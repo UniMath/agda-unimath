@@ -1,15 +1,13 @@
 # Diagonal vectors
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.constant-vectors where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
-open import linear-algebra.vectors using (vec; empty-vec; _∷_)
+open import linear-algebra.vectors
 ```
 
 ## Idea

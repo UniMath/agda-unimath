@@ -5,17 +5,16 @@ title: Ramsey theory
 ```agda
 module univalent-combinatorics.ramsey-theory where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using (Prop; type-Prop)
-open import foundation.unit-type using (unit-Prop)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types using
-  ( 𝔽; type-𝔽; has-cardinality)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 
 coloring : {l : Level} (k : ℕ) → UU l → UU l
 coloring k X = X → Fin k

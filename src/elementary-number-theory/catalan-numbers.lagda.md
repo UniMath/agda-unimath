@@ -3,25 +3,19 @@ title: Catalan numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.catalan-numbers where
 
-open import elementary-number-theory.binomial-coefficients using (_choose-ℕ_)
-open import elementary-number-theory.distance-natural-numbers using
-  ( dist-ℕ; leq-dist-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using (leq-le-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.strong-induction-natural-numbers using
-  ( strong-ind-ℕ)
-open import elementary-number-theory.sums-of-natural-numbers using (sum-Fin-ℕ)
+open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strong-induction-natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
 
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( nat-Fin; strict-upper-bound-nat-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

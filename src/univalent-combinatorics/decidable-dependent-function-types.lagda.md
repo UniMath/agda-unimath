@@ -3,33 +3,27 @@ title: Decidable dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.decidable-dependent-function-types where
 
 open import elementary-number-theory.decidable-dependent-function-types public
 
-open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-propositions using (is-decidable-Prop)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; elim-trunc-Prop-is-decidable)
-open import foundation.empty-types using (ind-empty)
-open import foundation.equivalences using (id-equiv)
-open import foundation.functions using (map-Π)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; map-universal-property-trunc-Prop; trunc-Prop;
-    unit-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using (Π-Prop)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; equiv-count; map-equiv-count; number-of-elements-count)
-open import univalent-combinatorics.finite-choice using (finite-choice)
-open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

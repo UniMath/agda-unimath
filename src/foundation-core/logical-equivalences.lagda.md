@@ -3,20 +3,14 @@ title: Logical equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.logical-equivalences where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2; _,_)
-open import foundation-core.equivalences using
-  ( _≃_; map-equiv; map-inv-equiv; is-equiv)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
-
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-prod; is-equiv-is-prop;
-    is-prop-function-type; is-prop-type-Prop)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

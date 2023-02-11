@@ -107,7 +107,7 @@ pr2 (pr2 (cone-pullback-property-pushout f g {X} c Y)) =
 pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ (l4 ⊔ lsuc l))))
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 pullback-property-pushout l {S} {A} {B} f g {X} c =
   (Y : UU l) → is-pullback
     ( precomp f Y)
@@ -144,7 +144,7 @@ module _
   is-equiv-up-pushout-up-pushout up-c up-d =
     is-equiv-is-equiv-precomp h
       ( λ l Z →
-        is-equiv-right-factor
+        is-equiv-right-factor-htpy
           ( cocone-map f g d)
           ( cocone-map f g c)
           ( precomp h Z)
@@ -157,7 +157,7 @@ module _
     ( up-c : {l : Level} → universal-property-pushout l f g c) →
     {l : Level} → universal-property-pushout l f g d
   up-pushout-up-pushout-is-equiv is-equiv-h up-c Z =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( cocone-map f g d)
       ( cocone-map f g c)
       ( precomp h Z)
@@ -170,7 +170,7 @@ module _
     is-equiv h →
     {l : Level} → universal-property-pushout l f g c
   up-pushout-is-equiv-up-pushout up-d is-equiv-h Z =
-    is-equiv-left-factor
+    is-equiv-left-factor-htpy
       ( cocone-map f g d)
       ( cocone-map f g c)
       ( precomp h Z)
@@ -227,7 +227,7 @@ pullback-property-pushout-universal-property-pushout :
   universal-property-pushout l f g c → pullback-property-pushout l f g c
 pullback-property-pushout-universal-property-pushout
   l f g c up-c Y =
-  is-equiv-right-factor
+  is-equiv-right-factor-htpy
     ( cocone-map f g c)
     ( tot (λ i' → tot (λ j' p → htpy-eq p)))
     ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y))
@@ -243,7 +243,7 @@ universal-property-pushout-pullback-property-pushout :
   pullback-property-pushout l f g c → universal-property-pushout l f g c
 universal-property-pushout-pullback-property-pushout
   l f g c pb-c Y =
-  is-equiv-comp
+  is-equiv-comp-htpy
     ( cocone-map f g c)
     ( tot (λ i' → tot (λ j' p → htpy-eq p)))
     ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y))

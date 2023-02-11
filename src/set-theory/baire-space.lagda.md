@@ -3,8 +3,6 @@ title: Baire space
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module set-theory.baire-space where
 
 open import elementary-number-theory.natural-numbers

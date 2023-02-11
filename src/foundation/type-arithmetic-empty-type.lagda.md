@@ -3,22 +3,20 @@ title: Type arithmetic with the empty type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-empty-type where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( empty; is-empty; is-equiv-is-empty'; ex-falso)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -385,3 +383,9 @@ module _
   inv-right-unit-law-coprod =
     inv-right-unit-law-coprod-is-empty A empty id
 ```
+
+## See also
+
+- In [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.html)
+  we show that `empty` is the initial type, which can be considered a
+  *left zero law for function types* (`(empty → A) ≃ unit`).

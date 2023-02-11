@@ -3,15 +3,13 @@ title: Union of subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unions-subtypes where
 
-open import foundation.disjunction using (disj-Prop; disj-decidable-Prop)
-open import foundation.decidable-subtypes using (decidable-subtype)
-open import foundation.existential-quantification using (exists-Prop)
-open import foundation.subtypes using (subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.disjunction
+open import foundation.decidable-subtypes
+open import foundation.existential-quantification
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -3,29 +3,22 @@ title: The image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.image-of-maps where
 
 open import foundation.images public
 
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-types using (is-decidable-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.fibers-of-maps using (equiv-total-fib; fib)
-open import foundation.propositional-truncations using (trunc-Prop)
-open import foundation.subtypes using
-  ( extensionality-type-subtype')
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
+open import foundation.propositional-truncations
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-equiv')
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-base-is-finite-Σ-merely-inhabited; is-finite-Σ)
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-sum-finite-types
 ```
 
 ```agda

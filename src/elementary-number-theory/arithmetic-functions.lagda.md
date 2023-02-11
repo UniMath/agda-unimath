@@ -3,15 +3,13 @@ title: Arithmetic functions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.arithmetic-functions where
 
-open import elementary-number-theory.nonzero-natural-numbers using (nonzero-ℕ)
+open import elementary-number-theory.nonzero-natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
-open import ring-theory.rings using (Ring; type-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

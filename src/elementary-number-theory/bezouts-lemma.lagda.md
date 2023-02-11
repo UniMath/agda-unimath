@@ -5,8 +5,7 @@ title: Bezout's lemma
 ```agda
 module elementary-number-theory.bezouts-lemma where
 
-open import elementary-number-theory.absolute-value-integers using 
- ( abs-ℤ; abs-int-ℕ; abs-neg-ℤ; int-abs-is-nonnegative-ℤ; is-nonzero-abs-ℤ; multiplicative-abs-ℤ)
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-integers

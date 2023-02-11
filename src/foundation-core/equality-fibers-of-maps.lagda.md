@@ -3,29 +3,23 @@ title: Equality in the fibers of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.equality-fibers-of-maps where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-dependent-pair-types using
-  ( pair-eq-Σ; is-equiv-pair-eq-Σ)
-open import foundation-core.equivalences using
-  ( is-fiberwise-equiv; is-equiv-comp; is-equiv; _≃_)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv)
-open import foundation-core.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using
-  ( _＝_; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl;
-    is-equiv-concat; is-equiv-inv; is-equiv-tr)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
+
+open import foundation.identity-types
 ```
 
 ## Idea
 
-In the file `foundation-core.fibers-of-a-map` we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+In the file [`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.html) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
 
 ## Theorem
 
@@ -54,10 +48,8 @@ module _
       (s t : fib f b) → is-fiberwise-equiv (fib-ap-eq-fib-fiberwise s t)
     is-fiberwise-equiv-fib-ap-eq-fib-fiberwise (pair x y) (pair .x refl) refl =
       is-equiv-comp
-        ( fib-ap-eq-fib-fiberwise (pair x y) (pair x refl) refl)
         ( inv)
         ( concat right-unit refl)
-        ( refl-htpy)
         ( is-equiv-concat right-unit refl)
         ( is-equiv-inv (y ∙ refl) refl)
 
@@ -76,7 +68,7 @@ module _
   abstract
     is-equiv-fib-ap-eq-fib : (s t : fib f b) → is-equiv (fib-ap-eq-fib s t)
     is-equiv-fib-ap-eq-fib s t =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( fib-ap-eq-fib s t)
         ( tot (fib-ap-eq-fib-fiberwise s t))
         ( pair-eq-Σ {s = s} {t})
@@ -105,10 +97,15 @@ module _
       (q : (f x) ＝ (f y)) → is-equiv (eq-fib-fib-ap q)
     is-equiv-eq-fib-fib-ap q =
       is-equiv-comp
-        ( eq-fib-fib-ap q)
         ( tr (fib (ap f)) right-unit)
         ( fib-ap-eq-fib f (pair x q) (pair y refl))
-        ( refl-htpy)
         ( is-equiv-fib-ap-eq-fib f (pair x q) (pair y refl))
         ( is-equiv-tr (fib (ap f)) right-unit)
 ```
+
+## See also
+
+- Equality proofs in dependent pair types are characterized in
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
+- Equality proofs in dependent function types are characterized in
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).

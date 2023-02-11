@@ -3,21 +3,19 @@ title: Propositional maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.propositional-maps where
 
 open import foundation-core.propositional-maps public
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (_≃_)
-open import foundation-core.propositions using (is-prop; Prop)
-open import foundation-core.truncation-levels using (neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.propositions
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.embeddings using (is-emb; is-emb-Prop)
-open import foundation.logical-equivalences using (equiv-iff)
-open import foundation.truncated-maps using (is-prop-is-trunc-map)
+open import foundation.embeddings
+open import foundation.logical-equivalences
+open import foundation.truncated-maps
 ```
 
 ## Properties

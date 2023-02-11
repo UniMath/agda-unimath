@@ -3,27 +3,19 @@ title: Propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.propositions where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.contractible-types using
-  ( is-contr; is-contr-is-equiv; is-contr-equiv'; is-contr-Σ'; is-prop-is-contr;
-    is-contr-Π; eq-is-contr; is-property-is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-dependent-pair-types using
-  ( Eq-Σ; equiv-eq-pair-Σ)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; is-equiv-map-inv-is-equiv)
-open import foundation-core.function-extensionality using (htpy-eq)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (refl-htpy)
-open import foundation-core.identity-types using
-  ( _＝_; refl; left-inv; inv; _∙_; tr)
-open import foundation-core.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.function-extensionality
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -267,7 +259,7 @@ is-prop-type-Π-Prop' :
 is-prop-type-Π-Prop' A P = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 
 Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-pr1 (Π-Prop' A P) = {x : A} → type-Prop (P x)
+pr1 (Π-Prop' A P) = type-Π-Prop' A P
 pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 ```
 

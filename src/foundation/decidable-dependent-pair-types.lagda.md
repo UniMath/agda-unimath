@@ -3,23 +3,18 @@ title: Decidability of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-dependent-pair-types where
 
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-equiv; is-decidable-coprod; is-decidable-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.maybe using (Maybe; unit-Maybe; exception-Maybe)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod)
-open import foundation.type-arithmetic-unit-type using
-  ( left-unit-law-Σ)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.maybe
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

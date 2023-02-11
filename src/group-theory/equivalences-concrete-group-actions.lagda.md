@@ -3,8 +3,6 @@ title: Equivalences of concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.equivalences-concrete-group-actions where
 
 open import foundation.1-types

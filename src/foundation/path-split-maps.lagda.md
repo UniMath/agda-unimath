@@ -3,20 +3,16 @@ title: Path-split maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.path-split-maps where
 
 open import foundation-core.path-split-maps public
 
-open import foundation-core.propositions using
-  ( is-prop; is-prop-is-proof-irrelevant; is-equiv-is-prop)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr-prod; is-contr-Π)
-open import foundation.equivalences using
-  ( is-contr-sec-is-equiv; is-emb-is-equiv; is-equiv; is-property-is-equiv)
+open import foundation.equivalences
 ```
 
 ## Properties
@@ -24,26 +20,52 @@ open import foundation.equivalences using
 ### Being path-split is a property
 
 ```agda
-abstract
-  is-prop-is-path-split :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-prop (is-path-split f)
-  is-prop-is-path-split f =
-    is-prop-is-proof-irrelevant (λ is-path-split-f →
-      let is-equiv-f = is-equiv-is-path-split f is-path-split-f in
-      is-contr-prod
-        ( is-contr-sec-is-equiv is-equiv-f)
-        ( is-contr-Π
-          ( λ x → is-contr-Π
-            ( λ y → is-contr-sec-is-equiv (is-emb-is-equiv is-equiv-f x y)))))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-abstract
-  is-equiv-is-path-split-is-equiv :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-equiv (is-path-split-is-equiv f)
-  is-equiv-is-path-split-is-equiv f =
-    is-equiv-is-prop
-      ( is-property-is-equiv f)
-      ( is-prop-is-path-split f)
-      ( is-equiv-is-path-split f)
+  abstract
+    is-prop-is-path-split : (f : A → B) → is-prop (is-path-split f)
+    is-prop-is-path-split f =
+      is-prop-is-proof-irrelevant
+        ( λ is-path-split-f →
+          ( is-contr-prod
+            ( is-contr-sec-is-equiv (is-equiv-is-path-split f is-path-split-f))
+            ( is-contr-Π
+              ( λ x → is-contr-Π
+                ( λ y → is-contr-sec-is-equiv
+                  ( is-emb-is-equiv (is-equiv-is-path-split f is-path-split-f) x y))))))
+
+  abstract
+    is-equiv-is-path-split-is-equiv : (f : A → B) → is-equiv (is-path-split-is-equiv f)
+    is-equiv-is-path-split-is-equiv f =
+      is-equiv-is-prop
+        ( is-property-is-equiv f)
+        ( is-prop-is-path-split f)
+        ( is-equiv-is-path-split f)
+
+  equiv-is-path-split-is-equiv : (f : A → B) → is-equiv f ≃ is-path-split f
+  equiv-is-path-split-is-equiv f =
+    pair (is-path-split-is-equiv f) (is-equiv-is-path-split-is-equiv f)
+
+  abstract
+    is-equiv-is-equiv-is-path-split : (f : A → B) → is-equiv (is-equiv-is-path-split f)
+    is-equiv-is-equiv-is-path-split f =
+      is-equiv-is-prop
+        ( is-prop-is-path-split f)
+        ( is-property-is-equiv f)
+        ( is-path-split-is-equiv f)
+
+  equiv-is-equiv-is-path-split : (f : A → B) → is-path-split f ≃ is-equiv f
+  equiv-is-equiv-is-path-split f =
+    pair (is-equiv-is-path-split f) (is-equiv-is-equiv-is-path-split f)
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [`foundation.equivalences`](foundation.equivalences.html).
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
+- For the notion of maps with contractible fibers see
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).

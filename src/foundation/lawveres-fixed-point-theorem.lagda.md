@@ -3,18 +3,16 @@ title: Lawvere's fixed point theorem
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.lawveres-fixed-point-theorem where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.existential-quantification using (∃; ∃-Prop; intro-∃)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.identity-types using (_＝_; inv)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.function-extensionality
+
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.surjective-maps
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -3,36 +3,24 @@ title: The natural numbers base k
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.finitary-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; left-unit-law-add-ℕ; is-injective-add-ℕ'; commutative-add-ℕ)
-open import elementary-number-theory.congruence-natural-numbers using
-  ( cong-ℕ; concatenate-cong-eq-ℕ; translation-invariant-cong-ℕ';
-    eq-cong-le-ℕ; concatenate-cong-eq-cong-ℕ; symm-cong-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( le-ℕ; concatenate-le-leq-ℕ; transitive-leq-ℕ; leq-mul-ℕ; leq-add-ℕ;
-    neq-le-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; commutative-mul-ℕ; is-injective-mul-succ-ℕ; right-unit-law-mul-ℕ;
-    right-successor-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (pair)
-open import foundation.empty-types using (is-empty; ex-falso)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; nat-Fin; strict-upper-bound-nat-Fin; is-injective-nat-Fin; zero-Fin;
-    succ-Fin; nat-succ-Fin; is-zero-nat-zero-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 # The finitary natural numbers

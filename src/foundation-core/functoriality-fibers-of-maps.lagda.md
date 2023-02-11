@@ -109,3 +109,8 @@ module _
               ( ( inv (ap-inv g (H' a))) ∙
                 ( ap (ap g) (inv right-unit)))))))
 ```
+
+## See also
+
+- Equality proofs in the fiber of a map are characterized in
+  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.html).

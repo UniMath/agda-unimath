@@ -3,23 +3,12 @@ title: The difference between integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.difference-integers where
 
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ; right-unit-law-add-ℤ; left-inverse-law-add-ℤ; associative-add-ℤ;
-    add-ℤ'; left-unit-law-add-ℤ; right-inverse-law-add-ℤ;
-    right-predecessor-law-add-ℤ; left-predecessor-law-add-ℤ;
-    right-successor-law-add-ℤ; distributive-neg-add-ℤ; commutative-add-ℤ;
-    left-successor-law-add-ℤ; interchange-law-add-add-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; neg-ℤ; is-zero-ℤ; zero-ℤ; succ-ℤ; pred-ℤ; issec-pred-ℤ;
-    neg-succ-ℤ; neg-pred-ℤ; neg-neg-ℤ)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.interchange-law using
-  ( interchange-law; interchange-law-commutative-and-associative)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import foundation.identity-types
+open import foundation.interchange-law
 
 ```
 

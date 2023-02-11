@@ -1,34 +1,36 @@
 # Vectors on rings
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.vectors-on-rings where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.identity-types using (Id; refl; ap-binary)
-open import foundation.unit-type using (star)
-open import foundation.dependent-pair-types using (_,_)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.coproduct-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors using (constant-vec)
-open import linear-algebra.functoriality-vectors using
-  ( map-binary-vec; htpy-vec; map-vec)
-open import linear-algebra.scalar-multiplication-vectors using (scalar-mul-vec)
-open import linear-algebra.vectors using
-  ( vec; empty-vec; _∷_; head-vec; tail-vec; vec-Set)
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.scalar-multiplication-vectors
+open import linear-algebra.vectors
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; set-Ring; add-Ring; zero-Ring; left-unit-law-add-Ring;
-    right-unit-law-add-Ring; neg-Ring; associative-add-Ring;
-    left-inverse-law-add-Ring; right-inverse-law-add-Ring; mul-Ring;
-    associative-mul-Ring; one-Ring; left-unit-law-mul-Ring;
-    commutative-add-Ring;
-    left-distributive-mul-add-Ring; right-distributive-mul-add-Ring)
+open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
+open import group-theory.endomorphism-rings-abelian-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import ring-theory.homomorphisms-rings
+open import ring-theory.modules-rings
+
+
+open import ring-theory.rings
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -69,10 +71,6 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-
-  open import group-theory.semigroups using (Semigroup)
-  open import group-theory.monoids using (Monoid)
-  open import group-theory.commutative-monoids using (Commutative-Monoid)
 
   add-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n → vec-Ring R n
   add-vec-Ring = map-binary-vec (add-Ring R)
@@ -128,8 +126,7 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  open import group-theory.groups using (Group)
-  open import group-theory.abelian-groups using (Ab)
+
 
   neg-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n
   neg-vec-Ring = map-vec (neg-Ring R)
@@ -167,12 +164,6 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-
-  open import group-theory.abelian-groups using (Ab)
-  open import group-theory.homomorphisms-abelian-groups using (type-hom-Ab; map-hom-Ab; eq-htpy-hom-Ab)
-  open import group-theory.endomorphism-rings-abelian-groups using (endomorphism-ring-Ab)
-  open import ring-theory.homomorphisms-rings using (type-hom-Ring)
-  open import ring-theory.modules-rings using (left-module-Ring)
 
   scalar-mul-vec-Ring : {n : ℕ} (r : type-Ring R) → vec-Ring R n → vec-Ring R n
   scalar-mul-vec-Ring r empty-vec = empty-vec

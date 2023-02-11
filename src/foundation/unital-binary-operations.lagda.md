@@ -3,16 +3,13 @@ title: Unital binary operations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unital-binary-operations where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
-open import foundation.homotopies using (nat-htpy-id; coh-htpy-id)
-open import foundation.identity-types using
-  ( _＝_; inv; _∙_; ap; inv-con; concat')
-open import foundation.universe-levels using (UU; Level)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -27,7 +24,7 @@ A binary operation of type `A → A → A` is unital if there is a unit of type 
 module _
   {l : Level} {A : UU l} (μ : A → A → A) (e : A)
   where
-  
+
   left-unit-law : UU l
   left-unit-law = (x : A) → μ e x ＝ x
 
@@ -77,7 +74,7 @@ module _
       ( ap (μ e) (K e))
       ( H e)
       ( (ap (μ e) (H e)) ∙ (K e))
-      ( ( inv (nat-htpy-id (H) (K e))) ∙
+      ( ( inv-nat-htpy-id (H) (K e)) ∙
         ( ap (concat' (μ e (μ e e)) (K e)) (coh-htpy-id (H) e)))
 
 module _

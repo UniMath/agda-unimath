@@ -7,8 +7,6 @@ Univalent combinatorics is the study of finite univalent mathematics. Finiteness
 Many finite structures naturally organize themselves into groupoids, in which the isomorphic objects are identified by the univalence axiom. Univalence can therefore help with counting finite structures up to isomorphism. The main piece of machinery that helps in this task is the general notion of π-finiteness. A level `k` π-finite type is a type that has finitely many connected components, such that all its homotopy groups up to level `k` are finite. The π-finite types enjoy useful closure properties, such as closedness under Σ, cartesian products, coproducts, and closedness under Π under a mild condition.
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics where
 
 open import univalent-combinatorics.2-element-decidable-subtypes public
@@ -87,6 +85,7 @@ open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public
+open import univalent-combinatorics.set-quotients-of-index-two public
 open import univalent-combinatorics.skipping-element-standard-finite-types public
 open import univalent-combinatorics.species public
 open import univalent-combinatorics.standard-finite-pruned-trees public

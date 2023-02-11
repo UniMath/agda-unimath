@@ -1,40 +1,31 @@
-# Polygons
+---
+title: Polygons
+---
 
 ```agda
 module graph-theory.polygons where
 
-open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; has-decidable-equality-ℤ-Mod;
-    is-finite-ℤ-Mod)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; is-nonzero-ℕ; is-not-one-ℕ)
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.injective-maps using (is-emb-is-injective)
-open import foundation.mere-equivalences using
-  ( mere-equiv; is-set-mere-equiv'; has-decidable-equality-mere-equiv')
-open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero)
-open import foundation.unordered-pairs using
-  ( unordered-pair; type-unordered-pair; element-unordered-pair)
+open import foundation.decidable-equality
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.fibers-of-maps
+open import foundation.functoriality-propositional-truncation
+open import foundation.injective-maps
+open import foundation.mere-equivalences
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.equivalences-undirected-graphs using
-  ( equiv-vertex-equiv-Undirected-Graph)
-open import graph-theory.mere-equivalences-undirected-graphs using
-  ( mere-equiv-Undirected-Graph)
-open import graph-theory.simple-undirected-graphs using
-  ( is-simple-Undirected-Graph)
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph)
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.simple-undirected-graphs
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-mere-equiv)
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

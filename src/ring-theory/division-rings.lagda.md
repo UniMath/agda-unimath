@@ -3,19 +3,16 @@ title: Division rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.division-rings where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.identity-types using (Id)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.universe-levels
 
-open import ring-theory.invertible-elements-rings using
-  ( is-invertible-element-Ring)
-open import ring-theory.nontrivial-rings using (is-nontrivial-Ring)
-open import ring-theory.rings using (Ring; type-Ring; zero-Ring)
+open import ring-theory.invertible-elements-rings
+open import ring-theory.nontrivial-rings
+open import ring-theory.rings
 ```
 
 ## Idea

@@ -3,27 +3,18 @@ title: Uniqueness of set truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.uniqueness-set-truncations where
 
-open import foundation.contractible-types using (is-contr; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_; map-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.mere-equality using
-  ( mere-eq-Eq-Rel; reflecting-map-mere-eq)
-open import foundation.sets using (Set; type-Set; type-hom-Set)
-open import foundation.uniqueness-set-quotients using
-  ( is-equiv-is-set-quotient-is-set-quotient;
-    is-set-quotient-is-equiv-is-set-quotient;
-    is-set-quotient-is-set-quotient-is-equiv;
-    uniqueness-set-quotient)
-open import foundation.universal-property-set-truncation using
-  ( is-set-truncation; is-set-quotient-is-set-truncation;
-    is-set-truncation-is-set-quotient)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.mere-equality
+open import foundation.sets
+open import foundation.uniqueness-set-quotients
+open import foundation.universal-property-set-truncation
+open import foundation.universe-levels
 ```
 
 ## Idea

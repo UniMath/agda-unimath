@@ -3,47 +3,34 @@ title: Isolated points
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.isolated-points where
 
-open import foundation.constant-maps using (const; fib-const)
-open import foundation.contractible-types using (is-contr; is-contr-equiv)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-embeddings using (_↪d_)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-maps using (is-decidable-map)
-open import foundation.decidable-propositions using
-  ( is-prop-is-decidable)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-equiv; is-decidable-equiv';
-    is-decidable-prod; is-decidable-unit)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; is-emb-comp')
-open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
-open import foundation.equivalences using
-  (is-equiv; _≃_; is-equiv-has-inverse; map-equiv; _∘e_; equiv-ap)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( _＝_; refl; tr; ap; equiv-concat; inv)
-open import foundation.injective-maps using (is-emb-is-injective)
-open import foundation.maybe using (Maybe; maybe-structure)
-open import foundation.negation using (¬; equiv-neg)
-open import foundation.propositions using
-  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; Prop;
-    is-prop-is-inhabited; is-prop-Π; eq-is-prop)
-open import foundation.sets using (is-set)
-open import foundation.subtypes using
-  ( eq-type-subtype; is-emb-inclusion-subtype; equiv-ap-inclusion-subtype)
-open import foundation.type-arithmetic-unit-type using
-  ( left-unit-law-prod)
-open import foundation.unit-type using (unit; is-prop-unit; star)
-open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
+open import foundation.constant-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-embeddings
+open import foundation.decidable-equality
+open import foundation.decidable-maps
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.maybe
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -191,6 +178,11 @@ module _
         ( equiv-Eq-eq-isolated-point d x)
         ( is-prop-Eq-isolated-point d x)
 
+  is-contr-loop-space-isolated-point :
+    (d : is-isolated a) → is-contr (a ＝ a)
+  is-contr-loop-space-isolated-point d =
+    is-proof-irrelevant-is-prop (is-prop-eq-isolated-point d a) refl
+
   abstract
     is-emb-const-is-isolated : is-isolated a → is-emb (const unit A a)
     is-emb-const-is-isolated d star =
@@ -245,7 +237,7 @@ decidable-emb-isolated-point {l1} {A} a =
   pair
     ( const unit A (pr1 a))
     ( pair
-      ( is-emb-comp'
+      ( is-emb-comp
         ( inclusion-isolated-point A)
         ( const unit (isolated-point A) a)
         ( is-emb-inclusion-isolated-point A)

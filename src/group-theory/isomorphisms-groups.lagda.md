@@ -3,38 +3,24 @@ title: Isomorphisms of groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.isomorphisms-groups where
 
-open import category-theory.isomorphisms-large-precategories using
-  ( is-iso-Large-Precat; iso-Large-Precat; hom-iso-Large-Precat;
-    is-iso-hom-iso-Large-Precat; hom-inv-iso-Large-Precat;
-    is-sec-hom-inv-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat;
-    id-iso-Large-Precat; iso-eq-Large-Precat; comp-iso-Large-Precat;
-    inv-iso-Large-Precat)
+open import category-theory.isomorphisms-large-precategories
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv; _∘e_)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.identity-types using (Id)
-open import foundation.subtypes using (equiv-ap-inclusion-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import group-theory.category-of-semigroups using
-  ( extensionality-Semigroup)
-open import group-theory.equivalences-semigroups using
-  ( equiv-Semigroup; is-equiv-hom-Semigroup)
-open import group-theory.groups using
-  ( Group; semigroup-Group; is-group-Prop)
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group)
-open import group-theory.isomorphisms-semigroups using
-  ( equiv-iso-equiv-Semigroup; is-iso-is-equiv-hom-Semigroup;
-    is-equiv-is-iso-hom-Semigroup)
-open import group-theory.precategory-of-groups using (Group-Large-Precat)
+open import group-theory.category-of-semigroups
+open import group-theory.equivalences-semigroups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.isomorphisms-semigroups
+open import group-theory.precategory-of-groups
 ```
 
 ## Definitions

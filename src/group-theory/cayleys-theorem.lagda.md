@@ -3,25 +3,19 @@ title: Cayley's theorem
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.cayleys-theorem where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalence-extensionality using
-  ( eq-htpy-equiv; htpy-eq-equiv)
-open import foundation.identity-types using (inv; _∙_)
-open import foundation.injective-maps using (is-injective; is-emb-is-injective)
-open import foundation.universe-levels using (Level)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalence-extensionality
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.universe-levels
 
-open import group-theory.embeddings-groups using (emb-Group)
-open import group-theory.groups using
-  ( Group; type-Group; set-Group; equiv-mul-Group; associative-mul-Group;
-    right-unit-law-mul-Group; unit-Group; is-set-type-Group)
-open import group-theory.homomorphisms-groups using
-  ( preserves-mul-Group; type-hom-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.embeddings-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 ```agda

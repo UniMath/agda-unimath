@@ -3,17 +3,16 @@ title: Equality of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.equality-dependent-pair-types where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; refl; tr)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -86,3 +85,12 @@ module _
   η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
   η-pair t = eq-pair-Σ refl refl
 ```
+
+## See also
+
+- Equality proofs in cartesian product types are characterized in
+  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.html).
+- Equality proofs in dependent function types are characterized in
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
+- Equality proofs in the fiber of a map are characterized in
+  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.html).

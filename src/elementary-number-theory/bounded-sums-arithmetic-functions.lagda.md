@@ -3,24 +3,19 @@ title: Bounded sums of arithmetic functions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.bounded-sums-arithmetic-functions where
 
-open import elementary-number-theory.arithmetic-functions using
-  ( type-arithmetic-functions-Ring)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.nonzero-natural-numbers using
-  ( nonzero-ℕ; succ-nonzero-ℕ; one-nonzero-ℕ)
+open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop; is-decidable-type-decidable-Prop)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.functions using (_∘_)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.functions
+open import foundation.universe-levels
 
-open import ring-theory.rings using (Ring; type-Ring; zero-Ring; add-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

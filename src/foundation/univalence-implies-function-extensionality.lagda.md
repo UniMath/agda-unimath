@@ -5,24 +5,20 @@ title: The univalence axiom implies function extensionality
 ```agda
 module foundation.univalence-implies-function-extensionality where
 
-open import foundation-core.contractible-maps using (is-contr-map-is-equiv)
-open import foundation-core.contractible-types using (is-contr-retract-of)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( _≃_; is-equiv; map-equiv; is-equiv-id)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (postcomp; id)
-open import foundation-core.homotopies using (refl-htpy)
-open import foundation-core.identity-types using (refl; tr)
-open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( equiv-pr1)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 
-open import foundation.equivalence-induction using
-  ( ind-equiv; is-equiv-postcomp-univalence)
-open import foundation.function-extensionality using (htpy-eq; FUNEXT)
-open import foundation.weak-function-extensionality using
-  ( WEAK-FUNEXT; FUNEXT-WEAK-FUNEXT)
+open import foundation.equivalence-induction
+open import foundation-core.function-extensionality
+open import foundation.weak-function-extensionality
 
 ```
 

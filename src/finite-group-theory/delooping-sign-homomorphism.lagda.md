@@ -3,7 +3,7 @@ title: Deloopings of the sign homomorphism
 ---
 
 ```agda
-{-# OPTIONS --without-K --experimental-lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module finite-group-theory.delooping-sign-homomorphism where
 
@@ -18,7 +18,6 @@ open import finite-group-theory.transpositions
 open import foundation.commuting-squares
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-equivalence-relations
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -32,7 +31,6 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
@@ -50,7 +48,6 @@ open import foundation.univalence
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
@@ -59,19 +56,14 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-open import group-theory.semigroups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 
 open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.lists
+open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -106,7 +98,7 @@ module _
     D
       ( succ-ℕ (succ-ℕ n))
       ( ( raise-Fin l1 (succ-ℕ (succ-ℕ n)),
-        unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+        unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
   ( not-R-transposition-fin-succ-succ : (n : ℕ) →
     ( Y : 2-Element-Decidable-Subtype l1
       ( raise-Fin l1 (succ-ℕ (succ-ℕ n)))) →
@@ -115,7 +107,7 @@ module _
         ( pair
           ( raise-Fin l1 (succ-ℕ (succ-ℕ n)))
           ( unit-trunc-Prop
-            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
         ( quotient-aut-succ-succ-Fin n (transposition Y))
         ( map-equiv
           ( invertible-action-D-equiv
@@ -123,11 +115,11 @@ module _
             ( pair
               ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
               ( unit-trunc-Prop
-                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
             ( pair
               ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
               ( unit-trunc-Prop
-                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
             ( transposition Y))
           ( quotient-aut-succ-succ-Fin n (transposition Y)))))
             
@@ -140,8 +132,7 @@ module _
 
     raise-UU-Fin-Fin : (n : ℕ) → UU-Fin l1 n
     pr1 (raise-UU-Fin-Fin n) = raise l1 (Fin n)
-    pr2 (raise-UU-Fin-Fin n) =
-      unit-trunc-Prop (equiv-raise l1 (Fin n))
+    pr2 (raise-UU-Fin-Fin n) = unit-trunc-Prop (compute-raise-Fin l1 n)
 
     quotient-loop-Fin : (n : ℕ) →
       type-Group
@@ -226,13 +217,13 @@ module _
             ( succ-ℕ (succ-ℕ n))
             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
         ( raise l4 (Fin 2))
-        ( ( equiv-raise l4 (Fin 2)) ∘e
+        ( ( compute-raise-Fin l4 2) ∘e
           ( inv-equiv
             ( equiv-D/R-fin-2-equiv
               ( succ-ℕ (succ-ℕ n))
               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
               ( star)
-              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
       ( eq-is-prop is-prop-type-trunc-Prop)
 
   map-quotient-delooping-sign-loop : (n : ℕ) (X Y : UU l1) →
@@ -255,8 +246,8 @@ module _
       map-quotient-delooping-sign-loop n
         ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
         ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
-        ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
-        ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+        ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
+        ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
 
   quotient-delooping-sign-loop : (n : ℕ) →
     type-hom-Group
@@ -270,12 +261,12 @@ module _
         ( λ w → eq-pair-Σ (p ∙ q) w)
         ( eq-is-prop
           ( is-trunc-Id
-            ( is-prop-type-trunc-Prop _ (unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+            ( is-prop-type-trunc-Prop _ (unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))) ∙
         ( inv
           ( comp-eq-pair-Σ
-            ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
-            ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
-            ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+            ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
+            ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
+            ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
             ( p)
             ( q)
             ( eq-is-prop is-prop-type-trunc-Prop)
@@ -355,8 +346,8 @@ module _
     coherence-square-map-quotient-delooping-sign-loop-Set n
       ( raise l1 (Fin (succ-ℕ (succ-ℕ n)))) 
       ( raise l1 (Fin (succ-ℕ (succ-ℕ n)))) 
-      ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
-      ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+      ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
+      ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
       ( p)
       ( eq-is-prop is-prop-type-trunc-Prop)
       ( is-set-type-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -447,13 +438,13 @@ module _
      equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
       ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
       ( star)
-      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))) ∘e
+      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))) ∘e
       ( ( equiv-succ-Fin 2) ∘e
         ( inv-equiv
           ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
             ( star)
-            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
 
   map-quotient-aut-Fin : (n : ℕ) →
     type-Group (symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))) → 
@@ -480,14 +471,14 @@ module _
       ( ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
         ( star)
-        ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))) ∘e
+        ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))) ∘e
         ( ( equiv-succ-Fin 2) ∘e
           ( inv-equiv
             ( equiv-D/R-fin-2-equiv
               ( succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
               ( star)
-              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
   eq-map-quotient-aut-fin-transposition n Y =
     ap
       ( cases-map-quotient-aut-Fin n (transposition Y))
@@ -542,7 +533,7 @@ module _
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( star)
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
         ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n))
           ( quotient-aut-succ-succ-Fin n
             ( map-hom-symmetric-group-loop-group-Set
@@ -556,7 +547,7 @@ module _
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( star)
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
         ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n))
           ( map-quotient-loop-Fin n p
             ( quotient-aut-succ-succ-Fin n
@@ -600,11 +591,7 @@ module _
             ( R (succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
             ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
-            ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
-            ( reflects-map-reflecting-map-Eq-Rel
-              ( R (succ-ℕ (succ-ℕ n))
-                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
-              ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n))))
+            ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
             ( is-set-quotient-equivalence-class
               ( R (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -624,7 +611,7 @@ module _
               ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                 ( star)
-                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
             ( q ∙ inv r))))
   cases-eq-map-quotient-aut-Fin n p (inr ND) (inl (inr star)) (inr star) q r =
     ( ap
@@ -633,7 +620,7 @@ module _
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( star)
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
       ( ( ap
         ( map-equiv (equiv-succ-Fin 2))
         ( q)) ∙
@@ -653,7 +640,7 @@ module _
             ( succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
             ( star)
-            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
   cases-eq-map-quotient-aut-Fin n p (inr ND) (inr star) (inl (inr star)) q r =
     ( ap
       ( map-equiv
@@ -661,7 +648,7 @@ module _
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( star)
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
       ( ( ap
         ( map-equiv (equiv-succ-Fin 2))
         ( q)) ∙
@@ -681,7 +668,7 @@ module _
             ( succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
             ( star)
-            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
   cases-eq-map-quotient-aut-Fin n p (inr ND) (inr star) (inr star) q r =
     ex-falso
       ( ND
@@ -690,11 +677,7 @@ module _
             ( R (succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
             ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
-            ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
-            ( reflects-map-reflecting-map-Eq-Rel
-              ( R (succ-ℕ (succ-ℕ n))
-                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
-              ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n))))
+            ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
             ( is-set-quotient-equivalence-class
               ( R (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -714,7 +697,7 @@ module _
               ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                 ( star)
-                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
             ( q ∙ inv r))))
 
   eq-map-quotient-aut-Fin : (n : ℕ) →
@@ -758,7 +741,7 @@ module _
           ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
             ( star)
-            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
           ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n))
             ( quotient-aut-succ-succ-Fin n
               ( map-hom-symmetric-group-loop-group-Set
@@ -769,7 +752,7 @@ module _
           ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
             ( star)
-            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
           ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n))
             ( map-quotient-loop-Fin n p
               ( quotient-aut-succ-succ-Fin n
@@ -802,7 +785,7 @@ module _
         ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( star)
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
       ( map-quotient-loop-Fin n p)
       ( λ {x} {y} →
         preserves-R-invertible-action-D-equiv
@@ -864,13 +847,13 @@ module _
               ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                 ( star)
-                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
           ( sign-homomorphism (succ-ℕ (succ-ℕ n))
             ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (succ-ℕ (succ-ℕ n)))
           ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
   eq-quotient-delooping-sign-loop-sign-homomorphism n =
     map-inv-equiv
       ( equiv-ap-emb
@@ -887,7 +870,7 @@ module _
               ( succ-ℕ (succ-ℕ n))
               ( pair
                 ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
-                ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
           ( loop-group-Set (quotient-set-Fin (succ-ℕ (succ-ℕ n))))))
       ( eq-htpy
         ( λ (pair f s) →
@@ -907,7 +890,7 @@ module _
                     ( is-generated-transposition-symmetric-Fin-Level (succ-ℕ (succ-ℕ n))
                       ( pair
                         ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
-                        ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                        ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                   ( loop-group-Set (quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
                 ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -930,7 +913,7 @@ module _
                     ( is-generated-transposition-symmetric-Fin-Level (succ-ℕ (succ-ℕ n))
                       ( pair
                         ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
-                        ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                        ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                     ( loop-group-Set (quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
                   ( comp-hom-Group
                     ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -951,7 +934,7 @@ module _
                           ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                             ( star)
-                            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
                       ( sign-homomorphism (succ-ℕ (succ-ℕ n))
                         ( pair
                           ( Fin (succ-ℕ (succ-ℕ n)))
@@ -959,7 +942,7 @@ module _
                     ( hom-inv-symmetric-group-equiv-Set
                       ( Fin-Set (succ-ℕ (succ-ℕ n)))
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
-                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
                 ( pair f s)))
              λ (pair Y q) →
               ( eq-map-restriction-generating-subset-Group
@@ -974,7 +957,7 @@ module _
                   ( is-generated-transposition-symmetric-Fin-Level (succ-ℕ (succ-ℕ n))
                     ( pair
                       ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
-                      ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                      ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                 ( loop-group-Set (quotient-set-Fin (succ-ℕ (succ-ℕ n))))
                 ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -1093,13 +1076,13 @@ module _
                                 ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                                   ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                                   ( star)
-                                  ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))) ∘e
+                                  ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))) ∘e
                                   ( e ∘e
                                     ( inv-equiv
                                       ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                                         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                                         ( star)
-                                        ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                                        ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                               ( ( inv
                                 ( eq-sign-homomorphism-transposition (succ-ℕ (succ-ℕ n))
                                   ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))
@@ -1111,7 +1094,7 @@ module _
                                     ( transposition-conjugation-equiv {l4 = l1}
                                       ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
                                       ( Fin (succ-ℕ (succ-ℕ n)))
-                                      ( inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+                                      ( inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
                                       ( Y))))) ∙
                                 ( ap
                                   ( map-hom-Group
@@ -1129,27 +1112,27 @@ module _
                                       ( transposition-conjugation-equiv
                                         ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
                                         ( Fin (succ-ℕ (succ-ℕ n)))
-                                        ( inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+                                        ( inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
                                         ( Y)))) ∙
                                     ( ( eq-htpy-equiv
                                       ( correct-transposition-conjugation-equiv
                                         ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
                                         ( Fin (succ-ℕ (succ-ℕ n)))
-                                        ( inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+                                        ( inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
                                         ( Y))) ∙
                                       ( ( associative-comp-equiv
-                                        ( inv-equiv (inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                                        ( inv-equiv (inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
                                         ( transposition Y)
-                                        ( inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))) ∙
+                                        ( inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))) ∙
                                         ( ( ap
                                           ( λ e →
-                                            inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))) ∘e
+                                            inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))) ∘e
                                               ( transposition Y ∘e e))
-                                          ( inv-inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))) ∙
+                                          ( inv-inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))) ∙
                                           ( ap
                                             ( λ e →
-                                              inv-equiv (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))) ∘e
-                                                ( e ∘e equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))
+                                              inv-equiv (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))) ∘e
+                                                ( e ∘e compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
                                             ( q)))))))))))) ∙
                         ( inv
                           ( eq-map-restriction-generating-subset-Group
@@ -1164,7 +1147,7 @@ module _
                               ( is-generated-transposition-symmetric-Fin-Level (succ-ℕ (succ-ℕ n))
                                 ( pair
                                   ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
-                                  ( unit-trunc-Prop (equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                                  ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                             ( loop-group-Set (quotient-set-Fin (succ-ℕ (succ-ℕ n))))
                             ( comp-hom-Group
                               ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -1186,7 +1169,7 @@ module _
                                     ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                                       ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                                       ( star)
-                                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
                                 ( sign-homomorphism (succ-ℕ (succ-ℕ n))
                                   ( pair
                                     ( Fin (succ-ℕ (succ-ℕ n)))
@@ -1194,7 +1177,7 @@ module _
                               ( hom-inv-symmetric-group-equiv-Set
                                 ( Fin-Set (succ-ℕ (succ-ℕ n)))
                                 ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
-                                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+                                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
                             ( pair f s)))))))))
 
   eq-quotient-delooping-loop-UU-Fin-Group : (n : ℕ) →
@@ -1220,12 +1203,12 @@ module _
             ( iso-loop-group-equiv-Set
               ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
               ( raise-Set l4 (Fin-Set 2))
-              ( ( equiv-raise l4 (Fin 2)) ∘e
+              ( ( compute-raise-Fin l4 2) ∘e
                 ( inv-equiv
                   ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                     ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                     ( star)
-                    ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))))
+                    ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))
         ( quotient-delooping-sign-loop n))
       ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -1266,20 +1249,20 @@ module _
                         ( λ Z → equivalence-class (R (succ-ℕ (succ-ℕ n)) Z))
                         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∘e
                     ( inv-equiv
-                      ( ( equiv-raise l4 (Fin 2)) ∘e
+                      ( ( compute-raise-Fin l4 2) ∘e
                         ( inv-equiv
                           ( equiv-D/R-fin-2-equiv
                             ( succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                             ( star)
-                            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
-                  ( ( equiv-raise l4 (Fin 2)) ∘e
+                            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
+                  ( ( compute-raise-Fin l4 2) ∘e
                     ( inv-equiv
                       ( equiv-D/R-fin-2-equiv
                         ( succ-ℕ (succ-ℕ n))
                         ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                         ( star)
-                        ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                        ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))) ∙
                 ( ap
                   ( λ r →
                     ( r) ∙
@@ -1288,13 +1271,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( ( equiv-raise l4 (Fin 2)) ∘e
+                        ( ( compute-raise-Fin l4 2) ∘e
                           ( inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                   (  inv
                     ( comp-eq-equiv
                       ( raise l4 (Fin 2))
@@ -1305,13 +1288,13 @@ module _
                         ( R (succ-ℕ (succ-ℕ n))
                           ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                       ( inv-equiv
-                        ( ( equiv-raise l4 (Fin 2)) ∘e
+                        ( ( compute-raise-Fin l4 2) ∘e
                           ( inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                       ( equiv-eq
                         ( inv
                           ( ap
@@ -1337,12 +1320,12 @@ module _
                             ( R (succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                           ( raise l4 (Fin 2))
-                          ( ( equiv-raise l4 (Fin 2)) ∘e
+                          ( ( compute-raise-Fin l4 2) ∘e
                             ( inv-equiv
                               ( equiv-D/R-fin-2-equiv (succ-ℕ (succ-ℕ n))
                                 ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                 ( star)
-                                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))) ∙
+                                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))) ∙
                       ( ap
                         ( λ e →
                           inv
@@ -1351,13 +1334,13 @@ module _
                                 ( R (succ-ℕ (succ-ℕ n))
                                   ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                               ( raise l4 (Fin 2))
-                              ( ( equiv-raise l4 (Fin 2)) ∘e
+                              ( ( compute-raise-Fin l4 2) ∘e
                                 ( inv-equiv
                                   ( equiv-D/R-fin-2-equiv
                                     ( succ-ℕ (succ-ℕ n))
                                     ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                     ( star)
-                                    ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                                    ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))) ∙
                             ( map-equiv e
                               ( inv
                                 ( ap
@@ -1371,13 +1354,13 @@ module _
                       ( R (succ-ℕ (succ-ℕ n))
                         ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                     ( raise l4 (Fin 2))
-                    ( ( equiv-raise l4 (Fin 2)) ∘e
+                    ( ( compute-raise-Fin l4 2) ∘e
                       ( inv-equiv
                         ( equiv-D/R-fin-2-equiv
                           ( succ-ℕ (succ-ℕ n))
                           ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                           ( star)
-                          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+                          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))) ∙
                   ( inv
                     ( ap
                       ( λ Z → equivalence-class (R (succ-ℕ (succ-ℕ n)) Z))
@@ -1387,12 +1370,12 @@ module _
                     ( R (succ-ℕ (succ-ℕ n))
                       ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                   ( raise l4 (Fin 2))
-                  ( ( equiv-raise l4 (Fin 2)) ∘e
+                  ( ( compute-raise-Fin l4 2) ∘e
                     ( inv-equiv (equiv-D/R-fin-2-equiv
                       ( succ-ℕ (succ-ℕ n))
                       ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                       ( star)
-                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))) ∙
                 ( ap
                   ( λ r →
                     inv
@@ -1401,13 +1384,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( ( equiv-raise l4 (Fin 2)) ∘e
+                        ( ( compute-raise-Fin l4 2) ∘e
                           ( inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))) ∙
                       ( r))
                   ( ( distributive-inv-concat
                     ( inv
@@ -1416,13 +1399,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( ( equiv-raise l4 (Fin 2)) ∘e
+                        ( ( compute-raise-Fin l4 2) ∘e
                           ( inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                     ( inv
                       ( ap
                         ( λ Z → equivalence-class (R (succ-ℕ (succ-ℕ n)) Z))
@@ -1437,13 +1420,13 @@ module _
                                   ( R (succ-ℕ (succ-ℕ n))
                                     ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                                 ( raise l4 (type-Set (Fin-Set 2)))
-                                ( ( equiv-raise l4 (Fin 2)) ∘e
+                                ( ( compute-raise-Fin l4 2) ∘e
                                   ( inv-equiv
                                     ( equiv-D/R-fin-2-equiv
                                       ( succ-ℕ (succ-ℕ n))
                                       ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                       ( star)
-                                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))))
+                                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))))
                       ( inv-inv
                         ( ap
                           ( λ Z → equivalence-class (R (succ-ℕ (succ-ℕ n)) Z))
@@ -1460,13 +1443,13 @@ module _
                               ( R (succ-ℕ (succ-ℕ n))
                                 ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                             ( raise l4 (Fin 2))
-                            ( ( equiv-raise l4 (Fin 2)) ∘e
+                            ( ( compute-raise-Fin l4 2) ∘e
                               ( inv-equiv
                                 ( equiv-D/R-fin-2-equiv
                                   ( succ-ℕ (succ-ℕ n))
                                   ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                   ( star)
-                                  ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))))))))))) ∙
+                                  ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))))))) ∙
             ( ( ( ap
               ( eq-pair-Σ
                 ( ( inv
@@ -1475,13 +1458,13 @@ module _
                       ( R (succ-ℕ (succ-ℕ n))
                         ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                     ( raise l4 (Fin 2))
-                    ( ( equiv-raise l4 (Fin 2)) ∘e
+                    ( ( compute-raise-Fin l4 2) ∘e
                       ( inv-equiv
                         ( equiv-D/R-fin-2-equiv
                           ( succ-ℕ (succ-ℕ n))
                           ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                           ( star)
-                          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+                          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))) ∙
                   ( ( ap
                     ( λ Z → equivalence-class (R (succ-ℕ (succ-ℕ n)) Z))
                     ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
@@ -1490,13 +1473,13 @@ module _
                         ( R (succ-ℕ (succ-ℕ n))
                           ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                       ( raise l4 (Fin 2))
-                      ( ( equiv-raise l4 (Fin 2)) ∘e
+                      ( ( compute-raise-Fin l4 2) ∘e
                         ( inv-equiv
                           ( equiv-D/R-fin-2-equiv
                             ( succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                             ( star)
-                            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))))
+                            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))))
                 ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
                 ( ( inv
                   ( comp-eq-pair-Σ
@@ -1512,13 +1495,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( ( equiv-raise l4 (Fin 2)) ∘e
+                        ( ( compute-raise-Fin l4 2) ∘e
                           ( inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                     ( ( ap
                       ( λ Z → equivalence-class (R (succ-ℕ (succ-ℕ n)) Z))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
@@ -1527,13 +1510,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( ( equiv-raise l4 (Fin 2)) ∘e
+                        ( ( compute-raise-Fin l4 2) ∘e
                           ( inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                     ( eq-is-prop is-prop-type-trunc-Prop)
                     ( _))) ∙
                   ( ap
@@ -1545,13 +1528,13 @@ module _
                               ( R (succ-ℕ (succ-ℕ n))
                                 ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                             ( raise l4 (Fin 2))
-                            ( ( equiv-raise l4 (Fin 2)) ∘e
+                            ( ( compute-raise-Fin l4 2) ∘e
                               ( inv-equiv
                                 ( equiv-D/R-fin-2-equiv
                                   ( succ-ℕ (succ-ℕ n))
                                   ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                   ( star)
-                                  ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                                  ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                         ( eq-is-prop is-prop-type-trunc-Prop)) ∙
                         ( r))
                     ( ( inv
@@ -1574,13 +1557,13 @@ module _
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                           ( raise l4 (Fin 2))
-                          ( ( equiv-raise l4 (Fin 2)) ∘e
+                          ( ( compute-raise-Fin l4 2) ∘e
                             ( inv-equiv
                               ( equiv-D/R-fin-2-equiv
                                 ( succ-ℕ (succ-ℕ n))
                                 ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                 ( star)
-                                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                         ( eq-is-prop is-prop-type-trunc-Prop)
                         ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                       ( ap
@@ -1593,13 +1576,13 @@ module _
                                     ( succ-ℕ (succ-ℕ n))
                                     ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                                 ( raise l4 (Fin 2))
-                                ( ( equiv-raise l4 (Fin 2)) ∘e
+                                ( ( compute-raise-Fin l4 2) ∘e
                                   ( inv-equiv
                                     ( equiv-D/R-fin-2-equiv
                                       ( succ-ℕ (succ-ℕ n))
                                       ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                       ( star)
-                                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))
+                                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))
                               ( eq-is-prop is-prop-type-trunc-Prop)))
                         ( ( ap
                           ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
@@ -1637,13 +1620,13 @@ module _
                             ( R (succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                           ( raise l4 (Fin 2))
-                          ( equiv-raise l4 (Fin 2) ∘e
+                          ( compute-raise-Fin l4 2 ∘e
                             inv-equiv
                               ( equiv-D/R-fin-2-equiv
                                 ( succ-ℕ (succ-ℕ n))
                                 ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                                 ( star)
-                                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
                         ( eq-is-prop is-prop-type-trunc-Prop))))
                 ( ( ap
                   ( eq-pair-Σ
@@ -1653,13 +1636,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( equiv-raise l4 (Fin 2) ∘e
+                        ( compute-raise-Fin l4 2 ∘e
                           inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                   ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
                   ( inv
                     ( inv-eq-pair-Σ
@@ -1673,13 +1656,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( equiv-raise l4 (Fin 2) ∘e
+                        ( compute-raise-Fin l4 2 ∘e
                           inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
                       ( eq-is-prop is-prop-type-trunc-Prop))))) ∙
                 ( inv
                   ( eq-tr-type-Ω
@@ -1689,13 +1672,13 @@ module _
                           ( R (succ-ℕ (succ-ℕ n))
                             ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))))
                         ( raise l4 (Fin 2))
-                        ( equiv-raise l4 (Fin 2) ∘e
+                        ( compute-raise-Fin l4 2 ∘e
                           inv-equiv
                             ( equiv-D/R-fin-2-equiv
                               ( succ-ℕ (succ-ℕ n))
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
-                              ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                              ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
                       (eq-is-prop is-prop-type-trunc-Prop))
                     ( ap (map-quotient-delooping-sign (succ-ℕ (succ-ℕ n)))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))))))
@@ -1765,13 +1748,13 @@ module _
             ( iso-loop-group-equiv-Set
               ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
               ( raise-Set l4 (Fin-Set 2))
-              ( ( equiv-raise l4 (Fin 2)) ∘e
+              ( ( compute-raise-Fin l4 2) ∘e
                 ( inv-equiv
                   ( equiv-D/R-fin-2-equiv
                     ( succ-ℕ (succ-ℕ n))
                     ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                     ( star)
-                    ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))))
+                    ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))
         ( hom-inv-symmetric-group-loop-group-Set
           ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
       ( hom-symmetric-group-equiv-Set
@@ -1781,7 +1764,7 @@ module _
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( star)
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
 
   eq-quotient-delooping-sign-homomorphism : (n : ℕ) →
     Id
@@ -1824,7 +1807,7 @@ module _
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (succ-ℕ (succ-ℕ n)))
           ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
-          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
   eq-quotient-delooping-sign-homomorphism n =
     ( ap
       ( λ f →
@@ -1863,13 +1846,13 @@ module _
             ( iso-loop-group-equiv-Set
               ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
               ( raise-Set l4 (Fin-Set 2))
-              ( equiv-raise l4 (Fin 2) ∘e
+              ( compute-raise-Fin l4 2 ∘e
                 inv-equiv
                   ( equiv-D/R-fin-2-equiv
                     (succ-ℕ (succ-ℕ n))
                     ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                     ( star)
-                    ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                    ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
         ( quotient-delooping-sign-loop n)
         ( hom-inv-symmetric-group-loop-group-Set
           ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))) ∙
@@ -1903,17 +1886,17 @@ module _
                   ( iso-loop-group-equiv-Set
                     ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
                     ( raise-Set l4 (Fin-Set 2))
-                    ( equiv-raise l4 (Fin 2) ∘e
+                    ( compute-raise-Fin l4 2 ∘e
                       inv-equiv
                       ( equiv-D/R-fin-2-equiv
                         ( succ-ℕ (succ-ℕ n))
                         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                         ( star)
-                        ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                        ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
               ( f))
           ( eq-quotient-delooping-sign-loop-sign-homomorphism {l4 = l4} n)) ∙
           ( eq-pair-Σ
-            ( eq-htpy refl-htpy)
+            ( refl)
             ( eq-is-prop
               ( is-prop-preserves-mul-Semigroup
                 ( semigroup-Group
@@ -1953,13 +1936,13 @@ module _
                               ( iso-loop-group-equiv-Set
                                 ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
                                 ( raise-Set l4 (Fin-Set 2))
-                                ( equiv-raise l4 (Fin 2) ∘e
+                                ( compute-raise-Fin l4 2 ∘e
                                   inv-equiv
                                     ( equiv-D/R-fin-2-equiv
                                       ( succ-ℕ (succ-ℕ n))
                                       ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                                       ( star)
-                                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))))
+                                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
                           ( hom-inv-symmetric-group-loop-group-Set
                             ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
                         ( hom-symmetric-group-equiv-Set
@@ -1969,10 +1952,11 @@ module _
                             ( succ-ℕ (succ-ℕ n))
                             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
                             ( star)
-                            ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+                            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
                       ( sign-homomorphism (succ-ℕ (succ-ℕ n))
                         ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
                     ( hom-inv-symmetric-group-equiv-Set (Fin-Set (succ-ℕ (succ-ℕ n)))
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
-                      ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))))))
+                      ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
 ```
+ 

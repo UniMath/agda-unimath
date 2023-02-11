@@ -3,37 +3,26 @@ title: Choice of representatives for an equivalence relation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.choice-of-representatives-equivalence-relation where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
-  ( is-contr; center; is-contr-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalence-classes using
-  ( equivalence-class; class; eq-class-equivalence-class;
-    apply-effectiveness-class';
-    is-effective-class)
-open import foundation.equivalences using (_∘e_; is-equiv; _≃_)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_∙_; ap; refl)
-open import foundation.logical-equivalences using (backward-implication)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; trunc-Prop; unit-trunc-Prop;
-    is-prop-type-trunc-Prop)
-open import foundation.propositions using (eq-is-prop)
-open import foundation.surjective-maps using
-  ( is-surjective; is-equiv-is-emb-is-surjective)
-open import foundation.type-arithmetic-dependent-pair-types using (assoc-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalence-classes
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types 
+open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel)
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea

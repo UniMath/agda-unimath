@@ -3,13 +3,11 @@ title: Univalent type families
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.univalent-type-families where
 
-open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using (_＝_; equiv-tr)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

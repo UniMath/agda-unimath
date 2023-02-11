@@ -3,21 +3,18 @@ title: Cantor's diagonal argument
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.cantors-diagonal-argument where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty; empty-Prop)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.logical-equivalences using (iff-eq)
-open import foundation.negation using (neg-Prop; no-fixed-points-neg-Prop; ¬)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using (Prop)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation-core.function-extensionality
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.surjective-maps
+open import foundation.universe-levels
 ```
 
 ## Idea

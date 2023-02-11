@@ -3,32 +3,25 @@ title: Functoriality of function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-function-types where
 
 open import foundation-core.functoriality-function-types public
 
-open import foundation.constant-maps using (const)
-open import foundation.contractible-types using (center; eq-is-contr')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (postcomp; id; _∘_)
-open import foundation.function-extensionality using (htpy-eq; eq-htpy)
-open import foundation.functoriality-dependent-function-types using
-  ( is-trunc-map-map-Π-is-trunc-map';
-    is-trunc-map-is-trunc-map-map-Π')
-open import foundation.homotopies using (htpy-right-whisk)
-open import foundation.identity-types using (ap; refl)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.constant-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.contractible-maps using
-  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; map-inv-is-equiv; issec-map-inv-is-equiv;
-    isretr-map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
-open import foundation-core.truncated-maps using (is-trunc-map)
-open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
+open import foundation-core.contractible-maps
+open import foundation-core.equivalences
+open import foundation-core.function-extensionality
+open import foundation-core.truncated-maps
+open import foundation-core.truncation-levels
 ```
 
 ## Properties
@@ -53,3 +46,12 @@ is-trunc-map-is-trunc-map-postcomp k {X} {Y} f is-trunc-post-f =
     ( λ {l} {J} α → is-trunc-post-f {l} J)
     ( star)
 ```
+
+## See also
+
+- Functorial properties of dependent function types are recorded in
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).
+- Arithmetical laws involving dependent function types are recorded in
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
+- Equality proofs in dependent function types are characterized in
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).

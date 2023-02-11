@@ -488,11 +488,11 @@ module _
         ( coprod-Set (trunc-Set A) (trunc-Set B))
         ( map-coprod unit-trunc-Set unit-trunc-Set)
         ( λ {l} C →
-          is-equiv-right-factor'
+          is-equiv-right-factor
             ( ev-inl-inr (λ x → type-Set C))
             ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
             ( universal-property-coprod (type-Set C))
-            ( is-equiv-comp'
+            ( is-equiv-comp
               ( map-prod
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))
@@ -543,7 +543,7 @@ module _
         ( trunc-Set (Σ A (λ x → type-trunc-Set (B x))))
         ( unit-trunc-Set ∘ tot (λ x → unit-trunc-Set))
         ( λ {l} C →
-          is-equiv-right-factor'
+          is-equiv-right-factor
             ( ev-pair)
             ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
             ( is-equiv-ev-pair)
@@ -605,7 +605,7 @@ module _
         ( prod-Set (trunc-Set A) (trunc-Set B))
         ( map-prod unit-trunc-Set unit-trunc-Set)
         ( λ {l} C →
-          is-equiv-right-factor'
+          is-equiv-right-factor
             ( ev-pair)
             ( precomp-Set (map-prod unit-trunc-Set unit-trunc-Set) C)
             ( is-equiv-ev-pair)
@@ -661,15 +661,15 @@ abstract
       ( Π-Set (Fin-Set (succ-ℕ k)) (λ x → trunc-Set (A x)))
       ( map-Π (λ x → unit-trunc-Set))
       ( λ {l} B →
-        is-equiv-left-factor'
+        is-equiv-left-factor
           ( precomp (map-Π (λ x → unit-trunc-Set)) (type-Set B))
           ( precomp (ev-Maybe {B = type-trunc-Set ∘ A}) (type-Set B))
-          ( is-equiv-comp'
+          ( is-equiv-comp
             ( precomp ev-Maybe (type-Set B))
             ( precomp
               ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
               ( type-Set B))
-            ( is-equiv-right-factor'
+            ( is-equiv-right-factor
               ( ev-pair)
               ( precomp
                 ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)

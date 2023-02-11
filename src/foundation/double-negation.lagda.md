@@ -3,21 +3,17 @@ title: Double negation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.double-negation where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (_∘_)
-open import foundation.negation using (¬; map-neg; neg-Prop')
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Definition

@@ -3,18 +3,15 @@ title: Identity types of truncated types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.identity-truncated-types where
 
-open import foundation-core.equivalences using (_≃_)
-open import foundation-core.truncation-levels using (𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.equivalences
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.identity-types using (_＝_)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-equiv; is-trunc-equiv-is-trunc)
-open import foundation.univalence using (equiv-univalence)
+open import foundation.identity-types
+open import foundation.truncated-types
+open import foundation.univalence
 
 ```
 

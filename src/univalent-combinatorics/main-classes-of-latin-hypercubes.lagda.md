@@ -3,8 +3,6 @@ title: The groupoid of main classes of Latin hypercubes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.main-classes-of-latin-hypercubes where
 
 open import elementary-number-theory.natural-numbers

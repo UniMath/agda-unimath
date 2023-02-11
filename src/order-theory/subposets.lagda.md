@@ -1,24 +1,16 @@
 # Subposets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.subposets where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using (Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import order-theory.posets using
-  ( Poset; element-Poset; preorder-Poset; antisymmetric-leq-Poset)
-open import order-theory.preorders using (Preorder)
-open import order-theory.subpreorders using
-  ( element-sub-Preorder; eq-element-sub-Preorder; leq-sub-preorder-Prop;
-    leq-sub-Preorder; is-prop-leq-sub-Preorder; refl-leq-sub-Preorder;
-    transitive-leq-sub-Preorder; inclusion-sub-preorder-Prop;
-    inclusion-sub-Preorder; is-prop-inclusion-sub-Preorder;
-    refl-inclusion-sub-Preorder; transitive-inclusion-sub-Preorder)
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.subpreorders
 ```
 
 ## Definitions

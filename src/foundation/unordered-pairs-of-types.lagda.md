@@ -3,8 +3,6 @@ title: Unordered pairs of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unordered-pairs-of-types where
 
 open import foundation.contractible-types

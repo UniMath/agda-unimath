@@ -1,20 +1,18 @@
-# Pointed dependent functions
+---
+title: Pointed dependent functions
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.pointed-dependent-functions where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (ev-pt)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import structured-types.pointed-families-of-types using
-  ( Pointed-Fam; fam-Pointed-Fam; pt-Pointed-Fam)
-open import structured-types.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-types
 ```
 
 ## Idea

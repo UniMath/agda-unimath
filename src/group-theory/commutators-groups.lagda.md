@@ -3,16 +3,13 @@ title: Commutators of elements in groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.commutators-groups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.identity-types using
-  ( Id; _＝_; ap-binary; inv; _∙_; ap; refl)
-open import foundation.sets using (Set; is-set; Id-Prop)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 
 open import group-theory.group-solver
 open import group-theory.groups

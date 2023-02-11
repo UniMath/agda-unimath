@@ -3,20 +3,17 @@ title: The replacement axiom for type theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.replacement where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (id-emb)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.images using (im)
-open import foundation.locally-small-types using (is-locally-small)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.universe-levels using (Level; UUω; UU)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.homotopies
+open import foundation.images
+open import foundation.locally-small-types
+open import foundation.surjective-maps
+open import foundation.universe-levels
 
-open import foundation-core.small-types using
-  ( is-small; is-small-equiv'; is-small')
+open import foundation-core.small-types
 ```
 
 ## Idea

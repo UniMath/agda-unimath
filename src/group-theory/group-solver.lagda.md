@@ -3,33 +3,23 @@ title: Group solver
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.group-solver where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; _＝_; ap-binary; inv; _∙_; ap; refl)
-open import foundation.sets using (Set; is-set; Id-Prop)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.groups using
-  ( Group; type-Group; mul-Group; set-Group; is-set-type-Group
-  ; inv-Group ; unit-Group ; associative-mul-Group
-  ; right-inverse-law-mul-Group ; left-inverse-law-mul-Group
-  ; right-unit-law-mul-Group ; left-unit-law-mul-Group
-  ; distributive-inv-mul-Group ; inv-inv-Group
-  )
+open import group-theory.groups
 
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ; is-set-ℕ)
+open import elementary-number-theory.natural-numbers
 
 open import linear-algebra.vectors
 -- open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.lists
 open import foundation.decidable-types
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; ind-coprod; is-prop-coprod; is-left; is-right)
-open import group-theory.groups using (inv-unit-Group)
+open import foundation.coproduct-types
+open import group-theory.groups
 ```
 
 

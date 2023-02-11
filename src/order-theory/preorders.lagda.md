@@ -1,15 +1,12 @@
 # Preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.preorders where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

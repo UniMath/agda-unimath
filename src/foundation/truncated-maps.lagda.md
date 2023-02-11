@@ -3,24 +3,19 @@ title: Truncated maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.truncated-maps where
 
 open import foundation-core.truncated-maps public
 
 open import foundation-core.cones-pullbacks
-open import foundation-core.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; triple)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functoriality-fibers-of-maps using (map-fib-cone)
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functoriality-fibers-of-maps
+open import foundation-core.propositions
 open import foundation-core.pullbacks
-open import foundation-core.truncated-types using
-  ( is-prop-is-trunc; is-trunc-is-equiv)
-open import foundation-core.truncation-levels using (𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
-
-open import foundation.propositions using (is-prop; is-prop-Π; Prop)
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Properties
@@ -31,7 +26,7 @@ open import foundation.propositions using (is-prop; is-prop-Π; Prop)
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
   is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fib f x))
 
@@ -47,7 +42,7 @@ module _
   {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3}
   {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
   where
-  
+
   abstract
     is-trunc-is-pullback :
       is-pullback f g c → is-trunc-map k g → is-trunc-map k (pr1 c)

@@ -3,43 +3,26 @@ title: The universal property of propositional truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-propositional-truncation where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; center; is-contr-equiv)
-open import foundation.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; ind-Σ; ev-pair)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; map-equiv; is-property-is-equiv;
-    is-equiv-top-is-equiv-bottom-square; is-equiv-precomp-is-equiv;
-    is-equiv-map-equiv; is-equiv-is-equiv-precomp-Prop; is-equiv-id;
-    is-equiv-comp')
-open import foundation.function-extensionality using (equiv-funext)
-open import foundation.functions using (_∘_; precomp-Π; precomp; id)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.functoriality-dependent-function-types using
-  ( is-equiv-map-Π)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; type-hom-Prop; is-equiv-is-prop;
-    is-prop-Π; type-equiv-Prop; Σ-Prop; is-prop-function-type; prod-Prop;
-    is-prop-type-hom-Prop)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.type-theoretic-principle-of-choice using
-  ( map-inv-distributive-Π-Σ; is-equiv-map-inv-distributive-Π-Σ)
-open import foundation.unit-type using (unit-Prop; terminal-map; ind-unit)
-open import foundation.universal-property-dependent-pair-types using
-  ( is-equiv-ev-pair)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtype-identity-principle
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universe-levels
 
-open import foundation-core.contractible-maps using
-  ( is-contr-map-is-equiv; is-equiv-is-contr-map)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ; map-Σ)
+open import foundation-core.contractible-maps
+open import foundation-core.functoriality-dependent-pair-types
 ```
 
 ## Idea
@@ -349,7 +332,7 @@ abstract
       ( refl-htpy)
       ( is-equiv-ev-pair)
       ( is-equiv-ev-pair)
-      ( is-equiv-comp'
+      ( is-equiv-comp
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
         ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))

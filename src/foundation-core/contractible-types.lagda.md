@@ -3,22 +3,18 @@ title: Contractible types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.contractible-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-cartesian-product-types using (eq-pair)
-open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation-core.equivalences using
-  ( is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv; _≃_;
-    is-equiv-map-inv-is-equiv; is-equiv-has-inverse)
-open import foundation-core.function-extensionality using (funext)
-open import foundation-core.identity-types using
-  ( _＝_; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
-open import foundation-core.retractions using (_retract-of_)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.universe-levels
+
+open import foundation.function-extensionality
 ```
 
 ## Idea
@@ -36,7 +32,7 @@ abstract
   center :
     {l : Level} {A : UU l} → is-contr A → A
   center (pair c is-contr-A) = c
-  
+
 eq-is-contr' :
   {l : Level} {A : UU l} → is-contr A → (x y : A) → x ＝ y
 eq-is-contr' (pair c C) x y = (inv (C x)) ∙ (C y)
@@ -50,7 +46,7 @@ abstract
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
     (x : A) → (center is-contr-A) ＝ x
   contraction C x = eq-is-contr C
-  
+
   coh-contraction :
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
     (contraction is-contr-A (center is-contr-A)) ＝ refl
@@ -103,7 +99,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (B : UU l2)
   where
-  
+
   abstract
     is-contr-is-equiv :
       (f : A → B) → is-equiv f → is-contr B → is-contr A
@@ -111,7 +107,7 @@ module _
     pr2 (is-contr-is-equiv f H (pair b K)) x =
       ( ap (map-inv-is-equiv H) (K (f x))) ∙
       ( isretr-map-inv-is-equiv H x)
-    
+
   abstract
     is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A
     is-contr-equiv (pair e is-equiv-e) is-contr-B =
@@ -157,6 +153,7 @@ module _
 ### Contractibility of cartesian product types
 
 Given two types `A` and `B`, the following are equivalent:
+
 1. The type `A × B` is contractible.
 2. Both `A` and `B` are contractible.
 
@@ -192,7 +189,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   abstract
     is-contr-prod : is-contr A → is-contr B → is-contr (A × B)
     pr1 (pr1 (is-contr-prod (pair a C) (pair b D))) = a
@@ -251,6 +248,15 @@ abstract
       ( λ x → contraction (H x) (f x))
 ```
 
+### The type of functions into a contractible type is contractible
+
+```agda
+is-contr-function-type :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-contr B → is-contr (A → B)
+is-contr-function-type is-contr-B = is-contr-Π λ _ → is-contr-B
+```
+
 ### The type of equivalences between contractible types is contractible
 
 ```agda
@@ -262,17 +268,17 @@ module _
     is-contr A → is-contr B → is-contr (A ≃ B)
   is-contr-equiv-is-contr (pair a α) (pair b β) =
     is-contr-Σ
-      ( is-contr-Π (λ x → (pair b β)))
+      ( is-contr-function-type (pair b β))
       ( λ x → b)
       ( is-contr-prod
         ( is-contr-Σ
-          ( is-contr-Π (λ y → (pair a α)))
+          ( is-contr-function-type (pair a α))
           ( λ y → a)
-          ( is-contr-Π (λ y → is-prop-is-contr (pair b β) b y)))
+          ( is-contr-Π (is-prop-is-contr (pair b β) b)))
         ( is-contr-Σ
-          ( is-contr-Π (λ x → pair a α))
+          ( is-contr-function-type (pair a α))
           ( λ y → a)
-          ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))))
+          ( is-contr-Π (is-prop-is-contr (pair a α) a))))
 ```
 
 ### Being contractible is a proposition
@@ -281,14 +287,14 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-contr-is-contr : is-contr A → is-contr (is-contr A)
     is-contr-is-contr (pair a α) =
       is-contr-Σ
         ( pair a α)
         ( a)
-        ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))
+        ( is-contr-Π (is-prop-is-contr (pair a α) a))
 
   abstract
     is-property-is-contr : (H K : is-contr A) → is-contr (H ＝ K)

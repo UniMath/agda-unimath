@@ -3,8 +3,6 @@ title: Functoriality of function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.functoriality-function-types where
 
 open import foundation-core.coherently-invertible-maps
@@ -12,12 +10,13 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.path-split-maps
 open import foundation-core.universe-levels
+
+open import foundation.function-extensionality
 ```
 
 ## Properties
@@ -98,3 +97,12 @@ pr1 (equiv-postcomp A e) = postcomp A (map-equiv e)
 pr2 (equiv-postcomp A e) =
   is-equiv-postcomp-is-equiv (map-equiv e) (is-equiv-map-equiv e) A
 ```
+
+## See also
+
+- Functorial properties of dependent function types are recorded in
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).
+- Arithmetical laws involving dependent function types are recorded in
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
+- Equality proofs in dependent function types are characterized in
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).

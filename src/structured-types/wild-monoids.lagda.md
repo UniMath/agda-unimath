@@ -5,26 +5,17 @@ title: Wild monoids
 ```agda
 module structured-types.wild-monoids where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; _∙_; ap)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups using (preserves-mul)
+open import group-theory.homomorphisms-semigroups
 
-open import structured-types.coherent-h-spaces using
-  ( Coherent-H-Space; type-Coherent-H-Space; mul-Coherent-H-Space;
-    unit-Coherent-H-Space; left-unit-law-mul-Coherent-H-Space;
-    mul-Coherent-H-Space'; right-unit-law-mul-Coherent-H-Space;
-    pointed-type-Coherent-H-Space; coherent-unital-mul-Pointed-Type;
-    coherent-unital-mul-Coherent-H-Space; ap-mul-Coherent-H-Space;
-    coh-unit-laws-mul-Coherent-H-Space)
-open import structured-types.morphisms-coherent-h-spaces using
-  ( hom-Coherent-H-Space; preserves-unital-mul; preserves-left-unit-law-mul;
-    preserves-right-unit-law-mul; preserves-coh-unit-laws-mul)
-open import structured-types.pointed-maps using (_→*_)
-open import structured-types.pointed-types using
-  ( Pointed-Type)
+open import structured-types.coherent-h-spaces
+open import structured-types.morphisms-coherent-h-spaces
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 ## Idea

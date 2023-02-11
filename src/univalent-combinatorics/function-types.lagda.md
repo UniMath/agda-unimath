@@ -3,25 +3,18 @@ title: Finite function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.function-types where
 
-open import foundation.dependent-pair-types using (pr1; pr2)
-open import foundation.equivalences using (_≃_)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types using
-  ( is-finite-prod)
-open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.dependent-function-types using
-  ( count-Π; is-finite-Π)
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-Σ)
-open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; 𝔽; type-𝔽; is-finite-type-𝔽)
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 ## Properties

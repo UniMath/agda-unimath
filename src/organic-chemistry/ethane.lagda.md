@@ -3,8 +3,6 @@ title: Ethane
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.ethane where
 
 open import elementary-number-theory.inequality-natural-numbers

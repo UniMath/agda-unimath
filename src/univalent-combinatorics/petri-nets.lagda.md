@@ -3,8 +3,6 @@ title: Petri-nets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.petri-nets where
 
 open import foundation.cartesian-product-types

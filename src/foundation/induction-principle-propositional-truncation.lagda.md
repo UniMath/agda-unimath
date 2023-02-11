@@ -3,15 +3,12 @@ title: The induction principle for propositional truncation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.induction-principle-propositional-truncation where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; tr)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-is-proof-irrelevant; eq-is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

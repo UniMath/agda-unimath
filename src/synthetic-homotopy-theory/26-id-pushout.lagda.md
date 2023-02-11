@@ -51,7 +51,7 @@ module hom-Fam-pushout
     QS = pr2 (pr2 Q)
 
   {- Definition 19.1.1 -}
-  
+
   hom-Fam-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   hom-Fam-pushout =
@@ -61,7 +61,7 @@ module hom-Fam-pushout
           ( (hB (g s)) ∘ (map-equiv (PS s))) ~ ((map-equiv (QS s)) ∘ (hA (f s)))))
 
   {- Remark 19.1.2. We characterize the identity type of hom-Fam-pushout. -}
-  
+
   htpy-hom-Fam-pushout :
     ( h k : hom-Fam-pushout) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   htpy-hom-Fam-pushout h k =
@@ -78,7 +78,7 @@ module hom-Fam-pushout
       ( λ x → refl-htpy)
       ( pair
         ( λ y → refl-htpy)
-        ( λ s → inv-htpy right-unit-htpy))
+        ( λ s → inv-htpy-right-unit-htpy))
 
   htpy-hom-Fam-pushout-eq :
     ( h k : hom-Fam-pushout) → Id h k → htpy-hom-Fam-pushout h k
@@ -125,7 +125,7 @@ module hom-Fam-pushout
     ( h k : hom-Fam-pushout) → htpy-hom-Fam-pushout h k → Id h k
   eq-htpy-hom-Fam-pushout h k =
     map-inv-is-equiv (is-equiv-htpy-hom-Fam-pushout-eq h k)
-  
+
 open hom-Fam-pushout public
 
 {- Definition 19.1.3. Given a cocone structure on X and a family of maps indexed
@@ -180,8 +180,8 @@ is-equiv-square-path-over-fam-maps :
   { x x' : A} (p : Id x x') (f : B x → C x) (f' : B x' → C x') →
   is-equiv (square-path-over-fam-maps p f f')
 is-equiv-square-path-over-fam-maps refl f f' =
-  is-equiv-comp' htpy-eq inv (is-equiv-inv f f') (funext f' f)
-  
+  is-equiv-comp htpy-eq inv (is-equiv-inv f f') (funext f' f)
+
 is-equiv-hom-Fam-pushout-dep-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
@@ -231,7 +231,7 @@ triangle-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q h =
         ( λ s →
           ( htpy-eq
             ( coherence-naturality-fam-maps P Q (pr2 (pr2 c)) h s)) ∙h
-          ( inv-htpy right-unit-htpy))))
+          ( inv-htpy-right-unit-htpy))))
 
 is-equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -240,7 +240,7 @@ is-equiv-hom-Fam-pushout-map :
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
-  is-equiv-comp
+  is-equiv-comp-htpy
     ( hom-Fam-pushout-map c P Q)
     ( hom-Fam-pushout-dep-cocone c P Q)
     ( dep-cocone-map f g c (λ x → P x → Q x))
@@ -267,7 +267,7 @@ ev-pt-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g)
   {a : A} → (pr1 P a) → (hom-Fam-pushout P Q) → pr1 Q a
-ev-pt-hom-Fam-pushout P Q {a} p h = pr1 h a p 
+ev-pt-hom-Fam-pushout P Q {a} p h = pr1 h a p
 
 is-universal-Fam-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
@@ -301,7 +301,7 @@ is-universal-id-Fam-pushout' :
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
-  is-equiv-left-factor
+  is-equiv-left-factor-htpy
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
     ( ev-pt-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
@@ -328,7 +328,7 @@ is-universal-id-Fam-pushout l {S = S} {A} {B} {X} {f} {g} c up-X a Q =
     ( is-universal-id-Fam-pushout' c up-X a)
     ( Q)
 
-{- We construct the identity morphism and composition, and we show that 
+{- We construct the identity morphism and composition, and we show that
    morphisms equipped with two-sided inverses are equivalences. -}
 
 id-hom-Fam-pushout :

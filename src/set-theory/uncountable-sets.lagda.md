@@ -3,8 +3,6 @@ title: Uncountable sets
 ___
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module set-theory.uncountable-sets where
 
 open import foundation.negation

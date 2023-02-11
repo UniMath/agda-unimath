@@ -3,24 +3,16 @@ title: Commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.commutative-rings where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_)
-open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop; is-prop-Π)
-open import foundation.sets using (Set; type-Set; is-set; is-set-type-Set)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; mul-Ring; is-set-type-Ring; zero-Ring; add-Ring; neg-Ring;
-    is-zero-Ring; is-nonzero-Ring; set-Ring; associative-add-Ring;
-    left-unit-law-add-Ring; right-unit-law-add-Ring; left-inverse-law-add-Ring;
-    right-inverse-law-add-Ring; commutative-add-Ring; associative-mul-Ring;
-    left-unit-law-mul-Ring; right-unit-law-mul-Ring;
-    left-distributive-mul-add-Ring; right-distributive-mul-add-Ring; one-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

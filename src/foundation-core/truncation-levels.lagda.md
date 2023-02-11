@@ -4,11 +4,11 @@ title: Truncation levels
 
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.truncation-levels where
 
-open import foundation-core.universe-levels using (UU; lzero)
+open import foundation-core.universe-levels
 ```
 
 ## Idea

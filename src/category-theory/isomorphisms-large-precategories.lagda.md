@@ -3,25 +3,16 @@ title: Isomorphisms in large precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.isomorphisms-large-precategories where
 
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-hom-Large-Precat; id-hom-Large-Precat;
-    right-unit-law-comp-hom-Large-Precat;
-    associative-comp-hom-Large-Precat; comp-hom-Large-Precat';
-    left-unit-law-comp-hom-Large-Precat; hom-Large-Precat;
-    is-set-type-hom-Large-Precat)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
-open import foundation.propositions using
-  ( prod-Prop; is-prop; is-prop-all-elements-equal; Prop)
-open import foundation.sets using (Id-Prop; is-set; Set)
-open import foundation.subtypes using (eq-type-subtype; is-set-type-subtype)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import category-theory.large-precategories
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea

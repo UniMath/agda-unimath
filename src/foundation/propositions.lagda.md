@@ -3,27 +3,20 @@ title: Propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.propositions where
 
 open import foundation-core.propositions public
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (is-equiv-has-inverse; _≃_)
-open import foundation-core.function-extensionality using
-  ( htpy-eq; equiv-funext)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.truncated-types using
-  ( is-trunc)
-open import foundation-core.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.function-extensionality
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr; is-trunc-is-contr; eq-is-contr; is-contr-equiv; is-contr-Π;
-    is-prop-is-contr; is-property-is-contr)
+open import foundation.contractible-types
 ```
 
 ### Propositions are (k+1)-truncated for any k.

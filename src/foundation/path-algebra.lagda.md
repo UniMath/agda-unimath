@@ -3,18 +3,13 @@ title: Path algebra
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.path-algebra where
 
-open import foundation.binary-embeddings using (is-binary-emb-is-binary-equiv)
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using
-  ( Id; _＝_; refl; inv; _∙_; assoc; square; ap; concat'; concat; right-unit;
-    ap-id; ap-binary; is-binary-equiv-concat; left-unit; left-unit-ap-binary;
-    right-unit-ap-binary)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ```agda

@@ -1,16 +1,14 @@
 # Constant matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.constant-matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors using (constant-vec)
-open import linear-algebra.matrices using (matrix)
+open import linear-algebra.constant-vectors
+open import linear-algebra.matrices
 ```
 
 ## Idea

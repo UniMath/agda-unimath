@@ -3,17 +3,15 @@ title: Split surjective maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.split-surjective-maps where
 
-open import foundation.injective-maps using (is-injective)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (is-equiv)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.retractions using (retr)
-open import foundation-core.sections using (sec)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
+open import foundation.injective-maps
+open import foundation.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.universe-levels
 ```
 
 ## Idea

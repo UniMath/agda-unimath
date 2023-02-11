@@ -3,35 +3,23 @@ title: Proper divisors of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.proper-divisors-natural-numbers where
 
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; div-zero-ℕ; leq-div-ℕ; is-prop-div-ℕ; is-zero-div-zero-ℕ;
-    is-one-div-one-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( le-ℕ; le-leq-neq-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( is-decidable-div-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( right-unit-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ)
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
   
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-prod; is-decidable-neg)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (_＝_; refl; inv)
-open import foundation.negation using (¬; is-prop-neg)
-open import foundation.propositions using
-  ( is-prop; is-prop-prod)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

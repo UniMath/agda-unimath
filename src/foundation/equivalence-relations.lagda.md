@@ -525,7 +525,7 @@ equiv-surjection-into-set-eq-rel-Surjection-Into-Set f =
       ( is-set-quotient-is-surjective-and-effective
         ( eq-rel-Surjection-Into-Set f)
         ( set-Surjection-Into-Set f)
-        ( map-Surjection-Into-Set f)
+        ( pr1 (pr2 f) , (λ {x} {y} z → z))
         ( pair
           ( is-surjective-Surjection-Into-Set f)
           ( is-effective-map-Surjection-Into-Set f))))

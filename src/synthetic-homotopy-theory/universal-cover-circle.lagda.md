@@ -3,8 +3,6 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.universal-cover-circle where
 
 open import elementary-number-theory.equality-integers
@@ -113,7 +111,7 @@ triangle-comparison-fam-circle l P =
   eq-Eq-Fam-circle
     ( ev-fam-circle l P)
     ( comparison-fam-circle _ (ev-free-loop l (UU _) P))
-    ( pair id-equiv (inv-htpy (tr-equiv-eq-ap (pr2 l))))
+    ( pair id-equiv (htpy-eq (inv (tr-equiv-eq-ap (pr2 l)))))
 
 abstract
   is-equiv-ev-fam-circle-universal-property-circle :
@@ -121,7 +119,7 @@ abstract
     ( up-circle : universal-property-circle (lsuc l2) l) →
     is-equiv (ev-fam-circle {l2 = l2} l)
   is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( ev-fam-circle l)
       ( comparison-fam-circle l2)
       ( ev-free-loop l (UU l2))
@@ -131,7 +129,7 @@ abstract
 
 unique-family-property-circle :
   { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
-  UU (l1 ⊔ (lsuc l2))
+  UU (l1 ⊔ lsuc l2)
 unique-family-property-circle l2 {X} l =
   ( Q : Fam-circle l2) →
     is-contr (Σ (X → UU l2) (λ P → Eq-Fam-circle Q (ev-fam-circle l P)))
@@ -146,7 +144,7 @@ abstract
       ( tot (λ P → (Eq-Fam-circle-eq Q (ev-fam-circle l P)) ∘ inv))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ P →
-          is-equiv-comp' _ _
+          is-equiv-comp _ _
             ( is-equiv-inv _ _)
             ( is-equiv-Eq-Fam-circle-eq Q (ev-fam-circle l P))))
       ( is-contr-map-is-equiv
@@ -238,7 +236,7 @@ abstract
       ( _)
       ( is-equiv-f x)
       ( λ p₀ →
-        is-equiv-comp'
+        is-equiv-comp
           ( concat
             ( naturality-tr-fiberwise-transformation f l p₀)
             ( f x p₀))
@@ -361,7 +359,7 @@ segment-Σ refl f e e' H y = path-total-path-fiber _ _ (H y)
 
 contraction-total-space' :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-  ( x : A) → {F : UU l3} (e : F ≃ B x) → UU (l1 ⊔ (l2 ⊔ l3))
+  ( x : A) → {F : UU l3} (e : F ≃ B x) → UU (l1 ⊔ l2 ⊔ l3)
 contraction-total-space' c x {F} e =
   ( y : F) → Id c (pair x (map-equiv e y))
 

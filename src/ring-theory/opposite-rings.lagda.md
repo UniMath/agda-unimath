@@ -3,8 +3,6 @@ title: Opposite rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.opposite-rings where
 
 open import foundation.dependent-pair-types

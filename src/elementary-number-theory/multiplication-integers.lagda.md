@@ -3,48 +3,28 @@ title: Multiplication of integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.multiplication-integers where
 
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ; add-ℤ'; ap-add-ℤ; right-inverse-law-add-ℤ; left-unit-law-add-ℤ;
-    associative-add-ℤ; right-unit-law-add-ℤ; left-inverse-law-add-ℤ;
-    right-successor-law-add-ℤ; commutative-add-ℤ; left-successor-law-add-ℤ;
-    left-predecessor-law-add-ℤ; right-negative-law-add-ℤ;
-    distributive-neg-add-ℤ; is-positive-add-ℤ; add-int-ℕ)
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; add-ℕ'; commutative-add-ℕ; left-unit-law-add-ℕ;
-    left-successor-law-add-ℕ)
-open import elementary-number-theory.difference-integers using
-  ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ)
-open import elementary-number-theory.equality-integers using (Eq-eq-ℤ)
-open import elementary-number-theory.inequality-integers using
-  ( leq-ℤ; preserves-leq-add-ℤ; concatenate-eq-leq-eq-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; neg-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; int-ℕ; succ-ℤ; pred-ℤ;
-    in-pos; pred-neg-ℤ; issec-pred-ℤ; neg-pred-ℤ; neg-neg-ℤ; is-positive-ℤ;
-    succ-int-ℕ; is-zero-ℤ; is-nonzero-ℤ; is-positive-eq-ℤ; is-nonnegative-ℤ;
-    is-nonnegative-eq-ℤ; is-set-ℤ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.embeddings using (is-emb)
-open import foundation.empty-types using (ex-falso)
+open import foundation.coproduct-types
+open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equational-reasoning
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.injective-maps using
-  ( is-injective; is-emb-is-injective)
-open import foundation.interchange-law using
-  ( interchange-law; interchange-law-commutative-and-associative)
-open import foundation.type-arithmetic-empty-type using
-  ( map-left-unit-law-coprod-is-empty)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.interchange-law
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -1,17 +1,13 @@
 # Total preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.total-preorders where
 
-open import foundation.disjunction using (disj-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.disjunction
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import order-theory.preorders using
-  ( Preorder; element-Preorder; leq-preorder-Prop)
+open import order-theory.preorders
 ```
 
 ## Definition

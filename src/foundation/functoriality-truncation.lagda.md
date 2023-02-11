@@ -3,27 +3,19 @@ title: Functoriality of truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-truncation where
 
-open import foundation.contractible-types using
-  ( is-contr; center; contraction)
-open import foundation.dependent-pair-types using
-  ( Σ; pr1; pr2; pair)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; map-inv-equiv; isretr-map-inv-equiv;
-    issec-map-inv-equiv; is-equiv)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy)
-open import foundation.identity-types using (ap)
-open import foundation.truncation-levels using (𝕋)
-open import foundation.truncations using
-  ( type-trunc; unit-trunc; universal-property-trunc;
-    trunc)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.function-extensionality
+
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.truncation-levels
+open import foundation.truncations
+open import foundation.universe-levels
 ```
 
 ## Idea

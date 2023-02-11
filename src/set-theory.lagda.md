@@ -3,8 +3,6 @@ title: Set theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module set-theory where
 
 open import set-theory.baire-space public

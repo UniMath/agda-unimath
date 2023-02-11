@@ -3,8 +3,6 @@ title: Group theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory where
 
 open import group-theory.abelian-groups public
@@ -93,6 +91,7 @@ open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
+open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.representations-monoids public
 open import group-theory.semigroups public

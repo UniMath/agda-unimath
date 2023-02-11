@@ -3,14 +3,10 @@ title: Pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.pullbacks where
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-cubes
-open import foundation-core.commuting-squares
-open import foundation.cones-pullbacks
+open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -19,19 +15,18 @@ open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.homotopies
 open import foundation-core.morphisms-cospans
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 ```
 
@@ -127,7 +122,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   where
 
-  Eq-canonical-pullback : (t t' : canonical-pullback f g) → UU (l1 ⊔ (l2 ⊔ l3))
+  Eq-canonical-pullback : (t t' : canonical-pullback f g) → UU (l1 ⊔ l2 ⊔ l3)
   Eq-canonical-pullback (pair a bp) t' =
     let b = pr1 bp
         p = pr2 bp
@@ -185,10 +180,8 @@ module _
       universal-property-pullback l f g (cone-canonical-pullback f g)
     universal-property-pullback-canonical-pullback C =
       is-equiv-comp
-        ( cone-map f g (cone-canonical-pullback f g))
         ( tot (λ p → map-distributive-Π-Σ))
         ( mapping-into-Σ)
-        ( refl-htpy)
         ( is-equiv-mapping-into-Σ)
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ p → is-equiv-map-distributive-Π-Σ))
@@ -346,7 +339,7 @@ abstract
     (f : A → X) (g : B → X) (c : cone f g C) →
     is-pullback f g c → is-pullback g f (swap-cone f g c)
   is-pullback-swap-cone f g c is-pb-c =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( gap g f (swap-cone f g c))
       ( map-commutative-canonical-pullback f g)
       ( gap f g c)
@@ -360,7 +353,7 @@ abstract
     (f : A → X) (g : B → X) (c : cone f g C) →
     is-pullback g f (swap-cone f g c) → is-pullback f g c
   is-pullback-swap-cone' f g c is-pb-c' =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( gap g f (swap-cone f g c))
       ( map-commutative-canonical-pullback f g)
       ( gap f g c)
@@ -473,7 +466,7 @@ abstract
     is-pullback f g c →
     is-pullback (map-prod f g) (diagonal X) (fold-cone f g c)
   is-pullback-fold-cone-is-pullback f g c is-pb-c =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( gap (map-prod f g) (diagonal _) (fold-cone f g c))
       ( map-fold-cone f g)
       ( gap f g c)
@@ -488,7 +481,7 @@ abstract
     is-pullback (map-prod f g) (diagonal X) (fold-cone f g c) →
     is-pullback f g c
   is-pullback-is-pullback-fold-cone f g c is-pb-fold =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( gap (map-prod f g) (diagonal _) (fold-cone f g c))
       ( map-fold-cone f g)
       ( gap f g c)
@@ -549,29 +542,21 @@ abstract
     is-equiv (map-prod-cone f g f' g')
   is-equiv-map-prod-cone f g f' g' =
     is-equiv-comp
-      ( map-prod-cone f g f' g')
       ( tot ( λ t →
         ( tot (λ s → eq-pair')) ∘
         ( map-interchange-Σ-Σ _)))
       ( map-interchange-Σ-Σ _)
-      ( refl-htpy)
       ( is-equiv-map-interchange-Σ-Σ _)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ t → is-equiv-comp
-          ( ( tot (λ s → eq-pair')) ∘
-            ( map-interchange-Σ-Σ
-              ( λ y p y' → Id (f' (pr2 t)) (g' y'))))
           ( tot (λ s → eq-pair'))
           ( map-interchange-Σ-Σ
             ( λ y p y' → Id (f' (pr2 t)) (g' y')))
-          ( refl-htpy)
           ( is-equiv-map-interchange-Σ-Σ _)
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ s → is-equiv-comp
               ( eq-pair')
-              ( eq-pair')
               ( id)
-              ( refl-htpy)
               ( is-equiv-id)
               ( is-equiv-eq-pair
                 ( map-prod f f' t)
@@ -588,7 +573,7 @@ abstract
     is-pullback
       ( map-prod f f') (map-prod g g') (prod-cone f g f' g' c c')
   is-pullback-prod-is-pullback-pair f g c f' g' c' is-pb-c is-pb-c' =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( gap (map-prod f f') (map-prod g g') (prod-cone f g f' g' c c'))
       ( map-prod-cone f g f' g')
       ( map-prod (gap f g c) (gap f' g' c'))
@@ -642,7 +627,7 @@ abstract
     canonical-pullback f' g' → is-pullback f g c
   is-pullback-left-factor-is-pullback-prod f g c f' g' c' is-pb-cc' t =
     is-equiv-left-factor-is-equiv-map-prod (gap f g c) (gap f' g' c') t
-      ( is-equiv-right-factor
+      ( is-equiv-right-factor-htpy
         ( gap
           ( map-prod f f')
           ( map-prod g g')
@@ -667,7 +652,7 @@ abstract
     canonical-pullback f g → is-pullback f' g' c'
   is-pullback-right-factor-is-pullback-prod f g c f' g' c' is-pb-cc' t =
     is-equiv-right-factor-is-equiv-map-prod (gap f g c) (gap f' g' c') t
-      ( is-equiv-right-factor
+      ( is-equiv-right-factor-htpy
         ( gap
           ( map-prod f f')
           ( map-prod g g')
@@ -697,10 +682,8 @@ module _
       is-fiberwise-equiv g → is-pullback f (pr1 {B = Q}) cone-map-Σ
     is-pullback-is-fiberwise-equiv is-equiv-g =
       is-equiv-comp
-        ( gap f pr1 cone-map-Σ)
         ( gap f pr1 (cone-canonical-pullback-Σ f Q))
         ( tot g)
-        ( refl-htpy)
         ( is-equiv-tot-is-fiberwise-equiv is-equiv-g)
         ( is-pullback-cone-canonical-pullback-Σ f Q)
 
@@ -718,10 +701,8 @@ module _
     is-fiberwise-equiv-is-pullback is-pullback-cone-map-Σ =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-right-factor
-          ( gap f pr1 cone-map-Σ)
           ( gap f pr1 (cone-canonical-pullback-Σ f Q))
           ( tot g)
-          ( refl-htpy)
           ( is-pullback-cone-canonical-pullback-Σ f Q)
           ( is-pullback-cone-map-Σ))
 
@@ -804,7 +785,7 @@ module _
     is-pullback-rectangle-is-pullback-left-square c d is-pb-c is-pb-d =
       is-pullback-is-fiberwise-equiv-map-fib-cone (j ∘ i) h
         ( cone-comp-horizontal i j h c d)
-        ( λ x → is-equiv-comp
+        ( λ x → is-equiv-comp-htpy
           ( map-fib-cone (j ∘ i) h (cone-comp-horizontal i j h c d) x)
           ( map-fib-cone j h c (i x))
           ( map-fib-cone i (vertical-map-cone j h c) d x)
@@ -826,7 +807,7 @@ module _
       is-pullback-is-fiberwise-equiv-map-fib-cone i
         ( vertical-map-cone j h c)
         ( d)
-        ( λ x → is-equiv-right-factor
+        ( λ x → is-equiv-right-factor-htpy
           ( map-fib-cone (j ∘ i) h (cone-comp-horizontal i j h c d) x)
           ( map-fib-cone j h c (i x))
           ( map-fib-cone i (vertical-map-cone j h c) d x)

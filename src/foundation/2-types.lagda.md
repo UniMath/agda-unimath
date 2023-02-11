@@ -3,15 +3,12 @@ title: 2-Types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.2-types where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.truncated-types using
-  ( is-trunc; truncated-type-succ-Truncated-Type)
-open import foundation.truncation-levels using (two-𝕋)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.universe-levels
 ```
 
 ## Definition

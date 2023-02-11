@@ -3,8 +3,6 @@ title: Wild loops
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.wild-loops where
 
 open import foundation.automorphisms

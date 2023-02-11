@@ -3,27 +3,21 @@ title: Group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.group-actions where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using ( _≃_; map-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; ap; inv; _∙_; refl)
-open import foundation.sets using (Set; type-Set; is-set; is-set-type-Set)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.function-extensionality
 
-open import group-theory.groups using
-  ( Group; type-Group; unit-Group; mul-Group; inv-Group; left-inverse-law-mul-Group;
-    set-Group; equiv-mul-Group; associative-mul-Group)
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; map-hom-Group; preserves-unit-hom-Group;
-    preserves-mul-hom-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 ## Idea

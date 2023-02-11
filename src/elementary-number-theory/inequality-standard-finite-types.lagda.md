@@ -3,29 +3,25 @@ title: Inequality on the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.inequality-standard-finite-types where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; leq-le-ℕ; refl-leq-ℕ; contradiction-le-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.propositions using (is-prop; Prop)
-open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import order-theory.posets using (Poset)
-open import order-theory.preorders using (Preorder)
+open import order-theory.posets
+open import order-theory.preorders
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 # Inequality on the standard finite types

@@ -3,16 +3,14 @@ title: Boolean Reflection
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.boolean-reflection where
 
-open import foundation.booleans using (bool; true; false; Eq-eq-bool)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.booleans
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

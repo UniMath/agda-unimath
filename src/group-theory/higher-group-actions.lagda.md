@@ -3,8 +3,6 @@ title: Higher group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.higher-group-actions where
 
 open import foundation.identity-types

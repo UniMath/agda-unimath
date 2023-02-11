@@ -3,8 +3,6 @@ title: Saturated carbons
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.saturated-carbons where
 
 open import foundation.propositional-truncations

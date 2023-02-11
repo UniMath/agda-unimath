@@ -3,29 +3,21 @@ title: Orientations of cubes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.orientations-cubes where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.iterating-functions using (iterate)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.iterating-functions
+open import foundation.universe-levels
 
-open import univalent-combinatorics.cubes using
-  ( cube; vertex-cube; is-finite-dim-cube; is-finite-axis-cube)
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-Σ)
-open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using
-  ( number-of-elements-is-finite; is-finite-empty)
-open import univalent-combinatorics.function-types using
-  ( is-finite-function-type)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; succ-Fin)
+open import univalent-combinatorics.cubes
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Definition

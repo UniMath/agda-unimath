@@ -1,21 +1,15 @@
 # Least elements in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.least-elements-posets where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import order-theory.least-elements-preorders using
-  ( is-least-element-preorder-Prop; is-least-element-Preorder;
-    is-prop-is-least-element-Preorder; least-element-Preorder)
-open import order-theory.posets using
-  ( Poset; element-Poset; preorder-Poset; antisymmetric-leq-Poset)
+open import order-theory.least-elements-preorders
+open import order-theory.posets
 ```
 
 ## Definition

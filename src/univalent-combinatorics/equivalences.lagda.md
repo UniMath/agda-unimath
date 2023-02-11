@@ -3,23 +3,17 @@ title: Equivalences between finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equivalences where
 
 open import foundation.equivalences public
 
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-prod)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.embeddings using
-  ( is-decidable-is-emb-is-finite)
-open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.surjective-maps using
-  ( is-equiv-is-emb-is-surjective; is-surjective-is-equiv;
-    is-decidable-is-surjective-is-finite)
+open import univalent-combinatorics.embeddings
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.surjective-maps
 ```
 
 ## Properties

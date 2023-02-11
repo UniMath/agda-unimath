@@ -1,20 +1,18 @@
 # Multiplication of matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.multiplication-matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors using (constant-vec)
-open import linear-algebra.matrices-on-rings using (matrix-Ring)
-open import linear-algebra.vectors using (empty-vec; _∷_)
-open import linear-algebra.vectors-on-rings using (vec-Ring)
+open import linear-algebra.constant-vectors
+open import linear-algebra.matrices-on-rings
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-rings
 
-open import ring-theory.rings using (Ring; type-Ring)
+open import ring-theory.rings
 ```
 
 ## Definition

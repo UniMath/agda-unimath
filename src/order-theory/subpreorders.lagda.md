@@ -1,21 +1,16 @@
 # Subpreorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.subpreorders where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop; hom-Prop)
-open import foundation.subtypes using (type-subtype; eq-type-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import order-theory.preorders using
-  ( Preorder; element-Preorder; leq-preorder-Prop; refl-leq-Preorder;
-    transitive-leq-Preorder)
+open import order-theory.preorders
 ```
 
 ## Definition

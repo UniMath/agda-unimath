@@ -4,13 +4,10 @@ title: Truncation levels
 
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.truncation-levels where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation-core.functions
 open import foundation-core.identity-types

@@ -3,18 +3,14 @@ title: Stabilizer groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.stabilizer-groups where
 
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; type-Abstract-Group-Action;
-    mul-Abstract-Group-Action)
-open import group-theory.groups using (Group; type-Group)
+open import group-theory.group-actions
+open import group-theory.groups
 ```
 
 ## Idea

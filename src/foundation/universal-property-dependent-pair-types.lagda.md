@@ -3,17 +3,14 @@ title: The universal property of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-dependent-pair-types where
 
-open import foundation.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; ev-pair; ind-Σ)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

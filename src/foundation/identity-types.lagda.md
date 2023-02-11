@@ -3,23 +3,19 @@ title: Identity types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.identity-types where
 
 open import foundation-core.identity-types public
 
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.binary-equivalences
+open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
+open import foundation.universe-levels
 
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp';
-    map-equiv)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.function-extensionality using (eq-htpy)
-open import foundation-core.homotopies using (_~_; nat-htpy)
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
 ```
 
 ## Idea
@@ -34,7 +30,7 @@ The equality relation on a type is a reflexive relation, with the universal prop
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-equiv-inv : (x y : A) → is-equiv (λ (p : x ＝ y) → inv p)
     is-equiv-inv x y = is-equiv-has-inverse inv inv-inv inv-inv
@@ -97,7 +93,7 @@ module _
         ( inv-concat' x q)
         ( issec-inv-concat' x q)
         ( isretr-inv-concat' x q)
-  
+
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
   pr1 (equiv-concat' x q) = concat' x q
@@ -159,7 +155,7 @@ module _
     is-equiv-con-inv :
       (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (con-inv p q r)
     is-equiv-con-inv p refl r =
-      is-equiv-comp'
+      is-equiv-comp
         ( concat' p (inv right-unit))
         ( concat (inv right-unit) r)
         ( is-equiv-concat (inv right-unit) r)

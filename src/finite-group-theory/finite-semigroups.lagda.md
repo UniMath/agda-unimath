@@ -3,8 +3,6 @@ title: Finite semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.finite-semigroups where
 
 open import elementary-number-theory.natural-numbers

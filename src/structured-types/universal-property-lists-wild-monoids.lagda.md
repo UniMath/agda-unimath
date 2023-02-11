@@ -5,30 +5,18 @@ title: The universal property of lists with respect to wild monoids
 ```agda
 module structured-types.universal-property-lists-wild-monoids where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using
-  ( Id; refl; _∙_; ap; inv; ap-concat; ap-comp; ap-id; concat; left-inv;
-    concat'; assoc)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups using (preserves-mul)
+open import group-theory.homomorphisms-semigroups
 
-open import univalent-combinatorics.lists using
-  ( list; nil; cons; concat-list; left-unit-law-concat-list;
-    right-unit-law-concat-list; assoc-concat-list)
+open import univalent-combinatorics.lists
 
-open import structured-types.morphisms-coherent-h-spaces using
-  ( preserves-left-unit-law-mul; preserves-right-unit-law-mul;
-    preserves-coh-unit-laws-mul)
-open import structured-types.wild-monoids using
-  ( Wild-Monoid; type-Wild-Monoid; unit-Wild-Monoid; mul-Wild-Monoid;
-    left-unit-law-mul-Wild-Monoid; associative-mul-Wild-Monoid;
-    right-unit-law-mul-Wild-Monoid; coh-unit-laws-mul-Wild-Monoid;
-    unit-law-110-assoc-Wild-Monoid; wild-unital-magma-Wild-Monoid;
-    hom-Wild-Monoid)
-open import structured-types.coherent-h-spaces using
-  ( Coherent-H-Space)
+open import structured-types.morphisms-coherent-h-spaces
+open import structured-types.wild-monoids
+open import structured-types.coherent-h-spaces
 ```
 
 ## Idea

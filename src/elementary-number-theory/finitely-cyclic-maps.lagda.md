@@ -3,28 +3,20 @@ title: Finitely cyclic maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.finitely-cyclic-maps where
 
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( add-Fin; mod-succ-ℕ; right-unit-law-add-Fin; right-successor-law-add-Fin;
-    neg-Fin; issec-nat-Fin; commutative-add-Fin; associative-add-Fin;
-    left-inverse-law-add-Fin)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; _∙_; inv; ap)
-open import foundation.iterating-functions using
-  ( iterate; iterate-succ-ℕ; iterate-iterate)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.iterating-functions
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; succ-Fin; nat-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 # Finitely cyclic maps

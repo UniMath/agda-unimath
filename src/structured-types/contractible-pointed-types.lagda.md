@@ -3,8 +3,6 @@ title: Contractible pointed types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.contractible-pointed-types where
 
 open import foundation.contractible-types

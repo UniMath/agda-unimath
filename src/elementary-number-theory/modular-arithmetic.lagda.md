@@ -3,73 +3,41 @@ title: Modular arithmetic
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.modular-arithmetic where
 
 open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ; ap-add-ℤ; is-injective-add-ℤ; is-injective-add-ℤ'; associative-add-ℤ;
-    commutative-add-ℤ; left-unit-law-add-ℤ; right-unit-law-add-ℤ;
-    left-inverse-law-add-ℤ; right-inverse-law-add-ℤ;
-    left-successor-law-add-ℤ; right-successor-law-add-ℤ;
-    left-predecessor-law-add-ℤ; right-predecessor-law-add-ℤ;
-    is-add-one-succ-ℤ; is-add-one-succ-ℤ'; is-add-neg-one-pred-ℤ;
-    is-add-neg-one-pred-ℤ'; is-equiv-add-ℤ; is-equiv-add-ℤ')
-open import elementary-number-theory.congruence-integers using
-  ( cong-ℤ; refl-cong-ℤ; cong-int-cong-ℕ; concatenate-eq-cong-ℤ;
-    transitive-cong-ℤ; concatenate-cong-eq-cong-ℤ; symmetric-cong-ℤ;
-    is-discrete-cong-ℤ; cong-cong-int-ℕ; concatenate-cong-cong-cong-ℤ;
-    is-cong-zero-div-ℤ; div-is-cong-zero-ℤ; is-unit-cong-succ-ℤ)
-open import elementary-number-theory.congruence-natural-numbers using
-  ( refl-cong-ℕ; congruence-mul-ℕ; eq-cong-nat-Fin)
-open import elementary-number-theory.divisibility-integers using
-  ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ; div-neg-ℤ; neg-div-ℤ; div-div-int-abs-ℤ; div-int-abs-div-ℤ)
-open import elementary-number-theory.equality-integers using
-  ( has-decidable-equality-ℤ; ℤ-Discrete-Type)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.congruence-integers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
-    pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
-    is-equiv-pred-ℤ; is-equiv-neg-ℤ; is-set-ℤ; is-nonnegative-succ-ℤ; is-nonnegative-eq-ℤ; decide-is-nonnegative-ℤ; neg-neg-ℤ)
+open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; left-zero-law-mul-ℤ;
-    right-zero-law-mul-ℤ; left-unit-law-mul-ℤ; right-unit-law-mul-ℤ;
-    left-distributive-mul-add-ℤ; right-distributive-mul-add-ℤ;
-    is-mul-neg-one-neg-ℤ; is-mul-neg-one-neg-ℤ'; mul-int-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; left-unit-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-nonzero-ℕ)
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using (is-decidable; is-decidable-iff)
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.discrete-types using (Discrete-Type)
-open import foundation.empty-types using (empty; ex-falso)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary; tr)
-open import foundation.injective-maps using
-  ( is-injective; is-injective-id; is-injective-comp')
-open import foundation.negation using (¬; map-neg)
-open import foundation.sets using (is-set; Set)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.decidable-equality
+open import foundation.dependent-pair-types
+open import foundation.discrete-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms using (Endo)
+open import structured-types.types-equipped-with-endomorphisms
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin; Fin-Discrete-Type)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Fin; 𝔽)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; neg-one-Fin; one-Fin; nat-Fin; is-injective-nat-Fin;
-    is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin;
-    is-equiv-succ-Fin; is-equiv-pred-Fin; is-set-Fin; is-zero-Fin)
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.
@@ -154,22 +122,21 @@ int-ℤ-Mod (succ-ℕ k) x = int-ℕ (nat-Fin (succ-ℕ k) x)
 is-injective-int-ℤ-Mod : (k : ℕ) → is-injective (int-ℤ-Mod k)
 is-injective-int-ℤ-Mod zero-ℕ = is-injective-id
 is-injective-int-ℤ-Mod (succ-ℕ k) =
-  is-injective-comp' (is-injective-nat-Fin (succ-ℕ k)) is-injective-int-ℕ
+  is-injective-comp (is-injective-nat-Fin (succ-ℕ k)) is-injective-int-ℕ
 
 is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
 is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
 is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
 
-int-ℤ-Mod-bounded : (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) 
-  → leq-ℤ (int-ℤ-Mod (succ-ℕ  k) x) (int-ℕ (succ-ℕ k))  
-int-ℤ-Mod-bounded zero-ℕ (inr x) = star 
-int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ 
-  (add-ℤ (inr (inr k)) 
+int-ℤ-Mod-bounded : (k : ℕ) → (x : ℤ-Mod (succ-ℕ k))
+  → leq-ℤ (int-ℤ-Mod (succ-ℕ  k) x) (int-ℕ (succ-ℕ k))
+int-ℤ-Mod-bounded zero-ℕ (inr x) = star
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ
+  (add-ℤ (inr (inr k))
   (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
-int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ 
-  (add-ℤ (inr (inr k)) (inl k)) 
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ
+  (add-ℤ (inr (inr k)) (inl k))
   (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
-
 ```
 
 ## The successor and predecessor functions on the integers modulo k
@@ -456,7 +423,7 @@ preserves-successor-mod-ℕ (succ-ℕ k) x = refl
 
 mod-refl-ℕ : (k : ℕ) → mod-ℕ k k ＝ zero-ℤ-Mod k
 mod-refl-ℕ zero-ℕ = refl
-mod-refl-ℕ (succ-ℕ k) = is-zero-mod-succ-ℕ k (succ-ℕ k) (pair 1 (left-unit-law-mul-ℕ (succ-ℕ k))) 
+mod-refl-ℕ (succ-ℕ k) = is-zero-mod-succ-ℕ k (succ-ℕ k) (pair 1 (left-unit-law-mul-ℕ (succ-ℕ k)))
 
 mod-zero-ℤ : (k : ℕ) → mod-ℤ k zero-ℤ ＝ zero-ℤ-Mod k
 mod-zero-ℤ zero-ℕ = refl
@@ -674,7 +641,7 @@ cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) =
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k zero-ℕ))
     ( zero-ℕ)
     ( cong-nat-mod-succ-ℕ k zero-ℕ)
-cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = 
+cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) =
   cong-int-cong-ℕ
     ( succ-ℕ k)
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
@@ -785,9 +752,9 @@ has-no-fixed-points-succ-Fin {succ-ℕ k} x =
 
 ### Divisibility is decidable
 
-```agda 
+```agda
 is-decidable-div-ℤ : (d x : ℤ) → is-decidable (div-ℤ d x)
-is-decidable-div-ℤ d x = 
+is-decidable-div-ℤ d x =
   is-decidable-iff
     ( div-div-int-abs-ℤ ∘ div-is-zero-mod-ℤ (abs-ℤ d) x)
     ( is-zero-mod-div-ℤ (abs-ℤ d) x ∘ div-int-abs-div-ℤ)
@@ -795,7 +762,4 @@ is-decidable-div-ℤ d x =
       ( abs-ℤ d)
       ( mod-ℤ (abs-ℤ d) x)
       ( zero-ℤ-Mod (abs-ℤ d)))
-
-   
 ```
-

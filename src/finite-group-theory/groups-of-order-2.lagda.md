@@ -3,7 +3,7 @@ title: Groups of order 2
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --allow-unsolved-metas #-}
 
 module finite-group-theory.groups-of-order-2 where
 
@@ -89,7 +89,7 @@ pr1 (symmetric-Group-of-Order-2 l) =
   symmetric-Group (raise-Fin-Set l 2)
 pr2 (symmetric-Group-of-Order-2 l) =
   has-two-elements-Aut-2-Element-Type
-    ( pair (raise-Fin l 2) (unit-trunc-Prop (equiv-raise-Fin l 2)))
+    ( pair (raise-Fin l 2) (unit-trunc-Prop (compute-raise-Fin l 2)))
 ```
 
 ## Properties

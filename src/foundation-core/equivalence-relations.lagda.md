@@ -3,25 +3,18 @@ title: Equivalence relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.equivalence-relations where
 
-open import foundation.binary-relations using
-  ( Rel-Prop; is-reflexive-Rel-Prop; is-symmetric-Rel-Prop;
-    is-transitive-Rel-Prop; type-Rel-Prop; is-prop-type-Rel-Prop;
-    is-prop-is-reflexive-Rel-Prop; is-prop-is-symmetric-Rel-Prop;
-    is-prop-is-transitive-Rel-Prop)
-open import foundation.inhabited-subtypes using (inhabited-subtype)
-open import foundation.logical-equivalences using (_↔_; equiv-iff')
+open import foundation.binary-relations
+open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations 
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (_≃_)
-open import foundation-core.propositions using
-  ( is-prop; equiv-prop; is-prop-prod; Prop)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

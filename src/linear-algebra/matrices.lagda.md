@@ -1,20 +1,17 @@
 # Matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.contractible-types using (is-contr)
-open import foundation.identity-types using (Id; refl; ap-binary)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.dependent-pair-types
+open import foundation.contractible-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors using (map-vec)
-open import linear-algebra.vectors using
-  ( vec; _∷_; empty-vec; head-vec; tail-vec)
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 ```
 
 ## Idea

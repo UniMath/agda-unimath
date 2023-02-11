@@ -3,15 +3,13 @@ title: Weakly constant maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.weakly-constant-maps where
 
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
-open import foundation.identity-types using (_＝_)
-open import foundation.propositions using (is-prop; is-prop-Π; Prop)
-open import foundation.sets using (Set; type-Set; is-set-type-Set)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

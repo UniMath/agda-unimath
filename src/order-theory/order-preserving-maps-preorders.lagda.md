@@ -3,8 +3,6 @@ title: Order preserving maps on preorders
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.order-preserving-maps-preorders where
 
 open import foundation.contractible-types

@@ -3,8 +3,6 @@ title: Inhabited types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.inhabited-types where
 
 open import foundation.contractible-types
@@ -151,3 +149,12 @@ module _
       is-contr-total-equiv-Fam-Inhabited-Types
       equiv-eq-Fam-Inhabited-Types
 ```
+
+## See also
+
+- The notion of *nonempty types* is treated in
+  [`foundation.empty-types`](foundation.empty-types.html).
+  In particular, every inhabited type is nonempty.
+
+- For the notion of *pointed types*, see
+  [`structured-types.pointed-types`](structured-types.pointed-types.html).

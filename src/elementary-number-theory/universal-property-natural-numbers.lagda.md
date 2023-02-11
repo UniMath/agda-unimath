@@ -3,29 +3,20 @@ title: The universal property of the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.universal-property-natural-numbers where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; _≃_; _∘e_; id-equiv)
-open import foundation.function-extensionality using (equiv-funext)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-cartesian-product-types using
-  ( equiv-prod)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using
-  ( _＝_; _∙_; ap; refl; right-unit; inv; left-inv; assoc)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -94,15 +85,11 @@ module _
     map-inv-is-equiv (is-equiv-htpy-eq-structure-preserving-map-ℕ h k)
 
   center-structure-preserving-map-ℕ : structure-preserving-map-ℕ
-  center-structure-preserving-map-ℕ = triple h p H
+  center-structure-preserving-map-ℕ = triple h refl refl-htpy
     where
     h : ℕ → X
     h zero-ℕ = x
     h (succ-ℕ n) = f (h n)
-    p : h zero-ℕ ＝ x
-    p = refl
-    H : (h ∘ succ-ℕ) ~ (f ∘ h)
-    H = refl-htpy
 
   contraction-structure-preserving-map-ℕ :
     (h : structure-preserving-map-ℕ) → center-structure-preserving-map-ℕ ＝ h

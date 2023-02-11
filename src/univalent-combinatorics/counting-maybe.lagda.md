@@ -3,24 +3,18 @@ title: Counting the elements in Maybe
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting-maybe where
 
-open import elementary-number-theory.natural-numbers using
-  ( is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
-open import foundation.identity-types using (refl)
-open import foundation.maybe using (Maybe; exception-Maybe)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.equivalences-maybe
+open import foundation.identity-types
+open import foundation.maybe
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; count-unit; number-of-elements-count;
-    is-empty-is-zero-number-of-elements-count)
-open import univalent-combinatorics.coproduct-types using
-  ( count-coprod)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.coproduct-types
 ```
 
 ## Idea

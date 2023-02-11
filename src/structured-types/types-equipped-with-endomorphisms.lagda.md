@@ -3,8 +3,6 @@ title: Types equipped with endomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.types-equipped-with-endomorphisms where
 
 open import foundation.dependent-pair-types

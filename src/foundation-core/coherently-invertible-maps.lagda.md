@@ -3,19 +3,16 @@ title: Coherently invertible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.coherently-invertible-maps where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using
-  (_~_; _·r_; _·l_; nat-htpy; htpy-right-whisk)
-open import foundation-core.identity-types using
-  ( _＝_; inv; _∙_; ap; inv-con; sq-top-whisk; ap-comp; is-injective-concat';
-    concat; ap-id)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -133,3 +130,12 @@ module _
     pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
       coherence-inv-has-inverse H
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [`foundation.equivalences`](foundation.equivalences.html).
+- For the notion of maps with contractible fibers see
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [`foundation.path-split-maps`](foundation.path-split-maps.html).

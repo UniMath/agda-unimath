@@ -3,19 +3,15 @@ title: Binary embeddings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.binary-embeddings where
 
-open import foundation.binary-equivalences using
-  ( is-binary-equiv; fix-left; fix-right; is-equiv-fix-left; is-equiv-fix-right)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using (is-equiv-comp; is-emb-is-equiv)
-open import foundation.identity-types using
-  ( _＝_; ap-binary; concat'; ap; triangle-ap-binary; is-equiv-concat'; concat;
-    is-equiv-concat)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
+
+open import foundation.binary-equivalences
+open import foundation.identity-types
 ```
 
 ## Idea
@@ -56,7 +52,7 @@ is-binary-emb-is-binary-equiv :
 is-binary-emb-is-binary-equiv {f = f} H {x} {x'} {y} {y'} =
   pair
     ( λ q →
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( λ p → ap-binary f p q)
         ( concat' (f x y) (ap (fix-left f x') q))
         ( λ p → ap (fix-right f y) p)
@@ -64,7 +60,7 @@ is-binary-emb-is-binary-equiv {f = f} H {x} {x'} {y} {y'} =
         ( is-emb-fix-right-is-binary-equiv f H x x')
         ( is-equiv-concat' (f x y) (ap (fix-left f x') q)))
     ( λ p →
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( λ q → ap-binary f p q)
         ( concat (ap (fix-right f y) p) (f x' y'))
         ( λ q → ap (fix-left f x') q)

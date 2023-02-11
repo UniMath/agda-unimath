@@ -3,45 +3,33 @@ title: Abstract groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.groups where
 
-open import foundation.binary-embeddings using
-  ( is-binary-emb; is-binary-emb-is-binary-equiv)
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equational-reasoning
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; is-emb-is-equiv)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( Id; ap-binary; inv; _∙_; ap; refl; _＝_)
-open import foundation.injective-maps using
-  ( is-injective; is-injective-is-equiv)
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.involutions
-open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;
-    is-prop-Σ; Prop)
-open import foundation.sets using (Set; is-set; type-Set; Id-Prop)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import group-theory.monoids using
-  ( is-unital-Semigroup; Monoid; is-prop-is-unital-Semigroup)
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul)
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import structured-types.pointed-types using (Pointed-Type)
-open import structured-types.pointed-types-equipped-with-automorphisms using
-  ( Pointed-Type-With-Aut)
+open import structured-types.pointed-types
+open import structured-types.pointed-types-equipped-with-automorphisms
 
-open import univalent-combinatorics.lists using
-  ( list; mul-list-Monoid; distributive-mul-list-Monoid; concat-list)
+open import univalent-combinatorics.lists
 ```
 
 ## Idea

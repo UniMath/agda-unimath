@@ -5,78 +5,46 @@ title: Cyclic types
 ```agda
 module univalent-combinatorics.cyclic-types where
 
-open import elementary-number-theory.addition-integers using
-  ( left-unit-law-add-ℤ)
-open import elementary-number-theory.groups-of-modular-arithmetic using
-  ( ℤ-Mod-Group)
-open import elementary-number-theory.integers using (ℤ; succ-ℤ; zero-ℤ)
-open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; zero-ℤ-Mod; equiv-add-ℤ-Mod';
-    left-successor-law-add-ℤ-Mod; pred-ℤ-Mod; isretr-pred-ℤ-Mod;
-    issec-pred-ℤ-Mod; add-ℤ-Mod; mod-ℤ; add-ℤ-Mod'; mod-neg-one-ℤ;
-    is-add-neg-one-pred-ℤ-Mod; mod-zero-ℤ; preserves-predecessor-mod-ℤ;
-    left-predecessor-law-add-ℤ-Mod; left-unit-law-add-ℤ-Mod; ap-add-ℤ-Mod;
-    mod-one-ℤ; is-add-one-succ-ℤ-Mod; preserves-successor-mod-ℤ;
-    issec-int-ℤ-Mod; int-ℤ-Mod; ℤ-Mod-Endo)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.groups-of-modular-arithmetic
+open import elementary-number-theory.integers
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
-  using (left-unit-law-add-Fin)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types using
-  ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-comp-horizontal;
-    coherence-square-inv-horizontal)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_; inv-equiv;
-    map-inv-equiv; is-property-is-equiv; isretr-map-inv-equiv;
-    issec-map-inv-equiv; is-equiv-Prop; is-equiv-has-inverse)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( refl-htpy; _~_; is-contr-total-htpy; _·r_; _∙h_; _·l_; inv-htpy;
-    right-unit-htpy; equiv-concat-htpy'; is-contr-total-htpy')
-open import foundation.identity-types using
-  ( Id; inv; right-unit; _∙_; ap-id; ap; refl)
-open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
-    apply-universal-property-trunc-Prop)
-open import foundation.sets using
-  ( is-set; is-set-Prop; is-set-equiv'; is-set-equiv; Set)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-right-swap-Σ; right-unit-law-Σ-is-contr)
-open import foundation.unit-type using (star)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
+open import foundation.0-connected-types
+open import foundation.commuting-squares
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.isomorphisms-groups using
-  ( type-iso-Group; iso-equiv-Group; equiv-Group)
+open import group-theory.groups
+open import group-theory.isomorphisms-groups
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.pointed-types using (Pointed-Type)
+open import structured-types.pointed-types
 open import structured-types.types-equipped-with-endomorphisms
 
-open import synthetic-homotopy-theory.groups-of-loops-in-1-types using
-  ( loop-space-Group)
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+open import synthetic-homotopy-theory.groups-of-loops-in-1-types
+open import synthetic-homotopy-theory.loop-spaces
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; succ-Fin; Fin-Endo)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -160,7 +128,7 @@ pr2 (Cyclic-Type-Pointed-Type k) = ℤ-Mod-Cyclic-Type k
 module _
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   where
-  
+
   equiv-Cyclic-Type : UU (l1 ⊔ l2)
   equiv-Cyclic-Type = equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y)
 
@@ -189,7 +157,7 @@ module _
 
   id-equiv-Cyclic-Type : equiv-Cyclic-Type k X X
   id-equiv-Cyclic-Type = id-equiv-Endo (endo-Cyclic-Type k X)
-                                                 
+
   equiv-eq-Cyclic-Type :
     (Y : Cyclic-Type l k) → Id X Y → equiv-Cyclic-Type k X Y
   equiv-eq-Cyclic-Type .X refl = id-equiv-Cyclic-Type
@@ -208,7 +176,7 @@ is-contr-total-equiv-Cyclic-Type k X =
 module _
   {l : Level} (k : ℕ) (X : Cyclic-Type l k)
   where
-  
+
   is-equiv-equiv-eq-Cyclic-Type :
     (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
   is-equiv-equiv-eq-Cyclic-Type =
@@ -220,7 +188,7 @@ module _
     (Y : Cyclic-Type l k) → Id X Y ≃ equiv-Cyclic-Type k X Y
   pr1 (extensionality-Cyclic-Type Y) = equiv-eq-Cyclic-Type k X Y
   pr2 (extensionality-Cyclic-Type Y) = is-equiv-equiv-eq-Cyclic-Type Y
-  
+
   eq-equiv-Cyclic-Type :
     (Y : Cyclic-Type l k) → equiv-Cyclic-Type k X Y → Id X Y
   eq-equiv-Cyclic-Type Y = map-inv-is-equiv (is-equiv-equiv-eq-Cyclic-Type Y)
@@ -322,7 +290,7 @@ module _
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   (e : equiv-Cyclic-Type k X Y)
   where
-  
+
   left-unit-law-comp-equiv-Cyclic-Type :
     Id (comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e) e
   left-unit-law-comp-equiv-Cyclic-Type =

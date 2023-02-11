@@ -3,7 +3,7 @@ title: Dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation.dependent-pair-types where
 

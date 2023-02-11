@@ -3,34 +3,24 @@ title: Equivalences of cubes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equivalences-cubes where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_)
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; is-contr-total-htpy-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; tr; refl)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
-open import univalent-combinatorics.cubes using
-  ( cube; dim-cube; axis-cube; dim-cube-UU-Fin; axis-cube-UU-2; standard-cube)
-open import univalent-combinatorics.finite-types using
-  ( type-UU-Fin; UU-Fin; equiv-UU-Fin; is-contr-total-equiv-UU-Fin;
-    id-equiv-UU-Fin)
+open import univalent-combinatorics.cubes
+open import univalent-combinatorics.finite-types
 ```
 
 ## Definitions

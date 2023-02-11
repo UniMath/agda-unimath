@@ -1,17 +1,14 @@
 # Functoriality of matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.functoriality-matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors using
-  ( map-vec; map-binary-vec)
-open import linear-algebra.matrices using (matrix)
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.matrices
 ```
 
 ## Idea

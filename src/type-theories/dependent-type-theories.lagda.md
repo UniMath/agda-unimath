@@ -45,7 +45,7 @@ module dependent where
 
   record fibered-system
     {l1 l2 : Level} (l3 l4 : Level) (A : system l1 l2) :
-    UU (l1 ⊔ l2 ⊔ (lsuc l3) ⊔ (lsuc l4))
+    UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
     where
     coinductive
     field
@@ -1151,33 +1151,33 @@ module dependent where
 
   ------------------------------------------------------------------------------
 
-  system-slice-UU : {l : Level} (X : UU l) → system (lsuc l) l
-  system.type (system-slice-UU {l} X) = X → UU l
-  system.element (system-slice-UU X) Y = (x : X) → Y x
-  system.slice (system-slice-UU X) Y = system-slice-UU (Σ X Y)
+  system-Slice : {l : Level} (X : UU l) → system (lsuc l) l
+  system.type (system-Slice {l} X) = X → UU l
+  system.element (system-Slice X) Y = (x : X) → Y x
+  system.slice (system-Slice X) Y = system-Slice (Σ X Y)
   
   {-
-  hom-system-weakening-system-slice-UU :
+  hom-system-weakening-system-Slice :
     {l : Level} (X : UU l) (Y : X → UU l) →
-    hom-system (system-slice-UU X) (system-slice-UU (Σ X Y))
-  section-system.type (hom-system-weakening-system-slice-UU X Y) Z (pair x y) =
+    hom-system (system-Slice X) (system-Slice (Σ X Y))
+  section-system.type (hom-system-weakening-system-Slice X Y) Z (pair x y) =
     Z x
-  section-system.element (hom-system-weakening-system-slice-UU X Y) Z g (pair x y) =
+  section-system.element (hom-system-weakening-system-Slice X Y) Z g (pair x y) =
     g x
-  section-system.type (section-system.slice (hom-system-weakening-system-slice-UU X Y) Z) W (pair (pair x y) z) = W (pair x z)
-  section-system.element (section-system.slice (hom-system-weakening-system-slice-UU X Y) Z) W h (pair (pair x y) z) = h (pair x z)
-  section-system.slice (section-system.slice (hom-system-weakening-system-slice-UU X Y) Z) W = {!section-system.slice (hom-system-weakening-system-slice-UU X Y) ?!}
+  section-system.type (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W (pair (pair x y) z) = W (pair x z)
+  section-system.element (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W h (pair (pair x y) z) = h (pair x z)
+  section-system.slice (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W = {!section-system.slice (hom-system-weakening-system-Slice X Y) ?!}
 
-  weakening-system-slice-UU :
-    {l : Level} (X : UU l) → weakening (system-slice-UU X)
-  weakening.type (weakening-system-slice-UU X) Y =
-    hom-system-weakening-system-slice-UU X Y
-  weakening.slice (weakening-system-slice-UU X) = {!!}
+  weakening-system-Slice :
+    {l : Level} (X : UU l) → weakening (system-Slice X)
+  weakening.type (weakening-system-Slice X) Y =
+    hom-system-weakening-system-Slice X Y
+  weakening.slice (weakening-system-Slice X) = {!!}
   
   system-UU : (l : Level) → system (lsuc l) l
   system.type (system-UU l) = UU l
   system.element (system-UU l) X = X
-  system.slice (system-UU l) X = system-slice-UU X
+  system.slice (system-UU l) X = system-Slice X
   
   weakening-type-UU :
     {l : Level} (X : UU l) →

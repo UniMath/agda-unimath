@@ -3,34 +3,25 @@ title: Sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.sets where
 
 open import foundation-core.sets public
 
-open import foundation-core.1-types using (is-1-type; 1-Type)
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_)
-open import foundation-core.equivalences using (_≃_; is-equiv)
-open import foundation-core.functions using (precomp)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; Prop; is-prop-Σ)
-open import foundation-core.truncation-levels using (zero-𝕋; neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.1-types
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation.embeddings
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr; is-trunc-is-contr)
-open import foundation.propositional-maps using
-  ( is-emb-is-prop-map)
-open import foundation.subuniverses using
-  ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
-    is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
-open import foundation.truncated-types using
-  ( is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
-    is-trunc-function-type; is-trunc-equiv-is-trunc; is-trunc-Truncated-Type;
-    is-trunc-is-emb; is-trunc-emb; emb-type-Truncated-Type)
+open import foundation.contractible-types
+open import foundation.propositional-maps
+open import foundation.subuniverses
+open import foundation.truncated-types
 ```
 
 ## Properties
@@ -126,6 +117,10 @@ is-set-type-Π-Set' A B =
   {l1 l2 : Level} (A : UU l1) (B : A → Set l2) → Set (l1 ⊔ l2)
 pr1 (Π-Set' A B) = type-Π-Set' A B
 pr2 (Π-Set' A B) = is-set-type-Π-Set' A B
+
+function-Set :
+  {l1 l2 : Level} (A : UU l1) (B : Set l2) → Set (l1 ⊔ l2)
+function-Set A B = Π-Set' A (λ x → B)
 
 type-Π-Set :
   {l1 l2 : Level} (A : Set l1) (B : type-Set A → Set l2) → UU (l1 ⊔ l2)

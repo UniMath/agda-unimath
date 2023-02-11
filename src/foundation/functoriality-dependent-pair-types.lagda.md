@@ -3,8 +3,6 @@ title: Functoriality of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-dependent-pair-types where
 
 open import foundation-core.functoriality-dependent-pair-types public
@@ -17,9 +15,8 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-
-open import foundation.type-arithmetic-dependent-pair-types
 ```
 
 ## Properties
@@ -101,21 +98,16 @@ module _
     is-equiv map-canonical-pullback-tot-cone-cone-family
   is-equiv-map-canonical-pullback-tot-cone-cone-family =
     is-equiv-comp
-      ( map-canonical-pullback-tot-cone-cone-family)
       ( tot (λ aa' →
         ( tot (λ bb' → eq-pair-Σ')) ∘
         ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')))
       ( map-canonical-pullback-tot-cone-cone-fam-right-factor)
-      ( refl-htpy)
       ( is-equiv-map-interchange-Σ-Σ
         ( λ a bα a' → Σ (PB (pr1 bα))
           ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b'))))
       ( is-equiv-tot-is-fiberwise-equiv (λ aa' → is-equiv-comp
-        ( ( tot (λ bb' → eq-pair-Σ')) ∘
-          ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa'))
         ( tot (λ bb' → eq-pair-Σ'))
         ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')
-        ( refl-htpy)
         ( is-equiv-map-interchange-Σ-Σ _)
         ( is-equiv-tot-is-fiberwise-equiv (λ bb' → is-equiv-eq-pair-Σ
           ( pair (f (pr1 aa')) (f' (pr1 aa') (pr2 aa')))
@@ -150,7 +142,7 @@ module _
         ( g' (pr1 (pr2 c) x))
         ( c' x))
       ( is-pb-c)
-      ( is-equiv-right-factor
+      ( is-equiv-right-factor-htpy
         ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
         ( map-canonical-pullback-tot-cone-cone-family)
         ( map-Σ _
@@ -173,7 +165,7 @@ module _
     is-pullback
       (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family
   is-pullback-tot-is-pullback-family is-pb-c is-pb-c' =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
       ( map-canonical-pullback-tot-cone-cone-family)
       ( map-Σ _
@@ -193,3 +185,17 @@ module _
           ( is-pb-c'))
       ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
 ```
+
+## See also
+
+- Arithmetical laws involving dependent pair types are recorded in
+  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.html).
+- Equality proofs in dependent pair types are characterized in
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
+- The universal property of dependent pair types is treated in
+  [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.html).
+
+- Functorial properties of cartesian product types are recorded in
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
+- Functorial properties of dependent product types are recorded in
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).

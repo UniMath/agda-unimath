@@ -3,24 +3,18 @@ title: Monomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.monomorphisms where
 
-open import foundation.dependent-pair-types using (pr1; pr2)
-open import foundation.embeddings using (is-emb-Prop; is-emb)
-open import foundation.equivalences using (_≃_; map-inv-equiv)
-open import foundation.functions using (postcomp; _∘_)
-open import foundation.functoriality-function-types using
-  ( is-trunc-map-postcomp-is-trunc-map;
-    is-trunc-map-is-trunc-map-postcomp)
-open import foundation.identity-types using (_＝_; ap)
-open import foundation.propositional-maps using
-  ( is-emb-is-prop-map; is-prop-map-is-emb)
-open import foundation.propositions using
-  ( Prop; Π-Prop; is-prop; type-Prop; is-prop-type-Prop)
-open import foundation.truncation-levels using (neg-one-𝕋)
-open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-function-types
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.truncation-levels
+open import foundation.universe-levels
 ```
 
 ## Idea

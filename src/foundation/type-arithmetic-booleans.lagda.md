@@ -3,19 +3,16 @@ title: Type arithmetic with the booleans
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-booleans where
 
-open import foundation.booleans using (bool; true; false)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; is-equiv; is-equiv-has-inverse)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.booleans
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

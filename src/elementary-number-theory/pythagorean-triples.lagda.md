@@ -3,8 +3,6 @@ title: Pythagorean triples
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.pythagorean-triples where
 
 open import elementary-number-theory.addition-natural-numbers

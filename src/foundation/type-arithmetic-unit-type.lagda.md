@@ -3,21 +3,19 @@ title: Type arithmetic with the unit type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-unit-type where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.unit-type using (unit; star)
+open import foundation.function-extensionality
+open import foundation.unit-type
 ```
 
 ## Idea
@@ -116,7 +114,7 @@ module _
   pr2 inv-left-unit-law-prod = is-equiv-map-inv-left-unit-law-prod
 ```
 
-### The right unit law for cartesian products
+### Right unit law for cartesian products
 
 ```agda
   map-right-unit-law-prod : A × unit → A
@@ -189,3 +187,23 @@ module _
   pr1 inv-left-unit-law-Π = map-inv-left-unit-law-Π
   pr2 inv-left-unit-law-Π = is-equiv-map-inv-left-unit-law-Π
 ```
+
+### Left unit law for non-dependent function types
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  left-unit-law-function-types : (unit → A) ≃ A
+  left-unit-law-function-types = left-unit-law-Π (λ _ → A)
+
+  inv-left-unit-law-function-types : A ≃ (unit → A)
+  inv-left-unit-law-function-types = inv-left-unit-law-Π (λ _ → A)
+```
+
+## See also
+
+- That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be found in
+  [`foundation-core.contractible-types`](foundation-core.contractible-types.html).
+  This can be considered a *right zero law for function types* (`(A → unit) ≃ unit`).

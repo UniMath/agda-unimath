@@ -3,22 +3,17 @@ title: Injective maps between finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.injective-maps where
 
 open import foundation.injective-maps public
 
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-function-type; is-decidable-iff)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-function-types using
-  ( is-decidable-Π-is-finite)
-open import univalent-combinatorics.equality-finite-types using
-  ( has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using (is-finite)
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

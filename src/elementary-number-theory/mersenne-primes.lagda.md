@@ -3,19 +3,17 @@ title: Mersenne primes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.mersenne-primes where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.distance-natural-numbers using (dist-ℕ)
-open import elementary-number-theory.exponentiation-natural-numbers using (exp-ℕ)
-open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.prime-numbers
 
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.identity-types using (_＝_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.cartesian-product-types
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

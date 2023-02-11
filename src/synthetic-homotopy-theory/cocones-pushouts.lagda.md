@@ -79,7 +79,7 @@ coherence-htpy-cocone f g c c' K L =
 htpy-cocone :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} →
-  cocone f g X → cocone f g X → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  cocone f g X → cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 htpy-cocone f g c c' =
   Σ ((horizontal-map-cocone f g c) ~ (horizontal-map-cocone f g c'))
     ( λ K →

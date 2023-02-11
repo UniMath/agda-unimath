@@ -3,15 +3,13 @@ title: Sheargroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.sheargroups where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.identity-types using (Id)
-open import foundation.sets using (Set; type-Set)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Definition

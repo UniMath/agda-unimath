@@ -3,17 +3,15 @@ title: Effective maps for equivalence relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.effective-maps-equivalence-relations where
 
-open import foundation.surjective-maps using (is-surjective)
+open import foundation.surjective-maps
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
-open import foundation-core.equivalences using (_≃_)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.cartesian-product-types
+open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

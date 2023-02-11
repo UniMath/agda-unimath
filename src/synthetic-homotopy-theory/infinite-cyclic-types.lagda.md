@@ -3,53 +3,38 @@
 ```agda
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
-open import elementary-number-theory.addition-integers using
-  ( equiv-add-ℤ; add-ℤ; right-successor-law-add-ℤ; left-inverse-law-add-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; succ-ℤ; zero-ℤ; neg-ℤ; ℤ-Endo)
-open import elementary-number-theory.natural-numbers using (zero-ℕ)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-maps using (is-equiv-is-contr-map)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; eq-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; is-property-is-equiv; is-equiv-htpy; is-equiv-id; _∘e_;
-    map-equiv; equiv-postcomp-equiv; equiv-ap)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using (Id; ap; refl; equiv-concat')
-open import foundation.propositional-truncations using (unit-trunc-Prop)
-open import foundation.propositions using (is-proof-irrelevant-is-prop)
-open import foundation.raising-universe-levels using
-  ( raise; map-raise; map-inv-raise; equiv-raise)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( right-unit-law-Σ-is-contr; equiv-right-swap-Σ; assoc-Σ)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
+open import foundation-core.function-extensionality
+
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.initial-pointed-type-equipped-with-automorphism
-  using
-  ( ℤ-Pointed-Type-With-Aut; is-initial-ℤ-Pointed-Type-With-Aut)
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.pointed-types using (Pointed-Type)
-open import structured-types.pointed-types-equipped-with-automorphisms using
-  ( hom-Pointed-Type-With-Aut)
+open import structured-types.pointed-types
+open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+open import synthetic-homotopy-theory.loop-spaces
 
-open import univalent-combinatorics.cyclic-types using
-  ( Cyclic-Type; ℤ-Mod-Cyclic-Type; Cyclic-Type-Pointed-Type; endo-Cyclic-Type;
-    type-Cyclic-Type; endomorphism-Cyclic-Type; equiv-Cyclic-Type;
-    id-equiv-Cyclic-Type; equiv-eq-Cyclic-Type;
-    is-contr-total-equiv-Cyclic-Type; is-equiv-equiv-eq-Cyclic-Type;
-    extensionality-Cyclic-Type)
+open import univalent-combinatorics.cyclic-types
 ```
 
 ```agda
@@ -88,7 +73,7 @@ module _
   pr1 (pr1 point-Infinite-Cyclic-Type) = raise l ℤ
   pr2 (pr1 point-Infinite-Cyclic-Type) = (map-raise ∘ succ-ℤ) ∘ map-inv-raise
   pr2 point-Infinite-Cyclic-Type =
-    unit-trunc-Prop (pair (equiv-raise l ℤ) refl-htpy)
+    unit-trunc-Prop (pair (compute-raise l ℤ) refl-htpy)
 
   Infinite-Cyclic-Type-Pointed-Type-Level : Pointed-Type (lsuc l)
   pr1 Infinite-Cyclic-Type-Pointed-Type-Level = Infinite-Cyclic-Type l

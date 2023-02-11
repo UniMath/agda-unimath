@@ -3,23 +3,19 @@ title: Uniqueness of the truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.uniqueness-truncation where
 
-open import foundation.contractible-types using (center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
+open import foundation.functions
+open import foundation.homotopies
 open import foundation.injective-maps
-open import foundation.truncated-types using
-  ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type)
-open import foundation.truncation-levels using (𝕋)
-open import foundation-core.universal-property-truncation using
-  ( is-truncation)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation-core.universal-property-truncation
+open import foundation.universe-levels
 ```
 
 ## Idea

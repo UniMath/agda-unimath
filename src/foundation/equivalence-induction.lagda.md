@@ -7,13 +7,12 @@ module foundation.equivalence-induction where
 
 open import foundation-core.equivalence-induction public
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; id-equiv; is-equiv; map-equiv; is-equiv-id)
-open import foundation.functions using (postcomp)
-open import foundation.sections using (sec)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.sections
+open import foundation.univalence
+open import foundation.universe-levels
 ```
 
 ## Idea

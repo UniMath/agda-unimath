@@ -3,20 +3,16 @@ title: 1-Types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.1-types where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (is-equiv; _≃_)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; Prop)
-open import foundation-core.sets using (Set)
-open import foundation-core.truncated-types using
-  ( is-trunc; truncated-type-succ-Truncated-Type; is-trunc-is-equiv;
-    is-trunc-equiv; is-trunc-is-equiv'; is-trunc-equiv')
-open import foundation-core.truncation-levels using (one-𝕋; zero-𝕋)
-open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Definition

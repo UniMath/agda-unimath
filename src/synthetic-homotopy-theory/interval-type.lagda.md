@@ -1,21 +1,15 @@
 # The interval
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.interval-type where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-equiv; is-equiv-has-inverse; _≃_; id-equiv)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using
-  ( Id; tr; apd; _∙_; ap; refl; right-unit; inv; ap-id; equiv-concat)
-open import foundation.structure-identity-principle using
-  ( extensionality-Σ)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universe-levels
 ```
 
 ## Idea

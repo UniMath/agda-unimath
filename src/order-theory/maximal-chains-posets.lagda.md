@@ -1,20 +1,14 @@
 # Maximal chains in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.maximal-chains-posets where
 
-open import foundation.propositions using (Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import order-theory.chains-posets using (chain-Poset)
-open import order-theory.maximal-chains-preorders using
-  ( is-maximal-chain-preorder-Prop; is-maximal-chain-Preorder;
-    is-prop-is-maximal-chain-Preorder; maximal-chain-Preorder;
-    chain-maximal-chain-Preorder; is-maximal-chain-maximal-chain-Preorder;
-    element-maximal-chain-Preorder)
-open import order-theory.posets using (Poset; preorder-Poset)
+open import order-theory.chains-posets
+open import order-theory.maximal-chains-preorders
+open import order-theory.posets
 ```
 
 ## Definition

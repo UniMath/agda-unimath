@@ -3,8 +3,6 @@ title: The principle of omniscience
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.principle-of-omniscience where
 
 open import foundation.decidable-subtypes

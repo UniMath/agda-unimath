@@ -3,37 +3,22 @@ title: Higher groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.higher-groups where
 
-open import foundation.0-connected-types using
-  ( is-0-connected; mere-eq-is-0-connected;
-    apply-dependent-universal-property-is-0-connected)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-inv-equiv)
-open import foundation.identity-types using (Id; refl)
-open import foundation.mere-equality using (mere-eq)
-open import foundation.propositions using (Prop; type-Prop)
-open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import foundation.0-connected-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies using
-  ( htpy-pointed-map; extensionality-pointed-map;
-    assoc-comp-pointed-map; left-unit-law-comp-pointed-map;
-    right-unit-law-comp-pointed-map)
-open import structured-types.pointed-maps using
-  ( _→*_; map-pointed-map; preserves-point-pointed-map;
-    id-pointed-map; comp-pointed-map)
-open import structured-types.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces using
-  ( map-Ω; preserves-refl-map-Ω; preserves-mul-map-Ω;
-    preserves-inv-map-Ω)
-open import synthetic-homotopy-theory.loop-spaces using
-  ( type-Ω; refl-Ω; mul-Ω; associative-mul-Ω; left-unit-law-mul-Ω;
-    right-unit-law-mul-Ω; inv-Ω; left-inverse-law-mul-Ω;
-    right-inverse-law-mul-Ω)
+open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 ## Idea

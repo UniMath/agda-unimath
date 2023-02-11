@@ -3,14 +3,12 @@ title: Complements of type families
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.complements where
 
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.empty-types using (is-empty)
-open import foundation.functions using (_∘_)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -3,90 +3,52 @@ title: 2-element types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.2-element-types where
 
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( add-Fin)
-open import elementary-number-theory.natural-numbers using
-  ( Eq-eq-ℕ)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 
-open import foundation.automorphisms using (Aut)
-open import foundation.connected-components-universes using
-  ( is-contr-total-equiv-component-UU-Level; equiv-eq-component-UU-Level;
-    is-equiv-equiv-eq-component-UU-Level)
+open import foundation.automorphisms
+open import foundation.connected-components-universes
 open import foundation.constant-maps
-open import foundation.contractible-maps using
-  ( is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr;
-    is-equiv-is-contr; center)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation.double-negation using (dn-Prop'; intro-dn)
-open import foundation.empty-types using (ex-falso; empty-Prop; empty)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; is-equiv;
-    is-equiv-has-inverse; is-equiv-Prop; is-equiv-left-factor';
-    equiv-postcomp-equiv; is-equiv-comp; is-equiv-map-equiv;
-    is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv;
-    left-inverse-law-equiv; left-unit-law-equiv; right-inverse-law-equiv;
-    is-emb-is-equiv; right-unit-law-equiv; equiv-precomp;
-    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv)
-open import foundation.equivalence-extensionality using
-  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv; extensionality-equiv;
-    is-contr-total-htpy-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; is-fiberwise-equiv-is-equiv-tot; tot)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using
-  ( _＝_; refl; inv; _∙_; ap; tr; equiv-inv)
-open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.involutions using (is-involution-aut)
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
+open import foundation.fibers-of-maps
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.involutions
 open import foundation.logical-equivalences
-open import foundation.mere-equivalences using
-  ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv;
-    transitive-mere-equiv)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; type-trunc-Prop; trunc-Prop;
-    unit-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; Prop; type-Prop; is-prop-type-Prop)
-open import foundation.raising-universe-levels using (map-raise)
-open import foundation.sets using (is-set; Set; Id-Prop)
-open import foundation.subuniverses using (is-contr-total-equiv-subuniverse)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr)
-open import foundation.type-arithmetic-empty-type using
-  ( map-right-unit-law-coprod-is-empty)
-open import foundation.type-arithmetic-unit-type using
-  ( left-unit-law-Σ)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
+open import foundation.mere-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.subuniverses
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Eq-Fin-eq)
+open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences
-open import univalent-combinatorics.finite-types using
-  ( UU-Fin; type-UU-Fin; Fin-UU-Fin; Fin-UU-Fin'; has-cardinality;
-    has-cardinality-Prop; equiv-UU-Fin; is-finite; 𝔽; is-finite-has-cardinality;
-    set-UU-Fin; is-set-has-cardinality)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
-    is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -129,6 +91,12 @@ is-finite-type-2-Element-Type X =
 finite-type-2-Element-Type : {l : Level} → 2-Element-Type l → 𝔽 l
 pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
 pr2 (finite-type-2-Element-Type X) = is-finite-type-2-Element-Type X
+
+standard-2-Element-Type : (l : Level) → 2-Element-Type l
+standard-2-Element-Type l = Fin-UU-Fin l 2
+
+type-standard-2-Element-Type : (l : Level) → UU l
+type-standard-2-Element-Type l = type-2-Element-Type (standard-2-Element-Type l)
 ```
 
 ## Properties
@@ -306,15 +274,12 @@ module _
         ( has-two-elements-type-2-Element-Type X)
         ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
         ( λ α →
-          is-equiv-left-factor'
+          is-equiv-left-factor
             ( ev-zero-equiv-Fin-two-ℕ)
             ( map-equiv (equiv-postcomp-equiv α (Fin 2)))
             ( is-equiv-comp
-              ( ( ev-zero-equiv-Fin-two-ℕ) ∘
-                ( map-equiv (equiv-postcomp-equiv α (Fin 2))))
               ( map-equiv α)
               ( ev-zero-equiv-Fin-two-ℕ)
-              ( refl-htpy)
               ( is-equiv-ev-zero-aut-Fin-two-ℕ)
               ( is-equiv-map-equiv α))
             ( is-equiv-comp-equiv α (Fin 2)))
@@ -378,10 +343,10 @@ abstract
       ( equiv-tot
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
-          ( equiv-precomp-equiv (equiv-raise-Fin l 2) (pr1 X))))
+          ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
       ( is-contr-total-equiv-subuniverse
         ( mere-equiv-Prop (Fin 2))
-        ( Fin-UU-Fin l 2))
+        ( standard-2-Element-Type l))
 ```
 
 #### Completing the characterization of the identity type of the type of 2-element types of arbitrary universe level
@@ -389,7 +354,7 @@ abstract
 ```agda
 point-eq-UU-Fin-two-ℕ :
   {l : Level} {X : UU-Fin l 2} →
-  Fin-UU-Fin l 2 ＝ X → type-UU-Fin 2 X
+  standard-2-Element-Type l ＝ X → type-UU-Fin 2 X
 point-eq-UU-Fin-two-ℕ refl = map-raise (zero-Fin 1)
 
 abstract
@@ -403,7 +368,7 @@ abstract
 
 equiv-point-eq-UU-Fin-two-ℕ :
   {l : Level} {X : UU-Fin l 2} →
-  (Fin-UU-Fin l 2 ＝ X) ≃ type-UU-Fin 2 X
+  (standard-2-Element-Type l ＝ X) ≃ type-UU-Fin 2 X
 pr1 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
   point-eq-UU-Fin-two-ℕ
 pr2 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
@@ -411,7 +376,7 @@ pr2 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
 
 eq-point-UU-Fin-two-ℕ :
   {l : Level} {X : UU-Fin l 2} →
-  type-UU-Fin 2 X → Fin-UU-Fin l 2 ＝ X
+  type-UU-Fin 2 X → standard-2-Element-Type l ＝ X
 eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
@@ -498,15 +463,15 @@ abstract
     is-not-contractible-Fin 2
       ( Eq-eq-ℕ)
       ( is-contr-equiv
-        ( Fin-UU-Fin l 2 ＝ Fin-UU-Fin l 2)
+        ( standard-2-Element-Type l ＝ standard-2-Element-Type l)
         ( ( inv-equiv equiv-point-eq-UU-Fin-two-ℕ) ∘e
-          ( equiv-raise-Fin l 2))
+          ( compute-raise-Fin l 2))
         ( is-prop-is-contr
           ( pair
-            ( Fin-UU-Fin l 2)
+            ( standard-2-Element-Type l)
             ( λ X → eq-point-UU-Fin-two-ℕ (f X)))
-          ( Fin-UU-Fin l 2)
-          ( Fin-UU-Fin l 2)))
+          ( standard-2-Element-Type l)
+          ( standard-2-Element-Type l)))
 ```
 
 ### There is no decidability procedure that proves that an arbitrary 2-element type is decidable
@@ -668,7 +633,7 @@ module _
           ( ( ap
               ( λ x → ((inv-equiv equiv2 ∘e equiv2) ∘e equiv1) ∘e x)
               ( inv (left-inverse-law-equiv equiv2))) ∙
-          ( ( ( eq-htpy-equiv refl-htpy) ∙
+          ( ( ( eq-equiv-eq-map-equiv refl) ∙
               ( ap (λ x → inv-equiv equiv2 ∘e (x ∘e equiv2)) p)) ∙
             ( ( ap
                 ( λ x → inv-equiv equiv2 ∘e x)
@@ -762,11 +727,11 @@ preserves-add-aut-point-Fin-two-ℕ :
   aut-point-Fin-two-ℕ (add-Fin 2 a b) ＝
   ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
 preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inl (inr star)) =
-  eq-htpy-equiv refl-htpy
+  eq-equiv-eq-map-equiv refl
 preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inr star) =
-  eq-htpy-equiv refl-htpy
+  eq-equiv-eq-map-equiv refl
 preserves-add-aut-point-Fin-two-ℕ (inr star) (inl (inr star)) =
-  eq-htpy-equiv refl-htpy
+  eq-equiv-eq-map-equiv refl
 preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
   eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2) x))
 ```

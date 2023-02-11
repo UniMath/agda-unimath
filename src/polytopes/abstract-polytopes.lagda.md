@@ -1,8 +1,6 @@
 # Abstract polytopes
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module polytopes.abstract-polytopes where
 
 -- open import order-theory public
@@ -14,56 +12,25 @@ open import univalent-combinatorics
 open import univalent-foundations
 -}
 
-open import elementary-number-theory.inequality-standard-finite-types using
-  ( leq-Fin)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; is-contr-Prop)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.disjunction using (disj-Prop)
-open import foundation.identity-types using (Id; tr; inv)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (Set; is-set; Id-Prop)
-open import foundation.unit-type using (raise-unit-Prop; unit; star)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import order-theory.finitely-graded-posets using
-  ( Finitely-Graded-Poset; face-Finitely-Graded-Poset;
-    adjacent-Finitely-Graded-Poset; least-element-Finitely-Graded-Poset;
-    least-and-largest-element-Finitely-Graded-Poset;
-    largest-element-Finitely-Graded-Poset; face-finitely-graded-poset-Set;
-    is-set-face-Finitely-Graded-Poset; adjacent-finitely-graded-poset-Prop;
-    is-prop-adjacent-Finitely-Graded-Poset; element-finitely-graded-poset-Set;
-    element-Finitely-Graded-Poset; is-set-element-Finitely-Graded-Poset;
-    element-face-Finitely-Graded-Poset; type-element-Finitely-Graded-Poset;
-    face-element-Finitely-Graded-Poset; path-faces-Finitely-Graded-Poset;
-    refl-path-faces-Finitely-Graded-Poset;
-    cons-path-faces-Finitely-Graded-Poset;
-    tr-refl-path-faces-Finitely-Graded-Poset;
-    concat-path-faces-Finitely-Graded-Poset;
-    path-elements-Finitely-Graded-Poset;
-    refl-path-elements-Finitely-Graded-Poset;
-    concat-path-elements-Finitely-Graded-Poset;
-    leq-type-path-faces-Finitely-Graded-Poset;
-    eq-path-elements-Finitely-Graded-Poset;
-    eq-path-faces-Finitely-Graded-Poset;
-    antisymmetric-path-elements-Finitely-Graded-Poset;
-    leq-finitely-graded-poset-Prop; leq-Finitely-Graded-Poset;
-    is-prop-leq-Finitely-Graded-Poset; refl-leq-Finitely-Graded-Poset;
-    transitive-leq-Finitely-Graded-Poset;
-    antisymmetric-leq-Finitely-Graded-Poset; poset-Finitely-Graded-Poset;
-    chain-Finitely-Graded-Poset; maximal-chain-Finitely-Graded-Poset;
-    subtype-maximal-chain-Finitely-Graded-Poset)
-open import order-theory.posets using (Poset)
+open import order-theory.finitely-graded-posets
+open import order-theory.posets
 
-open import univalent-combinatorics.finite-types using (has-cardinality-Prop)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; inl-Fin; succ-Fin; zero-Fin; neg-one-Fin)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

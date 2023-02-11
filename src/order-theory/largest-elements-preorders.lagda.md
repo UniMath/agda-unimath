@@ -1,17 +1,13 @@
 # Largest elements in preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.largest-elements-preorders where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import order-theory.preorders using
-  ( Preorder; element-Preorder; leq-preorder-Prop)
+open import order-theory.preorders
 ```
 
 ## Definition

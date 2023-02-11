@@ -5,127 +5,69 @@ title: π-finite types
 ```agda
 module univalent-combinatorics.pi-finite-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types using
-  ( is-0-connected; mere-eq-is-0-connected; is-surjective-fiber-inclusion;
-    is-inhabited-is-0-connected)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.constant-maps using (const)
-open import foundation.contractible-types using
-  ( is-contr; is-prop-is-contr; center; is-contr-equiv'; is-contr-Prop)
-open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
-open import foundation.decidable-equality using
-  ( has-decidable-equality)
-open import foundation.decidable-propositions using
-  ( is-finite-is-decidable-Prop; is-decidable-Prop)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-equiv'; is-decidable-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using
-  ( is-emb; is-emb-right-factor; is-emb-comp'; equiv-ap-emb)
-open import foundation.empty-types using
-  ( is-empty; ex-falso; empty; ind-empty; empty-Prop)
-open import foundation.equality-coproduct-types using
-  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inl-inr;
-    compute-eq-coprod-inr-inl; compute-eq-coprod-inr-inr; is-emb-coprod;
-    is-empty-eq-coprod-inl-inr; is-emb-inl)
-open import foundation.equality-cartesian-product-types using
-  ( equiv-eq-pair)
-open import foundation.equality-dependent-pair-types using
-  ( equiv-pair-eq-Σ; eq-pair-Σ; pair-eq-Σ)
-open import foundation.equivalences using
-  ( _≃_; equiv-ap; map-equiv; inv-equiv; map-inv-equiv;
-    is-equiv-map-equiv; issec-map-inv-equiv; is-equiv; id-equiv; _∘e_;
-    is-emb-is-equiv)
-open import foundation.fiber-inclusions using (fiber-inclusion)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.function-extensionality using (equiv-funext)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-precomp-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ)
-open import foundation.functoriality-set-truncation using
-  ( equiv-trunc-Set; is-surjective-map-trunc-Set; map-trunc-Set;
-    equiv-trunc-im-Set; inclusion-trunc-im-Set; naturality-unit-trunc-Set;
-    is-emb-inclusion-trunc-im-Set)
-open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·r_)
-open import foundation.identity-types using (Id; tr; ap; refl; inv; _∙_)
-open import foundation.images using
-  ( im; map-unit-im; im-Set; eq-Eq-im; is-surjective-map-unit-im;
-    inclusion-im; equiv-Eq-eq-im)
-open import foundation.injective-maps using (is-injective-is-equiv)
-open import foundation.logical-equivalences using (equiv-iff)
-open import foundation.maybe using (Maybe)
-open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
-open import foundation.mere-equivalences using (mere-equiv)
-open import foundation.propositional-extensionality using
-  ( Prop-Set)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; trunc-Prop; type-trunc-Prop;
-    unit-trunc-Prop; is-prop-type-trunc-Prop;
-    apply-dependent-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop;
-    type-hom-Prop; function-Prop)
-open import foundation.set-truncations using
-  ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
-    is-contr-trunc-Set; equiv-distributive-trunc-coprod-Set;
-    equiv-unit-trunc-Set; unit-trunc-Set; trunc-Set;
-    universal-property-trunc-Set; apply-dependent-universal-property-trunc-Set';
-    is-effective-unit-trunc-Set; apply-effectiveness-unit-trunc-Set;
-    equiv-unit-trunc-unit-Set; is-empty-is-empty-trunc-Set;
-    is-surjective-unit-trunc-Set)
-open import foundation.sets using
-  ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; Set; type-Set)
-open import foundation.subtypes using (is-emb-inclusion-subtype)
-open import foundation.surjective-maps using
-  ( is-surjective; is-equiv-is-emb-is-surjective; is-surjective-comp')
-open import foundation.truncated-types using (is-trunc)
-open import foundation.truncation-levels using
-  ( 𝕋; zero-𝕋; succ-𝕋; truncation-level-ℕ)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod)
-open import foundation.unit-type using (unit; is-contr-unit; star)
-open import foundation.univalence using (equiv-eq)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-dependent-universal-property-coprod)
-open import foundation.universal-property-empty-type using
-  ( dependent-universal-property-empty')
-open import foundation.universal-property-unit-type using
-  ( equiv-dependent-universal-property-unit)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
+open import foundation.0-connected-types
+open import foundation.cartesian-product-types
+open import foundation.constant-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fiber-inclusions
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-set-truncation
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.images
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.maybe
+open import foundation.mere-equality
+open import foundation.mere-equivalences
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types using
-  ( is-finite-prod)
-open import univalent-combinatorics.coproduct-types using
-  ( is-finite-coprod)
-open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.dependent-function-types using
-  ( is-finite-Π)
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-Σ)
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
 open import
   univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
-  using
-  ( equiv-distributive-trunc-Π-is-finite-Set)
-open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using
-  ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
-    is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
-    is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
-    is-0-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
-    is-finite-has-finite-cardinality; is-decidable-type-trunc-Prop-is-finite;
-    is-set-is-finite)
-open import univalent-combinatorics.finitely-presented-types using
-  ( has-presentation-of-cardinality-has-cardinality-components)
-open import univalent-combinatorics.function-types using
-  ( is-finite-≃)
-open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-presented-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.image-of-maps
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -617,7 +559,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
     ( is-inhabited-is-0-connected C)
     ( is-π-finite-Prop zero-ℕ (Σ A B))
     ( α)
-    
+
   where
   α : A → is-π-finite zero-ℕ (Σ A B)
   α a =
@@ -633,7 +575,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
               ( type-trunc-Set (Σ A B))
               ( λ y → is-decidable-Prop (Id-Prop (trunc-Set (Σ A B)) x y))))
         ( β))
-        
+
     where
     β : (x : Σ A B) (v : type-trunc-Set (Σ A B)) →
         is-decidable (Id (unit-trunc-Set x) v)
@@ -644,7 +586,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             ( is-decidable-Prop
               ( Id-Prop (trunc-Set (Σ A B)) (unit-trunc-Set (pair x y)) u)))
         ( γ)
-        
+
       where
       γ : (v : Σ A B) →
           is-decidable (Id (unit-trunc-Set (pair x y)) (unit-trunc-Set v))
@@ -659,7 +601,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             ( is-decidable-Prop
               ( mere-eq-Prop (pair x y) (pair x' y')))
               ( δ))
-              
+
         where
         δ : Id a x → is-decidable (mere-eq (pair x y) (pair x' y'))
         δ refl =
@@ -668,7 +610,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             ( is-decidable-Prop
               ( mere-eq-Prop (pair a y) (pair x' y')))
             ( ε)
-            
+
           where
           ε : Id a x' → is-decidable (mere-eq (pair x y) (pair x' y'))
           ε refl =
@@ -677,7 +619,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                 ( is-finite-Σ
                   ( pr2 H a a)
                   ( λ ω → is-finite-is-decidable-Prop (P ω) (d ω))))
-            
+
             where
             ℙ : is-contr
                 ( Σ ( type-hom-Set (trunc-Set (Id a a)) (Prop-Set _))
@@ -693,7 +635,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             compute-P :
               ( ω : Id a a) →
               type-Prop (P (unit-trunc-Set ω)) ≃
-              type-trunc-Prop (Id (tr B ω y) y') 
+              type-trunc-Prop (Id (tr B ω y) y')
             compute-P ω = equiv-eq (ap pr1 (pr2 (center ℙ) ω))
             d : (t : type-trunc-Set (Id a a)) → is-decidable (type-Prop (P t))
             d = apply-dependent-universal-property-trunc-Set'
@@ -751,7 +693,7 @@ module _
   (f : A1 + A2 → B) (e : (A1 + A2) ≃ type-trunc-Set B)
   (H : (unit-trunc-Set ∘ f) ~ map-equiv e)
   where
-  
+
   map-is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
   map-is-coprod-codomain = ind-coprod (λ x → B) pr1 pr1
 
@@ -856,7 +798,7 @@ is-0-connected-im-unit f =
 has-finite-connected-components-Σ' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   (k : ℕ) → (Fin k ≃ (type-trunc-Set A)) →
-  ((x y : A) → has-finite-connected-components (Id x y)) → 
+  ((x y : A) → has-finite-connected-components (Id x y)) →
   ((x : A) → has-finite-connected-components (B x)) →
   has-finite-connected-components (Σ A B)
 has-finite-connected-components-Σ' zero-ℕ e H K =
@@ -919,19 +861,19 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
     i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
     is-surjective-i : is-surjective i
     is-surjective-i =
-      is-surjective-comp'
+      is-surjective-comp
         ( is-surjective-unit-trunc-Set _)
         ( is-surjective-map-unit-im (f ∘ inl))
     is-emb-i : is-emb i
     is-emb-i =
-      is-emb-right-factor
+      is-emb-right-factor-htpy
         ( (unit-trunc-Set ∘ f) ∘ inl)
         ( inclusion-trunc-im-Set (f ∘ inl))
         ( i)
         ( ( inv-htpy (naturality-unit-trunc-Set (inclusion-im (f ∘ inl)))) ·r
           ( map-unit-im (f ∘ inl)))
         ( is-emb-inclusion-trunc-im-Set (f ∘ inl))
-        ( is-emb-comp'
+        ( is-emb-comp
           ( unit-trunc-Set ∘ f)
           ( inl)
           ( is-emb-is-equiv Eηf)

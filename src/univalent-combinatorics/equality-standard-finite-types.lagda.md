@@ -3,43 +3,34 @@ title: Equality in the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equality-standard-finite-types where
 
-open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation-core.decidable-propositions using (decidable-Prop)
+open import foundation-core.decidable-propositions
 
 open import foundation.apartness-relations
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (_+_; inl; inr; is-prop-coprod; neq-inr-inl)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-empty; is-decidable-unit)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2)
-open import foundation.discrete-types using
-  ( Discrete-Type; type-with-apartness-Discrete-Type;
-    type-with-tight-apartness-Discrete-Type)
-open import foundation.empty-types using (empty; is-set-empty)
-open import foundation.equality-coproduct-types using
-  ( is-set-coprod)
-open import foundation.equivalences using (_≃_)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (Id; refl; ap; inv; _∙_)
-open import foundation.negation using (¬; map-neg)
-open import foundation.propositions using (is-prop; is-proof-irrelevant-is-prop)
-open import foundation.raising-universe-levels using (raise-Set)
-open import foundation.set-truncations using
-  ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; Set)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.discrete-types
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.set-truncations
+open import foundation.sets
 open import foundation.tight-apartness-relations
-open import foundation.unit-type using (unit; star; is-set-unit)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
-    is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ; is-set-Fin; Fin-Set)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

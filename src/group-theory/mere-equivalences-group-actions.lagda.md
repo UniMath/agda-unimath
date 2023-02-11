@@ -3,18 +3,15 @@ title: Mere equivalences of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.mere-equivalences-group-actions where
 
-open import foundation.propositional-truncations using (trunc-Prop)
-open import foundation.propositions using (Prop; type-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import group-theory.equivalences-group-actions using
-  ( equiv-Abstract-Group-Action)
-open import group-theory.group-actions using (Abstract-Group-Action)
-open import group-theory.groups using (Group)
+open import group-theory.equivalences-group-actions
+open import group-theory.group-actions
+open import group-theory.groups
 ```
 
 ## Definition

@@ -3,19 +3,16 @@ title: The law of excluded middle
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.law-of-excluded-middle where
 
-open import foundation.decidable-propositions using (decidable-Prop)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.negation using (¬)
-open import foundation.propositions using (Prop; type-Prop; is-prop-type-Prop)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-types using
-  ( is-not-decidable-type-UU-Fin-two-ℕ)
+open import univalent-combinatorics.2-element-types
 ```
 
 ## Idea

@@ -3,8 +3,6 @@ title: Finite group theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory where
 ```
 

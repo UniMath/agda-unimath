@@ -3,8 +3,6 @@ title: Orbits of concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.orbits-concrete-group-actions where
 
 open import foundation.dependent-pair-types

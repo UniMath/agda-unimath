@@ -3,21 +3,18 @@ title: The Goldbach conjecture
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.goldbach-conjecture where
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import
-  elementary-number-theory.divisibility-natural-numbers using (is-even-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.prime-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.identity-types using (_＝_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 # The Goldbach Conjecture

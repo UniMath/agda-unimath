@@ -3,8 +3,6 @@ title: The universal property of pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.universal-property-pullbacks where
 
 open import foundation-core.cones-pullbacks
@@ -17,7 +15,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 
@@ -31,7 +28,7 @@ module _
   (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
   where
   
-  universal-property-pullback : UU (l1 ⊔ (l2 ⊔ (l3 ⊔ (l4 ⊔ (lsuc l)))))
+  universal-property-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
   universal-property-pullback =
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
 ```
@@ -66,7 +63,7 @@ module _
       is-equiv h
     is-equiv-up-pullback-up-pullback up up' =
       is-equiv-is-equiv-postcomp h
-        ( λ D → is-equiv-right-factor
+        ( λ D → is-equiv-right-factor-htpy
           ( cone-map f g {C' = D} c')
           ( cone-map f g c)
           ( λ (k : D → C') → h ∘ k)
@@ -80,7 +77,7 @@ module _
       ({l : Level} → universal-property-pullback l f g c) →
       ({l : Level} → universal-property-pullback l f g c')
     up-pullback-up-pullback-is-equiv is-equiv-h up D =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( cone-map f g c')
         ( cone-map f g c)
         ( λ k → h ∘ k)
@@ -94,7 +91,7 @@ module _
       is-equiv h →
       ({l : Level} → universal-property-pullback l f g c)
     up-pullback-is-equiv-up-pullback up' is-equiv-h D =
-      is-equiv-left-factor
+      is-equiv-left-factor-htpy
         ( cone-map f g c')
         ( cone-map f g c)
         ( λ k → h ∘ k)

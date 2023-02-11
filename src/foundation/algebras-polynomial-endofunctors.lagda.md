@@ -3,30 +3,20 @@ title: Algebras for polynomial endofunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.algebras-polynomial-endofunctors where
 
-open import foundation.contractible-types using (is-contr; is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  (_∘e_; is-equiv; map-inv-is-equiv; _≃_)
-open import foundation.functions using (_∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( _~_; _∙h_; _·l_; _·r_; refl-htpy; is-contr-total-htpy; equiv-concat-htpy;
-    right-unit-htpy)
-open import foundation.identity-types using
-  ( ap; concat; _∙_; right-unit; _＝_; refl)
-open import foundation.polynomial-endofunctors using
-  ( type-polynomial-endofunctor; map-polynomial-endofunctor;
-    htpy-polynomial-endofunctor; coh-refl-htpy-polynomial-endofunctor)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
-open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.homotopies
+open import foundation.polynomial-endofunctors
+open import foundation.structure-identity-principle
 ```
 
 ## Idea

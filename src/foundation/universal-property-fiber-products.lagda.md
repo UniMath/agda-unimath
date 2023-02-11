@@ -3,28 +3,22 @@ title: The universal property of fiber products
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-fiber-products where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.cones-pullbacks using (cone)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using (is-equiv-has-inverse)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( tot)
-open import foundation.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using (refl; _∙_; inv; right-unit)
-open import foundation.pullbacks using
-  ( canonical-pullback; gap; is-pullback; map-extensionality-canonical-pullback;
-    universal-property-pullback-is-pullback)
-open import foundation.universal-property-pullbacks using
-  ( universal-property-pullback)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.cones-pullbacks
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.pullbacks
+open import foundation.universal-property-pullbacks
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -3,45 +3,40 @@ title: Subgroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.subgroups where
 
-open import foundation.binary-relations using
-  ( is-reflexive-Rel-Prop; is-symmetric-Rel-Prop; is-transitive-Rel-Prop)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation.embeddings using (is-emb; _↪_; is-emb-comp')
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalence-relations using (Eq-Rel)
-open import foundation.equivalences using (map-inv-is-equiv; _≃_)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (id; _∘_)
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.identity-types
-open import foundation.powersets using (_⊆_)
-open import foundation.propositional-extensionality using (is-set-type-Prop)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
-    is-prop-function-type; is-prop-prod; is-prop-is-equiv; Π-Prop; hom-Prop;
-    prod-Prop; eq-is-prop)
-open import foundation.raising-universe-levels using (raise-Prop; map-raise)
-open import foundation.sets using (is-set; is-set-function-type; Set)
-open import foundation.subtype-identity-principle using
-  ( extensionality-type-subtype)
-open import foundation.subtypes using
-  ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
-    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype; emb-subtype;
-    has-same-elements-subtype; extensionality-subtype)
-open import foundation.unit-type using (unit-Prop; star; raise-star)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.powersets
+open import foundation.propositional-extensionality
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.semigroups
+
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 ## Definitions
@@ -321,6 +316,77 @@ module _
       ( is-subgroup-Subgroup G H)
       ( λ x → pair id id)
       ( extensionality-subtype (subset-Subgroup G H))
+
+  refl-has-same-elements-Subgroup : has-same-elements-Subgroup H
+  refl-has-same-elements-Subgroup =
+    refl-has-same-elements-subtype (subset-Subgroup G H)
+
+  has-same-elements-eq-Subgroup :
+    (K : Subgroup l2 G) → (H ＝ K) → has-same-elements-Subgroup K
+  has-same-elements-eq-Subgroup K = map-equiv (extensionality-Subgroup K)
+
+  eq-has-same-elements-Subgroup :
+    (K : Subgroup l2 G) → has-same-elements-Subgroup K → (H ＝ K)
+  eq-has-same-elements-Subgroup K = map-inv-equiv (extensionality-Subgroup K)
+```
+
+### The containment relation of subgroups
+
+```agda
+contains-Subgroup-Prop :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  Subgroup l2 G → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+contains-Subgroup-Prop G H K =
+  inclusion-rel-subtype-Prop (subset-Subgroup G H) (subset-Subgroup G K)
+
+contains-Subgroup :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  Subgroup l2 G → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+contains-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
+
+refl-contains-Subgroup :
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
+  contains-Subgroup G H H
+refl-contains-Subgroup G H = refl-⊆ (subset-Subgroup G H)
+
+transitive-contains-Subgroup :
+  {l1 l2 l3 l4 : Level} (G : Group l1) (H : Subgroup l2 G)
+  (K : Subgroup l3 G) (L : Subgroup l4 G) →
+  contains-Subgroup G K L → contains-Subgroup G H K → contains-Subgroup G H L
+transitive-contains-Subgroup G H K L =
+  trans-⊆ (subset-Subgroup G H) (subset-Subgroup G K) (subset-Subgroup G L)
+
+antisymmetric-contains-Subgroup :
+  {l1 l2 : Level} (G : Group l1) (H K : Subgroup l2 G) →
+  contains-Subgroup G H K → contains-Subgroup G K H → H ＝ K
+antisymmetric-contains-Subgroup G H K α β =
+  eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
+
+Subgroup-Large-Preorder :
+  {l1 : Level} (G : Group l1) →
+  Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G 
+leq-large-preorder-Prop (Subgroup-Large-Preorder G) H K =
+  contains-Subgroup-Prop G H K
+refl-leq-Large-Preorder (Subgroup-Large-Preorder G) =
+  refl-contains-Subgroup G
+trans-leq-Large-Preorder (Subgroup-Large-Preorder G) =
+  transitive-contains-Subgroup G
+
+Subgroup-Preorder :
+  {l1 : Level} (l2 : Level) (G : Group l1) → Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subgroup-Preorder l2 G = preorder-Large-Preorder (Subgroup-Large-Preorder G) l2
+
+Subgroup-Large-Poset :
+  {l1 : Level} (G : Group l1) →
+  Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+large-preorder-Large-Poset (Subgroup-Large-Poset G) = Subgroup-Large-Preorder G
+antisymmetric-leq-Large-Poset (Subgroup-Large-Poset G) =
+  antisymmetric-contains-Subgroup G
+
+Subgroup-Poset :
+  {l1 : Level} (l2 : Level) (G : Group l1) → Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subgroup-Poset l2 G = poset-Large-Poset (Subgroup-Large-Poset G) l2
 ```
 
 ### Every subgroup induces two equivalence relations
@@ -380,7 +446,7 @@ module _
     (x y : type-Group G) → is-prop (right-sim-Subgroup x y)
   is-prop-right-sim-Subgroup x =
     is-prop-map-is-emb
-      ( is-emb-comp'
+      ( is-emb-comp
         ( mul-Group G x)
         ( inclusion-Subgroup G H)
         ( is-emb-mul-Group G x)
@@ -436,7 +502,7 @@ module _
     (x y : type-Group G) → is-prop (left-sim-Subgroup x y)
   is-prop-left-sim-Subgroup x =
     is-prop-map-is-emb
-      ( is-emb-comp'
+      ( is-emb-comp
         ( mul-Group' G x)
         ( inclusion-Subgroup G H)
         ( is-emb-mul-Group' G x)

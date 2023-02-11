@@ -3,8 +3,6 @@ title: Homomorphisms of groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-groups where
 
 open import foundation.cartesian-product-types

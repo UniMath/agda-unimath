@@ -3,43 +3,21 @@ title: Subgroups of abelian groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.subgroups-abelian-groups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; Set)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.abelian-groups using
-  ( Ab; group-Ab; type-Ab; commutative-add-Ab)
-open import group-theory.embeddings-groups using
-  ( emb-Group; emb-Group-Slice; emb-group-slice-Subgroup)
-open import group-theory.groups using (Group)
-open import group-theory.homomorphisms-abelian-groups using
-  ( preserves-add-Ab; type-hom-Ab; preserves-zero-Ab; preserves-negatives-Ab)
-open import group-theory.semigroups using (Semigroup)
-open import group-theory.subgroups using
-  ( subset-Group; is-set-subset-Group; contains-unit-subset-Group;
-    is-prop-contains-unit-subset-Group; is-closed-under-mul-subset-Group;
-    is-prop-is-closed-under-mul-subset-Group; is-closed-under-inv-subset-Group;
-    is-prop-is-closed-under-inv-subset-Group; is-subgroup-subset-Group;
-    is-prop-is-subgroup-subset-Group; Subgroup; subset-Subgroup;
-    is-emb-subset-Subgroup; is-in-Subgroup; is-prop-is-in-Subgroup;
-    is-subgroup-Subgroup; contains-unit-Subgroup; is-closed-under-mul-Subgroup;
-    is-closed-under-inv-Subgroup; type-group-Subgroup;
-    map-inclusion-group-Subgroup;
-    is-emb-inclusion-group-Subgroup; eq-subgroup-eq-group; set-group-Subgroup;
-    unit-Subgroup; mul-Subgroup; inv-Subgroup;
-    associative-mul-Subgroup; left-unit-law-mul-Subgroup;
-    right-unit-law-mul-Subgroup; left-inverse-law-mul-Subgroup;
-    right-inverse-law-mul-Subgroup; group-Subgroup;
-    preserves-mul-inclusion-group-Subgroup; inclusion-group-Subgroup;
-    semigroup-Subgroup; preserves-unit-inclusion-group-Subgroup;
-    preserves-inverses-inclusion-group-Subgroup)
+open import group-theory.abelian-groups
+open import group-theory.embeddings-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.semigroups
+open import group-theory.subgroups
 ```
 
 ## Definitions

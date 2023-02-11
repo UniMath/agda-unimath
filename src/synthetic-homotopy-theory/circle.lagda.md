@@ -3,8 +3,6 @@ title: The circle
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.circle where
 
 open import foundation.0-connected-types

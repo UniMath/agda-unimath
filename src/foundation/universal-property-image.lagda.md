@@ -3,50 +3,30 @@ title: The universal property of the image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-image where
 
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; center; is-contr-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using
-  ( _↪_; map-emb; id-emb; is-emb; is-emb-comp'; is-emb-map-emb)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; triangle-section; issec-map-inv-is-equiv; _∘e_;
-    id-equiv; is-property-is-equiv; is-equiv-map-equiv; _≃_; map-equiv;
-    inv-equiv)
-open import foundation.fibers-of-maps using (fib; reduce-Π-fib)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.homotopies using (_∙h_; _·r_; _~_; _·l_; refl-htpy)
-open import foundation.identity-types using (inv; _∙_; equiv-tr)
-open import foundation.images using
-  ( im; inclusion-im; emb-im; unit-im; map-unit-im)
-open import foundation.injective-maps using (is-injective-is-emb)
-open import foundation.propositional-maps using (fib-emb-Prop; is-prop-map-emb)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; is-prop-type-trunc-Prop; map-universal-property-trunc-Prop;
-    trunc-Prop; unit-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( is-equiv-is-prop; is-proof-irrelevant-is-prop; type-Prop)
-open import foundation.sections using (sec)
-open import foundation.slice using
-  ( hom-slice; map-hom-slice; triangle-hom-slice; is-prop-hom-slice;
-    htpy-hom-slice; comp-hom-slice; extensionality-hom-slice;
-    is-equiv-hom-slice-emb; equiv-slice; hom-equiv-slice;
-    equiv-hom-slice-fiberwise-hom; equiv-fiberwise-hom-hom-slice)
-open import foundation.subtypes using
-  ( type-subtype; is-emb-inclusion-subtype)
-open import foundation.surjective-maps using
-  ( is-surjective; equiv-dependent-universal-property-surj-is-surjective)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.images
+open import foundation.injective-maps
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sections
+open import foundation.slice
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -264,7 +244,7 @@ abstract
         X
     g = map-emb i ∘ pr1
     is-emb-g : is-emb g
-    is-emb-g = is-emb-comp' (map-emb i) pr1
+    is-emb-g = is-emb-comp (map-emb i) pr1
       ( is-emb-map-emb i)
       ( is-emb-inclusion-subtype (λ x → trunc-Prop _))
     α : hom-slice (map-emb i) g

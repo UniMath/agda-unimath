@@ -3,19 +3,16 @@ title: Decidable maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-maps where
 
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (_＝_; ap; inv; _∙_)
-open import foundation.retractions using (retr)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.retractions
+open import foundation.universe-levels
 ```
 
 ## Definition

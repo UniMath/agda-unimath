@@ -3,21 +3,18 @@ title: Repeating an element in a standard finite type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.repeating-element-standard-finite-type where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr; is-injective-inl)
-open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (_＝_; ap; refl; inv)
-open import foundation.negation using (¬)
-open import foundation.unit-type using (star)
+open import foundation.coproduct-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.unit-type
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Eq-Fin-eq)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ```agda

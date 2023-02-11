@@ -3,8 +3,6 @@ title: Elementary Number Theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory where
 
 open import elementary-number-theory.absolute-value-integers public
@@ -81,6 +79,5 @@ open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
 open import elementary-number-theory.universal-property-natural-numbers public
-open import elementary-number-theory.w-type-of-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public

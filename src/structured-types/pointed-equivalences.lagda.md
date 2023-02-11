@@ -3,50 +3,29 @@ title: Pointed equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.pointed-equivalences where
 
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-prod; center; eq-is-contr;
-    is-contr-total-path)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-contr-sec-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
-    _∘e_; is-emb-is-equiv; is-contr-retr-is-equiv; isretr-map-inv-is-equiv;
-    is-equiv-comp'; _≃_; is-property-is-equiv; map-equiv; id-equiv;
-    map-inv-equiv; is-equiv-has-inverse; is-equiv-map-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( Id; refl; ap; inv; _∙_; equiv-con-inv; equiv-inv; equiv-concat'; right-unit;
-    is-equiv-concat; is-equiv-concat'; _＝_)
-open import foundation.propositions using
-  ( is-prop; is-prop-is-proof-irrelevant; is-equiv-is-prop)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure; extensionality-Σ)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-right-swap-Σ)
-open import foundation.univalence using (equiv-univalence; is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.function-extensionality
 
-open import structured-types.pointed-homotopies using
-  ( htpy-pointed-map; extensionality-pointed-map; eq-htpy-pointed-map;
-    concat-htpy-pointed-map; assoc-comp-pointed-map;
-    left-whisker-htpy-pointed-map; right-unit-law-comp-pointed-map;
-    left-unit-law-comp-pointed-map; inv-assoc-comp-pointed-map;
-    right-whisker-htpy-pointed-map)
-open import structured-types.pointed-maps using
-  ( _→*_; comp-pointed-map; id-pointed-map; map-pointed-map;
-    preserves-point-pointed-map; precomp-pointed-map;
-    preserves-point-comp-pointed-map)
-open import structured-types.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
+open import foundation.universe-levels
+
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 ## Idea
@@ -253,7 +232,7 @@ module _
           ( isretr-map-inv-is-equiv H (pt-Pointed-Type A)))
         ( equiv-tot (λ p → equiv-inv _ _))
         ( is-contr-map-is-equiv
-          ( is-equiv-comp'
+          ( is-equiv-comp
             ( λ q → q ∙ refl)
             ( λ p →
               ( ap

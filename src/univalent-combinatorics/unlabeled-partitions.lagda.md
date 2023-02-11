@@ -3,8 +3,6 @@ title: Unlabeled partitions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.unlabeled-partitions where
 ```
 

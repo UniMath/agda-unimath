@@ -3,54 +3,85 @@ title: Suspensions of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.suspensions-of-types where
 
-open import elementary-number-theory.natural-numbers
-
-open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
+open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 ## Definition
 
-### Suspension of ordinary types
+### Suspension structure
 
 ```agda
-suspension-structure :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-structure X Y = Σ Y (λ N → Σ Y (λ S → (x : X) → Id N S))
+module _
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2)
+  where
+  
+  suspension-structure : UU (l1 ⊔ l2)
+  suspension-structure = Σ Y (λ N → Σ Y (λ S → (x : X) → N ＝ S))
 
-suspension-cocone' :
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+  
+  N-suspension-structure : suspension-structure X Y → Y
+  N-suspension-structure c = pr1 c
+
+  S-suspension-structure : suspension-structure X Y → Y
+  S-suspension-structure c = (pr1 ∘ pr2) c
+
+  merid-suspension-structure :
+    (c : suspension-structure X Y) →
+    X → N-suspension-structure c ＝ S-suspension-structure c
+  merid-suspension-structure c = (pr2 ∘ pr2) c
+```
+
+### Suspension cocones on a type
+
+```agda
+suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-cocone' X Y = cocone (const X unit star) (const X unit star) Y
+suspension-cocone X Y = cocone (const X unit star) (const X unit star) Y
 
 cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
-  suspension-structure X Y → suspension-cocone' X Y
+  suspension-structure X Y → suspension-cocone X Y
 cocone-suspension-structure X Y (pair N (pair S merid)) =
   pair
     ( const unit Y N)
     ( pair
       ( const unit Y S)
       ( merid))
+```
 
+### The universal property of the suspension of a type `X`
+
+```agda
 universal-property-suspension' :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2)
   (susp-str : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
@@ -64,7 +95,11 @@ is-suspension :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 is-suspension l X Y =
   Σ (suspension-structure X Y) (universal-property-suspension' l X Y)
+```
 
+### The suspension of an ordinary type `X`
+
+```agda
 suspension :
   {l : Level} → UU l → UU l
 suspension X = pushout (const X unit star) (const X unit star)
@@ -81,32 +116,79 @@ merid-susp :
   {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
 merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
 
-sphere : ℕ → UU lzero
-sphere zero-ℕ = bool
-sphere (succ-ℕ n) = suspension (sphere n)
+suspension-structure-suspension :
+  {l : Level} (X : UU l) → suspension-structure X (suspension X)
+pr1 (suspension-structure-suspension X) = N-susp
+pr1 (pr2 (suspension-structure-suspension X)) = S-susp
+pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
+```
 
-N-sphere : (n : ℕ) → sphere n
-N-sphere zero-ℕ = true
-N-sphere (succ-ℕ n) = N-susp
+### The suspension of a pointed type
 
-S-sphere : (n : ℕ) → sphere n
-S-sphere zero-ℕ = false
-S-sphere (succ-ℕ n) = S-susp
+```agda
+suspension-Pointed-Type :
+  {l : Level} → Pointed-Type l → Pointed-Type l
+pr1 (suspension-Pointed-Type X) = suspension (type-Pointed-Type X)
+pr2 (suspension-Pointed-Type X) = N-susp
 ```
 
 ## Properties
 
+#### Characterization of equalities in `suspension-structure`
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2}
+  where
+  
+  htpy-suspension-structure :
+    (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
+  htpy-suspension-structure c c' =
+    Σ ( (N-suspension-structure c) ＝ (N-suspension-structure c'))
+      ( λ p →
+        Σ ( ( S-suspension-structure c) ＝ ( S-suspension-structure c'))
+          ( λ q →
+            ( x : X) →
+            ( merid-suspension-structure c x ∙ q) ＝
+            ( p ∙ merid-suspension-structure c' x)))
+
+  extensionality-suspension-structure :
+    (c c' : suspension-structure X Z) → 
+    (c ＝ c') ≃ (htpy-suspension-structure c c')
+  extensionality-suspension-structure (N , S , merid) =
+    extensionality-Σ
+      ( λ y p →
+        Σ (S ＝ pr1 y) (λ q → (x : X) → (merid x ∙ q) ＝ (p ∙ pr2 y x)))
+      ( refl)
+      ( refl , right-unit-htpy)
+      ( λ z → id-equiv)
+      ( extensionality-Σ
+        ( λ H q → (x : X) → (merid x ∙ q) ＝ H x)
+        ( refl)
+        ( right-unit-htpy)
+        ( λ z → id-equiv)
+        ( λ H → equiv-concat-htpy right-unit-htpy H ∘e equiv-funext))
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c c' : suspension-structure X Z}
+  where
+
+  htpy-eq-suspension-structure : (c ＝ c') → htpy-suspension-structure c c'
+  htpy-eq-suspension-structure =
+    map-equiv (extensionality-suspension-structure c c')
+
+  eq-htpy-suspension-structure : htpy-suspension-structure c c' → (c ＝ c')
+  eq-htpy-suspension-structure =
+    map-inv-equiv (extensionality-suspension-structure c c')
+```
+
 ### The universal property of the suspension as a pushout
 
 ```agda
-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) → UU _
-suspension-cocone X Z = Σ Z (λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
-
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (susp-str-Y : suspension-structure X Y) →
-  (Z : UU l3) → (Y → Z) → suspension-cocone X Z
+  (Z : UU l3) → (Y → Z) → suspension-structure X Z
 ev-suspension (pair N (pair S merid)) Z h =
   pair (h N) (pair (h S) (h ·l merid))
 
@@ -118,7 +200,7 @@ universal-property-suspension l X Y susp-str-Y =
 
 comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-cocone' X Z ≃ suspension-cocone X Z
+  suspension-cocone X Z ≃ suspension-structure X Z
 comparison-suspension-cocone X Z =
   equiv-Σ
     ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
@@ -131,7 +213,7 @@ comparison-suspension-cocone X Z =
 
 map-comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-cocone' X Z → suspension-cocone X Z
+  suspension-cocone X Z → suspension-structure X Z
 map-comparison-suspension-cocone X Z =
   map-equiv (comparison-suspension-cocone X Z)
 
@@ -159,7 +241,7 @@ is-equiv-ev-suspension :
   ( up-Y : universal-property-suspension' l3 X Y susp-str-Y) → 
   ( Z : UU l3) → is-equiv (ev-suspension susp-str-Y Z)
 is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
-  is-equiv-comp
+  is-equiv-comp-htpy
     ( ev-suspension susp-str-Y Z)
     ( map-comparison-suspension-cocone X Z)
     ( cocone-map
@@ -170,6 +252,199 @@ is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
     ( up-Y Z)
     ( is-equiv-map-comparison-suspension-cocone X Z)
 ```
+
+### The suspension of X has the universal property of suspensions
+
+```agda
+module _
+  {l1 : Level} (X : UU l1)
+  where
+
+  up-suspension :
+    {l : Level} →
+    universal-property-suspension l X
+      ( suspension X)
+      ( suspension-structure-suspension X)
+  up-suspension Z =
+    is-equiv-htpy
+      ( ev-suspension (suspension-structure-suspension X) Z)
+      ( triangle-ev-suspension
+        { X = X}
+        { Y = suspension X}
+        ( suspension-structure-suspension X) Z)
+      ( is-equiv-map-equiv
+        ( ( comparison-suspension-cocone X Z) ∘e
+          ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
+
+  equiv-up-suspension :
+    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-structure X Z)
+  pr1 (equiv-up-suspension Z) =
+    ev-suspension (suspension-structure-suspension X) Z
+  pr2 (equiv-up-suspension Z) = up-suspension Z
+
+  map-inv-up-suspension : {l : Level} (Z : UU l) →
+    (suspension-structure X Z) → ((suspension X) → Z)
+  map-inv-up-suspension Z =
+    map-inv-equiv (equiv-up-suspension Z)
+
+  issec-map-inv-up-suspension :
+    {l : Level} (Z : UU l) →
+    ( ( ev-suspension ((suspension-structure-suspension X)) Z) ∘
+      ( map-inv-up-suspension Z)) ~ id
+  issec-map-inv-up-suspension Z = issec-map-inv-is-equiv (up-suspension Z)
+
+  isretr-map-inv-up-suspension : {l : Level} (Z : UU l) →
+    ( ( map-inv-up-suspension Z) ∘
+      ( ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
+  isretr-map-inv-up-suspension Z = isretr-map-inv-is-equiv (up-suspension Z)
+
+  up-suspension-N-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+    (map-inv-up-suspension Z c N-susp) ＝ pr1 c 
+  up-suspension-N-susp Z c =
+    pr1 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c))
+
+  up-suspension-S-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+    (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
+  up-suspension-S-susp Z c =
+    pr1 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
+
+  up-suspension-merid-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
+    ( ( ap (map-inv-up-suspension Z c) (merid-susp x)) ∙
+      ( up-suspension-S-susp Z c)) ＝
+    ( ( up-suspension-N-susp Z c) ∙ ( pr2 (pr2 c)) x)
+  up-suspension-merid-susp Z c =
+    pr2 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
+
+  ev-suspension-up-suspension :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+    ( ev-suspension
+      ( suspension-structure-suspension X)
+      ( Z)
+      ( map-inv-up-suspension Z c)) ＝ c
+  ev-suspension-up-suspension {l} Z c = 
+    eq-htpy-suspension-structure
+      ( ( up-suspension-N-susp Z c) ,
+        ( ( up-suspension-S-susp Z c) ,
+          ( up-suspension-merid-susp Z c)))
+```
+
+### The suspension-loop space adjunction
+
+Here we prove the universal property of the suspension of a pointed type: the suspension is left adjoint to the loop space. We do this by constructing an equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is given by λ f → Ω(f) ∘ unit
+
+#### The unit and counit of the adjunction
+
+```agda
+module _
+  {l1 : Level} (X : Pointed-Type l1)
+  where
+
+  shift : (type-Ω (suspension-Pointed-Type X)) → (N-susp ＝ S-susp)
+  shift l = l ∙ (merid-susp (pt-Pointed-Type X))
+
+  shift* :
+    Ω (suspension-Pointed-Type X) →*
+    ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
+  pr1 shift* = shift
+  pr2 shift* = refl
+
+  unshift : (N-susp ＝ S-susp) → (type-Ω (suspension-Pointed-Type X))
+  unshift p = p ∙ inv (merid-susp (pt-Pointed-Type X))
+
+  unshift* :
+    ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X))) →*
+    Ω (suspension-Pointed-Type X)
+  pr1 unshift* = unshift
+  pr2 unshift* = right-inv (merid-susp (pt-Pointed-Type X))
+
+  is-equiv-shift : is-equiv shift
+  is-equiv-shift = is-equiv-concat' N-susp (merid-susp (pt-Pointed-Type X))
+
+  pointed-equiv-shift :
+    ( Ω (suspension-Pointed-Type X)) ≃*
+    ( (N-susp ＝ S-susp) , merid-susp (pt-Pointed-Type X))
+  pr1 (pr1 pointed-equiv-shift) = shift
+  pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
+  pr2 pointed-equiv-shift = preserves-point-pointed-map _ _ shift*
+
+  merid-susp* : X →* ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
+  pr1 merid-susp* = merid-susp
+  pr2 merid-susp* = refl
+
+  unit-susp-loop-adj* : X →* Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
+
+  unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*
+
+  counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
+  counit-susp-loop-adj =
+    map-inv-is-equiv
+      ( up-suspension (type-Ω X) (type-Pointed-Type X))
+      ( ( pt-Pointed-Type X) ,
+        ( pt-Pointed-Type X) ,
+        ( id))
+
+  counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →* X
+  pr1 counit-susp-loop-adj* = counit-susp-loop-adj
+  pr2 counit-susp-loop-adj* =
+    up-suspension-N-susp
+      ( type-Ω X)
+      ( type-Pointed-Type X)
+      ( ( pt-Pointed-Type X) ,
+        ( pt-Pointed-Type X) ,
+        ( id))
+```
+
+#### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
+
+```agda
+module _
+  {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
+  where
+
+  equiv-susp-loop-adj : (suspension-Pointed-Type X →* Y)  ≃ (X →* Ω Y)
+  equiv-susp-loop-adj =
+    ( left-unit-law-Σ-is-contr
+      ( is-contr-total-path (pt-Pointed-Type Y))
+      ( (pt-Pointed-Type Y) , refl)) ∘e
+    ( ( inv-equiv
+        ( assoc-Σ
+          ( type-Pointed-Type Y)
+          ( λ z → (pt-Pointed-Type Y) ＝ z)
+          ( λ t →
+            Σ ( type-Pointed-Type X → (pt-Pointed-Type Y) ＝ (pr1 t))
+              ( λ f → f (pt-Pointed-Type X) ＝ (pr2 t))))) ∘e
+      ( ( equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
+        ( ( assoc-Σ
+            ( type-Pointed-Type Y)
+            ( λ y1 → type-Pointed-Type X → (pt-Pointed-Type Y) ＝ y1)
+            ( λ z →
+              Σ ( Id (pt-Pointed-Type Y) (pr1 z))
+                ( λ x → pr2 z (pt-Pointed-Type X) ＝ x))) ∘e
+          ( ( inv-equiv
+              ( right-unit-law-Σ-is-contr
+                ( λ ( z : Σ ( type-Pointed-Type Y)
+                            ( λ y1 →
+                              type-Pointed-Type X → pt-Pointed-Type Y ＝ y1)) →
+                  is-contr-total-path ((pr2 z) (pt-Pointed-Type X))))) ∘e
+            ( ( left-unit-law-Σ-is-contr
+                ( is-contr-total-path' (pt-Pointed-Type Y))
+                ( (pt-Pointed-Type Y) , refl)) ∘e
+              ( ( equiv-right-swap-Σ) ∘e
+                ( equiv-Σ-equiv-base
+                  ( λ c → (pr1 c) ＝ (pt-Pointed-Type Y))
+                  ( equiv-up-suspension
+                    ( type-Pointed-Type X)
+                    ( type-Pointed-Type Y)))))))))
+```
+
+#### The equivalence in the suspension-loop space adjunction is pointed
+
+[To do]
 
 ### The suspension of a contractible type is contractible
 
@@ -189,22 +464,4 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
       ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
       ( up-pushout (const X unit star) (const X unit star)))
     ( is-contr-unit)
-```
-
-### The suspension of X has the universal proprety of suspensions
-
-```agda
-module _
-  {l1 : Level} (X : UU l1)
-  where
-  
-  up-suspension :
-    {l : Level} → universal-property-suspension l X  (suspension X) (N-susp , S-susp , merid-susp)
-  up-suspension Z = htpy-preserve-is-equiv ((pr2 ( (comparison-suspension-cocone X Z) ∘e
-    (equiv-up-pushout (const X unit star) (const X unit star) Z))))
-    ((triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z)) 
-
-  equiv-up-suspensions :
-    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-cocone X Z)
-  equiv-up-suspensions Z = (ev-suspension (N-susp , S-susp , merid-susp) Z) , up-suspension Z
 ```

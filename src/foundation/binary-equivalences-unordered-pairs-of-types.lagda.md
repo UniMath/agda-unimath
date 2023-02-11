@@ -3,8 +3,6 @@ title: Binary equivalences on unordered pairs of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.binary-equivalences-unordered-pairs-of-types where
 
 open import foundation.binary-operations-unordered-pairs-of-types

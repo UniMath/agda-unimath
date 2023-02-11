@@ -3,55 +3,34 @@ title: Functoriality of set truncation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-set-truncation where
 
-open import foundation.contractible-types using
-  ( is-contr; center; eq-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.equivalences using
-  ( map-inv-is-equiv; is-equiv; _≃_; map-equiv; is-equiv-map-equiv;
-    is-equiv-htpy-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (tot)
-open import foundation.functoriality-truncation using
-  ( unique-map-trunc; map-trunc; naturality-unit-trunc;
-    htpy-uniqueness-map-trunc; id-map-trunc; comp-map-trunc;
-    htpy-trunc; map-equiv-trunc; is-equiv-map-equiv-trunc; equiv-trunc)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy)
-open import foundation.identity-types using (_＝_; ap; _∙_; inv; refl)
-open import foundation.images using
-  ( im; inclusion-im; is-emb-inclusion-im; map-unit-im; triangle-unit-im;
-    is-surjective-map-unit-im; unit-im; eq-Eq-im; im-Set)
-open import foundation.injective-maps using
-  ( is-injective; is-emb-is-injective; is-injective-is-emb)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using (function-Prop)
-open import foundation.set-truncations using
-  ( type-trunc-Set; unit-trunc-Set; universal-property-trunc-Set; trunc-Set;
-    dependent-universal-property-trunc-Set; map-equiv-trunc-Σ-Set;
-    trunc-Σ-Set; equiv-trunc-Σ-Set; apply-effectiveness-unit-trunc-Set;
-    apply-dependent-universal-property-trunc-Set'; is-surjective-unit-trunc-Set;
-    is-set-type-trunc-Set; is-set-truncation-trunc-Set)
-open import foundation.sets using (set-Prop; Id-Prop)
-open import foundation.slice using
-  ( hom-slice; equiv-slice; htpy-hom-slice; comp-hom-slice; hom-equiv-slice)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.truncation-levels using (zero-𝕋)
-open import foundation.uniqueness-image using (uniqueness-im)
-open import foundation.uniqueness-set-truncations using
-  ( is-set-truncation-is-equiv-is-set-truncation)
-open import foundation.universal-property-image using
-  ( is-image; is-image-is-surjective)
-open import foundation.universal-property-set-truncation using
-  ( is-set-truncation)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.function-extensionality
+
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-truncation
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.images
+open import foundation.injective-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.slice
+open import foundation.surjective-maps
+open import foundation.truncation-levels
+open import foundation.uniqueness-image
+open import foundation.uniqueness-set-truncations
+open import foundation.universal-property-image
+open import foundation.universal-property-set-truncation
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -3,55 +3,38 @@ title: Distributivity of set truncation over finite products
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module
   univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
   where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using
-  ( is-contr; is-equiv-is-contr; center; is-contr-equiv; is-contr-equiv';
-    is-contr-Prop)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ev-pair)
-open import foundation.empty-types using (empty-Set)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv-precomp-is-equiv; is-equiv-left-factor';
-    is-equiv-comp'; is-equiv-right-factor'; is-equiv-htpy-equiv;
-    is-equiv-map-equiv; _∘e_; equiv-postcomp-equiv;
-    inv-equiv; equiv-precomp-equiv; id-equiv)
-open import foundation.function-extensionality using (equiv-funext; eq-htpy)
-open import foundation.functions using (_∘_; map-Π; precomp; precomp-Π)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π; equiv-Π; map-equiv-Π; compute-map-equiv-Π; equiv-precomp-Π)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.functoriality-function-types using (equiv-postcomp)
-open import foundation.functoriality-set-truncation using
-  ( equiv-trunc-Set; map-equiv-trunc-Set; naturality-unit-trunc-Set)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using
-  ( Id; equiv-concat; ap; _∙_; equiv-concat'; inv)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.sets using (Π-Set; type-Set; Π-Set')
-open import foundation.set-truncations using
-  ( type-trunc-Set; unit-trunc-Set; uniqueness-trunc-Set; trunc-Set;
-    is-set-truncation-is-equiv; equiv-universal-property-trunc-Set)
-open import foundation.unit-type using (star)
-open import foundation.universal-property-dependent-pair-types using
-  ( is-equiv-ev-pair; equiv-ev-pair)
-open import foundation.universal-property-empty-type using
-  ( dependent-universal-property-empty')
-open import foundation.universal-property-maybe using
-  ( ev-Maybe; dependent-universal-property-Maybe)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
+open import foundation.functoriality-set-truncation
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.set-truncations
+open import foundation.unit-type
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-maybe
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ```agda
@@ -83,21 +66,21 @@ abstract
       ( Π-Set (Fin-Set (succ-ℕ k)) (λ x → trunc-Set (A x)))
       ( map-Π (λ x → unit-trunc-Set))
       ( λ {l} B →
-        is-equiv-left-factor'
+        is-equiv-left-factor
           ( precomp (map-Π (λ x → unit-trunc-Set)) (type-Set B))
           ( precomp (ev-Maybe {B = type-trunc-Set ∘ A}) (type-Set B))
-          ( is-equiv-comp'
+          ( is-equiv-comp
             ( precomp ev-Maybe (type-Set B))
             ( precomp
               ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
               ( type-Set B))
-            ( is-equiv-right-factor'
+            ( is-equiv-right-factor
               ( ev-pair)
               ( precomp
                 ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
                 ( type-Set B))
               ( is-equiv-ev-pair)
-              ( is-equiv-htpy-equiv
+              ( is-equiv-map-equiv
                 ( ( ( pair
                       ( precomp
                         ( (map-Π (λ x → unit-trunc-Set)))
@@ -121,8 +104,7 @@ abstract
                       ( equiv-universal-property-trunc-Set
                         ( A (inr star))
                         ( B)))) ∘e
-                  ( equiv-ev-pair))
-                ( refl-htpy)))
+                  ( equiv-ev-pair))))
             ( is-equiv-precomp-is-equiv
               ( ev-Maybe)
               ( dependent-universal-property-Maybe)

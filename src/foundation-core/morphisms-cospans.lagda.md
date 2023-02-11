@@ -3,6 +3,8 @@ title: Morphisms of cospans
 ---
 
 ```agda
+{-# OPTIONS --safe #-}
+
 module foundation-core.morphisms-cospans where
 
 open import foundation-core.cartesian-product-types
@@ -33,7 +35,7 @@ hom-cospan :
   {l1 l2 l3 l1' l2' l3' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} (f' : A' → X') (g' : B' → X') →
-  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ (l1' ⊔ (l2' ⊔ l3')))))
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l1' ⊔ l2' ⊔ l3')
 hom-cospan {A = A} {B} {X} f g {A'} {B'} {X'} f' g' =
   Σ (A → A') (λ hA →
     Σ (B → B') (λ hB →

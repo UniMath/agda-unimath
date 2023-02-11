@@ -3,20 +3,18 @@ title: Minimum on the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.minimum-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (_,_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.unit-type using (star)
+open import foundation.dependent-pair-types
+open import foundation.coproduct-types
+open import foundation.unit-type
 
 open import order-theory.greatest-lower-bounds-posets
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

@@ -3,38 +3,27 @@ title: Retracts of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.retracts-of-finite-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-maps using
-  ( is-decidable-map; is-decidable-map-retr)
-open import foundation.decidable-embeddings using
-  (_↪d_; decidable-subtype-decidable-emb)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.fibers-of-maps using (equiv-total-fib)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.injective-maps using (is-emb-is-injective)
-open import foundation.propositional-maps using (fib-emb-Prop)
-open import foundation.retractions using
-  ( retr; is-injective-retr; _retract-of_)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-maps
+open import foundation.decidable-embeddings
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.fibers-of-maps
+open import foundation.functoriality-propositional-truncation
+open import foundation.injective-maps
+open import foundation.propositional-maps
+open import foundation.retractions
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; has-decidable-equality-count; is-set-count; count-equiv)
-open import univalent-combinatorics.counting-decidable-subtypes using
-  ( count-decidable-subtype)
-open import univalent-combinatorics.equality-finite-types using
-  ( has-decidable-equality-is-finite)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import univalent-combinatorics.finite-types using
-  ( is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Properties

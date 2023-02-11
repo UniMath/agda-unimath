@@ -3,8 +3,6 @@ title: Totally faithful morphisms of undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.totally-faithful-morphisms-undirected-graphs where
 
 open import foundation.dependent-pair-types

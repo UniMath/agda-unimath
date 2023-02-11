@@ -3,21 +3,19 @@ title: Multisubsets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.multisubsets where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.identity-types using (_＝_)
-open import foundation.images using (im)
-open import foundation.negation using (¬)
-open import foundation.sets using (Set; type-Set)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
+open import foundation.identity-types
+open import foundation.images
+open import foundation.negation
+open import foundation.sets
+open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types using (is-finite)
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

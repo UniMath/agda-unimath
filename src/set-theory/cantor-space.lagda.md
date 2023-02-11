@@ -3,8 +3,6 @@ title: Cantor space
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module set-theory.cantor-space where
 
 open import elementary-number-theory.natural-numbers

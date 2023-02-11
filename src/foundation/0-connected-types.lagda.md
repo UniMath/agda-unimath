@@ -3,45 +3,30 @@ title: 0-Connected types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.0-connected-types where
 
-open import foundation.contractible-types using
-  ( is-contr-Prop; center; eq-is-contr; is-contr-equiv;
-    universal-property-contr-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv; inv-equiv)
-open import foundation.fiber-inclusions using (fiber-inclusion)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (ev-pt; precomp)
-open import foundation.functoriality-set-truncation using (equiv-trunc-Set)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (ap; refl)
-open import foundation.inhabited-types using (is-inhabited)
-open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
-    apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; is-prop; type-Prop; is-prop-type-Prop)
-open import foundation.set-truncations using
-  ( type-trunc-Set; apply-universal-property-trunc-Set'; unit-trunc-Set;
-    apply-effectiveness-unit-trunc-Set; trunc-Set;
-    apply-dependent-universal-property-trunc-Set';
-    apply-effectiveness-unit-trunc-Set')
-open import foundation.sets using (set-Prop; Id-Prop)
-open import foundation.surjective-maps using
-  ( is-surjective; equiv-dependent-universal-property-surj-is-surjective;
-    is-trunc-map-precomp-Π-is-surjective)
-open import foundation.truncated-maps using
-  ( is-trunc-map; is-trunc-map-comp; is-trunc-map-is-equiv)
-open import foundation.truncated-types using (is-trunc)
-open import foundation.truncation-levels using (𝕋; succ-𝕋)
-open import foundation.unit-type using (star; unit; pt; is-contr-unit)
-open import foundation.universal-property-unit-type using
-  ( equiv-universal-property-unit)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fiber-inclusions
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-set-truncation
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.surjective-maps
+open import foundation.truncated-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.unit-type
+open import foundation.universal-property-unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -110,10 +95,8 @@ is-trunc-map-ev-pt-is-connected :
   is-trunc-map k (ev-pt a (λ _ → B))
 is-trunc-map-ev-pt-is-connected k {A} {B} a H K =
   is-trunc-map-comp k
-    ( ev-pt a (λ _ → B))
     ( ev-pt star (λ _ → B))
     ( precomp (pt a) B)
-    ( refl-htpy)
     ( is-trunc-map-is-equiv k
       ( universal-property-contr-is-contr star is-contr-unit B))
     ( is-trunc-map-precomp-Π-is-surjective k

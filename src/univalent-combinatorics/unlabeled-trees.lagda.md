@@ -3,8 +3,6 @@ title: Unlabelled trees
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.unlabeled-trees where
 
 open import graph-theory.simple-undirected-graphs

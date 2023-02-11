@@ -3,24 +3,18 @@ title: Monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.monoids where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; inv; _∙_)
-open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; Prop;
-    prod-Prop; Π-Prop)
-open import foundation.sets using (Set; is-set; type-Set; Id-Prop)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.unital-binary-operations using (is-unital)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.unital-binary-operations
+open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup; set-Semigroup;
-    is-set-type-Semigroup; associative-mul-Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

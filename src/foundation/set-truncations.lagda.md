@@ -3,77 +3,43 @@ title: Set truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.set-truncations where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; center)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ev-pair)
-open import foundation.effective-maps-equivalence-relations using
-  ( is-surjective-and-effective; is-effective)
-open import foundation.embeddings using (_↪_; map-emb)
-open import foundation.empty-types using (empty; empty-Set; is-empty)
-open import foundation.equality-coproduct-types using
-  ( coprod-Set)
-open import foundation.equivalences using
-  ( _≃_; is-equiv; map-inv-equiv; map-equiv; is-equiv-right-factor';
-    is-equiv-comp'; is-equiv-htpy-equiv; _∘e_; issec-map-inv-equiv)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-cartesian-product-types using
-  ( map-prod; is-equiv-map-prod)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using (tot)
-open import foundation.functoriality-function-types using (equiv-postcomp)
-open import foundation.homotopies using (_~_; refl-htpy; inv-htpy)
-open import foundation.identity-types using (_＝_)
-open import foundation.mere-equality using
-  ( mere-eq-Eq-Rel; reflects-mere-eq; mere-eq; mere-eq-Prop)
-open import foundation.propositions using (Prop)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflecting-map-Eq-Rel)
-open import foundation.sets using
-  ( is-set; type-Set; Set; precomp-Set; type-hom-Set; is-set-type-Set;
-    is-set-is-contr; type-equiv-Set; prod-Set; Π-Set')
-open import foundation.slice using
-  ( hom-slice)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.truncation-levels using (zero-𝕋)
-open import foundation.truncations using
-  ( type-trunc; is-trunc-type-trunc; trunc; unit-trunc;
-    is-truncation-trunc; equiv-universal-property-trunc;
-    universal-property-trunc; map-universal-property-trunc;
-    triangle-universal-property-trunc; dependent-universal-property-trunc;
-    equiv-dependent-universal-property-trunc;
-    function-dependent-universal-property-trunc; is-equiv-unit-trunc;
-    equiv-unit-trunc; htpy-dependent-universal-property-trunc)
-open import foundation.uniqueness-set-truncations using
-  ( is-equiv-is-set-truncation-is-set-truncation;
-    is-set-truncation-is-equiv-is-set-truncation;
-    is-set-truncation-is-set-truncation-is-equiv; uniqueness-set-truncation)
-open import foundation.unit-type using (unit; unit-Set)
-open import foundation.universal-property-coproduct-types using
-  ( ev-inl-inr; universal-property-coprod)
-open import foundation.universal-property-dependent-pair-types using
-  ( is-equiv-ev-pair; equiv-ev-pair)
-open import foundation.universal-property-image using (is-image)
-open import foundation.universal-property-set-quotients using
-  ( is-set-quotient; is-surjective-and-effective-is-set-quotient;
-    emb-is-surjective-and-effective; triangle-emb-is-surjective-and-effective;
-    is-image-is-surjective-and-effective)
-open import foundation.universal-property-set-truncation using
-  ( is-set-truncation; universal-property-set-truncation;
-    universal-property-is-set-truncation; map-is-set-truncation;
-    triangle-is-set-truncation; precomp-Π-Set;
-    dependent-universal-property-set-truncation;
-    dependent-universal-property-is-set-truncation;
-    is-set-quotient-is-set-truncation; is-set-truncation-id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.function-extensionality
+
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.effective-maps-equivalence-relations
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.slice
+open import foundation.surjective-maps
+open import foundation.truncation-levels
+open import foundation.truncations
+open import foundation.uniqueness-set-truncations
+open import foundation.unit-type
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-image
+open import foundation.universal-property-set-quotients
+open import foundation.universal-property-set-truncation
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -226,8 +192,8 @@ abstract
     is-surjective-and-effective-is-set-quotient
       ( mere-eq-Eq-Rel A)
       ( trunc-Set A)
-      ( unit-trunc-Set)
-      ( reflects-mere-eq (trunc-Set A) unit-trunc-Set)
+      ( unit-trunc-Set ,
+        reflects-mere-eq (trunc-Set A) unit-trunc-Set)
       ( λ {l} → is-set-quotient-trunc-Set A)
 
 abstract
@@ -464,11 +430,11 @@ module _
         ( coprod-Set (trunc-Set A) (trunc-Set B))
         ( map-coprod unit-trunc-Set unit-trunc-Set)
         ( λ {l} C →
-          is-equiv-right-factor'
+          is-equiv-right-factor
             ( ev-inl-inr (λ x → type-Set C))
             ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
             ( universal-property-coprod (type-Set C))
-            ( is-equiv-comp'
+            ( is-equiv-comp
               ( map-prod
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))
@@ -519,7 +485,7 @@ module _
         ( trunc-Set (Σ A (λ x → type-trunc-Set (B x))))
         ( unit-trunc-Set ∘ tot (λ x → unit-trunc-Set))
         ( λ {l} C →
-          is-equiv-right-factor'
+          is-equiv-right-factor
             ( ev-pair)
             ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
             ( is-equiv-ev-pair)
@@ -558,7 +524,7 @@ module _
         ( prod-Set (trunc-Set A) (trunc-Set B))
         ( map-prod unit-trunc-Set unit-trunc-Set)
         ( λ {l} C →
-          is-equiv-right-factor'
+          is-equiv-right-factor
             ( ev-pair)
             ( precomp-Set (map-prod unit-trunc-Set unit-trunc-Set) C)
             ( is-equiv-ev-pair)

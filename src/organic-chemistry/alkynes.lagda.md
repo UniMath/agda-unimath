@@ -3,8 +3,6 @@ title: Alkynes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.alkynes where
 
 open import elementary-number-theory.natural-numbers

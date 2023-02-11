@@ -3,29 +3,19 @@ title: Anafunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.anafunctors where
 
-open import category-theory.categories using
-  ( Cat; precat-Cat; obj-Cat; type-hom-Cat)
-open import category-theory.functors-precategories using
-  ( functor-Precat; obj-functor-Precat; hom-functor-Precat;
-    respects-id-functor-Precat; respects-comp-functor-Precat)
-open import category-theory.isomorphisms-precategories using
-  ( iso-Precat; hom-iso-Precat; hom-inv-iso-Precat; id-iso-Precat;
-    issec-hom-inv-iso-Precat; isretr-hom-inv-iso-Precat)
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; id-hom-Precat; comp-hom-Precat;
-    comp-hom-Precat'; right-unit-law-comp-hom-Precat; assoc-comp-hom-Precat)
+open import category-theory.categories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-precategories
+open import category-theory.precategories
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.existential-quantification using (∃)
-open import foundation.identity-types using (_＝_; ap; _∙_; inv)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.universe-levels
 ```
 
 ## Idea

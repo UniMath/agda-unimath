@@ -1,42 +1,28 @@
-# Equivalences of undirected graphs
+---
+title: Equivalences of undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.equivalences-undirected-graphs where
 
-open import foundation.contractible-types using (is-contr; is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv; map-inv-is-equiv; id-equiv; _∘e_)
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; is-contr-total-htpy-equiv)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functions using (id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using
-  ( Id; tr; equiv-concat; refl; _＝_; equiv-tr; ap)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
-open import foundation.unordered-pairs using
-  ( map-equiv-unordered-pair; equiv-unordered-pair; htpy-unordered-pair;
-    standard-unordered-pair; equiv-standard-unordered-pair;
-    id-equiv-standard-unordered-pair)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
+open import foundation.functoriality-dependent-function-types
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.univalence
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.morphisms-undirected-graphs using
-  ( hom-Undirected-Graph; htpy-hom-Undirected-Graph;
-    refl-htpy-hom-Undirected-Graph)
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph;
-    unordered-pair-vertices-Undirected-Graph)
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 ## Idea

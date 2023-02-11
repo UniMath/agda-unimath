@@ -3,8 +3,6 @@ title: Pointed types equipped with automorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.pointed-types-equipped-with-automorphisms where
 
 open import foundation.automorphisms

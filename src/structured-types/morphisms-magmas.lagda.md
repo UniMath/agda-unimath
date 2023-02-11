@@ -3,8 +3,6 @@ title: Morphisms of magmas
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.morphisms-magmas where
 
 open import foundation.dependent-pair-types

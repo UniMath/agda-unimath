@@ -3,40 +3,29 @@ title: Counting in type theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting where
 
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using
-  ( is-contr; equiv-is-contr; is-contr-equiv'; center; eq-is-contr')
-open import foundation.coproduct-types using (inr; inl)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-equiv')
-open import foundation.decidable-types using (is-inhabited-or-empty)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( is-empty; ex-falso; is-equiv-is-empty'; empty; is-empty-type-trunc-Prop)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; map-inv-equiv; inv-equiv; id-equiv; _∘e_; is-equiv;
-    issec-map-inv-equiv; isretr-map-inv-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
-open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.propositional-truncations using
-  ( unit-trunc-Prop; type-trunc-Prop; is-prop-type-trunc-Prop)
-open import foundation.propositions using (is-proof-irrelevant-is-prop)
-open import foundation.sets using (is-set; is-set-equiv')
-open import foundation.unit-type using (unit; star; is-contr-unit)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Eq-Fin-eq; has-decidable-equality-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; is-contr-Fin-one-ℕ; neg-one-Fin; is-set-Fin)
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

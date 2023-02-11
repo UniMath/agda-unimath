@@ -3,8 +3,6 @@ title: Spectra
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.spectra where
 
 open import elementary-number-theory.natural-numbers

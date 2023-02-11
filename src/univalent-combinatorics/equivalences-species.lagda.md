@@ -3,8 +3,6 @@ title: Equivalences of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equivalences-species where
 
 open import foundation.contractible-types

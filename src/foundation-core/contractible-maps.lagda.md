@@ -3,24 +3,17 @@ title: Contractible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.contractible-maps where
 
-open import foundation-core.coherently-invertible-maps using
-  ( is-coherently-invertible; inv-is-coherently-invertible;
-    issec-inv-is-coherently-invertible; isretr-inv-is-coherently-invertible;
-    coh-inv-is-coherently-invertible)
-open import foundation-core.contractible-types using (is-contr; center; contraction)
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; is-coherently-invertible-is-equiv)
-open import foundation-core.fibers-of-maps using (fib; eq-Eq-fib)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_; _·r_; _·l_)
-open import foundation-core.identity-types using
-  ( _＝_; ap; inv; _∙_; refl; right-unit)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.coherently-invertible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -119,3 +112,12 @@ module _
     is-contr-map-is-equiv =
       is-contr-map-is-coherently-invertible ∘ is-coherently-invertible-is-equiv
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [`foundation.equivalences`](foundation.equivalences.html).
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
+- For the notion of path-split maps see
+  [`foundation.path-split-maps`](foundation.path-split-maps.html).

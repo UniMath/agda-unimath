@@ -1,24 +1,20 @@
 # Groups of loops in 1-types
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.groups-of-loops-in-1-types where
 
-open import foundation.1-types using
-  ( 1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using
-  ( _∙_; assoc; refl; left-unit; right-unit; left-inv; right-inv; inv)
-open import foundation.sets using (is-set; Set)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.1-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.groups
+open import group-theory.semigroups
 
-open import structured-types.pointed-types using (Pointed-Type)
+open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 ```agda

@@ -3,8 +3,6 @@ title: Free higher group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.free-higher-group-actions where
 
 open import foundation.propositions

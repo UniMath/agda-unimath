@@ -7,28 +7,55 @@ module foundation.univalence where
 
 open import foundation-core.univalence public
 
-open import foundation-core.contractible-types using (is-contr; is-contr-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation-core.homotopies using (refl-htpy)
-open import foundation-core.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.universe-levels
 
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using
-  ( _≃_; map-inv-is-equiv; id-equiv; is-equiv; _∘e_;
-    map-equiv; right-inverse-law-equiv; inv-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
-open import foundation.injective-maps using (is-injective-map-equiv)
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
 ```
 
 ## Idea
 
 The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
+
+In this file we postulate the univalence axiom. Its statement is defined in [`foundation-core.univalence`](foundation-core.univalence.html).
+
+## Postulates
+
+```agda
+postulate univalence : {l : Level} (A B : UU l) → UNIVALENCE A B
+```
+
+## Definitions
+
+```agda
+eq-equiv : {l : Level} (A B : UU l) → A ≃ B → A ＝ B
+eq-equiv A B = map-inv-is-equiv (univalence A B)
+
+equiv-univalence :
+  {l : Level} {A B : UU l} → (A ＝ B) ≃ (A ≃ B)
+pr1 equiv-univalence = equiv-eq
+pr2 equiv-univalence = univalence _ _
+
+abstract
+  is-contr-total-equiv : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → A ≃ X))
+  is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
+
+abstract
+  is-contr-total-equiv' : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → X ≃ A))
+  is-contr-total-equiv' {l} A =
+    is-contr-equiv'
+      ( Σ (UU l) (λ X → X ＝ A))
+      ( equiv-tot (λ X → equiv-univalence))
+      ( is-contr-total-path' A)
+```
 
 ### Univalence for type families
 
@@ -78,7 +105,7 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```agda
 comp-equiv-eq : {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-comp-equiv-eq refl refl = eq-htpy-equiv refl-htpy
+comp-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
 
 comp-eq-equiv : {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
@@ -94,7 +121,7 @@ comp-eq-equiv A B C f g =
 
 commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
-commutativity-inv-equiv-eq A .A refl = eq-htpy-equiv refl-htpy
+commutativity-inv-equiv-eq A .A refl = eq-equiv-eq-map-equiv refl
 
 commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
@@ -108,4 +135,14 @@ commutativity-inv-eq-equiv A B f =
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))
+```
+
+### eq-equiv on id is refl
+
+```agda
+refl-eq-equiv-id :
+  {l1 : Level} {A : UU l1} →
+  (eq-equiv A A (id-equiv {A = A})) ＝ refl
+refl-eq-equiv-id =
+  (isretr-map-inv-equiv equiv-univalence) refl   
 ```

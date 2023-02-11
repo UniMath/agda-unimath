@@ -3,8 +3,6 @@ title: Exponents of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.exponents-species where
 
 open import foundation.cartesian-product-types

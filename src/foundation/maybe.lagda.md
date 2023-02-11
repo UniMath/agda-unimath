@@ -3,31 +3,25 @@ title: The maybe modality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module foundation.maybe where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; is-injective-inl)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-neg)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equality-coproduct-types using
-  ( is-emb-inl; is-empty-eq-coprod-inl-inr)
-open import foundation.equivalences using (_≃_)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
-open import foundation.type-arithmetic-empty-type using
-  ( map-right-unit-law-coprod-is-empty)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

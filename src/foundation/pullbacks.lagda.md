@@ -3,63 +3,51 @@ title: Pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.pullbacks where
 
 open import foundation-core.pullbacks public
 
-open import foundation.commuting-cubes
-open import foundation.contractible-types using
-  ( is-contr; is-contr-total-path; is-contr-equiv'; is-contr-is-equiv';
-    is-equiv-is-contr)
-open import foundation.constant-maps using (const)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import foundation.descent-equivalences using (descent-is-equiv)
-open import foundation.diagonal-maps-of-types using (diagonal)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( is-equiv-comp; _∘e_; is-equiv; map-inv-is-equiv; _≃_; id-equiv;
-    map-inv-equiv; is-equiv-has-inverse; is-equiv-right-factor;
-    is-equiv-left-factor; is-pullback-is-equiv'; is-pullback-is-equiv)
-open import foundation.function-extensionality using
-  ( htpy-eq; issec-eq-htpy; isretr-eq-htpy; funext)
-open import foundation.functions using (_∘_; id; map-Π)
-open import foundation.functoriality-dependent-function-types using
-  ( map-inv-is-equiv-precomp-Π-is-equiv; htpy-map-Π;
-    isretr-map-inv-is-equiv-precomp-Π-is-equiv;
-    issec-map-inv-is-equiv-precomp-Π-is-equiv; is-equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot;
-    is-pullback-family-is-pullback-tot; map-Σ; tot-cone-cone-family)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; right-unit-htpy; _∙h_; _·l_; _·r_; ap-concat-htpy;
-    ap-concat-htpy'; inv-htpy; concat-htpy; concat-htpy';
-    is-equiv-concat-htpy'; is-equiv-concat-htpy; refl-htpy'; ind-htpy;
-    htpy-right-whisk; comp-htpy; assoc-htpy; nat-htpy)
-open import foundation.identity-types using
-  ( Id; _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv; concat';
-    concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr;
-    ap-comp; tr-Id-right)
-open import foundation.structure-identity-principle using (extensionality-Σ)
-open import foundation.type-theoretic-principle-of-choice using
-  ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
-    is-equiv-map-distributive-Π-Σ)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-
-open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
-open import foundation-core.function-extensionality using
-  ( eq-htpy; eq-htpy-refl-htpy)
-open import foundation-core.universal-property-pullbacks using
-  ( universal-property-pullback;
-    is-equiv-up-pullback-up-pullback; up-pullback-up-pullback-is-equiv)
+open import foundation-core.contractible-types
+open import foundation-core.constant-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.diagonal-maps-of-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
+
+open import foundation.commuting-cubes
+open import foundation.descent-equivalences
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
 ```
 
 ## Properties
+
+### Being a pullback is a property
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) 
+  where
+  
+  is-property-is-pullback : (c : cone f g C) → is-prop (is-pullback f g c)
+  is-property-is-pullback c = is-property-is-equiv (gap f g c)
+
+  is-pullback-Prop : (c : cone f g C) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-pullback-Prop c = pair (is-pullback f g c) (is-property-is-pullback c)
+```
 
 ### Exponents of pullbacks are pullbacks
 
@@ -117,7 +105,7 @@ abstract
       ( λ (h : T → B) → g ∘ h)
       ( exponent-cone T f g c)
   is-pullback-exponent-is-pullback f g c is-pb-c T =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( cone-map f g c)
       ( map-canonical-pullback-exponent f g T)
       ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
@@ -136,7 +124,7 @@ abstract
     is-pullback f g c
   is-pullback-is-pullback-exponent f g c is-pb-exp =
     is-pullback-universal-property-pullback f g c
-      ( λ T → is-equiv-comp
+      ( λ T → is-equiv-comp-htpy
         ( cone-map f g c)
         ( map-canonical-pullback-exponent f g T)
         ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
@@ -232,7 +220,7 @@ abstract
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
   where
 
@@ -249,10 +237,8 @@ module _
       is-equiv-tot-is-fiberwise-equiv (λ a →
         is-equiv-tot-is-fiberwise-equiv (λ b →
           is-equiv-comp
-            ( (concat' (f a) (inv (Hg b))) ∘ (concat (Hf a) (g' b)))
             ( concat' (f a) (inv (Hg b)))
             ( concat (Hf a) (g' b))
-            ( refl-htpy)
             ( is-equiv-concat (Hf a) (g' b))
             ( is-equiv-concat' (f a) (inv (Hg b)))))
 
@@ -266,7 +252,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
   where
 
@@ -298,7 +284,7 @@ module _
     is-pullback-htpy
       {c = pair p (pair q H)} (pair p' (pair q' H'))
       (pair Hp (pair Hq HH)) is-pb-c' =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( gap f g (triple p q H))
         ( map-equiv-canonical-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
@@ -315,7 +301,7 @@ module _
     is-pullback-htpy'
       (pair p (pair q H)) {pair p' (pair q' H')}
       (pair Hp (pair Hq HH)) is-pb-c =
-      is-equiv-right-factor
+      is-equiv-right-factor-htpy
         ( gap f g (triple p q H))
         ( map-equiv-canonical-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
@@ -351,7 +337,7 @@ htpy-parallel-cone-refl-htpy-htpy-cone f g
   tot
     ( λ K → tot
       ( λ L M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
-        ( M ∙h ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
+        ( M ∙h ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy)))
 
 abstract
   is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone :
@@ -364,16 +350,12 @@ abstract
     is-equiv-tot-is-fiberwise-equiv
       ( λ K → is-equiv-tot-is-fiberwise-equiv
         ( λ L → is-equiv-comp
-          ( λ M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
-            ( M ∙h
-              ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
           ( concat-htpy
             ( ap-concat-htpy H _ _ right-unit-htpy)
             ( ((f ·l K) ∙h refl-htpy) ∙h H'))
           ( concat-htpy'
             ( H ∙h (g ·l L))
-            ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy)))
-          ( refl-htpy)
+            ( ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy))
           ( is-equiv-concat-htpy'
             ( H ∙h (g ·l L))
             ( λ x → ap (λ z → z ∙ H' x) (inv right-unit)))
@@ -468,7 +450,7 @@ comp-htpy-eq-square-refl-htpy f g c c' =
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
     ( htpy-eq-square f g c c')
-  
+
 abstract
   htpy-parallel-cone-eq' :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
@@ -526,8 +508,8 @@ abstract
       htpy-parallel-cone Hf' Hg c c')
     ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})
     Hf g g' Hg c c' p
-  
-  comp-htpy-parallel-cone-eq : 
+
+  comp-htpy-parallel-cone-eq :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c c' : cone f g C) →
     ( ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
@@ -564,12 +546,12 @@ abstract
             ( c : cone f g C) (c' : cone f g' C) →
               is-equiv (htpy-parallel-cone-eq refl-htpy Hg c c'))
           ( λ c c' →
-            is-equiv-left-factor
+            is-equiv-left-factor-htpy
               ( htpy-eq-square f g c c')
               ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
               ( concat (tr-tr-refl-htpy-cone f g c) c')
               ( inv-htpy (comp-htpy-parallel-cone-eq f g c c'))
-              ( fundamental-theorem-id 
+              ( fundamental-theorem-id
                 ( is-contr-total-htpy-parallel-cone
                   ( refl-htpy' f)
                   ( refl-htpy' g)
@@ -693,7 +675,7 @@ abstract
     ((i : I) → is-pullback (f i) (g i) (c i)) →
     is-pullback (map-Π f) (map-Π g) (cone-Π f g c)
   is-pullback-cone-Π f g c is-pb-c =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( map-Π (λ i → gap (f i) (g i) (c i)))
       ( map-canonical-pullback-Π f g)
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))
@@ -928,7 +910,7 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
               ( h ·l back-left)
               ( (h ·l back-left) ∙h refl-htpy)
               ( (front-left ·r f') ∙h (hD ·l top))
-              ( inv-htpy right-unit-htpy)))))
+              ( inv-htpy-right-unit-htpy)))))
       ( is-pullback-rectangle-is-pullback-top h k hC
         ( pair f (pair g bottom))
         ( pair hA (pair g' back-right))
@@ -939,7 +921,6 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
 ```
 
 ### In a commuting cube where the maps from back-right to front-left are equivalences, the back-right square is a pullback if and only if the front-left square is a pullback
-
 
 ```agda
 is-pullback-front-left-is-pullback-back-right-cube-is-equiv :
@@ -1020,7 +1001,7 @@ pr1 (cone-ap f g (pair p (pair q  H)) c1 c2) = ap p
 pr1 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) γ =
   ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
-  ( ( inv (nat-htpy H γ)) ∙
+  ( ( inv-nat-htpy H γ) ∙
     ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ)))
 
 cone-ap' :
@@ -1039,9 +1020,9 @@ pr1 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) γ =
   ( tr-Id-right (H c2) (ap f (ap p γ))) ∙
   ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
-    ( ( inv (nat-htpy H γ)) ∙
+    ( ( inv-nat-htpy H γ) ∙
       ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ))))
-      
+
 is-pullback-cone-ap :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
@@ -1087,4 +1068,3 @@ is-pullback-cone-ap f g (pair p (pair q H)) is-pb-c c1 c2 =
           ( is-contr-total-path (p c1))))
       ( c2))
 ```
-

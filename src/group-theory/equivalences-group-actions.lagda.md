@@ -3,50 +3,29 @@ title: Equivalences of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.equivalences-group-actions where
 
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-inv-horizontal;
-    coherence-square-comp-horizontal)
-open import foundation.contractible-types using (is-contr; is-contr-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv; id-equiv;
-    is-property-is-equiv; map-inv-is-equiv; inv-equiv; _∘e_;
-    isretr-map-inv-equiv; issec-map-inv-equiv)
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv;  extensionality-equiv)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ; equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (Id; refl)
-open import foundation.sets using (is-contr-total-equiv-Set)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-right-swap-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.commuting-squares
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; type-Abstract-Group-Action;
-    mul-Abstract-Group-Action)
-open import group-theory.groups using (Group; type-Group)
-open import group-theory.homomorphisms-group-actions using
-  ( type-hom-Abstract-Group-Action; map-hom-Abstract-Group-Action;
-    htpy-hom-Abstract-Group-Action; refl-htpy-hom-Abstract-Group-Action;
-    is-contr-total-htpy-hom-Abstract-Group-Action)
-open import group-theory.homomorphisms-groups using
-  ( map-hom-Group; type-hom-Group; htpy-hom-Group;
-    is-contr-total-htpy-hom-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 ## Idea
