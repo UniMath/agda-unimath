@@ -34,14 +34,6 @@ is-split-surjective :
 is-split-surjective {A = A} {B} f = (b : B) → Σ A (λ a → f a ＝ b)
 ```
 
-### Split epimorphisms
-
-```agda
-is-split-epimorphism :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-split-epimorphism f = sec f
-```
-
 ## Properties
 
 ### Split surjections are maps equipped with a section
