@@ -8,6 +8,7 @@ module foundation.split-surjective-maps where
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -19,7 +20,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map `f : A → B` is split surjective if we can construct for every `b : B` an element `a : A` equipped with an identification `Id (f a) b`.
+A map `f : A → B` is split surjective if we can construct for every `b : B` an element in the fiber of `b`, meaning an element `a : A` equipped with an identification `f a ＝ b`.
 
 ## Warning
 
@@ -35,7 +36,7 @@ module _
   where
 
   is-split-surjective : (A → B) → UU (l1 ⊔ l2)
-  is-split-surjective f = (b : B) → Σ A (λ a → f a ＝ b)
+  is-split-surjective f = (b : B) → fib f b
 
   split-surjection : UU (l1 ⊔ l2)
   split-surjection = Σ (A → B) is-split-surjective
@@ -57,33 +58,33 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  sec-is-split-surjective : is-split-surjective f → sec f
-  pr1 (sec-is-split-surjective s) = pr1 ∘ s
-  pr2 (sec-is-split-surjective s) = pr2 ∘ s
+  section-is-split-surjective : is-split-surjective f → sec f
+  pr1 (section-is-split-surjective s) = pr1 ∘ s
+  pr2 (section-is-split-surjective s) = pr2 ∘ s
 
-  is-split-surjective-sec : sec f → is-split-surjective f
-  pr1 (is-split-surjective-sec s b) = pr1 s b
-  pr2 (is-split-surjective-sec s b) = pr2 s b
+  is-split-surjective-section : sec f → is-split-surjective f
+  pr1 (is-split-surjective-section s b) = pr1 s b
+  pr2 (is-split-surjective-section s b) = pr2 s b
 
-  is-equiv-sec-is-split-surjective : is-equiv sec-is-split-surjective
-  pr1 (pr1 is-equiv-sec-is-split-surjective) = is-split-surjective-sec
-  pr2 (pr1 is-equiv-sec-is-split-surjective) = refl-htpy
-  pr1 (pr2 is-equiv-sec-is-split-surjective) = is-split-surjective-sec
-  pr2 (pr2 is-equiv-sec-is-split-surjective) = refl-htpy
+  is-equiv-section-is-split-surjective : is-equiv section-is-split-surjective
+  pr1 (pr1 is-equiv-section-is-split-surjective) = is-split-surjective-section
+  pr2 (pr1 is-equiv-section-is-split-surjective) = refl-htpy
+  pr1 (pr2 is-equiv-section-is-split-surjective) = is-split-surjective-section
+  pr2 (pr2 is-equiv-section-is-split-surjective) = refl-htpy
 
-  is-equiv-is-split-surjective-sec : is-equiv is-split-surjective-sec
-  pr1 (pr1 is-equiv-is-split-surjective-sec) = sec-is-split-surjective
-  pr2 (pr1 is-equiv-is-split-surjective-sec) = refl-htpy
-  pr1 (pr2 is-equiv-is-split-surjective-sec) = sec-is-split-surjective
-  pr2 (pr2 is-equiv-is-split-surjective-sec) = refl-htpy
+  is-equiv-is-split-surjective-section : is-equiv is-split-surjective-section
+  pr1 (pr1 is-equiv-is-split-surjective-section) = section-is-split-surjective
+  pr2 (pr1 is-equiv-is-split-surjective-section) = refl-htpy
+  pr1 (pr2 is-equiv-is-split-surjective-section) = section-is-split-surjective
+  pr2 (pr2 is-equiv-is-split-surjective-section) = refl-htpy
 
-  equiv-sec-is-split-surjective : is-split-surjective f ≃ sec f
-  pr1 equiv-sec-is-split-surjective = sec-is-split-surjective
-  pr2 equiv-sec-is-split-surjective = is-equiv-sec-is-split-surjective
+  equiv-section-is-split-surjective : is-split-surjective f ≃ sec f
+  pr1 equiv-section-is-split-surjective = section-is-split-surjective
+  pr2 equiv-section-is-split-surjective = is-equiv-section-is-split-surjective
 
-  equiv-is-split-surjective-sec : sec f ≃ is-split-surjective f
-  pr1 equiv-is-split-surjective-sec = is-split-surjective-sec
-  pr2 equiv-is-split-surjective-sec = is-equiv-is-split-surjective-sec
+  equiv-is-split-surjective-section : sec f ≃ is-split-surjective f
+  pr1 equiv-is-split-surjective-section = is-split-surjective-section
+  pr2 equiv-is-split-surjective-section = is-equiv-is-split-surjective-section
 ```
 
 ### A map is an equivalence if and only if it is injective and split surjective
@@ -101,12 +102,12 @@ module _
   is-equiv-is-split-surjective-is-injective :
     is-injective f → is-split-surjective f → is-equiv f
   pr1 (is-equiv-is-split-surjective-is-injective l s) =
-    sec-is-split-surjective f s
+    section-is-split-surjective f s
   pr2 (is-equiv-is-split-surjective-is-injective l s) =
     retr-is-split-surjective-is-injective l s
 
   is-split-surjective-is-equiv : is-equiv f → is-split-surjective f
-  is-split-surjective-is-equiv = is-split-surjective-sec f ∘ pr1
+  is-split-surjective-is-equiv = is-split-surjective-section f ∘ pr1
 
   is-split-surjective-is-injective-is-equiv :
     is-equiv f → is-injective f × is-split-surjective f

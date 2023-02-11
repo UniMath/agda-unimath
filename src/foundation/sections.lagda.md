@@ -31,29 +31,6 @@ Any dependent function induces a section of the projection map
 
 ## Properties
 
-### The type of sections of a map is equivalent to the product of its fibers
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  compute-sec : ((y : B) → fib f y) ≃ sec f
-  compute-sec = distributive-Π-Σ
-
-  map-compute-sec : ((y : B) → fib f y) → sec f
-  map-compute-sec = map-equiv compute-sec
-
-  map-inv-compute-sec : sec f → ((y : B) → fib f y)
-  map-inv-compute-sec = map-inv-equiv compute-sec
-
-  issec-map-inv-compute-sec : (map-compute-sec ∘ map-inv-compute-sec) ~ id
-  issec-map-inv-compute-sec = issec-map-inv-equiv compute-sec
-
-  isretr-map-inv-compute-sec : (map-inv-compute-sec ∘ map-compute-sec) ~ id
-  isretr-map-inv-compute-sec = isretr-map-inv-equiv compute-sec
-```
-
 ### Sections of the projection map
 
 ```agda
@@ -204,4 +181,3 @@ pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
 pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
   isretr-section-comp-htpy f g h H sec-h
 ```
- 
