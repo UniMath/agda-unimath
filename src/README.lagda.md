@@ -772,6 +772,7 @@ open import orthogonal-factorization-systems.lifting-squares
 open import orthogonal-factorization-systems.lifts-of-maps
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.mere-lifting-properties
+open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom
 ```
 
