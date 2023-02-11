@@ -44,7 +44,6 @@ The pullback-hom of `f` and `g` can be canonically understood as the
 type of fibered maps from `f` to `g`. I.e. commuting squares where the
 vertical maps are `f` and `g`.
 
-
 ## Definition
 
 ```agda
@@ -64,17 +63,16 @@ module _
   gap-pullback-hom = gap (precomp f Y) (postcomp A g)
 ```
 
-### The pullback-hom comparison map
+### The diagonal pullback-hom map
 
-The pullback-hom comes equipped with a canonical comparison map
-`(X → B) → pullback-hom`
-which we can interpret as the map that takes a diagonal map `j` from
-the codomain of `f` to the domain of `g` to the fibered map
-`((g ∘ j) , (j ∘ f) , refl-htpy)`.
+The pullback-hom type comes equipped with a canonical comparison map
+`(X → B) → pullback-hom` which we can interpret as the map that takes
+a diagonal map `j` from the codomain of `f` to the domain of `g` to
+the fibered map `((g ∘ j) , (j ∘ f) , refl-htpy)`.
 
 ```agda
-  comparison-pullback-hom : (X → B) → pullback-hom
-  comparison-pullback-hom = gap-pullback-hom (postcomp X g , precomp f B , refl-htpy)
+  diagonal-pullback-hom : (X → B) → pullback-hom
+  diagonal-pullback-hom = gap-pullback-hom (postcomp X g , precomp f B , refl-htpy)
 ```
 
 ## Properties
