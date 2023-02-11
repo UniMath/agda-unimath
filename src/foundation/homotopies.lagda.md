@@ -253,10 +253,10 @@ module _
   compute-path-over-eq-value' :
     {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
     (((ap f p) ∙ q') ＝ (q ∙ (ap g p))) ≃ ((tr (eq-value f g) p q) ＝ q')
-  pr1 (compute-path-over-eq-value' refl q q') =
-    map-compute-path-over-eq-value' f g refl q q'
-  pr2 (compute-path-over-eq-value' refl q q') =
-    is-equiv-map-compute-path-over-eq-value' refl q q'
+  pr1 (compute-path-over-eq-value' p q q') =
+    map-compute-path-over-eq-value' f g p q q'
+  pr2 (compute-path-over-eq-value' p q q') =
+    is-equiv-map-compute-path-over-eq-value' p q q'
 ```
 
 ## See also
