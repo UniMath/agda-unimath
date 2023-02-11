@@ -1,5 +1,5 @@
 ---
-title: Lifting problems
+title: Lifting squares
 ---
 
 ```agda
@@ -26,8 +26,7 @@ open import orthogonal-factorization-systems.lifts-of-maps
 
 ## Idea
 
-A _lifting problem_ is the question of whether a given
-commutative square
+A _lifting square_ is a commuting square
 
 ```md
        h
@@ -40,8 +39,8 @@ commutative square
        i
 ```
 
-has a diagonal map `j : X → B` such that the complete
-diagram
+together with a diagonal map `j : X → B` such
+that the complete diagram
 
 ```md
        h
@@ -121,7 +120,7 @@ module _
   pr2 (is-lifting-square-spine j) = refl-htpy
 ```
 
-### Extensions as lifting problems
+### Extensions as lifting squares
 
 Extensions can be canonically interpreted as lifting squares where the terminal vertex is the terminal type.
 
@@ -188,7 +187,7 @@ module _
   pr2 equiv-extension-lifting-square = is-equiv-map-extension-lifting-square
 ```
 
-### Lifts as lifting problems
+### Lifts as lifting squares
 
 Lifts can be canonically interpreted as lifting squares where the initial vertex is the initial type.
 
