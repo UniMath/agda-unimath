@@ -767,10 +767,11 @@ open import organic-chemistry.saturated-carbons
 ```agda
 open import orthogonal-factorization-systems
 open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.lifting-squares
-open import orthogonal-factorization-systems.lifting-structures
 open import orthogonal-factorization-systems.lifts-of-maps
 open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.mere-lifting-properties
 open import orthogonal-factorization-systems.pullback-hom
 ```
 

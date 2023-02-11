@@ -40,13 +40,13 @@ The _pullback-hom_ of `f` and `g` is the pullback of the cospan:
       |  ⌟         |
       |            | g ∘ -
       V            V
-    Y → X ----> Y → A.
+    Y → X ----> Y → A
           - ∘ f
 ```
 
-The pullback-hom of `f` and `g` can be canonically understood as the
-type of fibered maps from `f` to `g`. I.e. commuting squares where the
-vertical maps are `f` and `g`.
+and can be canonically understood as the type of fibered maps from
+`f` to `g`. I.e. commuting squares where the vertical maps are `f`
+and `g`.
 
 ## Definition
 

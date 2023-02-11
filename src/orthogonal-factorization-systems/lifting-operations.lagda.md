@@ -5,6 +5,9 @@ title: Lifting operations
 ```agda
 module orthogonal-factorization-systems.lifting-operations where
 
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.homotopies
 open import foundation.sections
 open import foundation.universe-levels
 
@@ -52,4 +55,11 @@ module _
   diagonal-lift = sec (diagonal-pullback-hom f g)
 
   _⧄_ = diagonal-lift -- This symbol doesn't have an input sequence :(
+
+  map-diagonal-lift : diagonal-lift → pullback-hom f g → X → B
+  map-diagonal-lift = pr1
+
+  issec-map-diagonal-lift :
+    (d : diagonal-lift) → (diagonal-pullback-hom f g ∘ map-diagonal-lift d) ~ id
+  issec-map-diagonal-lift = pr2
 ```
