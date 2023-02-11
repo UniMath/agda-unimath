@@ -102,15 +102,18 @@ module _
 ### Functoriality of canonical pullbacks
 
 ```agda
-map-canonical-pullback :
+module _
   {l1 l2 l3 l1' l2' l3' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} (f' : A' → X') (g' : B' → X') →
-  hom-cospan f' g' f g →
-  canonical-pullback f' g' → canonical-pullback f g
-map-canonical-pullback f g f' g'
-  (pair hA (pair hB (pair hX (pair HA HB)))) (pair a' (pair b' p')) =
-  triple (hA a') (hB b') ((HA a') ∙ ((ap hX p') ∙ (inv (HB b'))))
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} (f' : A' → X') (g' : B' → X')
+  where
+
+  map-canonical-pullback :
+    hom-cospan f' g' f g → canonical-pullback f' g' → canonical-pullback f g
+  pr1 (map-canonical-pullback (hA , _) (a' , _)) = hA a'
+  pr1 (pr2 (map-canonical-pullback (hA , hB , _) (a' , b' , _))) = hB b'
+  pr2 (pr2 (map-canonical-pullback (hA , hB , hX , HA , HB) (a' , b' , p'))) =
+    (HA a') ∙ ((ap hX p') ∙ (inv (HB b')))
 ```
 
 ## Properties
@@ -907,4 +910,3 @@ module _
             ( λ t → is-fiberwise-equiv-map-fib-cone-is-pullback
               (horizontal-map-cone f g c) h d is-pb-d (pr1 t)))) 
 ```
-
