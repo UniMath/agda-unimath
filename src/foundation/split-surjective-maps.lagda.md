@@ -43,51 +43,55 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  map-sec-is-split-surjective : is-split-surjective f → sec f
-  pr1 (map-sec-is-split-surjective s) = pr1 ∘ s
-  pr2 (map-sec-is-split-surjective s) = pr2 ∘ s
+  sec-is-split-surjective : is-split-surjective f → sec f
+  pr1 (sec-is-split-surjective s) = pr1 ∘ s
+  pr2 (sec-is-split-surjective s) = pr2 ∘ s
 
-  map-is-split-surjective-sec : sec f → is-split-surjective f
-  pr1 (map-is-split-surjective-sec s b) = pr1 s b
-  pr2 (map-is-split-surjective-sec s b) = pr2 s b
+  is-split-surjective-sec : sec f → is-split-surjective f
+  pr1 (is-split-surjective-sec s b) = pr1 s b
+  pr2 (is-split-surjective-sec s b) = pr2 s b
 
-  is-equiv-map-sec-is-split-surjective : is-equiv map-sec-is-split-surjective
-  pr1 (pr1 is-equiv-map-sec-is-split-surjective) = map-is-split-surjective-sec
-  pr2 (pr1 is-equiv-map-sec-is-split-surjective) = refl-htpy
-  pr1 (pr2 is-equiv-map-sec-is-split-surjective) = map-is-split-surjective-sec
-  pr2 (pr2 is-equiv-map-sec-is-split-surjective) = refl-htpy
+  is-equiv-sec-is-split-surjective : is-equiv sec-is-split-surjective
+  pr1 (pr1 is-equiv-sec-is-split-surjective) = is-split-surjective-sec
+  pr2 (pr1 is-equiv-sec-is-split-surjective) = refl-htpy
+  pr1 (pr2 is-equiv-sec-is-split-surjective) = is-split-surjective-sec
+  pr2 (pr2 is-equiv-sec-is-split-surjective) = refl-htpy
 
-  is-equiv-map-is-split-surjective-sec : is-equiv map-is-split-surjective-sec
-  pr1 (pr1 is-equiv-map-is-split-surjective-sec) = map-sec-is-split-surjective
-  pr2 (pr1 is-equiv-map-is-split-surjective-sec) = refl-htpy
-  pr1 (pr2 is-equiv-map-is-split-surjective-sec) = map-sec-is-split-surjective
-  pr2 (pr2 is-equiv-map-is-split-surjective-sec) = refl-htpy
+  is-equiv-is-split-surjective-sec : is-equiv is-split-surjective-sec
+  pr1 (pr1 is-equiv-is-split-surjective-sec) = sec-is-split-surjective
+  pr2 (pr1 is-equiv-is-split-surjective-sec) = refl-htpy
+  pr1 (pr2 is-equiv-is-split-surjective-sec) = sec-is-split-surjective
+  pr2 (pr2 is-equiv-is-split-surjective-sec) = refl-htpy
 
   equiv-sec-is-split-surjective : is-split-surjective f ≃ sec f
-  pr1 equiv-sec-is-split-surjective = map-sec-is-split-surjective
-  pr2 equiv-sec-is-split-surjective = is-equiv-map-sec-is-split-surjective
+  pr1 equiv-sec-is-split-surjective = sec-is-split-surjective
+  pr2 equiv-sec-is-split-surjective = is-equiv-sec-is-split-surjective
 
   equiv-is-split-surjective-sec : sec f ≃ is-split-surjective f
-  pr1 equiv-is-split-surjective-sec = map-is-split-surjective-sec
-  pr2 equiv-is-split-surjective-sec = is-equiv-map-is-split-surjective-sec
+  pr1 equiv-is-split-surjective-sec = is-split-surjective-sec
+  pr2 equiv-is-split-surjective-sec = is-equiv-is-split-surjective-sec
 ```
 
 ### A map is an equivalence if and only if it is injective and split surjective
 
 ```agda
-abstract
-  is-equiv-is-split-surjective-is-injective :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2 } (f : X → Y) →
-    is-injective f →
-    is-split-surjective f →
-    is-equiv f
-  is-equiv-is-split-surjective-is-injective {X = X} {Y = Y} f l s =
-    pair (sec-f) (retr-f) 
-    where
-    sec-f : sec f
-    sec-f = pair (λ y → pr1 (s y)) (λ y → pr2 (s y))
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  where
 
-    retr-f : retr f
-    retr-f = pair (λ y → pr1 (s y)) (λ x → l (pr2 (s (f x))))
+  retr-is-split-surjective-is-injective :
+    is-injective f → is-split-surjective f → retr f
+  pr1 (retr-is-split-surjective-is-injective l s) = pr1 ∘ s
+  pr2 (retr-is-split-surjective-is-injective l s) = l ∘ (pr2 ∘ (s ∘ f))
+
+  is-equiv-is-split-surjective-is-injective :
+    is-injective f → is-split-surjective f → is-equiv f
+  pr1 (is-equiv-is-split-surjective-is-injective l s) =
+    sec-is-split-surjective f s
+  pr2 (is-equiv-is-split-surjective-is-injective l s) =
+    retr-is-split-surjective-is-injective l s
+
+  is-split-surjective-is-equiv : is-equiv f → is-split-surjective f
+  is-split-surjective-is-equiv = is-split-surjective-sec f ∘ pr1
 ```
  
