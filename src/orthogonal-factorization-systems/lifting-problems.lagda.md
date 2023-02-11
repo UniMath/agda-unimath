@@ -3,7 +3,7 @@ title: Lifting problems
 ---
 
 ```agda
-module orthogonal-factorization-systems.lifting-problems where
+module orthogonal-factorization-systems.lifting-squares where
 
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares

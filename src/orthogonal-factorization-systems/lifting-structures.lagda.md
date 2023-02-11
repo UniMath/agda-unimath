@@ -21,7 +21,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
-open import orthogonal-factorization-systems.lifting-problems
+open import orthogonal-factorization-systems.lifting-squares
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
