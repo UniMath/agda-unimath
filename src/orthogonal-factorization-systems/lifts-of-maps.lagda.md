@@ -67,6 +67,8 @@ module _
   compute-total-lift = inv-equiv inv-compute-total-lift
 ```
 
+## Properties
+
 ### If `P` is `k`-truncated then the type of lifts is `k`-truncated
 
 ```agda
