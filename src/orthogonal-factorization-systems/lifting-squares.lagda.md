@@ -74,6 +74,9 @@ module _
   lifting-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   lifting-square = Σ (X → B) (is-lifting-square)
 
+  map-diagonal-lifting-square : lifting-square → (X → B)
+  map-diagonal-lifting-square = pr1
+
   is-extension-is-lifting-square :
     (j : X → B) → is-lifting-square j → is-extension f h j
   is-extension-is-lifting-square j = pr1 ∘ pr1

@@ -10,7 +10,6 @@ module orthogonal-factorization-systems where
 open import orthogonal-factorization-systems.extensions-of-maps public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-squares public
-open import orthogonal-factorization-systems.lifting-structures public
 open import orthogonal-factorization-systems.lifts-of-maps public
 open import orthogonal-factorization-systems.local-types public
 open import orthogonal-factorization-systems.mere-liting-properties public
