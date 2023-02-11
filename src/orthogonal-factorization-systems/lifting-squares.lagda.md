@@ -93,7 +93,7 @@ module _
 
 ## Properties
 
-### A diagonal map gives rise to a lifting square
+### Diagonal maps give lifting squares
 
 The diagram
 
@@ -106,7 +106,18 @@ The diagram
   X         Y
 ```
 
-gives rise to a lifting square.
+gives rise to a lifting square
+
+```md
+     j ∘ f
+  A ------> B
+  |       ^ |
+ f|   j  /  |g
+  |    /    |
+  V  /      V
+  X ------> Y
+     g ∘ j
+```
 
 ```agda
 module _
@@ -114,10 +125,10 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  is-lifting-square-spine : (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
-  pr1 (pr1 (is-lifting-square-spine j)) = refl-htpy
-  pr2 (pr1 (is-lifting-square-spine j)) = refl-htpy
-  pr2 (is-lifting-square-spine j) = refl-htpy
+  is-lifting-square-diagonal : (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
+  pr1 (pr1 (is-lifting-square-diagonal j)) = refl-htpy
+  pr2 (pr1 (is-lifting-square-diagonal j)) = refl-htpy
+  pr2 (is-lifting-square-diagonal j) = refl-htpy
 ```
 
 ### Extensions as lifting squares
