@@ -5,7 +5,7 @@ title: Mere lifting properties
 ```agda
 module orthogonal-factorization-systems.mere-lifting-properties where
 
-open import foundation.inhabited-types
+open import foundation.surjective-maps
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -26,7 +26,7 @@ module _
   where
 
   mere-diagonal-lift : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  mere-diagonal-lift = is-inhabited (diagonal-lift f g)
+  mere-diagonal-lift = is-surjective (diagonal-pullback-hom f g)
 ```
 
 ## Properties
@@ -40,8 +40,8 @@ module _
   where
 
   is-prop-mere-diagonal-lift : is-prop (mere-diagonal-lift f g)
-  is-prop-mere-diagonal-lift = is-property-is-inhabited (diagonal-lift f g)
+  is-prop-mere-diagonal-lift = is-prop-is-surjective (diagonal-pullback-hom f g)
 
   mere-diagonal-lift-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  mere-diagonal-lift-Prop = is-inhabited-Prop (diagonal-lift f g)
+  mere-diagonal-lift-Prop = is-surjective-Prop (diagonal-pullback-hom f g)
 ```
