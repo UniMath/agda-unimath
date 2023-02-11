@@ -346,6 +346,12 @@ right-unit-ap-binary :
   {x x' : A} (p : x ＝ x') {y : B} →
   (ap-binary f p refl) ＝ (ap (λ z → f z y) p)
 right-unit-ap-binary f refl = refl
+
+ap-binary-comp :
+  {l1 l2 l3 l4 : Level} {A' : UU l4} {A : UU l1} {B : UU l2} {C : UU l3}
+  (H : A → B → C) (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
+  (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
+ap-binary-comp H f g refl = refl
 ```
 
 ### Action on identifications of dependent functions
