@@ -15,6 +15,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation.type-theoretic-principle-of-choice
 open import foundation-core.universe-levels
 ```
 
@@ -66,25 +67,11 @@ module _
   pr1 (is-split-surjective-section s b) = pr1 s b
   pr2 (is-split-surjective-section s b) = pr2 s b
 
-  is-equiv-section-is-split-surjective : is-equiv section-is-split-surjective
-  pr1 (pr1 is-equiv-section-is-split-surjective) = is-split-surjective-section
-  pr2 (pr1 is-equiv-section-is-split-surjective) = refl-htpy
-  pr1 (pr2 is-equiv-section-is-split-surjective) = is-split-surjective-section
-  pr2 (pr2 is-equiv-section-is-split-surjective) = refl-htpy
-
-  is-equiv-is-split-surjective-section : is-equiv is-split-surjective-section
-  pr1 (pr1 is-equiv-is-split-surjective-section) = section-is-split-surjective
-  pr2 (pr1 is-equiv-is-split-surjective-section) = refl-htpy
-  pr1 (pr2 is-equiv-is-split-surjective-section) = section-is-split-surjective
-  pr2 (pr2 is-equiv-is-split-surjective-section) = refl-htpy
-
   equiv-section-is-split-surjective : is-split-surjective f ≃ sec f
-  pr1 equiv-section-is-split-surjective = section-is-split-surjective
-  pr2 equiv-section-is-split-surjective = is-equiv-section-is-split-surjective
+  equiv-section-is-split-surjective = distributive-Π-Σ
 
   equiv-is-split-surjective-section : sec f ≃ is-split-surjective f
-  pr1 equiv-is-split-surjective-section = is-split-surjective-section
-  pr2 equiv-is-split-surjective-section = is-equiv-is-split-surjective-section
+  equiv-is-split-surjective-section = inv-distributive-Π-Σ
 ```
 
 ### A map is an equivalence if and only if it is injective and split surjective
