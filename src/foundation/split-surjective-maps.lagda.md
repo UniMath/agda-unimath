@@ -5,6 +5,7 @@ title: Split surjective maps
 ```agda
 module foundation.split-surjective-maps where
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -38,11 +39,18 @@ module _
 
   split-surjection : UU (l1 ⊔ l2)
   split-surjection = Σ (A → B) is-split-surjective
+
+  map-split-surjection : split-surjection → (A → B)
+  map-split-surjection = pr1
+
+  is-split-surjective-split-surjection :
+    (f : split-surjection) → is-split-surjective (map-split-surjection f)
+  is-split-surjective-split-surjection = pr2
 ```
 
 ## Properties
 
-### Split surjections are maps equipped with a section
+### Split surjections are equivalent to maps equipped with a section
 
 ```agda
 module _
@@ -99,4 +107,11 @@ module _
 
   is-split-surjective-is-equiv : is-equiv f → is-split-surjective f
   is-split-surjective-is-equiv = is-split-surjective-sec f ∘ pr1
+
+  is-split-surjective-is-injective-is-equiv :
+    is-equiv f → is-injective f × is-split-surjective f
+  pr1 (is-split-surjective-is-injective-is-equiv is-equiv-f) =
+    is-injective-is-equiv is-equiv-f
+  pr2 (is-split-surjective-is-injective-is-equiv is-equiv-f) =
+    is-split-surjective-is-equiv is-equiv-f
 ```
