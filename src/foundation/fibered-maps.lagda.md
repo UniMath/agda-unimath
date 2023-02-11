@@ -303,3 +303,15 @@ module _
   pr1 id-fibered-map = id
   pr2 id-fibered-map = id-map-over
 ```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y) (j : X → B)
+  where
+
+  diagonal-fibered-map : fibered-map f g
+  pr1 diagonal-fibered-map = g ∘ j
+  pr1 (pr2 diagonal-fibered-map) = j ∘ f
+  pr2 (pr2 diagonal-fibered-map) = refl-htpy
+```
