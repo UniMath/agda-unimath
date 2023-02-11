@@ -25,7 +25,7 @@ A triangle of maps
   \     /
    \   /
     V V
-     W
+     X
 ```
 
 is said to commute if there is a homotopy between the map on the left and the composite map.
