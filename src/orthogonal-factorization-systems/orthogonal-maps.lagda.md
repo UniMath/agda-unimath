@@ -40,11 +40,13 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
   
-  is-left-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-left-orthogonal = is-orthogonal
-
+  -- `is-right-orthogonal f g` asserts that `g` is right orthogonal to `f`
   is-right-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-right-orthogonal g f = is-orthogonal f g
+  is-right-orthogonal = is-orthogonal
+
+  -- `is-left-orthogonal f g` asserts that `g` is left orthogonal to `f`
+  is-left-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-left-orthogonal g f = is-orthogonal f g
 ```
 
 ## Properties
