@@ -22,16 +22,22 @@ A map `f : A → B` is split surjective if we can construct for every `b : B` an
 
 ## Warning
 
-Note that split-surjectiveness is the Curry-Howard interpretation of surjectiveness. However, this is not a property, and the split surjective maps don't fit in a factorization system along with the injective maps. 
+Note that split-surjectiveness is the Curry-Howard interpretation of surjectiveness. However, this is not a property, and the split surjective maps don't fit in a factorization system along with the injective maps.
 
 ## Definition
 
 ### Split surjective maps
 
 ```agda
-is-split-surjective :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-split-surjective {A = A} {B} f = (b : B) → Σ A (λ a → f a ＝ b)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-split-surjective : (A → B) → UU (l1 ⊔ l2)
+  is-split-surjective f = (b : B) → Σ A (λ a → f a ＝ b)
+
+  split-surjection : UU (l1 ⊔ l2)
+  split-surjection = Σ (A → B) is-split-surjective
 ```
 
 ## Properties
@@ -94,4 +100,3 @@ module _
   is-split-surjective-is-equiv : is-equiv f → is-split-surjective f
   is-split-surjective-is-equiv = is-split-surjective-sec f ∘ pr1
 ```
- 
