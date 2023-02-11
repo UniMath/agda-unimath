@@ -14,8 +14,6 @@ open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.retractions
-open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
 
@@ -137,25 +135,6 @@ module _
     pr1 (equiv-prop is-prop-A is-prop-B f g) = f
     pr2 (equiv-prop is-prop-A is-prop-B f g) =
       is-equiv-is-prop is-prop-A is-prop-B g
-```
-
-### Propositions are closed under retracts
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : UU l2)
-  where
-
-  is-proof-irrelevant-retract-of :
-    A retract-of B → is-proof-irrelevant B → is-proof-irrelevant A
-  is-proof-irrelevant-retract-of r is-proof-irrelevant-B a =
-    is-contr-retract-of B r (is-proof-irrelevant-B (pr1 r a))
-  
-  is-prop-retract-of : A retract-of B → is-prop B → is-prop A
-  is-prop-retract-of r is-prop-B =
-    is-prop-is-proof-irrelevant
-      ( is-proof-irrelevant-retract-of r
-        ( is-proof-irrelevant-is-prop is-prop-B))
 ```
 
 ### Propositions are closed under equivalences
