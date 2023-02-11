@@ -7,7 +7,11 @@ module orthogonal-factorization-systems.pullback-hom where
 
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibered-maps
+open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.morphisms-cospans
 open import foundation.pullbacks
@@ -92,4 +96,16 @@ module _
       pullback-hom f' g' → pullback-hom f g
   map-pullback-hom =
     map-canonical-pullback (precomp f Y) (postcomp A g) (precomp f' Y') (postcomp A' g')
+```
+
+### The pullback-hom is equivalent to the type of fibered maps between `f` and `g`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y)
+  where
+
+  equiv-fibered-map-pullback-hom : pullback-hom f g ≃ fibered-map f g
+  equiv-fibered-map-pullback-hom = equiv-tot λ i → equiv-tot λ h → equiv-funext
 ```
