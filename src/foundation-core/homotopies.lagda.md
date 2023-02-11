@@ -28,8 +28,7 @@ module _
 
   map-compute-path-over-eq-value :
     {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
-    ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p)) →
-    tr eq-value p q ＝ r
+    ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p)) → tr eq-value p q ＝ r
   map-compute-path-over-eq-value refl q r =
     inv ∘ (concat' r (right-unit ∙ ap-id q))
 
