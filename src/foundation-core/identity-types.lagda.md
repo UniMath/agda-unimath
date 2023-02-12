@@ -323,6 +323,11 @@ ap-binary :
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') → (f x y) ＝ (f x' y')
 ap-binary f refl refl = refl
 
+ap-binary-diagonal :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → A → B) →
+  {x x' : A} (p : x ＝ x') → (ap-binary f p p) ＝ (ap (λ a → f a a) p)
+ap-binary-diagonal f refl = refl  
+
 triangle-ap-binary :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
@@ -348,10 +353,18 @@ right-unit-ap-binary :
 right-unit-ap-binary f refl = refl
 
 ap-binary-comp :
+  {l1 l2 l3 l4 l5 : Level} {X : UU l4} {Y : UU l5} {A : UU l1} {B : UU l2} {C : UU l3}
+  (H : A → B → C) (f : X → A) (g : Y → B) {x0 x1 : X} (p : x0 ＝ x1)
+  {y0 y1 : Y} (q : y0 ＝ y1) → (ap-binary (λ x y → H (f x) (g y)) p q) ＝
+  ap-binary H (ap f p) (ap g q) 
+ap-binary-comp H f g refl refl = refl
+
+ap-binary-comp-diagonal :
   {l1 l2 l3 l4 : Level} {A' : UU l4} {A : UU l1} {B : UU l2} {C : UU l3}
   (H : A → B → C) (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
   (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
-ap-binary-comp H f g refl = refl
+ap-binary-comp-diagonal H f g p =
+  inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
 ```
 
 ### Action on identifications of dependent functions
