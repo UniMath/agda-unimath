@@ -15,11 +15,13 @@ open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.small-types
+open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -62,6 +64,18 @@ module _
 
   total-extension : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-extension P = Σ ((x : A) → P (i x)) (extension P)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
+  {P : B → UU l3} {f : (x : A) → P (i x)}
+  where
+
+  map-extension : extension i P f → (y : B) → P y
+  map-extension = pr1
+
+  is-extension-map-extension :
+    (E : extension i P f) → is-extension i f (map-extension E)
+  is-extension-map-extension = pr2
 ```
 
 ## Operations
@@ -164,6 +178,55 @@ module _
 ```
 
 ## Properties
+
+### Identifications of extensions of maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  (P : B → UU l3)
+  (f : (x : A) → P (i x)) 
+  where
+
+  coherence-htpy-extension :
+    (e e' : extension i P f) → map-extension e ~ map-extension e' → UU (l1 ⊔ l3)
+  coherence-htpy-extension e e' K =
+    (is-extension-map-extension e ∙h (K ∘ i)) ~ is-extension-map-extension e'
+  
+  htpy-extension : (e e' : extension i P f) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-extension e e' =
+    Σ ( map-extension e ~ map-extension e')
+      ( coherence-htpy-extension e e')
+  
+  refl-htpy-extension : (e : extension i P f) → htpy-extension e e
+  pr1 (refl-htpy-extension e) = refl-htpy
+  pr2 (refl-htpy-extension e) = right-unit-htpy
+
+  htpy-eq-extension : (e e' : extension i P f) → e ＝ e' → htpy-extension e e'
+  htpy-eq-extension e .e refl = refl-htpy-extension e
+
+  is-contr-total-htpy-extension : 
+    (e : extension i P f) → is-contr (Σ (extension i P f) (htpy-extension e))
+  is-contr-total-htpy-extension e =
+    is-contr-total-Eq-structure
+      (λ g G → coherence-htpy-extension e (g , G))
+      (is-contr-total-htpy (map-extension e))
+      (map-extension e , refl-htpy)
+      (is-contr-total-htpy (is-extension-map-extension e ∙h refl-htpy))
+
+  is-equiv-htpy-eq-extension :
+    (e e' : extension i P f) → is-equiv (htpy-eq-extension e e')
+  is-equiv-htpy-eq-extension e =
+    fundamental-theorem-id (is-contr-total-htpy-extension e) (htpy-eq-extension e)
+  
+  extensionality-extension :
+    (e e' : extension i P f) → (e ＝ e') ≃ (htpy-extension e e')
+  pr1 (extensionality-extension e e') = htpy-eq-extension e e'
+  pr2 (extensionality-extension e e') = is-equiv-htpy-eq-extension e e'
+
+  eq-htpy-extension : (e e' : extension i P f) → htpy-extension e e' → e ＝ e'
+  eq-htpy-extension e e' = map-inv-equiv (extensionality-extension e e')
+```
 
 ### The total type of extensions is equivalent to `(y : B) → P y`
 
