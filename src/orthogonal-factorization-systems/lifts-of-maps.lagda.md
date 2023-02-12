@@ -9,11 +9,13 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.small-types
+open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -51,6 +53,17 @@ module _
 
   total-lift : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-lift X = Σ (X → B) lift
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+   {X : UU l3} {f : X → B}
+  where
+
+  map-lift : lift i f → X → A
+  map-lift = pr1
+
+  is-lift-map-lift : (l : lift i f) → is-lift i f (map-lift l)
+  is-lift-map-lift = pr2
 ```
 
 ## Operations
@@ -124,7 +137,6 @@ module _
   is-lift-left-whisker h H x = ap h (H x)
 ```
 
-
 ## Right whiskering of lifts
 
 ```md
@@ -136,7 +148,6 @@ module _
   S - h -> X - f -> B
 ```
 
-
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {S : UU l4}
@@ -147,8 +158,54 @@ module _
   is-lift-right-whisker H h s = H (h s)
 ```
 
-
 ## Properties
+
+### Identification of lifts of maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {X : UU l3} (f : X → B)
+  where
+
+  coherence-htpy-lift :
+    (l l' : lift i f) → map-lift i l ~ map-lift i l' → UU (l2 ⊔ l3)
+  coherence-htpy-lift l l' K = (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
+  
+  htpy-lift : (l l' : lift i f) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-lift l l' =
+    Σ ( map-lift i l ~ map-lift i l')
+      ( coherence-htpy-lift l l')
+  
+  refl-htpy-lift : (l : lift i f) → htpy-lift l l
+  pr1 (refl-htpy-lift l) = refl-htpy
+  pr2 (refl-htpy-lift l) = right-unit-htpy
+
+  htpy-eq-lift : (l l' : lift i f) → l ＝ l' → htpy-lift l l'
+  htpy-eq-lift l .l refl = refl-htpy-lift l
+
+  is-contr-total-htpy-lift : 
+    (l : lift i f) → is-contr (Σ (lift i f) (htpy-lift l))
+  is-contr-total-htpy-lift l =
+    is-contr-total-Eq-structure
+      (λ g G → coherence-htpy-lift l (g , G))
+      (is-contr-total-htpy (map-lift i l))
+      (map-lift i l , refl-htpy)
+      (is-contr-total-htpy (is-lift-map-lift i l ∙h refl-htpy))
+
+  is-equiv-htpy-eq-lift :
+    (l l' : lift i f) → is-equiv (htpy-eq-lift l l')
+  is-equiv-htpy-eq-lift l =
+    fundamental-theorem-id (is-contr-total-htpy-lift l) (htpy-eq-lift l)
+  
+  extensionality-lift :
+    (l l' : lift i f) → (l ＝ l') ≃ (htpy-lift l l')
+  pr1 (extensionality-lift l l') = htpy-eq-lift l l'
+  pr2 (extensionality-lift l l') = is-equiv-htpy-eq-lift l l'
+
+  eq-htpy-lift : (l l' : lift i f) → htpy-lift l l' → l ＝ l'
+  eq-htpy-lift l l' = map-inv-equiv (extensionality-lift l l')
+```
 
 ### The total type of lifts is equivalent to `X → A`
 

@@ -66,7 +66,7 @@ module _
   gap-pullback-hom = gap (precomp f Y) (postcomp A g)
 ```
 
-### The diagonal pullback-hom map
+### The pullback-hom map
 
 The pullback-hom type comes equipped with a canonical comparison map
 `(X → B) → type-pullback-hom` which we can interpret as the map that takes
@@ -105,6 +105,6 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  equiv-fibered-map-pullback-hom : type-pullback-hom f g ≃ fibered-map f g
-  equiv-fibered-map-pullback-hom = equiv-tot λ i → equiv-tot λ h → equiv-funext
+  equiv-fibered-map-type-pullback-hom : type-pullback-hom f g ≃ fibered-map f g
+  equiv-fibered-map-type-pullback-hom = equiv-tot (λ i → equiv-tot (λ h → equiv-funext))
 ```
