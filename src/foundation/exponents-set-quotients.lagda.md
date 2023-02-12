@@ -8,11 +8,14 @@ module foundation.exponents-set-quotients where
 open import foundation.binary-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-set-quotients
 open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
@@ -42,7 +45,7 @@ for any two equivalence relations `R` on `A` and `S` on `B`.
 
 ## Definitions
 
-### An equivalence relation on `X → A`
+### The canonical equivalence relation on `X → A`
 
 ```agda
 module _
@@ -184,7 +187,7 @@ module _
   pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) {f} {g} {h} = trans-sim-hom-Eq-Rel f g h
 ```
 
-### The natural map of `sim-hom-Eq-Rel`
+### The universal reflecting map from `hom-Eq-Rel R S` to `A/R → B/S`
 
 ```agda
 module _
@@ -197,9 +200,32 @@ module _
   (UqS : {l : Level} → is-set-quotient l S QS qS)
   where
 
-  universal-map-sim-hom-Eq-Rel :
+  universal-map-hom-Eq-Rel :
     hom-Eq-Rel R S → type-hom-Set QR QS
-  universal-map-sim-hom-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
+  universal-map-hom-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
+
+  reflects-universal-map-hom-Eq-Rel :
+    reflects-Eq-Rel (eq-rel-hom-Eq-Rel R S) universal-map-hom-Eq-Rel
+  reflects-universal-map-hom-Eq-Rel {f} {g} s =
+    eq-htpy
+      ( ind-is-set-quotient R QR qR UqR
+        ( λ x →
+          Id-Prop QS
+            ( map-is-set-quotient R QR qR S QS qS UqR UqS f x)
+            ( map-is-set-quotient R QR qR S QS qS UqR UqS g x))
+        ( λ a →
+          coherence-square-map-is-set-quotient R QR qR S QS qS UqR UqS f a ∙
+          ( ( apply-effectiveness-is-set-quotient' S QS qS UqS (s a)) ∙
+            ( inv
+              ( coherence-square-map-is-set-quotient
+                R QR qR S QS qS UqR UqS g a)))))
+
+  universal-reflecting-map-hom-Eq-Rel :
+    reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) (type-hom-Set QR QS)
+  pr1 universal-reflecting-map-hom-Eq-Rel =
+    universal-map-hom-Eq-Rel
+  pr2 universal-reflecting-map-hom-Eq-Rel =
+    reflects-universal-map-hom-Eq-Rel
 ```
 
 ## Properties
@@ -207,5 +233,28 @@ module _
 ### The inclusion of the quotient `(X → A)/~` into `X → A/R` is an embedding
 
 ```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (X : UU l1) {A : UU l2} (R : Eq-Rel l3 A)
+  (Q : Set l4)
+  (q : reflecting-map-Eq-Rel (eq-rel-function-type X R) (type-Set Q))
+  (Uq : {l : Level} → is-set-quotient l (eq-rel-function-type X R) Q q)
+  (QR : Set l5) (qR : reflecting-map-Eq-Rel R (type-Set QR))
+  (UqR : {l : Level} → is-set-quotient l R QR qR)
+  where
 
+  is-emb-inclusion-is-set-quotient-eq-rel-function-type :
+    is-emb
+      ( map-inclusion-is-set-quotient-eq-rel-function-type X R Q q Uq QR qR UqR)
+  is-emb-inclusion-is-set-quotient-eq-rel-function-type =
+    is-emb-map-universal-property-set-quotient-is-set-quotient
+      ( eq-rel-function-type X R)
+      ( Q)
+      ( q)
+      ( Uq)
+      ( function-Set X QR)
+      ( exponent-reflecting-map-Eq-Rel X R qR)
+      ( λ g h p x →
+        apply-effectiveness-is-set-quotient R QR qR UqR (htpy-eq p x))
 ```
+
+### The extension of the universal map from `hom-Eq-Rel R S` to `A/R → B/S` to the quotient is an embedding
