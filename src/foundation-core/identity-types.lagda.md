@@ -365,6 +365,13 @@ ap-binary-comp-diagonal :
   (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
 ap-binary-comp-diagonal H f g p =
   inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
+
+ap-binary-comp' :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (H : A → B → C) (f : C → D) {a0 a1 : A} (p : a0 ＝ a1) {b0 b1 : B} (q : b0 ＝ b1) →
+  (ap-binary (λ a b → f (H a b)) p q) ＝ (ap f (ap-binary H p q))
+ap-binary-comp' H f refl refl = refl
+
 ```
 
 ### Action on identifications of dependent functions
