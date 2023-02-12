@@ -3,6 +3,8 @@ title: Exponents of set quotients
 ---
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.exponents-set-quotients where
 
 open import foundation.binary-relations
@@ -190,6 +192,8 @@ module _
 
 ### The universal reflecting map from `hom-Eq-Rel R S` to `A/R → B/S`
 
+#### First variant using only the universal property of set quotients
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -201,13 +205,16 @@ module _
   (UqS : {l : Level} → is-set-quotient l S QS qS)
   where
 
-  universal-map-hom-Eq-Rel :
+  universal-map-is-set-quotient-hom-Eq-Rel :
     hom-Eq-Rel R S → type-hom-Set QR QS
-  universal-map-hom-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
+  universal-map-is-set-quotient-hom-Eq-Rel =
+    map-is-set-quotient R QR qR S QS qS UqR UqS
 
-  reflects-universal-map-hom-Eq-Rel :
-    reflects-Eq-Rel (eq-rel-hom-Eq-Rel R S) universal-map-hom-Eq-Rel
-  reflects-universal-map-hom-Eq-Rel {f} {g} s =
+  reflects-universal-map-is-set-quotient-hom-Eq-Rel :
+    reflects-Eq-Rel
+      ( eq-rel-hom-Eq-Rel R S)
+      ( universal-map-is-set-quotient-hom-Eq-Rel)
+  reflects-universal-map-is-set-quotient-hom-Eq-Rel {f} {g} s =
     eq-htpy
       ( ind-is-set-quotient R QR qR UqR
         ( λ x →
@@ -221,12 +228,59 @@ module _
               ( coherence-square-map-is-set-quotient
                 R QR qR S QS qS UqR UqS g a)))))
 
-  universal-reflecting-map-hom-Eq-Rel :
+  universal-reflecting-map-is-set-quotient-hom-Eq-Rel :
     reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) (type-hom-Set QR QS)
-  pr1 universal-reflecting-map-hom-Eq-Rel =
-    universal-map-hom-Eq-Rel
-  pr2 universal-reflecting-map-hom-Eq-Rel =
-    reflects-universal-map-hom-Eq-Rel
+  pr1 universal-reflecting-map-is-set-quotient-hom-Eq-Rel =
+    universal-map-is-set-quotient-hom-Eq-Rel
+  pr2 universal-reflecting-map-is-set-quotient-hom-Eq-Rel =
+    reflects-universal-map-is-set-quotient-hom-Eq-Rel
+```
+
+#### Second variant using the designated set quotients
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A)
+  {B : UU l3} (S : Eq-Rel l4 B)
+  where
+
+  universal-map-set-quotient-hom-Eq-Rel :
+    hom-Eq-Rel R S → set-quotient R → set-quotient S
+  universal-map-set-quotient-hom-Eq-Rel =
+    universal-map-is-set-quotient-hom-Eq-Rel
+      ( R)
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( is-set-quotient-set-quotient R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-set-quotient S)
+
+  reflects-universal-map-set-quotient-hom-Eq-Rel :
+    reflects-Eq-Rel
+      ( eq-rel-hom-Eq-Rel R S)
+      ( universal-map-set-quotient-hom-Eq-Rel)
+  reflects-universal-map-set-quotient-hom-Eq-Rel =
+    reflects-universal-map-is-set-quotient-hom-Eq-Rel
+      ( R)
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( is-set-quotient-set-quotient R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-set-quotient S)
+
+  universal-reflecting-map-set-quotient-hom-Eq-Rel :
+    reflecting-map-Eq-Rel
+      ( eq-rel-hom-Eq-Rel R S)
+      ( set-quotient R → set-quotient S)
+  pr1 universal-reflecting-map-set-quotient-hom-Eq-Rel =
+    universal-map-set-quotient-hom-Eq-Rel
+  pr2 universal-reflecting-map-set-quotient-hom-Eq-Rel =
+    reflects-universal-map-set-quotient-hom-Eq-Rel
 ```
 
 ## Properties
@@ -260,6 +314,8 @@ module _
 
 ### The extension of the universal map from `hom-Eq-Rel R S` to `A/R → B/S` to the quotient is an embedding
 
+#### First variant using only the universal property of the set quotient
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
@@ -279,7 +335,7 @@ module _
       ( Σ ( type-hom-Set QH (hom-Set QR QS))
           ( λ μ →
             ( μ ∘ map-reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) qH) ~
-            ( universal-map-hom-Eq-Rel R QR qR UR S QS qS US)))
+            ( universal-map-is-set-quotient-hom-Eq-Rel R QR qR UR S QS qS US)))
   unique-inclusion-is-set-quotient-hom-Eq-Rel =
     universal-property-set-quotient-is-set-quotient
       ( eq-rel-hom-Eq-Rel R S)
@@ -287,7 +343,8 @@ module _
       ( qH)
       ( UH)
       ( hom-Set QR QS)
-      ( universal-reflecting-map-hom-Eq-Rel R QR qR UR S QS qS US)
+      ( universal-reflecting-map-is-set-quotient-hom-Eq-Rel
+        R QR qR UR S QS qS US)
           
   inclusion-is-set-quotient-hom-Eq-Rel :
     type-hom-Set QH (hom-Set QR QS)
@@ -297,7 +354,7 @@ module _
   triangle-inclusion-is-set-quotient-hom-Eq-Rel :
     ( inclusion-is-set-quotient-hom-Eq-Rel ∘
       map-reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) qH) ~
-    ( universal-map-hom-Eq-Rel R QR qR UR S QS qS US)
+    ( universal-map-is-set-quotient-hom-Eq-Rel R QR qR UR S QS qS US)
   triangle-inclusion-is-set-quotient-hom-Eq-Rel =
     pr2 (center (unique-inclusion-is-set-quotient-hom-Eq-Rel))
 
@@ -310,7 +367,8 @@ module _
       ( qH)
       ( UH)
       ( hom-Set QR QS)
-      ( universal-reflecting-map-hom-Eq-Rel R QR qR UR S QS qS US)
+      ( universal-reflecting-map-is-set-quotient-hom-Eq-Rel
+        R QR qR UR S QS qS US)
       ( λ g h p a →
         apply-effectiveness-is-set-quotient S QS qS US
           ( ( inv-htpy
@@ -319,5 +377,63 @@ module _
                 ( coherence-square-map-is-set-quotient
                   R QR qR S QS qS UR US h)))
             ( a)))
-
 ```
+
+#### Second variant using the official set quotients
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A)
+  {B : UU l3} (S : Eq-Rel l4 B)
+  where
+
+  unique-inclusion-set-quotient-hom-Eq-Rel :
+    is-contr
+      ( Σ ( set-quotient (eq-rel-hom-Eq-Rel R S) →
+            set-quotient R → set-quotient S)
+          ( λ μ →
+            ( μ ∘ quotient-map (eq-rel-hom-Eq-Rel R S)) ~
+            ( universal-map-set-quotient-hom-Eq-Rel R S)))
+  unique-inclusion-set-quotient-hom-Eq-Rel =
+    universal-property-set-quotient-is-set-quotient
+      ( eq-rel-hom-Eq-Rel R S)
+      ( quotient-Set (eq-rel-hom-Eq-Rel R S))
+      ( reflecting-map-quotient-map (eq-rel-hom-Eq-Rel R S))
+      ( is-set-quotient-set-quotient (eq-rel-hom-Eq-Rel R S))
+      ( hom-Set (quotient-Set R) (quotient-Set S))
+      ( universal-reflecting-map-set-quotient-hom-Eq-Rel R S)
+
+  inclusion-set-quotient-hom-Eq-Rel :
+    set-quotient (eq-rel-hom-Eq-Rel R S) → set-quotient R → set-quotient S
+  inclusion-set-quotient-hom-Eq-Rel =
+    pr1 (center (unique-inclusion-set-quotient-hom-Eq-Rel))
+
+  triangle-inclusion-set-quotient-hom-Eq-Rel :
+    ( inclusion-set-quotient-hom-Eq-Rel ∘
+      quotient-map (eq-rel-hom-Eq-Rel R S)) ~
+    ( universal-map-set-quotient-hom-Eq-Rel R S)
+  triangle-inclusion-set-quotient-hom-Eq-Rel =
+    pr2 (center (unique-inclusion-set-quotient-hom-Eq-Rel))
+  
+  is-emb-inclusion-set-quotient-hom-Eq-Rel :
+    is-emb inclusion-set-quotient-hom-Eq-Rel
+  is-emb-inclusion-set-quotient-hom-Eq-Rel =
+    is-emb-map-universal-property-set-quotient-is-set-quotient
+      ( eq-rel-hom-Eq-Rel R S)
+      ( quotient-Set (eq-rel-hom-Eq-Rel R S))
+      ( reflecting-map-quotient-map (eq-rel-hom-Eq-Rel R S))
+      ( is-set-quotient-set-quotient (eq-rel-hom-Eq-Rel R S))
+      ( hom-Set (quotient-Set R) (quotient-Set S))
+      ( universal-reflecting-map-set-quotient-hom-Eq-Rel R S)
+      ( λ g h p a →
+        apply-effectiveness-quotient-map S
+          ( ( inv-htpy
+              ( coherence-square-map-set-quotient R S g) ∙h
+              ( ( htpy-eq p ·r quotient-map R) ∙h
+                ( coherence-square-map-set-quotient
+                  R S h)))
+            ( a)))
+```
+          
+
