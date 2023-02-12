@@ -15,7 +15,7 @@ open import orthogonal-factorization-systems.pullback-hom
 
 ## Idea
 
-Given two maps, `f : A → X` and `g : B → Y`, we say that `f` has the _mere left lifting property_ with respect to `g` and that `g` has the _mere right lifting property_ with respect to `f` if the diagonal pullback-hom map is surjective. This means that the type of lifting operations between `f` and `g` is merely [inhabited](foundation.inhabited-types.html).
+Given two maps, `f : A → X` and `g : B → Y`, we say that `f` has the _mere left lifting property_ with respect to `g` and that `g` has the _mere right lifting property_ with respect to `f` if the pullback-hom is surjective. This means that the type of lifting operations between `f` and `g` is merely [inhabited](foundation.inhabited-types.html).
 
 ## Definition
 
@@ -26,7 +26,7 @@ module _
   where
 
   mere-diagonal-lift : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  mere-diagonal-lift = is-surjective (diagonal-pullback-hom f g)
+  mere-diagonal-lift = is-surjective (pullback-hom f g)
 ```
 
 ## Properties
@@ -40,8 +40,8 @@ module _
   where
 
   is-prop-mere-diagonal-lift : is-prop (mere-diagonal-lift f g)
-  is-prop-mere-diagonal-lift = is-prop-is-surjective (diagonal-pullback-hom f g)
+  is-prop-mere-diagonal-lift = is-prop-is-surjective (pullback-hom f g)
 
   mere-diagonal-lift-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  mere-diagonal-lift-Prop = is-surjective-Prop (diagonal-pullback-hom f g)
+  mere-diagonal-lift-Prop = is-surjective-Prop (pullback-hom f g)
 ```

@@ -19,8 +19,7 @@ open import orthogonal-factorization-systems.pullback-hom
 ## Idea
 
 The map `f : A → X` is said to be _orthogonal to_ `g : B → Y` if the
-diagonal pullback-hom map is an equivalence. This means that there is
-a unique lifting operation between `f` and `g`.
+pullback-hom is an equivalence. This means that there is a unique lifting operation between `f` and `g`.
 
 In this case we say that `f` is _left orthogonal_ to `g` and `g` is _right orthogonal_ to `f`.
 
@@ -32,7 +31,7 @@ module _
   where
 
   is-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-orthogonal f g = is-equiv (diagonal-pullback-hom f g)
+  is-orthogonal f g = is-equiv (pullback-hom f g)
 
   _⊥_ = is-orthogonal
 
@@ -60,7 +59,7 @@ module _
   where
 
   is-property-is-orthogonal : is-prop (is-orthogonal f g)
-  is-property-is-orthogonal = is-property-is-equiv (diagonal-pullback-hom f g)
+  is-property-is-orthogonal = is-property-is-equiv (pullback-hom f g)
 
   is-orthogonal-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pr1 is-orthogonal-Prop = is-orthogonal f g

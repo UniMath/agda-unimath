@@ -33,20 +33,19 @@ g ∘ - |            | g ∘ -
           - ∘ f  
 ```
 
-The _pullback-hom_ of `f` and `g` is the pullback of the cospan:
+The _pullback-hom_ of `f` and `g` is the comparison map from `B → X` to the pullback of the cospan:
 
 ```md
       P -------> B → A
       |  ⌟         |
       |            | g ∘ -
       V            V
-    Y → X ----> Y → A
+    Y → X ----> Y → A.
           - ∘ f
 ```
 
-and can be canonically understood as the type of fibered maps from
-`f` to `g`. I.e. commuting squares where the vertical maps are `f`
-and `g`.
+This pullback can be canonically understood as the type of fibered maps from
+`f` to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
 
 ## Definition
 
@@ -56,32 +55,32 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  pullback-hom : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  pullback-hom = canonical-pullback (precomp f Y) (postcomp A g)
+  type-pullback-hom : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  type-pullback-hom = canonical-pullback (precomp f Y) (postcomp A g)
   
-  cone-pullback-hom : cone (precomp f Y) (postcomp A g) (pullback-hom)
+  cone-pullback-hom : cone (precomp f Y) (postcomp A g) (type-pullback-hom)
   cone-pullback-hom = cone-canonical-pullback (precomp f Y) (postcomp A g)
 
   gap-pullback-hom :
-    {l : Level} {C : UU l} → cone (precomp f Y) (postcomp A g) C → C → pullback-hom
+    {l : Level} {C : UU l} → cone (precomp f Y) (postcomp A g) C → C → type-pullback-hom
   gap-pullback-hom = gap (precomp f Y) (postcomp A g)
 ```
 
 ### The diagonal pullback-hom map
 
 The pullback-hom type comes equipped with a canonical comparison map
-`(X → B) → pullback-hom` which we can interpret as the map that takes
+`(X → B) → type-pullback-hom` which we can interpret as the map that takes
 a diagonal map `j` from the codomain of `f` to the domain of `g` to
 the fibered map `((g ∘ j) , (j ∘ f) , refl-htpy)`.
 
 ```agda
-  diagonal-pullback-hom : (X → B) → pullback-hom
-  diagonal-pullback-hom = gap-pullback-hom (postcomp X g , precomp f B , refl-htpy)
+  pullback-hom : (X → B) → type-pullback-hom
+  pullback-hom = gap-pullback-hom (postcomp X g , precomp f B , refl-htpy)
 ```
 
 ## Properties
 
-### Functoriality of the pullback-hom
+### Functoriality of the pullback-hom type
 
 ```agda
 module _
@@ -93,12 +92,12 @@ module _
 
   map-pullback-hom :
       hom-cospan (precomp f' Y') (postcomp A' g') (precomp f Y) (postcomp A g) →
-      pullback-hom f' g' → pullback-hom f g
+      type-pullback-hom f' g' → type-pullback-hom f g
   map-pullback-hom =
     map-canonical-pullback (precomp f Y) (postcomp A g) (precomp f' Y') (postcomp A' g')
 ```
 
-### The pullback-hom is equivalent to the type of fibered maps between `f` and `g`
+### The pullback-hom type is equivalent to the type of fibered maps between `f` and `g`
 
 ```agda
 module _
@@ -106,6 +105,6 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  equiv-fibered-map-pullback-hom : pullback-hom f g ≃ fibered-map f g
+  equiv-fibered-map-pullback-hom : type-pullback-hom f g ≃ fibered-map f g
   equiv-fibered-map-pullback-hom = equiv-tot λ i → equiv-tot λ h → equiv-funext
 ```
