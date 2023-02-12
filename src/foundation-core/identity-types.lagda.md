@@ -153,7 +153,7 @@ ap-id refl = refl
 
 ap-comp :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k} (g : B → C)
-  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ (ap g (ap f p))
+  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
 ap-comp g f refl = refl
 
 ap-refl :
