@@ -247,7 +247,8 @@ module _
   right-extension-is-set-quotient-binary-reflecting-map-Eq-Rel UqS UqT f =
     comp-reflecting-map-Eq-Rel R
       ( eq-rel-hom-Eq-Rel S T)
-      ( universal-reflecting-map-hom-Eq-Rel S QS qS UqS T QT qT UqT)
+      ( universal-reflecting-map-is-set-quotient-hom-Eq-Rel
+        S QS qS UqS T QT qT UqT)
       ( hom-binary-hom-Eq-Rel R S T f)
 
 --   unique-binary-map-set-quotient :
