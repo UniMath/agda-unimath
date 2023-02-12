@@ -6,6 +6,7 @@ title: Exponents of set quotients
 module foundation.exponents-set-quotients where
 
 open import foundation.binary-relations
+open import foundation.commuting-triangles
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -258,3 +259,65 @@ module _
 ```
 
 ### The extension of the universal map from `hom-Eq-Rel R S` to `A/R → B/S` to the quotient is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A)
+  (QR : Set l3) (qR : reflecting-map-Eq-Rel R (type-Set QR))
+  (UR : {l : Level} → is-set-quotient l R QR qR)
+  {B : UU l4} (S : Eq-Rel l5 B)
+  (QS : Set l6) (qS : reflecting-map-Eq-Rel S (type-Set QS))
+  (US : {l : Level} → is-set-quotient l S QS qS)
+  (QH : Set l7)
+  (qH : reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) (type-Set QH))
+  (UH : {l : Level} → is-set-quotient l (eq-rel-hom-Eq-Rel R S) QH qH)
+  where
+
+  unique-inclusion-is-set-quotient-hom-Eq-Rel :
+    is-contr
+      ( Σ ( type-hom-Set QH (hom-Set QR QS))
+          ( λ μ →
+            ( μ ∘ map-reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) qH) ~
+            ( universal-map-hom-Eq-Rel R QR qR UR S QS qS US)))
+  unique-inclusion-is-set-quotient-hom-Eq-Rel =
+    universal-property-set-quotient-is-set-quotient
+      ( eq-rel-hom-Eq-Rel R S)
+      ( QH)
+      ( qH)
+      ( UH)
+      ( hom-Set QR QS)
+      ( universal-reflecting-map-hom-Eq-Rel R QR qR UR S QS qS US)
+          
+  inclusion-is-set-quotient-hom-Eq-Rel :
+    type-hom-Set QH (hom-Set QR QS)
+  inclusion-is-set-quotient-hom-Eq-Rel =
+    pr1 (center (unique-inclusion-is-set-quotient-hom-Eq-Rel))
+
+  triangle-inclusion-is-set-quotient-hom-Eq-Rel :
+    ( inclusion-is-set-quotient-hom-Eq-Rel ∘
+      map-reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) qH) ~
+    ( universal-map-hom-Eq-Rel R QR qR UR S QS qS US)
+  triangle-inclusion-is-set-quotient-hom-Eq-Rel =
+    pr2 (center (unique-inclusion-is-set-quotient-hom-Eq-Rel))
+
+  is-emb-inclusion-is-set-quotient-hom-Eq-Rel :
+    is-emb inclusion-is-set-quotient-hom-Eq-Rel
+  is-emb-inclusion-is-set-quotient-hom-Eq-Rel =
+    is-emb-map-universal-property-set-quotient-is-set-quotient
+      ( eq-rel-hom-Eq-Rel R S)
+      ( QH)
+      ( qH)
+      ( UH)
+      ( hom-Set QR QS)
+      ( universal-reflecting-map-hom-Eq-Rel R QR qR UR S QS qS US)
+      ( λ g h p a →
+        apply-effectiveness-is-set-quotient S QS qS US
+          ( ( inv-htpy
+              ( coherence-square-map-is-set-quotient R QR qR S QS qS UR US g) ∙h
+              ( ( htpy-eq p ·r map-reflecting-map-Eq-Rel R qR) ∙h
+                ( coherence-square-map-is-set-quotient
+                  R QR qR S QS qS UR US h)))
+            ( a)))
+
+```
