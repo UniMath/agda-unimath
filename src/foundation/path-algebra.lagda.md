@@ -125,11 +125,18 @@ unit-law-assoc-110' refl refl = refl
 
 # Higher Equalties/Higher Paths
 
+#### Idea:
+
+As we iterate identity type (i.e., consider the type of equalties between two equalties),
+the equalties gain more and more structure induced from the lower dimensional boundary equalties.
+
 ## Identity types of identity types (2-paths)
 
-### Idea:
+#### Idea:
 
-Identity types of identity types are types of the form `p ＝ q`, where `p q : x ＝ y` and `x y : A`. Terms of such a type are often called "2-paths" and a twice iterated identity type is often called "a type of 2-paths" and  (in reference to the homotopical interpretation of identity types).
+Identity types of identity types are types of the form `p ＝ q`, where `p q : x ＝ y` and `x y : A`.
+Terms of such a type are often called "2-paths" and a twice iterated identity type is often called "a type of 2-paths"
+(in reference to the homotopical interpretation of identity types).
 
 Since 2-paths are just equalities, they have the usual operations and coherences on paths/equalities.
 In the context of 2-paths, this famliar concatination operation is called vertical concatination
@@ -139,7 +146,7 @@ the boundary 1-paths (these are `p` and `q` in the example above).
 Since concatination of 1-paths is a functor, it has an induced action on paths.
 We call this operation horizontal concatination (`horizontal-concat-Id²` in the library).
 It comes with the standard coherences of an action on paths function,
-as well as coherences induced by those on boundary 1-paths.
+as well as coherences induced by coherences on the boundary 1-paths.
 
 --------------------------------------------------------------------------------
 
@@ -156,7 +163,7 @@ horizontal-concat-Id² :
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
 ```
 
-### Properties of vertical and horizontal concatenation in identity types of identity types
+### Properties of vertical and horizontal concatenation in identity types of identity types (a type of 2-paths)
 
 #### both operations are binary equivalences
 
@@ -374,12 +381,12 @@ interchange-y-z-concat-Id³ :
 interchange-y-z-concat-Id³ refl refl refl refl = inv right-unit
 ```
 
-## Four-times iterated identity types (4-paths)
+## Quadruple identity types (4-paths)
 
 ### Concatination of four paths.
 
 The pattern for concatination of 1, 2, and 3-paths continues.
-There are four ways to concatenatie in quadruple identity types.
+There are four ways to concatenate in quadruple identity types.
 We name the three non-standard concatenations in quadruple identity types
 i-, j-, and k-concatenation, after the standard names for the quaternions i, j, and k.
 
