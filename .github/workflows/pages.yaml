@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  AGDAHTMLFLAGS: --html --html-highlight=auto --html-dir=docs --only-scope-checking --css book/Agda.css
+  AGDAHTMLFLAGS: --html --html-highlight=auto --html-dir=docs --only-scope-checking --css=Agda.css
   AGDA: agda
 
 jobs:
