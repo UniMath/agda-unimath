@@ -359,18 +359,13 @@ module _
         is-injective-is-emb
           ( is-emb-inclusion-im (map-reflecting-map-Eq-Rel R q))
           ( map-equiv
-            ( convert-eq-values
-              ( triangle-unit-im (map-reflecting-map-Eq-Rel R q))
-              ( x)
-              ( y))
+            ( convert-eq-values (triangle-unit-im (map-reflecting-map-Eq-Rel R q)) x y)
             ( reflects-map-reflecting-map-Eq-Rel R q r))
       β : type-Set B → im (map-reflecting-map-Eq-Rel R q)
       β = map-inv-is-equiv
             ( Q ( pair
                   ( im (map-reflecting-map-Eq-Rel R q))
-                  ( is-set-im
-                    ( map-reflecting-map-Eq-Rel R q)
-                    ( is-set-type-Set B))))
+                  ( is-set-im (map-reflecting-map-Eq-Rel R q) (is-set-type-Set B))))
             ( pair (map-unit-im (map-reflecting-map-Eq-Rel R q)) α)
       γ : (β ∘ (map-reflecting-map-Eq-Rel R q)) ~
           map-unit-im (map-reflecting-map-Eq-Rel R q)
@@ -379,9 +374,7 @@ module _
               ( issec-map-inv-is-equiv
                 ( Q ( pair
                       ( im (map-reflecting-map-Eq-Rel R q))
-                      ( is-set-im
-                        ( map-reflecting-map-Eq-Rel R q)
-                        ( is-set-type-Set B))))
+                      ( is-set-im (map-reflecting-map-Eq-Rel R q) (is-set-type-Set B))))
                 ( pair (map-unit-im (map-reflecting-map-Eq-Rel R q)) α)))
       δ : ( ( inclusion-im (map-reflecting-map-Eq-Rel R q) ∘ β) ∘
             ( map-reflecting-map-Eq-Rel R q)) ~
@@ -415,8 +408,7 @@ module _
       P : type-Set B → Prop l2
       P = map-inv-is-equiv (Q (Prop-Set l2)) α
       compute-P :
-        (a : A) →
-        sim-Eq-Rel R x a ≃ type-Prop (P (map-reflecting-map-Eq-Rel R q a))
+        (a : A) → sim-Eq-Rel R x a ≃ type-Prop (P (map-reflecting-map-Eq-Rel R q a))
       compute-P a =
         equiv-eq
           ( ap pr1
@@ -443,31 +435,12 @@ module _
               ( pr2 v)))
       is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
       is-contr-total-P = pair center-total-P contraction-total-P
-      β : (b : type-Set B) →
-          map-reflecting-map-Eq-Rel R q x ＝ b → type-Prop (P b)
+      β : (b : type-Set B) → map-reflecting-map-Eq-Rel R q x ＝ b → type-Prop (P b)
       β .(map-reflecting-map-Eq-Rel R q x) refl = point-P
       γ : (b : type-Set B) → is-equiv (β b)
       γ = fundamental-theorem-id is-contr-total-P β
-      δ : (b : type-Set B) →
-          (map-reflecting-map-Eq-Rel R q x ＝ b) ≃ type-Prop (P b)
+      δ : (b : type-Set B) → (map-reflecting-map-Eq-Rel R q x ＝ b) ≃ type-Prop (P b)
       δ b = pair (β b) (γ b)
-
-  apply-effectiveness-is-set-quotient :
-    (q : reflecting-map-Eq-Rel R (type-Set B)) →
-    ({l : Level} → is-set-quotient l R B q) →
-    {x y : A} →
-    map-reflecting-map-Eq-Rel R q x ＝ map-reflecting-map-Eq-Rel R q y →
-    sim-Eq-Rel R x y
-  apply-effectiveness-is-set-quotient q H {x} {y} =
-    map-equiv (is-effective-is-set-quotient q H x y)
-
-  apply-effectiveness-is-set-quotient' :
-    (q : reflecting-map-Eq-Rel R (type-Set B)) →
-    ({l : Level} → is-set-quotient l R B q) →
-    {x y : A} → sim-Eq-Rel R x y →
-    map-reflecting-map-Eq-Rel R q x ＝ map-reflecting-map-Eq-Rel R q y
-  apply-effectiveness-is-set-quotient' q H {x} {y} =
-    map-inv-equiv (is-effective-is-set-quotient q H x y)
 
   abstract
     is-surjective-and-effective-is-set-quotient :
@@ -554,8 +527,7 @@ module _
 
   abstract
     is-set-quotient-is-surjective-and-effective :
-      {l : Level}
-      (E : is-surjective-and-effective R (map-reflecting-map-Eq-Rel R q)) →
+      {l : Level} (E : is-surjective-and-effective R (map-reflecting-map-Eq-Rel R q)) →
       is-set-quotient l R B q
     is-set-quotient-is-surjective-and-effective E X =
       is-equiv-is-contr-map
@@ -624,82 +596,4 @@ module _
     ( map-reflecting-map-Eq-Rel R g)
   triangle-universal-property-equivalence-class C g =
     pr2 (center (universal-property-equivalence-class C g))
-```
-
-### The induction property of set quotients
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (Q : Set l3)
-  (q : reflecting-map-Eq-Rel R (type-Set Q))
-  (U : {l : Level} → is-set-quotient l R Q q)
-  where
-
-  ind-is-set-quotient :
-    {l : Level} (P : type-Set Q → Prop l) →
-    ((a : A) → type-Prop (P (map-reflecting-map-Eq-Rel R q a))) →
-    ((x : type-Set Q) → type-Prop (P x))
-  ind-is-set-quotient =
-    apply-dependent-universal-property-surj-is-surjective
-      ( map-reflecting-map-Eq-Rel R q)
-      ( is-surjective-is-set-quotient R Q q U)
-```
-
-### Injectiveness of maps defined by the universal property of the set quotient
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (Q : Set l3)
-  (q : reflecting-map-Eq-Rel R (type-Set Q))
-  (U : {l : Level} → is-set-quotient l R Q q)
-  where
-
-  is-injective-map-universal-property-set-quotient-is-set-quotient :
-    {l4 : Level} (B : Set l4) (f : reflecting-map-Eq-Rel R (type-Set B))
-    ( H : (x y : A) →
-          map-reflecting-map-Eq-Rel R f x ＝ map-reflecting-map-Eq-Rel R f y →
-          sim-Eq-Rel R x y) →
-    is-injective
-      ( map-universal-property-set-quotient-is-set-quotient R Q q U B f)
-  is-injective-map-universal-property-set-quotient-is-set-quotient
-    B f H {x} {y} =
-    ind-is-set-quotient R Q q U
-      ( λ u →
-        function-Prop
-          ( map-universal-property-set-quotient-is-set-quotient R Q q U B f u ＝
-            map-universal-property-set-quotient-is-set-quotient R Q q U B f y)
-          ( Id-Prop Q u y))
-      ( λ a →
-        ( ind-is-set-quotient R Q q U
-          ( λ v →
-            function-Prop
-              ( ( map-reflecting-map-Eq-Rel R f a) ＝
-                ( map-universal-property-set-quotient-is-set-quotient
-                  R Q q U B f v))
-              ( Id-Prop Q (map-reflecting-map-Eq-Rel R q a) v))
-          ( λ b p →
-            reflects-map-reflecting-map-Eq-Rel R q
-              ( H a b
-                ( ( p) ∙
-                  ( triangle-universal-property-set-quotient-is-set-quotient
-                    R Q q U B f b))))
-          ( y)) ∘
-        ( concat
-          ( inv
-            ( triangle-universal-property-set-quotient-is-set-quotient
-              R Q q U B f a))
-          ( map-universal-property-set-quotient-is-set-quotient R Q q U B f y)))
-      ( x)
-
-  is-emb-map-universal-property-set-quotient-is-set-quotient :
-    {l4 : Level} (B : Set l4) (f : reflecting-map-Eq-Rel R (type-Set B))
-    ( H : (x y : A) →
-          map-reflecting-map-Eq-Rel R f x ＝ map-reflecting-map-Eq-Rel R f y →
-          sim-Eq-Rel R x y) →
-    is-emb
-      ( map-universal-property-set-quotient-is-set-quotient R Q q U B f)
-  is-emb-map-universal-property-set-quotient-is-set-quotient B f H =
-    is-emb-is-injective
-      ( is-set-type-Set B)
-      ( is-injective-map-universal-property-set-quotient-is-set-quotient B f H)
 ```

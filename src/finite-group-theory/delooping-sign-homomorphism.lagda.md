@@ -383,8 +383,8 @@ module _
         ( is-set-quotient-equivalence-class
           ( R (succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
-        ( ( quotient-loop-Fin n p) ,
-          ( λ {x} {y} →
+        ( quotient-loop-Fin n p)
+        ( λ {x} {y} →
             preserves-R-invertible-action-D-equiv
               ( succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
@@ -394,7 +394,7 @@ module _
                 ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                 ( p))
               ( x)
-              ( y)))
+              ( y))
 
   abstract
     eq-quotient-delooping-sign-loop-equiv-is-set-quotient : (n : ℕ) →
