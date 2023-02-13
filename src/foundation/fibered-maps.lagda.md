@@ -7,6 +7,7 @@ module foundation.fibered-maps where
 
 open import foundation-core.commuting-squares
 open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-types
 open import foundation-core.small-types
 open import foundation-core.truncation-levels
 open import foundation-core.truncated-types
@@ -15,12 +16,14 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
-open import foundation-core.homotopies
+open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.slice
+open import foundation.structure-identity-principle
 ```
 
 ## Idea
@@ -64,9 +67,82 @@ module _
   pr1 (cone-fibered-map ihH) = f
   pr1 (pr2 (cone-fibered-map (i , h , H))) = h
   pr2 (pr2 (cone-fibered-map (i , h , H))) = H
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y)
+  where
+
+  map-total-map-over : (i : X → Y) → map-over f g i → A → B
+  map-total-map-over i = pr1
+
+  is-map-over-map-total-map-over :
+    (i : X → Y) (m : map-over f g i) → is-map-over f g i (map-total-map-over i m)
+  is-map-over-map-total-map-over i = pr2
+
+  map-over-fibered-map : (m : fibered-map f g) → map-over f g (pr1 m)
+  map-over-fibered-map = pr2
+
+  map-base-fibered-map : (m : fibered-map f g) → X → Y
+  map-base-fibered-map = pr1
+
+  map-total-fibered-map : (m : fibered-map f g) → A → B
+  map-total-fibered-map = pr1 ∘ pr2
+
+  is-map-over-map-total-fibered-map :
+    (m : fibered-map f g) → is-map-over f g (map-base-fibered-map m) (map-total-fibered-map m)
+  is-map-over-map-total-fibered-map = pr2 ∘ pr2
 ```
 
 ## Properties
+
+### Identifications of maps over
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y) (i : X → Y)
+  where
+
+  coherence-htpy-map-over :
+    (m m' : map-over f g i) → map-total-map-over f g i m ~ map-total-map-over f g i m' → UU (l1 ⊔ l4)
+  coherence-htpy-map-over m m' K =
+    (is-map-over-map-total-map-over f g i m ∙h (g ·l K)) ~ is-map-over-map-total-map-over f g i m'
+  
+  htpy-map-over : (m m' : map-over f g i) → UU (l1 ⊔ l2 ⊔ l4)
+  htpy-map-over m m' =
+    Σ ( map-total-map-over f g i m ~ map-total-map-over f g i m')
+      ( coherence-htpy-map-over m m')
+  
+  refl-htpy-map-over : (m : map-over f g i) → htpy-map-over m m
+  pr1 (refl-htpy-map-over m) = refl-htpy
+  pr2 (refl-htpy-map-over m) = right-unit-htpy
+
+  htpy-eq-map-over : (m m' : map-over f g i) → m ＝ m' → htpy-map-over m m'
+  htpy-eq-map-over m .m refl = refl-htpy-map-over m
+
+  is-contr-total-htpy-map-over : 
+    (m : map-over f g i) → is-contr (Σ (map-over f g i) (htpy-map-over m))
+  is-contr-total-htpy-map-over m =
+    is-contr-total-Eq-structure
+      (λ g G → coherence-htpy-map-over m (g , G))
+      (is-contr-total-htpy (map-total-map-over f g i m))
+      (map-total-map-over f g i m , refl-htpy)
+      (is-contr-total-htpy (is-map-over-map-total-map-over f g i m ∙h refl-htpy))
+
+  is-equiv-htpy-eq-map-over :
+    (m m' : map-over f g i) → is-equiv (htpy-eq-map-over m m')
+  is-equiv-htpy-eq-map-over m =
+    fundamental-theorem-id (is-contr-total-htpy-map-over m) (htpy-eq-map-over m)
+  
+  extensionality-map-over :
+    (m m' : map-over f g i) → (m ＝ m') ≃ (htpy-map-over m m')
+  pr1 (extensionality-map-over m m') = htpy-eq-map-over m m'
+  pr2 (extensionality-map-over m m') = is-equiv-htpy-eq-map-over m m'
+
+  eq-htpy-map-over : (m m' : map-over f g i) → htpy-map-over m m' → m ＝ m'
+  eq-htpy-map-over m m' = map-inv-equiv (extensionality-map-over m m')
+```
 
 ### Fibered maps and fiberwise maps over are equivalent notions
 
