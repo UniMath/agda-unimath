@@ -1,4 +1,4 @@
-# 
+# Maximal ideals in rings
 
 ```agda
 module ring-theory.maximal-ideals-rings where
