@@ -136,13 +136,3 @@ commutativity-inv-eq-equiv A B f =
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))
 ```
-
-### eq-equiv on id is refl
-
-```agda
-refl-eq-equiv-id :
-  {l1 : Level} {A : UU l1} →
-  (eq-equiv A A (id-equiv {A = A})) ＝ refl
-refl-eq-equiv-id =
-  (isretr-map-inv-equiv equiv-univalence) refl   
-```
