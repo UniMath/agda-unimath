@@ -225,7 +225,9 @@ open import foundation.bands
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences-unordered-pairs-of-types
 open import foundation.binary-equivalences
+open import foundation.binary-homotopies
 open import foundation.binary-operations-unordered-pairs-of-types
+open import foundation.binary-reflecting-maps-equivalence-relations
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans

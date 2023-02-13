@@ -19,7 +19,9 @@ open import foundation.bands public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
+open import foundation.binary-homotopies public
 open import foundation.binary-operations-unordered-pairs-of-types public
+open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
 open import foundation.binary-transport public
 open import foundation.boolean-reflection public
