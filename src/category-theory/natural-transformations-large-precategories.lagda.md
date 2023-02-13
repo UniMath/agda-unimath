@@ -1,4 +1,4 @@
-{{#title  Natural transformations between functors between large precategories}}
+#  Natural transformations between functors between large precategories
 
 ```agda
 module category-theory.natural-transformations-large-precategories where

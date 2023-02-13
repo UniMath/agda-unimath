@@ -1,4 +1,4 @@
-{{#title  Types equipped with endomorphisms}}
+#  Types equipped with endomorphisms
 
 ```agda
 module structured-types.types-equipped-with-endomorphisms where

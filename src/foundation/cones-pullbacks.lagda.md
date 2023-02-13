@@ -1,4 +1,4 @@
-{{#title  Cones on pullback diagrams}}
+#  Cones on pullback diagrams
 
 ```agda
 module foundation.cones-pullbacks where

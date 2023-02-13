@@ -1,4 +1,4 @@
-{{#title  Lawvere's fixed point theorem}}
+#  Lawvere's fixed point theorem
 
 ```agda
 module foundation.lawveres-fixed-point-theorem where

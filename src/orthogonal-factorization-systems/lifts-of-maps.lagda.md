@@ -1,4 +1,4 @@
-{{#title  Lifts of maps}}
+#  Lifts of maps
 
 ```agda
 module orthogonal-factorization-systems.lifts-of-maps where

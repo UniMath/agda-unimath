@@ -1,4 +1,4 @@
-{{#title  Mere equivalences of types equipped with endomorphisms}}
+#  Mere equivalences of types equipped with endomorphisms
 
 ```agda
 module structured-types.mere-equivalences-types-equipped-with-endomorphisms where

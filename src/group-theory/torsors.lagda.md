@@ -1,4 +1,4 @@
-{{#title  Torsors of abstract groups}}
+#  Torsors of abstract groups
 
 ```agda
 module group-theory.torsors where

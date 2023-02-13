@@ -1,4 +1,4 @@
-{{#title  Homomorphisms of group actions}}
+#  Homomorphisms of group actions
 
 ```agda
 module group-theory.homomorphisms-group-actions where

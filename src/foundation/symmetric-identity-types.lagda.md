@@ -1,4 +1,4 @@
-{{#title  The symmetric identity types}}
+#  The symmetric identity types
 
 ```agda
 module foundation.symmetric-identity-types where

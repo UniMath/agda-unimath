@@ -1,4 +1,4 @@
-{{#title  The precategory of finite species}}
+#  The precategory of finite species
 
 ```agda
 module univalent-combinatorics.precategory-of-finite-species where

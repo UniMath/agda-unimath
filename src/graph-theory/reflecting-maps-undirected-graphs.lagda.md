@@ -1,4 +1,4 @@
-{{#title  Reflecting maps of undirected graphs}}
+#  Reflecting maps of undirected graphs
 
 ```agda
 module graph-theory.reflecting-maps-undirected-graphs where

@@ -1,4 +1,4 @@
-{{#title  Fibered involutions}}
+#  Fibered involutions
 
 ```agda
 module foundation.fibered-involutions where

@@ -1,4 +1,4 @@
-{{#title  Functoriality of propositional truncations}}
+#  Functoriality of propositional truncations
 
 ```agda
 module foundation.functoriality-propositional-truncation where

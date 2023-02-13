@@ -1,4 +1,4 @@
-{{#title  Sums of natural numbers}}
+#  Sums of natural numbers
 
 ```agda
 module elementary-number-theory.sums-of-natural-numbers where

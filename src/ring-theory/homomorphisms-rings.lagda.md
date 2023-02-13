@@ -1,4 +1,4 @@
-{{#title  Ring homomorphisms}}
+#  Ring homomorphisms
 
 ```agda
 module ring-theory.homomorphisms-rings where

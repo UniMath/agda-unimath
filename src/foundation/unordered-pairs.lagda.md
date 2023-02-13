@@ -1,4 +1,4 @@
-{{#title  Unordered pairs of elements in a type}}
+#  Unordered pairs of elements in a type
 
 ```agda
 module foundation.unordered-pairs where

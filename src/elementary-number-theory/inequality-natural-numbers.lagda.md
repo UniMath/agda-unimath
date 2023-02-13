@@ -1,4 +1,4 @@
-{{#title  Inequality of natural numbers}}
+#  Inequality of natural numbers
 
 ```agda
 module elementary-number-theory.inequality-natural-numbers where

@@ -1,4 +1,4 @@
-{{#title  Terminal object of a precategory}}
+#  Terminal object of a precategory
 
 ```agda
 module category-theory.terminal-objects-precategories where

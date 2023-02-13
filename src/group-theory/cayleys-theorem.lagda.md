@@ -1,4 +1,4 @@
-{{#title  Cayley's theorem}}
+#  Cayley's theorem
 
 ```agda
 module group-theory.cayleys-theorem where

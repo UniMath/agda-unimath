@@ -1,4 +1,4 @@
-{{#title  Trails in directed graphs}}
+#  Trails in directed graphs
 
 ```agda
 module graph-theory.trails-directed-graphs where

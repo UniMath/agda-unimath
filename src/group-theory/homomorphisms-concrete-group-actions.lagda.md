@@ -1,4 +1,4 @@
-{{#title  Morphisms of concrete group actions}}
+#  Morphisms of concrete group actions
 
 ```agda
 module group-theory.homomorphisms-concrete-group-actions where

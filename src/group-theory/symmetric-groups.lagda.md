@@ -1,4 +1,4 @@
-{{#title  Symmetric groups}}
+#  Symmetric groups
 
 ```agda
 module group-theory.symmetric-groups where

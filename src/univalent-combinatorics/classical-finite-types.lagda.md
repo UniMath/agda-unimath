@@ -1,4 +1,4 @@
-{{#title  The classical definition of the standard finite types}}
+#  The classical definition of the standard finite types
 
 ```agda
 module univalent-combinatorics.classical-finite-types where

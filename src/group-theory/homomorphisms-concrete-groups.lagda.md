@@ -1,4 +1,4 @@
-{{#title  Homomorphisms of concrete groups}}
+#  Homomorphisms of concrete groups
 
 ```agda
 module group-theory.homomorphisms-concrete-groups where

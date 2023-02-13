@@ -1,4 +1,4 @@
-{{#title  Morphisms of cospans}}
+#  Morphisms of cospans
 
 ```agda
 module foundation.morphisms-cospans where

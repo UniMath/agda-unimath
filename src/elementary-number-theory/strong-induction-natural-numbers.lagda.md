@@ -1,4 +1,4 @@
-{{#title  The strong induction principle for the natural numbers}}
+#  The strong induction principle for the natural numbers
 
 ```agda
 module elementary-number-theory.strong-induction-natural-numbers where

@@ -1,4 +1,4 @@
-{{#title  Vertex covers}}
+#  Vertex covers
 
 ```agda
 module graph-theory.vertex-covers where

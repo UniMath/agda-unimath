@@ -1,4 +1,4 @@
-{{#title  The universal property of booleans}}
+#  The universal property of booleans
 
 ```agda
 module foundation.universal-property-booleans where

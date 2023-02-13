@@ -1,4 +1,4 @@
-{{#title  Sequences}}
+#  Sequences
 
 ```agda
 module foundation.sequences where

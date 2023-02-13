@@ -1,4 +1,4 @@
-{{#title  The principle of omniscience}}
+#  The principle of omniscience
 
 ```agda
 module foundation.principle-of-omniscience where

@@ -1,4 +1,4 @@
-{{#title  Stirling numbers of the second kind}}
+#  Stirling numbers of the second kind
 
 ```agda
 module elementary-number-theory.stirling-numbers-of-the-second-kind where

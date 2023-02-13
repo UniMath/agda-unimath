@@ -1,4 +1,4 @@
-{{#title  Double powersets}}
+#  Double powersets
 
 ```agda
 module foundation.double-powersets where

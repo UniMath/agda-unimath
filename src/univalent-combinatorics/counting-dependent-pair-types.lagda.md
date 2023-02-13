@@ -1,4 +1,4 @@
-{{#title  Counting the elements of dependent pair types}}
+#  Counting the elements of dependent pair types
 
 ```agda
 module univalent-combinatorics.counting-dependent-pair-types where

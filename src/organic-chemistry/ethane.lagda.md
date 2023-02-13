@@ -1,4 +1,4 @@
-{{#title  Ethane}}
+#  Ethane
 
 ```agda
 module organic-chemistry.ethane where

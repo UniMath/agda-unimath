@@ -1,4 +1,4 @@
-{{#title  Decidability of dependent pair types}}
+#  Decidability of dependent pair types
 
 ```agda
 module foundation.decidable-dependent-pair-types where

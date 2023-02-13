@@ -1,4 +1,4 @@
-{{#title  Spectra}}
+#  Spectra
 
 ```agda
 module synthetic-homotopy-theory.spectra where

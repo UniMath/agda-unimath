@@ -1,4 +1,4 @@
-{{#title  H-spaces}}
+#  H-spaces
 
 ```agda
 module structured-types.h-spaces where

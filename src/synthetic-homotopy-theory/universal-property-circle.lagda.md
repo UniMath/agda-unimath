@@ -1,4 +1,4 @@
-{{#title  The universal property of the circle}}
+#  The universal property of the circle
 
 ```agda
 module synthetic-homotopy-theory.universal-property-circle where

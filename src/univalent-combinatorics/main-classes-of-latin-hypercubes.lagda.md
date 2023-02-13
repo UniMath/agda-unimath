@@ -1,4 +1,4 @@
-{{#title  The groupoid of main classes of Latin hypercubes}}
+#  The groupoid of main classes of Latin hypercubes
 
 ```agda
 module univalent-combinatorics.main-classes-of-latin-hypercubes where

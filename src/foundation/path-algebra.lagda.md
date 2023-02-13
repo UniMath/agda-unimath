@@ -1,4 +1,4 @@
-{{#title  Path algebra}}
+#  Path algebra
 
 ```agda
 module foundation.path-algebra where

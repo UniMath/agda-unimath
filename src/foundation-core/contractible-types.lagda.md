@@ -1,4 +1,4 @@
-{{#title  Contractible types}}
+#  Contractible types
 
 ```agda
 module foundation-core.contractible-types where

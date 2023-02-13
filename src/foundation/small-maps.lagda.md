@@ -1,4 +1,4 @@
-{{#title  Small maps}}
+#  Small maps
 
 ```agda
 module foundation.small-maps where

@@ -1,7 +1,5 @@
 
-{{#title Library coding style conventions}}
-
-# Goals
+# Library coding style conventions
 
 * This style guide is here to improve the readability of the code. If an item
   in this guide causes suboptimal readability of the code if applied, please

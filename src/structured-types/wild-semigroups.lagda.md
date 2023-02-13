@@ -1,4 +1,4 @@
-{{#title  Wild semigroups}}
+#  Wild semigroups
 
 ```agda
 module structured-types.wild-semigroups where

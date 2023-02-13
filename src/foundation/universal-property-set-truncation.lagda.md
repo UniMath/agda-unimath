@@ -1,4 +1,4 @@
-{{#title  The universal property of set truncations}}
+#  The universal property of set truncations
 
 ```agda
 module foundation.universal-property-set-truncation where

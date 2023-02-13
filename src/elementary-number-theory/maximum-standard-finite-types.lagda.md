@@ -1,4 +1,4 @@
-{{#title  Maximum on the standard finite types}}
+#  Maximum on the standard finite types
 
 ```agda
 module elementary-number-theory.maximum-standard-finite-types where

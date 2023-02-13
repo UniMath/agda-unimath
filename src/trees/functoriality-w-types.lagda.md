@@ -1,4 +1,4 @@
-{{#title  Functoriality of W-types}}
+#  Functoriality of W-types
 
 ```agda
 module trees.functoriality-w-types where

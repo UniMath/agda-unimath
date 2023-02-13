@@ -1,4 +1,4 @@
-{{#title  Symmetric H-spaces}}
+#  Symmetric H-spaces
 
 ```agda
 module structured-types.symmetric-h-spaces where

@@ -1,4 +1,4 @@
-{{#title  Finite species}}
+#  Finite species
 
 ```agda
 module univalent-combinatorics.finite-species where

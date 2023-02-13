@@ -1,4 +1,4 @@
-{{#title  Involutions}}
+#  Involutions
 
 ```agda
 module foundation-core.involutions where

@@ -1,4 +1,4 @@
-{{#title  Cantor's diagonal argument}}
+#  Cantor's diagonal argument
 
 ```agda
 module foundation.cantors-diagonal-argument where

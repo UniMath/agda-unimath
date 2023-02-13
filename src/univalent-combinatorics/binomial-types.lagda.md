@@ -1,4 +1,4 @@
-{{#title  The binomial types}}
+#  The binomial types
 
 ```agda
 module univalent-combinatorics.binomial-types where

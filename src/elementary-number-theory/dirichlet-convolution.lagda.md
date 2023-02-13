@@ -1,4 +1,4 @@
-{{#title  Dirichlet convolution}}
+#  Dirichlet convolution
 
 ```agda
 module elementary-number-theory.dirichlet-convolution where

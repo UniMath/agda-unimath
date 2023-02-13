@@ -1,4 +1,4 @@
-{{#title  The W-type of natural numbers}}
+#  The W-type of natural numbers
 
 ```agda
 module trees.w-type-of-natural-numbers where

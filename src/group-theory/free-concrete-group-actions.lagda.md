@@ -1,4 +1,4 @@
-{{#title  Free concrete group actions}}
+#  Free concrete group actions
 
 ```agda
 module group-theory.free-concrete-group-actions where

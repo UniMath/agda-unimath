@@ -1,4 +1,4 @@
-{{#title  Polygons}}
+#  Polygons
 
 ```agda
 module graph-theory.polygons where

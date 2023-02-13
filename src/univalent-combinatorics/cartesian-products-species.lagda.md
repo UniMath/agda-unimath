@@ -1,4 +1,4 @@
-{{#title  Cartesian products of species}}
+#  Cartesian products of species
 
 ```agda
 module univalent-combinatorics.cartesian-products-species where

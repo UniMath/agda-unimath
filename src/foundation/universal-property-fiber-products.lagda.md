@@ -1,4 +1,4 @@
-{{#title  The universal property of fiber products}}
+#  The universal property of fiber products
 
 ```agda
 module foundation.universal-property-fiber-products where

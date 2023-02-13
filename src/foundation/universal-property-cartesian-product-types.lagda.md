@@ -1,4 +1,4 @@
-{{#title  The universal propert of cartesian product types}}
+#  The universal propert of cartesian product types
 
 ```agda
 module foundation.universal-property-cartesian-product-types where

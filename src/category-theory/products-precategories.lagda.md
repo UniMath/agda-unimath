@@ -1,4 +1,4 @@
-{{#title  Products in precategories}}
+#  Products in precategories
 
 ```agda
 module category-theory.products-precategories where

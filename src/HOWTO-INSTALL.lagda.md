@@ -1,4 +1,4 @@
-{{#title INSTALL}}
+# INSTALL
 
 Before you can use the `agda-unimath` library, you should have Agda installed on your machine and an editor that is compatible with Agda. We recommend `Emacs` and `VSCode`.
 

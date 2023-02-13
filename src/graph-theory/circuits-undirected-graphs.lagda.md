@@ -1,4 +1,4 @@
-{{#title  Circuits in undirected graphs}}
+#  Circuits in undirected graphs
 
 ```agda
 module graph-theory.circuits-undirected-graphs where

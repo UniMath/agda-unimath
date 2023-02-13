@@ -1,4 +1,4 @@
-{{#title  Apartness relations}}
+#  Apartness relations
 
 ```agda
 module foundation.apartness-relations where

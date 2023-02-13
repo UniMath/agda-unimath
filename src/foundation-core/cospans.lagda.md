@@ -1,4 +1,4 @@
-{{#title  Cospans}}
+#  Cospans
 
 ```agda
 {-# OPTIONS --safe #-}

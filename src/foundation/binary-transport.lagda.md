@@ -1,4 +1,4 @@
-{{#title  Binary transport}}
+#  Binary transport
 
 ```agda
 module foundation.binary-transport where

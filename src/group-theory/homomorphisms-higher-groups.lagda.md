@@ -1,4 +1,4 @@
-{{#title  Homomorphisms of higher groups}}
+#  Homomorphisms of higher groups
 
 ```agda
 module group-theory.homomorphisms-higher-groups where

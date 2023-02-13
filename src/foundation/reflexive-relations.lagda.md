@@ -1,4 +1,4 @@
-{{#title  Reflexive relations}}
+#  Reflexive relations
 
 ```agda
 module foundation.reflexive-relations where

@@ -1,4 +1,4 @@
-{{#title  Pointing of species}}
+#  Pointing of species
 
 ```agda
 module univalent-combinatorics.pointing-species where

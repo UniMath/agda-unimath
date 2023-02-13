@@ -1,4 +1,4 @@
-{{#title  Transitive concrete group actions}}
+#  Transitive concrete group actions
 
 ```agda
 module group-theory.transitive-concrete-group-actions where

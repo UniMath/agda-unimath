@@ -1,4 +1,4 @@
-{{#title  Multivariable relations}}
+#  Multivariable relations
 
 ```agda
 module foundation.multivariable-relations where

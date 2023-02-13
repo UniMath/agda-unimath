@@ -1,4 +1,4 @@
-{{#title  Homomorphisms of commutative rings}}
+#  Homomorphisms of commutative rings
 
 ```agda
 module commutative-algebra.homomorphisms-commutative-rings where

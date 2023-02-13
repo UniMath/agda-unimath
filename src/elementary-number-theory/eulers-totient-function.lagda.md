@@ -1,4 +1,4 @@
-{{#title  Euler's totient function}}
+#  Euler's totient function
 
 ```agda
 module elementary-number-theory.eulers-totient-function where

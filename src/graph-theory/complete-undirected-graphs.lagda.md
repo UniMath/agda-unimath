@@ -1,4 +1,4 @@
-{{#title  Complete undirected graphs}}
+#  Complete undirected graphs
 
 ```agda
 module graph-theory.complete-undirected-graphs where

@@ -1,4 +1,4 @@
-{{#title  Petri-nets}}
+#  Petri-nets
 
 ```agda
 module univalent-combinatorics.petri-nets where

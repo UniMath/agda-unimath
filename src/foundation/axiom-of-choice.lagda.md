@@ -1,4 +1,4 @@
-{{#title  The axiom of choice}}
+#  The axiom of choice
 
 ```agda
 module foundation.axiom-of-choice where

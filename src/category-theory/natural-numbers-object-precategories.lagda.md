@@ -1,4 +1,4 @@
-{{#title  Natural numbers object in a precategory}}
+#  Natural numbers object in a precategory
 
 ```agda
 module category-theory.natural-numbers-object-precategories where

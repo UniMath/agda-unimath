@@ -1,4 +1,4 @@
-{{#title  Locally small types}}
+#  Locally small types
 
 ```agda
 module foundation.locally-small-types where

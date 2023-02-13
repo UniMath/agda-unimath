@@ -1,4 +1,4 @@
-{{#title  Furstenberg groups}}
+#  Furstenberg groups
 
 ```agda
 module group-theory.furstenberg-groups where

@@ -1,4 +1,4 @@
-{{#title  Alkanes}}
+#  Alkanes
 
 ```agda
 module organic-chemistry.alkanes where

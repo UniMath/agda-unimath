@@ -1,4 +1,4 @@
-{{#title  Homomorphisms of semigroups}}
+#  Homomorphisms of semigroups
 
 ```agda
 module group-theory.homomorphisms-semigroups where

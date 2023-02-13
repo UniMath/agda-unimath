@@ -1,4 +1,4 @@
-{{#title  Symmetric higher groups}}
+#  Symmetric higher groups
 
 ```agda
 module group-theory.symmetric-higher-groups where

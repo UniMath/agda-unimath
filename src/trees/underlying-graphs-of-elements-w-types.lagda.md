@@ -1,4 +1,4 @@
-{{#title  The underlying graphs of elements of W-types}}
+#  The underlying graphs of elements of W-types
 
 ```agda
 module trees.underlying-graphs-of-elements-w-types where

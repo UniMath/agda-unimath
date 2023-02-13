@@ -1,4 +1,4 @@
-{{#title  Sections}}
+#  Sections
 
 ```agda
 module foundation.sections where

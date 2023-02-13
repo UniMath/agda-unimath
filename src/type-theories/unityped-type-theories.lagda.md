@@ -1,4 +1,4 @@
-{{#title  Unityped type theories}}
+#  Unityped type theories
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}

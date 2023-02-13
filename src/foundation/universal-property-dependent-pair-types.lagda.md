@@ -1,4 +1,4 @@
-{{#title  The universal property of dependent pair types}}
+#  The universal property of dependent pair types
 
 ```agda
 module foundation.universal-property-dependent-pair-types where

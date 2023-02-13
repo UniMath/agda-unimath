@@ -1,4 +1,4 @@
-{{#title  Finite multiplication in magmas}}
+#  Finite multiplication in magmas
 
 ```agda
 module structured-types.finite-multiplication-magmas where

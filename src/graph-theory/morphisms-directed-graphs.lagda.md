@@ -1,4 +1,4 @@
-{{#title  Morphisms of directed graphs}}
+#  Morphisms of directed graphs
 
 ```agda
 module graph-theory.morphisms-directed-graphs where

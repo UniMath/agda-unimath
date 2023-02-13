@@ -1,4 +1,4 @@
-{{#title  The elementhood relation on W-types}}
+#  The elementhood relation on W-types
 
 ```agda
 module trees.elementhood-relation-w-types where

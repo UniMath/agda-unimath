@@ -1,4 +1,4 @@
-{{#title  Trees}}
+#  Trees
 
 ```agda
 module trees where

@@ -1,4 +1,4 @@
-{{#title  Large precategories}}
+#  Large precategories
 
 ```agda
 module category-theory.large-precategories where

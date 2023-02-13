@@ -1,4 +1,4 @@
-{{#title  Logical equivalences}}
+#  Logical equivalences
 
 ```agda
 module foundation-core.logical-equivalences where

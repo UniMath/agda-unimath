@@ -1,4 +1,4 @@
-{{#title  Simpson's delooping of the sign homomorphism}}
+#  Simpson's delooping of the sign homomorphism
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

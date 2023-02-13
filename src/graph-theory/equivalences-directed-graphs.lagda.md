@@ -1,4 +1,4 @@
-{{#title  Equivalences of directed graphs}}
+#  Equivalences of directed graphs
 
 ```agda
 module graph-theory.equivalences-directed-graphs where

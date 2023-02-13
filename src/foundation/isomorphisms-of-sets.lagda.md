@@ -1,4 +1,4 @@
-{{#title  Isomorphisms of sets}}
+#  Isomorphisms of sets
 
 ```agda
 module foundation.isomorphisms-of-sets where

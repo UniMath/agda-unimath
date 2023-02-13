@@ -1,4 +1,4 @@
-{{#title  Totally faithful morphisms of undirected graphs}}
+#  Totally faithful morphisms of undirected graphs
 
 ```agda
 module graph-theory.totally-faithful-morphisms-undirected-graphs where

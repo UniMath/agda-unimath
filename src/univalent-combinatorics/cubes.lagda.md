@@ -1,4 +1,4 @@
-{{#title  Cubes}}
+#  Cubes
 
 ```agda
 module univalent-combinatorics.cubes where

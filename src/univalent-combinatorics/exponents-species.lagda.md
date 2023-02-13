@@ -1,4 +1,4 @@
-{{#title  Exponents of species}}
+#  Exponents of species
 
 ```agda
 module univalent-combinatorics.exponents-species where

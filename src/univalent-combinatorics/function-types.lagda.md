@@ -1,4 +1,4 @@
-{{#title  Finite function types}}
+#  Finite function types
 
 ```agda
 module univalent-combinatorics.function-types where

@@ -1,4 +1,4 @@
-{{#title  Type arithmetic with the booleans}}
+#  Type arithmetic with the booleans
 
 ```agda
 module foundation.type-arithmetic-booleans where

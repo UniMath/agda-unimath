@@ -1,4 +1,4 @@
-{{#title  Bounded sums of arithmetic functions}}
+#  Bounded sums of arithmetic functions
 
 ```agda
 module elementary-number-theory.bounded-sums-arithmetic-functions where

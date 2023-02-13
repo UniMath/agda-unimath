@@ -1,4 +1,4 @@
-{{#title  The Well-Ordering Principle of the natural numbers}}
+#  The Well-Ordering Principle of the natural numbers
 
 ```agda
 module elementary-number-theory.well-ordering-principle-natural-numbers where

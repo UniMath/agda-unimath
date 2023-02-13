@@ -1,4 +1,4 @@
-{{#title  Subtypes}}
+#  Subtypes
 
 ```agda
 module foundation.subtypes where

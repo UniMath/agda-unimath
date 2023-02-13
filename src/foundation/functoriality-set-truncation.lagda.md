@@ -1,4 +1,4 @@
-{{#title  Functoriality of set truncation}}
+#  Functoriality of set truncation
 
 ```agda
 module foundation.functoriality-set-truncation where

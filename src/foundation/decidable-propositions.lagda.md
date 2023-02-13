@@ -1,4 +1,4 @@
-{{#title  Decidable propositions}}
+#  Decidable propositions
 
 ```agda
 module foundation.decidable-propositions where

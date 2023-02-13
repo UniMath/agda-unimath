@@ -1,4 +1,4 @@
-{{#title  Unit elements in the standard finite types}}
+#  Unit elements in the standard finite types
 
 ```agda
 module elementary-number-theory.unit-elements-standard-finite-types where

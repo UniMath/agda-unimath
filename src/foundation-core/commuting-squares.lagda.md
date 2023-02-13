@@ -1,4 +1,4 @@
-{{#title  Commuting squares}}
+#  Commuting squares
 
 ```agda
 {-# OPTIONS --safe #-}

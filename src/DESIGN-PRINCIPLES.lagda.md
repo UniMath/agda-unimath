@@ -1,5 +1,5 @@
 
-{{#title Design of the library}}
+# Design of the library
 
 ## Postulates in the library
 

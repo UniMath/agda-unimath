@@ -1,4 +1,4 @@
-{{#title  Relatively prime integers}}
+#  Relatively prime integers
 
 ```agda
 module elementary-number-theory.relatively-prime-integers where

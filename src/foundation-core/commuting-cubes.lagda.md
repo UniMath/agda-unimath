@@ -1,4 +1,4 @@
-{{#title  Commuting cubes}}
+#  Commuting cubes
 
 ```agda
 module foundation-core.commuting-cubes where

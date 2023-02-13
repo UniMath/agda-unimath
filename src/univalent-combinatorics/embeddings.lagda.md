@@ -1,4 +1,4 @@
-{{#title  Injective maps}}
+#  Injective maps
 
 ```agda
 module univalent-combinatorics.embeddings where

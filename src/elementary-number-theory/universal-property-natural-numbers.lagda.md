@@ -1,4 +1,4 @@
-{{#title  The universal property of the natural numbers}}
+#  The universal property of the natural numbers
 
 ```agda
 module elementary-number-theory.universal-property-natural-numbers where

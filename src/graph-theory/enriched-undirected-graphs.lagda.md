@@ -1,4 +1,4 @@
-{{#title  Enriched undirected graphs}}
+#  Enriched undirected graphs
 
 ```agda
 module graph-theory.enriched-undirected-graphs where

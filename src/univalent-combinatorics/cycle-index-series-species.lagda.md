@@ -1,4 +1,4 @@
-{{#title  Cycle index series of species}}
+#  Cycle index series of species
 
 ```agda
 module univalent-combinatorics.cycle-index-series-species where

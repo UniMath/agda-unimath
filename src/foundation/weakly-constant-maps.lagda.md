@@ -1,4 +1,4 @@
-{{#title  Weakly constant maps}}
+#  Weakly constant maps
 
 ```agda
 module foundation.weakly-constant-maps where

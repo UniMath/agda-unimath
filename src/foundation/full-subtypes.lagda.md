@@ -1,4 +1,4 @@
-{{#title  Full subtypes of types}}
+#  Full subtypes of types
 
 ```agda
 module foundation.full-subtypes where

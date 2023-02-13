@@ -1,4 +1,4 @@
-{{#title  Pointed dependent functions}}
+#  Pointed dependent functions
 
 ```agda
 module structured-types.pointed-dependent-functions where

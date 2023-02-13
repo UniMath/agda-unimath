@@ -1,4 +1,4 @@
-{{#title  Magmas}}
+#  Magmas
 
 ```agda
 module structured-types.magmas where

@@ -1,4 +1,4 @@
-{{#title  Prime numbers}}
+#  Prime numbers
 
 ```agda
 module elementary-number-theory.prime-numbers where

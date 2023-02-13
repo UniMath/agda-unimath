@@ -1,4 +1,4 @@
-{{#title  Functions}}
+#  Functions
 
 ```agda
 {-# OPTIONS --safe #-}

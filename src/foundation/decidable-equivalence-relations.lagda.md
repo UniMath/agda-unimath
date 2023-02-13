@@ -1,4 +1,4 @@
-{{#title  Decidable equivalence relations}}
+#  Decidable equivalence relations
 
 ```agda
 module foundation.decidable-equivalence-relations where

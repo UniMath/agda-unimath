@@ -1,4 +1,4 @@
-{{#title  Ramsey theory}}
+#  Ramsey theory
 
 ```agda
 module univalent-combinatorics.ramsey-theory where

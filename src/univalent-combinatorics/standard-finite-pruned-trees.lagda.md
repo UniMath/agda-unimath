@@ -1,4 +1,4 @@
-{{#title  Standard finite pruned trees}}
+#  Standard finite pruned trees
 
 ```agda
 module univalent-combinatorics.standard-finite-pruned-trees where

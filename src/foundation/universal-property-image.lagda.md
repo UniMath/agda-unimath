@@ -1,4 +1,4 @@
-{{#title  The universal property of the image of a map}}
+#  The universal property of the image of a map
 
 ```agda
 module foundation.universal-property-image where

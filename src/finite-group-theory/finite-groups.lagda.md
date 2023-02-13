@@ -1,4 +1,4 @@
-{{#title  Finite groups}}
+#  Finite groups
 
 ```agda
 module finite-group-theory.finite-groups where

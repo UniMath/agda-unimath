@@ -1,4 +1,4 @@
-{{#title  Counting the elements in Maybe}}
+#  Counting the elements in Maybe
 
 ```agda
 module univalent-combinatorics.counting-maybe where

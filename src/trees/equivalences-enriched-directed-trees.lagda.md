@@ -1,4 +1,4 @@
-{{#title  Equivalences of enriched directed trees}}
+#  Equivalences of enriched directed trees
 
 ```agda
 module trees.equivalences-enriched-directed-trees where

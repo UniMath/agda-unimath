@@ -1,4 +1,4 @@
-{{#title  Binary embeddings}}
+#  Binary embeddings
 
 ```agda
 module foundation.binary-embeddings where

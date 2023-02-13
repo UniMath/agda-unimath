@@ -1,4 +1,4 @@
-{{#title  Equality of dependent pair types}}
+#  Equality of dependent pair types
 
 ```agda
 module foundation.equality-dependent-pair-types where

@@ -1,4 +1,4 @@
-{{#title  Unlabelled trees}}
+#  Unlabelled trees
 
 ```agda
 module univalent-combinatorics.unlabeled-trees where

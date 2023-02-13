@@ -1,4 +1,4 @@
-{{#title  The universal property of truncations}}
+#  The universal property of truncations
 
 ```agda
 module foundation.universal-property-truncation where

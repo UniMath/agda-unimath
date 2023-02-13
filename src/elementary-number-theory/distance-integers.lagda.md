@@ -1,4 +1,4 @@
-{{#title  The distance between integers}}
+#  The distance between integers
 
 ```agda
 module elementary-number-theory.distance-integers where

@@ -1,4 +1,4 @@
-{{#title  Complements of subtypes}}
+#  Complements of subtypes
 
 ```agda
 module foundation.complements-subtypes where

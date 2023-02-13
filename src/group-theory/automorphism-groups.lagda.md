@@ -1,4 +1,4 @@
-{{#title  Automorphism groups}}
+#  Automorphism groups
 
 ```agda
 module group-theory.automorphism-groups where

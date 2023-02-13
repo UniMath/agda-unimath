@@ -1,4 +1,4 @@
-{{#title  The infinitude of primes}}
+#  The infinitude of primes
 
 ```agda
 module elementary-number-theory.infinitude-of-primes where

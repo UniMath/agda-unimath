@@ -1,4 +1,4 @@
-{{#title  Tuples of types}}
+#  Tuples of types
 
 ```agda
 module foundation.tuples-of-types where

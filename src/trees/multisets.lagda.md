@@ -1,4 +1,4 @@
-{{#title  Multisets}}
+#  Multisets
 
 ```agda
 module trees.multisets where

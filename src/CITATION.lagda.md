@@ -1,4 +1,4 @@
-{{#title Citing the Agda-UniMath library}}
+# Citing the Agda-UniMath library
 
 ```md
 @misc{Agda-UniMath,

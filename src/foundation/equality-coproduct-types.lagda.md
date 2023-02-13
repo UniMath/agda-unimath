@@ -1,4 +1,4 @@
-{{#title  Equality of coproduct types}}
+#  Equality of coproduct types
 
 ```agda
 module foundation.equality-coproduct-types where

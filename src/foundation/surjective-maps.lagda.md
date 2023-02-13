@@ -1,4 +1,4 @@
-{{#title  Surjective maps}}
+#  Surjective maps
 
 ```agda
 module foundation.surjective-maps where

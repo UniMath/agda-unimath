@@ -1,4 +1,4 @@
-{{#title  Function extensionality}}
+#  Function extensionality
 
 ```agda
 module foundation.function-extensionality where

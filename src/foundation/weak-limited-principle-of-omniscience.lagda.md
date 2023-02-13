@@ -1,4 +1,4 @@
-{{#title  The weak limited principle of omniscience}}
+#  The weak limited principle of omniscience
 
 ```agda
 module foundation.weak-limited-principle-of-omniscience where

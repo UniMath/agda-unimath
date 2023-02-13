@@ -1,4 +1,4 @@
-{{#title  Subgroups}}
+#  Subgroups
 
 ```agda
 module group-theory.subgroups where

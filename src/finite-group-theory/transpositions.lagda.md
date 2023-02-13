@@ -1,4 +1,4 @@
-{{#title  Transpositions}}
+#  Transpositions
 
 ```agda
 module finite-group-theory.transpositions where

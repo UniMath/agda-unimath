@@ -1,4 +1,4 @@
-{{#title  Multisubsets}}
+#  Multisubsets
 
 ```agda
 module foundation.multisubsets where

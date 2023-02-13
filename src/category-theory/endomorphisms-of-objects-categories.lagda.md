@@ -1,4 +1,4 @@
-{{#title  Endomorphisms of objects in categories}}
+#  Endomorphisms of objects in categories
 
 ```agda
 module category-theory.endomorphisms-of-objects-categories where

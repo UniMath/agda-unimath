@@ -1,4 +1,4 @@
-{{#title  The maybe modality}}
+#  The maybe modality
 
 ```agda
 module foundation.maybe where

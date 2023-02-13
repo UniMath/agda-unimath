@@ -1,4 +1,4 @@
-{{#title  Complements of isolated points of finite types}}
+#  Complements of isolated points of finite types
 
 ```agda
 module univalent-combinatorics.complements-isolated-points where

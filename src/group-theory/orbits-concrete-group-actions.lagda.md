@@ -1,4 +1,4 @@
-{{#title  Orbits of concrete group actions}}
+#  Orbits of concrete group actions
 
 ```agda
 module group-theory.orbits-concrete-group-actions where

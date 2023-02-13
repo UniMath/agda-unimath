@@ -1,4 +1,4 @@
-{{#title  Undirected graph structures on standard finite sets}}
+#  Undirected graph structures on standard finite sets
 
 ```agda
 module graph-theory.undirected-graph-structures-on-standard-finite-sets where

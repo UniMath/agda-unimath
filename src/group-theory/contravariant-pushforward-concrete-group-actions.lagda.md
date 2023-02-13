@@ -1,4 +1,4 @@
-{{#title  Contravariant pushforwards of concrete group actions}}
+#  Contravariant pushforwards of concrete group actions
 
 ```agda
 module group-theory.contravariant-pushforward-concrete-group-actions where

@@ -1,4 +1,4 @@
-{{#title  Rooted undirected trees}}
+#  Rooted undirected trees
 
 ```agda
 module trees.rooted-undirected-trees where

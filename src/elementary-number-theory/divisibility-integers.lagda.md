@@ -1,4 +1,4 @@
-{{#title  Divisibility of integers}}
+#  Divisibility of integers
 
 ```agda
 module elementary-number-theory.divisibility-integers where

@@ -1,4 +1,4 @@
-{{#title  Commutative rings}}
+#  Commutative rings
 
 ```agda
 module commutative-algebra.commutative-rings where

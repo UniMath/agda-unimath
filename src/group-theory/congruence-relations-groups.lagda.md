@@ -1,4 +1,4 @@
-{{#title  Congruence relations on groups}}
+#  Congruence relations on groups
 
 ```agda
 module group-theory.congruence-relations-groups where

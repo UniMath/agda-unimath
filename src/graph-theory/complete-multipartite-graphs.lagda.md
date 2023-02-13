@@ -1,4 +1,4 @@
-{{#title  Complete multipartite graphs}}
+#  Complete multipartite graphs
 
 ```agda
 module graph-theory.complete-multipartite-graphs where

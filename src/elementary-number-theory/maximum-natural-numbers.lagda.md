@@ -1,4 +1,4 @@
-{{#title  Maximum on the natural numbers}}
+#  Maximum on the natural numbers
 
 ```agda
 module elementary-number-theory.maximum-natural-numbers where

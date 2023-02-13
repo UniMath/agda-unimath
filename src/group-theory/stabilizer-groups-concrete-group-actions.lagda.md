@@ -1,4 +1,4 @@
-{{#title  Stabilizers of concrete group actions}}
+#  Stabilizers of concrete group actions
 
 ```agda
 module group-theory.stabilizer-groups-concrete-group-actions where

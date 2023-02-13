@@ -1,4 +1,4 @@
-{{#title  Decidable types in elementary number theory}}
+#  Decidable types in elementary number theory
 
 ```agda
 module elementary-number-theory.decidable-types where

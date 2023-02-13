@@ -1,4 +1,4 @@
-{{#title  Permutations}}
+#  Permutations
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

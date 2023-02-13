@@ -1,4 +1,4 @@
-{{#title  The rational numbers}}
+#  The rational numbers
 
 ```agda
 module elementary-number-theory.rational-numbers where

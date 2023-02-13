@@ -1,4 +1,4 @@
-{{#title  Finite presentations of types}}
+#  Finite presentations of types
 
 ```agda
 module univalent-combinatorics.finite-presentations where

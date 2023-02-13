@@ -1,4 +1,4 @@
-{{#title  The category of groups}}
+#  The category of groups
 
 ```agda
 module group-theory.category-of-groups where

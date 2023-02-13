@@ -1,4 +1,4 @@
-{{#title  Relatively prime natural numbers}}
+#  Relatively prime natural numbers
 
 ```agda
 module elementary-number-theory.relatively-prime-natural-numbers where

@@ -1,4 +1,4 @@
-{{#title  Wedges of types}}
+#  Wedges of types
 
 ```agda
 module synthetic-homotopy-theory.wedges-of-pointed-types where

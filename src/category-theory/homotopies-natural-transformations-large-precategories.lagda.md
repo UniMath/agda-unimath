@@ -1,4 +1,4 @@
-{{#title  Homotopies of natural transformations in large precategories}}
+#  Homotopies of natural transformations in large precategories
 
 ```agda
 module category-theory.homotopies-natural-transformations-large-precategories where

@@ -1,4 +1,4 @@
-{{#title  Coproduct types}}
+#  Coproduct types
 
 ```agda
 {-# OPTIONS --safe #-}

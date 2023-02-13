@@ -1,4 +1,4 @@
-{{#title  Multivariable decidable relations}}
+#  Multivariable decidable relations
 
 ```agda
 module foundation.multivariable-decidable-relations where

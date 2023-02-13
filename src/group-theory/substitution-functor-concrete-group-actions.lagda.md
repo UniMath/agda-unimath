@@ -1,4 +1,4 @@
-{{#title  The substitution functor of concrete group actions}}
+#  The substitution functor of concrete group actions
 
 ```agda
 module group-theory.substitution-functor-concrete-group-actions where

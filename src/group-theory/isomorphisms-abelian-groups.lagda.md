@@ -1,4 +1,4 @@
-{{#title  Isomorphisms of abelian groups}}
+#  Isomorphisms of abelian groups
 
 ```agda
 module group-theory.isomorphisms-abelian-groups where

@@ -1,4 +1,4 @@
-{{#title  Powersets}}
+#  Powersets
 
 ```agda
 module foundation.powersets where

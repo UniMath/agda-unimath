@@ -1,4 +1,4 @@
-{{#title  The full subgroup of a group}}
+#  The full subgroup of a group
 
 ```agda
 module group-theory.full-subgroups where

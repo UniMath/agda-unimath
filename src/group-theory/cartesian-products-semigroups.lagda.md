@@ -1,4 +1,4 @@
-{{#title  Cartesian products of semigroups}}
+#  Cartesian products of semigroups
 
 ```agda
 module group-theory.cartesian-products-semigroups where

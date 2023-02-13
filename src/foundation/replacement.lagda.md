@@ -1,4 +1,4 @@
-{{#title  The replacement axiom for type theory}}
+#  The replacement axiom for type theory
 
 ```agda
 module foundation.replacement where

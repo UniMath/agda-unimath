@@ -1,4 +1,4 @@
-{{#title  Truncated maps}}
+#  Truncated maps
 
 ```agda
 module foundation-core.truncated-maps where

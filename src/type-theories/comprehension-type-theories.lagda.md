@@ -1,4 +1,4 @@
-{{#title  Comprehension of fibered type theories}}
+#  Comprehension of fibered type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}

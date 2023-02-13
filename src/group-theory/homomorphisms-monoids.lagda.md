@@ -1,4 +1,4 @@
-{{#title  Homomorphisms of monoids}}
+#  Homomorphisms of monoids
 
 ```agda
 module group-theory.homomorphisms-monoids where

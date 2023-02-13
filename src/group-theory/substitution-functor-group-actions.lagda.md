@@ -1,4 +1,4 @@
-{{#title  The substitution functor of group actions}}
+#  The substitution functor of group actions
 
 ```agda
 module group-theory.substitution-functor-group-actions where

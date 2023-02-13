@@ -1,4 +1,4 @@
-{{#title  Morphisms of the slice category of types}}
+#  Morphisms of the slice category of types
 
 ```agda
 module foundation.slice where

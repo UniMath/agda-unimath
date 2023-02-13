@@ -1,4 +1,4 @@
-{{#title  Quotient groups}}
+#  Quotient groups
 
 ```agda
 module group-theory.quotient-groups where

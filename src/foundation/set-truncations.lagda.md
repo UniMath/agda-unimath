@@ -1,4 +1,4 @@
-{{#title  Set truncations}}
+#  Set truncations
 
 ```agda
 module foundation.set-truncations where

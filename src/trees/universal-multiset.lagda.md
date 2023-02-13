@@ -1,4 +1,4 @@
-{{#title  The universal multiset}}
+#  The universal multiset
 
 ```agda
 module trees.universal-multiset where

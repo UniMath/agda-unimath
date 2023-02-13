@@ -1,4 +1,4 @@
-{{#title  Cartesian products of monoids}}
+#  Cartesian products of monoids
 
 ```agda
 module group-theory.cartesian-products-monoids where

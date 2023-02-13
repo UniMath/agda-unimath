@@ -1,4 +1,4 @@
-{{#title  Lattices}}
+#  Lattices
 
 ```agda
 module order-theory.lattices where

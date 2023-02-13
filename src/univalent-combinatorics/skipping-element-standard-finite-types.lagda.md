@@ -1,4 +1,4 @@
-{{#title  Skipping elements in standard finite types}}
+#  Skipping elements in standard finite types
 
 ```agda
 module univalent-combinatorics.skipping-element-standard-finite-types where

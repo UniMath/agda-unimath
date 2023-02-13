@@ -1,4 +1,4 @@
-{{#title  Cyclic types}}
+#  Cyclic types
 
 ```agda
 module univalent-combinatorics.cyclic-types where

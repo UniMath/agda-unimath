@@ -1,4 +1,4 @@
-{{#title  Functoriality of dependent function types}}
+#  Functoriality of dependent function types
 
 ```agda
 module foundation-core.functoriality-dependent-function-types where

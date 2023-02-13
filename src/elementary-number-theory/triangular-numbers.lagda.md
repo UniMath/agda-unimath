@@ -1,4 +1,4 @@
-{{#title  The triangular numbers}}
+#  The triangular numbers
 
 ```agda
 module elementary-number-theory.triangular-numbers where

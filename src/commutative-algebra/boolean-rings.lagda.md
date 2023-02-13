@@ -1,4 +1,4 @@
-{{#title  Boolean rings}}
+#  Boolean rings
 
 ```agda
 module commutative-algebra.boolean-rings where

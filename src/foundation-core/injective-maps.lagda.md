@@ -1,4 +1,4 @@
-{{#title  Injective maps}}
+#  Injective maps
 
 ```agda
 module foundation-core.injective-maps where

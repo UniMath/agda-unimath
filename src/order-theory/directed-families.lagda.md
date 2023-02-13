@@ -1,4 +1,4 @@
-{{#title  Directed families in posets}}
+#  Directed families in posets
 
 ```agda
 module order-theory.directed-families where

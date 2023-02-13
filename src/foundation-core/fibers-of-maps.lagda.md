@@ -1,4 +1,4 @@
-{{#title  Fibers of maps}}
+#  Fibers of maps
 
 ```agda
 module foundation-core.fibers-of-maps where

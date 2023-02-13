@@ -1,4 +1,4 @@
-{{#title  Type arithmetic with the unit type}}
+#  Type arithmetic with the unit type
 
 ```agda
 module foundation.type-arithmetic-unit-type where

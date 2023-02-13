@@ -1,4 +1,4 @@
-{{#title  Strongly extensional maps}}
+#  Strongly extensional maps
 
 ```agda
 module foundation.strongly-extensional-maps where

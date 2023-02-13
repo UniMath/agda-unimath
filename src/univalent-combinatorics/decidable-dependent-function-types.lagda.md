@@ -1,4 +1,4 @@
-{{#title  Decidable dependent function types}}
+#  Decidable dependent function types
 
 ```agda
 module univalent-combinatorics.decidable-dependent-function-types where

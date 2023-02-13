@@ -1,4 +1,4 @@
-{{#title  Free higher group actions}}
+#  Free higher group actions
 
 ```agda
 module group-theory.free-higher-group-actions where

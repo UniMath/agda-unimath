@@ -1,4 +1,4 @@
-{{#title  Free loops}}
+#  Free loops
 
 ```agda
 module synthetic-homotopy-theory.free-loops where

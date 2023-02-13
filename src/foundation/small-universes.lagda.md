@@ -1,4 +1,4 @@
-{{#title  Small universes}}
+#  Small universes
 
 ```agda
 module foundation.small-universes where

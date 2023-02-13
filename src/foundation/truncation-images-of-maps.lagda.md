@@ -1,4 +1,4 @@
-{{#title  Truncation images of maps}}
+#  Truncation images of maps
 
 ```agda
 module foundation.truncation-images-of-maps where

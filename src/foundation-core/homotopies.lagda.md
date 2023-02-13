@@ -1,4 +1,4 @@
-{{#title  Homotopies}}
+#  Homotopies
 
 ```agda
 {-# OPTIONS --safe #-}

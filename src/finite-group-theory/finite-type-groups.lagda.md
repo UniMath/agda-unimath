@@ -1,4 +1,4 @@
-{{#title  The group of n-element types}}
+#  The group of n-element types
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

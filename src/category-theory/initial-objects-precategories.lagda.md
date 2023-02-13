@@ -1,4 +1,4 @@
-{{#title  Initial objects of a precategory}}
+#  Initial objects of a precategory
 
 ```agda
 module category-theory.initial-objects-precategories where

@@ -1,4 +1,4 @@
-{{#title  Sections}}
+#  Sections
 
 ```agda
 {-# OPTIONS --safe #-}

@@ -1,4 +1,4 @@
-{{#title  Retracts of finite types}}
+#  Retracts of finite types
 
 ```agda
 module univalent-combinatorics.retracts-of-finite-types where

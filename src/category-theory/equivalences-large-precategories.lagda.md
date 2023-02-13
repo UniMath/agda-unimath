@@ -1,4 +1,4 @@
-{{#title  Equivalences between large precategories}}
+#  Equivalences between large precategories
 
 ```agda
 module category-theory.equivalences-large-precategories where

@@ -1,4 +1,4 @@
-{{#title Projects using the `agda-unimath` library}}
+# Projects using the `agda-unimath` library
 
 Here is a list of projects that use the `agda-unimath` library:
 

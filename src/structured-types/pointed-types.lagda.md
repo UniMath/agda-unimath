@@ -1,4 +1,4 @@
-{{#title  Pointed types}}
+#  Pointed types
 
 ```agda
 module structured-types.pointed-types where

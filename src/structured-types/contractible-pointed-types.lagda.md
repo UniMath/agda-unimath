@@ -1,4 +1,4 @@
-{{#title  Contractible pointed types}}
+#  Contractible pointed types
 
 ```agda
 module structured-types.contractible-pointed-types where

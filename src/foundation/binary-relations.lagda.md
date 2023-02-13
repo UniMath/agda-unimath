@@ -1,4 +1,4 @@
-{{#title  Binary relations}}
+#  Binary relations
 
 ```agda
 module foundation.binary-relations where

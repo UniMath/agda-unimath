@@ -1,4 +1,4 @@
-{{#title  Transport}}
+#  Transport
 
 ```agda
 module foundation.transport where

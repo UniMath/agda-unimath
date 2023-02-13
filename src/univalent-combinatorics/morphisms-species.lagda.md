@@ -1,4 +1,4 @@
-{{#title  Morphisms of species}}
+#  Morphisms of species
 
 ```agda
 module univalent-combinatorics.morphisms-species where

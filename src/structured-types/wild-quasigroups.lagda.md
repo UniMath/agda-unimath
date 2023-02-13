@@ -1,4 +1,4 @@
-{{#title  Wild quasigroups}}
+#  Wild quasigroups
 
 ```agda
 module structured-types.wild-quasigroups where

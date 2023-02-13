@@ -1,4 +1,4 @@
-{{#title  Nontrivial rings}}
+#  Nontrivial rings
 
 ```agda
 module ring-theory.nontrivial-rings where

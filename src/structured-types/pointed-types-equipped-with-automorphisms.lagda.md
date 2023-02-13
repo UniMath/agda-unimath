@@ -1,4 +1,4 @@
-{{#title  Pointed types equipped with automorphisms}}
+#  Pointed types equipped with automorphisms
 
 ```agda
 module structured-types.pointed-types-equipped-with-automorphisms where

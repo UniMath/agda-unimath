@@ -1,4 +1,4 @@
-{{#title  Quotients of finite types}}
+#  Quotients of finite types
 
 ```agda
 module univalent-combinatorics.quotients-finite-types where

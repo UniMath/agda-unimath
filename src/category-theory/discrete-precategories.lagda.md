@@ -1,4 +1,4 @@
-{{#title  The discrete precategory introduced by any hSet}}
+#  The discrete precategory introduced by any hSet
 
 ```agda
 module category-theory.discrete-precategories where

@@ -1,4 +1,4 @@
-{{#title  Congruence relations on semigroups}}
+#  Congruence relations on semigroups
 
 ```agda
 module group-theory.congruence-relations-semigroups where

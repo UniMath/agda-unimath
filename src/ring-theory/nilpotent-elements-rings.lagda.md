@@ -1,4 +1,4 @@
-{{#title  Nilpotent elements in rings}}
+#  Nilpotent elements in rings
 
 ```agda
 module ring-theory.nilpotent-elements-rings where

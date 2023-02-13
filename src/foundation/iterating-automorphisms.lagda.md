@@ -1,4 +1,4 @@
-{{#title  Iterating automorphisms}}
+#  Iterating automorphisms
 
 ```agda
 module foundation.iterating-automorphisms where

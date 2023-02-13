@@ -1,4 +1,4 @@
-{{#title }}
+# 
 
 ```agda
 module ring-theory.dependent-products-rings where

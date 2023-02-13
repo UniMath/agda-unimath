@@ -1,4 +1,4 @@
-{{#title  Trivial subgroups}}
+#  Trivial subgroups
 
 ```agda
 module group-theory.trivial-subgroups where

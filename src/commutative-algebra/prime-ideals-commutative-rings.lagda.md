@@ -1,4 +1,4 @@
-{{#title  Prime ideals in commutative rings}}
+#  Prime ideals in commutative rings
 
 ```agda
 module commutative-algebra.prime-ideals-commutative-rings where

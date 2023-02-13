@@ -1,4 +1,4 @@
-{{#title  Negation}}
+#  Negation
 
 ```agda
 module foundation.negation where

@@ -1,4 +1,4 @@
-{{#title  Finite types}}
+#  Finite types
 
 ```agda
 module univalent-combinatorics.finite-types where

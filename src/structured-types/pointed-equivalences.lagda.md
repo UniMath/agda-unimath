@@ -1,4 +1,4 @@
-{{#title  Pointed equivalences}}
+#  Pointed equivalences
 
 ```agda
 module structured-types.pointed-equivalences where

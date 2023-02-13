@@ -1,4 +1,4 @@
-{{#title  Kuratowsky finite sets}}
+#  Kuratowsky finite sets
 
 ```agda
 module univalent-combinatorics.kuratowsky-finite-sets where

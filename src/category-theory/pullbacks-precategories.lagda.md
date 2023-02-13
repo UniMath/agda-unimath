@@ -1,4 +1,4 @@
-{{#title  Pullbacks in precategories}}
+#  Pullbacks in precategories
 
 ```agda
 module category-theory.pullbacks-precategories where
