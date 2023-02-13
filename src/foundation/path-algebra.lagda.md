@@ -8,9 +8,26 @@ module foundation.path-algebra where
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
+### the coherence paths on concatination induce homotopies
+
+```agda
+module _
+  {l : Level} {A : UU l} {a0 a1 : A}
+  where
+  
+  htpy-left-unit : (λ (p : a0 ＝ a1) → refl {x = a0} ∙ p) ~ id
+  htpy-left-unit p = left-unit
+
+  htpy-right-unit : (λ (p : a0 ＝ a1) → p ∙ refl) ~ id
+  htpy-right-unit p = right-unit
+```
+
 
 ```agda
 horizontal-concat-square :
@@ -102,15 +119,30 @@ unit-law-assoc-110' :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
   (inv right-unit ∙ assoc p q refl) ＝ ap (concat p z) (inv right-unit)
 unit-law-assoc-110' refl refl = refl
+```
+--------------------------------------------------------------------------------
+
+# Higher Equalties/Higher Paths
+
+## Identity types of identity types (2-paths)
+
+### Idea:
+
+Identity types of identity types are types of the form `p ＝ q`, where `p q : x ＝ y` and `x y : A`. Terms of such a type are often called "2-paths" such, and so a twice iterated identity type is often called "a type of 2-paths" and  (in reference to the homotopical interpretation of identity types).
+
+Since 2-paths are just equalities, they have the usual operations and coherences on paths/equalities.
+In the context of 2-paths, this famliar concatination operation is called vertical concatination
+(`vertical-concat-Id²` in the library). 
+
+But 2-paths also have novel operations and coherences derived from the operations and coherences of
+the underlying 1-paths. Since concatination of 1-paths is a functor, it has an induced action on paths.
+We call this operation horizontal concatination (`horizontal-concat-Id²` in the library). It comes with the standard coherences of an action on paths function.
 
 --------------------------------------------------------------------------------
 
-{- Identity types of identity types -}
+### Definition of vertical and horizontal concatenation in identity types of identity types (a type of 2-paths)
 
---------------------------------------------------------------------------------
-
-{- Vertical and horizontal concatenation in identity types of identity types -}
-
+```agda
 vertical-concat-Id² :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} → p ＝ q → q ＝ r → p ＝ r
 vertical-concat-Id² α β = α ∙ β
@@ -119,9 +151,13 @@ horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
   p ＝ q → u ＝ v → (p ∙ u) ＝ (q ∙ v)
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
+```
 
--- both operations are binary equivalences
+### Properties of vertical and horizontal concatenation in identity types of identity types
 
+#### both operations are binary equivalences
+
+```agda
 is-binary-equiv-vertical-concat-Id² :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} →
   is-binary-equiv (vertical-concat-Id² {l} {A} {x} {y} {p} {q} {r})
@@ -132,9 +168,13 @@ is-binary-equiv-horizontal-concat-Id² :
   is-binary-equiv (horizontal-concat-Id² {l} {A} {x} {y} {z} {p} {q} {u} {v})
 is-binary-equiv-horizontal-concat-Id² =
   is-binary-emb-is-binary-equiv is-binary-equiv-concat
+```
 
--- both operations satisfy unit laws
+#### Unit laws
 
+both operations satisfy unit laws
+
+```agda
 left-unit-law-vertical-concat-Id² :
   {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} {β : p ＝ q} →
   vertical-concat-Id² refl β ＝ β
@@ -154,33 +194,80 @@ right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝ ap (concat' x u) α
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
+```
 
+Horizontal concatination satisfies an additional unit law (on both the left and right).
+
+```agda
+module _
+  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1} (α : p ＝ p')
+  where
+
+  nat-sq-right-unit-Id² :
+    (right-unit ∙ α) ＝ ((horizontal-concat-Id² α refl) ∙ right-unit)
+  nat-sq-right-unit-Id² =
+    ((horizontal-concat-Id² refl (inv (ap-id α))) ∙ (nat-htpy htpy-right-unit α)) ∙
+    (horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
+  
+  nat-sq-left-unit-Id² :
+    (left-unit ∙ α) ＝ (horizontal-concat-Id² (refl {x = refl}) α)
+  nat-sq-left-unit-Id² =
+    ((inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
+      inv (left-unit-law-horizontal-concat-Id² α)
+```
 --------------------------------------------------------------------------------
 
-{- Three ways to concatenate in triple identity types -}
 
-{- We name the three concatenations of triple identity types x-, y-, and z-
-   concatenation, after the standard names for the three axis in 3-dimensional
-   space. -}
+## Thrice iterated identity types
 
+### Idea:
+
+these are identity types for terms in a type of 2-paths (an identity type of two terms in an identity type). In symbols, this is
+a type of the form `α ＝ β` where `α β : p ＝ q` and `p q : x ＝ y`
+We may often refer to such a type as a type of 3-paths.
+
+
+### Concatination in a type of 3-paths
+
+Like with 2-paths, 3-paths have the standard operations on equalties,
+plus the operations induced by the operations on 1-paths. But 3-paths also have operations induced by those on 2-paths.
+Thus there are three ways to concatenate in triple identity types. We name the three concatenations of triple identity types x-, y-,
+and z-concatenation, after the standard names for the three axis in 3-dimensional space.
+
+x-concatenation corresponds the standard concatination of equalities (1-paths).
+
+```agda
 x-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} {α β γ : p ＝ q} →
   α ＝ β → β ＝ γ → α ＝ γ
 x-concat-Id³ σ τ = vertical-concat-Id² σ τ
+```
 
+y-concatenation corresponds the operation induced by the concatination on 1-paths.
+
+```agda
 y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α β : p ＝ q}
   {γ δ : q ＝ r} → α ＝ β → γ ＝ δ → (α ∙ γ) ＝ (β ∙ δ)
 y-concat-Id³ σ τ = horizontal-concat-Id² σ τ
+```
 
+z-concatenation corresponds the concatination induced by the (horizontal) concatination on 2-paths.
+
+```agda
 z-concat-Id³ :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
   {α β : p ＝ q} {γ δ : u ＝ v} →
   α ＝ β → γ ＝ δ → horizontal-concat-Id² α γ ＝ horizontal-concat-Id² β δ
 z-concat-Id³ σ τ = ap-binary (λ s t → horizontal-concat-Id² s t) σ τ
+```
 
--- All three operations satisfy unit laws
+### Properties of concatination of 3-paths
 
+
+### Unit laws
+
+```agda
 left-unit-law-x-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} {α β : p ＝ q} {σ : α ＝ β} →
   x-concat-Id³ refl σ ＝ σ
