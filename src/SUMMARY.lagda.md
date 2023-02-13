@@ -915,12 +915,12 @@
 
 # Type theories
 - [type-theories](type-theories.md)
-- [comprehension-type-theories](type-theories.comprehension-type-theories.md)
-- [dependent-type-theories](type-theories.dependent-type-theories.md)
-- [fibered-dependent-type-theories](type-theories.fibered-dependent-type-theories.md)
-- [sections-dependent-type-theories](type-theories.sections-dependent-type-theories.md)
-- [simple-type-theories](type-theories.simple-type-theories.md)
-- [unityped-type-theories](type-theories.unityped-type-theories.md)
+  - [comprehension-type-theories](type-theories.comprehension-type-theories.md)
+  - [dependent-type-theories](type-theories.dependent-type-theories.md)
+  - [fibered-dependent-type-theories](type-theories.fibered-dependent-type-theories.md)
+  - [sections-dependent-type-theories](type-theories.sections-dependent-type-theories.md)
+  - [simple-type-theories](type-theories.simple-type-theories.md)
+  - [unityped-type-theories](type-theories.unityped-type-theories.md)
 
 
 
@@ -1009,7 +1009,6 @@
     - [skipping-element-standard-finite-types](univalent-combinatorics.skipping-element-standard-finite-types.md)
     - [species](univalent-combinatorics.species.md)
     - [standard-finite-pruned-trees](univalent-combinatorics.standard-finite-pruned-trees.md)
-    - [standard-finite-trees](univalent-combinatorics.standard-finite-trees.md)
     - [standard-finite-types](univalent-combinatorics.standard-finite-types.md)
     - [steiner-systems](univalent-combinatorics.steiner-systems.md)
     - [steiner-triple-systems](univalent-combinatorics.steiner-triple-systems.md)

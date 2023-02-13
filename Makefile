@@ -72,8 +72,8 @@ website: agda-html
 	@mdbook build
 
 .phony: serve-website
-serve-wesite:
-	@mdbook serve -p 8080
+serve-website:
+	@mdbook serve -p 8080 --open
 
 .PHONY : graph
 graph:
