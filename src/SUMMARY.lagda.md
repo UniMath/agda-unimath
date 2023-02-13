@@ -1,10 +1,27 @@
 # SUMMARY
 
-- [README](README.md)
-- [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
-- [Everything](everything.md)
+# Project
 
-------------------------------------------------------------------------
+- [Agda-UniMath](README.md)
+  - [README](README.md)
+  - [How-to](HOWTO-INSTALL.md)
+    - [Install](HOWTO-INSTALL.md)
+    - [Cite the library](CITATION.md)
+    - [Structure your file](CONVENTIONS.md)
+  - [Guidelines](CODINGSTYLE.md)
+    - [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
+    - [Library coding style](CODINGSTYLE.md)
+    - [Design principles](DESIGN-PRINCIPLES.md)
+  - [Community](CONTRIBUTORS.md)
+    - [Contributors](CONTRIBUTORS.md)
+    - [Project links](LINKS.md)
+    - [Users](USERS.md)
+  - [Everything](everything.md)
+
+
+---
+
+# Formalisation in Agda
 
 - [Category theory](category-theory.md)
   - [Adjunctions large precategories](category-theory.adjunctions-large-precategories.md)
