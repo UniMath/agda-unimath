@@ -3,21 +3,19 @@
 # Project
 
 - [Agda-UniMath](README.md)
-  - [README](README.md)
+  - [Home](README.md)
   - [Community](CONTRIBUTORS.md)
     - [Contributors](CONTRIBUTORS.md)
-    - [Project links](LINKS.md)
-    - [Users](USERS.md)
+    - [Projects using Agda-Unimath](USERS.md)
   - [How-to](HOWTO-INSTALL.md)
     - [Install](HOWTO-INSTALL.md)
     - [Cite the library](CITATION.md)
-    - [Structure your file](CONVENTIONS.md)
   - [Guidelines](CODINGSTYLE.md)
+    - [Structure your file](CONVENTIONS.md)
     - [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)
-
 
 ---
 

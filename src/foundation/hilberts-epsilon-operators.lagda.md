@@ -1,5 +1,4 @@
----
-title : Hilbert's ε-operators}}
+# Hilbert's ε-operators
 
 ```agda
 module foundation.hilberts-epsilon-operators where

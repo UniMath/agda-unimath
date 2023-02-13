@@ -9,9 +9,18 @@ Welcome to the website of the `agda-unimath` formalization project!
 <img align="right" width="300" alt="Agda-UniMath" src="./docs/images/agda-unimath-logo.svg" />
 </a>
 
-The `agda-unimath` library is a community formalisation project for univalent mathematics in [Agda](https://github.com/agda/agda). Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics have the potential to be useful, and informative resources for mathematicians. Our library is designed to work towards this goal, and we welcome contributions to the library about any topic in mathematics.
+The `agda-unimath` library is a community formalisation project for univalent
+mathematics in [Agda](https://github.com/agda/agda). The library project was
+created by Elisabeth Bonnevier, Jonathan Prieto-Cubides, and Egbert Rijke. Our
+goal is to formalize an extensive curriculum of mathematics from the univalent
+point of view. Furthermore, we think libraries of formalized mathematics have
+the potential to be useful, and informative resources for mathematicians. Our
+library is designed to work towards this goal, and we welcome contributions to
+the library about any topic in mathematics.
 
 The library is built in Agda 2.6.3. It can be compiled by running `make check` from the main folder of the repository.
+
+See the list of all Agda modules [here](everything.html).
 
 ## Joining the project
 
@@ -19,23 +28,8 @@ Great, you want to contribute something! The best way to start is to find us in 
 
 Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
-
-{{#include STATEMENT-OF-INCLUSION.md}}
-
-🌈 Happy contributing!!
-
-Elisabeth Bonnevier, Jonathan Prieto-Cubides, and Egbert Rijke
-
-See the list of all Agda modules [here](everything.html).
-
-## Additional Agda options
-
-```agda
-{-# OPTIONS --guardedness #-}
-```
+{{#include CITATION.md}}
 
 {{#include SUMMARY.md}}
 
 {{#include CONTRIBUTORS.md}}
-
-{{#include CITATION.md}}

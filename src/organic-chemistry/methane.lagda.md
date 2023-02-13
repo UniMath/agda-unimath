@@ -1,6 +1,6 @@
----
-title : Methane
----
+# Methane
+
+
 ```agda
 module organic-chemistry.methane where
 

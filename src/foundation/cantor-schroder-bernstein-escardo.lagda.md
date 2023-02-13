@@ -1,5 +1,4 @@
-{{#title  The Cantor-Schröder-Bernstein-Escardó theorem
----
+# The Cantor-Schröder-Bernstein-Escardó theorem
 
 Contributors: Elif Uskuplu, Egbert Rijke
 

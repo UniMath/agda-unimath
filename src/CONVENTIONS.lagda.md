@@ -6,9 +6,7 @@
 3. Files that are part of the formalisation should be in literate agda using markdown. They should have the file extension `.lagda.md`.
 4. Every file should begin with a header in the following format
 ```md
----
-title: [The title of the file]
----
+# [The title of the file]
 ```
 5. Immediately after the header, there should be a block of Agda code that loads the options, declares the present module, and performs all the imports. In particular, there should be no further imports later on in the file.
 6. The rest of the files is divided into sections, subsections and possibly subsubsections. Each section should have a markdown header of level `##`, and the title of each header should be generic, such as `Idea`, `Definition`, `Example`, `Properties`, and so on. 
@@ -17,13 +15,7 @@ title: [The title of the file]
 Ideally, the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept. We suggest adopt the following template:
 
 ```md
-{{# [The title of this file] }}
-
-Contributors : [The list of contributors]
-
-[ options
-  module declaration
-  imports]
+# The title of this file
 
 ## Idea
 

@@ -1,6 +1,4 @@
-{{#title  Truncation levels
----
-
+# Truncation levels
 
 ```agda
 {-# OPTIONS --safe #-}
