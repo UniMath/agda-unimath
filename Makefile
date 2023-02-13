@@ -66,9 +66,6 @@ agda-html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
 	${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
-	cd docs/; \
-	sh conv.sh; \
-	cp README.html index.html
 
 .PHONY: website
 website: agda-html
