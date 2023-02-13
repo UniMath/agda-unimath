@@ -1,16 +1,5 @@
 /* Aspects. */
-
-/* Code. */
-pre.highlight { padding: .4em .4em; border-style: dashed !important; }
-
-code { font-family: 'mononoki', 'DejaVu Sans Mono', 'Source Code Pro', 'Bitstream Vera Sans Mono', 'FreeMono', 'Courier New', 'Monaco', 'Menlo', monospace, serif; font-size: .85em; white-space: pre; }
-
-/* Agda. */
-pre.Agda { font-family: 'mononoki', 'DejaVu Sans Mono', 'Source Code Pro', 'Bitstream Vera Sans Mono', 'FreeMono', 'Courier New', 'Monaco', 'Menlo', monospace, serif; font-size: .85em; padding: .4em .4em; }
-
-pre.Spec { font-family: 'mononoki', 'DejaVu Sans Mono', 'Source Code Pro', 'Bitstream Vera Sans Mono', 'FreeMono', 'Courier New', 'Monaco', 'Menlo', monospace, serif; font-size: .85em; padding: .4em .4em; border-style: dashed !important; color: #B22222; }
-
-.Agda .Comment       { color: #9d9d9d }
+.Agda .Comment       { color: #B22222 }
 .Agda .Background    {}
 .Agda .Markup        { color: #000000 }
 .Agda .Keyword       { color: #CD6600 }
@@ -20,6 +9,7 @@ pre.Spec { font-family: 'mononoki', 'DejaVu Sans Mono', 'Source Code Pro', 'Bits
 .Agda .PrimitiveType { color: #0000CD }
 .Agda .Pragma        { color: black   }
 .Agda .Operator      {}
+.Agda .Hole          { background: #B4EEB4 }
 
 /* NameKinds. */
 .Agda .Bound                  { color: black   }
@@ -48,15 +38,4 @@ pre.Spec { font-family: 'mononoki', 'DejaVu Sans Mono', 'Source Code Pro', 'Bits
 /* Standard attributes. */
 .Agda a { text-decoration: none }
 .Agda a[href]:hover { background-color: #B4EEB4 }
-
-pre.Agda {
-  padding: 12px;
-  background-color: white;
-  border-left: 1px solid rgb(210, 218, 224);
-  border-radius: 5px;
-  white-space:pre;
-}
-
-pre.Agda a:hover {
-  text-decoration: none;
-}
+.Agda [href].hover-highlight { background-color: #B4EEB4; }

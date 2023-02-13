@@ -1,6 +1,7 @@
 # SUMMARY
 
 - [README](README.md)
+- [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
 - [Everything](everything.md)
 
 ---
