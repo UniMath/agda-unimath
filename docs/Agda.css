@@ -11,7 +11,7 @@
     font-weight: 500;
     font-size: .85em;
     padding: 1em;
-    overflow: scroll;
+    overflow-x: overlay;
 }
 
 .Agda .Markup {
