@@ -474,6 +474,7 @@ open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
 open import foundation-core.cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
