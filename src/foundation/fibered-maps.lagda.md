@@ -108,12 +108,12 @@ module _
     (m m' : map-over f g i) → map-total-map-over f g i m ~ map-total-map-over f g i m' → UU (l1 ⊔ l4)
   coherence-htpy-map-over m m' K =
     (is-map-over-map-total-map-over f g i m ∙h (g ·l K)) ~ is-map-over-map-total-map-over f g i m'
-  
+
   htpy-map-over : (m m' : map-over f g i) → UU (l1 ⊔ l2 ⊔ l4)
   htpy-map-over m m' =
     Σ ( map-total-map-over f g i m ~ map-total-map-over f g i m')
       ( coherence-htpy-map-over m m')
-  
+
   refl-htpy-map-over : (m : map-over f g i) → htpy-map-over m m
   pr1 (refl-htpy-map-over m) = refl-htpy
   pr2 (refl-htpy-map-over m) = right-unit-htpy
@@ -134,7 +134,7 @@ module _
     (m m' : map-over f g i) → is-equiv (htpy-eq-map-over m m')
   is-equiv-htpy-eq-map-over m =
     fundamental-theorem-id (is-contr-total-htpy-map-over m) (htpy-eq-map-over m)
-  
+
   extensionality-map-over :
     (m m' : map-over f g i) → (m ＝ m') ≃ (htpy-map-over m m')
   pr1 (extensionality-map-over m m') = htpy-eq-map-over m m'
@@ -142,6 +142,66 @@ module _
 
   eq-htpy-map-over : (m m' : map-over f g i) → htpy-map-over m m' → m ＝ m'
   eq-htpy-map-over m m' = map-inv-equiv (extensionality-map-over m m')
+```
+
+### Identifications of fibered maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y)
+  where
+
+  coherence-htpy-fibered-map :
+    (m m' : fibered-map f g) →
+    map-base-fibered-map f g m ~ map-base-fibered-map f g m' → 
+    map-total-fibered-map f g m ~ map-total-fibered-map f g m' → UU (l1 ⊔ l4)
+  coherence-htpy-fibered-map m m' I H =
+    ( is-map-over-map-total-fibered-map f g m ∙h (g ·l H)) ~
+    ( (I ·r f) ∙h is-map-over-map-total-fibered-map f g m')
+
+  htpy-fibered-map : (m m' : fibered-map f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-fibered-map m m' =
+    Σ ( map-base-fibered-map f g m ~ map-base-fibered-map f g m')
+      ( λ I →
+      Σ ( map-total-fibered-map f g m ~ map-total-fibered-map f g m')
+        ( coherence-htpy-fibered-map m m' I))
+
+  refl-htpy-fibered-map : (m : fibered-map f g) → htpy-fibered-map m m
+  pr1 (refl-htpy-fibered-map m) = refl-htpy
+  pr1 (pr2 (refl-htpy-fibered-map m)) = refl-htpy
+  pr2 (pr2 (refl-htpy-fibered-map m)) = inv-htpy-left-unit-htpy ∙h right-unit-htpy
+
+  htpy-eq-fibered-map : (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
+  htpy-eq-fibered-map m .m refl = refl-htpy-fibered-map m
+
+  is-contr-total-htpy-fibered-map : 
+    (m : fibered-map f g) → is-contr (Σ (fibered-map f g) (htpy-fibered-map m))
+  is-contr-total-htpy-fibered-map m =
+    is-contr-total-Eq-structure
+      ( λ i hH I →
+          Σ ( map-total-fibered-map f g m ~ map-total-fibered-map f g (i , hH))
+            ( coherence-htpy-fibered-map m (i , hH) I))
+      ( is-contr-total-htpy (map-base-fibered-map f g m))
+      ( map-base-fibered-map f g m , refl-htpy)
+      ( is-contr-total-Eq-structure
+        ( λ h H → coherence-htpy-fibered-map m (map-base-fibered-map f g m , h , H) refl-htpy)
+        ( is-contr-total-htpy (map-total-fibered-map f g m))
+        ( map-total-fibered-map f g m , refl-htpy)
+        (is-contr-total-htpy (is-map-over-map-total-fibered-map f g m ∙h refl-htpy)))
+
+  is-equiv-htpy-eq-fibered-map :
+    (m m' : fibered-map f g) → is-equiv (htpy-eq-fibered-map m m')
+  is-equiv-htpy-eq-fibered-map m =
+    fundamental-theorem-id (is-contr-total-htpy-fibered-map m) (htpy-eq-fibered-map m)
+
+  extensionality-fibered-map :
+    (m m' : fibered-map f g) → (m ＝ m') ≃ (htpy-fibered-map m m')
+  pr1 (extensionality-fibered-map m m') = htpy-eq-fibered-map m m'
+  pr2 (extensionality-fibered-map m m') = is-equiv-htpy-eq-fibered-map m m'
+
+  eq-htpy-fibered-map : (m m' : fibered-map f g) → htpy-fibered-map m m' → m ＝ m'
+  eq-htpy-fibered-map m m' = map-inv-equiv (extensionality-fibered-map m m')
 ```
 
 ### Fibered maps and fiberwise maps over are equivalent notions

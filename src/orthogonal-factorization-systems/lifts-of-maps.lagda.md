@@ -68,7 +68,7 @@ module _
 
 ## Operations
 
-### Vertical composition of lifts
+### Vertical composition of lifts of maps
 
 ```md
            A
@@ -94,7 +94,7 @@ module _
   is-lift-vertical-comp F H x = H x ∙ ap j (F x)
 ```
 
-### Horizontal composition of lifts
+### Horizontal composition of lifts of maps
 
 ```md
   A - f -> B - g -> C
@@ -137,7 +137,7 @@ module _
   is-lift-left-whisker h H x = ap h (H x)
 ```
 
-## Right whiskering of lifts
+## Right whiskering of lifts of maps
 
 ```md
                     A
@@ -207,7 +207,7 @@ module _
   eq-htpy-lift l l' = map-inv-equiv (extensionality-lift l l')
 ```
 
-### The total type of lifts is equivalent to `X → A`
+### The total type of lifts of maps is equivalent to `X → A`
 
 ```agda
 module _
@@ -229,7 +229,7 @@ module _
 
 ## Properties
 
-### If `P` is `k`-truncated then the type of lifts is `k`-truncated
+### If `P` is `k`-truncated then the type of lifts of maps is `k`-truncated
 
 ```agda
 module _

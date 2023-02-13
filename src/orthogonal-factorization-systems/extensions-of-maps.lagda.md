@@ -80,7 +80,7 @@ module _
 
 ## Operations
 
-### Vertical composition of extensions
+### Vertical composition of extensions of maps
 
 ```md
   A
@@ -108,7 +108,7 @@ module _
   is-extension-vertical-comp H G x = G x ∙ H (i x)
 ```
 
-### Horizontal composition of extensions
+### Horizontal composition of extensions of maps
 
 ```md
            A
@@ -131,7 +131,7 @@ module _
   is-extension-horizontal-comp I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
-### Left whiskering of extensions
+### Left whiskering of extensions of maps
 
 ```md
   A
@@ -154,7 +154,7 @@ module _
   is-extension-left-whisker h F = apd h ∘ F
 ```
 
-### Right whiskering of extensions
+### Right whiskering of extensions of maps
 
 ```md
   X - h -> A
@@ -191,7 +191,7 @@ module _
   coherence-htpy-extension :
     (e e' : extension i P f) → map-extension e ~ map-extension e' → UU (l1 ⊔ l3)
   coherence-htpy-extension e e' K =
-    (is-extension-map-extension e ∙h (K ∘ i)) ~ is-extension-map-extension e'
+    (is-extension-map-extension e ∙h (K ·r i)) ~ is-extension-map-extension e'
   
   htpy-extension : (e e' : extension i P f) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-extension e e' =
