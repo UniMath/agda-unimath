@@ -122,7 +122,7 @@ module _
 
   eq-equiv-eq-one-value-equiv-is-set-quotient :
     (P : is-equiv h) (Q : is-equiv h') →
-    pair h' Q ＝ equiv-is-set-quotient R QR f R QR f Uf Uf (pair h P) H
+    pair h' Q ＝ equiv-is-set-quotient R QR f R QR f Uf Uf ((h , P) , H)
   eq-equiv-eq-one-value-equiv-is-set-quotient P Q =
     ap pr1
       { x =
@@ -132,7 +132,7 @@ module _
             ( is-emb-is-equiv Q))}
       { y =
         center
-          ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf (pair h P) H)}
+          ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf ((h , P) , H))}
       ( eq-is-contr
-        ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf (pair h P) H))
+        ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf ((h , P) , H)))
 ```
