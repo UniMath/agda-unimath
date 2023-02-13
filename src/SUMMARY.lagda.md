@@ -452,6 +452,7 @@
   - [Constant maps](foundation-core.constant-maps.md)
   - [Contractible maps](foundation-core.contractible-maps.md)
   - [Contractible types](foundation-core.contractible-types.md)
+  - [Coproduct types](foundation-core.coproduct-types.md)
   - [Cospans](foundation-core.cospans.md)
   - [Dependent pair types](foundation-core.dependent-pair-types.md)
   - [Embeddings](foundation-core.embeddings.md)
