@@ -4,9 +4,7 @@
 - [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
 - [Everything](everything.md)
 
----
-
-# Category theory
+------------------------------------------------------------------------
 
 - [Category theory](category-theory.md)
   - [Adjunctions large precategories](category-theory.adjunctions-large-precategories.md)
@@ -48,11 +46,6 @@
   - [Slice precategories](category-theory.slice-precategories.md)
   - [Terminal objects precategories](category-theory.terminal-objects-precategories.md)
 
-
----
-
-# Commutative algebra
-
 - [Commutative algebra](commutative-algebra.md)
   - [Boolean rings](commutative-algebra.boolean-rings.md)
   - [Commutative rings](commutative-algebra.commutative-rings.md)
@@ -69,11 +62,6 @@
   - [Nilradical commutative rings](commutative-algebra.nilradical-commutative-rings.md)
   - [Prime ideals commutative rings](commutative-algebra.prime-ideals-commutative-rings.md)
   - [Zariski topology](commutative-algebra.zariski-topology.md)
-
-
----
-
-# Elementary number theory
 
 - [Elementary number theory](elementary-number-theory.md)
   - [Absolute value integers](elementary-number-theory.absolute-value-integers.md)
@@ -158,11 +146,6 @@
   - [Well ordering principle natural numbers](elementary-number-theory.well-ordering-principle-natural-numbers.md)
   - [Well ordering principle standard finite types](elementary-number-theory.well-ordering-principle-standard-finite-types.md)
 
-
----
-
-# Finite group theory
-
 - [Finite group theory](finite-group-theory.md)
   - [Abstract quaternion group](finite-group-theory.abstract-quaternion-group.md)
   - [Alternating concrete groups](finite-group-theory.alternating-concrete-groups.md)
@@ -181,11 +164,6 @@
   - [Subgroups finite groups](finite-group-theory.subgroups-finite-groups.md)
   - [Tetrahedra in-3-space](finite-group-theory.tetrahedra-in-3-space.md)
   - [Transpositions](finite-group-theory.transpositions.md)
-
-
----
-
-# Foundation
 
 - [Foundation](Foundation.md)
   - [0-connected types](foundation.0-connected-types.md)
@@ -436,11 +414,6 @@
   - [Xor](foundation.xor.md)
 
 
-
----
-
-# Foundation Core
-
 - [Foundation Core](foundation-core.md)
   - [0-maps](foundation-core.0-maps.md)
   - [1-types](foundation-core.1-types.md)
@@ -498,7 +471,7 @@
   - [Universal property pullbacks](foundation-core.universal-property-pullbacks.md)
   - [Universe levels](foundation-core.universe-levels.md)
 
-# Graph theory
+
 
 - [Graph theory](graph-theory.md)
   - [Circuits undirected graphs](graph-theory.circuits-undirected-graphs.md)
@@ -541,11 +514,6 @@
   - [Vertex covers](graph-theory.vertex-covers.md)
   - [Voltage graphs](graph-theory.voltage-graphs.md)
   - [Walks undirected graphs](graph-theory.walks-undirected-graphs.md)
-
-
----
-
-# Group theory
 - [Group theory](group-theory.md)
   - [Abelian groups](group-theory.abelian-groups.md)
   - [Addition homomorphisms abelian groups](group-theory.addition-homomorphisms-abelian-groups.md)
@@ -660,11 +628,6 @@
   - [Trivial subgroups](group-theory.trivial-subgroups.md)
   - [Unordered tuples of elements commutative monoids](group-theory.unordered-tuples-of-elements-commutative-monoids.md)
 
-
----
-
-# Linear algebra
-
 - [Linear algebra](linear-algebra.md)
   - [Constant matrices](linear-algebra.constant-matrices.md)
   - [Constant vectors](linear-algebra.constant-vectors.md)
@@ -680,11 +643,6 @@
   - [Vectors on rings](linear-algebra.vectors-on-rings.md)
   - [Vectors](linear-algebra.vectors.md)
 
-
-
----
-
-# Order theory
 
 - [Order theory](order-theory.md)
   - [Chains posets](order-theory.chains-posets.md)
@@ -729,11 +687,6 @@
   - [Total posets](order-theory.total-posets.md)
   - [Total preorders](order-theory.total-preorders.md)
 
-
----
-
-# Organic chemistry
-
 - [Organic chemistry](organic-chemistry.md)
   - [Alcohols](organic-chemistry.alcohols.md)
   - [Alkanes](organic-chemistry.alkanes.md)
@@ -743,28 +696,13 @@
   - [Hydrocarbons](organic-chemistry.hydrocarbons.md)
   - [Methane](organic-chemistry.methane.md)
   - [Saturated carbons](organic-chemistry.saturated-carbons.md)
-
-
----
-
-# Orthogonal factorization systems
 - [Orthogonal factorization systems](orthogonal-factorization-systems.md)
   - [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
   - [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
   - [Local types](orthogonal-factorization-systems.local-types.md)
 
-
----
-
-# Polytopes
-
 - [Polytopes](polytopes.md)
   - [Abstract polytopes](polytopes.abstract-polytopes.md)
-
-
----
-
-# Ring theory
 
 - [Ring theory](ring-theory.md)
   - [Algebras rings](ring-theory.algebras-rings.md)
@@ -791,11 +729,6 @@
   - [Rings](ring-theory.rings.md)
   - [Subsets rings](ring-theory.subsets-rings.md)
 
-
----
-
-# Set theory
-
 - [Set theory](set-theory.md)
   - [Baire space](set-theory.baire-space.md)
   - [Cantor space](set-theory.cantor-space.md)
@@ -803,11 +736,6 @@
   - [Countable sets](set-theory.countable-sets.md)
   - [Infinite sets](set-theory.infinite-sets.md)
   - [Uncountable sets](set-theory.uncountable-sets.md)
-
-
----
-
-# Structured types
 
 - [Structured types](structured-types.md)
   - [Central h-spaces](structured-types.central-h-spaces.md)
@@ -846,11 +774,6 @@
   - [Wild quasigroups](structured-types.wild-quasigroups.md)
   - [Wild semigroups](structured-types.wild-semigroups.md)
 
-
----
-
-# Synthetic homotopy theory
-
 - [Synthetic homotopy theory](synthetic-homotopy-theory.md)
   - [24-pushouts](synthetic-homotopy-theory.24-pushouts.md)
   - [26-descent](synthetic-homotopy-theory.26-descent.md)
@@ -881,11 +804,6 @@
   - [Universal property pushouts](synthetic-homotopy-theory.universal-property-pushouts.md)
   - [Wedges of pointed types](synthetic-homotopy-theory.wedges-of-pointed-types.md)
 
-
----
-
-# Trees
-
 - [Trees](trees.md)
   - [Directed trees](trees.directed-trees.md)
   - [Elementhood relation w-types](trees.elementhood-relation-w-types.md)
@@ -910,23 +828,13 @@
   - [Universal multiset](trees.universal-multiset.md)
   - [W type of natural numbers](trees.w-type-of-natural-numbers.md)
   - [W type of propositions](trees.w-type-of-propositions.md)
-  - [W types](trees.w-types.md)
-
----
-
-# Type theories
-- [Type theories](type-theories.md)
+  - [W types](trees.w-types.md)- [Type theories](type-theories.md)
   - [Comprehension type theories](type-theories.comprehension-type-theories.md)
   - [Dependent type theories](type-theories.dependent-type-theories.md)
   - [Fibered dependent type theories](type-theories.fibered-dependent-type-theories.md)
   - [Sections dependent type theories](type-theories.sections-dependent-type-theories.md)
   - [Simple type theories](type-theories.simple-type-theories.md)
   - [Unityped type theories](type-theories.unityped-type-theories.md)
-
----
-
-# Univalent combinatorics
-
 - [Univalent combinatorics](univalent-combinatorics.md)
     - [2-element decidable subtypes](univalent-combinatorics.2-element-decidable-subtypes.md)
     - [2-element subtypes](univalent-combinatorics.2-element-subtypes.md)
