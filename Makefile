@@ -52,8 +52,10 @@ agda-html: src/everything.lagda.md
 
 .PHONY: website
 website: agda-html
-	@python update-contributors.py
 	@mdbook build
+
+update-contributors:
+	@python update-contributors.py
 
 .phony: serve-website
 serve-website:
