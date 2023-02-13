@@ -28,6 +28,7 @@ module _
   htpy-right-unit p = right-unit
 ```
 
+### squares 
 
 ```agda
 horizontal-concat-square :
@@ -128,15 +129,17 @@ unit-law-assoc-110' refl refl = refl
 
 ### Idea:
 
-Identity types of identity types are types of the form `p ＝ q`, where `p q : x ＝ y` and `x y : A`. Terms of such a type are often called "2-paths" such, and so a twice iterated identity type is often called "a type of 2-paths" and  (in reference to the homotopical interpretation of identity types).
+Identity types of identity types are types of the form `p ＝ q`, where `p q : x ＝ y` and `x y : A`. Terms of such a type are often called "2-paths" and a twice iterated identity type is often called "a type of 2-paths" and  (in reference to the homotopical interpretation of identity types).
 
 Since 2-paths are just equalities, they have the usual operations and coherences on paths/equalities.
 In the context of 2-paths, this famliar concatination operation is called vertical concatination
-(`vertical-concat-Id²` in the library). 
-
+(`vertical-concat-Id²` in the library).
 But 2-paths also have novel operations and coherences derived from the operations and coherences of
-the underlying 1-paths. Since concatination of 1-paths is a functor, it has an induced action on paths.
-We call this operation horizontal concatination (`horizontal-concat-Id²` in the library). It comes with the standard coherences of an action on paths function.
+the boundary 1-paths (these are `p` and `q` in the example above).
+Since concatination of 1-paths is a functor, it has an induced action on paths.
+We call this operation horizontal concatination (`horizontal-concat-Id²` in the library).
+It comes with the standard coherences of an action on paths function,
+as well as coherences induced by those on boundary 1-paths.
 
 --------------------------------------------------------------------------------
 
@@ -196,7 +199,8 @@ right-unit-law-horizontal-concat-Id² :
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
 ```
 
-Horizontal concatination satisfies an additional unit law (on both the left and right).
+Horizontal concatination satisfies an additional "2-dimensional" unit law (on both the left and right) induced
+by the unit laws on the boundary 1-paths.
 
 ```agda
 module _
