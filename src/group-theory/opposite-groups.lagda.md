@@ -1,6 +1,4 @@
----
-title: The opposite of a group
----
+{{#title  The opposite of a group}}
 
 ```agda
 module group-theory.opposite-groups where

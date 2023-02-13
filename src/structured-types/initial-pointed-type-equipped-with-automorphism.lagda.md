@@ -1,6 +1,4 @@
----
-title: The initial pointed type equipped with an automorphism
----
+{{#title  The initial pointed type equipped with an automorphism}}
 
 ```agda
 module structured-types.initial-pointed-type-equipped-with-automorphism where

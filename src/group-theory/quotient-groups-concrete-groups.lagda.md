@@ -1,6 +1,4 @@
----
-title: Quotient groups of concrete groups
----
+{{#title  Quotient groups of concrete groups}}
 
 ```agda
 module group-theory.quotient-groups-concrete-groups where

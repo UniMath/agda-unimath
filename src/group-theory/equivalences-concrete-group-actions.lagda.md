@@ -1,6 +1,4 @@
----
-title: Equivalences of concrete group actions
----
+{{#title  Equivalences of concrete group actions}}
 
 ```agda
 module group-theory.equivalences-concrete-group-actions where

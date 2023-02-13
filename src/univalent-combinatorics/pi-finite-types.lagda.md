@@ -1,6 +1,4 @@
----
-title: π-finite types
----
+{{#title  π-finite types}}
 
 ```agda
 module univalent-combinatorics.pi-finite-types where

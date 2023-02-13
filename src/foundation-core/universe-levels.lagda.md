@@ -1,6 +1,4 @@
----
-title: Universe levels
----
+{{#title  Universe levels}}
 
 ```agda
 {-# OPTIONS --safe --no-import-sorts #-}

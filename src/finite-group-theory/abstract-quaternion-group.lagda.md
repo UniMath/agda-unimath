@@ -1,6 +1,4 @@
----
-title: The abstract quaternion group of order 8
----
+{{#title  The abstract quaternion group of order 8}}
 
 ```agda
 module finite-group-theory.abstract-quaternion-group where

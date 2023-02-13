@@ -1,6 +1,4 @@
----
-title: Decidable equality
----
+{{#title  Decidable equality}}
 
 ```agda
 module foundation.decidable-equality where

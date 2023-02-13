@@ -1,6 +1,4 @@
----
-title: Split surjective maps
----
+{{#title  Split surjective maps}}
 
 ```agda
 module foundation.split-surjective-maps where

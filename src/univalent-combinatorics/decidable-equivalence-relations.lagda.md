@@ -1,6 +1,4 @@
----
-title: Decidable equivalence relations on finite types
----
+{{#title  Decidable equivalence relations on finite types}}
 
 ```agda
 module univalent-combinatorics.decidable-equivalence-relations where

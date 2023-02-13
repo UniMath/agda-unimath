@@ -1,6 +1,4 @@
----
-title: Stabilizer groups
----
+{{#title  Stabilizer groups}}
 
 ```agda
 module group-theory.stabilizer-groups where

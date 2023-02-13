@@ -1,6 +1,4 @@
----
-title: Normal subgroups
----
+{{#title  Normal subgroups}}
 
 ```agda
 module group-theory.normal-subgroups where

@@ -1,6 +1,4 @@
----
-title: Planar binary trees
----
+{{#title  Planar binary trees}}
 
 ```agda
 module order-theory.planar-binary-trees where

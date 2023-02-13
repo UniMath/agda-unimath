@@ -1,6 +1,4 @@
----
-title: Unlabeled partitions
----
+{{#title  Unlabeled partitions}}
 
 ```agda
 module univalent-combinatorics.unlabeled-partitions where

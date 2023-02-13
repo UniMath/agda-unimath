@@ -1,6 +1,4 @@
----
-title: The invariant basis property of rings
----
+{{#title  The invariant basis property of rings}}
 
 ```agda
 module ring-theory.invariant-basis-property-rings where

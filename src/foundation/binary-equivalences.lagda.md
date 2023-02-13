@@ -1,6 +1,4 @@
----
-title: Binary equivalences
----
+{{#title  Binary equivalences}}
 
 ```agda
 module foundation.binary-equivalences where

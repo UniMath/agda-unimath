@@ -1,6 +1,4 @@
----
-title: Uniqueness of set truncations
----
+{{#title  Uniqueness of set truncations}}
 
 ```agda
 module foundation.uniqueness-set-truncations where

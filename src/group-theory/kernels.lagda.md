@@ -1,6 +1,4 @@
----
-title: Kernels
----
+{{#title  Kernels}}
 
 ```agda
 module group-theory.kernels where

@@ -1,6 +1,4 @@
----
-title: Higher groups
----
+{{#title  Higher groups}}
 
 ```agda
 module group-theory.higher-groups where

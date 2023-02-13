@@ -1,6 +1,4 @@
----
-title: Intersection of subtypes
----
+{{#title  Intersection of subtypes}}
 
 ```agda
 module foundation.intersections-subtypes where

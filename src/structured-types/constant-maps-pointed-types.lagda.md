@@ -1,6 +1,4 @@
----
-title: Constant maps of pointed types
----
+{{#title  Constant maps of pointed types}}
 
 ```agda
 module structured-types.constant-maps-pointed-types where

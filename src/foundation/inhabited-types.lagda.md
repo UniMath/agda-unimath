@@ -1,6 +1,4 @@
----
-title: Inhabited types
----
+{{#title  Inhabited types}}
 
 ```agda
 module foundation.inhabited-types where

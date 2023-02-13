@@ -1,6 +1,4 @@
----
-title: Stereoisomerism for enriched undirected graphs
----
+{{#title  Stereoisomerism for enriched undirected graphs}}
 
 ```agda
 module graph-theory.stereoisomerism-enriched-undirected-graphs where

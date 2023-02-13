@@ -1,6 +1,4 @@
----
-title: Ring theory
----
+{{#title  Ring theory}}
 
 ```agda
 module ring-theory where

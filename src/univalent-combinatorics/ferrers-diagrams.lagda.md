@@ -1,6 +1,4 @@
----
-title: Ferrers diagrams (unlabeled partitions)
----
+{{#title  Ferrers diagrams (unlabeled partitions)}}
 
 ```agda
 module univalent-combinatorics.ferrers-diagrams where

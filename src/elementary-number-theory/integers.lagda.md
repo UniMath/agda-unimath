@@ -1,6 +1,4 @@
----
-title: The integers
----
+{{#title  The integers}}
 
 ```agda
 module elementary-number-theory.integers where

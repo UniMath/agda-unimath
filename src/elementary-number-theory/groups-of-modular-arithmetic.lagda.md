@@ -1,6 +1,4 @@
----
-title: The groups ℤ/kℤ
----
+{{#title  The groups ℤ/kℤ}}
 
 ```agda
 module elementary-number-theory.groups-of-modular-arithmetic where

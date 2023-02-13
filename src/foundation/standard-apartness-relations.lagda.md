@@ -1,6 +1,4 @@
----
-title: Standard apartness relations
----
+{{#title  Standard apartness relations}}
 
 ```agda
 module foundation.standard-apartness-relations where

@@ -1,6 +1,4 @@
----
-title: Representations of monoids
----
+{{#title  Representations of monoids}}
 
 ```agda
 module group-theory.representations-monoids where

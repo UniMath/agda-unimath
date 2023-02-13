@@ -1,6 +1,4 @@
----
-title: Propositions
----
+{{#title  Propositions}}
 
 ```agda
 module foundation-core.propositions where

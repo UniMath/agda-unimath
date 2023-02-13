@@ -1,6 +1,4 @@
----
-title: Binary functoriality of set quotients
----
+{{#title  Binary functoriality of set quotients}}
 
 ```agda
 module foundation.binary-functoriality-set-quotients where

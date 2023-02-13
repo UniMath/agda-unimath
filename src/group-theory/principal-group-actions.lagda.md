@@ -1,6 +1,4 @@
----
-title: Principal group actions
----
+{{#title  Principal group actions}}
 
 ```agda
 module group-theory.principal-group-actions where

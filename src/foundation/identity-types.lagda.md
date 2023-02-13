@@ -1,6 +1,4 @@
----
-title: Identity types
----
+{{#title  Identity types}}
 
 ```agda
 module foundation.identity-types where

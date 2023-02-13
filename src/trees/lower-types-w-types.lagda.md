@@ -1,6 +1,4 @@
----
-title: Lower types of elements in W-types
----
+{{#title  Lower types of elements in W-types}}
 
 ```agda
 module trees.lower-types-w-types where

@@ -1,6 +1,4 @@
----
-title: Congruence relations on groups
----
+{{#title  Congruence relations on groups}}
 
 ```agda
 module group-theory.congruence-relations-groups where

@@ -1,6 +1,4 @@
----
-title: Subgroups of concrete groups
----
+{{#title  Subgroups of concrete groups}}
 
 ```agda
 module group-theory.subgroups-concrete-groups where

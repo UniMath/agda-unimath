@@ -1,6 +1,4 @@
----
-title: Truncated types
----
+{{#title  Truncated types}}
 
 ```agda
 module foundation-core.truncated-types where

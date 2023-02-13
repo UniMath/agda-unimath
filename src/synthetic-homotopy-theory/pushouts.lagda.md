@@ -1,6 +1,4 @@
----
-title: Pushouts
----
+{{#title  Pushouts}}
 
 ```agda
 module synthetic-homotopy-theory.pushouts where

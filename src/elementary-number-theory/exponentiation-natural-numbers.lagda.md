@@ -1,6 +1,4 @@
----
-title: Exponentiation of natural numbers
----
+{{#title  Exponentiation of natural numbers}}
 
 ```agda
 module elementary-number-theory.exponentiation-natural-numbers where

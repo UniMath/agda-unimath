@@ -1,6 +1,4 @@
----
-title: Congruence relations on monoids
----
+{{#title  Congruence relations on monoids}}
 
 ```agda
 module group-theory.congruence-relations-monoids where

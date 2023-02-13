@@ -1,6 +1,4 @@
----
-title: The type of natural numbers
----
+{{#title  The type of natural numbers}}
 
 ```agda
 module elementary-number-theory.natural-numbers where

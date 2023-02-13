@@ -1,6 +1,4 @@
----
-title: Orientations of cubes
----
+{{#title  Orientations of cubes}}
 
 ```agda
 module univalent-combinatorics.orientations-cubes where

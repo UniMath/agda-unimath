@@ -1,6 +1,4 @@
----
-title: Equivalences of directed trees
----
+{{#title  Equivalences of directed trees}}
 
 ```agda
 module trees.equivalences-directed-trees where

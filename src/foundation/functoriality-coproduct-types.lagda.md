@@ -1,6 +1,4 @@
----
-title: Functoriality of coproduct types
----
+{{#title  Functoriality of coproduct types}}
 
 ```agda
 module foundation.functoriality-coproduct-types where

@@ -1,6 +1,4 @@
----
-title: Tetrahedra in 3-dimensional space
----
+{{#title  Tetrahedra in 3-dimensional space}}
 
 ```agda
 module finite-group-theory.tetrahedra-in-3-space where

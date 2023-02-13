@@ -1,6 +1,4 @@
----
-title: The universal property of coproduct types
----
+{{#title  The universal property of coproduct types}}
 
 ```agda
 module foundation.universal-property-coproduct-types where

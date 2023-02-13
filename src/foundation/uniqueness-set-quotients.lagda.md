@@ -1,6 +1,4 @@
----
-title: The uniqueness of set quotients
----
+{{#title  The uniqueness of set quotients}}
 
 ```agda
 module foundation.uniqueness-set-quotients where

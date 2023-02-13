@@ -1,6 +1,4 @@
----
-title: Uniqueness of the image of a map
----
+{{#title  Uniqueness of the image of a map}}
 
 ```agda
 module foundation.uniqueness-image where

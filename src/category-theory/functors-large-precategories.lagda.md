@@ -1,6 +1,4 @@
----
-title: Functors between large precategories
----
+{{#title  Functors between large precategories}}
 
 ```agda
 module category-theory.functors-large-precategories where

@@ -1,6 +1,4 @@
----
-title: Trees
----
+{{#title  Trees}}
 
 ```agda
 module trees where

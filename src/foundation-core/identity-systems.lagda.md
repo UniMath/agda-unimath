@@ -1,6 +1,4 @@
----
-title: Identity systems
----
+{{#title  Identity systems}}
 
 ```agda
 module foundation-core.identity-systems where

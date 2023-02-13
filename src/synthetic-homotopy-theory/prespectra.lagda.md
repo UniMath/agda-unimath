@@ -1,6 +1,4 @@
----
-title: Prespectra
----
+{{#title  Prespectra}}
 
 ```agda
 module synthetic-homotopy-theory.prespectra where

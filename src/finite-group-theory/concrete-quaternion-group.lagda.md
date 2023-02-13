@@ -1,6 +1,4 @@
----
-title: The concrete quaternion group
----
+{{#title  The concrete quaternion group}}
 
 ```agda
 module finite-group-theory.concrete-quaternion-group where

@@ -1,6 +1,4 @@
----
-title: Nonzero natural numbers
----
+{{#title  Nonzero natural numbers}}
 
 ```agda
 module elementary-number-theory.nonzero-natural-numbers where

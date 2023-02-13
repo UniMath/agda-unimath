@@ -1,6 +1,4 @@
----
-title: Local commutative rings
----
+{{#title  Local commutative rings}}
 
 ```agda
 module commutative-algebra.local-commutative-rings where

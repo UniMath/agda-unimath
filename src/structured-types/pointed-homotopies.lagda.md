@@ -1,6 +1,4 @@
----
-title: Pointed homotopies
----
+{{#title  Pointed homotopies}}
 
 ```agda
 module structured-types.pointed-homotopies where

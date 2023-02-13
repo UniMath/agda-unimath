@@ -1,6 +1,4 @@
----
-title: Symmetric elements of involutive types
----
+{{#title  Symmetric elements of involutive types}}
 
 ```agda
 module structured-types.symmetric-elements-involutive-types where

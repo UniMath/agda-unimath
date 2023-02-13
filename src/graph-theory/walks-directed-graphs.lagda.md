@@ -1,6 +1,4 @@
----
-title: Walks in directed graphs
----
+{{#title  Walks in directed graphs}}
 
 ```agda
 module graph-theory.walks-directed-graphs where

@@ -1,6 +1,4 @@
----
-title: The subtype identity principle
----
+{{#title  The subtype identity principle}}
 
 ```agda
 module foundation-core.subtype-identity-principle where

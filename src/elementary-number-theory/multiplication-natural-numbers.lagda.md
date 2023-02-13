@@ -1,6 +1,4 @@
----
-title: Multiplication of natural numbers
----
+{{#title  Multiplication of natural numbers}}
 
 ```agda
 module elementary-number-theory.multiplication-natural-numbers where

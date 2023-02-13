@@ -1,6 +1,4 @@
----
-title: Induction principles on W-types
----
+{{#title  Induction principles on W-types}}
 
 ```agda
 module trees.induction-w-types where

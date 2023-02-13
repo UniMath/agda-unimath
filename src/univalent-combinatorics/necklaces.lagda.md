@@ -1,6 +1,4 @@
----
-title: Necklaces
----
+{{#title  Necklaces}}
 
 ```agda
 module univalent-combinatorics.necklaces where

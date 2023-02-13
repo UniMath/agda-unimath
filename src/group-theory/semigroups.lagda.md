@@ -1,6 +1,4 @@
----
-title: Semigroups
----
+{{#title  Semigroups}}
 
 ```agda
 module group-theory.semigroups where

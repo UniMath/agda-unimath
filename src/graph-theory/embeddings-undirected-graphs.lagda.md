@@ -1,6 +1,4 @@
----
-title: Embeddings of undirected graphs
----
+{{#title  Embeddings of undirected graphs}}
 
 ```agda
 module graph-theory.embeddings-undirected-graphs where

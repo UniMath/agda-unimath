@@ -1,6 +1,4 @@
----
-title: Standard finite trees
----
+{{#title  Standard finite trees}}
 
 ```agda
 module univalent-combinatorics.standard-finite-trees where

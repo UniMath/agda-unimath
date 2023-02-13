@@ -1,6 +1,4 @@
----
-title: The dihedral group construction
----
+{{#title  The dihedral group construction}}
 
 ```agda
 module group-theory.dihedral-group-construction where

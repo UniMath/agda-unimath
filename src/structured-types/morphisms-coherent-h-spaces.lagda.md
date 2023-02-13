@@ -1,6 +1,4 @@
----
-title: Morphisms of coherent H-spaces
----
+{{#title  Morphisms of coherent H-spaces}}
 
 ```agda
 module structured-types.morphisms-coherent-h-spaces where

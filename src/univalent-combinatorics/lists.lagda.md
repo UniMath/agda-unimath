@@ -1,6 +1,4 @@
----
-title: Lists
----
+{{#title  Lists}}
 
 ```agda
 module univalent-combinatorics.lists where

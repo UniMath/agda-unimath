@@ -1,6 +1,4 @@
----
-title: Isotopies of Latin squares
----
+{{#title  Isotopies of Latin squares}}
 
 ```agda
 module univalent-combinatorics.isotopies-latin-squares where

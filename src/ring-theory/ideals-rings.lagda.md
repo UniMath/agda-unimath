@@ -1,6 +1,4 @@
----
-title: Ideals in rings
----
+{{#title  Ideals in rings}}
 
 ```agda
 module ring-theory.ideals-rings where

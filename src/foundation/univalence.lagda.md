@@ -1,6 +1,4 @@
----
-title: The univalence axiom
----
+{{#title  The univalence axiom}}
 
 ```agda
 module foundation.univalence where

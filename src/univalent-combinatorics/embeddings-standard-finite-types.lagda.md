@@ -1,6 +1,4 @@
----
-title: Embeddings between standard finite types
----
+{{#title  Embeddings between standard finite types}}
 
 ```agda
 module univalent-combinatorics.embeddings-standard-finite-types where

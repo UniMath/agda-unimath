@@ -1,6 +1,4 @@
----
-title: Retractions
----
+{{#title  Retractions}}
 
 ```agda
 module foundation.retractions where

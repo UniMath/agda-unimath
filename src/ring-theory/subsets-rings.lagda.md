@@ -1,6 +1,4 @@
----
-title: Subsets of rings
----
+{{#title  Subsets of rings}}
 
 ```agda
 module ring-theory.subsets-rings where

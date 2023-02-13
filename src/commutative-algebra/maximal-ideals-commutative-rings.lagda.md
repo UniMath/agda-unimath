@@ -1,6 +1,4 @@
----
-title: Maximal ideals in commutative rings
----
+{{#title  Maximal ideals in commutative rings}}
 
 ```agda
 module commutative-algebra.maximal-ideals-commutative-rings where

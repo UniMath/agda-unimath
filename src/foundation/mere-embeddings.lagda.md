@@ -1,6 +1,4 @@
----
-title: Mere embeddings
----
+{{#title  Mere embeddings}}
 
 ```agda
 module foundation.mere-embeddings where

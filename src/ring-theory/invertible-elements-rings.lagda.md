@@ -1,6 +1,4 @@
----
-title: Invertible elements in rings
----
+{{#title  Invertible elements in rings}}
 
 ```agda
 module ring-theory.invertible-elements-rings where

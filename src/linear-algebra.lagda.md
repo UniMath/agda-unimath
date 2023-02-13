@@ -1,6 +1,4 @@
----
-title: Linear algebra
----
+{{#title  Linear algebra}}
 
 ```agda
 module linear-algebra where

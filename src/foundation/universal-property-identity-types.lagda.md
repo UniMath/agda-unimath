@@ -1,6 +1,4 @@
----
-title: The universal property of identity types
----
+{{#title  The universal property of identity types}}
 
 ```agda
 module foundation.universal-property-identity-types where

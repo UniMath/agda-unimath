@@ -1,6 +1,4 @@
----
-title: The center of a group
----
+{{#title  The center of a group}}
 
 ```agda
 module group-theory.centers-groups where

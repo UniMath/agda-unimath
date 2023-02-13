@@ -1,6 +1,4 @@
----
-title: Repeating an element in a standard finite type
----
+{{#title  Repeating an element in a standard finite type}}
 
 ```agda
 module elementary-number-theory.repeating-element-standard-finite-type where

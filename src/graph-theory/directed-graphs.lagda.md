@@ -1,6 +1,4 @@
----
-title: Graphs
----
+{{#title  Graphs}}
 
 ```agda
 module graph-theory.directed-graphs where

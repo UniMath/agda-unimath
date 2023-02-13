@@ -1,6 +1,4 @@
----
-title: Finitely cyclic maps
----
+{{#title  Finitely cyclic maps}}
 
 ```agda
 module elementary-number-theory.finitely-cyclic-maps where

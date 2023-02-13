@@ -1,6 +1,4 @@
----
-title: Path-split maps
----
+{{#title  Path-split maps}}
 
 ```agda
 module foundation-core.path-split-maps where

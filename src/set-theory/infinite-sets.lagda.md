@@ -1,6 +1,4 @@
----
-title: Infinite sets
----
+{{#title  Infinite sets}}
 
 ```agda
 module set-theory.infinite-sets where

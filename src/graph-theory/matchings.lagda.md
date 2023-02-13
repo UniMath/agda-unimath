@@ -1,6 +1,4 @@
----
-title: Matchings
----
+{{#title  Matchings}}
 
 ```agda
 module graph-theory.matchings where

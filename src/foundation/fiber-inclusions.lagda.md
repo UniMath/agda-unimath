@@ -1,6 +1,4 @@
----
-title: Fiber inclusions
----
+{{#title  Fiber inclusions}}
 
 ```agda
 module foundation.fiber-inclusions where

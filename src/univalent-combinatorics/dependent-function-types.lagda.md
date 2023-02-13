@@ -1,6 +1,4 @@
----
-title: Counting the elements of dependent function types
----
+{{#title  Counting the elements of dependent function types}}
 
 ```agda
 module univalent-combinatorics.dependent-function-types where

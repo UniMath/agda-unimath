@@ -1,6 +1,4 @@
----
-title: Sequences of elements in finite types
----
+{{#title  Sequences of elements in finite types}}
 
 ```agda
 module univalent-combinatorics.sequences-finite-types where

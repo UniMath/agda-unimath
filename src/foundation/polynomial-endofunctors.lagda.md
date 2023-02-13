@@ -1,6 +1,4 @@
----
-title: Polynomial endofunctors
----
+{{#title  Polynomial endofunctors}}
 
 ```agda
 module foundation.polynomial-endofunctors where

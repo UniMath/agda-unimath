@@ -1,6 +1,4 @@
----
-title: Deloopings of the sign homomorphism
----
+{{#title  Deloopings of the sign homomorphism}}
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

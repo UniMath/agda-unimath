@@ -1,6 +1,4 @@
----
-title: Precategories
----
+{{#title  Precategories}}
 
 ```agda
 module category-theory.precategories where

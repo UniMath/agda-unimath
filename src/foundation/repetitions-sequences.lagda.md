@@ -1,6 +1,4 @@
----
-title: Repetitions in sequences
----
+{{#title  Repetitions in sequences}}
 
 ```agda
 module foundation.repetitions-sequences where

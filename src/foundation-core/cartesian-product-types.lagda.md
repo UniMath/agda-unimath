@@ -1,6 +1,4 @@
----
-title: Cartesian product types
----
+{{#title  Cartesian product types}}
 
 ```agda
 {-# OPTIONS --safe #-}

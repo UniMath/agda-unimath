@@ -1,6 +1,4 @@
----
-title: Singleton subtypes
----
+{{#title  Singleton subtypes}}
 
 ```agda
 module foundation.singleton-subtypes where

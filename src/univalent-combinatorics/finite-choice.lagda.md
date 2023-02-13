@@ -1,6 +1,4 @@
----
-title: Finite choice
----
+{{#title  Finite choice}}
 
 ```agda
 module univalent-combinatorics.finite-choice where

@@ -1,6 +1,4 @@
----
-title: Singleton induction
----
+{{#title  Singleton induction}}
 
 ```agda
 module foundation.singleton-induction where

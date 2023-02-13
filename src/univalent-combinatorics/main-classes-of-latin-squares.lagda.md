@@ -1,6 +1,4 @@
----
-title: The groupoid of main classes of Latin squares
----
+{{#title  The groupoid of main classes of Latin squares}}
 
 ```agda
 module univalent-combinatorics.main-classes-of-latin-squares where

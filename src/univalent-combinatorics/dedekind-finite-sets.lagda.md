@@ -1,6 +1,4 @@
----
-title: Dedekind finite sets
----
+{{#title  Dedekind finite sets}}
 
 ```agda
 module univalent-combinatorics.dedekind-finite-sets where

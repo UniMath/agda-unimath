@@ -1,6 +1,4 @@
----
-title: Logical equivalences
----
+{{#title  Logical equivalences}}
 
 ```agda
 module foundation-core.logical-equivalences where

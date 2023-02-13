@@ -1,6 +1,4 @@
----
-title: Regular undirected graph
----
+{{#title  Regular undirected graph}}
 
 ```agda
 module graph-theory.regular-undirected-graphs where

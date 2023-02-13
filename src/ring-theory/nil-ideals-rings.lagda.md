@@ -1,6 +1,4 @@
----
-title: Nil ideals
----
+{{#title  Nil ideals}}
 
 ```agda
 module ring-theory.nil-ideals-rings where

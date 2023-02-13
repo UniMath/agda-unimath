@@ -1,6 +1,4 @@
----
-title: Algebras over rings
----
+{{#title  Algebras over rings}}
 
 ```agda
 module ring-theory.algebras-rings where

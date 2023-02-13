@@ -1,6 +1,4 @@
----
-title: The structure identity principle
----
+{{#title  The structure identity principle}}
 
 ```agda
 module foundation.structure-identity-principle where

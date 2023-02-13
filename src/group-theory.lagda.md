@@ -1,6 +1,4 @@
----
-title: Group theory
----
+{{#title  Group theory}}
 
 ```agda
 module group-theory where

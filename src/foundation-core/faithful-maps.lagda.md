@@ -1,6 +1,4 @@
----
-title: Faithful maps
----
+{{#title  Faithful maps}}
 
 ```agda
 module foundation-core.faithful-maps where

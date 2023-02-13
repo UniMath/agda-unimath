@@ -1,6 +1,4 @@
----
-title: Commutative algebra
----
+{{#title  Commutative algebra}}
 
 ```agda
 module commutative-algebra where

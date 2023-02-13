@@ -1,6 +1,4 @@
----
-title: Commutative monoids
----
+{{#title  Commutative monoids}}
 
 ```agda
 module group-theory.commutative-monoids where

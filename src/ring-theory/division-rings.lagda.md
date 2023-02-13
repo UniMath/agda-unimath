@@ -1,6 +1,4 @@
----
-title: Division rings
----
+{{#title  Division rings}}
 
 ```agda
 module ring-theory.division-rings where

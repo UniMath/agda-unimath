@@ -1,6 +1,4 @@
----
-title: The W-type of the type of propositions
----
+{{#title  The W-type of the type of propositions}}
 
 ```agda
 module trees.w-type-of-propositions where

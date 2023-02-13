@@ -1,6 +1,4 @@
----
-title: Partitions of finite types
----
+{{#title  Partitions of finite types}}
 
 ```agda
 module univalent-combinatorics.partitions where

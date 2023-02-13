@@ -1,6 +1,4 @@
----
-title: Equivalences between categories
----
+{{#title  Equivalences between categories}}
 
 ```agda
 module category-theory.equivalences-categories where

@@ -1,6 +1,4 @@
----
-title: Divisibility in modular arithmetic
----
+{{#title  Divisibility in modular arithmetic}}
 
 ```agda
 module elementary-number-theory.divisibility-modular-arithmetic where

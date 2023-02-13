@@ -1,6 +1,4 @@
----
-title: The universal property of pullbacks
----
+{{#title  The universal property of pullbacks}}
 
 ```agda
 module foundation.universal-property-pullbacks where

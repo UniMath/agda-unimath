@@ -1,6 +1,4 @@
----
-title: Submonoids
----
+{{#title  Submonoids}}
 
 ```agda
 module group-theory.submonoids where

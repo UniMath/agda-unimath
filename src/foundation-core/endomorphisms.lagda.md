@@ -1,6 +1,4 @@
----
-title: Endomorphisms
----
+{{#title  Endomorphisms}}
 
 ```agda
 module foundation-core.endomorphisms where

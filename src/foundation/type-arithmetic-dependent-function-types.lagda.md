@@ -1,6 +1,4 @@
----
-title: Type arithmetic with dependent function types
----
+{{#title  Type arithmetic with dependent function types}}
 
 ```agda
 module foundation.type-arithmetic-dependent-function-types where

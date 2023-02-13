@@ -1,6 +1,4 @@
----
-title: Involutive types
----
+{{#title  Involutive types}}
 
 ```agda
 module structured-types.involutive-types where

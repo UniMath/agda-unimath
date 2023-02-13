@@ -1,6 +1,4 @@
----
-title: Conjunction of propositions
----
+{{#title  Conjunction of propositions}}
 
 ```agda
 module foundation.conjunction where

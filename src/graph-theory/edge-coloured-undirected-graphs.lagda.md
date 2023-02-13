@@ -1,6 +1,4 @@
----
-title: Edge-coloured undirected graphs
----
+{{#title  Edge-coloured undirected graphs}}
 
 ```agda
 module graph-theory.edge-coloured-undirected-graphs where

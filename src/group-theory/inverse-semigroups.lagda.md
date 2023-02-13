@@ -1,6 +1,4 @@
----
-title: Inverse semigroups
----
+{{#title  Inverse semigroups}}
 
 ```agda
 module group-theory.inverse-semigroups where

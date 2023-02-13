@@ -1,6 +1,4 @@
----
-title: Impredicative encodings of the logical operations
----
+{{#title  Impredicative encodings of the logical operations}}
 
 ```agda
 module foundation.impredicative-encodings where

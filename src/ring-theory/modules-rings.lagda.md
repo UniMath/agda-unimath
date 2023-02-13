@@ -1,6 +1,4 @@
----
-title: Modules over rings
----
+{{#title  Modules over rings}}
 
 ```agda
 module ring-theory.modules-rings where

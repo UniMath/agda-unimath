@@ -1,6 +1,4 @@
----
-title: Effective maps for equivalence relations
----
+{{#title  Effective maps for equivalence relations}}
 
 ```agda
 module foundation.effective-maps-equivalence-relations where

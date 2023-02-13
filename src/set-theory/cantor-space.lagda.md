@@ -1,6 +1,4 @@
----
-title: Cantor space
----
+{{#title  Cantor space}}
 
 ```agda
 module set-theory.cantor-space where

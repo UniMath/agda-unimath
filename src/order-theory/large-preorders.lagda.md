@@ -1,6 +1,4 @@
----
-title: Large preorders
----
+{{#title  Large preorders}}
 
 ```agda
 module order-theory.large-preorders where

@@ -1,6 +1,4 @@
----
-title: Indexed W-types
----
+{{#title  Indexed W-types}}
 
 ```agda
 module trees.indexed-w-types where

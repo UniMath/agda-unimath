@@ -1,6 +1,4 @@
----
-title: The higher group of integers
----
+{{#title  The higher group of integers}}
 
 ```agda
 module group-theory.integers-higher-group where

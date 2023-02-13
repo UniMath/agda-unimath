@@ -1,6 +1,4 @@
----
-title: Monoids
----
+{{#title  Monoids}}
 
 ```agda
 module group-theory.monoids where

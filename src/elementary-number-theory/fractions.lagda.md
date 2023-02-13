@@ -1,6 +1,4 @@
----
-title: Fractions
----
+{{#title  Fractions}}
 
 ```agda
 module elementary-number-theory.fractions where

@@ -1,6 +1,4 @@
----
-title: Surjective maps between finite types
----
+{{#title  Surjective maps between finite types}}
 
 ```agda
 module univalent-combinatorics.surjective-maps where

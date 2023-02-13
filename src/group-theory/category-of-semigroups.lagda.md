@@ -1,6 +1,4 @@
----
-title: The category of semigroups
----
+{{#title  The category of semigroups}}
 
 ```agda
 module group-theory.category-of-semigroups where

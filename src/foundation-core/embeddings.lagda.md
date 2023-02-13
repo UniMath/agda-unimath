@@ -1,6 +1,4 @@
----
-title: Embeddings
----
+{{#title  Embeddings}}
 
 ```agda
 {-# OPTIONS --safe #-}

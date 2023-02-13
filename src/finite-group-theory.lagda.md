@@ -1,6 +1,4 @@
----
-title: Finite group theory
----
+{{#title  Finite group theory}}
 
 ```agda
 module finite-group-theory where

@@ -1,6 +1,4 @@
----
-title: Impredicative universes
----
+{{#title  Impredicative universes}}
 
 ```agda
 module foundation.impredicative-universes where

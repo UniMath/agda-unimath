@@ -1,6 +1,4 @@
----
-title: The precategory of semigroups
----
+{{#title  The precategory of semigroups}}
 
 ```agda
 module group-theory.precategory-of-semigroups where

@@ -1,6 +1,4 @@
----
-title: Joins of types
----
+{{#title  Joins of types}}
 
 ```agda
 module synthetic-homotopy-theory.joins-of-types where

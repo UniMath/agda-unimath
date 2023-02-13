@@ -1,6 +1,4 @@
----
-title: Transitive group actions
----
+{{#title  Transitive group actions}}
 
 ```agda
 module group-theory.transitive-group-actions where

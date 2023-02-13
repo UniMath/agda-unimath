@@ -1,6 +1,4 @@
----
-title: Unordered tuples of types
----
+{{#title  Unordered tuples of types}}
 
 ```agda
 module foundation.unordered-tuples-of-types where

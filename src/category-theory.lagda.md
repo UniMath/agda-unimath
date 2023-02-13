@@ -1,6 +1,4 @@
----
-title: Category theory
----
+{{#title  Category theory}}
 
 ```agda
 module category-theory where

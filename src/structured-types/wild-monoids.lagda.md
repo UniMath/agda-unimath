@@ -1,6 +1,4 @@
----
-title: Wild monoids
----
+{{#title  Wild monoids}}
 
 ```agda
 module structured-types.wild-monoids where

@@ -1,6 +1,4 @@
----
-title: Raising universe levels
----
+{{#title  Raising universe levels}}
 
 ```agda
 module foundation.raising-universe-levels where

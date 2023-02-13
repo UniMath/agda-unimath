@@ -1,6 +1,4 @@
----
-title: Contractible maps
----
+{{#title  Contractible maps}}
 
 ```agda
 module foundation-core.contractible-maps where

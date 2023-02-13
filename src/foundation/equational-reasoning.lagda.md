@@ -1,5 +1,4 @@
----
-title: Equational reasoning
+{{#title  Equational reasoning
 ---
 
 Tom de Jong, 27 May 2022.

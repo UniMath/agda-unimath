@@ -1,6 +1,4 @@
----
-title: Symmetric difference of subtypes
----
+{{#title  Symmetric difference of subtypes}}
 
 ```agda
 module foundation.symmetric-difference where

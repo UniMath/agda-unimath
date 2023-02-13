@@ -1,6 +1,4 @@
----
-title: The precategory of group actions
----
+{{#title  The precategory of group actions}}
 
 ```agda
 module group-theory.precategory-of-group-actions where

@@ -1,5 +1,4 @@
----
-title: Uncountable sets
+{{#title  Uncountable sets
 ___
 
 ```agda

@@ -1,6 +1,4 @@
----
-title: Counting the elements of decidable subtypes
----
+{{#title  Counting the elements of decidable subtypes}}
 
 ```agda
 module univalent-combinatorics.counting-decidable-subtypes where

@@ -1,6 +1,4 @@
----
-title: Hexagons of identifications
----
+{{#title  Hexagons of identifications}}
 
 ```agda
 module foundation.hexagons-of-identifications where

@@ -1,6 +1,4 @@
----
-title: Isomorphisms of semigroups
----
+{{#title  Isomorphisms of semigroups}}
 
 ```agda
 module group-theory.isomorphisms-semigroups where

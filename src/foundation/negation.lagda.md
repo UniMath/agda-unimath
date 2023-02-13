@@ -1,6 +1,4 @@
----
-title: Negation
----
+{{#title  Negation}}
 
 ```agda
 module foundation.negation where

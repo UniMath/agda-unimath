@@ -1,6 +1,4 @@
----
-title: Bezout's lemma
----
+{{#title  Bezout's lemma}}
 
 ```agda
 module elementary-number-theory.bezouts-lemma where

@@ -1,6 +1,4 @@
----
-title: Retracts of the type of natural numbers
----
+{{#title  Retracts of the type of natural numbers}}
 
 ```agda
 module elementary-number-theory.retracts-of-natural-numbers where

@@ -1,6 +1,4 @@
----
-title: Set theory
----
+{{#title  Set theory}}
 
 ```agda
 module set-theory where

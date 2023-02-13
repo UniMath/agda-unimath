@@ -1,6 +1,4 @@
----
-title: Finitely π-presented types
----
+{{#title  Finitely π-presented types}}
 
 ```agda
 module univalent-combinatorics.presented-pi-finite-types where

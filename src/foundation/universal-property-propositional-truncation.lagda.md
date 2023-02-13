@@ -1,6 +1,4 @@
----
-title: The universal property of propositional truncations
----
+{{#title  The universal property of propositional truncations}}
 
 ```agda
 module foundation.universal-property-propositional-truncation where

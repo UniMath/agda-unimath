@@ -1,6 +1,4 @@
----
-title: The greatest common divisor of natural numbers
----
+{{#title  The greatest common divisor of natural numbers}}
 
 ```agda
 module elementary-number-theory.greatest-common-divisor-natural-numbers where

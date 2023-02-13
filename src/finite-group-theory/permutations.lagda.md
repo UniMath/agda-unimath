@@ -1,6 +1,4 @@
----
-title: Permutations
----
+{{#title  Permutations}}
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

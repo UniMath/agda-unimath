@@ -1,6 +1,4 @@
----
-title: The Well-Ordering Principle of the standard finite types
----
+{{#title  The Well-Ordering Principle of the standard finite types}}
 
 ```agda
 module

@@ -1,6 +1,4 @@
----
-title: Projective types
----
+{{#title  Projective types}}
 
 ```agda
 module foundation.projective-types where

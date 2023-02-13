@@ -1,6 +1,4 @@
----
-title: The difference between integers
----
+{{#title  The difference between integers}}
 
 ```agda
 module elementary-number-theory.difference-integers where

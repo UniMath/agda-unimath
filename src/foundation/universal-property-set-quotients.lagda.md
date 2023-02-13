@@ -1,6 +1,4 @@
----
-title: The universal property of set quotients
----
+{{#title  The universal property of set quotients}}
 
 ```agda
 module foundation.universal-property-set-quotients where

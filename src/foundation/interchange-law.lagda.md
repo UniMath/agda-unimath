@@ -1,6 +1,4 @@
----
-title: The interchange law
----
+{{#title  The interchange law}}
 
 ```agda
 module foundation.interchange-law where

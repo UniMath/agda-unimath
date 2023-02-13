@@ -1,6 +1,4 @@
----
-title: The pigeonhole principle
----
+{{#title  The pigeonhole principle}}
 
 ```agda
 module univalent-combinatorics.pigeonhole-principle where

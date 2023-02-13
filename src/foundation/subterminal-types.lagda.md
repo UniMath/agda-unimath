@@ -1,6 +1,4 @@
----
-title: Subterminal types
----
+{{#title  Subterminal types}}
 
 ```agda
 module foundation.subterminal-types where

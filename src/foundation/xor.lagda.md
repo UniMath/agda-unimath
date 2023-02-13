@@ -1,6 +1,4 @@
----
-title: Exclusive disjunction of propositions
----
+{{#title  Exclusive disjunction of propositions}}
 
 ```agda
 module foundation.xor where

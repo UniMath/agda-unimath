@@ -1,6 +1,4 @@
----
-title: Large categories
----
+{{#title  Large categories}}
 
 ```agda
 module category-theory.large-categories where

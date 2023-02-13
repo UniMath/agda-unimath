@@ -1,6 +1,4 @@
----
-title: The precategory of concrete groups
----
+{{#title  The precategory of concrete groups}}
 
 ```agda
 module group-theory.precategory-of-concrete-groups where

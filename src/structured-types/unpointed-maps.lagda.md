@@ -1,6 +1,4 @@
----
-title: Unpointed maps between pointed types
----
+{{#title  Unpointed maps between pointed types}}
 
 ```agda
 module structured-types.unpointed-maps where

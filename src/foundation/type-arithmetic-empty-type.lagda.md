@@ -1,6 +1,4 @@
----
-title: Type arithmetic with the empty type
----
+{{#title  Type arithmetic with the empty type}}
 
 ```agda
 module foundation.type-arithmetic-empty-type where

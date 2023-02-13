@@ -1,6 +1,4 @@
----
-title: Set presented types
----
+{{#title  Set presented types}}
 
 ```agda
 module foundation.set-presented-types where

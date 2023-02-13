@@ -1,6 +1,4 @@
----
-title: Integral domains
----
+{{#title  Integral domains}}
 
 ```agda
 module commutative-algebra.integral-domains where

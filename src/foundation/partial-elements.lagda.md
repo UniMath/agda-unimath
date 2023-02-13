@@ -1,6 +1,4 @@
----
-title: Partial elements
----
+{{#title  Partial elements}}
 
 ```agda
 module foundation.partial-elements where

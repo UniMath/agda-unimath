@@ -1,6 +1,4 @@
----
-title: The symmetric identity types
----
+{{#title  The symmetric identity types}}
 
 ```agda
 module foundation.symmetric-identity-types where

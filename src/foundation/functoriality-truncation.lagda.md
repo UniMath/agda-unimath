@@ -1,6 +1,4 @@
----
-title: Functoriality of truncations
----
+{{#title  Functoriality of truncations}}
 
 ```agda
 module foundation.functoriality-truncation where

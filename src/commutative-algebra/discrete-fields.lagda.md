@@ -1,6 +1,4 @@
----
-title: Discrete fields
----
+{{#title  Discrete fields}}
 
 ```agda
 module commutative-algebra.discrete-fields where

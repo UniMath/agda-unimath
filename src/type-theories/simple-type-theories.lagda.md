@@ -1,6 +1,4 @@
----
-title: Simple type theories
----
+{{#title  Simple type theories}}
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}

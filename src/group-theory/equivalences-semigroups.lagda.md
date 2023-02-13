@@ -1,6 +1,4 @@
----
-title: Equivalences between semigroups
----
+{{#title  Equivalences between semigroups}}
 
 ```agda
 module group-theory.equivalences-semigroups where

@@ -1,6 +1,4 @@
----
-title: The absolute value function on the integers
----
+{{#title  The absolute value function on the integers}}
 
 ```agda
 module elementary-number-theory.absolute-value-integers where

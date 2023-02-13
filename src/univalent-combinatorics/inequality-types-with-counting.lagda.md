@@ -1,6 +1,4 @@
----
-title: Inequality on types equipped with a counting
----
+{{#title  Inequality on types equipped with a counting}}
 
 ```agda
 module univalent-combinatorics.inequality-types-with-counting where

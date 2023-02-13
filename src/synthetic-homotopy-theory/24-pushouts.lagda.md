@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+{{#title  Formalisation of the Symmetry Book}}
 
 ```agda
 module synthetic-homotopy-theory.24-pushouts where

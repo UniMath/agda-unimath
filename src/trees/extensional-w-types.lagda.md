@@ -1,6 +1,4 @@
----
-title: Extensional W-types
----
+{{#title  Extensional W-types}}
 
 ```agda
 module trees.extensional-w-types where

@@ -1,6 +1,4 @@
----
-title: Faithful morphisms of undirected graphs
----
+{{#title  Faithful morphisms of undirected graphs}}
 
 ```agda
 module graph-theory.faithful-morphisms-undirected-graphs where

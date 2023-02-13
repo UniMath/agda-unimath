@@ -1,6 +1,4 @@
----
-title: Counting in type theory
----
+{{#title  Counting in type theory}}
 
 ```agda
 module univalent-combinatorics.counting where

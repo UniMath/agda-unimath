@@ -1,6 +1,4 @@
----
-title: Morphisms of cospans
----
+{{#title  Morphisms of cospans}}
 
 ```agda
 {-# OPTIONS --safe #-}

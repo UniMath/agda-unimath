@@ -1,6 +1,4 @@
----
-title: Proper divisors of natural numbers
----
+{{#title  Proper divisors of natural numbers}}
 
 ```agda
 module elementary-number-theory.proper-divisors-natural-numbers where

@@ -1,6 +1,5 @@
 ---
-title : Shifting sequences
----
+title : Shifting sequences}}
 
 ```agda
 module foundation.shifting-sequences where

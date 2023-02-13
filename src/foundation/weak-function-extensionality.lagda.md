@@ -1,6 +1,4 @@
----
-title: Weak function extensionality
----
+{{#title  Weak function extensionality}}
 
 ```agda
 module foundation.weak-function-extensionality where

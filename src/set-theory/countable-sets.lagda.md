@@ -1,6 +1,4 @@
----
-title: Countable sets
----
+{{#title  Countable sets}}
 
 ```agda
 module set-theory.countable-sets where

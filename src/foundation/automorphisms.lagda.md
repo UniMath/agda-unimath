@@ -1,6 +1,4 @@
----
-title: Automorphisms of types
----
+{{#title  Automorphisms of types}}
 
 ```agda
 module foundation.automorphisms where

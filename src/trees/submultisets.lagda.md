@@ -1,6 +1,4 @@
----
-title: Submultisets
----
+{{#title  Submultisets}}
 
 ```agda
 module trees.submultisets where

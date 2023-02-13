@@ -1,6 +1,4 @@
----
-title: Isomorphisms in categories
----
+{{#title  Isomorphisms in categories}}
 
 ```agda
 module category-theory.isomorphisms-categories where

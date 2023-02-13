@@ -1,5 +1,4 @@
----
-title: Univalent mathematics in Agda
+{{#title  Univalent mathematics in Agda
 ---
 
 Welcome to the website of the `agda-unimath` formalization project.

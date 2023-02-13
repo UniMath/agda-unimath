@@ -1,6 +1,4 @@
----
-title: Suspensions of types
----
+{{#title  Suspensions of types}}
 
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where

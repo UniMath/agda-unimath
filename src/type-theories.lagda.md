@@ -1,6 +1,4 @@
----
-title: Type theories
----
+{{#title  Type theories}}
 
 ```agda
 {-# OPTIONS --guardedness #-}

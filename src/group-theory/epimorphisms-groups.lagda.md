@@ -1,6 +1,4 @@
----
-title: Epimorphisms in groups
----
+{{#title  Epimorphisms in groups}}
 
 ```agda
 module group-theory.epimorphisms-groups where

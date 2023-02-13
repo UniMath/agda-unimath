@@ -1,6 +1,4 @@
----
-title: Isolated points
----
+{{#title  Isolated points}}
 
 ```agda
 module foundation.isolated-points where

@@ -1,6 +1,4 @@
----
-title: Products of tuples of types
----
+{{#title  Products of tuples of types}}
 
 ```agda
 module foundation.products-of-tuples-of-types where

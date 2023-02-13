@@ -1,6 +1,4 @@
----
-title: Morphisms of undirected graphs
----
+{{#title  Morphisms of undirected graphs}}
 
 ```agda
 module graph-theory.morphisms-undirected-graphs where

@@ -1,6 +1,4 @@
----
-title: Dependent pair types
----
+{{#title  Dependent pair types}}
 
 ```agda
 {-# OPTIONS --safe #-}

@@ -1,6 +1,4 @@
----
-title: The infinite complex projective space
----
+{{#title  The infinite complex projective space}}
 
 ```agda
 module synthetic-homotopy-theory.infinite-complex-projective-space where

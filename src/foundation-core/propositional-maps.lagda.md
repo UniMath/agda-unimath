@@ -1,6 +1,4 @@
----
-title: Propositional maps
----
+{{#title  Propositional maps}}
 
 ```agda
 module foundation-core.propositional-maps where

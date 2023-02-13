@@ -1,6 +1,4 @@
----
-title: Monomorphisms of concrete groups
----
+{{#title  Monomorphisms of concrete groups}}
 
 ```agda
 module group-theory.monomorphisms-concrete-groups where

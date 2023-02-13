@@ -1,6 +1,4 @@
----
-title: Propositional extensionality
----
+{{#title  Propositional extensionality}}
 
 ```agda
 module foundation.propositional-extensionality where

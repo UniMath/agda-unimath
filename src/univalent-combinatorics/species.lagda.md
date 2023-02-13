@@ -1,6 +1,4 @@
----
-title: Species
----
+{{#title  Species}}
 
 ```agda
 module univalent-combinatorics.species where

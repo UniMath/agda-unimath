@@ -1,6 +1,4 @@
----
-title: Functoriality of set quotients
----
+{{#title  Functoriality of set quotients}}
 
 ```agda
 module foundation.functoriality-set-quotients where

@@ -1,6 +1,4 @@
----
-title: Equivalences of higher groups
----
+{{#title  Equivalences of higher groups}}
 
 ```agda
 module group-theory.equivalences-higher-groups where

@@ -1,6 +1,4 @@
----
-title: Synthetic homotopy theory
----
+{{#title  Synthetic homotopy theory}}
 
 ```agda
 module synthetic-homotopy-theory where

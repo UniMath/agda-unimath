@@ -1,6 +1,4 @@
----
-title: Coherently invertible maps
----
+{{#title  Coherently invertible maps}}
 
 ```agda
 {-# OPTIONS --safe #-}

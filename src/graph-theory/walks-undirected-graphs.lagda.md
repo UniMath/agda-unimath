@@ -1,6 +1,4 @@
----
-title: Walks in undirected graphs
----
+{{#title  Walks in undirected graphs}}
 
 ```agda
 module graph-theory.walks-undirected-graphs where

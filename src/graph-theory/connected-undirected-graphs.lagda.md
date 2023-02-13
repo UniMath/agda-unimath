@@ -1,6 +1,4 @@
----
-title: Connected graphs
----
+{{#title  Connected graphs}}
 
 ```agda
 module graph-theory.connected-undirected-graphs where

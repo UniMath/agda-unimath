@@ -1,6 +1,4 @@
----
-title: Products of rings
----
+{{#title  Products of rings}}
 
 ```agda
 module ring-theory.products-rings where

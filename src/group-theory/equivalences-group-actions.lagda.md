@@ -1,6 +1,4 @@
----
-title: Equivalences of group actions
----
+{{#title  Equivalences of group actions}}
 
 ```agda
 module group-theory.equivalences-group-actions where

@@ -1,6 +1,4 @@
----
-title: Cartier's delooping of the sign homomorphism
----
+{{#title  Cartier's delooping of the sign homomorphism}}
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

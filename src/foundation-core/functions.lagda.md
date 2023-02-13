@@ -1,6 +1,4 @@
----
-title: Functions
----
+{{#title  Functions}}
 
 ```agda
 {-# OPTIONS --safe #-}

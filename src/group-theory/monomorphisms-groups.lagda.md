@@ -1,6 +1,4 @@
----
-title: Monomorphisms in groups
----
+{{#title  Monomorphisms in groups}}
 
 ```agda
 module group-theory.monomorphisms-groups where

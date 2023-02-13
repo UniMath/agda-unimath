@@ -1,6 +1,4 @@
----
-title: Epimorphism in large precategories
----
+{{#title  Epimorphism in large precategories}}
 
 ```agda
 module category-theory.epimorphisms-large-precategories where

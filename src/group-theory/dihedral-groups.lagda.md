@@ -1,6 +1,4 @@
----
-title: The dihedral groups
----
+{{#title  The dihedral groups}}
 
 ```agda
 module group-theory.dihedral-groups where

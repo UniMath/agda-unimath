@@ -1,6 +1,4 @@
----
-title: Extensions of maps
----
+{{#title  Extensions of maps}}
 
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where

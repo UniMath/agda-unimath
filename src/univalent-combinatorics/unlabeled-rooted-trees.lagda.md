@@ -1,6 +1,4 @@
----
-title: Unlabelled rooted trees
----
+{{#title  Unlabelled rooted trees}}
 
 ```agda
 module univalent-combinatorics.unlabeled-rooted-trees where

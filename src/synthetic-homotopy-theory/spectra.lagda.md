@@ -1,6 +1,4 @@
----
-title: Spectra
----
+{{#title  Spectra}}
 
 ```agda
 module synthetic-homotopy-theory.spectra where

@@ -1,6 +1,4 @@
----
-title: Pythagorean triples
----
+{{#title  Pythagorean triples}}
 
 ```agda
 module elementary-number-theory.pythagorean-triples where

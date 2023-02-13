@@ -1,6 +1,4 @@
----
-title: Decidability of dependent pair types
----
+{{#title  Decidability of dependent pair types}}
 
 ```agda
 module univalent-combinatorics.decidable-dependent-pair-types where

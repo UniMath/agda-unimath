@@ -1,6 +1,4 @@
----
-title: Unlabeled structures of a species
----
+{{#title  Unlabeled structures of a species}}
 
 ```agda
 module univalent-combinatorics.unlabeled-structures-species where

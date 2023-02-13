@@ -1,6 +1,4 @@
----
-title: Anafunctors
----
+{{#title  Anafunctors}}
 
 ```agda
 module category-theory.anafunctors where

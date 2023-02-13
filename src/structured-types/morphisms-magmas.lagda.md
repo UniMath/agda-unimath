@@ -1,6 +1,4 @@
----
-title: Morphisms of magmas
----
+{{#title  Morphisms of magmas}}
 
 ```agda
 module structured-types.morphisms-magmas where

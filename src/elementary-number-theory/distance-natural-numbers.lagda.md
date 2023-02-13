@@ -1,6 +1,4 @@
----
-title: The distance between natural numbers
----
+{{#title  The distance between natural numbers}}
 
 ```agda
 module elementary-number-theory.distance-natural-numbers where

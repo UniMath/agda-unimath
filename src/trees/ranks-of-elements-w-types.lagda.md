@@ -1,6 +1,4 @@
----
-title: Ranks of elements in W-types
----
+{{#title  Ranks of elements in W-types}}
 
 ```agda
 module trees.ranks-of-elements-w-types where

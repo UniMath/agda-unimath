@@ -1,6 +1,4 @@
----
-title: Discrete types
----
+{{#title  Discrete types}}
 
 ```agda
 module foundation-core.discrete-types where

@@ -1,6 +1,4 @@
----
-title: Group actions
----
+{{#title  Group actions}}
 
 ```agda
 module group-theory.group-actions where

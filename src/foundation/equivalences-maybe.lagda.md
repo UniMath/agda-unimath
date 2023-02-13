@@ -1,6 +1,4 @@
----
-title: Equivalences on Maybe
----
+{{#title  Equivalences on Maybe}}
 
 ```agda
 module foundation.equivalences-maybe where

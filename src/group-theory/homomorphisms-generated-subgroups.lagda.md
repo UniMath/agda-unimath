@@ -1,6 +1,4 @@
----
-title: Homomorphisms of generated subgroups
----
+{{#title  Homomorphisms of generated subgroups}}
 
 ```agda
 module group-theory.homomorphisms-generated-subgroups where

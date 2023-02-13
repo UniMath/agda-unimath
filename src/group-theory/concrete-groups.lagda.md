@@ -1,6 +1,4 @@
----
-title: Concrete groups
----
+{{#title  Concrete groups}}
 
 ```agda
 module group-theory.concrete-groups where

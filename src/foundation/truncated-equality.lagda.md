@@ -1,6 +1,4 @@
----
-title: Truncated equality
----
+{{#title  Truncated equality}}
 
 ```agda
 module foundation.truncated-equality where

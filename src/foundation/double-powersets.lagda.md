@@ -1,6 +1,4 @@
----
-title: Double powersets
----
+{{#title  Double powersets}}
 
 ```agda
 module foundation.double-powersets where

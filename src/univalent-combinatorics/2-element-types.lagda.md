@@ -1,6 +1,4 @@
----
-title: 2-element types
----
+{{#title  2-element types}}
 
 ```agda
 module univalent-combinatorics.2-element-types where

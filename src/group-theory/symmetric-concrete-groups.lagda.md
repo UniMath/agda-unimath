@@ -1,6 +1,4 @@
----
-title: Symmetric concrete groups
----
+{{#title  Symmetric concrete groups}}
 
 ```agda
 module group-theory.symmetric-concrete-groups where

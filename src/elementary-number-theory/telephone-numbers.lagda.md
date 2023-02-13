@@ -1,6 +1,4 @@
----
-title: Telephone numbers
----
+{{#title  Telephone numbers}}
 
 ```agda
 module elementary-number-theory.telephone-numbers where

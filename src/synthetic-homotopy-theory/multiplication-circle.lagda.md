@@ -1,5 +1,4 @@
----
-title: The multiplication operation on the circle
+{{#title  The multiplication operation on the circle
 ---
 
 Contributors: Egbert Rijke.

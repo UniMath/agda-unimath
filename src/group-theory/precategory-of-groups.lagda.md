@@ -1,6 +1,4 @@
----
-title: The precategory of groups
----
+{{#title  The precategory of groups}}
 
 ```agda
 module group-theory.precategory-of-groups where

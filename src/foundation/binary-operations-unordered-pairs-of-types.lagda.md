@@ -1,6 +1,4 @@
----
-title: Binary operations on unordered pairs of types
----
+{{#title  Binary operations on unordered pairs of types}}
 
 ```agda
 module foundation.binary-operations-unordered-pairs-of-types where

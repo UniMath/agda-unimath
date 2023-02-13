@@ -1,6 +1,4 @@
----
-title: Subsemigroups
----
+{{#title  Subsemigroups}}
 
 ```agda
 module group-theory.subsemigroups where

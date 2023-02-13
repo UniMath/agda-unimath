@@ -1,6 +1,4 @@
----
-title: Cofibers
----
+{{#title  Cofibers}}
 
 ```agda
 module synthetic-homotopy-theory.cofibers where

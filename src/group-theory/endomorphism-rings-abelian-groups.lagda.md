@@ -1,6 +1,4 @@
----
-title: The endomorphism rings of abelian groups
----
+{{#title  The endomorphism rings of abelian groups}}
 
 ```agda
 module group-theory.endomorphism-rings-abelian-groups where

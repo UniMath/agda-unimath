@@ -1,6 +1,4 @@
----
-title: The sign homomorphism
----
+{{#title  The sign homomorphism}}
 
 ```agda
 module finite-group-theory.sign-homomorphism where

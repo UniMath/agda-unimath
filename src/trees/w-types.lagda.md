@@ -1,6 +1,4 @@
----
-title: W-types
----
+{{#title  W-types}}
 
 ```agda
 module trees.w-types where

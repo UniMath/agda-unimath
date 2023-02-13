@@ -1,6 +1,4 @@
----
-title: Euclidean division on the natural numbers
----
+{{#title  Euclidean division on the natural numbers}}
 
 ```agda
 module elementary-number-theory.euclidean-division-natural-numbers where

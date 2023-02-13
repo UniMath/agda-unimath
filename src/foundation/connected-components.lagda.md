@@ -1,6 +1,4 @@
----
-title: Connected components of types
----
+{{#title  Connected components of types}}
 
 ```agda
 module foundation.connected-components where

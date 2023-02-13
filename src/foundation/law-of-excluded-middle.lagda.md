@@ -1,6 +1,4 @@
----
-title: The law of excluded middle
----
+{{#title  The law of excluded middle}}
 
 ```agda
 module foundation.law-of-excluded-middle where

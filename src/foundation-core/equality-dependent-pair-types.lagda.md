@@ -1,6 +1,4 @@
----
-title: Equality of dependent pair types
----
+{{#title  Equality of dependent pair types}}
 
 ```agda
 {-# OPTIONS --safe #-}

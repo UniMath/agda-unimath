@@ -1,6 +1,4 @@
----
-title: Decidable subgroups of groups
----
+{{#title  Decidable subgroups of groups}}
 
 ```agda
 module group-theory.decidable-subgroups where

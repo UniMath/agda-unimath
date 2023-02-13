@@ -1,6 +1,4 @@
----
-title: Type duality
----
+{{#title  Type duality}}
 
 ```agda
 module foundation.type-duality where

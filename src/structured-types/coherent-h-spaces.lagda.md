@@ -1,6 +1,4 @@
----
-title: Coherent H-spaces
----
+{{#title  Coherent H-spaces}}
 
 ```agda
 module structured-types.coherent-h-spaces where

@@ -1,6 +1,4 @@
----
-title: Unique existence
----
+{{#title  Unique existence}}
 
 ```agda
 module foundation.unique-existence where

@@ -1,6 +1,4 @@
----
-title: Homomorphisms of groups
----
+{{#title  Homomorphisms of groups}}
 
 ```agda
 module group-theory.homomorphisms-groups where

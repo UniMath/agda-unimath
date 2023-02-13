@@ -1,6 +1,4 @@
----
-title: Inequality on the standard finite types
----
+{{#title  Inequality on the standard finite types}}
 
 ```agda
 module elementary-number-theory.inequality-standard-finite-types where

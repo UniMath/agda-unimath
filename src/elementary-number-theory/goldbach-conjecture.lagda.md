@@ -1,6 +1,4 @@
----
-title: The Goldbach conjecture
----
+{{#title  The Goldbach conjecture}}
 
 ```agda
 module elementary-number-theory.goldbach-conjecture where

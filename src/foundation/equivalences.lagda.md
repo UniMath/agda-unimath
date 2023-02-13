@@ -1,6 +1,4 @@
----
-title: Equivalences
----
+{{#title  Equivalences}}
 
 ```agda
 module foundation.equivalences where

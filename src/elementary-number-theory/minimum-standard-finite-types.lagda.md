@@ -1,6 +1,4 @@
----
-title: Minimum on the standard finite types
----
+{{#title  Minimum on the standard finite types}}
 
 ```agda
 module elementary-number-theory.minimum-standard-finite-types where

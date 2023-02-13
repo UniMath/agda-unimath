@@ -1,6 +1,4 @@
----
-title: The circle
----
+{{#title  The circle}}
 
 ```agda
 module synthetic-homotopy-theory.circle where

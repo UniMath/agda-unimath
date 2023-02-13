@@ -1,6 +1,4 @@
----
-title: Abstract groups
----
+{{#title  Abstract groups}}
 
 ```agda
 module group-theory.groups where

@@ -1,6 +1,4 @@
----
-title: Fibers of pointed maps
----
+{{#title  Fibers of pointed maps}}
 
 ```agda
 module structured-types.fibers-of-pointed-maps where

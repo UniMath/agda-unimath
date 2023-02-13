@@ -1,6 +1,4 @@
----
-title: Cartesian products of finite types
----
+{{#title  Cartesian products of finite types}}
 
 ```agda
 module univalent-combinatorics.cartesian-product-types where

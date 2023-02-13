@@ -1,6 +1,4 @@
----
-title: Constant maps
----
+{{#title  Constant maps}}
 
 ```agda
 module foundation.constant-maps where

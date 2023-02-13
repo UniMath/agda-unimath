@@ -1,6 +1,4 @@
----
-title: Abelian groups
----
+{{#title  Abelian groups}}
 
 ```agda
 module group-theory.abelian-groups where

@@ -1,6 +1,4 @@
----
-title: Saturated carbons
----
+{{#title  Saturated carbons}}
 
 ```agda
 module organic-chemistry.saturated-carbons where

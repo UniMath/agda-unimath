@@ -1,6 +1,4 @@
----
-title: Equivalences of types equipped with endomorphisms
----
+{{#title  Equivalences of types equipped with endomorphisms}}
 
 ```agda
 module structured-types.equivalences-types-equipped-with-endomorphisms where

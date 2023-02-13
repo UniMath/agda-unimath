@@ -1,6 +1,4 @@
----
-title: Functoriality of `fib`
----
+{{#title  Functoriality of `fib`}}
 
 ```agda
 module foundation.functoriality-fibers-of-maps where

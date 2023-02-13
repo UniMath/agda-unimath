@@ -1,6 +1,4 @@
----
-title: The precategory of functors and natural transformations between two fixed precategories
----
+{{#title  The precategory of functors and natural transformations between two fixed precategories}}
 
 ```agda
 module category-theory.precategory-of-functors where

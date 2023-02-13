@@ -1,6 +1,4 @@
----
-title: Equality of natural numbers
----
+{{#title  Equality of natural numbers}}
 
 ```agda
 module elementary-number-theory.equality-natural-numbers where

@@ -1,6 +1,4 @@
----
-title: 1-Types
----
+{{#title  1-Types}}
 
 ```agda
 module foundation-core.1-types where

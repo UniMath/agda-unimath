@@ -1,6 +1,4 @@
----
-title: Concrete automorphism groups on sets
----
+{{#title  Concrete automorphism groups on sets}}
 
 ```agda
 module group-theory.loop-groups-sets where

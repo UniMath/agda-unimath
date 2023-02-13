@@ -1,6 +1,4 @@
----
-title: Equivalences of enriched undirected graphs
----
+{{#title  Equivalences of enriched undirected graphs}}
 
 ```agda
 module graph-theory.equivalences-enriched-undirected-graphs where

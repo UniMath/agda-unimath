@@ -1,6 +1,4 @@
----
-title: Normal subgroups of concrete groups
----
+{{#title  Normal subgroups of concrete groups}}
 
 ```agda
 module group-theory.normal-subgroups-concrete-groups where

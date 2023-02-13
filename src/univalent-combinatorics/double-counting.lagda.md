@@ -1,6 +1,4 @@
----
-title: Double counting
----
+{{#title  Double counting}}
 
 ```agda
 module univalent-combinatorics.double-counting where

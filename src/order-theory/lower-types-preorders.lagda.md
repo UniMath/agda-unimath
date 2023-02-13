@@ -1,6 +1,4 @@
----
-title: Lower types in preorders
----
+{{#title  Lower types in preorders}}
 
 ```agda
 module order-theory.lower-types-preorders where

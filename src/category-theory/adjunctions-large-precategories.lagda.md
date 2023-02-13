@@ -1,6 +1,4 @@
----
-title: Adjunctions between large precategories
----
+{{#title  Adjunctions between large precategories}}
 
 ```agda
 module category-theory.adjunctions-large-precategories where

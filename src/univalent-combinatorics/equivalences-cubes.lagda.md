@@ -1,6 +1,4 @@
----
-title: Equivalences of cubes
----
+{{#title  Equivalences of cubes}}
 
 ```agda
 module univalent-combinatorics.equivalences-cubes where

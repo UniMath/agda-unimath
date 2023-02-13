@@ -1,6 +1,4 @@
----
-title: Sheargroups
----
+{{#title  Sheargroups}}
 
 ```agda
 module group-theory.sheargroups where

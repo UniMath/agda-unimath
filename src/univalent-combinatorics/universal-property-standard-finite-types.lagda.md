@@ -1,6 +1,4 @@
----
-title: The universal property of the standard finite types
----
+{{#title  The universal property of the standard finite types}}
 
 ```agda
 module univalent-combinatorics.universal-property-standard-finite-types where

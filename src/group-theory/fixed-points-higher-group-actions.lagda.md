@@ -1,6 +1,4 @@
----
-title: Fixed points of higher group actions
----
+{{#title  Fixed points of higher group actions}}
 
 ```agda
 module group-theory.fixed-points-higher-group-actions where

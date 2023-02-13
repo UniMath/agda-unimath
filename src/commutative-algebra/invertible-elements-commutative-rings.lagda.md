@@ -1,6 +1,4 @@
----
-title: Invertible elements in commutative rings
----
+{{#title  Invertible elements in commutative rings}}
 
 ```agda
 module commutative-algebra.invertible-elements-commutative-rings where

@@ -1,6 +1,4 @@
----
-title: Morphisms of finite species
----
+{{#title  Morphisms of finite species}}
 
 ```agda
 module univalent-combinatorics.morphisms-finite-species where

@@ -1,6 +1,4 @@
----
-title: Decidable types
----
+{{#title  Decidable types}}
 
 ```agda
 module foundation.decidable-types where

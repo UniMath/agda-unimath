@@ -1,6 +1,4 @@
----
-title: Connected components of universes
----
+{{#title  Connected components of universes}}
 
 ```agda
 module foundation.connected-components-universes where

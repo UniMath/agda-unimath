@@ -1,6 +1,4 @@
----
-title: The half-integers
----
+{{#title  The half-integers}}
 
 ```agda
 module elementary-number-theory.half-integers where

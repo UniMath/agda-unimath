@@ -1,6 +1,4 @@
----
-title: The universal property of maybe
----
+{{#title  The universal property of maybe}}
 
 ```agda
 module foundation.universal-property-maybe where

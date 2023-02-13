@@ -1,6 +1,4 @@
----
-title: Structure
----
+{{#title  Structure}}
 
 ```agda
 module foundation.structure where

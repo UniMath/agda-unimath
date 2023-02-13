@@ -1,6 +1,4 @@
----
-title: Preimages of subtypes
----
+{{#title  Preimages of subtypes}}
 
 ```agda
 module foundation.preimages-of-subtypes where

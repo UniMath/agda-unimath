@@ -1,6 +1,4 @@
----
-title: 2-element subtypes
----
+{{#title  2-element subtypes}}
 
 ```agda
 module univalent-combinatorics.2-element-subtypes where

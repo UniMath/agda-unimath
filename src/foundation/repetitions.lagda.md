@@ -1,6 +1,4 @@
----
-title: Repetitions of values of maps
----
+{{#title  Repetitions of values of maps}}
 
 ```agda
 module foundation.repetitions where

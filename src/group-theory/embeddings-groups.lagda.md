@@ -1,6 +1,4 @@
----
-title: Embeddings of groups
----
+{{#title  Embeddings of groups}}
 
 ```agda
 module group-theory.embeddings-groups where

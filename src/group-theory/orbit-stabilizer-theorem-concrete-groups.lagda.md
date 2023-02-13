@@ -1,6 +1,4 @@
----
-title: The orbit-stabilizer theorem for concrete groups
----
+{{#title  The orbit-stabilizer theorem for concrete groups}}
 
 ```agda
 module group-theory.orbit-stabilizer-theorem-concrete-groups where

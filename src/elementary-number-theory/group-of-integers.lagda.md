@@ -1,6 +1,4 @@
----
-title: The group of integers
----
+{{#title  The group of integers}}
 
 ```agda
 module elementary-number-theory.group-of-integers where

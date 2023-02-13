@@ -1,6 +1,4 @@
----
-title: Falling factorials
----
+{{#title  Falling factorials}}
 
 ```agda
 module elementary-number-theory.falling-factorials where

@@ -1,6 +1,4 @@
----
-title: Equivalences of undirected graphs
----
+{{#title  Equivalences of undirected graphs}}
 
 ```agda
 module graph-theory.equivalences-undirected-graphs where

@@ -1,6 +1,4 @@
----
-title: Homomorphisms of higher group actions
----
+{{#title  Homomorphisms of higher group actions}}
 
 ```agda
 module group-theory.homomorphisms-higher-group-actions where

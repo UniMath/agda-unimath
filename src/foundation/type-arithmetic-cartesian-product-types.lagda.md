@@ -1,6 +1,4 @@
----
-title: Type arithmetic for cartesian product types
----
+{{#title  Type arithmetic for cartesian product types}}
 
 ```agda
 module foundation.type-arithmetic-cartesian-product-types where

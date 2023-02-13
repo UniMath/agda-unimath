@@ -1,6 +1,4 @@
----
-title: Functoriality of cartesian product types
----
+{{#title  Functoriality of cartesian product types}}
 
 ```agda
 module foundation.functoriality-cartesian-product-types where

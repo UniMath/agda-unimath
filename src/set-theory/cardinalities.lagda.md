@@ -1,6 +1,4 @@
----
-title: Cardinalities of sets
----
+{{#title  Cardinalities of sets}}
 
 ```agda
 module set-theory.cardinalities where

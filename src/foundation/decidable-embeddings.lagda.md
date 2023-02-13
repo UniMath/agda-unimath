@@ -1,6 +1,4 @@
----
-title: Decidable embeddings
----
+{{#title  Decidable embeddings}}
 
 ```agda
 module foundation.decidable-embeddings where

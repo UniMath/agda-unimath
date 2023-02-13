@@ -1,6 +1,4 @@
----
-title: Empty types
----
+{{#title  Empty types}}
 
 ```agda
 module foundation.empty-types where

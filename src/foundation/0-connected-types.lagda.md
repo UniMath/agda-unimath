@@ -1,6 +1,4 @@
----
-title: 0-Connected types
----
+{{#title  0-Connected types}}
 
 ```agda
 module foundation.0-connected-types where

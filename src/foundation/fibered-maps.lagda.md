@@ -1,6 +1,4 @@
----
-title: Maps fibered over a map
----
+{{#title  Maps fibered over a map}}
 
 ```agda
 module foundation.fibered-maps where

@@ -1,6 +1,4 @@
----
-title: Groupoids
----
+{{#title  Groupoids}}
 
 ```agda
 module category-theory.groupoids where

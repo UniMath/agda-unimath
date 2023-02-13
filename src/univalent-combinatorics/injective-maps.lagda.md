@@ -1,6 +1,4 @@
----
-title: Injective maps between finite types
----
+{{#title  Injective maps between finite types}}
 
 ```agda
 module univalent-combinatorics.injective-maps where

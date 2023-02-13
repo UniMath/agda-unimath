@@ -1,6 +1,4 @@
----
-title: The univalence axiom implies function extensionality
----
+{{#title  The univalence axiom implies function extensionality}}
 
 ```agda
 module foundation.univalence-implies-function-extensionality where

@@ -1,6 +1,4 @@
----
-title: Equivalence classes
----
+{{#title  Equivalence classes}}
 
 ```agda
 module foundation.equivalence-classes where

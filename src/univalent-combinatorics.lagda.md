@@ -1,5 +1,4 @@
----
-title: Univalent Combinatorics
+{{#title  Univalent Combinatorics
 ---
 
 Univalent combinatorics is the study of finite univalent mathematics. Finiteness in univalent mathematics is expressed by a mere equivalence to a standard finite object.

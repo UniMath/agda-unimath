@@ -1,6 +1,4 @@
----
-title: Homomorphisms of abelian groups
----
+{{#title  Homomorphisms of abelian groups}}
 
 ```agda
 module group-theory.homomorphisms-abelian-groups where

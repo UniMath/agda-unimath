@@ -1,6 +1,4 @@
----
-title: Isomorphisms of group actions
----
+{{#title  Isomorphisms of group actions}}
 
 ```agda
 module group-theory.isomorphisms-group-actions where

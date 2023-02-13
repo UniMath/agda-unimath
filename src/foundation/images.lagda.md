@@ -1,6 +1,4 @@
----
-title: The image of a map
----
+{{#title  The image of a map}}
 
 ```agda
 module foundation.images where

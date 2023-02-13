@@ -1,6 +1,4 @@
----
-title: Reflecting maps for equivalence relations
----
+{{#title  Reflecting maps for equivalence relations}}
 
 ```agda
 module foundation.reflecting-maps-equivalence-relations where

@@ -1,6 +1,4 @@
----
-title: Functoriality of function types
----
+{{#title  Functoriality of function types}}
 
 ```agda
 module foundation.functoriality-function-types where

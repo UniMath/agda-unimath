@@ -1,6 +1,4 @@
----
-title: Boolean Reflection
----
+{{#title  Boolean Reflection}}
 
 ```agda
 module foundation.boolean-reflection where

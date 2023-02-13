@@ -1,6 +1,4 @@
----
-title: Existential quantification
----
+{{#title  Existential quantification}}
 
 ```agda
 module foundation.existential-quantification where

@@ -1,6 +1,4 @@
----
-title: Cycles in undirected graphs
----
+{{#title  Cycles in undirected graphs}}
 
 ```agda
 module graph-theory.cycles-undirected-graphs where

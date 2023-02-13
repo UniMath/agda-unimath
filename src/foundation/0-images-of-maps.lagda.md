@@ -1,6 +1,4 @@
----
-title: 0-Images of maps
----
+{{#title  0-Images of maps}}
 
 ```agda
 module foundation.0-images-of-maps where

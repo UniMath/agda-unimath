@@ -1,6 +1,4 @@
----
-title: Derivatives of species
----
+{{#title  Derivatives of species}}
 
 ```agda
 module univalent-combinatorics.derivatives-species where

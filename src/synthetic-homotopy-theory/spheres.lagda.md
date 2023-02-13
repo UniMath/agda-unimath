@@ -1,6 +1,4 @@
----
-title: Spheres
----
+{{#title  Spheres}}
 
 ```agda
 module synthetic-homotopy-theory.spheres where

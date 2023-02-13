@@ -1,6 +1,4 @@
----
-title: Incidence in undirected graphs
----
+{{#title  Incidence in undirected graphs}}
 
 ```agda
 module graph-theory.neighbors-undirected-graphs where

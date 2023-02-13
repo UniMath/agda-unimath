@@ -1,6 +1,4 @@
----
-title: Commuting squares
----
+{{#title  Commuting squares}}
 
 ```agda
 module foundation.commuting-squares where

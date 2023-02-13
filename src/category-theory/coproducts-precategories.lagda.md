@@ -1,6 +1,4 @@
----
-title: Coproducts in precategories
----
+{{#title  Coproducts in precategories}}
 
 ```agda
 module category-theory.coproducts-precategories where

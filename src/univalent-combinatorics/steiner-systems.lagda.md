@@ -1,6 +1,4 @@
----
-title: Steiner triple systems
----
+{{#title  Steiner triple systems}}
 
 ```agda
 module univalent-combinatorics.steiner-systems where

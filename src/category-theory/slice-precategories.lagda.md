@@ -1,6 +1,4 @@
----
-title: Slice precategories
----
+{{#title  Slice precategories}}
 
 ```agda
 module category-theory.slice-precategories where

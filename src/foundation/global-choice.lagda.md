@@ -1,6 +1,4 @@
----
-title: Global choice
----
+{{#title  Global choice}}
 
 ```agda
 module foundation.global-choice where

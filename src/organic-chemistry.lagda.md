@@ -1,6 +1,4 @@
----
-title: Organic Chemistry
----
+{{#title  Organic Chemistry}}
 
 ```agda
 module organic-chemistry where

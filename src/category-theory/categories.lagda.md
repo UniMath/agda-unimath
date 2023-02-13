@@ -1,6 +1,4 @@
----
-title: Categories
----
+{{#title  Categories}}
 
 ```agda
 module category-theory.categories where

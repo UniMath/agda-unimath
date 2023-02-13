@@ -43,6 +43,8 @@ src/everything.lagda.md : agdaFiles
 check : src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
+# FIXME: update this to only use agda and output in book folder directly
+# when writing the book
 .PHONY: html
 html: $(HTMLFILES)
 
@@ -68,9 +70,13 @@ agda-html: src/everything.lagda.md
 	sh conv.sh; \
 	cp README.html index.html
 
-.phony: watch-html
-watch-html : $(AGDAFILES)
-	@fswatch -0 $^ | xargs -0 -n1 -I {}  sh -c 'ALT=`realpath --relative-to=. {}` ; make "$${ALT/.lagda.md/.html}";'
+.PHONY: website
+website: agda-html
+	@mdbook build
+
+.phony: serve-website
+serve-wesite:
+	@mdbook serve -p 8080
 
 .PHONY : graph
 graph:
@@ -79,3 +85,4 @@ graph:
 .PHONY : clean
 clean:
 	rm -Rf _build/
+	find docs -name '*.html' -and -name '*.md' -delete -print0

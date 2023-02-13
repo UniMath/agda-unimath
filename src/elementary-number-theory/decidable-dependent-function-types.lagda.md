@@ -1,6 +1,4 @@
----
-title: Decidable dependent function types
----
+{{#title  Decidable dependent function types}}
 
 ```agda
 module elementary-number-theory.decidable-dependent-function-types where

@@ -1,6 +1,4 @@
----
-title: Choice of representatives for an equivalence relation
----
+{{#title  Choice of representatives for an equivalence relation}}
 
 ```agda
 module foundation.choice-of-representatives-equivalence-relation where

@@ -1,6 +1,4 @@
----
-title: Set quotients
----
+{{#title  Set quotients}}
 
 ```agda
 module foundation.set-quotients where

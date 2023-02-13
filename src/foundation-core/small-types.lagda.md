@@ -1,6 +1,4 @@
----
-title: Small types
----
+{{#title  Small types}}
 
 ```agda
 module foundation-core.small-types where

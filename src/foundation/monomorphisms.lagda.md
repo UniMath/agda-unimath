@@ -1,6 +1,4 @@
----
-title: Monomorphisms
----
+{{#title  Monomorphisms}}
 
 ```agda
 module foundation.monomorphisms where

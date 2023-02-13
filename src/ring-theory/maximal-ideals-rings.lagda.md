@@ -1,6 +1,4 @@
----
-title:
----
+{{#title }}
 
 ```agda
 module ring-theory.maximal-ideals-rings where

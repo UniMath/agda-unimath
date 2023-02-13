@@ -1,6 +1,4 @@
----
-title: Iterating functions
----
+{{#title  Iterating functions}}
 
 ```agda
 module foundation.iterating-functions where

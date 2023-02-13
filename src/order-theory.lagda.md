@@ -1,6 +1,4 @@
----
-title: Order theory
----
+{{#title  Order theory}}
 
 ```agda
 module order-theory where

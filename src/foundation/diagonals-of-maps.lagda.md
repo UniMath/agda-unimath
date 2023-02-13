@@ -1,6 +1,4 @@
----
-title: Diagonals of maps
----
+{{#title  Diagonals of maps}}
 
 ```agda
 module foundation.diagonals-of-maps where

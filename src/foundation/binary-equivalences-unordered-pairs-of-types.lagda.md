@@ -1,6 +1,4 @@
----
-title: Binary equivalences on unordered pairs of types
----
+{{#title  Binary equivalences on unordered pairs of types}}
 
 ```agda
 module foundation.binary-equivalences-unordered-pairs-of-types where

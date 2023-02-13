@@ -1,6 +1,4 @@
----
-title: Paths in undirected graphs
----
+{{#title  Paths in undirected graphs}}
 
 ```agda
 module graph-theory.paths-undirected-graphs where

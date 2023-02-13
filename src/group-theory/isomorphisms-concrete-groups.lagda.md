@@ -1,6 +1,4 @@
----
-title: Isomorphisms of concrete groups
----
+{{#title  Isomorphisms of concrete groups}}
 
 ```agda
 module group-theory.isomorphisms-concrete-groups where

@@ -1,6 +1,4 @@
----
-title: Mersenne primes
----
+{{#title  Mersenne primes}}
 
 ```agda
 module elementary-number-theory.mersenne-primes where

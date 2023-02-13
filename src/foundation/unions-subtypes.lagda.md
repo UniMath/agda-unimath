@@ -1,6 +1,4 @@
----
-title: Union of subtypes
----
+{{#title  Union of subtypes}}
 
 ```agda
 module foundation.unions-subtypes where

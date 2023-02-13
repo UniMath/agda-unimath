@@ -1,6 +1,4 @@
----
-title: Decidability of dependent function types
----
+{{#title  Decidability of dependent function types}}
 
 ```agda
 module foundation.decidable-dependent-function-types where

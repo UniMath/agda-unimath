@@ -1,6 +1,4 @@
----
-title: Directed graph structures on standard finite sets
----
+{{#title  Directed graph structures on standard finite sets}}
 
 ```agda
 module graph-theory.directed-graph-structures-on-standard-finite-sets where

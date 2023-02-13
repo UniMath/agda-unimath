@@ -1,6 +1,4 @@
----
-title: Equality on dependent function types
----
+{{#title  Equality on dependent function types}}
 
 ```agda
 module foundation.equality-dependent-function-types where

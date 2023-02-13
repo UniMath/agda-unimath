@@ -1,6 +1,4 @@
----
-title: Foundation
----
+{{#title  Foundation}}
 
 ```agda
 module foundation where

@@ -1,6 +1,4 @@
----
-title: The order of an element in a group
----
+{{#title  The order of an element in a group}}
 
 ```agda
 module group-theory.orders-of-elements-groups where
