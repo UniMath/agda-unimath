@@ -1,6 +1,4 @@
----
-title: Cycle partitions of finite types
----
+#  Cycle partitions of finite types
 
 ```agda
 module univalent-combinatorics.cycle-partitions where

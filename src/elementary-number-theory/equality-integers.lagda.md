@@ -1,6 +1,4 @@
----
-title: Equality of integers
----
+#  Equality of integers
 
 ```agda
 module elementary-number-theory.equality-integers where

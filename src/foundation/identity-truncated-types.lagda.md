@@ -1,6 +1,4 @@
----
-title: Identity types of truncated types
----
+#  Identity types of truncated types
 
 ```agda
 module foundation.identity-truncated-types where

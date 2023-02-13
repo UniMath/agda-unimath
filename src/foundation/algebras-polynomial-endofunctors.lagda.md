@@ -1,6 +1,4 @@
----
-title: Algebras for polynomial endofunctors
----
+#  Algebras for polynomial endofunctors
 
 ```agda
 module foundation.algebras-polynomial-endofunctors where

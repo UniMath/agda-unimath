@@ -1,6 +1,4 @@
----
-title: Epimorphisms with respect to maps into sets
----
+#  Epimorphisms with respect to maps into sets
 
 ```agda
 module foundation.epimorphisms-with-respect-to-sets where

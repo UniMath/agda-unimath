@@ -1,6 +1,4 @@
----
-title: Iterating involutions
----
+#  Iterating involutions
 
 ```agda
 module foundation.iterating-involutions where

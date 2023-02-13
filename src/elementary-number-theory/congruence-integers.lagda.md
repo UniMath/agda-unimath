@@ -1,6 +1,4 @@
----
-title: The congruence relations on the integers
----
+#  The congruence relations on the integers
 
 ```agda
 module elementary-number-theory.congruence-integers where

@@ -1,6 +1,4 @@
----
-title: The Eisenstein integers
----
+#  The Eisenstein integers
 
 ```agda
 module commutative-algebra.eisenstein-integers where

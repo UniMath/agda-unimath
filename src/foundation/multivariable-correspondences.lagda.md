@@ -1,6 +1,4 @@
----
-title: Multivariable correspondences
----
+#  Multivariable correspondences
 
 ```agda
 module foundation.multivariable-correspondences where

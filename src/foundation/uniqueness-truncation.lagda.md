@@ -1,6 +1,4 @@
----
-title: Uniqueness of the truncations
----
+#  Uniqueness of the truncations
 
 ```agda
 module foundation.uniqueness-truncation where

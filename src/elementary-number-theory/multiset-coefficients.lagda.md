@@ -1,6 +1,4 @@
----
-title: Multiset coefficients
----
+#  Multiset coefficients
 
 ```agda
 module elementary-number-theory.multiset-coefficients where

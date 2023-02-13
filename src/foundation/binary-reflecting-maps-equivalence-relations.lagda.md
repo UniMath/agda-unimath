@@ -1,6 +1,4 @@
----
-title: Binary reflecting maps of equivalence relations
----
+# Binary reflecting maps of equivalence relations
 
 ```agda
 module foundation.binary-reflecting-maps-equivalence-relations where

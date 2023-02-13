@@ -1,6 +1,4 @@
----
-title: Enriched directed trees
----
+#  Enriched directed trees
 
 ```
 module trees.enriched-directed-trees where

@@ -1,6 +1,4 @@
----
-title: The limited principle of omniscience (LPO)
----
+#  The limited principle of omniscience (LPO)
 
 ```agda
 module foundation.limited-principle-of-omniscience where

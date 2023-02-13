@@ -1,6 +1,4 @@
----
-title: Monoid actions
----
+#  Monoid actions
 
 ```agda
 module group-theory.monoid-actions where

@@ -1,6 +1,4 @@
----
-title: Complete bipartite graphs
----
+#  Complete bipartite graphs
 
 ```agda
 module graph-theory.complete-bipartite-graphs where

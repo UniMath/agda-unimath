@@ -1,6 +1,4 @@
----
-title: Latin squares
----
+#  Latin squares
 
 ```agda
 module univalent-combinatorics.latin-squares where

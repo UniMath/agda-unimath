@@ -1,6 +1,4 @@
----
-title: Factorials of natural numbers
----
+#  Factorials of natural numbers
 
 ```agda
 module elementary-number-theory.factorials where

@@ -1,6 +1,4 @@
----
-title: Tight apartness relations
----
+#  Tight apartness relations
 
 ```agda
 module foundation.tight-apartness-relations where

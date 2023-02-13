@@ -1,6 +1,4 @@
----
-title: Exponents of set quotients
----
+#  Exponents of set quotients
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

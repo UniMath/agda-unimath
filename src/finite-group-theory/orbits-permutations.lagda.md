@@ -1,6 +1,4 @@
----
-title: Orbits of permutations
----
+#  Orbits of permutations
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

@@ -1,6 +1,4 @@
----
-title: Type arithmetic for coproduct types
----
+#  Type arithmetic for coproduct types
 
 ```agda
 module foundation.type-arithmetic-coproduct-types where

@@ -1,6 +1,4 @@
----
-title: Finite semigroups
----
+#  Finite semigroups
 
 ```agda
 module finite-group-theory.finite-semigroups where

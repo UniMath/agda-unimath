@@ -1,6 +1,4 @@
----
-title: Dependent sums of finite types
----
+#  Dependent sums of finite types
 
 ```agda
 module univalent-combinatorics.dependent-sum-finite-types where

@@ -1,6 +1,4 @@
----
-title: Pairs of distinct elements
----
+#  Pairs of distinct elements
 
 ```agda
 module foundation.pairs-of-distinct-elements where

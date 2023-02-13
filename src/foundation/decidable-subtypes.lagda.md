@@ -1,6 +1,4 @@
----
-title: Decidable subtypes
----
+#  Decidable subtypes
 
 ```agda
 module foundation.decidable-subtypes where

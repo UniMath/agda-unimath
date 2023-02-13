@@ -1,6 +1,4 @@
----
-title: Principal torsors of concrete groups
----
+#  Principal torsors of concrete groups
 
 ```agda
 module group-theory.principal-torsors-concrete-groups where

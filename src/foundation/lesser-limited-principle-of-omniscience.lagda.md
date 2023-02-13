@@ -1,6 +1,4 @@
----
-title: The lesser limited principle of omniscience
----
+#  The lesser limited principle of omniscience
 
 ```agda
 module foundation.lesser-limited-principle-of-omniscience where

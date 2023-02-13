@@ -1,6 +1,4 @@
----
-title: Minimum on the natural numbers
----
+#  Minimum on the natural numbers
 
 ```agda
 module elementary-number-theory.minimum-natural-numbers where

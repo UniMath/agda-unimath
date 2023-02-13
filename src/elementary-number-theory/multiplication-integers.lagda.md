@@ -1,6 +1,4 @@
----
-title: Multiplication of integers
----
+#  Multiplication of integers
 
 ```agda
 module elementary-number-theory.multiplication-integers where

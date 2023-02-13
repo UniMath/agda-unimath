@@ -1,6 +1,4 @@
----
-title: Rooted quasitrees
----
+#  Rooted quasitrees
 
 ```agda
 module trees.rooted-quasitrees where

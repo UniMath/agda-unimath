@@ -1,6 +1,4 @@
----
-title: Diagonal maps of types
----
+#  Diagonal maps of types
 
 ```agda
 module foundation.diagonal-maps-of-types where

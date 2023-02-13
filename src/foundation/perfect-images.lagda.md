@@ -1,6 +1,4 @@
----
-title: Perfect Images
----
+#  Perfect Images
 
 ```agda
 module foundation.perfect-images where
