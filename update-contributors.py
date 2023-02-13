@@ -16,7 +16,7 @@ contributors = json.loads(response.text)
 sorted_contributors = sorted(contributors, key=lambda c: c['login'])
 
 template = """
-# Contributors
+## Contributors
 
 We are grateful to the following people for their contributions to
 the library. In alphabetical order, by GitHub username:

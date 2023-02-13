@@ -36,10 +36,6 @@ See the list of all Agda modules [here](everything.html).
 
 {{#include SUMMARY.md}}
 
-## Contributors
-
 {{#include CONTRIBUTORS.md}}
-
-## How to cite
 
 {{#include CITATION.md}}

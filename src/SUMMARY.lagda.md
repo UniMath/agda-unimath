@@ -4,6 +4,10 @@
 
 - [Agda-UniMath](README.md)
   - [README](README.md)
+  - [Community](CONTRIBUTORS.md)
+    - [Contributors](CONTRIBUTORS.md)
+    - [Project links](LINKS.md)
+    - [Users](USERS.md)
   - [How-to](HOWTO-INSTALL.md)
     - [Install](HOWTO-INSTALL.md)
     - [Cite the library](CITATION.md)
@@ -12,10 +16,6 @@
     - [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
-  - [Community](CONTRIBUTORS.md)
-    - [Contributors](CONTRIBUTORS.md)
-    - [Project links](LINKS.md)
-    - [Users](USERS.md)
   - [Everything](everything.md)
 
 

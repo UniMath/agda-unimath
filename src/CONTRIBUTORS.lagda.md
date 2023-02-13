@@ -1,5 +1,5 @@
 
-# Contributors
+## Contributors
 
 We are grateful to the following people for their contributions to
 the library. In alphabetical order, by GitHub username:
