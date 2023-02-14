@@ -1,6 +1,4 @@
----
-title: The dependent binomial theorem for types (Distributivity of dependent function types over coproduct types)
----
+#  The dependent binomial theorem for types (Distributivity of dependent function types over coproduct types)
 
 ```agda
 module foundation.dependent-binomial-theorem where

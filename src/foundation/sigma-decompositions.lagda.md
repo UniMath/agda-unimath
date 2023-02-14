@@ -1,6 +1,4 @@
----
-title: Σ-decompositions of types
----
+#  Σ-decompositions of types
 
 ```agda
 module foundation.sigma-decompositions where

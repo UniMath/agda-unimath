@@ -1,6 +1,4 @@
----
-title: Subgroups of abelian groups
----
+#  Subgroups of abelian groups
 
 ```agda
 module group-theory.subgroups-abelian-groups where

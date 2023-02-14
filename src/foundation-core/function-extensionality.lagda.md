@@ -1,6 +1,4 @@
----
-title: Function extensionality
----
+#  Function extensionality
 
 ```agda
 {-# OPTIONS --safe #-}

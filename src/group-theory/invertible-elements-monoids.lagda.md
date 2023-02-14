@@ -1,6 +1,4 @@
----
-title: Invertible elements in monoids
----
+#  Invertible elements in monoids
 
 ```agda
 module group-theory.invertible-elements-monoids where

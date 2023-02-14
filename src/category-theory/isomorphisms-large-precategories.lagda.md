@@ -1,6 +1,4 @@
----
-title: Isomorphisms in large precategories
----
+#  Isomorphisms in large precategories
 
 ```agda
 module category-theory.isomorphisms-large-precategories where

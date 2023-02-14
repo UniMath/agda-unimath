@@ -1,6 +1,4 @@
----
-title: Combinatorial identities of sums of natural numbers
----
+#  Combinatorial identities of sums of natural numbers
 
 ```agda
 module univalent-combinatorics.sums-of-natural-numbers where

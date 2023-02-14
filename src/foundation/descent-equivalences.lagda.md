@@ -1,6 +1,4 @@
----
-title: Descent for equivalences
----
+#  Descent for equivalences
 
 ```agda
 module foundation.descent-equivalences where

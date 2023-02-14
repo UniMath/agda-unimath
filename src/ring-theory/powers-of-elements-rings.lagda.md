@@ -1,6 +1,4 @@
----
-title: Powers of elements in rings
----
+#  Powers of elements in rings
 
 ```agda
 module ring-theory.powers-of-elements-rings where

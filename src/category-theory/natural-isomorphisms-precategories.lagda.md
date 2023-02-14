@@ -1,6 +1,4 @@
----
-title: Natural isomorphisms between functors between precategories
----
+#  Natural isomorphisms between functors between precategories
 
 ```agda
 module category-theory.natural-isomorphisms-precategories where

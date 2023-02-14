@@ -1,6 +1,4 @@
----
-title: Connected maps
----
+#  Connected maps
 
 ```agda
 module foundation.connected-maps where

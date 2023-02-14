@@ -1,6 +1,4 @@
----
-title: The universal property of propositional truncations with respect to sets
----
+#  The universal property of propositional truncations with respect to sets
 
 ```agda
 module foundation.universal-property-propositional-truncation-into-sets where

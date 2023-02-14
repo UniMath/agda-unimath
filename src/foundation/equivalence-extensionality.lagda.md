@@ -1,6 +1,4 @@
----
-title: Equivalence extensionality
----
+#  Equivalence extensionality
 
 ```agda
 module foundation.equivalence-extensionality where

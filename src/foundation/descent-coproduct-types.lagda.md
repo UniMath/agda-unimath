@@ -1,6 +1,4 @@
----
-title: Descent for coproduct types
----
+#  Descent for coproduct types
 
 ```agda
 module foundation.descent-coproduct-types where

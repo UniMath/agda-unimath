@@ -1,6 +1,4 @@
----
-title: Decidable subtypes of finite types
----
+#  Decidable subtypes of finite types
 
 ```agda
 module univalent-combinatorics.decidable-subtypes where

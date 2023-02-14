@@ -1,6 +1,4 @@
----
-title: Decidable relations on types
----
+#  Decidable relations on types
 
 ```agda
 module foundation.decidable-relations where

@@ -1,6 +1,4 @@
----
-title: The Zariski topology on the set of prime ideals in a commutative ring
----
+#  The Zariski topology on the set of prime ideals in a commutative ring
 
 ```agda
 module commutative-algebra.zariski-topology where

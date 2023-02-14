@@ -1,6 +1,4 @@
----
-title: Constant maps
----
+#  Constant maps
 
 ```agda
 {-# OPTIONS --safe #-}

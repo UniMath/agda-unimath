@@ -1,6 +1,4 @@
----
-title: Wild groups
----
+#  Wild groups
 
 ```agda
 module structured-types.wild-groups where

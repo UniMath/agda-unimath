@@ -1,6 +1,4 @@
----
-title: Local rings
----
+#  Local rings
 
 ```agda
 module ring-theory.local-rings where

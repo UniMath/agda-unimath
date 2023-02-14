@@ -1,6 +1,4 @@
----
-title: Pullbacks
----
+#  Pullbacks
 
 ```agda
 module foundation.pullbacks where

@@ -1,6 +1,4 @@
----
-title: Equality in finite types
----
+#  Equality in finite types
 
 ```agda
 module univalent-combinatorics.equality-finite-types where

@@ -1,6 +1,4 @@
----
-title: Addition on the natural numbers
----
+#  Addition on the natural numbers
 
 ```agda
 module elementary-number-theory.addition-natural-numbers where

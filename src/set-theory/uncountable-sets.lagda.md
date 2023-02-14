@@ -1,6 +1,4 @@
----
-title: Uncountable sets
-___
+# Uncountable sets
 
 ```agda
 module set-theory.uncountable-sets where

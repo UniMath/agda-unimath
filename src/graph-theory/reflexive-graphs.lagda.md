@@ -1,6 +1,4 @@
----
-title: Reflexive graphs
----
+#  Reflexive graphs
 
 ```agda
 module graph-theory.reflexive-graphs where

@@ -1,6 +1,4 @@
----
-title: Equivalences of species
----
+#  Equivalences of species
 
 ```agda
 module univalent-combinatorics.equivalences-species where

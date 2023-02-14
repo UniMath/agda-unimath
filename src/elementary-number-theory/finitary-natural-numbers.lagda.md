@@ -1,6 +1,4 @@
----
-title: The natural numbers base k
----
+#  The natural numbers base k
 
 ```agda
 module elementary-number-theory.finitary-natural-numbers where

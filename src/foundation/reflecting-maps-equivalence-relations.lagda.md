@@ -1,6 +1,4 @@
----
-title: Reflecting maps for equivalence relations
----
+#  Reflecting maps for equivalence relations
 
 ```agda
 module foundation.reflecting-maps-equivalence-relations where
@@ -67,55 +65,6 @@ module _
 ```
 
 ### Binary maps reflecting equivalence relations
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B)
-  where
-
-  binary-reflects-Eq-Rel :
-    {l5 : Level} {C : UU l5} → (A → B → C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  binary-reflects-Eq-Rel f =
-    {x x' : A} {y y' : B} →
-    sim-Eq-Rel R x x' → sim-Eq-Rel S y y' → f x y ＝ f x' y'
-
-  binary-reflecting-map-Eq-Rel :
-    {l5 : Level} (C : UU l5) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  binary-reflecting-map-Eq-Rel C = Σ (A → B → C) binary-reflects-Eq-Rel
-
-  map-binary-reflecting-map-Eq-Rel :
-    {l5 : Level} {C : UU l5} →
-    binary-reflecting-map-Eq-Rel C → (A → B → C)
-  map-binary-reflecting-map-Eq-Rel = pr1
-
-  reflects-binary-reflecting-map-Eq-Rel :
-    {l5 : Level} {C : UU l5} (f : binary-reflecting-map-Eq-Rel C) →
-    binary-reflects-Eq-Rel (map-binary-reflecting-map-Eq-Rel f)
-  reflects-binary-reflecting-map-Eq-Rel = pr2
-
-  is-prop-binary-reflects-Eq-Rel :
-    {l5 : Level} (C : Set l5) (f : A → B → type-Set C) →
-    is-prop (binary-reflects-Eq-Rel f)
-  is-prop-binary-reflects-Eq-Rel C f =
-    is-prop-Π'
-      ( λ x →
-        is-prop-Π'
-          ( λ x' →
-            is-prop-Π'
-              ( λ y →
-                is-prop-Π'
-                  ( λ y' →
-                    is-prop-function-type
-                      ( is-prop-function-type
-                        ( is-set-type-Set C (f x y) (f x' y')))))))
-
-  binary-reflects-Eq-Rel-Prop :
-    {l5 : Level} (C : Set l5) →
-    (A → B → type-Set C) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  pr1 (binary-reflects-Eq-Rel-Prop C f) = binary-reflects-Eq-Rel f
-  pr2 (binary-reflects-Eq-Rel-Prop C f) = is-prop-binary-reflects-Eq-Rel C f
-```
 
 ## Properties
 
@@ -193,84 +142,4 @@ module _
     htpy-reflecting-map-Eq-Rel g → f ＝ g
   eq-htpy-reflecting-map-Eq-Rel g =
     map-inv-is-equiv (is-equiv-htpy-eq-reflecting-map-Eq-Rel g)
-```
-
-### Characterizing the identity type of binary reflecting maps into sets
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B)
-  (C : Set l5) (f : binary-reflecting-map-Eq-Rel R S (type-Set C))
-  where
-
-  htpy-binary-reflecting-map-Eq-Rel :
-    (g : binary-reflecting-map-Eq-Rel R S (type-Set C)) → UU (l1 ⊔ l3 ⊔ l5)
-  htpy-binary-reflecting-map-Eq-Rel g =
-    (x : A) (y : B) →
-    map-binary-reflecting-map-Eq-Rel R S f x y ＝
-    map-binary-reflecting-map-Eq-Rel R S g x y
-
-  refl-htpy-binary-reflecting-map-Eq-Rel :
-    htpy-binary-reflecting-map-Eq-Rel f
-  refl-htpy-binary-reflecting-map-Eq-Rel x y = refl
-
-  htpy-eq-binary-reflecting-map-Eq-Rel :
-    (g : binary-reflecting-map-Eq-Rel R S (type-Set C)) →
-    (f ＝ g) → htpy-binary-reflecting-map-Eq-Rel g
-  htpy-eq-binary-reflecting-map-Eq-Rel .f refl =
-    refl-htpy-binary-reflecting-map-Eq-Rel
-
-  is-contr-total-htpy-binary-reflecting-map-Eq-Rel :
-    is-contr
-      ( Σ ( binary-reflecting-map-Eq-Rel R S (type-Set C))
-          ( htpy-binary-reflecting-map-Eq-Rel))
-  is-contr-total-htpy-binary-reflecting-map-Eq-Rel =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-Eq-Π
-        ( λ x → (λ g → map-binary-reflecting-map-Eq-Rel R S f x ~ g))
-        ( λ x → is-contr-total-htpy (map-binary-reflecting-map-Eq-Rel R S f x)))
-      ( is-prop-binary-reflects-Eq-Rel R S C)
-      ( map-binary-reflecting-map-Eq-Rel R S f)
-      ( λ x → refl-htpy)
-      ( reflects-binary-reflecting-map-Eq-Rel R S f)
-
-  is-equiv-htpy-eq-binary-reflecting-map-Eq-Rel :
-    (g : binary-reflecting-map-Eq-Rel R S (type-Set C)) →
-    is-equiv (htpy-eq-binary-reflecting-map-Eq-Rel g)
-  is-equiv-htpy-eq-binary-reflecting-map-Eq-Rel =
-    fundamental-theorem-id
-      is-contr-total-htpy-binary-reflecting-map-Eq-Rel
-      htpy-eq-binary-reflecting-map-Eq-Rel
-
-  extensionality-binary-reflecting-map-Eq-Rel :
-    (g : binary-reflecting-map-Eq-Rel R S (type-Set C)) →
-    (f ＝ g) ≃ htpy-binary-reflecting-map-Eq-Rel g
-  pr1 (extensionality-binary-reflecting-map-Eq-Rel g) =
-    htpy-eq-binary-reflecting-map-Eq-Rel g
-  pr2 (extensionality-binary-reflecting-map-Eq-Rel g) =
-    is-equiv-htpy-eq-binary-reflecting-map-Eq-Rel g
-
-  eq-htpy-binary-reflecting-map-Eq-Rel :
-    (g : binary-reflecting-map-Eq-Rel R S (type-Set C)) →
-    htpy-binary-reflecting-map-Eq-Rel g → (f ＝ g)
-  eq-htpy-binary-reflecting-map-Eq-Rel g =
-    map-inv-equiv (extensionality-binary-reflecting-map-Eq-Rel g)
-```
-
-### Composition of reflecting maps
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B) {C : UU l5}
-  where
-
-  comp-reflecting-map-Eq-Rel :
-    reflecting-map-Eq-Rel S C → (f : A → B) →
-    ({x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (f x) (f y)) →
-    reflecting-map-Eq-Rel R C
-  pr1 (comp-reflecting-map-Eq-Rel g f H) = map-reflecting-map-Eq-Rel S g ∘ f
-  pr2 (comp-reflecting-map-Eq-Rel g f H) {x} {y} r =
-    reflects-map-reflecting-map-Eq-Rel S g (H r)
 ```

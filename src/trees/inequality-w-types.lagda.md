@@ -1,6 +1,4 @@
----
-title: Inequality on W-types
----
+#  Inequality on W-types
 
 ```agda
 module trees.inequality-w-types where

@@ -1,6 +1,4 @@
----
-title: Hydrocarbons
----
+#  Hydrocarbons
 
 ```agda
 module organic-chemistry.hydrocarbons where

@@ -1,6 +1,4 @@
----
-title: Arithmetic functions
----
+#  Arithmetic functions
 
 ```agda
 module elementary-number-theory.arithmetic-functions where

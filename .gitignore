@@ -8,6 +8,7 @@ docs/dependency.dot
 docs/graph.png
 src/everything.lagda.md
 src/**/*.html
+book/
 
 ### Emacs ###
 # -*- mode: gitignore; -*-

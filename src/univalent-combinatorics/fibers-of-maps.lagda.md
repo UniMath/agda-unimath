@@ -1,6 +1,4 @@
----
-title: Fibers of maps between finite types
----
+#  Fibers of maps between finite types
 
 ```agda
 module univalent-combinatorics.fibers-of-maps where
