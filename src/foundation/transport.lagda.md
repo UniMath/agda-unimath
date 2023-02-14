@@ -7,6 +7,8 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -90,11 +92,27 @@ tr-eq-pair-Σ C refl refl u = refl
 ### Transport in a family of function types
 
 ```agda
-tr-function-type :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (C : A → UU l3)
-  (p : a0 ＝ a1) (f : B a0 → C a0) →
-  tr (λ a → B a → C a) p f ＝ λ x → tr C p (f (tr B (inv p) x))
-tr-function-type B C refl f = refl
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : A → UU l3)
+  where
+  
+  tr-function-type :
+    (p : x ＝ y) (f : B x → C x) →
+    tr (λ a → B a → C a) p f ＝ (tr C p ∘ (f ∘ tr B (inv p)))
+  tr-function-type refl f = refl
+   
+  compute-path-over-function-type :
+    (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
+    ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
+    (tr (λ a → B a → C a) p f ＝ g)
+  compute-path-over-function-type refl f g = inv-equiv equiv-funext
+
+  map-compute-path-over-function-type :
+    (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
+    ((b : B x) → tr C p (f b) ＝ g (tr B p b)) →
+    (tr (λ a → B a → C a) p f ＝ g)
+  map-compute-path-over-function-type p f g =
+    map-equiv (compute-path-over-function-type p f g)
 ```
 
 ### Transport in identity types
