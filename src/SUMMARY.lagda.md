@@ -766,6 +766,7 @@
   - [Isomorphisms rings](ring-theory.isomorphisms-rings.md)
   - [Local rings](ring-theory.local-rings.md)
   - [Localizations rings](ring-theory.localizations-rings.md)
+  - [Maximal ideals rings](ring-theory.maximal-ideals-rings.md)
   - [Modules rings](ring-theory.modules-rings.md)
   - [Nil ideals rings](ring-theory.nil-ideals-rings.md)
   - [Nilpotent elements rings](ring-theory.nilpotent-elements-rings.md)
