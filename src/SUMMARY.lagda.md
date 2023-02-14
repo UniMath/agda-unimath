@@ -61,6 +61,7 @@
   - [Slice precategories](category-theory.slice-precategories.md)
   - [Terminal objects precategories](category-theory.terminal-objects-precategories.md)
 
+
 - [Commutative algebra](commutative-algebra.md)
   - [Boolean rings](commutative-algebra.boolean-rings.md)
   - [Commutative rings](commutative-algebra.commutative-rings.md)
@@ -77,6 +78,7 @@
   - [Nilradical commutative rings](commutative-algebra.nilradical-commutative-rings.md)
   - [Prime ideals commutative rings](commutative-algebra.prime-ideals-commutative-rings.md)
   - [Zariski topology](commutative-algebra.zariski-topology.md)
+
 
 - [Elementary number theory](elementary-number-theory.md)
   - [Absolute value integers](elementary-number-theory.absolute-value-integers.md)
@@ -161,17 +163,19 @@
   - [Well ordering principle natural numbers](elementary-number-theory.well-ordering-principle-natural-numbers.md)
   - [Well ordering principle standard finite types](elementary-number-theory.well-ordering-principle-standard-finite-types.md)
 
+
 - [Finite group theory](finite-group-theory.md)
   - [Abstract quaternion group](finite-group-theory.abstract-quaternion-group.md)
   - [Alternating concrete groups](finite-group-theory.alternating-concrete-groups.md)
   - [Alternating groups](finite-group-theory.alternating-groups.md)
   - [Cartier delooping sign homomorphism](finite-group-theory.cartier-delooping-sign-homomorphism.md)
   - [Concrete quaternion group](finite-group-theory.concrete-quaternion-group.md)
+  - [Delooping sign homomorphism](finite-group-theory.delooping-sign-homomorphism.md)
   - [Finite groups](finite-group-theory.finite-groups.md)
   - [Finite monoids](finite-group-theory.finite-monoids.md)
   - [Finite semigroups](finite-group-theory.finite-semigroups.md)
   - [Finite type groups](finite-group-theory.finite-type-groups.md)
-  - [Groups of order-2](finite-group-theory.groups-of-order-2.md)
+  - [Groups of order 2](finite-group-theory.groups-of-order-2.md)
   - [Orbits permutations](finite-group-theory.orbits-permutations.md)
   - [Permutations](finite-group-theory.permutations.md)
   - [Sign homomorphism](finite-group-theory.sign-homomorphism.md)
