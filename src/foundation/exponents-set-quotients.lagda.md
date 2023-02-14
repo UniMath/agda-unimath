@@ -3,7 +3,7 @@ title: Exponents of set quotients
 ---
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+-- {-# OPTIONS --lossy-unification #-}
 
 module foundation.exponents-set-quotients where
 
@@ -245,42 +245,36 @@ module _
   {B : UU l3} (S : Eq-Rel l4 B)
   where
 
-  universal-map-set-quotient-hom-Eq-Rel :
-    hom-Eq-Rel R S → set-quotient R → set-quotient S
-  universal-map-set-quotient-hom-Eq-Rel =
-    universal-map-is-set-quotient-hom-Eq-Rel
+  universal-reflecting-map-set-quotient-hom-Eq-Rel :
+    reflecting-map-Eq-Rel
+      ( eq-rel-hom-Eq-Rel R S)
+      ( set-quotient R → set-quotient S)
+  universal-reflecting-map-set-quotient-hom-Eq-Rel =
+    universal-reflecting-map-is-set-quotient-hom-Eq-Rel
       ( R)
       ( quotient-Set R)
       ( reflecting-map-quotient-map R)
-      ( is-set-quotient-set-quotient R)
+      ( λ {l} → is-set-quotient-set-quotient R {l})
       ( S)
       ( quotient-Set S)
       ( reflecting-map-quotient-map S)
-      ( is-set-quotient-set-quotient S)
+      ( λ {l} → is-set-quotient-set-quotient S {l})
+
+  universal-map-set-quotient-hom-Eq-Rel :
+    hom-Eq-Rel R S → set-quotient R → set-quotient S
+  universal-map-set-quotient-hom-Eq-Rel =
+    map-reflecting-map-Eq-Rel
+      ( eq-rel-hom-Eq-Rel R S)
+      ( universal-reflecting-map-set-quotient-hom-Eq-Rel)
 
   reflects-universal-map-set-quotient-hom-Eq-Rel :
     reflects-Eq-Rel
       ( eq-rel-hom-Eq-Rel R S)
       ( universal-map-set-quotient-hom-Eq-Rel)
   reflects-universal-map-set-quotient-hom-Eq-Rel =
-    reflects-universal-map-is-set-quotient-hom-Eq-Rel
-      ( R)
-      ( quotient-Set R)
-      ( reflecting-map-quotient-map R)
-      ( is-set-quotient-set-quotient R)
-      ( S)
-      ( quotient-Set S)
-      ( reflecting-map-quotient-map S)
-      ( is-set-quotient-set-quotient S)
-
-  universal-reflecting-map-set-quotient-hom-Eq-Rel :
-    reflecting-map-Eq-Rel
+    reflects-map-reflecting-map-Eq-Rel
       ( eq-rel-hom-Eq-Rel R S)
-      ( set-quotient R → set-quotient S)
-  pr1 universal-reflecting-map-set-quotient-hom-Eq-Rel =
-    universal-map-set-quotient-hom-Eq-Rel
-  pr2 universal-reflecting-map-set-quotient-hom-Eq-Rel =
-    reflects-universal-map-set-quotient-hom-Eq-Rel
+      ( universal-reflecting-map-set-quotient-hom-Eq-Rel)
 ```
 
 ## Properties

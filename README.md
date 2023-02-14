@@ -142,7 +142,9 @@ title: [The title of the file]
 ---
 ```
 5. Immediately after the header, there should be a block of Agda code that loads the options, declares the present module, and performs all the imports. In particular, there should be no further imports later on in the file.
-6. The rest of the files is divided into sections, subsections and possibly subsubsections. Each section should have a markdown header of level `##`, and the title of each header should be generic, such as `Idea`, `Definition`, `Example`, `Properties`, and so on. 
+6. The rest of the files is divided into sections, subsections and possibly subsubsections. `##` headings are the main sections of the page. Usually at the beginning we have `## Idea` describing informally the idea of the things in that file. Then we hav `## Definitions` for definitions, and after that `## Properties` followed by `## See also` and `## References`. In rare cases we can include a section `## Examples` for examples or `## Theorem` if the main purpose of the file is to prove an important theorem. The reason `## Examples` is rarely used is that usually examples go in their own files, which can be listed under `## See also`.
+`###` headings are for subsectioning the `## Definitions` and `## Properties` section. They are brief descriptions of the code block that follows. If the code block that follows is very long, we can even use `####` headings to subdivide the subsections. 
+Note that we don't use `#` headings. Those are for the title of the page, and pandoc generates a `#` heading from the formatting of the title, mentioned above.
 7. The subsections should have a markdown header of level `###` and they should concisely describe the content of the block of code that follows.
 
 Ideally, the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept. We suggest adopt the following template:
