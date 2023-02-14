@@ -976,6 +976,7 @@
   - [Skipping element standard finite types](univalent-combinatorics.skipping-element-standard-finite-types.md)
   - [Species](univalent-combinatorics.species.md)
   - [Standard finite pruned trees](univalent-combinatorics.standard-finite-pruned-trees.md)
+  - [Standard finite trees](univalent-combinatorics.standard-finite-trees.md)
   - [Standard finite types](univalent-combinatorics.standard-finite-types.md)
   - [Steiner systems](univalent-combinatorics.steiner-systems.md)
   - [Steiner triple systems](univalent-combinatorics.steiner-triple-systems.md)
