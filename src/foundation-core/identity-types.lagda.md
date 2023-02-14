@@ -151,7 +151,7 @@ ap-id refl = refl
 
 ap-comp :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k} (g : B → C)
-  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ (ap g (ap f p))
+  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
 ap-comp g f refl = refl
 
 ap-refl :
@@ -321,6 +321,11 @@ ap-binary :
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') → (f x y) ＝ (f x' y')
 ap-binary f refl refl = refl
 
+ap-binary-diagonal :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → A → B) →
+  {x x' : A} (p : x ＝ x') → (ap-binary f p p) ＝ (ap (λ a → f a a) p)
+ap-binary-diagonal f refl = refl  
+
 triangle-ap-binary :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
@@ -344,6 +349,31 @@ right-unit-ap-binary :
   {x x' : A} (p : x ＝ x') {y : B} →
   (ap-binary f p refl) ＝ (ap (λ z → f z y) p)
 right-unit-ap-binary f refl = refl
+
+ap-binary-comp :
+  {l1 l2 l3 l4 l5 : Level} {X : UU l4} {Y : UU l5} {A : UU l1} {B : UU l2} {C : UU l3}
+  (H : A → B → C) (f : X → A) (g : Y → B) {x0 x1 : X} (p : x0 ＝ x1)
+  {y0 y1 : Y} (q : y0 ＝ y1) → (ap-binary (λ x y → H (f x) (g y)) p q) ＝
+  ap-binary H (ap f p) (ap g q) 
+ap-binary-comp H f g refl refl = refl
+
+ap-binary-comp-diagonal :
+  {l1 l2 l3 l4 : Level} {A' : UU l4} {A : UU l1} {B : UU l2} {C : UU l3}
+  (H : A → B → C) (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
+  (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
+ap-binary-comp-diagonal H f g p =
+  inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
+
+ap-binary-comp' :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : C → D) (H : A → B → C) {a0 a1 : A} (p : a0 ＝ a1) {b0 b1 : B} (q : b0 ＝ b1) →
+  (ap-binary (λ a b → f (H a b)) p q) ＝ (ap f (ap-binary H p q))
+ap-binary-comp' f H refl refl = refl
+
+ap-binary-permute :
+  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} {B : UU l2} {b0 b1 : B} {C : UU l3} (f : A → B → C) →
+  (p : a0 ＝ a1) (q : b0 ＝ b1) → (ap-binary (λ y x → f x y) q p) ＝ (ap-binary f p q)
+ap-binary-permute f refl refl = refl  
 ```
 
 ### Action on identifications of dependent functions
