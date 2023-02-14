@@ -184,6 +184,7 @@
   - [Tetrahedra in-3-space](finite-group-theory.tetrahedra-in-3-space.md)
   - [Transpositions](finite-group-theory.transpositions.md)
 
+
 - [Foundation](Foundation.md)
   - [0-connected types](foundation.0-connected-types.md)
   - [0-images of maps](foundation.0-images-of-maps.md)
@@ -508,7 +509,6 @@
   - [Universe levels](foundation-core.universe-levels.md)
 
 
-
 - [Graph theory](graph-theory.md)
   - [Circuits undirected graphs](graph-theory.circuits-undirected-graphs.md)
   - [Closed walks undirected graphs](graph-theory.closed-walks-undirected-graphs.md)
@@ -520,10 +520,11 @@
   - [Directed graph structures on standard finite sets](graph-theory.directed-graph-structures-on-standard-finite-sets.md)
   - [Directed graphs](graph-theory.directed-graphs.md)
   - [Edge coloured undirected graphs](graph-theory.edge-coloured-undirected-graphs.md)
+  - [Embeddings directed graphs](graph-theory.embeddings-directed-graphs.md)
   - [Embeddings undirected graphs](graph-theory.embeddings-undirected-graphs.md)
   - [Enriched undirected graphs](graph-theory.enriched-undirected-graphs.md)
-  - [Equivalences enriched undirected graphs](graph-theory.equivalences-enriched-undirected-graphs.md)
   - [Equivalences directed graphs](graph-theory.equivalences-directed-graphs.md)
+  - [Equivalences enriched undirected graphs](graph-theory.equivalences-enriched-undirected-graphs.md)
   - [Equivalences undirected graphs](graph-theory.equivalences-undirected-graphs.md)
   - [Eulerian circuits undirected graphs](graph-theory.eulerian-circuits-undirected-graphs.md)
   - [Faithful morphisms undirected graphs](graph-theory.faithful-morphisms-undirected-graphs.md)
@@ -544,12 +545,16 @@
   - [Simple undirected graphs](graph-theory.simple-undirected-graphs.md)
   - [Stereoisomerism enriched undirected graphs](graph-theory.stereoisomerism-enriched-undirected-graphs.md)
   - [Totally faithful morphisms undirected graphs](graph-theory.totally-faithful-morphisms-undirected-graphs.md)
+  - [Trails directed graphs](graph-theory.trails-directed-graphs.md)
   - [Trails undirected graphs](graph-theory.trails-undirected-graphs.md)
   - [Undirected graph structures on standard finite sets](graph-theory.undirected-graph-structures-on-standard-finite-sets.md)
   - [Undirected graphs](graph-theory.undirected-graphs.md)
   - [Vertex covers](graph-theory.vertex-covers.md)
   - [Voltage graphs](graph-theory.voltage-graphs.md)
+  - [Walks directed graphs](graph-theory.walks-directed-graphs.md)
   - [Walks undirected graphs](graph-theory.walks-undirected-graphs.md)
+
+
 - [Group theory](group-theory.md)
   - [Abelian groups](group-theory.abelian-groups.md)
   - [Addition homomorphisms abelian groups](group-theory.addition-homomorphisms-abelian-groups.md)
