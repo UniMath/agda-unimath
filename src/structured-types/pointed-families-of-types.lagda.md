@@ -1,6 +1,4 @@
----
-title: Pointed families of types
----
+#  Pointed families of types
 
 ```agda
 module structured-types.pointed-families-of-types where

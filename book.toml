@@ -1,0 +1,41 @@
+[book]
+language = "en"
+multilingual = false
+src = "docs"
+title = "Agda-UniMath"
+
+[preprocessor.index]
+
+[preprocessor.links]
+
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "Ayu"
+mathjax-support = true
+copy-fonts = true
+additional-css = ["docs/Agda.css"]
+additional-js = ["docs/js/custom.js", "docs/images/agda-unimath-logo.svg"]
+no-section-label = false
+git-repository-url = "https://github.com/UniMath/agda-unimath"
+git-repository-icon = "fa-github"
+
+[output.html.print]
+enable = true    # include support for printable output
+page-break = true # insert page-break after each chapter
+
+[output.html.fold]
+enable = true    # whether or not to enable section folding
+level = 0         # the depth to start folding
+
+[output.html.search]
+enable = true            # enables the search feature
+limit-results = 15       # maximum number of search results
+teaser-word-count = 30   # number of words used for a search result teaser
+use-boolean-and = true   # multiple search terms must all match
+boost-title = 2          # ranking boost factor for matches in headers
+boost-hierarchy = 1      # ranking boost factor for matches in page names
+boost-paragraph = 1      # ranking boost factor for matches in text
+expand = true            # partial words will match longer terms
+heading-split-level = 2  # link results to heading levels
+copy-js = true           # include Javascript code for search

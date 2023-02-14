@@ -1,6 +1,4 @@
----
-title: Orbits of group actions
----
+#  Orbits of group actions
 
 ```agda
 module group-theory.orbits-group-actions where

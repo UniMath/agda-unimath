@@ -1,6 +1,4 @@
----
-title: Catalan numbers
----
+#  Catalan numbers
 
 ```agda
 module elementary-number-theory.catalan-numbers where

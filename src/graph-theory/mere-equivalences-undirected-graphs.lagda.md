@@ -1,6 +1,4 @@
----
-title: Mere equivalences of undirected graphs
----
+#  Mere equivalences of undirected graphs
 
 ```agda
 module graph-theory.mere-equivalences-undirected-graphs where

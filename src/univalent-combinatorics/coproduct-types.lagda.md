@@ -1,6 +1,4 @@
----
-title: Coproducts of finite types
----
+#  Coproducts of finite types
 
 ```agda
 module univalent-combinatorics.coproduct-types where

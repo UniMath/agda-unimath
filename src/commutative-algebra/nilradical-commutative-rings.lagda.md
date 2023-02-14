@@ -1,6 +1,4 @@
----
-title: Nilradical of a commutative ring
----
+#  Nilradical of a commutative ring
 
 ```agda
 module commutative-algebra.nilradical-commutative-rings where

@@ -1,6 +1,4 @@
----
-title: Unit similarity on the standard finite types
----
+#  Unit similarity on the standard finite types
 
 ```agda
 module elementary-number-theory.unit-similarity-standard-finite-types where

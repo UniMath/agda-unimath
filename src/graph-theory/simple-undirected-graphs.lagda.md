@@ -1,6 +1,4 @@
----
-title: Simple undirected graphs
----
+#  Simple undirected graphs
 
 ```agda
 module graph-theory.simple-undirected-graphs where

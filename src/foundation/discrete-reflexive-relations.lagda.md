@@ -1,6 +1,4 @@
----
-title: Discrete reflexive relations
----
+#  Discrete reflexive relations
 
 ```agda
 module foundation.discrete-reflexive-relations where

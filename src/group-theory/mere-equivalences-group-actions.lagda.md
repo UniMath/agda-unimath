@@ -1,6 +1,4 @@
----
-title: Mere equivalences of group actions
----
+#  Mere equivalences of group actions
 
 ```agda
 module group-theory.mere-equivalences-group-actions where

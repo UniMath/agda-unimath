@@ -1,6 +1,4 @@
----
-title: Subgroups of finite groups
----
+#  Subgroups of finite groups
 
 ```agda
 module finite-group-theory.subgroups-finite-groups where

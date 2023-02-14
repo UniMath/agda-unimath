@@ -1,6 +1,4 @@
----
-title: Morphisms of types equipped with endomorphisms
----
+#  Morphisms of types equipped with endomorphisms
 
 ```agda
 module structured-types.morphisms-types-equipped-with-endomorphisms where

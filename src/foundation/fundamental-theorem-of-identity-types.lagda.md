@@ -1,6 +1,4 @@
----
-title: The fundamental theorem of identity types
----
+#  The fundamental theorem of identity types
 
 ```agda
 module foundation.fundamental-theorem-of-identity-types where

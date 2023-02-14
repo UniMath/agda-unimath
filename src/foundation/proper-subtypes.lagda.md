@@ -1,6 +1,4 @@
----
-title: Proper subsets
----
+#  Proper subsets
 
 ```agda
 module foundation.proper-subtypes where

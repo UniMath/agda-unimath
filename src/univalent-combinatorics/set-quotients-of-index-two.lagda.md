@@ -1,6 +1,4 @@
----
-title: Set quotients of index 2
----
+#  Set quotients of index 2
 
 ```agda
 module univalent-combinatorics.set-quotients-of-index-two where

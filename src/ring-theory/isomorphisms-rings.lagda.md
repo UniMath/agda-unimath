@@ -1,6 +1,4 @@
----
-title: Isomorphisms of rings
----
+#  Isomorphisms of rings
 
 ```agda
 module ring-theory.isomorphisms-rings where

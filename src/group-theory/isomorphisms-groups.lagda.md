@@ -1,6 +1,4 @@
----
-title: Isomorphisms of groups
----
+#  Isomorphisms of groups
 
 ```agda
 module group-theory.isomorphisms-groups where

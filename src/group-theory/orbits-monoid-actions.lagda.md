@@ -1,6 +1,4 @@
----
-title: The precategory of orbits of a monoid action
----
+#  The precategory of orbits of a monoid action
 
 ```agda
 module group-theory.orbits-monoid-actions where

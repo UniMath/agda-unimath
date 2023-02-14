@@ -1,6 +1,4 @@
----
-title: Products of tuples of elements in commutative monoids
----
+#  Products of tuples of elements in commutative monoids
 
 ```agda
 module group-theory.products-of-tuples-of-elements-commutative-monoids where

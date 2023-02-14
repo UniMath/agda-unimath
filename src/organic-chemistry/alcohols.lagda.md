@@ -1,6 +1,4 @@
----
-title: Alcohols
----
+#  Alcohols
 
 ```agda
 module organic-chemistry.alcohols where

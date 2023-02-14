@@ -1,6 +1,4 @@
----
-title: The Collatz conjecture
----
+#  The Collatz conjecture
 
 ```agda
 module elementary-number-theory.collatz-conjecture where

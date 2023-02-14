@@ -1,6 +1,4 @@
----
-title: Opposite rings
----
+#  Opposite rings
 
 ```agda
 module ring-theory.opposite-rings where

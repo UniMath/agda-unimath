@@ -1,6 +1,4 @@
----
-title: The unit type
----
+#  The unit type
 
 ```agda
 module foundation.unit-type where

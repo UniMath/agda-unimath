@@ -1,6 +1,4 @@
----
-title: Addition on the rationals
----
+#  Addition on the rationals
 
 ```agda
 module elementary-number-theory.addition-rationals where

@@ -1,6 +1,4 @@
----
-title: Modular arithmetic on the standard finite types
----
+#  Modular arithmetic on the standard finite types
 
 ```agda
 module elementary-number-theory.modular-arithmetic-standard-finite-types where

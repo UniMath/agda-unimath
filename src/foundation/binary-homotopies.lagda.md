@@ -1,6 +1,4 @@
----
-title: Homotopies of binary operations
----
+# Homotopies of binary operations
 
 ```agda
 module foundation.binary-homotopies where

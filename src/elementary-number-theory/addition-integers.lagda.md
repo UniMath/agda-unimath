@@ -1,6 +1,4 @@
----
-title: Addition on the integers
----
+#  Addition on the integers
 
 ```agda
 module elementary-number-theory.addition-integers where

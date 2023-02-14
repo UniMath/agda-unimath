@@ -1,6 +1,4 @@
----
-title: Unordered pairs of types
----
+#  Unordered pairs of types
 
 ```agda
 module foundation.unordered-pairs-of-types where

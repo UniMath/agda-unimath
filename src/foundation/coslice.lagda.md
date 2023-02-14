@@ -1,6 +1,4 @@
----
-title: Morphisms in the coslice category of types
----
+#  Morphisms in the coslice category of types
 
 ```agda
 module foundation.coslice where

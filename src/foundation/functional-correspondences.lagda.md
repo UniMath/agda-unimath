@@ -1,6 +1,4 @@
----
-title: Functional correspondences
----
+#  Functional correspondences
 
 ```agda
 module foundation.functional-correspondences where

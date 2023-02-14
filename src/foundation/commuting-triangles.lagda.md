@@ -1,6 +1,4 @@
----
-title: Commuting triangles
----
+# Commuting triangles
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

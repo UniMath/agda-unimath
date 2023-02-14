@@ -1,6 +1,4 @@
----
-title: Coproducts of species
----
+#  Coproducts of species
 
 ```agda
 module univalent-combinatorics.coproducts-species where

@@ -1,6 +1,4 @@
----
-title: Small multisets
----
+#  Small multisets
 
 ```agda
 module trees.small-multisets where

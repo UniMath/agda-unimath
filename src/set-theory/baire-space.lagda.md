@@ -1,6 +1,4 @@
----
-title: Baire space
----
+#  Baire space
 
 ```agda
 module set-theory.baire-space where
