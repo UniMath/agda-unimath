@@ -7,6 +7,8 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -90,11 +92,27 @@ tr-eq-pair-Σ C refl refl u = refl
 ### Transport in a family of function types
 
 ```agda
-tr-function-type :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (C : A → UU l3)
-  (p : a0 ＝ a1) (f : B a0 → C a0) →
-  tr (λ a → B a → C a) p f ＝ λ x → tr C p (f (tr B (inv p) x))
-tr-function-type B C refl f = refl
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : A → UU l3)
+  where
+  
+  tr-function-type :
+    (p : x ＝ y) (f : B x → C x) →
+    tr (λ a → B a → C a) p f ＝ (tr C p ∘ (f ∘ tr B (inv p)))
+  tr-function-type refl f = refl
+   
+  compute-path-over-function-type :
+    (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
+    ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
+    (tr (λ a → B a → C a) p f ＝ g)
+  compute-path-over-function-type refl f g = inv-equiv equiv-funext
+
+  map-compute-path-over-function-type :
+    (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
+    ((b : B x) → tr C p (f b) ＝ g (tr B p b)) →
+    (tr (λ a → B a → C a) p f ＝ g)
+  map-compute-path-over-function-type p f g =
+    map-equiv (compute-path-over-function-type p f g)
 ```
 
 ### Transport in identity types
@@ -113,11 +131,6 @@ tr-x＝y :
   (p : a0 ＝ a1) (q : a2 ＝ a3) (s : a0 ＝ a2) → 
   (tr (λ z → (pr1 z) ＝ (pr2 z)) (eq-pair p q) s) ＝ ((inv p) ∙ (s ∙ q))
 tr-x＝y refl refl s = inv right-unit
-
-tr-fx＝gx :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
-  {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) → (tr (λ x → f x ＝ g x) p q) ＝((inv (ap f p) ∙ q) ∙ (ap g p))
-tr-fx＝gx f g p q = inv (tr-eq-pair-diagonal (λ z → f (pr1 z) ＝ g (pr2 z)) p q) ∙ (tr-fx＝gy f g p p q)
 ```
 
 ### Transport in the family of loops

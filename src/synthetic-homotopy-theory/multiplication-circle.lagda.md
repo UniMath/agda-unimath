@@ -31,12 +31,12 @@ htpy-id-id-Π-𝕊¹ :
   Π-𝕊¹
     ( eq-value id id)
     ( loop-𝕊¹)
-    ( tr-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+    ( map-compute-path-over-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
 htpy-id-id-Π-𝕊¹ =
   apply-dependent-universal-property-𝕊¹
     ( eq-value id id)
     ( loop-𝕊¹)
-    ( tr-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+    ( map-compute-path-over-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
 
 htpy-id-id-𝕊¹ : (x : 𝕊¹) → Id x x
 htpy-id-id-𝕊¹ = pr1 htpy-id-id-Π-𝕊¹
