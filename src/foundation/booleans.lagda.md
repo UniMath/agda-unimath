@@ -1,6 +1,4 @@
----
-title: The booleans
----
+#  The booleans
 
 ```agda
 module foundation.booleans where

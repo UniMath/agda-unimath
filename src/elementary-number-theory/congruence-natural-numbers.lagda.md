@@ -1,6 +1,4 @@
----
-title: The congruence relations on the natural numbers
----
+#  The congruence relations on the natural numbers
 
 ```agda
 module elementary-number-theory.congruence-natural-numbers where

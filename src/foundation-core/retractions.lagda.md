@@ -1,6 +1,4 @@
----
-title: Retractions
----
+#  Retractions
 
 ```agda
 {-# OPTIONS --safe #-}

@@ -1,6 +1,4 @@
----
-title: Alternating concrete groups
----
+#  Alternating concrete groups
 
 ```agda
 module finite-group-theory.alternating-concrete-groups where

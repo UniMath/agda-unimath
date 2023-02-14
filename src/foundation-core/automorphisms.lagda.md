@@ -1,6 +1,4 @@
----
-title: Automorphisms
----
+#  Automorphisms
 
 ```agda
 module foundation-core.automorphisms where

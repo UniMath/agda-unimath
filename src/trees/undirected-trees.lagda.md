@@ -1,6 +1,4 @@
----
-title: Undirected rees
----
+#  Undirected rees
 
 ```agda
 module trees.undirected-trees where

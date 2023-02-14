@@ -1,6 +1,4 @@
----
-title: Lower bounds of type families over the natural numbers
----
+#  Lower bounds of type families over the natural numbers
 
 ```agda
 module elementary-number-theory.lower-bounds-natural-numbers where

@@ -1,6 +1,4 @@
----
-title: Upper bounds for type families over the natural numbers
----
+#  Upper bounds for type families over the natural numbers
 
 ```agda
 module elementary-number-theory.upper-bounds-natural-numbers where

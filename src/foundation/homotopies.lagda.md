@@ -1,6 +1,4 @@
----
-title: Homotopies
----
+#  Homotopies
 
 ```agda
 module foundation.homotopies where

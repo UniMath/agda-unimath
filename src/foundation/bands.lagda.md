@@ -1,6 +1,4 @@
----
-title: Bands
----
+#  Bands
 
 ```agda
 module foundation.bands where

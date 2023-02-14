@@ -1,6 +1,4 @@
----
-title: Equivalences between precategories
----
+#  Equivalences between precategories
 
 ```agda
 module category-theory.equivalences-precategories where

@@ -1,6 +1,4 @@
----
-title: Directed complete posets
----
+#  Directed complete posets
 
 ```agda
 module order-theory.directed-complete-posets where

@@ -1,6 +1,4 @@
----
-title: Central H-spaces
----
+#  Central H-spaces
 
 ```agda
 module structured-types.central-h-spaces where

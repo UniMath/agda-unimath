@@ -1,6 +1,4 @@
----
-title: Modular arithmetic
----
+#  Modular arithmetic
 
 ```agda
 module elementary-number-theory.modular-arithmetic where

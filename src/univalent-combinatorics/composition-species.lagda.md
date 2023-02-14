@@ -1,6 +1,4 @@
----
-title: Composition of species
----
+#  Composition of species
 
 ```agda
 module univalent-combinatorics.composition-species where

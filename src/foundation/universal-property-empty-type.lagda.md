@@ -1,6 +1,4 @@
----
-title: The universal property of the empty type
----
+#  The universal property of the empty type
 
 ```agda
 module foundation.universal-property-empty-type where

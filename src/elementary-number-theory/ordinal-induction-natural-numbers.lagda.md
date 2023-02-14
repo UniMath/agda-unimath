@@ -1,6 +1,4 @@
----
-title: The ordinal induction principle for the natural numbers
----
+#  The ordinal induction principle for the natural numbers
 
 ```agda
 module elementary-number-theory.ordinal-induction-natural-numbers where

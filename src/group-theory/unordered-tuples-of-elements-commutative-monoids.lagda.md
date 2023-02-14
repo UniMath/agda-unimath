@@ -1,6 +1,4 @@
----
-title: Unordered tuples of elements in commutative monoids
----
+#  Unordered tuples of elements in commutative monoids
 
 ```agda
 module group-theory.unordered-tuples-of-elements-commutative-monoids where

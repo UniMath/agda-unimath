@@ -1,6 +1,4 @@
----
-title: Subuniverse
----
+#  Subuniverse
 
 ```agda
 module foundation.subuniverses where

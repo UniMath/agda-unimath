@@ -1,6 +1,4 @@
----
-title: Elementary Number Theory
----
+#  Elementary Number Theory
 
 ```agda
 module elementary-number-theory where

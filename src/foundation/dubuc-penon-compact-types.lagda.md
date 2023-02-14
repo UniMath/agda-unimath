@@ -1,6 +1,4 @@
----
-title: Dubuc-Penon compact types
----
+#  Dubuc-Penon compact types
 
 ```agda
 module foundation.dubuc-penon-compact-types where

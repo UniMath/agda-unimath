@@ -1,6 +1,4 @@
----
-title: Complements of type families
----
+#  Complements of type families
 
 ```agda
 module foundation.complements where

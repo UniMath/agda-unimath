@@ -1,6 +1,4 @@
----
-title: Cocones for pushouts
----
+#  Cocones for pushouts
 
 ```agda
 module synthetic-homotopy-theory.cocones-pushouts where

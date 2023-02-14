@@ -1,6 +1,4 @@
----
-title: The Gaussian integers
----
+#  The Gaussian integers
 
 ```agda
 module commutative-algebra.gaussian-integers where

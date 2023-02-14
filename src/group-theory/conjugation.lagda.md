@@ -1,6 +1,4 @@
----
-title: Conjugation in groups
----
+#  Conjugation in groups
 
 ```agda
 module group-theory.conjugation where

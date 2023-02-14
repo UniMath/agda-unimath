@@ -1,6 +1,4 @@
----
-title: Products of unordered tuples of types
----
+#  Products of unordered tuples of types
 
 ```agda
 module foundation.products-unordered-tuples-of-types where

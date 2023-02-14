@@ -1,6 +1,4 @@
----
-title: Equational reasoning
----
+# Equational reasoning
 
 Tom de Jong, 27 May 2022.
 Elisabeth Bonnevier, 31 May 2022.

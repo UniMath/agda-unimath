@@ -1,6 +1,4 @@
----
-title: Natural transformations between functors between categories
----
+#  Natural transformations between functors between categories
 
 ```agda
 module category-theory.natural-transformations-categories where

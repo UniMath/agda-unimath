@@ -1,6 +1,4 @@
----
-title : Decidable propositions
----
+# Decidable propositions
 
 ```agda
 module univalent-combinatorics.decidable-propositions where

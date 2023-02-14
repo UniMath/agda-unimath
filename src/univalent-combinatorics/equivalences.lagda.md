@@ -1,6 +1,4 @@
----
-title: Equivalences between finite types
----
+#  Equivalences between finite types
 
 ```agda
 module univalent-combinatorics.equivalences where

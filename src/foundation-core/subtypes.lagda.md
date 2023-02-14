@@ -1,6 +1,4 @@
----
-title: Subtypes
----
+#  Subtypes
 
 ```agda
 module foundation-core.subtypes where

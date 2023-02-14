@@ -1,6 +1,4 @@
----
-title: Structured types
----
+#  Structured types
 
 ```agda
 module structured-types where

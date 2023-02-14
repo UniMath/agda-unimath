@@ -1,6 +1,4 @@
----
-title: The Twin Prime conjecture
----
+#  The Twin Prime conjecture
 
 ```agda
 module elementary-number-theory.twin-prime-conjecture where

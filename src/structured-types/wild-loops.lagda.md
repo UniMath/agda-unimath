@@ -1,6 +1,4 @@
----
-title: Wild loops
----
+#  Wild loops
 
 ```agda
 module structured-types.wild-loops where

@@ -1,6 +1,4 @@
----
-title: Square-free natural numbers
----
+#  Square-free natural numbers
 
 ```agda
 module elementary-number-theory.square-free-natural-numbers where

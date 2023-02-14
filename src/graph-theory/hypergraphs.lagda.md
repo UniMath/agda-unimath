@@ -1,6 +1,4 @@
----
-title: Hypergraphs
----
+#  Hypergraphs
 
 ```agda
 module graph-theory.hypergraphs where

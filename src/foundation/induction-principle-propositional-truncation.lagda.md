@@ -1,6 +1,4 @@
----
-title: The induction principle for propositional truncation
----
+#  The induction principle for propositional truncation
 
 ```agda
 module foundation.induction-principle-propositional-truncation where

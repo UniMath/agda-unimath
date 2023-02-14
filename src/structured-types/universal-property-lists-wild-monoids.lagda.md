@@ -1,6 +1,4 @@
----
-title: The universal property of lists with respect to wild monoids
----
+#  The universal property of lists with respect to wild monoids
 
 ```agda
 module structured-types.universal-property-lists-wild-monoids where

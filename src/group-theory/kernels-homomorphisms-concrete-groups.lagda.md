@@ -1,6 +1,4 @@
----
-title: Kernels of homomorphisms of concrete groups
----
+#  Kernels of homomorphisms of concrete groups
 
 ```agda
 module group-theory.kernels-homomorphisms-concrete-groups where

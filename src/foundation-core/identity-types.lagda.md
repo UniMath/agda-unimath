@@ -1,6 +1,4 @@
----
-title: Identity types
----
+#  Identity types
 
 ```agda
 {-# OPTIONS --safe #-}

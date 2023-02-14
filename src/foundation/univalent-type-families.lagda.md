@@ -1,6 +1,4 @@
----
-title: Univalent type families
----
+#  Univalent type families
 
 ```agda
 module foundation.univalent-type-families where

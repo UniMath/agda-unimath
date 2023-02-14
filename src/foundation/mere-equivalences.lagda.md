@@ -1,6 +1,4 @@
----
-title: Mere equivalences
----
+#  Mere equivalences
 
 ```agda
 module foundation.mere-equivalences where

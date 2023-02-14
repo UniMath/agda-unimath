@@ -1,6 +1,4 @@
----
-title: Transitive multisets
----
+#  Transitive multisets
 
 ```agda
 module trees.transitive-multisets where

@@ -1,15 +1,15 @@
 
-checkOpts :=--without-K --exact-split --guardedness
-everythingOpts :=$(checkOpts)
-agdaVerbose?=-v1
-# use "$ export agdaVerbose=20" if you want to see all
+CHECKOPTS :=--without-K --exact-split --guardedness
+everythingOpts :=$(CHECKOPTS)
+AGDAVERBOSE?=-v1
+# use "$ export AGDAVERBOSE=20" if you want to see all
 AGDAFILES := $(wildcard src/**/*.lagda.md)
-HTMLFILES := $(AGDAFILES:.lagda.md=.html)
+AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
 bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
 
-AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
-AGDA ?=agda $(agdaVerbose)
+AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
+AGDA ?=agda $(AGDAVERBOSE)
 TIME ?=time
 
 .PHONY : agdaFiles
@@ -20,10 +20,6 @@ agdaFiles :
 	@sort -o $@ $@
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
-
-
-# for p in $(shell cat $@); do echo $(shell wc -l $p); done
-
 
 .PHONY : src/everything.lagda.md
 src/everything.lagda.md : agdaFiles
@@ -43,34 +39,27 @@ src/everything.lagda.md : agdaFiles
 check : src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
-.PHONY: html
-html: $(HTMLFILES)
+AGDAMDFILES: $(AGDAMDFILES)
 
-%.html: %.lagda.md
+docs/%.md: src/%.lagda.md
 	@echo "... $@"
-	@pandoc --standalone \
-				--metadata-file=docs/_config.yml \
-				--template=docs/template.html5 \
-				--metadata \
-        title="Expected HTML" \
-				$? \
-				--from markdown+tex_math_dollars+tex_math_double_backslash+latex_macros+lists_without_preceding_blankline \
-				--to=html5  \
-				--mathjax \
-				-o $@ \
-				--variable=reload:"true"
+	@${AGDA} ${AGDAHTMLFLAfoGS} $<
 
 agda-html: src/everything.lagda.md
-	mkdir -p docs
-	rm -rf docs/*.html
-	${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
-	cd docs/; \
-	sh conv.sh; \
-	cp README.html index.html
+	@mkdir -p docs
+	@rm -rf docs/*.html
+	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
-.phony: watch-html
-watch-html : $(AGDAFILES)
-	@fswatch -0 $^ | xargs -0 -n1 -I {}  sh -c 'ALT=`realpath --relative-to=. {}` ; make "$${ALT/.lagda.md/.html}";'
+.PHONY: website
+website: agda-html
+	@mdbook build
+
+update-contributors:
+	@python update-contributors.py
+
+.phony: serve-website
+serve-website:
+	@mdbook serve -p 8080 --open
 
 .PHONY : graph
 graph:
@@ -79,3 +68,4 @@ graph:
 .PHONY : clean
 clean:
 	rm -Rf _build/
+	find docs -name '*.html' -and -name '*.md' -delete -print0

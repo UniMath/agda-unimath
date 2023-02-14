@@ -1,6 +1,4 @@
----
-title: Orientations of the complete undirected graph
----
+#  Orientations of the complete undirected graph
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

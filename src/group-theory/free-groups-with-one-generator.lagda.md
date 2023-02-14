@@ -1,6 +1,4 @@
----
-title: Free groups with one generator
----
+#  Free groups with one generator
 
 ```agda
 module group-theory.free-groups-with-one-generator where

@@ -1,6 +1,4 @@
----
-title: Ideals in commutative rings
----
+#  Ideals in commutative rings
 
 ```agda
 module commutative-algebra.ideals-commutative-rings where

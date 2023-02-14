@@ -1,6 +1,4 @@
----
-title: The type theoretic principle of choice
----
+#  The type theoretic principle of choice
 
 ```agda
 module foundation.type-theoretic-principle-of-choice where

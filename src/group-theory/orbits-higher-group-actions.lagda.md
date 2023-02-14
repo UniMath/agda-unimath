@@ -1,6 +1,4 @@
----
-title: Orbits of higher group actions
----
+#  Orbits of higher group actions
 
 ```agda
 module group-theory.orbits-higher-group-actions where
