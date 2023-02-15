@@ -373,7 +373,16 @@ ap-binary-comp' f H refl refl = refl
 ap-binary-permute :
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} {B : UU l2} {b0 b1 : B} {C : UU l3} (f : A → B → C) →
   (p : a0 ＝ a1) (q : b0 ＝ b1) → (ap-binary (λ y x → f x y) q p) ＝ (ap-binary f p q)
-ap-binary-permute f refl refl = refl  
+ap-binary-permute f refl refl = refl
+
+ap-binary-concat :
+  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 a2 : A}
+  {B : UU l2} {b0 b1 b2 : B} {C : UU l3}
+  (f : A → B → C) (p : a0 ＝ a1) (p' : a1 ＝ a2)
+  (q : b0 ＝ b1) (q' : b1 ＝ b2) →
+  (ap-binary f (p ∙ p') (q ∙ q')) ＝
+    ((ap-binary f p q) ∙ (ap-binary f p' q'))
+ap-binary-concat f refl refl refl refl  = refl
 ```
 
 ### Action on identifications of dependent functions
