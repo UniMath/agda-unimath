@@ -15,6 +15,7 @@ open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.partitions
+open import univalent-combinatorics.sigma-decompositions
 open import univalent-combinatorics.species
 ```
 
@@ -37,18 +38,21 @@ analytic-comp-species :
   {l1 l2 l3 : Level} → species l1 l2 → species l1 l3 →
   species l1 (lsuc l1 ⊔ l2 ⊔ l3)
 analytic-comp-species {l1} {l2} {l3} S T X =
-  Σ ( partition-𝔽 l1 l1 X)
-    ( λ P →
-      ( T (finite-indexing-type-partition-𝔽 X P)) ×
-      ( (y : indexing-type-partition-𝔽 X P) →
-        S (finite-block-partition-𝔽 X P y)))
+  Σ ( Σ-Decomposition-𝔽 l1 l1 X)
+    ( λ D →
+      ( T (finite-indexing-type-Σ-Decomposition-𝔽 X D) ×
+      ( (y : indexing-type-Σ-Decomposition-𝔽 X D) →
+      S (finite-cotype-Σ-Decomposition-𝔽 X D y ))))
 ```
 
-### The analytic unit for composition of species
+ ### The analytic unit for composition of species
 
-```agda
+ ```agda
 analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
+
+
+
 ```
 
 ## Properties
