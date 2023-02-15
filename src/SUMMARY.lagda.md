@@ -948,7 +948,7 @@
   - [Function types](univalent-combinatorics.function-types.md)
   - [Image of maps](univalent-combinatorics.image-of-maps.md)
   - [Inequality types with counting](univalent-combinatorics.inequality-types-with-counting.md)
-  - [Inhabited finite types](univalent-combinatorics.inhabited-types.md)
+  - [Inhabited finite types](univalent-combinatorics.inhabited-finite-types.md)
   - [Injective maps](univalent-combinatorics.injective-maps.md)
   - [Isotopies latin squares](univalent-combinatorics.isotopies-latin-squares.md)
   - [Kuratowsky finite sets](univalent-combinatorics.kuratowsky-finite-sets.md)
