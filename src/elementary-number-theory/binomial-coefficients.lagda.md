@@ -1,6 +1,4 @@
----
-title: The binomial coefficients
----
+#  The binomial coefficients
 
 ```agda
 module elementary-number-theory.binomial-coefficients where

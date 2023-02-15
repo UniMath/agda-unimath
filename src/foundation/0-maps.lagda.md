@@ -1,6 +1,4 @@
----
-title: 0-Maps
----
+#  0-Maps
 
 ```agda
 module foundation.0-maps where

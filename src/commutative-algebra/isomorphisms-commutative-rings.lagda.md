@@ -1,6 +1,4 @@
----
-title: Isomorphisms of commutative rings
----
+#  Isomorphisms of commutative rings
 
 ```agda
 module commutative-algebra.isomorphisms-commutative-rings where

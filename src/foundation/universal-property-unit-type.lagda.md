@@ -1,6 +1,4 @@
----
-title: The universal property of the unit type
----
+#  The universal property of the unit type
 
 ```agda
 module foundation.universal-property-unit-type where

@@ -1,6 +1,4 @@
----
-title: Idempotent elements in rings
----
+#  Idempotent elements in rings
 
 ```agda
 module ring-theory.idempotent-elements-rings where

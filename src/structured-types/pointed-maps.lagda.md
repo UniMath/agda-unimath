@@ -1,6 +1,4 @@
----
-title: Pointed maps
----
+#  Pointed maps
 
 ```agda
 module structured-types.pointed-maps where

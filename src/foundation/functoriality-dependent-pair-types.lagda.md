@@ -1,6 +1,4 @@
----
-title: Functoriality of dependent pair types
----
+#  Functoriality of dependent pair types
 
 ```agda
 module foundation.functoriality-dependent-pair-types where

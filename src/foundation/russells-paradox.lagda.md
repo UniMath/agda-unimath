@@ -1,6 +1,4 @@
----
-title: Russell's paradox
----
+#  Russell's paradox
 
 ```agda
 module foundation.russells-paradox where

@@ -1,6 +1,4 @@
----
-title: Equivalence induction
----
+#  Equivalence induction
 
 ```agda
 module foundation.equivalence-induction where

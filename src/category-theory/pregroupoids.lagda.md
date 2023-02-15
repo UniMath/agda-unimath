@@ -1,6 +1,4 @@
----
-title: Pregroupoids
----
+#  Pregroupoids
 
 ```agda
 module category-theory.pregroupoids where

@@ -1,6 +1,4 @@
----
-title: Rings
----
+#  Rings
 
 ```agda
 module ring-theory.rings where

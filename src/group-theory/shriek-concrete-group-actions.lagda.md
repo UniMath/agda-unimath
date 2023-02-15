@@ -1,6 +1,4 @@
----
-title: Shriek of concrete group homomorphisms
----
+#  Shriek of concrete group homomorphisms
 
 ```agda
 module group-theory.shriek-concrete-group-actions where

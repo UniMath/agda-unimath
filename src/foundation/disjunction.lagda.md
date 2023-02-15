@@ -1,6 +1,4 @@
----
-title: Disjunction of propositions
----
+#  Disjunction of propositions
 
 ```agda
 module foundation.disjunction where

@@ -1,6 +1,4 @@
----
-title: Cospans
----
+#  Cospans
 
 ```agda
 module foundation.cospans where

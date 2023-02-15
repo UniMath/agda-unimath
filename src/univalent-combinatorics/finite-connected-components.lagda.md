@@ -1,6 +1,4 @@
----
-title: Finiteness of the type of connected components
----
+#  Finiteness of the type of connected components
 
 ```agda
 module univalent-combinatorics.finite-connected-components where

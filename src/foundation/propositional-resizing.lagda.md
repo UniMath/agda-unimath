@@ -1,6 +1,4 @@
----
-title: Propositional resizing
----
+#  Propositional resizing
 
 ```agda
 module foundation.propositional-resizing where

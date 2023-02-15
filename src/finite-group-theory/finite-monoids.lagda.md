@@ -1,6 +1,4 @@
----
-title: Finite monoids
----
+#  Finite monoids
 
 ```agda
 module finite-group-theory.finite-monoids where

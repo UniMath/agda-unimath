@@ -1,6 +1,4 @@
----
-title: Sieves in categories
----
+#  Sieves in categories
 
 ```agda
 module category-theory.sieves-categories where

@@ -1,6 +1,4 @@
----
-title: Trails in undirected graphs
----
+#  Trails in undirected graphs
 
 ```agda
 module graph-theory.trails-undirected-graphs where

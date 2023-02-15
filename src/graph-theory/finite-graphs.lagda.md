@@ -1,6 +1,4 @@
----
-title: Finite graphs
----
+#  Finite graphs
 
 ```agda
 module graph-theory.finite-graphs where

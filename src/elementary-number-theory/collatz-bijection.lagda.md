@@ -1,6 +1,4 @@
----
-title: The Collatz bijection
----
+#  The Collatz bijection
 
 ```agda
 module elementary-number-theory.collatz-bijection where

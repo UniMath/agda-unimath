@@ -1,6 +1,4 @@
----
-title: Sets
----
+#  Sets
 
 ```agda
 module foundation.sets where

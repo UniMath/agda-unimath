@@ -1,6 +1,4 @@
----
-title: Subgroups of higher groups
----
+#  Subgroups of higher groups
 
 ```agda
 module group-theory.subgroups-higher-groups where

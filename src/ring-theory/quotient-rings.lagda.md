@@ -1,6 +1,4 @@
----
-title: Qutoient Rings
----
+#  Qutoient Rings
 
 ```agda
 module ring-theory.quotient-rings where

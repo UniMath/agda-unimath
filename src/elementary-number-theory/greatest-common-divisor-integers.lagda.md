@@ -1,6 +1,4 @@
----
-title: The greatest common divisor of integers
----
+#  The greatest common divisor of integers
 
 ```agda
 module elementary-number-theory.greatest-common-divisor-integers where

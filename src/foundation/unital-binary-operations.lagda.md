@@ -1,6 +1,4 @@
----
-title: Unital binary operations
----
+#  Unital binary operations
 
 ```agda
 module foundation.unital-binary-operations where

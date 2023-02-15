@@ -1,6 +1,4 @@
----
-title: Mere equality
----
+#  Mere equality
 
 ```agda
 module foundation.mere-equality where

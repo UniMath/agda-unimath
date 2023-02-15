@@ -1,6 +1,4 @@
----
-title: Ideals in preorders
----
+#  Ideals in preorders
 
 ```agda
 module order-theory.ideals-preorders where

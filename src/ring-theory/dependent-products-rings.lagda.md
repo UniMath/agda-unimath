@@ -1,6 +1,4 @@
----
-title:
----
+# Dependent products of rings
 
 ```agda
 module ring-theory.dependent-products-rings where

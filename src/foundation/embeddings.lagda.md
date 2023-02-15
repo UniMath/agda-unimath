@@ -1,6 +1,4 @@
----
-title: Embeddings
----
+#  Embeddings
 
 ```agda
 module foundation.embeddings where

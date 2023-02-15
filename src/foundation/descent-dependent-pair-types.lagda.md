@@ -1,6 +1,4 @@
----
-title: Descent for dependent pair types
----
+#  Descent for dependent pair types
 
 ```agda
 module foundation.descent-dependent-pair-types where

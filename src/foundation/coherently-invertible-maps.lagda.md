@@ -1,6 +1,4 @@
----
-title: Coherently invertible maps
----
+#  Coherently invertible maps
 
 ```agda
 module foundation.coherently-invertible-maps where

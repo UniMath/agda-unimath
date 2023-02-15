@@ -1,6 +1,4 @@
----
-title: The universal property of pushouts
----
+#  The universal property of pushouts
 
 ```agda
 module synthetic-homotopy-theory.universal-property-pushouts where

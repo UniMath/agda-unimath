@@ -1,6 +1,4 @@
----
-title: Propositional truncations
----
+#  Propositional truncations
 
 ```agda
 module foundation.propositional-truncations where

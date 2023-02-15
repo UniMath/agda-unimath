@@ -1,6 +1,4 @@
----
-title: Symmetric operations
----
+#  Symmetric operations
 
 ```agda
 module foundation.symmetric-operations where

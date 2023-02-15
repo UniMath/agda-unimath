@@ -1,6 +1,4 @@
----
-title: Foundation
----
+#  Foundation
 
 ```agda
 module foundation where
@@ -33,6 +31,7 @@ open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
 open import foundation.commuting-cubes public
 open import foundation.commuting-squares public
+open import foundation.commuting-triangles public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.conjunction public
@@ -62,6 +61,7 @@ open import foundation.dependent-paths public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
+open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
 open import foundation.discrete-reflexive-relations public
@@ -105,7 +105,8 @@ open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
-open import foundation.functoriality-set-truncation
+open import foundation.functoriality-set-truncation public
+open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.hexagons-of-identifications public
@@ -113,8 +114,8 @@ open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
+open import foundation.images-subtypes public
 open import foundation.images public
-open import foundation.images-subtypes
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
@@ -136,6 +137,7 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maybe public
+open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
@@ -151,6 +153,7 @@ open import foundation.partial-elements public
 open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
+open import foundation.perfect-images public
 open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
 open import foundation.preimages-of-subtypes public
@@ -198,6 +201,8 @@ open import foundation.surjective-maps public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
+open import foundation.tight-apartness-relations public
+open import foundation.transport public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
@@ -212,6 +217,7 @@ open import foundation.type-arithmetic-dependent-function-types public
 open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
+open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
 open import foundation.unions-subtypes public
 open import foundation.unique-existence public

@@ -1,6 +1,4 @@
----
-title: Products of natural numbers
----
+#  Products of natural numbers
 
 ```agda
 module elementary-number-theory.products-of-natural-numbers where

@@ -1,6 +1,4 @@
----
-title: Pointed sections of pointed maps
----
+#  Pointed sections of pointed maps
 
 ```agda
 module structured-types.pointed-sections where

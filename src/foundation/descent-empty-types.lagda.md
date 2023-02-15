@@ -1,6 +1,4 @@
----
-title: Descent for the empty type
----
+#  Descent for the empty type
 
 ```agda
 module foundation.descent-empty-types where
