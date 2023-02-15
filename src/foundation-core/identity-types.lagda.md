@@ -164,6 +164,11 @@ ap-concat :
   (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
 ap-concat f refl q = refl
 
+ap-concat' :
+  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
+  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) (H : (p ∙ q) ＝ r) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
+ap-concat' f p q .(p ∙ q) refl = ap-concat f p q
+
 ap-inv :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
   (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))

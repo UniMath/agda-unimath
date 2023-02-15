@@ -42,22 +42,57 @@ module _
   coherence-triangle-htpy' left right top = (top ∙h right) ~ left
 ```
 
-## Operations
+## Properties
+
+### Distributive law for left whiskering
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f g h : A → B}
+  {l3 : Level} {X : UU l3} (i : B → X)
+  (left : f ~ h) (right : g ~ h) (top : f ~ g)
+  where
+
+  distributivity-left-whisk' :
+    coherence-triangle-htpy' left right top →
+    (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
+  distributivity-left-whisk' T x =
+    ap-concat' i (top x) (right x) (left x) (T x)
+
+  distributivity-left-whisk :
+    coherence-triangle-htpy left right top →
+    (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
+  distributivity-left-whisk = distributivity-left-whisk' ∘ inv-htpy
+```
 
 ### Left whiskering triangles of homotopies
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {f g h i : (x : A) → B x}
+  {f g h : (x : A) → B x}
+  {left : f ~ h} {right : g ~ h} {top : f ~ g}
+  where
+
+  left-whisk-htpy-coherence-triangle-htpy :
+    {i : (x : A) → B x}
+    (H : h ~ i) (T : coherence-triangle-htpy left right top) →
+    coherence-triangle-htpy {h = i} (left ∙h H) (right ∙h H) top
+  left-whisk-htpy-coherence-triangle-htpy H T =
+    (λ x → ap (_∙ H x) (T x)) ∙h assoc-htpy top right H
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f g h : A → B}
   {left : f ~ h} {right : g ~ h} {top : f ~ g}
   where
 
   left-whisk-coherence-triangle-htpy :
-    (H : h ~ i) (T : coherence-triangle-htpy left right top) →
-    coherence-triangle-htpy {h = i} (left ∙h H) (right ∙h H) top
-  left-whisk-coherence-triangle-htpy H T =
-    (λ x → ap (_∙ H x) (T x)) ∙h assoc-htpy top right H
+    {l3 : Level} {X : UU l3} (i : B → X) (T : coherence-triangle-htpy left right top) →
+    coherence-triangle-htpy {f = i ∘ f} {i ∘ g} {i ∘ h} (i ·l left) (i ·l right) (i ·l top)
+  left-whisk-coherence-triangle-htpy i =
+    distributivity-left-whisk i left right top
 ```
 
 ### Right whiskering triangles of homotopies
@@ -65,13 +100,25 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {f g h i : (x : A) → B x}
+  {f g h : (x : A) → B x}
+  {left : f ~ h} {right : g ~ h} {top : f ~ g}
+  where
+
+  right-whisk-htpy-coherence-triangle-htpy :
+    {i : (x : A) → B x}
+    (T : coherence-triangle-htpy left right top) (H : i ~ f) →
+    coherence-triangle-htpy {f = i} (H ∙h left) right (H ∙h top)
+  right-whisk-htpy-coherence-triangle-htpy T H =
+    (λ x → ap (H x ∙_) (T x)) ∙h (inv-htpy-assoc-htpy H top right)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f g h : A → B}
   {left : f ~ h} {right : g ~ h} {top : f ~ g}
   where
 
   right-whisk-coherence-triangle-htpy :
-    (T : coherence-triangle-htpy left right top) (H : i ~ f) →
-    coherence-triangle-htpy {f = i} (H ∙h left) right (H ∙h top)
-  right-whisk-coherence-triangle-htpy T H =
-    (λ x → ap (H x ∙_) (T x)) ∙h (inv-htpy-assoc-htpy H top right)
+    {l3 : Level} {X : UU l3} (i : X → A) (T : coherence-triangle-htpy left right top) →
+    coherence-triangle-htpy {f = f ∘ i} {g ∘ i} {h ∘ i} (left ·r i) (right ·r i) (top ·r i)
+  right-whisk-coherence-triangle-htpy i T = T ∘ i
 ```
