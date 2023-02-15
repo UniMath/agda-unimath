@@ -59,6 +59,7 @@ open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
+open import univalent-combinatorics.inhabited-finite-types public
 open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.isotopies-latin-squares public
 open import univalent-combinatorics.kuratowsky-finite-sets public
@@ -84,6 +85,7 @@ open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public
 open import univalent-combinatorics.set-quotients-of-index-two public
+open import univalent-combinatorics.sigma-decompositions public
 open import univalent-combinatorics.skipping-element-standard-finite-types public
 open import univalent-combinatorics.species public
 open import univalent-combinatorics.standard-finite-pruned-trees public
