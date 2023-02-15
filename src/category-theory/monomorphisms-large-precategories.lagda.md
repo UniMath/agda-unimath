@@ -1,6 +1,4 @@
----
-title: Monomorphisms in large precategories
----
+#  Monomorphisms in large precategories
 
 ```agda
 module category-theory.monomorphisms-large-precategories where

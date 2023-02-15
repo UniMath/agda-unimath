@@ -1,6 +1,4 @@
----
-title: Closed walks in undirected graphs
----
+#  Closed walks in undirected graphs
 
 ```agda
 module graph-theory.closed-walks-undirected-graphs where

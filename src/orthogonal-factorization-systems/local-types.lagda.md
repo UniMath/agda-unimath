@@ -1,6 +1,4 @@
----
-title: Local types
----
+#  Local types
 
 ```agda
 module orthogonal-factorization-systems.local-types where

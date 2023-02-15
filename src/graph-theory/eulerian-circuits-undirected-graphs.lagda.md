@@ -1,6 +1,4 @@
----
-title: Eulerian circuits in undirected graphs
----
+#  Eulerian circuits in undirected graphs
 
 ```agda
 module graph-theory.eulerian-circuits-undirected-graphs where

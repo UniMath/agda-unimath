@@ -1,6 +1,4 @@
----
-title: Commutators of elements in groups
----
+#  Commutators of elements in groups
 
 ```agda
 module group-theory.commutators-groups where

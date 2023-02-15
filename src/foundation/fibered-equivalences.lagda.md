@@ -1,6 +1,4 @@
----
-title: Fibered equivalences
----
+#  Fibered equivalences
 
 ```agda
 module foundation.fibered-equivalences where

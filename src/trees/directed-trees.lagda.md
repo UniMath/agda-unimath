@@ -1,6 +1,4 @@
----
-title: Directed trees
----
+#  Directed trees
 
 ```agda
 module trees.directed-trees where

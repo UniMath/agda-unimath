@@ -1,6 +1,4 @@
----
-title: Fibered dependent type theories
----
+#  Fibered dependent type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}

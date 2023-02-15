@@ -1,6 +1,4 @@
----
-title: Cartesian products of groups
----
+#  Cartesian products of groups
 
 ```agda
 module group-theory.cartesian-products-groups where

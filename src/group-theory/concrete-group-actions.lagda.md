@@ -1,6 +1,4 @@
----
-title: Concrete group actions
----
+#  Concrete group actions
 
 ```agda
 module group-theory.concrete-group-actions where

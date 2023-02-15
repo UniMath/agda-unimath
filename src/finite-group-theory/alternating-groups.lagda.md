@@ -1,6 +1,4 @@
----
-title: Alternating groups
----
+#  Alternating groups
 
 ```agda
 module finite-group-theory.alternating-groups where

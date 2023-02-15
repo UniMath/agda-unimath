@@ -1,6 +1,4 @@
----
-title: Partitions
----
+#  Partitions
 
 ```agda
 module foundation.partitions where

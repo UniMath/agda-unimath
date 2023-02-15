@@ -1,6 +1,4 @@
----
-title: Geometric realizations of undirected graphs
----
+#  Geometric realizations of undirected graphs
 
 ```agda
 module graph-theory.geometric-realizations-undirected-graphs where

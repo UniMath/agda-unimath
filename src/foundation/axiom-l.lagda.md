@@ -1,6 +1,4 @@
----
-title: Axiom L
----
+#  Axiom L
 
 ```agda
 module foundation.axiom-l where

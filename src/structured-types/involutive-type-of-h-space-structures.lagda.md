@@ -1,6 +1,4 @@
----
-title: The involutive type of H-Space structures on a pointed type
----
+#  The involutive type of H-Space structures on a pointed type
 
 ```agda
 module structured-types.involutive-type-of-h-space-structures where

@@ -1,6 +1,4 @@
----
-title: Isomorphisms in precategories
----
+#  Isomorphisms in precategories
 
 ```agda
 module category-theory.isomorphisms-precategories where

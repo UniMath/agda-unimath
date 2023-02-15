@@ -1,6 +1,4 @@
----
-title : Voltage graphs
---- 
+# Voltage graphs
 
 ```agda
 module graph-theory.voltage-graphs where

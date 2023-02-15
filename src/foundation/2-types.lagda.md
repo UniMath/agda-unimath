@@ -1,6 +1,4 @@
----
-title: 2-Types
----
+#  2-Types
 
 ```agda
 module foundation.2-types where

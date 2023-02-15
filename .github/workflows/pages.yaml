@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  AGDAHTMLFLAGS: --html --html-highlight=code --html-dir=docs --css=docs/Agda.css
+  AGDAHTMLFLAGS: --html --html-highlight=auto --html-dir=docs --only-scope-checking --css=Agda.css
   AGDA: agda
 
 jobs:
@@ -57,11 +57,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
-      - name: Generate HTML
-        id: gen-html
+      
+      - name: MDBook setup
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: 0.4.22
+        
+      - name: Generate book
         run: |
           cd main
-          make agda-html
+          make website
           
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -69,7 +74,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'main/docs'
+          path: 'main/book'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1

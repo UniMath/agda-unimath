@@ -1,6 +1,4 @@
----
-title: Pointwise addition of morphisms of abelian groups
----
+#  Pointwise addition of morphisms of abelian groups
 
 ```agda
 module group-theory.addition-homomorphisms-abelian-groups where

@@ -1,6 +1,4 @@
----
-title: The Fibonacci sequence
----
+#  The Fibonacci sequence
 
 ```agda
 module elementary-number-theory.fibonacci-sequence where

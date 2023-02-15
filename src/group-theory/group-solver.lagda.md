@@ -1,6 +1,4 @@
----
-title: Group solver
----
+#  Group solver
 
 ```agda
 module group-theory.group-solver where

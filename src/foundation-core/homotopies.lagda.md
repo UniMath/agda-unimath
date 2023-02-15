@@ -1,6 +1,4 @@
----
-title: Homotopies
----
+#  Homotopies
 
 ```agda
 {-# OPTIONS --safe #-}
@@ -26,17 +24,23 @@ module _
   eq-value : X → UU l2
   eq-value x = (f x ＝ g x)
 
-  tr-eq-value :
+  map-compute-path-over-eq-value :
     {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
-    ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p)) →
-    tr eq-value p q ＝ r
-  tr-eq-value refl q .(ap id q ∙ refl) refl = inv (right-unit ∙ ap-id q)
+    ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p)) → tr eq-value p q ＝ r
+  map-compute-path-over-eq-value refl q r =
+    inv ∘ (concat' r (right-unit ∙ ap-id q))
 
-tr-eq-value-id-id :
+map-compute-path-over-eq-value' :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f g : X → Y) →
+  {x y : X} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+  (ap f p ∙ r) ＝ (q ∙ ap g p) → tr (eq-value f g) p q ＝ r
+map-compute-path-over-eq-value' f g refl q r = inv ∘ concat' r right-unit
+
+map-compute-path-over-eq-value-id-id :
   {l1 : Level} {A : UU l1} →
   {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
   (p ∙ r) ＝ (q ∙ p) → (tr (eq-value id id) p q) ＝ r
-tr-eq-value-id-id refl q r s = inv (s ∙ right-unit)
+map-compute-path-over-eq-value-id-id refl q r s = inv (s ∙ right-unit)
 ```
 
 ```agda

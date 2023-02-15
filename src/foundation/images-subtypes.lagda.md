@@ -1,6 +1,4 @@
----
-title: Images of subtypes
----
+#  Images of subtypes
 
 ```agda
 module foundation.images-subtypes where

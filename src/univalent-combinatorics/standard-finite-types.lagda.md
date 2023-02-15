@@ -1,6 +1,4 @@
----
-title: The standard finite types
----
+#  The standard finite types
 
 ```agda
 module univalent-combinatorics.standard-finite-types where

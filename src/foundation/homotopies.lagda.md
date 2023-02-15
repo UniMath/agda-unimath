@@ -1,6 +1,4 @@
----
-title: Homotopies
----
+#  Homotopies
 
 ```agda
 module foundation.homotopies where
@@ -204,6 +202,59 @@ module _
 
   equiv-con-inv-htpy : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
   equiv-con-inv-htpy = pair (con-inv-htpy H K L) is-equiv-con-inv-htpy
+```
+
+### Computing path-overs in the type family `eq-value` of dependent functions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x)
+  where
+
+  is-equiv-map-compute-path-over-eq-value :
+    {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    is-equiv (map-compute-path-over-eq-value f g p q r)
+  is-equiv-map-compute-path-over-eq-value refl q r =
+    is-equiv-comp
+      ( inv)
+      ( concat' r (right-unit ∙ ap-id q))
+      ( is-equiv-concat' r (right-unit ∙ ap-id q))
+      ( is-equiv-inv r q)
+
+  compute-path-over-eq-value :
+    {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    (((apd f p) ∙ r) ＝ ((ap (tr B p) q) ∙ (apd g p))) ≃
+    (tr (eq-value f g) p q ＝ r)
+  pr1 (compute-path-over-eq-value p q r) =
+    map-compute-path-over-eq-value f g p q r
+  pr2 (compute-path-over-eq-value p q r) =
+    is-equiv-map-compute-path-over-eq-value p q r
+```
+
+### Computing path-overs in the type family `eq-value` of ordinary functions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
+  where
+
+  is-equiv-map-compute-path-over-eq-value' :
+    {x y : A} (p : x ＝ y) (q : eq-value f g x) (q' : eq-value f g y) →
+    is-equiv (map-compute-path-over-eq-value' f g p q q')
+  is-equiv-map-compute-path-over-eq-value' refl q q' =
+    is-equiv-comp
+      ( inv)
+      ( concat' q' right-unit)
+      ( is-equiv-concat' q' right-unit)
+      ( is-equiv-inv q' q)
+
+  compute-path-over-eq-value' :
+    {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
+    (((ap f p) ∙ q') ＝ (q ∙ (ap g p))) ≃ ((tr (eq-value f g) p q) ＝ q')
+  pr1 (compute-path-over-eq-value' p q q') =
+    map-compute-path-over-eq-value' f g p q q'
+  pr2 (compute-path-over-eq-value' p q q') =
+    is-equiv-map-compute-path-over-eq-value' p q q'
 ```
 
 ## See also

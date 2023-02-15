@@ -1,6 +1,4 @@
----
-title: Orthogonal factorization systems
----
+#  Orthogonal factorization systems
 
 ```agda
 module orthogonal-factorization-systems where

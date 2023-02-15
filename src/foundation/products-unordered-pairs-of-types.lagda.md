@@ -1,6 +1,4 @@
----
-title: Products of unordered pairs of types
----
+#  Products of unordered pairs of types
 
 ```agda
 module foundation.products-unordered-pairs-of-types where

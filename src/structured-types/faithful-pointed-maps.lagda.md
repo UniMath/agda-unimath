@@ -1,6 +1,4 @@
----
-title: Faithful pointed maps
----
+#  Faithful pointed maps
 
 ```agda
 module structured-types.faithful-pointed-maps where

@@ -1,6 +1,4 @@
----
-title: The category of concrete groups
----
+#  The category of concrete groups
 
 ```agda
 module group-theory.category-of-concrete-groups where

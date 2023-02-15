@@ -1,6 +1,4 @@
----
-title: Higher group actions
----
+#  Higher group actions
 
 ```agda
 module group-theory.higher-group-actions where

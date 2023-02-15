@@ -1,6 +1,4 @@
----
-title: Type arithmetic for dependent pair types
----
+#  Type arithmetic for dependent pair types
 
 ```agda
 module foundation.type-arithmetic-dependent-pair-types where

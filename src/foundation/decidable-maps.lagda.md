@@ -1,6 +1,4 @@
----
-title: Decidable maps
----
+#  Decidable maps
 
 ```agda
 module foundation.decidable-maps where
