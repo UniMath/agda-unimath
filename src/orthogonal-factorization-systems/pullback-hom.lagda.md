@@ -1,6 +1,4 @@
----
-title: Pullback-hom
----
+# Pullback-hom
 
 ```agda
 module orthogonal-factorization-systems.pullback-hom where

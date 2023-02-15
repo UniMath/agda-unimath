@@ -1,5 +1,4 @@
----
-title: Lifting operations
+# Lifting operations
 ---
 
 ```agda

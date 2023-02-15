@@ -1,6 +1,4 @@
----
-title: Orthogonal maps
----
+# Orthogonal maps
 
 ```agda
 module orthogonal-factorization-systems.orthogonal-maps where

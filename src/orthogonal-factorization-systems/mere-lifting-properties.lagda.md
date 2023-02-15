@@ -1,6 +1,4 @@
----
-title: Mere lifting properties
----
+# Mere lifting properties
 
 ```agda
 module orthogonal-factorization-systems.mere-lifting-properties where
