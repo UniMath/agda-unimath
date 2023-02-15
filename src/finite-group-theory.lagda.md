@@ -10,6 +10,7 @@ open import finite-group-theory.alternating-concrete-groups public
 open import finite-group-theory.alternating-groups public
 open import finite-group-theory.cartier-delooping-sign-homomorphism public
 open import finite-group-theory.concrete-quaternion-group public
+open import finite-group-theory.delooping-sign-homomorphism public
 open import finite-group-theory.finite-groups public
 open import finite-group-theory.finite-monoids public
 open import finite-group-theory.finite-semigroups public
