@@ -187,10 +187,10 @@ module _
     ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
   
   nat-sq-left-unit-Id² :
-    (left-unit ∙ α) ＝ (horizontal-concat-Id² (refl {x = refl}) α)
-  nat-sq-left-unit-Id² =
-    ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
-    ( inv (left-unit-law-horizontal-concat-Id² α))
+    square left-unit α (horizontal-concat-Id² (refl {x = refl}) α) left-unit
+  nat-sq-left-unit-Id² = 
+    ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
+    ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
 ```
 
 ### Definition of horizontal inverse
@@ -269,7 +269,7 @@ unit-law-δ-interchange-Id² :
 unit-law-δ-interchange-Id² p refl = refl
 ```
 
-### Action on 2-paths of functions
+### Action on 2-paths of functors
 
 Functions have an induced action on 2-paths
 
@@ -294,10 +294,12 @@ module _
   where
 
   nat-sq-ap-inv-Id² :
-    square (ap-inv f p) (horizontal-inv-Id² (ap² f α)) (ap² f (horizontal-inv-Id² α)) (ap-inv f p')
+    square (ap-inv f p) (horizontal-inv-Id² (ap² f α))
+      (ap² f (horizontal-inv-Id² α)) (ap-inv f p')
   nat-sq-ap-inv-Id² =
-    (inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α)) ∙ (nat-htpy (ap-inv f) α)) ∙
-      (horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
+    (inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α)) ∙
+      (nat-htpy (ap-inv f) α)) ∙
+        (horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
 ```
 
 Identity law and constant law. 
@@ -317,7 +319,8 @@ module _
     (b : B) →
     square (ap-const b p) refl (ap² (const A B b) α) (ap-const b p')
   nat-sq-ap-const-Id² b =
-    (inv (horizontal-concat-Id² refl (ap-const refl α)) ∙ (nat-htpy (ap-const b) α))
+    (inv (horizontal-concat-Id² refl (ap-const refl α)) ∙
+      (nat-htpy (ap-const b) α))
 ```
 
 Composition law
@@ -329,10 +332,11 @@ module _
   where
 
   nat-sq-ap-comp-Id² :
-    square (ap-comp g f p) ((ap² g ∘ ap² f) α) (ap² (g ∘ f) α) (ap-comp g f p')
+    square (ap-comp g f p) ((ap² g ∘ ap² f) α)
+      (ap² (g ∘ f) α) (ap-comp g f p')
   nat-sq-ap-comp-Id² =
     (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
-    (nat-htpy (ap-comp g f) α))
+      (nat-htpy (ap-comp g f) α))
 ```
 
 ## Properties of 3-paths
