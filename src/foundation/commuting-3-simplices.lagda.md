@@ -1,5 +1,5 @@
 ---
-title: Commuting 3 simplices
+title: Commuting 3-simplices
 ---
 
 ```agda
@@ -45,4 +45,9 @@ module _
   coherence-3-simplex =
     ( upper-right ∙h (right ·l upper-left)) ~
     ( lower-left ∙h (lower-right ·r left))
+
+  coherence-3-simplex' : UU (l1 ⊔ l4)
+  coherence-3-simplex' =
+    ( lower-left ∙h (lower-right ·r left)) ~
+    ( upper-right ∙h (right ·l upper-left))
 ```
