@@ -31,7 +31,7 @@ We include two notations for the identity type. First, we introduce the identity
 
 After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
 
-## Defnition
+## Definition
 
 ```agda
 data Id {i : Level} {A : UU i} (x : A) : A → UU i where
