@@ -101,14 +101,15 @@ module _
     (c c' : cone f g C) (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
     (L : horizontal-map-cone f g c ~ horizontal-map-cone f g c') → UU (l4 ⊔ l3)
   coherence-htpy-cone c c' K L =
-    ( coherence-square-cone f g c ∙h (htpy-left-whisk g L)) ~
-    ( (htpy-left-whisk f K) ∙h coherence-square-cone f g c')
+    ( coherence-square-cone f g c ∙h (g ·l L)) ~
+    ( (f ·l K) ∙h coherence-square-cone f g c')
 
   htpy-cone : cone f g C → cone f g C → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cone c c' =
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f g c')
-      ( λ K → Σ (horizontal-map-cone f g c ~ horizontal-map-cone f g c')
-        ( λ L → coherence-htpy-cone c c' K L))
+      ( λ K →
+        Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f g c')
+          ( coherence-htpy-cone c c' K))
 
   refl-htpy-cone : (c : cone f g C) → htpy-cone c c
   pr1 (refl-htpy-cone c) = refl-htpy
