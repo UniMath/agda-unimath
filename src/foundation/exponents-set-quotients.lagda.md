@@ -1,7 +1,7 @@
 #  Exponents of set quotients
 
 ```agda
--- {-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module foundation.exponents-set-quotients where
 
@@ -380,9 +380,35 @@ module _
   {B : UU l3} (S : Eq-Rel l4 B)
   where
 
+  quotient-hom-Eq-Rel-Set : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  quotient-hom-Eq-Rel-Set = quotient-Set (eq-rel-hom-Eq-Rel R S)
+
+  set-quotient-hom-Eq-Rel : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  set-quotient-hom-Eq-Rel = type-Set quotient-hom-Eq-Rel-Set
+
+  is-set-set-quotient-hom-Eq-Rel : is-set set-quotient-hom-Eq-Rel
+  is-set-set-quotient-hom-Eq-Rel = is-set-type-Set quotient-hom-Eq-Rel-Set
+
+  reflecting-map-quotient-map-hom-Eq-Rel :
+    reflecting-map-Eq-Rel (eq-rel-hom-Eq-Rel R S) set-quotient-hom-Eq-Rel
+  reflecting-map-quotient-map-hom-Eq-Rel =
+    reflecting-map-quotient-map (eq-rel-hom-Eq-Rel R S)
+
+  quotient-map-hom-Eq-Rel : hom-Eq-Rel R S → set-quotient-hom-Eq-Rel
+  quotient-map-hom-Eq-Rel = quotient-map (eq-rel-hom-Eq-Rel R S)
+
+  is-set-quotient-set-quotient-hom-Eq-Rel :
+    {l : Level} →
+    is-set-quotient l
+      ( eq-rel-hom-Eq-Rel R S)
+      ( quotient-hom-Eq-Rel-Set)
+      ( reflecting-map-quotient-map-hom-Eq-Rel)
+  is-set-quotient-set-quotient-hom-Eq-Rel =
+    is-set-quotient-set-quotient (eq-rel-hom-Eq-Rel R S)
+
   unique-inclusion-set-quotient-hom-Eq-Rel :
     is-contr
-      ( Σ ( set-quotient (eq-rel-hom-Eq-Rel R S) →
+      ( Σ ( set-quotient-hom-Eq-Rel →
             set-quotient R → set-quotient S)
           ( λ μ →
             ( μ ∘ quotient-map (eq-rel-hom-Eq-Rel R S)) ~
@@ -390,9 +416,9 @@ module _
   unique-inclusion-set-quotient-hom-Eq-Rel =
     universal-property-set-quotient-is-set-quotient
       ( eq-rel-hom-Eq-Rel R S)
-      ( quotient-Set (eq-rel-hom-Eq-Rel R S))
-      ( reflecting-map-quotient-map (eq-rel-hom-Eq-Rel R S))
-      ( is-set-quotient-set-quotient (eq-rel-hom-Eq-Rel R S))
+      ( quotient-hom-Eq-Rel-Set)
+      ( reflecting-map-quotient-map-hom-Eq-Rel)
+      ( is-set-quotient-set-quotient-hom-Eq-Rel)
       ( hom-Set (quotient-Set R) (quotient-Set S))
       ( universal-reflecting-map-set-quotient-hom-Eq-Rel R S)
 
@@ -413,9 +439,9 @@ module _
   is-emb-inclusion-set-quotient-hom-Eq-Rel =
     is-emb-map-universal-property-set-quotient-is-set-quotient
       ( eq-rel-hom-Eq-Rel R S)
-      ( quotient-Set (eq-rel-hom-Eq-Rel R S))
-      ( reflecting-map-quotient-map (eq-rel-hom-Eq-Rel R S))
-      ( is-set-quotient-set-quotient (eq-rel-hom-Eq-Rel R S))
+      ( quotient-hom-Eq-Rel-Set)
+      ( reflecting-map-quotient-map-hom-Eq-Rel)
+      ( is-set-quotient-set-quotient-hom-Eq-Rel)
       ( hom-Set (quotient-Set R) (quotient-Set S))
       ( universal-reflecting-map-set-quotient-hom-Eq-Rel R S)
       ( λ g h p a →

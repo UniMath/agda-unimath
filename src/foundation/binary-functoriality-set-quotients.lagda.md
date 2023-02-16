@@ -249,40 +249,30 @@ module _
         S QS qS UqS T QT qT UqT)
       ( hom-binary-hom-Eq-Rel R S T f)
 
---   unique-binary-map-set-quotient :
---     ({l : Level} → is-set-quotient l R QR qR) →
---     ({l : Level} → is-set-quotient l S QS qS) →
---     ({l : Level} → is-set-quotient l T QT qT) →
---     (f : binary-hom-Eq-Rel R S T) →
---     is-contr
---       ( Σ ( type-Set QR → type-Set QS → type-Set QT)
---           ( λ h →
---             (x : A) (y : B) →
---             ( h ( map-reflecting-map-Eq-Rel R qR x)
---                 ( map-reflecting-map-Eq-Rel S qS y)) ＝
---             ( map-reflecting-map-Eq-Rel T qT
---               ( map-binary-hom-Eq-Rel R S T f x y))))
---   unique-binary-map-set-quotient UqR UqS UqT f =
---     is-contr-equiv'
---       ( Σ ( type-Set QR → type-Set QS → type-Set QT)
---           ( λ h →
---             (x : A) →
---             ( h ( map-reflecting-map-Eq-Rel R qR x)) ＝
---             ( map-universal-property-set-quotient-is-set-quotient
---               S QS qS UqS QT
---               ( comp-reflecting-map-Eq-Rel S T qT
---                 ( map-hom-binary-hom-Eq-Rel R S T f x)))))
---       ( equiv-tot
---         ( λ μ →
---           equiv-map-Π
---             ( λ x →
---               {!!} ∘e
---               ( equiv-funext))))
---       ( universal-property-set-quotient-is-set-quotient R QR qR UqR
---         ( {!!}) {!!})
+  unique-binary-map-set-quotient-is-set-quotient :
+    ({l : Level} → is-set-quotient l R QR qR) →
+    ({l : Level} → is-set-quotient l S QS qS) →
+    ({l : Level} → is-set-quotient l T QT qT) →
+    (f : binary-hom-Eq-Rel R S T) →
+    is-contr
+      ( Σ ( type-Set QR → type-Set QS → type-Set QT)
+          ( λ h →
+            (x : A) (y : B) →
+            ( h ( map-reflecting-map-Eq-Rel R qR x)
+                ( map-reflecting-map-Eq-Rel S qS y)) ＝
+            ( map-reflecting-map-Eq-Rel T qT
+              ( map-binary-hom-Eq-Rel R S T f x y))))
+  unique-binary-map-set-quotient-is-set-quotient UqR UqS UqT f =
+    is-contr-equiv
+      ( Σ ( type-Set QR → set-quotient-hom-Eq-Rel S T)
+          ( λ h →
+            ( h ∘ (map-reflecting-map-Eq-Rel R qR)) ~
+            ( quotient-map-hom-Eq-Rel S T ∘ {!!} )))
+      {!!}
+      {!!}
 
--- ```
+```
 
--- ### Binary functoriality of set quotients
+### Binary functoriality of set quotients
 
 
