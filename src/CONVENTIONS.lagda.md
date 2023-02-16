@@ -65,7 +65,7 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
 [ formalization of property 2]
 ```
 
-At the end of the file you may also add a `See also` or `References` section where you reference related sources such as other modules or articles related to the contents of the file.
+At the end of the file you may also add a `See also` or `References` subsection where you reference related sources such as other modules or articles related to the contents of the file.
 
 - If you want to reference another module in the library use the pattern
   ```[`foundation.univalence-axiom`](foundation.univalence-axiom.html)```.
