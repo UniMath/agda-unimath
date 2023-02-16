@@ -5,7 +5,6 @@ module foundation.path-algebra where
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.constant-maps
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
@@ -180,52 +179,17 @@ module _
   where
 
   nat-sq-right-unit-Id² :
-    square right-unit α (horizontal-concat-Id² α refl) right-unit
+    (right-unit ∙ α) ＝ ((horizontal-concat-Id² α refl) ∙ right-unit)
   nat-sq-right-unit-Id² =
     ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
       ( nat-htpy htpy-right-unit α)) ∙
     ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
   
   nat-sq-left-unit-Id² :
-    square left-unit α (horizontal-concat-Id² (refl {x = refl}) α) left-unit
-  nat-sq-left-unit-Id² = 
-    ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
-    ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
-```
-
-### Definition of horizontal inverse
-
-2-paths have an induced inverse operation from the operation on boundary 1-paths
-
-```agda
-module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1}
-  where
-
-  horizontal-inv-Id² : p ＝ p' → (inv p) ＝ (inv p')
-  horizontal-inv-Id² α = ap inv α
-```
-
-This operation satisfies a left and right idenity induced by the inverse laws on 1-paths
-
-```agda
-module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1} (α : p ＝ p')
-  where
-
-  nat-sq-right-inv-Id² :
-    square (right-inv p) refl (horizontal-concat-Id² α (horizontal-inv-Id² α)) (right-inv p')
-  nat-sq-right-inv-Id² =
-    (((horizontal-concat-Id² refl (inv (ap-const refl α))) ∙ nat-htpy right-inv α) ∙
-      (horizontal-concat-Id² (ap-binary-comp-diagonal (_∙_) id inv α) refl)) ∙
-        ap (λ t → (horizontal-concat-Id² t (horizontal-inv-Id² α)) ∙ right-inv p')  (ap-id α)
-
-  nat-sq-left-inv-Id² :
-    square (left-inv p) refl (horizontal-concat-Id² (horizontal-inv-Id² α) α) (left-inv p')
-  nat-sq-left-inv-Id² =
-    ((((horizontal-concat-Id² refl (inv (ap-const refl α))) ∙ nat-htpy left-inv α) ∙
-      (horizontal-concat-Id² (ap-binary-comp-diagonal (_∙_) inv id α) refl)) ∙
-        ap (λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')  (ap-id α))
+    (left-unit ∙ α) ＝ (horizontal-concat-Id² (refl {x = refl}) α)
+  nat-sq-left-unit-Id² =
+    ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
+    ( inv (left-unit-law-horizontal-concat-Id² α))
 ```
 
 ### Interchange laws for 2-paths
@@ -267,76 +231,6 @@ unit-law-δ-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {u v : y ＝ z} (δ : u ＝ v) →
   interchange-Id² (refl {x = p}) refl refl δ ＝ refl
 unit-law-δ-interchange-Id² p refl = refl
-```
-
-### Action on 2-paths of functors
-
-Functions have an induced action on 2-paths
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (f : A → B) (α : p ＝ p')
-  where
-
-  ap² : (ap f p) ＝ (ap f p')
-  ap² = (ap (ap f)) α
-```
-
-Since this is define in terms of `ap`, it comes with the standard coherences. It also has induced cohereces.
-
-Inverse law.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (f : A → B) (α : p ＝ p')
-  where
-
-  nat-sq-ap-inv-Id² :
-    square (ap-inv f p) (horizontal-inv-Id² (ap² f α))
-      (ap² f (horizontal-inv-Id² α)) (ap-inv f p')
-  nat-sq-ap-inv-Id² =
-    (inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α)) ∙
-      (nat-htpy (ap-inv f) α)) ∙
-        (horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
-```
-
-Identity law and constant law. 
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (α : p ＝ p')
-  where
-
-  nat-sq-ap-id-Id² :
-    square (ap-id p) α (ap² id α) (ap-id p')
-  nat-sq-ap-id-Id² =
-    ((horizontal-concat-Id² refl (inv (ap-id α))) ∙ (nat-htpy ap-id α))
-
-  nat-sq-ap-const-Id² :
-    (b : B) →
-    square (ap-const b p) refl (ap² (const A B b) α) (ap-const b p')
-  nat-sq-ap-const-Id² b =
-    (inv (horizontal-concat-Id² refl (ap-const refl α)) ∙
-      (nat-htpy (ap-const b) α))
-```
-
-Composition law
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {a0 a1 : A} {p p' : a0 ＝ a1} (g : B → C) (f : A → B) (α : p ＝ p')
-  where
-
-  nat-sq-ap-comp-Id² :
-    square (ap-comp g f p) ((ap² g ∘ ap² f) α)
-      (ap² (g ∘ f) α) (ap-comp g f p')
-  nat-sq-ap-comp-Id² =
-    (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
-      (nat-htpy (ap-comp g f) α))
 ```
 
 ## Properties of 3-paths
