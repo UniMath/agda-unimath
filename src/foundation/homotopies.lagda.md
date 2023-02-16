@@ -257,6 +257,24 @@ module _
     is-equiv-map-compute-path-over-eq-value' p q q'
 ```
 
+Relation between between `compute-path-over-eq-value'` and `nat-htpy`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {B : UU l2} (f g : A → B)
+  (H : f ~ g)
+  where
+  
+  nat-htpy-apd-htpy :
+    (p : a0 ＝ a1) →
+    (map-inv-equiv (compute-path-over-eq-value'
+      f g p (H a0) (H a1))) (apd H p) ＝ inv (nat-htpy H p)
+  nat-htpy-apd-htpy refl =
+    inv (ap (map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a0)))
+      (ap inv (left-inv right-unit))) ∙
+     (isretr-map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a1)) (inv right-unit))
+```
+
 ## See also
 
 - We postulate that homotopy is equivalent to identity of functions in
