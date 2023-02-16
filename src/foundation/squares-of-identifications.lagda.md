@@ -24,16 +24,14 @@ open import foundation.universe-levels
 A square of identifications (paths)
 
 ```md
-                 p-top
             x0 ------ y2
             |                 |
-p-left            |                 | p-right
+            |                 | 
             |                 |
             y1 ------ z
-             p-bottom
 ```
 
-is said to commute if there is a path `p ∙ q ＝ r ∙ s`. Such a path may often be called a "filler" of the square. The type fillers for a given square, called `square p q r s`, is defined in `foundation-core.identity-types`. This file includes basic operations on commutative squares of identifications.
+is said to commute if there is a path `left ∙ bottom ＝ top ∙ right`. Such a path may often be called a "filler" of the square. The type fillers for a given square, called `square p q r s`, is defined in `foundation-core.identity-types`. This file includes basic operations on commutative squares of identifications.
 
 ### Composition of squares
 
