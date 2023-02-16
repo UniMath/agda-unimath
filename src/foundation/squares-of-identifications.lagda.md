@@ -27,7 +27,7 @@ A square of identifications (paths)
                  p-top
             x0 ------ y2
             |                 |
-p-left |                 | p-right
+p-left            |                 | p-right
             |                 |
             y1 ------ z
              p-bottom
