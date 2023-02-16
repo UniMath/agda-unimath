@@ -25,9 +25,9 @@ A square of identifications (paths)
 
 ```md
             x0 ------ y2
-            |                 |
-            |                 | 
-            |                 |
+            |              |
+            |              | 
+            |              |
             y1 ------ z
 ```
 
