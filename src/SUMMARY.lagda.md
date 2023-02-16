@@ -785,6 +785,7 @@
   - [Cantor space](set-theory.cantor-space.md)
   - [Cardinalities](set-theory.cardinalities.md)
   - [Countable sets](set-theory.countable-sets.md)
+  - [Cumulative Hierarchy](set-theory.cumulative-hierarchy.md)
   - [Infinite sets](set-theory.infinite-sets.md)
   - [Uncountable sets](set-theory.uncountable-sets.md)
 
