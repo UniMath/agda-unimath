@@ -274,5 +274,3 @@ module _
 ```
 
 ### Binary functoriality of set quotients
-
-
