@@ -10,6 +10,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.universal-property-dependent-pair-types
@@ -113,6 +114,22 @@ module _
     (tr (λ a → B a → C a) p f ＝ g)
   map-compute-path-over-function-type p f g =
     map-equiv (compute-path-over-function-type p f g)
+```
+
+Relation between`compute-path-over-function-type` and `preserves-tr`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {i0 i1 : I} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i)
+  where
+
+  preserves-tr-apd-function :
+    (p : i0 ＝ i1) (a : A i0) →
+    (map-inv-equiv (compute-path-over-function-type
+      A B p (f i0) (f i1)) (apd f p) a) ＝
+    inv-htpy (preserves-tr f p) a
+  preserves-tr-apd-function refl = refl-htpy
 ```
 
 ### Transport in identity types
