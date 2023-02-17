@@ -65,6 +65,24 @@ module _
         (assoc p-top middle q-bottom)) ∙
           (ap-binary (_∙_) (refl {x = p-top}) q)) ∙
             inv (assoc p-top q-top q-right)
+
+module _
+  {l : Level} {A : UU l} {x y1 y2 z1 z2 w : A}
+  {p-left : x ＝ y1} {middle : y1 ＝ z2}
+  {p-top : x ＝ y2} {p-right : y2 ＝ z2}
+  {q-left : y1 ＝ z1} {q-bottom : z1 ＝ w}
+  {q-right : z2 ＝ w}
+  where
+
+  square-comp-vertical :
+    (square p-left middle p-top p-right) →
+    (square q-left q-bottom middle q-right) →
+    (square (p-left ∙ q-left) q-bottom p-top (p-right ∙ q-right))
+  square-comp-vertical p q =
+    (assoc p-left q-left q-bottom ∙ (((ap-binary (_∙_) (refl {x = p-left}) q) ∙
+      (inv (assoc p-left middle q-right))) ∙
+        ap-binary (_∙_) p (refl {x = q-right}))) ∙ assoc p-top p-right q-right
+
 ```
 
 ### Whiskering of commutative squares
