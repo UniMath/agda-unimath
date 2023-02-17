@@ -16,9 +16,9 @@ A square of identifications
 
 ```md
             x0 ------ y2
-            |         |
-            |         | 
-            |         |
+            |      |
+            |      | 
+            |      |
             y1 ------ z
 ```
 

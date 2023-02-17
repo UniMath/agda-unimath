@@ -3,8 +3,6 @@
 ```agda
 module foundation.path-algebra where
 
-
-
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.constant-maps
