@@ -189,6 +189,7 @@ open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
+open import foundation.squares-of-identifications public
 open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure-identity-principle public
