@@ -80,8 +80,8 @@ module _
 module _
   {l1 : Level} (l2 : Level) (V : pseudo-cumulative-hierarchy l1)
   where
-  cumulative-hierarchy-induction-principle : UU (lsuc (l1 ⊔ l2))
-  cumulative-hierarchy-induction-principle =
+  induction-principle-cumulative-hierarchy : UU (lsuc (l1 ⊔ l2))
+  induction-principle-cumulative-hierarchy =
     ( P : type-pseudo-cumulative-hierarchy V → UU l2)
     → ( (x : type-pseudo-cumulative-hierarchy V) → is-set (P x))
     → ( ρ : {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V )
@@ -97,9 +97,9 @@ module _
         → tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂)
     → (x : type-pseudo-cumulative-hierarchy V) → P x
 
-  compute-cumulative-hierarchy-induction-principle :
-    cumulative-hierarchy-induction-principle → UU (lsuc (l1 ⊔ l2))
-  compute-cumulative-hierarchy-induction-principle IP =
+  compute-induction-principle-cumulative-hierarchy :
+    induction-principle-cumulative-hierarchy → UU (lsuc (l1 ⊔ l2))
+  compute-induction-principle-cumulative-hierarchy IP =
     ( P : type-pseudo-cumulative-hierarchy V → UU l2)
     → ( σ : (x : type-pseudo-cumulative-hierarchy V) → is-set (P x))
     → ( ρ : {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V )
