@@ -16,7 +16,7 @@ open import foundation.propositional-truncations
 
 The cumulative hierarchy is a model of set theory.
 Instead of introducing it as a HIT, as in the HoTT Book [1, §10.5], we introduce
-it's induction principle, following [2].
+its induction principle, following [2].
 
 ## Definitions
 
@@ -36,7 +36,9 @@ have-equal-images {l1} {l2} {l3} {A} {B} {X} f g =
   has-smaller-image f g × has-smaller-image g f
 ```
 
-### A type is a pseudo cumulative hierarchy if it has the structure of a cumulative hierarchy, but not necessarily its induction principle.
+### Pseudo cumulative hierarchy
+
+A type is a pseudo cumulative hierarchy if it has the structure of a cumulative hierarchy, but not necessarily its induction principle.
 
 ```agda
 has-cumulative-hierarchy-structure : {l : Level} → (V : UU (lsuc l)) → UU (lsuc l)
@@ -115,11 +117,7 @@ module _
     → IP P σ ρ τ (set-pseudo-cumulative-hierarchy V f) ＝ ρ f IH
 ```
 
-## Properties
-
-## Examples
-
 ## References
 
 1. Institute for Advanced Study. Homotopy Type Theory: Univalent Foundations of Mathematics.
-2. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg and Chuangjie Xu. https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html
+2. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg and Chuangjie Xu. <https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html>
