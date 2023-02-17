@@ -102,6 +102,13 @@ module _
   commutative-add-Ring : (x y : type-Ring R) → Id (add-Ring x y) (add-Ring y x)
   commutative-add-Ring = commutative-add-Ab (ab-Ring R)
 
+  interchange-add-add-Ring :
+    (x y x' y' : type-Ring R) →
+    ( add-Ring (add-Ring x y) (add-Ring x' y')) ＝
+    ( add-Ring (add-Ring x x') (add-Ring y y'))
+  interchange-add-add-Ring =
+    interchange-add-add-Ab (ab-Ring R)
+
   is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring x)
   is-equiv-add-Ring = is-equiv-add-Ab (ab-Ring R)
 
