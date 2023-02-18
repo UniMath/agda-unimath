@@ -16,6 +16,7 @@ open import linear-algebra.multiplication-matrices public
 open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-vectors public
 open import linear-algebra.transposition-matrices public
+open import linear-algebra.vectors-on-commutative-rings public
 open import linear-algebra.vectors-on-rings public
 open import linear-algebra.vectors public
 ```

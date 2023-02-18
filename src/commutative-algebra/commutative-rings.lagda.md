@@ -223,6 +223,14 @@ module _
   mul-nat-Commutative-Ring (succ-ℕ n) x =
     add-Commutative-Ring (mul-nat-Commutative-Ring n x) x
 
+  ap-mul-nat-Commutative-Ring :
+    {m n : ℕ} {x y : type-Commutative-Ring} →
+    (m ＝ n) → (x ＝ y) →
+    mul-nat-Commutative-Ring m x ＝
+    mul-nat-Commutative-Ring n y
+  ap-mul-nat-Commutative-Ring p q =
+    ap-binary mul-nat-Commutative-Ring p q
+
   mul-nat-one-Commutative-Ring :
     (x : type-Commutative-Ring) → 
     mul-nat-Commutative-Ring 1 x ＝ x
