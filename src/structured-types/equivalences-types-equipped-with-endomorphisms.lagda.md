@@ -35,7 +35,7 @@ module _
   equiv-Endo =
     Σ ( type-Endo X ≃ type-Endo Y)
       ( λ e →
-        coherence-square
+        commuting-square
           ( map-equiv e)
           ( endomorphism-Endo X)
           ( endomorphism-Endo Y)
@@ -47,14 +47,14 @@ module _
   map-equiv-Endo : equiv-Endo → type-Endo X → type-Endo Y
   map-equiv-Endo e = map-equiv (equiv-equiv-Endo e)
 
-  coherence-square-equiv-Endo :
+  commuting-square-equiv-Endo :
     (e : equiv-Endo) →
-    coherence-square
+    commuting-square
       ( map-equiv-Endo e)
       ( endomorphism-Endo X)
       ( endomorphism-Endo Y)
       ( map-equiv-Endo e)
-  coherence-square-equiv-Endo e = pr2 e
+  commuting-square-equiv-Endo e = pr2 e
 ```
 
 ### The identity equivalence 
@@ -77,7 +77,7 @@ comp-equiv-Endo :
   equiv-Endo Y Z → equiv-Endo X Y → equiv-Endo X Z
 pr1 (comp-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
 pr2 (comp-equiv-Endo X Y Z f e) =
-  coherence-square-comp-horizontal
+  commuting-square-comp-horizontal
     ( map-equiv-Endo X Y e)
     ( map-equiv-Endo Y Z f)
     ( endomorphism-Endo X)
@@ -85,8 +85,8 @@ pr2 (comp-equiv-Endo X Y Z f e) =
     ( endomorphism-Endo Z)
     ( map-equiv-Endo X Y e)
     ( map-equiv-Endo Y Z f)
-    ( coherence-square-equiv-Endo X Y e)
-    ( coherence-square-equiv-Endo Y Z f)
+    ( commuting-square-equiv-Endo X Y e)
+    ( commuting-square-equiv-Endo Y Z f)
 ```
 
 ### Inverses of equivalences of types equipped with endomorphisms
@@ -96,12 +96,12 @@ inv-equiv-Endo :
   {l1 l2 : Level} (X : Endo l1) (Y : Endo l2) → equiv-Endo X Y → equiv-Endo Y X
 pr1 (inv-equiv-Endo X Y e) = inv-equiv (equiv-equiv-Endo X Y e)
 pr2 (inv-equiv-Endo X Y e) =
-  coherence-square-inv-horizontal
+  commuting-square-inv-horizontal
     ( equiv-equiv-Endo X Y e)
     ( endomorphism-Endo X)
     ( endomorphism-Endo Y)
     ( equiv-equiv-Endo X Y e)
-    ( coherence-square-equiv-Endo X Y e)
+    ( commuting-square-equiv-Endo X Y e)
 ```
 
 ### Homotopies of equivalences of types equipped with endomorphisms
@@ -113,7 +113,7 @@ module _
 
   hom-equiv-Endo : equiv-Endo X Y → hom-Endo X Y
   pr1 (hom-equiv-Endo e) = map-equiv-Endo X Y e
-  pr2 (hom-equiv-Endo e) = coherence-square-equiv-Endo X Y e
+  pr2 (hom-equiv-Endo e) = commuting-square-equiv-Endo X Y e
 
   htpy-equiv-Endo : (e f : equiv-Endo X Y) → UU (l1 ⊔ l2)
   htpy-equiv-Endo e f = htpy-hom-Endo X Y (hom-equiv-Endo e) (hom-equiv-Endo f)
@@ -178,7 +178,7 @@ module _
         ( λ x →
           inv
             ( ( right-unit) ∙
-              ( right-unit ∙ ap-id (coherence-square-equiv-Endo X Y e x)))))
+              ( right-unit ∙ ap-id (commuting-square-equiv-Endo X Y e x)))))
 
   right-unit-law-comp-equiv-Endo :
     (e : equiv-Endo X Y) → Id (comp-equiv-Endo X X Y e (id-equiv-Endo X)) e

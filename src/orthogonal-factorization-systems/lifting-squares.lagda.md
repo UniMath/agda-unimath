@@ -67,7 +67,7 @@ commutativity proof.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square h f g i)
+  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : commuting-square h f g i)
   where
 
   is-lifting-square : (j : X → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -80,7 +80,7 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {h : A → B} {f : A → X} {g : B → Y} {i : X → Y} {H : coherence-square h f g i}
+  {h : A → B} {f : A → X} {g : B → Y} {i : X → Y} {H : commuting-square h f g i}
   where
 
   map-diagonal-lifting-square : lifting-square h f g i H → (X → B)
@@ -128,7 +128,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square h f g i)
+  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : commuting-square h f g i)
   where
 
   coherence-htpy-lifting-square :

@@ -273,15 +273,15 @@ pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
 ### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
 
 ```agda
-coherence-square-ap-precomp-Π :
+commuting-square-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
-  coherence-square
+  commuting-square
     ( ap (precomp-Π f C) {g} {h})
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-ap-precomp-Π f g .g refl = refl
+commuting-square-ap-precomp-Π f g .g refl = refl
 
 is-trunc-map-succ-precomp-Π :
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
@@ -296,7 +296,7 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( htpy-eq)
         ( htpy-eq)
         ( precomp-Π f (eq-value g h))
-        ( coherence-square-ap-precomp-Π f g h)
+        ( commuting-square-ap-precomp-Π f g h)
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))

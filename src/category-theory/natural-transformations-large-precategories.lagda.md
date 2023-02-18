@@ -47,7 +47,7 @@ module _
         type-hom-Large-Precat D
           ( obj-functor-Large-Precat F X)
           ( obj-functor-Large-Precat G X)
-      coherence-square-natural-transformation-Large-Precat :
+      commuting-square-natural-transformation-Large-Precat :
         {l1 l2 : Level} {X : obj-Large-Precat C l1}
         {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
         square-Large-Precat D
@@ -73,7 +73,7 @@ id-natural-transformation-Large-Precat :
 obj-natural-transformation-Large-Precat
   (id-natural-transformation-Large-Precat {D = D} F) X =
     id-hom-Large-Precat D
-coherence-square-natural-transformation-Large-Precat
+commuting-square-natural-transformation-Large-Precat
   (id-natural-transformation-Large-Precat {D = D} F) f =
     ( left-unit-law-comp-hom-Large-Precat D (hom-functor-Large-Precat F f)) ∙
     ( inv

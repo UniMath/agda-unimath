@@ -220,10 +220,10 @@ module _
             ( map-is-set-quotient R QR qR S QS qS UqR UqS f x)
             ( map-is-set-quotient R QR qR S QS qS UqR UqS g x))
         ( λ a →
-          coherence-square-map-is-set-quotient R QR qR S QS qS UqR UqS f a ∙
+          commuting-square-map-is-set-quotient R QR qR S QS qS UqR UqS f a ∙
           ( ( apply-effectiveness-is-set-quotient' S QS qS UqS (s a)) ∙
             ( inv
-              ( coherence-square-map-is-set-quotient
+              ( commuting-square-map-is-set-quotient
                 R QR qR S QS qS UqR UqS g a)))))
 
   universal-reflecting-map-is-set-quotient-hom-Eq-Rel :
@@ -370,9 +370,9 @@ module _
       ( λ g h p a →
         apply-effectiveness-is-set-quotient S QS qS US
           ( ( inv-htpy
-              ( coherence-square-map-is-set-quotient R QR qR S QS qS UR US g) ∙h
+              ( commuting-square-map-is-set-quotient R QR qR S QS qS UR US g) ∙h
               ( ( htpy-eq p ·r map-reflecting-map-Eq-Rel R qR) ∙h
-                ( coherence-square-map-is-set-quotient
+                ( commuting-square-map-is-set-quotient
                   R QR qR S QS qS UR US h)))
             ( a)))
 ```
@@ -427,9 +427,9 @@ module _
       ( λ g h p a →
         apply-effectiveness-quotient-map S
           ( ( inv-htpy
-              ( coherence-square-map-set-quotient R S g) ∙h
+              ( commuting-square-map-set-quotient R S g) ∙h
               ( ( htpy-eq p ·r quotient-map R) ∙h
-                ( coherence-square-map-set-quotient
+                ( commuting-square-map-set-quotient
                   R S h)))
             ( a)))
 ```

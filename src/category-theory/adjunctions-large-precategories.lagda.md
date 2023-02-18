@@ -55,7 +55,7 @@ module _
         {X2 : obj-Large-Precat C l2} {Y1 : obj-Large-Precat D l3}
         {Y2 : obj-Large-Precat D l4} (f : type-hom-Large-Precat C X2 X1)
         (g : type-hom-Large-Precat D Y1 Y2) →
-        coherence-square
+        commuting-square
           ( map-equiv (equiv-is-adjoint-pair-Large-Precat X1 Y1))
           ( λ h →
             comp-hom-Large-Precat C
@@ -99,7 +99,7 @@ module _
     {X2 : obj-Large-Precat C l2} {Y1 : obj-Large-Precat D l3}
     {Y2 : obj-Large-Precat D l4} (f : type-hom-Large-Precat C X2 X1)
     (g : type-hom-Large-Precat D Y1 Y2) →
-    coherence-square
+    commuting-square
       ( map-inv-equiv-is-adjoint-pair-Large-Precat H X1 Y1)
       ( λ h →
         comp-hom-Large-Precat D
@@ -112,7 +112,7 @@ module _
       ( map-inv-equiv-is-adjoint-pair-Large-Precat H X2 Y2)
   naturality-inv-equiv-is-adjoint-pair-Large-Precat
     H {X1 = X1} {X2} {Y1} {Y2} f g =
-    coherence-square-inv-horizontal
+    commuting-square-inv-horizontal
       ( equiv-is-adjoint-pair-Large-Precat H X1 Y1)
       ( λ h →
         comp-hom-Large-Precat C
@@ -240,7 +240,7 @@ module _
     {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}
     {Y1 : obj-Large-Precat D l3} {Y2 : obj-Large-Precat D l4}
     (f : type-hom-Large-Precat C X2 X1) (g : type-hom-Large-Precat D Y1 Y2) →
-    coherence-square
+    commuting-square
       ( map-equiv-is-adjoint-pair-Adjunction FG X1 Y1)
       ( λ h →
         comp-hom-Large-Precat C
@@ -276,7 +276,7 @@ module _
     {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}
     {Y1 : obj-Large-Precat D l3} {Y2 : obj-Large-Precat D l4}
     (f : type-hom-Large-Precat C X2 X1) (g : type-hom-Large-Precat D Y1 Y2) →
-    coherence-square
+    commuting-square
       ( map-inv-equiv-is-adjoint-pair-Adjunction FG X1 Y1)
       ( λ h →
         comp-hom-Large-Precat D
@@ -317,7 +317,7 @@ module _
     map-inv-equiv-is-adjoint-pair-Adjunction C D FG X
       ( obj-left-adjoint-Adjunction C D FG X)
       ( id-hom-Large-Precat D)
-  coherence-square-natural-transformation-Large-Precat
+  commuting-square-natural-transformation-Large-Precat
     ( unit-Adjunction FG) {X = X} {Y} f =
     ( inv
       ( left-unit-law-comp-hom-Large-Precat C
@@ -401,7 +401,7 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation `ε :
       ( obj-right-adjoint-Adjunction C D FG Y)
       ( Y)
       ( id-hom-Large-Precat C)
-  coherence-square-natural-transformation-Large-Precat
+  commuting-square-natural-transformation-Large-Precat
     (counit-Adjunction FG) {X = X} {Y = Y} f =
     ( inv
       ( left-unit-law-comp-hom-Large-Precat D

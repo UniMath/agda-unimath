@@ -49,7 +49,7 @@ module _
   where
 
   is-map-over : (X → Y) → (A → B) → UU (l1 ⊔ l4)
-  is-map-over i h = coherence-square h f g i -- (i ∘ f) ~ (g ∘ h)
+  is-map-over i h = commuting-square h f g i -- (i ∘ f) ~ (g ∘ h)
 
   map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l4)
   map-over i = Σ (A → B) (is-map-over i)
@@ -313,7 +313,7 @@ module _
     is-map-over f g k i → is-map-over g h l j →
     is-map-over f h (l ∘ k) (j ∘ i)
   is-map-over-comp-horizontal {k} {l} {i} {j} =
-    coherence-square-comp-horizontal i j f g h k l
+    commuting-square-comp-horizontal i j f g h k l
 
   map-over-comp-horizontal :
     {k : X → Y} {l : Y → Z} →
@@ -346,7 +346,7 @@ module _
     is-map-over f g j i → is-map-over f' g' k j →
     is-map-over (f' ∘ f) (g' ∘ g) k i
   is-map-over-comp-vertical {f} {g} {f'} {g'} =
-    coherence-square-comp-vertical i f g j f' g' k
+    commuting-square-comp-vertical i f g j f' g' k
 ```
 
 ### The truncation level of the types of fibered maps is bounded by the truncation level of the codomains

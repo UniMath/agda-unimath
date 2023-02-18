@@ -40,7 +40,7 @@ module _
     Σ ( type-Set (pr1 X) → type-Set (pr1 Y))
       ( λ f →
         ( g : type-Group G) →
-        coherence-square
+        commuting-square
           ( f)
           ( mul-Abstract-Group-Action G X g)
           ( mul-Abstract-Group-Action G Y g)
@@ -50,14 +50,14 @@ module _
     type-hom-Abstract-Group-Action → type-Set (pr1 X) → type-Set (pr1 Y)
   map-hom-Abstract-Group-Action = pr1
 
-  coherence-square-hom-Abstract-Group-Action :
+  commuting-square-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action) (g : type-Group G) →
-    coherence-square
+    commuting-square
       ( map-hom-Abstract-Group-Action f)
       ( mul-Abstract-Group-Action G X g)
       ( mul-Abstract-Group-Action G Y g)
       ( map-hom-Abstract-Group-Action f)
-  coherence-square-hom-Abstract-Group-Action = pr2
+  commuting-square-hom-Abstract-Group-Action = pr2
 ```
 
 ### The identity morphism
@@ -86,7 +86,7 @@ module _
     type-hom-Abstract-Group-Action G X Z
   pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
   pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
-    coherence-square-comp-horizontal
+    commuting-square-comp-horizontal
       ( f)
       ( g)
       ( mul-Abstract-Group-Action G X x)

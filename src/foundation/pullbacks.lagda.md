@@ -57,7 +57,7 @@ exponent-cone :
   cone (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) (T → C)
 pr1 (exponent-cone T f g c) h = vertical-map-cone f g c ∘ h
 pr1 (pr2 (exponent-cone T f g c)) h = horizontal-map-cone f g c ∘ h
-pr2 (pr2 (exponent-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
+pr2 (pr2 (exponent-cone T f g c)) h = eq-htpy (commuting-square-cone f g c ·r h)
 
 map-canonical-pullback-exponent :
   {l1 l2 l3 l4 : Level}
@@ -91,7 +91,7 @@ triangle-map-canonical-pullback-exponent
   {A = A} {B} T f g c h =
   eq-pair-Σ refl
     ( eq-pair-Σ refl
-      ( inv (issec-eq-htpy (coherence-square-cone f g c ·r h))))
+      ( inv (issec-eq-htpy (commuting-square-cone f g c ·r h))))
 
 abstract
   is-pullback-exponent-is-pullback :
@@ -1031,7 +1031,7 @@ is-pullback-cone-ap :
   in
   is-pullback
     ( λ (α : Id (vertical-map-cone f g c c1) (vertical-map-cone f g c c2)) →
-      (ap f α) ∙ (coherence-square-cone f g c c2))
+      (ap f α) ∙ (commuting-square-cone f g c c2))
     ( λ (β : Id (horizontal-map-cone f g c c1) (horizontal-map-cone f g c c2)) →
       (H c1) ∙ (ap g β))
     ( cone-ap f g c c1 c2)

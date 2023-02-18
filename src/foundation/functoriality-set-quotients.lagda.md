@@ -144,7 +144,7 @@ module _
     (h : hom-Eq-Rel R S) →
     is-contr
       ( Σ ( type-Set QR → type-Set QS)
-          ( coherence-square
+          ( commuting-square
             ( map-hom-Eq-Rel R S h)
             ( map-reflecting-map-Eq-Rel R f)
             ( map-reflecting-map-Eq-Rel S g)))
@@ -164,16 +164,16 @@ module _
   map-is-set-quotient Uf Ug h =
     pr1 (center (unique-map-is-set-quotient Uf Ug h))
 
-  coherence-square-map-is-set-quotient :
+  commuting-square-map-is-set-quotient :
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     (Ug : {l : Level} → is-set-quotient l S QS g) →
     (h : hom-Eq-Rel R S) →
-    coherence-square
+    commuting-square
       ( map-hom-Eq-Rel R S h)
       ( map-reflecting-map-Eq-Rel R f)
       ( map-reflecting-map-Eq-Rel S g)
       ( map-is-set-quotient Uf Ug h)
-  coherence-square-map-is-set-quotient Uf Ug h =
+  commuting-square-map-is-set-quotient Uf Ug h =
     pr2 (center (unique-map-is-set-quotient Uf Ug h))
 ```
 
@@ -189,7 +189,7 @@ module _
     (h : hom-Eq-Rel R S) →
     is-contr
       ( Σ ( set-quotient R → set-quotient S)
-          ( coherence-square
+          ( commuting-square
             ( map-hom-Eq-Rel R S h)
             ( quotient-map R)
             ( quotient-map S)))
@@ -217,15 +217,15 @@ module _
       ( is-set-quotient-set-quotient R)
       ( is-set-quotient-set-quotient S)
 
-  coherence-square-map-set-quotient :
+  commuting-square-map-set-quotient :
     (h : hom-Eq-Rel R S) →
-    coherence-square
+    commuting-square
       ( map-hom-Eq-Rel R S h)
       ( quotient-map R)
       ( quotient-map S)
       ( map-set-quotient h)
-  coherence-square-map-set-quotient =
-    coherence-square-map-is-set-quotient
+  commuting-square-map-set-quotient =
+    commuting-square-map-is-set-quotient
       ( R)
       ( quotient-Set R)
       ( reflecting-map-quotient-map R)
@@ -317,7 +317,7 @@ module _
     is-contr
       ( Σ ( type-Set QR ≃ type-Set QS)
           ( λ h' →
-            coherence-square
+            commuting-square
               ( map-equiv-Eq-Rel R S h)
               ( map-reflecting-map-Eq-Rel R f)
               ( map-reflecting-map-Eq-Rel S g)
@@ -349,15 +349,15 @@ module _
   equiv-is-set-quotient Uf Ug h =
     pr1 (center (unique-equiv-is-set-quotient Uf Ug h))
 
-  coherence-square-equiv-is-set-quotient :
+  commuting-square-equiv-is-set-quotient :
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     (Ug : {l : Level} → is-set-quotient l S QS g) →
     (h : equiv-Eq-Rel R S) →
-    coherence-square (map-equiv-Eq-Rel R S h)
+    commuting-square (map-equiv-Eq-Rel R S h)
       ( map-reflecting-map-Eq-Rel R f)
       ( map-reflecting-map-Eq-Rel S g)
       ( map-equiv (equiv-is-set-quotient Uf Ug h))
-  coherence-square-equiv-is-set-quotient Uf Ug h =
+  commuting-square-equiv-is-set-quotient Uf Ug h =
     pr2 (center (unique-equiv-is-set-quotient Uf Ug h))
 ```
 

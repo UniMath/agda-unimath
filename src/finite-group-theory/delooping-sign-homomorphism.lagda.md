@@ -275,13 +275,13 @@ module _
         ( eq-pair-Σ q (eq-is-prop is-prop-type-trunc-Prop)))
 
   abstract
-    coherence-square-map-quotient-delooping-sign-loop-Set : (n : ℕ) →
+    commuting-square-map-quotient-delooping-sign-loop-Set : (n : ℕ) →
       ( X Y : UU l1) ( eX : mere-equiv (Fin (succ-ℕ (succ-ℕ n))) X) →
       ( eY : mere-equiv (Fin (succ-ℕ (succ-ℕ n))) Y) →
       ( p : Id X Y) →
       ( Id (tr (λ v → mere-equiv (Fin (succ-ℕ (succ-ℕ n))) v) p eX) eY) →
       ( sX : is-set X) ( sY : is-set Y) →
-      coherence-square
+      commuting-square
         ( map-equiv
           ( invertible-action-D-equiv
             ( succ-ℕ (succ-ℕ n))
@@ -300,7 +300,7 @@ module _
             ( equivalence-class-Set (R (succ-ℕ (succ-ℕ n)) (pair X eX)))
             ( equivalence-class-Set (R (succ-ℕ (succ-ℕ n)) (pair Y eY)))
             ( map-quotient-delooping-sign-loop n X Y eX eY p)))
-    coherence-square-map-quotient-delooping-sign-loop-Set n X .X eX .eX refl refl sX sY x =
+    commuting-square-map-quotient-delooping-sign-loop-Set n X .X eX .eX refl refl sX sY x =
       ( ap
         ( λ w →
           map-equiv
@@ -329,9 +329,9 @@ module _
               ( preserves-id-equiv-invertible-action-D-equiv (succ-ℕ (succ-ℕ n)) (pair X eX))
               ( x)))
 
-  coherence-square-map-quotient-delooping-sign-loop-Fin : (n : ℕ) 
+  commuting-square-map-quotient-delooping-sign-loop-Fin : (n : ℕ) 
     ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))) →
-    coherence-square
+    commuting-square
       ( map-quotient-loop-Fin n p)
       ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
       ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
@@ -340,8 +340,8 @@ module _
           ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
           ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
           ( map-quotient-delooping-sign-loop-Fin n p)))
-  coherence-square-map-quotient-delooping-sign-loop-Fin n p =
-    coherence-square-map-quotient-delooping-sign-loop-Set n
+  commuting-square-map-quotient-delooping-sign-loop-Fin n p =
+    commuting-square-map-quotient-delooping-sign-loop-Set n
       ( raise l1 (Fin (succ-ℕ (succ-ℕ n)))) 
       ( raise l1 (Fin (succ-ℕ (succ-ℕ n)))) 
       ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
@@ -359,7 +359,7 @@ module _
           ( type-Group
             ( symmetric-Group (quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
           ( λ h' →
-            coherence-square
+            commuting-square
               ( map-quotient-loop-Fin n p)
               ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
               ( map-reflecting-map-Eq-Rel
@@ -411,7 +411,7 @@ module _
               ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
               ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
               ( map-quotient-delooping-sign-loop-Fin n p))
-            ( coherence-square-map-quotient-delooping-sign-loop-Fin n p)}
+            ( commuting-square-map-quotient-delooping-sign-loop-Fin n p)}
         { y = center (is-contr-equiv-quotient n p)}
         ( eq-is-contr (is-contr-equiv-quotient n p))
 

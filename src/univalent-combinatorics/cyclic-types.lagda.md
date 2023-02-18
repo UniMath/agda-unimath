@@ -140,14 +140,14 @@ module _
   map-equiv-Cyclic-Type e =
     map-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y) e
 
-  coherence-square-equiv-Cyclic-Type :
+  commuting-square-equiv-Cyclic-Type :
     (e : equiv-Cyclic-Type) →
-    coherence-square
+    commuting-square
       ( map-equiv-Cyclic-Type e)
       ( endomorphism-Cyclic-Type k X)
       ( endomorphism-Cyclic-Type k Y)
       ( map-equiv-Cyclic-Type e)
-  coherence-square-equiv-Cyclic-Type e = pr2 e
+  commuting-square-equiv-Cyclic-Type e = pr2 e
 
 module _
   {l : Level} (k : ℕ) (X : Cyclic-Type l k)
@@ -230,8 +230,8 @@ module _
                   ( endomorphism-Cyclic-Type k Y
                     ( map-equiv-Cyclic-Type k X Y f x))
                   ( ( H (endomorphism-Cyclic-Type k X x)) ∙
-                    ( coherence-square-equiv-Cyclic-Type k X Y f x))
-                  ( ( coherence-square-equiv-Cyclic-Type k X Y e x) ∙
+                    ( commuting-square-equiv-Cyclic-Type k X Y f x))
+                  ( ( commuting-square-equiv-Cyclic-Type k X Y e x) ∙
                     ( ap (endomorphism-Cyclic-Type k Y) (H x)))))))
       ( is-contr-total-htpy-equiv-Endo
         ( endo-Cyclic-Type k X)
@@ -443,7 +443,7 @@ isretr-equiv-Eq-Cyclic-Type k e =
     ( compute-map-preserves-succ-map-ℤ-Mod
       ( k)
       ( map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k) e)
-      ( coherence-square-equiv-Cyclic-Type
+      ( commuting-square-equiv-Cyclic-Type
         ( k)
         ( ℤ-Mod-Cyclic-Type k)
         ( ℤ-Mod-Cyclic-Type k)
@@ -500,7 +500,7 @@ preserves-comp-Eq-equiv-Cyclic-Type k e f =
   inv
   ( compute-map-preserves-succ-map-ℤ-Mod k
     ( map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k) f)
-    ( coherence-square-equiv-Cyclic-Type k
+    ( commuting-square-equiv-Cyclic-Type k
       ( ℤ-Mod-Cyclic-Type k)
       ( ℤ-Mod-Cyclic-Type k)
       ( f))
