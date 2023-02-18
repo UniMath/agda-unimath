@@ -204,7 +204,7 @@ module _
     ( vertical-map-cone f g c) ∘ p'
   pr1 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) = q'
   pr2 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) =
-    coherence-square-maps-comp-horizontalcomp-vertical q' p' h
+    coherence-square-maps-comp-vertical q' p' h
       ( horizontal-map-cone f g c)
       ( vertical-map-cone f g c)
       ( g)

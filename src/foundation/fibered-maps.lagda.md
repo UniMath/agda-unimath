@@ -346,7 +346,7 @@ module _
     is-map-over f g j i → is-map-over f' g' k j →
     is-map-over (f' ∘ f) (g' ∘ g) k i
   is-map-over-comp-vertical {f} {g} {f'} {g'} =
-    coherence-square-maps-comp-horizontalcomp-vertical i f g j f' g' k
+    coherence-square-maps-comp-vertical i f g j f' g' k
 ```
 
 ### The truncation level of the types of fibered maps is bounded by the truncation level of the codomains
