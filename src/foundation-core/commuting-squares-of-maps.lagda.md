@@ -28,11 +28,11 @@ is said to commute if there is a homotopy between both composites.
 ## Definition
 
 ```agda
-commuting-square :
+coherence-square-maps :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
   (top : C → B) (left : C → A) (right : B → X) (bottom : A → X) →
   UU (l3 ⊔ l4)
-commuting-square top left right bottom =
+coherence-square-maps top left right bottom =
   (bottom ∘ left) ~ (right ∘ top)
 ```
 
@@ -41,21 +41,21 @@ commuting-square top left right bottom =
 ### Composing commuting squares horizontally and vertically
 
 ```agda
-commuting-square-comp-horizontal :
+coherence-square-maps-comp-horizontalcomp-horizontal :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (top-left : A → B) (top-right : B → C)
   (left : A → X) (mid : B → Y) (right : C → Z)
   (bottom-left : X → Y) (bottom-right : Y → Z) →
-  commuting-square top-left left mid bottom-left →
-  commuting-square top-right mid right bottom-right →
-  commuting-square
+  coherence-square-maps top-left left mid bottom-left →
+  coherence-square-maps top-right mid right bottom-right →
+  coherence-square-maps
     (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
-commuting-square-comp-horizontal
+coherence-square-maps-comp-horizontalcomp-horizontal
   top-left top-right left mid right bottom-left bottom-right sq-left sq-right =
   (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
 
-commuting-square-comp-vertical :
+coherence-square-maps-comp-horizontalcomp-vertical :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (top : A → X)
@@ -63,11 +63,11 @@ commuting-square-comp-vertical :
   (mid : B → Y)
   (left-bottom : B → C) (right-bottom : Y → Z)
   (bottom : C → Z) →
-  commuting-square top left-top right-top mid →
-  commuting-square mid left-bottom right-bottom bottom →
-  commuting-square
+  coherence-square-maps top left-top right-top mid →
+  coherence-square-maps mid left-bottom right-bottom bottom →
+  coherence-square-maps
     top (left-bottom ∘ left-top) (right-bottom ∘ right-top) bottom
-commuting-square-comp-vertical
+coherence-square-maps-comp-horizontalcomp-vertical
   top left-top right-top mid left-bottom right-bottom bottom sq-top sq-bottom =
   (sq-bottom ·r left-top) ∙h (right-bottom ·l sq-top)
 ```

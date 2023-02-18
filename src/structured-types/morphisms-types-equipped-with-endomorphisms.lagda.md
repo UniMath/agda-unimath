@@ -29,19 +29,19 @@ module _
   hom-Endo : UU (l1 ⊔ l2)
   hom-Endo =
     Σ ( type-Endo X → type-Endo Y)
-      ( λ f → commuting-square f (endomorphism-Endo X) (endomorphism-Endo Y) f)
+      ( λ f → coherence-square-maps f (endomorphism-Endo X) (endomorphism-Endo Y) f)
 
   map-hom-Endo : hom-Endo → type-Endo X → type-Endo Y
   map-hom-Endo = pr1
 
-  commuting-square-hom-Endo :
+  coherence-square-hom-Endo :
     (f : hom-Endo) →
-    commuting-square
+    coherence-square-maps
       ( map-hom-Endo f)
       ( endomorphism-Endo X)
       ( endomorphism-Endo Y)
       ( map-hom-Endo f)
-  commuting-square-hom-Endo = pr2
+  coherence-square-hom-Endo = pr2
 ```
 
 ### Homotopies of morphisms of types equipped with endomorphisms
@@ -55,8 +55,8 @@ module _
   htpy-hom-Endo f g =
     Σ ( map-hom-Endo X Y f ~ map-hom-Endo X Y g)
       ( λ H →
-        ( (H ·r endomorphism-Endo X) ∙h commuting-square-hom-Endo X Y g) ~
-        ( commuting-square-hom-Endo X Y f ∙h (endomorphism-Endo Y ·l H)))
+        ( (H ·r endomorphism-Endo X) ∙h coherence-square-hom-Endo X Y g) ~
+        ( coherence-square-hom-Endo X Y f ∙h (endomorphism-Endo Y ·l H)))
 
   refl-htpy-hom-Endo : (f : hom-Endo X Y) → htpy-hom-Endo f f
   pr1 (refl-htpy-hom-Endo f) = refl-htpy
@@ -71,18 +71,18 @@ module _
     is-contr-total-Eq-structure
       ( λ g G H →
         ( (H ·r endomorphism-Endo X) ∙h G) ~
-        ( commuting-square-hom-Endo X Y f ∙h (endomorphism-Endo Y ·l H)))
+        ( coherence-square-hom-Endo X Y f ∙h (endomorphism-Endo Y ·l H)))
       ( is-contr-total-htpy (map-hom-Endo X Y f))
       ( pair (map-hom-Endo X Y f) refl-htpy)
       ( is-contr-equiv
-        ( Σ ( commuting-square
+        ( Σ ( coherence-square-maps
               ( map-hom-Endo X Y f)
               ( endomorphism-Endo X)
               ( endomorphism-Endo Y)
               ( map-hom-Endo X Y f))
-            ( λ H → H ~ commuting-square-hom-Endo X Y f))
+            ( λ H → H ~ coherence-square-hom-Endo X Y f))
         ( equiv-tot (λ H → equiv-concat-htpy' H right-unit-htpy))
-        ( is-contr-total-htpy' (commuting-square-hom-Endo X Y f)))
+        ( is-contr-total-htpy' (coherence-square-hom-Endo X Y f)))
 
   is-equiv-htpy-eq-hom-Endo : (f g : hom-Endo X Y) → is-equiv (htpy-eq-hom-Endo f g)
   is-equiv-htpy-eq-hom-Endo f =

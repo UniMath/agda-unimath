@@ -33,7 +33,7 @@ module _
         iso-Large-Precat D
           ( obj-functor-Large-Precat F X)
           ( obj-functor-Large-Precat G X)
-      commuting-square-natural-isomorphism-Large-Precat :
+      coherence-square-natural-isomorphism-Large-Precat :
         {l1 l2 : Level} {X : obj-Large-Precat C l1}
         {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
         square-Large-Precat D
@@ -58,7 +58,7 @@ module _
         ( obj-functor-Large-Precat F X)
         ( obj-functor-Large-Precat G X)
         ( obj-natural-isomorphism-Large-Precat γ X)
-  commuting-square-natural-transformation-Large-Precat
+  coherence-square-natural-transformation-Large-Precat
     (natural-transformation-natural-isomorphism-Large-Precat γ) =
-      commuting-square-natural-isomorphism-Large-Precat γ
+      coherence-square-natural-isomorphism-Large-Precat γ
 ```

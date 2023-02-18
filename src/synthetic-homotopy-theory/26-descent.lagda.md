@@ -659,15 +659,15 @@ precompose-total-lifts {A = A} P f =
     ( λ h → h ∘ f)
     ( precompose-lifts P f)
 
-commuting-square-map-inv-distributive-Π-Σ :
+coherence-square-map-inv-distributive-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) (f : A → B) →
-  commuting-square
+  coherence-square-maps
     ( precompose-total-lifts P f)
     ( map-inv-distributive-Π-Σ {A = B} {B = λ x → X} {C = λ x y → P y})
     ( map-inv-distributive-Π-Σ)
     ( λ h → h ∘ f)
-commuting-square-map-inv-distributive-Π-Σ P f = refl-htpy
+coherence-square-map-inv-distributive-Π-Σ P f = refl-htpy
 
 {- Our goal is now to produce a homotopy between (precompose-total-lifts P f)
    and (precompose-total-lifts P g) for homotopic maps f and g, and a coherence
@@ -743,17 +743,17 @@ COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   {f g : A → B} (H : f ~ g) → UU _
 COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P {f} {g} H =
-  ( ( commuting-square-map-inv-distributive-Π-Σ P f) ∙h
+  ( ( coherence-square-map-inv-distributive-Π-Σ P f) ∙h
     ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P H))) ~
   ( ( ( λ h → eq-htpy (h ·l H)) ·r map-inv-distributive-Π-Σ) ∙h
-    ( commuting-square-map-inv-distributive-Π-Σ P g))
+    ( coherence-square-map-inv-distributive-Π-Σ P g))
 
 coherence-inv-htpy-distributive-Π-Σ-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   (f : A → B) → COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P (refl-htpy' f)
 coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
   ( ap-concat-htpy
-    ( commuting-square-map-inv-distributive-Π-Σ P f)
+    ( coherence-square-map-inv-distributive-Π-Σ P f)
     ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P refl-htpy))
     ( refl-htpy)
     ( λ h →

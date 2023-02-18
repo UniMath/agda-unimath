@@ -198,14 +198,14 @@ functor-free-dependent-loop l {P} {Q} f =
       ( naturality-tr-fiberwise-transformation f (loop-free-loop l) p₀) ∙
       ( ap (f (base-free-loop l)) α))
 
-commuting-square-functor-free-dependent-loop :
+coherence-square-maps-comp-horizontalfunctor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} {P : X → UU l2} {Q : X → UU l3}
   ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y)
   ( h : (x : X) → P x) →
   Id ( ( naturality-tr-fiberwise-transformation f α (h x)) ∙
        ( ap (f y) (apd h α)))
      ( apd (map-Π f h) α)
-commuting-square-functor-free-dependent-loop f refl h = refl
+coherence-square-maps-comp-horizontalfunctor-free-dependent-loop f refl h = refl
   
 square-functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
@@ -218,7 +218,7 @@ square-functor-free-dependent-loop (pair x l) {P} {Q} f h =
       ( ev-free-loop-Π (pair x l) P h))
     ( ev-free-loop-Π (pair x l) Q (map-Π f h))
     ( pair refl
-      ( right-unit ∙ (commuting-square-functor-free-dependent-loop f l h)))
+      ( right-unit ∙ (coherence-square-maps-comp-horizontalfunctor-free-dependent-loop f l h)))
 
 abstract
   is-equiv-functor-free-dependent-loop-is-fiberwise-equiv :

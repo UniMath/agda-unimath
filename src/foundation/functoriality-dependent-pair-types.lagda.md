@@ -39,17 +39,17 @@ module _
     map-Σ _ (horizontal-map-cone f g c) (λ x → (pr1 (pr2 (c' x))))
   pr2 (pr2 tot-cone-cone-family) =
     htpy-map-Σ PX
-      ( commuting-square-cone f g c)
+      ( coherence-square-cone f g c)
       ( λ z →
         ( f' (vertical-map-cone f g c z)) ∘
         ( vertical-map-cone
-          ( ( tr PX (commuting-square-cone f g c z)) ∘
+          ( ( tr PX (coherence-square-cone f g c z)) ∘
             ( f' (vertical-map-cone f g c z)))
           ( g' (horizontal-map-cone f g c z))
           ( c' z)))
       ( λ z →
-        commuting-square-cone
-          ( ( tr PX (commuting-square-cone f g c z)) ∘
+        coherence-square-cone
+          ( ( tr PX (coherence-square-cone f g c z)) ∘
             ( f' (vertical-map-cone f g c z)))
           ( g' (horizontal-map-cone f g c z))
           ( c' z))

@@ -46,15 +46,15 @@ module _
   map-iso-Abstract-Group-Action f =
     map-hom-Abstract-Group-Action G X Y (hom-iso-Abstract-Group-Action f)
 
-  commuting-square-iso-Abstract-Group-Action :
+  coherence-square-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) (g : type-Group G) →
-    commuting-square
+    coherence-square-maps
       ( map-iso-Abstract-Group-Action f)
       ( mul-Abstract-Group-Action G X g)
       ( mul-Abstract-Group-Action G Y g)
       ( map-iso-Abstract-Group-Action f)
-  commuting-square-iso-Abstract-Group-Action f =
-    commuting-square-hom-Abstract-Group-Action G X Y
+  coherence-square-iso-Abstract-Group-Action f =
+    coherence-square-hom-Abstract-Group-Action G X Y
       ( hom-iso-Abstract-Group-Action f)
 
   hom-inv-iso-Abstract-Group-Action :
@@ -110,6 +110,6 @@ module _
         ( id-hom-Abstract-Group-Action G X)
         ( isretr-hom-inv-iso-Abstract-Group-Action f))
   pr2 (equiv-iso-Abstract-Group-Action f) =
-    commuting-square-iso-Abstract-Group-Action f
+    coherence-square-iso-Abstract-Group-Action f
 ```
 

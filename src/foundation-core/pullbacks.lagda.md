@@ -80,7 +80,7 @@ module _
   gap : cone f g C → C → canonical-pullback f g
   pr1 (gap c z) = vertical-map-cone f g c z
   pr1 (pr2 (gap c z)) = horizontal-map-cone f g c z
-  pr2 (pr2 (gap c z)) = commuting-square-cone f g c z
+  pr2 (pr2 (gap c z)) = coherence-square-cone f g c z
 ```
 
 ### The `is-pullback` property
@@ -373,7 +373,7 @@ fold-cone :
 pr1 (pr1 (fold-cone f g c) z) = vertical-map-cone f g c z
 pr2 (pr1 (fold-cone f g c) z) = horizontal-map-cone f g c z
 pr1 (pr2 (fold-cone f g c)) = g ∘ horizontal-map-cone f g c
-pr2 (pr2 (fold-cone f g c)) z = eq-pair (commuting-square-cone f g c z) refl
+pr2 (pr2 (fold-cone f g c)) z = eq-pair (coherence-square-cone f g c z) refl
 
 map-fold-cone :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
@@ -733,7 +733,7 @@ module _
       ( eq-pair-Σ refl
         ( inv
           ( ( ap inv right-unit) ∙
-            ( inv-inv (commuting-square-cone f g c x)))))
+            ( inv-inv (coherence-square-cone f g c x)))))
 
   abstract
     is-fiberwise-equiv-map-fib-cone-is-pullback :

@@ -354,7 +354,7 @@ module _
 
   square-compute-total-walk-of-length-hom-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
-    commuting-square
+    coherence-square-maps
       ( tot (λ n → walk-of-length-hom-Directed-Graph n {x} {y}))
       ( map-compute-total-walk-of-length-Directed-Graph G x y)
       ( map-compute-total-walk-of-length-Directed-Graph H
@@ -415,7 +415,7 @@ module _
 
   square-compute-total-walk-of-length-equiv-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
-    commuting-square
+    coherence-square-maps
       ( tot
         ( λ n →
           map-equiv
