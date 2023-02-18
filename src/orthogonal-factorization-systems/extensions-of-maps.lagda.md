@@ -355,4 +355,4 @@ is-extension-along-self _ = refl-htpy
 
 ## See also
 
-- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.html) for the dual notion.
+- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.md) for the dual notion.

@@ -61,4 +61,4 @@ is-projective l2 l3 k X =
 
 ## See also
 
-- The natural map `(X → A)/~ → (X → A/R)` was studied in [foundation.exponents-set-quotients](foundation.exponents-set-quotients.html)
+- The natural map `(X → A)/~ → (X → A/R)` was studied in [foundation.exponents-set-quotients](foundation.exponents-set-quotients.md)

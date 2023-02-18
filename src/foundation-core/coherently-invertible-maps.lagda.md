@@ -134,8 +134,8 @@ module _
 ## See also
 
 - For the notion of biinvertible maps see
-  [`foundation.equivalences`](foundation.equivalences.html).
+  [`foundation.equivalences`](foundation.equivalences.md).
 - For the notion of maps with contractible fibers see
-  [`foundation.contractible-maps`](foundation.contractible-maps.html).
+  [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
-  [`foundation.path-split-maps`](foundation.path-split-maps.html).
+  [`foundation.path-split-maps`](foundation.path-split-maps.md).
