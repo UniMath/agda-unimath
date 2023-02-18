@@ -15,11 +15,13 @@ open import foundation-core.universe-levels
 A square of identifications
 
 ```md
-  x ------ y2
-  |         |
-  |         |
-  |         |
-  y1 ------ z
+          top
+      x ------- y
+      |         |
+ left |         | right
+      |         |
+      z ------- w
+         bottom
 ```
 
 is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`.
