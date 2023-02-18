@@ -43,9 +43,10 @@ module _
 
 ## Operations
 
-### Composing coherence squares of identifications
+### Composing squares of identifications
 
-We can compose coherence squares that have an edge in common. We call this _pasting_ of squares.
+We can compose coherence squares that have an edge in common.
+This is also called _pasting_ of squares.
 
 ```agda
 module _
@@ -87,10 +88,10 @@ module _
       assoc p-top p-right q-right
 ```
 
-### Pasting of identifications along edges in coherence squares of identifications
+### Pasting of identifications along edges of squares of identifications
 
 Given a coherence square with an edge `p` and a new identification `s : p ＝ p'` then we may paste that identification onto
-the square to get a coherence having `p'` as an edge instead of `p`.
+the square to get a coherence square having `p'` as an edge instead of `p`.
 
 ```agda
 module _
@@ -123,7 +124,7 @@ module _
   coherence-square-identifications-right-paste refl sq = sq
 ```
 
-### Whiskering coherence squares of identifications
+### Whiskering squares of identifications
 
 Given an identification at one the vertices of a coherence square,
 then we may whisker the square by that identification.
