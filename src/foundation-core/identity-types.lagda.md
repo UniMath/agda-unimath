@@ -206,30 +206,6 @@ con-inv :
 con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
 
-### Commuting squares of identifications
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y1 y2 z : A}
-  where
-  
-  square :
-    (p-left : x ＝ y1) (p-bottom : y1 ＝ z)
-    (p-top : x ＝ y2) (p-right : y2 ＝ z) → UU l
-  square p-left p-bottom p-top p-right =
-    (p-left ∙ p-bottom) ＝ (p-top ∙ p-right)
-
-  sq-left-whisk :
-    {p1 p1' : x ＝ y1} (s : p1 ＝ p1') {q1 : y1 ＝ z} {p2 : x ＝ y2}
-    {q2 : y2 ＝ z} → square p1 q1 p2 q2 → square p1' q1 p2 q2
-  sq-left-whisk refl sq = sq
-
-  sq-top-whisk :
-    (p1 : x ＝ y1) (q1 : y1 ＝ z) (p2 : x ＝ y2) {p2' : x ＝ y2} (s : p2 ＝ p2')
-    (q2 : y2 ＝ z) → square p1 q1 p2 q2 → square p1 q1 p2' q2
-  sq-top-whisk p1 q1 p2 refl q2 sq = sq
-```
-
 ### Transport
 
 We introduce transport. The fact that `tr B p` is an equivalence is recorded in `equivalences`.
