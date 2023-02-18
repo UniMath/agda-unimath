@@ -1,4 +1,4 @@
-# Higher modalities
+# Uniquely eliminating modalities
 
 ```agda
 module orthogonal-factorization-systems.uniquely-eliminating-modalities where
@@ -18,11 +18,11 @@ open import orthogonal-factorization-systems.modal-operators
 
 ```agda
 module _
-  {l : Level} {○ : modal-operator l} (unit-○ : modal-unit ○)
+  {l1 l2 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
   where
 
-  is-uniquely-eliminating-modality : UU (lsuc l)
+  is-uniquely-eliminating-modality : UU (lsuc l1 ⊔ l2)
   is-uniquely-eliminating-modality =
-    (X : UU l) (P : ○ X → UU l) →
+    (X : UU l1) (P : ○ X → UU l1) →
     is-local-type (unit-○ {X}) ((○x : ○ X) → ○ (P ○x))
 ```

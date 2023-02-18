@@ -8,6 +8,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.propositions
 open import foundation.subuniverses
+open import foundation.locally-small-types
 open import foundation.universe-levels
 ```
 
@@ -48,4 +49,17 @@ module _
 
   modal-types-subuniverse : subuniverse l1 (l1 ⊔ l2)
   modal-types-subuniverse = is-modal-Prop
+```
+
+## Locally small modal operators
+
+The notion of _higher modalities_ only makes sense for locally small modal operators.
+
+```agda
+is-locally-small-modal-operator :
+  {l1 l2 : Level} (○ : modal-operator l1 l2) → UU (lsuc l1 ⊔ l2)
+is-locally-small-modal-operator {l1} ○ = (X : UU l1) → is-locally-small l1 (○ X)
+
+locally-small-modal-operator : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+locally-small-modal-operator l1 l2 = Σ (modal-operator l1 l2) is-locally-small-modal-operator 
 ```
