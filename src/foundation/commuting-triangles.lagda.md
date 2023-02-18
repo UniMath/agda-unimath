@@ -36,10 +36,10 @@ If the top map is an equivalence, then there is an equivalence between the coher
 module _ {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (left : A → X) (right : B → X) (e : A ≃ B) where
 
-  equiv-coherence-triangle-inv-top :
-    coherence-triangle left right (map-equiv e) ≃
-    coherence-triangle' right left (map-inv-equiv e)
-  equiv-coherence-triangle-inv-top =
+  equiv-commuting-triangle-inv-top :
+    commuting-triangle left right (map-equiv e) ≃
+    commuting-triangle' right left (map-inv-equiv e)
+  equiv-commuting-triangle-inv-top =
     equiv-Π
       (λ b → left (map-inv-equiv e b) ＝ right b)
       ( e)
