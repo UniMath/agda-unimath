@@ -1,4 +1,4 @@
-# Cumulative Hierarchy
+# Cumulative hierarchy
 
 ```agda
 module set-theory.cumulative-hierarchy where
@@ -115,6 +115,20 @@ module _
         → tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂)
     → {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) (IH : (a : A) → P (f a))
     → IP P σ ρ τ (set-pseudo-cumulative-hierarchy V f) ＝ ρ f IH
+```
+
+## Properties
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (cumulative-hierarchy : pseudo-cumulative-hierarchy l1)
+  (cumulative-hierarchy-has-induction-principle-cumulative-hierarchy :
+    induction-principle-cumulative-hierarchy l2 cumulative-hierarchy)
+  (cumulative-hierarchy-has-compute-induction-principle-cumulative-hierarchy :
+    compute-induction-principle-cumulative-hierarchy l2 cumulative-hierarchy
+      cumulative-hierarchy-has-induction-principle-cumulative-hierarchy)
+  where
+
 ```
 
 ## References
