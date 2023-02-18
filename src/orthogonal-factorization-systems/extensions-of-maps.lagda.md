@@ -100,7 +100,7 @@ module _
   {i : A → B} {j : B → C}
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
-  
+
   is-extension-vertical-comp :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
   is-extension-vertical-comp H G x = G x ∙ H (i x)
@@ -123,7 +123,7 @@ module _
   {f : A → B} {g : A → C} {h : (x : A) → P (g x)}
   {i : B → C} {j : (z : C) → P z}
   where
-  
+
   is-extension-horizontal-comp :
     (I : is-extension f g i) → is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
   is-extension-horizontal-comp I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)

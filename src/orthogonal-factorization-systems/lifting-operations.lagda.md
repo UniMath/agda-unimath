@@ -1,5 +1,4 @@
 # Lifting operations
----
 
 ```agda
 module orthogonal-factorization-systems.lifting-operations where

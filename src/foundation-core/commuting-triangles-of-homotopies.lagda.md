@@ -23,7 +23,8 @@ A triangle of homotopies of maps
      h
 ```
 
-is said to commute if there is a homotopy between the homotopy on the left and the composite homotopy.
+is said to commute if there is a homotopy between the homotopy
+on the left `f ~ h` and the composite homotopy `f ~ g ~ h`.
 
 ## Definition
 
@@ -84,8 +85,11 @@ module _
   where
 
   left-whisk-htpy-coherence-triangle :
-    {l3 : Level} {X : UU l3} (i : B → X) (T : htpy-coherence-triangle left right top) →
-    htpy-coherence-triangle {f = i ∘ f} {i ∘ g} {i ∘ h} (i ·l left) (i ·l right) (i ·l top)
+    {l3 : Level} {X : UU l3} (i : B → X)
+    (T : htpy-coherence-triangle left right top) →
+    htpy-coherence-triangle
+      {f = i ∘ f} {i ∘ g} {i ∘ h}
+      (i ·l left) (i ·l right) (i ·l top)
   left-whisk-htpy-coherence-triangle i =
     distributivity-left-whisk i left right top
 ```
@@ -113,7 +117,10 @@ module _
   where
 
   right-whisk-htpy-coherence-triangle :
-    {l3 : Level} {X : UU l3} (T : htpy-coherence-triangle left right top) (i : X → A) →
-    htpy-coherence-triangle {f = f ∘ i} {g ∘ i} {h ∘ i} (left ·r i) (right ·r i) (top ·r i)
+    {l3 : Level} {X : UU l3}
+    (T : htpy-coherence-triangle left right top) (i : X → A) →
+    htpy-coherence-triangle
+      {f = f ∘ i} {g ∘ i} {h ∘ i}
+      (left ·r i) (right ·r i) (top ·r i)
   right-whisk-htpy-coherence-triangle T i = T ∘ i
 ```
