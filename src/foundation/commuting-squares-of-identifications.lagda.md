@@ -22,20 +22,21 @@ A square of identifications
   y1 ------ z
 ```
 
-is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`. Such an identification may be called a _coherence_ or _filler_ of the square.
+is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`.
+Such an identification may be called a _coherence_ or _filler_ of the square.
 
 ## Definition
 
 ```agda
 module _
-  {l : Level} {A : UU l} {x y1 y2 z : A}
+  {l : Level} {A : UU l} {x y z w : A}
   where
 
   coherence-square :
-    (p-left : x ＝ y1) (p-bottom : y1 ＝ z)
-    (p-top : x ＝ y2) (p-right : y2 ＝ z) → UU l
-  coherence-square p-left p-bottom p-top p-right =
-    (p-left ∙ p-bottom) ＝ (p-top ∙ p-right)
+    (left : x ＝ z) (bottom : z ＝ w)
+    (top : x ＝ y) (right : y ＝ w) → UU l
+  coherence-square left bottom top right =
+    (left ∙ bottom) ＝ (top ∙ right)
 ```
 
 ## Operations
