@@ -23,7 +23,7 @@ A square of identifications
 ```
 
 is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`.
-Such an identification may be called a _coherence_ or _filler_ of the square.
+Such an identification may be called a _coherence_ of the square.
 
 ## Definition
 
