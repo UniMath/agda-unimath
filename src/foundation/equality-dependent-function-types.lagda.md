@@ -68,11 +68,11 @@ module _
 ## See also
 
 - Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.html).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.md).
 - Equality proofs in cartesian product types are characterized in
-  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.html).
+  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - Equality proofs in dependent pair types are characterized in
-  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 
 - Function extensionality is postulated in
-  [`foundation.function-extensionality`](foundation.function-extensionality.html).
+  [`foundation.function-extensionality`](foundation.function-extensionality.md).
