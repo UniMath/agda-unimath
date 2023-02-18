@@ -54,16 +54,11 @@ module _
   (left : f ~ h) (right : g ~ h) (top : f ~ g)
   where
 
-  distributivity-left-whisk' :
-    htpy-coherence-triangle' left right top →
-    (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
-  distributivity-left-whisk' T x =
-    ap-concat' i (top x) (right x) (left x) (T x)
-
   distributivity-left-whisk :
     htpy-coherence-triangle left right top →
     (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
-  distributivity-left-whisk = distributivity-left-whisk' ∘ inv-htpy
+  distributivity-left-whisk T x =
+    ap-concat-eq i (top x) (right x) (left x) (T x)
 ```
 
 ### Left whiskering triangles of homotopies
@@ -72,7 +67,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   {f g h : (x : A) → B x}
-  {left : f ~ h} {right : g ~ h} {top : f ~ g}
+  {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
   left-whisk-htpy-htpy-coherence-triangle :
@@ -85,7 +80,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   {f g h : A → B}
-  {left : f ~ h} {right : g ~ h} {top : f ~ g}
+  {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
   left-whisk-htpy-coherence-triangle :
@@ -101,7 +96,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   {f g h : (x : A) → B x}
-  {left : f ~ h} {right : g ~ h} {top : f ~ g}
+  {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
   right-whisk-htpy-htpy-coherence-triangle :
@@ -114,7 +109,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   {f g h : A → B}
-  {left : f ~ h} {right : g ~ h} {top : f ~ g}
+  {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
   right-whisk-htpy-coherence-triangle :
