@@ -4,7 +4,7 @@
 module orthogonal-factorization-systems.lifting-squares where
 
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.contractible-types

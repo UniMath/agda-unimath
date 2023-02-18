@@ -1,9 +1,9 @@
-# Commuting 3-simplices
+# Commuting 3-simplices of maps
 
 ```agda
 {-# OPTIONS --safe #-}
 
-module foundation-core.commuting-3-simplices where
+module foundation-core.commuting-3-simplices-of-maps where
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
