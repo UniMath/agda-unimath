@@ -34,7 +34,7 @@ open import foundation.commuting-3-simplices public
 open import foundation.commuting-cubes public
 open import foundation.commuting-squares-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
-open import foundation.commuting-triangles public
+open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.conjunction public

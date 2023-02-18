@@ -1,9 +1,9 @@
-# Commuting triangles
+# Commuting triangles of maps
 
 ```agda
-module foundation.commuting-triangles where
+module foundation.commuting-triangles-of-maps where
 
-open import foundation-core.commuting-triangles public
+open import foundation-core.commuting-triangles-of-maps public
 
 open import foundation-core.equivalences
 open import foundation-core.universe-levels
