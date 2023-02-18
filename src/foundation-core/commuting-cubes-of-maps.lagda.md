@@ -34,12 +34,12 @@ We specify the type of the homotopy witnessing that a cube commutes. Imagine tha
             *
 ```
 
-with all maps pointing in the downwards direction. Presented in this way, a cube of maps has a top face, a back-left face, a back-right face, a front-left face, a front-right face, and a bottom face, all of which are homotopies. An element of type `commuting-cube` is a homotopy filling the cube.
+with all maps pointing in the downwards direction. Presented in this way, a cube of maps has a top face, a back-left face, a back-right face, a front-left face, a front-right face, and a bottom face, all of which are homotopies. An element of type `coherence-cube-maps` is a homotopy filling the cube.
 
 ## Definition
 
 ```agda
-commuting-cube :
+coherence-cube-maps :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
@@ -53,7 +53,7 @@ commuting-cube :
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
   UU _
-commuting-cube
+coherence-cube-maps
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =
   (((h ·l back-left) ∙h (front-left ·r f')) ∙h (hD ·l top)) ~
@@ -81,20 +81,20 @@ module _
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g))
   (c :
-    commuting-cube
+    coherence-cube-maps
       f g h k f' g' h' k' hA hB hC hD
       top back-left back-right front-left front-right bottom)
   where
 
-  commuting-cube-rotate-120 :
-    commuting-cube hC k' k hD hA f' f hB g' g h' h
+  coherence-cube-maps-rotate-120 :
+    coherence-cube-maps hC k' k hD hA f' f hB g' g h' h
       ( back-left)
       ( inv-htpy back-right)
       ( inv-htpy top)
       ( inv-htpy bottom)
       ( inv-htpy front-left)
       ( front-right)
-  commuting-cube-rotate-120 a' =
+  coherence-cube-maps-rotate-120 a' =
     ( ap (λ t → t ∙ (ap h (back-left a')))
       ( ap (λ t' → t' ∙ inv (bottom (hA a')))
         ( ap-inv k (back-right a')))) ∙
@@ -111,15 +111,15 @@ module _
           ( ap (λ t' → t' ∙ inv (front-left (f' a')))
             ( ap-inv hD (top a'))))))
 
-  commuting-cube-rotate-240 :
-    commuting-cube h' hB hD h g' hA hC g f' k' f k
+  coherence-cube-maps-rotate-240 :
+    coherence-cube-maps h' hB hD h g' hA hC g f' k' f k
       ( inv-htpy back-right)
       ( top)
       ( inv-htpy back-left)
       ( inv-htpy front-right)
       ( bottom)
       ( inv-htpy front-left)
-  commuting-cube-rotate-240 a' =
+  coherence-cube-maps-rotate-240 a' =
     ( ap (λ t → _ ∙ t) (ap-inv k (back-right a'))) ∙
     ( ( hexagon-rotate-240
         ( ap h (back-left a'))
@@ -134,15 +134,15 @@ module _
           ( λ t → inv (front-left (f' a')) ∙ t)
           ( ap (λ t' → t' ∙ _) (ap-inv h (back-left a'))))))
 
-  commuting-cube-mirror-A :
-    commuting-cube g f k h g' f' k' h' hA hC hB hD
+  coherence-cube-maps-mirror-A :
+    coherence-cube-maps g f k h g' f' k' h' hA hC hB hD
       ( inv-htpy top)
       ( back-right)
       ( back-left)
       ( front-right)
       ( front-left)
       ( inv-htpy bottom)
-  commuting-cube-mirror-A a' =
+  coherence-cube-maps-mirror-A a' =
     ( ap (λ t → _ ∙ t) (ap-inv hD (top a'))) ∙
     ( hexagon-mirror-A
       ( ap h (back-left a'))
@@ -153,15 +153,15 @@ module _
       ( front-right (g' a'))
       ( c a'))
 
-  commuting-cube-mirror-B :
-    commuting-cube hB h' h hD hA g' g hC f' f k' k
+  coherence-cube-maps-mirror-B :
+    coherence-cube-maps hB h' h hD hA g' g hC f' f k' k
       ( back-right)
       ( inv-htpy back-left)
       ( top)
       ( bottom)
       ( inv-htpy front-right)
       ( front-left)
-  commuting-cube-mirror-B a' =
+  coherence-cube-maps-mirror-B a' =
     ( ap (λ t → t ∙ (ap k (back-right a')))
       ( ap (λ t → t ∙ _) (ap-inv h (back-left a')))) ∙
     ( hexagon-mirror-B
@@ -173,15 +173,15 @@ module _
       ( front-right (g' a'))
       ( c a'))
 
-  commuting-cube-mirror-C :
-    commuting-cube k' hC hD k f' hA hB f g' h' g h
+  coherence-cube-maps-mirror-C :
+    coherence-cube-maps k' hC hD k f' hA hB f g' h' g h
       ( inv-htpy back-left)
       ( inv-htpy top)
       ( inv-htpy back-right)
       ( inv-htpy front-left)
       ( inv-htpy bottom)
       ( inv-htpy front-right)
-  commuting-cube-mirror-C a' =
+  coherence-cube-maps-mirror-C a' =
     ( ap
       ( λ t → (t ∙ inv (front-left (f' a'))) ∙ (ap h (inv (back-left a'))))
       ( ap-inv hD (top a'))) ∙
@@ -252,7 +252,7 @@ coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g))
-  (c : commuting-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
     top back-left back-right front-left front-right bottom) →
   coherence-htpy-parallel-cone
     ( bottom)
@@ -336,7 +336,7 @@ coherence-htpy-square-rectangle-top-fl-rectangle-br-bot-cube :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g))
-  (c : commuting-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
     top back-left back-right front-left front-right bottom) →
   coherence-htpy-square
     ( inv-htpy front-right)
