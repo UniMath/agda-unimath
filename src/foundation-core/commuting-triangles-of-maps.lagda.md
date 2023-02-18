@@ -31,11 +31,11 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   where
 
-  commuting-triangle :
+  coherence-triangle-maps :
     (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  commuting-triangle left right top = left ~ (right ∘ top)
+  coherence-triangle-maps left right top = left ~ (right ∘ top)
 
-  commuting-triangle' :
+  coherence-triangle-maps' :
     (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  commuting-triangle' left right top = (right ∘ top) ~ left
+  coherence-triangle-maps' left right top = (right ∘ top) ~ left
 ```

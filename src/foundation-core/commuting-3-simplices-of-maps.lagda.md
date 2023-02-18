@@ -31,10 +31,10 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (top : A → B) (left : A → X) (right : B → Y) (bottom : X → Y)
   (diagonal-up : X → B) (diagonal-down : A → Y)
-  (upper-left : commuting-triangle top diagonal-up left)
-  (lower-right : commuting-triangle bottom right diagonal-up)
-  (upper-right : commuting-triangle diagonal-down right top)
-  (lower-left : commuting-triangle diagonal-down bottom left)
+  (upper-left : coherence-triangle-maps top diagonal-up left)
+  (lower-right : coherence-triangle-maps bottom right diagonal-up)
+  (upper-right : coherence-triangle-maps diagonal-down right top)
+  (lower-left : coherence-triangle-maps diagonal-down bottom left)
   where
 
   commuting-3-simplex : UU (l1 ⊔ l4)
