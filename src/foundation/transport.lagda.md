@@ -18,6 +18,22 @@ open import foundation.universal-property-dependent-pair-types
 
 ## Properties
 
+
+### Transport
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2}
+  {x0 x1 : X} (p : x0 ＝ x1)
+  where
+
+  preserves-tr-id :
+    (p : x0 ＝ x1) → preserves-tr (λ x → id {A = A x}) p ~ refl-htpy
+  preserves-tr-id refl = refl-htpy
+```
+
+
+
 ### Transport in a family of cartesian products
 
 ```agda
