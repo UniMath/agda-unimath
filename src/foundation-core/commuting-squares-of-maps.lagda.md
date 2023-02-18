@@ -41,7 +41,7 @@ coherence-square-maps top left right bottom =
 ### Composing commuting squares horizontally and vertically
 
 ```agda
-coherence-square-maps-comp-horizontalcomp-horizontal :
+coherence-square-maps-comp-horizontal :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (top-left : A → B) (top-right : B → C)
@@ -51,7 +51,7 @@ coherence-square-maps-comp-horizontalcomp-horizontal :
   coherence-square-maps top-right mid right bottom-right →
   coherence-square-maps
     (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
-coherence-square-maps-comp-horizontalcomp-horizontal
+coherence-square-maps-comp-horizontal
   top-left top-right left mid right bottom-left bottom-right sq-left sq-right =
   (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
 

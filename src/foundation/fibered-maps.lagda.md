@@ -313,7 +313,7 @@ module _
     is-map-over f g k i → is-map-over g h l j →
     is-map-over f h (l ∘ k) (j ∘ i)
   is-map-over-comp-horizontal {k} {l} {i} {j} =
-    coherence-square-maps-comp-horizontalcomp-horizontal i j f g h k l
+    coherence-square-maps-comp-horizontal i j f g h k l
 
   map-over-comp-horizontal :
     {k : X → Y} {l : Y → Z} →

@@ -178,7 +178,7 @@ module _
   pr1 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
     (horizontal-map-cone j h c) ∘ p
   pr2 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
-    coherence-square-maps-comp-horizontalcomp-horizontal p
+    coherence-square-maps-comp-horizontal p
       ( horizontal-map-cone j h c)
       ( f)
       ( vertical-map-cone j h c)

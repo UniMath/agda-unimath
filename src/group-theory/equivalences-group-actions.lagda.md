@@ -194,7 +194,7 @@ module _
     equiv-Abstract-Group-Action G X Z
   pr1 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) = f ∘e e
   pr2 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) g =
-    coherence-square-maps-comp-horizontalcomp-horizontal
+    coherence-square-maps-comp-horizontal
       ( map-equiv e)
       ( map-equiv f)
       ( mul-Abstract-Group-Action G X g)
