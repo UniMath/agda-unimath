@@ -1,9 +1,9 @@
-#  Commuting cubes
+#  Commuting cubes of maps
 
 ```agda
-module foundation.commuting-cubes where
+module foundation.commuting-cubes-of-maps where
 
-open import foundation-core.commuting-cubes public
+open import foundation-core.commuting-cubes-of-maps public
 
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types

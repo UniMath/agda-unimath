@@ -18,7 +18,7 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 
-open import foundation.commuting-cubes
+open import foundation.commuting-cubes-of-maps
 open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
