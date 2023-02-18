@@ -1,7 +1,6 @@
 # Commuting squares of identifications
 
 ```agda
-
 {-# OPTIONS --safe #-}
 
 module foundation.commuting-squares-of-identifications where
@@ -10,14 +9,14 @@ open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
 
-## Idea :
+## Idea
 
 A square of identifications
 
 ```md
   x0 ------ y2
    |        |
-   |        | 
+   |        |
    |        |
   y1 ------ z
 ```
@@ -32,7 +31,7 @@ is said to _commute_ if there is a path `left ∙ bottom ＝ top ∙ right`. Suc
 module _
   {l : Level} {A : UU l} {x y1 y2 z : A}
   where
-  
+
   coherence-square :
     (p-left : x ＝ y1) (p-bottom : y1 ＝ z)
     (p-top : x ＝ y2) (p-right : y2 ＝ z) → UU l
@@ -42,7 +41,7 @@ module _
 
 ## Operations
 
-### Pasting commutative squares
+### Pasting commutative squares of identifications
 
 We can compose coherence squares that have an edge in common. We call this _pasting_ of squares.
 
