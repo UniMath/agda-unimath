@@ -1,4 +1,4 @@
-# Title: Homomorphisms Meet Semilattices 
+# Homomorphisms Meet Semilattices 
 
 ```agda
 

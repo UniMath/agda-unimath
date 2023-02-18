@@ -1,4 +1,4 @@
-# Title: Homomorphisms Frames 
+# Homomorphisms Frames 
 
 ```agda
 

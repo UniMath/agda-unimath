@@ -117,8 +117,8 @@ htpy-left-whisk h H x = ap h (H x)
 _·l_ = htpy-left-whisk
 
 htpy-right-whisk :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {g h : B → C} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  {g h : (y : B) → C y} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
 htpy-right-whisk H f x = H (f x)
 
 _·r_ = htpy-right-whisk

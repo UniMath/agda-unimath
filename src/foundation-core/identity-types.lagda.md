@@ -31,7 +31,7 @@ We include two notations for the identity type. First, we introduce the identity
 
 After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
 
-## Defnition
+## Definition
 
 ```agda
 data Id {i : Level} {A : UU i} (x : A) : A → UU i where
@@ -159,10 +159,25 @@ ap-refl :
   (ap f (refl {x = x})) ＝ refl
 ap-refl f x = refl
 
+inv-ap-refl-concat :
+  {i : Level} {A : UU i} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
+  (right-unit ∙ (r ∙ inv right-unit)) ＝ (ap (_∙ refl) r)
+inv-ap-refl-concat refl = right-inv right-unit
+
+ap-refl-concat : 
+  {i : Level} {A : UU i} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
+  (ap (_∙ refl) r) ＝ (right-unit ∙ (r ∙ inv right-unit)) 
+ap-refl-concat = inv ∘ inv-ap-refl-concat
+
 ap-concat :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
   (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
 ap-concat f refl q = refl
+
+ap-concat-eq :
+  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
+  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
+ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
 
 ap-inv :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
@@ -387,3 +402,4 @@ apd-const :
   (p : Id x y) → Id (apd f p) ((tr-const p (f x)) ∙ (ap f p))
 apd-const f refl = refl
 ```
+ 

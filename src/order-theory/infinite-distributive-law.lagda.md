@@ -1,4 +1,4 @@
-# Title: Infinite distributive law 
+# Infinite distributive law 
 
 ```agda
 

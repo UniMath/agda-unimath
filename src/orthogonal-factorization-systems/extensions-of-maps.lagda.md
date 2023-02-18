@@ -1,4 +1,4 @@
-#  Extensions of maps
+# Extensions of maps
 
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where
@@ -13,8 +13,13 @@ open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.small-types
+open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -57,11 +62,23 @@ module _
 
   total-extension : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-extension P = Σ ((x : A) → P (i x)) (extension P)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
+  {P : B → UU l3} {f : (x : A) → P (i x)}
+  where
+
+  map-extension : extension i P f → (y : B) → P y
+  map-extension = pr1
+
+  is-extension-map-extension :
+    (E : extension i P f) → is-extension i f (map-extension E)
+  is-extension-map-extension = pr2
 ```
 
 ## Operations
 
-### Vertical composition of extensions
+### Vertical composition of extensions of maps
 
 ```md
   A
@@ -83,13 +100,13 @@ module _
   {i : A → B} {j : B → C}
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
-  
-  _∘ext_ :
+
+  is-extension-vertical-comp :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
-  (H ∘ext G) x = G x ∙ H (i x)
+  is-extension-vertical-comp H G x = G x ∙ H (i x)
 ```
 
-### Horizontal composition of extensions
+### Horizontal composition of extensions of maps
 
 ```md
            A
@@ -101,15 +118,18 @@ module _
 ```
 
 ```agda
-_∙ext_ :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {P : C → UU l4}
   {f : A → B} {g : A → C} {h : (x : A) → P (g x)}
   {i : B → C} {j : (z : C) → P z}
-  (I : is-extension f g i) → is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
-_∙ext_ {P = P} {j = j} I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
+  where
+
+  is-extension-horizontal-comp :
+    (I : is-extension f g i) → is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
+  is-extension-horizontal-comp I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
-### Left whiskering of extensions
+### Left whiskering of extensions of maps
 
 ```md
   A
@@ -121,15 +141,18 @@ _∙ext_ {P = P} {j = j} I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
 ```agda
-_∙l-ext_ :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {P : C → UU l4}
   {i : A → B} {f : A → C} {g : B → C}
-  (h : (x : C) → P x) (F : is-extension i f g) →
-  (is-extension i (λ x → tr P (F x) (h (f x))) (h ∘ g))
-h ∙l-ext F = apd h ∘ F
+  where
+
+  is-extension-left-whisker :
+    (h : (x : C) → P x) (F : is-extension i f g) →
+    (is-extension i (λ x → tr P (F x) (h (f x))) (h ∘ g))
+  is-extension-left-whisker h F = apd h ∘ F
 ```
 
-### Right whiskering of extensions
+### Right whiskering of extensions of maps
 
 ```md
   X - h -> A
@@ -141,15 +164,67 @@ h ∙l-ext F = apd h ∘ F
 ```
 
 ```agda
-_∙r-ext_ :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : B → UU l3} {X : UU l4}
   {i : A → B} {f : (x : A) → P (i x)} {g : (y : B) → P y} 
-  (F : is-extension i f g) (h : X → A) →
-  (is-extension (i ∘ h) (f ∘ h) g)
-F ∙r-ext h = F ∘ h
+  where
+
+  is-extension-right-whisker :
+    (F : is-extension i f g) (h : X → A) →
+    (is-extension (i ∘ h) (f ∘ h) g)
+  is-extension-right-whisker F h = F ∘ h
 ```
 
 ## Properties
+
+### Identifications of extensions of maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  (P : B → UU l3)
+  (f : (x : A) → P (i x)) 
+  where
+
+  coherence-htpy-extension :
+    (e e' : extension i P f) → map-extension e ~ map-extension e' → UU (l1 ⊔ l3)
+  coherence-htpy-extension e e' K =
+    (is-extension-map-extension e ∙h (K ·r i)) ~ is-extension-map-extension e'
+  
+  htpy-extension : (e e' : extension i P f) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-extension e e' =
+    Σ ( map-extension e ~ map-extension e')
+      ( coherence-htpy-extension e e')
+  
+  refl-htpy-extension : (e : extension i P f) → htpy-extension e e
+  pr1 (refl-htpy-extension e) = refl-htpy
+  pr2 (refl-htpy-extension e) = right-unit-htpy
+
+  htpy-eq-extension : (e e' : extension i P f) → e ＝ e' → htpy-extension e e'
+  htpy-eq-extension e .e refl = refl-htpy-extension e
+
+  is-contr-total-htpy-extension : 
+    (e : extension i P f) → is-contr (Σ (extension i P f) (htpy-extension e))
+  is-contr-total-htpy-extension e =
+    is-contr-total-Eq-structure
+      (λ g G → coherence-htpy-extension e (g , G))
+      (is-contr-total-htpy (map-extension e))
+      (map-extension e , refl-htpy)
+      (is-contr-total-htpy (is-extension-map-extension e ∙h refl-htpy))
+
+  is-equiv-htpy-eq-extension :
+    (e e' : extension i P f) → is-equiv (htpy-eq-extension e e')
+  is-equiv-htpy-eq-extension e =
+    fundamental-theorem-id (is-contr-total-htpy-extension e) (htpy-eq-extension e)
+  
+  extensionality-extension :
+    (e e' : extension i P f) → (e ＝ e') ≃ (htpy-extension e e')
+  pr1 (extensionality-extension e e') = htpy-eq-extension e e'
+  pr2 (extensionality-extension e e') = is-equiv-htpy-eq-extension e e'
+
+  eq-htpy-extension : (e e' : extension i P f) → htpy-extension e e' → e ＝ e'
+  eq-htpy-extension e e' = map-inv-equiv (extensionality-extension e e')
+```
 
 ### The total type of extensions is equivalent to `(y : B) → P y`
 
@@ -167,6 +242,10 @@ module _
   compute-total-extension :
     (P : B → UU l3) → ((y : B) → P y) ≃ total-extension i P
   compute-total-extension P = inv-equiv (inv-compute-total-extension P)
+
+  is-small-total-extension : (P : B → UU l3) → is-small (l2 ⊔ l3) (total-extension i P)
+  pr1 (is-small-total-extension P) = (y : B) → P y
+  pr2 (is-small-total-extension P) = inv-compute-total-extension P
 ```
 
 ### If `P` is `k`-truncated then the type of extensions is `k`-truncated
@@ -199,6 +278,24 @@ module _
       ( (y : B) → P y)
       ( compute-total-extension i P)
       ( is-trunc-Π k is-trunc-P)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  where
+
+  is-contr-is-extension :
+    {P : B → UU l3} (f : (x : A) → P (i x)) →
+    ((x : A) → is-prop (P (i x))) →
+    (g : (x : B) → P x) → is-contr (is-extension i f g)
+  is-contr-is-extension f is-prop-P g =
+    is-contr-Π λ x → is-prop-P x (f x) (g (i x))
+
+  is-prop-is-extension :
+    {P : B → UU l3} (f : (x : A) → P (i x)) →
+    ((x : A) → is-set (P (i x))) →
+    (g : (x : B) → P x) → is-prop (is-extension i f g)
+  is-prop-is-extension f is-set-P g =
+    is-prop-Π λ x → is-set-P x (f x) (g (i x))
 ```
 
 ### Characterizing extensions in terms of the precomposition function
