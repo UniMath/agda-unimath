@@ -23,9 +23,7 @@ A square of identifications
 
 is said to _commute_ if there is a path `left ∙ bottom ＝ top ∙ right`. Such a path may be called a _filler_ of the square.
 
-## Definitions
-
-### Commuting squares of identifications
+## Definition
 
 ```agda
 module _
@@ -41,7 +39,7 @@ module _
 
 ## Operations
 
-### Pasting commutative squares of identifications
+### Pasting commuting squares of identifications
 
 We can compose coherence squares that have an edge in common. We call this _pasting_ of squares.
 
@@ -85,9 +83,9 @@ module _
       assoc p-top p-right q-right
 ```
 
-### Whiskering of commutative squares
+### Whiskering of commuting squares of identifications
 
-We can also _whisker_ a square: given a commutative square with, e.g., right edge `p-top` and an identification `p-top ＝ q-top`, we can derive a commutative square with top edge `q-top`. Note that whiskering of left and top edges is defined in `foundation-core.identity-types`.
+We can also _whisker_ a square: given a commutative square with, e.g., right edge `p-top` and an identification `p-top ＝ q-top`, we can derive a commutative square with top edge `q-top`.
 
 ```agda
 module _
