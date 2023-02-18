@@ -43,16 +43,16 @@ module _
   htpy-coherence-3-simplex : UU (l1 ⊔ l2)
   htpy-coherence-3-simplex =
     ( upper-right ∙h
-      left-whisk-htpy-htpy-coherence-triangle {right = diagonal-up} right upper-left) ~
+      left-whisk-htpy-htpy-coherence-triangle diagonal-up right upper-left) ~
     ( ( lower-left ∙h
-        right-whisk-htpy-htpy-coherence-triangle {right = right} lower-right left) ∙h
+        right-whisk-htpy-htpy-coherence-triangle right lower-right left) ∙h
       assoc-htpy left diagonal-up right)
 
   htpy-coherence-3-simplex' : UU (l1 ⊔ l2)
   htpy-coherence-3-simplex' =
     ( ( lower-left ∙h
-        right-whisk-htpy-htpy-coherence-triangle {right = right} lower-right left) ∙h
+        right-whisk-htpy-htpy-coherence-triangle right lower-right left) ∙h
       assoc-htpy left diagonal-up right) ~
     ( upper-right ∙h
-      left-whisk-htpy-htpy-coherence-triangle {right = diagonal-up} right upper-left)
+      left-whisk-htpy-htpy-coherence-triangle diagonal-up right upper-left)
 ```
