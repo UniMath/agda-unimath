@@ -18,7 +18,7 @@ open import foundation.homotopies
 ### Any coherence of commuting cubes induces a coherence of parallel cones
 
 ```agda
-coherence-htpy-parallel-cone-coherence-cube :
+coherence-htpy-parallel-cone-commuting-cube :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
@@ -31,7 +31,7 @@ coherence-htpy-parallel-cone-coherence-cube :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : commuting-cube f g h k f' g' h' k' hA hB hC hD
        top back-left back-right front-left front-right bottom) →
   coherence-htpy-parallel-cone
     ( front-left)
@@ -50,7 +50,7 @@ coherence-htpy-parallel-cone-coherence-cube :
           top back-left back-right front-left front-right bottom)))
     ( refl-htpy' f')
     ( back-right)
-coherence-htpy-parallel-cone-coherence-cube
+coherence-htpy-parallel-cone-commuting-cube
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom c =
   ( assoc-htpy
