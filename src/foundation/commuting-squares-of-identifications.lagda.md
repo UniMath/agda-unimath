@@ -14,14 +14,14 @@ open import foundation-core.universe-levels
 A square of identifications
 
 ```md
-  x0 ------ y2
-   |        |
-   |        |
-   |        |
+  x ------ y2
+  |         |
+  |         |
+  |         |
   y1 ------ z
 ```
 
-is said to _commute_ if there is a path `left ∙ bottom ＝ top ∙ right`. Such a path may be called a _filler_ of the square.
+is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`. Such an identification may be called a _filler_ of the square.
 
 ## Definition
 
@@ -83,36 +83,38 @@ module _
       assoc p-top p-right q-right
 ```
 
-### Whiskering of commuting squares of identifications
+### Pasting of identifications along edges in coherence squares
 
-We can also _whisker_ a square: given a commutative square with, e.g., right edge `p-top` and an identification `p-top ＝ q-top`, we can derive a commutative square with top edge `q-top`.
+Given a coherence square with an edge `p` and a new identification `s : p ＝ p'` then we may paste that identification onto
+the square to get a coherence having `p'` as an edge instead of `p`.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {x y1 y2 z : A}
+  {l : Level} {A : UU l} {x y z w : A}
+  (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w)
   where
 
-  coherence-square-left-whisk :
-    {p1 p1' : x ＝ y1} (s : p1 ＝ p1') {q1 : y1 ＝ z} {p2 : x ＝ y2}
-    {q2 : y2 ＝ z} → coherence-square p1 q1 p2 q2 → coherence-square p1' q1 p2 q2
-  coherence-square-left-whisk refl sq = sq
+  coherence-square-left-paste :
+    {left' : x ＝ z} (s : left ＝ left') →
+    coherence-square left bottom top right →
+    coherence-square left' bottom top right
+  coherence-square-left-paste refl sq = sq
 
-  coherence-square-top-whisk :
-    (p1 : x ＝ y1) (q1 : y1 ＝ z) (p2 : x ＝ y2) {p2' : x ＝ y2} (s : p2 ＝ p2')
-    (q2 : y2 ＝ z) → coherence-square p1 q1 p2 q2 → coherence-square p1 q1 p2' q2
-  coherence-square-top-whisk p1 q1 p2 refl q2 sq = sq
+  coherence-square-bottom-paste :
+    {bottom' : z ＝ w} (s : bottom ＝ bottom') →
+    coherence-square left bottom top right →
+    coherence-square left bottom' top right
+  coherence-square-bottom-paste refl sq = sq
 
-  coherence-square-right-whisk :
-    {p-left : x ＝ y1} {p-bottom : y1 ＝ z} {p-top : x ＝ y2}
-    {p-right q-right : y2 ＝ z} (s : p-right ＝ q-right) →
-    coherence-square p-left p-bottom p-top p-right →
-    coherence-square p-left p-bottom p-top q-right
-  coherence-square-right-whisk refl sq = sq
+  coherence-square-top-paste :
+    {top' : x ＝ y} (s : top ＝ top') →
+    coherence-square left bottom top right →
+    coherence-square left bottom top' right
+  coherence-square-top-paste refl sq = sq
 
-  coherence-square-bottom-whisk :
-    {p-left : x ＝ y1} {p-bottom q-bottom : y1 ＝ z} {p-top : x ＝ y2}
-    {p-right : y2 ＝ z} (s : p-bottom ＝ q-bottom) →
-    coherence-square p-left p-bottom p-top p-right →
-    coherence-square p-left q-bottom p-top p-right
-  coherence-square-bottom-whisk refl sq = sq
+  coherence-square-right-paste :
+    {right' : y ＝ w} (s : right ＝ right') →
+    coherence-square left bottom top right →
+    coherence-square left bottom top right'
+  coherence-square-right-paste refl sq = sq
 ```
