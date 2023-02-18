@@ -40,13 +40,13 @@ module _
        map-reflecting-map-Eq-Rel R f (h x))
   where
 
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient : is-emb h' →
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
     (y : A) (k k' k'' : Fin 2) → 
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)) ＝ k →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)) ＝ k' →
     map-equiv eA (map-reflecting-map-Eq-Rel R f (h y)) ＝ k'' →
     h' (map-reflecting-map-Eq-Rel R f y) ＝ map-reflecting-map-Eq-Rel R f (h y)
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inl (inr star)) k'' p q r =
     ( is-injective-map-equiv eA (q ∙ inv p)) ∙
       ( P ∙
@@ -58,7 +58,7 @@ module _
                 ( H' ( map-reflecting-map-Eq-Rel R f x)
                      ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inr star) (inl (inr star)) p q r =
     ex-falso
       ( neq-inl-inr
@@ -71,13 +71,13 @@ module _
                   ( is-effective-is-set-quotient R QR f Uf (h x) (h y))
                   ( inv P ∙ is-injective-map-equiv eA (p ∙ inv r)))))) ∙
             ( q))))
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inr star) (inr star) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inr star) (inl (inr star)) (inl (inr star)) p q r = 
     is-injective-map-equiv eA (q ∙ inv r)
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inr star) (inl (inr star)) (inr star) p q r =
     ex-falso
       ( neq-inr-inl
@@ -90,7 +90,7 @@ module _
                   ( is-effective-is-set-quotient R QR f Uf (h x) (h y))
                   ( inv P ∙ is-injective-map-equiv eA (p ∙ inv r)))))) ∙
             ( q))))
-  cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inr star) (inr star) k'' p q r =
     ( is-injective-map-equiv eA (q ∙ inv p)) ∙
       ( P ∙
@@ -103,14 +103,14 @@ module _
                      ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
 
-  coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient : is-emb h' →
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
     coherence-square-maps
       ( h)
       ( map-reflecting-map-Eq-Rel R f)
       ( map-reflecting-map-Eq-Rel R f)
       ( h')
-  coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y =
-    cases-coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient H' y
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y =
+    cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
       ( map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)))
       ( map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)))
       ( map-equiv eA (map-reflecting-map-Eq-Rel R f (h y)))
@@ -126,7 +126,7 @@ module _
       { x =
         pair
           ( pair h' Q)
-          ( coherence-square-maps-comp-horizontaleq-one-value-emb-is-set-quotient
+          ( cases-coherence-square-maps-eq-one-value-emb-is-set-quotient
             ( is-emb-is-equiv Q))}
       { y =
         center
