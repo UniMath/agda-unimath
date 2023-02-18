@@ -9,7 +9,6 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.subuniverses
 open import foundation.universe-levels
 
