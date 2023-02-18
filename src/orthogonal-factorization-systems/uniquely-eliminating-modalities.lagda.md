@@ -24,5 +24,5 @@ module _
   is-uniquely-eliminating-modality : UU (lsuc l1 ⊔ l2)
   is-uniquely-eliminating-modality =
     (X : UU l1) (P : ○ X → UU l1) →
-    is-local-type (unit-○ {X}) ((○x : ○ X) → ○ (P ○x))
+    is-local-type (unit-○ {X}) ((x' : ○ X) → ○ (P x'))
 ```
