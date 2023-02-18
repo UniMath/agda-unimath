@@ -214,7 +214,7 @@
   - [Commuting 3-simplices](foundation.commuting-3-simplices.md)
   - [Commuting cubes](foundation.commuting-cubes.md)
   - [Commuting squares](foundation.commuting-squares.md)
-  - [Commuting squares of identifications](foundation.commuting-squares-of-identifications) 
+  - [Commuting squares of identifications](foundation.commuting-squares-of-identifications.md) 
   - [Commuting triangles of homotopies](foundation.commuting-triangles-of-homotopies.md)
   - [Commuting triangles](foundation.commuting-triangles.md)
   - [Complements subtypes](foundation.complements-subtypes.md)
