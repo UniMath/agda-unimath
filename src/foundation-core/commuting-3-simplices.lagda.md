@@ -37,13 +37,13 @@ module _
   (lower-left : commuting-triangle diagonal-down bottom left)
   where
 
-  coherence-3-simplex : UU (l1 ⊔ l4)
-  coherence-3-simplex =
+  commuting-3-simplex : UU (l1 ⊔ l4)
+  commuting-3-simplex =
     ( upper-right ∙h (right ·l upper-left)) ~
     ( lower-left ∙h (lower-right ·r left))
 
-  coherence-3-simplex' : UU (l1 ⊔ l4)
-  coherence-3-simplex' =
+  commuting-3-simplex' : UU (l1 ⊔ l4)
+  commuting-3-simplex' =
     ( lower-left ∙h (lower-right ·r left)) ~
     ( upper-right ∙h (right ·l upper-left))
 ```
