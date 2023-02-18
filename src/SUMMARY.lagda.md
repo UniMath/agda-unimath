@@ -759,6 +759,7 @@
   - [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
   - [Local types](orthogonal-factorization-systems.local-types.md)
   - [Mere lifting properties](orthogonal-factorization-systems.mere-lifting-properties.md)
+  - [Modal operators](orthogonal-factorization-systems.modal-operators.md)
   - [Orthogonal maps](orthogonal-factorization-systems.orthogonal-maps.md)
   - [Pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
 
