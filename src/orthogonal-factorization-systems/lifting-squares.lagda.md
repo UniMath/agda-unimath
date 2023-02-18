@@ -11,12 +11,14 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.homotopies
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.truncation-levels
 open import foundation.unit-type
@@ -143,8 +145,8 @@ module _
       ( g ·l is-extension-lifting-square l)
       ( is-lift-lifting-square l' ·r f)
       ( coherence-lifting-square l)
-      ( left-whisk-htpy-coherence-triangle {right = K ·r f} g E)
-      ( right-whisk-htpy-coherence-triangle {right = g ·l K} L f)
+      ( left-whisk-htpy-coherence-triangle (K ·r f) g E)
+      ( right-whisk-htpy-coherence-triangle (g ·l K) L f)
       ( coherence-lifting-square l')
 
   htpy-lifting-square : (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -155,6 +157,153 @@ module _
           ( λ E →
             Σ ( is-lift-lifting-square l' ~ (is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
+
+  refl-htpy-lifting-square : (l : lifting-square h f g i H) → htpy-lifting-square l l
+  pr1 (refl-htpy-lifting-square l) = refl-htpy
+  pr1 (pr2 (refl-htpy-lifting-square l)) = inv-htpy-right-unit-htpy
+  pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
+  pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) = homotopy-reasoning
+    ( ( inv-htpy-right-unit-htpy
+        ∙h
+        ( ( ap (_∙ refl) ∘ coherence-lifting-square l)
+          ∙h
+          assoc-htpy
+            ( H)
+            ( g ·l is-extension-lifting-square l)
+            ( refl-htpy))))
+    ~ 
+    ( ( ( inv-htpy-right-unit-htpy
+          ∙h
+          ( ap (_∙ refl) ∘ coherence-lifting-square l))
+        ∙h
+        assoc-htpy
+          ( H)
+          ( g ·l is-extension-lifting-square l)
+          ( refl-htpy)))
+      by
+        inv-htpy-assoc-htpy
+          ( inv-htpy-right-unit-htpy)
+          ( ap (_∙ refl) ∘ (coherence-lifting-square l))
+          ( assoc-htpy
+            ( H)
+            ( g ·l is-extension-lifting-square l)
+            ( refl-htpy))
+      ~
+      ( ( ( coherence-lifting-square l ∙h inv-htpy-right-unit-htpy)
+        ∙h
+        assoc-htpy
+          ( H)
+          ( g ·l is-extension-lifting-square l)
+          ( refl-htpy)))
+        by (λ x →
+          ap
+          ( _∙ assoc-htpy
+            ( H)
+            ( g ·l is-extension-lifting-square l)
+            ( refl-htpy)
+            ( x))
+          ( ( ap
+              ( right-whisk-htpy-coherence-triangle
+                ( refl-htpy)
+                ( inv-htpy-right-unit-htpy {H = is-lift-lifting-square l})
+                ( f)
+                ( x) ∙_)
+              (ap-refl-concat (coherence-lifting-square l x)))
+            ∙
+            ( ( inv-htpy-assoc-htpy
+                ( inv-htpy-right-unit-htpy)
+                ( right-unit-htpy)
+                ( coherence-lifting-square l ∙h inv-htpy-right-unit-htpy) x)
+              ∙
+              ( ap
+                ( _∙ ( coherence-lifting-square l ∙h inv-htpy-right-unit-htpy) x)
+                ( left-inv right-unit)))))
+      ~
+      {!  !}
+        by {!   !}
+      ~
+      {!  !}
+        by (λ x →
+          ap
+          ( _∙ assoc-htpy
+            ( H)
+            ( g ·l is-extension-lifting-square l)
+            ( refl-htpy)
+            ( x))
+          ( {!  !}))
+      ~
+      ( ( coherence-lifting-square l
+          ∙h
+          ( ( λ x →
+                ap
+                  ( H x ∙_)
+                  ( ap-concat-eq
+                    ( g)
+                    ( is-extension-lifting-square l x)
+                    ( refl)
+                    ( is-extension-lifting-square l x)
+                    ( inv right-unit)))
+            ∙h
+            ( inv-htpy-assoc-htpy
+                  ( H)
+                  ( g ·l is-extension-lifting-square l)
+                  ( refl-htpy))))
+        ∙h
+        assoc-htpy
+          ( H)
+          ( g ·l is-extension-lifting-square l)
+          ( refl-htpy))
+        by {!   !}
+  -- Remains to show
+  -- inv-htpy-right-unit-htpy
+  -- ~
+  -- right-whisk-htpy-htpy-coherence-triangle
+  --   ( refl-htpy)
+  --   ( left-whisk-htpy-coherence-triangle
+  --     ( refl-htpy)
+  --     ( g)
+  --     ( inv-htpy-right-unit-htpy))
+  --   ( H)
+  -- this is the same as
+  -- λ x →
+  --   ap
+  --   ( H x ∙_)
+  --   ( ap-concat-eq g (is-extension-lifting-square l x) refl (is-extension-lifting-square l x) (inv right-unit))
+  --   ∙ inv (assoc (H x) ( g ·l (is-extension-lifting-square l x)) refl)
+
+  -- so it would suffice to for instance show
+  -- assoc (H x) ( g ·l (is-extension-lifting-square l x)) refl
+  -- is refl
+  -- and
+  -- ap-concat-eq g (is-extension-lifting-square l x) refl (is-extension-lifting-square l x) (inv right-unit)
+  -- is inv-htpy-right-unit-htpy
+
+  -- Although this is not quite the case
+
+  htpy-eq-lifting-square : (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'
+  htpy-eq-lifting-square l .l refl = refl-htpy-lifting-square l
+
+  is-contr-total-htpy-lifting-square : 
+    (l : lifting-square h f g i H) → is-contr (Σ (lifting-square h f g i H) (htpy-lifting-square l))
+  is-contr-total-htpy-lifting-square l =
+    is-contr-total-Eq-structure
+      ({!   !})
+      (is-contr-total-htpy (map-diagonal-lifting-square l))
+      ({!   !})
+      ({!   !})
+
+  is-equiv-htpy-eq-lifting-square :
+    (l l' : lifting-square h f g i H) → is-equiv (htpy-eq-lifting-square l l')
+  is-equiv-htpy-eq-lifting-square l =
+    fundamental-theorem-id (is-contr-total-htpy-lifting-square l) (htpy-eq-lifting-square l)
+  
+  extensionality-lifting-square :
+    (l l' : lifting-square h f g i H) → (l ＝ l') ≃ (htpy-lifting-square l l')
+  pr1 (extensionality-lifting-square l l') = htpy-eq-lifting-square l l'
+  pr2 (extensionality-lifting-square l l') = is-equiv-htpy-eq-lifting-square l l'
+
+  eq-htpy-lifting-square : (l l' : lifting-square h f g i H) → htpy-lifting-square l l' → l ＝ l'
+  eq-htpy-lifting-square l l' = map-inv-equiv (extensionality-lifting-square l l')
 ```
 
 ### Diagonal maps give lifting squares
@@ -327,4 +476,3 @@ Lifts can be canonically interpreted as lifting squares where the initial vertex
 --   pr1 equiv-lift-lifting-square = map-lift-lifting-square ex-falso ex-falso g i ind-empty
 --   pr2 equiv-lift-lifting-square = is-equiv-map-lift-lifting-square
 ```
-    
