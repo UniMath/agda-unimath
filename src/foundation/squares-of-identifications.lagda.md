@@ -1,4 +1,4 @@
-# [Squares of identifications]
+# Squares of identifications
 
 ```agda
 
