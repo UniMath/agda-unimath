@@ -12,7 +12,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
-open import foundation.squares-of-identifications
+open import foundation.commuting-squares-of-identifications
 ```
 
 ## Idea

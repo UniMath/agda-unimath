@@ -1,10 +1,10 @@
-# Squares of identifications
+# Commuting squares of identifications
 
 ```agda
 
 {-# OPTIONS --safe #-}
 
-module foundation.squares-of-identifications where
+module foundation.commuting-squares-of-identifications where
 
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
