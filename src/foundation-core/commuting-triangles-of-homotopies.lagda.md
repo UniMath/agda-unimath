@@ -34,13 +34,13 @@ module _
   {f g h : (x : A) → B x}
   where
 
-  htpy-coherence-triangle :
+  coherence-triangle-homotopies :
     (left : f ~ h) (right : g ~ h) (top : f ~ g) → UU (l1 ⊔ l2)
-  htpy-coherence-triangle left right top = left ~ (top ∙h right)
+  coherence-triangle-homotopies left right top = left ~ (top ∙h right)
 
-  htpy-coherence-triangle' :
+  coherence-triangle-homotopies' :
     (left : f ~ h) (right : g ~ h) (top : f ~ g) → UU (l1 ⊔ l2)
-  htpy-coherence-triangle' left right top = (top ∙h right) ~ left
+  coherence-triangle-homotopies' left right top = (top ∙h right) ~ left
 ```
 
 ## Properties
@@ -56,7 +56,7 @@ module _
   where
 
   distributivity-left-whisk :
-    htpy-coherence-triangle left right top →
+    coherence-triangle-homotopies left right top →
     (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
   distributivity-left-whisk T x =
     ap-concat-eq i (top x) (right x) (left x) (T x)
@@ -71,11 +71,11 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  left-whisk-htpy-htpy-coherence-triangle :
+  left-whisk-htpy-coherence-triangle-homotopies :
     {i : (x : A) → B x}
-    (H : h ~ i) (T : htpy-coherence-triangle left right top) →
-    htpy-coherence-triangle {h = i} (left ∙h H) (right ∙h H) top
-  left-whisk-htpy-htpy-coherence-triangle H T =
+    (H : h ~ i) (T : coherence-triangle-homotopies left right top) →
+    coherence-triangle-homotopies {h = i} (left ∙h H) (right ∙h H) top
+  left-whisk-htpy-coherence-triangle-homotopies H T =
     (λ x → ap (_∙ H x) (T x)) ∙h assoc-htpy top right H
 
 module _
@@ -84,13 +84,13 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  left-whisk-htpy-coherence-triangle :
+  left-whisk-coherence-triangle-homotopies :
     {l3 : Level} {X : UU l3} (i : B → X)
-    (T : htpy-coherence-triangle left right top) →
-    htpy-coherence-triangle
+    (T : coherence-triangle-homotopies left right top) →
+    coherence-triangle-homotopies
       {f = i ∘ f} {i ∘ g} {i ∘ h}
       (i ·l left) (i ·l right) (i ·l top)
-  left-whisk-htpy-coherence-triangle i =
+  left-whisk-coherence-triangle-homotopies i =
     distributivity-left-whisk i left right top
 ```
 
@@ -103,11 +103,11 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  right-whisk-htpy-htpy-coherence-triangle :
+  right-whisk-htpy-coherence-triangle-homotopies :
     {i : (x : A) → B x}
-    (T : htpy-coherence-triangle left right top) (H : i ~ f) →
-    htpy-coherence-triangle {f = i} (H ∙h left) right (H ∙h top)
-  right-whisk-htpy-htpy-coherence-triangle T H =
+    (T : coherence-triangle-homotopies left right top) (H : i ~ f) →
+    coherence-triangle-homotopies {f = i} (H ∙h left) right (H ∙h top)
+  right-whisk-htpy-coherence-triangle-homotopies T H =
     (λ x → ap (H x ∙_) (T x)) ∙h (inv-htpy-assoc-htpy H top right)
 
 module _
@@ -116,11 +116,11 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  right-whisk-htpy-coherence-triangle :
+  right-whisk-coherence-triangle-homotopies :
     {l3 : Level} {X : UU l3}
-    (T : htpy-coherence-triangle left right top) (i : X → A) →
-    htpy-coherence-triangle
+    (T : coherence-triangle-homotopies left right top) (i : X → A) →
+    coherence-triangle-homotopies
       {f = f ∘ i} {g ∘ i} {h ∘ i}
       (left ·r i) (right ·r i) (top ·r i)
-  right-whisk-htpy-coherence-triangle T i = T ∘ i
+  right-whisk-coherence-triangle-homotopies T i = T ∘ i
 ```
