@@ -29,6 +29,7 @@ open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
+open import foundation.commuting-3-simplices public
 open import foundation.commuting-cubes public
 open import foundation.commuting-squares public
 open import foundation.commuting-triangles public

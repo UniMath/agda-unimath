@@ -3,8 +3,6 @@
 ```agda
 module foundation.axiom-of-choice where
 
-open import elementary-number-theory.natural-numbers
-
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -19,6 +17,7 @@ open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.sets
+open import foundation.split-surjective-maps
 open import foundation.surjective-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -65,7 +64,7 @@ is-set-projective-AC-0 ac X A B f h =
         ( λ g → ((map-surjection f) ∘ g) ＝ h)
         ( precomp h A)
         ( λ s H → eq-htpy (H ·r h))) ∘
-      ( map-compute-sec (map-surjection f)))
+      ( section-is-split-surjective (map-surjection f)))
     ( ac B (fib (map-surjection f)) (is-surjective-map-surjection f))
 
 AC-0-is-set-projective :
