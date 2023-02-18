@@ -5,7 +5,7 @@ module foundation.functoriality-dependent-function-types where
 
 open import foundation-core.functoriality-dependent-function-types public
 
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -276,7 +276,7 @@ pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
 coherence-square-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
-  coherence-square
+  coherence-square-maps
     ( ap (precomp-Π f C) {g} {h})
     ( htpy-eq)
     ( htpy-eq)

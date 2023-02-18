@@ -3,7 +3,7 @@
 ```agda
 module group-theory.homomorphisms-group-actions where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -40,7 +40,7 @@ module _
     Σ ( type-Set (pr1 X) → type-Set (pr1 Y))
       ( λ f →
         ( g : type-Group G) →
-        coherence-square
+        coherence-square-maps
           ( f)
           ( mul-Abstract-Group-Action G X g)
           ( mul-Abstract-Group-Action G Y g)
@@ -52,7 +52,7 @@ module _
 
   coherence-square-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action) (g : type-Group G) →
-    coherence-square
+    coherence-square-maps
       ( map-hom-Abstract-Group-Action f)
       ( mul-Abstract-Group-Action G X g)
       ( mul-Abstract-Group-Action G Y g)
@@ -86,7 +86,7 @@ module _
     type-hom-Abstract-Group-Action G X Z
   pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
   pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
-    coherence-square-comp-horizontal
+    coherence-square-maps-comp-horizontal
       ( f)
       ( g)
       ( mul-Abstract-Group-Action G X x)

@@ -3,7 +3,7 @@
 ```agda
 module structured-types.morphisms-types-equipped-with-endomorphisms where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -29,14 +29,14 @@ module _
   hom-Endo : UU (l1 ⊔ l2)
   hom-Endo =
     Σ ( type-Endo X → type-Endo Y)
-      ( λ f → coherence-square f (endomorphism-Endo X) (endomorphism-Endo Y) f)
+      ( λ f → coherence-square-maps f (endomorphism-Endo X) (endomorphism-Endo Y) f)
 
   map-hom-Endo : hom-Endo → type-Endo X → type-Endo Y
   map-hom-Endo = pr1
 
   coherence-square-hom-Endo :
     (f : hom-Endo) →
-    coherence-square
+    coherence-square-maps
       ( map-hom-Endo f)
       ( endomorphism-Endo X)
       ( endomorphism-Endo Y)
@@ -75,7 +75,7 @@ module _
       ( is-contr-total-htpy (map-hom-Endo X Y f))
       ( pair (map-hom-Endo X Y f) refl-htpy)
       ( is-contr-equiv
-        ( Σ ( coherence-square
+        ( Σ ( coherence-square-maps
               ( map-hom-Endo X Y f)
               ( endomorphism-Endo X)
               ( endomorphism-Endo Y)

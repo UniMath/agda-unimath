@@ -3,7 +3,7 @@
 ```agda
 module foundation.functoriality-set-quotients where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -144,7 +144,7 @@ module _
     (h : hom-Eq-Rel R S) →
     is-contr
       ( Σ ( type-Set QR → type-Set QS)
-          ( coherence-square
+          ( coherence-square-maps
             ( map-hom-Eq-Rel R S h)
             ( map-reflecting-map-Eq-Rel R f)
             ( map-reflecting-map-Eq-Rel S g)))
@@ -168,7 +168,7 @@ module _
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     (Ug : {l : Level} → is-set-quotient l S QS g) →
     (h : hom-Eq-Rel R S) →
-    coherence-square
+    coherence-square-maps
       ( map-hom-Eq-Rel R S h)
       ( map-reflecting-map-Eq-Rel R f)
       ( map-reflecting-map-Eq-Rel S g)
@@ -189,7 +189,7 @@ module _
     (h : hom-Eq-Rel R S) →
     is-contr
       ( Σ ( set-quotient R → set-quotient S)
-          ( coherence-square
+          ( coherence-square-maps
             ( map-hom-Eq-Rel R S h)
             ( quotient-map R)
             ( quotient-map S)))
@@ -219,7 +219,7 @@ module _
 
   coherence-square-map-set-quotient :
     (h : hom-Eq-Rel R S) →
-    coherence-square
+    coherence-square-maps
       ( map-hom-Eq-Rel R S h)
       ( quotient-map R)
       ( quotient-map S)
@@ -317,7 +317,7 @@ module _
     is-contr
       ( Σ ( type-Set QR ≃ type-Set QS)
           ( λ h' →
-            coherence-square
+            coherence-square-maps
               ( map-equiv-Eq-Rel R S h)
               ( map-reflecting-map-Eq-Rel R f)
               ( map-reflecting-map-Eq-Rel S g)
@@ -353,7 +353,7 @@ module _
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     (Ug : {l : Level} → is-set-quotient l S QS g) →
     (h : equiv-Eq-Rel R S) →
-    coherence-square (map-equiv-Eq-Rel R S h)
+    coherence-square-maps (map-equiv-Eq-Rel R S h)
       ( map-reflecting-map-Eq-Rel R f)
       ( map-reflecting-map-Eq-Rel S g)
       ( map-equiv (equiv-is-set-quotient Uf Ug h))
