@@ -6,6 +6,7 @@
 module foundation.commuting-squares-of-identifications where
 
 open import foundation-core.identity-types
+open import foundation-core.functions
 open import foundation-core.universe-levels
 ```
 
@@ -21,7 +22,7 @@ A square of identifications
   y1 ------ z
 ```
 
-is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`. Such an identification may be called a _filler_ of the square.
+is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`. Such an identification may be called a _coherence_ or _filler_ of the square.
 
 ## Definition
 
@@ -39,7 +40,7 @@ module _
 
 ## Operations
 
-### Pasting commuting squares of identifications
+### Composing coherence squares
 
 We can compose coherence squares that have an edge in common. We call this _pasting_ of squares.
 
@@ -117,4 +118,50 @@ module _
     coherence-square left bottom top right →
     coherence-square left bottom top right'
   coherence-square-right-paste refl sq = sq
+```
+
+### Whiskering coherence squares
+
+Given an identification at one the vertices of a coherence square,
+then we may whisker the square by that identification.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w)
+  where
+
+  coherence-square-top-left-whisk' :
+    {x' : A} (p : x' ＝ x) →
+    coherence-square left bottom top right →
+    coherence-square (p ∙ left) bottom (p ∙ top) right
+  coherence-square-top-left-whisk' refl sq = sq
+
+  coherence-square-top-left-whisk :
+    {x' : A} (p : x ＝ x') →
+    coherence-square left bottom top right →
+    coherence-square (inv p ∙ left) bottom (inv p ∙ top) right
+  coherence-square-top-left-whisk refl sq = sq
+
+  coherence-square-top-right-whisk :
+    {y' : A} (p : y ＝ y') →
+    coherence-square left bottom top right →
+    coherence-square left bottom (top ∙ p) (inv p ∙ right)
+  coherence-square-top-right-whisk refl =
+    coherence-square-top-paste left bottom top right (inv right-unit)
+
+  coherence-square-bottom-left-whisk :
+    {z' : A} (p : z ＝ z') →
+    coherence-square left bottom top right →
+    coherence-square (left ∙ p) (inv p ∙ bottom) top right
+  coherence-square-bottom-left-whisk refl =
+    coherence-square-left-paste left bottom top right (inv right-unit)
+
+  coherence-square-bottom-right-whisk :
+    {w' : A} (p : w ＝ w') →
+    coherence-square left bottom top right →
+    coherence-square left (bottom ∙ p) top (right ∙ p)
+  coherence-square-bottom-right-whisk refl =
+    coherence-square-bottom-paste left bottom top (right ∙ refl) (inv right-unit) ∘
+    coherence-square-right-paste left bottom top right (inv right-unit)
 ```
