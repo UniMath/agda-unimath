@@ -11,7 +11,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -140,14 +140,14 @@ module _
   map-equiv-Cyclic-Type e =
     map-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y) e
 
-  coherence-square-equiv-Cyclic-Type :
+  coherence-square-maps-comp-horizontalequiv-Cyclic-Type :
     (e : equiv-Cyclic-Type) →
-    coherence-square
+    coherence-square-maps
       ( map-equiv-Cyclic-Type e)
       ( endomorphism-Cyclic-Type k X)
       ( endomorphism-Cyclic-Type k Y)
       ( map-equiv-Cyclic-Type e)
-  coherence-square-equiv-Cyclic-Type e = pr2 e
+  coherence-square-maps-comp-horizontalequiv-Cyclic-Type e = pr2 e
 
 module _
   {l : Level} (k : ℕ) (X : Cyclic-Type l k)
@@ -230,8 +230,8 @@ module _
                   ( endomorphism-Cyclic-Type k Y
                     ( map-equiv-Cyclic-Type k X Y f x))
                   ( ( H (endomorphism-Cyclic-Type k X x)) ∙
-                    ( coherence-square-equiv-Cyclic-Type k X Y f x))
-                  ( ( coherence-square-equiv-Cyclic-Type k X Y e x) ∙
+                    ( coherence-square-maps-comp-horizontalequiv-Cyclic-Type k X Y f x))
+                  ( ( coherence-square-maps-comp-horizontalequiv-Cyclic-Type k X Y e x) ∙
                     ( ap (endomorphism-Cyclic-Type k Y) (H x)))))))
       ( is-contr-total-htpy-equiv-Endo
         ( endo-Cyclic-Type k X)
@@ -443,7 +443,7 @@ isretr-equiv-Eq-Cyclic-Type k e =
     ( compute-map-preserves-succ-map-ℤ-Mod
       ( k)
       ( map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k) e)
-      ( coherence-square-equiv-Cyclic-Type
+      ( coherence-square-maps-comp-horizontalequiv-Cyclic-Type
         ( k)
         ( ℤ-Mod-Cyclic-Type k)
         ( ℤ-Mod-Cyclic-Type k)
@@ -500,7 +500,7 @@ preserves-comp-Eq-equiv-Cyclic-Type k e f =
   inv
   ( compute-map-preserves-succ-map-ℤ-Mod k
     ( map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k) f)
-    ( coherence-square-equiv-Cyclic-Type k
+    ( coherence-square-maps-comp-horizontalequiv-Cyclic-Type k
       ( ℤ-Mod-Cyclic-Type k)
       ( ℤ-Mod-Cyclic-Type k)
       ( f))

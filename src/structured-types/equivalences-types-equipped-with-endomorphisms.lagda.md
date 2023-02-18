@@ -3,7 +3,7 @@
 ```agda
 module structured-types.equivalences-types-equipped-with-endomorphisms where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -35,7 +35,7 @@ module _
   equiv-Endo =
     Σ ( type-Endo X ≃ type-Endo Y)
       ( λ e →
-        coherence-square
+        coherence-square-maps
           ( map-equiv e)
           ( endomorphism-Endo X)
           ( endomorphism-Endo Y)
@@ -49,7 +49,7 @@ module _
 
   coherence-square-equiv-Endo :
     (e : equiv-Endo) →
-    coherence-square
+    coherence-square-maps
       ( map-equiv-Endo e)
       ( endomorphism-Endo X)
       ( endomorphism-Endo Y)
@@ -77,7 +77,7 @@ comp-equiv-Endo :
   equiv-Endo Y Z → equiv-Endo X Y → equiv-Endo X Z
 pr1 (comp-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
 pr2 (comp-equiv-Endo X Y Z f e) =
-  coherence-square-comp-horizontal
+  coherence-square-maps-comp-horizontal
     ( map-equiv-Endo X Y e)
     ( map-equiv-Endo Y Z f)
     ( endomorphism-Endo X)

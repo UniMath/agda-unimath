@@ -4,7 +4,7 @@
 module synthetic-homotopy-theory.26-id-pushout where
 
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -350,7 +350,7 @@ comp-hom-Fam-pushout {f = f} {g} P Q R k h =
     ( λ a → (pr1 k a) ∘ (pr1 h a))
     ( pair
       ( λ b → (pr1 (pr2 k) b) ∘ (pr1 (pr2 h) b))
-      ( λ s → coherence-square-comp-horizontal
+      ( λ s → coherence-square-maps-comp-horizontal
         ( pr1 h (f s))
         ( pr1 k (f s))
         ( map-equiv (pr2 (pr2 P) s))
