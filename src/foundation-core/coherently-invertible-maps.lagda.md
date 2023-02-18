@@ -110,7 +110,7 @@ module _
           ( ap f (pr2 (pr2 H) x))
           ( ( ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙
             ( pr1 (pr2 H) (f x)))
-          ( sq-top-whisk
+          ( coherence-square-top-whisk
             ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
             ( ap f (pr2 (pr2 H) x))
             ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
