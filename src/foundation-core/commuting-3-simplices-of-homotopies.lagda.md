@@ -40,16 +40,16 @@ module _
   (lower-left : coherence-triangle-homotopies diagonal-down bottom left)
   where
 
-  htpy-coherence-3-simplex : UU (l1 ⊔ l2)
-  htpy-coherence-3-simplex =
+  coherence-3-simplex-homotopies : UU (l1 ⊔ l2)
+  coherence-3-simplex-homotopies =
     ( upper-right ∙h
       left-whisk-htpy-coherence-triangle-homotopies diagonal-up right upper-left) ~
     ( ( lower-left ∙h
         right-whisk-htpy-coherence-triangle-homotopies right lower-right left) ∙h
       assoc-htpy left diagonal-up right)
 
-  htpy-coherence-3-simplex' : UU (l1 ⊔ l2)
-  htpy-coherence-3-simplex' =
+  coherence-3-simplex-homotopies' : UU (l1 ⊔ l2)
+  coherence-3-simplex-homotopies' =
     ( ( lower-left ∙h
         right-whisk-htpy-coherence-triangle-homotopies right lower-right left) ∙h
       assoc-htpy left diagonal-up right) ~

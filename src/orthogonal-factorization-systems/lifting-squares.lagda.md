@@ -137,7 +137,7 @@ module _
     (E : is-extension-lifting-square l' ~ (is-extension-lifting-square l ∙h (K ·r f)))
     (L : is-lift-lifting-square l' ~ (is-lift-lifting-square l ∙h (g ·l K))) → UU (l1 ⊔ l4)
   coherence-htpy-lifting-square l l' K E L =
-    htpy-coherence-3-simplex
+    coherence-3-simplex-homotopies
       ( is-lift-lifting-square l ·r f)
       ( H)
       ( g ·l (K ·r f))
