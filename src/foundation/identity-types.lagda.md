@@ -62,9 +62,8 @@ module _
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
 
-  equiv-concat-equiv : {x x' : A}
-                     → ((y : A) → (x ＝ y) ≃ (x' ＝ y))
-                     ≃ (x' ＝ x)
+  equiv-concat-equiv :
+    {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) ≃ (x' ＝ x)
   pr1 (equiv-concat-equiv {x}) e = map-equiv (e x) refl
   pr2 equiv-concat-equiv =
     is-equiv-has-inverse

@@ -172,7 +172,7 @@ ap :
 ap f refl = refl
 ```
 
-### Laws for `ap`
+### Laws for the functorial action on paths
 
 ```agda
 ap-id :
