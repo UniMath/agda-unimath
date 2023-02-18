@@ -31,6 +31,9 @@ is-inhabited-Prop X = trunc-Prop X
 is-inhabited : {l : Level} → UU l → UU l
 is-inhabited X = type-Prop (is-inhabited-Prop X)
 
+is-property-is-inhabited : {l : Level} → (X : UU l) → is-prop (is-inhabited X)
+is-property-is-inhabited X = is-prop-type-Prop (is-inhabited-Prop X)
+
 Inhabited-Type : (l : Level) → UU (lsuc l)
 Inhabited-Type l = Σ (UU l) is-inhabited
 
@@ -151,8 +154,8 @@ module _
 ## See also
 
 - The notion of *nonempty types* is treated in
-  [`foundation.empty-types`](foundation.empty-types.html).
+  [`foundation.empty-types`](foundation.empty-types.md).
   In particular, every inhabited type is nonempty.
 
 - For the notion of *pointed types*, see
-  [`structured-types.pointed-types`](structured-types.pointed-types.html).
+  [`structured-types.pointed-types`](structured-types.pointed-types.md).

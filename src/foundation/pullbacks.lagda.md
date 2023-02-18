@@ -18,7 +18,7 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 
-open import foundation.commuting-cubes
+open import foundation.commuting-cubes-of-maps
 open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -696,7 +696,7 @@ is-pullback-back-left-is-pullback-back-right-cube :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
     top back-left back-right front-left front-right bottom) →
   is-pullback h hD (pair hB (pair h' front-left)) →
   is-pullback k hD (pair hC (pair k' front-right)) →
@@ -750,7 +750,7 @@ is-pullback-back-right-is-pullback-back-left-cube :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
     top back-left back-right front-left front-right bottom) →
   is-pullback h hD (pair hB (pair h' front-left)) →
   is-pullback k hD (pair hC (pair k' front-right)) →
@@ -808,7 +808,7 @@ is-pullback-bottom-is-pullback-top-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
        top back-left back-right front-left front-right bottom) →
   is-equiv hA → is-equiv hB → is-equiv hC → is-equiv hD →
   is-pullback h' k' (pair f' (pair g' top)) →
@@ -846,7 +846,7 @@ is-pullback-bottom-is-pullback-top-cube-is-equiv
         ( refl-htpy' f')
         ( pair
           ( back-right)
-          ( coherence-htpy-parallel-cone-coherence-cube
+          ( coherence-htpy-parallel-cone-coherence-cube-maps
             f g h k f' g' h' k' hA hB hC hD
             top back-left back-right front-left front-right bottom c)))
       ( is-pullback-rectangle-is-pullback-left-square
@@ -874,7 +874,7 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
        top back-left back-right front-left front-right bottom) →
   is-equiv hA → is-equiv hB → is-equiv hC → is-equiv hD →
   is-pullback h k (pair f (pair g bottom)) →
@@ -934,7 +934,7 @@ is-pullback-front-left-is-pullback-back-right-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
        top back-left back-right front-left front-right bottom) →
   is-equiv f' → is-equiv f → is-equiv k' → is-equiv k →
   is-pullback g hC (pair hA (pair g' back-right)) →
@@ -946,7 +946,7 @@ is-pullback-front-left-is-pullback-back-right-cube-is-equiv
   is-pullback-bottom-is-pullback-top-cube-is-equiv
     hB h' h hD hA g' g hC f' f k' k
     back-right (inv-htpy back-left) top bottom (inv-htpy front-right) front-left
-    ( coherence-cube-mirror-B f g h k f' g' h' k' hA hB hC hD top
+    ( coherence-cube-maps-mirror-B f g h k f' g' h' k' hA hB hC hD top
       back-left back-right front-left front-right bottom c)
     is-equiv-f' is-equiv-f is-equiv-k' is-equiv-k is-pb-back-right
 
@@ -963,7 +963,7 @@ is-pullback-front-right-is-pullback-back-left-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
+  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
        top back-left back-right front-left front-right bottom) →
   is-equiv g' → is-equiv h' → is-equiv g → is-equiv h →
   is-pullback f hB (pair hA (pair f' back-left)) →
@@ -976,7 +976,7 @@ is-pullback-front-right-is-pullback-back-left-cube-is-equiv
     hC k' k hD hA f' f hB g' g h' h
     back-left (inv-htpy back-right) (inv-htpy top)
     ( inv-htpy bottom) (inv-htpy front-left) front-right
-    ( coherence-cube-rotate-120 f g h k f' g' h' k' hA hB hC hD
+    ( coherence-cube-maps-rotate-120 f g h k f' g' h' k' hA hB hC hD
       top back-left back-right front-left front-right bottom c)
     is-equiv-g' is-equiv-g is-equiv-h' is-equiv-h is-pb-back-left
 ```

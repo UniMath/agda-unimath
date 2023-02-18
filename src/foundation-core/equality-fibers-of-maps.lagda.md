@@ -17,7 +17,7 @@ open import foundation.identity-types
 
 ## Idea
 
-In the file [`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.html) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+In the file [`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.md) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
 
 ## Theorem
 
@@ -104,6 +104,6 @@ module _
 ## See also
 
 - Equality proofs in dependent pair types are characterized in
-  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 - Equality proofs in dependent function types are characterized in
-  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).

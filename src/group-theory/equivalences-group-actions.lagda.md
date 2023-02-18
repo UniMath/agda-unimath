@@ -3,7 +3,7 @@
 ```agda
 module group-theory.equivalences-group-actions where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -49,7 +49,7 @@ module _
     Σ ( type-Abstract-Group-Action G X ≃ type-Abstract-Group-Action G Y)
       ( λ e →
         ( g : type-Group G) →
-        coherence-square
+        coherence-square-maps
           ( map-equiv e)
           ( mul-Abstract-Group-Action G X g)
           ( mul-Abstract-Group-Action G Y g)
@@ -74,7 +74,7 @@ module _
 
   coherence-square-equiv-Abstract-Group-Action :
     (e : equiv-Abstract-Group-Action) (g : type-Group G) →
-    coherence-square
+    coherence-square-maps
       ( map-equiv-Abstract-Group-Action e)
       ( mul-Abstract-Group-Action G X g)
       ( mul-Abstract-Group-Action G Y g)
@@ -194,7 +194,7 @@ module _
     equiv-Abstract-Group-Action G X Z
   pr1 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) = f ∘e e
   pr2 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) g =
-    coherence-square-comp-horizontal
+    coherence-square-maps-comp-horizontal
       ( map-equiv e)
       ( map-equiv f)
       ( mul-Abstract-Group-Action G X g)

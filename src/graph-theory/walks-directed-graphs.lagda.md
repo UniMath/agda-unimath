@@ -6,7 +6,7 @@ module graph-theory.walks-directed-graphs where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -354,7 +354,7 @@ module _
 
   square-compute-total-walk-of-length-hom-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
-    coherence-square
+    coherence-square-maps
       ( tot (λ n → walk-of-length-hom-Directed-Graph n {x} {y}))
       ( map-compute-total-walk-of-length-Directed-Graph G x y)
       ( map-compute-total-walk-of-length-Directed-Graph H
@@ -415,7 +415,7 @@ module _
 
   square-compute-total-walk-of-length-equiv-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
-    coherence-square
+    coherence-square-maps
       ( tot
         ( λ n →
           map-equiv

@@ -7,7 +7,7 @@ open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -55,7 +55,7 @@ module _
         {X2 : obj-Large-Precat C l2} {Y1 : obj-Large-Precat D l3}
         {Y2 : obj-Large-Precat D l4} (f : type-hom-Large-Precat C X2 X1)
         (g : type-hom-Large-Precat D Y1 Y2) →
-        coherence-square
+        coherence-square-maps
           ( map-equiv (equiv-is-adjoint-pair-Large-Precat X1 Y1))
           ( λ h →
             comp-hom-Large-Precat C
@@ -99,7 +99,7 @@ module _
     {X2 : obj-Large-Precat C l2} {Y1 : obj-Large-Precat D l3}
     {Y2 : obj-Large-Precat D l4} (f : type-hom-Large-Precat C X2 X1)
     (g : type-hom-Large-Precat D Y1 Y2) →
-    coherence-square
+    coherence-square-maps
       ( map-inv-equiv-is-adjoint-pair-Large-Precat H X1 Y1)
       ( λ h →
         comp-hom-Large-Precat D
@@ -240,7 +240,7 @@ module _
     {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}
     {Y1 : obj-Large-Precat D l3} {Y2 : obj-Large-Precat D l4}
     (f : type-hom-Large-Precat C X2 X1) (g : type-hom-Large-Precat D Y1 Y2) →
-    coherence-square
+    coherence-square-maps
       ( map-equiv-is-adjoint-pair-Adjunction FG X1 Y1)
       ( λ h →
         comp-hom-Large-Precat C
@@ -276,7 +276,7 @@ module _
     {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}
     {Y1 : obj-Large-Precat D l3} {Y2 : obj-Large-Precat D l4}
     (f : type-hom-Large-Precat C X2 X1) (g : type-hom-Large-Precat D Y1 Y2) →
-    coherence-square
+    coherence-square-maps
       ( map-inv-equiv-is-adjoint-pair-Adjunction FG X1 Y1)
       ( λ h →
         comp-hom-Large-Precat D

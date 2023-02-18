@@ -1,4 +1,4 @@
-# Title: Homomorphisms Meet Sup Lattice 
+# Homomorphisms Meet Sup Lattice 
 
 ```agda
 

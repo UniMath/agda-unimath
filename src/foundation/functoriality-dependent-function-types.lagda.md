@@ -5,7 +5,7 @@ module foundation.functoriality-dependent-function-types where
 
 open import foundation-core.functoriality-dependent-function-types public
 
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -276,7 +276,7 @@ pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
 coherence-square-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
-  coherence-square
+  coherence-square-maps
     ( ap (precomp-Π f C) {g} {h})
     ( htpy-eq)
     ( htpy-eq)
@@ -305,13 +305,13 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
 ## See also
 
 - Arithmetical laws involving dependent function types are recorded in
-  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
-  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
 
 - Functorial properties of function types are recorded in
-  [`foundation.functoriality-function-types`](foundation.functoriality-function-types.html).
+  [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in
-  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.html).
+  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.md).
 - Functorial properties of cartesian product types are recorded in
-  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.md).

@@ -3,7 +3,7 @@
 ```agda
 module synthetic-homotopy-theory.26-descent where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.cones-pullbacks
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -662,7 +662,7 @@ precompose-total-lifts {A = A} P f =
 coherence-square-map-inv-distributive-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) (f : A → B) →
-  coherence-square
+  coherence-square-maps
     ( precompose-total-lifts P f)
     ( map-inv-distributive-Π-Σ {A = B} {B = λ x → X} {C = λ x y → P y})
     ( map-inv-distributive-Π-Σ)
