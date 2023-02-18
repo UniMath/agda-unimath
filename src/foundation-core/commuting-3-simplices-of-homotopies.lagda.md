@@ -34,25 +34,25 @@ module _
   {f g h i : (x : A) → B x}
   (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
   (diagonal-up : h ~ g) (diagonal-down : f ~ i)
-  (upper-left : htpy-coherence-triangle top diagonal-up left)
-  (lower-right : htpy-coherence-triangle bottom right diagonal-up)
-  (upper-right : htpy-coherence-triangle diagonal-down right top)
-  (lower-left : htpy-coherence-triangle diagonal-down bottom left)
+  (upper-left : coherence-triangle-homotopies top diagonal-up left)
+  (lower-right : coherence-triangle-homotopies bottom right diagonal-up)
+  (upper-right : coherence-triangle-homotopies diagonal-down right top)
+  (lower-left : coherence-triangle-homotopies diagonal-down bottom left)
   where
 
-  htpy-coherence-3-simplex : UU (l1 ⊔ l2)
-  htpy-coherence-3-simplex =
+  coherence-3-simplex-homotopies : UU (l1 ⊔ l2)
+  coherence-3-simplex-homotopies =
     ( upper-right ∙h
-      left-whisk-htpy-htpy-coherence-triangle diagonal-up right upper-left) ~
+      left-whisk-htpy-coherence-triangle-homotopies diagonal-up right upper-left) ~
     ( ( lower-left ∙h
-        right-whisk-htpy-htpy-coherence-triangle right lower-right left) ∙h
+        right-whisk-htpy-coherence-triangle-homotopies right lower-right left) ∙h
       assoc-htpy left diagonal-up right)
 
-  htpy-coherence-3-simplex' : UU (l1 ⊔ l2)
-  htpy-coherence-3-simplex' =
+  coherence-3-simplex-homotopies' : UU (l1 ⊔ l2)
+  coherence-3-simplex-homotopies' =
     ( ( lower-left ∙h
-        right-whisk-htpy-htpy-coherence-triangle right lower-right left) ∙h
+        right-whisk-htpy-coherence-triangle-homotopies right lower-right left) ∙h
       assoc-htpy left diagonal-up right) ~
     ( upper-right ∙h
-      left-whisk-htpy-htpy-coherence-triangle diagonal-up right upper-left)
+      left-whisk-htpy-coherence-triangle-homotopies diagonal-up right upper-left)
 ```

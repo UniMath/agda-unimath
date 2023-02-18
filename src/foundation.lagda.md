@@ -30,11 +30,11 @@ open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
 open import foundation.commuting-3-simplices-of-homotopies public
-open import foundation.commuting-3-simplices public
-open import foundation.commuting-cubes public
-open import foundation.commuting-squares public
+open import foundation.commuting-3-simplices-of-maps public
+open import foundation.commuting-cubes-of-maps public
+open import foundation.commuting-squares-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
-open import foundation.commuting-triangles public
+open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.conjunction public
@@ -192,7 +192,7 @@ open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
-open import foundation.squares-of-identifications public
+open import foundation.commuting-squares-of-identifications public
 open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure-identity-principle public

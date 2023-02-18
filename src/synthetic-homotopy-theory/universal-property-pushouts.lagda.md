@@ -100,7 +100,7 @@ pr1 (cone-pullback-property-pushout f g {X} c Y) =
 pr1 (pr2 (cone-pullback-property-pushout f g {X} c Y)) =
   precomp (vertical-map-cocone f g c) Y
 pr2 (pr2 (cone-pullback-property-pushout f g {X} c Y)) =
-  htpy-precomp (coherence-square-cocone f g c) Y
+  htpy-precomp (coherence-square-maps-comp-horizontalcocone f g c) Y
 
 pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
@@ -217,7 +217,7 @@ triangle-pullback-property-pushout-universal-property-pushout
   {S = S} {A = A} {B = B} f g c Y h =
     eq-pair-Σ refl
       ( eq-pair-Σ refl
-        ( inv (issec-eq-htpy (h ·l coherence-square-cocone f g c))))
+        ( inv (issec-eq-htpy (h ·l coherence-square-maps-comp-horizontalcocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2}

@@ -1,9 +1,9 @@
-# Commuting triangles
+# Commuting triangles of maps
 
 ```agda
 {-# OPTIONS --safe #-}
 
-module foundation-core.commuting-triangles where
+module foundation-core.commuting-triangles-of-maps where
 
 open import foundation-core.functions
 open import foundation-core.homotopies
@@ -31,11 +31,11 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   where
 
-  coherence-triangle :
+  coherence-triangle-maps :
     (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  coherence-triangle left right top = left ~ (right ∘ top)
+  coherence-triangle-maps left right top = left ~ (right ∘ top)
 
-  coherence-triangle' :
+  coherence-triangle-maps' :
     (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  coherence-triangle' left right top = (right ∘ top) ~ left
+  coherence-triangle-maps' left right top = (right ∘ top) ~ left
 ```

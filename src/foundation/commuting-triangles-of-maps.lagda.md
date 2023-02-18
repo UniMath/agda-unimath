@@ -1,9 +1,9 @@
-# Commuting triangles
+# Commuting triangles of maps
 
 ```agda
-module foundation.commuting-triangles where
+module foundation.commuting-triangles-of-maps where
 
-open import foundation-core.commuting-triangles public
+open import foundation-core.commuting-triangles-of-maps public
 
 open import foundation-core.equivalences
 open import foundation-core.universe-levels
@@ -36,10 +36,10 @@ If the top map is an equivalence, then there is an equivalence between the coher
 module _ {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (left : A → X) (right : B → X) (e : A ≃ B) where
 
-  equiv-coherence-triangle-inv-top :
-    coherence-triangle left right (map-equiv e) ≃
-    coherence-triangle' right left (map-inv-equiv e)
-  equiv-coherence-triangle-inv-top =
+  equiv-coherence-triangle-maps-inv-top :
+    coherence-triangle-maps left right (map-equiv e) ≃
+    coherence-triangle-maps' right left (map-inv-equiv e)
+  equiv-coherence-triangle-maps-inv-top =
     equiv-Π
       (λ b → left (map-inv-equiv e b) ＝ right b)
       ( e)

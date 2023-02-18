@@ -4,7 +4,7 @@
 module orthogonal-factorization-systems.lifting-squares where
 
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.contractible-types
@@ -67,7 +67,7 @@ commutativity proof.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square h f g i)
+  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square-maps h f g i)
   where
 
   is-lifting-square : (j : X → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -80,7 +80,7 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {h : A → B} {f : A → X} {g : B → Y} {i : X → Y} {H : coherence-square h f g i}
+  {h : A → B} {f : A → X} {g : B → Y} {i : X → Y} {H : coherence-square-maps h f g i}
   where
 
   map-diagonal-lifting-square : lifting-square h f g i H → (X → B)
@@ -128,7 +128,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square h f g i)
+  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square-maps h f g i)
   where
 
   coherence-htpy-lifting-square :
@@ -137,7 +137,7 @@ module _
     (E : is-extension-lifting-square l' ~ (is-extension-lifting-square l ∙h (K ·r f)))
     (L : is-lift-lifting-square l' ~ (is-lift-lifting-square l ∙h (g ·l K))) → UU (l1 ⊔ l4)
   coherence-htpy-lifting-square l l' K E L =
-    htpy-coherence-3-simplex
+    coherence-3-simplex-homotopies
       ( is-lift-lifting-square l ·r f)
       ( H)
       ( g ·l (K ·r f))
@@ -145,8 +145,8 @@ module _
       ( g ·l is-extension-lifting-square l)
       ( is-lift-lifting-square l' ·r f)
       ( coherence-lifting-square l)
-      ( left-whisk-htpy-coherence-triangle (K ·r f) g E)
-      ( right-whisk-htpy-coherence-triangle (g ·l K) L f)
+      ( left-whisk-coherence-triangle-homotopies (K ·r f) g E)
+      ( right-whisk-coherence-triangle-homotopies (g ·l K) L f)
       ( coherence-lifting-square l')
 
   htpy-lifting-square : (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
