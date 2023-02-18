@@ -321,17 +321,17 @@ module _
 
 
 - Functorial properties of coproducts are recorded in
-  [`foundation.functoriality-coproduct-types`](foundation.functoriality-coproduct-types.html).
+  [`foundation.functoriality-coproduct-types`](foundation.functoriality-coproduct-types.md).
 - Equality proofs in coproduct types are characterized in
-  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.html).
+  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.md).
 - The universal property of coproducts is treated in
-  [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.html).
+  [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.md).
 
 - Arithmetical laws involving dependent pair types are recorded in
-  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.html).
+  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.md).
 - Arithmetical laws involving cartesian-product types are recorded in
-  [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.html).
+  [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.md).
 - Arithmetical laws involving the unit type are recorded in
-  [`foundation.type-arithmetic-unit-type`](foundation.type-arithmetic-unit-type.html).
+  [`foundation.type-arithmetic-unit-type`](foundation.type-arithmetic-unit-type.md).
 - Arithmetical laws involving the empty type are recorded in
-  [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.html).
+  [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.md).

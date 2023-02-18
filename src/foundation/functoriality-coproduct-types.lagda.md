@@ -490,13 +490,13 @@ module _ {i j k l : Level}
 ## See also
 
 - Arithmetical laws involving coproduct types are recorded in
-  [`foundation.type-arithmetic-coproduct-types`](foundation.type-arithmetic-coproduct-types.html).
+  [`foundation.type-arithmetic-coproduct-types`](foundation.type-arithmetic-coproduct-types.md).
 - Equality proofs in coproduct types are characterized in
-  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.html).
+  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.md).
 - The universal property of coproducts is treated in
-  [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.html).
+  [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.md).
 
 - Functorial properties of cartesian product types are recorded in
-  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.md).
 - Functorial properties of dependent pair types are recorded in
-  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.html).
+  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.md).

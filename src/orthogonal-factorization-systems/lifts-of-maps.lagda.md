@@ -273,4 +273,4 @@ module _
 
 ## See also
 
-- [`orthogonal-factorization-systems.extensions-of-maps`](orthogonal-factorization-systems.extensions-of-maps.html) for the dual notion.
+- [`orthogonal-factorization-systems.extensions-of-maps`](orthogonal-factorization-systems.extensions-of-maps.md) for the dual notion.

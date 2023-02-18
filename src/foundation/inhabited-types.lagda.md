@@ -154,8 +154,8 @@ module _
 ## See also
 
 - The notion of *nonempty types* is treated in
-  [`foundation.empty-types`](foundation.empty-types.html).
+  [`foundation.empty-types`](foundation.empty-types.md).
   In particular, every inhabited type is nonempty.
 
 - For the notion of *pointed types*, see
-  [`structured-types.pointed-types`](structured-types.pointed-types.html).
+  [`structured-types.pointed-types`](structured-types.pointed-types.md).

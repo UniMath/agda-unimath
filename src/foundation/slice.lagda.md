@@ -357,8 +357,8 @@ module _
 ## See also
 
 - For the formally dual notion see
-  [`foundation.coslice`](foundation.coslice.html).
+  [`foundation.coslice`](foundation.coslice.md).
 - For slices in the context of category theory see
-  [`category-theory.slice-precategories`](category-theory.slice-precategories.html).
+  [`category-theory.slice-precategories`](category-theory.slice-precategories.md).
 - For fibered maps see
-  [`foundation.fibered-maps`](foundation.fibered-maps.html).
+  [`foundation.fibered-maps`](foundation.fibered-maps.md).
