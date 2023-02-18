@@ -4,7 +4,7 @@
 module foundation-core.cones-pullbacks where
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

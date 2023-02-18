@@ -3,7 +3,7 @@
 ```agda
 module foundation.fibered-maps where
 
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-types
 open import foundation-core.small-types

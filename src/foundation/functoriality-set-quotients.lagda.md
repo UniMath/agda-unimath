@@ -3,7 +3,7 @@
 ```agda
 module foundation.functoriality-set-quotients where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types

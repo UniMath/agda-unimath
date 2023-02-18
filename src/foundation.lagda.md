@@ -32,7 +32,7 @@ open import foundation.coherently-invertible-maps public
 open import foundation.commuting-3-simplices-of-homotopies public
 open import foundation.commuting-3-simplices public
 open import foundation.commuting-cubes public
-open import foundation.commuting-squares public
+open import foundation.commuting-squares-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles public
 open import foundation.complements public

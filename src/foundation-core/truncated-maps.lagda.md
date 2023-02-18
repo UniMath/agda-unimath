@@ -3,7 +3,7 @@
 ```agda
 module foundation-core.truncated-maps where
 
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-fibers-of-maps

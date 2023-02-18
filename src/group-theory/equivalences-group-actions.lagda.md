@@ -3,7 +3,7 @@
 ```agda
 module group-theory.equivalences-group-actions where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

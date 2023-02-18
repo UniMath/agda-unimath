@@ -5,7 +5,7 @@ module foundation.functoriality-dependent-function-types where
 
 open import foundation-core.functoriality-dependent-function-types public
 
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings

@@ -5,7 +5,7 @@ module group-theory.isomorphisms-group-actions where
 
 open import category-theory.isomorphisms-large-precategories
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types

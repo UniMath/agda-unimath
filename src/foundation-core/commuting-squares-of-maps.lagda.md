@@ -1,9 +1,9 @@
-#  Commuting squares
+#  Commuting squares of maps
 
 ```agda
 {-# OPTIONS --safe #-}
 
-module foundation-core.commuting-squares where
+module foundation-core.commuting-squares-of-maps where
 
 open import foundation-core.functions
 open import foundation-core.homotopies

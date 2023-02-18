@@ -4,7 +4,7 @@
 module synthetic-homotopy-theory.26-id-pushout where
 
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types

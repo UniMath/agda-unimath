@@ -4,7 +4,7 @@
 module foundation-core.commuting-cubes where
 
 open import foundation-core.cones-pullbacks
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies

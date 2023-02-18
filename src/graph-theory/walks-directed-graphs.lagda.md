@@ -6,7 +6,7 @@ module graph-theory.walks-directed-graphs where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

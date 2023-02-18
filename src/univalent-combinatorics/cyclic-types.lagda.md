@@ -11,7 +11,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

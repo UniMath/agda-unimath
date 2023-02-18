@@ -3,7 +3,7 @@
 ```agda
 module univalent-combinatorics.set-quotients-of-index-two where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

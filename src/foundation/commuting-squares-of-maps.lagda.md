@@ -1,9 +1,9 @@
-#  Commuting squares
+#  Commuting squares of maps
 
 ```agda
-module foundation.commuting-squares where
+module foundation.commuting-squares-of-maps where
 
-open import foundation-core.commuting-squares public
+open import foundation-core.commuting-squares-of-maps public
 
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
