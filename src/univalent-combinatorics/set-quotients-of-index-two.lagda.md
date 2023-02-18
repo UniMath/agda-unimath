@@ -103,13 +103,13 @@ module _
                      ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
 
-  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
+  coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
     coherence-square-maps
       ( h)
       ( map-reflecting-map-Eq-Rel R f)
       ( map-reflecting-map-Eq-Rel R f)
       ( h')
-  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y =
+  coherence-square-maps-eq-one-value-emb-is-set-quotient H' y =
     cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
       ( map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)))
       ( map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)))
@@ -126,7 +126,7 @@ module _
       { x =
         pair
           ( pair h' Q)
-          ( cases-coherence-square-maps-eq-one-value-emb-is-set-quotient
+          ( coherence-square-maps-eq-one-value-emb-is-set-quotient
             ( is-emb-is-equiv Q))}
       { y =
         center
