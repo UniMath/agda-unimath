@@ -6,6 +6,7 @@
   - [Home](README.md)
   - [Community](CONTRIBUTORS.md)
     - [Contributors](CONTRIBUTORS.md)
+    - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
     - [Projects using Agda-Unimath](USERS.md)
   - [How-to](HOWTO-INSTALL.md)
     - [Install](HOWTO-INSTALL.md)
