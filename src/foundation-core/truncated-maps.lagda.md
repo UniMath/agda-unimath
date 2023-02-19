@@ -3,7 +3,7 @@
 ```agda
 module foundation-core.truncated-maps where
 
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-fibers-of-maps
@@ -294,7 +294,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (i : C → D)
-  (H : coherence-square f g h i)
+  (H : coherence-square-maps f g h i)
   where
 
   is-trunc-map-top-is-trunc-map-bottom-is-equiv :

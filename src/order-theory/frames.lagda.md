@@ -1,4 +1,4 @@
-# Title: Frames 
+# Frames 
 
 ```agda
 

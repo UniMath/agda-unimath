@@ -251,4 +251,4 @@ module _
 
 ## See also
 
-- Integer partitions in [`elementary-number-theory.integer-partitions`](elementary-number-theory.integer-partitions.html)
+- Integer partitions in [`elementary-number-theory.integer-partitions`](elementary-number-theory.integer-partitions.md)

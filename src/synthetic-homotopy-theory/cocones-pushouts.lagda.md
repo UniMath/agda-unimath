@@ -3,7 +3,7 @@
 ```agda
 module synthetic-homotopy-theory.cocones-pushouts where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -43,7 +43,7 @@ cocone :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) → UU l4 → UU _
 cocone {A = A} {B = B} f g X =
-  Σ (A → X) (λ i → Σ (B → X) (λ j → coherence-square g f j i))
+  Σ (A → X) (λ i → Σ (B → X) (λ j → coherence-square-maps g f j i))
 
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -57,7 +57,7 @@ module _
   vertical-map-cocone = pr1 (pr2 c)
 
   coherence-square-cocone :
-    coherence-square g f vertical-map-cocone horizontal-map-cocone
+    coherence-square-maps g f vertical-map-cocone horizontal-map-cocone
   coherence-square-cocone = pr2 (pr2 c)
 ```
 

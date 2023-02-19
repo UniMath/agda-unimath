@@ -1,4 +1,4 @@
-# Title: Homomorphisms Sup Lattices 
+# Homomorphisms Sup Lattices 
 
 ```agda
 

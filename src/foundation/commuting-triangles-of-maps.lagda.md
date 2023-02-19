@@ -1,13 +1,11 @@
-# Commuting triangles
+# Commuting triangles of maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module foundation.commuting-triangles-of-maps where
 
-module foundation.commuting-triangles where
+open import foundation-core.commuting-triangles-of-maps public
 
 open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.homotopies
 open import foundation-core.universe-levels
 
 open import foundation.functoriality-dependent-function-types
@@ -28,20 +26,6 @@ A triangle of maps
 
 is said to commute if there is a homotopy between the map on the left and the composite map.
 
-## Definition
-
-```agda
-module _ {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} where
-
-  coherence-triangle :
-    (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  coherence-triangle left right top = left ~ (right ∘ top)
-
-  coherence-triangle' :
-    (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  coherence-triangle' left right top = (right ∘ top) ~ left
-```
-
 ## Properties
 
 ### Top map is an equivalence
@@ -52,10 +36,10 @@ If the top map is an equivalence, then there is an equivalence between the coher
 module _ {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (left : A → X) (right : B → X) (e : A ≃ B) where
 
-  equiv-coherence-triangle-inv-top :
-    coherence-triangle left right (map-equiv e) ≃
-    coherence-triangle' right left (map-inv-equiv e)
-  equiv-coherence-triangle-inv-top =
+  equiv-coherence-triangle-maps-inv-top :
+    coherence-triangle-maps left right (map-equiv e) ≃
+    coherence-triangle-maps' right left (map-inv-equiv e)
+  equiv-coherence-triangle-maps-inv-top =
     equiv-Π
       (λ b → left (map-inv-equiv e b) ＝ right b)
       ( e)
