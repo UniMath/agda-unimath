@@ -790,11 +790,13 @@
   - [Nilpotent elements rings](ring-theory.nilpotent-elements-rings.md)
   - [Nontrivial rings](ring-theory.nontrivial-rings.md)
   - [Opposite rings](ring-theory.opposite-rings.md)
-  - [Powers of elements rings](ring-theory.powers-of-elements-rings.md)
+  - [Powers of elements in rings](ring-theory.powers-of-elements-rings.md)
+  - [Powers of elements in semirings](ring-theory.powers-of-elements-semirings.md)
   - [Products rings](ring-theory.products-rings.md)
   - [Quotient rings](ring-theory.quotient-rings.md)
   - [Radical ideals rings](ring-theory.radical-ideals-rings.md)
   - [Rings](ring-theory.rings.md)
+  - [Semirings](ring-theory.semirings.md)
   - [Subsets rings](ring-theory.subsets-rings.md)
 
 

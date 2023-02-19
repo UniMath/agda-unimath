@@ -22,9 +22,11 @@ open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nontrivial-rings public
 open import ring-theory.opposite-rings public
 open import ring-theory.powers-of-elements-rings public
+open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.products-rings public
 open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
 open import ring-theory.rings public
+open import ring-theory.semirings public
 open import ring-theory.subsets-rings public
 ```
