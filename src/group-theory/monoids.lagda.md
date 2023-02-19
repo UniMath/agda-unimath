@@ -30,47 +30,49 @@ Monoid :
   (l : Level) → UU (lsuc l)
 Monoid l = Σ (Semigroup l) is-unital-Semigroup
 
-semigroup-Monoid :
-  {l : Level} (M : Monoid l) → Semigroup l
-semigroup-Monoid M = pr1 M
+module _
+  {l : Level} (M : Monoid l)
+  where
 
-type-Monoid : {l : Level} (M : Monoid l) → UU l
-type-Monoid M = type-Semigroup (semigroup-Monoid M)
+  semigroup-Monoid : Semigroup l
+  semigroup-Monoid = pr1 M
 
-set-Monoid : {l : Level} (M : Monoid l) → Set l
-set-Monoid M = set-Semigroup (semigroup-Monoid M)
+  type-Monoid : UU l
+  type-Monoid = type-Semigroup semigroup-Monoid
 
-is-set-type-Monoid :
-  {l : Level} (M : Monoid l) → is-set (type-Monoid M)
-is-set-type-Monoid M = is-set-type-Semigroup (semigroup-Monoid M)
+  set-Monoid : Set l
+  set-Monoid = set-Semigroup semigroup-Monoid
 
-mul-Monoid :
-  {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
-mul-Monoid M = mul-Semigroup (semigroup-Monoid M)
+  is-set-type-Monoid : is-set type-Monoid
+  is-set-type-Monoid = is-set-type-Semigroup semigroup-Monoid
 
-mul-Monoid' :
-  {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
-mul-Monoid' M y x = mul-Monoid M x y
+  mul-Monoid : type-Monoid → type-Monoid → type-Monoid
+  mul-Monoid = mul-Semigroup semigroup-Monoid
 
-associative-mul-Monoid :
-  {l : Level} (M : Monoid l) (x y z : type-Monoid M) →
-  Id (mul-Monoid M (mul-Monoid M x y) z) (mul-Monoid M x (mul-Monoid M y z))
-associative-mul-Monoid M =
-  associative-mul-Semigroup (semigroup-Monoid M)
+  mul-Monoid' : type-Monoid → type-Monoid → type-Monoid
+  mul-Monoid' y x = mul-Monoid x y
 
-unit-Monoid :
-  {l : Level} (M : Monoid l) → type-Monoid M
-unit-Monoid M = pr1 (pr2 M)
+  ap-mul-Monoid :
+    {x x' y y' : type-Monoid} →
+    x ＝ x' → y ＝ y' → mul-Monoid x y ＝ mul-Monoid x' y'
+  ap-mul-Monoid = ap-mul-Semigroup semigroup-Monoid
 
-left-unit-law-mul-Monoid :
-  {l : Level} (M : Monoid l) (x : type-Monoid M) →
-  Id (mul-Monoid M (unit-Monoid M) x) x
-left-unit-law-mul-Monoid M = pr1 (pr2 (pr2 M))
+  associative-mul-Monoid :
+    (x y z : type-Monoid) →
+    mul-Monoid (mul-Monoid x y) z ＝ mul-Monoid x (mul-Monoid y z)
+  associative-mul-Monoid = associative-mul-Semigroup semigroup-Monoid
 
-right-unit-law-mul-Monoid :
-  {l : Level} (M : Monoid l) (x : type-Monoid M) →
-  Id (mul-Monoid M x (unit-Monoid M)) x
-right-unit-law-mul-Monoid M = pr2 (pr2 (pr2 M))
+  has-unit-Monoid : is-unital mul-Monoid
+  has-unit-Monoid = pr2 M
+
+  unit-Monoid : type-Monoid
+  unit-Monoid = pr1 has-unit-Monoid
+
+  left-unit-law-mul-Monoid : (x : type-Monoid) → mul-Monoid unit-Monoid x ＝ x
+  left-unit-law-mul-Monoid = pr1 (pr2 has-unit-Monoid)
+
+  right-unit-law-mul-Monoid : (x : type-Monoid) → mul-Monoid x unit-Monoid ＝ x
+  right-unit-law-mul-Monoid = pr2 (pr2 has-unit-Monoid)
 ```
 
 ## Properties
