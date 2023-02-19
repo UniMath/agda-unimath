@@ -10,6 +10,11 @@ open import foundation.sets
 open import foundation.transport
 open import foundation.universe-levels
 open import foundation.propositional-truncations
+
+open import foundation.unit-type
+open import foundation-core.equivalences
+open import orthogonal-factorization-systems.lifts-of-maps
+open import foundation.function-extensionality
 ```
 
 ## Idea
@@ -19,22 +24,6 @@ Instead of introducing it as a HIT, as in the HoTT Book [1, §10.5], we introduc
 its induction principle, following [2].
 
 ## Definitions
-
-### Equal images of functions
-
-```agda
-has-smaller-image :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} →
-  (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
-has-smaller-image {l1} {l2} {l3} {A} {B} {X} f g =
-  (a : A) → Σ B (λ b → g b ＝ f a)
-
-have-equal-images :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} →
-  (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
-have-equal-images {l1} {l2} {l3} {A} {B} {X} f g =
-  has-smaller-image f g × has-smaller-image g f
-```
 
 ### Pseudo cumulative hierarchy
 
@@ -47,10 +36,11 @@ has-cumulative-hierarchy-structure {l} V =
     ( Σ ({A : UU l} → (A → V) → V)
       ( λ V-set →
         ( {A B : UU l} (f : A → V) (g : B → V) →
-          have-equal-images f g → V-set f ＝ V-set g)))
+          (lift f g × lift g f) → V-set f ＝ V-set g)))
 
 pseudo-cumulative-hierarchy : (l : Level) → UU (lsuc (lsuc l))
-pseudo-cumulative-hierarchy (l) = Σ (UU (lsuc l)) has-cumulative-hierarchy-structure
+pseudo-cumulative-hierarchy (l) =
+  Σ (UU (lsuc l)) has-cumulative-hierarchy-structure
 
 module _
   {l : Level} (V : pseudo-cumulative-hierarchy l)
@@ -70,7 +60,8 @@ module _
 
   set-ext-pseudo-cumulative-hierarchy :
     {A B : UU l} (f : A → pr1 V) (g : B → pr1 V)
-    → have-equal-images f g → set-pseudo-cumulative-hierarchy f ＝ set-pseudo-cumulative-hierarchy g
+    → (lift f g × lift g f)
+    → set-pseudo-cumulative-hierarchy f ＝ set-pseudo-cumulative-hierarchy g
   set-ext-pseudo-cumulative-hierarchy = pr2 (pr2 (pr2 V))
 ```
 
@@ -87,7 +78,7 @@ module _
     → ( ρ : {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V )
       → ((a : A) → P (f a)) → P (set-pseudo-cumulative-hierarchy V f))
     → ( {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
-        ( g : B → type-pseudo-cumulative-hierarchy V) (e : have-equal-images f g)
+        ( g : B → type-pseudo-cumulative-hierarchy V) (e : lift f g × lift g f)
         → (IH₁ : (a : A) → P (f a))
         → (IH₂ : (b : B) → P (g b))
         → ((a : A) → type-trunc-Prop ( Σ B (λ b → Σ (f a ＝ g b)
@@ -105,7 +96,7 @@ module _
     → ( ρ : {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V )
       → ((a : A) → P (f a)) → P (set-pseudo-cumulative-hierarchy V f))
     → ( τ : {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
-        ( g : B → type-pseudo-cumulative-hierarchy V) (e : have-equal-images f g)
+        ( g : B → type-pseudo-cumulative-hierarchy V) (e : lift f g × lift g f)
         → (IH₁ : (a : A) → P (f a))
         → (IH₂ : (b : B) → P (g b))
         → ((a : A) → type-trunc-Prop ( Σ B (λ b → Σ (f a ＝ g b)
@@ -121,12 +112,12 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (cumulative-hierarchy : pseudo-cumulative-hierarchy l1)
-  (cumulative-hierarchy-has-induction-principle-cumulative-hierarchy :
-    induction-principle-cumulative-hierarchy l2 cumulative-hierarchy)
-  (cumulative-hierarchy-has-compute-induction-principle-cumulative-hierarchy :
-    compute-induction-principle-cumulative-hierarchy l2 cumulative-hierarchy
-      cumulative-hierarchy-has-induction-principle-cumulative-hierarchy)
+  {l1 : Level} (l2 : Level) (V : pseudo-cumulative-hierarchy l1)
+  (induction-principle-cumulative-hierarchy-V :
+    induction-principle-cumulative-hierarchy l2 V)
+  (compute-induction-principle-cumulative-hierarchy-V :
+    compute-induction-principle-cumulative-hierarchy l2 V
+      induction-principle-cumulative-hierarchy-V)
   where
 
 ```
