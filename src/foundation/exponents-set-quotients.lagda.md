@@ -6,7 +6,7 @@
 module foundation.exponents-set-quotients where
 
 open import foundation.binary-relations
-open import foundation.commuting-triangles
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings

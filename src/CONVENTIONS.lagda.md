@@ -6,7 +6,7 @@
 3. Files that are part of the formalisation should be in literate agda using markdown. They should have the file extension `.lagda.md`.
 4. Every file should begin with a header in the following format
 ```md
-# [The title of the file]
+# The title of the file
 ```
 5. Immediately after the header, there should be a block of Agda code that loads the options, declares the present module, and performs all the imports. In particular, there should be no further imports later on in the file.
 6. The rest of the files is divided into sections, subsections and possibly subsubsections. `##` headings are the main sections of the page. Usually at the beginning we have `## Idea` describing informally the idea of the things in that file. Then we hav `## Definitions` for definitions, and after that `## Properties` followed by `## See also` and `## References`. In rare cases we can include a section `## Examples` for examples or `## Theorem` if the main purpose of the file is to prove an important theorem. The reason `## Examples` is rarely used is that usually examples go in their own files, which can be listed under `## See also`.
@@ -14,10 +14,13 @@
 Note that `#` headings are only used for the title of the page.
 7. The subsections should have a markdown header of level `###` and they should concisely describe the content of the block of code that follows.
 
-Ideally, the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept. We suggest adopt the following template:
+Ideally, the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept. We suggest adopting the following template:
 
 ```md
 # The title of this file
+
+[ module declaration]
+[ import statements]
 
 ## Idea
 
@@ -62,5 +65,14 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
   Informal explanation)
 
 [ formalization of property 2]
+```
 
+At the end of the file you may also add a `See also` or `References` subsection where you reference related sources such as other modules or articles related to the contents of the file.
 
+- If you want to reference another module in the library use the pattern
+  ```[`foundation.univalence-axiom`](foundation.univalence-axiom.md)```.
+  This will be displayed as [`foundation.univalence-axiom`](foundation.univalence-axiom.md).
+- If you want to reference another page with custom text use the pattern ```[Agda-Unimath](https://unimath.github.io/agda-unimath/)```.
+  This will be displayed as [Agda-Unimath](https://unimath.github.io/agda-unimath/).
+- If you want to reference another page without custom text but with a clickable link use the pattern ```<https://unimath.github.io/agda-unimath/>```.
+  This will be displayed as <https://unimath.github.io/agda-unimath/>.

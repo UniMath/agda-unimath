@@ -13,7 +13,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -281,7 +281,7 @@ module _
       ( p : Id X Y) →
       ( Id (tr (λ v → mere-equiv (Fin (succ-ℕ (succ-ℕ n))) v) p eX) eY) →
       ( sX : is-set X) ( sY : is-set Y) →
-      coherence-square
+      coherence-square-maps
         ( map-equiv
           ( invertible-action-D-equiv
             ( succ-ℕ (succ-ℕ n))
@@ -331,7 +331,7 @@ module _
 
   coherence-square-map-quotient-delooping-sign-loop-Fin : (n : ℕ) 
     ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))) →
-    coherence-square
+    coherence-square-maps
       ( map-quotient-loop-Fin n p)
       ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
       ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
@@ -359,7 +359,7 @@ module _
           ( type-Group
             ( symmetric-Group (quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
           ( λ h' →
-            coherence-square
+            coherence-square-maps
               ( map-quotient-loop-Fin n p)
               ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
               ( map-reflecting-map-Eq-Rel

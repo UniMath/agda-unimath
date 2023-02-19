@@ -5,7 +5,7 @@ module group-theory.isomorphisms-group-actions where
 
 open import category-theory.isomorphisms-large-precategories
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -48,7 +48,7 @@ module _
 
   coherence-square-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) (g : type-Group G) →
-    coherence-square
+    coherence-square-maps
       ( map-iso-Abstract-Group-Action f)
       ( mul-Abstract-Group-Action G X g)
       ( mul-Abstract-Group-Action G Y g)

@@ -4,7 +4,7 @@
 module foundation-core.cones-pullbacks where
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-squares
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -48,7 +48,7 @@ module _
   where
    
   cone : {l4 : Level} → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  cone C = Σ (C → A) (λ p → Σ (C → B) (λ q → coherence-square q p g f))
+  cone C = Σ (C → A) (λ p → Σ (C → B) (λ q → coherence-square-maps q p g f))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
@@ -62,7 +62,7 @@ module _
   horizontal-map-cone = pr1 (pr2 c)
 
   coherence-square-cone :
-    coherence-square horizontal-map-cone vertical-map-cone g f
+    coherence-square-maps horizontal-map-cone vertical-map-cone g f
   coherence-square-cone = pr2 (pr2 c)
 ```
 
@@ -99,14 +99,15 @@ module _
     (c c' : cone f g C) (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
     (L : horizontal-map-cone f g c ~ horizontal-map-cone f g c') → UU (l4 ⊔ l3)
   coherence-htpy-cone c c' K L =
-    ( coherence-square-cone f g c ∙h (htpy-left-whisk g L)) ~
-    ( (htpy-left-whisk f K) ∙h coherence-square-cone f g c')
+    ( coherence-square-cone f g c ∙h (g ·l L)) ~
+    ( (f ·l K) ∙h coherence-square-cone f g c')
 
   htpy-cone : cone f g C → cone f g C → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cone c c' =
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f g c')
-      ( λ K → Σ (horizontal-map-cone f g c ~ horizontal-map-cone f g c')
-        ( λ L → coherence-htpy-cone c c' K L))
+      ( λ K →
+        Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f g c')
+          ( coherence-htpy-cone c c' K))
 
   refl-htpy-cone : (c : cone f g C) → htpy-cone c c
   pr1 (refl-htpy-cone c) = refl-htpy
@@ -177,7 +178,7 @@ module _
   pr1 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
     (horizontal-map-cone j h c) ∘ p
   pr2 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
-    coherence-square-comp-horizontal p
+    coherence-square-maps-comp-horizontal p
       ( horizontal-map-cone j h c)
       ( f)
       ( vertical-map-cone j h c)
@@ -203,7 +204,7 @@ module _
     ( vertical-map-cone f g c) ∘ p'
   pr1 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) = q'
   pr2 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) =
-    coherence-square-comp-vertical q' p' h
+    coherence-square-maps-comp-vertical q' p' h
       ( horizontal-map-cone f g c)
       ( vertical-map-cone f g c)
       ( g)

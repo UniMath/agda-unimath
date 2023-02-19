@@ -117,12 +117,16 @@ htpy-left-whisk h H x = ap h (H x)
 _·l_ = htpy-left-whisk
 
 htpy-right-whisk :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {g h : B → C} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  {g h : (y : B) → C y} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
 htpy-right-whisk H f x = H (f x)
 
 _·r_ = htpy-right-whisk
 ```
+
+**Warning**: The infix whiskering operators `_·l_` and `_·r_` use the symbol `·` ("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`)
+as opposed to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙` ("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`).
+If these look the same in your editor, we suggest that you change your font. For a reference, see [How to install](HOWTO-INSTALL.md).
 
 ### Transposition of homotopies
 
@@ -320,6 +324,6 @@ module _
 ## See also
 
 - We postulate that homotopy is equivalent to identity of functions in
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.html).
+  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
 - We define an equational reasoning syntax for homotopies in
-  [`foundation.equational-reasoning`](foundation.equational-reasoning.html).
+  [`foundation.equational-reasoning`](foundation.equational-reasoning.md).

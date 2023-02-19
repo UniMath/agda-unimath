@@ -11,7 +11,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -142,7 +142,7 @@ module _
 
   coherence-square-equiv-Cyclic-Type :
     (e : equiv-Cyclic-Type) →
-    coherence-square
+    coherence-square-maps
       ( map-equiv-Cyclic-Type e)
       ( endomorphism-Cyclic-Type k X)
       ( endomorphism-Cyclic-Type k Y)

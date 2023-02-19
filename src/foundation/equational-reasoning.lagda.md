@@ -189,6 +189,6 @@ preorder X reasoning
 
 ## References
 
-1. Martín Escardó. https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda
-2. Martín Escardó. https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda
-3. The Agda standard library. https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda
+1. Martín Escardó. <https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda>
+2. Martín Escardó. <https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda>
+3. The Agda standard library. <https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda>

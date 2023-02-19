@@ -84,11 +84,23 @@ module _
   η-pair t = eq-pair-Σ refl refl
 ```
 
+### Lifting equality to the total space
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  lift-eq-Σ :
+    {x y : A} (p : x ＝ y) (b : B x) → (pair x b) ＝ (pair y (tr B p b))
+  lift-eq-Σ refl b = refl
+```
+
 ## See also
 
 - Equality proofs in cartesian product types are characterized in
-  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.html).
+  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - Equality proofs in dependent function types are characterized in
-  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
 - Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.html).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.md).
