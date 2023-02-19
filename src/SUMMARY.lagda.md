@@ -64,8 +64,10 @@
 
 - [Commutative algebra](commutative-algebra.md)
   - [Binomial theorem for commutative rings](commutative-algebra.binomial-theorem-commutative-rings.md)
+  - [Binomial theorem for commutative semirings](commutative-algebra.binomial-theorem-commutative-semirings.md)
   - [Boolean rings](commutative-algebra.boolean-rings.md)
   - [Commutative rings](commutative-algebra.commutative-rings.md)
+  - [Commutative semirings](commutative-algebra.commutative-semirings.md)
   - [Discrete fields](commutative-algebra.discrete-fields.md)
   - [Eisenstein integers](commutative-algebra.eisenstein-integers.md)
   - [Gaussian integers](commutative-algebra.gaussian-integers.md)
@@ -78,8 +80,10 @@
   - [Maximal ideals in commutative rings](commutative-algebra.maximal-ideals-commutative-rings.md)
   - [Nilradicals of commutative rings](commutative-algebra.nilradical-commutative-rings.md)
   - [Powers of elements in commutative rings](commutative-algebra.powers-of-elements-commutative-rings.md)
+  - [Powers of elements in commutative semirings](commutative-algebra.powers-of-elements-commutative-semirings.md)
   - [Prime ideals in commutative rings](commutative-algebra.prime-ideals-commutative-rings.md)
   - [Sums of elements in commutative rings](commutative-algebra.sums-commutative-rings.md)
+  - [Sums of elements in commutative semirings](commutative-algebra.sums-commutative-semirings.md)
   - [Zariski topology](commutative-algebra.zariski-topology.md)
 
 
@@ -695,8 +699,9 @@
   - [Scalar multiplication of vectors](linear-algebra.scalar-multiplication-vectors.md)
   - [Scalar multiplication of vectors on rings](linear-algebra.scalar-multiplication-vectors-on-rings.md)
   - [Transposition of matrices](linear-algebra.transposition-matrices.md)
-  - [Vectors on commutative rings](linear-algebra.vectors-on-commutative-rings.md)
   - [Vectors](linear-algebra.vectors.md)
+  - [Vectors on commutative rings](linear-algebra.vectors-on-commutative-rings.md)
+  - [Vectors on commutative semirings](linear-algebra.vectors-on-commutative-semirings.lagda.md)
   - [Vectors on rings](linear-algebra.vectors-on-rings.md)
   - [Vectors on semirings](linear-algebra.vectors-on-semirings.md)
 
