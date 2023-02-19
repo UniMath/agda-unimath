@@ -45,7 +45,7 @@ binomial-sum-Commutative-Ring :
 binomial-sum-Commutative-Ring R n f =
   sum-Commutative-Ring R (succ-ℕ n)
     ( λ i →
-      mul-nat-Commutative-Ring R
+      mul-nat-scalar-Commutative-Ring R
         ( binomial-coefficient-Fin n i)
         ( f i))
 ```
@@ -66,10 +66,10 @@ module _
   binomial-sum-one-element-Commutative-Ring f =
     ( sum-one-element-Commutative-Ring R
       ( λ i →
-        mul-nat-Commutative-Ring R
+        mul-nat-scalar-Commutative-Ring R
           ( binomial-coefficient-Fin 0 i)
           ( f i))) ∙
-    ( mul-nat-one-Commutative-Ring R
+    ( left-unit-law-mul-nat-scalar-Commutative-Ring R
       ( head-functional-vec-Commutative-Ring R 0 f))
 
   binomial-sum-two-elements-Commutative-Ring :
@@ -78,11 +78,14 @@ module _
     add-Commutative-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Commutative-Ring f =
     sum-two-elements-Commutative-Ring R
-      ( λ i → mul-nat-Commutative-Ring R (binomial-coefficient-Fin 1 i) (f i)) ∙
+      ( λ i →
+        mul-nat-scalar-Commutative-Ring R
+          ( binomial-coefficient-Fin 1 i)
+          ( f i)) ∙
       ( ap-binary
         ( add-Commutative-Ring R)
-        ( mul-nat-one-Commutative-Ring R (f (zero-Fin 1)))
-        ( mul-nat-one-Commutative-Ring R (f (one-Fin 1))))
+        ( left-unit-law-mul-nat-scalar-Commutative-Ring R (f (zero-Fin 1)))
+        ( left-unit-law-mul-nat-scalar-Commutative-Ring R (f (one-Fin 1))))
 ```
 
 ### Binomial sums are homotopy invariant
@@ -101,7 +104,7 @@ module _
       ( succ-ℕ n)
       ( λ i →
         ap
-          ( mul-nat-Commutative-Ring R (binomial-coefficient-Fin n i))
+          ( mul-nat-scalar-Commutative-Ring R (binomial-coefficient-Fin n i))
           ( H i))
 ```
 
@@ -122,11 +125,13 @@ module _
       ( succ-ℕ n)
       ( x)
       ( λ i →
-        mul-nat-Commutative-Ring R (binomial-coefficient-Fin n i) (f i))) ∙
+        mul-nat-scalar-Commutative-Ring R
+          ( binomial-coefficient-Fin n i)
+          ( f i))) ∙
     ( htpy-sum-Commutative-Ring R
       ( succ-ℕ n)
       ( λ i →
-        right-mul-nat-law-mul-Commutative-Ring R
+        right-nat-scalar-law-mul-Commutative-Ring R
           ( binomial-coefficient-Fin n i)
           ( x)
           ( f i)))
@@ -140,12 +145,12 @@ module _
     ( right-distributive-mul-sum-Commutative-Ring R
       ( succ-ℕ n)
       ( λ i →
-        mul-nat-Commutative-Ring R (binomial-coefficient-Fin n i) (f i))
+        mul-nat-scalar-Commutative-Ring R (binomial-coefficient-Fin n i) (f i))
       ( x)) ∙
     ( htpy-sum-Commutative-Ring R
       ( succ-ℕ n)
       ( λ i →
-        left-mul-nat-law-mul-Commutative-Ring R
+        left-nat-scalar-law-mul-Commutative-Ring R
           ( binomial-coefficient-Fin n i)
           ( f i )
           ( x)))
@@ -176,7 +181,7 @@ module _
       ( sum-Commutative-Ring R
         ( succ-ℕ n)
         ( λ i →
-          mul-nat-Commutative-Ring R
+          mul-nat-scalar-Commutative-Ring R
             ( binomial-coefficient-Fin (succ-ℕ n) (inl-Fin (succ-ℕ n) i))
             ( mul-Commutative-Ring R
               ( power-Commutative-Ring R
@@ -219,7 +224,7 @@ module _
                 ( x)))))) ∙
       ( ( ap
           ( add-Commutative-Ring R _)
-          ( ( ap-mul-nat-Commutative-Ring R
+          ( ( ap-mul-nat-scalar-Commutative-Ring R
               ( is-one-on-diagonal-binomial-coefficient-ℕ (succ-ℕ n))
               ( ap
                 ( λ t →
@@ -227,7 +232,7 @@ module _
                     ( power-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x)
                     ( power-Commutative-Ring R t y))
                 ( dist-eq-ℕ' (succ-ℕ n)))) ∙
-            ( ( mul-nat-one-Commutative-Ring R
+            ( ( left-unit-law-mul-nat-scalar-Commutative-Ring R
                 ( mul-Commutative-Ring R
                   ( power-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x)
                   ( one-Commutative-Ring R))) ∙
@@ -237,7 +242,7 @@ module _
           ( sum-Commutative-Ring R
             ( succ-ℕ n)
             ( λ i →
-              mul-nat-Commutative-Ring R
+              mul-nat-scalar-Commutative-Ring R
                 ( binomial-coefficient-Fin (succ-ℕ n) (inl-Fin (succ-ℕ n) i))
                 ( mul-Commutative-Ring R
                   ( power-Commutative-Ring R
@@ -271,7 +276,7 @@ module _
       ( sum-Commutative-Ring R
         ( succ-ℕ n)
         ( λ i →
-          mul-nat-Commutative-Ring R
+          mul-nat-scalar-Commutative-Ring R
             ( binomial-coefficient-ℕ
               ( succ-ℕ n)
               ( succ-ℕ (nat-Fin (succ-ℕ (succ-ℕ n)) (inl-Fin (succ-ℕ n) i))))
@@ -323,7 +328,7 @@ module _
       ( ( snoc-sum-Commutative-Ring R
           ( succ-ℕ n)
           ( λ i →
-            mul-nat-Commutative-Ring R
+            mul-nat-scalar-Commutative-Ring R
               ( binomial-coefficient-Fin (succ-ℕ n) i)
               ( mul-Commutative-Ring R
                 ( power-Commutative-Ring R
@@ -334,7 +339,7 @@ module _
                   ( y))))
           ( ( ap
               ( λ m →
-                mul-nat-Commutative-Ring R
+                mul-nat-scalar-Commutative-Ring R
                   ( binomial-coefficient-ℕ (succ-ℕ n) m)
                   ( mul-Commutative-Ring R
                     ( power-Commutative-Ring R m x)
@@ -342,7 +347,7 @@ module _
                       ( dist-ℕ (succ-ℕ (succ-ℕ n)) m)
                       ( y))))
               ( is-zero-nat-zero-Fin {n})) ∙
-            ( ( mul-nat-one-Commutative-Ring R
+            ( ( left-unit-law-mul-nat-scalar-Commutative-Ring R
                 ( mul-Commutative-Ring R
                   ( one-Commutative-Ring R)
                   ( power-Commutative-Ring R (succ-ℕ (succ-ℕ n)) y))) ∙
@@ -355,7 +360,7 @@ module _
             ( λ i →
               ( ap
                 ( λ m →
-                  mul-nat-Commutative-Ring R
+                  mul-nat-scalar-Commutative-Ring R
                     ( binomial-coefficient-ℕ (succ-ℕ n) m)
                     ( mul-Commutative-Ring R
                       ( power-Commutative-Ring R m x)
@@ -383,12 +388,12 @@ binomial-theorem-Commutative-Ring R zero-ℕ x y =
   inv
     ( ( sum-one-element-Commutative-Ring R
         ( λ i →
-          mul-nat-Commutative-Ring R
+          mul-nat-scalar-Commutative-Ring R
             ( binomial-coefficient-Fin 0 i)
             ( mul-Commutative-Ring R
               ( power-Commutative-Ring R (nat-Fin 1 i) x)
               ( power-Commutative-Ring R (dist-ℕ 0 (nat-Fin 1 i)) y)))) ∙
-      ( ( mul-nat-one-Commutative-Ring R
+      ( ( left-unit-law-mul-nat-scalar-Commutative-Ring R
           ( mul-Commutative-Ring R
             ( one-Commutative-Ring R)
             ( one-Commutative-Ring R))) ∙
@@ -399,16 +404,16 @@ binomial-theorem-Commutative-Ring R (succ-ℕ zero-ℕ) x y =
       ( add-Commutative-Ring R)
       ( ( inv (left-unit-law-mul-Commutative-Ring R y)) ∙
         ( inv
-          ( mul-nat-one-Commutative-Ring R
+          ( left-unit-law-mul-nat-scalar-Commutative-Ring R
             ( mul-Commutative-Ring R (one-Commutative-Ring R) y))))
       ( ( inv (right-unit-law-mul-Commutative-Ring R x)) ∙
         ( inv
-          ( mul-nat-one-Commutative-Ring R
+          ( left-unit-law-mul-nat-scalar-Commutative-Ring R
             ( mul-Commutative-Ring R x (one-Commutative-Ring R)))))) ∙
     ( inv
       ( sum-two-elements-Commutative-Ring R
         ( λ i →
-          mul-nat-Commutative-Ring R
+          mul-nat-scalar-Commutative-Ring R
           ( binomial-coefficient-Fin 1 i)
           ( mul-Commutative-Ring R
             ( power-Commutative-Ring R (nat-Fin 2 i) x)
@@ -426,7 +431,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
           ( sum-Commutative-Ring R
             ( succ-ℕ n)
             ( λ i →
-              mul-nat-Commutative-Ring R
+              mul-nat-scalar-Commutative-Ring R
               ( binomial-coefficient-Fin (succ-ℕ n) (inl-Fin (succ-ℕ n) i))
               ( mul-Commutative-Ring R
                 ( power-Commutative-Ring R
@@ -439,7 +444,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
           ( sum-Commutative-Ring R
             ( succ-ℕ n)
             ( λ i →
-              mul-nat-Commutative-Ring R
+              mul-nat-scalar-Commutative-Ring R
               ( binomial-coefficient-ℕ
                 ( succ-ℕ n)
                 ( succ-ℕ (nat-Fin (succ-ℕ (succ-ℕ n)) (inl-Fin (succ-ℕ n) i))))
@@ -457,7 +462,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
             ( ( interchange-add-sum-Commutative-Ring R
                 ( succ-ℕ n)
                 ( λ i →
-                  mul-nat-Commutative-Ring R
+                  mul-nat-scalar-Commutative-Ring R
                   ( binomial-coefficient-Fin (succ-ℕ n) (inl-Fin (succ-ℕ n) i))
                   ( mul-Commutative-Ring R
                     ( power-Commutative-Ring R
@@ -467,7 +472,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                       ( dist-ℕ (succ-ℕ n) (nat-Fin (succ-ℕ n) i))
                       ( y))))
                 ( λ i →
-                  mul-nat-Commutative-Ring R
+                  mul-nat-scalar-Commutative-Ring R
                   ( binomial-coefficient-ℕ
                     ( succ-ℕ n)
                     ( succ-ℕ
@@ -483,7 +488,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                 ( succ-ℕ n)
                 ( λ i →
                   ( inv
-                    ( right-distributive-mul-nat-add-Commutative-Ring R
+                    ( right-distributive-mul-nat-scalar-add-Commutative-Ring R
                       ( binomial-coefficient-ℕ
                         ( succ-ℕ n)
                         ( nat-Fin (succ-ℕ n) i))
@@ -499,7 +504,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                           ( y))))) ∙
                   ( ap
                     ( λ m →
-                      mul-nat-Commutative-Ring R
+                      mul-nat-scalar-Commutative-Ring R
                         ( binomial-coefficient-ℕ (succ-ℕ (succ-ℕ n)) m)
                         ( mul-Commutative-Ring R
                           ( power-Commutative-Ring R m x)
@@ -518,7 +523,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                   ( snoc-sum-Commutative-Ring R
                     ( succ-ℕ n)
                     ( λ i →
-                      mul-nat-Commutative-Ring R
+                      mul-nat-scalar-Commutative-Ring R
                         ( binomial-coefficient-ℕ
                           ( succ-ℕ (succ-ℕ n))
                           ( nat-Fin (succ-ℕ (succ-ℕ n)) i))
@@ -533,7 +538,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                             ( y))))
                     ( ( ap
                         ( λ m →
-                          mul-nat-Commutative-Ring R
+                          mul-nat-scalar-Commutative-Ring R
                             ( binomial-coefficient-ℕ (succ-ℕ (succ-ℕ n)) m)
                             ( mul-Commutative-Ring R
                               ( power-Commutative-Ring R m x)
@@ -541,7 +546,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                                 ( dist-ℕ (succ-ℕ (succ-ℕ n)) m)
                                 ( y))))
                         ( is-zero-nat-zero-Fin {n})) ∙
-                      ( ( mul-nat-one-Commutative-Ring R
+                      ( ( left-unit-law-mul-nat-scalar-Commutative-Ring R
                           ( mul-Commutative-Ring R
                             ( one-Commutative-Ring R)
                             ( power-Commutative-Ring R
@@ -555,7 +560,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                 ( cons-sum-Commutative-Ring R
                   ( succ-ℕ (succ-ℕ n))
                   ( λ i →
-                    mul-nat-Commutative-Ring R
+                    mul-nat-scalar-Commutative-Ring R
                       ( binomial-coefficient-Fin (succ-ℕ (succ-ℕ n)) i)
                       ( mul-Commutative-Ring R
                         ( power-Commutative-Ring R
@@ -565,7 +570,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                           ( dist-ℕ
                             ( succ-ℕ (succ-ℕ n))
                             ( nat-Fin (succ-ℕ (succ-ℕ (succ-ℕ n))) i)) y)))
-                  ( ( ap-mul-nat-Commutative-Ring R
+                  ( ( ap-mul-nat-scalar-Commutative-Ring R
                       ( is-one-on-diagonal-binomial-coefficient-ℕ
                         ( succ-ℕ (succ-ℕ n)))
                       ( ( ap
@@ -576,7 +581,7 @@ binomial-theorem-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x y =
                             ( dist-eq-ℕ' (succ-ℕ (succ-ℕ n))))) ∙
                         ( right-unit-law-mul-Commutative-Ring R
                           ( power-Commutative-Ring R (succ-ℕ (succ-ℕ n)) x)))) ∙
-                    ( mul-nat-one-Commutative-Ring R
+                    ( left-unit-law-mul-nat-scalar-Commutative-Ring R
                       ( power-Commutative-Ring R
                         ( succ-ℕ (succ-ℕ n))
                         ( x))))))))))))

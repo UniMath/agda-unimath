@@ -231,86 +231,59 @@ module _
         ( mul-Commutative-Ring' z)
         ( commutative-mul-Commutative-Ring x y)) ∙
       ( associative-mul-Commutative-Ring y x z))
+```
 
-  mul-nat-Commutative-Ring :
+### Scalar multiplication of elements of a commutative ring by natural numbers
+
+```agda
+  mul-nat-scalar-Commutative-Ring :
     ℕ → type-Commutative-Ring → type-Commutative-Ring
-  mul-nat-Commutative-Ring zero-ℕ x = zero-Commutative-Ring
-  mul-nat-Commutative-Ring (succ-ℕ n) x =
-    add-Commutative-Ring (mul-nat-Commutative-Ring n x) x
+  mul-nat-scalar-Commutative-Ring =
+    mul-nat-scalar-Ring ring-Commutative-Ring
 
-  ap-mul-nat-Commutative-Ring :
+  ap-mul-nat-scalar-Commutative-Ring :
     {m n : ℕ} {x y : type-Commutative-Ring} →
     (m ＝ n) → (x ＝ y) →
-    mul-nat-Commutative-Ring m x ＝
-    mul-nat-Commutative-Ring n y
-  ap-mul-nat-Commutative-Ring p q =
-    ap-binary mul-nat-Commutative-Ring p q
+    mul-nat-scalar-Commutative-Ring m x ＝
+    mul-nat-scalar-Commutative-Ring n y
+  ap-mul-nat-scalar-Commutative-Ring =
+    ap-mul-nat-scalar-Ring ring-Commutative-Ring
 
-  mul-nat-one-Commutative-Ring :
+  left-unit-law-mul-nat-scalar-Commutative-Ring :
     (x : type-Commutative-Ring) → 
-    mul-nat-Commutative-Ring 1 x ＝ x
-  mul-nat-one-Commutative-Ring x = left-unit-law-add-Commutative-Ring x
+    mul-nat-scalar-Commutative-Ring 1 x ＝ x
+  left-unit-law-mul-nat-scalar-Commutative-Ring =
+    left-unit-law-mul-nat-scalar-Ring ring-Commutative-Ring
 
-  left-mul-nat-law-mul-Commutative-Ring :
+  left-nat-scalar-law-mul-Commutative-Ring :
     (n : ℕ) (x y : type-Commutative-Ring) →
-    mul-Commutative-Ring (mul-nat-Commutative-Ring n x) y ＝
-    mul-nat-Commutative-Ring n (mul-Commutative-Ring x y)
-  left-mul-nat-law-mul-Commutative-Ring zero-ℕ x y =
-    left-zero-law-mul-Commutative-Ring y
-  left-mul-nat-law-mul-Commutative-Ring (succ-ℕ n) x y =
-    ( right-distributive-mul-add-Commutative-Ring
-      ( mul-nat-Commutative-Ring n x)
-      ( x)
-      ( y)) ∙
-    ( ap
-      ( add-Commutative-Ring' (mul-Commutative-Ring x y))
-      ( left-mul-nat-law-mul-Commutative-Ring n x y))
+    mul-Commutative-Ring (mul-nat-scalar-Commutative-Ring n x) y ＝
+    mul-nat-scalar-Commutative-Ring n (mul-Commutative-Ring x y)
+  left-nat-scalar-law-mul-Commutative-Ring =
+    left-nat-scalar-law-mul-Ring ring-Commutative-Ring
 
-  right-mul-nat-law-mul-Commutative-Ring :
+  right-nat-scalar-law-mul-Commutative-Ring :
     (n : ℕ) (x y : type-Commutative-Ring) →
-    mul-Commutative-Ring x (mul-nat-Commutative-Ring n y) ＝
-    mul-nat-Commutative-Ring n (mul-Commutative-Ring x y)
-  right-mul-nat-law-mul-Commutative-Ring zero-ℕ x y =
-    right-zero-law-mul-Commutative-Ring x
-  right-mul-nat-law-mul-Commutative-Ring (succ-ℕ n) x y =
-    ( left-distributive-mul-add-Commutative-Ring x
-      ( mul-nat-Commutative-Ring n y)
-      ( y)) ∙
-    ( ap
-      ( add-Commutative-Ring' (mul-Commutative-Ring x y))
-      ( right-mul-nat-law-mul-Commutative-Ring n x y))
+    mul-Commutative-Ring x (mul-nat-scalar-Commutative-Ring n y) ＝
+    mul-nat-scalar-Commutative-Ring n (mul-Commutative-Ring x y)
+  right-nat-scalar-law-mul-Commutative-Ring =
+    right-nat-scalar-law-mul-Ring ring-Commutative-Ring
 
-  left-distributive-mul-nat-add-Commutative-Ring :
+  left-distributive-mul-nat-scalar-add-Commutative-Ring :
     (n : ℕ) (x y : type-Commutative-Ring) →
-    mul-nat-Commutative-Ring n (add-Commutative-Ring x y) ＝
+    mul-nat-scalar-Commutative-Ring n (add-Commutative-Ring x y) ＝
     add-Commutative-Ring
-      ( mul-nat-Commutative-Ring n x)
-      ( mul-nat-Commutative-Ring n y)
-  left-distributive-mul-nat-add-Commutative-Ring zero-ℕ x y =
-    inv (left-unit-law-add-Commutative-Ring zero-Commutative-Ring)
-  left-distributive-mul-nat-add-Commutative-Ring (succ-ℕ n) x y =
-    ( ap
-      ( add-Commutative-Ring' (add-Commutative-Ring x y))
-      ( left-distributive-mul-nat-add-Commutative-Ring n x y)) ∙
-    ( interchange-add-add-Commutative-Ring
-      ( mul-nat-Commutative-Ring n x)
-      ( mul-nat-Commutative-Ring n y)
-      ( x)
-      ( y))
+      ( mul-nat-scalar-Commutative-Ring n x)
+      ( mul-nat-scalar-Commutative-Ring n y)
+  left-distributive-mul-nat-scalar-add-Commutative-Ring =
+    left-distributive-mul-nat-scalar-add-Ring ring-Commutative-Ring
 
-  right-distributive-mul-nat-add-Commutative-Ring :
+  right-distributive-mul-nat-scalar-add-Commutative-Ring :
     (m n : ℕ) (x : type-Commutative-Ring) →
-    mul-nat-Commutative-Ring (add-ℕ m n) x ＝
+    mul-nat-scalar-Commutative-Ring (add-ℕ m n) x ＝
     add-Commutative-Ring
-      ( mul-nat-Commutative-Ring m x)
-      ( mul-nat-Commutative-Ring n x)
-  right-distributive-mul-nat-add-Commutative-Ring m zero-ℕ x =
-    inv (right-unit-law-add-Commutative-Ring (mul-nat-Commutative-Ring m x))
-  right-distributive-mul-nat-add-Commutative-Ring m (succ-ℕ n) x =
-    ( ap
-      ( add-Commutative-Ring' x)
-      ( right-distributive-mul-nat-add-Commutative-Ring m n x)) ∙
-    ( associative-add-Commutative-Ring
-      ( mul-nat-Commutative-Ring m x)
-      ( mul-nat-Commutative-Ring n x) x)
+      ( mul-nat-scalar-Commutative-Ring m x)
+      ( mul-nat-scalar-Commutative-Ring n x)
+  right-distributive-mul-nat-scalar-add-Commutative-Ring =
+    right-distributive-mul-nat-scalar-add-Ring ring-Commutative-Ring
 ```

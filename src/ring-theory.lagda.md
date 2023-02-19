@@ -4,6 +4,7 @@
 module ring-theory where
 
 open import ring-theory.algebras-rings public
+open import ring-theory.binomial-theorem-semirings public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.division-rings public
 open import ring-theory.homomorphisms-rings public

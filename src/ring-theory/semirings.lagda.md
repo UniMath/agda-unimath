@@ -3,6 +3,9 @@
 ```agda
 module ring-theory.semirings where
 
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -257,4 +260,86 @@ module _
     (x : type-Semiring R) → Id (mul-Semiring R x one-Semiring) x
   right-unit-law-mul-Semiring =
     right-unit-law-mul-Monoid multiplicative-monoid-Semiring
+```
+
+### Scalar multiplication of semiring elements by natural numbers
+
+```
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  mul-nat-scalar-Semiring : ℕ → type-Semiring R → type-Semiring R
+  mul-nat-scalar-Semiring zero-ℕ x = zero-Semiring R
+  mul-nat-scalar-Semiring (succ-ℕ n) x =
+    add-Semiring R (mul-nat-scalar-Semiring n x) x
+
+  ap-mul-nat-scalar-Semiring :
+    {m n : ℕ} {x y : type-Semiring R} →
+    (m ＝ n) → (x ＝ y) →
+    mul-nat-scalar-Semiring m x ＝ mul-nat-scalar-Semiring n y
+  ap-mul-nat-scalar-Semiring p q = ap-binary mul-nat-scalar-Semiring p q
+
+  left-unit-law-mul-nat-scalar-Semiring :
+    (x : type-Semiring R) →  mul-nat-scalar-Semiring 1 x ＝ x
+  left-unit-law-mul-nat-scalar-Semiring x = left-unit-law-add-Semiring R x
+
+  left-nat-scalar-law-mul-Semiring :
+    (n : ℕ) (x y : type-Semiring R) →
+    mul-Semiring R (mul-nat-scalar-Semiring n x) y ＝
+    mul-nat-scalar-Semiring n (mul-Semiring R x y)
+  left-nat-scalar-law-mul-Semiring zero-ℕ x y =
+    left-zero-law-mul-Semiring R y
+  left-nat-scalar-law-mul-Semiring (succ-ℕ n) x y =
+    ( right-distributive-mul-add-Semiring R
+      ( mul-nat-scalar-Semiring n x)
+      ( x)
+      ( y)) ∙
+    ( ap
+      ( add-Semiring' R (mul-Semiring R x y))
+      ( left-nat-scalar-law-mul-Semiring n x y))
+
+  right-nat-scalar-law-mul-Semiring :
+    (n : ℕ) (x y : type-Semiring R) →
+    mul-Semiring R x (mul-nat-scalar-Semiring n y) ＝
+    mul-nat-scalar-Semiring n (mul-Semiring R x y)
+  right-nat-scalar-law-mul-Semiring zero-ℕ x y =
+    right-zero-law-mul-Semiring R x
+  right-nat-scalar-law-mul-Semiring (succ-ℕ n) x y =
+    ( left-distributive-mul-add-Semiring R x
+      ( mul-nat-scalar-Semiring n y)
+      ( y)) ∙
+    ( ap
+      ( add-Semiring' R (mul-Semiring R x y))
+      ( right-nat-scalar-law-mul-Semiring n x y))
+
+  left-distributive-mul-nat-scalar-add-Semiring :
+    (n : ℕ) (x y : type-Semiring R) →
+    mul-nat-scalar-Semiring n (add-Semiring R x y) ＝
+    add-Semiring R (mul-nat-scalar-Semiring n x) (mul-nat-scalar-Semiring n y)
+  left-distributive-mul-nat-scalar-add-Semiring zero-ℕ x y =
+    inv (left-unit-law-add-Semiring R (zero-Semiring R))
+  left-distributive-mul-nat-scalar-add-Semiring (succ-ℕ n) x y =
+    ( ap
+      ( add-Semiring' R (add-Semiring R x y))
+      ( left-distributive-mul-nat-scalar-add-Semiring n x y)) ∙
+    ( interchange-add-add-Semiring R
+      ( mul-nat-scalar-Semiring n x)
+      ( mul-nat-scalar-Semiring n y)
+      ( x)
+      ( y))
+
+  right-distributive-mul-nat-scalar-add-Semiring :
+    (m n : ℕ) (x : type-Semiring R) →
+    mul-nat-scalar-Semiring (add-ℕ m n) x ＝
+    add-Semiring R (mul-nat-scalar-Semiring m x) (mul-nat-scalar-Semiring n x)
+  right-distributive-mul-nat-scalar-add-Semiring m zero-ℕ x =
+    inv (right-unit-law-add-Semiring R (mul-nat-scalar-Semiring m x))
+  right-distributive-mul-nat-scalar-add-Semiring m (succ-ℕ n) x =
+    ( ap
+      ( add-Semiring' R x)
+      ( right-distributive-mul-nat-scalar-add-Semiring m n x)) ∙
+    ( associative-add-Semiring R
+      ( mul-nat-scalar-Semiring m x)
+      ( mul-nat-scalar-Semiring n x) x)
 ```
