@@ -968,6 +968,7 @@
   - [Inequality types with counting](univalent-combinatorics.inequality-types-with-counting.md)
   - [Inhabited finite types](univalent-combinatorics.inhabited-finite-types.md)
   - [Injective maps](univalent-combinatorics.injective-maps.md)
+  - [Involution on the standard finite types](univalent-combinatorics.involution-standard-finite-types.md)
   - [Isotopies latin squares](univalent-combinatorics.isotopies-latin-squares.md)
   - [Kuratowsky finite sets](univalent-combinatorics.kuratowsky-finite-sets.md)
   - [Latin squares](univalent-combinatorics.latin-squares.md)
