@@ -3,7 +3,7 @@
 ```agda
 module foundation.repetitions where
 
-open import foundation.commuting-squares
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -70,7 +70,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : C → D) (e : A ≃ C) (d : B ≃ D)
-  (H : coherence-square (map-equiv e) f g (map-equiv d))
+  (H : coherence-square-maps (map-equiv e) f g (map-equiv d))
   where
 
   equiv-repetition : repetition f ≃ repetition g
@@ -112,7 +112,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : C → D) (e : A ↪ C) (d : B ↪ D)
-  (H : coherence-square (map-emb e) f g (map-emb d))
+  (H : coherence-square-maps (map-emb e) f g (map-emb d))
   where
 
   emb-repetition : repetition f ↪ repetition g

@@ -12,7 +12,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
-open import foundation.squares-of-identifications
+open import foundation.commuting-squares-of-identifications
 ```
 
 ## Idea
@@ -110,14 +110,14 @@ module _
           ( ap f (pr2 (pr2 H) x))
           ( ( ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙
             ( pr1 (pr2 H) (f x)))
-          ( sq-top-whisk
+          ( coherence-square-identifications-top-paste
             ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
             ( ap f (pr2 (pr2 H) x))
             ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
+            ( pr1 (pr2 H) (f x))
             ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
               ( inv
                 ( ap (ap f) (coh-is-coherently-invertible-id (pr2 (pr2 H)) x))))
-            ( pr1 (pr2 H) (f x))
             ( nat-htpy (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
 
   abstract
@@ -134,8 +134,8 @@ module _
 ## See also
 
 - For the notion of biinvertible maps see
-  [`foundation.equivalences`](foundation.equivalences.html).
+  [`foundation.equivalences`](foundation.equivalences.md).
 - For the notion of maps with contractible fibers see
-  [`foundation.contractible-maps`](foundation.contractible-maps.html).
+  [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
-  [`foundation.path-split-maps`](foundation.path-split-maps.html).
+  [`foundation.path-split-maps`](foundation.path-split-maps.md).

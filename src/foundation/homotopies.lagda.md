@@ -21,7 +21,7 @@ open import foundation.identity-types
 
 ## Idea
 
-A homotopy of identifications is a pointwise equality between dependent functions. We defined homotopies in [`foundation-core.homotopies`](foundation-core.homotopies.html). In this file, we record some properties of homotopies that require function extensionality, equivalences, or other.
+A homotopy of identifications is a pointwise equality between dependent functions. We defined homotopies in [`foundation-core.homotopies`](foundation-core.homotopies.md). In this file, we record some properties of homotopies that require function extensionality, equivalences, or other.
 
 ## Properties
 
@@ -278,6 +278,6 @@ module _
 ## See also
 
 - We postulate that homotopy is equivalent to identity of functions in
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.html).
+  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
 - We define an equational reasoning syntax for homotopies in
-  [`foundation.equational-reasoning`](foundation.equational-reasoning.html).
+  [`foundation.equational-reasoning`](foundation.equational-reasoning.md).
