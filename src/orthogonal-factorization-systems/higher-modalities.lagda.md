@@ -142,17 +142,13 @@ module _
 
 ## Properties
 
-### For higher modalities the modal operator of is a functor
+### For higher modalities the modal operator is a functor
 
 ```agda
 module _
-  {l : Level} (h : higher-modality l l)
+  {l : Level}
+  (((○ , is-locally-small-○) , unit-○ , Id-○ , ind-○ , comp-○) : higher-modality l l)
   where
-
-  private
-    ○ = modal-operator-higher-modality h
-    unit-○ = modal-unit-higher-modality h
-    ind-○ = induction-principle-higher-modality h
 
   map-○ : {X Y : UU l} → (X → Y) → ○ X → ○ Y
   map-○ {X} {Y} f = ind-○ X (λ _ → Y) (unit-○ ∘ f)
@@ -163,17 +159,9 @@ module _
 ```agda
 module _
   {l : Level}
-  (h : higher-modality l l)
+  (((○ , is-locally-small-○) , unit-○ , Id-○ , ind-○ , comp-○) : higher-modality l l)
   (X : UU l)
   where
-
-  private
-    ○ = modal-operator-higher-modality h
-    is-locally-small-○ = is-locally-small-modal-operator-higher-modality h
-    unit-○ = modal-unit-higher-modality h
-    Id-○ = is-modal-identity-types-higher-modality h
-    ind-○ = induction-principle-higher-modality h
-    comp-○ = computation-principle-higher-modality h
 
   map-inv-unit-○ : ○ (○ X) → ○ X
   map-inv-unit-○ = ind-○ (○ X) (λ _ → X) id
@@ -193,8 +181,14 @@ module _
       ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
       ( map-inv-is-equiv
         ( Id-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
-        ( map-○ h
+        ( map-○ ((○ , is-locally-small-○) , unit-○ , Id-○ , ind-○ , comp-○)
           ( map-equiv-is-small
             ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x''))
           ( ○-issec-map-inv-unit-○ x'')))
+
+  is-modal-○ : is-modal unit-○ (○ X)
+  pr1 (pr1 is-modal-○) = map-inv-unit-○
+  pr2 (pr1 is-modal-○) = issec-map-inv-unit-○
+  pr1 (pr2 is-modal-○) = map-inv-unit-○
+  pr2 (pr2 is-modal-○) = isretr-map-inv-unit-○
 ```
