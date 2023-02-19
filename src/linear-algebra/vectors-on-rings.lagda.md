@@ -11,6 +11,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.dependent-pair-types
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -257,14 +258,20 @@ module _
       ( right-inverse-law-add-Ring R x)
       ( right-inverse-law-add-vec-Ring v)
 
+  is-unital-vec-Ring : (n : ℕ) → is-unital (add-vec-Ring R {n})
+  pr1 (is-unital-vec-Ring n) = zero-vec-Ring R
+  pr1 (pr2 (is-unital-vec-Ring n)) = left-unit-law-add-vec-Ring R
+  pr2 (pr2 (is-unital-vec-Ring n)) = right-unit-law-add-vec-Ring R
+
+  is-group-vec-Ring : (n : ℕ) → is-group (vec-Ring-Semigroup R n)
+  pr1 (is-group-vec-Ring n) = is-unital-vec-Ring n
+  pr1 (pr2 (is-group-vec-Ring n)) = neg-vec-Ring
+  pr1 (pr2 (pr2 (is-group-vec-Ring n))) = left-inverse-law-add-vec-Ring
+  pr2 (pr2 (pr2 (is-group-vec-Ring n))) = right-inverse-law-add-vec-Ring
+
   vec-Ring-Group : ℕ → Group l
   pr1 (vec-Ring-Group n) = vec-Ring-Semigroup R n
-  pr1 (pr1 (pr2 (vec-Ring-Group n))) = zero-vec-Ring R
-  pr1 (pr2 (pr1 (pr2 (vec-Ring-Group n)))) = left-unit-law-add-vec-Ring R
-  pr2 (pr2 (pr1 (pr2 (vec-Ring-Group n)))) = right-unit-law-add-vec-Ring R
-  pr1 (pr2 (pr2 (vec-Ring-Group n))) = neg-vec-Ring
-  pr1 (pr2 (pr2 (pr2 (vec-Ring-Group n)))) = left-inverse-law-add-vec-Ring
-  pr2 (pr2 (pr2 (pr2 (vec-Ring-Group n)))) = right-inverse-law-add-vec-Ring
+  pr2 (vec-Ring-Group n) = is-group-vec-Ring n
 
   vec-Ring-Ab : ℕ → Ab l
   pr1 (vec-Ring-Ab n) = vec-Ring-Group n

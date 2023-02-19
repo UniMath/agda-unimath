@@ -22,6 +22,10 @@ open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
 ```
 
+## Idea
+
+Vectors on a commutative semiring `R` are vectors on the underlying type of `R`. The commutative semiring structur on `R` induces further structure on the type of vectors on `R`.
+
 ## Definitions
 
 ### Listed vectors on commutative semirings

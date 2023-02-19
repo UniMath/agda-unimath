@@ -21,6 +21,7 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -203,7 +204,7 @@ module _
 
 ### Multiplication in a ring
 
-```
+```agda
 module _
   {l : Level} (R : Ring l)
   where
@@ -302,16 +303,24 @@ module _
   {l : Level} (R : Ring l)
   where
 
+  commutative-monoid-Ring : Commutative-Monoid l
+  commutative-monoid-Ring = commutative-monoid-Ab (ab-Ring R)
+
+  has-mul-Ring : has-mul-Commutative-Monoid commutative-monoid-Ring
+  pr1 has-mul-Ring = has-associative-mul-Ring R
+  pr1 (pr2 has-mul-Ring) = is-unital-Ring R
+  pr1 (pr2 (pr2 has-mul-Ring)) = left-distributive-mul-add-Ring R
+  pr2 (pr2 (pr2 has-mul-Ring)) = right-distributive-mul-add-Ring R
+
+  zero-laws-mul-Ring :
+    zero-laws-Commutative-Monoid commutative-monoid-Ring has-mul-Ring
+  pr1 zero-laws-mul-Ring = left-zero-law-mul-Ring R
+  pr2 zero-laws-mul-Ring = right-zero-law-mul-Ring R
+
   semiring-Ring : Semiring l
-  pr1 semiring-Ring = commutative-monoid-Ab (ab-Ring R)
-  pr1 (pr1 (pr2 semiring-Ring)) = has-associative-mul-Ring R
-  pr1 (pr1 (pr2 (pr1 (pr2 semiring-Ring)))) = one-Ring R
-  pr1 (pr2 (pr1 (pr2 (pr1 (pr2 semiring-Ring))))) = left-unit-law-mul-Ring R
-  pr2 (pr2 (pr1 (pr2 (pr1 (pr2 semiring-Ring))))) = right-unit-law-mul-Ring R
-  pr1 (pr2 (pr2 (pr1 (pr2 semiring-Ring)))) = left-distributive-mul-add-Ring R
-  pr2 (pr2 (pr2 (pr1 (pr2 semiring-Ring)))) = right-distributive-mul-add-Ring R
-  pr1 (pr2 (pr2 semiring-Ring)) = left-zero-law-mul-Ring R
-  pr2 (pr2 (pr2 semiring-Ring)) = right-zero-law-mul-Ring R
+  pr1 semiring-Ring = commutative-monoid-Ring
+  pr1 (pr2 semiring-Ring) = has-mul-Ring
+  pr2 (pr2 semiring-Ring) = zero-laws-mul-Ring
 ```
 
 ### Computing multiplication with minus one in a ring
@@ -340,7 +349,7 @@ module _
 
 ### Scalar multiplication of ring elements by a natural number
 
-```
+```agda
 module _
   {l : Level} (R : Ring l)
   where

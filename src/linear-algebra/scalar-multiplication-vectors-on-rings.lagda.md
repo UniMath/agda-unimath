@@ -20,6 +20,8 @@ open import ring-theory.modules-rings
 open import ring-theory.rings
 ```
 
+## Definition
+
 ### Scalar multiplication of vectors on rings
 
 ```agda
@@ -67,6 +69,8 @@ module _
       ( right-distributive-mul-add-Ring R r s x)
       ( right-distributive-scalar-mul-add-vec-Ring r s v)
 ```
+
+## Properties
 
 ### Scalar multiplication defines an `Ab`-endomorphism of `vec-Ring`s, and this mapping is a ring homomorphism `R → End(vec R n)`
 

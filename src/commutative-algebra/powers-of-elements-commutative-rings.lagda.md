@@ -13,6 +13,10 @@ open import foundation.universe-levels
 open import ring-theory.powers-of-elements-rings
 ```
 
+## Idea
+
+The power operation on a commutative ring is the map `n x ↦ xⁿ`, which is defined by iteratively multiplying `x` with itself `n` times.
+
 ## Definition
 
 ```agda

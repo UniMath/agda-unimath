@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial theorem in commutative rings asserts that for any two elements `x` and `y` of a commutative ring `R` and any natural number `n`, we have
+The binomial theorem in semirings asserts that for any two elements `x` and `y` of a commutative ring `R` and any natural number `n`, if `xy = yx` holds then we have
 
 ```md
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
@@ -380,7 +380,7 @@ module _
 
 ## Theorem
 
-### Binomial theorem for commutative rings
+### Binomial theorem for semirings
 
 ```agda
 binomial-theorem-Semiring :

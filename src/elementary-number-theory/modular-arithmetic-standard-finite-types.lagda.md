@@ -718,8 +718,6 @@ is-injective-add-Fin' k x {y} {z} p =
     ( commutative-add-Fin k x y ∙ (p ∙ commutative-add-Fin k z x))
 ```
 
-## More laws
-
 ### `neg-Fin` multiplies by `-1`
 
 ```agda

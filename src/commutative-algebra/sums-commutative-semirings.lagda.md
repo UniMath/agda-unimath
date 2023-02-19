@@ -22,6 +22,10 @@ open import ring-theory.sums-semirings
 open import univalent-combinatorics.standard-finite-types
 ```
 
+## Idea
+
+The sum operation extends the binary addition operation on a commutative semiring `R` to any family of elements of `R` indexed by a standard finite type.
+
 ## Definition
 
 ```agda

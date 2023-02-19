@@ -51,9 +51,9 @@ has-mul-Commutative-Monoid M =
           pr1 μ (mul-Commutative-Monoid M a b) c ＝
           mul-Commutative-Monoid M (pr1 μ a c) (pr1 μ b c))))
 
-zero-laws-has-mul-Commutative-Monoid :
+zero-laws-Commutative-Monoid :
   {l : Level} (M : Commutative-Monoid l) → has-mul-Commutative-Monoid M → UU l
-zero-laws-has-mul-Commutative-Monoid M ((μ , α) , laws) =
+zero-laws-Commutative-Monoid M ((μ , α) , laws) =
   ( (x : type-Commutative-Monoid M) →
     μ (unit-Commutative-Monoid M) x ＝ unit-Commutative-Monoid M) ×
   ((x : type-Commutative-Monoid M) →
@@ -63,7 +63,7 @@ Semiring : (l : Level) → UU (lsuc l)
 Semiring l1 =
   Σ ( Commutative-Monoid l1)
     ( λ M →
-      Σ (has-mul-Commutative-Monoid M) (zero-laws-has-mul-Commutative-Monoid M))
+      Σ (has-mul-Commutative-Monoid M) (zero-laws-Commutative-Monoid M))
 
 module _
   {l : Level} (R : Semiring l)
@@ -183,7 +183,7 @@ module _
 
 ### Multiplication in a semiring
 
-```
+```agda
 module _
   {l : Level} (R : Semiring l)
   where
@@ -264,7 +264,7 @@ module _
 
 ### Scalar multiplication of semiring elements by natural numbers
 
-```
+```agda
 module _
   {l : Level} (R : Semiring l)
   where

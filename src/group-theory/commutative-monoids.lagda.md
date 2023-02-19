@@ -26,6 +26,8 @@ A commutative monoid is a monoid `M` in which `xy = yx` holds for all `x y : M`.
 
 ## Definition
 
+### Commutative monoids
+
 ```agda
 is-commutative-Monoid :
   {l : Level} (M : Monoid l) → UU l
@@ -53,7 +55,11 @@ module _
 
   is-set-type-Commutative-Monoid : is-set type-Commutative-Monoid
   is-set-type-Commutative-Monoid = is-set-type-Monoid monoid-Commutative-Monoid
+```
 
+### The multiplicative operation of a commutative monoid
+
+```agda
   has-associative-mul-Commutative-Monoid :
     has-associative-mul-Set set-Commutative-Monoid
   has-associative-mul-Commutative-Monoid =

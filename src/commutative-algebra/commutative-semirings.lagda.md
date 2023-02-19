@@ -22,9 +22,10 @@ A semiring `R` is said to be commutative if its multiplicative operation is comm
 
 ## Definition
 
+### Main definition
+
 ```agda
-is-commutative-Semiring :
-  { l : Level} → Semiring l → UU l
+is-commutative-Semiring : {l : Level} → Semiring l → UU l
 is-commutative-Semiring R =
   (x y : type-Semiring R) → mul-Semiring R x y ＝ mul-Semiring R y x
 
@@ -40,7 +41,11 @@ is-prop-is-commutative-Semiring R =
 Commutative-Semiring :
   ( l : Level) → UU (lsuc l)
 Commutative-Semiring l = Σ (Semiring l) is-commutative-Semiring
+```
 
+### Immediate infrastructure for commutative semirings
+
+```agda
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
@@ -223,6 +228,8 @@ module _
         ( commutative-mul-Commutative-Semiring x y)) ∙
       ( associative-mul-Commutative-Semiring y x z))
 ```
+
+## Operations
 
 ### Scalar multiplication of elements of a commutative ring by natural numbers
 
