@@ -3,10 +3,9 @@
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where
 
-open import foundation-core.dependent-pair-types
-
 open import foundation.contractible-types
 open import foundation.contractible-maps
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -101,9 +100,9 @@ module _
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
 
-  is-extension-vertical-comp :
+  is-extension-comp-vertical :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
-  is-extension-vertical-comp H G x = G x ∙ H (i x)
+  is-extension-comp-vertical H G x = G x ∙ H (i x)
 ```
 
 ### Horizontal composition of extensions of maps
@@ -124,9 +123,9 @@ module _
   {i : B → C} {j : (z : C) → P z}
   where
 
-  is-extension-horizontal-comp :
+  is-extension-comp-horizontal :
     (I : is-extension f g i) → is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
-  is-extension-horizontal-comp I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
+  is-extension-comp-horizontal I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
 ### Left whiskering of extensions of maps
@@ -177,7 +176,7 @@ module _
 
 ## Properties
 
-### Identifications of extensions of maps
+### Characterizing identifications of extensions of maps
 
 ```agda
 module _
@@ -248,7 +247,7 @@ module _
   pr2 (is-small-total-extension P) = inv-compute-total-extension P
 ```
 
-### If `P` is `k`-truncated then the type of extensions is `k`-truncated
+### The truncation level of the type of extensions is bounded by the truncation level of the codomains
 
 ```agda
 module _
@@ -298,7 +297,7 @@ module _
     is-prop-Π λ x → is-set-P x (f x) (g (i x))
 ```
 
-### Characterizing extensions in terms of the precomposition function
+### Every map has a unique extension along `i` if and only if `P` is `i`-local
 
 ```agda
 module _
@@ -355,4 +354,5 @@ is-extension-along-self _ = refl-htpy
 
 ## See also
 
-- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.md) for the dual notion.
+- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.md)
+  for the dual notion.
