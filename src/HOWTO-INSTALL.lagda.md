@@ -33,13 +33,14 @@ In the `agda-unimath` library, we use two notations for the identity type. The i
 After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`. While you're at it, you can also add the key sequence `yo` to obtain the Japanese symbol `ょ` for the Yoneda embedding.
 
 **Warning**: This library uses unicode characters extensively, so it is important to use a font family with wide support for these.
-As a suggestion, this webiste uses the following family of fonts in prioritized order (decreasing) to display Agda code:
-```css
-Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace
-```
 For example, the infix whiskering operators `_·l_` and `_·r_` use the symbol `·` ("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`)
 as opposed to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙` ("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`).
 If these look the same in your editor, we suggest that you change your font.
+If you are looking for a suggestion, this website uses the following family of fonts in prioritized order (decreasing) to display Agda code:
+```css
+Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace
+```
+
 
 ### After the setup
 
