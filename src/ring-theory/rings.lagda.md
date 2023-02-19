@@ -22,12 +22,14 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
+open import ring-theory.semirings
+
 open import univalent-combinatorics.lists
 ```
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the integers. A ring consists of a set equipped with additian and multiplication, where the addition operation gives the ring the structure of an abelian group, and the multiplication is associative, unital, and distributive over addition.
+The concept of ring vastly generalizes the arithmetical structure on the integers. A ring consists of a set equipped with addition and multiplication, where the addition operation gives the ring the structure of an abelian group, and the multiplication is associative, unital, and distributive over addition.
 
 ## Definitions
 
@@ -288,6 +290,25 @@ module _
       ( ( inv
           ( left-distributive-mul-add-Ring R x (zero-Ring R) (zero-Ring R))) ∙
         ( ap (mul-Ring R x) (left-unit-law-add-Ring R (zero-Ring R))))
+```
+
+### Rings are semirings
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  semiring-Ring : Semiring l
+  pr1 semiring-Ring = commutative-monoid-Ab (ab-Ring R)
+  pr1 (pr1 (pr2 semiring-Ring)) = has-associative-mul-Ring R
+  pr1 (pr1 (pr2 (pr1 (pr2 semiring-Ring)))) = one-Ring R
+  pr1 (pr2 (pr1 (pr2 (pr1 (pr2 semiring-Ring))))) = left-unit-law-mul-Ring R
+  pr2 (pr2 (pr1 (pr2 (pr1 (pr2 semiring-Ring))))) = right-unit-law-mul-Ring R
+  pr1 (pr2 (pr2 (pr1 (pr2 semiring-Ring)))) = left-distributive-mul-add-Ring R
+  pr2 (pr2 (pr2 (pr1 (pr2 semiring-Ring)))) = right-distributive-mul-add-Ring R
+  pr1 (pr2 (pr2 semiring-Ring)) = left-zero-law-mul-Ring R
+  pr2 (pr2 (pr2 semiring-Ring)) = right-zero-law-mul-Ring R
 ```
 
 ### Computing multiplication with minus one in a ring

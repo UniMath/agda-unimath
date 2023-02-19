@@ -15,9 +15,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
-open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
@@ -25,10 +23,6 @@ open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.scalar-multiplication-vectors
 open import linear-algebra.vectors
-
-open import ring-theory.homomorphisms-rings
-open import ring-theory.modules-rings
-
 
 open import ring-theory.rings
 
@@ -264,84 +258,15 @@ module _
       ( right-inverse-law-add-vec-Ring v)
 
   vec-Ring-Group : ℕ → Group l
-  vec-Ring-Group n = vec-Ring-Semigroup R n ,
-    (zero-vec-Ring R , left-unit-law-add-vec-Ring R , right-unit-law-add-vec-Ring R) ,
-    (neg-vec-Ring , left-inverse-law-add-vec-Ring , right-inverse-law-add-vec-Ring)
+  pr1 (vec-Ring-Group n) = vec-Ring-Semigroup R n
+  pr1 (pr1 (pr2 (vec-Ring-Group n))) = zero-vec-Ring R
+  pr1 (pr2 (pr1 (pr2 (vec-Ring-Group n)))) = left-unit-law-add-vec-Ring R
+  pr2 (pr2 (pr1 (pr2 (vec-Ring-Group n)))) = right-unit-law-add-vec-Ring R
+  pr1 (pr2 (pr2 (vec-Ring-Group n))) = neg-vec-Ring
+  pr1 (pr2 (pr2 (pr2 (vec-Ring-Group n)))) = left-inverse-law-add-vec-Ring
+  pr2 (pr2 (pr2 (pr2 (vec-Ring-Group n)))) = right-inverse-law-add-vec-Ring
 
   vec-Ring-Ab : ℕ → Ab l
-  vec-Ring-Ab n = vec-Ring-Group n , commutative-add-vec-Ring R
+  pr1 (vec-Ring-Ab n) = vec-Ring-Group n
+  pr2 (vec-Ring-Ab n) = commutative-add-vec-Ring R
 ```
-
-### Scalar multiplication of vectors on rings
-
-```agda
-module _
-  {l : Level} (R : Ring l)
-  where
-
-  scalar-mul-vec-Ring : {n : ℕ} (r : type-Ring R) → vec-Ring R n → vec-Ring R n
-  scalar-mul-vec-Ring r empty-vec = empty-vec
-  scalar-mul-vec-Ring r (x ∷ v) = mul-Ring R r x ∷ scalar-mul-vec-Ring r v
-
-  associative-scalar-mul-vec-Ring :
-    {n : ℕ} (r s : type-Ring R) (v : vec-Ring R n) →
-    Id ( scalar-mul-vec-Ring (mul-Ring R r s) v)
-       ( scalar-mul-vec-Ring r (scalar-mul-vec-Ring s v))
-  associative-scalar-mul-vec-Ring r s empty-vec = refl
-  associative-scalar-mul-vec-Ring r s (x ∷ v) =
-    ap-binary _∷_
-      ( associative-mul-Ring R r s x)
-      ( associative-scalar-mul-vec-Ring r s v)
-
-  unit-law-scalar-mul-vec-Ring :
-    {n : ℕ} (v : vec-Ring R n) → Id (scalar-mul-vec-Ring (one-Ring R) v) v
-  unit-law-scalar-mul-vec-Ring empty-vec = refl
-  unit-law-scalar-mul-vec-Ring (x ∷ v) =
-    ap-binary _∷_ (left-unit-law-mul-Ring R x) (unit-law-scalar-mul-vec-Ring v)
-
-  left-distributive-scalar-mul-add-vec-Ring :
-    {n : ℕ} (r : type-Ring R) (v1 v2 : vec-Ring R n) →
-    Id ( scalar-mul-vec-Ring r (add-vec-Ring R v1 v2))
-       ( add-vec-Ring R (scalar-mul-vec-Ring r v1) (scalar-mul-vec-Ring r v2))
-  left-distributive-scalar-mul-add-vec-Ring r empty-vec empty-vec = refl
-  left-distributive-scalar-mul-add-vec-Ring r (x ∷ v1) (y ∷ v2) =
-    ap-binary _∷_
-      ( left-distributive-mul-add-Ring R r x y)
-      ( left-distributive-scalar-mul-add-vec-Ring r v1 v2)
-
-  right-distributive-scalar-mul-add-vec-Ring :
-    {n : ℕ} (r s : type-Ring R) (v : vec-Ring R n) →
-    Id ( scalar-mul-vec-Ring (add-Ring R r s) v)
-       ( add-vec-Ring R (scalar-mul-vec-Ring r v) (scalar-mul-vec-Ring s v))
-  right-distributive-scalar-mul-add-vec-Ring r s empty-vec = refl
-  right-distributive-scalar-mul-add-vec-Ring r s (x ∷ v) =
-    ap-binary _∷_
-      ( right-distributive-mul-add-Ring R r s x)
-      ( right-distributive-scalar-mul-add-vec-Ring r s v)
-```
-
-Scalar multiplication defines an `Ab`-endomorphism of `vec-Ring`s, and this mapping is a ring homomorphism `R → End(vec R n)`
-
-```agda
-  scalar-mul-vec-Ring-endomorphism : (n : ℕ) (r : type-Ring R) → type-hom-Ab (vec-Ring-Ab R n) (vec-Ring-Ab R n)
-  scalar-mul-vec-Ring-endomorphism n r = 
-    scalar-mul-vec-Ring r ,
-    left-distributive-scalar-mul-add-vec-Ring r
-
-  scalar-mul-hom-Ring : (n : ℕ) → type-hom-Ring R (endomorphism-ring-Ab (vec-Ring-Ab R n))
-  scalar-mul-hom-Ring n = (scalar-mul-vec-Ring-endomorphism n , 
-    (λ k1 k2 → hom-extensional (right-distributive-scalar-mul-add-vec-Ring k1 k2))), 
-    (λ k1 k2 → hom-extensional (associative-scalar-mul-vec-Ring k1 k2)) ,
-    hom-extensional (unit-law-scalar-mul-vec-Ring)
-      where
-        V = vec-Ring-Ab R n
-        hom-extensional : {f g : type-hom-Ab V V}
-            → ((v : vec-Ring R n) → Id (map-hom-Ab V V f v) (map-hom-Ab V V g v))
-            → Id f g
-        hom-extensional = eq-htpy-hom-Ab V V
-
-  vec-left-module-Ring : (n : ℕ) → left-module-Ring l R
-  vec-left-module-Ring n = vec-Ring-Ab R n , scalar-mul-hom-Ring n
-```
-
-## Properties

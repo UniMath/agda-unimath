@@ -15,6 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -154,6 +155,24 @@ module _
 
   neg-zero-Ab : neg-Ab zero-Ab ＝ zero-Ab
   neg-zero-Ab = inv-unit-Group group-Ab
+```
+
+### Abelian groups are commutative monoids
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  monoid-Ab : Monoid l
+  pr1 monoid-Ab = semigroup-Ab A
+  pr1 (pr2 monoid-Ab) = zero-Ab A
+  pr1 (pr2 (pr2 monoid-Ab)) = left-unit-law-add-Ab A
+  pr2 (pr2 (pr2 monoid-Ab)) = right-unit-law-add-Ab A
+
+  commutative-monoid-Ab : Commutative-Monoid l
+  pr1 commutative-monoid-Ab = monoid-Ab
+  pr2 commutative-monoid-Ab = commutative-add-Ab A
 ```
 
 ### Addition on an abelian group is a binary equivalence

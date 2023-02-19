@@ -28,15 +28,15 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the integers. A ring consists of a set equipped with additian and multiplication, where the addition operation gives the ring the structure of an abelian group, and the multiplication is associative, unital, and distributive over addition.
+The concept of semiring vastly generalizes the arithmetical structure on the natural numbers. A semiring consists of a set equipped with addition and multiplication, where the addition operation gives the ring the structure of a commutative monoid, and the multiplication is associative, unital, and distributive over addition.
 
 ## Definitions
 
-### Rings
+### Semirings
 
 ```agda
 has-mul-Commutative-Monoid :
-  {l1 : Level} → Commutative-Monoid l1 → UU l1
+  {l : Level} → Commutative-Monoid l → UU l
 has-mul-Commutative-Monoid M =
   Σ ( has-associative-mul-Set (set-Commutative-Monoid M))
     ( λ μ →
@@ -48,8 +48,19 @@ has-mul-Commutative-Monoid M =
           pr1 μ (mul-Commutative-Monoid M a b) c ＝
           mul-Commutative-Monoid M (pr1 μ a c) (pr1 μ b c))))
 
-Semiring : (l1 : Level) → UU (lsuc l1)
-Semiring l1 = Σ (Commutative-Monoid l1) has-mul-Commutative-Monoid
+zero-laws-has-mul-Commutative-Monoid :
+  {l : Level} (M : Commutative-Monoid l) → has-mul-Commutative-Monoid M → UU l
+zero-laws-has-mul-Commutative-Monoid M ((μ , α) , laws) =
+  ( (x : type-Commutative-Monoid M) →
+    μ (unit-Commutative-Monoid M) x ＝ unit-Commutative-Monoid M) ×
+  ((x : type-Commutative-Monoid M) →
+    μ x (unit-Commutative-Monoid M) ＝ unit-Commutative-Monoid M)
+
+Semiring : (l : Level) → UU (lsuc l)
+Semiring l1 =
+  Σ ( Commutative-Monoid l1)
+    ( λ M →
+      Σ (has-mul-Commutative-Monoid M) (zero-laws-has-mul-Commutative-Monoid M))
 
 module _
   {l : Level} (R : Semiring l)
@@ -76,7 +87,7 @@ module _
     is-set-type-Commutative-Monoid commutative-monoid-Semiring
 ```
 
-### Addition in a ring
+### Addition in a semiring
 
 ```agda
 module _
@@ -175,7 +186,7 @@ module _
   where
   
   has-associative-mul-Semiring : has-associative-mul-Set (set-Semiring R)
-  has-associative-mul-Semiring = pr1 (pr2 R)
+  has-associative-mul-Semiring = pr1 (pr1 (pr2 R))
 
   mul-Semiring : type-Semiring R → type-Semiring R → type-Semiring R
   mul-Semiring = pr1 has-associative-mul-Semiring
@@ -202,17 +213,25 @@ module _
     mul-Semiring x (add-Semiring R y z) ＝
     add-Semiring R (mul-Semiring x y) (mul-Semiring x z)
   left-distributive-mul-add-Semiring =
-    pr1 (pr2 (pr2 (pr2 R)))
+    pr1 (pr2 (pr2 (pr1 (pr2 R))))
 
   right-distributive-mul-add-Semiring :
     (x y z : type-Semiring R) →
     Id ( mul-Semiring (add-Semiring R x y) z)
       ( add-Semiring R (mul-Semiring x z) (mul-Semiring y z))
   right-distributive-mul-add-Semiring =
-    pr2 (pr2 (pr2 (pr2 R)))
+    pr2 (pr2 (pr2 (pr1 (pr2 R))))
+
+  left-zero-law-mul-Semiring :
+    (x : type-Semiring R) → mul-Semiring (zero-Semiring R) x ＝ zero-Semiring R
+  left-zero-law-mul-Semiring = pr1 (pr2 (pr2 R))
+
+  right-zero-law-mul-Semiring :
+    (x : type-Semiring R) → mul-Semiring x (zero-Semiring R) ＝ zero-Semiring R
+  right-zero-law-mul-Semiring = pr2 (pr2 (pr2 R))
 ```
 
-### Multiplicative units in a ring
+### Multiplicative units in a semiring
 
 ```agda
 module _
@@ -220,7 +239,7 @@ module _
   where
 
   is-unital-Semiring : is-unital (mul-Semiring R)
-  is-unital-Semiring = pr1 (pr2 (pr2 R))
+  is-unital-Semiring = pr1 (pr2 (pr1 (pr2 R)))
 
   multiplicative-monoid-Semiring : Monoid l
   pr1 multiplicative-monoid-Semiring = multiplicative-semigroup-Semiring R
