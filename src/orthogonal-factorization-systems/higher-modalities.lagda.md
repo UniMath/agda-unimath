@@ -28,26 +28,33 @@ open import orthogonal-factorization-systems.modal-operators
 ```agda
 module _
   {l1 l2 : Level}
-  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
+  {○ : modal-operator l1 l2}
   (unit-○ : modal-unit ○)
   where
 
-  modality-induction-principle : UU (lsuc l1 ⊔ l2)
-  modality-induction-principle =
+  modal-ind : UU (lsuc l1 ⊔ l2)
+  modal-ind =
     (X : UU l1) (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) →
     (x' : ○ X) → ○ (P x')
 
-  modality-recursion-principle : UU (lsuc l1 ⊔ l2)
-  modality-recursion-principle =
-    (X : UU l1) (Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
+  modal-rec : UU (lsuc l1 ⊔ l2)
+  modal-rec = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
 
-  modality-computation-principle :
-    modality-induction-principle → UU (lsuc l1 ⊔ l2)
-  modality-computation-principle ind-○ =
+  modal-comp : modal-ind → UU (lsuc l1 ⊔ l2)
+  modal-comp ind-○ =
     (X : UU l1) (P : ○ X → UU l1) →
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
+
+  modal-rec-modal-ind : modal-ind → modal-rec
+  modal-rec-modal-ind ind X Y = ind X (λ _ → Y)
+
+module _
+  {l1 l2 : Level}
+  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
+  (unit-○ : modal-unit ○)
+  where
 
   is-modal-identity-types : UU (lsuc l1 ⊔ l2)
   is-modal-identity-types =
@@ -57,21 +64,24 @@ module _
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
     is-modal-identity-types ×
-      Σ ( modality-induction-principle)
-        ( modality-computation-principle)
+      Σ ( modal-ind unit-○)
+        ( modal-comp unit-○)
 
   is-modal-identity-types-is-higher-modality :
     is-higher-modality → is-modal-identity-types
   is-modal-identity-types-is-higher-modality = pr1
 
-  induction-principle-is-higher-modality :
-    is-higher-modality → modality-induction-principle
-  induction-principle-is-higher-modality = pr1 ∘ pr2
+  modal-ind-is-higher-modality : is-higher-modality → modal-ind unit-○
+  modal-ind-is-higher-modality = pr1 ∘ pr2
 
-  computation-principle-is-higher-modality :
+  modal-rec-is-higher-modality : is-higher-modality → modal-rec unit-○
+  modal-rec-is-higher-modality =
+    modal-rec-modal-ind unit-○ ∘ modal-ind-is-higher-modality
+
+  modal-comp-is-higher-modality :
     (h : is-higher-modality) →
-    modality-computation-principle (induction-principle-is-higher-modality h)
-  computation-principle-is-higher-modality = pr2 ∘ pr2
+    modal-comp unit-○ (modal-ind-is-higher-modality h)
+  modal-comp-is-higher-modality = pr2 ∘ pr2
 
 higher-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 higher-modality l1 l2 =
@@ -91,70 +101,75 @@ module _
   modal-operator-higher-modality : modal-operator l1 l2
   modal-operator-higher-modality =
     modal-operator-locally-small-modal-operator
-      locally-small-modal-operator-higher-modality
+      ( locally-small-modal-operator-higher-modality)
 
   is-locally-small-modal-operator-higher-modality :
     is-locally-small-modal-operator (modal-operator-higher-modality)
   is-locally-small-modal-operator-higher-modality =
     is-locally-small-locally-small-modal-operator
-      locally-small-modal-operator-higher-modality
+      ( locally-small-modal-operator-higher-modality)
 
-  modal-unit-higher-modality : modal-unit modal-operator-higher-modality
+  modal-unit-higher-modality :
+    modal-unit (modal-operator-higher-modality)
   modal-unit-higher-modality = pr1 (pr2 h)
 
   is-higher-modality-higher-modality :
     is-higher-modality
-      locally-small-modal-operator-higher-modality
-      modal-unit-higher-modality
+      ( locally-small-modal-operator-higher-modality)
+      ( modal-unit-higher-modality)
   is-higher-modality-higher-modality = pr2 (pr2 h)
 
   is-modal-identity-types-higher-modality :
     is-modal-identity-types
-      locally-small-modal-operator-higher-modality
-      modal-unit-higher-modality
+      ( locally-small-modal-operator-higher-modality)
+      ( modal-unit-higher-modality)
   is-modal-identity-types-higher-modality =
-    is-modal-identity-types-is-higher-modality
-    locally-small-modal-operator-higher-modality
-    modal-unit-higher-modality
-    is-higher-modality-higher-modality
+    ( is-modal-identity-types-is-higher-modality)
+    ( locally-small-modal-operator-higher-modality)
+    ( modal-unit-higher-modality)
+    ( is-higher-modality-higher-modality)
 
-  induction-principle-higher-modality :
-    modality-induction-principle
-      locally-small-modal-operator-higher-modality
-      modal-unit-higher-modality
-  induction-principle-higher-modality =
-    induction-principle-is-higher-modality
-      locally-small-modal-operator-higher-modality
-      modal-unit-higher-modality
-      is-higher-modality-higher-modality
+  modal-ind-higher-modality :
+    modal-ind (modal-unit-higher-modality)
+  modal-ind-higher-modality =
+    modal-ind-is-higher-modality
+      ( locally-small-modal-operator-higher-modality)
+      ( modal-unit-higher-modality)
+      ( is-higher-modality-higher-modality)
+  
+  modal-rec-higher-modality :
+    modal-rec (modal-unit-higher-modality)
+  modal-rec-higher-modality =
+    modal-rec-modal-ind
+      ( modal-unit-higher-modality)
+      ( modal-ind-higher-modality)
 
-  computation-principle-higher-modality :
-      modality-computation-principle
-        locally-small-modal-operator-higher-modality
-        modal-unit-higher-modality
-        induction-principle-higher-modality
-  computation-principle-higher-modality =
-    computation-principle-is-higher-modality
-      locally-small-modal-operator-higher-modality
-      modal-unit-higher-modality
-      is-higher-modality-higher-modality
+  modal-comp-higher-modality :
+    modal-comp
+      ( modal-unit-higher-modality)
+      ( modal-ind-higher-modality)
+  modal-comp-higher-modality =
+    modal-comp-is-higher-modality
+      ( locally-small-modal-operator-higher-modality)
+      ( modal-unit-higher-modality)
+      ( is-higher-modality-higher-modality)
 ```
 
 ## Properties
 
-### For higher modalities the modal operator is a functor
+### Given a modal recursion principle the modal operator has an action on maps
 
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , Id-○ , ind-○ , comp-○) : higher-modality l l)
+  {○ : modal-operator l l} (unit-○ : modal-unit ○) (rec-○ : modal-rec unit-○)
   where
 
   map-○ : {X Y : UU l} → (X → Y) → ○ X → ○ Y
-  map-○ {X} {Y} f = ind-○ X (λ _ → Y) (unit-○ ∘ f)
+  map-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
 ```
 
-### For higher modalities `○ X` is modal
+### `○ X` is modal
 
 ```agda
 module _
@@ -169,7 +184,8 @@ module _
   isretr-map-inv-unit-○ : (map-inv-unit-○ ∘ unit-○) ~ id
   isretr-map-inv-unit-○ = comp-○ (○ X) (λ _ → X) id
 
-  ○-issec-map-inv-unit-○ : (x' : ○ (○ X)) → ○ (unit-○ (map-inv-unit-○ x') ＝ x')
+  ○-issec-map-inv-unit-○ :
+    (x' : ○ (○ X)) → ○ (unit-○ (map-inv-unit-○ x') ＝ x')
   ○-issec-map-inv-unit-○ =
     ind-○ (○ X)
       ( λ x'' → unit-○ (map-inv-unit-○ x'') ＝ x'')
@@ -181,7 +197,7 @@ module _
       ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
       ( map-inv-is-equiv
         ( Id-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
-        ( map-○ ((○ , is-locally-small-○) , unit-○ , Id-○ , ind-○ , comp-○)
+        ( map-○ unit-○ (modal-rec-modal-ind unit-○ ind-○)
           ( map-equiv-is-small
             ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x''))
           ( ○-issec-map-inv-unit-○ x'')))
