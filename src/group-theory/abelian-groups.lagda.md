@@ -157,6 +157,8 @@ module _
   neg-zero-Ab = inv-unit-Group group-Ab
 ```
 
+## Properties
+
 ### Abelian groups are commutative monoids
 
 ```agda

@@ -27,7 +27,6 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
-
 open import univalent-combinatorics.standard-finite-types
 ```
 
