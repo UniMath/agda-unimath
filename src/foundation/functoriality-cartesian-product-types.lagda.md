@@ -3,8 +3,10 @@
 ```agda
 module foundation.functoriality-cartesian-product-types where
 
+open import foundation-core.constant-maps
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -12,6 +14,8 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
+open import foundation-core.sections
+open import foundation-core.retractions
 ```
 
 ## Idea
@@ -112,6 +116,21 @@ module _
     is-equiv-map-prod f g is-equiv-f is-equiv-g
 ```
 
+### TODO: title
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4} {D : UU l5}
+  (f : X → A) (g : X → B) (u : X → C) (v : X → D) (s : A → C) (t : B → D)
+  where
+
+  -- TODO: prove facts about (map-prod f g ∘ diagonal) ≡ ⟨ f , g ⟩ somewhere else?
+  htpy-comp-parallel-prod : (u ~ (s ∘ f)) → (v ~ (t ∘ g)) →
+    ((map-prod u v ∘ diagonal X) ~ (map-prod s t ∘ (map-prod f g ∘ diagonal X)))
+  htpy-comp-parallel-prod H K x = eq-pair (H x) (K x)
+
+```
+
 ### The fibers of `map-prod f g`
 
 ```agda
@@ -180,6 +199,87 @@ module _
     (t : C × D) → fib (map-prod f g) t ≃ ((fib f (pr1 t)) × (fib g (pr2 t)))
   pr1 (compute-fib-map-prod t) = map-compute-fib-map-prod t
   pr2 (compute-fib-map-prod t) = is-equiv-map-compute-fib-map-prod t
+```
+
+### TODO: title
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → C) (g : B → D)
+  where
+
+  module _
+    ((pair (pair s-fg S-fg) (pair r-fg R-fg)) : is-equiv (map-prod f g))
+    where
+
+    -- TODO: "component" sounds weird
+    sec-map-prod-component-pr1 : D → sec f
+    pr1 (sec-map-prod-component-pr1 d) c = pr1 (s-fg (pair c d))
+    pr2 (sec-map-prod-component-pr1 d) c = (pr1 ·l S-fg) (pair c d)
+
+    sec-map-prod-component-pr2 : C → sec g
+    pr1 (sec-map-prod-component-pr2 c) d = pr2 (s-fg (pair c d))
+    pr2 (sec-map-prod-component-pr2 c) d = (pr2 ·l S-fg) (pair c d)
+
+    retr-map-prod-component-pr1 : D → retr f
+    pr1 (retr-map-prod-component-pr1 d) c = pr1 (r-fg (pair c d))
+    pr2 (retr-map-prod-component-pr1 d) =
+      ((pr1 ∘ r-fg) ·l triangle-sec) ∙h ((pr1 ·l R-fg) ·r id×const)
+      where
+      get-sec-g : A → sec g
+      get-sec-g a = sec-map-prod-component-pr2 (f a)
+      across : A → B
+      across a = pr1 (get-sec-g a) d
+      id×const : A → A × B
+      id×const = map-prod id across ∘ diagonal _
+      triangle-sec : (map-prod f (const _ _ _ d) ∘ diagonal _) ~ ((map-prod f g) ∘ id×const)
+      triangle-sec =
+        htpy-comp-parallel-prod
+          id across
+          _ _
+          f g
+          refl-htpy (inv-htpy (λ a → (pr2 (get-sec-g a)) d))
+
+    -- TODO: which looks better
+    retr-map-prod-component-pr2 : C → retr g
+    pr1 (retr-map-prod-component-pr2 c) d = pr2 (r-fg (pair c d))
+    pr2 (retr-map-prod-component-pr2 c) =
+       ((pr2 ∘ r-fg) ·l triangle-sec) ∙h ((pr2 ·l R-fg) ·r const×id)
+      where
+      get-sec-f : B → sec f
+      get-sec-f b = sec-map-prod-component-pr1 (g b)
+      const×id : B → A × B
+      const×id b = (pair (pr1 (get-sec-f b) c) b)
+      triangle-sec : (λ b → (pair c (g b))) ~ ((map-prod f g) ∘ const×id)
+      triangle-sec b = eq-pair (inv-htpy (pr2 (get-sec-f b)) c) refl
+
+  prod-equivs-nonempty-codoms-is-equiv-map-prod :
+    is-equiv (map-prod f g) → (D → is-equiv f) × (C → is-equiv g)
+  pr1 (pr1 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) d) =
+    sec-map-prod-component-pr1 e d
+  pr2 (pr1 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) d) =
+    retr-map-prod-component-pr1 e d
+  pr1 (pr2 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) c) =
+    sec-map-prod-component-pr2 e c
+  pr2 (pr2 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) c) =
+    retr-map-prod-component-pr2 e c
+
+  is-equiv-map-prod-equivs-nonempty-codom' :
+    (C × D) → (D → is-equiv f) → (C → is-equiv g) → is-equiv (map-prod f g)
+  is-equiv-map-prod-equivs-nonempty-codom' (pair c d) f' g' =
+    is-equiv-map-prod f g (f' d) (g' c)
+
+  is-equiv-map-prod-equivs-nonempty-codoms :
+    ((D → is-equiv f) × (C → is-equiv g)) → is-equiv (map-prod f g)
+  pr1 (pr1 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) cd =
+    pr1 (pr1 (is-equiv-map-prod-equivs-nonempty-codom' cd f' g')) cd
+  pr2 (pr1 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) cd =
+    pr2 (pr1 ((is-equiv-map-prod-equivs-nonempty-codom' cd f' g'))) cd
+  pr1 (pr2 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) cd =
+    pr1 (pr2 (is-equiv-map-prod-equivs-nonempty-codom' cd f' g')) cd
+  pr2 (pr2 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) ab =
+    pr2 (pr2 (is-equiv-map-prod-equivs-nonempty-codom' (map-prod f g ab) f' g')) ab
 ```
 
 ## See also
