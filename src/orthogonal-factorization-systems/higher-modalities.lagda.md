@@ -24,7 +24,7 @@ open import orthogonal-factorization-systems.modal-operators
 ```agda
 module _
   {l1 l2 : Level}
-  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2)
+  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
   (unit-○ : modal-unit ○)
   where
 
@@ -67,7 +67,7 @@ module _
 
 higher-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 higher-modality l1 l2 =
-  Σ ( locally-small-modal-operator l1 l2)
+  Σ ( locally-small-modal-operator l1 l2 l1)
     ( λ ○ →
       Σ ( modal-unit (pr1 ○))
         ( is-higher-modality ○))
@@ -77,7 +77,7 @@ module _
     where
 
   locally-small-modal-operator-higher-modality :
-    locally-small-modal-operator l1 l2
+    locally-small-modal-operator l1 l2 l1
   locally-small-modal-operator-higher-modality = pr1 h
 
   modal-operator-higher-modality : modal-operator l1 l2

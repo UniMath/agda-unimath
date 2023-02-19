@@ -58,19 +58,22 @@ locally small types.
 
 ```agda
 is-locally-small-modal-operator :
-  {l1 l2 : Level} (○ : modal-operator l1 l2) → UU (lsuc l1 ⊔ l2)
-is-locally-small-modal-operator {l1} ○ = (X : UU l1) → is-locally-small l1 (○ X)
+  {l1 l2 l3 : Level} (○ : modal-operator l1 l2) → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
+is-locally-small-modal-operator {l1} {l2} {l3} ○ =
+  (X : UU l1) → is-locally-small l3 (○ X)
 
-locally-small-modal-operator : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-locally-small-modal-operator l1 l2 =
-  Σ (modal-operator l1 l2) (is-locally-small-modal-operator)
+locally-small-modal-operator :
+  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+locally-small-modal-operator l1 l2 l3 =
+  Σ (modal-operator l1 l2) (is-locally-small-modal-operator {l1} {l2} {l3})
 
 modal-operator-locally-small-modal-operator :
-  {l1 l2 : Level} → locally-small-modal-operator l1 l2 → modal-operator l1 l2
+  {l1 l2 l3 : Level} →
+  locally-small-modal-operator l1 l2 l3 → modal-operator l1 l2
 modal-operator-locally-small-modal-operator = pr1
 
 is-locally-small-modal-operator-locally-small-modal-operator :
-  {l1 l2 : Level} (○ : locally-small-modal-operator l1 l2) →
+  {l1 l2 l3 : Level} (○ : locally-small-modal-operator l1 l2 l3) →
   is-locally-small-modal-operator (modal-operator-locally-small-modal-operator ○)
 is-locally-small-modal-operator-locally-small-modal-operator = pr2
 ```
