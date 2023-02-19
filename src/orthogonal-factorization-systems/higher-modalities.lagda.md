@@ -5,11 +5,15 @@ module orthogonal-factorization-systems.higher-modalities where
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equational-reasoning
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.propositions
+open import foundation.sections
 open import foundation.small-types
 open import foundation.subuniverses
 open import foundation.universe-levels
@@ -33,6 +37,10 @@ module _
     (X : UU l1) (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) →
     (x' : ○ X) → ○ (P x')
+
+  modality-recursion-principle : UU (lsuc l1 ⊔ l2)
+  modality-recursion-principle =
+    (X : UU l1) (Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
 
   modality-computation-principle :
     modality-induction-principle → UU (lsuc l1 ⊔ l2)
@@ -85,6 +93,12 @@ module _
     modal-operator-locally-small-modal-operator
       locally-small-modal-operator-higher-modality
 
+  is-locally-small-modal-operator-higher-modality :
+    is-locally-small-modal-operator (modal-operator-higher-modality)
+  is-locally-small-modal-operator-higher-modality =
+    is-locally-small-locally-small-modal-operator
+      locally-small-modal-operator-higher-modality
+
   modal-unit-higher-modality : modal-unit modal-operator-higher-modality
   modal-unit-higher-modality = pr1 (pr2 h)
 
@@ -124,4 +138,63 @@ module _
       locally-small-modal-operator-higher-modality
       modal-unit-higher-modality
       is-higher-modality-higher-modality
+```
+
+## Properties
+
+### For higher modalities the modal operator of is a functor
+
+```agda
+module _
+  {l : Level} (h : higher-modality l l)
+  where
+
+  private
+    ○ = modal-operator-higher-modality h
+    unit-○ = modal-unit-higher-modality h
+    ind-○ = induction-principle-higher-modality h
+
+  map-○ : {X Y : UU l} → (X → Y) → ○ X → ○ Y
+  map-○ {X} {Y} f = ind-○ X (λ _ → Y) (unit-○ ∘ f)
+```
+
+### For higher modalities `○ X` is modal
+
+```agda
+module _
+  {l : Level}
+  (h : higher-modality l l)
+  (X : UU l)
+  where
+
+  private
+    ○ = modal-operator-higher-modality h
+    is-locally-small-○ = is-locally-small-modal-operator-higher-modality h
+    unit-○ = modal-unit-higher-modality h
+    Id-○ = is-modal-identity-types-higher-modality h
+    ind-○ = induction-principle-higher-modality h
+    comp-○ = computation-principle-higher-modality h
+
+  map-inv-unit-○ : ○ (○ X) → ○ X
+  map-inv-unit-○ = ind-○ (○ X) (λ _ → X) id
+
+  isretr-map-inv-unit-○ : (map-inv-unit-○ ∘ unit-○) ~ id
+  isretr-map-inv-unit-○ = comp-○ (○ X) (λ _ → X) id
+
+  ○-issec-map-inv-unit-○ : (x' : ○ (○ X)) → ○ (unit-○ (map-inv-unit-○ x') ＝ x')
+  ○-issec-map-inv-unit-○ =
+    ind-○ (○ X)
+      ( λ x'' → unit-○ (map-inv-unit-○ x'') ＝ x'')
+      ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-unit-○))
+
+  issec-map-inv-unit-○ : (unit-○ ∘ map-inv-unit-○) ~ id
+  issec-map-inv-unit-○ x'' =
+    map-inv-equiv-is-small
+      ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
+      ( map-inv-is-equiv
+        ( Id-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
+        ( map-○ h
+          ( map-equiv-is-small
+            ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x''))
+          ( ○-issec-map-inv-unit-○ x'')))
 ```

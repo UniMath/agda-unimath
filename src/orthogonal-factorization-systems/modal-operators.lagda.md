@@ -72,8 +72,8 @@ modal-operator-locally-small-modal-operator :
   locally-small-modal-operator l1 l2 l3 → modal-operator l1 l2
 modal-operator-locally-small-modal-operator = pr1
 
-is-locally-small-modal-operator-locally-small-modal-operator :
+is-locally-small-locally-small-modal-operator :
   {l1 l2 l3 : Level} (○ : locally-small-modal-operator l1 l2 l3) →
   is-locally-small-modal-operator (modal-operator-locally-small-modal-operator ○)
-is-locally-small-modal-operator-locally-small-modal-operator = pr2
+is-locally-small-locally-small-modal-operator = pr2
 ```
