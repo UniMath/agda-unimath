@@ -8,6 +8,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import ring-theory.powers-of-elements-semirings
 open import ring-theory.rings
 ```
 
@@ -15,9 +16,7 @@ open import ring-theory.rings
 
 ```agda
 power-Ring : {l : Level} (R : Ring l) → ℕ → type-Ring R → type-Ring R
-power-Ring R zero-ℕ x = one-Ring R
-power-Ring R (succ-ℕ zero-ℕ) x = x
-power-Ring R (succ-ℕ (succ-ℕ n)) x = mul-Ring R (power-Ring R (succ-ℕ n) x) x
+power-Ring R = power-Semiring (semiring-Ring R)
 ```
 
 ## Properties
@@ -32,6 +31,26 @@ module _
   power-succ-Ring :
     (n : ℕ) (x : type-Ring R) →
     power-Ring R (succ-ℕ n) x ＝ mul-Ring R (power-Ring R n x) x
-  power-succ-Ring zero-ℕ x = inv (left-unit-law-mul-Ring R x)
-  power-succ-Ring (succ-ℕ n) x = refl
+  power-succ-Ring = power-succ-Semiring (semiring-Ring R)
+```
+
+### If `x` commutes with `y` then so do their powers
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  commute-powers-Ring' :
+    (n : ℕ) {x y : type-Ring R} →
+    ( mul-Ring R x y ＝ mul-Ring R y x) →
+    ( mul-Ring R (power-Ring R n x) y) ＝
+    ( mul-Ring R y (power-Ring R n x))
+  commute-powers-Ring' = commute-powers-Semiring' (semiring-Ring R)
+
+  commute-powers-Ring :
+    (m n : ℕ) {x y : type-Ring R} → mul-Ring R x y ＝ mul-Ring R y x →
+    ( mul-Ring R (power-Ring R m x) (power-Ring R n y)) ＝
+    ( mul-Ring R (power-Ring R n y) (power-Ring R m x))
+  commute-powers-Ring = commute-powers-Semiring (semiring-Ring R)
 ```

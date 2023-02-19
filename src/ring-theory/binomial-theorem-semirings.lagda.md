@@ -594,4 +594,3 @@ binomial-theorem-Semiring R (succ-ℕ (succ-ℕ n)) x y H =
                         ( succ-ℕ (succ-ℕ n))
                         ( x))))))))))))
 ```
-
