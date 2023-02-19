@@ -109,6 +109,16 @@ module _
   interchange-add-add-Ring =
     interchange-add-add-Ab (ab-Ring R)
 
+  right-swap-add-Ring :
+    (x y z : type-Ring R) →
+    add-Ring (add-Ring x y) z ＝ add-Ring (add-Ring x z) y
+  right-swap-add-Ring = right-swap-add-Ab (ab-Ring R)
+
+  left-swap-add-Ring :
+    (x y z : type-Ring R) →
+    add-Ring x (add-Ring y z) ＝ add-Ring y (add-Ring x z)
+  left-swap-add-Ring = left-swap-add-Ab (ab-Ring R)
+
   is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring x)
   is-equiv-add-Ring = is-equiv-add-Ab (ab-Ring R)
 

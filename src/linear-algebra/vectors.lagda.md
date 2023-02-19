@@ -21,6 +21,7 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -52,6 +53,10 @@ module _
   snoc-vec : {n : ℕ} → vec A n → A → vec A (succ-ℕ n)
   snoc-vec empty-vec a = a ∷ empty-vec
   snoc-vec (x ∷ v) a = x ∷ (snoc-vec v a)
+
+  revert-vec : {n : ℕ} → vec A n → vec A n
+  revert-vec empty-vec = empty-vec
+  revert-vec (x ∷ v) = snoc-vec (revert-vec v) x
 ```
 
 ### The functional type of vectors
@@ -70,7 +75,8 @@ module _
   head-functional-vec : (n : ℕ) → functional-vec A (succ-ℕ n) → A
   head-functional-vec n v = v (inr star)
 
-  tail-functional-vec : (n : ℕ) → functional-vec A (succ-ℕ n) → functional-vec A n
+  tail-functional-vec :
+    (n : ℕ) → functional-vec A (succ-ℕ n) → functional-vec A n
   tail-functional-vec n v = v ∘ (inl-Fin n)
 
   cons-functional-vec :
@@ -81,8 +87,13 @@ module _
   snoc-functional-vec :
     (n : ℕ) → functional-vec A n → A → functional-vec A (succ-ℕ n)
   snoc-functional-vec zero-ℕ v a i = a
-  snoc-functional-vec (succ-ℕ n) v a (inl x) = snoc-functional-vec n (tail-functional-vec n v) a x
+  snoc-functional-vec (succ-ℕ n) v a (inl x) =
+    snoc-functional-vec n (tail-functional-vec n v) a x
   snoc-functional-vec (succ-ℕ n) v a (inr x) = head-functional-vec n v
+
+  revert-functional-vec :
+    (n : ℕ) → functional-vec A n → functional-vec A n
+  revert-functional-vec n v i = v (opposite-Fin n i)
 ```
 
 ## Properties

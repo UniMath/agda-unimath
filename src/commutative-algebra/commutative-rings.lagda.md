@@ -3,6 +3,7 @@
 ```agda
 module commutative-algebra.commutative-rings where
 
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
@@ -129,6 +130,20 @@ module _
       ( add-Commutative-Ring y y'))
   interchange-add-add-Commutative-Ring =
     interchange-add-add-Ring ring-Commutative-Ring
+
+  right-swap-add-Commutative-Ring :
+    (x y z : type-Commutative-Ring) →
+    ( add-Commutative-Ring (add-Commutative-Ring x y) z) ＝
+    ( add-Commutative-Ring (add-Commutative-Ring x z) y)
+  right-swap-add-Commutative-Ring =
+    right-swap-add-Ring ring-Commutative-Ring
+
+  left-swap-add-Commutative-Ring :
+    (x y z : type-Commutative-Ring) →
+    ( add-Commutative-Ring x (add-Commutative-Ring y z)) ＝
+    ( add-Commutative-Ring y (add-Commutative-Ring x z))
+  left-swap-add-Commutative-Ring =
+    left-swap-add-Ring ring-Commutative-Ring
 
   mul-Commutative-Ring : (x y : type-Commutative-Ring) → type-Commutative-Ring
   mul-Commutative-Ring = mul-Ring ring-Commutative-Ring
@@ -264,4 +279,38 @@ module _
     ( ap
       ( add-Commutative-Ring' (mul-Commutative-Ring x y))
       ( right-mul-nat-law-mul-Commutative-Ring n x y))
+
+  left-distributive-mul-nat-add-Commutative-Ring :
+    (n : ℕ) (x y : type-Commutative-Ring) →
+    mul-nat-Commutative-Ring n (add-Commutative-Ring x y) ＝
+    add-Commutative-Ring
+      ( mul-nat-Commutative-Ring n x)
+      ( mul-nat-Commutative-Ring n y)
+  left-distributive-mul-nat-add-Commutative-Ring zero-ℕ x y =
+    inv (left-unit-law-add-Commutative-Ring zero-Commutative-Ring)
+  left-distributive-mul-nat-add-Commutative-Ring (succ-ℕ n) x y =
+    ( ap
+      ( add-Commutative-Ring' (add-Commutative-Ring x y))
+      ( left-distributive-mul-nat-add-Commutative-Ring n x y)) ∙
+    ( interchange-add-add-Commutative-Ring
+      ( mul-nat-Commutative-Ring n x)
+      ( mul-nat-Commutative-Ring n y)
+      ( x)
+      ( y))
+
+  right-distributive-mul-nat-add-Commutative-Ring :
+    (m n : ℕ) (x : type-Commutative-Ring) →
+    mul-nat-Commutative-Ring (add-ℕ m n) x ＝
+    add-Commutative-Ring
+      ( mul-nat-Commutative-Ring m x)
+      ( mul-nat-Commutative-Ring n x)
+  right-distributive-mul-nat-add-Commutative-Ring m zero-ℕ x =
+    inv (right-unit-law-add-Commutative-Ring (mul-nat-Commutative-Ring m x))
+  right-distributive-mul-nat-add-Commutative-Ring m (succ-ℕ n) x =
+    ( ap
+      ( add-Commutative-Ring' x)
+      ( right-distributive-mul-nat-add-Commutative-Ring m n x)) ∙
+    ( associative-add-Commutative-Ring
+      ( mul-nat-Commutative-Ring m x)
+      ( mul-nat-Commutative-Ring n x) x)
 ```

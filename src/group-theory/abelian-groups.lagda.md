@@ -47,120 +47,113 @@ is-prop-is-abelian-Group G = is-prop-type-Prop (is-abelian-group-Prop G)
 
 Ab : (l : Level) → UU (lsuc l)
 Ab l = Σ (Group l) is-abelian-Group
+```
 
-group-Ab :
-  {l : Level} (A : Ab l) → Group l
-group-Ab A = pr1 A
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+  
+  group-Ab : Group l
+  group-Ab = pr1 A
 
-set-Ab :
-  {l : Level} (A : Ab l) → Set l
-set-Ab A = set-Group (group-Ab A)
+  set-Ab : Set l
+  set-Ab = set-Group group-Ab
 
-type-Ab :
-  {l : Level} (A : Ab l) → UU l
-type-Ab A = type-Group (group-Ab A)
+  type-Ab : UU l
+  type-Ab = type-Group group-Ab
 
-is-set-type-Ab :
-  {l : Level} (A : Ab l) → is-set (type-Ab A)
-is-set-type-Ab A = is-set-type-Group (group-Ab A)
+  is-set-type-Ab : is-set type-Ab
+  is-set-type-Ab = is-set-type-Group group-Ab
 
-has-associative-add-Ab :
-  {l : Level} (A : Ab l) → has-associative-mul-Set (set-Ab A)
-has-associative-add-Ab A = has-associative-mul-Group (group-Ab A)
+  has-associative-add-Ab : has-associative-mul-Set set-Ab
+  has-associative-add-Ab = has-associative-mul-Group group-Ab
 
-add-Ab :
-  {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
-add-Ab A = mul-Group (group-Ab A)
+  add-Ab : type-Ab → type-Ab → type-Ab
+  add-Ab = mul-Group group-Ab
 
-add-Ab' :
-  {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
-add-Ab' A = mul-Group' (group-Ab A)
+  add-Ab' : type-Ab → type-Ab → type-Ab
+  add-Ab' = mul-Group' group-Ab
 
-ap-add-Ab :
-  {l : Level} (A : Ab l) {x y x' y' : type-Ab A} (p : Id x x') (q : Id y y') →
-  Id (add-Ab A x y) (add-Ab A x' y')
-ap-add-Ab A p q = ap-binary (add-Ab A) p q
+  ap-add-Ab :
+    {x y x' y' : type-Ab} → x ＝ x' → y ＝ y' → add-Ab x y ＝ add-Ab x' y'
+  ap-add-Ab p q = ap-binary add-Ab p q
 
-associative-add-Ab :
-  {l : Level} (A : Ab l) (x y z : type-Ab A) →
-  Id (add-Ab A (add-Ab A x y) z) (add-Ab A x (add-Ab A y z))
-associative-add-Ab A = associative-mul-Group (group-Ab A)
+  associative-add-Ab :
+    (x y z : type-Ab ) → add-Ab (add-Ab x y) z ＝ add-Ab x (add-Ab y z)
+  associative-add-Ab = associative-mul-Group group-Ab
 
-semigroup-Ab :
-  {l : Level} (A : Ab l) → Semigroup l
-semigroup-Ab A = semigroup-Group (group-Ab A)
+  semigroup-Ab : Semigroup l
+  semigroup-Ab = semigroup-Group group-Ab
 
-is-group-Ab :
-  {l : Level} (A : Ab l) → is-group (semigroup-Ab A)
-is-group-Ab A = is-group-Group (group-Ab A)
+  is-group-Ab : is-group semigroup-Ab
+  is-group-Ab = is-group-Group group-Ab
 
-has-zero-Ab :
-  {l : Level} (A : Ab l) → is-unital-Semigroup (semigroup-Ab A)
-has-zero-Ab A = is-unital-Group (group-Ab A)
+  has-zero-Ab : is-unital-Semigroup semigroup-Ab
+  has-zero-Ab = is-unital-Group group-Ab
 
-zero-Ab :
-  {l : Level} (A : Ab l) → type-Ab A
-zero-Ab A = unit-Group (group-Ab A)
+  zero-Ab : type-Ab
+  zero-Ab = unit-Group group-Ab
 
-is-zero-Ab : {l : Level} (A : Ab l) → type-Ab A → UU l
-is-zero-Ab A x = Id x (zero-Ab A)
+  is-zero-Ab : type-Ab → UU l
+  is-zero-Ab x = x ＝ zero-Ab
 
-left-unit-law-add-Ab :
-  {l : Level} (A : Ab l) → (x : type-Ab A) →
-  Id (add-Ab A (zero-Ab A) x) x
-left-unit-law-add-Ab A = left-unit-law-mul-Group (group-Ab A)
+  left-unit-law-add-Ab : (x : type-Ab) → add-Ab zero-Ab x ＝ x
+  left-unit-law-add-Ab = left-unit-law-mul-Group group-Ab
 
-right-unit-law-add-Ab :
-  {l : Level} (A : Ab l) → (x : type-Ab A) →
-  Id (add-Ab A x (zero-Ab A)) x
-right-unit-law-add-Ab A = right-unit-law-mul-Group (group-Ab A)
+  right-unit-law-add-Ab : (x : type-Ab) → add-Ab x zero-Ab ＝ x
+  right-unit-law-add-Ab = right-unit-law-mul-Group group-Ab
 
-has-negatives-Ab :
-  {l : Level} (A : Ab l) → is-group' (semigroup-Ab A) (has-zero-Ab A)
-has-negatives-Ab A = has-inverses-Group (group-Ab A)
+  has-negatives-Ab : is-group' semigroup-Ab has-zero-Ab
+  has-negatives-Ab = has-inverses-Group group-Ab
 
-neg-Ab :
-  {l : Level} (A : Ab l) → type-Ab A → type-Ab A
-neg-Ab A = inv-Group (group-Ab A)
+  neg-Ab : type-Ab → type-Ab
+  neg-Ab = inv-Group group-Ab
 
-left-inverse-law-add-Ab :
-  {l : Level} (A : Ab l) (x : type-Ab A) →
-  Id (add-Ab A (neg-Ab A x) x) (zero-Ab A)
-left-inverse-law-add-Ab A = left-inverse-law-mul-Group (group-Ab A)
+  left-inverse-law-add-Ab : (x : type-Ab) → add-Ab (neg-Ab x) x ＝ zero-Ab
+  left-inverse-law-add-Ab = left-inverse-law-mul-Group group-Ab
 
-right-inverse-law-add-Ab :
-  {l : Level} (A : Ab l) (x : type-Ab A) →
-  Id (add-Ab A x (neg-Ab A x)) (zero-Ab A)
-right-inverse-law-add-Ab A = right-inverse-law-mul-Group (group-Ab A)
+  right-inverse-law-add-Ab : (x : type-Ab) → add-Ab x (neg-Ab x) ＝ zero-Ab
+  right-inverse-law-add-Ab = right-inverse-law-mul-Group group-Ab
 
-commutative-add-Ab :
-  {l : Level} (A : Ab l) (x y : type-Ab A) →
-  Id (add-Ab A x y) (add-Ab A y x)
-commutative-add-Ab A = pr2 A
+  commutative-add-Ab : (x y : type-Ab) → Id (add-Ab x y) (add-Ab y x)
+  commutative-add-Ab = pr2 A
 
-interchange-add-add-Ab :
-  {l : Level} (A : Ab l) (a b c d : type-Ab A) →
-  Id ( add-Ab A (add-Ab A a b) (add-Ab A c d))
-     ( add-Ab A (add-Ab A a c) (add-Ab A b d))
-interchange-add-add-Ab A =
-  interchange-law-commutative-and-associative
-    ( add-Ab A)
-    ( commutative-add-Ab A)
-    ( associative-add-Ab A)
+  interchange-add-add-Ab :
+    (a b c d : type-Ab) →
+    add-Ab (add-Ab a b) (add-Ab c d) ＝ add-Ab (add-Ab a c) (add-Ab b d)
+  interchange-add-add-Ab =
+    interchange-law-commutative-and-associative
+      add-Ab
+      commutative-add-Ab
+      associative-add-Ab
 
-distributive-neg-add-Ab :
-  {l : Level} (A : Ab l) (x y : type-Ab A) →
-  Id (neg-Ab A (add-Ab A x y)) (add-Ab A (neg-Ab A x) (neg-Ab A y))
-distributive-neg-add-Ab A x y =
-  ( distributive-inv-mul-Group (group-Ab A) x y) ∙
-  ( commutative-add-Ab A (neg-Ab A y) (neg-Ab A x))
+  right-swap-add-Ab :
+    (a b c : type-Ab) → add-Ab (add-Ab a b) c ＝ add-Ab (add-Ab a c) b
+  right-swap-add-Ab a b c =
+    ( associative-add-Ab a b c) ∙
+    ( ( ap (add-Ab a) (commutative-add-Ab b c)) ∙
+      ( inv (associative-add-Ab a c b)))
 
-neg-neg-Ab :
-  {l : Level} (A : Ab l) (x : type-Ab A) → neg-Ab A (neg-Ab A x) ＝ x
-neg-neg-Ab A = inv-inv-Group (group-Ab A)
+  left-swap-add-Ab :
+    (a b c : type-Ab) → add-Ab a (add-Ab b c) ＝ add-Ab b (add-Ab a c)
+  left-swap-add-Ab a b c =
+    ( inv (associative-add-Ab a b c)) ∙
+    ( ( ap (add-Ab' c) (commutative-add-Ab a b)) ∙
+      ( associative-add-Ab b a c))
 
-neg-zero-Ab : {l : Level} (A : Ab l) → neg-Ab A (zero-Ab A) ＝ zero-Ab A
-neg-zero-Ab A = inv-unit-Group (group-Ab A)
+  distributive-neg-add-Ab :
+    (x y : type-Ab) →
+    neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
+  distributive-neg-add-Ab x y =
+    ( distributive-inv-mul-Group group-Ab x y) ∙
+    ( commutative-add-Ab (neg-Ab y) (neg-Ab x))
+
+  neg-neg-Ab : (x : type-Ab) → neg-Ab (neg-Ab x) ＝ x
+  neg-neg-Ab = inv-inv-Group group-Ab
+
+  neg-zero-Ab : neg-Ab zero-Ab ＝ zero-Ab
+  neg-zero-Ab = inv-unit-Group group-Ab
 ```
 
 ### Addition on an abelian group is a binary equivalence

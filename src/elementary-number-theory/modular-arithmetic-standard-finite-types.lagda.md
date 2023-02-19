@@ -28,9 +28,9 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
-# Modular arithmetic
+## Definitions
 
-## The congruence class of a natural number modulo a successor
+### The congruence class of a natural number modulo a successor
 
 ```agda
 mod-succ-ℕ : (k : ℕ) → ℕ → Fin (succ-ℕ k)
@@ -43,6 +43,10 @@ mod-two-ℕ = mod-succ-ℕ 1
 mod-three-ℕ : ℕ → Fin 3
 mod-three-ℕ = mod-succ-ℕ 2
 ```
+
+## Properties
+
+### `nat-Fin k (succ-Fin k x)` and `succ-ℕ (nat-Fin k x)` are congruent modulo `k`
 
 ```agda
 cong-nat-succ-Fin :
@@ -76,7 +80,7 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( cong-nat-mod-succ-ℕ k x)
 ```
 
-We show that if mod-succ-ℕ k x = mod-succ-ℕ k y, then x and y must be congruent modulo succ-ℕ n. This is the forward direction of the theorem.
+### If the congruence classes of `x` and `y` modulo `k + 1` are equal, then `x` and `y` are congruent modulo `k + 1`
 
 ```agda
 cong-eq-mod-succ-ℕ :
@@ -88,6 +92,8 @@ cong-eq-mod-succ-ℕ k x y p =
     ( ap (nat-Fin (succ-ℕ k)) p)
     ( cong-nat-mod-succ-ℕ k y)
 ```
+
+### If `x` and `y` are congruent modulo `k + 1` then their congruence classes modulo `k + 1` are equal
 
 ```agda
 eq-mod-succ-cong-ℕ :
@@ -106,7 +112,9 @@ eq-mod-succ-cong-ℕ k x y H =
       ( trans-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) H
         ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
           ( cong-nat-mod-succ-ℕ k y))))
-```          
+```
+
+### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
 
 ```agda
 is-zero-mod-succ-ℕ :
@@ -123,7 +131,7 @@ div-is-zero-mod-succ-ℕ k x p =
     ( right-unit-law-dist-ℕ x)
 ```
 
-### The inclusion of Fin k into ℕ is a section of mod-succ-ℕ
+### The inclusion of `Fin k` into `ℕ` is a section of `mod-succ-ℕ`
 
 ```agda
 issec-nat-Fin :
@@ -146,9 +154,25 @@ pr1 (is-split-surjective-mod-succ-ℕ {k} x) = nat-Fin (succ-ℕ k) x
 pr2 (is-split-surjective-mod-succ-ℕ {k} x) = issec-nat-Fin k x
 ```
 
-## The group structure on the standard finite types
+### The residue of `x` modulo `k + 1` is less than or equal to `x`
 
-### Addition on finite sets
+```agda
+leq-nat-mod-succ-ℕ :
+  (k x : ℕ) → leq-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
+leq-nat-mod-succ-ℕ k zero-ℕ =
+  concatenate-eq-leq-ℕ zero-ℕ (is-zero-nat-zero-Fin {k}) (refl-leq-ℕ zero-ℕ)
+leq-nat-mod-succ-ℕ k (succ-ℕ x) =
+  transitive-leq-ℕ
+    ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
+    ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
+    ( succ-ℕ x)
+    ( leq-nat-mod-succ-ℕ k x)
+    ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+```
+
+## Operations
+
+### Addition on the standard finite sets
 
 ```agda
 add-Fin : (k : ℕ) → Fin k → Fin k → Fin k
@@ -195,46 +219,7 @@ cong-add-ℕ {k} x y =
       ( y)
       ( x)
       ( cong-nat-mod-succ-ℕ k y))
-```
 
-### Distance on finite sets
-
-```agda
-dist-Fin : (k : ℕ) → Fin k → Fin k → Fin k
-dist-Fin (succ-ℕ k) x y =
-  mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
-
-dist-Fin' : (k : ℕ) → Fin k → Fin k → Fin k
-dist-Fin' k x y = dist-Fin k y x
-
-ap-dist-Fin :
-  (k : ℕ) {x y x' y' : Fin k} →
-  x ＝ x' → y ＝ y' → dist-Fin k x y ＝ dist-Fin k x' y'
-ap-dist-Fin k p q = ap-binary (dist-Fin k) p q
-
-cong-dist-Fin :
-  {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (dist-Fin k x y)) (dist-ℕ (nat-Fin k x) (nat-Fin k y))
-cong-dist-Fin {succ-ℕ k} x y =
-  cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
-```
-
-### The negative of an element of Fin k
-
-```agda
-neg-Fin :
-  (k : ℕ) → Fin k → Fin k
-neg-Fin (succ-ℕ k) x =
-  mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
-
-cong-neg-Fin :
-  {k : ℕ} (x : Fin k) →
-  cong-ℕ k (nat-Fin k (neg-Fin k x)) (dist-ℕ (nat-Fin k x) k)
-cong-neg-Fin {succ-ℕ k} x =
-  cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
-```
-
-```agda
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (add-ℕ x y) (add-ℕ x' y')
@@ -265,7 +250,70 @@ mod-succ-add-ℕ k x y =
         ( cong-nat-mod-succ-ℕ k y)))
 ```
 
-## Laws for addition on Fin k
+### Distance on the standard finite sets
+
+```agda
+dist-Fin : (k : ℕ) → Fin k → Fin k → Fin k
+dist-Fin (succ-ℕ k) x y =
+  mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
+
+dist-Fin' : (k : ℕ) → Fin k → Fin k → Fin k
+dist-Fin' k x y = dist-Fin k y x
+
+ap-dist-Fin :
+  (k : ℕ) {x y x' y' : Fin k} →
+  x ＝ x' → y ＝ y' → dist-Fin k x y ＝ dist-Fin k x' y'
+ap-dist-Fin k p q = ap-binary (dist-Fin k) p q
+
+cong-dist-Fin :
+  {k : ℕ} (x y : Fin k) →
+  cong-ℕ k (nat-Fin k (dist-Fin k x y)) (dist-ℕ (nat-Fin k x) (nat-Fin k y))
+cong-dist-Fin {succ-ℕ k} x y =
+  cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
+```
+
+### The negative of an element of a standard finite set
+
+```agda
+neg-Fin :
+  (k : ℕ) → Fin k → Fin k
+neg-Fin (succ-ℕ k) x =
+  mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
+
+cong-neg-Fin :
+  {k : ℕ} (x : Fin k) →
+  cong-ℕ k (nat-Fin k (neg-Fin k x)) (dist-ℕ (nat-Fin k x) k)
+cong-neg-Fin {succ-ℕ k} x =
+  cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
+```
+
+### Multiplication on the standard finite sets
+
+```agda
+mul-Fin :
+  (k : ℕ) → Fin k → Fin k → Fin k
+mul-Fin (succ-ℕ k) x y =
+  mod-succ-ℕ k (mul-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
+
+mul-Fin' :
+  (k : ℕ) → Fin k → Fin k → Fin k
+mul-Fin' k x y = mul-Fin k y x
+
+ap-mul-Fin :
+  (k : ℕ) {x y x' y' : Fin k} →
+  x ＝ x' → y ＝ y' → mul-Fin k x y ＝ mul-Fin k x' y'
+ap-mul-Fin k p q = ap-binary (mul-Fin k) p q
+
+cong-mul-Fin :
+  {k : ℕ} (x y : Fin k) →
+  cong-ℕ k (nat-Fin k (mul-Fin k x y)) (mul-ℕ (nat-Fin k x) (nat-Fin k y))
+cong-mul-Fin {succ-ℕ k} x y =
+  cong-nat-mod-succ-ℕ k (mul-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
+```
+
+## Laws
+
+### Laws for addition
 
 ```agda
 commutative-add-Fin : (k : ℕ) (x y : Fin k) → add-Fin k x y ＝ add-Fin k y x
@@ -383,6 +431,8 @@ right-inverse-law-add-Fin k x =
   ( left-inverse-law-add-Fin k x)
 ```
 
+### The successor function on a standard finite set adds one
+
 ```agda
 is-add-one-succ-Fin' :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
@@ -401,9 +451,11 @@ is-add-one-succ-Fin :
 is-add-one-succ-Fin k x =
   ( is-add-one-succ-Fin' k x) ∙
   ( commutative-add-Fin (succ-ℕ k) x (one-Fin k))
+```
 
--- We conclude the successor laws for addition on Fin k
+### Successor laws for addition on Fin k
 
+```agda
 right-successor-law-add-Fin :
   (k : ℕ) (x y : Fin k) →
   add-Fin k x (succ-Fin k y) ＝ succ-Fin k (add-Fin k x y)
@@ -421,33 +473,7 @@ left-successor-law-add-Fin k x y =
     ( ap (succ-Fin k) (commutative-add-Fin k y x)))
 ```
 
-## Multiplication on Fin k
-
-```agda
-{- We define the multiplication on the types Fin k. -}
-
-mul-Fin :
-  (k : ℕ) → Fin k → Fin k → Fin k
-mul-Fin (succ-ℕ k) x y =
-  mod-succ-ℕ k (mul-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
-
-mul-Fin' :
-  (k : ℕ) → Fin k → Fin k → Fin k
-mul-Fin' k x y = mul-Fin k y x
-
-ap-mul-Fin :
-  (k : ℕ) {x y x' y' : Fin k} →
-  x ＝ x' → y ＝ y' → mul-Fin k x y ＝ mul-Fin k x' y'
-ap-mul-Fin k p q = ap-binary (mul-Fin k) p q
-
-cong-mul-Fin :
-  {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (mul-Fin k x y)) (mul-ℕ (nat-Fin k x) (nat-Fin k y))
-cong-mul-Fin {succ-ℕ k} x y =
-  cong-nat-mod-succ-ℕ k (mul-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
-```
-
-## Laws for multiplication on the standard finite types
+### Laws for multiplication on the standard finite types
 
 ```agda
 associative-mul-Fin :
@@ -621,6 +647,8 @@ right-distributive-mul-add-Fin k x y z =
     ( ap-add-Fin k (commutative-mul-Fin k z x) (commutative-mul-Fin k z y)))
 ```
 
+## Properties
+
 ### Addition on `Fin k` is a binary equivalence
 
 ```agda
@@ -690,6 +718,10 @@ is-injective-add-Fin' k x {y} {z} p =
     ( commutative-add-Fin k x y ∙ (p ∙ commutative-add-Fin k z x))
 ```
 
+## More laws
+
+### `neg-Fin` multiplies by `-1`
+
 ```agda
 mul-neg-one-Fin :
   {k : ℕ} (x : Fin (succ-ℕ k)) →
@@ -714,6 +746,8 @@ mul-neg-one-Fin {k} x =
       ( inv (right-inverse-law-add-Fin k x)))
 ```
 
+### The negative of `-1` is `1`
+
 ```agda
 is-one-neg-neg-one-Fin :
   (k : ℕ) → is-one-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) (neg-one-Fin k))
@@ -724,7 +758,11 @@ is-one-neg-neg-one-Fin k =
     ( cong-identification-ℕ
       ( succ-ℕ k)
       ( is-one-dist-succ-ℕ k))
+```
 
+### The negative of `1` is `-1`
+
+```agda
 is-neg-one-neg-one-Fin :
   (k : ℕ) → neg-Fin (succ-ℕ k) (one-Fin k) ＝ (neg-one-Fin k)
 is-neg-one-neg-one-Fin k =
@@ -732,7 +770,11 @@ is-neg-one-neg-one-Fin k =
     ( ( right-inverse-law-add-Fin k (one-Fin k)) ∙
       ( ( inv (left-inverse-law-add-Fin k (neg-one-Fin k))) ∙
         ( ap (add-Fin' (succ-ℕ k) (neg-one-Fin k)) (is-one-neg-neg-one-Fin k))))
+```
 
+### The predecessor function adds `-1`
+
+```agda
 is-add-neg-one-pred-Fin' :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   pred-Fin (succ-ℕ k) x ＝ add-Fin (succ-ℕ k) x (neg-one-Fin k)
@@ -758,7 +800,11 @@ is-add-neg-one-pred-Fin :
 is-add-neg-one-pred-Fin k x =
   ( is-add-neg-one-pred-Fin' k x) ∙
   ( commutative-add-Fin (succ-ℕ k) x (neg-one-Fin k))
+```
 
+### `neg-Fin` multiplies by `-1`
+
+```agda
 is-mul-neg-one-neg-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   neg-Fin (succ-ℕ k) x ＝ mul-Fin (succ-ℕ k) (neg-one-Fin k) x
@@ -789,12 +835,20 @@ is-mul-neg-one-neg-Fin' :
   neg-Fin (succ-ℕ k) x ＝ mul-Fin (succ-ℕ k) x (neg-one-Fin k)
 is-mul-neg-one-neg-Fin' k x =
   is-mul-neg-one-neg-Fin k x ∙ commutative-mul-Fin (succ-ℕ k) (neg-one-Fin k) x
+```
 
+### The negative of `0` is `0`
+
+```agda
 neg-zero-Fin : (k : ℕ) → neg-Fin (succ-ℕ k) (zero-Fin k) ＝ zero-Fin k
 neg-zero-Fin k =
   ( inv (left-unit-law-add-Fin k (neg-Fin (succ-ℕ k) (zero-Fin k)))) ∙
   ( right-inverse-law-add-Fin k (zero-Fin k))
+```
 
+### The negative of a successor is the predecessor of the negative
+
+```agda
 neg-succ-Fin :
   (k : ℕ) (x : Fin k) → neg-Fin k (succ-Fin k x) ＝ pred-Fin k (neg-Fin k x)
 neg-succ-Fin (succ-ℕ k) x =
@@ -811,7 +865,11 @@ neg-succ-Fin (succ-ℕ k) x =
           ( ( inv (is-mul-neg-one-neg-Fin k (one-Fin k))) ∙
             ( is-neg-one-neg-one-Fin k))) ∙
         ( inv (is-add-neg-one-pred-Fin' k (neg-Fin (succ-ℕ k) x))))))
+```
 
+### The negative of a predecessor is the successor of a negative
+
+```agda
 neg-pred-Fin :
   (k : ℕ) (x : Fin k) → neg-Fin k (pred-Fin k x) ＝ succ-Fin k (neg-Fin k x)
 neg-pred-Fin (succ-ℕ k) x =
@@ -828,7 +886,11 @@ neg-pred-Fin (succ-ℕ k) x =
           ( ( inv (is-mul-neg-one-neg-Fin k (neg-one-Fin k))) ∙
             ( is-one-neg-neg-one-Fin k))) ∙
         ( inv (is-add-one-succ-Fin' k (neg-Fin (succ-ℕ k) x))))))
+```
 
+### Taking negatives distributes over addition
+
+```agda
 distributive-neg-add-Fin :
   (k : ℕ) (x y : Fin k) →
   neg-Fin k (add-Fin k x y) ＝ add-Fin k (neg-Fin k x) (neg-Fin k y)
@@ -840,7 +902,11 @@ distributive-neg-add-Fin (succ-ℕ k) x y =
         ( succ-ℕ k)
         ( is-mul-neg-one-neg-Fin k x)
         ( is-mul-neg-one-neg-Fin k y))))
+```
 
+### Predecessor laws of addition
+
+```agda
 left-predecessor-law-add-Fin :
   (k : ℕ) (x y : Fin k) →
   add-Fin k (pred-Fin k x) y ＝ pred-Fin k (add-Fin k x y)
@@ -856,7 +922,11 @@ right-predecessor-law-add-Fin (succ-ℕ k) x y =
   ( ap (add-Fin (succ-ℕ k) x) (is-add-neg-one-pred-Fin' k y)) ∙
   ( ( inv (associative-add-Fin (succ-ℕ k) x y (neg-one-Fin k))) ∙
     ( inv (is-add-neg-one-pred-Fin' k (add-Fin (succ-ℕ k) x y))))
+```
 
+### Negative laws of multiplication
+
+```agda
 left-negative-law-mul-Fin :
   (k : ℕ) (x y : Fin k) →
   mul-Fin k (neg-Fin k x) y ＝ neg-Fin k (mul-Fin k x y)
@@ -872,7 +942,11 @@ right-negative-law-mul-Fin (succ-ℕ k) x y =
   ( commutative-mul-Fin (succ-ℕ k) x (neg-Fin (succ-ℕ k) y)) ∙
   ( ( left-negative-law-mul-Fin (succ-ℕ k) y x) ∙
     ( ap (neg-Fin (succ-ℕ k)) (commutative-mul-Fin (succ-ℕ k) y x)))
+```
 
+### Successor laws of multiplication
+
+```agda
 left-successor-law-mul-Fin :
   (k : ℕ) (x y : Fin k) →
   mul-Fin k (succ-Fin k x) y ＝ add-Fin k y (mul-Fin k x y)
@@ -892,7 +966,11 @@ right-successor-law-mul-Fin (succ-ℕ k) x y =
     ( ap
       ( add-Fin' (succ-ℕ k) (mul-Fin (succ-ℕ k) x y))
       ( right-unit-law-mul-Fin k x)))
+```
 
+### Predecessor laws of multiplication
+
+```agda
 left-predecessor-law-mul-Fin :
   (k : ℕ) (x y : Fin k) →
   mul-Fin k (pred-Fin k x) y ＝ add-Fin k (neg-Fin k y) (mul-Fin k x y)
@@ -914,46 +992,7 @@ right-predecessor-law-mul-Fin (succ-ℕ k) x y =
       ( inv (is-mul-neg-one-neg-Fin' k x))))
 ```
 
-```agda
-leq-nat-mod-succ-ℕ :
-  (k x : ℕ) → leq-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
-leq-nat-mod-succ-ℕ k zero-ℕ =
-  concatenate-eq-leq-ℕ zero-ℕ (is-zero-nat-zero-Fin {k}) (refl-leq-ℕ zero-ℕ)
-leq-nat-mod-succ-ℕ k (succ-ℕ x) =
-  transitive-leq-ℕ
-    ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
-    ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
-    ( succ-ℕ x)
-    ( leq-nat-mod-succ-ℕ k x)
-    ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
-```
-
-## Decidability of division
-
-```agda
-is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)
-is-decidable-div-ℕ zero-ℕ x =
-  is-decidable-iff
-    ( div-eq-ℕ zero-ℕ x)
-    ( inv ∘ (is-zero-div-zero-ℕ x))
-    ( is-decidable-is-zero-ℕ' x)
-is-decidable-div-ℕ (succ-ℕ d) x =
-  is-decidable-iff
-    ( div-is-zero-mod-succ-ℕ d x)
-    ( is-zero-mod-succ-ℕ d x)
-    ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
-
-div-ℕ-decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → decidable-Prop lzero
-pr1 (div-ℕ-decidable-Prop d x H) = div-ℕ d x
-pr1 (pr2 (div-ℕ-decidable-Prop d x H)) = is-prop-div-ℕ d x H
-pr2 (pr2 (div-ℕ-decidable-Prop d x H)) = is-decidable-div-ℕ d x
-
-is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
-is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
-
-is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
-is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
-```
+### Taking negatives is an involution
 
 ```agda
 neg-neg-Fin :
@@ -986,4 +1025,33 @@ equiv-neg-Fin :
   (k : ℕ) → Fin k ≃ Fin k
 pr1 (equiv-neg-Fin k) = neg-Fin k
 pr2 (equiv-neg-Fin k) = is-equiv-neg-Fin k
+```
+
+## Properties
+
+### Divisibility is a decidable relation on `ℕ`
+
+```agda
+is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)
+is-decidable-div-ℕ zero-ℕ x =
+  is-decidable-iff
+    ( div-eq-ℕ zero-ℕ x)
+    ( inv ∘ (is-zero-div-zero-ℕ x))
+    ( is-decidable-is-zero-ℕ' x)
+is-decidable-div-ℕ (succ-ℕ d) x =
+  is-decidable-iff
+    ( div-is-zero-mod-succ-ℕ d x)
+    ( is-zero-mod-succ-ℕ d x)
+    ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
+
+div-ℕ-decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → decidable-Prop lzero
+pr1 (div-ℕ-decidable-Prop d x H) = div-ℕ d x
+pr1 (pr2 (div-ℕ-decidable-Prop d x H)) = is-prop-div-ℕ d x H
+pr2 (pr2 (div-ℕ-decidable-Prop d x H)) = is-decidable-div-ℕ d x
+
+is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
+is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
+
+is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
+is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 ```

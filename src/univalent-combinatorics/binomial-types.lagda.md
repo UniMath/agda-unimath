@@ -345,7 +345,7 @@ equiv-binomial-type e f =
   ( compute-small-binomial-type _ _)
 
 binomial-type-Fin :
-  (n m : ℕ) → binomial-type (Fin n) (Fin m) ≃ Fin (n choose-ℕ m)
+  (n m : ℕ) → binomial-type (Fin n) (Fin m) ≃ Fin (binomial-coefficient-ℕ n m)
 binomial-type-Fin zero-ℕ zero-ℕ =
   equiv-is-contr binomial-type-over-empty is-contr-Fin-one-ℕ
 binomial-type-Fin zero-ℕ (succ-ℕ m) =
@@ -353,7 +353,10 @@ binomial-type-Fin zero-ℕ (succ-ℕ m) =
 binomial-type-Fin (succ-ℕ n) zero-ℕ =
   equiv-is-contr binomial-type-over-empty is-contr-Fin-one-ℕ
 binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
-  ( ( inv-equiv (Fin-add-ℕ (n choose-ℕ m) (n choose-ℕ succ-ℕ m))) ∘e
+  ( ( inv-equiv
+      ( Fin-add-ℕ
+        ( binomial-coefficient-ℕ n m)
+        ( binomial-coefficient-ℕ n (succ-ℕ m)))) ∘e
     ( equiv-coprod
       ( binomial-type-Fin n m)
       ( binomial-type-Fin n (succ-ℕ m)))) ∘e
@@ -362,13 +365,13 @@ binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
 has-cardinality-binomial-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (n m : ℕ) →
   has-cardinality n A → has-cardinality m B →
-  has-cardinality (n choose-ℕ m) (binomial-type A B)
+  has-cardinality (binomial-coefficient-ℕ n m) (binomial-type A B)
 has-cardinality-binomial-type {A = A} {B} n m H K =
   apply-universal-property-trunc-Prop H
-    ( has-cardinality-Prop (n choose-ℕ m) (binomial-type A B))
+    ( has-cardinality-Prop (binomial-coefficient-ℕ n m) (binomial-type A B))
     ( λ e →
       apply-universal-property-trunc-Prop K
-        ( has-cardinality-Prop (n choose-ℕ m) (binomial-type A B))
+        ( has-cardinality-Prop (binomial-coefficient-ℕ n m) (binomial-type A B))
         ( λ f →
           unit-trunc-Prop
             ( inv-equiv
@@ -376,7 +379,7 @@ has-cardinality-binomial-type {A = A} {B} n m H K =
 
 binomial-type-UU-Fin :
   {l1 l2 : Level} (n m : ℕ) → UU-Fin l1 n → UU-Fin l2 m →
-  UU-Fin (lsuc l1 ⊔ lsuc l2) (n choose-ℕ m)
+  UU-Fin (lsuc l1 ⊔ lsuc l2) (binomial-coefficient-ℕ n m)
 pr1 (binomial-type-UU-Fin n m A B) =
   binomial-type (type-UU-Fin n A) (type-UU-Fin m B)
 pr2 (binomial-type-UU-Fin n m A B) =
@@ -388,7 +391,8 @@ has-finite-cardinality-binomial-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-finite-cardinality A → has-finite-cardinality B →
   has-finite-cardinality (binomial-type A B)
-pr1 (has-finite-cardinality-binomial-type (pair n H) (pair m K)) = n choose-ℕ m
+pr1 (has-finite-cardinality-binomial-type (pair n H) (pair m K)) =
+  binomial-coefficient-ℕ n m
 pr2 (has-finite-cardinality-binomial-type (pair n H) (pair m K)) =
   has-cardinality-binomial-type n m H K
 

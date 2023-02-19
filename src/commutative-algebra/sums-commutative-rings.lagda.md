@@ -14,6 +14,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import linear-algebra.vectors
 open import linear-algebra.vectors-on-commutative-rings
 
 open import univalent-combinatorics.standard-finite-types
@@ -72,6 +73,40 @@ module _
     ap-binary
       ( add-Commutative-Ring R)
       ( htpy-sum-Commutative-Ring n (H ·r inl-Fin n)) (H (inr star))
+```
+
+### Sums are equal to the zero-th term plus the rest
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  cons-sum-Commutative-Ring :
+    (n : ℕ) (f : functional-vec-Commutative-Ring R (succ-ℕ n)) →
+    {x : type-Commutative-Ring R} → head-functional-vec n f ＝ x →
+    sum-Commutative-Ring R (succ-ℕ n) f ＝
+    add-Commutative-Ring R (sum-Commutative-Ring R n (f ∘ inl-Fin n)) x
+  cons-sum-Commutative-Ring n f refl = refl
+
+  snoc-sum-Commutative-Ring :
+    (n : ℕ) (f : functional-vec-Commutative-Ring R (succ-ℕ n)) →
+    {x : type-Commutative-Ring R} → f (zero-Fin n) ＝ x →
+    sum-Commutative-Ring R (succ-ℕ n) f ＝
+    add-Commutative-Ring R
+      ( x)
+      ( sum-Commutative-Ring R n (f ∘ inr-Fin n))
+  snoc-sum-Commutative-Ring zero-ℕ f refl =
+    ( sum-one-element-Commutative-Ring R f) ∙
+    ( inv (right-unit-law-add-Commutative-Ring R (f (zero-Fin 0))))
+  snoc-sum-Commutative-Ring (succ-ℕ n) f refl =
+    ( ap
+      ( add-Commutative-Ring' R (head-functional-vec (succ-ℕ n) f))
+      ( snoc-sum-Commutative-Ring n (f ∘ inl-Fin (succ-ℕ n)) refl)) ∙
+    ( associative-add-Commutative-Ring R
+      ( f (zero-Fin (succ-ℕ n)))
+      ( sum-Commutative-Ring R n (f ∘ (inr-Fin (succ-ℕ n) ∘ inl-Fin n)))
+      ( head-functional-vec (succ-ℕ n) f))
 ```
 
 ### Multiplication distributes over sums
