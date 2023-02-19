@@ -94,7 +94,7 @@ right-distributive-mul-binomial-sum-ℕ =
 
 ## Theorem
 
-### Binomial theorem for commutative rings
+### Binomial theorem for the natural numbers
 
 ```agda
 binomial-theorem-ℕ :
