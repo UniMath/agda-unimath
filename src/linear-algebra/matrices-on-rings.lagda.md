@@ -49,7 +49,7 @@ module _
   where
 
   add-matrix-Ring : {m n : ℕ} (A B : matrix-Ring R m n) → matrix-Ring R m n
-  add-matrix-Ring = map-binary-matrix (add-Ring R)
+  add-matrix-Ring = binary-map-matrix (add-Ring R)
 ```
 
 ## Properties
