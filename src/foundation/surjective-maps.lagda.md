@@ -21,9 +21,13 @@ open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
+
+open import foundation.cartesian-product-types
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.embeddings
+open import foundation.equality-cartesian-product-types
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -32,9 +36,6 @@ open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.subtypes
 open import foundation.truncated-types
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
@@ -385,6 +386,32 @@ module _
     is-surjective-comp-htpy (g ∘ h) g h refl-htpy
 ```
 
+### The product of two surjective maps is surjective
+
+```agda
+module _ {l1 l2 l3 l4 : Level} {A : UU l1} {A' : UU l2}
+  {B : UU l3} {B' : UU l4} where
+
+  is-surjective-prod :
+    {f : A → B} {g : A' → B'} →
+    is-surjective f → is-surjective g →
+    is-surjective (λ ((a , a') : A × A') → (f a , g a'))
+  is-surjective-prod H H' (b , b') =
+    apply-twice-universal-property-trunc-Prop
+      ( H b)
+      ( H' b')
+      ( trunc-Prop _)
+      ( λ (a , p) (a' , p') → unit-trunc-Prop ((a , a') , eq-pair p p'))
+
+  surjection-prod :
+    (A ↠ B) → (A' ↠ B') → ((A × A') ↠ (B × B'))
+  pr1 (surjection-prod f g) (a , a') = (map-surjection f a , map-surjection g a')
+  pr2 (surjection-prod f g) =
+    is-surjective-prod
+      ( is-surjective-map-surjection f)
+      ( is-surjective-map-surjection g)
+```
+
 ### The composite of a surjective map with an equivalence is surjective
 
 ```agda
@@ -705,33 +732,45 @@ module _
 module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
   (C : Set l3) (g : A → type-Set C) where
 
-  equiv-universal-property-surj-into-set :
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') ≃
+  is-prop-surj-comm-map-into-set :
+    is-prop (Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)))
+  is-prop-surj-comm-map-into-set =
+    is-prop-all-elements-equal
+      (λ (h , q) (h' , q') →
+        eq-type-subtype
+          ( λ h'' → Π-Prop A (λ a → Id-Prop C (g a) (h'' (map-surjection f a))))
+          ( eq-htpy
+            ( apply-dependent-universal-property-surjection
+                ( f)
+                ( λ b → Id-Prop C (h b) (h' b))
+                ( λ a → inv (q a) ∙ q' a))))
+
+  map-universal-property-surj-into-set :
+    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) →
+    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
+  map-universal-property-surj-into-set (h , q) a a' p =
+    q a ∙ (ap h p ∙ inv (q a'))
+
+  inv-map-universal-property-surj-into-set :
+    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
     Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
-  equiv-universal-property-surj-into-set =
-    (equiv-tot (λ h → equiv-precomp-Π (inv-equiv-total-fib (map-surjection f)) _)) ∘e
-    (equiv-tot (λ h → inv-equiv equiv-ev-pair) ∘e
-    (distributive-Π-Σ ∘e
-    (inv-equiv
-      ( equiv-dependent-universal-property-surjection
+  inv-map-universal-property-surj-into-set H =
+    map-equiv
+      ( e)
+      (apply-dependent-universal-property-surjection
         ( f)
-        ( λ b → pair (P b) (is-prop-P b))) ∘e
-    (inv-distributive-Π-Σ ∘e
-    (equiv-tot (λ g' → equiv-map-Π (λ a → inv-equiv equiv-ev-pair)) ∘e
-    (equiv-tot
-      ( λ g' →
-        equiv-pr1
-          ( λ H →
-            is-proof-irrelevant-is-prop
-              (is-prop-Π (λ a → is-set-type-Set C (g a) (g' a)))
-              (λ a → H a a refl))) ∘e
-    (equiv-tot (λ g' → commutative-prod) ∘e
-    (assoc-Σ _ _ _ ∘e
-    (inv-left-unit-law-Σ-is-contr (is-contr-total-htpy g) (pair g refl-htpy) ∘e
-    equiv-swap-Π)))))))))
+        ( λ b → P b , is-prop-P b)
+        ( λ a → (g a , λ (a' , p') → H a' a p')))
     where
       P : B → UU (l1 ⊔ l2 ⊔ l3)
       P b = Σ (type-Set C) (λ c → (s : fib (map-surjection f) b) → g (pr1 s) ＝ c)
+
+      e : ((b : B) → P b) ≃
+          Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
+      e =
+        (equiv-tot (λ h → equiv-precomp-Π (inv-equiv-total-fib (map-surjection f)) _)) ∘e
+        (equiv-tot (λ h → inv-equiv equiv-ev-pair) ∘e
+        (distributive-Π-Σ))
 
       is-prop-P : (b : B) → is-prop (P b)
       is-prop-P b =
@@ -744,27 +783,25 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
                 ( λ s → inv (q s) ∙ q' s)
                 ( is-surjective-map-surjection f b)))
 
-  map-universal-property-surj-into-set :
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
-    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
-  map-universal-property-surj-into-set =
-    map-equiv equiv-universal-property-surj-into-set
+  equiv-universal-property-surj-into-set :
+    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) ≃
+    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
+  pr1 equiv-universal-property-surj-into-set = map-universal-property-surj-into-set
+  pr2 equiv-universal-property-surj-into-set =
+    is-equiv-is-prop
+      ( is-prop-surj-comm-map-into-set)
+      ( is-prop-Π (λ a → is-prop-Π (λ a' → is-prop-function-type (is-set-type-Set C (g a) (g a')))))
+      ( inv-map-universal-property-surj-into-set)
 
   function-map-universal-property-surj-into-set :
     ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
     B → type-Set C
   function-map-universal-property-surj-into-set =
-    pr1 ∘ map-universal-property-surj-into-set
+    pr1 ∘ map-inv-equiv equiv-universal-property-surj-into-set
 
   comm-map-universal-property-surj-into-set :
     (H : (a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
     g ~ (function-map-universal-property-surj-into-set H ∘ map-surjection f)
   comm-map-universal-property-surj-into-set =
-    pr2 ∘ map-universal-property-surj-into-set
-
-  inv-universal-property-surj-into-set :
-    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) →
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
-  inv-universal-property-surj-into-set =
-    map-inv-equiv equiv-universal-property-surj-into-set
+    pr2 ∘ map-inv-equiv equiv-universal-property-surj-into-set
 ```
