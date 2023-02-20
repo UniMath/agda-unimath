@@ -2,7 +2,7 @@
 
 ### [Egbert Rijke (Lead developer)](https://users.fmf.uni-lj.si/rijke/)
   
-Egbert Rijke is a postdoctoral researcher at the Faculty of Mathematics and Physics, University of Ljubljana. He is an expert on homotopy type theory and type-theoretic foundations of mathematics.
+Egbert Rijke is a postdoctoral researcher at the Faculty of Mathematics and Physics, University of Ljubljana. His research is on homotopy type theory and general mathematics from a univalent point of view.
 
 ### [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
@@ -10,7 +10,7 @@ Fredrik is a PhD student at the Norwegian University of Science and Technology i
 
 ### [Elisabeth Bonnevier](https://elisabeth.bonnevier.one)
 
-Elisabeth is a PhD student in logic at the University of Bergen. Her research interests are (homotopy) type theory and higher category theory.
+Elisabeth is a PhD student in logic at the University of Bergen. Her research is on type theory, homotopy type theory, and higher category theory.
 
 ### [Jonathan Prieto-Cubides](https://jonaprieto.github.io)
 
