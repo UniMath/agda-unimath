@@ -4,7 +4,7 @@
   
 Egbert Rijke is a postdoctoral researcher at the Faculty of Mathematics and Physics, University of Ljubljana. He is an expert on homotopy type theory and type-theoretic foundations of mathematics.
 
-### [Fredrik Bakke](https://www.ntnu.no/ansatte/fredrik.bakke)
+### [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 Fredrik is a PhD student at the Norwegian University of Science and Technology in Trondheim. His research is on homotopy theory and higher category theory.
 
