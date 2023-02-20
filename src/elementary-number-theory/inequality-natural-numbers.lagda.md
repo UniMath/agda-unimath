@@ -410,6 +410,8 @@ transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) (succ-ℕ m) t s =
   transitive-le-ℕ' k l m t s
 ```
 
+### The successor function preserves strict inequality on the right
+
 ```agda
 preserves-le-succ-ℕ :
   (m n : ℕ) → le-ℕ m n → le-ℕ m (succ-ℕ n)
