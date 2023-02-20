@@ -756,6 +756,12 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
   function-map-universal-property-surj-into-set =
     pr1 ∘ map-universal-property-surj-into-set
 
+  comm-map-universal-property-surj-into-set :
+    (H : (a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
+    g ~ (function-map-universal-property-surj-into-set H ∘ map-surjection f)
+  comm-map-universal-property-surj-into-set =
+    pr2 ∘ map-universal-property-surj-into-set
+
   inv-universal-property-surj-into-set :
     Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) →
     ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
