@@ -51,6 +51,11 @@ module _
   mul-Semigroup' : type-Semigroup → type-Semigroup → type-Semigroup
   mul-Semigroup' x y = mul-Semigroup y x
 
+  ap-mul-Semigroup :
+    {x x' y y' : type-Semigroup} →
+    x ＝ x' → y ＝ y' → mul-Semigroup x y ＝ mul-Semigroup x' y'
+  ap-mul-Semigroup p q = ap-binary mul-Semigroup p q
+
   associative-mul-Semigroup :
     (x y z : type-Semigroup) →
     Id ( mul-Semigroup (mul-Semigroup x y) z)

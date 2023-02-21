@@ -33,8 +33,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
   where
 
-  map-binary-matrix :
+  binary-map-matrix :
     {m n : ℕ} → matrix A m n → matrix B m n → matrix C m n
-  map-binary-matrix = map-binary-vec (map-binary-vec f)
+  binary-map-matrix = binary-map-vec (binary-map-vec f)
 ```
 
