@@ -751,10 +751,10 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
   map-universal-property-surj-into-set (h , q) a a' p =
     q a ∙ (ap h p ∙ inv (q a'))
 
-  inv-map-universal-property-surj-into-set :
+  inv-universal-property-surj-into-set :
     ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
     Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
-  inv-map-universal-property-surj-into-set H =
+  inv-universal-property-surj-into-set H =
     map-equiv
       ( e)
       (apply-dependent-universal-property-surjection
@@ -791,17 +791,17 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
     is-equiv-is-prop
       ( is-prop-surj-comm-map-into-set)
       ( is-prop-Π (λ a → is-prop-Π (λ a' → is-prop-function-type (is-set-type-Set C (g a) (g a')))))
-      ( inv-map-universal-property-surj-into-set)
+      ( inv-universal-property-surj-into-set)
 
-  function-map-universal-property-surj-into-set :
+  function-inv-universal-property-surj-into-set :
     ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
     B → type-Set C
-  function-map-universal-property-surj-into-set =
+  function-inv-universal-property-surj-into-set =
     pr1 ∘ map-inv-equiv equiv-universal-property-surj-into-set
 
-  comm-map-universal-property-surj-into-set :
+  comm-inv-universal-property-surj-into-set :
     (H : (a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
-    g ~ (function-map-universal-property-surj-into-set H ∘ map-surjection f)
-  comm-map-universal-property-surj-into-set =
+    g ~ (function-inv-universal-property-surj-into-set H ∘ map-surjection f)
+  comm-inv-universal-property-surj-into-set =
     pr2 ∘ map-inv-equiv equiv-universal-property-surj-into-set
 ```
