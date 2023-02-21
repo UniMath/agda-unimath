@@ -115,7 +115,10 @@ module _
 
   compute-path-over-Ω² :
     (p : x0 ＝ x1) (α : (refl {x = x0}) ＝ refl) (β : (refl {x = x1}) ＝ refl) →
-    (path-over (λ x → (refl {x = x}) ＝ refl) p α β) ≃ (((inv left-unit ∙ (horizontal-concat-Id² α (refl {x = p}))) ∙ left-unit ) ＝ ((inv right-unit ∙ (horizontal-concat-Id² (refl {x = p}) β)) ∙ right-unit))
+    (path-over (λ x → (refl {x = x}) ＝ refl) p α β) ≃
+    (((inv left-unit ∙ (horizontal-concat-Id² α (refl {x = p}))) ∙ left-unit ) ＝
+      ((inv right-unit ∙ (horizontal-concat-Id² (refl {x = p}) β)) ∙ right-unit))
   compute-path-over-Ω² refl α β =
-    equiv-concat' (horizontal-concat-Id² α refl ∙ refl) (nat-sq-left-unit-Id² β) ∘e equiv-concat (inv (nat-sq-right-unit-Id² α)) β
+    equiv-concat' (horizontal-concat-Id² α refl ∙ refl) (nat-sq-left-unit-Id² β) ∘e
+      equiv-concat (inv (nat-sq-right-unit-Id² α)) β
 ```
