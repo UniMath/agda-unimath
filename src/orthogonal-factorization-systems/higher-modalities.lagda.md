@@ -19,11 +19,14 @@ open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 ## Idea
 
 ## Definition
+
+### The universal property of higher modalities
 
 ```agda
 module _
@@ -47,9 +50,17 @@ module _
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
 
+  modal-universal-property : UU (lsuc l1 ⊔ l2)
+  modal-universal-property =
+    Σ modal-ind modal-comp
+
   modal-rec-modal-ind : modal-ind → modal-rec
   modal-rec-modal-ind ind X Y = ind X (λ _ → Y)
+```
 
+### The `is-higher-modality` predicate
+
+```agda
 module _
   {l1 l2 : Level}
   ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
@@ -63,16 +74,14 @@ module _
 
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
-    is-modal-identity-types ×
-      Σ ( modal-ind unit-○)
-        ( modal-comp unit-○)
+    modal-universal-property (unit-○) × is-modal-identity-types
+```
 
-  is-modal-identity-types-is-higher-modality :
-    is-higher-modality → is-modal-identity-types
-  is-modal-identity-types-is-higher-modality = pr1
+### Projections for the `is-higher-modality` predicate
 
+```agda
   modal-ind-is-higher-modality : is-higher-modality → modal-ind unit-○
-  modal-ind-is-higher-modality = pr1 ∘ pr2
+  modal-ind-is-higher-modality = pr1 ∘ pr1
 
   modal-rec-is-higher-modality : is-higher-modality → modal-rec unit-○
   modal-rec-is-higher-modality =
@@ -81,15 +90,27 @@ module _
   modal-comp-is-higher-modality :
     (h : is-higher-modality) →
     modal-comp unit-○ (modal-ind-is-higher-modality h)
-  modal-comp-is-higher-modality = pr2 ∘ pr2
+  modal-comp-is-higher-modality = pr2 ∘ pr1
 
+  is-modal-identity-types-is-higher-modality :
+    is-higher-modality → is-modal-identity-types
+  is-modal-identity-types-is-higher-modality = pr2
+```
+
+### The structure of a higher modality
+
+```agda
 higher-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 higher-modality l1 l2 =
   Σ ( locally-small-modal-operator l1 l2 l1)
     ( λ ○ →
       Σ ( modal-unit (pr1 ○))
         ( is-higher-modality ○))
+```
 
+### Projections for `higher-modality`
+
+```agda
 module _
   {l1 l2 : Level} (h : higher-modality l1 l2)
     where
@@ -119,16 +140,6 @@ module _
       ( modal-unit-higher-modality)
   is-higher-modality-higher-modality = pr2 (pr2 h)
 
-  is-modal-identity-types-higher-modality :
-    is-modal-identity-types
-      ( locally-small-modal-operator-higher-modality)
-      ( modal-unit-higher-modality)
-  is-modal-identity-types-higher-modality =
-    ( is-modal-identity-types-is-higher-modality)
-    ( locally-small-modal-operator-higher-modality)
-    ( modal-unit-higher-modality)
-    ( is-higher-modality-higher-modality)
-
   modal-ind-higher-modality :
     modal-ind (modal-unit-higher-modality)
   modal-ind-higher-modality =
@@ -136,7 +147,7 @@ module _
       ( locally-small-modal-operator-higher-modality)
       ( modal-unit-higher-modality)
       ( is-higher-modality-higher-modality)
-  
+
   modal-rec-higher-modality :
     modal-rec (modal-unit-higher-modality)
   modal-rec-higher-modality =
@@ -153,11 +164,21 @@ module _
       ( locally-small-modal-operator-higher-modality)
       ( modal-unit-higher-modality)
       ( is-higher-modality-higher-modality)
+
+  is-modal-identity-types-higher-modality :
+    is-modal-identity-types
+      ( locally-small-modal-operator-higher-modality)
+      ( modal-unit-higher-modality)
+  is-modal-identity-types-higher-modality =
+    ( is-modal-identity-types-is-higher-modality)
+    ( locally-small-modal-operator-higher-modality)
+    ( modal-unit-higher-modality)
+    ( is-higher-modality-higher-modality)
 ```
 
 ## Properties
 
-### Given a modal recursion principle the modal operator has an action on maps
+### Given a modal recursion principle, the modal operator has an action on maps
 
 ```agda
 module _
@@ -174,7 +195,7 @@ module _
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , Id-○ , ind-○ , comp-○) : higher-modality l l)
+  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
   (X : UU l)
   where
 

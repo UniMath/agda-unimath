@@ -63,7 +63,7 @@ module _
   factorization l3 = Σ (UU l3) (factorization-through)
 ```
 
-### Destructors for factorizations
+### Projections for factorizations
 
 ```agda
   right-map-factorization-through :
