@@ -60,20 +60,24 @@ neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star
 
 is-neg-one-Fin : (k : ℕ) → Fin k → UU lzero
-is-neg-one-Fin (succ-ℕ k) x = Id x (neg-one-Fin k)
+is-neg-one-Fin (succ-ℕ k) x = x ＝ neg-one-Fin k
 
 neg-two-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-two-Fin zero-ℕ = inr star
 neg-two-Fin (succ-ℕ k) = inl (inr star)
 
 is-inl-Fin : (k : ℕ) → Fin (succ-ℕ k) → UU lzero
-is-inl-Fin k x = Σ (Fin k) (λ y → Id (inl y) x)
+is-inl-Fin k x = Σ (Fin k) (λ y → inl y ＝ x)
 
 is-neg-one-is-not-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   ¬ (is-inl-Fin k x) → is-neg-one-Fin (succ-ℕ k) x
 is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (pair x refl))
 is-neg-one-is-not-inl-Fin k (inr star) H = refl
+
+inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
+inr-Fin (succ-ℕ k) (inl x) = inl (inr-Fin k x)
+inr-Fin (succ-ℕ k) (inr star) = inr star
 ```
 
 ### The standard finite types in an arbitrary universe
@@ -196,10 +200,10 @@ zero-Fin zero-ℕ = inr star
 zero-Fin (succ-ℕ k) = inl (zero-Fin k)
 
 is-zero-Fin : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin (succ-ℕ k) x = Id x (zero-Fin k)
+is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
 
 is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin' (succ-ℕ k) x = Id (zero-Fin k) x
+is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
 
 is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
 is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
@@ -228,13 +232,19 @@ is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
 
 nat-skip-zero-Fin :
   (k : ℕ) (x : Fin k) →
-  Id (nat-Fin (succ-ℕ k) (skip-zero-Fin k x)) (succ-ℕ (nat-Fin k x))
+  nat-Fin (succ-ℕ k) (skip-zero-Fin k x) ＝ succ-ℕ (nat-Fin k x)
 nat-skip-zero-Fin (succ-ℕ k) (inl x) = nat-skip-zero-Fin k x
 nat-skip-zero-Fin (succ-ℕ k) (inr star) = refl
 
 nat-succ-Fin :
-  (k : ℕ) (x : Fin k) → Id (nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))) (succ-ℕ (nat-Fin k x))
+  (k : ℕ) (x : Fin k) →
+  nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) ＝ succ-ℕ (nat-Fin k x)
 nat-succ-Fin k x = nat-skip-zero-Fin k x
+
+nat-inr-Fin :
+  (k : ℕ) (x : Fin k) → nat-Fin (succ-ℕ k) (inr-Fin k x) ＝ succ-ℕ (nat-Fin k x)
+nat-inr-Fin (succ-ℕ k) (inl x) = nat-inr-Fin k x
+nat-inr-Fin (succ-ℕ k) (inr star) = refl
 ```
 
 ```agda
@@ -242,7 +252,7 @@ one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
 
 is-one-Fin : (k : ℕ) → Fin k → UU lzero
-is-one-Fin (succ-ℕ k) x = Id x (one-Fin k)
+is-one-Fin (succ-ℕ k) x = x ＝ one-Fin k
 
 is-zero-or-one-Fin-two-ℕ :
   (x : Fin 2) → (is-zero-Fin 2 x) + (is-one-Fin 2 x)
@@ -309,13 +319,14 @@ pred-zero-Fin (succ-ℕ k) = ap (skip-neg-two-Fin (succ-ℕ k)) (pred-zero-Fin k
 
 succ-skip-neg-two-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
-  Id (succ-Fin (succ-ℕ (succ-ℕ k)) (skip-neg-two-Fin (succ-ℕ k) x)) (inl (succ-Fin (succ-ℕ k) x))
+  succ-Fin (succ-ℕ (succ-ℕ k)) (skip-neg-two-Fin (succ-ℕ k) x) ＝
+  inl (succ-Fin (succ-ℕ k) x)
 succ-skip-neg-two-Fin zero-ℕ (inr star) = refl
 succ-skip-neg-two-Fin (succ-ℕ k) (inl x) = refl
 succ-skip-neg-two-Fin (succ-ℕ k) (inr star) = refl
 
 issec-pred-Fin :
-  (k : ℕ) (x : Fin k) → Id (succ-Fin k (pred-Fin k x)) x
+  (k : ℕ) (x : Fin k) → succ-Fin k (pred-Fin k x) ＝ x
 issec-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
 issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
   ( succ-skip-neg-two-Fin k (pred-Fin (succ-ℕ k) x)) ∙
@@ -323,7 +334,7 @@ issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
 issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = refl
 
 isretr-pred-Fin :
-  (k : ℕ) (x : Fin k) → Id (pred-Fin k (succ-Fin k x)) x
+  (k : ℕ) (x : Fin k) → pred-Fin k (succ-Fin k x) ＝ x
 isretr-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
 isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inl x)) =
   ap (skip-neg-two-Fin (succ-ℕ k)) (isretr-pred-Fin (succ-ℕ k) (inl x))
@@ -370,7 +381,7 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
 
 ```agda
 abstract
-  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → Id k l
+  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → k ＝ l
   is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
   is-injective-Fin {zero-ℕ} {succ-ℕ l} e =
     ex-falso (map-inv-equiv e (zero-Fin l))

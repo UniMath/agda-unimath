@@ -14,6 +14,10 @@ open import foundation.identity-types
 open import foundation.unit-type 
 ```
 
+## Idea
+
+The distance function between integers measures how far two integers are apart.
+
 ## Definition
 
 ```agda
