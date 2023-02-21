@@ -3,8 +3,9 @@
 ```agda
 module foundation.functoriality-cartesian-product-types where
 
-open import foundation-core.constant-maps
 open import foundation-core.cartesian-product-types
+open import foundation-core.constant-maps
+open import foundation-core.coherently-invertible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-cartesian-product-types
@@ -201,7 +202,14 @@ module _
   pr2 (compute-fib-map-prod t) = is-equiv-map-compute-fib-map-prod t
 ```
 
-### TODO: title
+### Product map is an equivalence if and only if factors are equivalences, assuming inhabited codomains
+
+The idea behind the requirement of "inhabited codomains" is that it suffices
+for one codomain to be empty to make the product empty, and in such situation
+we cannot guarantee that the other map is an equivalence: consider the simple
+counterexample of `id×ex-falso : 0×0 → 0×1`. Then the only way to show that
+`ex-falso` is an equivalence is by assuming a contradiction `c : 0`.
+
 
 ```agda
 module _
@@ -210,76 +218,132 @@ module _
   where
 
   module _
-    ((pair (pair s-fg S-fg) (pair r-fg R-fg)) : is-equiv (map-prod f g))
+    (e : is-equiv (map-prod f g))
     where
 
-    -- TODO: "component" sounds weird
-    sec-map-prod-component-pr1 : D → sec f
-    pr1 (sec-map-prod-component-pr1 d) c = pr1 (s-fg (pair c d))
-    pr2 (sec-map-prod-component-pr1 d) c = (pr1 ·l S-fg) (pair c d)
+    private
+      inv-f×g : has-inverse (map-prod f g)
+      inv-f×g = has-inverse-is-equiv e
+      inv-f×g-map : C × D → A × B
+      inv-f×g-map = pr1 inv-f×g
+      issec-inv-f×g-map : ((map-prod f g) ∘ inv-f×g-map) ~ id
+      issec-inv-f×g-map = pr1 (pr2 inv-f×g)
+      isretr-inv-f×g-map : (inv-f×g-map ∘ (map-prod f g)) ~ id
+      isretr-inv-f×g-map = pr2 (pr2 inv-f×g)
 
-    sec-map-prod-component-pr2 : C → sec g
-    pr1 (sec-map-prod-component-pr2 c) d = pr2 (s-fg (pair c d))
-    pr2 (sec-map-prod-component-pr2 c) d = (pr2 ·l S-fg) (pair c d)
+    map-inv-left-factor-is-equiv-map-prod : D → C → A
+    map-inv-left-factor-is-equiv-map-prod d c = pr1 (inv-f×g-map (pair c d))
 
-    retr-map-prod-component-pr1 : D → retr f
-    pr1 (retr-map-prod-component-pr1 d) c = pr1 (r-fg (pair c d))
-    pr2 (retr-map-prod-component-pr1 d) =
-      ((pr1 ∘ r-fg) ·l triangle-sec) ∙h ((pr1 ·l R-fg) ·r id×const)
+    map-inv-right-factor-is-equiv-map-prod : C → D → B
+    map-inv-right-factor-is-equiv-map-prod c d = pr2 (inv-f×g-map (pair c d))
+
+    issec-map-inv-left-factor-is-equiv-map-prod : (d : D) →
+      (f ∘ map-inv-left-factor-is-equiv-map-prod d) ~ id
+    issec-map-inv-left-factor-is-equiv-map-prod d c = (pr1 ·l issec-inv-f×g-map) (pair c d)
+
+    issec-map-inv-right-factor-is-equiv-map-prod : (c : C) →
+      (g ∘ map-inv-right-factor-is-equiv-map-prod c) ~ id
+    issec-map-inv-right-factor-is-equiv-map-prod c d = (pr2 ·l issec-inv-f×g-map) (pair c d)
+
+    isretr-map-inv-left-factor-is-equiv-map-prod : (d : D) →
+      (map-inv-left-factor-is-equiv-map-prod d ∘ f) ~ id
+    isretr-map-inv-left-factor-is-equiv-map-prod d =
+      ((pr1 ∘ inv-f×g-map) ·l htpy-triangle) ∙h
+        ((pr1 ·l isretr-inv-f×g-map) ·r <id,const>)
       where
-      get-sec-g : A → sec g
-      get-sec-g a = sec-map-prod-component-pr2 (f a)
       across : A → B
-      across a = pr1 (get-sec-g a) d
-      id×const : A → A × B
-      id×const = map-prod id across ∘ diagonal _
-      triangle-sec : (map-prod f (const _ _ _ d) ∘ diagonal _) ~ ((map-prod f g) ∘ id×const)
-      triangle-sec =
-        htpy-comp-parallel-prod
-          id across
-          _ _
-          f g
-          refl-htpy (inv-htpy (λ a → (pr2 (get-sec-g a)) d))
+      across a = map-inv-right-factor-is-equiv-map-prod (f a) d
+      <id,const> : A → A × B
+      <id,const> a = pair a (across a)
+      htpy-triangle : (λ a → pair (f a) d) ~ ((map-prod f g) ∘ <id,const>)
+      htpy-triangle a =
+        eq-pair
+          refl
+          (inv-htpy (issec-map-inv-right-factor-is-equiv-map-prod (f a)) d)
 
-    -- TODO: which looks better
-    retr-map-prod-component-pr2 : C → retr g
-    pr1 (retr-map-prod-component-pr2 c) d = pr2 (r-fg (pair c d))
-    pr2 (retr-map-prod-component-pr2 c) =
-       ((pr2 ∘ r-fg) ·l triangle-sec) ∙h ((pr2 ·l R-fg) ·r const×id)
+    is-equiv-left-factor-is-equiv-map-prod : D → is-equiv f
+    is-equiv-left-factor-is-equiv-map-prod d =
+      is-equiv-has-inverse
+        (map-inv-left-factor-is-equiv-map-prod d)
+        (issec-map-inv-left-factor-is-equiv-map-prod d)
+        (isretr-map-inv-left-factor-is-equiv-map-prod d)
+
+    isretr-map-inv-right-factor-is-equiv-map-prod : (c : C) →
+      (map-inv-right-factor-is-equiv-map-prod c ∘ g) ~ id
+    isretr-map-inv-right-factor-is-equiv-map-prod c =
+      ((pr2 ∘ inv-f×g-map) ·l htpy-triangle) ∙h
+        ((pr2 ·l isretr-inv-f×g-map) ·r <const,id>)
       where
-      get-sec-f : B → sec f
-      get-sec-f b = sec-map-prod-component-pr1 (g b)
-      const×id : B → A × B
-      const×id b = (pair (pr1 (get-sec-f b) c) b)
-      triangle-sec : (λ b → (pair c (g b))) ~ ((map-prod f g) ∘ const×id)
-      triangle-sec b = eq-pair (inv-htpy (pr2 (get-sec-f b)) c) refl
+      across : B → A
+      across b = map-inv-left-factor-is-equiv-map-prod (g b) c
+      <const,id> : B → A × B
+      <const,id> b = pair (across b) b
+      htpy-triangle : (λ b → pair c (g b)) ~ ((map-prod f g) ∘ <const,id>)
+      htpy-triangle b =
+        eq-pair
+          (inv-htpy (issec-map-inv-left-factor-is-equiv-map-prod (g b)) c)
+          refl
 
-  prod-equivs-nonempty-codoms-is-equiv-map-prod :
+    is-equiv-right-factor-is-equiv-map-prod : C → is-equiv g
+    is-equiv-right-factor-is-equiv-map-prod c =
+      is-equiv-has-inverse
+        (map-inv-right-factor-is-equiv-map-prod c)
+        (issec-map-inv-right-factor-is-equiv-map-prod c)
+        (isretr-map-inv-right-factor-is-equiv-map-prod c)
+
+  is-equiv-factors-is-equiv-map-prod :
     is-equiv (map-prod f g) → (D → is-equiv f) × (C → is-equiv g)
-  pr1 (pr1 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) d) =
-    sec-map-prod-component-pr1 e d
-  pr2 (pr1 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) d) =
-    retr-map-prod-component-pr1 e d
-  pr1 (pr2 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) c) =
-    sec-map-prod-component-pr2 e c
-  pr2 (pr2 (prod-equivs-nonempty-codoms-is-equiv-map-prod e) c) =
-    retr-map-prod-component-pr2 e c
+  pr1 (is-equiv-factors-is-equiv-map-prod e) =
+    is-equiv-left-factor-is-equiv-map-prod e
+  pr2 (is-equiv-factors-is-equiv-map-prod e) =
+    is-equiv-right-factor-is-equiv-map-prod e
 
-  is-equiv-map-prod-equivs-nonempty-codom' :
-    (C × D) → (D → is-equiv f) → (C → is-equiv g) → is-equiv (map-prod f g)
-  is-equiv-map-prod-equivs-nonempty-codom' (pair c d) f' g' =
-    is-equiv-map-prod f g (f' d) (g' c)
+  module _
+    (is-equiv-left-factor : D → is-equiv f)
+    (is-equiv-right-factor : C → is-equiv g)
+    where
 
-  is-equiv-map-prod-equivs-nonempty-codoms :
-    ((D → is-equiv f) × (C → is-equiv g)) → is-equiv (map-prod f g)
-  pr1 (pr1 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) cd =
-    pr1 (pr1 (is-equiv-map-prod-equivs-nonempty-codom' cd f' g')) cd
-  pr2 (pr1 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) cd =
-    pr2 (pr1 ((is-equiv-map-prod-equivs-nonempty-codom' cd f' g'))) cd
-  pr1 (pr2 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) cd =
-    pr1 (pr2 (is-equiv-map-prod-equivs-nonempty-codom' cd f' g')) cd
-  pr2 (pr2 (is-equiv-map-prod-equivs-nonempty-codoms (pair f' g'))) ab =
-    pr2 (pr2 (is-equiv-map-prod-equivs-nonempty-codom' (map-prod f g ab) f' g')) ab
+    private
+      inv-f : D → has-inverse f
+      inv-f d = has-inverse-is-equiv (is-equiv-left-factor d)
+      inv-f-map : D → C → A
+      inv-f-map d = pr1 (inv-f d)
+      issec-inv-f-map : (d : D) → (f ∘ (inv-f-map d)) ~ id
+      issec-inv-f-map d = pr1 (pr2 (inv-f d))
+      isretr-inv-f-map : (d : D) → ((inv-f-map d) ∘ f) ~ id
+      isretr-inv-f-map d = pr2 (pr2 (inv-f d))
+      inv-g : C → has-inverse g
+      inv-g c = has-inverse-is-equiv (is-equiv-right-factor c)
+      inv-g-map : C → D → B
+      inv-g-map c = pr1 (inv-g c)
+      issec-inv-g-map : (c : C) → (g ∘ (inv-g-map c)) ~ id
+      issec-inv-g-map c = pr1 (pr2 (inv-g c))
+      isretr-inv-g-map : (c : C) → ((inv-g-map c) ∘ g) ~ id
+      isretr-inv-g-map c = pr2 (pr2 (inv-g c))
+
+    map-inv-map-prod-is-equiv-factors : C × D → A × B
+    pr1 (map-inv-map-prod-is-equiv-factors (pair c d)) =
+      inv-f-map d c
+    pr2 (map-inv-map-prod-is-equiv-factors (pair c d)) =
+      inv-g-map c d
+
+    issec-map-inv-map-prod-is-equiv-factors :
+      (map-prod f g ∘ map-inv-map-prod-is-equiv-factors) ~ id
+    issec-map-inv-map-prod-is-equiv-factors (pair c d) =
+      eq-pair (issec-inv-f-map d c) (issec-inv-g-map c d)
+
+    isretr-map-inv-map-prod-is-equiv-factors :
+      (map-inv-map-prod-is-equiv-factors ∘ map-prod f g) ~ id
+    isretr-map-inv-map-prod-is-equiv-factors (pair a b) =
+      eq-pair (isretr-inv-f-map (g b) a) (isretr-inv-g-map (f a) b)
+
+  is-equiv-map-prod-is-equiv-factors :
+    (D → is-equiv f) → (C → is-equiv g) → is-equiv (map-prod f g)
+  is-equiv-map-prod-is-equiv-factors f' g' =
+    is-equiv-has-inverse
+      (map-inv-map-prod-is-equiv-factors f' g')
+      (issec-map-inv-map-prod-is-equiv-factors f' g')
+      (isretr-map-inv-map-prod-is-equiv-factors f' g')
 ```
 
 ## See also
