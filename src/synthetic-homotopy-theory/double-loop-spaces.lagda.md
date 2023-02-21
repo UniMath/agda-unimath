@@ -3,6 +3,8 @@
 ```agda
 module synthetic-homotopy-theory.double-loop-spaces where
 
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
@@ -102,4 +104,18 @@ eckmann-hilton-Ω² :
 eckmann-hilton-Ω² α β =
   ( inv (outer-eckmann-hilton-connection-Ω² α β)) ∙
   ( inner-eckmann-hilton-connection-Ω² α β)
+```
+
+### Transport in a family of double loops
+
+```agda
+module _
+  {l : Level} {X : UU l} {x0 x1 : X}
+  where
+
+  compute-path-over-Ω² :
+    (p : x0 ＝ x1) (α : (refl {x = x0}) ＝ refl) (β : (refl {x = x1}) ＝ refl) →
+    (path-over (λ x → (refl {x = x}) ＝ refl) p α β) ≃ (((inv left-unit ∙ (horizontal-concat-Id² α (refl {x = p}))) ∙ left-unit ) ＝ ((inv right-unit ∙ (horizontal-concat-Id² (refl {x = p}) β)) ∙ right-unit))
+  compute-path-over-Ω² refl α β =
+    equiv-concat' (horizontal-concat-Id² α refl ∙ refl) (nat-sq-left-unit-Id² β) ∘e equiv-concat (inv (nat-sq-right-unit-Id² α)) β
 ```
