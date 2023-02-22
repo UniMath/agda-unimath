@@ -22,19 +22,32 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
+```
 
+## Idea
 
+The descent property uniquely characterizes type families over the circle.
+
+## Definitions
+
+```agda
 Fam-circle :
   ( l1 : Level) → UU (lsuc l1)
 Fam-circle l1 = Σ (UU l1) Aut
+```
 
+## Properties
+
+### Characterization of the identity type of `Fam-circle`
+
+```agda
 Eq-Fam-circle :
   { l1 : Level} → Fam-circle l1 → Fam-circle l1 → UU l1
 Eq-Fam-circle P Q =
   Σ ( (pr1 P) ≃ (pr1 Q))
     ( λ h →
       ( (map-equiv h) ∘ (map-equiv (pr2 P))) ~ ((map-equiv (pr2 Q)) ∘ (map-equiv h)))
-  
+
 reflexive-Eq-Fam-circle :
   { l1 : Level} (P : Fam-circle l1) → Eq-Fam-circle P P
 reflexive-Eq-Fam-circle (pair X e) =
@@ -44,30 +57,32 @@ Eq-Fam-circle-eq :
   { l1 : Level} (P Q : Fam-circle l1) → Id P Q → Eq-Fam-circle P Q
 Eq-Fam-circle-eq P .P refl = reflexive-Eq-Fam-circle P
 
-abstract
-  is-contr-total-Eq-Fam-circle :
-    { l1 : Level} (P : Fam-circle l1) →
-    is-contr (Σ (Fam-circle l1) (Eq-Fam-circle P))
-  is-contr-total-Eq-Fam-circle (pair X e) =
-    is-contr-total-Eq-structure
-      ( λ Y f h →
-        ((map-equiv h) ∘ (map-equiv e)) ~ ((map-equiv f) ∘ (map-equiv h)))
-      ( is-contr-total-equiv X)
-      ( pair X id-equiv)
-    ( is-contr-total-htpy-equiv e)
+is-contr-total-Eq-Fam-circle :
+  { l1 : Level} (P : Fam-circle l1) →
+  is-contr (Σ (Fam-circle l1) (Eq-Fam-circle P))
+is-contr-total-Eq-Fam-circle (pair X e) =
+  is-contr-total-Eq-structure
+    ( λ Y f h →
+      ((map-equiv h) ∘ (map-equiv e)) ~ ((map-equiv f) ∘ (map-equiv h)))
+    ( is-contr-total-equiv X)
+    ( pair X id-equiv)
+  ( is-contr-total-htpy-equiv e)
 
-abstract
-  is-equiv-Eq-Fam-circle-eq :
-    { l1 : Level} (P Q : Fam-circle l1) → is-equiv (Eq-Fam-circle-eq P Q)
-  is-equiv-Eq-Fam-circle-eq P =
-    fundamental-theorem-id
-      ( is-contr-total-Eq-Fam-circle P)
-      ( Eq-Fam-circle-eq P)
+is-equiv-Eq-Fam-circle-eq :
+  { l1 : Level} (P Q : Fam-circle l1) → is-equiv (Eq-Fam-circle-eq P Q)
+is-equiv-Eq-Fam-circle-eq P =
+  fundamental-theorem-id
+    ( is-contr-total-Eq-Fam-circle P)
+    ( Eq-Fam-circle-eq P)
 
 eq-Eq-Fam-circle :
   { l1 : Level} (P Q : Fam-circle l1) → Eq-Fam-circle P Q → Id P Q
 eq-Eq-Fam-circle P Q = map-inv-is-equiv (is-equiv-Eq-Fam-circle-eq P Q)
+```
 
+### Uniqueness of type families defined by `Fam-circle`
+
+```agda
 ev-fam-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
   ( X → UU l2) → Fam-circle l2
@@ -80,11 +95,10 @@ comparison-fam-circle :
   ( l1 : Level) → free-loop (UU l1) → Fam-circle l1
 comparison-fam-circle l1 = tot (λ Y → equiv-eq)
 
-abstract
-  is-equiv-comparison-fam-circle :
-    ( l1 : Level) → is-equiv (comparison-fam-circle l1)
-  is-equiv-comparison-fam-circle l1 =
-    is-equiv-tot-is-fiberwise-equiv (λ Y → univalence Y Y)
+is-equiv-comparison-fam-circle :
+  ( l1 : Level) → is-equiv (comparison-fam-circle l1)
+is-equiv-comparison-fam-circle l1 =
+  is-equiv-tot-is-fiberwise-equiv (λ Y → univalence Y Y)
 
 triangle-comparison-fam-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
@@ -95,19 +109,18 @@ triangle-comparison-fam-circle l P =
     ( comparison-fam-circle _ (ev-free-loop l (UU _) P))
     ( pair id-equiv (htpy-eq (inv (tr-equiv-eq-ap (pr2 l)))))
 
-abstract
-  is-equiv-ev-fam-circle-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loop X)
-    ( up-circle : universal-property-circle (lsuc l2) l) →
-    is-equiv (ev-fam-circle {l2 = l2} l)
-  is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
-    is-equiv-comp-htpy
-      ( ev-fam-circle l)
-      ( comparison-fam-circle l2)
-      ( ev-free-loop l (UU l2))
-      ( triangle-comparison-fam-circle l)
-      ( up-circle (UU l2))
-      ( is-equiv-comparison-fam-circle l2)
+is-equiv-ev-fam-circle-universal-property-circle :
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  ( up-circle : universal-property-circle (lsuc l2) l) →
+  is-equiv (ev-fam-circle {l2 = l2} l)
+is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
+  is-equiv-comp-htpy
+    ( ev-fam-circle l)
+    ( comparison-fam-circle l2)
+    ( ev-free-loop l (UU l2))
+    ( triangle-comparison-fam-circle l)
+    ( up-circle (UU l2))
+    ( is-equiv-comparison-fam-circle l2)
 
 unique-family-property-circle :
   { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
@@ -116,23 +129,26 @@ unique-family-property-circle l2 {X} l =
   ( Q : Fam-circle l2) →
     is-contr (Σ (X → UU l2) (λ P → Eq-Fam-circle Q (ev-fam-circle l P)))
 
-abstract
-  unique-family-property-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-    universal-property-circle (lsuc l2) l → unique-family-property-circle l2 l
-  unique-family-property-universal-property-circle l up-circle Q =
-    is-contr-is-equiv'
-      ( fib (ev-fam-circle l) Q)
-      ( tot (λ P → (Eq-Fam-circle-eq Q (ev-fam-circle l P)) ∘ inv))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ P →
-          is-equiv-comp _ _
-            ( is-equiv-inv _ _)
-            ( is-equiv-Eq-Fam-circle-eq Q (ev-fam-circle l P))))
-      ( is-contr-map-is-equiv
-        ( is-equiv-ev-fam-circle-universal-property-circle l up-circle)
-        ( Q))
+unique-family-property-universal-property-circle :
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
+  universal-property-circle (lsuc l2) l → unique-family-property-circle l2 l
+unique-family-property-universal-property-circle l up-circle Q =
+  is-contr-is-equiv'
+    ( fib (ev-fam-circle l) Q)
+    ( tot (λ P → (Eq-Fam-circle-eq Q (ev-fam-circle l P)) ∘ inv))
+    ( is-equiv-tot-is-fiberwise-equiv
+      ( λ P →
+        is-equiv-comp _ _
+          ( is-equiv-inv _ _)
+          ( is-equiv-Eq-Fam-circle-eq Q (ev-fam-circle l P))))
+    ( is-contr-map-is-equiv
+      ( is-equiv-ev-fam-circle-universal-property-circle l up-circle)
+      ( Q))
+```
 
+### Sections of families over the circle
+
+```agda
 Section-Fam-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X) (P : Fam-circle l2) → UU _
 Section-Fam-circle l P =
@@ -157,5 +173,4 @@ section-fam-circle l dup-circle Q P (pair e H) (pair p α) =
   map-inv-is-equiv
     ( dup-circle Q)
     ( pair (map-equiv e p) ((inv (H p)) ∙ (ap (map-equiv e) α)))
-
 ```
