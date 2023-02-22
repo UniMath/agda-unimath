@@ -29,7 +29,7 @@ open import univalent-combinatorics.inhabited-finite-types
         ( λ Y → equiv-𝔽 A (Σ-𝔽 X (λ x → finite-type-Inhabited-Type-𝔽 (Y x)))))
 
 module _
-  {l l1 l2 : Level} {A : 𝔽 l} (D : Σ-Decomposition-𝔽 l1 l2 A)
+  {l l1 l2 : Level} (A : 𝔽 l) (D : Σ-Decomposition-𝔽 l1 l2 A)
   where
 
   finite-indexing-type-Σ-Decomposition-𝔽 : 𝔽 l1
