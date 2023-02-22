@@ -3,6 +3,8 @@
 ```agda
 module univalent-combinatorics.sigma-decompositions where
 
+open import foundation.sigma-decompositions
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.inhabited-types
@@ -27,7 +29,7 @@ open import univalent-combinatorics.inhabited-finite-types
         ( λ Y → equiv-𝔽 A (Σ-𝔽 X (λ x → finite-type-Inhabited-Type-𝔽 (Y x)))))
 
 module _
-  {l l1 l2 : Level} (A : 𝔽 l) (D : Σ-Decomposition-𝔽 l1 l2 A)
+  {l l1 l2 : Level} {A : 𝔽 l} (D : Σ-Decomposition-𝔽 l1 l2 A)
   where
 
   finite-indexing-type-Σ-Decomposition-𝔽 : 𝔽 l1
@@ -64,4 +66,5 @@ module _
     type-𝔽 A → Σ indexing-type-Σ-Decomposition-𝔽 cotype-Σ-Decomposition-𝔽
   map-matching-correspondence-Σ-Decomposition-𝔽 =
     map-equiv matching-correspondence-Σ-Decomposition-𝔽
+
 ```
