@@ -207,7 +207,7 @@
   - [Algebras polynomial endofunctors](foundation.algebras-polynomial-endofunctors.md)
   - [Apartness relations](foundation.apartness-relations.md)
   - [Automorphisms](foundation.automorphisms.md)
-  - [Axiom l](foundation.axiom-l.md)
+  - [Axiom L](foundation.axiom-l.md)
   - [Axiom of choice](foundation.axiom-of-choice.md)
   - [Bands](foundation.bands.md)
   - [Binary embeddings](foundation.binary-embeddings.md)
