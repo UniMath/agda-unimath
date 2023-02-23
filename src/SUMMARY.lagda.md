@@ -879,6 +879,7 @@
   - [Circle](synthetic-homotopy-theory.circle.md)
   - [Cocones pushouts](synthetic-homotopy-theory.cocones-pushouts.md)
   - [Cofibers](synthetic-homotopy-theory.cofibers.md)
+  - [Descent circle](synthetic-homotopy-theory.descent-circle.md)
   - [Double loop spaces](synthetic-homotopy-theory.double-loop-spaces.md)
   - [Free loops](synthetic-homotopy-theory.free-loops.md)
   - [Functoriality loop spaces](synthetic-homotopy-theory.functoriality-loop-spaces.md)
