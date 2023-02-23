@@ -45,7 +45,7 @@ module _
   modal-rec = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
 
   modal-comp : modal-ind → UU (lsuc l1 ⊔ l2)
-  modal-comp ind-○ =
+  modal-comp ind-○ = 
     (X : UU l1) (P : ○ X → UU l1) →
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
@@ -183,11 +183,11 @@ module _
 ```agda
 module _
   {l : Level}
-  {○ : modal-operator l l} (unit-○ : modal-unit ○) (rec-○ : modal-rec unit-○)
+  {○ : modal-operator l l} (unit-○ : modal-unit ○)
   where
 
-  map-○ : {X Y : UU l} → (X → Y) → ○ X → ○ Y
-  map-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+  map-modal-rec : (rec-○ : modal-rec unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
+  map-modal-rec rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
 ```
 
 ### `○ X` is modal
@@ -218,7 +218,7 @@ module _
       ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
       ( map-inv-is-equiv
         ( Id-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
-        ( map-○ unit-○ (modal-rec-modal-ind unit-○ ind-○)
+        ( map-modal-rec unit-○ (modal-rec-modal-ind unit-○ ind-○)
           ( map-equiv-is-small
             ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x''))
           ( ○-issec-map-inv-unit-○ x'')))
