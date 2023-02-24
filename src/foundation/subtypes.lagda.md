@@ -22,9 +22,12 @@ open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
 open import foundation.equality-dependent-function-types
+open import foundation.equational-reasoning
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
 ```
 
 ## Definition
@@ -116,3 +119,4 @@ subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set {l1} l2 A) = subtype l2 A
 pr2 (subtype-Set {l1} l2 A) = is-set-subtype
 ```
+

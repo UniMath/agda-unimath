@@ -56,11 +56,11 @@ module _
         map-inv-is-equiv-is-equiv-postcomp
         issec-map-inv-is-equiv-is-equiv-postcomp
         isretr-map-inv-is-equiv-is-equiv-postcomp
+```
 
-{- The following version of the same theorem works when X and Y are in the same
-   universe. The condition of inducing equivalences by postcomposition is 
-   simplified to that universe. -}
+The following version of the same theorem works when X and Y are in the same universe. The condition of inducing equivalences by postcomposition is simplified to that universe.
 
+```agda
 is-equiv-is-equiv-postcomp' :
   {l : Level} {X : UU l} {Y : UU l} (f : X → Y) →
   ((A : UU l) → is-equiv (postcomp A f)) → is-equiv f
