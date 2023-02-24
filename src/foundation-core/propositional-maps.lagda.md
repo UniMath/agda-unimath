@@ -68,11 +68,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  abstract
-    is-prop-map-emb : (f : B ↪ A) → is-prop-map (map-emb f)
-    is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
+  is-prop-map-emb : (f : A ↪ B) → is-prop-map (map-emb f)
+  is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
+
+  is-prop-map-emb' : (f : A ↪ B) → (b : B) → is-prop (fib' (map-emb f) b)
+  is-prop-map-emb' f y =
+    is-prop-equiv' (equiv-fib (map-emb f) y) (is-prop-map-emb f y)
 
   fib-emb-Prop : A ↪ B → B → Prop (l1 ⊔ l2)
   pr1 (fib-emb-Prop f y) = fib (map-emb f) y
-  pr2 (fib-emb-Prop f y) = is-prop-map-is-emb (is-emb-map-emb f) y
+  pr2 (fib-emb-Prop f y) = is-prop-map-emb f y
+
+  fib-emb-Prop' : A ↪ B → B → Prop (l1 ⊔ l2)
+  pr1 (fib-emb-Prop' f y) = fib' (map-emb f) y
+  pr2 (fib-emb-Prop' f y) = is-prop-map-emb' f y
 ```

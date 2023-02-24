@@ -22,11 +22,10 @@ the library about any topic in mathematics.
 
 ```
 @misc{Agda-UniMath,
-  author =     {Egbert Rijke and 
-                Elisabeth Bonnevier and
-                Jonathan Prieto-Cubides and others},
-  title =     {Univalent mathematics in {Agda}},
-  url =         {https://github.com/UniMath/agda-unimath/},
+  author =       {Egbert Rijke and 
+                  Elisabeth Bonnevier and
+                  Jonathan Prieto-Cubides and others},
+  title =        {Univalent mathematics in {Agda}},
+  url =          {https://github.com/UniMath/agda-unimath/},
   howpublished = {\url{https://unimath.github.io/agda-unimath/}}
 }
-```
