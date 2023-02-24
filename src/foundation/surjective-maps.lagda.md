@@ -25,6 +25,7 @@ open import foundation-core.universe-levels
 open import foundation.connected-maps
 open import foundation.embeddings
 open import foundation.homotopies
+open import foundation.monomorphisms
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
@@ -619,8 +620,5 @@ module _
   is-equiv-postcomp-extension-surjective-map f i g H K =
     is-equiv-is-emb-is-surjective
       {!!}
-      ( is-emb-map-Σ
-        ( is-extension f (g ∘ i))
-        {! is-emb-postcomp-is-emb!}
-        {!!})
+      ( ?)
 ```

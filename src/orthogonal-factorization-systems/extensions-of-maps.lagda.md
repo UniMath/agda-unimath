@@ -7,6 +7,7 @@ open import foundation-core.dependent-pair-types
 
 open import foundation.contractible-types
 open import foundation.contractible-maps
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -16,6 +17,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.monomorphisms
 open import foundation.propositions
 open import foundation.sets
 -- open import foundation.small-types
@@ -389,6 +391,25 @@ is-extension-along-self-Π :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B) → is-extension f f id
 is-extension-along-self-Π _ = refl-htpy
+```
+
+### Postcomposition of extensions by an embedding is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  is-emb-postcomp-extension :
+    (f : A → B) (i : A → X) (g : X → Y) → is-emb g →
+    is-emb (postcomp-extension f i g)
+  is-emb-postcomp-extension f i g H =
+    is-emb-map-Σ
+      ( is-extension f (g ∘ i))
+      ( is-mono-is-emb g H B)
+      ( λ j →
+        is-emb-is-equiv
+          ( is-equiv-map-Π (λ x → ap g) (λ x → H (i x) (j (f x)))))
 ```
 
 ## See also
