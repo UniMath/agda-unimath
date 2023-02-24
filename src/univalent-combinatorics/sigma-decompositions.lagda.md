@@ -75,12 +75,15 @@ module _
    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
     is-inhabited (cotype-Σ-Decomposition-𝔽 x)
   is-inhabited-cotype-Σ-Decomposition-𝔽 x =
-    is-inhabited-type-Inhabited-Type-𝔽 (finite-inhabited-cotype-Σ-Decomposition-𝔽 x)
+    is-inhabited-type-Inhabited-Type-𝔽
+      ( finite-inhabited-cotype-Σ-Decomposition-𝔽 x)
 
   inhabited-cotype-Σ-Decomposition-𝔽 :
     Fam-Inhabited-Types l2 indexing-type-Σ-Decomposition-𝔽
-  pr1 (inhabited-cotype-Σ-Decomposition-𝔽 x) = cotype-Σ-Decomposition-𝔽 x
-  pr2 (inhabited-cotype-Σ-Decomposition-𝔽 x) = is-inhabited-cotype-Σ-Decomposition-𝔽 x
+  pr1 (inhabited-cotype-Σ-Decomposition-𝔽 x) =
+    cotype-Σ-Decomposition-𝔽 x
+  pr2 (inhabited-cotype-Σ-Decomposition-𝔽 x) =
+    is-inhabited-cotype-Σ-Decomposition-𝔽 x
 
   matching-correspondence-Σ-Decomposition-𝔽 :
     type-𝔽 A ≃ Σ indexing-type-Σ-Decomposition-𝔽 cotype-Σ-Decomposition-𝔽
@@ -93,9 +96,12 @@ module _
 
   Σ-Decomposition-Σ-Decomposition-𝔽 :
     Σ-Decomposition l1 l2 (type-𝔽 A)
-  pr1 Σ-Decomposition-Σ-Decomposition-𝔽 = indexing-type-Σ-Decomposition-𝔽
-  pr1 (pr2 Σ-Decomposition-Σ-Decomposition-𝔽) = inhabited-cotype-Σ-Decomposition-𝔽
-  pr2 (pr2 Σ-Decomposition-Σ-Decomposition-𝔽) = matching-correspondence-Σ-Decomposition-𝔽
+  pr1 Σ-Decomposition-Σ-Decomposition-𝔽 =
+    indexing-type-Σ-Decomposition-𝔽
+  pr1 (pr2 Σ-Decomposition-Σ-Decomposition-𝔽) =
+    inhabited-cotype-Σ-Decomposition-𝔽
+  pr2 (pr2 Σ-Decomposition-Σ-Decomposition-𝔽) =
+    matching-correspondence-Σ-Decomposition-𝔽
 ```
 
 ### Fibered double finite Σ-Decompositions
@@ -107,8 +113,6 @@ fibered-Σ-Decomposition-𝔽 :
 fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
   Σ (Σ-Decomposition-𝔽 l2 l3 A)
     (λ D → Σ-Decomposition-𝔽 l4 l5 (finite-indexing-type-Σ-Decomposition-𝔽 A D))
-
-
 ```
 
 ### Displayed double Σ-decompositions
@@ -119,9 +123,8 @@ displayed-Σ-Decomposition-𝔽 :
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
 displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
   ( Σ (Σ-Decomposition-𝔽 l2 l3 A)
-  (λ D → (u : indexing-type-Σ-Decomposition-𝔽 A D) →  Σ-Decomposition-𝔽 l4 l5 (finite-cotype-Σ-Decomposition-𝔽 A D u)))
-
-
+  (λ D → (u : indexing-type-Σ-Decomposition-𝔽 A D) →
+  Σ-Decomposition-𝔽 l4 l5 (finite-cotype-Σ-Decomposition-𝔽 A D u)))
 ```
 
 ## Properties
@@ -132,6 +135,7 @@ displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
 module _
    {l1 l2 l3 : Level} (A : 𝔽 l1)
   where
+
   is-finite-Σ-Decomposition :
     subtype (l2 ⊔ l3) (Σ-Decomposition l2 l3 (type-𝔽 A))
   is-finite-Σ-Decomposition D =
@@ -217,6 +221,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level} (A : 𝔽 l1)
   where
+
   is-finite-fibered-Σ-Decomposition :
     subtype (l2 ⊔ l3 ⊔ l4 ⊔ l5)
       ( fibered-Σ-Decomposition l2 l3 l4 l5 (type-𝔽 A))
@@ -287,13 +292,15 @@ module _
     map-reindexing-Σ-Π :
       {l1 l2 l3 : Level}
       {M : UU l1} {N : M → UU l2} {S : (m : M) → (nm : N m) → UU l3} →
-      Σ ((m : M) → N m) (λ n → ((m : M) → S m (n m))) → (m : M) → Σ (N m) (λ nm → S m nm)
+      Σ ((m : M) → N m) (λ n → ((m : M) → S m (n m))) → (m : M) →
+      Σ (N m) (λ nm → S m nm)
     map-reindexing-Σ-Π (n , s) = λ m → (n m , s m)
 
     map-inv-reindexing-Σ-Π :
       {l1 l2 l3 : Level}
       {M : UU l1} {N : M → UU l2} {S : (m : M) → ((nm : N m) → UU l3)} →
-      ((m : M) → Σ (N m) (λ nm → S m nm)) → Σ ((m : M) → N m) (λ n →  ((m : M) → S m (n m)))
+      ((m : M) → Σ (N m) (λ nm → S m nm)) →
+      Σ ((m : M) → N m) (λ n →  ((m : M) → S m (n m)))
     map-inv-reindexing-Σ-Π h = (pr1 ∘ h , pr2 ∘ h)
 
     equiv-reindexing-Σ-Π :
@@ -342,6 +349,7 @@ module _
   {l1 l : Level} (A : 𝔽 l1)
   (D : fibered-Σ-Decomposition l l l l (type-𝔽 A))
   where
+
   map-is-finite-displayed-fibered-Σ-Decomposition :
     type-Prop (is-finite-fibered-Σ-Decomposition A D) →
     type-Prop (is-finite-displayed-Σ-Decomposition A
@@ -397,5 +405,4 @@ equiv-displayed-fibered-Σ-Decomposition-𝔽 A =
         ( equiv-displayed-fibered-Σ-Decomposition)
         ( equiv-is-finite-displayed-fibered-Σ-Decomposition A) ∘e
       inv-equiv ( equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype A))
-
 ```
