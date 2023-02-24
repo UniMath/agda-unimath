@@ -30,6 +30,8 @@ open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
+
+open import orthogonal-factorization-systems.extensions-of-maps
 ```
 
 ## Idea
@@ -601,4 +603,24 @@ eq-equiv-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f g : Surjection-Into-Set l2 A) →
   equiv-Surjection-Into-Set f g → f ＝ g
 eq-equiv-Surjection-Into-Set = eq-equiv-Surjection-Into-Truncated-Type
+```
+
+### Postcomposition of extensions along surjective maps by an embedding is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  is-equiv-postcomp-extension-surjective-map :
+    (f : A → B) (i : A → X) (g : X → Y) →
+    is-surjective f → is-emb g →
+    is-equiv (postcomp-extension f i g)
+  is-equiv-postcomp-extension-surjective-map f i g H K =
+    is-equiv-is-emb-is-surjective
+      {!!}
+      ( is-emb-map-Σ
+        ( is-extension f (g ∘ i))
+        {! is-emb-postcomp-is-emb!}
+        {!!})
 ```

@@ -1,6 +1,8 @@
 #  Binary functoriality of set quotients
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.binary-functoriality-set-quotients where
 
 open import foundation.binary-homotopies
@@ -20,6 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -224,6 +227,44 @@ module _
   pr2 equiv-hom-binary-hom-Eq-Rel = is-equiv-hom-binary-hom-Eq-Rel
 ```
 
+### We have `qT (f x y) ＝ map-set-quotient _ _ (map-hom-binary-hom-Eq-Rel R S T f)` for all `x : A` and `y : B`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A)
+  (QR : Set l3) (qR : reflecting-map-Eq-Rel R (type-Set QR))
+  {B : UU l4} (S : Eq-Rel l5 B)
+  (QS : Set l6) (qS : reflecting-map-Eq-Rel S (type-Set QS))
+  {C : UU l7} (T : Eq-Rel l8 C)
+  (QT : Set l9) (qT : reflecting-map-Eq-Rel T (type-Set QT))
+  where
+
+  compute-map-is-set-quotient-map-hom-binary-hom-Eq-Rel :
+    (UqS : {l : Level} → is-set-quotient l S QS qS) →
+    (UqT : {l : Level} → is-set-quotient l T QT qT) →
+    (f : binary-hom-Eq-Rel R S T) → 
+    (x : A) (y : B) →
+    map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
+    map-is-set-quotient S QS qS T QT qT UqS UqT
+      ( map-hom-binary-hom-Eq-Rel R S T f x)
+      ( map-reflecting-map-Eq-Rel S qS y)
+  compute-map-is-set-quotient-map-hom-binary-hom-Eq-Rel UqS UqT f x y =
+    ( ( inv
+        ( coherence-square-map-is-set-quotient S QS qS T QT qT UqS UqT
+          ( map-hom-binary-hom-Eq-Rel R S T f x)
+          ( y))) ∙
+      {!refl!}) ∙
+    ( htpy-eq
+      ( triangle-inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
+        ( quotient-hom-Eq-Rel-Set S T)
+        ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+        ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+        ( map-hom-binary-hom-Eq-Rel R S T f x))
+      ( map-reflecting-map-Eq-Rel S qS y))
+    
+```
+
 ### Binary functoriality of types that satisfy the universal property of set quotients
 
 ```agda
@@ -266,11 +307,18 @@ module _
     is-contr-equiv
       ( Σ ( type-Set QR → set-quotient-hom-Eq-Rel S T)
           ( λ h →
-            ( h ∘ (map-reflecting-map-Eq-Rel R qR)) ~
-            ( quotient-map-hom-Eq-Rel S T ∘ {!!} )))
+            ( x : A) →
+            ( h (map-reflecting-map-Eq-Rel R qR x)) ＝
+            ( quotient-map (eq-rel-hom-Eq-Rel S T)
+              ( map-hom-binary-hom-Eq-Rel R S T f x))))
       {!!}
-      {!!}
-
+      ( unique-map-is-set-quotient R QR qR
+        ( eq-rel-hom-Eq-Rel S T)
+        ( quotient-hom-Eq-Rel-Set S T)
+        ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+        ( UqR)
+        ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+        ( hom-binary-hom-Eq-Rel R S T f))
 ```
 
 ### Binary functoriality of set quotients

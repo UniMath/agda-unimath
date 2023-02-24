@@ -94,7 +94,7 @@ module _
     (l : lifting-square h f g i H) → is-extension f h (map-diagonal-lifting-square l)
   is-extension-lifting-square = pr1 ∘ pr2
 
-  extension-lifting-square : lifting-square h f g i H → extension f (λ _ → B) h
+  extension-lifting-square : lifting-square h f g i H → extension f h
   pr1 (extension-lifting-square L) = map-diagonal-lifting-square L
   pr2 (extension-lifting-square L) = is-extension-lifting-square L
 
