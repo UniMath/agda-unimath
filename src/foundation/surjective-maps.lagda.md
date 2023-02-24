@@ -11,8 +11,9 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
@@ -25,10 +26,12 @@ open import foundation-core.universe-levels
 open import foundation.connected-maps
 open import foundation.embeddings
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 
@@ -613,12 +616,62 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
 
-  is-equiv-postcomp-extension-surjective-map :
+  is-surjective-postcomp-extension-surjective-map :
+    (f : A → B) (i : A → X) (g : X → Y) →
+    is-surjective f → is-emb g →
+    is-surjective (postcomp-extension f i g)
+  is-surjective-postcomp-extension-surjective-map f i g H K (h , L) =
+    unit-trunc-Prop
+      ( ( j , N) ,
+        ( eq-htpy-extension f
+          ( g ∘ i)
+          ( postcomp-extension f i g (j , N))
+          ( h , L)
+          ( M)
+          ( λ a →
+            ( ap
+              ( concat' (g (i a)) (M (f a)))
+              ( issec-map-inv-is-equiv
+                ( K (i a) ((j (f a))))
+                ( L a ∙ inv (M (f a))))) ∙
+            ( issec-inv-concat' (g (i a)) (M (f a)) (L a)))))
+    where
+    
+    J : (b : B) → fib g (h b)
+    J =
+      apply-dependent-universal-property-surj-is-surjective f H
+        ( λ b → fib-emb-Prop (g , K) (h b))
+        ( λ a → (i a , L a))
+
+    j : B → X
+    j b = pr1 (J b)
+
+    M : (g ∘ j) ~ h
+    M b = pr2 (J b)
+
+    N : i ~ (j ∘ f)
+    N a = map-inv-is-equiv (K (i a) (j (f a))) (L a ∙ inv (M (f a)))
+
+  is-equiv-postcomp-extension-is-surjective :
     (f : A → B) (i : A → X) (g : X → Y) →
     is-surjective f → is-emb g →
     is-equiv (postcomp-extension f i g)
-  is-equiv-postcomp-extension-surjective-map f i g H K =
+  is-equiv-postcomp-extension-is-surjective f i g H K =
     is-equiv-is-emb-is-surjective
-      {!!}
-      ( ?)
+      ( is-surjective-postcomp-extension-surjective-map f i g H K)
+      ( is-emb-postcomp-extension f i g K)
+
+  equiv-postcomp-extension-surjection :
+    (f : A ↠ B) (i : A → X) (g : X ↪ Y) →
+    extension (map-surjection f) i ≃
+    extension (map-surjection f) (map-emb g ∘ i)
+  pr1 (equiv-postcomp-extension-surjection f i g) =
+    postcomp-extension (map-surjection f) i (map-emb g)
+  pr2 (equiv-postcomp-extension-surjection f i g) =
+    is-equiv-postcomp-extension-is-surjective
+      ( map-surjection f)
+      ( i)
+      ( map-emb g)
+      ( is-surjective-map-surjection f)
+      ( is-emb-map-emb g)
 ```

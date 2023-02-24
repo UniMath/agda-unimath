@@ -369,6 +369,13 @@ module _
                 ( coherence-square-map-is-set-quotient
                   R QR qR S QS qS UR US h)))
             ( a)))
+
+  emb-inclusion-is-set-quotient-hom-Eq-Rel :
+    type-Set QH ↪ type-hom-Set QR QS
+  pr1 emb-inclusion-is-set-quotient-hom-Eq-Rel =
+    inclusion-is-set-quotient-hom-Eq-Rel
+  pr2 emb-inclusion-is-set-quotient-hom-Eq-Rel =
+    is-emb-inclusion-is-set-quotient-hom-Eq-Rel
 ```
 
 #### Second variant using the official set quotients
@@ -452,6 +459,13 @@ module _
                 ( coherence-square-map-set-quotient
                   R S h)))
             ( a)))
+
+  emb-inclusion-set-quotient-hom-Eq-Rel :
+    set-quotient (eq-rel-hom-Eq-Rel R S) ↪ (set-quotient R → set-quotient S)
+  pr1 emb-inclusion-set-quotient-hom-Eq-Rel =
+    inclusion-set-quotient-hom-Eq-Rel
+  pr2 emb-inclusion-set-quotient-hom-Eq-Rel =
+    is-emb-inclusion-set-quotient-hom-Eq-Rel
 ```
           
 

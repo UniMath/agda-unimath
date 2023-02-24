@@ -9,6 +9,7 @@ open import foundation.binary-homotopies
 open import foundation.binary-reflecting-maps-equivalence-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.exponents-set-quotients
@@ -26,6 +27,7 @@ open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
@@ -227,44 +229,6 @@ module _
   pr2 equiv-hom-binary-hom-Eq-Rel = is-equiv-hom-binary-hom-Eq-Rel
 ```
 
-### We have `qT (f x y) ＝ map-set-quotient _ _ (map-hom-binary-hom-Eq-Rel R S T f)` for all `x : A` and `y : B`
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
-  {A : UU l1} (R : Eq-Rel l2 A)
-  (QR : Set l3) (qR : reflecting-map-Eq-Rel R (type-Set QR))
-  {B : UU l4} (S : Eq-Rel l5 B)
-  (QS : Set l6) (qS : reflecting-map-Eq-Rel S (type-Set QS))
-  {C : UU l7} (T : Eq-Rel l8 C)
-  (QT : Set l9) (qT : reflecting-map-Eq-Rel T (type-Set QT))
-  where
-
-  compute-map-is-set-quotient-map-hom-binary-hom-Eq-Rel :
-    (UqS : {l : Level} → is-set-quotient l S QS qS) →
-    (UqT : {l : Level} → is-set-quotient l T QT qT) →
-    (f : binary-hom-Eq-Rel R S T) → 
-    (x : A) (y : B) →
-    map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
-    map-is-set-quotient S QS qS T QT qT UqS UqT
-      ( map-hom-binary-hom-Eq-Rel R S T f x)
-      ( map-reflecting-map-Eq-Rel S qS y)
-  compute-map-is-set-quotient-map-hom-binary-hom-Eq-Rel UqS UqT f x y =
-    ( ( inv
-        ( coherence-square-map-is-set-quotient S QS qS T QT qT UqS UqT
-          ( map-hom-binary-hom-Eq-Rel R S T f x)
-          ( y))) ∙
-      {!refl!}) ∙
-    ( htpy-eq
-      ( triangle-inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
-        ( quotient-hom-Eq-Rel-Set S T)
-        ( reflecting-map-quotient-map-hom-Eq-Rel S T)
-        ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
-        ( map-hom-binary-hom-Eq-Rel R S T f x))
-      ( map-reflecting-map-Eq-Rel S qS y))
-    
-```
-
 ### Binary functoriality of types that satisfy the universal property of set quotients
 
 ```agda
@@ -276,25 +240,37 @@ module _
   (QS : Set l6) (qS : reflecting-map-Eq-Rel S (type-Set QS))
   {C : UU l7} (T : Eq-Rel l8 C)
   (QT : Set l9) (qT : reflecting-map-Eq-Rel T (type-Set QT))
+  (UqR : {l : Level} → is-set-quotient l R QR qR)
+  (UqS : {l : Level} → is-set-quotient l S QS qS)
+  (UqT : {l : Level} → is-set-quotient l T QT qT)
+  (f : binary-hom-Eq-Rel R S T)
   where
 
-  right-extension-is-set-quotient-binary-reflecting-map-Eq-Rel :
-    ({l : Level} → is-set-quotient l S QS qS) →
-    ({l : Level} → is-set-quotient l T QT qT) →
-    binary-hom-Eq-Rel R S T →
-    reflecting-map-Eq-Rel R (type-hom-Set QS QT)
-  right-extension-is-set-quotient-binary-reflecting-map-Eq-Rel UqS UqT f =
-    comp-reflecting-map-Eq-Rel R
-      ( eq-rel-hom-Eq-Rel S T)
-      ( universal-reflecting-map-is-set-quotient-hom-Eq-Rel
-        S QS qS UqS T QT qT UqT)
-      ( hom-binary-hom-Eq-Rel R S T f)
+  private
+    p : (x : A) (y : B) →
+        map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
+        inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
+          ( quotient-hom-Eq-Rel-Set S T)
+          ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+          ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+          ( quotient-map-hom-Eq-Rel S T (map-hom-binary-hom-Eq-Rel R S T f x))
+          ( map-reflecting-map-Eq-Rel S qS y)
+    p x y =
+      ( inv
+        ( coherence-square-map-is-set-quotient S QS qS T QT qT UqS UqT
+          ( map-hom-binary-hom-Eq-Rel R S T f x)
+          ( y))) ∙
+      ( inv
+        ( htpy-eq
+          ( triangle-inclusion-is-set-quotient-hom-Eq-Rel
+            S QS qS UqS T QT qT UqT
+            ( quotient-hom-Eq-Rel-Set S T)
+            ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+            ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+            ( map-hom-binary-hom-Eq-Rel R S T f x))
+          ( map-reflecting-map-Eq-Rel S qS y)))
 
-  unique-binary-map-set-quotient-is-set-quotient :
-    ({l : Level} → is-set-quotient l R QR qR) →
-    ({l : Level} → is-set-quotient l S QS qS) →
-    ({l : Level} → is-set-quotient l T QT qT) →
-    (f : binary-hom-Eq-Rel R S T) →
+  unique-binary-map-is-set-quotient :
     is-contr
       ( Σ ( type-Set QR → type-Set QS → type-Set QT)
           ( λ h →
@@ -303,15 +279,58 @@ module _
                 ( map-reflecting-map-Eq-Rel S qS y)) ＝
             ( map-reflecting-map-Eq-Rel T qT
               ( map-binary-hom-Eq-Rel R S T f x y))))
-  unique-binary-map-set-quotient-is-set-quotient UqR UqS UqT f =
+  unique-binary-map-is-set-quotient =
     is-contr-equiv
       ( Σ ( type-Set QR → set-quotient-hom-Eq-Rel S T)
           ( λ h →
             ( x : A) →
             ( h (map-reflecting-map-Eq-Rel R qR x)) ＝
-            ( quotient-map (eq-rel-hom-Eq-Rel S T)
+            ( quotient-map-hom-Eq-Rel S T
               ( map-hom-binary-hom-Eq-Rel R S T f x))))
-      {!!}
+      ( equiv-tot
+        ( λ h →
+          ( equiv-inv-htpy
+            ( ( quotient-map-hom-Eq-Rel S T) ∘
+              ( map-hom-binary-hom-Eq-Rel R S T f))
+            ( h ∘ map-reflecting-map-Eq-Rel R qR))) ∘e
+        ( ( inv-equiv
+            ( equiv-postcomp-extension-surjection
+              ( map-reflecting-map-Eq-Rel R qR ,
+                is-surjective-is-set-quotient R QR qR UqR)
+              ( ( quotient-map-hom-Eq-Rel S T) ∘
+                ( map-hom-binary-hom-Eq-Rel R S T f))
+              ( emb-inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
+                ( quotient-hom-Eq-Rel-Set S T)
+                ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+                ( is-set-quotient-set-quotient-hom-Eq-Rel S T)))) ∘e
+          ( equiv-tot
+            ( λ h →
+              equiv-map-Π
+                ( λ x →
+                  ( inv-equiv equiv-funext) ∘e
+                  ( inv-equiv
+                    ( equiv-dependent-universal-property-surj-is-surjective
+                      ( map-reflecting-map-Eq-Rel S qS)
+                      ( is-surjective-is-set-quotient S QS qS UqS)
+                      ( λ u →
+                        Id-Prop QT
+                        ( inclusion-is-set-quotient-hom-Eq-Rel
+                          S QS qS UqS T QT qT UqT
+                          ( quotient-hom-Eq-Rel-Set S T)
+                          ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+                          ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+                          ( quotient-map-hom-Eq-Rel S T
+                            ( map-hom-binary-hom-Eq-Rel R S T f x))
+                          ( u))
+                        ( h (map-reflecting-map-Eq-Rel R qR x) u))) ∘e
+                    ( equiv-map-Π
+                      ( λ y →
+                        ( equiv-inv _ _) ∘e
+                        ( equiv-concat'
+                          ( h
+                            ( map-reflecting-map-Eq-Rel R qR x)
+                            ( map-reflecting-map-Eq-Rel S qS y))
+                          ( p x y))))))))))
       ( unique-map-is-set-quotient R QR qR
         ( eq-rel-hom-Eq-Rel S T)
         ( quotient-hom-Eq-Rel-Set S T)
@@ -319,6 +338,64 @@ module _
         ( UqR)
         ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
         ( hom-binary-hom-Eq-Rel R S T f))
+
+  binary-map-is-set-quotient : type-hom-Set QR (hom-Set QS QT)
+  binary-map-is-set-quotient =
+    pr1 (center unique-binary-map-is-set-quotient)
+
+  compute-binary-map-is-set-quotient :
+    (x : A) (y : B) →
+    binary-map-is-set-quotient
+      ( map-reflecting-map-Eq-Rel R qR x)
+      ( map-reflecting-map-Eq-Rel S qS y) ＝
+    map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y)
+  compute-binary-map-is-set-quotient =
+    pr2 (center unique-binary-map-is-set-quotient)
 ```
 
 ### Binary functoriality of set quotients
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A)
+  {B : UU l3} (S : Eq-Rel l4 B)
+  {C : UU l5} (T : Eq-Rel l6 C)
+  (f : binary-hom-Eq-Rel R S T)
+  where
+
+  unique-binary-map-set-quotient :
+    is-contr
+      ( Σ ( set-quotient R → set-quotient S → set-quotient T)
+          ( λ h →
+            (x : A) (y : B) →
+            ( h (quotient-map R x) (quotient-map S y)) ＝
+            ( quotient-map T (map-binary-hom-Eq-Rel R S T f x y))))
+  unique-binary-map-set-quotient =
+    unique-binary-map-is-set-quotient
+      ( R)
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( T)
+      ( quotient-Set T)
+      ( reflecting-map-quotient-map T)
+      ( is-set-quotient-set-quotient R)
+      ( is-set-quotient-set-quotient S)
+      ( is-set-quotient-set-quotient T)
+      ( f)
+  
+
+  binary-map-set-quotient : set-quotient R → set-quotient S → set-quotient T
+  binary-map-set-quotient =
+    pr1 (center unique-binary-map-set-quotient)
+
+  compute-binary-map-set-quotient :
+    (x : A) (y : B) →
+    ( binary-map-set-quotient (quotient-map R x) (quotient-map S y)) ＝
+    ( quotient-map T (map-binary-hom-Eq-Rel R S T f x y))
+  compute-binary-map-set-quotient =
+    pr2 (center unique-binary-map-set-quotient)
+```

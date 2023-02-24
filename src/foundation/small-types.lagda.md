@@ -11,7 +11,7 @@ open import foundation.homotopies
 open import foundation.images
 open import foundation.locally-small-types
 open import foundation.replacement
-open import foundation-core.surjective-maps
+open import foundation.surjective-maps
 open import foundation.uniqueness-image
 open import foundation.universal-property-image
 open import foundation.universe-levels

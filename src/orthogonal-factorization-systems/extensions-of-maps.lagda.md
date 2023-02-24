@@ -220,48 +220,56 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
-  (P : B → UU l3)
+  {P : B → UU l3}
   (f : (x : A) → P (i x)) 
   where
 
-  coherence-htpy-extension-Π :
-    (e e' : extension-Π i P f) → map-extension e ~ map-extension e' → UU (l1 ⊔ l3)
-  coherence-htpy-extension-Π e e' K =
+  coherence-htpy-extension :
+    (e e' : extension-Π i P f) →
+    map-extension e ~ map-extension e' → UU (l1 ⊔ l3)
+  coherence-htpy-extension e e' K =
     (is-extension-map-extension e ∙h (K ·r i)) ~ is-extension-map-extension e'
   
-  htpy-extension-Π : (e e' : extension-Π i P f) → UU (l1 ⊔ l2 ⊔ l3)
-  htpy-extension-Π e e' =
+  htpy-extension : (e e' : extension-Π i P f) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-extension e e' =
     Σ ( map-extension e ~ map-extension e')
-      ( coherence-htpy-extension-Π e e')
+      ( coherence-htpy-extension e e')
   
-  refl-htpy-extension-Π : (e : extension-Π i P f) → htpy-extension-Π e e
-  pr1 (refl-htpy-extension-Π e) = refl-htpy
-  pr2 (refl-htpy-extension-Π e) = right-unit-htpy
+  refl-htpy-extension : (e : extension-Π i P f) → htpy-extension e e
+  pr1 (refl-htpy-extension e) = refl-htpy
+  pr2 (refl-htpy-extension e) = right-unit-htpy
 
-  htpy-eq-extension-Π : (e e' : extension-Π i P f) → e ＝ e' → htpy-extension-Π e e'
-  htpy-eq-extension-Π e .e refl = refl-htpy-extension-Π e
+  htpy-eq-extension :
+    (e e' : extension-Π i P f) → e ＝ e' → htpy-extension e e'
+  htpy-eq-extension e .e refl = refl-htpy-extension e
 
-  is-contr-total-htpy-extension-Π : 
-    (e : extension-Π i P f) → is-contr (Σ (extension-Π i P f) (htpy-extension-Π e))
-  is-contr-total-htpy-extension-Π e =
+  is-contr-total-htpy-extension : 
+    (e : extension-Π i P f) →
+    is-contr (Σ (extension-Π i P f) (htpy-extension e))
+  is-contr-total-htpy-extension e =
     is-contr-total-Eq-structure
-      (λ g G → coherence-htpy-extension-Π e (g , G))
-      (is-contr-total-htpy (map-extension e))
-      (map-extension e , refl-htpy)
-      (is-contr-total-htpy (is-extension-map-extension e ∙h refl-htpy))
+      ( λ g G → coherence-htpy-extension e (g , G))
+      ( is-contr-total-htpy (map-extension e))
+      ( map-extension e , refl-htpy)
+      ( is-contr-total-htpy (is-extension-map-extension e ∙h refl-htpy))
 
-  is-equiv-htpy-eq-extension-Π :
-    (e e' : extension-Π i P f) → is-equiv (htpy-eq-extension-Π e e')
-  is-equiv-htpy-eq-extension-Π e =
-    fundamental-theorem-id (is-contr-total-htpy-extension-Π e) (htpy-eq-extension-Π e)
+  is-equiv-htpy-eq-extension :
+    (e e' : extension-Π i P f) → is-equiv (htpy-eq-extension e e')
+  is-equiv-htpy-eq-extension e =
+    fundamental-theorem-id
+      ( is-contr-total-htpy-extension e)
+      ( htpy-eq-extension e)
   
   extensionality-extension-Π :
-    (e e' : extension-Π i P f) → (e ＝ e') ≃ (htpy-extension-Π e e')
-  pr1 (extensionality-extension-Π e e') = htpy-eq-extension-Π e e'
-  pr2 (extensionality-extension-Π e e') = is-equiv-htpy-eq-extension-Π e e'
+    (e e' : extension-Π i P f) → (e ＝ e') ≃ (htpy-extension e e')
+  pr1 (extensionality-extension-Π e e') = htpy-eq-extension e e'
+  pr2 (extensionality-extension-Π e e') = is-equiv-htpy-eq-extension e e'
 
-  eq-htpy-extension-Π : (e e' : extension-Π i P f) → htpy-extension-Π e e' → e ＝ e'
-  eq-htpy-extension-Π e e' = map-inv-equiv (extensionality-extension-Π e e')
+  eq-htpy-extension :
+    (e e' : extension-Π i P f) (H : map-extension e ~ map-extension e') →
+    coherence-htpy-extension e e' H → e ＝ e'
+  eq-htpy-extension e e' H K =
+    map-inv-equiv (extensionality-extension-Π e e') (H , K)
 ```
 
 ### The total type of extensions is equivalent to `(y : B) → P y`
@@ -272,20 +280,14 @@ module _
   where
 
   inv-compute-total-extension-Π :
-    (P : B → UU l3) → total-extension-Π i P ≃ ((y : B) → P y)
-  inv-compute-total-extension-Π P =
+    {P : B → UU l3} → total-extension-Π i P ≃ ((y : B) → P y)
+  inv-compute-total-extension-Π {P} =
     ( right-unit-law-Σ-is-contr ( λ f → is-contr-total-htpy' (f ∘ i))) ∘e
     ( equiv-left-swap-Σ)
 
   compute-total-extension-Π :
-    (P : B → UU l3) → ((y : B) → P y) ≃ total-extension-Π i P
-  compute-total-extension-Π P = inv-equiv (inv-compute-total-extension-Π P)
-
-{-
-  is-small-total-extension-Π : (P : B → UU l3) → is-small (l2 ⊔ l3) (total-extension-Π i P)
-  pr1 (is-small-total-extension-Π P) = (y : B) → P y
-  pr2 (is-small-total-extension-Π P) = inv-compute-total-extension-Π P
--}
+    {P : B → UU l3} → ((y : B) → P y) ≃ total-extension-Π i P
+  compute-total-extension-Π {P} = inv-equiv (inv-compute-total-extension-Π)
 ```
 
 ### If `P` is `k`-truncated then the type of extensions is `k`-truncated
@@ -295,46 +297,46 @@ module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-trunc-is-extension-Π :
+  is-trunc-is-extension :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
     (g : (x : B) → P x) → is-trunc k (is-extension i f g)
-  is-trunc-is-extension-Π f is-trunc-P g =
+  is-trunc-is-extension f is-trunc-P g =
     is-trunc-Π k λ x → is-trunc-P x (f x) (g (i x))
 
-  is-trunc-extension-Π :
+  is-trunc-extension :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : B) → is-trunc k (P x)) → is-trunc k (extension-Π i P f)
-  is-trunc-extension-Π f is-trunc-P =
+  is-trunc-extension f is-trunc-P =
     is-trunc-Σ
       ( is-trunc-Π k is-trunc-P)
-      ( is-trunc-is-extension-Π f (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
+      ( is-trunc-is-extension f (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
 
-  is-trunc-total-extension-Π :
+  is-trunc-total-extension :
     {P : B → UU l3} →
     ((x : B) → is-trunc k (P x)) → is-trunc k (total-extension-Π i P)
-  is-trunc-total-extension-Π {P} is-trunc-P =
+  is-trunc-total-extension {P} is-trunc-P =
     is-trunc-equiv' k
       ( (y : B) → P y)
-      ( compute-total-extension-Π i P)
+      ( compute-total-extension-Π i)
       ( is-trunc-Π k is-trunc-P)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-contr-is-extension-Π :
+  is-contr-is-extension :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-prop (P (i x))) →
     (g : (x : B) → P x) → is-contr (is-extension i f g)
-  is-contr-is-extension-Π f is-prop-P g =
+  is-contr-is-extension f is-prop-P g =
     is-contr-Π λ x → is-prop-P x (f x) (g (i x))
 
-  is-prop-is-extension-Π :
+  is-prop-is-extension :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-set (P (i x))) →
     (g : (x : B) → P x) → is-prop (is-extension i f g)
-  is-prop-is-extension-Π f is-set-P g =
+  is-prop-is-extension f is-set-P g =
     is-prop-Π λ x → is-set-P x (f x) (g (i x))
 ```
 
@@ -357,18 +359,22 @@ module _
     (equiv-fib'-precomp-extension-Π f) ∘e (equiv-fib (precomp-Π i P) f)
 
   equiv-is-contr-extension-is-local-family :
-    is-local-family i P ≃ ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
+    is-local-family i P ≃
+    ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
   equiv-is-contr-extension-is-local-family =
-    equiv-map-Π (λ f → equiv-is-contr-equiv (equiv-fib-precomp-extension-Π f))
-    ∘e equiv-is-contr-map-is-equiv (precomp-Π i P)
+    ( equiv-map-Π
+      ( λ f → equiv-is-contr-equiv (equiv-fib-precomp-extension-Π f))) ∘e
+    ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
   is-contr-extension-is-local-family :
-    is-local-family i P → ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
+    is-local-family i P →
+    ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
   is-contr-extension-is-local-family =
     map-equiv equiv-is-contr-extension-is-local-family
 
   is-local-family-is-contr-extension-Π :
-    ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f)) → is-local-family i P
+    ((f : (x : A) → P (i x)) →
+    is-contr (extension-Π i P f)) → is-local-family i P
   is-local-family-is-contr-extension-Π =
     map-inv-equiv equiv-is-contr-extension-is-local-family
 ```
