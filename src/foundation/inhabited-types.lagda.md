@@ -151,6 +151,32 @@ module _
       equiv-eq-Fam-Inhabited-Types
 ```
 
+### Inhabited types are closed under `Σ`
+
+```agda
+is-inhabited-Σ :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
+  is-inhabited X → ((x : X) → is-inhabited (Y x)) → is-inhabited (Σ X Y)
+is-inhabited-Σ {l1} {l2} {X} {Y} H K =
+  apply-universal-property-trunc-Prop H
+    ( is-inhabited-Prop (Σ X Y))
+    ( λ x →
+      apply-universal-property-trunc-Prop
+        ( K x)
+        ( is-inhabited-Prop (Σ X Y))
+        ( λ y → unit-trunc-Prop (x , y)))
+
+Σ-Inhabited-Type :
+  {l1 l2 : Level} (X : Inhabited-Type l1)
+  (Y : type-Inhabited-Type X → Inhabited-Type l2) → Inhabited-Type (l1 ⊔ l2)
+pr1 (Σ-Inhabited-Type X Y) =
+  Σ (type-Inhabited-Type X) (λ x → type-Inhabited-Type (Y x))
+pr2 (Σ-Inhabited-Type X Y) =
+  is-inhabited-Σ
+    ( is-inhabited-type-Inhabited-Type X)
+    ( λ x → is-inhabited-type-Inhabited-Type (Y x))  
+```
+
 ## See also
 
 - The notion of *nonempty types* is treated in

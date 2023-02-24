@@ -3,7 +3,7 @@
 ```agda
 module univalent-combinatorics.sigma-decompositions where
 
-open import foundation.sigma-decompositions
+open import foundation.sigma-decompositions public
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -19,6 +19,7 @@ open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 open import foundation.univalence
 
@@ -181,8 +182,8 @@ module _
       ( pr1)
       ( map-inv-equiv ( equiv-Σ-Decomposition-𝔽-is-finite-subtype))
       ( refl-htpy)
-      ( is-equiv-map-equiv
-        ( inv-equiv (equiv-Σ-Decomposition-𝔽-is-finite-subtype)))
+      ( is-equiv-map-inv-equiv
+        ( equiv-Σ-Decomposition-𝔽-is-finite-subtype))
       ( is-emb-inclusion-subtype (is-finite-Σ-Decomposition))
 
   emb-Σ-Decomposition-Σ-Decomposition-𝔽 :
@@ -233,30 +234,6 @@ module _
           ( (indexing-type-fst-fibered-Σ-Decomposition D) , (pr1 p))
           ( snd-fibered-Σ-Decomposition D) )
 
-  private
-    map-reindexing-Σ-Σ :
-      {l1 l2 l3 l4 : Level}
-      {M : UU l1} {N : M → UU l2} {S : M → UU l3}
-      {T : (m : M) → N m → S m → UU l4} →
-      Σ (Σ M N) (λ mn → Σ (S (pr1 mn)) λ s → T (pr1 mn) (pr2 mn) s) →
-      Σ (Σ M (λ v → S v))
-        (λ v → Σ (N (pr1 v)) (λ v₁ → T (pr1 v) v₁ (pr2 v)))
-    map-reindexing-Σ-Σ ((m , n), (s , t)) = ((m , s) , (n , t))
-
-    equiv-reindexing-Σ-Σ :
-      {l1 l2 l3 l4 : Level}
-      {M : UU l1} {N : M → UU l2}
-      {S : M → UU l3} {T : (m : M) → N m → S m → UU l4} →
-      Σ (Σ M N) (λ mn → Σ (S (pr1 mn)) λ s → T (pr1 mn) (pr2 mn) s) ≃
-      Σ (Σ M (λ v → S v))
-        (λ v → Σ (N (pr1 v)) (λ v₁ → T (pr1 v) v₁ (pr2 v)))
-    pr1 equiv-reindexing-Σ-Σ = map-reindexing-Σ-Σ
-    pr2 equiv-reindexing-Σ-Σ =
-      is-equiv-has-inverse
-        map-reindexing-Σ-Σ
-        refl-htpy
-        refl-htpy
-
   equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype :
     type-subtype is-finite-fibered-Σ-Decomposition ≃
     fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A
@@ -268,7 +245,13 @@ module _
        ( λ x →
          equiv-Σ-Decomposition-𝔽-is-finite-subtype
            ( ( indexing-type-Σ-Decomposition (pr1 x)) ,
-             (pr1 (pr2 x)))) ∘e equiv-reindexing-Σ-Σ
+             (pr1 (pr2 x)))) ∘e
+       interchange-Σ-Σ
+         ( λ D D' p →
+           type-Prop
+             ( is-finite-Σ-Decomposition
+               ( indexing-type-Σ-Decomposition D , pr1 p)
+               D'))
 ```
 
 #### Displayed finite Σ-Decomposition as a subtype
@@ -287,34 +270,6 @@ module _
             is-finite-Σ-Decomposition
               ( ( cotype-fst-displayed-Σ-Decomposition D x) , (pr2 p x))
               ( snd-displayed-Σ-Decomposition D x) ))
-
-  private
-    map-reindexing-Σ-Π :
-      {l1 l2 l3 : Level}
-      {M : UU l1} {N : M → UU l2} {S : (m : M) → (nm : N m) → UU l3} →
-      Σ ((m : M) → N m) (λ n → ((m : M) → S m (n m))) → (m : M) →
-      Σ (N m) (λ nm → S m nm)
-    map-reindexing-Σ-Π (n , s) = λ m → (n m , s m)
-
-    map-inv-reindexing-Σ-Π :
-      {l1 l2 l3 : Level}
-      {M : UU l1} {N : M → UU l2} {S : (m : M) → ((nm : N m) → UU l3)} →
-      ((m : M) → Σ (N m) (λ nm → S m nm)) →
-      Σ ((m : M) → N m) (λ n →  ((m : M) → S m (n m)))
-    map-inv-reindexing-Σ-Π h = (pr1 ∘ h , pr2 ∘ h)
-
-    equiv-reindexing-Σ-Π :
-      {l1 l2 l3 : Level}
-      {M : UU l1} {N : M → UU l2} {S : (m : M) → ((nm : N m) → UU l3)} →
-      Σ ((m : M) → N m) (λ n →  ((m : M) → S m (n m))) ≃
-      ((m : M) → Σ (N m) (λ nm → S m nm))
-    pr1 equiv-reindexing-Σ-Π = map-reindexing-Σ-Π
-    pr2 equiv-reindexing-Σ-Π =
-      is-equiv-has-inverse
-        map-inv-reindexing-Σ-Π
-        refl-htpy
-        refl-htpy
-
 
   equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype :
     type-subtype is-finite-displayed-Σ-Decomposition ≃
@@ -338,8 +293,8 @@ module _
                (finite-cotype-Σ-Decomposition-𝔽 A
                  ( map-equiv
                    ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A) D1) x)) ∘e
-           equiv-reindexing-Σ-Π) ∘e
-       equiv-reindexing-Σ-Σ
+           inv-distributive-Π-Σ ) ∘e
+       interchange-Σ-Σ _
 ```
 
 #### Fibered finite Σ-decompositions and displayed finite Σ-Decomposition are equivalent
