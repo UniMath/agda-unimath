@@ -10,7 +10,7 @@ Fredrik is a PhD student at the Norwegian University of Science and Technology i
 
 ### [Elisabeth Bonnevier](https://elisabeth.bonnevier.one)
 
-Elisabeth is a PhD student in logic at the University of Bergen. Her research is on type theory, homotopy type theory, and higher category theory.
+Elisabeth is a PhD student at the University of Bergen. Her research is on homotopy type theory.
 
 ### [Jonathan Prieto-Cubides](https://jonaprieto.github.io)
 
