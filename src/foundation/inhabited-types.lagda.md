@@ -174,7 +174,7 @@ pr1 (Σ-Inhabited-Type X Y) =
 pr2 (Σ-Inhabited-Type X Y) =
   is-inhabited-Σ
     ( is-inhabited-type-Inhabited-Type X)
-    ( λ x → is-inhabited-type-Inhabited-Type (Y x))  
+    ( λ x → is-inhabited-type-Inhabited-Type (Y x))
 ```
 
 ## See also
