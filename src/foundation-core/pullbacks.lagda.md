@@ -581,38 +581,6 @@ abstract
       ( triangle-map-prod-cone f g c f' g' c')
       ( is-equiv-map-prod _ _ is-pb-c is-pb-c')
       ( is-equiv-map-prod-cone f g f' g')
-  
-abstract
-  is-equiv-left-factor-is-equiv-map-prod :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-    (f : A → C) (g : B → D) (d : D) →
-    is-equiv (map-prod f g) → is-equiv f
-  is-equiv-left-factor-is-equiv-map-prod f g d is-equiv-fg =
-    is-equiv-is-contr-map
-      ( λ x → is-contr-left-factor-prod
-        ( fib f x)
-        ( fib g d)
-        ( is-contr-is-equiv'
-          ( fib (map-prod f g) (pair x d))
-          ( map-compute-fib-map-prod f g (pair x d))
-          ( is-equiv-map-compute-fib-map-prod f g (pair x d))
-          ( is-contr-map-is-equiv is-equiv-fg (pair x d))))
-
-abstract
-  is-equiv-right-factor-is-equiv-map-prod :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-    (f : A → C) (g : B → D) (c : C) →
-    is-equiv (map-prod f g) → is-equiv g
-  is-equiv-right-factor-is-equiv-map-prod f g c is-equiv-fg =
-    is-equiv-is-contr-map
-      ( λ y → is-contr-right-factor-prod
-        ( fib f c)
-        ( fib g y)
-        ( is-contr-is-equiv'
-          ( fib (map-prod f g) (pair c y))
-          ( map-compute-fib-map-prod f g (pair c y))
-          ( is-equiv-map-compute-fib-map-prod f g (pair c y))
-          ( is-contr-map-is-equiv is-equiv-fg (pair c y))))
 
 abstract
   is-pullback-left-factor-is-pullback-prod :
