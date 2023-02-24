@@ -954,7 +954,12 @@ module _
        ( assoc-Σ M P Y  ∘e
          ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
          inv-assoc-Σ M P Y )) ＝ id-equiv
-    lemma4 = (ap (λ e → assoc-Σ M P Y ∘e (e ∘e inv-assoc-Σ M P Y)) lemma3) ∙ ((ap (λ e → assoc-Σ M P Y ∘e e) ( left-unit-law-equiv (inv-assoc-Σ M P Y))) ∙ eq-htpy-equiv (issec-map-inv-assoc-Σ M P Y))
+    lemma4 =
+      ( ap (λ e → assoc-Σ M P Y ∘e (e ∘e inv-assoc-Σ M P Y)) lemma3) ∙
+        ( ( ap
+            ( λ e → assoc-Σ M P Y ∘e e)
+            ( left-unit-law-equiv (inv-assoc-Σ M P Y))) ∙
+          ( eq-htpy-equiv (issec-map-inv-assoc-Σ M P Y)))
 
     lemma5 :
       ( ( equiv-Σ N id-equiv (inv-equiv ∘ t) ) ∘e
@@ -976,15 +981,29 @@ module _
           ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ∘e
             s))
             by
-            eq-htpy-equiv (λ a → ap (map-equiv (equiv-Σ N id-equiv (inv-equiv ∘ t)))
-              ( htpy-eq-equiv lemma4 (map-equiv (( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t )) (map-equiv s a))))
+            eq-htpy-equiv
+              ( λ a → ap (map-equiv (equiv-Σ N id-equiv (inv-equiv ∘ t)))
+              ( htpy-eq-equiv lemma4
+                ( map-equiv
+                  ( ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ))
+                  ( map-equiv s a))))
             ＝
         equiv-Σ N id-equiv (λ m → inv-equiv (t m) ∘e t m) ∘e s
             by eq-htpy-equiv refl-htpy
             ＝
         s
             by
-            eq-htpy-equiv (λ a → (htpy-map-Σ N refl-htpy (λ m p → (((map-inv-equiv (t m)) ∘ map-equiv (t m)) p  )) λ m → htpy-eq-equiv (left-inverse-law-equiv (t m))) (map-equiv s a))
+            eq-htpy-equiv
+              ( λ a →
+                ( htpy-map-Σ
+                  ( N)
+                  ( refl-htpy)
+                  ( λ m p →
+                    ( ((map-inv-equiv (t m)) ∘ map-equiv (t m)) p  ))
+                  ( λ m →
+                    htpy-eq-equiv
+                      ( left-inverse-law-equiv (t m)))
+                      ( map-equiv s a)))
 
     htpy-matching-correspondence :
       map-equiv (
