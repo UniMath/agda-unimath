@@ -340,6 +340,10 @@ module _
           ( triangle-map-Σ D f g)
           ( is-equiv-map-Σ-map-base f D H)
           ( K))
+
+  map-equiv-Σ :
+    (e : A ≃ B) (g : (x : A) → C x ≃ D (map-equiv e x)) → Σ A C → Σ B D
+  map-equiv-Σ e g = map-equiv (equiv-Σ e g)
 ```
 
 ### Any commuting triangle induces a map on fibers
