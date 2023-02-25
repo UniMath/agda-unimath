@@ -118,7 +118,9 @@ module _
     mul-Group G x (conjugation-Group' G x y) ＝
     mul-Group G y x
   right-conjugation-law-mul-Group' x y =
-    ( ap (mul-Group G x) (associative-mul-Group G (inv-Group G x) y x)) ∙
+    ( ap
+      ( mul-Group G x)
+      ( associative-mul-Group G (inv-Group G x) y x)) ∙
     ( issec-mul-inv-Group G x (mul-Group G y x))
 
   left-conjugation-law-mul-Group :
@@ -126,7 +128,9 @@ module _
     mul-Group G (conjugation-Group G x y) x ＝ mul-Group G x y
   left-conjugation-law-mul-Group x y =
     ( associative-mul-Group G (mul-Group G x y) (inv-Group G x) x) ∙
-    ( ( ap (mul-Group G (mul-Group G x y)) (left-inverse-law-mul-Group G x)) ∙
+    ( ( ap
+        ( mul-Group G (mul-Group G x y))
+        ( left-inverse-law-mul-Group G x)) ∙
       ( right-unit-law-mul-Group G (mul-Group G x y)))
 
   left-conjugation-law-mul-Group' :
@@ -170,8 +174,62 @@ module _
         ( ( ap-mul-Group G
             ( inv-inv-Group G x)
             ( ( distributive-inv-mul-Group G x (inv-Group G y)) ∙
-              ( ap (mul-Group' G (inv-Group G x)) (inv-inv-Group G y)))) ∙
+              ( ap
+                ( mul-Group' G (inv-Group G x))
+                ( inv-inv-Group G y)))) ∙
           ( inv (associative-mul-Group G x y ( inv-Group G x))))))
+
+  conjugation-inv-Group' :
+    (x y : type-Group G) →
+    conjugation-Group' G x (inv-Group G y) ＝
+    inv-Group G (conjugation-Group' G x y)
+  conjugation-inv-Group' x y =
+    ( ap (mul-Group' G x) (inv (distributive-inv-mul-Group G y x))) ∙
+    ( ( ap
+        ( mul-Group G (inv-Group G (mul-Group G y x)))
+        ( inv (inv-inv-Group G x))) ∙
+      ( ( inv
+          ( distributive-inv-mul-Group G
+            ( inv-Group G x)
+            ( mul-Group G y x))) ∙
+        ( ap
+          ( inv-Group G)
+          ( inv (associative-mul-Group G (inv-Group G x) y x)))))
+
+  conjugation-left-div-Group :
+    (x y : type-Group G) →
+    conjugation-Group G x (left-div-Group G x y) ＝
+    right-div-Group G y x
+  conjugation-left-div-Group x y =
+    ap (mul-Group' G (inv-Group G x)) (issec-mul-inv-Group G x y)
+
+  conjugation-left-div-Group' :
+    (x y : type-Group G) →
+    conjugation-Group G y (left-div-Group G x y) ＝
+    right-div-Group G y x
+  conjugation-left-div-Group' x y =
+    ( ap
+      ( mul-Group' G (inv-Group G y))
+      ( inv (associative-mul-Group G y (inv-Group G x) y))) ∙
+    ( isretr-mul-inv-Group' G y (right-div-Group G y x))
+
+  conjugation-right-div-Group :
+    (x y : type-Group G) →
+    conjugation-Group' G y (right-div-Group G x y) ＝
+    left-div-Group G y x
+  conjugation-right-div-Group x y =
+    ( associative-mul-Group G
+      ( inv-Group G y)
+      ( right-div-Group G x y)
+      ( y)) ∙
+    ( ap (mul-Group G (inv-Group G y)) (issec-mul-inv-Group' G y x))
+
+  conjugation-right-div-Group' :
+    (x y : type-Group G) →
+    conjugation-Group' G x (right-div-Group G x y) ＝
+    left-div-Group G y x
+  conjugation-right-div-Group' x y =
+    ap (mul-Group' G x) (isretr-mul-inv-Group G x (inv-Group G y))
 ```
 
 ### Conjugation by `x` is an automorphism of `G`
