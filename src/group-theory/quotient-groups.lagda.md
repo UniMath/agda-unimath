@@ -25,6 +25,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.kernels
 open import group-theory.normal-subgroups
+open import group-theory.semigroups
 ```
 
 ## Idea
@@ -178,7 +179,7 @@ module _
       ( eq-rel-congruence-Normal-Subgroup G H)
   pr1 binary-hom-mul-quotient-Group = mul-Group G
   pr2 binary-hom-mul-quotient-Group =
-    is-congruence-eq-rel-congruence-Normal-Subgroup G H
+    mul-congruence-Normal-Subgroup G H
 
   mul-quotient-Group :
     (x y : type-quotient-Group) → type-quotient-Group
@@ -188,6 +189,10 @@ module _
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( binary-hom-mul-quotient-Group)
+
+  mul-quotient-Group' :
+    (x y : type-quotient-Group) → type-quotient-Group
+  mul-quotient-Group' x y = mul-quotient-Group y x
 
   compute-mul-quotient-Group :
     (x y : type-Group G) →
@@ -207,8 +212,136 @@ module _
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
   pr1 hom-inv-quotient-Group = inv-Group G
-  pr2 hom-inv-quotient-Group = {!!}
+  pr2 hom-inv-quotient-Group = inv-congruence-Normal-Subgroup G H
 
   inv-quotient-Group : type-quotient-Group → type-quotient-Group
-  inv-quotient-Group = {!!}
+  inv-quotient-Group =
+    map-set-quotient
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( hom-inv-quotient-Group)
+
+  compute-inv-quotient-Group :
+    (x : type-Group G) →
+    inv-quotient-Group (map-quotient-hom-Group x) ＝
+    map-quotient-hom-Group (inv-Group G x)
+  compute-inv-quotient-Group =
+    coherence-square-map-set-quotient
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( hom-inv-quotient-Group)
+
+  left-unit-law-mul-quotient-Group :
+    (x : type-quotient-Group) →
+    mul-quotient-Group unit-quotient-Group x ＝ x
+  left-unit-law-mul-quotient-Group =
+    induction-set-quotient
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( λ y →
+        Id-Prop
+          ( set-quotient-Group)
+          ( mul-quotient-Group unit-quotient-Group y)
+          ( y))
+      ( λ x →
+        ( compute-mul-quotient-Group (unit-Group G) x) ∙
+        ( ap map-quotient-hom-Group (left-unit-law-mul-Group G x)))
+
+  right-unit-law-mul-quotient-Group :
+    (x : type-quotient-Group) →
+    mul-quotient-Group x unit-quotient-Group ＝ x
+  right-unit-law-mul-quotient-Group =
+    induction-set-quotient
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( λ y →
+        Id-Prop
+          ( set-quotient-Group)
+          ( mul-quotient-Group y unit-quotient-Group)
+          ( y))
+      ( λ x →
+        ( compute-mul-quotient-Group x (unit-Group G)) ∙
+        ( ap map-quotient-hom-Group (right-unit-law-mul-Group G x)))
+
+  associative-mul-quotient-Group :
+    (x y z : type-quotient-Group) →
+    ( mul-quotient-Group (mul-quotient-Group x y) z) ＝
+    ( mul-quotient-Group x (mul-quotient-Group y z))
+  associative-mul-quotient-Group =
+    triple-induction-set-quotient'
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( λ x y z →
+        Id-Prop
+          ( set-quotient-Group)
+          ( mul-quotient-Group (mul-quotient-Group x y) z)
+          ( mul-quotient-Group x (mul-quotient-Group y z)))
+      ( λ x y z →
+        ( ap
+          ( mul-quotient-Group' (map-quotient-hom-Group z))
+          ( compute-mul-quotient-Group x y)) ∙
+        ( ( compute-mul-quotient-Group (mul-Group G x y) z) ∙
+          ( ( ap
+              ( map-quotient-hom-Group)
+              ( associative-mul-Group G x y z)) ∙
+            ( ( inv
+                ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
+              ( ap
+                ( mul-quotient-Group (map-quotient-hom-Group x))
+                ( inv (compute-mul-quotient-Group y z)))))))
+
+  left-inverse-law-mul-quotient-Group :
+    (x : type-quotient-Group) →
+    ( mul-quotient-Group (inv-quotient-Group x) x) ＝
+    ( unit-quotient-Group)
+  left-inverse-law-mul-quotient-Group =
+    induction-set-quotient
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( λ y →
+        Id-Prop
+          ( set-quotient-Group)
+          ( mul-quotient-Group (inv-quotient-Group y) y)
+          ( unit-quotient-Group))
+      ( λ x →
+        ( ap
+          ( mul-quotient-Group' (map-quotient-hom-Group x))
+          ( compute-inv-quotient-Group x)) ∙
+        ( ( compute-mul-quotient-Group (inv-Group G x) x) ∙
+          ( ap map-quotient-hom-Group
+            ( left-inverse-law-mul-Group G x))))
+
+  right-inverse-law-mul-quotient-Group :
+    (x : type-quotient-Group) →
+    ( mul-quotient-Group x (inv-quotient-Group x)) ＝
+    ( unit-quotient-Group)
+  right-inverse-law-mul-quotient-Group =
+    induction-set-quotient
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( λ y →
+        Id-Prop
+          ( set-quotient-Group)
+          ( mul-quotient-Group y (inv-quotient-Group y))
+          ( unit-quotient-Group))
+      ( λ x →
+        ( ap
+          ( mul-quotient-Group (map-quotient-hom-Group x))
+          ( compute-inv-quotient-Group x)) ∙
+        ( ( compute-mul-quotient-Group x (inv-Group G x)) ∙
+          ( ap map-quotient-hom-Group
+            ( right-inverse-law-mul-Group G x))))
+
+  semigroup-quotient-Group : Semigroup (l1 ⊔ l2)
+  pr1 semigroup-quotient-Group = set-quotient-Group
+  pr1 (pr2 semigroup-quotient-Group) = mul-quotient-Group
+  pr2 (pr2 semigroup-quotient-Group) = associative-mul-quotient-Group
+
+  quotient-Group : Group (l1 ⊔ l2)
+  pr1 quotient-Group = semigroup-quotient-Group
+  pr1 (pr1 (pr2 quotient-Group)) = unit-quotient-Group
+  pr1 (pr2 (pr1 (pr2 quotient-Group))) =
+    left-unit-law-mul-quotient-Group
+  pr2 (pr2 (pr1 (pr2 quotient-Group))) =
+    right-unit-law-mul-quotient-Group
+  pr1 (pr2 (pr2 quotient-Group)) = inv-quotient-Group
+  pr1 (pr2 (pr2 (pr2 quotient-Group))) =
+    left-inverse-law-mul-quotient-Group
+  pr2 (pr2 (pr2 (pr2 quotient-Group))) =
+    right-inverse-law-mul-quotient-Group
 ```
