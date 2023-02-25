@@ -58,7 +58,13 @@ module _
   modal-rec-modal-ind ind X Y = ind X (λ _ → Y)
 ```
 
-### The `is-higher-modality` predicate
+### Closure under identity type formers
+
+We say that the identity types of a locally small type are modal if their
+small equivalent is modal.
+We say that a modality is closed under identity type formation if for every
+modal type, their identity types are also modal.
+
 
 ```agda
 module _
@@ -71,7 +77,11 @@ module _
   is-modal-identity-types =
     (X : UU l1) (x y : ○ X) →
     is-modal (unit-○) (type-is-small (is-locally-small-○ X x y))
+```
 
+### The `is-higher-modality` predicate
+
+```agda
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
     modal-universal-property (unit-○) × is-modal-identity-types
@@ -178,7 +188,7 @@ module _
 
 ## Properties
 
-### Given a modal recursion principle, the modal operator has an action on maps
+### The modal operator's action on maps
 
 ```agda
 module _
@@ -188,6 +198,46 @@ module _
 
   map-modal-rec : (rec-○ : modal-rec unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
   map-modal-rec rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+```
+
+### Modal identity elimination
+
+```agda
+module _
+  {l1 l2 : Level}
+  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
+  (unit-○ : modal-unit ○)
+  (Id-○ : is-modal-identity-types (○ , is-locally-small-○) unit-○)
+  where
+
+  id-elim-higher-modality :
+    {X : UU l1} {x' y' : ○ X} →
+    ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
+  id-elim-higher-modality {X} {x'} {y'} =
+    map-inv-unit-is-modal-is-small unit-○
+      ( x' ＝ y')
+      ( is-locally-small-○ X x' y')
+      ( Id-○ X x' y')
+```
+
+Homogenous higher modalities are closed under identity formation in the usual sense
+
+```agda
+module _
+  {l : Level}
+  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  where
+
+  map-inv-unit-id-higher-modality :
+    {X : UU l} {x' y' : ○ X} → ○ (x' ＝ y') → x' ＝ y'
+  map-inv-unit-id-higher-modality {X} {x'} {y'} =
+    map-inv-unit-is-modal-is-small unit-○
+      ( x' ＝ y')
+      ( is-locally-small-○ X x' y')
+      ( Id-○ X x' y') ∘
+      ( map-modal-rec unit-○
+        ( modal-rec-modal-ind unit-○ ind-○) 
+        ( map-equiv-is-small ( is-locally-small-○ X x' y')))
 ```
 
 ### `○ X` is modal
@@ -205,27 +255,40 @@ module _
   isretr-map-inv-unit-○ : (map-inv-unit-○ ∘ unit-○) ~ id
   isretr-map-inv-unit-○ = comp-○ (○ X) (λ _ → X) id
 
-  ○-issec-map-inv-unit-○ :
-    (x' : ○ (○ X)) → ○ (unit-○ (map-inv-unit-○ x') ＝ x')
-  ○-issec-map-inv-unit-○ =
-    ind-○ (○ X)
-      ( λ x'' → unit-○ (map-inv-unit-○ x'') ＝ x'')
-      ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-unit-○))
-
   issec-map-inv-unit-○ : (unit-○ ∘ map-inv-unit-○) ~ id
   issec-map-inv-unit-○ x'' =
-    map-inv-equiv-is-small
-      ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
-      ( map-inv-is-equiv
-        ( Id-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x'')
-        ( map-modal-rec unit-○ (modal-rec-modal-ind unit-○ ind-○)
-          ( map-equiv-is-small
-            ( is-locally-small-○ (○ X) (unit-○ (map-inv-unit-○ x'')) x''))
-          ( ○-issec-map-inv-unit-○ x'')))
+    map-inv-unit-id-higher-modality
+      ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○)
+      ( ind-○ (○ X)
+        ( λ x'' → unit-○ (map-inv-unit-○ x'') ＝ x'')
+        ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-unit-○)) x'')
 
   is-modal-○ : is-modal unit-○ (○ X)
   pr1 (pr1 is-modal-○) = map-inv-unit-○
   pr2 (pr1 is-modal-○) = issec-map-inv-unit-○
   pr1 (pr2 is-modal-○) = map-inv-unit-○
   pr2 (pr2 is-modal-○) = isretr-map-inv-unit-○
+```
+
+## Higher modalities are uniquely eliminating modalities
+
+```agda
+module _
+  {l : Level}
+  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  where
+
+  isretr-ind-○ :
+    {X : UU l} {P : ○ X → UU l} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ X P) ~ id
+  isretr-ind-○ {X} {P} = eq-htpy ∘ comp-○ X P
+
+  issec-ind-○ :
+    {X : UU l} {P : ○ X → UU l} → (ind-○ X P ∘ precomp-Π unit-○ (○ ∘ P)) ~ id
+  issec-ind-○ {X} {P} s =
+    eq-htpy
+      ( map-inv-unit-id-higher-modality
+        ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) ∘
+        ( ind-○ X
+          ( λ x' → (ind-○ X P ∘ precomp-Π (unit-○) (○ ∘ P)) s x' ＝ s x')
+          ( unit-○ ∘ comp-○ X P (s ∘ unit-○))))
 ```

@@ -6,9 +6,10 @@ module orthogonal-factorization-systems.modal-operators where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.locally-small-types
 open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.locally-small-types
+open import foundation.small-types
 open import foundation.universe-levels
 ```
 
@@ -49,6 +50,65 @@ module _
 
   modal-types-subuniverse : subuniverse l1 (l1 ⊔ l2)
   modal-types-subuniverse = is-modal-Prop
+```
+
+## Modal small types
+
+A small type is said to be modal if its small equivalent is modal.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
+  (X : UU l3) (is-small-X : is-small l1 X)
+  where
+
+  is-modal-is-small : UU (l1 ⊔ l2)
+  is-modal-is-small = is-modal unit-○ (type-is-small is-small-X)
+
+  is-equiv-unit-is-modal-is-small :
+    is-modal-is-small →
+    is-equiv (unit-○ ∘ map-equiv-is-small is-small-X)
+  is-equiv-unit-is-modal-is-small =
+    is-equiv-comp _ _ (is-equiv-map-equiv (equiv-is-small is-small-X))
+
+  equiv-unit-is-modal-is-small :
+    is-modal-is-small → X ≃ ○ (type-is-small is-small-X)
+  pr1 (equiv-unit-is-modal-is-small m) = unit-○ ∘ map-equiv-is-small is-small-X
+  pr2 (equiv-unit-is-modal-is-small m) = is-equiv-unit-is-modal-is-small m
+
+  map-inv-unit-is-modal-is-small :
+    is-modal-is-small → ○ (type-is-small is-small-X) → X
+  map-inv-unit-is-modal-is-small =
+    map-inv-equiv ∘ equiv-unit-is-modal-is-small
+
+module _
+  {l1 l2 l3 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
+  (X : Small-Type l1 l3)
+  where
+
+  is-modal-small-type : UU (l1 ⊔ l2)
+  is-modal-small-type =
+    is-modal-is-small unit-○ (type-Small-Type X) (is-small-type-Small-Type X)
+
+  is-equiv-unit-is-modal-small-type :
+    is-modal-small-type →
+    is-equiv (unit-○ ∘ (map-equiv (equiv-is-small-type-Small-Type X)))
+  is-equiv-unit-is-modal-small-type =
+    is-equiv-unit-is-modal-is-small unit-○
+      ( type-Small-Type X)
+      ( is-small-type-Small-Type X)
+
+  equiv-unit-is-modal-small-type :
+    is-modal-small-type → type-Small-Type X ≃ ○ (small-type-Small-Type X)
+  equiv-unit-is-modal-small-type =
+    equiv-unit-is-modal-is-small unit-○
+      ( type-Small-Type X)
+      ( is-small-type-Small-Type X)
+
+  map-inv-unit-is-modal-small-type :
+    is-modal-small-type → ○ (small-type-Small-Type X) → type-Small-Type X
+  map-inv-unit-is-modal-small-type =
+    map-inv-equiv ∘ equiv-unit-is-modal-small-type
 ```
 
 ## Locally small modal operators
