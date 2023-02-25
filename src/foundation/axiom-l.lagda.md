@@ -20,6 +20,7 @@ open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.sets
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-identity-types
 ```
@@ -32,21 +33,42 @@ Axiom L, which is due to Peter Lumsdaine, asserts that for any two types `X` and
 ## Definition
 
 ```agda
-axiom-L : (l : Level) → UU (lsuc l)
-axiom-L l = (X Y : UU l) → is-emb (equiv-eq {A = X} {B = Y})
+AXIOM-L : (l : Level) → UU (lsuc l)
+AXIOM-L l = (X Y : UU l) → is-emb (equiv-eq {A = X} {B = Y})
 
-emb-L : {l : Level} → axiom-L l → (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
+emb-L : {l : Level} → AXIOM-L l → (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
 pr1 (emb-L H X Y) = equiv-eq
 pr2 (emb-L H X Y) = H X Y
 ```
 
 ## Properties
 
+### Univalence implies Axiom L
+
+```agda
+axiom-L-univalence :
+  {l : Level} → ((A B : UU l) → UNIVALENCE A B) → AXIOM-L l
+axiom-L-univalence ua A B = is-emb-is-equiv (ua A B)
+```
+
+### Axiom K implies Axiom L
+
+```agda
+axiom-L-axiom-K :
+  {l : Level} → ((A : UU l) → AXIOM-K A) → AXIOM-K (UU l) → AXIOM-L l
+axiom-L-axiom-K K K-UU A B =
+  is-emb-is-prop-is-set
+    ( is-set-axiom-K K-UU A B)
+    ( is-set-equiv-is-set
+      ( is-set-axiom-K (K A))
+      ( is-set-axiom-K (K B)))
+```
+
 ### Axiom L implies that `Id : A → A → UU l` is an embedding
 
 ```agda
 module _
-  {l : Level} (L : axiom-L l) (A : UU l)
+  {l : Level} (L : AXIOM-L l) (A : UU l)
   where
 
 
@@ -61,7 +83,7 @@ module _
             ( eq-is-contr (is-contr-total-path x))))
       ( λ _ → ap Id)
     where
-    emb-fib : (x : A) → fib' Id (Id x) ↪ Σ A (λ y → Id x y)
+    emb-fib : (x : A) → fib' Id (Id x) ↪ Σ A (Id x)
     emb-fib x =
       comp-emb
         ( comp-emb
