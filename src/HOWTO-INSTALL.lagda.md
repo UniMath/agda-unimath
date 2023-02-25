@@ -1,25 +1,54 @@
 # INSTALL
 
 Before you can use the `agda-unimath` library, you should have Agda
-installed on your machine and an editor that is compatible with Agda.
-We recommend `Emacs` and `VSCode`.
+installed on your machine. You can get Agda via following their
+installation instructions, or using the provided Nix flake, if you're using Nix.
+You should also have an editor capable of working with Agda file.
+We recommend either of `Emacs` and `VSCode`.
 
-### Installation guides and tutorials for Agda
+### Installation guides
 
- - Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
- - Once you have Agda up and running, you can copy our library to your machine using
- ```md
- git clone git@github.com:UniMath/agda-unimath.git
- ```
- - If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
+Get a copy of our library on your machine using
+```shell
+git clone git@github.com:UniMath/agda-unimath.git
+```
+then install Agda as described in the next section.
+
+#### Without Nix
+
+Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
+
+#### With Nix
+
+The library comes with a development shell described in the flake.nix file. To activate the shell, open a terminal in the directory where you cloned the library, and run
+```shell
+nix develop
+```
+Then to make sure that your editor sees the Agda installation,
+start it from within that shell, i.e. run `code` or `emacs` inside the shell.
+
+To make `emacs` use the correct `agda2-mode` provided by the development environment,
+add the following snippet to your `.emacs` file:
+```elisp
+(when (executable-find "agda-mode")
+  (load-file (let ((coding-system-for-read 'utf-8))
+               (shell-command-to-string "agda-mode locate"))))
+```
+which is a modified version of the usual agda2-mode setup provided by Agda,
+except it checks if Agda is available, so that it doesn't cause errors
+when opening Emacs outside the project.
 
 ### Setting up emacs for literate Agda files
 
 The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. For your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
 
-```md
+```elisp
 (setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
 ```
+
+### Tutorials for Agda
+
+If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
 
 ### Setting up emacs for special symbols
 
@@ -48,7 +77,7 @@ readability, both in your programming environment and on our website.
 Emacs has an option to display a line marking the 80th column.
 This option can be enabled by adding
 
-```md
+```elisp
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 ```
 
