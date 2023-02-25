@@ -68,6 +68,14 @@ module _
   is-in-subtype-inclusion-subtype :
     (x : type-subtype) → is-in-subtype (inclusion-subtype x)
   is-in-subtype-inclusion-subtype = pr2
+
+  is-closed-under-eq-subtype :
+    {x y : A} → is-in-subtype x → (x ＝ y) → is-in-subtype y
+  is-closed-under-eq-subtype p refl = p
+
+  is-closed-under-eq-subtype' :
+    {x y : A} → is-in-subtype y → (x ＝ y) → is-in-subtype x
+  is-closed-under-eq-subtype' p refl = p
 ```
 
 ## Properties

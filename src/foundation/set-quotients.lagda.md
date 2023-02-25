@@ -12,6 +12,7 @@ open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -213,12 +214,139 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  apply-dependent-universal-property-surj-quotient-map :
+  equiv-induction-set-quotient :
+    {l : Level} (P : set-quotient R → Prop l) →
+    ((y : set-quotient R) → type-Prop (P y)) ≃
+    ((x : A) → type-Prop (P (quotient-map R x)))
+  equiv-induction-set-quotient =
+    equiv-dependent-universal-property-surj-is-surjective
+      ( quotient-map R)
+      ( is-surjective-quotient-map R)
+    
+  induction-set-quotient :
     {l : Level} (P : set-quotient R → Prop l) →
     ((x : A) → type-Prop (P (quotient-map R x))) →
     ((y : set-quotient R) → type-Prop (P y))
-  apply-dependent-universal-property-surj-quotient-map =
-    apply-dependent-universal-property-surj-is-surjective
-      ( quotient-map R)
-      ( is-surjective-quotient-map R)
+  induction-set-quotient P =
+    map-inv-equiv (equiv-induction-set-quotient P)
+```
+
+### Double induction for set quotients
+
+#### The most general case
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B)
+  (P : set-quotient R → set-quotient S → Prop l5)
+  where
+
+  equiv-double-induction-set-quotient :
+    ((x : set-quotient R) (y : set-quotient S) → type-Prop (P x y)) ≃
+    ( (x : A) (y : B) →
+      type-Prop (P (quotient-map R x) (quotient-map S y)))
+  equiv-double-induction-set-quotient =
+    ( equiv-map-Π
+      ( λ x →
+        equiv-induction-set-quotient S (P (quotient-map R x)))) ∘e
+    ( equiv-induction-set-quotient R
+      ( λ x → Π-Prop (set-quotient S) (P x)))
+
+  double-induction-set-quotient :
+    ( (x : A) (y : B) →
+      type-Prop (P (quotient-map R x) (quotient-map S y))) →
+    ((x : set-quotient R) (y : set-quotient S) → type-Prop (P x y))
+  double-induction-set-quotient =
+    map-inv-equiv equiv-double-induction-set-quotient
+```
+
+#### Double induction over a single set quotient
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  (P : (x y : set-quotient R) → Prop l3)
+  where
+
+  equiv-double-induction-set-quotient' :
+    ((x y : set-quotient R) → type-Prop (P x y)) ≃
+    ((x y : A) → type-Prop (P (quotient-map R x) (quotient-map R y)))
+  equiv-double-induction-set-quotient' =
+    equiv-double-induction-set-quotient R R P
+
+  double-induction-set-quotient' :
+    ( (x y : A) →
+      type-Prop (P (quotient-map R x) (quotient-map R y))) →
+    ((x y : set-quotient R) → type-Prop (P x y))
+  double-induction-set-quotient' =
+    double-induction-set-quotient R R P
+```
+
+### Triple induction for set quotients
+
+#### The most general case
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B)
+  {C : UU l5} (T : Eq-Rel l6 C)
+  (P : set-quotient R → set-quotient S → set-quotient T → Prop l7)
+  where
+
+  equiv-triple-induction-set-quotient :
+    ( (x : set-quotient R) (y : set-quotient S) (z : set-quotient T) →
+      type-Prop (P x y z)) ≃
+    ( (x : A) (y : B) (z : C) →
+      type-Prop
+        ( P (quotient-map R x) (quotient-map S y) (quotient-map T z)))
+  equiv-triple-induction-set-quotient =
+    ( equiv-map-Π
+      ( λ x →
+        equiv-double-induction-set-quotient S T
+          ( P (quotient-map R x)))) ∘e
+    ( equiv-induction-set-quotient R
+      ( λ x →
+        Π-Prop
+          ( set-quotient S)
+          ( λ y → Π-Prop (set-quotient T) (P x y))))
+
+  triple-induction-set-quotient :
+    ( (x : A) (y : B) (z : C) →
+      type-Prop
+        ( P ( quotient-map R x)
+            ( quotient-map S y)
+            ( quotient-map T z))) →
+    ( x : set-quotient R) (y : set-quotient S)
+    ( z : set-quotient T) → type-Prop (P x y z)
+  triple-induction-set-quotient =
+    map-inv-equiv equiv-triple-induction-set-quotient
+```
+
+#### Triple induction over a single set quotient
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  (P : (x y z : set-quotient R) → Prop l3)
+  where
+
+  equiv-triple-induction-set-quotient' :
+    ((x y z : set-quotient R) → type-Prop (P x y z)) ≃
+    ( (x y z : A) →
+      type-Prop
+        ( P (quotient-map R x) (quotient-map R y) (quotient-map R z)))
+  equiv-triple-induction-set-quotient' =
+    equiv-triple-induction-set-quotient R R R P
+
+  triple-induction-set-quotient' :
+    ( (x y z : A) →
+      type-Prop
+        ( P ( quotient-map R x)
+            ( quotient-map R y)
+            ( quotient-map R z))) →
+    ( x y z : set-quotient R) → type-Prop (P x y z)
+  triple-induction-set-quotient' =
+    triple-induction-set-quotient R R R P
 ```
