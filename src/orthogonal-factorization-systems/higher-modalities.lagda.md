@@ -236,7 +236,7 @@ module _
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y') ∘
       ( map-modal-rec unit-○
-        ( modal-rec-modal-ind unit-○ ind-○) 
+        ( modal-rec-modal-ind unit-○ ind-○)
         ( map-equiv-is-small ( is-locally-small-○ X x' y')))
 ```
 
@@ -249,25 +249,25 @@ module _
   (X : UU l)
   where
 
-  map-inv-unit-○ : ○ (○ X) → ○ X
-  map-inv-unit-○ = ind-○ (○ X) (λ _ → X) id
+  map-inv-modal-unit : ○ (○ X) → ○ X
+  map-inv-modal-unit = ind-○ (○ X) (λ _ → X) id
 
-  isretr-map-inv-unit-○ : (map-inv-unit-○ ∘ unit-○) ~ id
-  isretr-map-inv-unit-○ = comp-○ (○ X) (λ _ → X) id
+  isretr-map-inv-modal-unit : (map-inv-modal-unit ∘ unit-○) ~ id
+  isretr-map-inv-modal-unit = comp-○ (○ X) (λ _ → X) id
 
-  issec-map-inv-unit-○ : (unit-○ ∘ map-inv-unit-○) ~ id
-  issec-map-inv-unit-○ x'' =
+  issec-map-inv-modal-unit : (unit-○ ∘ map-inv-modal-unit) ~ id
+  issec-map-inv-modal-unit x'' =
     map-inv-unit-id-higher-modality
       ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○)
       ( ind-○ (○ X)
-        ( λ x'' → unit-○ (map-inv-unit-○ x'') ＝ x'')
-        ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-unit-○)) x'')
+        ( λ x'' → unit-○ (map-inv-modal-unit x'') ＝ x'')
+        ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-modal-unit)) x'')
 
   is-modal-○ : is-modal unit-○ (○ X)
-  pr1 (pr1 is-modal-○) = map-inv-unit-○
-  pr2 (pr1 is-modal-○) = issec-map-inv-unit-○
-  pr1 (pr2 is-modal-○) = map-inv-unit-○
-  pr2 (pr2 is-modal-○) = isretr-map-inv-unit-○
+  pr1 (pr1 is-modal-○) = map-inv-modal-unit
+  pr2 (pr1 is-modal-○) = issec-map-inv-modal-unit
+  pr1 (pr2 is-modal-○) = map-inv-modal-unit
+  pr2 (pr2 is-modal-○) = isretr-map-inv-modal-unit
 ```
 
 ## Higher modalities are uniquely eliminating modalities
@@ -278,17 +278,34 @@ module _
   (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
   where
 
-  isretr-ind-○ :
+  isretr-modal-ind :
     {X : UU l} {P : ○ X → UU l} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ X P) ~ id
-  isretr-ind-○ {X} {P} = eq-htpy ∘ comp-○ X P
+  isretr-modal-ind {X} {P} = eq-htpy ∘ comp-○ X P
 
-  issec-ind-○ :
+  issec-modal-ind :
     {X : UU l} {P : ○ X → UU l} → (ind-○ X P ∘ precomp-Π unit-○ (○ ∘ P)) ~ id
-  issec-ind-○ {X} {P} s =
+  issec-modal-ind {X} {P} s =
     eq-htpy
       ( map-inv-unit-id-higher-modality
         ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) ∘
         ( ind-○ X
           ( λ x' → (ind-○ X P ∘ precomp-Π (unit-○) (○ ∘ P)) s x' ＝ s x')
           ( unit-○ ∘ comp-○ X P (s ∘ unit-○))))
+
+  is-equiv-modal-ind : (X : UU l) (P : ○ X → UU l) → is-equiv (ind-○ X P)
+  pr1 (pr1 (is-equiv-modal-ind X P)) = precomp-Π unit-○ (○ ∘ P)
+  pr2 (pr1 (is-equiv-modal-ind X P)) = issec-modal-ind
+  pr1 (pr2 (is-equiv-modal-ind X P)) = precomp-Π unit-○ (○ ∘ P)
+  pr2 (pr2 (is-equiv-modal-ind X P)) = isretr-modal-ind
+
+  equiv-modal-ind :
+    (X : UU l) (P : ○ X → UU l) →
+    ((x : X) → ○ (P (unit-○ x))) ≃ ((x' : ○ X) → ○ (P x'))
+  pr1 (equiv-modal-ind X P) = ind-○ X P
+  pr2 (equiv-modal-ind X P) = is-equiv-modal-ind X P
+
+  is-uniquely-eliminating-modality-higher-modality :
+    is-uniquely-eliminating-modality unit-○
+  is-uniquely-eliminating-modality-higher-modality X P =
+    is-equiv-map-inv-is-equiv (is-equiv-modal-ind X P)
 ```

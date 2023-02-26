@@ -15,7 +15,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-## Definition
+## Definitions
 
 ```agda
 modal-operator : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -92,7 +92,7 @@ module _
 
   is-equiv-unit-is-modal-small-type :
     is-modal-small-type →
-    is-equiv (unit-○ ∘ (map-equiv (equiv-is-small-type-Small-Type X)))
+    is-equiv (unit-○ ∘ map-equiv (equiv-is-small-type-Small-Type X))
   is-equiv-unit-is-modal-small-type =
     is-equiv-unit-is-modal-is-small unit-○
       ( type-Small-Type X)
