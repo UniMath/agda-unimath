@@ -5,6 +5,7 @@
 - [Agda-UniMath](README.md)
   - [Home](README.md)
   - [Community](CONTRIBUTORS.md)
+    - [Maintainers](MAINTAINERS.md)
     - [Contributors](CONTRIBUTORS.md)
     - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
     - [Projects using Agda-Unimath](USERS.md)
@@ -13,7 +14,6 @@
     - [Cite the library](CITATION.md)
   - [Guidelines](CODINGSTYLE.md)
     - [Structure your file](CONVENTIONS.md)
-    - [Statement of Inclusion](STATEMENT-OF-INCLUSION.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)
@@ -226,7 +226,7 @@
   - [Commuting 3-simplices of homotopies](foundation.commuting-3-simplices-of-homotopies.md)
   - [Commuting 3-simplices of maps](foundation.commuting-3-simplices-of-maps.md)
   - [Commuting cubes of maps](foundation.commuting-cubes-of-maps.md)
-  - [Commuting squares of identifications](foundation.commuting-squares-of-identifications.md) 
+  - [Commuting squares of identifications](foundation.commuting-squares-of-identifications.md)
   - [Commuting squares of maps](foundation.commuting-squares-of-maps.md)
   - [Commuting triangles of homotopies](foundation.commuting-triangles-of-homotopies.md)
   - [Commuting triangles of maps](foundation.commuting-triangles-of-maps.md)
@@ -517,7 +517,6 @@
   - [Sets](foundation-core.sets.md)
   - [Singleton induction](foundation-core.singleton-induction.md)
   - [Small types](foundation-core.small-types.md)
-  - [Squares of identifications](foundation-core.squares-of-identifications)
   - [Subtype identity principle](foundation-core.subtype-identity-principle.md)
   - [Subtypes](foundation-core.subtypes.md)
   - [Truncated maps](foundation-core.truncated-maps.md)
@@ -928,7 +927,7 @@
   - [W-type of natural numbers](trees.w-type-of-natural-numbers.md)
   - [W-type of propositions](trees.w-type-of-propositions.md)
   - [W-types](trees.w-types.md)
-  
+
 
 - [Type theories](type-theories.md)
   - [Comprehension type theories](type-theories.comprehension-type-theories.md)

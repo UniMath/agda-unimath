@@ -26,11 +26,13 @@ A congruence relation on a group `G` is an equivalence relation `≡` on `G` suc
 
 ```agda
 is-congruence-Eq-Rel-Group :
-  {l1 l2 : Level} (G : Group l1) → Eq-Rel l2 (type-Group G) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (G : Group l1) →
+  Eq-Rel l2 (type-Group G) → UU (l1 ⊔ l2)
 is-congruence-Eq-Rel-Group G R =
   is-congruence-Eq-Rel-Semigroup (semigroup-Group G) R
 
-congruence-Group : {l : Level} (l2 : Level) (G : Group l) → UU (l ⊔ lsuc l2)
+congruence-Group :
+  {l : Level} (l2 : Level) (G : Group l) → UU (l ⊔ lsuc l2)
 congruence-Group l2 G =
   Σ (Eq-Rel l2 (type-Group G)) (is-congruence-Eq-Rel-Group G)
 
@@ -49,7 +51,8 @@ module _
 
   is-prop-sim-congruence-Group :
     (x y : type-Group G) → is-prop (sim-congruence-Group x y)
-  is-prop-sim-congruence-Group = is-prop-sim-Eq-Rel eq-rel-congruence-Group
+  is-prop-sim-congruence-Group =
+    is-prop-sim-Eq-Rel eq-rel-congruence-Group
 
   concatenate-eq-sim-congruence-Group :
     {x1 x2 y : type-Group G} →
@@ -63,7 +66,8 @@ module _
 
   concatenate-eq-sim-eq-congruence-Group :
     {x1 x2 y1 y2 : type-Group G} → x1 ＝ x2 →
-    sim-congruence-Group x2 y1 → y1 ＝ y2 → sim-congruence-Group x1 y2
+    sim-congruence-Group x2 y1 →
+    y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
   
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
@@ -73,36 +77,53 @@ module _
   symm-congruence-Group = symm-Eq-Rel eq-rel-congruence-Group
 
   equiv-symm-congruence-Group :
-    (x y : type-Group G) → sim-congruence-Group x y ≃ sim-congruence-Group y x
-  equiv-symm-congruence-Group x y = equiv-symm-Eq-Rel eq-rel-congruence-Group
+    (x y : type-Group G) →
+    sim-congruence-Group x y ≃ sim-congruence-Group y x
+  equiv-symm-congruence-Group x y =
+    equiv-symm-Eq-Rel eq-rel-congruence-Group
 
-  trans-congruence-Group : is-transitive-Rel-Prop prop-congruence-Group
+  trans-congruence-Group :
+    is-transitive-Rel-Prop prop-congruence-Group
   trans-congruence-Group = trans-Eq-Rel eq-rel-congruence-Group
 
-  mul-congruence-Group : is-congruence-Eq-Rel-Group G eq-rel-congruence-Group
+  mul-congruence-Group :
+    is-congruence-Eq-Rel-Group G eq-rel-congruence-Group
   mul-congruence-Group = pr2 R
 
   left-mul-congruence-Group :
-    (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
+    (x : type-Group G) {y z : type-Group G} →
+    sim-congruence-Group y z →
     sim-congruence-Group (mul-Group G x y) (mul-Group G x z)
-  left-mul-congruence-Group x H = mul-congruence-Group refl-congruence-Group H
+  left-mul-congruence-Group x H =
+    mul-congruence-Group refl-congruence-Group H
 
   right-mul-congruence-Group :
-    {x y : type-Group G} → sim-congruence-Group x y → (z : type-Group G) →
+    {x y : type-Group G} → sim-congruence-Group x y →
+    (z : type-Group G) →
     sim-congruence-Group (mul-Group G x z) (mul-Group G y z)
-  right-mul-congruence-Group H z = mul-congruence-Group H refl-congruence-Group
+  right-mul-congruence-Group H z =
+    mul-congruence-Group H refl-congruence-Group
 
   conjugation-congruence-Group :
-    (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
-    sim-congruence-Group (conjugation-Group G x y) (conjugation-Group G x z)
+    (x : type-Group G) {y z : type-Group G} →
+    sim-congruence-Group y z →
+    sim-congruence-Group
+      ( conjugation-Group G x y)
+      ( conjugation-Group G x z)
   conjugation-congruence-Group x H =
-    right-mul-congruence-Group (left-mul-congruence-Group x H) (inv-Group G x)
+    right-mul-congruence-Group
+      ( left-mul-congruence-Group x H) (inv-Group G x)
 
   conjugation-congruence-Group' :
-    (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
-    sim-congruence-Group (conjugation-Group' G x y) (conjugation-Group' G x z)
+    (x : type-Group G) {y z : type-Group G} →
+    sim-congruence-Group y z →
+    sim-congruence-Group
+      ( conjugation-Group' G x y)
+      ( conjugation-Group' G x z)
   conjugation-congruence-Group' x H =
-    right-mul-congruence-Group (left-mul-congruence-Group (inv-Group G x) H) x
+    right-mul-congruence-Group
+      ( left-mul-congruence-Group (inv-Group G x) H)
+      ( x)
 
   sim-right-div-unit-congruence-Group : (x y : type-Group G) → UU l2
   sim-right-div-unit-congruence-Group x y =
@@ -158,7 +179,10 @@ module _
   inv-congruence-Group {x} {y} H =
     concatenate-eq-sim-eq-congruence-Group
       ( inv
-        ( ( associative-mul-Group G (inv-Group G x) y (inv-Group G y)) ∙
+        ( ( associative-mul-Group G
+            ( inv-Group G x)
+            ( y)
+            ( inv-Group G y)) ∙
           ( ( ap
               ( mul-Group G (inv-Group G x))
               ( right-inverse-law-mul-Group G y)) ∙
@@ -167,7 +191,9 @@ module _
         ( right-mul-congruence-Group
           ( left-mul-congruence-Group (inv-Group G x) H)
           ( inv-Group G y)))
-      ( ( ap (mul-Group' G (inv-Group G y)) (left-inverse-law-mul-Group G x)) ∙
+      ( ( ap
+          ( mul-Group' G (inv-Group G y))
+          ( left-inverse-law-mul-Group G x)) ∙
         ( left-unit-law-mul-Group G (inv-Group G y)))
 ```
 
@@ -194,7 +220,8 @@ is-contr-total-relate-same-elements-congruence-Group :
     ( Σ ( congruence-Group l2 G)
         ( relate-same-elements-congruence-Group G R))
 is-contr-total-relate-same-elements-congruence-Group G =
-  is-contr-total-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+  is-contr-total-relate-same-elements-congruence-Semigroup
+    ( semigroup-Group G)
 
 relate-same-elements-eq-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
@@ -206,7 +233,8 @@ is-equiv-relate-same-elements-eq-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
   is-equiv (relate-same-elements-eq-congruence-Group G R S)
 is-equiv-relate-same-elements-eq-congruence-Group G =
-  is-equiv-relate-same-elements-eq-congruence-Semigroup (semigroup-Group G)
+  is-equiv-relate-same-elements-eq-congruence-Semigroup
+    ( semigroup-Group G)
 
 extensionality-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →

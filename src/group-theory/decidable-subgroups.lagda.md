@@ -359,7 +359,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
   
-  right-sim-Decidable-Subgroup : (x y : type-Group G) → UU (l1 ⊔ l2)
+  right-sim-Decidable-Subgroup : (x y : type-Group G) → UU l2
   right-sim-Decidable-Subgroup =
     right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
@@ -369,7 +369,7 @@ module _
     is-prop-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   prop-right-eq-rel-Decidable-Subgroup :
-    (x y : type-Group G) → Prop (l1 ⊔ l2)
+    (x y : type-Group G) → Prop l2
   prop-right-eq-rel-Decidable-Subgroup =
     prop-right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 
@@ -381,14 +381,14 @@ module _
   symm-right-sim-Decidable-Subgroup :
     is-symmetric-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
   symm-right-sim-Decidable-Subgroup =
-    symm-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
+    symmetric-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   trans-right-sim-Decidable-Subgroup :
     is-transitive-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
   trans-right-sim-Decidable-Subgroup =
-    trans-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
+    transitive-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  right-eq-rel-Decidable-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group G)
+  right-eq-rel-Decidable-Subgroup : Eq-Rel l2 (type-Group G)
   right-eq-rel-Decidable-Subgroup =
     right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```
@@ -400,7 +400,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
   
-  left-sim-Decidable-Subgroup : (x y : type-Group G) → UU (l1 ⊔ l2)
+  left-sim-Decidable-Subgroup : (x y : type-Group G) → UU l2
   left-sim-Decidable-Subgroup =
     left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
@@ -409,7 +409,7 @@ module _
   is-prop-left-sim-Decidable-Subgroup =
     is-prop-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  prop-left-eq-rel-Decidable-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
+  prop-left-eq-rel-Decidable-Subgroup : (x y : type-Group G) → Prop l2
   prop-left-eq-rel-Decidable-Subgroup =
     prop-left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 
@@ -418,17 +418,17 @@ module _
   refl-left-sim-Decidable-Subgroup =
     refl-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  symm-left-sim-Decidable-Subgroup :
+  symmetric-left-sim-Decidable-Subgroup :
     is-symmetric-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
-  symm-left-sim-Decidable-Subgroup =
-    symm-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
+  symmetric-left-sim-Decidable-Subgroup =
+    symmetric-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  trans-left-sim-Decidable-Subgroup :
+  transitive-left-sim-Decidable-Subgroup :
     is-transitive-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
-  trans-left-sim-Decidable-Subgroup =
-    trans-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
+  transitive-left-sim-Decidable-Subgroup =
+    transitive-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  left-eq-rel-Decidable-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group G)
+  left-eq-rel-Decidable-Subgroup : Eq-Rel l2 (type-Group G)
   left-eq-rel-Decidable-Subgroup =
     left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```

@@ -1,7 +1,7 @@
 #  Groups of order 2
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
+{-# OPTIONS --lossy-unification #-}
 
 module finite-group-theory.groups-of-order-2 where
 
@@ -159,20 +159,20 @@ module _
   map-specified-hom-Group-of-Order-2 =
     map-equiv equiv-Group-of-Order-2
   
-  specified-hom-Group-of-Order-2 :
-    type-hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
-  specified-hom-Group-of-Order-2 = {!!}
+--   specified-hom-Group-of-Order-2 :
+--     type-hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
+--   specified-hom-Group-of-Order-2 = {!!}
   
-```
+-- ```
 
-### The type of groups of order 2 is contractible
+-- ### The type of groups of order 2 is contractible
 
-```agda
-is-contr-Group-of-Order-2 : (l : Level) → is-contr (Group-of-Order-2 l)
-pr1 (is-contr-Group-of-Order-2 l) = symmetric-Group-of-Order-2 l
-pr2 (is-contr-Group-of-Order-2 l) G =
-  eq-iso-Group-of-Order-2
-    ( symmetric-Group-of-Order-2 l)
-    ( G)
-    {!!}
-```
+-- ```agda
+-- is-contr-Group-of-Order-2 : (l : Level) → is-contr (Group-of-Order-2 l)
+-- pr1 (is-contr-Group-of-Order-2 l) = symmetric-Group-of-Order-2 l
+-- pr2 (is-contr-Group-of-Order-2 l) G =
+--   eq-iso-Group-of-Order-2
+--     ( symmetric-Group-of-Order-2 l)
+--     ( G)
+--     {!!}
+-- ```
