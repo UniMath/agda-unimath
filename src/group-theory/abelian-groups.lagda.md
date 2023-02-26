@@ -8,6 +8,8 @@ open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -29,6 +31,8 @@ Abelian groups are groups of which the group operation is commutative
 
 ## Definition
 
+### The condition of being an abelian group
+
 ```agda
 is-abelian-group-Prop : {l : Level} → Group l → Prop l
 is-abelian-group-Prop G =
@@ -37,20 +41,24 @@ is-abelian-group-Prop G =
     ( λ x →
       Π-Prop
         ( type-Group G)
-        ( λ y → Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x)))
+        ( λ y →
+          Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x)))
 
 is-abelian-Group : {l : Level} → Group l → UU l
 is-abelian-Group G = type-Prop (is-abelian-group-Prop G)
 
 is-prop-is-abelian-Group :
   {l : Level} (G : Group l) → is-prop (is-abelian-Group G)
-is-prop-is-abelian-Group G = is-prop-type-Prop (is-abelian-group-Prop G)
-
-Ab : (l : Level) → UU (lsuc l)
-Ab l = Σ (Group l) is-abelian-Group
+is-prop-is-abelian-Group G =
+  is-prop-type-Prop (is-abelian-group-Prop G)
 ```
 
+### The type of abelian groups
+
 ```agda
+Ab : (l : Level) → UU (lsuc l)
+Ab l = Σ (Group l) is-abelian-Group
+
 module _
   {l : Level} (A : Ab l)
   where
@@ -97,7 +105,13 @@ module _
   zero-Ab = unit-Group group-Ab
 
   is-zero-Ab : type-Ab → UU l
-  is-zero-Ab x = x ＝ zero-Ab
+  is-zero-Ab = is-unit-Group group-Ab
+
+  is-prop-is-zero-Ab : (x : type-Ab) → is-prop (is-zero-Ab x)
+  is-prop-is-zero-Ab = is-prop-is-unit-Group group-Ab
+
+  is-zero-ab-Prop : type-Ab → Prop l
+  is-zero-ab-Prop = is-unit-group-Prop group-Ab
 
   left-unit-law-add-Ab : (x : type-Ab) → add-Ab zero-Ab x ＝ x
   left-unit-law-add-Ab = left-unit-law-mul-Group group-Ab
@@ -111,10 +125,12 @@ module _
   neg-Ab : type-Ab → type-Ab
   neg-Ab = inv-Group group-Ab
 
-  left-inverse-law-add-Ab : (x : type-Ab) → add-Ab (neg-Ab x) x ＝ zero-Ab
+  left-inverse-law-add-Ab :
+    (x : type-Ab) → add-Ab (neg-Ab x) x ＝ zero-Ab
   left-inverse-law-add-Ab = left-inverse-law-mul-Group group-Ab
 
-  right-inverse-law-add-Ab : (x : type-Ab) → add-Ab x (neg-Ab x) ＝ zero-Ab
+  right-inverse-law-add-Ab :
+    (x : type-Ab) → add-Ab x (neg-Ab x) ＝ zero-Ab
   right-inverse-law-add-Ab = right-inverse-law-mul-Group group-Ab
 
   commutative-add-Ab : (x y : type-Ab) → Id (add-Ab x y) (add-Ab y x)
@@ -179,16 +195,64 @@ module _
 
 ### Addition on an abelian group is a binary equivalence
 
+#### Addition on the left is an equivalence
+
 ```agda
 module _
   {l : Level} (A : Ab l)
   where
 
+  left-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
+  left-subtraction-Ab = left-div-Group (group-Ab A)
+
+  issec-add-neg-Ab :
+    (x : type-Ab A) → (add-Ab A x ∘ left-subtraction-Ab x) ~ id
+  issec-add-neg-Ab = issec-mul-inv-Group (group-Ab A)
+
+  isretr-add-neg-Ab :
+    (x : type-Ab A) → (left-subtraction-Ab x ∘ add-Ab A x) ~ id
+  isretr-add-neg-Ab = isretr-mul-inv-Group (group-Ab A)
+
   is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
   is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
 
+  equiv-add-Ab : (x : type-Ab A) → type-Ab A ≃ type-Ab A
+  equiv-add-Ab = equiv-mul-Group (group-Ab A)
+```
+
+#### Addition on the right is an equivalence
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
+  right-subtraction-Ab = right-div-Group (group-Ab A)
+
+  issec-add-neg-Ab' :
+    (x : type-Ab A) →
+    (add-Ab' A x ∘ (λ y → right-subtraction-Ab y x)) ~ id
+  issec-add-neg-Ab' = issec-mul-inv-Group' (group-Ab A)
+
+  isretr-add-neg-Ab' :
+    (x : type-Ab A) →
+    ((λ y → right-subtraction-Ab y x) ∘ add-Ab' A x) ~ id
+  isretr-add-neg-Ab' = isretr-mul-inv-Group' (group-Ab A)
+
   is-equiv-add-Ab' : (x : type-Ab A) → is-equiv (add-Ab' A x)
   is-equiv-add-Ab' = is-equiv-mul-Group' (group-Ab A)
+
+  equiv-add-Ab' : type-Ab A → (type-Ab A ≃ type-Ab A)
+  equiv-add-Ab' = equiv-mul-Group' (group-Ab A)
+```
+
+#### Addition on an abelian group is a binary equivalence
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
 
   is-binary-equiv-add-Ab : is-binary-equiv (add-Ab A)
   is-binary-equiv-add-Ab = is-binary-equiv-mul-Group (group-Ab A)
@@ -233,12 +297,24 @@ module _
   where
 
   transpose-eq-add-Ab :
-    {x y z : type-Ab A} → Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
+    {x y z : type-Ab A} →
+    Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
   transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
 
+  inv-transpose-eq-add-Ab :
+    {x y z : type-Ab A} →
+    Id x (add-Ab A z (neg-Ab A y)) → add-Ab A x y ＝ z
+  inv-transpose-eq-add-Ab = inv-transpose-eq-mul-Group (group-Ab A)
+
   transpose-eq-add-Ab' :
-    {x y z : type-Ab A} → Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
+    {x y z : type-Ab A} →
+    Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
   transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
+
+  inv-transpose-eq-add-Ab' :
+    {x y z : type-Ab A} →
+    Id y (add-Ab A (neg-Ab A x) z) → Id (add-Ab A x y) z
+  inv-transpose-eq-add-Ab' = inv-transpose-eq-mul-Group' (group-Ab A)
 ```
 
 ### Any idempotent element in an abelian group is zero
