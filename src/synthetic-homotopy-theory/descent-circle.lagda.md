@@ -36,10 +36,18 @@ The descent property uniquely characterizes type families over the circle.
 
 ## Definitions
 
+### Type families over the circle
+
 ```agda
 Fam-circle :
   ( l1 : Level) → UU (lsuc l1)
 Fam-circle l1 = Σ (UU l1) Aut
+
+type-Fam-circle : {l1 : Level} → (P : Fam-circle l1) → UU l1
+type-Fam-circle = pr1
+
+aut-Fam-circle : {l1 : Level} → (P : Fam-circle l1) → Aut (type-Fam-circle P)
+aut-Fam-circle = pr2
 ```
 
 ## Properties
@@ -50,106 +58,108 @@ Fam-circle l1 = Σ (UU l1) Aut
 Eq-Fam-circle :
   { l1 : Level} → Fam-circle l1 → Fam-circle l1 → UU l1
 Eq-Fam-circle P Q =
-  Σ ( (pr1 P) ≃ (pr1 Q))
+  Σ ( (type-Fam-circle P) ≃ (type-Fam-circle Q))
     ( λ h →
-      ( (map-equiv h) ∘ (map-equiv (pr2 P))) ~ ((map-equiv (pr2 Q)) ∘ (map-equiv h)))
+      ( (map-equiv h) ∘ (map-equiv (aut-Fam-circle P))) ~
+      ( (map-equiv (aut-Fam-circle Q)) ∘ (map-equiv h)))
 
-reflexive-Eq-Fam-circle :
+refl-Eq-Fam-circle :
   { l1 : Level} (P : Fam-circle l1) → Eq-Fam-circle P P
-reflexive-Eq-Fam-circle (pair X e) =
-  pair id-equiv refl-htpy
+refl-Eq-Fam-circle (X , e) =
+  id-equiv , refl-htpy
 
-Eq-Fam-circle-eq :
-  { l1 : Level} (P Q : Fam-circle l1) → Id P Q → Eq-Fam-circle P Q
-Eq-Fam-circle-eq P .P refl = reflexive-Eq-Fam-circle P
+Eq-eq-Fam-circle :
+  { l1 : Level} (P Q : Fam-circle l1) → P ＝ Q → Eq-Fam-circle P Q
+Eq-eq-Fam-circle P .P refl = refl-Eq-Fam-circle P
 
 is-contr-total-Eq-Fam-circle :
   { l1 : Level} (P : Fam-circle l1) →
   is-contr (Σ (Fam-circle l1) (Eq-Fam-circle P))
-is-contr-total-Eq-Fam-circle (pair X e) =
+is-contr-total-Eq-Fam-circle (X , e) =
   is-contr-total-Eq-structure
     ( λ Y f h →
       ((map-equiv h) ∘ (map-equiv e)) ~ ((map-equiv f) ∘ (map-equiv h)))
     ( is-contr-total-equiv X)
-    ( pair X id-equiv)
+    ( X , id-equiv)
   ( is-contr-total-htpy-equiv e)
 
-is-equiv-Eq-Fam-circle-eq :
-  { l1 : Level} (P Q : Fam-circle l1) → is-equiv (Eq-Fam-circle-eq P Q)
-is-equiv-Eq-Fam-circle-eq P =
+is-equiv-Eq-eq-Fam-circle :
+  { l1 : Level} (P Q : Fam-circle l1) → is-equiv (Eq-eq-Fam-circle P Q)
+is-equiv-Eq-eq-Fam-circle P =
   fundamental-theorem-id
     ( is-contr-total-Eq-Fam-circle P)
-    ( Eq-Fam-circle-eq P)
+    ( Eq-eq-Fam-circle P)
 
 eq-Eq-Fam-circle :
-  { l1 : Level} (P Q : Fam-circle l1) → Eq-Fam-circle P Q → Id P Q
-eq-Eq-Fam-circle P Q = map-inv-is-equiv (is-equiv-Eq-Fam-circle-eq P Q)
+  { l1 : Level} (P Q : Fam-circle l1) → Eq-Fam-circle P Q → P ＝ Q
+eq-Eq-Fam-circle P Q = map-inv-is-equiv (is-equiv-Eq-eq-Fam-circle P Q)
 ```
 
 ### Uniqueness of type families defined by `Fam-circle`
 
 ```agda
-ev-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  ( X → UU l2) → Fam-circle l2
-ev-fam-circle l P =
-  pair
-    ( P (base-free-loop l))
-    ( equiv-tr P (loop-free-loop l))
-
-comparison-fam-circle :
+comparison-Fam-circle :
   ( l1 : Level) → free-loop (UU l1) → Fam-circle l1
-comparison-fam-circle l1 = tot (λ Y → equiv-eq)
+comparison-Fam-circle l1 = tot (λ Y → equiv-eq)
 
-is-equiv-comparison-fam-circle :
-  ( l1 : Level) → is-equiv (comparison-fam-circle l1)
-is-equiv-comparison-fam-circle l1 =
+is-equiv-comparison-Fam-circle :
+  ( l1 : Level) → is-equiv (comparison-Fam-circle l1)
+is-equiv-comparison-Fam-circle l1 =
   is-equiv-tot-is-fiberwise-equiv (λ Y → univalence Y Y)
 
-triangle-comparison-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  (ev-fam-circle l) ~ ((comparison-fam-circle l2) ∘ (ev-free-loop l (UU l2)))
-triangle-comparison-fam-circle l P =
-  eq-Eq-Fam-circle
-    ( ev-fam-circle l P)
-    ( comparison-fam-circle _ (ev-free-loop l (UU _) P))
-    ( pair id-equiv (htpy-eq (inv (tr-equiv-eq-ap (pr2 l)))))
-
-is-equiv-ev-fam-circle-universal-property-circle :
+module _
   { l1 l2 : Level} {X : UU l1} (l : free-loop X)
-  ( up-circle : universal-property-circle (lsuc l2) l) →
-  is-equiv (ev-fam-circle {l2 = l2} l)
-is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
-  is-equiv-comp-htpy
-    ( ev-fam-circle l)
-    ( comparison-fam-circle l2)
-    ( ev-free-loop l (UU l2))
-    ( triangle-comparison-fam-circle l)
-    ( up-circle (UU l2))
-    ( is-equiv-comparison-fam-circle l2)
+  where
+
+  ev-Fam-circle : ( X → UU l2) → Fam-circle l2
+  pr1 (ev-Fam-circle P) = P (base-free-loop l)
+  pr2 (ev-Fam-circle P) = equiv-tr P (loop-free-loop l)
+
+  triangle-comparison-fam-circle :
+    ev-Fam-circle ~ ((comparison-Fam-circle l2) ∘ (ev-free-loop l (UU l2)))
+  triangle-comparison-fam-circle P =
+    eq-Eq-Fam-circle
+      ( ev-Fam-circle P)
+      ( comparison-Fam-circle _ (ev-free-loop l (UU _) P))
+      ( id-equiv , (htpy-eq (inv (tr-equiv-eq-ap (loop-free-loop l)))))
+
+  is-equiv-ev-Fam-circle-universal-property-circle :
+    ( up-circle : universal-property-circle (lsuc l2) l) →
+    is-equiv ev-Fam-circle
+  is-equiv-ev-Fam-circle-universal-property-circle up-circle =
+     is-equiv-comp-htpy
+      ( ev-Fam-circle)
+      ( comparison-Fam-circle l2)
+      ( ev-free-loop l (UU l2))
+      ( triangle-comparison-fam-circle)
+      ( up-circle (UU l2))
+      ( is-equiv-comparison-Fam-circle l2)
 
 unique-family-property-circle :
   { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
   UU (l1 ⊔ lsuc l2)
 unique-family-property-circle l2 {X} l =
   ( Q : Fam-circle l2) →
-    is-contr (Σ (X → UU l2) (λ P → Eq-Fam-circle Q (ev-fam-circle l P)))
+    is-contr (Σ (X → UU l2) (λ P → Eq-Fam-circle Q (ev-Fam-circle l P)))
 
-unique-family-property-universal-property-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  universal-property-circle (lsuc l2) l → unique-family-property-circle l2 l
-unique-family-property-universal-property-circle l up-circle Q =
-  is-contr-is-equiv'
-    ( fib (ev-fam-circle l) Q)
-    ( tot (λ P → (Eq-Fam-circle-eq Q (ev-fam-circle l P)) ∘ inv))
-    ( is-equiv-tot-is-fiberwise-equiv
-      ( λ P →
-        is-equiv-comp _ _
-          ( is-equiv-inv _ _)
-          ( is-equiv-Eq-Fam-circle-eq Q (ev-fam-circle l P))))
-    ( is-contr-map-is-equiv
-      ( is-equiv-ev-fam-circle-universal-property-circle l up-circle)
-      ( Q))
+module _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  where
+
+  unique-family-property-universal-property-circle :
+    universal-property-circle (lsuc l2) l → unique-family-property-circle l2 l
+  unique-family-property-universal-property-circle up-circle Q =
+    is-contr-is-equiv'
+      ( fib (ev-Fam-circle l) Q)
+      ( tot (λ P → Eq-eq-Fam-circle Q (ev-Fam-circle l P) ∘ inv))
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ P →
+          is-equiv-comp _ _
+            ( is-equiv-inv _ _)
+            ( is-equiv-Eq-eq-Fam-circle Q (ev-Fam-circle l P))))
+      ( is-contr-map-is-equiv
+        ( is-equiv-ev-Fam-circle-universal-property-circle l up-circle)
+        ( Q))
 ```
 
 ### Sections of families over the circle
@@ -158,7 +168,7 @@ unique-family-property-universal-property-circle l up-circle Q =
 Section-Fam-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X) (P : Fam-circle l2) → UU _
 Section-Fam-circle l P =
-  Σ (pr1 P) (λ p → Id (map-equiv (pr2 P) p) p)
+  Σ (type-Fam-circle P) (λ p → (map-equiv (aut-Fam-circle P) p) ＝ p)
 
 fam-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
@@ -166,17 +176,17 @@ fam-circle :
   Fam-circle l2 → X → UU l2
 fam-circle {l1} {l2} l dup-circle =
   map-inv-is-equiv
-    ( is-equiv-ev-fam-circle-universal-property-circle l
+    ( is-equiv-ev-Fam-circle-universal-property-circle l
       ( universal-property-dependent-universal-property-circle l dup-circle))
 
 section-fam-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : dependent-universal-property-circle l2 l) →
   ( Q : X → UU l2) (P : Fam-circle l2) →
-  ( e : Eq-Fam-circle P (ev-fam-circle l Q)) →
+  ( e : Eq-Fam-circle P (ev-Fam-circle l Q)) →
   Section-Fam-circle l P → (x : X) → Q x
-section-fam-circle l dup-circle Q P (pair e H) (pair p α) =
+section-fam-circle l dup-circle Q P (e , H) (p , α) =
   map-inv-is-equiv
     ( dup-circle Q)
-    ( pair (map-equiv e p) ((inv (H p)) ∙ (ap (map-equiv e) α)))
+    ( (map-equiv e p) , ((inv (H p)) ∙ (ap (map-equiv e) α)))
 ```
