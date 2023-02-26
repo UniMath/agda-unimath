@@ -120,7 +120,11 @@ module _
   is-prop-is-subgroup-subset-Group : is-prop is-subgroup-subset-Group
   is-prop-is-subgroup-subset-Group =
     is-prop-type-Prop is-subgroup-subset-group-Prop
+```
 
+### The type of all subgroups of a group
+
+```agda
 Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
 Subgroup l G = type-subtype (is-subgroup-subset-group-Prop {l2 = l} G)

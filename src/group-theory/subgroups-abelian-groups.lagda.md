@@ -88,6 +88,18 @@ module _
   is-in-Subgroup-Ab : type-Ab A → UU l2
   is-in-Subgroup-Ab = is-in-Subgroup (group-Ab A) B
 
+  is-closed-under-eq-Subgroup-Ab :
+    {x y : type-Ab A} →
+    is-in-Subgroup-Ab x → x ＝ y → is-in-Subgroup-Ab y
+  is-closed-under-eq-Subgroup-Ab =
+    is-closed-under-eq-Subgroup (group-Ab A) B
+
+  is-closed-under-eq-Subgroup-Ab' :
+    {x y : type-Ab A} →
+    is-in-Subgroup-Ab y → x ＝ y → is-in-Subgroup-Ab x
+  is-closed-under-eq-Subgroup-Ab' =
+    is-closed-under-eq-Subgroup' (group-Ab A) B
+
   is-prop-is-in-Subgroup-Ab :
     (x : type-Ab A) → is-prop (is-in-Subgroup-Ab x)
   is-prop-is-in-Subgroup-Ab =
