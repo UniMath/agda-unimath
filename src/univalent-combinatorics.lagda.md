@@ -17,6 +17,7 @@ open import univalent-combinatorics.cartesian-products-species public
 open import univalent-combinatorics.classical-finite-types public
 open import univalent-combinatorics.complements-isolated-points public
 open import univalent-combinatorics.composition-species public
+open import univalent-combinatorics.composition-general-species public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.coproducts-species public
 open import univalent-combinatorics.counting-decidable-subtypes public
@@ -57,6 +58,8 @@ open import univalent-combinatorics.finite-species public
 open import univalent-combinatorics.finite-types public
 open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.function-types public
+open import univalent-combinatorics.general-species public
+open import univalent-combinatorics.generalized-species public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.inhabited-finite-types public

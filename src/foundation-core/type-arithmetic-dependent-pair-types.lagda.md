@@ -3,6 +3,7 @@
 ```agda
 module foundation-core.type-arithmetic-dependent-pair-types where
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -327,6 +328,22 @@ module _
   equiv-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) ≃ Σ (Σ A C) (B ∘ pr1)
   pr1 equiv-right-swap-Σ = map-right-swap-Σ
   pr2 equiv-right-swap-Σ = is-equiv-map-right-swap-Σ
+```
+
+### Distributive laws of cartesian products over Σ
+
+```agda
+left-distributive-prod-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
+  (A × (Σ B C)) ≃ Σ B (λ b → A × (C b))
+left-distributive-prod-Σ =
+  equiv-left-swap-Σ
+
+right-distributive-prod-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
+  ((Σ A B) × C) ≃ Σ A (λ a → B a × C )
+right-distributive-prod-Σ {A} =
+  assoc-Σ _ _  _
 ```
 
 ## See also
