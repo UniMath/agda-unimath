@@ -377,7 +377,7 @@ module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
   where
 
-  right-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU (l1 ⊔ l2)
+  right-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU l2
   right-sim-Subgroup-𝔽 = right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
   is-prop-right-sim-Subgroup-𝔽 :
@@ -386,7 +386,7 @@ module _
     is-prop-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
   prop-right-eq-rel-Subgroup-𝔽 :
-    (x y : type-Group-𝔽 G) → Prop (l1 ⊔ l2)
+    (x y : type-Group-𝔽 G) → Prop l2
   prop-right-eq-rel-Subgroup-𝔽 =
     prop-right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 
@@ -405,7 +405,7 @@ module _
   trans-right-sim-Subgroup-𝔽 =
     trans-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  right-eq-rel-Subgroup-𝔽 : Eq-Rel (l1 ⊔ l2) (type-Group-𝔽 G)
+  right-eq-rel-Subgroup-𝔽 : Eq-Rel l2 (type-Group-𝔽 G)
   right-eq-rel-Subgroup-𝔽 =
     right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 ```
@@ -417,7 +417,7 @@ module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
   where
   
-  left-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU (l1 ⊔ l2)
+  left-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU l2
   left-sim-Subgroup-𝔽 = left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
   is-prop-left-sim-Subgroup-𝔽 :
@@ -425,7 +425,7 @@ module _
   is-prop-left-sim-Subgroup-𝔽 =
     is-prop-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  prop-left-eq-rel-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → Prop (l1 ⊔ l2)
+  prop-left-eq-rel-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → Prop l2
   prop-left-eq-rel-Subgroup-𝔽 =
     prop-left-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 
@@ -434,17 +434,17 @@ module _
   refl-left-sim-Subgroup-𝔽 =
     refl-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  symm-left-sim-Subgroup-𝔽 :
+  symmetric-left-sim-Subgroup-𝔽 :
     is-symmetric-Rel-Prop prop-left-eq-rel-Subgroup-𝔽
-  symm-left-sim-Subgroup-𝔽 =
-    symm-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+  symmetric-left-sim-Subgroup-𝔽 =
+    symmetric-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  trans-left-sim-Subgroup-𝔽 :
+  transitive-left-sim-Subgroup-𝔽 :
     is-transitive-Rel-Prop prop-left-eq-rel-Subgroup-𝔽
-  trans-left-sim-Subgroup-𝔽 =
-    trans-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+  transitive-left-sim-Subgroup-𝔽 =
+    transitive-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  left-eq-rel-Subgroup-𝔽 : Eq-Rel (l1 ⊔ l2) (type-Group-𝔽 G)
+  left-eq-rel-Subgroup-𝔽 : Eq-Rel l2 (type-Group-𝔽 G)
   left-eq-rel-Subgroup-𝔽 =
     left-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 ```

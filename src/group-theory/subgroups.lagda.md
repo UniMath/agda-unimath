@@ -14,6 +14,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.powersets
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
@@ -63,9 +64,11 @@ module _
   contains-unit-subset-group-Prop = P (unit-Group G)
   
   contains-unit-subset-Group : UU l2
-  contains-unit-subset-Group = type-Prop contains-unit-subset-group-Prop
+  contains-unit-subset-Group =
+    type-Prop contains-unit-subset-group-Prop
 
-  is-prop-contains-unit-subset-Group : is-prop contains-unit-subset-Group
+  is-prop-contains-unit-subset-Group :
+    is-prop contains-unit-subset-Group
   is-prop-contains-unit-subset-Group =
     is-prop-type-Prop contains-unit-subset-group-Prop
 
@@ -76,7 +79,8 @@ module _
       ( λ x →
         Π-Prop
           ( type-Group G)
-          ( λ y → hom-Prop (P x) (hom-Prop (P y) (P (mul-Group G x y)))))
+          ( λ y →
+            hom-Prop (P x) (hom-Prop (P y) (P (mul-Group G x y)))))
 
   is-closed-under-mul-subset-Group : UU (l1 ⊔ l2)
   is-closed-under-mul-subset-Group =
@@ -126,7 +130,8 @@ module _
   where
 
   subset-Subgroup : subset-Group l2 G
-  subset-Subgroup = inclusion-subtype (is-subgroup-subset-group-Prop G) H
+  subset-Subgroup =
+    inclusion-subtype (is-subgroup-subset-group-Prop G) H
 
   type-Subgroup : UU (l1 ⊔ l2)
   type-Subgroup = type-subtype subset-Subgroup
@@ -142,6 +147,18 @@ module _
 
   is-in-Subgroup : type-Group G → UU l2
   is-in-Subgroup = is-in-subtype subset-Subgroup
+
+  is-closed-under-eq-Subgroup :
+    {x y : type-Group G} →
+    is-in-Subgroup x → (x ＝ y) → is-in-Subgroup y
+  is-closed-under-eq-Subgroup =
+    is-closed-under-eq-subtype subset-Subgroup
+
+  is-closed-under-eq-Subgroup' :
+    {x y : type-Group G} →
+    is-in-Subgroup y → (x ＝ y) → is-in-Subgroup x
+  is-closed-under-eq-Subgroup' =
+    is-closed-under-eq-subtype' subset-Subgroup
 
   is-in-subgroup-inclusion-Subgroup :
     (x : type-Subgroup) → is-in-Subgroup (inclusion-Subgroup x)
@@ -166,8 +183,43 @@ module _
     is-closed-under-inv-subset-Group G subset-Subgroup
   is-closed-under-inv-Subgroup = pr2 (pr2 is-subgroup-Subgroup)
 
+  is-closed-under-inv-Subgroup' :
+    (x : type-Group G) →
+    is-in-Subgroup (inv-Group G x) → is-in-Subgroup x
+  is-closed-under-inv-Subgroup' x p =
+    is-closed-under-eq-Subgroup
+      ( is-closed-under-inv-Subgroup (inv-Group G x) p)
+      ( inv-inv-Group G x)
+
+  is-in-subgroup-left-factor-Subgroup :
+    (x y : type-Group G) →
+    is-in-Subgroup (mul-Group G x y) → is-in-Subgroup y →
+    is-in-Subgroup x
+  is-in-subgroup-left-factor-Subgroup x y p q =
+    is-closed-under-eq-Subgroup
+      ( is-closed-under-mul-Subgroup
+        ( mul-Group G x y)
+        ( inv-Group G y)
+        ( p)
+        ( is-closed-under-inv-Subgroup y q))
+      ( isretr-mul-inv-Group' G y x)
+
+  is-in-subgroup-right-factor-Subgroup :
+    (x y : type-Group G) →
+    is-in-Subgroup (mul-Group G x y) → is-in-Subgroup x →
+    is-in-Subgroup y
+  is-in-subgroup-right-factor-Subgroup x y p q =
+    is-closed-under-eq-Subgroup
+      ( is-closed-under-mul-Subgroup
+        ( inv-Group G x)
+        ( mul-Group G x y)
+        ( is-closed-under-inv-Subgroup x q)
+        ( p))
+      ( isretr-mul-inv-Group G x y)
+
 is-emb-subset-Subgroup :
-  {l1 l2 : Level} (G : Group l1) → is-emb (subset-Subgroup {l2 = l2} G)
+  {l1 l2 : Level} (G : Group l1) →
+  is-emb (subset-Subgroup {l2 = l2} G)
 is-emb-subset-Subgroup G =
   is-emb-inclusion-subtype (is-subgroup-subset-group-Prop G)
 ```
@@ -183,16 +235,15 @@ module _
   type-group-Subgroup = type-subtype (subset-Subgroup G H)
 
   map-inclusion-group-Subgroup : type-group-Subgroup → type-Group G
-  map-inclusion-group-Subgroup = inclusion-subtype (subset-Subgroup G H)
+  map-inclusion-group-Subgroup =
+    inclusion-subtype (subset-Subgroup G H)
 
-  is-emb-inclusion-group-Subgroup : is-emb map-inclusion-group-Subgroup
+  is-emb-inclusion-group-Subgroup :
+    is-emb map-inclusion-group-Subgroup
   is-emb-inclusion-group-Subgroup =
     is-emb-inclusion-subtype (subset-Subgroup G H)
 
-  eq-subgroup-eq-group :
-    {x y : type-group-Subgroup} →
-    Id (map-inclusion-group-Subgroup x) (map-inclusion-group-Subgroup y) →
-    Id x y
+  eq-subgroup-eq-group : is-injective map-inclusion-group-Subgroup
   eq-subgroup-eq-group {x} {y} =
     map-inv-is-equiv (is-emb-inclusion-group-Subgroup x y)
 
@@ -211,7 +262,8 @@ module _
     Id (mul-Subgroup (mul-Subgroup x y) z)
        (mul-Subgroup x (mul-Subgroup y z))
   associative-mul-Subgroup x y z =
-    eq-subgroup-eq-group (associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
+    eq-subgroup-eq-group
+      ( associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
 
   unit-Subgroup : type-group-Subgroup
   pr1 unit-Subgroup = unit-Group G
@@ -229,7 +281,8 @@ module _
 
   inv-Subgroup : type-group-Subgroup → type-group-Subgroup
   pr1 (inv-Subgroup x) = inv-Group G (pr1 x)
-  pr2 (inv-Subgroup x) = is-closed-under-inv-Subgroup G H (pr1 x) (pr2 x)
+  pr2 (inv-Subgroup x) =
+    is-closed-under-inv-Subgroup G H (pr1 x) (pr2 x)
 
   left-inverse-law-mul-Subgroup :
     ( x : type-group-Subgroup) →
@@ -257,7 +310,8 @@ module _
   pr2 (pr2 (pr1 (pr2 group-Subgroup))) = right-unit-law-mul-Subgroup
   pr1 (pr2 (pr2 group-Subgroup)) = inv-Subgroup
   pr1 (pr2 (pr2 (pr2 group-Subgroup))) = left-inverse-law-mul-Subgroup
-  pr2 (pr2 (pr2 (pr2 group-Subgroup))) = right-inverse-law-mul-Subgroup
+  pr2 (pr2 (pr2 (pr2 group-Subgroup))) =
+    right-inverse-law-mul-Subgroup
 ```
 
 ### The inclusion of the underlying group of a subgroup into the ambient group
@@ -290,7 +344,8 @@ module _
 
   inclusion-group-Subgroup : type-hom-Group (group-Subgroup G H) G
   pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
-  pr2 inclusion-group-Subgroup = preserves-mul-inclusion-group-Subgroup
+  pr2 inclusion-group-Subgroup =
+    preserves-mul-inclusion-group-Subgroup
 ```
 
 ## Properties
@@ -302,9 +357,12 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  has-same-elements-Subgroup : {l3 : Level} → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-Subgroup :
+    {l3 : Level} → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Subgroup K =
-    has-same-elements-subtype (subset-Subgroup G H) (subset-Subgroup G K)
+    has-same-elements-subtype
+      ( subset-Subgroup G H)
+      ( subset-Subgroup G K)
 
   extensionality-Subgroup :
     (K : Subgroup l2 G) → (H ＝ K) ≃ has-same-elements-Subgroup K
@@ -321,11 +379,13 @@ module _
 
   has-same-elements-eq-Subgroup :
     (K : Subgroup l2 G) → (H ＝ K) → has-same-elements-Subgroup K
-  has-same-elements-eq-Subgroup K = map-equiv (extensionality-Subgroup K)
+  has-same-elements-eq-Subgroup K =
+    map-equiv (extensionality-Subgroup K)
 
   eq-has-same-elements-Subgroup :
     (K : Subgroup l2 G) → has-same-elements-Subgroup K → (H ＝ K)
-  eq-has-same-elements-Subgroup K = map-inv-equiv (extensionality-Subgroup K)
+  eq-has-same-elements-Subgroup K =
+    map-inv-equiv (extensionality-Subgroup K)
 ```
 
 ### The containment relation of subgroups
@@ -335,7 +395,9 @@ contains-Subgroup-Prop :
   {l1 l2 l3 : Level} (G : Group l1) →
   Subgroup l2 G → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
 contains-Subgroup-Prop G H K =
-  inclusion-rel-subtype-Prop (subset-Subgroup G H) (subset-Subgroup G K)
+  inclusion-rel-subtype-Prop
+    ( subset-Subgroup G H)
+    ( subset-Subgroup G K)
 
 contains-Subgroup :
   {l1 l2 l3 : Level} (G : Group l1) →
@@ -350,9 +412,13 @@ refl-contains-Subgroup G H = refl-⊆ (subset-Subgroup G H)
 transitive-contains-Subgroup :
   {l1 l2 l3 l4 : Level} (G : Group l1) (H : Subgroup l2 G)
   (K : Subgroup l3 G) (L : Subgroup l4 G) →
-  contains-Subgroup G K L → contains-Subgroup G H K → contains-Subgroup G H L
+  contains-Subgroup G K L → contains-Subgroup G H K →
+  contains-Subgroup G H L
 transitive-contains-Subgroup G H K L =
-  trans-⊆ (subset-Subgroup G H) (subset-Subgroup G K) (subset-Subgroup G L)
+  trans-⊆
+    ( subset-Subgroup G H)
+    ( subset-Subgroup G K)
+    ( subset-Subgroup G L)
 
 antisymmetric-contains-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H K : Subgroup l2 G) →
@@ -372,61 +438,70 @@ trans-leq-Large-Preorder (Subgroup-Large-Preorder G) =
   transitive-contains-Subgroup G
 
 Subgroup-Preorder :
-  {l1 : Level} (l2 : Level) (G : Group l1) → Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
-Subgroup-Preorder l2 G = preorder-Large-Preorder (Subgroup-Large-Preorder G) l2
+  {l1 : Level} (l2 : Level) (G : Group l1) →
+  Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subgroup-Preorder l2 G =
+  preorder-Large-Preorder (Subgroup-Large-Preorder G) l2
 
 Subgroup-Large-Poset :
   {l1 : Level} (G : Group l1) →
   Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
-large-preorder-Large-Poset (Subgroup-Large-Poset G) = Subgroup-Large-Preorder G
+large-preorder-Large-Poset (Subgroup-Large-Poset G) =
+  Subgroup-Large-Preorder G
 antisymmetric-leq-Large-Poset (Subgroup-Large-Poset G) =
   antisymmetric-contains-Subgroup G
 
 Subgroup-Poset :
-  {l1 : Level} (l2 : Level) (G : Group l1) → Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  {l1 : Level} (l2 : Level) (G : Group l1) →
+  Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
 Subgroup-Poset l2 G = poset-Large-Poset (Subgroup-Large-Poset G) l2
 ```
 
 ### Every subgroup induces two equivalence relations
 
-#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`.
+#### The equivalence relation where `x ~ y` if and only if `x⁻¹ y ∈ H`
 
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  right-sim-Subgroup' : (x y : type-Group G) → UU l2
-  right-sim-Subgroup' x y = is-in-Subgroup G H (left-div-Group G x y)
+  right-sim-Subgroup : (x y : type-Group G) → UU l2
+  right-sim-Subgroup x y = is-in-Subgroup G H (left-div-Group G x y)
 
-  is-prop-right-sim-Subgroup' :
-    (x y : type-Group G) → is-prop (right-sim-Subgroup' x y)
-  is-prop-right-sim-Subgroup' x y =
-    is-prop-is-in-Subgroup G H (mul-Group G (inv-Group G x) y)
+  is-prop-right-sim-Subgroup :
+    (x y : type-Group G) → is-prop (right-sim-Subgroup x y)
+  is-prop-right-sim-Subgroup x y =
+    is-prop-is-in-Subgroup G H (left-div-Group G x y)
 
-  prop-right-eq-rel-Subgroup' : (x y : type-Group G) → Prop l2
-  pr1 (prop-right-eq-rel-Subgroup' x y) = right-sim-Subgroup' x y
-  pr2 (prop-right-eq-rel-Subgroup' x y) = is-prop-right-sim-Subgroup' x y
+  prop-right-eq-rel-Subgroup : (x y : type-Group G) → Prop l2
+  pr1 (prop-right-eq-rel-Subgroup x y) = right-sim-Subgroup x y
+  pr2 (prop-right-eq-rel-Subgroup x y) =
+    is-prop-right-sim-Subgroup x y
 
-  refl-right-sim-Subgroup' : (x : type-Group G) → right-sim-Subgroup' x x
-  refl-right-sim-Subgroup' x =
+  refl-right-sim-Subgroup :
+    {x : type-Group G} → right-sim-Subgroup x x
+  refl-right-sim-Subgroup {x} =
     tr
       ( is-in-Subgroup G H)
       ( inv (left-inverse-law-mul-Group G x))
       ( contains-unit-Subgroup G H)
 
-  symmetric-right-sim-Subgroup' :
-    (x y : type-Group G) → right-sim-Subgroup' x y → right-sim-Subgroup' y x
-  symmetric-right-sim-Subgroup' x y p =
+  symmetric-right-sim-Subgroup :
+    {x y : type-Group G} →
+    right-sim-Subgroup x y → right-sim-Subgroup y x
+  symmetric-right-sim-Subgroup {x} {y} p =
     tr
       ( is-in-Subgroup G H)
       ( inv-left-div-Group G x y)
-      ( is-closed-under-inv-Subgroup G H (mul-Group G (inv-Group G x) y) p)
+      ( is-closed-under-inv-Subgroup G H
+        ( left-div-Group G x y)
+        ( p))
 
-  transitive-right-sim-Subgroup' :
-    (x y z : type-Group G) → right-sim-Subgroup' x y →
-    right-sim-Subgroup' y z → right-sim-Subgroup' x z
-  transitive-right-sim-Subgroup' x y z p q =
+  transitive-right-sim-Subgroup :
+    {x y z : type-Group G} → right-sim-Subgroup x y →
+    right-sim-Subgroup y z → right-sim-Subgroup x z
+  transitive-right-sim-Subgroup {x} {y} {z} p q =
     tr
       ( is-in-Subgroup G H)
       ( mul-left-div-Group G x y z)
@@ -435,109 +510,69 @@ module _
         ( left-div-Group G y z)
         ( p)
         ( q))
-  
-  right-sim-Subgroup : (x y : type-Group G) → UU (l1 ⊔ l2)
-  right-sim-Subgroup x y =
-    fib (mul-Group G x ∘ inclusion-Subgroup G H) y
 
-  is-prop-right-sim-Subgroup :
-    (x y : type-Group G) → is-prop (right-sim-Subgroup x y)
-  is-prop-right-sim-Subgroup x =
-    is-prop-map-is-emb
-      ( is-emb-comp
-        ( mul-Group G x)
-        ( inclusion-Subgroup G H)
-        ( is-emb-mul-Group G x)
-        ( is-emb-inclusion-Subgroup G H))
-
-  prop-right-eq-rel-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
-  pr1 (prop-right-eq-rel-Subgroup x y) = right-sim-Subgroup x y
-  pr2 (prop-right-eq-rel-Subgroup x y) = is-prop-right-sim-Subgroup x y
-
-  refl-right-sim-Subgroup :
-    is-reflexive-Rel-Prop prop-right-eq-rel-Subgroup
-  pr1 (refl-right-sim-Subgroup {x}) = unit-Subgroup G H
-  pr2 (refl-right-sim-Subgroup {x}) = right-unit-law-mul-Group G x
-
-  symm-right-sim-Subgroup :
-    is-symmetric-Rel-Prop prop-right-eq-rel-Subgroup
-  pr1 (symm-right-sim-Subgroup {x} {y} (u , p)) =
-    inv-Subgroup G H u
-  pr2 (symm-right-sim-Subgroup {x} {y} (u , p)) =
-    inv (transpose-eq-mul-Group G p)
-
-  trans-right-sim-Subgroup :
-    is-transitive-Rel-Prop prop-right-eq-rel-Subgroup
-  pr1 (trans-right-sim-Subgroup {x} {y} {z} (u , p) (v , q)) =
-    mul-Subgroup G H u v
-  pr2 (trans-right-sim-Subgroup {x} {y} {z} (u , p) (v , q)) =
-    ( inv
-      ( associative-mul-Group G x
-        ( inclusion-Subgroup G H u)
-        ( inclusion-Subgroup G H v))) ∙
-    ( ( ap (mul-Group' G (inclusion-Subgroup G H v)) p) ∙
-      ( q))
-
-  right-eq-rel-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group G)
+  right-eq-rel-Subgroup : Eq-Rel l2 (type-Group G)
   pr1 right-eq-rel-Subgroup = prop-right-eq-rel-Subgroup
   pr1 (pr2 right-eq-rel-Subgroup) = refl-right-sim-Subgroup
-  pr1 (pr2 (pr2 right-eq-rel-Subgroup)) = symm-right-sim-Subgroup
-  pr2 (pr2 (pr2 right-eq-rel-Subgroup)) = trans-right-sim-Subgroup
+  pr1 (pr2 (pr2 right-eq-rel-Subgroup)) = symmetric-right-sim-Subgroup
+  pr2 (pr2 (pr2 right-eq-rel-Subgroup)) = transitive-right-sim-Subgroup
 ```
 
-#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`.
+#### The equivalence relation where `x ~ y` if and only if `xy⁻¹ ∈ H`
 
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
-  
-  left-sim-Subgroup : (x y : type-Group G) → UU (l1 ⊔ l2)
-  left-sim-Subgroup x y =
-    fib (mul-Group' G x ∘ inclusion-Subgroup G H) y
+
+  left-sim-Subgroup : (x y : type-Group G) → UU l2
+  left-sim-Subgroup x y = is-in-Subgroup G H (right-div-Group G x y)
 
   is-prop-left-sim-Subgroup :
     (x y : type-Group G) → is-prop (left-sim-Subgroup x y)
-  is-prop-left-sim-Subgroup x =
-    is-prop-map-is-emb
-      ( is-emb-comp
-        ( mul-Group' G x)
-        ( inclusion-Subgroup G H)
-        ( is-emb-mul-Group' G x)
-        ( is-emb-inclusion-Subgroup G H))
+  is-prop-left-sim-Subgroup x y =
+    is-prop-is-in-Subgroup G H (right-div-Group G x y)
 
-  prop-left-eq-rel-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
+  prop-left-eq-rel-Subgroup : (x y : type-Group G) → Prop l2
   pr1 (prop-left-eq-rel-Subgroup x y) = left-sim-Subgroup x y
   pr2 (prop-left-eq-rel-Subgroup x y) =
     is-prop-left-sim-Subgroup x y
 
   refl-left-sim-Subgroup :
-    is-reflexive-Rel-Prop prop-left-eq-rel-Subgroup
-  pr1 (refl-left-sim-Subgroup {x}) = unit-Subgroup G H
-  pr2 (refl-left-sim-Subgroup {x}) = left-unit-law-mul-Group G x
+    {x : type-Group G} → left-sim-Subgroup x x
+  refl-left-sim-Subgroup {x} =
+    tr
+      ( is-in-Subgroup G H)
+      ( inv (right-inverse-law-mul-Group G x))
+      ( contains-unit-Subgroup G H)
 
-  symm-left-sim-Subgroup :
-    is-symmetric-Rel-Prop prop-left-eq-rel-Subgroup
-  pr1 (symm-left-sim-Subgroup {x} {y} (u , p)) =
-    inv-Subgroup G H u
-  pr2 (symm-left-sim-Subgroup {x} {y} (u , p)) =
-    inv (transpose-eq-mul-Group' G p)
+  symmetric-left-sim-Subgroup :
+    {x y : type-Group G} →
+    left-sim-Subgroup x y → left-sim-Subgroup y x
+  symmetric-left-sim-Subgroup {x} {y} p =
+    tr
+      ( is-in-Subgroup G H)
+      ( inv-right-div-Group G x y)
+      ( is-closed-under-inv-Subgroup G H
+        ( right-div-Group G x y)
+        ( p))
 
-  trans-left-sim-Subgroup :
-    is-transitive-Rel-Prop prop-left-eq-rel-Subgroup
-  pr1 (trans-left-sim-Subgroup {x} {y} {z} (u , p) (v , q)) =
-    mul-Subgroup G H v u
-  pr2 (trans-left-sim-Subgroup {x} {y} {z} (u , p) (v , q)) =
-    ( associative-mul-Group G
-      ( inclusion-Subgroup G H v)
-      ( inclusion-Subgroup G H u)
-      ( x)) ∙
-    ( ( ap (mul-Group G (inclusion-Subgroup G H v)) p) ∙
-      ( q))
+  transitive-left-sim-Subgroup :
+    {x y z : type-Group G} → left-sim-Subgroup x y →
+    left-sim-Subgroup y z → left-sim-Subgroup x z
+  transitive-left-sim-Subgroup {x} {y} {z} p q =
+    tr
+      ( is-in-Subgroup G H)
+      ( mul-right-div-Group G x y z)
+      ( is-closed-under-mul-Subgroup G H
+        ( right-div-Group G x y)
+        ( right-div-Group G y z)
+        ( p)
+        ( q))
 
-  left-eq-rel-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group G)
+  left-eq-rel-Subgroup : Eq-Rel l2 (type-Group G)
   pr1 left-eq-rel-Subgroup = prop-left-eq-rel-Subgroup
   pr1 (pr2 left-eq-rel-Subgroup) = refl-left-sim-Subgroup
-  pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symm-left-sim-Subgroup
-  pr2 (pr2 (pr2 left-eq-rel-Subgroup)) = trans-left-sim-Subgroup
+  pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symmetric-left-sim-Subgroup
+  pr2 (pr2 (pr2 left-eq-rel-Subgroup)) = transitive-left-sim-Subgroup
 ```

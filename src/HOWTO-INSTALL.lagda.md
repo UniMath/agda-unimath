@@ -1,20 +1,54 @@
 # INSTALL
 
-Before you can use the `agda-unimath` library, you should have Agda installed on your machine and an editor that is compatible with Agda. We recommend `Emacs` and `VSCode`.
+Before you can use the `agda-unimath` library, you should have Agda
+installed on your machine. You can get Agda via following their
+installation instructions, or using the provided Nix flake, if you're using Nix.
+You should also have an editor capable of working with Agda file.
+We recommend either of `Emacs` and `VSCode`.
 
-### Installation guides and tutorials for Agda
+### Installation guides
 
- - Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
- - Once you have Agda up and running, you can copy our library to your machine using `git clone git@github.com:UniMath/agda-unimath.git`.
- - If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
+Get a copy of our library on your machine using
+```shell
+git clone git@github.com:UniMath/agda-unimath.git
+```
+then install Agda as described in the next section.
+
+#### Without Nix
+
+Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
+
+#### With Nix
+
+The library comes with a development shell described in the flake.nix file. To activate the shell, open a terminal in the directory where you cloned the library, and run
+```shell
+nix develop
+```
+Then to make sure that your editor sees the Agda installation,
+start it from within that shell, i.e. run `code` or `emacs` inside the shell.
+
+To make `emacs` use the correct `agda2-mode` provided by the development environment,
+add the following snippet to your `.emacs` file:
+```elisp
+(when (executable-find "agda-mode")
+  (load-file (let ((coding-system-for-read 'utf-8))
+               (shell-command-to-string "agda-mode locate"))))
+```
+which is a modified version of the usual agda2-mode setup provided by Agda,
+except it checks if Agda is available, so that it doesn't cause errors
+when opening Emacs outside the project.
 
 ### Setting up emacs for literate Agda files
 
 The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. For your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
 
-```md
+```elisp
 (setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
 ```
+
+### Tutorials for Agda
+
+If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
 
 ### Setting up emacs for special symbols
 
@@ -30,12 +64,34 @@ In the `agda-unimath` library, we use two notations for the identity type. The i
 - Type the full width equals sign `＝` in the translations field.
 - Click the `Apply and save` button.
 
-After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`. While you're at it, you can also add the key sequence `yo` to obtain the Japanese symbol `ょ` for the Yoneda embedding.
+After completing these steps, you can type `\=` in order to obtain the
+full width equals sign `＝`. While you're at it, you can also add the
+key sequence `yo` to obtain the Japanese symbol `ょ` for the Yoneda
+embedding.
 
-**Warning**: This library uses unicode characters extensively, so it is important to use a font family with wide support for these.
-For example, the infix whiskering operators `_·l_` and `_·r_` use the symbol `·` ("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`)
-as opposed to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙` ("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`).
-If these look the same in your editor, we suggest that you change your font.
+### 80 character limit
+
+The `agda-unimath` library maintains an 80 character limit
+on the length of lines in the source code. This limit is to improve
+readability, both in your programming environment and on our website.
+Emacs has an option to display a line marking the 80th column.
+This option can be enabled by adding
+
+```elisp
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+```
+
+to your `.emacs` file.
+
+### Note on the library's use of unicode characters
+
+This library makes extensive use of unicode characters.
+It is therefore important to use a font family with wide
+support for them.
+For example, we make use of the
+[middle dot](https://www.compart.com/en/unicode/U+00B7) symbol `·`,
+as well as the [bullet operator](https://www.compart.com/en/unicode/U+2219) symbol `∙`, which in some fonts are indistinguishable. If these two symbols look the same in your editor, we suggest that you change your font.
+
 As a suggestion, this website uses the following family of fonts in prioritized order (decreasing) to display Agda code:
 ```css
 Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace

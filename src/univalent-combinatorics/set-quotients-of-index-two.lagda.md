@@ -1,6 +1,8 @@
 #  Set quotients of index 2
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module univalent-combinatorics.set-quotients-of-index-two where
 
 open import foundation.commuting-squares-of-maps
