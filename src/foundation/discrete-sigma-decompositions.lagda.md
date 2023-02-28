@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sigma-decompositions
+open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -51,6 +52,16 @@ module _
     UU (l2 ⊔ l3)
   is-discrete-Σ-Decomposition =
     type-Prop (is-discrete-Prop-Σ-Decomposition)
+
+is-discrete-discrete-Σ-Decomposition :
+  {l1 l2 : Level} {A : UU l1} →
+  is-discrete-Σ-Decomposition (discrete-Σ-Decomposition l2 A)
+is-discrete-discrete-Σ-Decomposition = λ x → is-contr-raise-unit
+
+type-is-discrete-Σ-Decomposition :
+  {l1 l2 l3 : Level} {A : UU l1} → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+type-is-discrete-Σ-Decomposition {l1} {l2} {l3} {A} =
+  type-subtype (is-discrete-Prop-Σ-Decomposition {l1} {l2} {l3} {A})
 ```
 
 ## Propositions
@@ -85,5 +96,21 @@ module _
             ( right-inverse-law-equiv
               ( equiv-pr1 ( λ _ → is-contr-raise-unit)))))))
       ( eq-is-contr is-contr-raise-unit)
+
+is-contr-type-is-discrete-Σ-Decomposition :
+  {l1 l2 : Level} {A : UU l1} →
+  is-contr (type-is-discrete-Σ-Decomposition {l1} {l1} {l2} {A})
+pr1 ( is-contr-type-is-discrete-Σ-Decomposition {l1} {l2} {A}) =
+  ( discrete-Σ-Decomposition l2 A , is-discrete-discrete-Σ-Decomposition)
+pr2 ( is-contr-type-is-discrete-Σ-Decomposition {l1} {l2} {A}) =
+  ( λ x →
+    eq-type-subtype
+      ( is-discrete-Prop-Σ-Decomposition)
+      ( inv
+        ( eq-equiv-Σ-Decomposition
+          ( pr1 x)
+          ( discrete-Σ-Decomposition l2 A)
+          ( equiv-discrete-is-discrete-Σ-Decomposition (pr1 x) (pr2 x)))))
+
 ```
 
