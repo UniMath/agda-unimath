@@ -7,6 +7,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -21,52 +22,68 @@ open import foundation.universe-levels
 
 ```agda
 module _
-  {l1 : Level} (A : UU l1)
+  {l1 : Level} (l2 : Level) (A : UU l1)
   where
 
   discrete-Σ-Decomposition :
-    Σ-Decomposition l1 lzero A
+    Σ-Decomposition l1 l2 A
   pr1 discrete-Σ-Decomposition = A
-  pr1 (pr2 discrete-Σ-Decomposition) a = ( unit , unit-trunc-Prop star)
-  pr2 (pr2 discrete-Σ-Decomposition) = inv-equiv (equiv-pr1 λ _ → is-contr-unit)
+  pr1 (pr2 discrete-Σ-Decomposition) a =
+    ( raise-unit l2 , unit-trunc-Prop (raise-star))
+  pr2 (pr2 discrete-Σ-Decomposition) =
+    inv-equiv
+      ( equiv-pr1
+        ( λ _ →
+          is-contr-raise-unit))
 
 module _
   {l1 l2 l3 : Level} {A : UU l1}
   (D : Σ-Decomposition l2 l3 A)
   where
 
+  is-discrete-Prop-Σ-Decomposition : Prop (l2 ⊔ l3)
+  is-discrete-Prop-Σ-Decomposition =
+    Π-Prop
+      ( indexing-type-Σ-Decomposition D)
+      ( λ x → is-contr-Prop (cotype-Σ-Decomposition D x))
+
   is-discrete-Σ-Decomposition :
     UU (l2 ⊔ l3)
   is-discrete-Σ-Decomposition =
-    (x : indexing-type-Σ-Decomposition D) → is-contr (cotype-Σ-Decomposition D x)
+    type-Prop (is-discrete-Prop-Σ-Decomposition)
 ```
 
 ## Propositions
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1}
+  {l1 l2 l3 l4 : Level} {A : UU l1}
   (D : Σ-Decomposition l2 l3 A)
   (is-discrete : is-discrete-Σ-Decomposition D)
   where
 
   equiv-discrete-is-discrete-Σ-Decomposition :
-    equiv-Σ-Decomposition D (discrete-Σ-Decomposition A)
+    equiv-Σ-Decomposition D (discrete-Σ-Decomposition l4 A)
   pr1 equiv-discrete-is-discrete-Σ-Decomposition =
     ( inv-equiv
       ( right-unit-law-Σ-is-contr is-discrete ∘e
         matching-correspondence-Σ-Decomposition D ))
   pr1 (pr2 equiv-discrete-is-discrete-Σ-Decomposition) x =
-    ( terminal-map , is-equiv-terminal-map-is-contr (is-discrete x) )
+    ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
+      is-equiv-comp
+        ( map-equiv (compute-raise-unit l4))
+        ( terminal-map)
+        ( is-equiv-terminal-map-is-contr (is-discrete x))
+        ( is-equiv-map-equiv ( compute-raise-unit l4)))
   pr2 (pr2 equiv-discrete-is-discrete-Σ-Decomposition) a =
     eq-pair-Σ
-      ( ap ( λ f → map-equiv f a)
+      (  ap ( λ f → map-equiv f a)
         ( ( left-inverse-law-equiv
             ( equiv-pr1 is-discrete ∘e
               matching-correspondence-Σ-Decomposition D))  ∙
         ( ( inv
             ( right-inverse-law-equiv
-              ( equiv-pr1 ( λ _ → is-contr-unit)))))))
-      ( eq-is-contr is-contr-unit)
+              ( equiv-pr1 ( λ _ → is-contr-raise-unit)))))))
+      ( eq-is-contr is-contr-raise-unit)
 ```
 

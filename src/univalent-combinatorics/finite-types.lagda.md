@@ -220,6 +220,12 @@ abstract
   is-finite-unit : is-finite unit
   is-finite-unit = is-finite-count count-unit
 
+abstract
+  is-finite-raise-unit :
+    {l1 : Level} → is-finite (raise-unit l1)
+  is-finite-raise-unit {l1} =
+    is-finite-equiv (compute-raise-unit l1) is-finite-unit
+
 unit-𝔽 : 𝔽 lzero
 pr1 unit-𝔽 = unit
 pr2 unit-𝔽 = is-finite-unit
