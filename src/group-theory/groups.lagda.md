@@ -337,7 +337,7 @@ module _
   is-unit-left-div-eq-Group refl = left-inverse-law-mul-Group G _
 ```
 
-### Two eleemnts `x` and `y` are equal iff `xy⁻¹=1`
+### Two elements `x` and `y` are equal iff `xy⁻¹=1`
 
 ```agda
   eq-is-unit-right-div-Group :

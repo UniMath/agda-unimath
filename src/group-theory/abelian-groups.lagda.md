@@ -18,6 +18,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -171,6 +172,26 @@ module _
 
   neg-zero-Ab : neg-Ab zero-Ab ＝ zero-Ab
   neg-zero-Ab = inv-unit-Group group-Ab
+```
+
+### Conjugation in an abelian group
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  equiv-conjugation-Ab : (x : type-Ab A) → type-Ab A ≃ type-Ab A
+  equiv-conjugation-Ab = equiv-conjugation-Group (group-Ab A)
+
+  conjugation-Ab : (x : type-Ab A) → type-Ab A → type-Ab A
+  conjugation-Ab = conjugation-Group (group-Ab A)
+
+  equiv-conjugation-Ab' : (x : type-Ab A) → type-Ab A ≃ type-Ab A
+  equiv-conjugation-Ab' = equiv-conjugation-Group' (group-Ab A)
+
+  conjugation-Ab' : (x : type-Ab A) → type-Ab A → type-Ab A
+  conjugation-Ab' = conjugation-Group' (group-Ab A)
 ```
 
 ## Properties
@@ -332,6 +353,221 @@ module _
   is-zero-is-idempotent-Ab = is-unit-is-idempotent-Group (group-Ab A)
 ```
 
+### Taking negatives of elements of an abelian group is an equivalence
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-equiv-neg-Ab : is-equiv (neg-Ab A)
+  is-equiv-neg-Ab = is-equiv-inv-Group (group-Ab A)
+
+  equiv-equiv-neg-Ab : type-Ab A ≃ type-Ab A
+  equiv-equiv-neg-Ab = equiv-equiv-inv-Group (group-Ab A)  
+```
+
+### Two elements `x` and `y` are equal iff `-x + y = 0`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  eq-is-zero-left-subtraction-Ab :
+    {x y : type-Ab A} →
+    is-zero-Ab A (left-subtraction-Ab A x y) → x ＝ y
+  eq-is-zero-left-subtraction-Ab =
+    eq-is-unit-left-div-Group (group-Ab A)
+
+  is-zero-left-subtraction-Ab :
+    {x y : type-Ab A} →
+    x ＝ y → is-zero-Ab A (left-subtraction-Ab A x y)
+  is-zero-left-subtraction-Ab = is-unit-left-div-eq-Group (group-Ab A)
+```
+
+### Two elements `x` and `y` are equal iff `x - y = 0`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  eq-is-zero-right-subtraction-Ab :
+    {x y : type-Ab A} →
+    is-zero-Ab A (right-subtraction-Ab A x y) → x ＝ y
+  eq-is-zero-right-subtraction-Ab =
+    eq-is-unit-right-div-Group (group-Ab A)
+
+  is-zero-right-subtraction-eq-Ab :
+    {x y : type-Ab A} →
+    x ＝ y → is-zero-Ab A (right-subtraction-Ab A x y)
+  is-zero-right-subtraction-eq-Ab =
+    is-unit-right-div-eq-Group (group-Ab A)
+```
+
+### The negative of `-x + y` is `-y + x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  neg-left-subtraction-Ab :
+    (x y : type-Ab A) →
+    neg-Ab A (left-subtraction-Ab A x y) ＝ left-subtraction-Ab A y x
+  neg-left-subtraction-Ab = inv-left-div-Group (group-Ab A)
+```
+
+### The negative of `x - y` is `y - x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  neg-right-subtraction-Ab :
+    (x y : type-Ab A) →
+    neg-Ab A (right-subtraction-Ab A x y) ＝ right-subtraction-Ab A y x
+  neg-right-subtraction-Ab = inv-right-div-Group (group-Ab A)
+```
+
+### The sum of `-x + y` and `-y + z` is `-x + z`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  add-left-subtraction-Ab :
+    (x y z : type-Ab A) →
+    add-Ab A (left-subtraction-Ab A x y) (left-subtraction-Ab A y z) ＝
+    left-subtraction-Ab A x z
+  add-left-subtraction-Ab = mul-left-div-Group (group-Ab A)
+```
+
+### The sum of `x - y` and `y - z` is `x - z`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  add-right-subtraction-Ab :
+    (x y z : type-Ab A) →
+    add-Ab A (right-subtraction-Ab A x y) (right-subtraction-Ab A y z) ＝
+    right-subtraction-Ab A x z
+  add-right-subtraction-Ab = mul-right-div-Group (group-Ab A)
+```
+
+### Conjugation is the identity function
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-identity-conjugation-Ab :
+    (x : type-Ab A) → conjugation-Ab A x ~ id
+  is-identity-conjugation-Ab x y =
+    ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
+    ( isretr-add-neg-Ab' A x y)
+```
+
+### Laws for conjugation and addition
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  htpy-conjugation-Ab :
+    (x : type-Ab A) →
+    conjugation-Ab' A x ~ conjugation-Ab A (neg-Ab A x)
+  htpy-conjugation-Ab = htpy-conjugation-Group (group-Ab A)
+
+  htpy-conjugation-Ab' :
+    (x : type-Ab A) →
+    conjugation-Ab A x ~ conjugation-Ab' A (neg-Ab A x)
+  htpy-conjugation-Ab' = htpy-conjugation-Group' (group-Ab A)
+
+  conjugation-zero-Ab :
+    (x : type-Ab A) → conjugation-Ab A x (zero-Ab A) ＝ zero-Ab A
+  conjugation-zero-Ab = conjugation-unit-Group (group-Ab A)
+
+  right-conjugation-law-add-Ab :
+    (x y : type-Ab A) →
+    add-Ab A (neg-Ab A x) (conjugation-Ab A x y) ＝
+    right-subtraction-Ab A y x
+  right-conjugation-law-add-Ab =
+    right-conjugation-law-mul-Group (group-Ab A)
+
+  right-conjugation-law-add-Ab' :
+    (x y : type-Ab A) →
+    add-Ab A x (conjugation-Ab' A x y) ＝ add-Ab A y x
+  right-conjugation-law-add-Ab' =
+    right-conjugation-law-mul-Group' (group-Ab A)
+
+  left-conjugation-law-add-Ab :
+    (x y : type-Ab A) →
+    add-Ab A (conjugation-Ab A x y) x ＝ add-Ab A x y
+  left-conjugation-law-add-Ab =
+    left-conjugation-law-mul-Group (group-Ab A)
+
+  left-conjugation-law-add-Ab' :
+    (x y : type-Ab A) →
+    add-Ab A (conjugation-Ab' A x y) (neg-Ab A x) ＝
+    left-subtraction-Ab A x y
+  left-conjugation-law-add-Ab' =
+    left-conjugation-law-mul-Group' (group-Ab A)
+
+  distributive-conjugation-add-Ab :
+    (x y z : type-Ab A) →
+    conjugation-Ab A x (add-Ab A y z) ＝
+    add-Ab A (conjugation-Ab A x y) (conjugation-Ab A x z)
+  distributive-conjugation-add-Ab =
+    distributive-conjugation-mul-Group (group-Ab A)
+
+  conjugation-neg-Ab :
+    (x y : type-Ab A) →
+    conjugation-Ab A x (neg-Ab A y) ＝ neg-Ab A (conjugation-Ab A x y)
+  conjugation-neg-Ab = conjugation-inv-Group (group-Ab A)
+
+  conjugation-neg-Ab' :
+    (x y : type-Ab A) →
+    conjugation-Ab' A x (neg-Ab A y) ＝
+    neg-Ab A (conjugation-Ab' A x y)
+  conjugation-neg-Ab' = conjugation-inv-Group' (group-Ab A)
+
+  conjugation-left-subtraction-Ab :
+    (x y : type-Ab A) →
+    conjugation-Ab A x (left-subtraction-Ab A x y) ＝
+    right-subtraction-Ab A y x
+  conjugation-left-subtraction-Ab =
+    conjugation-left-div-Group (group-Ab A)
+
+  conjugation-left-subtraction-Ab' :
+    (x y : type-Ab A) →
+    conjugation-Ab A y (left-subtraction-Ab A x y) ＝
+    right-subtraction-Ab A y x
+  conjugation-left-subtraction-Ab' =
+    conjugation-left-div-Group' (group-Ab A)
+
+  conjugation-right-subtraction-Ab :
+    (x y : type-Ab A) →
+    conjugation-Ab' A y (right-subtraction-Ab A x y) ＝
+    left-subtraction-Ab A y x
+  conjugation-right-subtraction-Ab =
+    conjugation-right-div-Group (group-Ab A)
+
+  conjugation-right-subtraction-Ab' :
+    (x y : type-Ab A) →
+    conjugation-Ab' A x (right-subtraction-Ab A x y) ＝
+    left-subtraction-Ab A y x
+  conjugation-right-subtraction-Ab' =
+    conjugation-right-div-Group' (group-Ab A)
+```
+
 ### Addition of a list of elements in an abelian group
 
 ```agda
@@ -346,5 +582,6 @@ module _
     (l1 l2 : list (type-Ab A)) →
     Id ( add-list-Ab (concat-list l1 l2))
        ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
-  preserves-concat-add-list-Ab = preserves-concat-mul-list-Group (group-Ab A)
+  preserves-concat-add-list-Ab =
+    preserves-concat-mul-list-Group (group-Ab A)
 ```
