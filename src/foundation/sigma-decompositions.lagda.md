@@ -6,13 +6,16 @@ module foundation.sigma-decompositions where
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equality-dependent-function-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
 open import foundation.functions
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -21,8 +24,10 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport
+open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
@@ -336,7 +341,7 @@ module _
   (X : Σ-Decomposition l2 l3 A) (Y : Σ-Decomposition l4 l5 A)
   (e : equiv-Σ-Decomposition X Y)
   where
-  
+
   equiv-indexing-type-equiv-Σ-Decomposition :
     indexing-type-Σ-Decomposition X ≃ indexing-type-Σ-Decomposition Y
   equiv-indexing-type-equiv-Σ-Decomposition = pr1 e
@@ -358,7 +363,7 @@ module _
     cotype-Σ-Decomposition Y (map-equiv-indexing-type-equiv-Σ-Decomposition x)
   map-equiv-cotype-equiv-Σ-Decomposition x =
     map-equiv (equiv-cotype-equiv-Σ-Decomposition x)
-  
+
 module _
   {l1 l2 l3 : Level} {A : UU l1} (X : Σ-Decomposition l2 l3 A)
   where

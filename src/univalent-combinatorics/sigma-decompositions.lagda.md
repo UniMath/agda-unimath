@@ -5,14 +5,17 @@ module univalent-combinatorics.sigma-decompositions where
 
 open import foundation.sigma-decompositions public
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
@@ -144,7 +147,6 @@ is-finite-base-type-Σ-Decomposition-𝔽 D =
       ( λ x → is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 D x)))
 ```
 
-
 ### Characterization of the equality of finite Σ-Decompositions
 
 ```agda
@@ -208,25 +210,24 @@ module _
   pr2 (emb-Σ-Decomposition-Σ-Decomposition-𝔽) =
     is-emb-Σ-Decomposition-Σ-Decomposition-𝔽
 
-module _
+equiv-Σ-Decomposition-𝔽 :
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1}
+  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l4 l5 A) →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+equiv-Σ-Decomposition-𝔽 X Y =
+  equiv-Σ-Decomposition
+    ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
+    ( Σ-Decomposition-Σ-Decomposition-𝔽 Y)
+
+extensionality-Σ-Decomposition-𝔽 :
   {l1 l2 l3 : Level} {A : UU l1}
-  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l2 l3 A)
-  where
-
-  equiv-Σ-Decomposition-𝔽 :
-    UU (l1 ⊔ l2 ⊔ l3 )
-  equiv-Σ-Decomposition-𝔽 =
-    equiv-Σ-Decomposition
-      ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
-      ( Σ-Decomposition-Σ-Decomposition-𝔽 Y)
-
-  extensionality-Σ-Decomposition-𝔽 :
-    (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽
-  extensionality-Σ-Decomposition-𝔽 =
-     extensionality-Σ-Decomposition
-       ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
-       ( Σ-Decomposition-Σ-Decomposition-𝔽 Y) ∘e
-     equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-𝔽)
+  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l2 l3 A) →
+  (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽 X Y
+extensionality-Σ-Decomposition-𝔽 X Y =
+   extensionality-Σ-Decomposition
+     ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
+     ( Σ-Decomposition-Σ-Decomposition-𝔽 Y) ∘e
+   equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-𝔽)
 ```
 
 ### Iterated finite Σ-Decomposition
