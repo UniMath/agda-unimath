@@ -1,5 +1,6 @@
 #  Stabilizers of concrete group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.stabilizer-groups-concrete-group-actions where
 
@@ -20,6 +21,7 @@ open import group-theory.orbits-concrete-group-actions
 open import group-theory.subgroups-concrete-groups
 open import group-theory.transitive-concrete-group-actions
 ```
+</details>
 
 ## Idea
 

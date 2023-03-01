@@ -1,5 +1,6 @@
 #  Propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.propositions where
 
@@ -17,6 +18,7 @@ open import foundation-core.universe-levels
 
 open import foundation.contractible-types
 ```
+</details>
 
 ### Propositions are (k+1)-truncated for any k
 

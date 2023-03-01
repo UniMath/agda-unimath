@@ -1,5 +1,6 @@
 #  The universal property of propositional truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-propositional-truncation where
 
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-maps
 open import foundation-core.functoriality-dependent-pair-types
 ```
+</details>
 
 ## Idea
 

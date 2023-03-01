@@ -1,5 +1,6 @@
 #  Raising universe levels
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.raising-universe-levels where
 
@@ -12,6 +13,7 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

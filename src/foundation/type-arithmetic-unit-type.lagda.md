@@ -1,5 +1,6 @@
 #  Type arithmetic with the unit type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-unit-type where
 
@@ -15,6 +16,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 

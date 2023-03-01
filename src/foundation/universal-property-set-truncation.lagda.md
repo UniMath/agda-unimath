@@ -1,5 +1,6 @@
 #  The universal property of set truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-set-truncation where
 
@@ -23,6 +24,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 

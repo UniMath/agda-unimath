@@ -1,5 +1,6 @@
 #  Walks in undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.walks-undirected-graphs where
 
@@ -27,6 +28,7 @@ open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

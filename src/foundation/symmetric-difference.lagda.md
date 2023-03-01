@@ -1,5 +1,6 @@
 #  Symmetric difference of subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-difference where
 
@@ -17,6 +18,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.xor
 ```
+</details>
 
 ## Idea
 

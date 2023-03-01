@@ -1,5 +1,6 @@
 #  Unordered pairs of elements in a type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-pairs where
 
@@ -30,6 +31,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

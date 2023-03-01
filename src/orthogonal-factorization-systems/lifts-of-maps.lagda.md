@@ -1,5 +1,6 @@
 # Lifts of maps
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.lifts-of-maps where
 
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Equality of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equality-dependent-pair-types where
 
@@ -12,6 +13,7 @@ open import foundation-core.universe-levels
 
 open import foundation.identity-types
 ```
+</details>
 
 ## Properties
 

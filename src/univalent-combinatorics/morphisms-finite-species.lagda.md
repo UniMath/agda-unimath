@@ -1,5 +1,6 @@
 #  Morphisms of finite species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.morphisms-finite-species where
 
@@ -21,6 +22,7 @@ open import univalent-combinatorics.morphisms-species
 
 open import univalent-combinatorics.equality-finite-types
 ```
+</details>
 
 ## Idea
 

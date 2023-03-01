@@ -1,5 +1,6 @@
 #  Iterating functions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-functions where
 
@@ -29,6 +30,7 @@ open import univalent-combinatorics.standard-finite-types
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

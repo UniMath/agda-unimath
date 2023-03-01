@@ -1,5 +1,6 @@
 #  Morphisms of directed graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.morphisms-directed-graphs where
 
@@ -20,6 +21,7 @@ open import foundation.unordered-pairs
 
 open import graph-theory.directed-graphs
 ```
+</details>
 
 ## Definitions
 

@@ -1,5 +1,6 @@
 #  Propositional truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.propositional-truncations where
 
@@ -21,6 +22,7 @@ open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Idea
 

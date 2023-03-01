@@ -1,5 +1,6 @@
 #  Congruence relations on groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-groups where
 
@@ -17,6 +18,7 @@ open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

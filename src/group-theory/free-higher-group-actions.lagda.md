@@ -1,5 +1,6 @@
 #  Free higher group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.free-higher-group-actions where
 
@@ -12,6 +13,7 @@ open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 open import group-theory.orbits-higher-group-actions
 ```
+</details>
 
 ## Idea
 

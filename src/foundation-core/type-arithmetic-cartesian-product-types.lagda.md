@@ -1,5 +1,6 @@
 #  Type arithmetic for cartesian product types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.type-arithmetic-cartesian-product-types where
 
@@ -13,6 +14,7 @@ open import foundation-core.identity-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

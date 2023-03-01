@@ -1,5 +1,6 @@
 # Identity types
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -10,6 +11,7 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

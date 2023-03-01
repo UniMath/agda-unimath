@@ -1,5 +1,6 @@
 # Functoriality of the type of vectors
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-vectors where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 ```
+</details>
 
 ## Idea
 

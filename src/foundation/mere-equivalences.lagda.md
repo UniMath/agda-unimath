@@ -1,5 +1,6 @@
 #  Mere equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.mere-equivalences where
 
@@ -15,6 +16,7 @@ open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

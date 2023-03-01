@@ -1,5 +1,6 @@
 #  The circle
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.circle where
 
@@ -30,6 +31,7 @@ open import structured-types.pointed-types
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
 ```
+</details>
 
 ## Postulates
 

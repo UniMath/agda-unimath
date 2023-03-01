@@ -1,5 +1,6 @@
 #  Group solver
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.group-solver where
 
@@ -19,6 +20,7 @@ open import foundation.decidable-types
 open import foundation.coproduct-types
 open import group-theory.groups
 ```
+</details>
 
 
 ## Idea

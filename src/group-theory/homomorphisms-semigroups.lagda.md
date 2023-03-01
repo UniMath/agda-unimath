@@ -1,5 +1,6 @@
 #  Homomorphisms of semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-semigroups where
 
@@ -17,6 +18,7 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

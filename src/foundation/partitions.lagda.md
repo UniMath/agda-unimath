@@ -1,5 +1,6 @@
 #  Partitions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.partitions where
 
@@ -35,6 +36,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

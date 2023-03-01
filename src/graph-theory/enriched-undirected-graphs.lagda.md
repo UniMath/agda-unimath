@@ -1,5 +1,6 @@
 #  Enriched undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.enriched-undirected-graphs where
 
@@ -17,6 +18,7 @@ open import graph-theory.undirected-graphs
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Iterating involutions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-involutions where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definition
 

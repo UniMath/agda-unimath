@@ -1,5 +1,6 @@
 #  Modular arithmetic on the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
 
@@ -27,6 +28,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definitions
 

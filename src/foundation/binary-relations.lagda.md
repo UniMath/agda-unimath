@@ -1,5 +1,6 @@
 #  Binary relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-relations where
 
@@ -16,6 +17,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.subtypes
 open import foundation.univalence
 ```
+</details>
 
 ## Idea
 

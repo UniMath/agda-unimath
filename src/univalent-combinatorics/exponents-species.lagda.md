@@ -1,5 +1,6 @@
 #  Exponents of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.exponents-species where
 
@@ -14,6 +15,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.species
 ```
+</details>
 
 ## Idea
 

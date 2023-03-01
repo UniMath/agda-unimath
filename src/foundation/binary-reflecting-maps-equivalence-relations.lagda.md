@@ -1,5 +1,6 @@
 # Binary reflecting maps of equivalence relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-reflecting-maps-equivalence-relations where
 
@@ -17,6 +18,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

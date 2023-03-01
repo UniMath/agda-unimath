@@ -1,5 +1,6 @@
 #  The symmetric identity types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-identity-types where
 
@@ -23,6 +24,7 @@ open import foundation.unordered-pairs
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

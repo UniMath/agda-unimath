@@ -1,5 +1,6 @@
 #  The binomial coefficients
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.binomial-coefficients where
 
@@ -13,6 +14,7 @@ open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  The image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.images where
 
@@ -26,6 +27,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Cartesian products of semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.cartesian-products-semigroups where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

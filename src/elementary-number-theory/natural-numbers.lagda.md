@@ -1,5 +1,6 @@
 #  The type of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.natural-numbers where
 
@@ -23,6 +24,7 @@ open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

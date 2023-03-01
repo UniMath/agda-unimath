@@ -2,9 +2,6 @@
 
 ```agda
 module linear-algebra where
-```
-
-```agda
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-vectors public
 open import linear-algebra.diagonal-matrices-on-rings public

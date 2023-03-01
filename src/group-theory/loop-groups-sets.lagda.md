@@ -1,5 +1,6 @@
 #  Concrete automorphism groups on sets
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.loop-groups-sets where
 
@@ -29,6 +30,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 open import group-theory.symmetric-groups
 ```
+</details>
 
 ## Idea
 

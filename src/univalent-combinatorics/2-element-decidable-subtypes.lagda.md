@@ -1,5 +1,6 @@
 #  2-element decidable subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-decidable-subtypes where
 
@@ -45,6 +46,7 @@ open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

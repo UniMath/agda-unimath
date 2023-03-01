@@ -1,5 +1,6 @@
 #  Complements of subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.complements-subtypes where
 
@@ -14,6 +15,7 @@ open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

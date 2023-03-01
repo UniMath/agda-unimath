@@ -1,5 +1,6 @@
 #  Propositional maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.propositional-maps where
 
@@ -15,6 +16,7 @@ open import foundation.embeddings
 open import foundation.logical-equivalences
 open import foundation.truncated-maps
 ```
+</details>
 
 ## Properties
 

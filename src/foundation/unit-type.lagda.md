@@ -1,5 +1,6 @@
 #  The unit type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unit-type where
 
@@ -18,6 +19,7 @@ open import foundation.raising-universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

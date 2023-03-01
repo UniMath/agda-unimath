@@ -1,5 +1,6 @@
 #  The abstract quaternion group of order 8
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.abstract-quaternion-group where
 
@@ -25,6 +26,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

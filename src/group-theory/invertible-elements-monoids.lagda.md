@@ -1,5 +1,6 @@
 #  Invertible elements in monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.invertible-elements-monoids where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

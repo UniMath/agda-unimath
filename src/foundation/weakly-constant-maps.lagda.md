@@ -1,5 +1,6 @@
 #  Weakly constant maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.weakly-constant-maps where
 
@@ -9,6 +10,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

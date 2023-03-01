@@ -1,5 +1,6 @@
 #  Decidable subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-subtypes where
 
@@ -23,6 +24,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

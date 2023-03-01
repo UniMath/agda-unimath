@@ -1,5 +1,6 @@
 #  Subterminal types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.subterminal-types where
 
@@ -12,6 +13,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

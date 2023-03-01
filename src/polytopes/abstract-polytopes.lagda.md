@@ -1,5 +1,6 @@
 # Abstract polytopes
 
+<details><summary>Imports</summary>
 ```agda
 module polytopes.abstract-polytopes where
 
@@ -32,6 +33,7 @@ open import order-theory.posets
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

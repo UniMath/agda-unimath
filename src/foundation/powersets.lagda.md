@@ -1,5 +1,6 @@
 #  Powersets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.powersets where
 
@@ -19,6 +20,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 

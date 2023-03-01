@@ -1,5 +1,6 @@
 #  0-Images of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.0-images-of-maps where
 
@@ -13,6 +14,7 @@ open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

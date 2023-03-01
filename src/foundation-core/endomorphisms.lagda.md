@@ -1,5 +1,6 @@
 #  Endomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.endomorphisms where
 
@@ -13,6 +14,7 @@ open import foundation.sets
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

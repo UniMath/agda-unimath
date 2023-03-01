@@ -1,5 +1,6 @@
 #  Ideals in rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.ideals-rings where
 
@@ -28,6 +29,7 @@ open import ring-theory.subsets-rings
 
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Wedges of types
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.wedges-of-pointed-types where
 
@@ -20,6 +21,7 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 
 ```
+</details>
 
 ```agda
 _∨_ :

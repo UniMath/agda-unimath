@@ -1,5 +1,6 @@
 # Maximal chains in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.maximal-chains-preorders where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import order-theory.chains-preorders
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 

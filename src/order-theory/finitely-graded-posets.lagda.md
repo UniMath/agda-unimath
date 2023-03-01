@@ -1,5 +1,6 @@
 # Finitely graded posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.finitely-graded-posets where
 
@@ -30,6 +31,7 @@ open import order-theory.total-posets
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

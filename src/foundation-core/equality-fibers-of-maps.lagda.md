@@ -1,5 +1,6 @@
 #  Equality in the fibers of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.equality-fibers-of-maps where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 

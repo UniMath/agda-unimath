@@ -1,5 +1,6 @@
 #  Quotient groups of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.quotient-groups-concrete-groups where
 
@@ -29,6 +30,7 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ## Idea
 

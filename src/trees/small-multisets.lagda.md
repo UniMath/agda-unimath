@@ -1,5 +1,6 @@
 #  Small multisets
 
+<details><summary>Imports</summary>
 ```agda
 module trees.small-multisets where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import trees.multisets
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

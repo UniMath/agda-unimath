@@ -1,5 +1,6 @@
 #  The Eisenstein integers
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.eisenstein-integers where
 
@@ -22,6 +23,7 @@ open import group-theory.semigroups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

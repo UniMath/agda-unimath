@@ -1,5 +1,6 @@
 #  Equivalence relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.equivalence-relations where
 
@@ -14,6 +15,7 @@ open import foundation-core.equivalences
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

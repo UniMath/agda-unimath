@@ -1,5 +1,6 @@
 #  Logical equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.logical-equivalences where
 
@@ -10,6 +11,7 @@ open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

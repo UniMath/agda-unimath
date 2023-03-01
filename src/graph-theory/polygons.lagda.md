@@ -1,5 +1,6 @@
 #  Polygons
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.polygons where
 
@@ -25,6 +26,7 @@ open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Decidable propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-propositions where
 
@@ -36,6 +37,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

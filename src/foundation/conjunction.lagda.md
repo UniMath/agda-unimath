@@ -1,5 +1,6 @@
 #  Conjunction of propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.conjunction where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
 ```
+</details>
 
 ## Idea
 

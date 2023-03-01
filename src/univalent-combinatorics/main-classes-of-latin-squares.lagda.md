@@ -1,5 +1,6 @@
 #  The groupoid of main classes of Latin squares
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.main-classes-of-latin-squares where
 
@@ -13,6 +14,7 @@ open import univalent-combinatorics.main-classes-of-latin-hypercubes
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

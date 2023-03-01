@@ -1,5 +1,6 @@
 #  Decidability of dependent function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-dependent-function-types where
 
@@ -12,6 +13,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

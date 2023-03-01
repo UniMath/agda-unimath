@@ -1,5 +1,6 @@
 #  Trails in directed graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.trails-directed-graphs where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import graph-theory.directed-graphs
 open import graph-theory.walks-directed-graphs
 ```
+</details>
 
 ## Idea
 

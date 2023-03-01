@@ -1,5 +1,6 @@
 #  The absolute value function on the integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.absolute-value-integers where
 
@@ -19,6 +20,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+</details>
 
 # The absolute value of integers
 

@@ -1,5 +1,6 @@
 #  Ring homomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.homomorphisms-rings where
 
@@ -21,6 +22,7 @@ open import group-theory.homomorphisms-abelian-groups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

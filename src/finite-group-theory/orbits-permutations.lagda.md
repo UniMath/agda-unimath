@@ -1,5 +1,6 @@
 #  Orbits of permutations
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -63,6 +64,7 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

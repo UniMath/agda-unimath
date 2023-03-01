@@ -1,5 +1,6 @@
 #  Inequality of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.inequality-natural-numbers where
 
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 

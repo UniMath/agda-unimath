@@ -1,5 +1,6 @@
 #  Disjunction of propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.disjunction where
 
@@ -15,6 +16,7 @@ open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

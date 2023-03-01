@@ -1,5 +1,6 @@
 #  Lower types in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.lower-types-preorders where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

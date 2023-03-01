@@ -1,5 +1,6 @@
 #  Induction principles on W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.induction-w-types where
 
@@ -18,6 +19,7 @@ open import trees.elementhood-relation-w-types
 open import trees.inequality-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

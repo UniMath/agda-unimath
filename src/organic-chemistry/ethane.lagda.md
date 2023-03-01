@@ -1,5 +1,6 @@
 #  Ethane
 
+<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.ethane where
 
@@ -35,6 +36,7 @@ open import univalent-combinatorics.standard-finite-types
 open import organic-chemistry.alkanes
 open import organic-chemistry.hydrocarbons
 ```
+</details>
 
 ## Idea
 

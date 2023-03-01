@@ -1,5 +1,6 @@
 #  Invertible elements in rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.invertible-elements-rings where
 
@@ -13,6 +14,7 @@ open import group-theory.invertible-elements-monoids
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

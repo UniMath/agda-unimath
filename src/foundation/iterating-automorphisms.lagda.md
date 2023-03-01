@@ -1,5 +1,6 @@
 #  Iterating automorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-automorphisms where
 
@@ -18,6 +19,7 @@ open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

@@ -1,5 +1,6 @@
 #  Path algebra
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.path-algebra where
 
@@ -13,6 +14,7 @@ open import foundation.identity-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

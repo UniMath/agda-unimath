@@ -1,11 +1,13 @@
 #  Multiset coefficients
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiset-coefficients where
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Fiber inclusions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.fiber-inclusions where
 
@@ -28,6 +29,7 @@ open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 

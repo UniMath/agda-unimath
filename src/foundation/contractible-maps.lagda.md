@@ -1,5 +1,6 @@
 #  Contractible maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.contractible-maps where
 
@@ -14,6 +15,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.truncated-maps
 ```
+</details>
 
 ## Properties
 

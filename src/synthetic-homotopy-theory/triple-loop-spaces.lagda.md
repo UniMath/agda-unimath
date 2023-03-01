@@ -1,5 +1,6 @@
 # Triple loop spaces
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.triple-loop-spaces where
 
@@ -13,6 +14,7 @@ open import structured-types.pointed-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
+</details>
 
 ```agda
 module _

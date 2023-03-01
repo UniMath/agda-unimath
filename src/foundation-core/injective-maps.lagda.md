@@ -1,5 +1,6 @@
 #  Injective maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.injective-maps where
 
@@ -16,6 +17,7 @@ open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Symmetric operations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-operations where
 
@@ -22,6 +23,7 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

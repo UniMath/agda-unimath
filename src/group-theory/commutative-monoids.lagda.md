@@ -1,5 +1,6 @@
 # Commutative monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.commutative-monoids where
 
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

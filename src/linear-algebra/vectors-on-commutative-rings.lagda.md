@@ -1,5 +1,6 @@
 # Vectors on commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-commutative-rings where
 
@@ -21,6 +22,7 @@ open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
 ```
+</details>
 
 ## Idea
 

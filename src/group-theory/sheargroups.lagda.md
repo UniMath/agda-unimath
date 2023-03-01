@@ -1,5 +1,6 @@
 #  Sheargroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.sheargroups where
 
@@ -9,6 +10,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

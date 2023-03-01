@@ -1,5 +1,6 @@
 #  The booleans
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.booleans where
 
@@ -23,6 +24,7 @@ open import foundation.unit-type
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

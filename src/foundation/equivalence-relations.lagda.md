@@ -1,5 +1,6 @@
 #  Equivalence relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-relations where
 
@@ -39,6 +40,7 @@ open import foundation.universal-property-set-quotients
 
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Properties
 

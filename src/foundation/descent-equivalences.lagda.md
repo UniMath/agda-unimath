@@ -1,5 +1,6 @@
 #  Descent for equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.descent-equivalences where
 
@@ -14,6 +15,7 @@ open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.pullbacks
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

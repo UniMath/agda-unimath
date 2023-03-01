@@ -1,5 +1,6 @@
 #  Finite choice
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.finite-choice where
 
@@ -37,6 +38,7 @@ open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

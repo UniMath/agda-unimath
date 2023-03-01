@@ -1,5 +1,6 @@
 #  The Goldbach conjecture
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.goldbach-conjecture where
 
@@ -14,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 # The Goldbach Conjecture
 

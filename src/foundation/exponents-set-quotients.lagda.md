@@ -1,5 +1,6 @@
 #  Exponents of set quotients
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -25,6 +26,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

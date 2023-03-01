@@ -1,5 +1,6 @@
 #  Alcohols
 
+<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.alcohols where
 
@@ -14,6 +15,7 @@ open import foundation.unordered-pairs
 open import organic-chemistry.saturated-carbons
 open import organic-chemistry.hydrocarbons
 ```
+</details>
 
 ## Idea
 

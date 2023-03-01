@@ -1,5 +1,6 @@
 #  Radical ideals in rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.radical-ideals-rings where
 
@@ -10,6 +11,7 @@ open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

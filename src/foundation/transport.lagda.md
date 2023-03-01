@@ -1,5 +1,6 @@
 #  Transport
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.transport where
 
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.universal-property-dependent-pair-types
 ```
+</details>
 
 ## Properties
 

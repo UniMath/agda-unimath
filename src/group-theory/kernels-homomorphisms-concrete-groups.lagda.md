@@ -1,5 +1,6 @@
 #  Kernels of homomorphisms of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.kernels-homomorphisms-concrete-groups where
 
@@ -20,6 +21,7 @@ open import group-theory.homomorphisms-concrete-groups
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

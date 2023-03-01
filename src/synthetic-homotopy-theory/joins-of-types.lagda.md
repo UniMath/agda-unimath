@@ -1,5 +1,6 @@
 #  Joins of types
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.joins-of-types where
 
@@ -26,6 +27,7 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 
 ```
+</details>
 
 ## Idea
 

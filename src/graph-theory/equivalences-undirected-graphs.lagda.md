@@ -1,5 +1,6 @@
 #  Equivalences of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.equivalences-undirected-graphs where
 
@@ -22,6 +23,7 @@ open import foundation.unordered-pairs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

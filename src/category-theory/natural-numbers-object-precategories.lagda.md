@@ -1,5 +1,6 @@
 #  Natural numbers object in a precategory
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.natural-numbers-object-precategories where
 
@@ -12,6 +13,7 @@ open import foundation.identity-types
 open import foundation.unique-existence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

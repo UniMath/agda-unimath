@@ -1,5 +1,6 @@
 #  Pointed families of types
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-families-of-types where
 
@@ -8,6 +9,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

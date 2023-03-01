@@ -1,5 +1,6 @@
 #  The induction principle for propositional truncation
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.induction-principle-propositional-truncation where
 
@@ -8,6 +9,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  The greatest common divisor of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.greatest-common-divisor-integers where
 
@@ -22,6 +23,7 @@ open import foundation.logical-equivalences
 open import foundation.universe-levels
 open import foundation.unit-type
 ```
+</details>
 
 # Greatest common divisors of integers
 

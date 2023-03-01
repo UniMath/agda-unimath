@@ -1,5 +1,6 @@
 #  Isolated points
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.isolated-points where
 
@@ -30,6 +31,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

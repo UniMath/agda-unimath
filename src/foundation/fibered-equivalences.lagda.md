@@ -1,5 +1,6 @@
 #  Fibered equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.fibered-equivalences where
 
@@ -20,6 +21,7 @@ open import foundation.fibered-maps
 open import foundation.pullbacks
 open import foundation.slice
 ```
+</details>
 
 ## Idea
 

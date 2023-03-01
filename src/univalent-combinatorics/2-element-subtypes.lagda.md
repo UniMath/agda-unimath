@@ -1,5 +1,6 @@
 #  2-element subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-subtypes where
 
@@ -32,6 +33,7 @@ open import foundation.unordered-pairs
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

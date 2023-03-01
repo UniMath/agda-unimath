@@ -1,5 +1,6 @@
 # Functoriality of matrices
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-matrices where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices
 ```
+</details>
 
 ## Idea
 

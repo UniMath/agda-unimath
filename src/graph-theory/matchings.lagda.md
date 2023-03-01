@@ -1,5 +1,6 @@
 #  Matchings
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.matchings where
 
@@ -18,6 +19,7 @@ open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Cartesian products of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cartesian-products-species where
 
@@ -15,6 +16,7 @@ open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.exponents-species
 ```
+</details>
 
 ## Idea
 

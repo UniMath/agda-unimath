@@ -1,5 +1,6 @@
 #  Necklaces
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.necklaces where
 
@@ -20,6 +21,7 @@ open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

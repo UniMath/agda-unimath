@@ -5,6 +5,7 @@ Elisabeth Bonnevier, 31 May 2022.
 Egbert Rijke, 31 August 2022.
 Szumie Xie, 31 August 2022.
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equational-reasoning where
 
@@ -17,6 +18,7 @@ open import foundation-core.logical-equivalences
 open import foundation-core.universe-levels
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

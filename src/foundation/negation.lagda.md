@@ -1,5 +1,6 @@
 #  Negation
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.negation where
 
@@ -13,6 +14,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

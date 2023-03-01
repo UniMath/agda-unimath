@@ -1,5 +1,6 @@
 #  The precategory of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.precategory-of-concrete-groups where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
 ```
+</details>
 
 ## Definitions
 

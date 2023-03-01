@@ -1,5 +1,6 @@
 #  Finitely cyclic maps
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.finitely-cyclic-maps where
 
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 # Finitely cyclic maps
 

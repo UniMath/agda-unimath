@@ -1,5 +1,6 @@
 #  The natural numbers base k
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.finitary-natural-numbers where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 # The finitary natural numbers
 

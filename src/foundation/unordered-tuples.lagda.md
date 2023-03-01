@@ -1,5 +1,6 @@
 #  Unordered n-tuples of elements in a type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-tuples where
 
@@ -25,6 +26,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Equivalences
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -15,6 +16,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

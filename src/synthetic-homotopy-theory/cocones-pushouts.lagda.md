@@ -1,5 +1,6 @@
 #  Cocones for pushouts
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.cocones-pushouts where
 
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

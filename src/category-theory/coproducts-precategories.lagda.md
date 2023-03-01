@@ -1,5 +1,6 @@
 #  Coproducts in precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.coproducts-precategories where
 
@@ -12,6 +13,7 @@ open import foundation.propositions
 open import foundation.unique-existence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

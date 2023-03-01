@@ -1,5 +1,6 @@
 #  Categories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.categories where
 
@@ -19,6 +20,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Automorphism groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.automorphism-groups where
 
@@ -26,6 +27,7 @@ open import group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

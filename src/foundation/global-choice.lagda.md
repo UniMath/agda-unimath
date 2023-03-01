@@ -1,5 +1,6 @@
 #  Global choice
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.global-choice where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

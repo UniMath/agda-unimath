@@ -1,5 +1,6 @@
 #  The uniqueness of set quotients
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-set-quotients where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 

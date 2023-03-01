@@ -1,5 +1,6 @@
 #  Functors between large precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.functors-large-precategories where
 
@@ -9,6 +10,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

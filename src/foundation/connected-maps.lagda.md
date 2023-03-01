@@ -1,5 +1,6 @@
 #  Connected maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.connected-maps where
 
@@ -28,6 +29,7 @@ open import foundation.truncations
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

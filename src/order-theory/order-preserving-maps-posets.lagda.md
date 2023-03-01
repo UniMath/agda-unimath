@@ -1,5 +1,6 @@
 #  Order preserving maps on posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.order-preserving-maps-posets where
 
@@ -17,6 +18,7 @@ open import foundation.universe-levels
 open import order-theory.order-preserving-maps-preorders
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 

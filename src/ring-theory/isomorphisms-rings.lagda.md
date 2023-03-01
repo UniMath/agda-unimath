@@ -1,5 +1,6 @@
 #  Isomorphisms of rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.isomorphisms-rings where
 
@@ -28,6 +29,7 @@ open import group-theory.isomorphisms-abelian-groups
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Definition
 

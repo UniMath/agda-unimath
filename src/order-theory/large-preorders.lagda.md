@@ -1,5 +1,6 @@
 #  Large preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.large-preorders where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

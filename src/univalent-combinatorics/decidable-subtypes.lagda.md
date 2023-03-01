@@ -1,5 +1,6 @@
 #  Decidable subtypes of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-subtypes where
 
@@ -23,6 +24,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+</details>
 
 ## Definitions
 

@@ -1,5 +1,6 @@
 #  Pointed maps
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-maps where
 
@@ -13,6 +14,7 @@ open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

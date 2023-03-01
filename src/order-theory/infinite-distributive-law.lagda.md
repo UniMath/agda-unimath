@@ -1,5 +1,6 @@
 # Infinite distributive law 
 
+<details><summary>Imports</summary>
 ```agda
 
 module order-theory.infinite-distributive-law where
@@ -18,6 +19,7 @@ open import order-theory.sup-lattices
 open import order-theory.meet-semilattices
 
 ```
+</details>
 
 ## Idea
 Let A be a poset that has all binary meets and arbitrary joins (which we call sups).

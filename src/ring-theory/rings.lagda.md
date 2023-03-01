@@ -1,5 +1,6 @@
 #  Rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.rings where
 
@@ -30,6 +31,7 @@ open import ring-theory.semirings
 
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 

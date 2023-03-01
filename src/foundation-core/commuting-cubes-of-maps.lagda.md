@@ -1,5 +1,6 @@
 #  Commuting cubes of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.commuting-cubes-of-maps where
 
@@ -13,6 +14,7 @@ open import foundation-core.universe-levels
 
 open import foundation.hexagons-of-identifications
 ```
+</details>
 
 ## Idea
 

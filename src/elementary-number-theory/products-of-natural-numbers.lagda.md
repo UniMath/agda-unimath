@@ -1,5 +1,6 @@
 #  Products of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.products-of-natural-numbers where
 
@@ -11,6 +12,7 @@ open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ```agda
 Π-ℕ : (k : ℕ) → (Fin k → ℕ) → ℕ

@@ -1,5 +1,6 @@
 #  Type arithmetic for dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.type-arithmetic-dependent-pair-types where
 
@@ -14,6 +15,7 @@ open import foundation-core.identity-types
 open import foundation-core.singleton-induction
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

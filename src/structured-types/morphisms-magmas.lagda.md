@@ -1,5 +1,6 @@
 #  Morphisms of magmas
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-magmas where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import structured-types.magmas
 ```
+</details>
 
 ## Idea
 

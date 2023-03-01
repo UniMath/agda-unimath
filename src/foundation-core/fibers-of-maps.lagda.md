@@ -1,5 +1,6 @@
 #  Fibers of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.fibers-of-maps where
 
@@ -12,6 +13,7 @@ open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 

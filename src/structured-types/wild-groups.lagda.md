@@ -1,5 +1,6 @@
 #  Wild groups
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-groups where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-types
 open import structured-types.wild-monoids
 ```
+</details>
 
 ```agda
 is-wild-group-Wild-Monoid :

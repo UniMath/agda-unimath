@@ -1,5 +1,6 @@
 #  Magmas
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.magmas where
 
@@ -15,6 +16,7 @@ open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

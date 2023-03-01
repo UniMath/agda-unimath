@@ -1,5 +1,6 @@
 #  Russell's paradox
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.russells-paradox where
 
@@ -23,6 +24,7 @@ open import trees.multisets
 open import trees.small-multisets
 open import trees.universal-multiset
 ```
+</details>
 
 ## Idea
 

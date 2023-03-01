@@ -1,5 +1,6 @@
 #  Multisets
 
+<details><summary>Imports</summary>
 ```agda
 module trees.multisets where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import trees.elementhood-relation-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

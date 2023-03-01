@@ -1,5 +1,6 @@
 #  Symmetric H-spaces
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.symmetric-h-spaces where
 
@@ -13,6 +14,7 @@ open import structured-types.symmetric-elements-involutive-types
 
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 

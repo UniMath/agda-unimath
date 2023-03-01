@@ -1,5 +1,6 @@
 #  Coproduct types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.coproduct-types where
 
@@ -19,6 +20,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ### The predicates of being in the left and in the right summand
 

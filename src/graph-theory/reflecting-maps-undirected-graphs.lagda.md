@@ -1,5 +1,6 @@
 #  Reflecting maps of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.reflecting-maps-undirected-graphs where
 
@@ -10,6 +11,7 @@ open import foundation.unordered-pairs
 
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

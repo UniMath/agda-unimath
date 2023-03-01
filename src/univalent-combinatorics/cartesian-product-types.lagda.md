@@ -1,5 +1,6 @@
 #  Cartesian products of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cartesian-product-types where
 
@@ -35,6 +36,7 @@ open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

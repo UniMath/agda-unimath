@@ -1,5 +1,6 @@
 #  Contractible types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.contractible-types where
 
@@ -23,6 +24,7 @@ open import foundation.function-extensionality
 open import foundation.unit-type
 open import foundation.subuniverses
 ```
+</details>
 
 ## Definition
 

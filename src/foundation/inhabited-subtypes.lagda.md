@@ -1,5 +1,6 @@
 #  Inhabited subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.inhabited-subtypes where
 
@@ -15,6 +16,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

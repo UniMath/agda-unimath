@@ -1,5 +1,6 @@
 #  Cartier's delooping of the sign homomorphism
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -29,6 +30,7 @@ open import group-theory.symmetric-groups
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

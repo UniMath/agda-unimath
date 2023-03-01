@@ -1,5 +1,6 @@
 #  The rational numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.rational-numbers where
 
@@ -27,6 +28,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

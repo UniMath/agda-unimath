@@ -1,5 +1,6 @@
 #  Composition of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.composition-species where
 
@@ -18,6 +19,7 @@ open import univalent-combinatorics.partitions
 open import univalent-combinatorics.sigma-decompositions
 open import univalent-combinatorics.species
 ```
+</details>
 
 ## Idea
 

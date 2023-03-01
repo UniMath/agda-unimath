@@ -1,5 +1,6 @@
 #  Tight apartness relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.tight-apartness-relations where
 
@@ -14,6 +15,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

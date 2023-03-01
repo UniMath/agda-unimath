@@ -1,5 +1,6 @@
 #  Full subtypes of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.full-subtypes where
 
@@ -14,6 +15,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

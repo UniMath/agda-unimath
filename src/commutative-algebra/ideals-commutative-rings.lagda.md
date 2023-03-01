@@ -1,5 +1,6 @@
 #  Ideals in commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.ideals-commutative-rings where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
 ```
+</details>
 
 ## Idea
 

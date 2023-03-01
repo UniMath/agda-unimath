@@ -1,5 +1,6 @@
 #  Equality of coproduct types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equality-coproduct-types where
 
@@ -23,6 +24,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

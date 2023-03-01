@@ -1,5 +1,6 @@
 #  1-Types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.1-types where
 
@@ -17,6 +18,7 @@ open import foundation-core.universe-levels
 open import foundation.subuniverses
 open import foundation.truncated-types
 ```
+</details>
 
 ### Being a 1-type is a property
 

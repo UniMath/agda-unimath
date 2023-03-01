@@ -1,5 +1,6 @@
 #  Prime numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.prime-numbers where
 
@@ -23,6 +24,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

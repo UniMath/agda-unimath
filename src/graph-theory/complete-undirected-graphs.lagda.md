@@ -1,5 +1,6 @@
 #  Complete undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-undirected-graphs where
 
@@ -10,6 +11,7 @@ open import graph-theory.finite-graphs
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

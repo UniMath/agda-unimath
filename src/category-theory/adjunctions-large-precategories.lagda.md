@@ -1,5 +1,6 @@
 #  Adjunctions between large precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.adjunctions-large-precategories where
 
@@ -12,6 +13,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

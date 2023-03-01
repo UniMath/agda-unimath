@@ -1,5 +1,6 @@
 # Homomorphisms Frames 
 
+<details><summary>Imports</summary>
 ```agda
 
 module order-theory.homomorphisms-frames where
@@ -26,6 +27,7 @@ open import order-theory.homomorphisms-meet-sup-lattices
 open import order-theory.frames
 
 ```
+</details>
 
 ## Idea
 A frame homomorphism is an order preserving map between posets that additionally preserves binary meets and arbitrary joins.

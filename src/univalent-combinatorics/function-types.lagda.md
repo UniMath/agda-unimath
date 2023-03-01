@@ -1,5 +1,6 @@
 #  Finite function types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.function-types where
 
@@ -14,6 +15,7 @@ open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Properties
 

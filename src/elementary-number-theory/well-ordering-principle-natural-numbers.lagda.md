@@ -1,5 +1,6 @@
 #  The Well-Ordering Principle of the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.well-ordering-principle-natural-numbers where
 
@@ -23,6 +24,7 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

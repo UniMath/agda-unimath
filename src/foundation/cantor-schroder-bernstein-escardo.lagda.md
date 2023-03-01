@@ -2,6 +2,7 @@
 
 Contributors: Elif Uskuplu, Egbert Rijke
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.cantor-schroder-bernstein-escardo where
 
@@ -22,6 +23,7 @@ open import foundation.perfect-images
 open import foundation.split-surjective-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Multiplication of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-natural-numbers where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Definition
 

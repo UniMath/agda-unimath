@@ -1,5 +1,6 @@
 #  Binary transport
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-transport where
 
@@ -9,6 +10,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

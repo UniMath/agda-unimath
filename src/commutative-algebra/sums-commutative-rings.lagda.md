@@ -1,5 +1,6 @@
 # Sums in commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.sums-commutative-rings where
 
@@ -21,6 +22,7 @@ open import ring-theory.sums-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

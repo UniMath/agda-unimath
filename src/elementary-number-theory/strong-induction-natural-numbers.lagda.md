@@ -1,5 +1,6 @@
 #  The strong induction principle for the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.strong-induction-natural-numbers where
 
@@ -19,6 +20,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

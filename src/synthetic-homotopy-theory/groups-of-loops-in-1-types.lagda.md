@@ -1,5 +1,6 @@
 # Groups of loops in 1-types
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.groups-of-loops-in-1-types where
 
@@ -16,6 +17,7 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ```agda
 module _

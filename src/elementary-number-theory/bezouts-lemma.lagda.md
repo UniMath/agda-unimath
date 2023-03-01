@@ -1,5 +1,6 @@
 #  Bezout's lemma
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bezouts-lemma where
 
@@ -41,6 +42,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

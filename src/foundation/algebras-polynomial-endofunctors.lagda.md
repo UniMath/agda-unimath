@@ -1,5 +1,6 @@
 #  Algebras for polynomial endofunctors
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.algebras-polynomial-endofunctors where
 
@@ -16,6 +17,7 @@ open import foundation.homotopies
 open import foundation.polynomial-endofunctors
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 

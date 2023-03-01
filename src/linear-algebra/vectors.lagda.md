@@ -1,5 +1,6 @@
 # Vectors
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors where
 
@@ -24,6 +25,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Normal subgroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups where
 
@@ -30,6 +31,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

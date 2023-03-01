@@ -1,5 +1,6 @@
 #  Functoriality of set quotients
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -31,6 +32,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 

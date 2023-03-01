@@ -1,5 +1,6 @@
 #  Type duality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-duality where
 
@@ -32,6 +33,7 @@ open import foundation.universe-levels
 open import foundation-core.fibers-of-maps
 open import foundation-core.injective-maps
 ```
+</details>
 
 ## Idea
 

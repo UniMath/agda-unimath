@@ -1,5 +1,6 @@
 #  The universal property of propositional truncations with respect to sets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-propositional-truncation-into-sets where
 
@@ -17,6 +18,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 ```
+</details>
 
 ## Idea
 

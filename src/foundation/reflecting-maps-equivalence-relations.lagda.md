@@ -1,5 +1,6 @@
 #  Reflecting maps for equivalence relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.reflecting-maps-equivalence-relations where
 
@@ -19,6 +20,7 @@ open import foundation-core.sets
 open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

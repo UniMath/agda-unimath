@@ -1,5 +1,6 @@
 #  Homomorphisms of abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-abelian-groups where
 
@@ -19,6 +20,7 @@ open import group-theory.homomorphisms-semigroups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Coherently invertible maps
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 
 open import foundation.commuting-squares-of-identifications
 ```
+</details>
 
 ## Idea
 

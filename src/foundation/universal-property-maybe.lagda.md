@@ -1,5 +1,6 @@
 #  The universal property of maybe
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-maybe where
 
@@ -15,6 +16,7 @@ open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

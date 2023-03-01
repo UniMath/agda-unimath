@@ -1,5 +1,6 @@
 # Homomorphisms Sup Lattices 
 
+<details><summary>Imports</summary>
 ```agda
 
 module order-theory.homomorphisms-sup-lattices where
@@ -20,6 +21,7 @@ open import order-theory.sup-lattices
 open import order-theory.order-preserving-maps-posets
 
 ```
+</details>
 
 ## Idea
 A sup lattice homomorphism is a order preserving map between the underlying posets that additionally preserves sups (or arbitrary joins of subsets). 

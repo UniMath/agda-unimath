@@ -1,5 +1,6 @@
 #  The distance between integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.distance-integers where
 
@@ -13,6 +14,7 @@ open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.unit-type 
 ```
+</details>
 
 ## Idea
 

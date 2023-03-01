@@ -1,5 +1,6 @@
 #  The law of excluded middle
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.law-of-excluded-middle where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 

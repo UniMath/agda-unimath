@@ -1,5 +1,6 @@
 #  Unordered tuples of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-tuples-of-types where
 
@@ -17,6 +18,7 @@ open import foundation.unordered-tuples
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

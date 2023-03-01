@@ -1,5 +1,6 @@
 #  Divisibility of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-natural-numbers where
 
@@ -17,6 +18,7 @@ open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 # Divisibility on the natural numbers
 

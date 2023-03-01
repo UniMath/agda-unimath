@@ -1,5 +1,6 @@
 #  The univalence axiom
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.univalence where
 
@@ -16,6 +17,7 @@ open import foundation-core.universe-levels
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 ```
+</details>
 
 ## Idea
 

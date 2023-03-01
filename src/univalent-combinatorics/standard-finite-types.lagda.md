@@ -1,5 +1,6 @@
 #  The standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.standard-finite-types where
 
@@ -28,6 +29,7 @@ open import foundation.universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Monomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.monomorphisms where
 
@@ -14,6 +15,7 @@ open import foundation.propositions
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

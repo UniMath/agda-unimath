@@ -1,5 +1,6 @@
 #  Commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.commutative-rings where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

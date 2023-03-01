@@ -1,5 +1,6 @@
 #  Subuniverse
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.subuniverses where
 
@@ -17,6 +18,7 @@ open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.univalence
 ```
+</details>
 
 ## Idea
 

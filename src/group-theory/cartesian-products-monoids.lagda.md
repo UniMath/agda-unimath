@@ -1,5 +1,6 @@
 #  Cartesian products of monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.cartesian-products-monoids where
 
@@ -13,6 +14,7 @@ open import group-theory.cartesian-products-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

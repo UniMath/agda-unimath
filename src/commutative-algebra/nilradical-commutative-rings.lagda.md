@@ -1,5 +1,6 @@
 #  Nilradical of a commutative ring
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.nilradical-commutative-rings where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import ring-theory.nilpotent-elements-rings
 ```
+</details>
 
 ## Idea
 

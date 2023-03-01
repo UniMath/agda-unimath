@@ -1,5 +1,6 @@
 #  Dirichlet convolution
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.dirichlet-convolution where
 
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Definition
 

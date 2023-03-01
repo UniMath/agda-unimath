@@ -1,5 +1,6 @@
 #  Retracts of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.retracts-of-finite-types where
 
@@ -23,6 +24,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Properties
 

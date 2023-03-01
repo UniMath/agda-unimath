@@ -1,6 +1,7 @@
 # Truncation levels
 
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.truncation-levels where
 
@@ -11,6 +12,7 @@ open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.truncation-levels public
 ```
+</details>
 
 ## Definitions
 

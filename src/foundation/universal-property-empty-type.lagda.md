@@ -1,5 +1,6 @@
 #  The universal property of the empty type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-empty-type where
 
@@ -12,6 +13,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 

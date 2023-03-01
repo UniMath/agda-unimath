@@ -1,5 +1,6 @@
 # Vectors on semirings
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-semirings where
 
@@ -28,6 +29,7 @@ open import ring-theory.semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

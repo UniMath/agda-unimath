@@ -1,5 +1,6 @@
 #  Standard apartness relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.standard-apartness-relations where
 
@@ -14,6 +15,7 @@ open import foundation.negation
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

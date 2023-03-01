@@ -1,6 +1,7 @@
 # Methane
 
 
+<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.methane where
 
@@ -23,6 +24,7 @@ open import graph-theory.walks-undirected-graphs using (refl-walk-Undirected-Gra
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+</details>
 ## Idea
 
 **Methane** is the simpliest hydrocarbon, and the first alkane.

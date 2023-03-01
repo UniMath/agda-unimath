@@ -1,5 +1,6 @@
 #  Walks in directed graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.walks-directed-graphs where
 
@@ -23,6 +24,7 @@ open import graph-theory.directed-graphs
 open import graph-theory.equivalences-directed-graphs
 open import graph-theory.morphisms-directed-graphs
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  The W-type of the type of propositions
 
+<details><summary>Imports</summary>
 ```agda
 module trees.w-type-of-propositions where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 open import trees.extensional-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

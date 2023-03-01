@@ -1,5 +1,6 @@
 #  Type arithmetic for coproduct types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-coproduct-types where
 
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

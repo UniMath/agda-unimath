@@ -1,5 +1,6 @@
 #  Homomorphisms of generated subgroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-generated-subgroups where
 
@@ -31,6 +32,7 @@ open import group-theory.subgroups-generated-by-subsets-groups
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

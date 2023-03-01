@@ -1,5 +1,6 @@
 #  Contractible maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.contractible-maps where
 
@@ -13,6 +14,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

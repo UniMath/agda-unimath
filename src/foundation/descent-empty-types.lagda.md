@@ -1,5 +1,6 @@
 #  Descent for the empty type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.descent-empty-types where
 
@@ -9,6 +10,7 @@ open import foundation-core.empty-types
 open import foundation-core.pullbacks
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Theorem
 

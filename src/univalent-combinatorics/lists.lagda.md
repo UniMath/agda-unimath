@@ -1,5 +1,6 @@
 #  Lists
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.lists where
 
@@ -28,6 +29,7 @@ open import foundation.universe-levels
 
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

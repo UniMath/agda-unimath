@@ -1,5 +1,6 @@
 # Loop spaces
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.loop-spaces where
 
@@ -14,6 +15,7 @@ open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
+</details>
 
 ## Idea
 

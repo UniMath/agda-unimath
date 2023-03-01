@@ -1,5 +1,6 @@
 #  endomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.endomorphisms where
 
@@ -17,6 +18,7 @@ open import group-theory.semigroups
 
 open import structured-types.wild-monoids
 ```
+</details>
 
 ## Idea
 

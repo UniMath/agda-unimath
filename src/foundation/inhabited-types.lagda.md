@@ -1,5 +1,6 @@
 #  Inhabited types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.inhabited-types where
 
@@ -15,6 +16,7 @@ open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

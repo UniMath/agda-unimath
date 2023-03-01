@@ -1,5 +1,6 @@
 #  Sequences of elements in finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.sequences-finite-types where
 
@@ -20,6 +21,7 @@ open import foundation.sequences
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Surjective maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.surjective-maps where
 
@@ -37,6 +38,7 @@ open import foundation.universal-property-propositional-truncation
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
+</details>
 
 ## Idea
 

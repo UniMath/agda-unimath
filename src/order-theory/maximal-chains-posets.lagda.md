@@ -1,5 +1,6 @@
 # Maximal chains in posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.maximal-chains-posets where
 
@@ -10,6 +11,7 @@ open import order-theory.chains-posets
 open import order-theory.maximal-chains-preorders
 open import order-theory.posets
 ```
+</details>
 
 ## Definition
 

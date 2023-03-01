@@ -1,5 +1,6 @@
 # The binomial theorem in commutative semirings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.binomial-theorem-commutative-semirings where
 
@@ -26,6 +27,7 @@ open import ring-theory.binomial-theorem-semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

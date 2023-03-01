@@ -1,5 +1,6 @@
 #  The type theoretic principle of choice
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-theoretic-principle-of-choice where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 

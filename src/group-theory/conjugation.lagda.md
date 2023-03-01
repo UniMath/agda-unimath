@@ -1,5 +1,6 @@
 #  Conjugation in groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.conjugation where
 
@@ -16,6 +17,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 ```
+</details>
 
 ## Idea
 

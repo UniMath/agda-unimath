@@ -1,5 +1,6 @@
 # Lifting squares
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.lifting-squares where
 
@@ -27,6 +28,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
+</details>
 
 ## Idea
 

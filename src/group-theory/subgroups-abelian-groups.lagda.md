@@ -1,5 +1,6 @@
 #  Subgroups of abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups-abelian-groups where
 
@@ -17,6 +18,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
 ```
+</details>
 
 ## Definitions
 

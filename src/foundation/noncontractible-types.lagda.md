@@ -1,5 +1,6 @@
 #  Non-contractible types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.noncontractible-types where
 
@@ -13,6 +14,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

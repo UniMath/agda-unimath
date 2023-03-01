@@ -1,5 +1,6 @@
 #  Cardinalities of sets
 
+<details><summary>Imports</summary>
 ```agda
 module set-theory.cardinalities where
 
@@ -20,6 +21,7 @@ open import foundation.sets
 open import foundation-core.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

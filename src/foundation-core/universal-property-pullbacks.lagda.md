@@ -1,5 +1,6 @@
 #  The universal property of pullbacks
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.universal-property-pullbacks where
 
@@ -15,6 +16,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Definition
 

@@ -1,5 +1,6 @@
 #  Isomorphisms of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-concrete-groups where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-groups
 open import group-theory.precategory-of-concrete-groups
 ```
+</details>
 
 ## Idea
 

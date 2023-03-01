@@ -1,5 +1,6 @@
 #  Dubuc-Penon compact types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.dubuc-penon-compact-types where
 
@@ -8,6 +9,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

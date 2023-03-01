@@ -1,5 +1,6 @@
 #  Reflexive relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.reflexive-relations where
 
@@ -7,6 +8,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

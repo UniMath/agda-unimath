@@ -1,5 +1,6 @@
 #  Decidable subgroups of groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.decidable-subgroups where
 
@@ -25,6 +26,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
 ```
+</details>
 
 ## Idea
 

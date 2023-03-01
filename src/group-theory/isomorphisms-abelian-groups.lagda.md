@@ -1,5 +1,6 @@
 #  Isomorphisms of abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-abelian-groups where
 
@@ -20,6 +21,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 ```
+</details>
 
 ## Idea
 

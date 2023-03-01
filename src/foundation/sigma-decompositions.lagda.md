@@ -1,5 +1,6 @@
 #  Σ-decompositions of types
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification  #-}
 module foundation.sigma-decompositions where
@@ -26,6 +27,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

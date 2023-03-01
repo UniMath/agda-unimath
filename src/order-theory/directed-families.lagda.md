@@ -1,5 +1,6 @@
 #  Directed families in posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.directed-families where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 ```
+</details>
 
 ## Definition
 

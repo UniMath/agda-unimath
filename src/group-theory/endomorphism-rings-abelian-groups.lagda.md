@@ -1,5 +1,6 @@
 #  The endomorphism rings of abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.endomorphism-rings-abelian-groups where
 
@@ -12,6 +13,7 @@ open import group-theory.homomorphisms-abelian-groups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

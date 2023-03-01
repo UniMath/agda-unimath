@@ -1,5 +1,6 @@
 #  Free groups with one generator
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.free-groups-with-one-generator where
 
@@ -26,6 +27,7 @@ open import group-theory.homomorphisms-groups
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+</details>
 
 ## Idea
 

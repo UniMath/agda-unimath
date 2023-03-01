@@ -1,5 +1,6 @@
 #  Shriek of concrete group homomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.shriek-concrete-group-actions where
 
@@ -16,6 +17,7 @@ open import group-theory.homomorphisms-concrete-group-actions
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.substitution-functor-concrete-group-actions
 ```
+</details>
 
 ## Definition
 

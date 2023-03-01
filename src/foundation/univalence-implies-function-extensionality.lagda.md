@@ -1,5 +1,6 @@
 #  The univalence axiom implies function extensionality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.univalence-implies-function-extensionality where
 
@@ -19,6 +20,7 @@ open import foundation-core.function-extensionality
 open import foundation.weak-function-extensionality
 
 ```
+</details>
 
 ## Idea
 

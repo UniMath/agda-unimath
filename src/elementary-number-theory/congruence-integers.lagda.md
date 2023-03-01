@@ -1,5 +1,6 @@
 #  The congruence relations on the integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.congruence-integers where
 
@@ -17,6 +18,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 # The congruence relations on the integers
 

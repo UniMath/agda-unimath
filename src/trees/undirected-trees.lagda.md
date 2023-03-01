@@ -1,5 +1,6 @@
 #  Undirected rees
 
+<details><summary>Imports</summary>
 ```agda
 module trees.undirected-trees where
 
@@ -24,6 +25,7 @@ open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
 ```
+</details>
 
 ## Idea
 

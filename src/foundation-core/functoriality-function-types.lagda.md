@@ -1,5 +1,6 @@
 #  Functoriality of function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.functoriality-function-types where
 
@@ -16,6 +17,7 @@ open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Properties
 

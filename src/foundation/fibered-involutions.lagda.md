@@ -1,5 +1,6 @@
 #  Fibered involutions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.fibered-involutions where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 
 open import foundation.fibered-maps
 ```
+</details>
 
 ## Idea
 

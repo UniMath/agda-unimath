@@ -1,5 +1,6 @@
 #  The Well-Ordering Principle of the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module
   elementary-number-theory.well-ordering-principle-standard-finite-types
@@ -39,6 +40,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Functoriality of coproduct types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-coproduct-types where
 
@@ -29,6 +30,7 @@ open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Double powersets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.double-powersets where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import order-theory.large-posets
 open import order-theory.posets
 ```
+</details>
 
 ## Definitions
 

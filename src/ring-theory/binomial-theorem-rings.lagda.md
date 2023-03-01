@@ -1,5 +1,6 @@
 # The binomial theorem for rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.binomial-theorem-rings where
 
@@ -26,6 +27,7 @@ open import ring-theory.sums-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Commuting cubes of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.commuting-cubes-of-maps where
 
@@ -12,6 +13,7 @@ open import foundation-core.universe-levels
 
 open import foundation.homotopies
 ```
+</details>
 
 ## Properties
 

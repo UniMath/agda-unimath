@@ -1,5 +1,6 @@
 #  Ideals in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.ideals-preorders where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import order-theory.lower-types-preorders
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

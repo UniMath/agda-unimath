@@ -1,5 +1,6 @@
 #  Unordered pairs of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-pairs-of-types where
 
@@ -15,6 +16,7 @@ open import foundation.unordered-pairs
 
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 

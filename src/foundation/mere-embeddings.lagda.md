@@ -1,5 +1,6 @@
 #  Mere embeddings
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.mere-embeddings where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 
 open import order-theory.large-preorders
 ```
+</details>
 
 ## Definition
 

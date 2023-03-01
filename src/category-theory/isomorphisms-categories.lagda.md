@@ -1,5 +1,6 @@
 #  Isomorphisms in categories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.isomorphisms-categories where
 
@@ -17,6 +18,7 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

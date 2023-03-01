@@ -1,5 +1,6 @@
 #  Euclidean division on the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.euclidean-division-natural-numbers where
 
@@ -17,6 +18,7 @@ open import foundation.identity-types
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

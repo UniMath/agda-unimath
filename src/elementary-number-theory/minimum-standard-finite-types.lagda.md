@@ -1,5 +1,6 @@
 #  Minimum on the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.minimum-standard-finite-types where
 
@@ -14,6 +15,7 @@ open import order-theory.greatest-lower-bounds-posets
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

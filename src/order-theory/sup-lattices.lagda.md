@@ -1,5 +1,6 @@
 # Sup Lattices
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.sup-lattices where
 
@@ -15,6 +16,7 @@ open import order-theory.posets
 open import order-theory.least-upper-bounds-posets
 
 ```
+</details>
 
 ## Idea
 A sup lattice is a poset in which every family of elements has a least upperbound.

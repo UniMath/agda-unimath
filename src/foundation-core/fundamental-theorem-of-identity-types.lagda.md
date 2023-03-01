@@ -1,5 +1,6 @@
 #  The fundamental theorem of identity types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.fundamental-theorem-of-identity-types where
 
@@ -13,6 +14,7 @@ open import foundation-core.sections
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Perfect Images
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.perfect-images where
 
@@ -23,6 +24,7 @@ open import foundation.propositions
 open import foundation.propositional-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Decidable equivalence relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-equivalence-relations where
 
@@ -36,6 +37,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

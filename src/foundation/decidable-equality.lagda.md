@@ -1,5 +1,6 @@
 #  Decidable equality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-equality where
 
@@ -23,6 +24,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

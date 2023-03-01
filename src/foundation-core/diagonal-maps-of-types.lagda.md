@@ -1,5 +1,6 @@
 #  Diagonal maps of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.diagonal-maps-of-types where
 
@@ -15,6 +16,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

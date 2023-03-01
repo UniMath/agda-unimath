@@ -1,5 +1,6 @@
 #  Involutions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.involutions where
 
@@ -15,6 +16,7 @@ open import foundation-core.universe-levels
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
 ```
+</details>
 
 ## Idea
 

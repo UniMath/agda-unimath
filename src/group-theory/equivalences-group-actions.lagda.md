@@ -1,5 +1,6 @@
 #  Equivalences of group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-group-actions where
 
@@ -25,6 +26,7 @@ open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
 open import group-theory.symmetric-groups
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 # Powers of elements in semirings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.powers-of-elements-semirings where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import ring-theory.semirings
 ```
+</details>
 
 ## Idea
 

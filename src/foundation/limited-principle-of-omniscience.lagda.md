@@ -1,5 +1,6 @@
 #  The limited principle of omniscience (LPO)
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.limited-principle-of-omniscience where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

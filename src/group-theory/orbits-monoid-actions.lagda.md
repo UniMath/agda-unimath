@@ -1,5 +1,6 @@
 #  The precategory of orbits of a monoid action
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.orbits-monoid-actions where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import group-theory.monoid-actions
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

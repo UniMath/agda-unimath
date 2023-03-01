@@ -1,5 +1,6 @@
 #  Symmetric concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.symmetric-concrete-groups where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Decidability of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-dependent-pair-types where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

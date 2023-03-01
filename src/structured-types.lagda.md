@@ -2,9 +2,6 @@
 
 ```agda
 module structured-types where
-```
-
-```agda
 open import structured-types.central-h-spaces public
 open import structured-types.coherent-h-spaces public
 open import structured-types.constant-maps-pointed-types public

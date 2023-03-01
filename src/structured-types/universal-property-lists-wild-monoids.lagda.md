@@ -1,5 +1,6 @@
 #  The universal property of lists with respect to wild monoids
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.universal-property-lists-wild-monoids where
 
@@ -16,6 +17,7 @@ open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.wild-monoids
 open import structured-types.coherent-h-spaces
 ```
+</details>
 
 ## Idea
 

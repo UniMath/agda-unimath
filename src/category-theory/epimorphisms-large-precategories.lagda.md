@@ -1,5 +1,6 @@
 #  Epimorphism in large precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.epimorphisms-large-precategories where
 
@@ -12,6 +13,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Equivalence induction
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.equivalence-induction where
 
@@ -13,6 +14,7 @@ open import foundation-core.sections
 open import foundation-core.singleton-induction
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

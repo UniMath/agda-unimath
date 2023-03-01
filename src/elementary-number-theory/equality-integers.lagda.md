@@ -1,5 +1,6 @@
 #  Equality of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.equality-integers where
 
@@ -26,6 +27,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.truncations where
 
@@ -26,6 +27,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

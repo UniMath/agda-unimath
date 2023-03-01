@@ -1,5 +1,6 @@
 # Infinite cyclic types
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
@@ -36,6 +37,7 @@ open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.cyclic-types
 ```
+</details>
 
 ```agda
 Infinite-Cyclic-Type : (l : Level) → UU (lsuc l)

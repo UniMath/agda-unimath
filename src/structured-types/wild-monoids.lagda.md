@@ -1,5 +1,6 @@
 #  Wild monoids
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-monoids where
 
@@ -15,6 +16,7 @@ open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

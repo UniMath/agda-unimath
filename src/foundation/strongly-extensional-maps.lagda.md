@@ -1,11 +1,13 @@
 #  Strongly extensional maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.strongly-extensional-maps where
 
 open import foundation.apartness-relations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

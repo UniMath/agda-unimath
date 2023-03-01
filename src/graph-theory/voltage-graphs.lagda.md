@@ -1,5 +1,6 @@
 # Voltage graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.voltage-graphs where
 
@@ -10,6 +11,7 @@ open import graph-theory.directed-graphs
 
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

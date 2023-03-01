@@ -1,5 +1,6 @@
 # Pullback-hom
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.pullback-hom where
 
@@ -15,6 +16,7 @@ open import foundation.morphisms-cospans
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

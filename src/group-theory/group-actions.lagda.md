@@ -1,5 +1,6 @@
 #  Group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.group-actions where
 
@@ -17,6 +18,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.symmetric-groups
 ```
+</details>
 
 ## Idea
 

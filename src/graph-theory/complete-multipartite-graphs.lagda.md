@@ -1,5 +1,6 @@
 #  Complete multipartite graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-multipartite-graphs where
 
@@ -16,6 +17,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+</details>
 
 ## Idea
 

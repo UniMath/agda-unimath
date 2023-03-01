@@ -1,5 +1,6 @@
 #  Anafunctors
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.anafunctors where
 
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

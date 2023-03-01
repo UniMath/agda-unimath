@@ -1,5 +1,6 @@
 #  Equality of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.equality-natural-numbers where
 
@@ -24,6 +25,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 

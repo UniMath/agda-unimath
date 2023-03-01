@@ -1,5 +1,6 @@
 #  Morphisms of coherent H-spaces
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-coherent-h-spaces where
 
@@ -15,6 +16,7 @@ open import group-theory.homomorphisms-semigroups
 open import structured-types.pointed-maps
 open import structured-types.coherent-h-spaces
 ```
+</details>
 
 ## Idea
 

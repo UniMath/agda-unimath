@@ -1,5 +1,6 @@
 # Least upper bounds in posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.least-upper-bounds-posets where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 

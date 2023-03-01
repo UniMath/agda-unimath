@@ -1,5 +1,6 @@
 #  Transpositions
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.transpositions where
 
@@ -46,6 +47,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

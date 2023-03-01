@@ -1,5 +1,6 @@
 #  Isomorphisms of semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-semigroups where
 
@@ -22,6 +23,7 @@ open import group-theory.homomorphisms-semigroups
 open import group-theory.precategory-of-semigroups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

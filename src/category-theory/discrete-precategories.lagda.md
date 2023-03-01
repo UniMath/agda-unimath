@@ -1,5 +1,6 @@
 #  The discrete precategory introduced by any hSet
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.discrete-precategories where
 
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ### Discrete precategories
 

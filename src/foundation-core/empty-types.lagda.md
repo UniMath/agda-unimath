@@ -1,5 +1,6 @@
 #  Empty types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.empty-types where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 
 open import foundation.propositions
 ```
+</details>
 
 ## Idea
 

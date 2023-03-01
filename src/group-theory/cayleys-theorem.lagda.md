@@ -1,5 +1,6 @@
 #  Cayley's theorem
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.cayleys-theorem where
 
@@ -15,6 +16,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.symmetric-groups
 ```
+</details>
 
 ```agda
 module _

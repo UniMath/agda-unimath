@@ -1,5 +1,6 @@
 #  Mere equality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.mere-equality where
 
@@ -14,6 +15,7 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

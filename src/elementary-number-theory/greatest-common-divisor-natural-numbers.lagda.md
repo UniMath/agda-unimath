@@ -1,5 +1,6 @@
 #  The greatest common divisor of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
@@ -26,6 +27,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

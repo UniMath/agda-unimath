@@ -1,5 +1,6 @@
 #  The groupoid of main classes of Latin hypercubes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.main-classes-of-latin-hypercubes where
 
@@ -24,6 +25,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definition
 

@@ -1,5 +1,6 @@
 #  Functoriality of dependent function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-dependent-function-types where
 
@@ -27,6 +28,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 ```
+</details>
 
 ## Idea
 

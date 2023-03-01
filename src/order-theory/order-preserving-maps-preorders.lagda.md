@@ -1,5 +1,6 @@
 #  Order preserving maps on preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.order-preserving-maps-preorders where
 
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

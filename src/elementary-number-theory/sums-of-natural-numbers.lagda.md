@@ -1,5 +1,6 @@
 #  Sums of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.sums-of-natural-numbers where
 
@@ -22,6 +23,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Equivalences between precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.equivalences-precategories where
 
@@ -10,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

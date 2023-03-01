@@ -1,5 +1,6 @@
 #  The maybe modality on finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.maybe where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ```agda
 add-free-point-UU-Fin :

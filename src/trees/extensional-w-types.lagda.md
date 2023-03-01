@@ -1,5 +1,6 @@
 #  Extensional W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.extensional-w-types where
 
@@ -24,6 +25,7 @@ open import foundation.universe-levels
 open import trees.elementhood-relation-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

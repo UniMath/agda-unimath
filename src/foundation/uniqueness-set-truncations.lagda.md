@@ -1,5 +1,6 @@
 #  Uniqueness of set truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-set-truncations where
 
@@ -14,6 +15,7 @@ open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

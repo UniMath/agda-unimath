@@ -1,5 +1,6 @@
 #  Endomorphisms of objects in categories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.endomorphisms-of-objects-categories where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Definition
 

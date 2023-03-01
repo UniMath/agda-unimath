@@ -1,5 +1,6 @@
 #  The category of semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.category-of-semigroups where
 
@@ -15,6 +16,7 @@ open import group-theory.isomorphisms-semigroups
 open import group-theory.precategory-of-semigroups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Impredicative encodings of the logical operations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.impredicative-encodings where
 
@@ -18,6 +19,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

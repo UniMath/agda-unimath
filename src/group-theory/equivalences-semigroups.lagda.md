@@ -1,5 +1,6 @@
 #  Equivalences between semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-semigroups where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

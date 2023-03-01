@@ -1,5 +1,6 @@
 #  Cycles in undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.cycles-undirected-graphs where
 
@@ -12,6 +13,7 @@ open import graph-theory.embeddings-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

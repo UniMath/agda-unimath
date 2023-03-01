@@ -1,5 +1,6 @@
 # Vectors on rings
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-rings where
 
@@ -29,6 +30,7 @@ open import ring-theory.rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

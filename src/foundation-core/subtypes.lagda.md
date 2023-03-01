@@ -1,5 +1,6 @@
 #  Subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.subtypes where
 
@@ -23,6 +24,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

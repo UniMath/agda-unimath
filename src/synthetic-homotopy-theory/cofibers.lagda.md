@@ -1,5 +1,6 @@
 #  Cofibers
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.cofibers where
 
@@ -18,6 +19,7 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Involutions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.involutions where
 
@@ -17,6 +18,7 @@ open import foundation-core.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

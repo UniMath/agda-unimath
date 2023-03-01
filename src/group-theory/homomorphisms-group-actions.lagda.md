@@ -1,5 +1,6 @@
 #  Homomorphisms of group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-group-actions where
 
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 open import group-theory.group-actions
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

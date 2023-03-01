@@ -1,5 +1,6 @@
 #  W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.w-types where
 
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Idea
 

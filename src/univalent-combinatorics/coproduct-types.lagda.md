@@ -1,5 +1,6 @@
 #  Coproducts of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.coproduct-types where
 
@@ -26,6 +27,7 @@ open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

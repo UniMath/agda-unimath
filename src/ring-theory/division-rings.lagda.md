@@ -1,5 +1,6 @@
 #  Division rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.division-rings where
 
@@ -12,6 +13,7 @@ open import ring-theory.invertible-elements-rings
 open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

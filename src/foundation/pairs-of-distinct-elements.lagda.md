@@ -1,5 +1,6 @@
 #  Pairs of distinct elements
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.pairs-of-distinct-elements where
 
@@ -16,6 +17,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Decidable types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-types where
 
@@ -20,6 +21,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

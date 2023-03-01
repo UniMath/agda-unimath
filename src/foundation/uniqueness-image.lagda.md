@@ -1,5 +1,6 @@
 #  Uniqueness of the image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-image where
 
@@ -18,6 +19,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ### Uniqueness of the image
 

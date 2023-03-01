@@ -1,5 +1,6 @@
 #  Equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equivalences where
 
@@ -35,6 +36,7 @@ open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Properties
 

@@ -1,5 +1,6 @@
 #  Singleton induction
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.singleton-induction where
 
@@ -11,6 +12,7 @@ open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Symmetric groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.symmetric-groups where
 
@@ -32,6 +33,7 @@ open import group-theory.opposite-groups
 open import group-theory.semigroups
 open import group-theory.symmetric-concrete-groups
 ```
+</details>
 
 ## Definitions
 

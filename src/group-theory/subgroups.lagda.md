@@ -1,5 +1,6 @@
 #  Subgroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups where
 
@@ -37,6 +38,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+</details>
 
 ## Definitions
 

@@ -1,5 +1,6 @@
 #  Fibered dependent type theories
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --guardedness #-}
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import type-theories.dependent-type-theories
 ```
+</details>
 
 ### Bifibered systems
 

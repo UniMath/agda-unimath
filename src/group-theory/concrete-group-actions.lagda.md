@@ -1,5 +1,6 @@
 #  Concrete group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.concrete-group-actions where
 
@@ -14,6 +15,7 @@ open import group-theory.concrete-groups
 
 open import synthetic-homotopy-theory.circle
 ```
+</details>
 
 ## Idea
 

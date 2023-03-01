@@ -1,5 +1,6 @@
 #  Semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.semigroups where
 
@@ -8,6 +9,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

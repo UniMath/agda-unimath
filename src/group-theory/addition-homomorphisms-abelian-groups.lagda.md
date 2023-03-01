@@ -1,5 +1,6 @@
 #  Pointwise addition of morphisms of abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.addition-homomorphisms-abelian-groups where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 ```
+</details>
 
 ## Idea
 

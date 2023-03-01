@@ -1,6 +1,7 @@
 # Sums of elements in rings
 
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.sums-rings where
 
@@ -23,6 +24,7 @@ open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  The universal propert of cartesian product types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-cartesian-product-types where
 
@@ -18,6 +19,7 @@ open import foundation.unit-type
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

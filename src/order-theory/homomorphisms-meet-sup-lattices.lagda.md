@@ -1,5 +1,6 @@
 # Homomorphisms Meet Sup Lattice 
 
+<details><summary>Imports</summary>
 ```agda
 
 module order-theory.homomorphisms-meet-sup-lattices where
@@ -24,6 +25,7 @@ open import order-theory.homomorphisms-meet-semilattices
 open import order-theory.homomorphisms-sup-lattices
 
 ```
+</details>
 
 ## Idea
 A meet sup lattice homomorphism is an order preserving map between the underlying posets that preserves meets and sup.

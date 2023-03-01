@@ -1,5 +1,6 @@
 #  Alternating groups
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.alternating-groups where
 
@@ -13,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

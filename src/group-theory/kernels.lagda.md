@@ -1,5 +1,6 @@
 #  Kernels
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.kernels where
 
@@ -18,6 +19,7 @@ open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

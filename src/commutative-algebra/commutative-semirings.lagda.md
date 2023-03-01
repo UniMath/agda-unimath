@@ -1,5 +1,6 @@
 #  Commutative semirings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.commutative-semirings where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import ring-theory.semirings
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Orientations of the complete undirected graph
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -617,6 +618,7 @@ module _
             ( map-orientation-complete-undirected-graph-equiv X X' e d'))
           ( P))
 ```
+</details>
 
 ```agda
 module _

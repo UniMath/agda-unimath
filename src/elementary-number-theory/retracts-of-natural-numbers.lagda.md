@@ -1,5 +1,6 @@
 #  Retracts of the type of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.retracts-of-natural-numbers where
 
@@ -10,6 +11,7 @@ open import foundation.decidable-maps
 open import foundation.retractions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

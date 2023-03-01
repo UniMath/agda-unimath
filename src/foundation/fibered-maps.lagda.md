@@ -1,5 +1,6 @@
 #  Maps fibered over a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.fibered-maps where
 
@@ -23,6 +24,7 @@ open import foundation.homotopies
 open import foundation.slice
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 

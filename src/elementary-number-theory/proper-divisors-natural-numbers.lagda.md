@@ -1,5 +1,6 @@
 #  Proper divisors of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.proper-divisors-natural-numbers where
 
@@ -19,6 +20,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

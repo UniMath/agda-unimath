@@ -1,5 +1,6 @@
 #  Totally faithful morphisms of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.totally-faithful-morphisms-undirected-graphs where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

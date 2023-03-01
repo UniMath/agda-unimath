@@ -1,5 +1,6 @@
 #  Pointed homotopies
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-homotopies where
 
@@ -16,6 +17,7 @@ open import structured-types.pointed-families-of-types
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

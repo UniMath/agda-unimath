@@ -1,5 +1,6 @@
 #  Embeddings
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.embeddings where
 
@@ -23,6 +24,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.truncated-maps
 ```
+</details>
 
 ## Properties
 

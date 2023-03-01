@@ -1,5 +1,6 @@
 #  Subgroups of finite groups
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.subgroups-finite-groups where
 
@@ -25,6 +26,7 @@ open import group-theory.subgroups
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

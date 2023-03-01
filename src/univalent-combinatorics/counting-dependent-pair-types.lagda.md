@@ -1,5 +1,6 @@
 #  Counting the elements of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.counting-dependent-pair-types where
 
@@ -32,6 +33,7 @@ open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Isomorphisms of groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-groups where
 
@@ -20,6 +21,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.precategory-of-groups
 ```
+</details>
 
 ## Definitions
 

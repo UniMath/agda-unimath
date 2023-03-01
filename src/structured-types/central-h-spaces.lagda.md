@@ -1,5 +1,6 @@
 #  Central H-spaces
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.central-h-spaces where
 
@@ -8,6 +9,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

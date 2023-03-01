@@ -1,5 +1,6 @@
 #  The sign homomorphism
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.sign-homomorphism where
 
@@ -32,6 +33,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Homotopies
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.homotopies where
 
@@ -18,6 +19,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 

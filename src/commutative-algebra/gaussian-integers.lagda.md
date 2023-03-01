@@ -1,5 +1,6 @@
 #  The Gaussian integers
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.gaussian-integers where
 
@@ -27,6 +28,7 @@ open import group-theory.semigroups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Functoriality of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.functoriality-dependent-pair-types where
 
@@ -14,6 +15,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Equivalence extensionality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-extensionality where
 
@@ -21,6 +22,7 @@ open import foundation.function-extensionality
 open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Characterizing the identity type of equivalences
 

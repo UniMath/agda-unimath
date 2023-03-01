@@ -1,5 +1,6 @@
 #  Decidable propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.decidable-propositions where
 
@@ -20,6 +21,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 

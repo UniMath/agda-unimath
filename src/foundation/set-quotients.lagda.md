@@ -1,5 +1,6 @@
 #  Set quotients
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.set-quotients where
 
@@ -27,6 +28,7 @@ open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definitions
 

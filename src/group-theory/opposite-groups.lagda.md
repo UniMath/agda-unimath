@@ -1,5 +1,6 @@
 #  The opposite of a group
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.opposite-groups where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import group-theory.isomorphisms-groups
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Pullbacks
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.pullbacks where
 
@@ -27,6 +28,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Definitions
 

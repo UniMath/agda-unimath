@@ -1,5 +1,6 @@
 #  Axiom L
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.axiom-l where
 
@@ -22,6 +23,7 @@ open import foundation.univalence
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

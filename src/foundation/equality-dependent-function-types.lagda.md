@@ -1,5 +1,6 @@
 #  Equality on dependent function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equality-dependent-function-types where
 
@@ -12,6 +13,7 @@ open import foundation-core.universe-levels
 
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Idea
 

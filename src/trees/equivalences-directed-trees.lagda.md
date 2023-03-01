@@ -1,5 +1,6 @@
 #  Equivalences of directed trees
 
+<details><summary>Imports</summary>
 ```agda
 module trees.equivalences-directed-trees where
 
@@ -17,6 +18,7 @@ open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 ```
+</details>
 
 ## Definition
 

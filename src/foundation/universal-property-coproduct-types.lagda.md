@@ -1,5 +1,6 @@
 #  The universal property of coproduct types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-coproduct-types where
 
@@ -13,6 +14,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

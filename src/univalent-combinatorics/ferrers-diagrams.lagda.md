@@ -1,5 +1,6 @@
 #  Ferrers diagrams (unlabeled partitions)
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.ferrers-diagrams where
 
@@ -23,6 +24,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 ```
+</details>
 
 ## Idea
 

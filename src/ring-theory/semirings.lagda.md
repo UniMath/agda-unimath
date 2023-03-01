@@ -1,5 +1,6 @@
 #  Semirings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.semirings where
 
@@ -28,6 +29,7 @@ open import group-theory.semigroups
 
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 

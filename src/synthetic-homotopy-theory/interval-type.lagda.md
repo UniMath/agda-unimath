@@ -1,5 +1,6 @@
 # The interval
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.interval-type where
 
@@ -11,6 +12,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

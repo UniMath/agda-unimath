@@ -1,5 +1,6 @@
 #  Equivalences of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences-species where
 
@@ -16,6 +17,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Quotient groups
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -27,6 +28,7 @@ open import group-theory.kernels
 open import group-theory.normal-subgroups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

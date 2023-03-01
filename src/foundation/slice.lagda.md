@@ -1,5 +1,6 @@
 #  Morphisms of the slice category of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.slice where
 
@@ -27,6 +28,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 ```
+</details>
 
 ## Idea
 

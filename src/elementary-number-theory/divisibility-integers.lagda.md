@@ -1,5 +1,6 @@
 #  Divisibility of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-integers where
 
@@ -25,6 +26,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Nil ideals
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.nil-ideals-rings where
 
@@ -10,6 +11,7 @@ open import ring-theory.ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

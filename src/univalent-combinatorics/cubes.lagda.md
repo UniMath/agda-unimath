@@ -1,5 +1,6 @@
 #  Cubes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cubes where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Definitions
 

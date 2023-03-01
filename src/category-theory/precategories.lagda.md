@@ -1,5 +1,6 @@
 #  Precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.precategories where
 
@@ -13,6 +14,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

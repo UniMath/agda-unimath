@@ -1,5 +1,6 @@
 #  Inequality of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.inequality-integers where
 
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 # Inequality on the integers
 

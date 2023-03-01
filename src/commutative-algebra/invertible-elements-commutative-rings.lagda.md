@@ -1,5 +1,6 @@
 #  Invertible elements in commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.invertible-elements-commutative-rings where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

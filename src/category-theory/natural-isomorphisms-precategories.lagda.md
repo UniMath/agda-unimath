@@ -1,5 +1,6 @@
 #  Natural isomorphisms between functors between precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.natural-isomorphisms-precategories where
 
@@ -12,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

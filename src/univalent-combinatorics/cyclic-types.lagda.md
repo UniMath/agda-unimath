@@ -1,5 +1,6 @@
 #  Cyclic types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cyclic-types where
 
@@ -44,6 +45,7 @@ open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

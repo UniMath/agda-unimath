@@ -1,5 +1,6 @@
 #  Suspensions of types
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where
 
@@ -31,6 +32,7 @@ open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
+</details>
 
 ## Definition
 

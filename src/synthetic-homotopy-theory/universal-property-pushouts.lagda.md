@@ -1,5 +1,6 @@
 #  The universal property of pushouts
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.universal-property-pushouts where
 
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-pushouts
 ```
+</details>
 
 ## Definition
 

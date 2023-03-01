@@ -1,5 +1,6 @@
 #  Descent for dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.descent-dependent-pair-types where
 
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Theorem
 

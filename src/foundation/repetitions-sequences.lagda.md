@@ -1,5 +1,6 @@
 #  Repetitions in sequences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.repetitions-sequences where
 
@@ -13,6 +14,7 @@ open import foundation.repetitions
 open import foundation.sequences
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

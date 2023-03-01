@@ -1,5 +1,6 @@
 #  Free loops
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.free-loops where
 
@@ -13,6 +14,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

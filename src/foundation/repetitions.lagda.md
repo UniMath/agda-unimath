@@ -1,5 +1,6 @@
 #  Repetitions of values of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.repetitions where
 
@@ -16,6 +17,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.truncated-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Vertex covers
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.vertex-covers where
 
@@ -19,6 +20,7 @@ open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

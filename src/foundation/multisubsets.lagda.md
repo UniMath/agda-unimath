@@ -1,5 +1,6 @@
 #  Multisubsets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.multisubsets where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

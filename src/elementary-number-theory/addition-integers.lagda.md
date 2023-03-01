@@ -1,5 +1,6 @@
 #  Addition on the integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-integers where
 
@@ -23,6 +24,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+</details>
 
 ## Idea
 

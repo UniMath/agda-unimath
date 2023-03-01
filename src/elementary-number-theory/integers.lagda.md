@@ -1,5 +1,6 @@
 #  The integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.integers where
 
@@ -26,6 +27,7 @@ open import structured-types.types-equipped-with-endomorphisms
 open import structured-types.pointed-types-equipped-with-automorphisms
 
 ```
+</details>
 
 ## Idea
 

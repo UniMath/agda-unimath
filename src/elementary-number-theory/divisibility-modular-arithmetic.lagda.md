@@ -1,5 +1,6 @@
 #  Divisibility in modular arithmetic
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-modular-arithmetic where
 
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.fibers-of-maps
 ```
+</details>
 
 ## Idea
 

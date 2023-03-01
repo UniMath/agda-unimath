@@ -1,5 +1,6 @@
 #  Proper subsets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.proper-subtypes where
 
@@ -9,6 +10,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

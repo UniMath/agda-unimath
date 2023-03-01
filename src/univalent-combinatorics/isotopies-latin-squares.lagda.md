@@ -1,5 +1,6 @@
 #  Isotopies of Latin squares
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.isotopies-latin-squares where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.latin-squares
 ```
+</details>
 
 ## Idea
 

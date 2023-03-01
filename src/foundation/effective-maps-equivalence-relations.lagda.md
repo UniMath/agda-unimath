@@ -1,5 +1,6 @@
 #  Effective maps for equivalence relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.effective-maps-equivalence-relations where
 
@@ -11,6 +12,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

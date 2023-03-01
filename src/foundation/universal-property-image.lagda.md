@@ -1,5 +1,6 @@
 #  The universal property of the image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-image where
 
@@ -26,6 +27,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

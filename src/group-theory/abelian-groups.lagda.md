@@ -1,5 +1,6 @@
 #  Abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.abelian-groups where
 
@@ -22,6 +23,7 @@ open import group-theory.semigroups
 
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 

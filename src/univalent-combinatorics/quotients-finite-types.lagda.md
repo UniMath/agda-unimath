@@ -1,5 +1,6 @@
 #  Quotients of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.quotients-finite-types where
 
@@ -15,6 +16,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

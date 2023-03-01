@@ -1,5 +1,6 @@
 # Decidable propositions
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-propositions where
 
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ### Propositions have countings if and only if they are decidable
 

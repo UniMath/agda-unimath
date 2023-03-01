@@ -1,5 +1,6 @@
 #  Undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.undirected-graphs where
 
@@ -14,6 +15,7 @@ open import foundation.unordered-pairs
 
 open import graph-theory.directed-graphs
 ```
+</details>
 
 ## Idea
 

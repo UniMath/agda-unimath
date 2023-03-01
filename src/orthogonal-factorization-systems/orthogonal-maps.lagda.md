@@ -1,5 +1,6 @@
 # Orthogonal maps
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.orthogonal-maps where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.pullback-hom
 ```
+</details>
 
 ## Idea
 

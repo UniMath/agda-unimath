@@ -1,5 +1,6 @@
 # Subpreorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.subpreorders where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 

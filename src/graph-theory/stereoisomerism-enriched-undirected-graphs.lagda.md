@@ -1,5 +1,6 @@
 #  Stereoisomerism for enriched undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.stereoisomerism-enriched-undirected-graphs where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 ```
+</details>
 
 ## Idea
 
