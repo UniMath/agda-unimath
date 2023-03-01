@@ -19,11 +19,8 @@ two universes.
 ## Definition
 
 ```agda
-free-function-type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-free-function-type l1 l2 = Σ (UU l1) (λ A → Σ (UU l2) (λ B → (A → B)))
-
 function-class : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-function-class l1 l2 l3 = subtype l3 (free-function-type l1 l2)
+function-class l1 l2 l3 = {A : UU l1} {B : UU l2} → (A → B) → Prop l3
 ```
 
 We say a function class is **equivalence closed** if it contains the
@@ -33,7 +30,7 @@ equivalences.
 is-equiv-closed-function-class :
   {l1 l2 l3 : Level} → function-class l1 l2 l3 → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
 is-equiv-closed-function-class {l1} {l2} {l3} c =
-  (A : UU l1) (B : UU l2) (f : A → B) → is-equiv f → type-Prop (c (A , B , f))
+  (A : UU l1) (B : UU l2) (f : A → B) → is-equiv f → type-Prop (c f)
 
 equiv-closed-function-class :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
@@ -49,8 +46,8 @@ is-composition-closed-function-class :
   {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
 is-composition-closed-function-class {l1} {l2} c =
   (A B C : UU l1) (f : A → B) (g : B → C) →
-  type-Prop (c (A , B , f)) → type-Prop (c (B , C , g)) →
-  type-Prop (c (A , C , g ∘ f))
+  type-Prop (c f) → type-Prop (c g) →
+  type-Prop (c (g ∘ f))
 
 composition-closed-function-class :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -68,7 +65,7 @@ is-prop-is-equiv-closed-function-class :
   is-prop (is-equiv-closed-function-class c)
 is-prop-is-equiv-closed-function-class c =
   is-prop-Π λ A → is-prop-Π λ B → is-prop-Π λ f →
-    is-prop-function-type (is-prop-type-Prop (c (A , B , f)))
+    is-prop-function-type (is-prop-type-Prop (c f))
 
 is-equiv-closed-function-class-Prop :
   {l1 l2 l3 : Level} → function-class l1 l2 l3 → Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3)
@@ -88,7 +85,7 @@ is-prop-is-composition-closed-function-class c =
   is-prop-Π λ A → is-prop-Π λ B → is-prop-Π λ C →
     is-prop-Π λ f → is-prop-Π λ g →
       is-prop-function-type (is-prop-function-type
-        ( is-prop-type-Prop (c (A , C , (g ∘ f)))))
+        ( is-prop-type-Prop (c  (g ∘ f))))
 
 is-composition-closed-function-class-Prop :
   {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
