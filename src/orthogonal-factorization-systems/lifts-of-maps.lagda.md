@@ -166,7 +166,8 @@ module _
 
   coherence-htpy-lift :
     (l l' : lift i f) → map-lift i l ~ map-lift i l' → UU (l2 ⊔ l3)
-  coherence-htpy-lift l l' K = (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
+  coherence-htpy-lift l l' K =
+    (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
   
   htpy-lift : (l l' : lift i f) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-lift l l' =
