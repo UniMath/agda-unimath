@@ -4,7 +4,10 @@
 module univalent-combinatorics.inhabited-finite-types where
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
@@ -67,5 +70,21 @@ module _
 
   total-Fam-Inhabited-Types-𝔽 : 𝔽 (l1 ⊔ l2)
   total-Fam-Inhabited-Types-𝔽 = Σ-𝔽 X finite-type-Fam-Inhabited-Types-𝔽
+```
 
+## Proposition
+
+### Equality in inhabited finite types
+
+```agda
+eq-equiv-Inhabited-Type-𝔽 :
+  {l : Level} → (X Y : Inhabited-Type-𝔽 l) →
+  type-Inhabited-Type-𝔽 X ≃ type-Inhabited-Type-𝔽 Y → X ＝ Y
+eq-equiv-Inhabited-Type-𝔽 X Y e =
+  eq-type-subtype
+    ( λ X  → is-inhabited-Prop (type-𝔽 X))
+    ( eq-equiv-𝔽
+      ( finite-type-Inhabited-Type-𝔽 X)
+      ( finite-type-Inhabited-Type-𝔽 Y)
+      ( e))
 ```
