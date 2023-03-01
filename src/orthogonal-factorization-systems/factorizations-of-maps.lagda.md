@@ -6,24 +6,12 @@ module orthogonal-factorization-systems.factorizations-of-maps where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.small-types
 open import foundation.structure-identity-principle
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.extensions-of-maps
 ```
 
 ## Idea
