@@ -219,15 +219,23 @@ equiv-Σ-Decomposition-𝔽 X Y =
     ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
     ( Σ-Decomposition-Σ-Decomposition-𝔽 Y)
 
-extensionality-Σ-Decomposition-𝔽 :
+module _
   {l1 l2 l3 : Level} {A : UU l1}
-  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l2 l3 A) →
-  (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽 X Y
-extensionality-Σ-Decomposition-𝔽 X Y =
-   extensionality-Σ-Decomposition
-     ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
-     ( Σ-Decomposition-Σ-Decomposition-𝔽 Y) ∘e
-   equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-𝔽)
+  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l2 l3 A)
+  where
+
+  extensionality-Σ-Decomposition-𝔽 :
+    (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽 X Y
+  extensionality-Σ-Decomposition-𝔽 =
+    extensionality-Σ-Decomposition
+      ( Σ-Decomposition-Σ-Decomposition-𝔽 X)
+      ( Σ-Decomposition-Σ-Decomposition-𝔽 Y) ∘e
+    equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-𝔽)
+
+  eq-equiv-Σ-Decomposition-𝔽 :
+    equiv-Σ-Decomposition-𝔽 X Y → (X ＝ Y)
+  eq-equiv-Σ-Decomposition-𝔽 =
+    map-inv-equiv (extensionality-Σ-Decomposition-𝔽)
 ```
 
 ### Iterated finite Σ-Decomposition

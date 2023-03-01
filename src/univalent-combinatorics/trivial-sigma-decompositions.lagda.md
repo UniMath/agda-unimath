@@ -11,8 +11,10 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -28,18 +30,18 @@ module _
   {l1 : Level} (l2 : Level) (A : UU l1) (is-finite-A : is-finite A)
   where
 
-  trivial-Σ-Decomposition-𝔽-inhabited :
+  trivial-inhabited-Σ-Decomposition-𝔽 :
     (p : is-inhabited A) → Σ-Decomposition-𝔽 l2 l1 A
-  trivial-Σ-Decomposition-𝔽-inhabited p =
+  trivial-inhabited-Σ-Decomposition-𝔽 p =
     map-Σ-Decomposition-𝔽-subtype-is-finite
-      ( ( trivial-Σ-Decomposition-inhabited l2 A p) ,
+      ( ( trivial-inhabited-Σ-Decomposition l2 A p) ,
         ( is-finite-raise-unit , λ x → is-finite-A))
 
-  trivial-Σ-Decomposition-𝔽-empty :
+  trivial-empty-Σ-Decomposition-𝔽 :
     (p : is-empty A) → Σ-Decomposition-𝔽 lzero lzero A
-  trivial-Σ-Decomposition-𝔽-empty p =
+  trivial-empty-Σ-Decomposition-𝔽 p =
     map-Σ-Decomposition-𝔽-subtype-is-finite
-      ( ( trivial-Σ-Decomposition-empty l2 A p) ,
+      ( ( trivial-empty-Σ-Decomposition l2 A p) ,
         ( is-finite-is-empty id ,
           λ x → ex-falso x))
 
@@ -57,6 +59,18 @@ module _
     UU (l2)
   is-trivial-Σ-Decomposition-𝔽 =
     type-Prop (is-trivial-Prop-Σ-Decomposition-𝔽)
+
+is-trivial-trivial-inhabited-Σ-Decomposition-𝔽 :
+  {l1 l2 : Level} {A : UU l1} (is-finite-A : is-finite A) (p : is-inhabited A) →
+  is-trivial-Σ-Decomposition-𝔽
+    ( trivial-inhabited-Σ-Decomposition-𝔽 l2 A is-finite-A p)
+is-trivial-trivial-inhabited-Σ-Decomposition-𝔽 is-finite-A p =
+  is-trivial-trivial-inhabited-Σ-Decomposition p
+
+type-trivial-Σ-Decomposition-𝔽 :
+  {l1 l2 l3 : Level} {A : UU l1} → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+type-trivial-Σ-Decomposition-𝔽 {l1} {l2} {l3} {A}=
+  type-subtype (is-trivial-Prop-Σ-Decomposition-𝔽 {l1} {l2} {l3} {A})
 ```
 
 ## Propositions
@@ -71,7 +85,7 @@ module _
   equiv-trivial-is-trivial-Σ-Decomposition-𝔽 :
     equiv-Σ-Decomposition-𝔽
       ( D)
-      ( trivial-Σ-Decomposition-𝔽-inhabited
+      ( trivial-inhabited-Σ-Decomposition-𝔽
         ( l4)
         ( A)
         ( is-finite-base-type-Σ-Decomposition-𝔽 D)
@@ -82,4 +96,21 @@ module _
     equiv-trivial-is-trivial-Σ-Decomposition
       ( Σ-Decomposition-Σ-Decomposition-𝔽 D)
       ( is-trivial)
+
+is-contr-type-trivial-Σ-Decomposition-𝔽 :
+  {l1 l2 : Level} {A : UU l1} →
+  (is-finite-A : is-finite A) (p : is-inhabited A) →
+  is-contr (type-trivial-Σ-Decomposition-𝔽 {l1} {l2} {l1} {A})
+pr1 ( is-contr-type-trivial-Σ-Decomposition-𝔽 {l1} {l2} {A} is-finite-A p) =
+  ( trivial-inhabited-Σ-Decomposition-𝔽 l2 A is-finite-A p ,
+    is-trivial-trivial-inhabited-Σ-Decomposition-𝔽 is-finite-A p)
+pr2 ( is-contr-type-trivial-Σ-Decomposition-𝔽 {l1} {l2} {A} is-finite-A p) =
+   ( λ x →
+     eq-type-subtype
+       ( is-trivial-Prop-Σ-Decomposition-𝔽)
+       ( inv
+         ( eq-equiv-Σ-Decomposition-𝔽
+           ( pr1 x)
+           ( trivial-inhabited-Σ-Decomposition-𝔽 l2 A is-finite-A p)
+           ( equiv-trivial-is-trivial-Σ-Decomposition-𝔽 (pr1 x) (pr2 x)))))
 ```
