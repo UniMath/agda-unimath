@@ -84,6 +84,25 @@ module _
     A → Σ indexing-type-Σ-Decomposition cotype-Σ-Decomposition
   map-matching-correspondence-Σ-Decomposition =
     map-equiv matching-correspondence-Σ-Decomposition
+
+  is-inhabited-indexing-type-inhabited-Σ-Decomposition :
+    (p : is-inhabited A) → (is-inhabited (indexing-type-Σ-Decomposition))
+  is-inhabited-indexing-type-inhabited-Σ-Decomposition p =
+    map-Inhabited-Type (pr1 ∘ map-matching-correspondence-Σ-Decomposition) p
+
+  inhabited-indexing-type-inhabited-Σ-Decomposition :
+    (p : is-inhabited A) → (Inhabited-Type l2)
+  pr1 (inhabited-indexing-type-inhabited-Σ-Decomposition p) =
+    indexing-type-Σ-Decomposition
+  pr2 (inhabited-indexing-type-inhabited-Σ-Decomposition p) =
+    is-inhabited-indexing-type-inhabited-Σ-Decomposition p
+
+  is-inhabited-base-is-inhabited-indexing-type-Σ-Decomposition :
+    (is-inhabited (indexing-type-Σ-Decomposition)) → (is-inhabited A)
+  is-inhabited-base-is-inhabited-indexing-type-Σ-Decomposition p =
+    map-Inhabited-Type
+      (map-inv-equiv matching-correspondence-Σ-Decomposition)
+      ( is-inhabited-Σ p is-inhabited-cotype-Σ-Decomposition)
 ```
 
 ### Set-indexed Σ-decompositions

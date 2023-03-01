@@ -20,8 +20,6 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.sigma-decompositions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-
-open import univalent-combinatorics.general-species
 ```
 
 ## Idea

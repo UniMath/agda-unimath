@@ -7,6 +7,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -175,6 +176,16 @@ pr2 (Σ-Inhabited-Type X Y) =
   is-inhabited-Σ
     ( is-inhabited-type-Inhabited-Type X)
     ( λ x → is-inhabited-type-Inhabited-Type (Y x))
+```
+
+### Inhabited types are closed under maps
+
+```agda
+
+map-Inhabited-Type :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (f : (A → B)) → is-inhabited A → is-inhabited B
+map-Inhabited-Type f = map-trunc-Prop f
 ```
 
 ## See also
