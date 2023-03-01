@@ -131,15 +131,16 @@ If these look the same in your editor, we suggest that you change your font. For
 ### Horizontal composition of homotopies
 
 ```agda
-htpy-comp-horizontal : 
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {f f' : A → B} {g g' : B → C} → (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
-htpy-comp-horizontal {f' = f'} {g = g} F G = (g ·l F) ∙h (G ·r f')
+  {f f' : A → B} {g g' : B → C}
+  where
 
-htpy-comp-horizontal' : 
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {f f' : A → B} {g g' : B → C} → (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
-htpy-comp-horizontal' {f = f} {g' = g'} F G = (G ·r f) ∙h (g' ·l F)
+  htpy-comp-horizontal : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-comp-horizontal F G = (g ·l F) ∙h (G ·r f')
+
+  htpy-comp-horizontal' : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-comp-horizontal' F G = (G ·r f) ∙h (g' ·l F)
 ```
 
 ### Transposition of homotopies
