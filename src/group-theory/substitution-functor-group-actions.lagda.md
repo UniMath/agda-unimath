@@ -185,7 +185,7 @@ module _
                               ( p'))))
                         ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
                           ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))})})
-  
+
   set-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} → Abstract-Group-Action G l3 →
     Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)

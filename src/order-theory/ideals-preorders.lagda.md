@@ -24,7 +24,7 @@ Ideals in preorders are inhabited lower types `L` that contain an upper bound fo
 module _
   {l1 l2 : Level} (P : Preorder l1 l2)
   where
-  
+
   is-ideal-lower-type-Preorder :
     {l3 : Level} (L : lower-type-Preorder l3 P) → UU (l1 ⊔ l2 ⊔ l3)
   is-ideal-lower-type-Preorder L =

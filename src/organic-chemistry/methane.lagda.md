@@ -1,6 +1,5 @@
 # Methane
 
-
 <details><summary>Imports</summary>
 ```agda
 module organic-chemistry.methane where

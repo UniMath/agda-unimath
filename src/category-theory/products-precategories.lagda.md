@@ -54,7 +54,6 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
   has-all-binary-products : UU (l1 ⊔ l2)
   has-all-binary-products = (x y : obj-Precat C) → product x y
 
-
 module _ {l1 l2 : Level} (C : Precat l1 l2)
   (t : has-all-binary-products C) where
 

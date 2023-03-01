@@ -93,7 +93,7 @@ module _
       ( tot (λ bb' → eq-pair-Σ')) ∘
       ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa'))) ∘
     ( map-canonical-pullback-tot-cone-cone-fam-right-factor)
-  
+
   is-equiv-map-canonical-pullback-tot-cone-cone-family :
     is-equiv map-canonical-pullback-tot-cone-cone-family
   is-equiv-map-canonical-pullback-tot-cone-cone-family =
@@ -153,7 +153,7 @@ module _
             ( c' x)))
         ( triangle-canonical-pullback-tot-cone-cone-family)
         ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
-        ( is-pb-tot)) 
+        ( is-pb-tot))
 
   is-pullback-tot-is-pullback-family :
     is-pullback f g c →

@@ -44,7 +44,7 @@ module _
     is-0-connected classifying-type-symmetric-∞-Group
   is-0-connected-classifying-type-symmetric-∞-Group =
     is-0-connected-component-UU X
-  
+
   symmetric-∞-Group : ∞-Group (lsuc l)
   symmetric-∞-Group =
     pair

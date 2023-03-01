@@ -46,7 +46,6 @@ We write Agda code that allows for such reasoning. The code for equational
 reasoning for equalities and equivalences is based on Martín Escardó's Agda code
 [1,2] and the Agda standard library [3].
 
-
 ## Definitions
 
 ### Equational reasoning for identifications

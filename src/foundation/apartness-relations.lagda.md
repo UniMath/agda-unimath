@@ -137,7 +137,7 @@ module _
 module _
   {l1 l2 l3 : Level} (X : UU l1) (Y : Type-With-Apartness l2 l3)
   where
-  
+
   rel-apart-function-into-Type-With-Apartness :
     Rel-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
   rel-apart-function-into-Type-With-Apartness f g =

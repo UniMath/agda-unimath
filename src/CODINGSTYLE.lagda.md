@@ -11,7 +11,7 @@
 
 ## Names
 
-The naming convention in this library is such that the name of a construction closely matches the type of the construction. For example, the proof that the successor function on the integers is an equivalence has type `is-equiv succ-ℤ`. The name of the proof that the successor function on the integers is an equivalence is therefore `is-equiv-succ-ℤ`. Notice that most names are fully lowercase, and words are separated by hyphens. 
+The naming convention in this library is such that the name of a construction closely matches the type of the construction. For example, the proof that the successor function on the integers is an equivalence has type `is-equiv succ-ℤ`. The name of the proof that the successor function on the integers is an equivalence is therefore `is-equiv-succ-ℤ`. Notice that most names are fully lowercase, and words are separated by hyphens.
 
 Names may also refer to types of the hypotheses used in the construction. Since the first objective of a name is to describe the type of the constructed term, the description of the hypotheses comes after the description of the conclusion in a name. For example, the term `is-equiv-is-contr-map` is a function of type `is-contr-map f → is-equiv f`, where `f` is a function already assumed. This convention has the advantage that if we have `H : is-contr-map f`, then the term `is-equiv-is-contr-map H` contains the description `is-contr-map` closest to the variable `H` of which it is a description.
 
@@ -44,13 +44,13 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 * There should always be a single blank line after a module declaration.
 * The variables of a module should be declared on a new line, with a 2-space indentation level. If the variables don't fit on a single line, they can be declared over multiple lines, grouping the variables together logically.
 * The `where` keyword is positioned on a new line after the variable declarations, with a 2-space indentation level.
-  
+
 ```md
 module _
   {l : Level} (G : Group l)
   where
 ```
-  
+
 ## Layout of `where` blocks
 
 * `where` blocks are preferred rather than the `let` construction.

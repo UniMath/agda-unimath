@@ -46,7 +46,7 @@ module _
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
 ```
 
-### The small precategory of G-sets 
+### The small precategory of G-sets
 
 ```agda
 module _

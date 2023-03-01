@@ -35,7 +35,7 @@ module _
     tr-type-Ω
       ( preserves-point-pointed-map A B f)
       ( ap (map-pointed-map A B f) p)
-  
+
   preserves-refl-map-Ω : Id (map-Ω refl) refl
   preserves-refl-map-Ω = preserves-refl-tr-Ω (pr2 f)
 

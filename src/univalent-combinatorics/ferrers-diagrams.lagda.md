@@ -47,7 +47,7 @@ ferrers-diagram l2 l3 A =
 module _
   {l1 l2 l3 : Level} {A : UU l1} (D : ferrers-diagram l2 l3 A)
   where
-  
+
   row-ferrers-diagram : UU l2
   row-ferrers-diagram = pr1 D
 
@@ -79,7 +79,7 @@ ferrers-diagram-𝔽 {l} l2 l3 A =
 module _
   {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
   where
-  
+
   row-ferrers-diagram-𝔽 : 𝔽 l2
   row-ferrers-diagram-𝔽 = pr1 D
 
@@ -127,7 +127,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} (D : ferrers-diagram l2 l3 A)
   where
-  
+
   equiv-ferrers-diagram :
     {l4 l5 : Level} (E : ferrers-diagram l4 l5 A) → UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
   equiv-ferrers-diagram E =

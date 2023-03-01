@@ -25,7 +25,7 @@ A type is said to be subterminal if it embeds into the unit type. A type is subt
 module _
   {l : Level} (A : UU l)
   where
-  
+
   is-subterminal : UU l
   is-subterminal = is-emb (terminal-map {A = A})
 ```
@@ -38,7 +38,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-subterminal-is-proof-irrelevant :
       is-proof-irrelevant A → is-subterminal A

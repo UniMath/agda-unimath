@@ -860,7 +860,7 @@ neg-succ-Fin (succ-ℕ k) x =
         ( x)
         ( one-Fin k)) ∙
       ( ( ap-add-Fin
-          ( succ-ℕ k) 
+          ( succ-ℕ k)
           ( inv (is-mul-neg-one-neg-Fin k x))
           ( ( inv (is-mul-neg-one-neg-Fin k (one-Fin k))) ∙
             ( is-neg-one-neg-one-Fin k))) ∙
@@ -881,7 +881,7 @@ neg-pred-Fin (succ-ℕ k) x =
         ( x)
         ( neg-one-Fin k)) ∙
       ( ( ap-add-Fin
-          ( succ-ℕ k) 
+          ( succ-ℕ k)
           ( inv (is-mul-neg-one-neg-Fin k x))
           ( ( inv (is-mul-neg-one-neg-Fin k (neg-one-Fin k))) ∙
             ( is-one-neg-neg-one-Fin k))) ∙

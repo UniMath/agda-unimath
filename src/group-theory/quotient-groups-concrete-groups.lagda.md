@@ -39,7 +39,7 @@ Given a normal subgroup `N` of a concrete group `G`, the quotient group `G/N` is
 The quotient `G/N` can be constructed in several ways.
 
 1. We can construct `G/N` as the type of `G`-sets merely equivalent to the coset action of `N`. Since this construction is reminiscent of the torsor construction of BG, we call this the **standard construction** of `G/N`.
-2. We can construct `G/N` as the 0-image of the coset action `N : BG → U`. We call this the **0-image construction** of `G/N`. 
+2. We can construct `G/N` as the 0-image of the coset action `N : BG → U`. We call this the **0-image construction** of `G/N`.
 
 ## Definitions
 

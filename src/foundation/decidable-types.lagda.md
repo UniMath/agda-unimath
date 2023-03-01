@@ -60,7 +60,6 @@ is-merely-decidable A = type-trunc-Prop (is-decidable A)
 
 ## Examples
 
-
 ### The unit type and the empty type are decidable
 
 ```
@@ -147,7 +146,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-decidable-retract-of :
     A retract-of B → is-decidable B → is-decidable A
   is-decidable-retract-of (pair i (pair r H)) (inl b) = inl (r b)

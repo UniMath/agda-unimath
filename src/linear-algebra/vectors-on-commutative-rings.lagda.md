@@ -36,7 +36,7 @@ Vectors on a commutative ring `R` are vectors on the underlying type of `R`. The
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   vec-Commutative-Ring : ℕ → UU l
   vec-Commutative-Ring = vec-Ring (ring-Commutative-Ring R)
 
@@ -118,7 +118,7 @@ module _
 
 ### Pointwise addition of vectors on a commutative ring
 
-#### Pointwise addition of listed vectors on a commutative ring 
+#### Pointwise addition of listed vectors on a commutative ring
 
 ```agda
 module _

@@ -66,7 +66,7 @@ module _
 
   pointed-type-Coherent-H-Space : Pointed-Type l
   pointed-type-Coherent-H-Space = pr1 M
-  
+
   type-Coherent-H-Space : UU l
   type-Coherent-H-Space = type-Pointed-Type pointed-type-Coherent-H-Space
 

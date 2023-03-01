@@ -28,7 +28,7 @@ A trail in an undirected graph is a walk that passes through each edge at most o
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
-  
+
   is-trail-walk-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y →
     UU (lsuc lzero ⊔ l1 ⊔ l2)

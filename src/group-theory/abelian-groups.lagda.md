@@ -56,7 +56,7 @@ Ab l = Σ (Group l) is-abelian-Group
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   group-Ab : Group l
   group-Ab = pr1 A
 
@@ -249,7 +249,7 @@ module _
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   is-idempotent-Ab : type-Ab A → UU l
   is-idempotent-Ab = is-idempotent-Group (group-Ab A)
 
@@ -264,7 +264,7 @@ module _
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   add-list-Ab : list (type-Ab A) → type-Ab A
   add-list-Ab = mul-list-Group (group-Ab A)
 

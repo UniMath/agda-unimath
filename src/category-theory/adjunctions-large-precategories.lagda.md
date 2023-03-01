@@ -31,7 +31,7 @@ G g ∘ _ ∘ f |                        | g ∘ _ ∘ F f
             v                        v
        hom X₂ (G Y₂) --------> hom (F X₂) Y₂
                        ϕ X₂ Y₂
-``` 
+```
 
 In this case we say that `F` is left adjoint to `G` and `G` is right adjoint to `F` and write this as `F ⊣ G`.
 
@@ -152,7 +152,6 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-
   record Adjunction : Setω where
     field
       level-left-adjoint-Adjunction :
@@ -272,7 +271,7 @@ module _
     type-hom-Large-Precat C X (obj-right-adjoint-Adjunction FG Y)
   map-inv-equiv-is-adjoint-pair-Adjunction FG X Y =
     map-inv-equiv (equiv-is-adjoint-pair-Adjunction FG X Y)
-    
+
   naturality-inv-equiv-is-adjoint-pair-Adjunction :
     (FG : Adjunction) {l1 l2 l3 l4 : Level}
     {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}

@@ -144,7 +144,7 @@ module _
 module _
   {l : Level} {X : UU l}
   where
-  
+
   iterate-automorphism-int-ℕ :
     (n : ℕ) (e : Aut X) →
     htpy-equiv (iterate-automorphism-ℕ n e) (iterate-automorphism-ℤ (int-ℕ n) e)

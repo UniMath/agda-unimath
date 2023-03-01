@@ -92,7 +92,7 @@ in-subuniverse-equiv' P e = tr P (inv (eq-equiv _ _ e))
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2)
   where
-  
+
   equiv-subuniverse : (X Y : type-subuniverse P) → UU l1
   equiv-subuniverse X Y = (pr1 X) ≃ (pr1 Y)
 
@@ -142,7 +142,7 @@ fam-subuniverse P X = X → type-subuniverse P
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) {X : UU l3}
   where
-  
+
   equiv-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → UU (l1 ⊔ l3)
   equiv-fam-subuniverse Y Z = (x : X) → equiv-subuniverse P (Y x) (Z x)
@@ -166,7 +166,7 @@ module _
   is-equiv-equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → is-equiv (equiv-eq-fam-subuniverse Y Z)
   is-equiv-equiv-eq-fam-subuniverse Y =
-    fundamental-theorem-id 
+    fundamental-theorem-id
       ( is-contr-total-equiv-fam-subuniverse Y)
       ( equiv-eq-fam-subuniverse Y)
 

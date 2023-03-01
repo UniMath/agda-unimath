@@ -90,7 +90,7 @@ module _
     reflects-Eq-Rel eq-rel-function-type (map-exponent-reflecting-map-Eq-Rel q)
   reflects-exponent-reflecting-map-Eq-Rel q {f} {g} H =
     eq-htpy (λ x → reflects-map-reflecting-map-Eq-Rel R q (H x))
-    
+
   exponent-reflecting-map-Eq-Rel :
     {l4 : Level} {B : UU l4} →
     reflecting-map-Eq-Rel R B →
@@ -106,7 +106,7 @@ module _
     (QR : Set l5) (qR : reflecting-map-Eq-Rel R (type-Set QR))
     (UqR : {l : Level} → is-set-quotient l R QR qR)
     where
-  
+
     unique-inclusion-is-set-quotient-eq-rel-function-type :
       is-contr
         ( Σ ( type-Set Q → (X → type-Set QR))
@@ -339,7 +339,7 @@ module _
       ( hom-Set QR QS)
       ( universal-reflecting-map-is-set-quotient-hom-Eq-Rel
         R QR qR UR S QS qS US)
-          
+
   inclusion-is-set-quotient-hom-Eq-Rel :
     type-hom-Set QH (hom-Set QR QS)
   inclusion-is-set-quotient-hom-Eq-Rel =
@@ -442,7 +442,7 @@ module _
     ( universal-map-set-quotient-hom-Eq-Rel R S)
   triangle-inclusion-set-quotient-hom-Eq-Rel =
     pr2 (center (unique-inclusion-set-quotient-hom-Eq-Rel))
-  
+
   is-emb-inclusion-set-quotient-hom-Eq-Rel :
     is-emb inclusion-set-quotient-hom-Eq-Rel
   is-emb-inclusion-set-quotient-hom-Eq-Rel =
@@ -469,5 +469,4 @@ module _
   pr2 emb-inclusion-set-quotient-hom-Eq-Rel =
     is-emb-inclusion-set-quotient-hom-Eq-Rel
 ```
-          
 

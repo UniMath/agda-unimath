@@ -76,7 +76,7 @@ has-cardinality-type-complement-point-UU-Fin k (pair (pair X H) x) =
           ( ( inv-equiv
               ( equiv-maybe-structure-point-UU-Fin k (pair X H) x)) ∘e
             ( e))))
-  
+
 complement-point-UU-Fin :
   {l1 : Level} (k : ℕ) →
   Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) →

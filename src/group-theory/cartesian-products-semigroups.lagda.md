@@ -24,7 +24,7 @@ The cartesian product of two semigroups `A` and `B` consists of the cartesian pr
 module _
   {l1 l2 : Level} (A : Semigroup l1) (B : Semigroup l2)
   where
-  
+
   set-prod-Semigroup : Set (l1 ⊔ l2)
   set-prod-Semigroup = prod-Set (set-Semigroup A) (set-Semigroup B)
 

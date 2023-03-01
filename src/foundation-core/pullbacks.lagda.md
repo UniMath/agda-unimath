@@ -45,7 +45,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {f : A → X} {g : B → X}
   where
-   
+
   π₁ : canonical-pullback f g → A
   π₁ = pr1
 
@@ -62,7 +62,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   where
-  
+
   cone-canonical-pullback : cone f g (canonical-pullback f g)
   pr1 cone-canonical-pullback = π₁
   pr1 (pr2 cone-canonical-pullback) = π₂
@@ -76,7 +76,7 @@ The gap map of a square is the map fron the vertex of the cone into the canonica
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) 
+  (f : A → X) (g : B → X)
   where
 
   gap : cone f g C → C → canonical-pullback f g
@@ -92,7 +92,7 @@ The proposition is-pullback is the assertion that the gap map is an equivalence.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) 
+  (f : A → X) (g : B → X)
   where
 
   is-pullback : cone f g C → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -178,7 +178,7 @@ module _
   where
 
   abstract
-    universal-property-pullback-canonical-pullback : 
+    universal-property-pullback-canonical-pullback :
       {l : Level} →
       universal-property-pullback l f g (cone-canonical-pullback f g)
     universal-property-pullback-canonical-pullback C =
@@ -195,7 +195,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) 
+  (f : A → X) (g : B → X)
   where
 
   htpy-cone-up-pullback-canonical-pullback :
@@ -211,7 +211,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) 
+  (f : A → X) (g : B → X)
   where
 
   abstract
@@ -250,7 +250,7 @@ module _
 
   canonical-pullback-Σ : UU (l1 ⊔ l3)
   canonical-pullback-Σ = Σ A (λ x → Q (f x))
-  
+
   cone-canonical-pullback-Σ : cone f (pr1 {B = Q}) canonical-pullback-Σ
   pr1 cone-canonical-pullback-Σ = pr1
   pr1 (pr2 cone-canonical-pullback-Σ) = map-Σ-map-base f Q
@@ -262,7 +262,7 @@ module _
     x
   pr2 (inv-gap-cone-canonical-pullback-Σ (pair x (pair (pair .(f x) q) refl))) =
     q
-  
+
   abstract
     issec-inv-gap-cone-canonical-pullback-Σ :
       ( ( gap f (pr1 {B = Q}) cone-canonical-pullback-Σ) ∘
@@ -378,7 +378,7 @@ pr1 (pr2 (fold-cone f g c)) = g ∘ horizontal-map-cone f g c
 pr2 (pr2 (fold-cone f g c)) z = eq-pair (coherence-square-cone f g c z) refl
 
 map-fold-cone :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) → (g : B → X) →
   canonical-pullback f g → canonical-pullback (map-prod f g) (diagonal X)
 pr1 (pr1 (map-fold-cone f g x)) = π₁ x
@@ -387,7 +387,7 @@ pr1 (pr2 (map-fold-cone f g x)) = g (π₂ x)
 pr2 (pr2 (map-fold-cone f g x)) = eq-pair (π₃ x) refl
 
 inv-map-fold-cone :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) → (g : B → X) →
   canonical-pullback (map-prod f g) (diagonal X) → canonical-pullback f g
 inv-map-fold-cone f g (pair (pair a b) (pair x α)) =
@@ -444,7 +444,7 @@ abstract
                 ( ap (λ t → p ∙ (inv t)) (ap-pr2-eq-pair p refl))) ∙
               ( right-unit))) ∙
           ( right-unit)))
-  
+
 abstract
   is-equiv-map-fold-cone :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -642,7 +642,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : A → UU l3}
   (Q : B → UU l4) (f : A → B) (g : (x : A) → (P x) → (Q (f x)))
   where
-  
+
   cone-map-Σ : cone f (pr1 {B = Q}) (Σ A P)
   pr1 cone-map-Σ = pr1
   pr1 (pr2 cone-map-Σ) = map-Σ Q f g
@@ -876,5 +876,5 @@ module _
             ( λ t → map-fib-cone (horizontal-map-cone f g c) h d (pr1 t))
             ( is-fiberwise-equiv-map-fib-cone-is-pullback f g c is-pb-c x)
             ( λ t → is-fiberwise-equiv-map-fib-cone-is-pullback
-              (horizontal-map-cone f g c) h d is-pb-d (pr1 t)))) 
+              (horizontal-map-cone f g c) h d is-pb-d (pr1 t))))
 ```

@@ -113,7 +113,6 @@ We use these lemmas in the following calculation ASDFASD:
 \end{split}
 \end{equation}
 
-
 ```
 module directed-graph-defs-equivalence
   {l1 l2 : Level} where

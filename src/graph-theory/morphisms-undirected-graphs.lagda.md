@@ -89,7 +89,6 @@ module _
   pr2 id-hom-Undirected-Graph p = id
 ```
 
-
 ## Properties
 
 ### Characterizing the identity type of morphisms of undirected graphs

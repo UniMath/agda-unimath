@@ -33,7 +33,7 @@ The stabilizer of an element `x : X pt` of a concrete G-set `X : BG → Set` is 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
-  
+
   action-stabilizer-action-Concrete-Group :
     type-action-Concrete-Group G X → action-Concrete-Group (l1 ⊔ l2) G
   action-stabilizer-action-Concrete-Group x u =

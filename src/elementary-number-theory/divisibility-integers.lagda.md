@@ -11,7 +11,7 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
-  
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -373,7 +373,7 @@ presim-unit-ℤ : ℤ → ℤ → UU lzero
 presim-unit-ℤ x y = Σ unit-ℤ (λ u → mul-ℤ (pr1 u) x ＝ y)
 
 {- We could define sim-unit-ℤ x y to be the propositional truncation of
-   presim-unit-ℤ, but that's a waste because presim-unit-ℤ x y is only not a 
+   presim-unit-ℤ, but that's a waste because presim-unit-ℤ x y is only not a
    proposition when both x and y are zero. -}
 sim-unit-ℤ : ℤ → ℤ → UU lzero
 sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
@@ -411,7 +411,7 @@ is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
   where
   q : is-zero-ℤ v
   q = is-injective-mul-ℤ' x f {v} {zero-ℤ} (β ∙ p)
-  
+
 is-nonzero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
 is-nonzero-sim-unit-ℤ H f =
@@ -569,7 +569,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H with ( is-decidable-is-zero-ℤ x)
 is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z = inl (z ∙ inv (is-zero-sim-unit-ℤ H z))
 is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz with ( is-one-or-neg-one-is-unit-ℤ
         (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -)))))
-        (is-unit-int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) ) 
+        (is-unit-int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) )
 is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos = inl (equational-reasoning
          x  ＝ mul-ℤ one-ℤ x                             by (inv (left-unit-law-mul-ℤ x))
             ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by inv (ap (λ - → mul-ℤ - x) pos)
@@ -592,12 +592,12 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with
   ( is-plus-or-minus-sim-unit-ℤ K )
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg with ( is-decidable-is-zero-ℤ a )
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z = 
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
   equational-reasoning
     a ＝ zero-ℤ   by z
       ＝ neg-ℤ a  by inv (ap neg-ℤ z)
-      ＝ b        by neg 
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz = 
+      ＝ b        by neg
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
    a H (tr is-nonnegative-ℤ (inv neg) H')))
 ```

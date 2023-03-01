@@ -79,22 +79,22 @@ Group l = Σ (Semigroup l) is-group
 module _
   {l : Level} (G : Group l)
   where
-  
+
   semigroup-Group : Semigroup l
   semigroup-Group = pr1 G
-  
+
   set-Group : Set l
   set-Group = pr1 semigroup-Group
-  
+
   type-Group : UU l
   type-Group = pr1 set-Group
-  
+
   is-set-type-Group : is-set type-Group
   is-set-type-Group = pr2 set-Group
-  
+
   has-associative-mul-Group : has-associative-mul type-Group
   has-associative-mul-Group = pr2 semigroup-Group
-  
+
   mul-Group : type-Group → type-Group → type-Group
   mul-Group = pr1 has-associative-mul-Group
 
@@ -102,18 +102,18 @@ module _
     {x x' y y' : type-Group} (p : Id x x') (q : Id y y') →
     Id (mul-Group x y) (mul-Group x' y')
   ap-mul-Group p q = ap-binary mul-Group p q
-  
+
   mul-Group' : type-Group → type-Group → type-Group
   mul-Group' x y = mul-Group y x
 
   commute-Group : type-Group → type-Group → UU l
   commute-Group x y = mul-Group x y ＝ mul-Group y x
-  
+
   associative-mul-Group :
     (x y z : type-Group) →
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
   associative-mul-Group = pr2 has-associative-mul-Group
-    
+
   is-group-Group : is-group semigroup-Group
   is-group-Group = pr2 G
 
@@ -123,13 +123,13 @@ module _
   monoid-Group : Monoid l
   pr1 monoid-Group = semigroup-Group
   pr2 monoid-Group = is-unital-Group
-  
+
   unit-Group : type-Group
   unit-Group = pr1 is-unital-Group
 
   is-unit-Group : type-Group → UU l
   is-unit-Group x = Id x unit-Group
-  
+
   is-prop-is-unit-Group : (x : type-Group) → is-prop (is-unit-Group x)
   is-prop-is-unit-Group x = is-set-type-Group x unit-Group
 
@@ -140,7 +140,7 @@ module _
   left-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
   left-unit-law-mul-Group = pr1 (pr2 is-unital-Group)
-  
+
   right-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group x unit-Group) x
   right-unit-law-mul-Group = pr2 (pr2 is-unital-Group)
@@ -148,17 +148,17 @@ module _
   pointed-type-Group : Pointed-Type l
   pr1 pointed-type-Group = type-Group
   pr2 pointed-type-Group = unit-Group
-  
+
   has-inverses-Group : is-group' semigroup-Group is-unital-Group
   has-inverses-Group = pr2 is-group-Group
-  
+
   inv-Group : type-Group → type-Group
   inv-Group = pr1 has-inverses-Group
-  
+
   left-inverse-law-mul-Group :
     (x : type-Group) → Id (mul-Group (inv-Group x) x) unit-Group
   left-inverse-law-mul-Group = pr1 (pr2 has-inverses-Group)
-  
+
   right-inverse-law-mul-Group :
     (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
   right-inverse-law-mul-Group = pr2 (pr2 has-inverses-Group)
@@ -196,7 +196,7 @@ module _
       ( left-div-Group x)
       ( issec-mul-inv-Group x)
       ( isretr-mul-inv-Group x)
-  
+
   equiv-mul-Group : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group x) = mul-Group x
   pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
@@ -221,14 +221,14 @@ module _
     ( associative-mul-Group _ _ _) ∙
     ( ( ap (mul-Group y) (right-inverse-law-mul-Group x)) ∙
       ( right-unit-law-mul-Group y))
-  
+
   is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
       ( λ y → right-div-Group y x)
       ( issec-mul-inv-Group' x)
       ( isretr-mul-inv-Group' x)
-  
+
   equiv-mul-Group' : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group' x) = mul-Group' x
   pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
@@ -432,7 +432,7 @@ abstract
       ( eq-htpy
         ( λ x →
           equational-reasoning
-          i x ＝ μ e (i x)            by inv (left-unit-G (i x)) 
+          i x ＝ μ e (i x)            by inv (left-unit-G (i x))
               ＝ μ (μ (i' x) x) (i x) by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
               ＝ μ (i' x) (μ x (i x)) by assoc-G (i' x) x (i x)
               ＝ μ (i' x) e           by ap (μ (i' x)) (right-inv-i x)
@@ -458,7 +458,7 @@ pr2 (is-group-Prop G) = is-prop-is-group G
 module _
   {l : Level} (G : Group l)
   where
-  
+
   is-idempotent-Group : type-Group G → UU l
   is-idempotent-Group x = Id (mul-Group G x x) x
 
@@ -474,7 +474,7 @@ module _
 module _
   {l : Level} (G : Group l)
   where
-  
+
   mul-list-Group : list (type-Group G) → type-Group G
   mul-list-Group = mul-list-Monoid (monoid-Group G)
 

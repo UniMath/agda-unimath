@@ -85,7 +85,6 @@ module _
   pr2 id-hom-Directed-Graph _ _ = id
 ```
 
-
 ## Properties
 
 ### Characterizing the identity type of morphisms graphs

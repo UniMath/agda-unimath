@@ -97,7 +97,7 @@ module _
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
-  
+
   equiv-tr-edge-Undirected-Graph :
     (p q : unordered-pair-vertices-Undirected-Graph G)
     (α : Eq-unordered-pair p q) →

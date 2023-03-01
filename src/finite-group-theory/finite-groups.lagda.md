@@ -73,7 +73,7 @@ module _
   semigroup-Group-𝔽 : Semigroup l
   semigroup-Group-𝔽 =
     semigroup-Semigroup-𝔽 finite-semigroup-Group-𝔽
-  
+
   is-group-Group-𝔽 : is-group semigroup-Group-𝔽
   is-group-Group-𝔽 = pr2 G
 
@@ -124,7 +124,7 @@ module _
 
   is-unital-Group-𝔽 : is-unital-Semigroup semigroup-Group-𝔽
   is-unital-Group-𝔽 = is-unital-Group group-Group-𝔽
-    
+
   monoid-Group-𝔽 : Monoid l
   monoid-Group-𝔽 = monoid-Group group-Group-𝔽
 
@@ -184,7 +184,7 @@ module _
     mul-Group-𝔽 (inv-Group-𝔽 x) x ＝ unit-Group-𝔽
   left-inverse-law-mul-Group-𝔽 =
     left-inverse-law-mul-Group group-Group-𝔽
-    
+
   right-inverse-law-mul-Group-𝔽 :
     (x : type-Group-𝔽) →
     mul-Group-𝔽 x (inv-Group-𝔽 x) ＝ unit-Group-𝔽
@@ -226,11 +226,11 @@ module _
   is-equiv-mul-Group-𝔽' :
     (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽' x)
   is-equiv-mul-Group-𝔽' = is-equiv-mul-Group' group-Group-𝔽
-  
+
   equiv-mul-Group-𝔽' :
     (x : type-Group-𝔽) → type-Group-𝔽 ≃ type-Group-𝔽
   equiv-mul-Group-𝔽' = equiv-mul-Group' group-Group-𝔽
-  
+
   is-binary-equiv-mul-Group-𝔽 : is-binary-equiv mul-Group-𝔽
   is-binary-equiv-mul-Group-𝔽 =
     is-binary-equiv-mul-Group group-Group-𝔽
@@ -278,7 +278,7 @@ module _
 
   inv-inv-Group-𝔽 :
     (x : type-Group-𝔽) → inv-Group-𝔽 (inv-Group-𝔽 x) ＝ x
-  inv-inv-Group-𝔽 = inv-inv-Group group-Group-𝔽        
+  inv-inv-Group-𝔽 = inv-inv-Group group-Group-𝔽
 ```
 
 ### Groups of fixed finite order

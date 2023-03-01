@@ -85,7 +85,7 @@ abstract
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) → is-equiv f →
     ({l3 : Level} (A : UU l3) → is-equiv (postcomp A f))
   is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
-    is-equiv-has-inverse 
+    is-equiv-has-inverse
       ( postcomp A (map-inv-is-equiv is-equiv-f))
       ( λ g → eq-htpy (htpy-right-whisk (issec-map-inv-is-equiv is-equiv-f) g))
       ( λ h → eq-htpy (htpy-right-whisk (isretr-map-inv-is-equiv is-equiv-f) h))

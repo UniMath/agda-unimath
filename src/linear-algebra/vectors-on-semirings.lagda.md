@@ -43,7 +43,7 @@ Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   vec-Semiring : ℕ → UU l
   vec-Semiring = vec (type-Semiring R)
 
@@ -113,7 +113,7 @@ module _
 
 ### Pointwise addition of vectors on a ring
 
-#### Pointwise addition of listed vectors on a ring 
+#### Pointwise addition of listed vectors on a ring
 
 ```agda
 module _

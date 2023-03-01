@@ -40,7 +40,7 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   where
-  
+
   descent-is-equiv :
     (i : X → Y) (j : Y → Z) (h : C → Z)
     (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →

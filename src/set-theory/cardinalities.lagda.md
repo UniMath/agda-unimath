@@ -60,7 +60,7 @@ compute-leq-cardinality-Prop' {l1} {l2} X =
   triangle-universal-property-trunc-Set
     ( Prop-Set (l1 ⊔ l2))
     ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
-    
+
 leq-cardinality-Prop :
   {l1 l2 : Level} → cardinal l1 → cardinal l2 → Prop (l1 ⊔ l2)
 leq-cardinality-Prop {l1} {l2} =
@@ -160,7 +160,7 @@ is-effective-cardinality X Y =
 
 ```agda
 antisymmetric-≤-cardinality :
-  {l1 : Level} (X Y : cardinal l1) → (LEM l1) → 
+  {l1 : Level} (X Y : cardinal l1) → (LEM l1) →
   X ≤-cardinality Y → Y ≤-cardinality X → X ＝ Y
 antisymmetric-≤-cardinality {l1} X Y lem =
   apply-dependent-universal-property-trunc-Set'

@@ -54,7 +54,7 @@ module _
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
-  
+
   inclusion-chain-preorder-Prop :
     {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
     Prop (l1 ⊔ l3 ⊔ l4)

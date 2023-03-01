@@ -71,7 +71,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
-  
+
   is-equiv-inclusion-is-full-subtype :
     is-full-subtype P → is-equiv (inclusion-subtype P)
   is-equiv-inclusion-is-full-subtype H =

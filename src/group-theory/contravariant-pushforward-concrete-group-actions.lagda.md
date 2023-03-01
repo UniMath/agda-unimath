@@ -29,7 +29,7 @@ module _
   contravariant-pushforward-action-Concrete-Group :
     {l : Level} → action-Concrete-Group l G → action-Concrete-Group {!!} H
   contravariant-pushforward-action-Concrete-Group X y = {!!}
-  
+
     -- The following should be constructed as a set
     hom-action-Concrete-Group G X
       ( subst-action-Concrete-Group G H f (λ y → Id (shape-Concrete-Group H) y))

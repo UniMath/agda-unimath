@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
 
-
 Welcome to the website of the `agda-unimath` formalization project!
 
 <a href="https://github.com/unimath/agda-unimath">

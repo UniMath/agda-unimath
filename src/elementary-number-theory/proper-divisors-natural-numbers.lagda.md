@@ -10,7 +10,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-  
+
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types

@@ -46,7 +46,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  extensional-Eq-eq-𝕎 : 
+  extensional-Eq-eq-𝕎 :
     {x y : 𝕎 A B} → x ＝ y → (z : 𝕎 A B) → (z ∈-𝕎 x) ≃ (z ∈-𝕎 y)
   extensional-Eq-eq-𝕎 refl z = id-equiv
 
@@ -54,7 +54,7 @@ is-extensional-𝕎 :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
 is-extensional-𝕎 A B =
   (x y : 𝕎 A B) → is-equiv (extensional-Eq-eq-𝕎 {x = x} {y})
-  
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -125,7 +125,7 @@ module _
                             equiv-concat
                               ( ap f (isretr-map-inv-equiv e y))
                               ( g (map-equiv e y))))))) ∘e
-              ( ( equiv-left-swap-Σ) ∘e 
+              ( ( equiv-left-swap-Σ) ∘e
                 ( equiv-tot
                   ( λ g →
                     inv-equiv (equiv-fam-equiv-equiv-slice f g)))))) ∘e

@@ -101,7 +101,7 @@ module _
       ( associative-mul-Group G g
         ( generalized-map-hom-free-group-with-one-generator-ℤ (inr (inr x)) h1)
         ( h2)))
-  
+
   map-hom-free-group-with-one-generator-ℤ : ℤ → type-Group G
   map-hom-free-group-with-one-generator-ℤ k =
     generalized-map-hom-free-group-with-one-generator-ℤ k (unit-Group G)

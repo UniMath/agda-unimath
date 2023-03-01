@@ -67,12 +67,12 @@ module _
 
   abstract
     is-set-axiom-K : axiom-K A → is-set A
-    is-set-axiom-K H x y = is-prop-all-elements-equal (is-set-axiom-K' H x y) 
+    is-set-axiom-K H x y = is-prop-all-elements-equal (is-set-axiom-K' H x y)
 
   abstract
     axiom-K-is-set : is-set A → axiom-K A
     axiom-K-is-set H x p =
-      ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙ 
+      ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 

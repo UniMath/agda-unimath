@@ -53,7 +53,7 @@ module _
   module _
     (i : Fin (succ-ℕ k))
     where
-    
+
     face-finitely-graded-poset-Set : Set l1
     face-finitely-graded-poset-Set = pr1 X i
 
@@ -73,7 +73,7 @@ module _
 
     adjacent-finitely-graded-poset-Prop : Prop l2
     adjacent-finitely-graded-poset-Prop = pr2 X i y z
-  
+
     adjacent-Finitely-Graded-Poset : UU l2
     adjacent-Finitely-Graded-Poset =
       type-Prop adjacent-finitely-graded-poset-Prop
@@ -207,7 +207,7 @@ eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
       ( inl-Fin (succ-ℕ k) i2)
       ( λ (q : is-one-ℕ (succ-ℕ (succ-ℕ k))) →
         is-nonzero-succ-ℕ k (is-injective-succ-ℕ q))
-      ( antisymmetric-leq-Fin 
+      ( antisymmetric-leq-Fin
         ( succ-ℕ (succ-ℕ k))
         ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) i2))
         ( inl-Fin (succ-ℕ k) i2)
@@ -230,7 +230,7 @@ eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
-  
+
   abstract
     eq-path-faces-Finitely-Graded-Poset :
       {i : Fin (succ-ℕ k)} (x y : face-Finitely-Graded-Poset X i) →
@@ -274,7 +274,7 @@ module _
   module _
     (x y : element-Finitely-Graded-Poset X)
     where
-    
+
     leq-finitely-graded-poset-Prop : Prop (l1 ⊔ l2)
     leq-finitely-graded-poset-Prop =
       trunc-Prop (path-elements-Finitely-Graded-Poset X x y)
@@ -316,7 +316,7 @@ module _
           ( Id-Prop (element-finitely-graded-poset-Set X) x y)
           ( λ M →
             antisymmetric-path-elements-Finitely-Graded-Poset X x y L M))
-  
+
   poset-Finitely-Graded-Poset : Poset l1 (l1 ⊔ l2)
   pr1 poset-Finitely-Graded-Poset = element-Finitely-Graded-Poset X
   pr1 (pr2 poset-Finitely-Graded-Poset) = leq-finitely-graded-poset-Prop
@@ -340,7 +340,7 @@ module _
   module _
     (x : face-Finitely-Graded-Poset X (zero-Fin k))
     where
-    
+
     is-least-element-finitely-graded-poset-Prop : Prop (l1 ⊔ l2)
     is-least-element-finitely-graded-poset-Prop =
       is-least-element-poset-Prop
@@ -390,7 +390,7 @@ module _
   module _
     (x : face-Finitely-Graded-Poset X (neg-one-Fin k))
     where
-    
+
     is-largest-element-finitely-graded-poset-Prop : Prop (l1 ⊔ l2)
     is-largest-element-finitely-graded-poset-Prop =
       is-largest-element-poset-Prop
@@ -412,7 +412,7 @@ module _
 
   largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
   largest-element-Finitely-Graded-Poset =
-    Σ ( face-Finitely-Graded-Poset X (neg-one-Fin k)) 
+    Σ ( face-Finitely-Graded-Poset X (neg-one-Fin k))
       ( is-largest-element-Finitely-Graded-Poset)
 
   all-elements-equal-largest-element-Finitely-Graded-Poset :
@@ -466,7 +466,7 @@ module _
   module _
     (i : Fin (succ-ℕ k))
     where
-    
+
     face-set-Finitely-Graded-Subposet : Set (l1 ⊔ l3)
     face-set-Finitely-Graded-Subposet =
       Σ-Set
@@ -506,7 +506,7 @@ module _
     adjacent-finitely-graded-subposet-Prop : Prop l2
     adjacent-finitely-graded-subposet-Prop =
       adjacent-finitely-graded-poset-Prop X i (pr1 y) (pr1 z)
-  
+
     adjacent-Finitely-Graded-Subposet : UU l2
     adjacent-Finitely-Graded-Subposet =
       type-Prop adjacent-finitely-graded-subposet-Prop
@@ -678,7 +678,7 @@ module _
     {l3 : Level}
     (S : {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset X i → Prop l3)
     where
-    
+
     is-chain-finitely-graded-subposet-Prop : Prop (l1 ⊔ l2 ⊔ l3)
     is-chain-finitely-graded-subposet-Prop =
       is-total-poset-Prop (poset-Finitely-Graded-Subposet X S)
@@ -686,12 +686,12 @@ module _
     is-chain-Finitely-Graded-Subposet : UU (l1 ⊔ l2 ⊔ l3)
     is-chain-Finitely-Graded-Subposet =
       type-Prop is-chain-finitely-graded-subposet-Prop
-    
+
     is-prop-is-chain-Finitely-Graded-Subposet :
       is-prop is-chain-Finitely-Graded-Subposet
     is-prop-is-chain-Finitely-Graded-Subposet =
       is-prop-type-Prop is-chain-finitely-graded-subposet-Prop
-      
+
   chain-Finitely-Graded-Poset : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
   chain-Finitely-Graded-Poset l = Σ _ (is-chain-Finitely-Graded-Subposet {l})
 
@@ -725,7 +725,7 @@ module _
   is-prop-inclusion-chain-Finitely-Graded-Poset =
     is-prop-inclusion-Finitely-Graded-Subposet X
       ( subtype-chain-Finitely-Graded-Poset X C)
-      ( subtype-chain-Finitely-Graded-Poset X D) 
+      ( subtype-chain-Finitely-Graded-Poset X D)
 ```
 
 ### Maximal chains in preorders

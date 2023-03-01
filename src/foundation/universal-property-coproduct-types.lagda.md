@@ -51,13 +51,13 @@ module _
       {l3 : Level} (X : UU l3) →
       is-equiv (ev-inl-inr (λ (t : A + B) → X))
     universal-property-coprod X = dependent-universal-property-coprod (λ t → X)
-  
+
   equiv-universal-property-coprod :
     {l3 : Level} (X : UU l3) →
     (A + B → X) ≃ ((A → X) × (B → X))
   equiv-universal-property-coprod X =
     equiv-dependent-universal-property-coprod (λ t → X)
-  
+
   abstract
     uniqueness-coprod :
       {l3 : Level} {Y : UU l3} (i : A → Y) (j : B → Y) →

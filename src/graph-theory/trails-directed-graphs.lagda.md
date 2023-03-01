@@ -21,7 +21,7 @@ A trail in a directed graph is a walk that goes through each edge at most once.
 module _
   {l1 l2 : Level} (G : Directed-Graph l1 l2)
   where
-  
+
   is-trail-walk-Directed-Graph :
     {x y : vertex-Directed-Graph G} → walk-Directed-Graph G x y → UU (l1 ⊔ l2)
   is-trail-walk-Directed-Graph w =

@@ -148,7 +148,7 @@ module _
     {l : Level} {I : UU l} (f : I → element-Poset P) → UU (l1 ⊔ l2 ⊔ l)
   has-least-upper-bound-family-Poset f =
     Σ (element-Poset P) (is-least-upper-bound-family-Poset f)
-    
+
   all-elements-equal-has-least-upper-bound-family-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) →
     all-elements-equal (has-least-upper-bound-family-Poset f)

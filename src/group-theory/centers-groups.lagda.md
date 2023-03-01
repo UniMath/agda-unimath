@@ -25,7 +25,7 @@ The **center** of a group `G` is the normal subgroup consisting of all elements 
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   subtype-center-Group : subset-Group l1 G
   subtype-center-Group g =
     Π-Prop

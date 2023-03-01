@@ -37,7 +37,7 @@ module _
 
   rel-apart-Discrete-Type : Rel-Prop l (type-Discrete-Type X)
   rel-apart-Discrete-Type x y = neg-Prop' (x ＝ y)
-  
+
   apart-Discrete-Type : (x y : type-Discrete-Type X) → UU l
   apart-Discrete-Type x y = type-Prop (rel-apart-Discrete-Type x y)
 

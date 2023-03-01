@@ -87,13 +87,13 @@ paradox-Russell {l} H =
     ( pair (map-equiv β) (map-inv-equiv β))
 
   where
-  
+
   K : is-small-universe l l
   K = pair H (λ X → pair X id-equiv)
 
   R : 𝕍 (lsuc l)
   R = Russell l
-  
+
   is-small-R : is-small-𝕍 l R
   is-small-R = is-small-Russell K
 

@@ -44,7 +44,7 @@ induction-ordinal-ind-ℕ :
   { l : Level} (P : ℕ → UU l) →
   ( qS : (k : ℕ) → □-<-ℕ P k → □-<-ℕ P (succ-ℕ k))
   ( n : ℕ) → □-<-ℕ P n
-induction-ordinal-ind-ℕ P qS zero-ℕ = zero-ordinal-ind-ℕ P 
+induction-ordinal-ind-ℕ P qS zero-ℕ = zero-ordinal-ind-ℕ P
 induction-ordinal-ind-ℕ P qS (succ-ℕ n) =
   qS n (induction-ordinal-ind-ℕ P qS n)
 

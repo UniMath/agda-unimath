@@ -24,7 +24,7 @@ The notion of sieve generalizes simultaneously the notion of right ideal in a mo
 module _
   {l1 l2 : Level} (C : Cat l1 l2) (A : obj-Cat C)
   where
-  
+
   is-sieve-cat-Prop :
     {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
     Prop (l1 ⊔ l2 ⊔ l3)

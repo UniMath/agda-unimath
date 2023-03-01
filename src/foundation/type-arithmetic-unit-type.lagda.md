@@ -56,7 +56,7 @@ module _
   left-unit-law-Σ : Σ unit A ≃ A star
   pr1 left-unit-law-Σ = map-left-unit-law-Σ
   pr2 left-unit-law-Σ = is-equiv-map-left-unit-law-Σ
-  
+
   is-equiv-map-inv-left-unit-law-Σ : is-equiv map-inv-left-unit-law-Σ
   is-equiv-map-inv-left-unit-law-Σ =
     is-equiv-has-inverse

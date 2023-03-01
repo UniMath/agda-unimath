@@ -102,7 +102,7 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   (Y : Abstract-Group-Action G l3) (e : equiv-Abstract-Group-Action G X Y)
   where
-  
+
   htpy-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
   htpy-equiv-Abstract-Group-Action f =
@@ -119,7 +119,7 @@ module _
     (f : equiv-Abstract-Group-Action G X Y) →
     Id e f → htpy-equiv-Abstract-Group-Action f
   htpy-eq-equiv-Abstract-Group-Action .e refl =
-    refl-htpy-equiv-Abstract-Group-Action 
+    refl-htpy-equiv-Abstract-Group-Action
 
   is-contr-total-htpy-equiv-Abstract-Group-Action :
     is-contr

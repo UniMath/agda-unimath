@@ -106,7 +106,7 @@ iso-Group-of-Order-2 G H =
 module _
   {l : Level} (G : Group-of-Order-2 l)
   where
-  
+
   iso-eq-Group-of-Order-2 :
     (H : Group-of-Order-2 l) → Id G H → iso-Group-of-Order-2 G H
   iso-eq-Group-of-Order-2 H p =
@@ -160,11 +160,11 @@ module _
     type-Group-of-Order-2 G → type-Group-of-Order-2 H
   map-specified-hom-Group-of-Order-2 =
     map-equiv equiv-Group-of-Order-2
-  
+
 --   specified-hom-Group-of-Order-2 :
 --     type-hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
 --   specified-hom-Group-of-Order-2 = {!!}
-  
+
 -- ```
 
 -- ### The type of groups of order 2 is contractible

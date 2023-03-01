@@ -51,7 +51,7 @@ A 2-element subtype of a type `A` is a subtype `P` of `A` of which its underlyin
 module _
   {l1 l2 : Level} {X : UU l1} (P : 2-Element-Subtype l2 X)
   where
-  
+
   subtype-2-Element-Subtype : subtype l2 X
   subtype-2-Element-Subtype = pr1 P
 
@@ -148,7 +148,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1}
   (P : 2-Element-Subtype l2 X) (Q : 2-Element-Subtype l3 X)
   where
-  
+
   hom-2-Element-Subtype : UU (l1 ⊔ l2 ⊔ l3)
   hom-2-Element-Subtype =
     (x : X) → type-prop-2-Element-Subtype P x → type-prop-2-Element-Subtype Q x
@@ -221,7 +221,6 @@ pr2 (precomp-equiv-2-Element-Subtype e (pair P H)) =
               ( λ g → (type-Prop (P x)) ≃ (type-Prop (P (map-equiv g x))))
               ( inv (left-inverse-law-equiv e))
               ( id-equiv)))))
-  
 
 {-
 module _
@@ -236,7 +235,7 @@ module _
   is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
     ex-falso (H (inv p))
   is-injective-map-Fin-two-ℕ f H {inr star} {inr star} p = refl
-  
+
   is-injective-element-unordered-pair :
     (p : unordered-pair A) →
     ¬ ( (x y : type-unordered-pair p) →

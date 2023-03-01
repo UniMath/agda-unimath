@@ -166,7 +166,7 @@ abstract
   isretr-pred-ℤ (inr (inl star)) = refl
   isretr-pred-ℤ (inr (inr zero-ℕ)) = refl
   isretr-pred-ℤ (inr (inr (succ-ℕ x))) = refl
-  
+
   issec-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
   issec-pred-ℤ (inl zero-ℕ) = refl
   issec-pred-ℤ (inl (succ-ℕ x)) = refl
@@ -411,7 +411,7 @@ decide-is-nonnegative-ℤ :
 decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ : 
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
   (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos = refl
 ```

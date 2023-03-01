@@ -82,11 +82,11 @@ pr2 (inv-iff (f , g)) = f
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
-  
+
   equiv-iff' : (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
   pr1 (equiv-iff' t) = pr1 t
   pr2 (equiv-iff' t) = is-equiv-is-prop (pr2 P) (pr2 Q) (pr2 t)
-  
+
   equiv-iff :
     (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) →
     type-Prop P ≃ type-Prop Q

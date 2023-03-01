@@ -42,7 +42,7 @@ pr1 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) g f = refl
 pr2 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) = star
 
 endo-Semigroup : {l : Level} → Set l → Semigroup l
-pr1 (endo-Semigroup A) = endo-Set A 
+pr1 (endo-Semigroup A) = endo-Set A
 pr1 (pr2 (endo-Semigroup A)) g f = g ∘ f
 pr2 (pr2 (endo-Semigroup A)) h g f = refl
 

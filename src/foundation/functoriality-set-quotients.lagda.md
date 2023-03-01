@@ -374,7 +374,7 @@ module _
   (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
   where
 
-  id-map-is-set-quotient : 
+  id-map-is-set-quotient :
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     map-is-set-quotient R QR f R QR f Uf Uf (id-hom-Eq-Rel R) ~ id
   id-map-is-set-quotient Uf x =
@@ -387,7 +387,7 @@ module _
       ( eq-is-contr
         ( unique-map-is-set-quotient R QR f R QR f Uf Uf (id-hom-Eq-Rel R)))
 
-  id-equiv-is-set-quotient : 
+  id-equiv-is-set-quotient :
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     htpy-equiv
       ( equiv-is-set-quotient R QR f R QR f Uf Uf (id-equiv-Eq-Rel R))

@@ -10,7 +10,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
-    
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -140,7 +140,7 @@ is-one-is-proper-divisor-two-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) (pair f H) =
   ex-falso (f refl)
 is-one-is-proper-divisor-two-ℕ (succ-ℕ (succ-ℕ (succ-ℕ x))) (pair f H) =
   ex-falso (leq-div-succ-ℕ (succ-ℕ (succ-ℕ (succ-ℕ x))) 1 H)
-  
+
 is-prime-easy-two-ℕ : is-prime-easy-ℕ 2
 pr1 is-prime-easy-two-ℕ = Eq-eq-ℕ
 pr2 is-prime-easy-two-ℕ = is-one-is-proper-divisor-two-ℕ

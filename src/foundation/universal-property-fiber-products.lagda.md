@@ -73,7 +73,7 @@ module _
         inv-gap-fiberwise-prod
         issec-inv-gap-fiberwise-prod
         isretr-inv-gap-fiberwise-prod
-  
+
   abstract
     universal-property-pullback-fiberwise-prod :
       {l : Level} →

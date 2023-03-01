@@ -460,7 +460,7 @@ is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ x)
 is-emb-mul-ℤ x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ x f)
 
 is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ' x)
-is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)  
+is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)
 ```
 
 ```agda

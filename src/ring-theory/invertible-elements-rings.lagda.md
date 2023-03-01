@@ -26,15 +26,15 @@ Invertible elements are elements that have a two-sided multiplicative inverse. S
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   has-left-inverse-Ring : type-Ring R → UU l
   has-left-inverse-Ring x =
     Σ (type-Ring R) (λ y → Id (mul-Ring R y x) (one-Ring R))
-  
+
   has-right-inverse-Ring : type-Ring R → UU l
   has-right-inverse-Ring x =
     Σ (type-Ring R) (λ y → Id (mul-Ring R x y) (one-Ring R))
-  
+
   has-two-sided-inverse-Ring : type-Ring R → UU l
   has-two-sided-inverse-Ring x =
     ( has-left-inverse-Ring x) × (has-right-inverse-Ring x)
@@ -42,7 +42,7 @@ module _
   is-invertible-element-ring-Prop : type-Ring R → Prop l
   is-invertible-element-ring-Prop =
     is-invertible-element-monoid-Prop (multiplicative-monoid-Ring R)
-    
+
   is-invertible-element-Ring : type-Ring R → UU l
   is-invertible-element-Ring x =
     type-Prop (is-invertible-element-ring-Prop x)

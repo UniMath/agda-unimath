@@ -33,7 +33,7 @@ pair-of-distinct-elements A =
 module _
   {l : Level} {A : UU l} (p : pair-of-distinct-elements A)
   where
-  
+
   fst-pair-of-distinct-elements : A
   fst-pair-of-distinct-elements = pr1 p
 
@@ -53,7 +53,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   Eq-pair-of-distinct-elements :
     (p q : pair-of-distinct-elements A) → UU l
   Eq-pair-of-distinct-elements p q =
@@ -101,7 +101,7 @@ module _
     p ＝ q
   eq-Eq-pair-of-distinct-elements {p} {q} α β =
     map-inv-is-equiv (is-equiv-Eq-eq-pair-of-distinct-elements p q) (pair α β)
-  
+
 ```
 
 ### Equivalences map pairs of distinct elements to pairs of distinct elements

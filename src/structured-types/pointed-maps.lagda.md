@@ -44,7 +44,7 @@ module _
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
-  
+
   map-pointed-map : A →* B → type-Pointed-Type A → type-Pointed-Type B
   map-pointed-map f = pr1 f
 

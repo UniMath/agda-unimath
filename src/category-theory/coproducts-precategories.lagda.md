@@ -47,7 +47,6 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
   has-all-binary-coproducts : UU (l1 ⊔ l2)
   has-all-binary-coproducts = (x y : obj-Precat C) → coproduct x y
 
-
 module _ {l1 l2 : Level} (C : Precat l1 l2)
   (t : has-all-binary-coproducts C) where
 

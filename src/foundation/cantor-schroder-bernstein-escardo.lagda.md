@@ -43,14 +43,14 @@ type-Cantor-Schröder-Bernstein-Escardó l1 l2 =
 
 ```agda
 module _
-  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2)) 
+  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
   where
 
   module _
     {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪ X)
     where
 
-    map-Cantor-Schröder-Bernstein-Escardó' : 
+    map-Cantor-Schröder-Bernstein-Escardó' :
       (x : X) → is-decidable (is-perfect-image (map-emb f) (map-emb g) x) → Y
     map-Cantor-Schröder-Bernstein-Escardó' x (inl y) =
       inverse-of-perfect-image x y
@@ -166,4 +166,4 @@ module _
 
 ## References
 
-[1] The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md), [Link 2](https://github.com/martinescardo/TypeTopology)). 
+[1] The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md), [Link 2](https://github.com/martinescardo/TypeTopology)).

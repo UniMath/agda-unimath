@@ -173,7 +173,7 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   (Y : Abstract-Group-Action G l3)
   where
-  
+
   is-set-type-hom-Abstract-Group-Action :
     is-set (type-hom-Abstract-Group-Action G X Y)
   is-set-type-hom-Abstract-Group-Action f g =

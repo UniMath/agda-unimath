@@ -55,7 +55,6 @@ raise-ex-falso-emb l =
   comp-emb ex-falso-emb (emb-equiv (inv-equiv (compute-raise-empty l)))
 ```
 
-
 ### Being empty is a proposition
 
 ```agda

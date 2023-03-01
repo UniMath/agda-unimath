@@ -101,7 +101,7 @@ module _
     concat-list
       ( inv-formal-combination-subset-Group u)
       ( in-list (pair (succ-Fin 2 s) x))
-    
+
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →
     Id ( ev-formal-combination-subset-Group
@@ -227,7 +227,7 @@ module _
       ( ev-formal-combination-subset-Group c)
       ( is-closed-under-inv-Subgroup G U s (H s K))
       ( contains-formal-combinations-Subgroup U H c)
-  contains-formal-combinations-Subgroup U H (cons (pair (inr star) (pair s K)) c) = 
+  contains-formal-combinations-Subgroup U H (cons (pair (inr star) (pair s K)) c) =
     is-closed-under-mul-Subgroup G U
       ( inclusion-subtype S (pair s K))
       ( ev-formal-combination-subset-Group c)

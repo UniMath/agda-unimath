@@ -140,7 +140,7 @@ module _
 
   abstract
     distributive-trunc-Π-count-Set :
-      count A → 
+      count A →
       is-contr
         ( Σ ( ( type-trunc-Set ((x : A) → B x)) ≃
               ( (x : A) → type-trunc-Set (B x)))

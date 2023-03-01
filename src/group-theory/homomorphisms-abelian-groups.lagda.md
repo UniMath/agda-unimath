@@ -32,7 +32,7 @@ Homomorphisms between abelian groups are just homomorphisms between their underl
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
-  
+
   preserves-add-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
   preserves-add-Ab = preserves-mul-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 
@@ -70,7 +70,7 @@ module _
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
-  
+
   htpy-hom-Ab : (f g : type-hom-Ab A B) → UU (l1 ⊔ l2)
   htpy-hom-Ab f g = htpy-hom-Group (group-Ab A) (group-Ab B) f g
 

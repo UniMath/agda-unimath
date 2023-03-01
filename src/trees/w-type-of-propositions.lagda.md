@@ -40,7 +40,7 @@ succ-𝕎-Prop {l} P = tree-𝕎 (raise-unit-Prop l) (λ x → P)
 ```agda
 standard-subfinite-type : {l : Level} → 𝕎-Prop l → UU l
 standard-subfinite-type (tree-𝕎 P α) =
-  Σ (type-Prop P) (λ p → standard-subfinite-type (α p)) + type-Prop P 
+  Σ (type-Prop P) (λ p → standard-subfinite-type (α p)) + type-Prop P
 ```
 
 ## Properties

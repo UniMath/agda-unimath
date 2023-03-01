@@ -176,7 +176,7 @@ right-unit-law-comp-hom-Group G H =
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
-  
+
   preserves-unit-Group : (type-Group G → type-Group H) → UU l2
   preserves-unit-Group f = Id (f (unit-Group G)) (unit-Group H)
 

@@ -207,7 +207,6 @@ module _
 
 ### The type of edges on a walk is equivalent to `Fin n` where `n` is the length of the walk
 
-
 ```agda
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) {x : vertex-Undirected-Graph G}

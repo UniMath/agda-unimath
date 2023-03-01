@@ -74,7 +74,7 @@ module _
         issec-inv-gap-prod
         isretr-inv-gap-prod
 
-  {- We conclude that cartesian products satisfy the universal property of 
+  {- We conclude that cartesian products satisfy the universal property of
      pullbacks. -}
 
   abstract

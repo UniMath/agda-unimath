@@ -46,7 +46,7 @@ module _
         ( p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p ≃
         edge-Undirected-Graph H (map-equiv-unordered-pair f p))
-        
+
   equiv-vertex-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H

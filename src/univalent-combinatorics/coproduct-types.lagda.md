@@ -73,7 +73,7 @@ abstract
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   count-left-summand : count (X + Y) → count X
   count-left-summand e =
     count-equiv

@@ -71,7 +71,7 @@ module _
     sim-congruence-Group x2 y1 →
     y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
-  
+
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
   refl-congruence-Group = refl-Eq-Rel eq-rel-congruence-Group
 

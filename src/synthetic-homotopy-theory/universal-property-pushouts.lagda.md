@@ -43,7 +43,7 @@ module _
   (up-c : {l : Level} → universal-property-pushout l f g c)
   (d : cocone f g Y)
   where
-  
+
   map-universal-property-pushout : X → Y
   map-universal-property-pushout = map-inv-is-equiv (up-c Y) d
 
@@ -54,7 +54,7 @@ module _
       ( cocone-map f g c map-universal-property-pushout)
       ( d)
       ( issec-map-inv-is-equiv (up-c Y) d)
-  
+
   uniqueness-map-universal-property-pushout :
     is-contr ( Σ (X → Y) (λ h → htpy-cocone f g (cocone-map f g c h) d))
   uniqueness-map-universal-property-pushout =
@@ -70,7 +70,6 @@ module _
 
 The universal property of the pushout of a span `S` can also be stated as a pullback-property: a cocone `c ≐ pair i (pair j H)` with vertex `X` satisfies the universal property of the pushout of `S` if and only if the square
 
-   
 ```md
   Y^X -----> Y^B
    |          |
@@ -136,7 +135,7 @@ module _
         ( ap
           ( λ t → cocone-map f g t k)
           ( eq-htpy-cocone f g (cocone-map f g c h) d KLM)))
-  
+
   is-equiv-up-pushout-up-pushout :
     ( up-c : {l : Level} → universal-property-pushout l f g c) →
     ( up-d : {l : Level} → universal-property-pushout l f g d) →
@@ -206,7 +205,7 @@ uniquely-unique-pushout f g c d up-c up-d =
 ### The universal property of pushouts is equivalent to the pullback property of pushouts
 
 In order to show that the universal property of pushouts is equivalent to the pullback property, we show that the maps `cocone-map` and the gap map fit in a commuting triangle, where the third map is an equivalence. The claim then follows from the 3-for-2 property of equivalences.
-   
+
 ```agda
 triangle-pullback-property-pushout-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2}

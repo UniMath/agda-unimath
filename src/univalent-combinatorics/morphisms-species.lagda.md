@@ -36,7 +36,7 @@ hom-species :
 hom-species {l1} F G = (X : 𝔽 l1) → F X → G X
 
 id-hom-species : {l1 l2 : Level} → (F : species l1 l2) → hom-species F F
-id-hom-species F = λ X x → x 
+id-hom-species F = λ X x → x
 
 comp-hom-species :
   {l1 l2 l3 l4 : Level}
@@ -86,7 +86,7 @@ is-equiv-htpy-eq-hom-species f =
 
 eq-htpy-hom-species :
   {l1 l2 l3 : Level} {F : species l1 l2} {G : species l1 l3}
-  {f g : hom-species F G} → htpy-hom-species f g → Id f g 
+  {f g : hom-species F G} → htpy-hom-species f g → Id f g
 eq-htpy-hom-species {f = f} {g = g} =
   map-inv-is-equiv (is-equiv-htpy-eq-hom-species f g)
 ```

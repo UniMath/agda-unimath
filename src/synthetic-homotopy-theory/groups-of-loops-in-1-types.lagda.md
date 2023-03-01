@@ -23,7 +23,7 @@ open import synthetic-homotopy-theory.loop-spaces
 module _
   {l : Level} (A : Pointed-Type l)
   where
-  
+
   loop-space-Set : is-set (type-Ω A) → Set l
   pr1 (loop-space-Set is-set-Ω) = type-Ω A
   pr2 (loop-space-Set is-set-Ω) = is-set-Ω

@@ -48,7 +48,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X)
   where
-   
+
   cone : {l4 : Level} → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   cone C = Σ (C → A) (λ p → Σ (C → B) (λ q → coherence-square-maps q p g f))
 
@@ -96,7 +96,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) {C : UU l4}
   where
-  
+
   coherence-htpy-cone :
     (c c' : cone f g C) (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
     (L : horizontal-map-cone f g c ~ horizontal-map-cone f g c') → UU (l4 ⊔ l3)
@@ -115,7 +115,7 @@ module _
   pr1 (refl-htpy-cone c) = refl-htpy
   pr1 (pr2 (refl-htpy-cone c)) = refl-htpy
   pr2 (pr2 (refl-htpy-cone c)) = right-unit-htpy
-      
+
   htpy-eq-cone : (c c' : cone f g C) → c ＝ c' → htpy-cone c c'
   htpy-eq-cone c .c refl = refl-htpy-cone c
 
@@ -173,7 +173,7 @@ module _
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
-  
+
   cone-comp-horizontal :
     (c : cone j h B) → cone i (vertical-map-cone j h c) A → cone (j ∘ i) h A
   pr1 (cone-comp-horizontal c (pair f (pair p H))) = f
@@ -199,7 +199,7 @@ module _
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
-  
+
   cone-comp-vertical :
     (c : cone f g B) → cone (horizontal-map-cone f g c) h A → cone f (g ∘ h) A
   pr1 (cone-comp-vertical c (pair p' (pair q' H'))) =
@@ -230,7 +230,7 @@ pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
   where
 
@@ -250,7 +250,7 @@ module _
   fam-htpy-parallel-cone c c' Hp =
     Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f' g' c')
       ( coherence-htpy-parallel-cone c c' Hp)
-  
+
   htpy-parallel-cone :
     {l4 : Level} {C : UU l4} →
     cone f g C → cone f' g' C → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

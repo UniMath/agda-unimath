@@ -39,7 +39,7 @@ module _
 module _
   {l1 : Level} (X : Endo l1)
   where
-  
+
   refl-mere-equiv-Endo : mere-equiv-Endo X X
   refl-mere-equiv-Endo = unit-trunc-Prop (id-equiv-Endo X)
 ```
@@ -50,7 +50,7 @@ module _
 module _
   {l1 : Level} (X : Endo l1)
   where
-  
+
   Component-Endo : UU (lsuc l1)
   Component-Endo = Σ (Endo l1) (mere-equiv-Endo X)
 
@@ -90,7 +90,7 @@ module _
   equiv-eq-Component-Endo :
     (T S : Component-Endo X) → Id T S → equiv-Component-Endo T S
   equiv-eq-Component-Endo T .T refl = id-equiv-Component-Endo T
-  
+
   is-contr-total-equiv-Component-Endo :
     is-contr
       ( Σ ( Component-Endo X)
@@ -111,5 +111,4 @@ module _
       ( is-contr-total-equiv-Component-Endo)
       ( equiv-eq-Component-Endo (canonical-Component-Endo X))
 ```
-
 

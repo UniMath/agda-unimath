@@ -69,7 +69,7 @@ module _
 module _
   {l : Level} (G : Semigroup l)
   where
-  
+
   center-total-preserves-mul-id-Semigroup :
     Σ ( has-associative-mul (type-Semigroup G))
       ( λ μ → preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)

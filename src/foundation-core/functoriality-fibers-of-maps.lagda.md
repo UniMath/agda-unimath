@@ -31,7 +31,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C)
   where
-  
+
   map-fib-cone : (x : A) → fib (pr1 c) x → fib g (f x)
   pr1 (map-fib-cone x t) = pr1 (pr2 c) (pr1 t)
   pr2 (map-fib-cone x t) = (inv (pr2 (pr2 c) (pr1 t))) ∙ (ap f (pr2 t))
@@ -81,7 +81,7 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  map-fib-cone-comp-vertical : 
+  map-fib-cone-comp-vertical :
     (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
     ( ( map-fib-cone f (g ∘ h) (cone-comp-vertical f g h c d) x) ∘
       ( inv-map-compute-fib-comp (pr1 c) (pr1 d) x)) ~

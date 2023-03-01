@@ -36,7 +36,7 @@ Vectors on a commutative semiring `R` are vectors on the underlying type of `R`.
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   vec-Commutative-Semiring : ℕ → UU l
   vec-Commutative-Semiring =
     vec-Semiring (semiring-Commutative-Semiring R)
@@ -122,7 +122,7 @@ module _
 
 ### Pointwise addition of vectors on a commutative semiring
 
-#### Pointwise addition of listed vectors on a commutative semiring 
+#### Pointwise addition of listed vectors on a commutative semiring
 
 ```agda
 module _

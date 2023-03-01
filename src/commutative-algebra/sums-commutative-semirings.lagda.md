@@ -45,7 +45,7 @@ sum-Commutative-Semiring R = sum-Semiring (semiring-Commutative-Semiring R)
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   sum-one-element-Commutative-Semiring :
     (f : functional-vec-Commutative-Semiring R 1) →
     sum-Commutative-Semiring R 1 f ＝ head-functional-vec 0 f

@@ -23,7 +23,7 @@ The principal group action is the action of a group on itself by multiplication 
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   principal-Abstract-Group-Action : Abstract-Group-Action G l1
   pr1 principal-Abstract-Group-Action = set-Group G
   pr1 (pr2 principal-Abstract-Group-Action) g = equiv-mul-Group G g

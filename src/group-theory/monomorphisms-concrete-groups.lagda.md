@@ -16,7 +16,7 @@ open import group-theory.homomorphisms-concrete-groups
 
 ## Idea
 
-A monomorphism of concrete groups from `G` to `H` is a faithful pointed map BH →* BG. Recall that a map is said to be faithful if it induces embeddings on identity types. In particular, any faithful pointed map BH →* BG induces an embedding ΩBH → ΩBG, i.e., an inclusion of the underlying groups of a concrete group. 
+A monomorphism of concrete groups from `G` to `H` is a faithful pointed map BH →* BG. Recall that a map is said to be faithful if it induces embeddings on identity types. In particular, any faithful pointed map BH →* BG induces an embedding ΩBH → ΩBG, i.e., an inclusion of the underlying groups of a concrete group.
 
 ```agda
 module _ {l1 l2 : Level} (l3 : Level)

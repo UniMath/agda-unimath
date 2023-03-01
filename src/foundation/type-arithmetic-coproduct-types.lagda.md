@@ -33,16 +33,16 @@ module _
   map-commutative-coprod : A + B → B + A
   map-commutative-coprod (inl a) = inr a
   map-commutative-coprod (inr b) = inl b
-  
+
   map-inv-commutative-coprod : B + A → A + B
   map-inv-commutative-coprod (inl b) = inr b
   map-inv-commutative-coprod (inr a) = inl a
-  
+
   issec-map-inv-commutative-coprod :
     ( map-commutative-coprod ∘ map-inv-commutative-coprod) ~ id
   issec-map-inv-commutative-coprod (inl b) = refl
   issec-map-inv-commutative-coprod (inr a) = refl
-  
+
   isretr-map-inv-commutative-coprod :
     ( map-inv-commutative-coprod ∘ map-commutative-coprod) ~ id
   isretr-map-inv-commutative-coprod (inl a) = refl
@@ -66,7 +66,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
-  
+
   map-assoc-coprod : (A + B) + C → A + (B + C)
   map-assoc-coprod (inl (inl x)) = inl x
   map-assoc-coprod (inl (inr x)) = inr (inl x)
@@ -104,7 +104,7 @@ module _
   assoc-coprod : ((A + B) + C) ≃ (A + (B + C))
   pr1 assoc-coprod = map-assoc-coprod
   pr2 assoc-coprod = is-equiv-map-assoc-coprod
-  
+
   inv-assoc-coprod : (A + (B + C)) ≃ ((A + B) + C)
   pr1 inv-assoc-coprod = map-inv-assoc-coprod
   pr2 inv-assoc-coprod = is-equiv-map-inv-assoc-coprod
@@ -116,7 +116,7 @@ module _
 module _
   {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : A + B → UU l3)
   where
-  
+
   map-right-distributive-Σ-coprod :
     Σ (A + B) C → (Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y)))
   map-right-distributive-Σ-coprod (pair (inl x) z) = inl (pair x z)
@@ -232,7 +232,7 @@ module _
       is-equiv map-right-distributive-prod-coprod
     is-equiv-map-right-distributive-prod-coprod =
       is-equiv-map-right-distributive-Σ-coprod A B (λ x → C)
-  
+
   right-distributive-prod-coprod : ((A + B) × C) ≃ ((A × C) + (B × C))
   right-distributive-prod-coprod = right-distributive-Σ-coprod A B (λ x → C)
 ```
@@ -320,7 +320,6 @@ module _
 ```
 
 ## See also
-
 
 - Functorial properties of coproducts are recorded in
   [`foundation.functoriality-coproduct-types`](foundation.functoriality-coproduct-types.md).

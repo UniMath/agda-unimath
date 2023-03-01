@@ -36,7 +36,7 @@ module _
     (f g : type-arithmetic-functions-Ring R) →
     type-arithmetic-functions-Ring R
   dirichlet-convolution-arithmetic-functions-Ring f g (pair zero-ℕ H) =
-    ex-falso (H refl) 
+    ex-falso (H refl)
   dirichlet-convolution-arithmetic-functions-Ring f g (pair (succ-ℕ n) H) =
     bounded-sum-arithmetic-function-Ring R
       ( succ-ℕ n)

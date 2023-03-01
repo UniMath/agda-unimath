@@ -1,6 +1,5 @@
 # Truncation levels
 
-
 <details><summary>Imports</summary>
 ```agda
 module foundation.truncation-levels where

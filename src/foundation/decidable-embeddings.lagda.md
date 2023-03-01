@@ -134,7 +134,7 @@ abstract
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y}
   where
-  
+
   abstract
     is-decidable-emb-is-decidable-prop-map :
       is-decidable-prop-map f → is-decidable-emb f

@@ -89,7 +89,7 @@ module _
   apply-dependent-universal-property-𝕊¹ : Π-𝕊¹
   apply-dependent-universal-property-𝕊¹ =
     center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))
-  
+
   function-apply-dependent-universal-property-𝕊¹ : (x : 𝕊¹) → P x
   function-apply-dependent-universal-property-𝕊¹ =
     pr1 apply-dependent-universal-property-𝕊¹
@@ -137,7 +137,7 @@ module _
   apply-universal-property-𝕊¹ : Map-𝕊¹
   apply-universal-property-𝕊¹ =
     center (uniqueness-universal-property-𝕊¹ (pair x α))
-      
+
   map-apply-universal-property-𝕊¹ : 𝕊¹ → X
   map-apply-universal-property-𝕊¹ =
     pr1 apply-universal-property-𝕊¹

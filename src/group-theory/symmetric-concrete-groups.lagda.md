@@ -34,7 +34,7 @@ module _
 
   shape-symmetric-Concrete-Group : classifying-type-symmetric-Concrete-Group
   shape-symmetric-Concrete-Group = shape-Automorphism-Group (Set-1-Type l) A
-  
+
   symmetric-Concrete-Group : Concrete-Group (lsuc l)
   symmetric-Concrete-Group = Automorphism-Group (Set-1-Type l) A
 ```

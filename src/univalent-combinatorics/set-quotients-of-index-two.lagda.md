@@ -45,7 +45,7 @@ module _
   where
 
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
-    (y : A) (k k' k'' : Fin 2) → 
+    (y : A) (k k' k'' : Fin 2) →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)) ＝ k →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)) ＝ k' →
     map-equiv eA (map-reflecting-map-Eq-Rel R f (h y)) ＝ k'' →
@@ -79,7 +79,7 @@ module _
     ( inl (inr star)) (inr star) (inr star) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inr star) (inl (inr star)) (inl (inr star)) p q r = 
+    ( inr star) (inl (inr star)) (inl (inr star)) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inr star) (inl (inr star)) (inr star) p q r =

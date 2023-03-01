@@ -37,7 +37,7 @@ module _
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   where
-  
+
   preserves-mul-semigroup-Prop :
     (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-semigroup-Prop f =
@@ -65,7 +65,7 @@ module _
               ( set-Semigroup H)
               ( f (mul-Semigroup' G x y))
               ( mul-Semigroup H (f x) (f y))))
-              
+
   preserves-mul-Semigroup :
     (type-Semigroup G → type-Semigroup H) → UU (l1 ⊔ l2)
   preserves-mul-Semigroup f =
@@ -111,7 +111,7 @@ module _
 
   htpy-eq-hom-Semigroup :
     (f g : type-hom-Semigroup) → Id f g → htpy-hom-Semigroup f g
-  htpy-eq-hom-Semigroup f .f refl = refl-htpy-hom-Semigroup f 
+  htpy-eq-hom-Semigroup f .f refl = refl-htpy-hom-Semigroup f
 
   abstract
     is-contr-total-htpy-hom-Semigroup :
@@ -129,7 +129,7 @@ module _
     is-equiv-htpy-eq-hom-Semigroup :
       (f g : type-hom-Semigroup) → is-equiv (htpy-eq-hom-Semigroup f g)
     is-equiv-htpy-eq-hom-Semigroup f =
-      fundamental-theorem-id 
+      fundamental-theorem-id
         ( is-contr-total-htpy-hom-Semigroup f)
         ( htpy-eq-hom-Semigroup f)
 

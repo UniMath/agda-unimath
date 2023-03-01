@@ -31,7 +31,7 @@ A vertex cover on a undirect graph is a set of vertices that includes at least o
 ```agda
 vertex-cover : {l1 l2 : Level} → Undirected-Graph l1 l2 →
   UU (lsuc lzero ⊔ l1 ⊔ l2)
-vertex-cover G = 
+vertex-cover G =
   Σ ( vertex-Undirected-Graph G → Fin 2)
     ( λ c →
       ( p : unordered-pair-vertices-Undirected-Graph G) → edge-Undirected-Graph G p →

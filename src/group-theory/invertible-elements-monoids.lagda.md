@@ -87,7 +87,7 @@ module _
           ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-mul-Monoid M y')))))
-  
+
   is-prop-is-invertible-element-Monoid :
     (x : type-Monoid M) → is-prop (is-invertible-element-Monoid M x)
   is-prop-is-invertible-element-Monoid x =

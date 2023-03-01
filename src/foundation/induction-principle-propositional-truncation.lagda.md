@@ -24,7 +24,7 @@ case-paths-induction-principle-propositional-truncation :
   ( B : type-Prop P → UU l) → UU (l ⊔ l2)
 case-paths-induction-principle-propositional-truncation P α f B =
   (p q : type-Prop P) (x : B p) (y : B q) → tr B (α p q) x ＝ y
-  
+
 induction-principle-propositional-truncation :
   (l : Level) {l1 l2 : Level} {A : UU l1}
   (P : Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
@@ -50,7 +50,7 @@ abstract
     ( p : type-Prop P) → is-prop (B p)
   is-prop-case-paths-induction-principle-propositional-truncation P α f B β p =
     is-prop-is-proof-irrelevant (λ x → pair (tr B (α p p) x) (β p p x))
-  
+
   case-paths-induction-principle-propositional-truncation-is-prop :
     { l : Level} {l1 l2 : Level} {A : UU l1}
     ( P : Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →

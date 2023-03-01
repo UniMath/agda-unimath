@@ -91,7 +91,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
   where
-  
+
   is-equiv-hom-Directed-Graph :
     hom-Directed-Graph G H → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-hom-Directed-Graph f =

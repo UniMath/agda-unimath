@@ -36,7 +36,7 @@ The following definition produces for each `k : ℕ` a sequence of sequences as 
   0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence
   1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
       ⋮
-  1,…,1,0,…,0,0,0,0,…  -- This is row k+1    
+  1,…,1,0,…,0,0,0,0,…  -- This is row k+1
   2,1,…,1,0,0,0,0,0,…  -- After k+1 steps we append 2's at the start
       ⋮
   2,…,2,1,…,1,0,…,0,…  -- This is row 2(k+1)

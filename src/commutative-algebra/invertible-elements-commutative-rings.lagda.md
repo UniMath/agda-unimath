@@ -24,15 +24,15 @@ Invertible elements are elements that have a two-sided multiplicative inverse. S
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   has-left-inverse-Commutative-Ring : type-Commutative-Ring R → UU l
   has-left-inverse-Commutative-Ring =
     has-left-inverse-Ring (ring-Commutative-Ring R)
-  
+
   has-right-inverse-Commutative-Ring : type-Commutative-Ring R → UU l
   has-right-inverse-Commutative-Ring =
     has-right-inverse-Ring (ring-Commutative-Ring R)
-  
+
   has-two-sided-inverse-Commutative-Ring : type-Commutative-Ring R → UU l
   has-two-sided-inverse-Commutative-Ring =
     has-two-sided-inverse-Ring (ring-Commutative-Ring R)

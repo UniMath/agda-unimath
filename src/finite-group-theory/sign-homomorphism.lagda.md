@@ -45,7 +45,7 @@ The sign of a permutation is defined as the parity of the length of the decompos
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n) 
+  {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
 
   sign-homomorphism-Fin-two : Aut (type-UU-Fin n X) → Fin 2
@@ -324,7 +324,7 @@ module _
     ( preserves-add-aut-point-Fin-two-ℕ
       ( sign-homomorphism-Fin-two n X f)
       ( sign-homomorphism-Fin-two n X g))
-  
+
   sign-homomorphism :
     type-hom-Group
       ( symmetric-Group (set-UU-Fin n X))
@@ -343,5 +343,5 @@ module _
       ( equiv-succ-Fin 2)
   eq-sign-homomorphism-transposition Y =
     ap aut-point-Fin-two-ℕ (eq-sign-homomorphism-Fin-two-transposition n X Y)
-    
+
 ```

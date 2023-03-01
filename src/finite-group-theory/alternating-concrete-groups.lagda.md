@@ -26,7 +26,7 @@ The alternating concrete groups are the kernels of the concrete sign homomorphis
 module _
   (n : ℕ)
   where
-  
+
   alternating-Concrete-Group : Concrete-Group (lsuc (lsuc lzero))
   alternating-Concrete-Group =
     concrete-group-kernel-hom-Concrete-Group

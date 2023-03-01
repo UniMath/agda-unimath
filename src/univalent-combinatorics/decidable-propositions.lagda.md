@@ -90,4 +90,3 @@ abstract
     cases-number-of-elements-count-eq d (d x y)
 ```
 
-

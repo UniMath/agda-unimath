@@ -32,12 +32,12 @@ open import univalent-combinatorics.standard-finite-types
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
-  
+
   fam-coprod :
     Fin 2  → UU (l1 ⊔ l2)
   fam-coprod (inl (inr star)) = raise l2 A
   fam-coprod (inr star) = raise l1 B
-  
+
   map-compute-total-fam-coprod :
     Σ (Fin 2) fam-coprod → A + B
   map-compute-total-fam-coprod (pair (inl (inr star)) y) = inl (map-inv-raise y)
@@ -71,7 +71,7 @@ module _
       map-inv-compute-total-fam-coprod
       issec-map-inv-compute-total-fam-coprod
       isretr-map-inv-compute-total-fam-coprod
-  
+
   compute-total-fam-coprod :
     (Σ (Fin 2) fam-coprod) ≃ (A + B)
   pr1 compute-total-fam-coprod = map-compute-total-fam-coprod
@@ -81,7 +81,7 @@ module _
     (A + B) ≃ Σ (Fin 2) fam-coprod
   inv-compute-total-fam-coprod =
     inv-equiv compute-total-fam-coprod
-  
+
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3}
   where
@@ -122,4 +122,4 @@ module _
     ( equiv-map-Π
       ( λ x → inv-compute-total-fam-coprod (A x) (B x)))
 ```
-  
+

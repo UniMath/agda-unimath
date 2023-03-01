@@ -46,7 +46,7 @@ with the property that any group homomorphism `f : G → K` such that
 module _
   {l1 l2 l3 : Level} (G : Group l1) (K : Group l2)
   where
-  
+
   nullifies-normal-subgroup-hom-Group-Prop :
     type-hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Group-Prop f H =

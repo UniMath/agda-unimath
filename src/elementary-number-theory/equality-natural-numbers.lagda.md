@@ -89,7 +89,7 @@ pr2 (is-contr-total-Eq-ℕ (succ-ℕ m)) (pair (succ-ℕ n) e) =
 is-equiv-Eq-eq-ℕ :
   {m n : ℕ} → is-equiv (Eq-eq-ℕ {m} {n})
 is-equiv-Eq-eq-ℕ {m} {n} =
-  fundamental-theorem-id 
+  fundamental-theorem-id
     ( is-contr-total-Eq-ℕ m)
     ( λ y → Eq-eq-ℕ {m} {y})
     ( n)

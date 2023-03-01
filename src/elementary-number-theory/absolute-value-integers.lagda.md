@@ -13,7 +13,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types 
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equational-reasoning
 open import foundation.functions
@@ -146,32 +146,32 @@ neg-both-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mu
 neg-both-abs-ℤ-mul-ℤ x y = (neg-right-abs-ℤ-mul-ℤ x y) ∙ (neg-left-abs-ℤ-mul-ℤ x (neg-ℤ y))
 
 int-ℕ-abs-ℤ-mult-positive-ints : (x y : ℕ) →
-  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
+  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
   ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-int-ℕ-abs-ℤ-mult-positive-ints x y = equational-reasoning  
-  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
-    ＝ mul-ℤ (inr (inr x)) (inr (inr y)) 
-      by (int-abs-is-nonnegative-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))) 
-        (is-nonnegative-is-positive-ℤ 
-          (is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} star star))) 
-    ＝ mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) (inr (inr y)) 
-      by (ap (λ H → mul-ℤ H (inr (inr y))) 
-        (int-abs-is-nonnegative-ℤ (inr (inr x)) 
+int-ℕ-abs-ℤ-mult-positive-ints x y = equational-reasoning
+  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
+    ＝ mul-ℤ (inr (inr x)) (inr (inr y))
+      by (int-abs-is-nonnegative-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))
+        (is-nonnegative-is-positive-ℤ
+          (is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} star star)))
+    ＝ mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) (inr (inr y))
+      by (ap (λ H → mul-ℤ H (inr (inr y)))
+        (int-abs-is-nonnegative-ℤ (inr (inr x))
           (is-nonnegative-is-positive-ℤ {inr (inr x)} star)))
-    ＝ mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) (int-ℕ (abs-ℤ (inr (inr y)))) 
-      by (ap (λ H → mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) H) 
-        (int-abs-is-nonnegative-ℤ (inr (inr y)) 
+    ＝ mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) (int-ℕ (abs-ℤ (inr (inr y))))
+      by (ap (λ H → mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) H)
+        (int-abs-is-nonnegative-ℤ (inr (inr y))
           (is-nonnegative-is-positive-ℤ {inr (inr y)} star)))
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y)))) 
+    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
       by (mul-int-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
 
 multiplicative-abs-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
-multiplicative-abs-ℤ (inl x) (inl y) = is-injective-int-ℕ 
+multiplicative-abs-ℤ (inl x) (inl y) = is-injective-int-ℕ
   (equational-reasoning
     int-ℕ (abs-ℤ (mul-ℤ (inl x) (inl y)))
-    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
-      by (ap int-ℕ (neg-both-abs-ℤ-mul-ℤ (inl x) (inl y))) 
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y)))) 
+    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
+      by (ap int-ℕ (neg-both-abs-ℤ-mul-ℤ (inl x) (inl y)))
+    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
       by (int-ℕ-abs-ℤ-mult-positive-ints x y))
 multiplicative-abs-ℤ (inl x) (inr (inl star)) = equational-reasoning
   abs-ℤ (mul-ℤ (inl x) zero-ℤ)
@@ -180,23 +180,23 @@ multiplicative-abs-ℤ (inl x) (inr (inl star)) = equational-reasoning
 multiplicative-abs-ℤ (inl x) (inr (inr y)) = is-injective-int-ℕ
   (equational-reasoning
     int-ℕ (abs-ℤ (mul-ℤ (inl x) (inr (inr y))))
-    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
-      by (ap int-ℕ (neg-left-abs-ℤ-mul-ℤ (inl x) (inr (inr y)))) 
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y)))) 
+    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
+      by (ap int-ℕ (neg-left-abs-ℤ-mul-ℤ (inl x) (inr (inr y))))
+    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
       by (int-ℕ-abs-ℤ-mult-positive-ints x y))
-multiplicative-abs-ℤ (inr (inl star)) y = refl 
+multiplicative-abs-ℤ (inr (inl star)) y = refl
 multiplicative-abs-ℤ (inr (inr x)) (inl y) = is-injective-int-ℕ
-  (equational-reasoning 
+  (equational-reasoning
     int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inl y)))
-    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
-      by (ap int-ℕ (neg-right-abs-ℤ-mul-ℤ (inr (inr x)) (inl y))) 
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y)))) 
+    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
+      by (ap int-ℕ (neg-right-abs-ℤ-mul-ℤ (inr (inr x)) (inl y)))
+    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
       by (int-ℕ-abs-ℤ-mult-positive-ints x y))
 multiplicative-abs-ℤ (inr (inr x)) (inr (inl star)) = equational-reasoning
   abs-ℤ (mul-ℤ (inr (inr x)) zero-ℤ)
   ＝ zero-ℕ by (ap (abs-ℤ) (right-zero-law-mul-ℤ (inr (inr x))))
   ＝ mul-ℕ (abs-ℤ (inr (inr x))) zero-ℕ by (inv (right-zero-law-mul-ℕ (abs-ℤ (inr (inr x)))))
-multiplicative-abs-ℤ (inr (inr x)) (inr (inr y)) = is-injective-int-ℕ 
+multiplicative-abs-ℤ (inr (inr x)) (inr (inr y)) = is-injective-int-ℕ
   (int-ℕ-abs-ℤ-mult-positive-ints x y)
 
 ```

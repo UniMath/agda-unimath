@@ -20,7 +20,7 @@ open import order-theory.posets
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
-  
+
   is-maximal-chain-poset-Prop :
     {l3 : Level} → chain-Poset l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-poset-Prop =

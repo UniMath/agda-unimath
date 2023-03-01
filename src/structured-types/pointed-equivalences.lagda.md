@@ -147,7 +147,7 @@ module _
       ( is-contr-total-equiv (type-Pointed-Type A))
       ( pair (type-Pointed-Type A) id-equiv)
       ( is-contr-total-path (pt-Pointed-Type A))
-  
+
   extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
   extensionality-Pointed-Type =
     extensionality-Σ

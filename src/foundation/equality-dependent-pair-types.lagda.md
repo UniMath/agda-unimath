@@ -21,10 +21,10 @@ open import foundation.identity-types
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   comp-eq-pair-Σ :
     {x y z : A} (a : B x) (b : B y) (c : B z) (p : x ＝ y) (q : y ＝ z) →
-    ( r : tr B p a ＝ b) (s : tr B q b ＝ c) → 
+    ( r : tr B p a ＝ b) (s : tr B q b ＝ c) →
     ( concat
       {x = pair x a}
       {y = pair y b}
@@ -43,8 +43,8 @@ module _
     (pr1 (pair-eq-Σ (ap f p))) ＝ (ap (λ x → pr1 (f x)) p)
   ap-pair-eq-Σ X f x .x refl = refl
 
-  inv-eq-pair-Σ : 
-    {x y : A} (a : B x) (b : B y) (p : x ＝ y) (r : tr B p a ＝ b) → 
+  inv-eq-pair-Σ :
+    {x y : A} (a : B x) (b : B y) (p : x ＝ y) (r : tr B p a ＝ b) →
     ( inv (eq-pair-Σ p r)) ＝
     ( eq-pair-Σ
       ( inv p)

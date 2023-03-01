@@ -142,9 +142,9 @@ trans-sim-fraction-ℤ x y z r s =
                             ( denominator-fraction-ℤ y)))))))))))))
 
 eq-rel-sim-fraction-ℤ : Eq-Rel lzero fraction-ℤ
-eq-rel-sim-fraction-ℤ = pair (sim-fraction-ℤ-Prop) 
-  ( pair' (λ {x} → refl-sim-fraction-ℤ x) 
-    ( pair' (λ {x y} → symm-sim-fraction-ℤ x y) 
-      (λ {x y z} → trans-sim-fraction-ℤ x y z))) 
+eq-rel-sim-fraction-ℤ = pair (sim-fraction-ℤ-Prop)
+  ( pair' (λ {x} → refl-sim-fraction-ℤ x)
+    ( pair' (λ {x y} → symm-sim-fraction-ℤ x y)
+      (λ {x y z} → trans-sim-fraction-ℤ x y z)))
 
 ```

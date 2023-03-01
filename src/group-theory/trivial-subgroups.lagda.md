@@ -37,7 +37,7 @@ module _
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   trivial-Subgroup : Subgroup l1 G
   pr1 trivial-Subgroup x = is-unit-group-Prop G x
   pr1 (pr2 trivial-Subgroup) = refl

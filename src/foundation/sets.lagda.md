@@ -69,7 +69,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-set A → is-set B → is-set (A × B)
   is-set-prod = is-trunc-prod zero-𝕋
-  
+
 prod-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2) → Set (l1 ⊔ l2)
 prod-Set A B = Σ-Set A (λ x → B)
@@ -181,7 +181,7 @@ module _
 module _
   {l1 l2 : Level} (A : Set l1) (B : Set l2)
   where
-  
+
   type-equiv-Set : UU (l1 ⊔ l2)
   type-equiv-Set = type-Set A ≃ type-Set B
 
@@ -199,7 +199,7 @@ module _
 
   equiv-eq-Set : (Y : Set l) → X ＝ Y → type-equiv-Set X Y
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
-  
+
   abstract
     is-contr-total-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
     is-contr-total-equiv-Set =

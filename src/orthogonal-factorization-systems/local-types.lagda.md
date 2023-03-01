@@ -17,7 +17,6 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
 
-
 open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type

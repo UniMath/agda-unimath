@@ -22,7 +22,6 @@ open import group-theory.groups
 ```
 </details>
 
-
 ## Idea
 
 This module simplifies group expressions, such that all items associate the same way
@@ -31,7 +30,6 @@ and removes units and inverses next to the original.
 The main entry-point is `solveExpr` below
 
 ```agda
-
 
 data Fin : ℕ → UU where
   zero-Fin : ∀ {n} → Fin (succ-ℕ n)
@@ -175,8 +173,6 @@ module _ {n : ℕ} where
     distr-inv-mul-GE : ∀ x y → GroupEquality (gInv (gMul x y)) (gMul (gInv y) (gInv x))
     distr-inv-mul-GE x y = singleton-GE (xdistr-inv-mul-GE x y)
 
-
-
   assoc-GE' : ∀ x y z → GroupEquality (gMul x (gMul y z)) (gMul (gMul x y) z)
   assoc-GE' x y z = sym-GE (assoc-GE x y z)
 
@@ -223,7 +219,6 @@ module _ {n : ℕ} where
     (unquoteSimpleElem (inv-SE' w))
   inv-single-valid (inv-SE x) = inv-inv-GE (inner x)
   inv-single-valid (pure-SE x) = refl-GE
-
 
   gMul-concat-nonempty : ∀ (w : GroupSyntax n) (as b : Simple n) →
                         GroupEquality (gMul (unquoteSimple b) (unquoteSimpleNonEmpty as w))
@@ -285,7 +280,6 @@ module _ {n : ℕ} where
     unQuoteGS (gMul x y) e = mul-Group G (unQuoteGS x e) (unQuoteGS y e)
     unQuoteGS (gInv x) e = inv-Group G (unQuoteGS x e)
     unQuoteGS (inner x) e = getVec e x
-
 
     private
       -- Shorter names to make the proofs less verbose

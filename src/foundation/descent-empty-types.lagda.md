@@ -18,7 +18,7 @@ open import foundation-core.universe-levels
 module _
   {l1 l2 l3 : Level} {B : UU l1} {X : UU l2} {C : UU l3} (g : B → X)
   where
-  
+
   cone-empty : is-empty C → (C → B) → cone ex-falso g C
   cone-empty p q = triple p q (λ c → ex-falso (p c))
 

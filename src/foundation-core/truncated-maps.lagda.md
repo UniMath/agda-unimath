@@ -217,7 +217,6 @@ module _
   is-prop-map-comp : is-prop-map g → is-prop-map h → is-prop-map (g ∘ h)
   is-prop-map-comp = is-trunc-map-comp neg-one-𝕋 g h
 
-
 abstract
   is-trunc-map-comp-htpy :
     {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
@@ -269,7 +268,6 @@ module _
 
   is-prop-map-right-factor-htpy : is-prop-map g → is-prop-map f → is-prop-map h
   is-prop-map-right-factor-htpy = is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
-
 
 is-trunc-map-right-factor :
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}

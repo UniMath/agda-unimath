@@ -180,5 +180,5 @@ module _
     left-unit-law-comp-hom-orbit-Monoid-Action
   pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
     right-unit-law-comp-hom-orbit-Monoid-Action
-    
+
 ```

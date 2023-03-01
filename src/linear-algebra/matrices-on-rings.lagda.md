@@ -27,7 +27,7 @@ open import ring-theory.rings
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   matrix-Ring : ℕ → ℕ → UU l
   matrix-Ring m n = matrix (type-Ring R) m n
 ```

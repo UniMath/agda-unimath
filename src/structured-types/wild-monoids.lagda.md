@@ -28,13 +28,13 @@ open import structured-types.pointed-types
 module _
   {l : Level} (M : Coherent-H-Space l)
   where
-  
+
   associator-Coherent-H-Space : UU l
   associator-Coherent-H-Space =
     (x y z : type-Coherent-H-Space M) →
     Id ( mul-Coherent-H-Space M (mul-Coherent-H-Space M x y) z)
       ( mul-Coherent-H-Space M x (mul-Coherent-H-Space M y z))
-     
+
   is-unital-associator : (α : associator-Coherent-H-Space) → UU l
   is-unital-associator α111 =
     Σ ( (y z : type-Coherent-H-Space M) →
@@ -80,7 +80,7 @@ module _
 
   wild-unital-magma-Wild-Monoid : Coherent-H-Space l
   wild-unital-magma-Wild-Monoid = pr1 M
-      
+
   type-Wild-Monoid : UU l
   type-Wild-Monoid = type-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
@@ -148,7 +148,7 @@ module _
 module _
   {l1 l2 : Level} (M : Wild-Monoid l1) (N : Wild-Monoid l2)
   where
-  
+
   hom-Wild-Monoid : UU (l1 ⊔ l2)
   hom-Wild-Monoid =
     hom-Coherent-H-Space

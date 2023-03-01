@@ -202,7 +202,7 @@ equiv-subgroup-Concrete-Group :
 equiv-subgroup-Concrete-Group G X Y =
   type-subtype
     ( subtype-preserves-unit-coset-equiv-action-Concrete-Group G X Y)
-  
+
 extensionality-subgroup-Concrete-Group :
   {l1 l2 : Level} (G : Concrete-Group l1) (X Y : subgroup-Concrete-Group l2 G) →
   (X ＝ Y) ≃ equiv-subgroup-Concrete-Group G X Y

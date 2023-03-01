@@ -26,7 +26,7 @@ A prime ideal is an ideal `I` in a commutative ring `R` such that for every `a,b
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
   where
-  
+
   is-prime-ideal-commutative-ring-Prop : Prop (l1 ⊔ l2)
   is-prime-ideal-commutative-ring-Prop =
     Π-Prop

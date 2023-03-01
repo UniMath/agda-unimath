@@ -50,7 +50,7 @@ module _
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
-  
+
   inclusion-chain-poset-Prop :
     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
     Prop (l1 ⊔ l3 ⊔ l4)

@@ -71,7 +71,7 @@ eq-equiv-Contr = eq-equiv-subuniverse is-contr-Prop
 abstract
   center-Contr : (l : Level) → Contr l
   center-Contr l = pair (raise-unit l) is-contr-raise-unit
-  
+
   contraction-Contr :
     {l : Level} (A : Contr l) → center-Contr l ＝ A
   contraction-Contr A =
@@ -104,7 +104,7 @@ equiv-is-contr-equiv {A = A} {B = B} e =
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-trunc-is-contr : (k : 𝕋) → is-contr A → is-trunc k A
     is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A

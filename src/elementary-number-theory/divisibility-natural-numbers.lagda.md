@@ -9,7 +9,7 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-    
+
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types

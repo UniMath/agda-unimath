@@ -91,7 +91,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
   where
-  
+
   is-normal-kernel-hom-Group :
     is-normal-Subgroup G (subgroup-kernel-hom-Group G H f)
   is-normal-kernel-hom-Group g h =

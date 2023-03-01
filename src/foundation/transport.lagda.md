@@ -20,7 +20,6 @@ open import foundation.universal-property-dependent-pair-types
 
 ## Properties
 
-
 ### Transport
 
 ```agda
@@ -33,8 +32,6 @@ module _
     (p : x0 ＝ x1) → preserves-tr (λ x → id {A = A x}) p ~ refl-htpy
   preserves-tr-id refl = refl-htpy
 ```
-
-
 
 ### Transport in a family of cartesian products
 
@@ -54,7 +51,7 @@ tr-prod B C refl u = refl
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A} {b0 b1 : B}
   where
-  
+
   tr-eq-pair :
     (C : A × B → UU l3) (p : a0 ＝ a1) (q : b0 ＝ b1) (u : C (a0 , b0)) →
     tr C (eq-pair p q) u ＝
@@ -114,12 +111,12 @@ tr-eq-pair-Σ C refl refl u = refl
 module _
   {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : A → UU l3)
   where
-  
+
   tr-function-type :
     (p : x ＝ y) (f : B x → C x) →
     tr (λ a → B a → C a) p f ＝ (tr C p ∘ (f ∘ tr B (inv p)))
   tr-function-type refl f = refl
-   
+
   compute-path-over-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
@@ -156,14 +153,14 @@ module _
 tr-fx＝gy :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {a0 a1 : A} {b0 b1 : B} (f : A → C) (g : B → C)
-  (p : a0 ＝ a1) (q : b0 ＝ b1) (s : f a0 ＝ g b0) → 
+  (p : a0 ＝ a1) (q : b0 ＝ b1) (s : f a0 ＝ g b0) →
   (tr (λ z → (f (pr1 z)) ＝ (g (pr2 z))) (eq-pair p q) s) ＝
   (((inv (ap f p)) ∙ s) ∙ (ap g q))
 tr-fx＝gy f g refl refl s = inv right-unit
 
 tr-x＝y :
   {l1 : Level} {A : UU l1} {a0 a1 a2 a3 : A}
-  (p : a0 ＝ a1) (q : a2 ＝ a3) (s : a0 ＝ a2) → 
+  (p : a0 ＝ a1) (q : a2 ＝ a3) (s : a0 ＝ a2) →
   (tr (λ z → (pr1 z) ＝ (pr2 z)) (eq-pair p q) s) ＝ ((inv p) ∙ (s ∙ q))
 tr-x＝y refl refl s = inv right-unit
 ```

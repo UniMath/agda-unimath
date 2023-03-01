@@ -27,7 +27,7 @@ Given a concrete group `G`, a concrete action of `G` on a type is defined to be 
 module _
   {l1 : Level} (l2 : Level) (G : Concrete-Group l1)
   where
-  
+
   action-Concrete-Group : UU (l1 ⊔ lsuc l2)
   action-Concrete-Group = classifying-type-Concrete-Group G → Set l2
 

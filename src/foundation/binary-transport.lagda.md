@@ -26,7 +26,7 @@ Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A → B → UU l3)
   where
-  
+
   binary-tr :
     {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → C x y → C x' y'
   binary-tr refl refl = id

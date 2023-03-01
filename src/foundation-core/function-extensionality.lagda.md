@@ -26,7 +26,7 @@ In this file, we define the statement of the axiom. The axiom itself is postulat
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   htpy-eq : {f g : (x : A) → B x} → (f ＝ g) → (f ~ g)
   htpy-eq refl = refl-htpy
 
@@ -53,7 +53,7 @@ ap-ev :
   (p : f ＝ g) → (ap (λ h → h a) p) ＝ htpy-eq p a
 ap-ev a refl = refl
 ```
- 
+
 ## See also
 
 - That the univalence axiom implies function extensionality is proven in

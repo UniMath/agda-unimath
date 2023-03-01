@@ -34,7 +34,6 @@ open import foundation.univalence
 
 The slice of a category over an object X is the category of morphisms into X. A morphism in the slice from `f : A → X` to `g : B → X` consists of a function `h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these definitions for types.
 
-
 ## Definition
 
 ### The objects of the slice category of types
@@ -237,8 +236,6 @@ module _
     fiberwise-equiv (fib f) (fib g) ≃ equiv-slice f g
   equiv-equiv-slice-fiberwise-equiv =
     inv-equiv equiv-fiberwise-equiv-equiv-slice
-  
-  
 
   fiberwise-equiv-equiv-slice :
     equiv-slice f g → fiberwise-equiv (fib f) (fib g)
@@ -348,7 +345,6 @@ module _
     (f g : Slice l2 A) → (f ＝ g) ≃ equiv-slice' f g
   pr1 (extensionality-Slice f g) = equiv-eq-Slice f g
   pr2 (extensionality-Slice f g) = is-equiv-equiv-eq-Slice f g
-    
 
   eq-equiv-slice :
     (f g : Slice l2 A) → equiv-slice' f g → f ＝ g

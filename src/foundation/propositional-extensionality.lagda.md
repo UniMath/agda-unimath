@@ -40,7 +40,7 @@ Propositional extensionality characterizes identifications of propositions. It a
 module _
   {l1 : Level}
   where
-  
+
   abstract
     is-contr-total-iff :
       (P : Prop l1) → is-contr (Σ (Prop l1) (λ Q → P ⇔ Q))
@@ -58,7 +58,7 @@ module _
   abstract
     is-equiv-iff-eq : (P Q : Prop l1) → is-equiv (iff-eq {l1} {P} {Q})
     is-equiv-iff-eq P =
-      fundamental-theorem-id 
+      fundamental-theorem-id
         ( is-contr-total-iff P)
         ( λ Q → iff-eq {P = P} {Q})
 

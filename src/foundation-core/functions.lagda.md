@@ -70,7 +70,7 @@ map-Π f h i = f i (h i)
 
 map-Π' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {J : UU l4} (α : J → I) → 
+  {J : UU l4} (α : J → I) →
   ((i : I) → A i → B i) → ((j : J) → A (α j)) → ((j : J) → B (α j))
 map-Π' α f = map-Π (λ j → f (α j))
 ```

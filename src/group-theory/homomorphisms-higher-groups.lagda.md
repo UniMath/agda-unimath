@@ -109,7 +109,7 @@ module _
 module _
   {l : Level} (G : ∞-Group l)
   where
-  
+
   id-hom-∞-Group : hom-∞-Group G G
   id-hom-∞-Group = id-pointed-map
 

@@ -28,7 +28,7 @@ Since isomorphic semigroups are equal, the precategory of semigroups is a catego
 is-category-Semigroup :
   is-category-Large-Precat Semigroup-Large-Precat
 is-category-Semigroup G =
-  fundamental-theorem-id 
+  fundamental-theorem-id
     ( is-contr-total-iso-Semigroup G)
     ( iso-eq-Semigroup G)
 

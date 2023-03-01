@@ -47,7 +47,7 @@ module _
 
   is-set-type-Abstract-Group-Action : is-set type-Abstract-Group-Action
   is-set-type-Abstract-Group-Action = is-set-type-Set set-Abstract-Group-Action
-  
+
   equiv-mul-Abstract-Group-Action :
     type-Group G → type-Abstract-Group-Action ≃ type-Abstract-Group-Action
   equiv-mul-Abstract-Group-Action =

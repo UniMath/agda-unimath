@@ -43,7 +43,7 @@ module _
         ( {!!})
         {!!}
 
-      is-equiv-has-inverse 
+      is-equiv-has-inverse
         ( pr1 (center K))
         ( htpy-eq
           ( is-injective-is-equiv
@@ -83,7 +83,6 @@ module _
             ( pr2 (center K))
             -}
 
-  
 {-
 -- Uniqueness of set truncations
 
@@ -111,7 +110,7 @@ module _
 
   abstract
     is-set-truncation-is-equiv-is-set-truncation :
-      ({l : Level} → is-set-truncation l C g) → is-equiv h → 
+      ({l : Level} → is-set-truncation l C g) → is-equiv h →
       {l : Level} → is-set-truncation l B f
     is-set-truncation-is-equiv-is-set-truncation Sg Eh =
       is-set-truncation-is-set-quotient B f
@@ -160,7 +159,7 @@ module _
         ( C)
         ( reflecting-map-mere-eq C g)
         ( is-set-quotient-is-set-truncation C g Sg)
-  
+
   equiv-uniqueness-set-truncation : type-Set B ≃ type-Set C
   equiv-uniqueness-set-truncation =
     pr1 (center uniqueness-set-truncation)

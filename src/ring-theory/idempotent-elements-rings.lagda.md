@@ -23,7 +23,7 @@ An idempotent element in a ring is an element `x` such that `x² = x`.
 module _
   {l : Level} (R : Ring l) (x : type-Ring R)
   where
-  
+
   is-idempotent-element-ring-Prop : Prop l
   is-idempotent-element-ring-Prop = Id-Prop (set-Ring R) (mul-Ring R x x) x
 

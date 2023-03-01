@@ -10,7 +10,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies 
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -143,7 +143,7 @@ is-set-type-hom-finite-species F G f g =
       is-prop-Π
         ( λ x p q →
           is-set-is-finite (is-finite-type-𝔽 (G X)) (f X x) (g X x) p q)))
-     
+
 hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →
   Set (lsuc l1 ⊔ l2 ⊔ l3)

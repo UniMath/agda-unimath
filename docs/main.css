@@ -49,12 +49,12 @@ ul.posts li {
     list-style: none;
 }
 
-pre {
+code, pre {
     font-size: .95rem;
     text-overflow: clip;
     line-height: 1rem;
     width: 50%;
-    font-family: "Menlo","Inconsolata","Consolas","Roboto Mono","Ubuntu Mono","Liberation Mono","Courier New",monospace;
+    font-family: 'JetBrains Mono', 'Source Code Pro', 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
 }
 
 .changelog {

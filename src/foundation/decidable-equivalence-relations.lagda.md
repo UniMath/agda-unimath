@@ -262,7 +262,7 @@ module _
                   ( transitive-Decidable-Equivalence-Relation R H)
                   ( transitive-Decidable-Equivalence-Relation R
                     ( symmetric-Decidable-Equivalence-Relation R H))))
-  
+
     is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation :
       is-contr
         ( Σ ( equivalence-class-Decidable-Equivalence-Relation R)
@@ -329,7 +329,7 @@ module _
       ( equiv-symmetric-Decidable-Equivalence-Relation R) ∘e
       ( effective-quotient-Decidable-Equivalence-Relation' R x
         ( class-Decidable-Equivalence-Relation R y))
-  
+
   abstract
     apply-effectiveness-class-Decidable-Equivalence-Relation :
       {x y : A} →

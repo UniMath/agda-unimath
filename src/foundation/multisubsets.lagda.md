@@ -48,7 +48,7 @@ module _
   locally-finite-multisubset : Set l1 → UU l1
   locally-finite-multisubset U = type-Set U → ℕ
 
-  support-locally-finite-multisubset : 
+  support-locally-finite-multisubset :
     (U : Set l1) → locally-finite-multisubset U → UU l1
   support-locally-finite-multisubset U μ =
     Σ (type-Set U) λ x → ¬ (μ x ＝ zero-ℕ)

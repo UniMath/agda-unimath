@@ -41,7 +41,7 @@ module _
 module _
   {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
   where
-  
+
   universal-property-circle : UU (l1 ⊔ lsuc l2)
   universal-property-circle = (Y : UU l2) → is-equiv (ev-free-loop α Y)
 ```
@@ -73,7 +73,7 @@ module _
   (H : {l : Level} → induction-principle-circle l α) (P : X → UU l2)
   (β : free-dependent-loop α P)
   where
-  
+
   function-induction-principle-circle : (x : X) → P x
   function-induction-principle-circle = pr1 (H P) β
 

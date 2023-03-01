@@ -4,7 +4,6 @@
 ```agda
 module univalent-combinatorics.sums-of-natural-numbers where
 
-
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers public
 

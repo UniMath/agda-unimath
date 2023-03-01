@@ -25,7 +25,7 @@ cube k = Σ (UU-Fin lzero k) (λ X → type-UU-Fin k X → UU-Fin lzero 2)
 module _
   (k : ℕ) (X : cube k)
   where
-  
+
   dim-cube-UU-Fin : UU-Fin lzero k
   dim-cube-UU-Fin = pr1 X
 

@@ -105,10 +105,10 @@ abstract
     is-coherently-invertible f →
     (C : B → UU l3) → is-equiv (precomp-Π f C)
   is-equiv-precomp-Π-is-coherently-invertible f
-    ( pair g (pair issec-g (pair isretr-g coh))) C = 
+    ( pair g (pair issec-g (pair isretr-g coh))) C =
     is-equiv-has-inverse
       (λ s y → tr C (issec-g y) (s (g y)))
-      ( λ s → eq-htpy (λ x → 
+      ( λ s → eq-htpy (λ x →
         ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙
         ( ( tr-precompose-fam C f (isretr-g x) (s (g (f x)))) ∙
           ( apd s (isretr-g x)))))
@@ -122,7 +122,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   (H : is-equiv f) (C : B → UU l3)
   where
-  
+
   abstract
     is-equiv-precomp-Π-is-equiv : is-equiv (precomp-Π f C)
     is-equiv-precomp-Π-is-equiv =
@@ -143,7 +143,7 @@ module _
     htpy-eq (issec-map-inv-is-equiv is-equiv-precomp-Π-is-equiv h)
 
   isretr-map-inv-is-equiv-precomp-Π-is-equiv :
-    (g : (b : B) → C b) → 
+    (g : (b : B) → C b) →
     (map-inv-is-equiv-precomp-Π-is-equiv (precomp-Π f C g)) ~ g
   isretr-map-inv-is-equiv-precomp-Π-is-equiv g =
     htpy-eq (isretr-map-inv-is-equiv is-equiv-precomp-Π-is-equiv g)

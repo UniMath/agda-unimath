@@ -23,7 +23,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A matching in a undirected graph is a set of edges without common vertices. 
+A matching in a undirected graph is a set of edges without common vertices.
 
 ## Definitions
 

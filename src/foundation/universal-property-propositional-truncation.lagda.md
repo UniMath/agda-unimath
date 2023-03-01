@@ -236,7 +236,7 @@ abstract
         ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-ptr-f (Σ-Prop P Q)))
       ( id {A = type-Prop P})
-      
+
 abstract
   is-propositional-truncation-dependent-universal-property :
     { l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →

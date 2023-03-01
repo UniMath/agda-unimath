@@ -26,7 +26,7 @@ open import univalent-combinatorics.standard-finite-types
 module _
   {l : Level} {X : UU l} (f : X → X) (P : is-involution f)
   where
-  
+
   iterate-involution :
     (n : ℕ) (x : X) → iterate n f x ＝ iterate (nat-Fin 2 (mod-two-ℕ n)) f x
   iterate-involution zero-ℕ x = refl
@@ -34,7 +34,7 @@ module _
     ap f (iterate-involution n x) ∙ (cases-iterate-involution (mod-two-ℕ n))
     where
     cases-iterate-involution : (k : Fin 2) →
-      Id (f (iterate (nat-Fin 2 k) f x)) (iterate (nat-Fin 2 (succ-Fin 2 k)) f x) 
+      Id (f (iterate (nat-Fin 2 k) f x)) (iterate (nat-Fin 2 (succ-Fin 2 k)) f x)
     cases-iterate-involution (inl (inr star)) = refl
     cases-iterate-involution (inr star) = P x
 ```

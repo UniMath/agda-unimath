@@ -214,7 +214,7 @@ module _
                 ( q)))
     uniqueness-im =
       uniqueness-image f (emb-im f) (unit-im f) (is-image-im f) i q H
-  
+
   equiv-slice-uniqueness-im : equiv-slice (inclusion-im f) (map-emb i)
   equiv-slice-uniqueness-im =
     pr1 (center uniqueness-im)

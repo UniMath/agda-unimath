@@ -41,16 +41,16 @@ count X = Σ ℕ (λ k → Fin k ≃ X)
 module _
   {l : Level} {X : UU l} (e : count X)
   where
-  
+
   number-of-elements-count : ℕ
   number-of-elements-count = pr1 e
-  
+
   equiv-count : Fin number-of-elements-count ≃ X
   equiv-count = pr2 e
-  
+
   map-equiv-count : Fin number-of-elements-count → X
   map-equiv-count = map-equiv equiv-count
-  
+
   map-inv-equiv-count : X → Fin number-of-elements-count
   map-inv-equiv-count = map-inv-equiv equiv-count
 
@@ -59,10 +59,10 @@ module _
 
   isretr-map-inv-equiv-count : (map-inv-equiv-count ∘ map-equiv-count) ~ id
   isretr-map-inv-equiv-count = isretr-map-inv-equiv equiv-count
-  
+
   inv-equiv-count : X ≃ Fin number-of-elements-count
   inv-equiv-count = inv-equiv equiv-count
-  
+
   is-set-count : is-set X
   is-set-count =
     is-set-equiv'
@@ -87,7 +87,7 @@ pr2 (count-Fin k) = id-equiv
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   abstract
     equiv-count-equiv :
       (e : X ≃ Y) (f : count X) → Fin (number-of-elements-count f) ≃ Y
@@ -101,14 +101,14 @@ module _
     equiv-count-equiv' :
       (e : X ≃ Y) (f : count Y) → Fin (number-of-elements-count f) ≃ X
     equiv-count-equiv' e f = inv-equiv e ∘e (equiv-count f)
-  
+
   count-equiv' : X ≃ Y → count Y → count X
   pr1 (count-equiv' e f) = number-of-elements-count f
   pr2 (count-equiv' e f) = equiv-count-equiv' e f
-  
+
   count-is-equiv : {f : X → Y} → is-equiv f → count X → count Y
   count-is-equiv H = count-equiv (pair _ H)
-  
+
   count-is-equiv' :
     {f : X → Y} → is-equiv f → count Y → count X
   count-is-equiv' H = count-equiv' (pair _ H)

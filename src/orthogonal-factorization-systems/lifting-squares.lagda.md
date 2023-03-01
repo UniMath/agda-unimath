@@ -114,7 +114,7 @@ module _
 
   coherence-is-lifting-square :
     {j : X → B} → (l : is-lifting-square h f g i H j) →
-    (is-lift-is-lifting-square l ·r f) ~ (H ∙h (g ·l is-extension-is-lifting-square l)) 
+    (is-lift-is-lifting-square l ·r f) ~ (H ∙h (g ·l is-extension-is-lifting-square l))
   coherence-is-lifting-square = pr2 ∘ pr2
 
   coherence-lifting-square :

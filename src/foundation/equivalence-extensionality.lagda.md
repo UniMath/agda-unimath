@@ -82,4 +82,3 @@ module _
     {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → htpy-equiv e e'
   htpy-eq-map-equiv = htpy-eq
 ```
- 

@@ -275,7 +275,7 @@ comp-map-inv-equiv-equiv-is-not-exception-Maybe :
 comp-map-inv-equiv-equiv-is-not-exception-Maybe e =
   comp-map-equiv-equiv-is-not-exception-Maybe (inv-equiv e)
 ```
-    
+
 ### The map `map-inv-equiv-equiv-Maybe e` is a section of `map-equiv-equiv-Maybe e`
 
 ```agda
@@ -370,9 +370,9 @@ pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
 
 ```agda
 module _
-  {l : Level} (X : Set l) 
+  {l : Level} (X : Set l)
   where
-  
+
   extend-equiv-Maybe :
     (type-Set X ≃ type-Set X) ≃
     ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))

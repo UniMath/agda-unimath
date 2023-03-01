@@ -108,7 +108,7 @@ module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
   (e : equiv-Directed-Tree S T)
   where
-  
+
   preserves-root-equiv-Directed-Tree :
     node-equiv-Directed-Tree S T e (root-Directed-Tree S) ＝
     root-Directed-Tree T

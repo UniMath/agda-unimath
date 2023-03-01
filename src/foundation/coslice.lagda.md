@@ -72,4 +72,3 @@ module _
   eq-htpy-hom-coslice h k H K =
     map-inv-equiv (extensionality-hom-coslice h k) (pair H K)
 ```
- 

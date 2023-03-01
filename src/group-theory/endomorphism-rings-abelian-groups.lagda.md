@@ -27,7 +27,7 @@ For any abelian group $A$, the set $\mathrm{hom}(A,A)$ of morphisms of abelian g
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   endomorphism-ring-Ab : Ring l
   pr1 (pr1 (pr1 (pr1 endomorphism-ring-Ab))) = hom-Ab A A
   pr1 (pr2 (pr1 (pr1 (pr1 endomorphism-ring-Ab)))) = add-hom-Ab A A

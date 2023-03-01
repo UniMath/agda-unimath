@@ -100,7 +100,7 @@ private
 ### Peano's 8th axiom
 
 ```agda
-private   
+private
   Peano-8 : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
   Peano-8 x ()
 

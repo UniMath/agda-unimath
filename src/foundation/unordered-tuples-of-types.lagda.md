@@ -77,7 +77,7 @@ module _
 module _
   {l : Level} {n : ℕ} (A : unordered-tuple-types l n)
   where
-  
+
   id-equiv-unordered-tuple-types : equiv-unordered-tuple-types n A A
   pr1 id-equiv-unordered-tuple-types = id-equiv
   pr2 id-equiv-unordered-tuple-types i = id-equiv

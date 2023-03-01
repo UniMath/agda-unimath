@@ -105,7 +105,7 @@ module _
     ap
       ( mul-Group' G (inv-Group G x))
       ( ap (mul-Group' G y) (inv (inv-inv-Group G x)))
-  
+
   right-conjugation-law-mul-Group :
     (x y : type-Group G) →
     mul-Group G (inv-Group G x) (conjugation-Group G x y) ＝

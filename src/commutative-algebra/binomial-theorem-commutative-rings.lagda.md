@@ -57,7 +57,7 @@ binomial-sum-Commutative-Ring R = binomial-sum-Ring (ring-Commutative-Ring R)
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   binomial-sum-one-element-Commutative-Ring :
     (f : functional-vec-Commutative-Ring R 1) →
     binomial-sum-Commutative-Ring R 0 f ＝

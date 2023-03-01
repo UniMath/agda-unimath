@@ -29,7 +29,7 @@ Involutive-Type l = 2-Element-Type lzero → UU l
 module _
   {l : Level} (X : Involutive-Type l)
   where
-  
+
   type-Involutive-Type : UU l
   type-Involutive-Type = X (standard-2-Element-Type lzero)
 ```

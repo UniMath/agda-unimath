@@ -6,7 +6,7 @@ module elementary-number-theory.multiplication-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
-    
+
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -100,7 +100,7 @@ abstract
     (x y : ℕ) → mul-ℕ x y ＝ mul-ℕ y x
   commutative-mul-ℕ zero-ℕ y = inv (right-zero-law-mul-ℕ y)
   commutative-mul-ℕ (succ-ℕ x) y =
-    ( commutative-add-ℕ (mul-ℕ x y) y) ∙ 
+    ( commutative-add-ℕ (mul-ℕ x y) y) ∙
     ( ( ap (add-ℕ y) (commutative-mul-ℕ x y)) ∙
       ( inv (right-successor-law-mul-ℕ y x)))
 
@@ -109,22 +109,22 @@ abstract
     (x y z : ℕ) → mul-ℕ x (add-ℕ y z) ＝ add-ℕ (mul-ℕ x y) (mul-ℕ x z)
   left-distributive-mul-add-ℕ zero-ℕ y z = refl
   left-distributive-mul-add-ℕ (succ-ℕ x) y z =
-    ( left-successor-law-mul-ℕ x (add-ℕ y z)) ∙ 
-    ( ( ap (add-ℕ' (add-ℕ y z)) (left-distributive-mul-add-ℕ x y z)) ∙ 
+    ( left-successor-law-mul-ℕ x (add-ℕ y z)) ∙
+    ( ( ap (add-ℕ' (add-ℕ y z)) (left-distributive-mul-add-ℕ x y z)) ∙
       ( ( associative-add-ℕ (mul-ℕ x y) (mul-ℕ x z) (add-ℕ y z)) ∙
-        ( ( ap ( add-ℕ (mul-ℕ x y)) 
+        ( ( ap ( add-ℕ (mul-ℕ x y))
                ( ( inv (associative-add-ℕ (mul-ℕ x z) y z)) ∙
                  ( ( ap (add-ℕ' z) (commutative-add-ℕ (mul-ℕ x z) y)) ∙
-                   ( associative-add-ℕ y (mul-ℕ x z) z)))) ∙ 
+                   ( associative-add-ℕ y (mul-ℕ x z) z)))) ∙
           ( inv (associative-add-ℕ (mul-ℕ x y) y (add-ℕ (mul-ℕ x z) z))))))
 
 abstract
   right-distributive-mul-add-ℕ :
     (x y z : ℕ) → mul-ℕ (add-ℕ x y) z ＝ add-ℕ (mul-ℕ x z) (mul-ℕ y z)
   right-distributive-mul-add-ℕ x y z =
-    ( commutative-mul-ℕ (add-ℕ x y) z) ∙ 
-    ( ( left-distributive-mul-add-ℕ z x y) ∙ 
-      ( ( ap (add-ℕ' (mul-ℕ z y)) (commutative-mul-ℕ z x)) ∙ 
+    ( commutative-mul-ℕ (add-ℕ x y) z) ∙
+    ( ( left-distributive-mul-add-ℕ z x y) ∙
+      ( ( ap (add-ℕ' (mul-ℕ z y)) (commutative-mul-ℕ z x)) ∙
         ( ap (add-ℕ (mul-ℕ x z)) (commutative-mul-ℕ z y))))
 
 abstract
@@ -132,7 +132,7 @@ abstract
     (x y z : ℕ) → mul-ℕ (mul-ℕ x y) z ＝ mul-ℕ x (mul-ℕ y z)
   associative-mul-ℕ zero-ℕ y z = refl
   associative-mul-ℕ (succ-ℕ x) y z =
-    ( right-distributive-mul-add-ℕ (mul-ℕ x y) y z) ∙ 
+    ( right-distributive-mul-add-ℕ (mul-ℕ x y) y z) ∙
     ( ap (add-ℕ' (mul-ℕ y z)) (associative-mul-ℕ x y z))
 
 left-two-law-mul-ℕ :
@@ -221,11 +221,11 @@ is-one-right-is-one-mul-ℕ zero-ℕ zero-ℕ p = p
 is-one-right-is-one-mul-ℕ zero-ℕ (succ-ℕ y) ()
 is-one-right-is-one-mul-ℕ (succ-ℕ x) zero-ℕ p =
   is-one-right-is-one-mul-ℕ x zero-ℕ p
-is-one-right-is-one-mul-ℕ (succ-ℕ x) (succ-ℕ y) p = 
+is-one-right-is-one-mul-ℕ (succ-ℕ x) (succ-ℕ y) p =
   ap ( succ-ℕ)
      ( is-zero-right-is-zero-add-ℕ (mul-ℕ x (succ-ℕ y)) y
        ( is-injective-succ-ℕ p))
-       
+
 is-one-left-is-one-mul-ℕ :
   (x y : ℕ) → is-one-ℕ (mul-ℕ x y) → is-one-ℕ x
 is-one-left-is-one-mul-ℕ x y p =

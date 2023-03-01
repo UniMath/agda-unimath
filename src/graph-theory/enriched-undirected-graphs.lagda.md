@@ -28,7 +28,7 @@ The map `sh : V → A` assigns to each vertex a shape, and with it an ∞-group 
 
 ## Definition
 
-```agda 
+```agda
 Enriched-Undirected-Graph :
   {l1 l2 : Level} (l3 l4 : Level) (A : UU l1) (B : A → UU l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
@@ -176,5 +176,5 @@ module _
                 ( ∞-group-vertex-Enriched-Undirected-Graph v)
                 ( action-∞-group-vertex-Enriched-Undirected-Graph v) h
                 ( map-inv-equiv-neighbor-Enriched-Undirected-Graph v x))))))
-    
+
 ```

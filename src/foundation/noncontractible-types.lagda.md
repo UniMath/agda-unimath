@@ -38,7 +38,7 @@ is-noncontractible' : {l : Level} (A : UU l) → ℕ → UU l
 is-noncontractible' A zero-ℕ = is-empty A
 is-noncontractible' A (succ-ℕ k) =
   Σ A (λ x → Σ A (λ y → is-noncontractible' (x ＝ y) k))
- 
+
 is-noncontractible : {l : Level} (A : UU l) → UU l
 is-noncontractible A = Σ ℕ (is-noncontractible' A)
 ```

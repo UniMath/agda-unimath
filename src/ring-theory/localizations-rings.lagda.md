@@ -23,15 +23,13 @@ open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 
-
-
 {- We introduce homomorphism that invert specific elements -}
 
 module _
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (x : type-Ring R1)
   (f : type-hom-Ring R1 R2)
   where
-  
+
   inverts-element-hom-Ring : UU l2
   inverts-element-hom-Ring =
     is-invertible-element-Ring R2 (map-hom-Ring R1 R2 f x)
@@ -213,7 +211,7 @@ is-right-inverse-inv-inverts-subset-hom-Ring :
   Id (mul-Ring S (map-hom-Ring R S f x) (inv-inverts-subset-hom-Ring R S P f H x p)) (one-Ring S)
 is-right-inverse-inv-inverts-subset-hom-Ring R S P f H x p =
   is-right-inverse-inv-inverts-element-hom-Ring R S x f (H x p)
-  
+
 inverts-subset-comp-hom-Ring :
   {l1 l2 l3 l4 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3)
   (P : subset-Ring l4 R) (g : type-hom-Ring S T) (f : type-hom-Ring R S) →
@@ -240,5 +238,4 @@ universal-property-localization-subset-Ring :
 universal-property-localization-subset-Ring l R S P f H =
   (T : Ring l) →
   is-equiv (precomp-universal-property-localization-subset-Ring R S T P f H)
-
 

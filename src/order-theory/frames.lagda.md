@@ -1,4 +1,4 @@
-# Frames 
+# Frames
 
 <details><summary>Imports</summary>
 ```agda
@@ -6,10 +6,10 @@
 module order-theory.frames where
 
 open import foundation.functions
-open import foundation.cartesian-product-types 
-open import foundation.dependent-pair-types 
-open import foundation.propositions 
-open import foundation.subtypes 
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.identity-types
 open import foundation.sets
@@ -27,17 +27,16 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea: A frame is a poset that has binary meets and arbitrary joins and further satisfies the infinite distributive law.
 There are many equivalent ways to formulate this definition. Our choice here is simply motivated by a desire to avoid
-iterated sigma types. 
+iterated sigma types.
 
 ```agda
 
 Frame : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Frame l1 l2 l3 = Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3 ) 
+Frame l1 l2 l3 = Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3 )
 
 ```
 
 ## Now we retrieve all the information from a frame (i.e. break up all of it's components, etc.)
-
 
 ```agda
 

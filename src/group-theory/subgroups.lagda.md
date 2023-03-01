@@ -61,10 +61,10 @@ is-set-subset-Group l G =
 module _
   {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G)
   where
-  
+
   contains-unit-subset-group-Prop : Prop l2
   contains-unit-subset-group-Prop = P (unit-Group G)
-  
+
   contains-unit-subset-Group : UU l2
   contains-unit-subset-Group =
     type-Prop contains-unit-subset-group-Prop
@@ -232,7 +232,7 @@ is-emb-subset-Subgroup G =
 module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
-  
+
   type-group-Subgroup :  UU (l1 ⊔ l2)
   type-group-Subgroup = type-subtype (subset-Subgroup G H)
 
@@ -322,7 +322,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
-  
+
   preserves-mul-inclusion-group-Subgroup :
     preserves-mul-Group
       ( group-Subgroup G H)
@@ -431,7 +431,7 @@ antisymmetric-contains-Subgroup G H K α β =
 Subgroup-Large-Preorder :
   {l1 : Level} (G : Group l1) →
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
-type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G 
+type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G
 leq-large-preorder-Prop (Subgroup-Large-Preorder G) H K =
   contains-Subgroup-Prop G H K
 refl-leq-Large-Preorder (Subgroup-Large-Preorder G) =

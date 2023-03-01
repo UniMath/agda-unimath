@@ -24,7 +24,7 @@ open import group-theory.semigroups
 module _
   {l1 l2 : Level} (C : Cat l1 l2) (X : obj-Cat C)
   where
-  
+
   endo-Cat : UU l2
   endo-Cat = type-hom-Cat C X X
 
@@ -54,7 +54,7 @@ module _
   pr1 semigroup-endo-Cat = set-endo-Cat
   pr1 (pr2 semigroup-endo-Cat) = comp-endo-Cat
   pr2 (pr2 semigroup-endo-Cat) = assoc-comp-endo-Cat
-  
+
   monoid-endo-Cat : Monoid l2
   pr1 monoid-endo-Cat = semigroup-endo-Cat
   pr1 (pr2 monoid-endo-Cat) = id-endo-Cat

@@ -13,7 +13,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Semigroups are sets equipped an associative binary operation. 
+Semigroups are sets equipped an associative binary operation.
 
 ## Definition
 

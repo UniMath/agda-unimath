@@ -31,7 +31,7 @@ open import group-theory.precategory-of-groups
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
-  
+
   is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
   is-iso-hom-Group = is-iso-Large-Precat Group-Large-Precat {X = G} {Y = H}
 

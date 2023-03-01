@@ -24,10 +24,10 @@ Pointed-Type l = Σ (UU l) (λ X → X)
 module _
   {l : Level} (A : Pointed-Type l)
   where
-  
+
   type-Pointed-Type : UU l
   type-Pointed-Type = pr1 A
-  
+
   pt-Pointed-Type : type-Pointed-Type
   pt-Pointed-Type = pr2 A
 ```

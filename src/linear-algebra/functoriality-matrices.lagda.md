@@ -23,7 +23,7 @@ An map `f : A → B` induces a map `matrix A m n → matrix B m n`.
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   map-matrix : {m n : ℕ} → matrix A m n → matrix B m n
   map-matrix = map-vec (map-vec f)
 ```

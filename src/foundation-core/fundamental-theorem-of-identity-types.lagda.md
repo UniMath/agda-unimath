@@ -55,8 +55,8 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where
-  
-  abstract 
+
+  abstract
     fundamental-theorem-id-J :
       is-contr (Σ A B) → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
     fundamental-theorem-id-J is-contr-AB =

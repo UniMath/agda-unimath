@@ -58,7 +58,7 @@ binomial-sum-Commutative-Semiring R =
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   binomial-sum-one-element-Commutative-Semiring :
     (f : functional-vec-Commutative-Semiring R 1) →
     binomial-sum-Commutative-Semiring R 0 f ＝

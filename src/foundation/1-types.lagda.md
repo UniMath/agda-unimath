@@ -123,7 +123,7 @@ module _
 
   equiv-eq-1-Type : (Y : 1-Type l) → X ＝ Y → type-equiv-1-Type Y
   equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
-  
+
   abstract
     is-contr-total-equiv-1-Type : is-contr (Σ (1-Type l) type-equiv-1-Type)
     is-contr-total-equiv-1-Type =

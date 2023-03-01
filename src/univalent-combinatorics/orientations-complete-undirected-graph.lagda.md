@@ -220,7 +220,7 @@ module _
               ( pr1 Y)
               ( is-finite-type-UU-Fin n X))
             ( d2 Y)
-            ( d3 Y)) 
+            ( d3 Y))
   is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     ( d d' : orientation-Complete-Undirected-Graph) (m : Fin 2) →
     Id
@@ -395,7 +395,7 @@ module _
         ( pair 0 (unit-trunc-Prop (equiv-is-empty id (λ (pair _ np) → np refl))))
         ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference d d)))
   pr1 (pr2 (pr2 even-difference-orientation-Complete-Undirected-Graph)) {d} {d'} p =
-    is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d' (zero-Fin 1) p  
+    is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d' (zero-Fin 1) p
   pr2 (pr2 (pr2 even-difference-orientation-Complete-Undirected-Graph)) {d1} {d2} {d3} p1 p2 =
     eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d1 d2 d3 (zero-Fin 1) p1 p2
 
@@ -412,7 +412,7 @@ module _
 
   quotient-sign : UU (lsuc l)
   quotient-sign = equivalence-class even-difference-orientation-Complete-Undirected-Graph
-  
+
   quotient-sign-Set : Set (lsuc l)
   quotient-sign-Set = equivalence-class-Set even-difference-orientation-Complete-Undirected-Graph
 
@@ -645,7 +645,7 @@ module _
     pair y (tr (λ Z → type-decidable-Prop (pr1 Z y)) P (inr refl))
   cases-orientation-aut-count e Y (pair x (pair y (pair np P))) (inr nq) (inr nr) =
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
- 
+
   orientation-aut-count : X ≃ X →
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
@@ -659,7 +659,7 @@ module _
       ( has-decidable-equality-count eX
         ( map-equiv e (pr1 (pr2 (two-elements-transposition eX Y))))
         ( pr1 (pr2 (two-elements-transposition eX Y))))
-    
+
   cases-orientation-two-elements-count : (i j : X)
     (Y : 2-Element-Decidable-Subtype l X) →
     ( two-elements : Σ X
@@ -681,7 +681,7 @@ module _
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
   cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inl r) (inr ns) =
     pair y (tr (λ Z → type-decidable-Prop (pr1 Z y)) P (inr refl))
-  cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inr nr) s = 
+  cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inr nr) s =
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
 
   orientation-two-elements-count : (i j : X) → ¬ (Id i j) →
@@ -696,7 +696,7 @@ module _
       ( has-decidable-equality-count eX
         ( pr1 (two-elements-transposition eX Y)) j)
       ( has-decidable-equality-count eX
-        ( pr1 (pr2 (two-elements-transposition eX Y))) i) 
+        ( pr1 (pr2 (two-elements-transposition eX Y))) i)
 
   first-element-count : X
   first-element-count =
@@ -716,7 +716,7 @@ module _
           ( two-distinct-elements-leq-2-Fin
             ( number-of-elements-count eX)
             ( ineq))))
-          
+
   abstract
     distinct-two-elements-count : ¬ (Id first-element-count second-element-count)
     distinct-two-elements-count p =
@@ -733,14 +733,14 @@ module _
       ( has-decidable-equality-count eX)
       ( distinct-two-elements-count)
 
-  canonical-orientation-count : 
+  canonical-orientation-count :
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
   canonical-orientation-count =
     orientation-two-elements-count first-element-count second-element-count distinct-two-elements-count
 
-  trans-canonical-orientation-count : 
+  trans-canonical-orientation-count :
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -797,7 +797,7 @@ module _
 
     inward-edge-left-two-elements-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y i)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -823,8 +823,8 @@ module _
                 ( np)))
             ( Y)))
         ( x)
-    cases-inward-edge-left-transposition-orientation-count 
-      i j np Y x nq nr (inl (pair r1 r2)) = 
+    cases-inward-edge-left-transposition-orientation-count
+      i j np Y x nq nr (inl (pair r1 r2)) =
       ( ap
         ( λ d →
           pr1
@@ -853,7 +853,7 @@ module _
                   ( np)))
               ( pr1 (two-elements-transposition eX Y)))
             ( pr1 (two-elements-transposition eX Y))}
-          
+
         { y =
           inl
             ( tr
@@ -884,7 +884,7 @@ module _
                 ( pr1 (two-elements-transposition eX Y)))
               ( pr1 (two-elements-transposition eX Y)))))) ∙
         ( r1)
-    cases-inward-edge-left-transposition-orientation-count 
+    cases-inward-edge-left-transposition-orientation-count
       i j np Y x nq nr (inr (pair r1 r2)) =
       ( ap
         ( λ w →
@@ -965,7 +965,7 @@ module _
                       ( has-decidable-equality-count eX)
                       ( np)))
                   ( pr1 (two-elements-transposition eX Y)))
-                ( pr1 (two-elements-transposition eX Y))))) 
+                ( pr1 (two-elements-transposition eX Y)))))
           ( eq-is-prop
             ( is-prop-is-decidable
               ( is-set-count eX
@@ -980,7 +980,7 @@ module _
 
     inward-edge-left-transposition-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y i)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -1005,7 +1005,7 @@ module _
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
     cases-inward-edge-right-two-elements-orientation-count
-      i j np Y x nq nr (inl (pair r1 r2)) = 
+      i j np Y x nq nr (inl (pair r1 r2)) =
       ( ap
         ( λ d →
           pr1
@@ -1056,7 +1056,7 @@ module _
 
     inward-edge-right-two-elements-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y j)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -1238,7 +1238,7 @@ module _
 
     inward-edge-right-transposition-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y j)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -1954,7 +1954,7 @@ module _
               ( np))))
         ( j))
 
-  cases-eq-map-orientation-transposition-orientation-two-elements-count : 
+  cases-eq-map-orientation-transposition-orientation-two-elements-count :
     ( i j : X) (np : ¬ (Id i j)) →
     ( Y : 2-Element-Decidable-Subtype l X) →
     ( two-elements : Σ X
@@ -2453,7 +2453,7 @@ module _
                   ( has-decidable-equality-count eX (pr1 (pr2 k)) j)))
             ( inv R))))
 
-  eq-map-orientation-transposition-orientation-two-elements-count : 
+  eq-map-orientation-transposition-orientation-two-elements-count :
     ( i j : X) (np : ¬ (Id i j)) →
     Id
       ( map-orientation-complete-undirected-graph-equiv
@@ -2907,7 +2907,7 @@ module _
                   ( mod-two-ℕ)
                   ( eq-orientation-pointwise-difference-two-elements-count j i
                     ( λ p → np (inv p))))))))
-    
+
   not-even-difference-orientation-aut-transposition-count :
     (Y : 2-Element-Decidable-Subtype l X) →
     ¬ ( sim-Eq-Rel
@@ -3047,7 +3047,7 @@ module _
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
-        ( trans-canonical-orientation-count) 
+        ( trans-canonical-orientation-count)
     cases-retr-orientation T NH t q (inl (inr star)) r =
       ex-falso
         ( NH
@@ -3218,7 +3218,7 @@ module _
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
-  
+
   equiv-fin-2-quotient-sign-equiv-Fin : (h : Fin n ≃ type-UU-Fin n X) →
     ( Fin 2 ≃ quotient-sign n X)
   equiv-fin-2-quotient-sign-equiv-Fin h =

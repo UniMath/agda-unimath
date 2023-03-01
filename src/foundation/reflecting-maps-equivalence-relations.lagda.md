@@ -34,10 +34,10 @@ A map `f : A → B` out of a type `A` equipped with an equivalence relation `R` 
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
-  
+
   reflects-Eq-Rel : {l3 : Level} {B : UU l3} → (A → B) → UU (l1 ⊔ l2 ⊔ l3)
   reflects-Eq-Rel f = {x y : A} → sim-Eq-Rel R x y → (f x ＝ f y)
-  
+
   reflecting-map-Eq-Rel : {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
   reflecting-map-Eq-Rel B = Σ (A → B) reflects-Eq-Rel
 
@@ -102,11 +102,11 @@ module _
     (g : reflecting-map-Eq-Rel R (type-Set B)) → UU _
   htpy-reflecting-map-Eq-Rel g =
     pr1 f ~ pr1 g
-  
+
   refl-htpy-reflecting-map-Eq-Rel :
     htpy-reflecting-map-Eq-Rel f
   refl-htpy-reflecting-map-Eq-Rel = refl-htpy
-  
+
   htpy-eq-reflecting-map-Eq-Rel :
     (g : reflecting-map-Eq-Rel R (type-Set B)) →
     f ＝ g → htpy-reflecting-map-Eq-Rel g

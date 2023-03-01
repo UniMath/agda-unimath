@@ -4,7 +4,6 @@
 ```agda
 module ring-theory.binomial-theorem-rings where
 
-
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -56,7 +55,7 @@ binomial-sum-Ring R = binomial-sum-Semiring (semiring-Ring R)
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   binomial-sum-one-element-Ring :
     (f : functional-vec-Ring R 1) →
     binomial-sum-Ring R 0 f ＝ head-functional-vec-Ring R 0 f
