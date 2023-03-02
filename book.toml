@@ -12,9 +12,6 @@ create-missing = false
 
 [preprocessor.links]
 
-[preprocessor.bibliography]
-command = "docs/ref.bib docs/ieee.csl"
-
 [preprocessor.pagetoc]
 
 [preprocessor.katex]
