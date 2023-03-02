@@ -3,13 +3,40 @@
 ```agda
 module foundation.type-arithmetic-dependent-function-types where
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 
 ## Properties
+
+### Unit law when the base type is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (C : is-contr A) (a : A)
+  where
+
+  left-unit-law-Π-is-contr : ((a : A) → (B a)) ≃ B a
+  left-unit-law-Π-is-contr =
+    ( left-unit-law-Π ( λ _ → B a )) ∘e
+    ( equiv-Π
+      ( λ _ → B a)
+      ( terminal-map , is-equiv-terminal-map-is-contr C )
+      ( λ a →
+        equiv-eq
+         ( ap B ( eq-is-contr C))))
+
+
+
+```
 
 ### The swap function `((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)` is an equivalence
 

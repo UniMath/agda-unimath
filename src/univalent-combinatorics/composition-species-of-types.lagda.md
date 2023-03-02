@@ -6,6 +6,7 @@ module univalent-combinatorics.composition-species-of-types where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-sigma-decompositions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
@@ -13,12 +14,18 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.universal-property-dependent-pair-types
 open import foundation.sigma-decompositions
+open import foundation.trivial-sigma-decompositions
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
 
 open import univalent-combinatorics.species-of-types
@@ -62,13 +69,50 @@ analytic-unit-species-types X = is-contr X
 ### Unit laws for analytic composition of species
 
 ```agda
-{-
-left-unit-law-comp-species :
-  {l1 l2 : Level} (F : species l1 l2) →
-  equiv-species (analytic-comp-species analytic-unit-species F) F
-left-unit-law-comp-species F X =
-  {!!}
--}
+left-unit-law-comp-inhabited-species-types :
+  {l1 l2 : Level}
+  (F : species-types l1 l2) → (A : UU l1) → (p :  is-inhabited A) →
+  analytic-comp-species-types analytic-unit-species-types F A ≃ F A
+left-unit-law-comp-inhabited-species-types {l1} F A p =
+  ( ( left-unit-law-Σ-is-contr
+      ( is-contr-type-trivial-Σ-Decomposition p)
+      ( trivial-inhabited-Σ-Decomposition l1 A p ,
+        is-trivial-trivial-inhabited-Σ-Decomposition p)) ∘e
+  ( ( inv-assoc-Σ
+      ( Σ-Decomposition l1 l1 A)
+      ( λ D → is-contr (indexing-type-Σ-Decomposition D))
+      ( λ C → F (cotype-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
+  ( ( equiv-Σ
+      ( _)
+      ( id-equiv)
+      ( λ D →
+        equiv-Σ
+          ( λ z → F (cotype-Σ-Decomposition D (center z)))
+          ( id-equiv)
+          ( λ C →
+            ( left-unit-law-Π-is-contr C (center C))))))))
+
+right-unit-law-comp-species-types :
+  {l1 l2 : Level}
+  (F : species-types l1 l2) → (A : UU l1)  →
+  analytic-comp-species-types F analytic-unit-species-types A ≃ F A
+right-unit-law-comp-species-types {l1} F A =
+  ( ( left-unit-law-Σ-is-contr
+      ( is-contr-type-discrete-Σ-Decomposition)
+      ( ( discrete-Σ-Decomposition l1 A) ,
+        is-discrete-discrete-Σ-Decomposition) ) ∘e
+  ( ( inv-assoc-Σ
+      ( Σ-Decomposition l1 l1 A)
+      ( λ D →
+          (y : indexing-type-Σ-Decomposition D) → is-contr (cotype-Σ-Decomposition D y))
+      ( λ D → F (indexing-type-Σ-Decomposition (pr1 D)))) ∘e
+  ( equiv-Σ
+      ( λ D →
+        ( (y : indexing-type-Σ-Decomposition D) →
+          analytic-unit-species-types ( cotype-Σ-Decomposition D y)) ×
+        F ( indexing-type-Σ-Decomposition D))
+     ( id-equiv)
+     ( λ _ → commutative-prod))))
 ```
 
 ### Associativity of composition of species

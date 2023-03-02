@@ -147,6 +147,18 @@ is-finite-base-type-Σ-Decomposition-𝔽 D =
       ( λ x → is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 D x)))
 ```
 
+### The type of all finite Σ-Decomposition is finite
+
+```agda
+{-
+is-finite-Σ-Decomposition-𝔽 :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  is-finite (Σ-Decomposition l2 l3 A)
+is-finite-Σ-Decomposition-𝔽 =
+  {!!}
+-}
+```
+
 ### Characterization of the equality of finite Σ-Decompositions
 
 ```agda
@@ -236,6 +248,7 @@ module _
     equiv-Σ-Decomposition-𝔽 X Y → (X ＝ Y)
   eq-equiv-Σ-Decomposition-𝔽 =
     map-inv-equiv (extensionality-Σ-Decomposition-𝔽)
+
 ```
 
 ### Iterated finite Σ-Decomposition
