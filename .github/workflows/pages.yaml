@@ -57,11 +57,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
+      - uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: 3.0.1
+
+      - name: Install mdbook-theme
+        uses: baptiste0928/cargo-install@v1
+        with:
+          crate: mdbook-theme
+
+      - name: Install mdbook-katex
+        uses: baptiste0928/cargo-install@v1
+        with:
+          crate: mdbook-katex
       
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
-          mdbook-version: 0.4.22
+          mdbook-version: 'latest'
         
       - name: Generate book
         run: |
@@ -74,7 +87,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'main/book'
+          path: 'main/book/html'
 
       - name: Deploy to GitHub Pages
         id: deployment
