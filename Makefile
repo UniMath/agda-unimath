@@ -59,7 +59,7 @@ update-contributors:
 
 .phony: serve-website
 serve-website:
-	@mdbook serve -p 8080 --open
+	@mdbook serve -p 8080 --open -d ./book/html
 
 .PHONY : graph
 graph:
