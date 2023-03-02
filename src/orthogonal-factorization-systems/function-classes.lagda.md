@@ -85,7 +85,7 @@ is-prop-is-composition-closed-function-class c =
   is-prop-Π λ A → is-prop-Π λ B → is-prop-Π λ C →
     is-prop-Π λ f → is-prop-Π λ g →
       is-prop-function-type (is-prop-function-type
-        ( is-prop-type-Prop (c  (g ∘ f))))
+        ( is-prop-type-Prop (c (g ∘ f))))
 
 is-composition-closed-function-class-Prop :
   {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)

@@ -19,15 +19,14 @@ open import orthogonal-factorization-systems.modal-operators
 
 ## Definition
 
-```agda
-module _
-  {l1 l2 : Level} (○ : modal-operator l1 l2)
-  where
+We say a modal operator `○` is Σ-closed if for every type `X` such that `○ X`
+is true then for every family `P` over `X` such that each fiber of `○ ∘ P` is
+true, then `○ (Σ X P)` is also true.
 
-  is-Σ-closed : UU (lsuc l1 ⊔ l2)
-  is-Σ-closed =
-    (X : UU l1) → ○ X → 
-    (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
+```agda
+is-Σ-closed : {l1 l2 : Level} (○ : modal-operator l1 l2) → UU (lsuc l1 ⊔ l2)
+is-Σ-closed {l1} ○ =
+  (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
 
 module _
   {l1 l2 l3 : Level} {○ : modal-operator (l1 ⊔ l2) l1} (unit-○ : modal-unit ○)
