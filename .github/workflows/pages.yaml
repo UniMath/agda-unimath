@@ -20,8 +20,6 @@ concurrency:
 env:
   AGDAHTMLFLAGS: --html --html-highlight=auto --html-dir=docs --only-scope-checking --css=Agda.css
   AGDA: agda
-  INPUT_PATH: main/book/html
-
 jobs:
   pages:
     runs-on: macOS-latest
