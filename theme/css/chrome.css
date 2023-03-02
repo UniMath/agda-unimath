@@ -109,9 +109,9 @@ a > .hljs {
     text-overflow: ellipsis;
 }
 
-a .menu-title {
-    color: chocolate;
-    font-weight: 400;
+#menu-bar > h1 > a {
+    color: var(--fg);
+    text-decoration: none;
 }
 
 .js .menu-title {
