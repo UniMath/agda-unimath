@@ -7,8 +7,11 @@
     border: 1px solid #f0f0f0;
     border-radius: 5px;
     background-color: #fafafa;
-    padding: 1em;
+    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-left: .5em;
     overflow-x: overlay;
+    width: 90%;
 }
 
 .Agda .Markup {
