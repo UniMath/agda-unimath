@@ -456,7 +456,7 @@
   - [Weakly constant maps](foundation.weakly-constant-maps.md)
   - [Xor](foundation.xor.md)
 
-- Foundation core
+- [Foundation core](foundation-core.lagda.md)
   - [0-maps](foundation-core.0-maps.md)
   - [1-types](foundation-core.1-types.md)
   - [Automorphisms](foundation-core.automorphisms.md)
