@@ -19,6 +19,7 @@ open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
+open import foundation.homotopies
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
@@ -45,6 +46,18 @@ coprod-Fin k (succ-ℕ l) =
 Fin-add-ℕ :
   (k l : ℕ) → Fin (add-ℕ k l) ≃ (Fin k + Fin l)
 Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
+
+inl-coprod-Fin :
+  (k l : ℕ) → Fin k → Fin (add-ℕ k l) 
+inl-coprod-Fin k l = map-equiv (coprod-Fin k l) ∘ inl
+
+inr-coprod-Fin :
+  (k l : ℕ) → Fin l → Fin (add-ℕ k l) 
+inr-coprod-Fin k l = map-equiv (coprod-Fin k l) ∘ inr
+
+compute-inl-coprod-Fin :
+  (k : ℕ) → inl-coprod-Fin k 0 ~ id
+compute-inl-coprod-Fin k x = refl
 ```
 
 ### Types equipped with a count are closed under coproducts

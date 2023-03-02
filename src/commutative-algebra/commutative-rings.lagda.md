@@ -12,6 +12,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import foundation.interchange-law
 
 open import ring-theory.rings
 ```
@@ -231,6 +232,12 @@ module _
         ( mul-Commutative-Ring' z)
         ( commutative-mul-Commutative-Ring x y)) ∙
       ( associative-mul-Commutative-Ring y x z))
+
+  interchange-mul-mul-Commutative-Ring :
+    (x y z w : type-Commutative-Ring) → 
+    mul-Commutative-Ring (mul-Commutative-Ring x y) (mul-Commutative-Ring z w) ＝
+    mul-Commutative-Ring (mul-Commutative-Ring x z) (mul-Commutative-Ring y w)
+  interchange-mul-mul-Commutative-Ring = interchange-law-commutative-and-associative mul-Commutative-Ring commutative-mul-Commutative-Ring associative-mul-Commutative-Ring 
 ```
 
 ### Scalar multiplication of elements of a commutative ring by natural numbers
