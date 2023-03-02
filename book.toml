@@ -6,7 +6,7 @@ title = "Agda-UniMath"
 
 [build]
 build-dir = "book/html"
-create-missing = false
+create-missing = true
 
 [preprocessor.index]
 
