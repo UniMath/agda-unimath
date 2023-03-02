@@ -698,7 +698,7 @@
   - [Transposition of matrices](linear-algebra.transposition-matrices.md)
   - [Vectors](linear-algebra.vectors.md)
   - [Vectors on commutative rings](linear-algebra.vectors-on-commutative-rings.md)
-  - [Vectors on commutative semirings](linear-algebra.vectors-on-commutative-semirings.lagda.md)
+  - [Vectors on commutative semirings](linear-algebra.vectors-on-commutative-semirings.md)
   - [Vectors on rings](linear-algebra.vectors-on-rings.md)
   - [Vectors on semirings](linear-algebra.vectors-on-semirings.md)
 
