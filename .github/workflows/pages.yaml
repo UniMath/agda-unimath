@@ -57,14 +57,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
-      - uses: r-lib/actions/setup-pandoc@v2
-        with:
-          pandoc-version: 3.0.1
-
-      - name: Install mdbook-theme
+      - name: Install mdbook-pagetoc
         uses: baptiste0928/cargo-install@v1
         with:
-          crate: mdbook-theme
+          crate: mdbook-pagetoc
 
       - name: Install mdbook-katex
         uses: baptiste0928/cargo-install@v1
