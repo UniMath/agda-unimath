@@ -22,8 +22,8 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
 8. At the end of the file you may also add a `See also` or `References` subsection where you reference related sources such as other modules or articles related to the contents of the file.
 
 - If you want to reference another module in the library use the pattern
-  ```[`foundation.univalence-axiom`](foundation.univalence-axiom.md)```.
-  This will be displayed as [`foundation.univalence-axiom`](foundation.univalence-axiom.md).
+  ```[`foundation.univalence`](foundation.univalence.md)```.
+  This will be displayed as [`foundation.univalence`](foundation.univalence.md).
 - If you want to reference another page with custom text use the pattern ```[Agda-Unimath](https://unimath.github.io/agda-unimath/)```.
   This will be displayed as [Agda-Unimath](https://unimath.github.io/agda-unimath/).
 - If you want to reference another page without custom text but with a clickable link use the pattern ```<https://unimath.github.io/agda-unimath/>```.
