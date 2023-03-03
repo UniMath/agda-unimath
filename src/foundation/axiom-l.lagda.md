@@ -48,8 +48,21 @@ pr2 (emb-L H X Y) = H X Y
 
 ```agda
 axiom-L-univalence :
-  {l : Level} → ((A B : UU l) → UNIVALENCE A B) → AXIOM-L l
+  {l : Level} → ((A B : UU l) → UNIVALENCE A B) → axiom-L l
 axiom-L-univalence ua A B = is-emb-is-equiv (ua A B)
+```
+
+### Axiom L generalizes axiom K
+
+```agda
+axiom-L-axiom-K :
+  {l : Level} → ((A : UU l) → axiom-K A) → axiom-K (UU l) → axiom-L l
+axiom-L-axiom-K K K-UU A B =
+  is-emb-is-prop-is-set
+    ( is-set-axiom-K K-UU A B)
+    ( is-set-equiv-is-set
+      ( is-set-axiom-K (K A))
+      ( is-set-axiom-K (K B)))
 ```
 
 ### Axiom L implies that `Id : A → (A → UU l)` is an embedding
