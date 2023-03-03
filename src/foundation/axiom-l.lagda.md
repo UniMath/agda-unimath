@@ -65,42 +65,42 @@ axiom-L-axiom-K K K-UU A B =
       ( is-set-axiom-K (K B)))
 ```
 
-### Axiom L implies that `Id : A → (A → UU l)` is an embedding
+### Axiom L implies that `Id : A → A → UU l` is an embedding
 
 ```agda
-is-emb-Id : {l : Level} → axiom-L l → (A : UU l) → is-emb (Id {A = A})
-is-emb-Id L A x =
-  fundamental-theorem-id
-    ( pair
-      ( pair x refl)
-      ( λ u →
-        is-injective-emb
-          ( emb-fib x)
-          ( eq-is-contr (is-contr-total-path x))))
-    ( λ y p → ap Id p)
+module _
+  {l : Level} (L : axiom-L l) (A : UU l)
   where
-  emb-fib : (x : A) → fib' Id (Id x) ↪ Σ A (λ y → Id x y)
-  emb-fib x =
-    comp-emb
-      ( comp-emb
-        ( emb-equiv
-          ( equiv-tot
+
+  is-emb-Id : is-emb (Id {A = A})
+  is-emb-Id x =
+    fundamental-theorem-id
+      ( pair
+        ( pair x refl)
+        ( λ _ →
+          is-injective-emb
+            ( emb-fib x)
+            ( eq-is-contr (is-contr-total-path x))))
+      ( λ _ → ap Id)
+    where
+    emb-fib : (x : A) → fib' Id (Id x) ↪ Σ A (Id x)
+    emb-fib x =
+      comp-emb
+        ( comp-emb
+          ( emb-equiv
+            ( equiv-tot
+              ( λ y →
+                ( equiv-ev-refl y) ∘e
+                ( ( equiv-inclusion-is-full-subtype
+                    ( Π-Prop A ∘ (is-equiv-Prop ∘_))
+                    ( fundamental-theorem-id (is-contr-total-path x))) ∘e
+                  ( distributive-Π-Σ)))))
+          ( emb-Σ
+            ( λ y → (z : A) → Id y z ≃ Id x z)
+            ( id-emb)
             ( λ y →
-              ( equiv-ev-refl y) ∘e
-              ( ( equiv-inclusion-is-full-subtype
-                  ( λ h →
-                    Π-Prop A (λ z → is-equiv-Prop (h z)))
-                  ( λ h →
-                    fundamental-theorem-id
-                      ( is-contr-total-path x)
-                      ( h))) ∘e
-                ( distributive-Π-Σ)))))
-        ( emb-Σ
-          ( λ y → (z : A) → Id y z ≃ Id x z)
-          ( id-emb)
-          ( λ y →
-            comp-emb
-              ( emb-Π (λ z → emb-L L (Id y z) (Id x z)))
-              ( emb-equiv equiv-funext))))
-      ( emb-equiv (inv-equiv (equiv-fib Id (Id x))))
+              comp-emb
+                ( emb-Π (λ z → emb-L L (Id y z) (Id x z)))
+                ( emb-equiv equiv-funext))))
+        ( emb-equiv (inv-equiv (equiv-fib Id (Id x))))
 ```
