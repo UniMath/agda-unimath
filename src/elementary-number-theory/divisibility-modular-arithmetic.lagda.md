@@ -1,5 +1,6 @@
 #  Divisibility in modular arithmetic
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-modular-arithmetic where
 
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.fibers-of-maps
 ```
+</details>
 
 ## Idea
 
@@ -53,7 +55,7 @@ trans-div-ℤ-Mod {succ-ℕ k} = trans-div-Fin (succ-ℕ k)
 ```agda
 is-decidable-div-ℤ-Mod : (k : ℕ) (x y : ℤ-Mod k) →
   is-decidable (div-ℤ-Mod k x y)
-is-decidable-div-ℤ-Mod zero-ℕ x y = is-decidable-div-ℤ x y  
-is-decidable-div-ℤ-Mod (succ-ℕ k) x y = is-decidable-fib-Fin 
+is-decidable-div-ℤ-Mod zero-ℕ x y = is-decidable-div-ℤ x y
+is-decidable-div-ℤ-Mod (succ-ℕ k) x y = is-decidable-fib-Fin
   {succ-ℕ k} {succ-ℕ k} (mul-ℤ-Mod' (succ-ℕ k) x) y
 ```

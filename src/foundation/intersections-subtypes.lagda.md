@@ -1,5 +1,6 @@
 #  Intersection of subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.intersections-subtypes where
 
@@ -10,6 +11,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

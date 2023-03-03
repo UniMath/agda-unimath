@@ -1,5 +1,6 @@
 # Interval subposets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.interval-subposets where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import order-theory.posets
 open import order-theory.subposets
 ```
+</details>
 
 ## Idea
 

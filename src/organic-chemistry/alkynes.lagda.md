@@ -1,5 +1,6 @@
 #  Alkynes
 
+<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.alkynes where
 
@@ -14,6 +15,7 @@ open import univalent-combinatorics.finite-types
 open import organic-chemistry.saturated-carbons
 open import organic-chemistry.hydrocarbons
 ```
+</details>
 
 ## Idea
 

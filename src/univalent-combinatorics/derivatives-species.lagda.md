@@ -1,5 +1,6 @@
 #  Derivatives of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.derivatives-species where
 
@@ -9,6 +10,7 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 ```
+</details>
 
 ## Idea
 

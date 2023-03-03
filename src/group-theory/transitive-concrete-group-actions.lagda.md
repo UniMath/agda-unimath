@@ -1,5 +1,6 @@
 #  Transitive concrete group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.transitive-concrete-group-actions where
 
@@ -23,6 +24,7 @@ open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
 open import group-theory.orbits-concrete-group-actions
 ```
+</details>
 
 ## Definition
 
@@ -177,7 +179,7 @@ module _
       ( is-transitive-action-Concrete-Group-Prop G)
       ( X)
       ( Y))
-```  
+```
 
 ## Properties
 
@@ -190,7 +192,7 @@ module _
   (Y : transitive-action-Concrete-Group l3 G)
   (e f : equiv-transitive-action-Concrete-Group G X Y)
   where
-  
+
   htpy-equiv-transitive-action-Concrete-Group : UU (l2 ⊔ l3)
   htpy-equiv-transitive-action-Concrete-Group =
     htpy-equiv-action-Concrete-Group G
@@ -206,7 +208,7 @@ module _
       ( action-transitive-action-Concrete-Group G Y)
       ( e)
       ( f)
-    
+
   htpy-exists-equiv-transitive-action-Concrete-Group :
     ∃ ( type-transitive-action-Concrete-Group G X)
       ( λ x →
@@ -242,7 +244,7 @@ module _
 module _
   {l1 l2 : Level} (G : Concrete-Group l1)
   where
-  
+
   is-1-type-transitive-action-Concrete-Group :
     is-1-type (transitive-action-Concrete-Group l2 G)
   is-1-type-transitive-action-Concrete-Group =

@@ -26,7 +26,6 @@ open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 
-
 -- Section 19.1 Characterizing families of maps over pushouts
 
 module hom-Fam-pushout

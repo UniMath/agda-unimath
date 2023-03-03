@@ -1,5 +1,6 @@
 #  Composition of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.composition-species where
 
@@ -18,6 +19,7 @@ open import univalent-combinatorics.partitions
 open import univalent-combinatorics.sigma-decompositions
 open import univalent-combinatorics.species
 ```
+</details>
 
 ## Idea
 
@@ -50,8 +52,6 @@ analytic-comp-species {l1} {l2} {l3} S T X =
  ```agda
 analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
-
-
 
 ```
 

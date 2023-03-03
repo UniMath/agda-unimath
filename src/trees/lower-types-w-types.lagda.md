@@ -1,5 +1,6 @@
 #  Lower types of elements in W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.lower-types-w-types where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import trees.ranks-of-elements-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 
@@ -22,7 +24,7 @@ We define by induction a type family over `W A B` in a way that generalizes the 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   data
     lower-𝕎 : 𝕎 A B → UU (l1 ⊔ l2)
     where

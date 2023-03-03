@@ -1,5 +1,6 @@
 #  The universal multiset
 
+<details><summary>Imports</summary>
 ```agda
 module trees.universal-multiset where
 
@@ -16,6 +17,7 @@ open import trees.multisets
 open import trees.small-multisets
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

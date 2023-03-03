@@ -1,5 +1,6 @@
 #  Complements of type families
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.complements where
 
@@ -8,6 +9,7 @@ open import foundation.empty-types
 open import foundation.functions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

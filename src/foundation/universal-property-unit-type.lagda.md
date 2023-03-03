@@ -1,5 +1,6 @@
 #  The universal property of the unit type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-unit-type where
 
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

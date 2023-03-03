@@ -1,5 +1,6 @@
 #  Binary equivalences on unordered pairs of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-equivalences-unordered-pairs-of-types where
 
@@ -10,6 +11,7 @@ open import foundation.products-unordered-pairs-of-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 ```
+</details>
 
 ## Idea
 

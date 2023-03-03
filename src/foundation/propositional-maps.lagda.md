@@ -1,5 +1,6 @@
 #  Propositional maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.propositional-maps where
 
@@ -15,6 +16,7 @@ open import foundation.embeddings
 open import foundation.logical-equivalences
 open import foundation.truncated-maps
 ```
+</details>
 
 ## Properties
 
@@ -24,7 +26,7 @@ open import foundation.truncated-maps
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-prop-is-prop-map : (f : A → B) → is-prop (is-prop-map f)
   is-prop-is-prop-map f = is-prop-is-trunc-map neg-one-𝕋 f
 

@@ -1,5 +1,6 @@
 #  Counting the elements of dependent function types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.dependent-function-types where
 
@@ -22,6 +23,7 @@ open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

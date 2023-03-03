@@ -1,5 +1,6 @@
 # Matrices on rings
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.matrices-on-rings where
 
@@ -16,6 +17,7 @@ open import linear-algebra.vectors-on-rings
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Definitions
 
@@ -25,7 +27,7 @@ open import ring-theory.rings
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   matrix-Ring : ℕ → ℕ → UU l
   matrix-Ring m n = matrix (type-Ring R) m n
 ```

@@ -1,5 +1,6 @@
 #  The universal property of the image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-image where
 
@@ -26,6 +27,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -104,7 +106,7 @@ module _
           ( λ h →
             extensionality-hom-slice f (map-emb j) (precomp-emb f i q j h) r))
         ( is-contr-map-is-equiv (H C j) r)
-                                      
+
   hom-slice-universal-property-image : hom-slice (map-emb i) (map-emb j)
   hom-slice-universal-property-image =
     pr1 (center universal-property-image)
@@ -112,7 +114,7 @@ module _
   map-hom-slice-universal-property-image : B → C
   map-hom-slice-universal-property-image =
     map-hom-slice (map-emb i) (map-emb j) hom-slice-universal-property-image
-  
+
   triangle-hom-slice-universal-property-image :
     (map-emb i) ~ (map-emb j ∘ map-hom-slice-universal-property-image)
   triangle-hom-slice-universal-property-image =
@@ -198,20 +200,20 @@ abstract
         pair ( map-hom-slice f (map-emb m) h (pr1 t))
              ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
                ( pr2 t)))
-  
+
   map-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
     (m : B ↪ X) (h : hom-slice f (map-emb m)) → im f → B
   map-is-image-im f m h (pair x t) =
     pr1 (fiberwise-map-is-image-im f m h x t)
-  
+
   triangle-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
     (m : B ↪ X) (h : hom-slice f (map-emb m)) →
     inclusion-im f ~ ((map-emb m) ∘ (map-is-image-im f m h))
   triangle-is-image-im f m h (pair x t) =
     inv (pr2 (fiberwise-map-is-image-im f m h x t))
-  
+
   is-image-im :
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
     {l : Level} → is-image l f (emb-im f) (unit-im f)

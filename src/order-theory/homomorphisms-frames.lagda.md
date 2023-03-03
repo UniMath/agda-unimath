@@ -1,14 +1,15 @@
-# Homomorphisms Frames 
+# Homomorphisms Frames
 
+<details><summary>Imports</summary>
 ```agda
 
 module order-theory.homomorphisms-frames where
 
 open import foundation.functions
-open import foundation.cartesian-product-types 
-open import foundation.dependent-pair-types 
-open import foundation.propositions 
-open import foundation.subtypes 
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.identity-types
 open import foundation.sets
@@ -26,6 +27,7 @@ open import order-theory.homomorphisms-meet-sup-lattices
 open import order-theory.frames
 
 ```
+</details>
 
 ## Idea
 A frame homomorphism is an order preserving map between posets that additionally preserves binary meets and arbitrary joins.
@@ -33,7 +35,7 @@ A frame homomorphism is an order preserving map between posets that additionally
 ```agda
 
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6) 
+  {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6)
   where
 
   hom-Frame : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)

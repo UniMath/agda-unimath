@@ -1,5 +1,6 @@
 #  Dedekind finite sets
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.dedekind-finite-sets where
 
@@ -10,6 +11,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

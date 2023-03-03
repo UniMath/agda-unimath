@@ -1,5 +1,6 @@
 # Maximal chains in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.maximal-chains-preorders where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import order-theory.chains-preorders
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 
@@ -18,7 +20,7 @@ open import order-theory.preorders
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
-  
+
   is-maximal-chain-preorder-Prop :
     {l3 : Level} → chain-Preorder l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-preorder-Prop {l3} C =

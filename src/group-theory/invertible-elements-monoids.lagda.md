@@ -1,5 +1,6 @@
 #  Invertible elements in monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.invertible-elements-monoids where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 
@@ -85,7 +87,7 @@ module _
           ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-mul-Monoid M y')))))
-  
+
   is-prop-is-invertible-element-Monoid :
     (x : type-Monoid M) → is-prop (is-invertible-element-Monoid M x)
   is-prop-is-invertible-element-Monoid x =

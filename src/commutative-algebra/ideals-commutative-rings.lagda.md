@@ -1,5 +1,6 @@
 #  Ideals in commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.ideals-commutative-rings where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
 ```
+</details>
 
 ## Idea
 
@@ -58,7 +60,7 @@ module _
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R)
   where
-  
+
   is-closed-under-mul-left-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-mul-left-subset-Commutative-Ring =
     is-closed-under-mul-left-subset-Ring (ring-Commutative-Ring R) S
@@ -66,7 +68,7 @@ module _
   is-closed-under-mul-right-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-mul-right-subset-Commutative-Ring =
     is-closed-under-mul-right-subset-Ring (ring-Commutative-Ring R) S
-  
+
   is-ideal-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-ideal-subset-Commutative-Ring =
     is-two-sided-ideal-subset-Ring (ring-Commutative-Ring R) S
@@ -74,7 +76,7 @@ module _
 ideal-Commutative-Ring :
   {l1 : Level} (l2 : Level) → Commutative-Ring l1 → UU (l1 ⊔ lsuc l2)
 ideal-Commutative-Ring l2 R = two-sided-ideal-Ring l2 (ring-Commutative-Ring R)
-  
+
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
   where

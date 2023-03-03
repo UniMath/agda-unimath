@@ -1,5 +1,6 @@
 #  Equivalence classes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-classes where
 
@@ -39,6 +40,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -80,7 +82,7 @@ module _
 ```agda
   equivalence-class : UU (l1 ⊔ lsuc l2)
   equivalence-class = type-subtype is-equivalence-class-Prop
-  
+
   class : A → equivalence-class
   pr1 (class x) = prop-Eq-Rel R x
   pr2 (class x) =
@@ -292,7 +294,7 @@ module _
     Σ (equivalence-class R) (λ P → is-in-equivalence-class R P a)
   pr1 center-total-is-in-equivalence-class = class R a
   pr2 center-total-is-in-equivalence-class = refl-Eq-Rel R
-  
+
   contraction-total-is-in-equivalence-class :
     ( t :
       Σ ( equivalence-class R)
@@ -302,7 +304,7 @@ module _
     eq-type-subtype
       ( λ D → is-in-equivalence-class-Prop R D a)
       ( eq-class-equivalence-class R C H)
-    
+
   is-contr-total-is-in-equivalence-class :
     is-contr
       ( Σ ( equivalence-class R)
@@ -358,7 +360,7 @@ module _
       is-effective R (class R)
     is-effective-class x y =
       ( equiv-symm-Eq-Rel R) ∘e ( effective-quotient' x (class R y))
-  
+
   abstract
     apply-effectiveness-class :
       {x y : A} → class R x ＝ class R y → sim-Eq-Rel R x y
@@ -444,7 +446,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
-  
+
   is-small-equivalence-class : is-small (l1 ⊔ l2) (equivalence-class R)
   is-small-equivalence-class =
     is-small-is-surjective

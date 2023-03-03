@@ -1,5 +1,6 @@
 #  Equivalences of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.equivalences-undirected-graphs where
 
@@ -22,6 +23,7 @@ open import foundation.unordered-pairs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 
@@ -44,7 +46,7 @@ module _
         ( p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p ≃
         edge-Undirected-Graph H (map-equiv-unordered-pair f p))
-        
+
   equiv-vertex-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H

@@ -1,5 +1,6 @@
 # Scalar multiplication on matrices
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.scalar-multiplication-matrices where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import linear-algebra.matrices
 open import linear-algebra.scalar-multiplication-vectors
 ```
+</details>
 
 ```agda
 scalar-mul-matrix :

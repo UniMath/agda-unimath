@@ -1,5 +1,6 @@
 # Totally ordered posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.total-posets where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 open import order-theory.posets
 open import order-theory.total-preorders
 ```
+</details>
 
 ## Definition
 

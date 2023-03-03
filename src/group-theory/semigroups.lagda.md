@@ -1,5 +1,6 @@
 #  Semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.semigroups where
 
@@ -8,10 +9,11 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
-Semigroups are sets equipped an associative binary operation. 
+Semigroups are sets equipped an associative binary operation.
 
 ## Definition
 

@@ -1,5 +1,6 @@
 #  The precategory of semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.precategory-of-semigroups where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

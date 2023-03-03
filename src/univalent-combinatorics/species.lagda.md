@@ -1,5 +1,6 @@
 #  Species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.species where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ### Idea
 

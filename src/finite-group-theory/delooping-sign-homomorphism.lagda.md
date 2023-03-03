@@ -1,5 +1,6 @@
 #  Deloopings of the sign homomorphism
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -64,12 +65,13 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ### Deloopings of the sign homomorphism
 
 ```agda
 module _
-  { l1 l2 l3 : Level} 
+  { l1 l2 l3 : Level}
   ( D : (n : ℕ) (X : UU-Fin l1 n) → UU l2)
   ( R : (n : ℕ) (X : UU-Fin l1 n) → Eq-Rel l3 (D n X))
   ( is-decidable-R : (n : ℕ) (X : UU-Fin l1 n) (a b : D n X) →
@@ -120,7 +122,6 @@ module _
                 ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
             ( transposition Y))
           ( quotient-aut-succ-succ-Fin n (transposition Y)))))
-            
 
   where
 
@@ -189,7 +190,7 @@ module _
     map-trunc-Prop
       ( equiv-D/R-fin-2-equiv n X ineq)
       ( has-cardinality-type-UU-Fin n X)
-  
+
   map-quotient-delooping-sign : (n : ℕ) →
     classifying-type-Concrete-Group
       ( UU-Fin-Group l1 n) →
@@ -329,7 +330,7 @@ module _
               ( preserves-id-equiv-invertible-action-D-equiv (succ-ℕ (succ-ℕ n)) (pair X eX))
               ( x)))
 
-  coherence-square-map-quotient-delooping-sign-loop-Fin : (n : ℕ) 
+  coherence-square-map-quotient-delooping-sign-loop-Fin : (n : ℕ)
     ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))) →
     coherence-square-maps
       ( map-quotient-loop-Fin n p)
@@ -342,8 +343,8 @@ module _
           ( map-quotient-delooping-sign-loop-Fin n p)))
   coherence-square-map-quotient-delooping-sign-loop-Fin n p =
     coherence-square-map-quotient-delooping-sign-loop-Set n
-      ( raise l1 (Fin (succ-ℕ (succ-ℕ n)))) 
-      ( raise l1 (Fin (succ-ℕ (succ-ℕ n)))) 
+      ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
+      ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
       ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
       ( unit-trunc-Prop (compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))
       ( p)
@@ -397,7 +398,7 @@ module _
   abstract
     eq-quotient-delooping-sign-loop-equiv-is-set-quotient : (n : ℕ) →
       ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))) →
-      Id 
+      Id
         ( map-hom-symmetric-group-loop-group-Set
           ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
           ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
@@ -445,7 +446,7 @@ module _
             ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
 
   map-quotient-aut-Fin : (n : ℕ) →
-    type-Group (symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))) → 
+    type-Group (symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))) →
     type-Group
       ( symmetric-Group (quotient-set-Fin (succ-ℕ (succ-ℕ n))))
   map-quotient-aut-Fin n h =
@@ -763,7 +764,7 @@ module _
 
   eq-map-quotient-aut-loop-equiv-is-set-quotient : (n : ℕ) →
     ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))) →
-    Id 
+    Id
       ( map-quotient-aut-Fin n
         ( map-hom-symmetric-group-loop-group-Set
           ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
@@ -1957,4 +1958,4 @@ module _
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
 ```
- 
+

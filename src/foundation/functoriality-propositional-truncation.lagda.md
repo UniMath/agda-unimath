@@ -1,5 +1,6 @@
 #  Functoriality of propositional truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-propositional-truncation where
 
@@ -15,6 +16,7 @@ open import foundation-core.universe-levels
 
 open import foundation.propositional-truncations
 ```
+</details>
 
 ## Idea
 

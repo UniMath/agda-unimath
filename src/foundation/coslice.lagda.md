@@ -1,5 +1,6 @@
 #  Morphisms in the coslice category of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.coslice where
 
@@ -13,6 +14,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 
@@ -70,4 +72,3 @@ module _
   eq-htpy-hom-coslice h k H K =
     map-inv-equiv (extensionality-hom-coslice h k) (pair H K)
 ```
- 

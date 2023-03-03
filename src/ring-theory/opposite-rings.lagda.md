@@ -1,5 +1,6 @@
 #  Opposite rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.opposite-rings where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

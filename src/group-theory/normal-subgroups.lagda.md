@@ -1,5 +1,6 @@
 #  Normal subgroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups where
 
@@ -30,6 +31,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 
@@ -333,7 +335,7 @@ Normal-Subgroup-Large-Preorder :
   {l1 : Level} (G : Group l1) →
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Normal-Subgroup-Large-Preorder G) l2 =
-  Normal-Subgroup l2 G 
+  Normal-Subgroup l2 G
 leq-large-preorder-Prop (Normal-Subgroup-Large-Preorder G) H K =
   contains-Normal-Subgroup-Prop G H K
 refl-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
@@ -370,7 +372,7 @@ Normal-Subgroup-Poset l2 G =
 module _
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
   where
-  
+
   sim-congruence-Normal-Subgroup : (x y : type-Group G) → UU l2
   sim-congruence-Normal-Subgroup =
     right-sim-Subgroup G (subgroup-Normal-Subgroup G N)

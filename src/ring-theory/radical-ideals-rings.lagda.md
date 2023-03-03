@@ -1,5 +1,6 @@
 #  Radical ideals in rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.radical-ideals-rings where
 
@@ -10,6 +11,7 @@ open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -21,7 +23,7 @@ A radical ideal in a ring R is a two-sided ideal I such that `1 + x` is a multip
 module _
   {l1 l2 : Level} (R : Ring l1) (I : two-sided-ideal-Ring l2 R)
   where
-  
+
   is-radical-two-sided-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-radical-two-sided-ideal-ring-Prop =
     Π-Prop

@@ -1,5 +1,6 @@
 #  The invariant basis property of rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.invariant-basis-property-rings where
 
@@ -14,6 +15,7 @@ open import ring-theory.rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

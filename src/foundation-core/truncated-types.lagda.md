@@ -1,5 +1,6 @@
 #  Truncated types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.truncated-types where
 
@@ -19,6 +20,7 @@ open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 

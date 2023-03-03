@@ -1,5 +1,6 @@
 # Vectors
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors where
 
@@ -24,6 +25,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -43,7 +45,7 @@ data vec {l : Level} (A : UU l) : ℕ → UU l where
 module _
   {l : Level} {A : UU l}
   where
-  
+
   head-vec : {n : ℕ} → vec A (succ-ℕ n) → A
   head-vec (x ∷ v) = x
 
@@ -61,7 +63,7 @@ module _
 
 ### The functional type of vectors
 
-```agda  
+```agda
 functional-vec : {l : Level} → UU l → ℕ → UU l
 functional-vec A n = Fin n → A
 
@@ -104,7 +106,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-    
+
   Eq-vec : (n : ℕ) → vec A n → vec A n → UU l
   Eq-vec zero-ℕ empty-vec empty-vec = raise-unit l
   Eq-vec (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (Id x y) × (Eq-vec n xs ys)
@@ -142,7 +144,7 @@ module _
   issec-eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
     ( square-Eq-eq-vec n x xs ys (eq-Eq-vec n xs ys ps)) ∙
     ( ap (pair refl) (issec-eq-Eq-vec n xs ys ps))
-                                                                                                            
+
   is-equiv-Eq-eq-vec :
     (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
   is-equiv-Eq-eq-vec n u v =

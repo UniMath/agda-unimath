@@ -1,5 +1,6 @@
 #  Type arithmetic with the unit type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-unit-type where
 
@@ -15,6 +16,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 
@@ -54,7 +56,7 @@ module _
   left-unit-law-Σ : Σ unit A ≃ A star
   pr1 left-unit-law-Σ = map-left-unit-law-Σ
   pr2 left-unit-law-Σ = is-equiv-map-left-unit-law-Σ
-  
+
   is-equiv-map-inv-left-unit-law-Σ : is-equiv map-inv-left-unit-law-Σ
   is-equiv-map-inv-left-unit-law-Σ =
     is-equiv-has-inverse

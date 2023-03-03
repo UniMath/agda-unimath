@@ -1,5 +1,6 @@
 #  The Gaussian integers
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.gaussian-integers where
 
@@ -27,6 +28,7 @@ open import group-theory.semigroups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -155,7 +157,7 @@ associative-add-ℤ[i] :
   (x y z : ℤ[i]) → Id (add-ℤ[i] (add-ℤ[i] x y) z) (add-ℤ[i] x (add-ℤ[i] y z))
 associative-add-ℤ[i] (pair a1 b1) (pair a2 b2) (pair a3 b3) =
   eq-Eq-ℤ[i] (associative-add-ℤ a1 a2 a3) (associative-add-ℤ b1 b2 b3)
-  
+
 left-inverse-law-add-ℤ[i] :
   (x : ℤ[i]) → Id (add-ℤ[i] (neg-ℤ[i] x) x) zero-ℤ[i]
 left-inverse-law-add-ℤ[i] (pair a b) =

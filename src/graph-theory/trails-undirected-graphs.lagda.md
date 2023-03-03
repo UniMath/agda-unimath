@@ -1,5 +1,6 @@
 #  Trails in undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.trails-undirected-graphs where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
 ```
+</details>
 
 ## Idea
 
@@ -26,7 +28,7 @@ A trail in an undirected graph is a walk that passes through each edge at most o
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
-  
+
   is-trail-walk-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y →
     UU (lsuc lzero ⊔ l1 ⊔ l2)

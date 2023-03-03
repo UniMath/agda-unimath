@@ -1,5 +1,6 @@
 #  Lattices
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.lattices where
 
@@ -13,6 +14,7 @@ open import order-theory.join-semilattices
 open import order-theory.meet-semilattices
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 

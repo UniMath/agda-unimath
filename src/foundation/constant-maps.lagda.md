@@ -1,5 +1,6 @@
 #  Constant maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.constant-maps where
 
@@ -25,6 +26,7 @@ open import foundation-core.universe-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 ```
+</details>
 
 ## Properties
 

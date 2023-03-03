@@ -2,6 +2,7 @@
 
 We characterize dependent paths in the family of depedent paths;
 define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
+<details><summary>Imports</summary>
 ```agda
 module foundation.dependent-paths where
 
@@ -16,6 +17,7 @@ open import foundation.sections
 open import foundation.transport
 open import foundation.universe-levels
 ```
+</details>
 
 We characterize dependent paths in the family λ t → path-over B t b0 b1
 
@@ -32,15 +34,15 @@ module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
   (B : A → UU l2) {b0 : B a0} {b1 : B a1} (α : p0 ＝ p1)
   where
-  
+
   tr-path-over :
-    (q01 : path-over B p0 b0 b1) → 
+    (q01 : path-over B p0 b0 b1) →
     (tr (λ t → path-over B t b0 b1) α q01) ＝ (inv (tr² B α b0) ∙ q01)
   tr-path-over q01 = inv (tr-ap {D = (λ x → x ＝ b1)}
     (λ t → tr B t b0) (λ x → id) α q01) ∙ tr-Id-left (tr² B α b0) q01
 
   tr-inv-path-over :
-    (q01 : path-over B p1 b0 b1) → 
+    (q01 : path-over B p1 b0 b1) →
     (tr (λ t → path-over B t b0 b1) (inv α) q01) ＝ ((tr² B α b0) ∙ q01)
   tr-inv-path-over q01 = inv (tr-ap {D = λ x → x ＝ b1}
     (λ t → tr B t b0) (λ x → id) (inv α) q01) ∙
@@ -57,7 +59,7 @@ module _
     (λ q → tr (λ t → path-over B t b0 b1) (inv α) q) ＝ (λ q → (tr² B α b0) ∙ q)
   tr-inv-path-over-eq-tr²-concat = map-inv-equiv ((htpy-eq) ,
     (funext (tr (λ t → path-over B t b0 b1) (inv α)) (λ q → (tr² B α b0) ∙ q))) tr-inv-path-over
-  
+
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
   (B : A → UU l2) (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
@@ -126,7 +128,7 @@ Too bad I thought of this only after writing everything out...oops -}
   is-equiv-tr-path-over-path-over² =
     is-equiv-has-inverse path-over²-tr-path-over
     issec-path-over²-tr-path-over isretr-path-over²-tr-path-over
-    
+
 ```
 
 Definition: Groupoidal operators on dependent paths.
@@ -138,16 +140,16 @@ module _
   where
 
   d-concat : path-over B (p01 ∙ p12) b0 b2
-  d-concat =   (tr-concat {B = B} p01 p12 b0)  ∙ ((ap (tr B p12) q01) ∙ (q12)) 
+  d-concat =   (tr-concat {B = B} p01 p12 b0)  ∙ ((ap (tr B p12) q01) ∙ (q12))
 
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (p01 : a0 ＝ a1) {b0 : B a0} {b1 : B a1}
   (q01 : path-over B p01 b0 b1)
   where
-  
+
   d-inv : path-over B (inv p01) b1 b0
   d-inv =  (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
-    ap (λ t → tr B t b0) (right-inv p01))) 
+    ap (λ t → tr B t b0) (right-inv p01)))
 ```
 
 Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws.
@@ -161,7 +163,7 @@ module _
   d-assoc :
     {a2 a3 : A} {b2 : B a2} {b3 : B a3}
     (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2)
-    (q12 : path-over B p12 b1 b2) (p23 : a2 ＝ a3) (q23 : path-over B p23 b2 b3) → 
+    (q12 : path-over B p12 b1 b2) (p23 : a2 ＝ a3) (q23 : path-over B p23 b2 b3) →
     path-over² B (assoc p01 p12 p23)
       (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)
       (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
@@ -223,7 +225,7 @@ module _
   d-inv-d-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (inv-inv p) (d-inv B (inv p) (d-inv B p q)) q
   d-inv-d-inv refl refl = refl
-  
+
   d-inv-d-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b1) (inv-inv p) (d-inv B (inv p) (d-inv B p q))) ＝ q
   d-inv-d-inv' p q = tr-path-over-path-over² B (inv-inv p)
@@ -232,7 +234,7 @@ module _
   distributive-d-inv-d-concat :
     {a2 : A} {b2 : B a2} (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1)
     (p12 : a1 ＝ a2) (q12 : path-over B p12 b1 b2) →
-    path-over² B (distributive-inv-concat p01 p12) 
+    path-over² B (distributive-inv-concat p01 p12)
     (d-inv B (p01 ∙ p12) (d-concat B p01 q01 p12 q12))
     (d-concat B (inv p12) (d-inv B p12 q12) (inv p01) (d-inv B p01 q01))
   distributive-d-inv-d-concat refl refl refl refl = refl

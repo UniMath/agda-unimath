@@ -1,5 +1,6 @@
 #  The universal property of pullbacks
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-pullbacks where
 
@@ -25,6 +26,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 ```
+</details>
 
 ## Idea
 

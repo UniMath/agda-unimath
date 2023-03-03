@@ -1,5 +1,6 @@
 #  Full subtypes of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.full-subtypes where
 
@@ -14,6 +15,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -69,7 +71,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
-  
+
   is-equiv-inclusion-is-full-subtype :
     is-full-subtype P → is-equiv (inclusion-subtype P)
   is-equiv-inclusion-is-full-subtype H =

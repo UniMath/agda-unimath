@@ -1,5 +1,6 @@
 #  Unordered tuples of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-tuples-of-types where
 
@@ -17,6 +18,7 @@ open import foundation.unordered-tuples
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 
@@ -75,7 +77,7 @@ module _
 module _
   {l : Level} {n : ℕ} (A : unordered-tuple-types l n)
   where
-  
+
   id-equiv-unordered-tuple-types : equiv-unordered-tuple-types n A A
   pr1 id-equiv-unordered-tuple-types = id-equiv
   pr2 id-equiv-unordered-tuple-types i = id-equiv

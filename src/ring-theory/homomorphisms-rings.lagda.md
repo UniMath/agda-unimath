@@ -1,5 +1,6 @@
 #  Ring homomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.homomorphisms-rings where
 
@@ -21,6 +22,7 @@ open import group-theory.homomorphisms-abelian-groups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -242,7 +244,7 @@ id-hom-Ring R = pair (id-hom-Ab (ab-Ring R)) (is-ring-homomorphism-id-hom-Ring R
 hom-Ab-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  type-hom-Ab (ab-Ring R1) (ab-Ring R3) 
+  type-hom-Ab (ab-Ring R1) (ab-Ring R3)
 hom-Ab-comp-hom-Ring R1 R2 R3 g f =
   comp-hom-Ab
     ( ab-Ring R1)

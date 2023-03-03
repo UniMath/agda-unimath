@@ -1,5 +1,6 @@
 #  Subsemigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.subsemigroups where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

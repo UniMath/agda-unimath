@@ -1,5 +1,6 @@
 #  Representations of monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.representations-monoids where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

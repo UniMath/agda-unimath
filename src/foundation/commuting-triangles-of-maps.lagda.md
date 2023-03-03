@@ -1,5 +1,6 @@
 # Commuting triangles of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.commuting-triangles-of-maps where
 
@@ -11,6 +12,7 @@ open import foundation-core.universe-levels
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Pointed homotopies
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-homotopies where
 
@@ -16,6 +17,7 @@ open import structured-types.pointed-families-of-types
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -28,7 +30,7 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A)
   (f : pointed-Π A B)
   where
-  
+
   htpy-pointed-Π : (g : pointed-Π A B) → UU (l1 ⊔ l2)
   htpy-pointed-Π g =
     pointed-Π A
@@ -213,7 +215,7 @@ module _
             ( inv (ap (pr1 g) (pr2 f2) ∙ pr2 g)))))
 
 module _
-  {l1 l2 l3 : Level} 
+  {l1 l2 l3 : Level}
   where
 
   right-whisker-htpy-pointed-map :
@@ -223,9 +225,9 @@ module _
       ( comp-pointed-map A B C g1 f)
       ( comp-pointed-map A B C g2 f)
   right-whisker-htpy-pointed-map (pair A a) (pair B .(f a)) (pair C c)
-    g1 g2 H (pair f refl) = 
+    g1 g2 H (pair f refl) =
     pair (pr1 H ·r f) (pr2 H)
-  
+
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
@@ -234,4 +236,4 @@ module _
     (f g h : A →* B) → htpy-pointed-map A B f g → htpy-pointed-map A B g h →
     htpy-pointed-map A B f h
   concat-htpy-pointed-map = concat-htpy-pointed-Π A (constant-Pointed-Fam A B)
-```  
+```

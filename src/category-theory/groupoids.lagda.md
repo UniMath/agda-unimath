@@ -1,5 +1,6 @@
 #  Groupoids
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.groupoids where
 
@@ -24,6 +25,7 @@ open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

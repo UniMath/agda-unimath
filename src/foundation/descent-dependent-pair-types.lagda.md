@@ -1,5 +1,6 @@
 #  Descent for dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.descent-dependent-pair-types where
 
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Theorem
 
@@ -40,7 +42,7 @@ module _
   triangle-descent-Σ i .(pr1 (c i) a') (pair a' refl) = refl
 
   abstract
-    descent-Σ : 
+    descent-Σ :
       ((i : I) → is-pullback (f i) h (c i)) →
       is-pullback (ind-Σ f) h cone-descent-Σ
     descent-Σ is-pb-c =
@@ -59,7 +61,7 @@ module _
             ( is-equiv-map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))))
 
   abstract
-    descent-Σ' : 
+    descent-Σ' :
       is-pullback (ind-Σ f) h cone-descent-Σ →
       ((i : I) → is-pullback (f i) h (c i))
     descent-Σ' is-pb-dsq i =

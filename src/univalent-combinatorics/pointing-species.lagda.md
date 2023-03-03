@@ -1,5 +1,6 @@
 #  Pointing of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pointing-species where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 ```
+</details>
 
 ## Idea
 

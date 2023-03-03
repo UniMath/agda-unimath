@@ -1,5 +1,6 @@
 #  Equivalences between large precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.equivalences-large-precategories where
 
@@ -9,6 +10,7 @@ open import category-theory.natural-isomorphisms-large-precategories
 open import category-theory.large-precategories
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

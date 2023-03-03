@@ -1,5 +1,6 @@
 #  Subsets of rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.subsets-rings where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

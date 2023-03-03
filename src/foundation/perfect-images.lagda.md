@@ -1,5 +1,6 @@
 #  Perfect Images
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.perfect-images where
 
@@ -23,11 +24,12 @@ open import foundation.propositions
 open import foundation.propositional-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
 Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f ) ^ n (a₀) = a`, consider also the following chain
- 
+
   `a₀ --> f (a₀) --> g (f (a₀)) --> f (g (f (a₀))) --> ... --> (g ◦ f ) ^ n (a₀) = a`
 
 We say `a₀` is an origin for `a`, and  `a` is `perfect image` for `g` if any origin of `a` is in the image of `g`.
@@ -67,20 +69,20 @@ module _
   is-decidable-is-perfect-image-is-emb :
     LEM (l1 ⊔ l2) → (a : A) → is-decidable (is-perfect-image f g a)
   is-decidable-is-perfect-image-is-emb lem a =
-    lem (is-perfect-image-Prop a)  
+    lem (is-perfect-image-Prop a)
 ```
 
 If `a` is a perfect image for `g`, then `a` has a preimage under `g`. Just take n=zero in the definition.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}  
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-perfect-image-is-fib :
     {f : A → B} {g : B → A} → (a : A) →
     is-perfect-image f g a → fib g a
-  is-perfect-image-is-fib a ρ = ρ a 0 refl  
+  is-perfect-image-is-fib a ρ = ρ a 0 refl
 ```
 
 One can define a map from `A` to `B` restricting the domain to the perfect images of `g`. This gives a kind of section of g. When g is also an embedding, the map gives a kind of retraction of g.
@@ -145,7 +147,7 @@ module _
     where
     q : g (f a) ＝ a₀
     q = ap g p ∙ is-sec-inverse-of-perfect-image a₀ ρ
-                                                    
+
     s : ¬ (is-perfect-image f g (g (f a)))
     s = λ η → nρ (previous-perfect-image a η)
 

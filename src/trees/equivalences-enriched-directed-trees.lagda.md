@@ -1,5 +1,6 @@
 #  Equivalences of enriched directed trees
 
+<details><summary>Imports</summary>
 ```agda
 module trees.equivalences-enriched-directed-trees where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 open import trees.enriched-directed-trees
 open import trees.equivalences-directed-trees
 ```
+</details>
 
 ## Definition
 

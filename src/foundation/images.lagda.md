@@ -1,5 +1,6 @@
 #  The image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.images where
 
@@ -26,6 +27,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -40,7 +42,7 @@ module _
 
   subtype-im : subtype (l1 ⊔ l2) X
   subtype-im x = trunc-Prop (fib f x)
-    
+
   im : UU (l1 ⊔ l2)
   im = type-subtype subtype-im
 
@@ -91,7 +93,7 @@ module _
   abstract
     is-equiv-Eq-eq-im : (x y : im f) → is-equiv (Eq-eq-im x y)
     is-equiv-Eq-eq-im x =
-      fundamental-theorem-id 
+      fundamental-theorem-id
         ( is-contr-total-Eq-im x)
         ( Eq-eq-im x)
 
@@ -154,7 +156,7 @@ abstract
   is-trunc-im :
     {l1 l2 : Level} (k : 𝕋) {X : UU l1} {A : UU l2} (f : A → X) →
     is-trunc (succ-𝕋 k) X → is-trunc (succ-𝕋 k) (im f)
-  is-trunc-im k f = is-trunc-emb k (emb-im f) 
+  is-trunc-im k f = is-trunc-emb k (emb-im f)
 ```
 
 ### The image of a map into a proposition is a proposition

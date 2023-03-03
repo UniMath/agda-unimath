@@ -20,7 +20,6 @@ concurrency:
 env:
   AGDAHTMLFLAGS: --html --html-highlight=auto --html-dir=docs --only-scope-checking --css=Agda.css
   AGDA: agda
-
 jobs:
   pages:
     runs-on: macOS-latest
@@ -57,11 +56,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
+      - name: Install mdbook-pagetoc
+        uses: baptiste0928/cargo-install@v1
+        with:
+          crate: mdbook-pagetoc
+
+      - name: Install mdbook-katex
+        uses: baptiste0928/cargo-install@v1
+        with:
+          crate: mdbook-katex
       
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
-          mdbook-version: 0.4.22
+          mdbook-version: 'latest'
         
       - name: Generate book
         run: |
@@ -74,8 +82,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'main/book'
-
+          path: main/book/html
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1

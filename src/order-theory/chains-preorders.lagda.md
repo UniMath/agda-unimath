@@ -1,5 +1,6 @@
 # Chains in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.chains-preorders where
 
@@ -12,6 +13,7 @@ open import order-theory.preorders
 open import order-theory.subpreorders
 open import order-theory.total-preorders
 ```
+</details>
 
 ## Definition
 
@@ -52,7 +54,7 @@ module _
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
-  
+
   inclusion-chain-preorder-Prop :
     {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
     Prop (l1 ⊔ l3 ⊔ l4)

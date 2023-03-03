@@ -1,5 +1,6 @@
 #  The universal property of identity types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-identity-types where
 
@@ -10,6 +11,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

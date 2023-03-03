@@ -1,5 +1,6 @@
 #  Truncated maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.truncated-maps where
 
@@ -15,6 +16,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Properties
 

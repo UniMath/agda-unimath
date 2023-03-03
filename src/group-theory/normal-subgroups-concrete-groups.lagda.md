@@ -1,5 +1,6 @@
 #  Normal subgroups of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups-concrete-groups where
 
@@ -10,6 +11,7 @@ open import group-theory.concrete-groups
 open import group-theory.subgroups-concrete-groups
 open import group-theory.transitive-concrete-group-actions
 ```
+</details>
 
 ## Idea
 

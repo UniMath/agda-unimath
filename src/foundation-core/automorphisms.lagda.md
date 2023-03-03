@@ -1,5 +1,6 @@
 #  Automorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.automorphisms where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

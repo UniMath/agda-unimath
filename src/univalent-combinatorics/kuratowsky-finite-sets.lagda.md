@@ -1,5 +1,6 @@
 #  Kuratowsky finite sets
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.kuratowsky-finite-sets where
 
@@ -19,6 +20,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

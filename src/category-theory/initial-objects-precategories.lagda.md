@@ -1,5 +1,6 @@
 #  Initial objects of a precategory
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.initial-objects-precategories where
 
@@ -9,6 +10,7 @@ open import foundation.dependent-pair-types
 open import foundation-core.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

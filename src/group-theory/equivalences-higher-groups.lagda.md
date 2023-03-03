@@ -1,5 +1,6 @@
 #  Equivalences of higher groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-higher-groups where
 
@@ -19,6 +20,7 @@ open import group-theory.homomorphisms-higher-groups
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Definitions
 

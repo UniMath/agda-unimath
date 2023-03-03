@@ -1,5 +1,6 @@
 #  Fibers of pointed maps
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.fibers-of-pointed-maps where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Definition
 

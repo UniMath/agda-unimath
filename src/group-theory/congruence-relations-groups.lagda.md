@@ -1,5 +1,6 @@
 #  Congruence relations on groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-groups where
 
@@ -17,6 +18,7 @@ open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 
@@ -69,7 +71,7 @@ module _
     sim-congruence-Group x2 y1 →
     y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
-  
+
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
   refl-congruence-Group = refl-Eq-Rel eq-rel-congruence-Group
 

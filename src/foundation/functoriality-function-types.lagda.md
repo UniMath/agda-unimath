@@ -1,5 +1,6 @@
 #  Functoriality of function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-function-types where
 
@@ -21,6 +22,7 @@ open import foundation-core.function-extensionality
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Properties
 

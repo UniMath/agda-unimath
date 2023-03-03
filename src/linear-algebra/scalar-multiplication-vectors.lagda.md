@@ -1,5 +1,6 @@
 # Scalar multiplication of vectors
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.scalar-multiplication-vectors where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Higher groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.higher-groups where
 
@@ -18,6 +19,7 @@ open import structured-types.pointed-types
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ## Idea
 

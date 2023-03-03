@@ -1,5 +1,6 @@
 # Powers of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.powers-integers where
 
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 
 open import ring-theory.powers-of-elements-rings
 ```
+</details>
 
 ## Idea
 

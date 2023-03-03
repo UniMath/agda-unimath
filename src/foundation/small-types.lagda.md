@@ -1,5 +1,6 @@
 #  Small types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.small-types where
 
@@ -16,6 +17,7 @@ open import foundation.uniqueness-image
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 

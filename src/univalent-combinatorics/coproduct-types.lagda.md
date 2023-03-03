@@ -1,5 +1,6 @@
 #  Coproducts of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.coproduct-types where
 
@@ -26,6 +27,7 @@ open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -71,7 +73,7 @@ abstract
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   count-left-summand : count (X + Y) → count X
   count-left-summand e =
     count-equiv

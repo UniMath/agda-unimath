@@ -1,5 +1,6 @@
 #  Finite graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.finite-graphs where
 
@@ -27,6 +28,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -71,7 +73,6 @@ module _
   pr1 undirected-graph-Undirected-Graph-𝔽 = vertex-Undirected-Graph-𝔽
   pr2 undirected-graph-Undirected-Graph-𝔽 = edge-Undirected-Graph-𝔽
 ```
-
 
 ### The following type is expected to be equivalent to Undirected-Graph-𝔽
 

@@ -1,5 +1,6 @@
 #  Binary functoriality of set quotients
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -31,6 +32,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -386,7 +388,6 @@ module _
       ( is-set-quotient-set-quotient S)
       ( is-set-quotient-set-quotient T)
       ( f)
-  
 
   binary-map-set-quotient : set-quotient R → set-quotient S → set-quotient T
   binary-map-set-quotient =

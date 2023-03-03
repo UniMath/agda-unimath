@@ -1,5 +1,6 @@
 #  Matchings
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.matchings where
 
@@ -18,10 +19,11 @@ open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
-A matching in a undirected graph is a set of edges without common vertices. 
+A matching in a undirected graph is a set of edges without common vertices.
 
 ## Definitions
 

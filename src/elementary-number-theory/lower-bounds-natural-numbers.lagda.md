@@ -1,5 +1,6 @@
 #  Lower bounds of type families over the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.lower-bounds-natural-numbers where
 
@@ -10,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Injective maps between finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.injective-maps where
 
@@ -13,6 +14,7 @@ open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

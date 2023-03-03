@@ -1,5 +1,6 @@
 #  Rooted undirected trees
 
+<details><summary>Imports</summary>
 ```agda
 module trees.rooted-undirected-trees where
 
@@ -16,6 +17,7 @@ open import graph-theory.undirected-graphs
 
 open import trees.undirected-trees
 ```
+</details>
 
 ## Idea
 

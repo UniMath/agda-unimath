@@ -1,5 +1,6 @@
 #  The involutive type of H-Space structures on a pointed type
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.involutive-type-of-h-space-structures where
 
@@ -24,6 +25,7 @@ open import structured-types.pointed-types
 
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 

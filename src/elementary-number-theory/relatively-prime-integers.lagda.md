@@ -1,5 +1,6 @@
 #  Relatively prime integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.relatively-prime-integers where
 
@@ -9,6 +10,7 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import foundation.universe-levels
 open import foundation.propositions
 ```
+</details>
 
 ## Idea
 

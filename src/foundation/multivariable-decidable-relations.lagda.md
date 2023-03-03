@@ -1,5 +1,6 @@
 #  Multivariable decidable relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.multivariable-decidable-relations where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

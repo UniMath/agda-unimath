@@ -1,9 +1,10 @@
 #  Mere embeddings
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.mere-embeddings where
 
-open import foundation.cantor-schroder-bernstein-escardo 
+open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.embeddings
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 
 open import order-theory.large-preorders
 ```
+</details>
 
 ## Definition
 
@@ -54,7 +56,7 @@ refl-leq-Large-Preorder mere-emb-Large-Preorder = refl-mere-emb
 trans-leq-Large-Preorder mere-emb-Large-Preorder X Y Z = transitive-mere-emb
 ```
 
-### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them. 
+### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them.
 
 ```agda
 antisymmetric-mere-emb :
@@ -66,5 +68,5 @@ antisymmetric-mere-emb lem f g =
    λ f' →
      apply-universal-property-trunc-Prop g
      (mere-equiv-Prop _ _)
-     λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g') 
+     λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')
 ```

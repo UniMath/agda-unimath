@@ -1,5 +1,6 @@
 #  Maps fibered over a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.fibered-maps where
 
@@ -23,6 +24,7 @@ open import foundation.homotopies
 open import foundation.slice
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 
@@ -59,7 +61,6 @@ module _
 
   fiberwise-map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   fiberwise-map-over i = (x : X) → fib f x → fib g (i x)
-
 
   cone-fibered-map : (ihH : fibered-map) → cone (pr1 ihH) g A
   pr1 (cone-fibered-map ihH) = f
@@ -119,7 +120,7 @@ module _
   htpy-eq-map-over : (m m' : map-over f g i) → m ＝ m' → htpy-map-over m m'
   htpy-eq-map-over m .m refl = refl-htpy-map-over m
 
-  is-contr-total-htpy-map-over : 
+  is-contr-total-htpy-map-over :
     (m : map-over f g i) → is-contr (Σ (map-over f g i) (htpy-map-over m))
   is-contr-total-htpy-map-over m =
     is-contr-total-Eq-structure
@@ -152,7 +153,7 @@ module _
 
   coherence-htpy-fibered-map :
     (m m' : fibered-map f g) →
-    map-base-fibered-map f g m ~ map-base-fibered-map f g m' → 
+    map-base-fibered-map f g m ~ map-base-fibered-map f g m' →
     map-total-fibered-map f g m ~ map-total-fibered-map f g m' → UU (l1 ⊔ l4)
   coherence-htpy-fibered-map m m' I H =
     ( is-map-over-map-total-fibered-map f g m ∙h (g ·l H)) ~
@@ -173,7 +174,7 @@ module _
   htpy-eq-fibered-map : (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
   htpy-eq-fibered-map m .m refl = refl-htpy-fibered-map m
 
-  is-contr-total-htpy-fibered-map : 
+  is-contr-total-htpy-fibered-map :
     (m : fibered-map f g) → is-contr (Σ (fibered-map f g) (htpy-fibered-map m))
   is-contr-total-htpy-fibered-map m =
     is-contr-total-Eq-structure

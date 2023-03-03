@@ -1,5 +1,6 @@
 #  Decidability of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-dependent-pair-types where
 
@@ -14,6 +15,7 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

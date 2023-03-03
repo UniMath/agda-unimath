@@ -1,5 +1,6 @@
 #  The replacement axiom for type theory
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.replacement where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 
 open import foundation-core.small-types
 ```
+</details>
 
 ## Idea
 

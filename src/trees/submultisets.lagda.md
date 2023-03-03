@@ -1,5 +1,6 @@
 #  Submultisets
 
+<details><summary>Imports</summary>
 ```agda
 module trees.submultisets where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import trees.multisets
 ```
+</details>
 
 ## Idea
 

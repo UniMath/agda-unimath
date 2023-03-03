@@ -1,5 +1,6 @@
 #  Binary equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-equivalences where
 
@@ -9,6 +10,7 @@ open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

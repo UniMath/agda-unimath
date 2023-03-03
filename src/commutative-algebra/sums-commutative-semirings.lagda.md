@@ -1,5 +1,6 @@
 # Sums in commutative semirings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.sums-commutative-semirings where
 
@@ -21,6 +22,7 @@ open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -43,7 +45,7 @@ sum-Commutative-Semiring R = sum-Semiring (semiring-Commutative-Semiring R)
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   sum-one-element-Commutative-Semiring :
     (f : functional-vec-Commutative-Semiring R 1) →
     sum-Commutative-Semiring R 1 f ＝ head-functional-vec 0 f

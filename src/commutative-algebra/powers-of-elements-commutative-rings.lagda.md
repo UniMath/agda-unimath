@@ -1,5 +1,6 @@
 # Powers of elements in commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.powers-of-elements-commutative-rings where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import ring-theory.powers-of-elements-rings
 ```
+</details>
 
 ## Idea
 

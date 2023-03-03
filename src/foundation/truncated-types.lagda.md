@@ -1,5 +1,6 @@
 #  Truncated types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.truncated-types where
 
@@ -19,6 +20,7 @@ open import foundation-core.universe-levels
 open import foundation.subtype-identity-principle
 open import foundation.univalence
 ```
+</details>
 
 ## Definition
 

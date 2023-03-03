@@ -1,5 +1,6 @@
 #  Orientations of cubes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.orientations-cubes where
 
@@ -17,6 +18,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definition
 

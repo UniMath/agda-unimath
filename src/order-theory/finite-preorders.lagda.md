@@ -1,5 +1,6 @@
 # Finite preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.finite-preorders where
 
@@ -24,6 +25,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Finite preorders
 
@@ -232,7 +234,7 @@ module _
   element-finite-sub-Preorder-𝔽 : 𝔽 (l1 ⊔ l3)
   pr1 element-finite-sub-Preorder-𝔽 = element-finite-sub-Preorder X S
   pr2 element-finite-sub-Preorder-𝔽 = is-finite-element-finite-sub-Preorder X S
-  
+
   finite-sub-Preorder : Finite-Preorder (l1 ⊔ l3) l2
   pr1 finite-sub-Preorder = element-finite-sub-Preorder-𝔽
   pr1 (pr2 finite-sub-Preorder) = leq-finite-sub-Preorder-decidable-Prop X S

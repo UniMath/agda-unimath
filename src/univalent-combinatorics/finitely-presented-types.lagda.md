@@ -1,5 +1,6 @@
 #  Finitely presented types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.finitely-presented-types where
 
@@ -22,6 +23,7 @@ open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

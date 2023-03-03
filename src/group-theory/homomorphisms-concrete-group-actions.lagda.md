@@ -1,5 +1,6 @@
 #  Morphisms of concrete group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-concrete-group-actions where
 
@@ -17,6 +18,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 ```
+</details>
 
 ## Definition
 

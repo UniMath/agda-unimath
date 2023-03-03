@@ -1,5 +1,6 @@
 #  Homomorphisms of monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-monoids where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

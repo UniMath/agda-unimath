@@ -1,5 +1,6 @@
 #  Bracelets
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.bracelets where
 
@@ -12,6 +13,7 @@ open import graph-theory.polygons
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definition
 

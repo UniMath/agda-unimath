@@ -1,5 +1,6 @@
 # Decidable subposets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.decidable-subposets where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import order-theory.posets
 open import order-theory.subposets
 ```
+</details>
 
 ## Definition
 

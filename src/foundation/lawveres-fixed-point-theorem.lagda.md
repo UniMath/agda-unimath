@@ -1,5 +1,6 @@
 #  Lawvere's fixed point theorem
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.lawveres-fixed-point-theorem where
 
@@ -12,6 +13,7 @@ open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

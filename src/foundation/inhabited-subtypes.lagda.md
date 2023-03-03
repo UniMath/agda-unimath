@@ -1,5 +1,6 @@
 #  Inhabited subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.inhabited-subtypes where
 
@@ -15,6 +16,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -88,7 +90,7 @@ has-same-elements-inhabited-subtype-Prop P Q =
   has-same-elements-subtype-Prop
     ( subtype-inhabited-subtype P)
     ( subtype-inhabited-subtype Q)
-    
+
 has-same-elements-inhabited-subtype :
   {l1 l2 l3 : Level} {A : UU l1} →
   inhabited-subtype l2 A → inhabited-subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
@@ -105,7 +107,7 @@ is-prop-has-same-elements-inhabited-subtype P Q =
 module _
   {l1 l2 : Level} {A : UU l1} (P : inhabited-subtype l2 A)
   where
-  
+
   refl-has-same-elements-inhabited-subtype :
     has-same-elements-inhabited-subtype P P
   pr1 (refl-has-same-elements-inhabited-subtype x) = id

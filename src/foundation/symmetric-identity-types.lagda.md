@@ -1,5 +1,6 @@
 #  The symmetric identity types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-identity-types where
 
@@ -23,6 +24,7 @@ open import foundation.unordered-pairs
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -151,7 +153,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   equiv-symmetric-Id :
     (e : A ≃ B) (a : unordered-pair A) →
     symmetric-Id a ≃ symmetric-Id (map-equiv-unordered-pair e a)

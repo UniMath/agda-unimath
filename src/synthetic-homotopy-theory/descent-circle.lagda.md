@@ -1,5 +1,6 @@
 # The descent property of the circle
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.descent-circle where
 
@@ -23,6 +24,7 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
 ```
+</details>
 
 ## Idea
 

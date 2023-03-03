@@ -1,5 +1,6 @@
 #  0-Connected types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.0-connected-types where
 
@@ -26,6 +27,7 @@ open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

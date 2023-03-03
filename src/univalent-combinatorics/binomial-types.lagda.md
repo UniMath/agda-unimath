@@ -1,5 +1,6 @@
 #  The binomial types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.binomial-types where
 
@@ -46,6 +47,7 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

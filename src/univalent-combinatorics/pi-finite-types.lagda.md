@@ -1,5 +1,6 @@
 #  π-finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pi-finite-types where
 
@@ -67,6 +68,7 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

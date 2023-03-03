@@ -1,5 +1,6 @@
 #  Isomorphisms of commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.isomorphisms-commutative-rings where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import ring-theory.isomorphisms-rings
 ```
+</details>
 
 ## Definition
 

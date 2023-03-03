@@ -1,5 +1,6 @@
 #  Steiner triple systems
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.steiner-systems where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Retractions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.retractions where
 
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 

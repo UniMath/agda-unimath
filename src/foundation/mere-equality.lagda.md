@@ -1,5 +1,6 @@
 #  Mere equality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.mere-equality where
 
@@ -14,6 +15,7 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -25,13 +27,13 @@ Two elements in a type are said to be merely equal if there is an element of the
 module _
   {l : Level} {A : UU l}
   where
-  
+
   mere-eq-Prop : A → A → Prop l
   mere-eq-Prop x y = trunc-Prop (x ＝ y)
-  
+
   mere-eq : A → A → UU l
   mere-eq x y = type-trunc-Prop (x ＝ y)
-  
+
   is-prop-mere-eq : (x y : A) → is-prop (mere-eq x y)
   is-prop-mere-eq x y = is-prop-type-trunc-Prop
 ```
@@ -86,7 +88,7 @@ pr2 (pr2 (pr2 (mere-eq-Eq-Rel A))) = trans-mere-eq
 module _
   {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : A → type-Set X)
   where
-  
+
   reflects-mere-eq : reflects-Eq-Rel (mere-eq-Eq-Rel A) f
   reflects-mere-eq {x} {y} r =
     apply-universal-property-trunc-Prop r

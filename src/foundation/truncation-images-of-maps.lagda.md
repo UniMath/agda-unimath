@@ -1,5 +1,6 @@
 #  Truncation images of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.truncation-images-of-maps where
 
@@ -13,6 +14,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -28,7 +30,7 @@ The **`k`-truncation image** of a map `f : A → B` is the type `trunc-im k f` t
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   trunc-im : UU (l1 ⊔ l2)
   trunc-im = Σ B (λ y → type-trunc k (fib f y))
 

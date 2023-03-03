@@ -1,5 +1,6 @@
 #  Pointed sections of pointed maps
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-sections where
 
@@ -10,6 +11,7 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  The center of a group
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.centers-groups where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.subgroups
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +25,7 @@ The **center** of a group `G` is the normal subgroup consisting of all elements 
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   subtype-center-Group : subset-Group l1 G
   subtype-center-Group g =
     Π-Prop

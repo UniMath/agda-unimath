@@ -1,5 +1,6 @@
 #  Path-split maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.path-split-maps where
 
@@ -12,6 +13,7 @@ open import foundation-core.universe-levels
 
 open import foundation.equivalences
 ```
+</details>
 
 ## Properties
 

@@ -1,5 +1,6 @@
 #  Stabilizers of concrete group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.stabilizer-groups-concrete-group-actions where
 
@@ -20,6 +21,7 @@ open import group-theory.orbits-concrete-group-actions
 open import group-theory.subgroups-concrete-groups
 open import group-theory.transitive-concrete-group-actions
 ```
+</details>
 
 ## Idea
 
@@ -31,7 +33,7 @@ The stabilizer of an element `x : X pt` of a concrete G-set `X : BG → Set` is 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
-  
+
   action-stabilizer-action-Concrete-Group :
     type-action-Concrete-Group G X → action-Concrete-Group (l1 ⊔ l2) G
   action-stabilizer-action-Concrete-Group x u =

@@ -1,5 +1,6 @@
 #  Furstenberg groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.furstenberg-groups where
 
@@ -10,6 +11,7 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

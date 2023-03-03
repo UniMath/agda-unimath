@@ -1,5 +1,6 @@
 # Functoriality of the type of vectors
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-vectors where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 ```
+</details>
 
 ## Idea
 
@@ -26,7 +28,7 @@ Any map `f : A → B` determines a map `vec n A → vec n B` for every `n`.
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   map-vec : {n : ℕ} → (A → B) → vec A n → vec B n
   map-vec _ empty-vec = empty-vec
   map-vec f (x ∷ xs) = f x ∷ map-vec f xs
@@ -43,7 +45,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
-  
+
   binary-map-vec :
     {n : ℕ} → (A → B → C) → vec A n → vec B n → vec C n
   binary-map-vec f empty-vec empty-vec = empty-vec

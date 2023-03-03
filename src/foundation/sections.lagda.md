@@ -1,5 +1,6 @@
 #  Sections
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.sections where
 
@@ -22,6 +23,7 @@ open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Idea
 

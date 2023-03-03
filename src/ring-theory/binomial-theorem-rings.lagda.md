@@ -1,8 +1,8 @@
 # The binomial theorem for rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.binomial-theorem-rings where
-
 
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
@@ -26,6 +26,7 @@ open import ring-theory.sums-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -54,7 +55,7 @@ binomial-sum-Ring R = binomial-sum-Semiring (semiring-Ring R)
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   binomial-sum-one-element-Ring :
     (f : functional-vec-Ring R 1) →
     binomial-sum-Ring R 0 f ＝ head-functional-vec-Ring R 0 f

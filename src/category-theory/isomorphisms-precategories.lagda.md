@@ -1,10 +1,11 @@
 #  Isomorphisms in precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.isomorphisms-precategories where
 
 open import category-theory.precategories
-    
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -17,6 +18,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -99,7 +101,7 @@ module _
 module _
   {l1 l2 : Level} (C : Precat l1 l2)
   where
-  
+
   iso-Precat : (x y : obj-Precat C) → UU l2
   iso-Precat x y = type-subtype (is-iso-precat-Prop C {x} {y})
 
@@ -197,7 +199,6 @@ module _
     is-set-type-subtype
       ( is-iso-precat-Prop C)
       ( is-set-type-hom-Precat C x y)
-      
 
   iso-Precat-Set : (x y : obj-Precat C) → Set l2
   pr1 (iso-Precat-Set x y) = iso-Precat C x y

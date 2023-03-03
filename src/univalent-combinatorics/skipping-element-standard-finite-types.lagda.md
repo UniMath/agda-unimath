@@ -1,5 +1,6 @@
 #  Skipping elements in standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.skipping-element-standard-finite-types where
 
@@ -15,6 +16,7 @@ open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ```agda
 skip-Fin :

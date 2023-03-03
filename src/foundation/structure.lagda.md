@@ -1,5 +1,6 @@
 #  Structure
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.structure where
 
@@ -10,6 +11,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Mere equivalences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.mere-equivalences where
 
@@ -15,6 +16,7 @@ open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -80,9 +82,9 @@ abstract
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} 
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   is-trunc-mere-equiv : (k : 𝕋) → mere-equiv X Y → is-trunc k Y → is-trunc k X
   is-trunc-mere-equiv k e H =
      apply-universal-property-trunc-Prop
@@ -102,9 +104,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} 
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   is-set-mere-equiv : mere-equiv X Y → is-set Y → is-set X
   is-set-mere-equiv = is-trunc-mere-equiv zero-𝕋
 
@@ -118,7 +120,7 @@ module _
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   has-decidable-equality-mere-equiv :
     mere-equiv X Y → has-decidable-equality Y → has-decidable-equality X
   has-decidable-equality-mere-equiv e d =

@@ -1,5 +1,6 @@
 #  Homomorphisms of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-concrete-groups where
 
@@ -21,6 +22,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-higher-groups
 open import group-theory.higher-groups
 ```
+</details>
 
 ```agda
 module _

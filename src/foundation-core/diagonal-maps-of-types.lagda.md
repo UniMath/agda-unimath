@@ -1,5 +1,6 @@
 #  Diagonal maps of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.diagonal-maps-of-types where
 
@@ -15,6 +16,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -68,19 +70,19 @@ module _
 
   eq-fib-diagonal : (t : A × A) → fib (diagonal A) t → pr1 t ＝ pr2 t
   eq-fib-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
-  
+
   fib-diagonal-eq : (t : A × A) → pr1 t ＝ pr2 t → fib (diagonal A) t
   pr1 (fib-diagonal-eq (pair x y) β) = x
   pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
-  
+
   issec-fib-diagonal-eq :
     (t : A × A) → ((eq-fib-diagonal t) ∘ (fib-diagonal-eq t)) ~ id
   issec-fib-diagonal-eq (pair x .x) refl = refl
-  
+
   isretr-fib-diagonal-eq :
     (t : A × A) → ((fib-diagonal-eq t) ∘ (eq-fib-diagonal t)) ~ id
   isretr-fib-diagonal-eq .(pair z z) (pair z refl) = refl
-  
+
   abstract
     is-equiv-eq-fib-diagonal : (t : A × A) → is-equiv (eq-fib-diagonal t)
     is-equiv-eq-fib-diagonal t =

@@ -1,5 +1,6 @@
 # Decidable subpreorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.decidable-subpreorders where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import order-theory.preorders
 open import order-theory.subpreorders
 ```
+</details>
 
 ## Idea
 

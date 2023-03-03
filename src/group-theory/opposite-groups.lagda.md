@@ -1,5 +1,6 @@
 #  The opposite of a group
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.opposite-groups where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import group-theory.isomorphisms-groups
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 
@@ -38,7 +40,7 @@ pr2 (pr2 (pr2 (pr2 (op-Group G)))) = left-inverse-law-mul-Group G
 module _
   {l : Level} (G : Group l)
   where
-  
+
   equiv-inv-Group : equiv-Group G (op-Group G)
   pr1 equiv-inv-Group = equiv-equiv-inv-Group G
   pr2 equiv-inv-Group = distributive-inv-mul-Group G

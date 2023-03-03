@@ -1,10 +1,12 @@
 #  Indexed W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.indexed-w-types where
 
 open import foundation.universe-levels
 ```
+</details>
 
 ```agda
 data

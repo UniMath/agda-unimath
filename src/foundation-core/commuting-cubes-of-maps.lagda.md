@@ -1,5 +1,6 @@
 #  Commuting cubes of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.commuting-cubes-of-maps where
 
@@ -13,6 +14,7 @@ open import foundation-core.universe-levels
 
 open import foundation.hexagons-of-identifications
 ```
+</details>
 
 ## Idea
 
@@ -24,7 +26,7 @@ We specify the type of the homotopy witnessing that a cube commutes. Imagine tha
          /  |  \
         /   |   \
        *    *    *
-       |\ /   \ /| 
+       |\ /   \ /|
        | \     ‌/ |
        |/ \   / \|
        *    *    *
@@ -63,7 +65,7 @@ coherence-cube-maps
 ### Symmetries of commuting cubes
 
 The symmetry group D₃ acts on a cube. However, the coherence filling a cube needs to be modified to show that the rotated/reflected cube again commutes. In the following definitions we provide the homotopies witnessing that the rotated/reflected cubes again commute.
-  
+
 Note: although in principle it ought to be enough to show this for the generators of the symmetry group D₃, in practice it is more straightforward to just do the work for each of the symmetries separately. One reason is that some of the homotopies witnessing that the faces commute will be inverted as the result of an application of a symmetry. Inverting a homotopy twice results in a new homotopy that is only homotopic to the original homotopy.
 
 ```agda
@@ -203,7 +205,7 @@ module _
 ### Rectangles in commuting cubes
 
 ```agda
-rectangle-back-left-front-left-cube : 
+rectangle-back-left-front-left-cube :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
@@ -221,7 +223,7 @@ rectangle-back-left-front-left-cube f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =
   (h ·l back-left) ∙h (front-left ·r f')
 
-rectangle-back-right-front-right-cube : 
+rectangle-back-right-front-right-cube :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
@@ -239,7 +241,7 @@ rectangle-back-right-front-right-cube f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =
   (k ·l back-right) ∙h (front-right ·r g')
 
-coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube : 
+coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
@@ -297,7 +299,7 @@ rectangle-top-front-left-cube :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((h ∘ hB) ∘ f') ~ ((hD ∘ k') ∘ g') 
+  ((h ∘ hB) ∘ f') ~ ((hD ∘ k') ∘ g')
 rectangle-top-front-left-cube
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =
@@ -323,7 +325,7 @@ rectangle-back-right-bottom-cube
   ( bottom ·r hA) ∙h (k ·l back-right)
 
 {-
-coherence-htpy-square-rectangle-top-fl-rectangle-br-bot-cube : 
+coherence-htpy-square-rectangle-top-fl-rectangle-br-bot-cube :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)

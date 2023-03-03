@@ -1,5 +1,6 @@
 #  Natural isomorphisms between functors on large precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.natural-isomorphisms-large-precategories where
 
@@ -7,9 +8,10 @@ open import category-theory.functors-large-precategories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
-    
+
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -47,7 +49,7 @@ module _
             ( obj-functor-Large-Precat F Y)
             ( obj-functor-Large-Precat G Y)
             ( obj-natural-isomorphism-Large-Precat Y))
-               
+
   open natural-isomorphism-Large-Precat public
 
   natural-transformation-natural-isomorphism-Large-Precat :

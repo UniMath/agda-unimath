@@ -1,5 +1,6 @@
 #  Equivalences between standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences-standard-finite-types where
 
@@ -18,6 +19,7 @@ open import foundation.universal-property-unit-type
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

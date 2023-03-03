@@ -1,5 +1,6 @@
 #  Equivalences of concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-concrete-groups where
 
@@ -16,6 +17,7 @@ open import group-theory.concrete-groups
 open import group-theory.equivalences-higher-groups
 open import group-theory.higher-groups
 ```
+</details>
 
 ## Idea
 
