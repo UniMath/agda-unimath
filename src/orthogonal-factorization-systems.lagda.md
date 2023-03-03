@@ -4,6 +4,7 @@
 module orthogonal-factorization-systems where
 
 open import orthogonal-factorization-systems.extensions-of-maps public
+open import orthogonal-factorization-systems.higher-modalities public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-squares public
 open import orthogonal-factorization-systems.lifts-of-maps public
