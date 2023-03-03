@@ -759,6 +759,7 @@
 
 - [Orthogonal factorization systems](orthogonal-factorization-systems.md)
   - [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
+  - [Function classes](orthogonal-factorization-systems.function-classes.md)
   - [Lifting operations](orthogonal-factorization-systems.lifting-operations.md)
   - [Lifting squares](orthogonal-factorization-systems.lifting-squares.md)
   - [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
