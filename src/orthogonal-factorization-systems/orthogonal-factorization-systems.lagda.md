@@ -1,5 +1,6 @@
 # Orthogonal factorization systems
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.orthogonal-factorization-systems where
 
@@ -17,6 +18,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.function-classes
 open import orthogonal-factorization-systems.factorizations-of-maps
 ```
+</details>
 
 ## Idea
 

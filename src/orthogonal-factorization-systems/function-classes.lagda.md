@@ -1,5 +1,6 @@
 # Function classes
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.function-classes where
 
@@ -10,11 +11,11 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
-A function class is a subtype of the type of all functions between types in
-two universes.
+A function class is a subtype of the type of all functions.
 
 ## Definition
 

@@ -1,5 +1,6 @@
 # Factorizations of maps
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.factorizations-of-maps where
 
@@ -13,6 +14,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

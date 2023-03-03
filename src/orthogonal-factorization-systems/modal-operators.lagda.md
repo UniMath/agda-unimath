@@ -1,5 +1,6 @@
 # Modal operators
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.modal-operators where
 
@@ -12,6 +13,7 @@ open import foundation.subuniverses
 open import foundation.small-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
