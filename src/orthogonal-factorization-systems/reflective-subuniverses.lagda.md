@@ -59,7 +59,6 @@ is-Σ-closed-reflective-subuniverse (○ , unit-○ , is-modal' , _) =
 
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Σ-closed reflective-subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
 - [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
 
 ## References

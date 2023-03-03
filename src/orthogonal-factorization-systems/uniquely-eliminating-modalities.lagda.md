@@ -19,6 +19,9 @@ open import orthogonal-factorization-systems.modal-operators
 
 ## Idea
 
+A **uniquely eliminating modality** is a _higher mode of logic_ defined in terms
+of a monadic modal operator `○` satisfying a certain locality condition.
+
 ## Definition
 
 ```agda
