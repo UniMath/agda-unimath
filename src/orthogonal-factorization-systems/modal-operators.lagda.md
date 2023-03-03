@@ -23,6 +23,8 @@ a **modal unit** that compares every type `X` to its modal type `○ X` (`X → 
 
 ## Definitions
 
+### Modal operators and units
+
 ```agda
 modal-operator : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 modal-operator l1 l2 = UU l1 → UU l2
@@ -31,7 +33,7 @@ modal-unit : {l1 l2 : Level} → modal-operator l1 l2 → UU (lsuc l1 ⊔ l2)
 modal-unit {l1} ○ = {X : UU l1} → X → ○ X
 ```
 
-## The subuniverse of modal types
+### The subuniverse of modal types
 
 ```agda
 module _
@@ -58,7 +60,7 @@ module _
   modal-types-subuniverse = is-modal-Prop
 ```
 
-## Modal small types
+### Modal small types
 
 A small type is said to be modal if its small equivalent is modal.
 
@@ -117,7 +119,7 @@ module _
     map-inv-equiv ∘ equiv-unit-is-modal-small-type
 ```
 
-## Locally small modal operators
+### Locally small modal operators
 
 We say a modal operator is _locally small_ if it maps small types to
 locally small types.
@@ -144,7 +146,7 @@ is-locally-small-locally-small-modal-operator :
 is-locally-small-locally-small-modal-operator = pr2
 ```
 
-## Σ-closed modal operators
+### Σ-closed modal operators
 
 We say a modal operator `○` is Σ-closed if for every type `X` such that for
 every term of `○ X` and for every family `P` over `X` equipped with a section
@@ -155,3 +157,7 @@ is-Σ-closed-modal-operator : {l1 l2 : Level} (○ : modal-operator l1 l2) → U
 is-Σ-closed-modal-operator {l1} ○ =
   (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
 ```
+
+## References
+
+- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020 ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526), [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))

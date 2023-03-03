@@ -54,3 +54,14 @@ is-Σ-closed-reflective-subuniverse (○ , unit-○ , is-modal' , _) =
   Σ ( reflective-subuniverse l1 l2 l3)
     ( is-Σ-closed-reflective-subuniverse {l1} {l2} {l3})
 ```
+
+## See also
+
+- [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
+- [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
+- [Σ-closed reflective-subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
+- [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
+
+## References
+
+- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020 ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526), [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
