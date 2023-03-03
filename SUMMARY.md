@@ -767,6 +767,7 @@
   - [Modal operators](orthogonal-factorization-systems.modal-operators.md)
   - [Orthogonal maps](orthogonal-factorization-systems.orthogonal-maps.md)
   - [Pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
+  - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
 
 - [Polytopes](polytopes.md)
   - [Abstract polytopes](polytopes.abstract-polytopes.md)
