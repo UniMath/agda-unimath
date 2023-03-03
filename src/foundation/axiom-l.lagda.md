@@ -4,24 +4,26 @@
 ```agda
 module foundation.axiom-l where
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.propositions
+open import foundation-core.univalence
+open import foundation-core.universe-levels
+
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositional-maps
-open import foundation.propositions
+open import foundation.sets
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universal-property-identity-types
-open import foundation.universe-levels
 ```
 </details>
 
@@ -41,6 +43,14 @@ pr2 (emb-L H X Y) = H X Y
 ```
 
 ## Properties
+
+### Axiom L generalizes the univalence axiom
+
+```agda
+axiom-L-univalence :
+  {l : Level} → ((A B : UU l) → UNIVALENCE A B) → AXIOM-L l
+axiom-L-univalence ua A B = is-emb-is-equiv (ua A B)
+```
 
 ### Axiom L implies that `Id : A → (A → UU l)` is an embedding
 
