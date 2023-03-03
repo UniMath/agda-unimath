@@ -4,10 +4,9 @@
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where
 
-open import foundation-core.dependent-pair-types
-
-open import foundation.contractible-types
 open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -21,7 +20,6 @@ open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.propositions
 open import foundation.sets
--- open import foundation.small-types
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -217,7 +215,7 @@ module _
 
 ## Properties
 
-### Identifications of extensions of maps
+### Characterizing identifications of extensions of maps
 
 ```agda
 module _
@@ -262,16 +260,16 @@ module _
       ( is-contr-total-htpy-extension e)
       ( htpy-eq-extension e)
 
-  extensionality-extension-Π :
+  extensionality-extension :
     (e e' : extension-Π i P f) → (e ＝ e') ≃ (htpy-extension e e')
-  pr1 (extensionality-extension-Π e e') = htpy-eq-extension e e'
-  pr2 (extensionality-extension-Π e e') = is-equiv-htpy-eq-extension e e'
+  pr1 (extensionality-extension e e') = htpy-eq-extension e e'
+  pr2 (extensionality-extension e e') = is-equiv-htpy-eq-extension e e'
 
   eq-htpy-extension :
     (e e' : extension-Π i P f) (H : map-extension e ~ map-extension e') →
     coherence-htpy-extension e e' H → e ＝ e'
   eq-htpy-extension e e' H K =
-    map-inv-equiv (extensionality-extension-Π e e') (H , K)
+    map-inv-equiv (extensionality-extension e e') (H , K)
 ```
 
 ### The total type of extensions is equivalent to `(y : B) → P y`
@@ -292,32 +290,32 @@ module _
   compute-total-extension-Π {P} = inv-equiv (inv-compute-total-extension-Π)
 ```
 
-### If `P` is `k`-truncated then the type of extensions is `k`-truncated
+### The truncation level of the type of extensions is bounded by the truncation level of the codomains
 
 ```agda
 module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-trunc-is-extension :
+  is-trunc-is-extension-Π :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
     (g : (x : B) → P x) → is-trunc k (is-extension i f g)
-  is-trunc-is-extension f is-trunc-P g =
+  is-trunc-is-extension-Π f is-trunc-P g =
     is-trunc-Π k λ x → is-trunc-P x (f x) (g (i x))
 
-  is-trunc-extension :
+  is-trunc-extension-Π :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : B) → is-trunc k (P x)) → is-trunc k (extension-Π i P f)
-  is-trunc-extension f is-trunc-P =
+  is-trunc-extension-Π f is-trunc-P =
     is-trunc-Σ
       ( is-trunc-Π k is-trunc-P)
-      ( is-trunc-is-extension f (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
+      ( is-trunc-is-extension-Π f (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
 
-  is-trunc-total-extension :
+  is-trunc-total-extension-Π :
     {P : B → UU l3} →
     ((x : B) → is-trunc k (P x)) → is-trunc k (total-extension-Π i P)
-  is-trunc-total-extension {P} is-trunc-P =
+  is-trunc-total-extension-Π {P} is-trunc-P =
     is-trunc-equiv' k
       ( (y : B) → P y)
       ( compute-total-extension-Π i)
@@ -342,7 +340,7 @@ module _
     is-prop-Π λ x → is-set-P x (f x) (g (i x))
 ```
 
-### Characterizing extensions in terms of the precomposition function
+### Every map has a unique extension along `i` if and only if `P` is `i`-local
 
 ```agda
 module _
@@ -360,45 +358,45 @@ module _
   equiv-fib-precomp-extension-Π f =
     (equiv-fib'-precomp-extension-Π f) ∘e (equiv-fib (precomp-Π i P) f)
 
-  equiv-is-contr-extension-is-local-family :
+  equiv-is-contr-extension-Π-is-local-family :
     is-local-family i P ≃
     ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
-  equiv-is-contr-extension-is-local-family =
+  equiv-is-contr-extension-Π-is-local-family =
     ( equiv-map-Π
       ( λ f → equiv-is-contr-equiv (equiv-fib-precomp-extension-Π f))) ∘e
     ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
-  is-contr-extension-is-local-family :
+  is-contr-extension-Π-is-local-family :
     is-local-family i P →
     ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
-  is-contr-extension-is-local-family =
-    map-equiv equiv-is-contr-extension-is-local-family
+  is-contr-extension-Π-is-local-family =
+    map-equiv equiv-is-contr-extension-Π-is-local-family
 
   is-local-family-is-contr-extension-Π :
     ((f : (x : A) → P (i x)) →
     is-contr (extension-Π i P f)) → is-local-family i P
   is-local-family-is-contr-extension-Π =
-    map-inv-equiv equiv-is-contr-extension-is-local-family
+    map-inv-equiv equiv-is-contr-extension-Π-is-local-family
 ```
 
 ## Examples
 
-### Every map is an extension-Π of itself along the identity
+### Every map is an extension of itself along the identity
 
 ```agda
-is-extension-self-Π :
+is-extension-self :
   {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
   (f : (x : A) → P x) → is-extension id f f
-is-extension-self-Π _ = refl-htpy
+is-extension-self _ = refl-htpy
 ```
 
-### The identity is an extension-Π of every map along themselves
+### The identity is an extension of every map along themselves
 
 ```agda
-is-extension-along-self-Π :
+is-extension-along-self :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B) → is-extension f f id
-is-extension-along-self-Π _ = refl-htpy
+is-extension-along-self _ = refl-htpy
 ```
 
 ### Postcomposition of extensions by an embedding is an embedding
@@ -422,4 +420,5 @@ module _
 
 ## See also
 
-- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.md) for the dual notion.
+- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.md)
+  for the dual notion.
