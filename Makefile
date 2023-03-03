@@ -12,6 +12,19 @@ AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --onl
 AGDA ?=agda $(AGDAVERBOSE)
 TIME ?=time
 
+METAFILES:=CITATION.md \
+			CODINGSTYLE.md \
+			CONTRIBUTORS.md \
+			CONVENTIONS.md \
+			DESIGN-PRINCIPLES.md \
+			HOWTO-INSTALL.md \
+			LICENSE.md \
+			MAINTAINERS.md \
+			README.md \
+			STATEMENT-OF-INCLUSION.md \
+			SUMMARY.md \
+			USERS.md \
+
 .PHONY : agdaFiles
 agdaFiles :
 	@rm -rf $@
@@ -46,12 +59,13 @@ docs/%.md: src/%.lagda.md
 	@${AGDA} ${AGDAHTMLFLAfoGS} $<
 
 agda-html: src/everything.lagda.md
-	@mkdir -p docs
-	@rm -rf docs/*.html
+	@rm -rf docs/
+	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
 .PHONY: website
 website: agda-html
+	@cp $(METAFILES) docs/
 	@mdbook build
 
 update-contributors:

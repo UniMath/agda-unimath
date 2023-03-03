@@ -3,7 +3,7 @@
 :root {
   --sidebar-width: 250px;
   --page-padding: 5px;
-  --content-max-width: 75%;
+  --content-max-width: 85%;
   --menu-bar-height: 40px;
   --mono-font: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
   --code-font-size: 0.875em;
