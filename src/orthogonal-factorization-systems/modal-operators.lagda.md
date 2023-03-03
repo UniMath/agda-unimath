@@ -17,6 +17,10 @@ open import foundation.universe-levels
 
 ## Idea
 
+Underlying every modality is a **modal operator**, which is an operation on
+types that construct new types. For a _monadic_ modality `○`, there is moreover
+a **modal unit** that compares every type `X` to its modal type `○ X` (`X → ○ X`).
+
 ## Definitions
 
 ```agda
