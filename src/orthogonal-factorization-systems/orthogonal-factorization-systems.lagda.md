@@ -21,36 +21,34 @@ open import orthogonal-factorization-systems.factorizations-of-maps
 ## Idea
 
 An **orthogonal factorization system** is a pair of composition closed function
-classes L and R containing the equivalences, such that for every function
-`f : A → B` there is a unique factorization of it such that the left map is in
-`L` and the right map is in `R`.
+classes `L` and `R` that contain the equivalences, such that for every function
+`f : A → B` there is a unique factorization `f ~ fr ∘ fl` such that the left map
+(by diagrammatic ordering) `fl` is in `L` and the right map `fr` is in `R`.
 
 ## Definition
 
-We first define factorizations from a left and a right function class.
+We first define factorizations with a left and a right function class.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (L : function-class l1 l3 l4)
-  (R : function-class l3 l2 l5)
+  {l1 l2 lF lL lR : Level}
+  (L : function-class l1 lF lL)
+  (R : function-class lF l2 lR)
   {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-function-class-factorization-Prop : factorization f l3 → Prop (l4 ⊔ l5)
+  is-function-class-factorization-Prop : factorization f lF → Prop (lL ⊔ lR)
   is-function-class-factorization-Prop F =
-    conj-Prop
-      ( L (left-map-factorization F))
-      ( R (right-map-factorization F))
+    conj-Prop (L (left-map-factorization F)) (R (right-map-factorization F))
 
-  is-function-class-factorization : factorization f l3 → UU (l4 ⊔ l5)
+  is-function-class-factorization : factorization f lF → UU (lL ⊔ lR)
   is-function-class-factorization =
     type-Prop ∘ is-function-class-factorization-Prop
 
   function-class-factorization :
-    UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   function-class-factorization =
-    Σ (factorization f l3) (is-function-class-factorization)
+    Σ (factorization f lF) (is-function-class-factorization)
 ```
 
 ### Orthogonal factorization systems
@@ -81,9 +79,9 @@ orthogonal-factorization-system l lL lR =
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (L : function-class l1 l1 l2)
-  (R : function-class l1 l1 l3)
+  {l lL lR : Level}
+  (L : function-class l l lL)
+  (R : function-class l l lR)
   where
 
   is-prop-is-orthogonal-factorization-system :
@@ -99,7 +97,7 @@ module _
           ( is-prop-is-equiv-closed-function-class R))
         ( is-prop-Π λ A → is-prop-Π λ B → is-prop-Π λ f → is-property-is-contr))
 
-  is-orthogonal-factorization-system-Prop : Prop (lsuc l1 ⊔ l2 ⊔ l3)
+  is-orthogonal-factorization-system-Prop : Prop (lsuc l ⊔ lL ⊔ lR)
   pr1 is-orthogonal-factorization-system-Prop =
     is-orthogonal-factorization-system L R
   pr2 is-orthogonal-factorization-system-Prop =
