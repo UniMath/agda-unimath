@@ -29,4 +29,4 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
 - If you want to reference another page without custom text but with a clickable link use the pattern ```<https://unimath.github.io/agda-unimath/>```.
   This will be displayed as <https://unimath.github.io/agda-unimath/>.
 
-One good example of the expected structure of a file is in the file [foundation.cantor-schroder-bernstein-escardo.lagda.md](foundation.cantor-schroder-bernstein-escardo.lagda.md).
+One good example of the expected structure of a file is in the file [foundation.cantor-schroder-bernstein-escardo.lagda.md](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
