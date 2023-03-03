@@ -2,8 +2,8 @@
 
 # Project
 
-- [Agda-UniMath](index.html)
-  - [Home](index.html)
+- [Agda-UniMath](HOME.md)
+  - [Home](HOME.md)
   - [Community](CONTRIBUTORS.md)
     - [Maintainers](MAINTAINERS.md)
     - [Contributors](CONTRIBUTORS.md)

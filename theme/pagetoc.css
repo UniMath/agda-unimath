@@ -17,13 +17,12 @@ main {
 
 .pagetoc {
     position: fixed;
-    /* width: var(--pagetoc-width); */
-    height: calc(100vh - var(--menu-bar-height) - 0.67em * 4);
+    /* height: calc(100vh - var(--menu-bar-height) - 0.67em * 4); */
     overflow: auto;
     border-left: 2px solid #dfdfdf;
     /* margin-left: 2%; */
-    margin-right: 15px;
-    font-size: 0.85em;
+    /* margin-right: 15px; */
+    font-size: var(--pagetoc-fontsize);
 }
 
 .pagetoc a {

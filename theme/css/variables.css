@@ -7,8 +7,7 @@
   --menu-bar-height: 40px;
   --mono-font: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
   --code-font-size: 0.875em;
-  --pagetoc-width: 25%;
-  --pagetoc-fontsize: 12.5px;
+  --pagetoc-fontsize: 0.7em;
 }
 
 /* @media only screen and (max-width:1439px) {
@@ -34,7 +33,7 @@
   --icons: #737480;
   --icons-hover: #b7b9cc;
 
-  --links: #0096cf;
+  --links: #2b79a2;
 
   --inline-code-color: #ffb454;
 
@@ -114,7 +113,7 @@
   --icons: #747474;
   --icons-hover: #000000;
 
-  --links: #1f1fff;
+  --links: #2b79a2;
 
   --inline-code-color: #F42C4C;
 

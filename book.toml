@@ -5,7 +5,6 @@ src = "docs"
 title = "Agda-UniMath"
 
 [build]
-build-dir = "book/html"
 create-missing = true
 [preprocessor.index]
 
@@ -26,7 +25,6 @@ macros = "theme/latex-macros.txt"
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "Ayu"
-mathjax-support = false
 copy-fonts = true
 additional-css = ["theme/Agda.css", "theme/pagetoc.css"]
 additional-js = ["theme/js/custom.js", "theme/images/agda-unimath-logo.svg", "theme/pagetoc.js"]
