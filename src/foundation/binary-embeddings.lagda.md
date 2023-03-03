@@ -1,5 +1,6 @@
 #  Binary embeddings
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-embeddings where
 
@@ -11,6 +12,7 @@ open import foundation-core.universe-levels
 open import foundation.binary-equivalences
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 

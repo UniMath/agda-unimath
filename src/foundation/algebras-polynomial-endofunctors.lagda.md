@@ -1,5 +1,6 @@
 #  Algebras for polynomial endofunctors
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.algebras-polynomial-endofunctors where
 
@@ -16,6 +17,7 @@ open import foundation.homotopies
 open import foundation.polynomial-endofunctors
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 
@@ -31,12 +33,12 @@ algebra-polynomial-endofunctor-UU :
   UU (lsuc l ⊔ l1 ⊔ l2)
 algebra-polynomial-endofunctor-UU l A B =
   Σ (UU l) (λ X → type-polynomial-endofunctor A B X → X)
-                                                  
+
 type-algebra-polynomial-endofunctor :
   {l l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   algebra-polynomial-endofunctor-UU l A B → UU l
 type-algebra-polynomial-endofunctor X = pr1 X
-                                            
+
 structure-algebra-polynomial-endofunctor :
   {l l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (X : algebra-polynomial-endofunctor-UU l A B) →
@@ -49,7 +51,7 @@ structure-algebra-polynomial-endofunctor X = pr2 X
 
 ```agda
 -- Morphisms of algebras for polynomial endofunctors
-  
+
 hom-algebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
   (X : algebra-polynomial-endofunctor-UU l3 A B) →
@@ -95,7 +97,7 @@ module _
   (Y : algebra-polynomial-endofunctor-UU l4 A B)
   (f : hom-algebra-polynomial-endofunctor X Y)
   where
-  
+
   htpy-hom-algebra-polynomial-endofunctor :
     (g : hom-algebra-polynomial-endofunctor X Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-hom-algebra-polynomial-endofunctor g =
@@ -177,7 +179,7 @@ module _
     htpy-eq-hom-algebra-polynomial-endofunctor g
   pr2 (extensionality-hom-algebra-polynomial-endofunctor g) =
     is-equiv-htpy-eq-hom-algebra-polynomial-endofunctor g
-        
+
   eq-htpy-hom-algebra-polynomial-endofunctor :
     (g : hom-algebra-polynomial-endofunctor X Y) →
     htpy-hom-algebra-polynomial-endofunctor g → f ＝ g

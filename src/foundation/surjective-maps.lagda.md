@@ -1,5 +1,6 @@
 #  Surjective maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.surjective-maps where
 
@@ -37,6 +38,7 @@ open import foundation.universal-property-propositional-truncation
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
+</details>
 
 ## Idea
 
@@ -636,7 +638,7 @@ module _
                 ( L a ∙ inv (M (f a))))) ∙
             ( issec-inv-concat' (g (i a)) (M (f a)) (L a)))))
     where
-    
+
     J : (b : B) → fib g (h b)
     J =
       apply-dependent-universal-property-surj-is-surjective f H

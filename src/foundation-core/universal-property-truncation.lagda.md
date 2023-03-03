@@ -1,5 +1,6 @@
 #  The universal property of truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.universal-property-truncation where
 
@@ -19,6 +20,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Idea
 

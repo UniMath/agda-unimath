@@ -1,5 +1,6 @@
 #  The infinite complex projective space
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.infinite-complex-projective-space where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.circle
 ```
+</details>
 
 ## Definitions
 

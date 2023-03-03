@@ -1,5 +1,6 @@
 #  Totally faithful morphisms of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.totally-faithful-morphisms-undirected-graphs where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +25,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
-  
+
   is-totally-faithful-hom-Undirected-Graph :
     hom-Undirected-Graph G H → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l4)
   is-totally-faithful-hom-Undirected-Graph f =

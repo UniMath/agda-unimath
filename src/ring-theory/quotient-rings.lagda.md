@@ -1,5 +1,6 @@
 #  Qutoient Rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.quotient-rings where
 
@@ -14,6 +15,7 @@ open import ring-theory.ideals-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Definitions
 

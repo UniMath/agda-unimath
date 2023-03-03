@@ -1,5 +1,6 @@
 #  Injective maps
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.embeddings where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.injective-maps
 ```
+</details>
 
 ## Idea
 

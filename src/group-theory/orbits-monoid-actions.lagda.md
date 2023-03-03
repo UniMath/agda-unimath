@@ -1,5 +1,6 @@
 #  The precategory of orbits of a monoid action
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.orbits-monoid-actions where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import group-theory.monoid-actions
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 
@@ -178,5 +180,5 @@ module _
     left-unit-law-comp-hom-orbit-Monoid-Action
   pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
     right-unit-law-comp-hom-orbit-Monoid-Action
-    
+
 ```

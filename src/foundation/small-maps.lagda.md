@@ -1,5 +1,6 @@
 #  Small maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.small-maps where
 
@@ -10,6 +11,7 @@ open import foundation.propositions
 open import foundation.small-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

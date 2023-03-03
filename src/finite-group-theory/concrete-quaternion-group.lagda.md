@@ -1,5 +1,6 @@
 #  The concrete quaternion group
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.concrete-quaternion-group where
 
@@ -16,6 +17,7 @@ open import univalent-combinatorics.cubes
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equivalences-cubes
 ```
+</details>
 
 ## Definition
 

@@ -1,5 +1,6 @@
 #  Equivalence extensionality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-extensionality where
 
@@ -21,6 +22,7 @@ open import foundation.function-extensionality
 open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Characterizing the identity type of equivalences
 
@@ -80,4 +82,3 @@ module _
     {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → htpy-equiv e e'
   htpy-eq-map-equiv = htpy-eq
 ```
- 

@@ -1,5 +1,6 @@
 #  Free groups with one generator
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.free-groups-with-one-generator where
 
@@ -26,6 +27,7 @@ open import group-theory.homomorphisms-groups
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+</details>
 
 ## Idea
 
@@ -99,7 +101,7 @@ module _
       ( associative-mul-Group G g
         ( generalized-map-hom-free-group-with-one-generator-ℤ (inr (inr x)) h1)
         ( h2)))
-  
+
   map-hom-free-group-with-one-generator-ℤ : ℤ → type-Group G
   map-hom-free-group-with-one-generator-ℤ k =
     generalized-map-hom-free-group-with-one-generator-ℤ k (unit-Group G)

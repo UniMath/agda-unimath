@@ -1,5 +1,6 @@
 #  Congruence relations on monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-monoids where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.congruence-relations-semigroups
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

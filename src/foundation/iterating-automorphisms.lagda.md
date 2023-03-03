@@ -1,5 +1,6 @@
 #  Iterating automorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-automorphisms where
 
@@ -18,6 +19,7 @@ open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 
@@ -142,7 +144,7 @@ module _
 module _
   {l : Level} {X : UU l}
   where
-  
+
   iterate-automorphism-int-ℕ :
     (n : ℕ) (e : Aut X) →
     htpy-equiv (iterate-automorphism-ℕ n e) (iterate-automorphism-ℤ (int-ℕ n) e)

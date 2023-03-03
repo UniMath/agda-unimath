@@ -1,5 +1,6 @@
 # Finite Σ-decompositions of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.sigma-decompositions where
 
@@ -27,6 +28,7 @@ open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 ```
+</details>
 
 ## Idea
 

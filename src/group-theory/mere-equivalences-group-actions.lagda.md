@@ -1,5 +1,6 @@
 #  Mere equivalences of group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.mere-equivalences-group-actions where
 
@@ -11,6 +12,7 @@ open import group-theory.equivalences-group-actions
 open import group-theory.group-actions
 open import group-theory.groups
 ```
+</details>
 
 ## Definition
 

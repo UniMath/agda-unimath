@@ -1,5 +1,6 @@
 #  Lower types in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.lower-types-preorders where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 
@@ -20,7 +22,7 @@ A lower type in a preorder `P` is a downwards closed subtype of `P`.
 module _
   {l1 l2 : Level} (P : Preorder l1 l2)
   where
-  
+
   is-downwards-closed-subtype-Preorder :
     {l3 : Level} (S : subtype l3 (element-Preorder P)) → UU (l1 ⊔ l2 ⊔ l3)
   is-downwards-closed-subtype-Preorder S =

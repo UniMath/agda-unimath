@@ -1,5 +1,6 @@
 #  Connected types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.connected-types where
 
@@ -13,6 +14,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Infinite sets
 
+<details><summary>Imports</summary>
 ```agda
 module set-theory.infinite-sets where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

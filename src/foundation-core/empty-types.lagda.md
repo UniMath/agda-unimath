@@ -1,5 +1,6 @@
 #  Empty types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.empty-types where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 
 open import foundation.propositions
 ```
+</details>
 
 ## Idea
 
@@ -45,7 +47,7 @@ is-nonempty A = is-empty (is-empty A)
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-emb-ex-falso : is-emb (ex-falso {A = A})
     is-emb-ex-falso ()
@@ -119,4 +121,3 @@ abstract
     {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
   is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
 ```
- 

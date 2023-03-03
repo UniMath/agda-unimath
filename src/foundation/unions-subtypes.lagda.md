@@ -1,5 +1,6 @@
 #  Union of subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unions-subtypes where
 
@@ -9,6 +10,7 @@ open import foundation.existential-quantification
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

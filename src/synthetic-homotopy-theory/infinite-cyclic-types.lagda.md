@@ -1,5 +1,6 @@
 # Infinite cyclic types
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
@@ -36,10 +37,11 @@ open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.cyclic-types
 ```
+</details>
 
 ```agda
 Infinite-Cyclic-Type : (l : Level) → UU (lsuc l)
-Infinite-Cyclic-Type l = Cyclic-Type l zero-ℕ 
+Infinite-Cyclic-Type l = Cyclic-Type l zero-ℕ
 
 ℤ-Infinite-Cyclic-Type : Infinite-Cyclic-Type lzero
 ℤ-Infinite-Cyclic-Type = ℤ-Mod-Cyclic-Type zero-ℕ
@@ -53,10 +55,10 @@ module _
 
   endo-Infinite-Cyclic-Type : Endo l
   endo-Infinite-Cyclic-Type = endo-Cyclic-Type zero-ℕ X
-  
+
   type-Infinite-Cyclic-Type : UU l
   type-Infinite-Cyclic-Type = type-Cyclic-Type zero-ℕ X
-  
+
   endomorphism-Infinite-Cyclic-Type :
     type-Infinite-Cyclic-Type → type-Infinite-Cyclic-Type
   endomorphism-Infinite-Cyclic-Type = endomorphism-Cyclic-Type zero-ℕ X
@@ -64,7 +66,7 @@ module _
   mere-equiv-ℤ-Infinite-Cyclic-Type :
     mere-equiv-Endo ℤ-Endo endo-Infinite-Cyclic-Type
   mere-equiv-ℤ-Infinite-Cyclic-Type = pr2 X
-  
+
 module _
   (l : Level)
   where
@@ -80,9 +82,9 @@ module _
   pr2 Infinite-Cyclic-Type-Pointed-Type-Level = point-Infinite-Cyclic-Type
 
 module _
-  {l1 : Level} (X : Infinite-Cyclic-Type l1) 
+  {l1 : Level} (X : Infinite-Cyclic-Type l1)
   where
-  
+
   equiv-Infinite-Cyclic-Type :
     {l2 : Level} → Infinite-Cyclic-Type l2 → UU (l1 ⊔ l2)
   equiv-Infinite-Cyclic-Type = equiv-Cyclic-Type zero-ℕ X
@@ -93,7 +95,7 @@ module _
   equiv-eq-Infinite-Cyclic-Type :
     (Y : Infinite-Cyclic-Type l1) → Id X Y → equiv-Infinite-Cyclic-Type Y
   equiv-eq-Infinite-Cyclic-Type = equiv-eq-Cyclic-Type zero-ℕ X
-  
+
   is-contr-total-equiv-Infinite-Cyclic-Type :
     is-contr (Σ (Infinite-Cyclic-Type l1) equiv-Infinite-Cyclic-Type)
   is-contr-total-equiv-Infinite-Cyclic-Type =
@@ -110,7 +112,7 @@ module _
 
 module _
   where
-  
+
   map-left-factor-compute-Ω-Infinite-Cyclic-Type :
     equiv-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type → ℤ
   map-left-factor-compute-Ω-Infinite-Cyclic-Type e =

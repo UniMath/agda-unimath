@@ -1,5 +1,6 @@
 #  Equivalence induction
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-induction where
 
@@ -12,6 +13,7 @@ open import foundation.sections
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

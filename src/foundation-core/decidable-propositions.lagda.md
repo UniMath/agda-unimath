@@ -1,5 +1,6 @@
 #  Decidable propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.decidable-propositions where
 
@@ -20,6 +21,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 
@@ -123,7 +125,7 @@ abstract
     {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
   is-prop-is-decidable-trunc-Prop A =
     is-prop-is-decidable is-prop-type-trunc-Prop
-    
+
 is-decidable-trunc-Prop : {l : Level} → UU l → Prop l
 pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
 pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A

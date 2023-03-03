@@ -1,5 +1,6 @@
 #  The dihedral groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.dihedral-groups where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import group-theory.dihedral-group-construction
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

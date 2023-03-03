@@ -1,5 +1,6 @@
 #  The type theoretic principle of choice
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-theoretic-principle-of-choice where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
+</details>
 
 ## Idea
 
@@ -44,7 +46,7 @@ universally-structured-Π {A = A} {B} C =
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
   where
-  
+
   htpy-universally-structured-Π :
     (t t' : universally-structured-Π C) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-universally-structured-Π t t' =

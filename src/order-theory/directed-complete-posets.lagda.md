@@ -1,5 +1,6 @@
 #  Directed complete posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.directed-complete-posets where
 
@@ -12,6 +13,7 @@ open import order-theory.directed-families
 open import order-theory.least-upper-bounds-posets
 open import order-theory.posets
 ```
+</details>
 
 ## Definition
 

@@ -1,5 +1,6 @@
 #  Pullbacks
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.pullbacks where
 
@@ -29,6 +30,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 ```
+</details>
 
 ## Properties
 
@@ -37,9 +39,9 @@ open import foundation.unit-type
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) 
+  (f : A → X) (g : B → X)
   where
-  
+
   is-property-is-pullback : (c : cone f g C) → is-prop (is-pullback f g c)
   is-property-is-pullback c = is-property-is-equiv (gap f g c)
 

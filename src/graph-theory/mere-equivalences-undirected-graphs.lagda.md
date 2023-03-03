@@ -1,5 +1,6 @@
 #  Mere equivalences of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.mere-equivalences-undirected-graphs where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

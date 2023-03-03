@@ -1,5 +1,6 @@
 #  Necklaces
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.necklaces where
 
@@ -20,6 +21,7 @@ open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -73,7 +75,7 @@ necklace-pattern l m n =
 module _
   {l1 l2 : Level} (m n : ℕ)
   where
-  
+
   equiv-necklace :
     (N1 : necklace l1 m n) (N2 : necklace l2 m n) → UU (l1 ⊔ l2)
   equiv-necklace N1 N2 =
@@ -98,7 +100,7 @@ module _
 module _
   {l : Level} (m n : ℕ)
   where
-  
+
   extensionality-necklace :
     (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m n N1 N2
   extensionality-necklace N1 =

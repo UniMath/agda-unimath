@@ -1,5 +1,6 @@
 # Finite posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.finite-posets where
 
@@ -12,6 +13,7 @@ open import order-theory.posets
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Finite Posets
 

@@ -1,5 +1,6 @@
 # The commutative ring of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.commutative-ring-of-integers where
 
@@ -18,6 +19,7 @@ open import group-theory.groups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Definition
 

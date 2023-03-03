@@ -1,5 +1,6 @@
 #  The universal property of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-dependent-pair-types where
 
@@ -10,6 +11,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

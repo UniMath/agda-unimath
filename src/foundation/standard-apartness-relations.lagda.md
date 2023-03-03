@@ -1,5 +1,6 @@
 #  Standard apartness relations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.standard-apartness-relations where
 
@@ -14,6 +15,7 @@ open import foundation.negation
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -26,7 +28,7 @@ is-standard-Apartness-Relation :
   {l1 l2 : Level} (l3 : Level) {A : UU l1} (R : Apartness-Relation l2 A) →
   UU (l1 ⊔ l2 ⊔ lsuc l3)
 is-standard-Apartness-Relation {l1} {l2} l3 {A} R =
-  LEM l3 → (x y : A) → (¬ (x ＝ y)) ↔ apart-Apartness-Relation R x y 
+  LEM l3 → (x y : A) → (¬ (x ＝ y)) ↔ apart-Apartness-Relation R x y
 ```
 
 ## Properties

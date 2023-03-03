@@ -1,5 +1,6 @@
 #  Sets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.sets where
 
@@ -13,6 +14,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -70,7 +72,7 @@ module _
   abstract
     axiom-K-is-set : is-set A → AXIOM-K A
     axiom-K-is-set H x p =
-      ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙ 
+      ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 

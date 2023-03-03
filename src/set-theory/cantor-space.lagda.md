@@ -1,5 +1,6 @@
 #  Cantor space
 
+<details><summary>Imports</summary>
 ```agda
 module set-theory.cantor-space where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

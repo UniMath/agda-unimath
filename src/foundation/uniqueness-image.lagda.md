@@ -1,5 +1,6 @@
 #  Uniqueness of the image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-image where
 
@@ -18,6 +19,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ### Uniqueness of the image
 
@@ -212,7 +214,7 @@ module _
                 ( q)))
     uniqueness-im =
       uniqueness-image f (emb-im f) (unit-im f) (is-image-im f) i q H
-  
+
   equiv-slice-uniqueness-im : equiv-slice (inclusion-im f) (map-emb i)
   equiv-slice-uniqueness-im =
     pr1 (center uniqueness-im)

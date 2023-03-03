@@ -1,5 +1,6 @@
 # Locally finite posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.locally-finite-posets where
 
@@ -12,6 +13,7 @@ open import order-theory.finite-posets
 open import order-theory.interval-subposets
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +25,7 @@ A poset `X` is said to be locally finite if for every `x, y ∈ X`, the poset `[
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
-  
+
   is-locally-finite-poset-Prop : Prop (l1 ⊔ l2)
   is-locally-finite-poset-Prop =
     Π-Prop

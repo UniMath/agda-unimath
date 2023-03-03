@@ -1,5 +1,6 @@
 # The binomial theorem for the integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.binomial-theorem-integers where
 
@@ -29,6 +30,7 @@ open import linear-algebra.vectors
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

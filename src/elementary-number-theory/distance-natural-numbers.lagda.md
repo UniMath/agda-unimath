@@ -1,5 +1,6 @@
 #  The distance between natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.distance-natural-numbers where
 
@@ -7,7 +8,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-  
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

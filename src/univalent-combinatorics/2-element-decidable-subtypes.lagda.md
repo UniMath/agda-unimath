@@ -1,5 +1,6 @@
 #  2-element decidable subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-decidable-subtypes where
 
@@ -45,6 +46,7 @@ open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -63,7 +65,7 @@ A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of whi
 module _
   {l1 l2 : Level} {X : UU l1} (P : 2-Element-Decidable-Subtype l2 X)
   where
-  
+
   decidable-subtype-2-Element-Decidable-Subtype : decidable-subtype l2 X
   decidable-subtype-2-Element-Decidable-Subtype = pr1 P
 
@@ -91,7 +93,7 @@ module _
     {x : X} {y z : is-in-2-Element-Decidable-Subtype x} → Id y z
   eq-is-in-2-Element-Decidable-Subtype {x} =
     eq-is-prop (is-prop-is-in-2-Element-Decidable-Subtype x)
-      
+
   type-2-Element-Decidable-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Decidable-Subtype =
     type-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
@@ -111,7 +113,7 @@ module _
   is-injective-inclusion-2-Element-Decidable-Subtype =
     is-injective-inclusion-decidable-subtype
       decidable-subtype-2-Element-Decidable-Subtype
-      
+
   has-two-elements-type-2-Element-Decidable-Subtype :
     has-two-elements type-2-Element-Decidable-Subtype
   has-two-elements-type-2-Element-Decidable-Subtype = pr2 P
@@ -159,7 +161,7 @@ module _
     subtype-standard-2-Element-Subtype
       ( pair X (is-set-has-decidable-equality d))
       ( np)
-      
+
   decidable-subtype-standard-2-Element-Decidable-Subtype : decidable-subtype l X
   pr1 (decidable-subtype-standard-2-Element-Decidable-Subtype z) =
     type-prop-standard-2-Element-Decidable-Subtype z
@@ -354,7 +356,7 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
               ( inv (right-inverse-law-equiv e))
               ( id-equiv))))
 
-preserves-comp-precomp-equiv-2-Element-Decidable-Subtype : 
+preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
   { l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} (e : X ≃ Y) →
   ( f : Y ≃ Z) →
   Id
@@ -368,7 +370,7 @@ preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f =
         ( refl)
         ( eq-is-prop is-prop-type-trunc-Prop))
 ```
-  
+
 ## Properties
 
 ### Any 2-element decidable subtype of a standard finite type is a standard 2-element decidable subtype

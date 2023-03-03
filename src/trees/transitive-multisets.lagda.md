@@ -1,5 +1,6 @@
 #  Transitive multisets
 
+<details><summary>Imports</summary>
 ```agda
 module trees.transitive-multisets where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 open import trees.multisets
 open import trees.submultisets
 ```
+</details>
 
 ## Idea
 

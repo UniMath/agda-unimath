@@ -1,5 +1,6 @@
 #  The Collatz conjecture
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.collatz-conjecture where
 
@@ -10,6 +11,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 # We state the collatz conjecture
 

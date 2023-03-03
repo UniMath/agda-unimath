@@ -1212,7 +1212,6 @@ coherence-cube-flattening-lemma {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} 
            ( htpy-precomp (htpy-map-Σ Q refl-htpy g (λ a → htpy-eq (K' a))) T h))) ? (λ a → eq-htpy (K a)) h!})
     H g g' K
 
-
 flattening-pushout' :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →

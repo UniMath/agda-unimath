@@ -1,5 +1,6 @@
 #  Unordered pairs of elements in a type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-pairs where
 
@@ -30,6 +31,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -50,7 +52,7 @@ unordered-pair A = Σ (2-Element-Type lzero) (λ X → type-2-Element-Type X →
 module _
   {l : Level} {A : UU l} (p : unordered-pair A)
   where
-  
+
   2-element-type-unordered-pair : 2-Element-Type lzero
   2-element-type-unordered-pair = pr1 p
 
@@ -205,7 +207,7 @@ module _
 module _
   {l1 : Level} {A : UU l1}
   where
-  
+
   mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → Prop l1
   mere-Eq-unordered-pair-Prop p q = trunc-Prop (Eq-unordered-pair p q)
 

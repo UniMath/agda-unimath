@@ -1,5 +1,6 @@
 #  Cartesian products of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cartesian-products-species where
 
@@ -15,6 +16,7 @@ open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.exponents-species
 ```
+</details>
 
 ## Idea
 
@@ -33,11 +35,11 @@ prod-species F G X = (F X) × (G X)
 
 ### The adjunction between cartesian products and exponents of species
 
-```agda 
+```agda
 equiv-universal-property-exponents-species :
   {l1 l2 l3 l4 : Level}
   (F : species l1 l2) (G : species l1 l3) (H : species l1 l4) →
   hom-species (prod-species F G) H ≃ hom-species F (function-species G H)
 equiv-universal-property-exponents-species F G H =
   equiv-map-Π (λ X → equiv-ev-pair)
-``` 
+```

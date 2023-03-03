@@ -1,5 +1,6 @@
 #  Symmetric elements of involutive types
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.symmetric-elements-involutive-types where
 
@@ -9,6 +10,7 @@ open import structured-types.involutive-types
 
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 

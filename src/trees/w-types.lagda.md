@@ -1,5 +1,6 @@
 #  W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.w-types where
 
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Idea
 
@@ -36,10 +38,10 @@ data 𝕎 {l1 l2 : Level} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   symbol-𝕎 : 𝕎 A B → A
   symbol-𝕎 (tree-𝕎 x α) = x
-  
+
   component-𝕎 : (x : 𝕎 A B) → B (symbol-𝕎 x) → 𝕎 A B
   component-𝕎 (tree-𝕎 x α) = α
 
@@ -84,10 +86,10 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   Eq-𝕎 : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   Eq-𝕎 (tree-𝕎 x α) (tree-𝕎 y β) =
-    Σ (x ＝ y) (λ p → (z : B x) → Eq-𝕎 (α z) (β (tr B p z))) 
+    Σ (x ＝ y) (λ p → (z : B x) → Eq-𝕎 (α z) (β (tr B p z)))
 
   refl-Eq-𝕎 : (w : 𝕎 A B) → Eq-𝕎 w w
   refl-Eq-𝕎 (tree-𝕎 x α) = pair refl (λ z → refl-Eq-𝕎 (α z))
@@ -123,7 +125,7 @@ module _
 
   is-equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → is-equiv (Eq-𝕎-eq v w)
   is-equiv-Eq-𝕎-eq v =
-    fundamental-theorem-id 
+    fundamental-theorem-id
       ( is-contr-total-Eq-𝕎 v)
       ( Eq-𝕎-eq v)
 
@@ -132,7 +134,7 @@ module _
 
   equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → (v ＝ w) ≃ Eq-𝕎 v w
   equiv-Eq-𝕎-eq v w = pair (Eq-𝕎-eq v w) (is-equiv-Eq-𝕎-eq v w)
-  
+
   is-trunc-𝕎 : (k : 𝕋) → is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (𝕎 A B)
   is-trunc-𝕎 k is-trunc-A (tree-𝕎 x α) (tree-𝕎 y β) =
     is-trunc-is-equiv k
@@ -249,7 +251,7 @@ htpy-htpy-hom-𝕎-Alg {A = A} {B} X f (tree-𝕎 x α) =
   ( inv
     ( structure-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X f
       ( pair x α)))
-                 
+
 compute-structure-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (X : algebra-polynomial-endofunctor-UU l3 A B) (x : A) (α : B x → 𝕎 A B)
@@ -259,7 +261,7 @@ compute-structure-htpy-hom-𝕎-Alg :
        ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
   ( ap ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
        ( eq-htpy (H ·r α)))
-compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α = 
+compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
   ind-htpy
     ( map-hom-𝕎-Alg X)
     ( λ f H →

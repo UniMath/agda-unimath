@@ -1,5 +1,6 @@
 #  0-Images of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.0-images-of-maps where
 
@@ -13,6 +14,7 @@ open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -24,7 +26,7 @@ The 0-image of a map `f : A → B` is the type `0-im f := Σ (b : B), type-trunc
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   0-im : UU (l1 ⊔ l2)
   0-im = trunc-im zero-𝕋 f
 

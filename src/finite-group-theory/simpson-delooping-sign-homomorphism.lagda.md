@@ -1,5 +1,6 @@
 #  Simpson's delooping of the sign homomorphism
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -76,6 +77,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ### Simpson's delooping of the sign homomorphism
 
@@ -333,7 +335,7 @@ module _
             ( standard-2-Element-Decidable-Subtype
               ( has-decidable-equality-Fin
                 (number-of-elements-count eX))
-              ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))    
+              ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
     cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inl (inr star)) q =
       ex-falso
         ( NP
@@ -575,7 +577,7 @@ module _
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
-  
+
   equiv-fin-2-quotient-sign-comp-equiv-Fin : (h : Fin n ≃ type-UU-Fin n X) →
     ( Fin 2 ≃ quotient-sign-comp n X)
   equiv-fin-2-quotient-sign-comp-equiv-Fin h =
@@ -634,7 +636,7 @@ module _
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n)
           ( ( inv-equiv ( map-simpson-comp-equiv X X' e f)) ∘e
             ( map-simpson-comp-equiv X X' e f')))
-    lemma-sign-comp X X' e f f' = 
+    lemma-sign-comp X X' e f f' =
        ap
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
         ( ( ap
@@ -660,7 +662,6 @@ module _
   pr2 (preserves-sign-comp-simpson-comp-equiv X X' e f f') P =
     P ∙ inv (lemma-sign-comp X X' e f f')
 ```
-
 
 ```agda
 module _

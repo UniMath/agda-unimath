@@ -1,5 +1,6 @@
 #  Equivalences
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -15,6 +16,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -28,7 +30,7 @@ An equivalence is a map that has a section and a (separate) retraction. This is 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = sec f × retr f
 
@@ -57,7 +59,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1}
   where
-  
+
   is-fiberwise-equiv :
     {B : A → UU l2} {C : A → UU l3}
     (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
@@ -84,7 +86,7 @@ module _
   pr2 (pr1 is-equiv-id) = refl-htpy
   pr1 (pr2 is-equiv-id) = id
   pr2 (pr2 is-equiv-id) = refl-htpy
-  
+
   id-equiv : A ≃ A
   pr1 id-equiv = id
   pr2 id-equiv = is-equiv-id
@@ -152,7 +154,7 @@ module _
   isretr-map-inv-is-equiv : (map-inv-is-equiv ∘ f) ~ id
   isretr-map-inv-is-equiv =
     isretr-inv-has-inverse (has-inverse-is-equiv H)
-  
+
   coherence-map-inv-is-equiv :
     ( issec-map-inv-is-equiv ·r f) ~ (f ·l isretr-map-inv-is-equiv)
   coherence-map-inv-is-equiv =
@@ -181,7 +183,7 @@ module _
   isretr-map-inv-equiv : (map-inv-equiv ∘ (map-equiv e)) ~ id
   isretr-map-inv-equiv =
     isretr-map-inv-is-equiv (is-equiv-map-equiv e)
-  
+
   coherence-map-inv-equiv :
     ( issec-map-inv-equiv ·r (map-equiv e)) ~
     ( (map-equiv e) ·l isretr-map-inv-equiv)
@@ -427,7 +429,7 @@ module _
     V           V
     B --------> D
           i                                                                   -}
-          
+
   abstract
     is-equiv-top-is-equiv-left-square :
       is-equiv i → is-equiv f → is-equiv g → is-equiv h
@@ -443,7 +445,7 @@ module _
   abstract
     is-equiv-bottom-is-equiv-top-square :
       is-equiv f → is-equiv g → is-equiv h → is-equiv i
-    is-equiv-bottom-is-equiv-top-square Ef Eg Eh = 
+    is-equiv-bottom-is-equiv-top-square Ef Eg Eh =
       is-equiv-left-factor i f (is-equiv-comp-htpy (i ∘ f) g h H Eh Eg) Ef
 
   abstract

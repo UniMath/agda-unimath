@@ -1,5 +1,6 @@
 #  Wild semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-semigroups where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import structured-types.magmas
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 # Transposition of matrices
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.transposition-matrices where
 
@@ -12,6 +13,7 @@ open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices
 open import linear-algebra.vectors
 ```
+</details>
 
 ## Idea
 

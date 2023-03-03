@@ -1,5 +1,6 @@
 #  Involutions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.involutions where
 
@@ -15,6 +16,7 @@ open import foundation-core.universe-levels
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
 ```
+</details>
 
 ## Idea
 
@@ -25,8 +27,8 @@ An involution on a type `A` is a map (or an equivalence) `f : A → A` such that
 ### Involutions are their own inverse
 
 ```agda
-htpy-own-inverse-is-involution : 
-  {l : Level} {A : UU l} {f : Aut A} → is-involution-aut f → map-inv-equiv f ~ map-equiv f 
+htpy-own-inverse-is-involution :
+  {l : Level} {A : UU l} {f : Aut A} → is-involution-aut f → map-inv-equiv f ~ map-equiv f
 htpy-own-inverse-is-involution {f = f} is-involution-f x =
       is-injective-map-equiv f
         ( htpy-eq-equiv (right-inverse-law-equiv f) x ∙ inv (is-involution-f x))

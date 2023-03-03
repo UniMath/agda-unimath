@@ -1,5 +1,6 @@
 #  Homomorphisms of groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-groups where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-semigroups
 ```
+</details>
 
 ## Idea
 
@@ -174,7 +176,7 @@ right-unit-law-comp-hom-Group G H =
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
-  
+
   preserves-unit-Group : (type-Group G → type-Group H) → UU l2
   preserves-unit-Group f = Id (f (unit-Group G)) (unit-Group H)
 

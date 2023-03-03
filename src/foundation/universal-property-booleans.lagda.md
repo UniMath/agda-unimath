@@ -1,5 +1,6 @@
 #  The universal property of booleans
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-booleans where
 
@@ -14,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ```agda
 ev-true-false :

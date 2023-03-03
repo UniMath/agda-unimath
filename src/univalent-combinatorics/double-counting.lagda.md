@@ -1,5 +1,6 @@
 #  Double counting
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.double-counting where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

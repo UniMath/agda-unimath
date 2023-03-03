@@ -1,5 +1,6 @@
 #  Homomorphisms of commutative rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.homomorphisms-commutative-rings where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import ring-theory.homomorphisms-rings
 ```
+</details>
 
 ## Idea
 

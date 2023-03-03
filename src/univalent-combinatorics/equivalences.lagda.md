@@ -1,5 +1,6 @@
 #  Equivalences between finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences where
 
@@ -13,6 +14,7 @@ open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.surjective-maps
 ```
+</details>
 
 ## Properties
 

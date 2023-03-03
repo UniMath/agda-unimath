@@ -1,5 +1,6 @@
 #  Σ-decompositions of types
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification  #-}
 module foundation.sigma-decompositions where
@@ -26,12 +27,13 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
 A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The type `X` is called the indexing type of the Σ-decomposition, the elements of `Y x` are called the cotypes of the Σ-decomposition, and the equivalence `A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
 
-Note that types may have many Σ-decomposition. The type of Σ-decompositions of the unit type, for instance, is equivalent to the type of all pointed connected types. Alternatively, we may think of the type of Σ-decompositions of the unit type as the type of higher groupoid structures on a point, i.e., the type of higher group structures. 
+Note that types may have many Σ-decomposition. The type of Σ-decompositions of the unit type, for instance, is equivalent to the type of all pointed connected types. Alternatively, we may think of the type of Σ-decompositions of the unit type as the type of higher groupoid structures on a point, i.e., the type of higher group structures.
 
 We may restrict to Σ-decompositions where the indexing type is in a given subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
 
@@ -336,7 +338,7 @@ module _
   (X : Σ-Decomposition l2 l3 A) (Y : Σ-Decomposition l4 l5 A)
   (e : equiv-Σ-Decomposition X Y)
   where
-  
+
   equiv-indexing-type-equiv-Σ-Decomposition :
     indexing-type-Σ-Decomposition X ≃ indexing-type-Σ-Decomposition Y
   equiv-indexing-type-equiv-Σ-Decomposition = pr1 e
@@ -358,7 +360,7 @@ module _
     cotype-Σ-Decomposition Y (map-equiv-indexing-type-equiv-Σ-Decomposition x)
   map-equiv-cotype-equiv-Σ-Decomposition x =
     map-equiv (equiv-cotype-equiv-Σ-Decomposition x)
-  
+
 module _
   {l1 l2 l3 : Level} {A : UU l1} (X : Σ-Decomposition l2 l3 A)
   where
@@ -724,7 +726,7 @@ module _
     is-contr
       ( Σ ( displayed-Σ-Decomposition l2 l3 l4 l5 A )
           ( equiv-displayed-Σ-Decomposition disp-D))
-  is-contr-total-equiv-displayed-Σ-Decomposition = 
+  is-contr-total-equiv-displayed-Σ-Decomposition =
     is-contr-total-Eq-structure
       ( λ X' f-Y' e → equiv-snd-displayed-Σ-Decomposition
         ( disp-D)
@@ -894,7 +896,7 @@ module _
           ( matching-correspondence-inv-displayed-fibered-Σ-Decomposition
             ( disp-D)))) ~
       ( map-equiv e)
-    htpy-matching-correspondence a = 
+    htpy-matching-correspondence a =
       htpy-eq-equiv
         ( right-inverse-law-equiv (equiv-Σ-equiv-base Y (inv-equiv f)))
         ( map-equiv e a)
@@ -1013,7 +1015,6 @@ module _
       ~ map-equiv s
     htpy-matching-correspondence a =
       htpy-eq-equiv lemma5 a
-
 
   issec-map-inv-displayed-fibered-Σ-Decomposition :
     ( map-displayed-fibered-Σ-Decomposition

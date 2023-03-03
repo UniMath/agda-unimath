@@ -1,5 +1,6 @@
 #  Functoriality of truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-truncation where
 
@@ -15,6 +16,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

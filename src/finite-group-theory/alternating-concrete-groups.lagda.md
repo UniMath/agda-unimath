@@ -1,5 +1,6 @@
 #  Alternating concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.alternating-concrete-groups where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-groups
 open import group-theory.kernels-homomorphisms-concrete-groups
 ```
+</details>
 
 ## Idea
 
@@ -24,7 +26,7 @@ The alternating concrete groups are the kernels of the concrete sign homomorphis
 module _
   (n : ℕ)
   where
-  
+
   alternating-Concrete-Group : Concrete-Group (lsuc (lsuc lzero))
   alternating-Concrete-Group =
     concrete-group-kernel-hom-Concrete-Group

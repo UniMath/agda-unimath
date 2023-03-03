@@ -1,5 +1,6 @@
 #  Repeating an element in a standard finite type
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.repeating-element-standard-finite-type where
 
@@ -14,6 +15,7 @@ open import foundation.unit-type
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ```agda
 repeat-Fin :

@@ -1,5 +1,6 @@
 #  Monoid actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.monoid-actions where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 

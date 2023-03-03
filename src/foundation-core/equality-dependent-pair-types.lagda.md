@@ -1,5 +1,6 @@
 #  Equality of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -12,10 +13,11 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
-An identification `(pair x y) ＝ (pair x' y')` in a dependent pair type `Σ A B` is equivalently described as a pair `pair α β` consisting of an identification `α : x ＝ x'` and an identification `β : (tr B α y) ＝ y'`. 
+An identification `(pair x y) ＝ (pair x' y')` in a dependent pair type `Σ A B` is equivalently described as a pair `pair α β` consisting of an identification `α : x ＝ x'` and an identification `β : (tr B α y) ＝ y'`.
 
 ## Definition
 

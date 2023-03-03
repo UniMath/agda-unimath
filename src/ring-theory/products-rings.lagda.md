@@ -1,5 +1,6 @@
 #  Products of rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.products-rings where
 
@@ -16,6 +17,7 @@ open import group-theory.semigroups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

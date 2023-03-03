@@ -1,5 +1,6 @@
 #  The image of a map
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.image-of-maps where
 
@@ -18,6 +19,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.dependent-sum-finite-types
 ```
+</details>
 
 ```agda
 module _

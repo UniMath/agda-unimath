@@ -1,5 +1,6 @@
 #  Existential quantification
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.existential-quantification where
 
@@ -9,6 +10,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

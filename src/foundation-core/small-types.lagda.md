@@ -1,5 +1,6 @@
 #  Small types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.small-types where
 
@@ -22,6 +23,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

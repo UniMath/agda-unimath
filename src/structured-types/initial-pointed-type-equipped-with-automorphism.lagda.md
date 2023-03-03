@@ -1,5 +1,6 @@
 #  The initial pointed type equipped with an automorphism
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.initial-pointed-type-equipped-with-automorphism where
 
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+</details>
 
 ## Idea
 

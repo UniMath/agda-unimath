@@ -1,5 +1,6 @@
 #  Isomorphisms of group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-group-actions where
 
@@ -17,6 +18,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.precategory-of-group-actions
 ```
+</details>
 
 ## Definition
 

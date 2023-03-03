@@ -1,5 +1,6 @@
 # Commuting 3-simplices of maps
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -9,6 +10,7 @@ open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

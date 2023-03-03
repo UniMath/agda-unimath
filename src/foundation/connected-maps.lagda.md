@@ -1,5 +1,6 @@
 #  Connected maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.connected-maps where
 
@@ -28,6 +29,7 @@ open import foundation.truncations
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -188,7 +190,7 @@ module _
 module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B}
   where
-  
+
   dependent-universal-property-is-connected-map :
     is-connected-map k f → (P : B → Truncated-Type l3 k) →
     is-equiv (precomp-Π f (λ b → type-Truncated-Type (P b)))

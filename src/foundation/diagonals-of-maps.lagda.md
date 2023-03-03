@@ -1,5 +1,6 @@
 #  Diagonals of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.diagonals-of-maps where
 
@@ -19,6 +20,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

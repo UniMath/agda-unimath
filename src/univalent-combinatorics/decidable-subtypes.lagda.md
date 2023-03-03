@@ -1,5 +1,6 @@
 #  Decidable subtypes of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-subtypes where
 
@@ -23,6 +24,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+</details>
 
 ## Definitions
 
@@ -35,7 +37,7 @@ subset-𝔽 l2 X = decidable-subtype l2 (type-𝔽 X)
 module _
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
   where
-    
+
   subtype-subset-𝔽 : subtype l2 (type-𝔽 X)
   subtype-subset-𝔽 = subtype-decidable-subtype P
 
@@ -57,7 +59,7 @@ module _
 module _
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
   where
-  
+
   type-subset-𝔽 : UU (l1 ⊔ l2)
   type-subset-𝔽 = type-decidable-subtype P
 

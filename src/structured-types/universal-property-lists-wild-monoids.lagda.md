@@ -1,5 +1,6 @@
 #  The universal property of lists with respect to wild monoids
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.universal-property-lists-wild-monoids where
 
@@ -16,6 +17,7 @@ open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.wild-monoids
 open import structured-types.coherent-h-spaces
 ```
+</details>
 
 ## Idea
 
@@ -245,7 +247,7 @@ module _
 
 preserves-coh-unit-laws-map-elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
-  (f : X → type-Wild-Monoid M) → 
+  (f : X → type-Wild-Monoid M) →
   preserves-coh-unit-laws-mul
     ( list-Coherent-H-Space X)
     ( wild-unital-magma-Wild-Monoid M)
@@ -255,7 +257,7 @@ preserves-coh-unit-laws-map-elim-list-Wild-Monoid :
     ( preserves-right-unit-law-map-elim-list-Wild-Monoid M f)
 preserves-coh-unit-laws-map-elim-list-Wild-Monoid
   (pair (pair (pair M eM) (pair μ (pair lM (pair rM cM)))) αM) f = refl
-  
+
 elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
   (f : X → type-Wild-Monoid M) →

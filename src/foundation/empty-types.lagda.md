@@ -1,5 +1,6 @@
 #  Empty types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.empty-types where
 
@@ -19,6 +20,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -52,7 +54,6 @@ raise-ex-falso-emb :
 raise-ex-falso-emb l =
   comp-emb ex-falso-emb (emb-equiv (inv-equiv (compute-raise-empty l)))
 ```
-
 
 ### Being empty is a proposition
 

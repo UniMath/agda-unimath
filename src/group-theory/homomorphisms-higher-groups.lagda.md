@@ -1,5 +1,6 @@
 #  Homomorphisms of higher groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-higher-groups where
 
@@ -14,6 +15,7 @@ open import structured-types.pointed-maps
 
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
+</details>
 
 ## Idea
 
@@ -107,7 +109,7 @@ module _
 module _
   {l : Level} (G : ∞-Group l)
   where
-  
+
   id-hom-∞-Group : hom-∞-Group G G
   id-hom-∞-Group = id-pointed-map
 

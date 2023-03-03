@@ -1,5 +1,6 @@
 #  Epimorphisms with respect to maps into sets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.epimorphisms-with-respect-to-sets where
 
@@ -22,6 +23,7 @@ open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

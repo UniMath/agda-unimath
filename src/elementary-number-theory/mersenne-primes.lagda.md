@@ -1,5 +1,6 @@
 #  Mersenne primes
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.mersenne-primes where
 
@@ -13,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.group-actions where
 
@@ -17,6 +18,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.symmetric-groups
 ```
+</details>
 
 ## Idea
 
@@ -45,7 +47,7 @@ module _
 
   is-set-type-Abstract-Group-Action : is-set type-Abstract-Group-Action
   is-set-type-Abstract-Group-Action = is-set-type-Set set-Abstract-Group-Action
-  
+
   equiv-mul-Abstract-Group-Action :
     type-Group G → type-Abstract-Group-Action ≃ type-Abstract-Group-Action
   equiv-mul-Abstract-Group-Action =

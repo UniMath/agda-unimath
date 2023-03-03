@@ -1,5 +1,6 @@
 # Meet-semilattices
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.meet-semilattices where
 
@@ -15,6 +16,7 @@ open import group-theory.semigroups
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 

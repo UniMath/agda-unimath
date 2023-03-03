@@ -1,5 +1,6 @@
 # Cumulative hierarchy
 
+<details><summary>Imports</summary>
 ```agda
 module set-theory.cumulative-hierarchy where
 
@@ -16,6 +17,7 @@ open import foundation-core.equivalences
 open import orthogonal-factorization-systems.lifts-of-maps
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 

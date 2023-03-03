@@ -1,5 +1,6 @@
 #  Addition on the integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-integers where
 
@@ -23,6 +24,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+</details>
 
 ## Idea
 
@@ -57,7 +59,7 @@ ap-add-ℤ p q = ap-binary add-ℤ p q
 abstract
   left-unit-law-add-ℤ : (k : ℤ) → zero-ℤ +ℤ k ＝ k
   left-unit-law-add-ℤ k = refl
-  
+
   right-unit-law-add-ℤ : (k : ℤ) → k +ℤ zero-ℤ ＝ k
   right-unit-law-add-ℤ (inl zero-ℕ) = refl
   right-unit-law-add-ℤ (inl (succ-ℕ x)) =
@@ -169,7 +171,7 @@ abstract
 
   add-neg-one-left-ℤ : (x : ℤ) → neg-one-ℤ +ℤ x ＝ pred-ℤ x
   add-neg-one-left-ℤ x = refl
-  
+
   add-neg-one-right-ℤ : (x : ℤ) → x +ℤ neg-one-ℤ ＝ pred-ℤ x
   add-neg-one-right-ℤ x = inv (is-add-neg-one-pred-ℤ' x)
 ```
@@ -259,7 +261,7 @@ abstract
       neg-ℤ (inr (inr x)) +ℤ inr (inr x)
       ＝ inr (inr x) +ℤ inl x                    by commutative-add-ℤ (inl x) (inr (inr x))
       ＝ zero-ℤ                                  by left-inverse-law-add-ℤ (inl x)
-  
+
   right-inverse-law-add-ℤ :
     (x : ℤ) → x +ℤ neg-ℤ x ＝ zero-ℤ
   right-inverse-law-add-ℤ x =

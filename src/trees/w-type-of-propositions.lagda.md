@@ -1,5 +1,6 @@
 #  The W-type of the type of propositions
 
+<details><summary>Imports</summary>
 ```agda
 module trees.w-type-of-propositions where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 open import trees.extensional-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 
@@ -38,7 +40,7 @@ succ-𝕎-Prop {l} P = tree-𝕎 (raise-unit-Prop l) (λ x → P)
 ```agda
 standard-subfinite-type : {l : Level} → 𝕎-Prop l → UU l
 standard-subfinite-type (tree-𝕎 P α) =
-  Σ (type-Prop P) (λ p → standard-subfinite-type (α p)) + type-Prop P 
+  Σ (type-Prop P) (λ p → standard-subfinite-type (α p)) + type-Prop P
 ```
 
 ## Properties

@@ -1,5 +1,6 @@
 #  Standard finite pruned trees
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.standard-finite-pruned-trees where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

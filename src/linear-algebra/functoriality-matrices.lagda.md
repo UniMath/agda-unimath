@@ -1,5 +1,6 @@
 # Functoriality of matrices
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-matrices where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices
 ```
+</details>
 
 ## Idea
 
@@ -21,7 +23,7 @@ An map `f : A → B` induces a map `matrix A m n → matrix B m n`.
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   map-matrix : {m n : ℕ} → matrix A m n → matrix B m n
   map-matrix = map-vec (map-vec f)
 ```

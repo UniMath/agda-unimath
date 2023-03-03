@@ -1,8 +1,8 @@
 # Sums of elements in semirings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.sums-semirings where
-
 
 open import elementary-number-theory.natural-numbers
 
@@ -20,6 +20,7 @@ open import ring-theory.semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -46,7 +47,7 @@ sum-Semiring R (succ-ℕ n) f =
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   sum-one-element-Semiring :
     (f : functional-vec-Semiring R 1) →
     sum-Semiring R 1 f ＝ head-functional-vec 0 f
@@ -181,7 +182,7 @@ module _
       ( interchange-add-sum-Semiring n
         ( f ∘ inl-Fin n)
         ( g ∘ inl-Fin n)))
-    
+
 ```
 
 ### Extending a sum of elements in a semiring

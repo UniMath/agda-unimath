@@ -1,5 +1,6 @@
 #  Maximum on the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.maximum-natural-numbers where
 
@@ -14,6 +15,7 @@ open import order-theory.least-upper-bounds-posets
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

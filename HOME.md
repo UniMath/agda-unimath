@@ -2,11 +2,10 @@
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
 
-
 Welcome to the website of the `agda-unimath` formalization project!
 
 <a href="https://github.com/unimath/agda-unimath">
-<img align="right" width="300" alt="Agda-UniMath" src="./docs/images/agda-unimath-logo.svg" />
+<img align="right" width="300" alt="Agda-UniMath" src="./theme/images/agda-unimath-logo.svg" />
 </a>
 
 The `agda-unimath` library is a community formalisation project for univalent

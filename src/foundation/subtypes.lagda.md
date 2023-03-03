@@ -1,5 +1,6 @@
 #  Subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.subtypes where
 
@@ -29,6 +30,7 @@ open import foundation.propositional-extensionality
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 ```
+</details>
 
 ## Definition
 
@@ -53,7 +55,7 @@ Subtype l2 l3 A =
 module _
   {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where
-  
+
   is-injective-inclusion-subtype : is-injective (inclusion-subtype B)
   is-injective-inclusion-subtype =
     is-injective-is-emb (is-emb-inclusion-subtype B)

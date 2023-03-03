@@ -1,5 +1,6 @@
 #  The Twin Prime conjecture
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.twin-prime-conjecture where
 
@@ -11,6 +12,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 # The twin prime conjecture
 

@@ -1,5 +1,6 @@
 #  Induction principles on W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.induction-w-types where
 
@@ -18,6 +19,7 @@ open import trees.elementhood-relation-w-types
 open import trees.inequality-w-types
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 
@@ -55,7 +57,7 @@ module _
     (x y : 𝕎 A B) (e : y ∈-𝕎 x) →
     ind-□-∈-𝕎 P h x y e ＝ h y (ind-□-∈-𝕎 P h y)
   comp-□-∈-𝕎 P h (tree-𝕎 x α) .(α b) (pair b refl) = refl
-  
+
   ind-∈-𝕎 :
     (P : 𝕎 A B → UU l3) (h : (y : 𝕎 A B) → □-∈-𝕎 P y → P y) →
     (x : 𝕎 A B) → P x
@@ -131,10 +133,10 @@ Now we prove the actual induction principle with computation rule, where we obta
 
 ```agda
 strong-ind-𝕎 :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (P : 𝕎 A B → UU l3) → 
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (P : 𝕎 A B → UU l3) →
   ((x : 𝕎 A B) → □-𝕎 P x → P x) → (x : 𝕎 A B) → P x
 strong-ind-𝕎 P h = reflect-□-𝕎 h (□-strong-ind-𝕎 h)
-                                               
+
 strong-comp-𝕎 :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (P : 𝕎 A B → UU l3) →
   (h : (x : 𝕎 A B) → □-𝕎 P x → P x) (x : 𝕎 A B) →

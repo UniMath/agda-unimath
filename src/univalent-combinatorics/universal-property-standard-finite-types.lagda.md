@@ -1,5 +1,6 @@
 #  The universal property of the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.universal-property-standard-finite-types where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

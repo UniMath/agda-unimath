@@ -1,5 +1,6 @@
 #  Equivalences of species
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences-species where
 
@@ -16,6 +17,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 
 ```
+</details>
 
 ## Idea
 
@@ -37,7 +39,7 @@ equiv-species {l1} F G = (X : 𝔽 l1) → F X ≃ G X
 ```agda
 extensionality-species :
   {l1 l2 : Level} (F : species l1 l2) (G : species l1 l2) →
-  (Id F G) ≃ (equiv-species F G)  
+  (Id F G) ≃ (equiv-species F G)
 extensionality-species = extensionality-fam
 ```
- 
+

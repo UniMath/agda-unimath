@@ -1,5 +1,6 @@
 #  Spheres
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.spheres where
 
@@ -11,6 +12,7 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

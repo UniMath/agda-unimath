@@ -1,5 +1,6 @@
 #  Large Posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.large-posets where
 
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import order-theory.large-preorders
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 

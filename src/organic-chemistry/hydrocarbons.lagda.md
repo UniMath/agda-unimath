@@ -1,5 +1,6 @@
 #  Hydrocarbons
 
+<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.hydrocarbons where
 
@@ -19,6 +20,7 @@ open import graph-theory.finite-graphs
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

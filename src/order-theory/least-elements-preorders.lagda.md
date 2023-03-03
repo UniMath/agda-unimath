@@ -1,5 +1,6 @@
 # Least elements in preorders
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.least-elements-preorders where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 

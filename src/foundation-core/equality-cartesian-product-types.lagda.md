@@ -1,5 +1,6 @@
 #  Equality of cartesian product types
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -13,6 +14,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -24,7 +26,7 @@ Identifications `Id (pair x y) (pair x' y')` in a cartesian product are equivale
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   Eq-prod : (s t : A × B) → UU (l1 ⊔ l2)
   Eq-prod s t = ((pr1 s) ＝ (pr1 t)) × ((pr2 s) ＝ (pr2 t))
 ```
@@ -37,7 +39,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   eq-pair' : {s t : A × B} → Eq-prod s t → s ＝ t
   eq-pair' {pair x y} {pair .x .y} (pair refl refl) = refl
 
@@ -86,7 +88,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} 
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   triangle-eq-pair :

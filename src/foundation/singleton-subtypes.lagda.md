@@ -1,5 +1,6 @@
 #  Singleton subtypes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.singleton-subtypes where
 
@@ -13,6 +14,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

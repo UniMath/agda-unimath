@@ -1,5 +1,6 @@
 #  Sections
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -10,6 +11,7 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -34,7 +36,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
-  
+
   section-left-factor :
     (g : B → X) (h : A → B) → sec (g ∘ h) → sec g
   pr1 (section-left-factor g h sec-gh) = h ∘ (pr1 sec-gh)
@@ -73,7 +75,6 @@ module _
     (H ·r pr1 (section-comp g h sec-h sec-g)) ∙h
     (pr2 (section-comp g h sec-h sec-g))
 
-
   inv-triangle-section :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
     (sec-h : sec h) → (f ∘ (pr1 sec-h)) ~ g
@@ -86,4 +87,3 @@ module _
   triangle-section h g f H sec-h =
     inv-htpy (inv-triangle-section h g f H sec-h)
 ```
- 

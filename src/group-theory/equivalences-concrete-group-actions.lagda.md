@@ -1,5 +1,6 @@
 #  Equivalences of concrete group actions
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-concrete-group-actions where
 
@@ -22,6 +23,7 @@ open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-group-actions
 ```
+</details>
 
 ## Idea
 

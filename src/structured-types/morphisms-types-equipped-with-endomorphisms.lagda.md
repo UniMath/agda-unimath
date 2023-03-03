@@ -1,5 +1,6 @@
 #  Morphisms of types equipped with endomorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-types-equipped-with-endomorphisms where
 
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms
 ```
+</details>
 
 ## Definition
 

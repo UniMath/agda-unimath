@@ -1,5 +1,6 @@
 #  Products of unordered tuples of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.products-unordered-tuples-of-types where
 
@@ -25,6 +26,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.universal-property-standard-finite-types
 ```
+</details>
 
 ## Idea
 

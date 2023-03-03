@@ -1,5 +1,6 @@
 #  Morphisms of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.morphisms-undirected-graphs where
 
@@ -19,6 +20,7 @@ open import foundation.unordered-pairs
 
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Definitions
 
@@ -86,7 +88,6 @@ module _
   pr1 id-hom-Undirected-Graph = id
   pr2 id-hom-Undirected-Graph p = id
 ```
-
 
 ## Properties
 

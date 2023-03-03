@@ -1,5 +1,6 @@
 #  Nonzero natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.nonzero-natural-numbers where
 
@@ -9,6 +10,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

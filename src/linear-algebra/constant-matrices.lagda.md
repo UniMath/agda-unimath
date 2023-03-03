@@ -1,5 +1,6 @@
 # Constant matrices
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.constant-matrices where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import linear-algebra.constant-vectors
 open import linear-algebra.matrices
 ```
+</details>
 
 ## Idea
 

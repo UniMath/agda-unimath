@@ -1,5 +1,6 @@
 #  Set presented types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.set-presented-types where
 
@@ -11,6 +12,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

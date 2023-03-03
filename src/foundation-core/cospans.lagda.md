@@ -1,5 +1,6 @@
 #  Cospans
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -9,6 +10,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Definition
 

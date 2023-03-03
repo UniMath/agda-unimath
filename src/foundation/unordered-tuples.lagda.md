@@ -1,5 +1,6 @@
 #  Unordered n-tuples of elements in a type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-tuples where
 
@@ -25,6 +26,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -60,7 +62,7 @@ module _
   has-decidable-equality-type-unordered-tuple =
     has-decidable-equality-has-cardinality n
       has-cardinality-type-unordered-tuple
-      
+
   element-unordered-tuple : type-unordered-tuple → A
   element-unordered-tuple = pr2 t
 ```
@@ -115,7 +117,7 @@ pr2 (standard-unordered-tuple n f) = f
 module _
   {l : Level} (n : ℕ) {A : UU l}
   where
-  
+
   Eq-unordered-tuple : unordered-tuple n A → unordered-tuple n A → UU l
   Eq-unordered-tuple x y =
     Σ ( type-unordered-tuple n x ≃ type-unordered-tuple n y)

@@ -1,5 +1,6 @@
 #  Modules over rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.modules-rings where
 
@@ -18,6 +19,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.opposite-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

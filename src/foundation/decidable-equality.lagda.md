@@ -1,5 +1,6 @@
 #  Decidable equality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-equality where
 
@@ -23,6 +24,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 
@@ -125,7 +127,7 @@ abstract
     has-decidable-equality B → has-decidable-equality A
   has-decidable-equality-equiv e dB x y =
     is-decidable-equiv (equiv-ap e x y) (dB (map-equiv e x) (map-equiv e y))
-  
+
 abstract
   has-decidable-equality-equiv' :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
@@ -166,7 +168,7 @@ module _
   abstract
     refl-Eq-has-decidable-equality :
       (d : has-decidable-equality A) (x : A) →
-      Eq-has-decidable-equality d x x 
+      Eq-has-decidable-equality d x x
     refl-Eq-has-decidable-equality d x with d x x
     ... | inl α = star
     ... | inr f = f refl
@@ -219,7 +221,7 @@ abstract
             ( intro-dn)
             ( is-set-has-decidable-equality d x y)
             ( is-prop-neg))))
-            
+
 has-decidable-equality-Prop :
   {l1 : Level} (X : UU l1) → Prop l1
 pr1 (has-decidable-equality-Prop X) = has-decidable-equality X

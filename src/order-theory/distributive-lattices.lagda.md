@@ -1,5 +1,6 @@
 #  Distributive Lattices
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.distributive-lattices where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import order-theory.lattices
 ```
+</details>
 
 ## Idea
 

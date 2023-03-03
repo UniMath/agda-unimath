@@ -1,5 +1,6 @@
 #  Finite multiplication in magmas
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.finite-multiplication-magmas where
 
@@ -16,6 +17,7 @@ open import structured-types.magmas
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definition
 

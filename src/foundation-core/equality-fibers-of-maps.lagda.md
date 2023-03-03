@@ -1,5 +1,6 @@
 #  Equality in the fibers of a map
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.equality-fibers-of-maps where
 
@@ -14,6 +15,7 @@ open import foundation-core.universe-levels
 
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 
@@ -84,7 +86,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)
   where
-  
+
   eq-fib-fib-ap :
     (q : f x ＝ f y) → (pair x q) ＝ (pair y refl) → fib (ap f {x} {y}) q
   eq-fib-fib-ap q =

@@ -1,5 +1,6 @@
 #  Bounded sums of arithmetic functions
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bounded-sums-arithmetic-functions where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

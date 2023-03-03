@@ -1,5 +1,6 @@
 #  The order of an element in a group
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.orders-of-elements-groups where
 
@@ -12,6 +13,7 @@ open import group-theory.groups
 open import group-theory.kernels
 open import group-theory.normal-subgroups
 ```
+</details>
 
 ## Idea
 

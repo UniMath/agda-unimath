@@ -1,5 +1,6 @@
 #  Decidable types in elementary number theory
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.decidable-types where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

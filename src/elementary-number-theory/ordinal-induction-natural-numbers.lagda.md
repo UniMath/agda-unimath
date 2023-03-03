@@ -1,5 +1,6 @@
 #  The ordinal induction principle for the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.ordinal-induction-natural-numbers where
 
@@ -9,6 +10,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.empty-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +44,7 @@ induction-ordinal-ind-ℕ :
   { l : Level} (P : ℕ → UU l) →
   ( qS : (k : ℕ) → □-<-ℕ P k → □-<-ℕ P (succ-ℕ k))
   ( n : ℕ) → □-<-ℕ P n
-induction-ordinal-ind-ℕ P qS zero-ℕ = zero-ordinal-ind-ℕ P 
+induction-ordinal-ind-ℕ P qS zero-ℕ = zero-ordinal-ind-ℕ P
 induction-ordinal-ind-ℕ P qS (succ-ℕ n) =
   qS n (induction-ordinal-ind-ℕ P qS n)
 

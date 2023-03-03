@@ -1,5 +1,6 @@
 #  Contractible pointed types
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.contractible-pointed-types where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Definition
 

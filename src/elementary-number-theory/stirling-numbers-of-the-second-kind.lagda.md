@@ -1,5 +1,6 @@
 #  Stirling numbers of the second kind
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.stirling-numbers-of-the-second-kind where
 
@@ -7,6 +8,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

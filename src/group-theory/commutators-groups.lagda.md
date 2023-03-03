@@ -1,5 +1,6 @@
 #  Commutators of elements in groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.commutators-groups where
 
@@ -13,6 +14,7 @@ open import group-theory.group-solver
 open import group-theory.groups
 
 ```
+</details>
 
 ## Idea
 

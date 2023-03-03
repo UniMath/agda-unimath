@@ -1,5 +1,6 @@
 #  Comprehension of fibered type theories
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --guardedness #-}
 
@@ -12,6 +13,7 @@ open import type-theories.fibered-dependent-type-theories
 
 open dependent
 ```
+</details>
 
 ## Idea
 
