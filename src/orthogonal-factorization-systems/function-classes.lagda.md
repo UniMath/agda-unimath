@@ -1,6 +1,7 @@
 # Function classes
 
-<details><summary>Imports</summary>
+<details>
+<summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.function-classes where
 
