@@ -59,7 +59,7 @@ composition-closed-function-class l1 l2 =
 
 ## Properties
 
-### Being equivalence closed is a property
+### Equivalence closedness is a property
 
 ```agda
 is-prop-is-equiv-closed-function-class :
@@ -77,7 +77,7 @@ pr2 (is-equiv-closed-function-class-Prop c) =
   is-prop-is-equiv-closed-function-class c
 ```
 
-### Being composition closed is a property
+### Composition closedness is a property
 
 ```agda
 is-prop-is-composition-closed-function-class :
