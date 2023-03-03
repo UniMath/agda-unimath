@@ -768,6 +768,7 @@
   - [Modal operators](orthogonal-factorization-systems.modal-operators.md)
   - [Orthogonal maps](orthogonal-factorization-systems.orthogonal-maps.md)
   - [Pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
+  - [Reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
   - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
 
 - [Polytopes](polytopes.md)
