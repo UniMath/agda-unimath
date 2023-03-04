@@ -1,10 +1,11 @@
 #  Addition on the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-natural-numbers where
 
 open import elementary-number-theory.natural-numbers
-  
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Definition
 
@@ -54,14 +56,14 @@ left-successor-law-add-ℕ :
 left-successor-law-add-ℕ x zero-ℕ = refl
 left-successor-law-add-ℕ x (succ-ℕ y) =
   ap succ-ℕ (left-successor-law-add-ℕ x y)
-                                        
+
 right-successor-law-add-ℕ :
   (x y : ℕ) → add-ℕ x (succ-ℕ y) ＝ succ-ℕ (add-ℕ x y)
 right-successor-law-add-ℕ x y = refl
 
 associative-add-ℕ :
   (x y z : ℕ) → add-ℕ (add-ℕ x y) z ＝ add-ℕ x (add-ℕ y z)
-associative-add-ℕ x y zero-ℕ = refl 
+associative-add-ℕ x y zero-ℕ = refl
 associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
 
 commutative-add-ℕ : (x y : ℕ) → add-ℕ x y ＝ add-ℕ y x

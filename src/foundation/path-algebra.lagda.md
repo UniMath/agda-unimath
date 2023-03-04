@@ -1,5 +1,6 @@
 #  Path algebra
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.path-algebra where
 
@@ -13,6 +14,7 @@ open import foundation.identity-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -30,7 +32,7 @@ Since 2-paths are just identifications, they have the usual operations and coher
 module _
   {l : Level} {A : UU l} {a0 a1 : A}
   where
-  
+
   htpy-left-unit : (λ (p : a0 ＝ a1) → refl {x = a0} ∙ p) ~ id
   htpy-left-unit p = left-unit
 
@@ -38,7 +40,7 @@ module _
   htpy-right-unit p = right-unit
 ```
 
-### squares 
+### squares
 
 ```agda
 horizontal-concat-square :
@@ -59,7 +61,7 @@ horizontal-concat-square {a = a} {f = f}
 horizontal-unit-square :
   {l : Level} {A : UU l} {a b : A} (p : a ＝ b) →
   coherence-square-identifications p refl refl p
-horizontal-unit-square p = right-unit 
+horizontal-unit-square p = right-unit
 
 left-unit-law-horizontal-concat-square :
   {l : Level} {A : UU l} {a b c d : A}
@@ -186,10 +188,10 @@ module _
     ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
       ( nat-htpy htpy-right-unit α)) ∙
     ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
-  
+
   nat-sq-left-unit-Id² :
     coherence-square-identifications left-unit α (horizontal-concat-Id² (refl {x = refl}) α) left-unit
-  nat-sq-left-unit-Id² = 
+  nat-sq-left-unit-Id² =
     ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
     ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
 ```
@@ -237,7 +239,7 @@ interchange-Id² :
   (α : p ＝ q) (β : q ＝ r) (γ : u ＝ v) (δ : v ＝ w) →
   ( horizontal-concat-Id²
     ( vertical-concat-Id² α β)
-    ( vertical-concat-Id² γ δ)) ＝ 
+    ( vertical-concat-Id² γ δ)) ＝
   ( vertical-concat-Id²
     ( horizontal-concat-Id² α γ)
     ( horizontal-concat-Id² β δ))
@@ -303,7 +305,7 @@ module _
         (horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
 ```
 
-Identity law and constant law. 
+Identity law and constant law.
 
 ```agda
 module _
@@ -494,7 +496,7 @@ k-concat-Id⁴ σ τ = ap-binary (λ m n → z-concat-Id³ m n) σ τ
 module _
   {l : Level} {A : UU l} {x000 x001 x010 x100 x011 x101 x110 x111 : A}
   where
-  
+
   cube :
     (p000̂ : x000 ＝ x001) (p00̂0 : x000 ＝ x010) (p0̂00 : x000 ＝ x100)
     (p00̂1 : x001 ＝ x011) (p0̂01 : x001 ＝ x101) (p010̂ : x010 ＝ x011)

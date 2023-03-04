@@ -1,5 +1,6 @@
 #  Homotopies
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 
@@ -9,6 +10,7 @@ open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -238,7 +240,6 @@ inv-nat-htpy :
   {x y : A} (p : x ＝ y) →
   ((ap f p) ∙ (H y)) ＝ ((H x) ∙ (ap g p))
 inv-nat-htpy H p = inv (nat-htpy H p)
-
 
 nat-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)

@@ -1,5 +1,6 @@
 # Vectors on rings
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-rings where
 
@@ -29,6 +30,7 @@ open import ring-theory.rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +44,7 @@ Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   vec-Ring : ℕ → UU l
   vec-Ring = vec (type-Ring R)
 
@@ -111,7 +113,7 @@ module _
 
 ### Pointwise addition of vectors on a ring
 
-#### Pointwise addition of listed vectors on a ring 
+#### Pointwise addition of listed vectors on a ring
 
 ```agda
 module _

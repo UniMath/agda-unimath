@@ -1,5 +1,6 @@
 #  The greatest common divisor of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
@@ -26,6 +27,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -323,7 +325,7 @@ is-commutative-gcd-ℕ a b =
   pr2 (σ (pair x y)) = x
 ```
 
-### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`. 
+### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`.
 
 ```agda
 preserves-is-common-divisor-mul-ℕ :
@@ -370,11 +372,11 @@ is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
 
 ```agda
 is-id-is-gcd-zero-ℕ : {b x : ℕ} → gcd-ℕ 0 b ＝ x → x ＝ b
-is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b 
-  (pr2 (is-common-divisor-is-gcd-ℕ 0 b x 
-    (tr (λ t → is-gcd-ℕ 0 b t) H (is-gcd-gcd-ℕ 0 b)))) 
-  (tr (λ t → div-ℕ b t) H 
-    (div-gcd-is-common-divisor-ℕ 0 b b 
+is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
+  (pr2 (is-common-divisor-is-gcd-ℕ 0 b x
+    (tr (λ t → is-gcd-ℕ 0 b t) H (is-gcd-gcd-ℕ 0 b))))
+  (tr (λ t → div-ℕ b t) H
+    (div-gcd-is-common-divisor-ℕ 0 b b
       (pair' (div-zero-ℕ b) (refl-div-ℕ b))))
 ```
 
@@ -382,7 +384,7 @@ is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
 
 ```agda
 is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
-is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x} 
+is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
   ((is-commutative-gcd-ℕ 0 a) ∙ H)
 
 ```

@@ -1,5 +1,6 @@
 #  The higher group of integers
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.integers-higher-group where
 
@@ -12,6 +13,7 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.circle
 ```
+</details>
 
 ## Idea
 

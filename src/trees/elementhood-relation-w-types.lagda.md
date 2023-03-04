@@ -1,5 +1,6 @@
 #  The elementhood relation on W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.elementhood-relation-w-types where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 

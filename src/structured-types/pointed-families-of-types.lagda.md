@@ -1,5 +1,6 @@
 #  Pointed families of types
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-families-of-types where
 
@@ -8,6 +9,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +25,7 @@ Pointed-Fam l A = Σ (type-Pointed-Type A → UU l) (λ P → P (pt-Pointed-Type
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A)
   where
-  
+
   fam-Pointed-Fam : type-Pointed-Type A → UU l2
   fam-Pointed-Fam = pr1 B
 

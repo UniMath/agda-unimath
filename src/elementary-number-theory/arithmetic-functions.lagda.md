@@ -1,5 +1,6 @@
 #  Arithmetic functions
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.arithmetic-functions where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

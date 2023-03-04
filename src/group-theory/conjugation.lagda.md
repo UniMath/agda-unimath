@@ -1,5 +1,6 @@
 #  Conjugation in groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.conjugation where
 
@@ -16,6 +17,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 ```
+</details>
 
 ## Idea
 
@@ -103,7 +105,7 @@ module _
     ap
       ( mul-Group' G (inv-Group G x))
       ( ap (mul-Group' G y) (inv (inv-inv-Group G x)))
-  
+
   right-conjugation-law-mul-Group :
     (x y : type-Group G) →
     mul-Group G (inv-Group G x) (conjugation-Group G x y) ＝

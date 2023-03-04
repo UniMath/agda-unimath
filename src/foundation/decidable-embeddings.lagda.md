@@ -1,5 +1,6 @@
 #  Decidable embeddings
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-embeddings where
 
@@ -31,6 +32,7 @@ open import foundation.propositional-maps
 open import foundation.type-duality
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Idea
 
@@ -132,7 +134,7 @@ abstract
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y}
   where
-  
+
   abstract
     is-decidable-emb-is-decidable-prop-map :
       is-decidable-prop-map f → is-decidable-emb f

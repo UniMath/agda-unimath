@@ -1,5 +1,6 @@
 # Homotopies of binary operations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.binary-homotopies where
 
@@ -12,6 +13,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

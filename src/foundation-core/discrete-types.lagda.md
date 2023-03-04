@@ -1,5 +1,6 @@
 #  Discrete types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.discrete-types where
 
@@ -8,6 +9,7 @@ open import foundation.dependent-pair-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

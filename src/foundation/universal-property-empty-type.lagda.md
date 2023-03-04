@@ -1,5 +1,6 @@
 #  The universal property of the empty type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-empty-type where
 
@@ -12,6 +13,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 
@@ -46,7 +48,7 @@ module _
   pr1 (dependent-universal-property-empty-is-empty {l} H P) x = ex-falso (H x)
   pr2 (dependent-universal-property-empty-is-empty {l} H P) f =
     eq-htpy (λ x → ex-falso (H x))
-  
+
   universal-property-empty-is-empty :
     {l : Level} (H : is-empty A) → universal-property-empty l
   universal-property-empty-is-empty {l} H =

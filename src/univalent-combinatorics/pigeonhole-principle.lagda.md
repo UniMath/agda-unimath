@@ -1,5 +1,6 @@
 #  The pigeonhole principle
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pigeonhole-principle where
 
@@ -36,6 +37,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -98,7 +100,7 @@ abstract
 module _
   (k l : ℕ) (f : Fin k → Fin l) (p : le-ℕ l k)
   where
-  
+
   abstract
     repetition-le-Fin : repetition f
     repetition-le-Fin =
@@ -184,7 +186,7 @@ module _
 
   abstract
     leq-is-emb-count :
-      {f : A → B} → is-emb f → 
+      {f : A → B} → is-emb f →
       (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
     leq-is-emb-count {f} H = leq-emb-count (pair f H)
 
@@ -234,7 +236,7 @@ module _
   (f : A → B)
   (p : le-ℕ (number-of-elements-count eB) (number-of-elements-count eA))
   where
-    
+
   repetition-le-count : repetition f
   repetition-le-count =
     map-equiv-repetition

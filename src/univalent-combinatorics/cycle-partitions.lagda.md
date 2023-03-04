@@ -1,5 +1,6 @@
 #  Cycle partitions of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cycle-partitions where
 
@@ -13,6 +14,7 @@ open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

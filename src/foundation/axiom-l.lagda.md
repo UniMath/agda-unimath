@@ -1,5 +1,6 @@
 #  Axiom L
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.axiom-l where
 
@@ -22,9 +23,9 @@ open import foundation.univalence
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
-
 
 Axiom L, which is due to Peter Lumsdaine, asserts that for any two types `X` and `Y` in a common universe, the map `X ＝ Y → X ≃ Y` is an embedding. This axiom is a common generalization of the univalence axiom and axiom K, in the sense that both univalence and axiom K imply axiom L.
 

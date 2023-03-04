@@ -1,5 +1,6 @@
 #  The subtype identity principle
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.subtype-identity-principle where
 
@@ -14,6 +15,7 @@ open import foundation-core.propositions
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

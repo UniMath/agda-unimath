@@ -1,5 +1,6 @@
 #  Double negation
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.double-negation where
 
@@ -13,6 +14,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

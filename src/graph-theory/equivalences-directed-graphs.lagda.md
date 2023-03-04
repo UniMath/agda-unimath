@@ -1,5 +1,6 @@
 #  Equivalences of directed graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.equivalences-directed-graphs where
 
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 ```
+</details>
 
 ## Definition
 
@@ -89,7 +91,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
   where
-  
+
   is-equiv-hom-Directed-Graph :
     hom-Directed-Graph G H → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-hom-Directed-Graph f =

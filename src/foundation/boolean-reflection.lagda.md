@@ -1,5 +1,6 @@
 #  Boolean Reflection
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.boolean-reflection where
 
@@ -10,6 +11,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

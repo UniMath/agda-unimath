@@ -1,5 +1,6 @@
 #  Functoriality of W-types
 
+<details><summary>Imports</summary>
 ```agda
 module trees.functoriality-w-types where
 
@@ -23,6 +24,7 @@ open import foundation.universe-levels
 
 open import trees.w-types
 ```
+</details>
 
 ## Idea
 
@@ -74,7 +76,7 @@ abstract
                       ( λ (d : D c) → fib (map-𝕎 D f e) (γ d))
                       ( (equiv-tr D p) ∘e (e a))
                       ( λ b → id-equiv)) ∘e
-                    ( inv-distributive-Π-Σ)) ∘e 
+                    ( inv-distributive-Π-Σ)) ∘e
                   ( equiv-tot
                     ( λ α →
                       equiv-Π

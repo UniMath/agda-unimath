@@ -1,5 +1,6 @@
 #  Saturated carbons
 
+<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.saturated-carbons where
 
@@ -13,6 +14,7 @@ open import univalent-combinatorics.finite-types
 
 open import organic-chemistry.hydrocarbons
 ```
+</details>
 
 ## Idea
 

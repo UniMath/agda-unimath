@@ -1,5 +1,6 @@
 #  Distributivity of set truncation over finite products
 
+<details><summary>Imports</summary>
 ```agda
 module
   univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
@@ -34,6 +35,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ```agda
 -- trunc-Set distributes over Π indexed by Fin
@@ -138,7 +140,7 @@ module _
 
   abstract
     distributive-trunc-Π-count-Set :
-      count A → 
+      count A →
       is-contr
         ( Σ ( ( type-trunc-Set ((x : A) → B x)) ≃
               ( (x : A) → type-trunc-Set (B x)))

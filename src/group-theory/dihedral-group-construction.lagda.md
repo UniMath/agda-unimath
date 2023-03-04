@@ -1,5 +1,6 @@
 #  The dihedral group construction
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.dihedral-group-construction where
 
@@ -15,6 +16,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 # Local types
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.local-types where
 
@@ -16,13 +17,13 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
 
-
 open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 ```
+</details>
 
 ## Idea
 

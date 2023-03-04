@@ -1,5 +1,6 @@
 #  Unordered tuples of elements in commutative monoids
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.unordered-tuples-of-elements-commutative-monoids where
 
@@ -11,6 +12,7 @@ open import foundation.unordered-tuples
 
 open import group-theory.commutative-monoids
 ```
+</details>
 
 ## Definition
 

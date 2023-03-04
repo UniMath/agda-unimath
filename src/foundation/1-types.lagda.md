@@ -1,5 +1,6 @@
 #  1-Types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.1-types where
 
@@ -17,6 +18,7 @@ open import foundation-core.universe-levels
 open import foundation.subuniverses
 open import foundation.truncated-types
 ```
+</details>
 
 ### Being a 1-type is a property
 
@@ -121,7 +123,7 @@ module _
 
   equiv-eq-1-Type : (Y : 1-Type l) → X ＝ Y → type-equiv-1-Type Y
   equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
-  
+
   abstract
     is-contr-total-equiv-1-Type : is-contr (Σ (1-Type l) type-equiv-1-Type)
     is-contr-total-equiv-1-Type =

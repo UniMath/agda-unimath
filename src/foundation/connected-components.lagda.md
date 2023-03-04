@@ -1,5 +1,6 @@
 #  Connected components of types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.connected-components where
 
@@ -17,6 +18,7 @@ open import group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

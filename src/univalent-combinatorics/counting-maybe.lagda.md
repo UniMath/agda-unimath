@@ -1,5 +1,6 @@
 #  Counting the elements in Maybe
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.counting-maybe where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.coproduct-types
 ```
+</details>
 
 ## Idea
 

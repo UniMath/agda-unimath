@@ -1,5 +1,6 @@
 #  Finite monoids
 
+<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.finite-monoids where
 
@@ -27,6 +28,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

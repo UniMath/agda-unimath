@@ -1,5 +1,6 @@
 #  1-Types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.1-types where
 
@@ -12,6 +13,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Definition
 

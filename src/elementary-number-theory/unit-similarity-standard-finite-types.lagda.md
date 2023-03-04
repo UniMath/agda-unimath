@@ -1,5 +1,6 @@
 #  Unit similarity on the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.unit-similarity-standard-finite-types where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Commuting squares of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.commuting-squares-of-maps where
 
@@ -10,6 +11,7 @@ open import foundation-core.universe-levels
 
 open import foundation.equivalences
 ```
+</details>
 
 ## Composing and inverting squares horizontally and vertically
 

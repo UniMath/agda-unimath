@@ -1,5 +1,6 @@
 #  The maybe modality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.maybe where
 
@@ -21,6 +22,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

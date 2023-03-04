@@ -1,9 +1,8 @@
 # Sums of elements in rings
 
-
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.sums-rings where
-
 
 open import elementary-number-theory.natural-numbers
 
@@ -23,6 +22,7 @@ open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -44,7 +44,7 @@ sum-Ring R = sum-Semiring (semiring-Ring R)
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   sum-one-element-Ring :
     (f : functional-vec-Ring R 1) → sum-Ring R 1 f ＝ head-functional-vec 0 f
   sum-one-element-Ring = sum-one-element-Semiring (semiring-Ring R)

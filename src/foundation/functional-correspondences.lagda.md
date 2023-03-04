@@ -1,5 +1,6 @@
 #  Functional correspondences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functional-correspondences where
 
@@ -16,6 +17,7 @@ open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

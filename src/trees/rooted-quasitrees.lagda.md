@@ -1,5 +1,6 @@
 #  Rooted quasitrees
 
+<details><summary>Imports</summary>
 ```agda
 module trees.rooted-quasitrees where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

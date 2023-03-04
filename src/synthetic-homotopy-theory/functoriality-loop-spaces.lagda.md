@@ -1,5 +1,6 @@
 # Functoriality of the loop space operation
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.functoriality-loop-spaces where
 
@@ -16,6 +17,7 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ## Idea
 
@@ -33,7 +35,7 @@ module _
     tr-type-Ω
       ( preserves-point-pointed-map A B f)
       ( ap (map-pointed-map A B f) p)
-  
+
   preserves-refl-map-Ω : Id (map-Ω refl) refl
   preserves-refl-map-Ω = preserves-refl-tr-Ω (pr2 f)
 

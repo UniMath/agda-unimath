@@ -1,5 +1,6 @@
 #  Type arithmetic with the empty type
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-empty-type where
 
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -68,7 +70,7 @@ module _
       inv-pr1-prod-is-empty
       issec-inv-pr1-prod-is-empty
       isretr-inv-pr1-prod-is-empty
-  
+
   left-zero-law-prod-is-empty : (A × B) ≃ A
   pr1 left-zero-law-prod-is-empty = pr1
   pr2 left-zero-law-prod-is-empty = is-equiv-pr1-prod-is-empty
@@ -119,7 +121,7 @@ module _
       inv-pr2-prod-is-empty
       issec-inv-pr2-prod-is-empty
       isretr-inv-pr2-prod-is-empty
-  
+
   right-zero-law-prod-is-empty : (A × B) ≃ B
   pr1 right-zero-law-prod-is-empty = pr2
   pr2 right-zero-law-prod-is-empty = is-equiv-pr2-prod-is-empty
@@ -131,10 +133,10 @@ module _
 module _
   {l : Level} (A : UU l)
   where
-  
+
   map-right-absorption-Σ : Σ A (λ x → empty) → empty
   map-right-absorption-Σ (pair x ())
-  
+
   is-equiv-map-right-absorption-Σ : is-equiv map-right-absorption-Σ
   is-equiv-map-right-absorption-Σ = is-equiv-is-empty' map-right-absorption-Σ
 
@@ -152,11 +154,11 @@ module _
 
   map-left-absorption-Σ : Σ empty A → empty
   map-left-absorption-Σ = pr1
-  
+
   is-equiv-map-left-absorption-Σ : is-equiv map-left-absorption-Σ
   is-equiv-map-left-absorption-Σ =
     is-equiv-is-empty' map-left-absorption-Σ
-  
+
   left-absorption-Σ : Σ empty A ≃ empty
   pr1 left-absorption-Σ = map-left-absorption-Σ
   pr2 left-absorption-Σ = is-equiv-map-left-absorption-Σ
@@ -168,7 +170,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   map-right-absorption-prod : A × empty → empty
   map-right-absorption-prod = map-right-absorption-Σ A
 
@@ -192,11 +194,11 @@ module _
 
   map-left-absorption-prod : empty × A → empty
   map-left-absorption-prod = map-left-absorption-Σ (λ x → A)
-  
+
   is-equiv-map-left-absorption-prod : is-equiv map-left-absorption-prod
   is-equiv-map-left-absorption-prod =
     is-equiv-map-left-absorption-Σ (λ x → A)
-    
+
   left-absorption-prod : (empty × A) ≃ empty
   left-absorption-prod = left-absorption-Σ (λ x → A)
 
@@ -281,7 +283,7 @@ module _
   is-equiv-map-left-unit-law-coprod : is-equiv map-left-unit-law-coprod
   is-equiv-map-left-unit-law-coprod =
     is-equiv-map-left-unit-law-coprod-is-empty empty B id
-  
+
   left-unit-law-coprod : (empty + B) ≃ B
   left-unit-law-coprod = left-unit-law-coprod-is-empty empty B id
 
@@ -299,7 +301,7 @@ module _
   map-right-unit-law-coprod-is-empty : A + B → A
   map-right-unit-law-coprod-is-empty (inl a) = a
   map-right-unit-law-coprod-is-empty (inr b) = ex-falso (H b)
-  
+
   map-inv-right-unit-law-coprod-is-empty : A → A + B
   map-inv-right-unit-law-coprod-is-empty = inl
 

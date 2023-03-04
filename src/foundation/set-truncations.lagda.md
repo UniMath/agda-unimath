@@ -1,5 +1,6 @@
 #  Set truncations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.set-truncations where
 
@@ -39,6 +40,7 @@ open import foundation.universal-property-set-quotients
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -80,7 +82,7 @@ equiv-dependent-universal-property-trunc-Set :
   ((x : type-trunc-Set A) → type-Set (B x)) ≃
   ((a : A) → type-Set (B (unit-trunc-Set a)))
 equiv-dependent-universal-property-trunc-Set = equiv-dependent-universal-property-trunc
-  
+
 module _
   {l1 : Level} {A : UU l1}
   where
@@ -402,7 +404,7 @@ module _
   map-equiv-uniqueness-trunc-Set' : type-Set B → type-trunc-Set A
   map-equiv-uniqueness-trunc-Set' =
     map-equiv equiv-uniqueness-trunc-Set'
-  
+
   triangle-uniqueness-trunc-Set' :
     (map-equiv-uniqueness-trunc-Set' ∘ f) ~ unit-trunc-Set
   triangle-uniqueness-trunc-Set' =

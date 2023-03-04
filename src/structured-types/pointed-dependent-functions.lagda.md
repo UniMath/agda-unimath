@@ -1,5 +1,6 @@
 #  Pointed dependent functions
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-dependent-functions where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

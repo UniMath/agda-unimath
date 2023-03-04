@@ -1,5 +1,6 @@
 #  Powersets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.powersets where
 
@@ -19,6 +20,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 
@@ -35,7 +37,7 @@ module _
     {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
   inclusion-rel-subtype-Prop P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
-  
+
   _⊆_ :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
   P ⊆ Q = type-Prop (inclusion-rel-subtype-Prop P Q)
@@ -83,7 +85,7 @@ module _
 module _
   {l1 : Level} (A : UU l1)
   where
-  
+
   powerset-Large-Preorder :
     Large-Preorder (λ l → l1 ⊔ lsuc l) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   type-Large-Preorder powerset-Large-Preorder l = subtype l A

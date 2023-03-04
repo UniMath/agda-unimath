@@ -1,5 +1,6 @@
 # Least upper bounds in posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.least-upper-bounds-posets where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 
@@ -146,7 +148,7 @@ module _
     {l : Level} {I : UU l} (f : I → element-Poset P) → UU (l1 ⊔ l2 ⊔ l)
   has-least-upper-bound-family-Poset f =
     Σ (element-Poset P) (is-least-upper-bound-family-Poset f)
-    
+
   all-elements-equal-has-least-upper-bound-family-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) →
     all-elements-equal (has-least-upper-bound-family-Poset f)

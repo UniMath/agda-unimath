@@ -1,5 +1,6 @@
 #  Type arithmetic for cartesian product types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.type-arithmetic-cartesian-product-types where
 
@@ -13,6 +14,7 @@ open import foundation-core.identity-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -30,7 +32,7 @@ module _
   map-commutative-prod : A × B → B × A
   pr1 (map-commutative-prod (pair a b)) = b
   pr2 (map-commutative-prod (pair a b)) = a
-  
+
   map-inv-commutative-prod : B × A → A × B
   pr1 (map-inv-commutative-prod (pair b a)) = a
   pr2 (map-inv-commutative-prod (pair b a)) = b
@@ -61,7 +63,7 @@ module _
 module _
   {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
   where
-  
+
   map-assoc-prod : (A × B) × C → A × (B × C)
   map-assoc-prod = map-assoc-Σ A (λ x → B) (λ w → C)
 

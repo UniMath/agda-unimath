@@ -1,5 +1,6 @@
 #  The congruence relations on the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.congruence-natural-numbers where
 
@@ -17,6 +18,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Properties
 

@@ -1,5 +1,6 @@
 #  Graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.directed-graphs where
 
@@ -10,6 +11,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.equivalences
 ```
+</details>
 
 ## Idea
 
@@ -100,18 +102,18 @@ module equiv {l1 l2 : Level} where
 #### Equivalence between Directed-Graph definitions
 
 The two definitions given above for directed graphs are equivalent. $\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$.
-We use these lemmas in the following calculation ASDFASD:
+We use these lemmas in the following calculation:
 
-\begin{equation}
+$$\begin{equation}
 \begin{split}
 \sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
  (V \times V \to \mathcal{U}) \\
  &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
 &\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
 \end{split}
-\end{equation}
+\end{equation}$$
 
-
+<!-- 
 ```
 module directed-graph-defs-equivalence
   {l1 l2 : Level} where
@@ -139,4 +141,5 @@ module directed-graph-defs-equivalence
 -- Show that Directed-Graph is pre-category
 -- + iso corresponds to equiv.
 -- Instance of
-```
+``` 
+-->

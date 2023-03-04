@@ -1,5 +1,6 @@
 #  The W-type of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module trees.w-type-of-natural-numbers where
 
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 
 open import trees.w-types
 ```
+</details>
 
 ## Definition
 

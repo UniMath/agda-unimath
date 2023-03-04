@@ -1,5 +1,6 @@
 #  Locally small types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.locally-small-types where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.small-types
 ```
+</details>
 
 ## Idea
 

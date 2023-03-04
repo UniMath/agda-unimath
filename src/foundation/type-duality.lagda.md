@@ -1,5 +1,6 @@
 #  Type duality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-duality where
 
@@ -37,6 +38,7 @@ open import foundation.universe-levels
 open import foundation-core.fibers-of-maps
 open import foundation-core.injective-maps
 ```
+</details>
 
 ## Idea
 
@@ -155,7 +157,7 @@ pr2 (emb-type-duality H) =
 module _
   {l l1 : Level} {A : UU l1} (H : is-small l A)
   where
-  
+
   map-inv-type-duality :
     type-exp-UU l A → type-polynomial-endofunctor-UU l A
   pr1 (map-inv-type-duality B) =
@@ -165,7 +167,7 @@ module _
     ( map-inv-equiv
       ( equiv-is-small
         ( is-small-Σ {l3 = l} {l4 = l} H (λ a → is-small' {l} {B a}))))
-  
+
   issec-map-inv-type-duality :
     ( map-type-duality (is-locally-small-is-small H) ∘ map-inv-type-duality) ~
     id
@@ -219,7 +221,7 @@ module _
       ( is-emb-map-type-duality (is-locally-small-is-small H))
       ( issec-map-inv-type-duality
         ( map-type-duality (is-locally-small-is-small H) X))
-  
+
   is-equiv-map-type-duality :
     is-equiv (map-type-duality (is-locally-small-is-small H))
   is-equiv-map-type-duality =

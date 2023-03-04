@@ -1,5 +1,6 @@
 #  Rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.rings where
 
@@ -30,6 +31,7 @@ open import ring-theory.semirings
 
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 
@@ -186,7 +188,7 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   has-negatives-Ring : is-group' (additive-semigroup-Ring R) (has-zero-Ring R)
   has-negatives-Ring = has-negatives-Ab (ab-Ring R)
 
@@ -208,7 +210,7 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   has-associative-mul-Ring : has-associative-mul-Set (set-Ring R)
   has-associative-mul-Ring = pr1 (pr2 R)
 
@@ -227,7 +229,7 @@ module _
     (x y z : type-Ring R) →
     Id (mul-Ring (mul-Ring x y) z) (mul-Ring x (mul-Ring y z))
   associative-mul-Ring = pr2 has-associative-mul-Ring
-  
+
   multiplicative-semigroup-Ring : Semigroup l
   pr1 multiplicative-semigroup-Ring = set-Ring R
   pr2 multiplicative-semigroup-Ring = has-associative-mul-Ring
@@ -332,7 +334,7 @@ module _
 
   neg-one-Ring : type-Ring R
   neg-one-Ring = neg-Ring R (one-Ring R)
-  
+
   mul-neg-one-Ring :
     (x : type-Ring R) → Id (mul-Ring R neg-one-Ring x) (neg-Ring R x)
   mul-neg-one-Ring x =
@@ -402,7 +404,7 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   add-list-Ring : list (type-Ring R) → type-Ring R
   add-list-Ring = add-list-Ab (ab-Ring R)
 

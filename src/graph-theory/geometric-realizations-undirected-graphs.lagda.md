@@ -1,5 +1,6 @@
 #  Geometric realizations of undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.geometric-realizations-undirected-graphs where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import graph-theory.reflecting-maps-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Standard finite trees
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.standard-finite-trees where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

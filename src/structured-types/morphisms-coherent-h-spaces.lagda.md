@@ -1,5 +1,6 @@
 #  Morphisms of coherent H-spaces
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-coherent-h-spaces where
 
@@ -15,6 +16,7 @@ open import group-theory.homomorphisms-semigroups
 open import structured-types.pointed-maps
 open import structured-types.coherent-h-spaces
 ```
+</details>
 
 ## Idea
 
@@ -98,7 +100,7 @@ preserves-coh-unit-laws-mul' :
     ( pr2 f)
     ( μf) →
   UU l2
-preserves-coh-unit-laws-mul' M N f μf lf rf =     
+preserves-coh-unit-laws-mul' M N f μf lf rf =
   Id { A =
        Id (ap (pr1 f) (lM eM) ∙ ef) ((μf eM eM ∙ ap-binary μN ef ef) ∙ rN eN)}
      ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
@@ -172,7 +174,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
   rN = right-unit-law-mul-Coherent-H-Space N
   cN = coh-unit-laws-mul-Coherent-H-Space N
   ef = pr2 f
-  
+
 preserves-unital-mul :
   {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
   (f : pointed-type-Coherent-H-Space M →* pointed-type-Coherent-H-Space N) →

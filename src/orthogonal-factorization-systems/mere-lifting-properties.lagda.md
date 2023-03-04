@@ -1,5 +1,6 @@
 # Mere lifting properties
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.mere-lifting-properties where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.pullback-hom
 ```
+</details>
 
 ## Idea
 

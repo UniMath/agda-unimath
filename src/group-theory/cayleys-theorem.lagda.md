@@ -1,5 +1,6 @@
 #  Cayley's theorem
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.cayleys-theorem where
 
@@ -15,16 +16,17 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.symmetric-groups
 ```
+</details>
 
 ```agda
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   map-Cayleys-theorem :
     type-Group G → type-Group (symmetric-Group (set-Group G))
   map-Cayleys-theorem x = equiv-mul-Group G x
-  
+
   preserves-mul-map-Cayleys-theorem :
     preserves-mul-Group G (symmetric-Group (set-Group G)) map-Cayleys-theorem
   preserves-mul-map-Cayleys-theorem x y =

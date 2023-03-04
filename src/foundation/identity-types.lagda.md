@@ -1,5 +1,6 @@
 #  Identity types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.identity-types where
 
@@ -15,6 +16,7 @@ open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 ```
+</details>
 
 ## Idea
 

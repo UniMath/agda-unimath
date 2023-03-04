@@ -40,7 +40,6 @@ is-ramsey-set {l} {k} q r A =
 is-ramsey-set-empty-coloring : (r : ℕ) → is-ramsey-set ex-falso r empty-𝔽
 is-ramsey-set-empty-coloring zero-ℕ c = {!!}
 is-ramsey-set-empty-coloring (succ-ℕ r) c = {!!}
-  
 
 is-ramsey-set-Fin-r :
   {k : ℕ} (q : Fin k → ℕ) (r : ℕ) → fib q r → is-ramsey-set q r (Fin-𝔽 r)

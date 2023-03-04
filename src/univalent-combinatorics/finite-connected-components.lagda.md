@@ -1,5 +1,6 @@
 #  Finiteness of the type of connected components
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.finite-connected-components where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 

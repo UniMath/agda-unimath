@@ -1,5 +1,6 @@
 #  Fibers of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.fibers-of-maps where
 
@@ -19,6 +20,7 @@ open import foundation-core.universe-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 ```
+</details>
 
 ## Properties
 

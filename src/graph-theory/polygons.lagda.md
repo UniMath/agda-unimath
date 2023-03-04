@@ -1,5 +1,6 @@
 #  Polygons
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.polygons where
 
@@ -25,6 +26,7 @@ open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 
@@ -70,7 +72,7 @@ Polygon k =
 module _
   (k : ℕ) (X : Polygon k)
   where
-  
+
   undirected-graph-Polygon : Undirected-Graph lzero lzero
   undirected-graph-Polygon = pr1 X
 
@@ -135,9 +137,9 @@ is-set-vertex-standard-polygon-Undirected-Graph k = is-set-ℤ-Mod k
 module _
   (k : ℕ) (p : unordered-pair-vertices-standard-polygon-Undirected-Graph k)
   where
-  
+
   is-emb-element-unordered-pair-edge-standard-polygon-Undirected-Graph :
-    edge-standard-polygon-Undirected-Graph k p → 
+    edge-standard-polygon-Undirected-Graph k p →
     is-emb (element-unordered-pair p)
   is-emb-element-unordered-pair-edge-standard-polygon-Undirected-Graph e =
     is-emb-is-injective

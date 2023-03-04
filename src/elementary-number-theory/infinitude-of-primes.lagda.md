@@ -1,5 +1,6 @@
 #  The infinitude of primes
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.infinitude-of-primes where
 
@@ -27,6 +28,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

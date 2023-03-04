@@ -1,5 +1,6 @@
 #  Exponentiation of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.exponentiation-natural-numbers where
 
@@ -12,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Isomorphisms of rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.isomorphisms-rings where
 
@@ -28,6 +29,7 @@ open import group-theory.isomorphisms-abelian-groups
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Definition
 
@@ -163,7 +165,7 @@ iso-eq-Ring R1 .R1 refl = id-iso-Ring R1
 
 {- We first show that a ring homomorphism is an isomorphism if and only if
    the underlying homomorphism of abelian groups is an isomorphism. -}
-   
+
 is-iso-hom-Ab-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ring R1 R2 → UU (l1 ⊔ l2)
@@ -174,7 +176,7 @@ is-iso-hom-Ab-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   is-iso-hom-Ring R1 R2 f →
   is-iso-hom-Ab-hom-Ring R1 R2 f
-is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f = 
+is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f =
   pair ( hom-ab-hom-Ring R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
        ( pair
          ( ap ( hom-ab-hom-Ring R2 R2)
@@ -227,7 +229,7 @@ preserves-one-inv-is-iso-hom-Ab :
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f)
   ( pres-unit-f : preserves-one-hom-Ab R1 R2 f) →
   preserves-one-hom-Ab R2 R1
-    ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f) 
+    ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
 preserves-one-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
   ( inv
     ( ap
@@ -411,7 +413,7 @@ is-equiv-iso-eq-Ring R =
   fundamental-theorem-id
     ( is-contr-total-iso-Ring R)
     ( iso-eq-Ring R)
-    
+
 eq-iso-Ring :
   { l : Level} (R S : Ring l) → iso-Ring R S → Id R S
 eq-iso-Ring R S = map-inv-is-equiv (is-equiv-iso-eq-Ring R S)

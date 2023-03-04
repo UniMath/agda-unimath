@@ -1,11 +1,13 @@
 #  Negation
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.negation where
 
 open import foundation-core.empty-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

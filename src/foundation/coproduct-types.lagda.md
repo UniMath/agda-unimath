@@ -1,5 +1,6 @@
 #  Coproduct types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.coproduct-types where
 
@@ -19,6 +20,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ### The predicates of being in the left and in the right summand
 
@@ -26,7 +28,7 @@ open import foundation.universe-levels
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   is-left-Prop : X + Y → Prop lzero
   is-left-Prop (inl x) = unit-Prop
   is-left-Prop (inr x) = empty-Prop
@@ -61,7 +63,7 @@ module _
   is-injective-inl refl = refl
 
   is-injective-inr : is-injective {B = A + B} inr
-  is-injective-inr refl = refl 
+  is-injective-inr refl = refl
 
   neq-inl-inr : {x : A} {y : B} → ¬ (inl x ＝ inr y)
   neq-inl-inr ()
@@ -92,7 +94,7 @@ module _
     (map-inv-equiv-left-summand ∘ map-equiv-left-summand) ~ id
   isretr-map-inv-equiv-left-summand (pair (inl x) star) = refl
   isretr-map-inv-equiv-left-summand (pair (inr x) ())
-  
+
   equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
   pr2 equiv-left-summand =
@@ -124,7 +126,7 @@ module _
     (map-inv-equiv-right-summand ∘ map-equiv-right-summand) ~ id
   isretr-map-inv-equiv-right-summand (pair (inl x) ())
   isretr-map-inv-equiv-right-summand (pair (inr x) star) = refl
-  
+
   equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
@@ -167,7 +169,7 @@ module _
       ex-falso (f p' q)
     all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inr q') =
       ap inr (is-prop-Q q q')
-  
+
   abstract
     is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (P + Q)
     is-prop-coprod f is-prop-P is-prop-Q =

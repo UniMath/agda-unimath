@@ -1,5 +1,6 @@
 #  Counting the elements of dependent pair types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.counting-dependent-pair-types where
 
@@ -32,6 +33,7 @@ open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -90,7 +92,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
     (f : (x : A) → count (B x)) →
     Id ( number-of-elements-count (count-Σ' k e f))
-      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))) 
+      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x))))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coprod

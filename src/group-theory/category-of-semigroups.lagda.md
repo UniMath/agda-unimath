@@ -1,5 +1,6 @@
 #  The category of semigroups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.category-of-semigroups where
 
@@ -15,6 +16,7 @@ open import group-theory.isomorphisms-semigroups
 open import group-theory.precategory-of-semigroups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 
@@ -26,7 +28,7 @@ Since isomorphic semigroups are equal, the precategory of semigroups is a catego
 is-category-Semigroup :
   is-category-Large-Precat Semigroup-Large-Precat
 is-category-Semigroup G =
-  fundamental-theorem-id 
+  fundamental-theorem-id
     ( is-contr-total-iso-Semigroup G)
     ( iso-eq-Semigroup G)
 

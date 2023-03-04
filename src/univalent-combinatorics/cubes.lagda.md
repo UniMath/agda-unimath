@@ -1,5 +1,6 @@
 #  Cubes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cubes where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Definitions
 
@@ -23,7 +25,7 @@ cube k = Σ (UU-Fin lzero k) (λ X → type-UU-Fin k X → UU-Fin lzero 2)
 module _
   (k : ℕ) (X : cube k)
   where
-  
+
   dim-cube-UU-Fin : UU-Fin lzero k
   dim-cube-UU-Fin = pr1 X
 

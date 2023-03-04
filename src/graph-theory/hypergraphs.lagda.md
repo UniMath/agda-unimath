@@ -1,5 +1,6 @@
 #  Hypergraphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.hypergraphs where
 
@@ -9,6 +10,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 ```
+</details>
 
 ## Idea
 

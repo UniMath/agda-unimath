@@ -1,5 +1,6 @@
 # Posets
 
+<details><summary>Imports</summary>
 ```agda
 module order-theory.posets where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 

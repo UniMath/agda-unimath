@@ -1,14 +1,15 @@
-# Homomorphisms Sup Lattices 
+# Homomorphisms Sup Lattices
 
+<details><summary>Imports</summary>
 ```agda
 
 module order-theory.homomorphisms-sup-lattices where
 
 open import foundation.functions
-open import foundation.cartesian-product-types 
-open import foundation.dependent-pair-types 
-open import foundation.propositions 
-open import foundation.subtypes 
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.identity-types
 open import foundation.sets
@@ -20,10 +21,10 @@ open import order-theory.sup-lattices
 open import order-theory.order-preserving-maps-posets
 
 ```
+</details>
 
 ## Idea
-A sup lattice homomorphism is a order preserving map between the underlying posets that additionally preserves sups (or arbitrary joins of subsets). 
-
+A sup lattice homomorphism is a order preserving map between the underlying posets that additionally preserves sups (or arbitrary joins of subsets).
 
 ```agda
 

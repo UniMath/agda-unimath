@@ -1,5 +1,6 @@
 #  Sequences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.sequences where
 
@@ -8,6 +9,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.functions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Inequality on types equipped with a counting
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.inequality-types-with-counting where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

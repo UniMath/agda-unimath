@@ -1,5 +1,6 @@
 #  Projective types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.projective-types where
 
@@ -13,6 +14,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

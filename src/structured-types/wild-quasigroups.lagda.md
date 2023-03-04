@@ -1,5 +1,6 @@
 #  Wild quasigroups
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-quasigroups where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import structured-types.magmas
 ```
+</details>
 
 ## Idea
 

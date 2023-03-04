@@ -1,5 +1,6 @@
 #  Impredicative encodings of the logical operations
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.impredicative-encodings where
 
@@ -18,6 +19,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -129,7 +131,7 @@ map-impredicative-disj-Prop {l1} {l2} P1 P2 =
       ( λ x → type-impredicative-disj-Prop P1 P2)
       ( λ x Q f1 f2 → f1 x)
       ( λ y Q f1 f2 → f2 y))
-  
+
 inv-map-impredicative-disj-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-disj-Prop P1 P2 → type-disj-Prop P1 P2

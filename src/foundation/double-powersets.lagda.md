@@ -1,5 +1,6 @@
 #  Double powersets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.double-powersets where
 
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import order-theory.large-posets
 open import order-theory.posets
 ```
+</details>
 
 ## Definitions
 
@@ -23,7 +25,7 @@ open import order-theory.posets
 module _
   {l1 : Level} (l2 : Level)
   where
-  
+
   double-powerset-Large-Poset :
     UU l1 →
     Large-Poset
@@ -54,7 +56,7 @@ intersection-double-powerset F a =
 module _
   {l1 l2 l3 : Level} {A : UU l1} (F : double-powerset l2 l3 A)
   where
-  
+
   inclusion-intersection-double-powerset :
     (X : type-subtype F) →
     intersection-double-powerset F ⊆ inclusion-subtype F X

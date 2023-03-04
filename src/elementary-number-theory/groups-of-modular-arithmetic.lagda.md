@@ -1,5 +1,6 @@
 #  The groups ℤ/kℤ
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.groups-of-modular-arithmetic where
 
@@ -13,6 +14,7 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

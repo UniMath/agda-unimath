@@ -1,5 +1,6 @@
 #  Morphisms of magmas
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-magmas where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import structured-types.magmas
 ```
+</details>
 
 ## Idea
 
@@ -20,7 +22,7 @@ A morphism of magmas from `M` to `N` is a map between their underlying type that
 module _
   {l1 l2 : Level} (M : Magma l1) (N : Magma l2)
   where
-  
+
   preserves-mul-Magma : (type-Magma M → type-Magma N) → UU (l1 ⊔ l2)
   preserves-mul-Magma f =
     (x y : type-Magma M) → Id (f (mul-Magma M x y)) (mul-Magma N (f x) (f y))

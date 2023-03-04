@@ -1,5 +1,6 @@
 #  The Collatz bijection
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.collatz-bijection where
 
@@ -13,6 +14,7 @@ open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 

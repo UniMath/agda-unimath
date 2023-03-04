@@ -1,5 +1,6 @@
 # Extensions of maps
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where
 
@@ -29,6 +30,7 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
 ```
+</details>
 
 ## Idea
 
@@ -191,7 +193,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : B → UU l3} {X : UU l4}
-  {i : A → B} {f : (x : A) → P (i x)} {g : (y : B) → P y} 
+  {i : A → B} {f : (x : A) → P (i x)} {g : (y : B) → P y}
   where
 
   is-extension-right-whisker :
@@ -205,7 +207,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
-  
+
   postcomp-extension :
     (f : A → B) (i : A → X) (g : X → Y) →
     extension f i → extension f (g ∘ i)
@@ -221,7 +223,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   {P : B → UU l3}
-  (f : (x : A) → P (i x)) 
+  (f : (x : A) → P (i x))
   where
 
   coherence-htpy-extension :
@@ -229,12 +231,12 @@ module _
     map-extension e ~ map-extension e' → UU (l1 ⊔ l3)
   coherence-htpy-extension e e' K =
     (is-extension-map-extension e ∙h (K ·r i)) ~ is-extension-map-extension e'
-  
+
   htpy-extension : (e e' : extension-Π i P f) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-extension e e' =
     Σ ( map-extension e ~ map-extension e')
       ( coherence-htpy-extension e e')
-  
+
   refl-htpy-extension : (e : extension-Π i P f) → htpy-extension e e
   pr1 (refl-htpy-extension e) = refl-htpy
   pr2 (refl-htpy-extension e) = right-unit-htpy
@@ -243,7 +245,7 @@ module _
     (e e' : extension-Π i P f) → e ＝ e' → htpy-extension e e'
   htpy-eq-extension e .e refl = refl-htpy-extension e
 
-  is-contr-total-htpy-extension : 
+  is-contr-total-htpy-extension :
     (e : extension-Π i P f) →
     is-contr (Σ (extension-Π i P f) (htpy-extension e))
   is-contr-total-htpy-extension e =
@@ -259,7 +261,7 @@ module _
     fundamental-theorem-id
       ( is-contr-total-htpy-extension e)
       ( htpy-eq-extension e)
-  
+
   extensionality-extension-Π :
     (e e' : extension-Π i P f) → (e ＝ e') ≃ (htpy-extension e e')
   pr1 (extensionality-extension-Π e e') = htpy-eq-extension e e'
@@ -352,7 +354,7 @@ module _
     (f : (x : A) → P (i x)) → fib' (precomp-Π i P) f ≃ extension-Π i P f
   equiv-fib'-precomp-extension-Π f =
     equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
-  
+
   equiv-fib-precomp-extension-Π :
     (f : (x : A) → P (i x)) → fib (precomp-Π i P) f ≃ extension-Π i P f
   equiv-fib-precomp-extension-Π f =

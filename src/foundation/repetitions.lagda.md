@@ -1,5 +1,6 @@
 #  Repetitions of values of maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.repetitions where
 
@@ -16,6 +17,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.truncated-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -32,7 +34,7 @@ module _
     (f : A → B) (p : pair-of-distinct-elements A) → UU l2
   is-repetition-pair-of-distinct-elements f p =
     f (fst-pair-of-distinct-elements p) ＝ f (snd-pair-of-distinct-elements p)
-  
+
   repetition : (A → B) → UU (l1 ⊔ l2)
   repetition f =
     Σ (pair-of-distinct-elements A) (is-repetition-pair-of-distinct-elements f)

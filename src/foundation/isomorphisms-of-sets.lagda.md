@@ -1,5 +1,6 @@
 #  Isomorphisms of sets
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.isomorphisms-of-sets where
 
@@ -14,6 +15,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

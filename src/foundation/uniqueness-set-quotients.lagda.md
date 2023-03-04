@@ -1,5 +1,6 @@
 #  The uniqueness of set quotients
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-set-quotients where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 
@@ -117,7 +119,7 @@ module _
     ({l : Level} → is-set-quotient l R C g) →
     is-equiv h
   is-equiv-is-set-quotient-is-set-quotient Uf Ug =
-    is-equiv-has-inverse 
+    is-equiv-has-inverse
       ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
@@ -156,7 +158,7 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B)) 
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
   (Uf : {l : Level} → is-set-quotient l R B f)
   (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
   (Ug : {l : Level} → is-set-quotient l R C g)

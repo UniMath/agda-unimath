@@ -1,5 +1,6 @@
 #  Wild loops
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-loops where
 
@@ -15,6 +16,7 @@ open import structured-types.magmas
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
+</details>
 
 ## Idea
 

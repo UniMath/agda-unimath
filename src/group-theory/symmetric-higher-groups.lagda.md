@@ -1,5 +1,6 @@
 #  Symmetric higher groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.symmetric-higher-groups where
 
@@ -13,6 +14,7 @@ open import group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +44,7 @@ module _
     is-0-connected classifying-type-symmetric-∞-Group
   is-0-connected-classifying-type-symmetric-∞-Group =
     is-0-connected-component-UU X
-  
+
   symmetric-∞-Group : ∞-Group (lsuc l)
   symmetric-∞-Group =
     pair

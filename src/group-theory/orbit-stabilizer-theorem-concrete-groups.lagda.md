@@ -1,5 +1,6 @@
 #  The orbit-stabilizer theorem for concrete groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.orbit-stabilizer-theorem-concrete-groups where
 
@@ -23,6 +24,7 @@ open import group-theory.transitive-concrete-group-actions
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

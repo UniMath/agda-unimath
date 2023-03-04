@@ -1,5 +1,6 @@
 #  Directed trees
 
+<details><summary>Imports</summary>
 ```agda
 module trees.directed-trees where
 
@@ -27,6 +28,7 @@ open import foundation.universe-levels
 open import graph-theory.directed-graphs
 open import graph-theory.walks-directed-graphs
 ```
+</details>
 
 ## Idea
 

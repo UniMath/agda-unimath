@@ -1,5 +1,6 @@
 #  Addition on the rationals
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-rationals where
 
@@ -15,6 +16,7 @@ open import foundation.propositions
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+</details>
 
 ## Idea
 

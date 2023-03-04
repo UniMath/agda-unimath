@@ -2,6 +2,7 @@
 
 Contributors: Egbert Rijke.
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.multiplication-circle where
 
@@ -17,6 +18,7 @@ open import structured-types.pointed-maps
 
 open import synthetic-homotopy-theory.circle
 ```
+</details>
 
 ## Idea
 

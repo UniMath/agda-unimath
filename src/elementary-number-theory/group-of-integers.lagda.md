@@ -1,5 +1,6 @@
 #  The group of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.group-of-integers where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

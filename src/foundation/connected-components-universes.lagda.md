@@ -1,5 +1,6 @@
 #  Connected components of universes
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.connected-components-universes where
 
@@ -20,6 +21,7 @@ open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

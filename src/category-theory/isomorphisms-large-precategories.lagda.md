@@ -1,5 +1,6 @@
 #  Isomorphisms in large precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.isomorphisms-large-precategories where
 
@@ -12,6 +13,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

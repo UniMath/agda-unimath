@@ -1,5 +1,6 @@
 #  Type arithmetic with dependent function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-dependent-function-types where
 
@@ -14,6 +15,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 
@@ -44,7 +46,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : A → B → UU l3}
   where
-  
+
   swap-Π : ((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)
   swap-Π f y x = f x y
 

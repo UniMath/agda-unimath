@@ -1,5 +1,6 @@
 #  Multiplication of integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-integers where
 
@@ -24,6 +25,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -458,7 +460,7 @@ is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ x)
 is-emb-mul-ℤ x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ x f)
 
 is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ' x)
-is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)  
+is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)
 ```
 
 ```agda

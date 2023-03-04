@@ -1,5 +1,6 @@
 #  Slice precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.slice-precategories where
 
@@ -24,6 +25,7 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Natural transformations between functors on precategories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.natural-transformations-precategories where
 
@@ -17,6 +18,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

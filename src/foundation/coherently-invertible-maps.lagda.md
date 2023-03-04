@@ -1,5 +1,6 @@
 #  Coherently invertible maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.coherently-invertible-maps where
 
@@ -21,6 +22,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Properties
 

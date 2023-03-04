@@ -1,5 +1,6 @@
 #  Semirings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.semirings where
 
@@ -28,6 +29,7 @@ open import group-theory.semigroups
 
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 
@@ -187,7 +189,7 @@ module _
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   has-associative-mul-Semiring : has-associative-mul-Set (set-Semiring R)
   has-associative-mul-Semiring = pr1 (pr1 (pr2 R))
 
@@ -206,7 +208,7 @@ module _
     (x y z : type-Semiring R) →
     Id (mul-Semiring (mul-Semiring x y) z) (mul-Semiring x (mul-Semiring y z))
   associative-mul-Semiring = pr2 has-associative-mul-Semiring
-  
+
   multiplicative-semigroup-Semiring : Semigroup l
   pr1 multiplicative-semigroup-Semiring = set-Semiring R
   pr2 multiplicative-semigroup-Semiring = has-associative-mul-Semiring

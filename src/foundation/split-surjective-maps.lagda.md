@@ -1,5 +1,6 @@
 #  Split surjective maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.split-surjective-maps where
 
@@ -16,6 +17,7 @@ open import foundation-core.sections
 open import foundation.type-theoretic-principle-of-choice
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

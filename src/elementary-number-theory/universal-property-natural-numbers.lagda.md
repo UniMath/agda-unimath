@@ -1,5 +1,6 @@
 #  The universal property of the natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.universal-property-natural-numbers where
 
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

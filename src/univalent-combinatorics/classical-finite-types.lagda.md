@@ -1,5 +1,6 @@
 #  The classical definition of the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.classical-finite-types where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

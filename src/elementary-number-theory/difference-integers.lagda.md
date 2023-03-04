@@ -1,5 +1,6 @@
 #  The difference between integers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.difference-integers where
 
@@ -9,6 +10,7 @@ open import foundation.identity-types
 open import foundation.interchange-law
 
 ```
+</details>
 
 # The difference between integers
 

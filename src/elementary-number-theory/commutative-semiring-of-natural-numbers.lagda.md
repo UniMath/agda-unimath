@@ -1,5 +1,6 @@
 # The commutative semiring of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.commutative-semiring-of-natural-numbers where
 
@@ -18,6 +19,7 @@ open import group-theory.semigroups
 
 open import ring-theory.semirings
 ```
+</details>
 
 ## Definition
 

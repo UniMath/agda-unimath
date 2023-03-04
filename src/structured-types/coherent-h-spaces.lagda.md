@@ -1,5 +1,6 @@
 #  Coherent H-spaces
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.coherent-h-spaces where
 
@@ -28,6 +29,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -64,7 +66,7 @@ module _
 
   pointed-type-Coherent-H-Space : Pointed-Type l
   pointed-type-Coherent-H-Space = pr1 M
-  
+
   type-Coherent-H-Space : UU l
   type-Coherent-H-Space = type-Pointed-Type pointed-type-Coherent-H-Space
 

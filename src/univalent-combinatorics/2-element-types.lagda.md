@@ -1,5 +1,6 @@
 #  2-element types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-types where
 
@@ -48,6 +49,7 @@ open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -105,7 +107,7 @@ type-standard-2-Element-Type l = type-2-Element-Type (standard-2-Element-Type l)
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   has-two-elements-equiv : X ≃ Y → has-two-elements X → has-two-elements Y
   has-two-elements-equiv e H = transitive-mere-equiv H (unit-trunc-Prop e)
 
@@ -263,7 +265,7 @@ pr2 equiv-ev-zero-aut-Fin-two-ℕ = is-equiv-ev-zero-aut-Fin-two-ℕ
 module _
   {l1 : Level} (X : 2-Element-Type l1)
   where
-  
+
   abstract
     is-equiv-ev-zero-equiv-Fin-two-ℕ :
       is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {type-2-Element-Type X})
@@ -385,7 +387,7 @@ eq-point-UU-Fin-two-ℕ =
 module _
   {l : Level} (X : 2-Element-Type l)
   where
-  
+
   has-two-elements-Aut-2-Element-Type :
     has-two-elements (Aut (type-2-Element-Type X))
   has-two-elements-Aut-2-Element-Type =
@@ -513,7 +515,7 @@ cases-is-involution-aut-Fin-two-ℕ e (inr star) (inl (inr star)) (inr star) p q
   ap (map-equiv e) p ∙ q
 cases-is-involution-aut-Fin-two-ℕ e (inr star) (inr star) z p q =
   ap (map-equiv e) p ∙ p
-  
+
 is-involution-aut-Fin-two-ℕ : (e : Fin 2 ≃ Fin 2) → is-involution-aut e
 is-involution-aut-Fin-two-ℕ e x =
   cases-is-involution-aut-Fin-two-ℕ e x
@@ -525,7 +527,7 @@ is-involution-aut-Fin-two-ℕ e x =
 module _
   {l : Level} (X : 2-Element-Type l)
   where
-  
+
   is-involution-aut-2-element-type :
     (e : equiv-2-Element-Type X X) → is-involution-aut e
   is-involution-aut-2-element-type e x =
@@ -821,7 +823,7 @@ module _
 module _
   {l1 l2 : Level} (X : 2-Element-Type l1) (Y : 2-Element-Type l2)
   where
-  
+
   is-decidable-is-equiv-2-Element-Type :
     (f : type-2-Element-Type X → type-2-Element-Type Y) →
     is-decidable (is-equiv f)

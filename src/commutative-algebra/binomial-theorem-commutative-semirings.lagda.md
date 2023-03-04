@@ -1,5 +1,6 @@
 # The binomial theorem in commutative semirings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.binomial-theorem-commutative-semirings where
 
@@ -26,6 +27,7 @@ open import ring-theory.binomial-theorem-semirings
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -56,7 +58,7 @@ binomial-sum-Commutative-Semiring R =
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   binomial-sum-one-element-Commutative-Semiring :
     (f : functional-vec-Commutative-Semiring R 1) →
     binomial-sum-Commutative-Semiring R 0 f ＝

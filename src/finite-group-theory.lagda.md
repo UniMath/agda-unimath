@@ -2,9 +2,6 @@
 
 ```agda
 module finite-group-theory where
-```
-
-```agda
 open import finite-group-theory.abstract-quaternion-group public
 open import finite-group-theory.alternating-concrete-groups public
 open import finite-group-theory.alternating-groups public

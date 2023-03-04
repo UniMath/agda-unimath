@@ -1,5 +1,6 @@
 #  Functoriality of dependent function types
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-dependent-function-types where
 
@@ -27,6 +28,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +44,7 @@ module _
   { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
   ( e : A' ≃ A) (f : (a' : A') → B' a' ≃ B (map-equiv e a'))
   where
-  
+
   map-equiv-Π : ((a' : A') → B' a') → ((a : A) → B a)
   map-equiv-Π =
     ( map-Π
@@ -231,7 +233,7 @@ abstract
       ( HTPY-map-equiv-Π B' B e)
       ( htpy-map-equiv-Π-refl-htpy B e)
       e' H f f' K
-  
+
   comp-htpy-map-equiv-Π :
     { l1 l2 l3 l4 : Level}
     { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)

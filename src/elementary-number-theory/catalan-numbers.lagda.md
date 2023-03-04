@@ -1,5 +1,6 @@
 #  Catalan numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.catalan-numbers where
 
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

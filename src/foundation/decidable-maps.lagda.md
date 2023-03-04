@@ -1,5 +1,6 @@
 #  Decidable maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-maps where
 
@@ -12,6 +13,7 @@ open import foundation.identity-types
 open import foundation.retractions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

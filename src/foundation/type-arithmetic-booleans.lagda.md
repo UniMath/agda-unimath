@@ -1,5 +1,6 @@
 #  Type arithmetic with the booleans
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-booleans where
 
@@ -12,6 +13,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

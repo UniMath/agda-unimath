@@ -1,5 +1,6 @@
 # Uncountable sets
 
+<details><summary>Imports</summary>
 ```agda
 module set-theory.uncountable-sets where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import set-theory.countable-sets
 ```
+</details>
 
 ## Definition
 

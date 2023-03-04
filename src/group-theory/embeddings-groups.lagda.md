@@ -1,5 +1,6 @@
 #  Embeddings of groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.embeddings-groups where
 
@@ -11,6 +12,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.groups
 open import group-theory.subgroups
 ```
+</details>
 
 ## Idea
 

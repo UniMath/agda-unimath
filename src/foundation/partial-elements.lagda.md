@@ -1,5 +1,6 @@
 #  Partial elements
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.partial-elements where
 
@@ -8,6 +9,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

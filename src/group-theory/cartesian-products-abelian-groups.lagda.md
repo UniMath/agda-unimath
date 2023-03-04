@@ -1,5 +1,6 @@
 #  Cartesian products of abelian groups
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.cartesian-products-abelian-groups where
 
@@ -15,6 +16,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 

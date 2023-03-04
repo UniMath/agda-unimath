@@ -1,5 +1,6 @@
 #  Equivalences of cubes
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences-cubes where
 
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Definitions
 

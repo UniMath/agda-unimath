@@ -1,5 +1,6 @@
 #  Pushouts
 
+<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.pushouts where
 
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
+</details>
 
 ## Postulates
 

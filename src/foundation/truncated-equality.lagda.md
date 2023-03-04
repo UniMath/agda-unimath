@@ -1,5 +1,6 @@
 #  Truncated equality
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.truncated-equality where
 
@@ -9,6 +10,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

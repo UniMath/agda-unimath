@@ -1,5 +1,6 @@
 #  The E₈-lattice
 
+<details><summary>Imports</summary>
 ```agda
 module group-theory.e8-lattice where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definition
 

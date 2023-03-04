@@ -1,5 +1,6 @@
 #  Large categories
 
+<details><summary>Imports</summary>
 ```agda
 module category-theory.large-categories where
 
@@ -9,6 +10,7 @@ open import category-theory.large-precategories
 open import foundation.equivalences
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

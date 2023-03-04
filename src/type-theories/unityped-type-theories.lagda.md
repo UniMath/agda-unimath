@@ -25,7 +25,7 @@ Unityped type theories are type theories in which all terms have the same type. 
 
 ```agda
 module unityped where
-  
+
   record system (l : Level) : UU (lsuc l)
     where
     coinductive
@@ -39,7 +39,7 @@ module unityped where
     field
       element : Set l
       slice   : system-Set l
-  
+
   record hom-system
     {l1 l2 : Level} (σ : system l1) (T : system l2) : UU (l1 ⊔ l2)
     where
@@ -47,12 +47,12 @@ module unityped where
     field
       element : system.element σ → system.element T
       slice   : hom-system (system.slice σ) (system.slice T)
-  
+
   id-hom-system :
     {l : Level} (σ : system l) → hom-system σ σ
   hom-system.element (id-hom-system σ) = id
   hom-system.slice (id-hom-system σ) = id-hom-system (system.slice σ)
-  
+
   comp-hom-system :
     {l1 l2 l3 : Level} {σ : system l1} {τ : system l2} {υ : system l3}
     (β : hom-system τ υ) (α : hom-system σ τ) → hom-system σ υ
@@ -60,7 +60,7 @@ module unityped where
     hom-system.element β ∘ hom-system.element α
   hom-system.slice (comp-hom-system β α) =
     comp-hom-system (hom-system.slice β) (hom-system.slice α)
-  
+
   record htpy-hom-system
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (g h : hom-system σ τ) :
     UU (l1 ⊔ l2)
@@ -69,7 +69,7 @@ module unityped where
     field
       element : hom-system.element g ~ hom-system.element h
       slice   : htpy-hom-system (hom-system.slice g) (hom-system.slice h)
-  
+
   record weakening
     {l : Level} (σ : system l) : UU l
     where
@@ -77,7 +77,7 @@ module unityped where
     field
       element : hom-system σ (system.slice σ)
       slice   : weakening (system.slice σ)
-  
+
   record preserves-weakening
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (Wσ : weakening σ)
     (Wτ : weakening τ) (h : hom-system σ τ) : UU (l1 ⊔ l2)
@@ -95,7 +95,7 @@ module unityped where
                   ( weakening.slice Wσ)
                   ( weakening.slice Wτ)
                   ( hom-system.slice h)
-  
+
   record substitution
     {l : Level} (σ : system l) : UU l
     where
@@ -104,7 +104,7 @@ module unityped where
       element : (x : system.element σ) →
                 hom-system (system.slice σ) σ
       slice   : substitution (system.slice σ)
-  
+
   record preserves-substitution
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (Sσ : substitution σ)
     (Sτ : substitution τ) (h : hom-system σ τ) : UU (l1 ⊔ l2)
@@ -124,7 +124,7 @@ module unityped where
                   ( substitution.slice Sσ)
                   ( substitution.slice Sτ)
                   ( hom-system.slice h)
-  
+
   record generic-element
     {l : Level} (σ : system l) : UU l
     where
@@ -132,7 +132,7 @@ module unityped where
     field
       element : system.element (system.slice σ)
       slice   : generic-element (system.slice σ)
-  
+
   record preserves-generic-element
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (δσ : generic-element σ)
     (δτ : generic-element τ) (h : hom-system σ τ) : UU (l1 ⊔ l2)
@@ -147,7 +147,7 @@ module unityped where
                   ( generic-element.slice δσ)
                   ( generic-element.slice δτ)
                   ( hom-system.slice h)
-  
+
   record weakening-preserves-weakening
     {l : Level} {σ : system l} (W : weakening σ) : UU l
     where
@@ -158,7 +158,7 @@ module unityped where
                   ( weakening.slice W)
                   ( weakening.element W)
       slice   : weakening-preserves-weakening (weakening.slice W)
-  
+
   record substitution-preserves-substitution
     {l : Level} {σ : system l} (S : substitution σ) : UU l
     where
@@ -170,7 +170,7 @@ module unityped where
                   ( S)
                   ( substitution.element S x)
       slice   : substitution-preserves-substitution (substitution.slice S)
-  
+
   record weakening-preserves-substitution
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
     where
@@ -183,7 +183,7 @@ module unityped where
       slice   : weakening-preserves-substitution
                   ( weakening.slice W)
                   ( substitution.slice S)
-  
+
   record substitution-preserves-weakening
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
     where
@@ -197,7 +197,7 @@ module unityped where
       slice   : substitution-preserves-weakening
                   ( weakening.slice W)
                   ( substitution.slice S)
-  
+
   record weakening-preserves-generic-element
     {l : Level} {σ : system l} (W : weakening σ) (δ : generic-element σ) : UU l
     where
@@ -210,7 +210,7 @@ module unityped where
       slice   : weakening-preserves-generic-element
                   ( weakening.slice W)
                   ( generic-element.slice δ)
-  
+
   record substitution-preserves-generic-element
     {l : Level} {σ : system l} (S : substitution σ) (δ : generic-element σ) :
     UU l
@@ -225,7 +225,7 @@ module unityped where
       slice   : substitution-preserves-generic-element
                   ( substitution.slice S)
                   ( generic-element.slice δ)
-  
+
   record substitution-cancels-weakening
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
     where
@@ -240,7 +240,7 @@ module unityped where
       slice   : substitution-cancels-weakening
                   ( weakening.slice W)
                   ( substitution.slice S)
-  
+
   record generic-element-is-identity
     {l : Level} {σ : system l} (S : substitution σ) (δ : generic-element σ) :
     UU l
@@ -255,7 +255,7 @@ module unityped where
       slice   : generic-element-is-identity
                   ( substitution.slice S)
                   ( generic-element.slice δ)
-  
+
   record substitution-by-generic-element
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ)
     (δ : generic-element σ) : UU l
@@ -273,7 +273,7 @@ module unityped where
                   ( weakening.slice W)
                   ( substitution.slice S)
                   ( generic-element.slice δ)
-  
+
   record type-theory
     (l : Level) : UU (lsuc l)
     where
@@ -336,7 +336,7 @@ module unityped where
     iterated-weakening {l} {A} {succ-ℕ m} {n} x = {!!}
 
     -- hom(X,Y) := Tm(W(X,Y))
-  
+
     hom : {l : Level} (A : type-theory l) → ℕ → ℕ → UU l
     hom A m n = El A (succ-ℕ (add-ℕ m n))
 
@@ -355,7 +355,7 @@ module simple-unityped where
     {l : Level} → unityped.system l → simple.system l unit
   simple.system.element (system A) x = unityped.system.element A
   simple.system.slice (system A) x = system (unityped.system.slice A)
-  
+
   hom-system :
     {l1 l2 : Level} {A : unityped.system l1} {B : unityped.system l2} →
     unityped.hom-system A B →
@@ -374,7 +374,7 @@ module simple-unityped where
   simple.htpy-hom-system.element (id-hom-system A) x = refl-htpy
   simple.htpy-hom-system.slice (id-hom-system A) x =
     id-hom-system (unityped.system.slice A)
-  
+
   comp-hom-system :
     {l1 l2 l3 : Level} {A : unityped.system l1} {B : unityped.system l2}
     {C : unityped.system l3} (g : unityped.hom-system B C)

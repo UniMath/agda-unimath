@@ -1,5 +1,6 @@
 #  Algebras over rings
 
+<details><summary>Imports</summary>
 ```agda
 module ring-theory.algebras-rings where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 open import ring-theory.modules-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

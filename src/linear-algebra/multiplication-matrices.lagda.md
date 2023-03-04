@@ -1,5 +1,6 @@
 # Multiplication of matrices
 
+<details><summary>Imports</summary>
 ```agda
 module linear-algebra.multiplication-matrices where
 
@@ -14,6 +15,7 @@ open import linear-algebra.vectors-on-rings
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Definition
 

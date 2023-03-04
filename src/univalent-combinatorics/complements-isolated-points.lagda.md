@@ -1,5 +1,6 @@
 #  Complements of isolated points of finite types
 
+<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.complements-isolated-points where
 
@@ -21,6 +22,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -74,7 +76,7 @@ has-cardinality-type-complement-point-UU-Fin k (pair (pair X H) x) =
           ( ( inv-equiv
               ( equiv-maybe-structure-point-UU-Fin k (pair X H) x)) ∘e
             ( e))))
-  
+
 complement-point-UU-Fin :
   {l1 : Level} (k : ℕ) →
   Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) →

@@ -1,5 +1,6 @@
 #  Path-split maps
 
+<details><summary>Imports</summary>
 ```agda
 module foundation-core.path-split-maps where
 
@@ -13,6 +14,7 @@ open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

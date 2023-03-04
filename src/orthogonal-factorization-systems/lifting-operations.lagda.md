@@ -1,5 +1,6 @@
 # Lifting operations
 
+<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.lifting-operations where
 
@@ -11,6 +12,7 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.pullback-hom
 ```
+</details>
 
 ## Idea
 

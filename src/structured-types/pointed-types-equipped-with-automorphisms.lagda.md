@@ -1,5 +1,6 @@
 #  Pointed types equipped with automorphisms
 
+<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-types-equipped-with-automorphisms where
 
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -204,7 +206,7 @@ is-equiv-htpy-hom-Pointed-Type-With-Aut :
   (Y : Pointed-Type-With-Aut l2) (h1 h2 : hom-Pointed-Type-With-Aut X Y) →
   is-equiv (htpy-hom-Pointed-Type-With-Aut-eq X Y h1 h2)
 is-equiv-htpy-hom-Pointed-Type-With-Aut X Y h1 =
-  fundamental-theorem-id 
+  fundamental-theorem-id
     ( is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1)
     ( htpy-hom-Pointed-Type-With-Aut-eq X Y h1)
 

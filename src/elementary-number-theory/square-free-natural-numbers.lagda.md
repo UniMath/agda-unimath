@@ -1,5 +1,6 @@
 #  Square-free natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.square-free-natural-numbers where
 
@@ -9,6 +10,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  The universal property of set quotients
 
+<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
@@ -40,6 +41,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -129,7 +131,7 @@ module _
     type-Set B → type-Set C
   map-universal-property-set-quotient-is-set-quotient Uf C g =
     pr1 (center (universal-property-set-quotient-is-set-quotient Uf C g))
-  
+
   triangle-universal-property-set-quotient-is-set-quotient :
     {l4 : Level} (Uf : {l : Level} → is-set-quotient l R B f)
     (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
@@ -185,9 +187,9 @@ module _
     ( ( inv-equiv (equiv-ap-emb (emb-equivalence-class R))) ∘e
       ( ( inv-equiv (convert-eq-values T x y)) ∘e
         ( equiv-ap-emb i)))
-    
+
   is-surjective-and-effective-is-image :
-    (i : type-Set B ↪ (A → Prop l2)) → 
+    (i : type-Set B ↪ (A → Prop l2)) →
     (T : (prop-Eq-Rel R) ~ ((map-emb i) ∘ q)) →
     ({l : Level} → is-image l (prop-Eq-Rel R) i (pair q T)) →
     is-surjective-and-effective R q
@@ -237,7 +239,7 @@ module _
   compute-map-emb-is-surjective-and-effective :
     (H : is-surjective-and-effective R q) (b : type-Set B) (a : A) →
     type-Prop (large-map-emb-is-surjective-and-effective H b a) ≃
-    type-Prop (map-emb-is-surjective-and-effective H b a) 
+    type-Prop (map-emb-is-surjective-and-effective H b a)
   compute-map-emb-is-surjective-and-effective H b a =
     pr2 (pr2 (small-map-emb-is-surjective-and-effective H b a))
 
@@ -250,7 +252,7 @@ module _
         eq-equiv-Prop
           ( ( compute-map-emb-is-surjective-and-effective H (q a) x) ∘e
             ( inv-equiv (pr2 H a x))))
-  
+
   is-emb-map-emb-is-surjective-and-effective :
     (H : is-surjective-and-effective R q) →
     is-emb (map-emb-is-surjective-and-effective H)
@@ -298,11 +300,11 @@ module _
           ( α p))
     where
     α : {x y : type-Set B}
-        (p : ( large-map-emb-is-surjective-and-effective e x) ＝ 
+        (p : ( large-map-emb-is-surjective-and-effective e x) ＝
              ( large-map-emb-is-surjective-and-effective e y)) →
         fib q y → type-Prop (Id-Prop B x y)
     α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
-  
+
   large-emb-is-surjective-and-effective :
     is-surjective-and-effective R q → type-Set B ↪ (A → Prop l3)
   large-emb-is-surjective-and-effective e =
@@ -483,7 +485,7 @@ module _
       (E : is-surjective-and-effective R (map-reflecting-map-Eq-Rel R q))
       {l : Level} (X : Set l) (f : reflecting-map-Eq-Rel R (type-Set X))
       where
-      
+
       P-Prop : (b : type-Set B) (x : type-Set X) → Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
         ∃-Prop A
@@ -513,7 +515,7 @@ module _
                         ( pr2 E (pr1 u) (pr1 v))
                         ( (pr2 (pr2 u)) ∙ (inv (pr2 (pr2 v)))))) ∙
                     ( pr1 (pr2 v))))))
-                    
+
       is-prop-total-P : (b : type-Set B) → is-prop (Σ (type-Set X) (P b))
       is-prop-total-P b =
         is-prop-all-elements-equal (all-elements-equal-total-P b)
@@ -529,7 +531,7 @@ module _
                 ( Σ (type-Set X) (P b))
                 ( is-prop-total-P b)))
           ( λ a → pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
-          
+
       β : (a : A) →
           ( α (map-reflecting-map-Eq-Rel R q a)) ＝
           ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
@@ -576,7 +578,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
-  
+
   universal-property-equivalence-class :
     {l : Level} →
     universal-property-set-quotient l R
@@ -604,7 +606,7 @@ module _
     equivalence-class R → type-Set C
   map-universal-property-equivalence-class C g =
     pr1 (center (universal-property-equivalence-class C g))
-  
+
   triangle-universal-property-equivalence-class :
     {l4 : Level} (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
     ( ( map-universal-property-equivalence-class C g) ∘

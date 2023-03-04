@@ -1,5 +1,6 @@
 #  Factorials of natural numbers
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.factorials where
 
@@ -12,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 ```
+</details>
 
 # Factorials
 

@@ -1,5 +1,6 @@
 #  Inequality on the standard finite types
 
+<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.inequality-standard-finite-types where
 
@@ -21,6 +22,7 @@ open import order-theory.preorders
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 # Inequality on the standard finite types
 

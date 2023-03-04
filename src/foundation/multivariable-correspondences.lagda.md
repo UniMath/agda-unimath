@@ -1,5 +1,6 @@
 #  Multivariable correspondences
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.multivariable-correspondences where
 
@@ -9,6 +10,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

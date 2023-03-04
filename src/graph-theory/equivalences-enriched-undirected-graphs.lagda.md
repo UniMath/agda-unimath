@@ -1,5 +1,6 @@
 #  Equivalences of enriched undirected graphs
 
+<details><summary>Imports</summary>
 ```agda
 module graph-theory.equivalences-enriched-undirected-graphs where
 
@@ -19,6 +20,7 @@ open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.neighbors-undirected-graphs
 ```
+</details>
 
 ## Idea
 

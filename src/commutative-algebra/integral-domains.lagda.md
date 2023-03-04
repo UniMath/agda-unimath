@@ -1,5 +1,6 @@
 #  Integral domains
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.integral-domains where
 
@@ -14,6 +15,7 @@ open import group-theory.abelian-groups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 

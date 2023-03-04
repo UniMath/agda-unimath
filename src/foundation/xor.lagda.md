@@ -1,5 +1,6 @@
 #  Exclusive disjunction of propositions
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.xor where
 
@@ -40,6 +41,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -66,7 +68,7 @@ module _
   where
 
   xor-Prop : Prop (l1 ⊔ l2)
-  xor-Prop = 
+  xor-Prop =
     coprod-Prop
       ( conj-Prop P (neg-Prop Q))
       ( conj-Prop Q (neg-Prop P))
@@ -128,7 +130,7 @@ all-elements-equal-type-symmetric-xor-Prop (pair X P) x y =
         ( compute-swap-2-Element-Type X (pr1 x) (pr1 y) np)
         ( pr2 (pr2 x))
         ( pr1 (pr2 y)))
-        
+
 is-prop-type-symmetric-xor-Prop :
   {l : Level} (p : unordered-pair (Prop l)) →
   is-prop (type-symmetric-xor-Prop p)
@@ -138,7 +140,7 @@ is-prop-type-symmetric-xor-Prop p =
 
 symmetric-xor-Prop :
   {l : Level} → symmetric-operation (Prop l) (Prop l)
-pr1 (symmetric-xor-Prop E) = type-symmetric-xor-Prop E 
+pr1 (symmetric-xor-Prop E) = type-symmetric-xor-Prop E
 pr2 (symmetric-xor-Prop E) = is-prop-type-symmetric-xor-Prop E
 ```
 
@@ -153,7 +155,7 @@ module _
   xor-Prop' = is-contr-Prop (type-Prop P + type-Prop Q)
 
   type-xor-Prop' : UU (l1 ⊔ l2)
-  type-xor-Prop' = type-Prop xor-Prop' 
+  type-xor-Prop' = type-Prop xor-Prop'
 ```
 
 ## Properties
@@ -170,7 +172,7 @@ module _
     inl (pair p (λ q → is-empty-eq-coprod-inl-inr p q (H (inr q))))
   map-equiv-xor-Prop (pair (inr q) H) =
     inr (pair q (λ p → is-empty-eq-coprod-inr-inl q p (H (inl p))))
-  
+
   equiv-xor-Prop : type-xor-Prop' P Q ≃ type-xor-Prop P Q
   equiv-xor-Prop =
     ( equiv-coprod
@@ -210,7 +212,7 @@ module _
 module _
   {l : Level} {A B : UU l}
   where
-  
+
   xor-symmetric-xor :
     symmetric-xor (standard-unordered-pair A B) → xor A B
   xor-symmetric-xor (pair (inl (inr star)) (pair p nq)) =
@@ -245,7 +247,6 @@ module _
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
       ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
       ( na)
-
 
 {-
   eq-equiv-Prop
@@ -326,7 +327,7 @@ module _
 module _
   {l : Level} (P Q : Prop l)
   where
-  
+
   xor-symmetric-xor-Prop :
     type-hom-Prop
       ( symmetric-xor-Prop (standard-unordered-pair P Q))

@@ -1,5 +1,6 @@
 #  The Eisenstein integers
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.eisenstein-integers where
 
@@ -22,6 +23,7 @@ open import group-theory.semigroups
 
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -152,7 +154,7 @@ associative-add-ℤ[ω] :
   (x y z : ℤ[ω]) → add-ℤ[ω] (add-ℤ[ω] x y) z ＝ add-ℤ[ω] x (add-ℤ[ω] y z)
 associative-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
   eq-Eq-ℤ[ω] (associative-add-ℤ a c e) (associative-add-ℤ b d f)
-  
+
 left-inverse-law-add-ℤ[ω] :
   (x : ℤ[ω]) → add-ℤ[ω] (neg-ℤ[ω] x) x ＝ zero-ℤ[ω]
 left-inverse-law-add-ℤ[ω] (pair a b) =

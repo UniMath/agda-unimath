@@ -1,5 +1,6 @@
 #  Boolean rings
 
+<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.boolean-rings where
 
@@ -10,6 +11,7 @@ open import foundation.universe-levels
 
 open import ring-theory.idempotent-elements-rings
 ```
+</details>
 
 ## Idea
 

@@ -1,5 +1,6 @@
 #  Set quotients
 
+<details><summary>Imports</summary>
 ```agda
 module foundation.set-quotients where
 
@@ -27,6 +28,7 @@ open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definitions
 
@@ -36,7 +38,7 @@ open import foundation.universe-levels
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
-  
+
   set-quotient : UU (l1 ⊔ l2)
   set-quotient = small-type-Small-Type (equivalence-class-Small-Type R)
 
@@ -180,7 +182,7 @@ module _
     map-inv-equiv (is-effective-quotient-map x y)
 
   is-surjective-and-effective-quotient-map :
-    is-surjective-and-effective R (quotient-map R) -- 
+    is-surjective-and-effective R (quotient-map R) --
   pr1 is-surjective-and-effective-quotient-map = is-surjective-quotient-map R
   pr2 is-surjective-and-effective-quotient-map = is-effective-quotient-map
 
@@ -222,7 +224,7 @@ module _
     equiv-dependent-universal-property-surj-is-surjective
       ( quotient-map R)
       ( is-surjective-quotient-map R)
-    
+
   induction-set-quotient :
     {l : Level} (P : set-quotient R → Prop l) →
     ((x : A) → type-Prop (P (quotient-map R x))) →
