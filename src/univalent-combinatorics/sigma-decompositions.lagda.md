@@ -6,6 +6,7 @@ module univalent-combinatorics.sigma-decompositions where
 open import foundation.sigma-decompositions public
 
 open import foundation.contractible-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -18,6 +19,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.images
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -26,9 +28,11 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 open import foundation.univalence
 
+open import univalent-combinatorics.decidable-equivalence-relations
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.quotients-finite-types
 ```
 
 ## Idea
@@ -145,6 +149,12 @@ is-finite-base-type-Σ-Decomposition-𝔽 D =
     ( is-finite-Σ
       ( is-finite-indexing-type-Σ-Decomposition-𝔽 D)
       ( λ x → is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 D x)))
+```
+
+### Equivalence between finite decidable equivalence relations and finite Σ-decompositions
+
+```agda
+
 ```
 
 ### The type of all finite Σ-Decomposition is finite

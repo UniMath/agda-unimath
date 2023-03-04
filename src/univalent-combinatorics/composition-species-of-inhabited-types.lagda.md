@@ -167,13 +167,89 @@ module _
 ### Unit laws for analytic composition of species-inhabited-types
 
 ```agda
-{-
+
 left-unit-law-comp-species-inhabited-types :
-  {l1 l2 : Level} (F : species-inhabited-types l1 l2) →
-  equiv-species-inhabited-types (analytic-comp-species-inhabited-types analytic-unit-species-inhabited-types F) F
-left-unit-law-comp-species-inhabited-types F X =
-  {!!}
--}
+  {l1 l2 : Level}
+  (F : species-inhabited-types l1 l2) → (A : Inhabited-Type l1) →
+  ( analytic-comp-species-inhabited-types
+    ( analytic-unit-species-inhabited-types)
+    ( F)) A ≃
+  F A
+left-unit-law-comp-species-inhabited-types F A =
+  ( ( inv-equiv
+      ( equiv-Σ-extension-species-inhabited-types
+        ( F)
+        ( A))) ∘e
+  ( ( left-unit-law-comp-inhabited-species-types
+      ( Σ-extension-species-inhabited-types F)
+      ( type-Inhabited-Type A)
+      ( is-inhabited-type-Inhabited-Type A)) ∘e
+  ( ( equiv-Σ
+      ( _)
+      ( id-equiv)
+      ( λ D →
+        equiv-prod
+          ( left-unit-law-Σ-is-contr
+            ( is-proof-irrelevant-is-prop
+              ( is-property-is-inhabited (indexing-type-Σ-Decomposition D))
+              ( is-inhabited-indexing-type-inhabited-Σ-Decomposition
+                ( D)
+                ( is-inhabited-type-Inhabited-Type A)))
+            ( is-inhabited-indexing-type-inhabited-Σ-Decomposition
+              ( D)
+              ( is-inhabited-type-Inhabited-Type A)))
+          ( id-equiv))) ∘e
+  ( ( equiv-analytic-comp-extension-species-inhabited-types
+      ( analytic-unit-species-inhabited-types)
+      ( F)
+      (( type-Inhabited-Type A))) ∘e
+  ( ( equiv-Σ-extension-species-inhabited-types
+      ( analytic-comp-species-inhabited-types
+        ( analytic-unit-species-inhabited-types)
+        ( F))
+      ( A)))))))
+
+right-unit-law-comp-species-inhabited-types :
+  {l1 l2 : Level}
+  (F : species-inhabited-types l1 l2) → (A : Inhabited-Type l1) →
+  ( analytic-comp-species-inhabited-types
+    ( F)
+    ( analytic-unit-species-inhabited-types)) A ≃
+  F A
+right-unit-law-comp-species-inhabited-types F A =
+  ( ( inv-equiv
+      ( equiv-Σ-extension-species-inhabited-types
+        ( F)
+        ( A))) ∘e
+  ( ( right-unit-law-comp-species-types
+      ( Σ-extension-species-inhabited-types F)
+      ( type-Inhabited-Type A)) ∘e
+  ( ( equiv-Σ
+      ( _)
+      ( id-equiv)
+      ( λ D →
+        equiv-prod
+          ( id-equiv)
+          ( equiv-Π
+            ( _)
+            ( id-equiv)
+            ( λ x →
+              ( left-unit-law-Σ-is-contr
+                ( is-proof-irrelevant-is-prop
+                  ( is-property-is-inhabited (cotype-Σ-Decomposition D x))
+                  ( is-inhabited-cotype-Σ-Decomposition D x))
+                ( is-inhabited-cotype-Σ-Decomposition D x)))))) ∘e
+  ( ( equiv-analytic-comp-extension-species-inhabited-types
+      ( F)
+      ( analytic-unit-species-inhabited-types)
+      (( type-Inhabited-Type A))) ∘e
+  ( ( equiv-Σ-extension-species-inhabited-types
+      ( analytic-comp-species-inhabited-types
+        ( F)
+        ( analytic-unit-species-inhabited-types))
+      ( A)))))))
+
+
 ```
 
 ### Associativity of composition of species-inhabited-types

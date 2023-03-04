@@ -3,12 +3,16 @@
 ```agda
 module foundation.type-duality where
 
+open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalences
+open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
@@ -23,6 +27,7 @@ open import foundation.propositions
 open import foundation.slice
 open import foundation.small-types
 open import foundation.structure
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type

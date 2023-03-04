@@ -23,14 +23,22 @@ open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
+open import foundation.cartesian-product-types
 open import foundation.connected-maps
 open import foundation.embeddings
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.logical-equivalences
 open import foundation.monomorphisms
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.subtypes
 open import foundation.truncated-types
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
@@ -674,4 +682,41 @@ module _
       ( map-emb g)
       ( is-surjective-map-surjection f)
       ( is-emb-map-emb g)
+```
+
+### Type duality surjective function
+
+The type of surjective maps from `A → B` is equivalent to the type of pairs of inhabited dependent family `Y : A → U` and equivalence between `A ≃ Σ B Y`
+
+```agda
+type-duality-surjective-functions :
+  {l1 : Level} (l2 : Level) (A : UU l1) (B : UU (l1 ⊔ l2))→
+  (A ↠ B) ≃
+    Σ
+    ( Fam-Inhabited-Types (l1 ⊔ l2) B )
+    ( λ Y → A ≃ Σ B (type-Fam-Inhabited-Types Y))
+type-duality-surjective-functions {l1} l2 A B =
+  ( ( equiv-Σ-equiv-base
+      ( λ Y → A ≃ Σ B (type-Fam-Inhabited-Types Y))
+      ( ( λ Y-inhab → (λ b → (pr1 Y-inhab b , pr2 Y-inhab b))) ,
+          ( is-equiv-has-inverse
+            ( λ fam-Y → (pr1 ∘ fam-Y , pr2 ∘ fam-Y))
+            ( refl-htpy)
+            ( refl-htpy)))) ∘e
+    ( ( inv-assoc-Σ
+        ( B → UU (l1 ⊔ l2))
+        ( λ Y → (b : B) → is-inhabited (Y b))
+        ( λ Y-inhab → A ≃ Σ B (pr1 Y-inhab))) ∘e
+      ( ( equiv-Σ
+          ( λ Y →
+                ((b : B) → is-inhabited (Y b))
+                × (A ≃ Σ B Y))
+          ( id-equiv)
+          ( λ _ →  commutative-prod)) ∘e
+        ( ( assoc-Σ (B → UU ( l1 ⊔ l2)) (λ Y → A ≃ Σ B Y) _) ∘e
+          ( equiv-subtype-equiv
+            ( type-duality-functions l2 A B)
+            ( is-surjective-Prop)
+            ( λ Y → Π-Prop B λ b → is-inhabited-Prop (pr1 Y b))
+            ( λ f → iff-eq {P = is-surjective-Prop f} refl))))))
 ```

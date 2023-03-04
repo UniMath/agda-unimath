@@ -28,10 +28,12 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
@@ -679,4 +681,27 @@ abstract
         tr ( λ m → has-cardinality m X)
            ( p)
            ( pr2 (has-finite-cardinality-is-finite H)))
+```
+
+### A type `X` is finite if and only if `X` has decidable equality and there exist a surjection `A ↠ Fin-n`
+
+```agda
+is-finite-surjection-has-decidable-equality :
+  {l1 l2 : Level} {X : UU l1 } {n : ℕ} →
+  (p : has-decidable-equality X) → (f : Fin n ↠ X) →
+  is-finite (X)
+is-finite-surjection-has-decidable-equality {n = zero-ℕ} p f =
+  is-finite-is-empty  {!!}
+is-finite-surjection-has-decidable-equality {X = X} {n = succ-ℕ zero-ℕ} p f =
+  is-finite-is-contr
+    ( map-surjection f (inr star) ,
+      ( λ x →
+        ind-trunc-Prop
+          ( λ z →
+            ( map-surjection f (inr star) ＝ x) ,
+              is-set-has-decidable-equality p (map-surjection f (inr star)) x)
+          ( λ y → map-left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star) y)
+          ( is-surjective-map-surjection f x)))
+is-finite-surjection-has-decidable-equality {n = succ-ℕ (succ-ℕ n)} p f =
+  {!!}
 ```
