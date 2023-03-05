@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.truncation-levels where
-
 open import foundation-core.universe-levels
 ```
 </details>

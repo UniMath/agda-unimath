@@ -5,7 +5,6 @@ Contributors: Elif Uskuplu, Egbert Rijke
 <details><summary>Imports</summary>
 ```agda
 module foundation.cantor-schroder-bernstein-escardo where
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.large-categories where
-
 open import Agda.Primitive using (Setω)
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories

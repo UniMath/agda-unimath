@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-groups where
-
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.contractible-types
@@ -13,7 +12,6 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
 open import group-theory.groups

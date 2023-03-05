@@ -3,13 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.involution-standard-finite-types where
-
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-
 open import foundation.identity-types
 open import foundation.involutions
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

@@ -3,11 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.equivalences-large-precategories where
-
 open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories
-open import category-theory.natural-isomorphisms-large-precategories
 open import category-theory.large-precategories
+open import category-theory.natural-isomorphisms-large-precategories
 open import foundation.universe-levels
 ```
 </details>

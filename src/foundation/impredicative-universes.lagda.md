@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.impredicative-universes where
-
 open import foundation.propositions
 open import foundation.small-types
 open import foundation.universe-levels

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.decidable-maps where
-
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types

@@ -3,12 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.complements-subtypes where
-
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.functions
 open import foundation.full-subtypes
+open import foundation.functions
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.subtypes

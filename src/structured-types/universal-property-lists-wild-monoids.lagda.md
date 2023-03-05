@@ -3,19 +3,15 @@
 <details><summary>Imports</summary>
 ```agda
 module structured-types.universal-property-lists-wild-monoids where
-
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import group-theory.homomorphisms-semigroups
-
-open import univalent-combinatorics.lists
-
+open import structured-types.coherent-h-spaces
 open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.wild-monoids
-open import structured-types.coherent-h-spaces
+open import univalent-combinatorics.lists
 ```
 </details>
 

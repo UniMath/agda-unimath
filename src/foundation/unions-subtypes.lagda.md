@@ -3,9 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.unions-subtypes where
-
-open import foundation.disjunction
 open import foundation.decidable-subtypes
+open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.subtypes
 open import foundation.universe-levels

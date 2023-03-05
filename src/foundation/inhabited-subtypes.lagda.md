@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.inhabited-subtypes where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

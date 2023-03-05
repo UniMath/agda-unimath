@@ -3,12 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module set-theory.cantor-space where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

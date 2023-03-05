@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.descent-circle where
-
 open import foundation.automorphisms
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -20,7 +19,6 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
-
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
 ```

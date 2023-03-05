@@ -3,16 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module commutative-algebra.integral-domains where
-
 open import commutative-algebra.commutative-rings
-
 open import foundation.dependent-pair-types
 open import foundation.injective-maps
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
-
 open import ring-theory.rings
 ```
 </details>

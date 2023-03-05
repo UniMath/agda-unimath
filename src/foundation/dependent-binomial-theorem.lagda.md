@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.dependent-binomial-theorem where
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -11,8 +10,8 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
@@ -20,7 +19,6 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

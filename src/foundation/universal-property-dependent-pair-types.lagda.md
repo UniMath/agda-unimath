@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-dependent-pair-types where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality

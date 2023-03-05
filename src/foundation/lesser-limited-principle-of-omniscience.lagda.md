@@ -3,16 +3,13 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.lesser-limited-principle-of-omniscience where
-
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.disjunction
 open import foundation.fibers-of-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

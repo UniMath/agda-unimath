@@ -2,28 +2,24 @@
 
 <details><summary>Imports</summary>
 ```agda
-
 module order-theory.homomorphisms-meet-sup-lattices where
-
-open import foundation.functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.sets
-
-open import order-theory.posets
-open import order-theory.least-upper-bounds-posets
 open import order-theory.greatest-lower-bounds-posets
-open import order-theory.sup-lattices
-open import order-theory.meet-semilattices
-open import order-theory.infinite-distributive-law
-open import order-theory.order-preserving-maps-posets
 open import order-theory.homomorphisms-meet-semilattices
 open import order-theory.homomorphisms-sup-lattices
-
+open import order-theory.infinite-distributive-law
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.sup-lattices
 ```
 </details>
 

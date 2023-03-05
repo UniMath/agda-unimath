@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bezouts-lemma where
-
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
@@ -11,23 +10,22 @@ open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
-open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-maps
@@ -39,7 +37,6 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

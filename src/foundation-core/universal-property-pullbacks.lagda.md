@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.universal-property-pullbacks where
-
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types

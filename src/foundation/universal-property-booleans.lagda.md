@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-booleans where
-
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

@@ -3,17 +3,14 @@
 <details><summary>Imports</summary>
 ```agda
 module commutative-algebra.local-commutative-rings where
-
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.invertible-elements-commutative-rings
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import ring-theory.invertible-elements-rings
 open import ring-theory.local-rings
 open import ring-theory.nontrivial-rings

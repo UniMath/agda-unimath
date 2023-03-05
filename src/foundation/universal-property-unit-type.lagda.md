@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-unit-type where
-
 open import foundation-core.homotopies
-
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

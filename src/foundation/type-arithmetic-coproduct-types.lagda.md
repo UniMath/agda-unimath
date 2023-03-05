@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-coproduct-types where
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types

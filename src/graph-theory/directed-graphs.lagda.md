@@ -3,13 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module graph-theory.directed-graphs where
-
-open import foundation.universe-levels
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.equivalences
+open import foundation.universe-levels
 ```
 </details>
 

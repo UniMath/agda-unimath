@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.shifting-sequences where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.universe-levels
 ```
 </details>

@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
-
 module foundation.binary-functoriality-set-quotients where
-
 open import foundation.binary-homotopies
 open import foundation.binary-reflecting-maps-equivalence-relations
 open import foundation.contractible-types

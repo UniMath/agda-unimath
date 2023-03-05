@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.distance-integers where
-
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-natural-numbers

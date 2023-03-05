@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.pythagorean-triples where
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.identity-types
 open import foundation.universe-levels
 ```

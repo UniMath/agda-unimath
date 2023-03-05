@@ -3,14 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.exponents-species where
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.universe-levels
-
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.species

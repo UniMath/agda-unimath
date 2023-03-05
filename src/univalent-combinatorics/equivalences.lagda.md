@@ -3,13 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences where
-
-open import foundation.equivalences public
-
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences public
 open import foundation.universe-levels
-
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.surjective-maps

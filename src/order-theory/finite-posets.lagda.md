@@ -3,14 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.finite-posets where
-
 open import foundation.decidable-types
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import order-theory.finite-preorders
 open import order-theory.posets
-
 open import univalent-combinatorics.finite-types
 ```
 </details>

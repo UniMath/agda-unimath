@@ -3,14 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.constant-maps where
-
-open import foundation-core.constant-maps public
-
 open import foundation-core.0-maps
 open import foundation-core.1-types
+open import foundation-core.constant-maps public
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
-open import foundation.embeddings
 open import foundation-core.equivalences
 open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
@@ -22,7 +19,7 @@ open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
+open import foundation.embeddings
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 ```

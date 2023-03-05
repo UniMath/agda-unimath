@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-types where
-
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-
 open import foundation.automorphisms
 open import foundation.connected-components-universes
 open import foundation.constant-maps
@@ -17,13 +15,13 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -43,7 +41,6 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.finite-types

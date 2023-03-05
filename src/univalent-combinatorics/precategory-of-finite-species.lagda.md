@@ -3,11 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.precategory-of-finite-species where
-
 open import category-theory.large-precategories
-
 open import foundation.universe-levels
-
 open import univalent-combinatorics.finite-species
 open import univalent-combinatorics.morphisms-finite-species
 ```

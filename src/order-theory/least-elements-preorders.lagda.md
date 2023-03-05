@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.least-elements-preorders where
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import order-theory.preorders
 ```
 </details>

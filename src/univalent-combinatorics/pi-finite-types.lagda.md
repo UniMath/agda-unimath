@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pi-finite-types where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
@@ -17,8 +15,8 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
@@ -53,14 +51,12 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
-open import
-  univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-presented-types

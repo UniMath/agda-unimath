@@ -3,25 +3,21 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups-generated-by-subsets-groups where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
-open import foundation.subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.subgroups
-
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```

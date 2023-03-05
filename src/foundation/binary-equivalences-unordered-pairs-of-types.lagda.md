@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.binary-equivalences-unordered-pairs-of-types where
-
 open import foundation.binary-operations-unordered-pairs-of-types
 open import foundation.equivalences
 open import foundation.functions

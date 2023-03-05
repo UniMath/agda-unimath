@@ -3,15 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.endomorphisms where
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.sets
-
 open import structured-types.pointed-types
 ```
 </details>
