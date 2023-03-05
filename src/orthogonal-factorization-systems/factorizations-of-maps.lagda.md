@@ -4,6 +4,7 @@
 ```agda
 module orthogonal-factorization-systems.factorizations-of-maps where
 
+open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -11,14 +12,17 @@ open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.function-classes
 ```
 </details>
 
 ## Idea
 
-A _factorization_ of a map `f : A → B` is a pair of maps `g : X → B` and
+A **factorization** of a map `f : A → B` is a pair of maps `g : X → B` and
 `h : A → X` such that their composite `g ∘ h` is `f`.
 
 ```md
@@ -33,7 +37,9 @@ A _factorization_ of a map `f : A → B` is a pair of maps `g : X → B` and
 We use diagrammatic order and say the map `h` is the _left_ and `g` the _right_
 map of the factorization.
 
-## Definition
+## Definitions
+
+### Factorizations
 
 ```agda
 module _
@@ -101,6 +107,30 @@ module _
     is-factorization f (right-map-factorization F) (left-map-factorization F)
   is-factorization-factorization =
     is-factorization-factorization-through ∘ factorization-through-factorization
+```
+
+## Factorizations with function classes
+
+```agda
+module _
+  {l1 l2 lF lL lR : Level}
+  (L : function-class l1 lF lL)
+  (R : function-class lF l2 lR)
+  {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-function-class-factorization-Prop : factorization f lF → Prop (lL ⊔ lR)
+  is-function-class-factorization-Prop F =
+    conj-Prop (L (left-map-factorization F)) (R (right-map-factorization F))
+
+  is-function-class-factorization : factorization f lF → UU (lL ⊔ lR)
+  is-function-class-factorization =
+    type-Prop ∘ is-function-class-factorization-Prop
+
+  function-class-factorization :
+    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
+  function-class-factorization =
+    Σ (factorization f lF) (is-function-class-factorization)
 ```
 
 ## Properties
