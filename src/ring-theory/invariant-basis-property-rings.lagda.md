@@ -3,16 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module ring-theory.invariant-basis-property-rings where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import ring-theory.dependent-products-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.rings
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

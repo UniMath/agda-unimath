@@ -3,20 +3,18 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.local-types where
-
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.function-extensionality
 open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
-
 open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type

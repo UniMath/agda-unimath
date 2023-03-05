@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.pullback-hom where
-
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
 open import foundation.equivalences

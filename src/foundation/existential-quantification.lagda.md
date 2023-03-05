@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.existential-quantification where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.propositional-truncations

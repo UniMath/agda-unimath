@@ -3,18 +3,15 @@
 <details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.functoriality-loop-spaces where
-
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import structured-types.faithful-pointed-maps
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-
 open import synthetic-homotopy-theory.loop-spaces
 ```
 </details>

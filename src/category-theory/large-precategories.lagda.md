@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.large-precategories where
-
 open import Agda.Primitive using (Setω)
 open import foundation.functions
 open import foundation.identity-types

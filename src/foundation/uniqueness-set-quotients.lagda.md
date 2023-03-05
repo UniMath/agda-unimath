@@ -3,9 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-set-quotients where
-
+open import foundation-core.equivalence-relations
 open import foundation-core.function-extensionality
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,8 +17,6 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
 </details>
 

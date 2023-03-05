@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.connected-types where
-
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.equivalences

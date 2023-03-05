@@ -43,7 +43,5 @@ window.addEventListener('load', function() {
     updateFunction.call();
 });
 
-
-
 // Handle active elements on scroll
 window.addEventListener("scroll", updateFunction);

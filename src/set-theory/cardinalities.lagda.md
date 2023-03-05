@@ -3,7 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module set-theory.cardinalities where
-
+open import foundation-core.sets
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -18,7 +18,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation-core.sets
 open import foundation.universe-levels
 ```
 </details>

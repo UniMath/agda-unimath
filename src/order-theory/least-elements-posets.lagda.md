@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.least-elements-posets where
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-
 open import order-theory.least-elements-preorders
 open import order-theory.posets
 ```

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.xor where
-
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.contractible-types
@@ -17,15 +16,15 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-extensionality
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.symmetric-operations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
@@ -35,7 +34,6 @@ open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types

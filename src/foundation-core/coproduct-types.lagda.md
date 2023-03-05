@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.coproduct-types where
-
 open import foundation.universe-levels
 ```
 </details>

@@ -3,9 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-relations where
-
 open import foundation-core.equivalence-relations public
-
+open import foundation-core.universe-levels
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -37,8 +36,6 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients
-
-open import foundation-core.universe-levels
 ```
 </details>
 

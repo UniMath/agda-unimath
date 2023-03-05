@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.functors-precategories where
-
 open import category-theory.precategories
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

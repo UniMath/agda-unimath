@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.set-truncations where
-
 open import foundation-core.function-extensionality
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types

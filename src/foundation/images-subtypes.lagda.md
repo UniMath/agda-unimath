@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.images-subtypes where
-
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.images

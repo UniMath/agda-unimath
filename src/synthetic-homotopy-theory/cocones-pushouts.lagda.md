@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.cocones-pushouts where
-
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

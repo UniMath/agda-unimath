@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.standard-apartness-relations where
-
 open import foundation.apartness-relations
 open import foundation.coproduct-types
 open import foundation.decidable-types

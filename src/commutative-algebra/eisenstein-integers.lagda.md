@@ -3,24 +3,19 @@
 <details><summary>Imports</summary>
 ```agda
 module commutative-algebra.eisenstein-integers where
-
 open import commutative-algebra.commutative-rings
-
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
-
 open import ring-theory.rings
 ```
 </details>

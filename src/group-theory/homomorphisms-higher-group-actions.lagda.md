@@ -3,14 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-higher-group-actions where
-
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```

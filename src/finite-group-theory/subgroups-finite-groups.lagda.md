@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module finite-group-theory.subgroups-finite-groups where
-
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-semigroups
-
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -16,13 +14,11 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.decidable-subgroups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
-
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```

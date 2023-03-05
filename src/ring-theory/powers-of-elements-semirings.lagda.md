@@ -3,12 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module ring-theory.powers-of-elements-semirings where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import ring-theory.semirings
 ```
 </details>

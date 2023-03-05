@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.set-presented-types where
-
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.functions

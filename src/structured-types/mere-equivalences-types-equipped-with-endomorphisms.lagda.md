@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module structured-types.mere-equivalences-types-equipped-with-endomorphisms where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -11,10 +10,9 @@ open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.subtype-identity-principle
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```

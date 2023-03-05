@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.partitions where
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -22,8 +21,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
-open import foundation.logical-equivalences
 open import foundation.locally-small-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets

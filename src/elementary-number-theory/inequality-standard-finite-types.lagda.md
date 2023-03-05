@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.inequality-standard-finite-types where
-
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -16,10 +14,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import order-theory.posets
 open import order-theory.preorders
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

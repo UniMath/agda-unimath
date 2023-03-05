@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.chains-posets where
-
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import order-theory.chains-preorders
 open import order-theory.posets
 ```

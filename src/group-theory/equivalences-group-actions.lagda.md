@@ -3,12 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-group-actions where
-
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -19,7 +18,6 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-group-actions

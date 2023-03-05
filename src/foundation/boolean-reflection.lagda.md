@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.boolean-reflection where
-
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-types

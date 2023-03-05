@@ -3,11 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.multivariable-correspondences where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.universe-levels
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

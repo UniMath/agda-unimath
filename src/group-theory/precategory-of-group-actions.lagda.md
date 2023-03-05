@@ -3,13 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.precategory-of-group-actions where
-
 open import category-theory.large-precategories
 open import category-theory.precategories
-
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-group-actions

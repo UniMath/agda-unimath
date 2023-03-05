@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.preimages-of-subtypes where
-
 open import foundation.subtypes
 open import foundation.universe-levels
 ```

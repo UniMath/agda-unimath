@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.necklaces where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -14,9 +12,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-
 open import structured-types.types-equipped-with-endomorphisms
-
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types

@@ -3,15 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-vectors where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import linear-algebra.vectors
 ```
 </details>

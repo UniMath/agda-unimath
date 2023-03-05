@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.unordered-pairs-of-types where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -13,7 +12,6 @@ open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
 open import univalent-combinatorics.2-element-types
 ```
 </details>

@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.relatively-prime-integers where
-
-open import elementary-number-theory.integers
 open import elementary-number-theory.greatest-common-divisor-integers
-
-open import foundation.universe-levels
+open import elementary-number-theory.integers
 open import foundation.propositions
+open import foundation.universe-levels
 ```
 </details>
 

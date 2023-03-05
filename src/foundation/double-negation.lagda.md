@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.double-negation where
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
