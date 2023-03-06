@@ -1,8 +1,11 @@
 # Cartesian product types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation-core.cartesian-product-types where
 open import foundation-core.dependent-pair-types
 open import foundation-core.universe-levels

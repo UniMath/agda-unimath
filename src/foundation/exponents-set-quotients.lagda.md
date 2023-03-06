@@ -1,8 +1,11 @@
 # Exponents of set quotients
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation.exponents-set-quotients where
 open import foundation.binary-relations
 open import foundation.commuting-triangles-of-maps

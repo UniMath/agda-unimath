@@ -1,8 +1,11 @@
 # Cartier's delooping of the sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module finite-group-theory.cartier-delooping-sign-homomorphism where
 open import elementary-number-theory.natural-numbers
 open import finite-group-theory.delooping-sign-homomorphism

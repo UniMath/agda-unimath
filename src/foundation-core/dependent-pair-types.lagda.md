@@ -1,8 +1,11 @@
 # Dependent pair types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation-core.dependent-pair-types where
 open import foundation-core.universe-levels
 ```

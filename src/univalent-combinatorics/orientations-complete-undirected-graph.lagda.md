@@ -1,8 +1,11 @@
 # Orientations of the complete undirected graph
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module univalent-combinatorics.orientations-complete-undirected-graph where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
@@ -60,6 +63,10 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.symmetric-difference
+```
+</details>
+
+```agda
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n)
   where

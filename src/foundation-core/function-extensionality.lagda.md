@@ -1,8 +1,11 @@
 # Function extensionality
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation-core.function-extensionality where
 open import foundation-core.equivalences
 open import foundation-core.functions

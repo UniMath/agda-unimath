@@ -1,8 +1,11 @@
 # Orbits of permutations
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module finite-group-theory.orbits-permutations where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types

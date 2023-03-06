@@ -1,8 +1,11 @@
 # Quotient groups
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module group-theory.quotient-groups where
 open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types

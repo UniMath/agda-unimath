@@ -1,8 +1,11 @@
 # Commuting triangles of homotopies
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation-core.commuting-triangles-of-homotopies where
 open import foundation-core.functions
 open import foundation-core.homotopies
