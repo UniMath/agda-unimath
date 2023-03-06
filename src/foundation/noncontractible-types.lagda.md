@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.noncontractible-types where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

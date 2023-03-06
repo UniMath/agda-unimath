@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.repetitions where
-
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings

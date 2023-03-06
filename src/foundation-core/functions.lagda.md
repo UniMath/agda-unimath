@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.functions where
-
 open import foundation-core.universe-levels
 ```
 </details>

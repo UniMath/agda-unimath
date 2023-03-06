@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module trees.submultisets where
-
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.universe-levels
-
 open import trees.multisets
 ```
 </details>

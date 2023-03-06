@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.function-extensionality where
-
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies

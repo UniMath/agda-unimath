@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module trees.universal-multiset where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -11,7 +10,6 @@ open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.universe-levels
-
 open import trees.functoriality-w-types
 open import trees.multisets
 open import trees.small-multisets

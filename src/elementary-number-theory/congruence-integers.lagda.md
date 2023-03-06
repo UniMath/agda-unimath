@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.congruence-integers where
-
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-integers

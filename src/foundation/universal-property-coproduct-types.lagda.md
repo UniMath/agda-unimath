@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-coproduct-types where
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

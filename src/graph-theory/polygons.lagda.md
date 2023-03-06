@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module graph-theory.polygons where
-
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
-
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -18,12 +16,10 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
-
 open import univalent-combinatorics.finite-types
 ```
 </details>

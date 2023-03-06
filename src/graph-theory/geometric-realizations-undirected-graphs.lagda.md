@@ -3,13 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module graph-theory.geometric-realizations-undirected-graphs where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.symmetric-identity-types
 open import foundation.universe-levels
-
 open import graph-theory.reflecting-maps-undirected-graphs
 open import graph-theory.undirected-graphs
 ```

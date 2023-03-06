@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module ring-theory.ideals-generated-by-subsets-rings where
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
@@ -13,11 +12,9 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import ring-theory.ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
-
 open import univalent-combinatorics.lists
 ```
 </details>

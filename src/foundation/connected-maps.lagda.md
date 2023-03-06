@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.connected-maps where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types

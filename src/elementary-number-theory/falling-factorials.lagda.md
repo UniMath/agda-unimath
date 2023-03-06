@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.falling-factorials where
-
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```

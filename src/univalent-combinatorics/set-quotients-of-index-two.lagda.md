@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
-
 module univalent-combinatorics.set-quotients-of-index-two where
-
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -24,7 +22,6 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

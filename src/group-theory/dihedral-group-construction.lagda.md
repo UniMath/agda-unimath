@@ -3,14 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.dihedral-group-construction where
-
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.monoids

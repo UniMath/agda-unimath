@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.truncation-images-of-maps where
-
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences

@@ -3,12 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module graph-theory.circuits-undirected-graphs where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
 open import graph-theory.polygons
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.undirected-graphs

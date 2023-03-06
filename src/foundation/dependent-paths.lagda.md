@@ -5,11 +5,10 @@ define the groupoidal operators on dependent paths; define the cohrences paths: 
 <details><summary>Imports</summary>
 ```agda
 module foundation.dependent-paths where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions

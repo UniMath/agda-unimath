@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module trees.lower-types-w-types where
-
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import trees.ranks-of-elements-w-types
 open import trees.w-types
 ```

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.small-maps where
-
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.locally-small-types

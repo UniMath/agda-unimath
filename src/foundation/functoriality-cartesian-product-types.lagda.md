@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-cartesian-product-types where
-
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types

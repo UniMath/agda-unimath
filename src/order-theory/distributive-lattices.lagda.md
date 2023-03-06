@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.distributive-lattices where
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import order-theory.lattices
 ```
 </details>

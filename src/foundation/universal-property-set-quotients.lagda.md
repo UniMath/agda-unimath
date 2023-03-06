@@ -3,12 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
-
 module foundation.universal-property-set-quotients where
-
 open import foundation-core.equivalence-relations
 open import foundation-core.univalence
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types

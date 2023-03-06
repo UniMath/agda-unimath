@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-image where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings

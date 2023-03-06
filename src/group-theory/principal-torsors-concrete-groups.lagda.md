@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.principal-torsors-concrete-groups where
-
 open import foundation.universe-levels
-
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 ```

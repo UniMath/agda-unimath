@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.weakly-constant-maps where
-
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions

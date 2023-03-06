@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module structured-types.equivalences-types-equipped-with-endomorphisms where
-
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -13,12 +12,11 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.subtype-identity-principle
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
-
 open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```

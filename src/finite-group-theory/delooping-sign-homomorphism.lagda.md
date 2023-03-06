@@ -3,17 +3,13 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
-
 module finite-group-theory.delooping-sign-homomorphism where
-
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
-
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -46,7 +42,6 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
@@ -57,9 +52,7 @@ open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
-
 open import synthetic-homotopy-theory.loop-spaces
-
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.set-quotients-of-index-two

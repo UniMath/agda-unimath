@@ -3,14 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.exponentiation-natural-numbers where
-
 open import commutative-algebra.powers-of-elements-commutative-semirings
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.identity-types
 ```
 </details>

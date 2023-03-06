@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module trees.equivalences-directed-trees where
-
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -12,10 +11,8 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import graph-theory.equivalences-directed-graphs
 open import graph-theory.walks-directed-graphs
-
 open import trees.directed-trees
 ```
 </details>

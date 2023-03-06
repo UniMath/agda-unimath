@@ -3,13 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module trees.elementhood-relation-w-types where
-
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import trees.w-types
 ```
 </details>

@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.difference-integers where
-
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import foundation.identity-types
 open import foundation.interchange-law
-
 ```
 </details>
 

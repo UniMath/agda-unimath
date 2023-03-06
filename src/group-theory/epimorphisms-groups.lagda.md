@@ -3,12 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.epimorphisms-groups where
-
 open import category-theory.epimorphisms-large-precategories
-
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups

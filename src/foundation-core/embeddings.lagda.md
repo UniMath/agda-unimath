@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.embeddings where
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

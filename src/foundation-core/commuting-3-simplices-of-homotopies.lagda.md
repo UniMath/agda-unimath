@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.commuting-3-simplices-of-homotopies where
-
 open import foundation-core.commuting-triangles-of-homotopies
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
