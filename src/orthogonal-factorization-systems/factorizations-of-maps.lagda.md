@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.factorizations-of-maps where
-
 open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -15,7 +14,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-
 open import orthogonal-factorization-systems.function-classes
 ```
 </details>

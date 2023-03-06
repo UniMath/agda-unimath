@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.function-classes where
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

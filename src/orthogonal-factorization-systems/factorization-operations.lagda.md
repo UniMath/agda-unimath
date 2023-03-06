@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.factorization-operations where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,7 +14,6 @@ open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes
 ```
