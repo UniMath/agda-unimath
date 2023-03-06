@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.epimorphisms-large-precategories where
-
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
-
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types

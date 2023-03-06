@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.higher-group-actions where
-
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import group-theory.higher-groups
 ```
 </details>

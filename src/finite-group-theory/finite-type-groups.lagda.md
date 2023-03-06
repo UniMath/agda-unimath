@@ -3,17 +3,14 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
-
 module finite-group-theory.finite-type-groups where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -23,14 +20,12 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
-
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types

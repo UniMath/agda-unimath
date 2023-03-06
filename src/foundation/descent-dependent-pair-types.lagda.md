@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.descent-dependent-pair-types where
-
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
 open import foundation.equivalences

@@ -3,13 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.mere-equivalences-concrete-group-actions where
-
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions

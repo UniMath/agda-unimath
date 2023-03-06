@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.diagonals-of-maps where
-
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings

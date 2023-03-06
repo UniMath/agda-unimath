@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module organic-chemistry.alkanes where
-
 open import foundation.universe-levels
-
-open import organic-chemistry.saturated-carbons
 open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
 ```
 </details>
 

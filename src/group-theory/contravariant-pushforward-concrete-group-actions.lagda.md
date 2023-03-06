@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.contravariant-pushforward-concrete-group-actions where
-
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-group-actions

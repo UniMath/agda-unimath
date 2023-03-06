@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module ring-theory.ideals-rings where
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -18,15 +17,12 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.normal-subgroups
-open import group-theory.subgroups-abelian-groups
 open import group-theory.subgroups
-
+open import group-theory.subgroups-abelian-groups
 open import ring-theory.rings
 open import ring-theory.subsets-rings
-
 open import univalent-combinatorics.lists
 ```
 </details>

@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module structured-types.magmas where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

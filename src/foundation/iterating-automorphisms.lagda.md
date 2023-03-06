@@ -3,15 +3,13 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.iterating-automorphisms where
-
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.automorphisms
 open import foundation.coproduct-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types

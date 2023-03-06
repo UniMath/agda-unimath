@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.coproduct-types where
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
@@ -20,7 +18,6 @@ open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.double-counting

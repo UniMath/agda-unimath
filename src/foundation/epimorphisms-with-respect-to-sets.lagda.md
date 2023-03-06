@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.epimorphisms-with-respect-to-sets where
-
 open import foundation-core.univalence
-
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences

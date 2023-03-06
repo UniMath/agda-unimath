@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.catalan-numbers where
-
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -11,9 +10,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
-
 open import foundation.universe-levels
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

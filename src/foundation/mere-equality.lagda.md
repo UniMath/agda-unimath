@@ -3,17 +3,15 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.mere-equality where
-
-open import foundation.functoriality-propositional-truncation
-open import foundation.propositional-truncations
-open import foundation.reflecting-maps-equivalence-relations
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
+open import foundation.functoriality-propositional-truncation
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
 ```
 </details>
 

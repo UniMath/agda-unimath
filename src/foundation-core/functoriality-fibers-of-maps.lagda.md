@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.functoriality-fibers-of-maps where
-
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types

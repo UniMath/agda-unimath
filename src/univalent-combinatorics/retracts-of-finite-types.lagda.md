@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.retracts-of-finite-types where
-
 open import elementary-number-theory.natural-numbers
-
-open import foundation.decidable-maps
 open import foundation.decidable-embeddings
+open import foundation.decidable-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.fibers-of-maps
@@ -16,7 +14,6 @@ open import foundation.injective-maps
 open import foundation.propositional-maps
 open import foundation.retractions
 open import foundation.universe-levels
-
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.equality-finite-types

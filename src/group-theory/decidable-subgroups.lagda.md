@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.decidable-subgroups where
-
 open import foundation.binary-relations
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
@@ -20,7 +19,6 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
-
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups

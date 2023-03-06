@@ -3,15 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module trees.inequality-w-types where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
-
 open import trees.elementhood-relation-w-types
 open import trees.w-types
 ```

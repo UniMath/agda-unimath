@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.decidable-relations where
-
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.propositions

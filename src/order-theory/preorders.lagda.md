@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.preorders where
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.propositions

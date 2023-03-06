@@ -3,12 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.loop-groups-sets where
-
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equality-dependent-pair-types
-open import foundation.functions
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-truncated-types
 open import foundation.identity-types
@@ -19,7 +18,6 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
-
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 open import group-theory.groups

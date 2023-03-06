@@ -3,16 +3,13 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.coherently-invertible-maps where
-
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-
 open import foundation.commuting-squares-of-identifications
 ```
 </details>

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.intersections-subtypes where
-
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.double-powersets

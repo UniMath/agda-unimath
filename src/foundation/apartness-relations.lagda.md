@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.apartness-relations where
-
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types

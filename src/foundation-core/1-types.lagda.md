@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.1-types where
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types

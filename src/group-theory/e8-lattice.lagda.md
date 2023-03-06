@@ -3,13 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.e8-lattice where
-
 open import elementary-number-theory.integers
-
 open import foundation.equality-coproduct-types
 open import foundation.sets
 open import foundation.universe-levels
-
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

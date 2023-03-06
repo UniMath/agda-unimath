@@ -3,13 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.contractible-maps where
-
 open import foundation-core.contractible-maps public
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.propositions

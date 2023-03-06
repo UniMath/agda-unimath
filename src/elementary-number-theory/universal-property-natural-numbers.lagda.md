@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.universal-property-natural-numbers where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

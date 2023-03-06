@@ -3,12 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module commutative-algebra.nilradical-commutative-rings where
-
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-
 open import foundation.universe-levels
-
 open import ring-theory.nilpotent-elements-rings
 ```
 </details>

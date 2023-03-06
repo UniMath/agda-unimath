@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.identity-systems where
-
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

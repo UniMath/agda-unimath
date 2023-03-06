@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.discrete-types where
-
 open import foundation-core.discrete-types public
-
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.coproduct-types

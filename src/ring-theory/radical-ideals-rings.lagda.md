@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module ring-theory.radical-ideals-rings where
-
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings

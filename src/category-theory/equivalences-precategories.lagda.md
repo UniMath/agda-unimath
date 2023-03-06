@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.equivalences-precategories where
-
 open import category-theory.functors-precategories
 open import category-theory.natural-isomorphisms-precategories
 open import category-theory.precategories

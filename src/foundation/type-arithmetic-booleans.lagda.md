@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-booleans where
-
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

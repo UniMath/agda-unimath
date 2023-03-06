@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-dependent-function-types where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies

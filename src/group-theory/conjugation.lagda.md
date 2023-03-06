@@ -3,15 +3,13 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.conjugation where
-
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-groups

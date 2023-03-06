@@ -3,13 +3,11 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.iterating-functions where
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.automorphisms
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -22,13 +20,10 @@ open import foundation.involutions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import group-theory.monoid-actions
-
-open import univalent-combinatorics.standard-finite-types
-
 open import group-theory.monoids
 open import group-theory.semigroups
+open import univalent-combinatorics.standard-finite-types
 ```
 </details>
 

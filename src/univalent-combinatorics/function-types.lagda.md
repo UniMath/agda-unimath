@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.function-types where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
-
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types

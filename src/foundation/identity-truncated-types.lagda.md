@@ -3,15 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.identity-truncated-types where
-
 open import foundation-core.equivalences
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.identity-types
 open import foundation.truncated-types
 open import foundation.univalence
-
 ```
 </details>
 
