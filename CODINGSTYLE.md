@@ -1,4 +1,3 @@
-
 # Library coding style conventions
 
 * This style guide is here to improve the readability of the code. If an item
@@ -26,8 +25,9 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 * The capitalized part of a name only appears at the end of the name.
 * Unicode symbols are used sparingly, and only following established mathematical practice.
 * Abbreviations are used sparingly, as they also impair the readability of the code.
-* If a symbol is not available, the concept is described in words or abbreviated words. For example, the equality symbol = is not available to the user to assert an equality. Hence, we write Id x y to assert equality, referring to the identity type, and we do not use a new symbol.
-* The readability of the code has a high priority. Therefore we try to avoid subtly different variations of the same symbol.
+* If a symbol is not available, the concept is described in words or abbreviated words.
+* The readability of the code has high priority. Therefore we try to avoid subtly different variations of the same symbol.
+  The only exception to this rule is the use of the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm) for identity type formation, as the standard equals sign is a reserved symbol in Agda.
 
 ## Indentation
 
@@ -39,7 +39,8 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 
 ## Modules
 
-* Using anonymous modules is encouraged to group constructions by topic, introducing the common arguments of those constructions as parameters.
+* All module imports should be done at the beginning of the file directly after the named module declaration, and the imports should be sorted alphabetically.
+* Using anonymous modules is encouraged to group constructions by topic, introducing the common arguments of those constructions as parameters. This usually improves the readability of the individual statements as well.
 * As a rule of thumb, there should only be one named module per file. The other modules in the file should be anonymous.
 * There should always be a single blank line after a module declaration.
 * The variables of a module should be declared on a new line, with a 2-space indentation level. If the variables don't fit on a single line, they can be declared over multiple lines, grouping the variables together logically.
