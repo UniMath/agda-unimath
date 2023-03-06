@@ -1,4 +1,4 @@
-#  Singleton subtypes
+# Singleton subtypes
 
 <details><summary>Imports</summary>
 ```agda

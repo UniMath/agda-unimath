@@ -1,4 +1,4 @@
-#  Unordered tuples of elements in commutative monoids
+# Unordered tuples of elements in commutative monoids
 
 <details><summary>Imports</summary>
 ```agda

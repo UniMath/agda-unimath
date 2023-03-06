@@ -1,4 +1,4 @@
-#  Telephone numbers
+# Telephone numbers
 
 <details><summary>Imports</summary>
 ```agda

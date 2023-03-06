@@ -1,4 +1,4 @@
-#  Identity types
+# Identity types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Faithful pointed maps
+# Faithful pointed maps
 
 <details><summary>Imports</summary>
 ```agda

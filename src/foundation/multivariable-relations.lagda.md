@@ -1,4 +1,4 @@
-#  Multivariable relations
+# Multivariable relations
 
 <details><summary>Imports</summary>
 ```agda

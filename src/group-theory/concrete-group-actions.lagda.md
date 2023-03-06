@@ -1,4 +1,4 @@
-#  Concrete group actions
+# Concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

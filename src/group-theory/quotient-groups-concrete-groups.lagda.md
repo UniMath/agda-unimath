@@ -1,4 +1,4 @@
-#  Quotient groups of concrete groups
+# Quotient groups of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

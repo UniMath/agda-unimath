@@ -1,4 +1,4 @@
-#  The divisibility relation on the standard finite types
+# The divisibility relation on the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

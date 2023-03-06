@@ -1,4 +1,4 @@
-#  Functional correspondences
+# Functional correspondences
 
 <details><summary>Imports</summary>
 ```agda

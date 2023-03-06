@@ -1,4 +1,4 @@
-#  Exclusive disjunction of propositions
+# Exclusive disjunction of propositions
 
 <details><summary>Imports</summary>
 ```agda

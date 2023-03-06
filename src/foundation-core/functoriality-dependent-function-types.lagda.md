@@ -1,4 +1,4 @@
-#  Functoriality of dependent function types
+# Functoriality of dependent function types
 
 <details><summary>Imports</summary>
 ```agda

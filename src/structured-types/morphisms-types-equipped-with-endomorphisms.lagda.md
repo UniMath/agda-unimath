@@ -1,4 +1,4 @@
-#  Morphisms of types equipped with endomorphisms
+# Morphisms of types equipped with endomorphisms
 
 <details><summary>Imports</summary>
 ```agda

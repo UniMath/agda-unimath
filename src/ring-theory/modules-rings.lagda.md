@@ -1,4 +1,4 @@
-#  Modules over rings
+# Modules over rings
 
 <details><summary>Imports</summary>
 ```agda

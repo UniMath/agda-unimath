@@ -1,4 +1,4 @@
-#  Σ-decompositions of types
+# Σ-decompositions of types
 
 <details><summary>Imports</summary>
 ```agda

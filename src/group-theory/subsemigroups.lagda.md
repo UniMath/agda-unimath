@@ -1,4 +1,4 @@
-#  Subsemigroups
+# Subsemigroups
 
 <details><summary>Imports</summary>
 ```agda

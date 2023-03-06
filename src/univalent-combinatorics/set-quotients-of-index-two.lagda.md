@@ -1,4 +1,4 @@
-#  Set quotients of index 2
+# Set quotients of index 2
 
 <details><summary>Imports</summary>
 ```agda

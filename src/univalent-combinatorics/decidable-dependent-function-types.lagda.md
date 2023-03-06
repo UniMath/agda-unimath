@@ -1,4 +1,4 @@
-#  Decidable dependent function types
+# Decidable dependent function types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Integral domains
+# Integral domains
 
 <details><summary>Imports</summary>
 ```agda

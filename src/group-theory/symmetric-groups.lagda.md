@@ -1,4 +1,4 @@
-#  Symmetric groups
+# Symmetric groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Magmas
+# Magmas
 
 <details><summary>Imports</summary>
 ```agda

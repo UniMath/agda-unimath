@@ -1,4 +1,4 @@
-#  Finite species
+# Finite species
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Equivalences of species
+# Equivalences of species
 
 <details><summary>Imports</summary>
 ```agda

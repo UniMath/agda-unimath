@@ -1,4 +1,4 @@
-#  Kernels of homomorphisms of concrete groups
+# Kernels of homomorphisms of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

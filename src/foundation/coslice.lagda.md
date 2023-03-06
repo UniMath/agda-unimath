@@ -1,4 +1,4 @@
-#  Morphisms in the coslice category of types
+# Morphisms in the coslice category of types
 
 <details><summary>Imports</summary>
 ```agda

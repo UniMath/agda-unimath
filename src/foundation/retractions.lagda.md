@@ -1,4 +1,4 @@
-#  Retractions
+# Retractions
 
 <details><summary>Imports</summary>
 ```agda

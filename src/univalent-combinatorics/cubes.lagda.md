@@ -1,4 +1,4 @@
-#  Cubes
+# Cubes
 
 <details><summary>Imports</summary>
 ```agda

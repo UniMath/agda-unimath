@@ -1,4 +1,4 @@
-#  Diagonal maps of types
+# Diagonal maps of types
 
 <details><summary>Imports</summary>
 ```agda

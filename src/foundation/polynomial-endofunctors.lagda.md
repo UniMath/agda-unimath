@@ -1,4 +1,4 @@
-#  Polynomial endofunctors
+# Polynomial endofunctors
 
 <details><summary>Imports</summary>
 ```agda

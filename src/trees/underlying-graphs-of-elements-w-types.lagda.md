@@ -1,4 +1,4 @@
-#  The underlying graphs of elements of W-types
+# The underlying graphs of elements of W-types
 
 <details><summary>Imports</summary>
 ```agda

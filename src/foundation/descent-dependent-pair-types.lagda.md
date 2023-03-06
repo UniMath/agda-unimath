@@ -1,4 +1,4 @@
-#  Descent for dependent pair types
+# Descent for dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

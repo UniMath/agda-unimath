@@ -1,4 +1,4 @@
-#  Equality in the standard finite types
+# Equality in the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

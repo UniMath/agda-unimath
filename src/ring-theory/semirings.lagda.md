@@ -1,4 +1,4 @@
-#  Semirings
+# Semirings
 
 <details><summary>Imports</summary>
 ```agda

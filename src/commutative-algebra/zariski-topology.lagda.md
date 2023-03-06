@@ -1,4 +1,4 @@
-#  The Zariski topology on the set of prime ideals in a commutative ring
+# The Zariski topology on the set of prime ideals in a commutative ring
 
 <details><summary>Imports</summary>
 ```agda

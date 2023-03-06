@@ -1,4 +1,4 @@
-#  Fibers of pointed maps
+# Fibers of pointed maps
 
 <details><summary>Imports</summary>
 ```agda

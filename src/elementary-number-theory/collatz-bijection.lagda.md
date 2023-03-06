@@ -1,4 +1,4 @@
-#  The Collatz bijection
+# The Collatz bijection
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Images of subtypes
+# Images of subtypes
 
 <details><summary>Imports</summary>
 ```agda

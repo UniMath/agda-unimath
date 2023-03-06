@@ -1,4 +1,4 @@
-#  Inhabited types
+# Inhabited types
 
 <details><summary>Imports</summary>
 ```agda

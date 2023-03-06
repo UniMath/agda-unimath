@@ -1,4 +1,4 @@
-#  Cartesian products of monoids
+# Cartesian products of monoids
 
 <details><summary>Imports</summary>
 ```agda

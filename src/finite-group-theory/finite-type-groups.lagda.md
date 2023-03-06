@@ -1,4 +1,4 @@
-#  The group of n-element types
+# The group of n-element types
 
 <details><summary>Imports</summary>
 ```agda

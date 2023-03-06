@@ -1,4 +1,4 @@
-#  Isolated points
+# Isolated points
 
 <details><summary>Imports</summary>
 ```agda

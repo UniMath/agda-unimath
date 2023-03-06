@@ -1,4 +1,4 @@
-#  Symmetric difference of subtypes
+# Symmetric difference of subtypes
 
 <details><summary>Imports</summary>
 ```agda

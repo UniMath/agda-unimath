@@ -1,4 +1,4 @@
-#  Directed families in posets
+# Directed families in posets
 
 <details><summary>Imports</summary>
 ```agda

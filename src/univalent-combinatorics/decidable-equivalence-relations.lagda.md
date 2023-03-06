@@ -1,4 +1,4 @@
-#  Decidable equivalence relations on finite types
+# Decidable equivalence relations on finite types
 
 <details><summary>Imports</summary>
 ```agda

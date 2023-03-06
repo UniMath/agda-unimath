@@ -1,4 +1,4 @@
-#  Cycle index series of species
+# Cycle index series of species
 
 <details><summary>Imports</summary>
 ```agda

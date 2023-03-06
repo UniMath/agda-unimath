@@ -1,4 +1,4 @@
-#  The groupoid of main classes of Latin squares
+# The groupoid of main classes of Latin squares
 
 <details><summary>Imports</summary>
 ```agda

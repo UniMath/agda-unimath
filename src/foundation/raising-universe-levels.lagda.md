@@ -1,4 +1,4 @@
-#  Raising universe levels
+# Raising universe levels
 
 <details><summary>Imports</summary>
 ```agda

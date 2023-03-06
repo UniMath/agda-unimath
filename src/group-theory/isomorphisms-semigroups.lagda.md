@@ -1,4 +1,4 @@
-#  Isomorphisms of semigroups
+# Isomorphisms of semigroups
 
 <details><summary>Imports</summary>
 ```agda

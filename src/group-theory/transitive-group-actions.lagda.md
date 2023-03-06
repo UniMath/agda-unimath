@@ -1,4 +1,4 @@
-#  Transitive group actions
+# Transitive group actions
 
 <details><summary>Imports</summary>
 ```agda

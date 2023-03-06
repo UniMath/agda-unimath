@@ -1,4 +1,4 @@
-#  The invariant basis property of rings
+# The invariant basis property of rings
 
 <details><summary>Imports</summary>
 ```agda

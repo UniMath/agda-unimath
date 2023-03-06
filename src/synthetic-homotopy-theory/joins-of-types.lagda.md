@@ -1,4 +1,4 @@
-#  Joins of types
+# Joins of types
 
 <details><summary>Imports</summary>
 ```agda

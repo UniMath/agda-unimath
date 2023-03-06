@@ -1,4 +1,4 @@
-#  Small universes
+# Small universes
 
 <details><summary>Imports</summary>
 ```agda

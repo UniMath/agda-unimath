@@ -1,4 +1,4 @@
-#  Symmetric elements of involutive types
+# Symmetric elements of involutive types
 
 <details><summary>Imports</summary>
 ```agda

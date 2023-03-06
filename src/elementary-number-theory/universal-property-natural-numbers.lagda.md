@@ -1,4 +1,4 @@
-#  The universal property of the natural numbers
+# The universal property of the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

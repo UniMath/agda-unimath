@@ -1,4 +1,4 @@
-#  Singleton induction
+# Singleton induction
 
 <details><summary>Imports</summary>
 ```agda

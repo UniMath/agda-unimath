@@ -1,4 +1,4 @@
-#  Sheargroups
+# Sheargroups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Species
+# Species
 
 <details><summary>Imports</summary>
 ```agda

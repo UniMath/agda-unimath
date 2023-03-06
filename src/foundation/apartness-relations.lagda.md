@@ -1,4 +1,4 @@
-#  Apartness relations
+# Apartness relations
 
 <details><summary>Imports</summary>
 ```agda

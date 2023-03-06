@@ -1,4 +1,4 @@
-#  Descent for the empty type
+# Descent for the empty type
 
 <details><summary>Imports</summary>
 ```agda

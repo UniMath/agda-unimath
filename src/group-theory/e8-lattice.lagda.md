@@ -1,4 +1,4 @@
-#  The E₈-lattice
+# The E₈-lattice
 
 <details><summary>Imports</summary>
 ```agda

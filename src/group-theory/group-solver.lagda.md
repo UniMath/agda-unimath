@@ -1,4 +1,4 @@
-#  Group solver
+# Group solver
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Invertible elements in monoids
+# Invertible elements in monoids
 
 <details><summary>Imports</summary>
 ```agda

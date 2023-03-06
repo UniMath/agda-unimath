@@ -1,4 +1,4 @@
-#  Equivalences of higher groups
+# Equivalences of higher groups
 
 <details><summary>Imports</summary>
 ```agda

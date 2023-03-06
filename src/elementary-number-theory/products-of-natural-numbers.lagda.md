@@ -1,4 +1,4 @@
-#  Products of natural numbers
+# Products of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

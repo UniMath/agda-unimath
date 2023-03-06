@@ -1,4 +1,4 @@
-#  Perfect Images
+# Perfect Images
 
 <details><summary>Imports</summary>
 ```agda

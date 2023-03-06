@@ -1,4 +1,4 @@
-#  Effective maps for equivalence relations
+# Effective maps for equivalence relations
 
 <details><summary>Imports</summary>
 ```agda

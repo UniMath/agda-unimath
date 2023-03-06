@@ -1,4 +1,4 @@
-#  Prespectra
+# Prespectra
 
 <details><summary>Imports</summary>
 ```agda

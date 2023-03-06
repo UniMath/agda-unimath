@@ -1,4 +1,4 @@
-#  Morphisms of finite species
+# Morphisms of finite species
 
 <details><summary>Imports</summary>
 ```agda

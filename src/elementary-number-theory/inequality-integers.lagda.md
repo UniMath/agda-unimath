@@ -1,4 +1,4 @@
-#  Inequality of integers
+# Inequality of integers
 
 <details><summary>Imports</summary>
 ```agda

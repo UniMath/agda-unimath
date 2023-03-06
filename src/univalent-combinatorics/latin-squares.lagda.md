@@ -1,4 +1,4 @@
-#  Latin squares
+# Latin squares
 
 <details><summary>Imports</summary>
 ```agda

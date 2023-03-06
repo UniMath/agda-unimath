@@ -1,4 +1,4 @@
-#  The Well-Ordering Principle of the natural numbers
+# The Well-Ordering Principle of the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

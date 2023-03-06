@@ -1,4 +1,4 @@
-#  Multivariable correspondences
+# Multivariable correspondences
 
 <details><summary>Imports</summary>
 ```agda

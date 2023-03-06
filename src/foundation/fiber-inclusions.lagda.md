@@ -1,4 +1,4 @@
-#  Fiber inclusions
+# Fiber inclusions
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Iterating involutions
+# Iterating involutions
 
 <details><summary>Imports</summary>
 ```agda

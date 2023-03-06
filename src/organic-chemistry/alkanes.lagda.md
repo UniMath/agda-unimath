@@ -1,4 +1,4 @@
-#  Alkanes
+# Alkanes
 
 <details><summary>Imports</summary>
 ```agda

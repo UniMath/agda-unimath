@@ -1,4 +1,4 @@
-#  The infinitude of primes
+# The infinitude of primes
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Divisibility in modular arithmetic
+# Divisibility in modular arithmetic
 
 <details><summary>Imports</summary>
 ```agda

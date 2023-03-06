@@ -1,4 +1,4 @@
-#  Fractions
+# Fractions
 
 <details><summary>Imports</summary>
 ```agda

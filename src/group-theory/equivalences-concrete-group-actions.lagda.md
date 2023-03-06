@@ -1,4 +1,4 @@
-#  Equivalences of concrete group actions
+# Equivalences of concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

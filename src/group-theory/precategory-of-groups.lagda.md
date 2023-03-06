@@ -1,4 +1,4 @@
-#  The precategory of groups
+# The precategory of groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Transpositions
+# Transpositions
 
 <details><summary>Imports</summary>
 ```agda

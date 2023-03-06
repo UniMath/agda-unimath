@@ -1,4 +1,4 @@
-#  Complete bipartite graphs
+# Complete bipartite graphs
 
 <details><summary>Imports</summary>
 ```agda

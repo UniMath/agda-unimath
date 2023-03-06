@@ -1,4 +1,4 @@
-#  Shriek of concrete group homomorphisms
+# Shriek of concrete group homomorphisms
 
 <details><summary>Imports</summary>
 ```agda

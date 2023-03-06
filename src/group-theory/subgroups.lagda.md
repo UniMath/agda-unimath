@@ -1,4 +1,4 @@
-#  Subgroups
+# Subgroups
 
 <details><summary>Imports</summary>
 ```agda

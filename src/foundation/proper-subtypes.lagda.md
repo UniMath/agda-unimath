@@ -1,4 +1,4 @@
-#  Proper subsets
+# Proper subsets
 
 <details><summary>Imports</summary>
 ```agda

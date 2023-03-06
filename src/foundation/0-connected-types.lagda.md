@@ -1,4 +1,4 @@
-#  0-Connected types
+# 0-Connected types
 
 <details><summary>Imports</summary>
 ```agda

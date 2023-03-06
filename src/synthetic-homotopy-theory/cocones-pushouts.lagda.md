@@ -1,4 +1,4 @@
-#  Cocones for pushouts
+# Cocones for pushouts
 
 <details><summary>Imports</summary>
 ```agda

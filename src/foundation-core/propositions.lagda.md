@@ -1,4 +1,4 @@
-#  Propositions
+# Propositions
 
 <details><summary>Imports</summary>
 ```agda

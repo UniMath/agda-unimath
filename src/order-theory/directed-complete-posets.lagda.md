@@ -1,4 +1,4 @@
-#  Directed complete posets
+# Directed complete posets
 
 <details><summary>Imports</summary>
 ```agda

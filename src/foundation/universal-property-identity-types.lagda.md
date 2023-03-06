@@ -1,4 +1,4 @@
-#  The universal property of identity types
+# The universal property of identity types
 
 <details><summary>Imports</summary>
 ```agda

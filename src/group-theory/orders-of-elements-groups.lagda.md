@@ -1,4 +1,4 @@
-#  The order of an element in a group
+# The order of an element in a group
 
 <details><summary>Imports</summary>
 ```agda

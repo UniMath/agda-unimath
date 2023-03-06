@@ -1,4 +1,4 @@
-#  Enriched undirected graphs
+# Enriched undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

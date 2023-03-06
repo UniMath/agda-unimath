@@ -1,4 +1,4 @@
-#  Ideals in rings
+# Ideals in rings
 
 <details><summary>Imports</summary>
 ```agda

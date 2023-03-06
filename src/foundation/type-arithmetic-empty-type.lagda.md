@@ -1,4 +1,4 @@
-#  Type arithmetic with the empty type
+# Type arithmetic with the empty type
 
 <details><summary>Imports</summary>
 ```agda

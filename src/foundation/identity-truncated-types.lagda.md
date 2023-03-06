@@ -1,4 +1,4 @@
-#  Identity types of truncated types
+# Identity types of truncated types
 
 <details><summary>Imports</summary>
 ```agda

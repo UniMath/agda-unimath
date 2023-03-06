@@ -1,4 +1,4 @@
-#  Faithful maps
+# Faithful maps
 
 <details><summary>Imports</summary>
 ```agda

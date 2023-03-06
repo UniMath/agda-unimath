@@ -1,4 +1,4 @@
-#  The elementhood relation on W-types
+# The elementhood relation on W-types
 
 <details><summary>Imports</summary>
 ```agda

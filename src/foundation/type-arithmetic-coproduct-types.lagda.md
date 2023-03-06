@@ -1,4 +1,4 @@
-#  Type arithmetic for coproduct types
+# Type arithmetic for coproduct types
 
 <details><summary>Imports</summary>
 ```agda

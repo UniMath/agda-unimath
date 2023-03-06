@@ -1,4 +1,4 @@
-#  Retracts of the type of natural numbers
+# Retracts of the type of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

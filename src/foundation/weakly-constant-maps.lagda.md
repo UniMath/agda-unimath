@@ -1,4 +1,4 @@
-#  Weakly constant maps
+# Weakly constant maps
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Nilpotent elements in rings
+# Nilpotent elements in rings
 
 <details><summary>Imports</summary>
 ```agda

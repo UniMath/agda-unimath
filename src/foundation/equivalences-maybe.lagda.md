@@ -1,4 +1,4 @@
-#  Equivalences on Maybe
+# Equivalences on Maybe
 
 <details><summary>Imports</summary>
 ```agda

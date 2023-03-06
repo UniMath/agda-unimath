@@ -1,4 +1,4 @@
-#  Equivalences between precategories
+# Equivalences between precategories
 
 <details><summary>Imports</summary>
 ```agda

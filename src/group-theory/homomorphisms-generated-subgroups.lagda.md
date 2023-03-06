@@ -1,4 +1,4 @@
-#  Homomorphisms of generated subgroups
+# Homomorphisms of generated subgroups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Abelian groups
+# Abelian groups
 
 <details><summary>Imports</summary>
 ```agda

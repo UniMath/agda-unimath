@@ -1,4 +1,4 @@
-#  Pointwise addition of morphisms of abelian groups
+# Pointwise addition of morphisms of abelian groups
 
 <details><summary>Imports</summary>
 ```agda

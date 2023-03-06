@@ -1,4 +1,4 @@
-#  Counting the elements in Maybe
+# Counting the elements in Maybe
 
 <details><summary>Imports</summary>
 ```agda

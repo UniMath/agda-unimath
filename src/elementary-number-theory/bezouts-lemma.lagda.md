@@ -1,4 +1,4 @@
-#  Bezout's lemma
+# Bezout's lemma
 
 <details><summary>Imports</summary>
 ```agda

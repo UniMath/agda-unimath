@@ -1,4 +1,4 @@
-#  Pointed types
+# Pointed types
 
 <details><summary>Imports</summary>
 ```agda

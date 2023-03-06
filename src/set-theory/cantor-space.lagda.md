@@ -1,4 +1,4 @@
-#  Cantor space
+# Cantor space
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Submultisets
+# Submultisets
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Subgroups of concrete groups
+# Subgroups of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

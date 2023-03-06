@@ -1,4 +1,4 @@
-#  Commutative rings
+# Commutative rings
 
 <details><summary>Imports</summary>
 ```agda

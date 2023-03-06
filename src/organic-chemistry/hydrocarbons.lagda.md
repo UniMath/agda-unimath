@@ -1,4 +1,4 @@
-#  Hydrocarbons
+# Hydrocarbons
 
 <details><summary>Imports</summary>
 ```agda

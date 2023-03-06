@@ -1,4 +1,4 @@
-#  Catalan numbers
+# Catalan numbers
 
 <details><summary>Imports</summary>
 ```agda

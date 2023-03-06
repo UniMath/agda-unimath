@@ -1,4 +1,4 @@
-#  Petri-nets
+# Petri-nets
 
 <details><summary>Imports</summary>
 ```agda

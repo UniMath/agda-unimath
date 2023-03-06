@@ -1,4 +1,4 @@
-#  Large categories
+# Large categories
 
 <details><summary>Imports</summary>
 ```agda

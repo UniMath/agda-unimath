@@ -1,4 +1,4 @@
-#  Lists
+# Lists
 
 <details><summary>Imports</summary>
 ```agda

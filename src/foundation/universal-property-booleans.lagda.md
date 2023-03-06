@@ -1,4 +1,4 @@
-#  The universal property of booleans
+# The universal property of booleans
 
 <details><summary>Imports</summary>
 ```agda

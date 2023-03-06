@@ -1,4 +1,4 @@
-#  Orbits of higher group actions
+# Orbits of higher group actions
 
 <details><summary>Imports</summary>
 ```agda

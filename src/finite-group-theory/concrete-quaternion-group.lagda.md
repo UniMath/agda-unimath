@@ -1,4 +1,4 @@
-#  The concrete quaternion group
+# The concrete quaternion group
 
 <details><summary>Imports</summary>
 ```agda

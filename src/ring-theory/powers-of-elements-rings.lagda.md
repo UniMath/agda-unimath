@@ -1,4 +1,4 @@
-#  Powers of elements in rings
+# Powers of elements in rings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Descent for equivalences
+# Descent for equivalences
 
 <details><summary>Imports</summary>
 ```agda

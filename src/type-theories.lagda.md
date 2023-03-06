@@ -1,4 +1,4 @@
-#  Type theories
+# Type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}

@@ -1,4 +1,4 @@
-#  Type arithmetic for cartesian product types
+# Type arithmetic for cartesian product types
 
 <details><summary>Imports</summary>
 ```agda

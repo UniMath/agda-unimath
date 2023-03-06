@@ -1,4 +1,4 @@
-#  Pointed sections of pointed maps
+# Pointed sections of pointed maps
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Stabilizer groups
+# Stabilizer groups
 
 <details><summary>Imports</summary>
 ```agda

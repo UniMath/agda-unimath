@@ -1,4 +1,4 @@
-#  Fixed points of higher group actions
+# Fixed points of higher group actions
 
 <details><summary>Imports</summary>
 ```agda

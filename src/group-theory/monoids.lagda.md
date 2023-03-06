@@ -1,4 +1,4 @@
-#  Monoids
+# Monoids
 
 <details><summary>Imports</summary>
 ```agda

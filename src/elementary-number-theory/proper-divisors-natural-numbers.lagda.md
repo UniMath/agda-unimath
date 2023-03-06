@@ -1,4 +1,4 @@
-#  Proper divisors of natural numbers
+# Proper divisors of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

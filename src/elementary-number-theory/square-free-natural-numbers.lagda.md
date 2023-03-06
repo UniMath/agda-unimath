@@ -1,4 +1,4 @@
-#  Square-free natural numbers
+# Square-free natural numbers
 
 <details><summary>Imports</summary>
 ```agda

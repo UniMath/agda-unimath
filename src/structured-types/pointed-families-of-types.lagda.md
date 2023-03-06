@@ -1,4 +1,4 @@
-#  Pointed families of types
+# Pointed families of types
 
 <details><summary>Imports</summary>
 ```agda

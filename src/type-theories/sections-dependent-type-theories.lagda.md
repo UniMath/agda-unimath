@@ -1,4 +1,4 @@
-#  Sections of dependent type theories
+# Sections of dependent type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}

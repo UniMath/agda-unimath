@@ -1,4 +1,4 @@
-#  The univalence axiom implies function extensionality
+# The univalence axiom implies function extensionality
 
 <details><summary>Imports</summary>
 ```agda

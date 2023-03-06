@@ -1,4 +1,4 @@
-#  The universal property of the empty type
+# The universal property of the empty type
 
 <details><summary>Imports</summary>
 ```agda

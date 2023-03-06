@@ -1,4 +1,4 @@
-#  Finite graphs
+# Finite graphs
 
 <details><summary>Imports</summary>
 ```agda

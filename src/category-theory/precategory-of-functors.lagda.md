@@ -1,4 +1,4 @@
-#  The precategory of functors and natural transformations between two fixed precategories
+# The precategory of functors and natural transformations between two fixed precategories
 
 <details><summary>Imports</summary>
 ```agda

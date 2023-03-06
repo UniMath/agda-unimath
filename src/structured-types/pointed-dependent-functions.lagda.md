@@ -1,4 +1,4 @@
-#  Pointed dependent functions
+# Pointed dependent functions
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Pointing of species
+# Pointing of species
 
 <details><summary>Imports</summary>
 ```agda

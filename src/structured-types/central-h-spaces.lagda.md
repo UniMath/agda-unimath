@@ -1,4 +1,4 @@
-#  Central H-spaces
+# Central H-spaces
 
 <details><summary>Imports</summary>
 ```agda

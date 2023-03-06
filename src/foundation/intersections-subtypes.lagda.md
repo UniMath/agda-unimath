@@ -1,4 +1,4 @@
-#  Intersection of subtypes
+# Intersection of subtypes
 
 <details><summary>Imports</summary>
 ```agda

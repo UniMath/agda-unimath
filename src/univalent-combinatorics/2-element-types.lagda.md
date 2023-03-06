@@ -1,4 +1,4 @@
-#  2-element types
+# 2-element types
 
 <details><summary>Imports</summary>
 ```agda

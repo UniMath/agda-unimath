@@ -1,4 +1,4 @@
-#  The category of semigroups
+# The category of semigroups
 
 <details><summary>Imports</summary>
 ```agda

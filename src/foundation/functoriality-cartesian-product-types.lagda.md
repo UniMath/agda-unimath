@@ -1,4 +1,4 @@
-#  Functoriality of cartesian product types
+# Functoriality of cartesian product types
 
 <details><summary>Imports</summary>
 ```agda

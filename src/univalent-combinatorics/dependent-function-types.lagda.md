@@ -1,4 +1,4 @@
-#  Counting the elements of dependent function types
+# Counting the elements of dependent function types
 
 <details><summary>Imports</summary>
 ```agda

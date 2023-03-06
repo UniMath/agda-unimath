@@ -1,4 +1,4 @@
-#  The integers
+# The integers
 
 <details><summary>Imports</summary>
 ```agda

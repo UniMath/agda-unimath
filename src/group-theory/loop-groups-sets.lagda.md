@@ -1,4 +1,4 @@
-#  Concrete automorphism groups on sets
+# Concrete automorphism groups on sets
 
 <details><summary>Imports</summary>
 ```agda

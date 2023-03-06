@@ -1,4 +1,4 @@
-#  Rooted undirected trees
+# Rooted undirected trees
 
 <details><summary>Imports</summary>
 ```agda

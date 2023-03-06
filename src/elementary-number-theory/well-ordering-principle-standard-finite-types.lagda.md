@@ -1,4 +1,4 @@
-#  The Well-Ordering Principle of the standard finite types
+# The Well-Ordering Principle of the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

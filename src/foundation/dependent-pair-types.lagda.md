@@ -1,4 +1,4 @@
-#  Dependent pair types
+# Dependent pair types
 
 ```agda
 {-# OPTIONS --safe #-}

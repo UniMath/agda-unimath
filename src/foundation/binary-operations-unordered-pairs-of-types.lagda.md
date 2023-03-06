@@ -1,4 +1,4 @@
-#  Binary operations on unordered pairs of types
+# Binary operations on unordered pairs of types
 
 <details><summary>Imports</summary>
 ```agda

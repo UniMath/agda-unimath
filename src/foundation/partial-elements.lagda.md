@@ -1,4 +1,4 @@
-#  Partial elements
+# Partial elements
 
 <details><summary>Imports</summary>
 ```agda

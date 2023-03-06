@@ -1,4 +1,4 @@
-#  Unit elements in the standard finite types
+# Unit elements in the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

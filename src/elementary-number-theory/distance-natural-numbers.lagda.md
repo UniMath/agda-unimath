@@ -1,4 +1,4 @@
-#  The distance between natural numbers
+# The distance between natural numbers
 
 <details><summary>Imports</summary>
 ```agda

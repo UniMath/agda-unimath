@@ -1,4 +1,4 @@
-#  Cartesian products of species
+# Cartesian products of species
 
 <details><summary>Imports</summary>
 ```agda

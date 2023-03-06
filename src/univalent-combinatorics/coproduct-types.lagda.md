@@ -1,4 +1,4 @@
-#  Coproducts of finite types
+# Coproducts of finite types
 
 <details><summary>Imports</summary>
 ```agda

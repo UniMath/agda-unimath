@@ -1,4 +1,4 @@
-#  Uniqueness of the image of a map
+# Uniqueness of the image of a map
 
 <details><summary>Imports</summary>
 ```agda

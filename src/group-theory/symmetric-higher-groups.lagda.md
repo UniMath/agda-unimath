@@ -1,4 +1,4 @@
-#  Symmetric higher groups
+# Symmetric higher groups
 
 <details><summary>Imports</summary>
 ```agda

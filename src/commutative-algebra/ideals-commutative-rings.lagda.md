@@ -1,4 +1,4 @@
-#  Ideals in commutative rings
+# Ideals in commutative rings
 
 <details><summary>Imports</summary>
 ```agda

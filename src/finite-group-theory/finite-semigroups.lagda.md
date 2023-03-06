@@ -1,4 +1,4 @@
-#  Finite semigroups
+# Finite semigroups
 
 <details><summary>Imports</summary>
 ```agda

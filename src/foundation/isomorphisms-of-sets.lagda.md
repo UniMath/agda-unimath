@@ -1,4 +1,4 @@
-#  Isomorphisms of sets
+# Isomorphisms of sets
 
 <details><summary>Imports</summary>
 ```agda

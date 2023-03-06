@@ -1,4 +1,4 @@
-#  Order preserving maps on posets
+# Order preserving maps on posets
 
 <details><summary>Imports</summary>
 ```agda

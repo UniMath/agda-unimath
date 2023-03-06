@@ -1,4 +1,4 @@
-#  Unique existence
+# Unique existence
 
 <details><summary>Imports</summary>
 ```agda

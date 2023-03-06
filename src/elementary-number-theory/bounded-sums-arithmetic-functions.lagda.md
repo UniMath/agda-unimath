@@ -1,4 +1,4 @@
-#  Bounded sums of arithmetic functions
+# Bounded sums of arithmetic functions
 
 <details><summary>Imports</summary>
 ```agda

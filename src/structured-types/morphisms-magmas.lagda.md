@@ -1,4 +1,4 @@
-#  Morphisms of magmas
+# Morphisms of magmas
 
 <details><summary>Imports</summary>
 ```agda

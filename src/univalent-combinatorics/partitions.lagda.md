@@ -1,4 +1,4 @@
-#  Partitions of finite types
+# Partitions of finite types
 
 <details><summary>Imports</summary>
 ```agda

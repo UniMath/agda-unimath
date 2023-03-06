@@ -1,4 +1,4 @@
-#  Suspensions of types
+# Suspensions of types
 
 <details><summary>Imports</summary>
 ```agda

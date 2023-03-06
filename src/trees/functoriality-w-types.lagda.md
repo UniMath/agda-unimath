@@ -1,4 +1,4 @@
-#  Functoriality of W-types
+# Functoriality of W-types
 
 <details><summary>Imports</summary>
 ```agda

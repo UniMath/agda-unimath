@@ -1,4 +1,4 @@
-#  Contravariant pushforwards of concrete group actions
+# Contravariant pushforwards of concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

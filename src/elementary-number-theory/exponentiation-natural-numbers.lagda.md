@@ -1,4 +1,4 @@
-#  Exponentiation of natural numbers
+# Exponentiation of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

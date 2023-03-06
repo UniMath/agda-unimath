@@ -1,4 +1,4 @@
-#  The congruence relations on the natural numbers
+# The congruence relations on the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Steiner triple systems
+# Steiner triple systems
 
 <details><summary>Imports</summary>
 ```agda

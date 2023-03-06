@@ -1,4 +1,4 @@
-#  Isomorphisms of commutative rings
+# Isomorphisms of commutative rings
 
 <details><summary>Imports</summary>
 ```agda

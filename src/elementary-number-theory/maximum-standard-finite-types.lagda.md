@@ -1,4 +1,4 @@
-#  Maximum on the standard finite types
+# Maximum on the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

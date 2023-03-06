@@ -1,4 +1,4 @@
-#  Modular arithmetic
+# Modular arithmetic
 
 <details><summary>Imports</summary>
 ```agda

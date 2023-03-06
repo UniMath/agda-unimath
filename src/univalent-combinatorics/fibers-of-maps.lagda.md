@@ -1,4 +1,4 @@
-#  Fibers of maps between finite types
+# Fibers of maps between finite types
 
 <details><summary>Imports</summary>
 ```agda

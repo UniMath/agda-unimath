@@ -1,4 +1,4 @@
-#  Natural transformations between functors between large precategories
+# Natural transformations between functors between large precategories
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Equality of cartesian product types
+# Equality of cartesian product types
 
 <details><summary>Imports</summary>
 ```agda

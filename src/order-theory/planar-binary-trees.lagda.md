@@ -1,4 +1,4 @@
-#  Planar binary trees
+# Planar binary trees
 
 <details><summary>Imports</summary>
 ```agda

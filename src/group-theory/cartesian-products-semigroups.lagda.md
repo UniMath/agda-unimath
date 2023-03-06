@@ -1,4 +1,4 @@
-#  Cartesian products of semigroups
+# Cartesian products of semigroups
 
 <details><summary>Imports</summary>
 ```agda

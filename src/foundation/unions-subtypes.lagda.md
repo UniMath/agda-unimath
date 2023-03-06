@@ -1,4 +1,4 @@
-#  Union of subtypes
+# Union of subtypes
 
 <details><summary>Imports</summary>
 ```agda

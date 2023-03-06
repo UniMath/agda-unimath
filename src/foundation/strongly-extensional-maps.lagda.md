@@ -1,4 +1,4 @@
-#  Strongly extensional maps
+# Strongly extensional maps
 
 <details><summary>Imports</summary>
 ```agda

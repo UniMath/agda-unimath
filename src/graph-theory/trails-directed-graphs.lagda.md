@@ -1,4 +1,4 @@
-#  Trails in directed graphs
+# Trails in directed graphs
 
 <details><summary>Imports</summary>
 ```agda

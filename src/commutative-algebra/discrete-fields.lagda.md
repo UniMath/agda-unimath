@@ -1,4 +1,4 @@
-#  Discrete fields
+# Discrete fields
 
 <details><summary>Imports</summary>
 ```agda

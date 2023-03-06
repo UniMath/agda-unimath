@@ -1,4 +1,4 @@
-#  Locally small types
+# Locally small types
 
 <details><summary>Imports</summary>
 ```agda

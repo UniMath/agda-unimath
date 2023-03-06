@@ -1,4 +1,4 @@
-#  Matchings
+# Matchings
 
 <details><summary>Imports</summary>
 ```agda

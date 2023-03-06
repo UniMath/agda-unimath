@@ -1,4 +1,4 @@
-#  The universal property of the image of a map
+# The universal property of the image of a map
 
 <details><summary>Imports</summary>
 ```agda

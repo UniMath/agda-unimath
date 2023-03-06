@@ -1,4 +1,4 @@
-#  Retracts of finite types
+# Retracts of finite types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Decidable subtypes of finite types
+# Decidable subtypes of finite types
 
 <details><summary>Imports</summary>
 ```agda

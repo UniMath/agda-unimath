@@ -1,4 +1,4 @@
-#  The induction principle for propositional truncation
+# The induction principle for propositional truncation
 
 <details><summary>Imports</summary>
 ```agda

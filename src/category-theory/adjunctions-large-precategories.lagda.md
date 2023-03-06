@@ -1,4 +1,4 @@
-#  Adjunctions between large precategories
+# Adjunctions between large precategories
 
 <details><summary>Imports</summary>
 ```agda

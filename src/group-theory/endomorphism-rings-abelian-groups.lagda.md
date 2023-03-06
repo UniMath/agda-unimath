@@ -1,4 +1,4 @@
-#  The endomorphism rings of abelian groups
+# The endomorphism rings of abelian groups
 
 <details><summary>Imports</summary>
 ```agda

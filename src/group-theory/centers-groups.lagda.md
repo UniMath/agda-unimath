@@ -1,4 +1,4 @@
-#  The center of a group
+# The center of a group
 
 <details><summary>Imports</summary>
 ```agda

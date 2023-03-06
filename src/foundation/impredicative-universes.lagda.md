@@ -1,4 +1,4 @@
-#  Impredicative universes
+# Impredicative universes
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The universal property of propositional truncations
+# The universal property of propositional truncations
 
 <details><summary>Imports</summary>
 ```agda

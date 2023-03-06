@@ -1,4 +1,4 @@
-#  Decidable equality
+# Decidable equality
 
 <details><summary>Imports</summary>
 ```agda

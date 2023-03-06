@@ -1,4 +1,4 @@
-#  Circuits in undirected graphs
+# Circuits in undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

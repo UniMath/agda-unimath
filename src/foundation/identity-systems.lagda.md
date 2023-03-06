@@ -1,4 +1,4 @@
-#  Identity systems
+# Identity systems
 
 ```agda
 module foundation.identity-systems where

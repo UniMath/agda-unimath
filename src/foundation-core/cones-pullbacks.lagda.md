@@ -1,4 +1,4 @@
-#  Cones on pullback diagrams
+# Cones on pullback diagrams
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The universal property of fiber products
+# The universal property of fiber products
 
 <details><summary>Imports</summary>
 ```agda

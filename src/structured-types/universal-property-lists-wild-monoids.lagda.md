@@ -1,4 +1,4 @@
-#  The universal property of lists with respect to wild monoids
+# The universal property of lists with respect to wild monoids
 
 <details><summary>Imports</summary>
 ```agda

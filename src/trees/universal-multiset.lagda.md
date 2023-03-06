@@ -1,4 +1,4 @@
-#  The universal multiset
+# The universal multiset
 
 <details><summary>Imports</summary>
 ```agda

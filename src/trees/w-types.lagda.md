@@ -1,4 +1,4 @@
-#  W-types
+# W-types
 
 <details><summary>Imports</summary>
 ```agda

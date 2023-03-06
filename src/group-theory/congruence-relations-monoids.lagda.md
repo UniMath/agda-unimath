@@ -1,4 +1,4 @@
-#  Congruence relations on monoids
+# Congruence relations on monoids
 
 <details><summary>Imports</summary>
 ```agda

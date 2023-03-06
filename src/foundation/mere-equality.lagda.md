@@ -1,4 +1,4 @@
-#  Mere equality
+# Mere equality
 
 <details><summary>Imports</summary>
 ```agda

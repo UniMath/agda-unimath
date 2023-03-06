@@ -1,4 +1,4 @@
-#  Cyclic types
+# Cyclic types
 
 <details><summary>Imports</summary>
 ```agda

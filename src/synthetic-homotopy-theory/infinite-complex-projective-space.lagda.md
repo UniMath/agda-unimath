@@ -1,4 +1,4 @@
-#  The infinite complex projective space
+# The infinite complex projective space
 
 <details><summary>Imports</summary>
 ```agda

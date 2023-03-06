@@ -1,4 +1,4 @@
-#  Decidable maps
+# Decidable maps
 
 <details><summary>Imports</summary>
 ```agda

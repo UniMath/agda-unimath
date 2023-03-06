@@ -1,4 +1,4 @@
-#  Morphisms of cospans
+# Morphisms of cospans
 
 <details><summary>Imports</summary>
 ```agda

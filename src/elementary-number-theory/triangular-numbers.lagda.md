@@ -1,4 +1,4 @@
-#  The triangular numbers
+# The triangular numbers
 
 <details><summary>Imports</summary>
 ```agda

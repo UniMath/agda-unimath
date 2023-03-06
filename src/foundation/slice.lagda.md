@@ -1,4 +1,4 @@
-#  Morphisms of the slice category of types
+# Morphisms of the slice category of types
 
 <details><summary>Imports</summary>
 ```agda

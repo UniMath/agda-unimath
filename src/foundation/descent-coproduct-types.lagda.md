@@ -1,4 +1,4 @@
-#  Descent for coproduct types
+# Descent for coproduct types
 
 <details><summary>Imports</summary>
 ```agda

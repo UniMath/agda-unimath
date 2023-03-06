@@ -1,4 +1,4 @@
-#  Homotopies
+# Homotopies
 
 <details><summary>Imports</summary>
 ```agda

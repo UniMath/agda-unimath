@@ -1,4 +1,4 @@
-#  Nil ideals
+# Nil ideals
 
 <details><summary>Imports</summary>
 ```agda

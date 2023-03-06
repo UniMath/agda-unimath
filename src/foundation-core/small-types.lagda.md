@@ -1,4 +1,4 @@
-#  Small types
+# Small types
 
 <details><summary>Imports</summary>
 ```agda

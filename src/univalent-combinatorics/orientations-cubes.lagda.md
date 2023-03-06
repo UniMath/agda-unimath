@@ -1,4 +1,4 @@
-#  Orientations of cubes
+# Orientations of cubes
 
 <details><summary>Imports</summary>
 ```agda

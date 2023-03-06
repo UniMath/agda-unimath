@@ -1,4 +1,4 @@
-#  Sequences
+# Sequences
 
 <details><summary>Imports</summary>
 ```agda

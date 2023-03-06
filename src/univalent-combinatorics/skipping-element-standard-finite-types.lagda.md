@@ -1,4 +1,4 @@
-#  Skipping elements in standard finite types
+# Skipping elements in standard finite types
 
 <details><summary>Imports</summary>
 ```agda

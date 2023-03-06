@@ -1,4 +1,4 @@
-#  Reflecting maps of undirected graphs
+# Reflecting maps of undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

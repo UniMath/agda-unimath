@@ -1,4 +1,4 @@
-#  The principle of omniscience
+# The principle of omniscience
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Functions
+# Functions
 
 <details><summary>Imports</summary>
 ```agda

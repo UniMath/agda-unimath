@@ -1,4 +1,4 @@
-#  Cospans
+# Cospans
 
 <details><summary>Imports</summary>
 ```agda

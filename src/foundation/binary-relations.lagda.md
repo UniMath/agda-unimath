@@ -1,4 +1,4 @@
-#  Binary relations
+# Binary relations
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Double counting
+# Double counting
 
 <details><summary>Imports</summary>
 ```agda

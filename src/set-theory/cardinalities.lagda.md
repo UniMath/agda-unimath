@@ -1,4 +1,4 @@
-#  Cardinalities of sets
+# Cardinalities of sets
 
 <details><summary>Imports</summary>
 ```agda

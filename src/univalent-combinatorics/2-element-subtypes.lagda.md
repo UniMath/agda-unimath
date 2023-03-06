@@ -1,4 +1,4 @@
-#  2-element subtypes
+# 2-element subtypes
 
 <details><summary>Imports</summary>
 ```agda

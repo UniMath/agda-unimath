@@ -1,4 +1,4 @@
-#  Mere equivalences of types equipped with endomorphisms
+# Mere equivalences of types equipped with endomorphisms
 
 <details><summary>Imports</summary>
 ```agda

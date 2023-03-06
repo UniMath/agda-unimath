@@ -1,4 +1,4 @@
-#  Inequality on the standard finite types
+# Inequality on the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Natural numbers object in a precategory
+# Natural numbers object in a precategory
 
 <details><summary>Imports</summary>
 ```agda

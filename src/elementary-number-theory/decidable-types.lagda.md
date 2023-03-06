@@ -1,4 +1,4 @@
-#  Decidable types in elementary number theory
+# Decidable types in elementary number theory
 
 <details><summary>Imports</summary>
 ```agda

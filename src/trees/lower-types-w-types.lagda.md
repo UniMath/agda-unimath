@@ -1,4 +1,4 @@
-#  Lower types of elements in W-types
+# Lower types of elements in W-types
 
 <details><summary>Imports</summary>
 ```agda

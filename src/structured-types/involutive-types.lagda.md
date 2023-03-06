@@ -1,4 +1,4 @@
-#  Involutive types
+# Involutive types
 
 <details><summary>Imports</summary>
 ```agda

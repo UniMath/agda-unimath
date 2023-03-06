@@ -1,4 +1,4 @@
-#  Embeddings between standard finite types
+# Embeddings between standard finite types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Automorphism groups
+# Automorphism groups
 
 <details><summary>Imports</summary>
 ```agda

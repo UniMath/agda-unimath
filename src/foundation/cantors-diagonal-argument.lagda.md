@@ -1,4 +1,4 @@
-#  Cantor's diagonal argument
+# Cantor's diagonal argument
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Sieves in categories
+# Sieves in categories
 
 <details><summary>Imports</summary>
 ```agda

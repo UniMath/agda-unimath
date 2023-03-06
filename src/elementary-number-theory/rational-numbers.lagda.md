@@ -1,4 +1,4 @@
-#  The rational numbers
+# The rational numbers
 
 <details><summary>Imports</summary>
 ```agda

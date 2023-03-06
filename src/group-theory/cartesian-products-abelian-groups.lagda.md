@@ -1,4 +1,4 @@
-#  Cartesian products of abelian groups
+# Cartesian products of abelian groups
 
 <details><summary>Imports</summary>
 ```agda

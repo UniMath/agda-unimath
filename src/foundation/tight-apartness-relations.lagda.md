@@ -1,4 +1,4 @@
-#  Tight apartness relations
+# Tight apartness relations
 
 <details><summary>Imports</summary>
 ```agda

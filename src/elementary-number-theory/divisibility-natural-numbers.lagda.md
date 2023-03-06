@@ -1,4 +1,4 @@
-#  Divisibility of natural numbers
+# Divisibility of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

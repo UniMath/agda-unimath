@@ -1,4 +1,4 @@
-#  Wild semigroups
+# Wild semigroups
 
 <details><summary>Imports</summary>
 ```agda

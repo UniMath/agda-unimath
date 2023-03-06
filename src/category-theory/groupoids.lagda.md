@@ -1,4 +1,4 @@
-#  Groupoids
+# Groupoids
 
 <details><summary>Imports</summary>
 ```agda

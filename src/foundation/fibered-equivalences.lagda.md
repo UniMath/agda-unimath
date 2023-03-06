@@ -1,4 +1,4 @@
-#  Fibered equivalences
+# Fibered equivalences
 
 <details><summary>Imports</summary>
 ```agda

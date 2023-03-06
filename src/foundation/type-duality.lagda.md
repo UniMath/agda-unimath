@@ -1,4 +1,4 @@
-#  Type duality
+# Type duality
 
 <details><summary>Imports</summary>
 ```agda

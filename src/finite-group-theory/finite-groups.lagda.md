@@ -1,4 +1,4 @@
-#  Finite groups
+# Finite groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Spheres
+# Spheres
 
 <details><summary>Imports</summary>
 ```agda

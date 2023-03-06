@@ -1,4 +1,4 @@
-#  Large Posets
+# Large Posets
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Homomorphisms of higher group actions
+# Homomorphisms of higher group actions
 
 <details><summary>Imports</summary>
 ```agda

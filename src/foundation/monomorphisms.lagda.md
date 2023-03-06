@@ -1,4 +1,4 @@
-#  Monomorphisms
+# Monomorphisms
 
 <details><summary>Imports</summary>
 ```agda

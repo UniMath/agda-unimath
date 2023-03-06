@@ -1,4 +1,4 @@
-#  The standard finite types
+# The standard finite types
 
 <details><summary>Imports</summary>
 ```agda

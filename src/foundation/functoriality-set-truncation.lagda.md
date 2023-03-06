@@ -1,4 +1,4 @@
-#  Functoriality of set truncation
+# Functoriality of set truncation
 
 <details><summary>Imports</summary>
 ```agda

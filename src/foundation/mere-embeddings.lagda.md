@@ -1,4 +1,4 @@
-#  Mere embeddings
+# Mere embeddings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The higher group of integers
+# The higher group of integers
 
 <details><summary>Imports</summary>
 ```agda

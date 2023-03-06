@@ -1,4 +1,4 @@
-#  Nonzero natural numbers
+# Nonzero natural numbers
 
 <details><summary>Imports</summary>
 ```agda

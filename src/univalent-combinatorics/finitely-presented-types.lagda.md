@@ -1,4 +1,4 @@
-#  Finitely presented types
+# Finitely presented types
 
 <details><summary>Imports</summary>
 ```agda

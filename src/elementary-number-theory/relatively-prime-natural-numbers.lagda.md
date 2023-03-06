@@ -1,4 +1,4 @@
-#  Relatively prime natural numbers
+# Relatively prime natural numbers
 
 <details><summary>Imports</summary>
 ```agda

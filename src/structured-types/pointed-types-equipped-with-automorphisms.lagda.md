@@ -1,4 +1,4 @@
-#  Pointed types equipped with automorphisms
+# Pointed types equipped with automorphisms
 
 <details><summary>Imports</summary>
 ```agda

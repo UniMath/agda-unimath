@@ -1,4 +1,4 @@
-#  Functoriality of propositional truncations
+# Functoriality of propositional truncations
 
 <details><summary>Imports</summary>
 ```agda

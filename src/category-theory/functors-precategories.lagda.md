@@ -1,4 +1,4 @@
-#  Functors between precategories
+# Functors between precategories
 
 <details><summary>Imports</summary>
 ```agda

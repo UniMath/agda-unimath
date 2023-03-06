@@ -1,4 +1,4 @@
-#  Contractible pointed types
+# Contractible pointed types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Wild monoids
+# Wild monoids
 
 <details><summary>Imports</summary>
 ```agda

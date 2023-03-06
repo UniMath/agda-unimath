@@ -1,4 +1,4 @@
-#  Decidable subgroups of groups
+# Decidable subgroups of groups
 
 <details><summary>Imports</summary>
 ```agda

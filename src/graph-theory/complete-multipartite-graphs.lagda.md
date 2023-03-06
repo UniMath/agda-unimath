@@ -1,4 +1,4 @@
-#  Complete multipartite graphs
+# Complete multipartite graphs
 
 <details><summary>Imports</summary>
 ```agda

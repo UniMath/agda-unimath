@@ -1,4 +1,4 @@
-#  Normal subgroups of concrete groups
+# Normal subgroups of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

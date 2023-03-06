@@ -1,4 +1,4 @@
-#  The dihedral group construction
+# The dihedral group construction
 
 <details><summary>Imports</summary>
 ```agda

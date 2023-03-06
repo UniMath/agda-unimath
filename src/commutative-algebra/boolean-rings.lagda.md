@@ -1,4 +1,4 @@
-#  Boolean rings
+# Boolean rings
 
 <details><summary>Imports</summary>
 ```agda

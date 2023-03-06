@@ -1,4 +1,4 @@
-#  Cartier's delooping of the sign homomorphism
+# Cartier's delooping of the sign homomorphism
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Unordered n-tuples of elements in a type
+# Unordered n-tuples of elements in a type
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Morphisms of coherent H-spaces
+# Morphisms of coherent H-spaces
 
 <details><summary>Imports</summary>
 ```agda

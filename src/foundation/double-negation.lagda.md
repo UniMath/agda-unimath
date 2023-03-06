@@ -1,4 +1,4 @@
-#  Double negation
+# Double negation
 
 <details><summary>Imports</summary>
 ```agda

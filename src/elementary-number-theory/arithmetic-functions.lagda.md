@@ -1,4 +1,4 @@
-#  Arithmetic functions
+# Arithmetic functions
 
 <details><summary>Imports</summary>
 ```agda

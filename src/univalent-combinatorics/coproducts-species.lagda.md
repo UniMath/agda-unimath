@@ -1,4 +1,4 @@
-#  Coproducts of species
+# Coproducts of species
 
 <details><summary>Imports</summary>
 ```agda

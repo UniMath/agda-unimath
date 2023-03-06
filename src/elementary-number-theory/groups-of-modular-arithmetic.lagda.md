@@ -1,4 +1,4 @@
-#  The groups ℤ/kℤ
+# The groups ℤ/kℤ
 
 <details><summary>Imports</summary>
 ```agda

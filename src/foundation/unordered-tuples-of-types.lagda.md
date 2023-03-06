@@ -1,4 +1,4 @@
-#  Unordered tuples of types
+# Unordered tuples of types
 
 <details><summary>Imports</summary>
 ```agda

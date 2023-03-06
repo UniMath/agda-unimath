@@ -1,4 +1,4 @@
-#  Contractible maps
+# Contractible maps
 
 <details><summary>Imports</summary>
 ```agda

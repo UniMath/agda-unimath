@@ -1,4 +1,4 @@
-#  Equivalences of directed graphs
+# Equivalences of directed graphs
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  0-Images of maps
+# 0-Images of maps
 
 <details><summary>Imports</summary>
 ```agda

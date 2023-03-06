@@ -1,4 +1,4 @@
-#  The subtype identity principle
+# The subtype identity principle
 
 <details><summary>Imports</summary>
 ```agda

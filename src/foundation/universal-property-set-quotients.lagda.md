@@ -1,4 +1,4 @@
-#  The universal property of set quotients
+# The universal property of set quotients
 
 <details><summary>Imports</summary>
 ```agda

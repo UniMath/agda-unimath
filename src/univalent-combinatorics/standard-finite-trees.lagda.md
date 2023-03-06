@@ -1,4 +1,4 @@
-#  Standard finite trees
+# Standard finite trees
 
 <details><summary>Imports</summary>
 ```agda

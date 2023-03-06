@@ -1,4 +1,4 @@
-#  Radical ideals in rings
+# Radical ideals in rings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The sign homomorphism
+# The sign homomorphism
 
 <details><summary>Imports</summary>
 ```agda

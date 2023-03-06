@@ -1,4 +1,4 @@
-#  Walks in directed graphs
+# Walks in directed graphs
 
 <details><summary>Imports</summary>
 ```agda

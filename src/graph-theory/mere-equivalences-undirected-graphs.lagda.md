@@ -1,4 +1,4 @@
-#  Mere equivalences of undirected graphs
+# Mere equivalences of undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

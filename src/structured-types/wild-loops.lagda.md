@@ -1,4 +1,4 @@
-#  Wild loops
+# Wild loops
 
 <details><summary>Imports</summary>
 ```agda

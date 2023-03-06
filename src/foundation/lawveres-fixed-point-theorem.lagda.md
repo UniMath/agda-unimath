@@ -1,4 +1,4 @@
-#  Lawvere's fixed point theorem
+# Lawvere's fixed point theorem
 
 <details><summary>Imports</summary>
 ```agda

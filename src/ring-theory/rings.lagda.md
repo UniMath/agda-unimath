@@ -1,4 +1,4 @@
-#  Rings
+# Rings
 
 <details><summary>Imports</summary>
 ```agda

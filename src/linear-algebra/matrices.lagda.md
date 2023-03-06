@@ -17,7 +17,7 @@ open import linear-algebra.vectors
 
 An `(m × n)`-matrix of elements in `A` is an arrangement of elements of A with `m` rows and `n` columns. In other words, a matrix is vector of length `m` of vectors of length `n` of elements of `A`.
 
-##  Definitions
+## Definitions
 
 ### Matrices
 

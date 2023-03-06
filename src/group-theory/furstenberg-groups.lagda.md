@@ -1,4 +1,4 @@
-#  Furstenberg groups
+# Furstenberg groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The binomial coefficients
+# The binomial coefficients
 
 <details><summary>Imports</summary>
 ```agda

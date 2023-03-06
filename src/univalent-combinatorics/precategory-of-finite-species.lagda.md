@@ -1,4 +1,4 @@
-#  The precategory of finite species
+# The precategory of finite species
 
 <details><summary>Imports</summary>
 ```agda

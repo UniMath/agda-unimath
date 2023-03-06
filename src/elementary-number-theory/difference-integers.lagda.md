@@ -1,4 +1,4 @@
-#  The difference between integers
+# The difference between integers
 
 <details><summary>Imports</summary>
 ```agda

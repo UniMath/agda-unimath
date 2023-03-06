@@ -1,4 +1,4 @@
-#  The maybe modality
+# The maybe modality
 
 <details><summary>Imports</summary>
 ```agda

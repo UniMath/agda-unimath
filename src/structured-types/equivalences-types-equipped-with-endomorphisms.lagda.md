@@ -1,4 +1,4 @@
-#  Equivalences of types equipped with endomorphisms
+# Equivalences of types equipped with endomorphisms
 
 <details><summary>Imports</summary>
 ```agda

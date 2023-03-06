@@ -1,4 +1,4 @@
-#  Multivariable decidable relations
+# Multivariable decidable relations
 
 <details><summary>Imports</summary>
 ```agda

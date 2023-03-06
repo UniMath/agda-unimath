@@ -1,4 +1,4 @@
-#  Small maps
+# Small maps
 
 <details><summary>Imports</summary>
 ```agda

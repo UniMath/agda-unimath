@@ -1,4 +1,4 @@
-#  Endomorphisms
+# Endomorphisms
 
 <details><summary>Imports</summary>
 ```agda

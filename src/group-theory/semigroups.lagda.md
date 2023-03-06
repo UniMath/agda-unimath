@@ -1,4 +1,4 @@
-#  Semigroups
+# Semigroups
 
 <details><summary>Imports</summary>
 ```agda

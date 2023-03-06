@@ -1,4 +1,4 @@
-#  Unordered pairs of types
+# Unordered pairs of types
 
 <details><summary>Imports</summary>
 ```agda

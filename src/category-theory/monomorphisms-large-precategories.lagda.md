@@ -1,4 +1,4 @@
-#  Monomorphisms in large precategories
+# Monomorphisms in large precategories
 
 <details><summary>Imports</summary>
 ```agda

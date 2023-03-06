@@ -1,4 +1,4 @@
-#  Maps fibered over a map
+# Maps fibered over a map
 
 <details><summary>Imports</summary>
 ```agda

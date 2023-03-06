@@ -1,4 +1,4 @@
-#  The universal property of the standard finite types
+# The universal property of the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

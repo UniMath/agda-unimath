@@ -1,4 +1,4 @@
-#  Set quotients
+# Set quotients
 
 <details><summary>Imports</summary>
 ```agda

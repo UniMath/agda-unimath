@@ -1,4 +1,4 @@
-#  Stereoisomerism for enriched undirected graphs
+# Stereoisomerism for enriched undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

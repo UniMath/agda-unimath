@@ -1,4 +1,4 @@
-#  Connected components of universes
+# Connected components of universes
 
 <details><summary>Imports</summary>
 ```agda

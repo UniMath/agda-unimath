@@ -1,4 +1,4 @@
-#  Weak function extensionality
+# Weak function extensionality
 
 <details><summary>Imports</summary>
 ```agda

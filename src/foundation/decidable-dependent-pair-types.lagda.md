@@ -1,4 +1,4 @@
-#  Decidability of dependent pair types
+# Decidability of dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

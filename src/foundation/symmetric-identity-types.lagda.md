@@ -1,4 +1,4 @@
-#  The symmetric identity types
+# The symmetric identity types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Deloopings of the sign homomorphism
+# Deloopings of the sign homomorphism
 
 <details><summary>Imports</summary>
 ```agda

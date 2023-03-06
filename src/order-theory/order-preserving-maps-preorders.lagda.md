@@ -1,4 +1,4 @@
-#  Order preserving maps on preorders
+# Order preserving maps on preorders
 
 <details><summary>Imports</summary>
 ```agda

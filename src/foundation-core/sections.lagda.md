@@ -1,4 +1,4 @@
-#  Sections
+# Sections
 
 <details><summary>Imports</summary>
 ```agda

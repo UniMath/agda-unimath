@@ -1,4 +1,4 @@
-#  Anafunctors
+# Anafunctors
 
 <details><summary>Imports</summary>
 ```agda

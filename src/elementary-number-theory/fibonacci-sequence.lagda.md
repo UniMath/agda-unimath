@@ -1,4 +1,4 @@
-#  The Fibonacci sequence
+# The Fibonacci sequence
 
 <details><summary>Imports</summary>
 ```agda

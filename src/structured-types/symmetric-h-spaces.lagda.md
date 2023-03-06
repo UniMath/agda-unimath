@@ -1,4 +1,4 @@
-#  Symmetric H-spaces
+# Symmetric H-spaces
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Endomorphisms of objects in categories
+# Endomorphisms of objects in categories
 
 <details><summary>Imports</summary>
 ```agda

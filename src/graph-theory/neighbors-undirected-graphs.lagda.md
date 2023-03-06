@@ -1,4 +1,4 @@
-#  Incidence in undirected graphs
+# Incidence in undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

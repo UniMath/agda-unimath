@@ -1,4 +1,4 @@
-#  Free groups with one generator
+# Free groups with one generator
 
 <details><summary>Imports</summary>
 ```agda

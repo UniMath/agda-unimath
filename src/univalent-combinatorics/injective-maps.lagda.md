@@ -1,4 +1,4 @@
-#  Injective maps between finite types
+# Injective maps between finite types
 
 <details><summary>Imports</summary>
 ```agda

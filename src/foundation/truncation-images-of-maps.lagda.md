@@ -1,4 +1,4 @@
-#  Truncation images of maps
+# Truncation images of maps
 
 <details><summary>Imports</summary>
 ```agda

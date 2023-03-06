@@ -1,4 +1,4 @@
-#  Upper bounds for type families over the natural numbers
+# Upper bounds for type families over the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Uniqueness of set truncations
+# Uniqueness of set truncations
 
 <details><summary>Imports</summary>
 ```agda

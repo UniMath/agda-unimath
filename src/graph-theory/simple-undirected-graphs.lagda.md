@@ -1,4 +1,4 @@
-#  Simple undirected graphs
+# Simple undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

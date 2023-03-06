@@ -1,4 +1,4 @@
-#  Products in precategories
+# Products in precategories
 
 <details><summary>Imports</summary>
 ```agda

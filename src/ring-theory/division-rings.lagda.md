@@ -1,4 +1,4 @@
-#  Division rings
+# Division rings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Modular arithmetic on the standard finite types
+# Modular arithmetic on the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

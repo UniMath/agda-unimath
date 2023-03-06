@@ -1,4 +1,4 @@
-#  Free loops
+# Free loops
 
 <details><summary>Imports</summary>
 ```agda

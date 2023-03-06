@@ -1,4 +1,4 @@
-#  Submonoids
+# Submonoids
 
 <details><summary>Imports</summary>
 ```agda

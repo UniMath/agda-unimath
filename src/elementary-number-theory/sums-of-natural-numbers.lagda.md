@@ -1,4 +1,4 @@
-#  Sums of natural numbers
+# Sums of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Cycles in undirected graphs
+# Cycles in undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

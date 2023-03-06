@@ -1,4 +1,4 @@
-#  Connected graphs
+# Connected graphs
 
 <details><summary>Imports</summary>
 ```agda

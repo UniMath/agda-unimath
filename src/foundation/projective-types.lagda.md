@@ -1,4 +1,4 @@
-#  Projective types
+# Projective types
 
 <details><summary>Imports</summary>
 ```agda

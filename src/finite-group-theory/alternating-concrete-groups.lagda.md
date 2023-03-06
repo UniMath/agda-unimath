@@ -1,4 +1,4 @@
-#  Alternating concrete groups
+# Alternating concrete groups
 
 <details><summary>Imports</summary>
 ```agda

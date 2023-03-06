@@ -1,4 +1,4 @@
-#  Isomorphisms of group actions
+# Isomorphisms of group actions
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Products of tuples of types
+# Products of tuples of types
 
 <details><summary>Imports</summary>
 ```agda

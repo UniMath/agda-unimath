@@ -1,4 +1,4 @@
-#  Truncated equality
+# Truncated equality
 
 <details><summary>Imports</summary>
 ```agda

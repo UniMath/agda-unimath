@@ -1,4 +1,4 @@
-#  The type theoretic principle of choice
+# The type theoretic principle of choice
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Equality in the fibers of a map
+# Equality in the fibers of a map
 
 <details><summary>Imports</summary>
 ```agda

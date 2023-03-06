@@ -1,4 +1,4 @@
-#  Free concrete group actions
+# Free concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

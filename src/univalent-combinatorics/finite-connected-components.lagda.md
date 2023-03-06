@@ -1,4 +1,4 @@
-#  Finiteness of the type of connected components
+# Finiteness of the type of connected components
 
 <details><summary>Imports</summary>
 ```agda

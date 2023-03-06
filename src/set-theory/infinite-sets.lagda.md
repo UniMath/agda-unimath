@@ -1,4 +1,4 @@
-#  Infinite sets
+# Infinite sets
 
 <details><summary>Imports</summary>
 ```agda

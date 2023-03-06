@@ -1,4 +1,4 @@
-#  Symmetric concrete groups
+# Symmetric concrete groups
 
 <details><summary>Imports</summary>
 ```agda

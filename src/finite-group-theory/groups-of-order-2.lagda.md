@@ -1,4 +1,4 @@
-#  Groups of order 2
+# Groups of order 2
 
 <details><summary>Imports</summary>
 ```agda

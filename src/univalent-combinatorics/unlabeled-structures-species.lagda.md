@@ -1,4 +1,4 @@
-#  Unlabeled structures of a species
+# Unlabeled structures of a species
 
 <details><summary>Imports</summary>
 ```agda

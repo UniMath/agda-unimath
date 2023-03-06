@@ -1,4 +1,4 @@
-#  Higher groups
+# Higher groups
 
 <details><summary>Imports</summary>
 ```agda

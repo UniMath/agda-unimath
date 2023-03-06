@@ -1,4 +1,4 @@
-#  The universal propert of cartesian product types
+# The universal propert of cartesian product types
 
 <details><summary>Imports</summary>
 ```agda

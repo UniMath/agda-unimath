@@ -1,4 +1,4 @@
-#  Edge-coloured undirected graphs
+# Edge-coloured undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

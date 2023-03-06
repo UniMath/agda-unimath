@@ -1,4 +1,4 @@
-#  Divisibility of integers
+# Divisibility of integers
 
 <details><summary>Imports</summary>
 ```agda

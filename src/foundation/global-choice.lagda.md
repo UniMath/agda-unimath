@@ -1,4 +1,4 @@
-#  Global choice
+# Global choice
 
 <details><summary>Imports</summary>
 ```agda

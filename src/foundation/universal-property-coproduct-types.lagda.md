@@ -1,4 +1,4 @@
-#  The universal property of coproduct types
+# The universal property of coproduct types
 
 <details><summary>Imports</summary>
 ```agda

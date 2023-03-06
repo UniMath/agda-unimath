@@ -1,4 +1,4 @@
-#  The precategory of concrete groups
+# The precategory of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Natural isomorphisms between functors between precategories
+# Natural isomorphisms between functors between precategories
 
 <details><summary>Imports</summary>
 ```agda

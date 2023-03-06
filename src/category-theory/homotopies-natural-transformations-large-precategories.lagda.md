@@ -1,4 +1,4 @@
-#  Homotopies of natural transformations in large precategories
+# Homotopies of natural transformations in large precategories
 
 <details><summary>Imports</summary>
 ```agda
