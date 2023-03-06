@@ -3,12 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-dependent-pair-types where
+open import foundation-core.functoriality-dependent-pair-types public
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types public
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks

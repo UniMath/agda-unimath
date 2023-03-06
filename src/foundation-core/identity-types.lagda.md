@@ -1,8 +1,11 @@
 # Identity types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation-core.identity-types where
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types

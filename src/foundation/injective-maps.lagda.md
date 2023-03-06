@@ -3,8 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.injective-maps where
-open import foundation-core.empty-types
 open import foundation-core.injective-maps public
+open import foundation-core.empty-types
 open import foundation-core.universe-levels
 ```
 </details>

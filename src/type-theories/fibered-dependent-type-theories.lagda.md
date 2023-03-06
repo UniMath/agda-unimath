@@ -1,8 +1,11 @@
 # Fibered dependent type theories
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --guardedness #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module type-theories.fibered-dependent-type-theories where
 open import foundation.dependent-pair-types
 open import foundation.functions

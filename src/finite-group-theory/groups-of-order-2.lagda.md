@@ -1,8 +1,11 @@
 # Groups of order 2
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module finite-group-theory.groups-of-order-2 where
 open import elementary-number-theory.groups-of-modular-arithmetic
 open import finite-group-theory.finite-groups

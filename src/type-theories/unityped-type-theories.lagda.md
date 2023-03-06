@@ -2,20 +2,21 @@
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
+```
 
+<details><summary>Imports</summary>
+```agda
 module type-theories.unityped-type-theories where
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
 open import type-theories.simple-type-theories
 ```
+</details>
 
 ## Idea
 

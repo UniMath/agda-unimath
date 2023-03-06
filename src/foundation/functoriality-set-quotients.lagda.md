@@ -1,8 +1,11 @@
 # Functoriality of set quotients
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module foundation.functoriality-set-quotients where
 open import foundation-core.equivalence-relations
 open import foundation.commuting-squares-of-maps

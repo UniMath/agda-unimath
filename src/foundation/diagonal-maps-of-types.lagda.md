@@ -3,12 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.diagonal-maps-of-types where
+open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
-open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.embeddings
 open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps

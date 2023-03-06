@@ -1,8 +1,11 @@
 # The group of n-element types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+<details><summary>Imports</summary>
+```agda
 module finite-group-theory.finite-type-groups where
 open import elementary-number-theory.natural-numbers
 open import foundation.0-connected-types

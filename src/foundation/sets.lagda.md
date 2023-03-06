@@ -3,6 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.sets where
+open import foundation-core.sets public
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
@@ -10,7 +11,6 @@ open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets public
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 open import foundation.contractible-types
