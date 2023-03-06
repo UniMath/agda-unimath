@@ -39,9 +39,9 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 
 ## Modules
 
-* All module imports should be done at the beginning of the file directly after the named module declaration, and the imports should be sorted alphabetically.
-* Using anonymous modules is encouraged to group constructions by topic, introducing the common arguments of those constructions as parameters. This usually improves the readability of the individual statements as well.
 * As a rule of thumb, there should only be one named module per file. The other modules in the file should be anonymous.
+* All module imports should be done directly after the file's named module declaration, and they should be sorted alphabetically.
+* Using anonymous modules is encouraged to group constructions by topic, introducing the common arguments of those constructions as parameters. This usually improves the readability of the individual statements as well.
 * There should always be a single blank line after a module declaration.
 * The variables of a module should be declared on a new line, with a 2-space indentation level. If the variables don't fit on a single line, they can be declared over multiple lines, grouping the variables together logically.
 * The `where` keyword is positioned on a new line after the variable declarations, with a 2-space indentation level.
