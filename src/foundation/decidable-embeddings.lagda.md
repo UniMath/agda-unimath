@@ -1,4 +1,4 @@
-#  Decidable embeddings
+# Decidable embeddings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Propositional maps
+# Propositional maps
 
 <details><summary>Imports</summary>
 ```agda

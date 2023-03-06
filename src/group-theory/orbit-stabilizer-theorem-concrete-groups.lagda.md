@@ -1,4 +1,4 @@
-#  The orbit-stabilizer theorem for concrete groups
+# The orbit-stabilizer theorem for concrete groups
 
 <details><summary>Imports</summary>
 ```agda

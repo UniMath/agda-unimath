@@ -1,4 +1,4 @@
-#  Fibered dependent type theories
+# Fibered dependent type theories
 
 <details><summary>Imports</summary>
 ```agda

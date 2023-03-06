@@ -1,4 +1,4 @@
-#  Wild groups
+# Wild groups
 
 <details><summary>Imports</summary>
 ```agda

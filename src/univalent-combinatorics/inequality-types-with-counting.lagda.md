@@ -1,4 +1,4 @@
-#  Inequality on types equipped with a counting
+# Inequality on types equipped with a counting
 
 <details><summary>Imports</summary>
 ```agda

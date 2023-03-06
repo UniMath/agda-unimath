@@ -1,4 +1,4 @@
-#  The pigeonhole principle
+# The pigeonhole principle
 
 <details><summary>Imports</summary>
 ```agda

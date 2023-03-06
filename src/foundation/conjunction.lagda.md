@@ -1,4 +1,4 @@
-#  Conjunction of propositions
+# Conjunction of propositions
 
 <details><summary>Imports</summary>
 ```agda

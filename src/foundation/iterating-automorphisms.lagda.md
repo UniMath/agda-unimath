@@ -1,4 +1,4 @@
-#  Iterating automorphisms
+# Iterating automorphisms
 
 <details><summary>Imports</summary>
 ```agda

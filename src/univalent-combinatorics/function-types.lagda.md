@@ -1,4 +1,4 @@
-#  Finite function types
+# Finite function types
 
 <details><summary>Imports</summary>
 ```agda

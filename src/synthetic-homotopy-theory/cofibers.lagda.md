@@ -1,4 +1,4 @@
-#  Cofibers
+# Cofibers
 
 <details><summary>Imports</summary>
 ```agda

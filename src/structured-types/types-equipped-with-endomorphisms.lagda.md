@@ -1,4 +1,4 @@
-#  Types equipped with endomorphisms
+# Types equipped with endomorphisms
 
 <details><summary>Imports</summary>
 ```agda

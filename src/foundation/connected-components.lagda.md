@@ -1,4 +1,4 @@
-#  Connected components of types
+# Connected components of types
 
 <details><summary>Imports</summary>
 ```agda

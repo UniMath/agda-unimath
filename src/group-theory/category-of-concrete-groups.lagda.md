@@ -1,4 +1,4 @@
-#  The category of concrete groups
+# The category of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

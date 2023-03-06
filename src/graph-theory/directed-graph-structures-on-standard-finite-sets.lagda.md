@@ -1,4 +1,4 @@
-#  Directed graph structures on standard finite sets
+# Directed graph structures on standard finite sets
 
 <details><summary>Imports</summary>
 ```agda

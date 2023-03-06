@@ -1,4 +1,4 @@
-#  Small multisets
+# Small multisets
 
 <details><summary>Imports</summary>
 ```agda

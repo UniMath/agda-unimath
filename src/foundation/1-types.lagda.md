@@ -1,4 +1,4 @@
-#  1-Types
+# 1-Types
 
 <details><summary>Imports</summary>
 ```agda

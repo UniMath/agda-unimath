@@ -1,4 +1,4 @@
-#  Orientations of the complete undirected graph
+# Orientations of the complete undirected graph
 
 <details><summary>Imports</summary>
 ```agda

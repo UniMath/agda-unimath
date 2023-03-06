@@ -1,4 +1,4 @@
-#  The category of groups
+# The category of groups
 
 <details><summary>Imports</summary>
 ```agda

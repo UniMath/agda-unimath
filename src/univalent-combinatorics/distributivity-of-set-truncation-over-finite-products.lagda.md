@@ -1,4 +1,4 @@
-#  Distributivity of set truncation over finite products
+# Distributivity of set truncation over finite products
 
 <details><summary>Imports</summary>
 ```agda

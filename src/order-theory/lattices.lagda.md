@@ -1,4 +1,4 @@
-#  Lattices
+# Lattices
 
 <details><summary>Imports</summary>
 ```agda

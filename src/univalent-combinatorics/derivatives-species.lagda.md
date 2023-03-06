@@ -1,4 +1,4 @@
-#  Derivatives of species
+# Derivatives of species
 
 <details><summary>Imports</summary>
 ```agda

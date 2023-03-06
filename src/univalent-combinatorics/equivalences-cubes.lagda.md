@@ -1,4 +1,4 @@
-#  Equivalences of cubes
+# Equivalences of cubes
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  2-element decidable subtypes
+# 2-element decidable subtypes
 
 <details><summary>Imports</summary>
 ```agda

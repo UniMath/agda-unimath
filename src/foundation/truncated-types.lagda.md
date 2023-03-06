@@ -1,4 +1,4 @@
-#  Truncated types
+# Truncated types
 
 <details><summary>Imports</summary>
 ```agda

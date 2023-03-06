@@ -1,4 +1,4 @@
-#  Cartesian product types
+# Cartesian product types
 
 <details><summary>Imports</summary>
 ```agda

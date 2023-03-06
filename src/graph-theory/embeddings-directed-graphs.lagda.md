@@ -1,4 +1,4 @@
-#  Embeddings of directed graphs
+# Embeddings of directed graphs
 
 ```
 module graph-theory.embeddings-directed-graphs where

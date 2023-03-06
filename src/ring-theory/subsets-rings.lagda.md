@@ -1,4 +1,4 @@
-#  Subsets of rings
+# Subsets of rings
 
 <details><summary>Imports</summary>
 ```agda

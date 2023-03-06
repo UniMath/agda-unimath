@@ -1,4 +1,4 @@
-#  The Eisenstein integers
+# The Eisenstein integers
 
 <details><summary>Imports</summary>
 ```agda

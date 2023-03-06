@@ -1,4 +1,4 @@
-#  Faithful morphisms of undirected graphs
+# Faithful morphisms of undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

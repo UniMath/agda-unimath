@@ -1,4 +1,4 @@
-#  Path-split maps
+# Path-split maps
 
 <details><summary>Imports</summary>
 ```agda

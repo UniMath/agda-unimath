@@ -1,4 +1,4 @@
-#  Function extensionality
+# Function extensionality
 
 <details><summary>Imports</summary>
 ```agda

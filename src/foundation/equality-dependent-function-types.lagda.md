@@ -1,4 +1,4 @@
-#  Equality on dependent function types
+# Equality on dependent function types
 
 <details><summary>Imports</summary>
 ```agda

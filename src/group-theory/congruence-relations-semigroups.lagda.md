@@ -1,4 +1,4 @@
-#  Congruence relations on semigroups
+# Congruence relations on semigroups
 
 <details><summary>Imports</summary>
 ```agda

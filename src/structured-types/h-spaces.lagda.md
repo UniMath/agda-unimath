@@ -1,4 +1,4 @@
-#  H-spaces
+# H-spaces
 
 <details><summary>Imports</summary>
 ```agda

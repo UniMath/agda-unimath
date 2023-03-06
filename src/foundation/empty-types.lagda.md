@@ -1,4 +1,4 @@
-#  Empty types
+# Empty types
 
 <details><summary>Imports</summary>
 ```agda

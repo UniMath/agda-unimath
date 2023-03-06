@@ -1,4 +1,4 @@
-#  Dedekind finite sets
+# Dedekind finite sets
 
 <details><summary>Imports</summary>
 ```agda

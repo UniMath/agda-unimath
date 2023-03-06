@@ -1,4 +1,4 @@
-#  Prime numbers
+# Prime numbers
 
 <details><summary>Imports</summary>
 ```agda

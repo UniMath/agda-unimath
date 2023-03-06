@@ -1,4 +1,4 @@
-#  Subgroups of higher groups
+# Subgroups of higher groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Morphisms of species
+# Morphisms of species
 
 <details><summary>Imports</summary>
 ```agda

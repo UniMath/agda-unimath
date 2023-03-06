@@ -1,4 +1,4 @@
-#  The groupoid of main classes of Latin hypercubes
+# The groupoid of main classes of Latin hypercubes
 
 <details><summary>Imports</summary>
 ```agda

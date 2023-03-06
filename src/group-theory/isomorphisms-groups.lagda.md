@@ -1,4 +1,4 @@
-#  Isomorphisms of groups
+# Isomorphisms of groups
 
 <details><summary>Imports</summary>
 ```agda

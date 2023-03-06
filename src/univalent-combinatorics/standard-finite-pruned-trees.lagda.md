@@ -1,4 +1,4 @@
-#  Standard finite pruned trees
+# Standard finite pruned trees
 
 <details><summary>Imports</summary>
 ```agda

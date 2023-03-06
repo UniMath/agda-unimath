@@ -1,4 +1,4 @@
-#  The uniqueness of set quotients
+# The uniqueness of set quotients
 
 <details><summary>Imports</summary>
 ```agda

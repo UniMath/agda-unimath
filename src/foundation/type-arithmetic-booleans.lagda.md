@@ -1,4 +1,4 @@
-#  Type arithmetic with the booleans
+# Type arithmetic with the booleans
 
 <details><summary>Imports</summary>
 ```agda

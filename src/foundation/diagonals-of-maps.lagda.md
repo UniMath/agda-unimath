@@ -1,4 +1,4 @@
-#  Diagonals of maps
+# Diagonals of maps
 
 <details><summary>Imports</summary>
 ```agda

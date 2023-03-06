@@ -1,4 +1,4 @@
-#  Homomorphisms of higher groups
+# Homomorphisms of higher groups
 
 <details><summary>Imports</summary>
 ```agda

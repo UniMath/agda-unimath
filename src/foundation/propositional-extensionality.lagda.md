@@ -1,4 +1,4 @@
-#  Propositional extensionality
+# Propositional extensionality
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The greatest common divisor of integers
+# The greatest common divisor of integers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Equivalences of group actions
+# Equivalences of group actions
 
 <details><summary>Imports</summary>
 ```agda

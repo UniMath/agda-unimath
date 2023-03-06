@@ -1,4 +1,4 @@
-#  Multiplication of natural numbers
+# Multiplication of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

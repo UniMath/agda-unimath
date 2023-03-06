@@ -1,4 +1,4 @@
-#  Pairs of distinct elements
+# Pairs of distinct elements
 
 <details><summary>Imports</summary>
 ```agda

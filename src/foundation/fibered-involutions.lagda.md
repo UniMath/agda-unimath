@@ -1,4 +1,4 @@
-#  Fibered involutions
+# Fibered involutions
 
 <details><summary>Imports</summary>
 ```agda

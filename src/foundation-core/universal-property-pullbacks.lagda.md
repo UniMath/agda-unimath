@@ -1,4 +1,4 @@
-#  The universal property of pullbacks
+# The universal property of pullbacks
 
 <details><summary>Imports</summary>
 ```agda

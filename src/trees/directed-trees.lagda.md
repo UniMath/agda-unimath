@@ -1,4 +1,4 @@
-#  Directed trees
+# Directed trees
 
 <details><summary>Imports</summary>
 ```agda

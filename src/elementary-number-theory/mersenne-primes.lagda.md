@@ -1,4 +1,4 @@
-#  Mersenne primes
+# Mersenne primes
 
 <details><summary>Imports</summary>
 ```agda

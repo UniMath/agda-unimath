@@ -1,4 +1,4 @@
-#  The binomial types
+# The binomial types
 
 <details><summary>Imports</summary>
 ```agda

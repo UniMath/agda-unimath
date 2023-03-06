@@ -1,4 +1,4 @@
-#  Partitions
+# Partitions
 
 <details><summary>Imports</summary>
 ```agda

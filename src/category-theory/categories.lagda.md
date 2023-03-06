@@ -1,4 +1,4 @@
-#  Categories
+# Categories
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Equality of natural numbers
+# Equality of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

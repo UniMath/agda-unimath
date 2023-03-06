@@ -1,4 +1,4 @@
-#  The unit type
+# The unit type
 
 <details><summary>Imports</summary>
 ```agda

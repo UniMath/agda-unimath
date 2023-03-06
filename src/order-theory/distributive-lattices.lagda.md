@@ -1,4 +1,4 @@
-#  Distributive Lattices
+# Distributive Lattices
 
 <details><summary>Imports</summary>
 ```agda

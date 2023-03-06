@@ -1,4 +1,4 @@
-#  Invertible elements in rings
+# Invertible elements in rings
 
 <details><summary>Imports</summary>
 ```agda

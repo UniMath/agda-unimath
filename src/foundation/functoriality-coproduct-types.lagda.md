@@ -1,4 +1,4 @@
-#  Functoriality of coproduct types
+# Functoriality of coproduct types
 
 <details><summary>Imports</summary>
 ```agda

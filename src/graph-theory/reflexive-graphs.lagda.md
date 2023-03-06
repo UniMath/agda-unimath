@@ -1,4 +1,4 @@
-#  Reflexive graphs
+# Reflexive graphs
 
 <details><summary>Imports</summary>
 ```agda

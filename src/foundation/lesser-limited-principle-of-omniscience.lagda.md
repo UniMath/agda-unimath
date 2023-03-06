@@ -1,4 +1,4 @@
-#  The lesser limited principle of omniscience
+# The lesser limited principle of omniscience
 
 <details><summary>Imports</summary>
 ```agda

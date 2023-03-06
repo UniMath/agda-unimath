@@ -1,4 +1,4 @@
-#  The weak limited principle of omniscience
+# The weak limited principle of omniscience
 
 <details><summary>Imports</summary>
 ```agda

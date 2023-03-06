@@ -1,4 +1,4 @@
-#  The precategory of group actions
+# The precategory of group actions
 
 <details><summary>Imports</summary>
 ```agda

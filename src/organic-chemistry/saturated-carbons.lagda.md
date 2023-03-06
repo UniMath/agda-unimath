@@ -1,4 +1,4 @@
-#  Saturated carbons
+# Saturated carbons
 
 <details><summary>Imports</summary>
 ```agda

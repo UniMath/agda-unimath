@@ -1,4 +1,4 @@
-#  Symmetric operations
+# Symmetric operations
 
 <details><summary>Imports</summary>
 ```agda

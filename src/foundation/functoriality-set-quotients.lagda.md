@@ -1,4 +1,4 @@
-#  Functoriality of set quotients
+# Functoriality of set quotients
 
 <details><summary>Imports</summary>
 ```agda

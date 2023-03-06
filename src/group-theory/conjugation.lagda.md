@@ -1,4 +1,4 @@
-#  Conjugation in groups
+# Conjugation in groups
 
 <details><summary>Imports</summary>
 ```agda

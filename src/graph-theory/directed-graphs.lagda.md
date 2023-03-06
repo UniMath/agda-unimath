@@ -1,4 +1,4 @@
-#  Graphs
+# Graphs
 
 <details><summary>Imports</summary>
 ```agda

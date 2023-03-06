@@ -1,4 +1,4 @@
-#  Axiom L
+# Axiom L
 
 <details><summary>Imports</summary>
 ```agda

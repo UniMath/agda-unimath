@@ -1,4 +1,4 @@
-#  Pullbacks
+# Pullbacks
 
 <details><summary>Imports</summary>
 ```agda

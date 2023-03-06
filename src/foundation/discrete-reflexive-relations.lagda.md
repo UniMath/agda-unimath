@@ -1,4 +1,4 @@
-#  Discrete reflexive relations
+# Discrete reflexive relations
 
 <details><summary>Imports</summary>
 ```agda

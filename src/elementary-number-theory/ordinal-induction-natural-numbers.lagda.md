@@ -1,4 +1,4 @@
-#  The ordinal induction principle for the natural numbers
+# The ordinal induction principle for the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

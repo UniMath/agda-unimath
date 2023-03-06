@@ -1,4 +1,4 @@
-#  Sequences of elements in finite types
+# Sequences of elements in finite types
 
 <details><summary>Imports</summary>
 ```agda

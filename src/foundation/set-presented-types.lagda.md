@@ -1,4 +1,4 @@
-#  Set presented types
+# Set presented types
 
 <details><summary>Imports</summary>
 ```agda

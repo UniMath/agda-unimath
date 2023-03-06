@@ -1,4 +1,4 @@
-#  Addition on the rationals
+# Addition on the rationals
 
 <details><summary>Imports</summary>
 ```agda

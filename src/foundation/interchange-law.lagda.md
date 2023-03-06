@@ -1,4 +1,4 @@
-#  The interchange law
+# The interchange law
 
 <details><summary>Imports</summary>
 ```agda

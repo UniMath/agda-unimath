@@ -1,4 +1,4 @@
-#  Bands
+# Bands
 
 <details><summary>Imports</summary>
 ```agda

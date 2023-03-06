@@ -1,4 +1,4 @@
-#  Constant maps
+# Constant maps
 
 <details><summary>Imports</summary>
 ```agda

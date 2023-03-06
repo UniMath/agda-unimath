@@ -1,4 +1,4 @@
-#  Subterminal types
+# Subterminal types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Cycle partitions of finite types
+# Cycle partitions of finite types
 
 <details><summary>Imports</summary>
 ```agda

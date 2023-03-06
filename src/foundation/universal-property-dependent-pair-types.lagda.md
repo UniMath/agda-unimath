@@ -1,4 +1,4 @@
-#  The universal property of dependent pair types
+# The universal property of dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

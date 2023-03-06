@@ -1,4 +1,4 @@
-#  Functoriality of truncations
+# Functoriality of truncations
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Homomorphisms of groups
+# Homomorphisms of groups
 
 <details><summary>Imports</summary>
 ```agda

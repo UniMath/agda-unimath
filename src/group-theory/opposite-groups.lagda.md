@@ -1,4 +1,4 @@
-#  The opposite of a group
+# The opposite of a group
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Closed walks in undirected graphs
+# Closed walks in undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

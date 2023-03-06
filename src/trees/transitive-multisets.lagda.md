@@ -1,4 +1,4 @@
-#  Transitive multisets
+# Transitive multisets
 
 <details><summary>Imports</summary>
 ```agda

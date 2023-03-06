@@ -1,4 +1,4 @@
-#  Equivalence relations
+# Equivalence relations
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Algebras for polynomial endofunctors
+# Algebras for polynomial endofunctors
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Paths in undirected graphs
+# Paths in undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

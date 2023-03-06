@@ -1,4 +1,4 @@
-#  Equivalences between semigroups
+# Equivalences between semigroups
 
 <details><summary>Imports</summary>
 ```agda

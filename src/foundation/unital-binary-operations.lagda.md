@@ -1,4 +1,4 @@
-#  Unital binary operations
+# Unital binary operations
 
 <details><summary>Imports</summary>
 ```agda

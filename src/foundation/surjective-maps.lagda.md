@@ -1,4 +1,4 @@
-#  Surjective maps
+# Surjective maps
 
 <details><summary>Imports</summary>
 ```agda

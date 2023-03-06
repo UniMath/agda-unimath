@@ -1,4 +1,4 @@
-#  Qutoient Rings
+# Qutoient Rings
 
 <details><summary>Imports</summary>
 ```agda

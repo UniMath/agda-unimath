@@ -1,4 +1,4 @@
-#  Embeddings of groups
+# Embeddings of groups
 
 <details><summary>Imports</summary>
 ```agda

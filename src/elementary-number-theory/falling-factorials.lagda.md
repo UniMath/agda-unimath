@@ -1,4 +1,4 @@
-#  Falling factorials
+# Falling factorials
 
 <details><summary>Imports</summary>
 ```agda

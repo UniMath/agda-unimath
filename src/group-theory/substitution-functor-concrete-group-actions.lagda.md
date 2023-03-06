@@ -1,4 +1,4 @@
-#  The substitution functor of concrete group actions
+# The substitution functor of concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

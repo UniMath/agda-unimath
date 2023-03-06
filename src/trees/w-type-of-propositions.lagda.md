@@ -1,4 +1,4 @@
-#  The W-type of the type of propositions
+# The W-type of the type of propositions
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Invertible elements in commutative rings
+# Invertible elements in commutative rings
 
 <details><summary>Imports</summary>
 ```agda

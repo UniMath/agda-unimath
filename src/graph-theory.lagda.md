@@ -1,4 +1,4 @@
-#  Graph theory
+# Graph theory
 
 ```agda
 module graph-theory where

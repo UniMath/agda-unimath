@@ -1,4 +1,4 @@
-#  Ferrers diagrams (unlabeled partitions)
+# Ferrers diagrams (unlabeled partitions)
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Powersets
+# Powersets
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Initial objects of a precategory
+# Initial objects of a precategory
 
 <details><summary>Imports</summary>
 ```agda

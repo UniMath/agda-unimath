@@ -1,4 +1,4 @@
-#  Undirected graph structures on standard finite sets
+# Undirected graph structures on standard finite sets
 
 <details><summary>Imports</summary>
 ```agda

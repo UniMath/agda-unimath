@@ -1,4 +1,4 @@
-#  Cayley's theorem
+# Cayley's theorem
 
 <details><summary>Imports</summary>
 ```agda

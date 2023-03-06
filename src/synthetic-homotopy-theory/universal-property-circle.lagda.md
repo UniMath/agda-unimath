@@ -1,4 +1,4 @@
-#  The universal property of the circle
+# The universal property of the circle
 
 <details><summary>Imports</summary>
 ```agda

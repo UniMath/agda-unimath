@@ -1,4 +1,4 @@
-#  The type of natural numbers
+# The type of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

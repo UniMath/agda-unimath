@@ -1,4 +1,4 @@
-#  Pointed homotopies
+# Pointed homotopies
 
 <details><summary>Imports</summary>
 ```agda

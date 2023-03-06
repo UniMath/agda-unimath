@@ -1,4 +1,4 @@
-#  Equivalences of concrete groups
+# Equivalences of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

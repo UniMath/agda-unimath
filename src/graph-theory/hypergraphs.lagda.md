@@ -1,4 +1,4 @@
-#  Hypergraphs
+# Hypergraphs
 
 <details><summary>Imports</summary>
 ```agda

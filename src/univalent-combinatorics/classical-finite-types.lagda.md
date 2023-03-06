@@ -1,4 +1,4 @@
-#  The classical definition of the standard finite types
+# The classical definition of the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

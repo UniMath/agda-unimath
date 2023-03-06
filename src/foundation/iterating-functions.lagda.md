@@ -1,4 +1,4 @@
-#  Iterating functions
+# Iterating functions
 
 <details><summary>Imports</summary>
 ```agda

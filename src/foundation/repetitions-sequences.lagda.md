@@ -1,4 +1,4 @@
-#  Repetitions in sequences
+# Repetitions in sequences
 
 <details><summary>Imports</summary>
 ```agda

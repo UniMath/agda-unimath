@@ -1,4 +1,4 @@
-#  Natural isomorphisms between functors on large precategories
+# Natural isomorphisms between functors on large precategories
 
 <details><summary>Imports</summary>
 ```agda

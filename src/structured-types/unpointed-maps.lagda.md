@@ -1,4 +1,4 @@
-#  Unpointed maps between pointed types
+# Unpointed maps between pointed types
 
 <details><summary>Imports</summary>
 ```agda

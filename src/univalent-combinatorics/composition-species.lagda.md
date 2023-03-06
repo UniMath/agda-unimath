@@ -1,4 +1,4 @@
-#  Composition of species
+# Composition of species
 
 <details><summary>Imports</summary>
 ```agda
@@ -45,7 +45,7 @@ analytic-comp-species {l1} {l2} {l3} S T X =
       S (finite-cotype-Σ-Decomposition-𝔽 X D y ))))
 ```
 
- ### The analytic unit for composition of species
+### The analytic unit for composition of species
 
  ```agda
 analytic-unit-species : {l1 : Level} → species l1 l1

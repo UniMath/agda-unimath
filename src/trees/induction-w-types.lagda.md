@@ -1,4 +1,4 @@
-#  Induction principles on W-types
+# Induction principles on W-types
 
 <details><summary>Imports</summary>
 ```agda

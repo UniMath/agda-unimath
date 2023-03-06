@@ -1,4 +1,4 @@
-#  Commutators of elements in groups
+# Commutators of elements in groups
 
 <details><summary>Imports</summary>
 ```agda

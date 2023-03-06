@@ -1,4 +1,4 @@
-#  Natural transformations between functors between categories
+# Natural transformations between functors between categories
 
 <details><summary>Imports</summary>
 ```agda

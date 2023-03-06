@@ -1,4 +1,4 @@
-#  Prime ideals in commutative rings
+# Prime ideals in commutative rings
 
 <details><summary>Imports</summary>
 ```agda

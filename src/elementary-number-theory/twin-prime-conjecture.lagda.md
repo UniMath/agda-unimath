@@ -1,4 +1,4 @@
-#  The Twin Prime conjecture
+# The Twin Prime conjecture
 
 <details><summary>Imports</summary>
 ```agda

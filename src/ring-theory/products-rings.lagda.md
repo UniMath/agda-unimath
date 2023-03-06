@@ -1,4 +1,4 @@
-#  Products of rings
+# Products of rings
 
 <details><summary>Imports</summary>
 ```agda

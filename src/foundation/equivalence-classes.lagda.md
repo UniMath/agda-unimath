@@ -1,4 +1,4 @@
-#  Equivalence classes
+# Equivalence classes
 
 <details><summary>Imports</summary>
 ```agda

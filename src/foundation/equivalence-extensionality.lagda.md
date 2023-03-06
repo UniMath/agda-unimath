@@ -1,4 +1,4 @@
-#  Equivalence extensionality
+# Equivalence extensionality
 
 <details><summary>Imports</summary>
 ```agda

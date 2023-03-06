@@ -1,4 +1,4 @@
-#  Tetrahedra in 3-dimensional space
+# Tetrahedra in 3-dimensional space
 
 <details><summary>Imports</summary>
 ```agda

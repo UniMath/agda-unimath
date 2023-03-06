@@ -1,4 +1,4 @@
-#  Functoriality of function types
+# Functoriality of function types
 
 <details><summary>Imports</summary>
 ```agda

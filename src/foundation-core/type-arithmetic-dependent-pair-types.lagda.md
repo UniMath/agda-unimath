@@ -1,4 +1,4 @@
-#  Type arithmetic for dependent pair types
+# Type arithmetic for dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Complements of isolated points of finite types
+# Complements of isolated points of finite types
 
 <details><summary>Imports</summary>
 ```agda

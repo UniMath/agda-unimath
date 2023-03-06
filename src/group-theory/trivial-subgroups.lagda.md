@@ -1,4 +1,4 @@
-#  Trivial subgroups
+# Trivial subgroups
 
 <details><summary>Imports</summary>
 ```agda

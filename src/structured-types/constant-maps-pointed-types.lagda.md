@@ -1,4 +1,4 @@
-#  Constant maps of pointed types
+# Constant maps of pointed types
 
 <details><summary>Imports</summary>
 ```agda

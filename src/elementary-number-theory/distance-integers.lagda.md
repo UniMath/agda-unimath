@@ -1,4 +1,4 @@
-#  The distance between integers
+# The distance between integers
 
 <details><summary>Imports</summary>
 ```agda

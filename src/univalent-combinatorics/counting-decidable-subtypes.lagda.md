@@ -1,4 +1,4 @@
-#  Counting the elements of decidable subtypes
+# Counting the elements of decidable subtypes
 
 <details><summary>Imports</summary>
 ```agda

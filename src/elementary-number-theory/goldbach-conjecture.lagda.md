@@ -1,4 +1,4 @@
-#  The Goldbach conjecture
+# The Goldbach conjecture
 
 <details><summary>Imports</summary>
 ```agda

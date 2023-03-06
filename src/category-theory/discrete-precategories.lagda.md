@@ -1,4 +1,4 @@
-#  The discrete precategory introduced by any hSet
+# The discrete precategory introduced by any hSet
 
 <details><summary>Imports</summary>
 ```agda

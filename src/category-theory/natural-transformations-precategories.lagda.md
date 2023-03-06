@@ -1,4 +1,4 @@
-#  Natural transformations between functors on precategories
+# Natural transformations between functors on precategories
 
 <details><summary>Imports</summary>
 ```agda

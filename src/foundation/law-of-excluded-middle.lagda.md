@@ -1,4 +1,4 @@
-#  The law of excluded middle
+# The law of excluded middle
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Unlabelled rooted trees
+# Unlabelled rooted trees
 
 <details><summary>Imports</summary>
 ```agda

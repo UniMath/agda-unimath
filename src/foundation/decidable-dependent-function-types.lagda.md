@@ -1,4 +1,4 @@
-#  Decidability of dependent function types
+# Decidability of dependent function types
 
 <details><summary>Imports</summary>
 ```agda

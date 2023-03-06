@@ -1,4 +1,4 @@
-#  Mere equivalences
+# Mere equivalences
 
 <details><summary>Imports</summary>
 ```agda

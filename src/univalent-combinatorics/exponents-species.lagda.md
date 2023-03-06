@@ -1,4 +1,4 @@
-#  Exponents of species
+# Exponents of species
 
 <details><summary>Imports</summary>
 ```agda

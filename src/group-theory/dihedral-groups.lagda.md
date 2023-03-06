@@ -1,4 +1,4 @@
-#  The dihedral groups
+# The dihedral groups
 
 <details><summary>Imports</summary>
 ```agda

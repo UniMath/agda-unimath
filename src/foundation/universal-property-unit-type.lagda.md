@@ -1,4 +1,4 @@
-#  The universal property of the unit type
+# The universal property of the unit type
 
 <details><summary>Imports</summary>
 ```agda

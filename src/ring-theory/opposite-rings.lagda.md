@@ -1,4 +1,4 @@
-#  Opposite rings
+# Opposite rings
 
 <details><summary>Imports</summary>
 ```agda

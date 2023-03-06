@@ -1,4 +1,4 @@
-#  The precategory of orbits of a monoid action
+# The precategory of orbits of a monoid action
 
 <details><summary>Imports</summary>
 ```agda

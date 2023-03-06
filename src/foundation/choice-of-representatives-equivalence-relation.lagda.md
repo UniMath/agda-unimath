@@ -1,4 +1,4 @@
-#  Choice of representatives for an equivalence relation
+# Choice of representatives for an equivalence relation
 
 <details><summary>Imports</summary>
 ```agda

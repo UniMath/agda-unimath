@@ -1,4 +1,4 @@
-#  The Collatz conjecture
+# The Collatz conjecture
 
 <details><summary>Imports</summary>
 ```agda

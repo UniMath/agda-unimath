@@ -1,4 +1,4 @@
-#  Counting the elements of dependent pair types
+# Counting the elements of dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

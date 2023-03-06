@@ -1,4 +1,4 @@
-#  Propositional resizing
+# Propositional resizing
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The initial pointed type equipped with an automorphism
+# The initial pointed type equipped with an automorphism
 
 <details><summary>Imports</summary>
 ```agda

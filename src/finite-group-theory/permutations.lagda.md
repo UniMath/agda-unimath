@@ -1,4 +1,4 @@
-#  Permutations
+# Permutations
 
 <details><summary>Imports</summary>
 ```agda

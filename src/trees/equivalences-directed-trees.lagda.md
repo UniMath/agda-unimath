@@ -1,4 +1,4 @@
-#  Equivalences of directed trees
+# Equivalences of directed trees
 
 <details><summary>Imports</summary>
 ```agda

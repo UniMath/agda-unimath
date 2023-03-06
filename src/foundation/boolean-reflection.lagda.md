@@ -1,4 +1,4 @@
-#  Boolean Reflection
+# Boolean Reflection
 
 <details><summary>Imports</summary>
 ```agda

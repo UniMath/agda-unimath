@@ -1,4 +1,4 @@
-#  Identity systems
+# Identity systems
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Mere equivalences of group actions
+# Mere equivalences of group actions
 
 <details><summary>Imports</summary>
 ```agda

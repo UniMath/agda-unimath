@@ -1,4 +1,4 @@
-#  Ring homomorphisms
+# Ring homomorphisms
 
 <details><summary>Imports</summary>
 ```agda

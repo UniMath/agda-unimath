@@ -1,4 +1,4 @@
-#  The functoriality of `fib`
+# The functoriality of `fib`
 
 <details><summary>Imports</summary>
 ```agda

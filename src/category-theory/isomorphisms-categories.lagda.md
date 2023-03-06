@@ -1,4 +1,4 @@
-#  Isomorphisms in categories
+# Isomorphisms in categories
 
 <details><summary>Imports</summary>
 ```agda

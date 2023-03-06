@@ -1,4 +1,4 @@
-#  Binary equivalences
+# Binary equivalences
 
 <details><summary>Imports</summary>
 ```agda

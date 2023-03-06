@@ -1,4 +1,4 @@
-#  Commuting squares of maps
+# Commuting squares of maps
 
 <details><summary>Imports</summary>
 ```agda

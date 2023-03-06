@@ -1,4 +1,4 @@
-#  Homomorphisms of abelian groups
+# Homomorphisms of abelian groups
 
 <details><summary>Imports</summary>
 ```agda

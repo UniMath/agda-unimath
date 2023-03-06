@@ -1,4 +1,4 @@
-#  The group of integers
+# The group of integers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Repetitions of values of maps
+# Repetitions of values of maps
 
 <details><summary>Imports</summary>
 ```agda

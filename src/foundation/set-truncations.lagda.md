@@ -1,4 +1,4 @@
-#  Set truncations
+# Set truncations
 
 <details><summary>Imports</summary>
 ```agda

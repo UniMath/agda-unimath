@@ -1,4 +1,4 @@
-#  Binary functoriality of set quotients
+# Binary functoriality of set quotients
 
 <details><summary>Imports</summary>
 ```agda

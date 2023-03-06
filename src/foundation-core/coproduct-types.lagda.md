@@ -1,4 +1,4 @@
-#  Coproduct types
+# Coproduct types
 
 <details><summary>Imports</summary>
 ```agda

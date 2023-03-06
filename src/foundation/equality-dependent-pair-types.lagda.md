@@ -1,4 +1,4 @@
-#  Equality of dependent pair types
+# Equality of dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

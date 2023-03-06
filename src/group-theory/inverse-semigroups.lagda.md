@@ -1,4 +1,4 @@
-#  Inverse semigroups
+# Inverse semigroups
 
 <details><summary>Imports</summary>
 ```agda

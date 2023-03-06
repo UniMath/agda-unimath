@@ -1,4 +1,4 @@
-#  Kuratowsky finite sets
+# Kuratowsky finite sets
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Decidable subtypes
+# Decidable subtypes
 
 <details><summary>Imports</summary>
 ```agda

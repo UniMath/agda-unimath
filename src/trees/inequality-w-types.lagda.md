@@ -1,4 +1,4 @@
-#  Inequality on W-types
+# Inequality on W-types
 
 <details><summary>Imports</summary>
 ```agda

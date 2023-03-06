@@ -1,4 +1,4 @@
-#  Wild quasigroups
+# Wild quasigroups
 
 <details><summary>Imports</summary>
 ```agda

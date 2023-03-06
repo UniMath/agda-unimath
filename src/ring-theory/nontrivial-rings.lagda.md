@@ -1,4 +1,4 @@
-#  Nontrivial rings
+# Nontrivial rings
 
 <details><summary>Imports</summary>
 ```agda

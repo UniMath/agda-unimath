@@ -1,4 +1,4 @@
-#  Lower types in preorders
+# Lower types in preorders
 
 <details><summary>Imports</summary>
 ```agda

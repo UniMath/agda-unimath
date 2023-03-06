@@ -1,4 +1,4 @@
-#  Mere equivalences of concrete group actions
+# Mere equivalences of concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

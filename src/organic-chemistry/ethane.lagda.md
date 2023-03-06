@@ -1,4 +1,4 @@
-#  Ethane
+# Ethane
 
 <details><summary>Imports</summary>
 ```agda

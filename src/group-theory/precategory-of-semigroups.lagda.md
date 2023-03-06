@@ -1,4 +1,4 @@
-#  The precategory of semigroups
+# The precategory of semigroups
 
 <details><summary>Imports</summary>
 ```agda

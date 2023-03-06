@@ -1,4 +1,4 @@
-#  Pointed equivalences
+# Pointed equivalences
 
 <details><summary>Imports</summary>
 ```agda

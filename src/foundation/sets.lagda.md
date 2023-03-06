@@ -1,4 +1,4 @@
-#  Sets
+# Sets
 
 <details><summary>Imports</summary>
 ```agda

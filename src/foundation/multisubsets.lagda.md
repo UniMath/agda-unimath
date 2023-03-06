@@ -1,4 +1,4 @@
-#  Multisubsets
+# Multisubsets
 
 <details><summary>Imports</summary>
 ```agda

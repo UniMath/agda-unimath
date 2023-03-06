@@ -1,4 +1,4 @@
-#  Epimorphisms with respect to maps into sets
+# Epimorphisms with respect to maps into sets
 
 <details><summary>Imports</summary>
 ```agda

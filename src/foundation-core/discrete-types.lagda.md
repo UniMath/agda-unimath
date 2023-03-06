@@ -1,4 +1,4 @@
-#  Discrete types
+# Discrete types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Epimorphisms in groups
+# Epimorphisms in groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Quotient groups
+# Quotient groups
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Idempotent elements in rings
+# Idempotent elements in rings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Unlabelled trees
+# Unlabelled trees
 
 <details><summary>Imports</summary>
 ```agda

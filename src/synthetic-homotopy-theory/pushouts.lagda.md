@@ -1,4 +1,4 @@
-#  Pushouts
+# Pushouts
 
 <details><summary>Imports</summary>
 ```agda

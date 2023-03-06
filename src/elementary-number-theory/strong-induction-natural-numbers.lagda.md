@@ -1,4 +1,4 @@
-#  The strong induction principle for the natural numbers
+# The strong induction principle for the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

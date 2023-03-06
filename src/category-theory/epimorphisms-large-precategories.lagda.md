@@ -1,4 +1,4 @@
-#  Epimorphism in large precategories
+# Epimorphism in large precategories
 
 <details><summary>Imports</summary>
 ```agda

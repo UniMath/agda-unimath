@@ -1,4 +1,4 @@
-#  Bracelets
+# Bracelets
 
 <details><summary>Imports</summary>
 ```agda

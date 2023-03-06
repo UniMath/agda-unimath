@@ -1,4 +1,4 @@
-#  Double powersets
+# Double powersets
 
 <details><summary>Imports</summary>
 ```agda

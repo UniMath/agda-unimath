@@ -1,4 +1,4 @@
-#  The natural numbers base k
+# The natural numbers base k
 
 <details><summary>Imports</summary>
 ```agda

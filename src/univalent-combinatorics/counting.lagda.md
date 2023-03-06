@@ -1,4 +1,4 @@
-#  Counting in type theory
+# Counting in type theory
 
 <details><summary>Imports</summary>
 ```agda

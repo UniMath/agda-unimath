@@ -1,4 +1,4 @@
-#  The universal property of maybe
+# The universal property of maybe
 
 <details><summary>Imports</summary>
 ```agda

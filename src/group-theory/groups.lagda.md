@@ -1,4 +1,4 @@
-#  Abstract groups
+# Abstract groups
 
 <details><summary>Imports</summary>
 ```agda

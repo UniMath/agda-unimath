@@ -1,4 +1,4 @@
-#  Connected maps
+# Connected maps
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Isomorphisms in large precategories
+# Isomorphisms in large precategories
 
 <details><summary>Imports</summary>
 ```agda

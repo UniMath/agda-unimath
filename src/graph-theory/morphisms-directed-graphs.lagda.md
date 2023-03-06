@@ -1,4 +1,4 @@
-#  Morphisms of directed graphs
+# Morphisms of directed graphs
 
 <details><summary>Imports</summary>
 ```agda

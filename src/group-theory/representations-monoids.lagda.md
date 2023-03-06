@@ -1,4 +1,4 @@
-#  Representations of monoids
+# Representations of monoids
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Quotients of finite types
+# Quotients of finite types
 
 <details><summary>Imports</summary>
 ```agda

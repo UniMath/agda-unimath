@@ -1,4 +1,4 @@
-#  Tuples of types
+# Tuples of types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Products of unordered tuples of types
+# Products of unordered tuples of types
 
 <details><summary>Imports</summary>
 ```agda

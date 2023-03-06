@@ -1,4 +1,4 @@
-#  Dirichlet convolution
+# Dirichlet convolution
 
 <details><summary>Imports</summary>
 ```agda

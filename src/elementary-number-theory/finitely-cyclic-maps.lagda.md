@@ -1,4 +1,4 @@
-#  Finitely cyclic maps
+# Finitely cyclic maps
 
 <details><summary>Imports</summary>
 ```agda

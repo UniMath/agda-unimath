@@ -1,4 +1,4 @@
-#  Coproducts in precategories
+# Coproducts in precategories
 
 <details><summary>Imports</summary>
 ```agda

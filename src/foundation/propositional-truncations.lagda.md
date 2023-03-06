@@ -1,4 +1,4 @@
-#  Propositional truncations
+# Propositional truncations
 
 <details><summary>Imports</summary>
 ```agda

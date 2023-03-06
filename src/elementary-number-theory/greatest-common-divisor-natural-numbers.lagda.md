@@ -1,4 +1,4 @@
-#  The greatest common divisor of natural numbers
+# The greatest common divisor of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

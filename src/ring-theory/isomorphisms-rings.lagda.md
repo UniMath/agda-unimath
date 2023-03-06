@@ -1,4 +1,4 @@
-#  Isomorphisms of rings
+# Isomorphisms of rings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Impredicative encodings of the logical operations
+# Impredicative encodings of the logical operations
 
 <details><summary>Imports</summary>
 ```agda

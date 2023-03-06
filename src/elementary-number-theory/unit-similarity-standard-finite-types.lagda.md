@@ -1,4 +1,4 @@
-#  Unit similarity on the standard finite types
+# Unit similarity on the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

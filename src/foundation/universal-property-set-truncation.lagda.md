@@ -1,4 +1,4 @@
-#  The universal property of set truncations
+# The universal property of set truncations
 
 <details><summary>Imports</summary>
 ```agda

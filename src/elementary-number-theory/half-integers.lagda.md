@@ -1,4 +1,4 @@
-#  The half-integers
+# The half-integers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Finite multiplication in magmas
+# Finite multiplication in magmas
 
 <details><summary>Imports</summary>
 ```agda

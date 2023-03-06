@@ -1,4 +1,4 @@
-#  Local commutative rings
+# Local commutative rings
 
 <details><summary>Imports</summary>
 ```agda

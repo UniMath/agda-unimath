@@ -1,4 +1,4 @@
-#  Simpson's delooping of the sign homomorphism
+# Simpson's delooping of the sign homomorphism
 
 <details><summary>Imports</summary>
 ```agda

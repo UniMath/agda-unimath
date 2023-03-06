@@ -1,4 +1,4 @@
-#  Cartesian products of finite types
+# Cartesian products of finite types
 
 <details><summary>Imports</summary>
 ```agda

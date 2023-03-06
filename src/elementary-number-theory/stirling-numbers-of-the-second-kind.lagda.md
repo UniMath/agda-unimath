@@ -1,4 +1,4 @@
-#  Stirling numbers of the second kind
+# Stirling numbers of the second kind
 
 <details><summary>Imports</summary>
 ```agda

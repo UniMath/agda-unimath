@@ -1,4 +1,4 @@
-#  The absolute value function on the integers
+# The absolute value function on the integers
 
 <details><summary>Imports</summary>
 ```agda

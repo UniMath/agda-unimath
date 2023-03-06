@@ -1,4 +1,4 @@
-#  Isomorphisms of concrete groups
+# Isomorphisms of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

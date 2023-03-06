@@ -1,4 +1,4 @@
-#  Transport
+# Transport
 
 <details><summary>Imports</summary>
 ```agda

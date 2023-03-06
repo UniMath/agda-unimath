@@ -1,4 +1,4 @@
-#  Decidable propositions
+# Decidable propositions
 
 <details><summary>Imports</summary>
 ```agda

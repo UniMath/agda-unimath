@@ -1,4 +1,4 @@
-#  Hexagons of identifications
+# Hexagons of identifications
 
 <details><summary>Imports</summary>
 ```agda

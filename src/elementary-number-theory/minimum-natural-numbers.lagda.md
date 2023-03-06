@@ -1,4 +1,4 @@
-#  Minimum on the natural numbers
+# Minimum on the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

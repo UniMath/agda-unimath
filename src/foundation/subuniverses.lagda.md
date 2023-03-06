@@ -1,4 +1,4 @@
-#  Subuniverse
+# Subuniverse
 
 <details><summary>Imports</summary>
 ```agda

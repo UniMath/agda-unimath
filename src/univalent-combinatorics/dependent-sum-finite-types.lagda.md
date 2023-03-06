@@ -1,4 +1,4 @@
-#  Dependent sums of finite types
+# Dependent sums of finite types
 
 <details><summary>Imports</summary>
 ```agda

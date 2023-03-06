@@ -1,4 +1,4 @@
-#  Russell's paradox
+# Russell's paradox
 
 <details><summary>Imports</summary>
 ```agda

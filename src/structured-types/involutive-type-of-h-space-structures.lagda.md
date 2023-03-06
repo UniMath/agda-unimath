@@ -1,4 +1,4 @@
-#  The involutive type of H-Space structures on a pointed type
+# The involutive type of H-Space structures on a pointed type
 
 <details><summary>Imports</summary>
 ```agda

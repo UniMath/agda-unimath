@@ -1,4 +1,4 @@
-#  The booleans
+# The booleans
 
 <details><summary>Imports</summary>
 ```agda

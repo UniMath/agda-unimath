@@ -1,4 +1,4 @@
-#  Dubuc-Penon compact types
+# Dubuc-Penon compact types
 
 <details><summary>Imports</summary>
 ```agda

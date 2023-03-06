@@ -1,4 +1,4 @@
-#  Complements of subtypes
+# Complements of subtypes
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The abstract quaternion group of order 8
+# The abstract quaternion group of order 8
 
 <details><summary>Imports</summary>
 ```agda

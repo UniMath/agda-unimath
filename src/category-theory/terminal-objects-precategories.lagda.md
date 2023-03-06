@@ -1,4 +1,4 @@
-#  Terminal object of a precategory
+# Terminal object of a precategory
 
 <details><summary>Imports</summary>
 ```agda

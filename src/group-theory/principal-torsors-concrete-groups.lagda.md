@@ -1,4 +1,4 @@
-#  Principal torsors of concrete groups
+# Principal torsors of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

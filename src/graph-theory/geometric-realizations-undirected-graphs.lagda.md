@@ -1,4 +1,4 @@
-#  Geometric realizations of undirected graphs
+# Geometric realizations of undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

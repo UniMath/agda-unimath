@@ -1,4 +1,4 @@
-#  Pullbacks in precategories
+# Pullbacks in precategories
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Vertex covers
+# Vertex covers
 
 <details><summary>Imports</summary>
 ```agda

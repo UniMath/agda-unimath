@@ -1,4 +1,4 @@
-#  Equivalences between categories
+# Equivalences between categories
 
 <details><summary>Imports</summary>
 ```agda

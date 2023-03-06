@@ -1,4 +1,4 @@
-#  Euclidean division on the natural numbers
+# Euclidean division on the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The congruence relations on the integers
+# The congruence relations on the integers
 
 <details><summary>Imports</summary>
 ```agda

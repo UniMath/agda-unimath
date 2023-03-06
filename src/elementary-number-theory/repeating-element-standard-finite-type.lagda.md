@@ -1,4 +1,4 @@
-#  Repeating an element in a standard finite type
+# Repeating an element in a standard finite type
 
 <details><summary>Imports</summary>
 ```agda

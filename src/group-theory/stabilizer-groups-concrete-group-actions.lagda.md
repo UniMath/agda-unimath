@@ -1,4 +1,4 @@
-#  Stabilizers of concrete group actions
+# Stabilizers of concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

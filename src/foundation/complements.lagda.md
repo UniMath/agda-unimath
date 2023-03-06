@@ -1,4 +1,4 @@
-#  Complements of type families
+# Complements of type families
 
 <details><summary>Imports</summary>
 ```agda

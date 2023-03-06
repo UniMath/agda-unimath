@@ -1,4 +1,4 @@
-#  Binary transport
+# Binary transport
 
 <details><summary>Imports</summary>
 ```agda

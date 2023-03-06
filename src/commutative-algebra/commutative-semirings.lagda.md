@@ -1,4 +1,4 @@
-#  Commutative semirings
+# Commutative semirings
 
 <details><summary>Imports</summary>
 ```agda

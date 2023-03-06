@@ -1,4 +1,4 @@
-#  Equivalence induction
+# Equivalence induction
 
 <details><summary>Imports</summary>
 ```agda

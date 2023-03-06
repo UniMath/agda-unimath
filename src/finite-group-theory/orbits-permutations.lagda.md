@@ -1,4 +1,4 @@
-#  Orbits of permutations
+# Orbits of permutations
 
 <details><summary>Imports</summary>
 ```agda

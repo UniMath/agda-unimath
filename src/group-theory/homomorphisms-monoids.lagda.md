@@ -1,4 +1,4 @@
-#  Homomorphisms of monoids
+# Homomorphisms of monoids
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Euler's totient function
+# Euler's totient function
 
 <details><summary>Imports</summary>
 ```agda

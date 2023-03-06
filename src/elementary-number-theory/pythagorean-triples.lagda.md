@@ -1,4 +1,4 @@
-#  Pythagorean triples
+# Pythagorean triples
 
 <details><summary>Imports</summary>
 ```agda

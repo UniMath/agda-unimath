@@ -1,4 +1,4 @@
-#  The limited principle of omniscience (LPO)
+# The limited principle of omniscience (LPO)
 
 <details><summary>Imports</summary>
 ```agda

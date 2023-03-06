@@ -1,4 +1,4 @@
-#  Type arithmetic with the unit type
+# Type arithmetic with the unit type
 
 <details><summary>Imports</summary>
 ```agda

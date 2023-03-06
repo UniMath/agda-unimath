@@ -1,4 +1,4 @@
-#  Injective maps
+# Injective maps
 
 <details><summary>Imports</summary>
 ```agda

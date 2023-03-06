@@ -1,4 +1,4 @@
-#  Coherent H-spaces
+# Coherent H-spaces
 
 <details><summary>Imports</summary>
 ```agda

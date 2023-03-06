@@ -1,4 +1,4 @@
-#  Reflecting maps for equivalence relations
+# Reflecting maps for equivalence relations
 
 <details><summary>Imports</summary>
 ```agda

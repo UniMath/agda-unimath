@@ -1,4 +1,4 @@
-#  Ranks of elements in W-types
+# Ranks of elements in W-types
 
 <details><summary>Imports</summary>
 ```agda

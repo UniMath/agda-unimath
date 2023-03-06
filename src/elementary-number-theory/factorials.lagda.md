@@ -1,4 +1,4 @@
-#  Factorials of natural numbers
+# Factorials of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

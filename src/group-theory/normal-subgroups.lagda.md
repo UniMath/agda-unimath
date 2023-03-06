@@ -1,4 +1,4 @@
-#  Normal subgroups
+# Normal subgroups
 
 <details><summary>Imports</summary>
 ```agda

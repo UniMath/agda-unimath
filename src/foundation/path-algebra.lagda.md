@@ -1,4 +1,4 @@
-#  Path algebra
+# Path algebra
 
 <details><summary>Imports</summary>
 ```agda

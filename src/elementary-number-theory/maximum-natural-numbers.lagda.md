@@ -1,4 +1,4 @@
-#  Maximum on the natural numbers
+# Maximum on the natural numbers
 
 <details><summary>Imports</summary>
 ```agda

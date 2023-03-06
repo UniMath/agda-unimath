@@ -1,4 +1,4 @@
-#  Decidable relations on types
+# Decidable relations on types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Slice precategories
+# Slice precategories
 
 <details><summary>Imports</summary>
 ```agda

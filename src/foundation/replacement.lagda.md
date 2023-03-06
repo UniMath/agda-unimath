@@ -1,4 +1,4 @@
-#  The replacement axiom for type theory
+# The replacement axiom for type theory
 
 <details><summary>Imports</summary>
 ```agda

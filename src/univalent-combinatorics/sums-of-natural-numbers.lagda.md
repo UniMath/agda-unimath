@@ -1,4 +1,4 @@
-#  Combinatorial identities of sums of natural numbers
+# Combinatorial identities of sums of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

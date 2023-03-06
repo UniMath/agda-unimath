@@ -1,4 +1,4 @@
-#  Polygons
+# Polygons
 
 <details><summary>Imports</summary>
 ```agda

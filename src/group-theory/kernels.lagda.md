@@ -1,4 +1,4 @@
-#  Kernels
+# Kernels
 
 <details><summary>Imports</summary>
 ```agda

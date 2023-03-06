@@ -1,4 +1,4 @@
-#  Embeddings
+# Embeddings
 
 <details><summary>Imports</summary>
 ```agda

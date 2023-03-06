@@ -1,4 +1,4 @@
-#  Comprehension of fibered type theories
+# Comprehension of fibered type theories
 
 <details><summary>Imports</summary>
 ```agda

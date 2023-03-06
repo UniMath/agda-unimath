@@ -1,4 +1,4 @@
-#  Finite monoids
+# Finite monoids
 
 <details><summary>Imports</summary>
 ```agda

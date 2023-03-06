@@ -1,4 +1,4 @@
-#  Cartesian products of groups
+# Cartesian products of groups
 
 <details><summary>Imports</summary>
 ```agda

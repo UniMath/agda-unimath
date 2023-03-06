@@ -1,4 +1,4 @@
-#  Countable sets
+# Countable sets
 
 <details><summary>Imports</summary>
 ```agda

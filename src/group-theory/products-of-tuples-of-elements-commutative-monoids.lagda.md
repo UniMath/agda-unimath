@@ -1,4 +1,4 @@
-#  Products of tuples of elements in commutative monoids
+# Products of tuples of elements in commutative monoids
 
 <details><summary>Imports</summary>
 ```agda

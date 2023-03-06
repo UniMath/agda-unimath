@@ -1,4 +1,4 @@
-#  Binary equivalences on unordered pairs of types
+# Binary equivalences on unordered pairs of types
 
 <details><summary>Imports</summary>
 ```agda

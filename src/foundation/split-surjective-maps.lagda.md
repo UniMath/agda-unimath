@@ -1,4 +1,4 @@
-#  Split surjective maps
+# Split surjective maps
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Equality of coproduct types
+# Equality of coproduct types
 
 <details><summary>Imports</summary>
 ```agda

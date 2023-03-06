@@ -1,4 +1,4 @@
-#  Exponents of set quotients
+# Exponents of set quotients
 
 <details><summary>Imports</summary>
 ```agda

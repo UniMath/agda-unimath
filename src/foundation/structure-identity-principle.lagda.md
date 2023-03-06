@@ -1,4 +1,4 @@
-#  The structure identity principle
+# The structure identity principle
 
 <details><summary>Imports</summary>
 ```agda

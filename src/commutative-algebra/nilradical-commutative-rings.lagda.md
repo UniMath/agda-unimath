@@ -1,4 +1,4 @@
-#  Nilradical of a commutative ring
+# Nilradical of a commutative ring
 
 <details><summary>Imports</summary>
 ```agda

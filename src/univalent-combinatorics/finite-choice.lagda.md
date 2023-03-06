@@ -1,4 +1,4 @@
-#  Finite choice
+# Finite choice
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Truncated maps
+# Truncated maps
 
 <details><summary>Imports</summary>
 ```agda

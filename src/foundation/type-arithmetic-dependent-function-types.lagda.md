@@ -1,4 +1,4 @@
-#  Type arithmetic with dependent function types
+# Type arithmetic with dependent function types
 
 <details><summary>Imports</summary>
 ```agda

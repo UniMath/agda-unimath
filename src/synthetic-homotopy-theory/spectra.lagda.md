@@ -1,4 +1,4 @@
-#  Spectra
+# Spectra
 
 <details><summary>Imports</summary>
 ```agda

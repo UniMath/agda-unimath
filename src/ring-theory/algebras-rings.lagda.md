@@ -1,4 +1,4 @@
-#  Algebras over rings
+# Algebras over rings
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Baire space
+# Baire space
 
 <details><summary>Imports</summary>
 ```agda

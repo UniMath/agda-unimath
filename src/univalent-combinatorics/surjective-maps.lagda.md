@@ -1,4 +1,4 @@
-#  Surjective maps between finite types
+# Surjective maps between finite types
 
 <details><summary>Imports</summary>
 ```agda

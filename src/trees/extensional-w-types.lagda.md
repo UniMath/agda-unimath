@@ -1,4 +1,4 @@
-#  Extensional W-types
+# Extensional W-types
 
 <details><summary>Imports</summary>
 ```agda

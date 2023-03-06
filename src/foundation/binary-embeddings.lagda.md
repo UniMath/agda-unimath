@@ -1,4 +1,4 @@
-#  Binary embeddings
+# Binary embeddings
 
 <details><summary>Imports</summary>
 ```agda

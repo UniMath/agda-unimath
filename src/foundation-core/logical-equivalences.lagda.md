@@ -1,4 +1,4 @@
-#  Logical equivalences
+# Logical equivalences
 
 <details><summary>Imports</summary>
 ```agda

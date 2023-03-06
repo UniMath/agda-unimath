@@ -1,4 +1,4 @@
-#  Embeddings of undirected graphs
+# Embeddings of undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

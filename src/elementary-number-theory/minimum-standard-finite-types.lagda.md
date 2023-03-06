@@ -1,4 +1,4 @@
-#  Minimum on the standard finite types
+# Minimum on the standard finite types
 
 <details><summary>Imports</summary>
 ```agda

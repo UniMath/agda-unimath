@@ -1,4 +1,4 @@
-#  The circle
+# The circle
 
 <details><summary>Imports</summary>
 ```agda

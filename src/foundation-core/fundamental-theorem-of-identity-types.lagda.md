@@ -1,4 +1,4 @@
-#  The fundamental theorem of identity types
+# The fundamental theorem of identity types
 
 <details><summary>Imports</summary>
 ```agda

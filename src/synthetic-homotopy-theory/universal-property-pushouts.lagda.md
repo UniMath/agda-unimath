@@ -1,4 +1,4 @@
-#  The universal property of pushouts
+# The universal property of pushouts
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Monomorphisms of concrete groups
+# Monomorphisms of concrete groups
 
 <details><summary>Imports</summary>
 ```agda

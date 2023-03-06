@@ -1,4 +1,4 @@
-#  Reflexive relations
+# Reflexive relations
 
 <details><summary>Imports</summary>
 ```agda

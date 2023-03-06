@@ -1,4 +1,4 @@
-#  Congruence relations on groups
+# Congruence relations on groups
 
 <details><summary>Imports</summary>
 ```agda

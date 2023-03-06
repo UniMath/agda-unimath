@@ -1,4 +1,4 @@
-#  Decidable equivalence relations
+# Decidable equivalence relations
 
 <details><summary>Imports</summary>
 ```agda

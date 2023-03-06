@@ -1,4 +1,4 @@
-#  Subgroups of finite groups
+# Subgroups of finite groups
 
 <details><summary>Imports</summary>
 ```agda

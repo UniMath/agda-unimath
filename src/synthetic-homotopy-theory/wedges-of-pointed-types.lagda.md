@@ -1,4 +1,4 @@
-#  Wedges of types
+# Wedges of types
 
 <details><summary>Imports</summary>
 ```agda

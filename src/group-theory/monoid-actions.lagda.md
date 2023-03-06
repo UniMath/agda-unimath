@@ -1,4 +1,4 @@
-#  Monoid actions
+# Monoid actions
 
 <details><summary>Imports</summary>
 ```agda

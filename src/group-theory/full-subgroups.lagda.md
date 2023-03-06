@@ -1,4 +1,4 @@
-#  The full subgroup of a group
+# The full subgroup of a group
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  The univalence axiom
+# The univalence axiom
 
 <details><summary>Imports</summary>
 ```agda

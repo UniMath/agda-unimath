@@ -1,4 +1,4 @@
-#  Morphisms of concrete group actions
+# Morphisms of concrete group actions
 
 <details><summary>Imports</summary>
 ```agda

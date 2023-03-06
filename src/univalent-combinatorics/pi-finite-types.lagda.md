@@ -1,4 +1,4 @@
-#  π-finite types
+# π-finite types
 
 <details><summary>Imports</summary>
 ```agda

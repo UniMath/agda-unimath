@@ -1,4 +1,4 @@
-#  Existential quantification
+# Existential quantification
 
 <details><summary>Imports</summary>
 ```agda

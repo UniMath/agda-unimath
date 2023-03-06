@@ -1,4 +1,4 @@
-#  Structure
+# Structure
 
 <details><summary>Imports</summary>
 ```agda

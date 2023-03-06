@@ -1,4 +1,4 @@
-#  The W-type of natural numbers
+# The W-type of natural numbers
 
 <details><summary>Imports</summary>
 ```agda

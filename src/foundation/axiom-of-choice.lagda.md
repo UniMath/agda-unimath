@@ -1,4 +1,4 @@
-#  The axiom of choice
+# The axiom of choice
 
 <details><summary>Imports</summary>
 ```agda

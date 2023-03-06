@@ -1,4 +1,4 @@
-#  Equivalences of enriched undirected graphs
+# Equivalences of enriched undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

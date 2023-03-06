@@ -1,4 +1,4 @@
-#  Indexed W-types
+# Indexed W-types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Multiset coefficients
+# Multiset coefficients
 
 <details><summary>Imports</summary>
 ```agda

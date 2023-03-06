@@ -1,4 +1,4 @@
-#  Non-contractible types
+# Non-contractible types
 
 <details><summary>Imports</summary>
 ```agda

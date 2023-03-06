@@ -1,4 +1,4 @@
-#  Functoriality of dependent pair types
+# Functoriality of dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

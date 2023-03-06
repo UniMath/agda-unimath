@@ -1,4 +1,4 @@
-#  Pregroupoids
+# Pregroupoids
 
 <details><summary>Imports</summary>
 ```agda

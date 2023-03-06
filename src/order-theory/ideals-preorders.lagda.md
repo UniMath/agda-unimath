@@ -1,4 +1,4 @@
-#  Ideals in preorders
+# Ideals in preorders
 
 <details><summary>Imports</summary>
 ```agda

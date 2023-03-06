@@ -1,4 +1,4 @@
-#  Local rings
+# Local rings
 
 <details><summary>Imports</summary>
 ```agda

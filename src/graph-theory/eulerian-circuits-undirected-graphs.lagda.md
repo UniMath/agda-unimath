@@ -1,4 +1,4 @@
-#  Eulerian circuits in undirected graphs
+# Eulerian circuits in undirected graphs
 
 <details><summary>Imports</summary>
 ```agda

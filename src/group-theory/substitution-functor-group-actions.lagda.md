@@ -1,4 +1,4 @@
-#  The substitution functor of group actions
+# The substitution functor of group actions
 
 <details><summary>Imports</summary>
 ```agda

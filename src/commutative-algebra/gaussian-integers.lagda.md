@@ -1,4 +1,4 @@
-#  The Gaussian integers
+# The Gaussian integers
 
 <details><summary>Imports</summary>
 ```agda

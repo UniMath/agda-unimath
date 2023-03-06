@@ -1,4 +1,4 @@
-#  Undirected rees
+# Undirected rees
 
 <details><summary>Imports</summary>
 ```agda

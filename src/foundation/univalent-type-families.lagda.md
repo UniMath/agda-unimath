@@ -1,4 +1,4 @@
-#  Univalent type families
+# Univalent type families
 
 <details><summary>Imports</summary>
 ```agda

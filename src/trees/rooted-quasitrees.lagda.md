@@ -1,4 +1,4 @@
-#  Rooted quasitrees
+# Rooted quasitrees
 
 <details><summary>Imports</summary>
 ```agda

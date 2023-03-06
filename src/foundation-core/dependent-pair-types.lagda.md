@@ -1,4 +1,4 @@
-#  Dependent pair types
+# Dependent pair types
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Coherently invertible maps
+# Coherently invertible maps
 
 <details><summary>Imports</summary>
 ```agda

@@ -1,4 +1,4 @@
-#  Alcohols
+# Alcohols
 
 <details><summary>Imports</summary>
 ```agda

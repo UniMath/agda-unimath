@@ -1,4 +1,4 @@
-#  Subgroups of abelian groups
+# Subgroups of abelian groups
 
 <details><summary>Imports</summary>
 ```agda

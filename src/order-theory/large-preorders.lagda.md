@@ -1,4 +1,4 @@
-#  Large preorders
+# Large preorders
 
 <details><summary>Imports</summary>
 ```agda

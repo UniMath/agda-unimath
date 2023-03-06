@@ -1,4 +1,4 @@
-#  Isotopies of Latin squares
+# Isotopies of Latin squares
 
 <details><summary>Imports</summary>
 ```agda
