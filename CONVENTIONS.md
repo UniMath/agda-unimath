@@ -25,7 +25,7 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
       `[the univalence axiom](foundation.univalence.md)`, which will be displayed as [the univalence axiom](foundation.univalence.md).
     - You can reference another module by module name using ```[`foundation.univalence`](foundation.univalence.md)```, which will be displayed as [`foundation.univalence`](foundation.univalence.md).
     - If you just want to add a clickable link, use the pattern `<https://unimath.github.io/agda-unimath/>`. This will be displayed as <https://unimath.github.io/agda-unimath/>.
-    - Or if you want to add a clickable link with custom text use `[Agda-Unimath](https://unimath.github.io/agda-unimath/)`.
-      This will be displayed as [Agda-Unimath](https://unimath.github.io/agda-unimath/).
+    - Or if you want to add a clickable link with custom text use `[UniMath/agda-unimath](https://github.com/UniMath/agda-unimath)`.
+      This will be displayed as [UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
 
 A good reference file for the expected structure of a file is [`foundation.cantor-schroder-bernstein-escardo.lagda.md`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
