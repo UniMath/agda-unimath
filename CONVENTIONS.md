@@ -28,4 +28,4 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
     - Or if you want to add a clickable link with custom text use `[UniMath/agda-unimath](https://github.com/UniMath/agda-unimath)`.
       This will be displayed as [UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
 
-A good reference file for the expected structure of a file is [`foundation.cantor-schroder-bernstein-escardo.lagda.md`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
+A good reference file for the expected structure of a file is [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
