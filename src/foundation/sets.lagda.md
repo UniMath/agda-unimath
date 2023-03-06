@@ -6,10 +6,6 @@ module foundation.sets where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.sets where
-=======
->>>>>>> Stashed changes
 open import foundation-core.sets public
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types

@@ -6,10 +6,6 @@ module foundation.equality-dependent-pair-types where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.equality-dependent-pair-types where
-=======
->>>>>>> Stashed changes
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

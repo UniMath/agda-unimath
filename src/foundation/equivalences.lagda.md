@@ -6,10 +6,6 @@ module foundation.equivalences where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.equivalences where
-=======
->>>>>>> Stashed changes
 open import foundation-core.equivalences public
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps

@@ -6,10 +6,6 @@ module foundation.propositional-maps where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.propositional-maps where
-=======
->>>>>>> Stashed changes
 open import foundation-core.propositional-maps public
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

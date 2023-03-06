@@ -6,10 +6,6 @@ module foundation.functoriality-function-types where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.functoriality-function-types where
-=======
->>>>>>> Stashed changes
 open import foundation-core.functoriality-function-types public
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences

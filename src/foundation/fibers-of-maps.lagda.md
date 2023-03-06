@@ -6,10 +6,6 @@ module foundation.fibers-of-maps where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.fibers-of-maps where
-=======
->>>>>>> Stashed changes
 open import foundation-core.fibers-of-maps public
 open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps

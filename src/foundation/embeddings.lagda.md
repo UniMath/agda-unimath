@@ -6,10 +6,6 @@ module foundation.embeddings where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.embeddings where
-=======
->>>>>>> Stashed changes
 open import foundation-core.embeddings public
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks

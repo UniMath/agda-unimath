@@ -6,10 +6,6 @@ module foundation.functoriality-dependent-function-types where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.functoriality-dependent-function-types where
-=======
->>>>>>> Stashed changes
 open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps

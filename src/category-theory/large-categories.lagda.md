@@ -6,9 +6,9 @@ module category-theory.large-categories where
 
 <details><summary>Imports</summary>
 ```agda
+open import Agda.Primitive using (Setω)
 open import foundation.equivalences
 open import foundation.universe-levels
-open import Agda.Primitive using (Setω)
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
 ```

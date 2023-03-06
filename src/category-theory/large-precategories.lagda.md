@@ -6,11 +6,11 @@ module category-theory.large-precategories where
 
 <details><summary>Imports</summary>
 ```agda
+open import Agda.Primitive using (Setω)
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-open import Agda.Primitive using (Setω)
 ```
 </details>
 

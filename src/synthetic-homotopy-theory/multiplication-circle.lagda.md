@@ -1,5 +1,4 @@
 # The multiplication operation on the circle
-Contributors: Egbert Rijke.
 
 ```agda
 module synthetic-homotopy-theory.multiplication-circle where

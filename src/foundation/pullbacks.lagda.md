@@ -6,10 +6,6 @@ module foundation.pullbacks where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.pullbacks where
-=======
->>>>>>> Stashed changes
 open import foundation-core.pullbacks public
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks

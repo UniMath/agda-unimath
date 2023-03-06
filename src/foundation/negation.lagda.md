@@ -6,10 +6,6 @@ module foundation.negation where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.negation where
-=======
->>>>>>> Stashed changes
 open import foundation-core.negation public
 open import foundation-core.empty-types
 open import foundation.cartesian-product-types

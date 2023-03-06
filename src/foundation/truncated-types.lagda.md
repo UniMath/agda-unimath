@@ -6,10 +6,6 @@ module foundation.truncated-types where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.truncated-types where
-=======
->>>>>>> Stashed changes
 open import foundation-core.truncated-types public
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

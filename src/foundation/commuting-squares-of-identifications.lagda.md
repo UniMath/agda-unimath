@@ -1,14 +1,7 @@
 # Commuting squares of identifications
 
-<<<<<<< Updated upstream
 ```agda
 {-# OPTIONS --safe #-}
-```
-
-<details><summary>Imports</summary>
-=======
->>>>>>> Stashed changes
-```agda
 module foundation.commuting-squares-of-identifications where
 ```
 

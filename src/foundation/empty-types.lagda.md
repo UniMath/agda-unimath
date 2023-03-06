@@ -6,10 +6,6 @@ module foundation.empty-types where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.empty-types where
-=======
->>>>>>> Stashed changes
 open import foundation-core.empty-types public
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

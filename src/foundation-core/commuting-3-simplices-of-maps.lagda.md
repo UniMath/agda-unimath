@@ -1,14 +1,7 @@
 # Commuting 3-simplices of maps
 
-<<<<<<< Updated upstream
 ```agda
 {-# OPTIONS --safe #-}
-```
-
-<details><summary>Imports</summary>
-=======
->>>>>>> Stashed changes
-```agda
 module foundation-core.commuting-3-simplices-of-maps where
 ```
 

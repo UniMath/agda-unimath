@@ -2,11 +2,11 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+module type-theories.sections-dependent-type-theories where
 ```
 
 <details><summary>Imports</summary>
 ```agda
-module type-theories.sections-dependent-type-theories where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels

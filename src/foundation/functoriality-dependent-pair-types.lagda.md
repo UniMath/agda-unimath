@@ -6,10 +6,6 @@ module foundation.functoriality-dependent-pair-types where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.functoriality-dependent-pair-types where
-=======
->>>>>>> Stashed changes
 open import foundation-core.functoriality-dependent-pair-types public
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types

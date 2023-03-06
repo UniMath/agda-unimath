@@ -6,10 +6,6 @@ module foundation.constant-maps where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.constant-maps where
-=======
->>>>>>> Stashed changes
 open import foundation-core.constant-maps public
 open import foundation-core.0-maps
 open import foundation-core.1-types

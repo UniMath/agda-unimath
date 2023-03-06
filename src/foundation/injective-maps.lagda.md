@@ -6,10 +6,6 @@ module foundation.injective-maps where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.injective-maps where
-=======
->>>>>>> Stashed changes
 open import foundation-core.injective-maps public
 open import foundation-core.empty-types
 open import foundation-core.universe-levels

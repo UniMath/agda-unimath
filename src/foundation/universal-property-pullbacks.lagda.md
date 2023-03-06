@@ -6,10 +6,6 @@ module foundation.universal-property-pullbacks where
 
 <details><summary>Imports</summary>
 ```agda
-<<<<<<< Updated upstream
-module foundation.universal-property-pullbacks where
-=======
->>>>>>> Stashed changes
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks

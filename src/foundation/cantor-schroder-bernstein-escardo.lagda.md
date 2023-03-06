@@ -1,5 +1,4 @@
 # The Cantor-Schröder-Bernstein-Escardó theorem
-Contributors: Elif Uskuplu, Egbert Rijke
 
 ```agda
 module foundation.cantor-schroder-bernstein-escardo where
