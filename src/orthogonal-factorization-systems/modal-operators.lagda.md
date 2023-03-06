@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.modal-operators where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions

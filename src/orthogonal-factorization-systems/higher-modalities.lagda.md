@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.higher-modalities where
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -18,7 +17,6 @@ open import foundation.sections
 open import foundation.small-types
 open import foundation.subuniverses
 open import foundation.universe-levels
-
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
