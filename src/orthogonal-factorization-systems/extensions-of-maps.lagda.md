@@ -1,8 +1,11 @@
 # Extensions of maps
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -19,7 +22,6 @@ open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.propositions
 open import foundation.sets
--- open import foundation.small-types
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels

@@ -1,13 +1,16 @@
 # Terminal object of a precategory
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.terminal-objects-precategories where
-open import category-theory.precategories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.identity-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import category-theory.precategories
 ```
 </details>
 

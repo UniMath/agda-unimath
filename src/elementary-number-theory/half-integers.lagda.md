@@ -1,12 +1,15 @@
 # The half-integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.half-integers where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.universe-levels
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
 ```
 </details>
 

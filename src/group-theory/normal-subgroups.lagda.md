@@ -1,8 +1,11 @@
 # Normal subgroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types

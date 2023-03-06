@@ -1,8 +1,11 @@
 # The descent property of the circle
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.descent-circle where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.automorphisms
 open import foundation.contractible-maps
 open import foundation.contractible-types

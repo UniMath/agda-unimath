@@ -1,8 +1,11 @@
 # Equivalence relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-relations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalence-relations public
 open import foundation-core.universe-levels
 open import foundation.binary-relations

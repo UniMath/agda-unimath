@@ -1,12 +1,11 @@
 # The sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.sign-homomorphism where
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
-open import finite-group-theory.permutations
-open import finite-group-theory.transpositions
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -19,6 +18,10 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
+open import finite-group-theory.permutations
+open import finite-group-theory.transpositions
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.symmetric-groups

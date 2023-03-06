@@ -1,8 +1,15 @@
 # Truncated maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.truncated-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.truncated-maps where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.truncated-maps public
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types

@@ -1,11 +1,14 @@
 # Boolean rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.boolean-rings where
-open import commutative-algebra.commutative-rings
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import commutative-algebra.commutative-rings
 open import ring-theory.idempotent-elements-rings
 ```
 </details>

@@ -1,8 +1,15 @@
 # Involutions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.involutions where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.involutions where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.involutions public
 open import foundation-core.automorphisms
 open import foundation-core.functions

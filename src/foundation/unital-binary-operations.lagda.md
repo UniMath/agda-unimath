@@ -1,8 +1,11 @@
 # Unital binary operations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.unital-binary-operations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.homotopies

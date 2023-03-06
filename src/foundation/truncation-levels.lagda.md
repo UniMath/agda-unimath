@@ -1,13 +1,25 @@
 # Truncation levels
 
+```agda
+module foundation.truncation-levels where
+```
+
 <details><summary>Imports</summary>
 ```agda
+<<<<<<< Updated upstream
 module foundation.truncation-levels where
 open import foundation-core.truncation-levels public
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation-core.functions
 open import foundation-core.identity-types
+=======
+open import foundation-core.truncation-levels public
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+>>>>>>> Stashed changes
 ```
 </details>
 

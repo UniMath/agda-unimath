@@ -1,8 +1,11 @@
 # Complete bipartite graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-bipartite-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels

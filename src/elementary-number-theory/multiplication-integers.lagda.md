@@ -1,16 +1,11 @@
 # Multiplication of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-integers where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -22,6 +17,14 @@ open import foundation.interchange-law
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

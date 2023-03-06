@@ -1,12 +1,15 @@
 # Powers of elements in commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.powers-of-elements-commutative-rings where
-open import commutative-algebra.commutative-rings
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.identity-types
 open import foundation.universe-levels
+open import commutative-algebra.commutative-rings
+open import elementary-number-theory.natural-numbers
 open import ring-theory.powers-of-elements-rings
 ```
 </details>

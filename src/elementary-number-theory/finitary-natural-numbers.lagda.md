@@ -1,13 +1,11 @@
 # The natural numbers base k
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.finitary-natural-numbers where
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -16,6 +14,11 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

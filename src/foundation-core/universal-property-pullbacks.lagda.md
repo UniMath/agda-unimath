@@ -1,8 +1,11 @@
 # The universal property of pullbacks
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.universal-property-pullbacks where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types

@@ -1,9 +1,12 @@
 # Cospans
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 module foundation-core.cospans where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.universe-levels

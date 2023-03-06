@@ -1,8 +1,15 @@
 # Contractible types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.contractible-types where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.contractible-types where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.contractible-types public
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps

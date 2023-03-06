@@ -1,8 +1,11 @@
 # Simple undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.simple-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.negation

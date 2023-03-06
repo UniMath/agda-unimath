@@ -1,8 +1,11 @@
 # The orbit-stabilizer theorem for concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.orbit-stabilizer-theorem-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.connected-components
 open import foundation.dependent-pair-types

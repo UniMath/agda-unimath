@@ -1,8 +1,11 @@
 # Mere equivalences of group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.mere-equivalences-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels

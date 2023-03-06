@@ -1,8 +1,22 @@
 # The infinitude of primes
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.infinitude-of-primes where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
@@ -15,17 +29,6 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
-open import foundation.universe-levels
 ```
 </details>
 

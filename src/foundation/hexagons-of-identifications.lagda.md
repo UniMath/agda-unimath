@@ -1,8 +1,11 @@
 # Hexagons of identifications
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.hexagons-of-identifications where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```

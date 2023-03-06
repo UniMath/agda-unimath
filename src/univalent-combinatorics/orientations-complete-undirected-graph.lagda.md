@@ -4,19 +4,12 @@
 {-# OPTIONS --lossy-unification #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.orientations-complete-undirected-graph where
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
-open import finite-group-theory.transpositions
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -52,6 +45,16 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import finite-group-theory.transpositions
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
@@ -70,6 +73,7 @@ open import univalent-combinatorics.symmetric-difference
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
+
   orientation-Complete-Undirected-Graph : UU (lsuc l)
   orientation-Complete-Undirected-Graph =
     ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →

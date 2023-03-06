@@ -1,8 +1,11 @@
 # Congruence relations on groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.contractible-types

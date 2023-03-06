@@ -1,9 +1,11 @@
 # Counting in type theory
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.counting where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -20,6 +22,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

@@ -1,14 +1,17 @@
 # The Twin Prime conjecture
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.twin-prime-conjecture where
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.prime-numbers
 ```
 </details>
 

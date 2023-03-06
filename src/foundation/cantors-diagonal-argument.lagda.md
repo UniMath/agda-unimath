@@ -1,8 +1,11 @@
 # Cantor's diagonal argument
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.cantors-diagonal-argument where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.function-extensionality
 open import foundation.dependent-pair-types
 open import foundation.empty-types

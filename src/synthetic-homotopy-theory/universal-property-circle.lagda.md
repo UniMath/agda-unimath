@@ -1,8 +1,11 @@
 # The universal property of the circle
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.universal-property-circle where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

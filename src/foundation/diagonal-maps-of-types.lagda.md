@@ -1,8 +1,15 @@
 # Diagonal maps of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.diagonal-maps-of-types where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.diagonal-maps-of-types where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.0-maps
 open import foundation-core.1-types

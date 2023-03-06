@@ -1,8 +1,11 @@
 # Directed complete posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.directed-complete-posets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes

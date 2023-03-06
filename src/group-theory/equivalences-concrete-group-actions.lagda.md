@@ -1,8 +1,11 @@
 # Equivalences of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

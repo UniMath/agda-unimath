@@ -1,8 +1,11 @@
 # Ideals in preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.ideals-preorders where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types

@@ -1,11 +1,11 @@
 # The precategory of functors and natural transformations between two fixed precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.precategory-of-functors where
-open import category-theory.functors-precategories
-open import category-theory.natural-transformations-precategories
-open import category-theory.precategories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equational-reasoning
@@ -15,6 +15,9 @@ open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+open import category-theory.functors-precategories
+open import category-theory.natural-transformations-precategories
+open import category-theory.precategories
 ```
 </details>
 

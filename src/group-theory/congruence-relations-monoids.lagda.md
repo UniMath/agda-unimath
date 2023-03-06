@@ -1,8 +1,11 @@
 # Congruence relations on monoids
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-monoids where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations

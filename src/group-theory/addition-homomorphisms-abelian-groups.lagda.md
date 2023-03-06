@@ -1,8 +1,11 @@
 # Pointwise addition of morphisms of abelian groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.addition-homomorphisms-abelian-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels

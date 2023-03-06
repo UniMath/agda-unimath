@@ -1,8 +1,11 @@
 # Pointed sections of pointed maps
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-sections where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import structured-types.pointed-homotopies

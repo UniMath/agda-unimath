@@ -1,8 +1,11 @@
 # Cartesian products of species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cartesian-products-species where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types

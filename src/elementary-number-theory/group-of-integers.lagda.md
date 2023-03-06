@@ -1,12 +1,15 @@
 # The group of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.group-of-integers where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
 open import group-theory.groups
 open import group-theory.semigroups
 ```

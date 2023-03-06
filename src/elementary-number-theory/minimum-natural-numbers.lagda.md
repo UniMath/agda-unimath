@@ -1,13 +1,16 @@
 # Minimum on the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.minimum-natural-numbers where
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import order-theory.greatest-lower-bounds-posets
 open import univalent-combinatorics.standard-finite-types
 ```

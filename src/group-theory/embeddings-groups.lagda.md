@@ -1,8 +1,11 @@
 # Embeddings of groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.embeddings-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels

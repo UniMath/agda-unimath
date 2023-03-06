@@ -1,8 +1,11 @@
 # Decidable equivalence relations on finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-equivalence-relations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types

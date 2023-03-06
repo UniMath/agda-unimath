@@ -1,8 +1,11 @@
 # Directed families in posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.directed-families where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.existential-quantification
 open import foundation.inhabited-types

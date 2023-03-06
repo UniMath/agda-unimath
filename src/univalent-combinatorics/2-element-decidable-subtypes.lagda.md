@@ -1,11 +1,11 @@
 # 2-element decidable subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-decidable-subtypes where
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.automorphisms
 open import foundation.booleans
 open import foundation.cartesian-product-types
@@ -36,6 +36,9 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
 open import foundation.universe-levels
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.decidable-subtypes

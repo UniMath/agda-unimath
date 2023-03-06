@@ -1,11 +1,14 @@
 # Injective maps between finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.injective-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import foundation.injective-maps public
 open import foundation.decidable-types
 open import foundation.identity-types
-open import foundation.injective-maps public
 open import foundation.universe-levels
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.equality-finite-types

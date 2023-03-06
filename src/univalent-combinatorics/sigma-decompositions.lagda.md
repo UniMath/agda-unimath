@@ -1,8 +1,12 @@
 # Finite Σ-decompositions of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.sigma-decompositions where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import foundation.sigma-decompositions public
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
@@ -15,7 +19,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
-open import foundation.sigma-decompositions public
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice

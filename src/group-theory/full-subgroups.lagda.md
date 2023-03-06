@@ -1,8 +1,11 @@
 # The full subgroup of a group
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.full-subgroups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences

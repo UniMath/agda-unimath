@@ -1,8 +1,11 @@
 # Dependent sums of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.dependent-sum-finite-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.complements
 open import foundation.contractible-types
 open import foundation.decidable-types

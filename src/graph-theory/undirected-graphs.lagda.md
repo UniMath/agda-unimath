@@ -1,8 +1,11 @@
 # Undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

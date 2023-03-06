@@ -1,8 +1,11 @@
 # Finite posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.finite-posets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.decidable-types
 open import foundation.propositions
 open import foundation.universe-levels

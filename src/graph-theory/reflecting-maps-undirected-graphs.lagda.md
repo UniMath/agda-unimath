@@ -1,8 +1,11 @@
 # Reflecting maps of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.reflecting-maps-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.symmetric-identity-types
 open import foundation.universe-levels

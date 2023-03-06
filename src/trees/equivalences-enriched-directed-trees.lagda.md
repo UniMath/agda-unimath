@@ -1,8 +1,11 @@
 # Equivalences of enriched directed trees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.equivalences-enriched-directed-trees where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences

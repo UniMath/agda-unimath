@@ -1,8 +1,11 @@
 # Symmetric higher groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.symmetric-higher-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.connected-components-universes
 open import foundation.dependent-pair-types

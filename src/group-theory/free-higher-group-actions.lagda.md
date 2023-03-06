@@ -1,8 +1,11 @@
 # Free higher group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.free-higher-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes

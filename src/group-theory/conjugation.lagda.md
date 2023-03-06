@@ -1,8 +1,11 @@
 # Conjugation in groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.conjugation where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences

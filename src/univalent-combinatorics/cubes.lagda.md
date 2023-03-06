@@ -1,11 +1,14 @@
 # Cubes
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cubes where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.finite-types
 ```

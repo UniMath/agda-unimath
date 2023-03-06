@@ -1,13 +1,16 @@
 # Euler's totient function
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.eulers-totient-function where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
-open import foundation.coproduct-types
-open import foundation.decidable-types
 ```
 </details>
 

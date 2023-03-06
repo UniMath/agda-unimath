@@ -1,8 +1,11 @@
 # Pointed homotopies
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-homotopies where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality

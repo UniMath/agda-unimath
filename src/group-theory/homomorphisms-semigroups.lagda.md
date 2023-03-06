@@ -1,8 +1,11 @@
 # Homomorphisms of semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-semigroups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

@@ -1,8 +1,11 @@
 # Equivalences of directed trees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.equivalences-directed-trees where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

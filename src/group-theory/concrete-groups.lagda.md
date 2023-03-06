@@ -1,8 +1,11 @@
 # Concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.concrete-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.dependent-pair-types

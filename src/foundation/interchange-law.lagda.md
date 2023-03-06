@@ -1,8 +1,11 @@
 # The interchange law
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.interchange-law where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.identity-types
 open import foundation.universe-levels
 ```

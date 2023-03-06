@@ -1,13 +1,16 @@
 # Endomorphisms of objects in categories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.endomorphisms-of-objects-categories where
-open import category-theory.categories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+open import category-theory.categories
 open import group-theory.monoids
 open import group-theory.semigroups
 ```

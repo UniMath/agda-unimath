@@ -1,8 +1,11 @@
 # Wedges of types
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.wedges-of-pointed-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.dependent-pair-types

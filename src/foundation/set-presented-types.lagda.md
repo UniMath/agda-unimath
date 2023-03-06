@@ -1,8 +1,11 @@
 # Set presented types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.set-presented-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.functions

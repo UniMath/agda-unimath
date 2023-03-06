@@ -1,8 +1,11 @@
 # Commuting cubes of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.commuting-cubes-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types

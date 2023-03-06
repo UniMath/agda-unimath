@@ -1,8 +1,11 @@
 # Type duality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-duality where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.fibers-of-maps
 open import foundation-core.injective-maps
 open import foundation.contractible-maps

@@ -1,8 +1,11 @@
 # Symmetric difference of subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-difference where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes

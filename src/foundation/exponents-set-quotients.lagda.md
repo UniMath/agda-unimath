@@ -4,9 +4,12 @@
 {-# OPTIONS --lossy-unification #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.exponents-set-quotients where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types

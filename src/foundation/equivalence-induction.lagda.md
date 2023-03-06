@@ -1,8 +1,11 @@
 # Equivalence induction
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-induction where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalence-induction public
 open import foundation.dependent-pair-types
 open import foundation.equivalences

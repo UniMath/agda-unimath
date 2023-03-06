@@ -1,8 +1,11 @@
 # Morphisms in the coslice category of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.coslice where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

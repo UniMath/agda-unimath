@@ -1,10 +1,13 @@
 # Multiplication of matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.multiplication-matrices where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import linear-algebra.constant-vectors
 open import linear-algebra.matrices-on-rings
 open import linear-algebra.vectors

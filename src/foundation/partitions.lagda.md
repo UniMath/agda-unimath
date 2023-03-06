@@ -1,8 +1,11 @@
 # Partitions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.partitions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types

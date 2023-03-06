@@ -1,8 +1,11 @@
 # Morphisms of coherent H-spaces
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-coherent-h-spaces where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies

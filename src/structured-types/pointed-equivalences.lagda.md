@@ -1,8 +1,11 @@
 # Pointed equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-equivalences where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.function-extensionality
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps

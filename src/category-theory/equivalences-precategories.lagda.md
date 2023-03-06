@@ -1,14 +1,17 @@
 # Equivalences between precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.equivalences-precategories where
-open import category-theory.functors-precategories
-open import category-theory.natural-isomorphisms-precategories
-open import category-theory.precategories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import category-theory.functors-precategories
+open import category-theory.natural-isomorphisms-precategories
+open import category-theory.precategories
 ```
 </details>
 

@@ -1,8 +1,11 @@
 # Suspensions of types
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

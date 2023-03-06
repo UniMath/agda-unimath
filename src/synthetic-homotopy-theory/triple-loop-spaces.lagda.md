@@ -1,8 +1,11 @@
 # Triple loop spaces
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.triple-loop-spaces where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra

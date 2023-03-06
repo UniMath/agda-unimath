@@ -1,14 +1,11 @@
 # The Well-Ordering Principle of the standard finite types
 
+```agda
+module elementary-number-theory.well-ordering-principle-standard-finite-types where
+```
+
 <details><summary>Imports</summary>
 ```agda
-module
-  elementary-number-theory.well-ordering-principle-standard-finite-types
-  where
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
@@ -33,6 +30,10 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.standard-finite-types

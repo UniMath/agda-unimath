@@ -1,8 +1,11 @@
 # Powersets
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.powersets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality

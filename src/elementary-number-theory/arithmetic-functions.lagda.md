@@ -1,10 +1,13 @@
 # Arithmetic functions
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.arithmetic-functions where
-open import elementary-number-theory.nonzero-natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.universe-levels
+open import elementary-number-theory.nonzero-natural-numbers
 open import ring-theory.rings
 ```
 </details>

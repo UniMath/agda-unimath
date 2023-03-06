@@ -1,8 +1,11 @@
 # Symmetric H-spaces
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.symmetric-h-spaces where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.symmetric-operations
 open import foundation.universe-levels

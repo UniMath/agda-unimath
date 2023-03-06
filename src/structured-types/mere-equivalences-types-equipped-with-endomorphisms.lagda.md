@@ -1,8 +1,11 @@
 # Mere equivalences of types equipped with endomorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.mere-equivalences-types-equipped-with-endomorphisms where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

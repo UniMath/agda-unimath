@@ -1,8 +1,11 @@
 # Connected types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.connected-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.equivalences

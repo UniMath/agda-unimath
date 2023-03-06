@@ -1,14 +1,11 @@
 # Cyclic types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cyclic-types where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.groups-of-modular-arithmetic
-open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -28,6 +25,12 @@ open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.groups-of-modular-arithmetic
+open import elementary-number-theory.integers
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import group-theory.groups
 open import group-theory.isomorphisms-groups
 open import structured-types.equivalences-types-equipped-with-endomorphisms

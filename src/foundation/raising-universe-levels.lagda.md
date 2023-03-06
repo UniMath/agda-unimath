@@ -1,8 +1,11 @@
 # Raising universe levels
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.raising-universe-levels where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

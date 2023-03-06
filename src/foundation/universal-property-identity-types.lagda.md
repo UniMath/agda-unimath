@@ -1,8 +1,11 @@
 # The universal property of identity types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-identity-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality

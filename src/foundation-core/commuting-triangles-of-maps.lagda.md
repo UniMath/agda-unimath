@@ -1,12 +1,19 @@
 # Commuting triangles of maps
 
+<<<<<<< Updated upstream
 ```agda
 {-# OPTIONS --safe #-}
 ```
 
 <details><summary>Imports</summary>
+=======
+>>>>>>> Stashed changes
 ```agda
 module foundation-core.commuting-triangles-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.universe-levels

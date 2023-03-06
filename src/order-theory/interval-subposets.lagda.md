@@ -1,8 +1,11 @@
 # Interval subposets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.interval-subposets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels

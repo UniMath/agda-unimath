@@ -1,8 +1,11 @@
 # Quotient groups of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.quotient-groups-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.0-images-of-maps
 open import foundation.1-types

@@ -1,8 +1,11 @@
 # Greatest lower bounds in posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.greatest-lower-bounds-posets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.propositions

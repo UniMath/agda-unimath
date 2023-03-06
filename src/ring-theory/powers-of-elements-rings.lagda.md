@@ -1,11 +1,14 @@
 # Powers of elements in rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.powers-of-elements-rings where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.identity-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.rings
 ```

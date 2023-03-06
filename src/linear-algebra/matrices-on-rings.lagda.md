@@ -1,11 +1,14 @@
 # Matrices on rings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.matrices-on-rings where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.identity-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import linear-algebra.constant-matrices
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.matrices

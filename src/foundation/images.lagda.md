@@ -1,8 +1,11 @@
 # The image of a map
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.images where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

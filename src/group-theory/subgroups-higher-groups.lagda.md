@@ -1,8 +1,11 @@
 # Subgroups of higher groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups-higher-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

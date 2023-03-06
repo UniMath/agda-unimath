@@ -1,8 +1,11 @@
 # Homomorphisms Meet Sup Lattice
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.homomorphisms-meet-sup-lattices where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions

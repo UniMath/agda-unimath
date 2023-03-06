@@ -1,8 +1,11 @@
 # Complete multipartite graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-multipartite-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs

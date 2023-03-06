@@ -1,8 +1,11 @@
 # The universal property of the image of a map
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-image where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

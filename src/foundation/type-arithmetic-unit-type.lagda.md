@@ -1,8 +1,11 @@
 # Type arithmetic with the unit type
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-unit-type where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

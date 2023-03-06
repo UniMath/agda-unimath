@@ -1,12 +1,15 @@
 # The difference between integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.difference-integers where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.identity-types
 open import foundation.interchange-law
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
 ```
 </details>
 

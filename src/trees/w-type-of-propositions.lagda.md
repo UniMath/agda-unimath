@@ -1,8 +1,11 @@
 # The W-type of the type of propositions
 
-<details><summary>Imports</summary>
 ```agda
 module trees.w-type-of-propositions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

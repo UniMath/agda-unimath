@@ -1,8 +1,11 @@
 # Geometric realizations of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.geometric-realizations-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions

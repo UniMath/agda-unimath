@@ -1,8 +1,11 @@
 # Homomorphisms of higher groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-higher-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels

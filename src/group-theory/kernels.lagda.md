@@ -1,8 +1,11 @@
 # Kernels
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.kernels where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types

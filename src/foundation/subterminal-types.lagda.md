@@ -1,8 +1,11 @@
 # Subterminal types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.subterminal-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.equivalences

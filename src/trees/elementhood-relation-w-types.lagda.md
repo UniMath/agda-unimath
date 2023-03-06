@@ -1,8 +1,11 @@
 # The elementhood relation on W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.elementhood-relation-w-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fibers-of-maps

@@ -1,8 +1,11 @@
 # Congruence relations on semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.congruence-relations-semigroups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

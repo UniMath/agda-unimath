@@ -1,10 +1,11 @@
 # Distributivity of set truncation over finite products
 
+```agda
+module univalent-combinatorics.distributivity-of-set-truncation-over-finite-products where
+```
+
 <details><summary>Imports</summary>
 ```agda
-module
-  univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
-  where
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.coproduct-types

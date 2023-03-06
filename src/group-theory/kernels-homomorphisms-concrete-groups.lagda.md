@@ -1,8 +1,11 @@
 # Kernels of homomorphisms of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.kernels-homomorphisms-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components

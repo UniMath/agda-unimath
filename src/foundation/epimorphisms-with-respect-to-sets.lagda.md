@@ -1,8 +1,11 @@
 # Epimorphisms with respect to maps into sets
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.epimorphisms-with-respect-to-sets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.univalence
 open import foundation.dependent-pair-types
 open import foundation.embeddings

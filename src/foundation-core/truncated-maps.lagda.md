@@ -1,8 +1,11 @@
 # Truncated maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.truncated-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types

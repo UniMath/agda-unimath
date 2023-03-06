@@ -1,11 +1,11 @@
 # Equality of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.equality-integers where
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -24,6 +24,9 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

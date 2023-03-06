@@ -1,8 +1,11 @@
 # Mere equivalences of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.mere-equivalences-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels

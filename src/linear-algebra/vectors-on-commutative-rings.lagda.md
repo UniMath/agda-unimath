@@ -1,14 +1,17 @@
 # Vectors on commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-commutative-rings where
-open import commutative-algebra.commutative-rings
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.universe-levels
+open import commutative-algebra.commutative-rings
+open import elementary-number-theory.natural-numbers
 open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups

@@ -1,8 +1,11 @@
 # Double counting
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.double-counting where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types

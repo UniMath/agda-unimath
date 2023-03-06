@@ -1,16 +1,19 @@
 # Addition on the rationals
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-rationals where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.rational-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.propositions
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.rational-numbers
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 </details>

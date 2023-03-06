@@ -1,8 +1,11 @@
 # Cartesian products of monoids
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.cartesian-products-monoids where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types

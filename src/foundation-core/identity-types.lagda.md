@@ -1,12 +1,19 @@
 # Identity types
 
+<<<<<<< Updated upstream
 ```agda
 {-# OPTIONS --safe #-}
 ```
 
 <details><summary>Imports</summary>
+=======
+>>>>>>> Stashed changes
 ```agda
 module foundation-core.identity-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

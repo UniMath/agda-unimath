@@ -1,8 +1,15 @@
 # Logical equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.logical-equivalences where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.logical-equivalences where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.logical-equivalences public
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

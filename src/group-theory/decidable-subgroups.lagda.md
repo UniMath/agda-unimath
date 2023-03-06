@@ -1,8 +1,11 @@
 # Decidable subgroups of groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.decidable-subgroups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes

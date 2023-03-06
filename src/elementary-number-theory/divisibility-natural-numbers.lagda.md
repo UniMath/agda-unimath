@@ -1,13 +1,11 @@
 # Divisibility of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-natural-numbers where
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -15,6 +13,11 @@ open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.universe-levels
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

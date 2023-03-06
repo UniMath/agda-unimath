@@ -1,8 +1,11 @@
 # Monoid actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.monoid-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
 open import foundation.function-extensionality

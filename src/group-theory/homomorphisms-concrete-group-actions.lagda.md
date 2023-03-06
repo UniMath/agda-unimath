@@ -1,8 +1,11 @@
 # Morphisms of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences

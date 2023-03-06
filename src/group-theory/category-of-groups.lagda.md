@@ -1,13 +1,16 @@
 # The category of groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.category-of-groups where
-open import category-theory.large-categories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import category-theory.large-categories
 open import group-theory.groups
 open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups

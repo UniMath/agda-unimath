@@ -4,13 +4,12 @@
 {-# OPTIONS --lossy-unification #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.cartier-delooping-sign-homomorphism where
-open import elementary-number-theory.natural-numbers
-open import finite-group-theory.delooping-sign-homomorphism
-open import finite-group-theory.finite-type-groups
-open import finite-group-theory.sign-homomorphism
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -18,6 +17,10 @@ open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
+open import finite-group-theory.delooping-sign-homomorphism
+open import finite-group-theory.finite-type-groups
+open import finite-group-theory.sign-homomorphism
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-groups

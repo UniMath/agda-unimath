@@ -1,8 +1,11 @@
 # Mere equivalences of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.mere-equivalences-concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations

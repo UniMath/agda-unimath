@@ -1,9 +1,11 @@
 # Connected maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.connected-maps where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -26,6 +28,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.univalence
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

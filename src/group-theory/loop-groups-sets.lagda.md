@@ -1,8 +1,11 @@
 # Concrete automorphism groups on sets
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.loop-groups-sets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences

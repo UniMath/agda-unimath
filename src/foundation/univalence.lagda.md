@@ -1,8 +1,15 @@
 # The univalence axiom
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.univalence where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.univalence where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.univalence public
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

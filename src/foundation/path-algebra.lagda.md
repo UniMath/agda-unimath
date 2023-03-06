@@ -1,8 +1,11 @@
 # Path algebra
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.path-algebra where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications

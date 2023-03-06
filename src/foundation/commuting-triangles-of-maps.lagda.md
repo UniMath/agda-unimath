@@ -1,8 +1,11 @@
 # Commuting triangles of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.commuting-triangles-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.commuting-triangles-of-maps public
 open import foundation-core.equivalences
 open import foundation-core.universe-levels

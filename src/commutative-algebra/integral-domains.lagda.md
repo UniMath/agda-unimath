@@ -1,13 +1,16 @@
 # Integral domains
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.integral-domains where
-open import commutative-algebra.commutative-rings
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.injective-maps
 open import foundation.sets
 open import foundation.universe-levels
+open import commutative-algebra.commutative-rings
 open import group-theory.abelian-groups
 open import ring-theory.rings
 ```

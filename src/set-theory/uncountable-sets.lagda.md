@@ -1,8 +1,11 @@
 # Uncountable sets
 
-<details><summary>Imports</summary>
 ```agda
 module set-theory.uncountable-sets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets

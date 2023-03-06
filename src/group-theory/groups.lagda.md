@@ -1,8 +1,11 @@
 # Abstract groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types

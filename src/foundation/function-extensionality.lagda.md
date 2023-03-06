@@ -1,8 +1,15 @@
 # Function extensionality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.function-extensionality where
+```
+
+<details><summary>Imports</summary>
+```agda
+<<<<<<< Updated upstream
+module foundation.function-extensionality where
+=======
+>>>>>>> Stashed changes
 open import foundation-core.function-extensionality public
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

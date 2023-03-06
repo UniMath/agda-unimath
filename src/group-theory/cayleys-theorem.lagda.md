@@ -1,8 +1,11 @@
 # Cayley's theorem
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.cayleys-theorem where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-extensionality

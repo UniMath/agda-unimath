@@ -1,9 +1,11 @@
 # π-finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pi-finite-types where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
@@ -51,6 +53,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting

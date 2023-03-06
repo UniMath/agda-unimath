@@ -1,8 +1,11 @@
 # Commutators of elements in groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.commutators-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.identity-types

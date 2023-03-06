@@ -1,8 +1,11 @@
 # Subgroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

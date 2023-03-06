@@ -1,10 +1,11 @@
 # The initial pointed type equipped with an automorphism
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.initial-pointed-type-equipped-with-automorphism where
-open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -15,6 +16,8 @@ open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 </details>

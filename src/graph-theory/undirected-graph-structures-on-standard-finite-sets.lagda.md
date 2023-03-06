@@ -1,12 +1,15 @@
 # Undirected graph structures on standard finite sets
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.undirected-graph-structures-on-standard-finite-sets where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

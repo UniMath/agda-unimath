@@ -1,10 +1,13 @@
 # Steiner triple systems
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.steiner-triple-systems where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.steiner-systems
 ```
 </details>

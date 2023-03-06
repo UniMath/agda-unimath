@@ -1,8 +1,11 @@
 # Union of subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.unions-subtypes where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.decidable-subtypes
 open import foundation.disjunction
 open import foundation.existential-quantification

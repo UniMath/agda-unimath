@@ -1,8 +1,11 @@
 # Retractions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.retractions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.retractions public
 open import foundation.coslice
 open import foundation.dependent-pair-types

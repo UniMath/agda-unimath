@@ -1,8 +1,11 @@
 # 0-Images of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.0-images-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types

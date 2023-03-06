@@ -1,8 +1,11 @@
 # Pointed maps
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.functions

@@ -1,8 +1,11 @@
 # Equality in the fibers of a map
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.equality-fibers-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences

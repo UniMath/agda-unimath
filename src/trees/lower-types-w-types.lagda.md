@@ -1,8 +1,11 @@
 # Lower types of elements in W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.lower-types-w-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.propositions

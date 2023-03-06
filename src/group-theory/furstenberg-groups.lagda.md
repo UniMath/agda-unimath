@@ -1,8 +1,11 @@
 # Furstenberg groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.furstenberg-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types

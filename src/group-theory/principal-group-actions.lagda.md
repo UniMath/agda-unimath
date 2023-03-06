@@ -1,8 +1,11 @@
 # Principal group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.principal-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.universe-levels

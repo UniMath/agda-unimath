@@ -1,8 +1,11 @@
 # Injective maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.injective-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings

@@ -1,8 +1,11 @@
 # Division rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.division-rings where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.identity-types
 open import foundation.negation

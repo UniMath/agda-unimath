@@ -1,8 +1,11 @@
 # Lifting squares
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.lifting-squares where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps

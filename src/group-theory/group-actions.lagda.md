@@ -1,8 +1,11 @@
 # Group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.function-extensionality
 open import foundation.dependent-pair-types
 open import foundation.equivalences

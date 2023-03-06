@@ -4,10 +4,12 @@
 {-# OPTIONS --lossy-unification #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.finite-type-groups where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -23,6 +25,7 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups

@@ -1,8 +1,11 @@
 # Full subtypes of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.full-subtypes where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-maps
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types

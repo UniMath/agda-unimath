@@ -1,12 +1,15 @@
 # Unlabeled structures of a species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.unlabeled-structures-species where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 ```

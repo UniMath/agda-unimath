@@ -4,9 +4,12 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module type-theories.fibered-dependent-type-theories where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types

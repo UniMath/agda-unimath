@@ -1,10 +1,13 @@
 # Isomorphisms of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-concrete-groups where
-open import category-theory.isomorphisms-large-precategories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.universe-levels
+open import category-theory.isomorphisms-large-precategories
 open import group-theory.concrete-groups
 open import group-theory.precategory-of-concrete-groups
 ```

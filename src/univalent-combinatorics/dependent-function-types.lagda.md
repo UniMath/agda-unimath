@@ -1,9 +1,11 @@
 # Counting the elements of dependent function types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.dependent-function-types where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -14,6 +16,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-choice

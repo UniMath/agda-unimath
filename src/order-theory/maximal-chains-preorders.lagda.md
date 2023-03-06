@@ -1,8 +1,11 @@
 # Maximal chains in preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.maximal-chains-preorders where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels

@@ -1,8 +1,11 @@
 # Complements of subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.complements-subtypes where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes

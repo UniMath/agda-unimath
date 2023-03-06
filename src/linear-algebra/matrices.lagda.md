@@ -1,13 +1,16 @@
 # Matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.matrices where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 ```

@@ -1,8 +1,11 @@
 # The opposite of a group
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.opposite-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels

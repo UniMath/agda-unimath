@@ -1,8 +1,11 @@
 # The dihedral group construction
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.dihedral-group-construction where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types

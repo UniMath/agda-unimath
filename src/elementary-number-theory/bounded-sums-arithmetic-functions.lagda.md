@@ -1,16 +1,19 @@
 # Bounded sums of arithmetic functions
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bounded-sums-arithmetic-functions where
-open import elementary-number-theory.arithmetic-functions
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.functions
 open import foundation.universe-levels
+open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import ring-theory.rings
 ```
 </details>

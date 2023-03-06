@@ -1,8 +1,11 @@
 # Pointed types
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

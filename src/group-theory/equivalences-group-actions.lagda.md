@@ -1,8 +1,11 @@
 # Equivalences of group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

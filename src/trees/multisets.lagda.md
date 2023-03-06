@@ -1,8 +1,11 @@
 # Multisets
 
-<details><summary>Imports</summary>
 ```agda
 module trees.multisets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functions

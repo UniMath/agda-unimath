@@ -1,18 +1,21 @@
 # Anafunctors
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.anafunctors where
-open import category-theory.categories
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-precategories
-open import category-theory.precategories
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
+open import category-theory.categories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-precategories
+open import category-theory.precategories
 ```
 </details>
 

@@ -1,8 +1,11 @@
 # Species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.species where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels

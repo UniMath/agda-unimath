@@ -1,8 +1,11 @@
 # The higher group of integers
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.integers-higher-group where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import group-theory.higher-groups

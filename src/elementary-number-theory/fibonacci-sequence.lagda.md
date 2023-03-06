@@ -1,8 +1,11 @@
 # The Fibonacci sequence
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.fibonacci-sequence where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```

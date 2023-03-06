@@ -1,8 +1,11 @@
 # Subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.subtypes where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.1-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

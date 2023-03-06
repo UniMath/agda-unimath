@@ -1,8 +1,11 @@
 # Ranks of elements in W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.ranks-of-elements-w-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

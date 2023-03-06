@@ -4,9 +4,12 @@
 {-# OPTIONS --safe #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.function-extensionality where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies

@@ -1,12 +1,15 @@
 # Cycle partitions of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cycle-partitions where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types

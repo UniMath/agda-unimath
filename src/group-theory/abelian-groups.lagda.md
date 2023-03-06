@@ -1,8 +1,11 @@
 # Abelian groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.abelian-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types

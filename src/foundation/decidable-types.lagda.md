@@ -1,8 +1,11 @@
 # Decidable types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

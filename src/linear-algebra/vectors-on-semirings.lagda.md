@@ -1,9 +1,11 @@
 # Vectors on semirings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-semirings where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -11,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups

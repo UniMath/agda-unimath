@@ -1,8 +1,11 @@
 # Concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions

@@ -1,17 +1,20 @@
 # The distance between integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.distance-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import foundation.coproduct-types
+open import foundation.equational-reasoning
+open import foundation.identity-types
+open import foundation.unit-type
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import foundation.coproduct-types
-open import foundation.equational-reasoning
-open import foundation.identity-types
-open import foundation.unit-type
 ```
 </details>
 
