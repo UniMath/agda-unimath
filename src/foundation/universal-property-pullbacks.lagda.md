@@ -3,12 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-pullbacks where
+open import foundation-core.universal-property-pullbacks public
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
-open import foundation-core.universal-property-pullbacks public
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

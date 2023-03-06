@@ -3,10 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.fibers-of-maps where
+open import foundation-core.fibers-of-maps public
 open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
-open import foundation-core.fibers-of-maps public
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

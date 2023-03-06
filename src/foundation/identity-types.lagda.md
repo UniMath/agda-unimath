@@ -3,10 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.identity-types where
+open import foundation-core.identity-types public
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.identity-types public
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality

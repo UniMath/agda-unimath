@@ -3,9 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.contractible-types where
+open import foundation-core.contractible-types public
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation-core.contractible-types public
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

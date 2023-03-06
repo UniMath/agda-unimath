@@ -3,8 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.negation where
-open import foundation-core.empty-types
 open import foundation-core.negation public
+open import foundation-core.empty-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

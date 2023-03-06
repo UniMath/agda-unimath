@@ -3,10 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.embeddings where
+open import foundation-core.embeddings public
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings public
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
