@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.finite-preorders where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
@@ -16,10 +14,8 @@ open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import order-theory.decidable-subpreorders
 open import order-theory.preorders
-
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types

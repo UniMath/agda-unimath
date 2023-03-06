@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.equality-cartesian-product-types where
-
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

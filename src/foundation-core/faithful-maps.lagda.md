@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.faithful-maps where
-
 open import foundation-core.0-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings

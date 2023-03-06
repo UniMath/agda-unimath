@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module structured-types.involutive-types where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
-
 open import univalent-combinatorics.2-element-types
 ```
 </details>

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.axiom-of-choice where
-
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

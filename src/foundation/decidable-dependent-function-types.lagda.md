@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.decidable-dependent-function-types where
-
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.equivalences

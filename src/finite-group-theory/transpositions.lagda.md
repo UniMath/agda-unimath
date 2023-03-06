@@ -3,43 +3,40 @@
 <details><summary>Imports</summary>
 ```agda
 module finite-group-theory.transpositions where
-
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
-
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
-open import foundation.decidable-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.equivalences-maybe
-open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.involutions
 open import foundation.injective-maps
+open import foundation.involutions
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.propositions
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
-
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting

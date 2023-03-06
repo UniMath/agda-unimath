@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.discrete-types where
-
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.sets

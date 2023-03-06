@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.lower-bounds-natural-numbers where
-
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels

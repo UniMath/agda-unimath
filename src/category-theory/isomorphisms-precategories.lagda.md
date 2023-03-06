@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module category-theory.isomorphisms-precategories where
-
 open import category-theory.precategories
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning

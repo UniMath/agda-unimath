@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module ring-theory.division-rings where
-
 open import foundation.cartesian-product-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
-
 open import ring-theory.invertible-elements-rings
 open import ring-theory.nontrivial-rings
 open import ring-theory.rings

@@ -3,15 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module graph-theory.edge-coloured-undirected-graphs where
-
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
 open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
-
 open import univalent-combinatorics.finite-types
 ```
 </details>

@@ -3,12 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.loop-spaces where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import structured-types.coherent-h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.subterminal-types where
-
 open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.equivalences

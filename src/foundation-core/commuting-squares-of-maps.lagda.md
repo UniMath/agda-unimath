@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.commuting-squares-of-maps where
-
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.universe-levels

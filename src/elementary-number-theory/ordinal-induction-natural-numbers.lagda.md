@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.ordinal-induction-natural-numbers where
-
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.empty-types
 open import foundation.universe-levels
 ```

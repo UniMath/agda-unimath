@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups-concrete-groups where
-
 open import foundation.universe-levels
-
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.subgroups-concrete-groups

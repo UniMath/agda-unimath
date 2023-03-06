@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.images where
-
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

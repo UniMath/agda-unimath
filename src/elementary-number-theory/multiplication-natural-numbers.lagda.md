@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-natural-numbers where
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -15,7 +13,6 @@ open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.negation
 open import foundation.universe-levels
-
 open import group-theory.monoids
 open import group-theory.semigroups
 ```

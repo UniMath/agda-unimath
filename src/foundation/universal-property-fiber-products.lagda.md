@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-fiber-products where
-
 open import foundation.cartesian-product-types
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types

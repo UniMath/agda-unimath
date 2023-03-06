@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.latin-squares where
-
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types

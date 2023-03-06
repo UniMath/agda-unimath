@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.dependent-sum-finite-types where
-
 open import foundation.complements
 open import foundation.contractible-types
 open import foundation.decidable-types
@@ -23,7 +22,6 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types

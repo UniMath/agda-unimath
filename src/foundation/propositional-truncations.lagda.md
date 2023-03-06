@@ -3,7 +3,10 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.propositional-truncations where
-
+open import foundation-core.coproduct-types
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,11 +19,6 @@ open import foundation.propositions
 open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
-
-open import foundation-core.coproduct-types
-open import foundation-core.sets
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
 ```
 </details>
 

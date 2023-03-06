@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.equality-coproduct-types where
-
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality

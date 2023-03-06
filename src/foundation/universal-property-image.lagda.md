@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-image where
-
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

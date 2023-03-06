@@ -3,11 +3,9 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.orbits-group-actions where
-
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import group-theory.group-actions
 open import group-theory.groups
 ```

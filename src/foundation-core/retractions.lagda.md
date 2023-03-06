@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.retractions where
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies

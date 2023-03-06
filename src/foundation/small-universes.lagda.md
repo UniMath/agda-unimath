@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.small-universes where
-
 open import foundation.cartesian-product-types
 open import foundation.small-types
 open import foundation.universe-levels

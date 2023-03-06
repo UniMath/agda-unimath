@@ -3,9 +3,7 @@
 <details><summary>Imports</summary>
 ```agda
 module set-theory.countable-sets where
-
 open import elementary-number-theory.natural-numbers
-
 open import foundation.complements-subtypes
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes

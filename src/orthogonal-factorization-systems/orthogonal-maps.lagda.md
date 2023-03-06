@@ -3,14 +3,12 @@
 <details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.orthogonal-maps where
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.pullback-hom
 ```

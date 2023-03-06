@@ -3,10 +3,8 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.natural-numbers where
-
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

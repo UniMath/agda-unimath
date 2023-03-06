@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.hilberts-epsilon-operators where
-
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-propositional-truncation

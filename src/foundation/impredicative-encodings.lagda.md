@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.impredicative-encodings where
-
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

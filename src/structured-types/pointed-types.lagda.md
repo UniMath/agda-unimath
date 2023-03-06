@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-types where
-
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-semigroups where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,7 +14,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
 open import group-theory.semigroups
 ```
 </details>

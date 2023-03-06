@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation.dubuc-penon-compact-types where
-
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.subtypes

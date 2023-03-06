@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-integers where
-
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.difference-integers
@@ -12,7 +11,6 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.embeddings
 open import foundation.empty-types

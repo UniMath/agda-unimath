@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module foundation-core.0-maps where
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions

@@ -3,7 +3,6 @@
 <details><summary>Imports</summary>
 ```agda
 module order-theory.order-preserving-maps-preorders where
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -14,7 +13,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
 open import order-theory.preorders
 ```
 </details>
