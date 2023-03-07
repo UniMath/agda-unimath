@@ -1,8 +1,11 @@
-#  Logical equivalences
+# Logical equivalences
 
 ```agda
 module foundation-core.logical-equivalences where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -10,6 +13,7 @@ open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -80,11 +84,11 @@ pr2 (inv-iff (f , g)) = f
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
-  
+
   equiv-iff' : (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
   pr1 (equiv-iff' t) = pr1 t
   pr2 (equiv-iff' t) = is-equiv-is-prop (pr2 P) (pr2 Q) (pr2 t)
-  
+
   equiv-iff :
     (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) →
     type-Prop P ≃ type-Prop Q

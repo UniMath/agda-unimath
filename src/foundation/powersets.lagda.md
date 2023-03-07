@@ -1,24 +1,27 @@
-#  Powersets
+# Powersets
 
 ```agda
 module foundation.powersets where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 
@@ -35,7 +38,7 @@ module _
     {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
   inclusion-rel-subtype-Prop P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
-  
+
   _⊆_ :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
   P ⊆ Q = type-Prop (inclusion-rel-subtype-Prop P Q)
@@ -83,7 +86,7 @@ module _
 module _
   {l1 : Level} (A : UU l1)
   where
-  
+
   powerset-Large-Preorder :
     Large-Preorder (λ l → l1 ⊔ lsuc l) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   type-Large-Preorder powerset-Large-Preorder l = subtype l A

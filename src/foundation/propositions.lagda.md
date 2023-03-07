@@ -1,10 +1,12 @@
-#  Propositions
+# Propositions
 
 ```agda
 module foundation.propositions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.propositions public
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
@@ -14,9 +16,9 @@ open import foundation-core.retractions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.contractible-types
 ```
+</details>
 
 ### Propositions are (k+1)-truncated for any k
 
@@ -33,7 +35,7 @@ abstract
 module _
   {l1 l2 : Level} {A : UU l1} (B : UU l2)
   where
-  
+
   is-prop-retract-of : A retract-of B → is-prop B → is-prop A
   is-prop-retract-of = is-trunc-retract-of
 ```

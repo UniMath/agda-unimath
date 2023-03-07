@@ -1,8 +1,13 @@
-#  Small multisets
+# Small multisets
 
 ```agda
 module trees.small-multisets where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import trees.multisets
+open import trees.w-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -16,10 +21,8 @@ open import foundation.small-types
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import trees.multisets
-open import trees.w-types
 ```
+</details>
 
 ## Idea
 
@@ -141,7 +144,7 @@ resize-𝕍' (pair X H) = pair (resize-𝕍 X H) (is-small-resize-𝕍 X H)
 
 abstract
   resize-resize-𝕍 :
-    {l1 l2 : Level} {x : 𝕍 l1} (H : is-small-𝕍 l2 x) → 
+    {l1 l2 : Level} {x : 𝕍 l1} (H : is-small-𝕍 l2 x) →
     resize-𝕍 (resize-𝕍 x H) (is-small-resize-𝕍 x H) ＝ x
   resize-resize-𝕍 {x = tree-𝕎 A α} (pair (pair A' e) H) =
     eq-Eq-𝕎

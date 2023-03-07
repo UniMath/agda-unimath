@@ -1,22 +1,23 @@
-#  endomorphisms
+# endomorphisms
 
 ```agda
 module foundation.endomorphisms where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.endomorphisms public
-
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import group-theory.monoids
 open import group-theory.semigroups
-
 open import structured-types.wild-monoids
 ```
+</details>
 
 ## Idea
 
@@ -40,7 +41,7 @@ pr1 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) g f = refl
 pr2 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) = star
 
 endo-Semigroup : {l : Level} → Set l → Semigroup l
-pr1 (endo-Semigroup A) = endo-Set A 
+pr1 (endo-Semigroup A) = endo-Set A
 pr1 (pr2 (endo-Semigroup A)) g f = g ∘ f
 pr2 (pr2 (endo-Semigroup A)) h g f = refl
 

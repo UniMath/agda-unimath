@@ -1,10 +1,12 @@
-#  Decidable propositions
+# Decidable propositions
 
 ```agda
 module foundation.decidable-propositions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.decidable-propositions public
-
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -32,10 +34,10 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 
@@ -65,7 +67,7 @@ pr2 emb-prop-decidable-Prop = is-emb-prop-decidable-Prop
 module _
   {l : Level}
   where
-  
+
   split-decidable-Prop :
     decidable-Prop l ≃
     ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
@@ -164,7 +166,7 @@ pr2 (iff-universes-decidable-Prop l l' P) p =
 ```agda
 is-set-decidable-Prop : {l : Level} → is-set (decidable-Prop l)
 is-set-decidable-Prop {l} =
-  is-set-equiv bool equiv-bool-decidable-Prop is-set-bool 
+  is-set-equiv bool equiv-bool-decidable-Prop is-set-bool
 ```
 
 ### Extensionality of decidable propositions
@@ -185,7 +187,7 @@ module _
   iff-eq-decidable-Prop :
     P ＝ Q → type-decidable-Prop P ↔ type-decidable-Prop Q
   iff-eq-decidable-Prop = map-equiv extensionality-decidable-Prop
-  
+
   eq-iff-decidable-Prop :
     (type-decidable-Prop P → type-decidable-Prop Q) →
     (type-decidable-Prop Q → type-decidable-Prop P) → P ＝ Q

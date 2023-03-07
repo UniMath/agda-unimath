@@ -1,10 +1,13 @@
-#  Ferrers diagrams (unlabeled partitions)
+# Ferrers diagrams (unlabeled partitions)
 
 ```agda
 module univalent-combinatorics.ferrers-diagrams where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.pi-finite-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -19,10 +22,9 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.pi-finite-types
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -45,7 +47,7 @@ ferrers-diagram l2 l3 A =
 module _
   {l1 l2 l3 : Level} {A : UU l1} (D : ferrers-diagram l2 l3 A)
   where
-  
+
   row-ferrers-diagram : UU l2
   row-ferrers-diagram = pr1 D
 
@@ -77,7 +79,7 @@ ferrers-diagram-𝔽 {l} l2 l3 A =
 module _
   {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
   where
-  
+
   row-ferrers-diagram-𝔽 : 𝔽 l2
   row-ferrers-diagram-𝔽 = pr1 D
 
@@ -125,7 +127,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} (D : ferrers-diagram l2 l3 A)
   where
-  
+
   equiv-ferrers-diagram :
     {l4 l5 : Level} (E : ferrers-diagram l4 l5 A) → UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
   equiv-ferrers-diagram E =

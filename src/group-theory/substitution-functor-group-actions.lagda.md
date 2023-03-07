@@ -1,10 +1,17 @@
-#  The substitution functor of group actions
+# The substitution functor of group actions
 
 ```agda
 module group-theory.substitution-functor-group-actions where
+```
 
-open import category-theory.functors-large-precategories
-
+<details><summary>Imports</summary>
+```agda
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.precategory-of-group-actions
+open import group-theory.symmetric-groups
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
@@ -14,14 +21,9 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.universe-levels
-
-open import group-theory.precategory-of-group-actions
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-group-actions
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
+open import category-theory.functors-large-precategories
 ```
+</details>
 
 ## Idea
 
@@ -183,7 +185,7 @@ module _
                               ( p'))))
                         ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
                           ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))})})
-  
+
   set-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} → Abstract-Group-Action G l3 →
     Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)

@@ -1,8 +1,11 @@
-#  Contractible maps
+# Contractible maps
 
 ```agda
 module foundation-core.contractible-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -13,6 +16,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -37,7 +41,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
-  
+
   map-inv-is-contr-map : is-contr-map f → B → A
   map-inv-is-contr-map H y = pr1 (center (H y))
 
@@ -90,7 +94,7 @@ module _
         ( ( right-unit) ∙
           ( inv ( coh-inv-is-coherently-invertible H x)))
 
-  is-contr-map-is-coherently-invertible : 
+  is-contr-map-is-coherently-invertible :
     is-coherently-invertible f → is-contr-map f
   pr1 (is-contr-map-is-coherently-invertible H y) =
     center-fib-is-coherently-invertible H y
@@ -104,7 +108,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
-  
+
   abstract
     is-contr-map-is-equiv : is-equiv f → is-contr-map f
     is-contr-map-is-equiv =

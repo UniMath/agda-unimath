@@ -1,15 +1,18 @@
-#  Trivial subgroups
+# Trivial subgroups
 
 ```agda
 module group-theory.trivial-subgroups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.groups
+open import group-theory.subgroups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import group-theory.groups
-open import group-theory.subgroups
 ```
+</details>
 
 ## Idea
 
@@ -35,7 +38,7 @@ module _
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   trivial-Subgroup : Subgroup l1 G
   pr1 trivial-Subgroup x = is-unit-group-Prop G x
   pr1 (pr2 trivial-Subgroup) = refl

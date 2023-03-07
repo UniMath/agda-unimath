@@ -1,10 +1,13 @@
-#  The uniqueness of set quotients
+# The uniqueness of set quotients
 
 ```agda
 module foundation.uniqueness-set-quotients where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.equivalence-relations
 open import foundation-core.function-extensionality
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,9 +20,8 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 
@@ -117,7 +119,7 @@ module _
     ({l : Level} → is-set-quotient l R C g) →
     is-equiv h
   is-equiv-is-set-quotient-is-set-quotient Uf Ug =
-    is-equiv-has-inverse 
+    is-equiv-has-inverse
       ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
@@ -156,7 +158,7 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B)) 
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
   (Uf : {l : Level} → is-set-quotient l R B f)
   (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
   (Ug : {l : Level} → is-set-quotient l R C g)

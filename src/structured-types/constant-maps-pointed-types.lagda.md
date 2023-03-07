@@ -1,15 +1,18 @@
-#  Constant maps of pointed types
+# Constant maps of pointed types
 
 ```agda
 module structured-types.constant-maps-pointed-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

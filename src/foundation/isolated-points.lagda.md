@@ -1,8 +1,11 @@
-#  Isolated points
+# Isolated points
 
 ```agda
 module foundation.isolated-points where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -30,6 +33,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -76,7 +80,7 @@ complement-isolated-point X x =
 module _
   {l1 : Level} {A : UU l1} (a : A)
   where
-  
+
   is-decidable-map-const-is-isolated :
     is-isolated a → is-decidable-map (const unit A a)
   is-decidable-map-const-is-isolated d x =
@@ -135,12 +139,12 @@ module _
       (d : is-isolated a) → Σ A (Eq-isolated-point d)
     pr1 (center-total-Eq-isolated-point d) = a
     pr2 (center-total-Eq-isolated-point d) = refl-Eq-isolated-point d
-  
+
     cases-contraction-total-Eq-isolated-point :
       (d : is-isolated a) (x : A) (dx : is-decidable (a ＝ x))
       (e : cases-Eq-isolated-point d x dx) → a ＝ x
     cases-contraction-total-Eq-isolated-point d x (inl p) e = p
-  
+
     contraction-total-Eq-isolated-point :
       (d : is-isolated a) (t : Σ A (Eq-isolated-point d)) →
       center-total-Eq-isolated-point d ＝ t
@@ -159,7 +163,7 @@ module _
     is-equiv-Eq-eq-isolated-point :
       (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-point d {x})
     is-equiv-Eq-eq-isolated-point d =
-      fundamental-theorem-id 
+      fundamental-theorem-id
         ( is-contr-total-Eq-isolated-point d)
         ( λ x → Eq-eq-isolated-point d {x})
 

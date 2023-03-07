@@ -1,18 +1,21 @@
-#  Pointed maps
+# Pointed maps
 
 ```agda
 module structured-types.pointed-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-types
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import structured-types.pointed-dependent-functions
-open import structured-types.pointed-families-of-types
-open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +45,7 @@ module _
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
-  
+
   map-pointed-map : A →* B → type-Pointed-Type A → type-Pointed-Type B
   map-pointed-map f = pr1 f
 

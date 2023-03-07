@@ -1,8 +1,13 @@
-#  Ideals in rings
+# Ideals in rings
 
 ```agda
 module ring-theory.ideals-rings where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import ring-theory.rings
+open import ring-theory.subsets-rings
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -17,17 +22,13 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.normal-subgroups
-open import group-theory.subgroups-abelian-groups
 open import group-theory.subgroups
-
-open import ring-theory.rings
-open import ring-theory.subsets-rings
-
+open import group-theory.subgroups-abelian-groups
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 
@@ -41,7 +42,7 @@ A left ideal of a ring `R` is an additive subgroup of `R` that is closed under m
 module _
   {l1 : Level} (R : Ring l1)
   where
-  
+
   is-additive-subgroup-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-additive-subgroup-subset-Ring = is-subgroup-Ab (ab-Ring R)
@@ -53,19 +54,19 @@ module _
 module _
   {l1 : Level} (R : Ring l1)
   where
-  
+
   is-closed-under-mul-left-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-closed-under-mul-left-subset-Ring P =
     (x : type-Ring R) (y : type-Ring R) →
     type-Prop (P y) → type-Prop (P (mul-Ring R x y))
-  
+
   is-left-ideal-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-left-ideal-subset-Ring P =
     is-additive-subgroup-subset-Ring R P ×
     is-closed-under-mul-left-subset-Ring P
-  
+
 left-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
 left-ideal-Ring l R = Σ (subset-Ring l R) (is-left-ideal-subset-Ring R)
@@ -117,7 +118,7 @@ module _
 module _
   {l1 : Level} (R : Ring l1)
   where
-  
+
   is-closed-under-mul-right-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-closed-under-mul-right-subset-Ring P =

@@ -1,16 +1,18 @@
-#  Cubes
+# Cubes
 
 ```agda
 module univalent-combinatorics.cubes where
+```
 
-open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.finite-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Definitions
 
@@ -23,7 +25,7 @@ cube k = Σ (UU-Fin lzero k) (λ X → type-UU-Fin k X → UU-Fin lzero 2)
 module _
   (k : ℕ) (X : cube k)
   where
-  
+
   dim-cube-UU-Fin : UU-Fin lzero k
   dim-cube-UU-Fin = pr1 X
 

@@ -1,13 +1,16 @@
-#  Functoriality of coproduct types
+# Functoriality of coproduct types
 
 ```agda
 module foundation.functoriality-coproduct-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.empty-types
+open import foundation-core.equality-cartesian-product-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
@@ -17,11 +20,10 @@ open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.universe-levels
-
 open import foundation.coproduct-types
 open import foundation.equality-coproduct-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
@@ -29,6 +31,7 @@ open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 ```
+</details>
 
 ## Idea
 
@@ -36,13 +39,13 @@ Any two maps `f : A → B` and `g : C → D` induce a map `map-coprod f g : copr
 
 ## Definitions
 
-### The functorial action of the coproduct operation 
+### The functorial action of the coproduct operation
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   where
-  
+
   map-coprod : (A → A') → (B → B') → A + B → A' + B'
   map-coprod f g (inl x) = inl (f x)
   map-coprod f g (inr y) = inr (g y)
@@ -56,7 +59,7 @@ module _
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
-  
+
   id-map-coprod : (map-coprod (id {A = A}) (id {A = B})) ~ id
   id-map-coprod (inl x) = refl
   id-map-coprod (inr x) = refl
@@ -71,7 +74,7 @@ module _
   {A'' : UU l1''} {B'' : UU l2''}
   (f : A → A') (f' : A' → A'') (g : B → B') (g' : B' → B'')
   where
-  
+
   compose-map-coprod :
     (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
   compose-map-coprod (inl x) = refl
@@ -85,7 +88,7 @@ module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   {f f' : A → A'} (H : f ~ f') {g g' : B → B'} (K : g ~ g')
   where
-  
+
   htpy-map-coprod : (map-coprod f g) ~ (map-coprod f' g')
   htpy-map-coprod (inl x) = ap inl (H x)
   htpy-map-coprod (inr y) = ap inr (K y)
@@ -133,7 +136,7 @@ module _
   fib-map-coprod-inr-fib : (y : B) → fib g y → fib (map-coprod f g) (inr y)
   pr1 (fib-map-coprod-inr-fib y (pair b' p)) = inr b'
   pr2 (fib-map-coprod-inr-fib y (pair b' p)) = ap inr p
-  
+
   fib-fib-map-coprod-inr : (y : B) → fib (map-coprod f g) (inr y) → fib g y
   fib-fib-map-coprod-inr y (pair (inl a') p) =
     ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
@@ -204,7 +207,7 @@ module _
   map-equiv-coprod :
     (A ≃ A') → (B ≃ B') → A + B → A' + B'
   map-equiv-coprod e e' = map-coprod (map-equiv e) (map-equiv e')
-  
+
   equiv-coprod :
     (A ≃ A') → (B ≃ B') → (A + B) ≃ (A' + B')
   pr1 (equiv-coprod e e') = map-equiv-coprod e e'
@@ -245,7 +248,7 @@ is-contr-fib-map-coprod {A = A} {B} {C} {D} f g =
 
 {-
 is-emb-map-coprod :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} → 
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   is-emb (λ (fg : (A → B) × (C → D)) → map-coprod (pr1 fg) (pr2 fg))
 is-emb-map-coprod (pair f g) =
   fundamental-theorem-id (pair f g)
@@ -259,7 +262,7 @@ is-emb-map-coprod (pair f g) =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} 
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   equiv-coproduct-induce-equiv-disjoint :
@@ -282,7 +285,7 @@ module _
       ( ( ap (λ z → map-equiv z (inr b)) (right-inverse-law-equiv f)) ∙
         ( ( inv (ap (λ z → inr (map-equiv z b)) (right-inverse-law-equiv g))) ∙
           ( inv (p (map-inv-equiv g b)))))
-  
+
   cases-retr-equiv-coprod :
     (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
@@ -290,7 +293,7 @@ module _
   cases-retr-equiv-coprod f g p x (inl y) q = y
   cases-retr-equiv-coprod f g p x (inr y) q =
     ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
-  
+
   inv-cases-retr-equiv-coprod :
     (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
@@ -308,7 +311,7 @@ module _
     (r : map-inv-equiv f (inl (cases-retr-equiv-coprod f g p x y q)) ＝ z) →
     ( inv-cases-retr-equiv-coprod f g p
       ( cases-retr-equiv-coprod f g p x y q) z r) ＝
-    ( x)   
+    ( x)
   retr-cases-retr-equiv-coprod f g p x (inl y) (inl z) q r =
     is-injective-inl
       ( ( inv r) ∙
@@ -322,7 +325,7 @@ module _
         ( inv-commutative-square-inr f g p)
         ( y)
         ( z)
-        ( r)) 
+        ( r))
   retr-cases-retr-equiv-coprod f g p x (inr y) z q r =
     ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
 
@@ -333,7 +336,7 @@ module _
     (r : map-equiv f (inl (inv-cases-retr-equiv-coprod f g p x y q)) ＝ z) →
     ( cases-retr-equiv-coprod f g p
       ( inv-cases-retr-equiv-coprod f g p x y q) z r) ＝
-    ( x)   
+    ( x)
   sec-cases-retr-equiv-coprod f g p x (inl y) (inl z) q r =
     is-injective-inl
       ( ( inv r) ∙

@@ -1,12 +1,15 @@
-#  Cantor's diagonal argument
+# Cantor's diagonal argument
 
 ```agda
 module foundation.cantors-diagonal-argument where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.function-extensionality
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -14,6 +17,7 @@ open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

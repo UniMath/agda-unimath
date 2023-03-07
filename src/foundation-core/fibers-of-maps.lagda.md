@@ -1,17 +1,20 @@
-#  Fibers of maps
+# Fibers of maps
 
 ```agda
 module foundation-core.fibers-of-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 
@@ -301,7 +304,7 @@ module _
   inv-map-compute-fib-comp :
     Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
   pr1 (inv-map-compute-fib-comp t) = pr1 (pr2 t)
-  pr2 (inv-map-compute-fib-comp t) = 
+  pr2 (inv-map-compute-fib-comp t) =
     ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
   issec-inv-map-compute-fib-comp :

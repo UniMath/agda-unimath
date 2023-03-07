@@ -1,8 +1,11 @@
-#  Monomorphisms
+# Monomorphisms
 
 ```agda
 module foundation.monomorphisms where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -14,6 +17,7 @@ open import foundation.propositions
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

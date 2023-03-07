@@ -1,19 +1,21 @@
-#  Contractible maps
+# Contractible maps
 
 ```agda
 module foundation.contractible-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.contractible-maps public
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.truncated-maps
 ```
+</details>
 
 ## Properties
 
@@ -23,7 +25,7 @@ open import foundation.truncated-maps
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-prop-is-contr-map : (f : A → B) → is-prop (is-contr-map f)
   is-prop-is-contr-map f = is-prop-is-trunc-map neg-two-𝕋 f
 
@@ -38,7 +40,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   equiv-is-equiv-is-contr-map : (f : A → B) → is-contr-map f ≃ is-equiv f
   equiv-is-equiv-is-contr-map f =
     equiv-iff

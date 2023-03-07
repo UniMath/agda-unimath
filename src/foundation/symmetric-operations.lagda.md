@@ -1,27 +1,30 @@
-#  Symmetric operations
+# Symmetric operations
 
 ```agda
 module foundation.symmetric-operations where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.sets
-open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.unit-type
+open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -31,7 +34,7 @@ Recall that there is a standard unordered pairing operation `{-,-} : A → (A �
   λ f x y → f {x,y} : (unordered-pair A → B) → (A → A → B)
 ```
 
-A binary operation `μ : A → A → B` is symmetric if it extends to an operation `μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is symmetric if there is an operation `μ̃` on the undordered pairs in `A`, such that `μ̃({x,y}) = μ(x,y)` for all `x, y : A`. Symmetric operations can be understood to be fully coherent commutative operations. One can check that if `B` is a set, then `μ` has such an extension if and only if it is commutative in the usual algebraic sense. 
+A binary operation `μ : A → A → B` is symmetric if it extends to an operation `μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is symmetric if there is an operation `μ̃` on the undordered pairs in `A`, such that `μ̃({x,y}) = μ(x,y)` for all `x, y : A`. Symmetric operations can be understood to be fully coherent commutative operations. One can check that if `B` is a set, then `μ` has such an extension if and only if it is commutative in the usual algebraic sense.
 
 ## Definition
 
@@ -41,7 +44,7 @@ A binary operation `μ : A → A → B` is symmetric if it extends to an operati
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-commutative : (A → A → B) → UU (l1 ⊔ l2)
   is-commutative f = (x y : A) → f x y ＝ f y x
 ```
@@ -77,14 +80,14 @@ module _
     (f : A → A → type-Set B) (H : is-commutative f) →
     (X : UU lzero) (p : X → A) (e e' : Fin 2 ≃ X) →
     (htpy-equiv e e') + (htpy-equiv e (e' ∘e equiv-succ-Fin 2)) →
-    ( f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1)))) ＝ 
+    ( f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1)))) ＝
     ( f (p (map-equiv e' (zero-Fin 1))) (p (map-equiv e' (one-Fin 1))))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inl K) =
     ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inr K) =
     ( ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))) ∙
     ( H (p (map-equiv e' (one-Fin 1))) (p (map-equiv e' (zero-Fin 1))))
-  
+
   symmetric-operation-is-commutative :
     (f : A → A → type-Set B) → is-commutative f →
     symmetric-operation A (type-Set B)
@@ -110,7 +113,7 @@ module _
     symmetric-operation-is-commutative f H (standard-unordered-pair x y) ＝
     f x y
   compute-symmetric-operation-is-commutative f H x y =
-    
+
     htpy-universal-property-set-quotient-trunc-Prop B
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →

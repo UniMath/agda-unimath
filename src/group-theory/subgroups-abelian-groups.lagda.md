@@ -1,22 +1,25 @@
-#  Subgroups of abelian groups
+# Subgroups of abelian groups
 
 ```agda
 module group-theory.subgroups-abelian-groups where
+```
 
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.abelian-groups
 open import group-theory.embeddings-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
+</details>
 
 ## Definitions
 
@@ -38,7 +41,7 @@ is-set-subset-Ab l A = is-set-subset-Group l (group-Ab A)
 module _
   {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A)
   where
-  
+
   contains-zero-subset-Ab : UU l2
   contains-zero-subset-Ab = contains-unit-subset-Group (group-Ab A) P
 
@@ -63,7 +66,7 @@ module _
     is-prop is-closed-under-neg-subset-Ab
   is-prop-closed-under-neg-subset-Ab =
     is-prop-is-closed-under-inv-subset-Group (group-Ab A) P
-  
+
   is-subgroup-Ab : UU (l1 ⊔ l2)
   is-subgroup-Ab = is-subgroup-subset-Group (group-Ab A) P
 
@@ -81,7 +84,7 @@ Subgroup-Ab l A = Subgroup l (group-Ab A)
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
-  
+
   subset-Subgroup-Ab : subset-Ab l2 A
   subset-Subgroup-Ab = subset-Subgroup (group-Ab A) B
 
@@ -167,7 +170,7 @@ is-emb-subset-Subgroup-Ab A = is-emb-subset-Subgroup (group-Ab A)
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
-  
+
   type-ab-Subgroup-Ab : UU (l1 ⊔ l2)
   type-ab-Subgroup-Ab = type-group-Subgroup (group-Ab A) B
 
@@ -247,12 +250,11 @@ module _
 
 ### The inclusion of the underlying group of a subgroup into the ambient abelian group
 
-
 ```agda
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
-  
+
   preserves-add-inclusion-ab-Subgroup-Ab :
     preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
   preserves-add-inclusion-ab-Subgroup-Ab =

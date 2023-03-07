@@ -1,10 +1,14 @@
-#  Complements of isolated points of finite types
+# Complements of isolated points of finite types
 
 ```agda
 module univalent-combinatorics.complements-isolated-points where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-maybe
@@ -16,11 +20,9 @@ open import foundation.maybe
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -74,7 +76,7 @@ has-cardinality-type-complement-point-UU-Fin k (pair (pair X H) x) =
           ( ( inv-equiv
               ( equiv-maybe-structure-point-UU-Fin k (pair X H) x)) ∘e
             ( e))))
-  
+
 complement-point-UU-Fin :
   {l1 : Level} (k : ℕ) →
   Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) →

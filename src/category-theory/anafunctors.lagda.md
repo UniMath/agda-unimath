@@ -1,13 +1,15 @@
-#  Anafunctors
+# Anafunctors
 
 ```agda
 module category-theory.anafunctors where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-precategories
 open import category-theory.precategories
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -15,6 +17,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -51,7 +54,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
   (F : anafunctor-Precat l5 C D)
   where
-  
+
   object-anafunctor-Precat : obj-Precat C → obj-Precat D → UU l5
   object-anafunctor-Precat = pr1 F
 
@@ -74,7 +77,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} (C : Cat l1 l2) (D : Cat l3 l4)
   (F : anafunctor-Cat l5 C D)
   where
-  
+
   object-anafunctor-Cat : obj-Cat C → obj-Cat D → UU l5
   object-anafunctor-Cat =
     object-anafunctor-Precat (precat-Cat C) (precat-Cat D) F
@@ -95,7 +98,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
   where
-  
+
   anafunctor-functor-Precat : functor-Precat C D → anafunctor-Precat l4 C D
   pr1 (anafunctor-functor-Precat F) X Y =
     iso-Precat D (obj-functor-Precat C D F X) Y

@@ -1,11 +1,13 @@
-#  Isomorphisms in categories
+# Isomorphisms in categories
 
 ```agda
 module category-theory.isomorphisms-categories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import category-theory.categories
 open import category-theory.isomorphisms-precategories
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -17,6 +19,7 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -261,7 +264,7 @@ is-prop-is-iso-Cat C = is-prop-is-iso-Precat (precat-Cat C)
 module _
   {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : iso-Cat C x y)
   where
-  
+
   Eq-iso-Cat : iso-Cat C x y → UU l2
   Eq-iso-Cat g = hom-iso-Cat C f ＝ hom-iso-Cat C g
 
@@ -377,7 +380,7 @@ module _
 module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
-  
+
   iso-eq-Cat : {x y : obj-Cat C} → x ＝ y → iso-Cat C x y
   iso-eq-Cat {x} {y} = iso-eq-Precat (precat-Cat C) x y
 
@@ -397,7 +400,7 @@ module _
 module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
-  
+
   extensionality-obj-Cat :
     (x y : obj-Cat C) → (x ＝ y) ≃ iso-Cat C x y
   pr1 (extensionality-obj-Cat x y) = iso-eq-Cat C

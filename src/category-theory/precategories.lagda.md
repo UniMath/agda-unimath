@@ -1,18 +1,22 @@
-#  Precategories
+# Precategories
 
 ```agda
 module category-theory.precategories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -31,7 +35,7 @@ The reason this is called a *pre*category and not a category in Homotopy Type Th
 module _
   {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
   where
-  
+
   associative-composition-structure-Set : UU (l1 ⊔ l2)
   associative-composition-structure-Set =
     Σ ( {x y z : A}
@@ -63,10 +67,10 @@ Precat l1 l2 =
 module _
   {l1 l2 : Level} (C : Precat l1 l2)
   where
-  
+
   obj-Precat : UU l1
   obj-Precat = pr1 C
-  
+
   hom-Precat : (x y : obj-Precat) → Set l2
   hom-Precat = pr1 (pr2 C)
 
@@ -185,7 +189,6 @@ module _
           ( λ x →
             ( inv (left-unit-law-e' (e x))) ∙
             ( right-unit-law-e (e' x))))
-
 
     is-prop-is-unital-composition-structure-Set :
       ( μ : associative-composition-structure-Set hom) →

@@ -1,4 +1,4 @@
-#  Formalisation of the Symmetry Book
+# Formalisation of the Symmetry Book
 
 ```agda
 module synthetic-homotopy-theory.universal-cover-circle where
@@ -66,7 +66,7 @@ coherence-square-functor-free-dependent-loop :
        ( ap (f y) (apd h α)))
      ( apd (map-Π f h) α)
 coherence-square-functor-free-dependent-loop f refl h = refl
-  
+
 square-functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   { P : X → UU l2} {Q : X → UU l3} (f : (x : X) → P x → Q x) →
@@ -145,21 +145,21 @@ abstract
         ( universal-property-dependent-universal-property-circle l
           ( dup-circle))
         ( pair ℤ equiv-succ-ℤ))
-  
+
   fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
     ({k : Level} → dependent-universal-property-circle k l) →
     X → UU lzero
   fundamental-cover-circle l dup-circle =
     pr1 (Fundamental-cover-circle l dup-circle)
-    
+
   comp-fiber-fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
     ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
     ℤ ≃ fundamental-cover-circle l dup-circle (base-free-loop l)
   comp-fiber-fundamental-cover-circle l dup-circle =
     pr1 ( pr2 ( Fundamental-cover-circle l dup-circle))
-  
+
   comp-tr-fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
     ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
@@ -305,7 +305,7 @@ map-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' α =
             ( map-inv-equiv (equiv-contraction-total-space c x e) h))) ∙
         ( issec-map-inv-is-equiv
           ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
-          ( h))) ∙ 
+          ( h))) ∙
       ( ( eq-htpy
           ( con-inv-htpy h
             ( segment-Σ refl f e e' H)
@@ -502,13 +502,13 @@ abstract
     map-equiv
       ( pS (inr (inr x)))
       ( elim-ℤ P p0 pS (inr (inr x)))
-  
+
   comp-zero-elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
     Id (elim-ℤ P p0 pS zero-ℤ) p0
   comp-zero-elim-ℤ P p0 pS = refl
-  
+
   comp-succ-elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) (k : ℤ) →
@@ -526,7 +526,7 @@ abstract
         ( elim-ℤ P p0 pS (succ-ℤ (inl (succ-ℕ x)))))
   comp-succ-elim-ℤ P p0 pS (inr (inl star)) = refl
   comp-succ-elim-ℤ P p0 pS (inr (inr x)) = refl
-  
+
 ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) → UU l1
@@ -534,7 +534,6 @@ ELIM-ℤ P p0 pS =
   Σ ( (k : ℤ) → P k) (λ f →
     ( ( Id (f zero-ℤ) p0) ×
       ( (k : ℤ) → Id (f (succ-ℤ k)) ((map-equiv (pS k)) (f k)))))
-
 
 Elim-ℤ :
   { l1 : Level} (P : ℤ → UU l1)

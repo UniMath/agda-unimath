@@ -1,8 +1,11 @@
-#  Type arithmetic with the booleans
+# Type arithmetic with the booleans
 
 ```agda
 module foundation.type-arithmetic-booleans where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -12,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

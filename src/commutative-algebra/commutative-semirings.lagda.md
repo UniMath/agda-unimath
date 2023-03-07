@@ -1,20 +1,22 @@
-#  Commutative semirings
+# Commutative semirings
 
 ```agda
 module commutative-algebra.commutative-semirings where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import ring-theory.semirings
 ```
+</details>
 
 ## Idea
 
@@ -49,7 +51,7 @@ Commutative-Semiring l = Σ (Semiring l) is-commutative-Semiring
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   semiring-Commutative-Semiring : Semiring l
   semiring-Commutative-Semiring = pr1 R
 
@@ -248,7 +250,7 @@ module _
     ap-mul-nat-scalar-Semiring semiring-Commutative-Semiring
 
   left-unit-law-mul-nat-scalar-Commutative-Semiring :
-    (x : type-Commutative-Semiring) → 
+    (x : type-Commutative-Semiring) →
     mul-nat-scalar-Commutative-Semiring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Commutative-Semiring =
     left-unit-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring

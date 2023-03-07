@@ -1,8 +1,11 @@
-#  Contractible types
+# Contractible types
 
 ```agda
 module foundation-core.contractible-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-cartesian-product-types
@@ -11,9 +14,9 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.universe-levels
-
 open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 

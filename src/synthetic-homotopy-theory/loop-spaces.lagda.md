@@ -2,18 +2,21 @@
 
 ```agda
 module synthetic-homotopy-theory.loop-spaces where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import structured-types.coherent-h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
+</details>
 
 ## Idea
 
@@ -27,7 +30,7 @@ The loop space of a pointed type `A` is the pointed type of self-identifications
 module _
   {l : Level} (A : Pointed-Type l)
   where
-  
+
   type-Ω : UU l
   type-Ω = Id (pt-Pointed-Type A) (pt-Pointed-Type A)
 
@@ -105,7 +108,7 @@ module _
 module _
   {l : Level} (A : Pointed-Type l)
   where
-  
+
   associative-mul-Ω :
     (x y z : type-Ω A) → Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
   associative-mul-Ω x y z = assoc x y z
@@ -115,12 +118,12 @@ module _
 
 ```
 module _
-  {l1 : Level} {A : UU l1} {x y : A} 
+  {l1 : Level} {A : UU l1} {x y : A}
   where
 
   equiv-tr-Ω : Id x y → Ω (pair A x) ≃* Ω (pair A y)
   equiv-tr-Ω refl = pair id-equiv refl
-  
+
   equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
   equiv-tr-type-Ω p =
     equiv-pointed-equiv (Ω (pair A x)) (Ω (pair A y)) (equiv-tr-Ω p)
@@ -150,5 +153,5 @@ module _
     (p : Id x y) (q : type-Ω (pair A x)) →
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
-    
+
 ```

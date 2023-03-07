@@ -2,17 +2,20 @@
 
 ```agda
 module orthogonal-factorization-systems.orthogonal-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import orthogonal-factorization-systems.lifting-operations
+open import orthogonal-factorization-systems.pullback-hom
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.lifting-operations
-open import orthogonal-factorization-systems.pullback-hom
 ```
+</details>
 
 ## Idea
 
@@ -36,7 +39,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
-  
+
   -- `is-right-orthogonal f g` asserts that `g` is right orthogonal to `f`
   is-right-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-right-orthogonal = is-orthogonal

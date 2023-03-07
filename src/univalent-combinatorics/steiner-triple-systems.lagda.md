@@ -1,14 +1,16 @@
-#  Steiner triple systems
+# Steiner triple systems
 
 ```agda
 module univalent-combinatorics.steiner-triple-systems where
-
-open import elementary-number-theory.natural-numbers
-
-open import foundation.universe-levels
-
-open import univalent-combinatorics.steiner-systems
 ```
+
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.steiner-systems
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
+```
+</details>
 
 ## Definition
 

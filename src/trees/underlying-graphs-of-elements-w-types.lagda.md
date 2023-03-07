@@ -1,17 +1,24 @@
-#  The underlying graphs of elements of W-types
+# The underlying graphs of elements of W-types
 
 ```agda
 module trees.underlying-graphs-of-elements-w-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import trees.directed-trees
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -26,22 +33,16 @@ open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.trails-directed-graphs
 open import graph-theory.walks-directed-graphs
-
-open import trees.directed-trees
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
 ```
+</details>
 
 ## Idea
 
 We assign to each element of a W-type `𝕎 A B` a directed graph. This directed graph is a tree in the graph theoretical sense if and only if each `B x` is a type with decidable equality.
-
 
 ## Definition
 
@@ -382,7 +383,7 @@ module _
     ( v : 𝕎 A B) (x y : node-graph-element-𝕎 v) →
     edge-graph-element-𝕎' v
       ( map-compute-node-graph-element-𝕎 v x)
-      ( map-compute-node-graph-element-𝕎 v y) → 
+      ( map-compute-node-graph-element-𝕎 v y) →
     edge-graph-element-𝕎 v x y
   map-inv-compute-edge-graph-element-𝕎 (tree-𝕎 a α) root-𝕎 root-𝕎 e =
     ex-falso (is-empty-raise-empty e)
@@ -522,7 +523,7 @@ module _
         ( inclusion-graph-element-𝕎 H)
         ( walk-to-root-graph-element-𝕎 v x))
       ( edge-to-root-graph-element-𝕎 H)
-    
+
   is-tree-graph-element-𝕎 :
     (w : 𝕎 A B) → is-tree-Directed-Graph' (graph-element-𝕎 w) root-𝕎
   is-tree-graph-element-𝕎 w =

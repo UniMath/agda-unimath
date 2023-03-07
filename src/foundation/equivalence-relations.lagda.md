@@ -1,10 +1,13 @@
-#  Equivalence relations
+# Equivalence relations
 
 ```agda
 module foundation.equivalence-relations where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalence-relations public
-
+open import foundation-core.universe-levels
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -36,9 +39,8 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients
-
-open import foundation-core.universe-levels
 ```
+</details>
 
 ## Properties
 
@@ -379,7 +381,7 @@ isretr-eq-rel-partition-Eq-Rel P =
   eq-has-same-blocks-partition
     ( partition-Eq-Rel (eq-rel-partition P))
     ( P)
-    ( has-same-elements-partition-eq-rel-partition P) 
+    ( has-same-elements-partition-eq-rel-partition P)
 ```
 
 #### The map `eq-rel-partition` is an equivalence
@@ -407,7 +409,7 @@ pr2 equiv-eq-rel-partition = is-equiv-eq-rel-partition
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
-  
+
   set-indexed-Σ-decomposition-Eq-Rel :
     Set-Indexed-Σ-Decomposition (l1 ⊔ l2) (l1 ⊔ l2) A
   set-indexed-Σ-decomposition-Eq-Rel =
@@ -435,7 +437,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : A → type-Set X)
   where
-  
+
   rel-map-into-set : Rel-Prop l2 A
   rel-map-into-set x y = Id-Prop X (f x) (f y)
 
@@ -529,7 +531,7 @@ equiv-surjection-into-set-eq-rel-Surjection-Into-Set f =
           ( is-effective-map-Surjection-Into-Set f))))
 
 issec-eq-rel-Surjection-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set (l1 ⊔ l2) A) → 
+  {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set (l1 ⊔ l2) A) →
   surjection-into-set-Eq-Rel (eq-rel-Surjection-Into-Set f) ＝ f
 issec-eq-rel-Surjection-Into-Set f =
   eq-equiv-Surjection-Into-Set
@@ -542,7 +544,7 @@ issec-eq-rel-Surjection-Into-Set f =
 
 ```agda
 is-equiv-surjection-into-set-Eq-Rel :
-  {l1 : Level} {A : UU l1} → 
+  {l1 : Level} {A : UU l1} →
   is-equiv (surjection-into-set-Eq-Rel {l1} {l1} {A})
 is-equiv-surjection-into-set-Eq-Rel {l1} {A} =
   is-equiv-has-inverse

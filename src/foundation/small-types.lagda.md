@@ -1,10 +1,12 @@
-#  Small types
+# Small types
 
 ```agda
 module foundation.small-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.small-types public
-
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.homotopies
@@ -16,6 +18,7 @@ open import foundation.uniqueness-image
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 

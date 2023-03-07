@@ -1,8 +1,11 @@
-#  Cocones for pushouts
+# Cocones for pushouts
 
 ```agda
 module synthetic-homotopy-theory.cocones-pushouts where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,6 +20,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

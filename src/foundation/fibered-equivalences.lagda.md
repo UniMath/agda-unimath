@@ -1,8 +1,11 @@
-#  Fibered equivalences
+# Fibered equivalences
 
 ```agda
 module foundation.fibered-equivalences where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
@@ -13,13 +16,13 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
-
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.pullbacks
 open import foundation.slice
 ```
+</details>
 
 ## Idea
 
@@ -73,7 +76,7 @@ module _
   eq-equiv-over-equiv-slice : equiv-slice (i ∘ f) g ＝ equiv-over f g i
   eq-equiv-over-equiv-slice = refl
 
-  eq-equiv-slice-equiv-over : equiv-over f g i ＝ equiv-slice (i ∘ f) g 
+  eq-equiv-slice-equiv-over : equiv-over f g i ＝ equiv-slice (i ∘ f) g
   eq-equiv-slice-equiv-over = refl
 
   equiv-equiv-over-fiberwise-equiv :
@@ -110,7 +113,7 @@ module _
     (equiv-over f g i) ≃ Σ (map-over f g i) (is-equiv ∘ pr1)
   pr1 equiv-Σ-is-equiv-equiv-over = map-Σ-is-equiv-equiv-over
   pr2 equiv-Σ-is-equiv-equiv-over = is-equiv-map-Σ-is-equiv-equiv-over
-  
+
   is-equiv-map-equiv-over-Σ-is-equiv : is-equiv map-equiv-over-Σ-is-equiv
   is-equiv-map-equiv-over-Σ-is-equiv =
     is-equiv-has-inverse map-Σ-is-equiv-equiv-over refl-htpy refl-htpy
@@ -119,7 +122,6 @@ module _
     Σ (map-over f g i) (is-equiv ∘ pr1) ≃ (equiv-over f g i)
   pr1 equiv-equiv-over-Σ-is-equiv = map-equiv-over-Σ-is-equiv
   pr2 equiv-equiv-over-Σ-is-equiv = is-equiv-map-equiv-over-Σ-is-equiv
-
 
   emb-map-over-equiv-over : equiv-over f g i ↪ map-over f g i
   emb-map-over-equiv-over =
@@ -130,7 +132,6 @@ module _
   map-emb-map-over-equiv-over : equiv-over f g i → map-over f g i
   map-emb-map-over-equiv-over = map-emb emb-map-over-equiv-over
 
-
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y)
@@ -138,7 +139,6 @@ module _
 
   is-fibered-equiv-fibered-map : fibered-map f g → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-fibered-equiv-fibered-map (i , h , H) = is-equiv i × is-equiv h
-
 
   map-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
     (fibered-equiv f g) → Σ (fibered-map f g) (is-fibered-equiv-fibered-map)
@@ -196,7 +196,6 @@ module _
   pr2 equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
     is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
 
-
   is-prop-is-fibered-equiv-fibered-map :
     (ihH : fibered-map f g) → is-prop (is-fibered-equiv-fibered-map ihH)
   is-prop-is-fibered-equiv-fibered-map (i , h , H) =
@@ -214,7 +213,7 @@ module _
     comp-emb
       ( emb-subtype is-fibered-equiv-fibered-map-Prop)
       ( emb-equiv equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
-  
+
   map-fibered-map-fibered-equiv : fibered-equiv f g → fibered-map f g
   map-fibered-map-fibered-equiv = map-emb emb-fibered-map-fibered-equiv
 ```
@@ -226,7 +225,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {Y : UU l4} (f : A → X) (g : B → Y) (ihH : fibered-map f g)
   where
-  
+
   is-fibered-equiv-is-pullback :
     is-equiv (pr1 ihH) →
     is-pullback (pr1 ihH) g (cone-fibered-map f g ihH) →
@@ -259,8 +258,8 @@ module _
   equiv-is-pullback-is-fibered-equiv is-equiv-i =
     inv-equiv (equiv-is-fibered-equiv-is-pullback is-equiv-i)
 
-  fibered-equiv-is-pullback : 
-    is-equiv (pr1 ihH) → 
+  fibered-equiv-is-pullback :
+    is-equiv (pr1 ihH) →
     is-pullback (pr1 ihH) g (cone-fibered-map f g ihH) →
     fibered-equiv f g
   pr1 (pr1 (fibered-equiv-is-pullback is-equiv-i pb)) = pr1 ihH

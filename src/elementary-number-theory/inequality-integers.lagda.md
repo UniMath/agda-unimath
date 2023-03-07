@@ -1,13 +1,16 @@
-#  Inequality of integers
+# Inequality of integers
 
 ```agda
 module elementary-number-theory.inequality-integers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.functions
@@ -16,6 +19,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 # Inequality on the integers
 
@@ -121,9 +125,9 @@ reflects-order-add-ℤ {x} {y} {z} =
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
 leq-int-ℕ zero-ℕ y H = tr (is-nonnegative-ℤ) (inv (right-unit-law-add-ℤ (int-ℕ y))) (is-nonnegative-int-ℕ y)
-leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ) 
+leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
   (inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x))
-    ∙ (ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) 
+    ∙ (ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y)
     ∙ ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
   (leq-int-ℕ x y H)
 ```

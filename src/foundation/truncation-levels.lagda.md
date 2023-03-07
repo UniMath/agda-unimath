@@ -1,16 +1,23 @@
 # Truncation levels
 
-
 ```agda
 module foundation.truncation-levels where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.truncation-levels public
+open import foundation-core.truncation-levels public
+open import foundation-core.functions
 open import foundation-core.functions
 open import foundation-core.identity-types
-open import foundation-core.truncation-levels public
+open import foundation-core.identity-types
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Definitions
 

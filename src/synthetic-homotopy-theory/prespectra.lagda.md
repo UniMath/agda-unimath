@@ -1,18 +1,19 @@
-#  Prespectra
+# Prespectra
 
 ```agda
 module synthetic-homotopy-theory.prespectra where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.loop-spaces
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
+open import elementary-number-theory.natural-numbers
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-
-open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ## Idea
 

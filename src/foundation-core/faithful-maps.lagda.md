@@ -1,8 +1,11 @@
-#  Faithful maps
+# Faithful maps
 
 ```agda
 module foundation-core.faithful-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.0-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -17,6 +20,7 @@ open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

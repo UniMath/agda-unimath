@@ -1,8 +1,12 @@
-#  The universal property of the circle
+# The universal property of the circle
 
 ```agda
 module synthetic-homotopy-theory.universal-property-circle where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.free-loops
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,9 +20,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sections
 open import foundation.universe-levels
-
-open import synthetic-homotopy-theory.free-loops
 ```
+</details>
 
 ## Definitions
 
@@ -39,7 +42,7 @@ module _
 module _
   {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
   where
-  
+
   universal-property-circle : UU (l1 ⊔ lsuc l2)
   universal-property-circle = (Y : UU l2) → is-equiv (ev-free-loop α Y)
 ```
@@ -71,7 +74,7 @@ module _
   (H : {l : Level} → induction-principle-circle l α) (P : X → UU l2)
   (β : free-dependent-loop α P)
   where
-  
+
   function-induction-principle-circle : (x : X) → P x
   function-induction-principle-circle = pr1 (H P) β
 

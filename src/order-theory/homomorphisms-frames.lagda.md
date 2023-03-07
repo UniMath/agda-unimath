@@ -1,31 +1,32 @@
-# Homomorphisms Frames 
+# Homomorphisms Frames
 
 ```agda
-
 module order-theory.homomorphisms-frames where
-
-open import foundation.functions
-open import foundation.cartesian-product-types 
-open import foundation.dependent-pair-types 
-open import foundation.propositions 
-open import foundation.subtypes 
-open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.sets
-
-open import order-theory.posets
-open import order-theory.least-upper-bounds-posets
-open import order-theory.greatest-lower-bounds-posets
-open import order-theory.sup-lattices
-open import order-theory.meet-semilattices
-open import order-theory.infinite-distributive-law
-open import order-theory.order-preserving-maps-posets
-open import order-theory.homomorphisms-meet-semilattices
-open import order-theory.homomorphisms-sup-lattices
-open import order-theory.homomorphisms-meet-sup-lattices
-open import order-theory.frames
-
 ```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.frames
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.homomorphisms-meet-semilattices
+open import order-theory.homomorphisms-meet-sup-lattices
+open import order-theory.homomorphisms-sup-lattices
+open import order-theory.infinite-distributive-law
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.sup-lattices
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
+```
+</details>
 
 ## Idea
 A frame homomorphism is an order preserving map between posets that additionally preserves binary meets and arbitrary joins.
@@ -33,7 +34,7 @@ A frame homomorphism is an order preserving map between posets that additionally
 ```agda
 
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6) 
+  {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6)
   where
 
   hom-Frame : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)

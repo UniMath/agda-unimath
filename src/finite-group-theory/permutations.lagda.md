@@ -1,16 +1,17 @@
-#  Permutations
+# Permutations
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module finite-group-theory.permutations where
+```
 
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-
-open import finite-group-theory.transpositions
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.orbits-permutations
-
+open import finite-group-theory.transpositions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -18,9 +19,9 @@ open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.equivalences-maybe
-open import foundation.equivalence-extensionality
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
@@ -32,10 +33,10 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
-
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
@@ -44,6 +45,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Properties
 
@@ -115,7 +117,7 @@ abstract
       ( map-equiv f y)
   retr-permutation-list-transpositions-Fin' zero-ℕ f (inr star) p (inr star) z q = inv p
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inl z) q =
-    ap 
+    ap
       (λ w →
         map-equiv
           ( permutation-list-transpositions
@@ -137,7 +139,7 @@ abstract
                 ( inl y)))
           { x =
             permutation-list-transpositions (list-transpositions-permutation-Fin (succ-ℕ n) _)}
-          { y = F'} 
+          { y = F'}
           ( eq-htpy-equiv
             ( λ w → retr-permutation-list-transpositions-Fin' n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
             ( (ap (map-equiv (transposition t)) lemma) ∙
@@ -192,7 +194,7 @@ abstract
       ( ap (λ e → map-equiv (pr1 (map-equiv e P)) (inl y)) (right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
         ( ap (map-equiv (transposition t)) q ∙ lemma2)
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inr star) q =
-    ap 
+    ap
       (λ w →
         map-equiv
           ( permutation-list-transpositions
@@ -214,7 +216,7 @@ abstract
                 ( inl y)))
           { x =
             permutation-list-transpositions (list-transpositions-permutation-Fin (succ-ℕ n) _)}
-          { y = F'} 
+          { y = F'}
           ( eq-htpy-equiv
             ( λ w → retr-permutation-list-transpositions-Fin' n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
           ( (ap (map-equiv (transposition t)) lemma) ∙
@@ -230,7 +232,7 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
     P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
       ( transposition t ∘e f)
@@ -244,7 +246,7 @@ abstract
         ( ap (map-equiv (transposition t)) q ∙
           ( left-computation-standard-transposition (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inr star) z q =
-    ap 
+    ap
       (λ w →
         map-equiv
           ( permutation-list-transpositions
@@ -268,7 +270,7 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' =
       map-inv-equiv
@@ -278,7 +280,7 @@ abstract
           ( ( ap (λ y → map-transposition t y) p) ∙
             right-computation-standard-transposition (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inl y) (inl z) q =
-    ap 
+    ap
       (λ w →
         map-equiv
           ( permutation-list-transpositions
@@ -299,7 +301,7 @@ abstract
       ( neq-inr-inl
         ( is-injective-map-equiv f (p ∙ inv q)))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inr star) z q =
-    ap 
+    ap
       (λ w →
         map-equiv
           ( permutation-list-transpositions
@@ -405,13 +407,13 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n) 
+  {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
 
   module _
     (f : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
     where
-    
+
     parity-transposition-permutation : UU (lsuc l)
     parity-transposition-permutation =
       Σ (Fin 2) (λ k →
@@ -478,4 +480,4 @@ module _
         is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
 ```
- 
+

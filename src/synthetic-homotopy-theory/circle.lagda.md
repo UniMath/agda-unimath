@@ -1,8 +1,13 @@
-#  The circle
+# The circle
 
 ```agda
 module synthetic-homotopy-theory.circle where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.universal-property-circle
 open import foundation.0-connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -22,14 +27,11 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
-
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.universal-property-circle
 ```
+</details>
 
 ## Postulates
 
@@ -87,7 +89,7 @@ module _
   apply-dependent-universal-property-𝕊¹ : Π-𝕊¹
   apply-dependent-universal-property-𝕊¹ =
     center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))
-  
+
   function-apply-dependent-universal-property-𝕊¹ : (x : 𝕊¹) → P x
   function-apply-dependent-universal-property-𝕊¹ =
     pr1 apply-dependent-universal-property-𝕊¹
@@ -135,7 +137,7 @@ module _
   apply-universal-property-𝕊¹ : Map-𝕊¹
   apply-universal-property-𝕊¹ =
     center (uniqueness-universal-property-𝕊¹ (pair x α))
-      
+
   map-apply-universal-property-𝕊¹ : 𝕊¹ → X
   map-apply-universal-property-𝕊¹ =
     pr1 apply-universal-property-𝕊¹

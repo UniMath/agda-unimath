@@ -1,8 +1,11 @@
-#  Free loops
+# Free loops
 
 ```agda
 module synthetic-homotopy-theory.free-loops where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -13,6 +16,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -29,10 +33,10 @@ free-loop X = Σ X (λ x → x ＝ x)
 module _
   {l1 : Level} {X : UU l1}
   where
-    
+
   base-free-loop : free-loop X → X
   base-free-loop = pr1
-  
+
   loop-free-loop : (α : free-loop X) → base-free-loop α ＝ base-free-loop α
   loop-free-loop = pr2
 ```
@@ -43,7 +47,7 @@ module _
 module _
   {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
   where
-    
+
   free-dependent-loop : UU l2
   free-dependent-loop =
     Σ ( P (base-free-loop α)) (λ p₀ → tr P (loop-free-loop α) p₀ ＝ p₀)
@@ -99,7 +103,7 @@ module _
     is-equiv-Eq-eq-free-loop α =
       fundamental-theorem-id
         ( is-contr-total-Eq-free-loop α)
-        ( Eq-eq-free-loop α) 
+        ( Eq-eq-free-loop α)
 ```
 
 ### Characterization of the identity type of free dependent loops

@@ -1,8 +1,15 @@
-#  Propositional truncations
+# Propositional truncations
 
 ```agda
 module foundation.propositional-truncations where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.coproduct-types
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -15,12 +22,8 @@ open import foundation.propositions
 open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
-
-open import foundation-core.coproduct-types
-open import foundation-core.sets
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Idea
 
@@ -89,7 +92,7 @@ abstract
     (( y : type-trunc-Prop A) → type-Prop (P y))
   ind-trunc-Prop P f =
     ind-trunc-Prop' (type-Prop ∘ P) f
-      ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y))) 
+      ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
 
   comp-trunc-Prop :
     {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
@@ -250,7 +253,7 @@ abstract
 module _
   {l1 l2 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l2)
   where
-  
+
   equiv-dependent-universal-property-trunc-Prop :
     ((y : type-trunc-Prop A) → type-Prop (P y)) ≃
     ((x : A) → type-Prop (P (unit-trunc-Prop x)))

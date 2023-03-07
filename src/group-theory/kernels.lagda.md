@@ -1,23 +1,26 @@
-#  Kernels
+# Kernels
 
 ```agda
 module group-theory.kernels where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.embeddings-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.normal-subgroups
+open import group-theory.subgroups
+open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
-open import group-theory.homomorphisms-groups
-open import group-theory.embeddings-groups
-open import group-theory.normal-subgroups
-open import group-theory.subgroups
-open import group-theory.groups
 ```
+</details>
 
 ## Idea
 
@@ -89,7 +92,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
   where
-  
+
   is-normal-kernel-hom-Group :
     is-normal-Subgroup G (subgroup-kernel-hom-Group G H f)
   is-normal-kernel-hom-Group g h =

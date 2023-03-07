@@ -1,16 +1,22 @@
-#  Retractions
+# Retractions
 
 ```agda
 {-# OPTIONS --safe #-}
+```
 
+```agda
 module foundation-core.retractions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -22,7 +28,7 @@ A retraction is a map that has a section
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   retr : (f : A → B) → UU (l1 ⊔ l2)
   retr f = Σ (B → A) (λ g → (g ∘ f) ~ id)
 
@@ -33,7 +39,7 @@ A retract-of B = Σ (A → B) retr
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   section-retract-of : A retract-of B → A → B
   section-retract-of = pr1
 
@@ -91,25 +97,25 @@ module _
     (g : B → X) (h : A → B) → retr (g ∘ h) → retr h
   pr1 (retraction-right-factor g h retr-gh) = pr1 retr-gh ∘ g
   pr2 (retraction-right-factor g h retr-gh) = pr2 retr-gh
-  
+
   retraction-right-factor-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) → retr f → retr h
   pr1 (retraction-right-factor-htpy f g h H retr-f) =
     pr1 retr-f ∘ g
-  pr2 (retraction-right-factor-htpy f g h H retr-f) = 
+  pr2 (retraction-right-factor-htpy f g h H retr-f) =
     (inv-htpy ((pr1 retr-f) ·l H)) ∙h (pr2 retr-f)
 ```
 
 ### Composites of retractions are retractions
 
 ```agda
-  retraction-comp : 
+  retraction-comp :
     (g : B → X) (h : A → B) → retr g → retr h → retr (g ∘ h)
   pr1 (retraction-comp g h retr-g retr-h) = pr1 retr-h ∘ pr1 retr-g
   pr2 (retraction-comp g h retr-g retr-h) =
     ((pr1 retr-h) ·l (pr2 retr-g ·r h)) ∙h (pr2 retr-h)
 
-  retraction-comp-htpy : 
+  retraction-comp-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     retr g → retr h → retr f
   pr1 (retraction-comp-htpy f g h H retr-g retr-h) =
@@ -117,15 +123,14 @@ module _
   pr2 (retraction-comp-htpy f g h H retr-g retr-h) =
     ( pr1 (retraction-comp g h retr-g retr-h) ·l H) ∙h
     pr2 (retraction-comp g h retr-g retr-h)
-  
 
   inv-triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-    (retr-g : retr g) → ((pr1 retr-g) ∘ f) ~ h 
+    (retr-g : retr g) → ((pr1 retr-g) ∘ f) ~ h
   inv-triangle-retraction f g h H retr-g = (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
 
   triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
     (retr-g : retr g) → h ~ ((pr1 retr-g) ∘ f)
   triangle-retraction f g h H retr-g = inv-htpy (inv-triangle-retraction f g h H retr-g)
-``` 
+```

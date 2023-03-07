@@ -1,16 +1,18 @@
-#  Finiteness of the type of connected components
+# Finiteness of the type of connected components
 
 ```agda
 module univalent-combinatorics.finite-connected-components where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.finite-types
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.universe-levels
-
-open import univalent-combinatorics.finite-types
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

@@ -1,10 +1,12 @@
-#  Equivalences
+# Equivalences
 
 ```agda
 module foundation.equivalences where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalences public
-
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -28,13 +30,13 @@ open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Properties
 
@@ -46,7 +48,7 @@ We already proved in `foundation-core.equivalences` that equivalences are embedd
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   emb-equiv : (A ≃ B) → (A ↪ B)
   pr1 (emb-equiv e) = map-equiv e
   pr2 (emb-equiv e) = is-emb-is-equiv (is-equiv-map-equiv e)
@@ -89,7 +91,7 @@ module _
            ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
     ( ( assoc p (inv (issec-map-inv-equiv e y)) (issec-map-inv-equiv e y)) ∙
       ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
-  
+
   map-eq-transpose-equiv' :
     {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
   map-eq-transpose-equiv' p = inv (map-eq-transpose-equiv (inv p))
@@ -191,7 +193,7 @@ Now we prove the usual statement, without the subuniverse
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   abstract
     is-equiv-is-equiv-precomp :
       (f : A → B) → ((l : Level) (C : UU l) → is-equiv (precomp f C)) →
@@ -245,7 +247,7 @@ module _
   is-contr-sec-is-equiv {f} is-equiv-f =
     is-contr-equiv'
       ( (b : B) → fib f b)
-      ( distributive-Π-Σ) 
+      ( distributive-Π-Σ)
       ( is-contr-Π (is-contr-map-is-equiv is-equiv-f))
 ```
 
@@ -308,7 +310,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   abstract
     Ind-htpy-equiv :
       {l3 : Level} (e : A ≃ B)
@@ -320,12 +322,12 @@ module _
       Ind-identity-system e
         ( refl-htpy-equiv e)
         ( is-contr-total-htpy-equiv e)
-  
+
   ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
     P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
   ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
-  
+
   comp-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
@@ -348,14 +350,14 @@ module _
 
   left-unit-law-equiv : (e : X ≃ Y) → (id-equiv ∘e e) ＝ e
   left-unit-law-equiv e = eq-equiv-eq-map-equiv refl
-  
+
   right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
   right-unit-law-equiv e = eq-equiv-eq-map-equiv refl
-  
+
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
     eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
-  
+
   right-inverse-law-equiv : (e : X ≃ Y) → (e ∘e (inv-equiv e)) ＝ id-equiv
   right-inverse-law-equiv e =
     eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))

@@ -1,20 +1,22 @@
-#  Standard finite trees
+# Standard finite trees
 
 ```agda
 module univalent-combinatorics.standard-finite-trees where
+```
 
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
-open import elementary-number-theory.maximum-natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.standard-finite-types
 open import foundation.cartesian-product-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
 ```
+</details>
 
 ## Idea
 

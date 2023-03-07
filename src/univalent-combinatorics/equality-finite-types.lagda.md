@@ -1,10 +1,16 @@
-#  Equality in finite types
+# Equality in finite types
 
 ```agda
 module univalent-combinatorics.equality-finite-types where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -12,13 +18,9 @@ open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

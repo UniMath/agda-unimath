@@ -1,10 +1,12 @@
-#  Function extensionality
+# Function extensionality
 
 ```agda
 module foundation.function-extensionality where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.function-extensionality public
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -12,6 +14,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -25,7 +28,7 @@ In this file we postulate the function extensionality axiom. Its statement is de
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   postulate funext : (f : (x : A) → B x) → FUNEXT f
 
   equiv-funext : {f g : (x : A) → B x} → (f ＝ g) ≃ (f ~ g)
@@ -35,11 +38,11 @@ module _
   abstract
     eq-htpy : {f g : (x : A) → B x} → (f ~ g) → f ＝ g
     eq-htpy = map-inv-is-equiv (funext _ _)
-  
+
     issec-eq-htpy :
       {f g : (x : A) → B x} → (htpy-eq ∘ (eq-htpy {f = f} {g = g})) ~ id
     issec-eq-htpy = issec-map-inv-is-equiv (funext _ _)
-  
+
     isretr-eq-htpy :
       {f g : (x : A) → B x} → (eq-htpy ∘ (htpy-eq {f = f} {g = g})) ~ id
     isretr-eq-htpy = isretr-map-inv-is-equiv (funext _ _)
@@ -58,7 +61,7 @@ module _
 ```
 
 ## See also
- 
+
 - That the univalence axiom implies function extensionality is proven in
   [`foundation.univalence-implies-function-extensionality`](foundation.univalence-implies-function-extensionality.md).
 - Weak function extensionality is defined in

@@ -2,7 +2,10 @@
 
 ```agda
 module synthetic-homotopy-theory.interval-type where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -11,6 +14,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -62,7 +66,7 @@ ev-𝕀 f = triple (f source-𝕀) (f target-𝕀) (apd f path-𝕀)
 module _
   {l : Level} {P : 𝕀 → UU l}
   where
-  
+
   Eq-Data-𝕀 : (x y : Data-𝕀 P) → UU l
   Eq-Data-𝕀 x y =
     Σ ( Id (pr1 x) (pr1 y)) (λ α →

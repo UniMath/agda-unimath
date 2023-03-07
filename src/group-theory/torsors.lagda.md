@@ -1,4 +1,4 @@
-#  Torsors of abstract groups
+# Torsors of abstract groups
 
 ```agda
 module group-theory.torsors where
@@ -49,7 +49,7 @@ module _
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   Torsor-Abstract-Group : (l : Level) → UU (l1 ⊔ lsuc l)
   Torsor-Abstract-Group l =
     Σ ( Abstract-Group-Action G l)
@@ -226,13 +226,13 @@ module _
           is-set-type-Torsor-Abstract-Group G Y
             ( map-equiv (pr1 e) x)
             ( map-equiv (pr1 f) x)))
-  
+
 module _
   {l1 l2 l3 l4 : Level} (G : Group l1)
   (X : Torsor-Abstract-Group G l2) (Y : Torsor-Abstract-Group G l3)
   (Z : Torsor-Abstract-Group G l4)
   where
-  
+
   comp-equiv-Torsor-Abstract-Group :
     equiv-Torsor-Abstract-Group G Y Z → equiv-Torsor-Abstract-Group G X Y →
     equiv-Torsor-Abstract-Group G X Z
@@ -482,7 +482,6 @@ module _
     ( ap ( map-equiv f)
          ( inv (right-unit-law-mul-Group G (map-equiv e (unit-Group G))))) ∙
     ( K (map-equiv e (unit-Group G)) (unit-Group G))
- 
 
   equiv-Eq-Torsor-Abstract-Group :
     Eq-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) →
@@ -512,7 +511,7 @@ module _
       ( λ g →
         ( inv (pr2 e g (unit-Group G))) ∙
         ( ap (map-equiv (pr1 e)) (right-unit-law-mul-Group G g)))
-  
+
   abstract
     is-equiv-Eq-equiv-Torsor-Abstract-Group :
       (X : Torsor-Abstract-Group G l1) →

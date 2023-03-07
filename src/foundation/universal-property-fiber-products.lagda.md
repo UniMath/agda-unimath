@@ -1,8 +1,11 @@
-#  The universal property of fiber products
+# The universal property of fiber products
 
 ```agda
 module foundation.universal-property-fiber-products where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
@@ -18,6 +21,7 @@ open import foundation.pullbacks
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -71,7 +75,7 @@ module _
         inv-gap-fiberwise-prod
         issec-inv-gap-fiberwise-prod
         isretr-inv-gap-fiberwise-prod
-  
+
   abstract
     universal-property-pullback-fiberwise-prod :
       {l : Level} →

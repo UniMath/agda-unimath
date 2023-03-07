@@ -1,8 +1,11 @@
-#  Double negation
+# Double negation
 
 ```agda
 module foundation.double-negation where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -13,6 +16,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

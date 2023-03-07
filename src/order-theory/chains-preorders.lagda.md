@@ -2,16 +2,19 @@
 
 ```agda
 module order-theory.chains-preorders where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import order-theory.preorders
+open import order-theory.subpreorders
+open import order-theory.total-preorders
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import order-theory.preorders
-open import order-theory.subpreorders
-open import order-theory.total-preorders
 ```
+</details>
 
 ## Definition
 
@@ -52,7 +55,7 @@ module _
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
-  
+
   inclusion-chain-preorder-Prop :
     {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
     Prop (l1 ⊔ l3 ⊔ l4)

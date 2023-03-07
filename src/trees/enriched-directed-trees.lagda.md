@@ -1,4 +1,4 @@
-#  Enriched directed trees
+# Enriched directed trees
 
 ```
 module trees.enriched-directed-trees where
@@ -50,7 +50,7 @@ module _
 
   directed-tree-Enriched-Directed-Tree : Directed-Tree l3 l4
   directed-tree-Enriched-Directed-Tree = pr1 T
-                                             
+
   graph-Enriched-Directed-Tree : Directed-Graph l3 l4
   graph-Enriched-Directed-Tree =
     graph-Directed-Tree directed-tree-Enriched-Directed-Tree

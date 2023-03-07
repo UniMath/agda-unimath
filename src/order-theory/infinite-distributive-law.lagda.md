@@ -1,23 +1,24 @@
-# Infinite distributive law 
+# Infinite distributive law
 
 ```agda
-
 module order-theory.infinite-distributive-law where
-
-open import foundation.cartesian-product-types 
-open import foundation.dependent-pair-types 
-open import foundation.propositions 
-open import foundation.subtypes 
-open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.sets
-
-open import order-theory.posets
-open import order-theory.least-upper-bounds-posets
-open import order-theory.sup-lattices
-open import order-theory.meet-semilattices
-
 ```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
+open import order-theory.sup-lattices
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
+```
+</details>
 
 ## Idea
 Let A be a poset that has all binary meets and arbitrary joins (which we call sups).
@@ -27,7 +28,6 @@ The infinite distributive law states:
 for all a : A and for all families b : I → A the following identity holds
                   a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
 Note: One could inquire about the dual infinite distributive law but it is not needed at this time.
-
 
 ```agda
 
@@ -151,5 +151,4 @@ distributive-law-meet-sup-lattice l1 l2 l3 A =
 This notation is not easy on the eye, but recall, in more familiar notation the identity expressed here is:
                                 a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
 
-
-Show that the identity is a prop. 
+Show that the identity is a prop.

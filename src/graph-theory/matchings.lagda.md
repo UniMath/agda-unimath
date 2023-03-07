@@ -1,8 +1,14 @@
-#  Matchings
+# Matchings
 
 ```agda
 module graph-theory.matchings where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.edge-coloured-undirected-graphs
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -11,17 +17,13 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import graph-theory.edge-coloured-undirected-graphs
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
-
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
-A matching in a undirected graph is a set of edges without common vertices. 
+A matching in a undirected graph is a set of edges without common vertices.
 
 ## Definitions
 

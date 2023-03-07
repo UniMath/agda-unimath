@@ -1,17 +1,12 @@
-#  The Gaussian integers
+# The Gaussian integers
 
 ```agda
 module commutative-algebra.gaussian-integers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import commutative-algebra.commutative-rings
-
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -20,13 +15,18 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
-
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -155,7 +155,7 @@ associative-add-ℤ[i] :
   (x y z : ℤ[i]) → Id (add-ℤ[i] (add-ℤ[i] x y) z) (add-ℤ[i] x (add-ℤ[i] y z))
 associative-add-ℤ[i] (pair a1 b1) (pair a2 b2) (pair a3 b3) =
   eq-Eq-ℤ[i] (associative-add-ℤ a1 a2 a3) (associative-add-ℤ b1 b2 b3)
-  
+
 left-inverse-law-add-ℤ[i] :
   (x : ℤ[i]) → Id (add-ℤ[i] (neg-ℤ[i] x) x) zero-ℤ[i]
 left-inverse-law-add-ℤ[i] (pair a b) =

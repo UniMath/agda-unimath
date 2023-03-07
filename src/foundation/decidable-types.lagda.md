@@ -1,8 +1,11 @@
-#  Decidable types
+# Decidable types
 
 ```agda
 module foundation.decidable-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -12,14 +15,15 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.hilberts-epsilon-operators
 open import foundation.negation
-open import foundation.retractions
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.retractions
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -57,7 +61,6 @@ is-merely-decidable A = type-trunc-Prop (is-decidable A)
 ```
 
 ## Examples
-
 
 ### The unit type and the empty type are decidable
 
@@ -145,7 +148,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-decidable-retract-of :
     A retract-of B → is-decidable B → is-decidable A
   is-decidable-retract-of (pair i (pair r H)) (inl b) = inl (r b)

@@ -2,7 +2,11 @@
 
 ```agda
 module orthogonal-factorization-systems.lifts-of-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import orthogonal-factorization-systems.extensions-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,9 +22,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.extensions-of-maps
 ```
+</details>
 
 ## Idea
 
@@ -169,12 +172,12 @@ module _
   coherence-htpy-lift :
     (l l' : lift i f) → map-lift i l ~ map-lift i l' → UU (l2 ⊔ l3)
   coherence-htpy-lift l l' K = (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
-  
+
   htpy-lift : (l l' : lift i f) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-lift l l' =
     Σ ( map-lift i l ~ map-lift i l')
       ( coherence-htpy-lift l l')
-  
+
   refl-htpy-lift : (l : lift i f) → htpy-lift l l
   pr1 (refl-htpy-lift l) = refl-htpy
   pr2 (refl-htpy-lift l) = right-unit-htpy
@@ -182,7 +185,7 @@ module _
   htpy-eq-lift : (l l' : lift i f) → l ＝ l' → htpy-lift l l'
   htpy-eq-lift l .l refl = refl-htpy-lift l
 
-  is-contr-total-htpy-lift : 
+  is-contr-total-htpy-lift :
     (l : lift i f) → is-contr (Σ (lift i f) (htpy-lift l))
   is-contr-total-htpy-lift l =
     is-contr-total-Eq-structure
@@ -195,7 +198,7 @@ module _
     (l l' : lift i f) → is-equiv (htpy-eq-lift l l')
   is-equiv-htpy-eq-lift l =
     fundamental-theorem-id (is-contr-total-htpy-lift l) (htpy-eq-lift l)
-  
+
   extensionality-lift :
     (l l' : lift i f) → (l ＝ l') ≃ (htpy-lift l l')
   pr1 (extensionality-lift l l') = htpy-eq-lift l l'
@@ -247,7 +250,7 @@ module _
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-A)
       ( is-trunc-is-lift f is-trunc-B)
-  
+
   is-trunc-total-lift :
     (X : UU l3) → is-trunc k A → is-trunc k (total-lift i X)
   is-trunc-total-lift X is-trunc-A =

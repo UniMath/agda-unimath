@@ -1,14 +1,16 @@
-#  Pullbacks
+# Pullbacks
 
 ```agda
 module foundation.pullbacks where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.pullbacks public
-
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
-open import foundation-core.contractible-types
 open import foundation-core.constant-maps
+open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
@@ -17,7 +19,6 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
-
 open import foundation.commuting-cubes-of-maps
 open import foundation.descent-equivalences
 open import foundation.equivalences
@@ -29,6 +30,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 ```
+</details>
 
 ## Properties
 
@@ -37,9 +39,9 @@ open import foundation.unit-type
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) 
+  (f : A → X) (g : B → X)
   where
-  
+
   is-property-is-pullback : (c : cone f g C) → is-prop (is-pullback f g c)
   is-property-is-pullback c = is-property-is-equiv (gap f g c)
 

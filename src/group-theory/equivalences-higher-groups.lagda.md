@@ -1,8 +1,13 @@
-#  Equivalences of higher groups
+# Equivalences of higher groups
 
 ```agda
 module group-theory.equivalences-higher-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.higher-groups
+open import group-theory.homomorphisms-higher-groups
 open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -12,13 +17,10 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
-open import group-theory.higher-groups
-open import group-theory.homomorphisms-higher-groups
-
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Definitions
 

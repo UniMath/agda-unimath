@@ -1,11 +1,13 @@
-#  Categories
+# Categories
 
 ```agda
 module category-theory.categories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import category-theory.isomorphisms-precategories
 open import category-theory.precategories
-
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -19,6 +21,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -103,7 +106,7 @@ iso-eq-Set {l} = iso-eq-Precat (Set-Precat l)
 
 is-category-Set-Precat : (l : Level) → is-category-Precat (Set-Precat l)
 is-category-Set-Precat l x =
-  fundamental-theorem-id 
+  fundamental-theorem-id
     ( is-contr-equiv'
       ( Σ (Set l) (type-equiv-Set x))
       ( equiv-tot (equiv-iso-equiv-Set x))

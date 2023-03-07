@@ -1,13 +1,15 @@
 # Equational reasoning
 
-Tom de Jong, 27 May 2022.
 Elisabeth Bonnevier, 31 May 2022.
 Egbert Rijke, 31 August 2022.
 Szumie Xie, 31 August 2022.
 
 ```agda
 module foundation.equational-reasoning where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -17,6 +19,7 @@ open import foundation-core.logical-equivalences
 open import foundation-core.universe-levels
 open import order-theory.preorders
 ```
+</details>
 
 ## Idea
 
@@ -43,7 +46,6 @@ inequalities. Note that for inequalities we also need to pass the preorder as an
 We write Agda code that allows for such reasoning. The code for equational
 reasoning for equalities and equivalences is based on Martín Escardó's Agda code
 [1,2] and the Agda standard library [3].
-
 
 ## Definitions
 

@@ -1,13 +1,17 @@
-#  Latin squares
+# Latin squares
 
 ```agda
 module univalent-combinatorics.latin-squares where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

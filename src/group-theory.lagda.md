@@ -1,4 +1,4 @@
-#  Group theory
+# Group theory
 
 ```agda
 module group-theory where

@@ -1,12 +1,16 @@
-#  Small universes
+# Small universes
 
 ```agda
 module foundation.small-universes where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.small-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,39 +1,42 @@
-#  The group of n-element types
+# The group of n-element types
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module finite-group-theory.finite-type-groups where
+```
 
-open import elementary-number-theory.natural-numbers
-
-open import foundation.0-connected-types 
-open import foundation.dependent-pair-types 
-open import foundation.equality-dependent-pair-types 
-open import foundation.equivalences 
-open import foundation.functions
+<details><summary>Imports</summary>
+```agda
+open import foundation.0-connected-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types 
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types
-open import foundation.univalence 
-open import foundation.universe-levels 
-
-open import group-theory.concrete-groups 
+open import foundation.univalence
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
+open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ### Definition
 
@@ -60,7 +63,7 @@ module _
   pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
   pr2 hom-loop-group-fin-UU-Fin-Group p q =
     inv (comp-pair-eq-Σ p q)
-  
+
   hom-inv-loop-group-fin-UU-Fin-Group :
     type-hom-Group
       ( loop-group-Set (raise-Set l (Fin-Set n)))
@@ -137,7 +140,4 @@ module _
   pr1 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-sec-hom-inv-loop-group-fin-UU-Fin-Group
   pr2 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-retr-hom-inv-loop-group-fin-UU-Fin-Group
 ```
-
-
-
 

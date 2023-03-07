@@ -1,10 +1,14 @@
-#  Necklaces
+# Necklaces
 
 ```agda
 module univalent-combinatorics.necklaces where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -13,13 +17,10 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-
+open import elementary-number-theory.natural-numbers
 open import structured-types.types-equipped-with-endomorphisms
-
-open import univalent-combinatorics.cyclic-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -73,7 +74,7 @@ necklace-pattern l m n =
 module _
   {l1 l2 : Level} (m n : ℕ)
   where
-  
+
   equiv-necklace :
     (N1 : necklace l1 m n) (N2 : necklace l2 m n) → UU (l1 ⊔ l2)
   equiv-necklace N1 N2 =
@@ -98,7 +99,7 @@ module _
 module _
   {l : Level} (m n : ℕ)
   where
-  
+
   extensionality-necklace :
     (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m n N1 N2
   extensionality-necklace N1 =

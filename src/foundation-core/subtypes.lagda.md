@@ -1,8 +1,11 @@
-#  Subtypes
+# Subtypes
 
 ```agda
 module foundation-core.subtypes where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.1-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -23,10 +26,11 @@ open import foundation-core.truncation-levels
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
-A subtype of a type `A` is a family of propositions over `A`. The underlying type of a subtype `P` of `A` is the total space `Σ A B`. 
+A subtype of a type `A` is a family of propositions over `A`. The underlying type of a subtype `P` of `A` is the total space `Σ A B`.
 
 ## Definition
 
@@ -152,7 +156,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   abstract
     is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
     is-subtype-is-emb-pr1 H x =
@@ -165,7 +169,7 @@ module _
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} (P : subtype l2 A)
   where
-  
+
   abstract
     is-trunc-type-subtype :
       is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (type-subtype P)
@@ -177,7 +181,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
-  
+
   abstract
     is-prop-type-subtype : is-prop A → is-prop (type-subtype P)
     is-prop-type-subtype = is-trunc-type-subtype neg-two-𝕋 P

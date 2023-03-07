@@ -1,14 +1,17 @@
-#  Relatively prime integers
+# Relatively prime integers
 
 ```agda
 module elementary-number-theory.relatively-prime-integers where
-
-open import elementary-number-theory.integers
-open import elementary-number-theory.greatest-common-divisor-integers
-
-open import foundation.universe-levels
-open import foundation.propositions
 ```
+
+<details><summary>Imports</summary>
+```agda
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integers
+open import foundation.propositions
+open import foundation.universe-levels
+```
+</details>
 
 ## Idea
 

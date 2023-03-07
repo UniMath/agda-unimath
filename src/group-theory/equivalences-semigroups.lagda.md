@@ -1,8 +1,13 @@
-#  Equivalences between semigroups
+# Equivalences between semigroups
 
 ```agda
 module group-theory.equivalences-semigroups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.homomorphisms-semigroups
+open import group-theory.semigroups
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,10 +21,8 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import group-theory.homomorphisms-semigroups
-open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 
@@ -67,7 +70,7 @@ module _
 module _
   {l : Level} (G : Semigroup l)
   where
-  
+
   center-total-preserves-mul-id-Semigroup :
     Σ ( has-associative-mul (type-Semigroup G))
       ( λ μ → preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)

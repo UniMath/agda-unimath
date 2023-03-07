@@ -1,14 +1,17 @@
-#  Natural transformations between functors between large precategories
+# Natural transformations between functors between large precategories
 
 ```agda
 module category-theory.natural-transformations-large-precategories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
-    
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

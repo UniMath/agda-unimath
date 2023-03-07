@@ -1,10 +1,12 @@
-#  Diagonal maps of types
+# Diagonal maps of types
 
 ```agda
 module foundation.diagonal-maps-of-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.diagonal-maps-of-types public
-
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
@@ -22,6 +24,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Properties
 
@@ -31,7 +34,7 @@ open import foundation-core.universe-levels
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-trunc-is-trunc-map-diagonal :
       (k : 𝕋) → is-trunc-map k (diagonal A) → is-trunc (succ-𝕋 k) A
@@ -63,9 +66,9 @@ module _
     is-1-type-is-faithful-diagonal : is-faithful (diagonal A) → is-1-type A
     is-1-type-is-faithful-diagonal H =
       is-1-type-is-0-map-diagonal (is-0-map-is-faithful H)
-  
+
   abstract
-    is-trunc-map-diagonal-is-trunc : 
+    is-trunc-map-diagonal-is-trunc :
       (k : 𝕋) → is-trunc (succ-𝕋 k) A → is-trunc-map k (diagonal A)
     is-trunc-map-diagonal-is-trunc k is-trunc-A t =
       is-trunc-is-equiv k

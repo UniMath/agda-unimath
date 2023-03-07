@@ -1,13 +1,21 @@
-#  Equivalences of group actions
+# Equivalences of group actions
 
 ```agda
 module group-theory.equivalences-group-actions where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -18,13 +26,8 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-group-actions
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
 ```
+</details>
 
 ## Idea
 
@@ -100,7 +103,7 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   (Y : Abstract-Group-Action G l3) (e : equiv-Abstract-Group-Action G X Y)
   where
-  
+
   htpy-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
   htpy-equiv-Abstract-Group-Action f =
@@ -117,7 +120,7 @@ module _
     (f : equiv-Abstract-Group-Action G X Y) →
     Id e f → htpy-equiv-Abstract-Group-Action f
   htpy-eq-equiv-Abstract-Group-Action .e refl =
-    refl-htpy-equiv-Abstract-Group-Action 
+    refl-htpy-equiv-Abstract-Group-Action
 
   is-contr-total-htpy-equiv-Abstract-Group-Action :
     is-contr

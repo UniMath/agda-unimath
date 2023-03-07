@@ -1,4 +1,4 @@
-#  Automorphisms of types
+# Automorphisms of types
 
 ```agda
 module foundation.automorphisms where

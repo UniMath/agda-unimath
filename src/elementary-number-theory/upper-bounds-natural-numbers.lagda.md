@@ -1,13 +1,16 @@
-#  Upper bounds for type families over the natural numbers
+# Upper bounds for type families over the natural numbers
 
 ```agda
 module elementary-number-theory.upper-bounds-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

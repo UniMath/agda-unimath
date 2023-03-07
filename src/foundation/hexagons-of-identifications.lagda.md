@@ -1,11 +1,15 @@
-#  Hexagons of identifications
+# Hexagons of identifications
 
 ```agda
 module foundation.hexagons-of-identifications where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -29,7 +33,7 @@ coherence-hexagon α β γ δ ε ζ = ((α ∙ β) ∙ γ) ＝ (δ ∙ (ε ∙ �
 module _
   {l : Level} {A : UU l} {x u u' v v' y : A}
   where
-  
+
   hexagon-rotate-120 :
     (α : x ＝ u) (β : u ＝ u') (γ : u' ＝ y)
     (δ : x ＝ v) (ε : v ＝ v') (ζ : v' ＝ y) →

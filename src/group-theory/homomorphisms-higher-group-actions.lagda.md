@@ -1,18 +1,21 @@
-#  Homomorphisms of higher group actions
+# Homomorphisms of higher group actions
 
 ```agda
 module group-theory.homomorphisms-higher-group-actions where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.higher-group-actions
+open import group-theory.higher-groups
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
 ```
+</details>
 
 ## Definition
 

@@ -1,8 +1,17 @@
-#  Composition of species
+# Composition of species
 
 ```agda
 module univalent-combinatorics.composition-species where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equivalences-species
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.partitions
+open import univalent-combinatorics.sigma-decompositions
+open import univalent-combinatorics.species
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -10,14 +19,8 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equivalences-species
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.partitions
-open import univalent-combinatorics.sigma-decompositions
-open import univalent-combinatorics.species
 ```
+</details>
 
 ## Idea
 
@@ -45,13 +48,11 @@ analytic-comp-species {l1} {l2} {l3} S T X =
       S (finite-cotype-Σ-Decomposition-𝔽 X D y ))))
 ```
 
- ### The analytic unit for composition of species
+### The analytic unit for composition of species
 
  ```agda
 analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
-
-
 
 ```
 

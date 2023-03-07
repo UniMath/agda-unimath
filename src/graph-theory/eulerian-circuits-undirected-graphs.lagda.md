@@ -1,19 +1,21 @@
-#  Eulerian circuits in undirected graphs
+# Eulerian circuits in undirected graphs
 
 ```agda
 module graph-theory.eulerian-circuits-undirected-graphs where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.polygons
+open import graph-theory.undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
-
-open import graph-theory.morphisms-undirected-graphs
-open import graph-theory.polygons
-open import graph-theory.undirected-graphs
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

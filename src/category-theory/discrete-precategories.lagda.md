@@ -1,19 +1,22 @@
-#  The discrete precategory introduced by any hSet
+# The discrete precategory introduced by any hSet
 
 ```agda
 module category-theory.discrete-precategories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
-
 open import foundation.dependent-pair-types
-open import foundation.sets
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 ```
+</details>
 
 ### Discrete precategories
 

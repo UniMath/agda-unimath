@@ -1,11 +1,13 @@
-#  Subgroups of finite groups
+# Subgroups of finite groups
 
 ```agda
 module finite-group-theory.subgroups-finite-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-semigroups
-
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -15,16 +17,15 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.decidable-subgroups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
-
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ## Idea
 
@@ -75,7 +76,7 @@ module _
     contains-unit-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
-  
+
   is-prop-contains-unit-decidable-subset-Group-𝔽 :
     is-prop contains-unit-decidable-subset-Group-𝔽
   is-prop-contains-unit-decidable-subset-Group-𝔽 =
@@ -147,7 +148,7 @@ Subgroup-𝔽 l G = Decidable-Subgroup l (group-Group-𝔽 G)
 module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
   where
-  
+
   decidable-subset-Subgroup-𝔽 : decidable-subset-Group l2 (group-Group-𝔽 G)
   decidable-subset-Subgroup-𝔽 =
     decidable-subset-Decidable-Subgroup (group-Group-𝔽 G) H
@@ -173,7 +174,7 @@ module _
   finite-type-Subgroup-𝔽 : 𝔽 (l1 ⊔ l2)
   finite-type-Subgroup-𝔽 =
     finite-type-subset-𝔽 (finite-type-Group-𝔽 G) decidable-subset-Subgroup-𝔽
-  
+
   inclusion-Subgroup-𝔽 : type-Subgroup-𝔽 → type-Group-𝔽 G
   inclusion-Subgroup-𝔽 = inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
@@ -197,7 +198,7 @@ module _
     (x : type-Group-𝔽 G) → is-prop (is-in-Subgroup-𝔽 x)
   is-prop-is-in-Subgroup-𝔽 =
     is-prop-is-in-Decidable-Subgroup (group-Group-𝔽 G) H
-    
+
   contains-unit-Subgroup-𝔽 :
     contains-unit-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
   contains-unit-Subgroup-𝔽 =
@@ -272,7 +273,7 @@ module _
 
   inv-Subgroup-𝔽 : type-Subgroup-𝔽 G H → type-Subgroup-𝔽 G H
   inv-Subgroup-𝔽 = inv-Decidable-Subgroup (group-Group-𝔽 G) H
-  
+
   left-inverse-law-mul-Subgroup-𝔽 :
     ( x : type-Subgroup-𝔽 G H) →
     mul-Subgroup-𝔽 (inv-Subgroup-𝔽 x) x ＝ unit-Subgroup-𝔽
@@ -416,7 +417,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
   where
-  
+
   left-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU l2
   left-sim-Subgroup-𝔽 = left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 

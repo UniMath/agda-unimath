@@ -1,8 +1,18 @@
-#  Quotient groups of concrete groups
+# Quotient groups of concrete groups
 
 ```agda
 module group-theory.quotient-groups-concrete-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-group-actions
+open import group-theory.higher-groups
+open import group-theory.mere-equivalences-concrete-group-actions
+open import group-theory.normal-subgroups-concrete-groups
+open import group-theory.transitive-concrete-group-actions
 open import foundation.0-connected-types
 open import foundation.0-images-of-maps
 open import foundation.1-types
@@ -16,19 +26,10 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-group-actions
-open import group-theory.higher-groups
-open import group-theory.mere-equivalences-concrete-group-actions
-open import group-theory.normal-subgroups-concrete-groups
-open import group-theory.transitive-concrete-group-actions
-
 open import structured-types.pointed-types
-
 open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ## Idea
 
@@ -37,7 +38,7 @@ Given a normal subgroup `N` of a concrete group `G`, the quotient group `G/N` is
 The quotient `G/N` can be constructed in several ways.
 
 1. We can construct `G/N` as the type of `G`-sets merely equivalent to the coset action of `N`. Since this construction is reminiscent of the torsor construction of BG, we call this the **standard construction** of `G/N`.
-2. We can construct `G/N` as the 0-image of the coset action `N : BG → U`. We call this the **0-image construction** of `G/N`. 
+2. We can construct `G/N` as the 0-image of the coset action `N : BG → U`. We call this the **0-image construction** of `G/N`.
 
 ## Definitions
 

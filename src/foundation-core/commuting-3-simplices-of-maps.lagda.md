@@ -2,13 +2,16 @@
 
 ```agda
 {-# OPTIONS --safe #-}
-
 module foundation-core.commuting-3-simplices-of-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,10 +1,12 @@
-#  The univalence axiom
+# The univalence axiom
 
 ```agda
 module foundation.univalence where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.univalence public
-
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -12,10 +14,10 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.universe-levels
-
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 ```
+</details>
 
 ## Idea
 
@@ -84,7 +86,7 @@ abstract
   is-equiv-equiv-eq-fam :
     {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
   is-equiv-equiv-eq-fam B =
-    fundamental-theorem-id 
+    fundamental-theorem-id
       ( is-contr-total-equiv-fam B)
       ( equiv-eq-fam B)
 
@@ -142,5 +144,5 @@ refl-eq-equiv-id :
   {l1 : Level} {A : UU l1} →
   (eq-equiv A A (id-equiv {A = A})) ＝ refl
 refl-eq-equiv-id =
-  (isretr-map-inv-equiv equiv-univalence) refl   
+  (isretr-map-inv-equiv equiv-univalence) refl
 ```

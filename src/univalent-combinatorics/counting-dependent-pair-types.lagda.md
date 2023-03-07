@@ -1,13 +1,16 @@
-#  Counting the elements of dependent pair types
+# Counting the elements of dependent pair types
 
 ```agda
 module univalent-combinatorics.counting-dependent-pair-types where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.standard-finite-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -25,13 +28,12 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -90,7 +92,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
     (f : (x : A) → count (B x)) →
     Id ( number-of-elements-count (count-Σ' k e f))
-      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))) 
+      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x))))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coprod

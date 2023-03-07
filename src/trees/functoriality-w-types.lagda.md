@@ -1,8 +1,12 @@
-#  Functoriality of W-types
+# Functoriality of W-types
 
 ```agda
 module trees.functoriality-w-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import trees.w-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
@@ -20,9 +24,8 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-
-open import trees.w-types
 ```
+</details>
 
 ## Idea
 
@@ -74,7 +77,7 @@ abstract
                       ( λ (d : D c) → fib (map-𝕎 D f e) (γ d))
                       ( (equiv-tr D p) ∘e (e a))
                       ( λ b → id-equiv)) ∘e
-                    ( inv-distributive-Π-Σ)) ∘e 
+                    ( inv-distributive-Π-Σ)) ∘e
                   ( equiv-tot
                     ( λ α →
                       equiv-Π

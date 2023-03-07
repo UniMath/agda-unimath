@@ -1,13 +1,17 @@
-#  Partial elements
+# Partial elements
 
 ```agda
 module foundation.partial-elements where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

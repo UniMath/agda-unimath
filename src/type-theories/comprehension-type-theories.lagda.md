@@ -1,17 +1,20 @@
-#  Comprehension of fibered type theories
+# Comprehension of fibered type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}
+```
 
+```agda
 module type-theories.comprehension-type-theories where
+```
 
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import type-theories.dependent-type-theories
 open import type-theories.fibered-dependent-type-theories
-
-open dependent
+open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

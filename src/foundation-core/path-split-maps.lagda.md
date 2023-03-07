@@ -1,8 +1,11 @@
-#  Path-split maps
+# Path-split maps
 
 ```agda
 module foundation-core.path-split-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.dependent-pair-types
@@ -13,6 +16,7 @@ open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 

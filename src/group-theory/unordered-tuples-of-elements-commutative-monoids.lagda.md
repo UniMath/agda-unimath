@@ -1,16 +1,18 @@
-#  Unordered tuples of elements in commutative monoids
+# Unordered tuples of elements in commutative monoids
 
 ```agda
 module group-theory.unordered-tuples-of-elements-commutative-monoids where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import group-theory.commutative-monoids
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-tuples
-
-open import group-theory.commutative-monoids
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Definition
 

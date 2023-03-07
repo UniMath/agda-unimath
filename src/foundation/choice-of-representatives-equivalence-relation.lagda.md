@@ -1,8 +1,12 @@
-#  Choice of representatives for an equivalence relation
+# Choice of representatives for an equivalence relation
 
 ```agda
 module foundation.choice-of-representatives-equivalence-relation where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.equivalence-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,11 +21,10 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-pair-types 
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 
@@ -31,16 +34,16 @@ If we can construct a choice of representatives for each equivalence class, then
 module _
   {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
-    
+
   is-choice-of-representatives :
     (A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   is-choice-of-representatives P =
     (a : A) → is-contr (Σ A (λ x → P x × sim-Eq-Rel R a x))
-  
+
   representatives :
     {P : A → UU l3} → is-choice-of-representatives P → UU (l1 ⊔ l3)
   representatives {P} H = Σ A P
-  
+
   class-representatives :
     {P : A → UU l3} (H : is-choice-of-representatives P) →
     representatives H → equivalence-class R

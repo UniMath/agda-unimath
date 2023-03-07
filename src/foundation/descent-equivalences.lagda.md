@@ -1,10 +1,11 @@
-#  Descent for equivalences
+# Descent for equivalences
 
 ```agda
 module foundation.descent-equivalences where
+```
 
-open import foundation.equivalences
-
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
@@ -13,7 +14,9 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.pullbacks
 open import foundation-core.universe-levels
+open import foundation.equivalences
 ```
+</details>
 
 ## Idea
 
@@ -38,7 +41,7 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   where
-  
+
   descent-is-equiv :
     (i : X → Y) (j : Y → Z) (h : C → Z)
     (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →

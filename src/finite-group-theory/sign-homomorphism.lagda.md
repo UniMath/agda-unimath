@@ -1,37 +1,37 @@
-#  The sign homomorphism
+# The sign homomorphism
 
 ```agda
 module finite-group-theory.sign-homomorphism where
+```
 
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.permutations
 open import finite-group-theory.transpositions
-
 open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.symmetric-groups
-
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -43,7 +43,7 @@ The sign of a permutation is defined as the parity of the length of the decompos
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n) 
+  {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
 
   sign-homomorphism-Fin-two : Aut (type-UU-Fin n X) → Fin 2
@@ -322,7 +322,7 @@ module _
     ( preserves-add-aut-point-Fin-two-ℕ
       ( sign-homomorphism-Fin-two n X f)
       ( sign-homomorphism-Fin-two n X g))
-  
+
   sign-homomorphism :
     type-hom-Group
       ( symmetric-Group (set-UU-Fin n X))
@@ -341,5 +341,5 @@ module _
       ( equiv-succ-Fin 2)
   eq-sign-homomorphism-transposition Y =
     ap aut-point-Fin-two-ℕ (eq-sign-homomorphism-Fin-two-transposition n X Y)
-    
+
 ```

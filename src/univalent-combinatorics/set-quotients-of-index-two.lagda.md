@@ -1,10 +1,16 @@
-#  Set quotients of index 2
+# Set quotients of index 2
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module univalent-combinatorics.set-quotients-of-index-two where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.standard-finite-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -23,9 +29,8 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ```agda
 module _
@@ -43,7 +48,7 @@ module _
   where
 
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
-    (y : A) (k k' k'' : Fin 2) → 
+    (y : A) (k k' k'' : Fin 2) →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)) ＝ k →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)) ＝ k' →
     map-equiv eA (map-reflecting-map-Eq-Rel R f (h y)) ＝ k'' →
@@ -77,7 +82,7 @@ module _
     ( inl (inr star)) (inr star) (inr star) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inr star) (inl (inr star)) (inl (inr star)) p q r = 
+    ( inr star) (inl (inr star)) (inl (inr star)) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inr star) (inl (inr star)) (inr star) p q r =

@@ -1,17 +1,22 @@
-#  Fibered dependent type theories
+# Fibered dependent type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}
+```
 
+```agda
 module type-theories.fibered-dependent-type-theories where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import type-theories.dependent-type-theories
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import type-theories.dependent-type-theories
 ```
+</details>
 
 ### Bifibered systems
 
@@ -63,7 +68,7 @@ module fibered where
                 bifibered-system.type D Y (section-system.type f X)
       element : {X : system.type A} {Y : fibered-system.type B X} →
                 {x : system.element A X} (y : fibered-system.element B Y x) →
-                bifibered-system.element D 
+                bifibered-system.element D
                   ( type Y)
                   ( y)
                   ( section-system.element f x)
@@ -109,7 +114,7 @@ module fibered where
             ( bifibered-system.slice D d))
        ( bifibered-system.slice D (tr (bifibered-system.type D Y) p d))
   tr-bifibered-system-slice D Y refl refl = refl
-   
+
   Eq-bifibered-system' :
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : system l1 l2}
     {B : fibered-system l3 l4 A} {C C' : fibered-system l5 l6 A}
@@ -159,7 +164,7 @@ module fibered where
   htpy-section-fibered-system :
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : system l1 l2}
     {B : fibered-system l3 l4 A} {C : fibered-system l5 l6 A}
-    {D : bifibered-system l7 l8 B C} {f f' : section-system C} 
+    {D : bifibered-system l7 l8 B C} {f f' : section-system C}
     (H : htpy-section-system f f')
     (g : section-fibered-system f D) (h : section-fibered-system f' D) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l7 ⊔ l8)
@@ -188,7 +193,7 @@ module fibered where
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : system l1 l2} {A' : system l3 l4}
     (f : hom-system A A') (B : fibered-system l5 l6 A)
     (B' : fibered-system l7 l8 A') → UU (l1 ⊔ l2 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8)
-  hom-fibered-system f B B' = 
+  hom-fibered-system f B B' =
     section-fibered-system f (constant-bifibered-system B B')
 
   id-hom-fibered-system :
@@ -662,7 +667,7 @@ module fibered where
 
   -- We define subtype theories
 
-  record is-subtype-theory 
+  record is-subtype-theory
     {l1 l2 l3 l4 : Level} {A : type-theory l1 l2}
     (B : fibered-type-theory l3 l4 A) : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
     where

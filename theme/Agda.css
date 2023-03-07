@@ -1,18 +1,8 @@
 /* Aspects. */
 .Agda .Comment {
-    color: #B22222
+    color: #948e8e
 }
 
-.Agda {
-    background: aliceblue;
-    border: 1px solid #f0f0f0;
-    font-family: Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: .85em;
-    padding: 1em;
-    overflow-x: overlay;
-}
 
 .Agda .Markup {
     color: #000000

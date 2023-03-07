@@ -1,8 +1,13 @@
-#  The universal property of propositional truncations
+# The universal property of propositional truncations
 
 ```agda
 module foundation.universal-property-propositional-truncation where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.contractible-maps
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,10 +23,8 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
-
-open import foundation-core.contractible-maps
-open import foundation-core.functoriality-dependent-pair-types
 ```
+</details>
 
 ## Idea
 
@@ -234,7 +237,7 @@ abstract
         ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-ptr-f (Σ-Prop P Q)))
       ( id {A = type-Prop P})
-      
+
 abstract
   is-propositional-truncation-dependent-universal-property :
     { l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →

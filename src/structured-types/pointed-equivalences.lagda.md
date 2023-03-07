@@ -1,13 +1,18 @@
-#  Pointed equivalences
+# Pointed equivalences
 
 ```agda
 module structured-types.pointed-equivalences where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 open import foundation-core.function-extensionality
-
+open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -20,11 +25,8 @@ open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -145,7 +147,7 @@ module _
       ( is-contr-total-equiv (type-Pointed-Type A))
       ( pair (type-Pointed-Type A) id-equiv)
       ( is-contr-total-path (pt-Pointed-Type A))
-  
+
   extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
   extensionality-Pointed-Type =
     extensionality-Σ

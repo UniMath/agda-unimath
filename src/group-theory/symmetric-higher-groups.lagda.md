@@ -1,18 +1,20 @@
-#  Symmetric higher groups
+# Symmetric higher groups
 
 ```agda
 module group-theory.symmetric-higher-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.higher-groups
 open import foundation.0-connected-types
 open import foundation.connected-components-universes
 open import foundation.dependent-pair-types
 open import foundation.mere-equivalences
 open import foundation.universe-levels
-
-open import group-theory.higher-groups
-
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +44,7 @@ module _
     is-0-connected classifying-type-symmetric-∞-Group
   is-0-connected-classifying-type-symmetric-∞-Group =
     is-0-connected-component-UU X
-  
+
   symmetric-∞-Group : ∞-Group (lsuc l)
   symmetric-∞-Group =
     pair

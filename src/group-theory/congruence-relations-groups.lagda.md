@@ -1,8 +1,14 @@
-#  Congruence relations on groups
+# Congruence relations on groups
 
 ```agda
 module group-theory.congruence-relations-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.congruence-relations-semigroups
+open import group-theory.conjugation
+open import group-theory.groups
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.contractible-types
@@ -12,11 +18,8 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import group-theory.congruence-relations-semigroups
-open import group-theory.conjugation
-open import group-theory.groups
 ```
+</details>
 
 ## Idea
 
@@ -69,7 +72,7 @@ module _
     sim-congruence-Group x2 y1 →
     y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
-  
+
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
   refl-congruence-Group = refl-Eq-Rel eq-rel-congruence-Group
 

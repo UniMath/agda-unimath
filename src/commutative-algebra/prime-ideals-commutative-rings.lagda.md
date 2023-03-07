@@ -1,18 +1,20 @@
-#  Prime ideals in commutative rings
+# Prime ideals in commutative rings
 
 ```agda
 module commutative-algebra.prime-ideals-commutative-rings where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import ring-theory.ideals-rings
 ```
+</details>
 
 ## Idea
 
@@ -24,7 +26,7 @@ A prime ideal is an ideal `I` in a commutative ring `R` such that for every `a,b
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
   where
-  
+
   is-prime-ideal-commutative-ring-Prop : Prop (l1 ⊔ l2)
   is-prime-ideal-commutative-ring-Prop =
     Π-Prop

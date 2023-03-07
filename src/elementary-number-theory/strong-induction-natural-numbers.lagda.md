@@ -1,11 +1,13 @@
-#  The strong induction principle for the natural numbers
+# The strong induction principle for the natural numbers
 
 ```agda
 module elementary-number-theory.strong-induction-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -19,6 +21,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -132,7 +135,7 @@ computation-succ-strong-ind-ℕ P q0 qS n = refl
 strong-ind-ℕ :
   {l : Level} → (P : ℕ → UU l) (p0 : P zero-ℕ) →
   (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) (n : ℕ) → P n
-strong-ind-ℕ P p0 pS = 
+strong-ind-ℕ P p0 pS =
   ε-□-≤-ℕ
     ( induction-strong-ind-ℕ P
       ( zero-strong-ind-ℕ P p0)
@@ -149,7 +152,7 @@ cases-leq-succ-reflexive-leq-ℕ :
 cases-leq-succ-reflexive-leq-ℕ {zero-ℕ} = refl
 cases-leq-succ-reflexive-leq-ℕ {succ-ℕ n} =
   ap (map-coprod id (ap succ-ℕ)) cases-leq-succ-reflexive-leq-ℕ
-  
+
 cases-eq-comp-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
   ( pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
@@ -214,7 +217,7 @@ comp-succ-strong-ind-ℕ :
   ( pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   ( n : ℕ) →
   strong-ind-ℕ P p0 pS (succ-ℕ n) ＝ pS n (λ m p → strong-ind-ℕ P p0 pS m)
-comp-succ-strong-ind-ℕ P p0 pS n = 
+comp-succ-strong-ind-ℕ P p0 pS n =
   ( eq-succ-strong-ind-ℕ P pS n
     ( induction-strong-ind-ℕ P
       ( zero-strong-ind-ℕ P p0)

@@ -1,16 +1,19 @@
-#  Free concrete group actions
+# Free concrete group actions
 
 ```agda
 module group-theory.free-concrete-group-actions where
+```
 
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.orbits-concrete-group-actions
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 

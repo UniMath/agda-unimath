@@ -1,22 +1,26 @@
-#  Orientations of the complete undirected graph
+# Orientations of the complete undirected graph
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module univalent-combinatorics.orientations-complete-undirected-graph where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
-
-open import finite-group-theory.transpositions
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.2-element-subtypes
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.symmetric-difference
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -27,13 +31,13 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalence-extensionality
 open import foundation.equivalence-classes
+open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
@@ -50,21 +54,22 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.universe-levels
 open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.universe-levels
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import finite-group-theory.transpositions
+```
+</details>
 
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.symmetric-difference
-
+```agda
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
@@ -73,7 +78,6 @@ module _
   orientation-Complete-Undirected-Graph =
     ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
     Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x))
-
   2-Element-Decidable-Subtype-subtype-pointwise-difference :
     orientation-Complete-Undirected-Graph →
     orientation-Complete-Undirected-Graph →
@@ -90,7 +94,6 @@ module _
           ( is-finite-type-UU-Fin n X))
         ( d Y)
         ( d' Y))
-
   is-finite-subtype-pointwise-difference :
     (d d' : orientation-Complete-Undirected-Graph) →
     is-finite
@@ -103,14 +106,12 @@ module _
     is-finite-type-decidable-subtype
       ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d d')
       ( is-finite-2-Element-Decidable-Subtype n X)
-
   mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     orientation-Complete-Undirected-Graph →
     orientation-Complete-Undirected-Graph → Fin 2
   mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d' =
     mod-two-ℕ (number-of-elements-is-finite
       ( is-finite-subtype-pointwise-difference d d'))
-
   abstract
     equiv-symmetric-difference-subtype-pointwise-difference :
       ( d1 d2 d3 : orientation-Complete-Undirected-Graph) →
@@ -219,7 +220,7 @@ module _
               ( pr1 Y)
               ( is-finite-type-UU-Fin n X))
             ( d2 Y)
-            ( d3 Y)) 
+            ( d3 Y))
   is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     ( d d' : orientation-Complete-Undirected-Graph) (m : Fin 2) →
     Id
@@ -271,7 +272,6 @@ module _
           ( λ (pair Y np) → pair Y (λ p' → np (inv p')))
           ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
           ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
-
   eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     (d1 d2 d3 : orientation-Complete-Undirected-Graph) (m : Fin 2) →
     Id
@@ -379,7 +379,6 @@ module _
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
           ( is-finite-2-Element-Decidable-Subtype n X))
-
   even-difference-orientation-Complete-Undirected-Graph :
     Eq-Rel lzero orientation-Complete-Undirected-Graph
   pr1 even-difference-orientation-Complete-Undirected-Graph d d' =
@@ -394,10 +393,9 @@ module _
         ( pair 0 (unit-trunc-Prop (equiv-is-empty id (λ (pair _ np) → np refl))))
         ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference d d)))
   pr1 (pr2 (pr2 even-difference-orientation-Complete-Undirected-Graph)) {d} {d'} p =
-    is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d' (zero-Fin 1) p  
+    is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d' (zero-Fin 1) p
   pr2 (pr2 (pr2 even-difference-orientation-Complete-Undirected-Graph)) {d1} {d2} {d3} p1 p2 =
     eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d1 d2 d3 (zero-Fin 1) p1 p2
-
   abstract
     is-decidable-even-difference-orientation-Complete-Undirected-Graph :
       (Y Y' : orientation-Complete-Undirected-Graph) →
@@ -408,17 +406,13 @@ module _
         ( is-finite-Fin 2)
         ( zero-Fin 1)
         ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph Y Y')
-
   quotient-sign : UU (lsuc l)
   quotient-sign = equivalence-class even-difference-orientation-Complete-Undirected-Graph
-  
   quotient-sign-Set : Set (lsuc l)
   quotient-sign-Set = equivalence-class-Set even-difference-orientation-Complete-Undirected-Graph
-
 module _
   {l : Level} (n : ℕ)
   where
-
   map-orientation-complete-undirected-graph-equiv : (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') → orientation-Complete-Undirected-Graph n X →
     orientation-Complete-Undirected-Graph n X'
@@ -426,7 +420,6 @@ module _
     map-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
   pr2 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
     pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
-
   orientation-complete-undirected-graph-equiv : (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') →
     orientation-Complete-Undirected-Graph n X ≃ orientation-Complete-Undirected-Graph n X'
@@ -461,7 +454,6 @@ module _
                   ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( ap (λ h → map-equiv h (pr1 (d Y))) (right-inverse-law-equiv (inv-equiv e))))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
-
   abstract
     preserves-id-equiv-orientation-complete-undirected-graph-equiv :
       (X : UU-Fin l n) →
@@ -474,7 +466,6 @@ module _
               eq-pair-Σ
                 ( ap (λ Y' → pr1 (d Y')) (eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
                 ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
-
     preserves-comp-orientation-complete-undirected-graph-equiv :
       ( X Y Z : UU-Fin l n) (e : type-UU-Fin n X ≃ type-UU-Fin n Y) →
       ( f : type-UU-Fin n Y ≃ type-UU-Fin n Z) →
@@ -502,7 +493,6 @@ module _
                             orientation-complete-undirected-graph-equiv X Y e)
                           ( d)
                           ( S))))))))
-
     preserves-even-difference-orientation-complete-undirected-graph-equiv :
       (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
       ( d d' : orientation-Complete-Undirected-Graph n X) →
@@ -617,6 +607,7 @@ module _
             ( map-orientation-complete-undirected-graph-equiv X X' e d'))
           ( P))
 ```
+</details>
 
 ```agda
 module _
@@ -643,7 +634,7 @@ module _
     pair y (tr (λ Z → type-decidable-Prop (pr1 Z y)) P (inr refl))
   cases-orientation-aut-count e Y (pair x (pair y (pair np P))) (inr nq) (inr nr) =
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
- 
+
   orientation-aut-count : X ≃ X →
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
@@ -657,7 +648,7 @@ module _
       ( has-decidable-equality-count eX
         ( map-equiv e (pr1 (pr2 (two-elements-transposition eX Y))))
         ( pr1 (pr2 (two-elements-transposition eX Y))))
-    
+
   cases-orientation-two-elements-count : (i j : X)
     (Y : 2-Element-Decidable-Subtype l X) →
     ( two-elements : Σ X
@@ -679,7 +670,7 @@ module _
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
   cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inl r) (inr ns) =
     pair y (tr (λ Z → type-decidable-Prop (pr1 Z y)) P (inr refl))
-  cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inr nr) s = 
+  cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inr nr) s =
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
 
   orientation-two-elements-count : (i j : X) → ¬ (Id i j) →
@@ -694,7 +685,7 @@ module _
       ( has-decidable-equality-count eX
         ( pr1 (two-elements-transposition eX Y)) j)
       ( has-decidable-equality-count eX
-        ( pr1 (pr2 (two-elements-transposition eX Y))) i) 
+        ( pr1 (pr2 (two-elements-transposition eX Y))) i)
 
   first-element-count : X
   first-element-count =
@@ -714,7 +705,7 @@ module _
           ( two-distinct-elements-leq-2-Fin
             ( number-of-elements-count eX)
             ( ineq))))
-          
+
   abstract
     distinct-two-elements-count : ¬ (Id first-element-count second-element-count)
     distinct-two-elements-count p =
@@ -731,14 +722,14 @@ module _
       ( has-decidable-equality-count eX)
       ( distinct-two-elements-count)
 
-  canonical-orientation-count : 
+  canonical-orientation-count :
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
   canonical-orientation-count =
     orientation-two-elements-count first-element-count second-element-count distinct-two-elements-count
 
-  trans-canonical-orientation-count : 
+  trans-canonical-orientation-count :
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -795,7 +786,7 @@ module _
 
     inward-edge-left-two-elements-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y i)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -821,8 +812,8 @@ module _
                 ( np)))
             ( Y)))
         ( x)
-    cases-inward-edge-left-transposition-orientation-count 
-      i j np Y x nq nr (inl (pair r1 r2)) = 
+    cases-inward-edge-left-transposition-orientation-count
+      i j np Y x nq nr (inl (pair r1 r2)) =
       ( ap
         ( λ d →
           pr1
@@ -851,7 +842,7 @@ module _
                   ( np)))
               ( pr1 (two-elements-transposition eX Y)))
             ( pr1 (two-elements-transposition eX Y))}
-          
+
         { y =
           inl
             ( tr
@@ -882,7 +873,7 @@ module _
                 ( pr1 (two-elements-transposition eX Y)))
               ( pr1 (two-elements-transposition eX Y)))))) ∙
         ( r1)
-    cases-inward-edge-left-transposition-orientation-count 
+    cases-inward-edge-left-transposition-orientation-count
       i j np Y x nq nr (inr (pair r1 r2)) =
       ( ap
         ( λ w →
@@ -963,7 +954,7 @@ module _
                       ( has-decidable-equality-count eX)
                       ( np)))
                   ( pr1 (two-elements-transposition eX Y)))
-                ( pr1 (two-elements-transposition eX Y))))) 
+                ( pr1 (two-elements-transposition eX Y)))))
           ( eq-is-prop
             ( is-prop-is-decidable
               ( is-set-count eX
@@ -978,7 +969,7 @@ module _
 
     inward-edge-left-transposition-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y i)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -1003,7 +994,7 @@ module _
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
     cases-inward-edge-right-two-elements-orientation-count
-      i j np Y x nq nr (inl (pair r1 r2)) = 
+      i j np Y x nq nr (inl (pair r1 r2)) =
       ( ap
         ( λ d →
           pr1
@@ -1054,7 +1045,7 @@ module _
 
     inward-edge-right-two-elements-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y j)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -1236,7 +1227,7 @@ module _
 
     inward-edge-right-transposition-orientation-count :
       ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y x)) →
       ( type-decidable-Prop (pr1 Y j)) →
       ¬ (Id x i) → ¬ (Id x j) →
       Id
@@ -1952,7 +1943,7 @@ module _
               ( np))))
         ( j))
 
-  cases-eq-map-orientation-transposition-orientation-two-elements-count : 
+  cases-eq-map-orientation-transposition-orientation-two-elements-count :
     ( i j : X) (np : ¬ (Id i j)) →
     ( Y : 2-Element-Decidable-Subtype l X) →
     ( two-elements : Σ X
@@ -2451,7 +2442,7 @@ module _
                   ( has-decidable-equality-count eX (pr1 (pr2 k)) j)))
             ( inv R))))
 
-  eq-map-orientation-transposition-orientation-two-elements-count : 
+  eq-map-orientation-transposition-orientation-two-elements-count :
     ( i j : X) (np : ¬ (Id i j)) →
     Id
       ( map-orientation-complete-undirected-graph-equiv
@@ -2905,7 +2896,7 @@ module _
                   ( mod-two-ℕ)
                   ( eq-orientation-pointwise-difference-two-elements-count j i
                     ( λ p → np (inv p))))))))
-    
+
   not-even-difference-orientation-aut-transposition-count :
     (Y : 2-Element-Decidable-Subtype l X) →
     ¬ ( sim-Eq-Rel
@@ -3045,7 +3036,7 @@ module _
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
-        ( trans-canonical-orientation-count) 
+        ( trans-canonical-orientation-count)
     cases-retr-orientation T NH t q (inl (inr star)) r =
       ex-falso
         ( NH
@@ -3216,7 +3207,7 @@ module _
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
-  
+
   equiv-fin-2-quotient-sign-equiv-Fin : (h : Fin n ≃ type-UU-Fin n X) →
     ( Fin 2 ≃ quotient-sign n X)
   equiv-fin-2-quotient-sign-equiv-Fin h =

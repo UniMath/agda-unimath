@@ -1,11 +1,16 @@
-#  Coproducts of finite types
+# Coproducts of finite types
 
 ```agda
 module univalent-combinatorics.coproduct-types where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
@@ -19,13 +24,10 @@ open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -71,7 +73,7 @@ abstract
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   count-left-summand : count (X + Y) → count X
   count-left-summand e =
     count-equiv

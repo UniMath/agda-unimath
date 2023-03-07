@@ -2,26 +2,27 @@
 
 ```agda
 module synthetic-homotopy-theory.groups-of-loops-in-1-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.loop-spaces
 open import foundation.1-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.groups
 open import group-theory.semigroups
-
 open import structured-types.pointed-types
-
-open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ```agda
 module _
   {l : Level} (A : Pointed-Type l)
   where
-  
+
   loop-space-Set : is-set (type-Ω A) → Set l
   pr1 (loop-space-Set is-set-Ω) = type-Ω A
   pr2 (loop-space-Set is-set-Ω) = is-set-Ω

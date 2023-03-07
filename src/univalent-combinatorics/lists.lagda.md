@@ -1,12 +1,11 @@
-#  Lists
+# Lists
 
 ```agda
 module univalent-combinatorics.lists where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -25,9 +24,12 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 
@@ -56,7 +58,7 @@ fold-list b μ (cons a l) = μ a (fold-list b μ l)
 map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   list A → list B
-map-list f = fold-list nil (λ a → cons (f a)) 
+map-list f = fold-list nil (λ a → cons (f a))
 
 length-list : {l : Level} {A : UU l} → list A → ℕ
 length-list = fold-list 0 (λ a → succ-ℕ)
@@ -593,7 +595,7 @@ module _
   preserves-concat-map-list nil k = refl
   preserves-concat-map-list (cons x l) k =
     ap (cons (f x)) (preserves-concat-map-list l k)
-  
+
 ```
 
 ### Multiplication of a list of elements in a monoid
@@ -602,7 +604,7 @@ module _
 module _
   {l : Level} (M : Monoid l)
   where
-  
+
   mul-list-Monoid : list (type-Monoid M) → type-Monoid M
   mul-list-Monoid nil = unit-Monoid M
   mul-list-Monoid (cons x l) = mul-Monoid M x (mul-list-Monoid l)

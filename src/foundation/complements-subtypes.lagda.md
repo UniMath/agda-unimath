@@ -1,19 +1,23 @@
-#  Complements of subtypes
+# Complements of subtypes
 
 ```agda
 module foundation.complements-subtypes where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.functions
 open import foundation.full-subtypes
+open import foundation.functions
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -45,7 +49,7 @@ complement-decidable-subtype P x = neg-decidable-Prop (P x)
 module _
   {l1 l2 : Level} {A : UU l1}
   where
-  
+
   is-full-union-subtype-complement-subtype :
     (P : subtype l2 A) → is-decidable-subtype P →
     is-full-subtype (union-subtype P (complement-subtype P) )

@@ -2,11 +2,14 @@
 
 ```agda
 module foundation.shifting-sequences where
-
-open import elementary-number-theory.natural-numbers
-
-open import foundation.universe-levels
 ```
+
+<details><summary>Imports</summary>
+```agda
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
+```
+</details>
 
 ## Idea
 

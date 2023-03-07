@@ -1,15 +1,17 @@
-#  The precategory of groups
+# The precategory of groups
 
 ```agda
 module group-theory.precategory-of-groups where
+```
 
-open import category-theory.large-precategories
-
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import foundation.universe-levels
+open import category-theory.large-precategories
 ```
+</details>
 
 ## Definition
 

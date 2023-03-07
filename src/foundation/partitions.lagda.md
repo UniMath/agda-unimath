@@ -1,8 +1,11 @@
-#  Partitions
+# Partitions
 
 ```agda
 module foundation.partitions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -21,8 +24,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
-open import foundation.logical-equivalences
 open import foundation.locally-small-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -35,6 +38,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -175,7 +179,7 @@ We introduce the type of blocks of a partition. However, we will soon be able to
     is-locally-small-type-subtype
       ( subtype-partition)
       ( is-locally-small-inhabited-subtype is-small')
-  
+
   is-small-block-partition-Large-Type :
     is-small (l1 ⊔ l2) block-partition-Large-Type
   is-small-block-partition-Large-Type =
@@ -525,7 +529,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} (P : partition l2 l3 A)
   where
-  
+
   compute-total-block-partition :
     Σ (block-partition P) (type-block-partition P) ≃ A
   compute-total-block-partition =
@@ -537,7 +541,6 @@ module _
     Σ (block-partition P) (type-block-partition P) → A
   map-compute-total-block-partition = map-equiv compute-total-block-partition
 ```
-
 
 ### The type of partitions of `A` is equivalent to the type of set-indexed Σ-decompositions of `A`
 

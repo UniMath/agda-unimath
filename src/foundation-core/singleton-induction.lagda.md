@@ -1,8 +1,11 @@
-#  Singleton induction
+# Singleton induction
 
 ```agda
 module foundation-core.singleton-induction where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
@@ -11,6 +14,7 @@ open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -46,7 +50,7 @@ abstract
     B a → (x : A) → B x
   ind-singleton-is-contr a is-contr-A B b x =
     tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
-  
+
   comp-singleton-is-contr :
     {i j : Level} {A : UU i} (a : A) (is-contr-A : is-contr A) (B : A → UU j) →
     ((ev-pt a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id

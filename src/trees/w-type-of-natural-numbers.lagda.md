@@ -1,10 +1,12 @@
-#  The W-type of natural numbers
+# The W-type of natural numbers
 
 ```agda
 module trees.w-type-of-natural-numbers where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import trees.w-types
 open import foundation.booleans
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,9 +18,9 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
-
-open import trees.w-types
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Definition
 

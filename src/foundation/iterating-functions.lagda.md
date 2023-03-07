@@ -1,14 +1,11 @@
-#  Iterating functions
+# Iterating functions
 
 ```agda
 module foundation.iterating-functions where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.automorphisms
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -21,14 +18,17 @@ open import foundation.involutions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import group-theory.monoid-actions
-
-open import univalent-combinatorics.standard-finite-types
-
 open import group-theory.monoids
 open import group-theory.semigroups
+open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -40,7 +40,7 @@ Any map `f : X → X` can be iterated by repeatedly applying `f`
 module _
   {l : Level} {X : UU l}
   where
-  
+
   iterate : ℕ → (X → X) → (X → X)
   iterate zero-ℕ f x = x
   iterate (succ-ℕ k) f x = f (iterate k f x)
@@ -124,11 +124,11 @@ module _
     ( iterate-mul-ℕ (exp-ℕ l k) l f x) ∙
     ( ( iterate-exp-ℕ k l (iterate l f) x) ∙
       ( inv (htpy-eq (iterate-succ-ℕ k (iterate l) f) x)))
-      
+
 module _
   {l : Level} (X : Set l)
   where
-  
+
   iterative-Monoid-Action : Monoid-Action l ℕ*-Monoid
   pr1 iterative-Monoid-Action = endo-Set X
   pr1 (pr1 (pr2 iterative-Monoid-Action)) k f = iterate k f

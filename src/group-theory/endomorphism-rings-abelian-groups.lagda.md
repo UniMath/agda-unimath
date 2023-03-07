@@ -1,17 +1,19 @@
-#  The endomorphism rings of abelian groups
+# The endomorphism rings of abelian groups
 
 ```agda
 module group-theory.endomorphism-rings-abelian-groups where
+```
 
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
-
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -25,7 +27,7 @@ For any abelian group $A$, the set $\mathrm{hom}(A,A)$ of morphisms of abelian g
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   endomorphism-ring-Ab : Ring l
   pr1 (pr1 (pr1 (pr1 endomorphism-ring-Ab))) = hom-Ab A A
   pr1 (pr2 (pr1 (pr1 (pr1 endomorphism-ring-Ab)))) = add-hom-Ab A A

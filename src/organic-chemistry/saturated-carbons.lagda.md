@@ -1,18 +1,20 @@
-#  Saturated carbons
+# Saturated carbons
 
 ```agda
 module organic-chemistry.saturated-carbons where
+```
 
-open import foundation.propositional-truncations
+<details><summary>Imports</summary>
+```agda
+open import organic-chemistry.hydrocarbons
 open import foundation.dependent-pair-types
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import foundation.propositions
-
 open import univalent-combinatorics.finite-types
-
-open import organic-chemistry.hydrocarbons
 ```
+</details>
 
 ## Idea
 

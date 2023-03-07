@@ -1,8 +1,11 @@
-#  Inhabited types
+# Inhabited types
 
 ```agda
 module foundation.inhabited-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -15,6 +18,7 @@ open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -58,7 +62,7 @@ Fam-Inhabited-Types l2 X = X → Inhabited-Type l2
 module _
   {l1 l2 : Level} {X : UU l1} (Y : Fam-Inhabited-Types l2 X)
   where
-  
+
   type-Fam-Inhabited-Types : X → UU l2
   type-Fam-Inhabited-Types x = type-Inhabited-Type (Y x)
 

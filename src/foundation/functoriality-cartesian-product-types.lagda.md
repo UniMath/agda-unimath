@@ -1,8 +1,11 @@
-#  Functoriality of cartesian product types
+# Functoriality of cartesian product types
 
 ```agda
 module foundation.functoriality-cartesian-product-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -15,6 +18,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -121,7 +125,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → C) (g : B → D)
   where
-  
+
   map-compute-fib-map-prod :
     (t : C × D) → fib (map-prod f g) t → (fib f (pr1 t)) × (fib g (pr2 t))
   pr1 (pr1 (map-compute-fib-map-prod ._ ((a , b) , refl))) = a
@@ -134,7 +138,7 @@ module _
   pr1 (pr1 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl))) = x
   pr2 (pr1 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl))) = y
   pr2 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl)) = refl
-  
+
   issec-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-compute-fib-map-prod t) ∘ (map-inv-compute-fib-map-prod t)) ~ id

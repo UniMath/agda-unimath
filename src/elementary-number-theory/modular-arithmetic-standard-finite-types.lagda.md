@@ -1,8 +1,11 @@
-#  Modular arithmetic on the standard finite types
+# Modular arithmetic on the standard finite types
 
 ```agda
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
@@ -11,7 +14,6 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -23,10 +25,10 @@ open import foundation.injective-maps
 open import foundation.split-surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Definitions
 
@@ -858,7 +860,7 @@ neg-succ-Fin (succ-ℕ k) x =
         ( x)
         ( one-Fin k)) ∙
       ( ( ap-add-Fin
-          ( succ-ℕ k) 
+          ( succ-ℕ k)
           ( inv (is-mul-neg-one-neg-Fin k x))
           ( ( inv (is-mul-neg-one-neg-Fin k (one-Fin k))) ∙
             ( is-neg-one-neg-one-Fin k))) ∙
@@ -879,7 +881,7 @@ neg-pred-Fin (succ-ℕ k) x =
         ( x)
         ( neg-one-Fin k)) ∙
       ( ( ap-add-Fin
-          ( succ-ℕ k) 
+          ( succ-ℕ k)
           ( inv (is-mul-neg-one-neg-Fin k x))
           ( ( inv (is-mul-neg-one-neg-Fin k (neg-one-Fin k))) ∙
             ( is-one-neg-neg-one-Fin k))) ∙

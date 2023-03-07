@@ -1,8 +1,15 @@
-#  Decidable subgroups of groups
+# Decidable subgroups of groups
 
 ```agda
 module group-theory.decidable-subgroups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.semigroups
+open import group-theory.subgroups
 open import foundation.binary-relations
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
@@ -19,12 +26,8 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.semigroups
-open import group-theory.subgroups
 ```
+</details>
 
 ## Idea
 
@@ -57,11 +60,11 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (P : decidable-subset-Group l2 G)
   where
-  
+
   contains-unit-decidable-subset-group-Prop : Prop l2
   contains-unit-decidable-subset-group-Prop =
     contains-unit-subset-group-Prop G (subset-decidable-subset-Group G P)
-  
+
   contains-unit-decidable-subset-Group : UU l2
   contains-unit-decidable-subset-Group =
     contains-unit-subset-Group G (subset-decidable-subset-Group G P)
@@ -205,7 +208,7 @@ is-emb-decidable-subset-Decidable-Subgroup G =
 module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
-  
+
   type-group-Decidable-Subgroup :  UU (l1 ⊔ l2)
   type-group-Decidable-Subgroup =
     type-group-Subgroup G (subgroup-Decidable-Subgroup G H)
@@ -290,7 +293,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
-  
+
   preserves-mul-inclusion-group-Decidable-Subgroup :
     preserves-mul-Group
       ( group-Decidable-Subgroup G H)
@@ -358,7 +361,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
-  
+
   right-sim-Decidable-Subgroup : (x y : type-Group G) → UU l2
   right-sim-Decidable-Subgroup =
     right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
@@ -399,7 +402,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
-  
+
   left-sim-Decidable-Subgroup : (x y : type-Group G) → UU l2
   left-sim-Decidable-Subgroup =
     left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)

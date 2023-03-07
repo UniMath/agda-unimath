@@ -2,7 +2,10 @@
 
 ```agda
 module orthogonal-factorization-systems.pullback-hom where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +18,7 @@ open import foundation.morphisms-cospans
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -22,13 +26,13 @@ Given a pair of maps `f : A → X` and `g : B → Y`, there is a
 commuting square
 
 ```md
-          - ∘ f  
+          - ∘ f
     B → X ----> B → A
       |            |
 g ∘ - |            | g ∘ -
       V            V
     Y → X ----> Y → A.
-          - ∘ f  
+          - ∘ f
 ```
 
 The _pullback-hom_ of `f` and `g` is the comparison map from `B → X` to the pullback of the cospan:
@@ -55,7 +59,7 @@ module _
 
   type-pullback-hom : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   type-pullback-hom = canonical-pullback (precomp f Y) (postcomp A g)
-  
+
   cone-pullback-hom : cone (precomp f Y) (postcomp A g) (type-pullback-hom)
   cone-pullback-hom = cone-canonical-pullback (precomp f Y) (postcomp A g)
 

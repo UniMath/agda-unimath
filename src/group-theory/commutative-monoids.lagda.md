@@ -2,7 +2,12 @@
 
 ```agda
 module group-theory.commutative-monoids where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.monoids
+open import group-theory.semigroups
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
@@ -15,10 +20,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-
-open import group-theory.monoids
-open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 
@@ -101,7 +104,7 @@ module _
     ( mul-Commutative-Monoid
       ( mul-Commutative-Monoid x x')
       ( mul-Commutative-Monoid y y'))
-  interchange-mul-mul-Commutative-Monoid = 
+  interchange-mul-mul-Commutative-Monoid =
     interchange-law-commutative-and-associative
       mul-Commutative-Monoid
       commutative-mul-Commutative-Monoid
@@ -143,7 +146,7 @@ module _
 
   unit-Commutative-Monoid : type-Commutative-Monoid M
   unit-Commutative-Monoid = unit-Monoid (monoid-Commutative-Monoid M)
-  
+
   left-unit-law-mul-Commutative-Monoid :
     (x : type-Commutative-Monoid M) →
     mul-Commutative-Monoid M unit-Commutative-Monoid x ＝ x

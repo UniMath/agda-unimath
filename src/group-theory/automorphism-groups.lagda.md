@@ -1,8 +1,15 @@
-#  Automorphism groups
+# Automorphism groups
 
 ```agda
 module group-theory.automorphism-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-groups
+open import group-theory.equivalences-higher-groups
+open import group-theory.higher-groups
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components
@@ -18,14 +25,9 @@ open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
-
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-groups
-open import group-theory.equivalences-higher-groups
-open import group-theory.higher-groups
-
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -57,7 +59,7 @@ module _
     is-0-connected classifying-type-Automorphism-∞-Group
   is-0-connected-classifying-type-Automorphism-∞-Group =
     is-0-connected-connected-component A a
-  
+
   Automorphism-∞-Group : ∞-Group l
   pr1 Automorphism-∞-Group = classifying-pointed-type-Automorphism-∞-Group
   pr2 Automorphism-∞-Group =
@@ -80,7 +82,7 @@ module _
 
   Automorphism-Group : Concrete-Group l
   pr1 Automorphism-Group = Automorphism-∞-Group (type-1-Type A) a
-  pr2 Automorphism-Group = 
+  pr2 Automorphism-Group =
     is-trunc-connected-component
       ( type-1-Type A)
       ( a)
@@ -213,7 +215,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   equiv-eq-Automorphism-∞-Group :
     {x y : A} (p : x ＝ y) →
     equiv-∞-Group (Automorphism-∞-Group A x) (Automorphism-∞-Group A y)

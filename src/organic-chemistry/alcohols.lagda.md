@@ -1,8 +1,13 @@
-#  Alcohols
+# Alcohols
 
 ```agda
 module organic-chemistry.alcohols where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
 open import foundation.cartesian-product-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
@@ -10,10 +15,8 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import organic-chemistry.saturated-carbons
-open import organic-chemistry.hydrocarbons
 ```
+</details>
 
 ## Idea
 

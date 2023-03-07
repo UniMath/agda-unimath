@@ -1,8 +1,11 @@
-#  Decidable propositions
+# Decidable propositions
 
 ```agda
 module foundation-core.decidable-propositions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -12,7 +15,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
-
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.double-negation
@@ -20,6 +22,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 
@@ -123,7 +126,7 @@ abstract
     {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
   is-prop-is-decidable-trunc-Prop A =
     is-prop-is-decidable is-prop-type-trunc-Prop
-    
+
 is-decidable-trunc-Prop : {l : Level} → UU l → Prop l
 pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
 pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A

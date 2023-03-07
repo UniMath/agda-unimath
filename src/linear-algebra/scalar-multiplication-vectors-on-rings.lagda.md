@@ -2,23 +2,23 @@
 
 ```agda
 module linear-algebra.scalar-multiplication-vectors-on-rings where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-rings
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
+open import elementary-number-theory.natural-numbers
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
-
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
-
 open import ring-theory.homomorphisms-rings
 open import ring-theory.modules-rings
 open import ring-theory.rings
 ```
+</details>
 
 ## Definition
 
@@ -35,7 +35,7 @@ module _
 
   associative-scalar-mul-vec-Ring :
     {n : ℕ} (r s : type-Ring R) (v : vec-Ring R n) →
-    scalar-mul-vec-Ring (mul-Ring R r s) v ＝ 
+    scalar-mul-vec-Ring (mul-Ring R r s) v ＝
     scalar-mul-vec-Ring r (scalar-mul-vec-Ring s v)
   associative-scalar-mul-vec-Ring r s empty-vec = refl
   associative-scalar-mul-vec-Ring r s (x ∷ v) =

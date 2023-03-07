@@ -1,10 +1,12 @@
-#  Homotopies
+# Homotopies
 
 ```agda
 module foundation.homotopies where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.homotopies public
-
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -14,10 +16,10 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-systems
 open import foundation-core.sections
 open import foundation-core.universe-levels
-
 open import foundation.function-extensionality
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 
@@ -264,7 +266,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {B : UU l2} (f g : A → B)
   (H : f ~ g)
   where
-  
+
   nat-htpy-apd-htpy :
     (p : a0 ＝ a1) →
     (map-inv-equiv (compute-path-over-eq-value'

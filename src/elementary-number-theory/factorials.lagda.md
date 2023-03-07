@@ -1,8 +1,11 @@
-#  Factorials of natural numbers
+# Factorials of natural numbers
 
 ```agda
 module elementary-number-theory.factorials where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -12,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 ```
+</details>
 
 # Factorials
 

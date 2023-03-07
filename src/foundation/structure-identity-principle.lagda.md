@@ -1,8 +1,11 @@
-#  The structure identity principle
+# The structure identity principle
 
 ```agda
 module foundation.structure-identity-principle where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
@@ -14,6 +17,7 @@ open import foundation-core.identity-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -26,7 +30,7 @@ module _
   { l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {C : A → UU l3}
   ( D : (x : A) → B x → C x → UU l4)
   where
-    
+
   abstract
     is-contr-total-Eq-structure :
       (is-contr-AC : is-contr (Σ A C)) (t : Σ A C) →
@@ -72,7 +76,7 @@ module _
     (z : Σ A B) → pair a b ＝ z → Σ (Eq-A (pr1 z)) (Eq-B (pr2 z))
   pr1 (map-extensionality-Σ f g .(pair a b) refl) = refl-A
   pr2 (map-extensionality-Σ f g .(pair a b) refl) = refl-B
-  
+
   extensionality-Σ :
     (f : (x : A) → (a ＝ x) ≃ Eq-A x)
     (g : (y : B a) → (b ＝ y) ≃ Eq-B y refl-A) →

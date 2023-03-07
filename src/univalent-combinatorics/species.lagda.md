@@ -1,14 +1,17 @@
-#  Species
+# Species
 
 ```agda
 module univalent-combinatorics.species where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.finite-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import univalent-combinatorics.finite-types
 ```
+</details>
 
 ### Idea
 

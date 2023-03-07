@@ -1,17 +1,23 @@
-#  Functoriality of set quotients
+# Functoriality of set quotients
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module foundation.functoriality-set-quotients where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.equivalence-relations
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -28,9 +34,8 @@ open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
+</details>
 
 ## Idea
 
@@ -372,7 +377,7 @@ module _
   (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
   where
 
-  id-map-is-set-quotient : 
+  id-map-is-set-quotient :
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     map-is-set-quotient R QR f R QR f Uf Uf (id-hom-Eq-Rel R) ~ id
   id-map-is-set-quotient Uf x =
@@ -385,7 +390,7 @@ module _
       ( eq-is-contr
         ( unique-map-is-set-quotient R QR f R QR f Uf Uf (id-hom-Eq-Rel R)))
 
-  id-equiv-is-set-quotient : 
+  id-equiv-is-set-quotient :
     (Uf : {l : Level} → is-set-quotient l R QR f) →
     htpy-equiv
       ( equiv-is-set-quotient R QR f R QR f Uf Uf (id-equiv-Eq-Rel R))

@@ -2,14 +2,16 @@
 
 ```agda
 module graph-theory.voltage-graphs where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.directed-graphs
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
-open import graph-theory.directed-graphs
-
 open import group-theory.groups
 ```
+</details>
 
 ## Idea
 

@@ -1,12 +1,16 @@
-#  Isomorphisms of semigroups
+# Isomorphisms of semigroups
 
 ```agda
 module group-theory.isomorphisms-semigroups where
+```
 
-open import category-theory.isomorphisms-large-precategories
-
+<details><summary>Imports</summary>
+```agda
+open import group-theory.equivalences-semigroups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.precategory-of-semigroups
+open import group-theory.semigroups
 open import foundation-core.function-extensionality
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,12 +20,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import group-theory.equivalences-semigroups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.precategory-of-semigroups
-open import group-theory.semigroups
+open import category-theory.isomorphisms-large-precategories
 ```
+</details>
 
 ## Idea
 
@@ -33,7 +34,7 @@ Isomorphisms of semigroups are homomorphisms that have a two-sided inverse.
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   where
-  
+
   is-iso-hom-Semigroup : (f : type-hom-Semigroup G H) → UU (l1 ⊔ l2)
   is-iso-hom-Semigroup f =
     is-iso-Large-Precat Semigroup-Large-Precat {X = G} {Y = H} f
@@ -45,7 +46,7 @@ module _
 
   type-iso-Semigroup : UU (l1 ⊔ l2)
   type-iso-Semigroup = iso-Large-Precat Semigroup-Large-Precat G H
-  
+
   hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
   hom-iso-Semigroup = hom-iso-Large-Precat Semigroup-Large-Precat G H
 
@@ -141,7 +142,7 @@ module _
     pr1 (pr2 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
       eq-htpy-hom-Semigroup H H (issec-map-inv-is-equiv is-equiv-f)
     pr2 (pr2 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
-      eq-htpy-hom-Semigroup G G (isretr-map-inv-is-equiv is-equiv-f)         
+      eq-htpy-hom-Semigroup G G (isretr-map-inv-is-equiv is-equiv-f)
 
   abstract
     is-equiv-is-iso-hom-Semigroup :

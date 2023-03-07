@@ -1,15 +1,18 @@
-#  Nil ideals
+# Nil ideals
 
 ```agda
 module ring-theory.nil-ideals-rings where
+```
 
-open import foundation.propositions
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import ring-theory.ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.rings
+open import foundation.propositions
+open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +26,7 @@ A nil ideal in a ring is an ideal in which every element is nilpotent
 module _
   {l1 l2 : Level} (R : Ring l1) (I : left-ideal-Ring l2 R)
   where
-  
+
   is-nil-left-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-nil-left-ideal-ring-Prop =
     Π-Prop
@@ -45,7 +48,7 @@ module _
 module _
   {l1 l2 : Level} (R : Ring l1) (I : right-ideal-Ring l2 R)
   where
-  
+
   is-nil-right-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-nil-right-ideal-ring-Prop =
     Π-Prop
@@ -67,7 +70,7 @@ module _
 module _
   {l1 l2 : Level} (R : Ring l1) (I : two-sided-ideal-Ring l2 R)
   where
-  
+
   is-nil-two-sided-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-nil-two-sided-ideal-ring-Prop =
     Π-Prop

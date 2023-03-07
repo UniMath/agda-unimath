@@ -1,19 +1,20 @@
-#  Minimum on the standard finite types
+# Minimum on the standard finite types
 
 ```agda
 module elementary-number-theory.minimum-standard-finite-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.unit-type
-
 open import order-theory.greatest-lower-bounds-posets
-
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -76,5 +77,5 @@ pr1 (pr1 (is-greatest-lower-bound-min-Fin k l m)) =
   leq-left-leq-min-Fin k (min-Fin k l m) l m (refl-leq-Fin k (min-Fin k l m))
 pr2 (pr1 (is-greatest-lower-bound-min-Fin k l m)) =
   leq-right-leq-min-Fin k (min-Fin k l m) l m (refl-leq-Fin k (min-Fin k l m))
-pr2 (is-greatest-lower-bound-min-Fin k l m) x (pair H K) = leq-min-Fin k x l m H K 
+pr2 (is-greatest-lower-bound-min-Fin k l m) x (pair H K) = leq-min-Fin k x l m H K
 ```

@@ -1,11 +1,15 @@
-#  Preimages of subtypes
+# Preimages of subtypes
 
 ```agda
 module foundation.preimages-of-subtypes where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -1,8 +1,11 @@
-#  Type arithmetic with the unit type
+# Type arithmetic with the unit type
 
 ```agda
 module foundation.type-arithmetic-unit-type where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -11,10 +14,10 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-
 open import foundation.function-extensionality
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 
@@ -54,7 +57,7 @@ module _
   left-unit-law-Σ : Σ unit A ≃ A star
   pr1 left-unit-law-Σ = map-left-unit-law-Σ
   pr2 left-unit-law-Σ = is-equiv-map-left-unit-law-Σ
-  
+
   is-equiv-map-inv-left-unit-law-Σ : is-equiv map-inv-left-unit-law-Σ
   is-equiv-map-inv-left-unit-law-Σ =
     is-equiv-has-inverse

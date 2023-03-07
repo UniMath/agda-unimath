@@ -1,16 +1,22 @@
-#  Dependent pair types
+# Dependent pair types
 
 ```agda
 {-# OPTIONS --safe #-}
+```
 
+```agda
 module foundation-core.dependent-pair-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
-When `B` is a family of types over `A`, then we can form the type of pairs `pair a b` consisting of an element `a : A` and an element `b : B a`. Such pairs are called dependent pairs, since the type of the second component depends on the first component. 
+When `B` is a family of types over `A`, then we can form the type of pairs `pair a b` consisting of an element `a : A` and an element `b : B a`. Such pairs are called dependent pairs, since the type of the second component depends on the first component.
 
 ## Definition
 

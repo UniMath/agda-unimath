@@ -1,11 +1,11 @@
-#  Semirings
+# Semirings
 
 ```agda
 module ring-theory.semirings where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -19,15 +19,16 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
-
 open import univalent-combinatorics.lists
 ```
+</details>
 
 ## Idea
 
@@ -187,7 +188,7 @@ module _
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   has-associative-mul-Semiring : has-associative-mul-Set (set-Semiring R)
   has-associative-mul-Semiring = pr1 (pr1 (pr2 R))
 
@@ -206,7 +207,7 @@ module _
     (x y z : type-Semiring R) →
     Id (mul-Semiring (mul-Semiring x y) z) (mul-Semiring x (mul-Semiring y z))
   associative-mul-Semiring = pr2 has-associative-mul-Semiring
-  
+
   multiplicative-semigroup-Semiring : Semigroup l
   pr1 multiplicative-semigroup-Semiring = set-Semiring R
   pr2 multiplicative-semigroup-Semiring = has-associative-mul-Semiring

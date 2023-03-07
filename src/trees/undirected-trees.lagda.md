@@ -1,11 +1,11 @@
-#  Undirected rees
+# Undirected rees
 
 ```agda
 module trees.undirected-trees where
+```
 
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -18,12 +18,14 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
 ```
+</details>
 
 ## Idea
 
@@ -61,7 +63,7 @@ module _
 
   edge-Undirected-Tree : unordered-pair-nodes-Undirected-Tree → UU l2
   edge-Undirected-Tree = edge-Undirected-Graph undirected-graph-Undirected-Tree
-    
+
   walk-Undirected-Tree :
     node-Undirected-Tree → node-Undirected-Tree → UU (lsuc lzero ⊔ l1 ⊔ l2)
   walk-Undirected-Tree = walk-Undirected-Graph undirected-graph-Undirected-Tree
@@ -252,7 +254,7 @@ module _
 module _
   {l1 l2 : Level} (T : Undirected-Tree l1 l2)
   where
-  
+
   is-refl-is-circuit-walk-Undirected-Tree :
     {x y : node-Undirected-Tree T} (t : trail-Undirected-Tree T x y)
     (p : x ＝ y) →
@@ -355,7 +357,6 @@ has-decidable-equality-node-Undirected-Tree T x y =
     ( is-decidable-is-constant-trail-Undirected-Tree T
       ( standard-trail-Undirected-Tree T x y))
 ```
-
 
 ### Any trail in a tree is a path
 

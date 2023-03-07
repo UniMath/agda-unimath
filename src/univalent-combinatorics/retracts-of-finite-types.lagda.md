@@ -1,12 +1,19 @@
-#  Retracts of finite types
+# Retracts of finite types
 
 ```agda
 module univalent-combinatorics.retracts-of-finite-types where
+```
 
-open import elementary-number-theory.natural-numbers
-
-open import foundation.decidable-maps
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-embeddings
+open import foundation.decidable-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.fibers-of-maps
@@ -15,14 +22,9 @@ open import foundation.injective-maps
 open import foundation.propositional-maps
 open import foundation.retractions
 open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Properties
 

@@ -1,8 +1,11 @@
-#  Tight apartness relations
+# Tight apartness relations
 
 ```agda
 module foundation.tight-apartness-relations where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
@@ -14,10 +17,11 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
-A relation `R` is said to be tight if for every `x y : A` we have `¬ (R x y) → (x ＝ y)`. 
+A relation `R` is said to be tight if for every `x y : A` we have `¬ (R x y) → (x ＝ y)`.
 
 ## Definition
 

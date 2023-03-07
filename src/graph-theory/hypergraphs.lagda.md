@@ -1,14 +1,17 @@
-#  Hypergraphs
+# Hypergraphs
 
 ```agda
 module graph-theory.hypergraphs where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-tuples
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

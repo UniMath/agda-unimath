@@ -1,8 +1,11 @@
-#  The abstract quaternion group of order 8
+# The abstract quaternion group of order 8
 
 ```agda
 module finite-group-theory.abstract-quaternion-group where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -17,14 +20,13 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import group-theory.groups
 open import group-theory.semigroups
-
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

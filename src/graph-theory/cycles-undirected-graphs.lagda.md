@@ -1,17 +1,19 @@
-#  Cycles in undirected graphs
+# Cycles in undirected graphs
 
 ```agda
 module graph-theory.cycles-undirected-graphs where
+```
 
-open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import graph-theory.embeddings-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.undirected-graphs
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

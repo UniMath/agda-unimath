@@ -1,18 +1,20 @@
-#  Symmetric H-spaces
+# Symmetric H-spaces
 
 ```agda
 module structured-types.symmetric-h-spaces where
+```
 
-open import foundation.dependent-pair-types
-open import foundation.symmetric-operations
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import structured-types.involutive-type-of-h-space-structures
 open import structured-types.pointed-types
 open import structured-types.symmetric-elements-involutive-types
-
+open import foundation.dependent-pair-types
+open import foundation.symmetric-operations
+open import foundation.universe-levels
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 

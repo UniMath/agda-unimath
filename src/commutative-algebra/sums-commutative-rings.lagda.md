@@ -2,25 +2,24 @@
 
 ```agda
 module commutative-algebra.sums-commutative-rings where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import commutative-algebra.commutative-rings
-
-open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.natural-numbers
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-commutative-rings
-
 open import ring-theory.sums-rings
-
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -43,7 +42,7 @@ sum-Commutative-Ring R = sum-Ring (ring-Commutative-Ring R)
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   sum-one-element-Commutative-Ring :
     (f : functional-vec-Commutative-Ring R 1) →
     sum-Commutative-Ring R 1 f ＝ head-functional-vec 0 f

@@ -1,8 +1,11 @@
-#  Decidable subtypes
+# Decidable subtypes
 
 ```agda
 module foundation.decidable-subtypes where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -23,6 +26,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -56,7 +60,7 @@ decidable-subtype l X = X → decidable-Prop l
 module _
   {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
   where
-  
+
   subtype-decidable-subtype : subtype l2 A
   subtype-decidable-subtype a = prop-decidable-Prop (P a)
 
@@ -80,7 +84,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
   where
-  
+
   type-decidable-subtype : UU (l1 ⊔ l2)
   type-decidable-subtype = type-subtype (subtype-decidable-subtype P)
 
@@ -168,7 +172,7 @@ module _
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} (P : decidable-subtype l2 A)
   where
-  
+
   abstract
     is-trunc-type-decidable-subtype :
       is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (type-decidable-subtype P)
@@ -178,7 +182,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
   where
-  
+
   abstract
     is-prop-type-decidable-subtype :
       is-prop A → is-prop (type-decidable-subtype P)
@@ -237,7 +241,7 @@ module _
     extensionality-Π P
       ( λ x Q → prop-decidable-Prop (P x) ⇔ prop-decidable-Prop Q)
       ( λ x Q → extensionality-decidable-Prop (P x) Q)
-  
+
   has-same-elements-eq-decidable-subtype :
     (Q : decidable-subtype l2 A) →
     (P ＝ Q) → has-same-elements-decidable-subtype Q

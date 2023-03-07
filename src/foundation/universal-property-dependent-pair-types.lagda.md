@@ -1,8 +1,11 @@
-#  The universal property of dependent pair types
+# The universal property of dependent pair types
 
 ```agda
 module foundation.universal-property-dependent-pair-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -10,6 +13,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

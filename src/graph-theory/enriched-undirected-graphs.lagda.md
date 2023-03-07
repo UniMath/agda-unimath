@@ -1,8 +1,13 @@
-#  Enriched undirected graphs
+# Enriched undirected graphs
 
 ```agda
 module graph-theory.enriched-undirected-graphs where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -10,13 +15,10 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
-
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```
+</details>
 
 ## Idea
 
@@ -26,7 +28,7 @@ The map `sh : V → A` assigns to each vertex a shape, and with it an ∞-group 
 
 ## Definition
 
-```agda 
+```agda
 Enriched-Undirected-Graph :
   {l1 l2 : Level} (l3 l4 : Level) (A : UU l1) (B : A → UU l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
@@ -174,5 +176,5 @@ module _
                 ( ∞-group-vertex-Enriched-Undirected-Graph v)
                 ( action-∞-group-vertex-Enriched-Undirected-Graph v) h
                 ( map-inv-equiv-neighbor-Enriched-Undirected-Graph v x))))))
-    
+
 ```

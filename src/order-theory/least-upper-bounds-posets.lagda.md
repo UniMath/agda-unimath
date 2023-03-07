@@ -2,15 +2,18 @@
 
 ```agda
 module order-theory.least-upper-bounds-posets where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import order-theory.posets
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import order-theory.posets
 ```
+</details>
 
 ## Idea
 
@@ -146,7 +149,7 @@ module _
     {l : Level} {I : UU l} (f : I → element-Poset P) → UU (l1 ⊔ l2 ⊔ l)
   has-least-upper-bound-family-Poset f =
     Σ (element-Poset P) (is-least-upper-bound-family-Poset f)
-    
+
   all-elements-equal-has-least-upper-bound-family-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) →
     all-elements-equal (has-least-upper-bound-family-Poset f)

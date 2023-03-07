@@ -1,10 +1,15 @@
-#  Group actions
+# Group actions
 
 ```agda
 module group-theory.group-actions where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 open import foundation-core.function-extensionality
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -12,11 +17,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
 ```
+</details>
 
 ## Idea
 
@@ -45,7 +47,7 @@ module _
 
   is-set-type-Abstract-Group-Action : is-set type-Abstract-Group-Action
   is-set-type-Abstract-Group-Action = is-set-type-Set set-Abstract-Group-Action
-  
+
   equiv-mul-Abstract-Group-Action :
     type-Group G → type-Abstract-Group-Action ≃ type-Abstract-Group-Action
   equiv-mul-Abstract-Group-Action =

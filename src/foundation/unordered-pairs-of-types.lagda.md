@@ -1,8 +1,11 @@
-#  Unordered pairs of types
+# Unordered pairs of types
 
 ```agda
 module foundation.unordered-pairs-of-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -12,9 +15,9 @@ open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 
@@ -70,7 +73,7 @@ module _
 module _
   {l : Level} (A : unordered-pair-types l)
   where
-  
+
   id-equiv-unordered-pair-types : equiv-unordered-pair-types A A
   pr1 id-equiv-unordered-pair-types = id-equiv
   pr2 id-equiv-unordered-pair-types i = id-equiv
@@ -104,5 +107,4 @@ module _
   pr2 (extensionality-unordered-pair-types B) =
     is-equiv-equiv-eq-unordered-pair-types B
 ```
-
 

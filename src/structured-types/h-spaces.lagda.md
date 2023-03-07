@@ -1,8 +1,12 @@
-#  H-spaces
+# H-spaces
 
 ```agda
 module structured-types.h-spaces where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -10,9 +14,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-
-open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

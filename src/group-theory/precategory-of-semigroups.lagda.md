@@ -1,15 +1,17 @@
-#  The precategory of semigroups
+# The precategory of semigroups
 
 ```agda
 module group-theory.precategory-of-semigroups where
+```
 
-open import category-theory.large-precategories
-
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
+open import foundation.universe-levels
+open import category-theory.large-precategories
 ```
+</details>
 
 ## Idea
 

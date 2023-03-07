@@ -1,10 +1,11 @@
-#  Non-contractible types
+# Non-contractible types
 
 ```agda
 module foundation.noncontractible-types where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -12,7 +13,9 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -36,7 +39,7 @@ is-noncontractible' : {l : Level} (A : UU l) → ℕ → UU l
 is-noncontractible' A zero-ℕ = is-empty A
 is-noncontractible' A (succ-ℕ k) =
   Σ A (λ x → Σ A (λ y → is-noncontractible' (x ＝ y) k))
- 
+
 is-noncontractible : {l : Level} (A : UU l) → UU l
 is-noncontractible A = Σ ℕ (is-noncontractible' A)
 ```

@@ -1,15 +1,23 @@
-#  Suspensions of types
+# Suspensions of types
 
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-systems
@@ -20,17 +28,11 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-
-open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
 ```
+</details>
 
 ## Definition
 
@@ -40,14 +42,14 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 module _
   {l1 l2 : Level} (X : UU l1) (Y : UU l2)
   where
-  
+
   suspension-structure : UU (l1 ⊔ l2)
   suspension-structure = Σ Y (λ N → Σ Y (λ S → (x : X) → N ＝ S))
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
-  
+
   N-suspension-structure : suspension-structure X Y → Y
   N-suspension-structure c = pr1 c
 
@@ -139,7 +141,7 @@ pr2 (suspension-Pointed-Type X) = N-susp
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
   where
-  
+
   htpy-suspension-structure :
     (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
   htpy-suspension-structure c c' =
@@ -152,7 +154,7 @@ module _
             ( p ∙ merid-suspension-structure c' x)))
 
   extensionality-suspension-structure :
-    (c c' : suspension-structure X Z) → 
+    (c c' : suspension-structure X Z) →
     (c ＝ c') ≃ (htpy-suspension-structure c c')
   extensionality-suspension-structure (N , S , merid) =
     extensionality-Σ
@@ -207,7 +209,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-structure X Z) 
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-structure X Z)
   where
 
   ap-pr1-eq-htpy-suspension-structure :
@@ -283,7 +285,7 @@ triangle-ev-suspension (pair N (pair S merid)) Z h = refl
 is-equiv-ev-suspension :
   { l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   ( susp-str-Y : suspension-structure X Y) →
-  ( up-Y : universal-property-suspension' l3 X Y susp-str-Y) → 
+  ( up-Y : universal-property-suspension' l3 X Y susp-str-Y) →
   ( Z : UU l3) → is-equiv (ev-suspension susp-str-Y Z)
 is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
   is-equiv-comp-htpy
@@ -345,7 +347,7 @@ module _
 
   up-suspension-N-susp :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
-    (map-inv-up-suspension Z c N-susp) ＝ pr1 c 
+    (map-inv-up-suspension Z c N-susp) ＝ pr1 c
   up-suspension-N-susp Z c =
     pr1 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c))
 
@@ -369,7 +371,7 @@ module _
       ( suspension-structure-suspension X)
       ( Z)
       ( map-inv-up-suspension Z c)) ＝ c
-  ev-suspension-up-suspension {l} Z c = 
+  ev-suspension-up-suspension {l} Z c =
     eq-htpy-suspension-structure
       ( ( up-suspension-N-susp Z c) ,
         ( ( up-suspension-S-susp Z c) ,

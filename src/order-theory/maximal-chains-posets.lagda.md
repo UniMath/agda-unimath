@@ -2,14 +2,17 @@
 
 ```agda
 module order-theory.maximal-chains-posets where
+```
 
-open import foundation.propositions
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import order-theory.chains-posets
 open import order-theory.maximal-chains-preorders
 open import order-theory.posets
+open import foundation.propositions
+open import foundation.universe-levels
 ```
+</details>
 
 ## Definition
 
@@ -18,7 +21,7 @@ open import order-theory.posets
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
-  
+
   is-maximal-chain-poset-Prop :
     {l3 : Level} → chain-Poset l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-poset-Prop =

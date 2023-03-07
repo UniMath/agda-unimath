@@ -1,10 +1,12 @@
-#  Coherently invertible maps
+# Coherently invertible maps
 
 ```agda
 module foundation.coherently-invertible-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coherently-invertible-maps public
-
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -16,11 +18,11 @@ open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Properties
 

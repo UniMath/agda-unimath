@@ -1,13 +1,16 @@
-#  Decidable subtypes of finite types
+# Decidable subtypes of finite types
 
 ```agda
 module univalent-combinatorics.decidable-subtypes where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
 open import foundation.decidable-subtypes public
-
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
-
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -17,12 +20,10 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.function-types
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Definitions
 
@@ -35,7 +36,7 @@ subset-𝔽 l2 X = decidable-subtype l2 (type-𝔽 X)
 module _
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
   where
-    
+
   subtype-subset-𝔽 : subtype l2 (type-𝔽 X)
   subtype-subset-𝔽 = subtype-decidable-subtype P
 
@@ -57,7 +58,7 @@ module _
 module _
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
   where
-  
+
   type-subset-𝔽 : UU (l1 ⊔ l2)
   type-subset-𝔽 = type-decidable-subtype P
 

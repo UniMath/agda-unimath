@@ -1,8 +1,11 @@
-#  Equality in the fibers of a map
+# Equality in the fibers of a map
 
 ```agda
 module foundation-core.equality-fibers-of-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -11,9 +14,9 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
-
 open import foundation.identity-types
 ```
+</details>
 
 ## Idea
 
@@ -84,7 +87,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)
   where
-  
+
   eq-fib-fib-ap :
     (q : f x ＝ f y) → (pair x q) ＝ (pair y refl) → fib (ap f {x} {y}) q
   eq-fib-fib-ap q =

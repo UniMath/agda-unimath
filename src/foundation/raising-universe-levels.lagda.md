@@ -1,8 +1,11 @@
-#  Raising universe levels
+# Raising universe levels
 
 ```agda
 module foundation.raising-universe-levels where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -12,6 +15,7 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -76,7 +80,7 @@ pr2 (raise-Set l A) =
 module _
   {l1 l2 : Level} (l3 l4 : Level) {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
-  
+
   map-equiv-raise : raise l3 A → raise l4 B
   map-equiv-raise (map-raise x) = map-raise (map-equiv e x)
 

@@ -1,8 +1,12 @@
-#  Invertible elements in monoids
+# Invertible elements in monoids
 
 ```agda
 module group-theory.invertible-elements-monoids where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.monoids
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -11,9 +15,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import group-theory.monoids
 ```
+</details>
 
 ## Idea
 
@@ -85,7 +88,7 @@ module _
           ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-mul-Monoid M y')))))
-  
+
   is-prop-is-invertible-element-Monoid :
     (x : type-Monoid M) → is-prop (is-invertible-element-Monoid M x)
   is-prop-is-invertible-element-Monoid x =

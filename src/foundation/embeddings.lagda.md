@@ -1,10 +1,12 @@
-#  Embeddings
+# Embeddings
 
 ```agda
 module foundation.embeddings where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.embeddings public
-
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
@@ -18,11 +20,11 @@ open import foundation-core.pullbacks
 open import foundation-core.sections
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.truncated-maps
 ```
+</details>
 
 ## Properties
 

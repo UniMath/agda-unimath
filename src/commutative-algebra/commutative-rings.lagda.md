@@ -1,20 +1,22 @@
-#  Commutative rings
+# Commutative rings
 
 ```agda
 module commutative-algebra.commutative-rings where
+```
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -44,7 +46,7 @@ Commutative-Ring l = Σ (Ring l) is-commutative-Ring
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   ring-Commutative-Ring : Ring l
   ring-Commutative-Ring = pr1 R
 
@@ -250,7 +252,7 @@ module _
     ap-mul-nat-scalar-Ring ring-Commutative-Ring
 
   left-unit-law-mul-nat-scalar-Commutative-Ring :
-    (x : type-Commutative-Ring) → 
+    (x : type-Commutative-Ring) →
     mul-nat-scalar-Commutative-Ring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Commutative-Ring =
     left-unit-law-mul-nat-scalar-Ring ring-Commutative-Ring

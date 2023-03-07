@@ -2,33 +2,32 @@
 
 ```agda
 module linear-algebra.vectors-on-rings where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.scalar-multiplication-vectors
+open import linear-algebra.vectors
 open import foundation.constant-maps
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.unit-type
-open import foundation.dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-
+open import elementary-number-theory.natural-numbers
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
-
-open import linear-algebra.constant-vectors
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.scalar-multiplication-vectors
-open import linear-algebra.vectors
-
 open import ring-theory.rings
-
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -42,7 +41,7 @@ Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   vec-Ring : ℕ → UU l
   vec-Ring = vec (type-Ring R)
 
@@ -111,7 +110,7 @@ module _
 
 ### Pointwise addition of vectors on a ring
 
-#### Pointwise addition of listed vectors on a ring 
+#### Pointwise addition of listed vectors on a ring
 
 ```agda
 module _

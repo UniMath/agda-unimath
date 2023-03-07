@@ -1,8 +1,17 @@
-#  The orbit-stabilizer theorem for concrete groups
+# The orbit-stabilizer theorem for concrete groups
 
 ```agda
 module group-theory.orbit-stabilizer-theorem-concrete-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.mere-equivalences-concrete-group-actions
+open import group-theory.stabilizer-groups-concrete-group-actions
+open import group-theory.subgroups-concrete-groups
+open import group-theory.transitive-concrete-group-actions
 open import foundation.0-connected-types
 open import foundation.connected-components
 open import foundation.dependent-pair-types
@@ -13,16 +22,9 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.mere-equivalences-concrete-group-actions
-open import group-theory.subgroups-concrete-groups
-open import group-theory.stabilizer-groups-concrete-group-actions
-open import group-theory.transitive-concrete-group-actions
-
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 

@@ -1,10 +1,11 @@
-#  Connected maps
+# Connected maps
 
 ```agda
 module foundation.connected-maps where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -27,7 +28,9 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.univalence
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -188,7 +191,7 @@ module _
 module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B}
   where
-  
+
   dependent-universal-property-is-connected-map :
     is-connected-map k f → (P : B → Truncated-Type l3 k) →
     is-equiv (precomp-Π f (λ b → type-Truncated-Type (P b)))

@@ -1,8 +1,11 @@
-#  Functoriality of dependent pair types
+# Functoriality of dependent pair types
 
 ```agda
 module foundation-core.functoriality-dependent-pair-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -14,6 +17,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -30,7 +34,7 @@ module _
   where
 
   {- Any family of maps induces a map on the total spaces. -}
-  
+
   tot : Σ A B → Σ A C
   pr1 (tot t) = pr1 t
   pr2 (tot t) = f (pr1 t) (pr2 t)
@@ -55,7 +59,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   (D : B → UU l4)
   where
-  
+
   map-Σ :
     (f : A → B) (g : (x : A) → C x → D (f x)) → Σ A C → Σ B D
   pr1 (map-Σ f g t) = f (pr1 t)
@@ -123,7 +127,7 @@ module _
   where
   {- We show that for any family of maps, the fiber of the induced map on total
      spaces are equivalent to the fibers of the maps in the family. -}
-   
+
   map-compute-fib-tot : (t : Σ A C) → fib (tot f) t → fib (f (pr1 t)) (pr2 t)
   pr1 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = y
   pr2 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = refl
@@ -214,7 +218,6 @@ module _
 
 ### The fibers of `map-Σ-map-base`
 
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
@@ -234,7 +237,7 @@ module _
   pr2
     ( fib-fib-map-Σ-map-base
       .(map-Σ-map-base f C (pair x z)) (pair (pair x z) refl)) = refl
-  
+
   issec-fib-fib-map-Σ-map-base :
     (t : Σ B C) → (fib-map-Σ-map-base-fib t ∘ fib-fib-map-Σ-map-base t) ~ id
   issec-fib-fib-map-Σ-map-base .(pair (f x) z) (pair (pair x z) refl) = refl
@@ -264,7 +267,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
-  
+
   abstract
     is-contr-map-map-Σ-map-base :
       is-contr-map f → is-contr-map (map-Σ-map-base f C)
@@ -303,7 +306,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   (D : B → UU l4)
   where
-  
+
   abstract
     is-equiv-map-Σ :
       (f : A → B) (g : (x : A) → C x → D (f x)) →
@@ -353,7 +356,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
-  
+
   fib-triangle :
     (x : X) → (fib f x) → (fib g x)
   pr1 (fib-triangle .(f a) (pair a refl)) = h a

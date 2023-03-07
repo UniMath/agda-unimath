@@ -1,21 +1,24 @@
-#  Conjugation in groups
+# Conjugation in groups
 
 ```agda
 module group-theory.conjugation where
+```
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalence-extensionality
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
+open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -103,7 +106,7 @@ module _
     ap
       ( mul-Group' G (inv-Group G x))
       ( ap (mul-Group' G y) (inv (inv-inv-Group G x)))
-  
+
   right-conjugation-law-mul-Group :
     (x y : type-Group G) →
     mul-Group G (inv-Group G x) (conjugation-Group G x y) ＝

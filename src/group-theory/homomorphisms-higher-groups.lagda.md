@@ -1,19 +1,20 @@
-#  Homomorphisms of higher groups
+# Homomorphisms of higher groups
 
 ```agda
 module group-theory.homomorphisms-higher-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.higher-groups
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import group-theory.higher-groups
-
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
-
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
+</details>
 
 ## Idea
 
@@ -107,7 +108,7 @@ module _
 module _
   {l : Level} (G : ∞-Group l)
   where
-  
+
   id-hom-∞-Group : hom-∞-Group G G
   id-hom-∞-Group = id-pointed-map
 

@@ -1,12 +1,15 @@
-#  Decidable embeddings
+# Decidable embeddings
 
 ```agda
 module foundation.decidable-embeddings where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
-open import foundation-core.coproduct-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
@@ -18,7 +21,6 @@ open import foundation-core.propositions
 open import foundation-core.subtype-identity-principle
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-
 open import foundation.decidable-maps
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
@@ -31,6 +33,7 @@ open import foundation.propositional-maps
 open import foundation.type-duality
 open import foundation.type-theoretic-principle-of-choice
 ```
+</details>
 
 ## Idea
 
@@ -132,7 +135,7 @@ abstract
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y}
   where
-  
+
   abstract
     is-decidable-emb-is-decidable-prop-map :
       is-decidable-prop-map f → is-decidable-emb f

@@ -1,8 +1,11 @@
-#  The axiom of choice
+# The axiom of choice
 
 ```agda
 module foundation.axiom-of-choice where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -23,6 +26,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

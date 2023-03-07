@@ -1,16 +1,22 @@
-#  The pigeonhole principle
+# The pigeonhole principle
 
 ```agda
 module univalent-combinatorics.pigeonhole-principle where
+```
 
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
-
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.embeddings-standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -27,15 +33,11 @@ open import foundation.repetitions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.embeddings-standard-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -98,7 +100,7 @@ abstract
 module _
   (k l : ℕ) (f : Fin k → Fin l) (p : le-ℕ l k)
   where
-  
+
   abstract
     repetition-le-Fin : repetition f
     repetition-le-Fin =
@@ -184,7 +186,7 @@ module _
 
   abstract
     leq-is-emb-count :
-      {f : A → B} → is-emb f → 
+      {f : A → B} → is-emb f →
       (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
     leq-is-emb-count {f} H = leq-emb-count (pair f H)
 
@@ -234,7 +236,7 @@ module _
   (f : A → B)
   (p : le-ℕ (number-of-elements-count eB) (number-of-elements-count eA))
   where
-    
+
   repetition-le-count : repetition f
   repetition-le-count =
     map-equiv-repetition

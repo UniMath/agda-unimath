@@ -2,19 +2,21 @@
 
 ```agda
 module order-theory.sup-lattices where
-
-open import foundation.cartesian-product-types 
-open import foundation.dependent-pair-types 
-open import foundation.propositions 
-open import foundation.subtypes 
-open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.sets
-
-open import order-theory.posets
-open import order-theory.least-upper-bounds-posets
-
 ```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.least-upper-bounds-posets
+open import order-theory.posets
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
+```
+</details>
 
 ## Idea
 A sup lattice is a poset in which every family of elements has a least upperbound.
@@ -27,10 +29,10 @@ the order relation and one for the indexing type.
 
 ```agda
 module _
-  {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2) 
+  {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
-  
-  is-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3) 
+
+  is-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-sup-lattice-poset-Prop =
     Π-Prop
       (UU l3)
@@ -42,8 +44,8 @@ module _
   is-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-sup-lattice-Poset = type-Prop is-sup-lattice-poset-Prop
 
-  is-prop-sup-lattice-Poset : is-prop is-sup-lattice-Poset  
-  is-prop-sup-lattice-Poset = is-prop-type-Prop is-sup-lattice-poset-Prop 
+  is-prop-sup-lattice-Poset : is-prop is-sup-lattice-Poset
+  is-prop-sup-lattice-Poset = is-prop-type-Prop is-sup-lattice-poset-Prop
 
 Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Sup-Lattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-sup-lattice-Poset l3 P)
@@ -97,7 +99,7 @@ module _
   element-sup-lattice-Set = element-poset-Set poset-Sup-Lattice
 
   is-sup-lattice-Sup-Lattice :
-    is-sup-lattice-Poset l3 poset-Sup-Lattice 
+    is-sup-lattice-Poset l3 poset-Sup-Lattice
   is-sup-lattice-Sup-Lattice = pr2 A
 
   sup-lattice-Sup-Lattice : Sup-Lattice l1 l2 l3

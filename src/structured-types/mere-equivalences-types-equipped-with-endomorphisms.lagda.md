@@ -1,8 +1,13 @@
-#  Mere equivalences of types equipped with endomorphisms
+# Mere equivalences of types equipped with endomorphisms
 
 ```agda
 module structured-types.mere-equivalences-types-equipped-with-endomorphisms where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -10,13 +15,11 @@ open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.subtype-identity-principle
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
-open import structured-types.equivalences-types-equipped-with-endomorphisms
-open import structured-types.types-equipped-with-endomorphisms
 ```
+</details>
 
 ## Definition
 
@@ -37,7 +40,7 @@ module _
 module _
   {l1 : Level} (X : Endo l1)
   where
-  
+
   refl-mere-equiv-Endo : mere-equiv-Endo X X
   refl-mere-equiv-Endo = unit-trunc-Prop (id-equiv-Endo X)
 ```
@@ -48,7 +51,7 @@ module _
 module _
   {l1 : Level} (X : Endo l1)
   where
-  
+
   Component-Endo : UU (lsuc l1)
   Component-Endo = Σ (Endo l1) (mere-equiv-Endo X)
 
@@ -88,7 +91,7 @@ module _
   equiv-eq-Component-Endo :
     (T S : Component-Endo X) → Id T S → equiv-Component-Endo T S
   equiv-eq-Component-Endo T .T refl = id-equiv-Component-Endo T
-  
+
   is-contr-total-equiv-Component-Endo :
     is-contr
       ( Σ ( Component-Endo X)
@@ -109,5 +112,4 @@ module _
       ( is-contr-total-equiv-Component-Endo)
       ( equiv-eq-Component-Endo (canonical-Component-Endo X))
 ```
-
 

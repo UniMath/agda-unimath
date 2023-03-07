@@ -1,8 +1,11 @@
-#  Involutions
+# Involutions
 
 ```agda
 module foundation-core.involutions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.automorphisms
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -14,9 +17,9 @@ open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
@@ -84,7 +87,7 @@ pr1 (is-involution-Truncated-Type k is-trunc-A f) = is-involution f
 pr2 (is-involution-Truncated-Type k is-trunc-A f) =
   is-trunc-is-involution k is-trunc-A f
 
-is-trunc-involution : 
+is-trunc-involution :
   {l : Level} {A : UU l} (k : 𝕋) →
   is-trunc k A → is-trunc k (involution A)
 is-trunc-involution k is-trunc-A =
@@ -92,7 +95,7 @@ is-trunc-involution k is-trunc-A =
     (is-trunc-function-type k is-trunc-A)
     (is-trunc-is-involution k (is-trunc-succ-is-trunc k is-trunc-A))
 
-involution-Truncated-Type : 
+involution-Truncated-Type :
   {l : Level} {k : 𝕋} → Truncated-Type l k → Truncated-Type l k
 involution-Truncated-Type {k = k} (A , is-trunc-A) =
   involution A , is-trunc-involution k is-trunc-A

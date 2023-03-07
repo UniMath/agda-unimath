@@ -1,8 +1,12 @@
-#  Undirected graphs
+# Undirected graphs
 
 ```agda
 module graph-theory.undirected-graphs where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.directed-graphs
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -11,9 +15,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import graph-theory.directed-graphs
 ```
+</details>
 
 ## Idea
 
@@ -95,7 +98,7 @@ module _
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
-  
+
   equiv-tr-edge-Undirected-Graph :
     (p q : unordered-pair-vertices-Undirected-Graph G)
     (α : Eq-unordered-pair p q) →

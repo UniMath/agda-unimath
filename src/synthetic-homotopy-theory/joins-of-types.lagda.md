@@ -1,31 +1,32 @@
-#  Joins of types
+# Joins of types
 
 ```agda
 module synthetic-homotopy-theory.joins-of-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
+open import foundation-core.functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation-core.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types 
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
-
-open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
-
 ```
+</details>
 
 ## Idea
 
@@ -250,16 +251,16 @@ module _
 
   join-Prop : Prop (l1 ⊔ l2)
   join-Prop = (A * B) , is-prop-join-is-prop is-prop-A is-prop-B
-  
+
   type-join-Prop : UU (l1 ⊔ l2)
   type-join-Prop = type-Prop join-Prop
-  
+
   is-prop-type-join-Prop : is-prop type-join-Prop
   is-prop-type-join-Prop = is-prop-type-Prop join-Prop
 
   inl-join-Prop : type-hom-Prop (A , is-prop-A) join-Prop
   inl-join-Prop = inl-join A B
-  
+
   inr-join-Prop : type-hom-Prop (B , is-prop-B) join-Prop
   inr-join-Prop = inr-join A B
 ```
@@ -301,7 +302,7 @@ module _
 
   equiv-join-disj-Prop : (type-disj-Prop A B) ≃ (type-join-Prop A B)
   equiv-join-disj-Prop = pair map-join-disj-Prop is-equiv-map-join-disj-Prop
-  
+
   up-join-disj : {l : Level} → universal-property-pushout l pr1 pr2 cocone-disj
   up-join-disj =
     up-pushout-up-pushout-is-equiv

@@ -1,16 +1,19 @@
-#  Cartesian products of semigroups
+# Cartesian products of semigroups
 
 ```agda
 module group-theory.cartesian-products-semigroups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.semigroups
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
-open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 
@@ -22,7 +25,7 @@ The cartesian product of two semigroups `A` and `B` consists of the cartesian pr
 module _
   {l1 l2 : Level} (A : Semigroup l1) (B : Semigroup l2)
   where
-  
+
   set-prod-Semigroup : Set (l1 ⊔ l2)
   set-prod-Semigroup = prod-Set (set-Semigroup A) (set-Semigroup B)
 

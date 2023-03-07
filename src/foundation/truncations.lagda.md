@@ -1,10 +1,15 @@
-#  Truncations
+# Truncations
 
 ```agda
 module foundation.truncations where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.truncation-levels
-
+open import foundation-core.truncation-levels
+open import foundation-core.universal-property-truncation
+open import foundation-core.universe-levels
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -21,11 +26,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.truncated-types
 open import foundation.universal-property-dependent-pair-types
-
-open import foundation-core.truncation-levels
-open import foundation-core.universal-property-truncation
-open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -90,7 +92,7 @@ module _
         ( is-truncation-trunc)
         ( B)
         ( f))
-  
+
   map-universal-property-trunc :
     (B : Truncated-Type l2 k) → (A → type-Truncated-Type B) →
     type-trunc k A → type-Truncated-Type B
@@ -191,7 +193,7 @@ unique-truncated-fam-trunc {l1} {l2} {k} {A} B =
       ( A)
       ( Truncated-Type-Truncated-Type l2 k)
       ( B))
-      
+
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : A → Truncated-Type l2 k)
   where

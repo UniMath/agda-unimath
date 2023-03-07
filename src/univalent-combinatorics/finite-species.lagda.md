@@ -1,13 +1,16 @@
-#  Finite species
+# Finite species
 
 ```agda
 module univalent-combinatorics.finite-species where
+```
 
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
+open import foundation.universe-levels
 ```
+</details>
 
 ### Idea
 

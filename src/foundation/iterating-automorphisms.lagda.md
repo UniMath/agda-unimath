@@ -1,23 +1,26 @@
-#  Iterating automorphisms
+# Iterating automorphisms
 
 ```agda
 module foundation.iterating-automorphisms where
+```
 
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.automorphisms
 open import foundation.coproduct-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Definition
 
@@ -142,7 +145,7 @@ module _
 module _
   {l : Level} {X : UU l}
   where
-  
+
   iterate-automorphism-int-ℕ :
     (n : ℕ) (e : Aut X) →
     htpy-equiv (iterate-automorphism-ℕ n e) (iterate-automorphism-ℤ (int-ℕ n) e)

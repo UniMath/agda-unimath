@@ -1,8 +1,11 @@
-#  Propositions
+# Propositions
 
 ```agda
 module foundation-core.propositions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -14,6 +17,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -68,17 +72,17 @@ abstract
 module _
   {l : Level} (A : UU l)
   where
-  
+
   all-elements-equal : UU l
   all-elements-equal = (x y : A) → x ＝ y
-  
+
   is-proof-irrelevant : UU l
   is-proof-irrelevant = A → is-contr A
 
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-prop-all-elements-equal : all-elements-equal A → is-prop A
     pr1 (is-prop-all-elements-equal H x y) = (inv (H x x)) ∙ (H x y)
@@ -105,11 +109,11 @@ module _
 
   abstract
     is-prop-is-proof-irrelevant : is-proof-irrelevant A → is-prop A
-    is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y 
+    is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y
 
   abstract
     eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
-    eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant 
+    eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant
 ```
 
 ### A map between propositions is an equivalence if there is a map in the reverse direction

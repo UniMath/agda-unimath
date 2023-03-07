@@ -1,10 +1,12 @@
-#  Equivalence induction
+# Equivalence induction
 
 ```agda
 module foundation.equivalence-induction where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalence-induction public
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -12,6 +14,7 @@ open import foundation.sections
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

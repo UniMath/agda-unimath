@@ -1,10 +1,12 @@
-#  The universal property of truncations
+# The universal property of truncations
 
 ```agda
 module foundation.universal-property-truncation where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.universal-property-truncation public
-
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -26,6 +28,7 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 
@@ -64,7 +67,7 @@ module _
                       ( Id-Truncated-Type C (g x') z)))) ∘e
               ( equiv-ev-pair)))
           ( is-contr-total-path (g x)))
-  
+
   is-truncation-is-truncation-ap :
     {l : Level} → is-truncation l B f
   is-truncation-is-truncation-ap C =
@@ -85,7 +88,7 @@ module _
             ( distributive-Π-Σ))
           ( is-contr-Π
             ( unique-extension-fib-is-truncation-is-truncation-ap C g)))
-  
+
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 (succ-𝕋 k))
   {f : A → type-Truncated-Type B}
@@ -98,7 +101,7 @@ module _
       ( dependent-universal-property-truncation-is-truncation B f H
         ( λ y → truncated-type-trunc-Prop k (fib f y)))
       ( λ x → unit-trunc-Prop (pair x refl))
-      
+
 {-
 -- Corollary 18.5.4
 
@@ -354,7 +357,7 @@ module _
   map-equiv-uniqueness-trunc-Set' : type-Set B → type-trunc-Set A
   map-equiv-uniqueness-trunc-Set' =
     map-equiv equiv-uniqueness-trunc-Set'
-  
+
   triangle-uniqueness-trunc-Set' :
     (map-equiv-uniqueness-trunc-Set' ∘ f) ~ unit-trunc-Set
   triangle-uniqueness-trunc-Set' =
@@ -734,7 +737,7 @@ module _
 
   abstract
     distributive-trunc-Π-count-Set :
-      count A → 
+      count A →
       is-contr
         ( Σ ( ( type-trunc-Set ((x : A) → B x)) ≃
               ( (x : A) → type-trunc-Set (B x)))

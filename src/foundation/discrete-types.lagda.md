@@ -1,10 +1,12 @@
-#  Discrete types
+# Discrete types
 
 ```agda
 module foundation.discrete-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.discrete-types public
-
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.coproduct-types
@@ -19,6 +21,7 @@ open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -35,7 +38,7 @@ module _
 
   rel-apart-Discrete-Type : Rel-Prop l (type-Discrete-Type X)
   rel-apart-Discrete-Type x y = neg-Prop' (x ＝ y)
-  
+
   apart-Discrete-Type : (x y : type-Discrete-Type X) → UU l
   apart-Discrete-Type x y = type-Prop (rel-apart-Discrete-Type x y)
 

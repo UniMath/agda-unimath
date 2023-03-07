@@ -1,8 +1,11 @@
-#  Russell's paradox
+# Russell's paradox
 
 ```agda
 module foundation.russells-paradox where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -18,11 +21,11 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
 open import trees.multisets
 open import trees.small-multisets
 open import trees.universal-multiset
 ```
+</details>
 
 ## Idea
 
@@ -85,13 +88,13 @@ paradox-Russell {l} H =
     ( pair (map-equiv β) (map-inv-equiv β))
 
   where
-  
+
   K : is-small-universe l l
   K = pair H (λ X → pair X id-equiv)
 
   R : 𝕍 (lsuc l)
   R = Russell l
-  
+
   is-small-R : is-small-𝕍 l R
   is-small-R = is-small-Russell K
 

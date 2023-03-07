@@ -1,8 +1,12 @@
-#  Equivalences of directed trees
+# Equivalences of directed trees
 
 ```agda
 module trees.equivalences-directed-trees where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import trees.directed-trees
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -11,12 +15,10 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-
 open import graph-theory.equivalences-directed-graphs
 open import graph-theory.walks-directed-graphs
-
-open import trees.directed-trees
 ```
+</details>
 
 ## Definition
 
@@ -106,7 +108,7 @@ module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
   (e : equiv-Directed-Tree S T)
   where
-  
+
   preserves-root-equiv-Directed-Tree :
     node-equiv-Directed-Tree S T e (root-Directed-Tree S) ＝
     root-Directed-Tree T

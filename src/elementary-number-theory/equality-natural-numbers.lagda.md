@@ -1,13 +1,14 @@
-#  Equality of natural numbers
+# Equality of natural numbers
 
 ```agda
 module elementary-number-theory.equality-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.natural-numbers
-
 open import foundation-core.decidable-propositions
 open import foundation-core.discrete-types
-
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -24,6 +25,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 
@@ -87,7 +89,7 @@ pr2 (is-contr-total-Eq-ℕ (succ-ℕ m)) (pair (succ-ℕ n) e) =
 is-equiv-Eq-eq-ℕ :
   {m n : ℕ} → is-equiv (Eq-eq-ℕ {m} {n})
 is-equiv-Eq-eq-ℕ {m} {n} =
-  fundamental-theorem-id 
+  fundamental-theorem-id
     ( is-contr-total-Eq-ℕ m)
     ( λ y → Eq-eq-ℕ {m} {y})
     ( n)

@@ -1,8 +1,11 @@
-#  Fibered involutions
+# Fibered involutions
 
 ```agda
 module foundation.fibered-involutions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -11,9 +14,9 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.involutions
 open import foundation-core.universe-levels
-
 open import foundation.fibered-maps
 ```
+</details>
 
 ## Idea
 
@@ -45,12 +48,12 @@ fibered-involution :
   (A → X) → (A → X) → UU (l1 ⊔ l2)
 fibered-involution {X = X} f g = Σ (involution X) (involution-over f g ∘ map-involution)
 
-is-fiberwise-involution : 
+is-fiberwise-involution :
   {l1 l2 : Level} {X : UU l1} {P : X → UU l2} →
   ((x : X) → P x → P x) → UU (l1 ⊔ l2)
 is-fiberwise-involution {X = X} f = (x : X) → is-involution (f x)
 
-fam-involution : 
+fam-involution :
   {l1 l2 : Level} {X : UU l1} (P : X → UU l2) → UU (l1 ⊔ l2)
 fam-involution {X = X} P = (x : X) → involution (P x)
 ```

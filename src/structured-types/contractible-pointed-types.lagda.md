@@ -1,14 +1,17 @@
-#  Contractible pointed types
+# Contractible pointed types
 
 ```agda
 module structured-types.contractible-pointed-types where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-types
 open import foundation.contractible-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import structured-types.pointed-types
 ```
+</details>
 
 ## Definition
 

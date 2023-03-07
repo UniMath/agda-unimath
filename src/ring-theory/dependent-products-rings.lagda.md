@@ -2,20 +2,22 @@
 
 ```agda
 module ring-theory.dependent-products-rings where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import ring-theory.rings
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
-
-open import ring-theory.rings
 ```
+</details>
 
 ## Idea
 
@@ -27,7 +29,7 @@ Given a family of rings `R i` indexed by `i : I`, their dependent product `Π(i:
 module _
   {l1 l2 : Level} {I : UU l1} (R : I → Ring l2)
   where
-  
+
   set-Π-Ring : Set (l1 ⊔ l2)
   set-Π-Ring = Π-Set' I (λ i → set-Ring (R i))
 

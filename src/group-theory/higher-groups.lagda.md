@@ -1,8 +1,11 @@
-#  Higher groups
+# Higher groups
 
 ```agda
 module group-theory.higher-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -10,14 +13,13 @@ open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 ```
+</details>
 
 ## Idea
 

@@ -1,4 +1,4 @@
-#  Formalisation of the Symmetry Book
+# Formalisation of the Symmetry Book
 
 ```agda
 module synthetic-homotopy-theory.26-id-pushout where
@@ -25,7 +25,6 @@ open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
-
 
 -- Section 19.1 Characterizing families of maps over pushouts
 

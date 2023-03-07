@@ -1,10 +1,15 @@
-#  The image of a map
+# The image of a map
 
 ```agda
 module univalent-combinatorics.image-of-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 open import foundation.images public
-
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -13,11 +18,8 @@ open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
-
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-sum-finite-types
 ```
+</details>
 
 ```agda
 module _

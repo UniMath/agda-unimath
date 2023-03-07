@@ -1,11 +1,14 @@
-#  The universal property of propositional truncations with respect to sets
+# The universal property of propositional truncations with respect to sets
 
 ```agda
 module foundation.universal-property-propositional-truncation-into-sets where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
@@ -17,6 +20,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 ```
+</details>
 
 ## Idea
 
@@ -113,7 +117,7 @@ abstract
           ( λ x → pair (f x) (unit-trunc-Prop (pair x refl)))
           ( unit-trunc-Prop a))
         ( pair (f a) (unit-trunc-Prop (pair a refl))))
-  
+
   issec-map-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     ( ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B) ∘
@@ -141,7 +145,7 @@ abstract
             ( g ∘ unit-trunc-Prop)
             ( is-weakly-constant-map-precomp-unit-trunc-Prop g)
             ( x)))
-  
+
   universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B)

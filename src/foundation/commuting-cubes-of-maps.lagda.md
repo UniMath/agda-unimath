@@ -1,17 +1,19 @@
-#  Commuting cubes of maps
+# Commuting cubes of maps
 
 ```agda
 module foundation.commuting-cubes-of-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.commuting-cubes-of-maps public
-
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.universe-levels
-
 open import foundation.homotopies
 ```
+</details>
 
 ## Properties
 

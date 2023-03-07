@@ -1,8 +1,11 @@
-#  Euclidean division on the natural numbers
+# Euclidean division on the natural numbers
 
 ```agda
 module elementary-number-theory.euclidean-division-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
@@ -14,9 +17,9 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -34,7 +37,7 @@ The following definition produces for each `k : ℕ` a sequence of sequences as 
   0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence
   1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
       ⋮
-  1,…,1,0,…,0,0,0,0,…  -- This is row k+1    
+  1,…,1,0,…,0,0,0,0,…  -- This is row k+1
   2,1,…,1,0,0,0,0,0,…  -- After k+1 steps we append 2's at the start
       ⋮
   2,…,2,1,…,1,0,…,0,…  -- This is row 2(k+1)

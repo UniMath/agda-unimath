@@ -2,16 +2,19 @@
 
 ```agda
 module order-theory.subposets where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.subpreorders
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.subpreorders
 ```
+</details>
 
 ## Definitions
 
@@ -59,7 +62,7 @@ module _
   pr1 (pr1 (pr2 (pr2 sub-Poset))) = refl-leq-sub-Poset
   pr2 (pr1 (pr2 (pr2 sub-Poset))) = transitive-leq-sub-Poset
   pr2 (pr2 (pr2 sub-Poset)) = antisymmetric-leq-sub-Poset
-  
+
 ```
 
 ### Inclusion of sub-posets
@@ -73,7 +76,7 @@ module _
     {l3 l4 : Level} (S : element-Poset X → Prop l3)
     (T : element-Poset X → Prop l4)
     where
-    
+
     inclusion-sub-poset-Prop : Prop (l1 ⊔ l3 ⊔ l4)
     inclusion-sub-poset-Prop =
       inclusion-sub-preorder-Prop (preorder-Poset X) S T
@@ -97,7 +100,7 @@ module _
     inclusion-sub-Poset T U → inclusion-sub-Poset S T →
     inclusion-sub-Poset S U
   transitive-inclusion-sub-Poset =
-    transitive-inclusion-sub-Preorder (preorder-Poset X) 
+    transitive-inclusion-sub-Preorder (preorder-Poset X)
 
   sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
   pr1 (sub-poset-Preorder l) = element-Poset X → Prop l

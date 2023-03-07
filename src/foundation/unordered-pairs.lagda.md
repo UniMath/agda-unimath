@@ -1,8 +1,11 @@
-#  Unordered pairs of elements in a type
+# Unordered pairs of elements in a type
 
 ```agda
 module foundation.unordered-pairs where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -12,8 +15,8 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -24,12 +27,12 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -50,7 +53,7 @@ unordered-pair A = Σ (2-Element-Type lzero) (λ X → type-2-Element-Type X →
 module _
   {l : Level} {A : UU l} (p : unordered-pair A)
   where
-  
+
   2-element-type-unordered-pair : 2-Element-Type lzero
   2-element-type-unordered-pair = pr1 p
 
@@ -205,7 +208,7 @@ module _
 module _
   {l1 : Level} {A : UU l1}
   where
-  
+
   mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → Prop l1
   mere-Eq-unordered-pair-Prop p q = trunc-Prop (Eq-unordered-pair p q)
 

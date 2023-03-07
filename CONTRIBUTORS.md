@@ -12,6 +12,8 @@ the library. In alphabetical order, by GitHub username:
 - [Matej Jazbec (MatejJazbec)](https://github.com/MatejJazbec)
 - [Alice Laroche (Seiryn21)](https://github.com/Seiryn21)
 - [Nathan van Doorn (Taneb)](https://github.com/Taneb)
+- [VictorBlanchi (VictorBlanchi)](https://github.com/VictorBlanchi)
+- [Vojtěch Štěpančík (VojtechStep)](https://github.com/VojtechStep)
 - [Andreas Källberg (anka-213)](https://github.com/anka-213)
 - [Bryan Lu (blu-bird)](https://github.com/blu-bird)
 - [Dylan Braithwaite (dylanbraithwaite)](https://github.com/dylanbraithwaite)

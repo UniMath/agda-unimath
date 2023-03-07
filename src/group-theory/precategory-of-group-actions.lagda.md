@@ -1,18 +1,20 @@
-#  The precategory of group actions
+# The precategory of group actions
 
 ```agda
 module group-theory.precategory-of-group-actions where
+```
 
-open import category-theory.large-precategories
-open import category-theory.precategories
-
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-group-actions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+open import category-theory.large-precategories
+open import category-theory.precategories
 ```
+</details>
 
 ## Definitions
 
@@ -44,7 +46,7 @@ module _
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
 ```
 
-### The small precategory of G-sets 
+### The small precategory of G-sets
 
 ```agda
 module _

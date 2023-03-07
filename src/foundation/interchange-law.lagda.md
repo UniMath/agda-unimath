@@ -1,11 +1,15 @@
-#  The interchange law
+# The interchange law
 
 ```agda
 module foundation.interchange-law where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -41,7 +45,7 @@ module _
 module _
   {l : Level} {X : UU l} (μ : X → X → X)
   where
-  
+
   interchange-law : (X → X → X) → UU l
   interchange-law ν = (x y u v : X) → μ (ν x y) (ν u v) ＝ ν (μ x u) (μ y v)
 

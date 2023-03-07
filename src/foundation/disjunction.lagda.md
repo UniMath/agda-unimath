@@ -1,20 +1,23 @@
-#  Disjunction of propositions
+# Disjunction of propositions
 
 ```agda
 module foundation.disjunction where
+```
 
-open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.decidable-types
-open import foundation.propositional-truncations
-
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.universe-levels
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.propositional-truncations
 ```
+</details>
 
 ## Idea
 
@@ -37,7 +40,7 @@ abstract
     is-prop (type-disj-Prop P Q)
   is-prop-type-disj-Prop P Q = is-prop-type-Prop (disj-Prop P Q)
 
-disj-decidable-Prop : 
+disj-decidable-Prop :
   {l1 l2 : Level} → decidable-Prop l1 → decidable-Prop l2 → decidable-Prop (l1 ⊔ l2)
 pr1 (disj-decidable-Prop P Q) = type-disj-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
 pr1 (pr2 (disj-decidable-Prop P Q)) =

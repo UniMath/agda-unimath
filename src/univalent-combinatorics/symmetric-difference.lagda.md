@@ -31,14 +31,14 @@ module _
   {l l1 l2 : Level} (X : UU l) (F : is-finite X)
   (P : decidable-subtype l1 X)
   (Q : decidable-subtype l2 X)
-  
+
   where
 
   eq-symmetric-difference :
     Id
       ( add-ℕ
         ( number-of-elements-is-finite
-          ( is-finite-type-decidable-subtype P F))        
+          ( is-finite-type-decidable-subtype P F))
         ( number-of-elements-is-finite (is-finite-type-decidable-subtype Q F)))
       ( add-ℕ
         ( number-of-elements-is-finite

@@ -1,10 +1,12 @@
-#  Functoriality of truncations
+# Functoriality of truncations
 
 ```agda
 module foundation.functoriality-truncation where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.function-extensionality
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +17,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

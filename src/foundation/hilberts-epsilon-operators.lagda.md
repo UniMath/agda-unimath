@@ -2,13 +2,17 @@
 
 ```agda
 module foundation.hilberts-epsilon-operators where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

@@ -2,19 +2,10 @@
 
 ```agda
 module polytopes.abstract-polytopes where
+```
 
--- open import order-theory public
-
-{-
-open import foundation
-open import elementary-number-theory
-open import univalent-combinatorics
-open import univalent-foundations
--}
-
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -25,13 +16,16 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
-
+open import univalent-combinatorics
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 
@@ -79,7 +73,7 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
-  
+
   diamond-condition-Finitely-Graded-Poset : UU (l1 ⊔ l2)
   diamond-condition-Finitely-Graded-Poset =
     type-Prop (diamond-condition-finitely-graded-poset-Prop X)
@@ -310,7 +304,7 @@ module _
   poset-Prepolytope : Poset l1 (l1 ⊔ l2)
   poset-Prepolytope =
     poset-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
-    
+
   chain-Prepolytope : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
   chain-Prepolytope =
     chain-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
@@ -416,7 +410,7 @@ module _
     {i1 i2 i3 : Fin (succ-ℕ k)}
     {x : face-Prepolytope i1} {y : face-Prepolytope i2}
     where
-    
+
     is-on-path-face-Prepolytope :
       path-faces-Prepolytope x y → face-Prepolytope i3 → UU l1
     is-on-path-face-Prepolytope p z =
@@ -433,7 +427,6 @@ module _
 ### Proof condition P2 of polytopes
 
 The second axiom of polytopes asserts that every maximal chain has k elements. Note that every maximal chain is a path from the bottom element to the top element, which necessarily passes through all dimensions. Therefore, the second axiom follows from our setup. Note that we didn't start with general posets, but with finitely graded posets.
-
 
 ```agda
 

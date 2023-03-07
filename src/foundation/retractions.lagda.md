@@ -1,20 +1,23 @@
-#  Retractions
+# Retractions
 
 ```agda
 module foundation.retractions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.retractions public
-
 open import foundation.coslice
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
+open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.universe-levels
 ```
+</details>
 
 ## Properties
 

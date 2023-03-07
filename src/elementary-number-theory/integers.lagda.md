@@ -1,10 +1,12 @@
-#  The integers
+# The integers
 
 ```agda
 module elementary-number-theory.integers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.natural-numbers
-
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -21,11 +23,10 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import structured-types.types-equipped-with-endomorphisms
 open import structured-types.pointed-types-equipped-with-automorphisms
-
+open import structured-types.types-equipped-with-endomorphisms
 ```
+</details>
 
 ## Idea
 
@@ -164,7 +165,7 @@ abstract
   isretr-pred-ℤ (inr (inl star)) = refl
   isretr-pred-ℤ (inr (inr zero-ℕ)) = refl
   isretr-pred-ℤ (inr (inr (succ-ℕ x))) = refl
-  
+
   issec-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
   issec-pred-ℤ (inl zero-ℕ) = refl
   issec-pred-ℤ (inl (succ-ℕ x)) = refl
@@ -409,7 +410,7 @@ decide-is-nonnegative-ℤ :
 decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ : 
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
   (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos = refl
 ```

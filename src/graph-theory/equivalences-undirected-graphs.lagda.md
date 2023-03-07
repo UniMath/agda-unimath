@@ -1,15 +1,20 @@
-#  Equivalences of undirected graphs
+# Equivalences of undirected graphs
 
 ```agda
 module graph-theory.equivalences-undirected-graphs where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.undirected-graphs
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
-open import foundation.functoriality-dependent-function-types
+open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -18,10 +23,8 @@ open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import graph-theory.morphisms-undirected-graphs
-open import graph-theory.undirected-graphs
 ```
+</details>
 
 ## Idea
 
@@ -44,7 +47,7 @@ module _
         ( p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p ≃
         edge-Undirected-Graph H (map-equiv-unordered-pair f p))
-        
+
   equiv-vertex-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H

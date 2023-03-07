@@ -1,11 +1,13 @@
-#  Surjective maps
+# Surjective maps
 
 ```agda
 module foundation.surjective-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -22,8 +24,8 @@ open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.connected-maps
+open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.homotopies
 open import foundation.identity-types
@@ -34,9 +36,9 @@ open import foundation.truncated-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
-
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
+</details>
 
 ## Idea
 
@@ -636,7 +638,7 @@ module _
                 ( L a ∙ inv (M (f a))))) ∙
             ( issec-inv-concat' (g (i a)) (M (f a)) (L a)))))
     where
-    
+
     J : (b : B) → fib g (h b)
     J =
       apply-dependent-universal-property-surj-is-surjective f H

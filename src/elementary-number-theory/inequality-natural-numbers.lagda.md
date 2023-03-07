@@ -1,12 +1,14 @@
-#  Inequality of natural numbers
+# Inequality of natural numbers
 
 ```agda
 module elementary-number-theory.inequality-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-    
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -19,9 +21,9 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import order-theory.posets
 ```
+</details>
 
 ## Idea
 
@@ -474,7 +476,7 @@ leq-le-succ-ℕ :
 leq-le-succ-ℕ {zero-ℕ} {y} H = star
 leq-le-succ-ℕ {succ-ℕ x} {succ-ℕ y} H = leq-le-succ-ℕ {x} {y} H
 
-leq-succ-le-ℕ : 
+leq-succ-le-ℕ :
   (x y : ℕ) → le-ℕ x y → leq-ℕ (succ-ℕ x) y
 leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
@@ -543,7 +545,7 @@ left-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ m k) ≤-ℕ (
 left-law-leq-add-ℕ zero-ℕ m n = id
 left-law-leq-add-ℕ (succ-ℕ k) m n H = left-law-leq-add-ℕ k m n H
 
-right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ k m) ≤-ℕ (add-ℕ k n) 
+right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ k m) ≤-ℕ (add-ℕ k n)
 right-law-leq-add-ℕ k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-add-ℕ k m)
@@ -570,7 +572,7 @@ leq-add-ℕ m (succ-ℕ n) =
   transitive-leq-ℕ m (add-ℕ m n) (succ-ℕ (add-ℕ m n))
     ( succ-leq-ℕ (add-ℕ m n))
     ( leq-add-ℕ m n)
-    
+
 leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (add-ℕ n m)
 leq-add-ℕ' m n =
   concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)

@@ -1,4 +1,4 @@
-#  Dependent type theories
+# Dependent type theories
 
 ```agda
 {-# OPTIONS --guardedness #-}
@@ -20,13 +20,13 @@ We introduce the cagegory of dependent type theories, following Voevodsky's noti
 
 ```agda
 module dependent where
-  
+
   ------------------------------------------------------------------------------
-  
+
   {- (Dependency) systems are the structure around which a dependent type theory
      is built.
-  
-     Ã₀       Ã₁       Ã₂   
+
+     Ã₀       Ã₁       Ã₂
      |        |        |
      |        |        |
      V        V        V
@@ -67,7 +67,7 @@ module dependent where
   ------------------------------------------------------------------------------
 
   {- We will introduce homotopies of sections of fibered systems. However,
-     in order to define concatenation of those homotopies, we will first 
+     in order to define concatenation of those homotopies, we will first
      define heterogeneous homotopies of sections of fibered systems. -}
 
   tr-fibered-system-slice :
@@ -149,7 +149,7 @@ module dependent where
     ( inv-htpy-section-system' {α = refl} .refl refl H) {X} x =
     eq-transpose-tr
       ( section-system.type H X)
-      ( inv (section-system.element H x))        
+      ( inv (section-system.element H x))
   section-system.slice
     ( inv-htpy-section-system' {B = B} {α = refl} .refl refl H) X =
     inv-htpy-section-system'
@@ -157,7 +157,7 @@ module dependent where
       ( inv (ap-inv (fibered-system.slice B) (section-system.type H X)))
       ( section-system.slice H X)
 
-  -- We specialize the above definitions to nonhomogenous homotopies 
+  -- We specialize the above definitions to nonhomogenous homotopies
 
   htpy-section-system :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : fibered-system l3 l4 A}
@@ -212,9 +212,9 @@ module dependent where
     system.element B Y
   fibered-system.slice (constant-fibered-system A B) {X} Y =
     constant-fibered-system (system.slice A X) (system.slice B Y)
-  
+
   hom-system :
-    {l1 l2 l3 l4 : Level} (A : system l1 l2) (B : system l3 l4) → 
+    {l1 l2 l3 l4 : Level} (A : system l1 l2) (B : system l3 l4) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-system A B =
     section-system (constant-fibered-system A B)
@@ -224,12 +224,12 @@ module dependent where
   {- Homotopies of morphisms of systems are defined as an instance of
      homotopies of sections of fibered systems
   -}
-  
+
   htpy-hom-system :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : system l3 l4}
     (f g : hom-system A B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-hom-system f g = htpy-section-system f g
-  
+
   refl-htpy-hom-system :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : system l3 l4}
     (f : hom-system A B) → htpy-hom-system f f
@@ -257,7 +257,7 @@ module dependent where
   section-system.type (id-hom-system A) X = X
   section-system.element (id-hom-system A) x = x
   section-system.slice (id-hom-system A) X = id-hom-system (system.slice A X)
-  
+
   comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level}
     {A : system l1 l2} {B : system l3 l4} {C : system l5 l6}
@@ -354,7 +354,7 @@ module dependent where
       ( γ (section-system.type H X))
       ( section-system.slice H X)
       where
-      γ : {Y Y' : system.type B} (p : Id Y Y') → 
+      γ : {Y Y' : system.type B} (p : Id Y Y') →
           Id ( tr ( λ t → t)
                   ( ap-binary hom-system
                     ( ap (system.slice B) p)
@@ -412,28 +412,28 @@ module dependent where
     (f : hom-system A B) →
     htpy-section-system (comp-hom-system g f) (comp-hom-system g' f)
   right-whisker-htpy-hom-system H f =
-    right-whisker-htpy-hom-system' refl refl refl H f 
+    right-whisker-htpy-hom-system' refl refl refl H f
 
   ------------------------------------------------------------------------------
-  
-  {- Dependent type theories are systems equipped with weakening and 
-     substitution structure, and with the structure of generic elements (the 
-     variable rule). 
+
+  {- Dependent type theories are systems equipped with weakening and
+     substitution structure, and with the structure of generic elements (the
+     variable rule).
   -}
-  
+
   ------------------------------------------------------------------------------
-  
+
   -- We introduce weakening structure on systems
-  
+
   record weakening {l1 l2 : Level} (A : system l1 l2) : UU (lsuc l1 ⊔ lsuc l2)
     where
     coinductive
     field
       type  : (X : system.type A) → hom-system A (system.slice A X)
       slice : (X : system.type A) → weakening (system.slice A X)
-  
+
   -- We state what it means for a morphism to preserve weakening structure
-  
+
   record preserves-weakening
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : system l3 l4}
     (WA : weakening A) (WB : weakening B) (h : hom-system A B) :
@@ -454,11 +454,11 @@ module dependent where
                 ( weakening.slice WA X)
                 ( weakening.slice WB (section-system.type h X))
                 ( section-system.slice h X)
-  
+
   ------------------------------------------------------------------------------
-  
+
   -- We introduce substitution structure on a system
-  
+
   record substitution {l1 l2 : Level} (A : system l1 l2) :
     UU (lsuc l1 ⊔ lsuc l2)
     where
@@ -467,9 +467,9 @@ module dependent where
       type  : {X : system.type A} (x : system.element A X) →
               hom-system (system.slice A X) A
       slice : (X : system.type A) → substitution (system.slice A X)
-  
+
   -- We state what it means for a morphism to preserve substitution structure
-  
+
   record preserves-substitution
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : system l3 l4}
     (SA : substitution A) (SB : substitution B) (h : hom-system A B) :
@@ -509,7 +509,7 @@ module dependent where
                   ( section-system.type (weakening.type W X) X)
       slice : (X : system.type A) →
               generic-element (weakening.slice W X)
-  
+
   record preserves-generic-element
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : system l3 l4}
     {WA : weakening A} (δA : generic-element WA)
@@ -540,7 +540,7 @@ module dependent where
   {- In a dependent type theory, every weakening morphism and every substitution
      morphism preserve both the weakening and substitution structure, and they
      also preserve generic elements.
-  
+
      For example, the rule that states that weakening preserves weakening (on
      types) can be displayed as follows:
 
@@ -548,9 +548,9 @@ module dependent where
      ------------------------------------------------------------------------
       Γ,A,W(A,Δ),W(A,B),W(W(A,B),W(A,E)) ⊢ W(W(A,B),W(A,C))=W(A,W(B,C)) type
 
-     Furthermore, there are laws that state that substitution by a:A cancels 
+     Furthermore, there are laws that state that substitution by a:A cancels
      weakening by A, that substituting a:A in the generic element of A gives us
-     the element a back, and that substituting by the generic element of A 
+     the element a back, and that substituting by the generic element of A
      cancels weakening by A.
 
      We will now state these laws.
@@ -565,7 +565,7 @@ module dependent where
               preserves-weakening W (weakening.slice W X) (weakening.type W X)
       slice : (X : system.type A) →
               weakening-preserves-weakening (weakening.slice W X)
-  
+
   record substitution-preserves-substitution
     {l1 l2 : Level} {A : system l1 l2} (S : substitution A) : UU (l1 ⊔ l2)
     where
@@ -578,7 +578,7 @@ module dependent where
                 ( substitution.type S x)
       slice : (X : system.type A) →
               substitution-preserves-substitution (substitution.slice S X)
-  
+
   record weakening-preserves-substitution
     {l1 l2 : Level} {A : system l1 l2} (S : substitution A) (W : weakening A) :
     UU (l1 ⊔ l2)
@@ -594,7 +594,7 @@ module dependent where
               weakening-preserves-substitution
                 ( substitution.slice S X)
                 ( weakening.slice W X)
-  
+
   record substitution-preserves-weakening
     {l1 l2 : Level} {A : system l1 l2} (W : weakening A) (S : substitution A) :
     UU (l1 ⊔ l2)
@@ -610,7 +610,7 @@ module dependent where
               substitution-preserves-weakening
                 ( weakening.slice W X)
                 ( substitution.slice S X)
-  
+
   record weakening-preserves-generic-element
     {l1 l2 : Level} {A : system l1 l2} (W : weakening A)
     (WW : weakening-preserves-weakening W) (δ : generic-element W) :
@@ -628,7 +628,7 @@ module dependent where
                 ( weakening.slice W X)
                 ( weakening-preserves-weakening.slice WW X)
                 ( generic-element.slice δ X)
-  
+
   record substitution-preserves-generic-element
     {l1 l2 : Level} {A : system l1 l2} (W : weakening A)
     (δ : generic-element W) (S : substitution A)
@@ -648,7 +648,7 @@ module dependent where
                 ( generic-element.slice δ X)
                 ( substitution.slice S X)
                 ( substitution-preserves-weakening.slice SW X)
-  
+
   record substitution-cancels-weakening
     {l1 l2 : Level} {A : system l1 l2} (W : weakening A) (S : substitution A) :
     UU (l1 ⊔ l2)
@@ -665,7 +665,7 @@ module dependent where
               substitution-cancels-weakening
                 ( weakening.slice W X)
                 ( substitution.slice S X)
-  
+
   record generic-element-is-identity
     {l1 l2 : Level} {A : system l1 l2} (W : weakening A) (S : substitution A)
     (δ : generic-element W) (S!W : substitution-cancels-weakening W S) :
@@ -688,7 +688,7 @@ module dependent where
                 ( substitution.slice S X)
                 ( generic-element.slice δ X)
                 ( substitution-cancels-weakening.slice S!W X)
-  
+
   record substitution-by-generic-element
     {l1 l2 : Level} {A : system l1 l2} (W : weakening A) (S : substitution A)
     (δ : generic-element W) :
@@ -711,11 +711,11 @@ module dependent where
                 ( weakening.slice W X)
                 ( substitution.slice S X)
                 ( generic-element.slice δ X)
-  
+
   ------------------------------------------------------------------------------
 
   -- We complete the definition of a dependent type theory
-  
+
   record type-theory
     (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
     where
@@ -737,12 +737,12 @@ module dependent where
   closed-type-dtt :
     {l1 l2 : Level} (A : type-theory l1 l2) → UU l1
   closed-type-dtt A = system.type (type-theory.sys A)
-  
+
   global-element-dtt :
     {l1 l2 : Level} (A : type-theory l1 l2) → closed-type-dtt A →
     UU l2
   global-element-dtt A = system.element (type-theory.sys A)
-  
+
   weakening-dtt :
     {l1 l2 : Level} (A : type-theory l1 l2) (X : closed-type-dtt A) →
     hom-system
@@ -753,7 +753,7 @@ module dependent where
   ------------------------------------------------------------------------------
 
   -- We introduce the slice of a dependent type theory
-  
+
   slice-dtt :
     {l1 l2 : Level} (A : type-theory l1 l2)
     (X : system.type (type-theory.sys A)) →
@@ -788,7 +788,7 @@ module dependent where
   ------------------------------------------------------------------------------
 
   -- We introduce morphisms of dependent type theories
-  
+
   record hom-dtt
     {l1 l2 l3 l4 : Level} (A : type-theory l1 l2)
     (B : type-theory l3 l4) : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -1016,12 +1016,12 @@ module dependent where
              ( ap ( section-system.type
                     ( section-system.slice g (section-system.type f X)))
                   ( p))
-             ( section-system.element 
+             ( section-system.element
                ( section-system.slice g (section-system.type f X))
                ( u)))
            ( section-system.element
              ( section-system.slice g (section-system.type f X))
-             ( tr 
+             ( tr
                ( system.element (system.slice B (section-system.type f X)))
                ( p)
                ( u)))
@@ -1075,8 +1075,8 @@ module dependent where
   ------------------------------------------------------------------------------
 
   -- We introduce simple type theories
-  
-  record is-simple-type-theory 
+
+  record is-simple-type-theory
     {l1 l2 : Level} (A : type-theory l1 l2) : UU l1
     where
     coinductive
@@ -1087,7 +1087,7 @@ module dependent where
                   ( weakening.type (type-theory.W A) X))
       slice : (X : system.type (type-theory.sys A)) →
               is-simple-type-theory (slice-dtt A X)
-  
+
   record simple-type-theory (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
     where
     field
@@ -1098,7 +1098,7 @@ module dependent where
 
   {- We introduce the condition that the action on elements of a morphism of
      dependent type theories is an equivalence -}
-  
+
   record is-equiv-on-elements-hom-system
     {l1 l2 l3 l4 : Level} (A : system l1 l2) (B : system l3 l4)
     (h : hom-system A B) : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -1115,7 +1115,7 @@ module dependent where
   ------------------------------------------------------------------------------
 
   -- We introduce unary type theories
-  
+
   record unary-type-theory
     {l1 l2 : Level} (A : type-theory l1 l2) : UU (lsuc l1 ⊔ lsuc l2)
     where
@@ -1153,7 +1153,7 @@ module dependent where
   system.type (system-Slice {l} X) = X → UU l
   system.element (system-Slice X) Y = (x : X) → Y x
   system.slice (system-Slice X) Y = system-Slice (Σ X Y)
-  
+
   {-
   hom-system-weakening-system-Slice :
     {l : Level} (X : UU l) (Y : X → UU l) →
@@ -1171,19 +1171,19 @@ module dependent where
   weakening.type (weakening-system-Slice X) Y =
     hom-system-weakening-system-Slice X Y
   weakening.slice (weakening-system-Slice X) = {!!}
-  
+
   system-UU : (l : Level) → system (lsuc l) l
   system.type (system-UU l) = UU l
   system.element (system-UU l) X = X
   system.slice (system-UU l) X = system-Slice X
-  
+
   weakening-type-UU :
     {l : Level} (X : UU l) →
     hom-system (system-UU l) (system.slice (system-UU l) X)
   section-system.type (weakening-type-UU X) Y x = Y
   section-system.element (weakening-type-UU X) Y y x = y
   section-system.slice (weakening-type-UU X) Y = {!!}
-  
+
   weakening-UU : (l : Level) → weakening (system-UU l)
   section-system.type (weakening.type (weakening-UU l) X) Y x = Y
   section-system.element (weakening.type (weakening-UU l) X) Y y x = y
@@ -1208,7 +1208,7 @@ module dependent where
   ------------------------------------------------------------------------------
 
   -- We define what it means for a dependent type theory to have Π-types
-  
+
   record function-types
     {l1 l2 : Level} (A : type-theory l1 l2) : UU (l1 ⊔ l2)
     where
@@ -1270,7 +1270,7 @@ module dependent where
     tr ( system.element (type-theory.sys (slice-dtt A X)))
        {! (section-system.type (preserves-weakening.type (hom-dtt.W (function-types.sys Π (natural-numbers.N N))) ?) ?)!}
     {-
-    Id ( section-system.type 
+    Id ( section-system.type
          ( weakening.type (type-theory.W A) X)
          ( section-system.type
            ( hom-dtt.sys (function-types.sys Π (natural-numbers.N N)))
@@ -1282,7 +1282,7 @@ module dependent where
            ( function-types.sys (function-types.slice Π X)
              ( natural-numbers.N (natural-numbers-slice A Π N X))))
          ( section-system.type
-           ( weakening.type 
+           ( weakening.type
              ( type-theory.W (slice-dtt A X))
              ( natural-numbers.N (natural-numbers-slice A Π N X)))
            ( natural-numbers.N (natural-numbers-slice A Π N X))))
@@ -1300,7 +1300,7 @@ module dependent where
   ------------------------------------------------------------------------------
 
   {-
-  
+
   concat-htpy-hom-system' :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' B'' : system l3 l4}
     (p : Id B B') (q : Id B' B'') {f : hom-system A B} {g : hom-system A B'}
@@ -1365,7 +1365,7 @@ module c-system where
 
 {-
   -- We define elements of contexts
-  data element-context 
+  data element-context
     {l1 l2 : Level} {A : type-theory l1 l2} : (Γ : context A) → UU {!substitution.type (type-theory.S A) !}
     where
     element-empty-context : element-context empty-ctx

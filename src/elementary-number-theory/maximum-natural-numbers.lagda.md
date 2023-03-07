@@ -1,19 +1,20 @@
-#  Maximum on the natural numbers
+# Maximum on the natural numbers
 
 ```agda
 module elementary-number-theory.maximum-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.unit-type
-
 open import order-theory.least-upper-bounds-posets
-
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

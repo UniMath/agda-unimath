@@ -2,20 +2,23 @@
 
 ```agda
 module set-theory.cumulative-hierarchy where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import foundation-core.equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.transport
-open import foundation.universe-levels
-open import foundation.propositional-truncations
-
 open import foundation.unit-type
-open import foundation-core.equivalences
+open import foundation.universe-levels
 open import orthogonal-factorization-systems.lifts-of-maps
-open import foundation.function-extensionality
 ```
+</details>
 
 ## Idea
 

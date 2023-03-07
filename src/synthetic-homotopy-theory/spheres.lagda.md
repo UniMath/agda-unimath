@@ -1,16 +1,17 @@
-#  Spheres
+# Spheres
 
 ```agda
 module synthetic-homotopy-theory.spheres where
+```
 
-open import elementary-number-theory.natural-numbers
-
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import synthetic-homotopy-theory.suspensions-of-types
-
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -2,16 +2,19 @@
 
 ```agda
 module order-theory.subpreorders where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import order-theory.preorders
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import order-theory.preorders
 ```
+</details>
 
 ## Definition
 
@@ -67,7 +70,7 @@ module _
     {l3 l4 : Level} (S : element-Preorder X → Prop l3)
     (T : element-Preorder X → Prop l4)
     where
-    
+
     inclusion-sub-preorder-Prop : Prop (l1 ⊔ l3 ⊔ l4)
     inclusion-sub-preorder-Prop =
       Π-Prop (element-Preorder X) (λ x → hom-Prop (S x) (T x))
@@ -98,5 +101,4 @@ module _
   pr1 (pr2 (pr2 (Sub-Preorder l))) = refl-inclusion-sub-Preorder
   pr2 (pr2 (pr2 (Sub-Preorder l))) = transitive-inclusion-sub-Preorder
 ```
-
 

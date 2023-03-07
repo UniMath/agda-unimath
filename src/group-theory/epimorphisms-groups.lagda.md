@@ -1,18 +1,20 @@
-#  Epimorphisms in groups
+# Epimorphisms in groups
 
 ```agda
 module group-theory.epimorphisms-groups where
+```
 
-open import category-theory.epimorphisms-large-precategories
-
-open import foundation.propositions
-open import foundation.universe-levels
-
+<details><summary>Imports</summary>
+```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups
+open import foundation.propositions
+open import foundation.universe-levels
+open import category-theory.epimorphisms-large-precategories
 ```
+</details>
 
 ## Idea
 

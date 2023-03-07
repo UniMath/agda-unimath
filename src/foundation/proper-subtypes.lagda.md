@@ -1,14 +1,18 @@
-#  Proper subsets
+# Proper subsets
 
 ```agda
 module foundation.proper-subtypes where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.complements-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

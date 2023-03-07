@@ -1,10 +1,14 @@
-#  Walks in directed graphs
+# Walks in directed graphs
 
 ```agda
 module graph-theory.walks-directed-graphs where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.directed-graphs
+open import graph-theory.equivalences-directed-graphs
+open import graph-theory.morphisms-directed-graphs
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.coproduct-types
@@ -18,11 +22,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
-
-open import graph-theory.directed-graphs
-open import graph-theory.equivalences-directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 
@@ -285,7 +287,7 @@ module _
 
     total-edge-edge-on-walk-Directed-Graph : total-edge-Directed-Graph G
     total-edge-edge-on-walk-Directed-Graph = pr1 e
-    
+
     source-edge-on-walk-Directed-Graph : vertex-Directed-Graph G
     source-edge-on-walk-Directed-Graph =
       source-total-edge-Directed-Graph G total-edge-edge-on-walk-Directed-Graph
@@ -331,7 +333,7 @@ module _
   {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
   (f : hom-Directed-Graph G H)
   where
-  
+
   walk-of-length-hom-Directed-Graph :
     (n : ℕ) {x y : vertex-Directed-Graph G} →
     walk-of-length-Directed-Graph G n x y →

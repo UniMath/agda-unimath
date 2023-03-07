@@ -1,13 +1,16 @@
-#  Sequences
+# Sequences
 
 ```agda
 module foundation.sequences where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import foundation.functions
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+</details>
 
 ## Idea
 

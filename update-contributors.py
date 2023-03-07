@@ -56,5 +56,5 @@ for contributor in sorted_contributors:
 
 output = template.replace("Name 1", "\n".join(contributors_list))
 
-with open("src/CONTRIBUTORS.lagda.md", "w") as file:
+with open("CONTRIBUTORS.md", "w") as file:
     file.write(output)

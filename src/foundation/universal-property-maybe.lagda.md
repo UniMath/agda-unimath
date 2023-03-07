@@ -1,8 +1,11 @@
-#  The universal property of maybe
+# The universal property of maybe
 
 ```agda
 module foundation.universal-property-maybe where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -15,6 +18,7 @@ open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -31,7 +35,7 @@ module _
     ((x : Maybe A) → B x) → ((x : A) → B (unit-Maybe x)) × B exception-Maybe
   pr1 (ev-Maybe h) x = h (unit-Maybe x)
   pr2 (ev-Maybe h) = h exception-Maybe
-  
+
   ind-Maybe :
     ((x : A) → B (unit-Maybe x)) × (B exception-Maybe) → (x : Maybe A) → B x
   ind-Maybe (pair h b) (inl x) = h x

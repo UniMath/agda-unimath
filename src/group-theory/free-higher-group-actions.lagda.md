@@ -1,17 +1,20 @@
-#  Free higher group actions
+# Free higher group actions
 
 ```agda
 module group-theory.free-higher-group-actions where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.higher-group-actions
+open import group-theory.higher-groups
+open import group-theory.orbits-higher-group-actions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
-open import group-theory.orbits-higher-group-actions
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +26,7 @@ A higher group action is said to be free if its type of orbits is a set.
 module _
   {l1 l2 : Level} (G : ∞-Group l1) (X : action-∞-Group l2 G)
   where
-  
+
   is-free-action-∞-Group-Prop : Prop (l1 ⊔ l2)
   is-free-action-∞-Group-Prop = is-set-Prop (orbit-action-∞-Group G X)
 

@@ -1,8 +1,11 @@
-#  The universal property of pullbacks
+# The universal property of pullbacks
 
 ```agda
 module foundation-core.universal-property-pullbacks where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -15,6 +18,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Definition
 
@@ -25,7 +29,7 @@ module _
   {l1 l2 l3 l4 : Level} (l : Level) {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
   where
-  
+
   universal-property-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
   universal-property-pullback =
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
@@ -42,11 +46,11 @@ module _
   {f : A → X} {g : B → X} (c : cone f g C) (c' : cone f g C')
   (h : C' → C) (KLM : htpy-cone f g (cone-map f g c h) c')
   where
-  
+
   triangle-cone-cone :
     {l6 : Level} (D : UU l6) →
     (cone-map f g {C' = D} c') ~ ((cone-map f g c) ∘ (λ (k : D → C') → h ∘ k))
-  triangle-cone-cone D k = 
+  triangle-cone-cone D k =
     inv
       ( ap
         ( λ t → cone-map f g {C' = D} t k)

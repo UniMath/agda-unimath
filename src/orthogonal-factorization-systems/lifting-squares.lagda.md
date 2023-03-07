@@ -2,10 +2,15 @@
 
 ```agda
 module orthogonal-factorization-systems.lifting-squares where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifts-of-maps
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
 open import foundation.commuting-3-simplices-of-homotopies
+open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,17 +21,15 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.extensions-of-maps
-open import orthogonal-factorization-systems.lifts-of-maps
 ```
+</details>
 
 ## Idea
 
@@ -112,7 +115,7 @@ module _
 
   coherence-is-lifting-square :
     {j : X → B} → (l : is-lifting-square h f g i H j) →
-    (is-lift-is-lifting-square l ·r f) ~ (H ∙h (g ·l is-extension-is-lifting-square l)) 
+    (is-lift-is-lifting-square l ·r f) ~ (H ∙h (g ·l is-extension-is-lifting-square l))
   coherence-is-lifting-square = pr2 ∘ pr2
 
   coherence-lifting-square :

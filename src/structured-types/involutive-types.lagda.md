@@ -1,14 +1,17 @@
-#  Involutive types
+# Involutive types
 
 ```agda
 module structured-types.involutive-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
-
 open import univalent-combinatorics.2-element-types
 ```
+</details>
 
 ## Idea
 
@@ -27,7 +30,7 @@ Involutive-Type l = 2-Element-Type lzero → UU l
 module _
   {l : Level} (X : Involutive-Type l)
   where
-  
+
   type-Involutive-Type : UU l
   type-Involutive-Type = X (standard-2-Element-Type lzero)
 ```

@@ -1,14 +1,18 @@
-#  Equivalences between large precategories
+# Equivalences between large precategories
 
 ```agda
 module category-theory.equivalences-large-precategories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories
-open import category-theory.natural-isomorphisms-large-precategories
 open import category-theory.large-precategories
+open import category-theory.natural-isomorphisms-large-precategories
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

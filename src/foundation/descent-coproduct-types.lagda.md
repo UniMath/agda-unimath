@@ -1,8 +1,11 @@
-#  Descent for coproduct types
+# Descent for coproduct types
 
 ```agda
 module foundation.descent-coproduct-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.cones-pullbacks
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -18,6 +21,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+</details>
 
 ## Theorem
 
@@ -30,7 +34,7 @@ module _
   (αA : A → X) (αB : B → X) (αA' : A' → X') (αB' : B' → X')
   (HA : (αA ∘ f) ~ (h ∘ αA')) (HB : (αB ∘ g) ~ (h ∘ αB'))
   where
-  
+
   triangle-descent-square-fib-map-coprod-inl-fib :
     (x : A) →
     (map-fib-cone αA h (triple f αA' HA) x) ~
@@ -66,7 +70,7 @@ module _
   {A : UU l1} {B : UU l2} {X : UU l3} {A' : UU l1'} {B' : UU l2'} {X' : UU l3'}
   (f : A → X) (g : B → X) (i : X' → X)
   where
-  
+
   cone-descent-coprod :
     (cone-A' : cone f i A') (cone-B' : cone g i B') →
     cone (ind-coprod _ f g) i (A' + B')

@@ -1,15 +1,27 @@
-#  Symmetric groups
+# Symmetric groups
 
 ```agda
 module group-theory.symmetric-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.concrete-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.monoids
+open import group-theory.opposite-groups
+open import group-theory.semigroups
+open import group-theory.symmetric-concrete-groups
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
-open import foundation.functions
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -21,17 +33,8 @@ open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import group-theory.concrete-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-groups
-open import group-theory.monoids
-open import group-theory.opposite-groups
-open import group-theory.semigroups
-open import group-theory.symmetric-concrete-groups
 ```
+</details>
 
 ## Definitions
 
@@ -85,7 +88,7 @@ module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2) (e : type-Set X ≃ type-Set Y)
   where
 
-  hom-symmetric-group-equiv-Set : 
+  hom-symmetric-group-equiv-Set :
     type-hom-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 hom-symmetric-group-equiv-Set f = e ∘e (f ∘e inv-equiv e)
   pr2 hom-symmetric-group-equiv-Set f g =
@@ -95,7 +98,7 @@ module _
         ( inv (left-inverse-law-equiv e))) ∙
         ( eq-equiv-eq-map-equiv refl))
 
-  hom-inv-symmetric-group-equiv-Set : 
+  hom-inv-symmetric-group-equiv-Set :
     type-hom-Group (symmetric-Group Y) (symmetric-Group X)
   pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e (f ∘e e)
   pr2 hom-inv-symmetric-group-equiv-Set f g =

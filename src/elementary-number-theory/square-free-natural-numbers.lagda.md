@@ -1,14 +1,17 @@
-#  Square-free natural numbers
+# Square-free natural numbers
 
 ```agda
 module elementary-number-theory.square-free-natural-numbers where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
-
+open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

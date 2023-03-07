@@ -1,8 +1,11 @@
-#  Fiber inclusions
+# Fiber inclusions
 
 ```agda
 module foundation.fiber-inclusions where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cones-pullbacks
@@ -23,11 +26,11 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-
 open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+</details>
 
 ## Idea
 
@@ -39,7 +42,7 @@ Given a family `B` of types over `A` and an element `a : A`, then the fiber incl
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
-  
+
   fiber-inclusion : (x : A) → B x → Σ A B
   pr1 (fiber-inclusion x y) = x
   pr2 (fiber-inclusion x y) = y
@@ -61,7 +64,7 @@ module _
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1}
   where
-  
+
   is-trunc-is-trunc-map-fiber-inclusion :
     ((B : A → UU l2) (a : A) → is-trunc-map k (fiber-inclusion B a)) →
     is-trunc (succ-𝕋 k) A
@@ -135,7 +138,7 @@ pr2 (fiber-inclusion-faithful-map A B x) =
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A)
   where
-  
+
   cone-fiber-fam : cone (pr1 {B = B}) (pt a) (B a)
   pr1 cone-fiber-fam = fiber-inclusion B a
   pr1 (pr2 cone-fiber-fam) = terminal-map

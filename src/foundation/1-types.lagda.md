@@ -1,10 +1,12 @@
-#  1-Types
+# 1-Types
 
 ```agda
 module foundation.1-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.1-types public
-
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -13,10 +15,10 @@ open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.subuniverses
 open import foundation.truncated-types
 ```
+</details>
 
 ### Being a 1-type is a property
 
@@ -121,7 +123,7 @@ module _
 
   equiv-eq-1-Type : (Y : 1-Type l) → X ＝ Y → type-equiv-1-Type Y
   equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
-  
+
   abstract
     is-contr-total-equiv-1-Type : is-contr (Σ (1-Type l) type-equiv-1-Type)
     is-contr-total-equiv-1-Type =

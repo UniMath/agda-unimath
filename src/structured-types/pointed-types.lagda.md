@@ -1,11 +1,15 @@
-#  Pointed types
+# Pointed types
 
 ```agda
 module structured-types.pointed-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -22,10 +26,10 @@ Pointed-Type l = Σ (UU l) (λ X → X)
 module _
   {l : Level} (A : Pointed-Type l)
   where
-  
+
   type-Pointed-Type : UU l
   type-Pointed-Type = pr1 A
-  
+
   pt-Pointed-Type : type-Pointed-Type
   pt-Pointed-Type = pr2 A
 ```

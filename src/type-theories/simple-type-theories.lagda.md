@@ -1,15 +1,18 @@
-#  Simple type theories
+# Simple type theories
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
-
 module type-theories.simple-type-theories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -19,7 +22,7 @@ Simple type theories are type theories that have no type dependency. The categor
 
 ```agda
 module simple where
-  
+
   record system
     {l1 : Level} (l2 : Level) (T : UU l1) : UU (l1 ⊔ lsuc l2)
     where
@@ -44,13 +47,13 @@ module simple where
     coinductive
     field
       element : {X : T} (x : system.element A X) →
-                fibered-system.element B (f X) x 
+                fibered-system.element B (f X) x
       slice   : (X : T) → section-system (fibered-system.slice B (f X)) f
 
   ------------------------------------------------------------------------------
 
   {- We will introduce homotopies of sections of fibered systems. However,
-     in order to define concatenation of those homotopies, we will first 
+     in order to define concatenation of those homotopies, we will first
      define heterogeneous homotopies of sections of fibered systems. -}
 
   Eq-fibered-system' :
@@ -124,7 +127,7 @@ module simple where
       ( inv (ap-inv (fibered-system.slice B) (H X)))
       ( section-system.slice K X)
 
-  -- We specialize the above definitions to nonhomogenous homotopies 
+  -- We specialize the above definitions to nonhomogenous homotopies
 
   htpy-section-system :
     {l1 l2 l3 l4 : Level} {T : UU l1} {A : system l2 T} {S : T → UU l3}
@@ -176,15 +179,15 @@ module simple where
 
   htpy-hom-system :
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S}
-    {A : system l3 T} {B : system l4 S} (g h : hom-system f A B) → 
+    {A : system l3 T} {B : system l4 S} (g h : hom-system f A B) →
     UU (l1 ⊔ l3 ⊔ l4)
   htpy-hom-system g h = htpy-section-system {!!} {!!} {!!}
-  
+
   id-hom-system :
     {l1 l2 : Level} {T : UU l1} (A : system l2 T) → hom-system id A A
   section-system.element (id-hom-system A) {X} = id
   section-system.slice (id-hom-system A) X = id-hom-system (system.slice A X)
-  
+
   comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level} {T : UU l1} {S : UU l2} {R : UU l3} {g : S → R}
     {f : T → S} {A : system l4 T} {B : system l5 S} {C : system l6 R}
@@ -193,7 +196,7 @@ module simple where
     section-system.element β {f X} ∘ section-system.element α {X}
   section-system.slice (comp-hom-system {f = f} β α) X =
     comp-hom-system (section-system.slice β (f X)) (section-system.slice α X)
-  
+
   record weakening
     {l1 l2 : Level} {T : UU l1} (A : system l2 T) : UU (l1 ⊔ l2)
     where
@@ -201,7 +204,7 @@ module simple where
     field
       element : (X : T) → hom-system id A (system.slice A X)
       slice   : (X : T) → weakening (system.slice A X)
-  
+
   record preserves-weakening
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S}
     {A : system l3 T} {B : system l4 S} (WA : weakening A) (WB : weakening B)
@@ -222,7 +225,7 @@ module simple where
                   ( weakening.slice WA X)
                   ( weakening.slice WB (f X))
                   ( section-system.slice h X)
-  
+
   record substitution
     {l1 l2 : Level} {T : UU l1} (A : system l2 T) : UU (l1 ⊔ l2)
     where
@@ -231,7 +234,7 @@ module simple where
       element : {X : T} (x : system.element A X) →
                 hom-system id (system.slice A X) A
       slice   : (X : T) → substitution (system.slice A X)
-  
+
   record preserves-substitution
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S} {A : system l3 T}
     {B : system l4 S} (SA : substitution A) (SB : substitution B)
@@ -253,7 +256,7 @@ module simple where
                   ( substitution.slice SA X)
                   ( substitution.slice SB (f X))
                   ( section-system.slice h X)
-  
+
   record generic-element
     {l1 l2 : Level} {T : UU l1} (A : system l2 T) : UU (l1 ⊔ l2)
     where
@@ -261,7 +264,7 @@ module simple where
     field
       element : (X : T) → system.element (system.slice A X) X
       slice   : (X : T) → generic-element (system.slice A X)
-  
+
   record preserves-generic-element
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S}
     {A : system l3 T} {B : system l4 S} (δA : generic-element A)
@@ -283,7 +286,7 @@ module simple where
   module _
     {l1 l2 : Level} {T : UU l1}
     where
-  
+
     record weakening-preserves-weakening
       {A : system l2 T} (W : weakening A) : UU (l1 ⊔ l2)
       where
@@ -295,7 +298,7 @@ module simple where
                     ( weakening.slice W X)
                     ( weakening.element W X)
         slice   : (X : T) → weakening-preserves-weakening (weakening.slice W  X)
-  
+
     record substitution-preserves-substitution
       {A : system l2 T} (S : substitution A) : UU (l1 ⊔ l2)
       where
@@ -308,7 +311,7 @@ module simple where
                     ( substitution.element S x)
         slice   : (X : T) →
                   substitution-preserves-substitution (substitution.slice S X)
-  
+
     record weakening-preserves-substitution
       {A : system l2 T} (W : weakening A) (S : substitution A) : UU (l1 ⊔ l2)
       where
@@ -323,7 +326,7 @@ module simple where
                   weakening-preserves-substitution
                     ( weakening.slice W X)
                     ( substitution.slice S X)
-  
+
     record substitution-preserves-weakening
       {A : system l2 T} (W : weakening A) (S : substitution A) : UU (l1 ⊔ l2)
       where
@@ -338,7 +341,7 @@ module simple where
                   substitution-preserves-weakening
                     ( weakening.slice W X)
                     ( substitution.slice S X)
-  
+
     record weakening-preserves-generic-element
       {A : system l2 T} (W : weakening A) (δ : generic-element A) : UU (l1 ⊔ l2)
       where
@@ -353,7 +356,7 @@ module simple where
                   weakening-preserves-generic-element
                     ( weakening.slice W X)
                     ( generic-element.slice δ X)
-  
+
     record substitution-preserves-generic-element
       {A : system l2 T} (S : substitution A) (δ : generic-element A) :
       UU (l1 ⊔ l2)
@@ -369,7 +372,7 @@ module simple where
                   substitution-preserves-generic-element
                     ( substitution.slice S X)
                     ( generic-element.slice δ X)
-  
+
     record substitution-cancels-weakening
       {A : system l2 T} (W : weakening A) (S : substitution A) : UU (l1 ⊔ l2)
       where
@@ -385,7 +388,7 @@ module simple where
                   substitution-cancels-weakening
                     ( weakening.slice W X)
                     ( substitution.slice S X)
-  
+
     record generic-element-is-identity
       {A : system l2 T} (S : substitution A) (δ : generic-element A) :
       UU (l1 ⊔ l2)
@@ -401,7 +404,7 @@ module simple where
                   generic-element-is-identity
                     ( substitution.slice S X)
                     ( generic-element.slice δ X)
-  
+
     record substitution-by-generic-element
       {A : system l2 T} (W : weakening A) (S : substitution A)
       (δ : generic-element A) : UU (l1 ⊔ l2)
@@ -421,7 +424,7 @@ module simple where
                     ( weakening.slice W X)
                     ( substitution.slice S X)
                     ( generic-element.slice δ X)
-  
+
   record type-theory
     (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc  l2)
     where
@@ -549,7 +552,7 @@ module dependent-simple
     simple.section-system.element K
   dependent.section-system.slice (htpy-section-system {H = H} K) X =
     {!htpy-section-system ?!}
-                                              
+
   hom-system :
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l3} {f : T → S}
     {A : simple.system l2 T} {B : simple.system l4 S} →
@@ -560,7 +563,7 @@ module dependent-simple
     simple.section-system.element h
   dependent.section-system.slice (hom-system h) X =
     hom-system (simple.section-system.slice h X)
-  
+
   comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level} {T : UU l1} {S : UU l2} {R : UU l3}
     {g : S → R} {f : T → S} {A : simple.system l4 T} {B : simple.system l5 S}
@@ -578,7 +581,7 @@ module dependent-simple
     comp-hom-system
       ( simple.section-system.slice k (f X))
       ( simple.section-system.slice h X)
-  
+
   htpy-hom-system :
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S}
     {A : simple.system l3 T} {B : simple.system l4 S}
@@ -590,7 +593,7 @@ module dependent-simple
     simple.section-system.element {f = {!!}} H x --simple.section-system.element H {X} x
   dependent.section-system.slice (htpy-hom-system H) X =
     {!!} --htpy-hom-system (simple.section-system.slice H X)
-  
+
   weakening :
     {l1 l2 : Level} {T : UU l1} {A : simple.system l2 T} →
     simple.weakening A → dependent.weakening (system A)
@@ -623,7 +626,7 @@ module dependent-simple
           ( g)))
   dependent.preserves-weakening.slice (preserves-weakening Wg) X =
     preserves-weakening (simple.preserves-weakening.slice Wg X)
-  
+
   substitution :
     {l1 l2 : Level} {T : UU l1} {A : simple.system l2 T} →
     simple.substitution A →
@@ -647,7 +650,7 @@ module dependent-simple
     generic-element
       ( simple.weakening.slice W X)
       ( simple.generic-element.slice δ X)
-  
+
   weakening-preserves-weakening :
     {l1 l2 : Level} {T : UU l1} {A : simple.system l2 T}
     {W : simple.weakening A} →

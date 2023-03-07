@@ -1,8 +1,11 @@
-#  Global choice
+# Global choice
 
 ```agda
 module foundation.global-choice where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
@@ -10,10 +13,10 @@ open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

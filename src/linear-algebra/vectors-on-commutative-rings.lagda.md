@@ -2,25 +2,25 @@
 
 ```agda
 module linear-algebra.vectors-on-commutative-rings where
+```
 
-open import commutative-algebra.commutative-rings
-
-open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.universe-levels
-
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
-
+<details><summary>Imports</summary>
+```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
+open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.universe-levels
+open import commutative-algebra.commutative-rings
+open import elementary-number-theory.natural-numbers
+open import group-theory.commutative-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
+</details>
 
 ## Idea
 
@@ -34,7 +34,7 @@ Vectors on a commutative ring `R` are vectors on the underlying type of `R`. The
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   vec-Commutative-Ring : ℕ → UU l
   vec-Commutative-Ring = vec-Ring (ring-Commutative-Ring R)
 
@@ -116,7 +116,7 @@ module _
 
 ### Pointwise addition of vectors on a commutative ring
 
-#### Pointwise addition of listed vectors on a commutative ring 
+#### Pointwise addition of listed vectors on a commutative ring
 
 ```agda
 module _

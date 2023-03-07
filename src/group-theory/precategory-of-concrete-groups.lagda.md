@@ -1,17 +1,19 @@
-#  The precategory of concrete groups
+# The precategory of concrete groups
 
 ```agda
 module group-theory.precategory-of-concrete-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-groups
+open import foundation.universe-levels
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
-
-open import foundation.universe-levels
-
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
 ```
+</details>
 
 ## Definitions
 
@@ -28,7 +30,7 @@ id-hom-Large-Precat Concrete-Group-Large-Precat {X = G} =
 associative-comp-hom-Large-Precat Concrete-Group-Large-Precat
   {X = G} {Y = H} {Z = K} {W = L} h g f =
   eq-htpy-hom-Concrete-Group G L _ _
-    ( assoc-comp-hom-Concrete-Group G H K L h g f) 
+    ( assoc-comp-hom-Concrete-Group G H K L h g f)
 left-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat
   {X = G} {Y = H} f =
   eq-htpy-hom-Concrete-Group G H _ _

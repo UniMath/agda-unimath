@@ -1,8 +1,11 @@
-#  Equality of coproduct types
+# Equality of coproduct types
 
 ```agda
 module foundation.equality-coproduct-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -23,6 +26,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -62,7 +66,7 @@ module _
   eq-Eq-coprod : (x y : A + B) → Eq-coprod x y → x ＝ y
   eq-Eq-coprod .(inl x) .(inl x) (Eq-eq-coprod-inl {x} {.x} refl) = refl
   eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
-  
+
   is-contr-total-Eq-coprod :
     (x : A + B) → is-contr (Σ (A + B) (Eq-coprod x))
   pr1 (pr1 (is-contr-total-Eq-coprod (inl x))) = inl x
@@ -78,7 +82,7 @@ module _
 
   is-equiv-Eq-eq-coprod : (x y : A + B) → is-equiv (Eq-eq-coprod x y)
   is-equiv-Eq-eq-coprod x =
-    fundamental-theorem-id 
+    fundamental-theorem-id
       ( is-contr-total-Eq-coprod x)
       ( Eq-eq-coprod x)
 
@@ -97,7 +101,7 @@ module _
   module _
     (x y : A)
     where
-    
+
     map-compute-Eq-coprod-inl-inl : Eq-coprod {B = B} (inl x) (inl y) → (x ＝ y)
     map-compute-Eq-coprod-inl-inl (Eq-eq-coprod-inl p) = p
 
@@ -124,7 +128,7 @@ module _
     compute-eq-coprod-inl-inl : Id {A = A + B} (inl x) (inl y) ≃ (x ＝ y)
     compute-eq-coprod-inl-inl =
       compute-Eq-coprod-inl-inl ∘e extensionality-coprod (inl x) (inl y)
-      
+
     map-compute-eq-coprod-inl-inl : Id {A = A + B} (inl x) (inl y) → x ＝ y
     map-compute-eq-coprod-inl-inl = map-equiv compute-eq-coprod-inl-inl
 
@@ -147,7 +151,7 @@ module _
     compute-eq-coprod-inl-inr : Id {A = A + B} (inl x) (inr y) ≃ empty
     compute-eq-coprod-inl-inr =
       compute-Eq-coprod-inl-inr ∘e extensionality-coprod (inl x) (inr y)
-      
+
     is-empty-eq-coprod-inl-inr : is-empty (Id {A = A + B} (inl x) (inr y))
     is-empty-eq-coprod-inl-inr = map-equiv compute-eq-coprod-inl-inr
 
@@ -170,14 +174,14 @@ module _
     compute-eq-coprod-inr-inl : Id {A = A + B} (inr x) (inl y) ≃ empty
     compute-eq-coprod-inr-inl =
       compute-Eq-coprod-inr-inl ∘e extensionality-coprod (inr x) (inl y)
-      
+
     is-empty-eq-coprod-inr-inl : is-empty (Id {A = A + B} (inr x) (inl y))
     is-empty-eq-coprod-inr-inl = map-equiv compute-eq-coprod-inr-inl
 
   module _
     (x y : B)
     where
-    
+
     map-compute-Eq-coprod-inr-inr : Eq-coprod {A = A} (inr x) (inr y) → x ＝ y
     map-compute-Eq-coprod-inr-inr (Eq-eq-coprod-inr p) = p
 
@@ -215,7 +219,7 @@ module _
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
-  
+
   abstract
     is-emb-inl : is-emb (inl {A = A} {B = B})
     is-emb-inl x =

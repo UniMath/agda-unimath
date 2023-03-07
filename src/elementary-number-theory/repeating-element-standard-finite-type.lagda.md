@@ -1,19 +1,21 @@
-#  Repeating an element in a standard finite type
+# Repeating an element in a standard finite type
 
 ```agda
 module elementary-number-theory.repeating-element-standard-finite-type where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.unit-type
-
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ```agda
 repeat-Fin :

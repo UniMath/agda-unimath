@@ -1,12 +1,12 @@
-#  Finite monoids
+# Finite monoids
 
 ```agda
 module finite-group-theory.finite-monoids where
+```
 
-open import elementary-number-theory.natural-numbers
-
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.finite-semigroups
-
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -16,10 +16,9 @@ open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
+open import elementary-number-theory.natural-numbers
 open import group-theory.monoids
 open import group-theory.semigroups
-
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
@@ -27,6 +26,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+</details>
 
 ## Idea
 

@@ -1,10 +1,17 @@
-#  Functoriality of function types
+# Functoriality of function types
 
 ```agda
 module foundation.functoriality-function-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.functoriality-function-types public
-
+open import foundation-core.contractible-maps
+open import foundation-core.equivalences
+open import foundation-core.function-extensionality
+open import foundation-core.truncated-maps
+open import foundation-core.truncation-levels
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -14,13 +21,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.contractible-maps
-open import foundation-core.equivalences
-open import foundation-core.function-extensionality
-open import foundation-core.truncated-maps
-open import foundation-core.truncation-levels
 ```
+</details>
 
 ## Properties
 

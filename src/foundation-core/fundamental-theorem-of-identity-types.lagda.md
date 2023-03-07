@@ -1,18 +1,22 @@
-#  The fundamental theorem of identity types
+# The fundamental theorem of identity types
 
 ```agda
 module foundation-core.fundamental-theorem-of-identity-types where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -53,8 +57,8 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where
-  
-  abstract 
+
+  abstract
     fundamental-theorem-id-J :
       is-contr (Σ A B) → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
     fundamental-theorem-id-J is-contr-AB =

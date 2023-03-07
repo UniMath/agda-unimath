@@ -1,14 +1,18 @@
-#  Functors between categories
+# Functors between categories
 
 ```agda
 module category-theory.functors-categories where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 

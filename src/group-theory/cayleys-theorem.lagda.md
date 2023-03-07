@@ -1,30 +1,33 @@
-#  Cayley's theorem
+# Cayley's theorem
 
 ```agda
 module group-theory.cayleys-theorem where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.embeddings-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-extensionality
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
-
-open import group-theory.embeddings-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
 ```
+</details>
 
 ```agda
 module _
   {l1 : Level} (G : Group l1)
   where
-  
+
   map-Cayleys-theorem :
     type-Group G → type-Group (symmetric-Group (set-Group G))
   map-Cayleys-theorem x = equiv-mul-Group G x
-  
+
   preserves-mul-map-Cayleys-theorem :
     preserves-mul-Group G (symmetric-Group (set-Group G)) map-Cayleys-theorem
   preserves-mul-map-Cayleys-theorem x y =

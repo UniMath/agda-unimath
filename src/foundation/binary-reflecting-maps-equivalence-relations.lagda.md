@@ -2,7 +2,10 @@
 
 ```agda
 module foundation.binary-reflecting-maps-equivalence-relations where
+```
 
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -17,6 +20,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+</details>
 
 ## Idea
 
@@ -27,7 +31,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2}
   (R : Eq-Rel l3 A) (S : Eq-Rel l4 B)
   where
-  
+
   binary-reflects-Eq-Rel :
     {X : UU l5} (f : A → B → X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   binary-reflects-Eq-Rel f =

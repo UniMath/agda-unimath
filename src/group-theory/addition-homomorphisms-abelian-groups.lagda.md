@@ -1,15 +1,18 @@
-#  Pointwise addition of morphisms of abelian groups
+# Pointwise addition of morphisms of abelian groups
 
 ```agda
 module group-theory.addition-homomorphisms-abelian-groups where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import group-theory.abelian-groups
-open import group-theory.homomorphisms-abelian-groups
 ```
+</details>
 
 ## Idea
 
@@ -23,7 +26,7 @@ Morphisms of abelian groups can be added pointwise. This operation turns each ho
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
-  
+
   add-hom-Ab :
     type-hom-Ab A B → type-hom-Ab A B → type-hom-Ab A B
   pr1 (add-hom-Ab f g) x = add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B g x)
@@ -54,7 +57,7 @@ module _
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
-  
+
   associative-add-hom-Ab :
     (f g h : type-hom-Ab A B) →
     Id ( add-hom-Ab A B (add-hom-Ab A B f g) h)

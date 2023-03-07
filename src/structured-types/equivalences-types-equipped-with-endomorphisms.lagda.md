@@ -1,8 +1,13 @@
-#  Equivalences of types equipped with endomorphisms
+# Equivalences of types equipped with endomorphisms
 
 ```agda
 module structured-types.equivalences-types-equipped-with-endomorphisms where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.morphisms-types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -12,15 +17,13 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.subtype-identity-principle
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.types-equipped-with-endomorphisms
 ```
+</details>
 
 ## Definition
 
@@ -43,7 +46,7 @@ module _
 
   equiv-equiv-Endo : equiv-Endo → type-Endo X ≃ type-Endo Y
   equiv-equiv-Endo e = pr1 e
-  
+
   map-equiv-Endo : equiv-Endo → type-Endo X → type-Endo Y
   map-equiv-Endo e = map-equiv (equiv-equiv-Endo e)
 
@@ -57,7 +60,7 @@ module _
   coherence-square-equiv-Endo e = pr2 e
 ```
 
-### The identity equivalence 
+### The identity equivalence
 
 ```agda
 module _
@@ -200,7 +203,7 @@ module _
 
   equiv-eq-Endo : (Y : Endo l1) → Id X Y → equiv-Endo X Y
   equiv-eq-Endo .X refl = id-equiv-Endo X
-  
+
   is-contr-total-equiv-Endo : is-contr (Σ (Endo l1) (equiv-Endo X))
   is-contr-total-equiv-Endo =
     is-contr-total-Eq-structure
@@ -211,7 +214,7 @@ module _
 
   is-equiv-equiv-eq-Endo : (Y : Endo l1) → is-equiv (equiv-eq-Endo Y)
   is-equiv-equiv-eq-Endo =
-    fundamental-theorem-id 
+    fundamental-theorem-id
       is-contr-total-equiv-Endo
       equiv-eq-Endo
 

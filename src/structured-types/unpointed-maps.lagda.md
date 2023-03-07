@@ -1,13 +1,16 @@
-#  Unpointed maps between pointed types
+# Unpointed maps between pointed types
 
 ```agda
 module structured-types.unpointed-maps where
+```
 
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
-open import structured-types.pointed-types
 ```
+</details>
 
 ## Idea
 
