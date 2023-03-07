@@ -85,6 +85,19 @@ module _
   subset-Subgroup-Ab : subset-Ab l2 A
   subset-Subgroup-Ab = subset-Subgroup (group-Ab A) B
 
+  type-Subgroup-Ab : UU (l1 ⊔ l2)
+  type-Subgroup-Ab = type-Subgroup (group-Ab A) B
+
+  inclusion-Subgroup-Ab : type-Subgroup-Ab → type-Ab A
+  inclusion-Subgroup-Ab = inclusion-Subgroup (group-Ab A) B
+
+  is-emb-inclusion-Subgroup-Ab : is-emb inclusion-Subgroup-Ab
+  is-emb-inclusion-Subgroup-Ab =
+    is-emb-inclusion-Subgroup (group-Ab A) B
+
+  emb-inclusion-Subgroup-Ab : type-Subgroup-Ab ↪ type-Ab A
+  emb-inclusion-Subgroup-Ab = emb-inclusion-Subgroup (group-Ab A) B
+
   is-in-Subgroup-Ab : type-Ab A → UU l2
   is-in-Subgroup-Ab = is-in-Subgroup (group-Ab A) B
 
@@ -99,6 +112,12 @@ module _
     is-in-Subgroup-Ab y → x ＝ y → is-in-Subgroup-Ab x
   is-closed-under-eq-Subgroup-Ab' =
     is-closed-under-eq-Subgroup' (group-Ab A) B
+
+  is-in-subgroup-inclusion-Subgroup-Ab :
+    (x : type-Subgroup-Ab) →
+    is-in-Subgroup-Ab (inclusion-Subgroup-Ab x)
+  is-in-subgroup-inclusion-Subgroup-Ab =
+    is-in-subgroup-inclusion-Subgroup (group-Ab A) B
 
   is-prop-is-in-Subgroup-Ab :
     (x : type-Ab A) → is-prop (is-in-Subgroup-Ab x)
@@ -115,11 +134,27 @@ module _
 
   is-closed-under-add-Subgroup-Ab :
     is-closed-under-add-subset-Ab A subset-Subgroup-Ab
-  is-closed-under-add-Subgroup-Ab = is-closed-under-mul-Subgroup (group-Ab A) B
+  is-closed-under-add-Subgroup-Ab =
+    is-closed-under-mul-Subgroup (group-Ab A) B
 
   is-closed-under-neg-Subgroup-Ab :
     is-closed-under-neg-subset-Ab A subset-Subgroup-Ab
-  is-closed-under-neg-Subgroup-Ab = is-closed-under-inv-Subgroup (group-Ab A) B
+  is-closed-under-neg-Subgroup-Ab =
+    is-closed-under-inv-Subgroup (group-Ab A) B
+
+  is-in-subgroup-left-summand-Subgroup-Ab :
+    (x y : type-Ab A) →
+    is-in-Subgroup-Ab (add-Ab A x y) → is-in-Subgroup-Ab y →
+    is-in-Subgroup-Ab x
+  is-in-subgroup-left-summand-Subgroup-Ab =
+    is-in-subgroup-left-factor-Subgroup (group-Ab A) B
+
+  is-in-subgroup-right-summand-Subgroup-Ab :
+    (x y : type-Ab A) →
+    is-in-Subgroup-Ab (add-Ab A x y) → is-in-Subgroup-Ab x →
+    is-in-Subgroup-Ab y
+  is-in-subgroup-right-summand-Subgroup-Ab =
+    is-in-subgroup-right-factor-Subgroup (group-Ab A) B
 
 is-emb-subset-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) → is-emb (subset-Subgroup-Ab {l2 = l2} A)
