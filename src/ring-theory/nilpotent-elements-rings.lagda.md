@@ -1,15 +1,18 @@
 # Nilpotent elements in rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.nilpotent-elements-rings where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
+open import ring-theory.powers-of-elements-rings
+open import ring-theory.rings
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import ring-theory.powers-of-elements-rings
-open import ring-theory.rings
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

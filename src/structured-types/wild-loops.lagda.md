@@ -1,18 +1,21 @@
 # Wild loops
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-loops where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import structured-types.coherent-h-spaces
+open import structured-types.magmas
+open import structured-types.pointed-types
+open import structured-types.wild-quasigroups
 open import foundation.automorphisms
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
-open import structured-types.coherent-h-spaces
-open import structured-types.magmas
-open import structured-types.pointed-types
-open import structured-types.wild-quasigroups
 ```
 </details>
 

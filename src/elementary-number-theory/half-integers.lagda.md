@@ -1,8 +1,11 @@
 # The half-integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.half-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import foundation.coproduct-types

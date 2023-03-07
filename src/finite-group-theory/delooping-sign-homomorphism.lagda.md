@@ -4,11 +4,12 @@
 {-# OPTIONS --lossy-unification #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.delooping-sign-homomorphism where
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
@@ -45,6 +46,8 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups

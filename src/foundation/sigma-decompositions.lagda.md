@@ -1,9 +1,12 @@
 # Σ-decompositions of types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification  #-}
 module foundation.sigma-decompositions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types

@@ -1,8 +1,11 @@
 # Homotopies
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.homotopies where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.homotopies public
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

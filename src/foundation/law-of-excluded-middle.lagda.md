@@ -1,8 +1,11 @@
 # The law of excluded middle
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.law-of-excluded-middle where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types

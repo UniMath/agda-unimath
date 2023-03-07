@@ -1,14 +1,17 @@
 # Monomorphisms of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.monomorphisms-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-groups
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.propositions
 open import foundation.universe-levels
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
 ```
 </details>
 

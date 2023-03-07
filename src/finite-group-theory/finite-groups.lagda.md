@@ -1,9 +1,11 @@
 # Finite groups
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.finite-groups where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.finite-semigroups
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -24,6 +26,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups

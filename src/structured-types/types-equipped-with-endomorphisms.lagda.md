@@ -1,8 +1,11 @@
 # Types equipped with endomorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.types-equipped-with-endomorphisms where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
 open import foundation.universe-levels

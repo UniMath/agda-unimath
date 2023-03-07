@@ -1,8 +1,11 @@
 # The induction principle for propositional truncation
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.induction-principle-propositional-truncation where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions

@@ -4,9 +4,12 @@
 {-# OPTIONS --safe #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.embeddings where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

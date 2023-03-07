@@ -1,15 +1,18 @@
 # Posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.posets where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.preorders
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-open import order-theory.preorders
 ```
 </details>
 

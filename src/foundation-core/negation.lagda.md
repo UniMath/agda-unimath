@@ -1,8 +1,11 @@
 # Negation
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.negation where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.empty-types
 open import foundation-core.universe-levels
 ```

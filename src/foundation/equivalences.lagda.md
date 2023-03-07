@@ -1,8 +1,11 @@
 # Equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.equivalences where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalences public
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps

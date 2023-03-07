@@ -1,8 +1,14 @@
 # Pointed equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-equivalences where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 open import foundation-core.function-extensionality
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
@@ -19,9 +25,6 @@ open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
 ```
 </details>
 

@@ -1,8 +1,11 @@
 # Coherently invertible maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.coherently-invertible-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coherently-invertible-maps public
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types

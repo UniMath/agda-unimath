@@ -4,12 +4,15 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module type-theories.comprehension-type-theories where
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+```agda
 open import type-theories.dependent-type-theories
 open import type-theories.fibered-dependent-type-theories
+open import foundation.universe-levels
 ```
 </details>
 

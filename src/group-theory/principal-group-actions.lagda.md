@@ -1,13 +1,16 @@
 # Principal group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.principal-group-actions where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import group-theory.group-actions
+open import group-theory.groups
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.universe-levels
-open import group-theory.group-actions
-open import group-theory.groups
 ```
 </details>
 

@@ -1,8 +1,11 @@
 # The Zariski topology on the set of prime ideals in a commutative ring
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.zariski-topology where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 open import foundation.dependent-pair-types

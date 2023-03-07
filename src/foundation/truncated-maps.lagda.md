@@ -1,8 +1,11 @@
 # Truncated maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.truncated-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.truncated-maps public
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types

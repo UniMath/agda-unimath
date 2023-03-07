@@ -1,13 +1,16 @@
 # The infinite complex projective space
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.infinite-complex-projective-space where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.circle
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.set-truncations
 open import foundation.universe-levels
-open import synthetic-homotopy-theory.circle
 ```
 </details>
 

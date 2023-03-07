@@ -1,8 +1,11 @@
 # Natural isomorphisms between functors between precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.natural-isomorphisms-precategories where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-precategories
 open import category-theory.natural-transformations-precategories

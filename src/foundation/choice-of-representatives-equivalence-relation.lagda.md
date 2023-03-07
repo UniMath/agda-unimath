@@ -1,8 +1,11 @@
 # Choice of representatives for an equivalence relation
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.choice-of-representatives-equivalence-relation where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalence-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types

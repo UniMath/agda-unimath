@@ -1,8 +1,11 @@
 # Contractible maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.contractible-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

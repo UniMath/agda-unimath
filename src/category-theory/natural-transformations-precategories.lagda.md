@@ -1,8 +1,11 @@
 # Natural transformations between functors on precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.natural-transformations-precategories where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import category-theory.functors-precategories
 open import category-theory.precategories
 open import foundation.dependent-pair-types

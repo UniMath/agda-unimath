@@ -1,12 +1,11 @@
 # The binomial theorem for the integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.binomial-theorem-integers where
-open import commutative-algebra.binomial-theorem-commutative-rings
-open import commutative-algebra.commutative-semirings
-open import commutative-algebra.powers-of-elements-commutative-semirings
-open import commutative-algebra.sums-commutative-semirings
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.commutative-ring-of-integers
 open import elementary-number-theory.distance-natural-numbers
@@ -22,6 +21,10 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+open import commutative-algebra.binomial-theorem-commutative-rings
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.powers-of-elements-commutative-semirings
+open import commutative-algebra.sums-commutative-semirings
 open import linear-algebra.vectors
 open import univalent-combinatorics.standard-finite-types
 ```

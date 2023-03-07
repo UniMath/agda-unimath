@@ -1,8 +1,11 @@
 # W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.w-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.truncation-levels
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.contractible-types

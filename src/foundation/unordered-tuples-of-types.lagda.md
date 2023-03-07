@@ -1,9 +1,11 @@
 # Unordered tuples of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-tuples-of-types where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -13,6 +15,7 @@ open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-tuples
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.finite-types
 ```
 </details>

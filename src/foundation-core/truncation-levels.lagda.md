@@ -2,11 +2,11 @@
 
 ```agda
 {-# OPTIONS --safe #-}
+module foundation-core.truncation-levels where
 ```
 
 <details><summary>Imports</summary>
 ```agda
-module foundation-core.truncation-levels where
 open import foundation-core.universe-levels
 ```
 </details>

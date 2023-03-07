@@ -1,8 +1,11 @@
 # The congruence relations on the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.congruence-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers

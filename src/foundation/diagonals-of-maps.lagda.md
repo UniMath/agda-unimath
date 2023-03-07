@@ -1,8 +1,11 @@
 # Diagonals of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.diagonals-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings

@@ -1,8 +1,11 @@
 # The universal property of propositional truncations with respect to sets
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-propositional-truncation-into-sets where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps

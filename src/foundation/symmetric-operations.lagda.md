@@ -1,8 +1,11 @@
 # Symmetric operations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-operations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality

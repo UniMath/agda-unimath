@@ -1,8 +1,11 @@
 # Isolated points
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.isolated-points where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types

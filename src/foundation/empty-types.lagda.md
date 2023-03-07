@@ -1,8 +1,11 @@
 # Empty types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.empty-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.empty-types public
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

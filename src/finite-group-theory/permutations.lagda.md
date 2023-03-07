@@ -4,11 +4,12 @@
 {-# OPTIONS --lossy-unification #-}
 ```
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.permutations where
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.transpositions
 open import foundation.cartesian-product-types
@@ -32,6 +33,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 open import univalent-combinatorics.2-element-decidable-subtypes

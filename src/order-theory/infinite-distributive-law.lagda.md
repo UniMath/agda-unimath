@@ -1,8 +1,15 @@
 # Infinite distributive law
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.infinite-distributive-law where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
+open import order-theory.sup-lattices
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -10,10 +17,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import order-theory.least-upper-bounds-posets
-open import order-theory.meet-semilattices
-open import order-theory.posets
-open import order-theory.sup-lattices
 ```
 </details>
 

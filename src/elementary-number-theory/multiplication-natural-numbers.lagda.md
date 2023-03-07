@@ -1,8 +1,11 @@
 # Multiplication of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types

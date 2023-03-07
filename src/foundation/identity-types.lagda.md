@@ -1,8 +1,11 @@
 # Identity types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.identity-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.identity-types public
 open import foundation-core.equivalences
 open import foundation-core.functions

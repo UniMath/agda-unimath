@@ -1,8 +1,11 @@
 # The integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.coproduct-types

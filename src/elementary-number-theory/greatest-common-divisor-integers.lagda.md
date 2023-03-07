@@ -1,8 +1,11 @@
 # The greatest common divisor of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.greatest-common-divisor-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-integers

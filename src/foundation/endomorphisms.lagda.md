@@ -1,8 +1,11 @@
 # endomorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.endomorphisms where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.endomorphisms public
 open import foundation.dependent-pair-types
 open import foundation.functions

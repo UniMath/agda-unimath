@@ -1,12 +1,15 @@
 # Total preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.total-preorders where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.preorders
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
-open import order-theory.preorders
 ```
 </details>
 

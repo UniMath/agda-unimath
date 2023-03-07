@@ -1,8 +1,12 @@
 # Pointed types equipped with automorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-types-equipped-with-automorphisms where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import structured-types.pointed-types
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -15,7 +19,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import structured-types.pointed-types
 ```
 </details>
 

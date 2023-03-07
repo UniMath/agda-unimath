@@ -1,8 +1,11 @@
 # Mersenne primes
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.mersenne-primes where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers

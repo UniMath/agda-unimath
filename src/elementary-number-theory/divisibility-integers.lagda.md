@@ -1,8 +1,11 @@
 # Divisibility of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.divisibility-natural-numbers

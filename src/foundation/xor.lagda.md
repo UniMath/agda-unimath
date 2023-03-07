@@ -1,8 +1,11 @@
 # Exclusive disjunction of propositions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.xor where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.contractible-types

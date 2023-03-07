@@ -1,8 +1,11 @@
 # Local commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.local-commutative-rings where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.invertible-elements-commutative-rings
 open import foundation.cartesian-product-types

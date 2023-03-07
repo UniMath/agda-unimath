@@ -1,8 +1,11 @@
 # Unit similarity on the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.unit-similarity-standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers

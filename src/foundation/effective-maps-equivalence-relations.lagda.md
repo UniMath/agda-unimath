@@ -1,8 +1,11 @@
 # Effective maps for equivalence relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.effective-maps-equivalence-relations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences

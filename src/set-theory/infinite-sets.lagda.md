@@ -1,14 +1,17 @@
 # Infinite sets
 
-<details><summary>Imports</summary>
 ```agda
 module set-theory.infinite-sets where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.existential-quantification
 open import foundation.mere-embeddings
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

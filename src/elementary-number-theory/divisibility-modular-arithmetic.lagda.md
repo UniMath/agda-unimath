@@ -1,8 +1,11 @@
 # Divisibility in modular arithmetic
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-modular-arithmetic where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-standard-finite-types

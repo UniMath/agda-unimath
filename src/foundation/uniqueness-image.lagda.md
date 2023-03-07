@@ -1,8 +1,11 @@
 # Uniqueness of the image of a map
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-image where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings

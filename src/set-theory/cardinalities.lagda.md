@@ -1,8 +1,11 @@
 # Cardinalities of sets
 
-<details><summary>Imports</summary>
 ```agda
 module set-theory.cardinalities where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.sets
 open import foundation.dependent-pair-types
 open import foundation.embeddings

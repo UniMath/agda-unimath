@@ -1,8 +1,11 @@
 # The congruence relations on the integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.congruence-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-integers

@@ -1,12 +1,15 @@
 # Transitive multisets
 
-<details><summary>Imports</summary>
 ```agda
 module trees.transitive-multisets where
-open import foundation.embeddings
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+```agda
 open import trees.multisets
 open import trees.submultisets
+open import foundation.embeddings
+open import foundation.universe-levels
 ```
 </details>
 

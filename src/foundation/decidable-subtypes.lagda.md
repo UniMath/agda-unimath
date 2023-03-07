@@ -1,8 +1,11 @@
 # Decidable subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-subtypes where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions

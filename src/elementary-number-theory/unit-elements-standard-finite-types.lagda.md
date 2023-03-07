@@ -1,8 +1,11 @@
 # Unit elements in the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.unit-elements-standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-standard-finite-types

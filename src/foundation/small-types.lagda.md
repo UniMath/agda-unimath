@@ -1,8 +1,11 @@
 # Small types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.small-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.small-types public
 open import foundation.dependent-pair-types
 open import foundation.embeddings

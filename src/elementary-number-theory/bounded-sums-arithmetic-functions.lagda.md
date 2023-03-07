@@ -1,8 +1,11 @@
 # Bounded sums of arithmetic functions
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bounded-sums-arithmetic-functions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.arithmetic-functions
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers

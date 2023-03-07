@@ -1,8 +1,16 @@
 # Suspensions of types
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -23,11 +31,6 @@ open import foundation.universe-levels
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 </details>
 

@@ -1,8 +1,11 @@
 # Tight apartness relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.tight-apartness-relations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.cartesian-product-types

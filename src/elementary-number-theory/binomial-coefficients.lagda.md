@@ -1,8 +1,11 @@
 # The binomial coefficients
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.binomial-coefficients where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers

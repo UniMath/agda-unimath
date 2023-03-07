@@ -1,8 +1,11 @@
 # Finitely cyclic maps
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.finitely-cyclic-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types

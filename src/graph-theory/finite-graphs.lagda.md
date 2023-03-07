@@ -1,9 +1,12 @@
 # Finite graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.finite-graphs where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.undirected-graphs
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -13,7 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import graph-theory.undirected-graphs
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.dependent-function-types

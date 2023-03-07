@@ -1,8 +1,11 @@
 # Propositional truncations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.propositional-truncations where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coproduct-types
 open import foundation-core.sets
 open import foundation-core.truncated-types

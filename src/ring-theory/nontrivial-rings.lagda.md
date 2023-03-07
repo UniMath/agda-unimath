@@ -1,14 +1,17 @@
 # Nontrivial rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.nontrivial-rings where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import ring-theory.rings
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-open import ring-theory.rings
 ```
 </details>
 

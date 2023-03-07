@@ -1,8 +1,11 @@
 # Modular arithmetic on the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers

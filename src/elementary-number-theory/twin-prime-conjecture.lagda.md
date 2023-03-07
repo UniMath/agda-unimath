@@ -1,8 +1,11 @@
 # The Twin Prime conjecture
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.twin-prime-conjecture where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers

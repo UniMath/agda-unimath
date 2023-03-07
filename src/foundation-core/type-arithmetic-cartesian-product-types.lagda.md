@@ -1,8 +1,11 @@
 # Type arithmetic for cartesian product types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.type-arithmetic-cartesian-product-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

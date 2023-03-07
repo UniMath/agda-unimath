@@ -1,8 +1,11 @@
 # Functoriality of dependent function types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.functoriality-dependent-function-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps

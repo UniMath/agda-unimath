@@ -1,8 +1,11 @@
 # Global choice
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.global-choice where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation

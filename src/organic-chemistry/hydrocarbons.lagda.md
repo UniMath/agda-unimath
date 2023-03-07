@@ -1,16 +1,19 @@
 # Hydrocarbons
 
-<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.hydrocarbons where
-open import elementary-number-theory.inequality-natural-numbers
-open import finite-group-theory.tetrahedra-in-3-space
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.negation
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+open import elementary-number-theory.inequality-natural-numbers
+open import finite-group-theory.tetrahedra-in-3-space
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.finite-graphs
 open import univalent-combinatorics.finite-types

@@ -1,10 +1,11 @@
 # The Well-Ordering Principle of the standard finite types
 
+```agda
+module elementary-number-theory.well-ordering-principle-standard-finite-types where
+```
+
 <details><summary>Imports</summary>
 ```agda
-module
-  elementary-number-theory.well-ordering-principle-standard-finite-types
-  where
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers

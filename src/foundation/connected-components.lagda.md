@@ -1,8 +1,11 @@
 # Connected components of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.connected-components where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types

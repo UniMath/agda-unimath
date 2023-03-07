@@ -1,11 +1,14 @@
 # Diagonal vectors
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.constant-vectors where
-open import elementary-number-theory.natural-numbers
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+```agda
 open import linear-algebra.vectors
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

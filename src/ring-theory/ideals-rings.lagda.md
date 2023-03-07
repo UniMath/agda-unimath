@@ -1,8 +1,13 @@
 # Ideals in rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.ideals-rings where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import ring-theory.rings
+open import ring-theory.subsets-rings
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -21,8 +26,6 @@ open import group-theory.abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
-open import ring-theory.rings
-open import ring-theory.subsets-rings
 open import univalent-combinatorics.lists
 ```
 </details>

@@ -1,8 +1,11 @@
 # Dirichlet convolution
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.dirichlet-convolution where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.arithmetic-functions
 open import elementary-number-theory.bounded-sums-arithmetic-functions
 open import elementary-number-theory.inequality-natural-numbers

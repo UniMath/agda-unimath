@@ -1,8 +1,11 @@
 # The universal property of booleans
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-booleans where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

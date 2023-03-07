@@ -1,8 +1,11 @@
 # Minimum on the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.minimum-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types

@@ -1,8 +1,11 @@
 # Fiber inclusions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.fiber-inclusions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cones-pullbacks

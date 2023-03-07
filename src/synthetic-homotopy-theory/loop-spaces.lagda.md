@@ -1,8 +1,11 @@
 # Loop spaces
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.loop-spaces where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types

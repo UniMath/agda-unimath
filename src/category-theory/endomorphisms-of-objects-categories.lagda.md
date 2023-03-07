@@ -1,8 +1,11 @@
 # Endomorphisms of objects in categories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.endomorphisms-of-objects-categories where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import category-theory.categories
 open import foundation.dependent-pair-types
 open import foundation.identity-types

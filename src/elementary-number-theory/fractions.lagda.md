@@ -1,8 +1,11 @@
 # Fractions
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.fractions where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import foundation.cartesian-product-types

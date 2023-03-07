@@ -1,10 +1,11 @@
 # The Cantor-Schröder-Bernstein-Escardó theorem
 
-Contributors: Elif Uskuplu, Egbert Rijke
+```agda
+module foundation.cantor-schroder-bernstein-escardo where
+```
 
 <details><summary>Imports</summary>
 ```agda
-module foundation.cantor-schroder-bernstein-escardo where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

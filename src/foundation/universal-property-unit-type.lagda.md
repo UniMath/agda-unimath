@@ -1,8 +1,11 @@
 # The universal property of the unit type
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-unit-type where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.homotopies
 open import foundation.constant-maps
 open import foundation.contractible-types

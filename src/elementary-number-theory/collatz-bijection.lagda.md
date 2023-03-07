@@ -1,8 +1,11 @@
 # The Collatz bijection
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.collatz-bijection where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.modular-arithmetic

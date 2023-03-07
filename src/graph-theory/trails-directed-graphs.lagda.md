@@ -1,13 +1,16 @@
 # Trails in directed graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.trails-directed-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.directed-graphs
+open import graph-theory.walks-directed-graphs
 open import foundation.dependent-pair-types
 open import foundation.injective-maps
 open import foundation.universe-levels
-open import graph-theory.directed-graphs
-open import graph-theory.walks-directed-graphs
 ```
 </details>
 

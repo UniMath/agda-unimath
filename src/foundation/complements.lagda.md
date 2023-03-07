@@ -1,8 +1,11 @@
 # Complements of type families
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.complements where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functions

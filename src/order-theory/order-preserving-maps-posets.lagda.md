@@ -1,8 +1,13 @@
 # Order preserving maps on posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.order-preserving-maps-posets where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.order-preserving-maps-preorders
+open import order-theory.posets
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -13,8 +18,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
 ```
 </details>
 

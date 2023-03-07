@@ -1,8 +1,11 @@
 # Descent for coproduct types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.descent-coproduct-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cones-pullbacks
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

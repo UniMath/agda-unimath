@@ -1,8 +1,12 @@
 # Morphisms of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.morphisms-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.undirected-graphs
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -16,7 +20,6 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import graph-theory.undirected-graphs
 ```
 </details>
 

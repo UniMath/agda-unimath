@@ -1,8 +1,11 @@
 # Maps fibered over a map
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.fibered-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-types

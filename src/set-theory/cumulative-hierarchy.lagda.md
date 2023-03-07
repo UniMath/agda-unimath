@@ -1,8 +1,11 @@
 # Cumulative hierarchy
 
-<details><summary>Imports</summary>
 ```agda
 module set-theory.cumulative-hierarchy where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

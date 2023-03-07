@@ -1,13 +1,16 @@
 # An involution on the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.involution-standard-finite-types where
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
+open import univalent-combinatorics.standard-finite-types
 open import foundation.identity-types
 open import foundation.involutions
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

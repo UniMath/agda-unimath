@@ -1,8 +1,11 @@
 # Categories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.categories where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import category-theory.isomorphisms-precategories
 open import category-theory.precategories
 open import foundation.1-types

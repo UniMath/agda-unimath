@@ -1,8 +1,11 @@
 # Uniqueness of the truncations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-truncation where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.universal-property-truncation
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

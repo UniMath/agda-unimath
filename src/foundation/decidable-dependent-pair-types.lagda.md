@@ -1,8 +1,11 @@
 # Decidability of dependent pair types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-dependent-pair-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types

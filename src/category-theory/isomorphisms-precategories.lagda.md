@@ -1,8 +1,11 @@
 # Isomorphisms in precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.isomorphisms-precategories where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import category-theory.precategories
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

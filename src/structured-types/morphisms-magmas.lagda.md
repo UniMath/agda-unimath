@@ -1,12 +1,15 @@
 # Morphisms of magmas
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.morphisms-magmas where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import structured-types.magmas
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import structured-types.magmas
 ```
 </details>
 

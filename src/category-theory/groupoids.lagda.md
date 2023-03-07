@@ -1,8 +1,11 @@
 # Groupoids
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.groupoids where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import category-theory.categories
 open import category-theory.equivalences-categories
 open import category-theory.functors-categories

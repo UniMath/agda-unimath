@@ -1,15 +1,18 @@
 # Finite multiplication in magmas
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.finite-multiplication-magmas where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
+open import structured-types.magmas
 open import foundation.coproduct-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import structured-types.magmas
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```

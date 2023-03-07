@@ -1,8 +1,11 @@
 # Mere embeddings
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.mere-embeddings where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.embeddings
 open import foundation.law-of-excluded-middle

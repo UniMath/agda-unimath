@@ -1,8 +1,11 @@
 # Isomorphisms of commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.isomorphisms-commutative-rings where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import commutative-algebra.commutative-rings
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

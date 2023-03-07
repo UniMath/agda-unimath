@@ -1,8 +1,11 @@
 # The Well-Ordering Principle of the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.well-ordering-principle-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.natural-numbers

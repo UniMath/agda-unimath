@@ -1,13 +1,16 @@
 # Trivial subgroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.trivial-subgroups where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import group-theory.groups
+open import group-theory.subgroups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import group-theory.groups
-open import group-theory.subgroups
 ```
 </details>
 

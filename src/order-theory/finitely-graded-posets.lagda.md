@@ -1,11 +1,16 @@
 # Finitely graded posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.finitely-graded-posets where
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+```agda
+open import order-theory.largest-elements-posets
+open import order-theory.least-elements-posets
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.total-posets
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -20,11 +25,9 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import order-theory.largest-elements-posets
-open import order-theory.least-elements-posets
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.total-posets
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

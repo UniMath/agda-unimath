@@ -1,8 +1,11 @@
 # Pullbacks
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.pullbacks where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.pullbacks public
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks

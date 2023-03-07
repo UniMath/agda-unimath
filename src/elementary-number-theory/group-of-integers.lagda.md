@@ -1,8 +1,11 @@
 # The group of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.group-of-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import foundation.dependent-pair-types

@@ -1,8 +1,11 @@
 # Type arithmetic with dependent function types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-dependent-function-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies

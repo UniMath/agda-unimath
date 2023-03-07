@@ -1,8 +1,11 @@
 # Fibers of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.fibers-of-maps where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.fibers-of-maps public
 open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps

@@ -1,8 +1,11 @@
 # The universal property of set truncations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-set-truncation where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalence-relations
 open import foundation.contractible-maps
 open import foundation.contractible-types

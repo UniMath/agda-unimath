@@ -1,8 +1,11 @@
 # Higher groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.higher-groups where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

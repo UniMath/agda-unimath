@@ -1,8 +1,11 @@
 # Inequality of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.inequality-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.inequality-natural-numbers

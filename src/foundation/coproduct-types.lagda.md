@@ -1,8 +1,11 @@
 # Coproduct types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.coproduct-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coproduct-types public
 open import foundation-core.empty-types
 open import foundation.contractible-types

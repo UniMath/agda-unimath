@@ -1,8 +1,11 @@
 # Identity types of truncated types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.identity-truncated-types where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.equivalences
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels

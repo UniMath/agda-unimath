@@ -1,8 +1,11 @@
 # Univalent type families
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.univalent-type-families where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels

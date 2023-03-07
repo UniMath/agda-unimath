@@ -1,13 +1,16 @@
 # Normal subgroups of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups-concrete-groups where
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.subgroups-concrete-groups
 open import group-theory.transitive-concrete-group-actions
+open import foundation.universe-levels
 ```
 </details>
 

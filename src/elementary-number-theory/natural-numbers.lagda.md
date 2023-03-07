@@ -1,8 +1,11 @@
 # The type of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.natural-numbers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation.contractible-types

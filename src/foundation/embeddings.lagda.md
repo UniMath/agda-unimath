@@ -1,8 +1,11 @@
 # Embeddings
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.embeddings where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import foundation-core.embeddings public
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks

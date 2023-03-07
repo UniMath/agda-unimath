@@ -1,8 +1,11 @@
 # The natural numbers base k
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.finitary-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers

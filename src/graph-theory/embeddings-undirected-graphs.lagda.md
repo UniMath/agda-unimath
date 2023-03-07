@@ -1,14 +1,17 @@
 # Embeddings of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.embeddings-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.propositions
 open import foundation.universe-levels
-open import graph-theory.morphisms-undirected-graphs
-open import graph-theory.undirected-graphs
 ```
 </details>
 

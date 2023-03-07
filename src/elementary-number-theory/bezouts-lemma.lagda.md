@@ -1,8 +1,11 @@
 # Bezout's lemma
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bezouts-lemma where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers

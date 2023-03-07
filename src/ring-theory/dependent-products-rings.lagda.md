@@ -1,8 +1,12 @@
 # Dependent products of rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.dependent-products-rings where
+```
+
+<details><summary>Imports</summary>
+```agda
+open import ring-theory.rings
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
@@ -12,7 +16,6 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
-open import ring-theory.rings
 ```
 </details>
 

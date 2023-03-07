@@ -1,8 +1,11 @@
 # Addition on the integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-integers where
+```
+
+<details><summary>Imports</summary>
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
