@@ -5,6 +5,7 @@ module group-theory.monomorphisms-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -14,6 +15,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 open import category-theory.monomorphisms-large-precategories
 ```
+
 </details>
 
 ## Idea

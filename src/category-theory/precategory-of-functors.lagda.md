@@ -5,6 +5,7 @@ module category-theory.precategory-of-functors where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-precategories
@@ -19,6 +20,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ### Precategory of functors

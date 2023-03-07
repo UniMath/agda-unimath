@@ -5,6 +5,7 @@ module group-theory.homomorphisms-generated-subgroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.epimorphisms-groups
 open import group-theory.full-subgroups
@@ -32,6 +33,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

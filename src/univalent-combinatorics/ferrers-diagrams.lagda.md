@@ -5,6 +5,7 @@ module univalent-combinatorics.ferrers-diagrams where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
@@ -24,6 +25,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

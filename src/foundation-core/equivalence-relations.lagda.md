@@ -5,6 +5,7 @@ module foundation-core.equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
@@ -16,6 +17,7 @@ open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 ```
+
 </details>
 
 ## Idea

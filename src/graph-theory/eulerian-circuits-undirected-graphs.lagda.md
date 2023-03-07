@@ -5,6 +5,7 @@ module graph-theory.eulerian-circuits-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.polygons
@@ -15,6 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

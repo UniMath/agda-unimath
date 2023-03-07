@@ -5,6 +5,7 @@ module foundation.propositions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.propositions public
 open import foundation-core.dependent-pair-types
@@ -18,6 +19,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 open import foundation.contractible-types
 ```
+
 </details>
 
 ### Propositions are (k+1)-truncated for any k

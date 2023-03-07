@@ -5,6 +5,7 @@ module univalent-combinatorics.injective-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.equality-finite-types
@@ -14,6 +15,7 @@ open import foundation.decidable-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

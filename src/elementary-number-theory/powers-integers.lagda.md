@@ -5,6 +5,7 @@ module elementary-number-theory.powers-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.commutative-ring-of-integers
 open import elementary-number-theory.integers
@@ -16,6 +17,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import ring-theory.powers-of-elements-rings
 ```
+
 </details>
 
 ## Idea

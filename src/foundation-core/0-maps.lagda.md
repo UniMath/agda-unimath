@@ -5,6 +5,7 @@ module foundation-core.0-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
@@ -16,6 +17,7 @@ open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Definition

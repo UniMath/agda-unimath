@@ -5,6 +5,7 @@ module univalent-combinatorics.function-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
@@ -16,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

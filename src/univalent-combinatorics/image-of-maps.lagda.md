@@ -5,6 +5,7 @@ module univalent-combinatorics.image-of-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
@@ -19,6 +20,7 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

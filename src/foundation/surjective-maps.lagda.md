@@ -5,6 +5,7 @@ module foundation.surjective-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
@@ -38,6 +39,7 @@ open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
+
 </details>
 
 ## Idea

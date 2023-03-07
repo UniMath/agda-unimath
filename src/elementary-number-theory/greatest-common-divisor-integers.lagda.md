@@ -5,6 +5,7 @@ module elementary-number-theory.greatest-common-divisor-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-natural-numbers
@@ -24,6 +25,7 @@ open import foundation.logical-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 # Greatest common divisors of integers

@@ -9,6 +9,7 @@ module foundation.exponents-set-quotients where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.binary-relations
 open import foundation.commuting-triangles-of-maps
@@ -30,6 +31,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

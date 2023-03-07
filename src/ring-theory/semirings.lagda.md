@@ -5,6 +5,7 @@ module ring-theory.semirings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -28,6 +29,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

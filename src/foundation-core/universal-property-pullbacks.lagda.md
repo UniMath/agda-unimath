@@ -5,6 +5,7 @@ module foundation-core.universal-property-pullbacks where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
@@ -18,6 +19,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Definition

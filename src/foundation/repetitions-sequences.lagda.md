@@ -5,6 +5,7 @@ module foundation.repetitions-sequences where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -15,6 +16,7 @@ open import foundation.sequences
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

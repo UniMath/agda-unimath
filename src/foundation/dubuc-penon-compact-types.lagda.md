@@ -5,12 +5,14 @@ module foundation.dubuc-penon-compact-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

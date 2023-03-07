@@ -5,6 +5,7 @@ module elementary-number-theory.infinitude-of-primes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.divisibility-natural-numbers
@@ -30,6 +31,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module elementary-number-theory.addition-rationals where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+
 </details>
 
 ## Idea

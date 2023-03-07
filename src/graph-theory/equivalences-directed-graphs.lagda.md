@@ -5,6 +5,7 @@ module graph-theory.equivalences-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
@@ -23,6 +24,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

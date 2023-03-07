@@ -5,6 +5,7 @@ module univalent-combinatorics.equivalences-cubes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.finite-types
@@ -21,6 +22,7 @@ open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definitions

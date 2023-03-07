@@ -12,6 +12,7 @@ module foundation.dependent-paths where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -24,6 +25,7 @@ open import foundation.sections
 open import foundation.transport
 open import foundation.universe-levels
 ```
+
 </details>
 
 We characterize dependent paths in the family λ t → path-over B t b0 b1

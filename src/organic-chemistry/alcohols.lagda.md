@@ -5,6 +5,7 @@ module organic-chemistry.alcohols where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import organic-chemistry.hydrocarbons
 open import organic-chemistry.saturated-carbons
@@ -16,6 +17,7 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 ```
+
 </details>
 
 ## Idea

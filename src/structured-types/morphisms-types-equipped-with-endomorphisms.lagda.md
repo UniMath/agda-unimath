@@ -5,6 +5,7 @@ module structured-types.morphisms-types-equipped-with-endomorphisms where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.types-equipped-with-endomorphisms
 open import foundation.commuting-squares-of-maps
@@ -18,6 +19,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

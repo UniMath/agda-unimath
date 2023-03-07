@@ -5,6 +5,7 @@ module group-theory.loop-groups-sets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
@@ -31,6 +32,7 @@ open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

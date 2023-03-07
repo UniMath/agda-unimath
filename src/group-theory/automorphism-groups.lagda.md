@@ -5,6 +5,7 @@ module group-theory.automorphism-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-groups
@@ -27,6 +28,7 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

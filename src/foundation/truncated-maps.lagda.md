@@ -5,6 +5,7 @@ module foundation.truncated-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.truncated-maps public
 open import foundation-core.cones-pullbacks
@@ -17,6 +18,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Properties

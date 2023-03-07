@@ -5,6 +5,7 @@ module graph-theory.polygons where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
@@ -25,6 +26,7 @@ open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

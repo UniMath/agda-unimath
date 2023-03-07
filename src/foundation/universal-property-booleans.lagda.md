@@ -5,6 +5,7 @@ module foundation.universal-property-booleans where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.booleans
 open import foundation.cartesian-product-types
@@ -17,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

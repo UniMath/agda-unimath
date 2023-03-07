@@ -5,6 +5,7 @@ module foundation.homotopies where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.homotopies public
 open import foundation-core.contractible-types
@@ -19,6 +20,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.identity-types
 ```
+
 </details>
 
 ## Idea

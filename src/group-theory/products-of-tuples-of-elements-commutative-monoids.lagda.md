@@ -5,6 +5,7 @@ module group-theory.products-of-tuples-of-elements-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.commutative-monoids
 open import group-theory.unordered-tuples-of-elements-commutative-monoids
@@ -19,6 +20,7 @@ open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

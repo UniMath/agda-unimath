@@ -5,6 +5,7 @@ module univalent-combinatorics.main-classes-of-latin-hypercubes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.decidable-subtypes
@@ -25,6 +26,7 @@ open import foundation.unordered-tuples
 open import foundation.unordered-tuples-of-types
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definition

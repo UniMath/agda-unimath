@@ -5,6 +5,7 @@ module elementary-number-theory.exponentiation-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
@@ -13,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.identity-types
 open import commutative-algebra.powers-of-elements-commutative-semirings
 ```
+
 </details>
 
 ## Idea

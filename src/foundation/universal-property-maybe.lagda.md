@@ -5,6 +5,7 @@ module foundation.universal-property-maybe where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -18,6 +19,7 @@ open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

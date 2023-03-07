@@ -5,6 +5,7 @@ module foundation.decidable-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.retractions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

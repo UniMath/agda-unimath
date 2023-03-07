@@ -5,6 +5,7 @@ module foundation.choice-of-representatives-equivalence-relation where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.equivalence-relations
 open import foundation.cartesian-product-types
@@ -24,6 +25,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module group-theory.monoid-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

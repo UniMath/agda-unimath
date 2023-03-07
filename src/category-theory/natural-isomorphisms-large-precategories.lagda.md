@@ -5,6 +5,7 @@ module category-theory.natural-isomorphisms-large-precategories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import category-theory.functors-large-precategories
 open import category-theory.isomorphisms-large-precategories
@@ -12,6 +13,7 @@ open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

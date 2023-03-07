@@ -5,6 +5,7 @@ module foundation.existential-quantification where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -12,6 +13,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

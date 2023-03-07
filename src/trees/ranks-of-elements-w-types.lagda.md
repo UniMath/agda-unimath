@@ -5,6 +5,7 @@ module trees.ranks-of-elements-w-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.elementhood-relation-w-types
 open import trees.inequality-w-types
@@ -19,6 +20,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

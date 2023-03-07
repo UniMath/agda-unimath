@@ -5,6 +5,7 @@ module group-theory.mere-equivalences-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.equivalences-group-actions
 open import group-theory.group-actions
@@ -13,6 +14,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

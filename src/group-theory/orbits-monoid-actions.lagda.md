@@ -5,6 +5,7 @@ module group-theory.orbits-monoid-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.monoid-actions
 open import group-theory.monoids
@@ -19,6 +20,7 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 open import category-theory.precategories
 ```
+
 </details>
 
 ## Idea

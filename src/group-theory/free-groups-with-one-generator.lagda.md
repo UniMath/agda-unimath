@@ -5,6 +5,7 @@ module group-theory.free-groups-with-one-generator where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -26,6 +27,7 @@ open import elementary-number-theory.natural-numbers
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module foundation.embeddings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.embeddings public
 open import foundation-core.cartesian-product-types
@@ -24,6 +25,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.truncated-maps
 ```
+
 </details>
 
 ## Properties

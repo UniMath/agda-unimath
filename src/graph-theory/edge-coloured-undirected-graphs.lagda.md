@@ -5,6 +5,7 @@ module graph-theory.edge-coloured-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import foundation.unordered-pairs
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module group-theory.isomorphisms-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-abelian-groups
@@ -22,6 +23,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module univalent-combinatorics.isotopies-latin-squares where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.latin-squares
 open import foundation.dependent-pair-types
@@ -12,6 +13,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

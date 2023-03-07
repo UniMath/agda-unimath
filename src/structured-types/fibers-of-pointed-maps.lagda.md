@@ -5,6 +5,7 @@ module structured-types.fibers-of-pointed-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
@@ -12,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

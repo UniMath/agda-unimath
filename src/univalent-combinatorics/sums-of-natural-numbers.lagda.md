@@ -5,6 +5,7 @@ module univalent-combinatorics.sums-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -17,6 +18,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

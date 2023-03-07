@@ -5,6 +5,7 @@ module finite-group-theory.finite-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.finite-semigroups
 open import foundation.binary-embeddings
@@ -44,6 +45,7 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

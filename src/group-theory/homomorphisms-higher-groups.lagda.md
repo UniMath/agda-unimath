@@ -5,6 +5,7 @@ module group-theory.homomorphisms-higher-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.higher-groups
 open import foundation.equivalences
@@ -14,6 +15,7 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
+
 </details>
 
 ## Idea

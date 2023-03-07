@@ -5,11 +5,13 @@ module foundation.bands where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.equivalences
 open import foundation.set-truncations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

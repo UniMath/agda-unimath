@@ -5,6 +5,7 @@ module foundation-core.equality-fibers-of-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
@@ -16,6 +17,7 @@ open import foundation-core.homotopies
 open import foundation-core.universe-levels
 open import foundation.identity-types
 ```
+
 </details>
 
 ## Idea

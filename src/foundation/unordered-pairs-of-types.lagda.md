@@ -5,6 +5,7 @@ module foundation.unordered-pairs-of-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import foundation.universe-levels
 open import foundation.unordered-pairs
 open import univalent-combinatorics.2-element-types
 ```
+
 </details>
 
 ## Idea

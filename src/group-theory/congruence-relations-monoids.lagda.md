@@ -5,6 +5,7 @@ module group-theory.congruence-relations-monoids where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.congruence-relations-semigroups
 open import group-theory.monoids
@@ -15,6 +16,7 @@ open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

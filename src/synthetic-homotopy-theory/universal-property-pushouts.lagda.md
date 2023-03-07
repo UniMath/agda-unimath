@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.cocones-pushouts
 open import foundation.cones-pullbacks
@@ -23,6 +24,7 @@ open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

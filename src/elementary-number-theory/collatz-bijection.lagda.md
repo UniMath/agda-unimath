@@ -5,6 +5,7 @@ module elementary-number-theory.collatz-bijection where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
@@ -15,6 +16,7 @@ open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+
 </details>
 
 ## Idea

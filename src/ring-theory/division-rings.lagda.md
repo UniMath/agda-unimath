@@ -5,6 +5,7 @@ module ring-theory.division-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.invertible-elements-rings
 open import ring-theory.nontrivial-rings
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

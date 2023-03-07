@@ -5,6 +5,7 @@ module foundation.limited-principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

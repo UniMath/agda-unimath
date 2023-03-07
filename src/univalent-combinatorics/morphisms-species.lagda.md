@@ -5,6 +5,7 @@ module univalent-combinatorics.morphisms-species where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
@@ -19,6 +20,7 @@ open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ### Idea

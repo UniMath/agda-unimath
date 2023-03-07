@@ -5,6 +5,7 @@ module trees.w-type-of-propositions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.extensional-w-types
 open import trees.w-types
@@ -17,6 +18,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

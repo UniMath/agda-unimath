@@ -5,6 +5,7 @@ module foundation.iterating-functions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.automorphisms
 open import foundation.coproduct-types
@@ -28,6 +29,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module trees.rooted-undirected-trees where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.undirected-trees
 open import foundation.coproduct-types
@@ -16,6 +17,7 @@ open import elementary-number-theory.natural-numbers
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+
 </details>
 
 ## Idea

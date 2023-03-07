@@ -5,6 +5,7 @@ module foundation.isolated-points where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -33,6 +34,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

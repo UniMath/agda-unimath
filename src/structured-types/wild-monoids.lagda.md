@@ -5,6 +5,7 @@ module structured-types.wild-monoids where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.coherent-h-spaces
 open import structured-types.morphisms-coherent-h-spaces
@@ -16,6 +17,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 ```
+
 </details>
 
 ## Idea

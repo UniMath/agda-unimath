@@ -5,6 +5,7 @@ module group-theory.precategory-of-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.group-actions
 open import group-theory.groups
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import category-theory.large-precategories
 open import category-theory.precategories
 ```
+
 </details>
 
 ## Definitions

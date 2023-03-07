@@ -5,6 +5,7 @@ module foundation.equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.equivalence-relations public
 open import foundation-core.universe-levels
@@ -40,6 +41,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients
 ```
+
 </details>
 
 ## Properties

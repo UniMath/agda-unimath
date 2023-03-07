@@ -5,6 +5,7 @@ module order-theory.homomorphisms-frames where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.frames
 open import order-theory.greatest-lower-bounds-posets
@@ -26,6 +27,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

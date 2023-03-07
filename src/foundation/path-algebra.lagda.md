@@ -5,6 +5,7 @@ module foundation.path-algebra where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -16,6 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

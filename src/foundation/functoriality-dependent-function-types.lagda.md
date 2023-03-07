@@ -5,6 +5,7 @@ module foundation.functoriality-dependent-function-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.commuting-squares-of-maps
@@ -28,6 +29,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 ```
+
 </details>
 
 ## Idea

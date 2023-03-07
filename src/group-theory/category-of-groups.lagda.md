@@ -5,6 +5,7 @@ module group-theory.category-of-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.isomorphisms-groups
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import category-theory.large-categories
 ```
+
 </details>
 
 ## Definition

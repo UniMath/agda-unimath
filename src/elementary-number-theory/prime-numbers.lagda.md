@@ -5,6 +5,7 @@ module elementary-number-theory.prime-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.divisibility-natural-numbers
@@ -25,6 +26,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

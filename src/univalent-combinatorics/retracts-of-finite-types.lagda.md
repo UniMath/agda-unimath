@@ -5,6 +5,7 @@ module univalent-combinatorics.retracts-of-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
@@ -24,6 +25,7 @@ open import foundation.retractions
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Properties

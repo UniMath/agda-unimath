@@ -5,6 +5,7 @@ module group-theory.conjugation where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.group-actions
 open import group-theory.groups
@@ -18,6 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

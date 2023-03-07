@@ -5,6 +5,7 @@ module univalent-combinatorics.counting where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -26,6 +27,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

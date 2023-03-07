@@ -5,6 +5,7 @@ module order-theory.maximal-chains-posets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.chains-posets
 open import order-theory.maximal-chains-preorders
@@ -12,6 +13,7 @@ open import order-theory.posets
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

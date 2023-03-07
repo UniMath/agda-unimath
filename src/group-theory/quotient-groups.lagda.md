@@ -9,6 +9,7 @@ module group-theory.quotient-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -31,6 +32,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

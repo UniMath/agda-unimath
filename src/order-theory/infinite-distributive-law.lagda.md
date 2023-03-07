@@ -5,6 +5,7 @@ module order-theory.infinite-distributive-law where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
@@ -18,6 +19,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

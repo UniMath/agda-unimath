@@ -5,6 +5,7 @@ module foundation.contractible-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-maps public
 open import foundation-core.dependent-pair-types
@@ -15,6 +16,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.truncated-maps
 ```
+
 </details>
 
 ## Properties

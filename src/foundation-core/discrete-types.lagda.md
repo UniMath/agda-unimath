@@ -5,12 +5,14 @@ module foundation-core.discrete-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

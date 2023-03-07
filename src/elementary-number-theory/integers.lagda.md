@@ -5,6 +5,7 @@ module elementary-number-theory.integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
@@ -26,6 +27,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```
+
 </details>
 
 ## Idea

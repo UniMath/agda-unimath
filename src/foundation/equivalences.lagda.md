@@ -5,6 +5,7 @@ module foundation.equivalences where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.equivalences public
 open import foundation-core.cones-pullbacks
@@ -36,6 +37,7 @@ open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
 ```
+
 </details>
 
 ## Properties

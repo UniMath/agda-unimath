@@ -5,6 +5,7 @@ module group-theory.homomorphisms-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-semigroups
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module foundation.mere-embeddings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.embeddings
@@ -15,6 +16,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 open import order-theory.large-preorders
 ```
+
 </details>
 
 ## Definition

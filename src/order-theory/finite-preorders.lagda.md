@@ -5,6 +5,7 @@ module order-theory.finite-preorders where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.decidable-subpreorders
 open import order-theory.preorders
@@ -24,6 +25,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Finite preorders

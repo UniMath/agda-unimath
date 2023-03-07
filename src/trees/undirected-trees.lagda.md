@@ -5,6 +5,7 @@ module trees.undirected-trees where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -25,6 +26,7 @@ open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
 ```
+
 </details>
 
 ## Idea

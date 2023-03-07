@@ -5,6 +5,7 @@ module foundation.truncated-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.truncated-types public
 open import foundation-core.contractible-types
@@ -20,6 +21,7 @@ open import foundation-core.universe-levels
 open import foundation.subtype-identity-principle
 open import foundation.univalence
 ```
+
 </details>
 
 ## Definition

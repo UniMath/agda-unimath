@@ -5,6 +5,7 @@ module foundation-core.cones-pullbacks where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-squares-of-maps
@@ -20,6 +21,7 @@ open import foundation-core.universe-levels
 open import foundation.homotopies
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module foundation.binary-transport where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -12,6 +13,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

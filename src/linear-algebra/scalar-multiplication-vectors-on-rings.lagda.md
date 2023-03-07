@@ -5,6 +5,7 @@ module linear-algebra.scalar-multiplication-vectors-on-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
@@ -18,6 +19,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.modules-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definition

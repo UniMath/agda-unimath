@@ -5,6 +5,7 @@ module foundation.lesser-limited-principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.disjunction
 open import foundation.fibers-of-maps
@@ -15,6 +16,7 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

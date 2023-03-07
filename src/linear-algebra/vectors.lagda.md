@@ -5,6 +5,7 @@ module linear-algebra.vectors where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -25,6 +26,7 @@ open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

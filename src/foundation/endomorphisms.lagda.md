@@ -5,6 +5,7 @@ module foundation.endomorphisms where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.endomorphisms public
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 open import structured-types.wild-monoids
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module graph-theory.trails-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
@@ -16,6 +17,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

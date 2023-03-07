@@ -5,6 +5,7 @@ module univalent-combinatorics.dependent-sum-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
@@ -33,6 +34,7 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

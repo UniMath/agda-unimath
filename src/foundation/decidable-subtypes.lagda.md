@@ -5,6 +5,7 @@ module foundation.decidable-subtypes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.1-types
 open import foundation.coproduct-types
@@ -26,6 +27,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module set-theory.countable-sets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.complements-subtypes
 open import foundation.decidable-propositions
@@ -25,6 +26,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

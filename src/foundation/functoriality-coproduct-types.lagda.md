@@ -5,6 +5,7 @@ module foundation.functoriality-coproduct-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
@@ -31,6 +32,7 @@ open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 ```
+
 </details>
 
 ## Idea

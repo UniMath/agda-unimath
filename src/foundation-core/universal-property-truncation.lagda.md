@@ -5,6 +5,7 @@ module foundation-core.universal-property-truncation where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-maps
 open import foundation-core.functoriality-dependent-pair-types
@@ -21,6 +22,7 @@ open import foundation.truncated-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

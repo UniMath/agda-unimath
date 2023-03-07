@@ -5,6 +5,7 @@ module foundation-core.equivalence-induction where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -16,6 +17,7 @@ open import foundation-core.sections
 open import foundation-core.singleton-induction
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module group-theory.monomorphisms-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
@@ -13,6 +14,7 @@ open import foundation.embeddings
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

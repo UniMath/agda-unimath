@@ -5,6 +5,7 @@ module foundation.reflecting-maps-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -21,6 +22,7 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.equality-dependent-function-types
 open import foundation.homotopies
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module foundation-core.involutions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.automorphisms
 open import foundation-core.contractible-types
@@ -19,6 +20,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

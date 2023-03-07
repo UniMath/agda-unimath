@@ -5,6 +5,7 @@ module univalent-combinatorics.surjective-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.fibers-of-maps
@@ -13,6 +14,7 @@ open import foundation.surjective-maps public
 open import foundation.decidable-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

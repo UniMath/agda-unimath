@@ -5,6 +5,7 @@ module univalent-combinatorics.necklaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import structured-types.types-equipped-with-endomorphisms
 ```
+
 </details>
 
 ## Idea

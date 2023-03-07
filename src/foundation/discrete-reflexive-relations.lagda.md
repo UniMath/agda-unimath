@@ -5,6 +5,7 @@ module foundation.discrete-reflexive-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -13,6 +14,7 @@ open import foundation.propositions
 open import foundation.reflexive-relations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

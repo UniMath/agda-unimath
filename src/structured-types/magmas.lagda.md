@@ -5,6 +5,7 @@ module structured-types.magmas where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -17,6 +18,7 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

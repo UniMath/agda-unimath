@@ -5,6 +5,7 @@ module univalent-combinatorics.standard-finite-trees where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.standard-finite-types
 open import foundation.cartesian-product-types
@@ -16,6 +17,7 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 ```
+
 </details>
 
 ## Idea

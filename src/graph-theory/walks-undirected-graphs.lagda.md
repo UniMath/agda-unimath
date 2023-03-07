@@ -5,6 +5,7 @@ module graph-theory.walks-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.undirected-graphs
 open import foundation.contractible-types
@@ -27,6 +28,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

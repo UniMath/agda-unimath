@@ -5,6 +5,7 @@ module trees.underlying-graphs-of-elements-w-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
@@ -38,6 +39,7 @@ open import graph-theory.morphisms-directed-graphs
 open import graph-theory.trails-directed-graphs
 open import graph-theory.walks-directed-graphs
 ```
+
 </details>
 
 ## Idea
