@@ -6,6 +6,18 @@ module elementary-number-theory.modular-arithmetic where
 
 <details><summary>Imports</summary>
 ```agda
+open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.congruence-integers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -20,18 +32,6 @@ open import foundation.negation
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.congruence-integers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import structured-types.types-equipped-with-endomorphisms
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types

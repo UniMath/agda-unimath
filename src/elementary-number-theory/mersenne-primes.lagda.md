@@ -6,14 +6,14 @@ module elementary-number-theory.mersenne-primes where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.universe-levels
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 </details>
 

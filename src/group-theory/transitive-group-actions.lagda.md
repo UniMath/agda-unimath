@@ -6,12 +6,12 @@ module group-theory.transitive-group-actions where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.group-actions
+open import group-theory.groups
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import group-theory.group-actions
-open import group-theory.groups
 ```
 </details>
 

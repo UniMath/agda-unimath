@@ -6,6 +6,9 @@ module univalent-combinatorics.distributivity-of-set-truncation-over-finite-prod
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -29,9 +32,6 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 </details>
 

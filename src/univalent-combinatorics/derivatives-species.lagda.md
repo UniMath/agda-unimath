@@ -6,10 +6,10 @@ module univalent-combinatorics.derivatives-species where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.universe-levels
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
+open import foundation.universe-levels
 ```
 </details>
 

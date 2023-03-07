@@ -6,9 +6,9 @@ module group-theory.higher-group-actions where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.higher-groups
 open import foundation.identity-types
 open import foundation.universe-levels
-open import group-theory.higher-groups
 ```
 </details>
 

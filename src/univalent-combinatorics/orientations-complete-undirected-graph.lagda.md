@@ -10,6 +10,17 @@ module univalent-combinatorics.orientations-complete-undirected-graph where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.2-element-subtypes
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.symmetric-difference
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -55,17 +66,6 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 open import finite-group-theory.transpositions
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.symmetric-difference
 ```
 </details>
 

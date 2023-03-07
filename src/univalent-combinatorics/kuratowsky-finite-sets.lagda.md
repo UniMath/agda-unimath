@@ -6,6 +6,10 @@ module univalent-combinatorics.kuratowsky-finite-sets where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.image-of-maps
+open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -15,10 +19,6 @@ open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.image-of-maps
-open import univalent-combinatorics.standard-finite-types
 ```
 </details>
 

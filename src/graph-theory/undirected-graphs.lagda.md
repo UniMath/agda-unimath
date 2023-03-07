@@ -6,6 +6,7 @@ module graph-theory.undirected-graphs where
 
 <details><summary>Imports</summary>
 ```agda
+open import graph-theory.directed-graphs
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -14,7 +15,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import graph-theory.directed-graphs
 ```
 </details>
 

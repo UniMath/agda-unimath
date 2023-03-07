@@ -6,10 +6,10 @@ module univalent-combinatorics.petri-nets where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.finite-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import univalent-combinatorics.finite-types
 ```
 </details>
 

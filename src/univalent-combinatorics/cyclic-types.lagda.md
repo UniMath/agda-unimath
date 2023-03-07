@@ -6,6 +6,7 @@ module univalent-combinatorics.cyclic-types where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.standard-finite-types
 open import foundation.0-connected-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -40,7 +41,6 @@ open import structured-types.pointed-types
 open import structured-types.types-equipped-with-endomorphisms
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types
 open import synthetic-homotopy-theory.loop-spaces
-open import univalent-combinatorics.standard-finite-types
 ```
 </details>
 

@@ -6,13 +6,13 @@ module group-theory.subgroups-higher-groups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.higher-groups
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.sets
 open import foundation.universe-levels
-open import group-theory.higher-groups
 open import structured-types.pointed-types
 ```
 </details>

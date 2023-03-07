@@ -6,6 +6,8 @@ module trees.equivalences-enriched-directed-trees where
 
 <details><summary>Imports</summary>
 ```agda
+open import trees.enriched-directed-trees
+open import trees.equivalences-directed-trees
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
@@ -14,8 +16,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-open import trees.enriched-directed-trees
-open import trees.equivalences-directed-trees
 ```
 </details>
 

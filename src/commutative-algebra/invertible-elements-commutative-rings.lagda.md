@@ -6,9 +6,9 @@ module commutative-algebra.invertible-elements-commutative-rings where
 
 <details><summary>Imports</summary>
 ```agda
+open import commutative-algebra.commutative-rings
 open import foundation.propositions
 open import foundation.universe-levels
-open import commutative-algebra.commutative-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```

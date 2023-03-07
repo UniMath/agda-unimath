@@ -6,6 +6,13 @@ module elementary-number-theory.binomial-theorem-integers where
 
 <details><summary>Imports</summary>
 ```agda
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.commutative-ring-of-integers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.powers-integers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -18,13 +25,6 @@ open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
 open import commutative-algebra.sums-commutative-semirings
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.commutative-ring-of-integers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.powers-integers
 open import linear-algebra.vectors
 open import univalent-combinatorics.standard-finite-types
 ```

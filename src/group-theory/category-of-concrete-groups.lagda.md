@@ -6,11 +6,11 @@ module group-theory.category-of-concrete-groups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-groups
 open import foundation.universe-levels
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
 ```
 </details>
 

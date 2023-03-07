@@ -6,14 +6,14 @@ module linear-algebra.matrices-on-rings where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.identity-types
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import linear-algebra.constant-matrices
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.matrices
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
+open import foundation.identity-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
 </details>

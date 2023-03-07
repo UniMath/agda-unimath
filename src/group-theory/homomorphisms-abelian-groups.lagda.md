@@ -6,6 +6,9 @@ module group-theory.homomorphisms-abelian-groups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -14,9 +17,6 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 open import category-theory.large-precategories
-open import group-theory.abelian-groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
 open import ring-theory.rings
 ```
 </details>

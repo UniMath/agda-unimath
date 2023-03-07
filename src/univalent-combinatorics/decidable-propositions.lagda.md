@@ -6,6 +6,8 @@ module univalent-combinatorics.decidable-propositions where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-propositions public
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -16,8 +18,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
 ```
 </details>
 

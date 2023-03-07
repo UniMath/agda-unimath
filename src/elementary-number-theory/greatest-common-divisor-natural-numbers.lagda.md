@@ -6,15 +6,6 @@ module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.universe-levels
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.distance-natural-numbers
@@ -27,6 +18,15 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.universe-levels
 ```
 </details>
 

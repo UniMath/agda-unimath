@@ -6,6 +6,11 @@ module group-theory.full-subgroups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.subgroups
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -19,11 +24,6 @@ open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-groups
-open import group-theory.subgroups
 ```
 </details>
 

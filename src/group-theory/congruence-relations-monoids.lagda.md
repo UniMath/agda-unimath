@@ -6,14 +6,14 @@ module group-theory.congruence-relations-monoids where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.congruence-relations-semigroups
+open import group-theory.monoids
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
-open import group-theory.congruence-relations-semigroups
-open import group-theory.monoids
 ```
 </details>
 

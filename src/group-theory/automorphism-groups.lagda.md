@@ -6,6 +6,10 @@ module group-theory.automorphism-groups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-groups
+open import group-theory.equivalences-higher-groups
+open import group-theory.higher-groups
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components
@@ -21,10 +25,6 @@ open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-groups
-open import group-theory.equivalences-higher-groups
-open import group-theory.higher-groups
 open import structured-types.pointed-types
 ```
 </details>

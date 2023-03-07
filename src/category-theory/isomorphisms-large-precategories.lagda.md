@@ -6,6 +6,7 @@ module category-theory.isomorphisms-large-precategories where
 
 <details><summary>Imports</summary>
 ```agda
+open import category-theory.large-precategories
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -13,7 +14,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import category-theory.large-precategories
 ```
 </details>
 

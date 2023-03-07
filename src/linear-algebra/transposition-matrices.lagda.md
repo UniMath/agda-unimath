@@ -6,12 +6,12 @@ module linear-algebra.transposition-matrices where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.identity-types
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices
 open import linear-algebra.vectors
+open import foundation.identity-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
 </details>
 

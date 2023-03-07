@@ -6,11 +6,11 @@ module synthetic-homotopy-theory.iterated-loop-spaces where
 
 <details><summary>Imports</summary>
 ```agda
+open import synthetic-homotopy-theory.loop-spaces
 open import foundation.identity-types
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import structured-types.pointed-types
-open import synthetic-homotopy-theory.loop-spaces
 ```
 </details>
 

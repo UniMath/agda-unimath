@@ -7,12 +7,12 @@ module category-theory.homotopies-natural-transformations-large-precategories wh
 <details><summary>Imports</summary>
 ```agda
 open import Agda.Primitive using (Setω)
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.universe-levels
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 </details>
 

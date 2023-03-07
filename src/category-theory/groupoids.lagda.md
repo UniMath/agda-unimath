@@ -6,6 +6,13 @@ module category-theory.groupoids where
 
 <details><summary>Imports</summary>
 ```agda
+open import category-theory.categories
+open import category-theory.equivalences-categories
+open import category-theory.functors-categories
+open import category-theory.isomorphisms-categories
+open import category-theory.isomorphisms-precategories
+open import category-theory.precategories
+open import category-theory.pregroupoids
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -18,13 +25,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import category-theory.categories
-open import category-theory.equivalences-categories
-open import category-theory.functors-categories
-open import category-theory.isomorphisms-categories
-open import category-theory.isomorphisms-precategories
-open import category-theory.precategories
-open import category-theory.pregroupoids
 ```
 </details>
 

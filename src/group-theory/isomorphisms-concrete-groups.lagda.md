@@ -6,10 +6,10 @@ module group-theory.isomorphisms-concrete-groups where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.universe-levels
-open import category-theory.isomorphisms-large-precategories
 open import group-theory.concrete-groups
 open import group-theory.precategory-of-concrete-groups
+open import foundation.universe-levels
+open import category-theory.isomorphisms-large-precategories
 ```
 </details>
 

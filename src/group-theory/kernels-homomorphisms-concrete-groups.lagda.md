@@ -6,6 +6,9 @@ module group-theory.kernels-homomorphisms-concrete-groups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.concrete-groups
+open import group-theory.higher-groups
+open import group-theory.homomorphisms-concrete-groups
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components
@@ -15,9 +18,6 @@ open import foundation.sets
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
-open import group-theory.concrete-groups
-open import group-theory.higher-groups
-open import group-theory.homomorphisms-concrete-groups
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.pointed-types
 ```

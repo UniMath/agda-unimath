@@ -6,6 +6,7 @@ module group-theory.congruence-relations-semigroups where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.semigroups
 open import foundation.binary-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,7 +17,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-open import group-theory.semigroups
 ```
 </details>
 

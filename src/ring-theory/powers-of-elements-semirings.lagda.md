@@ -6,10 +6,10 @@ module ring-theory.powers-of-elements-semirings where
 
 <details><summary>Imports</summary>
 ```agda
+open import ring-theory.semirings
 open import foundation.identity-types
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import ring-theory.semirings
 ```
 </details>
 

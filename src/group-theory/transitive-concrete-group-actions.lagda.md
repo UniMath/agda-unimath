@@ -6,6 +6,10 @@ module group-theory.transitive-concrete-group-actions where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-group-actions
+open import group-theory.orbits-concrete-group-actions
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.dependent-pair-types
@@ -20,10 +24,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-group-actions
-open import group-theory.orbits-concrete-group-actions
 ```
 </details>
 

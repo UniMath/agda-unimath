@@ -6,12 +6,12 @@ module elementary-number-theory.commutative-semiring-of-natural-numbers where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-open import commutative-algebra.commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+open import commutative-algebra.commutative-semirings
 open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups

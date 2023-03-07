@@ -6,6 +6,10 @@ module ring-theory.binomial-theorem-rings where
 
 <details><summary>Imports</summary>
 ```agda
+open import ring-theory.binomial-theorem-semirings
+open import ring-theory.powers-of-elements-rings
+open import ring-theory.rings
+open import ring-theory.sums-rings
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -18,10 +22,6 @@ open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import linear-algebra.vectors-on-rings
-open import ring-theory.binomial-theorem-semirings
-open import ring-theory.powers-of-elements-rings
-open import ring-theory.rings
-open import ring-theory.sums-rings
 open import univalent-combinatorics.standard-finite-types
 ```
 </details>

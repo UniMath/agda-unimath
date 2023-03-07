@@ -7,13 +7,13 @@ module category-theory.adjunctions-large-precategories where
 <details><summary>Imports</summary>
 ```agda
 open import Agda.Primitive using (Setω)
+open import category-theory.functors-large-precategories
+open import category-theory.large-precategories
+open import category-theory.natural-transformations-large-precategories
 open import foundation.commuting-squares-of-maps
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
-open import category-theory.functors-large-precategories
-open import category-theory.large-precategories
-open import category-theory.natural-transformations-large-precategories
 ```
 </details>
 

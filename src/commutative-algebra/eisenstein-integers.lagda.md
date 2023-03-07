@@ -6,12 +6,12 @@ module commutative-algebra.eisenstein-integers where
 
 <details><summary>Imports</summary>
 ```agda
+open import commutative-algebra.commutative-rings
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-open import commutative-algebra.commutative-rings
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers

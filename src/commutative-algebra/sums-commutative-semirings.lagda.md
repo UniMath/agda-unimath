@@ -6,13 +6,13 @@ module commutative-algebra.sums-commutative-semirings where
 
 <details><summary>Imports</summary>
 ```agda
+open import commutative-algebra.commutative-semirings
 open import foundation.coproduct-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import commutative-algebra.commutative-semirings
 open import elementary-number-theory.natural-numbers
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-commutative-semirings

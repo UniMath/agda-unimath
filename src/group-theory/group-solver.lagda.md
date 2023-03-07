@@ -6,6 +6,8 @@ module group-theory.group-solver where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.groups
+open import group-theory.groups
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -13,8 +15,6 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import group-theory.groups
-open import group-theory.groups
 open import linear-algebra.vectors
 open import univalent-combinatorics.lists
 ```

@@ -6,13 +6,13 @@ module graph-theory.simple-undirected-graphs where
 
 <details><summary>Imports</summary>
 ```agda
+open import graph-theory.undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import graph-theory.undirected-graphs
 open import univalent-combinatorics.finite-types
 ```
 </details>

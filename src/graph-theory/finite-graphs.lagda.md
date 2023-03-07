@@ -6,6 +6,7 @@ module graph-theory.finite-graphs where
 
 <details><summary>Imports</summary>
 ```agda
+open import graph-theory.undirected-graphs
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,7 +17,6 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 open import elementary-number-theory.natural-numbers
-open import graph-theory.undirected-graphs
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.dependent-function-types

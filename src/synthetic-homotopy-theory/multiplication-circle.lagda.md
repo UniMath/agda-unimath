@@ -6,6 +6,7 @@ module synthetic-homotopy-theory.multiplication-circle where
 
 <details><summary>Imports</summary>
 ```agda
+open import synthetic-homotopy-theory.circle
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions
@@ -14,7 +15,6 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
-open import synthetic-homotopy-theory.circle
 ```
 </details>
 

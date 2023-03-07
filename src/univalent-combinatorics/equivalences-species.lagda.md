@@ -6,6 +6,8 @@ module univalent-combinatorics.equivalences-species where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.species
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -14,8 +16,6 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.species
 ```
 </details>
 

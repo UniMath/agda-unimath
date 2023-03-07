@@ -6,10 +6,10 @@ module category-theory.natural-transformations-large-precategories where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.identity-types
-open import foundation.universe-levels
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 </details>
 

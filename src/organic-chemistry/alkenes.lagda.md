@@ -6,12 +6,12 @@ module organic-chemistry.alkenes where
 
 <details><summary>Imports</summary>
 ```agda
+open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import organic-chemistry.hydrocarbons
-open import organic-chemistry.saturated-carbons
 open import univalent-combinatorics.finite-types
 ```
 </details>

@@ -6,9 +6,9 @@ module group-theory.integers-higher-group where
 
 <details><summary>Imports</summary>
 ```agda
+open import group-theory.higher-groups
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import group-theory.higher-groups
 open import structured-types.pointed-types
 open import synthetic-homotopy-theory.circle
 ```

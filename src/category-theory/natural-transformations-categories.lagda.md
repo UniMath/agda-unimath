@@ -6,10 +6,10 @@ module category-theory.natural-transformations-categories where
 
 <details><summary>Imports</summary>
 ```agda
-open import foundation.universe-levels
 open import category-theory.categories
 open import category-theory.functors-categories
 open import category-theory.natural-transformations-precategories
+open import foundation.universe-levels
 ```
 </details>
 

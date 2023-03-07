@@ -6,6 +6,10 @@ module synthetic-homotopy-theory.joins-of-types where
 
 <details><summary>Imports</summary>
 ```agda
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 open import foundation-core.functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -21,10 +25,6 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 </details>
 

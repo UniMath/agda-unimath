@@ -6,6 +6,15 @@ module elementary-number-theory.rational-numbers where
 
 <details><summary>Imports</summary>
 ```agda
+open import elementary-number-theory.bezouts-lemma
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.fractions
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.relatively-prime-integers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -19,15 +28,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.bezouts-lemma
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.fractions
-open import elementary-number-theory.greatest-common-divisor-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.relatively-prime-integers
 ```
 </details>
 

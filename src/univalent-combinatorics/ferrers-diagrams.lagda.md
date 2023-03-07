@@ -6,6 +6,8 @@ module univalent-combinatorics.ferrers-diagrams where
 
 <details><summary>Imports</summary>
 ```agda
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.pi-finite-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -21,8 +23,6 @@ open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.pi-finite-types
 ```
 </details>
 

@@ -6,6 +6,9 @@ module graph-theory.walks-directed-graphs where
 
 <details><summary>Imports</summary>
 ```agda
+open import graph-theory.directed-graphs
+open import graph-theory.equivalences-directed-graphs
+open import graph-theory.morphisms-directed-graphs
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.coproduct-types
@@ -20,9 +23,6 @@ open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
-open import graph-theory.directed-graphs
-open import graph-theory.equivalences-directed-graphs
-open import graph-theory.morphisms-directed-graphs
 ```
 </details>
 

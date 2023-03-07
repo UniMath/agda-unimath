@@ -6,6 +6,10 @@ module linear-algebra.vectors-on-rings where
 
 <details><summary>Imports</summary>
 ```agda
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.scalar-multiplication-vectors
+open import linear-algebra.vectors
 open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -20,10 +24,6 @@ open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
-open import linear-algebra.constant-vectors
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.scalar-multiplication-vectors
-open import linear-algebra.vectors
 open import ring-theory.rings
 open import univalent-combinatorics.standard-finite-types
 ```
