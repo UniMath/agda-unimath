@@ -1,8 +1,12 @@
-#  Fibered equivalences
+# Fibered equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.fibered-equivalences where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
@@ -19,6 +23,7 @@ open import foundation.fibered-maps
 open import foundation.pullbacks
 open import foundation.slice
 ```
+
 </details>
 
 ## Idea

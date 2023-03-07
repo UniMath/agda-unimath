@@ -1,13 +1,18 @@
 # Powers of elements in semirings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.powers-of-elements-semirings where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import ring-theory.semirings
 open import foundation.identity-types
 open import foundation.universe-levels
-open import ring-theory.semirings
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

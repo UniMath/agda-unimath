@@ -1,8 +1,12 @@
-#  Descent for equivalences
+# Descent for equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.descent-equivalences where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
@@ -13,6 +17,7 @@ open import foundation-core.pullbacks
 open import foundation-core.universe-levels
 open import foundation.equivalences
 ```
+
 </details>
 
 ## Idea

@@ -1,15 +1,20 @@
-#  Algebras over rings
+# Algebras over rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.algebras-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import ring-theory.modules-rings
+open import ring-theory.rings
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import ring-theory.modules-rings
-open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

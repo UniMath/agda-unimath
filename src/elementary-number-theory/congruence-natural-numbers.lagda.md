@@ -1,8 +1,12 @@
-#  The congruence relations on the natural numbers
+# The congruence relations on the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.congruence-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
@@ -15,6 +19,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Properties

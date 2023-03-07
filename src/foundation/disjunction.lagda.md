@@ -1,8 +1,12 @@
-#  Disjunction of propositions
+# Disjunction of propositions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.disjunction where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -14,6 +18,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.propositional-truncations
 ```
+
 </details>
 
 ## Idea

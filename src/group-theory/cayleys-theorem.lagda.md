@@ -1,19 +1,24 @@
-#  Cayley's theorem
+# Cayley's theorem
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.cayleys-theorem where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.embeddings-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-extensionality
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
-open import group-theory.embeddings-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
 ```
+
 </details>
 
 ```agda

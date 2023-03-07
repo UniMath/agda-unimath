@@ -1,15 +1,20 @@
 # Lifting operations
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.lifting-operations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import orthogonal-factorization-systems.pullback-hom
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.sections
 open import foundation.universe-levels
-open import orthogonal-factorization-systems.pullback-hom
 ```
+
 </details>
 
 ## Idea

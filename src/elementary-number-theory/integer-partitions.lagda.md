@@ -1,4 +1,4 @@
-#  Integer partitions
+# Integer partitions
 
 ```agda
 module elementary-number-theory.integer-partitions where

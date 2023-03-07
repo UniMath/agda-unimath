@@ -1,14 +1,19 @@
-#  Nil ideals
+# Nil ideals
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.nil-ideals-rings where
-open import foundation.propositions
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import ring-theory.ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.rings
+open import foundation.propositions
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

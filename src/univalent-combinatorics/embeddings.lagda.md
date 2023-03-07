@@ -1,14 +1,19 @@
-#  Injective maps
+# Injective maps
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.embeddings where
-open import foundation.decidable-types
-open import foundation.embeddings public
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.injective-maps
+open import foundation.embeddings public
+open import foundation.decidable-types
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

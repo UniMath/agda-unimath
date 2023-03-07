@@ -1,16 +1,21 @@
 # Chains in preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.chains-preorders where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.preorders
+open import order-theory.subpreorders
+open import order-theory.total-preorders
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-open import order-theory.preorders
-open import order-theory.subpreorders
-open import order-theory.total-preorders
 ```
+
 </details>
 
 ## Definition

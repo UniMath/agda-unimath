@@ -1,8 +1,14 @@
-#  Isomorphisms of rings
+# Isomorphisms of rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.isomorphisms-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import ring-theory.homomorphisms-rings
+open import ring-theory.rings
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -23,9 +29,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.isomorphisms-abelian-groups
-open import ring-theory.homomorphisms-rings
-open import ring-theory.rings
 ```
+
 </details>
 
 ## Definition

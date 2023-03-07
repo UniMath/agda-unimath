@@ -1,8 +1,12 @@
-#  The symmetric identity types
+# The symmetric identity types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.symmetric-identity-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -22,6 +26,7 @@ open import foundation.unordered-pairs
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

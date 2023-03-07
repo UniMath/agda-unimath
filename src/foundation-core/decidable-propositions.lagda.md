@@ -1,8 +1,12 @@
-#  Decidable propositions
+# Decidable propositions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.decidable-propositions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -19,6 +23,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unit-type
 ```
+
 </details>
 
 ## Idea

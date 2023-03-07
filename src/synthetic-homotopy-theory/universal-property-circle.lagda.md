@@ -1,8 +1,13 @@
-#  The universal property of the circle
+# The universal property of the circle
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.universal-property-circle where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import synthetic-homotopy-theory.free-loops
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,8 +21,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sections
 open import foundation.universe-levels
-open import synthetic-homotopy-theory.free-loops
 ```
+
 </details>
 
 ## Definitions

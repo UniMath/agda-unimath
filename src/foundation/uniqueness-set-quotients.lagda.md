@@ -1,8 +1,12 @@
-#  The uniqueness of set quotients
+# The uniqueness of set quotients
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.uniqueness-set-quotients where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.equivalence-relations
 open import foundation-core.function-extensionality
 open import foundation.contractible-types
@@ -18,6 +22,7 @@ open import foundation.subtype-identity-principle
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

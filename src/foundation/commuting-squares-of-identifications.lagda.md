@@ -1,13 +1,18 @@
 # Commuting squares of identifications
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
 module foundation.commuting-squares-of-identifications where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

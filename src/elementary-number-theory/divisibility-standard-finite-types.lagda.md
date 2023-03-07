@@ -1,8 +1,12 @@
-#  The divisibility relation on the standard finite types
+# The divisibility relation on the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.divisibility-standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import foundation.decidable-types
@@ -13,6 +17,7 @@ open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

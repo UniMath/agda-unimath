@@ -1,8 +1,12 @@
-#  Multiplication of integers
+# Multiplication of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.multiplication-integers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.difference-integers
@@ -23,6 +27,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

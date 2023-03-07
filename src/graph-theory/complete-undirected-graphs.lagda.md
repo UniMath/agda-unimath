@@ -1,13 +1,18 @@
-#  Complete undirected graphs
+# Complete undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-undirected-graphs where
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import graph-theory.complete-multipartite-graphs
 open import graph-theory.finite-graphs
+open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

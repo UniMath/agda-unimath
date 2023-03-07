@@ -1,15 +1,20 @@
 # Largest elements in posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.largest-elements-posets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.largest-elements-preorders
+open import order-theory.posets
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-open import order-theory.largest-elements-preorders
-open import order-theory.posets
 ```
+
 </details>
 
 ## Definition

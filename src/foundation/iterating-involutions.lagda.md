@@ -1,18 +1,23 @@
-#  Iterating involutions
+# Iterating involutions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-involutions where
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

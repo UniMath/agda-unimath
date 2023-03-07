@@ -1,8 +1,12 @@
 # Binary reflecting maps of equivalence relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.binary-reflecting-maps-equivalence-relations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -17,6 +21,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
-#  Descent for coproduct types
+# Descent for coproduct types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.descent-coproduct-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cones-pullbacks
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -18,6 +22,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Theorem

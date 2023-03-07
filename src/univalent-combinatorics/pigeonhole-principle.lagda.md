@@ -1,11 +1,19 @@
-#  The pigeonhole principle
+# The pigeonhole principle
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pigeonhole-principle where
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.embeddings-standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -26,14 +34,11 @@ open import foundation.repetitions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.embeddings-standard-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
+
 </details>
 
 ## Idea

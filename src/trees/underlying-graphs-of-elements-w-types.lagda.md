@@ -1,8 +1,16 @@
-#  The underlying graphs of elements of W-types
+# The underlying graphs of elements of W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.underlying-graphs-of-elements-w-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import trees.directed-trees
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -30,11 +38,8 @@ open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.trails-directed-graphs
 open import graph-theory.walks-directed-graphs
-open import trees.directed-trees
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
 ```
+
 </details>
 
 ## Idea

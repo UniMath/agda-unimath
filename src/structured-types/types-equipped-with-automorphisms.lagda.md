@@ -1,4 +1,4 @@
-#  Types equipped with automorphisms
+# Types equipped with automorphisms
 
 ```agda
 module structured-types.types-equipped-with-automorphisms where

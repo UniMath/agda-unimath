@@ -1,16 +1,21 @@
-#  Contravariant pushforwards of concrete group actions
+# Contravariant pushforwards of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.contravariant-pushforward-concrete-group-actions where
-open import foundation.identity-types
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-group-actions
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.substitution-functor-concrete-group-actions
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

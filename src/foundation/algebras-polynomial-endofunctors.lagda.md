@@ -1,8 +1,12 @@
-#  Algebras for polynomial endofunctors
+# Algebras for polynomial endofunctors
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.algebras-polynomial-endofunctors where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -15,6 +19,7 @@ open import foundation.homotopies
 open import foundation.polynomial-endofunctors
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea

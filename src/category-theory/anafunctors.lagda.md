@@ -1,8 +1,12 @@
-#  Anafunctors
+# Anafunctors
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.anafunctors where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-precategories
@@ -14,6 +18,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
-#  Ideals in commutative rings
+# Ideals in commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.ideals-commutative-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import foundation.dependent-pair-types
 open import foundation.propositions
@@ -10,6 +14,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import ring-theory.ideals-rings
 ```
+
 </details>
 
 ## Idea

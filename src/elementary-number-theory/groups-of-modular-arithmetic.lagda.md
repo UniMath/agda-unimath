@@ -1,8 +1,12 @@
-#  The groups ℤ/kℤ
+# The groups ℤ/kℤ
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.groups-of-modular-arithmetic where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
@@ -11,6 +15,7 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

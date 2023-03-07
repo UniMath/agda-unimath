@@ -1,9 +1,12 @@
-#  Finite semigroups
+# Finite semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.finite-semigroups where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -15,6 +18,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import group-theory.semigroups
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
@@ -24,6 +28,7 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

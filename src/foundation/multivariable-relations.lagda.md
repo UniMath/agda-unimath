@@ -1,14 +1,19 @@
-#  Multivariable relations
+# Multivariable relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.multivariable-relations where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.multivariable-correspondences
 open import foundation.subtypes
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

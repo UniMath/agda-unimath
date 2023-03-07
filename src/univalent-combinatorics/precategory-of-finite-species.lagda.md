@@ -1,13 +1,18 @@
-#  The precategory of finite species
+# The precategory of finite species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.precategory-of-finite-species where
-open import category-theory.large-precategories
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import univalent-combinatorics.finite-species
 open import univalent-combinatorics.morphisms-finite-species
+open import foundation.universe-levels
+open import category-theory.large-precategories
 ```
+
 </details>
 
 ### Idea

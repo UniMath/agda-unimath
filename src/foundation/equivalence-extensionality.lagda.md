@@ -1,8 +1,12 @@
-#  Equivalence extensionality
+# Equivalence extensionality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.equivalence-extensionality where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -20,6 +24,7 @@ open import foundation.function-extensionality
 open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+
 </details>
 
 ## Characterizing the identity type of equivalences

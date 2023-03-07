@@ -1,8 +1,12 @@
-#  Groupoids
+# Groupoids
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.groupoids where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.categories
 open import category-theory.equivalences-categories
 open import category-theory.functors-categories
@@ -23,6 +27,7 @@ open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,19 @@
 # Frames
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.frames where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.infinite-distributive-law
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.sup-lattices
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -11,14 +22,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import order-theory.greatest-lower-bounds-posets
-open import order-theory.infinite-distributive-law
-open import order-theory.least-upper-bounds-posets
-open import order-theory.meet-semilattices
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
-open import order-theory.sup-lattices
 ```
+
 </details>
 
 ## Idea: A frame is a poset that has binary meets and arbitrary joins and further satisfies the infinite distributive law.

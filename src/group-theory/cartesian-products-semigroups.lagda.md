@@ -1,15 +1,20 @@
-#  Cartesian products of semigroups
+# Cartesian products of semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.cartesian-products-semigroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.semigroups
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

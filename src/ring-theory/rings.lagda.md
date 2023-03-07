@@ -1,10 +1,13 @@
-#  Rings
+# Rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.rings where
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import ring-theory.semirings
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -18,14 +21,16 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
-open import ring-theory.semirings
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

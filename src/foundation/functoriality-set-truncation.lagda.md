@@ -1,8 +1,12 @@
-#  Functoriality of set truncation
+# Functoriality of set truncation
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-set-truncation where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.function-extensionality
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -29,6 +33,7 @@ open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea
