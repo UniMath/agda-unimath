@@ -1,8 +1,12 @@
-#  Images of subtypes
+# Images of subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.images-subtypes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.images
@@ -10,6 +14,7 @@ open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

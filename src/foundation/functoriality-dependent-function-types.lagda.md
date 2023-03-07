@@ -1,15 +1,19 @@
-#  Functoriality of dependent function types
+# Functoriality of dependent function types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-dependent-function-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
-open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
@@ -25,6 +29,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,21 @@
-#  Concrete automorphism groups on sets
+# Concrete automorphism groups on sets
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.loop-groups-sets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.automorphism-groups
+open import group-theory.concrete-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.monoids
+open import group-theory.semigroups
+open import group-theory.symmetric-groups
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -18,16 +31,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
-open import group-theory.automorphism-groups
-open import group-theory.concrete-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-groups
-open import group-theory.monoids
-open import group-theory.semigroups
-open import group-theory.symmetric-groups
 ```
+
 </details>
 
 ## Idea

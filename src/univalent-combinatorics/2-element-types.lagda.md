@@ -1,10 +1,16 @@
-#  2-element types
+# 2-element types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-types where
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.equivalences
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.automorphisms
 open import foundation.connected-components-universes
 open import foundation.constant-maps
@@ -41,11 +47,10 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.equivalences
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

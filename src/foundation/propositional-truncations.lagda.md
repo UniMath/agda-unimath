@@ -1,8 +1,12 @@
-#  Propositional truncations
+# Propositional truncations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.propositional-truncations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.coproduct-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
@@ -20,6 +24,7 @@ open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

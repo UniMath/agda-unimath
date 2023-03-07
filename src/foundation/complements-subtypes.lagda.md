@@ -1,8 +1,12 @@
-#  Complements of subtypes
+# Complements of subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.complements-subtypes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
@@ -14,6 +18,7 @@ open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

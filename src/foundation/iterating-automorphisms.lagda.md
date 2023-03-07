@@ -1,11 +1,12 @@
-#  Iterating automorphisms
+# Iterating automorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-automorphisms where
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.automorphisms
 open import foundation.coproduct-types
 open import foundation.equivalence-extensionality
@@ -16,7 +17,11 @@ open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definition

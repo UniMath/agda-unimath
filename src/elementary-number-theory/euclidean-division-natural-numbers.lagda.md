@@ -1,8 +1,12 @@
-#  Euclidean division on the natural numbers
+# Euclidean division on the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.euclidean-division-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
@@ -16,6 +20,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,13 @@
-#  Sections
+# Sections
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.sections where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation-core.sections public
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -12,7 +17,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation-core.sections public
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 open import foundation.function-extensionality
@@ -20,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+
 </details>
 
 ## Idea

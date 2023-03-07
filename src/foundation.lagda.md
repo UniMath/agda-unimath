@@ -1,4 +1,4 @@
-#  Foundation
+# Foundation
 
 ```agda
 module foundation where

@@ -1,8 +1,12 @@
-#  The universal property of the natural numbers
+# The universal property of the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.universal-property-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -15,6 +19,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

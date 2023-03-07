@@ -1,8 +1,12 @@
-#  Bezout's lemma
+# Bezout's lemma
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.bezouts-lemma where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
@@ -39,6 +43,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,13 +1,18 @@
 # Scalar multiplication on matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.scalar-multiplication-matrices where
-open import elementary-number-theory.natural-numbers
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import linear-algebra.matrices
 open import linear-algebra.scalar-multiplication-vectors
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ```agda

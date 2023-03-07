@@ -1,14 +1,19 @@
 # Maximal chains in posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.maximal-chains-posets where
-open import foundation.propositions
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import order-theory.chains-posets
 open import order-theory.maximal-chains-preorders
 open import order-theory.posets
+open import foundation.propositions
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

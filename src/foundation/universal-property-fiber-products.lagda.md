@@ -1,8 +1,12 @@
-#  The universal property of fiber products
+# The universal property of fiber products
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-fiber-products where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
@@ -18,6 +22,7 @@ open import foundation.pullbacks
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

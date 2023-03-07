@@ -1,4 +1,4 @@
-#  Polytopes
+# Polytopes
 
 ```agda
 module polytopes where

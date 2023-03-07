@@ -1,10 +1,16 @@
-#  Cartier's delooping of the sign homomorphism
+# Cartier's delooping of the sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.cartier-delooping-sign-homomorphism where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import finite-group-theory.delooping-sign-homomorphism
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.sign-homomorphism
@@ -15,6 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-groups
@@ -24,6 +31,7 @@ open import group-theory.symmetric-groups
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

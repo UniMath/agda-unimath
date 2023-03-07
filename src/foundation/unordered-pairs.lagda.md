@@ -1,8 +1,12 @@
-#  Unordered pairs of elements in a type
+# Unordered pairs of elements in a type
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-pairs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -29,6 +33,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

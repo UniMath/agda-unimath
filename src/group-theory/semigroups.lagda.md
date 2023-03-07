@@ -1,13 +1,18 @@
-#  Semigroups
+# Semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.semigroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

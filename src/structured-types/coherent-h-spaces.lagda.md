@@ -1,8 +1,19 @@
-#  Coherent H-spaces
+# Coherent H-spaces
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.coherent-h-spaces where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import structured-types.h-spaces
+open import structured-types.magmas
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-maps
+open import structured-types.pointed-sections
+open import structured-types.pointed-types
 open import foundation-core.endomorphisms
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,14 +28,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
-open import structured-types.h-spaces
-open import structured-types.magmas
-open import structured-types.pointed-dependent-functions
-open import structured-types.pointed-families-of-types
-open import structured-types.pointed-maps
-open import structured-types.pointed-sections
-open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

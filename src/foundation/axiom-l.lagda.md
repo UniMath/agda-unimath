@@ -1,8 +1,12 @@
-#  Axiom L
+# Axiom L
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.axiom-l where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
@@ -14,15 +18,8 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.univalence
 open import foundation-core.universe-levels
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-function-types
-open import foundation.sets
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.universal-property-identity-types
 ```
+
 </details>
 
 ## Idea

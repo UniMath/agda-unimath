@@ -1,8 +1,12 @@
-#  Locally small types
+# Locally small types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.locally-small-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.small-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -19,6 +23,7 @@ open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

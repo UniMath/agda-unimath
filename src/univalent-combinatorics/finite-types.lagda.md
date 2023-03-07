@@ -1,10 +1,15 @@
-#  Finite types
+# Finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.finite-types where
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components-universes
@@ -32,10 +37,10 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

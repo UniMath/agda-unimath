@@ -1,9 +1,16 @@
-#  The universal property of set quotients
+# The universal property of set quotients
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module foundation.universal-property-set-quotients where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.equivalence-relations
 open import foundation-core.univalence
 open import foundation.cartesian-product-types
@@ -38,6 +45,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

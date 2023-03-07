@@ -1,8 +1,12 @@
-#  The replacement axiom for type theory
+# The replacement axiom for type theory
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.replacement where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.small-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -12,6 +16,7 @@ open import foundation.locally-small-types
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

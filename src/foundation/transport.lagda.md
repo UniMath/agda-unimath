@@ -1,8 +1,12 @@
-#  Transport
+# Transport
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.transport where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -15,6 +19,7 @@ open import foundation.identity-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

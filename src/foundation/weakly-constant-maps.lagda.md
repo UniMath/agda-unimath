@@ -1,14 +1,19 @@
-#  Weakly constant maps
+# Weakly constant maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.weakly-constant-maps where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

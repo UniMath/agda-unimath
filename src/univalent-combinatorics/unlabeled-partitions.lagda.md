@@ -1,4 +1,4 @@
-#  Unlabeled partitions
+# Unlabeled partitions
 
 ```agda
 module univalent-combinatorics.unlabeled-partitions where

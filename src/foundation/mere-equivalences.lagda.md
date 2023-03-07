@@ -1,8 +1,12 @@
-#  Mere equivalences
+# Mere equivalences
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.mere-equivalences where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.decidable-equality
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
@@ -15,6 +19,7 @@ open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

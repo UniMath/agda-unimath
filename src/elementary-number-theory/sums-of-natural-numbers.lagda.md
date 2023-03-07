@@ -1,8 +1,12 @@
-#  Sums of natural numbers
+# Sums of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.sums-of-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -20,6 +24,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

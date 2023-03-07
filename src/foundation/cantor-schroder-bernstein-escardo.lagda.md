@@ -1,10 +1,12 @@
 # The Cantor-Schröder-Bernstein-Escardó theorem
 
-Contributors: Elif Uskuplu, Egbert Rijke
-
-<details><summary>Imports</summary>
 ```agda
 module foundation.cantor-schroder-bernstein-escardo where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -22,6 +24,7 @@ open import foundation.perfect-images
 open import foundation.split-surjective-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

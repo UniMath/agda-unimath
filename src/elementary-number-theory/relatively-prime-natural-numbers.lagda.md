@@ -1,8 +1,12 @@
-#  Relatively prime natural numbers
+# Relatively prime natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.relatively-prime-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -12,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

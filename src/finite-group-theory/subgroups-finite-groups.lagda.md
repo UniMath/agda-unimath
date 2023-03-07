@@ -1,8 +1,12 @@
-#  Subgroups of finite groups
+# Subgroups of finite groups
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.subgroups-finite-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-semigroups
 open import foundation.binary-relations
@@ -22,6 +26,7 @@ open import group-theory.subgroups
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,13 @@
 # Lifts of maps
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.lifts-of-maps where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import orthogonal-factorization-systems.extensions-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,8 +23,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import orthogonal-factorization-systems.extensions-of-maps
 ```
+
 </details>
 
 ## Idea

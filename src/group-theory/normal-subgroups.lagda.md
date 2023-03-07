@@ -1,8 +1,16 @@
-#  Normal subgroups
+# Normal subgroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.normal-subgroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.congruence-relations-groups
+open import group-theory.conjugation
+open import group-theory.groups
+open import group-theory.subgroups
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
@@ -19,15 +27,12 @@ open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
-open import group-theory.congruence-relations-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.subgroups
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
-#  Inequality of natural numbers
+# Inequality of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.inequality-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -20,6 +24,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import order-theory.posets
 ```
+
 </details>
 
 ## Idea

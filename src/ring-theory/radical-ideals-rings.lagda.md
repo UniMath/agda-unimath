@@ -1,14 +1,19 @@
-#  Radical ideals in rings
+# Radical ideals in rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.radical-ideals-rings where
-open import foundation.propositions
-open import foundation.universe-levels
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
+open import foundation.propositions
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

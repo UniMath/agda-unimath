@@ -1,8 +1,12 @@
-#  Homotopies of natural transformations in large precategories
+# Homotopies of natural transformations in large precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.homotopies-natural-transformations-large-precategories where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
@@ -11,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

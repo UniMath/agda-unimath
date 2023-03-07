@@ -1,16 +1,21 @@
 # Functoriality of the type of vectors
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-vectors where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import linear-algebra.vectors
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-open import linear-algebra.vectors
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea
