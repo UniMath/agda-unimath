@@ -5,6 +5,7 @@ module elementary-number-theory.proper-divisors-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
@@ -21,6 +22,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

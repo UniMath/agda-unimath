@@ -5,6 +5,7 @@ module structured-types.pointed-equivalences where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
@@ -26,6 +27,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

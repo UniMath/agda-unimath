@@ -5,6 +5,7 @@ module group-theory.normal-subgroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.congruence-relations-groups
 open import group-theory.conjugation
@@ -31,6 +32,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module foundation.iterating-automorphisms where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.automorphisms
 open import foundation.coproduct-types
@@ -20,6 +21,7 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definition

@@ -5,6 +5,7 @@ module organic-chemistry.ethane where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import organic-chemistry.alkanes
 open import organic-chemistry.hydrocarbons
@@ -33,6 +34,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

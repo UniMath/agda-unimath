@@ -9,6 +9,7 @@ module finite-group-theory.delooping-sign-homomorphism where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations
@@ -64,6 +65,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ### Deloopings of the sign homomorphism

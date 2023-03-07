@@ -5,6 +5,7 @@ module univalent-combinatorics.pi-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -67,6 +68,7 @@ open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

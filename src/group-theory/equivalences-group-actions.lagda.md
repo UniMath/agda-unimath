@@ -5,6 +5,7 @@ module group-theory.equivalences-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.group-actions
 open import group-theory.groups
@@ -27,6 +28,7 @@ open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

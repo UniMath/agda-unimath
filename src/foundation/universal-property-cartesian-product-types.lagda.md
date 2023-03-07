@@ -5,6 +5,7 @@ module foundation.universal-property-cartesian-product-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.cones-pullbacks
@@ -21,6 +22,7 @@ open import foundation.unit-type
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

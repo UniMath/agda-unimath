@@ -9,6 +9,7 @@ module finite-group-theory.finite-type-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
@@ -36,6 +37,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ### Definition

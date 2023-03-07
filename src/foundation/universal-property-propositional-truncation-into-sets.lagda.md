@@ -5,6 +5,7 @@ module foundation.universal-property-propositional-truncation-into-sets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,6 +21,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module elementary-number-theory.binomial-theorem-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.commutative-ring-of-integers
@@ -28,6 +29,7 @@ open import commutative-algebra.sums-commutative-semirings
 open import linear-algebra.vectors
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

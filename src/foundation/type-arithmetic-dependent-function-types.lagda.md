@@ -5,12 +5,14 @@ module foundation.type-arithmetic-dependent-function-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

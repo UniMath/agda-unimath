@@ -5,6 +5,7 @@ module group-theory.homomorphisms-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-groups
@@ -19,6 +20,7 @@ open import foundation.universe-levels
 open import category-theory.large-precategories
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

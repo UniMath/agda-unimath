@@ -5,11 +5,13 @@ module group-theory.fixed-points-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

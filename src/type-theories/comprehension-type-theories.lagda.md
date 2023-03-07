@@ -9,11 +9,13 @@ module type-theories.comprehension-type-theories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import type-theories.dependent-type-theories
 open import type-theories.fibered-dependent-type-theories
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

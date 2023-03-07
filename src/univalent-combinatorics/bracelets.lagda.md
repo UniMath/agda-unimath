@@ -5,6 +5,7 @@ module univalent-combinatorics.bracelets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.standard-finite-types
 open import foundation.dependent-pair-types
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import graph-theory.polygons
 ```
+
 </details>
 
 ## Definition

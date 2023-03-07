@@ -5,6 +5,7 @@ module elementary-number-theory.goldbach-conjecture where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
@@ -16,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 # The Goldbach Conjecture

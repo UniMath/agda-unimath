@@ -5,6 +5,7 @@ module order-theory.frames where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.infinite-distributive-law
@@ -22,6 +23,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea: A frame is a poset that has binary meets and arbitrary joins and further satisfies the infinite distributive law.

@@ -5,6 +5,7 @@ module structured-types.faithful-pointed-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
@@ -13,6 +14,7 @@ open import foundation.faithful-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

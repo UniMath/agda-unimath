@@ -5,6 +5,7 @@ module univalent-combinatorics.lists where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -29,6 +30,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import group-theory.monoids
 ```
+
 </details>
 
 ## Idea

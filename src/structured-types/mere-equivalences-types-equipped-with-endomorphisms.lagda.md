@@ -5,6 +5,7 @@ module structured-types.mere-equivalences-types-equipped-with-endomorphisms wher
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
@@ -19,6 +20,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

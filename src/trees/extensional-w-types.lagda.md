@@ -5,6 +5,7 @@ module trees.extensional-w-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.elementhood-relation-w-types
 open import trees.w-types
@@ -26,6 +27,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalent-type-families
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

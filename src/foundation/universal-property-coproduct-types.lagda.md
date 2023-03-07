@@ -5,6 +5,7 @@ module foundation.universal-property-coproduct-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -16,6 +17,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

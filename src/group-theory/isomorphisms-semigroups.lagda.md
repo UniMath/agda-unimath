@@ -5,6 +5,7 @@ module group-theory.isomorphisms-semigroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.equivalences-semigroups
 open import group-theory.homomorphisms-semigroups
@@ -22,6 +23,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import category-theory.isomorphisms-large-precategories
 ```
+
 </details>
 
 ## Idea

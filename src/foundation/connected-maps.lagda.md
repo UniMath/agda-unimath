@@ -5,6 +5,7 @@ module foundation.connected-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.connected-types
 open import foundation.contractible-maps
@@ -30,6 +31,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

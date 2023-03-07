@@ -5,6 +5,7 @@ module elementary-number-theory.strong-induction-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -21,6 +22,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

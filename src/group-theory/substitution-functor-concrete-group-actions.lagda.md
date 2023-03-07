@@ -5,12 +5,14 @@ module group-theory.substitution-functor-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

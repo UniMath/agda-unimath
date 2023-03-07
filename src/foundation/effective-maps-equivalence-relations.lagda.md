@@ -5,6 +5,7 @@ module foundation.effective-maps-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalence-relations
@@ -13,6 +14,7 @@ open import foundation-core.identity-types
 open import foundation-core.universe-levels
 open import foundation.surjective-maps
 ```
+
 </details>
 
 ## Idea

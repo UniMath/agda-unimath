@@ -9,6 +9,7 @@ module finite-group-theory.orbits-permutations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.transpositions
 open import foundation.automorphisms
@@ -65,6 +66,7 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

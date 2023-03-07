@@ -5,6 +5,7 @@ module univalent-combinatorics.cartesian-product-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
@@ -36,6 +37,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.free-loops where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

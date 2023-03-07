@@ -5,6 +5,7 @@ module foundation.impredicative-encodings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -21,6 +22,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

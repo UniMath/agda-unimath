@@ -5,6 +5,7 @@ module ring-theory.binomial-theorem-semirings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.semirings
@@ -23,6 +24,7 @@ open import elementary-number-theory.natural-numbers
 open import linear-algebra.vectors-on-semirings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

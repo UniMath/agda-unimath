@@ -5,6 +5,7 @@ module elementary-number-theory.divisibility-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
@@ -19,6 +20,7 @@ open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 # Divisibility on the natural numbers

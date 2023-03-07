@@ -5,6 +5,7 @@ module foundation.set-truncations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.function-extensionality
 open import foundation.cartesian-product-types
@@ -41,6 +42,7 @@ open import foundation.universal-property-set-quotients
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

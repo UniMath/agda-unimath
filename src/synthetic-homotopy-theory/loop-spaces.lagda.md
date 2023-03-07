@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.loop-spaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,6 +17,7 @@ open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
+
 </details>
 
 ## Idea

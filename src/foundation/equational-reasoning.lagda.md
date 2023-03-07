@@ -9,6 +9,7 @@ module foundation.equational-reasoning where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -19,6 +20,7 @@ open import foundation-core.logical-equivalences
 open import foundation-core.universe-levels
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Idea

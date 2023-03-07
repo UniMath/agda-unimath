@@ -5,6 +5,7 @@ module foundation.set-presented-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -14,6 +15,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module linear-algebra.vectors-on-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
@@ -27,6 +28,7 @@ open import group-theory.semigroups
 open import ring-theory.rings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

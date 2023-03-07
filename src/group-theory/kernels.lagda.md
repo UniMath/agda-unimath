@@ -5,6 +5,7 @@ module group-theory.kernels where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.embeddings-groups
 open import group-theory.groups
@@ -20,6 +21,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

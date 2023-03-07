@@ -5,6 +5,7 @@ module elementary-number-theory.well-ordering-principle-standard-finite-types wh
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
@@ -38,6 +39,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

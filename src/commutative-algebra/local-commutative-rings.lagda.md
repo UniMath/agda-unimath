@@ -5,6 +5,7 @@ module commutative-algebra.local-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.invertible-elements-commutative-rings
@@ -19,6 +20,7 @@ open import ring-theory.local-rings
 open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

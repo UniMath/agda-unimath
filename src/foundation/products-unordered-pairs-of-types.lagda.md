@@ -5,6 +5,7 @@ module foundation.products-unordered-pairs-of-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -23,6 +24,7 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.universal-property-standard-finite-types
 ```
+
 </details>
 
 ## Idea

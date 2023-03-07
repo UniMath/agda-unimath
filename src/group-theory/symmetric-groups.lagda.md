@@ -5,6 +5,7 @@ module group-theory.symmetric-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import group-theory.groups
@@ -34,6 +35,7 @@ open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definitions

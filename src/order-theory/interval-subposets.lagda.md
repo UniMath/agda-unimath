@@ -5,6 +5,7 @@ module order-theory.interval-subposets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.posets
 open import order-theory.subposets
@@ -12,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

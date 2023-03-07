@@ -5,9 +5,11 @@ module trees.indexed-w-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

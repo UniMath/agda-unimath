@@ -5,6 +5,7 @@ module trees.equivalences-directed-trees where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.directed-trees
 open import foundation.binary-transport
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import graph-theory.equivalences-directed-graphs
 open import graph-theory.walks-directed-graphs
 ```
+
 </details>
 
 ## Definition

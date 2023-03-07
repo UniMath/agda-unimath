@@ -5,12 +5,14 @@ module structured-types.contractible-pointed-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-types
 open import foundation.contractible-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

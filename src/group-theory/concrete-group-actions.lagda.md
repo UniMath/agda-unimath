@@ -5,6 +5,7 @@ module group-theory.concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import foundation.cartesian-product-types
@@ -15,6 +16,7 @@ open import foundation.sets
 open import foundation.universe-levels
 open import synthetic-homotopy-theory.circle
 ```
+
 </details>
 
 ## Idea

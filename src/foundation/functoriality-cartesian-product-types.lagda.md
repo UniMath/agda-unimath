@@ -5,6 +5,7 @@ module foundation.functoriality-cartesian-product-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
@@ -18,6 +19,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

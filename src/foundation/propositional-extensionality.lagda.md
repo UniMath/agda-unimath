@@ -5,6 +5,7 @@ module foundation.propositional-extensionality where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -28,6 +29,7 @@ open import foundation.univalent-type-families
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

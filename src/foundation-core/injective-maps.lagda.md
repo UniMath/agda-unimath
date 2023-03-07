@@ -5,6 +5,7 @@ module foundation-core.injective-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -19,6 +20,7 @@ open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

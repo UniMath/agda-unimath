@@ -5,6 +5,7 @@ module foundation.iterating-involutions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.coproduct-types
 open import foundation.identity-types
@@ -16,6 +17,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

@@ -5,6 +5,7 @@ module organic-chemistry.methane where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import organic-chemistry.alkanes using (is-alkane-hydrocarbon)
 open import organic-chemistry.hydrocarbons using (hydrocarbon)
@@ -20,6 +21,7 @@ open import graph-theory.walks-undirected-graphs using (refl-walk-Undirected-Gra
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 ## Idea
 

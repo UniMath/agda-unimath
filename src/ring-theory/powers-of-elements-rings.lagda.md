@@ -5,6 +5,7 @@ module ring-theory.powers-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.rings
@@ -12,6 +13,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

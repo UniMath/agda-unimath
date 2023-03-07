@@ -5,6 +5,7 @@ module foundation.constant-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.constant-maps public
 open import foundation-core.0-maps
@@ -26,6 +27,7 @@ open import foundation.embeddings
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 ```
+
 </details>
 
 ## Properties

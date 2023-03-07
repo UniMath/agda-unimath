@@ -5,6 +5,7 @@ module organic-chemistry.hydrocarbons where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -18,6 +19,7 @@ open import graph-theory.connected-undirected-graphs
 open import graph-theory.finite-graphs
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module category-theory.natural-numbers-object-precategories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.unique-existence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

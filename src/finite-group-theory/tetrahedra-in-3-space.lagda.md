@@ -5,6 +5,7 @@ module finite-group-theory.tetrahedra-in-3-space where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -13,6 +14,7 @@ open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

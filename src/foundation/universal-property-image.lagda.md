@@ -5,6 +5,7 @@ module foundation.universal-property-image where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -29,6 +30,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

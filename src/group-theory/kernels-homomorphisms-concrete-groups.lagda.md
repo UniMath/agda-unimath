@@ -5,6 +5,7 @@ module group-theory.kernels-homomorphisms-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import group-theory.higher-groups
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

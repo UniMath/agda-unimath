@@ -9,6 +9,7 @@ module univalent-combinatorics.orientations-complete-undirected-graph where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-subtypes
@@ -67,6 +68,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 open import finite-group-theory.transpositions
 ```
+
 </details>
 
 ```agda
@@ -607,6 +609,7 @@ module _
             ( map-orientation-complete-undirected-graph-equiv X X' e d'))
           ( P))
 ```
+
 </details>
 
 ```agda

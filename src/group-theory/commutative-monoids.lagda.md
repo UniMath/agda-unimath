@@ -5,6 +5,7 @@ module group-theory.commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -21,6 +22,7 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

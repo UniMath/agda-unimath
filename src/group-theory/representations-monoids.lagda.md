@@ -5,6 +5,7 @@ module group-theory.representations-monoids where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import category-theory.categories
 open import category-theory.endomorphisms-of-objects-categories
 ```
+
 </details>
 
 ## Idea

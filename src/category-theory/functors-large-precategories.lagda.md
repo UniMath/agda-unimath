@@ -5,6 +5,7 @@ module category-theory.functors-large-precategories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import Agda.Primitive using (Setω)
 open import category-theory.large-precategories
@@ -12,6 +13,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

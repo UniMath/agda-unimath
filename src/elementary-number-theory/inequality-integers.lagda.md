@@ -5,6 +5,7 @@ module elementary-number-theory.inequality-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-integers
@@ -19,6 +20,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 # Inequality on the integers

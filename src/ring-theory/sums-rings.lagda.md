@@ -5,6 +5,7 @@ module ring-theory.sums-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.rings
 open import ring-theory.semirings
@@ -20,6 +21,7 @@ open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

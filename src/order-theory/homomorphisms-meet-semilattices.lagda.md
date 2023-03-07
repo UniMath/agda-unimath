@@ -5,6 +5,7 @@ module order-theory.homomorphisms-meet-semilattices where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.meet-semilattices
@@ -19,6 +20,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

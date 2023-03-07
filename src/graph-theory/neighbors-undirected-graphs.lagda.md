@@ -5,6 +5,7 @@ module graph-theory.neighbors-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.undirected-graphs
@@ -18,6 +19,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 ```
+
 </details>
 
 ## Idea

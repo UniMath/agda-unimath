@@ -5,6 +5,7 @@ module univalent-combinatorics.exponents-species where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.morphisms-species
@@ -16,6 +17,7 @@ open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

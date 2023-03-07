@@ -5,6 +5,7 @@ module foundation.xor where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.conjunction
@@ -42,6 +43,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

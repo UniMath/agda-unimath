@@ -5,6 +5,7 @@ module group-theory.subsemigroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.semigroups
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module elementary-number-theory.well-ordering-principle-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
@@ -25,6 +26,7 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

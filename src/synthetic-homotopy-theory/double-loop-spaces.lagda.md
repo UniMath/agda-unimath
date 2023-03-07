@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.double-loop-spaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import foundation.identity-types
@@ -12,6 +13,7 @@ open import foundation.path-algebra
 open import foundation.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Definition

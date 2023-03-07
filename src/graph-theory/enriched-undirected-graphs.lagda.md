@@ -5,6 +5,7 @@ module graph-theory.enriched-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```
+
 </details>
 
 ## Idea

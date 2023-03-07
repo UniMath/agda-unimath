@@ -6,9 +6,11 @@ module foundation-core.truncation-levels where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

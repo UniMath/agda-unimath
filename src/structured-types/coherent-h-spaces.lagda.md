@@ -5,6 +5,7 @@ module structured-types.coherent-h-spaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.h-spaces
 open import structured-types.magmas
@@ -28,6 +29,7 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 ```
+
 </details>
 
 ## Idea

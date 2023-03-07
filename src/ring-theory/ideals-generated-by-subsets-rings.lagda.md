@@ -5,6 +5,7 @@ module ring-theory.ideals-generated-by-subsets-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.ideals-rings
 open import ring-theory.rings
@@ -20,6 +21,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

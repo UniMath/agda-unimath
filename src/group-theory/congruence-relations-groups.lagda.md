@@ -5,6 +5,7 @@ module group-theory.congruence-relations-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
@@ -19,6 +20,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

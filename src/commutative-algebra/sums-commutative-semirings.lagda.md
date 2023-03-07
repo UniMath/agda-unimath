@@ -5,6 +5,7 @@ module commutative-algebra.sums-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-semirings
 open import foundation.coproduct-types
@@ -19,6 +20,7 @@ open import linear-algebra.vectors-on-commutative-semirings
 open import ring-theory.sums-semirings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

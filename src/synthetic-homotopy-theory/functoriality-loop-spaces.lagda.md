@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.functoriality-loop-spaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.loop-spaces
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import structured-types.faithful-pointed-maps
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

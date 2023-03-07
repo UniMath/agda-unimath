@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.descent-circle where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
@@ -25,6 +26,7 @@ open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

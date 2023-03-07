@@ -5,6 +5,7 @@ module group-theory.centers-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.subgroups
@@ -14,6 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

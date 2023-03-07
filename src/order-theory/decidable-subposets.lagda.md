@@ -5,6 +5,7 @@ module order-theory.decidable-subposets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.posets
 open import order-theory.subposets
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

@@ -5,6 +5,7 @@ module trees.w-type-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.w-types
 open import foundation.booleans
@@ -20,6 +21,7 @@ open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definition

@@ -9,11 +9,13 @@ module foundation-core.homotopies where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module group-theory.subgroups-generated-by-subsets-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.full-subgroups
 open import group-theory.groups
@@ -24,6 +25,7 @@ open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

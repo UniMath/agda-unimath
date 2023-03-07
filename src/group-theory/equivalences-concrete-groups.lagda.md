@@ -5,6 +5,7 @@ module group-theory.equivalences-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import group-theory.equivalences-higher-groups
@@ -18,6 +19,7 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

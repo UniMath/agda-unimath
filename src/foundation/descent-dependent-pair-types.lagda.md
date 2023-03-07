@@ -5,6 +5,7 @@ module foundation.descent-dependent-pair-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Theorem

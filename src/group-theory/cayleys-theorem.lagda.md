@@ -5,6 +5,7 @@ module group-theory.cayleys-theorem where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.embeddings-groups
 open import group-theory.groups
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

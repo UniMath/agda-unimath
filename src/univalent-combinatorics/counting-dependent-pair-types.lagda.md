@@ -5,6 +5,7 @@ module univalent-combinatorics.counting-dependent-pair-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
@@ -33,6 +34,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 ```
+
 </details>
 
 ## Idea

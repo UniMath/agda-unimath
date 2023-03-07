@@ -5,6 +5,7 @@ module order-theory.order-preserving-maps-preorders where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.preorders
 open import foundation.contractible-types
@@ -18,6 +19,7 @@ open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

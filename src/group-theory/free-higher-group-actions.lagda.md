@@ -5,6 +5,7 @@ module group-theory.free-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
@@ -14,6 +15,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

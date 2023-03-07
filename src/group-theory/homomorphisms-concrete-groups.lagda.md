@@ -5,6 +5,7 @@ module group-theory.homomorphisms-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-groups
 open import group-theory.higher-groups
@@ -23,6 +24,7 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

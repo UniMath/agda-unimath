@@ -5,6 +5,7 @@ module univalent-combinatorics.pigeonhole-principle where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-function-types
@@ -37,6 +38,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
+
 </details>
 
 ## Idea

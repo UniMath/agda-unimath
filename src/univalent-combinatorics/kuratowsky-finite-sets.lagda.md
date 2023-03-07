@@ -5,6 +5,7 @@ module univalent-combinatorics.kuratowsky-finite-sets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -20,6 +21,7 @@ open import foundation.surjective-maps
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

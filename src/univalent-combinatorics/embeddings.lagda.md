@@ -5,6 +5,7 @@ module univalent-combinatorics.embeddings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.injective-maps
@@ -12,6 +13,7 @@ open import foundation.embeddings public
 open import foundation.decidable-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

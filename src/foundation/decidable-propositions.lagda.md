@@ -5,6 +5,7 @@ module foundation.decidable-propositions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.decidable-propositions public
 open import foundation.booleans
@@ -37,6 +38,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

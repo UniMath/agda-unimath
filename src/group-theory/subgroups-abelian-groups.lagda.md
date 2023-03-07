@@ -5,6 +5,7 @@ module group-theory.subgroups-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.abelian-groups
 open import group-theory.embeddings-groups
@@ -19,6 +20,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definitions

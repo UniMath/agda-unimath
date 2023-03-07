@@ -5,6 +5,7 @@ module univalent-combinatorics.counting-maybe where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
@@ -15,6 +16,7 @@ open import foundation.maybe
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

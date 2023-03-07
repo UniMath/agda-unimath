@@ -5,6 +5,7 @@ module foundation-core.functoriality-function-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-maps
@@ -18,6 +19,7 @@ open import foundation-core.path-split-maps
 open import foundation-core.universe-levels
 open import foundation.function-extensionality
 ```
+
 </details>
 
 ## Properties

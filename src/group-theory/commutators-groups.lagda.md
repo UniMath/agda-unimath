@@ -5,6 +5,7 @@ module group-theory.commutators-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.group-solver
 open import group-theory.groups
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

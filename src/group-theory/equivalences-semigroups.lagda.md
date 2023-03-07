@@ -5,6 +5,7 @@ module group-theory.equivalences-semigroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
@@ -22,6 +23,7 @@ open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module finite-group-theory.sign-homomorphism where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.permutations
 open import finite-group-theory.transpositions
@@ -31,6 +32,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

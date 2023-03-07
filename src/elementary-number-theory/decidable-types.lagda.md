@@ -5,6 +5,7 @@ module elementary-number-theory.decidable-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -20,6 +21,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

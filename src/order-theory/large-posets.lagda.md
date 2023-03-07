@@ -5,6 +5,7 @@ module order-theory.large-posets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import Agda.Primitive using (Setω)
 open import order-theory.large-preorders
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

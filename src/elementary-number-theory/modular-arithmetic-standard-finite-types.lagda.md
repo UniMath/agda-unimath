@@ -5,6 +5,7 @@ module elementary-number-theory.modular-arithmetic-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
@@ -28,6 +29,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definitions

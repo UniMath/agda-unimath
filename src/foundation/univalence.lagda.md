@@ -5,6 +5,7 @@ module foundation.univalence where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.univalence public
 open import foundation-core.contractible-types
@@ -17,6 +18,7 @@ open import foundation-core.universe-levels
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 ```
+
 </details>
 
 ## Idea

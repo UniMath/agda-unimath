@@ -5,6 +5,7 @@ module group-theory.substitution-functor-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.group-actions
 open import group-theory.groups
@@ -23,6 +24,7 @@ open import foundation.sets
 open import foundation.universe-levels
 open import category-theory.functors-large-precategories
 ```
+
 </details>
 
 ## Idea

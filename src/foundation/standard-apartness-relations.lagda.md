@@ -5,6 +5,7 @@ module foundation.standard-apartness-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.apartness-relations
 open import foundation.coproduct-types
@@ -17,6 +18,7 @@ open import foundation.negation
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

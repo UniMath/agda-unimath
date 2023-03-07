@@ -5,6 +5,7 @@ module graph-theory.equivalences-enriched-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
@@ -21,6 +22,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

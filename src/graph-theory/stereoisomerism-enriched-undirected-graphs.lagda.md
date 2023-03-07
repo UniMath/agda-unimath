@@ -5,6 +5,7 @@ module graph-theory.stereoisomerism-enriched-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
@@ -13,6 +14,7 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea
