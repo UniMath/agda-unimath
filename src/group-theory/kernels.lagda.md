@@ -5,6 +5,7 @@ module group-theory.kernels where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -25,6 +26,7 @@ open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
 ```
+
 </details>
 
 ## Idea

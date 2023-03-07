@@ -5,6 +5,7 @@ module organic-chemistry.alkynes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import organic-chemistry.hydrocarbons
 open import organic-chemistry.saturated-carbons
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module structured-types.morphisms-coherent-h-spaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.coherent-h-spaces
 open import structured-types.pointed-maps
@@ -16,6 +17,7 @@ open import foundation.path-algebra
 open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 ```
+
 </details>
 
 ## Idea

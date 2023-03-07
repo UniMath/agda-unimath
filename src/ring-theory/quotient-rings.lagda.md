@@ -5,6 +5,7 @@ module ring-theory.quotient-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-rings
@@ -15,6 +16,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import group-theory.normal-subgroups
 ```
+
 </details>
 
 ## Definitions

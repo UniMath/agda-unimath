@@ -5,6 +5,7 @@ module group-theory.embeddings-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -14,6 +15,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.subgroups
 ```
+
 </details>
 
 ## Idea

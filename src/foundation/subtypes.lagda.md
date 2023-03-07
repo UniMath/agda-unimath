@@ -5,6 +5,7 @@ module foundation.subtypes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.subtypes public
 open import foundation-core.contractible-types
@@ -29,6 +30,7 @@ open import foundation.propositional-extensionality
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 ```
+
 </details>
 
 ## Definition

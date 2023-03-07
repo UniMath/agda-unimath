@@ -5,6 +5,7 @@ module foundation.universal-property-propositional-truncation where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-maps
 open import foundation-core.functoriality-dependent-pair-types
@@ -24,6 +25,7 @@ open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

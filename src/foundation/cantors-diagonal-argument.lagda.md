@@ -5,6 +5,7 @@ module foundation.cantors-diagonal-argument where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.function-extensionality
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,12 +5,14 @@ module elementary-number-theory.difference-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import foundation.identity-types
 open import foundation.interchange-law
 ```
+
 </details>
 
 # The difference between integers

@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.joins-of-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
@@ -26,6 +27,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

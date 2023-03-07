@@ -5,6 +5,7 @@ module ring-theory.modules-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.homomorphisms-rings
 open import ring-theory.opposite-rings
@@ -19,6 +20,7 @@ open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 ```
+
 </details>
 
 ## Idea

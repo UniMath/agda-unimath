@@ -5,6 +5,7 @@ module group-theory.transitive-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.group-actions
 open import group-theory.groups
@@ -13,6 +14,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

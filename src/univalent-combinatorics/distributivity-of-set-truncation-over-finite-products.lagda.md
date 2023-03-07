@@ -5,6 +5,7 @@ module univalent-combinatorics.distributivity-of-set-truncation-over-finite-prod
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
@@ -33,6 +34,7 @@ open import foundation.universal-property-maybe
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ```agda

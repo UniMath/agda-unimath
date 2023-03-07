@@ -5,6 +5,7 @@ module group-theory.isomorphisms-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.equivalences-group-actions
 open import group-theory.group-actions
@@ -18,6 +19,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import category-theory.isomorphisms-large-precategories
 ```
+
 </details>
 
 ## Definition

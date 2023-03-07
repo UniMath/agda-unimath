@@ -5,6 +5,7 @@ module foundation.type-arithmetic-booleans where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.booleans
 open import foundation.coproduct-types
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

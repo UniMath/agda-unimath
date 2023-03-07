@@ -5,10 +5,12 @@ module foundation.strongly-extensional-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.apartness-relations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

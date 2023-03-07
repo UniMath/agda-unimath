@@ -5,6 +5,7 @@ module group-theory.stabilizer-groups-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
@@ -22,6 +23,7 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

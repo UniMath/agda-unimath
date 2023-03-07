@@ -5,6 +5,7 @@ module orthogonal-factorization-systems.extensions-of-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import orthogonal-factorization-systems.local-types
 open import foundation-core.dependent-pair-types
@@ -29,6 +30,7 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

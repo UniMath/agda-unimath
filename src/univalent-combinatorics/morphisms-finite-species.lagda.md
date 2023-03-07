@@ -5,6 +5,7 @@ module univalent-combinatorics.morphisms-finite-species where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-species
@@ -22,6 +23,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module trees.equivalences-enriched-directed-trees where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.enriched-directed-trees
 open import trees.equivalences-directed-trees
@@ -17,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

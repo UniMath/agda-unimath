@@ -5,6 +5,7 @@ module univalent-combinatorics.main-classes-of-latin-squares where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.main-classes-of-latin-hypercubes
 open import univalent-combinatorics.pi-finite-types
@@ -14,6 +15,7 @@ open import foundation.set-truncations
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

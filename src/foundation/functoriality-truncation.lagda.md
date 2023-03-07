@@ -5,6 +5,7 @@ module foundation.functoriality-truncation where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.function-extensionality
 open import foundation.contractible-types
@@ -17,6 +18,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

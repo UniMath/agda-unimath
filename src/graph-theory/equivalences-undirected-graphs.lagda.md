@@ -5,6 +5,7 @@ module graph-theory.equivalences-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
@@ -24,6 +25,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 ```
+
 </details>
 
 ## Idea

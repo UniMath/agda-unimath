@@ -5,6 +5,7 @@ module foundation.function-extensionality where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.function-extensionality public
 open import foundation-core.dependent-pair-types
@@ -14,6 +15,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

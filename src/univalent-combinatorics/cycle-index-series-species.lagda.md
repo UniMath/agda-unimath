@@ -5,6 +5,7 @@ module univalent-combinatorics.cycle-index-series-species where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
@@ -15,6 +16,7 @@ open import foundation.functions
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

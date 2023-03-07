@@ -5,6 +5,7 @@ module group-theory.orbit-stabilizer-theorem-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
@@ -24,6 +25,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

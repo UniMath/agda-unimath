@@ -5,6 +5,7 @@ module foundation.type-duality where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.fibers-of-maps
 open import foundation-core.injective-maps
@@ -34,6 +35,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

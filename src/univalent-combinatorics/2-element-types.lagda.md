@@ -5,6 +5,7 @@ module univalent-combinatorics.2-element-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences
@@ -49,6 +50,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

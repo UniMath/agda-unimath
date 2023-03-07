@@ -5,6 +5,7 @@ module univalent-combinatorics.unlabeled-structures-species where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
@@ -13,6 +14,7 @@ open import foundation.equivalences
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

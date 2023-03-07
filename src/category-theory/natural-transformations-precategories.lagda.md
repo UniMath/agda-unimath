@@ -5,6 +5,7 @@ module category-theory.natural-transformations-precategories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import category-theory.functors-precategories
 open import category-theory.precategories
@@ -19,6 +20,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

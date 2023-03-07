@@ -5,11 +5,13 @@ module structured-types.central-h-spaces where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-types
 open import foundation.equivalences
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

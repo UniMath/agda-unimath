@@ -5,6 +5,7 @@ module group-theory.decidable-subgroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -27,6 +28,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

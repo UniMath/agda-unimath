@@ -5,6 +5,7 @@ module graph-theory.complete-multipartite-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.finite-graphs
 open import foundation.dependent-pair-types
@@ -17,6 +18,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+
 </details>
 
 ## Idea

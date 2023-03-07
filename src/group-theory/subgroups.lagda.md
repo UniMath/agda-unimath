@@ -5,6 +5,7 @@ module group-theory.subgroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -38,6 +39,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Definitions

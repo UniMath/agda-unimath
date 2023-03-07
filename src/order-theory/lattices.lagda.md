@@ -5,6 +5,7 @@ module order-theory.lattices where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.join-semilattices
 open import order-theory.meet-semilattices
@@ -15,6 +16,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

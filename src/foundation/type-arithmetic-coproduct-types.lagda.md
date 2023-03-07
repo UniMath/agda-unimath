@@ -5,6 +5,7 @@ module foundation.type-arithmetic-coproduct-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -18,6 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

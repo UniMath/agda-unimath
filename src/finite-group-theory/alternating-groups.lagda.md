@@ -5,6 +5,7 @@ module finite-group-theory.alternating-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.sign-homomorphism
 open import elementary-number-theory.natural-numbers
@@ -14,6 +15,7 @@ open import group-theory.symmetric-groups
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

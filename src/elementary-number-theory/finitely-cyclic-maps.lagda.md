@@ -5,6 +5,7 @@ module elementary-number-theory.finitely-cyclic-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
@@ -17,6 +18,7 @@ open import foundation.iterating-functions
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 # Finitely cyclic maps

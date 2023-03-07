@@ -5,6 +5,7 @@ module ring-theory.products-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.rings
 open import foundation.cartesian-product-types
@@ -17,6 +18,7 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

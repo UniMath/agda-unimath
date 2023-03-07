@@ -5,6 +5,7 @@ module group-theory.quotient-groups-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
@@ -29,6 +30,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-types
 open import synthetic-homotopy-theory.loop-spaces
 ```
+
 </details>
 
 ## Idea

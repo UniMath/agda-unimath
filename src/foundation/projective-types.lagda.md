@@ -5,6 +5,7 @@ module foundation.projective-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.connected-maps
 open import foundation.functions
@@ -15,6 +16,7 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

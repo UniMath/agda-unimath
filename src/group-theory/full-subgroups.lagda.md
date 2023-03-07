@@ -5,6 +5,7 @@ module group-theory.full-subgroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -25,6 +26,7 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

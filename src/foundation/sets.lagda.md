@@ -5,6 +5,7 @@ module foundation.sets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.sets public
 open import foundation-core.1-types
@@ -22,6 +23,7 @@ open import foundation.propositional-maps
 open import foundation.subuniverses
 open import foundation.truncated-types
 ```
+
 </details>
 
 ## Properties

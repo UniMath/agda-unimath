@@ -5,6 +5,7 @@ module structured-types.finite-multiplication-magmas where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.magmas
 open import foundation.coproduct-types
@@ -16,6 +17,7 @@ open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

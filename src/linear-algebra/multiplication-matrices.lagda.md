@@ -5,6 +5,7 @@ module linear-algebra.multiplication-matrices where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.matrices-on-rings
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definition

@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.cofibers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
@@ -18,6 +19,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

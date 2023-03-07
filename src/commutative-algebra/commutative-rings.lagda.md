@@ -5,6 +5,7 @@ module commutative-algebra.commutative-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -16,6 +17,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

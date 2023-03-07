@@ -5,6 +5,7 @@ module foundation.binary-relations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
@@ -18,6 +19,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.subtypes
 open import foundation.univalence
 ```
+
 </details>
 
 ## Idea

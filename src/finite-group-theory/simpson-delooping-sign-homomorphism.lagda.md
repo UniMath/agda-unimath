@@ -9,6 +9,7 @@ module finite-group-theory.simpson-delooping-sign-homomorphism where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.delooping-sign-homomorphism
 open import finite-group-theory.finite-type-groups
@@ -76,6 +77,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ### Simpson's delooping of the sign homomorphism

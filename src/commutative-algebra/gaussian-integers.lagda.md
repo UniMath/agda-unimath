@@ -5,6 +5,7 @@ module commutative-algebra.gaussian-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-rings
 open import foundation.cartesian-product-types
@@ -26,6 +27,7 @@ open import group-theory.groups
 open import group-theory.semigroups
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

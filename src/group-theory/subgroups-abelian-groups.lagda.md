@@ -5,6 +5,7 @@ module group-theory.subgroups-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
@@ -31,6 +32,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Definitions

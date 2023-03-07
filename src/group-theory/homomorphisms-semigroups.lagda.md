@@ -5,6 +5,7 @@ module group-theory.homomorphisms-semigroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.semigroups
 open import foundation.contractible-types
@@ -19,6 +20,7 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module structured-types.initial-pointed-type-equipped-with-automorphism where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import foundation.contractible-types
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module foundation.sections where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.sections public
 open import foundation-core.contractible-types
@@ -23,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 ```
+
 </details>
 
 ## Idea

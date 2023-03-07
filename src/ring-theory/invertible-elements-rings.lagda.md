@@ -5,6 +5,7 @@ module ring-theory.invertible-elements-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.rings
 open import foundation.cartesian-product-types
@@ -14,6 +15,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 open import group-theory.invertible-elements-monoids
 ```
+
 </details>
 
 ## Idea

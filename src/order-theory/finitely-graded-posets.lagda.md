@@ -5,6 +5,7 @@ module order-theory.finitely-graded-posets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.largest-elements-posets
 open import order-theory.least-elements-posets
@@ -30,6 +31,7 @@ open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

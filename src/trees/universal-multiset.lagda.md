@@ -5,6 +5,7 @@ module trees.universal-multiset where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.functoriality-w-types
 open import trees.multisets
@@ -18,6 +19,7 @@ open import foundation.small-types
 open import foundation.small-universes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

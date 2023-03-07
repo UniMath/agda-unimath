@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.circle where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
@@ -31,6 +32,7 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Postulates

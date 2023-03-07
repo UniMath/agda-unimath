@@ -5,6 +5,7 @@ module univalent-combinatorics.fibers-of-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -28,6 +29,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 ```
+
 </details>
 
 ## Idea

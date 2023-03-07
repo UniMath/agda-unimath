@@ -5,6 +5,7 @@ module commutative-algebra.sums-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-rings
 open import foundation.coproduct-types
@@ -19,6 +20,7 @@ open import linear-algebra.vectors-on-commutative-rings
 open import ring-theory.sums-rings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

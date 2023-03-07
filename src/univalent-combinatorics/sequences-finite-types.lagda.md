@@ -5,6 +5,7 @@ module univalent-combinatorics.sequences-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
@@ -21,6 +22,7 @@ open import foundation.sequences
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

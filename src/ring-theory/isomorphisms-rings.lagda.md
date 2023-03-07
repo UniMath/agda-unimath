@@ -5,6 +5,7 @@ module ring-theory.isomorphisms-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
@@ -29,6 +30,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.isomorphisms-abelian-groups
 ```
+
 </details>
 
 ## Definition

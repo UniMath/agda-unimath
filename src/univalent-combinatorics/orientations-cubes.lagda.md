@@ -5,6 +5,7 @@ module univalent-combinatorics.orientations-cubes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.dependent-sum-finite-types
@@ -18,6 +19,7 @@ open import foundation.iterating-functions
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definition

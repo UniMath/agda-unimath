@@ -5,6 +5,7 @@ module linear-algebra.diagonal-matrices-on-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definitions

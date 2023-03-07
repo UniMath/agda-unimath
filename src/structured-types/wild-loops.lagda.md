@@ -5,6 +5,7 @@ module structured-types.wild-loops where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.coherent-h-spaces
 open import structured-types.magmas
@@ -17,6 +18,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

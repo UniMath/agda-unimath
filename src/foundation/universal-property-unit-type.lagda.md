@@ -5,6 +5,7 @@ module foundation.universal-property-unit-type where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.homotopies
 open import foundation.constant-maps
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

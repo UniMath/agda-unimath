@@ -9,6 +9,7 @@ module foundation.functoriality-set-quotients where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.equivalence-relations
 open import foundation.commuting-squares-of-maps
@@ -35,6 +36,7 @@ open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

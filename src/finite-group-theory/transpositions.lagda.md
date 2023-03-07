@@ -5,6 +5,7 @@ module finite-group-theory.transpositions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
@@ -47,6 +48,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

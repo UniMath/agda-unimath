@@ -5,6 +5,7 @@ module univalent-combinatorics.coproduct-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
@@ -27,6 +28,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module univalent-combinatorics.standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -29,6 +30,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import structured-types.types-equipped-with-endomorphisms
 ```
+
 </details>
 
 ## Idea

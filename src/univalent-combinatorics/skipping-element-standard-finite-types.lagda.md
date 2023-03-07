@@ -5,6 +5,7 @@ module univalent-combinatorics.skipping-element-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.standard-finite-types
 open import foundation.coproduct-types
@@ -16,6 +17,7 @@ open import foundation.injective-maps
 open import foundation.unit-type
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ```agda

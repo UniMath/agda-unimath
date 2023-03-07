@@ -5,6 +5,7 @@ module commutative-algebra.powers-of-elements-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-rings
 open import foundation.identity-types
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import ring-theory.powers-of-elements-rings
 ```
+
 </details>
 
 ## Idea

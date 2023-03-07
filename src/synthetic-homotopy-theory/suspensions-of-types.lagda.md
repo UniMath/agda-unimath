@@ -5,6 +5,7 @@ module synthetic-homotopy-theory.suspensions-of-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
@@ -32,6 +33,7 @@ open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Definition

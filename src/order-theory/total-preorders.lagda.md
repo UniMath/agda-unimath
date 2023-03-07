@@ -5,12 +5,14 @@ module order-theory.total-preorders where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.preorders
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

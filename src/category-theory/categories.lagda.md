@@ -5,6 +5,7 @@ module category-theory.categories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import category-theory.isomorphisms-precategories
 open import category-theory.precategories
@@ -21,6 +22,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

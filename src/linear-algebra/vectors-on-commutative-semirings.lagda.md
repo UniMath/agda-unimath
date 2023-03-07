@@ -5,6 +5,7 @@ module linear-algebra.vectors-on-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
@@ -20,6 +21,7 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

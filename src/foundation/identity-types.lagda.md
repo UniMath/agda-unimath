@@ -5,6 +5,7 @@ module foundation.identity-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.identity-types public
 open import foundation-core.equivalences
@@ -16,6 +17,7 @@ open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

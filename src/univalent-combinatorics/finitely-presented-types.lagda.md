@@ -5,6 +5,7 @@ module univalent-combinatorics.finitely-presented-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-connected-components
@@ -23,6 +24,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

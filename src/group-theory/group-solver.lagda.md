@@ -5,6 +5,7 @@ module group-theory.group-solver where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.groups
@@ -18,6 +19,7 @@ open import elementary-number-theory.natural-numbers
 open import linear-algebra.vectors
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

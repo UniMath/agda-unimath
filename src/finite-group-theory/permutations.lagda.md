@@ -9,6 +9,7 @@ module finite-group-theory.permutations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.transpositions
@@ -45,6 +46,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Properties

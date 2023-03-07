@@ -5,6 +5,7 @@ module foundation.negation where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.negation public
 open import foundation-core.empty-types
@@ -15,6 +16,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

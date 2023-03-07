@@ -5,6 +5,7 @@ module univalent-combinatorics.composition-species where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equivalences-species
@@ -20,6 +21,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

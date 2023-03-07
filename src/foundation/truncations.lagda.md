@@ -5,6 +5,7 @@ module foundation.truncations where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.truncation-levels
 open import foundation-core.truncation-levels
@@ -27,6 +28,7 @@ open import foundation.propositions
 open import foundation.truncated-types
 open import foundation.universal-property-dependent-pair-types
 ```
+
 </details>
 
 ## Idea

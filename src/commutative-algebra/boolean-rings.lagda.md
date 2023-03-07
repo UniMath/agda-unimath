@@ -5,12 +5,14 @@ module commutative-algebra.boolean-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-rings
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import ring-theory.idempotent-elements-rings
 ```
+
 </details>
 
 ## Idea

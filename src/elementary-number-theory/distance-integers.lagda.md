@@ -5,6 +5,7 @@ module elementary-number-theory.distance-integers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.difference-integers
@@ -16,6 +17,7 @@ open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+
 </details>
 
 ## Idea

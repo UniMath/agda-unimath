@@ -5,6 +5,7 @@ module trees.lower-types-w-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import trees.ranks-of-elements-w-types
 open import trees.w-types
@@ -13,6 +14,7 @@ open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

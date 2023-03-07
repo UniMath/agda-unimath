@@ -5,6 +5,7 @@ module univalent-combinatorics.equivalences where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
@@ -14,6 +15,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

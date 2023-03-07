@@ -5,6 +5,7 @@ module elementary-number-theory.natural-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
@@ -25,6 +26,7 @@ open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

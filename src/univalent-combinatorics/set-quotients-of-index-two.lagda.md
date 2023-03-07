@@ -9,6 +9,7 @@ module univalent-combinatorics.set-quotients-of-index-two where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.standard-finite-types
 open import foundation.commuting-squares-of-maps
@@ -30,6 +31,7 @@ open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

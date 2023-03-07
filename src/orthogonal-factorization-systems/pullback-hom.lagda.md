@@ -5,6 +5,7 @@ module orthogonal-factorization-systems.pullback-hom where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cones-pullbacks
 open import foundation.dependent-pair-types
@@ -18,6 +19,7 @@ open import foundation.morphisms-cospans
 open import foundation.pullbacks
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

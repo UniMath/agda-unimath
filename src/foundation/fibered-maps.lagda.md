@@ -5,6 +5,7 @@ module foundation.fibered-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
@@ -25,6 +26,7 @@ open import foundation.homotopies
 open import foundation.slice
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea

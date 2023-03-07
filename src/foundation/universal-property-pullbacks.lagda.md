@@ -5,6 +5,7 @@ module foundation.universal-property-pullbacks where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.commuting-squares-of-maps
@@ -26,6 +27,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

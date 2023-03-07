@@ -5,6 +5,7 @@ module foundation.unit-type where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
@@ -19,6 +20,7 @@ open import foundation-core.universe-levels
 open import foundation.raising-universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

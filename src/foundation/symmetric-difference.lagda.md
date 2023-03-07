@@ -5,6 +5,7 @@ module foundation.symmetric-difference where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -20,6 +21,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.xor
 ```
+
 </details>
 
 ## Idea

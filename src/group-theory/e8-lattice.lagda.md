@@ -5,6 +5,7 @@ module group-theory.e8-lattice where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.equality-coproduct-types
 open import foundation.sets
@@ -12,6 +13,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.integers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

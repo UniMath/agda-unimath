@@ -9,6 +9,7 @@ module foundation.binary-functoriality-set-quotients where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.binary-homotopies
 open import foundation.binary-reflecting-maps-equivalence-relations
@@ -36,6 +37,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

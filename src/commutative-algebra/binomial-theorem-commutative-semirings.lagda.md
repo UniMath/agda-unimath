@@ -5,6 +5,7 @@ module commutative-algebra.binomial-theorem-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
@@ -24,6 +25,7 @@ open import linear-algebra.vectors-on-commutative-semirings
 open import ring-theory.binomial-theorem-semirings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

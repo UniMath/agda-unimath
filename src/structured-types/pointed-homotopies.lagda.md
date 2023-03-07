@@ -5,6 +5,7 @@ module structured-types.pointed-homotopies where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types
@@ -18,6 +19,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module structured-types.involutive-type-of-h-space-structures where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import structured-types.constant-maps-pointed-types
 open import structured-types.pointed-types
@@ -25,6 +26,7 @@ open import foundation.symmetric-operations
 open import foundation.universe-levels
 open import univalent-combinatorics.2-element-types
 ```
+
 </details>
 
 ## Idea

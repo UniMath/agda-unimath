@@ -5,6 +5,7 @@ module order-theory.directed-families where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.posets
 open import foundation.cartesian-product-types
@@ -13,6 +14,7 @@ open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

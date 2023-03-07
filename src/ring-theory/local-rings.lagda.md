@@ -5,6 +5,7 @@ module ring-theory.local-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.invertible-elements-rings
 open import ring-theory.nontrivial-rings
@@ -16,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module order-theory.subposets where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import order-theory.posets
 open import order-theory.preorders
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definitions

@@ -5,6 +5,7 @@ module group-theory.shriek-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
@@ -18,6 +19,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

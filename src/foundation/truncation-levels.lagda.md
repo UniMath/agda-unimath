@@ -5,6 +5,7 @@ module foundation.truncation-levels where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.truncation-levels public
 open import foundation-core.truncation-levels public
@@ -17,6 +18,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definitions

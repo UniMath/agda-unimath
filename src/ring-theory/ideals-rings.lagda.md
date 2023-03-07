@@ -5,6 +5,7 @@ module ring-theory.ideals-rings where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import ring-theory.rings
 open import ring-theory.subsets-rings
@@ -28,6 +29,7 @@ open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

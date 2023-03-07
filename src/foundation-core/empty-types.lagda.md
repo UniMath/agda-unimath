@@ -5,6 +5,7 @@ module foundation-core.empty-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -16,6 +17,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 open import foundation.propositions
 ```
+
 </details>
 
 ## Idea

@@ -5,6 +5,7 @@ module group-theory.homomorphisms-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

@@ -5,6 +5,7 @@ module group-theory.monoids where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.semigroups
 open import foundation.cartesian-product-types
@@ -16,6 +17,7 @@ open import foundation.subtypes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

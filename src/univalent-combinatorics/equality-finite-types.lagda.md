@@ -5,6 +5,7 @@ module univalent-combinatorics.equality-finite-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-propositions
@@ -20,6 +21,7 @@ open import foundation.sets
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

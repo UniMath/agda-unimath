@@ -5,6 +5,7 @@ module foundation.retractions where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.retractions public
 open import foundation.coslice
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

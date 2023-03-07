@@ -5,6 +5,7 @@ module foundation.products-of-tuples-of-types where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.equivalences
@@ -13,6 +14,7 @@ open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -5,12 +5,14 @@ module foundation.commuting-squares-of-maps where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.commuting-squares-of-maps public
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 open import foundation.equivalences
 ```
+
 </details>
 
 ## Composing and inverting squares horizontally and vertically

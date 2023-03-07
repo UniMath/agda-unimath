@@ -5,6 +5,7 @@ module category-theory.epimorphisms-large-precategories where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
@@ -14,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

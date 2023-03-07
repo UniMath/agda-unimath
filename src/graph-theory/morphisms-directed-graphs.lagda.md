@@ -5,6 +5,7 @@ module graph-theory.morphisms-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import graph-theory.directed-graphs
 open import foundation.binary-transport
@@ -22,6 +23,7 @@ open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 ```
+
 </details>
 
 ## Definitions

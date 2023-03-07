@@ -5,6 +5,7 @@ module foundation.equivalence-classes where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.equivalence-relations
 open import foundation.cartesian-product-types
@@ -41,6 +42,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

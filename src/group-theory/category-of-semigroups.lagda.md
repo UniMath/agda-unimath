@@ -5,6 +5,7 @@ module group-theory.category-of-semigroups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.isomorphisms-semigroups
 open import group-theory.precategory-of-semigroups
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import category-theory.large-categories
 ```
+
 </details>
 
 ## Idea

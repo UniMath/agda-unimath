@@ -5,6 +5,7 @@ module group-theory.concrete-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.groups
 open import group-theory.higher-groups
@@ -24,6 +25,7 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

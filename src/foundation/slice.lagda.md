@@ -5,6 +5,7 @@ module foundation.slice where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -29,6 +30,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 ```
+
 </details>
 
 ## Idea

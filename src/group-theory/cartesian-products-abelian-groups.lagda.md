@@ -5,6 +5,7 @@ module group-theory.cartesian-products-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import group-theory.abelian-groups
 open import group-theory.cartesian-products-groups
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea
