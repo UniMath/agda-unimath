@@ -20,7 +20,6 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-groups
--- open import group-theory.embeddings-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.normal-subgroups

@@ -9,16 +9,31 @@ module group-theory.quotients-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
+open import foundation.binary-functoriality-set-quotients
+open import foundation.dependent-pair-types
+open import foundation.effective-maps-equivalence-relations
+open import foundation.equivalences
+open import foundation.functoriality-set-quotients
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
+open import foundation.sets
+open import foundation.surjective-maps
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.kernels
 open import group-theory.quotient-groups
+open import group-theory.semigroups
 open import group-theory.subgroups-abelian-groups
 ```
+
 </details>
 
 ## Idea
@@ -85,274 +100,224 @@ module _
 
 ### The universal property of quotient groups
 
-
+```agda
 precomp-nullifying-hom-Ab :
-  {l1 l2 l3 l4 : Level} (A : Ab l1) (H : Subgroup-Ab l2 G)
-  (K : Group l3) (f : nullifying-hom-Ab G K H)
-  (L : Group l4) → type-hom-Ab K L → nullifying-hom-Ab G L H
-pr1 (precomp-nullifying-hom-Ab G H K f L g) =
-  comp-hom-Ab G K L g (hom-nullifying-hom-Ab G K H f)
-pr2 (precomp-nullifying-hom-Ab G H K f L g) h p =
-  ( ap
-    ( map-hom-Ab K L g)
-    ( nullifies-nullifying-hom-Ab G K H f h p)) ∙
-  ( preserves-unit-hom-Ab K L g)
+  {l1 l2 l3 l4 : Level} (A : Ab l1) (H : Subgroup-Ab l2 A)
+  (B : Ab l3) (f : nullifying-hom-Ab A B H)
+  (C : Ab l4) → type-hom-Ab B C → nullifying-hom-Ab A C H
+precomp-nullifying-hom-Ab A H B f C =
+  precomp-nullifying-hom-Group
+    ( group-Ab A)
+    ( normal-subgroup-Subgroup-Ab A H)
+    ( group-Ab B)
+    ( f)
+    ( group-Ab C)
 
-universal-property-quotient-Group :
+universal-property-quotient-Ab :
   {l1 l2 l3 : Level} (l : Level) (A : Ab l1)
-  (H : Subgroup-Ab l2 G) (Q : Group l3)
-  (q : nullifying-hom-Ab G Q H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
-universal-property-quotient-Group l G H Q q =
-  (K : Group l) → is-equiv (precomp-nullifying-hom-Ab G H Q q K)
-
+  (H : Subgroup-Ab l2 A) (B : Ab l3)
+  (q : nullifying-hom-Ab A B H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
+universal-property-quotient-Ab l A H B q =
+  (C : Ab l) → is-equiv (precomp-nullifying-hom-Ab A H B q C)
+```
 
 ### The quotient group
 
 #### The quotient map and the underlying set of the quotient group
 
-
+```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (H : Subgroup-Ab l2 G)
+  {l1 l2 : Level} (A : Ab l1) (H : Subgroup-Ab l2 A)
   where
 
-  set-quotient-Group : Set (l1 ⊔ l2)
-  set-quotient-Group =
-    quotient-Set (eq-rel-congruence-Subgroup-Ab G H)
+  set-quotient-Ab : Set (l1 ⊔ l2)
+  set-quotient-Ab =
+    quotient-Set (eq-rel-congruence-Subgroup-Ab A H)
 
-  type-quotient-Group : UU (l1 ⊔ l2)
-  type-quotient-Group =
-    set-quotient (eq-rel-congruence-Subgroup-Ab G H)
+  type-quotient-Ab : UU (l1 ⊔ l2)
+  type-quotient-Ab =
+    set-quotient (eq-rel-congruence-Subgroup-Ab A H)
 
-  is-set-type-quotient-Group : is-set type-quotient-Group
-  is-set-type-quotient-Group =
-    is-set-set-quotient (eq-rel-congruence-Subgroup-Ab G H)
+  is-set-type-quotient-Ab : is-set type-quotient-Ab
+  is-set-type-quotient-Ab =
+    is-set-set-quotient (eq-rel-congruence-Subgroup-Ab A H)
 
-  map-quotient-hom-Ab : type-Group G → type-quotient-Group
+  map-quotient-hom-Ab : type-Ab A → type-quotient-Ab
   map-quotient-hom-Ab =
-    quotient-map (eq-rel-congruence-Subgroup-Ab G H)
+    quotient-map (eq-rel-congruence-Subgroup-Ab A H)
 
   is-surjective-map-quotient-hom-Ab :
     is-surjective map-quotient-hom-Ab
   is-surjective-map-quotient-hom-Ab =
-    is-surjective-quotient-map (eq-rel-congruence-Subgroup-Ab G H)
+    is-surjective-quotient-map (eq-rel-congruence-Subgroup-Ab A H)
 
   is-effective-map-quotient-hom-Ab :
     is-effective
-      ( eq-rel-congruence-Subgroup-Ab G H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
       ( map-quotient-hom-Ab)
   is-effective-map-quotient-hom-Ab =
-    is-effective-quotient-map (eq-rel-congruence-Subgroup-Ab G H)
+    is-effective-quotient-map (eq-rel-congruence-Subgroup-Ab A H)
 
   apply-effectiveness-map-quotient-hom-Ab :
-    {x y : type-Group G} →
+    {x y : type-Ab A} →
     map-quotient-hom-Ab x ＝ map-quotient-hom-Ab y →
-    sim-congruence-Subgroup-Ab G H x y
+    sim-congruence-Subgroup-Ab A H x y
   apply-effectiveness-map-quotient-hom-Ab =
     apply-effectiveness-quotient-map
-      ( eq-rel-congruence-Subgroup-Ab G H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
 
   apply-effectiveness-map-quotient-hom-Ab' :
-    {x y : type-Group G} →
-    sim-congruence-Subgroup-Ab G H x y →
+    {x y : type-Ab A} →
+    sim-congruence-Subgroup-Ab A H x y →
     map-quotient-hom-Ab x ＝ map-quotient-hom-Ab y
   apply-effectiveness-map-quotient-hom-Ab' =
     apply-effectiveness-quotient-map'
-      ( eq-rel-congruence-Subgroup-Ab G H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
 
   reflecting-map-quotient-hom-Ab :
     reflecting-map-Eq-Rel
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( type-quotient-Group)
+      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( type-quotient-Ab)
   reflecting-map-quotient-hom-Ab =
     reflecting-map-quotient-map
-      ( eq-rel-congruence-Subgroup-Ab G H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
 
-  is-set-quotient-set-quotient-Group :
+  is-set-quotient-set-quotient-Ab :
     {l : Level} →
     is-set-quotient l
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( set-quotient-Group)
+      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( set-quotient-Ab)
       ( reflecting-map-quotient-hom-Ab)
-  is-set-quotient-set-quotient-Group =
+  is-set-quotient-set-quotient-Ab =
     is-set-quotient-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-
+      ( eq-rel-congruence-Subgroup-Ab A H)
+```
 
 #### The group structure on the quotient group
 
+```agda
+  zero-quotient-Ab : type-quotient-Ab
+  zero-quotient-Ab = map-quotient-hom-Ab (zero-Ab A)
 
-  unit-quotient-Group : type-quotient-Group
-  unit-quotient-Group = map-quotient-hom-Ab (unit-Group G)
-
-  binary-hom-mul-quotient-Group :
+  binary-hom-add-quotient-Ab :
     binary-hom-Eq-Rel
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-  pr1 binary-hom-mul-quotient-Group = mul-Group G
-  pr2 binary-hom-mul-quotient-Group =
-    mul-congruence-Subgroup-Ab G H
+      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
+  binary-hom-add-quotient-Ab =
+    binary-hom-mul-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
 
-  mul-quotient-Group :
-    (x y : type-quotient-Group) → type-quotient-Group
-  mul-quotient-Group =
-    binary-map-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( binary-hom-mul-quotient-Group)
+  add-quotient-Ab :
+    (x y : type-quotient-Ab) → type-quotient-Ab
+  add-quotient-Ab =
+    mul-quotient-Group (group-Ab A) (normal-subgroup-Subgroup-Ab A H)
 
-  mul-quotient-Group' :
-    (x y : type-quotient-Group) → type-quotient-Group
-  mul-quotient-Group' x y = mul-quotient-Group y x
+  add-quotient-Ab' :
+    (x y : type-quotient-Ab) → type-quotient-Ab
+  add-quotient-Ab' =
+    mul-quotient-Group' (group-Ab A) (normal-subgroup-Subgroup-Ab A H)
 
-  compute-mul-quotient-Group :
-    (x y : type-Group G) →
-    mul-quotient-Group
+  compute-add-quotient-Ab :
+    (x y : type-Ab A) →
+    add-quotient-Ab
       ( map-quotient-hom-Ab x)
       ( map-quotient-hom-Ab y) ＝
-    map-quotient-hom-Ab (mul-Group G x y)
-  compute-mul-quotient-Group =
-    compute-binary-map-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( binary-hom-mul-quotient-Group)
+    map-quotient-hom-Ab (add-Ab A x y)
+  compute-add-quotient-Ab =
+    compute-mul-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
 
-  hom-inv-quotient-Group :
+  hom-neg-quotient-Ab :
     hom-Eq-Rel
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-  pr1 hom-inv-quotient-Group = inv-Group G
-  pr2 hom-inv-quotient-Group = inv-congruence-Subgroup-Ab G H
+      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( eq-rel-congruence-Subgroup-Ab A H)
+  hom-neg-quotient-Ab =
+    hom-inv-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
 
-  inv-quotient-Group : type-quotient-Group → type-quotient-Group
-  inv-quotient-Group =
-    map-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( hom-inv-quotient-Group)
+  neg-quotient-Ab : type-quotient-Ab → type-quotient-Ab
+  neg-quotient-Ab =
+    inv-quotient-Group (group-Ab A) (normal-subgroup-Subgroup-Ab A H)
 
-  compute-inv-quotient-Group :
-    (x : type-Group G) →
-    inv-quotient-Group (map-quotient-hom-Ab x) ＝
-    map-quotient-hom-Ab (inv-Group G x)
-  compute-inv-quotient-Group =
-    coherence-square-map-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( hom-inv-quotient-Group)
+  compute-neg-quotient-Ab :
+    (x : type-Ab A) →
+    neg-quotient-Ab (map-quotient-hom-Ab x) ＝
+    map-quotient-hom-Ab (neg-Ab A x)
+  compute-neg-quotient-Ab =
+    compute-inv-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
 
-  left-unit-law-mul-quotient-Group :
-    (x : type-quotient-Group) →
-    mul-quotient-Group unit-quotient-Group x ＝ x
-  left-unit-law-mul-quotient-Group =
-    induction-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( λ y →
-        Id-Prop
-          ( set-quotient-Group)
-          ( mul-quotient-Group unit-quotient-Group y)
-          ( y))
-      ( λ x →
-        ( compute-mul-quotient-Group (unit-Group G) x) ∙
-        ( ap map-quotient-hom-Ab (left-unit-law-mul-Group G x)))
-
-  right-unit-law-mul-quotient-Group :
-    (x : type-quotient-Group) →
-    mul-quotient-Group x unit-quotient-Group ＝ x
-  right-unit-law-mul-quotient-Group =
-    induction-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( λ y →
-        Id-Prop
-          ( set-quotient-Group)
-          ( mul-quotient-Group y unit-quotient-Group)
-          ( y))
-      ( λ x →
-        ( compute-mul-quotient-Group x (unit-Group G)) ∙
-        ( ap map-quotient-hom-Ab (right-unit-law-mul-Group G x)))
-
-  associative-mul-quotient-Group :
-    (x y z : type-quotient-Group) →
-    ( mul-quotient-Group (mul-quotient-Group x y) z) ＝
-    ( mul-quotient-Group x (mul-quotient-Group y z))
-  associative-mul-quotient-Group =
-    triple-induction-set-quotient'
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( λ x y z →
-        Id-Prop
-          ( set-quotient-Group)
-          ( mul-quotient-Group (mul-quotient-Group x y) z)
-          ( mul-quotient-Group x (mul-quotient-Group y z)))
-      ( λ x y z →
-        ( ap
-          ( mul-quotient-Group' (map-quotient-hom-Ab z))
-          ( compute-mul-quotient-Group x y)) ∙
-        ( ( compute-mul-quotient-Group (mul-Group G x y) z) ∙
-          ( ( ap
-              ( map-quotient-hom-Ab)
-              ( associative-mul-Group G x y z)) ∙
-            ( ( inv
-                ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
-              ( ap
-                ( mul-quotient-Group (map-quotient-hom-Ab x))
-                ( inv (compute-mul-quotient-Group y z)))))))
-
-  left-inverse-law-mul-quotient-Group :
-    (x : type-quotient-Group) →
-    ( mul-quotient-Group (inv-quotient-Group x) x) ＝
-    ( unit-quotient-Group)
-  left-inverse-law-mul-quotient-Group =
-    induction-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( λ y →
-        Id-Prop
-          ( set-quotient-Group)
-          ( mul-quotient-Group (inv-quotient-Group y) y)
-          ( unit-quotient-Group))
-      ( λ x →
-        ( ap
-          ( mul-quotient-Group' (map-quotient-hom-Ab x))
-          ( compute-inv-quotient-Group x)) ∙
-        ( ( compute-mul-quotient-Group (inv-Group G x) x) ∙
-          ( ap map-quotient-hom-Ab
-            ( left-inverse-law-mul-Group G x))))
-
-  right-inverse-law-mul-quotient-Group :
-    (x : type-quotient-Group) →
-    ( mul-quotient-Group x (inv-quotient-Group x)) ＝
-    ( unit-quotient-Group)
-  right-inverse-law-mul-quotient-Group =
-    induction-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab G H)
-      ( λ y →
-        Id-Prop
-          ( set-quotient-Group)
-          ( mul-quotient-Group y (inv-quotient-Group y))
-          ( unit-quotient-Group))
-      ( λ x →
-        ( ap
-          ( mul-quotient-Group (map-quotient-hom-Ab x))
-          ( compute-inv-quotient-Group x)) ∙
-        ( ( compute-mul-quotient-Group x (inv-Group G x)) ∙
-          ( ap map-quotient-hom-Ab
-            ( right-inverse-law-mul-Group G x))))
-
-  semigroup-quotient-Group : Semigroup (l1 ⊔ l2)
-  pr1 semigroup-quotient-Group = set-quotient-Group
-  pr1 (pr2 semigroup-quotient-Group) = mul-quotient-Group
-  pr2 (pr2 semigroup-quotient-Group) = associative-mul-quotient-Group
-
-  quotient-Group : Group (l1 ⊔ l2)
-  pr1 quotient-Group = semigroup-quotient-Group
-  pr1 (pr1 (pr2 quotient-Group)) = unit-quotient-Group
-  pr1 (pr2 (pr1 (pr2 quotient-Group))) =
+  left-unit-law-add-quotient-Ab :
+    (x : type-quotient-Ab) → add-quotient-Ab zero-quotient-Ab x ＝ x
+  left-unit-law-add-quotient-Ab =
     left-unit-law-mul-quotient-Group
-  pr2 (pr2 (pr1 (pr2 quotient-Group))) =
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
+
+  right-unit-law-add-quotient-Ab :
+    (x : type-quotient-Ab) → add-quotient-Ab x zero-quotient-Ab ＝ x
+  right-unit-law-add-quotient-Ab =
     right-unit-law-mul-quotient-Group
-  pr1 (pr2 (pr2 quotient-Group)) = inv-quotient-Group
-  pr1 (pr2 (pr2 (pr2 quotient-Group))) =
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
+
+  associative-add-quotient-Ab :
+    (x y z : type-quotient-Ab) →
+    ( add-quotient-Ab (add-quotient-Ab x y) z) ＝
+    ( add-quotient-Ab x (add-quotient-Ab y z))
+  associative-add-quotient-Ab =
+    associative-mul-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
+
+  left-inverse-law-add-quotient-Ab :
+    (x : type-quotient-Ab) →
+    add-quotient-Ab (neg-quotient-Ab x) x ＝ zero-quotient-Ab
+  left-inverse-law-add-quotient-Ab =
     left-inverse-law-mul-quotient-Group
-  pr2 (pr2 (pr2 (pr2 quotient-Group))) =
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
+
+  right-inverse-law-add-quotient-Ab :
+    (x : type-quotient-Ab) →
+    add-quotient-Ab x (neg-quotient-Ab x) ＝ zero-quotient-Ab
+  right-inverse-law-add-quotient-Ab =
     right-inverse-law-mul-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
+
+  commutative-add-quotient-Ab :
+    (x y : type-quotient-Ab) →
+    add-quotient-Ab x y ＝ add-quotient-Ab y x
+  commutative-add-quotient-Ab =
+    double-induction-set-quotient'
+      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( λ x y →
+        Id-Prop
+          ( set-quotient-Ab)
+          ( add-quotient-Ab x y)
+          ( add-quotient-Ab y x))
+      ( λ x y →
+        ( compute-add-quotient-Ab x y) ∙
+        ( ( ap map-quotient-hom-Ab (commutative-add-Ab A x y)) ∙
+          ( inv (compute-add-quotient-Ab y x))))
+
+  semigroup-quotient-Ab : Semigroup (l1 ⊔ l2)
+  semigroup-quotient-Ab =
+    semigroup-quotient-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A H)
+
+  group-quotient-Ab : Group (l1 ⊔ l2)
+  group-quotient-Ab =
+    quotient-Group (group-Ab A) (normal-subgroup-Subgroup-Ab A H)
+
+  quotient-Ab : Ab (l1 ⊔ l2)
+  pr1 quotient-Ab = group-quotient-Ab
+  pr2 quotient-Ab = commutative-add-quotient-Ab
+```
