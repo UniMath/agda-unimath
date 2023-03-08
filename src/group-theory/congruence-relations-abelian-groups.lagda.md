@@ -5,6 +5,7 @@ module group-theory.congruence-relations-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import foundation.binary-relations
 open import foundation.contractible-types
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.congruence-relations-groups
 ```
+
 </details>
 
 ## Idea
