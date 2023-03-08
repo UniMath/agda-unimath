@@ -2,25 +2,22 @@
 
 ```agda
 module set-theory.cumulative-hierarchy where
-```
 
-<details><summary>Imports</summary>
-
-```agda
-open import foundation-core.equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.equational-reasoning
+open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.transport
-open import foundation.unit-type
+open import foundation.truncated-types
 open import foundation.universe-levels
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.truncation-levels
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
-
-</details>
 
 ## Idea
 
@@ -64,7 +61,8 @@ module _
   set-pseudo-cumulative-hierarchy = pr1 (pr2 (pr2 V))
 
   set-ext-pseudo-cumulative-hierarchy :
-    {A B : UU l} (f : A → pr1 V) (g : B → pr1 V)
+    {A B : UU l} (f : A → type-pseudo-cumulative-hierarchy)
+    (g : B → type-pseudo-cumulative-hierarchy)
     → (lift f g × lift g f)
     → set-pseudo-cumulative-hierarchy f ＝ set-pseudo-cumulative-hierarchy g
   set-ext-pseudo-cumulative-hierarchy = pr2 (pr2 (pr2 V))
@@ -83,13 +81,14 @@ module _
     → ( ρ : {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V )
       → ((a : A) → P (f a)) → P (set-pseudo-cumulative-hierarchy V f))
     → ( {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
-        ( g : B → type-pseudo-cumulative-hierarchy V) (e : lift f g × lift g f)
+        ( g : B → type-pseudo-cumulative-hierarchy V)
+        (e : lift f g × lift g f)
         → (IH₁ : (a : A) → P (f a))
         → (IH₂ : (b : B) → P (g b))
-        → ((a : A) → type-trunc-Prop ( Σ B (λ b → Σ (f a ＝ g b)
-                         (λ p → tr P p (IH₁ a) ＝ IH₂ b ))))
-        → ((b : B) → type-trunc-Prop ( Σ A (λ a → Σ (g b ＝ f a)
-                         (λ p → tr P p (IH₂ b) ＝ IH₁ a ))))
+        → ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+            ( λ p → tr P p (IH₁ a) ＝ IH₂ b)))
+        → ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+                         (λ p → tr P p (IH₂ b) ＝ IH₁ a)))
         → tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂)
     → (x : type-pseudo-cumulative-hierarchy V) → P x
 
@@ -104,10 +103,10 @@ module _
         ( g : B → type-pseudo-cumulative-hierarchy V) (e : lift f g × lift g f)
         → (IH₁ : (a : A) → P (f a))
         → (IH₂ : (b : B) → P (g b))
-        → ((a : A) → type-trunc-Prop ( Σ B (λ b → Σ (f a ＝ g b)
-                         (λ p → tr P p (IH₁ a) ＝ IH₂ b ))))
-        → ((b : B) → type-trunc-Prop ( Σ A (λ a → Σ (g b ＝ f a)
-                         (λ p → tr P p (IH₂ b) ＝ IH₁ a ))))
+        → ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+            ( λ p → tr P p (IH₁ a) ＝ IH₂ b)))
+        → ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+                         (λ p → tr P p (IH₂ b) ＝ IH₁ a)))
         → tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂)
     → {A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) (IH : (a : A) → P (f a))
     → IP P σ ρ τ (set-pseudo-cumulative-hierarchy V f) ＝ ρ f IH
@@ -117,14 +116,113 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (V : pseudo-cumulative-hierarchy l1)
+  {l1 : Level} (V : pseudo-cumulative-hierarchy l1)
   (induction-principle-cumulative-hierarchy-V :
-    induction-principle-cumulative-hierarchy l2 V)
+    (l2 : Level) → induction-principle-cumulative-hierarchy l2 V)
   (compute-induction-principle-cumulative-hierarchy-V :
-    compute-induction-principle-cumulative-hierarchy l2 V
-      induction-principle-cumulative-hierarchy-V)
+    (l2 : Level) → compute-induction-principle-cumulative-hierarchy l2 V
+      (induction-principle-cumulative-hierarchy-V l2))
   where
 
+  underlying-function-cumulative-hierarchy :
+    (v : type-pseudo-cumulative-hierarchy V)
+    → ∃ (UU l1)
+        ( λ A → Σ (A → type-pseudo-cumulative-hierarchy V)
+          ( λ f → set-pseudo-cumulative-hierarchy V f ＝ v))
+  underlying-function-cumulative-hierarchy =
+    induction-principle-cumulative-hierarchy-V
+      ( lsuc l1) _
+      ( λ - → is-trunc-type-Truncated-Type (set-trunc-Prop _))
+      ( λ {A} f H → unit-trunc-Prop (pair A (pair f refl)))
+      ( λ f g e IH₁ IH₂ hIH₁ hIH₂ → eq-is-prop is-prop-type-trunc-Prop)
+
+  recursion-principle-cumulative-hierarchy-V : {l2 : Level}
+    → (X : UU l2) (σ : is-set X)
+    → (ρ : {A : UU l1} → (A → type-pseudo-cumulative-hierarchy V) → (A → X) → X)
+    → (τ : {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
+        (g : B → type-pseudo-cumulative-hierarchy V)
+        (e : lift f g × lift g f)
+      → (IH₁ : A → X)
+      → (IH₂ : B → X)
+      → ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+          ( λ _ → IH₁ a ＝ IH₂ b)))
+      → ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+          ( λ _ → IH₂ b ＝ IH₁ a)))
+      → ρ f IH₁ ＝ ρ g IH₂)
+      → type-pseudo-cumulative-hierarchy V → X
+  recursion-principle-cumulative-hierarchy-V {l2} X σ ρ τ =
+      induction-principle-cumulative-hierarchy-V l2 (λ _ → X) (λ _ → σ) ρ τ'
+    where
+      τ' : {A B : UU l1} (f : A → pr1 V) (g : B → pr1 V)
+           (e : lift f g × lift g f) (IH₁ : (a : A) → X) (IH₂ : (b : B) → X)
+         → ((a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ p → tr (λ _ → X) p (IH₁ a) ＝ IH₂ b)))
+         → ((b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ p → tr (λ _ → X) p (IH₂ b) ＝ IH₁ a)))
+         → tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁) ＝ ρ g IH₂
+      τ' {A} {B} f g e IH₁ IH₂ hIH₁ hIH₂ =
+        equational-reasoning
+        tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
+        ＝ ρ f IH₁ by tr-const path-f-g (ρ f IH₁)
+        ＝ ρ g IH₂ by τ f g e IH₁ IH₂ hIH₁' hIH₂'
+        where
+          path-f-g = set-ext-pseudo-cumulative-hierarchy V f g e
+          hIH₁' : (a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
+          hIH₁' a = map-trunc-Prop
+            (λ (b , p , q) → (b , p , (inv (tr-const p _) ∙ q))) (hIH₁ a)
+          hIH₂' : (b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
+          hIH₂' b = map-trunc-Prop
+            (λ (a , p , q) → (a , p , (inv (tr-const p _) ∙ q))) (hIH₂ b)
+
+  compute-recursion-principle-cumulative-hierarchy-V : {l2 : Level}
+    → (X : UU l2) (σ : is-set X)
+    → (ρ : {A : UU l1} → (A → type-pseudo-cumulative-hierarchy V) → (A → X) → X)
+    → (τ : {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
+        ( g : B → type-pseudo-cumulative-hierarchy V)
+        ( e : lift f g × lift g f)
+      → ( IH₁ : A → X)
+      → ( IH₂ : B → X)
+      → ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+          ( λ _ → IH₁ a ＝ IH₂ b)))
+      → ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+          ( λ _ → IH₂ b ＝ IH₁ a)))
+      → ρ f IH₁ ＝ ρ g IH₂)
+    → {A : UU l1} → (f : A → type-pseudo-cumulative-hierarchy V) → (IH : A → X)
+    → recursion-principle-cumulative-hierarchy-V X σ ρ τ
+        ( set-pseudo-cumulative-hierarchy V f) ＝ ρ f IH
+  compute-recursion-principle-cumulative-hierarchy-V {l2} X σ ρ τ =
+      compute-induction-principle-cumulative-hierarchy-V l2 (λ _ → X) (λ _ → σ) ρ τ'
+    where
+      τ' : {A B : UU l1} (f : A → pr1 V) (g : B → pr1 V)
+           (e : lift f g × lift g f) (IH₁ : (a : A) → X) (IH₂ : (b : B) → X)
+         → ((a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ p → tr (λ _ → X) p (IH₁ a) ＝ IH₂ b)))
+         → ((b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ p → tr (λ _ → X) p (IH₂ b) ＝ IH₁ a)))
+         → tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁) ＝ ρ g IH₂
+      τ' {A} {B} f g e IH₁ IH₂ hIH₁ hIH₂ =
+        equational-reasoning
+        tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
+        ＝ ρ f IH₁ by tr-const path-f-g (ρ f IH₁)
+        ＝ ρ g IH₂ by τ f g e IH₁ IH₂ hIH₁' hIH₂'
+        where
+          path-f-g = set-ext-pseudo-cumulative-hierarchy V f g e
+          hIH₁' : (a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
+          hIH₁' a = map-trunc-Prop
+            (λ (b , p , q) → (b , p , (inv (tr-const p _) ∙ q))) (hIH₁ a)
+          hIH₂' : (b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
+          hIH₂' b = map-trunc-Prop
+            (λ (a , p , q) → (a , p , (inv (tr-const p _) ∙ q))) (hIH₂ b)
+
+  -- prop-recursion-principle-cumulative-hierarchy-V : {l2 : Level}
+  --   → (ρ : {A : UU l1} → (A → type-pseudo-cumulative-hierarchy V) → (A → Prop l2) → Prop l2)
+  --   → (τ : {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
+  --       (g : B → type-pseudo-cumulative-hierarchy V)
+  --       (e : lift f g × lift g f)
+  --     → (IH₁ : A → Prop l2)
+  --     → (IH₂ : B → Prop l2)
+  --     → ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+  --         ( λ _ → IH₁ a ＝ IH₂ b)))
+  --     → type-Prop (ρ f IH₁) → type-Prop (ρ g IH₂))
+  --   → type-pseudo-cumulative-hierarchy V → Prop l2
+  -- prop-recursion-principle-cumulative-hierarchy-V {l2} ρ τ =
+  --   recursion-principle-cumulative-hierarchy-V (Prop l2) {!!} ρ {!!}
 ```
 
 ## References
