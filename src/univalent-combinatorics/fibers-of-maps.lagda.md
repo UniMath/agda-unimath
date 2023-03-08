@@ -45,7 +45,9 @@ count-fib :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   count A → count B → (y : B) → count (fib f y)
 count-fib f count-A count-B =
-  count-fiber-count-Σ count-B (count-equiv' (equiv-total-fib f) count-A)
+  count-fiber-count-Σ-count-base
+    ( count-B)
+    ( count-equiv' (equiv-total-fib f) count-A)
 
 abstract
   sum-number-of-elements-count-fib :
