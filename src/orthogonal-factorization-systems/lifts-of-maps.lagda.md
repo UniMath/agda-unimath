@@ -230,8 +230,6 @@ module _
   pr2 (is-small-total-lift) = inv-compute-total-lift
 ```
 
-## Properties
-
 ### If `P` is `k`-truncated then the type of lifts of maps is `k`-truncated
 
 ```agda
