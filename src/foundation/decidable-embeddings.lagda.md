@@ -10,6 +10,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
+open import foundation.decidable-equality
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -333,4 +334,37 @@ abstract
     {l : Level} {X : UU l} → is-decidable-emb (ex-falso {l} {X})
   pr1 (is-decidable-emb-ex-falso {l} {X}) = is-emb-ex-falso
   pr2 (is-decidable-emb-ex-falso {l} {X}) x = inr pr1
+
+decidable-emb-ex-falso :
+  {l : Level} {X : UU l} → empty ↪d X
+pr1 decidable-emb-ex-falso = ex-falso
+pr2 decidable-emb-ex-falso = is-decidable-emb-ex-falso
+
+decidable-emb-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪d B
+decidable-emb-is-empty {A = A} f =
+  map-equiv
+    ( equiv-precomp-decidable-emb-equiv (equiv-is-empty f id) _)
+    ( decidable-emb-ex-falso)
+```
+
+### The map on total spaces induced by a family of decidable embeddings is a decidable embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  is-decidable-emb-tot :
+    {f : (x : A) → B x → C x} →
+    ((x : A) → is-decidable-emb (f x)) → is-decidable-emb (tot f)
+  is-decidable-emb-tot H =
+    ( is-emb-tot (λ x → is-emb-is-decidable-emb (H x)) ,
+      is-decidable-map-tot λ x → is-decidable-map-is-decidable-emb (H x))
+
+  tot-decidable-emb : ((x : A) → B x ↪d C x) → Σ A B ↪d Σ A C
+  pr1 (tot-decidable-emb f) = tot (λ x → map-decidable-emb (f x))
+  pr2 (tot-decidable-emb f) =
+    is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x))
+
 ```

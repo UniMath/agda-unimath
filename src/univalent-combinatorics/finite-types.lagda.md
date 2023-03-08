@@ -685,25 +685,27 @@ abstract
            ( pr2 (has-finite-cardinality-is-finite H)))
 ```
 
-### A type `X` is finite if and only if `X` has decidable equality and there exist a surjection `A ↠ Fin-n`
+### A type `X` is finite if and only if `X` has decidable equality and there exist a surjection  `Fin-n ↠ X`
 
-```agda
-is-finite-surjection-has-decidable-equality :
-  {l1 l2 : Level} {X : UU l1 } {n : ℕ} →
-  (p : has-decidable-equality X) → (f : Fin n ↠ X) →
-  is-finite (X)
-is-finite-surjection-has-decidable-equality {n = zero-ℕ} p f =
-  is-finite-is-empty  {!!}
-is-finite-surjection-has-decidable-equality {X = X} {n = succ-ℕ zero-ℕ} p f =
-  is-finite-is-contr
-    ( map-surjection f (inr star) ,
-      ( λ x →
-        ind-trunc-Prop
-          ( λ z →
-            ( map-surjection f (inr star) ＝ x) ,
-              is-set-has-decidable-equality p (map-surjection f (inr star)) x)
-          ( λ y → map-left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star) y)
-          ( is-surjective-map-surjection f x)))
-is-finite-surjection-has-decidable-equality {n = succ-ℕ (succ-ℕ n)} p f =
-  {!!}
-```
+-- ```agda
+-- is-finite-surjection-has-decidable-equality :
+--   {l1 l2 : Level} {X : UU l1 } {n : ℕ} →
+--   (p : has-decidable-equality X) → (f : Fin n ↠ X) →
+--   is-finite (X)
+-- is-finite-surjection-has-decidable-equality {n = zero-ℕ} p f =
+--   is-finite-is-empty
+--     ( ind-trunc-Prop (λ _ → empty-Prop) pr1 ∘ is-surjective-map-surjection f)
+-- is-finite-surjection-has-decidable-equality {X = X} {n = succ-ℕ zero-ℕ} p f =
+--   is-finite-is-contr
+--     ( map-surjection f (inr star) ,
+--       ( λ x →
+--         ind-trunc-Prop
+--           ( λ z →
+--             ( map-surjection f (inr star) ＝ x) ,
+--               is-set-has-decidable-equality p (map-surjection f (inr star)) x)
+--           ( λ y → map-left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star) y)
+--           ( is-surjective-map-surjection f x)))
+-- is-finite-surjection-has-decidable-equality {n = succ-ℕ n} p f =
+--   {!is-finite-surjection-has-decidable-equality {n = n} ? ?
+--    is-finite-surjection-has-decidable-equality {n = 1} ? ?!}
+-- ```
