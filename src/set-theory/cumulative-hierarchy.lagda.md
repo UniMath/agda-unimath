@@ -2,7 +2,11 @@
 
 ```agda
 module set-theory.cumulative-hierarchy where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -18,6 +22,8 @@ open import foundation.propositions
 open import foundation.truncation-levels
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
+
+</details>
 
 ## Idea
 
