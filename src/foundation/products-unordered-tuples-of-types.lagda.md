@@ -1,11 +1,12 @@
-#  Products of unordered tuples of types
+# Products of unordered tuples of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.products-unordered-tuples-of-types where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -20,12 +21,13 @@ open import foundation.universal-property-maybe
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 open import foundation.unordered-tuples-of-types
-
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.universal-property-standard-finite-types
 ```
+
 </details>
 
 ## Idea

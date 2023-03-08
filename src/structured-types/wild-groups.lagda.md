@@ -1,17 +1,20 @@
-#  Wild groups
+# Wild groups
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-groups where
+```
 
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.binary-equivalences
-open import foundation.universe-levels
+<details><summary>Imports</summary>
 
+```agda
 open import structured-types.pointed-types
 open import structured-types.wild-monoids
+open import foundation.binary-equivalences
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

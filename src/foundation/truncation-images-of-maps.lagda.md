@@ -1,9 +1,12 @@
-#  Truncation images of maps
+# Truncation images of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.truncation-images-of-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -14,6 +17,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

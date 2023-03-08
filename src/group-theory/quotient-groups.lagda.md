@@ -1,11 +1,21 @@
-#  Quotient groups
+# Quotient groups
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module group-theory.quotient-groups where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.kernels
+open import group-theory.normal-subgroups
+open import group-theory.semigroups
 open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
@@ -21,13 +31,8 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.kernels
-open import group-theory.normal-subgroups
-open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

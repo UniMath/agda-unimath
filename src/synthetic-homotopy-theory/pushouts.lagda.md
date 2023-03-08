@@ -1,18 +1,21 @@
-#  Pushouts
+# Pushouts
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.pushouts where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.universe-levels
-
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
 ```
+
 </details>
 
 ## Postulates

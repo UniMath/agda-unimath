@@ -1,17 +1,20 @@
-#  Stereoisomerism for enriched undirected graphs
+# Stereoisomerism for enriched undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.stereoisomerism-enriched-undirected-graphs where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import graph-theory.enriched-undirected-graphs
+open import graph-theory.equivalences-undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.universe-levels
-
-open import graph-theory.enriched-undirected-graphs
-open import graph-theory.equivalences-undirected-graphs
 ```
+
 </details>
 
 ## Idea

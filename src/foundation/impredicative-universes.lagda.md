@@ -1,13 +1,17 @@
-#  Impredicative universes
+# Impredicative universes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.impredicative-universes where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.propositions
 open import foundation.small-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

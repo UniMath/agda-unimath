@@ -1,16 +1,20 @@
-#  Products in precategories
+# Products in precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.exponential-objects-precategories where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.precategories
 open import category-theory.products-precategories
-open import foundation.dependent-pair-types
 open import foundation-core.identity-types
+open import foundation.dependent-pair-types
 open import foundation.unique-existence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

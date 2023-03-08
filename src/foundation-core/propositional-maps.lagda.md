@@ -1,9 +1,12 @@
-#  Propositional maps
+# Propositional maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.propositional-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -16,6 +19,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

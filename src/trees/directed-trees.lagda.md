@@ -1,12 +1,15 @@
-#  Directed trees
+# Directed trees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.directed-trees where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -24,10 +27,10 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
-
 open import graph-theory.directed-graphs
 open import graph-theory.walks-directed-graphs
 ```
+
 </details>
 
 ## Idea

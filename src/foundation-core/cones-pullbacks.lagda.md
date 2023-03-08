@@ -1,9 +1,12 @@
-#  Cones on pullback diagrams
+# Cones on pullback diagrams
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.cones-pullbacks where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
@@ -15,10 +18,10 @@ open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-
 open import foundation.homotopies
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea

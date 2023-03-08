@@ -1,11 +1,14 @@
-#  The precategory of orbits of a monoid action
+# The precategory of orbits of a monoid action
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.orbits-monoid-actions where
+```
 
-open import category-theory.precategories
+<details><summary>Imports</summary>
 
+```agda
+open import group-theory.monoid-actions
+open import group-theory.monoids
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,10 +18,9 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
-open import group-theory.monoid-actions
-open import group-theory.monoids
+open import category-theory.precategories
 ```
+
 </details>
 
 ## Idea

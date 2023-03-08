@@ -1,15 +1,19 @@
-#  The principle of omniscience
+# The principle of omniscience
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.principle-of-omniscience where
+```
 
-open import foundation.decidable-subtypes
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

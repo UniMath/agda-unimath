@@ -1,21 +1,23 @@
 # Join-semilattices
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.join-semilattices where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.least-upper-bounds-posets
+open import order-theory.posets
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.semigroups
-
-open import order-theory.least-upper-bounds-posets
-open import order-theory.posets
 ```
+
 </details>
 
 ## Idea

@@ -1,11 +1,12 @@
-#  Perfect Images
+# Perfect Images
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.perfect-images where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -20,10 +21,12 @@ open import foundation.injective-maps
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
 open import foundation.negation
-open import foundation.propositions
 open import foundation.propositional-maps
+open import foundation.propositions
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

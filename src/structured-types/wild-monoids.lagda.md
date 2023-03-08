@@ -1,21 +1,23 @@
-#  Wild monoids
+# Wild monoids
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.wild-monoids where
+```
 
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.unit-type
-open import foundation.universe-levels
+<details><summary>Imports</summary>
 
-open import group-theory.homomorphisms-semigroups
-
+```agda
 open import structured-types.coherent-h-spaces
 open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
+open import group-theory.homomorphisms-semigroups
 ```
+
 </details>
 
 ## Idea

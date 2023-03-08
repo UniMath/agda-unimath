@@ -1,9 +1,12 @@
-#  The rational numbers
+# The rational numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.rational-numbers where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.bezouts-lemma
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
@@ -13,12 +16,11 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-integers
-
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
@@ -28,6 +30,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

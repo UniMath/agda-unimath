@@ -1,20 +1,21 @@
-#  The invariant basis property of rings
+# The invariant basis property of rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.invariant-basis-property-rings where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
-open import foundation.identity-types
-open import foundation.universe-levels
-
+```agda
 open import ring-theory.dependent-products-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.rings
-
+open import foundation.identity-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,24 +1,17 @@
-#  Orbits of permutations
+# Orbits of permutations
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module finite-group-theory.orbits-permutations where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import finite-group-theory.transpositions
-
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.decidable-types
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.euclidean-division-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.lower-bounds-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
-
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -33,9 +26,9 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
@@ -53,7 +46,16 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
-
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.decidable-types
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
@@ -64,6 +66,7 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

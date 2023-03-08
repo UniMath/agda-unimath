@@ -1,20 +1,23 @@
-#  Σ-decompositions of types
+# Σ-decompositions of types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification  #-}
 module foundation.sigma-decompositions where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
-open import foundation.functions
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
@@ -32,6 +35,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

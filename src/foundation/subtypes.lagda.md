@@ -1,16 +1,15 @@
-#  Subtypes
+# Subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.subtypes where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.subtypes public
-
-open import foundation.equality-dependent-function-types
-
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
-open import foundation.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
@@ -21,7 +20,8 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
+open import foundation.embeddings
+open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-function-types
 open import foundation.equational-reasoning
 open import foundation.injective-maps
@@ -30,6 +30,7 @@ open import foundation.propositional-extensionality
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 ```
+
 </details>
 
 ## Definition

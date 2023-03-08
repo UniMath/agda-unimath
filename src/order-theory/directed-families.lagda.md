@@ -1,17 +1,20 @@
-#  Directed families in posets
+# Directed families in posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.directed-families where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.posets
 open import foundation.cartesian-product-types
 open import foundation.existential-quantification
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import order-theory.posets
 ```
+
 </details>
 
 ## Definition

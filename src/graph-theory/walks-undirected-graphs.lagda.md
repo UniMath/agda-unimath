@@ -1,12 +1,13 @@
-#  Walks in undirected graphs
+# Walks in undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.walks-undirected-graphs where
+```
 
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
+```agda
+open import graph-theory.undirected-graphs
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -23,11 +24,11 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import graph-theory.undirected-graphs
-
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

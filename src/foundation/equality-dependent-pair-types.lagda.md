@@ -1,18 +1,20 @@
-#  Equality of dependent pair types
+# Equality of dependent pair types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.equality-dependent-pair-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.equality-dependent-pair-types public
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
-
 open import foundation.identity-types
 ```
+
 </details>
 
 ## Properties

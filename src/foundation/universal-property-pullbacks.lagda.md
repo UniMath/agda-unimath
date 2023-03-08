@@ -1,11 +1,18 @@
-#  The universal property of pullbacks
+# The universal property of pullbacks
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.universal-property-pullbacks where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.universal-property-pullbacks public
-
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-maps
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -19,13 +26,8 @@ open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.cones-pullbacks
-open import foundation-core.contractible-maps
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 ```
+
 </details>
 
 ## Idea

@@ -1,9 +1,12 @@
-#  Decidable equality
+# Decidable equality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-equality where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -24,6 +27,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

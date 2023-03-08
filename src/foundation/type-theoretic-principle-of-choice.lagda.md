@@ -1,9 +1,12 @@
-#  The type theoretic principle of choice
+# The type theoretic principle of choice
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-theoretic-principle-of-choice where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -11,10 +14,10 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea

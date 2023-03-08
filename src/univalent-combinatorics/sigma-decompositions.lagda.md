@@ -1,11 +1,19 @@
 # Finite Σ-decompositions of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.sigma-decompositions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import univalent-combinatorics.decidable-equivalence-relations
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.quotients-finite-types
 
 open import foundation.sigma-decompositions public
-
 open import foundation.contractible-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -15,7 +23,6 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
@@ -26,15 +33,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.universe-levels
 open import foundation.univalence
-
-open import univalent-combinatorics.decidable-equivalence-relations
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
-open import univalent-combinatorics.quotients-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,24 +1,24 @@
 # The commutative semiring of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.commutative-semiring-of-natural-numbers where
+```
 
-open import commutative-algebra.commutative-semirings
+<details><summary>Imports</summary>
 
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
+open import commutative-algebra.commutative-semirings
 open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
-
 open import ring-theory.semirings
 ```
+
 </details>
 
 ## Definition

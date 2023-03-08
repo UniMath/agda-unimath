@@ -1,16 +1,20 @@
-#  Graphs
+# Graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.directed-graphs where
+```
 
-open import foundation.universe-levels
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.equivalences
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea
@@ -113,7 +117,7 @@ $$\begin{equation}
 \end{split}
 \end{equation}$$
 
-<!-- 
+<!--
 ```
 module directed-graph-defs-equivalence
   {l1 l2 : Level} where
@@ -141,5 +145,5 @@ module directed-graph-defs-equivalence
 -- Show that Directed-Graph is pre-category
 -- + iso corresponds to equiv.
 -- Instance of
-``` 
+```
 -->

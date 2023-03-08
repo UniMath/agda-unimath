@@ -1,9 +1,12 @@
-#  Small maps
+# Small maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.small-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.locally-small-types
@@ -11,6 +14,7 @@ open import foundation.propositions
 open import foundation.small-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

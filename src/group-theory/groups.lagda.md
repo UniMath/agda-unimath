@@ -1,9 +1,14 @@
-#  Abstract groups
+# Abstract groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.groups where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.monoids
+open import group-theory.semigroups
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -21,15 +26,11 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import group-theory.monoids
-open import group-theory.semigroups
-
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
-
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

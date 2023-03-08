@@ -1,16 +1,18 @@
 # Constant matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.constant-matrices where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
-open import foundation.universe-levels
-
+```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.matrices
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

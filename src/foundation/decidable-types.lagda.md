@@ -1,9 +1,12 @@
-#  Decidable types
+# Decidable types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -13,14 +16,15 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.hilberts-epsilon-operators
 open import foundation.negation
-open import foundation.retractions
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.retractions
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

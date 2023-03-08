@@ -1,9 +1,12 @@
-#  The image of a map
+# The image of a map
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.images where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -27,6 +30,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

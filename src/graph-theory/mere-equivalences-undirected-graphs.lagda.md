@@ -1,16 +1,19 @@
-#  Mere equivalences of undirected graphs
+# Mere equivalences of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.mere-equivalences-undirected-graphs where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.undirected-graphs
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import graph-theory.equivalences-undirected-graphs
-open import graph-theory.undirected-graphs
 ```
+
 </details>
 
 ## Idea

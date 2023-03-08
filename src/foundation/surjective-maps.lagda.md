@@ -1,12 +1,14 @@
-#  Surjective maps
+# Surjective maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.surjective-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -23,9 +25,9 @@ open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import foundation.cartesian-product-types
 open import foundation.connected-maps
+open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -43,9 +45,9 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
-
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
+
 </details>
 
 ## Idea

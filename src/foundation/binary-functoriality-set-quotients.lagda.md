@@ -1,11 +1,16 @@
-#  Binary functoriality of set quotients
+# Binary functoriality of set quotients
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module foundation.binary-functoriality-set-quotients where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.binary-homotopies
 open import foundation.binary-reflecting-maps-equivalence-relations
 open import foundation.contractible-types
@@ -32,6 +37,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,9 +1,11 @@
-#  Injective maps
+# Injective maps
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.embeddings where
+```
+<details><summary>Imports</summary>
 
+```agda
 open import foundation.embeddings public
 
 open import elementary-number-theory.natural-numbers
@@ -25,6 +27,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.injective-maps
 open import univalent-combinatorics.retracts-of-finite-types
 ```
+
 </details>
 
 ## Idea

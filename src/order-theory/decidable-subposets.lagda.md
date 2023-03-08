@@ -1,19 +1,22 @@
 # Decidable subposets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.decidable-subposets where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.posets
+open import order-theory.subposets
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import order-theory.posets
-open import order-theory.subposets
 ```
+
 </details>
 
 ## Definition

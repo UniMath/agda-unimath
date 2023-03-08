@@ -1,14 +1,20 @@
-#  Fibers of maps between finite types
+# Fibers of maps between finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.fibers-of-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 open import foundation.fibers-of-maps public
-
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
-
 open import foundation.contractible-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -20,15 +26,10 @@ open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
 ```
+
 </details>
 
 ## Idea

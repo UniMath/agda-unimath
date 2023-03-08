@@ -1,4 +1,4 @@
-#  Functions
+# Functions
 
 ```agda
 -- {-# OPTIONS --safe #-}
@@ -6,7 +6,6 @@
 module foundation.functions where
 
 open import foundation-core.functions public
-
 open import foundation.dependent-pair-types
 
 open import foundation.equivalences

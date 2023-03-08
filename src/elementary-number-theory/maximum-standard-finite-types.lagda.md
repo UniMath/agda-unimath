@@ -1,20 +1,21 @@
-#  Maximum on the standard finite types
+# Maximum on the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.maximum-standard-finite-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.unit-type
-
 open import order-theory.least-upper-bounds-posets
-
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

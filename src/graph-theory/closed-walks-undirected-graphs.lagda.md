@@ -1,18 +1,20 @@
-#  Closed walks in undirected graphs
+# Closed walks in undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.closed-walks-undirected-graphs where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-
+```agda
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.undirected-graphs
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

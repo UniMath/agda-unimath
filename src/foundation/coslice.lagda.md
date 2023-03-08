@@ -1,19 +1,22 @@
-#  Morphisms in the coslice category of types
+# Morphisms in the coslice category of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.coslice where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea

@@ -1,9 +1,15 @@
-#  Equivalences of concrete group actions
+# Equivalences of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-concrete-group-actions where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-group-actions
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -18,11 +24,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-group-actions
 ```
+
 </details>
 
 ## Idea

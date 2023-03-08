@@ -1,15 +1,18 @@
 # Chains in posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.chains-posets where
+```
 
-open import foundation.propositions
-open import foundation.universe-levels
+<details><summary>Imports</summary>
 
+```agda
 open import order-theory.chains-preorders
 open import order-theory.posets
+open import foundation.propositions
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

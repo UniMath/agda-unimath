@@ -1,13 +1,12 @@
-#  Reflecting maps for equivalence relations
+# Reflecting maps for equivalence relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.reflecting-maps-equivalence-relations where
+```
 
-open import foundation.equality-dependent-function-types
-open import foundation.effective-maps-equivalence-relations
-open import foundation.homotopies
+<details><summary>Imports</summary>
 
+```agda
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
@@ -19,7 +18,11 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
+open import foundation.effective-maps-equivalence-relations
+open import foundation.equality-dependent-function-types
+open import foundation.homotopies
 ```
+
 </details>
 
 ## Idea

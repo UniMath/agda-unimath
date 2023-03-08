@@ -1,9 +1,12 @@
-#  Involutions
+# Involutions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.involutions where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.automorphisms
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -15,9 +18,9 @@ open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

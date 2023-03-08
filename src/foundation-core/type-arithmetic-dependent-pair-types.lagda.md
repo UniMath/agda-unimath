@@ -1,9 +1,12 @@
-#  Type arithmetic for dependent pair types
+# Type arithmetic for dependent pair types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.type-arithmetic-dependent-pair-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -16,6 +19,7 @@ open import foundation-core.identity-types
 open import foundation-core.singleton-induction
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

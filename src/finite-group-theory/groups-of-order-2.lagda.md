@@ -1,15 +1,17 @@
-#  Groups of order 2
+# Groups of order 2
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module finite-group-theory.groups-of-order-2 where
+```
 
-open import elementary-number-theory.groups-of-modular-arithmetic
+<details><summary>Imports</summary>
 
+```agda
 open import finite-group-theory.finite-groups
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,18 +22,17 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-
+open import elementary-number-theory.groups-of-modular-arithmetic
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.symmetric-groups
-
 open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.finite-types
-
 open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

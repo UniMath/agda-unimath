@@ -1,18 +1,24 @@
-#  Functoriality of set quotients
+# Functoriality of set quotients
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
 
+```agda
 module foundation.functoriality-set-quotients where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import foundation-core.equivalence-relations
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -29,9 +35,8 @@ open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
+
 </details>
 
 ## Idea

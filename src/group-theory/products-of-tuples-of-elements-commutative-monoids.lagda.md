@@ -1,11 +1,14 @@
-#  Products of tuples of elements in commutative monoids
+# Products of tuples of elements in commutative monoids
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.products-of-tuples-of-elements-commutative-monoids where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
+```agda
+open import group-theory.commutative-monoids
+open import group-theory.unordered-tuples-of-elements-commutative-monoids
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -13,13 +16,11 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import group-theory.commutative-monoids
-open import group-theory.unordered-tuples-of-elements-commutative-monoids
-
+open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

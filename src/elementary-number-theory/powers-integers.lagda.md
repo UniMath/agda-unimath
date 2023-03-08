@@ -1,22 +1,23 @@
 # Powers of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.powers-integers where
+```
 
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
+<details><summary>Imports</summary>
 
+```agda
 open import elementary-number-theory.commutative-ring-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
-
 open import foundation.identity-types
 open import foundation.universe-levels
-
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
 open import ring-theory.powers-of-elements-rings
 ```
+
 </details>
 
 ## Idea

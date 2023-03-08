@@ -1,11 +1,13 @@
-#  Fibers of maps
+# Fibers of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.fibers-of-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.fibers-of-maps public
-
 open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
@@ -16,10 +18,10 @@ open import foundation-core.identity-types
 open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
-
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 ```
+
 </details>
 
 ## Properties

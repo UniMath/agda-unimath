@@ -1,4 +1,4 @@
-#  Equality of cartesian product types
+# Equality of cartesian product types
 
 ```agda
 module foundation.equality-cartesian-product-types where

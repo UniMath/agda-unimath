@@ -1,15 +1,18 @@
-#  Lower types in preorders
+# Lower types in preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.lower-types-preorders where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.preorders
 open import foundation.dependent-pair-types
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import order-theory.preorders
 ```
+
 </details>
 
 ## Idea

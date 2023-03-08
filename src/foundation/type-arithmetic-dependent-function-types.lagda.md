@@ -1,9 +1,12 @@
-#  Type arithmetic with dependent function types
+# Type arithmetic with dependent function types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-dependent-function-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +18,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

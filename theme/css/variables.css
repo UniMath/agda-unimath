@@ -56,6 +56,7 @@
   --searchresults-border-color: #888;
   --searchresults-li-bg: #252932;
   --search-mark-bg: #e3b171;
+  --code-bg: #1e1e1e;
 }
 
 .coal {
@@ -96,12 +97,13 @@
   --searchresults-border-color: #98a3ad;
   --searchresults-li-bg: #2b2b2f;
   --search-mark-bg: #355c7d;
+  --code-bg: #1e1e1e;
 }
 
 .light {
   --bg: hsl(0, 0%, 100%);
   --fg: hsl(0, 0%, 0%);
-
+  --code-bg: aliceblue;
   --sidebar-bg: #fafafa;
   --sidebar-fg: hsl(0, 0%, 0%);
   --sidebar-non-existant: #aaaaaa;
@@ -176,6 +178,7 @@
   --searchresults-border-color: #5c5c68;
   --searchresults-li-bg: #242430;
   --search-mark-bg: #a2cff5;
+  --code-bg: #1e1e1e;
 }
 
 .rust {
@@ -216,6 +219,7 @@
   --searchresults-border-color: #888;
   --searchresults-li-bg: #dec2a2;
   --search-mark-bg: #e69f67;
+  --code-bg: hsl(60, 5%, 75%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -257,5 +261,6 @@
     --searchresults-border-color: #98a3ad;
     --searchresults-li-bg: #2b2b2f;
     --search-mark-bg: #355c7d;
+    --code-bg: aliceblue;
   }
 }

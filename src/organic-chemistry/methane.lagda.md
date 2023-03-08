@@ -1,28 +1,27 @@
 # Methane
 
-<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.methane where
+```
 
-open import organic-chemistry.hydrocarbons using (hydrocarbon)
+<details><summary>Imports</summary>
+
+```agda
 open import organic-chemistry.alkanes using (is-alkane-hydrocarbon)
-
-open import finite-group-theory.tetrahedra-in-3-space using (tetrahedron-in-3-space)
-
-open import elementary-number-theory.inequality-natural-numbers
-
-open import foundation.unit-type
+open import organic-chemistry.hydrocarbons using (hydrocarbon)
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.unit-type
 open import foundation.universe-levels
-
+open import elementary-number-theory.inequality-natural-numbers
+open import finite-group-theory.tetrahedra-in-3-space using (tetrahedron-in-3-space)
 open import graph-theory.walks-undirected-graphs using (refl-walk-Undirected-Graph)
-
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 ## Idea
 

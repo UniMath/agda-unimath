@@ -1,9 +1,12 @@
-#  Pairs of distinct elements
+# Pairs of distinct elements
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.pairs-of-distinct-elements where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,6 +20,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

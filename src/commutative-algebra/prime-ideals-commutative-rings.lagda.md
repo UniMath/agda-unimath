@@ -1,19 +1,21 @@
-#  Prime ideals in commutative rings
+# Prime ideals in commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.prime-ideals-commutative-rings where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import ring-theory.ideals-rings
 ```
+
 </details>
 
 ## Idea

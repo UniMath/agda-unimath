@@ -1,14 +1,18 @@
-#  Equivalences between categories
+# Equivalences between categories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.equivalences-categories where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.categories
 open import category-theory.equivalences-precategories
 open import category-theory.functors-categories
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

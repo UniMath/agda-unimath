@@ -1,17 +1,19 @@
-#  The category of concrete groups
+# The category of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.category-of-concrete-groups where
+```
 
-open import category-theory.large-categories
-open import category-theory.large-precategories
+<details><summary>Imports</summary>
 
-open import foundation.universe-levels
-
+```agda
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
+open import foundation.universe-levels
+open import category-theory.large-categories
+open import category-theory.large-precategories
 ```
+
 </details>
 
 ## Definitions

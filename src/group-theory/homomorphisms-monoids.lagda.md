@@ -1,16 +1,19 @@
-#  Homomorphisms of monoids
+# Homomorphisms of monoids
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-monoids where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.homomorphisms-semigroups
+open import group-theory.monoids
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import group-theory.homomorphisms-semigroups
-open import group-theory.monoids
 ```
+
 </details>
 
 ## Idea

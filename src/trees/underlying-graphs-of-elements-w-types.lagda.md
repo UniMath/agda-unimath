@@ -1,18 +1,25 @@
-#  The underlying graphs of elements of W-types
+# The underlying graphs of elements of W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.underlying-graphs-of-elements-w-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import trees.directed-trees
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -27,17 +34,12 @@ open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.trails-directed-graphs
 open import graph-theory.walks-directed-graphs
-
-open import trees.directed-trees
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
 ```
+
 </details>
 
 ## Idea

@@ -1,20 +1,23 @@
-#  Finite function types
+# Finite function types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.function-types where
+```
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.universe-levels
+<details><summary>Imports</summary>
 
+```agda
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

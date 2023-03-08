@@ -1,9 +1,12 @@
-#  Unordered pairs of elements in a type
+# Unordered pairs of elements in a type
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.unordered-pairs where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -13,8 +16,8 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -25,12 +28,12 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

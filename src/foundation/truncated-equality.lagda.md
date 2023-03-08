@@ -1,15 +1,19 @@
-#  Truncated equality
+# Truncated equality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.truncated-equality where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.identity-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definition

@@ -1,13 +1,19 @@
-#  Constant maps
+# Constant maps
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
 
+```agda
 module foundation-core.constant-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Definition

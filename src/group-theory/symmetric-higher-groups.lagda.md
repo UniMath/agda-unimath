@@ -1,19 +1,21 @@
-#  Symmetric higher groups
+# Symmetric higher groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.symmetric-higher-groups where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.higher-groups
 open import foundation.0-connected-types
 open import foundation.connected-components-universes
 open import foundation.dependent-pair-types
 open import foundation.mere-equivalences
 open import foundation.universe-levels
-
-open import group-theory.higher-groups
-
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

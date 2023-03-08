@@ -1,9 +1,12 @@
-#  Connected components of universes
+# Connected components of universes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.connected-components-universes where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -21,6 +24,7 @@ open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,12 +1,14 @@
-#  Categories
+# Categories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.categories where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.isomorphisms-precategories
 open import category-theory.precategories
-
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -20,6 +22,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

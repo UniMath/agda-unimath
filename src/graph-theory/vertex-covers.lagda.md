@@ -1,9 +1,15 @@
-#  Vertex covers
+# Vertex covers
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.vertex-covers where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import graph-theory.edge-coloured-undirected-graphs
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -13,13 +19,9 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import graph-theory.edge-coloured-undirected-graphs
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
-
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,16 +1,19 @@
-#  Propositional extensionality
+# Propositional extensionality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.propositional-extensionality where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -26,6 +29,7 @@ open import foundation.univalent-type-families
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

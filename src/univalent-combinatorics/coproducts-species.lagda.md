@@ -1,9 +1,15 @@
-#  Coproducts of species
+# Coproducts of species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.coproducts-species where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.morphisms-species
+open import univalent-combinatorics.species
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.equivalences
@@ -12,11 +18,8 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
-
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.morphisms-species
-open import univalent-combinatorics.species
 ```
+
 </details>
 
 ## Idea

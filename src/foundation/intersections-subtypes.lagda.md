@@ -1,9 +1,12 @@
-#  Intersection of subtypes
+# Intersection of subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.intersections-subtypes where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.double-powersets
@@ -11,6 +14,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

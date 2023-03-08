@@ -1,11 +1,13 @@
   Functoriality of dependent pair types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.functoriality-dependent-pair-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.functoriality-dependent-pair-types public
-
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
@@ -17,6 +19,7 @@ open import foundation-core.pullbacks
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Properties

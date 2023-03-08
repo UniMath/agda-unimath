@@ -1,15 +1,21 @@
-#  Commuting squares of maps
+# Commuting squares of maps
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
 
+```agda
 module foundation-core.commuting-squares-of-maps where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,22 +1,23 @@
 # Diagonal matrices on rings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.diagonal-matrices-on-rings where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
-open import foundation.identity-types
-open import foundation.universe-levels
-
+```agda
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices-on-rings
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
-
+open import foundation.identity-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definitions

@@ -1,26 +1,28 @@
-#  Equivalences of cubes
+# Equivalences of cubes
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences-cubes where
+```
 
-open import elementary-number-theory.natural-numbers
+<details><summary>Imports</summary>
 
+```agda
+open import univalent-combinatorics.cubes
+open import univalent-combinatorics.finite-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-
-open import univalent-combinatorics.cubes
-open import univalent-combinatorics.finite-types
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Definitions

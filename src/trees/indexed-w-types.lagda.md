@@ -1,11 +1,15 @@
-#  Indexed W-types
+# Indexed W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.indexed-w-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.universe-levels
 ```
+
 </details>
 
 ```agda

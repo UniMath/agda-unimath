@@ -1,19 +1,22 @@
-#  Lattices
+# Lattices
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.lattices where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.join-semilattices
+open import order-theory.meet-semilattices
+open import order-theory.posets
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
-open import order-theory.join-semilattices
-open import order-theory.meet-semilattices
-open import order-theory.posets
 ```
+
 </details>
 
 ## Idea

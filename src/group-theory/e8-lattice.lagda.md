@@ -1,17 +1,19 @@
-#  The E₈-lattice
+# The E₈-lattice
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.e8-lattice where
+```
 
-open import elementary-number-theory.integers
+<details><summary>Imports</summary>
 
+```agda
 open import foundation.equality-coproduct-types
 open import foundation.sets
 open import foundation.universe-levels
-
+open import elementary-number-theory.integers
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

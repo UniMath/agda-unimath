@@ -1,22 +1,26 @@
-#  Type arithmetic with the empty type
+# Type arithmetic with the empty type
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-arithmetic-empty-type where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

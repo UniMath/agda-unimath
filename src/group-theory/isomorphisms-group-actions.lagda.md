@@ -1,23 +1,25 @@
-#  Isomorphisms of group actions
+# Isomorphisms of group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-group-actions where
+```
 
-open import category-theory.isomorphisms-large-precategories
+<details><summary>Imports</summary>
 
-open import foundation.commuting-squares-of-maps
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.universe-levels
-
+```agda
 open import group-theory.equivalences-group-actions
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.precategory-of-group-actions
+open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
+open import category-theory.isomorphisms-large-precategories
 ```
+
 </details>
 
 ## Definition

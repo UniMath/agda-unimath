@@ -1,14 +1,17 @@
-#  Alkanes
+# Alkanes
 
-<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.alkanes where
-
-open import foundation.universe-levels
-
-open import organic-chemistry.saturated-carbons
-open import organic-chemistry.hydrocarbons
 ```
+
+<details><summary>Imports</summary>
+
+```agda
+open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
+open import foundation.universe-levels
+```
+
 </details>
 
 ## Idea

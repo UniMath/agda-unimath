@@ -1,15 +1,18 @@
-#  Submultisets
+# Submultisets
 
-<details><summary>Imports</summary>
 ```agda
 module trees.submultisets where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import trees.multisets
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.universe-levels
-
-open import trees.multisets
 ```
+
 </details>
 
 ## Idea

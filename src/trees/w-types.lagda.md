@@ -1,9 +1,13 @@
-#  W-types
+# W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.w-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import foundation-core.truncation-levels
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -20,9 +24,8 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-
-open import foundation-core.truncation-levels
 ```
+
 </details>
 
 ## Idea

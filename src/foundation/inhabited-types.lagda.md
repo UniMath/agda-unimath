@@ -1,9 +1,12 @@
-#  Inhabited types
+# Inhabited types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.inhabited-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -17,6 +20,7 @@ open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

@@ -1,11 +1,13 @@
-#  Decidable equivalence relations
+# Decidable equivalence relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.decidable-equivalence-relations where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.equivalence-relations
-
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -37,6 +39,7 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

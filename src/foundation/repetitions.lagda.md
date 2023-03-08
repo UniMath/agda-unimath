@@ -1,9 +1,12 @@
-#  Repetitions of values of maps
+# Repetitions of values of maps
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.repetitions where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -17,6 +20,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.truncated-maps
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

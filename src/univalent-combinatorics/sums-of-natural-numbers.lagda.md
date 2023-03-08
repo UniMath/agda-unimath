@@ -1,22 +1,24 @@
-#  Combinatorial identities of sums of natural numbers
+# Combinatorial identities of sums of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.sums-of-natural-numbers where
+```
 
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers public
+<details><summary>Imports</summary>
 
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universe-levels
-
+```agda
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.sums-of-natural-numbers public
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
+
 </details>
 
 ## Idea

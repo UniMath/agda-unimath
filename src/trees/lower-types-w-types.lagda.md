@@ -1,17 +1,20 @@
-#  Lower types of elements in W-types
+# Lower types of elements in W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.lower-types-w-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
+open import trees.ranks-of-elements-w-types
+open import trees.w-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import trees.ranks-of-elements-w-types
-open import trees.w-types
 ```
+
 </details>
 
 ## Idea

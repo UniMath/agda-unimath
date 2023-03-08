@@ -1,11 +1,13 @@
-#  Set quotients
+# Set quotients
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.set-quotients where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.equivalence-relations
-
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
@@ -28,6 +30,7 @@ open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Definitions
