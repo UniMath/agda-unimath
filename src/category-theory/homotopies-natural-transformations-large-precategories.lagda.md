@@ -90,4 +90,3 @@ A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `�
   associative-concat-htpy-natural-transformation-Large-Precat α β γ δ H K L X =
     assoc (H X) (K X) (L X)
 ```
-

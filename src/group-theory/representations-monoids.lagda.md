@@ -7,13 +7,13 @@ module group-theory.representations-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
+open import category-theory.categories
+open import category-theory.endomorphisms-of-objects-categories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import category-theory.categories
-open import category-theory.endomorphisms-of-objects-categories
+open import group-theory.homomorphisms-monoids
+open import group-theory.monoids
 ```
 
 </details>

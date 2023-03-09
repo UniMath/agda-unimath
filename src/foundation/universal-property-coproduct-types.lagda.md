@@ -93,4 +93,3 @@ module _
           ( Y))
         ( universal-property-coprod Y)
 ```
-

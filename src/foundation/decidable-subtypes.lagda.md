@@ -260,4 +260,3 @@ module _
     map-equiv (extensionality-decidable-subtype P) refl ＝ (λ x → pair id id)
   refl-extensionality-decidable-subtype = refl
 ```
-

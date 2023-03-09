@@ -7,10 +7,10 @@ module finite-group-theory.alternating-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import finite-group-theory.cartier-delooping-sign-homomorphism
 open import finite-group-theory.finite-type-groups
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import group-theory.concrete-groups
 open import group-theory.kernels-homomorphisms-concrete-groups
 ```

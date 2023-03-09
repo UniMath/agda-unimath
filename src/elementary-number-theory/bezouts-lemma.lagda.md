@@ -1446,4 +1446,3 @@ div-right-factor-coprime-ℤ x y z H K = pair (add-ℤ (mul-ℤ s z) (mul-ℤ t 
     ＝ mul-ℤ one-ℤ z by ap (λ M → mul-ℤ M z) (bezout-eqn ∙ K)
     ＝ z by left-unit-law-mul-ℤ z
 ```
-

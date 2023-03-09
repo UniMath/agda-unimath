@@ -179,4 +179,3 @@ abstract
     {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
   is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
 ```
-

@@ -7,10 +7,10 @@ module elementary-number-theory.decidable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-dependent-pair-types public
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
-open import foundation.decidable-dependent-pair-types public
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

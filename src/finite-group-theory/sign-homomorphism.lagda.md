@@ -7,6 +7,8 @@ module finite-group-theory.sign-homomorphism where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations
 open import finite-group-theory.transpositions
 open import foundation.automorphisms
@@ -21,8 +23,6 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.symmetric-groups

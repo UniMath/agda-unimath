@@ -65,7 +65,7 @@ module _
   modal-rec = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
 
   modal-comp : modal-ind → UU (lsuc l1 ⊔ l2)
-  modal-comp ind-○ = 
+  modal-comp ind-○ =
     (X : UU l1) (P : ○ X → UU l1) →
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
@@ -84,7 +84,6 @@ We say that the identity types of a locally small type are modal if their
 small equivalent is modal.
 We say that a modality is closed under identity type formation if for every
 modal type, their identity types are also modal.
-
 
 ```agda
 module _

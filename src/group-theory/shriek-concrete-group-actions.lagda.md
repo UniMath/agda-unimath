@@ -7,17 +7,17 @@ module group-theory.shriek-concrete-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-group-actions
-open import group-theory.homomorphisms-concrete-groups
-open import group-theory.substitution-functor-concrete-group-actions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.universe-levels
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-group-actions
+open import group-theory.homomorphisms-concrete-groups
+open import group-theory.substitution-functor-concrete-group-actions
 ```
 
 </details>

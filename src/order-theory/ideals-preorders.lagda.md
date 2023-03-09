@@ -7,12 +7,12 @@ module order-theory.ideals-preorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.lower-types-preorders
-open import order-theory.preorders
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.universe-levels
+open import order-theory.lower-types-preorders
+open import order-theory.preorders
 ```
 
 </details>

@@ -67,4 +67,3 @@ module _
     is-local-Commutative-Ring commutative-ring-Local-Commutative-Ring
   is-local-commutative-ring-Local-Commutative-Ring = pr2 R
 ```
-

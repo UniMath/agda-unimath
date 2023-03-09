@@ -238,4 +238,3 @@ universal-property-localization-subset-Ring :
 universal-property-localization-subset-Ring l R S P f H =
   (T : Ring l) →
   is-equiv (precomp-universal-property-localization-subset-Ring R S T P f H)
-

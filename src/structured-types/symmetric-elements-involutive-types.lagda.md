@@ -7,8 +7,8 @@ module structured-types.symmetric-elements-involutive-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.involutive-types
 open import foundation.universe-levels
+open import structured-types.involutive-types
 open import univalent-combinatorics.2-element-types
 ```
 

@@ -14,9 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import group-theory.congruence-relations-monoids
-
 open import ring-theory.semirings
 ```
 
@@ -34,7 +32,7 @@ the multiplicative monoid of `R`.
 module _
   {l1 : Level} (R : Semiring l1)
   where
-  
+
   is-congruence-Semiring :
     {l2 : Level}
     (S : congruence-Monoid l2 (additive-monoid-Semiring R)) → UU (l1 ⊔ l2)

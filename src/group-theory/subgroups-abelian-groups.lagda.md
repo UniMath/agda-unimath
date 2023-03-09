@@ -16,7 +16,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-groups
@@ -25,7 +24,6 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.semigroups
 open import group-theory.subgroups
-
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
@@ -349,7 +347,7 @@ refl-contains-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A) →
   contains-Subgroup-Ab A B B
 refl-contains-Subgroup-Ab A = refl-contains-Subgroup (group-Ab A)
-  
+
 transitive-contains-Subgroup-Ab :
   {l1 l2 l3 l4 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   (C : Subgroup-Ab l3 A) (D : Subgroup-Ab l4 A) →
@@ -392,7 +390,7 @@ Subgroup-Ab-Poset l2 A = Subgroup-Poset l2 (group-Ab A)
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
-  
+
   is-normal-Subgroup-Ab : is-normal-Subgroup (group-Ab A) B
   is-normal-Subgroup-Ab x y =
     is-closed-under-eq-Subgroup-Ab' A B
@@ -476,7 +474,7 @@ module _
     left-eq-rel-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
-      
+
   left-sim-congruence-Subgroup-Ab :
     type-Ab A → type-Ab A → UU l2
   left-sim-congruence-Subgroup-Ab =
@@ -617,7 +615,7 @@ module _
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
-  
+
   has-same-elements-subgroup-congruence-Ab :
     has-same-elements-Subgroup-Ab A
       ( subgroup-congruence-Ab A
@@ -643,7 +641,7 @@ module _
 module _
   {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A)
   where
-  
+
   relate-same-elements-congruence-subgroup-congruence-Ab :
     relate-same-elements-congruence-Ab A
       ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
@@ -668,7 +666,7 @@ module _
 module _
   {l1 l2 : Level} (A : Ab l1)
   where
-  
+
   is-equiv-congruence-Subgroup-Ab :
     is-equiv (congruence-Subgroup-Ab {l1} {l2} A)
   is-equiv-congruence-Subgroup-Ab =

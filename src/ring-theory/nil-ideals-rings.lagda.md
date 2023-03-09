@@ -7,11 +7,11 @@ module ring-theory.nil-ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.propositions
+open import foundation.universe-levels
 open import ring-theory.ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.rings
-open import foundation.propositions
-open import foundation.universe-levels
 ```
 
 </details>
@@ -87,4 +87,3 @@ module _
   is-prop-is-nil-two-sided-ideal-Ring =
     is-prop-type-Prop is-nil-two-sided-ideal-ring-Prop
 ```
-

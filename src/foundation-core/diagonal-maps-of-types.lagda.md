@@ -95,4 +95,3 @@ module _
         ( issec-fib-diagonal-eq t)
         ( isretr-fib-diagonal-eq t)
 ```
-

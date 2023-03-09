@@ -7,13 +7,13 @@ module group-theory.commutators-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.group-solver
-open import group-theory.groups
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+open import group-theory.group-solver
+open import group-theory.groups
 ```
 
 </details>
