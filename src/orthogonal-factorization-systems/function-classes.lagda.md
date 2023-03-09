@@ -1,8 +1,12 @@
 # Function classes
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.function-classes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -12,6 +16,7 @@ open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

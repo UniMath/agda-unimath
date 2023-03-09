@@ -25,7 +25,7 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
                 if l.startswith('module') or l.startswith('{-# OPTIONS'):
                     print(
                         'Error: module decl./pragmas can not be in the details import block\n\
-                        Please put it in the first Agda block after the first header\n')
+                        Please put it in the first Agda block after the first header:\n\t' + str(fpath) )
                     sys.exit(1)
                 elif 'open import' in l:
                     if l.endswith('public'):
