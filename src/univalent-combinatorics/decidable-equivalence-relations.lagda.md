@@ -13,6 +13,7 @@ open import foundation.decidable-types
 open import foundation.equivalence-relations
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import univalent-combinatorics.finite-types
 ```
 

@@ -8,14 +8,18 @@ module linear-algebra.vectors-on-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
+
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors

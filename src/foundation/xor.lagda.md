@@ -38,6 +38,7 @@ open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types

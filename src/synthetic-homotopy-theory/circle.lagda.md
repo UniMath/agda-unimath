@@ -26,9 +26,11 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
+
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
 ```

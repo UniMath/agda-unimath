@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import univalent-combinatorics.2-element-types
 ```
 

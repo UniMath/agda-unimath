@@ -9,12 +9,14 @@ module foundation.iterating-involutions where
 ```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

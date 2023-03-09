@@ -8,7 +8,9 @@ module linear-algebra.scalar-multiplication-matrices where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
+
 open import linear-algebra.matrices
 open import linear-algebra.scalar-multiplication-vectors
 ```

@@ -9,6 +9,7 @@ module group-theory.higher-group-actions where
 ```agda
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import group-theory.higher-groups
 ```
 

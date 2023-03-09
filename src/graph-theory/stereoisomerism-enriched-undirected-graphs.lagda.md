@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.universe-levels
+
 open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 ```

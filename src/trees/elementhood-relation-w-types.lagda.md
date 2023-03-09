@@ -12,6 +12,7 @@ open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import trees.w-types
 ```
 

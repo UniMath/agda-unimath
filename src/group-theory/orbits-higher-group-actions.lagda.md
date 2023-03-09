@@ -9,6 +9,7 @@ module group-theory.orbits-higher-group-actions where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```

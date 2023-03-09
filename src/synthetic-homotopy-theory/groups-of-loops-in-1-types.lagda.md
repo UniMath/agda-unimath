@@ -12,9 +12,12 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.semigroups
+
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.loop-spaces
 ```
 

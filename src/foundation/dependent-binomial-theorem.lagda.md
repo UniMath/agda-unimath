@@ -23,6 +23,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
+
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

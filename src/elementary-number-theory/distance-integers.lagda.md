@@ -12,6 +12,7 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.equational-reasoning
 open import foundation.identity-types

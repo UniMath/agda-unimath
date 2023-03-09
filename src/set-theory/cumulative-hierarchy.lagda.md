@@ -7,7 +7,6 @@ module set-theory.cumulative-hierarchy where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -17,6 +16,9 @@ open import foundation.sets
 open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
+
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
 

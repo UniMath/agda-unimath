@@ -18,6 +18,7 @@ open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
+
 open import structured-types.pointed-types
 ```
 

@@ -9,6 +9,7 @@ module elementary-number-theory.nonzero-natural-numbers where
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

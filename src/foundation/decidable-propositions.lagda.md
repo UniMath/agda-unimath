@@ -8,6 +8,7 @@ module foundation.decidable-propositions where
 
 ```agda
 open import foundation-core.decidable-propositions public
+
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -35,6 +36,7 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```

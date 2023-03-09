@@ -7,6 +7,12 @@ module orthogonal-factorization-systems.local-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.equivalences
+open import foundation.type-arithmetic-dependent-function-types
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universal-property-empty-type
+
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -19,11 +25,6 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
-open import foundation.equivalences
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.type-arithmetic-unit-type
-open import foundation.unit-type
-open import foundation.universal-property-empty-type
 ```
 
 </details>

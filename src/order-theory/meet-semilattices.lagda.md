@@ -13,7 +13,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.semigroups
+
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.posets
 ```

@@ -24,9 +24,11 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.loop-spaces

@@ -10,6 +10,7 @@ module elementary-number-theory.addition-integers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.coproduct-types
@@ -23,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 

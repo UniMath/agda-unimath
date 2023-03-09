@@ -7,6 +7,9 @@ module foundation-core.functoriality-dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-extensionality
+open import foundation.type-theoretic-principle-of-choice
+
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
@@ -20,8 +23,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.path-split-maps
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
-open import foundation.type-theoretic-principle-of-choice
 ```
 
 </details>

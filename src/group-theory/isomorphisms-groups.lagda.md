@@ -8,6 +8,7 @@ module group-theory.isomorphisms-groups where
 
 ```agda
 open import category-theory.isomorphisms-large-precategories
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import group-theory.category-of-semigroups
 open import group-theory.equivalences-semigroups
 open import group-theory.groups

@@ -13,8 +13,10 @@ module finite-group-theory.permutations where
 ```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
+
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.transpositions
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -36,8 +38,10 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
+
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting

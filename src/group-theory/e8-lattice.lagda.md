@@ -8,9 +8,11 @@ module group-theory.e8-lattice where
 
 ```agda
 open import elementary-number-theory.integers
+
 open import foundation.equality-coproduct-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

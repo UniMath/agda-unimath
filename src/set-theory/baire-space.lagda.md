@@ -8,6 +8,7 @@ module set-theory.baire-space where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
 ```
 

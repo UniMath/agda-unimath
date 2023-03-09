@@ -8,11 +8,14 @@ module linear-algebra.multiplication-matrices where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
+
 open import linear-algebra.constant-vectors
 open import linear-algebra.matrices-on-rings
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
+
 open import ring-theory.rings
 ```
 

@@ -8,6 +8,7 @@ module foundation.retractions where
 
 ```agda
 open import foundation-core.retractions public
+
 open import foundation.coslice
 open import foundation.dependent-pair-types
 open import foundation.equivalences

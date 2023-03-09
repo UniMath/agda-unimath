@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-groups
@@ -24,6 +25,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.semigroups
 open import group-theory.subgroups
+
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets

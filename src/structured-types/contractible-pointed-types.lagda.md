@@ -10,6 +10,7 @@ module structured-types.contractible-pointed-types where
 open import foundation.contractible-types
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import structured-types.pointed-types
 ```
 

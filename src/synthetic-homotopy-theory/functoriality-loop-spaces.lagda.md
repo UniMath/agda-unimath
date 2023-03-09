@@ -13,9 +13,11 @@ open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import structured-types.faithful-pointed-maps
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.loop-spaces
 ```
 

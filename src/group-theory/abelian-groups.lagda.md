@@ -20,6 +20,7 @@ open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.commutative-monoids
 open import group-theory.commutative-monoids
 open import group-theory.conjugation
@@ -29,6 +30,7 @@ open import group-theory.monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 open import group-theory.semigroups
+
 open import univalent-combinatorics.lists
 ```
 

@@ -8,9 +8,11 @@ module univalent-combinatorics.finite-connected-components where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.universe-levels
+
 open import univalent-combinatorics.finite-types
 ```
 

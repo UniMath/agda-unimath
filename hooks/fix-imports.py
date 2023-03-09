@@ -11,7 +11,10 @@ status = 0
 def sort_and_split_namespaces(imports):
     namespaces = defaultdict(list)
     for __import in imports:
-        namespaces[__import.rindex(".")].append(__import)
+        try:
+            namespaces[__import[:__import.rindex(".")]].append(__import)
+        except ValueError:
+            namespaces[""].append(__import)
     return "\n\n".join("\n".join(sorted(namespace_imports)) for k, namespace_imports in sorted(namespaces.items()))
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
@@ -46,10 +49,9 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
 
                 print(
                     'Warning: Please review the imports block, it contains non-imports statements:\n\t' + str(fpath))
-            imports = '\n'.join(
-                    filter(lambda ls: len(ls) > 0,
-                           [
-                        sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(ls))]))
+            imports = '\n\n'.join(
+                filter(lambda ls: len(ls) > 0,
+                    [sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(otherStuff))]))
 
             importBlock = '<details><summary>Imports</summary>\n' + \
                 '\n```agda\n' +\

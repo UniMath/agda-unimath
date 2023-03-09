@@ -8,14 +8,16 @@ module foundation.involutions where
 
 ```agda
 open import foundation-core.involutions public
+
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+
 open import foundation-core.automorphisms
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.universe-levels
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
 ```
 
 </details>

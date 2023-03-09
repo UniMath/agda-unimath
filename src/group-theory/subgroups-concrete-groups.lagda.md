@@ -19,14 +19,17 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.transitive-concrete-group-actions
+
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 ```

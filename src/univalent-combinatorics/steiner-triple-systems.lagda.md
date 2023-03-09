@@ -8,7 +8,9 @@ module univalent-combinatorics.steiner-triple-systems where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
+
 open import univalent-combinatorics.steiner-systems
 ```
 

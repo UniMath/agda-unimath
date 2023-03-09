@@ -12,6 +12,7 @@ open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.unit-type

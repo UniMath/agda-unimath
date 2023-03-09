@@ -10,6 +10,7 @@ module graph-theory.mere-equivalences-undirected-graphs where
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.undirected-graphs
 ```

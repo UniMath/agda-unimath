@@ -8,6 +8,7 @@ module foundation.connected-maps where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types

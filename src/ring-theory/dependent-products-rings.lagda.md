@@ -13,9 +13,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
+
 open import ring-theory.rings
 ```
 

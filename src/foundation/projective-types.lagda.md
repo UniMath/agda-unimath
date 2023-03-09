@@ -8,6 +8,7 @@ module foundation.projective-types where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.connected-maps
 open import foundation.functions
 open import foundation.sets
