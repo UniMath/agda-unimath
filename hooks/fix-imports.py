@@ -2,10 +2,17 @@
 # Run this script:
 # $ python3 hooks/fix-imports.py fileName.lagda.md
 
+from collections import defaultdict
 import sys
 import utils
 
 status = 0
+
+def sort_and_split_namespaces(imports):
+    namespaces = defaultdict(list)
+    for __import in imports:
+        namespaces[__import.rindex(".")].append(__import)
+    return "\n\n".join("\n".join(sorted(namespace_imports)) for k, namespace_imports in sorted(namespaces.items()))
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
     with open(fpath, 'r', encoding='UTF-8') as file:
@@ -38,12 +45,11 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
             if len(otherStuff) > 0:
 
                 print(
-                    'Warning: Please review the imports block, it contains non-imports statements:\n\t' + str(fpath) )
+                    'Warning: Please review the imports block, it contains non-imports statements:\n\t' + str(fpath))
             imports = '\n'.join(
-                map(lambda ls: '\n'.join(sorted(ls)),
                     filter(lambda ls: len(ls) > 0,
                            [
-                        publicImports, nonPublicImports, otherStuff])))
+                        sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(ls))]))
 
             importBlock = '<details><summary>Imports</summary>\n' + \
                 '\n```agda\n' +\
@@ -56,8 +62,9 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
             with open(fpath, 'w') as file:
                 file.write(newContent)
         else:
-            agdaBlockStart = utils.find_index(contents,'```agda')
+            agdaBlockStart = utils.find_index(contents, '```agda')
             if len(agdaBlockStart) > 1:
-                print('Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
+                print(
+                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
                 status = 1
 sys.exit(status)
