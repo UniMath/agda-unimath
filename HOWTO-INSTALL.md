@@ -38,7 +38,7 @@ which is a modified version of the usual agda2-mode setup provided by Agda,
 except it checks if Agda is available, so that it doesn't cause errors
 when opening Emacs outside the project.
 
-### Setting up macs for literate Agda files
+### Setting up emacs for literate Agda files
 
 The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. For your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
 
