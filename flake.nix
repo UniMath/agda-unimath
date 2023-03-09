@@ -29,6 +29,7 @@
               # working on the website
               pkgs.mdbook
 	      pkgs.mdbook-katex
+	      # mdbook-toc is not included here and hence must be installed manually
             ];
           };
 
