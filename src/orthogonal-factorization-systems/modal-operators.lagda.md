@@ -147,18 +147,21 @@ modal-operator-locally-small-modal-operator = pr1
 
 is-locally-small-locally-small-modal-operator :
   {l1 l2 l3 : Level} (○ : locally-small-modal-operator l1 l2 l3) →
-  is-locally-small-modal-operator (modal-operator-locally-small-modal-operator ○)
+  is-locally-small-modal-operator
+    ( modal-operator-locally-small-modal-operator ○)
 is-locally-small-locally-small-modal-operator = pr2
 ```
 
 ### Σ-closed modal operators
 
-We say a modal operator `○` is Σ-closed if for every type `X` such that for
+We can say a modal operator `○` is Σ-closed if for every type `X` such that for
 every term of `○ X` and for every family `P` over `X` equipped with a section
-of `○ ∘ P`, there is also a term of `○ (Σ X P)`.
+of `○ ∘ P`, there is also a term of `○ (Σ X P)`. Note that this is not
+completely conventional terminology.
 
 ```agda
-is-Σ-closed-modal-operator : {l1 l2 : Level} (○ : modal-operator l1 l2) → UU (lsuc l1 ⊔ l2)
+is-Σ-closed-modal-operator :
+  {l1 l2 : Level} → modal-operator l1 l2 → UU (lsuc l1 ⊔ l2)
 is-Σ-closed-modal-operator {l1} ○ =
   (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
 ```
