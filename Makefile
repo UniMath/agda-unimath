@@ -84,3 +84,8 @@ graph:
 clean:
 	rm -Rf _build/
 	find docs -name '*.html' -and -name '*.md' -delete -print0
+
+.PHONY : pre-commit
+pre-commit:
+	@make check
+	@pre-commit run --all-files

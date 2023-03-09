@@ -38,7 +38,7 @@ which is a modified version of the usual agda2-mode setup provided by Agda,
 except it checks if Agda is available, so that it doesn't cause errors
 when opening Emacs outside the project.
 
-### Setting up emacs for literate Agda files
+### Setting up macs for literate Agda files
 
 The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. For your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
 
@@ -100,3 +100,21 @@ Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaV
 ### After the setup
 
 With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the main folder of the repository. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
+
+## Pre-commit hooks
+
+The `agda-unimath` library comes with pre-commit hooks that checks
+that files follow some basic formatting rules. To use these hooks,
+you need to install the `pre-commit` tool. The easiest way to do
+this is to use the Python package manager `pip`:
+
+```shell
+python3 -pip install pre-commit
+```
+
+Once you have installed `pre-commit`, next time before you open a new PR, please stage
+all your changes and run the following command:
+
+```shell
+make pre-commit
+```
