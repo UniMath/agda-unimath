@@ -4,7 +4,6 @@
 module orthogonal-factorization-systems.modal-operators where
 ```
 
-
 <details><summary>Imports</summary>
 
 ```agda
@@ -13,8 +12,8 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.locally-small-types
 open import foundation.propositions
-open import foundation.subuniverses
 open import foundation.small-types
+open import foundation.subuniverses
 open import foundation.universe-levels
 ```
 

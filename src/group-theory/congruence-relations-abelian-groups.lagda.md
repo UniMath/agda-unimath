@@ -15,7 +15,6 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import group-theory.abelian-groups
 open import group-theory.congruence-relations-groups
 ```

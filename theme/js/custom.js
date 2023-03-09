@@ -4,7 +4,7 @@ if (link) {
   var filename = link.getAttribute('href');
   const fileList =
     [
-      'CITATION.md',
+      'CITATION.cff',
       'CODINGSTYLE.md',
       'CONTRIBUTORS.md',
       'CONVENTIONS.md',

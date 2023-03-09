@@ -11,6 +11,7 @@ module finite-group-theory.groups-of-order-2 where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.groups-of-modular-arithmetic
 open import finite-group-theory.finite-groups
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -22,7 +23,6 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-open import elementary-number-theory.groups-of-modular-arithmetic
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups

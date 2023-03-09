@@ -7,14 +7,14 @@ module commutative-algebra.commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import ring-theory.rings
 ```
 

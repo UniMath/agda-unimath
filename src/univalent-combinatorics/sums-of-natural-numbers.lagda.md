@@ -7,16 +7,16 @@ module univalent-combinatorics.sums-of-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.standard-finite-types
 open import elementary-number-theory.sums-of-natural-numbers public
+open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

@@ -7,8 +7,6 @@ module graph-theory.enriched-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
 open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,6 +14,8 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```

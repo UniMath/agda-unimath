@@ -7,9 +7,7 @@ module univalent-combinatorics.complements-isolated-points where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-maybe
@@ -21,7 +19,9 @@ open import foundation.maybe
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

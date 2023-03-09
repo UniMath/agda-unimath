@@ -7,10 +7,10 @@ module foundation.multivariable-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import foundation.multivariable-correspondences
 open import foundation.subtypes
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
 

@@ -7,11 +7,11 @@ module set-theory.uncountable-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import set-theory.countable-sets
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import set-theory.countable-sets
 ```
 
 </details>

@@ -7,17 +7,17 @@ module univalent-combinatorics.orientations-cubes where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.iterating-functions
+open import foundation.universe-levels
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.iterating-functions
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>

@@ -7,13 +7,13 @@ module foundation.limited-principle-of-omniscience where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import univalent-combinatorics.standard-finite-types
 ```
 

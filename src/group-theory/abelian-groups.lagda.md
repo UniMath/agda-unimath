@@ -7,10 +7,6 @@ module group-theory.abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
@@ -24,13 +20,15 @@ open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-
+open import group-theory.commutative-monoids
 open import group-theory.commutative-monoids
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.groups
+open import group-theory.monoids
 open import group-theory.monoids
 open import group-theory.semigroups
-
+open import group-theory.semigroups
 open import univalent-combinatorics.lists
 ```
 
@@ -374,7 +372,7 @@ module _
   is-equiv-neg-Ab = is-equiv-inv-Group (group-Ab A)
 
   equiv-equiv-neg-Ab : type-Ab A ≃ type-Ab A
-  equiv-equiv-neg-Ab = equiv-equiv-inv-Group (group-Ab A)  
+  equiv-equiv-neg-Ab = equiv-equiv-inv-Group (group-Ab A)
 ```
 
 ### Two elements `x` and `y` are equal iff `-x + y = 0`

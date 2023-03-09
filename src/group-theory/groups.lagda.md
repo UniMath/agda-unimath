@@ -7,8 +7,6 @@ module group-theory.groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.monoids
-open import group-theory.semigroups
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -26,6 +24,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+open import group-theory.monoids
+open import group-theory.semigroups
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import univalent-combinatorics.lists
@@ -175,7 +175,7 @@ module _
 module _
   {l : Level} (G : Group l)
   where
-  
+
   left-div-Group : type-Group G → type-Group G → type-Group G
   left-div-Group x y = mul-Group G (inv-Group G x) y
 
@@ -199,7 +199,7 @@ module _
       ( left-div-Group x)
       ( issec-mul-inv-Group x)
       ( isretr-mul-inv-Group x)
-  
+
   equiv-mul-Group : (x : type-Group G) → type-Group G ≃ type-Group G
   pr1 (equiv-mul-Group x) = mul-Group G x
   pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
@@ -224,14 +224,14 @@ module _
     ( associative-mul-Group G _ _ _) ∙
     ( ( ap (mul-Group G y) (right-inverse-law-mul-Group G x)) ∙
       ( right-unit-law-mul-Group G y))
-  
+
   is-equiv-mul-Group' : (x : type-Group G) → is-equiv (mul-Group' G x)
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
       ( λ y → right-div-Group y x)
       ( issec-mul-inv-Group' x)
       ( isretr-mul-inv-Group' x)
-  
+
   equiv-mul-Group' : (x : type-Group G) → type-Group G ≃ type-Group G
   pr1 (equiv-mul-Group' x) = mul-Group' G x
   pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x

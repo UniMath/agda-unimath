@@ -7,7 +7,9 @@ module synthetic-homotopy-theory.infinite-cyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import synthetic-homotopy-theory.loop-spaces
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import foundation-core.function-extensionality
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -23,9 +25,6 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
@@ -33,6 +32,7 @@ open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
+open import synthetic-homotopy-theory.loop-spaces
 open import univalent-combinatorics.cyclic-types
 ```
 

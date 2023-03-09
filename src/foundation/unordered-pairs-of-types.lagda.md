@@ -109,4 +109,3 @@ module _
   pr2 (extensionality-unordered-pair-types B) =
     is-equiv-equiv-eq-unordered-pair-types B
 ```
-

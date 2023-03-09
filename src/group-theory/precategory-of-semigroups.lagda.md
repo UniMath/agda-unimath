@@ -7,10 +7,10 @@ module group-theory.precategory-of-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.large-precategories
+open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
-open import foundation.universe-levels
-open import category-theory.large-precategories
 ```
 
 </details>

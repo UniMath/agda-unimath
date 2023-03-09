@@ -7,7 +7,7 @@ module univalent-combinatorics.universal-property-standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -18,7 +18,7 @@ open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

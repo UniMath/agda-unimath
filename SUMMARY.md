@@ -11,7 +11,7 @@
     - [Projects using Agda-Unimath](USERS.md)
   - [How-to](HOWTO-INSTALL.md)
     - [Install](HOWTO-INSTALL.md)
-    - [Cite the library](CITATION.md)
+    - [Cite the library](CITATION.cff)
   - [Guidelines](CODINGSTYLE.md)
     - [Structure your file](CONVENTIONS.md)
     - [Library coding style](CODINGSTYLE.md)

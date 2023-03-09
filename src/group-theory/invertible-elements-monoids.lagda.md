@@ -7,7 +7,6 @@ module group-theory.invertible-elements-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.monoids
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,6 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+open import group-theory.monoids
 ```
 
 </details>

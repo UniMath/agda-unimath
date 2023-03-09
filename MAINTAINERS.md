@@ -14,5 +14,4 @@ Elisabeth is a PhD student at the University of Bergen. Her research is on homot
 
 ### [Jonathan Prieto-Cubides](https://jonaprieto.github.io)
 
-Jonathan is a researcher and a compiler engineer at Heliax designing and implementing the functional programming language Juvix. His research is on graph theory from a univalent point of view.
-
+Jonathan is a researcher and a compiler engineer at Heliax designing and implementing the functional programming language Juvix. His PhD research is on graph theory from a univalent point of view.

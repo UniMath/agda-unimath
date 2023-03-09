@@ -7,11 +7,11 @@ module group-theory.unordered-tuples-of-elements-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.commutative-monoids
+open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-tuples
-open import elementary-number-theory.natural-numbers
+open import group-theory.commutative-monoids
 ```
 
 </details>

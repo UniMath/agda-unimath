@@ -7,7 +7,8 @@ module graph-theory.walks-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.undirected-graphs
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -24,8 +25,7 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
+open import graph-theory.undirected-graphs
 open import univalent-combinatorics.standard-finite-types
 ```
 

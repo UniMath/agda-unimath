@@ -8,11 +8,11 @@ module type-theories.sections-dependent-type-theories where
 <details><summary>Imports</summary>
 
 ```agda
-open import type-theories.dependent-type-theories
-open import type-theories.fibered-dependent-type-theories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import type-theories.dependent-type-theories
+open import type-theories.fibered-dependent-type-theories
 open dependent
 open fibered
 ```

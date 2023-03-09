@@ -54,4 +54,3 @@ module _
   is-prop-is-invertible-element-Commutative-Ring =
     is-prop-is-invertible-element-Ring (ring-Commutative-Ring R)
 ```
-
