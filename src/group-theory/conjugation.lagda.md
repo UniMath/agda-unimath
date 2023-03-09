@@ -112,7 +112,7 @@ module _
   right-conjugation-law-mul-Group :
     (x y : type-Group G) →
     mul-Group G (inv-Group G x) (conjugation-Group G x y) ＝
-    mul-Group G y (inv-Group G x)
+    right-div-Group G y x
   right-conjugation-law-mul-Group x y =
     inv
       ( transpose-eq-mul-Group' G
@@ -141,7 +141,7 @@ module _
   left-conjugation-law-mul-Group' :
     (x y : type-Group G) →
     mul-Group G (conjugation-Group' G x y) (inv-Group G x) ＝
-    mul-Group G (inv-Group G x) y
+    left-div-Group G x y
   left-conjugation-law-mul-Group' x y =
     isretr-mul-inv-Group' G x (mul-Group G (inv-Group G x) y)
 

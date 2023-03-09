@@ -7,12 +7,13 @@ module group-theory.embeddings-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.subgroups
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.subgroups
 ```
 
 </details>
@@ -51,17 +52,13 @@ module _
 ```agda
 emb-Group-Slice :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-emb-Group-Slice l G =
-  Σ ( Group l) (λ H → emb-Group H G)
+emb-Group-Slice l G = Σ ( Group l) (λ H → emb-Group H G)
 
 emb-group-slice-Subgroup :
   { l1 l2 : Level} (G : Group l1) →
   Subgroup l2 G → emb-Group-Slice (l1 ⊔ l2) G
-emb-group-slice-Subgroup G P =
-  pair
-    ( group-Subgroup G P)
-    ( pair
-      ( inclusion-group-Subgroup G P)
-      ( is-emb-inclusion-group-Subgroup G P))
+pr1 (emb-group-slice-Subgroup G P) = group-Subgroup G P
+pr1 (pr2 (emb-group-slice-Subgroup G P)) = inclusion-group-Subgroup G P
+pr2 (pr2 (emb-group-slice-Subgroup G P)) =
+  is-emb-inclusion-group-Subgroup G P
 ```
-
