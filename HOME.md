@@ -27,7 +27,7 @@ Great, you want to contribute something! The best way to start is to find us in 
 
 Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
-{{#include CITATION.md}}
+{{#include CITATION.cff}}
 
 {{#include SUMMARY.md}}
 
