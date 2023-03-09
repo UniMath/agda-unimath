@@ -40,8 +40,8 @@ is-orthogonal-factorization-system :
   (R : function-class l l lR)
   → UU (lsuc l ⊔ lL ⊔ lR)
 is-orthogonal-factorization-system {l} L R =
-  ( is-function-precat L) ×
-  ( ( is-function-precat R) ×
+  ( is-wide-function-precat L) ×
+  ( ( is-wide-function-precat R) ×
     ( (A B : UU l) → unique-function-class-factorization-operation L R A B))
 
 orthogonal-factorization-system :
@@ -68,9 +68,9 @@ module _
     is-prop (is-orthogonal-factorization-system L R)
   is-prop-is-orthogonal-factorization-system =
     is-prop-prod
-      ( is-prop-is-function-precat L)
+      ( is-prop-is-wide-function-precat L)
       ( is-prop-prod
-        ( is-prop-is-function-precat R)
+        ( is-prop-is-wide-function-precat R)
         ( is-prop-Π
             λ A → is-prop-Π
               λ B → is-prop-unique-function-class-factorization-operation L R))

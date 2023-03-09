@@ -70,16 +70,17 @@ composition-closed-function-class l1 l2 =
 ```
 
 A function class that has identities and is composition closed
-is morally a ∞-subprecategory of the ∞-precategory of small types.
+is morally a wide subpre-∞-category of the pre-∞-category of small types.
 
 ```agda
-is-function-precat :
+is-wide-function-precat :
   {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-is-function-precat c =
+is-wide-function-precat c =
   has-identity-maps-function-class c × is-composition-closed-function-class c
 
-function-precat : {l1 l2 : Level} → UU (lsuc l1 ⊔ lsuc l2)
-function-precat {l1} {l2} = Σ (function-class l1 l1 l2) (is-function-precat)
+wide-function-precat : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+wide-function-precat l1 l2 =
+  Σ (function-class l1 l1 l2) (is-wide-function-precat)
 ```
 
 ## Properties
@@ -136,14 +137,14 @@ pr2 (is-composition-closed-function-class-Prop c) =
 ```
 
 ```agda
-is-function-precat-Prop :
+is-wide-function-precat-Prop :
   {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
-is-function-precat-Prop c =
+is-wide-function-precat-Prop c =
   prod-Prop
     ( has-identity-maps-function-class-Prop c)
     ( is-composition-closed-function-class-Prop c)
 
-is-prop-is-function-precat :
-  {l1 l2 : Level} (c : function-class l1 l1 l2) → is-prop (is-function-precat c)
-is-prop-is-function-precat = is-prop-type-Prop ∘ is-function-precat-Prop
+is-prop-is-wide-function-precat :
+  {l1 l2 : Level} (c : function-class l1 l1 l2) → is-prop (is-wide-function-precat c)
+is-prop-is-wide-function-precat = is-prop-type-Prop ∘ is-wide-function-precat-Prop
 ```
