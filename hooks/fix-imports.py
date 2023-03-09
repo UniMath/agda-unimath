@@ -9,23 +9,27 @@ import utils
 status = 0
 
 def sort_and_split_namespaces(imports):
+    # Subdivide imports into namespaces
     namespaces = defaultdict(set)
     for __import in imports:
         try:
-            namespaces[__import[:__import.rindex(".")]].add(__import)
+            namespaces[__import[:__import.index(".")]].add(__import)
         except ValueError:
             namespaces[__import].add(__import)
 
+    # If the entire namespace is imported, no further imports from that namespace are needed
     for k in namespaces.keys():
-        if k in namespaces[k]: # The entire namespace is imported. Remove all other imports
+        if k in namespaces[k]:
             namespaces[k] = {k}
 
     for __import in namespaces["open import foundation"]:
         namespaces["open import foundation-core"].discard("open import foundation-core" + __import[__import.index("."):])
 
+    # Remove any namespaces that ended up being empty
     namespaces = dict(filter(lambda kv: len(kv[1])>0, namespaces.items()))
 
-    return "\n\n".join("\n".join(sorted(namespace_imports)) for k, namespace_imports in sorted(namespaces.items()))
+    # Join together with the appropriate line separations
+    return "\n\n".join("\n".join(sorted(namespace_imports)) for namespace, namespace_imports in sorted(namespaces.items()))
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
     with open(fpath, 'r', encoding='UTF-8') as file:
@@ -34,7 +38,9 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
         end = contents.find('</details>')
         if start != -1 and end != -1:
             block = contents[start:end]
-            newBlock = filter(lambda l: l.strip() != '', block.split('\n'))
+            newBlock = filter(lambda l: l != '', map(str.__strip__, block.split('\n')))
+
+            # Don't want repeat import statements
             publicImports = set()
             nonPublicImports = set()
             otherStuff = []
