@@ -4,7 +4,6 @@
 module orthogonal-factorization-systems.higher-modalities where
 ```
 
-
 <details><summary>Imports</summary>
 
 ```agda
@@ -284,11 +283,11 @@ module _
         ( λ x'' → unit-○ (map-inv-modal-unit x'') ＝ x'')
         ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-modal-unit)) x'')
 
-  is-modal-○ : is-modal unit-○ (○ X)
-  pr1 (pr1 is-modal-○) = map-inv-modal-unit
-  pr2 (pr1 is-modal-○) = issec-map-inv-modal-unit
-  pr1 (pr2 is-modal-○) = map-inv-modal-unit
-  pr2 (pr2 is-modal-○) = isretr-map-inv-modal-unit
+  is-modal-modal-operator-type : is-modal unit-○ (○ X)
+  pr1 (pr1 is-modal-modal-operator-type) = map-inv-modal-unit
+  pr2 (pr1 is-modal-modal-operator-type) = issec-map-inv-modal-unit
+  pr1 (pr2 is-modal-modal-operator-type) = map-inv-modal-unit
+  pr2 (pr2 is-modal-modal-operator-type) = isretr-map-inv-modal-unit
 ```
 
 ## Higher modalities are uniquely eliminating modalities
