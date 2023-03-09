@@ -1,8 +1,12 @@
-#  Alkynes
+# Alkynes
 
-<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.alkynes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -11,6 +15,7 @@ open import organic-chemistry.hydrocarbons
 open import organic-chemistry.saturated-carbons
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

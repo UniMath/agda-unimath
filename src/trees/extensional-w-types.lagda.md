@@ -1,8 +1,12 @@
-#  Extensional W-types
+# Extensional W-types
 
-<details><summary>Imports</summary>
 ```agda
 module trees.extensional-w-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -23,6 +27,7 @@ open import foundation.universe-levels
 open import trees.elementhood-relation-w-types
 open import trees.w-types
 ```
+
 </details>
 
 ## Idea

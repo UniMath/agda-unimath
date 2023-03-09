@@ -1,8 +1,12 @@
-#  Inverse semigroups
+# Inverse semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.inverse-semigroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -11,6 +15,7 @@ open import foundation.sets
 open import foundation.universe-levels
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

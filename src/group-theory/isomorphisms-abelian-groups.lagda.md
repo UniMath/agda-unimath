@@ -1,8 +1,12 @@
-#  Isomorphisms of abelian groups
+# Isomorphisms of abelian groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-abelian-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -19,6 +23,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 ```
+
 </details>
 
 ## Idea

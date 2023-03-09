@@ -1,8 +1,12 @@
-#  Finite multiplication in magmas
+# Finite multiplication in magmas
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.finite-multiplication-magmas where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.equivalences
@@ -13,6 +17,7 @@ open import structured-types.magmas
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

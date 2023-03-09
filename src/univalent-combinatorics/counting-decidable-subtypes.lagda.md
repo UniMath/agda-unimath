@@ -1,15 +1,19 @@
-#  Counting the elements of decidable subtypes
+# Counting the elements of decidable subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.counting-decidable-subtypes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.decidable-subtypes public
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
-open import foundation.decidable-subtypes public
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -32,6 +36,7 @@ open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Properties

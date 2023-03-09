@@ -1,8 +1,12 @@
-#  The universal property of lists with respect to wild monoids
+# The universal property of lists with respect to wild monoids
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.universal-property-lists-wild-monoids where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.unit-type
@@ -13,6 +17,7 @@ open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.wild-monoids
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

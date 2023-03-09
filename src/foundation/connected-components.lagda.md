@@ -1,8 +1,12 @@
-#  Connected components of types
+# Connected components of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.connected-components where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -15,6 +19,7 @@ open import foundation.universe-levels
 open import group-theory.higher-groups
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea
@@ -88,4 +93,3 @@ is-trunc-connected-component {l} {k} A a H =
   is-trunc-Σ H (λ x → is-trunc-is-prop k is-prop-type-trunc-Prop)
 
 ```
-

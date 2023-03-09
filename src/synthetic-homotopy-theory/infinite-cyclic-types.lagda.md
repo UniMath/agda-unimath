@@ -1,8 +1,12 @@
 # Infinite cyclic types
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.infinite-cyclic-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
@@ -31,6 +35,7 @@ open import structured-types.types-equipped-with-endomorphisms
 open import synthetic-homotopy-theory.loop-spaces
 open import univalent-combinatorics.cyclic-types
 ```
+
 </details>
 
 ```agda

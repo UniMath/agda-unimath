@@ -1,12 +1,17 @@
-#  Standard finite pruned trees
+# Standard finite pruned trees
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.standard-finite-pruned-trees where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

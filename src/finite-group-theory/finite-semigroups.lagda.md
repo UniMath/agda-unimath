@@ -1,8 +1,12 @@
-#  Finite semigroups
+# Finite semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.finite-semigroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -24,6 +28,7 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

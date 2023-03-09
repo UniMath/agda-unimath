@@ -1,8 +1,12 @@
-#  π-finite types
+# π-finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.pi-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
@@ -64,6 +68,7 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

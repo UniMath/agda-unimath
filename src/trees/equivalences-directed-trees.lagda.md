@@ -1,8 +1,12 @@
-#  Equivalences of directed trees
+# Equivalences of directed trees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.equivalences-directed-trees where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -15,6 +19,7 @@ open import graph-theory.equivalences-directed-graphs
 open import graph-theory.walks-directed-graphs
 open import trees.directed-trees
 ```
+
 </details>
 
 ## Definition

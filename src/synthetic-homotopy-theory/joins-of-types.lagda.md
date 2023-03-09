@@ -1,8 +1,12 @@
-#  Joins of types
+# Joins of types
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.joins-of-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -23,6 +27,7 @@ open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
+
 </details>
 
 ## Idea

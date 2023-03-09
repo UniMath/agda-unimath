@@ -1,12 +1,17 @@
-#  Tuples of types
+# Tuples of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.tuples-of-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

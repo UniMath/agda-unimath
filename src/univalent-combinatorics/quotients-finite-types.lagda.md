@@ -1,8 +1,12 @@
-#  Quotients of finite types
+# Quotients of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.quotients-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
@@ -14,6 +18,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 ```
+
 </details>
 
 ## Idea

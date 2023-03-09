@@ -1,8 +1,12 @@
 # Extensions of maps
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.extensions-of-maps where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -26,6 +30,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import orthogonal-factorization-systems.local-types
 ```
+
 </details>
 
 ## Idea

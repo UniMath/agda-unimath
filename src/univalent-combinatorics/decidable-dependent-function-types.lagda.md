@@ -1,8 +1,12 @@
-#  Decidable dependent function types
+# Decidable dependent function types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-dependent-function-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
@@ -20,6 +24,7 @@ open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

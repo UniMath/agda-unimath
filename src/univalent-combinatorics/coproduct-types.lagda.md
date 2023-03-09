@@ -1,8 +1,12 @@
-#  Coproducts of finite types
+# Coproducts of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.coproduct-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
@@ -24,6 +28,7 @@ open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

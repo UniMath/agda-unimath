@@ -1,8 +1,12 @@
-#  Enriched undirected graphs
+# Enriched undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.enriched-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +19,7 @@ open import graph-theory.undirected-graphs
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```
+
 </details>
 
 ## Idea

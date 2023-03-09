@@ -1,8 +1,12 @@
-#  Reflexive graphs
+# Reflexive graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.reflexive-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -23,6 +27,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

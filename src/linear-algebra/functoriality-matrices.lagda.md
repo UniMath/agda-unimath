@@ -1,13 +1,18 @@
 # Functoriality of matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.functoriality-matrices where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices
 ```
+
 </details>
 
 ## Idea
@@ -36,4 +41,3 @@ module _
     {m n : ℕ} → matrix A m n → matrix B m n → matrix C m n
   binary-map-matrix = binary-map-vec (binary-map-vec f)
 ```
-

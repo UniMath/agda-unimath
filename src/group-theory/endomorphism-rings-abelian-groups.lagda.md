@@ -1,8 +1,12 @@
-#  The endomorphism rings of abelian groups
+# The endomorphism rings of abelian groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.endomorphism-rings-abelian-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import group-theory.abelian-groups
@@ -10,6 +14,7 @@ open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

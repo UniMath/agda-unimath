@@ -1,11 +1,19 @@
-#  Coproduct types
+# Coproduct types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --safe #-}
+```
+
+```agda
 module foundation-core.coproduct-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

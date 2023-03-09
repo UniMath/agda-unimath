@@ -1,8 +1,12 @@
-#  Shriek of concrete group homomorphisms
+# Shriek of concrete group homomorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.shriek-concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -15,6 +19,7 @@ open import group-theory.homomorphisms-concrete-group-actions
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.substitution-functor-concrete-group-actions
 ```
+
 </details>
 
 ## Definition

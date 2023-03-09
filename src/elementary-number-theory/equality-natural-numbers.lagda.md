@@ -1,8 +1,12 @@
-#  Equality of natural numbers
+# Equality of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.equality-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation-core.decidable-propositions
 open import foundation-core.discrete-types
@@ -22,6 +26,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Properties

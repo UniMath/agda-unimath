@@ -1,8 +1,12 @@
-#  Homotopies of natural transformations in large precategories
+# Homotopies of natural transformations in large precategories
 
-<details><summary>Imports</summary>
 ```agda
 module category-theory.homotopies-natural-transformations-large-precategories where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
@@ -11,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea
@@ -85,4 +90,3 @@ A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `�
   associative-concat-htpy-natural-transformation-Large-Precat α β γ δ H K L X =
     assoc (H X) (K X) (L X)
 ```
-

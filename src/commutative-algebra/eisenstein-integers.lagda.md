@@ -1,8 +1,12 @@
-#  The Eisenstein integers
+# The Eisenstein integers
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.eisenstein-integers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.equality-integers
@@ -18,6 +22,7 @@ open import group-theory.groups
 open import group-theory.semigroups
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

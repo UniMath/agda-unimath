@@ -1,14 +1,19 @@
-#  Rooted quasitrees
+# Rooted quasitrees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.rooted-quasitrees where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+
 </details>
 
 ## Idea

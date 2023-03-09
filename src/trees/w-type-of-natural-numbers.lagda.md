@@ -1,8 +1,12 @@
-#  The W-type of natural numbers
+# The W-type of natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module trees.w-type-of-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.contractible-types
@@ -17,6 +21,7 @@ open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 open import trees.w-types
 ```
+
 </details>
 
 ## Definition
@@ -81,4 +86,3 @@ is-equiv-ℕ-Nat-𝕎 =
 equiv-ℕ-Nat-𝕎 : Nat-𝕎 ≃ ℕ
 equiv-ℕ-Nat-𝕎 = pair ℕ-Nat-𝕎 is-equiv-ℕ-Nat-𝕎
 ```
-

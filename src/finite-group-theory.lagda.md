@@ -1,4 +1,4 @@
-#  Finite group theory
+# Finite group theory
 
 ```agda
 module finite-group-theory where

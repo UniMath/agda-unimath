@@ -1,8 +1,12 @@
-#  Cycle index series of species
+# Cycle index series of species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cycle-index-series-species where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
@@ -12,6 +16,7 @@ open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 ```
+
 </details>
 
 ## Idea

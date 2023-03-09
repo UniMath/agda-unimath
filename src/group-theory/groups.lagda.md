@@ -1,8 +1,12 @@
-#  Abstract groups
+# Abstract groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -26,11 +30,12 @@ open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea
 
-An abstract group is a group in the usual algebraic sense, i.e., it consists of a set equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the group laws
+An **abstract group** is a group in the usual algebraic sense, i.e., it consists of a set equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the group laws
 
 ```md
   (xy)z = x(yz)      (associativity)
@@ -40,7 +45,7 @@ An abstract group is a group in the usual algebraic sense, i.e., it consists of 
    xx⁻¹ = e          (right inverse law)
 ```
 
-## Groups in Univalent Mathematics
+## Definition
 
 ### The condition that a semigroup is a group
 
@@ -67,11 +72,7 @@ is-group G =
 Group :
   (l : Level) → UU (lsuc l)
 Group l = Σ (Semigroup l) is-group
-```
 
-### The underlying structure of a group
-
-```agda
 module _
   {l : Level} (G : Group l)
   where
@@ -166,91 +167,97 @@ module _
       ( right-inverse-law-mul-Group unit-Group)
 ```
 
+## Properties
+
 ### Multiplication by `x` from the left is an equivalence
 
 ```agda
-  left-div-Group : type-Group → type-Group → type-Group
-  left-div-Group x y = mul-Group (inv-Group x) y
+module _
+  {l : Level} (G : Group l)
+  where
+
+  left-div-Group : type-Group G → type-Group G → type-Group G
+  left-div-Group x y = mul-Group G (inv-Group G x) y
 
   issec-mul-inv-Group :
-    (x : type-Group) → (mul-Group x ∘ left-div-Group x) ~ id
+    (x : type-Group G) → (mul-Group G x ∘ left-div-Group x) ~ id
   issec-mul-inv-Group x y =
-    ( inv (associative-mul-Group _ _ _)) ∙
-    ( ( ap (mul-Group' y) (right-inverse-law-mul-Group x)) ∙
-      ( left-unit-law-mul-Group y))
+    ( inv (associative-mul-Group G _ _ _)) ∙
+    ( ( ap (mul-Group' G y) (right-inverse-law-mul-Group G x)) ∙
+      ( left-unit-law-mul-Group G y))
 
   isretr-mul-inv-Group :
-    (x : type-Group) → (left-div-Group x ∘ mul-Group x) ~ id
+    (x : type-Group G) → (left-div-Group x ∘ mul-Group G x) ~ id
   isretr-mul-inv-Group x y =
-    ( inv (associative-mul-Group _ _ _)) ∙
-    ( ( ap (mul-Group' y) (left-inverse-law-mul-Group x)) ∙
-      ( left-unit-law-mul-Group y))
+    ( inv (associative-mul-Group G _ _ _)) ∙
+    ( ( ap (mul-Group' G y) (left-inverse-law-mul-Group G x)) ∙
+      ( left-unit-law-mul-Group G y))
 
-  is-equiv-mul-Group : (x : type-Group) → is-equiv (mul-Group x)
+  is-equiv-mul-Group : (x : type-Group G) → is-equiv (mul-Group G x)
   is-equiv-mul-Group x =
     is-equiv-has-inverse
       ( left-div-Group x)
       ( issec-mul-inv-Group x)
       ( isretr-mul-inv-Group x)
 
-  equiv-mul-Group : (x : type-Group) → type-Group ≃ type-Group
-  pr1 (equiv-mul-Group x) = mul-Group x
+  equiv-mul-Group : (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-mul-Group x) = mul-Group G x
   pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
 ```
 
 ### Multiplication by `x` from the right is an equivalence
 
 ```agda
-  right-div-Group : type-Group → type-Group → type-Group
-  right-div-Group x y = mul-Group x (inv-Group y)
+  right-div-Group : type-Group G → type-Group G → type-Group G
+  right-div-Group x y = mul-Group G x (inv-Group G y)
 
   issec-mul-inv-Group' :
-    (x : type-Group) → (mul-Group' x ∘ (λ y → right-div-Group y x)) ~ id
+    (x : type-Group G) → (mul-Group' G x ∘ (λ y → right-div-Group y x)) ~ id
   issec-mul-inv-Group' x y =
-    ( associative-mul-Group _ _ _) ∙
-    ( ( ap (mul-Group y) (left-inverse-law-mul-Group x)) ∙
-      ( right-unit-law-mul-Group y))
+    ( associative-mul-Group G _ _ _) ∙
+    ( ( ap (mul-Group G y) (left-inverse-law-mul-Group G x)) ∙
+      ( right-unit-law-mul-Group G y))
 
   isretr-mul-inv-Group' :
-    (x : type-Group) → ((λ y → right-div-Group y x) ∘ mul-Group' x) ~ id
+    (x : type-Group G) → ((λ y → right-div-Group y x) ∘ mul-Group' G x) ~ id
   isretr-mul-inv-Group' x y =
-    ( associative-mul-Group _ _ _) ∙
-    ( ( ap (mul-Group y) (right-inverse-law-mul-Group x)) ∙
-      ( right-unit-law-mul-Group y))
+    ( associative-mul-Group G _ _ _) ∙
+    ( ( ap (mul-Group G y) (right-inverse-law-mul-Group G x)) ∙
+      ( right-unit-law-mul-Group G y))
 
-  is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
+  is-equiv-mul-Group' : (x : type-Group G) → is-equiv (mul-Group' G x)
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
       ( λ y → right-div-Group y x)
       ( issec-mul-inv-Group' x)
       ( isretr-mul-inv-Group' x)
 
-  equiv-mul-Group' : (x : type-Group) → type-Group ≃ type-Group
-  pr1 (equiv-mul-Group' x) = mul-Group' x
+  equiv-mul-Group' : (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-mul-Group' x) = mul-Group' G x
   pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
 ```
 
 ### Multiplication is a binary equivalence and a binary embedding
 
 ```agda
-  is-binary-equiv-mul-Group : is-binary-equiv mul-Group
+  is-binary-equiv-mul-Group : is-binary-equiv (mul-Group G)
   pr1 is-binary-equiv-mul-Group = is-equiv-mul-Group'
   pr2 is-binary-equiv-mul-Group = is-equiv-mul-Group
 
-  is-binary-emb-mul-Group : is-binary-emb mul-Group
+  is-binary-emb-mul-Group : is-binary-emb (mul-Group G)
   is-binary-emb-mul-Group =
     is-binary-emb-is-binary-equiv is-binary-equiv-mul-Group
 
-  is-emb-mul-Group : (x : type-Group) → is-emb (mul-Group x)
+  is-emb-mul-Group : (x : type-Group G) → is-emb (mul-Group G x)
   is-emb-mul-Group x = is-emb-is-equiv (is-equiv-mul-Group x)
 
-  is-emb-mul-Group' : (x : type-Group) → is-emb (mul-Group' x)
+  is-emb-mul-Group' : (x : type-Group G) → is-emb (mul-Group' G x)
   is-emb-mul-Group' x = is-emb-is-equiv (is-equiv-mul-Group' x)
 
-  is-injective-mul-Group : (x : type-Group) → is-injective (mul-Group x)
+  is-injective-mul-Group : (x : type-Group G) → is-injective (mul-Group G x)
   is-injective-mul-Group x = is-injective-is-equiv (is-equiv-mul-Group x)
 
-  is-injective-mul-Group' : (x : type-Group) → is-injective (mul-Group' x)
+  is-injective-mul-Group' : (x : type-Group G) → is-injective (mul-Group' G x)
   is-injective-mul-Group' x = is-injective-is-equiv (is-equiv-mul-Group' x)
 ```
 
@@ -258,68 +265,64 @@ module _
 
 ```agda
   transpose-eq-mul-Group :
-    {x y z : type-Group} →
-    (mul-Group x y ＝ z) → (x ＝ mul-Group z (inv-Group y))
+    {x y z : type-Group G} →
+    (mul-Group G x y ＝ z) → (x ＝ mul-Group G z (inv-Group G y))
   transpose-eq-mul-Group {x} {y} {z} refl =
-    ( ( inv (right-unit-law-mul-Group x)) ∙
-      ( ap (mul-Group x) (inv (right-inverse-law-mul-Group y)))) ∙
-    ( inv (associative-mul-Group x y (inv-Group y)))
+    inv (isretr-mul-inv-Group' y x)
 
   inv-transpose-eq-mul-Group :
-    {x y z : type-Group} →
-    (x ＝ mul-Group z (inv-Group y)) → (mul-Group x y ＝ z)
+    {x y z : type-Group G} →
+    (x ＝ mul-Group G z (inv-Group G y)) → (mul-Group G x y ＝ z)
   inv-transpose-eq-mul-Group {._} {y} {z} refl =
     issec-mul-inv-Group' y z
 
   transpose-eq-mul-Group' :
-    {x y z : type-Group} →
-    Id (mul-Group x y) z → Id y (mul-Group (inv-Group x) z)
+    {x y z : type-Group G} →
+    Id (mul-Group G x y) z → Id y (mul-Group G (inv-Group G x) z)
   transpose-eq-mul-Group' {x} {y} {z} refl =
-    ( ( inv (left-unit-law-mul-Group y)) ∙
-      ( ap (mul-Group' y) (inv (left-inverse-law-mul-Group x)))) ∙
-    ( associative-mul-Group (inv-Group x) x y)
+    inv (isretr-mul-inv-Group x y)
 
   inv-transpose-eq-mul-Group' :
-    {x y z : type-Group} →
-    (mul-Group x y ＝ z) → (y ＝ mul-Group (inv-Group x) z)
+    {x y z : type-Group G} →
+    Id y (mul-Group G (inv-Group G x) z) → (mul-Group G x y ＝ z)
   inv-transpose-eq-mul-Group' {x} {y} {._} refl =
-    inv (isretr-mul-inv-Group x y)
+    issec-mul-inv-Group x _
 ```
 
 ### Distributivity of inverses over multiplication
 
 ```agda
   distributive-inv-mul-Group :
-    (x y : type-Group) →
-    Id (inv-Group (mul-Group x y)) (mul-Group (inv-Group y) (inv-Group x))
+    (x y : type-Group G) →
+    Id (inv-Group G (mul-Group G x y)) (mul-Group G (inv-Group G y) (inv-Group G x))
   distributive-inv-mul-Group x y =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
-          ( ( associative-mul-Group (inv-Group (mul-Group x y)) x y) ∙
-            ( left-inverse-law-mul-Group (mul-Group x y)))) ∙
-        ( left-unit-law-mul-Group (inv-Group y)))
+          ( ( associative-mul-Group G (inv-Group G (mul-Group G x y)) x y) ∙
+            ( left-inverse-law-mul-Group G (mul-Group G x y)))) ∙
+        ( left-unit-law-mul-Group G (inv-Group G y)))
 ```
 
 ### Inverting elements of a group is an involution
 
 ```agda
   inv-inv-Group :
-    (x : type-Group) → Id (inv-Group (inv-Group x)) x
+    (x : type-Group G) → Id (inv-Group G (inv-Group G x)) x
   inv-inv-Group x =
     is-injective-mul-Group
-      ( inv-Group x)
-      ( ( right-inverse-law-mul-Group (inv-Group x)) ∙
-        ( inv (left-inverse-law-mul-Group x)))
+      ( inv-Group G x)
+      ( ( right-inverse-law-mul-Group G (inv-Group G x)) ∙
+        ( inv (left-inverse-law-mul-Group G x)))
 ```
 
 ### Inverting elements of a group is an equivalence
 
 ```agda
-  is-equiv-inv-Group : is-equiv inv-Group
+  is-equiv-inv-Group : is-equiv (inv-Group G)
   is-equiv-inv-Group = is-equiv-is-involution inv-inv-Group
 
-  equiv-equiv-inv-Group : type-Group ≃ type-Group
-  pr1 equiv-equiv-inv-Group = inv-Group
+  equiv-equiv-inv-Group : type-Group G ≃ type-Group G
+  pr1 equiv-equiv-inv-Group = inv-Group G
   pr2 equiv-equiv-inv-Group = is-equiv-inv-Group
 ```
 
@@ -327,86 +330,82 @@ module _
 
 ```agda
   eq-is-unit-left-div-Group :
-    {x y : type-Group} → is-unit-Group (left-div-Group x y) → x ＝ y
+    {x y : type-Group G} → is-unit-Group G (left-div-Group x y) → x ＝ y
   eq-is-unit-left-div-Group {x} {y} H =
-    inv
-      ( ( ( inv-transpose-eq-mul-Group' H) ∙
-          ( right-unit-law-mul-Group (inv-Group (inv-Group x)))) ∙
-        ( inv-inv-Group x))
+    ( inv (right-unit-law-mul-Group G x)) ∙
+    ( inv-transpose-eq-mul-Group' (inv H))
 
   is-unit-left-div-eq-Group :
-    {x y : type-Group} → x ＝ y → is-unit-Group (left-div-Group x y)
-  is-unit-left-div-eq-Group refl = left-inverse-law-mul-Group _
+    {x y : type-Group G} → x ＝ y → is-unit-Group G (left-div-Group x y)
+  is-unit-left-div-eq-Group refl = left-inverse-law-mul-Group G _
 ```
 
-### Two eleemnts `x` and `y` are equal iff `xy⁻¹=1`
+### Two elements `x` and `y` are equal iff `xy⁻¹=1`
 
 ```agda
   eq-is-unit-right-div-Group :
-    {x y : type-Group} → is-unit-Group (right-div-Group x y) → x ＝ y
+    {x y : type-Group G} → is-unit-Group G (right-div-Group x y) → x ＝ y
   eq-is-unit-right-div-Group H =
-    inv (inv-transpose-eq-mul-Group (inv H)) ∙ left-unit-law-mul-Group _
+    inv (inv-transpose-eq-mul-Group (inv H)) ∙ left-unit-law-mul-Group G _
 
   is-unit-right-div-eq-Group :
-    {x y : type-Group} → x ＝ y → is-unit-Group (right-div-Group x y)
-  is-unit-right-div-eq-Group refl = right-inverse-law-mul-Group _
+    {x y : type-Group G} → x ＝ y → is-unit-Group G (right-div-Group x y)
+  is-unit-right-div-eq-Group refl = right-inverse-law-mul-Group G _
 ```
 
 ### The inverse of `x⁻¹y` is `y⁻¹x`
 
 ```agda
   inv-left-div-Group :
-    (x y : type-Group) → inv-Group (left-div-Group x y) ＝ left-div-Group y x
+    (x y : type-Group G) → inv-Group G (left-div-Group x y) ＝ left-div-Group y x
   inv-left-div-Group x y =
     equational-reasoning
-      inv-Group (left-div-Group x y)
-        ＝ left-div-Group y (inv-Group (inv-Group x))    by distributive-inv-mul-Group (inv-Group x) y
-        ＝ left-div-Group y x                            by ap (left-div-Group y) (inv-inv-Group x)
+      inv-Group G (left-div-Group x y)
+        ＝ left-div-Group y (inv-Group G (inv-Group G x))    by distributive-inv-mul-Group (inv-Group G x) y
+        ＝ left-div-Group y x                                by ap (left-div-Group y) (inv-inv-Group x)
 ```
 
 ### The inverse of `xy⁻¹` is `yx⁻¹`
 
 ```agda
   inv-right-div-Group :
-    (x y : type-Group) → inv-Group (right-div-Group x y) ＝ right-div-Group y x
+    (x y : type-Group G) → inv-Group G (right-div-Group x y) ＝ right-div-Group y x
   inv-right-div-Group x y =
     equational-reasoning
-      inv-Group (right-div-Group x y)
-        ＝ right-div-Group (inv-Group (inv-Group y)) x   by distributive-inv-mul-Group x (inv-Group y)
-        ＝ right-div-Group y x                           by ap (mul-Group' (inv-Group x)) (inv-inv-Group y)
+      inv-Group G (right-div-Group x y)
+        ＝ right-div-Group (inv-Group G (inv-Group G y)) x   by distributive-inv-mul-Group x (inv-Group G y)
+        ＝ right-div-Group y x                               by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
 ```
 
 ### The multiple of `x⁻¹y` and `y⁻¹z` is `x⁻¹z`
 
 ```agda
   mul-left-div-Group :
-    (x y z : type-Group) →
-    mul-Group (left-div-Group x y) (left-div-Group y z) ＝ left-div-Group x z
+    (x y z : type-Group G) →
+    mul-Group G (left-div-Group x y) (left-div-Group y z) ＝ left-div-Group x z
   mul-left-div-Group x y z =
     equational-reasoning
-      mul-Group (left-div-Group x y) (left-div-Group y z)
-      ＝ mul-Group (inv-Group x) (mul-Group y (left-div-Group y z))
-        by associative-mul-Group (inv-Group x) y (left-div-Group y z)
+      mul-Group G (left-div-Group x y) (left-div-Group y z)
+      ＝ mul-Group G (inv-Group G x) (mul-Group G y (left-div-Group y z))
+        by associative-mul-Group G (inv-Group G x) y (left-div-Group y z)
       ＝ left-div-Group x z
-        by ap (mul-Group (inv-Group x)) (issec-mul-inv-Group y z)
+        by ap (mul-Group G (inv-Group G x)) (issec-mul-inv-Group y z)
 ```
 
 ### The multiple of `xy⁻¹` and `yz⁻¹` is `xz⁻¹`
 
 ```agda
   mul-right-div-Group :
-    (x y z : type-Group) →
-    mul-Group (right-div-Group x y) (right-div-Group y z) ＝ right-div-Group x z
+    (x y z : type-Group G) →
+    mul-Group G (right-div-Group x y) (right-div-Group y z) ＝ right-div-Group x z
   mul-right-div-Group x y z =
     equational-reasoning
-      mul-Group (right-div-Group x y) (right-div-Group y z)
-      ＝ mul-Group x (mul-Group (inv-Group y) (right-div-Group y z))
-        by associative-mul-Group x (inv-Group y) (right-div-Group y z)
+      mul-Group G (right-div-Group x y) (right-div-Group y z)
+      ＝ mul-Group G x (mul-Group G (inv-Group G y) (right-div-Group y z))
+        by associative-mul-Group G x (inv-Group G y) (right-div-Group y z)
       ＝ right-div-Group x z
-        by ap (mul-Group x) (isretr-mul-inv-Group y (inv-Group z))
+        by ap (mul-Group G x) (isretr-mul-inv-Group y (inv-Group G z))
 ```
-
-## Properties
 
 ### For any semigroup, being a group is a property
 

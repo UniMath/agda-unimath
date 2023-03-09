@@ -1,8 +1,12 @@
-#  Kernels
+# Kernels
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.kernels where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
@@ -11,12 +15,17 @@ open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import group-theory.abelian-groups
+open import group-theory.embeddings-abelian-groups
 open import group-theory.embeddings-groups
 open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
+open import group-theory.subgroups-abelian-groups
 ```
+
 </details>
 
 ## Idea
@@ -107,4 +116,59 @@ module _
   kernel-hom-Group : Normal-Subgroup l2 G
   pr1 kernel-hom-Group = subgroup-kernel-hom-Group G H f
   pr2 kernel-hom-Group = is-normal-kernel-hom-Group
+```
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  where
+
+  subtype-kernel-hom-Ab : subset-Ab l2 A
+  subtype-kernel-hom-Ab =
+    subtype-kernel-hom-Group (group-Ab A) (group-Ab B) f
+
+  is-in-kernel-hom-Ab : type-Ab A → UU l2
+  is-in-kernel-hom-Ab =
+    is-in-kernel-hom-Group (group-Ab A) (group-Ab B) f
+
+  contains-zero-subtype-kernel-hom-Ab :
+    is-in-kernel-hom-Ab (zero-Ab A)
+  contains-zero-subtype-kernel-hom-Ab =
+    contains-unit-subtype-kernel-hom-Group (group-Ab A) (group-Ab B) f
+
+  is-closed-under-add-subtype-kernel-hom-Ab :
+    is-closed-under-add-subset-Ab A subtype-kernel-hom-Ab
+  is-closed-under-add-subtype-kernel-hom-Ab =
+    is-closed-under-mul-subtype-kernel-hom-Group
+      ( group-Ab A)
+      ( group-Ab B)
+      ( f)
+
+  is-closed-under-neg-subtype-kernel-hom-Ab :
+    is-closed-under-neg-subset-Ab A subtype-kernel-hom-Ab
+  is-closed-under-neg-subtype-kernel-hom-Ab =
+    is-closed-under-inv-subtype-kernel-hom-Group
+      ( group-Ab A)
+      ( group-Ab B)
+      ( f)
+
+  kernel-hom-Ab : Subgroup-Ab l2 A
+  kernel-hom-Ab =
+    subgroup-kernel-hom-Group (group-Ab A) (group-Ab B) f
+
+  ab-kernel-hom-Ab : Ab (l1 ⊔ l2)
+  ab-kernel-hom-Ab = ab-Subgroup-Ab A kernel-hom-Ab
+
+  inclusion-kernel-hom-Ab : type-hom-Ab ab-kernel-hom-Ab A
+  inclusion-kernel-hom-Ab =
+    inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
+
+  is-emb-inclusion-kernel-hom-Ab :
+    is-emb-hom-Ab ab-kernel-hom-Ab A inclusion-kernel-hom-Ab
+  is-emb-inclusion-kernel-hom-Ab =
+    is-emb-inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
+
+  emb-inclusion-kernel-hom-Ab : emb-Ab ab-kernel-hom-Ab A
+  emb-inclusion-kernel-hom-Ab =
+    emb-inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
 ```

@@ -1,14 +1,19 @@
-#  Large preorders
+# Large preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.large-preorders where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import Agda.Primitive using (Setω)
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Idea

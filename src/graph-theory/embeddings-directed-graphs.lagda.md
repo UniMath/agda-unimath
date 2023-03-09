@@ -1,4 +1,4 @@
-#  Embeddings of directed graphs
+# Embeddings of directed graphs
 
 ```
 module graph-theory.embeddings-directed-graphs where
@@ -55,4 +55,3 @@ module _
     is-emb-hom-Directed-Graph (hom-emb-Directed-Graph f)
   is-emb-emb-Directed-Graph = pr2
 ```
-

@@ -1,8 +1,12 @@
-#  Large Posets
+# Large Posets
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.large-posets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import Agda.Primitive using (Setω)
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -11,6 +15,7 @@ open import foundation.universe-levels
 open import order-theory.large-preorders
 open import order-theory.posets
 ```
+
 </details>
 
 ## Idea

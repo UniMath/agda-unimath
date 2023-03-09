@@ -1,8 +1,12 @@
 # Vectors on commutative semirings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-commutative-semirings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-semirings
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
@@ -17,6 +21,7 @@ open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
 ```
+
 </details>
 
 ## Idea

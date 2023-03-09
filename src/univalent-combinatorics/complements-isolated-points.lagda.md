@@ -1,8 +1,12 @@
-#  Complements of isolated points of finite types
+# Complements of isolated points of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.complements-isolated-points where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -19,6 +23,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

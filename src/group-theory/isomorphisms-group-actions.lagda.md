@@ -1,8 +1,12 @@
-#  Isomorphisms of group actions
+# Isomorphisms of group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-group-actions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.isomorphisms-large-precategories
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
@@ -15,6 +19,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.precategory-of-group-actions
 ```
+
 </details>
 
 ## Definition
@@ -111,4 +116,3 @@ module _
   pr2 (equiv-iso-Abstract-Group-Action f) =
     coherence-square-iso-Abstract-Group-Action f
 ```
-

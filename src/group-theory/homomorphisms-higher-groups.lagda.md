@@ -1,8 +1,12 @@
-#  Homomorphisms of higher groups
+# Homomorphisms of higher groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-higher-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -11,6 +15,7 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
+
 </details>
 
 ## Idea
@@ -158,4 +163,3 @@ module _
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
 ```
-

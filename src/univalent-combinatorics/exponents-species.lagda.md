@@ -1,8 +1,12 @@
-#  Exponents of species
+# Exponents of species
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.exponents-species where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -13,6 +17,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.species
 ```
+
 </details>
 
 ## Idea

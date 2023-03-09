@@ -1,8 +1,12 @@
-#  The type theoretic principle of choice
+# The type theoretic principle of choice
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.type-theoretic-principle-of-choice where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -13,6 +17,7 @@ open import foundation-core.universe-levels
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
+
 </details>
 
 ## Idea
@@ -174,4 +179,3 @@ abstract
     {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
   is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
 ```
-

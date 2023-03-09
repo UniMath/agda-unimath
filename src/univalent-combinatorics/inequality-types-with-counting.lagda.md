@@ -1,8 +1,12 @@
-#  Inequality on types equipped with a counting
+# Inequality on types equipped with a counting
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.inequality-types-with-counting where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-standard-finite-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -12,6 +16,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

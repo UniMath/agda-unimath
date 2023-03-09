@@ -1,8 +1,12 @@
-#  Quotient groups of concrete groups
+# Quotient groups of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.quotient-groups-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.0-images-of-maps
 open import foundation.1-types
@@ -26,6 +30,7 @@ open import group-theory.transitive-concrete-group-actions
 open import structured-types.pointed-types
 open import synthetic-homotopy-theory.loop-spaces
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
-#  Discrete types
+# Discrete types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.discrete-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.discrete-types public
 open import foundation.apartness-relations
 open import foundation.binary-relations
@@ -18,6 +22,7 @@ open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

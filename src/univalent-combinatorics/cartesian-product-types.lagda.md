@@ -1,8 +1,12 @@
-#  Cartesian products of finite types
+# Cartesian products of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cartesian-product-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
@@ -33,6 +37,7 @@ open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

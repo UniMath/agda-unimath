@@ -1,8 +1,12 @@
-#  Order preserving maps on preorders
+# Order preserving maps on preorders
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.order-preserving-maps-preorders where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +19,7 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Idea

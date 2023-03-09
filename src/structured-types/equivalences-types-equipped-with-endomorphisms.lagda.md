@@ -1,8 +1,12 @@
-#  Equivalences of types equipped with endomorphisms
+# Equivalences of types equipped with endomorphisms
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.equivalences-types-equipped-with-endomorphisms where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -20,6 +24,7 @@ open import foundation.universe-levels
 open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```
+
 </details>
 
 ## Definition

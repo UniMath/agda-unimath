@@ -1,8 +1,12 @@
-#  Equality in the standard finite types
+# Equality in the standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equality-standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation-core.decidable-propositions
@@ -27,6 +31,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

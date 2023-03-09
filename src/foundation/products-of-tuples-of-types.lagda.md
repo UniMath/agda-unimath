@@ -1,8 +1,12 @@
-#  Products of tuples of types
+# Products of tuples of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.products-of-tuples-of-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.equivalences
@@ -10,6 +14,7 @@ open import foundation.tuples-of-types
 open import foundation.universe-levels
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea
@@ -44,4 +49,3 @@ equiv-universal-property-product-tuple-types A i =
 ```
 
 ## Properties
-

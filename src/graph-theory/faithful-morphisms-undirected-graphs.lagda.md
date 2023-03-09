@@ -1,8 +1,12 @@
-#  Faithful morphisms of undirected graphs
+# Faithful morphisms of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.faithful-morphisms-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.propositions
@@ -10,6 +14,7 @@ open import foundation.universe-levels
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+
 </details>
 
 ## Idea

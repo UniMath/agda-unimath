@@ -1,8 +1,13 @@
-#  Fibers of maps between finite types
+# Fibers of maps between finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.fibers-of-maps where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.fibers-of-maps public
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 open import foundation.contractible-types
@@ -10,7 +15,6 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps public
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -25,6 +29,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea
@@ -122,4 +127,3 @@ is-decidable-fib-Fin :
 is-decidable-fib-Fin {k} {l} f y =
   is-decidable-fib-count f (count-Fin k) (count-Fin l) y
 ```
-

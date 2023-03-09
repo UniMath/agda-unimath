@@ -1,8 +1,12 @@
-#  Rooted undirected trees
+# Rooted undirected trees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.rooted-undirected-trees where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -13,6 +17,7 @@ open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 open import trees.undirected-trees
 ```
+
 </details>
 
 ## Idea

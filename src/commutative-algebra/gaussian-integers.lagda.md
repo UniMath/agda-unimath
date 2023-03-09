@@ -1,8 +1,12 @@
-#  The Gaussian integers
+# The Gaussian integers
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.gaussian-integers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-integers
@@ -23,6 +27,7 @@ open import group-theory.groups
 open import group-theory.semigroups
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

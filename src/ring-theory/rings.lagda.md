@@ -1,8 +1,12 @@
-#  Rings
+# Rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.binary-embeddings
@@ -26,6 +30,7 @@ open import group-theory.semigroups
 open import ring-theory.semirings
 open import univalent-combinatorics.lists
 ```
+
 </details>
 
 ## Idea

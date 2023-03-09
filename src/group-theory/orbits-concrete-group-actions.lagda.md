@@ -1,8 +1,12 @@
-#  Orbits of concrete group actions
+# Orbits of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.orbits-concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.sets
@@ -10,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 ```
+
 </details>
 
 ## Definition

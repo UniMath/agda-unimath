@@ -1,9 +1,16 @@
-#  Cartier's delooping of the sign homomorphism
+# Cartier's delooping of the sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.cartier-delooping-sign-homomorphism where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import finite-group-theory.delooping-sign-homomorphism
 open import finite-group-theory.finite-type-groups
@@ -24,6 +31,7 @@ open import group-theory.symmetric-groups
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea
@@ -131,4 +139,3 @@ module _
           ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 ```
-

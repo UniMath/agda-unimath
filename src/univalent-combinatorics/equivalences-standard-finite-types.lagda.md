@@ -1,8 +1,12 @@
-#  Equivalences between standard finite types
+# Equivalences between standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.equivalences-standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
@@ -16,6 +20,7 @@ open import foundation.universal-property-unit-type
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

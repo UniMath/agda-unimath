@@ -1,14 +1,19 @@
-#  The higher group of integers
+# The higher group of integers
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.integers-higher-group where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import group-theory.higher-groups
 open import structured-types.pointed-types
 open import synthetic-homotopy-theory.circle
 ```
+
 </details>
 
 ## Idea

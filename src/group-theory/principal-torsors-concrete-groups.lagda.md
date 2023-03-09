@@ -1,12 +1,17 @@
-#  Principal torsors of concrete groups
+# Principal torsors of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.principal-torsors-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 ```
+
 </details>
 
 ## Idea

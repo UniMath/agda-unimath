@@ -65,20 +65,20 @@ jobs:
         uses: baptiste0928/cargo-install@v1
         with:
           crate: mdbook-katex
-      
+
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: 'latest'
-        
+
       - name: Generate book
         run: |
           cd main
           make website
-          
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

@@ -1,8 +1,12 @@
-#  Invertible elements in rings
+# Invertible elements in rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.invertible-elements-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -11,6 +15,7 @@ open import foundation.universe-levels
 open import group-theory.invertible-elements-monoids
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

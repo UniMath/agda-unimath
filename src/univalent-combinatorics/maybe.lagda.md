@@ -1,14 +1,19 @@
-#  The maybe modality on finite types
+# The maybe modality on finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.maybe where
-open import elementary-number-theory.natural-numbers
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.maybe public
+open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ```agda

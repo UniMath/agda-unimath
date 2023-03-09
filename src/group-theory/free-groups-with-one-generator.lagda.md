@@ -1,8 +1,12 @@
-#  Free groups with one generator
+# Free groups with one generator
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.free-groups-with-one-generator where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
@@ -23,6 +27,7 @@ open import group-theory.homomorphisms-groups
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+
 </details>
 
 ## Idea

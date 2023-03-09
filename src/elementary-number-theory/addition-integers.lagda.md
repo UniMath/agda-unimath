@@ -1,8 +1,12 @@
-#  Addition on the integers
+# Addition on the integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-integers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
@@ -21,6 +25,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
+
 </details>
 
 ## Idea

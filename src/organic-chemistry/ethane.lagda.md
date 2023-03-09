@@ -1,8 +1,12 @@
-#  Ethane
+# Ethane
 
-<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.ethane where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import finite-group-theory.tetrahedra-in-3-space
 open import foundation.contractible-types
@@ -30,6 +34,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

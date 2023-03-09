@@ -1,9 +1,16 @@
-#  Orbits of permutations
+# Orbits of permutations
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.orbits-permutations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.equality-natural-numbers
@@ -59,6 +66,7 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

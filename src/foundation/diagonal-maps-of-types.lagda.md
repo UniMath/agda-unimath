@@ -1,14 +1,18 @@
-#  Diagonal maps of types
+# Diagonal maps of types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.diagonal-maps-of-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
-open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.embeddings
 open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
@@ -21,6 +25,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
+
 </details>
 
 ## Properties

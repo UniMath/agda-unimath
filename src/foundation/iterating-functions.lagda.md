@@ -1,8 +1,12 @@
-#  Iterating functions
+# Iterating functions
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.iterating-functions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
@@ -25,6 +29,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

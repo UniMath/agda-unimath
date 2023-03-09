@@ -1,11 +1,16 @@
 # Shifting sequences
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.shifting-sequences where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

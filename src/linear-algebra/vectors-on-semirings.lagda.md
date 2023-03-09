@@ -1,8 +1,12 @@
 # Vectors on semirings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.vectors-on-semirings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.constant-maps
 open import foundation.coproduct-types
@@ -23,6 +27,7 @@ open import linear-algebra.vectors
 open import ring-theory.semirings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

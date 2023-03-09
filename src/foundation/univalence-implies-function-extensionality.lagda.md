@@ -1,8 +1,12 @@
-#  The univalence axiom implies function extensionality
+# The univalence axiom implies function extensionality
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.univalence-implies-function-extensionality where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -17,6 +21,7 @@ open import foundation-core.universe-levels
 open import foundation.equivalence-induction
 open import foundation.weak-function-extensionality
 ```
+
 </details>
 
 ## Idea

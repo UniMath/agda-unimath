@@ -1,8 +1,12 @@
-#  Cyclic types
+# Cyclic types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.cyclic-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.integers
@@ -39,6 +43,7 @@ open import synthetic-homotopy-theory.groups-of-loops-in-1-types
 open import synthetic-homotopy-theory.loop-spaces
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

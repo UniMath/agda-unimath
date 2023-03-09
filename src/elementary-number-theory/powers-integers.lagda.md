@@ -1,8 +1,12 @@
 # Powers of integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.powers-integers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import elementary-number-theory.commutative-ring-of-integers
@@ -13,6 +17,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import ring-theory.powers-of-elements-rings
 ```
+
 </details>
 
 ## Idea

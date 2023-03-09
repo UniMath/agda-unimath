@@ -1,8 +1,12 @@
-#  Qutoient Rings
+# Qutoient Rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.quotient-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -12,6 +16,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definitions

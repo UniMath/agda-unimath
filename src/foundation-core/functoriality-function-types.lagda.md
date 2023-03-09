@@ -1,8 +1,12 @@
-#  Functoriality of function types
+# Functoriality of function types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation-core.functoriality-function-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -15,6 +19,7 @@ open import foundation-core.path-split-maps
 open import foundation-core.universe-levels
 open import foundation.function-extensionality
 ```
+
 </details>
 
 ## Properties

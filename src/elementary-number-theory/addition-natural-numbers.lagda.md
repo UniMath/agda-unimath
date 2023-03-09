@@ -1,8 +1,12 @@
-#  Addition on the natural numbers
+# Addition on the natural numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.addition-natural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -17,6 +21,7 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Definition

@@ -1,9 +1,16 @@
-#  Permutations
+# Permutations
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.permutations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import finite-group-theory.orbits-permutations
@@ -39,6 +46,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Properties
@@ -474,4 +482,3 @@ module _
         is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
 ```
-

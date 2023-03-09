@@ -1,8 +1,12 @@
 # The binomial theorem for rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.binomial-theorem-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -21,6 +25,7 @@ open import ring-theory.rings
 open import ring-theory.sums-rings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

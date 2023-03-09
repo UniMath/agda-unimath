@@ -1,14 +1,19 @@
 # Inhabited finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.inhabited-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.universe-levels
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

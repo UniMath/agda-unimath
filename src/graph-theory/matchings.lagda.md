@@ -1,8 +1,12 @@
-#  Matchings
+# Matchings
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.matchings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -16,6 +20,7 @@ open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

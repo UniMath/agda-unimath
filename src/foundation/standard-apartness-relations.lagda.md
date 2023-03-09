@@ -1,8 +1,12 @@
-#  Standard apartness relations
+# Standard apartness relations
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.standard-apartness-relations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.apartness-relations
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -14,6 +18,7 @@ open import foundation.negation
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

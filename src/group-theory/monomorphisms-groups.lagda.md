@@ -1,8 +1,12 @@
-#  Monomorphisms in groups
+# Monomorphisms in groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.monomorphisms-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.monomorphisms-large-precategories
 open import foundation.propositions
 open import foundation.universe-levels
@@ -11,6 +15,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups
 ```
+
 </details>
 
 ## Idea

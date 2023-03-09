@@ -1,9 +1,15 @@
-#  Unlabelled rooted trees
+# Unlabelled rooted trees
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.unlabeled-rooted-trees where
 ```
+
+<details><summary>Imports</summary>
+
+```agda
+
+```
+
 </details>
 
 ## Idea

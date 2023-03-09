@@ -1,8 +1,12 @@
 # Homomorphisms Frames
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.homomorphisms-frames where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -23,6 +27,7 @@ open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.sup-lattices
 ```
+
 </details>
 
 ## Idea

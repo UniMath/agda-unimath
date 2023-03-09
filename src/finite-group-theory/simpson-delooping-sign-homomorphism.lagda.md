@@ -1,9 +1,16 @@
-#  Simpson's delooping of the sign homomorphism
+# Simpson's delooping of the sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.simpson-delooping-sign-homomorphism where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -70,6 +77,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ### Simpson's delooping of the sign homomorphism
@@ -759,4 +767,3 @@ module _
           ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 ```
-

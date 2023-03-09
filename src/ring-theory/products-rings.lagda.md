@@ -1,8 +1,12 @@
-#  Products of rings
+# Products of rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.products-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -14,6 +18,7 @@ open import group-theory.groups
 open import group-theory.semigroups
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

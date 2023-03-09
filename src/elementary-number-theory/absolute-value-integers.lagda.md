@@ -1,8 +1,12 @@
-#  The absolute value function on the integers
+# The absolute value function on the integers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.absolute-value-integers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -18,6 +22,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.unit-type
 ```
+
 </details>
 
 # The absolute value of integers

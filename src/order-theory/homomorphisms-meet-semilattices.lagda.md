@@ -1,8 +1,12 @@
 # Homomorphisms Meet Semilattices
 
-<details><summary>Imports</summary>
 ```agda
 module order-theory.homomorphisms-meet-semilattices where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -16,6 +20,7 @@ open import order-theory.meet-semilattices
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 ```
+
 </details>
 
 ## Idea

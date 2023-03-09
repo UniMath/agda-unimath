@@ -1,8 +1,12 @@
-#  Paths in undirected graphs
+# Paths in undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.paths-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.injective-maps
@@ -10,6 +14,7 @@ open import foundation.universe-levels
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
 ```
+
 </details>
 
 ## Idea

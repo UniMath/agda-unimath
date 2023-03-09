@@ -1,8 +1,12 @@
-#  The binomial types
+# The binomial types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.binomial-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.natural-numbers
 open import foundation.booleans
@@ -44,6 +48,7 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

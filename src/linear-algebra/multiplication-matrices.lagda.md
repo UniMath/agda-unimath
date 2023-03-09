@@ -1,8 +1,12 @@
 # Multiplication of matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.multiplication-matrices where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 open import linear-algebra.constant-vectors
@@ -11,6 +15,7 @@ open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definition
@@ -149,4 +154,3 @@ module _
   associative-mul-matrices x y z = {!!}
 -}
 ```
-

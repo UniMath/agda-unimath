@@ -1,8 +1,12 @@
-#  The sign homomorphism
+# The sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.sign-homomorphism where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations
@@ -28,6 +32,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

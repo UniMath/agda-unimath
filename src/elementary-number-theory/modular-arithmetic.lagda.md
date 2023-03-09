@@ -1,8 +1,12 @@
-#  Modular arithmetic
+# Modular arithmetic
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.modular-arithmetic where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.congruence-integers
@@ -34,6 +38,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.

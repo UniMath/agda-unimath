@@ -1,11 +1,16 @@
-#  Baire space
+# Baire space
 
-<details><summary>Imports</summary>
 ```agda
 module set-theory.baire-space where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

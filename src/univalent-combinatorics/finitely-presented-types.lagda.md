@@ -1,8 +1,12 @@
-#  Finitely presented types
+# Finitely presented types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.finitely-presented-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,6 +24,7 @@ open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

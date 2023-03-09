@@ -1,8 +1,12 @@
 # The binomial theorem for semirings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.binomial-theorem-semirings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -20,6 +24,7 @@ open import ring-theory.semirings
 open import ring-theory.sums-semirings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

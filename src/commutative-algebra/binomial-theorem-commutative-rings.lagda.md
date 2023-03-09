@@ -1,8 +1,12 @@
 # The binomial theorem in commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.binomial-theorem-commutative-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.sums-commutative-rings
@@ -21,6 +25,7 @@ open import linear-algebra.vectors-on-commutative-rings
 open import ring-theory.binomial-theorem-rings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

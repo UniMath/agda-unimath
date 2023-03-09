@@ -1,8 +1,12 @@
-#  The standard finite types
+# The standard finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.standard-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
@@ -26,6 +30,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import structured-types.types-equipped-with-endomorphisms
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
-#  Walks in undirected graphs
+# Walks in undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.walks-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
@@ -24,6 +28,7 @@ open import foundation.unordered-pairs
 open import graph-theory.undirected-graphs
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
 # Matrices
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.matrices where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -11,13 +15,14 @@ open import foundation.universe-levels
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 ```
+
 </details>
 
 ## Idea
 
 An `(m × n)`-matrix of elements in `A` is an arrangement of elements of A with `m` rows and `n` columns. In other words, a matrix is vector of length `m` of vectors of length `n` of elements of `A`.
 
-##  Definitions
+## Definitions
 
 ### Matrices
 

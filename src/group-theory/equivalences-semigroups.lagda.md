@@ -1,8 +1,12 @@
-#  Equivalences between semigroups
+# Equivalences between semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.equivalences-semigroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -19,6 +23,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

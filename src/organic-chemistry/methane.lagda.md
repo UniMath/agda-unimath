@@ -1,8 +1,12 @@
 # Methane
 
-<details><summary>Imports</summary>
 ```agda
 module organic-chemistry.methane where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import finite-group-theory.tetrahedra-in-3-space using (tetrahedron-in-3-space)
 open import foundation.dependent-pair-types
@@ -17,6 +21,7 @@ open import organic-chemistry.hydrocarbons using (hydrocarbon)
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 ## Idea
 

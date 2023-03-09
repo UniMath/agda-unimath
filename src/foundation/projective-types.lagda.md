@@ -1,8 +1,12 @@
-#  Projective types
+# Projective types
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.projective-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.connected-maps
 open import foundation.functions
@@ -12,6 +16,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

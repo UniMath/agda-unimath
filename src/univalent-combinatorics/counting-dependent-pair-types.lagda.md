@@ -1,8 +1,12 @@
-#  Counting the elements of dependent pair types
+# Counting the elements of dependent pair types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.counting-dependent-pair-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -30,6 +34,7 @@ open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

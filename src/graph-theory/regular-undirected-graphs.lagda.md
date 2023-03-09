@@ -1,4 +1,4 @@
-#  Regular undirected graph
+# Regular undirected graph
 
 ```agda
 module graph-theory.regular-undirected-graphs where

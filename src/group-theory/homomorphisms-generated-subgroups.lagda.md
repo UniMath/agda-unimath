@@ -1,8 +1,12 @@
-#  Homomorphisms of generated subgroups
+# Homomorphisms of generated subgroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-generated-subgroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -29,6 +33,7 @@ open import group-theory.subgroups-generated-by-subsets-groups
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

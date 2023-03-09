@@ -1,8 +1,12 @@
-#  The rational numbers
+# The rational numbers
 
-<details><summary>Imports</summary>
 ```agda
 module elementary-number-theory.rational-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.bezouts-lemma
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
@@ -26,6 +30,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea
@@ -458,4 +463,3 @@ is-set-ℚ =
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
 ```
-

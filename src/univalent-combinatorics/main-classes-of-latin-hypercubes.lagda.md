@@ -1,8 +1,12 @@
-#  The groupoid of main classes of Latin hypercubes
+# The groupoid of main classes of Latin hypercubes
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.main-classes-of-latin-hypercubes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.decidable-propositions
@@ -22,6 +26,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Definition

@@ -1,8 +1,12 @@
-#  Local rings
+# Local rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.local-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -13,6 +17,7 @@ open import ring-theory.invertible-elements-rings
 open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea

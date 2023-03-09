@@ -1,8 +1,12 @@
-#  Equivalences of undirected graphs
+# Equivalences of undirected graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.equivalences-undirected-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -21,6 +25,7 @@ open import foundation.unordered-pairs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+
 </details>
 
 ## Idea

@@ -1,9 +1,16 @@
-#  The group of n-element types
+# The group of n-element types
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.finite-type-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
@@ -30,6 +37,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ### Definition
@@ -134,4 +142,3 @@ module _
   pr1 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-sec-hom-inv-loop-group-fin-UU-Fin-Group
   pr2 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-retr-hom-inv-loop-group-fin-UU-Fin-Group
 ```
-

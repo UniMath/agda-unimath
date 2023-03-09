@@ -1,12 +1,17 @@
-#  Pointed families of types
+# Pointed families of types
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.pointed-families-of-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

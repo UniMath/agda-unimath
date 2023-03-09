@@ -1,8 +1,12 @@
-#  The universal property of pushouts
+# The universal property of pushouts
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.universal-property-pushouts where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cones-pullbacks
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -20,6 +24,7 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 open import synthetic-homotopy-theory.cocones-pushouts
 ```
+
 </details>
 
 ## Definition

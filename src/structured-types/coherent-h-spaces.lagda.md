@@ -1,8 +1,12 @@
-#  Coherent H-spaces
+# Coherent H-spaces
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.coherent-h-spaces where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation-core.endomorphisms
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -25,6 +29,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 ```
+
 </details>
 
 ## Idea

@@ -55,7 +55,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
-            
+
       - name: Typecheck the whole formalisation
         run: |
           cd main
@@ -102,3 +102,10 @@ jobs:
         run: |
           cd main
           make agda-html
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - uses: pre-commit/action@v3.0.0

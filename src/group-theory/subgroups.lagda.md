@@ -1,8 +1,12 @@
-#  Subgroups
+# Subgroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -35,6 +39,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Definitions
@@ -119,7 +124,11 @@ module _
   is-prop-is-subgroup-subset-Group : is-prop is-subgroup-subset-Group
   is-prop-is-subgroup-subset-Group =
     is-prop-type-Prop is-subgroup-subset-group-Prop
+```
 
+### The type of all subgroups of a group
+
+```agda
 Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
 Subgroup l G = type-subtype (is-subgroup-subset-group-Prop {l2 = l} G)

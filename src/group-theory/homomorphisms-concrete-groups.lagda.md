@@ -1,8 +1,12 @@
-#  Homomorphisms of concrete groups
+# Homomorphisms of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.homomorphisms-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,6 +24,7 @@ open import group-theory.higher-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-higher-groups
 ```
+
 </details>
 
 ```agda

@@ -1,8 +1,12 @@
-#  Complete multipartite graphs
+# Complete multipartite graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-multipartite-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -14,6 +18,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+
 </details>
 
 ## Idea

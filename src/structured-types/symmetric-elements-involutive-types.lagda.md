@@ -1,12 +1,17 @@
-#  Symmetric elements of involutive types
+# Symmetric elements of involutive types
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.symmetric-elements-involutive-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.universe-levels
 open import structured-types.involutive-types
 open import univalent-combinatorics.2-element-types
 ```
+
 </details>
 
 ## Idea

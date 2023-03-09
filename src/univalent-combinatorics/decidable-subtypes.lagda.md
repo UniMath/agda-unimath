@@ -1,13 +1,17 @@
-#  Decidable subtypes of finite types
+# Decidable subtypes of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.decidable-subtypes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.decidable-subtypes public
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
-open import foundation.decidable-subtypes public
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.injective-maps
@@ -20,6 +24,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+
 </details>
 
 ## Definitions

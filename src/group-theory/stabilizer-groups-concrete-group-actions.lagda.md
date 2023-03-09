@@ -1,8 +1,12 @@
-#  Stabilizers of concrete group actions
+# Stabilizers of concrete group actions
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.stabilizer-groups-concrete-group-actions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.connected-components
 open import foundation.dependent-pair-types
@@ -19,6 +23,7 @@ open import group-theory.orbits-concrete-group-actions
 open import group-theory.subgroups-concrete-groups
 open import group-theory.transitive-concrete-group-actions
 ```
+
 </details>
 
 ## Idea

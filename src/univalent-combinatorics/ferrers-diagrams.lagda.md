@@ -1,8 +1,12 @@
-#  Ferrers diagrams (unlabeled partitions)
+# Ferrers diagrams (unlabeled partitions)
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.ferrers-diagrams where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -21,6 +25,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 ```
+
 </details>
 
 ## Idea

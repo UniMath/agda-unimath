@@ -1,9 +1,16 @@
-#  Deloopings of the sign homomorphism
+# Deloopings of the sign homomorphism
 
-<details><summary>Imports</summary>
 ```agda
 {-# OPTIONS --lossy-unification #-}
+```
+
+```agda
 module finite-group-theory.delooping-sign-homomorphism where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import finite-group-theory.finite-type-groups
@@ -58,6 +65,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ### Deloopings of the sign homomorphism
@@ -1951,4 +1959,3 @@ module _
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
 ```
-

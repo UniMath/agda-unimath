@@ -1,8 +1,12 @@
-#  Finite monoids
+# Finite monoids
 
-<details><summary>Imports</summary>
 ```agda
 module finite-group-theory.finite-monoids where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import finite-group-theory.finite-semigroups
 open import foundation.decidable-propositions
@@ -23,6 +27,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

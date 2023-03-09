@@ -1,8 +1,12 @@
-#  Magmas
+# Magmas
 
-<details><summary>Imports</summary>
 ```agda
 module structured-types.magmas where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -14,6 +18,7 @@ open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

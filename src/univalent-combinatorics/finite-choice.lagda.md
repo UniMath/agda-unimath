@@ -1,8 +1,12 @@
-#  Finite choice
+# Finite choice
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.finite-choice where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 open import foundation.coproduct-types
@@ -35,6 +39,7 @@ open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

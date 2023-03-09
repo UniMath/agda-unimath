@@ -1,8 +1,12 @@
-#  Small multisets
+# Small multisets
 
-<details><summary>Imports</summary>
 ```agda
 module trees.small-multisets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -19,6 +23,7 @@ open import foundation.universe-levels
 open import trees.multisets
 open import trees.w-types
 ```
+
 </details>
 
 ## Idea

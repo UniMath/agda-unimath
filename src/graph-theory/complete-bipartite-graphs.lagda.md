@@ -1,8 +1,12 @@
-#  Complete bipartite graphs
+# Complete bipartite graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.complete-bipartite-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
@@ -15,6 +19,7 @@ open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Definition

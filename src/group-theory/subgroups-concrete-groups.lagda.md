@@ -1,8 +1,12 @@
-#  Subgroups of concrete groups
+# Subgroups of concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.subgroups-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.0-maps
 open import foundation.dependent-pair-types
@@ -26,6 +30,7 @@ open import structured-types.pointed-types
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 ```
+
 </details>
 
 ## Idea

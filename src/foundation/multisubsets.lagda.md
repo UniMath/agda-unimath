@@ -1,8 +1,12 @@
-#  Multisubsets
+# Multisubsets
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.multisubsets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
@@ -13,6 +17,7 @@ open import foundation.sets
 open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

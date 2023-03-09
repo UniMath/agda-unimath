@@ -1,8 +1,12 @@
 # Abstract polytopes
 
-<details><summary>Imports</summary>
 ```agda
 module polytopes.abstract-polytopes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
@@ -22,6 +26,7 @@ open import univalent-combinatorics
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

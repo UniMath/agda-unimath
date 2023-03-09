@@ -1,8 +1,12 @@
 # Scalar multiplication of vectors on rings
 
-<details><summary>Imports</summary>
 ```agda
 module linear-algebra.scalar-multiplication-vectors-on-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -15,6 +19,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.modules-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Definition
@@ -100,4 +105,3 @@ module _
   vec-left-module-Ring : (n : ℕ) → left-module-Ring l R
   vec-left-module-Ring n = vec-Ring-Ab R n , scalar-mul-hom-Ring n
 ```
-

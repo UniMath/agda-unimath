@@ -1,4 +1,4 @@
-#  Commutative algebra
+# Commutative algebra
 
 ```agda
 module commutative-algebra where

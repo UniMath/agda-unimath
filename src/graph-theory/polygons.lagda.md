@@ -1,8 +1,12 @@
-#  Polygons
+# Polygons
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.polygons where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import foundation.decidable-equality
@@ -22,6 +26,7 @@ open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 open import univalent-combinatorics.finite-types
 ```
+
 </details>
 
 ## Idea

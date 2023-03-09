@@ -1,8 +1,12 @@
 # Sums of elements in rings
 
-<details><summary>Imports</summary>
 ```agda
 module ring-theory.sums-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.functions
@@ -17,6 +21,7 @@ open import ring-theory.semirings
 open import ring-theory.sums-semirings
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

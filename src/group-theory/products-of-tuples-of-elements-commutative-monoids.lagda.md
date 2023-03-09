@@ -1,8 +1,12 @@
-#  Products of tuples of elements in commutative monoids
+# Products of tuples of elements in commutative monoids
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.products-of-tuples-of-elements-commutative-monoids where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -16,6 +20,7 @@ open import group-theory.unordered-tuples-of-elements-commutative-monoids
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

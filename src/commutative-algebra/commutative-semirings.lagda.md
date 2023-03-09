@@ -1,8 +1,12 @@
-#  Commutative semirings
+# Commutative semirings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.commutative-semirings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
@@ -13,6 +17,7 @@ open import foundation.sets
 open import foundation.universe-levels
 open import ring-theory.semirings
 ```
+
 </details>
 
 ## Idea

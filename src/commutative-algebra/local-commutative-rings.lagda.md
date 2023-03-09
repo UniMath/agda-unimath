@@ -1,8 +1,12 @@
-#  Local commutative rings
+# Local commutative rings
 
-<details><summary>Imports</summary>
 ```agda
 module commutative-algebra.local-commutative-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.invertible-elements-commutative-rings
 open import foundation.cartesian-product-types
@@ -16,6 +20,7 @@ open import ring-theory.local-rings
 open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
+
 </details>
 
 ## Idea
@@ -62,4 +67,3 @@ module _
     is-local-Commutative-Ring commutative-ring-Local-Commutative-Ring
   is-local-commutative-ring-Local-Commutative-Ring = pr2 R
 ```
-

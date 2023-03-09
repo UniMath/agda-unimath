@@ -1,8 +1,12 @@
-#  Powersets
+# Powersets
 
-<details><summary>Imports</summary>
 ```agda
 module foundation.powersets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -18,6 +22,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
+
 </details>
 
 ## Definition

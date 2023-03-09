@@ -1,8 +1,12 @@
-#  Undirected rees
+# Undirected rees
 
-<details><summary>Imports</summary>
 ```agda
 module trees.undirected-trees where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
@@ -22,6 +26,7 @@ open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 open import graph-theory.walks-undirected-graphs
 ```
+
 </details>
 
 ## Idea

@@ -1,8 +1,12 @@
-#  Walks in directed graphs
+# Walks in directed graphs
 
-<details><summary>Imports</summary>
 ```agda
 module graph-theory.walks-directed-graphs where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
@@ -21,6 +25,7 @@ open import graph-theory.directed-graphs
 open import graph-theory.equivalences-directed-graphs
 open import graph-theory.morphisms-directed-graphs
 ```
+
 </details>
 
 ## Idea

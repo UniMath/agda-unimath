@@ -1,8 +1,12 @@
-#  Cofibers
+# Cofibers
 
-<details><summary>Imports</summary>
 ```agda
 module synthetic-homotopy-theory.cofibers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -15,6 +19,7 @@ open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
+
 </details>
 
 ## Idea

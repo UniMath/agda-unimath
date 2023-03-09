@@ -1,8 +1,12 @@
-#  Symmetric concrete groups
+# Symmetric concrete groups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.symmetric-concrete-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -13,6 +17,7 @@ open import foundation.universe-levels
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 ```
+
 </details>
 
 ## Idea

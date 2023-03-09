@@ -1,8 +1,12 @@
-#  Isomorphisms of semigroups
+# Isomorphisms of semigroups
 
-<details><summary>Imports</summary>
 ```agda
 module group-theory.isomorphisms-semigroups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import category-theory.isomorphisms-large-precategories
 open import foundation-core.function-extensionality
 open import foundation.contractible-types
@@ -19,6 +23,7 @@ open import group-theory.homomorphisms-semigroups
 open import group-theory.precategory-of-semigroups
 open import group-theory.semigroups
 ```
+
 </details>
 
 ## Idea

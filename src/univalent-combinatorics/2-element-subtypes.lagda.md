@@ -1,8 +1,12 @@
-#  2-element subtypes
+# 2-element subtypes
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.2-element-subtypes where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -31,6 +35,7 @@ open import foundation.unordered-pairs
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea

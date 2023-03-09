@@ -1,8 +1,12 @@
-#  Retracts of finite types
+# Retracts of finite types
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.retracts-of-finite-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
@@ -21,6 +25,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Properties

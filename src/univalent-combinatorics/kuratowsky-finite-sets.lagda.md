@@ -1,8 +1,12 @@
-#  Kuratowsky finite sets
+# Kuratowsky finite sets
 
-<details><summary>Imports</summary>
 ```agda
 module univalent-combinatorics.kuratowsky-finite-sets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
@@ -17,6 +21,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
 ```
+
 </details>
 
 ## Idea
