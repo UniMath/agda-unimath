@@ -72,25 +72,29 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  commutative-monoid-Semiring : Commutative-Monoid l
-  commutative-monoid-Semiring = pr1 R
+  additive-commutative-monoid-Semiring : Commutative-Monoid l
+  additive-commutative-monoid-Semiring = pr1 R
 
-  monoid-Semiring : Monoid l
-  monoid-Semiring = monoid-Commutative-Monoid commutative-monoid-Semiring
+  additive-monoid-Semiring : Monoid l
+  additive-monoid-Semiring =
+    monoid-Commutative-Monoid additive-commutative-monoid-Semiring
 
-  semigroup-Semiring : Semigroup l
-  semigroup-Semiring =
-    semigroup-Commutative-Monoid commutative-monoid-Semiring
+  additive-semigroup-Semiring : Semigroup l
+  additive-semigroup-Semiring =
+    semigroup-Commutative-Monoid additive-commutative-monoid-Semiring
 
   set-Semiring : Set l
-  set-Semiring = set-Commutative-Monoid commutative-monoid-Semiring
+  set-Semiring =
+    set-Commutative-Monoid additive-commutative-monoid-Semiring
 
   type-Semiring : UU l
-  type-Semiring = type-Commutative-Monoid commutative-monoid-Semiring
+  type-Semiring =
+    type-Commutative-Monoid additive-commutative-monoid-Semiring
 
   is-set-type-Semiring : is-set type-Semiring
   is-set-type-Semiring =
-    is-set-type-Commutative-Monoid commutative-monoid-Semiring
+    is-set-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring)
 ```
 
 ### Addition in a semiring
@@ -102,52 +106,57 @@ module _
 
   has-associative-add-Semiring : has-associative-mul-Set (set-Semiring R)
   has-associative-add-Semiring =
-    has-associative-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    has-associative-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   add-Semiring : type-Semiring R → type-Semiring R → type-Semiring R
-  add-Semiring = mul-Commutative-Monoid (commutative-monoid-Semiring R)
+  add-Semiring =
+    mul-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   add-Semiring' : type-Semiring R → type-Semiring R → type-Semiring R
-  add-Semiring' = mul-Commutative-Monoid' (commutative-monoid-Semiring R)
+  add-Semiring' =
+    mul-Commutative-Monoid' (additive-commutative-monoid-Semiring R)
 
   ap-add-Semiring :
     {x y x' y' : type-Semiring R} →
     x ＝ x' → y ＝ y' → add-Semiring x y ＝ add-Semiring x' y'
-  ap-add-Semiring = ap-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+  ap-add-Semiring =
+    ap-mul-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   associative-add-Semiring :
     (x y z : type-Semiring R) →
     add-Semiring (add-Semiring x y) z ＝ add-Semiring x (add-Semiring y z)
   associative-add-Semiring =
-    associative-mul-Commutative-Monoid (commutative-monoid-Semiring R)
-
-  additive-semigroup-Semiring : Semigroup l
-  additive-semigroup-Semiring =
-    semigroup-Commutative-Monoid (commutative-monoid-Semiring R)
+    associative-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   commutative-add-Semiring :
     (x y : type-Semiring R) → add-Semiring x y ＝ add-Semiring y x
   commutative-add-Semiring =
-    commutative-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    commutative-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   interchange-add-add-Semiring :
     (x y x' y' : type-Semiring R) →
     ( add-Semiring (add-Semiring x y) (add-Semiring x' y')) ＝
     ( add-Semiring (add-Semiring x x') (add-Semiring y y'))
   interchange-add-add-Semiring =
-    interchange-mul-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    interchange-mul-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   right-swap-add-Semiring :
     (x y z : type-Semiring R) →
     add-Semiring (add-Semiring x y) z ＝ add-Semiring (add-Semiring x z) y
   right-swap-add-Semiring =
-    right-swap-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    right-swap-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   left-swap-add-Semiring :
     (x y z : type-Semiring R) →
     add-Semiring x (add-Semiring y z) ＝ add-Semiring y (add-Semiring x z)
   left-swap-add-Semiring =
-    left-swap-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    left-swap-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ### The zero element of a semiring
@@ -159,10 +168,12 @@ module _
 
   has-zero-Semiring : is-unital (add-Semiring R)
   has-zero-Semiring =
-    has-unit-Commutative-Monoid (commutative-monoid-Semiring R)
+    has-unit-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   zero-Semiring : type-Semiring R
-  zero-Semiring = unit-Commutative-Monoid (commutative-monoid-Semiring R)
+  zero-Semiring =
+    unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   is-zero-Semiring : type-Semiring R → UU l
   is-zero-Semiring x = Id x zero-Semiring
@@ -176,12 +187,14 @@ module _
   left-unit-law-add-Semiring :
     (x : type-Semiring R) → Id (add-Semiring R zero-Semiring x) x
   left-unit-law-add-Semiring =
-    left-unit-law-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    left-unit-law-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   right-unit-law-add-Semiring :
     (x : type-Semiring R) → Id (add-Semiring R x zero-Semiring) x
   right-unit-law-add-Semiring =
-    right-unit-law-mul-Commutative-Monoid (commutative-monoid-Semiring R)
+    right-unit-law-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ### Multiplication in a semiring
