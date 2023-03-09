@@ -11,25 +11,31 @@ status = 0
 def sort_and_split_namespaces(imports):
     # Subdivide imports into namespaces
     namespaces = defaultdict(set)
-    for __import in imports:
+    for statement in imports:
+        namespace_start = statement.index("open import") + len("open import") + 1
+        module = statement[namespace_start:]
         try:
-            namespaces[__import[:__import.index(".")]].add(__import)
+            namespace = module[:module.rindex(".")]
+            namespaces[namespace].add(module)
         except ValueError:
-            namespaces[__import].add(__import)
+            namespaces[module].add(module)
 
     # If the entire namespace is imported, no further imports from that namespace are needed
     for k in namespaces.keys():
         if k in namespaces[k]:
             namespaces[k] = {k}
 
-    for __import in namespaces["open import foundation"]:
-        namespaces["open import foundation-core"].discard("open import foundation-core" + __import[__import.index("."):])
+    for statement in namespaces["foundation"]:
+        submodule_start = statement.index(".")
+        namespaces["foundation-core"].discard("foundation-core" + statement[submodule_start:])
 
     # Remove any namespaces that ended up being empty
-    namespaces = dict(filter(lambda kv: len(kv[1])>0, namespaces.items()))
+    namespaces = dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
 
     # Join together with the appropriate line separations
-    return "\n\n".join("\n".join(sorted(namespace_imports)) for namespace, namespace_imports in sorted(namespaces.items()))
+    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports))) for namespace, namespace_imports in sorted(namespaces.items()))
+
+    return "\n\n".join(blocks)
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
     with open(fpath, 'r', encoding='UTF-8') as file:
@@ -47,30 +53,25 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
             openStatements = []
 
             for l in newBlock:
-                if l.startswith('```') or len(l.strip()) == 0:
+                if  len(l) == 0 or l.startswith('```') or '<details>' in l or '</details>' in l:
                     continue
-                if l.lstrip().startswith('module') or l.lstrip().startswith('{-# OPTIONS'):
+                if l.startswith('module') or l.startswith('{-# OPTIONS'):
                     print(
                         'Error: module decl./pragmas can not be in the details import block\n\
                         Please put it in the first Agda block after the first header:\n\t' + str(fpath))
                     sys.exit(1)
                 elif 'open import' in l:
-                    if l.rstrip().endswith('public'):
+                    if l.endswith('public'):
                         publicImports.add(l)
                     else:
                         nonPublicImports.add(l)
                 elif 'open' in l:
                     openStatements.append(l)
-                elif l.strip() == '```' or l.strip() == '```agda' or '<details>' in l.strip() or '</details>' in l.strip():
-                    pass
                 else:
                     print('Error: unknown statement in details import block:\n\t' + str(fpath))
-
-
             if len(openStatements) > 0:
-
                 print(
-                    'Warning: Please review the imports block, it contains non-imports statements:\n\t' + str(fpath))
+                    'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath))
             imports = '\n\n'.join(
                 filter(lambda ls: len(ls) > 0,
                     [sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(openStatements))]))
