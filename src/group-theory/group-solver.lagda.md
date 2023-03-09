@@ -17,7 +17,6 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.groups
 
 open import linear-algebra.vectors
 

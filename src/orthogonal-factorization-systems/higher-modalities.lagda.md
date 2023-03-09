@@ -16,7 +16,6 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.propositions
 open import foundation.sections
 open import foundation.small-types
 open import foundation.subuniverses

@@ -15,7 +15,6 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
 ```

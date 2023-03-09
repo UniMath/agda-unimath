@@ -25,8 +25,8 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
         if start != -1 and end != -1:
             block = contents[start:end]
             newBlock = filter(lambda l: l.strip() != '', block.split('\n'))
-            publicImports = []
-            nonPublicImports = []
+            publicImports = set()
+            nonPublicImports = set()
             otherStuff = []
 
             for l in newBlock:
@@ -39,9 +39,9 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
                     sys.exit(1)
                 elif 'open import' in l:
                     if l.endswith('public'):
-                        publicImports.append(l)
+                        publicImports.add(l)
                     else:
-                        nonPublicImports.append(l)
+                        nonPublicImports.add(l)
                 elif 'open' in l:
                     otherStuff.append(l)
 

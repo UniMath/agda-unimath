@@ -25,7 +25,6 @@ open import foundation.truncated-types
 open import foundation.universal-property-dependent-pair-types
 
 open import foundation-core.truncation-levels
-open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
 open import foundation-core.universe-levels
 ```

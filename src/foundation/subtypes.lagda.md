@@ -11,7 +11,6 @@ open import foundation-core.subtypes public
 
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-function-types
 open import foundation.equational-reasoning
 open import foundation.injective-maps
 open import foundation.logical-equivalences
