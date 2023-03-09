@@ -83,3 +83,12 @@ module _
   pr2 is-orthogonal-factorization-system-Prop =
     is-prop-is-orthogonal-factorization-system
 ```
+
+## See also
+
+The equivalent notions of
+- [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
+- [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
+- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
+
+- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020 ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526), [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
