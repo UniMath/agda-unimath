@@ -781,6 +781,8 @@
   - [Algebras of rings](ring-theory.algebras-rings.md)
   - [Binomial theorem for rings](ring-theory.binomial-theorem-rings.md)
   - [Binomial theorem for semirings](ring-theory.binomial-theorem-semirings.md)
+  - [Congruence relations on rings](ring-theory.congruence-relations-rings.md)
+  - [Congruence relations on semirings](ring-theory.congruence-relations-semirings.md)
   - [Dependent products of rings](ring-theory.dependent-products-rings.md)
   - [Division rings](ring-theory.division-rings.md)
   - [Homomorphisms of rings](ring-theory.homomorphisms-rings.md)

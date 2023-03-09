@@ -29,9 +29,9 @@ A congruence relation on an abelian group `A` is a congruence relation on the un
 ## Definition
 
 ```agda
-is-congruence-Eq-Rel-Ab :
+is-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) → Eq-Rel l2 (type-Ab A) → UU (l1 ⊔ l2)
-is-congruence-Eq-Rel-Ab A = is-congruence-Eq-Rel-Group (group-Ab A)
+is-congruence-Ab A = is-congruence-Group (group-Ab A)
 
 congruence-Ab : {l : Level} (l2 : Level) (A : Ab l) → UU (l ⊔ lsuc l2)
 congruence-Ab l2 A = congruence-Group l2 (group-Ab A)
@@ -89,8 +89,7 @@ module _
     is-transitive-Rel-Prop prop-congruence-Ab
   trans-congruence-Ab = trans-congruence-Group (group-Ab A) R
 
-  add-congruence-Ab :
-    is-congruence-Eq-Rel-Ab A eq-rel-congruence-Ab
+  add-congruence-Ab : is-congruence-Ab A eq-rel-congruence-Ab
   add-congruence-Ab = mul-congruence-Group (group-Ab A) R
 
   left-add-congruence-Ab :

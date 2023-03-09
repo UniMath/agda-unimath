@@ -469,7 +469,7 @@ module _
     sim-left-sim-congruence-Normal-Subgroup x y
 
   mul-congruence-Normal-Subgroup :
-    is-congruence-Eq-Rel-Group G eq-rel-congruence-Normal-Subgroup
+    is-congruence-Group G eq-rel-congruence-Normal-Subgroup
   mul-congruence-Normal-Subgroup
     {x} {x'} {y} {y'} p q =
     is-closed-under-eq-Normal-Subgroup G N

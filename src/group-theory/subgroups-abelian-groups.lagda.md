@@ -547,7 +547,7 @@ module _
       ( normal-subgroup-Subgroup-Ab A B)
 
   add-congruence-Subgroup-Ab :
-    is-congruence-Eq-Rel-Group
+    is-congruence-Group
       ( group-Ab A)
       ( eq-rel-congruence-Subgroup-Ab)
   add-congruence-Subgroup-Ab =
