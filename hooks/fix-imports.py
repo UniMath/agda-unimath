@@ -8,7 +8,7 @@ import utils
 
 status = 0
 
-def sort_and_split_namespaces(imports):
+def normalize_imports(imports):
     # Subdivide imports into namespaces
     namespaces = defaultdict(set)
     for statement in imports:
@@ -74,7 +74,7 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
                     'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath))
             imports = '\n\n'.join(
                 filter(lambda ls: len(ls) > 0,
-                    [sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(openStatements))]))
+                    [normalize_imports(publicImports), normalize_imports(nonPublicImports), '\n'.join(sorted(openStatements))]))
 
             importBlock = '<details><summary>Imports</summary>\n' + \
                 '\n```agda\n' +\
