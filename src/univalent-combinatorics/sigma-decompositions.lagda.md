@@ -11,8 +11,8 @@ open import univalent-combinatorics.decidable-equivalence-relations
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.type-duality
 open import univalent-combinatorics.quotients-finite-types
-
 open import foundation.sigma-decompositions public
 open import foundation.contractible-types
 open import foundation.decidable-propositions
@@ -22,8 +22,10 @@ open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
@@ -31,9 +33,12 @@ open import foundation.images
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universe-levels
+
 ```
 
 </details>
@@ -154,9 +159,33 @@ is-finite-base-type-Σ-Decomposition-𝔽 D =
       ( λ x → is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 D x)))
 ```
 
+### Equivalence between finite surjection and finite Σ-decomposition
+
+```agda
+equiv-finite-surjection-Σ-Decomposition-𝔽 :
+  {l : Level} (A : 𝔽 l ) →
+  Σ-Decomposition-𝔽 l l (type-𝔽 A)  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B) )
+equiv-finite-surjection-Σ-Decomposition-𝔽 {l} A =
+  equiv-Σ
+    ( λ B → type-𝔽 A ↠ type-𝔽 B)
+    ( id-equiv)
+    ( λ B →
+      ( ( equiv-fib-pr1 (λ (X : 𝔽 l) → (type-𝔽 X) ↠ (type-𝔽 B))) A ∘e
+      ( ( equiv-Σ
+          ( λ x → pr1 x ＝ A)
+          ( id-equiv)
+          ( λ slice → {!!}) ∘e
+      ( inv-equiv
+        ( equiv-Σ-equiv-base
+          ( λ Y → type-𝔽 A ≃ Σ (pr1 B) (λ x → pr1 (pr1 (Y x))))
+          ( equiv-Fib-trunc-Prop-𝔽 l B)))))))
+```
+
 ### Equivalence between finite decidable equivalence relations and finite Σ-decompositions
 
 ```agda
+
+
 
 ```
 
@@ -286,7 +315,7 @@ module _
     type-subtype is-finite-fibered-Σ-Decomposition ≃
     fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A
   equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype =
-     equiv-Σ
+    equiv-Σ
        ( λ D →
          Σ-Decomposition-𝔽 l4 l5 ( indexing-type-Σ-Decomposition-𝔽 D))
        ( equiv-Σ-Decomposition-𝔽-is-finite-subtype )

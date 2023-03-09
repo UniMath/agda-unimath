@@ -45,4 +45,5 @@ module _
     (x y : X) → is-decidable (type-Decidable-Relation x y)
   is-decidable-type-Decidable-Relation x y =
     is-decidable-type-decidable-Prop (R x y)
+
 ```

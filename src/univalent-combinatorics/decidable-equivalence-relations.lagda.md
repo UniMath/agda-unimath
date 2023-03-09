@@ -8,11 +8,22 @@ module univalent-combinatorics.decidable-equivalence-relations where
 
 ```agda
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.function-types
+open import foundation.binary-relations
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
 open import foundation.equivalence-relations
 open import foundation.propositions
+open import foundation.propositional-truncations
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 
@@ -85,10 +96,103 @@ module _
     sim-Decidable-Equivalence-Relation-𝔽 x z
   transitive-Decidable-Equivalence-Relation-𝔽 =
     transitive-Decidable-Equivalence-Relation R
+
+module _
+  {l1 l2 : Level} (A : 𝔽 l1) (R : Decidable-Relation l2 (type-𝔽 A))
+  where
+
+
+  is-finite-relation-Decidable-Relation-𝔽 :
+    (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (type-Decidable-Relation R x y)
+  is-finite-relation-Decidable-Relation-𝔽 x y =
+     unit-trunc-Prop
+       ( count-decidable-Prop
+         ( relation-Decidable-Relation R x y )
+         ( is-decidable-type-Decidable-Relation R x y))
+
+
+  is-finite-is-reflexive-Dec-Rel-Prop-𝔽 :
+    is-finite (is-reflexive-Rel-Prop (relation-Decidable-Relation R))
+  is-finite-is-reflexive-Dec-Rel-Prop-𝔽 =
+    is-finite-Π'
+      ( is-finite-type-𝔽 A)
+      (λ x → is-finite-relation-Decidable-Relation-𝔽 x x )
+
+  is-finite-is-symmetric-Dec-Rel-Prop-𝔽 :
+    is-finite (is-symmetric-Rel-Prop (relation-Decidable-Relation R))
+  is-finite-is-symmetric-Dec-Rel-Prop-𝔽 =
+    is-finite-Π'
+      ( is-finite-type-𝔽 A)
+      ( λ x →
+         is-finite-Π'
+           ( is-finite-type-𝔽 A)
+           ( λ y →
+             is-finite-function-type
+               ( is-finite-relation-Decidable-Relation-𝔽 x y)
+               ( is-finite-relation-Decidable-Relation-𝔽 y x)))
+
+  is-finite-is-transitive-Dec-Rel-Prop-𝔽 :
+    is-finite (is-transitive-Rel-Prop (relation-Decidable-Relation R))
+  is-finite-is-transitive-Dec-Rel-Prop-𝔽 =
+    is-finite-Π'
+      ( is-finite-type-𝔽 A)
+      ( λ x →
+        is-finite-Π'
+          ( is-finite-type-𝔽 A)
+          ( λ y →
+            is-finite-Π'
+              ( is-finite-type-𝔽 A)
+              ( λ z →
+                is-finite-function-type
+                  ( is-finite-relation-Decidable-Relation-𝔽 x y)
+                  ( is-finite-function-type
+                     ( is-finite-relation-Decidable-Relation-𝔽 y z)
+                     ( is-finite-relation-Decidable-Relation-𝔽 x z)) )))
+
+
+  is-finite-is-equivalence-Dec-Rel-Prop-𝔽 :
+    is-finite (is-equivalence-relation (relation-Decidable-Relation R))
+  is-finite-is-equivalence-Dec-Rel-Prop-𝔽 =
+    is-finite-prod
+      ( is-finite-is-reflexive-Dec-Rel-Prop-𝔽)
+      ( is-finite-prod
+          is-finite-is-symmetric-Dec-Rel-Prop-𝔽
+          is-finite-is-transitive-Dec-Rel-Prop-𝔽)
 ```
 
 ## Properties
 
+#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a finite type.
+
+```agda
+equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 :
+  {l1 : Level} (A : 𝔽 l1) →
+  Decidable-Equivalence-Relation-𝔽 l1 A ≃ Σ (𝔽 l1) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
+equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 = {!!}
+```
+
+
 ### The type of decidable equivalence relations on a finite type is finite
 
-### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind
+```agda
+is-finite-Decidable-Relation-𝔽 :
+  {l1 : Level} (A : 𝔽 l1) →
+  is-finite (Decidable-Relation l1 (type-𝔽 A))
+is-finite-Decidable-Relation-𝔽 A =
+  is-finite-Π
+    ( is-finite-type-𝔽 A)
+    ( λ a →
+      is-finite-Π
+        ( is-finite-type-𝔽 A)
+        ( λ b → is-finite-decidable-Prop))
+
+is-finite-Dec-Eq-Rel-𝔽 :
+  {l1 : Level} (A : 𝔽 l1) →
+  is-finite (Decidable-Equivalence-Relation-𝔽 l1 A)
+is-finite-Dec-Eq-Rel-𝔽 A =
+  is-finite-Σ
+    ( is-finite-Decidable-Relation-𝔽 A)
+    ( λ R → is-finite-is-equivalence-Dec-Rel-Prop-𝔽 A R)
+```
+
+-- ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind

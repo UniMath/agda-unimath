@@ -10,6 +10,7 @@ module univalent-combinatorics.fibers-of-maps where
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -23,6 +24,7 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -130,3 +132,21 @@ is-decidable-fib-Fin {k} {l} f y =
   is-decidable-fib-count f (count-Fin k) (count-Fin l) y
 ```
 
+### If `f : A → B` and `B` is finite, then `A` is finite if and only if the fibers of f are finite
+
+```agda
+
+equiv-is-finite-domain-is-finite-fib :
+  {l1 l2 : Level} {A : UU l1} →
+  (B : 𝔽 l2) (f : A → (type-𝔽 B)) →
+  ((b : type-𝔽 B) → is-finite (fib f b)) ≃ is-finite A
+equiv-is-finite-domain-is-finite-fib {A = A} B f =
+  equiv-prop
+    ( is-prop-Π (λ b → is-prop-is-finite (fib f b)))
+    ( is-prop-is-finite A)
+    ( λ P →
+      is-finite-equiv
+        ( equiv-total-fib f)
+        ( is-finite-Σ (is-finite-type-𝔽 B) P))
+    ( λ P → is-finite-fib f P ( is-finite-type-𝔽 B))
+```

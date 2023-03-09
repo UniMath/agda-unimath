@@ -11,9 +11,14 @@ open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 ```
 
@@ -48,6 +53,13 @@ module _
   inhabited-type-Inhabited-Type-𝔽 : Inhabited-Type l
   pr1 inhabited-type-Inhabited-Type-𝔽 = type-Inhabited-Type-𝔽
   pr2 inhabited-type-Inhabited-Type-𝔽 = is-inhabited-type-Inhabited-Type-𝔽
+
+equiv-Inhabited-Type-𝔽 :
+  {l : Level} →
+  Inhabited-Type-𝔽 l ≃
+    Σ (Inhabited-Type l ) (λ X → is-finite (type-Inhabited-Type X))
+equiv-Inhabited-Type-𝔽 = equiv-right-swap-Σ
+
 ```
 
 ### Families of inhabited types
@@ -75,6 +87,20 @@ module _
 
   total-Fam-Inhabited-Types-𝔽 : 𝔽 (l1 ⊔ l2)
   total-Fam-Inhabited-Types-𝔽 = Σ-𝔽 X finite-type-Fam-Inhabited-Types-𝔽
+
+equiv-Fam-Inhabited-Type-𝔽 :
+  {l1 l2 : Level} → (X : 𝔽 l1) →
+  Fam-Inhabited-Types-𝔽 l2 X ≃
+    Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
+      ( λ Y → ((x : (type-𝔽 X)) → is-finite (type-Inhabited-Type (Y x))))
+equiv-Fam-Inhabited-Type-𝔽 X =
+   ( distributive-Π-Σ ∘e
+    ( equiv-Π
+      ( λ _ → Σ (Inhabited-Type _) ( is-finite ∘ type-Inhabited-Type))
+      ( id-equiv)
+      ( λ _ → equiv-Inhabited-Type-𝔽)))
+
+
 ```
 
 ## Proposition

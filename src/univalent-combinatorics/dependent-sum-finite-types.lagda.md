@@ -71,7 +71,7 @@ abstract
   is-finite-fiber-is-finite-Σ {l1} {l2} {X} {Y} f g x =
     apply-universal-property-trunc-Prop f
       ( is-finite-Prop (Y x))
-      ( λ e → map-trunc-Prop (λ h → count-fiber-count-Σ e h x) g)
+      ( λ e → map-trunc-Prop (λ h → count-fiber-count-Σ-count-base e h x) g)
 
 -- Theorem 16.3.6 (iii) (b), (c), B has a section implies (a)
 
