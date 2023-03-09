@@ -9,12 +9,17 @@ import utils
 status = 0
 
 def sort_and_split_namespaces(imports):
-    namespaces = defaultdict(list)
+    namespaces = defaultdict(set)
     for __import in imports:
         try:
-            namespaces[__import[:__import.rindex(".")]].append(__import)
+            namespaces[__import[:__import.rindex(".")]].add(__import)
         except ValueError:
-            namespaces[""].append(__import)
+            namespaces[__import].add(__import)
+
+    for k in namespaces.keys():
+        if k in namespaces[k]: # The entire namespace is imported. Remove all other imports
+            namespaces[k] = {k}
+
     return "\n\n".join("\n".join(sorted(namespace_imports)) for k, namespace_imports in sorted(namespaces.items()))
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
