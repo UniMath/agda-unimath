@@ -7,14 +7,14 @@ module univalent-combinatorics.inequality-types-with-counting where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
-open import elementary-number-theory.inequality-standard-finite-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

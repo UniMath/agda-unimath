@@ -7,12 +7,12 @@ module univalent-combinatorics.steiner-systems where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.finite-types
+open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

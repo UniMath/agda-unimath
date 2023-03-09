@@ -8,9 +8,9 @@ module commutative-algebra.powers-of-elements-commutative-semirings where
 
 ```agda
 open import commutative-algebra.commutative-semirings
+open import elementary-number-theory.natural-numbers
 open import foundation.identity-types
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import ring-theory.powers-of-elements-semirings
 ```
 

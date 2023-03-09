@@ -7,7 +7,6 @@ module trees.functoriality-w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.w-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
@@ -25,6 +24,7 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+open import trees.w-types
 ```
 
 </details>

@@ -7,12 +7,12 @@ module group-theory.mere-equivalences-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.equivalences-group-actions
-open import group-theory.group-actions
-open import group-theory.groups
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+open import group-theory.equivalences-group-actions
+open import group-theory.group-actions
+open import group-theory.groups
 ```
 
 </details>

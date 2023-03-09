@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.groups-of-loops-in-1-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import synthetic-homotopy-theory.loop-spaces
 open import foundation.1-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -16,6 +15,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.semigroups
 open import structured-types.pointed-types
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>

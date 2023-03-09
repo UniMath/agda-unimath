@@ -7,11 +7,11 @@ module group-theory.orbits-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.group-actions
-open import group-theory.groups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import group-theory.group-actions
+open import group-theory.groups
 ```
 
 </details>
@@ -32,4 +32,3 @@ module _
   hom-orbit-Abstract-Group-Action x y =
     Σ (type-Group G) (λ g → Id (mul-Abstract-Group-Action G X g x) y)
 ```
-

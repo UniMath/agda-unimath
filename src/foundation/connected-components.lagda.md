@@ -93,4 +93,3 @@ is-trunc-connected-component {l} {k} A a H =
   is-trunc-Σ H (λ x → is-trunc-is-prop k is-prop-type-trunc-Prop)
 
 ```
-

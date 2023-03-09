@@ -7,18 +7,27 @@ module group-theory.subgroups-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.abelian-groups
-open import group-theory.embeddings-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.semigroups
-open import group-theory.subgroups
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import group-theory.abelian-groups
+open import group-theory.congruence-relations-abelian-groups
+open import group-theory.congruence-relations-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.normal-subgroups
+open import group-theory.semigroups
+open import group-theory.subgroups
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -90,8 +99,39 @@ module _
   subset-Subgroup-Ab : subset-Ab l2 A
   subset-Subgroup-Ab = subset-Subgroup (group-Ab A) B
 
+  type-Subgroup-Ab : UU (l1 ⊔ l2)
+  type-Subgroup-Ab = type-Subgroup (group-Ab A) B
+
+  inclusion-Subgroup-Ab : type-Subgroup-Ab → type-Ab A
+  inclusion-Subgroup-Ab = inclusion-Subgroup (group-Ab A) B
+
+  is-emb-inclusion-Subgroup-Ab : is-emb inclusion-Subgroup-Ab
+  is-emb-inclusion-Subgroup-Ab =
+    is-emb-inclusion-Subgroup (group-Ab A) B
+
+  emb-inclusion-Subgroup-Ab : type-Subgroup-Ab ↪ type-Ab A
+  emb-inclusion-Subgroup-Ab = emb-inclusion-Subgroup (group-Ab A) B
+
   is-in-Subgroup-Ab : type-Ab A → UU l2
   is-in-Subgroup-Ab = is-in-Subgroup (group-Ab A) B
+
+  is-closed-under-eq-Subgroup-Ab :
+    {x y : type-Ab A} →
+    is-in-Subgroup-Ab x → x ＝ y → is-in-Subgroup-Ab y
+  is-closed-under-eq-Subgroup-Ab =
+    is-closed-under-eq-Subgroup (group-Ab A) B
+
+  is-closed-under-eq-Subgroup-Ab' :
+    {x y : type-Ab A} →
+    is-in-Subgroup-Ab y → x ＝ y → is-in-Subgroup-Ab x
+  is-closed-under-eq-Subgroup-Ab' =
+    is-closed-under-eq-Subgroup' (group-Ab A) B
+
+  is-in-subgroup-inclusion-Subgroup-Ab :
+    (x : type-Subgroup-Ab) →
+    is-in-Subgroup-Ab (inclusion-Subgroup-Ab x)
+  is-in-subgroup-inclusion-Subgroup-Ab =
+    is-in-subgroup-inclusion-Subgroup (group-Ab A) B
 
   is-prop-is-in-Subgroup-Ab :
     (x : type-Ab A) → is-prop (is-in-Subgroup-Ab x)
@@ -108,11 +148,27 @@ module _
 
   is-closed-under-add-Subgroup-Ab :
     is-closed-under-add-subset-Ab A subset-Subgroup-Ab
-  is-closed-under-add-Subgroup-Ab = is-closed-under-mul-Subgroup (group-Ab A) B
+  is-closed-under-add-Subgroup-Ab =
+    is-closed-under-mul-Subgroup (group-Ab A) B
 
   is-closed-under-neg-Subgroup-Ab :
     is-closed-under-neg-subset-Ab A subset-Subgroup-Ab
-  is-closed-under-neg-Subgroup-Ab = is-closed-under-inv-Subgroup (group-Ab A) B
+  is-closed-under-neg-Subgroup-Ab =
+    is-closed-under-inv-Subgroup (group-Ab A) B
+
+  is-in-subgroup-left-summand-Subgroup-Ab :
+    (x y : type-Ab A) →
+    is-in-Subgroup-Ab (add-Ab A x y) → is-in-Subgroup-Ab y →
+    is-in-Subgroup-Ab x
+  is-in-subgroup-left-summand-Subgroup-Ab =
+    is-in-subgroup-left-factor-Subgroup (group-Ab A) B
+
+  is-in-subgroup-right-summand-Subgroup-Ab :
+    (x y : type-Ab A) →
+    is-in-Subgroup-Ab (add-Ab A x y) → is-in-Subgroup-Ab x →
+    is-in-Subgroup-Ab y
+  is-in-subgroup-right-summand-Subgroup-Ab =
+    is-in-subgroup-right-factor-Subgroup (group-Ab A) B
 
 is-emb-subset-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) → is-emb (subset-Subgroup-Ab {l2 = l2} A)
@@ -232,19 +288,412 @@ module _
   inclusion-ab-Subgroup-Ab = inclusion-group-Subgroup (group-Ab A) B
 ```
 
-### The type of all abelian groups equipped with an embedding into the ambient abelian group
+### Normal subgroups of an abelian group
 
 ```agda
-emb-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) → UU (l1 ⊔ l2)
-emb-Ab A B = emb-Group (group-Ab A) (group-Ab B)
+Normal-Subgroup-Ab :
+  {l1 : Level} (l2 : Level) (A : Ab l1) → UU (l1 ⊔ lsuc l2)
+Normal-Subgroup-Ab l2 A = Normal-Subgroup l2 (group-Ab A)
+```
 
-emb-Ab-Slice :
-  (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
-emb-Ab-Slice l A = emb-Group-Slice l (group-Ab A)
+## Properties
 
-emb-ab-slice-Subgroup-Ab :
-  { l1 l2 : Level} (A : Ab l1) →
-  Subgroup-Ab l2 A → emb-Ab-Slice (l1 ⊔ l2) A
-emb-ab-slice-Subgroup-Ab A = emb-group-slice-Subgroup (group-Ab A)
+### Extensionality of the type of all subgroups of an abelian group
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+
+  has-same-elements-Subgroup-Ab :
+    {l3 : Level} → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-Subgroup-Ab =
+    has-same-elements-Subgroup (group-Ab A) B
+
+  extensionality-Subgroup-Ab :
+    (C : Subgroup-Ab l2 A) → (B ＝ C) ≃ has-same-elements-Subgroup-Ab C
+  extensionality-Subgroup-Ab =
+    extensionality-Subgroup (group-Ab A) B
+
+  refl-has-same-elements-Subgroup-Ab : has-same-elements-Subgroup-Ab B
+  refl-has-same-elements-Subgroup-Ab =
+    refl-has-same-elements-Subgroup (group-Ab A) B
+
+  has-same-elements-eq-Subgroup-Ab :
+    (C : Subgroup-Ab l2 A) → (B ＝ C) → has-same-elements-Subgroup-Ab C
+  has-same-elements-eq-Subgroup-Ab =
+    has-same-elements-eq-Subgroup (group-Ab A) B
+
+  eq-has-same-elements-Subgroup-Ab :
+    (C : Subgroup-Ab l2 A) → has-same-elements-Subgroup-Ab C → (B ＝ C)
+  eq-has-same-elements-Subgroup-Ab =
+    eq-has-same-elements-Subgroup (group-Ab A) B
+```
+
+### The containment relation of subgroups of abelian groups
+
+```agda
+contains-Subgroup-Ab-Prop :
+  {l1 l2 l3 : Level} (A : Ab l1) →
+  Subgroup-Ab l2 A → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+contains-Subgroup-Ab-Prop A = contains-Subgroup-Prop (group-Ab A)
+
+contains-Subgroup-Ab :
+  {l1 l2 l3 : Level} (A : Ab l1) →
+  Subgroup-Ab l2 A → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
+contains-Subgroup-Ab A = contains-Subgroup (group-Ab A)
+
+refl-contains-Subgroup-Ab :
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A) →
+  contains-Subgroup-Ab A B B
+refl-contains-Subgroup-Ab A = refl-contains-Subgroup (group-Ab A)
+
+transitive-contains-Subgroup-Ab :
+  {l1 l2 l3 l4 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  (C : Subgroup-Ab l3 A) (D : Subgroup-Ab l4 A) →
+  contains-Subgroup-Ab A C D → contains-Subgroup-Ab A B C →
+  contains-Subgroup-Ab A B D
+transitive-contains-Subgroup-Ab A =
+  transitive-contains-Subgroup (group-Ab A)
+
+antisymmetric-contains-Subgroup-Ab :
+  {l1 l2 : Level} (A : Ab l1) (B C : Subgroup-Ab l2 A) →
+  contains-Subgroup-Ab A B C → contains-Subgroup-Ab A C B → B ＝ C
+antisymmetric-contains-Subgroup-Ab A =
+  antisymmetric-contains-Subgroup (group-Ab A)
+
+Subgroup-Ab-Large-Preorder :
+  {l1 : Level} (A : Ab l1) →
+  Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+Subgroup-Ab-Large-Preorder A =
+  Subgroup-Large-Preorder (group-Ab A)
+
+Subgroup-Ab-Preorder :
+  {l1 : Level} (l2 : Level) (A : Ab l1) →
+  Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subgroup-Ab-Preorder l2 A = Subgroup-Preorder l2 (group-Ab A)
+
+Subgroup-Ab-Large-Poset :
+  {l1 : Level} (A : Ab l1) →
+  Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+Subgroup-Ab-Large-Poset A = Subgroup-Large-Poset (group-Ab A)
+
+Subgroup-Ab-Poset :
+  {l1 : Level} (l2 : Level) (A : Ab l1) →
+  Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subgroup-Ab-Poset l2 A = Subgroup-Poset l2 (group-Ab A)
+```
+
+### Every subgroup of an abelian group is normal
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+
+  is-normal-Subgroup-Ab : is-normal-Subgroup (group-Ab A) B
+  is-normal-Subgroup-Ab x y =
+    is-closed-under-eq-Subgroup-Ab' A B
+      ( is-in-subgroup-inclusion-Subgroup-Ab A B y)
+      ( is-identity-conjugation-Ab A x (inclusion-Subgroup-Ab A B y))
+
+  normal-subgroup-Subgroup-Ab : Normal-Subgroup-Ab l2 A
+  pr1 normal-subgroup-Subgroup-Ab = B
+  pr2 normal-subgroup-Subgroup-Ab = is-normal-Subgroup-Ab
+
+  closure-property-Subgroup-Ab :
+    {x y z : type-Ab A} →
+    is-in-Subgroup-Ab A B y →
+    is-in-Subgroup-Ab A B (add-Ab A x z) →
+    is-in-Subgroup-Ab A B (add-Ab A (add-Ab A x y) z)
+  closure-property-Subgroup-Ab =
+    closure-property-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab)
+
+  closure-property-Subgroup-Ab' :
+    {x y z : type-Ab A} →
+    is-in-Subgroup-Ab A B y →
+    is-in-Subgroup-Ab A B (add-Ab A x z) →
+    is-in-Subgroup-Ab A B (add-Ab A x (add-Ab A y z))
+  closure-property-Subgroup-Ab' =
+    closure-property-Normal-Subgroup'
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab)
+
+  conjugation-Subgroup-Ab :
+    type-Ab A → type-Subgroup-Ab A B → type-Subgroup-Ab A B
+  conjugation-Subgroup-Ab =
+    conjugation-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab)
+
+  conjugation-Subgroup-Ab' :
+    type-Ab A → type-Subgroup-Ab A B → type-Subgroup-Ab A B
+  conjugation-Subgroup-Ab' =
+    conjugation-Normal-Subgroup'
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab)
+```
+
+### Subgroups of abelian groups are in 1-1 correspondence with congruence relations
+
+#### The standard similarity relation obtained from a subgroup
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+
+  sim-congruence-Subgroup-Ab : (x y : type-Ab A) → UU l2
+  sim-congruence-Subgroup-Ab =
+    sim-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  is-prop-sim-congruence-Subgroup-Ab :
+    (x y : type-Ab A) → is-prop (sim-congruence-Subgroup-Ab x y)
+  is-prop-sim-congruence-Subgroup-Ab =
+    is-prop-sim-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  prop-congruence-Subgroup-Ab : (x y : type-Ab A) → Prop l2
+  prop-congruence-Subgroup-Ab =
+    prop-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+```
+
+#### The left equivalence relation obtained from a subgroup
+
+```agda
+  left-eq-rel-congruence-Subgroup-Ab :
+    Eq-Rel l2 (type-Ab A)
+  left-eq-rel-congruence-Subgroup-Ab =
+    left-eq-rel-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  left-sim-congruence-Subgroup-Ab :
+    type-Ab A → type-Ab A → UU l2
+  left-sim-congruence-Subgroup-Ab =
+    left-sim-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+```
+
+#### The left similarity relation of a subgroup relates the same elements as the standard similarity relation
+
+```agda
+  left-sim-sim-congruence-Subgroup-Ab :
+    (x y : type-Ab A) →
+    sim-congruence-Subgroup-Ab x y →
+    left-sim-congruence-Subgroup-Ab x y
+  left-sim-sim-congruence-Subgroup-Ab =
+    left-sim-sim-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  sim-left-sim-congruence-Subgroup-Ab :
+    (x y : type-Ab A) →
+    left-sim-congruence-Subgroup-Ab x y →
+    sim-congruence-Subgroup-Ab x y
+  sim-left-sim-congruence-Subgroup-Ab =
+    sim-left-sim-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+```
+
+#### The standard similarity relation is a congruence relation
+
+```agda
+  refl-congruence-Subgroup-Ab :
+    is-reflexive-Rel-Prop prop-congruence-Subgroup-Ab
+  refl-congruence-Subgroup-Ab =
+    refl-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  symm-congruence-Subgroup-Ab :
+    is-symmetric-Rel-Prop prop-congruence-Subgroup-Ab
+  symm-congruence-Subgroup-Ab =
+    symm-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  trans-congruence-Subgroup-Ab :
+    is-transitive-Rel-Prop prop-congruence-Subgroup-Ab
+  trans-congruence-Subgroup-Ab =
+    trans-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  eq-rel-congruence-Subgroup-Ab : Eq-Rel l2 (type-Ab A)
+  eq-rel-congruence-Subgroup-Ab =
+    eq-rel-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  relate-same-elements-left-sim-congruence-Subgroup-Ab :
+    relate-same-elements-Eq-Rel
+      ( eq-rel-congruence-Subgroup-Ab)
+      ( left-eq-rel-congruence-Subgroup-Ab)
+  relate-same-elements-left-sim-congruence-Subgroup-Ab =
+    relate-same-elements-left-sim-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  add-congruence-Subgroup-Ab :
+    is-congruence-Group
+      ( group-Ab A)
+      ( eq-rel-congruence-Subgroup-Ab)
+  add-congruence-Subgroup-Ab =
+    mul-congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  congruence-Subgroup-Ab : congruence-Ab l2 A
+  congruence-Subgroup-Ab =
+    congruence-Normal-Subgroup
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  neg-congruence-Subgroup-Ab :
+    {x y : type-Ab A} →
+    sim-congruence-Subgroup-Ab x y →
+    sim-congruence-Subgroup-Ab (neg-Ab A x) (neg-Ab A y)
+  neg-congruence-Subgroup-Ab =
+    neg-congruence-Ab A congruence-Subgroup-Ab
+```
+
+#### The subgroup obtained from a congruence relation
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A)
+  where
+
+  subset-congruence-Ab : subset-Ab l2 A
+  subset-congruence-Ab = prop-congruence-Ab A R (zero-Ab A)
+
+  is-in-subset-congruence-Ab : (type-Ab A) → UU l2
+  is-in-subset-congruence-Ab =
+    is-in-subset-congruence-Group (group-Ab A) R
+
+  contains-zero-subset-congruence-Ab :
+    contains-zero-subset-Ab A subset-congruence-Ab
+  contains-zero-subset-congruence-Ab =
+    contains-unit-subset-congruence-Group (group-Ab A) R
+
+  is-closed-under-add-subset-congruence-Ab :
+    is-closed-under-add-subset-Ab A subset-congruence-Ab
+  is-closed-under-add-subset-congruence-Ab =
+    is-closed-under-mul-subset-congruence-Group (group-Ab A) R
+
+  is-closed-under-neg-subset-congruence-Ab :
+    is-closed-under-neg-subset-Ab A subset-congruence-Ab
+  is-closed-under-neg-subset-congruence-Ab =
+    is-closed-under-inv-subset-congruence-Group (group-Ab A) R
+
+  subgroup-congruence-Ab : Subgroup-Ab l2 A
+  subgroup-congruence-Ab = subgroup-congruence-Group (group-Ab A) R
+
+  is-normal-subgroup-congruence-Ab :
+    is-normal-Subgroup (group-Ab A) subgroup-congruence-Ab
+  is-normal-subgroup-congruence-Ab =
+    is-normal-subgroup-congruence-Group (group-Ab A) R
+
+  normal-subgroup-congruence-Ab : Normal-Subgroup l2 (group-Ab A)
+  normal-subgroup-congruence-Ab =
+    normal-subgroup-congruence-Group (group-Ab A) R
+```
+
+#### The subgroup obtained from the congruence relation of a subgroup `N` is `N` itself
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+
+  has-same-elements-subgroup-congruence-Ab :
+    has-same-elements-Subgroup-Ab A
+      ( subgroup-congruence-Ab A
+        ( congruence-Subgroup-Ab A B))
+      ( B)
+  has-same-elements-subgroup-congruence-Ab =
+    has-same-elements-normal-subgroup-congruence-Group
+      ( group-Ab A)
+      ( normal-subgroup-Subgroup-Ab A B)
+
+  isretr-subgroup-congruence-Ab :
+    subgroup-congruence-Ab A (congruence-Subgroup-Ab A B) ＝ B
+  isretr-subgroup-congruence-Ab =
+    eq-has-same-elements-Subgroup-Ab A
+      ( subgroup-congruence-Ab A (congruence-Subgroup-Ab A B))
+      ( B)
+      ( has-same-elements-subgroup-congruence-Ab)
+```
+
+#### The congruence relation of the subgroup obtained from a congruence relation `R` is `R` itself
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A)
+  where
+
+  relate-same-elements-congruence-subgroup-congruence-Ab :
+    relate-same-elements-congruence-Ab A
+      ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
+      ( R)
+  relate-same-elements-congruence-subgroup-congruence-Ab =
+    relate-same-elements-congruence-normal-subgroup-congruence-Group
+      ( group-Ab A)
+      ( R)
+
+  issec-subgroup-congruence-Ab :
+    congruence-Subgroup-Ab A (subgroup-congruence-Ab A R) ＝ R
+  issec-subgroup-congruence-Ab =
+    eq-relate-same-elements-congruence-Ab A
+      ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
+      ( R)
+      ( relate-same-elements-congruence-subgroup-congruence-Ab)
+```
+
+#### The equivalence of subgroups and congruence relations
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1)
+  where
+
+  is-equiv-congruence-Subgroup-Ab :
+    is-equiv (congruence-Subgroup-Ab {l1} {l2} A)
+  is-equiv-congruence-Subgroup-Ab =
+    is-equiv-has-inverse
+      ( subgroup-congruence-Ab A)
+      ( issec-subgroup-congruence-Ab A)
+      ( isretr-subgroup-congruence-Ab A)
+
+  equiv-congruence-Subgroup-Ab :
+    Subgroup-Ab l2 A ≃ congruence-Ab l2 A
+  pr1 equiv-congruence-Subgroup-Ab =
+    congruence-Subgroup-Ab A
+  pr2 equiv-congruence-Subgroup-Ab =
+    is-equiv-congruence-Subgroup-Ab
+
+  is-equiv-subgroup-congruence-Ab :
+    is-equiv (subgroup-congruence-Ab {l1} {l2} A)
+  is-equiv-subgroup-congruence-Ab =
+    is-equiv-has-inverse
+      ( congruence-Subgroup-Ab A)
+      ( isretr-subgroup-congruence-Ab A)
+      ( issec-subgroup-congruence-Ab A)
+
+  equiv-subgroup-congruence-Ab :
+    congruence-Ab l2 A ≃ Subgroup-Ab l2 A
+  pr1 equiv-subgroup-congruence-Ab =
+    subgroup-congruence-Ab A
+  pr2 equiv-subgroup-congruence-Ab =
+    is-equiv-subgroup-congruence-Ab
 ```

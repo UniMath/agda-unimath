@@ -63,4 +63,3 @@ module _
   pr1 (pr2 (pr2 monoid-endo-Cat)) = left-unit-law-comp-endo-Cat
   pr2 (pr2 (pr2 monoid-endo-Cat)) = right-unit-law-comp-endo-Cat
 ```
-

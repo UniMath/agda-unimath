@@ -7,8 +7,8 @@ module organic-chemistry.ethane where
 <details><summary>Imports</summary>
 
 ```agda
-open import organic-chemistry.alkanes
-open import organic-chemistry.hydrocarbons
+open import elementary-number-theory.inequality-natural-numbers
+open import finite-group-theory.tetrahedra-in-3-space
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -25,10 +25,10 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import elementary-number-theory.inequality-natural-numbers
-open import finite-group-theory.tetrahedra-in-3-space
 open import graph-theory.finite-graphs
 open import graph-theory.walks-undirected-graphs
+open import organic-chemistry.alkanes
+open import organic-chemistry.hydrocarbons
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types

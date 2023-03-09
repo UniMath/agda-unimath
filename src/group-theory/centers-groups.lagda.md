@@ -7,13 +7,13 @@ module group-theory.centers-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.groups
-open import group-theory.subgroups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import group-theory.groups
+open import group-theory.subgroups
 ```
 
 </details>

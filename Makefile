@@ -12,7 +12,7 @@ AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --onl
 AGDA ?=agda $(AGDAVERBOSE)
 TIME ?=time
 
-METAFILES:=CITATION.md \
+METAFILES:=CITATION.cff \
 			CODINGSTYLE.md \
 			CONTRIBUTORS.md \
 			CONVENTIONS.md \
@@ -84,3 +84,8 @@ graph:
 clean:
 	rm -Rf _build/
 	find docs -name '*.html' -and -name '*.md' -delete -print0
+
+.PHONY : pre-commit
+pre-commit:
+	@make check
+	@pre-commit run --all-files

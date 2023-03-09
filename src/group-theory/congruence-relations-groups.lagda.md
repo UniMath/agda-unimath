@@ -7,9 +7,6 @@ module group-theory.congruence-relations-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.congruence-relations-semigroups
-open import group-theory.conjugation
-open import group-theory.groups
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.contractible-types
@@ -19,6 +16,9 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
+open import group-theory.congruence-relations-semigroups
+open import group-theory.conjugation
+open import group-theory.groups
 ```
 
 </details>
@@ -30,16 +30,16 @@ A congruence relation on a group `G` is an equivalence relation `≡` on `G` suc
 ## Definition
 
 ```agda
-is-congruence-Eq-Rel-Group :
+is-congruence-Group :
   {l1 l2 : Level} (G : Group l1) →
   Eq-Rel l2 (type-Group G) → UU (l1 ⊔ l2)
-is-congruence-Eq-Rel-Group G R =
-  is-congruence-Eq-Rel-Semigroup (semigroup-Group G) R
+is-congruence-Group G R =
+  is-congruence-Semigroup (semigroup-Group G) R
 
 congruence-Group :
   {l : Level} (l2 : Level) (G : Group l) → UU (l ⊔ lsuc l2)
 congruence-Group l2 G =
-  Σ (Eq-Rel l2 (type-Group G)) (is-congruence-Eq-Rel-Group G)
+  Σ (Eq-Rel l2 (type-Group G)) (is-congruence-Group G)
 
 module _
   {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G)
@@ -92,7 +92,7 @@ module _
   trans-congruence-Group = trans-Eq-Rel eq-rel-congruence-Group
 
   mul-congruence-Group :
-    is-congruence-Eq-Rel-Group G eq-rel-congruence-Group
+    is-congruence-Group G eq-rel-congruence-Group
   mul-congruence-Group = pr2 R
 
   left-mul-congruence-Group :
@@ -253,4 +253,3 @@ eq-relate-same-elements-congruence-Group :
 eq-relate-same-elements-congruence-Group G =
   eq-relate-same-elements-congruence-Semigroup (semigroup-Group G)
 ```
-
