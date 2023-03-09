@@ -25,9 +25,11 @@ open import orthogonal-factorization-systems.function-classes
 ## Idea
 
 An **orthogonal factorization system** is a pair of composition closed function
-classes `L` and `R` that contain the equivalences, such that for every function
-`f : A → B` there is a unique factorization `f ~ r ∘ l` such that the left map
-(by diagrammatic ordering) `l` is in `L` and the right map `r` is in `R`.
+classes `L` and `R` that contain the identities (morally, this means that they
+are wide subpre-∞-categories of the ∞-category of types), such that for every
+function `f : A → B` there is a unique factorization `f ~ r ∘ l` such that the
+left map (by diagrammatic ordering) `l` is in `L` and the right map `r` is in
+`R`.
 
 ## Definition
 

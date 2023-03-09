@@ -70,7 +70,7 @@ composition-closed-function-class l1 l2 =
 ```
 
 A function class that has identities and is composition closed
-is morally a wide subpre-∞-category of the pre-∞-category of small types.
+is morally a wide subpre-∞-category of the ∞-category of small types.
 
 ```agda
 is-wide-function-precat :
