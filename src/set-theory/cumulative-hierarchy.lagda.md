@@ -13,16 +13,17 @@ open import foundation.equational-reasoning
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.transport
 open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.propositional-truncations
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.truncation-levels
+
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
