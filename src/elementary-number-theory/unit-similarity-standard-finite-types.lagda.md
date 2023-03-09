@@ -106,4 +106,3 @@ pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
             ( cong-nat-mod-succ-ℕ k x)))) ∙
       ( p))
 ```
-

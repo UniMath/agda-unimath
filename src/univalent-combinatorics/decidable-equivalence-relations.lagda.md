@@ -7,13 +7,13 @@ module univalent-combinatorics.decidable-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.finite-types
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types
 open import foundation.equivalence-relations
 open import foundation.propositions
 open import foundation.universe-levels
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

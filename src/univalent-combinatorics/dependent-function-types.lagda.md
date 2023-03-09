@@ -7,11 +7,7 @@ module univalent-combinatorics.dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -22,7 +18,11 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

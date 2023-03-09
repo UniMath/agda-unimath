@@ -7,7 +7,6 @@ module ring-theory.homomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.rings
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -22,6 +21,7 @@ open import foundation.subtypes
 open import foundation.truncation-levels
 open import foundation.universe-levels
 open import group-theory.homomorphisms-abelian-groups
+open import ring-theory.rings
 ```
 
 </details>

@@ -7,11 +7,6 @@ module group-theory.subgroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-groups
-open import group-theory.semigroups
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -34,6 +29,11 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.semigroups
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
@@ -124,7 +124,11 @@ module _
   is-prop-is-subgroup-subset-Group : is-prop is-subgroup-subset-Group
   is-prop-is-subgroup-subset-Group =
     is-prop-type-Prop is-subgroup-subset-group-Prop
+```
 
+### The type of all subgroups of a group
+
+```agda
 Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
 Subgroup l G = type-subtype (is-subgroup-subset-group-Prop {l2 = l} G)

@@ -22,7 +22,7 @@ the library about any topic in mathematics.
 
 ```
 @misc{Agda-UniMath,
-  author =       {Egbert Rijke and 
+  author =       {Egbert Rijke and
                   Elisabeth Bonnevier and
                   Jonathan Prieto-Cubides and others},
   title =        {Univalent mathematics in {Agda}},

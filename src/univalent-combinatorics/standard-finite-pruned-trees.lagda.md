@@ -7,9 +7,9 @@ module univalent-combinatorics.standard-finite-pruned-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.standard-finite-types
-open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
+open import foundation.universe-levels
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

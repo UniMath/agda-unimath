@@ -7,10 +7,10 @@ module order-theory.total-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.posets
-open import order-theory.total-preorders
 open import foundation.propositions
 open import foundation.universe-levels
+open import order-theory.posets
+open import order-theory.total-preorders
 ```
 
 </details>

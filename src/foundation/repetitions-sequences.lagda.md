@@ -7,6 +7,7 @@ module foundation.repetitions-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
@@ -14,7 +15,6 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions
 open import foundation.sequences
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>

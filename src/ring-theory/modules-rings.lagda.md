@@ -7,9 +7,6 @@ module ring-theory.modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.homomorphisms-rings
-open import ring-theory.opposite-rings
-open import ring-theory.rings
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
@@ -19,6 +16,9 @@ open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+open import ring-theory.homomorphisms-rings
+open import ring-theory.opposite-rings
+open import ring-theory.rings
 ```
 
 </details>

@@ -29,3 +29,5 @@ Ideally, the first section of a file explains the idea, then proceeds to give th
       This will be displayed as [UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
 
 A good reference file for the expected structure of a file is [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
+
+Please note that some conventions above are checks enforced by our pre-commit hooks, read more about them in [HOWTO-INSTALL.md](HOWTO-INSTALL.md#pre-commit-hooks).

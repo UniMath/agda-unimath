@@ -122,4 +122,3 @@ subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set {l1} l2 A) = subtype l2 A
 pr2 (subtype-Set {l1} l2 A) = is-set-subtype
 ```
-

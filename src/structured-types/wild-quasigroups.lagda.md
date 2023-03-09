@@ -7,12 +7,12 @@ module structured-types.wild-quasigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.magmas
 open import foundation.automorphisms
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
+open import structured-types.magmas
 ```
 
 </details>

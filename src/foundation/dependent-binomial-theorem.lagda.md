@@ -125,4 +125,3 @@ module _
     ( equiv-map-Π
       ( λ x → inv-compute-total-fam-coprod (A x) (B x)))
 ```
-

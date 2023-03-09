@@ -463,4 +463,3 @@ is-set-ℚ =
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
 ```
-

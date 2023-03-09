@@ -7,11 +7,11 @@ module graph-theory.connected-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.undirected-graphs
-open import graph-theory.walks-undirected-graphs
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+open import graph-theory.undirected-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 </details>

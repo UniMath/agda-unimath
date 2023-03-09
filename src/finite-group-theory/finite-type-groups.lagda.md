@@ -11,6 +11,7 @@ module finite-group-theory.finite-type-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -26,7 +27,6 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -142,4 +142,3 @@ module _
   pr1 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-sec-hom-inv-loop-group-fin-UU-Fin-Group
   pr2 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-retr-hom-inv-loop-group-fin-UU-Fin-Group
 ```
-

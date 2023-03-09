@@ -7,10 +7,6 @@ module group-theory.conjugation where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
@@ -18,6 +14,10 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.isomorphisms-groups
 ```
 
 </details>
@@ -112,7 +112,7 @@ module _
   right-conjugation-law-mul-Group :
     (x y : type-Group G) →
     mul-Group G (inv-Group G x) (conjugation-Group G x y) ＝
-    mul-Group G y (inv-Group G x)
+    right-div-Group G y x
   right-conjugation-law-mul-Group x y =
     inv
       ( transpose-eq-mul-Group' G
@@ -141,7 +141,7 @@ module _
   left-conjugation-law-mul-Group' :
     (x y : type-Group G) →
     mul-Group G (conjugation-Group' G x y) (inv-Group G x) ＝
-    mul-Group G (inv-Group G x) y
+    left-div-Group G x y
   left-conjugation-law-mul-Group' x y =
     isretr-mul-inv-Group' G x (mul-Group G (inv-Group G x) y)
 

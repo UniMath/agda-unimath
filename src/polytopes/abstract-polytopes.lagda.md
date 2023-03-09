@@ -7,6 +7,9 @@ module polytopes.abstract-polytopes where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,9 +20,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.natural-numbers
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
 open import univalent-combinatorics

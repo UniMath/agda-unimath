@@ -5,7 +5,7 @@
   --page-padding: 5px;
   --content-max-width: 85%;
   --menu-bar-height: 40px;
-  --mono-font: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
+  --mono-font: Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
   --code-font-size: 0.875em;
   --pagetoc-fontsize: 0.7em;
 }

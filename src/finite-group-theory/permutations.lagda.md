@@ -11,6 +11,8 @@ module finite-group-theory.permutations where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.transpositions
 open import foundation.cartesian-product-types
@@ -34,8 +36,6 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 open import univalent-combinatorics.2-element-decidable-subtypes
@@ -482,4 +482,3 @@ module _
         is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
 ```
-

@@ -11,6 +11,7 @@ module finite-group-theory.cartier-delooping-sign-homomorphism where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import finite-group-theory.delooping-sign-homomorphism
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.sign-homomorphism
@@ -21,7 +22,6 @@ open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-groups
@@ -139,4 +139,3 @@ module _
           ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 ```
-
