@@ -9,6 +9,7 @@ module group-theory.embeddings-abelian-groups where
 ```agda
 open import foundation.embeddings
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.embeddings-groups
 open import group-theory.homomorphisms-abelian-groups

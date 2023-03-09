@@ -8,6 +8,7 @@ module elementary-number-theory.integers where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -24,6 +25,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```

@@ -19,6 +19,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
+
 open import group-theory.monoids
 open import group-theory.semigroups
 ```

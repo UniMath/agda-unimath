@@ -16,7 +16,9 @@ open import foundation.propositions
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
 open import group-theory.higher-groups
+
 open import structured-types.pointed-types
 ```
 

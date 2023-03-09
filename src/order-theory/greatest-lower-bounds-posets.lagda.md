@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import order-theory.posets
 ```
 

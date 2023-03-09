@@ -8,6 +8,7 @@ module group-theory.fixed-points-higher-group-actions where
 
 ```agda
 open import foundation.universe-levels
+
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```

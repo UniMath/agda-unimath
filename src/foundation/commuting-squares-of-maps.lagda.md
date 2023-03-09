@@ -8,9 +8,11 @@ module foundation.commuting-squares-of-maps where
 
 ```agda
 open import foundation-core.commuting-squares-of-maps public
+
+open import foundation.equivalences
+
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.equivalences
 ```
 
 </details>

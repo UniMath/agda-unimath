@@ -20,7 +20,9 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
 open import group-theory.homomorphisms-abelian-groups
+
 open import ring-theory.rings
 ```
 

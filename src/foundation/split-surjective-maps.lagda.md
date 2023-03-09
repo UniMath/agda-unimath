@@ -7,6 +7,8 @@ module foundation.split-surjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.type-theoretic-principle-of-choice
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -18,7 +20,6 @@ open import foundation-core.injective-maps
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.universe-levels
-open import foundation.type-theoretic-principle-of-choice
 ```
 
 </details>

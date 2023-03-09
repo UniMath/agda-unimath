@@ -9,6 +9,7 @@ module trees.transitive-multisets where
 ```agda
 open import foundation.embeddings
 open import foundation.universe-levels
+
 open import trees.multisets
 open import trees.submultisets
 ```

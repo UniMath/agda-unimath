@@ -10,6 +10,7 @@ module ring-theory.binomial-theorem-semirings where
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -18,10 +19,13 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import linear-algebra.vectors-on-semirings
+
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.semirings
 open import ring-theory.sums-semirings
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

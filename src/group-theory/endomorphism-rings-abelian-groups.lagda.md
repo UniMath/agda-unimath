@@ -9,9 +9,11 @@ module group-theory.endomorphism-rings-abelian-groups where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+
 open import ring-theory.rings
 ```
 

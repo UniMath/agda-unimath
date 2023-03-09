@@ -7,6 +7,8 @@ module foundation.fibered-involutions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.fibered-maps
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -15,7 +17,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.involutions
 open import foundation-core.universe-levels
-open import foundation.fibered-maps
 ```
 
 </details>

@@ -21,6 +21,7 @@ open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
+
 open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```

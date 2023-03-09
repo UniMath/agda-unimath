@@ -8,6 +8,7 @@ module foundation.products-unordered-tuples-of-types where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -22,6 +23,7 @@ open import foundation.universal-property-maybe
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 open import foundation.unordered-tuples-of-types
+
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types

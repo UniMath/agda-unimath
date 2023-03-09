@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 ```

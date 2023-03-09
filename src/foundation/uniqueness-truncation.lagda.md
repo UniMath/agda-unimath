@@ -7,7 +7,6 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universal-property-truncation
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,6 +17,8 @@ open import foundation.injective-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
+open import foundation-core.universal-property-truncation
 ```
 
 </details>

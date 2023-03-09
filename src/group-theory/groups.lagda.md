@@ -24,10 +24,13 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import group-theory.monoids
 open import group-theory.semigroups
+
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
+
 open import univalent-combinatorics.lists
 ```
 

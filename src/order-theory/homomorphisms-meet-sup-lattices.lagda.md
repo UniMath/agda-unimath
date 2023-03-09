@@ -15,6 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.homomorphisms-meet-semilattices
 open import order-theory.homomorphisms-sup-lattices

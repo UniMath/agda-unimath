@@ -13,7 +13,9 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.higher-groups
+
 open import structured-types.pointed-types
 ```
 

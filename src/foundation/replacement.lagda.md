@@ -7,7 +7,6 @@ module foundation.replacement where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.small-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.homotopies
@@ -15,6 +14,8 @@ open import foundation.images
 open import foundation.locally-small-types
 open import foundation.surjective-maps
 open import foundation.universe-levels
+
+open import foundation-core.small-types
 ```
 
 </details>

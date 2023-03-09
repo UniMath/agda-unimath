@@ -30,6 +30,7 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-maps
@@ -41,6 +42,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

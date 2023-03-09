@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+
 open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.neighbors-undirected-graphs

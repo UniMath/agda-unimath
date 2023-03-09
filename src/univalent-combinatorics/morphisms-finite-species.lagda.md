@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-species
 open import univalent-combinatorics.finite-types

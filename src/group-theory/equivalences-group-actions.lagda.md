@@ -22,6 +22,7 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-group-actions

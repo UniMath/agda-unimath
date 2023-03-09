@@ -10,6 +10,7 @@ module elementary-number-theory.inequality-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -22,6 +23,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import order-theory.posets
 ```
 

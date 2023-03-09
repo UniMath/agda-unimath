@@ -8,7 +8,9 @@ module group-theory.precategory-of-semigroups where
 
 ```agda
 open import category-theory.large-precategories
+
 open import foundation.universe-levels
+
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 ```

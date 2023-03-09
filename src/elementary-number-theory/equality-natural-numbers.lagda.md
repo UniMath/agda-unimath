@@ -8,8 +8,7 @@ module elementary-number-theory.equality-natural-numbers where
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import foundation-core.decidable-propositions
-open import foundation-core.discrete-types
+
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -25,6 +24,9 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.decidable-propositions
+open import foundation-core.discrete-types
 ```
 
 </details>

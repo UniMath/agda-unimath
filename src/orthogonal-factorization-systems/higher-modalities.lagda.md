@@ -16,11 +16,11 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.propositions
 open import foundation.sections
 open import foundation.small-types
 open import foundation.subuniverses
 open import foundation.universe-levels
+
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```

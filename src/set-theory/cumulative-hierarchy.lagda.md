@@ -23,6 +23,9 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
+
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
 

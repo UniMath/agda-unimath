@@ -10,6 +10,7 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types

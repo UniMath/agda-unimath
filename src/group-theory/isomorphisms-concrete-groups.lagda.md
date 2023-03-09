@@ -8,7 +8,9 @@ module group-theory.isomorphisms-concrete-groups where
 
 ```agda
 open import category-theory.isomorphisms-large-precategories
+
 open import foundation.universe-levels
+
 open import group-theory.concrete-groups
 open import group-theory.precategory-of-concrete-groups
 ```

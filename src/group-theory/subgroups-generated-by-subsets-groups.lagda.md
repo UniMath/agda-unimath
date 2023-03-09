@@ -8,6 +8,7 @@ module group-theory.subgroups-generated-by-subsets-groups where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -19,9 +20,11 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.subgroups
+
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```

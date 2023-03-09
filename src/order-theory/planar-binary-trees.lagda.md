@@ -11,6 +11,7 @@ open import foundation.booleans
 open import foundation.empty-types
 open import foundation.functions
 open import foundation.universe-levels
+
 open import trees.w-types
 ```
 

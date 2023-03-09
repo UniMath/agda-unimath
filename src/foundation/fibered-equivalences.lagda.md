@@ -7,6 +7,12 @@ module foundation.fibered-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibered-maps
+open import foundation.pullbacks
+open import foundation.slice
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
@@ -17,11 +23,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.fibered-maps
-open import foundation.pullbacks
-open import foundation.slice
 ```
 
 </details>

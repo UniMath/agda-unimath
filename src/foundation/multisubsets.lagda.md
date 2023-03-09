@@ -8,6 +8,7 @@ module foundation.multisubsets where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
@@ -15,6 +16,7 @@ open import foundation.images
 open import foundation.negation
 open import foundation.sets
 open import foundation.universe-levels
+
 open import univalent-combinatorics.finite-types
 ```
 

@@ -8,8 +8,11 @@ module univalent-combinatorics.maybe where
 
 ```agda
 open import foundation.maybe public
+
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
+
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
 ```

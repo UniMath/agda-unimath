@@ -8,13 +8,15 @@ module foundation.negation where
 
 ```agda
 open import foundation-core.negation public
-open import foundation-core.empty-types
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import foundation-core.empty-types
 ```
 
 </details>

@@ -14,7 +14,9 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import group-theory.congruence-relations-monoids
+
 open import ring-theory.semirings
 ```
 

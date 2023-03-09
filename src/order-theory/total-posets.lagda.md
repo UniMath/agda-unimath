@@ -9,6 +9,7 @@ module order-theory.total-posets where
 ```agda
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import order-theory.posets
 open import order-theory.total-preorders
 ```

@@ -8,15 +8,18 @@ module group-theory.group-solver where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.groups
-open import group-theory.groups
+
 open import linear-algebra.vectors
+
 open import univalent-combinatorics.lists
 ```
 

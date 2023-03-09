@@ -8,12 +8,14 @@ module foundation.logical-equivalences where
 
 ```agda
 open import foundation-core.logical-equivalences public
+
+open import foundation.propositions
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.propositions
 ```
 
 </details>

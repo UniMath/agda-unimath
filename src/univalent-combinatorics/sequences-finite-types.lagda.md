@@ -9,6 +9,7 @@ module univalent-combinatorics.sequences-finite-types where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functions
@@ -19,6 +20,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions
 open import foundation.repetitions-sequences
 open import foundation.sequences
+
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```

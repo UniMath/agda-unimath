@@ -10,6 +10,7 @@ module finite-group-theory.tetrahedra-in-3-space where
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.universe-levels
+
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types

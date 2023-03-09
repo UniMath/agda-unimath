@@ -23,6 +23,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import group-theory.epimorphisms-groups
 open import group-theory.full-subgroups
 open import group-theory.groups
@@ -30,6 +31,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
+
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
