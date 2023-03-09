@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.propositions
 open import foundation.universe-levels
-
 open import orthogonal-factorization-systems.function-classes
 ```
 
