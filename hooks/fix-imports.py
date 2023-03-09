@@ -44,7 +44,7 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
             # Don't want repeat import statements
             publicImports = set()
             nonPublicImports = set()
-            otherStuff = []
+            openStatements = []
 
             for l in newBlock:
                 if l.startswith('```') or len(l.strip()) == 0:
@@ -55,20 +55,25 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
                         Please put it in the first Agda block after the first header:\n\t' + str(fpath))
                     sys.exit(1)
                 elif 'open import' in l:
-                    if l.endswith('public'):
+                    if l.rstrip().endswith('public'):
                         publicImports.add(l)
                     else:
                         nonPublicImports.add(l)
                 elif 'open' in l:
-                    otherStuff.append(l)
+                    openStatements.append(l)
+                elif l.strip() == '```' or l.strip() == '```agda' or '<details>' in l.strip() or '</details>' in l.strip():
+                    pass
+                else:
+                    print('Error: unknown statement in details import block:\n\t' + str(fpath))
 
-            if len(otherStuff) > 0:
+
+            if len(openStatements) > 0:
 
                 print(
                     'Warning: Please review the imports block, it contains non-imports statements:\n\t' + str(fpath))
             imports = '\n\n'.join(
                 filter(lambda ls: len(ls) > 0,
-                    [sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(otherStuff))]))
+                    [sort_and_split_namespaces(publicImports), sort_and_split_namespaces(nonPublicImports), '\n'.join(sorted(openStatements))]))
 
             importBlock = '<details><summary>Imports</summary>\n' + \
                 '\n```agda\n' +\
