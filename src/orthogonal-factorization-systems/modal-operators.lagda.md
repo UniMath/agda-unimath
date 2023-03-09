@@ -1,8 +1,13 @@
 # Modal operators
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.modal-operators where
+```
+
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -12,6 +17,7 @@ open import foundation.subuniverses
 open import foundation.small-types
 open import foundation.universe-levels
 ```
+
 </details>
 
 ## Idea

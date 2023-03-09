@@ -1,8 +1,12 @@
 # Uniquely eliminating modalities
 
-<details><summary>Imports</summary>
 ```agda
 module orthogonal-factorization-systems.uniquely-eliminating-modalities where
+```
+
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -13,6 +17,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
 ```
+
 </details>
 
 ## Idea
