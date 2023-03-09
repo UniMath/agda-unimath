@@ -762,13 +762,17 @@
 
 - [Orthogonal factorization systems](orthogonal-factorization-systems.md)
   - [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
+  - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
   - [Lifting operations](orthogonal-factorization-systems.lifting-operations.md)
   - [Lifting squares](orthogonal-factorization-systems.lifting-squares.md)
   - [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
   - [Local types](orthogonal-factorization-systems.local-types.md)
   - [Mere lifting properties](orthogonal-factorization-systems.mere-lifting-properties.md)
+  - [Modal operators](orthogonal-factorization-systems.modal-operators.md)
   - [Orthogonal maps](orthogonal-factorization-systems.orthogonal-maps.md)
   - [Pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
+  - [Reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
+  - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
 
 - [Polytopes](polytopes.md)
   - [Abstract polytopes](polytopes.abstract-polytopes.md)
