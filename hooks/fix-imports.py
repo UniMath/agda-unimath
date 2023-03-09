@@ -38,7 +38,8 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
         end = contents.find('</details>')
         if start != -1 and end != -1:
             block = contents[start:end]
-            newBlock = filter(lambda l: l != '', map(str.__strip__, block.split('\n')))
+            # Strip all lines. There should not be any indentation in this block
+            newBlock = filter(lambda l: l != '', map(lambda l: l.strip(), block.split('\n')))
 
             # Don't want repeat import statements
             publicImports = set()
@@ -48,7 +49,7 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
             for l in newBlock:
                 if l.startswith('```') or len(l.strip()) == 0:
                     continue
-                if l.startswith('module') or l.startswith('{-# OPTIONS'):
+                if l.lstrip().startswith('module') or l.lstrip().startswith('{-# OPTIONS'):
                     print(
                         'Error: module decl./pragmas can not be in the details import block\n\
                         Please put it in the first Agda block after the first header:\n\t' + str(fpath))
