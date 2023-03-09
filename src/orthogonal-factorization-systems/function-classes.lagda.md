@@ -13,7 +13,6 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.univalence
 open import foundation.universe-levels
 ```
 
@@ -30,7 +29,7 @@ function-class : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 function-class l1 l2 l3 = {A : UU l1} {B : UU l2} → (A → B) → Prop l3
 ```
 
-### Function classes containing identities and equivalences
+### Function classes containing identities or equivalences
 
 ```agda
 has-identity-maps-function-class :
@@ -52,6 +51,8 @@ equivalences-function-class l1 l2 l3 =
   Σ (function-class l1 l2 l3) (has-equivalences-function-class)
 ```
 
+### Composition closed function classes
+
 We say a function class is **composition closed** if it is closed under taking
 composites.
 
@@ -67,20 +68,6 @@ composition-closed-function-class :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 composition-closed-function-class l1 l2 =
   Σ (function-class l1 l1 l2) (is-composition-closed-function-class)
-```
-
-A function class that has identities and is composition closed
-is morally a wide subpre-∞-category of the ∞-category of small types.
-
-```agda
-is-wide-function-precat :
-  {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-is-wide-function-precat c =
-  has-identity-maps-function-class c × is-composition-closed-function-class c
-
-wide-function-precat : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-wide-function-precat l1 l2 =
-  Σ (function-class l1 l1 l2) (is-wide-function-precat)
 ```
 
 ## Properties
@@ -134,17 +121,4 @@ pr1 (is-composition-closed-function-class-Prop c) =
   is-composition-closed-function-class c
 pr2 (is-composition-closed-function-class-Prop c) =
   is-prop-is-composition-closed-function-class c
-```
-
-```agda
-is-wide-function-precat-Prop :
-  {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
-is-wide-function-precat-Prop c =
-  prod-Prop
-    ( has-identity-maps-function-class-Prop c)
-    ( is-composition-closed-function-class-Prop c)
-
-is-prop-is-wide-function-precat :
-  {l1 l2 : Level} (c : function-class l1 l1 l2) → is-prop (is-wide-function-precat c)
-is-prop-is-wide-function-precat = is-prop-type-Prop ∘ is-wide-function-precat-Prop
 ```

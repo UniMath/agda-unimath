@@ -18,6 +18,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.factorization-operations
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes
+open import orthogonal-factorization-systems.wide-function-precats
 ```
 
 </details>
