@@ -23,7 +23,6 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
 open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
@@ -194,7 +193,6 @@ module _
       ( λ x → is-set-is-prop (σ x)) ρ
       ( λ _ g _ _ _ _ _ → eq-is-prop (σ (set-pseudo-cumulative-hierarchy V g)))
 ```
-
 
 ### The recursion principle of the cumulative hierarchy together with its computation rule.
 
