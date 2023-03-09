@@ -28,6 +28,7 @@ open import orthogonal-factorization-systems.function-classes
 
 A **factorization operation** on a function type `A → B` is a choice of
 factorization for every map `f` in `A → B`.
+
 ```md
        ∙
       ^ \

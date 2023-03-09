@@ -42,7 +42,7 @@ _lifting properties_. However, these are generally additional structure
 on the maps.
 
 For the proof-irrelevant notion see
-[`orthogonal-factorization-systems.mere-lifting-properties`](orthogonal-factorization-systems.mere-lifting-properties.md).
+[`mere lifting properties`](orthogonal-factorization-systems.mere-lifting-properties.md).
 
 ## Definition
 
