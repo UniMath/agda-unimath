@@ -28,6 +28,7 @@
               python
               # working on the website
               pkgs.mdbook
+	      pkgs.mdbook-katex
             ];
           };
 
