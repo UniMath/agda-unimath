@@ -80,7 +80,7 @@ module _
   {A : UU l1} {B : UU l2}
   where
 
-  mere-function-class-factorization-property-Prop : 
+  mere-function-class-factorization-property-Prop :
     Prop (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   mere-function-class-factorization-property-Prop =
     Π-Prop (A → B) (is-inhabited-Prop ∘ function-class-factorization L R)

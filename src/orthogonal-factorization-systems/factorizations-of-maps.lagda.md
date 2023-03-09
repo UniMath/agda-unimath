@@ -95,7 +95,7 @@ module _
   right-map-factorization =
     right-map-factorization-through ∘ factorization-through-factorization
 
-  left-map-factorization : 
+  left-map-factorization :
     {l3 : Level} (F : factorization f l3) → A → type-factorization F
   left-map-factorization =
     left-map-factorization-through ∘ factorization-through-factorization
@@ -149,7 +149,7 @@ module _
   coherence-htpy-factorization-through F F' R L =
     ( is-factorization-factorization-through F ∙h htpy-comp-horizontal L R) ~
     is-factorization-factorization-through F'
-  
+
   htpy-factorization-through :
     (F F' : factorization-through f X) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-factorization-through F F' =
@@ -158,7 +158,7 @@ module _
         Σ ( left-map-factorization-through F
             ~ left-map-factorization-through F')
           ( coherence-htpy-factorization-through F F' R))
-  
+
   refl-htpy-factorization-through :
     (F : factorization-through f X) → htpy-factorization-through F F
   pr1 (refl-htpy-factorization-through F) = refl-htpy
@@ -170,7 +170,7 @@ module _
     F ＝ F' → htpy-factorization-through F F'
   htpy-eq-factorization-through F .F refl = refl-htpy-factorization-through F
 
-  is-contr-total-htpy-factorization-through : 
+  is-contr-total-htpy-factorization-through :
     (F : factorization-through f X) →
     is-contr (Σ (factorization-through f X) (htpy-factorization-through F))
   is-contr-total-htpy-factorization-through F =
@@ -199,7 +199,7 @@ module _
     fundamental-theorem-id
       ( is-contr-total-htpy-factorization-through F)
       ( htpy-eq-factorization-through F)
-  
+
   extensionality-factorization-through :
     (F F' : factorization-through f X) →
     (F ＝ F') ≃ (htpy-factorization-through F F')

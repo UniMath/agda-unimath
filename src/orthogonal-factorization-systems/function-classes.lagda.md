@@ -138,7 +138,7 @@ is-function-precat-Prop c =
     ( has-identity-maps-function-class-Prop c)
     ( is-composition-closed-function-class-Prop c)
 
-is-prop-is-function-precat : 
+is-prop-is-function-precat :
   {l1 l2 : Level} (c : function-class l1 l1 l2) → is-prop (is-function-precat c)
 is-prop-is-function-precat = is-prop-type-Prop ∘ is-function-precat-Prop
 ```
