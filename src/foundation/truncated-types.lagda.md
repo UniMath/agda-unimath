@@ -20,7 +20,6 @@ open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.subtypes
 open import foundation-core.truncation-levels
-open import foundation-core.univalence
 open import foundation-core.universe-levels
 ```
 

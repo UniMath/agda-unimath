@@ -25,7 +25,6 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncation-levels

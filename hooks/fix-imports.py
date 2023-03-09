@@ -20,6 +20,11 @@ def sort_and_split_namespaces(imports):
         if k in namespaces[k]: # The entire namespace is imported. Remove all other imports
             namespaces[k] = {k}
 
+    for __import in namespaces["open import foundation"]:
+        namespaces["open import foundation-core"].discard("open import foundation-core" + __import[__import.index("."):])
+
+    namespaces = dict(filter(lambda kv: len(kv[1])>0, namespaces.items()))
+
     return "\n\n".join("\n".join(sorted(namespace_imports)) for k, namespace_imports in sorted(namespaces.items()))
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
@@ -40,7 +45,7 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
                 if l.startswith('module') or l.startswith('{-# OPTIONS'):
                     print(
                         'Error: module decl./pragmas can not be in the details import block\n\
-                        Please put it in the first Agda block after the first header\n')
+                        Please put it in the first Agda block after the first header:\n\t' + str(fpath))
                     sys.exit(1)
                 elif 'open import' in l:
                     if l.endswith('public'):
