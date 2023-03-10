@@ -12,6 +12,7 @@ open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.cartesian-products-monoids
 open import group-theory.cartesian-products-semigroups
 open import group-theory.groups

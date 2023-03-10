@@ -15,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
 open import graph-theory.directed-graphs
 ```
 

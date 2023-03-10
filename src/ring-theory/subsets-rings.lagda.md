@@ -12,6 +12,7 @@ open import foundation.propositional-extensionality
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import ring-theory.rings
 ```
 

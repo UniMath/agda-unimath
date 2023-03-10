@@ -8,6 +8,7 @@ module foundation.equivalence-induction where
 
 ```agda
 open import foundation-core.equivalence-induction public
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions

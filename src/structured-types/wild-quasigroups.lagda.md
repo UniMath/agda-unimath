@@ -12,6 +12,7 @@ open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
+
 open import structured-types.magmas
 ```
 

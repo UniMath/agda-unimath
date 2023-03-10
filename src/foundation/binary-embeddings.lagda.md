@@ -7,12 +7,13 @@ module foundation.binary-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-equivalences
+open import foundation.identity-types
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.universe-levels
-open import foundation.binary-equivalences
-open import foundation.identity-types
 ```
 
 </details>

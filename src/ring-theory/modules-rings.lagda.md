@@ -12,10 +12,12 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+
 open import ring-theory.homomorphisms-rings
 open import ring-theory.opposite-rings
 open import ring-theory.rings

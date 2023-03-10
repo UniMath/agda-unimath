@@ -8,6 +8,13 @@ module foundation.sets where
 
 ```agda
 open import foundation-core.sets public
+
+open import foundation.contractible-types
+open import foundation.embeddings
+open import foundation.propositional-maps
+open import foundation.subuniverses
+open import foundation.truncated-types
+
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
@@ -17,11 +24,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-open import foundation.contractible-types
-open import foundation.embeddings
-open import foundation.propositional-maps
-open import foundation.subuniverses
-open import foundation.truncated-types
 ```
 
 </details>

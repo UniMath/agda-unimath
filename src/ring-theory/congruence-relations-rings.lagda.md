@@ -13,8 +13,10 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-monoids
+
 open import ring-theory.congruence-relations-semirings
 open import ring-theory.rings
 ```

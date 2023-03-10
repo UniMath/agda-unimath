@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-types

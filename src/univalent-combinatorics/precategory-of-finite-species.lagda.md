@@ -8,7 +8,9 @@ module univalent-combinatorics.precategory-of-finite-species where
 
 ```agda
 open import category-theory.large-precategories
+
 open import foundation.universe-levels
+
 open import univalent-combinatorics.finite-species
 open import univalent-combinatorics.morphisms-finite-species
 ```

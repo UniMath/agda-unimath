@@ -15,6 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import trees.extensional-w-types
 open import trees.w-types
 ```

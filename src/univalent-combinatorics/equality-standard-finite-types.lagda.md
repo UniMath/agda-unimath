@@ -9,7 +9,7 @@ module univalent-combinatorics.equality-standard-finite-types where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import foundation-core.decidable-propositions
+
 open import foundation.apartness-relations
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -29,6 +29,9 @@ open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.decidable-propositions
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

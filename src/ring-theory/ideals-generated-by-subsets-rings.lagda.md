@@ -16,9 +16,11 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import ring-theory.ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
+
 open import univalent-combinatorics.lists
 ```
 

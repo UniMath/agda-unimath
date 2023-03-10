@@ -11,6 +11,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import group-theory.group-actions
 open import group-theory.groups
 ```

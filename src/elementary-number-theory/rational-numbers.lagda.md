@@ -16,6 +16,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-integers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

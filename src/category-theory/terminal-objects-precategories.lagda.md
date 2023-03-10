@@ -8,10 +8,12 @@ module category-theory.terminal-objects-precategories where
 
 ```agda
 open import category-theory.precategories
-open import foundation-core.identity-types
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 ```
 
 </details>

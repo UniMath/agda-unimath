@@ -9,6 +9,7 @@ module ring-theory.nil-ideals-rings where
 ```agda
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import ring-theory.ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.rings

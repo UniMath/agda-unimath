@@ -10,6 +10,7 @@ module category-theory.equivalences-categories where
 open import category-theory.categories
 open import category-theory.equivalences-precategories
 open import category-theory.functors-categories
+
 open import foundation.universe-levels
 ```
 

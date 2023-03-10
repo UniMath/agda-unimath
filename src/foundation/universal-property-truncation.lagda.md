@@ -8,6 +8,7 @@ module foundation.universal-property-truncation where
 
 ```agda
 open import foundation-core.universal-property-truncation public
+
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

@@ -9,6 +9,7 @@ module structured-types.central-h-spaces where
 ```agda
 open import foundation.equivalences
 open import foundation.universe-levels
+
 open import structured-types.pointed-types
 ```
 

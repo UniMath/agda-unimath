@@ -8,6 +8,7 @@ module foundation.shifting-sequences where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
 ```
 

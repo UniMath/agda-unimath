@@ -8,8 +8,10 @@ module group-theory.monomorphisms-groups where
 
 ```agda
 open import category-theory.monomorphisms-large-precategories
+
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups

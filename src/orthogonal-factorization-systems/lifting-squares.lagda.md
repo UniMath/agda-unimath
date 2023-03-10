@@ -27,6 +27,7 @@ open import foundation.structure-identity-principle
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
 ```

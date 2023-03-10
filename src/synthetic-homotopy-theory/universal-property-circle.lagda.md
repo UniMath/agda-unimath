@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sections
 open import foundation.universe-levels
+
 open import synthetic-homotopy-theory.free-loops
 ```
 

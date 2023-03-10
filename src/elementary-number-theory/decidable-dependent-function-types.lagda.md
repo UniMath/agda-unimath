@@ -2,7 +2,11 @@
 
 ```agda
 module elementary-number-theory.decidable-dependent-function-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.decidable-dependent-function-types public
 
 open import elementary-number-theory.inequality-natural-numbers
@@ -18,6 +22,8 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
+
+</details>
 
 ## Idea
 

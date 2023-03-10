@@ -8,7 +8,9 @@ module elementary-number-theory.arithmetic-functions where
 
 ```agda
 open import elementary-number-theory.nonzero-natural-numbers
+
 open import foundation.universe-levels
+
 open import ring-theory.rings
 ```
 

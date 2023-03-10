@@ -8,6 +8,7 @@ module category-theory.functors-precategories where
 
 ```agda
 open import category-theory.precategories
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions

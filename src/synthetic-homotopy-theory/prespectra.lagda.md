@@ -8,10 +8,13 @@ module synthetic-homotopy-theory.prespectra where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.loop-spaces
 ```
 

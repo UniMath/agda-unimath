@@ -17,6 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+
 open import structured-types.types-equipped-with-endomorphisms
 ```
 

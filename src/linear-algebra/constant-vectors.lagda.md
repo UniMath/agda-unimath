@@ -8,7 +8,9 @@ module linear-algebra.constant-vectors where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
+
 open import linear-algebra.vectors
 ```
 

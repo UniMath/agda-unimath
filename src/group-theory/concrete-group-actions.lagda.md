@@ -13,7 +13,9 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.concrete-groups
+
 open import synthetic-homotopy-theory.circle
 ```
 

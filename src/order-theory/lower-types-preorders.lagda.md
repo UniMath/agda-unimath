@@ -10,6 +10,7 @@ module order-theory.lower-types-preorders where
 open import foundation.dependent-pair-types
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import order-theory.preorders
 ```
 

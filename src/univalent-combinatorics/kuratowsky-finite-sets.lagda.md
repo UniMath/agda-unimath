@@ -8,6 +8,7 @@ module univalent-combinatorics.kuratowsky-finite-sets where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -16,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.universe-levels
+
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps

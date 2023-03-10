@@ -15,8 +15,10 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import graph-theory.equivalences-directed-graphs
 open import graph-theory.walks-directed-graphs
+
 open import trees.directed-trees
 ```
 

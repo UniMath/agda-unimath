@@ -8,6 +8,13 @@ module foundation.equivalences where
 
 ```agda
 open import foundation-core.equivalences public
+
+open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.truncated-maps
+open import foundation.type-theoretic-principle-of-choice
+
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -31,11 +38,6 @@ open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-open import foundation.equivalence-extensionality
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.truncated-maps
-open import foundation.type-theoretic-principle-of-choice
 ```
 
 </details>

@@ -22,6 +22,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.extensions-of-maps
 ```
 
 </details>
@@ -229,8 +231,6 @@ module _
   pr1 (is-small-total-lift) = X → A
   pr2 (is-small-total-lift) = inv-compute-total-lift
 ```
-
-## Properties
 
 ### The truncation level of the type of lifts is bounded by the truncation level of the codomains
 

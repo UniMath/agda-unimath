@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.symmetric-identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
 open import graph-theory.undirected-graphs
 ```
 

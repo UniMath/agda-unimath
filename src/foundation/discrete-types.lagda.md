@@ -8,6 +8,7 @@ module foundation.discrete-types where
 
 ```agda
 open import foundation-core.discrete-types public
+
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.coproduct-types

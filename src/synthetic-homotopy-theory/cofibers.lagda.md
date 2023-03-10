@@ -13,7 +13,9 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts

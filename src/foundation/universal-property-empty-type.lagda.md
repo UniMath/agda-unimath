@@ -7,13 +7,14 @@ module foundation.universal-property-empty-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.universe-levels
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-extensionality
 ```
 
 </details>

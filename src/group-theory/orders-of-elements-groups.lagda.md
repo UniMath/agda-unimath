@@ -8,7 +8,9 @@ module group-theory.orders-of-elements-groups where
 
 ```agda
 open import elementary-number-theory.group-of-integers
+
 open import foundation.universe-levels
+
 open import group-theory.free-groups-with-one-generator
 open import group-theory.groups
 open import group-theory.kernels

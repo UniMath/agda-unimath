@@ -28,6 +28,7 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types

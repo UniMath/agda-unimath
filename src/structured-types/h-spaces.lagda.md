@@ -14,6 +14,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
+
 open import structured-types.pointed-types
 ```
 

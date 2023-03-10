@@ -7,13 +7,14 @@ module foundation.lawveres-fixed-point-theorem where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.function-extensionality
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.universe-levels
+
+open import foundation-core.function-extensionality
 ```
 
 </details>
