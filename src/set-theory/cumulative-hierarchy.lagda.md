@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.existential-quantification
+open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.propositional-extensionality
@@ -39,6 +40,25 @@ its induction principle, following [2].
 
 ## Definitions
 
+###
+
+```agda
+has-smaller-image :
+  { l1 l2 l3 : Level } →
+  {A : UU l1} {B : UU l2} {C : UU l3} →
+  (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
+has-smaller-image {l1} {l2} {l3} {A} {B} {C} f g =
+  (a : A) → ∃ B (λ b → g b ＝ f a)
+
+has-same-image :
+  { l1 l2 l3 : Level } →
+  {A : UU l1} {B : UU l2} {C : UU l3} →
+  (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
+has-same-image {l1} {l2} {l3} {A} {B} {C} f g =
+  has-smaller-image f g ×
+    has-smaller-image g f
+```
+
 ### Pseudo cumulative hierarchy
 
 A type is a pseudo cumulative hierarchy if it has the structure of a cumulative hierarchy, but not necessarily its induction principle.
@@ -51,8 +71,7 @@ has-cumulative-hierarchy-structure {l} V =
     ( Σ ({A : UU l} → (A → V) → V)
       ( λ V-set →
         ( {A B : UU l} (f : A → V) (g : B → V) →
-          ( type-trunc-Prop (lift f g) ×
-            type-trunc-Prop (lift g f)) → V-set f ＝ V-set g)))
+          ( has-same-image f g) → V-set f ＝ V-set g)))
 
 pseudo-cumulative-hierarchy : (l : Level) → UU (lsuc (lsuc l))
 pseudo-cumulative-hierarchy (l) =
@@ -78,7 +97,7 @@ module _
   set-ext-pseudo-cumulative-hierarchy :
     { A B : UU l} (f : A → type-pseudo-cumulative-hierarchy)
     ( g : B → type-pseudo-cumulative-hierarchy) →
-    ( type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f)) →
+    ( has-same-image f g) →
     set-pseudo-cumulative-hierarchy f ＝ set-pseudo-cumulative-hierarchy g
   set-ext-pseudo-cumulative-hierarchy = pr2 (pr2 (pr2 V))
 ```
@@ -98,13 +117,13 @@ module _
       ( (a : A) → P (f a)) → P (set-pseudo-cumulative-hierarchy V f)) →
     ( { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) →
       ( g : B → type-pseudo-cumulative-hierarchy V)
-      ( e : type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f))
+      ( e : has-same-image f g)
       ( IH₁ : (a : A) → P (f a))
       ( IH₂ : (b : B) → P (g b)) →
-      ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+      ( ( a : A) → ∃ B (λ b → Σ (f a ＝ g b)
         ( λ p → tr P p (IH₁ a) ＝ IH₂ b))) →
-      ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
-                       (λ p → tr P p (IH₂ b) ＝ IH₁ a))) →
+      ( ( b : B) → ∃ A (λ a →
+        Σ (g b ＝ f a) (λ p → tr P p (IH₂ b) ＝ IH₁ a))) →
       tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂) →
     (x : type-pseudo-cumulative-hierarchy V) → P x
 
@@ -119,7 +138,7 @@ module _
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) →
       ( g : B → type-pseudo-cumulative-hierarchy V)
-      ( e : type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f))
+      ( e : has-same-image f g)
       ( IH₁ : (a : A) → P (f a))
       ( IH₂ : (b : B) → P (g b)) →
       ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
@@ -207,7 +226,7 @@ module _
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V)
-      ( e : type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f))
+      ( e : has-same-image f g)
       ( IH₁ : A → X)
       ( IH₂ : B → X) →
       ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
@@ -219,7 +238,7 @@ module _
     where
     τ' :
       { A B : UU l1} (f : A → pr1 V) (g : B → pr1 V)
-      ( e : type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f))
+      ( e : has-same-image f g)
       ( IH₁ : (a : A) → X) (IH₂ : (b : B) → X) →
       ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
         (λ p → tr (λ _ → X) p (IH₁ a) ＝ IH₂ b))) →
@@ -249,7 +268,7 @@ module _
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V)
-      ( e : type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f))
+      ( e : has-same-image f g)
       ( IH₁ : A → X)
       ( IH₂ : B → X) →
       ( ( a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
@@ -264,7 +283,7 @@ module _
     where
     τ' :
       { A B : UU l1} (f : A → pr1 V) (g : B → pr1 V)
-      ( e : type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f))
+      ( e : has-same-image f g)
       ( IH₁ : (a : A) → X) (IH₂ : (b : B) → X) →
       ( ( a : A) → ∃ B (λ b → Σ (f a ＝ g b)
         ( λ p → tr (λ _ → X) p (IH₁ a) ＝ IH₂ b))) →
@@ -299,7 +318,7 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
       ( A → Prop l2) → Prop l2)
     ( τ : {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V)
-      ( e : type-trunc-Prop (lift g f))
+      ( e : has-smaller-image f g)
       ( IH₁ : A → Prop l2)
       ( IH₂ : B → Prop l2) →
       ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
@@ -312,13 +331,13 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
     τ' :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V) →
-      ( type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f)) →
+      ( e : has-same-image f g)
       ( IH₁ : A → Prop l2) (IH₂ : B → Prop l2) →
       ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
       ( (b : B) → ∃ A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
       ρ f IH₁ ＝ ρ g IH₂
     τ' f g (e₁ , e₂) IH₁ IH₂ hIH₁ hIH₂ =
-      eq-iff (τ f g e₂ IH₁ IH₂ hIH₁) (τ g f e₁ IH₂ IH₁ hIH₂)
+      eq-iff (τ f g e₁ IH₁ IH₂ hIH₁) (τ g f e₂ IH₂ IH₁ hIH₂)
 
   compute-prop-recursion-principle-cumulative-hierarchy :
     {l2 : Level}
@@ -328,7 +347,7 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V)
-      ( e : type-trunc-Prop (lift g f))
+      ( e : has-smaller-image f g)
       ( IH₁ : A → Prop l2)
       ( IH₂ : B → Prop l2) →
       ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
@@ -344,13 +363,13 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
     τ' :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V) →
-      ( type-trunc-Prop (lift f g) × type-trunc-Prop (lift g f)) →
+      ( e : has-same-image f g)
       ( IH₁ : A → Prop l2) (IH₂ : B → Prop l2) →
       ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
       ( (b : B) → ∃ A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
       ρ f IH₁ ＝ ρ g IH₂
     τ' f g (e₁ , e₂) IH₁ IH₂ hIH₁ hIH₂ =
-      eq-iff (τ f g e₂ IH₁ IH₂ hIH₁) (τ g f e₁ IH₂ IH₁ hIH₂)
+      eq-iff (τ f g e₁ IH₁ IH₂ hIH₁) (τ g f e₂ IH₂ IH₁ hIH₂)
 ```
 
 Another simplification of the recursion principle, when recursive calls are not needed.
@@ -362,18 +381,21 @@ Another simplification of the recursion principle, when recursive calls are not 
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V) →
-      ( type-trunc-Prop (lift g f)) → type-Prop (ρ f) → type-Prop (ρ g)) →
+      ( e : has-smaller-image f g) →
+      type-Prop (ρ f) → type-Prop (ρ g)) →
     type-pseudo-cumulative-hierarchy V → Prop l2
   simple-prop-recursion-principle-cumulative-hierarchy {l2} ρ τ =
     prop-recursion-principle-cumulative-hierarchy
       ( λ f _ → ρ f) (λ f g e _ _ _ → τ f g e)
 
-  compute-simple-prop-recursion-principle-cumulative-hierarchy : {l2 : Level}
+  compute-simple-prop-recursion-principle-cumulative-hierarchy :
+    {l2 : Level}
     ( ρ : {A : UU l1} → (A → type-pseudo-cumulative-hierarchy V) → Prop l2)
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V) →
-      ( type-trunc-Prop (lift g f)) → type-Prop (ρ f) → type-Prop (ρ g)) →
+      ( e : has-smaller-image f g) →
+      type-Prop (ρ f) → type-Prop (ρ g)) →
     {A : UU l1} → (f : A → type-pseudo-cumulative-hierarchy V) →
     simple-prop-recursion-principle-cumulative-hierarchy ρ τ
       ( set-pseudo-cumulative-hierarchy V f) ＝ ρ f
@@ -396,13 +418,13 @@ Another simplification of the recursion principle, when recursive calls are not 
     e :
       {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V) →
-      ( type-trunc-Prop (lift g f)) →
+      ( e : has-smaller-image f g) →
       ( ∃ A (λ a → f a ＝ x) → ∃ B (λ b → g b ＝ x))
     e {A} {B} f g s =
       map-universal-property-trunc-Prop
         ( ∃-Prop B (λ b → g b ＝ x))
-        ( λ (a , p) →
-          map-trunc-Prop (λ (h , q) → h a , (inv (q a) ∙ p)) s)
+        ( λ ( a , p) →
+          map-trunc-Prop (λ (b , q) → (b , q ∙ p)) (s a))
 
   ∈-cumulative-hierarchy :
     ( type-pseudo-cumulative-hierarchy V) →
@@ -419,6 +441,24 @@ Another simplification of the recursion principle, when recursive calls are not 
   id-∈-cumulative-hierarchy x f =
     ap pr1 (compute-simple-prop-recursion-principle-cumulative-hierarchy _ _ f)
 
+  ∈-cumulative-hierarchy-mere-preimage  :
+    { x : type-pseudo-cumulative-hierarchy V} →
+    { A : UU l1}
+    { f : A → type-pseudo-cumulative-hierarchy V} →
+    ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f)) →
+    ∃ A (λ a → f a ＝ x)
+  ∈-cumulative-hierarchy-mere-preimage {x} {A} {f} =
+    tr id (id-∈-cumulative-hierarchy x f)
+
+  mere-preimage-∈-cumulative-hierarchy  :
+    { x : type-pseudo-cumulative-hierarchy V} →
+    { A : UU l1}
+    { f : A → type-pseudo-cumulative-hierarchy V} →
+    ∃ A (λ a → f a ＝ x) →
+    ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f))
+  mere-preimage-∈-cumulative-hierarchy {x} {A} {f} =
+    tr id (inv (id-∈-cumulative-hierarchy x f))
+
   is-prop-∈-cumulative-hierarchy :
     ( x : type-pseudo-cumulative-hierarchy V) →
     ( y : type-pseudo-cumulative-hierarchy V) →
@@ -427,7 +467,7 @@ Another simplification of the recursion principle, when recursive calls are not 
     is-prop-type-Prop (∈-cumulative-hierarchy-Prop x y)
 ```
 
--- ### The subset relationship for the cumulative hierarchy
+### The subset relationship for the cumulative hierarchy
 
 ```agda
   ⊆-cumulative-hierarchy :
@@ -445,6 +485,80 @@ Another simplification of the recursion principle, when recursive calls are not 
   is-prop-⊆-cumulative-hierarchy x y =
     is-prop-Π ( λ v →
       ( is-prop-Π (λ _ → is-prop-∈-cumulative-hierarchy v y)))
+
+  ⊆-cumulative-hierarchy-has-smaller-image :
+    { A B : UU l1}
+    ( f : A → type-pseudo-cumulative-hierarchy V)
+    ( g : B → type-pseudo-cumulative-hierarchy V) →
+    ⊆-cumulative-hierarchy
+      ( set-pseudo-cumulative-hierarchy V f)
+      ( set-pseudo-cumulative-hierarchy V g) →
+    has-smaller-image f g
+  ⊆-cumulative-hierarchy-has-smaller-image f g s a =
+    ∈-cumulative-hierarchy-mere-preimage
+      ( s (f a)
+        ( mere-preimage-∈-cumulative-hierarchy
+          (unit-trunc-Prop (a , refl))))
+
+  has-smaller-image-⊆-cumulative-hierarchy :
+    { A B : UU l1}
+    ( f : A → type-pseudo-cumulative-hierarchy V)
+    ( g : B → type-pseudo-cumulative-hierarchy V) →
+    has-smaller-image f g →
+    ⊆-cumulative-hierarchy
+      ( set-pseudo-cumulative-hierarchy V f)
+      ( set-pseudo-cumulative-hierarchy V g)
+  has-smaller-image-⊆-cumulative-hierarchy {A} {B} f g s x m =
+    mere-preimage-∈-cumulative-hierarchy
+      ( map-universal-property-trunc-Prop (∃-Prop B (λ b → g b ＝ x))
+        ( λ (a , p) →
+          map-trunc-Prop (λ (b , q) → (b , q ∙ p)) (s a))
+        ( ∈-cumulative-hierarchy-mere-preimage m))
+```
+
+### Extensionality of the membership relation
+
+```agda
+  pre-extensionality-∈-cumulative-hierarchy :
+    { A : UU l1}
+    ( f : A → type-pseudo-cumulative-hierarchy V)
+    ( x : type-pseudo-cumulative-hierarchy V) →
+    ( ⊆-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f)) →
+    ( ⊆-cumulative-hierarchy (set-pseudo-cumulative-hierarchy V f) x) →
+    x ＝ (set-pseudo-cumulative-hierarchy V f)
+  pre-extensionality-∈-cumulative-hierarchy f =
+    prop-ind-principle-cumulative-hierarchy
+      ( λ x →
+        ⊆-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f) →
+        ⊆-cumulative-hierarchy (set-pseudo-cumulative-hierarchy V f) x →
+        x ＝ (set-pseudo-cumulative-hierarchy V f))
+      ( λ v →
+        is-prop-Π (λ _ →
+          is-prop-Π (λ _ →
+            is-set-pseudo-cumulative-hierarchy V
+              v (set-pseudo-cumulative-hierarchy V f))))
+      ( λ g H H₁ H₂ →
+        set-ext-pseudo-cumulative-hierarchy V g f
+          ( ⊆-cumulative-hierarchy-has-smaller-image g f H₁ ,
+            ⊆-cumulative-hierarchy-has-smaller-image f g H₂))
+
+  extensionality-∈-cumulative-hierarchy :
+    ( x y : type-pseudo-cumulative-hierarchy V) →
+    ( ⊆-cumulative-hierarchy x y) →
+    ( ⊆-cumulative-hierarchy y x) →
+    x ＝ y
+  extensionality-∈-cumulative-hierarchy x =
+    prop-ind-principle-cumulative-hierarchy
+      ( λ y →
+        ⊆-cumulative-hierarchy x y →
+        ⊆-cumulative-hierarchy y x → x ＝ y)
+      ( λ v →
+        is-prop-Π (λ _ →
+          is-prop-Π (λ _ →
+            is-set-pseudo-cumulative-hierarchy V x v)))
+      ( λ f H H₁ H₂ →
+        pre-extensionality-∈-cumulative-hierarchy
+          f x H₁ H₂)
 ```
 
 ## References
