@@ -8,10 +8,12 @@ module group-theory.category-of-groups where
 
 ```agda
 open import category-theory.large-categories
+
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups

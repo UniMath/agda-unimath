@@ -13,7 +13,9 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
 open import graph-theory.undirected-graphs
+
 open import univalent-combinatorics.finite-types
 ```
 

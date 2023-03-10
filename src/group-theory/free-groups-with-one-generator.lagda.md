@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -22,8 +23,10 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```

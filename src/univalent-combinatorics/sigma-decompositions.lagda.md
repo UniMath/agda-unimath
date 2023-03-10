@@ -8,6 +8,7 @@ module univalent-combinatorics.sigma-decompositions where
 
 ```agda
 open import foundation.sigma-decompositions public
+
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
@@ -25,6 +26,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
+
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types

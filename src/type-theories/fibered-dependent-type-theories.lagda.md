@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import type-theories.dependent-type-theories
 ```
 

@@ -8,6 +8,7 @@ module foundation.injective-maps where
 
 ```agda
 open import foundation-core.injective-maps public
+
 open import foundation-core.empty-types
 open import foundation-core.universe-levels
 ```

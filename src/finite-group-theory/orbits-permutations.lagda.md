@@ -21,7 +21,9 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+
 open import finite-group-theory.transpositions
+
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -56,6 +58,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
+
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting

@@ -15,6 +15,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
+
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 ```

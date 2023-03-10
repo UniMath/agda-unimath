@@ -7,7 +7,6 @@ module foundation.weak-function-extensionality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.function-extensionality
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -28,6 +27,8 @@ open import foundation.subtypes
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
+open import foundation-core.function-extensionality
 ```
 
 </details>

@@ -11,6 +11,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 open import group-theory.orbits-higher-group-actions

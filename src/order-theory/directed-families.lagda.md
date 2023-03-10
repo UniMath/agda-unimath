@@ -12,6 +12,7 @@ open import foundation.existential-quantification
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import order-theory.posets
 ```
 

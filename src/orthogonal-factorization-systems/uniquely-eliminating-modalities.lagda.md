@@ -14,6 +14,7 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
 ```

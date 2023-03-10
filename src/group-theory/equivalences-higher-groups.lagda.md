@@ -16,8 +16,10 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-higher-groups
+
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 ```

@@ -16,6 +16,7 @@ open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
 open import univalent-combinatorics.2-element-types
 ```
 

@@ -8,6 +8,7 @@ module group-theory.orbits-monoid-actions where
 
 ```agda
 open import category-theory.precategories
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,6 +18,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
 open import group-theory.monoid-actions
 open import group-theory.monoids
 ```

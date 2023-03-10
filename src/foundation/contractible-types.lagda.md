@@ -8,6 +8,11 @@ module foundation.contractible-types where
 
 ```agda
 open import foundation-core.contractible-types public
+
+open import foundation.function-extensionality
+open import foundation.subuniverses
+open import foundation.unit-type
+
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
@@ -21,9 +26,6 @@ open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
-open import foundation.subuniverses
-open import foundation.unit-type
 ```
 
 </details>

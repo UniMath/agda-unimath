@@ -12,6 +12,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import ring-theory.rings
 ```
 

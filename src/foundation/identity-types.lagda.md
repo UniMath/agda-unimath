@@ -8,14 +8,16 @@ module foundation.identity-types where
 
 ```agda
 open import foundation-core.identity-types public
-open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.homotopies
+
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
 ```
 
 </details>

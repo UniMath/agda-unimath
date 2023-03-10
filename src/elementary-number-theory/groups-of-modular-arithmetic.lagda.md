@@ -9,8 +9,10 @@ module elementary-number-theory.groups-of-modular-arithmetic where
 ```agda
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups

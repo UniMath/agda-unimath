@@ -8,8 +8,11 @@ module synthetic-homotopy-theory.spheres where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
+
 open import synthetic-homotopy-theory.suspensions-of-types
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

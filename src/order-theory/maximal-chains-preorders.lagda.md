@@ -10,6 +10,7 @@ module order-theory.maximal-chains-preorders where
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import order-theory.chains-preorders
 open import order-theory.preorders
 ```

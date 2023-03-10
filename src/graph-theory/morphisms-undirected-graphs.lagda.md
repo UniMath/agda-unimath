@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
 open import graph-theory.undirected-graphs
 ```
 

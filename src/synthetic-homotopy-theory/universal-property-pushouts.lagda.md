@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
 open import synthetic-homotopy-theory.cocones-pushouts
 ```
 

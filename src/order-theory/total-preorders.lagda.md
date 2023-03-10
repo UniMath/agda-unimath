@@ -10,6 +10,7 @@ module order-theory.total-preorders where
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import order-theory.preorders
 ```
 

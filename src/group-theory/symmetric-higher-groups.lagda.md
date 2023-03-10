@@ -12,7 +12,9 @@ open import foundation.connected-components-universes
 open import foundation.dependent-pair-types
 open import foundation.mere-equivalences
 open import foundation.universe-levels
+
 open import group-theory.higher-groups
+
 open import structured-types.pointed-types
 ```
 

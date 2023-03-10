@@ -8,6 +8,7 @@ module univalent-combinatorics.skipping-element-standard-finite-types where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -15,6 +16,7 @@ open import foundation.equality-coproduct-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.unit-type
+
 open import univalent-combinatorics.standard-finite-types
 ```
 

@@ -7,7 +7,6 @@ module foundation.epimorphisms-with-respect-to-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.univalence
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -24,6 +23,8 @@ open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.univalence
 ```
 
 </details>

@@ -17,6 +17,7 @@ open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
 ```

@@ -8,6 +8,7 @@ module univalent-combinatorics.equality-finite-types where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -15,6 +16,7 @@ open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.universe-levels
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.equality-standard-finite-types

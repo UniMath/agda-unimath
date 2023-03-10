@@ -20,6 +20,7 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
@@ -27,7 +28,9 @@ open import group-theory.higher-groups
 open import group-theory.mere-equivalences-concrete-group-actions
 open import group-theory.normal-subgroups-concrete-groups
 open import group-theory.transitive-concrete-group-actions
+
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.loop-spaces
 ```
 

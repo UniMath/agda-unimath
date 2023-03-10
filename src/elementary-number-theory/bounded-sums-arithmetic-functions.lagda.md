@@ -10,11 +10,13 @@ module elementary-number-theory.bounded-sums-arithmetic-functions where
 open import elementary-number-theory.arithmetic-functions
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.functions
 open import foundation.universe-levels
+
 open import ring-theory.rings
 ```
 

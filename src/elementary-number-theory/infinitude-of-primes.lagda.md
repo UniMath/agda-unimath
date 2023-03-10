@@ -19,6 +19,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

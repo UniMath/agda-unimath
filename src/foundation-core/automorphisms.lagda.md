@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+
 open import structured-types.pointed-types
 ```
 

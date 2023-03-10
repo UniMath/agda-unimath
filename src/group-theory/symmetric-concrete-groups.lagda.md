@@ -14,6 +14,7 @@ open import foundation.mere-equality
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 ```

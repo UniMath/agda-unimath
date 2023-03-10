@@ -9,6 +9,7 @@ module structured-types.unpointed-maps where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import structured-types.pointed-types
 ```
 

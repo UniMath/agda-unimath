@@ -13,9 +13,11 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
