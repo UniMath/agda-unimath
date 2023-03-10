@@ -240,14 +240,13 @@ module _
 
   left-distributive-mul-add-Ring :
     (x y z : type-Ring R) →
-    Id (mul-Ring x (add-Ring R y z)) (add-Ring R (mul-Ring x y) (mul-Ring x z))
+    mul-Ring x (add-Ring R y z) ＝ add-Ring R (mul-Ring x y) (mul-Ring x z)
   left-distributive-mul-add-Ring =
     pr1 (pr2 (pr2 (pr2 R)))
 
   right-distributive-mul-add-Ring :
     (x y z : type-Ring R) →
-    Id ( mul-Ring (add-Ring R x y) z)
-      ( add-Ring R (mul-Ring x z) (mul-Ring y z))
+    mul-Ring (add-Ring R x y) z ＝ add-Ring R (mul-Ring x z) (mul-Ring y z)
   right-distributive-mul-add-Ring =
     pr2 (pr2 (pr2 (pr2 R)))
 ```
