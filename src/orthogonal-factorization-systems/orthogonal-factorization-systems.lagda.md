@@ -15,10 +15,11 @@ open import foundation.functions
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
 open import orthogonal-factorization-systems.factorization-operations
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.wide-function-precats
+open import orthogonal-factorization-systems.wide-function-classes
 ```
 
 </details>
@@ -43,8 +44,8 @@ is-orthogonal-factorization-system :
   (R : function-class l l lR)
   → UU (lsuc l ⊔ lL ⊔ lR)
 is-orthogonal-factorization-system {l} L R =
-  ( is-wide-function-precat L) ×
-  ( ( is-wide-function-precat R) ×
+  ( is-wide-function-class L) ×
+  ( ( is-wide-function-class R) ×
     ( (A B : UU l) → unique-function-class-factorization-operation L R A B))
 
 orthogonal-factorization-system :
@@ -71,9 +72,9 @@ module _
     is-prop (is-orthogonal-factorization-system L R)
   is-prop-is-orthogonal-factorization-system =
     is-prop-prod
-      ( is-prop-is-wide-function-precat L)
+      ( is-prop-is-wide-function-class L)
       ( is-prop-prod
-        ( is-prop-is-wide-function-precat R)
+        ( is-prop-is-wide-function-class R)
         ( is-prop-Π
             λ A → is-prop-Π
               λ B → is-prop-unique-function-class-factorization-operation L R))

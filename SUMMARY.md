@@ -777,6 +777,7 @@
   - [Pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
   - [Reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
   - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
+  - [Wide function classes](orthogonal-factorization-systems.wide-function-classes.md)
 
 - [Polytopes](polytopes.md)
   - [Abstract polytopes](polytopes.abstract-polytopes.md)

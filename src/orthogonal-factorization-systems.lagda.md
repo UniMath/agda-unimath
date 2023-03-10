@@ -19,4 +19,5 @@ open import orthogonal-factorization-systems.orthogonal-maps public
 open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
+open import orthogonal-factorization-systems.wide-function-classes public
 ```

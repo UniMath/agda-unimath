@@ -29,8 +29,6 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
-
 open import orthogonal-factorization-systems.local-types
 ```
 
