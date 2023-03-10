@@ -73,15 +73,15 @@ module _
       ( λ pair-a → eq-pair (eq-is-prop is-prop-A ) (eq-is-prop is-prop-A))
       ( λ a → eq-is-prop is-prop-A)
 
-  equiv-extra-hypotheses :
-    {l1 : Level} {B : UU l1} →
-    (is-prop A) → (is-prop B) → (f : A → B) → (A ≃ (A × B))
-  pr1 (equiv-extra-hypotheses is-prop-A is-prop-B f) a = a , f a
-  pr2 (equiv-extra-hypotheses is-prop-A is-prop-B f) =
-    is-equiv-has-inverse
-      ( pr1)
-      ( λ p → eq-pair (eq-is-prop is-prop-A ) (eq-is-prop is-prop-B))
-      ( λ a → eq-is-prop is-prop-A)
+equiv-add-redondent-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (is-prop B) → (f : A → B) → (A ≃ (A × B))
+pr1 (equiv-add-redondent-prop is-prop-B f) a = a , f a
+pr2 (equiv-add-redondent-prop is-prop-B f) =
+  is-equiv-has-inverse
+    ( pr1)
+    ( λ p → eq-pair refl (eq-is-prop is-prop-B))
+    ( λ a → refl)
 ```
 
 ### The fibers of the diagonal map

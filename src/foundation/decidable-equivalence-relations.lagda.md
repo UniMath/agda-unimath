@@ -30,6 +30,7 @@ open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.images
 open import foundation.logical-equivalences
@@ -131,6 +132,24 @@ module _
     sim-Decidable-Equivalence-Relation x z
   transitive-Decidable-Equivalence-Relation =
     trans-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
+
+equiv-equivalence-relation-is-decidable-Dec-Eq-Rel :
+  {l1 l2 : Level} {X : UU l1} →
+  Decidable-Equivalence-Relation l2 X ≃
+  Σ ( Eq-Rel l2 X)
+    ( λ R → ((x y : X) → is-decidable (type-Prop ((pr1 R) x y))))
+pr1 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel R =
+  ( equivalence-relation-Decidable-Equivalence-Relation R ,
+    is-decidable-sim-Decidable-Equivalence-Relation R)
+pr2 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel =
+  is-equiv-has-inverse
+    ( λ R →
+      ( map-inv-equiv
+          ( equiv-relation-is-decidable-Decidable-Relation)
+          ( (pr1 (pr1 R)) , (pr2 R))  ,
+        pr2 (pr1 R) ))
+    ( refl-htpy)
+    ( refl-htpy)
 ```
 
 ### Equivalence classes of decidable equivalence relations
@@ -479,12 +498,11 @@ is-dec-rel-equiv-surj-if-has-dec-eq B f dec-eq x y =
   dec-eq (map-surjection f x) (map-surjection f y)
 
 
-
-equiv-surjection-into-set-dec-equal-Eq-Rel :
+equiv-surjection-into-set-Dec-Eq-Rel :
   {l1 : Level} (A : UU l1) →
   Decidable-Equivalence-Relation l1 A ≃
   Σ (UU l1) (λ X → (A ↠ X) × has-decidable-equality X)
-equiv-surjection-into-set-dec-equal-Eq-Rel {l1} A =
+equiv-surjection-into-set-Dec-Eq-Rel {l1} A =
   ( ( equiv-Σ
       ( λ z → (A ↠ z) × has-decidable-equality z)
       ( id-equiv)
@@ -492,9 +510,7 @@ equiv-surjection-into-set-dec-equal-Eq-Rel {l1} A =
         ( equiv-prod
          ( id-equiv)
          ( inv-equiv
-             ( equiv-extra-hypotheses
-               ( has-decidable-equality ( X))
-               ( is-prop-has-decidable-equality)
+             ( equiv-add-redondent-prop
                ( is-prop-is-set ( X))
                ( is-set-has-decidable-equality)) ∘e
            commutative-prod) ∘e
@@ -512,7 +528,9 @@ equiv-surjection-into-set-dec-equal-Eq-Rel {l1} A =
        is-prop-Π
          ( λ x →
            is-prop-Π
-             ( λ y → is-prop-is-decidable (is-prop-sim-Eq-Rel _ x y))))
+             ( λ y →
+               is-prop-is-decidable
+                 ( is-prop-sim-Eq-Rel (eq-rel-Surjection-Into-Set surj) x y))))
      ( λ _ → is-prop-has-decidable-equality)
      ( λ surj →
        has-dec-eq-if-is-dec-rel-equiv-surj
@@ -526,5 +544,5 @@ equiv-surjection-into-set-dec-equal-Eq-Rel {l1} A =
       ( equiv-Σ-equiv-base
         ( λ R → ((x y : A) → is-decidable (sim-Eq-Rel R x y)))
         ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
-          {!equiv-left-swap-Σ!}))))
+          equiv-equivalence-relation-is-decidable-Dec-Eq-Rel )))))
 ```

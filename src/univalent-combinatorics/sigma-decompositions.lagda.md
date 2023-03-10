@@ -162,43 +162,40 @@ is-finite-base-type-Σ-Decomposition-𝔽 D =
 ### Equivalence between finite surjection and finite Σ-decomposition
 
 ```agda
-equiv-finite-surjection-Σ-Decomposition-𝔽 :
-  {l : Level} (A : 𝔽 l ) →
-  Σ-Decomposition-𝔽 l l (type-𝔽 A)  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B) )
-equiv-finite-surjection-Σ-Decomposition-𝔽 {l} A =
-  equiv-Σ
-    ( λ B → type-𝔽 A ↠ type-𝔽 B)
-    ( id-equiv)
-    ( λ B →
-      ( ( equiv-fib-pr1 (λ (X : 𝔽 l) → (type-𝔽 X) ↠ (type-𝔽 B))) A ∘e
-      ( ( equiv-Σ
-          ( λ x → pr1 x ＝ A)
-          ( id-equiv)
-          ( λ slice → {!!}) ∘e
-      ( inv-equiv
-        ( equiv-Σ-equiv-base
-          ( λ Y → type-𝔽 A ≃ Σ (pr1 B) (λ x → pr1 (pr1 (Y x))))
-          ( equiv-Fib-trunc-Prop-𝔽 l B)))))))
+module _
+  {l : Level} (A : 𝔽 l)
+  where
+
+  equiv-finite-surjection-Σ-Decomposition-𝔽 :
+    Σ-Decomposition-𝔽 l l (type-𝔽 A)  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B) )
+  equiv-finite-surjection-Σ-Decomposition-𝔽 =
+    equiv-Σ
+      ( λ B → type-𝔽 A ↠ type-𝔽 B)
+      ( id-equiv)
+      ( λ X → inv-equiv (equiv-surjection-𝔽-family-finite-inhabited-type A X))
 ```
 
 ### Equivalence between finite decidable equivalence relations and finite Σ-decompositions
 
 ```agda
-
-
+  equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽 :
+    Σ-Decomposition-𝔽 l l (type-𝔽 A) ≃
+    Decidable-Equivalence-Relation-𝔽 l A
+  equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽 =
+    inv-equiv (equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A) ∘e
+    equiv-finite-surjection-Σ-Decomposition-𝔽
 
 ```
 
 ### The type of all finite Σ-Decomposition is finite
 
 ```agda
-{-
-is-finite-Σ-Decomposition-𝔽 :
-  {l1 l2 l3 : Level} {A : UU l1} →
-  is-finite (Σ-Decomposition l2 l3 A)
-is-finite-Σ-Decomposition-𝔽 =
-  {!!}
--}
+  is-finite-Σ-Decomposition-𝔽 :
+    is-finite (Σ-Decomposition-𝔽 l l (type-𝔽 A))
+  is-finite-Σ-Decomposition-𝔽 =
+    is-finite-equiv
+      ( inv-equiv equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽)
+      ( is-finite-Dec-Eq-Rel-𝔽 A)
 ```
 
 ### Characterization of the equality of finite Σ-Decompositions

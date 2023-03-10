@@ -9,22 +9,34 @@ module univalent-combinatorics.decidable-equivalence-relations where
 ```agda
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.function-types
+open import univalent-combinatorics.surjective-maps
+open import univalent-combinatorics.standard-finite-types
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.decidable-equality
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.equivalence-relations
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.propositions
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import elementary-number-theory.natural-numbers
 ```
 
 </details>
@@ -167,8 +179,54 @@ module _
 ```agda
 equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →
-  Decidable-Equivalence-Relation-𝔽 l1 A ≃ Σ (𝔽 l1) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
-equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 = {!!}
+  Decidable-Equivalence-Relation-𝔽 l1 A ≃
+  Σ (𝔽 l1) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
+equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A =
+  ( equiv-Σ-equiv-base
+      ( λ X → (type-𝔽 A) ↠ (type-𝔽 X))
+      ( equiv-Σ
+          ( λ X → is-finite X)
+          ( id-equiv)
+          ( λ X →
+            inv-equiv is-finite-iff-∃-surjection-has-decidable-equality)) ∘e
+  ( ( inv-assoc-Σ
+        ( UU _)
+        ( λ X →
+            has-decidable-equality X ×
+            type-trunc-Prop (Σ ℕ (λ n → Fin n ↠  X)))
+        ( λ X → type-𝔽 A ↠ pr1 X)  ) ∘e
+  ( ( equiv-Σ
+        (λ X →
+            Σ ( has-decidable-equality X ×
+                type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+              ( λ _ → pr1 A ↠ X))
+        ( id-equiv)
+        ( λ X →
+          ( ( inv-equiv
+              ( assoc-prod
+                ( has-decidable-equality X)
+                ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+                ( type-𝔽 A ↠ X))) ∘e
+          ( ( equiv-prod id-equiv commutative-prod) ∘e
+          ( ( assoc-prod
+              ( has-decidable-equality (map-equiv id-equiv X))
+              ( type-𝔽 A ↠ X)
+              ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
+          ( ( equiv-prod commutative-prod id-equiv)  ∘e
+          ( ( equiv-add-redondent-prop
+              ( is-prop-type-trunc-Prop)
+              ( λ x →
+                 apply-universal-property-trunc-Prop
+                   ( is-finite-type-𝔽 A)
+                   ( trunc-Prop ( Σ ℕ (λ n → Fin n ↠ X)))
+                   ( λ count-A →
+                     unit-trunc-Prop
+                       ( number-of-elements-count count-A ,
+                         ( (map-surjection (pr1 x) ∘ map-equiv-count count-A) ,
+                           is-surjective-precomp-equiv
+                             ( is-surjective-map-surjection (pr1 x))
+                             ( equiv-count count-A)))))))))))) ∘e
+  ( equiv-surjection-into-set-Dec-Eq-Rel (type-𝔽 A))))))
 ```
 
 

@@ -54,7 +54,7 @@ is-decidable-is-surjective-is-finite f HA HB =
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1 }
+  {l1 : Level} {X : UU l1 }
   where
 
   count-surjection-has-decidable-equality :
@@ -78,7 +78,11 @@ module _
               ( count-equiv
                 ( inv-equiv-total-fib (map-surjection f)) (count-Fin n))))))
       ( count-equiv (inv-equiv-total-fib (map-surjection f)) (count-Fin n))
+```
 
+### A type `X` is finite if and only if it has decidable equality and there exists a surjection from a finite type to `X`
+
+```agda
   is-finite-iff-∃-surjection-has-decidable-equality :
     is-finite X ≃
       ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))

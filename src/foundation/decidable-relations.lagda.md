@@ -9,7 +9,11 @@ module foundation.decidable-relations where
 ```agda
 open import foundation.decidable-propositions
 open import foundation.decidable-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.propositions
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
 
@@ -46,4 +50,16 @@ module _
   is-decidable-type-Decidable-Relation x y =
     is-decidable-type-decidable-Prop (R x y)
 
+equiv-relation-is-decidable-Decidable-Relation :
+  {l1 l2 : Level} {X : UU l1} →
+  Decidable-Relation l2 X ≃
+  Σ ( X → X → Prop l2) (λ R → ((x y : X) → is-decidable (type-Prop (R x y))))
+pr1 equiv-relation-is-decidable-Decidable-Relation dec-R =
+  ( relation-Decidable-Relation dec-R ,
+    is-decidable-type-Decidable-Relation dec-R)
+pr2 equiv-relation-is-decidable-Decidable-Relation =
+  is-equiv-has-inverse
+    ( λ R → (λ x y → (pr1 (pr1 R x y)) , ((pr2 (pr1 R x y)) , (pr2 R x y)) ) )
+    ( refl-htpy)
+    ( refl-htpy)
 ```
