@@ -762,6 +762,9 @@
 
 - [Orthogonal factorization systems](orthogonal-factorization-systems.md)
   - [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
+  - [Factorization operations](orthogonal-factorization-systems.factorization-operations.md)
+  - [Factorizations of maps](orthogonal-factorization-systems.factorizations-of-maps.md)
+  - [Function classes](orthogonal-factorization-systems.function-classes.md)
   - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
   - [Lifting operations](orthogonal-factorization-systems.lifting-operations.md)
   - [Lifting squares](orthogonal-factorization-systems.lifting-squares.md)
@@ -769,10 +772,12 @@
   - [Local types](orthogonal-factorization-systems.local-types.md)
   - [Mere lifting properties](orthogonal-factorization-systems.mere-lifting-properties.md)
   - [Modal operators](orthogonal-factorization-systems.modal-operators.md)
+  - [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
   - [Orthogonal maps](orthogonal-factorization-systems.orthogonal-maps.md)
   - [Pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
   - [Reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
   - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
+  - [Wide function classes](orthogonal-factorization-systems.wide-function-classes.md)
 
 - [Polytopes](polytopes.md)
   - [Abstract polytopes](polytopes.abstract-polytopes.md)
