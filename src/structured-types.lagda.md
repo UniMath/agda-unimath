@@ -2,6 +2,7 @@
 
 ```agda
 module structured-types where
+
 open import structured-types.central-h-spaces public
 open import structured-types.coherent-h-spaces public
 open import structured-types.constant-maps-pointed-types public
@@ -24,13 +25,15 @@ open import structured-types.pointed-equivalences public
 open import structured-types.pointed-families-of-types public
 open import structured-types.pointed-homotopies public
 open import structured-types.pointed-maps public
-open import structured-types.pointed-types-equipped-with-automorphisms public
+open import structured-types.pointed-sections public
 open import structured-types.pointed-types public
+open import structured-types.pointed-types-equipped-with-automorphisms public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
 open import structured-types.universal-property-lists-wild-monoids public
+open import structured-types.unpointed-maps public
 open import structured-types.wild-groups public
 open import structured-types.wild-loops public
 open import structured-types.wild-monoids public
