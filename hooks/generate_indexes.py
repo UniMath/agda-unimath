@@ -47,14 +47,17 @@ def generate_agda_block(namespace):
 if __name__ == "__main__":
     namespaces = get_subdirectories(root)
     for namespace in namespaces:
-        with open(os.path.join(root, namespace) + ".lagda.md", "r+") as namespace_file:
+        namespace_filename = os.path.join(root, namespace) + ".lagda.md"
+        with open(namespace_filename, "a+") as namespace_file:
+          pass
+        with open(namespace_filename, "r") as namespace_file:
 
             contents = namespace_file.read()
 
             title_index = contents.find("#")
             if title_index > 0:
                 print(
-                    f"Warning! Namespace file {namespace_file} has title after first line.")
+                    f"Warning! Namespace file {namespace_filename} has title after first line.")
             elif title_index == -1:  # Missing title. Generate it
                 contents = generate_title(namespace) + contents
 
@@ -69,7 +72,7 @@ if __name__ == "__main__":
                 if agda_block_end == -1:
                     # An agda block is opened but not closed.
                     # This is an error, but we can fix it
-                    print(f"Warning! agda-block was opened but not closed in {namespace_file}.")
+                    print(f"Warning! agda-block was opened but not closed in {namespace_filename}.")
                     contents = contents[:agda_block_start] + \
                         generate_agda_block(namespace)
                 else:
