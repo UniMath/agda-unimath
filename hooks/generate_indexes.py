@@ -42,13 +42,22 @@ def generate_imports(namespace):
     # 
     return "\n".join(sorted("open import " + namespace + "." + module_file[:module_file.index(".lagda.md")] + " public" for module_file in namespace_files))
 
+template = \
+'''# {title}
+
+```agda
+module {namespace} where
+
+{imports}
+```
+'''
+
 def generate_index(namespace):
 
     title = generate_title(namespace)
     imports = generate_imports(namespace)
 
-    return f"# {title}\n\n```agda\nmodule {namespace} where\n\n{imports}\n```\n"
-    
+    return template.format(title=title, namespace=namespace, imports=imports)
 
     
 if __name__ == "__main__":
