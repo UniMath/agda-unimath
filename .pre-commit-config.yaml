@@ -15,7 +15,7 @@ repos:
 
     - id: remove-extra-blank-lines
       name: Remove extra blank lines
-      entry: hooks/remove-extra-blank.py
+      entry: hooks/remove_extra_blank_lines.py
       language: python
       always_run: true
       verbose: true
@@ -24,9 +24,9 @@ repos:
       args: []
       require_serial: false
 
-    - id: fix-imports
+    - id: fix_imports
       name: Format Agda imports
-      entry: hooks/fix-imports.py
+      entry: hooks/fix_imports.py
       language: python
       always_run: true
       verbose: true
