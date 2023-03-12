@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/generate_indexes.py fileName.lagda.md
+# $ python3 hooks/generate_namespace_indexes.py
 
 import os
 import pathlib
@@ -8,6 +8,7 @@ import utils
 
 status = 0
 root = "src"
+
 
 def get_subdirectories(startpath):
     for root, dirs, files in os.walk(startpath):
@@ -32,7 +33,7 @@ def generate_imports(namespace):
 
 
 agda_block_template = \
-'''```agda
+    '''```agda
 module {namespace} where
 
 {imports}
@@ -49,12 +50,12 @@ if __name__ == "__main__":
     for namespace in namespaces:
         namespace_filename = os.path.join(root, namespace) + ".lagda.md"
         with open(namespace_filename, "a+") as namespace_file:
-          pass
+            pass
         with open(namespace_filename, "r") as namespace_file:
 
             contents = namespace_file.read()
 
-            title_index = contents.find("#")
+            title_index = contents.find("# ")
             if title_index > 0:
                 print(
                     f"Warning! Namespace file {namespace_filename} has title after first line.")
@@ -72,12 +73,13 @@ if __name__ == "__main__":
                 if agda_block_end == -1:
                     # An agda block is opened but not closed.
                     # This is an error, but we can fix it
-                    print(f"Warning! agda-block was opened but not closed in {namespace_filename}.")
+                    print(
+                        f"Warning! agda-block was opened but not closed in {namespace_filename}.")
                     contents = contents[:agda_block_start] + \
                         generate_agda_block(namespace)
                 else:
                     contents = contents[:agda_block_start] + generate_agda_block(
                         namespace) + contents[agda_block_end+len("```\n"):]
-                    
+
             with open(os.path.join(root, namespace) + ".lagda.md", "w") as f:
-              f.write(contents)
+                f.write(contents)

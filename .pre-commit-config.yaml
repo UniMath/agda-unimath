@@ -35,9 +35,19 @@ repos:
       args: []
       require_serial: false
 
-    - id: generate-indexes
-      name: Format Agda imports
-      entry: hooks/generate_indexes.py
+    - id: generate-namespace-indexes
+      name: Generate Agda namespace index modules
+      entry: hooks/generate_namespace_indexes.py
+      language: python
+      always_run: true
+      verbose: true
+      types_or: [markdown, text]
+      args: []
+      require_serial: false
+
+    - id: generate-main-index
+      name: Generate main index
+      entry: hooks/generate_main_index.py
       language: python
       always_run: true
       verbose: true
