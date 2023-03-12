@@ -20,4 +20,4 @@
 
 ---
 
-{{#include INDEX.md}}
+{{#include MODULE-INDEX.md}}

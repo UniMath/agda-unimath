@@ -63,7 +63,7 @@ if __name__ == "__main__":
     status = 0
     root = "src"
 
-    index_path = "INDEX.md"
+    index_path = "MODULE-INDEX.md"
     index_header = "# Formalisation in Agda"
 
     index_content, status = generate_index(root, index_header)
