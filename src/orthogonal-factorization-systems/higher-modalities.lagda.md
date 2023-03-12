@@ -9,16 +9,12 @@ module orthogonal-factorization-systems.higher-modalities where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sections
 open import foundation.small-types
-open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators

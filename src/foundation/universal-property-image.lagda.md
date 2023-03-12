@@ -27,7 +27,6 @@ open import foundation.sections
 open import foundation.slice
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
 

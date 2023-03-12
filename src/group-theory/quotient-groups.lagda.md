@@ -15,7 +15,6 @@ open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.propositions

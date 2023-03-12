@@ -28,7 +28,6 @@ open import group-theory.epimorphisms-groups
 open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
 

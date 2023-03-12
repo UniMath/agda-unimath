@@ -12,13 +12,6 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equational-reasoning
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

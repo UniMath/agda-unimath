@@ -8,19 +8,16 @@ module structured-types.involutive-type-of-h-space-structures where
 
 ```agda
 open import foundation.binary-transport
-open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.symmetric-identity-types
-open import foundation.symmetric-operations
 open import foundation.universe-levels
 
 open import structured-types.constant-maps-pointed-types

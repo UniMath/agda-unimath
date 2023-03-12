@@ -8,10 +8,7 @@ module foundation.structure where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functoriality-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 ```
 

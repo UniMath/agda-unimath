@@ -10,7 +10,6 @@ module foundation.decidable-propositions where
 open import foundation-core.decidable-propositions public
 
 open import foundation.booleans
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -19,14 +18,11 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets

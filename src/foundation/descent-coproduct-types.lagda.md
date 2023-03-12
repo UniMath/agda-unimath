@@ -10,10 +10,8 @@ module foundation.descent-coproduct-types where
 open import foundation.cones-pullbacks
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-fibers-of-maps

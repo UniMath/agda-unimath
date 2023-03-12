@@ -8,7 +8,6 @@ module set-theory.cardinalities where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
@@ -17,7 +16,6 @@ open import foundation.law-of-excluded-middle
 open import foundation.mere-embeddings
 open import foundation.mere-equivalences
 open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets

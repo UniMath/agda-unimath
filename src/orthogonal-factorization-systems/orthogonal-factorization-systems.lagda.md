@@ -8,16 +8,11 @@ module orthogonal-factorization-systems.orthogonal-factorization-systems where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.factorization-operations
-open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes
 open import orthogonal-factorization-systems.wide-function-classes
 ```

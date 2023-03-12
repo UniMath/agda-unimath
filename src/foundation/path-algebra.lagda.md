@@ -11,7 +11,6 @@ open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications
 open import foundation.constant-maps
-open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types

@@ -11,13 +11,9 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
-open import foundation.mere-equivalences
 open import foundation.sets
-open import foundation.unit-type
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 open import foundation.unordered-pairs

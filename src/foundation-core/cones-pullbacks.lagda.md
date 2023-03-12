@@ -10,13 +10,10 @@ module foundation-core.cones-pullbacks where
 open import foundation.homotopies
 open import foundation.structure-identity-principle
 
-open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types

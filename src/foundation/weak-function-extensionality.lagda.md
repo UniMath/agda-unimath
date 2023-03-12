@@ -7,7 +7,6 @@ module foundation.weak-function-extensionality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -16,16 +15,9 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.negation
 open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.function-extensionality

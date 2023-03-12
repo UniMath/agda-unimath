@@ -9,7 +9,6 @@ module foundation.negation where
 ```agda
 open import foundation-core.negation public
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.logical-equivalences

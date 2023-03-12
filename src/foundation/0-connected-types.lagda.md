@@ -14,7 +14,6 @@ open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-set-truncation
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.mere-equality

@@ -28,7 +28,6 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 
 open import structured-types.initial-pointed-type-equipped-with-automorphism
-open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 
 </details>

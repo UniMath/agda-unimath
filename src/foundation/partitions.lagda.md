@@ -8,11 +8,9 @@ module foundation.partitions where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
@@ -31,7 +29,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.sigma-decompositions
-open import foundation.singleton-subtypes
 open import foundation.small-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes

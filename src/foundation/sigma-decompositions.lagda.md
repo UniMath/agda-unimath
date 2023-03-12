@@ -10,11 +10,9 @@ module foundation.sigma-decompositions where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.equational-reasoning
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -24,7 +22,6 @@ open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence

@@ -8,10 +8,7 @@ module foundation.truncation-images-of-maps where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.truncation-levels
 open import foundation.truncations

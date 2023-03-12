@@ -17,15 +17,12 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.set-truncations
-open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels

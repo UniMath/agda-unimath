@@ -7,12 +7,6 @@ module foundation.0-images-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.identity-types
-open import foundation.images
-open import foundation.propositional-truncations
-open import foundation.set-truncations
 open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels

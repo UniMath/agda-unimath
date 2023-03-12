@@ -7,12 +7,10 @@ module foundation.powersets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.subtypes

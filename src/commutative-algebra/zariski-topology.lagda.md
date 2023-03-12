@@ -10,7 +10,6 @@ module commutative-algebra.zariski-topology where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 
-open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.powersets

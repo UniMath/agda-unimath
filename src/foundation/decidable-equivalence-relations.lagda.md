@@ -8,7 +8,6 @@ module foundation.decidable-equivalence-relations where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-relations
 open import foundation.decidable-subtypes
@@ -27,7 +26,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations

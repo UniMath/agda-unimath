@@ -47,7 +47,7 @@ def categorize_imports(block):
 
     return (publicImports, nonPublicImports, openStatements)
 
-def normalize_imports(imports):
+def subdivide_namespaces_imports(imports):
     # Subdivide imports into namespaces
     namespaces = defaultdict(set)
     for statement in imports:
@@ -65,12 +65,19 @@ def normalize_imports(imports):
             namespaces[k] = {k}
 
     for statement in namespaces["foundation"]:
-        submodule_start = statement.index(".")
-        namespaces["foundation-core"].discard("foundation-core" + statement[submodule_start:])
+        submodule_start = statement.find(".")
+        if submodule_start != -1:
+          namespaces["foundation-core"].discard("foundation-core" + statement[submodule_start:])
+
+    if "foundation" in namespaces["foundation"]:
+        namespaces.pop("foundation-core")
 
     # Remove any namespaces that ended up being empty
-    namespaces = dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
+    return dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
 
+def normalize_imports(imports):
+    # Subdivide imports into namespaces
+    namespaces = subdivide_namespaces_imports(imports)
     # Join together with the appropriate line separations
     blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports))) for namespace, namespace_imports in sorted(namespaces.items()))
 
@@ -114,7 +121,7 @@ if __name__ == "__main__":
           new_content = contents[:start] + \
               pretty_imports_block + \
               contents[end:]
-          
+
           with open(fpath, 'w') as file:
               file.write(new_content)
 

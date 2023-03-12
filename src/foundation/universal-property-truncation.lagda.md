@@ -15,12 +15,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels

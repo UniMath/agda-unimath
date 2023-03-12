@@ -11,7 +11,6 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types

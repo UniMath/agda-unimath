@@ -31,8 +31,6 @@ open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
-
-open import foundation-core.function-extensionality
 ```
 
 </details>

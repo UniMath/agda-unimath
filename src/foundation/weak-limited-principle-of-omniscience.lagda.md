@@ -10,7 +10,6 @@ module foundation.weak-limited-principle-of-omniscience where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.disjunction
-open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets

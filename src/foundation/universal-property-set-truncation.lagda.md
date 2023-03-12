@@ -24,8 +24,6 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
 
 </details>

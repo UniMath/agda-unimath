@@ -12,7 +12,6 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types

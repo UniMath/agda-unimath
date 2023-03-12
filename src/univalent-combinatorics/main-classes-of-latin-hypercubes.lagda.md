@@ -11,7 +11,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.mere-equivalences
@@ -19,7 +18,6 @@ open import foundation.products-unordered-tuples-of-types
 open import foundation.set-truncations
 open import foundation.universe-levels
 open import foundation.unordered-tuples
-open import foundation.unordered-tuples-of-types
 
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.decidable-subtypes

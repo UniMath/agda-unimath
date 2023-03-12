@@ -16,9 +16,6 @@ open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.transport
 open import foundation.universe-levels
 ```
 

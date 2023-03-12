@@ -7,9 +7,7 @@ module group-theory.precategory-of-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.precategories
 
 open import foundation.universe-levels
 

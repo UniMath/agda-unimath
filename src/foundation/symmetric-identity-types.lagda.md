@@ -24,7 +24,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

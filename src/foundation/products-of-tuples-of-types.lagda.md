@@ -9,8 +9,6 @@ module foundation.products-of-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.equivalences
 open import foundation.tuples-of-types
 open import foundation.universe-levels
 

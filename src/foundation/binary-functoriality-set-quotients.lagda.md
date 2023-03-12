@@ -12,10 +12,8 @@ module foundation.binary-functoriality-set-quotients where
 
 ```agda
 open import foundation.binary-homotopies
-open import foundation.binary-reflecting-maps-equivalence-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.exponents-set-quotients

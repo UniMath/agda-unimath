@@ -9,7 +9,6 @@ module univalent-combinatorics.decidable-subtypes where
 ```agda
 open import foundation.decidable-subtypes public
 
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-equality

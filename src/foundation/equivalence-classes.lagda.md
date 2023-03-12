@@ -9,26 +9,19 @@ module foundation.equivalence-classes where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
-open import foundation.images
 open import foundation.inhabited-subtypes
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations

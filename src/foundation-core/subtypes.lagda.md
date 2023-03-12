@@ -7,15 +7,12 @@ module foundation-core.subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.1-types
-open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
@@ -24,7 +21,6 @@ open import foundation-core.sets
 open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

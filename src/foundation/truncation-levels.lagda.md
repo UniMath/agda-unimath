@@ -9,7 +9,6 @@ module foundation.truncation-levels where
 ```agda
 open import foundation-core.truncation-levels public
 
-open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation-core.functions

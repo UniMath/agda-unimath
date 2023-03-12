@@ -1,8 +1,12 @@
 # Enriched directed trees
 
-```
+```agda
 module trees.enriched-directed-trees where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
@@ -11,6 +15,8 @@ open import graph-theory.directed-graphs
 
 open import trees.directed-trees
 ```
+
+</details>
 
 ## Idea
 

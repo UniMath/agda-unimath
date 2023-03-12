@@ -17,7 +17,6 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.split-surjective-maps
 open import foundation.unit-type
 
 open import univalent-combinatorics.equality-standard-finite-types

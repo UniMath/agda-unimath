@@ -7,8 +7,6 @@ module foundation.connected-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -28,7 +26,6 @@ open import foundation.subtypes
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.truncations
 open import foundation.univalence
 open import foundation.universe-levels
 ```

@@ -10,29 +10,23 @@ module univalent-combinatorics.partitions where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```
 

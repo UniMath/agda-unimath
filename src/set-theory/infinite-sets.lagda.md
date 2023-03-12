@@ -9,7 +9,6 @@ module set-theory.infinite-sets where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.existential-quantification
 open import foundation.mere-embeddings
 open import foundation.propositions
 open import foundation.sets

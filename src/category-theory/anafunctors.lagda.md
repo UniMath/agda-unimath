@@ -14,7 +14,6 @@ open import category-theory.precategories
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels

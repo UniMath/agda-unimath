@@ -19,15 +19,9 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.transport
 open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.equivalences
-
-open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>

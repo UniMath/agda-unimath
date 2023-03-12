@@ -19,7 +19,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

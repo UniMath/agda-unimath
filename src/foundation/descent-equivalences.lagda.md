@@ -10,10 +10,8 @@ module foundation.descent-equivalences where
 open import foundation.equivalences
 
 open import foundation-core.cones-pullbacks
-open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.pullbacks
 open import foundation-core.universe-levels

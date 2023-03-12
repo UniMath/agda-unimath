@@ -17,16 +17,12 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.equivalences
-open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.functions
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
-open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.partitions
 open import foundation.propositional-truncations

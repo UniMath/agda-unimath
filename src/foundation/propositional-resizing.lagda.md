@@ -8,7 +8,6 @@ module foundation.propositional-resizing where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

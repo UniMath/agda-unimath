@@ -12,14 +12,12 @@ open import foundation-core.discrete-types public
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 ```
