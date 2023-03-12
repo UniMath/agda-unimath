@@ -27,3 +27,14 @@ def get_lagda_file_title(lagda_filepath):
 
 def get_import_statement(namespace, module_file, public=False):
     return f"open import {namespace}.{module_file[:module_file.find('.lagda.md')]}{' public' * public}"
+
+def get_equivalence_classes(equivalence_relation, iterable):
+    partitions = []  # Found partitions
+    for e in iterable:  # Loop over each element
+        for p in partitions:
+            if equivalence_relation(e, p[0]):  # Found a partition for it!
+                p.append(e)
+                break
+        else: # Make a new partition for it.
+            partitions.append([e])
+    return partitions

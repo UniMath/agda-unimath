@@ -51,7 +51,7 @@ if __name__ == "__main__":
             contents = generate_title(namespace) + contents
 
         agda_block_start = contents.rfind("```agda\n")
-        
+
         if agda_block_start == -1:
             # Must add agda block
             # Add at the end of the file
