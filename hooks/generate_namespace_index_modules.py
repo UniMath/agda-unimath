@@ -7,10 +7,8 @@ import sys
 import pathlib
 import utils
 
-
 def generate_title(namespace):
     return "# " + namespace.capitalize().replace("-", " ") + "\n"
-
 
 def generate_imports(root, namespace):
     namespace_path = os.path.join(root, namespace)
@@ -18,7 +16,6 @@ def generate_imports(root, namespace):
         pathlib.Path(os.path.join(namespace_path, f))), os.listdir(namespace_path))
 
     return "\n".join(sorted(utils.get_import_statement(namespace, module_file, public=True) for module_file in namespace_files))
-
 
 agda_block_template = \
     '''```agda
@@ -28,10 +25,8 @@ module {namespace} where
 ```
 '''
 
-
 def generate_agda_block(root, namespace):
     return agda_block_template.format(namespace=namespace, imports=generate_imports(root, namespace))
-
 
 if __name__ == "__main__":
 

@@ -9,7 +9,6 @@ import utils
 STATUS_FLAG_NO_TITLE = 1
 STATUS_FLAG_DUPLICATE_TITLE = 2
 
-
 def equivalence_classes(rel, it):
     partitions = []  # Found partitions
     for e in it:  # Loop over each element
@@ -23,9 +22,7 @@ def equivalence_classes(rel, it):
             partitions.append([e])
     return partitions
 
-
 entry_template = '- [{title}]({mdfile})'
-
 
 def generate_namespace_entry_list(namespace):
     status = 0
@@ -59,7 +56,6 @@ def generate_namespace_entry_list(namespace):
 
     return entry_template.format(title=utils.get_lagda_file_title(os.path.join(root, namespace) + ".lagda.md"), mdfile=namespace + ".md") + "\n" + "\n".join(entry_list), status
 
-
 def generate_index(root, header):
     status = 0
     entry_lists = []
@@ -69,7 +65,6 @@ def generate_index(root, header):
         status |= s
 
     return f"{header}\n\n" + "\n\n".join(entry_lists) + "\n", status
-
 
 if __name__ == "__main__":
 
