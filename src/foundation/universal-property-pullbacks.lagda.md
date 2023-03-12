@@ -9,15 +9,15 @@ module foundation.universal-property-pullbacks where
 ```agda
 open import foundation-core.universal-property-pullbacks public
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtype-identity-principle
-open import foundation.universe-levels
 
 open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>

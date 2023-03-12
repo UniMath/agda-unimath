@@ -7,8 +7,8 @@ module foundation.interchange-law where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.universe-levels
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>

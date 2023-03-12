@@ -9,14 +9,15 @@ module foundation.products-unordered-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.universal-property-maybe
-open import foundation.universe-levels
 open import foundation.unordered-tuples
 open import foundation.unordered-tuples-of-types
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.complements-isolated-points
 ```

@@ -7,21 +7,21 @@ module foundation.diagonals-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equality-fibers-of-maps
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositional-maps
-open import foundation.pullbacks
-open import foundation.truncated-maps
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
+open import foundation-core.contractible-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equality-fibers-of-maps
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
+open import foundation-core.pullbacks
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

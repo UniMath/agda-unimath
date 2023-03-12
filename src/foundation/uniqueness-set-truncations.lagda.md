@@ -7,16 +7,17 @@ module foundation.uniqueness-set-truncations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.mere-equality
 open import foundation.sets
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-truncation
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 </details>

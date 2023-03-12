@@ -7,10 +7,10 @@ module foundation.complements where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.functions
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.functions
+open import foundation-core.universe-levels
 ```
 
 </details>

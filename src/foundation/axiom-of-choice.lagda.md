@@ -7,22 +7,23 @@ module foundation.axiom-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
-open import foundation.sets
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.sets
+open import foundation-core.universe-levels
 ```
 
 </details>

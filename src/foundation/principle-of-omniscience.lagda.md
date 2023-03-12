@@ -7,11 +7,12 @@ module foundation.principle-of-omniscience where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.decidable-propositions
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>

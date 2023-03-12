@@ -8,7 +8,8 @@ module foundation.strongly-extensional-maps where
 
 ```agda
 open import foundation.apartness-relations
-open import foundation.universe-levels
+
+open import foundation-core.universe-levels
 ```
 
 </details>

@@ -8,16 +8,17 @@ module foundation.mere-equivalences where
 
 ```agda
 open import foundation.decidable-equality
-open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.equivalences
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

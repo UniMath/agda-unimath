@@ -9,14 +9,14 @@ module foundation.functoriality-function-types where
 ```agda
 open import foundation-core.functoriality-function-types public
 
-open import foundation.constant-maps
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.unit-type
-open import foundation.universe-levels
 
+open import foundation-core.constant-maps
+open import foundation-core.functions
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

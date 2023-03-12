@@ -7,34 +7,34 @@ module foundation.equivalence-classes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
-open import foundation.embeddings
 open import foundation.equational-reasoning
-open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.locally-small-types
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
 open import foundation.slice
 open import foundation.small-types
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universal-property-image
-open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>

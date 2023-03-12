@@ -10,11 +10,11 @@ module foundation.contractible-maps where
 open import foundation-core.contractible-maps public
 
 open import foundation.equivalences
-open import foundation.logical-equivalences
-open import foundation.propositions
 open import foundation.truncated-maps
 
 open import foundation-core.dependent-pair-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```

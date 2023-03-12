@@ -7,11 +7,11 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

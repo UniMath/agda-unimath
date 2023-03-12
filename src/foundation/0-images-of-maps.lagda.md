@@ -8,8 +8,9 @@ module foundation.0-images-of-maps where
 
 ```agda
 open import foundation.truncation-images-of-maps
-open import foundation.truncation-levels
-open import foundation.universe-levels
+
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

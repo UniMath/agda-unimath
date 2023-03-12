@@ -11,7 +11,7 @@ module foundation-core.coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

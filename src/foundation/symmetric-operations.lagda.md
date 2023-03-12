@@ -7,16 +7,17 @@ module foundation.symmetric-operations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
-open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.sets
 open import foundation.universal-property-propositional-truncation-into-sets
-open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types

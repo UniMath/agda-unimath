@@ -10,7 +10,6 @@ module foundation.sections where
 open import foundation-core.sections public
 
 open import foundation.function-extensionality
-open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 
@@ -22,6 +21,7 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.retractions
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels

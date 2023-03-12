@@ -10,7 +10,8 @@ module foundation.products-of-tuples-of-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.tuples-of-types
-open import foundation.universe-levels
+
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```

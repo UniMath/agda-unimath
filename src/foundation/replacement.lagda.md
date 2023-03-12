@@ -9,9 +9,9 @@ module foundation.replacement where
 ```agda
 open import foundation.images
 open import foundation.locally-small-types
-open import foundation.universe-levels
 
 open import foundation-core.small-types
+open import foundation-core.universe-levels
 ```
 
 </details>

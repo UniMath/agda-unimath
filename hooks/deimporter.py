@@ -4,24 +4,18 @@ import pathlib
 import subprocess
 import utils
 
-def get_files_recursively(startpath):
-    """
-    Recursively list all files in a directory and its subdirectories
-    """
-    for root, dirs, files in os.walk(startpath):
-        for file in files:
-            # Yield the fully qualified path of each file
-            yield os.path.join(root, file)
-
 
 if __name__ == "__main__":
     # Import remover
 
+    # Checks every file, import statement by import statement, if they still type check if the statement is removed. If so, removes that statemet.
+
     root = "src"
     status = 0
+    agda_options = "--without-K --exact-split"
 
     agda_files = sorted(filter(lambda f: utils.isAgdaFile(pathlib.Path(
-        f)) and os.path.dirname(f) != root, get_files_recursively(root)))
+        f)) and os.path.dirname(f) != root, utils.get_files_recursively(root)))
 
     for i, agda_file in enumerate(agda_files):
         # If file doesn't compile, skip
@@ -37,7 +31,7 @@ if __name__ == "__main__":
             if nonpublic is None:
                 print(f" Warning! Could not find imports. Skipping.")
                 continue
-            elif (subprocess.call("agda " + agda_file, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) != 0):
+            elif (subprocess.call(f"agda {agda_options} {agda_file}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) != 0):
                 print(f" ERROR! did not compile. Skipping.")
                 continue
             else:
@@ -57,10 +51,10 @@ if __name__ == "__main__":
                 with open(agda_file, 'w') as file:
                     file.write(new_content)
 
-                if (subprocess.call("agda " + agda_file, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) != 0):
+                if (subprocess.call(f"agda {agda_options} {agda_file}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) != 0):
                     newnonpublic.add(statement)
                 else:
-                    print(f"  the statement '{statement}' was unused")
+                    print(f"    '{statement}' was unused")
 
             # Write final version
             pretty_imports_block = prettify_imports_to_block(

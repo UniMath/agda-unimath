@@ -7,15 +7,16 @@ module foundation.type-arithmetic-empty-type where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>

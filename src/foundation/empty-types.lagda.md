@@ -12,11 +12,11 @@ open import foundation-core.empty-types public
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
+open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
 
