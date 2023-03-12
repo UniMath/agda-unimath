@@ -6,7 +6,6 @@ from collections import defaultdict
 import sys
 import utils
 
-
 def get_imports_block(contents):
     start = contents.find('<details>')
     if start == -1:
@@ -15,7 +14,6 @@ def get_imports_block(contents):
     if end == -1:
         return None, -1, -1
     return contents[start:end], start, end
-
 
 def categorize_imports(block):
     if block is None:
@@ -51,7 +49,6 @@ def categorize_imports(block):
 
     return (publicImports, nonPublicImports, openStatements)
 
-
 def subdivide_namespaces_imports(imports):
     # Subdivide imports into namespaces
     namespaces = defaultdict(set)
@@ -82,7 +79,6 @@ def subdivide_namespaces_imports(imports):
     # Remove any namespaces that ended up being empty
     return dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
 
-
 def normalize_imports(imports):
     # Subdivide imports into namespaces
     namespaces = subdivide_namespaces_imports(imports)
@@ -92,16 +88,13 @@ def normalize_imports(imports):
 
     return "\n\n".join(blocks)
 
-
 def get_imports(contents):
     block, start, end = get_imports_block(contents)
     return categorize_imports(block)
 
-
 def prettify_imports(public, nonpublic, openstatements):
     return '\n\n'.join(filter(lambda ls: len(ls) > 0,
                               (normalize_imports(public), normalize_imports(nonpublic), '\n'.join(sorted(openstatements)))))
-
 
 def prettify_imports_to_block(public, nonpublic, openstatements):
     pretty_imports = prettify_imports(public, nonpublic, openstatements)
@@ -110,36 +103,35 @@ def prettify_imports_to_block(public, nonpublic, openstatements):
         pretty_imports + \
         '\n```\n\n'
 
-
 def prettify_imports_block(block):
     public, nonpublic, openstatements = categorize_imports(block)
     return prettify_imports_to_block(public, nonpublic, openstatements)
-
 
 if __name__ == "__main__":
 
     status = 0
 
-    for fpath in utils.agdaFiles(sys.argv[1:]):
+    for fpath in utils.get_agda_files(sys.argv[1:]):
 
         with open(fpath, 'r', encoding='UTF-8') as file:
             contents = file.read()
-            block, start, end = get_imports_block(contents)
-            if block is None:
-                agdaBlockStart = utils.find_index(contents, '```agda')
-                if len(agdaBlockStart) > 1:
-                    print(
-                        'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
-                    status |= 1  # Flag
-                continue
 
-            pretty_imports_block = prettify_imports_block(block)
+        block, start, end = get_imports_block(contents)
+        if block is None:
+            agdaBlockStart = utils.find_index(contents, '```agda')
+            if len(agdaBlockStart) > 1:
+                print(
+                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
+                status |= 1  # Flag
+            continue
 
-            new_content = contents[:start] + \
-                pretty_imports_block + \
-                contents[end:]
+        pretty_imports_block = prettify_imports_block(block)
 
-            with open(fpath, 'w') as file:
-                file.write(new_content)
+        new_content = contents[:start] + \
+            pretty_imports_block + \
+            contents[end:]
+
+        with open(fpath, 'w') as file:
+            file.write(new_content)
 
     sys.exit(status)

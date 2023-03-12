@@ -6,12 +6,14 @@ import sys
 import utils
 import re
 
-for fpath in utils.agdaFiles(sys.argv[1:]):
-    with open(fpath, "r") as f:
-        inputText = f.read()
-    output = re.sub(r"[ \t]+$", "", inputText, flags=re.MULTILINE)
-    output = re.sub(r"\n\s*\n\s*\n", "\n\n", output)
-    with open(fpath, "w") as f:
-        f.write(output)
+if __name__ == "__main__":
 
-sys.exit(0)
+  for fpath in utils.get_agda_files(sys.argv[1:]):
+      with open(fpath, "r") as f:
+          inputText = f.read()
+      output = re.sub(r"[ \t]+$", "", inputText, flags=re.MULTILINE)
+      output = re.sub(r"\n\s*\n\s*\n", "\n\n", output)
+      with open(fpath, "w") as f:
+          f.write(output)
+
+  sys.exit(0)

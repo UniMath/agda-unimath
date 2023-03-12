@@ -1,13 +1,7 @@
 from fix_imports import *
 import itertools
 import os
-import subprocess
 import utils
-
-
-def get_files(path):
-    return os.listdir(path)
-
 
 if __name__ == "__main__":
     # foundation to foundation-core import demoter
@@ -23,16 +17,17 @@ if __name__ == "__main__":
     agda_options = "--without-K --exact-split"
 
     core_filenames = sorted(filter(lambda f: f.endswith(
-        ".lagda.md"), get_files("src/foundation-core")))
+        ".lagda.md"), os.listdir("src/foundation-core")))
     foundation_filenames = sorted(
-        filter(lambda f: f.endswith(".lagda.md"), get_files("src/foundation")))
-    foundation_and_core_files = tuple(itertools.chain(map(lambda f: os.path.join(root, "foundation", f),
-                                                          foundation_filenames), map(lambda f: os.path.join(root, "foundation-core", f), core_filenames)))
+        filter(lambda f: f.endswith(".lagda.md"), os.listdir("src/foundation")))
+    foundation_filepaths = map(lambda f: os.path.join(root, "foundation", f), foundation_filenames)
+    core_filepaths = map(lambda f: os.path.join(root, "foundation-core", f), core_filenames)
+    foundation_and_core_files = tuple(itertools.chain(foundation_filepaths, core_filepaths))
 
-    core_submodules = set(map(lambda f: f[:-len(".lagda.md")], core_filenames))
+    core_submodules = set(map(lambda f: f[:f.rfind(".lagda.md")], core_filenames))
 
-    foundation_modules_without_definitions = set(map(lambda f: "foundation." + f[:-len(".lagda.md")], filter(
-        lambda f: utils.has_no_definitions(os.path.join(root, "foundation", f)) and f[:-len(".lagda.md")] in core_submodules, foundation_filenames)))
+    foundation_files_without_definitions = filter(lambda f: utils.has_no_definitions(os.path.join(root, "foundation", f)) and f[:f.rfind(".lagda.md")] in core_submodules, foundation_filenames)
+    foundation_modules_without_definitions = set(map(lambda f: "foundation." + f[:f.rfind(".lagda.md")], foundation_files_without_definitions))
 
     print("The following modules can be fast-tracked, as they do not have any definitions:")
     print(foundation_modules_without_definitions)
@@ -58,42 +53,43 @@ if __name__ == "__main__":
                 print(" has no foundation imports. Skipping.")
                 continue
 
-            if (subprocess.call(f"agda {agda_options} {agda_file}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) != 0):
-                print(f" ERROR! did not compile. Skipping.")
+            if (utils.call_agda(agda_options, agda_file) != 0):
+                print(f" ERROR! did not typeckec. Skipping.")
                 continue
             else:
                 print(" typechecked.")
 
-            newnonpublic = set(nonpublic)
+            new_nonpublic = set(nonpublic)
 
 
 
             # Fast-track foundation files without definitions
-            stmts = set()
-            for statement in namespaces["foundation"]:
-                if statement in foundation_modules_without_definitions:
-                    newnonpublic.discard("open import " + statement)
-                    newnonpublic.add(
-                        "open import " + statement.replace("foundation.", "foundation-core."))
+            fast_track_modules = set()
+            for module in namespaces["foundation"]:
+                if module in foundation_modules_without_definitions:
+                    statement = "open import " + module
+                    new_nonpublic.discard(statement)
+                    new_nonpublic.add(statement.replace("foundation.", "foundation-core."))
                     pretty_imports_block = prettify_imports_to_block(
-                        public, newnonpublic, open_statements)
-                    stmts.add(statement)
+                        public, new_nonpublic, open_statements)
+                    fast_track_modules.add(module)
 
-            if len(stmts) > 0:
-                print(f'    {stmts} can immediately be imported from core')
+            if len(fast_track_modules) > 0:
+                print(f'    {fast_track_modules} can immediately be imported from core')
                 namespaces["foundation"] = namespaces["foundation"].difference(
-                    stmts)
+                    fast_track_modules)
 
             # Others
-            for statement in namespaces["foundation"]:
-                if (statement[len("foundation."):]) not in core_submodules:
+            for module in namespaces["foundation"]:
+                if (module[len("foundation."):]) not in core_submodules:
                     continue
 
-                newnonpublic.discard("open import " + statement)
-                newnonpublic.add(
-                    "open import " + statement.replace("foundation.", "foundation-core."))
+                statement = "open import " + module
+                new_nonpublic.discard(statement)
+                new_nonpublic.add(statement.replace("foundation.", "foundation-core."))
+
                 pretty_imports_block = prettify_imports_to_block(
-                    public, newnonpublic, open_statements)
+                    public, new_nonpublic, open_statements)
 
                 new_content = contents[:start] + \
                     pretty_imports_block + \
@@ -102,17 +98,15 @@ if __name__ == "__main__":
                 with open(agda_file, 'w') as file:
                     file.write(new_content)
 
-                if (subprocess.call(f"agda {agda_options} {agda_file}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) != 0):
-                    newnonpublic.discard(
-                        "open import " + statement.replace("foundation.", "foundation-core."))
-                    newnonpublic.add("open import " + statement)
+                if (utils.call_agda(agda_options, agda_file) != 0):
+                  new_nonpublic.discard(statement.replace("foundation.", "foundation-core."))
+                  new_nonpublic.add(statement)
                 else:
-                    print(
-                        f"    '{statement}' can be imported from core")
+                    print(f"    '{module}' can be imported from core")
 
             # Write final version
             pretty_imports_block = prettify_imports_to_block(
-                public, newnonpublic, open_statements)
+                public, new_nonpublic, open_statements)
 
             new_content = contents[:start] + \
                 pretty_imports_block + \

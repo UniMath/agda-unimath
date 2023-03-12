@@ -1,19 +1,17 @@
 import pathlib as path
 import os
-
+import subprocess
 
 def find_index(s: str, t: str) -> list[int]:
     return [p for p, c in enumerate(s) if c == t]
 
-
-def isAgdaFile(f: path.Path) -> bool:
+def is_agda_file(f: path.Path) -> bool:
     return (f.match('*.lagda.md') and
             f.exists() and
             f.is_file())
 
-
-def agdaFiles(files: list[str]) -> list[path.Path]:
-    return list(filter(isAgdaFile,
+def get_agda_files(files: list[str]) -> list[path.Path]:
+    return list(filter(is_agda_file,
                        map(path.Path, files)))
 
 def get_files_recursively(startpath):
@@ -51,7 +49,6 @@ def extract_agda_code(lagda_filepath):
 
     return "\n\n".join(find_blocks())
 
-
 def has_no_definitions(lagda_filepath):
     """
     Determines if a literate agda markdown file doesn't have any definitions.
@@ -59,3 +56,6 @@ def has_no_definitions(lagda_filepath):
     """
     agda_code = extract_agda_code(lagda_filepath)
     return '=' not in agda_code and ':' not in agda_code
+
+def call_agda(options, filepath):
+    return subprocess.call(f"agda {options} {filepath}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
