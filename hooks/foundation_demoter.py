@@ -61,8 +61,6 @@ if __name__ == "__main__":
 
             new_nonpublic = set(nonpublic)
 
-
-
             # Fast-track foundation files without definitions
             fast_track_modules = set()
             for module in namespaces["foundation"]:
