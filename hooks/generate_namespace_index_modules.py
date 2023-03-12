@@ -3,8 +3,8 @@
 # $ python3 hooks/generate_namespace_index_modules.py
 
 import os
-import sys
 import pathlib
+import sys
 import utils
 
 def generate_title(namespace):
@@ -12,10 +12,11 @@ def generate_title(namespace):
 
 def generate_imports(root, namespace):
     namespace_path = os.path.join(root, namespace)
-    namespace_files = filter(lambda f: utils.isAgdaFile(
-        pathlib.Path(os.path.join(namespace_path, f))), os.listdir(namespace_path))
+    agda_file_filter = lambda f: utils.isAgdaFile(pathlib.Path(os.path.join(namespace_path, f)))
+    namespace_files = filter(agda_file_filter, os.listdir(namespace_path))
 
-    return "\n".join(sorted(utils.get_import_statement(namespace, module_file, public=True) for module_file in namespace_files))
+    import_statements = (utils.get_import_statement(namespace, module_file, public=True) for module_file in namespace_files)
+    return "\n".join(sorted(import_statements))
 
 agda_block_template = \
     '''```agda
@@ -50,6 +51,7 @@ if __name__ == "__main__":
             contents = generate_title(namespace) + contents
 
         agda_block_start = contents.rfind("```agda\n")
+        
         if agda_block_start == -1:
             # Must add agda block
             # Add at the end of the file
@@ -57,19 +59,20 @@ if __name__ == "__main__":
         else:
             agda_block_end = contents.find(
                 "\n```\n", agda_block_start + len("```agda\n"))
+            generated_block = generate_agda_block(root, namespace)
+
             if agda_block_end == -1:
                 # An agda block is opened but not closed.
                 # This is an error, but we can fix it
                 print(
-                    f"Warning! agda-block was opened but not closed in {namespace_filename}.")
-                contents = contents[:agda_block_start] + \
-                    generate_agda_block(root, namespace)
+                    f"WARNING! agda-block was opened but not closed in {namespace_filename}.")
+                contents = contents[:agda_block_start] + generated_block
             else:
-                contents = contents[:agda_block_start] + generate_agda_block(root,
-                                                                             namespace) + contents[agda_block_end+len("\n```\n"):]
+                contents = contents[:agda_block_start] + generated_block + contents[agda_block_end + len("\n```\n"):]
 
         if oldcontents != contents:
             status |= 1
             with open(namespace_filename, "w") as f:
                 f.write(contents)
+
     sys.exit(status)
