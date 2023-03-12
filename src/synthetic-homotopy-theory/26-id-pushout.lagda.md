@@ -1,4 +1,4 @@
-# Formalisation of the Symmetry Book
+# Formalisation of the Symmetry Book - 26 id pushout
 
 ```agda
 module synthetic-homotopy-theory.26-id-pushout where
