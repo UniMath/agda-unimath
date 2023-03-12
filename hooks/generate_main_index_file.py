@@ -63,7 +63,7 @@ def generate_namespace_entry_list(namespace):
 def generate_index(root):
     status = 0
     entry_lists = []
-    for namespace in sorted(utils.get_subdirectories(root)):
+    for namespace in sorted(utils.get_subdirectories_recursive(root)):
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s
@@ -76,6 +76,7 @@ if __name__ == "__main__":
     status = 0
     root = "src"
     index_path = "INDEX.md"
+
     index_content, status = generate_index(root)
 
     with open(index_path, "w") as index_file:
