@@ -11,16 +11,13 @@ STATUS_FLAG_DUPLICATE_TITLE = 2
 
 entry_template = '- [{title}]({mdfile})'
 
-def get_module_mdfile(namespace, module_file):
-    return namespace + "." + module_file.replace(".lagda.md", ".md")
-
 def generate_namespace_entry_list(namespace):
     status = 0
     modules = sorted(os.listdir(os.path.join(root, namespace)))
     module_titles = tuple(map(lambda m: utils.get_lagda_file_title(
         os.path.join(root, namespace, m)), modules))
     module_mdfiles = tuple(
-        map(lambda m: get_module_mdfile(namespace, m), modules))
+        map(lambda m: utils.get_module_mdfile(namespace, m), modules))
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):

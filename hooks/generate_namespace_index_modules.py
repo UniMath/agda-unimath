@@ -68,7 +68,8 @@ if __name__ == "__main__":
                     f"WARNING! agda-block was opened but not closed in {namespace_filename}.")
                 contents = contents[:agda_block_start] + generated_block
             else:
-                contents = contents[:agda_block_start] + generated_block + contents[agda_block_end + len("\n```\n"):]
+                agda_block_end += len("\n```\n")
+                contents = contents[:agda_block_start] + generated_block + contents[agda_block_end:]
 
         if oldcontents != contents:
             status |= 1

@@ -23,10 +23,16 @@ def get_lagda_file_title(lagda_filepath):
         title_index = contents.find("# ")
         if title_index != 0:
             return None
-        return contents[title_index + len("# "):contents.find("\n", len("# "))]
+
+        title_start = title_index + len("# ")
+        title_end = contents.find("\n", len("# "))
+        return contents[title_start:title_end]
 
 def get_import_statement(namespace, module_file, public=False):
     return f"open import {namespace}.{module_file[:module_file.find('.lagda.md')]}{' public' * public}"
+
+def get_module_mdfile(namespace, module_file):
+    return namespace + "." + module_file.replace(".lagda.md", ".md")
 
 def get_equivalence_classes(equivalence_relation, iterable):
     partitions = []  # Found partitions
