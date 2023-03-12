@@ -6,26 +6,30 @@ from collections import defaultdict
 import sys
 import utils
 
-status = 0
 
 def get_imports_block(contents):
-  start = contents.find('<details>')
-  if start == -1: return None, -1, -1
-  end = contents.find('</details>', start)
-  if end == -1: return None, -1, -1
-  return contents[start:end], start, end
+    start = contents.find('<details>')
+    if start == -1:
+        return None, -1, -1
+    end = contents.find('</details>', start)
+    if end == -1:
+        return None, -1, -1
+    return contents[start:end], start, end
+
 
 def categorize_imports(block):
-    if block is None: return (None, None, None)
+    if block is None:
+        return (None, None, None)
     # Strip all lines. There should not be any indentation in this block
-    block = filter(lambda l: l != '', map(lambda l: l.strip(), block.split('\n')))
+    block = filter(lambda l: l != '', map(
+        lambda l: l.strip(), block.split('\n')))
     # Don't want repeat import statements
     publicImports = set()
     nonPublicImports = set()
     openStatements = []
 
     for l in block:
-        if  len(l) == 0 or l.startswith('```') or '<details>' in l or '</details>' in l:
+        if len(l) == 0 or l.startswith('```') or '<details>' in l or '</details>' in l:
             continue
         if l.startswith('module') or l.startswith('{-# OPTIONS'):
             print(
@@ -47,11 +51,13 @@ def categorize_imports(block):
 
     return (publicImports, nonPublicImports, openStatements)
 
+
 def subdivide_namespaces_imports(imports):
     # Subdivide imports into namespaces
     namespaces = defaultdict(set)
     for statement in imports:
-        namespace_start = statement.index("open import") + len("open import") + 1
+        namespace_start = statement.index(
+            "open import") + len("open import") + 1
         module = statement[namespace_start:]
         try:
             namespace = module[:module.rindex(".")]
@@ -67,7 +73,8 @@ def subdivide_namespaces_imports(imports):
     for statement in namespaces["foundation"]:
         submodule_start = statement.find(".")
         if submodule_start != -1:
-          namespaces["foundation-core"].discard("foundation-core" + statement[submodule_start:])
+            namespaces["foundation-core"].discard(
+                "foundation-core" + statement[submodule_start:])
 
     if "foundation" in namespaces["foundation"]:
         namespaces.pop("foundation-core")
@@ -75,28 +82,34 @@ def subdivide_namespaces_imports(imports):
     # Remove any namespaces that ended up being empty
     return dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
 
+
 def normalize_imports(imports):
     # Subdivide imports into namespaces
     namespaces = subdivide_namespaces_imports(imports)
     # Join together with the appropriate line separations
-    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports))) for namespace, namespace_imports in sorted(namespaces.items()))
+    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports)))
+              for namespace, namespace_imports in sorted(namespaces.items()))
 
     return "\n\n".join(blocks)
 
+
 def get_imports(contents):
-  block, start, end = get_imports_block(contents)
-  return categorize_imports(block)
+    block, start, end = get_imports_block(contents)
+    return categorize_imports(block)
+
 
 def prettify_imports(public, nonpublic, openstatements):
     return '\n\n'.join(filter(lambda ls: len(ls) > 0,
-        (normalize_imports(public), normalize_imports(nonpublic), '\n'.join(sorted(openstatements)))))
+                              (normalize_imports(public), normalize_imports(nonpublic), '\n'.join(sorted(openstatements)))))
+
 
 def prettify_imports_to_block(public, nonpublic, openstatements):
     pretty_imports = prettify_imports(public, nonpublic, openstatements)
     return '<details><summary>Imports</summary>\n' + \
-              '\n```agda\n' + \
-              pretty_imports + \
-              '\n```\n\n'
+        '\n```agda\n' + \
+        pretty_imports + \
+        '\n```\n\n'
+
 
 def prettify_imports_block(block):
     public, nonpublic, openstatements = categorize_imports(block)
@@ -104,25 +117,29 @@ def prettify_imports_block(block):
 
 
 if __name__ == "__main__":
-  for fpath in utils.agdaFiles(sys.argv[1:]):
 
-      with open(fpath, 'r', encoding='UTF-8') as file:
-          contents = file.read()
-          block, start, end = get_imports_block(contents)
-          if block is None:
-              agdaBlockStart = utils.find_index(contents, '```agda')
-              if len(agdaBlockStart) > 1:
-                  print('Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
-                  status |= 1 # Flag
-              continue
+    status = 0
 
-          pretty_imports_block = prettify_imports_block(block)
+    for fpath in utils.agdaFiles(sys.argv[1:]):
 
-          new_content = contents[:start] + \
-              pretty_imports_block + \
-              contents[end:]
+        with open(fpath, 'r', encoding='UTF-8') as file:
+            contents = file.read()
+            block, start, end = get_imports_block(contents)
+            if block is None:
+                agdaBlockStart = utils.find_index(contents, '```agda')
+                if len(agdaBlockStart) > 1:
+                    print(
+                        'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
+                    status |= 1  # Flag
+                continue
 
-          with open(fpath, 'w') as file:
-              file.write(new_content)
+            pretty_imports_block = prettify_imports_block(block)
 
-  sys.exit(status)
+            new_content = contents[:start] + \
+                pretty_imports_block + \
+                contents[end:]
+
+            with open(fpath, 'w') as file:
+                file.write(new_content)
+
+    sys.exit(status)
