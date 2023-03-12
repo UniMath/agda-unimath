@@ -35,9 +35,9 @@ repos:
       args: []
       require_serial: false
 
-    - id: generate-namespace-indexes
+    - id: generate-namespace-index-modules
       name: Generate Agda namespace index modules
-      entry: hooks/generate_namespace_indexes.py
+      entry: hooks/generate_namespace_index_modules.py
       language: python
       always_run: true
       verbose: true
@@ -45,9 +45,9 @@ repos:
       args: []
       require_serial: false
 
-    - id: generate-main-index
-      name: Generate main index
-      entry: hooks/generate_main_index.py
+    - id: generate-main-index-file
+      name: Generate main index file
+      entry: hooks/generate_main_index_file.py
       language: python
       always_run: true
       verbose: true

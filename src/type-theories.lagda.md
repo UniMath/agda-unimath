@@ -1,6 +1,10 @@
 # Type theories
 
 ```agda
+{-# OPTIONS --guardedness #-}
+```
+
+```agda
 module type-theories where
 
 open import type-theories.comprehension-type-theories public

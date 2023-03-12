@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/generate_namespace_indexes.py
+# $ python3 hooks/generate_namespace_index_modules.py
 
 import os
 import pathlib
@@ -62,14 +62,14 @@ if __name__ == "__main__":
             elif title_index == -1:  # Missing title. Generate it
                 contents = generate_title(namespace) + contents
 
-            agda_block_start = contents.find("```agda")
+            agda_block_start = contents.rfind("```agda\n")
             if agda_block_start == -1:
                 # Must add agda block
                 # Add at the end of the file
                 contents = contents + "\n" + generate_agda_block(namespace)
             else:
                 agda_block_end = contents.find(
-                    "```\n", agda_block_start + len("```agda"))
+                    "\n```\n", agda_block_start + len("```agda\n"))
                 if agda_block_end == -1:
                     # An agda block is opened but not closed.
                     # This is an error, but we can fix it
@@ -79,7 +79,7 @@ if __name__ == "__main__":
                         generate_agda_block(namespace)
                 else:
                     contents = contents[:agda_block_start] + generate_agda_block(
-                        namespace) + contents[agda_block_end+len("```\n"):]
+                        namespace) + contents[agda_block_end+len("\n```\n"):]
 
             with open(os.path.join(root, namespace) + ".lagda.md", "w") as f:
                 f.write(contents)
