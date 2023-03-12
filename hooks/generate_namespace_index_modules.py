@@ -7,18 +7,7 @@ import sys
 import pathlib
 import utils
 
-status = 0
 root = "src"
-
-
-def get_subdirectories(startpath):
-    for root, dirs, files in os.walk(startpath):
-        for d in dirs:
-            yield d
-
-
-def get_files(path):
-    return os.listdir(path)
 
 
 def generate_title(namespace):
@@ -28,7 +17,7 @@ def generate_title(namespace):
 def generate_imports(namespace):
     namespace_path = os.path.join(root, namespace)
     namespace_files = filter(lambda f: utils.isAgdaFile(
-        pathlib.Path(os.path.join(namespace_path, f))), get_files(namespace_path))
+        pathlib.Path(os.path.join(namespace_path, f))), os.listdir(namespace_path))
 
     return "\n".join(sorted("open import " + namespace + "." + module_file[:module_file.index(".lagda.md")] + " public" for module_file in namespace_files))
 
@@ -47,7 +36,8 @@ def generate_agda_block(namespace):
 
 
 if __name__ == "__main__":
-    for namespace in get_subdirectories(root):
+    status = 0
+    for namespace in utils.get_subdirectories(root):
         namespace_filename = os.path.join(root, namespace) + ".lagda.md"
         with open(namespace_filename, "a+") as namespace_file:
             pass
@@ -83,7 +73,7 @@ if __name__ == "__main__":
                     namespace) + contents[agda_block_end+len("\n```\n"):]
 
         if (oldcontents != contents):
-          status |= 1
-          with open(namespace_filename, "w") as f:
-              f.write(contents)
+            status |= 1
+            with open(namespace_filename, "w") as f:
+                f.write(contents)
     sys.exit(status)

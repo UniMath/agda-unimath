@@ -4,30 +4,10 @@
 
 import os
 import sys
+import utils
 
 STATUS_FLAG_NO_TITLE = 1
 STATUS_FLAG_DUPLICATE_TITLE = 2
-
-
-def get_subdirectories(startpath):
-    for root, dirs, files in os.walk(startpath):
-        for d in dirs:
-            yield d
-
-
-def get_title(path):
-    with open(path, "r") as file:
-        contents = file.read()
-        title_index = contents.find("# ")
-        if title_index == -1:
-            return None
-        if title_index > 0:
-            return None
-        return contents[title_index + len("# "):contents.find("\n", len("# "))]
-
-
-def get_files(path):
-    return os.listdir(path)
 
 
 def equivalence_classes(rel, it):
@@ -49,8 +29,8 @@ entry_template = '- [{title}]({mdfile})'
 
 def generate_namespace_entry_list(namespace):
     status = 0
-    modules = sorted(get_files(os.path.join(root, namespace)))
-    module_titles = tuple(map(lambda m: get_title(
+    modules = sorted(os.listdir(os.path.join(root, namespace)))
+    module_titles = tuple(map(lambda m: utils.get_lagda_file_title(
         os.path.join(root, namespace, m)), modules))
     module_mdfiles = tuple(map(lambda m: (namespace + "." +
                                m.replace(".lagda.md", ".md")), modules))
@@ -77,13 +57,13 @@ def generate_namespace_entry_list(namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in sorted(zip(module_titles, module_mdfiles)))
 
-    return entry_template.format(title=get_title(os.path.join(root, namespace) + ".lagda.md"), mdfile=namespace + ".md") + "\n" + "\n".join(entry_list), status
+    return entry_template.format(title=utils.get_lagda_file_title(os.path.join(root, namespace) + ".lagda.md"), mdfile=namespace + ".md") + "\n" + "\n".join(entry_list), status
 
 
 def generate_index(root):
     status = 0
     entry_lists = []
-    for namespace in sorted(get_subdirectories(root)):
+    for namespace in sorted(utils.get_subdirectories(root)):
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s
