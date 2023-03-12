@@ -29,7 +29,7 @@ def get_lagda_file_title(lagda_filepath):
         return contents[title_start:title_end]
 
 def get_import_statement(namespace, module_file, public=False):
-    return f"open import {namespace}.{module_file[:module_file.find('.lagda.md')]}{' public' * public}"
+    return f"open import {namespace}.{module_file[:module_file.rfind('.lagda.md')]}{' public' * public}"
 
 def get_module_mdfile(namespace, module_file):
     return namespace + "." + module_file.replace(".lagda.md", ".md")

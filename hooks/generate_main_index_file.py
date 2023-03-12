@@ -36,13 +36,18 @@ def generate_namespace_entry_list(namespace):
         print(f"WARNING! Duplicate titles in {namespace}:")
         for ec in equal_titles:
             print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:-len('.lagda.md')] for m in ec)}")
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m.rfind('.lagda.md')] for m in ec)}")
+
+    module_titles_and_mdfiles = sorted(
+        zip(module_titles, module_mdfiles), key=lambda tm: (tm[0].casefold(), tm[1]))
 
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
-                  for t, md in sorted(zip(module_titles, module_mdfiles)))
+                  for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_file_title(os.path.join(root, namespace) + ".lagda.md")
-    namespace_entry = entry_template.format(title=namespace_title, mdfile=namespace + ".md")
+    namespace_title = utils.get_lagda_file_title(
+        os.path.join(root, namespace) + ".lagda.md")
+    namespace_entry = entry_template.format(
+        title=namespace_title, mdfile=namespace + ".md")
 
     namespace_entry_list = namespace_entry + "\n" + "\n".join(entry_list)
     return namespace_entry_list, status
