@@ -2,7 +2,7 @@
 # Run this script:
 # $ python3 hooks/fix_imports.py fileName.lagda.md
 
-from collections import defaultdict
+import collections
 import sys
 import utils
 
@@ -51,7 +51,7 @@ def categorize_imports(block):
 
 def subdivide_namespaces_imports(imports):
     # Subdivide imports into namespaces
-    namespaces = defaultdict(set)
+    namespaces = collections.defaultdict(set)
     for statement in imports:
         namespace_start = statement.index(
             "open import") + len("open import") + 1
