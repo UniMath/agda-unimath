@@ -1,10 +1,8 @@
 # Commuting triangles of maps
 
-<<<<<<< Updated upstream
 ```agda
 {-# OPTIONS --safe #-}
 module foundation-core.commuting-triangles-of-maps where
-
 ```
 
 <details><summary>Imports</summary>

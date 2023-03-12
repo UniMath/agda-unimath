@@ -1,4 +1,4 @@
-# Formalisation of the Symmetry Book
+# The universal cover of the circle
 
 ```agda
 module synthetic-homotopy-theory.universal-cover-circle where

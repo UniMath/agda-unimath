@@ -1,4 +1,4 @@
-# Alkynes
+# Alkenes
 
 ```agda
 module organic-chemistry.alkenes where

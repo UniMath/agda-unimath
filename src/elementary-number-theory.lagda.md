@@ -20,6 +20,7 @@ open import elementary-number-theory.commutative-ring-of-integers public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
+open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
@@ -33,11 +34,13 @@ open import elementary-number-theory.equality-integers public
 open import elementary-number-theory.equality-natural-numbers public
 open import elementary-number-theory.euclidean-division-natural-numbers public
 open import elementary-number-theory.eulers-totient-function public
+open import elementary-number-theory.exponentiation-natural-numbers public
 open import elementary-number-theory.factorials public
 open import elementary-number-theory.falling-factorials public
 open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
+open import elementary-number-theory.fractions public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
@@ -50,13 +53,14 @@ open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mersenne-primes public
 open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
-open import elementary-number-theory.modular-arithmetic-standard-finite-types public
 open import elementary-number-theory.modular-arithmetic public
+open import elementary-number-theory.modular-arithmetic-standard-finite-types public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiset-coefficients public
@@ -76,11 +80,14 @@ open import elementary-number-theory.retracts-of-natural-numbers public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public
 open import elementary-number-theory.strong-induction-natural-numbers public
+open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
 open import elementary-number-theory.universal-property-natural-numbers public
+open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
+```
