@@ -1,33 +1,30 @@
-import pathlib as path
+import pathlib
 import os
 import subprocess
-
 
 def get_files_recursively(startpath):
     """
     Recursively list all files in a directory and its subdirectories
     """
     for root, dirs, files in os.walk(startpath):
-        for file in files:
-            # Yield the fully qualified path of each file
-            yield os.path.join(root, file)
+        # Yield the fully qualified path of each file
+        yield from map(lambda f: os.path.join(root, f), files)
 
 def get_subdirectories_recursive(startpath):
     for root, dirs, files in os.walk(startpath):
         yield from dirs
 
-
 def find_index(s: str, t: str) -> list[int]:
     return [p for p, c in enumerate(s) if c == t]
 
-def is_agda_file(f: path.Path) -> bool:
+def is_agda_file(f: pathlib.Path) -> bool:
     return (f.match('*.lagda.md') and
             f.exists() and
             f.is_file())
 
-def get_agda_files(files: list[str]) -> list[path.Path]:
+def get_agda_files(files: list[str]) -> list[pathlib.Path]:
     return list(filter(is_agda_file,
-                       map(path.Path, files)))
+                       map(pathlib.Path, files)))
 
 def extract_agda_code(lagda_filepath):
     """
@@ -39,8 +36,7 @@ def extract_agda_code(lagda_filepath):
 
     def find_blocks(loc=0):
         loc = contents.find("```agda\n", loc)
-        if loc == -1:
-            return
+        if loc == -1: return
         block_start = loc + len("```agda\n")
 
         loc = contents.find("\n```", block_start)
@@ -65,7 +61,6 @@ def has_no_definitions(lagda_filepath):
 
 def call_agda(options, filepath):
     return subprocess.call(f"agda {options} {filepath}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
 
 def get_lagda_file_title(lagda_filepath):
     with open(lagda_filepath, "r") as file:
