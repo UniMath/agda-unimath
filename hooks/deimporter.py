@@ -8,7 +8,9 @@ import utils
 if __name__ == "__main__":
     # Import remover
 
-    # Checks every file, import statement by import statement, if they still type check if the statement is removed. If so, removes that statemet.
+    # Checks every file, import statement by import statement, if they still typecheck if the statement is removed. If so, removes that statemet.
+
+    # CAUTION! If the script is interrupted while running, you will likely end up with a missing import statement in the last inspected file.
 
     root = "src"
     status = 0

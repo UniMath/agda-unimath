@@ -12,9 +12,11 @@ def get_files(path):
 if __name__ == "__main__":
     # foundation to foundation-core import demoter
 
-    # Checks every foundation and foundation-core file, for every import statement from foundation, if that file still type checks of the import statement is replaced by importing from core. If so, keeps the change.
+    # Checks every foundation and foundation-core file, for every import statement from foundation, if that file still typechecks of the import statement is replaced by importing from core. If so, keeps the change.
 
     # Note: Only demotes imports in foundation and foundation-core modules
+
+    # CAUTION! If the script is interrupted while running, you will likely end up with a missing import statement in the last inspected file.
 
     root = "src"
     status = 0
