@@ -24,3 +24,6 @@ def get_lagda_file_title(lagda_filepath):
         if title_index != 0:
             return None
         return contents[title_index + len("# "):contents.find("\n", len("# "))]
+
+def get_import_statement(namespace, module_file, public=False):
+    return f"open import {namespace}.{module_file[:module_file.find('.lagda.md')]}{' public' * public}"

@@ -12,16 +12,12 @@ def generate_title(namespace):
     return "# " + namespace.capitalize().replace("-", " ") + "\n"
 
 
-def get_import_statement(namespace, module_file, public=False):
-    return "open import " + namespace + "." + module_file[:module_file.find(".lagda.md")] + (" public" * public)
-
-
 def generate_imports(root, namespace):
     namespace_path = os.path.join(root, namespace)
     namespace_files = filter(lambda f: utils.isAgdaFile(
         pathlib.Path(os.path.join(namespace_path, f))), os.listdir(namespace_path))
 
-    return "\n".join(sorted(get_import_statement(namespace, module_file, public=True) for module_file in namespace_files))
+    return "\n".join(sorted(utils.get_import_statement(namespace, module_file, public=True) for module_file in namespace_files))
 
 
 agda_block_template = \

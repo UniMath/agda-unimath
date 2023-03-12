@@ -60,7 +60,7 @@ def generate_namespace_entry_list(namespace):
     return entry_template.format(title=utils.get_lagda_file_title(os.path.join(root, namespace) + ".lagda.md"), mdfile=namespace + ".md") + "\n" + "\n".join(entry_list), status
 
 
-def generate_index(root):
+def generate_index(root, header):
     status = 0
     entry_lists = []
     for namespace in sorted(utils.get_subdirectories_recursive(root)):
@@ -68,16 +68,18 @@ def generate_index(root):
         entry_lists.append(entry_list)
         status |= s
 
-    return "# Formalisation in Agda\n\n" + "\n\n".join(entry_lists) + "\n", status
+    return f"{header}\n\n" + "\n\n".join(entry_lists) + "\n", status
 
 
 if __name__ == "__main__":
 
     status = 0
     root = "src"
-    index_path = "INDEX.md"
 
-    index_content, status = generate_index(root)
+    index_path = "INDEX.md"
+    index_header = "# Formalisation in Agda"
+
+    index_content, status = generate_index(root, index_header)
 
     with open(index_path, "w") as index_file:
         index_file.write(index_content)
