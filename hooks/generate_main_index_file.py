@@ -75,7 +75,7 @@ def generate_namespace_entry_list(namespace):
                 f"  Title '{ec[0][0]}': {', '.join(m[1][:-len('.lagda.md')] for m in ec)}")
 
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
-                  for t, md in zip(module_titles, module_mdfiles))
+                  for t, md in sorted(zip(module_titles, module_mdfiles)))
 
     return entry_template.format(title=get_title(os.path.join(root, namespace) + ".lagda.md"), mdfile=namespace + ".md") + "\n" + "\n".join(entry_list), status
 
@@ -88,7 +88,7 @@ def generate_index(root):
         entry_lists.append(entry_list)
         status |= s
 
-    return "# Formalization in Agda\n\n" + "\n\n".join(entry_lists) + "\n", status
+    return "# Formalisation in Agda\n\n" + "\n\n".join(entry_lists) + "\n", status
 
 
 if __name__ == "__main__":
