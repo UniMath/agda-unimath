@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
 # Dependent paths
 
-=======
-#  Dependent paths
->>>>>>> Stashed changes
 We characterize dependent paths in the family of depedent paths;
 define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
 
