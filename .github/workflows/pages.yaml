@@ -73,7 +73,7 @@ jobs:
 
       - uses: actions/setup-python@v3
       - uses: pre-commit/action@v3.0.0
-      
+
       - name: Generate book
         run: |
           cd main
