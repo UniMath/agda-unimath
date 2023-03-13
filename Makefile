@@ -21,7 +21,6 @@ METAFILES:=CITATION.cff \
 			HOWTO-INSTALL.md \
 			LICENSE.md \
 			MAINTAINERS.md \
-			MODULE-INDEX.md \ 
 			README.md \
 			STATEMENT-OF-INCLUSION.md \
 			SUMMARY.md \
@@ -68,6 +67,7 @@ agda-html: src/everything.lagda.md
 .PHONY: website
 website: agda-html
 	@cp $(METAFILES) docs/
+	@python3 update-contributors.py
 	@mdbook build
 
 update-contributors:
