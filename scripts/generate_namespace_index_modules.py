@@ -1,22 +1,27 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/generate_namespace_index_modules.py
+# $ python3 scripts/generate_namespace_index_modules.py
 
 import os
 import pathlib
 import sys
 import utils
 
+
 def generate_title(namespace):
     return "# " + namespace.capitalize().replace("-", " ") + "\n"
 
+
 def generate_imports(root, namespace):
     namespace_path = os.path.join(root, namespace)
-    agda_file_filter = lambda f: utils.isAgdaFile(pathlib.Path(os.path.join(namespace_path, f)))
+    def agda_file_filter(f): return utils.isAgdaFile(
+        pathlib.Path(os.path.join(namespace_path, f)))
     namespace_files = filter(agda_file_filter, os.listdir(namespace_path))
 
-    import_statements = (utils.get_import_statement(namespace, module_file, public=True) for module_file in namespace_files)
+    import_statements = (utils.get_import_statement(
+        namespace, module_file, public=True) for module_file in namespace_files)
     return "\n".join(sorted(import_statements))
+
 
 agda_block_template = \
     '''```agda
@@ -26,8 +31,10 @@ module {namespace} where
 ```
 '''
 
+
 def generate_agda_block(root, namespace):
     return agda_block_template.format(namespace=namespace, imports=generate_imports(root, namespace))
+
 
 if __name__ == "__main__":
 
@@ -69,7 +76,8 @@ if __name__ == "__main__":
                 contents = contents[:agda_block_start] + generated_block
             else:
                 agda_block_end += len("\n```\n")
-                contents = contents[:agda_block_start] + generated_block + contents[agda_block_end:]
+                contents = contents[:agda_block_start] + \
+                    generated_block + contents[agda_block_end:]
 
         if oldcontents != contents:
             status |= 1

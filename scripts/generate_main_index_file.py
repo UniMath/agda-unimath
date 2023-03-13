@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/generate_main_index_file.py
+# $ python3 scripts/generate_main_index_file.py
 
 import os
 import sys
@@ -10,6 +10,7 @@ STATUS_FLAG_NO_TITLE = 1
 STATUS_FLAG_DUPLICATE_TITLE = 2
 
 entry_template = '- [{title}]({mdfile})'
+
 
 def generate_namespace_entry_list(namespace):
     status = 0
@@ -52,6 +53,7 @@ def generate_namespace_entry_list(namespace):
     namespace_entry_list = namespace_entry + "\n" + "\n".join(entry_list)
     return namespace_entry_list, status
 
+
 def generate_index(root, header):
     status = 0
     entry_lists = []
@@ -63,17 +65,42 @@ def generate_index(root, header):
     index = f"{header}\n\n" + "\n\n".join(entry_lists) + "\n"
     return index, status
 
+
+summary_template = """
+# SUMMARY
+
+# Project
+
+- [Agda-UniMath](HOME.md)
+  - [Home](HOME.md)
+  - [Community](CONTRIBUTORS.md)
+    - [Maintainers](MAINTAINERS.md)
+    - [Contributors](CONTRIBUTORS.md)
+    - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
+    - [Projects using Agda-Unimath](USERS.md)
+  - [How-to](HOWTO-INSTALL.md)
+    - [Install](HOWTO-INSTALL.md)
+    - [Cite the library](CITATION.cff)
+  - [Guidelines](CODINGSTYLE.md)
+    - [Structure your file](CONVENTIONS.md)
+    - [Library coding style](CODINGSTYLE.md)
+    - [Design principles](DESIGN-PRINCIPLES.md)
+  - [Everything](everything.md)
+
+MODULE_INDEX
+"""
+
 if __name__ == "__main__":
 
-    status = 0
     root = "src"
 
-    index_path = "MODULE-INDEX.md"
+    summary_path = "SUMMARY.md"
     index_header = "# Formalisation in Agda"
 
     index_content, status = generate_index(root, index_header)
-
-    with open(index_path, "w") as index_file:
-        index_file.write(index_content)
-
+    if status == 0:
+        summary_contents = summary_template.replace(
+            "MODULE_INDEX", index_content)
+        with open(summary_path, "w") as summary_file:
+            summary_file.write(summary_contents)
     sys.exit(status)
