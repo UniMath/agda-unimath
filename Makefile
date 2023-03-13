@@ -67,6 +67,7 @@ agda-html: src/everything.lagda.md
 .PHONY: website
 website: agda-html
 	@make pre-commit
+	@python3 scripts/generate_main_index_file.py
 	@python3 scripts/update_contributors.py
 	@cp $(METAFILES) docs/
 	@mdbook build
