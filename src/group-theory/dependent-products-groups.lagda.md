@@ -23,10 +23,10 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a family of groups `Gᵢ` indexed by `i : I`, the
-dependent product `Π(i : I), Gᵢ` is a group consisting of dependent
-functions taking `i : I` to an element of the underlying type of `Gᵢ`.
-The multiplicative operation and the unit are given pointwise.
+Given a family of groups `Gᵢ` indexed by `i : I`, the dependent product
+`Π(i : I), Gᵢ` is a group consisting of dependent functions taking `i : I` to an
+element of the underlying type of `Gᵢ`. The multiplicative operation and the
+unit are given pointwise.
 
 ## Definition
 

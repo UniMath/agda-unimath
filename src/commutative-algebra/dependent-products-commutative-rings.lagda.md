@@ -28,7 +28,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a family of commutative rings `R i` indexed by `i : I`, their dependent product `Π(i:I), R i` is again a commutative ring.
+Given a family of commutative rings `R i` indexed by `i : I`, their dependent
+product `Π(i:I), R i` is again a commutative ring.
 
 ## Definition
 

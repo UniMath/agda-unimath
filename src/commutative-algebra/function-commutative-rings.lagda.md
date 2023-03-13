@@ -29,7 +29,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a commutative ring `R` and a type `X`, the type `R^X` of functions from `X` into the underlying type of `R` is again a commutative ring.
+Given a commutative ring `R` and a type `X`, the type `R^X` of functions from
+`X` into the underlying type of `R` is again a commutative ring.
 
 ## Definition
 

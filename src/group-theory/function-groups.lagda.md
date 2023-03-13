@@ -24,9 +24,9 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a group `G` and a type `X`, the function group `G^X`
-consists of functions from `X` to the underlying type of `G`. The
-group operations are given pointwise.
+Given a group `G` and a type `X`, the function group `G^X` consists of functions
+from `X` to the underlying type of `G`. The group operations are given
+pointwise.
 
 ## Definition
 

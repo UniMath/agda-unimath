@@ -26,9 +26,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a semiring `R` and a type `X`, the function semiring `R^X`
-consists of functions from `X` into the underlying type of `R`. The
-semiring operations are defined pointwise
+Given a semiring `R` and a type `X`, the function semiring `R^X` consists of
+functions from `X` into the underlying type of `R`. The semiring operations are
+defined pointwise
 
 ## Definition
 

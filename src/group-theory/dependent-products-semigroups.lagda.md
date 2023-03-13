@@ -20,10 +20,10 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a family of semigroups `Gᵢ` indexed by `i : I`, the dependent
-product `Π(i : I), Gᵢ` is the semigroup consisting of dependent functions
-assigning to each `i : I` an element of the underlying type of `Gᵢ`.
-The semigroup operation is given pointwise.
+Given a family of semigroups `Gᵢ` indexed by `i : I`, the dependent product
+`Π(i : I), Gᵢ` is the semigroup consisting of dependent functions assigning to
+each `i : I` an element of the underlying type of `Gᵢ`. The semigroup operation
+is given pointwise.
 
 ## Definition
 

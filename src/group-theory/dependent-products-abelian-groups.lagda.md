@@ -24,10 +24,10 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a family of abelian groups `Aᵢ` indexed by `i : I`, the
-dependent product `Π(i : I), Aᵢ` is an abelian group consisting of dependent
-functions taking `i : I` to an element of the underlying type of `Aᵢ`.
-The multiplicative operation and the unit are given pointwise.
+Given a family of abelian groups `Aᵢ` indexed by `i : I`, the dependent product
+`Π(i : I), Aᵢ` is an abelian group consisting of dependent functions taking
+`i : I` to an element of the underlying type of `Aᵢ`. The multiplicative
+operation and the unit are given pointwise.
 
 ## Definition
 

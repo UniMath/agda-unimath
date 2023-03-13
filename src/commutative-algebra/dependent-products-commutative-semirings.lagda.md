@@ -27,7 +27,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a family of commutative semirings `R i` indexed by `i : I`, their dependent product `Π(i:I), R i` is again a commutative semiring.
+Given a family of commutative semirings `R i` indexed by `i : I`, their
+dependent product `Π(i:I), R i` is again a commutative semiring.
 
 ## Definition
 

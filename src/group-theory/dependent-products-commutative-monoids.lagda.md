@@ -24,10 +24,10 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a family of commutative monoids `Mᵢ` indexed by `i : I`, the
-dependent product `Π(i : I), Mᵢ` is a commutative monoid consisting of dependent
-functions taking `i : I` to an element of the underlying type of `Mᵢ`.
-The multiplicative operation and the unit are given pointwise.
+Given a family of commutative monoids `Mᵢ` indexed by `i : I`, the dependent
+product `Π(i : I), Mᵢ` is a commutative monoid consisting of dependent functions
+taking `i : I` to an element of the underlying type of `Mᵢ`. The multiplicative
+operation and the unit are given pointwise.
 
 ## Definition
 

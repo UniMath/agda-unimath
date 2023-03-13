@@ -21,9 +21,9 @@ open import group-theory.dependent-products-semigroups
 
 ## Idea
 
-Given a semigroup `G` and a type `X`, the function semigroup `G^X`
-consists of functions from `X` to the underlying type of `G`. The
-semigroup operation is given pointwise.
+Given a semigroup `G` and a type `X`, the function semigroup `G^X` consists of
+functions from `X` to the underlying type of `G`. The semigroup operation is
+given pointwise.
 
 ## Definition
 

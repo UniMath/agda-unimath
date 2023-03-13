@@ -26,7 +26,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a commutative semiring `R` and a type `X`, the type `R^X` of functions from `X` to the underlying type of `R` is again a commutative semiring.
+Given a commutative semiring `R` and a type `X`, the type `R^X` of functions
+from `X` to the underlying type of `R` is again a commutative semiring.
 
 ## Definition
 
