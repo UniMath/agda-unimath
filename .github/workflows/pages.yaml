@@ -71,7 +71,7 @@ jobs:
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: 'latest'
-          
+
       - uses: actions/setup-python@v3
 
       - name: Generate book
