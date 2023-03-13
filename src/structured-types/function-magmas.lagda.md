@@ -28,13 +28,14 @@ module _
   {l1 l2 : Level} (M : Magma l1) (X : UU l2)
   where
 
-  type-exp-Magma : UU (l1 ⊔ l2)
-  type-exp-Magma = X → type-Magma M
+  type-function-Magma : UU (l1 ⊔ l2)
+  type-function-Magma = X → type-Magma M
 
-  mul-exp-Magma : type-exp-Magma → type-exp-Magma → type-exp-Magma
-  mul-exp-Magma f g x = mul-Magma M (f x) (g x)
+  mul-function-Magma :
+    type-function-Magma → type-function-Magma → type-function-Magma
+  mul-function-Magma f g x = mul-Magma M (f x) (g x)
 
-  exp-Magma : Magma (l1 ⊔ l2)
-  pr1 exp-Magma = type-exp-Magma
-  pr2 exp-Magma = mul-exp-Magma
+  function-Magma : Magma (l1 ⊔ l2)
+  pr1 function-Magma = type-function-Magma
+  pr2 function-Magma = mul-function-Magma
 ```
