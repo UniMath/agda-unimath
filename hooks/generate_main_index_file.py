@@ -63,17 +63,47 @@ def generate_index(root, header):
     index = f"{header}\n\n" + "\n\n".join(entry_lists) + "\n"
     return index, status
 
+
+summary_template ="""
+# SUMMARY
+
+# Project
+
+- [Agda-UniMath](HOME.md)
+  - [Home](HOME.md)
+  - [Community](CONTRIBUTORS.md)
+    - [Maintainers](MAINTAINERS.md)
+    - [Contributors](CONTRIBUTORS.md)
+    - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
+    - [Projects using Agda-Unimath](USERS.md)
+  - [How-to](HOWTO-INSTALL.md)
+    - [Install](HOWTO-INSTALL.md)
+    - [Cite the library](CITATION.cff)
+  - [Guidelines](CODINGSTYLE.md)
+    - [Structure your file](CONVENTIONS.md)
+    - [Library coding style](CODINGSTYLE.md)
+    - [Design principles](DESIGN-PRINCIPLES.md)
+  - [Everything](everything.md)
+
+MODULE_INDEX
+"""
+
 if __name__ == "__main__":
 
     status = 0
     root = "src"
 
     index_path = "MODULE-INDEX.md"
+    summary_path = "SUMMARY.md"
     index_header = "# Formalisation in Agda"
 
     index_content, status = generate_index(root, index_header)
 
     with open(index_path, "w") as index_file:
         index_file.write(index_content)
+
+    summary_contents = summary_template.replace("MODULE_INDEX",index_content)
+    with open(summary_path, "w") as summary_file:
+        summary_file.write(summary_contents)
 
     sys.exit(status)
