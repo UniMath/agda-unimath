@@ -1,7 +1,7 @@
-# Dependent function monoids
+# Dependent products of monoids
 
 ```agda
-module group-theory.dependent-function-monoids where
+module group-theory.dependent-products-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.dependent-function-semigroups
+open import group-theory.dependent-products-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -23,7 +23,7 @@ open import group-theory.semigroups
 ## Idea
 
 Given a family of monoids `Mᵢ` indexed by `i : I`, the
-dependent function monoid `Π(i : I), Mᵢ` consists of dependent
+dependent product `Π(i : I), Mᵢ` is a monoid consisting of dependent
 functions taking `i : I` to an element of the underlying type of `Mᵢ`.
 The multiplicative operation and the unit are given pointwise.
 

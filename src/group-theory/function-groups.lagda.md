@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.dependent-products-groups
 open import group-theory.function-semigroups
 open import group-theory.groups
 open import group-theory.monoids
@@ -34,79 +35,67 @@ module _
   {l1 l2 : Level} (G : Group l1) (X : UU l2)
   where
 
+  function-Group : Group (l1 ⊔ l2)
+  function-Group = Π-Group X (λ _ → G)
+
   semigroup-function-Group : Semigroup (l1 ⊔ l2)
-  semigroup-function-Group =
-    function-Semigroup (semigroup-Group G) X
+  semigroup-function-Group = semigroup-Π-Group X (λ _ → G)
 
   set-function-Group : Set (l1 ⊔ l2)
-  set-function-Group = set-Semigroup semigroup-function-Group
+  set-function-Group = set-Π-Group X (λ _ → G)
 
   type-function-Group : UU (l1 ⊔ l2)
-  type-function-Group = type-Semigroup semigroup-function-Group
+  type-function-Group = type-Π-Group X (λ _ → G)
 
   mul-function-Group :
     (f g : type-function-Group) → type-function-Group
-  mul-function-Group = mul-Semigroup semigroup-function-Group
+  mul-function-Group = mul-Π-Group X (λ _ → G)
 
   associative-mul-function-Group :
     (f g h : type-function-Group) →
     mul-function-Group (mul-function-Group f g) h ＝
     mul-function-Group f (mul-function-Group g h)
   associative-mul-function-Group =
-    associative-mul-Semigroup semigroup-function-Group
+    associative-mul-Π-Group X (λ _ → G)
 
   unit-function-Group : type-function-Group
-  unit-function-Group x = unit-Group G
+  unit-function-Group = unit-Π-Group X (λ _ → G)
 
   left-unit-law-mul-function-Group :
     (f : type-function-Group) →
     mul-function-Group unit-function-Group f ＝ f
-  left-unit-law-mul-function-Group f =
-    eq-htpy (λ x → left-unit-law-mul-Group G (f x))
+  left-unit-law-mul-function-Group =
+    left-unit-law-mul-Π-Group X (λ _ → G)
 
   right-unit-law-mul-function-Group :
     (f : type-function-Group) →
     mul-function-Group f unit-function-Group ＝ f
-  right-unit-law-mul-function-Group f =
-    eq-htpy (λ x → right-unit-law-mul-Group G (f x))
+  right-unit-law-mul-function-Group =
+    right-unit-law-mul-Π-Group X (λ _ → G)
 
   is-unital-function-Group :
     is-unital-Semigroup semigroup-function-Group
-  pr1 is-unital-function-Group =
-    unit-function-Group
-  pr1 (pr2 is-unital-function-Group) =
-    left-unit-law-mul-function-Group
-  pr2 (pr2 is-unital-function-Group) =
-    right-unit-law-mul-function-Group
+  is-unital-function-Group = is-unital-Π-Group X (λ _ → G)
 
   monoid-function-Group : Monoid (l1 ⊔ l2)
   pr1 monoid-function-Group = semigroup-function-Group
   pr2 monoid-function-Group = is-unital-function-Group
 
   inv-function-Group : type-function-Group → type-function-Group
-  inv-function-Group f x = inv-Group G (f x)
+  inv-function-Group = inv-Π-Group X (λ _ → G)
 
   left-inverse-law-mul-function-Group :
     (f : type-function-Group) →
     mul-function-Group (inv-function-Group f) f ＝ unit-function-Group
-  left-inverse-law-mul-function-Group f =
-    eq-htpy (λ x → left-inverse-law-mul-Group G (f x))
+  left-inverse-law-mul-function-Group =
+    left-inverse-law-mul-Π-Group X (λ _ → G)
 
   right-inverse-law-mul-function-Group :
     (f : type-function-Group) →
     mul-function-Group f (inv-function-Group f) ＝ unit-function-Group
-  right-inverse-law-mul-function-Group f =
-    eq-htpy (λ x → right-inverse-law-mul-Group G (f x))
+  right-inverse-law-mul-function-Group =
+    right-inverse-law-mul-Π-Group X (λ _ → G)
 
   is-group-function-Group : is-group semigroup-function-Group
-  pr1 is-group-function-Group = is-unital-function-Group
-  pr1 (pr2 is-group-function-Group) = inv-function-Group
-  pr1 (pr2 (pr2 is-group-function-Group)) =
-    left-inverse-law-mul-function-Group
-  pr2 (pr2 (pr2 is-group-function-Group)) =
-    right-inverse-law-mul-function-Group
-
-  function-Group : Group (l1 ⊔ l2)
-  pr1 function-Group = semigroup-function-Group
-  pr2 function-Group = is-group-function-Group
+  is-group-function-Group = is-group-Π-Group X (λ _ → G)
 ```

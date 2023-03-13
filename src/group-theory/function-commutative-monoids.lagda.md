@@ -14,8 +14,8 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.dependent-function-commutative-monoids
-open import group-theory.dependent-function-semigroups
+open import group-theory.dependent-products-commutative-monoids
+open import group-theory.dependent-products-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```

@@ -32,6 +32,6 @@ invariant-basis-property-Ring :
   {l1 : Level} → Ring l1 → UU l1
 invariant-basis-property-Ring R =
   (m n : ℕ) →
-  iso-Ring (Π-Ring {I = Fin m} (λ i → R)) (Π-Ring {I = Fin n} (λ i → R)) →
+  iso-Ring (Π-Ring (Fin m) (λ i → R)) (Π-Ring (Fin n) (λ i → R)) →
   Id m n
 ```

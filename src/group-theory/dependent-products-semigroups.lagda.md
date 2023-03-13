@@ -1,8 +1,8 @@
-# Dependent function semigroups
+# Dependent products of semigroups
 
 
 ```agda
-module group-theory.dependent-function-semigroups where
+module group-theory.dependent-products-semigroups where
 ```
 
 <details><summary>Imports</summary>
@@ -22,7 +22,7 @@ open import group-theory.semigroups
 ## Idea
 
 Given a family of semigroups `Gᵢ` indexed by `i : I`, the dependent
-function semigroup `Π(i : I), Gᵢ` consists of dependent functions
+product `Π(i : I), Gᵢ` is the semigroup consisting of dependent functions
 assigning to each `i : I` an element of the underlying type of `Gᵢ`.
 The semigroup operation is given pointwise.
 
