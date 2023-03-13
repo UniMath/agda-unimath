@@ -29,7 +29,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Sequences of elements in finite types must have repetitions. Furthermore, since equality in finite types is decidable, there must be a first repetition in any sequence of elements in a finite type.
+Sequences of elements in finite types must have repetitions. Furthermore, since
+equality in finite types is decidable, there must be a first repetition in any
+sequence of elements in a finite type.
 
 ## Properties
 

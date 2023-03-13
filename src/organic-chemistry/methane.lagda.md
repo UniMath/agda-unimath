@@ -33,6 +33,7 @@ open import univalent-combinatorics.finite-types
 **Methane** is the simpliest hydrocarbon, and the first alkane.
 
 ## Definition
+
 ```agda
 module _ (t : tetrahedron-in-3-space) where
 

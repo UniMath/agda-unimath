@@ -20,7 +20,8 @@ open import order-theory.preorders
 
 ## Idea
 
-Ideals in preorders are inhabited lower types `L` that contain an upper bound for every pair of elements in `L`.
+Ideals in preorders are inhabited lower types `L` that contain an upper bound
+for every pair of elements in `L`.
 
 ## Definition
 

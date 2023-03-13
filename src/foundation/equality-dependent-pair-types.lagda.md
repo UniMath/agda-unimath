@@ -66,4 +66,4 @@ module _
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
 - Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.md).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.md).

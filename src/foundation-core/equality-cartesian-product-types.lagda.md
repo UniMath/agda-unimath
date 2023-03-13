@@ -24,7 +24,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Identifications `Id (pair x y) (pair x' y')` in a cartesian product are equivalently described as pairs of identifications `Id x x'` and `Id y y'`. This provides us with a characterization of the identity type of cartesian product types.
+Identifications `Id (pair x y) (pair x' y')` in a cartesian product are
+equivalently described as pairs of identifications `Id x x'` and `Id y y'`. This
+provides us with a characterization of the identity type of cartesian product
+types.
 
 ## Definition
 

@@ -23,7 +23,8 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-An undirected graph consists of a type `V` of vertices and a family `E` of types over the unordered pairs of `V`.
+An undirected graph consists of a type `V` of vertices and a family `E` of types
+over the unordered pairs of `V`.
 
 ## Definition
 

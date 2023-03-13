@@ -22,7 +22,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A free loop in a type `X` consists of a point `x : X` and an identification `x ＝ x`. The type of free loops in `X` is equivalent to the type of maps `𝕊¹ → X`.
+A free loop in a type `X` consists of a point `x : X` and an identification
+`x ＝ x`. The type of free loops in `X` is equivalent to the type of maps
+`𝕊¹ → X`.
 
 ## Definitions
 

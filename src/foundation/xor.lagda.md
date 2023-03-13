@@ -49,7 +49,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The exclusive disjunction of two propositions `P` and `Q` is the proposition that `P` holds and `Q` doesn't hold or `P` doesn't hold and `Q` holds.
+The exclusive disjunction of two propositions `P` and `Q` is the proposition
+that `P` holds and `Q` doesn't hold or `P` doesn't hold and `Q` holds.
 
 ## Definitions
 

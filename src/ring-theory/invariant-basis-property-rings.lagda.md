@@ -23,7 +23,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A ring R is said to satisfy the invariant basis property if `R^m ≅ R^n` implies `m = n` for any two natural numbers `m` and `n`.
+A ring R is said to satisfy the invariant basis property if `R^m ≅ R^n` implies
+`m = n` for any two natural numbers `m` and `n`.
 
 ## Definition
 

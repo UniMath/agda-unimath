@@ -25,7 +25,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functional dependent correspondence is a dependent binary correspondence `C : Π (a : A) → B a → 𝒰` from a type `A` to a type family `B` over `A` such that for every `a : A` the type `Σ (b : B a), C a b` is contractible. The type of dependent functions from `A` to `B` is equivalent to the type of functional dependent correspondences.
+A functional dependent correspondence is a dependent binary correspondence
+`C : Π (a : A) → B a → 𝒰` from a type `A` to a type family `B` over `A` such
+that for every `a : A` the type `Σ (b : B a), C a b` is contractible. The type
+of dependent functions from `A` to `B` is equivalent to the type of functional
+dependent correspondences.
 
 ## Definition
 

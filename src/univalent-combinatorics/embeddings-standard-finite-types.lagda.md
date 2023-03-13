@@ -28,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding `Fin k ↪ Fin l`.
+Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding
+`Fin k ↪ Fin l`.
 
 ## Theorem
 
@@ -124,9 +125,5 @@ pr2 (reduce-emb-Fin k l f) = is-emb-map-reduce-emb-Fin k l f
 
 ### Any embedding from `Fin k` into itself is surjective
 
--- ```agda
--- is-split-surjective-is-emb-Fin :
---   {k : ℕ} {f : Fin k → Fin k} → is-emb f → is-split-surjective f
--- is-split-surjective-is-emb-Fin {zero-ℕ} {f} H ()
--- is-split-surjective-is-emb-Fin {succ-ℕ k} {f} H y = {!!}
--- ```
+--
+`agda -- is-split-surjective-is-emb-Fin : --   {k : ℕ} {f : Fin k → Fin k} → is-emb f → is-split-surjective f -- is-split-surjective-is-emb-Fin {zero-ℕ} {f} H () -- is-split-surjective-is-emb-Fin {succ-ℕ k} {f} H y = {!!} -- `

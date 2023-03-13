@@ -28,8 +28,8 @@ A triangle of homotopies of maps
      h
 ```
 
-is said to commute if there is a homotopy between the homotopy
-on the left `f ~ h` and the composite homotopy `f ~ g ~ h`.
+is said to commute if there is a homotopy between the homotopy on the left
+`f ~ h` and the composite homotopy `f ~ g ~ h`.
 
 ## Definition
 

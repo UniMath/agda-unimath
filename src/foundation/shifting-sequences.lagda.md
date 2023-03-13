@@ -16,7 +16,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a sequence `f : ℕ → A` and an element `a : A` we define `shift-ℕ a f : ℕ → A` by
+Given a sequence `f : ℕ → A` and an element `a : A` we define
+`shift-ℕ a f : ℕ → A` by
 
 ```md
   shift-ℕ a f zero-ℕ := a

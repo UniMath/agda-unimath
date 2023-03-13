@@ -26,7 +26,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider two types `A` and `B` equipped with equivalence relations `R` and `S`. A binary reflecting map from `A` to `B` to `X` is a binary map `f : A → B → X` such that for any to `R`-related elements `x` and `x'` in `A` and any two `S`-related elements `y` and `y'` in `B` we have `f x y ＝ f x' y'` in `X`.
+Consider two types `A` and `B` equipped with equivalence relations `R` and `S`.
+A binary reflecting map from `A` to `B` to `X` is a binary map `f : A → B → X`
+such that for any to `R`-related elements `x` and `x'` in `A` and any two
+`S`-related elements `y` and `y'` in `B` we have `f x y ＝ f x' y'` in `X`.
 
 ```agda
 module _

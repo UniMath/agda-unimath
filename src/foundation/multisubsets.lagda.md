@@ -24,7 +24,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A multisubset of a given set `U` is a type `B` equipped with a function `f : B → U`
+A multisubset of a given set `U` is a type `B` equipped with a function
+`f : B → U`
 
 ## Definition
 

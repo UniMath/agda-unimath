@@ -23,7 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The full subtype of a type contains every element. We define a full subtype at each universe level.
+The full subtype of a type contains every element. We define a full subtype at
+each universe level.
 
 ## Definition
 

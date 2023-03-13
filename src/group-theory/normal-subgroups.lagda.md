@@ -39,7 +39,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A normal subgroup of `G` is a subgroup `H` of `G` which is closed under conjugation.
+A normal subgroup of `G` is a subgroup `H` of `G` which is closed under
+conjugation.
 
 ## Definition
 

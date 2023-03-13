@@ -28,7 +28,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The truncatedness of a type is a measure of the complexity of its identity types. The simplest case is a contractible type. This is the base case of the inductive definition of truncatedness for types. A type is (k+1)-truncated if its identity types are k-truncated.
+The truncatedness of a type is a measure of the complexity of its identity
+types. The simplest case is a contractible type. This is the base case of the
+inductive definition of truncatedness for types. A type is (k+1)-truncated if
+its identity types are k-truncated.
 
 ## Definition
 

@@ -246,7 +246,7 @@ neq-mul-ℕ m n p =
         ( ap (add-ℕ (succ-ℕ m)) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
 ```
 
-### The multiplicative monoid ℕ*
+### The multiplicative monoid ℕ\*
 
 ```agda
 ℕ*-Semigroup : Semigroup lzero

@@ -20,7 +20,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The terminal object of a precategory (if it exists) is an object with the universal property that there is a unique morphism into it from any object.
+The terminal object of a precategory (if it exists) is an object with the
+universal property that there is a unique morphism into it from any object.
 
 ## Definition
 

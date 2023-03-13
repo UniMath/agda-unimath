@@ -44,7 +44,8 @@ Consider a diagram of the form
        i
 ```
 
-A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square `(i ∘ f) ~ (g ∘ h)` commutes.
+A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square
+`(i ∘ f) ~ (g ∘ h)` commutes.
 
 ## Definition
 

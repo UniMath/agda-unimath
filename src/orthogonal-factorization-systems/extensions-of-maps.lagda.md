@@ -36,9 +36,9 @@ open import orthogonal-factorization-systems.local-types
 
 ## Idea
 
-An _extension_ of a map `f : (x : A) → P x` along a map `i : A → B`
-is a map `g : (y : B) → Q y` such that `Q` restricts along `i`
-to `P` and `g` restricts along `i` to `f`.
+An _extension_ of a map `f : (x : A) → P x` along a map `i : A → B` is a map
+`g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g` restricts
+along `i` to `f`.
 
 ```md
   A

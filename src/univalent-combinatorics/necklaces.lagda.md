@@ -29,7 +29,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A necklace is an arrangement of coloured beads. Two necklaces are considered the same if one can be obtained from the other by rotating.
+A necklace is an arrangement of coloured beads. Two necklaces are considered the
+same if one can be obtained from the other by rotating.
 
 ## Definition
 

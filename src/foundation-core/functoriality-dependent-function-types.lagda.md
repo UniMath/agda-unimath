@@ -80,7 +80,8 @@ pr2 (equiv-map-Π e) = is-equiv-map-Π _ (λ i → is-equiv-map-equiv (e i))
 
 ### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fib f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
 
-This condition simplifies, for example, the proof that connected maps satisfy a dependent universal property.
+This condition simplifies, for example, the proof that connected maps satisfy a
+dependent universal property.
 
 ```agda
 is-equiv-precomp-Π-fiber-condition :

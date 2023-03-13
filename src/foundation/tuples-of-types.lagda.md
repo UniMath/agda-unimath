@@ -40,6 +40,4 @@ tuple-types-complement-point A i = {!!}
 -}
 ```
 
--- Σ (x : Fin (n + 1)) (a ≠ x)
-   ≃
--- Fin n
+-- Σ (x : Fin (n + 1)) (a ≠ x) ≃ -- Fin n

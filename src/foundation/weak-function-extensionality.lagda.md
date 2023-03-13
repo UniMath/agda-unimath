@@ -35,7 +35,9 @@ open import foundation-core.function-extensionality
 
 ## Idea
 
-Weak function extensionality is the principle that any dependent product of contractible types is contractible. This principle is equivalent to the function extensionality axiom.
+Weak function extensionality is the principle that any dependent product of
+contractible types is contractible. This principle is equivalent to the function
+extensionality axiom.
 
 ## Definition
 

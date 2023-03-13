@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The intersection of two subtypes `A` and `B` is the subtype that contains the elements that are in `A` and in `B`.
+The intersection of two subtypes `A` and `B` is the subtype that contains the
+elements that are in `A` and in `B`.
 
 ## Definition
 

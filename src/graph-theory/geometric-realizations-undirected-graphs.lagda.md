@@ -21,7 +21,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-The geometric realization of an undirected graph `G` is the initial type `X` equipped with a reflecting map from `G` into `X`.
+The geometric realization of an undirected graph `G` is the initial type `X`
+equipped with a reflecting map from `G` into `X`.
 
 ## Definition
 

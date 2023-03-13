@@ -37,7 +37,11 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-The concept of semiring vastly generalizes the arithmetical structure on the natural numbers. A semiring consists of a set equipped with addition and multiplication, where the addition operation gives the ring the structure of a commutative monoid, and the multiplication is associative, unital, and distributive over addition.
+The concept of semiring vastly generalizes the arithmetical structure on the
+natural numbers. A semiring consists of a set equipped with addition and
+multiplication, where the addition operation gives the ring the structure of a
+commutative monoid, and the multiplication is associative, unital, and
+distributive over addition.
 
 ## Definitions
 

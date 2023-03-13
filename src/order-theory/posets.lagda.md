@@ -21,7 +21,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A poset is a set equipped with a reflexive, antisymmetric, transitive relation that takes values in propositions.
+A poset is a set equipped with a reflexive, antisymmetric, transitive relation
+that takes values in propositions.
 
 ## Definition
 

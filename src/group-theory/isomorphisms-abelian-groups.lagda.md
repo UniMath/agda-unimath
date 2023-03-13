@@ -29,7 +29,8 @@ open import group-theory.isomorphisms-semigroups
 
 ## Idea
 
-Isomorphisms between abelian groups are just isomorphisms between their underlying groups.
+Isomorphisms between abelian groups are just isomorphisms between their
+underlying groups.
 
 ## Definition
 

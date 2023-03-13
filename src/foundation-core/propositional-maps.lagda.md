@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map is said to be propositional if its fibers are propositions. This condition is equivalent to being an embedding.
+A map is said to be propositional if its fibers are propositions. This condition
+is equivalent to being an embedding.
 
 ## Definition
 

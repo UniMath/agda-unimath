@@ -22,7 +22,8 @@ open import group-theory.kernels-homomorphisms-concrete-groups
 
 ## Idea
 
-The alternating concrete groups are the kernels of the concrete sign homomorphism
+The alternating concrete groups are the kernels of the concrete sign
+homomorphism
 
 ## Definition
 

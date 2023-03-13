@@ -47,7 +47,9 @@ Consider a type family `B` over `A`, and consider the following statements
 2. For each `x : A`, the elements of `B x` can be counted
 3. The elements of `Σ A B` can be counted.
 
-If 1 holds, then 2 holds if and only if 3 holds. Furthermore if 2 and 3 hold, then 1 holds if and only if the elements of `Σ A (¬ ∘ B)` can be counted, i.e., if the elements in the complement of `B` can be counted.
+If 1 holds, then 2 holds if and only if 3 holds. Furthermore if 2 and 3 hold,
+then 1 holds if and only if the elements of `Σ A (¬ ∘ B)` can be counted, i.e.,
+if the elements in the complement of `B` can be counted.
 
 ## Proofs
 
@@ -155,13 +157,18 @@ count-base-count-Σ b e f =
     ( count-Σ e (count-fib-map-section b e f))
 ```
 
-More generally, if `Σ A B` and each `B x` can be counted, then `A` can be counted if and only if the type `Σ A (¬ ∘ B)` can be counted. However, to avoid having to invoke function extensionality, we show that if `Σ A B` and each `B x` can be counted, then `A` can be counted if and only if
+More generally, if `Σ A B` and each `B x` can be counted, then `A` can be
+counted if and only if the type `Σ A (¬ ∘ B)` can be counted. However, to avoid
+having to invoke function extensionality, we show that if `Σ A B` and each `B x`
+can be counted, then `A` can be counted if and only if
 
 ```md
    count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))),
 ```
 
-where `f : (x : A) → count (B x)`. Thus, we have a precise characterization of when the elements of `A` can be counted, if it is given that `Σ A B` and each `B x` can be counted.
+where `f : (x : A) → count (B x)`. Thus, we have a precise characterization of
+when the elements of `A` can be counted, if it is given that `Σ A B` and each
+`B x` can be counted.
 
 ```agda
 section-count-base-count-Σ' :

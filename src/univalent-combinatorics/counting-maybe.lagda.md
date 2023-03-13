@@ -23,7 +23,8 @@ open import univalent-combinatorics.counting
 
 ## Idea
 
-The elements of a type `X` can be counted if and only if the elements of `Maybe X` can be counted.
+The elements of a type `X` can be counted if and only if the elements of
+`Maybe X` can be counted.
 
 ```agda
 count-Maybe : {l : Level} {X : UU l} → count X → count (Maybe X)

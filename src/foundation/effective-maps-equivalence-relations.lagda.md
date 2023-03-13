@@ -20,7 +20,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Consider a type `A` equipped with an equivalence relation `R`, and let `f : A → X` be a map. Then `f` is effective if `R x y ≃ Id (f x) (f y)` for all `x y : A`. If `f` is both effective and surjective, then it follows that `X` satisfies the universal property of the quotient `A/R`.
+Consider a type `A` equipped with an equivalence relation `R`, and let
+`f : A → X` be a map. Then `f` is effective if `R x y ≃ Id (f x) (f y)` for all
+`x y : A`. If `f` is both effective and surjective, then it follows that `X`
+satisfies the universal property of the quotient `A/R`.
 
 ## Definition
 

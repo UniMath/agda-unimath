@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A decidable (binary) relation on `X` is a binary relation `R` on `X` such that each `R x y` is a decidable proposition
+A decidable (binary) relation on `X` is a binary relation `R` on `X` such that
+each `R x y` is a decidable proposition
 
 ## Definitions
 

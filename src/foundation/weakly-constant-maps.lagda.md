@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A map `f : A → B` is said to be weakly constant if any two elements in `A` are mapped to identical elements in `B`.
+A map `f : A → B` is said to be weakly constant if any two elements in `A` are
+mapped to identical elements in `B`.
 
 ## Definition
 

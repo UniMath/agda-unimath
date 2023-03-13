@@ -21,7 +21,8 @@ open import foundation-core.function-extensionality
 
 ## Idea
 
-Lawvere's fixed point theorem asserts that if there is a surjective map `A → (A → B)`, then any map `B → B` must have a fixed point.
+Lawvere's fixed point theorem asserts that if there is a surjective map
+`A → (A → B)`, then any map `B → B` must have a fixed point.
 
 ## Theorem
 

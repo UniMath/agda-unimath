@@ -22,7 +22,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An edge-coloured undirected graph is an undirected graph equipped with a family of maps `E p → X` from the edges at unordered pairs `p` into a type `C` of colours, such that the induced map `incident-Undirected-Graph G x → C` is injective for each vertex `x`.
+An edge-coloured undirected graph is an undirected graph equipped with a family
+of maps `E p → X` from the edges at unordered pairs `p` into a type `C` of
+colours, such that the induced map `incident-Undirected-Graph G x → C` is
+injective for each vertex `x`.
 
 ## Definition
 

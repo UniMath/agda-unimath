@@ -384,7 +384,10 @@ module _
 
 ### The suspension-loop space adjunction
 
-Here we prove the universal property of the suspension of a pointed type: the suspension is left adjoint to the loop space. We do this by constructing an equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is given by λ f → Ω(f) ∘ unit
+Here we prove the universal property of the suspension of a pointed type: the
+suspension is left adjoint to the loop space. We do this by constructing an
+equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is
+given by λ f → Ω(f) ∘ unit
 
 #### The unit and counit of the adjunction
 
@@ -494,8 +497,6 @@ module _
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed
-
-[To do]
 
 ### The suspension of a contractible type is contractible
 

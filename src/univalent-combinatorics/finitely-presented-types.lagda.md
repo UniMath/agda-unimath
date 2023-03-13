@@ -31,7 +31,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is said to be finitely presented if it is presented by a standard finite type.
+A type is said to be finitely presented if it is presented by a standard finite
+type.
 
 ## Definition
 

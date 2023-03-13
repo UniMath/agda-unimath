@@ -22,7 +22,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A set `A` is said to be infinite if it contains arbitrarily large finite subsets.
+A set `A` is said to be infinite if it contains arbitrarily large finite
+subsets.
 
 ## Definition
 

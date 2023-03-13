@@ -25,7 +25,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Given two ringrs R1 and R2, we define a ring structure on the product of R1 and R2.
+Given two ringrs R1 and R2, we define a ring structure on the product of R1 and
+R2.
 
 ## Definition
 

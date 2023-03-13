@@ -23,7 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The universal property of set truncation implies that set truncations are uniquely unique.
+The universal property of set truncation implies that set truncations are
+uniquely unique.
 
 ## Properties
 

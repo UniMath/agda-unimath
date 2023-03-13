@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A Pythagorean triple is a triple `(a,b,c)` of natural numbers such that `a² + b² = c²`.
+A Pythagorean triple is a triple `(a,b,c)` of natural numbers such that
+`a² + b² = c²`.
 
 ## Definition
 

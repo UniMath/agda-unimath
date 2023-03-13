@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism between functors on categories is a natural isomorphism between the functors on the underlying precategories.
+A natural isomorphism between functors on categories is a natural isomorphism
+between the functors on the underlying precategories.
 
 ## Definition
 

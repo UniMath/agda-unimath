@@ -21,7 +21,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-The type of integers, equipped with a zero-element, addition, and negatives, forms a group.
+The type of integers, equipped with a zero-element, addition, and negatives,
+forms a group.
 
 ## Definition
 

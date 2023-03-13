@@ -28,7 +28,8 @@ open import foundation-core.function-extensionality
 
 ## Idea
 
-The universal property of set quotients implies that set quotients are uniquely unique.
+The universal property of set quotients implies that set quotients are uniquely
+unique.
 
 ## Properties
 

@@ -32,7 +32,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The axiom of choice asserts that for every family of inhabited types indexed by a set, the type of sections of that family is inhabited.
+The axiom of choice asserts that for every family of inhabited types indexed by
+a set, the type of sections of that family is inhabited.
 
 ## Definition
 

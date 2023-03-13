@@ -34,7 +34,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed equivalence is an equivalence in the category of pointed spaces. Equivalently, a pointed equivalence is a pointed map of which the underlying function is an equivalence.
+A pointed equivalence is an equivalence in the category of pointed spaces.
+Equivalently, a pointed equivalence is a pointed map of which the underlying
+function is an equivalence.
 
 ## Definitions
 

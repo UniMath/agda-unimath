@@ -24,7 +24,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-A semiring `R` is said to be commutative if its multiplicative operation is commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
+A semiring `R` is said to be commutative if its multiplicative operation is
+commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
 
 ## Definition
 

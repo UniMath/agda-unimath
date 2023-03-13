@@ -34,8 +34,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A reflexive graph is a graph such that there is
-an loop edge at every vertex.
+A reflexive graph is a graph such that there is an loop edge at every vertex.
 
 ## Definition
 

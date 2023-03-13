@@ -25,7 +25,9 @@ open import univalent-combinatorics.function-types
 
 ## Idea
 
-A complete multipartite graph consists of a finite list of sets `V1,…,Vn`, and for each unordered pair of distinct elements `i,j≤n` and each `x : Vi` and `y : Vj` an edge between `x` and `y`.
+A complete multipartite graph consists of a finite list of sets `V1,…,Vn`, and
+for each unordered pair of distinct elements `i,j≤n` and each `x : Vi` and
+`y : Vj` an edge between `x` and `y`.
 
 ```agda
 complete-multipartite-Undirected-Graph-𝔽 :

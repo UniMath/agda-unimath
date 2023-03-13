@@ -31,7 +31,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An equivalence of undirected graphs is a morphism of undirected graphs that induces an equivalence on vertices and equivalences on edges.
+An equivalence of undirected graphs is a morphism of undirected graphs that
+induces an equivalence on vertices and equivalences on edges.
 
 ## Definitions
 

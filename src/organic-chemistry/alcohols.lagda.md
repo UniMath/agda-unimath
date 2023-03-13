@@ -23,7 +23,9 @@ open import organic-chemistry.saturated-carbons
 
 ## Idea
 
-An alcohol is a hydrocarbon with at least one `-OH` group. The type of alcohols can therefore be defined as the type of hydrocarbons equipped with a distinguished subset of the available (unbonded) electrons of the carbon atoms.
+An alcohol is a hydrocarbon with at least one `-OH` group. The type of alcohols
+can therefore be defined as the type of hydrocarbons equipped with a
+distinguished subset of the available (unbonded) electrons of the carbon atoms.
 
 ## Definition
 
@@ -47,8 +49,12 @@ alcohol =
               ))))
 ```
 
-More explicitly, an alcohol is a hydrocarbon equipped with, for each of its carbons, a subset of its electrons, where membership in that subset indicates whether or not a hydroxyl group is bonded to that specific electron. We require the following conditions:
+More explicitly, an alcohol is a hydrocarbon equipped with, for each of its
+carbons, a subset of its electrons, where membership in that subset indicates
+whether or not a hydroxyl group is bonded to that specific electron. We require
+the following conditions:
 
-- The electron shared between a carbon atom and a hydroxyl group can not also be shared between that carbon atom and a different carbon.
+- The electron shared between a carbon atom and a hydroxyl group can not also be
+  shared between that carbon atom and a different carbon.
 - There must be at least one hydroxyl group.
 - Atoms to which hydroxyl groups are bonded must be saturated.

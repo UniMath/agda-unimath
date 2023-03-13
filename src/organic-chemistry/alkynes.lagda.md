@@ -23,7 +23,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of which has a triple bond.
+An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of
+which has a triple bond.
 
 ## Definition
 

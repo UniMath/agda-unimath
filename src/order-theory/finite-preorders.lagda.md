@@ -33,7 +33,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Finite preorders
 
-We say that a preorder X is finite if X has finitely many elements and the ordering relation on X is decidable.
+We say that a preorder X is finite if X has finitely many elements and the
+ordering relation on X is decidable.
 
 ```agda
 module _

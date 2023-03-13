@@ -32,7 +32,9 @@ open import structured-types.pointed-types-equipped-with-automorphisms
 
 ## Idea
 
-We introduce addition on the integers and derive its basic properties with respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to inequality are derived in `inequality-integers`.
+We introduce addition on the integers and derive its basic properties with
+respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to
+inequality are derived in `inequality-integers`.
 
 ## Definition
 

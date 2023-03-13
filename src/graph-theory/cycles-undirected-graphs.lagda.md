@@ -21,7 +21,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A cycle in an undirected graph `G` consists of a `k`-gon `H` equipped with an embedding of graphs from `H` into `G`.
+A cycle in an undirected graph `G` consists of a `k`-gon `H` equipped with an
+embedding of graphs from `H` into `G`.
 
 ## Definition
 

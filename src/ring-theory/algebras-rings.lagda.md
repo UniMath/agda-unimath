@@ -20,7 +20,8 @@ open import ring-theory.rings
 
 ## Idea
 
-An algebra over a ring `R` consists of an `R`-module `M` equipped with a binary operation `x y ↦ xy : M → M → M` such that
+An algebra over a ring `R` consists of an `R`-module `M` equipped with a binary
+operation `x y ↦ xy : M → M → M` such that
 
 ```md
   (xy)z  = x(yz)

@@ -338,6 +338,7 @@ module _
 ```
 
 #### Associatitivity
+
 ```agda
   assoc-comp-iso-Cat :
     {x y z w : obj-Cat C}

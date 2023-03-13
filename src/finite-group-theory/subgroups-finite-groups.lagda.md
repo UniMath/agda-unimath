@@ -63,7 +63,9 @@ module _
 
 ### Finite subgroups of finite groups
 
-By default, finite subgroups of finite groups are considered to be decidable. Indeed, one can prove that if a subgroup of a finite group has a finite underlying type, then it must be a decidable subgroup.
+By default, finite subgroups of finite groups are considered to be decidable.
+Indeed, one can prove that if a subgroup of a finite group has a finite
+underlying type, then it must be a decidable subgroup.
 
 ```agda
 module _

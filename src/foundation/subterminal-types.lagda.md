@@ -21,7 +21,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type is said to be subterminal if it embeds into the unit type. A type is subterminal if and only if it is a proposition.
+A type is said to be subterminal if it embeds into the unit type. A type is
+subterminal if and only if it is a proposition.
 
 ## Definition
 

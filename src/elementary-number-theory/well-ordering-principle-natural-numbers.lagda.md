@@ -32,7 +32,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The well-ordering principle of the natural numbers asserts that for every family of decidable types over ℕ equipped with a natural number `n` and an element `p : P n`, we can find a least natural number `n₀` with an element `p₀ : P n₀`.
+The well-ordering principle of the natural numbers asserts that for every family
+of decidable types over ℕ equipped with a natural number `n` and an element
+`p : P n`, we can find a least natural number `n₀` with an element `p₀ : P n₀`.
 
 ## Theorem
 

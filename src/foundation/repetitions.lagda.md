@@ -25,7 +25,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A repetition of values of a map `f : A → B` consists of a pair of distinct points in `A` that get mapped to the same point in `B`.
+A repetition of values of a map `f : A → B` consists of a pair of distinct
+points in `A` that get mapped to the same point in `B`.
 
 ## Definition
 

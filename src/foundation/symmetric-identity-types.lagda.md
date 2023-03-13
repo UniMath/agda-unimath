@@ -32,7 +32,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We construct a variant of the identity type equipped with a natural `ℤ/2`-action.
+We construct a variant of the identity type equipped with a natural
+`ℤ/2`-action.
 
 ## Definition
 

@@ -23,11 +23,16 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-In the file [`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.md) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+In the file
+[`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.md) we already
+gave one characterization of the identity type of `fib f b`, for an arbitrary
+map `f : A → B`. Here we give a second characterization, using the fibers of the
+action on identifications of `f`.
 
 ## Theorem
 
-For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an equivalence
+For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an
+equivalence
 
 ```md
 (x ＝ y) ≃ fib (ap f) ((pr2 x) ∙ (inv (pr2 y)))

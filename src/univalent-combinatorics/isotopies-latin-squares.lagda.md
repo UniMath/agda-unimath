@@ -19,7 +19,8 @@ open import univalent-combinatorics.latin-squares
 
 ## Idea
 
-An isotopy of latin squares from `L` to `K` consists of equivalences of the rows, columns, and symbols preserving the multiplication tables.
+An isotopy of latin squares from `L` to `K` consists of equivalences of the
+rows, columns, and symbols preserving the multiplication tables.
 
 ## Definition
 

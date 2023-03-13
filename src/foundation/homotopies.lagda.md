@@ -27,7 +27,11 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A homotopy of identifications is a pointwise equality between dependent functions. We defined homotopies in [`foundation-core.homotopies`](foundation-core.homotopies.md). In this file, we record some properties of homotopies that require function extensionality, equivalences, or other.
+A homotopy of identifications is a pointwise equality between dependent
+functions. We defined homotopies in
+[`foundation-core.homotopies`](foundation-core.homotopies.md). In this file, we
+record some properties of homotopies that require function extensionality,
+equivalences, or other.
 
 ## Properties
 

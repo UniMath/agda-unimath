@@ -18,7 +18,9 @@ open import ring-theory.rings
 
 ## Idea
 
-An arithmetic function is a function from the nonzero natural numbers into a (commutative) ring. The arithmetic functions form a ring under pointwise addition and dirichlet convolution.
+An arithmetic function is a function from the nonzero natural numbers into a
+(commutative) ring. The arithmetic functions form a ring under pointwise
+addition and dirichlet convolution.
 
 ## Definition
 

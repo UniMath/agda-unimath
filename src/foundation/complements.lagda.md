@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The complement of a type family `B` over `A` consists of the type of points in `A` at which `B x` is empty.
+The complement of a type family `B` over `A` consists of the type of points in
+`A` at which `B x` is empty.
 
 ```agda
 complement :

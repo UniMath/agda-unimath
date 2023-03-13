@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The universal property of dependent pair types gives us a characterization of maps out of a dependent pair types.
+The universal property of dependent pair types gives us a characterization of
+maps out of a dependent pair types.
 
 ## Theorem
 

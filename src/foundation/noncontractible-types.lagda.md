@@ -22,7 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type `X` is non-contractible if it comes equipped with an element of type `¬ (is-contr X)`.
+A type `X` is non-contractible if it comes equipped with an element of type
+`¬ (is-contr X)`.
 
 ## Definitions
 
@@ -35,7 +36,9 @@ is-not-contractible X = ¬ (is-contr X)
 
 ### A positive formulation of being noncontractible
 
-Noncontractibility is a more positive way to prove that a type is not contractible. When `A` is noncontractible in the following sense, then it is apart from the unit type.
+Noncontractibility is a more positive way to prove that a type is not
+contractible. When `A` is noncontractible in the following sense, then it is
+apart from the unit type.
 
 ```agda
 is-noncontractible' : {l : Level} (A : UU l) → ℕ → UU l

@@ -32,7 +32,9 @@ open import order-theory.sup-lattices
 </details>
 
 ## Idea
-A frame homomorphism is an order preserving map between posets that additionally preserves binary meets and arbitrary joins.
+
+A frame homomorphism is an order preserving map between posets that additionally
+preserves binary meets and arbitrary joins.
 
 ```agda
 

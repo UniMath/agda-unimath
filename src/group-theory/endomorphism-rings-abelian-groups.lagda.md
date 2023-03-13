@@ -21,7 +21,9 @@ open import ring-theory.rings
 
 ## Idea
 
-For any abelian group $A$, the set $\mathrm{hom}(A,A)$ of morphisms of abelian groups can be equipped with the structure of a ring, where addition is given pointwise and multiplication is given by composition.
+For any abelian group $A$, the set $\mathrm{hom}(A,A)$ of morphisms of abelian
+groups can be equipped with the structure of a ring, where addition is given
+pointwise and multiplication is given by composition.
 
 ## Definition
 

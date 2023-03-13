@@ -35,7 +35,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The slice of a category over an object X is the category of morphisms into X. A morphism in the slice from `f : A → X` to `g : B → X` consists of a function `h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these definitions for types.
+The slice of a category over an object X is the category of morphisms into X. A
+morphism in the slice from `f : A → X` to `g : B → X` consists of a function
+`h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these
+definitions for types.
 
 ## Definition
 
@@ -361,5 +364,4 @@ module _
   [`foundation.coslice`](foundation.coslice.md).
 - For slices in the context of category theory see
   [`category-theory.slice-precategories`](category-theory.slice-precategories.md).
-- For fibered maps see
-  [`foundation.fibered-maps`](foundation.fibered-maps.md).
+- For fibered maps see [`foundation.fibered-maps`](foundation.fibered-maps.md).

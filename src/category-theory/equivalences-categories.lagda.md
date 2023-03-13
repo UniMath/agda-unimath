@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor `F : C → D` on categories is an equivalence if it is an equivalence on the underlying precategories.
+A functor `F : C → D` on categories is an equivalence if it is an equivalence on
+the underlying precategories.
 
 ## Definition
 

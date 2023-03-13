@@ -23,7 +23,8 @@ open import group-theory.concrete-groups
 
 ## Idea
 
-The symmetric concrete group of a set `X` is the connected component of the universe of sets at `X`.
+The symmetric concrete group of a set `X` is the connected component of the
+universe of sets at `X`.
 
 ## Definition
 

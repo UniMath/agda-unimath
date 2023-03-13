@@ -19,7 +19,9 @@ open import group-theory.homomorphisms-abelian-groups
 
 ## Idea
 
-Morphisms of abelian groups can be added pointwise. This operation turns each hom-set of abelian groups into an abelian group. Moreover, composition of abelian groups distributes over addition from the left and from the right.
+Morphisms of abelian groups can be added pointwise. This operation turns each
+hom-set of abelian groups into an abelian group. Moreover, composition of
+abelian groups distributes over addition from the left and from the right.
 
 ## Definition
 

@@ -21,7 +21,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Consider a family of types `A i` indexed by `i : Fin n`. An `n`-ary decidable relation on the tuples of elements of the `A i` is a decidable subtype of the product of the `A i`.
+Consider a family of types `A i` indexed by `i : Fin n`. An `n`-ary decidable
+relation on the tuples of elements of the `A i` is a decidable subtype of the
+product of the `A i`.
 
 ## Definition
 

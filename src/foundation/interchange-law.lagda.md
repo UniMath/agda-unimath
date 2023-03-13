@@ -15,7 +15,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-The interchange law shows up in many variations in type theory. The interchange law for Σ-types is useful in characterizations of identity types; the interchange law for higher identity types is used in the Eckmann-Hilton argument to show that the higher homotopy groups of a type are abelian, and the interchange law for binary operations in rings are useful in computations. We first define a fully generalized interchange law, and then we specialize it to make it more directly applicable.
+The interchange law shows up in many variations in type theory. The interchange
+law for Σ-types is useful in characterizations of identity types; the
+interchange law for higher identity types is used in the Eckmann-Hilton argument
+to show that the higher homotopy groups of a type are abelian, and the
+interchange law for binary operations in rings are useful in computations. We
+first define a fully generalized interchange law, and then we specialize it to
+make it more directly applicable.
 
 ## Definition
 

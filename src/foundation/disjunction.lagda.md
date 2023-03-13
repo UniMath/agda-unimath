@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The disjunction of two propositions `P` and `Q` is the proposition that `P` holds or `Q` holds.
+The disjunction of two propositions `P` and `Q` is the proposition that `P`
+holds or `Q` holds.
 
 ## Definition
 

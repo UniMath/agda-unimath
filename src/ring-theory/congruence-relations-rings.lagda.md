@@ -25,8 +25,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A congruence relation on a ring `R` is a congruence relation on the
-underlying semiring of `R`.
+A congruence relation on a ring `R` is a congruence relation on the underlying
+semiring of `R`.
 
 ## Definition
 

@@ -24,7 +24,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two abelian groups `A` and `B` is an abelian group structure on the cartesian product of the underlying sets.
+The cartesian product of two abelian groups `A` and `B` is an abelian group
+structure on the cartesian product of the underlying sets.
 
 ## Definition
 

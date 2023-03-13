@@ -22,7 +22,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-An H-space is a pointed type `A` equipped with a binary operation `μ` and homotopies `(λ x → μ pt x) ~ id` and `λ x → μ x pt ~ id`. If `A` is a connected H-space, then `λ x → μ a x` and `λ x → μ x a` are equivalences for each `a : A`.
+An H-space is a pointed type `A` equipped with a binary operation `μ` and
+homotopies `(λ x → μ pt x) ~ id` and `λ x → μ x pt ~ id`. If `A` is a connected
+H-space, then `λ x → μ a x` and `λ x → μ x a` are equivalences for each `a : A`.
 
 ## Definitions
 

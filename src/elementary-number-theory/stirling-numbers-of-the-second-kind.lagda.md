@@ -16,7 +16,8 @@ open import elementary-number-theory.natural-numbers
 
 ## Idea
 
-The stirling number of the second kind `{n m}` is the number of surjective maps from the standard `n`-element set to the standard `m`-element set
+The stirling number of the second kind `{n m}` is the number of surjective maps
+from the standard `n`-element set to the standard `m`-element set
 
 ## Definition
 

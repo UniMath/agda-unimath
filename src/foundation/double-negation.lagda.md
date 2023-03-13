@@ -32,7 +32,8 @@ We define double negation and triple negation
 ¬¬¬ P = ¬ (¬ (¬ P))
 ```
 
-We also define the introduction rule for double negation, and the action on maps of double negation.
+We also define the introduction rule for double negation, and the action on maps
+of double negation.
 
 ```agda
 intro-dn : {l : Level} {P : UU l} → P → ¬¬ P

@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the diagonal into `A × A`.
+The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the
+diagonal into `A × A`.
 
 ## Definition
 

@@ -41,19 +41,23 @@ open import foundation-core.injective-maps
 
 ## Idea
 
-Given a univalent universe `𝒰`, we can define two closely related functors acting on all types. First there is the covariant functor given by
+Given a univalent universe `𝒰`, we can define two closely related functors
+acting on all types. First there is the covariant functor given by
 
 ```md
   P_𝒰(A) := Σ (X : 𝒰), X → A.
 ```
 
-This is a polynomial endofunctor. Second, there is the contravariant functor given by
+This is a polynomial endofunctor. Second, there is the contravariant functor
+given by
 
 ```md
   P^𝒰(A) := A → 𝒰.
 ```
 
-If the type `A` is locally 𝒰-small, then there is a map `φ_A : P_𝒰(A) → P^𝒰(A)`. This map is natural in `A`, and it is always an embedding. Furthermore, the map `φ_A` is an equivalence if and only if `A` is 𝒰-small.
+If the type `A` is locally 𝒰-small, then there is a map `φ_A : P_𝒰(A) → P^𝒰(A)`.
+This map is natural in `A`, and it is always an embedding. Furthermore, the map
+`φ_A` is an equivalence if and only if `A` is 𝒰-small.
 
 ## Definitions
 

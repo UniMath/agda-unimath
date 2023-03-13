@@ -20,7 +20,8 @@ open import group-theory.groups
 
 ## Idea
 
-A group `G` is said to act transitively on a set `X` if for every `x` and `y` in `X` there is a group element `g` such that `gx = y`.
+A group `G` is said to act transitively on a set `X` if for every `x` and `y` in
+`X` there is a group element `g` such that `gx = y`.
 
 ## Definition
 

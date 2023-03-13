@@ -18,7 +18,9 @@ open import univalent-combinatorics.species
 
 ## Idea
 
-When we think of a species as the coefficients of a formal power series, the derivative of a species is the species representing the derivative of that formal power series.
+When we think of a species as the coefficients of a formal power series, the
+derivative of a species is the species representing the derivative of that
+formal power series.
 
 ## Definition
 
