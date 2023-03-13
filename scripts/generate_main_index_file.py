@@ -11,6 +11,7 @@ STATUS_FLAG_DUPLICATE_TITLE = 2
 
 entry_template = '- [{title}]({mdfile})'
 
+
 def generate_namespace_entry_list(namespace):
     status = 0
     modules = sorted(os.listdir(os.path.join(root, namespace)))
@@ -52,6 +53,7 @@ def generate_namespace_entry_list(namespace):
     namespace_entry_list = namespace_entry + "\n" + "\n".join(entry_list)
     return namespace_entry_list, status
 
+
 def generate_index(root, header):
     status = 0
     entry_lists = []
@@ -64,7 +66,7 @@ def generate_index(root, header):
     return index, status
 
 
-summary_template ="""
+summary_template = """
 # SUMMARY
 
 # Project
@@ -102,7 +104,7 @@ if __name__ == "__main__":
     with open(index_path, "w") as index_file:
         index_file.write(index_content)
 
-    summary_contents = summary_template.replace("MODULE_INDEX",index_content)
+    summary_contents = summary_template.replace("MODULE_INDEX", index_content)
     with open(summary_path, "w") as summary_file:
         summary_file.write(summary_contents)
 

@@ -8,11 +8,13 @@ import utils
 
 status = 0
 
+
 def normalize_imports(imports):
     # Subdivide imports into namespaces
     namespaces = defaultdict(set)
     for statement in imports:
-        namespace_start = statement.index("open import") + len("open import") + 1
+        namespace_start = statement.index(
+            "open import") + len("open import") + 1
         module = statement[namespace_start:]
         try:
             namespace = module[:module.rindex(".")]
@@ -27,15 +29,18 @@ def normalize_imports(imports):
 
     for statement in namespaces["foundation"]:
         submodule_start = statement.index(".")
-        namespaces["foundation-core"].discard("foundation-core" + statement[submodule_start:])
+        namespaces["foundation-core"].discard(
+            "foundation-core" + statement[submodule_start:])
 
     # Remove any namespaces that ended up being empty
     namespaces = dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
 
     # Join together with the appropriate line separations
-    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports))) for namespace, namespace_imports in sorted(namespaces.items()))
+    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports)))
+              for namespace, namespace_imports in sorted(namespaces.items()))
 
     return "\n\n".join(blocks)
+
 
 for fpath in utils.agdaFiles(sys.argv[1:]):
     with open(fpath, 'r', encoding='UTF-8') as file:
@@ -45,7 +50,8 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
         if start != -1 and end != -1:
             block = contents[start:end]
             # Strip all lines. There should not be any indentation in this block
-            newBlock = filter(lambda l: l != '', map(lambda l: l.strip(), block.split('\n')))
+            newBlock = filter(lambda l: l != '', map(
+                lambda l: l.strip(), block.split('\n')))
 
             # Don't want repeat import statements
             publicImports = set()
@@ -53,7 +59,7 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
             openStatements = []
 
             for l in newBlock:
-                if  len(l) == 0 or l.startswith('```') or '<details>' in l or '</details>' in l:
+                if len(l) == 0 or l.startswith('```') or '<details>' in l or '</details>' in l:
                     continue
                 if l.startswith('module') or l.startswith('{-# OPTIONS'):
                     print(
@@ -68,13 +74,14 @@ for fpath in utils.agdaFiles(sys.argv[1:]):
                 elif 'open' in l:
                     openStatements.append(l)
                 else:
-                    print('Error: unknown statement in details import block:\n\t' + str(fpath))
+                    print(
+                        'Error: unknown statement in details import block:\n\t' + str(fpath))
             if len(openStatements) > 0:
                 print(
                     'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath))
             imports = '\n\n'.join(
                 filter(lambda ls: len(ls) > 0,
-                    [normalize_imports(publicImports), normalize_imports(nonPublicImports), '\n'.join(sorted(openStatements))]))
+                       [normalize_imports(publicImports), normalize_imports(nonPublicImports), '\n'.join(sorted(openStatements))]))
 
             importBlock = '<details><summary>Imports</summary>\n' + \
                 '\n```agda\n' +\

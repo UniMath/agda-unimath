@@ -4,12 +4,7 @@
 MAlonzo/**
 _build/**
 agdaFiles
-src/everything.lagda.md
-CONTRIBUTORS.md
-MODULE-INDEX.md
-SUMMARY.md
 src/**/*.html
-book/
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
@@ -257,7 +252,6 @@ _minted*
 *.sympy
 sympy-plots-for-*.tex/
 
-MODULE-INDEX# pdfcomment
 *.upa
 *.upb
 
@@ -423,5 +417,11 @@ node_modules/*
 .vscode
 package-lock.json
 
+# mdbook
 docs/
 html/
+book/
+src/everything.lagda.md
+CONTRIBUTORS.md
+MODULE-INDEX.md
+SUMMARY.md
