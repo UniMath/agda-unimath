@@ -4,11 +4,10 @@
 MAlonzo/**
 _build/**
 agdaFiles
-docs/dependency.dot
-docs/graph.png
 src/everything.lagda.md
-SUMMARY.md
+CONTRIBUTORS.md
 MODULE-INDEX.md
+SUMMARY.md
 src/**/*.html
 book/
 
@@ -258,7 +257,7 @@ _minted*
 *.sympy
 sympy-plots-for-*.tex/
 
-# pdfcomment
+MODULE-INDEX# pdfcomment
 *.upa
 *.upb
 

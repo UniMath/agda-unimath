@@ -66,12 +66,10 @@ agda-html: src/everything.lagda.md
 
 .PHONY: website
 website: agda-html
+	@make pre-commit
+	@python3 scripts/update_contributors.py
 	@cp $(METAFILES) docs/
-	@python3 update-contributors.py
 	@mdbook build
-
-update-contributors:
-	@python update-contributors.py
 
 .phony: serve-website
 serve-website:

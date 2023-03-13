@@ -15,7 +15,7 @@ repos:
 
     - id: remove-extra-blank-lines
       name: Remove extra blank lines
-      entry: hooks/remove-extra-blank.py
+      entry: scripts/remove-extra-blank.py
       language: python
       always_run: true
       verbose: true
@@ -26,7 +26,7 @@ repos:
 
     - id: fix-imports
       name: Format Agda imports
-      entry: hooks/fix-imports.py
+      entry: scripts/fix-imports.py
       language: python
       always_run: true
       verbose: true
@@ -37,7 +37,7 @@ repos:
 
     - id: generate-namespace-index-modules
       name: Generate Agda namespace index modules
-      entry: hooks/generate_namespace_index_modules.py
+      entry: scripts/generate_namespace_index_modules.py
       language: python
       always_run: true
       verbose: true
@@ -47,7 +47,7 @@ repos:
 
     - id: generate-main-index-file
       name: Generate main index file
-      entry: hooks/generate_main_index_file.py
+      entry: scripts/generate_main_index_file.py
       language: python
       always_run: true
       verbose: true

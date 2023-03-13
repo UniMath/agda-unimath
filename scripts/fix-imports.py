@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/fix-imports.py fileName.lagda.md
+# $ python3 scripts/fix-imports.py fileName.lagda.md
 
 from collections import defaultdict
 import sys

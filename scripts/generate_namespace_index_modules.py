@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/generate_namespace_index_modules.py
+# $ python3 scripts/generate_namespace_index_modules.py
 
 import os
 import pathlib
