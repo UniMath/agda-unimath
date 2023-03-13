@@ -23,10 +23,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-Let `C` and `D` be two large precategories. Two functors `F : C → D` and `G : D → C` constitute an adjoint pair if
-- for each pair of objects `X` in `C` and `Y` in `D`, there is an equivalence `ϕ X Y : hom X (G Y) ≃ hom (F X) Y`
-such that
-- for every pair of morhpisms `f : X₂ → X₁` and `g : Y₁ → Y₂` the following square commutes:
+Let `C` and `D` be two large precategories. Two functors `F : C → D` and
+`G : D → C` constitute an adjoint pair if
+
+- for each pair of objects `X` in `C` and `Y` in `D`, there is an equivalence
+  `ϕ X Y : hom X (G Y) ≃ hom (F X) Y` such that
+- for every pair of morhpisms `f : X₂ → X₁` and `g : Y₁ → Y₂` the following
+  square commutes:
 
 ```md
                        ϕ X₁ Y₁
@@ -39,7 +42,8 @@ G g ∘ _ ∘ f |                        | g ∘ _ ∘ F f
                        ϕ X₂ Y₂
 ```
 
-In this case we say that `F` is left adjoint to `G` and `G` is right adjoint to `F` and write this as `F ⊣ G`.
+In this case we say that `F` is left adjoint to `G` and `G` is right adjoint to
+`F` and write this as `F ⊣ G`.
 
 ## Definition
 
@@ -305,7 +309,8 @@ module _
 
 ### Unit of adjunction
 
-Given an adjoint pair `F ⊣ G`, we can construct a natural transformation `η : id → comp G F` called the unit of the adjunction.
+Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
+`η : id → comp G F` called the unit of the adjunction.
 
 ```agda
 module _
@@ -393,7 +398,8 @@ module _
 
 ### Counit of adjunction
 
-Given an adjoint pair `F ⊣ G`, we can construct a natural transformation `ε : comp F G → id` called the counit of the adjunction.
+Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
+`ε : comp F G → id` called the counit of the adjunction.
 
 ```agda
   counit-Adjunction :

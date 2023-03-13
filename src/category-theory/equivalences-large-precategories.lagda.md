@@ -20,7 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The large precategories `C` and `D` are equivalent if there are functors `F : C → D` and `G : D → C` such that
+The large precategories `C` and `D` are equivalent if there are functors
+`F : C → D` and `G : D → C` such that
+
 - `comp G F` is naturally isomorphic to the identity functor on `C`,
 - `comp F G` is naturally isomorphic to the identity functor on `D`.
 

@@ -23,7 +23,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define the operation of minimum (greatest lower bound) for the standard finite types.
+We define the operation of minimum (greatest lower bound) for the standard
+finite types.
 
 ## Definition
 
@@ -43,7 +44,10 @@ min-Fin-Fin (succ-ℕ n) k f = min-Fin k (f (inr star)) (min-Fin-Fin n k (λ k �
 
 ### Minimum is a greatest lower bound
 
-We prove that `min-Fin` is a greatest lower bound of its two arguments by showing that `min(m,n) ≤ x` is equivalent to `(m ≤ x) ∧ (n ≤ x)`, in components. By reflexivity of `≤`, we compute that `min(m,n) ≤ m` (and correspondingly for `n`).
+We prove that `min-Fin` is a greatest lower bound of its two arguments by
+showing that `min(m,n) ≤ x` is equivalent to `(m ≤ x) ∧ (n ≤ x)`, in components.
+By reflexivity of `≤`, we compute that `min(m,n) ≤ m` (and correspondingly for
+`n`).
 
 ```agda
 leq-min-Fin :

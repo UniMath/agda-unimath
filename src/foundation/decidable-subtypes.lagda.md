@@ -32,7 +32,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A decidable subtype of a type consists of a family of decidable propositions over it.
+A decidable subtype of a type consists of a family of decidable propositions
+over it.
 
 ## Definitions
 

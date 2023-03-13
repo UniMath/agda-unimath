@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of propositional truncations can be used to define the functorial action of propositional truncations.
+The universal property of propositional truncations can be used to define the
+functorial action of propositional truncations.
 
 ## Definition
 

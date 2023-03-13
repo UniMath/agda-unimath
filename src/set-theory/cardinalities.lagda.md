@@ -28,7 +28,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-The cardinality of a set is its isomorphism class. We take isomorphism classes of sets by set truncating the universe of sets of any given universe level. Note that this definition takes advantage of the univalence axiom: By the univalence axiom isomorphic sets are equal, and will be mapped to the same element in the set truncation of the universe of all sets.
+The cardinality of a set is its isomorphism class. We take isomorphism classes
+of sets by set truncating the universe of sets of any given universe level. Note
+that this definition takes advantage of the univalence axiom: By the univalence
+axiom isomorphic sets are equal, and will be mapped to the same element in the
+set truncation of the universe of all sets.
 
 ## Definition
 

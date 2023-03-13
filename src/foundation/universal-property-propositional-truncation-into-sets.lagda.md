@@ -26,7 +26,10 @@ open import foundation.weakly-constant-maps
 
 ## Idea
 
-The propositional truncation of `A` can be thought of as the quotient of `A` by the full equivalence relation, i.e., the equivalence relation by which all elements of `A` are considered to be equivalent. This idea leads to the universal property of the propositional truncations with respect to sets.
+The propositional truncation of `A` can be thought of as the quotient of `A` by
+the full equivalence relation, i.e., the equivalence relation by which all
+elements of `A` are considered to be equivalent. This idea leads to the
+universal property of the propositional truncations with respect to sets.
 
 ## Definition
 

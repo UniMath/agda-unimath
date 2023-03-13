@@ -23,13 +23,20 @@ open import foundation.universe-levels
 ## Idea
 
 A precategory in Homotopy Type Theory consists of:
+
 - a type `A` of objects,
 - for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
-together with a composition operation `comp : hom y z → hom x y → hom x z` such that:
-- `comp (comp h g) f = comp h (comp g f)` for any morphisms `h : hom z w`, `g : hom y z` and `f : hom x y`,
-- for each object `x : A` there is a morphism `id_x : hom x x` such that `comp id_x f = f` and `comp g id_x = g` for any morphisms `f : hom x y` and `g : hom z x`.
+  together with a composition operation `comp : hom y z → hom x y → hom x z`
+  such that:
+- `comp (comp h g) f = comp h (comp g f)` for any morphisms `h : hom z w`,
+  `g : hom y z` and `f : hom x y`,
+- for each object `x : A` there is a morphism `id_x : hom x x` such that
+  `comp id_x f = f` and `comp g id_x = g` for any morphisms `f : hom x y` and
+  `g : hom z x`.
 
-The reason this is called a *pre*category and not a category in Homotopy Type Theory is that we want to reserve that name for precategories where the identities between the objects are exactly the isomorphisms.
+The reason this is called a *pre*category and not a category in Homotopy Type
+Theory is that we want to reserve that name for precategories where the
+identities between the objects are exactly the isomorphisms.
 
 ## Definition
 
@@ -152,8 +159,11 @@ pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 
 ### The property of having identity morphisms is a proposition
 
-Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to `comp`. It is enough to show that `e = e'` since the right and left unit laws are propositions (because all hom-types are sets). By function extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by the unit laws we have the following chain of equalities:
-`e x = comp (e' x) (e x) = e' x.`
+Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to
+`comp`. It is enough to show that `e = e'` since the right and left unit laws
+are propositions (because all hom-types are sets). By function extensionality,
+it is enough to show that `e x = e' x` for all `x : A`. But by the unit laws we
+have the following chain of equalities: `e x = comp (e' x) (e x) = e' x.`
 
 ```agda
 module _

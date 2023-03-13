@@ -39,7 +39,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Since the standard finite types are defined recursively by adding a point one at a time, it follows that equality in the standard finite types is decidable, and that they are sets.
+Since the standard finite types are defined recursively by adding a point one at
+a time, it follows that equality in the standard finite types is decidable, and
+that they are sets.
 
 ## Properties
 

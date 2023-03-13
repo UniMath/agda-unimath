@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The union of two subtypes `A` and `B` is the subtype that contains the elements that are in `A` or in `B`.
+The union of two subtypes `A` and `B` is the subtype that contains the elements
+that are in `A` or in `B`.
 
 ## Definition
 

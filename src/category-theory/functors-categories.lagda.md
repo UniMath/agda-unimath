@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor between two categories is a functor between the underlying precategories.
+A functor between two categories is a functor between the underlying
+precategories.
 
 ## Definition
 

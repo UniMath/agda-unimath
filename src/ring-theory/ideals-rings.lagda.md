@@ -37,7 +37,8 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-A left ideal of a ring `R` is an additive subgroup of `R` that is closed under multiplication by elements of `R` from the left.
+A left ideal of a ring `R` is an additive subgroup of `R` that is closed under
+multiplication by elements of `R` from the left.
 
 ## Definitions
 

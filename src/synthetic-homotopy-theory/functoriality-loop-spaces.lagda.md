@@ -25,7 +25,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-Any pointed map `f : A →* B` induces a map `map-Ω f : Ω A →* Ω B`. Furthermore, this operation respects the groupoidal operations on loop spaces.
+Any pointed map `f : A →* B` induces a map `map-Ω f : Ω A →* Ω B`. Furthermore,
+this operation respects the groupoidal operations on loop spaces.
 
 ## Definition
 

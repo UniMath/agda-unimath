@@ -28,7 +28,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Homomorphisms between abelian groups are just homomorphisms between their underlying groups.
+Homomorphisms between abelian groups are just homomorphisms between their
+underlying groups.
 
 ## Definition
 

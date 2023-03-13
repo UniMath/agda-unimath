@@ -19,7 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is an isomorphism, for every object `x` in `C`.
+A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural
+transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is
+an isomorphism, for every object `x` in `C`.
 
 ## Definition
 

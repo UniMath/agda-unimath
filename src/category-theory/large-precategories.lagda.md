@@ -19,7 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A large precategory is a precategory where we don't fix a universe for the type of objects or morphisms. (This cannot be done with Σ-types, we must use a record type.)
+A large precategory is a precategory where we don't fix a universe for the type
+of objects or morphisms. (This cannot be done with Σ-types, we must use a record
+type.)
 
 ## Definition
 

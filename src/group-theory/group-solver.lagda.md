@@ -27,8 +27,8 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-This module simplifies group expressions, such that all items associate the same way
-and removes units and inverses next to the original.
+This module simplifies group expressions, such that all items associate the same
+way and removes units and inverses next to the original.
 
 The main entry-point is `solveExpr` below
 
@@ -344,13 +344,10 @@ module _ {n : ℕ} where
     open import linear-algebra.vectors using (_∷_ ; empty-vec) public
 
 ```
-  private
-    _*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
-    _*'_ = gMul
-    x : GroupSyntax 2
-    x = inner (zero-Fin)
-    y : GroupSyntax 2
-    y = inner (succ-Fin zero-Fin)
+
+private _\*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n _\*'_ =
+gMul x : GroupSyntax 2 x = inner (zero-Fin) y : GroupSyntax 2 y = inner
+(succ-Fin zero-Fin)
 
     infixl 20 _*'_
     ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
@@ -370,5 +367,7 @@ module _ {n : ℕ} where
     _ = {!simplifyValid (gInv x *' x *' y)!}
     -- _ = {!simplifyValid (gUnit *' gUnit)!}
     -- _ = {!simplifyValid (x *' gUnit)!}
+
+```
 
 ```

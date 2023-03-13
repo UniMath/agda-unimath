@@ -22,7 +22,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two monoids `M` and `N` consists of the product `M × N` of the underlying sets and the componentwise operation on it.
+The cartesian product of two monoids `M` and `N` consists of the product `M × N`
+of the underlying sets and the componentwise operation on it.
 
 ## Definition
 

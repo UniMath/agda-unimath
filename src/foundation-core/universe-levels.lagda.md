@@ -13,4 +13,6 @@ open import Agda.Primitive
 
 ## Idea
 
-We import Agda's built in mechanism of universe levels. The universes are called `UU`, which stands for `univalent universe`, although we will not immediately assume that universes are univalent.
+We import Agda's built in mechanism of universe levels. The universes are called
+`UU`, which stands for `univalent universe`, although we will not immediately
+assume that universes are univalent.

@@ -23,7 +23,11 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A dependent function taking values in a dependent pair type is equivalently described as a pair of dependent functions. This equivalence, which gives the distributivity of Π over Σ, is also known as the type theoretic principle of choice. Indeed, it is the Curry-Howard interpretation of (one formulation of) the axiom of choice.
+A dependent function taking values in a dependent pair type is equivalently
+described as a pair of dependent functions. This equivalence, which gives the
+distributivity of Π over Σ, is also known as the type theoretic principle of
+choice. Indeed, it is the Curry-Howard interpretation of (one formulation of)
+the axiom of choice.
 
 ## Definitions
 

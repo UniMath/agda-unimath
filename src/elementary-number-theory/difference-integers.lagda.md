@@ -18,7 +18,10 @@ open import foundation.interchange-law
 
 # The difference between integers
 
-Since integers of the form `x - y` occur often, we introduce them here and derive their basic properties relative to `succ-ℤ`, `neg-ℤ`, and `add-ℤ`. The file `multiplication-integers` imports `difference-integers` and more properties are derived there.
+Since integers of the form `x - y` occur often, we introduce them here and
+derive their basic properties relative to `succ-ℤ`, `neg-ℤ`, and `add-ℤ`. The
+file `multiplication-integers` imports `difference-integers` and more properties
+are derived there.
 
 ```
 diff-ℤ : ℤ → ℤ → ℤ

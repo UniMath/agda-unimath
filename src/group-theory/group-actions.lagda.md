@@ -26,7 +26,8 @@ open import group-theory.symmetric-groups
 
 ## Idea
 
-A action of a group `G` on a set `X` is a group homomorphism from `G` into `symmetric-Group X`.
+A action of a group `G` on a set `X` is a group homomorphism from `G` into
+`symmetric-Group X`.
 
 ## Definition
 

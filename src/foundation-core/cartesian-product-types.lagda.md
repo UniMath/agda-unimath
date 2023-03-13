@@ -19,7 +19,8 @@ open import foundation-core.universe-levels
 
 ## Definition
 
-Cartesian products of types are defined as dependent pair types, using a constant type family.
+Cartesian products of types are defined as dependent pair types, using a
+constant type family.
 
 ```agda
 prod : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)

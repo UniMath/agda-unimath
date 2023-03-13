@@ -25,7 +25,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a polynomial endofunctor `P A B`, an algebra for `P A B` conisists of a type `X` and a map `P A B X → X`.
+Given a polynomial endofunctor `P A B`, an algebra for `P A B` conisists of a
+type `X` and a map `P A B X → X`.
 
 ## Definitions
 

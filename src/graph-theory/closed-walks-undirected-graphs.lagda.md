@@ -21,7 +21,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A closed walk of length `k : ℕ` in an undirected graph `G` is a morphism of graphs from a `k`-gon into `G`.
+A closed walk of length `k : ℕ` in an undirected graph `G` is a morphism of
+graphs from a `k`-gon into `G`.
 
 ## Definition
 

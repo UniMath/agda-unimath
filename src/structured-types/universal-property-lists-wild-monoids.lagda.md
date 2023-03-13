@@ -25,7 +25,8 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-The type of lists of elements of `X` is the initial wild monoid equipped with a map from `X` into it.
+The type of lists of elements of `X` is the initial wild monoid equipped with a
+map from `X` into it.
 
 ## Definition
 

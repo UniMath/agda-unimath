@@ -29,7 +29,9 @@ open import trees.w-types
 
 ## Idea
 
-A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe `UU l` if its symbol `A` is a small type with respect to `UU l`, and if each `α x` is a small multiset with respect to `UU l`.
+A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe
+`UU l` if its symbol `A` is a small type with respect to `UU l`, and if each
+`α x` is a small multiset with respect to `UU l`.
 
 ## Definition
 

@@ -26,7 +26,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-A homomorphism between two semigroups is a map between their underlying types that preserves the binary operation.
+A homomorphism between two semigroups is a map between their underlying types
+that preserves the binary operation.
 
 ## Definition
 

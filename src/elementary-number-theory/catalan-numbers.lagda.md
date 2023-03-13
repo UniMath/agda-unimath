@@ -24,7 +24,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The Catalan numbers are a sequence of natural numbers that occur in several combinatorics problems.
+The Catalan numbers are a sequence of natural numbers that occur in several
+combinatorics problems.
 
 ## Definitions
 

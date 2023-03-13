@@ -24,7 +24,8 @@ open import structured-types.pointed-maps
 
 ## Idea
 
-Morphisms of wild unital magmas are pointed maps that preserve the unital binary operation, including its laws.
+Morphisms of wild unital magmas are pointed maps that preserve the unital binary
+operation, including its laws.
 
 ## Definition
 

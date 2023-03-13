@@ -31,7 +31,9 @@ open import order-theory.posets
 
 ## Idea
 
-The relation `≤` on the natural numbers is the unique relation such that `0` is less than any natural number, and such that `m+1 ≤ n+1` is equivalent to `m ≤ n`.
+The relation `≤` on the natural numbers is the unique relation such that `0` is
+less than any natural number, and such that `m+1 ≤ n+1` is equivalent to
+`m ≤ n`.
 
 ## Definitions
 

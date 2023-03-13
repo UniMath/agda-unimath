@@ -39,7 +39,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A finitely graded poset consists of a family of types indexed by `Fin (succ-ℕ k)` equipped with an ordering relation from `Fin (inl i)` to `Fin (succ-Fin (inl i))` for each `i : Fin k`.
+A finitely graded poset consists of a family of types indexed by
+`Fin (succ-ℕ k)` equipped with an ordering relation from `Fin (inl i)` to
+`Fin (succ-Fin (inl i))` for each `i : Fin k`.
 
 ```agda
 
@@ -334,7 +336,8 @@ module _
 
 ### Least and largest elements in finitely graded posets
 
-We make sure that the least element is a face of type zero-Fin, and that the largest element is a face of type neg-one-Fin.
+We make sure that the least element is a face of type zero-Fin, and that the
+largest element is a face of type neg-one-Fin.
 
 ```agda
 module _
@@ -782,3 +785,4 @@ module _
     subtype-maximal-chain-Finitely-Graded-Poset =
       subtype-chain-Finitely-Graded-Poset X
         chain-maximal-chain-Finitely-Graded-Poset
+```

@@ -36,13 +36,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a type `A` equipped with an equivalence relation `R` and a type `X`, the set quotient
+Given a type `A` equipped with an equivalence relation `R` and a type `X`, the
+set quotient
 
 ```md
   (X → A) / ~
 ```
 
-where `f ~ g := (x : A) → R (f x) (g x)`, embeds into the type `X → A/R`. This embedding for every `X`, `A`, and `R` if and only if the axiom of choice holds.
+where `f ~ g := (x : A) → R (f x) (g x)`, embeds into the type `X → A/R`. This
+embedding for every `X`, `A`, and `R` if and only if the axiom of choice holds.
 
 Consequently, we get embeddings
 

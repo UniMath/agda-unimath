@@ -34,7 +34,8 @@ open import group-theory.subgroups
 
 ## Idea
 
-A decidable subgroup of a group `G` is a subgroup of `G` defined by a decidable predicate on the type of elements of `G`.
+A decidable subgroup of a group `G` is a subgroup of `G` defined by a decidable
+predicate on the type of elements of `G`.
 
 ## Definitions
 

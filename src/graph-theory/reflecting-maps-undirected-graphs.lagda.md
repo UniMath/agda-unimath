@@ -19,7 +19,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A reflecting map from an undirected graph `(V , E)` into a type `X` consists of a map `fV : V → X` and a map
+A reflecting map from an undirected graph `(V , E)` into a type `X` consists of
+a map `fV : V → X` and a map
 
 ```md
   fE : (v : unordered-pair V) → E v → symmetric-Id (map-unordered-pair fV v).

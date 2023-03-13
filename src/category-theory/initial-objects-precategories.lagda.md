@@ -20,7 +20,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The initial object of a precategory (if it exists) is an object with the universal property that there is a unique morphism from it to any object.
+The initial object of a precategory (if it exists) is an object with the
+universal property that there is a unique morphism from it to any object.
 
 ## Definition
 

@@ -24,7 +24,9 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two groups `G` and `H` has the product of the underlying sets of `G` and `H` as its underlying type, and is equipped with pointwise multiplication.
+The cartesian product of two groups `G` and `H` has the product of the
+underlying sets of `G` and `H` as its underlying type, and is equipped with
+pointwise multiplication.
 
 ## Definition
 

@@ -19,7 +19,8 @@ open import group-theory.precategory-of-concrete-groups
 
 ## Idea
 
-Isomorphisms of concrete groups are isomorphisms in the large precategory of concrete groups
+Isomorphisms of concrete groups are isomorphisms in the large precategory of
+concrete groups
 
 ## Definition
 

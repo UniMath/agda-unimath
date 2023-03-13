@@ -22,7 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The universal property and dependent universal property of coproduct types characterize maps and dependent functions out of coproduct types.
+The universal property and dependent universal property of coproduct types
+characterize maps and dependent functions out of coproduct types.
 
 ```agda
 module _

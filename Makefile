@@ -92,5 +92,12 @@ clean:
 
 .PHONY : pre-commit
 pre-commit:
-	@make check
 	@pre-commit run --all-files
+	@make check
+
+website-dev:
+	@curl https://sh.rustup.rs -sSf | sh
+	@cargo install mdbook
+	@cargo install mdbook-linkcheck
+	@cargo install mdbook-katex
+	@cargo install mdbook-pagetoc

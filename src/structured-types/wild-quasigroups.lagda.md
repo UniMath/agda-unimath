@@ -20,7 +20,8 @@ open import structured-types.magmas
 
 ## Idea
 
-A wild quasigroup is a type `A` equipped with a binary equivalence `μ : A → A → A`.
+A wild quasigroup is a type `A` equipped with a binary equivalence
+`μ : A → A → A`.
 
 ## Definition
 

@@ -19,7 +19,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given a type `X` and a pointed type `A`, the constant map from `X` to `A` maps every element of `X` to the base point of `A`.
+Given a type `X` and a pointed type `A`, the constant map from `X` to `A` maps
+every element of `X` to the base point of `A`.
 
 ## Definition
 

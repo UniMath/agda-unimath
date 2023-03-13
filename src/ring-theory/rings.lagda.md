@@ -39,7 +39,10 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the integers. A ring consists of a set equipped with addition and multiplication, where the addition operation gives the ring the structure of an abelian group, and the multiplication is associative, unital, and distributive over addition.
+The concept of ring vastly generalizes the arithmetical structure on the
+integers. A ring consists of a set equipped with addition and multiplication,
+where the addition operation gives the ring the structure of an abelian group,
+and the multiplication is associative, unital, and distributive over addition.
 
 ## Definitions
 

@@ -21,9 +21,10 @@ open import foundation.universe-levels
 ## Idea
 
 A functor from a large precategory `C` to a large precategory `D` consists of:
+
 - a map `F : C → D` on objects,
-- a map `Fmap : hom x y → hom (F x) (F y)` on morphisms,
-such that the following identities hold:
+- a map `Fmap : hom x y → hom (F x) (F y)` on morphisms, such that the following
+  identities hold:
 - `Fmap id_x = id_(F x)`,
 - `Fmap (comp g f) = comp (F g) (F f)`.
 

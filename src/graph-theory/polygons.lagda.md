@@ -34,7 +34,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A polygon is an undirected graph that is merely equivalent to a graph with vertices `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each `k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a concrete presentation of the dihedral group `D_k`.
+A polygon is an undirected graph that is merely equivalent to a graph with
+vertices `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines
+for each `k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a
+concrete presentation of the dihedral group `D_k`.
 
 ## Definition
 

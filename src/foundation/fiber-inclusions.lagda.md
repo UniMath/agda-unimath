@@ -37,7 +37,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a family `B` of types over `A` and an element `a : A`, then the fiber inclusion of `B` at a is a map `B a → Σ A B`.
+Given a family `B` of types over `A` and an element `a : A`, then the fiber
+inclusion of `B` at a is a map `B a → Σ A B`.
 
 ## Definition
 

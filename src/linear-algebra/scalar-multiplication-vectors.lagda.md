@@ -19,7 +19,8 @@ open import linear-algebra.vectors
 
 ## Idea
 
-Any operation `B → A → A` for some type `B` of formal scalars induces an operation `B → vec n A → vec n A`.
+Any operation `B → A → A` for some type `B` of formal scalars induces an
+operation `B → vec n A → vec n A`.
 
 ## Definition
 

@@ -23,7 +23,10 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An Eulerian cicuit in an undirected graph `G` consists of a cicuit `T` in `G` such that every edge in `G` is in the image of `T`. In other words, an Eulerian circuit `T` consists of `k`-gon `H` equipped with a graph homomorphism `f : H → G` that induces an equivalence
+An Eulerian cicuit in an undirected graph `G` consists of a cicuit `T` in `G`
+such that every edge in `G` is in the image of `T`. In other words, an Eulerian
+circuit `T` consists of `k`-gon `H` equipped with a graph homomorphism
+`f : H → G` that induces an equivalence
 
 ```md
   Σ (unordered-pair-vertices-Polygon k H) (edge-Polygon k H) ≃

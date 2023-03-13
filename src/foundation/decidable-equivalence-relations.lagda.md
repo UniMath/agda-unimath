@@ -45,7 +45,8 @@ open import foundation-core.equivalence-relations
 
 ## Idea
 
-A decidable equivalence relation on a type `X` is an equivalence relation `R` on `X` such that `R x y` is a decidable proposition for each `x y : X`.
+A decidable equivalence relation on a type `X` is an equivalence relation `R` on
+`X` such that `R x y` is a decidable proposition for each `x y : X`.
 
 ## Definitions
 

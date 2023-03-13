@@ -21,7 +21,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a map `f : A → B` and a point `b : B`, the fiber of `f` at `b` is the preimage of `f` at `b`. In other words, it consists of the elements `a : A` equipped with an identification `Id (f a) b`.
+Given a map `f : A → B` and a point `b : B`, the fiber of `f` at `b` is the
+preimage of `f` at `b`. In other words, it consists of the elements `a : A`
+equipped with an identification `Id (f a) b`.
 
 ## Definition
 

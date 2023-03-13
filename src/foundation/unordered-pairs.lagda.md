@@ -39,7 +39,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An unordered pair of elements in a type `A` consists of a 2-element type `X` and a map `X → A`.
+An unordered pair of elements in a type `A` consists of a 2-element type `X` and
+a map `X → A`.
 
 ## Definition
 

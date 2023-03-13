@@ -22,7 +22,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-The integers modulo k, equipped with the zero-element, addition, and negatives, form groups.
+The integers modulo k, equipped with the zero-element, addition, and negatives,
+form groups.
 
 ## Definition
 

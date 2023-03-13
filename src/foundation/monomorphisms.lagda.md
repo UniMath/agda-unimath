@@ -23,7 +23,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A function `f : A → B` is a monomorphism if whenever we have two functions `g h : X → A` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that postcomposition by `f` is an embedding.
+A function `f : A → B` is a monomorphism if whenever we have two functions
+`g h : X → A` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state
+this in Homotopy Type Theory is to say that postcomposition by `f` is an
+embedding.
 
 ## Definition
 
@@ -43,7 +46,9 @@ module _ {l1 l2 : Level} (l3 : Level)
 
 ## Properties
 
-If `f : A → B` is a monomorphism then for any `g h : X → A` we have an equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f ∘ h` then `g = h`.
+If `f : A → B` is a monomorphism then for any `g h : X → A` we have an
+equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f ∘ h` then
+`g = h`.
 
 ```agda
 module _ {l1 l2 : Level} (l3 : Level)

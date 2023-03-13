@@ -23,7 +23,12 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An **n-alkene** is a hydrocarbon equipped with a choice of $n$ carbons, each of which has a double bond. For an n-alkene, the embedding from the given type (the first component of the n-alkene structure) specifies which carbons have double bonds. For example, 1-butene and but-2-ene have the same geometry, and the embedding is what differentiates them (while the third tautometer, isobutylene, is branched, thus has a different geometry).
+An **n-alkene** is a hydrocarbon equipped with a choice of $n$ carbons, each of
+which has a double bond. For an n-alkene, the embedding from the given type (the
+first component of the n-alkene structure) specifies which carbons have double
+bonds. For example, 1-butene and but-2-ene have the same geometry, and the
+embedding is what differentiates them (while the third tautometer, isobutylene,
+is branched, thus has a different geometry).
 
 ## Definition
 

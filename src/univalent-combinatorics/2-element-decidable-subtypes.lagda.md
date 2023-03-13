@@ -54,7 +54,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of which the underlying type has 2 elements.
+A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of
+which the underlying type has 2 elements.
 
 ## Definition
 

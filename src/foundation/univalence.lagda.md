@@ -25,9 +25,11 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
+The univalence axiom characterizes the identity types of universes. It asserts
+that the map `Id A B → A ≃ B` is an equivalence.
 
-In this file we postulate the univalence axiom. Its statement is defined in [`foundation-core.univalence`](foundation-core.univalence.md).
+In this file we postulate the univalence axiom. Its statement is defined in
+[`foundation-core.univalence`](foundation-core.univalence.md).
 
 ## Postulates
 

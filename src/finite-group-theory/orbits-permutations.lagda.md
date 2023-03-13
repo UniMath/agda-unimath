@@ -74,7 +74,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The orbit of a point `x` for a permutation `f` is the set of point obtained by iterating `f` on `x`.
+The orbit of a point `x` for a permutation `f` is the set of point obtained by
+iterating `f` on `x`.
 
 ## Definition
 

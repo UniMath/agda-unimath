@@ -22,7 +22,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A nilpotent element in a ring is an element `x` for which there is a natural number `n` such that `x^n = 0`.
+A nilpotent element in a ring is an element `x` for which there is a natural
+number `n` such that `x^n = 0`.
 
 ## Definition
 

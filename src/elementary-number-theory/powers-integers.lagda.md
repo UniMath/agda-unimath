@@ -25,7 +25,8 @@ open import ring-theory.powers-of-elements-rings
 
 ## Idea
 
-The power operation on the integers is the map `n x ↦ xⁿ`, which is defined by iteratively multiplying `x` with itself `n` times.
+The power operation on the integers is the map `n x ↦ xⁿ`, which is defined by
+iteratively multiplying `x` with itself `n` times.
 
 ## Definition
 

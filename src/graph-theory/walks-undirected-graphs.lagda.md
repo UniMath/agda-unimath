@@ -36,7 +36,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A walk in an undirected graph consists of a list of edges that connect the starting point with the end point. Walks may repeat edges and pass through the same vertex multiple times.
+A walk in an undirected graph consists of a list of edges that connect the
+starting point with the end point. Walks may repeat edges and pass through the
+same vertex multiple times.
 
 ## Definitions
 

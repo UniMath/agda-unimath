@@ -17,7 +17,8 @@ open import group-theory.higher-groups
 
 ## Idea
 
-The type of fixed points of a higher group action `X : BG → UU` is the type of sections `(u : BG) → X u`.
+The type of fixed points of a higher group action `X : BG → UU` is the type of
+sections `(u : BG) → X u`.
 
 ## Definition
 

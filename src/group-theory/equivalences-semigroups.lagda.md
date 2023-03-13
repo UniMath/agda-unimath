@@ -29,7 +29,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-An equivalence between semigroups is an equivalence between their underlying types that preserves the binary operation.
+An equivalence between semigroups is an equivalence between their underlying
+types that preserves the binary operation.
 
 ## Definition
 

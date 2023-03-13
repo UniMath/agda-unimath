@@ -22,7 +22,9 @@ open import group-theory.monoids
 
 ## Idea
 
-Representations of a monoid `M` in a category `C` consist of an object `V` in `C` equipped with a monoid homomorphism from `M` to the monoid of endomorphisms on `V`.
+Representations of a monoid `M` in a category `C` consist of an object `V` in
+`C` equipped with a monoid homomorphism from `M` to the monoid of endomorphisms
+on `V`.
 
 ## Definition
 

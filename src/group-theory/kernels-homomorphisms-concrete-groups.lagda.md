@@ -29,7 +29,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The kernel of a concrete group homomorphsim `Bf : BG →* BH` is the connected component at the base point of the fiber of `Bf`.
+The kernel of a concrete group homomorphsim `Bf : BG →* BH` is the connected
+component at the base point of the fiber of `Bf`.
 
 ## Definition
 

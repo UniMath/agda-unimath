@@ -24,7 +24,8 @@ open import order-theory.posets
 
 ## Idea
 
-A meet-semilattice is a poset in which every pair of elements has a greatest binary-lower bound.
+A meet-semilattice is a poset in which every pair of elements has a greatest
+binary-lower bound.
 
 ## Definitions
 

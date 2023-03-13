@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A partial element of `X` consists of a proposition `P` and a map `P → X`. We say that a partial element `(P, f)` is defined if the proposition `P` holds.
+A partial element of `X` consists of a proposition `P` and a map `P → X`. We say
+that a partial element `(P, f)` is defined if the proposition `P` holds.
 
 ```agda
 partial-element : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)

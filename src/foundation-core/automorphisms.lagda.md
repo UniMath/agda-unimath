@@ -27,7 +27,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-An automorphism on a type `A` is an equivalence `A ≃ A`. We will just reuse the infrastructure of equivalences for automorphisms.
+An automorphism on a type `A` is an equivalence `A ≃ A`. We will just reuse the
+infrastructure of equivalences for automorphisms.
 
 ## Definitions
 

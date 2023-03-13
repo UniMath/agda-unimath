@@ -26,7 +26,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Since we sometimes think of types as ∞-groupoids, with the groupoid structure provided implicitly by the identity type and its induction principle, we can think of maps as functors of ∞-groupoids. We borrow some terminology of functors, and call a map faithful if it induces embeddings on identity types.
+Since we sometimes think of types as ∞-groupoids, with the groupoid structure
+provided implicitly by the identity type and its induction principle, we can
+think of maps as functors of ∞-groupoids. We borrow some terminology of
+functors, and call a map faithful if it induces embeddings on identity types.
 
 ## Definition
 

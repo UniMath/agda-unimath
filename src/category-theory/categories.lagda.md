@@ -28,7 +28,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-A category in Homotopy Type Theory is a precategory for which the identities between the objects are the isomorphisms. More specifically, an equality between objects gives rise to an isomorphism between them, by the J-rule. A precategory is a category if this function is an equivalence. Note: being a category is a proposition since `is-equiv` is a proposition.
+A category in Homotopy Type Theory is a precategory for which the identities
+between the objects are the isomorphisms. More specifically, an equality between
+objects gives rise to an isomorphism between them, by the J-rule. A precategory
+is a category if this function is an equivalence. Note: being a category is a
+proposition since `is-equiv` is a proposition.
 
 ## Definition
 
@@ -125,7 +129,9 @@ pr2 (Set-Cat l) = is-category-Set-Precat l
 
 ### The objects in a category form a 1-type
 
-The type of identities between two objects in a category is equivalent to the type of isomorphisms between them. But this type is a set, and thus the identity type is a set.
+The type of identities between two objects in a category is equivalent to the
+type of isomorphisms between them. But this type is a set, and thus the identity
+type is a set.
 
 ```agda
 module _

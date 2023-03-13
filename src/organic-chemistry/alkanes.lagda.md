@@ -17,7 +17,8 @@ open import organic-chemistry.saturated-carbons
 
 ## Idea
 
-An **alkane** is a hydrocarbon that only has saturated carbons, i.e., it does not have any double or triple carbon-carbon bonds.
+An **alkane** is a hydrocarbon that only has saturated carbons, i.e., it does
+not have any double or triple carbon-carbon bonds.
 
 ## Definition
 

@@ -57,9 +57,12 @@ module _
 - Arithmetical laws involving the empty type are recorded in
   [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.md).
 
-- In [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.md)
-  we show that `empty` is the initial type, which can be considered a
-  *left zero law for function types* (`(empty → A) ≃ unit`).
-- That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be found in
+- In
+  [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.md)
+  we show that `empty` is the initial type, which can be considered a _left zero
+  law for function types_ (`(empty → A) ≃ unit`).
+- That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be
+  found in
   [`foundation-core.contractible-types`](foundation-core.contractible-types.md).
-  This can be considered a *right zero law for function types* (`(A → unit) ≃ unit`).
+  This can be considered a _right zero law for function types_
+  (`(A → unit) ≃ unit`).

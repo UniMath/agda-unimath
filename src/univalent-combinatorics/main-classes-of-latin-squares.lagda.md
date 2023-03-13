@@ -22,7 +22,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The groupoid of main classes of latin squares consists of unordered triples of inhabited types equipped with a ternary 1-1 correspondence.
+The groupoid of main classes of latin squares consists of unordered triples of
+inhabited types equipped with a ternary 1-1 correspondence.
 
 ## Definition
 

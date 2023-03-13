@@ -32,7 +32,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a family of rings `R i` indexed by `i : I`, their dependent product `Π(i:I), R i` is again a ring.
+Given a family of rings `R i` indexed by `i : I`, their dependent product
+`Π(i:I), R i` is again a ring.
 
 ## Definition
 

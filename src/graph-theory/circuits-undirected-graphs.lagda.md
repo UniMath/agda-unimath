@@ -21,7 +21,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A circuit in an undirected graph `G` consists of a `k`-gon `H` equipped with a totally faithful morphism of graphs from `H` to `G`. In other words, a circuit is a closed walk with no repeated edges.
+A circuit in an undirected graph `G` consists of a `k`-gon `H` equipped with a
+totally faithful morphism of graphs from `H` to `G`. In other words, a circuit
+is a closed walk with no repeated edges.
 
 ## Definition
 

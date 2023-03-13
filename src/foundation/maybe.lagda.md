@@ -30,7 +30,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The maybe modality is an operation on types that adds one point. This is used, for example, to define partial functions, where a partial function `f : X ⇀ Y` is a map `f : X → Maybe Y`.
+The maybe modality is an operation on types that adds one point. This is used,
+for example, to define partial functions, where a partial function `f : X ⇀ Y`
+is a map `f : X → Maybe Y`.
 
 ## Definitions
 

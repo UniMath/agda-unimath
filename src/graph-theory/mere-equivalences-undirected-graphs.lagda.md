@@ -19,7 +19,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-Two undirected graphs are said to be merely equivalent if there merely exists an equivalence of undirected graphs between them.
+Two undirected graphs are said to be merely equivalent if there merely exists an
+equivalence of undirected graphs between them.
 
 ## Definition
 

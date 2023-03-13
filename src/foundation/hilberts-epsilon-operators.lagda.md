@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Hilbert's ε-operator at a type `A` is a map `type-trunc-Prop A → A`. Contrary to Hilbert, we will not assume that such an operator exists for each type `A`.
+Hilbert's ε-operator at a type `A` is a map `type-trunc-Prop A → A`. Contrary to
+Hilbert, we will not assume that such an operator exists for each type `A`.
 
 ## Definition
 

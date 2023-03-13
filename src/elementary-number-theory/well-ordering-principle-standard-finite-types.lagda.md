@@ -46,7 +46,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The standard finite types inherit a well-ordering principle from the natural numbers
+The standard finite types inherit a well-ordering principle from the natural
+numbers
 
 ## Properties
 

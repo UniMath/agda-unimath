@@ -22,7 +22,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation of cartesian products with respect to themselves and dependent pair types.
+We prove laws for the manipulation of cartesian products with respect to
+themselves and dependent pair types.
 
 ## Laws
 
@@ -130,7 +131,7 @@ module _
 - Arithmetical laws involving dependent pair types are recorded in
   [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.md).
   - Arithmetical laws involving dependent product types are recorded in
-  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
+    [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Arithmetical laws involving coproduct types are recorded in
   [`foundation.type-arithmetic-coproduct-types`](foundation.type-arithmetic-coproduct-types.md).
 - Arithmetical laws involving the unit type are recorded in

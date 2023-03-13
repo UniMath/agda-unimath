@@ -30,7 +30,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-A ring `R` is said to be commutative if its multiplicative operation is commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
+A ring `R` is said to be commutative if its multiplicative operation is
+commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
 
 ## Definition
 

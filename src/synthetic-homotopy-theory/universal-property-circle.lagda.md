@@ -102,7 +102,9 @@ module _
 
 ### The induction principle of the circle implies the dependent universal property of the circle
 
-To prove this, we have to show that the section of ev-free-loop-Π is also a retraction. This construction is also by the induction principle of the circle, but it requires (a minimal amount of) preparations.
+To prove this, we have to show that the section of ev-free-loop-Π is also a
+retraction. This construction is also by the induction principle of the circle,
+but it requires (a minimal amount of) preparations.
 
 ```agda
 module _

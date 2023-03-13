@@ -24,7 +24,8 @@ open import order-theory.posets
 
 ## Idea
 
-A join-semilattice is a poset in which every pair of elements has a least binary-upper bound.
+A join-semilattice is a poset in which every pair of elements has a least
+binary-upper bound.
 
 ## Definitions
 

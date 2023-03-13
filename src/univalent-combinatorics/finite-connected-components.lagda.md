@@ -20,7 +20,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A type is said to have finitely many connected components if its set truncation is a finite type.
+A type is said to have finitely many connected components if its set truncation
+is a finite type.
 
 ## Definition
 

@@ -36,7 +36,8 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A directed tree is a directed graph `G` equipped with a rood `r : G` such that for every vertex `x : G` the type of trails from `x` to `r` is contractible.
+A directed tree is a directed graph `G` equipped with a rood `r : G` such that
+for every vertex `x : G` the type of trails from `x` to `r` is contractible.
 
 ## Definition
 

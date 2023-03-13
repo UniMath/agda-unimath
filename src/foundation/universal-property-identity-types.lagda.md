@@ -19,7 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The universal property of identity types characterizes families of maps out of the identity type. This universal property is also known as the type theoretic Yoneda lemma.
+The universal property of identity types characterizes families of maps out of
+the identity type. This universal property is also known as the type theoretic
+Yoneda lemma.
 
 ## Theorem
 

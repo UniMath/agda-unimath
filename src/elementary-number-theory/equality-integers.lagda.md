@@ -35,7 +35,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-An equality predicate is defined by pattern matching on the integers. Then we show that this predicate characterizes the identit type of the integers
+An equality predicate is defined by pattern matching on the integers. Then we
+show that this predicate characterizes the identit type of the integers
 
 ## Definition
 

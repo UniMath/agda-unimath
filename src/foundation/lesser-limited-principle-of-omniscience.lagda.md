@@ -23,7 +23,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The lesser limited principle of omniscience asserts that for any sequence `f : ℕ → Fin 2` containing at most one `1`, either `f n ＝ 0` for all even `n` or `f n ＝ 0` for all odd `n`.
+The lesser limited principle of omniscience asserts that for any sequence
+`f : ℕ → Fin 2` containing at most one `1`, either `f n ＝ 0` for all even `n`
+or `f n ＝ 0` for all odd `n`.
 
 ## Definition
 
