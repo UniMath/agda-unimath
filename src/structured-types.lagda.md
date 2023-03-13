@@ -11,6 +11,7 @@ open import structured-types.equivalences-types-equipped-with-endomorphisms publ
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public
 open import structured-types.finite-multiplication-magmas public
+open import structured-types.function-magmas public
 open import structured-types.h-spaces public
 open import structured-types.initial-pointed-type-equipped-with-automorphism public
 open import structured-types.involutive-type-of-h-space-structures public
