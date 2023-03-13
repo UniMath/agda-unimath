@@ -1,4 +1,4 @@
-# Products in precategories
+# Exponential objects in precategories
 
 ```agda
 module category-theory.exponential-objects-precategories where
