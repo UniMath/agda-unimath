@@ -13,7 +13,8 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.function-semigroups
+open import group-theory.dependent-function-monoids
+open import group-theory.dependent-function-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -33,52 +34,45 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (X : UU l2)
   where
 
+  function-Monoid : Monoid (l1 ⊔ l2)
+  function-Monoid = Π-Monoid X (λ _ → M)
+
   semigroup-function-Monoid : Semigroup (l1 ⊔ l2)
-  semigroup-function-Monoid =
-    function-Semigroup (semigroup-Monoid M) X
+  semigroup-function-Monoid = semigroup-Π-Monoid X (λ _ → M)
 
   set-function-Monoid : Set (l1 ⊔ l2)
-  set-function-Monoid = set-Semigroup semigroup-function-Monoid
+  set-function-Monoid = set-Π-Monoid X (λ _ → M)
 
   type-function-Monoid : UU (l1 ⊔ l2)
-  type-function-Monoid = type-Semigroup semigroup-function-Monoid
+  type-function-Monoid = type-Π-Monoid X (λ _ → M)
 
   mul-function-Monoid :
     (f g : type-function-Monoid) → type-function-Monoid
-  mul-function-Monoid = mul-Semigroup semigroup-function-Monoid
+  mul-function-Monoid = mul-Π-Monoid X (λ _ → M)
 
   associative-mul-function-Monoid :
     (f g h : type-function-Monoid) →
     mul-function-Monoid (mul-function-Monoid f g) h ＝
     mul-function-Monoid f (mul-function-Monoid g h)
   associative-mul-function-Monoid =
-    associative-mul-Semigroup semigroup-function-Monoid
+    associative-mul-Π-Monoid X (λ _ → M)
 
   unit-function-Monoid : type-function-Monoid
-  unit-function-Monoid x = unit-Monoid M
+  unit-function-Monoid = unit-Π-Monoid X (λ _ → M)
 
   left-unit-law-mul-function-Monoid :
     (f : type-function-Monoid) →
     mul-function-Monoid unit-function-Monoid f ＝ f
-  left-unit-law-mul-function-Monoid f =
-    eq-htpy (λ x → left-unit-law-mul-Monoid M (f x))
-
+  left-unit-law-mul-function-Monoid =
+    left-unit-law-mul-Π-Monoid X (λ _ → M)
+    
   right-unit-law-mul-function-Monoid :
     (f : type-function-Monoid) →
     mul-function-Monoid f unit-function-Monoid ＝ f
-  right-unit-law-mul-function-Monoid f =
-    eq-htpy (λ x → right-unit-law-mul-Monoid M (f x))
+  right-unit-law-mul-function-Monoid =
+    right-unit-law-mul-Π-Monoid X (λ _ → M)
 
   is-unital-function-Monoid :
     is-unital-Semigroup semigroup-function-Monoid
-  pr1 is-unital-function-Monoid =
-    unit-function-Monoid
-  pr1 (pr2 is-unital-function-Monoid) =
-    left-unit-law-mul-function-Monoid
-  pr2 (pr2 is-unital-function-Monoid) =
-    right-unit-law-mul-function-Monoid
-
-  function-Monoid : Monoid (l1 ⊔ l2)
-  pr1 function-Monoid = semigroup-function-Monoid
-  pr2 function-Monoid = is-unital-function-Monoid
+  is-unital-function-Monoid = is-unital-Π-Monoid X (λ _ → M)
 ```
