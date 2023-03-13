@@ -92,20 +92,15 @@ MODULE_INDEX
 
 if __name__ == "__main__":
 
-    status = 0
     root = "src"
 
-    index_path = "MODULE-INDEX.md"
     summary_path = "SUMMARY.md"
     index_header = "# Formalisation in Agda"
 
     index_content, status = generate_index(root, index_header)
-
-    with open(index_path, "w") as index_file:
-        index_file.write(index_content)
-
-    summary_contents = summary_template.replace("MODULE_INDEX", index_content)
-    with open(summary_path, "w") as summary_file:
-        summary_file.write(summary_contents)
-
+    if status == 0:
+        summary_contents = summary_template.replace(
+            "MODULE_INDEX", index_content)
+        with open(summary_path, "w") as summary_file:
+            summary_file.write(summary_contents)
     sys.exit(status)
