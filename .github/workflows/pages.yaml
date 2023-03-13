@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: main
+
       - uses: r-lib/actions/setup-pandoc@v2
         with:
           pandoc-version: '3.0.1'
@@ -70,6 +71,14 @@ jobs:
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: 'latest'
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.1'
+          check-latest: true
+          cache: 'pip'
+
+      - run: pip install -r main/scripts/requirements.txt
 
       - name: Generate book
         run: |

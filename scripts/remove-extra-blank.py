@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 hooks/remove-extra-blank.py fileName.lagda.md
+# $ python3 scripts/remove-extra-blank.py fileName.lagda.md
 
 import sys
 import utils
