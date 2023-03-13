@@ -16,7 +16,8 @@ if __name__ == "__main__":
 
     def filter_agda_files(f): return utils.is_agda_file(
         pathlib.Path(f)) and os.path.dirname(f) != root
-    agda_files = sorted(filter(filter_agda_files, utils.get_files_recursively(root)))
+    agda_files = sorted(
+        filter(filter_agda_files, utils.get_files_recursively(root)))
 
     for i, agda_file in enumerate(agda_files):
         i_string = str(i+1).rjust(len(str(len(agda_files))))

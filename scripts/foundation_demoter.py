@@ -36,7 +36,8 @@ if __name__ == "__main__":
         lambda f: "foundation." + f[:f.rfind(".lagda.md")], foundation_files_without_definitions))
 
     print("The following module imports can be fast-tracked, as they do not have any definitions:")
-    print(*map(lambda m: " - " + m, sorted(foundation_modules_without_definitions)), sep="\n")
+    print(*map(lambda m: " - " + m,
+          sorted(foundation_modules_without_definitions)), sep="\n")
     print()
 
     for i, agda_file in enumerate(foundation_and_core_files):
