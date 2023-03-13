@@ -24,7 +24,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-Since isomorphic semigroups are equal, the precategory of semigroups is a category.
+Since isomorphic semigroups are equal, the precategory of semigroups is a
+category.
 
 ## Definition
 

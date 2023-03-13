@@ -32,7 +32,9 @@ open import foundation-core.equivalence-relations
 
 ## Idea
 
-A map `f : A → B` into a set `B` satisfies the universal property of the set truncation of `A` if any map `A → C` into a set `C` extends uniquely along `f` to a map `B → C`.
+A map `f : A → B` into a set `B` satisfies the universal property of the set
+truncation of `A` if any map `A → C` into a set `C` extends uniquely along `f`
+to a map `B → C`.
 
 ## Definition
 

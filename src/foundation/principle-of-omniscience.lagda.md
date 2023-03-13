@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type `X` is said to satisfy the principle of omniscience if every decidable subtype of `X` is either inhabited or empty.
+A type `X` is said to satisfy the principle of omniscience if every decidable
+subtype of `X` is either inhabited or empty.
 
 ```agda
 is-omniscient-Prop : {l : Level} → UU l → Prop (lsuc lzero ⊔ l)

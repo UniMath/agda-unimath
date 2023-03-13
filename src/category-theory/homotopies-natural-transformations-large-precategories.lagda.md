@@ -22,9 +22,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two natural transformations `α β : F ⇒ G` are homotopic if for every object `x` there is an identity `Id (α x) (β x)`.
+Two natural transformations `α β : F ⇒ G` are homotopic if for every object `x`
+there is an identity `Id (α x) (β x)`.
 
-In `Setω` the identity type is not available. If it were, we would be able to characterize the identity type of natural transformations from `F` to `G` as the type of homotopies of natural transformations.
+In `Setω` the identity type is not available. If it were, we would be able to
+characterize the identity type of natural transformations from `F` to `G` as the
+type of homotopies of natural transformations.
 
 ## Definition
 
@@ -64,7 +67,8 @@ module _
 
 ### Concatenation of homotopies
 
-A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `γ` to form a homotopy from `α` to `γ`. The concatenation is associative.
+A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `γ`
+to form a homotopy from `α` to `γ`. The concatenation is associative.
 
 ```agda
   concat-htpy-natural-transformation-Large-Precat :

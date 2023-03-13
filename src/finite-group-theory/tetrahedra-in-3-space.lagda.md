@@ -20,9 +20,12 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-The type of tetrahedra in 3-dimensional space is a type of tetrahedra that can be rotated, but not reflected. In other words, the symmetry group of the tetrahedra in 3-dimensional space is the alternating group `A₄`.
+The type of tetrahedra in 3-dimensional space is a type of tetrahedra that can
+be rotated, but not reflected. In other words, the symmetry group of the
+tetrahedra in 3-dimensional space is the alternating group `A₄`.
 
-Note that any rotation of a tetrahedron in 3-space induces a rotation on the set of opposing pairs of edges. There are three such pairs of edges.
+Note that any rotation of a tetrahedron in 3-space induces a rotation on the set
+of opposing pairs of edges. There are three such pairs of edges.
 
 ## Definition
 

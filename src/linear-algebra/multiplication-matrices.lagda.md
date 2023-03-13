@@ -62,9 +62,9 @@ mul-transpose mulK-comm (a ∷ as) b = {!!}
 
 ## Properties of Matrix Multiplication
 
- - distributive laws (incomplete)
- - associativity (TODO)
- - identity (TODO)
+- distributive laws (incomplete)
+- associativity (TODO)
+- identity (TODO)
 
 ```agda
 {-

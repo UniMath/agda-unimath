@@ -26,7 +26,9 @@ open import trees.w-types
 
 ## Idea
 
-Consider two elements `x` and `y` of a W-type `𝕎 A B`. We say that the rank of `x` is at most the rank of `y` if for every element `x' ∈ x` and for every element `y' ∈ y` the rank of `x'` is at most the rank of `y'`.
+Consider two elements `x` and `y` of a W-type `𝕎 A B`. We say that the rank of
+`x` is at most the rank of `y` if for every element `x' ∈ x` and for every
+element `y' ∈ y` the rank of `x'` is at most the rank of `y'`.
 
 ## Definition
 

@@ -15,7 +15,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The type of truncation levels is a type similar to the type of natural numbers, but starting the count at -2, so that sets have truncation level 0.
+The type of truncation levels is a type similar to the type of natural numbers,
+but starting the count at -2, so that sets have truncation level 0.
 
 ## Definition
 

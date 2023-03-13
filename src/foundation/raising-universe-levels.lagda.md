@@ -21,7 +21,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-In Agda, types have a designated universe levels, and universes in Agda don't overlap. Using `data` types we can construct for any type `A` of universe level `l` an equivalent type in any higher universe.
+In Agda, types have a designated universe levels, and universes in Agda don't
+overlap. Using `data` types we can construct for any type `A` of universe level
+`l` an equivalent type in any higher universe.
 
 ## Definition
 

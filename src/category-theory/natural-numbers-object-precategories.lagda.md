@@ -21,7 +21,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Let `C` be a precategory with a terminal object `t`. A natural numbers object in `C` is an object `n` with morphisms `z : hom t n` and `s : hom n n` such that for any object `x` and morphisms `q : hom t x` and `f : hom x x` there exists a unique `u : hom n x` such that:
+Let `C` be a precategory with a terminal object `t`. A natural numbers object in
+`C` is an object `n` with morphisms `z : hom t n` and `s : hom n n` such that
+for any object `x` and morphisms `q : hom t x` and `f : hom x x` there exists a
+unique `u : hom n x` such that:
+
 - u ∘ z = q
 - u ∘ s = f ∘ u.
 

@@ -29,7 +29,9 @@ A map `f : A → B` is injective if `Id (f x) (f y)` implies `Id x y`.
 
 ## Warning
 
-The notion of injective map is, however, not homotopically coherent. It is fine to use injectivity for maps between sets, but for maps between general types it is recommended to use the notion of embedding.
+The notion of injective map is, however, not homotopically coherent. It is fine
+to use injectivity for maps between sets, but for maps between general types it
+is recommended to use the notion of embedding.
 
 ## Definition
 

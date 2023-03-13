@@ -19,7 +19,8 @@ open import group-theory.monoids
 
 ## Idea
 
-Homomorphisms between two monoids are homomorphisms between their underlying semigroups that preserve the unit element.
+Homomorphisms between two monoids are homomorphisms between their underlying
+semigroups that preserve the unit element.
 
 ## Definition
 

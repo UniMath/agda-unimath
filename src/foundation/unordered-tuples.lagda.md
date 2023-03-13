@@ -34,7 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An unordered n-tuple of elements of a type `A` consists of an n-element set `X` equipped with a map `X → A`.
+An unordered n-tuple of elements of a type `A` consists of an n-element set `X`
+equipped with a map `X → A`.
 
 ## Definition
 

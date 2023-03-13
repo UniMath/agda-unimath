@@ -57,7 +57,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-2-element types are types that are merely equivalent to the standard 2-element type `Fin 2`.
+2-element types are types that are merely equivalent to the standard 2-element
+type `Fin 2`.
 
 ## Definition
 

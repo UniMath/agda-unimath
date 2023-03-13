@@ -19,7 +19,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **pointed section** of a pointed map `f : A →* B` consists of a pointed map `g : B →* A` equipped with a pointed homotopy `H : (f ∘* g) ~* id`.
+A **pointed section** of a pointed map `f : A →* B` consists of a pointed map
+`g : B →* A` equipped with a pointed homotopy `H : (f ∘* g) ~* id`.
 
 ```agda
 pointed-section-Pointed-Type :

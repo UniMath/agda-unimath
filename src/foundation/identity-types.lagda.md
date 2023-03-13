@@ -24,7 +24,11 @@ open import foundation-core.homotopies
 
 ## Idea
 
-The equality relation on a type is a reflexive relation, with the universal property that it maps uniquely into any other reflexive relation. In type theory, we introduce the identity type as an inductive family of types, where the induction principle can be understood as expressing that the identity type is the least reflexive relation.
+The equality relation on a type is a reflexive relation, with the universal
+property that it maps uniquely into any other reflexive relation. In type
+theory, we introduce the identity type as an inductive family of types, where
+the induction principle can be understood as expressing that the identity type
+is the least reflexive relation.
 
 ## Properties
 

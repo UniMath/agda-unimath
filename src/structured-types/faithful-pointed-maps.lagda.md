@@ -20,7 +20,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A faithful pointed map from `A` to `B` is a pointed map from `A` to `B` of which the underlying map is faithful.
+A faithful pointed map from `A` to `B` is a pointed map from `A` to `B` of which
+the underlying map is faithful.
 
 ## Definition
 

@@ -1,7 +1,8 @@
 # Dependent paths
 
-We characterize dependent paths in the family of depedent paths;
-define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
+We characterize dependent paths in the family of depedent paths; define the
+groupoidal operators on dependent paths; define the cohrences paths: prove the
+operators are equivalences.
 
 ```agda
 module foundation.dependent-paths where
@@ -157,8 +158,9 @@ module _
     ap (λ t → tr B t b0) (right-inv p01)))
 ```
 
-Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws.
-Though, due to the dependent nature, the naive identities are not well typed. So these identities involve transporting.
+Now we prove these paths satisfy identities analgous to the usual unit, inverse,
+and associativity laws. Though, due to the dependent nature, the naive
+identities are not well typed. So these identities involve transporting.
 
 ```agda
 module _

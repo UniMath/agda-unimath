@@ -19,7 +19,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A radical ideal in a ring R is a two-sided ideal I such that `1 + x` is a multiplicative unit for every `x ∈ I`.
+A radical ideal in a ring R is a two-sided ideal I such that `1 + x` is a
+multiplicative unit for every `x ∈ I`.
 
 ## Definition
 

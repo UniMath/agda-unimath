@@ -24,13 +24,15 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a type `A` equipped with a type family `B` over `A`, the polynomial endofunctor `P A B` is defined by
+Given a type `A` equipped with a type family `B` over `A`, the polynomial
+endofunctor `P A B` is defined by
 
 ```md
   X ↦ Σ (x : A), (B x → X)
 ```
 
-Polynomial endofunctors are important in the study of W-types, and also in the study of combinatorial species.
+Polynomial endofunctors are important in the study of W-types, and also in the
+study of combinatorial species.
 
 ## Definitions
 

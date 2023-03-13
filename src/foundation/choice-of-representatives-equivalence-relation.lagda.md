@@ -31,7 +31,8 @@ open import foundation-core.equivalence-relations
 
 ## Idea
 
-If we can construct a choice of representatives for each equivalence class, then we can construct the set quotient as a retract of the original type.
+If we can construct a choice of representatives for each equivalence class, then
+we can construct the set quotient as a retract of the original type.
 
 ```agda
 module _

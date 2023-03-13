@@ -50,13 +50,16 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Bezout's lemma shows that for any two natural numbers `x` and `y` there exist `k` and `l` such that `dist-ℕ (kx,ly) = gcd(x,y)`. To prove this, note that the predicate `P : ℕ → UU lzero` given by
+Bezout's lemma shows that for any two natural numbers `x` and `y` there exist
+`k` and `l` such that `dist-ℕ (kx,ly) = gcd(x,y)`. To prove this, note that the
+predicate `P : ℕ → UU lzero` given by
 
 ```md
   P z := Σ (k : ℕ), Σ (l : ℕ), dist-ℕ (kx, ly) = z
 ```
 
-is decidable, because `P z ⇔ [y]_x | [z]_x` in `ℤ/x`. The least positive `z` such that `P z` holds is `gcd x y`.
+is decidable, because `P z ⇔ [y]_x | [z]_x` in `ℤ/x`. The least positive `z`
+such that `P z` holds is `gcd x y`.
 
 ## Definitions
 
@@ -87,7 +90,9 @@ is-distance-between-multiples-sym-ℕ x y z (pair k (pair l eqn)) =
 
 ### If `z = dist-ℕ (kx, ly)` for some `k` and `l`, then `[y] | [z]` in `ℤ-Mod x`
 
-If `z = dist-ℕ (kx, ly)` for some `k` and `l`, then it follows that `ly ≡ ±z mod x`. It follows that `±ly ≡ z mod x`, and therefore that `[y] | [z]` in `ℤ-Mod x`
+If `z = dist-ℕ (kx, ly)` for some `k` and `l`, then it follows that
+`ly ≡ ±z mod x`. It follows that `±ly ≡ z mod x`, and therefore that `[y] | [z]`
+in `ℤ-Mod x`
 
 ```agda
 int-is-distance-between-multiples-ℕ :
@@ -225,7 +230,15 @@ div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) =
 ```
 
 ### If `[y] | [z]` in `ℤ-Mod x`, then `z = dist-ℕ (kx, ly)` for some `k` and `l`
-If `x = 0`, then we can simply argue in `ℤ`. Otherwise, if `[y] | [z]` in `ℤ-Mod x`, there exists some equivalence class `u` in `ℤ-Mod x` such that `[u] [y] ≡ [z]` as a congruence mod `x`. This `u` can always be chosen such that `x > u ≥ 0`. Therefore, there exists some integer `a ≥ 0` such that `ax = uy - z`, or `ax = z - uy`. In the first case, we can extract the distance condition we desire. In the other case, we have that `ax + uy = z`. This can be written as `(a + y)x + (u - x)y = z`, so that the second term is non-positive. Then, in this case, we again can extract the distance condition we desire.
+
+If `x = 0`, then we can simply argue in `ℤ`. Otherwise, if `[y] | [z]` in
+`ℤ-Mod x`, there exists some equivalence class `u` in `ℤ-Mod x` such that
+`[u] [y] ≡ [z]` as a congruence mod `x`. This `u` can always be chosen such that
+`x > u ≥ 0`. Therefore, there exists some integer `a ≥ 0` such that
+`ax = uy - z`, or `ax = z - uy`. In the first case, we can extract the distance
+condition we desire. In the other case, we have that `ax + uy = z`. This can be
+written as `(a + y)x + (u - x)y = z`, so that the second term is non-positive.
+Then, in this case, we again can extract the distance condition we desire.
 
 ```agda
 cong-div-mod-ℤ : (x y z : ℕ) → (q : div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))
@@ -555,7 +568,9 @@ is-decidable-is-distance-between-multiples-ℕ x y z =
 
 ## Theorem
 
-Since `is-distance-between-multiples-ℕ x y z` is decidable, we can prove Bezout's lemma by the well-ordering principle. First, take the least positive distance `d` between multiples of `x` and `y`.
+Since `is-distance-between-multiples-ℕ x y z` is decidable, we can prove
+Bezout's lemma by the well-ordering principle. First, take the least positive
+distance `d` between multiples of `x` and `y`.
 
 ```agda
 pos-distance-between-multiples : (x y z : ℕ) → UU lzero
@@ -587,7 +602,9 @@ minimal-positive-distance : (x y : ℕ) → ℕ
 minimal-positive-distance x y = pr1 (minimal-pos-distance-between-multiples x y)
 ```
 
-Then `d` divides both `x` and `y`. Since `gcd x y` divides any number of the form `dist-ℕ (kx,ly)`, it follows that `gcd x y | d`, and hence that `gcd x y ＝ d`.
+Then `d` divides both `x` and `y`. Since `gcd x y` divides any number of the
+form `dist-ℕ (kx,ly)`, it follows that `gcd x y | d`, and hence that
+`gcd x y ＝ d`.
 
 ```agda
 minimal-positive-distance-is-distance : (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → (is-distance-between-multiples-ℕ x y (minimal-positive-distance x y))
@@ -1193,7 +1210,9 @@ bezouts-lemma-ℕ x y H = antisymmetric-div-ℕ (minimal-positive-distance x y) 
 bezouts-lemma-eqn-ℕ : (x y : ℕ) → (H : is-nonzero-ℕ (add-ℕ x y)) → dist-ℕ (mul-ℕ (minimal-positive-distance-x-coeff x y H) x) (mul-ℕ (minimal-positive-distance-y-coeff x y H) y) ＝ gcd-ℕ x y
 bezouts-lemma-eqn-ℕ x y H = minimal-positive-distance-eqn x y H ∙ bezouts-lemma-ℕ x y H
 ```
+
 ## Bezout's Lemma on `ℤ`
+
 ```agda
 bezouts-lemma-eqn-to-int :
   (x y : ℤ) → (H : is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y)))
@@ -1409,9 +1428,11 @@ bezouts-lemma-ℤ (inr (inr x)) (inr (inl star)) = pair one-ℤ (pair one-ℤ eq
 bezouts-lemma-ℤ (inr (inr x)) (inr (inr y)) = bezouts-lemma-pos-ints (inr (inr x)) (inr (inr y)) star star
 ```
 
-Now that Bezout's Lemma has been established, we establish a few corollaries of Bezout.
+Now that Bezout's Lemma has been established, we establish a few corollaries of
+Bezout.
 
 ### If `x | y z` and `gcd-Z x y ＝ 1`, then `x | z`.
+
 ```agda
 div-right-factor-coprime-ℤ : (x y z : ℤ) → (div-ℤ x (mul-ℤ y z)) → (gcd-ℤ x y ＝ one-ℤ) → div-ℤ x z
 div-right-factor-coprime-ℤ x y z H K = pair (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) eqn

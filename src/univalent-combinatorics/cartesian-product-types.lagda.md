@@ -44,7 +44,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The cartesian product of finite types is finite. We obtain a cartesian product operation on finite types.
+The cartesian product of finite types is finite. We obtain a cartesian product
+operation on finite types.
 
 ### The standard finite types are closed under cartesian products
 

@@ -22,7 +22,8 @@ open import order-theory.posets
 
 ## Idea
 
-A large poset is a large preorder such that the restriction of the ordering relation to any particular universe level is antisymmetric
+A large poset is a large preorder such that the restriction of the ordering
+relation to any particular universe level is antisymmetric
 
 ## Definition
 

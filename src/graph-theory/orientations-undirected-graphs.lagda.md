@@ -19,7 +19,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An orientation of an undirected graph is a function that picks a direction for every edge.
+An orientation of an undirected graph is a function that picks a direction for
+every edge.
 
 ## Definition
 

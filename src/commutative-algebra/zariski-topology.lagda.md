@@ -23,7 +23,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The Zariski topology on the set of prime ideals in a commutative ring is described by what the closed sets are: A subset `I` of prime ideals is closed if it is the intersection of all the prime ideals that
+The Zariski topology on the set of prime ideals in a commutative ring is
+described by what the closed sets are: A subset `I` of prime ideals is closed if
+it is the intersection of all the prime ideals that
 
 ## Definitions
 

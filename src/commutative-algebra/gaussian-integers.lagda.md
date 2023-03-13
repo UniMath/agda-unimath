@@ -36,7 +36,8 @@ open import ring-theory.rings
 
 ## Idea
 
-The Gaussian integers are the complex numbers of the form `a + bi`, where `a` and `b` are integers.
+The Gaussian integers are the complex numbers of the form `a + bi`, where `a`
+and `b` are integers.
 
 ## Definition
 

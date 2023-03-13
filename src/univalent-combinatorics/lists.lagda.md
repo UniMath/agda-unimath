@@ -37,7 +37,8 @@ open import group-theory.monoids
 
 ## Idea
 
-The type of lists of elements of a type `A` is defined inductively, with an empty list and an operation that extends a list with one element from `A`.
+The type of lists of elements of a type `A` is defined inductively, with an
+empty list and an operation that extends a list with one element from `A`.
 
 ## Definition
 

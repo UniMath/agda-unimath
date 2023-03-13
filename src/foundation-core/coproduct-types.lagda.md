@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The coproduct of two types `A` and `B` can be thought of as the disjoint union of `A` and `B`.
+The coproduct of two types `A` and `B` can be thought of as the disjoint union
+of `A` and `B`.
 
 ## Definition
 

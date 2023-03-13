@@ -31,7 +31,8 @@ open import group-theory.homomorphisms-concrete-group-actions
 
 ## Idea
 
-An equivalence of concrete group actions from `X` to `Y` is a family of equivalences from `X u` to `Y u` indexed by `u : BG`.
+An equivalence of concrete group actions from `X` to `Y` is a family of
+equivalences from `X u` to `Y u` indexed by `u : BG`.
 
 ## Definition
 

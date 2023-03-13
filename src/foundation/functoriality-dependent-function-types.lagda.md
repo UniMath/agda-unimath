@@ -36,7 +36,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The type constructor for dependent function types acts contravariantly in its first argument, and covariantly in its second argument.
+The type constructor for dependent function types acts contravariantly in its
+first argument, and covariantly in its second argument.
 
 ## Properties
 

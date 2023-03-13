@@ -25,7 +25,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A binary relation on a type `A` is a family of types `R x y` depending on two variables `x y : A`. In the special case where each `R x y` is a proposition, we say that the relation is valued in propositions.
+A binary relation on a type `A` is a family of types `R x y` depending on two
+variables `x y : A`. In the special case where each `R x y` is a proposition, we
+say that the relation is valued in propositions.
 
 ## Definition
 

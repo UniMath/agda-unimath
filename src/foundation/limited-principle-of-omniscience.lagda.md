@@ -23,7 +23,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The **Limited Principle of Omniscience** asserts that for every sequence `f : ℕ → Fin 2` either there exists an `n` such that `f n ＝ 1` or for all `n` we have `f n ＝ 0`.
+The **Limited Principle of Omniscience** asserts that for every sequence
+`f : ℕ → Fin 2` either there exists an `n` such that `f n ＝ 1` or for all `n`
+we have `f n ＝ 0`.
 
 ## Definition
 

@@ -41,7 +41,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A 2-element subtype of a type `A` is a subtype `P` of `A` of which its underlying type `Σ A P` has cardinality 2. Such a subtype is said to be decidable if the proposition `P x` is decidable for every `x : A`.
+A 2-element subtype of a type `A` is a subtype `P` of `A` of which its
+underlying type `Σ A P` has cardinality 2. Such a subtype is said to be
+decidable if the proposition `P x` is decidable for every `x : A`.
 
 ## Definitions
 
@@ -144,7 +146,8 @@ module _
 
 ### Morphisms of 2-element-subtypes
 
-A moprhism of 2-element subtypes `P` and `Q` is just a family of maps `P x → Q x`.
+A moprhism of 2-element subtypes `P` and `Q` is just a family of maps
+`P x → Q x`.
 
 ```agda
 {-

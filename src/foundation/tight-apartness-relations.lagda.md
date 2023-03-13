@@ -23,7 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A relation `R` is said to be tight if for every `x y : A` we have `¬ (R x y) → (x ＝ y)`.
+A relation `R` is said to be tight if for every `x y : A` we have
+`¬ (R x y) → (x ＝ y)`.
 
 ## Definition
 

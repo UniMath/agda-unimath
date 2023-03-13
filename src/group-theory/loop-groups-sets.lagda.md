@@ -39,6 +39,7 @@ open import group-theory.symmetric-groups
 ## Idea
 
 ## Definitions
+
 ```agda
 module _
   {l : Level} (X : Set l)

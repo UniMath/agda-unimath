@@ -23,8 +23,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation of dependent pair types with respect to themselves
-and arithmetical laws with respect to contractible types.
+We prove laws for the manipulation of dependent pair types with respect to
+themselves and arithmetical laws with respect to contractible types.
 
 ## Properties
 
@@ -128,7 +128,8 @@ module _
 
 ### Associativity of dependent pair types
 
-There are two ways to express associativity for dependent pair types. We formalize both ways.
+There are two ways to express associativity for dependent pair types. We
+formalize both ways.
 
 ```agda
 module _

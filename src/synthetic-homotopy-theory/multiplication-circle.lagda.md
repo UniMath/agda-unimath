@@ -24,7 +24,11 @@ open import synthetic-homotopy-theory.circle
 
 ## Idea
 
-Classically, the circle can be viewed as the subset of the complex numbers of absolute value 1. The absolute value of a product of complex numbers is the product of their absolute values. This implies that when we multiply two complex numbers on the unit circle, the result is a complex number on the unit circle. This multiplicative structure carries over to the homotopy type of the circle.
+Classically, the circle can be viewed as the subset of the complex numbers of
+absolute value 1. The absolute value of a product of complex numbers is the
+product of their absolute values. This implies that when we multiply two complex
+numbers on the unit circle, the result is a complex number on the unit circle.
+This multiplicative structure carries over to the homotopy type of the circle.
 
 ## Definition
 

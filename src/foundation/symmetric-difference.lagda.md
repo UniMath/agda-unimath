@@ -26,7 +26,8 @@ open import foundation.xor
 
 ## Idea
 
-The symmetric difference of two subtypes `A` and `B` is the subtypes that contains the elements that are either in `A` or in `B` but not in both.
+The symmetric difference of two subtypes `A` and `B` is the subtypes that
+contains the elements that are either in `A` or in `B` but not in both.
 
 ## Definition
 

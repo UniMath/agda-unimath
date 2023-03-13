@@ -20,7 +20,10 @@ open import order-theory.posets
 
 ## Idea
 
-A lower bound of two elements `x` and `y` in a poset `P` is an element `z` such that both `z ≤ x` and `z ≤ y` hold. A greatest lower bound of `x` and `y` is a lower bound `z` of `x` and `y` such that `w ≤ z` holds for any lower bound of `x` and `y`.
+A lower bound of two elements `x` and `y` in a poset `P` is an element `z` such
+that both `z ≤ x` and `z ≤ y` hold. A greatest lower bound of `x` and `y` is a
+lower bound `z` of `x` and `y` such that `w ≤ z` holds for any lower bound of
+`x` and `y`.
 
 ## Definitions
 

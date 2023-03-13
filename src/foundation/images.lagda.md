@@ -35,7 +35,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The image of a map is a type that satisfies the universal property of the image of a map.
+The image of a map is a type that satisfies the universal property of the image
+of a map.
 
 ## Definition
 

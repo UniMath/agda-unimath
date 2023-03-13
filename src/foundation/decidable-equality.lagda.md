@@ -32,7 +32,8 @@ open import foundation.universe-levels
 
 ## Definition
 
-A type `A` is said to have decidable equality if `Id x y` is a decidable type for every `x y : A`.
+A type `A` is said to have decidable equality if `Id x y` is a decidable type
+for every `x y : A`.
 
 ```agda
 has-decidable-equality : {l : Level} (A : UU l) → UU l
@@ -91,7 +92,8 @@ has-decidable-equality-prod d e =
 
 ### Decidability of equality of the factors of a cartesian product.
 
-If `A × B` has decidable equality and `B` has an element, then `A` has decidable equality; and vice versa.
+If `A × B` has decidable equality and `B` has an element, then `A` has decidable
+equality; and vice versa.
 
 ```agda
 has-decidable-equality-left-factor :

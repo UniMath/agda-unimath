@@ -20,7 +20,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An embedding of undirected graphs is a morphism `f : G → H` of undirected graphs which is an embedding on vertices such that for each unordered pair `p` of vertices in `G` the map
+An embedding of undirected graphs is a morphism `f : G → H` of undirected graphs
+which is an embedding on vertices such that for each unordered pair `p` of
+vertices in `G` the map
 
 ```md
   edge-hom-Undirected-Graph G H :
@@ -28,7 +30,8 @@ An embedding of undirected graphs is a morphism `f : G → H` of undirected grap
     edge-Undirected-Graph H (unordered-pair-vertices-hom-Undirected-Graph G H f)
 ```
 
-is also an embedding. Embeddings of undirected graphs correspond to undirected subgraphs.
+is also an embedding. Embeddings of undirected graphs correspond to undirected
+subgraphs.
 
 ## Definition
 

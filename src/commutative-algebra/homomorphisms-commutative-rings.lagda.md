@@ -18,7 +18,8 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-A morphism of commutative rings is just a morphism between their underlying rings.
+A morphism of commutative rings is just a morphism between their underlying
+rings.
 
 ## Definition
 

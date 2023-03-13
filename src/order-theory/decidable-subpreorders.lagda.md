@@ -22,7 +22,8 @@ open import order-theory.subpreorders
 
 ## Idea
 
-A decidable subpreorder Q of P is a subpreorder Q of P such that for each element `x : P` it is decidable whether or not `x` is in `Q`.
+A decidable subpreorder Q of P is a subpreorder Q of P such that for each
+element `x : P` it is decidable whether or not `x` is in `Q`.
 
 ## Definition
 

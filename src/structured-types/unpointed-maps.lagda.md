@@ -17,7 +17,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The type of unpointed maps between pointed types is a pointed type, pointed at the constant function.
+The type of unpointed maps between pointed types is a pointed type, pointed at
+the constant function.
 
 ## Definition
 

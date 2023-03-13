@@ -1,60 +1,58 @@
 fail_fast: false
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
-    -   id: check-case-conflict
-    -   id: check-merge-conflict
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
 
--   repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: 'v2.0.2'
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: "v2.0.2"
     hooks:
-    -   id: autopep8
+      - id: autopep8
         name: Python scripts formatting
 
--   repo: local
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.0.0-alpha.6"
     hooks:
+      - id: prettier
+        name: CSS, JS, YAML and Markdown (no codeblocks) formatting
+        types_or: [css, javascript, yaml, markdown]
 
-    - id: remove-extra-blank-lines
-      name:  Remove extra blank lines in Agda files
-      entry: scripts/remove-extra-blank.py
-      language: python
-      always_run: true
-      verbose: true
-      files: ^src\/.+\.lagda\.md$
-      types_or: [markdown, text]
-      args: []
-      require_serial: false
+  - repo: local
+    hooks:
+      - id: remove-extra-blank-lines
+        name: Remove extra blank lines in Agda files
+        entry: scripts/remove-extra-blank.py
+        language: python
+        always_run: true
+        verbose: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+        args: []
+        require_serial: false
 
-    - id: fix-imports
-      name: Format Agda imports
-      entry: scripts/fix-imports.py
-      language: python
-      always_run: true
-      verbose: true
-      files: ^src\/.+\.lagda\.md$
-      types_or: [markdown, text]
-      args: []
-      require_serial: false
+      - id: fix-imports
+        name: Format Agda imports
+        entry: scripts/fix-imports.py
+        language: python
+        always_run: true
+        verbose: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+        args: []
+        require_serial: false
 
-    - id: generate-namespace-index-modules
-      name: Generate Agda namespace index modules
-      entry: scripts/generate_namespace_index_modules.py
-      language: python
-      always_run: true
-      verbose: true
-      types_or: [markdown, text]
-      args: []
-      require_serial: false
-
-
-
-# - repo: https://github.com/pre-commit/mirrors-prettier
-#   rev: "v3.0.0-alpha.6"
-#   hooks:
-#     - id: prettier
-#       types_or: [css, javascript, markdown,yaml]
+      - id: generate-namespace-index-modules
+        name: Generate Agda namespace index modules
+        entry: scripts/generate_namespace_index_modules.py
+        language: python
+        always_run: true
+        verbose: true
+        types_or: [markdown, text]
+        args: []
+        require_serial: false

@@ -21,7 +21,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Division rings are nontrivial rings in which all nonzero elements are invertible.
+Division rings are nontrivial rings in which all nonzero elements are
+invertible.
 
 ## Definition
 

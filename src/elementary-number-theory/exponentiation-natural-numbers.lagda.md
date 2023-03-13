@@ -21,7 +21,8 @@ open import foundation.identity-types
 
 ## Idea
 
-The exponent `m^n` is the number obtained by multiplying `m` with itself `n` times.
+The exponent `m^n` is the number obtained by multiplying `m` with itself `n`
+times.
 
 ## Definition
 

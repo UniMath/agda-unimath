@@ -31,14 +31,12 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A type family `A` over `X` is said to be _local at_ `f : Y → X`,
-or _`f`-local_, if the precomposition map
-`_∘ f : ((x : X) → A x) → ((y : Y) → A (f y))`
-is an equivalence.
+A type family `A` over `X` is said to be _local at_ `f : Y → X`, or _`f`-local_,
+if the precomposition map `_∘ f : ((x : X) → A x) → ((y : Y) → A (f y))` is an
+equivalence.
 
 Likewise a type `A` is said to be `f`-local if the precomposition map
-`_∘ f : (X → A) → (Y → A)`
-is an equivalence.
+`_∘ f : (X → A) → (Y → A)` is an equivalence.
 
 ## Definition
 

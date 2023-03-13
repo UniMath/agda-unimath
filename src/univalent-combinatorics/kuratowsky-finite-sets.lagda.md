@@ -28,7 +28,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A Kuratowsky finite type is a set `X` for which there exists a surjection into `X` from a standard finite type. In other words, the Kuratowsky finite types are the set-quotient of a standard finite type.
+A Kuratowsky finite type is a set `X` for which there exists a surjection into
+`X` from a standard finite type. In other words, the Kuratowsky finite types are
+the set-quotient of a standard finite type.
 
 ## Definition
 

@@ -210,7 +210,10 @@ comp-restrict-injective-map-is-not-exception-Maybe {f = f} is-inj-f x =
 
 ### Any equivalence `Maybe X ≃ Maybe Y` induces a map `X → Y`
 
-We don't use with-abstraction to keep full control over the definitional equalities, so we give the definition in two steps. After the definition is complete, we also prove two computation rules. Since we will prove computation rules, we make the definition abstract.
+We don't use with-abstraction to keep full control over the definitional
+equalities, so we give the definition in two steps. After the definition is
+complete, we also prove two computation rules. Since we will prove computation
+rules, we make the definition abstract.
 
 ```agda
 map-equiv-equiv-Maybe' :

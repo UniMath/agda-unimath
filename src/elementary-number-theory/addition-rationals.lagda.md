@@ -24,7 +24,9 @@ open import structured-types.pointed-types-equipped-with-automorphisms
 
 ## Idea
 
-We introduce addition on the rationals and derive its basic properties. Properties of addition with respect to inequality are derived in `inequality-ratonals`.
+We introduce addition on the rationals and derive its basic properties.
+Properties of addition with respect to inequality are derived in
+`inequality-ratonals`.
 
 ## Definition
 

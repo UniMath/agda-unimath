@@ -23,7 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-An apartness relation `#` is said to be standard if the law of excluded middle implies that `#` is equivalent to negated equality.
+An apartness relation `#` is said to be standard if the law of excluded middle
+implies that `#` is equivalent to negated equality.
 
 ## Definition
 

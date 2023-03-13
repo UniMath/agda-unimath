@@ -34,7 +34,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-An integer `d` divides an integer `x` if there is an integer `k` such that `mul-ℤ k d = x`. In other words, the type `div-ℤ d x` is the fiber `fib (mul-ℤ' d) x`.
+An integer `d` divides an integer `x` if there is an integer `k` such that
+`mul-ℤ k d = x`. In other words, the type `div-ℤ d x` is the fiber
+`fib (mul-ℤ' d) x`.
 
 ## Definition
 
@@ -103,6 +105,7 @@ is-zero-div-zero-ℤ :
   (x : ℤ) → div-ℤ zero-ℤ x → is-zero-ℤ x
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 ```
+
 ### If `k` divides `x` and `k` is 0 then `x` is 0
 
 ```agda
@@ -587,6 +590,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr neg = inr (equational-rea
 ```
 
 ### If we have that `sim-unit-ℤ x y` and both `x` and `y` have the same sign,
+
 then they are the same
 
 ```agda

@@ -16,7 +16,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A reflexive relation on a type `A` is a type-valued binary relation `R : A → A → U` equipped with a proof `r : (x : A) → R x x
+A reflexive relation on a type `A` is a type-valued binary relation
+`R : A → A → U` equipped with a proof `r : (x : A) → R x x
 
 ## Definition
 

@@ -24,7 +24,8 @@ open import group-theory.congruence-relations-groups
 
 ## Idea
 
-A congruence relation on an abelian group `A` is a congruence relation on the underlying group of `A`.
+A congruence relation on an abelian group `A` is a congruence relation on the
+underlying group of `A`.
 
 ## Definition
 

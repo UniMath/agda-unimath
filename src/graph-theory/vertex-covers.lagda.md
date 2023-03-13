@@ -28,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A vertex cover on a undirect graph is a set of vertices that includes at least one extremity of each edge of the graph
+A vertex cover on a undirect graph is a set of vertices that includes at least
+one extremity of each edge of the graph
 
 ## Definitions
 

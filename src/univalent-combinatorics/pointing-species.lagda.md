@@ -18,7 +18,8 @@ open import univalent-combinatorics.species
 
 ## Idea
 
-A pointing of a species `F` is the species `F*` given by `F* X := X × (F X)`. In other words, it is the species of pointed `F`-structures
+A pointing of a species `F` is the species `F*` given by `F* X := X × (F X)`. In
+other words, it is the species of pointed `F`-structures
 
 ## Definition
 

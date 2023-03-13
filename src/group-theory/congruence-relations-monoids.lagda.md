@@ -22,8 +22,8 @@ open import group-theory.monoids
 
 ## Idea
 
-A congruence relation on a monoid `M` is a congruence relation on the
-underlying semigroup of `M`.
+A congruence relation on a monoid `M` is a congruence relation on the underlying
+semigroup of `M`.
 
 ## Definition
 

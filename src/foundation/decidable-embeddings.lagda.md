@@ -40,7 +40,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map is said to be a decidable embedding if it is an embedding and its fibers are decidable types.
+A map is said to be a decidable embedding if it is an embedding and its fibers
+are decidable types.
 
 ## Definitions
 

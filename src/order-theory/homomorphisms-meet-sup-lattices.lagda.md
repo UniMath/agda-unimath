@@ -30,9 +30,12 @@ open import order-theory.sup-lattices
 </details>
 
 ## Idea
-A meet sup lattice homomorphism is an order preserving map between the underlying posets that preserves meets and sup.
-In fact any sup lattice neccesarily has binary meets but we have yet to give a proof of this fact in the library. Thus,
-we opt (for now) to treat the two structures as existing independently.
+
+A meet sup lattice homomorphism is an order preserving map between the
+underlying posets that preserves meets and sup. In fact any sup lattice
+neccesarily has binary meets but we have yet to give a proof of this fact in the
+library. Thus, we opt (for now) to treat the two structures as existing
+independently.
 
 ```agda
 

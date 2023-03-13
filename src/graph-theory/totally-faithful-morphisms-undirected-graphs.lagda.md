@@ -20,7 +20,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A totally faithful morphism of undirected graphs is a morphism `f : G → H` of undirected graphs such that for edge `e` in `H` there is at most one edge in `G` that `f` maps to `e`.
+A totally faithful morphism of undirected graphs is a morphism `f : G → H` of
+undirected graphs such that for edge `e` in `H` there is at most one edge in `G`
+that `f` maps to `e`.
 
 ## Definition
 

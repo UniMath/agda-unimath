@@ -19,7 +19,8 @@ open import group-theory.groups
 
 ## Idea
 
-The orbit of an element `x` in a G-set `X` is the set of elements of the form `gx`.
+The orbit of an element `x` in a G-set `X` is the set of elements of the form
+`gx`.
 
 ## Definition
 

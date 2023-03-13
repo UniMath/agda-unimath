@@ -22,7 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two natural numbers `x` and `y` are said to be relatively prime if their greatest common divisor is `1`.
+Two natural numbers `x` and `y` are said to be relatively prime if their
+greatest common divisor is `1`.
 
 ## Definition
 
@@ -65,3 +66,4 @@ pr2 (is-decidable-prop-relatively-prime-ℕ x y) =
 -- relatively-prime-is-unit-mod-ℕ :
 --   (x y : ℕ) → is-unit-ℤ-Mod x (mod-ℕ y) → relatively-prime-ℕ x y
 -- relatively-prime-is-unit-mod-ℕ x y H = ?
+```

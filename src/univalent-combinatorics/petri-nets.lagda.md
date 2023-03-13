@@ -61,4 +61,4 @@ module _
   outgoing-arc-Petri-Net t s = type-𝔽 (outgoing-arc-Petri-Net-𝔽 t s)
 ```
 
-[1]: <https://arxiv.org/abs/2005.05108>
+[1]: https://arxiv.org/abs/2005.05108

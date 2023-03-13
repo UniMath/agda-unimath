@@ -64,7 +64,9 @@ module _
         isretr-map-inv-is-equiv-is-equiv-postcomp
 ```
 
-The following version of the same theorem works when X and Y are in the same universe. The condition of inducing equivalences by postcomposition is simplified to that universe.
+The following version of the same theorem works when X and Y are in the same
+universe. The condition of inducing equivalences by postcomposition is
+simplified to that universe.
 
 ```agda
 is-equiv-is-equiv-postcomp' :

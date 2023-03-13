@@ -23,7 +23,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-If a type comes equipped with a counting of its elements, then it inherits the inequality relations from the standard finite types.
+If a type comes equipped with a counting of its elements, then it inherits the
+inequality relations from the standard finite types.
 
 ## Definition
 

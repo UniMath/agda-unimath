@@ -28,8 +28,9 @@ open import order-theory.sup-lattices
 </details>
 
 ## Idea: A frame is a poset that has binary meets and arbitrary joins and further satisfies the infinite distributive law.
-There are many equivalent ways to formulate this definition. Our choice here is simply motivated by a desire to avoid
-iterated sigma types.
+
+There are many equivalent ways to formulate this definition. Our choice here is
+simply motivated by a desire to avoid iterated sigma types.
 
 ```agda
 

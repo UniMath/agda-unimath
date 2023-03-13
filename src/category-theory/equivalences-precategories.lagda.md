@@ -20,7 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor `F : C → D` is an equivalence of categories if there is a functor `G : D → C` such that:
+A functor `F : C → D` is an equivalence of categories if there is a functor
+`G : D → C` such that:
+
 - `comp G F` is naturally isomorphic to the identity functor on `C`,
 - `comp F G` is naturally isomorphic to the identity functor on `D`.
 

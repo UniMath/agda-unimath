@@ -23,7 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The complement of a subtype `P` of `A` consists of the elements that are not in `P`.
+The complement of a subtype `P` of `A` consists of the elements that are not in
+`P`.
 
 ## Definition
 

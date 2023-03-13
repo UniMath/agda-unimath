@@ -28,7 +28,9 @@ open import graph-theory.neighbors-undirected-graphs
 
 ## Idea
 
-An equivalence of `(A,B)`-enriched undirected graphs from `G` to `H` consists of an equivalence `e` of the underlying graphs of `G` and `H` such that preserving the labeling and the equivalences on the neighbors
+An equivalence of `(A,B)`-enriched undirected graphs from `G` to `H` consists of
+an equivalence `e` of the underlying graphs of `G` and `H` such that preserving
+the labeling and the equivalences on the neighbors
 
 ## Definition
 

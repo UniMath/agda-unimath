@@ -19,7 +19,8 @@ open import group-theory.groups
 
 ## Idea
 
-Given a G-set `X`, the stabilizer group at an element `x` of `X` is the subgroup of elements `g` of `G` that keep `x` fixed.
+Given a G-set `X`, the stabilizer group at an element `x` of `X` is the subgroup
+of elements `g` of `G` that keep `x` fixed.
 
 ## Definition
 

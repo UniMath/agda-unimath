@@ -17,7 +17,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type family over the natural numbers has an upper bound `n`, if there is a function from `P x` to the type `x ≤ n` for all `x : ℕ`. Similar for strict upper bounds.
+A type family over the natural numbers has an upper bound `n`, if there is a
+function from `P x` to the type `x ≤ n` for all `x : ℕ`. Similar for strict
+upper bounds.
 
 ## Definition
 

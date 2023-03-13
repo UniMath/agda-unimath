@@ -888,3 +888,4 @@ module _
   triangle-distributive-trunc-Π-is-finite-Set =
     pr2 (center distributive-trunc-Π-is-finite-Set)
     -}
+```

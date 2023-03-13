@@ -21,7 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A morphism `f : x → y` is a monomorphism if whenever we have two morphisms `g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that postcomposition by `f` is an embedding.
+A morphism `f : x → y` is a monomorphism if whenever we have two morphisms
+`g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state
+this in Homotopy Type Theory is to say that postcomposition by `f` is an
+embedding.
 
 ## Definition
 

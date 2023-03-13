@@ -32,7 +32,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`. Equivalently, a set `X` is countable if there is a surjective map `f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
+A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`.
+Equivalently, a set `X` is countable if there is a surjective map
+`f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
 
 ## Definition
 
@@ -98,8 +100,7 @@ module _
             -}
 ```
 
--- ℕ → Σ (n : ℕ), P' n + ¬ (P' n)
---   → (Σ (n : ℕ), P' n) + (Σ (n : ℕ), ¬ (P' n))
---   → X + 1
+-- ℕ → Σ (n : ℕ), P' n + ¬ (P' n) -- → (Σ (n : ℕ), P' n) + (Σ (n : ℕ), ¬ (P' n))
+-- → X + 1
 
 -- P' := shift-ℕ ∅ P
