@@ -685,3 +685,4 @@ module fibered where
       slice : (X : system.type (type-theory.sys A)) →
               is-subtype-theory (slice-fibered-type-theory B X)
 -}
+```

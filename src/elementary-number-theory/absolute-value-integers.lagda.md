@@ -131,6 +131,7 @@ is-nonzero-abs-ℤ (inr (inr x)) H = is-nonzero-succ-ℕ x
 ```
 
 ### Absolute value is multiplicative
+
 ```agda
 neg-left-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
 neg-left-abs-ℤ-mul-ℤ x y = equational-reasoning

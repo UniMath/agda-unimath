@@ -29,7 +29,11 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-In order to construct an identification `Id x y` in a coproduct `coprod A B`, both `x` and `y` must be of the form `inl _` or of the form `inr _`. If that is the case, then an identification can be constructed by constructin an identification in A or in B, according to the case. This leads to the characterization of identity types of coproducts.
+In order to construct an identification `Id x y` in a coproduct `coprod A B`,
+both `x` and `y` must be of the form `inl _` or of the form `inr _`. If that is
+the case, then an identification can be constructed by constructin an
+identification in A or in B, according to the case. This leads to the
+characterization of identity types of coproducts.
 
 ## Definition
 
@@ -90,7 +94,8 @@ module _
   pr2 (extensionality-coprod x y) = is-equiv-Eq-eq-coprod x y
 ```
 
-Now we use the characterization of the identity type to obtain the desired equivalences.
+Now we use the characterization of the identity type to obtain the desired
+equivalences.
 
 ```agda
 module _

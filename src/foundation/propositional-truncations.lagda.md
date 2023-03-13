@@ -30,7 +30,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We have specified what it means to be a propositional truncation in the file `foundation.universal-property-propositional-truncation`. Here we use the postulate of the existence of truncations at all levels, found in the file `foundation.truncations`, to show that propositional truncations exist.
+We have specified what it means to be a propositional truncation in the file
+`foundation.universal-property-propositional-truncation`. Here we use the
+postulate of the existence of truncations at all levels, found in the file
+`foundation.truncations`, to show that propositional truncations exist.
 
 ## Definition
 

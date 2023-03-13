@@ -73,7 +73,8 @@ module _
 
 ### The gap-map into the canonical pullback
 
-The gap map of a square is the map fron the vertex of the cone into the canonical pullback.
+The gap map of a square is the map fron the vertex of the cone into the
+canonical pullback.
 
 ```agda
 module _
@@ -89,7 +90,9 @@ module _
 
 ### The `is-pullback` property
 
-The proposition is-pullback is the assertion that the gap map is an equivalence. Note that this proposition is small, whereas the universal property is a large proposition.
+The proposition is-pullback is the assertion that the gap map is an equivalence.
+Note that this proposition is small, whereas the universal property is a large
+proposition.
 
 ```agda
 module _

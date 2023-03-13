@@ -22,7 +22,8 @@ open import ring-theory.ideals-rings
 
 ## Idea
 
-A prime ideal is an ideal `I` in a commutative ring `R` such that for every `a,b : R` whe have `ab ∈ I ⇒ (a ∈ I) ∨ (b ∈ I)`.
+A prime ideal is an ideal `I` in a commutative ring `R` such that for every
+`a,b : R` whe have `ab ∈ I ⇒ (a ∈ I) ∨ (b ∈ I)`.
 
 ## Definition
 

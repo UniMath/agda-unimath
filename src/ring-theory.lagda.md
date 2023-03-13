@@ -9,7 +9,10 @@ open import ring-theory.binomial-theorem-semirings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
 open import ring-theory.dependent-products-rings public
+open import ring-theory.dependent-products-semirings public
 open import ring-theory.division-rings public
+open import ring-theory.function-rings public
+open import ring-theory.function-semirings public
 open import ring-theory.homomorphisms-rings public
 open import ring-theory.ideals-generated-by-subsets-rings public
 open import ring-theory.ideals-rings public

@@ -28,7 +28,8 @@ open import univalent-combinatorics.universal-property-standard-finite-types
 
 ## Idea
 
-Given an unordered pair of types, we can take their product. This is a symmetric version of the cartesian product operation on types.
+Given an unordered pair of types, we can take their product. This is a symmetric
+version of the cartesian product operation on types.
 
 ## Definition
 

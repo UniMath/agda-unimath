@@ -24,11 +24,15 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map `f : A → B` is split surjective if we can construct for every `b : B` an element in the fiber of `b`, meaning an element `a : A` equipped with an identification `f a ＝ b`.
+A map `f : A → B` is split surjective if we can construct for every `b : B` an
+element in the fiber of `b`, meaning an element `a : A` equipped with an
+identification `f a ＝ b`.
 
 ## Warning
 
-Note that split-surjectiveness is the Curry-Howard interpretation of surjectiveness. However, this is not a property, and the split surjective maps don't fit in a factorization system along with the injective maps.
+Note that split-surjectiveness is the Curry-Howard interpretation of
+surjectiveness. However, this is not a property, and the split surjective maps
+don't fit in a factorization system along with the injective maps.
 
 ## Definition
 

@@ -30,7 +30,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The connected component of a universe `UU l` at a type `A : UU l` is the type of all `X : UU l` that are merely equivalent to `A`. More generally, we define the component of a universe `UU l1` of types merely equal to `A : UU l2`.
+The connected component of a universe `UU l` at a type `A : UU l` is the type of
+all `X : UU l` that are merely equivalent to `A`. More generally, we define the
+component of a universe `UU l1` of types merely equal to `A : UU l2`.
 
 ## Definition
 

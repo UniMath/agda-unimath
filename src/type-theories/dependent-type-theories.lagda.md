@@ -21,7 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-We introduce the cagegory of dependent type theories, following Voevodsky's notion of B-systems. The category of generalised algebraic theories is defined to be this category. It should be equivalent to the category of essentially algebraic theories.
+We introduce the cagegory of dependent type theories, following Voevodsky's
+notion of B-systems. The category of generalised algebraic theories is defined
+to be this category. It should be equivalent to the category of essentially
+algebraic theories.
 
 ```agda
 module dependent where
@@ -1430,3 +1433,4 @@ module c-system where
       ( weakening-type-context A (extension-ctx X Γ) Y)
       ( weakening-context {!!} {!!} {!!})
 -}
+```

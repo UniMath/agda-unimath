@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two integers are said to be relatively prime if their greatest common divisor is 1.
+Two integers are said to be relatively prime if their greatest common divisor
+is 1.
 
 ## Definition
 

@@ -26,7 +26,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map `f : A → B` out of a type `A` equipped with an equivalence relation `R` is said to reflect `R` if we have `R x y → Id (f x) (f y)` for every `x y : A`.
+A map `f : A → B` out of a type `A` equipped with an equivalence relation `R` is
+said to reflect `R` if we have `R x y → Id (f x) (f y)` for every `x y : A`.
 
 ## Definitions
 

@@ -24,8 +24,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a pair of maps `f : A → X` and `g : B → Y`, there is a
-commuting square
+Given a pair of maps `f : A → X` and `g : B → Y`, there is a commuting square
 
 ```md
           - ∘ f
@@ -37,7 +36,8 @@ g ∘ - |            | g ∘ -
           - ∘ f
 ```
 
-The _pullback-hom_ of `f` and `g` is the comparison map from `B → X` to the pullback of the cospan:
+The _pullback-hom_ of `f` and `g` is the comparison map from `B → X` to the
+pullback of the cospan:
 
 ```md
       P -------> B → A
@@ -48,8 +48,8 @@ The _pullback-hom_ of `f` and `g` is the comparison map from `B → X` to the pu
           - ∘ f
 ```
 
-This pullback can be canonically understood as the type of fibered maps from
-`f` to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
+This pullback can be canonically understood as the type of fibered maps from `f`
+to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
 
 ## Definition
 
@@ -73,10 +73,9 @@ module _
 
 ### The pullback-hom
 
-The pullback-hom is the canonical gap map `(X → B) → type-pullback-hom`
-and can be interpreted as the map that takes a diagonal map `j` from
-the codomain of `f` to the domain of `g` to the fibered map
-`((g ∘ j) , (j ∘ f) , refl-htpy)`.
+The pullback-hom is the canonical gap map `(X → B) → type-pullback-hom` and can
+be interpreted as the map that takes a diagonal map `j` from the codomain of `f`
+to the domain of `g` to the fibered map `((g ∘ j) , (j ∘ f) , refl-htpy)`.
 
 ```agda
   pullback-hom : (X → B) → type-pullback-hom

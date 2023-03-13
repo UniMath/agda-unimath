@@ -24,7 +24,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The distance function between natural numbers measures how far two natural numbers are apart. In the agda-unimath library we often prefer to work with `dist-ℕ` over the partially defined subtraction operation.
+The distance function between natural numbers measures how far two natural
+numbers are apart. In the agda-unimath library we often prefer to work with
+`dist-ℕ` over the partially defined subtraction operation.
 
 ## Definition
 

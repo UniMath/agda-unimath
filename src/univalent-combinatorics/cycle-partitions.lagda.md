@@ -21,7 +21,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A cycle partition of a finite type `A` is a finite family of cyclic finite types equipped with an equivalence from `A` to the total space of the underlying types of the family. The type of cyclic partitions of `A` is equivalent to the type of permutations of `A`.
+A cycle partition of a finite type `A` is a finite family of cyclic finite types
+equipped with an equivalence from `A` to the total space of the underlying types
+of the family. The type of cyclic partitions of `A` is equivalent to the type of
+permutations of `A`.
 
 ## Definition
 

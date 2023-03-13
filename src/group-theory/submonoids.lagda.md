@@ -25,7 +25,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-A submonoid of a monoid `M` is a subset of `M` that contains the unit of `M` and is closed under multiplication.
+A submonoid of a monoid `M` is a subset of `M` that contains the unit of `M` and
+is closed under multiplication.
 
 ## Definitions
 

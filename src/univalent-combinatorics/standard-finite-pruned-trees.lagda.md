@@ -18,7 +18,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A standard finite pruned tree of height `n` can be thought of as a standard finite tree in which each path from the root to a leaf has length `n + 1`.
+A standard finite pruned tree of height `n` can be thought of as a standard
+finite tree in which each path from the root to a leaf has length `n + 1`.
 
 ## Definition
 

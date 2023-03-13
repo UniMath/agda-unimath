@@ -23,7 +23,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An undirected graph is said to be simple if it only contains edges between distinct points, and there is at most one edge between any two vertices.
+An undirected graph is said to be simple if it only contains edges between
+distinct points, and there is at most one edge between any two vertices.
 
 ## Definition
 

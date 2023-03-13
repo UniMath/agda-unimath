@@ -26,7 +26,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-For any point `x` in a finite type `X` of cardinality `n+1`, we can construct its complement, which is a type of cardinality `n`.
+For any point `x` in a finite type `X` of cardinality `n+1`, we can construct
+its complement, which is a type of cardinality `n`.
 
 ## Definition
 

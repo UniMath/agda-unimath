@@ -20,7 +20,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A reflexive relation `R` on a type `A` is said to be discrete if for every `x : A` the type `Σ A (R x)` is contractible. The (standard) discrete reflexive relation on a type is its identity type.
+A reflexive relation `R` on a type `A` is said to be discrete if for every
+`x : A` the type `Σ A (R x)` is contractible. The (standard) discrete reflexive
+relation on a type is its identity type.
 
 ## Definitions
 

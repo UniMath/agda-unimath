@@ -20,7 +20,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A binary operation `f : A → B → C` is said to be a binary embedding if the functions `λ x → f x b` and `λ y → f a y` are embeddings for each `a : A` and `b : B` respectively.
+A binary operation `f : A → B → C` is said to be a binary embedding if the
+functions `λ x → f x b` and `λ y → f a y` are embeddings for each `a : A` and
+`b : B` respectively.
 
 ## Definition
 

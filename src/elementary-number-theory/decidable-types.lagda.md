@@ -27,7 +27,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-We describe conditions under which dependent sums and dependent products are decidable.
+We describe conditions under which dependent sums and dependent products are
+decidable.
 
 ## Properties
 

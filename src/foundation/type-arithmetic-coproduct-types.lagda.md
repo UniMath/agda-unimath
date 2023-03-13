@@ -25,7 +25,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation of coproduct types with respect to themselves, cartesian products, and dependent pair types.
+We prove laws for the manipulation of coproduct types with respect to
+themselves, cartesian products, and dependent pair types.
+
 ## Laws
 
 ### Commutativity of coproducts

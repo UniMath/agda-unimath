@@ -25,7 +25,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Two types `X` and `Y` are said to be merely equivalent, if there exists an equivalence from `X` to `Y`. Propositional truncations are used to express mere equivalence.
+Two types `X` and `Y` are said to be merely equivalent, if there exists an
+equivalence from `X` to `Y`. Propositional truncations are used to express mere
+equivalence.
 
 ## Definition
 

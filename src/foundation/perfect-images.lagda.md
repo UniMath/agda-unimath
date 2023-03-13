@@ -33,11 +33,13 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f ) ^ n (a₀) = a`, consider also the following chain
+Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f ) ^ n (a₀) = a`,
+consider also the following chain
 
-  `a₀ --> f (a₀) --> g (f (a₀)) --> f (g (f (a₀))) --> ... --> (g ◦ f ) ^ n (a₀) = a`
+`a₀ --> f (a₀) --> g (f (a₀)) --> f (g (f (a₀))) --> ... --> (g ◦ f ) ^ n (a₀) = a`
 
-We say `a₀` is an origin for `a`, and  `a` is `perfect image` for `g` if any origin of `a` is in the image of `g`.
+We say `a₀` is an origin for `a`, and `a` is `perfect image` for `g` if any
+origin of `a` is in the image of `g`.
 
 ## Definition
 
@@ -53,7 +55,9 @@ module _
 
 ## Properties
 
-If `g` is an embedding, then `is-perfect-image a` is a proposition. In this case, if we assume law of exluded middle, we can show `is-perfect-image a` is a decidable type for any `a : A`.
+If `g` is an embedding, then `is-perfect-image a` is a proposition. In this
+case, if we assume law of exluded middle, we can show `is-perfect-image a` is a
+decidable type for any `a : A`.
 
 ```agda
 module _
@@ -77,7 +81,8 @@ module _
     lem (is-perfect-image-Prop a)
 ```
 
-If `a` is a perfect image for `g`, then `a` has a preimage under `g`. Just take n=zero in the definition.
+If `a` is a perfect image for `g`, then `a` has a preimage under `g`. Just take
+n=zero in the definition.
 
 ```agda
 module _
@@ -90,7 +95,9 @@ module _
   is-perfect-image-is-fib a ρ = ρ a 0 refl
 ```
 
-One can define a map from `A` to `B` restricting the domain to the perfect images of `g`. This gives a kind of section of g. When g is also an embedding, the map gives a kind of retraction of g.
+One can define a map from `A` to `B` restricting the domain to the perfect
+images of `g`. This gives a kind of section of g. When g is also an embedding,
+the map gives a kind of retraction of g.
 
 ```agda
 module _
@@ -138,7 +145,8 @@ module _
   previous-perfect-image a γ a₀ n p = γ a₀ (succ-ℕ n) (ap (g ∘ f) p)
 ```
 
-Perfect images goes to a disjoint place under `inverse-of-perfect-image` than `f`
+Perfect images goes to a disjoint place under `inverse-of-perfect-image` than
+`f`
 
 ```agda
 module _
@@ -160,7 +168,8 @@ module _
     v = tr (λ _ → ¬ (is-perfect-image f g _)) q s
 ```
 
-Using the property above, we can talk about origins of `a` which are not images of `g`.
+Using the property above, we can talk about origins of `a` which are not images
+of `g`.
 
 ```agda
 module _
@@ -172,7 +181,8 @@ module _
     Σ A (λ a₀ → (Σ ℕ (λ n →  ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
 ```
 
-If we assume law of excluded middle and `g` is embedding, we can prove that if `is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
+If we assume law of excluded middle and `g` is embedding, we can prove that if
+`is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
 
 ```agda
 module _
@@ -192,7 +202,9 @@ module _
       (lem (pair (fib g a₀) (is-prop-map-is-emb is-emb-g a₀)))
 ```
 
-The following property states that if `g (b)` is not a perfect image, then `b` has an `f` fiber `a` that is not a perfect image for `g`. Again, we need to assume law of excluded middle and that both `g` and `f` are embedding.
+The following property states that if `g (b)` is not a perfect image, then `b`
+has an `f` fiber `a` that is not a perfect image for `g`. Again, we need to
+assume law of excluded middle and that both `g` and `f` are embedding.
 
 ```agda
 module _

@@ -20,7 +20,9 @@ open import order-theory.order-preserving-maps-posets
 </details>
 
 ## Idea
-A meet semi-lattice homomorphism is an order preserving map between the underlying posets that also preserves meets.
+
+A meet semi-lattice homomorphism is an order preserving map between the
+underlying posets that also preserves meets.
 
 ```agda
 

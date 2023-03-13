@@ -37,12 +37,11 @@ open import group-theory.subgroups-abelian-groups
 
 ## Idea
 
-Given a subgroup `B` of an abelian group `A`, the quotient group
-is an abelian group `A/B` equipped with a group homomorphism
-`q : A → A/B` such that `H ⊆ ker q`, and such that `q` satisfies the
-universal abelian group with the property that any group homomorphism
-`f : A → C` such that `B ⊆ ker f` extends uniquely along `q` to a
-group homomorphism `A/B → C`.
+Given a subgroup `B` of an abelian group `A`, the quotient group is an abelian
+group `A/B` equipped with a group homomorphism `q : A → A/B` such that
+`H ⊆ ker q`, and such that `q` satisfies the universal abelian group with the
+property that any group homomorphism `f : A → C` such that `B ⊆ ker f` extends
+uniquely along `q` to a group homomorphism `A/B → C`.
 
 ## Definitions
 

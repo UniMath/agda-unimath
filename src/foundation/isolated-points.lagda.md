@@ -40,7 +40,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A point `a : A` is considered to be isolated if `Id a x` is decidable for any `x`.
+A point `a : A` is considered to be isolated if `Id a x` is decidable for any
+`x`.
 
 ## Definitions
 

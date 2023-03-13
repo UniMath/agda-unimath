@@ -20,7 +20,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Structure is presented in type theory by dependent pair types. The structure identity principle is a way to characterize the identity type of a structure, using characterizations of the identity types of its components.
+Structure is presented in type theory by dependent pair types. The structure
+identity principle is a way to characterize the identity type of a structure,
+using characterizations of the identity types of its components.
 
 ## Lemma
 

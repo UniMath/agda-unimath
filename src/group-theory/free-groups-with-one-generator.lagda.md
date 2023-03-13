@@ -34,13 +34,15 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 
 ## Idea
 
-A group `F` equipped with an element `x : F` is said to satisfy the universal property of the free group with one generator if for every group `G` the map
+A group `F` equipped with an element `x : F` is said to satisfy the universal
+property of the free group with one generator if for every group `G` the map
 
 ```md
   type-hom-Group F G → type-Group G
 ```
 
-given by `h ↦ h x` is an equivalence. The group of integers is a free group with one generator.
+given by `h ↦ h x` is an equivalence. The group of integers is a free group with
+one generator.
 
 ## Definitions
 

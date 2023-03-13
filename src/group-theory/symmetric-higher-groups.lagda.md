@@ -22,7 +22,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The symmetric higher group of a type `X` is the connected component of the universe at `X`.
+The symmetric higher group of a type `X` is the connected component of the
+universe at `X`.
 
 ## Definition
 

@@ -26,7 +26,9 @@ open import linear-algebra.vectors-on-rings
 
 ## Idea
 
-Vectors on a commutative ring `R` are vectors on the underlying type of `R`. The commutative ring structur on `R` induces further structure on the type of vectors on `R`.
+Vectors on a commutative ring `R` are vectors on the underlying type of `R`. The
+commutative ring structur on `R` induces further structure on the type of
+vectors on `R`.
 
 ## Definitions
 

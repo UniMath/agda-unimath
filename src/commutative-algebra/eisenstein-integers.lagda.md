@@ -30,7 +30,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The Eisenstein integers are the complex numbers of the form `a + bω`, where `ω = -½ + ½√3i`, and where `a` and `b` are integers. Note that `ω` is a solution to the equation `ω² + ω + 1 = 0`.
+The Eisenstein integers are the complex numbers of the form `a + bω`, where
+`ω = -½ + ½√3i`, and where `a` and `b` are integers. Note that `ω` is a solution
+to the equation `ω² + ω + 1 = 0`.
 
 ## Definition
 

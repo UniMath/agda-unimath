@@ -41,7 +41,12 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given three types `A`, `B`, and `C` equipped with equivalence relations `R`, `S`, and `T`, respectively, any binary operation `f : A → B → C` such that for any `x x' : A` such that `R x x'` holds, and for any `y y' : B` such that `S y y'` holds, the relation `T (f x y) (f x' y')` holds extends uniquely to a binary operation `g : A/R → B/S → C/T` such that `g (q x) (q y) = q (f x y)` for all `x : A` and `y : B`.
+Given three types `A`, `B`, and `C` equipped with equivalence relations `R`,
+`S`, and `T`, respectively, any binary operation `f : A → B → C` such that for
+any `x x' : A` such that `R x x'` holds, and for any `y y' : B` such that
+`S y y'` holds, the relation `T (f x y) (f x' y')` holds extends uniquely to a
+binary operation `g : A/R → B/S → C/T` such that `g (q x) (q y) = q (f x y)` for
+all `x : A` and `y : B`.
 
 ## Definition
 

@@ -18,7 +18,9 @@ open import order-theory.subposets
 
 ## Idea
 
-Given two elements `x` and `y` in a poset `X`, the interval `[x, y]` is the subposet of `X` consisting of all elements `z` in `X` such that `x ≤ z` and `z ≤ y`.
+Given two elements `x` and `y` in a poset `X`, the interval `[x, y]` is the
+subposet of `X` consisting of all elements `z` in `X` such that `x ≤ z` and
+`z ≤ y`.
 
 ## Definition
 

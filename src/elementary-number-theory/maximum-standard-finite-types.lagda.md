@@ -23,7 +23,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define the operation of maximum (least upper bound) for the standard finite types.
+We define the operation of maximum (least upper bound) for the standard finite
+types.
 
 ## Definition
 

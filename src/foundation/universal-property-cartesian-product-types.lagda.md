@@ -28,7 +28,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of cartesian products characterizes maps into a cartesian product
+The universal property of cartesian products characterizes maps into a cartesian
+product
 
 ## Theorems
 

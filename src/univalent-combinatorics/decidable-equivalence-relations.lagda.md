@@ -21,7 +21,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A decidable equivalence relation on a finite type is an equivalence relation `R` such that each `R x y` is a decidable proposition.
+A decidable equivalence relation on a finite type is an equivalence relation `R`
+such that each `R x y` is a decidable proposition.
 
 ## Definition
 

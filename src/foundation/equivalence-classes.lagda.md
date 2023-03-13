@@ -41,7 +41,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An equivalence class of an equivalence relation `R` on `A` is a subtype of `A` that is merely equivalent to a subtype of the form `R x`. The type of equivalence classes of an equivalence relation satisfies the universal property of the set quotient.
+An equivalence class of an equivalence relation `R` on `A` is a subtype of `A`
+that is merely equivalent to a subtype of the form `R x`. The type of
+equivalence classes of an equivalence relation satisfies the universal property
+of the set quotient.
 
 ## Definition
 

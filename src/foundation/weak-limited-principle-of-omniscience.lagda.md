@@ -23,7 +23,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The **Weak Limited Principle of Omniscience** asserts that for any sequence `f : ℕ → Fin 2` either `f n ＝ 0` for all `n : ℕ` or not. In particular, it is a restricted form of the law of excluded middle.
+The **Weak Limited Principle of Omniscience** asserts that for any sequence
+`f : ℕ → Fin 2` either `f n ＝ 0` for all `n : ℕ` or not. In particular, it is a
+restricted form of the law of excluded middle.
 
 ## Definition
 

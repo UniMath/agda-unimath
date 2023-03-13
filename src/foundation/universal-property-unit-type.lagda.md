@@ -22,9 +22,12 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of the unit type characterizes maps out of the unit type. Similarly, the dependent universal property of the unit type characterizes dependent functions out of the unit type.
+The universal property of the unit type characterizes maps out of the unit type.
+Similarly, the dependent universal property of the unit type characterizes
+dependent functions out of the unit type.
 
-In `foundation.contractible-types` we have alread proven related universal properties of contractible types.
+In `foundation.contractible-types` we have alread proven related universal
+properties of contractible types.
 
 ## Properties
 

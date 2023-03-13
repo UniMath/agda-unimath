@@ -36,8 +36,7 @@ A _lifting square_ is a commuting square
        i
 ```
 
-together with a diagonal map `j : X → B` such
-that the complete diagram
+together with a diagonal map `j : X → B` such that the complete diagram
 
 ```md
        h
@@ -50,9 +49,8 @@ that the complete diagram
        i
 ```
 
-commutes. This we phrase as `j` being a simultaneous
-extension of `h` along `f` and lift of `i` along `g`,
-satisfying a higher coherence with the original
+commutes. This we phrase as `j` being a simultaneous extension of `h` along `f`
+and lift of `i` along `g`, satisfying a higher coherence with the original
 commutativity proof.
 
 ## Definition

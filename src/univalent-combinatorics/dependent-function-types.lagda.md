@@ -37,7 +37,8 @@ Dependent products of finite types indexed by a finite type are finite.
 
 ### Counting dependent products indexed by standard finite types
 
-If the elements of `A` can be counted and if for each `x : A` the elements of `B x` can be counted, then the elements of `Π A B` can be counted.
+If the elements of `A` can be counted and if for each `x : A` the elements of
+`B x` can be counted, then the elements of `Π A B` can be counted.
 
 ```agda
 count-Π-Fin :

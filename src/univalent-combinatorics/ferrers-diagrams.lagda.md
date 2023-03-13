@@ -29,7 +29,15 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Unlabeled partitions, also known as Ferrers diagrams, of a type `A` record the number of ways in which `A` can be decomposed as the dependent pair type of a family of inhabited types. More precisely, a Ferrers diagram of a type `A` consists of a type `X` and a family `Y` of inhabited types over `X` such that `Σ X Y` is merely equivalent to `A`. A finite Finite ferrers diagram of a finite type `A` consists of a finite type `X` and a family `Y` of inhabited finite types over `X` such that `Σ X Y` is merely equivalent to `A`. The number of finite Ferrers diagrams of `A` is the partition number of the cardinality of `A`.
+Unlabeled partitions, also known as Ferrers diagrams, of a type `A` record the
+number of ways in which `A` can be decomposed as the dependent pair type of a
+family of inhabited types. More precisely, a Ferrers diagram of a type `A`
+consists of a type `X` and a family `Y` of inhabited types over `X` such that
+`Σ X Y` is merely equivalent to `A`. A finite Finite ferrers diagram of a finite
+type `A` consists of a finite type `X` and a family `Y` of inhabited finite
+types over `X` such that `Σ X Y` is merely equivalent to `A`. The number of
+finite Ferrers diagrams of `A` is the partition number of the cardinality of
+`A`.
 
 ## Definition
 
@@ -254,4 +262,5 @@ module _
 
 ## See also
 
-- Integer partitions in [`elementary-number-theory.integer-partitions`](elementary-number-theory.integer-partitions.md)
+- Integer partitions in
+  [`elementary-number-theory.integer-partitions`](elementary-number-theory.integer-partitions.md)

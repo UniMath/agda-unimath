@@ -19,7 +19,10 @@ open import order-theory.posets
 
 ## Idea
 
-An upper bound of two elements `x` and `y` in a poset `P` is an element `z` such that both `x ≤ z` and `y ≤ z` hold. A least upper bound of `x` and `y` is an upper bound `z` of `x` and `y` such that `z ≤ w` holds for any upper bound `w` of `x` and `y`.
+An upper bound of two elements `x` and `y` in a poset `P` is an element `z` such
+that both `x ≤ z` and `y ≤ z` hold. A least upper bound of `x` and `y` is an
+upper bound `z` of `x` and `y` such that `z ≤ w` holds for any upper bound `w`
+of `x` and `y`.
 
 ## Definitions
 

@@ -20,7 +20,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two semigroups `A` and `B` consists of the cartesian product of its underlying sets and the componentwise multiplication
+The cartesian product of two semigroups `A` and `B` consists of the cartesian
+product of its underlying sets and the componentwise multiplication
 
 ## Definition
 

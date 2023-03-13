@@ -23,7 +23,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-An ∞-group is just a pointed connected type. Its underlying type is its loop space, and the classifying type is the pointed connected type itself.
+An ∞-group is just a pointed connected type. Its underlying type is its loop
+space, and the classifying type is the pointed connected type itself.
 
 ## Definition
 

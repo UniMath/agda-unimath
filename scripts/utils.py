@@ -2,6 +2,7 @@ import pathlib
 import os
 import subprocess
 
+
 def get_files_recursively(startpath):
     """
     Recursively list all files in a directory and its subdirectories
@@ -10,21 +11,26 @@ def get_files_recursively(startpath):
         # Yield the fully qualified path of each file
         yield from map(lambda f: os.path.join(root, f), files)
 
+
 def get_subdirectories_recursive(startpath):
     for root, dirs, files in os.walk(startpath):
         yield from dirs
 
+
 def find_index(s: str, t: str) -> list[int]:
     return [p for p, c in enumerate(s) if c == t]
+
 
 def is_agda_file(f: pathlib.Path) -> bool:
     return (f.match('*.lagda.md') and
             f.exists() and
             f.is_file())
 
+
 def get_agda_files(files: list[str]) -> list[pathlib.Path]:
     return list(filter(is_agda_file,
                        map(pathlib.Path, files)))
+
 
 def extract_agda_code(lagda_filepath):
     """
@@ -36,7 +42,8 @@ def extract_agda_code(lagda_filepath):
 
     def find_blocks(loc=0):
         loc = contents.find("```agda\n", loc)
-        if loc == -1: return
+        if loc == -1:
+            return
         block_start = loc + len("```agda\n")
 
         loc = contents.find("\n```", block_start)
@@ -51,6 +58,7 @@ def extract_agda_code(lagda_filepath):
 
     return "\n\n".join(find_blocks())
 
+
 def has_no_definitions(lagda_filepath):
     """
     Determines if a literate agda markdown file doesn't have any definitions.
@@ -59,8 +67,10 @@ def has_no_definitions(lagda_filepath):
     agda_code = extract_agda_code(lagda_filepath)
     return '=' not in agda_code and ':' not in agda_code
 
+
 def call_agda(options, filepath):
     return subprocess.call(f"agda {options} {filepath}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 
 def get_lagda_file_title(lagda_filepath):
     with open(lagda_filepath, "r") as file:
@@ -73,11 +83,14 @@ def get_lagda_file_title(lagda_filepath):
         title_end = contents.find("\n", len("# "))
         return contents[title_start:title_end]
 
+
 def get_import_statement(namespace, module_file, public=False):
     return f"open import {namespace}.{module_file[:module_file.rfind('.lagda.md')]}{' public' * public}"
 
+
 def get_module_mdfile(namespace, module_file):
     return namespace + "." + module_file.replace(".lagda.md", ".md")
+
 
 def get_equivalence_classes(equivalence_relation, iterable):
     partitions = []  # Found partitions
@@ -86,6 +99,6 @@ def get_equivalence_classes(equivalence_relation, iterable):
             if equivalence_relation(e, p[0]):  # Found a partition for it!
                 p.append(e)
                 break
-        else: # Make a new partition for it.
+        else:  # Make a new partition for it.
             partitions.append([e])
     return partitions

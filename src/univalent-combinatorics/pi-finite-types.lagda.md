@@ -74,7 +74,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is `π_n`-finite if it has finitely many connected components and all of its homotopy groups up to level `n` at all base points are finite.
+A type is `π_n`-finite if it has finitely many connected components and all of
+its homotopy groups up to level `n` at all base points are finite.
 
 ## Definition
 

@@ -20,7 +20,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The **`k`-truncation image** of a map `f : A → B` is the type `trunc-im k f` that fits in the (`k`-connected,`k`-truncated) factorization of `f`. It is defined as the type
+The **`k`-truncation image** of a map `f : A → B` is the type `trunc-im k f`
+that fits in the (`k`-connected,`k`-truncated) factorization of `f`. It is
+defined as the type
 
 ```md
   trunc-im k f := Σ (y : B), type-trunc k (fib f y)

@@ -19,8 +19,8 @@ open import foundation.universe-levels
 
 ### Discrete precategories
 
-Any set induces a discrete category whose objects are elements of the set and which contains
-no-nonidentity morphisms.
+Any set induces a discrete category whose objects are elements of the set and
+which contains no-nonidentity morphisms.
 
 ```agda
 

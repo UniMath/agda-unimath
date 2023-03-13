@@ -17,8 +17,8 @@ open import univalent-combinatorics.species
 
 ### Idea
 
-In this file, we define the type of finite species. A finite
-species is just a map from 𝔽 to 𝔽.
+In this file, we define the type of finite species. A finite species is just a
+map from 𝔽 to 𝔽.
 
 ## Definition
 

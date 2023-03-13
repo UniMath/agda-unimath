@@ -28,7 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
- A proper divisor of a natural number `n` is a natural number `d ≠ n` that divides `n`.
+A proper divisor of a natural number `n` is a natural number `d ≠ n` that
+divides `n`.
 
 ```agda
 is-proper-divisor-ℕ : ℕ → ℕ → UU lzero

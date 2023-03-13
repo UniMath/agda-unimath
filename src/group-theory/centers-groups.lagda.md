@@ -21,7 +21,8 @@ open import group-theory.subgroups
 
 ## Idea
 
-The **center** of a group `G` is the normal subgroup consisting of all elements `g : G` that commute with every element of `G`.
+The **center** of a group `G` is the normal subgroup consisting of all elements
+`g : G` that commute with every element of `G`.
 
 ## Definition
 

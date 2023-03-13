@@ -44,7 +44,9 @@ ind-equiv A P p {B} = pr1 (Ind-equiv A P) p B
 
 ### Equivalence induction implies that postcomposing by an equivalence is an equivalence
 
-Of course we already know this fact from function extensionality, but we prove it again from equivalence induction so that we can prove that univalence implies function extensionality.
+Of course we already know this fact from function extensionality, but we prove
+it again from equivalence induction so that we can prove that univalence implies
+function extensionality.
 
 ```agda
 abstract

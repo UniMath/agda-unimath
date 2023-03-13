@@ -21,7 +21,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial coefficient `(n choose k)` measures how many decidable subsets of `Fin n` there are of size `k`.
+The binomial coefficient `(n choose k)` measures how many decidable subsets of
+`Fin n` there are of size `k`.
 
 ## Definition
 

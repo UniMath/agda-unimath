@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Cantor's diagonal argument is used to show that there is no surjective map from a type into the type of its subtypes.
+Cantor's diagonal argument is used to show that there is no surjective map from
+a type into the type of its subtypes.
 
 ## Theorem
 

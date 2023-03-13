@@ -29,7 +29,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An epimorphism with respect to maps into sets are maps `f : A → B` suc that for every set `C` the precomposition function `(B → C) → (A → C)` is an embedding.
+An epimorphism with respect to maps into sets are maps `f : A → B` suc that for
+every set `C` the precomposition function `(B → C) → (A → C)` is an embedding.
 
 ## Definition
 

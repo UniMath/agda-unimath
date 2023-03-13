@@ -22,7 +22,8 @@ open import univalent-combinatorics.species
 
 ## Idea
 
-The cartesian product of two species `F` and `G` is their pointwise cartesian product.
+The cartesian product of two species `F` and `G` is their pointwise cartesian
+product.
 
 ## Definition
 

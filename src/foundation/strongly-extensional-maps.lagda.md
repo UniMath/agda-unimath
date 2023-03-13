@@ -16,7 +16,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Consider a function `f : A → B` between types equipped with apartness relations. Then we say that `f` is **strongly extensional** if
+Consider a function `f : A → B` between types equipped with apartness relations.
+Then we say that `f` is **strongly extensional** if
 
 ```md
   f x # f y → x # y
@@ -36,11 +37,5 @@ strongly-extensional A B f =
 
 ## Properties
 
--- ```agda
--- is-strongly-extensional :
---   {l1 l2 l3 l4 : Level} (A : Type-With-Apartness l1 l2)
---   (B : Type-With-Apartness l3 l4) →
---   (f : type-Type-With-Apartness A → type-Type-With-Apartness B) →
---   strongly-extensional A B f
--- is-strongly-extensional A B f x y H = {!!}
--- ```
+--
+`agda -- is-strongly-extensional : --   {l1 l2 l3 l4 : Level} (A : Type-With-Apartness l1 l2) --   (B : Type-With-Apartness l3 l4) → --   (f : type-Type-With-Apartness A → type-Type-With-Apartness B) → --   strongly-extensional A B f -- is-strongly-extensional A B f x y H = {!!} -- `

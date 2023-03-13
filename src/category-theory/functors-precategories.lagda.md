@@ -22,9 +22,10 @@ open import foundation.universe-levels
 ## Idea
 
 A functor from a precategory `C` to a precategory `D` consists of:
+
 - a map `F₀ : C → D` on objects,
-- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms,
-such that the following identities hold:
+- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms, such that the following
+  identities hold:
 - `F₁ id_x = id_(F₀ x)`,
 - `F₁ (comp g f) = comp (F₁ g) (F₁ f)`.
 

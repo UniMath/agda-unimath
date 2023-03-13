@@ -19,7 +19,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The conjunction of two propositions `P` and `Q` is the proposition that both `P` and `Q` hold.
+The conjunction of two propositions `P` and `Q` is the proposition that both `P`
+and `Q` hold.
 
 ## Definition
 

@@ -27,7 +27,8 @@ A species `S : 𝔽 → UU l` can be thought of as the analytic endofunctor
   X ↦ Σ (A : 𝔽) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 
@@ -47,7 +48,7 @@ analytic-comp-species {l1} {l2} {l3} S T X =
 
 ### The analytic unit for composition of species
 
- ```agda
+```agda
 analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
 

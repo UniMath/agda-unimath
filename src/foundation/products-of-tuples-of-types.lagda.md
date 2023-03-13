@@ -25,6 +25,7 @@ The product of an `n`-tuple of types is just the dependent product.
 ## Definition
 
 ### Products of `n`-tuples of types
+
 ```agda
 product-tuple-types :
   {l : Level} (n : ℕ) → tuple-types l n → UU l

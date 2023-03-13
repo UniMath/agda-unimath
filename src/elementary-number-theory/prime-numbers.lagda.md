@@ -46,7 +46,8 @@ is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 
 ### Definition 2
 
-This is an implementation of the idea of being prime, which is usually taken as the definition.
+This is an implementation of the idea of being prime, which is usually taken as
+the definition.
 
 ```agda
 is-one-is-proper-divisor-ℕ : ℕ → UU lzero

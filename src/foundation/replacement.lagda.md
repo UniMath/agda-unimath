@@ -18,7 +18,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The type theoretic replacement axiom asserts that the image of a map `f : A → B` from a small type `A` into a locally small type `B` is small.
+The type theoretic replacement axiom asserts that the image of a map `f : A → B`
+from a small type `A` into a locally small type `B` is small.
 
 ## Definition
 

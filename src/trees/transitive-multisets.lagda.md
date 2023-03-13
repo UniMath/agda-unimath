@@ -17,9 +17,12 @@ open import trees.submultisets
 
 ## Idea
 
-A multiset `x` is said to be transitive if `y ⊑-𝕍 x` for every `y ∈-𝕍 x`. That is, `x` is transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we have `z ∈-𝕍 y ≃ z ∈-𝕍 x`.
+A multiset `x` is said to be transitive if `y ⊑-𝕍 x` for every `y ∈-𝕍 x`. That
+is, `x` is transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we have `z ∈-𝕍 y ≃ z ∈-𝕍 x`.
 
-Similarly, we say that `x` is weakly transitive if `y ⊆-𝕍 x` for every `y ∈-𝕍 x`. That is, `x` is weakly transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we have `z ∈-𝕍 y ↪ z ∈-𝕍 x`.
+Similarly, we say that `x` is weakly transitive if `y ⊆-𝕍 x` for every
+`y ∈-𝕍 x`. That is, `x` is weakly transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we
+have `z ∈-𝕍 y ↪ z ∈-𝕍 x`.
 
 ## Definition
 

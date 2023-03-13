@@ -17,7 +17,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The induction principle for the propositional truncations present propositional truncations as higher inductive types.
+The induction principle for the propositional truncations present propositional
+truncations as higher inductive types.
 
 ## Definition
 

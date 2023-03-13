@@ -28,7 +28,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A subtype of a type `A` is a family of propositions over `A`. The underlying type of a subtype `P` of `A` is the total space `Σ A B`.
+A subtype of a type `A` is a family of propositions over `A`. The underlying
+type of a subtype `P` of `A` is the total space `Σ A B`.
 
 ## Definition
 

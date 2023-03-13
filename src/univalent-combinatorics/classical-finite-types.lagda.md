@@ -24,7 +24,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Classically, the standard type with n elements is defined to be `{0,1,...,n-1}`, i.e., it is the type of natural numbers strictly less than n.
+Classically, the standard type with n elements is defined to be `{0,1,...,n-1}`,
+i.e., it is the type of natural numbers strictly less than n.
 
 ## Definitions
 

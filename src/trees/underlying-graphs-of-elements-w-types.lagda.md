@@ -40,7 +40,9 @@ open import trees.w-types
 
 ## Idea
 
-We assign to each element of a W-type `𝕎 A B` a directed graph. This directed graph is a tree in the graph theoretical sense if and only if each `B x` is a type with decidable equality.
+We assign to each element of a W-type `𝕎 A B` a directed graph. This directed
+graph is a tree in the graph theoretical sense if and only if each `B x` is a
+type with decidable equality.
 
 ## Definition
 
@@ -285,7 +287,10 @@ module _
   node-inclusion-graph-element-𝕎' (tree-𝕎 x α) y n = inl (pair y n)
 ```
 
-Note that it seems unreasonable to expect that `node-inclusion-graph-element-𝕎'` is an embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)` embeds into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node inclusion has the same truncation level as the fiber inclusions
+Note that it seems unreasonable to expect that `node-inclusion-graph-element-𝕎'`
+is an embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)`
+embeds into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node
+inclusion has the same truncation level as the fiber inclusions
 
 ```md
   node-graph-element-𝕎' (α b) → Σ (y : B x), node-graph-element-𝕎' (α y)

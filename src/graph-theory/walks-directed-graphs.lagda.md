@@ -31,7 +31,8 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges that connect `x` to `y`.
+A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges
+that connect `x` to `y`.
 
 ## Definitions
 

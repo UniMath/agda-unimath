@@ -19,7 +19,8 @@ open import group-theory.subgroups
 
 ## Idea
 
-A subgroup `H` of `G` is said to be trivial if it only contains the unit element of `G`.
+A subgroup `H` of `G` is said to be trivial if it only contains the unit element
+of `G`.
 
 ## Definitions
 

@@ -22,7 +22,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Unityped type theories are type theories in which all terms have the same type. They are sometimes called untyped type theories. The category of unityped type theories is equivalent to the category of single sorted algebraic theories.
+Unityped type theories are type theories in which all terms have the same type.
+They are sometimes called untyped type theories. The category of unityped type
+theories is equivalent to the category of single sorted algebraic theories.
 
 ## Definitions
 
@@ -435,3 +437,4 @@ module simple-unityped where
   simple.generic-element.slice (generic-element δ) x =
     generic-element (unityped.generic-element.slice δ)
 -}
+```

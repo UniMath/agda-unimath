@@ -13,7 +13,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A regular undirected graph is a graph of which each vertex has the same number of incident edges
+A regular undirected graph is a graph of which each vertex has the same number
+of incident edges
 
 ## Definition
 
@@ -37,3 +38,4 @@ is-prop-is-regular-Undirected-Graph :
   is-prop (is-regular-Undirected-Graph X G)
 is-prop-is-regular-Undirected-Graph X G =
   is-prop-type-Prop (is-regular-undirected-graph-Prop X G)
+```

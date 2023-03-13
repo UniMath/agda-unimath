@@ -20,7 +20,8 @@ open import trees.w-types
 
 ## Idea
 
-The type of multisets of universe level `l` is the W-type of the universal family over the universe `UU l`.
+The type of multisets of universe level `l` is the W-type of the universal
+family over the universe `UU l`.
 
 ## Definitions
 

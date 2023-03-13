@@ -28,6 +28,7 @@ Contributions come in many forms, please ask us if you are not sure
 how to help. We are happy to help you get started.
 """
 
+
 def get_github_user_name(username):
     url = f"https://api.github.com/users/{username}"
 
@@ -43,6 +44,7 @@ def get_github_user_name(username):
     name = user_info.get('name', '')
 
     return name
+
 
 contributors_list = []
 

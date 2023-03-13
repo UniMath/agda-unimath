@@ -24,7 +24,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-When `A` is an abelian group, we can put a group structure on the disjoint union `A+A`, which specializes to the dihedral groups when we take `A := ℤ/k`.
+When `A` is an abelian group, we can put a group structure on the disjoint union
+`A+A`, which specializes to the dihedral groups when we take `A := ℤ/k`.
 
 ## Definitions
 

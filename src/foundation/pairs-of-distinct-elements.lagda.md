@@ -26,7 +26,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Pairs of distinct elements in a type `A` consist of two elements `x` and `y` of `A` equipped with an element of type `x ≠ y`.
+Pairs of distinct elements in a type `A` consist of two elements `x` and `y` of
+`A` equipped with an element of type `x ≠ y`.
 
 ## Definition
 

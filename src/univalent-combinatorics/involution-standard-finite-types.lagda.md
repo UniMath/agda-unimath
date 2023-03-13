@@ -20,7 +20,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Every standard finite type `Fin k` has an involution operation given by `x ↦ -x - 1`, using the group operations on `Fin k`.
+Every standard finite type `Fin k` has an involution operation given by
+`x ↦ -x - 1`, using the group operations on `Fin k`.
 
 ## Definition
 

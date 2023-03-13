@@ -33,7 +33,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-There are two equivalent definitions of vectors of length `n`. First, a **listed vector** of length `n` is a list of `n` elements of type `A`. Secondly, a **functional vector** of length `n` is a map `Fin n → A`. We define both types of vectors and show that they are equivalent.
+There are two equivalent definitions of vectors of length `n`. First, a **listed
+vector** of length `n` is a list of `n` elements of type `A`. Secondly, a
+**functional vector** of length `n` is a map `Fin n → A`. We define both types
+of vectors and show that they are equivalent.
 
 ## Definitions
 

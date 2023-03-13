@@ -16,7 +16,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a type family `P` on the universe, a `P`-structured type consists of a type `A` equipped with an element of type `P A`.
+Given a type family `P` on the universe, a `P`-structured type consists of a
+type `A` equipped with an element of type `P A`.
 
 ## Definition
 

@@ -18,7 +18,8 @@ open import trees.w-types
 
 ## Idea
 
-We define by induction a type family over `W A B` in a way that generalizes the construction of the standard finite types over ℕ to arbitrary W-types.
+We define by induction a type family over `W A B` in a way that generalizes the
+construction of the standard finite types over ℕ to arbitrary W-types.
 
 ## Definition
 

@@ -27,7 +27,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The strong induction principle allows one to assume in the inductive step that the inductive hypothesis is satisfied at all smaller values.
+The strong induction principle allows one to assume in the inductive step that
+the inductive hypothesis is satisfied at all smaller values.
 
 ## Definition
 

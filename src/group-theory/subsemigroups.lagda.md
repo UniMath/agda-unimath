@@ -24,7 +24,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-A subsemigroup of a semigroup `G` is a subtype of `G` closed under multiplication.
+A subsemigroup of a semigroup `G` is a subtype of `G` closed under
+multiplication.
 
 ## Definitions
 

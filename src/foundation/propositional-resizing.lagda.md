@@ -17,7 +17,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We say that there is propositional resizing for propositions of universe levels `l1` and `l2` if there is a type `Ω : UU l1` equipped with a subtype `Q` such that for each proposition `P` of universe level l2` there is an element `u : Ω` such that `Q u ≃ P`.
+We say that there is propositional resizing for propositions of universe levels
+`l1` and `l2` if there is a type `Ω : UU l1` equipped with a subtype `Q` such
+that for each proposition `P` of universe level l2`there is an element`u :
+Ω`such that`Q u ≃ P`.
 
 ## Definition
 

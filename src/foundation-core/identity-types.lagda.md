@@ -17,13 +17,25 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The equality relation on a type is a reflexive relation, with the universal property that it maps uniquely into any other reflexive relation. In type theory, we introduce the identity type as an inductive family of types, where the induction principle can be understood as expressing that the identity type is the least reflexive relation.
+The equality relation on a type is a reflexive relation, with the universal
+property that it maps uniquely into any other reflexive relation. In type
+theory, we introduce the identity type as an inductive family of types, where
+the induction principle can be understood as expressing that the identity type
+is the least reflexive relation.
 
 ### Notation of the identity type
 
-We include two notations for the identity type. First, we introduce the identity type using Martin-Löf's original notation `Id`. Then we introduce as a secondary option the infix notation `_＝_`.
+We include two notations for the identity type. First, we introduce the identity
+type using Martin-Löf's original notation `Id`. Then we introduce as a secondary
+option the infix notation `_＝_`.
 
-**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). Note that the full width equals sign is slightly wider, and it is highlighted in blue just like all the other defined constructions in Agda. In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
+**Note**: The equals sign in the infix notation is not the standard equals sign
+on your keyboard, but it is the
+[full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
+Note that the full width equals sign is slightly wider, and it is highlighted in
+blue just like all the other defined constructions in Agda. In order to type the
+full width equals sign in Agda emacs mode, you need to add it to your agda input
+method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
@@ -33,7 +45,8 @@ We include two notations for the identity type. First, we introduce the identity
 - Type the full width equals sign `＝` in the translations field.
 - Click the `Apply and save` button.
 
-After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
+After completing these steps, you can type `\=` in order to obtain the full
+width equals sign `＝`.
 
 ## Definition
 
@@ -53,13 +66,14 @@ module _
 
 ### The induction principle
 
-The induction principle of identity types states that given a base point `x : A` and
-a family of types over the identity types based at `x`, `B : (y : A) (p : x ＝ y) → UU l2`,
-then to construct a dependent function `f : (y : A) (p : x ＝ y) → B y p` it suffices
-to define it at `f x refl`.
+The induction principle of identity types states that given a base point `x : A`
+and a family of types over the identity types based at `x`,
+`B : (y : A) (p : x ＝ y) → UU l2`, then to construct a dependent function
+`f : (y : A) (p : x ＝ y) → B y p` it suffices to define it at `f x refl`.
 
-Note that Agda's pattern matching machinery allows us to define many operations on the identity type directly.
-However, sometimes it is useful to explicitly have the induction principle of the identity type.
+Note that Agda's pattern matching machinery allows us to define many operations
+on the identity type directly. However, sometimes it is useful to explicitly
+have the induction principle of the identity type.
 
 ```agda
 ind-Id :

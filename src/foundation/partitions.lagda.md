@@ -42,13 +42,15 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A partition of a type `A` is a subset `P` of the type of inhabited subsets of `A` such that for each `a : A` the type
+A partition of a type `A` is a subset `P` of the type of inhabited subsets of
+`A` such that for each `a : A` the type
 
 ```md
   Σ (Q : inhabited-subtype (A)), P(Q) × Q(a)
 ```
 
-is contractible. In other words, it is a collection `P` of inhabited subtypes of `A` such that each element of `A` is in a unique inhabited subtype in `P`.
+is contractible. In other words, it is a collection `P` of inhabited subtypes of
+`A` such that each element of `A` is in a unique inhabited subtype in `P`.
 
 ## Definition
 
@@ -90,7 +92,9 @@ module _
   is-prop-is-block-partition = is-prop-is-in-subtype subtype-partition
 ```
 
-We introduce the type of blocks of a partition. However, we will soon be able to reduce the universe level of this type. Therefore we call this type of blocks `large`.
+We introduce the type of blocks of a partition. However, we will soon be able to
+reduce the universe level of this type. Therefore we call this type of blocks
+`large`.
 
 ```
   block-partition-Large-Type : UU (l1 ⊔ lsuc l2 ⊔ l3)
@@ -191,7 +195,9 @@ We introduce the type of blocks of a partition. However, we will soon be able to
 
 ### The (small) type of blocks of a partition
 
-We will now introduce the type of blocks of a partition, and show that the type of blocks containing a fixed element `a` is contractible. Once this is done, we will have no more use for the large type of blocks of a partition.
+We will now introduce the type of blocks of a partition, and show that the type
+of blocks containing a fixed element `a` is contractible. Once this is done, we
+will have no more use for the large type of blocks of a partition.
 
 ```agda
   block-partition : UU (l1 ⊔ l2)
@@ -663,53 +669,34 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 
 #### The partition obtained from the set-indexed Σ-decomposition induced by a partition has the same blocks as the original partition
 
--- ```agda
--- module _
---   {l1 l2 l3 : Level} {A : UU l1} (P : partition (l1 ⊔ l2) l3 A)
---   where
+-- ```agda -- module \_ -- {l1 l2 l3 : Level} {A : UU l1} (P : partition (l1 ⊔
+l2) l3 A) -- where
 
---   is-block-is-block-partition-set-indexed-Σ-decomposition-partition :
---     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
---     is-block-partition
---       ( partition-Set-Indexed-Σ-Decomposition
---         ( set-indexed-Σ-decomposition-partition P))
---       ( Q) →
---     is-block-partition P Q
---   is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) =
---     apply-universal-property-trunc-Prop
---       ( is-inhabited-subtype-inhabited-subtype Q)
---       ( subtype-partition P Q)
---       ( λ (a , q) →
---         {!!})
+-- is-block-is-block-partition-set-indexed-Σ-decomposition-partition : -- ( Q :
+inhabited-subtype (l1 ⊔ l2) A) → -- is-block-partition -- (
+partition-Set-Indexed-Σ-Decomposition -- ( set-indexed-Σ-decomposition-partition
+P)) -- ( Q) → -- is-block-partition P Q --
+is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) = --
+apply-universal-property-trunc-Prop -- ( is-inhabited-subtype-inhabited-subtype
+Q) -- ( subtype-partition P Q) -- ( λ (a , q) → -- {!!})
 
--- {-
--- i : X
--- H : (x : A) → Q x ≃ (pr1 (inv-equiv (compute-total-block-partition P) x) ＝ i)
--- a : A
--- q : Q a
+-- {- -- i : X -- H : (x : A) → Q x ≃ (pr1 (inv-equiv
+(compute-total-block-partition P) x) ＝ i) -- a : A -- q : Q a
 
 -- H a q : pr1 (inv-equiv (compute-total-block-partition P) a) ＝ i
 
--- H' : (B : block)
--- -}
+-- H' : (B : block) -- -}
 
---   is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
---     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
---     is-block-partition P Q →
---     is-block-partition
---       ( partition-Set-Indexed-Σ-Decomposition
---         ( set-indexed-Σ-decomposition-partition P))
---       ( Q)
---   is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H =
---     {!!}
+-- is-block-partition-set-indexed-Σ-decomposition-is-block-partition : -- ( Q :
+inhabited-subtype (l1 ⊔ l2) A) → -- is-block-partition P Q → --
+is-block-partition -- ( partition-Set-Indexed-Σ-Decomposition -- (
+set-indexed-Σ-decomposition-partition P)) -- ( Q) --
+is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H = -- {!!}
 
---   has-same-blocks-partition-set-indexed-Σ-decomposition-partition :
---     has-same-blocks-partition
---       ( partition-Set-Indexed-Σ-Decomposition
---         ( set-indexed-Σ-decomposition-partition P))
---       ( P)
---   pr1 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
---     is-block-is-block-partition-set-indexed-Σ-decomposition-partition B
---   pr2 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
---     is-block-partition-set-indexed-Σ-decomposition-is-block-partition B
--- ```
+-- has-same-blocks-partition-set-indexed-Σ-decomposition-partition : --
+has-same-blocks-partition -- ( partition-Set-Indexed-Σ-Decomposition -- (
+set-indexed-Σ-decomposition-partition P)) -- ( P) -- pr1
+(has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) = --
+is-block-is-block-partition-set-indexed-Σ-decomposition-partition B -- pr2
+(has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) = --
+is-block-partition-set-indexed-Σ-decomposition-is-block-partition B -- ```

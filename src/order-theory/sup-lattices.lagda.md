@@ -20,9 +20,11 @@ open import order-theory.posets
 </details>
 
 ## Idea
-A sup lattice is a poset in which every family of elements has a least upperbound.
-For full generality we will consider 3 different universe levels: one for the underlying type, one for
-the order relation and one for the indexing type.
+
+A sup lattice is a poset in which every family of elements has a least
+upperbound. For full generality we will consider 3 different universe levels:
+one for the underlying type, one for the order relation and one for the indexing
+type.
 
 ## Definitions
 
@@ -53,7 +55,8 @@ Sup-Lattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-sup-lattice-Poset l3 P)
 
 ```
 
-We now develop the tools that allow us to work with the components of a sup lattice.
+We now develop the tools that allow us to work with the components of a sup
+lattice.
 
 ```agda
 

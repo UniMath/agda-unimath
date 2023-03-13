@@ -28,13 +28,20 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Recall that there is a standard unordered pairing operation `{-,-} : A → (A → unordered-pair A)`. This induces for any type `B` a map
+Recall that there is a standard unordered pairing operation
+`{-,-} : A → (A → unordered-pair A)`. This induces for any type `B` a map
 
 ```md
   λ f x y → f {x,y} : (unordered-pair A → B) → (A → A → B)
 ```
 
-A binary operation `μ : A → A → B` is symmetric if it extends to an operation `μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is symmetric if there is an operation `μ̃` on the undordered pairs in `A`, such that `μ̃({x,y}) = μ(x,y)` for all `x, y : A`. Symmetric operations can be understood to be fully coherent commutative operations. One can check that if `B` is a set, then `μ` has such an extension if and only if it is commutative in the usual algebraic sense.
+A binary operation `μ : A → A → B` is symmetric if it extends to an operation
+`μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is
+symmetric if there is an operation `μ̃` on the undordered pairs in `A`, such that
+`μ̃({x,y}) = μ(x,y)` for all `x, y : A`. Symmetric operations can be understood
+to be fully coherent commutative operations. One can check that if `B` is a set,
+then `μ` has such an extension if and only if it is commutative in the usual
+algebraic sense.
 
 ## Definition
 

@@ -38,7 +38,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Any two maps `f : A → B` and `g : C → D` induce a map `map-coprod f g : coprod A B → coprod C D`.
+Any two maps `f : A → B` and `g : C → D` induce a map
+`map-coprod f g : coprod A B → coprod C D`.
 
 ## Definitions
 

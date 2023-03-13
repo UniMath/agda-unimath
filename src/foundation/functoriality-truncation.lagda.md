@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of truncations can be used to define the functorial action of truncations.
+The universal property of truncations can be used to define the functorial
+action of truncations.
 
 ## Definition
 

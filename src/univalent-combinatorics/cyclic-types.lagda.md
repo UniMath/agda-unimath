@@ -49,7 +49,9 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-A cyclic type is a type `X` equipped with an endomorphism `f : X → X` such that the pair `(X, f)` is merely equivalent to the pair `(ℤ-Mod k, +1)` for some `k : ℕ`.
+A cyclic type is a type `X` equipped with an endomorphism `f : X → X` such that
+the pair `(X, f)` is merely equivalent to the pair `(ℤ-Mod k, +1)` for some
+`k : ℕ`.
 
 ## Definitions
 

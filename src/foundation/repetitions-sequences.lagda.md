@@ -23,7 +23,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A repetition in a sequence `a : ℕ → A` consists of a pair of distinct natural numbers `m` and `n` such that `a m = a n`.
+A repetition in a sequence `a : ℕ → A` consists of a pair of distinct natural
+numbers `m` and `n` such that `a m = a n`.
 
 ## Definition
 

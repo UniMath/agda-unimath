@@ -28,8 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A _lift_ of a map `f : X → B` along a map `i : A → B`
-is a map `g : X → A` such that the composition `i ∘ g` is `f`.
+A _lift_ of a map `f : X → B` along a map `i : A → B` is a map `g : X → A` such
+that the composition `i ∘ g` is `f`.
 
 ```md
            A

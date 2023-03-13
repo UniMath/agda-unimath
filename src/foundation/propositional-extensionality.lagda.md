@@ -34,7 +34,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Propositional extensionality characterizes identifications of propositions. It asserts that for any two propositions `P` and `Q`, we have `Id P Q ≃ (P ⇔ Q)`.
+Propositional extensionality characterizes identifications of propositions. It
+asserts that for any two propositions `P` and `Q`, we have `Id P Q ≃ (P ⇔ Q)`.
 
 ## Properties
 

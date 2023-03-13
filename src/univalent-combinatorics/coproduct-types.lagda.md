@@ -34,7 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Coproducts of finite types are finite, giving a coproduct operation on the type 𝔽 of finite types.
+Coproducts of finite types are finite, giving a coproduct operation on the type
+𝔽 of finite types.
 
 ## Properties
 

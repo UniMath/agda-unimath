@@ -20,7 +20,9 @@ open import order-theory.sup-lattices
 </details>
 
 ## Idea
-A sup lattice homomorphism is a order preserving map between the underlying posets that additionally preserves sups (or arbitrary joins of subsets).
+
+A sup lattice homomorphism is a order preserving map between the underlying
+posets that additionally preserves sups (or arbitrary joins of subsets).
 
 ```agda
 

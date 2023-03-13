@@ -38,7 +38,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of the set truncation implies that the set truncation acts functorially on maps between types.
+The universal property of the set truncation implies that the set truncation
+acts functorially on maps between types.
 
 ## Definition
 

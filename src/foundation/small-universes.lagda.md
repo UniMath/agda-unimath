@@ -16,7 +16,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A universe `UU l1` is said to be small with respect to `UU l2` if `UU l1` is a `UU l2`-small type and each `X : UU l1` is a `UU l2`-small type
+A universe `UU l1` is said to be small with respect to `UU l2` if `UU l1` is a
+`UU l2`-small type and each `X : UU l1` is a `UU l2`-small type
 
 ```agda
 is-small-universe :

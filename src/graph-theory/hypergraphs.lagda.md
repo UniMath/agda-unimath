@@ -18,7 +18,8 @@ open import foundation.unordered-tuples
 
 ## Idea
 
-A `k`-hypergraph consists of a type `V` of vertices and a family `E` of types indexed by the unordered `k`-tuples of vertices.
+A `k`-hypergraph consists of a type `V` of vertices and a family `E` of types
+indexed by the unordered `k`-tuples of vertices.
 
 ## Definition
 

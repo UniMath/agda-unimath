@@ -43,7 +43,9 @@ open import foundation-core.universe-levels
 
 ### Any equivalence is an embedding
 
-We already proved in `foundation-core.equivalences` that equivalences are embeddings. Here we have `_↪_` available, so we record the map from equivalences to embeddings.
+We already proved in `foundation-core.equivalences` that equivalences are
+embeddings. Here we have `_↪_` available, so we record the map from equivalences
+to embeddings.
 
 ```agda
 module _
@@ -57,7 +59,9 @@ module _
 
 ### Transposing equalities along equivalences
 
-The fact that equivalences are embeddings has many important consequences, we will use some of these consequences in order to derive basic properties of embeddings.
+The fact that equivalences are embeddings has many important consequences, we
+will use some of these consequences in order to derive basic properties of
+embeddings.
 
 ```agda
 module _
@@ -162,7 +166,8 @@ pr2 (equiv-precomp e C) =
 
 ### If precomposing by `f` is an equivalence, then `f` is an equivalence
 
-First, we prove this relative to a subuniverse, such that `f` is a map between two types in that subuniverse.
+First, we prove this relative to a subuniverse, such that `f` is a map between
+two types in that subuniverse.
 
 ```agda
 abstract
@@ -508,7 +513,8 @@ equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
 
 ## See also
 
-- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+- For the notions of inverses and coherently invertible maps, also known as
+  half-adjoint equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).

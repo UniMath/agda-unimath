@@ -25,7 +25,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Any finite type is a set because it is merely equivalent to a standard finite type. Moreover, any finite type has decidable equality. In particular, this implies that the type of identifications between any two elements in a finite type is finite.
+Any finite type is a set because it is merely equivalent to a standard finite
+type. Moreover, any finite type has decidable equality. In particular, this
+implies that the type of identifications between any two elements in a finite
+type is finite.
 
 ## Properties
 

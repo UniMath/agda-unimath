@@ -18,7 +18,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of n-truncations implies that n-truncations are determined uniquely up to a unique equivalence.
+The universal property of n-truncations implies that n-truncations are
+determined uniquely up to a unique equivalence.
 
 ```agda
 module _

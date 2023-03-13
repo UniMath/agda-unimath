@@ -29,7 +29,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A coherent H-space is a "wild unital magma", i.e., it is a pointed type equipped with a binary operation for which the base point is a unit, with a coherence law between the left and the right unit laws.
+A coherent H-space is a "wild unital magma", i.e., it is a pointed type equipped
+with a binary operation for which the base point is a unit, with a coherence law
+between the left and the right unit laws.
 
 ## Definitions
 

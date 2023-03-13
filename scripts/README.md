@@ -1,5 +1,4 @@
-
-We have included Python hooks which should run on almost any platform.
+We have included Python scripts/hooks which should run on almost any platform.
 
 Install pre-commit
 

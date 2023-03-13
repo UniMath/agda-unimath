@@ -34,7 +34,8 @@ open import group-theory.symmetric-groups
 
 ## Idea
 
-A morphism of G-sets is said to be an equivalence if its underlying map is an equivalence.
+A morphism of G-sets is said to be an equivalence if its underlying map is an
+equivalence.
 
 ## Definition
 

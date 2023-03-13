@@ -22,7 +22,12 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map is often said to satisfy a property `P` if each of its fibers satisfy property `P`. Thus, we define contractible maps to be maps of which each fiber is contractible. In other words, contractible maps are maps `f : A → B` such that for each element `b : B` there is a unique `a : A` equipped with an identification `(f a) ＝ b`, i.e., contractible maps are the type theoretic bijections.
+A map is often said to satisfy a property `P` if each of its fibers satisfy
+property `P`. Thus, we define contractible maps to be maps of which each fiber
+is contractible. In other words, contractible maps are maps `f : A → B` such
+that for each element `b : B` there is a unique `a : A` equipped with an
+identification `(f a) ＝ b`, i.e., contractible maps are the type theoretic
+bijections.
 
 ## Definition
 
@@ -121,7 +126,8 @@ module _
 
 - For the notion of biinvertible maps see
   [`foundation.equivalences`](foundation.equivalences.md).
-- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+- For the notions of inverses and coherently invertible maps, also known as
+  half-adjoint equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).

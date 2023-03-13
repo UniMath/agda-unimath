@@ -8,8 +8,12 @@ open import commutative-algebra.binomial-theorem-commutative-semirings public
 open import commutative-algebra.boolean-rings public
 open import commutative-algebra.commutative-rings public
 open import commutative-algebra.commutative-semirings public
+open import commutative-algebra.dependent-products-commutative-rings public
+open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public
 open import commutative-algebra.eisenstein-integers public
+open import commutative-algebra.function-commutative-rings public
+open import commutative-algebra.function-commutative-semirings public
 open import commutative-algebra.gaussian-integers public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.ideals-commutative-rings public

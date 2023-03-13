@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The universal property of pullbacks describes the optimal way to complete a diagram of the form
+The universal property of pullbacks describes the optimal way to complete a
+diagram of the form
 
 ```md
          B

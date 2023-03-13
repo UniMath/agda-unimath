@@ -20,7 +20,8 @@ open import group-theory.subgroups
 
 ## Idea
 
-Embeddings of groups are group homomorphisms of which the underlying map is an embedding
+Embeddings of groups are group homomorphisms of which the underlying map is an
+embedding
 
 ## Definitions
 

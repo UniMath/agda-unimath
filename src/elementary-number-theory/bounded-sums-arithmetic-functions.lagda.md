@@ -24,7 +24,9 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a decidable predicate `P` on the nonzero natural numbers, and a map `f` from the nonzero natural numbers in `P` into a ring `R`, the bounded sum is a summation of the values of `f` up to an upper bound `b`.
+Given a decidable predicate `P` on the nonzero natural numbers, and a map `f`
+from the nonzero natural numbers in `P` into a ring `R`, the bounded sum is a
+summation of the values of `f` up to an upper bound `b`.
 
 ## Definition
 

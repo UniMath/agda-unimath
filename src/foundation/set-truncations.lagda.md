@@ -47,7 +47,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The set truncation of a type `A` is a map `η : A → trunc-Set A` that satisfies the universal property of set truncations.
+The set truncation of a type `A` is a map `η : A → trunc-Set A` that satisfies
+the universal property of set truncations.
 
 ## Definition
 

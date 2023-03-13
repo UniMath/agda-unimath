@@ -23,7 +23,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Two elements in a type are said to be merely equal if there is an element of the propositionally truncated identity type between them.
+Two elements in a type are said to be merely equal if there is an element of the
+propositionally truncated identity type between them.
 
 ## Definition
 

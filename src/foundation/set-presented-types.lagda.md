@@ -21,7 +21,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A type `A` is said to be set presented if there exists a map `f : X → A` from a set `X` such that the composite `X → A → type-trunc-Set A` is an equivalence.
+A type `A` is said to be set presented if there exists a map `f : X → A` from a
+set `X` such that the composite `X → A → type-trunc-Set A` is an equivalence.
 
 ```agda
 has-set-presentation-Prop :

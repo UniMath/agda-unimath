@@ -25,7 +25,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-The type of neighbors a vertex `x` of an undirected graph `G` is the type of all vertices `y` in `G` equipped with an edge from `x` to `y`.
+The type of neighbors a vertex `x` of an undirected graph `G` is the type of all
+vertices `y` in `G` equipped with an edge from `x` to `y`.
 
 ## Definition
 

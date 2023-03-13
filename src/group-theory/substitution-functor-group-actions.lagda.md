@@ -31,7 +31,8 @@ open import group-theory.symmetric-groups
 
 ## Idea
 
-Given a group homomorphism `f : G → H` and an H-set `Y`, we obtain a G-actio on `Y` by `g,x ↦ f(g)x`. This operation is functorial in `Y`.
+Given a group homomorphism `f : G → H` and an H-set `Y`, we obtain a G-actio on
+`Y` by `g,x ↦ f(g)x`. This operation is functorial in `Y`.
 
 ## Definition
 

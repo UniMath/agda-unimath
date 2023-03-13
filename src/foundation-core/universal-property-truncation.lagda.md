@@ -28,7 +28,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We say that a map `f : A → B` into a `k`-truncated type `B` is a `k`-truncation of `A` -- or that it satisfies the universal property of the `k`-truncation of `A` -- if any map `g : A → C` into a `k`-truncated type `C` extends uniquely along `f` to a map `B → C`.
+We say that a map `f : A → B` into a `k`-truncated type `B` is a `k`-truncation
+of `A` -- or that it satisfies the universal property of the `k`-truncation of
+`A` -- if any map `g : A → C` into a `k`-truncated type `C` extends uniquely
+along `f` to a map `B → C`.
 
 ## Definition
 

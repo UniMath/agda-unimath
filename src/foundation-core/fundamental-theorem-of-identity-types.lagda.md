@@ -22,11 +22,18 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The fundamental theorem of identity type provides a way to characterize identity types. It uses the fact that a family of maps `f : (x : A) → a ＝ x → B x` is a family of equivalences if and only if it induces an equivalence `Σ A (Id a) → Σ A B` on total spaces. Note that the total space `Σ A (Id a)` is contractible. Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and only if `Σ A B` is contractible.
+The fundamental theorem of identity type provides a way to characterize identity
+types. It uses the fact that a family of maps `f : (x : A) → a ＝ x → B x` is a
+family of equivalences if and only if it induces an equivalence
+`Σ A (Id a) → Σ A B` on total spaces. Note that the total space `Σ A (Id a)` is
+contractible. Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and
+only if `Σ A B` is contractible.
 
 ## Theorem
 
-For any family of maps `f : (x : A) → a ＝ x → B x`, the following are equivalent:
+For any family of maps `f : (x : A) → a ＝ x → B x`, the following are
+equivalent:
+
 1. Each `f x` is an equivalence
 2. The total space `Σ A B` is contractible.
 

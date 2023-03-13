@@ -19,7 +19,8 @@ open import order-theory.posets
 
 ## Idea
 
-A poset `X` is said to be locally finite if for every `x, y ∈ X`, the poset `[x, y]` consisting of `z ∈ X` such that `x ≤ z ≤ y`, is finite.
+A poset `X` is said to be locally finite if for every `x, y ∈ X`, the poset
+`[x, y]` consisting of `z ∈ X` such that `x ≤ z ≤ y`, is finite.
 
 ## Definition
 

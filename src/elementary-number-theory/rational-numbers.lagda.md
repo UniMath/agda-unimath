@@ -34,7 +34,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of rational numbers is the quotient of the type of fractions, by the equivalence relation given by `(n/m) ~ (n'/m') := Id (mul-ℤ n m') (mul-ℤ n' m)`.
+The type of rational numbers is the quotient of the type of fractions, by the
+equivalence relation given by `(n/m) ~ (n'/m') := Id (mul-ℤ n m') (mul-ℤ n' m)`.
 
 ## Definitions
 
@@ -282,6 +283,7 @@ in-fraction-ℤ x = pair (reduce-fraction-ℤ x) (is-reduced-reduce-fraction-ℤ
 ```
 
 ### If two fractions are related by `sim-fraction-ℤ`, then their embeddings into `ℚ` are equal
+
 ```agda
 sim-unique-numerator-reduce-fraction-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → sim-unit-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-numerator-fraction-ℤ y)
 sim-unique-numerator-reduce-fraction-ℤ x y H = antisymmetric-div-ℤ

@@ -20,14 +20,20 @@ if __name__ == "__main__":
         ".lagda.md"), os.listdir("src/foundation-core")))
     foundation_filenames = sorted(
         filter(lambda f: f.endswith(".lagda.md"), os.listdir("src/foundation")))
-    foundation_filepaths = map(lambda f: os.path.join(root, "foundation", f), foundation_filenames)
-    core_filepaths = map(lambda f: os.path.join(root, "foundation-core", f), core_filenames)
-    foundation_and_core_files = tuple(itertools.chain(foundation_filepaths, core_filepaths))
+    foundation_filepaths = map(lambda f: os.path.join(
+        root, "foundation", f), foundation_filenames)
+    core_filepaths = map(lambda f: os.path.join(
+        root, "foundation-core", f), core_filenames)
+    foundation_and_core_files = tuple(
+        itertools.chain(foundation_filepaths, core_filepaths))
 
-    core_submodules = set(map(lambda f: f[:f.rfind(".lagda.md")], core_filenames))
+    core_submodules = set(
+        map(lambda f: f[:f.rfind(".lagda.md")], core_filenames))
 
-    foundation_files_without_definitions = filter(lambda f: utils.has_no_definitions(os.path.join(root, "foundation", f)) and f[:f.rfind(".lagda.md")] in core_submodules, foundation_filenames)
-    foundation_modules_without_definitions = set(map(lambda f: "foundation." + f[:f.rfind(".lagda.md")], foundation_files_without_definitions))
+    foundation_files_without_definitions = filter(lambda f: utils.has_no_definitions(os.path.join(
+        root, "foundation", f)) and f[:f.rfind(".lagda.md")] in core_submodules, foundation_filenames)
+    foundation_modules_without_definitions = set(map(
+        lambda f: "foundation." + f[:f.rfind(".lagda.md")], foundation_files_without_definitions))
 
     print("The following modules can be fast-tracked, as they do not have any definitions:")
     print(foundation_modules_without_definitions)
@@ -46,7 +52,7 @@ if __name__ == "__main__":
                 print(f" Warning! Could not find imports. Skipping.")
                 continue
 
-                        # Subdivide imports into namespaces
+                # Subdivide imports into namespaces
             namespaces = subdivide_namespaces_imports(nonpublic)
 
             if not "foundation" in namespaces.keys():
@@ -67,13 +73,15 @@ if __name__ == "__main__":
                 if module in foundation_modules_without_definitions:
                     statement = "open import " + module
                     new_nonpublic.discard(statement)
-                    new_nonpublic.add(statement.replace("foundation.", "foundation-core."))
+                    new_nonpublic.add(statement.replace(
+                        "foundation.", "foundation-core."))
                     pretty_imports_block = prettify_imports_to_block(
                         public, new_nonpublic, open_statements)
                     fast_track_modules.add(module)
 
             if len(fast_track_modules) > 0:
-                print(f'    {fast_track_modules} can immediately be imported from core')
+                print(
+                    f'    {fast_track_modules} can immediately be imported from core')
                 namespaces["foundation"] = namespaces["foundation"].difference(
                     fast_track_modules)
 
@@ -84,7 +92,8 @@ if __name__ == "__main__":
 
                 statement = "open import " + module
                 new_nonpublic.discard(statement)
-                new_nonpublic.add(statement.replace("foundation.", "foundation-core."))
+                new_nonpublic.add(statement.replace(
+                    "foundation.", "foundation-core."))
 
                 pretty_imports_block = prettify_imports_to_block(
                     public, new_nonpublic, open_statements)
@@ -97,8 +106,9 @@ if __name__ == "__main__":
                     file.write(new_content)
 
                 if (utils.call_agda(agda_options, agda_file) != 0):
-                  new_nonpublic.discard(statement.replace("foundation.", "foundation-core."))
-                  new_nonpublic.add(statement)
+                    new_nonpublic.discard(statement.replace(
+                        "foundation.", "foundation-core."))
+                    new_nonpublic.add(statement)
                 else:
                     print(f"    '{module}' can be imported from core")
 

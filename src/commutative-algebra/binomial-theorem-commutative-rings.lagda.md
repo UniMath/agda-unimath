@@ -28,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial theorem in commutative rings asserts that for any two elements `x` and `y` of a commutative ring `R` and any natural number `n`, we have
+The binomial theorem in commutative rings asserts that for any two elements `x`
+and `y` of a commutative ring `R` and any natural number `n`, we have
 
 ```md
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.

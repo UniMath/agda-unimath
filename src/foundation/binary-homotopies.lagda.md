@@ -22,7 +22,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Consider two binary operations `f g : (x : A) (y : B x) → C x y`. The type of binary homotopies between f and `g` is defined to be the type of pointwise identifications of `f` and `g`. We show that this characterizes the identity type of `(x : A) (y : B x) → C x y`.
+Consider two binary operations `f g : (x : A) (y : B x) → C x y`. The type of
+binary homotopies between f and `g` is defined to be the type of pointwise
+identifications of `f` and `g`. We show that this characterizes the identity
+type of `(x : A) (y : B x) → C x y`.
 
 ## Definition
 

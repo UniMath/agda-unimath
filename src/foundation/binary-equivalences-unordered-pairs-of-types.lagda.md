@@ -20,7 +20,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A binary operation `f : ((i : I) → A i) → B` is a binary equivalence if for each `i : I` and each `x : A i` the map `f ∘ pair x : A (swap i) → B` is an equivalence.
+A binary operation `f : ((i : I) → A i) → B` is a binary equivalence if for each
+`i : I` and each `x : A i` the map `f ∘ pair x : A (swap i) → B` is an
+equivalence.
 
 ## Definition
 

@@ -35,7 +35,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A type is said to be connected if its type of connected components, i.e., its set truncation, is contractible.
+A type is said to be connected if its type of connected components, i.e., its
+set truncation, is contractible.
 
 ```agda
 is-0-connected-Prop : {l : Level} → UU l → Prop l

@@ -35,7 +35,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The image of a map `f : A → X` is the least subtype of `X` containing all the values of `f`.
+The image of a map `f : A → X` is the least subtype of `X` containing all the
+values of `f`.
 
 ## Definition
 

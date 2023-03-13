@@ -27,7 +27,8 @@ A triangle of maps
      X
 ```
 
-is said to commute if there is a homotopy between the map on the left and the composite map.
+is said to commute if there is a homotopy between the map on the left and the
+composite map.
 
 ## Definition
 

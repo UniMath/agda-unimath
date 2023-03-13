@@ -20,7 +20,8 @@ open import structured-types.symmetric-elements-involutive-types
 
 ## Idea
 
-Symmetric H-spaces are defined to be poinded types A equipped with a symmetric element of the involutive type of H-space structures on A.
+Symmetric H-spaces are defined to be poinded types A equipped with a symmetric
+element of the involutive type of H-space structures on A.
 
 ## Definitions
 

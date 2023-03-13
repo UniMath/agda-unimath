@@ -25,7 +25,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An inhabited subtype of a type `A` is a subtype `P` of `A` such that the underlying type of `P` is inhabited.
+An inhabited subtype of a type `A` is a subtype `P` of `A` such that the
+underlying type of `P` is inhabited.
 
 ```agda
 is-inhabited-subtype-Prop :

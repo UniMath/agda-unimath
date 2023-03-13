@@ -25,8 +25,8 @@ open import univalent-combinatorics.species
 
 ### Idea
 
-A homomorphism between two species is a pointwise family of
-maps between their values.
+A homomorphism between two species is a pointwise family of maps between their
+values.
 
 ## Definitions
 

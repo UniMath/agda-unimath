@@ -23,7 +23,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A singleton subtype of a type `X` is a subtype `P` of `X` of which the underlying type is contractible.
+A singleton subtype of a type `X` is a subtype `P` of `X` of which the
+underlying type is contractible.
 
 ## Definition
 

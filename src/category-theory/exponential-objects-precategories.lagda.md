@@ -21,13 +21,16 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Let `C` be a category with all binary products. For objects `x` and `y` in `C`, an exponential (often denoted y^x) consists of:
+Let `C` be a category with all binary products. For objects `x` and `y` in `C`,
+an exponential (often denoted y^x) consists of:
+
 - an object `e`
-- a morphism `ev : hom (e × x) y`
-such that for every object `z` and morphism `f : hom (z × x) y` there exists a unique morphism `g : hom z e` such that
+- a morphism `ev : hom (e × x) y` such that for every object `z` and morphism
+  `f : hom (z × x) y` there exists a unique morphism `g : hom z e` such that
 - `comp (g × id x) ev = f`.
 
-We say that `C` has all exponentials if there is a choice of an exponential for each pair of objects.
+We say that `C` has all exponentials if there is a choice of an exponential for
+each pair of objects.
 
 ## Definition
 

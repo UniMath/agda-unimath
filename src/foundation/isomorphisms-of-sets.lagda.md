@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Since equality of elements in a set is a proposition, isomorphisms of sets are equivalent to equivalences of sets
+Since equality of elements in a set is a proposition, isomorphisms of sets are
+equivalent to equivalences of sets
 
 ```agda
 module _

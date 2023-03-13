@@ -32,7 +32,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A type is said to be small with respect to a universe `UU l` if it is equivalent to a type in `UU l`.
+A type is said to be small with respect to a universe `UU l` if it is equivalent
+to a type in `UU l`.
 
 ## Definitions
 

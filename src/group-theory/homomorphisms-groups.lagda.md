@@ -23,7 +23,8 @@ open import group-theory.homomorphisms-semigroups
 
 ## Idea
 
-A group homomorphism from one group to another is a semigroup homomorphism between their underlying semigroups
+A group homomorphism from one group to another is a semigroup homomorphism
+between their underlying semigroups
 
 ## Definition
 
