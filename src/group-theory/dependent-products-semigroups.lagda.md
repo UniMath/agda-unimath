@@ -1,6 +1,5 @@
 # Dependent products of semigroups
 
-
 ```agda
 module group-theory.dependent-products-semigroups where
 ```

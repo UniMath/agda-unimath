@@ -166,4 +166,3 @@ module _
   commutative-mul-function-Commutative-Ring =
     commutative-mul-Commutative-Ring function-Commutative-Ring
 ```
-

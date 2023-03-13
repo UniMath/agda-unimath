@@ -15,7 +15,6 @@ open import structured-types.magmas
 
 <details>
 
-
 ## Idea
 
 Given a magma `M` and a type `X`, the function magma `M^X` consists of
@@ -28,7 +27,7 @@ functions from `X` into the underlying type of `M`. The operation on
 module _
   {l1 l2 : Level} (M : Magma l1) (X : UU l2)
   where
-  
+
   type-exp-Magma : UU (l1 ⊔ l2)
   type-exp-Magma = X → type-Magma M
 

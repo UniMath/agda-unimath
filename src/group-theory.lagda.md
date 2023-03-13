@@ -26,6 +26,11 @@ open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
 open import group-theory.decidable-subgroups public
+open import group-theory.dependent-products-abelian-groups public
+open import group-theory.dependent-products-commutative-monoids public
+open import group-theory.dependent-products-groups public
+open import group-theory.dependent-products-monoids public
+open import group-theory.dependent-products-semigroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
 open import group-theory.e8-lattice public
@@ -43,6 +48,11 @@ open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.free-higher-group-actions public
 open import group-theory.full-subgroups public
+open import group-theory.function-abelian-groups public
+open import group-theory.function-commutative-monoids public
+open import group-theory.function-groups public
+open import group-theory.function-monoids public
+open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
 open import group-theory.group-actions public
 open import group-theory.group-solver public

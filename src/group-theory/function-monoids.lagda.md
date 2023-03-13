@@ -65,7 +65,7 @@ module _
     mul-function-Monoid unit-function-Monoid f ＝ f
   left-unit-law-mul-function-Monoid =
     left-unit-law-mul-Π-Monoid X (λ _ → M)
-    
+
   right-unit-law-mul-function-Monoid :
     (f : type-function-Monoid) →
     mul-function-Monoid f unit-function-Monoid ＝ f
