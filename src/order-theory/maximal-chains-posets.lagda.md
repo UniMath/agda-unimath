@@ -20,7 +20,6 @@ open import order-theory.posets
 ## Definition
 
 ```agda
-
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where

@@ -64,7 +64,7 @@ foundation.unit-type
 
 ### To show that a type is a proposition, we may assume it is inhabited
 
-```
+```agda
 abstract
   is-prop-is-inhabited :
     {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X

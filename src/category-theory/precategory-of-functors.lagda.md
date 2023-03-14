@@ -24,7 +24,6 @@ introduce a new precategory whose identity map and composition structure are
 inherited pointwise from the codomain precategory.
 
 ```agda
-
 module _
   {l1 l2 l3 l4 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
   where

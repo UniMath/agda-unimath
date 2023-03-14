@@ -47,7 +47,7 @@ a map `X → A`.
 
 ### The definition of unordered pairs
 
-```
+```agda
 unordered-pair : {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
 unordered-pair A = Σ (2-Element-Type lzero) (λ X → type-2-Element-Type X → A)
 ```

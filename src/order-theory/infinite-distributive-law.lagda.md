@@ -30,7 +30,6 @@ following identity holds a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ) No
 about the dual infinite distributive law but it is not needed at this time.
 
 ```agda
-
 module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
@@ -48,13 +47,11 @@ module _
 Meet-Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Meet-Sup-Lattice l1 l2 l3 =
   Σ (Poset l1 l2) (is-meet-sup-lattice-Poset l3)
-
 ```
 
 ## We need to provide the appropriate components to state the infinite distributive law.
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (A : Meet-Sup-Lattice l1 l2 l3)
   where
@@ -130,7 +127,6 @@ module _
     (I : UU l3) → (I → element-Meet-Sup-Lattice) →
     element-Meet-Sup-Lattice
   sup-Meet-Sup-Lattice I f = pr1 (is-sup-lattice-Meet-Sup-Lattice I f)
-
 ```
 
 ## Characterize the identity type.
@@ -138,14 +134,12 @@ module _
 ## We now state the infinite distributive law
 
 ```agda
-
 distributive-law-meet-sup-lattice : (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
 distributive-law-meet-sup-lattice l1 l2 l3 A =
   (a : element-Meet-Sup-Lattice A) → {I : UU l3} →
   (b : I → element-Meet-Sup-Lattice A) →
   (meet-Meet-Sup-Lattice A a (sup-Meet-Sup-Lattice A I b) ＝
   sup-Meet-Sup-Lattice A I (λ i → (meet-Meet-Sup-Lattice A a (b i))))
-
 ```
 
 This notation is not easy on the eye, but recall, in more familiar notation the

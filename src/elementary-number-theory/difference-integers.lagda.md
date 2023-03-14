@@ -23,7 +23,7 @@ derive their basic properties relative to `succ-ℤ`, `neg-ℤ`, and `add-ℤ`. 
 file `multiplication-integers` imports `difference-integers` and more properties
 are derived there.
 
-```
+```agda
 diff-ℤ : ℤ → ℤ → ℤ
 diff-ℤ x y = add-ℤ x (neg-ℤ y)
 

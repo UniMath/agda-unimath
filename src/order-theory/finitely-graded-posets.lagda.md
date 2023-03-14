@@ -44,7 +44,6 @@ A finitely graded poset consists of a family of types indexed by
 `Fin (succ-Fin (inl i))` for each `i : Fin k`.
 
 ```agda
-
 Finitely-Graded-Poset : (l1 l2 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2)
 Finitely-Graded-Poset l1 l2 k =
   Σ ( Fin (succ-ℕ k) → Set l1)
@@ -272,7 +271,6 @@ module _
 ### Poset structure on element-Finitely-Graded-Poset
 
 ```agda
-
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
@@ -464,7 +462,6 @@ module _
 ## Finitely graded subposets
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   (S : {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset X i → Prop l3)
@@ -615,7 +612,6 @@ module _
 ### Inclusion of finitely graded subposets
 
 ```agda
-
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
@@ -676,7 +672,6 @@ module _
 ### Chains in finitely graded posets
 
 ```agda
-
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
@@ -738,7 +733,6 @@ module _
 ### Maximal chains in preorders
 
 ```agda
-
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where

@@ -30,7 +30,6 @@ is equivalently described as a pair `pair α β` consisting of an identification
 ## Definition
 
 ```agda
-
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where

@@ -202,5 +202,4 @@ module _
 -- pr1 (pr1 (Infinite-Cyclic-Type-𝕊¹ x)) = Id x x
 -- pr2 (pr1 (Infinite-Cyclic-Type-𝕊¹ x)) = {!!}
 -- pr2 (Infinite-Cyclic-Type-𝕊¹ x) = {!!}
-
 ```

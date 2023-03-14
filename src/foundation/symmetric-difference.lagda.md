@@ -51,7 +51,7 @@ module _
 
 ### The coproduct of two decidable subtypes is equivalent to their symmetric difference plus two times their intersection
 
-```
+```agda
 module _
   {l l1 l2 : Level} {X : UU l}
   where

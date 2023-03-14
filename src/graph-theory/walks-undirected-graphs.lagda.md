@@ -234,7 +234,6 @@ module _
       ( total-edge-Undirected-Graph G)
       ( is-edge-on-walk-Undirected-Graph' G w)
       ( λ z → pair p e ＝ z))
-
 ```
 
 ### Right unit law for concatenation of walks
@@ -253,7 +252,6 @@ module _
     ap
       ( cons-walk-Undirected-Graph p e)
       ( right-unit-law-concat-walk-Undirected-Graph w)
-
 ```
 
 ### For any walk `w` from `x` to `y` and any vertex `v` on `w`, we can decompose `w` into a walk `w1` from `x` to `v` and a walk `w2` from `v` to `y`.

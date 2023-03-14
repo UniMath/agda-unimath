@@ -40,7 +40,7 @@ module _
 
 ### A type family over `A` is an identity system if and only if it is equivalent to the identity type
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where

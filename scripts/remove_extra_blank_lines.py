@@ -57,10 +57,10 @@ if __name__ == "__main__":
             status |= STATUS_FILES_WITH_UNEVEN_BLOCKS
         else:
 
-            output = recursive_sub(r"\n\n```$", "\n```\n", output)
+            output = recursive_sub(r"\n\n```\n", "\n```\n", output)
             output = recursive_sub(r"\n```(\S+)\n\n", r"\n```\1\n", output)
             # Empty blocks should have an empty line
-            output = recursive_sub(r"\n```(\S+)\n```$",
+            output = recursive_sub(r"\n```(\S+)\n```\n",
                                    r"\n```\1\n\n```\n", output)
 
         with open(fpath, "w") as f:

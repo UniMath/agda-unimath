@@ -51,7 +51,6 @@ analytic-comp-species {l1} {l2} {l3} S T X =
 ```agda
 analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
-
 ```
 
 ## Properties

@@ -25,7 +25,6 @@ A sup lattice homomorphism is a order preserving map between the underlying
 posets that additionally preserves sups (or arbitrary joins of subsets).
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (A : Sup-Lattice l1 l2 l3) (B : Sup-Lattice l4 l5 l6)
   where
@@ -46,5 +45,4 @@ module _
 
   preserves-sup-hom-Sup-Lattice : (H : hom-Sup-Lattice) → preserves-sups (map-hom-Sup-Lattice H)
   preserves-sup-hom-Sup-Lattice = pr2 ∘ pr2
-
 ```

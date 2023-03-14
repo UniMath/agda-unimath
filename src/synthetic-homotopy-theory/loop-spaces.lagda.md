@@ -121,7 +121,7 @@ module _
 
 -- We compute transport of type-Ω
 
-```
+```agda
 module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
@@ -158,5 +158,4 @@ module _
     (p : Id x y) (q : type-Ω (pair A x)) →
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
-
 ```

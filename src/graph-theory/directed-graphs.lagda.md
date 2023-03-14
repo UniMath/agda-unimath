@@ -121,7 +121,7 @@ $$
 $$
 
 <!--
-```
+```agda
 module directed-graph-defs-equivalence
   {l1 l2 : Level} where
   -- is-equiv-htpy-equiv

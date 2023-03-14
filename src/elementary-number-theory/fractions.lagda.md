@@ -152,5 +152,4 @@ eq-rel-sim-fraction-ℤ = pair (sim-fraction-ℤ-Prop)
   ( pair' (λ {x} → refl-sim-fraction-ℤ x)
     ( pair' (λ {x y} → symm-sim-fraction-ℤ x y)
       (λ {x y z} → trans-sim-fraction-ℤ x y z)))
-
 ```

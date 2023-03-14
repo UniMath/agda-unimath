@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 
 A 2-type is a type that is 2-truncated
 
-```
+```agda
 is-2-type : {l : Level} → UU l → UU l
 is-2-type = is-trunc (two-𝕋)
 

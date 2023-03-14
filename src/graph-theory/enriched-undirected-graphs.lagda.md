@@ -187,5 +187,4 @@ module _
                 ( ∞-group-vertex-Enriched-Undirected-Graph v)
                 ( action-∞-group-vertex-Enriched-Undirected-Graph v) h
                 ( map-inv-equiv-neighbor-Enriched-Undirected-Graph v x))))))
-
 ```
