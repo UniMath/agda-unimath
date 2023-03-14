@@ -680,8 +680,8 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 --       ( partition-Set-Indexed-Σ-Decomposition
 --         ( set-indexed-Σ-decomposition-partition P))
 --       ( Q) →
---     is-block-partition P Q 
---   is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) = 
+--     is-block-partition P Q
+--   is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) =
 --     apply-universal-property-trunc-Prop
 --       ( is-inhabited-subtype-inhabited-subtype Q)
 --       ( subtype-partition P Q)
@@ -696,20 +696,20 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 
 --   is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
 --     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
---     is-block-partition P Q → 
+--     is-block-partition P Q →
 --     is-block-partition
 --       ( partition-Set-Indexed-Σ-Decomposition
 --         ( set-indexed-Σ-decomposition-partition P))
---       ( Q) 
+--       ( Q)
 --   is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H = {!  !}
--- 
---   has-same-blocks-partition-set-indexed-Σ-decomposition-partition : 
+--
+--   has-same-blocks-partition-set-indexed-Σ-decomposition-partition :
 --     has-same-blocks-partition
 --       ( partition-Set-Indexed-Σ-Decomposition
 --         ( set-indexed-Σ-decomposition-partition P))
 --       ( P)
---   pr1 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) = 
+--   pr1 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
 --     is-block-is-block-partition-set-indexed-Σ-decomposition-partition B
---   pr2 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) = 
+--   pr2 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
 --     is-block-partition-set-indexed-Σ-decomposition-is-block-partition B
 ```
