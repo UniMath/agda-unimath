@@ -13,10 +13,42 @@ def recursive_sub(pattern, repl, string, flags=0):
     return string
 
 
-def recursive_replace(string, old, new):
-    while old in string:
-        string = string.replace(old, new)
-    return string
+open_tag_pattern = re.compile(r"\n```(\S+)\n")
+close_tag_pattern = re.compile(r"\n```\n")
+
+
+def has_well_formed_blocks(mdcode, pos=0):
+    """
+    Checks if in a .md-file, every opening block tag is paired with a closing
+    block tag before a new one is opened.
+    """
+
+    if pos >= len(mdcode):
+        return True
+
+    open_match = open_tag_pattern.search(mdcode, pos)
+    close_match = close_tag_pattern.search(mdcode, pos)
+
+    if (open_match is None) != (close_match is None):
+        # Open or closing tag but not both
+        return False
+    elif open_match is None:
+        # No more blocks
+        return True
+
+    if close_match.start() < open_match.start():
+        # A block is closed before it is opened
+        return False
+
+    # Check if multiple open tags
+    second_open_match = open_tag_pattern.search(mdcode, open_match.end())
+    if second_open_match is None:
+        # Check for extra close tag
+        return open_tag_pattern.search(mdcode, close_match.end()) is None
+    elif second_open_match.start() < close_match.start():
+        return False
+
+    return has_well_formed_blocks(mdcode, close_match.end())
 
 
 def len_iter(it):
@@ -30,7 +62,6 @@ if __name__ == "__main__":
 
     STATUS_FILES_WITH_UNEVEN_BLOCKS = 1
 
-    files_with_uneven_blocks = []
     status = 0
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
@@ -40,20 +71,10 @@ if __name__ == "__main__":
         output = recursive_sub(r"\n\s*\n\s*\n", "\n\n", output)
 
         # Remove blank lines after a code block starts, and blank lines before a code block ends
+        if not has_well_formed_blocks(output):
+            print(
+                f"Error! File '{fpath}' does not have well formed code blocks. Please check if there is an opening or closing code block tag (```) without a corresponding closing/opening tag.")
 
-        # Check if file starts/ends more blocks than it ends/starts
-        block_starts = len_iter(re.finditer(r"\n```\S+\n", output))
-        block_ends = len_iter(re.finditer(r"\n```\n", output))
-
-        if block_starts != block_ends:
-            if block_starts > block_ends:
-                print(
-                    f"Error! File '{fpath}' opens {block_starts} blocks but ends only {block_ends}.")
-            else:
-                print(
-                    f"Error! File '{fpath}' opens only {block_starts} blocks but ends {block_ends}.")
-
-            files_with_uneven_blocks.append(fpath)
             status |= STATUS_FILES_WITH_UNEVEN_BLOCKS
         else:
 
