@@ -7,16 +7,18 @@ module organic-chemistry.alkanes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import organic-chemistry.hydrocarbons
 open import organic-chemistry.saturated-carbons
-open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-An **alkane** is a hydrocarbon that only has saturated carbons, i.e., it does not have any double or triple carbon-carbon bonds.
+An **alkane** is a hydrocarbon that only has saturated carbons, i.e., it does
+not have any double or triple carbon-carbon bonds.
 
 ## Definition
 

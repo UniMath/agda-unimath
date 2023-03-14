@@ -7,11 +7,7 @@ module group-theory.category-of-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
-open import foundation.universe-levels
-open import category-theory.large-categories
-open import category-theory.large-precategories
+
 ```
 
 </details>
@@ -20,8 +16,5 @@ open import category-theory.large-precategories
 
 ### The category of concrete groups
 
--- ```agda
--- is-category-Concrete-Group-Large-Precat :
---   is-category-Large-Precat Concrete-Group-Large-Precat
--- is-category-Concrete-Group-Large-Precat = {!!}
--- ```
+--
+`agda -- is-category-Concrete-Group-Large-Precat : --   is-category-Large-Precat Concrete-Group-Large-Precat -- is-category-Concrete-Group-Large-Precat = {!!} -- `

@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.universal-property-circle where
 <details><summary>Imports</summary>
 
 ```agda
-open import synthetic-homotopy-theory.free-loops
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -21,6 +20,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sections
 open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.free-loops
 ```
 
 </details>
@@ -101,7 +102,9 @@ module _
 
 ### The induction principle of the circle implies the dependent universal property of the circle
 
-To prove this, we have to show that the section of ev-free-loop-Π is also a retraction. This construction is also by the induction principle of the circle, but it requires (a minimal amount of) preparations.
+To prove this, we have to show that the section of ev-free-loop-Π is also a
+retraction. This construction is also by the induction principle of the circle,
+but it requires (a minimal amount of) preparations.
 
 ```agda
 module _

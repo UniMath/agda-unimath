@@ -7,16 +7,19 @@ module univalent-combinatorics.standard-finite-pruned-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.standard-finite-types
-open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
+
+open import foundation.universe-levels
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A standard finite pruned tree of height `n` can be thought of as a standard finite tree in which each path from the root to a leaf has length `n + 1`.
+A standard finite pruned tree of height `n` can be thought of as a standard
+finite tree in which each path from the root to a leaf has length `n + 1`.
 
 ## Definition
 

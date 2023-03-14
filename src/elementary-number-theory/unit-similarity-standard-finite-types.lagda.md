@@ -12,9 +12,11 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.unit-elements-standard-finite-types
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -22,7 +24,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Two elements `x y : Fin k` are said to be unit similar if there is a unit element `u : Fin k` such that `mul-Fin u x = y`. This relation gives a groupoid structure on `Fin k`.
+Two elements `x y : Fin k` are said to be unit similar if there is a unit
+element `u : Fin k` such that `mul-Fin u x = y`. This relation gives a groupoid
+structure on `Fin k`.
 
 ## Definition
 
@@ -106,4 +110,3 @@ pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
             ( cong-nat-mod-succ-ℕ k x)))) ∙
       ( p))
 ```
-

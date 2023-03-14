@@ -8,26 +8,30 @@ module foundation.impredicative-encodings where
 
 ```agda
 open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-By quantifying over all propositions in a universe, we can define all the logical operations. The idea is to use the fact that any proposition `P` is equivalent to the proposition `(Q : Prop l) → (P ⇒ Q) ⇒ Q`, which can be thought of as the least proposition `Q` containing `P`.
+By quantifying over all propositions in a universe, we can define all the
+logical operations. The idea is to use the fact that any proposition `P` is
+equivalent to the proposition `(Q : Prop l) → (P ⇒ Q) ⇒ Q`, which can be thought
+of as the least proposition `Q` containing `P`.
 
 ### The impredicative encoding of the propositional truncation
 

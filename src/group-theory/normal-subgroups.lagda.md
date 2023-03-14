@@ -7,26 +7,24 @@ module group-theory.normal-subgroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.congruence-relations-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.subgroups
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import group-theory.congruence-relations-groups
+open import group-theory.conjugation
+open import group-theory.groups
+open import group-theory.subgroups
+
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
@@ -37,7 +35,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A normal subgroup of `G` is a subgroup `H` of `G` which is closed under conjugation.
+A normal subgroup of `G` is a subgroup `H` of `G` which is closed under
+conjugation.
 
 ## Definition
 
@@ -469,7 +468,7 @@ module _
     sim-left-sim-congruence-Normal-Subgroup x y
 
   mul-congruence-Normal-Subgroup :
-    is-congruence-Eq-Rel-Group G eq-rel-congruence-Normal-Subgroup
+    is-congruence-Group G eq-rel-congruence-Normal-Subgroup
   mul-congruence-Normal-Subgroup
     {x} {x'} {y} {y'} p q =
     is-closed-under-eq-Normal-Subgroup G N

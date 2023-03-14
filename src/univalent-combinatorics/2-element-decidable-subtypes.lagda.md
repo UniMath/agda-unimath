@@ -7,19 +7,15 @@ module univalent-combinatorics.2-element-decidable-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.2-element-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
+
 open import foundation.automorphisms
 open import foundation.booleans
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -30,7 +26,6 @@ open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
@@ -38,21 +33,25 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
 open import foundation.universe-levels
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+
+open import univalent-combinatorics.2-element-subtypes
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of which the underlying type has 2 elements.
+A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of
+which the underlying type has 2 elements.
 
 ## Definition
 

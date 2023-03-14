@@ -7,10 +7,6 @@ module group-theory.group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
-open import foundation-core.function-extensionality
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -18,13 +14,20 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
+open import foundation-core.function-extensionality
+
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 </details>
 
 ## Idea
 
-A action of a group `G` on a set `X` is a group homomorphism from `G` into `symmetric-Group X`.
+A action of a group `G` on a set `X` is a group homomorphism from `G` into
+`symmetric-Group X`.
 
 ## Definition
 

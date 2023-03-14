@@ -36,6 +36,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+
 open import elementary-number-theory.natural-numbers
 ```
 
@@ -43,7 +44,8 @@ open import elementary-number-theory.natural-numbers
 
 ## Idea
 
-A decidable equivalence relation on a finite type is an equivalence relation `R` such that each `R x y` is a decidable proposition.
+A decidable equivalence relation on a finite type is an equivalence relation `R`
+such that each `R x y` is a decidable proposition.
 
 ## Definition
 

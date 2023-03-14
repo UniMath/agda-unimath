@@ -7,15 +7,16 @@ module foundation.preimages-of-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.subtypes
-open import foundation.universe-levels
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The preimage of a subtype `S ⊆ B` under a map `f : A → B` is the subtype of `A` consisting of elements `a` such that `f a ∈ S`.
+The preimage of a subtype `S ⊆ B` under a map `f : A → B` is the subtype of `A`
+consisting of elements `a` such that `f a ∈ S`.
 
 ## Definition
 

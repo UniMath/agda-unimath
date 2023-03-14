@@ -12,7 +12,7 @@ AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --onl
 AGDA ?=agda $(AGDAVERBOSE)
 TIME ?=time
 
-METAFILES:=CITATION.md \
+METAFILES:=CITATION.cff \
 			CODINGSTYLE.md \
 			CONTRIBUTORS.md \
 			CONVENTIONS.md \
@@ -64,13 +64,18 @@ agda-html: src/everything.lagda.md
 	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
+SUMMARY.md:
+	@python3 scripts/generate_main_index_file.py
+
+CONTRIBUTORS.md:
+	@python3 scripts/update_contributors.py
+
 .PHONY: website
-website: agda-html
+website: agda-html \
+		 SUMMARY.md \
+		 CONTRIBUTORS.md
 	@cp $(METAFILES) docs/
 	@mdbook build
-
-update-contributors:
-	@python update-contributors.py
 
 .phony: serve-website
 serve-website:
@@ -84,3 +89,15 @@ graph:
 clean:
 	rm -Rf _build/
 	find docs -name '*.html' -and -name '*.md' -delete -print0
+
+.PHONY : pre-commit
+pre-commit:
+	@pre-commit run --all-files
+	@make check
+
+website-dev:
+	@curl https://sh.rustup.rs -sSf | sh
+	@cargo install mdbook
+	@cargo install mdbook-linkcheck
+	@cargo install mdbook-katex
+	@cargo install mdbook-pagetoc

@@ -7,6 +7,8 @@ module linear-algebra.vectors where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -22,7 +24,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -31,7 +33,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-There are two equivalent definitions of vectors of length `n`. First, a **listed vector** of length `n` is a list of `n` elements of type `A`. Secondly, a **functional vector** of length `n` is a map `Fin n → A`. We define both types of vectors and show that they are equivalent.
+There are two equivalent definitions of vectors of length `n`. First, a **listed
+vector** of length `n` is a list of `n` elements of type `A`. Secondly, a
+**functional vector** of length `n` is a map `Fin n → A`. We define both types
+of vectors and show that they are equivalent.
 
 ## Definitions
 

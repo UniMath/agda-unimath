@@ -7,25 +7,27 @@ module ring-theory.modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.homomorphisms-rings
-open import ring-theory.opposite-rings
-open import ring-theory.rings
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+
+open import ring-theory.homomorphisms-rings
+open import ring-theory.opposite-rings
+open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-A (left) module `M` over a ring `R` consists of an abelian group `M` equipped with an action `R → M → M` such
+A (left) module `M` over a ring `R` consists of an abelian group `M` equipped
+with an action `R → M → M` such
 
 ```md
   r(x+y) = rx + ry
@@ -38,7 +40,10 @@ A (left) module `M` over a ring `R` consists of an abelian group `M` equipped wi
       1x = x
 ```
 
-In other words, a left module `M` over a ring `R` consists of an abelian group `M` equipped with a ring homomorphism `R → endomorphism-ring-Ab M`. A right module over `R` consists of an abelian group `M` equipped with a ring homomorphism `R → opposite-Ring (endomorphism-ring-Ab M)`.
+In other words, a left module `M` over a ring `R` consists of an abelian group
+`M` equipped with a ring homomorphism `R → endomorphism-ring-Ab M`. A right
+module over `R` consists of an abelian group `M` equipped with a ring
+homomorphism `R → opposite-Ring (endomorphism-ring-Ab M)`.
 
 ## Definitions
 

@@ -7,22 +7,28 @@ module synthetic-homotopy-theory.multiplication-circle where
 <details><summary>Imports</summary>
 
 ```agda
-open import synthetic-homotopy-theory.circle
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
+
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>
 
 ## Idea
 
-Classically, the circle can be viewed as the subset of the complex numbers of absolute value 1. The absolute value of a product of complex numbers is the product of their absolute values. This implies that when we multiply two complex numbers on the unit circle, the result is a complex number on the unit circle. This multiplicative structure carries over to the homotopy type of the circle.
+Classically, the circle can be viewed as the subset of the complex numbers of
+absolute value 1. The absolute value of a product of complex numbers is the
+product of their absolute values. This implies that when we multiply two complex
+numbers on the unit circle, the result is a complex number on the unit circle.
+This multiplicative structure carries over to the homotopy type of the circle.
 
 ## Definition
 

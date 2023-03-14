@@ -7,20 +7,25 @@ module group-theory.epimorphisms-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.epimorphisms-large-precategories
+
+open import foundation.propositions
+open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups
-open import foundation.propositions
-open import foundation.universe-levels
-open import category-theory.epimorphisms-large-precategories
 ```
 
 </details>
 
 ## Idea
 
-A group homomorphism `f : x → y` is a epimorphism if whenever we have two group homomorphisms `g h : y → w` such that `g ∘ f = h ∘ f`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that precomposition by `f` is an embedding.
+A group homomorphism `f : x → y` is a epimorphism if whenever we have two group
+homomorphisms `g h : y → w` such that `g ∘ f = h ∘ f`, then in fact `g = h`. The
+way to state this in Homotopy Type Theory is to say that precomposition by `f`
+is an embedding.
 
 ## Definition
 

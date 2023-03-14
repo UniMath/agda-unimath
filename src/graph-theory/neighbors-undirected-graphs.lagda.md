@@ -7,8 +7,6 @@ module graph-theory.neighbors-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.equivalences-undirected-graphs
-open import graph-theory.undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -18,13 +16,17 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 </details>
 
 ## Idea
 
-The type of neighbors a vertex `x` of an undirected graph `G` is the type of all vertices `y` in `G` equipped with an edge from `x` to `y`.
+The type of neighbors a vertex `x` of an undirected graph `G` is the type of all
+vertices `y` in `G` equipped with an edge from `x` to `y`.
 
 ## Definition
 

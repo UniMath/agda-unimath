@@ -9,10 +9,12 @@ module commutative-algebra.prime-ideals-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import ring-theory.ideals-rings
 ```
 
@@ -20,7 +22,8 @@ open import ring-theory.ideals-rings
 
 ## Idea
 
-A prime ideal is an ideal `I` in a commutative ring `R` such that for every `a,b : R` whe have `ab ∈ I ⇒ (a ∈ I) ∨ (b ∈ I)`.
+A prime ideal is an ideal `I` in a commutative ring `R` such that for every
+`a,b : R` whe have `ab ∈ I ⇒ (a ∈ I) ∨ (b ∈ I)`.
 
 ## Definition
 

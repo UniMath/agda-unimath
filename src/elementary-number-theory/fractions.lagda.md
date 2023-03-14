@@ -9,6 +9,7 @@ module elementary-number-theory.fractions where
 ```agda
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
@@ -22,7 +23,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of fractions is the type of pairs `n/m` consisting of an integer `n` and a positive integer `m`. The type of rational numbers is a retract of the type of fractions.
+The type of fractions is the type of pairs `n/m` consisting of an integer `n`
+and a positive integer `m`. The type of rational numbers is a retract of the
+type of fractions.
 
 ## Definitions
 

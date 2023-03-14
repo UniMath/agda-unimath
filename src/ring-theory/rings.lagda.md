@@ -7,7 +7,9 @@ module ring-theory.rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.semirings
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -21,13 +23,15 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
+
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
+
+open import ring-theory.semirings
+
 open import univalent-combinatorics.lists
 ```
 
@@ -35,7 +39,10 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the integers. A ring consists of a set equipped with addition and multiplication, where the addition operation gives the ring the structure of an abelian group, and the multiplication is associative, unital, and distributive over addition.
+The concept of ring vastly generalizes the arithmetical structure on the
+integers. A ring consists of a set equipped with addition and multiplication,
+where the addition operation gives the ring the structure of an abelian group,
+and the multiplication is associative, unital, and distributive over addition.
 
 ## Definitions
 
@@ -236,14 +243,13 @@ module _
 
   left-distributive-mul-add-Ring :
     (x y z : type-Ring R) →
-    Id (mul-Ring x (add-Ring R y z)) (add-Ring R (mul-Ring x y) (mul-Ring x z))
+    mul-Ring x (add-Ring R y z) ＝ add-Ring R (mul-Ring x y) (mul-Ring x z)
   left-distributive-mul-add-Ring =
     pr1 (pr2 (pr2 (pr2 R)))
 
   right-distributive-mul-add-Ring :
     (x y z : type-Ring R) →
-    Id ( mul-Ring (add-Ring R x y) z)
-      ( add-Ring R (mul-Ring x z) (mul-Ring y z))
+    mul-Ring (add-Ring R x y) z ＝ add-Ring R (mul-Ring x z) (mul-Ring y z)
   right-distributive-mul-add-Ring =
     pr2 (pr2 (pr2 (pr2 R)))
 ```

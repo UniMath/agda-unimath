@@ -7,18 +7,20 @@ module ring-theory.radical-ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.propositions
+open import foundation.universe-levels
+
 open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
-open import foundation.propositions
-open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A radical ideal in a ring R is a two-sided ideal I such that `1 + x` is a multiplicative unit for every `x ∈ I`.
+A radical ideal in a ring R is a two-sided ideal I such that `1 + x` is a
+multiplicative unit for every `x ∈ I`.
 
 ## Definition
 

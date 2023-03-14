@@ -7,15 +7,9 @@ module synthetic-homotopy-theory.suspensions-of-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
@@ -24,14 +18,19 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -382,7 +381,10 @@ module _
 
 ### The suspension-loop space adjunction
 
-Here we prove the universal property of the suspension of a pointed type: the suspension is left adjoint to the loop space. We do this by constructing an equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is given by λ f → Ω(f) ∘ unit
+Here we prove the universal property of the suspension of a pointed type: the
+suspension is left adjoint to the loop space. We do this by constructing an
+equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is
+given by λ f → Ω(f) ∘ unit
 
 #### The unit and counit of the adjunction
 
@@ -492,8 +494,6 @@ module _
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed
-
-[To do]
 
 ### The suspension of a contractible type is contractible
 

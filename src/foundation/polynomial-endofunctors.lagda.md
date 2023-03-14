@@ -7,6 +7,9 @@ module foundation.polynomial-endofunctors where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.homotopies
+open import foundation.structure-identity-principle
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -15,21 +18,21 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.homotopies
-open import foundation.structure-identity-principle
 ```
 
 </details>
 
 ## Idea
 
-Given a type `A` equipped with a type family `B` over `A`, the polynomial endofunctor `P A B` is defined by
+Given a type `A` equipped with a type family `B` over `A`, the polynomial
+endofunctor `P A B` is defined by
 
 ```md
   X ↦ Σ (x : A), (B x → X)
 ```
 
-Polynomial endofunctors are important in the study of W-types, and also in the study of combinatorial species.
+Polynomial endofunctors are important in the study of W-types, and also in the
+study of combinatorial species.
 
 ## Definitions
 

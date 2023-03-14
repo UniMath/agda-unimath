@@ -9,6 +9,7 @@ module elementary-number-theory.nonzero-natural-numbers where
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
@@ -17,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of nonzero natural numbers consists of natural numbers equipped with a proof that they are nonzero.
+The type of nonzero natural numbers consists of natural numbers equipped with a
+proof that they are nonzero.
 
 ## Definitions
 

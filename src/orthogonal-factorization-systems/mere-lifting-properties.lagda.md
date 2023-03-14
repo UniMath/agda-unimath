@@ -7,18 +7,22 @@ module orthogonal-factorization-systems.mere-lifting-properties where
 <details><summary>Imports</summary>
 
 ```agda
-open import orthogonal-factorization-systems.lifting-operations
-open import orthogonal-factorization-systems.pullback-hom
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.pullback-hom
 ```
 
 </details>
 
 ## Idea
 
-Given two maps, `f : A → X` and `g : B → Y`, we say that `f` has the _mere left lifting property_ with respect to `g` and that `g` has the _mere right lifting property_ with respect to `f` if the pullback-hom is surjective. This means that the type of lifting operations between `f` and `g` is merely [inhabited](foundation.inhabited-types.md).
+Given two maps, `f : A → X` and `g : B → Y`, we say that `f` has the _mere left
+lifting property_ with respect to `g` and that `g` has the _mere right lifting
+property_ with respect to `f` if the pullback-hom is surjective. This means that
+the type of lifting operations between `f` and `g` is merely
+[inhabited](foundation.inhabited-types.md).
 
 ## Definition
 

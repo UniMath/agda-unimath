@@ -10,6 +10,7 @@ module trees.rooted-quasitrees where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
@@ -18,7 +19,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **rooted quasitree** is an undirected graph `G` equipped with a marked vertex`r`, to be called the root, such that for every vertex `x` there is a unique trail from `r` to `x`.
+A **rooted quasitree** is an undirected graph `G` equipped with a marked
+vertex`r`, to be called the root, such that for every vertex `x` there is a
+unique trail from `r` to `x`.
 
 ## Definition
 

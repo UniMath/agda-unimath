@@ -10,6 +10,7 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -21,7 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two natural numbers `x` and `y` are said to be relatively prime if their greatest common divisor is `1`.
+Two natural numbers `x` and `y` are said to be relatively prime if their
+greatest common divisor is `1`.
 
 ## Definition
 
@@ -64,3 +66,4 @@ pr2 (is-decidable-prop-relatively-prime-ℕ x y) =
 -- relatively-prime-is-unit-mod-ℕ :
 --   (x y : ℕ) → is-unit-ℤ-Mod x (mod-ℕ y) → relatively-prime-ℕ x y
 -- relatively-prime-is-unit-mod-ℕ x y H = ?
+```

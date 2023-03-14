@@ -11,16 +11,15 @@ module type-theories.comprehension-type-theories where
 <details><summary>Imports</summary>
 
 ```agda
-open import type-theories.dependent-type-theories
-open import type-theories.fibered-dependent-type-theories
-open import foundation.universe-levels
+
 ```
 
 </details>
 
 ## Idea
 
-Given a fibered type theory `S` over `T`, we can form the comprehension type theory `∫ST` analogous to the Grothendieck construction
+Given a fibered type theory `S` over `T`, we can form the comprehension type
+theory `∫ST` analogous to the Grothendieck construction
 
 ## Definition
 

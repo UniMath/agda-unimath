@@ -7,12 +7,13 @@ module set-theory.infinite-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification
+open import elementary-number-theory.natural-numbers
+
 open import foundation.mere-embeddings
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -20,7 +21,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A set `A` is said to be infinite if it contains arbitrarily large finite subsets.
+A set `A` is said to be infinite if it contains arbitrarily large finite
+subsets.
 
 ## Definition
 

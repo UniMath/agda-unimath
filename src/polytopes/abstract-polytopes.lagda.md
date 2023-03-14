@@ -7,6 +7,8 @@ module polytopes.abstract-polytopes where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,23 +19,23 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.natural-numbers
+
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
+
 open import univalent-combinatorics
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-We define abstract polytopes as finitely graded posets satisfying certain axioms. In the classical definition, the grading is a consequence of the axioms. Here, we take finitely graded posets as our starting point
+We define abstract polytopes as finitely graded posets satisfying certain
+axioms. In the classical definition, the grading is a consequence of the axioms.
+Here, we take finitely graded posets as our starting point
 
-The first axiom of polytopes asserts that polytopes have a least and a largest element. This is already defined as
+The first axiom of polytopes asserts that polytopes have a least and a largest
+element. This is already defined as
 
 `least-and-largest-element-finitely-graded-poset-Prop`.
 
@@ -88,7 +90,9 @@ module _
 
 ### Prepolytopes
 
-We introduce the notion of prepolytopes to be finitely graded posets equipped with a least and a largest element, and satisfying the diamond condition. Before we state the remaining conditions of polytopes, we introduce some terminology
+We introduce the notion of prepolytopes to be finitely graded posets equipped
+with a least and a largest element, and satisfying the diamond condition. Before
+we state the remaining conditions of polytopes, we introduce some terminology
 
 ```agda
 
@@ -428,7 +432,11 @@ module _
 
 ### Proof condition P2 of polytopes
 
-The second axiom of polytopes asserts that every maximal chain has k elements. Note that every maximal chain is a path from the bottom element to the top element, which necessarily passes through all dimensions. Therefore, the second axiom follows from our setup. Note that we didn't start with general posets, but with finitely graded posets.
+The second axiom of polytopes asserts that every maximal chain has k elements.
+Note that every maximal chain is a path from the bottom element to the top
+element, which necessarily passes through all dimensions. Therefore, the second
+axiom follows from our setup. Note that we didn't start with general posets, but
+with finitely graded posets.
 
 ```agda
 
@@ -458,7 +466,11 @@ module _
 
 ### Strong connectedness of polytopes
 
-The strong connectedness condition for polytopes asserts that the unordered graph of flags of a polytope is connected. The edges in this graph are punctured flags, i.e., chains that have exactly one element in each dimension except in one dimension that is neither the top nor the bottom dimension. A punctured flag connects the two flags it is a subchain of.
+The strong connectedness condition for polytopes asserts that the unordered
+graph of flags of a polytope is connected. The edges in this graph are punctured
+flags, i.e., chains that have exactly one element in each dimension except in
+one dimension that is neither the top nor the bottom dimension. A punctured flag
+connects the two flags it is a subchain of.
 
 ### The definition of polytopes
 

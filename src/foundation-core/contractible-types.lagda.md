@@ -7,6 +7,8 @@ module foundation-core.contractible-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-extensionality
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-cartesian-product-types
@@ -15,14 +17,14 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
 ```
 
 </details>
 
 ## Idea
 
-Contractible types are types that have, up to identification, exactly one element.
+Contractible types are types that have, up to identification, exactly one
+element.
 
 ## Definition
 
@@ -60,7 +62,8 @@ abstract
 
 ### The total space of the identity type based at a point is contractible
 
-We prove two cases of this fact: the first keeping the left-hand side fixed, and the second keeping the right-hand side fixed.
+We prove two cases of this fact: the first keeping the left-hand side fixed, and
+the second keeping the right-hand side fixed.
 
 ```agda
 module _

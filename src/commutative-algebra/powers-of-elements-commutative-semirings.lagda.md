@@ -8,9 +8,12 @@ module commutative-algebra.powers-of-elements-commutative-semirings where
 
 ```agda
 open import commutative-algebra.commutative-semirings
+
+open import elementary-number-theory.natural-numbers
+
 open import foundation.identity-types
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
 open import ring-theory.powers-of-elements-semirings
 ```
 
@@ -18,7 +21,8 @@ open import ring-theory.powers-of-elements-semirings
 
 ## Idea
 
-The power operation on a commutative semiring is the map `n x ↦ xⁿ`, which is defined by iteratively multiplying `x` with itself `n` times.
+The power operation on a commutative semiring is the map `n x ↦ xⁿ`, which is
+defined by iteratively multiplying `x` with itself `n` times.
 
 ## Definition
 

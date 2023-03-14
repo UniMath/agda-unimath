@@ -7,12 +7,6 @@ module univalent-combinatorics.composition-species where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equivalences-species
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.partitions
-open import univalent-combinatorics.sigma-decompositions
-open import univalent-combinatorics.species
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -31,6 +25,9 @@ open import foundation.propositional-truncations
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.sigma-decompositions
+open import univalent-combinatorics.species
 ```
 
 </details>
@@ -43,7 +40,8 @@ A species `S : 𝔽 → UU l` can be thought of as the analytic endofunctor
   X ↦ Σ (A : 𝔽) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 
@@ -63,7 +61,7 @@ analytic-comp-species {l1} {l2} {l3} S T X =
 
 ### The analytic unit for composition of species
 
- ```agda
+```agda
 analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
 ```

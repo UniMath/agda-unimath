@@ -7,7 +7,8 @@ module univalent-combinatorics.universal-property-standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -18,14 +19,17 @@ open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-The universal property of the standard finite types asserts that for any family `A` of types over `Fin n`, the type `Π (i : Fin n), A i` is equivalent to the iterated cartesian product `A 0 × ... × A (n-1)`.
+The universal property of the standard finite types asserts that for any family
+`A` of types over `Fin n`, the type `Π (i : Fin n), A i` is equivalent to the
+iterated Cartesian product `A 0 × ... × A (n-1)`.
 
 ## Definitions
 

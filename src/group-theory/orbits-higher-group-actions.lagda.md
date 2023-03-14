@@ -7,17 +7,19 @@ module group-theory.orbits-higher-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import group-theory.higher-group-actions
+open import group-theory.higher-groups
 ```
 
 </details>
 
 ## Idea
 
-The type of orbits of a higher group action `X` acted upon by `G` is the total space of `X`.
+The type of orbits of a higher group action `X` acted upon by `G` is the total
+space of `X`.
 
 ## Definition
 

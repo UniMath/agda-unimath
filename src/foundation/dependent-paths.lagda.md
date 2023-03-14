@@ -1,11 +1,8 @@
-<<<<<<< Updated upstream
 # Dependent paths
 
-=======
-#  Dependent paths
->>>>>>> Stashed changes
-We characterize dependent paths in the family of depedent paths;
-define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
+We characterize dependent paths in the family of depedent paths; define the
+groupoidal operators on dependent paths; define the cohrences paths: prove the
+operators are equivalences.
 
 ```agda
 module foundation.dependent-paths where
@@ -14,16 +11,14 @@ module foundation.dependent-paths where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.transport
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -161,8 +156,9 @@ module _
     ap (λ t → tr B t b0) (right-inv p01)))
 ```
 
-Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws.
-Though, due to the dependent nature, the naive identities are not well typed. So these identities involve transporting.
+Now we prove these paths satisfy identities analgous to the usual unit, inverse,
+and associativity laws. Though, due to the dependent nature, the naive
+identities are not well typed. So these identities involve transporting.
 
 ```agda
 module _

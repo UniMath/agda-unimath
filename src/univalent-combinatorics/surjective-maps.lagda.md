@@ -7,16 +7,17 @@ module univalent-combinatorics.surjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.counting-dependent-pair-types
+open import foundation.surjective-maps public
+
+open import foundation.decidable-types
+open import foundation.universe-levels
 open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.dependent-sum-finite-types
 open import foundation.surjective-maps public
 open import foundation.cartesian-product-types
 open import foundation.decidable-embeddings

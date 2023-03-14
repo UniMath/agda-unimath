@@ -1,4 +1,4 @@
-# Steiner triple systems
+# Steiner systems
 
 ```agda
 module univalent-combinatorics.steiner-systems where
@@ -7,19 +7,25 @@ module univalent-combinatorics.steiner-systems where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.contractible-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-A Steiner system of type `(t,k,n) : ℕ³` consists of an `n`-element type `X` equipped with a (decidable) set `P` of `k`-element subtypes of `X` such that each `t`-element subtype of `X` is contained in exactly one `k`-element subtype in `P`. A basic example is the Fano plane, which is a Steiner system of type `(2,3,7)`.
+A Steiner system of type `(t,k,n) : ℕ³` consists of an `n`-element type `X`
+equipped with a (decidable) set `P` of `k`-element subtypes of `X` such that
+each `t`-element subtype of `X` is contained in exactly one `k`-element subtype
+in `P`. A basic example is the Fano plane, which is a Steiner system of type
+`(2,3,7)`.
 
 ## Definition
 

@@ -7,35 +7,36 @@ module foundation.universal-property-image where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.images
-open import foundation.injective-maps
-open import foundation.propositional-maps
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sections
 open import foundation.slice
-open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universe-levels
+
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.sections
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The image of a map `f : A → X` is the least subtype of `X` containing all the values of `f`.
+The image of a map `f : A → X` is the least subtype of `X` containing all the
+values of `f`.
 
 ## Definition
 

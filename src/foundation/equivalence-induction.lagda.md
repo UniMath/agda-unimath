@@ -8,12 +8,14 @@ module foundation.equivalence-induction where
 
 ```agda
 open import foundation-core.equivalence-induction public
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.sections
+
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.sections
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -42,7 +44,9 @@ ind-equiv A P p {B} = pr1 (Ind-equiv A P) p B
 
 ### Equivalence induction implies that postcomposing by an equivalence is an equivalence
 
-Of course we already know this fact from function extensionality, but we prove it again from equivalence induction so that we can prove that univalence implies function extensionality.
+Of course we already know this fact from function extensionality, but we prove
+it again from equivalence induction so that we can prove that univalence implies
+function extensionality.
 
 ```agda
 abstract

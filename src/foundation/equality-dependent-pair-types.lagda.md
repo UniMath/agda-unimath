@@ -8,11 +8,11 @@ module foundation.equality-dependent-pair-types where
 
 ```agda
 open import foundation-core.equality-dependent-pair-types public
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
-open import foundation-core.homotopies
-open import foundation-core.universe-levels
+
 open import foundation.identity-types
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -64,4 +64,4 @@ module _
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
 - Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.md).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.md).

@@ -7,19 +7,21 @@ module trees.multisets where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.elementhood-relation-w-types
-open import trees.w-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functions
 open import foundation.universe-levels
+
+open import trees.elementhood-relation-w-types
+open import trees.w-types
 ```
 
 </details>
 
 ## Idea
 
-The type of multisets of universe level `l` is the W-type of the universal family over the universe `UU l`.
+The type of multisets of universe level `l` is the W-type of the universal
+family over the universe `UU l`.
 
 ## Definitions
 

@@ -7,17 +7,19 @@ module graph-theory.hypergraphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.unordered-tuples
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>
 
 ## Idea
 
-A `k`-hypergraph consists of a type `V` of vertices and a family `E` of types indexed by the unordered `k`-tuples of vertices.
+A `k`-hypergraph consists of a type `V` of vertices and a family `E` of types
+indexed by the unordered `k`-tuples of vertices.
 
 ## Definition
 

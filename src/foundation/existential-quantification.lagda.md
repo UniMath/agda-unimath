@@ -7,18 +7,24 @@ module foundation.existential-quantification where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Given a family of propositions `P` over `A`, the existential quantification of `P` over `A` is the proposition `∃ A P` asserting that there is an element `a : A` such that `P a` holds. We use the propositional truncation to define the existential quantification, because the Curry-Howard interpretation of the existential quantification as `Σ A P` does not guarantee that existential quantifications are interpreted as propositions.
+Given a family of propositions `P` over `A`, the existential quantification of
+`P` over `A` is the proposition `∃ A P` asserting that there is an element
+`a : A` such that `P a` holds. We use the propositional truncation to define the
+existential quantification, because the Curry-Howard interpretation of the
+existential quantification as `Σ A P` does not guarantee that existential
+quantifications are interpreted as propositions.
 
 ## Definition
 

@@ -7,21 +7,23 @@ module order-theory.decidable-subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.preorders
-open import order-theory.subpreorders
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import order-theory.preorders
+open import order-theory.subpreorders
 ```
 
 </details>
 
 ## Idea
 
-A decidable subpreorder Q of P is a subpreorder Q of P such that for each element `x : P` it is decidable whether or not `x` is in `Q`.
+A decidable subpreorder Q of P is a subpreorder Q of P such that for each
+element `x : P` it is decidable whether or not `x` is in `Q`.
 
 ## Definition
 

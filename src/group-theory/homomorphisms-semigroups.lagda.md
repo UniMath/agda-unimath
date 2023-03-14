@@ -7,7 +7,6 @@ module group-theory.homomorphisms-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.semigroups
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -19,13 +18,16 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-A homomorphism between two semigroups is a map between their underlying types that preserves the binary operation.
+A homomorphism between two semigroups is a map between their underlying types
+that preserves the binary operation.
 
 ## Definition
 

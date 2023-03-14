@@ -7,17 +7,19 @@ module foundation.partial-elements where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.propositions
 open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A partial element of `X` consists of a proposition `P` and a map `P → X`. We say that a partial element `(P, f)` is defined if the proposition `P` holds.
+A partial element of `X` consists of a proposition `P` and a map `P → X`. We say
+that a partial element `(P, f)` is defined if the proposition `P` holds.
 
 ```agda
 partial-element : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)

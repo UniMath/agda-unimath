@@ -7,17 +7,18 @@ module univalent-combinatorics.finite-species where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
-open import foundation.universe-levels
 ```
 
 </details>
 
 ### Idea
 
-In this file, we define the type of finite species. A finite
-species is just a map from 𝔽 to 𝔽.
+In this file, we define the type of finite species. A finite species is just a
+map from 𝔽 to 𝔽.
 
 ## Definition
 

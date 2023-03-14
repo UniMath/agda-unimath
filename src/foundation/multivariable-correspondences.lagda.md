@@ -7,8 +7,10 @@ module foundation.multivariable-correspondences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
+
+open import foundation-core.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -16,7 +18,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Consider a family of types `A` indexed by `Fin n`. An `n`-ary correspondence of tuples `(x₁,...,x_n)` where `x_i : A_i` is a type family over `(i : Fin n) → A i`.
+Consider a family of types `A` indexed by `Fin n`. An `n`-ary correspondence of
+tuples `(x₁,...,x_n)` where `x_i : A_i` is a type family over
+`(i : Fin n) → A i`.
 
 ## Definition
 

@@ -26,7 +26,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A cocone on a span `A <-f- S -g-> B` with vertex `X` consists of two maps `i : A → X` and `j : B → X` equipped with a homotopy witnessing that the square
+A cocone on a span `A <-f- S -g-> B` with vertex `X` consists of two maps
+`i : A → X` and `j : B → X` equipped with a homotopy witnessing that the square
 
 ```md
       g

@@ -7,20 +7,23 @@ module foundation-core.fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-extensionality
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
 ```
 
 </details>
 
 ## Idea
 
-Given a map `f : A → B` and a point `b : B`, the fiber of `f` at `b` is the preimage of `f` at `b`. In other words, it consists of the elements `a : A` equipped with an identification `Id (f a) b`.
+Given a map `f : A → B` and a point `b : B`, the fiber of `f` at `b` is the
+preimage of `f` at `b`. In other words, it consists of the elements `a : A`
+equipped with an identification `Id (f a) b`.
 
 ## Definition
 

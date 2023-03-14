@@ -7,8 +7,6 @@ module graph-theory.enriched-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
 open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,6 +14,10 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
+
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 ```
@@ -24,9 +26,16 @@ open import group-theory.higher-groups
 
 ## Idea
 
-Consider a type `A` equipped with a type family `B` over `A`. An **`(A,B)`-enriched undirected graph** is an undirected graph `G := (V,E)` equipped with a map `sh : V → A`, and for each vertex `v` an equivalence from `B (sh v)` to the type of all edges going out of `v`, i.e., to the type `neighbor v`.
+Consider a type `A` equipped with a type family `B` over `A`. An
+**`(A,B)`-enriched undirected graph** is an undirected graph `G := (V,E)`
+equipped with a map `sh : V → A`, and for each vertex `v` an equivalence from
+`B (sh v)` to the type of all edges going out of `v`, i.e., to the type
+`neighbor v`.
 
-The map `sh : V → A` assigns to each vertex a shape, and with it an ∞-group `BAut (sh v)`. The type family `B` restricted to `BAut (sh v)` is an `Aut (sh v)`-type, and the equivalence `B (sh v) ≃ neighbor v` then ensures type type being acted on is `neighbor v`.
+The map `sh : V → A` assigns to each vertex a shape, and with it an ∞-group
+`BAut (sh v)`. The type family `B` restricted to `BAut (sh v)` is an
+`Aut (sh v)`-type, and the equivalence `B (sh v) ≃ neighbor v` then ensures type
+type being acted on is `neighbor v`.
 
 ## Definition
 

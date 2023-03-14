@@ -7,16 +7,20 @@ module structured-types.pointed-families-of-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.pointed-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import structured-types.pointed-types
 ```
 
 </details>
 
 ## Idea
 
-A pointed family of types over a pointed type `A` is a family of types `B` over the underlying type of `A` equipped with a base point over the base point of `A`. Note that a pointed family of types should not be confused with a family of pointed types over `A`.
+A pointed family of types over a pointed type `A` is a family of types `B` over
+the underlying type of `A` equipped with a base point over the base point of
+`A`. Note that a pointed family of types should not be confused with a family of
+pointed types over `A`.
 
 ## Definition
 

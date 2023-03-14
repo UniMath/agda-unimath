@@ -8,6 +8,7 @@ module category-theory.coproducts-precategories where
 
 ```agda
 open import category-theory.precategories
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -21,8 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-We manually dualize the definition of products in precategories for convenience. See
-the documentation in that file for further information.
+We manually dualize the definition of products in precategories for convenience.
+See the documentation in that file for further information.
 
 ```agda
 module _ {l1 l2 : Level} (C : Precat l1 l2) where
@@ -111,7 +112,9 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
 
 ### Coproducts of morphisms
 
-If `C` has all binary coproducts then for any pair of morphisms `f : hom x₁ y₁` and `g : hom x₂ y₂` we can construct a morphism `f + g : hom (x₁ + x₂) (y₁ + y₂)`.
+If `C` has all binary coproducts then for any pair of morphisms `f : hom x₁ y₁`
+and `g : hom x₂ y₂` we can construct a morphism
+`f + g : hom (x₁ + x₂) (y₁ + y₂)`.
 
 ```agda
 module _ {l1 l2 : Level} (C : Precat l1 l2)

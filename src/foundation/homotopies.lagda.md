@@ -8,6 +8,10 @@ module foundation.homotopies where
 
 ```agda
 open import foundation-core.homotopies public
+
+open import foundation.function-extensionality
+open import foundation.identity-types
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -17,15 +21,17 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-systems
 open import foundation-core.sections
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
-open import foundation.identity-types
 ```
 
 </details>
 
 ## Idea
 
-A homotopy of identifications is a pointwise equality between dependent functions. We defined homotopies in [`foundation-core.homotopies`](foundation-core.homotopies.md). In this file, we record some properties of homotopies that require function extensionality, equivalences, or other.
+A homotopy of identifications is a pointwise equality between dependent
+functions. We defined homotopies in
+[`foundation-core.homotopies`](foundation-core.homotopies.md). In this file, we
+record some properties of homotopies that require function extensionality,
+equivalences, or other.
 
 ## Properties
 

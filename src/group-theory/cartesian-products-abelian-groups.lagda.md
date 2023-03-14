@@ -7,23 +7,25 @@ module group-theory.cartesian-products-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.abelian-groups
-open import group-theory.cartesian-products-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+open import group-theory.cartesian-products-groups
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-The cartesian product of two abelian groups `A` and `B` is an abelian group structure on the cartesian product of the underlying sets.
+The cartesian product of two abelian groups `A` and `B` is an abelian group
+structure on the cartesian product of the underlying sets.
 
 ## Definition
 

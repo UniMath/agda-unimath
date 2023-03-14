@@ -8,15 +8,18 @@ module foundation.connected-components where
 
 ```agda
 open import foundation.0-connected-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
+
 open import group-theory.higher-groups
+
 open import structured-types.pointed-types
 ```
 
@@ -24,7 +27,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The connected component of a type `A` at an element `a : A` is the type of all `x : A` that are merely equal to `a`.
+The connected component of a type `A` at an element `a : A` is the type of all
+`x : A` that are merely equal to `a`.
 
 ## Definition
 
@@ -93,4 +97,3 @@ is-trunc-connected-component {l} {k} A a H =
   is-trunc-Σ H (λ x → is-trunc-is-prop k is-prop-type-trunc-Prop)
 
 ```
-

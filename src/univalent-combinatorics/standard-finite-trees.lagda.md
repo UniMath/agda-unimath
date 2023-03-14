@@ -7,22 +7,31 @@ module univalent-combinatorics.standard-finite-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.maximum-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A standard finite tree is a finite tree that branches by standard finite sets. In contexts where one wouldn't be interested in considering finite trees to be the same if they differ up to a permutation of trees, people simply call our standard finite trees finite trees. From a univalent perspective, however, a finite tree is a tree built out of finite types, not just the standard finite types. Sometimes, standard finite trees are called planar finite trees, to emphasize that the branching types `Fin n` record the order in which the branches occur.
+A standard finite tree is a finite tree that branches by standard finite sets.
+In contexts where one wouldn't be interested in considering finite trees to be
+the same if they differ up to a permutation of trees, people simply call our
+standard finite trees finite trees. From a univalent perspective, however, a
+finite tree is a tree built out of finite types, not just the standard finite
+types. Sometimes, standard finite trees are called planar finite trees, to
+emphasize that the branching types `Fin n` record the order in which the
+branches occur.
 
 ## Definition
 

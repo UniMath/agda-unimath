@@ -9,7 +9,9 @@ module commutative-algebra.nilradical-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+
 open import foundation.universe-levels
+
 open import ring-theory.nilpotent-elements-rings
 ```
 
@@ -17,7 +19,8 @@ open import ring-theory.nilpotent-elements-rings
 
 ## Idea
 
-The nilradical of a commutative ring is the ideal consisting of all nilpotent elements.
+The nilradical of a commutative ring is the ideal consisting of all nilpotent
+elements.
 
 ## Definitions
 

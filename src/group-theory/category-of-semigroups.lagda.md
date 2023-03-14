@@ -7,22 +7,25 @@ module group-theory.category-of-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.isomorphisms-semigroups
-open import group-theory.precategory-of-semigroups
-open import group-theory.semigroups
+open import category-theory.large-categories
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import category-theory.large-categories
+
+open import group-theory.isomorphisms-semigroups
+open import group-theory.precategory-of-semigroups
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-Since isomorphic semigroups are equal, the precategory of semigroups is a category.
+Since isomorphic semigroups are equal, the precategory of semigroups is a
+category.
 
 ## Definition
 

@@ -9,6 +9,7 @@ module elementary-number-theory.lower-bounds-natural-numbers where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -18,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A lower bound for a type family `P` over the natural numbers is a natural number `n` such that `P x → n ≤ x` for all `x : ℕ`.
+A lower bound for a type family `P` over the natural numbers is a natural number
+`n` such that `P x → n ≤ x` for all `x : ℕ`.
 
 ## Definition
 

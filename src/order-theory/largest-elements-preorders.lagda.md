@@ -32,4 +32,3 @@ module _
   largest-element-Preorder : UU (l1 ⊔ l2)
   largest-element-Preorder = Σ (element-Preorder X) is-largest-element-Preorder
 ```
-

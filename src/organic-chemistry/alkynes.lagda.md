@@ -7,12 +7,15 @@ module organic-chemistry.alkynes where
 <details><summary>Imports</summary>
 
 ```agda
-open import organic-chemistry.hydrocarbons
-open import organic-chemistry.saturated-carbons
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
+
 open import univalent-combinatorics.finite-types
 ```
 
@@ -20,7 +23,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of which has a triple bond.
+An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of
+which has a triple bond.
 
 ## Definition
 

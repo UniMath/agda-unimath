@@ -7,19 +7,21 @@ module ring-theory.algebras-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.modules-rings
-open import ring-theory.rings
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import ring-theory.modules-rings
+open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-An algebra over a ring `R` consists of an `R`-module `M` equipped with a binary operation `x y ↦ xy : M → M → M` such that
+An algebra over a ring `R` consists of an `R`-module `M` equipped with a binary
+operation `x y ↦ xy : M → M → M` such that
 
 ```md
   (xy)z  = x(yz)
@@ -198,4 +200,3 @@ module _
 ```
 
 ### Unital algebras over a ring
-

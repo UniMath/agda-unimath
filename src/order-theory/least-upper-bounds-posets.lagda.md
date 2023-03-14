@@ -7,19 +7,22 @@ module order-theory.least-upper-bounds-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.posets
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import order-theory.posets
 ```
 
 </details>
 
 ## Idea
 
-An upper bound of two elements `x` and `y` in a poset `P` is an element `z` such that both `x ≤ z` and `y ≤ z` hold. A least upper bound of `x` and `y` is an upper bound `z` of `x` and `y` such that `z ≤ w` holds for any upper bound `w` of `x` and `y`.
+An upper bound of two elements `x` and `y` in a poset `P` is an element `z` such
+that both `x ≤ z` and `y ≤ z` hold. A least upper bound of `x` and `y` is an
+upper bound `z` of `x` and `y` such that `z ≤ w` holds for any upper bound `w`
+of `x` and `y`.
 
 ## Definitions
 

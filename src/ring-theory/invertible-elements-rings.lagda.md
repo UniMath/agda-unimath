@@ -7,20 +7,24 @@ module ring-theory.invertible-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.rings
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import group-theory.invertible-elements-monoids
+
+open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-Invertible elements are elements that have a two-sided multiplicative inverse. Such elements are also called the units of the Ring. The set of units of any ring forms a group.
+Invertible elements are elements that have a two-sided multiplicative inverse.
+Such elements are also called the units of the Ring. The set of units of any
+ring forms a group.
 
 ## Definition
 

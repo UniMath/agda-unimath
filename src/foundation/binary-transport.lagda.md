@@ -7,18 +7,19 @@ module foundation.binary-transport where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` and `q : y ＝ y'` in `A`, the binary transport of `B` is an operation
+Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` and
+`q : y ＝ y'` in `A`, the binary transport of `B` is an operation
 
 ```md
   binary-tr B p q : B x y → B x' y'

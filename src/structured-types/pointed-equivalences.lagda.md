@@ -7,10 +7,6 @@ module structured-types.pointed-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
-open import foundation-core.function-extensionality
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -26,13 +22,21 @@ open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import foundation-core.function-extensionality
+
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 </details>
 
 ## Idea
 
-A pointed equivalence is an equivalence in the category of pointed spaces. Equivalently, a pointed equivalence is a pointed map of which the underlying function is an equivalence.
+A pointed equivalence is an equivalence in the category of pointed spaces.
+Equivalently, a pointed equivalence is a pointed map of which the underlying
+function is an equivalence.
 
 ## Definitions
 

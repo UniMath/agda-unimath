@@ -7,6 +7,8 @@ module foundation-core.equality-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.identity-types
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -15,18 +17,22 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.universe-levels
-open import foundation.identity-types
 ```
 
 </details>
 
 ## Idea
 
-In the file [`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.md) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+In the file
+[`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.md) we already
+gave one characterization of the identity type of `fib f b`, for an arbitrary
+map `f : A → B`. Here we give a second characterization, using the fibers of the
+action on identifications of `f`.
 
 ## Theorem
 
-For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an equivalence
+For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an
+equivalence
 
 ```md
 (x ＝ y) ≃ fib (ap f) ((pr2 x) ∙ (inv (pr2 y)))

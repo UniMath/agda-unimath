@@ -7,18 +7,20 @@ module univalent-combinatorics.isotopies-latin-squares where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.latin-squares
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import univalent-combinatorics.latin-squares
 ```
 
 </details>
 
 ## Idea
 
-An isotopy of latin squares from `L` to `K` consists of equivalences of the rows, columns, and symbols preserving the multiplication tables.
+An isotopy of latin squares from `L` to `K` consists of equivalences of the
+rows, columns, and symbols preserving the multiplication tables.
 
 ## Definition
 

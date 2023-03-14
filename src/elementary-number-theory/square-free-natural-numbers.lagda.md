@@ -10,6 +10,7 @@ module elementary-number-theory.square-free-natural-numbers where
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
 ```
 
@@ -17,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural number `n` is said to be square-free if `x² | n ⇒ x = 1` for any natural number `x`.
+A natural number `n` is said to be square-free if `x² | n ⇒ x = 1` for any
+natural number `x`.
 
 ## Definition
 

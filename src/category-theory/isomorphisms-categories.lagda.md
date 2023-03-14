@@ -9,6 +9,7 @@ module category-theory.isomorphisms-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.isomorphisms-precategories
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
@@ -337,6 +338,7 @@ module _
 ```
 
 #### Associatitivity
+
 ```agda
   assoc-comp-iso-Cat :
     {x y z w : obj-Cat C}

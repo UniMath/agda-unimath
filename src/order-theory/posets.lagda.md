@@ -7,20 +7,22 @@ module order-theory.posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.preorders
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
+open import order-theory.preorders
 ```
 
 </details>
 
 ## Idea
 
-A poset is a set equipped with a reflexive, antisymmetric, transitive relation that takes values in propositions.
+A poset is a set equipped with a reflexive, antisymmetric, transitive relation
+that takes values in propositions.
 
 ## Definition
 

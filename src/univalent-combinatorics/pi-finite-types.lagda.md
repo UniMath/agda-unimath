@@ -7,18 +7,8 @@ module univalent-combinatorics.pi-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.finitely-presented-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.image-of-maps
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
@@ -44,7 +34,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.images
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.maybe
@@ -66,14 +55,27 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-presented-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.image-of-maps
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A type is `π_n`-finite if it has finitely many connected components and all of its homotopy groups up to level `n` at all base points are finite.
+A type is `π_n`-finite if it has finitely many connected components and all of
+its homotopy groups up to level `n` at all base points are finite.
 
 ## Definition
 

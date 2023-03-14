@@ -7,19 +7,22 @@ module order-theory.greatest-lower-bounds-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.posets
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import order-theory.posets
 ```
 
 </details>
 
 ## Idea
 
-A lower bound of two elements `x` and `y` in a poset `P` is an element `z` such that both `z ≤ x` and `z ≤ y` hold. A greatest lower bound of `x` and `y` is a lower bound `z` of `x` and `y` such that `w ≤ z` holds for any lower bound of `x` and `y`.
+A lower bound of two elements `x` and `y` in a poset `P` is an element `z` such
+that both `z ≤ x` and `z ≤ y` hold. A greatest lower bound of `x` and `y` is a
+lower bound `z` of `x` and `y` such that `w ≤ z` holds for any lower bound of
+`x` and `y`.
 
 ## Definitions
 

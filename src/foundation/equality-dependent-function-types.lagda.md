@@ -7,20 +7,22 @@ module foundation.equality-dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.type-theoretic-principle-of-choice
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.type-theoretic-principle-of-choice
 ```
 
 </details>
 
 ## Idea
 
-Given a family of types `B` over `A`, if we can characterize the identity types of each `B x`, then we can characterize the identity types of `(x : A) → B x`.
+Given a family of types `B` over `A`, if we can characterize the identity types
+of each `B x`, then we can characterize the identity types of `(x : A) → B x`.
 
 ### Contractibility
 
@@ -73,7 +75,7 @@ module _
 ## See also
 
 - Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.md).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.md).
 - Equality proofs in cartesian product types are characterized in
   [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - Equality proofs in dependent pair types are characterized in

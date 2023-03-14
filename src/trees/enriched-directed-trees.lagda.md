@@ -1,8 +1,12 @@
 # Enriched directed trees
 
-```
+```agda
 module trees.enriched-directed-trees where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
@@ -12,9 +16,12 @@ open import graph-theory.directed-graphs
 open import trees.directed-trees
 ```
 
+</details>
+
 ## Idea
 
-Consider a type `A` and a type family `B` over `A`. An `(A,B)`-enriched directed tree is a directed tree `T` equipped with a map
+Consider a type `A` and a type family `B` over `A`. An `(A,B)`-enriched directed
+tree is a directed tree `T` equipped with a map
 
 ```md
   shape : node-Directed-Tree T → A
@@ -26,7 +33,9 @@ and for each node `x` an equivalence
   e : B (shape x) ≃ Σ (node-Directed-Tree T) (λ y → edge-Directed-Tree T y x)
 ```
 
-By this equivalence, there is a higher group action of `Ω (A , f x)` on the type of children of `x`. We construct an embedding from `𝕎 A B` into the type of `(A , B)`-enriched directed trees.
+By this equivalence, there is a higher group action of `Ω (A , f x)` on the type
+of children of `x`. We construct an embedding from `𝕎 A B` into the type of
+`(A , B)`-enriched directed trees.
 
 ## Definition
 

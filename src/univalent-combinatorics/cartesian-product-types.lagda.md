@@ -7,13 +7,9 @@ module univalent-combinatorics.cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.decidable-equality
@@ -34,15 +30,22 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-The cartesian product of finite types is finite. We obtain a cartesian product operation on finite types.
+The cartesian product of finite types is finite. We obtain a cartesian product
+operation on finite types.
 
 ### The standard finite types are closed under cartesian products
 

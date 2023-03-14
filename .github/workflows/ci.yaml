@@ -22,11 +22,13 @@ on:
 
 # Cancel previous runs of the same branch
 concurrency:
-  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
+  group: "${{ github.workflow }}-${{ github.head_ref || github.run_id }}"
   cancel-in-progress: true
 
 env:
-  AGDAHTMLFLAGS: --only-scope-checking --html --html-highlight=code --html-dir=docs --css=docs/Agda.css
+  AGDAHTMLFLAGS:
+    --only-scope-checking --html --html-highlight=code --html-dir=docs
+    --css=docs/Agda.css
   AGDA: agda
 
 jobs:
@@ -34,8 +36,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macOS-latest , ubuntu-latest ]
-        agda: [ '2.6.3' ]
+        os: [macOS-latest, ubuntu-latest]
+        agda: ["2.6.3"]
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
@@ -51,11 +53,13 @@ jobs:
         name: Restore Agda formalisation cache
         with:
           path: main/_build
-          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+            hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
-            
+
       - name: Typecheck the whole formalisation
         run: |
           cd main
@@ -65,13 +69,13 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: main/_build
-          key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
+          key: "${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}"
 
   check-docs-gen:
     runs-on: macOS-latest
     strategy:
       matrix:
-        agda: [ '2.6.3' ]
+        agda: ["2.6.3"]
     needs: typecheck
     steps:
       - name: Checkout our repository
@@ -80,7 +84,7 @@ jobs:
           path: main
       - uses: r-lib/actions/setup-pandoc@v2
         with:
-          pandoc-version: '3.0.1'
+          pandoc-version: "3.0.1"
 
       - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
@@ -92,7 +96,9 @@ jobs:
         name: Restore Agda formalisation cache
         with:
           path: main/_build
-          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+            hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
@@ -102,3 +108,18 @@ jobs:
         run: |
           cd main
           make agda-html
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11.1"
+          check-latest: true
+          cache: "pip"
+
+      - run: pip install -r scripts/requirements.txt
+
+      - uses: pre-commit/action@v3.0.0

@@ -9,6 +9,7 @@ module category-theory.natural-numbers-object-precategories where
 ```agda
 open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -20,7 +21,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Let `C` be a precategory with a terminal object `t`. A natural numbers object in `C` is an object `n` with morphisms `z : hom t n` and `s : hom n n` such that for any object `x` and morphisms `q : hom t x` and `f : hom x x` there exists a unique `u : hom n x` such that:
+Let `C` be a precategory with a terminal object `t`. A natural numbers object in
+`C` is an object `n` with morphisms `z : hom t n` and `s : hom n n` such that
+for any object `x` and morphisms `q : hom t x` and `f : hom x x` there exists a
+unique `u : hom n x` such that:
+
 - u ∘ z = q
 - u ∘ s = f ∘ u.
 

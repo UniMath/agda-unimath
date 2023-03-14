@@ -8,11 +8,13 @@ module foundation.path-split-maps where
 
 ```agda
 open import foundation-core.path-split-maps public
+
+open import foundation.equivalences
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
-open import foundation.equivalences
 ```
 
 </details>
@@ -67,7 +69,8 @@ module _
 
 - For the notion of biinvertible maps see
   [`foundation.equivalences`](foundation.equivalences.md).
-- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+- For the notions of inverses and coherently invertible maps, also known as
+  half-adjoint equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).

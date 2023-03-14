@@ -7,20 +7,25 @@ module group-theory.monomorphisms-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.monomorphisms-large-precategories
+
+open import foundation.propositions
+open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups
-open import foundation.propositions
-open import foundation.universe-levels
-open import category-theory.monomorphisms-large-precategories
 ```
 
 </details>
 
 ## Idea
 
-A group homomorphism `f : x → y` is a monomorphism if whenever we have two group homomorphisms `g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that postcomposition by `f` is an embedding.
+A group homomorphism `f : x → y` is a monomorphism if whenever we have two group
+homomorphisms `g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The
+way to state this in Homotopy Type Theory is to say that postcomposition by `f`
+is an embedding.
 
 ## Definition
 

@@ -8,6 +8,7 @@ module category-theory.products-precategories where
 
 ```agda
 open import category-theory.precategories
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -22,13 +23,16 @@ open import foundation.universe-levels
 ## Idea
 
 A product of two objects `x` and `x` in a category `C` consists of:
+
 - an object `p`
-- morphisms `proj₁ : hom p x` and `proj₂ : hom p y`
-such that for every object `z` and morphisms `f : hom z x` and `g : hom z y` there exists a unique morphism `h : hom z p` such that
+- morphisms `proj₁ : hom p x` and `proj₂ : hom p y` such that for every object
+  `z` and morphisms `f : hom z x` and `g : hom z y` there exists a unique
+  morphism `h : hom z p` such that
 - `comp proj₁ h = f`
 - `comp proj₂ h = g`.
 
-We say that `C` has all binary products if there is a choice of a product for each pair of objects in `C`.
+We say that `C` has all binary products if there is a choice of a product for
+each pair of objects in `C`.
 
 ## Definition
 
@@ -116,7 +120,9 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
 
 ### Products of morphisms
 
-If `C` has all binary products then for any pair of morphisms `f : hom x₁ y₁` and `g : hom x₂ y₂` we can construct a morphism `f × g : hom (x₁ × x₂) (y₁ × y₂)`.
+If `C` has all binary products then for any pair of morphisms `f : hom x₁ y₁`
+and `g : hom x₂ y₂` we can construct a morphism
+`f × g : hom (x₁ × x₂) (y₁ × y₂)`.
 
 ```agda
 module _ {l1 l2 : Level} (C : Precat l1 l2)

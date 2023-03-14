@@ -7,8 +7,10 @@ module foundation.tuples-of-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
+
+open import foundation-core.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -38,6 +40,4 @@ tuple-types-complement-point A i = {!!}
 -}
 ```
 
--- Σ (x : Fin (n + 1)) (a ≠ x)
-   ≃
--- Fin n
+-- Σ (x : Fin (n + 1)) (a ≠ x) ≃ -- Fin n

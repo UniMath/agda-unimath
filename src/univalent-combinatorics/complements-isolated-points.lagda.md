@@ -7,28 +7,27 @@ module univalent-combinatorics.complements-isolated-points where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-maybe
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.maybe
-open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-For any point `x` in a finite type `X` of cardinality `n+1`, we can construct its complement, which is a type of cardinality `n`.
+For any point `x` in a finite type `X` of cardinality `n+1`, we can construct
+its complement, which is a type of cardinality `n`.
 
 ## Definition
 

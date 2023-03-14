@@ -7,6 +7,9 @@ module foundation.type-theoretic-principle-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-extensionality
+open import foundation.structure-identity-principle
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -14,15 +17,17 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
-open import foundation.structure-identity-principle
 ```
 
 </details>
 
 ## Idea
 
-A dependent function taking values in a dependent pair type is equivalently described as a pair of dependent functions. This equivalence, which gives the distributivity of Π over Σ, is also known as the type theoretic principle of choice. Indeed, it is the Curry-Howard interpretation of (one formulation of) the axiom of choice.
+A dependent function taking values in a dependent pair type is equivalently
+described as a pair of dependent functions. This equivalence, which gives the
+distributivity of Π over Σ, is also known as the type theoretic principle of
+choice. Indeed, it is the Curry-Howard interpretation of (one formulation of)
+the axiom of choice.
 
 ## Definitions
 
@@ -179,4 +184,3 @@ abstract
     {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
   is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
 ```
-

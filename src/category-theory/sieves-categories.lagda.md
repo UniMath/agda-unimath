@@ -8,6 +8,7 @@ module category-theory.sieves-categories where
 
 ```agda
 open import category-theory.categories
+
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -17,9 +18,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **sieve** `S` on an object `X` in a category `C` is a collection of morphisms into `X` which is closed under precomposition by arbitrary morphisms of `C`. In other words, for any morphism `f : Y → X` in `S` and any morphism `g : Z → Y` in `C`, the morphism `f ∘ g : Z → X` is in `S`.
+A **sieve** `S` on an object `X` in a category `C` is a collection of morphisms
+into `X` which is closed under precomposition by arbitrary morphisms of `C`. In
+other words, for any morphism `f : Y → X` in `S` and any morphism `g : Z → Y` in
+`C`, the morphism `f ∘ g : Z → X` is in `S`.
 
-The notion of sieve generalizes simultaneously the notion of right ideal in a monoid (a one-object category) and a lower set in a poset (a category with at most one morphism between any two objects).
+The notion of sieve generalizes simultaneously the notion of right ideal in a
+monoid (a one-object category) and a lower set in a poset (a category with at
+most one morphism between any two objects).
 
 ## Definition
 

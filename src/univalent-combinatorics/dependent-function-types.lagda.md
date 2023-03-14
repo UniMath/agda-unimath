@@ -7,11 +7,8 @@ module univalent-combinatorics.dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -24,7 +21,12 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -37,7 +39,8 @@ Dependent products of finite types indexed by a finite type are finite.
 
 ### Counting dependent products indexed by standard finite types
 
-If the elements of `A` can be counted and if for each `x : A` the elements of `B x` can be counted, then the elements of `Π A B` can be counted.
+If the elements of `A` can be counted and if for each `x : A` the elements of
+`B x` can be counted, then the elements of `Π A B` can be counted.
 
 ```agda
 count-Π-Fin :

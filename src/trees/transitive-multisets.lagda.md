@@ -7,19 +7,22 @@ module trees.transitive-multisets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import trees.multisets
 open import trees.submultisets
-open import foundation.embeddings
-open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A multiset `x` is said to be transitive if `y ⊑-𝕍 x` for every `y ∈-𝕍 x`. That is, `x` is transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we have `z ∈-𝕍 y ≃ z ∈-𝕍 x`.
+A multiset `x` is said to be transitive if `y ⊑-𝕍 x` for every `y ∈-𝕍 x`. That
+is, `x` is transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we have `z ∈-𝕍 y ≃ z ∈-𝕍 x`.
 
-Similarly, we say that `x` is weakly transitive if `y ⊆-𝕍 x` for every `y ∈-𝕍 x`. That is, `x` is weakly transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we have `z ∈-𝕍 y ↪ z ∈-𝕍 x`.
+Similarly, we say that `x` is weakly transitive if `y ⊆-𝕍 x` for every
+`y ∈-𝕍 x`. That is, `x` is weakly transitive if for every `z ∈-𝕍 y ∈-𝕍 x` we
+have `z ∈-𝕍 y ↪ z ∈-𝕍 x`.
 
 ## Definition
 

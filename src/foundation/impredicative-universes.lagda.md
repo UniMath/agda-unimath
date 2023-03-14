@@ -7,9 +7,9 @@ module foundation.impredicative-universes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.small-types
-open import foundation.universe-levels
+open import foundation-core.propositions
+open import foundation-core.small-types
+open import foundation-core.universe-levels
 ```
 
 </details>

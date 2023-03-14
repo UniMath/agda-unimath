@@ -7,22 +7,24 @@ module graph-theory.trails-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.undirected-graphs
-open import graph-theory.walks-undirected-graphs
+open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import graph-theory.undirected-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 </details>
 
 ## Idea
 
-A trail in an undirected graph is a walk that passes through each edge at most once
+A trail in an undirected graph is a walk that passes through each edge at most
+once
 
 ## Definition
 
@@ -130,7 +132,8 @@ is-trail-refl-walk-Undirected-Graph G {x} =
 
 ### Both walks in the decomposition of a trail are trails
 
-Note that in general, the concatenation of two trails does not need to be a trail.
+Note that in general, the concatenation of two trails does not need to be a
+trail.
 
 ```agda
 module _

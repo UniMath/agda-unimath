@@ -7,18 +7,20 @@ module group-theory.opposite-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.groups
-open import group-theory.isomorphisms-groups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.isomorphisms-groups
 ```
 
 </details>
 
 ## Idea
 
-The opposite of a group `G` with multiplication `μ` is a group with the same underlying set as `G` and multiplication given by `x y ↦ μ y x`.
+The opposite of a group `G` with multiplication `μ` is a group with the same
+underlying set as `G` and multiplication given by `x y ↦ μ y x`.
 
 ## Definition
 

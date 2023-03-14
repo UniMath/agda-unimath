@@ -7,8 +7,8 @@ module group-theory.orbits-monoid-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.monoid-actions
-open import group-theory.monoids
+open import category-theory.precategories
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,14 +18,18 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-open import category-theory.precategories
+
+open import group-theory.monoid-actions
+open import group-theory.monoids
 ```
 
 </details>
 
 ## Idea
 
-Given a monoid action `M → endo-Monoid X` we can define a category in which the objects are the elements of the set `X` and a morphism from `x` to `y` is an element `m` of the monoid `M` such that `mx = y`.
+Given a monoid action `M → endo-Monoid X` we can define a category in which the
+objects are the elements of the set `X` and a morphism from `x` to `y` is an
+element `m` of the monoid `M` such that `mx = y`.
 
 ## Definition
 

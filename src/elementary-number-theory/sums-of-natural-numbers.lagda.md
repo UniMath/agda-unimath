@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -20,8 +21,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -98,8 +99,5 @@ abstract
 
 ### Each of the summands is less than or equal to the total sum
 
--- ```agda
--- leq-sum-Fin-ℕ :
---   {k : ℕ} (f : Fin k → ℕ) (x : Fin k) → leq-ℕ (f x) (sum-Fin-ℕ f)
--- leq-sum-Fin-ℕ {succ-ℕ k} f x = {!leq-add-ℕ!}
--- ```
+--
+`agda -- leq-sum-Fin-ℕ : --   {k : ℕ} (f : Fin k → ℕ) (x : Fin k) → leq-ℕ (f x) (sum-Fin-ℕ f) -- leq-sum-Fin-ℕ {succ-ℕ k} f x = {!leq-add-ℕ!} -- `

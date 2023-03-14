@@ -8,17 +8,22 @@ module order-theory.large-preorders where
 
 ```agda
 open import Agda.Primitive using (Setω)
-open import order-theory.preorders
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import order-theory.preorders
 ```
 
 </details>
 
 ## Idea
 
-A large preorder consists of types indexed by a universe levels, and an ordering relation comparing objects of arbitrary universe levels. This level of generality accommodates the inclusion relation on subtypes of different universe levels.
+A large preorder consists of types indexed by a universe levels, and an ordering
+relation comparing objects of arbitrary universe levels. This level of
+generality accommodates the inclusion relation on subtypes of different universe
+levels.
 
 ## Definition
 

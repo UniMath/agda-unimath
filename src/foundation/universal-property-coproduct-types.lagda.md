@@ -7,22 +7,24 @@ module foundation.universal-property-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The universal property and dependent universal property of coproduct types characterize maps and dependent functions out of coproduct types.
+The universal property and dependent universal property of coproduct types
+characterize maps and dependent functions out of coproduct types.
 
 ```agda
 module _
@@ -93,4 +95,3 @@ module _
           ( Y))
         ( universal-property-coprod Y)
 ```
-

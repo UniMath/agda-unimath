@@ -118,3 +118,4 @@ module _
           ( symmetric-difference-decidable-subtype P Q)
           ( F))
         ( is-finite-coprod is-finite-intersection is-finite-intersection)
+```

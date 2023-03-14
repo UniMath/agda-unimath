@@ -11,65 +11,47 @@ module finite-group-theory.simpson-delooping-sign-homomorphism where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-group-theory.delooping-sign-homomorphism
-open import finite-group-theory.finite-type-groups
-open import finite-group-theory.permutations
-open import finite-group-theory.sign-homomorphism
-open import finite-group-theory.transpositions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equivalence-relations
-open import foundation.decidable-propositions
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-classes
-open import foundation.equivalence-extensionality
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-propositional-truncation
-open import foundation.functoriality-set-quotients
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
-open import foundation.logical-equivalences
-open import foundation.mere-equivalences
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
-open import foundation.truncated-types
-open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universal-property-set-quotients
-open import foundation.universe-levels
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-open import group-theory.automorphism-groups
+
+open import finite-group-theory.delooping-sign-homomorphism
+open import finite-group-theory.finite-type-groups
+open import finite-group-theory.permutations
+open import finite-group-theory.sign-homomorphism
+open import finite-group-theory.transpositions
+
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equivalence-relations
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalence-classes
+open import foundation.equivalence-extensionality
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.involutions
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
+
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
-open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-open import group-theory.semigroups
-open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
-open import synthetic-homotopy-theory.loop-spaces
+
 open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
@@ -767,4 +749,3 @@ module _
           ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 ```
-

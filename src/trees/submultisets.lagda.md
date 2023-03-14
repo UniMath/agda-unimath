@@ -7,17 +7,19 @@ module trees.submultisets where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.multisets
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.universe-levels
+
+open import trees.multisets
 ```
 
 </details>
 
 ## Idea
 
-Given two multisets `x` and `y`, we say that `x` is a submultiset of `y` if for every `z ∈-𝕍 x` we have `z ∈-𝕍 x ↪ z ∈-𝕍 y`.
+Given two multisets `x` and `y`, we say that `x` is a submultiset of `y` if for
+every `z ∈-𝕍 x` we have `z ∈-𝕍 x ↪ z ∈-𝕍 y`.
 
 ## Definition
 

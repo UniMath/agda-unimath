@@ -7,13 +7,15 @@ module linear-algebra.functoriality-vectors where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.vectors
+open import elementary-number-theory.natural-numbers
+
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import linear-algebra.vectors
 ```
 
 </details>

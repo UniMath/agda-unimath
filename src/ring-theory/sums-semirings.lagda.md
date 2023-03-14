@@ -7,16 +7,20 @@ module ring-theory.sums-semirings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.semirings
+open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
+
+open import ring-theory.semirings
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -24,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary addition operation on a semiring `R` to any family of elements of `R` indexed by a standard finite type.
+The sum operation extends the binary addition operation on a semiring `R` to any
+family of elements of `R` indexed by a standard finite type.
 
 ## Definition
 

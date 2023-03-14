@@ -8,31 +8,24 @@ module foundation.universal-property-pullbacks where
 
 ```agda
 open import foundation-core.universal-property-pullbacks public
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.cones-pullbacks
-open import foundation-core.contractible-maps
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
+
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.universe-levels
+
+open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The universal property of pullbacks describes the optimal way to complete a diagram of the form
+The universal property of pullbacks describes the optimal way to complete a
+diagram of the form
 
 ```md
          B

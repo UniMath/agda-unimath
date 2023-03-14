@@ -7,9 +7,11 @@ module graph-theory.orientations-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import graph-theory.undirected-graphs
+
 open import univalent-combinatorics.finite-types
 ```
 
@@ -17,7 +19,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An orientation of an undirected graph is a function that picks a direction for every edge.
+An orientation of an undirected graph is a function that picks a direction for
+every edge.
 
 ## Definition
 

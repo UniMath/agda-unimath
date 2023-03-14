@@ -7,25 +7,27 @@ module foundation.pairs-of-distinct-elements where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.negation
 open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Pairs of distinct elements in a type `A` consist of two elements `x` and `y` of `A` equipped with an element of type `x ≠ y`.
+Pairs of distinct elements in a type `A` consist of two elements `x` and `y` of
+`A` equipped with an element of type `x ≠ y`.
 
 ## Definition
 

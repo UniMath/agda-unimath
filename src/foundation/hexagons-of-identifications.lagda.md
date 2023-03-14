@@ -15,7 +15,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A hexagon of identifications is an identification `((α ∙ β) ∙ γ) ＝ (δ ∙ (ε ∙ ζ))`.
+A hexagon of identifications is an identification
+`((α ∙ β) ∙ γ) ＝ (δ ∙ (ε ∙ ζ))`.
 
 ## Definition
 

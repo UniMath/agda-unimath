@@ -7,18 +7,20 @@ module graph-theory.mere-equivalences-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.equivalences-undirected-graphs
-open import graph-theory.undirected-graphs
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 </details>
 
 ## Idea
 
-Two undirected graphs are said to be merely equivalent if there merely exists an equivalence of undirected graphs between them.
+Two undirected graphs are said to be merely equivalent if there merely exists an
+equivalence of undirected graphs between them.
 
 ## Definition
 

@@ -8,9 +8,11 @@ module category-theory.equivalences-large-precategories where
 
 ```agda
 open import Agda.Primitive using (Setω)
+
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-isomorphisms-large-precategories
+
 open import foundation.universe-levels
 ```
 
@@ -18,7 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The large precategories `C` and `D` are equivalent if there are functors `F : C → D` and `G : D → C` such that
+The large precategories `C` and `D` are equivalent if there are functors
+`F : C → D` and `G : D → C` such that
+
 - `comp G F` is naturally isomorphic to the identity functor on `C`,
 - `comp F G` is naturally isomorphic to the identity functor on `D`.
 

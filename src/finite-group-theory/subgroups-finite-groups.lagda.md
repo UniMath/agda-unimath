@@ -9,6 +9,7 @@ module finite-group-theory.subgroups-finite-groups where
 ```agda
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-semigroups
+
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -18,11 +19,13 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.decidable-subgroups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
+
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```
@@ -60,7 +63,9 @@ module _
 
 ### Finite subgroups of finite groups
 
-By default, finite subgroups of finite groups are considered to be decidable. Indeed, one can prove that if a subgroup of a finite group has a finite underlying type, then it must be a decidable subgroup.
+By default, finite subgroups of finite groups are considered to be decidable.
+Indeed, one can prove that if a subgroup of a finite group has a finite
+underlying type, then it must be a decidable subgroup.
 
 ```agda
 module _

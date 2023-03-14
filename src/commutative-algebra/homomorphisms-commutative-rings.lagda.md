@@ -8,7 +8,9 @@ module commutative-algebra.homomorphisms-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+
 open import foundation.universe-levels
+
 open import ring-theory.homomorphisms-rings
 ```
 
@@ -16,7 +18,8 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-A morphism of commutative rings is just a morphism between their underlying rings.
+A morphism of commutative rings is just a morphism between their underlying
+rings.
 
 ## Definition
 

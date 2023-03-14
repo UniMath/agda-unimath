@@ -10,10 +10,8 @@ module trees.directed-trees where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.functions
@@ -27,6 +25,7 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
+
 open import graph-theory.directed-graphs
 open import graph-theory.walks-directed-graphs
 ```
@@ -35,7 +34,8 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A directed tree is a directed graph `G` equipped with a rood `r : G` such that for every vertex `x : G` the type of trails from `x` to `r` is contractible.
+A directed tree is a directed graph `G` equipped with a rood `r : G` such that
+for every vertex `x : G` the type of trails from `x` to `r` is contractible.
 
 ## Definition
 

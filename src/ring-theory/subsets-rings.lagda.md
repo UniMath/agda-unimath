@@ -7,12 +7,13 @@ module ring-theory.subsets-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.rings
 open import foundation.dependent-pair-types
 open import foundation.propositional-extensionality
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import ring-theory.rings
 ```
 
 </details>

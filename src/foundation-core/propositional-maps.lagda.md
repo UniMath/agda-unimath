@@ -10,10 +10,7 @@ module foundation-core.propositional-maps where
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -24,7 +21,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map is said to be propositional if its fibers are propositions. This condition is equivalent to being an embedding.
+A map is said to be propositional if its fibers are propositions. This condition
+is equivalent to being an embedding.
 
 ## Definition
 

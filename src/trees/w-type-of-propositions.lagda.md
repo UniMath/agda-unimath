@@ -7,8 +7,6 @@ module trees.w-type-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.extensional-w-types
-open import trees.w-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -17,13 +15,17 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import trees.extensional-w-types
+open import trees.w-types
 ```
 
 </details>
 
 ## Idea
 
-The W-type of the type of propositions is defined using the type of propositions and the canonical type family over it.
+The W-type of the type of propositions is defined using the type of propositions
+and the canonical type family over it.
 
 ## Definition
 

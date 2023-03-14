@@ -29,8 +29,9 @@ A square of identifications
          bottom
 ```
 
-is said to _commute_ if there is an identification `left ∙ bottom ＝ top ∙ right`.
-Such an identification may be called a _coherence_ of the square.
+is said to _commute_ if there is an identification
+`left ∙ bottom ＝ top ∙ right`. Such an identification may be called a
+_coherence_ of the square.
 
 ## Definition
 
@@ -50,8 +51,8 @@ module _
 
 ### Composing squares of identifications
 
-We can compose coherence squares that have an edge in common.
-This is also called _pasting_ of squares.
+We can compose coherence squares that have an edge in common. This is also
+called _pasting_ of squares.
 
 ```agda
 module _
@@ -95,8 +96,9 @@ module _
 
 ### Pasting of identifications along edges of squares of identifications
 
-Given a coherence square with an edge `p` and a new identification `s : p ＝ p'` then we may paste that identification onto
-the square to get a coherence square having `p'` as an edge instead of `p`.
+Given a coherence square with an edge `p` and a new identification `s : p ＝ p'`
+then we may paste that identification onto the square to get a coherence square
+having `p'` as an edge instead of `p`.
 
 ```agda
 module _
@@ -131,8 +133,8 @@ module _
 
 ### Whiskering squares of identifications
 
-Given an identification at one the vertices of a coherence square,
-then we may whisker the square by that identification.
+Given an identification at one the vertices of a coherence square, then we may
+whisker the square by that identification.
 
 ```agda
 module _

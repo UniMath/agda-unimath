@@ -7,21 +7,20 @@ module ring-theory.binomial-theorem-semirings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.powers-of-elements-semirings
-open import ring-theory.semirings
-open import ring-theory.sums-semirings
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.unit-type
-open import foundation.universe-levels
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
+
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
+
 open import linear-algebra.vectors-on-semirings
+
+open import ring-theory.powers-of-elements-semirings
+open import ring-theory.semirings
+open import ring-theory.sums-semirings
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -29,7 +28,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial theorem in semirings asserts that for any two elements `x` and `y` of a commutative ring `R` and any natural number `n`, if `xy = yx` holds then we have
+The binomial theorem in semirings asserts that for any two elements `x` and `y`
+of a commutative ring `R` and any natural number `n`, if `xy = yx` holds then we
+have
 
 ```md
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.

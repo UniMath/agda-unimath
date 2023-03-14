@@ -7,22 +7,22 @@ module graph-theory.undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.directed-graphs
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import graph-theory.directed-graphs
 ```
 
 </details>
 
 ## Idea
 
-An undirected graph consists of a type `V` of vertices and a family `E` of types over the unordered pairs of `V`.
+An undirected graph consists of a type `V` of vertices and a family `E` of types
+over the unordered pairs of `V`.
 
 ## Definition
 

@@ -7,20 +7,23 @@ module ring-theory.nilpotent-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.powers-of-elements-rings
-open import ring-theory.rings
+open import elementary-number-theory.natural-numbers
+
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import ring-theory.powers-of-elements-rings
+open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-A nilpotent element in a ring is an element `x` for which there is a natural number `n` such that `x^n = 0`.
+A nilpotent element in a ring is an element `x` for which there is a natural
+number `n` such that `x^n = 0`.
 
 ## Definition
 

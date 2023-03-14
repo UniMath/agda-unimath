@@ -7,11 +7,12 @@ module order-theory.distributive-lattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.lattices
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
+open import order-theory.lattices
 ```
 
 </details>

@@ -15,7 +15,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The Curry-Howard interpretation of negation in type theory is the interpretation of the proposition `P ⇒ ⊥` using propositions as types. Thus, the negation of a type `A` is the type `A → empty`.
+The Curry-Howard interpretation of negation in type theory is the interpretation
+of the proposition `P ⇒ ⊥` using propositions as types. Thus, the negation of a
+type `A` is the type `A → empty`.
 
 ## Definition
 

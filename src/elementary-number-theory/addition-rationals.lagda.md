@@ -8,21 +8,20 @@ module elementary-number-theory.addition-rationals where
 
 ```agda
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.rational-numbers
+
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
-open import foundation.propositions
-open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 
 </details>
 
 ## Idea
 
-We introduce addition on the rationals and derive its basic properties. Properties of addition with respect to inequality are derived in `inequality-ratonals`.
+We introduce addition on the rationals and derive its basic properties.
+Properties of addition with respect to inequality are derived in
+`inequality-ratonals`.
 
 ## Definition
 

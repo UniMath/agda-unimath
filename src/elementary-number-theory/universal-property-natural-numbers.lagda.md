@@ -8,6 +8,7 @@ module elementary-number-theory.universal-property-natural-numbers where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -24,7 +25,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The universal property of the natural numbers asserts that for any type `X` equipped with a point `x : X` and an endomorphism `f : X → X`, the type of structure preserving maps from `ℕ` to `X` is contractible.
+The universal property of the natural numbers asserts that for any type `X`
+equipped with a point `x : X` and an endomorphism `f : X → X`, the type of
+structure preserving maps from `ℕ` to `X` is contractible.
 
 ```agda
 module _

@@ -7,14 +7,12 @@ module graph-theory.walks-directed-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.directed-graphs
-open import graph-theory.equivalences-directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -23,14 +21,18 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import graph-theory.directed-graphs
+open import graph-theory.equivalences-directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>
 
 ## Idea
 
-A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges that connect `x` to `y`.
+A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges
+that connect `x` to `y`.
 
 ## Definitions
 

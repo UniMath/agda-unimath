@@ -8,17 +8,20 @@ module category-theory.terminal-objects-precategories where
 
 ```agda
 open import category-theory.precategories
-open import foundation-core.identity-types
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 ```
 
 </details>
 
 ## Idea
 
-The terminal object of a precategory (if it exists) is an object with the universal property that there is a unique morphism into it from any object.
+The terminal object of a precategory (if it exists) is an object with the
+universal property that there is a unique morphism into it from any object.
 
 ## Definition
 

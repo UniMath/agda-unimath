@@ -7,20 +7,21 @@ module structured-types.symmetric-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.involutive-type-of-h-space-structures
-open import structured-types.pointed-types
-open import structured-types.symmetric-elements-involutive-types
 open import foundation.dependent-pair-types
 open import foundation.symmetric-operations
 open import foundation.universe-levels
-open import univalent-combinatorics.2-element-types
+
+open import structured-types.involutive-type-of-h-space-structures
+open import structured-types.pointed-types
+open import structured-types.symmetric-elements-involutive-types
 ```
 
 </details>
 
 ## Idea
 
-Symmetric H-spaces are defined to be poinded types A equipped with a symmetric element of the involutive type of H-space structures on A.
+Symmetric H-spaces are defined to be poinded types A equipped with a symmetric
+element of the involutive type of H-space structures on A.
 
 ## Definitions
 

@@ -13,13 +13,13 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -46,7 +46,8 @@ is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 
 ### Definition 2
 
-This is an implementation of the idea of being prime, which is usually taken as the definition.
+This is an implementation of the idea of being prime, which is usually taken as
+the definition.
 
 ```agda
 is-one-is-proper-divisor-ℕ : ℕ → UU lzero

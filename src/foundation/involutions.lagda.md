@@ -8,21 +8,24 @@ module foundation.involutions where
 
 ```agda
 open import foundation-core.involutions public
+
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+
 open import foundation-core.automorphisms
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.universe-levels
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
 ```
 
 </details>
 
 ## Idea
 
-An involution on a type `A` is a map (or an equivalence) `f : A → A` such that `(f ∘ f) ~ id`
+An involution on a type `A` is a map (or an equivalence) `f : A → A` such that
+`(f ∘ f) ~ id`
 
 ## Properties
 

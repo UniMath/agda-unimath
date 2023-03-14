@@ -14,6 +14,7 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -292,6 +293,7 @@ is-id-is-gcd-zero-ℤ {inr (inr b)} {x} H with (is-plus-or-minus-sim-unit-ℤ (i
 ```
 
 ### `gcd-ℤ a 0 ＝ abs-ℤ a`
+
 ```agda
 is-sim-id-is-gcd-zero-ℤ' : {a x : ℤ} → gcd-ℤ a zero-ℤ ＝ x → sim-unit-ℤ x a
 is-sim-id-is-gcd-zero-ℤ' {a} {x} H = is-sim-id-is-gcd-zero-ℤ {a} {x}

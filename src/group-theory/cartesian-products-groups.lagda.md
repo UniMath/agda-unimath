@@ -7,23 +7,25 @@ module group-theory.cartesian-products-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.cartesian-products-monoids
-open import group-theory.cartesian-products-semigroups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.cartesian-products-monoids
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-The cartesian product of two groups `G` and `H` has the product of the underlying sets of `G` and `H` as its underlying type, and is equipped with pointwise multiplication.
+The cartesian product of two groups `G` and `H` has the product of the
+underlying sets of `G` and `H` as its underlying type, and is equipped with
+pointwise multiplication.
 
 ## Definition
 

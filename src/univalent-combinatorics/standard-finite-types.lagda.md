@@ -7,6 +7,9 @@ module univalent-combinatorics.standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -26,8 +29,7 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
+
 open import structured-types.types-equipped-with-endomorphisms
 ```
 
@@ -35,7 +37,10 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (n+1) := (Fin n) + 1`. **Note** that the outermost coproduct (i.e. the `inr` injection) is the _top_ element, when `Fin n` is considered as an initial segment of `n`.
+The standard finite types are defined inductively by `Fin 0 := empty` and
+`Fin (n+1) := (Fin n) + 1`. **Note** that the outermost coproduct (i.e. the
+`inr` injection) is the _top_ element, when `Fin n` is considered as an initial
+segment of `n`.
 
 ## Definition
 

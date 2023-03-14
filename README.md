@@ -1,6 +1,7 @@
 # Univalent mathematics in Agda
 
-[![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
+[![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
+[![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
 
 The `agda-unimath` library is a community formalisation project for univalent
 mathematics in [Agda](https://github.com/agda/agda). The library project was
@@ -17,15 +18,15 @@ the library about any topic in mathematics.
 2. [Discord](https://discord.gg/Zp2e8hYsuX)
 3. [Twitch](https://www.twitch.tv/agdaunimath)
 
-
 ## Citing the `agda-unimath` library
 
 ```
 @misc{Agda-UniMath,
-  author =       {Egbert Rijke and 
+  author =       {Egbert Rijke and
                   Elisabeth Bonnevier and
                   Jonathan Prieto-Cubides and others},
   title =        {Univalent mathematics in {Agda}},
   url =          {https://github.com/UniMath/agda-unimath/},
   howpublished = {\url{https://unimath.github.io/agda-unimath/}}
 }
+```

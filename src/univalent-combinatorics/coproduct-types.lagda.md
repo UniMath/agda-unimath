@@ -7,13 +7,10 @@ module univalent-combinatorics.coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
-open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -25,15 +22,20 @@ open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Coproducts of finite types are finite, giving a coproduct operation on the type 𝔽 of finite types.
+Coproducts of finite types are finite, giving a coproduct operation on the type
+𝔽 of finite types.
 
 ## Properties
 

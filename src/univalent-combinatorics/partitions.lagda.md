@@ -7,31 +7,27 @@ module univalent-combinatorics.partitions where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.univalence
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -40,11 +36,16 @@ open import elementary-number-theory.natural-numbers
 
 A partition of a finite type `X` can be defined in several equivalent ways:
 
-- A partition is a subset `P` of the powerset of `X` such that each `U ⊆ X` in `P` is inhabited and each element `x : X` is in exactly one subset `U ⊆ X` in `P`.
+- A partition is a subset `P` of the powerset of `X` such that each `U ⊆ X` in
+  `P` is inhabited and each element `x : X` is in exactly one subset `U ⊆ X` in
+  `P`.
 - A partition is an equivalence relation on `X`
-- A partition is a decomposition of `X` into a type of the form `Σ A B` where `A` is finite and `B` is a family of inhabited finite types, i.e., it consists of such `A` and `B` and an equivalence `X ≃ Σ A B`.
+- A partition is a decomposition of `X` into a type of the form `Σ A B` where
+  `A` is finite and `B` is a family of inhabited finite types, i.e., it consists
+  of such `A` and `B` and an equivalence `X ≃ Σ A B`.
 
-Note that the last description is subtly different from the notion of unlabeled partition (i.e., Ferrers diagram), because it only uses mere equivalences.
+Note that the last description is subtly different from the notion of unlabeled
+partition (i.e., Ferrers diagram), because it only uses mere equivalences.
 
 ## Definition
 

@@ -20,13 +20,19 @@ block-delimiter = {left = "$$", right = "$$"}
 inline-delimiter = {left = "$", right = "$"}
 macros = "theme/latex-macros.txt"
 
+[preprocessor.catppuccin]
+assets_version = "0.1.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+
 [output.katex]
+
+[output.linkcheck]
+follow-web-links = false
 
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "Ayu"
 copy-fonts = true
-additional-css = ["theme/Agda.css", "theme/pagetoc.css"]
+additional-css = ["theme/Agda.css", "theme/pagetoc.css", "./theme/catppuccin.css", "./theme/catppuccin-highlight.css"]
 additional-js = ["theme/js/custom.js", "theme/images/agda-unimath-logo.svg", "theme/pagetoc.js"]
 no-section-label = false
 git-repository-url = "https://github.com/UniMath/agda-unimath"

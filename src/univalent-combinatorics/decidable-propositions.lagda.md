@@ -11,6 +11,9 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-propositions public
+
+open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -20,7 +23,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -92,4 +97,3 @@ abstract
   number-of-elements-count-eq d x y =
     cases-number-of-elements-count-eq d (d x y)
 ```
-

@@ -7,25 +7,29 @@ module trees.induction-w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 ```
 
 </details>
 
 ## Idea
 
-There are several induction principles on W-types, besided the induction principle that each W-type comes equipped with by definition. The first is an induction principle formulated with respect to the elementhood relation on W-types. The second is a strong induction principle, analogous to the strong induction principle for the natural numbers.
+There are several induction principles on W-types, besided the induction
+principle that each W-type comes equipped with by definition. The first is an
+induction principle formulated with respect to the elementhood relation on
+W-types. The second is a strong induction principle, analogous to the strong
+induction principle for the natural numbers.
 
 ## Properties
 
@@ -111,7 +115,8 @@ module _
 
 #### The strong induction principle for W-types
 
-We first prove an intermediate induction principle with computation rule, where we obtain sections of □-𝕎 P.
+We first prove an intermediate induction principle with computation rule, where
+we obtain sections of □-𝕎 P.
 
 ```agda
   □-strong-ind-𝕎 :
@@ -131,7 +136,8 @@ We first prove an intermediate induction principle with computation rule, where 
     □-strong-comp-𝕎 h (α b) y K
 ```
 
-Now we prove the actual induction principle with computation rule, where we obtain sections of P.
+Now we prove the actual induction principle with computation rule, where we
+obtain sections of P.
 
 ```agda
 strong-ind-𝕎 :

@@ -7,7 +7,6 @@ module order-theory.order-preserving-maps-preorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.preorders
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,13 +17,16 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
+open import order-theory.preorders
 ```
 
 </details>
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two preorders is siad to be order preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two preorders is siad to be
+order preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 

@@ -7,11 +7,18 @@ module foundation.slice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.polynomial-endofunctors
+open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.univalence
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
@@ -22,20 +29,16 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.polynomial-endofunctors
-open import foundation.structure-identity-principle
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 ```
 
 </details>
 
 ## Idea
 
-The slice of a category over an object X is the category of morphisms into X. A morphism in the slice from `f : A → X` to `g : B → X` consists of a function `h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these definitions for types.
+The slice of a category over an object X is the category of morphisms into X. A
+morphism in the slice from `f : A → X` to `g : B → X` consists of a function
+`h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these
+definitions for types.
 
 ## Definition
 
@@ -361,5 +364,4 @@ module _
   [`foundation.coslice`](foundation.coslice.md).
 - For slices in the context of category theory see
   [`category-theory.slice-precategories`](category-theory.slice-precategories.md).
-- For fibered maps see
-  [`foundation.fibered-maps`](foundation.fibered-maps.md).
+- For fibered maps see [`foundation.fibered-maps`](foundation.fibered-maps.md).

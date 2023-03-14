@@ -7,21 +7,22 @@ module foundation.locally-small-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.small-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.inhabited-subtypes
-open import foundation.propositions
-open import foundation.subtypes
 open import foundation.subuniverses
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.small-types
+open import foundation-core.subtypes
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

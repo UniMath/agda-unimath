@@ -7,20 +7,16 @@ module group-theory.commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.monoids
-open import group-theory.semigroups
-open import foundation.binary-embeddings
-open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
+
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>

@@ -33,20 +33,39 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The type `X` is called the indexing type of the Σ-decomposition, the elements of `Y x` are called the cotypes of the Σ-decomposition, and the equivalence `A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
+A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited
+types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The
+type `X` is called the indexing type of the Σ-decomposition, the elements of
+`Y x` are called the cotypes of the Σ-decomposition, and the equivalence
+`A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
 
-Note that types may have many Σ-decomposition. The type of Σ-decompositions of the unit type, for instance, is equivalent to the type of all pointed connected types. Alternatively, we may think of the type of Σ-decompositions of the unit type as the type of higher groupoid structures on a point, i.e., the type of higher group structures.
+Note that types may have many Σ-decomposition. The type of Σ-decompositions of
+the unit type, for instance, is equivalent to the type of all pointed connected
+types. Alternatively, we may think of the type of Σ-decompositions of the unit
+type as the type of higher groupoid structures on a point, i.e., the type of
+higher group structures.
 
-We may restrict to Σ-decompositions where the indexing type is in a given subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
+We may restrict to Σ-decompositions where the indexing type is in a given
+subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
 
-The type of set-indexed Σ-decompositions of a type `A` is equivalent to the type of equivalence relations on `A`.
+The type of set-indexed Σ-decompositions of a type `A` is equivalent to the type
+of equivalence relations on `A`.
 
 ## Definitions
 

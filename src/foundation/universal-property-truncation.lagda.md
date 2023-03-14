@@ -8,26 +8,26 @@ module foundation.universal-property-truncation where
 
 ```agda
 open import foundation-core.universal-property-truncation public
-open import foundation.contractible-maps
+
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.surjective-maps
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-types
-open import foundation.universe-levels
+
+open import foundation-core.contractible-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -887,3 +887,4 @@ module _
   triangle-distributive-trunc-Π-is-finite-Set =
     pr2 (center distributive-trunc-Π-is-finite-Set)
     -}
+```

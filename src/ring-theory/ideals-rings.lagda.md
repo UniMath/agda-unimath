@@ -7,34 +7,27 @@ module ring-theory.ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.rings
-open import ring-theory.subsets-rings
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.equational-reasoning
-open import foundation.existential-quantification
-open import foundation.fibers-of-maps
-open import foundation.functions
 open import foundation.identity-types
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.universe-levels
-open import group-theory.abelian-groups
+
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
-open import univalent-combinatorics.lists
+
+open import ring-theory.rings
+open import ring-theory.subsets-rings
 ```
 
 </details>
 
 ## Idea
 
-A left ideal of a ring `R` is an additive subgroup of `R` that is closed under multiplication by elements of `R` from the left.
+A left ideal of a ring `R` is an additive subgroup of `R` that is closed under
+multiplication by elements of `R` from the left.
 
 ## Definitions
 

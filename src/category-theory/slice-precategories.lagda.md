@@ -11,11 +11,11 @@ open import category-theory.precategories
 open import category-theory.products-precategories
 open import category-theory.pullbacks-precategories
 open import category-theory.terminal-objects-precategories
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -24,7 +24,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
 
@@ -32,7 +31,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The slice precategory of a precategory `C` over an object `X` of `C` is the category of objects of `C` equipped with a morphism into `X`.
+The slice precategory of a precategory `C` over an object `X` of `C` is the
+category of objects of `C` equipped with a morphism into `X`.
 
 ## Definitions
 
@@ -165,7 +165,8 @@ module _
 
 ### The slice precategory always has a terminal object
 
-The terminal object in the slice (pre-)category `C/X` is the identity morphism `id : hom X X`.
+The terminal object in the slice (pre-)category `C/X` is the identity morphism
+`id : hom X X`.
 
 ```agda
 module _

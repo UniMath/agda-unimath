@@ -7,13 +7,16 @@ module foundation.limited-principle-of-omniscience where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.disjunction
 open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -21,7 +24,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The **Limited Principle of Omniscience** asserts that for every sequence `f : ℕ → Fin 2` either there exists an `n` such that `f n ＝ 1` or for all `n` we have `f n ＝ 0`.
+The **Limited Principle of Omniscience** asserts that for every sequence
+`f : ℕ → Fin 2` either there exists an `n` such that `f n ＝ 1` or for all `n`
+we have `f n ＝ 0`.
 
 ## Definition
 

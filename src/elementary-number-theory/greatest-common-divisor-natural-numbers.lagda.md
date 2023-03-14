@@ -19,6 +19,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -34,7 +35,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The greatest common divisor of two natural numbers `x` and `y` is a number `gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and `y` if and only if it is a divisor of `gcd x y`.
+The greatest common divisor of two natural numbers `x` and `y` is a number
+`gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and
+`y` if and only if it is a divisor of `gcd x y`.
 
 ## Definition
 

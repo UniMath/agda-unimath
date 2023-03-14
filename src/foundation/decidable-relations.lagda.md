@@ -7,7 +7,6 @@ module foundation.decidable-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
@@ -15,13 +14,15 @@ open import foundation.homotopies
 open import foundation.propositions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation-core.decidable-propositions
 ```
 
 </details>
 
 ## Idea
 
-A decidable (binary) relation on `X` is a binary relation `R` on `X` such that each `R x y` is a decidable proposition
+A decidable (binary) relation on `X` is a binary relation `R` on `X` such that
+each `R x y` is a decidable proposition
 
 ## Definitions
 

@@ -9,6 +9,7 @@ module elementary-number-theory.relatively-prime-integers where
 ```agda
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
+
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -17,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two integers are said to be relatively prime if their greatest common divisor is 1.
+Two integers are said to be relatively prime if their greatest common divisor
+is 1.
 
 ## Definition
 

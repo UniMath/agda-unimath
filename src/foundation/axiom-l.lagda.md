@@ -7,6 +7,15 @@ module foundation.axiom-l where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.full-subtypes
+open import foundation.function-extensionality
+open import foundation.functoriality-dependent-function-types
+open import foundation.sets
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universal-property-identity-types
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
@@ -18,22 +27,16 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.univalence
 open import foundation-core.universe-levels
-
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-function-types
-open import foundation.sets
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.universal-property-identity-types
 ```
 
 </details>
 
 ## Idea
 
-Axiom L, which is due to Peter Lumsdaine, asserts that for any two types `X` and `Y` in a common universe, the map `X ＝ Y → X ≃ Y` is an embedding. This axiom is a common generalization of the univalence axiom and axiom K, in the sense that both univalence and axiom K imply axiom L.
+Axiom L, which is due to Peter Lumsdaine, asserts that for any two types `X` and
+`Y` in a common universe, the map `X ＝ Y → X ≃ Y` is an embedding. This axiom
+is a common generalization of the univalence axiom and axiom K, in the sense
+that both univalence and axiom K imply axiom L.
 
 ## Definition
 

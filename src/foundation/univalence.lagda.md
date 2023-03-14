@@ -8,6 +8,10 @@ module foundation.univalence where
 
 ```agda
 open import foundation-core.univalence public
+
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -15,17 +19,17 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.universe-levels
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
 ```
 
 </details>
 
 ## Idea
 
-The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
+The univalence axiom characterizes the identity types of universes. It asserts
+that the map `Id A B → A ≃ B` is an equivalence.
 
-In this file we postulate the univalence axiom. Its statement is defined in [`foundation-core.univalence`](foundation-core.univalence.md).
+In this file we postulate the univalence axiom. Its statement is defined in
+[`foundation-core.univalence`](foundation-core.univalence.md).
 
 ## Postulates
 

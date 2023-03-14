@@ -9,7 +9,6 @@ module graph-theory.directed-graphs where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -19,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A graph consists of a type of vertices equipped with a binary, type valued relation of edges.
+A graph consists of a type of vertices equipped with a binary, type valued
+relation of edges.
 
 ## Definition
 
@@ -105,17 +105,20 @@ module equiv {l1 l2 : Level} where
 
 #### Equivalence between Directed-Graph definitions
 
-The two definitions given above for directed graphs are equivalent. $\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$.
-We use these lemmas in the following calculation:
+The two definitions given above for directed graphs are equivalent.
+$\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent
+to $\sum_{(C : U)} C \to A$. We use these lemmas in the following calculation:
 
-$$\begin{equation}
+$$
+\begin{equation}
 \begin{split}
 \sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
  (V \times V \to \mathcal{U}) \\
  &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
 &\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
 \end{split}
-\end{equation}$$
+\end{equation}
+$$
 
 <!--
 ```

@@ -7,19 +7,22 @@ module graph-theory.closed-walks-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.undirected-graphs
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>
 
 ## Idea
 
-A closed walk of length `k : ℕ` in an undirected graph `G` is a morphism of graphs from a `k`-gon into `G`.
+A closed walk of length `k : ℕ` in an undirected graph `G` is a morphism of
+graphs from a `k`-gon into `G`.
 
 ## Definition
 

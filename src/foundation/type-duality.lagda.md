@@ -31,7 +31,6 @@ open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.slice
-open import foundation.small-types
 open import foundation.structure
 open import foundation.surjective-maps
 open import foundation.transport
@@ -39,26 +38,46 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.propositions
+open import foundation-core.small-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Given a univalent universe `𝒰`, we can define two closely related functors acting on all types. First there is the covariant functor given by
+Given a univalent universe `𝒰`, we can define two closely related functors
+acting on all types. First there is the covariant functor given by
 
 ```md
   P_𝒰(A) := Σ (X : 𝒰), X → A.
 ```
 
-This is a polynomial endofunctor. Second, there is the contravariant functor given by
+This is a polynomial endofunctor. Second, there is the contravariant functor
+given by
 
 ```md
   P^𝒰(A) := A → 𝒰.
 ```
 
-If the type `A` is locally 𝒰-small, then there is a map `φ_A : P_𝒰(A) → P^𝒰(A)`. This map is natural in `A`, and it is always an embedding. Furthermore, the map `φ_A` is an equivalence if and only if `A` is 𝒰-small.
+If the type `A` is locally 𝒰-small, then there is a map `φ_A : P_𝒰(A) → P^𝒰(A)`.
+This map is natural in `A`, and it is always an embedding. Furthermore, the map
+`φ_A` is an equivalence if and only if `A` is 𝒰-small.
 
 ## Definitions
 

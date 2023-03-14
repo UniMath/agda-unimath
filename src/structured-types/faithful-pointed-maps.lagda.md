@@ -7,19 +7,21 @@ module structured-types.faithful-pointed-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 </details>
 
 ## Idea
 
-A faithful pointed map from `A` to `B` is a pointed map from `A` to `B` of which the underlying map is faithful.
+A faithful pointed map from `A` to `B` is a pointed map from `A` to `B` of which
+the underlying map is faithful.
 
 ## Definition
 

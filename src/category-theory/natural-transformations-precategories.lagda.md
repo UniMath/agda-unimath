@@ -9,6 +9,7 @@ module category-theory.natural-transformations-precategories where
 ```agda
 open import category-theory.functors-precategories
 open import category-theory.precategories
+
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equational-reasoning
@@ -25,9 +26,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given precategories `C` and `D`, a natural transformation from a functor `F : C → D` to `G : C → D` consists of :
-- a family of morphisms `γ : (x : C) → hom (F x) (G x)`
-such that the following identity holds:
+Given precategories `C` and `D`, a natural transformation from a functor
+`F : C → D` to `G : C → D` consists of :
+
+- a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
+  identity holds:
 - `comp (G f) (γ x) = comp (γ y) (F f)`, for all `f : hom x y`.
 
 ## Definition

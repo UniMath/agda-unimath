@@ -19,12 +19,8 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.effective-maps-equivalence-relations
-open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
-open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -33,26 +29,37 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.images
-open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
 open import foundation.slice
-open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A decidable equivalence relation on a type `X` is an equivalence relation `R` on `X` such that `R x y` is a decidable proposition for each `x y : X`.
+A decidable equivalence relation on a type `X` is an equivalence relation `R` on
+`X` such that `R x y` is a decidable proposition for each `x y : X`.
 
 ## Definitions
 

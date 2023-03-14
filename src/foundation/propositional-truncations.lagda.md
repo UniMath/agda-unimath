@@ -7,29 +7,33 @@ module foundation.propositional-truncations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.coproduct-types
-open import foundation-core.sets
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-We have specified what it means to be a propositional truncation in the file `foundation.universal-property-propositional-truncation`. Here we use the postulate of the existence of truncations at all levels, found in the file `foundation.truncations`, to show that propositional truncations exist.
+We have specified what it means to be a propositional truncation in the file
+`foundation.universal-property-propositional-truncation`. Here we use the
+postulate of the existence of truncations at all levels, found in the file
+`foundation.truncations`, to show that propositional truncations exist.
 
 ## Definition
 

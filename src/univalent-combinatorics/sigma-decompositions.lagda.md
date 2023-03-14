@@ -7,13 +7,8 @@ module univalent-combinatorics.sigma-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.decidable-equivalence-relations
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
-open import univalent-combinatorics.type-duality
-open import univalent-combinatorics.quotients-finite-types
 open import foundation.sigma-decompositions public
+
 open import foundation.contractible-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -36,8 +31,14 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
+
+open import univalent-combinatorics.decidable-equivalence-relations
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.type-duality
+open import univalent-combinatorics.quotients-finite-types
 
 ```
 

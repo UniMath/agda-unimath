@@ -11,21 +11,26 @@ module foundation-core.coherently-invertible-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-identifications
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.commuting-squares-of-identifications
 ```
 
 </details>
 
 ## Idea
 
-An inverse for a map `f : A → B` is a map `g : B → A` equipped with homotopies `
-(f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is structure on the map `f`, and not a property. Therefore we include an coherence condition for the homotopies of an inverse. Coherently invertible map `f : A → B` is a map equipped with a two-sided inverse and this additional coherence law. They are also called half-adjoint equivalences.
+An inverse for a map `f : A → B` is a map `g : B → A` equipped with homotopies
+` (f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is structure on the map
+`f`, and not a property. Therefore we include an coherence condition for the
+homotopies of an inverse. Coherently invertible map `f : A → B` is a map
+equipped with a two-sided inverse and this additional coherence law. They are
+also called half-adjoint equivalences.
 
 ## Definition
 

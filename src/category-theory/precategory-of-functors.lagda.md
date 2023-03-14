@@ -10,14 +10,8 @@ module category-theory.precategory-of-functors where
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equational-reasoning
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -25,9 +19,9 @@ open import foundation.universe-levels
 
 ### Precategory of functors
 
-Functors between precategories and natural transformations between them introduce a
-new precategory whose identity map and composition structure are inherited pointwise
-from the codomain precategory.
+Functors between precategories and natural transformations between them
+introduce a new precategory whose identity map and composition structure are
+inherited pointwise from the codomain precategory.
 
 ```agda
 

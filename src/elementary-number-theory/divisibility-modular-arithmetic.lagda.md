@@ -7,15 +7,16 @@ module elementary-number-theory.divisibility-modular-arithmetic where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import univalent-combinatorics.fibers-of-maps
 ```
 
@@ -23,7 +24,8 @@ open import univalent-combinatorics.fibers-of-maps
 
 ## Idea
 
-For two numbers `x` and `y` in `ℤ-Mod k`, we say that `x` divides `y` if there is a number `u` in `ℤ-Mod k` such that `mul-ℤ-Mod k u x = y`.
+For two numbers `x` and `y` in `ℤ-Mod k`, we say that `x` divides `y` if there
+is a number `u` in `ℤ-Mod k` such that `mul-ℤ-Mod k u x = y`.
 
 ## Definition
 

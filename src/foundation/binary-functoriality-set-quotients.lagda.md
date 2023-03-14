@@ -12,37 +12,41 @@ module foundation.binary-functoriality-set-quotients where
 
 ```agda
 open import foundation.binary-homotopies
-open import foundation.binary-reflecting-maps-equivalence-relations
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalence-relations
-open import foundation.equivalences
 open import foundation.exponents-set-quotients
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-quotients
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Given three types `A`, `B`, and `C` equipped with equivalence relations `R`, `S`, and `T`, respectively, any binary operation `f : A → B → C` such that for any `x x' : A` such that `R x x'` holds, and for any `y y' : B` such that `S y y'` holds, the relation `T (f x y) (f x' y')` holds extends uniquely to a binary operation `g : A/R → B/S → C/T` such that `g (q x) (q y) = q (f x y)` for all `x : A` and `y : B`.
+Given three types `A`, `B`, and `C` equipped with equivalence relations `R`,
+`S`, and `T`, respectively, any binary operation `f : A → B → C` such that for
+any `x x' : A` such that `R x x'` holds, and for any `y y' : B` such that
+`S y y'` holds, the relation `T (f x y) (f x' y')` holds extends uniquely to a
+binary operation `g : A/R → B/S → C/T` such that `g (q x) (q y) = q (f x y)` for
+all `x : A` and `y : B`.
 
 ## Definition
 

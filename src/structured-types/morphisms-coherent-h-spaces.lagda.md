@@ -7,22 +7,25 @@ module structured-types.morphisms-coherent-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.coherent-h-spaces
-open import structured-types.pointed-maps
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
+
 open import group-theory.homomorphisms-semigroups
+
+open import structured-types.coherent-h-spaces
+open import structured-types.pointed-maps
 ```
 
 </details>
 
 ## Idea
 
-Morphisms of wild unital magmas are pointed maps that preserve the unital binary operation, including its laws.
+Morphisms of wild unital magmas are pointed maps that preserve the unital binary
+operation, including its laws.
 
 ## Definition
 

@@ -7,10 +7,6 @@ module structured-types.pointed-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.pointed-dependent-functions
-open import structured-types.pointed-families-of-types
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -18,13 +14,21 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 </details>
 
 ## Idea
 
-A pointed homotopy between pointed dependent functions is a pointed dependent function of the pointed family of pointwise identifications. Since pointed homotopies are defined for pointed dependent functions, a pointed homotopy between pointed homotopies is just an instance of a pointed homotopy.
+A pointed homotopy between pointed dependent functions is a pointed dependent
+function of the pointed family of pointwise identifications. Since pointed
+homotopies are defined for pointed dependent functions, a pointed homotopy
+between pointed homotopies is just an instance of a pointed homotopy.
 
 ## Definition
 

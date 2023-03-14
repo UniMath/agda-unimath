@@ -7,26 +7,26 @@ module foundation-core.cones-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cartesian-product-types
+open import foundation.homotopies
+open import foundation.structure-identity-principle
+
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.homotopies
-open import foundation.structure-identity-principle
 ```
 
 </details>
 
 ## Idea
 
-A cone on a cospan `A --f--> X <--g-- B` with vertex `C` is a triple `(p,q,H)` consisting of a map `p : C → A`, a map `q : C → B`, and a homotopy `H` witnessing that the square
+A cone on a cospan `A --f--> X <--g-- B` with vertex `C` is a triple `(p,q,H)`
+consisting of a map `p : C → A`, a map `q : C → B`, and a homotopy `H`
+witnessing that the square
 
 ```md
       q
@@ -44,7 +44,9 @@ commutes.
 
 ### Cones on cospans
 
-A cone on a cospan with a vertex C is a pair of functions from C into the domains of the maps in the cospan, equipped with a homotopy witnessing that the resulting square commutes.
+A cone on a cospan with a vertex C is a pair of functions from C into the
+domains of the maps in the cospan, equipped with a homotopy witnessing that the
+resulting square commutes.
 
 ```agda
 module _
@@ -92,7 +94,11 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
 
 ### Identifications of cones
 
-Next we characterize the identity type of the type of cones with a given vertex C. Note that in the definition of htpy-cone we do not use pattern matching on the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a Σ-type for any c and c', not just for c and c' of the form (pair p (pair q H)) and (pair p' (pair q' H')) respectively.
+Next we characterize the identity type of the type of cones with a given vertex
+C. Note that in the definition of htpy-cone we do not use pattern matching on
+the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a
+Σ-type for any c and c', not just for c and c' of the form (pair p (pair q H))
+and (pair p' (pair q' H')) respectively.
 
 ```agda
 module _

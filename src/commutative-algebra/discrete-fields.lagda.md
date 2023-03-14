@@ -8,7 +8,9 @@ module commutative-algebra.discrete-fields where
 
 ```agda
 open import commutative-algebra.commutative-rings
+
 open import foundation.universe-levels
+
 open import ring-theory.division-rings
 ```
 
@@ -16,7 +18,8 @@ open import ring-theory.division-rings
 
 ## Idea
 
-A discrete field is a commutative division ring. They are called discrete, because only nonzero elements are assumed to be invertible.
+A discrete field is a commutative division ring. They are called discrete,
+because only nonzero elements are assumed to be invertible.
 
 ## Definition
 

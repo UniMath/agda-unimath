@@ -7,19 +7,22 @@ module foundation.binary-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-equivalences
+open import foundation.identity-types
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.universe-levels
-open import foundation.binary-equivalences
-open import foundation.identity-types
 ```
 
 </details>
 
 ## Idea
 
-A binary operation `f : A → B → C` is said to be a binary embedding if the functions `λ x → f x b` and `λ y → f a y` are embeddings for each `a : A` and `b : B` respectively.
+A binary operation `f : A → B → C` is said to be a binary embedding if the
+functions `λ x → f x b` and `λ y → f a y` are embeddings for each `a : A` and
+`b : B` respectively.
 
 ## Definition
 

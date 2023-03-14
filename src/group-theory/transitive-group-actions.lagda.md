@@ -7,19 +7,21 @@ module group-theory.transitive-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.group-actions
-open import group-theory.groups
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import group-theory.group-actions
+open import group-theory.groups
 ```
 
 </details>
 
 ## Idea
 
-A group `G` is said to act transitively on a set `X` if for every `x` and `y` in `X` there is a group element `g` such that `gx = y`.
+A group `G` is said to act transitively on a set `X` if for every `x` and `y` in
+`X` there is a group element `g` such that `gx = y`.
 
 ## Definition
 

@@ -7,7 +7,6 @@ module orthogonal-factorization-systems.lifts-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import orthogonal-factorization-systems.extensions-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -29,8 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A _lift_ of a map `f : X → B` along a map `i : A → B`
-is a map `g : X → A` such that the composition `i ∘ g` is `f`.
+A _lift_ of a map `f : X → B` along a map `i : A → B` is a map `g : X → A` such
+that the composition `i ∘ g` is `f`.
 
 ```md
            A
@@ -52,7 +51,7 @@ module _
   is-lift f g = f ~ (i ∘ g)
 
   lift : {X : UU l3} → (X → B) → UU (l1 ⊔ l2 ⊔ l3)
-  lift {X = X} f = Σ (X → A) (is-lift f)
+  lift {X} f = Σ (X → A) (is-lift f)
 
   total-lift : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-lift X = Σ (X → B) lift
@@ -93,8 +92,8 @@ module _
   {i : A → B} {j : B → C} {f : X → B} {h : X → C} {g : X → A}
   where
 
-  is-lift-vertical-comp : is-lift i f g → is-lift j h f → is-lift (j ∘ i) h g
-  is-lift-vertical-comp F H x = H x ∙ ap j (F x)
+  is-lift-comp-vertical : is-lift i f g → is-lift j h f → is-lift (j ∘ i) h g
+  is-lift-comp-vertical F H x = H x ∙ ap j (F x)
 ```
 
 ### Horizontal composition of lifts of maps
@@ -114,12 +113,12 @@ module _
   {f : A → B} {g : B → C} {h : A → X} {i : B → X} {j : C → X}
   where
 
-  is-lift-horizontal-comp :
+  is-lift-comp-horizontal :
     is-lift j i g → is-lift i h f → is-lift j h (g ∘ f)
-  is-lift-horizontal-comp J I x = I x ∙ J (f x)
+  is-lift-comp-horizontal J I x = I x ∙ J (f x)
 ```
 
-## Left whiskering of lifts
+## Left whiskering of lifts of maps
 
 ```md
            A
@@ -136,8 +135,8 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-left-whisker : (h : B → S) → is-lift i f g → is-lift (h ∘ i) (h ∘ f) g
-  is-lift-left-whisker h H x = ap h (H x)
+  is-lift-left-whisk : (h : B → S) → is-lift i f g → is-lift (h ∘ i) (h ∘ f) g
+  is-lift-left-whisk h H x = ap h (H x)
 ```
 
 ## Right whiskering of lifts of maps
@@ -157,13 +156,13 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-right-whisker : is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
-  is-lift-right-whisker H h s = H (h s)
+  is-lift-right-whisk : is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
+  is-lift-right-whisk H h s = H (h s)
 ```
 
 ## Properties
 
-### Identification of lifts of maps
+### Characterizing identification of lifts of maps
 
 ```agda
 module _
@@ -173,7 +172,8 @@ module _
 
   coherence-htpy-lift :
     (l l' : lift i f) → map-lift i l ~ map-lift i l' → UU (l2 ⊔ l3)
-  coherence-htpy-lift l l' K = (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
+  coherence-htpy-lift l l' K =
+    (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
 
   htpy-lift : (l l' : lift i f) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-lift l l' =
@@ -219,7 +219,7 @@ module _
 
   inv-compute-total-lift : total-lift i X ≃ (X → A)
   inv-compute-total-lift =
-    ( right-unit-law-Σ-is-contr ((λ f → is-contr-total-htpy' (i ∘ f)))) ∘e
+    ( right-unit-law-Σ-is-contr ( λ f → is-contr-total-htpy' (i ∘ f))) ∘e
     ( equiv-left-swap-Σ)
 
   compute-total-lift : (X → A) ≃ total-lift i X
@@ -230,9 +230,7 @@ module _
   pr2 (is-small-total-lift) = inv-compute-total-lift
 ```
 
-## Properties
-
-### If `P` is `k`-truncated then the type of lifts of maps is `k`-truncated
+### The truncation level of the type of lifts is bounded by the truncation level of the codomains
 
 ```agda
 module _
@@ -268,14 +266,15 @@ module _
   is-contr-is-lift :
     {X : UU l3} (f : X → B) →
     is-prop B → (g : X → A) → is-contr (is-lift i f g)
-  is-contr-is-lift f is-prop-B g = is-contr-Π λ x → is-prop-B (f x) ((i ∘ g) x)
+  is-contr-is-lift f is-prop-B g = is-contr-Π λ x → is-prop-B (f x) (i (g x))
 
   is-prop-is-lift :
     {X : UU l3} (f : X → B) →
     is-set B → (g : X → A) → is-prop (is-lift i f g)
-  is-prop-is-lift f is-set-B g = is-prop-Π λ x → is-set-B (f x) ((i ∘ g) x)
+  is-prop-is-lift f is-set-B g = is-prop-Π λ x → is-set-B (f x) (i (g x))
 ```
 
 ## See also
 
-- [`orthogonal-factorization-systems.extensions-of-maps`](orthogonal-factorization-systems.extensions-of-maps.md) for the dual notion.
+- [`orthogonal-factorization-systems.extensions-of-maps`](orthogonal-factorization-systems.extensions-of-maps.md)
+  for the dual notion.

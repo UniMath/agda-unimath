@@ -9,6 +9,7 @@ module category-theory.monomorphisms-large-precategories where
 ```agda
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
+
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
@@ -20,7 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A morphism `f : x → y` is a monomorphism if whenever we have two morphisms `g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that postcomposition by `f` is an embedding.
+A morphism `f : x → y` is a monomorphism if whenever we have two morphisms
+`g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state
+this in Homotopy Type Theory is to say that postcomposition by `f` is an
+embedding.
 
 ## Definition
 

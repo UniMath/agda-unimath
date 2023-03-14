@@ -2,12 +2,18 @@
 
 ```agda
 module foundation.2-types where
-
-open import foundation.dependent-pair-types
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
 ```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation-core.dependent-pair-types
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
+```
+
+</details>
 
 ## Definition
 

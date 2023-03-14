@@ -7,10 +7,6 @@ module group-theory.isomorphisms-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.abelian-groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.isomorphisms-semigroups
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -22,13 +18,19 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.isomorphisms-groups
+open import group-theory.isomorphisms-semigroups
 ```
 
 </details>
 
 ## Idea
 
-Isomorphisms between abelian groups are just isomorphisms between their underlying groups.
+Isomorphisms between abelian groups are just isomorphisms between their
+underlying groups.
 
 ## Definition
 

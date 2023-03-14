@@ -7,23 +7,24 @@ module foundation.symmetric-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.unit-type
-open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import univalent-combinatorics.finite-types
+
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.universe-levels
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -31,7 +32,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We construct a variant of the identity type equipped with a natural `ℤ/2`-action.
+We construct a variant of the identity type equipped with a natural
+`ℤ/2`-action.
 
 ## Definition
 

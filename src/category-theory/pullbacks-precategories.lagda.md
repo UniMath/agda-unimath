@@ -8,6 +8,7 @@ module category-theory.pullbacks-precategories where
 
 ```agda
 open import category-theory.precategories
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -21,16 +22,20 @@ open import foundation.universe-levels
 
 ## Idea
 
-A pullback of two morphisms `f : hom y x` and `g : hom z x` in a category `C` consists of:
+A pullback of two morphisms `f : hom y x` and `g : hom z x` in a category `C`
+consists of:
+
 - an object `w`
-- morphisms `p₁ : hom w y` and `p₂ : hom w z`
-such that
-- `comp f p₁ = comp g p₂`
-together with the universal property that for every object `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such that `comp f p₁' = comp g p₂'` there exists a unique morphism `h : hom w' w` such that
+- morphisms `p₁ : hom w y` and `p₂ : hom w z` such that
+- `comp f p₁ = comp g p₂` together with the universal property that for every
+  object `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such
+  that `comp f p₁' = comp g p₂'` there exists a unique morphism `h : hom w' w`
+  such that
 - `comp p₁ h = p₁'`
 - `comp p₂ h = p₂'`.
 
-We say that `C` has all pullbacks if there is a choice of a pullback for each object `x` and pair of morphisms into `x` in `C`.
+We say that `C` has all pullbacks if there is a choice of a pullback for each
+object `x` and pair of morphisms into `x` in `C`.
 
 ## Definition
 

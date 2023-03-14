@@ -9,6 +9,7 @@ module category-theory.epimorphisms-large-precategories where
 ```agda
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
+
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
@@ -20,7 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A morphism `f : x → y` is a epimorphism if whenever we have two morphisms `g h : y → w` such that `g ∘ f = h ∘ f`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that precomposition by `f` is an embedding.
+A morphism `f : x → y` is a epimorphism if whenever we have two morphisms
+`g h : y → w` such that `g ∘ f = h ∘ f`, then in fact `g = h`. The way to state
+this in Homotopy Type Theory is to say that precomposition by `f` is an
+embedding.
 
 ## Definition
 

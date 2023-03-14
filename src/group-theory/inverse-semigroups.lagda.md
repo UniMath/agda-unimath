@@ -7,20 +7,23 @@ module group-theory.inverse-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.semigroups
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-An inverse semigroup is an algebraic structure that models partial bijections. In an inverse semigroup, elements have unique inverses in the sense that for each `x` there is a unique `y` such that `xyx = x` and `yxy = y`.
+An inverse semigroup is an algebraic structure that models partial bijections.
+In an inverse semigroup, elements have unique inverses in the sense that for
+each `x` there is a unique `y` such that `xyx = x` and `yxy = y`.
 
 ## Definition
 

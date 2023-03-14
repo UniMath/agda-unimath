@@ -10,6 +10,7 @@ module elementary-number-theory.equality-integers where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -17,7 +18,6 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -25,7 +25,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations
-open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -34,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-An equality predicate is defined by pattern matching on the integers. Then we show that this predicate characterizes the identit type of the integers
+An equality predicate is defined by pattern matching on the integers. Then we
+show that this predicate characterizes the identit type of the integers
 
 ## Definition
 

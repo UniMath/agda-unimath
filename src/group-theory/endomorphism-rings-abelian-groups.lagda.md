@@ -7,11 +7,13 @@ module group-theory.endomorphism-rings-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
+
 open import ring-theory.rings
 ```
 
@@ -19,7 +21,9 @@ open import ring-theory.rings
 
 ## Idea
 
-For any abelian group $A$, the set $\mathrm{hom}(A,A)$ of morphisms of abelian groups can be equipped with the structure of a ring, where addition is given pointwise and multiplication is given by composition.
+For any abelian group $A$, the set $\mathrm{hom}(A,A)$ of morphisms of abelian
+groups can be equipped with the structure of a ring, where addition is given
+pointwise and multiplication is given by composition.
 
 ## Definition
 

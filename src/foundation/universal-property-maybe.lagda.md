@@ -7,24 +7,26 @@ module foundation.universal-property-maybe where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.maybe
 open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-We combine the universal property of coproducts and the unit type to obtain a universal property of the maybe modality.
+We combine the universal property of coproducts and the unit type to obtain a
+universal property of the maybe modality.
 
 ```agda
 -- The universal property of Maybe

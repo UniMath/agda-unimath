@@ -10,6 +10,7 @@ module elementary-number-theory.eulers-totient-function where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.decidable-types
 ```
@@ -18,7 +19,8 @@ open import foundation.decidable-types
 
 ## Idea
 
-Euler's totient function `φ : ℕ → ℕ` is the function that maps a natural number `n` to the number of `x < n` that are relatively prime with `n`.
+Euler's totient function `φ : ℕ → ℕ` is the function that maps a natural number
+`n` to the number of `x < n` that are relatively prime with `n`.
 
 ## Definition
 

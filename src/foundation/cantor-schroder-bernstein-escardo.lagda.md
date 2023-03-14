@@ -7,29 +7,33 @@ module foundation.cantor-schroder-bernstein-escardo where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
-open import foundation.negation
 open import foundation.perfect-images
 open import foundation.split-surjective-maps
-open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.negation
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The classical Cantor-Schröder-Bernstein theorem asserts that from any pair of injective maps `f : A → B` and `g : B → A` we can construct a bijection between `A` and `B`. In a recent generalization [1], Escardó proved that the Cantor-Schröder-Bernstein theorem also holds for ∞-groupoids. His generalization asserts that from given embeddings of two types into each other, we can construct an equivalence between them.
+The classical Cantor-Schröder-Bernstein theorem asserts that from any pair of
+injective maps `f : A → B` and `g : B → A` we can construct a bijection between
+`A` and `B`. In a recent generalization, Escardó proved that the
+Cantor-Schröder-Bernstein theorem also holds for ∞-groupoids. His generalization
+asserts that from given embeddings of two types into each other, we can
+construct an equivalence between them.
 
 ## Statement
 
@@ -168,4 +172,7 @@ module _
 
 ## References
 
-[1] The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md), [Link 2](https://github.com/martinescardo/TypeTopology)).
+- Escardo M.
+  ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6).
+  - https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md
+  - https://github.com/martinescardo/TypeTopology

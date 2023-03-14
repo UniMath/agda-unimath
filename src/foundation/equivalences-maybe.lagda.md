@@ -7,6 +7,14 @@ module foundation.equivalences-maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.equality-coproduct-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.functoriality-coproduct-types
+open import foundation.maybe
+open import foundation.unit-type
+open import foundation.universal-property-maybe
+
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -15,17 +23,10 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
-open import foundation.equality-coproduct-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.functoriality-coproduct-types
-open import foundation.injective-maps
-open import foundation.maybe
-open import foundation.unit-type
-open import foundation.universal-property-maybe
 ```
 
 </details>
@@ -209,7 +210,10 @@ comp-restrict-injective-map-is-not-exception-Maybe {f = f} is-inj-f x =
 
 ### Any equivalence `Maybe X ≃ Maybe Y` induces a map `X → Y`
 
-We don't use with-abstraction to keep full control over the definitional equalities, so we give the definition in two steps. After the definition is complete, we also prove two computation rules. Since we will prove computation rules, we make the definition abstract.
+We don't use with-abstraction to keep full control over the definitional
+equalities, so we give the definition in two steps. After the definition is
+complete, we also prove two computation rules. Since we will prove computation
+rules, we make the definition abstract.
 
 ```agda
 map-equiv-equiv-Maybe' :

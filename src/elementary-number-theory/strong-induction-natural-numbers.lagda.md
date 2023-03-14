@@ -9,6 +9,7 @@ module elementary-number-theory.strong-induction-natural-numbers where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -18,7 +19,6 @@ open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -27,7 +27,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The strong induction principle allows one to assume in the inductive step that the inductive hypothesis is satisfied at all smaller values.
+The strong induction principle allows one to assume in the inductive step that
+the inductive hypothesis is satisfied at all smaller values.
 
 ## Definition
 

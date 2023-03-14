@@ -7,13 +7,7 @@ module linear-algebra.multiplication-matrices where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.constant-vectors
-open import linear-algebra.matrices-on-rings
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
-open import ring-theory.rings
+
 ```
 
 </details>
@@ -59,9 +53,9 @@ mul-transpose mulK-comm (a ∷ as) b = {!!}
 
 ## Properties of Matrix Multiplication
 
- - distributive laws (incomplete)
- - associativity (TODO)
- - identity (TODO)
+- distributive laws (incomplete)
+- associativity (TODO)
+- identity (TODO)
 
 ```agda
 {-
@@ -154,4 +148,3 @@ module _
   associative-mul-matrices x y z = {!!}
 -}
 ```
-

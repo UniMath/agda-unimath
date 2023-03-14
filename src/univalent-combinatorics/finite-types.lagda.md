@@ -7,15 +7,13 @@ module univalent-combinatorics.finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components-universes
 open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -39,8 +37,9 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

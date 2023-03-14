@@ -7,7 +7,6 @@ module group-theory.congruence-relations-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.semigroups
 open import foundation.binary-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -18,21 +17,25 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-A congruence relation on a semigroup `G` is an equivalence relation `≡` on `G` such that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we have `x1 · y1 ≡ x2 · y2`.
+A congruence relation on a semigroup `G` is an equivalence relation `≡` on `G`
+such that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we have
+`x1 · y1 ≡ x2 · y2`.
 
 ## Definition
 
 ```agda
-is-congruence-Eq-Rel-Semigroup-Prop :
+is-congruence-Semigroup-Prop :
   {l1 l2 : Level} (G : Semigroup l1) →
   Eq-Rel l2 (type-Semigroup G) → Prop (l1 ⊔ l2)
-is-congruence-Eq-Rel-Semigroup-Prop G R =
+is-congruence-Semigroup-Prop G R =
   Π-Prop'
     ( type-Semigroup G)
     ( λ x1 →
@@ -53,22 +56,22 @@ is-congruence-Eq-Rel-Semigroup-Prop G R =
                         ( mul-Semigroup G x1 y1)
                         ( mul-Semigroup G x2 y2)))))))
 
-is-congruence-Eq-Rel-Semigroup :
+is-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) →
   Eq-Rel l2 (type-Semigroup G) → UU (l1 ⊔ l2)
-is-congruence-Eq-Rel-Semigroup G R =
-  type-Prop (is-congruence-Eq-Rel-Semigroup-Prop G R)
+is-congruence-Semigroup G R =
+  type-Prop (is-congruence-Semigroup-Prop G R)
 
-is-prop-is-congruence-Eq-Rel-Semigroup :
+is-prop-is-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (R : Eq-Rel l2 (type-Semigroup G)) →
-  is-prop (is-congruence-Eq-Rel-Semigroup G R)
-is-prop-is-congruence-Eq-Rel-Semigroup G R =
-  is-prop-type-Prop (is-congruence-Eq-Rel-Semigroup-Prop G R)
+  is-prop (is-congruence-Semigroup G R)
+is-prop-is-congruence-Semigroup G R =
+  is-prop-type-Prop (is-congruence-Semigroup-Prop G R)
 
 congruence-Semigroup :
   {l : Level} (l2 : Level) (G : Semigroup l) → UU (l ⊔ lsuc l2)
 congruence-Semigroup l2 G =
-  Σ (Eq-Rel l2 (type-Semigroup G)) (is-congruence-Eq-Rel-Semigroup G)
+  Σ (Eq-Rel l2 (type-Semigroup G)) (is-congruence-Semigroup G)
 
 module _
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G)
@@ -104,7 +107,7 @@ module _
   trans-congruence-Semigroup = trans-Eq-Rel eq-rel-congruence-Semigroup
 
   mul-congruence-Semigroup :
-    is-congruence-Eq-Rel-Semigroup G eq-rel-congruence-Semigroup
+    is-congruence-Semigroup G eq-rel-congruence-Semigroup
   mul-congruence-Semigroup = pr2 R
 ```
 
@@ -136,7 +139,7 @@ is-contr-total-relate-same-elements-congruence-Semigroup G R =
   is-contr-total-Eq-subtype
     ( is-contr-total-relate-same-elements-Eq-Rel
       ( eq-rel-congruence-Semigroup G R))
-    ( is-prop-is-congruence-Eq-Rel-Semigroup G)
+    ( is-prop-is-congruence-Semigroup G)
     ( eq-rel-congruence-Semigroup G R)
     ( refl-relate-same-elements-congruence-Semigroup G R)
     ( mul-congruence-Semigroup G R)

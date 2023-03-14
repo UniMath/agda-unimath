@@ -11,14 +11,15 @@ module foundation-core.coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The coproduct of two types `A` and `B` can be thought of as the disjoint union of `A` and `B`.
+The coproduct of two types `A` and `B` can be thought of as the disjoint union
+of `A` and `B`.
 
 ## Definition
 

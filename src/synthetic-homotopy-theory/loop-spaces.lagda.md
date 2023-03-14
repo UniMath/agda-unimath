@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
+
 open import structured-types.coherent-h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
@@ -22,7 +23,9 @@ open import structured-types.wild-quasigroups
 
 ## Idea
 
-The loop space of a pointed type `A` is the pointed type of self-identifications of the base point of `A`. The loop space comes equipped with a groupoidal structure.
+The loop space of a pointed type `A` is the pointed type of self-identifications
+of the base point of `A`. The loop space comes equipped with a groupoidal
+structure.
 
 ## Definitions
 

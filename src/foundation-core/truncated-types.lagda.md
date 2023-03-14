@@ -7,6 +7,8 @@ module foundation-core.truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-extensionality
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -20,14 +22,16 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
 ```
 
 </details>
 
 ## Idea
 
-The truncatedness of a type is a measure of the complexity of its identity types. The simplest case is a contractible type. This is the base case of the inductive definition of truncatedness for types. A type is (k+1)-truncated if its identity types are k-truncated.
+The truncatedness of a type is a measure of the complexity of its identity
+types. The simplest case is a contractible type. This is the base case of the
+inductive definition of truncatedness for types. A type is (k+1)-truncated if
+its identity types are k-truncated.
 
 ## Definition
 

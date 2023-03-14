@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
-open import synthetic-homotopy-theory.cocones-pushouts
 open import foundation.cones-pullbacks
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -23,6 +22,8 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.cocones-pushouts
 ```
 
 </details>
@@ -71,7 +72,9 @@ module _
 
 ### The pullback property of pushouts
 
-The universal property of the pushout of a span `S` can also be stated as a pullback-property: a cocone `c ≐ pair i (pair j H)` with vertex `X` satisfies the universal property of the pushout of `S` if and only if the square
+The universal property of the pushout of a span `S` can also be stated as a
+pullback-property: a cocone `c ≐ pair i (pair j H)` with vertex `X` satisfies
+the universal property of the pushout of `S` if and only if the square
 
 ```md
   Y^X -----> Y^B
@@ -81,7 +84,9 @@ The universal property of the pushout of a span `S` can also be stated as a pull
   Y^A -----> Y^S
 ```
 
-is a pullback square for every type `Y`. Below, we first define the cone of this commuting square, and then we introduce the type pullback-property-pushout, which states that the above square is a pullback.
+is a pullback square for every type `Y`. Below, we first define the cone of this
+commuting square, and then we introduce the type pullback-property-pushout,
+which states that the above square is a pullback.
 
 ```agda
 htpy-precomp :
@@ -207,7 +212,10 @@ uniquely-unique-pushout f g c d up-c up-d =
 
 ### The universal property of pushouts is equivalent to the pullback property of pushouts
 
-In order to show that the universal property of pushouts is equivalent to the pullback property, we show that the maps `cocone-map` and the gap map fit in a commuting triangle, where the third map is an equivalence. The claim then follows from the 3-for-2 property of equivalences.
+In order to show that the universal property of pushouts is equivalent to the
+pullback property, we show that the maps `cocone-map` and the gap map fit in a
+commuting triangle, where the third map is an equivalence. The claim then
+follows from the 3-for-2 property of equivalences.
 
 ```agda
 triangle-pullback-property-pushout-universal-property-pushout :

@@ -7,21 +7,25 @@ module univalent-combinatorics.cycle-index-series-species where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.species
-open import foundation.automorphisms
-open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>
 
 ## Idea
 
-The cycle index series of a species `F` is a type family indexed by finite families of cyclic types. Note that a finite family of cyclic types `Cᵢ` uniquely determines a permutation `e` on the disjoint union `C := Σᵢ Cᵢ` of the underlying types of the `Cᵢ`. This permutation determines an action `F e` on `F C`. The cycle index series of `F` at the family `Cᵢ` is the type `Fix (F e)` of fixed points of `F e`.
+The cycle index series of a species `F` is a type family indexed by finite
+families of cyclic types. Note that a finite family of cyclic types `Cᵢ`
+uniquely determines a permutation `e` on the disjoint union `C := Σᵢ Cᵢ` of the
+underlying types of the `Cᵢ`. This permutation determines an action `F e` on
+`F C`. The cycle index series of `F` at the family `Cᵢ` is the type `Fix (F e)`
+of fixed points of `F e`.
 
 ## Definition
 

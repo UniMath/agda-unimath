@@ -7,33 +7,32 @@ module group-theory.decidable-subgroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.semigroups
-open import group-theory.subgroups
 open import foundation.binary-relations
-open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.semigroups
+open import group-theory.subgroups
 ```
 
 </details>
 
 ## Idea
 
-A decidable subgroup of a group `G` is a subgroup of `G` defined by a decidable predicate on the type of elements of `G`.
+A decidable subgroup of a group `G` is a subgroup of `G` defined by a decidable
+predicate on the type of elements of `G`.
 
 ## Definitions
 

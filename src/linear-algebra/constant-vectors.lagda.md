@@ -7,16 +7,19 @@ module linear-algebra.constant-vectors where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.vectors
-open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
+
+open import foundation.universe-levels
+
+open import linear-algebra.vectors
 ```
 
 </details>
 
 ## Idea
 
-Diagonal vectors are vectors on the diagonal, i.e., they are vectors of which all coefficients are equal.
+Diagonal vectors are vectors on the diagonal, i.e., they are vectors of which
+all coefficients are equal.
 
 ## Definition
 

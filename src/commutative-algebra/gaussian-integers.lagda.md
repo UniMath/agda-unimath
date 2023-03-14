@@ -8,23 +8,22 @@ module commutative-algebra.gaussian-integers where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.unit-type
-open import foundation.universe-levels
+
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-integers
-open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.natural-numbers
+
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
+
 open import ring-theory.rings
 ```
 
@@ -32,7 +31,8 @@ open import ring-theory.rings
 
 ## Idea
 
-The Gaussian integers are the complex numbers of the form `a + bi`, where `a` and `b` are integers.
+The Gaussian integers are the complex numbers of the form `a + bi`, where `a`
+and `b` are integers.
 
 ## Definition
 

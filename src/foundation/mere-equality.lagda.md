@@ -7,22 +7,24 @@ module foundation.mere-equality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.functoriality-propositional-truncation
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels
-open import foundation.functoriality-propositional-truncation
-open import foundation.propositional-truncations
-open import foundation.reflecting-maps-equivalence-relations
 ```
 
 </details>
 
 ## Idea
 
-Two elements in a type are said to be merely equal if there is an element of the propositionally truncated identity type between them.
+Two elements in a type are said to be merely equal if there is an element of the
+propositionally truncated identity type between them.
 
 ## Definition
 

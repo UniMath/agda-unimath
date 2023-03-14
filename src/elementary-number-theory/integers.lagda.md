@@ -8,7 +8,7 @@ module elementary-number-theory.integers where
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import foundation.contractible-types
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -24,7 +24,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import structured-types.pointed-types-equipped-with-automorphisms
+
 open import structured-types.types-equipped-with-endomorphisms
 ```
 
@@ -32,7 +32,8 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-The type of integers is an extension of the type of natural numbers including negative whole numbers.
+The type of integers is an extension of the type of natural numbers including
+negative whole numbers.
 
 ## Definitions
 
@@ -434,5 +435,8 @@ is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 
 ## See also
 
-1. We show in [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md) that ℤ is the initial pointed type equipped with an automorphism.
-2. The group of integers is constructed in [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.md).
+1. We show in
+   [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md)
+   that ℤ is the initial pointed type equipped with an automorphism.
+2. The group of integers is constructed in
+   [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.md).

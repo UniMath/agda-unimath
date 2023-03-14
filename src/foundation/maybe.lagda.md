@@ -7,30 +7,29 @@ module foundation.maybe where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
 open import foundation.equality-coproduct-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negation
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.negation
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The maybe modality is an operation on types that adds one point. This is used, for example, to define partial functions, where a partial function `f : X ⇀ Y` is a map `f : X → Maybe Y`.
+The maybe modality is an operation on types that adds one point. This is used,
+for example, to define partial functions, where a partial function `f : X ⇀ Y`
+is a map `f : X → Maybe Y`.
 
 ## Definitions
 

@@ -7,20 +7,23 @@ module foundation.universal-property-empty-type where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
-open import foundation-core.universe-levels
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.functions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-There is a unique map from the empty type into any type. Similarly, for any type family over an empty type, there is a unique dependent function taking values in this family.
+There is a unique map from the empty type into any type. Similarly, for any type
+family over an empty type, there is a unique dependent function taking values in
+this family.
 
 ## Properties
 

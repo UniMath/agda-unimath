@@ -7,8 +7,9 @@ module univalent-combinatorics.equality-standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.standard-finite-types
-open import foundation-core.decidable-propositions
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.apartness-relations
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -16,27 +17,28 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.set-truncations
-open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
+
+open import foundation-core.decidable-propositions
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Since the standard finite types are defined recursively by adding a point one at a time, it follows that equality in the standard finite types is decidable, and that they are sets.
+Since the standard finite types are defined recursively by adding a point one at
+a time, it follows that equality in the standard finite types is decidable, and
+that they are sets.
 
 ## Properties
 

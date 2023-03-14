@@ -7,15 +7,10 @@ module graph-theory.equivalences-directed-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -23,6 +18,9 @@ open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+
+open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>

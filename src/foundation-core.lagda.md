@@ -31,6 +31,7 @@ open import foundation-core.equality-cartesian-product-types public
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.equality-fibers-of-maps public
 open import foundation-core.equivalence-induction public
+open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
 open import foundation-core.faithful-maps public
 open import foundation-core.fibers-of-maps public

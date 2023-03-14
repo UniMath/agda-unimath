@@ -20,7 +20,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A homotopy of identifications is a pointwise equality between dependent functions.
+A homotopy of identifications is a pointwise equality between dependent
+functions.
 
 ## Definitions
 
@@ -132,9 +133,27 @@ htpy-right-whisk H f x = H (f x)
 _·r_ = htpy-right-whisk
 ```
 
-**Warning**: The infix whiskering operators `_·l_` and `_·r_` use the symbol `·` ("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`)
-as opposed to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙` ("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`).
-If these look the same in your editor, we suggest that you change your font. For a reference, see [How to install](HOWTO-INSTALL.md).
+**Warning**: The infix whiskering operators `_·l_` and `_·r_` use the symbol `·`
+("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`) as opposed
+to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙`
+("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`). If these look the same
+in your editor, we suggest that you change your font. For a reference, see
+[How to install](HOWTO-INSTALL.md).
+
+### Horizontal composition of homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {f f' : A → B} {g g' : B → C}
+  where
+
+  htpy-comp-horizontal : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-comp-horizontal F G = (g ·l F) ∙h (G ·r f')
+
+  htpy-comp-horizontal' : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-comp-horizontal' F G = (G ·r f) ∙h (g' ·l F)
+```
 
 ### Transposition of homotopies
 

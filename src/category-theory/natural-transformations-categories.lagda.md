@@ -10,6 +10,7 @@ module category-theory.natural-transformations-categories where
 open import category-theory.categories
 open import category-theory.functors-categories
 open import category-theory.natural-transformations-precategories
+
 open import foundation.universe-levels
 ```
 
@@ -17,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural transformation between functors on categories is a natural transformation between the functors on the underlying precategories.
+A natural transformation between functors on categories is a natural
+transformation between the functors on the underlying precategories.
 
 ## Definition
 

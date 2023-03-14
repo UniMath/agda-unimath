@@ -9,6 +9,7 @@ module elementary-number-theory.upper-bounds-natural-numbers where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
 ```
 
@@ -16,7 +17,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type family over the natural numbers has an upper bound `n`, if there is a function from `P x` to the type `x ≤ n` for all `x : ℕ`. Similar for strict upper bounds.
+A type family over the natural numbers has an upper bound `n`, if there is a
+function from `P x` to the type `x ≤ n` for all `x : ℕ`. Similar for strict
+upper bounds.
 
 ## Definition
 

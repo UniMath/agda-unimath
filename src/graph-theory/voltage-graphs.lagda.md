@@ -7,9 +7,11 @@ module graph-theory.voltage-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.directed-graphs
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import graph-theory.directed-graphs
+
 open import group-theory.groups
 ```
 
@@ -17,7 +19,8 @@ open import group-theory.groups
 
 ## Idea
 
-A voltage graph is a directed graph `G` equipped with a group `Π` (the voltage group) and a labelling of the edges of `G` by elements of `Π`.
+A voltage graph is a directed graph `G` equipped with a group `Π` (the voltage
+group) and a labelling of the edges of `G` by elements of `Π`.
 
 ## Definition
 

@@ -7,14 +7,17 @@ module foundation.multisubsets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.identity-types
-open import foundation.images
-open import foundation.negation
-open import foundation.sets
-open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
+
+open import foundation.images
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.identity-types
+open import foundation-core.negation
+open import foundation-core.sets
+open import foundation-core.universe-levels
+
 open import univalent-combinatorics.finite-types
 ```
 
@@ -22,7 +25,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A multisubset of a given set `U` is a type `B` equipped with a function `f : B → U`
+A multisubset of a given set `U` is a type `B` equipped with a function
+`f : B → U`
 
 ## Definition
 

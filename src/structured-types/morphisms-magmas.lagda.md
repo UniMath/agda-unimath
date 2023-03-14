@@ -7,17 +7,19 @@ module structured-types.morphisms-magmas where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.magmas
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import structured-types.magmas
 ```
 
 </details>
 
 ## Idea
 
-A morphism of magmas from `M` to `N` is a map between their underlying type that preserves the binary operation
+A morphism of magmas from `M` to `N` is a map between their underlying type that
+preserves the binary operation
 
 ## Definition
 

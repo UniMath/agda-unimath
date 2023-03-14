@@ -7,21 +7,19 @@ module foundation.replacement where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.small-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.homotopies
 open import foundation.images
 open import foundation.locally-small-types
-open import foundation.surjective-maps
-open import foundation.universe-levels
+
+open import foundation-core.small-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The type theoretic replacement axiom asserts that the image of a map `f : A → B` from a small type `A` into a locally small type `B` is small.
+The type theoretic replacement axiom asserts that the image of a map `f : A → B`
+from a small type `A` into a locally small type `B` is small.
 
 ## Definition
 

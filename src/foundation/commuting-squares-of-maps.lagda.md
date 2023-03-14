@@ -8,16 +8,19 @@ module foundation.commuting-squares-of-maps where
 
 ```agda
 open import foundation-core.commuting-squares-of-maps public
+
+open import foundation.equivalences
+
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.equivalences
 ```
 
 </details>
 
 ## Composing and inverting squares horizontally and vertically
 
-If the horizontal/vertical maps in a commuting square are both equivalences, then the square remains commuting if we invert those equivalences.
+If the horizontal/vertical maps in a commuting square are both equivalences,
+then the square remains commuting if we invert those equivalences.
 
 ```agda
 coherence-square-inv-horizontal :

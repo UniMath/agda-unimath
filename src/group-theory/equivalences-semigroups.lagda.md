@@ -7,8 +7,6 @@ module group-theory.equivalences-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.homomorphisms-semigroups
-open import group-theory.semigroups
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -22,13 +20,17 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import group-theory.homomorphisms-semigroups
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-An equivalence between semigroups is an equivalence between their underlying types that preserves the binary operation.
+An equivalence between semigroups is an equivalence between their underlying
+types that preserves the binary operation.
 
 ## Definition
 

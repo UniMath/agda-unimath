@@ -8,8 +8,10 @@ module category-theory.large-categories where
 
 ```agda
 open import Agda.Primitive using (Setω)
+
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
+
 open import foundation.equivalences
 open import foundation.universe-levels
 ```
@@ -18,7 +20,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-A large category in Homotopy Type Theory is a large precategory for which the identities between the objects are the isomorphisms. More specifically, an equality between objects gives rise to an isomorphism between them, by the J-rule. A large precategory is a large category if this function is an equivalence. Note: being a large category is a proposition since `is-equiv` is a proposition.
+A large category in Homotopy Type Theory is a large precategory for which the
+identities between the objects are the isomorphisms. More specifically, an
+equality between objects gives rise to an isomorphism between them, by the
+J-rule. A large precategory is a large category if this function is an
+equivalence. Note: being a large category is a proposition since `is-equiv` is a
+proposition.
 
 ## Definition
 

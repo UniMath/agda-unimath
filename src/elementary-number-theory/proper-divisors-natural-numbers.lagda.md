@@ -13,6 +13,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -27,7 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
- A proper divisor of a natural number `n` is a natural number `d ≠ n` that divides `n`.
+A proper divisor of a natural number `n` is a natural number `d ≠ n` that
+divides `n`.
 
 ```agda
 is-proper-divisor-ℕ : ℕ → ℕ → UU lzero

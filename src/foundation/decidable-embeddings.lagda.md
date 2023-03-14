@@ -7,6 +7,18 @@ module foundation.decidable-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-maps
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.type-duality
+open import foundation.type-theoretic-principle-of-choice
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -23,24 +35,14 @@ open import foundation-core.propositions
 open import foundation-core.subtype-identity-principle
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-open import foundation.decidable-maps
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositional-maps
-open import foundation.type-duality
-open import foundation.type-theoretic-principle-of-choice
 ```
 
 </details>
 
 ## Idea
 
-A map is said to be a decidable embedding if it is an embedding and its fibers are decidable types.
+A map is said to be a decidable embedding if it is an embedding and its fibers
+are decidable types.
 
 ## Definitions
 

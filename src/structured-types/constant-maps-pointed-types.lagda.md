@@ -7,18 +7,20 @@ module structured-types.constant-maps-pointed-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 </details>
 
 ## Idea
 
-Given a type `X` and a pointed type `A`, the constant map from `X` to `A` maps every element of `X` to the base point of `A`.
+Given a type `X` and a pointed type `A`, the constant map from `X` to `A` maps
+every element of `X` to the base point of `A`.
 
 ## Definition
 

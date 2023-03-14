@@ -10,6 +10,7 @@ module elementary-number-theory.pythagorean-triples where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -18,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A Pythagorean triple is a triple `(a,b,c)` of natural numbers such that `a² + b² = c²`.
+A Pythagorean triple is a triple `(a,b,c)` of natural numbers such that
+`a² + b² = c²`.
 
 ## Definition
 

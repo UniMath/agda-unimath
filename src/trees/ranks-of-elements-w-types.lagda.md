@@ -7,9 +7,6 @@ module trees.ranks-of-elements-w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -19,13 +16,19 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 ```
 
 </details>
 
 ## Idea
 
-Consider two elements `x` and `y` of a W-type `𝕎 A B`. We say that the rank of `x` is at most the rank of `y` if for every element `x' ∈ x` and for every element `y' ∈ y` the rank of `x'` is at most the rank of `y'`.
+Consider two elements `x` and `y` of a W-type `𝕎 A B`. We say that the rank of
+`x` is at most the rank of `y` if for every element `x' ∈ x` and for every
+element `y' ∈ y` the rank of `x'` is at most the rank of `y'`.
 
 ## Definition
 

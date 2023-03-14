@@ -7,21 +7,24 @@ module univalent-combinatorics.counting-maybe where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences-maybe
 open import foundation.identity-types
 open import foundation.maybe
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
 ```
 
 </details>
 
 ## Idea
 
-The elements of a type `X` can be counted if and only if the elements of `Maybe X` can be counted.
+The elements of a type `X` can be counted if and only if the elements of
+`Maybe X` can be counted.
 
 ```agda
 count-Maybe : {l : Level} {X : UU l} → count X → count (Maybe X)

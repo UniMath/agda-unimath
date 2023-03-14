@@ -9,6 +9,7 @@ module category-theory.natural-transformations-large-precategories where
 ```agda
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
+
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -17,9 +18,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given large precategories `C` and `D`, a natural transformation from a functor `F : C → D` to `G : C → D` consists of :
-- a family of morphisms `γ : (x : C) → hom (F x) (G x)`
-such that the following identity holds:
+Given large precategories `C` and `D`, a natural transformation from a functor
+`F : C → D` to `G : C → D` consists of :
+
+- a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
+  identity holds:
 - `comp (G f) (γ x) = comp (γ y) (F f)`, for all `f : hom x y`.
 
 ## Definition

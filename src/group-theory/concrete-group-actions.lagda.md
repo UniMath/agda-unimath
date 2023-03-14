@@ -7,21 +7,21 @@ module group-theory.concrete-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.concrete-groups
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-open import synthetic-homotopy-theory.circle
+
+open import group-theory.concrete-groups
 ```
 
 </details>
 
 ## Idea
 
-Given a concrete group `G`, a concrete action of `G` on a type is defined to be a type family over `BG`. Given a type family `X` over `BG`, the type being acted on is the type `X *`, and the action of `G` on `X *` is given by transport.
+Given a concrete group `G`, a concrete action of `G` on a type is defined to be
+a type family over `BG`. Given a type family `X` over `BG`, the type being acted
+on is the type `X *`, and the action of `G` on `X *` is given by transport.
 
 ## Definition
 

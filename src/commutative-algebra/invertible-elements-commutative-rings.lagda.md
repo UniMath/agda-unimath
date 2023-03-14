@@ -8,17 +8,20 @@ module commutative-algebra.invertible-elements-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-Invertible elements are elements that have a two-sided multiplicative inverse. Such elements are also called the units of the Ring. The set of units of any ring forms a group.
+Invertible elements are elements that have a two-sided multiplicative inverse.
+Such elements are also called the units of the Ring. The set of units of any
+ring forms a group.
 
 ## Definition
 
@@ -54,4 +57,3 @@ module _
   is-prop-is-invertible-element-Commutative-Ring =
     is-prop-is-invertible-element-Ring (ring-Commutative-Ring R)
 ```
-

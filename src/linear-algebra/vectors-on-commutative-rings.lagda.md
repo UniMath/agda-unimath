@@ -7,26 +7,28 @@ module linear-algebra.vectors-on-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.constant-vectors
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import commutative-algebra.commutative-rings
+
+open import elementary-number-theory.natural-numbers
+
 open import foundation.identity-types
 open import foundation.universe-levels
-open import commutative-algebra.commutative-rings
-open import elementary-number-theory.natural-numbers
+
 open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
+
+open import linear-algebra.constant-vectors
+open import linear-algebra.vectors-on-rings
 ```
 
 </details>
 
 ## Idea
 
-Vectors on a commutative ring `R` are vectors on the underlying type of `R`. The commutative ring structur on `R` induces further structure on the type of vectors on `R`.
+Vectors on a commutative ring `R` are vectors on the underlying type of `R`. The
+commutative ring structur on `R` induces further structure on the type of
+vectors on `R`.
 
 ## Definitions
 

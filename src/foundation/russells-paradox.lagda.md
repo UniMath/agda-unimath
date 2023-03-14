@@ -7,21 +7,23 @@ module foundation.russells-paradox where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.negation
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.type-arithmetic-cartesian-product-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
+
 open import trees.multisets
 open import trees.small-multisets
 open import trees.universal-multiset
@@ -31,7 +33,14 @@ open import trees.universal-multiset
 
 ## Idea
 
-Russells paradox arises when a set of all sets is assumed to exist. In Russell's paradox it is of no importance that the elementhood relation takes values in propositions. In other words, Russells paradox arises similarly if there is a multiset of all multisets. We will construct Russell's paradox from the assumption that a universe `U` is equivalent to a type `A : U`. We conclude that there can be no universe that is contained in itself. Furthermore, using replacement we show that for any type `A : U`, there is no surjective map `A → U`.
+Russells paradox arises when a set of all sets is assumed to exist. In Russell's
+paradox it is of no importance that the elementhood relation takes values in
+propositions. In other words, Russells paradox arises similarly if there is a
+multiset of all multisets. We will construct Russell's paradox from the
+assumption that a universe `U` is equivalent to a type `A : U`. We conclude that
+there can be no universe that is contained in itself. Furthermore, using
+replacement we show that for any type `A : U`, there is no surjective map
+`A → U`.
 
 ## Definition
 

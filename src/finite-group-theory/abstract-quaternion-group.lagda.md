@@ -21,8 +21,10 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import group-theory.groups
 open import group-theory.semigroups
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -32,7 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The abstract quaternion group of order 8 is the group of the quaternions `1`, `-1`, `i`, `-i`, `j`, `-j`, `k`, and `-k`.
+The abstract quaternion group of order 8 is the group of the quaternions `1`,
+`-1`, `i`, `-i`, `j`, `-j`, `k`, and `-k`.
 
 ## Definition
 

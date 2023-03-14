@@ -19,13 +19,18 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import foundation-core.functions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Consider a map `f : A → B` and a subtype `S ⊆ A`, then the images of `S` under `f` is the subtype of `B` consisting of the values of the composite `S ⊆ A → B`.
+Consider a map `f : A → B` and a subtype `S ⊆ A`, then the images of `S` under
+`f` is the subtype of `B` consisting of the values of the composite `S ⊆ A → B`.
 
 ## Definition
 

@@ -19,6 +19,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -33,7 +34,9 @@ open import foundation.negation
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import structured-types.types-equipped-with-endomorphisms
+
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -41,7 +44,9 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.
+Some modular arithmetic was already defined in
+`modular-arithmetic-standard-finite-types`. Here we package those results
+together in a more convenient package that also allows congruence modulo 0.
 
 ```agda
 ℤ-Mod : ℕ → UU lzero

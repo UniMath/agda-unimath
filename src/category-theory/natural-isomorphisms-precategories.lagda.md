@@ -11,6 +11,7 @@ open import category-theory.functors-precategories
 open import category-theory.isomorphisms-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -20,7 +21,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is an isomorphism, for every object `x` in `C`.
+A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural
+transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is
+an isomorphism, for every object `x` in `C`.
 
 ## Definition
 
@@ -42,7 +45,8 @@ module _ {l1 l2 l3 l4}
 
 ### Being a natural isomorphism is a proposition
 
-That a natural transformation is a natural isomorphism is a proposition. This follows from the fact that being an isomorphism is a proposition.
+That a natural transformation is a natural isomorphism is a proposition. This
+follows from the fact that being an isomorphism is a proposition.
 
 ```agda
 is-prop-is-nat-iso-Precat :

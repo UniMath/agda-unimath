@@ -20,7 +20,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Singleton induction on a type `A` equipped with a point `a : A` is a principle analogous to the induction principle of the unit type. A type satisfies singleton induction if and only if it is contractible.
+Singleton induction on a type `A` equipped with a point `a : A` is a principle
+analogous to the induction principle of the unit type. A type satisfies
+singleton induction if and only if it is contractible.
 
 ## Definition
 

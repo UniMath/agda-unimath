@@ -7,16 +7,10 @@ module foundation.type-arithmetic-dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.type-arithmetic-unit-type
-open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -84,9 +78,12 @@ module _
 - Arithmetical laws involving the empty type are recorded in
   [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.md).
 
-- In [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.md)
-  we show that `empty` is the initial type, which can be considered a
-  *left zero law for function types* (`(empty → A) ≃ unit`).
-- That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be found in
+- In
+  [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.md)
+  we show that `empty` is the initial type, which can be considered a _left zero
+  law for function types_ (`(empty → A) ≃ unit`).
+- That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be
+  found in
   [`foundation-core.contractible-types`](foundation-core.contractible-types.md).
-  This can be considered a *right zero law for function types* (`(A → unit) ≃ unit`).
+  This can be considered a _right zero law for function types_
+  (`(A → unit) ≃ unit`).

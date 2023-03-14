@@ -7,23 +7,25 @@ module group-theory.dihedral-group-construction where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
 
-When `A` is an abelian group, we can put a group structure on the disjoint union `A+A`, which specializes to the dihedral groups when we take `A := ℤ/k`.
+When `A` is an abelian group, we can put a group structure on the disjoint union
+`A+A`, which specializes to the dihedral groups when we take `A := ℤ/k`.
 
 ## Definitions
 

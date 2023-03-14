@@ -8,6 +8,7 @@ module foundation.diagonal-maps-of-types where
 
 ```agda
 open import foundation-core.diagonal-maps-of-types public
+
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types

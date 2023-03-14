@@ -7,21 +7,23 @@ module structured-types.pointed-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import structured-types.pointed-dependent-functions
-open import structured-types.pointed-families-of-types
-open import structured-types.pointed-types
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-types
 ```
 
 </details>
 
 ## Idea
 
-A pointed map from a pointed type `A` to a pointed type `B` is a base point preserving function from `A` to `B`.
+A pointed map from a pointed type `A` to a pointed type `B` is a base point
+preserving function from `A` to `B`.
 
 ## Definitions
 

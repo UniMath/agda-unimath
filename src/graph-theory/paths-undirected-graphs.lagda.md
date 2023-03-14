@@ -7,19 +7,25 @@ module graph-theory.paths-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.undirected-graphs
-open import graph-theory.walks-undirected-graphs
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.injective-maps
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import graph-theory.undirected-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 </details>
 
 ## Idea
 
-A path in an undirected graph G is a walk `w` in G such that the inclusion of the type of vertices on `w` into the vertices of `G` is an injective function. Note that we don't expect this function to be an embedding, since the type of vertices on `w` is equivalent to `Fin (n + 1)` where `n` is the length of the walk, whereas the type of vertices of `G` does not need to be a set.
+A path in an undirected graph G is a walk `w` in G such that the inclusion of
+the type of vertices on `w` into the vertices of `G` is an injective function.
+Note that we don't expect this function to be an embedding, since the type of
+vertices on `w` is equivalent to `Fin (n + 1)` where `n` is the length of the
+walk, whereas the type of vertices of `G` does not need to be a set.
 
 ## Definition
 

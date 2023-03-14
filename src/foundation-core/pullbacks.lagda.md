@@ -7,10 +7,13 @@ module foundation-core.pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-cartesian-product-types
@@ -25,10 +28,6 @@ open import foundation-core.morphisms-cospans
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.structure-identity-principle
-open import foundation.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -74,7 +73,8 @@ module _
 
 ### The gap-map into the canonical pullback
 
-The gap map of a square is the map fron the vertex of the cone into the canonical pullback.
+The gap map of a square is the map fron the vertex of the cone into the
+canonical pullback.
 
 ```agda
 module _
@@ -90,7 +90,9 @@ module _
 
 ### The `is-pullback` property
 
-The proposition is-pullback is the assertion that the gap map is an equivalence. Note that this proposition is small, whereas the universal property is a large proposition.
+The proposition is-pullback is the assertion that the gap map is an equivalence.
+Note that this proposition is small, whereas the universal property is a large
+proposition.
 
 ```agda
 module _

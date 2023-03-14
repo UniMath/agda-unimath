@@ -7,23 +7,24 @@ module order-theory.sup-lattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.least-upper-bounds-posets
-open import order-theory.posets
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
+
+open import order-theory.least-upper-bounds-posets
+open import order-theory.posets
 ```
 
 </details>
 
 ## Idea
-A sup lattice is a poset in which every family of elements has a least upperbound.
-For full generality we will consider 3 different universe levels: one for the underlying type, one for
-the order relation and one for the indexing type.
+
+A sup lattice is a poset in which every family of elements has a least
+upperbound. For full generality we will consider 3 different universe levels:
+one for the underlying type, one for the order relation and one for the indexing
+type.
 
 ## Definitions
 
@@ -54,7 +55,8 @@ Sup-Lattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-sup-lattice-Poset l3 P)
 
 ```
 
-We now develop the tools that allow us to work with the components of a sup lattice.
+We now develop the tools that allow us to work with the components of a sup
+lattice.
 
 ```agda
 

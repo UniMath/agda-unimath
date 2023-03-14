@@ -19,6 +19,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -36,7 +37,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-We show, using the sieve of Eratosthenes and the well-ordering principle of `ℕ`, that there are infinitely many primes. Consequently we obtain the function that returns for each `n` the `n`-th prime, and we obtain the function that counts the number of primes below a number `n`.
+We show, using the sieve of Eratosthenes and the well-ordering principle of `ℕ`,
+that there are infinitely many primes. Consequently we obtain the function that
+returns for each `n` the `n`-th prime, and we obtain the function that counts
+the number of primes below a number `n`.
 
 ## Definition
 

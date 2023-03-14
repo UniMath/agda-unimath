@@ -7,13 +7,11 @@ module univalent-combinatorics.2-element-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.equivalences
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.automorphisms
 open import foundation.connected-components-universes
-open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -22,9 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
-open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -33,7 +29,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
-open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -47,15 +42,19 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.equivalences
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-2-element types are types that are merely equivalent to the standard 2-element type `Fin 2`.
+2-element types are types that are merely equivalent to the standard 2-element
+type `Fin 2`.
 
 ## Definition
 

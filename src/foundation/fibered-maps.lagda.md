@@ -7,6 +7,11 @@ module foundation.fibered-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.slice
+open import foundation.structure-identity-principle
+
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-types
@@ -21,10 +26,6 @@ open import foundation-core.small-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.slice
-open import foundation.structure-identity-principle
 ```
 
 </details>
@@ -43,7 +44,8 @@ Consider a diagram of the form
        i
 ```
 
-A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square `(i ∘ f) ~ (g ∘ h)` commutes.
+A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square
+`(i ∘ f) ~ (g ∘ h)` commutes.
 
 ## Definition
 

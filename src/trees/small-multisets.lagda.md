@@ -7,8 +7,6 @@ module trees.small-multisets where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.multisets
-open import trees.w-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -17,18 +15,22 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import trees.multisets
+open import trees.w-types
 ```
 
 </details>
 
 ## Idea
 
-A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe `UU l` if its symbol `A` is a small type with respect to `UU l`, and if each `α x` is a small multiset with respect to `UU l`.
+A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe
+`UU l` if its symbol `A` is a small type with respect to `UU l`, and if each
+`α x` is a small multiset with respect to `UU l`.
 
 ## Definition
 

@@ -7,20 +7,24 @@ module univalent-combinatorics.cycle-partitions where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.cyclic-types
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
+
+open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-A cycle partition of a finite type `A` is a finite family of cyclic finite types equipped with an equivalence from `A` to the total space of the underlying types of the family. The type of cyclic partitions of `A` is equivalent to the type of permutations of `A`.
+A cycle partition of a finite type `A` is a finite family of cyclic finite types
+equipped with an equivalence from `A` to the total space of the underlying types
+of the family. The type of cyclic partitions of `A` is equivalent to the type of
+permutations of `A`.
 
 ## Definition
 

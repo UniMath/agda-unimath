@@ -7,13 +7,14 @@ module order-theory.subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.preorders
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import order-theory.preorders
 ```
 
 </details>
@@ -103,4 +104,3 @@ module _
   pr1 (pr2 (pr2 (Sub-Preorder l))) = refl-inclusion-sub-Preorder
   pr2 (pr2 (pr2 (Sub-Preorder l))) = transitive-inclusion-sub-Preorder
 ```
-

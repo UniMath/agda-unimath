@@ -10,15 +10,17 @@ module foundation.unions-subtypes where
 open import foundation.decidable-subtypes
 open import foundation.disjunction
 open import foundation.existential-quantification
-open import foundation.subtypes
-open import foundation.universe-levels
+
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The union of two subtypes `A` and `B` is the subtype that contains the elements that are in `A` or in `B`.
+The union of two subtypes `A` and `B` is the subtype that contains the elements
+that are in `A` or in `B`.
 
 ## Definition
 

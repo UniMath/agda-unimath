@@ -7,19 +7,21 @@ module trees.elementhood-relation-w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import trees.w-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import trees.w-types
 ```
 
 </details>
 
 ## Idea
 
-We say that a tree `S` is an element of a tree `tree-𝕎 x α` if `S` can be equipped with an element `y : B x` such that `α y = S`.
+We say that a tree `S` is an element of a tree `tree-𝕎 x α` if `S` can be
+equipped with an element `y : B x` such that `α y = S`.
 
 ## Definition
 

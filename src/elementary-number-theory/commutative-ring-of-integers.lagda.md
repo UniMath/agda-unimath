@@ -7,15 +7,18 @@ module elementary-number-theory.commutative-ring-of-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-rings
+
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import commutative-algebra.commutative-rings
+
 open import group-theory.abelian-groups
-open import group-theory.groups
+
 open import ring-theory.rings
 ```
 

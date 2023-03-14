@@ -7,27 +7,30 @@ module foundation.universal-property-fiber-products where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.cones-pullbacks
-open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.pullbacks
-open import foundation.universal-property-pullbacks
-open import foundation.universe-levels
+open import foundation-core.cartesian-product-types
+open import foundation-core.cones-pullbacks
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.pullbacks
+open import foundation-core.universal-property-pullbacks
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The fiberwise product of two families `P` and `Q` over a type `X` is the family of types `(P x) × (Q x)` over `X`. Similarly, the fiber product of two maps `f :A → X` and `g : B → X` is the type `Σ X (λ x → fib f x × fib g x)`, which fits in a pullback diagram on `f` and `g`.
+The fiberwise product of two families `P` and `Q` over a type `X` is the family
+of types `(P x) × (Q x)` over `X`. Similarly, the fiber product of two maps
+`f :A → X` and `g : B → X` is the type `Σ X (λ x → fib f x × fib g x)`, which
+fits in a pullback diagram on `f` and `g`.
 
 ```agda
 module _

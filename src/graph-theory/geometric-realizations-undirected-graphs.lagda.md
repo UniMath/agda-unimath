@@ -7,20 +7,22 @@ module graph-theory.geometric-realizations-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import graph-theory.reflecting-maps-undirected-graphs
-open import graph-theory.undirected-graphs
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.symmetric-identity-types
 open import foundation.universe-levels
+
+open import graph-theory.reflecting-maps-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 </details>
 
 ## Idea
 
-The geometric realization of an undirected graph `G` is the initial type `X` equipped with a reflecting map from `G` into `X`.
+The geometric realization of an undirected graph `G` is the initial type `X`
+equipped with a reflecting map from `G` into `X`.
 
 ## Definition
 

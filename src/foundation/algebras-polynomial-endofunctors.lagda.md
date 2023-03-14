@@ -7,6 +7,10 @@ module foundation.algebras-polynomial-endofunctors where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.homotopies
+open import foundation.polynomial-endofunctors
+open import foundation.structure-identity-principle
+
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -15,16 +19,14 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
-open import foundation.homotopies
-open import foundation.polynomial-endofunctors
-open import foundation.structure-identity-principle
 ```
 
 </details>
 
 ## Idea
 
-Given a polynomial endofunctor `P A B`, an algebra for `P A B` conisists of a type `X` and a map `P A B X → X`.
+Given a polynomial endofunctor `P A B`, an algebra for `P A B` conisists of a
+type `X` and a map `P A B X → X`.
 
 ## Definitions
 

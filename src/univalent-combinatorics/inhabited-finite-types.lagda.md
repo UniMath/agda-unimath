@@ -7,8 +7,6 @@ module univalent-combinatorics.inhabited-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.finite-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -20,6 +18,9 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

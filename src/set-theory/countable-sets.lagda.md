@@ -7,31 +7,24 @@ module set-theory.countable-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes
-open import foundation.decidable-propositions
+open import elementary-number-theory.natural-numbers
+
 open import foundation.decidable-subtypes
-open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.existential-quantification
-open import foundation.functions
-open import foundation.functoriality-coproduct-types
 open import foundation.maybe
-open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.unit-type
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>
 
 ## Idea
 
-A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`. Equivalently, a set `X` is countable if there is a surjective map `f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
+A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`.
+Equivalently, a set `X` is countable if there is a surjective map
+`f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
 
 ## Definition
 
@@ -97,8 +90,7 @@ module _
             -}
 ```
 
--- ℕ → Σ (n : ℕ), P' n + ¬ (P' n)
---   → (Σ (n : ℕ), P' n) + (Σ (n : ℕ), ¬ (P' n))
---   → X + 1
+-- ℕ → Σ (n : ℕ), P' n + ¬ (P' n) -- → (Σ (n : ℕ), P' n) + (Σ (n : ℕ), ¬ (P' n))
+-- → X + 1
 
 -- P' := shift-ℕ ∅ P

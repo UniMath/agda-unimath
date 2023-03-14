@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -23,7 +24,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The distance function between natural numbers measures how far two natural numbers are apart. In the agda-unimath library we often prefer to work with `dist-ℕ` over the partially defined subtraction operation.
+The distance function between natural numbers measures how far two natural
+numbers are apart. In the agda-unimath library we often prefer to work with
+`dist-ℕ` over the partially defined subtraction operation.
 
 ## Definition
 

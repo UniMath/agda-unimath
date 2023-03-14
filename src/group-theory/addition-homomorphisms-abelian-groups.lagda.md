@@ -7,18 +7,21 @@ module group-theory.addition-homomorphisms-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.abelian-groups
-open import group-theory.homomorphisms-abelian-groups
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 ```
 
 </details>
 
 ## Idea
 
-Morphisms of abelian groups can be added pointwise. This operation turns each hom-set of abelian groups into an abelian group. Moreover, composition of abelian groups distributes over addition from the left and from the right.
+Morphisms of abelian groups can be added pointwise. This operation turns each
+hom-set of abelian groups into an abelian group. Moreover, composition of
+abelian groups distributes over addition from the left and from the right.
 
 ## Definition
 

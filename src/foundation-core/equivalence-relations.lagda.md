@@ -7,22 +7,24 @@ module foundation-core.equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
+open import foundation.inhabited-subtypes
+open import foundation.propositional-truncations
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.universe-levels
-open import foundation.binary-relations
-open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
 ```
 
 </details>
 
 ## Idea
 
-An equivalence relation is a relation valued in propositions, which is reflexive,symmetric, and transitive.
+An equivalence relation is a relation valued in propositions, which is
+reflexive,symmetric, and transitive.
 
 ## Definition
 

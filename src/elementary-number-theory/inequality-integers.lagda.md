@@ -12,8 +12,8 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
-open import foundation.empty-types
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -124,6 +124,7 @@ reflects-order-add-ℤ {x} {y} {z} =
 ```
 
 ### Inclusion of ℕ into ℤ preserves order
+
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
 leq-int-ℕ zero-ℕ y H = tr (is-nonnegative-ℤ) (inv (right-unit-law-add-ℤ (int-ℕ y))) (is-nonnegative-int-ℕ y)

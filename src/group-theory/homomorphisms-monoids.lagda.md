@@ -7,18 +7,20 @@ module group-theory.homomorphisms-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.homomorphisms-semigroups
-open import group-theory.monoids
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import group-theory.homomorphisms-semigroups
+open import group-theory.monoids
 ```
 
 </details>
 
 ## Idea
 
-Homomorphisms between two monoids are homomorphisms between their underlying semigroups that preserve the unit element.
+Homomorphisms between two monoids are homomorphisms between their underlying
+semigroups that preserve the unit element.
 
 ## Definition
 

@@ -7,8 +7,9 @@ module univalent-combinatorics.embeddings-standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.repeating-element-standard-finite-type
+
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -16,17 +17,18 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.split-surjective-maps
 open import foundation.unit-type
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.repeating-element-standard-finite-type
+
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding `Fin k ↪ Fin l`.
+Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding
+`Fin k ↪ Fin l`.
 
 ## Theorem
 
@@ -122,9 +124,5 @@ pr2 (reduce-emb-Fin k l f) = is-emb-map-reduce-emb-Fin k l f
 
 ### Any embedding from `Fin k` into itself is surjective
 
--- ```agda
--- is-split-surjective-is-emb-Fin :
---   {k : ℕ} {f : Fin k → Fin k} → is-emb f → is-split-surjective f
--- is-split-surjective-is-emb-Fin {zero-ℕ} {f} H ()
--- is-split-surjective-is-emb-Fin {succ-ℕ k} {f} H y = {!!}
--- ```
+--
+`agda -- is-split-surjective-is-emb-Fin : --   {k : ℕ} {f : Fin k → Fin k} → is-emb f → is-split-surjective f -- is-split-surjective-is-emb-Fin {zero-ℕ} {f} H () -- is-split-surjective-is-emb-Fin {succ-ℕ k} {f} H y = {!!} -- `
