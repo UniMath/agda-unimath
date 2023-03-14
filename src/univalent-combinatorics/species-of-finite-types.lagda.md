@@ -22,33 +22,33 @@ In this file, we define the type of species of finite types. A species of finite
 ### Species
 
 ```agda
-species-finite-types : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-species-finite-types l1 l2 = 𝔽 l1 → 𝔽 l2
+species-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+species-𝔽 l1 l2 = 𝔽 l1 → 𝔽 l2
 ```
 
 ### Transport in species
 
 ```agda
-tr-species-finite-types :
-  {l1 l2 : Level} (F : species-finite-types l1 l2) (X Y : 𝔽 l1) →
+tr-species-𝔽 :
+  {l1 l2 : Level} (F : species-𝔽 l1 l2) (X Y : 𝔽 l1) →
   type-𝔽 X ≃ type-𝔽 Y → type-𝔽 (F X) → type-𝔽 (F Y)
-tr-species-finite-types F X Y e = tr (type-𝔽 ∘ F) (eq-equiv-𝔽 X Y e)
+tr-species-𝔽 F X Y e = tr (type-𝔽 ∘ F) (eq-equiv-𝔽 X Y e)
 ```
 
 ### Extension into species of types
 
 ```agda
 module _
-  {l1 l2 : Level} (S : species-finite-types l1 l2)
+  {l1 l2 : Level} (S : species-𝔽 l1 l2)
   where
 
-  Σ-extension-species-finite-types :
+  Σ-extension-species-𝔽 :
     species-types (l1) (l1 ⊔ l2)
-  Σ-extension-species-finite-types X =
+  Σ-extension-species-𝔽 X =
     Σ (is-finite X) (λ p → type-𝔽 (S (X , p)))
 
-  Π-extension-species-finite-types :
+  Π-extension-species-𝔽 :
     species-types (l1) (l1 ⊔ l2)
-  Π-extension-species-finite-types X =
+  Π-extension-species-𝔽 X =
     (p : is-finite X) → type-𝔽 (S (X , p))
 ```

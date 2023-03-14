@@ -967,82 +967,31 @@ module _
     f = matching-correspondence-Σ-Decomposition
       ( snd-fibered-Σ-Decomposition fib-D)
 
-    lemma :
-      {l : Level} {C : UU l} →
-      (inv-equiv (id-equiv {l} {C})) ＝ id-equiv {l} {C}
-    lemma = eq-htpy-equiv refl-htpy
-
-    lemma2 :
-      equiv-Σ-equiv-base Y (inv-equiv id-equiv) ＝ id-equiv
-    lemma2 = eq-htpy-equiv refl-htpy
-
-    lemma3 :
-      inv-equiv (equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ＝ id-equiv
-    lemma3 = (ap inv-equiv lemma2)  ∙ lemma
-
-    lemma4 :
-       ( assoc-Σ M P Y  ∘e
-         ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
-         inv-assoc-Σ M P Y )) ＝ id-equiv
-    lemma4 =
-      ( ap (λ e → assoc-Σ M P Y ∘e (e ∘e inv-assoc-Σ M P Y)) lemma3) ∙
-        ( ( ap
-            ( λ e → assoc-Σ M P Y ∘e e)
-            ( left-unit-law-equiv (inv-assoc-Σ M P Y))) ∙
-          ( eq-htpy-equiv (issec-map-inv-assoc-Σ M P Y)))
-
-    lemma5 :
-      ( ( equiv-Σ N id-equiv (inv-equiv ∘ t) ) ∘e
-        ( assoc-Σ M P Y  ∘e
-          ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
-            ( inv-assoc-Σ M P Y ∘e
-              ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ∘e
-              ( s)))))) ＝ s
-    lemma5 =
-      equational-reasoning
-        ( ( equiv-Σ N id-equiv (inv-equiv ∘ t) ) ∘e
-          ( assoc-Σ M P Y  ∘e
-          ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
-          ( inv-assoc-Σ M P Y ∘e
-          ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ∘e
-            s)))))
-            ＝
-        ( ( equiv-Σ N id-equiv (inv-equiv ∘ t) ) ∘e
-          ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ∘e
-            s))
-            by
-            eq-htpy-equiv
-              ( λ a → ap (map-equiv (equiv-Σ N id-equiv (inv-equiv ∘ t)))
-              ( htpy-eq-equiv lemma4
-                ( map-equiv
-                  ( ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ))
-                  ( map-equiv s a))))
-            ＝
-        equiv-Σ N id-equiv (λ m → inv-equiv (t m) ∘e t m) ∘e s
-            by eq-htpy-equiv refl-htpy
-            ＝
-        s
-            by
-            eq-htpy-equiv
-              ( λ a →
-                ( htpy-map-Σ
-                  ( N)
-                  ( refl-htpy)
-                  ( λ m p →
-                    ( ((map-inv-equiv (t m)) ∘ map-equiv (t m)) p  ))
-                  ( λ m →
-                    htpy-eq-equiv
-                      ( left-inverse-law-equiv (t m)))
-                      ( map-equiv s a)))
-
     htpy-matching-correspondence :
       map-equiv (
         ( equiv-Σ N id-equiv (inv-equiv ∘ t)  ) ∘e
         matching-correspondence-displayed-fibered-Σ-Decomposition
           (fib-D))
       ~ map-equiv s
-    htpy-matching-correspondence a =
-      htpy-eq-equiv lemma5 a
+    htpy-matching-correspondence x =
+      ( ap
+        ( λ f → map-equiv (equiv-tot (inv-equiv ∘ t)) f)
+        ( inv-map-eq-transpose-equiv
+          ( assoc-Σ M P Y)
+          ( inv
+            ( map-eq-transpose-equiv
+              ( equiv-Σ-equiv-base Y (inv-equiv id-equiv))
+              ( inv
+                ( map-eq-transpose-equiv
+                  ( assoc-Σ M P Y)
+                  ( issec-map-inv-assoc-Σ M P Y
+                    ( map-equiv (equiv-tot t ∘e s) x))))))))  ∙
+      ( inv
+        ( tot-comp (map-equiv ∘ t) (map-inv-equiv ∘ t) (map-equiv s x)) ∙
+      ( tot-htpy (λ z → isretr-map-inv-equiv (t z)) (map-equiv s x) ∙
+      ( tot-id
+        ( λ z → cotype-fst-displayed-Σ-Decomposition disp-D z)
+        ( map-equiv s x))))
 
   issec-map-inv-displayed-fibered-Σ-Decomposition :
     ( map-displayed-fibered-Σ-Decomposition

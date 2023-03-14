@@ -6,7 +6,7 @@ module univalent-combinatorics.composition-species-of-types where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-sigma-decompositions
+open import foundation.discrete-relaxed-sigma-decompositions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
@@ -20,8 +20,8 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.universal-property-dependent-pair-types
-open import foundation.sigma-decompositions
-open import foundation.trivial-sigma-decompositions
+open import foundation.relaxed-sigma-decompositions
+open import foundation.trivial-relaxed-sigma-decompositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -50,16 +50,16 @@ analytic-comp-species-types :
   {l1 l2 l3 : Level} → species-types l1 l2 → species-types l1 l3 →
   species-types l1 (lsuc l1 ⊔ l2 ⊔ l3)
 analytic-comp-species-types {l1} {l2} {l3} S T X =
-  Σ ( Σ-Decomposition l1 l1 X)
+  Σ ( Relaxed-Σ-Decomposition l1 l1 X)
     ( λ D →
-      ( S (indexing-type-Σ-Decomposition D) ×
-      ( (y : indexing-type-Σ-Decomposition D) →
-      T (cotype-Σ-Decomposition D y ))))
+      ( S (indexing-type-Relaxed-Σ-Decomposition D) ×
+      ( (y : indexing-type-Relaxed-Σ-Decomposition D) →
+      T (cotype-Relaxed-Σ-Decomposition D y ))))
 ```
 
- ### The analytic unit for composition of species
+### The analytic unit for composition of species
 
- ```agda
+```agda
 analytic-unit-species-types : {l1 : Level} → species-types l1 l1
 analytic-unit-species-types X = is-contr X
 ```
@@ -69,25 +69,25 @@ analytic-unit-species-types X = is-contr X
 ### Unit laws for analytic composition of species
 
 ```agda
-left-unit-law-comp-inhabited-species-types :
+left-unit-law-comp-species-types :
   {l1 l2 : Level}
-  (F : species-types l1 l2) → (A : UU l1) → (p :  is-inhabited A) →
+  (F : species-types l1 l2) → (A : UU l1) →
   analytic-comp-species-types analytic-unit-species-types F A ≃ F A
-left-unit-law-comp-inhabited-species-types {l1} F A p =
+left-unit-law-comp-species-types {l1} F A =
   ( ( left-unit-law-Σ-is-contr
-      ( is-contr-type-trivial-Σ-Decomposition p)
-      ( trivial-inhabited-Σ-Decomposition l1 A p ,
-        is-trivial-trivial-inhabited-Σ-Decomposition p)) ∘e
+      ( is-contr-type-trivial-Relaxed-Σ-Decomposition)
+      ( trivial-Relaxed-Σ-Decomposition l1 A ,
+        is-trivial-trivial-inhabited-Relaxed-Σ-Decomposition {l1} {l1} {A})) ∘e
   ( ( inv-assoc-Σ
-      ( Σ-Decomposition l1 l1 A)
-      ( λ D → is-contr (indexing-type-Σ-Decomposition D))
-      ( λ C → F (cotype-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
+      ( Relaxed-Σ-Decomposition l1 l1 A)
+      ( λ D → is-contr (indexing-type-Relaxed-Σ-Decomposition D))
+      ( λ C → F (cotype-Relaxed-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
   ( ( equiv-Σ
       ( _)
       ( id-equiv)
       ( λ D →
         equiv-Σ
-          ( λ z → F (cotype-Σ-Decomposition D (center z)))
+          ( λ z → F (cotype-Relaxed-Σ-Decomposition D (center z)))
           ( id-equiv)
           ( λ C →
             ( left-unit-law-Π-is-contr C (center C))))))))
@@ -98,19 +98,20 @@ right-unit-law-comp-species-types :
   analytic-comp-species-types F analytic-unit-species-types A ≃ F A
 right-unit-law-comp-species-types {l1} F A =
   ( ( left-unit-law-Σ-is-contr
-      ( is-contr-type-discrete-Σ-Decomposition)
-      ( ( discrete-Σ-Decomposition l1 A) ,
-        is-discrete-discrete-Σ-Decomposition) ) ∘e
+      ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
+      ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
+        is-discrete-discrete-Relaxed-Σ-Decomposition) ) ∘e
   ( ( inv-assoc-Σ
-      ( Σ-Decomposition l1 l1 A)
+      ( Relaxed-Σ-Decomposition l1 l1 A)
       ( λ D →
-          (y : indexing-type-Σ-Decomposition D) → is-contr (cotype-Σ-Decomposition D y))
-      ( λ D → F (indexing-type-Σ-Decomposition (pr1 D)))) ∘e
+          ( y : indexing-type-Relaxed-Σ-Decomposition D) →
+            is-contr (cotype-Relaxed-Σ-Decomposition D y))
+      ( λ D → F (indexing-type-Relaxed-Σ-Decomposition (pr1 D)))) ∘e
   ( equiv-Σ
       ( λ D →
-        ( (y : indexing-type-Σ-Decomposition D) →
-          analytic-unit-species-types ( cotype-Σ-Decomposition D y)) ×
-        F ( indexing-type-Σ-Decomposition D))
+        ( (y : indexing-type-Relaxed-Σ-Decomposition D) →
+          analytic-unit-species-types ( cotype-Relaxed-Σ-Decomposition D y)) ×
+        F ( indexing-type-Relaxed-Σ-Decomposition D))
      ( id-equiv)
      ( λ _ → commutative-prod))))
 ```
@@ -119,7 +120,7 @@ right-unit-law-comp-species-types {l1} F A =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} 
+  {l1 l2 l3 l4 : Level}
   (S : species-types l1 l2) (T : species-types l1 l3)
   (U : species-types l1 l4)
   where
@@ -139,10 +140,10 @@ module _
               ( id-equiv)
               ( λ D2 →
                 ( inv-assoc-Σ
-                  ( S (indexing-type-Σ-Decomposition D2))
+                  ( S (indexing-type-Relaxed-Σ-Decomposition D2))
                   ( λ _ →
-                    ( x : indexing-type-Σ-Decomposition D2) →
-                    T ( cotype-Σ-Decomposition D2 x))
+                    ( x : indexing-type-Relaxed-Σ-Decomposition D2) →
+                    T ( cotype-Relaxed-Σ-Decomposition D2 x))
                   _))) ∘e
           ( ( equiv-Σ
             ( _)
@@ -155,25 +156,25 @@ module _
                     ( ( inv-equiv
                         ( equiv-precomp-Π
                           ( inv-equiv
-                            ( matching-correspondence-Σ-Decomposition D2) )
-                        ( λ x → U ( cotype-Σ-Decomposition D1 x) ))) ∘e
+                            ( matching-correspondence-Relaxed-Σ-Decomposition D2) )
+                        ( λ x → U ( cotype-Relaxed-Σ-Decomposition D1 x) ))) ∘e
                       ( inv-equiv equiv-ev-pair))) ∘e
                   ( distributive-Π-Σ)))))))))) ∘e
     ( ( assoc-Σ
-        ( Σ-Decomposition l1 l1 A)
-        ( λ D → Σ-Decomposition l1 l1
-          ( indexing-type-Σ-Decomposition D))
+        ( Relaxed-Σ-Decomposition l1 l1 A)
+        ( λ D → Relaxed-Σ-Decomposition l1 l1
+          ( indexing-type-Relaxed-Σ-Decomposition D))
         ( _)) ∘e
     ( ( inv-equiv
         ( equiv-Σ-equiv-base
           ( _ )
-          ( equiv-displayed-fibered-Σ-Decomposition))) ∘e
+          ( equiv-displayed-fibered-Relaxed-Σ-Decomposition))) ∘e
     ( ( inv-assoc-Σ
-        ( Σ-Decomposition l1 l1 A)
+        ( Relaxed-Σ-Decomposition l1 l1 A)
         ( λ D →
-          ( x : indexing-type-Σ-Decomposition D) →
-            Σ-Decomposition l1 l1
-              ( cotype-Σ-Decomposition D x))
+          ( x : indexing-type-Relaxed-Σ-Decomposition D) →
+            Relaxed-Σ-Decomposition l1 l1
+              ( cotype-Relaxed-Σ-Decomposition D x))
         ( _)) ∘e
     ( ( equiv-Σ
         ( _)

@@ -8,6 +8,7 @@ module univalent-combinatorics.decidable-propositions where
 
 ```agda
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-propositions public
 open import foundation.coproduct-types
@@ -17,6 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import elementary-number-theory.natural-numbers
 ```
