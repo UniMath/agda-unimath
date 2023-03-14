@@ -7,18 +7,11 @@ module foundation-core.automorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.sets
-open import foundation.structure-identity-principle
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
 
 open import structured-types.pointed-types
 ```

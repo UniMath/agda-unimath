@@ -8,16 +8,13 @@ module group-theory.decidable-subgroups where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle

@@ -7,12 +7,13 @@ module foundation.law-of-excluded-middle where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.decidable-propositions
+open import foundation-core.dependent-pair-types
+open import foundation-core.negation
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 ```

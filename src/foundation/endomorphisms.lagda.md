@@ -9,12 +9,13 @@ module foundation.endomorphisms where
 ```agda
 open import foundation-core.endomorphisms public
 
-open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.sets
 open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
 open import group-theory.monoids
 open import group-theory.semigroups

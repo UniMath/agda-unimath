@@ -23,12 +23,10 @@ open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 

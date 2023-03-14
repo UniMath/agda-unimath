@@ -17,7 +17,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-presented-types
 open import foundation.set-truncations
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 

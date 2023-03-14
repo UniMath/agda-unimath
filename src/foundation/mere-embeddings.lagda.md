@@ -12,8 +12,9 @@ open import foundation.embeddings
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 
 open import order-theory.large-preorders
 ```

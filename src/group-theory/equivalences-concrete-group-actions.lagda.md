@@ -13,13 +13,10 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions

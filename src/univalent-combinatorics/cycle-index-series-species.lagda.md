@@ -9,14 +9,11 @@ module univalent-combinatorics.cycle-index-series-species where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.species
 ```
 
 </details>

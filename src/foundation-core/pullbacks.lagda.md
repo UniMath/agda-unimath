@@ -14,8 +14,6 @@ open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-cartesian-product-types

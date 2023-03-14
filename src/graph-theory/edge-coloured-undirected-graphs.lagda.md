@@ -14,8 +14,6 @@ open import foundation.unordered-pairs
 
 open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
-
-open import univalent-combinatorics.finite-types
 ```
 
 </details>

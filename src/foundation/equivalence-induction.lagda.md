@@ -9,12 +9,13 @@ module foundation.equivalence-induction where
 ```agda
 open import foundation-core.equivalence-induction public
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.sections
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.sections
+open import foundation-core.universe-levels
 ```
 
 </details>

@@ -31,7 +31,6 @@ open import foundation-core.function-extensionality
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
-open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms

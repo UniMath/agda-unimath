@@ -11,7 +11,6 @@ open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.pullback-hom
 ```
 

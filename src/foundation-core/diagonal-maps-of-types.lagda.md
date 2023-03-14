@@ -8,7 +8,6 @@ module foundation-core.diagonal-maps-of-types where
 
 ```agda
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences

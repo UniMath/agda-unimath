@@ -7,7 +7,6 @@ module ring-theory.local-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
@@ -15,7 +14,6 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings
-open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
 

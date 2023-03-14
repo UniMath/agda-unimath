@@ -12,24 +12,22 @@ module foundation.exponents-set-quotients where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalence-relations
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalence-relations
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>

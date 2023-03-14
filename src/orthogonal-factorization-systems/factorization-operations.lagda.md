@@ -8,15 +8,9 @@ module orthogonal-factorization-systems.factorization-operations where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functions
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
-open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.factorizations-of-maps

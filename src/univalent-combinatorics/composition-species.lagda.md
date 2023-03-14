@@ -10,15 +10,9 @@ module univalent-combinatorics.composition-species where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.partitions
 open import univalent-combinatorics.sigma-decompositions
 open import univalent-combinatorics.species
 ```

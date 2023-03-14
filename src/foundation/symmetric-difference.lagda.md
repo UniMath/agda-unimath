@@ -7,19 +7,20 @@ module foundation.symmetric-difference where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.identity-types hiding (inv)
 open import foundation.intersections-subtypes
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.universe-levels
 open import foundation.xor
+
+open import foundation-core.coproduct-types
+open import foundation-core.decidable-propositions
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>

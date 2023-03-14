@@ -8,13 +8,14 @@ module foundation.type-arithmetic-booleans where
 
 ```agda
 open import foundation.booleans
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>

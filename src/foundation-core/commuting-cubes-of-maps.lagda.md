@@ -9,7 +9,6 @@ module foundation-core.commuting-cubes-of-maps where
 ```agda
 open import foundation.hexagons-of-identifications
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

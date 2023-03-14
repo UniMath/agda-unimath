@@ -2,7 +2,11 @@
 
 ```agda
 module synthetic-homotopy-theory.27-sequences where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
@@ -16,7 +20,11 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
+```
 
+</details>
+
+```agda
 {- We introduce two types of sequences: one with the arrows going up and one
    with the arrows going down. -}
 

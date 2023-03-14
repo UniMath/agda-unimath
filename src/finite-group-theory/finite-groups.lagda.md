@@ -14,7 +14,6 @@ open import finite-group-theory.finite-semigroups
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.decidable-equality
-open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings

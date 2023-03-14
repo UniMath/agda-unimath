@@ -7,24 +7,22 @@ module foundation.epimorphisms-with-respect-to-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
-open import foundation.universe-levels
 
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.propositions
 open import foundation-core.univalence
+open import foundation-core.universe-levels
 ```
 
 </details>

@@ -28,7 +28,6 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
-open import group-theory.kernels
 open import group-theory.quotient-groups
 open import group-theory.semigroups
 open import group-theory.subgroups-abelian-groups

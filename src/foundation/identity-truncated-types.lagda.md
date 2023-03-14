@@ -7,11 +7,11 @@ module foundation.identity-truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.truncated-types
 open import foundation.univalence
 
 open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```

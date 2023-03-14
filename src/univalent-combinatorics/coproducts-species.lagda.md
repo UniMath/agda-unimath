@@ -10,13 +10,11 @@ module univalent-combinatorics.coproducts-species where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.equivalences
-open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.species
 ```

@@ -12,7 +12,8 @@ open import elementary-number-theory.natural-numbers
 open import foundation.decidable-subtypes
 open import foundation.multivariable-correspondences
 open import foundation.multivariable-relations
-open import foundation.universe-levels
+
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```

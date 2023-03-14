@@ -13,7 +13,6 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
 ```
 
 </details>

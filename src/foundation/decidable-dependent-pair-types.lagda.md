@@ -7,16 +7,17 @@ module foundation.decidable-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.maybe
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-unit-type
-open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>

@@ -27,7 +27,7 @@ repos:
     hooks:
       - id: remove-extra-blank-lines
         name: Remove extra blank lines in Agda files
-        entry: scripts/remove-extra-blank.py
+        entry: scripts/remove_extra_blank_lines.py
         language: python
         always_run: true
         verbose: true
@@ -38,7 +38,7 @@ repos:
 
       - id: fix-imports
         name: Format Agda imports
-        entry: scripts/fix-imports.py
+        entry: scripts/fix_imports.py
         language: python
         always_run: true
         verbose: true

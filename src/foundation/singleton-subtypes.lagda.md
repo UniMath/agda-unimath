@@ -8,14 +8,15 @@ module foundation.singleton-subtypes where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>

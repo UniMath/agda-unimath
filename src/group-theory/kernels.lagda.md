@@ -9,9 +9,7 @@ module group-theory.kernels where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels

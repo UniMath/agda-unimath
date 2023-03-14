@@ -33,7 +33,6 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types

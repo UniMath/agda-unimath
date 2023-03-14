@@ -15,13 +15,11 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
-open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
 open import group-theory.higher-groups

@@ -14,7 +14,7 @@ def generate_title(namespace):
 
 def generate_imports(root, namespace):
     namespace_path = os.path.join(root, namespace)
-    def agda_file_filter(f): return utils.isAgdaFile(
+    def agda_file_filter(f): return utils.is_agda_file(
         pathlib.Path(os.path.join(namespace_path, f)))
     namespace_files = filter(agda_file_filter, os.listdir(namespace_path))
 

@@ -16,7 +16,6 @@ open import foundation.embeddings
 open import foundation.fibers-of-maps
 open import foundation.functoriality-propositional-truncation
 open import foundation.injective-maps
-open import foundation.propositional-maps
 open import foundation.retractions
 open import foundation.universe-levels
 

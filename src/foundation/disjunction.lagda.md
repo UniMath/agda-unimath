@@ -8,10 +8,10 @@ module foundation.disjunction where
 
 ```agda
 open import foundation.conjunction
-open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.propositional-truncations
 
+open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences

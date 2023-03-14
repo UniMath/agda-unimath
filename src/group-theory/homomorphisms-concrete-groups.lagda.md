@@ -10,18 +10,12 @@ module group-theory.homomorphisms-concrete-groups where
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.surjective-maps
-open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
-open import group-theory.higher-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-higher-groups
 ```

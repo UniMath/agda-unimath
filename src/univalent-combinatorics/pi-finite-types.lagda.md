@@ -34,7 +34,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.images
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.maybe

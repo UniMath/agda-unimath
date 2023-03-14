@@ -14,7 +14,6 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.empty-types
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types

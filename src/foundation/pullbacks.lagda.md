@@ -16,8 +16,6 @@ open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.structure-identity-principle
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types

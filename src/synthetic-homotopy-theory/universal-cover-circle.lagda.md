@@ -2,7 +2,11 @@
 
 ```agda
 module synthetic-homotopy-theory.universal-cover-circle where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
@@ -33,7 +37,11 @@ open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
+```
 
+</details>
+
+```agda
 {- Section 12.2 The fundamental cover of the circle -}
 
 {- We show that if a type with a free loop satisfies the induction principle

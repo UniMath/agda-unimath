@@ -11,7 +11,6 @@ open import foundation.equality-coproduct-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
-open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universal-property-maybe
@@ -24,6 +23,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.universe-levels

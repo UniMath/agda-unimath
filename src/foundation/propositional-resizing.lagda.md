@@ -7,11 +7,10 @@ module foundation.propositional-resizing where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>

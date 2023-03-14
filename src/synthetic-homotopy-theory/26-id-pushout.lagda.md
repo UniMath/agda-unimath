@@ -2,7 +2,11 @@
 
 ```agda
 module synthetic-homotopy-theory.26-id-pushout where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -25,7 +29,11 @@ open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
+```
 
+</details>
+
+```agda
 -- Section 19.1 Characterizing families of maps over pushouts
 
 module hom-Fam-pushout

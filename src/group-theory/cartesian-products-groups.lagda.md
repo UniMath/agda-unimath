@@ -14,7 +14,6 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.cartesian-products-monoids
-open import group-theory.cartesian-products-semigroups
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
