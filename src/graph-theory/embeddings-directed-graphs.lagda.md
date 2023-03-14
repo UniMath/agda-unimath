@@ -12,7 +12,8 @@ open import foundation.embeddings
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs open import
+open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>
