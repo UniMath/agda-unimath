@@ -49,3 +49,21 @@ module _
   power-succ-Commutative-Ring =
     power-succ-Ring (ring-Commutative-Ring R)
 ```
+
+### Powers distribute over multiplication
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  distributive-power-mul-Commutative-Ring :
+    (n : ℕ) {x y : type-Commutative-Ring R} →
+    power-Commutative-Ring R n (mul-Commutative-Ring R x y) ＝ 
+    mul-Commutative-Ring R (power-Commutative-Ring R n x) (power-Commutative-Ring R n y)
+  distributive-power-mul-Commutative-Ring zero-ℕ {x} {y} = inv (left-unit-law-mul-Commutative-Ring R (one-Commutative-Ring R))
+  distributive-power-mul-Commutative-Ring (succ-ℕ zero-ℕ) {x} {y} = refl
+  distributive-power-mul-Commutative-Ring (succ-ℕ (succ-ℕ n)) {x} {y} = 
+    ap (mul-Commutative-Ring' R (mul-Commutative-Ring R x y)) (distributive-power-mul-Commutative-Ring (succ-ℕ n) {x} {y}) ∙ 
+    (interchange-mul-mul-Commutative-Ring R (power-Commutative-Ring R (succ-ℕ n) x) (power-Commutative-Ring R (succ-ℕ n) y) x y)
+```

@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import foundation.interchange-law
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
@@ -259,6 +260,20 @@ module _
   commutative-semiring-Commutative-Ring : Commutative-Semiring l
   pr1 commutative-semiring-Commutative-Ring = semiring-Commutative-Ring
   pr2 commutative-semiring-Commutative-Ring = commutative-mul-Commutative-Ring
+
+  interchange-mul-mul-Commutative-Ring :
+    (x y z w : type-Commutative-Ring) → 
+    mul-Commutative-Ring
+      ( mul-Commutative-Ring x y)
+      ( mul-Commutative-Ring z w) ＝
+    mul-Commutative-Ring
+      ( mul-Commutative-Ring x z)
+      ( mul-Commutative-Ring y w)
+  interchange-mul-mul-Commutative-Ring =
+    interchange-law-commutative-and-associative
+      mul-Commutative-Ring
+      commutative-mul-Commutative-Ring
+      associative-mul-Commutative-Ring 
 ```
 
 ### Scalar multiplication of elements of a commutative ring by natural numbers
