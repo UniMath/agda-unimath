@@ -11,6 +11,9 @@ open import foundation.surjective-maps public
 
 open import foundation.decidable-types
 open import foundation.universe-levels
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.embeddings
@@ -113,42 +116,3 @@ module _
                 ( pr2 n-surj))))
 
 ```
-
--- ### Type duality surjective function between finite type
-
--- If `A` and `B` are finite, then surjective maps from `A → B` is equivalent to the type of pairs of inhabited dependent family `Y : A → 𝔽` and equivalence between `A ≃ Σ B Y`
-
--- ```agda
--- type-duality-surjective-functions-𝔽 :
---   {l1 : Level} (l2 : Level) (A : 𝔽 l1) (B : 𝔽 (l1 ⊔ l2))→
---   ((type-𝔽 A) ↠ (type-𝔽 B)) ≃
---     Σ
---     ( Fam-Inhabited-Types-𝔽 (l1 ⊔ l2) B )
---     ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) λ x → type-Fam-Inhabited-Types-𝔽 B Y x)
--- type-duality-surjective-functions-𝔽 {l1} l2 A B =
---   ( ( equiv-Σ-equiv-base
---       ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) ( type-Fam-Inhabited-Types-𝔽 B Y))
---       ( inv-equiv (equiv-Fam-Inhabited-Type-𝔽 B))) ∘e
---     ( ( inv-assoc-Σ _  _ _ ) ∘e
---         ( ( equiv-Σ
---             ( _)
---             ( id-equiv)
---             ( λ Y →
---               ( ( equiv-Σ
---                   ( _)
---                   ( id-equiv)
---                   ( λ f →
---                     {!id-equiv!})) ∘e
---                 commutative-prod) ∘e
---                 inv-equiv
---                   ( right-unit-law-Σ-is-contr
---                     ( λ e →
---                       ( is-proof-irrelevant-is-prop
---                         ( is-prop-Π
---                           ( λ x → is-prop-is-finite (type-Inhabited-Type (Y x))))
---                         ( is-finite-fiber-is-finite-Σ
---                           ( is-finite-type-𝔽 B)
---                           ( is-finite-equiv e (is-finite-type-𝔽 A))))))))  ∘e
---           ( type-duality-surjective-functions l2 (type-𝔽 A) (type-𝔽 B)))))
--- ```
-

@@ -31,6 +31,7 @@ open import foundation.identity-types
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
