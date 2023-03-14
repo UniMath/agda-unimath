@@ -51,13 +51,6 @@ def has_well_formed_blocks(mdcode, pos=0):
     return has_well_formed_blocks(mdcode, close_match.end())
 
 
-def len_iter(it):
-    i = -1
-    for i, el in enumerate(it):
-        pass
-    return i + 1
-
-
 if __name__ == "__main__":
 
     STATUS_FILES_WITH_UNEVEN_BLOCKS = 1
