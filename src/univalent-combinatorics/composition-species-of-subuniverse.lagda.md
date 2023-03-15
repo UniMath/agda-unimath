@@ -1,4 +1,4 @@
-#  Composition of species of subuniverse
+# Composition of species of subuniverse
 
 ```agda
 module univalent-combinatorics.composition-species-of-subuniverse where
@@ -39,13 +39,15 @@ open import univalent-combinatorics.species-of-types
 
 ## Idea
 
-A species `S : Inhabited-Type → UU l` can be thought of as the analytic endofunctor
+A species `S : Inhabited-Type → UU l` can be thought of as the analytic
+endofunctor
 
 ```md
   X ↦ Σ (A : Inhabited-Type) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 

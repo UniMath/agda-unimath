@@ -112,4 +112,3 @@ pr2 ( is-contr-type-discrete-Σ-Decomposition {l1} {l2} {A}) =
           ( discrete-Σ-Decomposition l2 A)
           ( equiv-discrete-is-discrete-Σ-Decomposition (pr1 x) (pr2 x)))))
 ```
-

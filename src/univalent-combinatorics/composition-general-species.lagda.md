@@ -1,4 +1,4 @@
-#  Composition of general species
+# Composition of general species
 
 ```agda
 module univalent-combinatorics.composition-general-species where
@@ -24,13 +24,15 @@ open import foundation.type-theoretic-principle-of-choice
 
 ## Idea
 
-A general species `S : UU l1 → UU l2` can be thought of as the analytic endofunctor
+A general species `S : UU l1 → UU l2` can be thought of as the analytic
+endofunctor
 
 ```md
   X ↦ Σ (A : UU l1) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 
@@ -48,9 +50,9 @@ analytic-comp-general-species {l1} {l2} {l3} S T X =
       T (cotype-Σ-Decomposition D y ))))
 ```
 
- ### The analytic unit for composition of species
+### The analytic unit for composition of species
 
- ```agda
+```agda
 analytic-unit-general-species : {l1 : Level} → general-species l1 l1
 analytic-unit-general-species X = is-contr X
 ```
@@ -73,7 +75,7 @@ left-unit-law-comp-species F X =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} 
+  {l1 l2 l3 l4 : Level}
   (S : general-species l1 l2) (T : general-species l1 l3)
   (U : general-species l1 l4)
   where

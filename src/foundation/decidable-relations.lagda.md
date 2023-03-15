@@ -8,12 +8,13 @@ module foundation.decidable-relations where
 
 ```agda
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.propositions
-open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
 open import foundation-core.decidable-propositions
 ```
 

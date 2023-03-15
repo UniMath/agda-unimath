@@ -352,7 +352,8 @@ equiv-Fib-structure {l1} {l3} l P B =
 
 ```
 
-The type of all function from `A → B` is equivalent to the type of function `Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
+The type of all function from `A → B` is equivalent to the type of function
+`Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
 
 ```agda
 equiv-fixed-Slice' :
@@ -423,4 +424,3 @@ equiv-Fib-trunc-Prop :
 equiv-Fib-trunc-Prop l A =
   ( equiv-Fib-structure l is-inhabited A)
 ```
-

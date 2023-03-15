@@ -7,6 +7,7 @@ module foundation.decidable-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
@@ -25,7 +26,6 @@ open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
-open import foundation.decidable-equality
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions

@@ -7,15 +7,8 @@ module univalent-combinatorics.decidable-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.surjective-maps
-open import univalent-combinatorics.standard-finite-types
+open import elementary-number-theory.natural-numbers
+
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
@@ -25,19 +18,27 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.surjective-maps
 ```
 
 </details>
@@ -115,7 +116,6 @@ module _
   {l1 l2 : Level} (A : 𝔽 l1) (R : Decidable-Relation l2 (type-𝔽 A))
   where
 
-
   is-finite-relation-Decidable-Relation-𝔽 :
     (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (type-Decidable-Relation R x y)
   is-finite-relation-Decidable-Relation-𝔽 x y =
@@ -123,7 +123,6 @@ module _
        ( count-decidable-Prop
          ( relation-Decidable-Relation R x y )
          ( is-decidable-type-Decidable-Relation R x y))
-
 
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 :
     is-finite (is-reflexive-Rel-Prop (relation-Decidable-Relation R))
@@ -162,7 +161,6 @@ module _
                   ( is-finite-function-type
                      ( is-finite-relation-Decidable-Relation-𝔽 y z)
                      ( is-finite-relation-Decidable-Relation-𝔽 x z)) )))
-
 
   is-finite-is-equivalence-Dec-Rel-Prop-𝔽 :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
@@ -231,7 +229,6 @@ equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A =
   ( equiv-surjection-into-set-Dec-Eq-Rel (type-𝔽 A))))))
 ```
 
-
 ### The type of decidable equivalence relations on a finite type is finite
 
 ```agda
@@ -255,4 +252,5 @@ is-finite-Dec-Eq-Rel-𝔽 A =
     ( λ R → is-finite-is-equivalence-Dec-Rel-Prop-𝔽 A R)
 ```
 
--- ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind
+-- ### The number of decidable equivalence relations on a finite type is a
+Stirling number of the second kind

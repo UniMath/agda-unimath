@@ -28,20 +28,12 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport
-open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

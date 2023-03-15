@@ -1,4 +1,4 @@
-#  Species of types
+# Species of types
 
 ```agda
 module univalent-combinatorics.species-of-types where
@@ -12,8 +12,8 @@ open import foundation.universe-levels
 
 ### Idea
 
-In this file, we define the type of species of types. A species of types is just a
-map from an universe to another one.
+In this file, we define the type of species of types. A species of types is just
+a map from an universe to another one.
 
 ## Definitions
 

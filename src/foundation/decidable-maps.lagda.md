@@ -7,9 +7,9 @@ module foundation.decidable-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
 open import foundation.decidable-equality
 open import foundation.decidable-types
+open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 
 open import foundation-core.dependent-pair-types
@@ -49,7 +49,6 @@ is-decidable-map-retr d i (pair r R) b =
 ## Properties
 
 ### The map on total spaces induced by a family of decidable embeddings is a decidable embeddings
-
 
 ```agda
 module _

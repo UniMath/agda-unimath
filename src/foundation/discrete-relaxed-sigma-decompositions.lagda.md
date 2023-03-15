@@ -112,4 +112,3 @@ pr2 ( is-contr-type-discrete-Relaxed-Σ-Decomposition {l1} {l2} {A}) =
           ( discrete-Relaxed-Σ-Decomposition l2 A)
           ( equiv-discrete-is-discrete-Relaxed-Σ-Decomposition (pr1 x) (pr2 x)))))
 ```
-

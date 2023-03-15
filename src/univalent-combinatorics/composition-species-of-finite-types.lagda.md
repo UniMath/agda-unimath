@@ -1,4 +1,4 @@
-#  Composition of species
+# Composition of species
 
 ```agda
 module univalent-combinatorics.composition-species-of-finite-types where
@@ -44,7 +44,8 @@ A species `S : 𝔽 → 𝔽 l` can be thought of as the analytic endofunctor
   X ↦ Σ (A : 𝔽) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 
@@ -64,15 +65,15 @@ analytic-comp-species-𝔽 {l1} {l2} {l3} S T X =
           ( λ y → T (finite-cotype-Σ-Decomposition-𝔽 D y ))))
 ```
 
- ### The analytic unit for composition of species-finite-type
+### The analytic unit for composition of species-finite-type
 
- ```agda
+```agda
 analytic-unit-species-𝔽 : {l1 : Level} → species-𝔽 l1 l1
 analytic-unit-species-𝔽 X =
-  ( is-contr (type-𝔽 X) ,
-    is-finite-is-decidable-Prop
-      ( is-contr-Prop (type-𝔽 X))
-      ( is-decidable-is-contr-is-finite (is-finite-type-𝔽 X)))
+ ( is-contr (type-𝔽 X) ,
+   is-finite-is-decidable-Prop
+     ( is-contr-Prop (type-𝔽 X))
+     ( is-decidable-is-contr-is-finite (is-finite-type-𝔽 X)))
 ```
 
 ## Properties
@@ -182,75 +183,5 @@ left-unit-law-comp-inhabited-species-𝔽 F A inh-A =
 
 -- ### Associativity of composition of species
 
--- ```agda
--- assoc-comp-species :
---   {l1 l2 l3 l4 : Level} →
---   (S : species l1 l2) (T : species l1 l3)
---   (U : species l1 l4) →
---   ( analytic-comp-species S (analytic-comp-species T  U)) ＝
---   ( analytic-comp-species (analytic-comp-species S T) U)
--- assoc-comp-species {l1} {l2} {l3} {l4} S T U =
---   eq-equiv-fam
---     ( λ X →
---       ( ( inv-equiv
---           ( equiv-species-generalized-species
---             ( analytic-comp-species ( analytic-comp-species S T) U)
---             ( X))) ∘e
---       ( ( inv-equiv
---           ( equiv-analytic-comp-generalized-species
---              ( analytic-comp-species S T)
---              ( U)
---              ( type-𝔽 X)) ) ∘e
---       ( ( equiv-Σ
---           ( λ D →
---               Σ-extension-species-𝔽
---                 ( analytic-comp-species S T)
---                 ( indexing-type-Σ-Decomposition D) ×
---               ( (y : indexing-type-Σ-Decomposition D) →
---                 Σ-extension-species-𝔽 U (cotype-Σ-Decomposition D y)))
---           ( id-equiv)
---           ( λ D →
---             ( equiv-prod
---               ( inv-equiv
---                 ( equiv-analytic-comp-generalized-species
---                   ( S)
---                   ( T)
---                   ( indexing-type-Σ-Decomposition D))))
---               ( id-equiv))) ∘e
---       ( ( equiv-assoc-comp-general-species
---           ( Σ-extension-species-𝔽 {l1} {l2} S)
---           ( Σ-extension-species-𝔽 {l1} {l3} T)
---           ( Σ-extension-species-𝔽 {l1} {l4} U)
---           ( type-𝔽 X)) ∘e
---       ( ( equiv-Σ
---           (λ D →
---               Σ-extension-species-𝔽 S (indexing-type-Σ-Decomposition D) ×
---               ( ( y : indexing-type-Σ-Decomposition D) →
---                 ( analytic-comp-general-species
---                   ( Σ-extension-species-𝔽 T)
---                   ( Σ-extension-species-𝔽 U)
---                   (cotype-Σ-Decomposition D y))))
---           ( id-equiv)
---           ( λ D →
---             equiv-prod
---               ( id-equiv)
---               ( equiv-Π
---                 ( λ y →
---                    ( analytic-comp-general-species
---                      ( Σ-extension-species-𝔽 T)
---                      ( Σ-extension-species-𝔽< U)
---                      (cotype-Σ-Decomposition D y)))
---                 ( id-equiv)
---                 ( λ y →
---                   ( equiv-analytic-comp-generalized-species
---                     ( T)
---                     ( U)
---                     ( cotype-Σ-Decomposition D y)))))) ∘e
---       ( ( equiv-analytic-comp-generalized-species
---           ( S)
---           ( analytic-comp-species T U)
---           ( type-𝔽 X)) ∘e
---       ( equiv-species-generalized-species
---         ( analytic-comp-species S (analytic-comp-species T U))
---         ( X)))))))))
---  ```
+--
+`agda -- assoc-comp-species : --   {l1 l2 l3 l4 : Level} → --   (S : species l1 l2) (T : species l1 l3) --   (U : species l1 l4) → --   ( analytic-comp-species S (analytic-comp-species T  U)) ＝ --   ( analytic-comp-species (analytic-comp-species S T) U) -- assoc-comp-species {l1} {l2} {l3} {l4} S T U = --   eq-equiv-fam --     ( λ X → --       ( ( inv-equiv --           ( equiv-species-generalized-species --             ( analytic-comp-species ( analytic-comp-species S T) U) --             ( X))) ∘e --       ( ( inv-equiv --           ( equiv-analytic-comp-generalized-species --              ( analytic-comp-species S T) --              ( U) --              ( type-𝔽 X)) ) ∘e --       ( ( equiv-Σ --           ( λ D → --               Σ-extension-species-𝔽 --                 ( analytic-comp-species S T) --                 ( indexing-type-Σ-Decomposition D) × --               ( (y : indexing-type-Σ-Decomposition D) → --                 Σ-extension-species-𝔽 U (cotype-Σ-Decomposition D y))) --           ( id-equiv) --           ( λ D → --             ( equiv-prod --               ( inv-equiv --                 ( equiv-analytic-comp-generalized-species --                   ( S) --                   ( T) --                   ( indexing-type-Σ-Decomposition D)))) --               ( id-equiv))) ∘e --       ( ( equiv-assoc-comp-general-species --           ( Σ-extension-species-𝔽 {l1} {l2} S) --           ( Σ-extension-species-𝔽 {l1} {l3} T) --           ( Σ-extension-species-𝔽 {l1} {l4} U) --           ( type-𝔽 X)) ∘e --       ( ( equiv-Σ --           (λ D → --               Σ-extension-species-𝔽 S (indexing-type-Σ-Decomposition D) × --               ( ( y : indexing-type-Σ-Decomposition D) → --                 ( analytic-comp-general-species --                   ( Σ-extension-species-𝔽 T) --                   ( Σ-extension-species-𝔽 U) --                   (cotype-Σ-Decomposition D y)))) --           ( id-equiv) --           ( λ D → --             equiv-prod --               ( id-equiv) --               ( equiv-Π --                 ( λ y → --                    ( analytic-comp-general-species --                      ( Σ-extension-species-𝔽 T) --                      ( Σ-extension-species-𝔽< U) --                      (cotype-Σ-Decomposition D y))) --                 ( id-equiv) --                 ( λ y → --                   ( equiv-analytic-comp-generalized-species --                     ( T) --                     ( U) --                     ( cotype-Σ-Decomposition D y)))))) ∘e --       ( ( equiv-analytic-comp-generalized-species --           ( S) --           ( analytic-comp-species T U) --           ( type-𝔽 X)) ∘e --       ( equiv-species-generalized-species --         ( analytic-comp-species S (analytic-comp-species T U)) --         ( X))))))))) --  `

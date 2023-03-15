@@ -1,4 +1,4 @@
-#  Species of inhabited finite types
+# Species of inhabited finite types
 
 ```agda
 module univalent-combinatorics.species-of-inhabited-finite-types where
@@ -21,7 +21,9 @@ open import univalent-combinatorics.species-of-types
 
 ### Idea
 
-In this file, we define the type of species of inhabited finite types. A species of inhabited finite types is just a map from a universe of inhabited finite types to 𝔽.
+In this file, we define the type of species of inhabited finite types. A species
+of inhabited finite types is just a map from a universe of inhabited finite
+types to 𝔽.
 
 ## Definitions
 

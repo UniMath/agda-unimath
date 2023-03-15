@@ -101,7 +101,6 @@ equiv-Fam-Inhabited-Type-𝔽 X =
       ( id-equiv)
       ( λ _ → equiv-Inhabited-Type-𝔽)))
 
-
 ```
 
 ## Proposition

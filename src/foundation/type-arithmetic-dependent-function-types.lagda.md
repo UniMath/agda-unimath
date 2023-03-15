@@ -40,8 +40,6 @@ module _
         equiv-eq
          ( ap B ( eq-is-contr C))))
 
-
-
 ```
 
 ### The swap function `((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)` is an equivalence

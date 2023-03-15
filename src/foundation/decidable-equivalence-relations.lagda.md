@@ -7,7 +7,6 @@ module foundation.decidable-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalence-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -20,6 +19,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
+open import foundation.equivalence-relations
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.functions
@@ -38,19 +38,12 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
 ```
@@ -504,7 +497,6 @@ is-dec-rel-equiv-surj-if-has-dec-eq :
     is-decidable ( sim-Eq-Rel (eq-rel-Surjection-Into-Set (B , f)) x y))
 is-dec-rel-equiv-surj-if-has-dec-eq B f dec-eq x y =
   dec-eq (map-surjection f x) (map-surjection f y)
-
 
 equiv-surjection-into-set-Dec-Eq-Rel :
   {l1 : Level} (A : UU l1) →

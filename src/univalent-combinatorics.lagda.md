@@ -25,8 +25,13 @@ open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.cartesian-products-species public
 open import univalent-combinatorics.classical-finite-types public
 open import univalent-combinatorics.complements-isolated-points public
-open import univalent-combinatorics.composition-species public
 open import univalent-combinatorics.composition-general-species public
+open import univalent-combinatorics.composition-species public
+open import univalent-combinatorics.composition-species-of-finite-inhabited-types public
+open import univalent-combinatorics.composition-species-of-finite-types public
+open import univalent-combinatorics.composition-species-of-inhabited-types public
+open import univalent-combinatorics.composition-species-of-subuniverse public
+open import univalent-combinatorics.composition-species-of-types public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.coproducts-species public
 open import univalent-combinatorics.counting public
@@ -47,6 +52,7 @@ open import univalent-combinatorics.dedekind-finite-sets public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-sum-finite-types public
 open import univalent-combinatorics.derivatives-species public
+open import univalent-combinatorics.discrete-sigma-decompositions public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
 open import univalent-combinatorics.embeddings public
@@ -67,7 +73,6 @@ open import univalent-combinatorics.finite-species public
 open import univalent-combinatorics.finite-types public
 open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.function-types public
-open import univalent-combinatorics.general-species public
 open import univalent-combinatorics.generalized-species public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
@@ -101,6 +106,11 @@ open import univalent-combinatorics.set-quotients-of-index-two public
 open import univalent-combinatorics.sigma-decompositions public
 open import univalent-combinatorics.skipping-element-standard-finite-types public
 open import univalent-combinatorics.species public
+open import univalent-combinatorics.species-of-finite-types public
+open import univalent-combinatorics.species-of-inhabited-finite-types public
+open import univalent-combinatorics.species-of-inhabited-types public
+open import univalent-combinatorics.species-of-subuniverse public
+open import univalent-combinatorics.species-of-types public
 open import univalent-combinatorics.standard-finite-pruned-trees public
 open import univalent-combinatorics.standard-finite-trees public
 open import univalent-combinatorics.standard-finite-types public
@@ -109,6 +119,9 @@ open import univalent-combinatorics.steiner-triple-systems public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
+open import univalent-combinatorics.trivial-sigma-decompositions public
+open import univalent-combinatorics.type-duality public
+open import univalent-combinatorics.unions-subtypes public
 open import univalent-combinatorics.universal-property-standard-finite-types public
 open import univalent-combinatorics.unlabeled-partitions public
 open import univalent-combinatorics.unlabeled-rooted-trees public

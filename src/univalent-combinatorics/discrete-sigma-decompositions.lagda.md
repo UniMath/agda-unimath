@@ -99,4 +99,3 @@ pr2 ( is-contr-type-discrete-Σ-Decomposition-𝔽 {l1} {l2} {A} is-finite-A) =
           ( discrete-Σ-Decomposition-𝔽 l2 A is-finite-A)
           ( equiv-discrete-is-discrete-Σ-Decomposition-𝔽 (pr1 x) (pr2 x)))))
 ```
-

@@ -28,8 +28,8 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport
-open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
@@ -40,7 +40,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A relaxed Σ-decomposition is just a Σ-Decomposition where the condition that the cotype must be inhabited is relaxed.
+A relaxed Σ-decomposition is just a Σ-Decomposition where the condition that the
+cotype must be inhabited is relaxed.
 
 ## Definitions
 
@@ -794,7 +795,6 @@ module _
       ( tot-id
         ( λ z → cotype-fst-displayed-Relaxed-Σ-Decomposition disp-D z)
         ( map-equiv s x))))
-
 
   issec-map-inv-displayed-fibered-Relaxed-Σ-Decomposition :
     ( map-displayed-fibered-Relaxed-Σ-Decomposition

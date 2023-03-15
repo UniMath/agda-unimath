@@ -13,15 +13,15 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -225,4 +225,4 @@ assoc-comp-species {l1} {l2} {l3} {l4} S T U =
       ( equiv-species-generalized-species
         ( analytic-comp-species S (analytic-comp-species T U))
         ( X)))))))))
- ```
+```

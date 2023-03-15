@@ -34,6 +34,7 @@ open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
+
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
 

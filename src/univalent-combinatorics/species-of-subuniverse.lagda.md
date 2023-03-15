@@ -1,4 +1,4 @@
-#  Species of finite types
+# Species of finite types
 
 ```agda
 module univalent-combinatorics.species-of-subuniverse where
@@ -16,7 +16,8 @@ open import univalent-combinatorics.species-of-types
 
 ### Idea
 
-In this file, we define the type of species of subuniverse. A species of subuniverse is just a map from a subuniverse `P` to a subuniverse `Q`.
+In this file, we define the type of species of subuniverse. A species of
+subuniverse is just a map from a subuniverse `P` to a subuniverse `Q`.
 
 ## Definitions
 

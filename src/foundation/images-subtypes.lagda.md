@@ -19,10 +19,6 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import foundation-core.functions
-open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

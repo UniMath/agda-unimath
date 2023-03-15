@@ -37,9 +37,8 @@ open import univalent-combinatorics.decidable-equivalence-relations
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
-open import univalent-combinatorics.type-duality
 open import univalent-combinatorics.quotients-finite-types
-
+open import univalent-combinatorics.type-duality
 ```
 
 </details>

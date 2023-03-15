@@ -106,4 +106,3 @@ equiv-Fib-trunc-Prop-𝔽 l A =
       ( λ _ → equiv-left-swap-Σ)) ∘e
   ( assoc-Σ (UU _ ) (λ z → is-finite z) _)))))
 ```
-

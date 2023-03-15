@@ -1,4 +1,4 @@
-#  Species of finite types
+# Species of finite types
 
 ```agda
 module univalent-combinatorics.species-of-finite-types where
@@ -15,7 +15,8 @@ open import univalent-combinatorics.species-of-types
 
 ### Idea
 
-In this file, we define the type of species of finite types. A species of finite types is just a map from 𝔽 to a 𝔽.
+In this file, we define the type of species of finite types. A species of finite
+types is just a map from 𝔽 to a 𝔽.
 
 ## Definitions
 

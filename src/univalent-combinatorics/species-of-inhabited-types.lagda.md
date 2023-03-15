@@ -1,4 +1,4 @@
-#  Species of inhabited types
+# Species of inhabited types
 
 ```agda
 module univalent-combinatorics.species-of-inhabited-types where
@@ -15,7 +15,9 @@ open import univalent-combinatorics.species-of-types
 
 ### Idea
 
-In this file, we define the type of species of inhabited types. A species of inhabited types is just a map from an universe of inhabited types to an other universe.
+In this file, we define the type of species of inhabited types. A species of
+inhabited types is just a map from an universe of inhabited types to an other
+universe.
 
 ## Definitions
 

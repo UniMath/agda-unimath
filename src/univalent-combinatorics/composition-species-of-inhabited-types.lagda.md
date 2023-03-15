@@ -1,4 +1,4 @@
-#  Composition of species of inhabited types
+# Composition of species of inhabited types
 
 ```agda
 module univalent-combinatorics.composition-species-of-inhabited-types where
@@ -36,13 +36,15 @@ open import univalent-combinatorics.species-of-types
 
 ## Idea
 
-A species `S : Inhabited-Type → UU l` can be thought of as the analytic endofunctor
+A species `S : Inhabited-Type → UU l` can be thought of as the analytic
+endofunctor
 
 ```md
   X ↦ Σ (A : Inhabited-Type) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 
@@ -65,11 +67,11 @@ analytic-comp-species-inhabited-types {l1} {l2} {l3} S T X =
           T (inhabited-cotype-Σ-Decomposition D y ))))
 ```
 
- ### The analytic unit for composition of species-inhabited-types
+### The analytic unit for composition of species-inhabited-types
 
- ```agda
+```agda
 analytic-unit-species-inhabited-types :
-  {l1 : Level} → species-inhabited-types l1 l1
+ {l1 : Level} → species-inhabited-types l1 l1
 analytic-unit-species-inhabited-types X = is-contr (type-Inhabited-Type X)
 ```
 
@@ -249,7 +251,6 @@ right-unit-law-comp-species-inhabited-types F A =
         ( analytic-unit-species-inhabited-types))
       ( A)))))))
 
-
 ```
 
 ### Associativity of composition of species-inhabited-types
@@ -325,4 +326,4 @@ assoc-comp-species-inhabited-types {l1} {l2} {l3} {l4} S T U =
       ( equiv-Σ-extension-species-inhabited-types
         ( analytic-comp-species-inhabited-types S (analytic-comp-species-inhabited-types T U))
         ( X)))))))))
- ```
+```

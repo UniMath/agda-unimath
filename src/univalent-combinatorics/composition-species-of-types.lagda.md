@@ -1,4 +1,4 @@
-#  Composition of species of types
+# Composition of species of types
 
 ```agda
 module univalent-combinatorics.composition-species-of-types where
@@ -33,13 +33,15 @@ open import univalent-combinatorics.species-of-types
 
 ## Idea
 
-A specie of types `S : UU l1 → UU l2` can be thought of as the analytic endofunctor
+A specie of types `S : UU l1 → UU l2` can be thought of as the analytic
+endofunctor
 
 ```md
   X ↦ Σ (A : UU l1) (S A) × (A → X)
 ```
 
-Using the formula for composition of analytic endofunctors, we obtain a way to compose species.
+Using the formula for composition of analytic endofunctors, we obtain a way to
+compose species.
 
 ## Definition
 
