@@ -48,7 +48,7 @@ pr2 unit-Pointed-Type = star
 
 ### The induction principle of the unit type
 
-```
+```agda
 ind-unit : {l : Level} {P : unit → UU l} → P star → ((x : unit) → P x)
 ind-unit p star = p
 ```

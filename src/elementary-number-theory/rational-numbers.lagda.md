@@ -272,7 +272,6 @@ reduce-preserves-sim-ℤ x y H =
     (trans-sim-fraction-ℤ (reduce-fraction-ℤ x) x y
       (symm-sim-fraction-ℤ x (reduce-fraction-ℤ x) (sim-reduced-fraction-ℤ x)) H)
     (sim-reduced-fraction-ℤ y)
-
 ```
 
 ### Inclusion of fractions

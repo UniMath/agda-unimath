@@ -52,14 +52,12 @@ module _
 
 Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Sup-Lattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-sup-lattice-Poset l3 P)
-
 ```
 
 We now develop the tools that allow us to work with the components of a sup
 lattice.
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (A : Sup-Lattice l1 l2 l3)
   where
@@ -119,5 +117,4 @@ module _
     is-least-upper-bound-family-Poset poset-Sup-Lattice f
       (sup-Sup-Lattice I f)
   is-least-upper-bound-family-sup-Sup-Lattice I f = pr2 (is-sup-lattice-Sup-Lattice I f)
-
 ```

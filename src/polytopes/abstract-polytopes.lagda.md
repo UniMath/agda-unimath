@@ -46,7 +46,6 @@ Next, we assert the diamond condition for abstract polytopes.
 ### The diamond condition
 
 ```agda
-
 diamond-condition-finitely-graded-poset-Prop :
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k) →
   Prop (l1 ⊔ l2)
@@ -95,7 +94,6 @@ with a least and a largest element, and satisfying the diamond condition. Before
 we state the remaining conditions of polytopes, we introduce some terminology
 
 ```agda
-
 Prepolytope : (l1 l2 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2)
 Prepolytope l1 l2 k =
   Σ ( Finitely-Graded-Poset l1 l2 k)
@@ -427,7 +425,6 @@ module _
       is-prop (is-on-path-face-Prepolytope p z)
     is-prop-is-on-path-face-Prepolytope p z =
       is-prop-type-Prop (is-on-path-face-prepolytope-Prop p z)
-
 ```
 
 ### Proof condition P2 of polytopes
@@ -439,7 +436,6 @@ axiom follows from our setup. Note that we didn't start with general posets, but
 with finitely graded posets.
 
 ```agda
-
 module _
   {l1 l2 : Level} (l : Level) {k : ℕ} (X : Prepolytope l1 l2 k)
   where
@@ -475,7 +471,6 @@ connects the two flags it is a subchain of.
 ### The definition of polytopes
 
 ```agda
-
 Polytope :
   (l1 l2 l3 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Polytope l1 l2 l3 k =

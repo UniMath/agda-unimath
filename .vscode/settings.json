@@ -1,0 +1,9 @@
+{
+  "editor.rulers": [80],
+  "editor.snippetSuggestions": "top",
+  "javascript.suggest.names": false,
+  "editor.wordBasedSuggestions": false,
+  "editor.quickSuggestions": {
+    "other": "inline"
+  },
+}

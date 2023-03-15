@@ -130,7 +130,7 @@ module _
 
 ### Characterization of the identity type of transitive actions of a concrete group
 
-```
+```agda
 module _
   {l1 l2 : Level} (G : Concrete-Group l1)
   (X : transitive-action-Concrete-Group l2 G)

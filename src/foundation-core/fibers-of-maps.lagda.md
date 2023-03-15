@@ -243,7 +243,7 @@ module _
 
 ### The total space of fibers
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where

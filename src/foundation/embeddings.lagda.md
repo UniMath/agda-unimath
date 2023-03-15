@@ -80,7 +80,7 @@ module _
 
 ### Any map between propositions is an embedding
 
-```
+```agda
 is-emb-is-prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
   is-prop A → is-prop B → is-emb f

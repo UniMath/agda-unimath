@@ -30,5 +30,4 @@ Furstenberg-Group l =
             ( (x y z : type-Set X) → Id (μ (μ x z) (μ y z)) (μ x y)) ×
             ( Σ ( type-Set X → type-Set X → type-Set X)
                 ( λ δ → (x y : type-Set X) → Id (μ x (δ x y)) y)))))
-
 ```

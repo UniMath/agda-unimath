@@ -117,7 +117,6 @@ module _
       ( join-Join-Semilattice x y)
   is-least-binary-upper-bound-join-Join-Semilattice x y =
     pr2 (is-join-semilattice-Join-Semilattice x y)
-
 ```
 
 ### Algebraic join-semilattices

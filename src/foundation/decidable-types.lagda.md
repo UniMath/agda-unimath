@@ -71,7 +71,7 @@ is-merely-decidable A = type-trunc-Prop (is-decidable A)
 
 ### The unit type and the empty type are decidable
 
-```
+```agda
 is-decidable-unit : is-decidable unit
 is-decidable-unit = inl star
 

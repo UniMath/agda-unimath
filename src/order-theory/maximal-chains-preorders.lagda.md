@@ -20,7 +20,6 @@ open import order-theory.preorders
 ## Definition
 
 ```agda
-
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where

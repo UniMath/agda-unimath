@@ -180,7 +180,6 @@ module _
 ### Decidable sub-preorders of finite preorders
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
   (S : element-Finite-Preorder X → decidable-Prop l3)

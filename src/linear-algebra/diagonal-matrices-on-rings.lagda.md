@@ -39,7 +39,7 @@ module _
 
 ### Scalar matrices
 
-```
+```agda
 module _
   {l : Level} (R : Ring l)
   where

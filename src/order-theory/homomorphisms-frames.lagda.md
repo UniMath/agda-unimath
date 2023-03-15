@@ -27,7 +27,6 @@ A frame homomorphism is an order preserving map between posets that additionally
 preserves binary meets and arbitrary joins.
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6)
   where
@@ -51,5 +50,4 @@ module _
 
   preserves-sups-hom-Frame : (H : hom-Frame) → preserves-sups (sup-lattice-Frame A) (sup-lattice-Frame B) (map-hom-Frame H)
   preserves-sups-hom-Frame = pr2 ∘ preserves-meets-sups-hom-Frame
-
 ```

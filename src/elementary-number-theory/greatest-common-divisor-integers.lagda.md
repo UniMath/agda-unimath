@@ -155,7 +155,6 @@ pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
   ( div-sim-unit-ℤ
     ( symm-sim-unit-ℤ (sim-unit-abs-ℤ k))
     ( refl-sim-unit-ℤ (gcd-ℤ x y)))
-
 ```
 
 ### The gcd of `x` and `y` divides both `x` and `y`
@@ -289,7 +288,6 @@ is-id-is-gcd-zero-ℤ {inr (inr b)} {x} H with (is-plus-or-minus-sim-unit-ℤ (i
   gcd-is-nonneg = is-nonnegative-int-ℕ (gcd-ℕ 0 (succ-ℕ b))
   lem : (y : ℤ) → is-nonnegative-ℤ y → Σ (unit + ℕ) (λ z → y ＝ inr z)
   lem (inr z) H = pair z refl
-
 ```
 
 ### `gcd-ℤ a 0 ＝ abs-ℤ a`
