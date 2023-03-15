@@ -1,17 +1,20 @@
-# Species of finite types
+# Species of subuniverses
 
 ```agda
-module univalent-combinatorics.species-of-subuniverse where
+module univalent-combinatorics.species-of-subuniverses where
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.subuniverses
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.species-of-types
-
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
 ```
 
 ### Idea
@@ -21,7 +24,7 @@ subuniverse is just a map from a subuniverse `P` to a subuniverse `Q`.
 
 ## Definitions
 
-### Species
+### Species of subuniverses
 
 ```agda
 species-subuniverse :
@@ -59,4 +62,37 @@ module _
     species-types l1 (l2 ⊔ l3)
   Π-extension-species-subuniverse X =
     (p : is-in-subuniverse P X) → inclusion-subuniverse Q (F (X , p))
+```
+
+## Examples
+
+### Species of finite types
+
+A species of finite type is a map from `𝔽` to a `𝔽`.
+
+```agda
+species-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+species-𝔽 l1 l2 = species-subuniverse (is-finite-Prop {l1}) (is-finite-Prop {l2})
+```
+
+### Species of finite inhabited types
+
+A species of finite inhabited type is a map from the subuniverse of inhabited
+finite types to a `𝔽`.
+
+```agda
+species-inhab-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+species-inhab-𝔽 l1 l2 =
+  species-subuniverse (Inhabited-Type-𝔽-Prop l1) (is-finite-Prop {l2})
+```
+
+### Species of inhabited-types
+
+A species of inhabited type is a map from the subuniverse of inhabited types to
+a universe.
+
+```agda
+species-inhab : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+species-inhab l1 l2 =
+  species-subuniverse (is-inhabited-Prop {l1}) λ (X : UU l2) → unit-Prop
 ```

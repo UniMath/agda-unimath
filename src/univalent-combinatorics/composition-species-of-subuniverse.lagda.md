@@ -32,8 +32,8 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
-open import univalent-combinatorics.composition-species-of-types
-open import univalent-combinatorics.species-of-subuniverse
+open import univalent-combinatorics.large-composition-species-of-types
+open import univalent-combinatorics.species-of-subuniverses
 open import univalent-combinatorics.species-of-types
 ```
 
@@ -387,4 +387,18 @@ module _
         ( analytic-comp-species-subuniverse S T)
         ( U))
       ( assoc-comp-species-inhabited-types' S T U)
+```
+
+## Examples
+
+### Species of finite inhabited types
+
+```agda
+
+```
+
+### Species of inhabited types
+
+```agda
+
 ```

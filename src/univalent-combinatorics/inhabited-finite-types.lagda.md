@@ -14,6 +14,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
@@ -34,6 +35,9 @@ open import univalent-combinatorics.finite-types
 ```agda
 Inhabited-Type-𝔽 : (l : Level) → UU (lsuc l)
 Inhabited-Type-𝔽 l = Σ ( 𝔽 l) ( λ X → is-inhabited (type-𝔽 X))
+
+Inhabited-Type-𝔽-Prop : (l : Level) → UU l → Prop l
+Inhabited-Type-𝔽-Prop l X = prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
 
 module _
   {l : Level} (X : Inhabited-Type-𝔽 l)
