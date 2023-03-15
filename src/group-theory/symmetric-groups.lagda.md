@@ -155,7 +155,6 @@ module _
     is-sec-hom-inv-symmetric-group-equiv-Set
   pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
     is-retr-hom-inv-symmetric-group-equiv-Set
-
 ```
 
 ### The symmetric group and the abstract automorphism group of a set are isomorphic

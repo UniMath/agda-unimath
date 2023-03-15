@@ -67,7 +67,7 @@ is-decidable-map-is-decidable-emb H = pr2 H
 
 ### Decidably propositional maps
 
-```
+```agda
 is-decidable-prop-map :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
 is-decidable-prop-map {Y = Y} f = (y : Y) → is-decidable-prop (fib f y)

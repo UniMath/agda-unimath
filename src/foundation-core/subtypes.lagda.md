@@ -132,7 +132,7 @@ module _
 
 ### Restriction of an embedding to an embedding into a subtype
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where

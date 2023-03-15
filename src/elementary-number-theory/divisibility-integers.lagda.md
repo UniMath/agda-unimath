@@ -372,7 +372,7 @@ is-unit-right-factor-ℤ x y (pair d p) =
 
 ### We introduce the equivalence relation `ux = y`, where `u` is a unit
 
-```
+```agda
 {- The relation presim-unit-ℤ would be an equivalence relation, except it is not
    valued in the propositions. Indeed presim-unit-ℤ zero-ℤ zero-ℤ is not a
    proposition. -}

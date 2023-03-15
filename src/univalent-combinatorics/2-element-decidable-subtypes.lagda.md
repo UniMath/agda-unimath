@@ -329,7 +329,6 @@ module _
           is-finite-equiv
             ( inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
             ( is-finite-Fin 2)))
-
 ```
 
 ### 2-element decidable subtypes are closed under precomposition with an equivalence

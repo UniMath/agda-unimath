@@ -225,7 +225,6 @@ div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) =
           ＝ int-ℕ z
           by isretr-add-neg-ℤ' (mul-ℤ (int-ℕ l) (int-ℕ y)) (int-ℕ z))
        ＝ mod-ℕ x z by mod-int-ℕ x z))
-
 ```
 
 ### If `[y] | [z]` in `ℤ-Mod x`, then `z = dist-ℕ (kx, ly)` for some `k` and `l`
@@ -541,7 +540,6 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
             (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (int-ℕ z)
             (cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
         z-uy) (is-nonnegative-int-ℕ (succ-ℕ x)))
-
 ```
 
 ### The type `is-distance-between-multiples-ℕ x y z` is decidable
@@ -562,7 +560,6 @@ is-decidable-is-distance-between-multiples-ℕ x y z =
   decidable-div-ℤ-case-split (inr neg-div-Mod) =
     inr (λ dist → neg-div-Mod
       (div-mod-is-distance-between-multiples-ℕ x y z dist))
-
 ```
 
 ## Theorem

@@ -87,7 +87,7 @@ summary_template = """
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)
 
-MODULE_INDEX
+{module_index}
 """
 
 if __name__ == "__main__":
@@ -99,8 +99,7 @@ if __name__ == "__main__":
 
     index_content, status = generate_index(root, index_header)
     if status == 0:
-        summary_contents = summary_template.replace(
-            "MODULE_INDEX", index_content)
+        summary_contents = summary_template.format(module_index=index_content)
         with open(summary_path, "w") as summary_file:
             summary_file.write(summary_contents)
     sys.exit(status)

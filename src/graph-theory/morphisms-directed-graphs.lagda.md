@@ -58,7 +58,6 @@ module _
 ### Composition of morphisms graphs
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)

@@ -392,5 +392,4 @@ is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
 is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
 is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
   ((is-commutative-gcd-ℕ 0 a) ∙ H)
-
 ```

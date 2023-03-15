@@ -92,7 +92,7 @@ comp-map-trunc-Set = comp-map-trunc zero-𝕋
 
 ### The functorial action of set truncations preserves homotopies
 
-```
+```agda
 htpy-trunc-Set :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
   (f ~ g) → (map-trunc-Set f ~ map-trunc-Set g)
@@ -206,7 +206,7 @@ module _
 
 ### If the set truncation of a map `f` is surjective, then `f` is surjective
 
-```
+```agda
   abstract
     is-surjective-is-surjective-map-trunc-Set :
       is-surjective (map-trunc-Set f) → is-surjective f

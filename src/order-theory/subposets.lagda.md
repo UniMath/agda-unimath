@@ -24,7 +24,6 @@ open import order-theory.subpreorders
 ### Subposets
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (X : Poset l1 l2) (S : element-Poset X → Prop l3)
   where
@@ -65,7 +64,6 @@ module _
   pr1 (pr1 (pr2 (pr2 sub-Poset))) = refl-leq-sub-Poset
   pr2 (pr1 (pr2 (pr2 sub-Poset))) = transitive-leq-sub-Poset
   pr2 (pr2 (pr2 sub-Poset)) = antisymmetric-leq-sub-Poset
-
 ```
 
 ### Inclusion of sub-posets

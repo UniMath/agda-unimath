@@ -189,7 +189,7 @@ pr2 (equiv-pred-ℤ-Mod k) = is-equiv-pred-ℤ-Mod k
 
 ## Addition on the integers modulo k
 
-```
+```agda
 add-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
 add-ℤ-Mod zero-ℕ = add-ℤ
 add-ℤ-Mod (succ-ℕ k) = add-Fin (succ-ℕ k)

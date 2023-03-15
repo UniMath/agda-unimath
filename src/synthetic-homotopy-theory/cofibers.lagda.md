@@ -60,7 +60,6 @@ up-cofiber :
   ( {l : Level} →
     universal-property-pushout l f (const A unit star) (cocone-cofiber f))
 up-cofiber {A = A} f = up-pushout f (const A unit star)
-
 ```
 
 ## Properties

@@ -190,7 +190,6 @@ Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 module _
   {l1 l2 : Level} (C : Precat l1 l2)
   where
-
 ```
 
 ### The type of isomorphisms form a set

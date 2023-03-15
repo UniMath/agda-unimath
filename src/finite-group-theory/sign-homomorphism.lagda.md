@@ -350,5 +350,4 @@ module _
       ( equiv-succ-Fin 2)
   eq-sign-homomorphism-transposition Y =
     ap aut-point-Fin-two-ℕ (eq-sign-homomorphism-Fin-two-transposition n X Y)
-
 ```

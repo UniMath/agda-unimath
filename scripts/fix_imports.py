@@ -140,7 +140,8 @@ if __name__ == "__main__":
             pretty_imports_block + \
             contents[end:]
 
-        with open(fpath, 'w') as file:
-            file.write(new_content)
+        if contents != new_content:
+            with open(fpath, 'w') as file:
+                file.write(new_content)
 
     sys.exit(status)

@@ -75,7 +75,7 @@ universal-property-truncation l {k = k} {A} B f =
 
 ### The dependent universal property of truncations
 
-```
+```agda
 precomp-Π-Truncated-Type :
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   (C : B → Truncated-Type l3 k) →

@@ -64,7 +64,7 @@ module _
 
 ### The fiber inclusions are truncated maps for any type family B if and only if A is truncated
 
-```
+```agda
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1}
   where

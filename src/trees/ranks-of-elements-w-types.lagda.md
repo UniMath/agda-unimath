@@ -105,7 +105,7 @@ module _
 
 ### Reflexivity of rank comparison
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where

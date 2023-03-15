@@ -97,7 +97,7 @@ module _
 
 ### Right unit law for dependent pair types
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -220,7 +220,7 @@ module _
 
 ### The interchange law
 
-```
+```agda
 module _
   { l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {C : A → UU l3}
   ( D : (x : A) → B x → C x → UU l4)
