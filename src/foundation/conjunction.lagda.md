@@ -52,7 +52,7 @@ pr2 (pr2 (conj-decidable-Prop P Q)) =
 
 ### Introduction rule for conjunction
 
-```
+```agda
 intro-conj-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   type-Prop P → type-Prop Q → type-conj-Prop P Q

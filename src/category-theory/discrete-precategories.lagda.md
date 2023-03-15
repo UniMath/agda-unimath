@@ -23,7 +23,6 @@ Any set induces a discrete category whose objects are elements of the set and
 which contains no-nonidentity morphisms.
 
 ```agda
-
 module _
   {l : Level} (X : Set l)
   where
@@ -42,5 +41,4 @@ module _
       pr1 id-struct x = refl
       pr1 (pr2 id-struct) refl = refl
       pr2 (pr2 id-struct) refl = refl
-
 ```

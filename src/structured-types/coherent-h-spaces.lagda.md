@@ -167,5 +167,4 @@ compute-pointed-section-ev-pt-Pointed-Type (pair A a) =
     ( λ μp →
       Σ ( (x : A) → pr1 μp x a ＝ x)
         ( λ H → H a ＝ ( ( ap (λ h → h a) (pr2 μp) ∙ refl) ∙ refl))))
-
 ```

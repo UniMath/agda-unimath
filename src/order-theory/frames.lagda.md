@@ -27,16 +27,13 @@ There are many equivalent ways to formulate this definition. Our choice here is
 simply motivated by a desire to avoid iterated sigma types.
 
 ```agda
-
 Frame : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Frame l1 l2 l3 = Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3 )
-
 ```
 
 ## Now we retrieve all the information from a frame (i.e. break up all of it's components, etc.)
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (A : Frame l1 l2 l3)
   where
@@ -117,5 +114,4 @@ module _
   frame-Frame : Frame l1 l2 l3
   pr1 frame-Frame = meet-sup-lattice-Frame
   pr2 frame-Frame = distributive-law-Frame
-
 ```

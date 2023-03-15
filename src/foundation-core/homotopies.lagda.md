@@ -65,7 +65,7 @@ module _
 
 ### Reflexivity
 
-```
+```agda
 refl-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x} → f ~ f
 refl-htpy x = refl

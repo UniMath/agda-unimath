@@ -69,7 +69,6 @@ module _
   length-Path-𝕎 : (w : 𝕎 A B) → Path-𝕎 w → ℕ
   length-Path-𝕎 w (root .w) = zero-ℕ
   length-Path-𝕎 .(tree-𝕎 a f) (cons a f b p) = succ-ℕ (length-Path-𝕎 (f b) p)
-
 ```
 
 ## Properties

@@ -227,7 +227,7 @@ is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
 
 ### The dependent universal property of surjective maps
 
-```
+```agda
 dependent-universal-property-surj :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   UU ((lsuc l) ⊔ l1 ⊔ l2)

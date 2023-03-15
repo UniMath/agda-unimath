@@ -791,7 +791,6 @@ module _
 #### Equivalence between fibered double Σ-Decompositions and displayed double Σ-Decompositions
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1}
   (fib-D : fibered-Σ-Decomposition l2 l3 l4 l5 A)

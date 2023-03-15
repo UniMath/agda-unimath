@@ -120,7 +120,6 @@ module _
 ### Group isomorphisms are stable by composition
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
   where
@@ -133,7 +132,6 @@ module _
 ### Group isomorphisms are stable by inversion
 
 ```agda
-
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where

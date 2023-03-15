@@ -25,7 +25,6 @@ A meet semi-lattice homomorphism is an order preserving map between the
 underlying posets that also preserves meets.
 
 ```agda
-
 module _
   {l1 l2 l3 l4 : Level} (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
   where
@@ -47,5 +46,4 @@ module _
 
   preserves-meet-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
   preserves-meet-hom-Meet-Semilattice = pr2 ∘ pr2
-
 ```

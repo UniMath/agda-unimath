@@ -31,7 +31,6 @@ way and removes units and inverses next to the original.
 The main entry-point is `solveExpr` below
 
 ```agda
-
 data Fin : ℕ → UU where
   zero-Fin : ∀ {n} → Fin (succ-ℕ n)
   succ-Fin : ∀ {n} → Fin n → Fin (succ-ℕ n)
@@ -340,32 +339,29 @@ module _ {n : ℕ} where
     simplifyExpr env g = simplifyExpression (apply-n-args n g) env
 
     open import linear-algebra.vectors using (_∷_ ; empty-vec) public
-
 ```
 
-private _\*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n _\*'_ =
-gMul x : GroupSyntax 2 x = inner (zero-Fin) y : GroupSyntax 2 y = inner
-(succ-Fin zero-Fin)
+```agda
+-- private _\*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n _\*'_ =
+-- gMul x : GroupSyntax 2 x = inner (zero-Fin) y : GroupSyntax 2 y = inner
+-- (succ-Fin zero-Fin)
 
-    infixl 20 _*'_
-    ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
-    ex1 = simplifyValid _
+--     infixl 20 _*'_
+--     ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
+--     ex1 = simplifyValid _
 
-    ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (y * x * y ⁻¹ * x ⁻¹)
-    ex2 x' y' = simplifyExpression (gInv (x *' y *' gInv x *' gInv y)) (x' ∷ y' ∷ empty-vec)
+--     ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (y * x * y ⁻¹ * x ⁻¹)
+--     ex2 x' y' = simplifyExpression (gInv (x *' y *' gInv x *' gInv y)) (x' ∷ y' ∷ empty-vec)
 
-    _ : UU
-    -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
-    _ = {!ex1!}
+--     _ : UU
+--     -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
+--     _ = {!ex1!}
 
-    ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
-    ex3 x' y' = {!simplifyExpression (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
+--     ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
+--     ex3 x' y' = {!simplifyExpression (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
 
-    _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
-    _ = {!simplifyValid (gInv x *' x *' y)!}
-    -- _ = {!simplifyValid (gUnit *' gUnit)!}
-    -- _ = {!simplifyValid (x *' gUnit)!}
-
-```
-
+--     _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
+--     _ = {!simplifyValid (gInv x *' x *' y)!}
+--     -- _ = {!simplifyValid (gUnit *' gUnit)!}
+--     -- _ = {!simplifyValid (x *' gUnit)!}
 ```

@@ -79,7 +79,7 @@ module _
 
 ### The homotopy of cones obtained from the universal property of pullbacks
 
-```
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) {C : UU l4}

@@ -82,7 +82,7 @@ module _
 
 ### If a reflexive binary relation maps into the identity type of A, then A is a set
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : A → A → UU l2)
   (p : (x y : A) → is-prop (R x y)) (ρ : (x : A) → R x x)

@@ -187,7 +187,6 @@ module _
       ( interchange-add-sum-Semiring n
         ( f ∘ inl-Fin n)
         ( g ∘ inl-Fin n)))
-
 ```
 
 ### Extending a sum of elements in a semiring

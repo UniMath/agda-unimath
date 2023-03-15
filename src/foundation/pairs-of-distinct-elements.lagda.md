@@ -107,7 +107,6 @@ module _
     p ＝ q
   eq-Eq-pair-of-distinct-elements {p} {q} α β =
     map-inv-is-equiv (is-equiv-Eq-eq-pair-of-distinct-elements p q) (pair α β)
-
 ```
 
 ### Equivalences map pairs of distinct elements to pairs of distinct elements
