@@ -37,7 +37,6 @@ open import foundation.universe-levels
 ### Subtype duality
 
 ```agda
-
 equiv-surjection-𝔽-family-finite-inhabited-type :
   {l : Level} (A : 𝔽 l) (B : 𝔽 l) →
   ( (type-𝔽 A ↠ type-𝔽 B) ≃

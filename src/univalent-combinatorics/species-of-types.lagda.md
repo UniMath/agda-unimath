@@ -7,7 +7,6 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
-
 ```
 
 ### Idea

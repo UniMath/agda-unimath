@@ -20,7 +20,6 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.sigma-decompositions
-
 ```
 
 ## Definitions

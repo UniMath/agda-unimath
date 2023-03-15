@@ -473,7 +473,6 @@ module _
 #### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality.
 
 ```agda
-
 has-dec-eq-if-is-dec-rel-equiv-surj :
   {l1 : Level} {A : UU l1} (B : Set l1) (f : A ↠ type-Set B)→
   ( (x y : A) →

@@ -371,5 +371,4 @@ module _
   pr1 (tot-decidable-emb f) = tot (λ x → map-decidable-emb (f x))
   pr2 (tot-decidable-emb f) =
     is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x))
-
 ```

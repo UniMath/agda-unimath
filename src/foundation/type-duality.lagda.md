@@ -349,7 +349,6 @@ equiv-Fib-structure {l1} {l3} l P B =
       ( equiv-Fib l B)
       ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
   ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
-
 ```
 
 The type of all function from `A → B` is equivalent to the type of function

@@ -623,7 +623,6 @@ module _
 #### Equivalence between fibered double Relaxed-Σ-Decompositions and displayed double Relaxed-Σ-Decompositions
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1}
   (fib-D : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A)

@@ -135,7 +135,6 @@ count-fiber-count-Σ-count-base :
   count A → count (Σ A B) → (x : A) → count (B x)
 count-fiber-count-Σ-count-base e f x =
   count-fiber-count-Σ (has-decidable-equality-count e) f x
-
 ```
 
 ### If Σ A B and each B x can be counted, and if B has a section, then A can be counted

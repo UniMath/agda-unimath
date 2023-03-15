@@ -322,7 +322,6 @@ module _
         ( analytic-unit-species-subuniverse))
       ( S)
       ( htpy-right-unit-law-comp-species-subuniverse S)
-
 ```
 
 ### Associativity of composition of species-inhabited-types
@@ -423,7 +422,6 @@ module _
 ### Species of finite inhabited types
 
 ```agda
-
 equiv-Σ-Decomposition-Inhabited-Type-𝔽-Σ-Decomposition-𝔽 :
   {l1 l2 : Level} (X : Inhabited-Type-𝔽' l1) →
   Σ-Decomposition-𝔽 l2 l2 (type-Inhabited-Type-𝔽' X) ≃
@@ -463,7 +461,6 @@ pr1 (finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 {l} X) =
     ( type-Inhabited-Type-𝔽' X)
 pr2 (finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X) =
   is-finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X
-
 
 module _
   {l1 l2 : Level}

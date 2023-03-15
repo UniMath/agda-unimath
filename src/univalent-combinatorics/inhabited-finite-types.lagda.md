@@ -62,13 +62,11 @@ equiv-Inhabited-Type-𝔽 :
     Σ (Inhabited-Type l ) (λ X → is-finite (type-Inhabited-Type X))
 equiv-Inhabited-Type-𝔽 = equiv-right-swap-Σ
 
-
 Inhabited-Type-𝔽-Prop : {l : Level} → UU l → Prop l
 Inhabited-Type-𝔽-Prop X = prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
 
 Inhabited-Type-𝔽' : (l : Level) → UU (lsuc l)
 Inhabited-Type-𝔽' l = Σ (UU l) (λ X → type-Prop (Inhabited-Type-𝔽-Prop X))
-
 
 module _
   {l : Level} (X : Inhabited-Type-𝔽' l)
@@ -89,7 +87,6 @@ module _
   inhabited-type-Inhabited-Type-𝔽' : Inhabited-Type l
   pr1 inhabited-type-Inhabited-Type-𝔽' = type-Inhabited-Type-𝔽'
   pr2 inhabited-type-Inhabited-Type-𝔽' = is-inhabited-type-Inhabited-Type-𝔽'
-
 ```
 
 ### Families of inhabited types
@@ -129,7 +126,6 @@ equiv-Fam-Inhabited-Type-𝔽 X =
       ( λ _ → Σ (Inhabited-Type _) ( is-finite ∘ type-Inhabited-Type))
       ( id-equiv)
       ( λ _ → equiv-Inhabited-Type-𝔽)))
-
 ```
 
 ## Proposition

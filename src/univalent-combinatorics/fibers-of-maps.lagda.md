@@ -138,7 +138,6 @@ is-decidable-fib-Fin {k} {l} f y =
 ### If `f : A → B` and `B` is finite, then `A` is finite if and only if the fibers of f are finite
 
 ```agda
-
 equiv-is-finite-domain-is-finite-fib :
   {l1 l2 : Level} {A : UU l1} →
   (B : 𝔽 l2) (f : A → (type-𝔽 B)) →

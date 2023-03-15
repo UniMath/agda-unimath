@@ -59,7 +59,6 @@ type-discrete-Σ-Decomposition-𝔽 :
   {l1 l2 l3 : Level} {A : UU l1} → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 type-discrete-Σ-Decomposition-𝔽 {l1} {l2} {l3} {A} =
   type-subtype (is-discrete-Prop-Σ-Decomposition-𝔽 {l1} {l2} {l3} {A})
-
 ```
 
 ## Propositions

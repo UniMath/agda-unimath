@@ -223,7 +223,6 @@ module _
   equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽 =
     inv-equiv (equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A) ∘e
     equiv-finite-surjection-Σ-Decomposition-𝔽
-
 ```
 
 ### The type of all finite Σ-Decomposition is finite
@@ -326,7 +325,6 @@ module _
     equiv-Σ-Decomposition-𝔽 X Y → (X ＝ Y)
   eq-equiv-Σ-Decomposition-𝔽 =
     map-inv-equiv (extensionality-Σ-Decomposition-𝔽)
-
 ```
 
 ### Iterated finite Σ-Decomposition

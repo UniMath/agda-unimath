@@ -202,5 +202,4 @@ module _
     ( analytic-comp-species-types S (analytic-comp-species-types T  U)) ＝
     ( analytic-comp-species-types (analytic-comp-species-types S T) U)
   assoc-comp-species-types = eq-htpy htpy-assoc-comp-species-types
-
 ```

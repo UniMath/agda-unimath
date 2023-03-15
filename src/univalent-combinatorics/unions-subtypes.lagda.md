@@ -17,7 +17,6 @@ open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
-
 ```
 
 ## Properties
