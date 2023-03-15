@@ -9,6 +9,7 @@ module univalent-combinatorics.sigma-decompositions where
 ```agda
 open import foundation.sigma-decompositions public
 
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -27,6 +28,7 @@ open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.relaxed-sigma-decompositions
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
@@ -87,6 +89,12 @@ module _
     type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽 → UU l2
   cotype-Σ-Decomposition-𝔽 x = type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 x)
 
+  is-finite-cotype-Σ-Decomposition-𝔽 :
+    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
+    is-finite (cotype-Σ-Decomposition-𝔽 x)
+  is-finite-cotype-Σ-Decomposition-𝔽 x =
+    is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 x)
+
   is-inhabited-cotype-Σ-Decomposition-𝔽 :
    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
     is-inhabited (cotype-Σ-Decomposition-𝔽 x)
@@ -144,6 +152,37 @@ displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
 ```
 
 ## Properties
+
+### Finite Σ-Decomposition as a relaxed Σ-Decomposition with conditions
+
+```agda
+equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  Σ-Decomposition-𝔽 l2 l3 A ≃
+  Σ ( Relaxed-Σ-Decomposition l2 l3 A)
+    ( λ D →
+      is-finite (indexing-type-Relaxed-Σ-Decomposition D) ×
+      ((x : indexing-type-Relaxed-Σ-Decomposition D ) →
+        is-finite (cotype-Relaxed-Σ-Decomposition D x) ×
+        is-inhabited (cotype-Relaxed-Σ-Decomposition D x)))
+pr1 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 D =
+  ( indexing-type-Σ-Decomposition-𝔽 D ,
+    ( cotype-Σ-Decomposition-𝔽 D) ,
+    ( matching-correspondence-Σ-Decomposition-𝔽 D)) ,
+    ( is-finite-indexing-type-Σ-Decomposition-𝔽 D) ,
+    ( λ x → is-finite-cotype-Σ-Decomposition-𝔽 D x ,
+            is-inhabited-cotype-Σ-Decomposition-𝔽 D x)
+pr2 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 =
+  is-equiv-has-inverse
+    ( λ X →
+      ( ( pr1 (pr1 X)) ,
+        (pr1 (pr2 X))) ,
+        ((λ x → ((pr1 (pr2 (pr1 X)) x) , pr1 (pr2 (pr2 X) x) ) ,
+                pr2 (pr2 (pr2 X) x)) ,
+      pr2 (pr2 (pr1 X))))
+    refl-htpy
+    refl-htpy
+```
 
 ### The base type of a finite Σ-Decomposition is finite
 

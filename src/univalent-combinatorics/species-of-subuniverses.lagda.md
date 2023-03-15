@@ -83,7 +83,7 @@ finite types to a `𝔽`.
 ```agda
 species-inhab-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 species-inhab-𝔽 l1 l2 =
-  species-subuniverse (Inhabited-Type-𝔽-Prop l1) (is-finite-Prop {l2})
+  species-subuniverse (Inhabited-Type-𝔽-Prop {l1}) (is-finite-Prop {l2})
 ```
 
 ### Species of inhabited-types

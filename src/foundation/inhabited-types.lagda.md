@@ -196,6 +196,15 @@ map-Inhabited-Type :
 map-Inhabited-Type f = map-trunc-Prop f
 ```
 
+### Contractible types are inhabited
+
+```agda
+is-inhabited-is-contr :
+  {l1 : Level} {A : UU l1} → is-contr A → is-inhabited A
+is-inhabited-is-contr p =
+  unit-trunc-Prop (center p)
+```
+
 ## See also
 
 - The notion of _nonempty types_ is treated in

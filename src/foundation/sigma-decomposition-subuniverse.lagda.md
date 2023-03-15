@@ -7,6 +7,7 @@ module foundation.sigma-decomposition-subuniverse where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
@@ -74,36 +75,34 @@ module _
 map-equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse :
   {l1 l2 l3 : Level} (P : subuniverse l2 l3) {A : UU l1}
   (D : Σ-Decomposition-subuniverse P A) →
-  Σ
-    ( Σ ( Relaxed-Σ-Decomposition l2 l2 A)
-        ( λ D → is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D)))
+  Σ ( Relaxed-Σ-Decomposition l2 l2 A)
     ( λ D →
-      ( x : indexing-type-Relaxed-Σ-Decomposition (pr1 D)) →
-      is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition (pr1 D) x))
+        is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
+        (( x : indexing-type-Relaxed-Σ-Decomposition D) →
+          is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
 map-equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse P {A} D =
-  ( ( ( indexing-type-Σ-Decomposition-subuniverse P {A = A} D ,
-        ( cotype-Σ-Decomposition-subuniverse P D ,
-          matching-correspondence-Σ-Decomposition-subuniverse P D)) ,
-      is-in-subuniverse-indexing-type-Σ-Decomposition-subuniverse P D) ,
-    is-in-subuniverse-cotype-Σ-Decomposition-subuniverse P D)
+  ( ( indexing-type-Σ-Decomposition-subuniverse P {A = A} D ,
+      ( cotype-Σ-Decomposition-subuniverse P D ,
+        matching-correspondence-Σ-Decomposition-subuniverse P D)) ,
+    ( is-in-subuniverse-indexing-type-Σ-Decomposition-subuniverse P D ,
+      is-in-subuniverse-cotype-Σ-Decomposition-subuniverse P D))
 
 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse :
   {l1 l2 l3 : Level} (P : subuniverse l2 l3) {A : UU l1} →
   ( Σ-Decomposition-subuniverse P A) ≃
-  ( Σ
-      ( Σ ( Relaxed-Σ-Decomposition l2 l2 A)
-          ( λ D → is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D)))
+  ( Σ ( Relaxed-Σ-Decomposition l2 l2 A)
       ( λ D →
-        ( x : indexing-type-Relaxed-Σ-Decomposition (pr1 D)) →
-        ( is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition (pr1 D) x))))
+        is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
+        (( x : indexing-type-Relaxed-Σ-Decomposition D) →
+          ( is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))))
 pr1 (equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse P) =
   map-equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse P
 pr2 (equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse P) =
   is-equiv-has-inverse
     ( λ X →
-      ( ( pr1 (pr1 (pr1 X))) , (pr2 (pr1 X))) ,
-      ( ( λ x → (pr1 (pr2 (pr1 (pr1 X))) x) , (pr2 X x)) ,
-        ( pr2 (pr2 (pr1 (pr1 X))))))
+      ((pr1 (pr1 X)) , (pr1 (pr2 X))) ,
+      ((λ x → (pr1 (pr2 (pr1 X)) x) , (pr2 (pr2 X) x)) ,
+      (pr2 (pr2 (pr1 X)))))
     refl-htpy
     refl-htpy
 ```

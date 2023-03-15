@@ -36,9 +36,6 @@ open import univalent-combinatorics.finite-types
 Inhabited-Type-𝔽 : (l : Level) → UU (lsuc l)
 Inhabited-Type-𝔽 l = Σ ( 𝔽 l) ( λ X → is-inhabited (type-𝔽 X))
 
-Inhabited-Type-𝔽-Prop : (l : Level) → UU l → Prop l
-Inhabited-Type-𝔽-Prop l X = prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
-
 module _
   {l : Level} (X : Inhabited-Type-𝔽 l)
   where
@@ -64,6 +61,34 @@ equiv-Inhabited-Type-𝔽 :
   Inhabited-Type-𝔽 l ≃
     Σ (Inhabited-Type l ) (λ X → is-finite (type-Inhabited-Type X))
 equiv-Inhabited-Type-𝔽 = equiv-right-swap-Σ
+
+
+Inhabited-Type-𝔽-Prop : {l : Level} → UU l → Prop l
+Inhabited-Type-𝔽-Prop X = prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
+
+Inhabited-Type-𝔽' : (l : Level) → UU (lsuc l)
+Inhabited-Type-𝔽' l = Σ (UU l) (λ X → type-Prop (Inhabited-Type-𝔽-Prop X))
+
+
+module _
+  {l : Level} (X : Inhabited-Type-𝔽' l)
+  where
+
+  finite-type-Inhabited-Type-𝔽' : 𝔽 l
+  finite-type-Inhabited-Type-𝔽' = (pr1 X , pr1 (pr2 X))
+
+  type-Inhabited-Type-𝔽' : UU l
+  type-Inhabited-Type-𝔽' = type-𝔽 finite-type-Inhabited-Type-𝔽'
+
+  is-finite-Inhabited-Type-𝔽' : is-finite type-Inhabited-Type-𝔽'
+  is-finite-Inhabited-Type-𝔽' = is-finite-type-𝔽 finite-type-Inhabited-Type-𝔽'
+
+  is-inhabited-type-Inhabited-Type-𝔽' : is-inhabited type-Inhabited-Type-𝔽'
+  is-inhabited-type-Inhabited-Type-𝔽' = pr2 (pr2 X)
+
+  inhabited-type-Inhabited-Type-𝔽' : Inhabited-Type l
+  pr1 inhabited-type-Inhabited-Type-𝔽' = type-Inhabited-Type-𝔽'
+  pr2 inhabited-type-Inhabited-Type-𝔽' = is-inhabited-type-Inhabited-Type-𝔽'
 
 ```
 
