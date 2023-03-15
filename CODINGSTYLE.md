@@ -71,8 +71,44 @@ improve the readability.
   indentation of two additional spaces. If the type specification of a
   construction then still does not fit on a single line of 80 characters, we
   start new lines in the type declaration using the same indentation level.
-- Function arrows at line breaks should always go at the end of the line rather
-  than the beginning of the next line.
+- Infix binary operations at line breaks should always go at the end of the line
+  rather than the beginning of the next line.
+- Each definition in Agda has the structure of a finite tree. We use indentation
+  levels and parentheses to make this structure visible. The following example
+  shows our conventions:
+
+  ```agda
+  module _
+    {l1 l2 : Level} {A : UU l1} {B : UU l2}
+    where
+
+    is-trunc-equiv-is-trunc :
+      (k : 𝕋) → is-trunc k A → is-trunc k B → is-trunc k (A ≃ B)
+    is-trunc-equiv-is-trunc k H K =
+      is-trunc-Σ
+        ( is-trunc-function-type k K)
+        ( λ f →
+          is-trunc-Σ
+            ( is-trunc-Σ
+              ( is-trunc-function-type k H)
+              ( λ g →
+                is-trunc-Π k (λ y → is-trunc-Id K (f (g y)) y)))
+            ( λ _ →
+              is-trunc-Σ
+                ( is-trunc-function-type k H)
+                ( λ h →
+                  is-trunc-Π k (λ x → is-trunc-Id H (h (f x)) x))))
+  ```
+
+  At the root of the tree we find the function `is-trunc-Σ`. It takes two
+  arguments, each of which go on a new line with the indentation level increased
+  by two spaces. The first argument fits on one line, so we don't have to
+  introduce new line breaks. The second argument is too long to fit on a line,
+  so we break the line immediately after the `→` symbol following the
+  lambda-abstraction. When a part of the definition doesn't fit on a line, we
+  have the convention to use line breaks at the first possible occasion. The
+  next node is again `is-trunc-Σ`, which has two arguments, neither of which fit
+  on a line. So we use a line break immediately.
 
 ## Modules
 
