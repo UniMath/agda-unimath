@@ -9,15 +9,17 @@ module univalent-combinatorics.small-types where
 ```agda
 open import foundation.small-types public
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.univalence
 open import foundation.universe-levels
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>
@@ -27,7 +29,6 @@ open import elementary-number-theory.natural-numbers
 Every finite type is small.
 
 ```agda
-
 is-small-Fin :
   (l : Level) → (k : ℕ) → is-small l (Fin k)
 pr1 (is-small-Fin l k) = raise-Fin l k
