@@ -12,9 +12,11 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.coproduct-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -182,11 +184,17 @@ module _
 
 ```agda
 split-sum-Commutative-Ring :
-  {l : Level} (R : Commutative-Ring l) (n m : ℕ) (f : functional-vec-Commutative-Ring R (add-ℕ n m)) → 
-    sum-Commutative-Ring R (add-ℕ n m) f ＝ 
-    add-Commutative-Ring R (sum-Commutative-Ring R n (f ∘ inl-coprod-Fin n m)) (sum-Commutative-Ring R m (f ∘ inr-coprod-Fin n m))
-split-sum-Commutative-Ring R n zero-ℕ f = inv (right-unit-law-add-Commutative-Ring R (sum-Commutative-Ring R n f))
+  {l : Level} (R : Commutative-Ring l)
+  (n m : ℕ) (f : functional-vec-Commutative-Ring R (add-ℕ n m)) → 
+  sum-Commutative-Ring R (add-ℕ n m) f ＝ 
+  add-Commutative-Ring R
+    ( sum-Commutative-Ring R n (f ∘ inl-coprod-Fin n m))
+    ( sum-Commutative-Ring R m (f ∘ inr-coprod-Fin n m))
+split-sum-Commutative-Ring R n zero-ℕ f =
+  inv (right-unit-law-add-Commutative-Ring R (sum-Commutative-Ring R n f))
 split-sum-Commutative-Ring R n (succ-ℕ m) f = 
-  ap (add-Commutative-Ring' R (f(inr star))) (split-sum-Commutative-Ring R n m (f ∘ inl)) ∙ 
-  (associative-add-Commutative-Ring R _ _ _ )
+  ( ap
+    ( add-Commutative-Ring' R (f(inr star)))
+    ( split-sum-Commutative-Ring R n m (f ∘ inl))) ∙ 
+  ( associative-add-Commutative-Ring R _ _ _ )
 ```
