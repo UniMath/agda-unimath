@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.sums-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import foundation.dependent-pair-types
@@ -73,6 +74,7 @@ is-closed-under-addition-subset-nilradical-Commutative-Ring R {x} {y} f h =
           intro-∃
             ( add-ℕ n m)
             ( ( binomial-theorem-Commutative-Ring R (add-ℕ n m) x y) ∙
+              (split-sum-Commutative-Ring R n _ _) ∙ 
               {!   !})))
 ```
 
