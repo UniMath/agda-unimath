@@ -14,7 +14,7 @@ if __name__ == "__main__":
             contents = f.read()
 
         block_start = r'```agda\b'
-        block_end = r'```'
+        block_end = r'```\n'
         space_between = r'(\)|\}) *(\(|\{)'
         spaces_after = r'(\(|\{) *'
         spaces_before = r' *(\)|\})'

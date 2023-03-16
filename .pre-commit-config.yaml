@@ -57,21 +57,20 @@ repos:
         args: []
         require_serial: false
 
-      # Expereimental
+      - id: max-line-length
+        name: Check the maximum line length is respected
+        entry: scripts/max_line_length.py
+        language: python
+        verbose: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+        require_serial: false
+
+      # Experimental hooks
 
       # - id: spaces-convention
       #   name: Check Agda code block spaces convention
       #   entry: scripts/spaces_convention.py
-      #   language: python
-      #   always_run: true
-      #   verbose: true
-      #   files: ^src\/.+\.lagda\.md$
-      #   types_or: [markdown, text]
-      #   require_serial: false
-
-      # - id: agda-block-line-length
-      #   name: Check Agda code block line length (80)
-      #   entry: scripts/check_agdablock_line_length.py
       #   language: python
       #   always_run: true
       #   verbose: true

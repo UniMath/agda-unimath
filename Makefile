@@ -67,9 +67,6 @@ agda-html: src/everything.lagda.md
 SUMMARY.md:
 	@python3 scripts/generate_main_index_file.py
 
-# CONTRIBUTORS.md:
-# 	@python3 scripts/update_contributors.py
-
 .PHONY: website
 website: agda-html \
 		SUMMARY.md

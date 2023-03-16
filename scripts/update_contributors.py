@@ -21,7 +21,7 @@ template = """
 ## Contributors
 
 We are grateful to the following people for their contributions to
-the library. In alphabetical order, by GitHub username:
+the library.
 
 Name 1
 
@@ -53,7 +53,10 @@ contributors_list = []
 for contributor in contributors:
     login = contributor['login']
     html_url = contributor['html_url']
-    contributors_list.append(f"- [{login}]({html_url})")
+    name = get_github_user_name(login)
+    if name is None or name == "":
+        name = login
+    contributors_list.append(f"- [{name}]({html_url})")
 
 output = template.replace("Name 1", "\n".join(contributors_list))
 
