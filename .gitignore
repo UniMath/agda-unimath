@@ -3,6 +3,7 @@
 *.agdai
 MAlonzo/**
 _build/**
+_build/
 agdaFiles
 src/**/*.html
 
@@ -420,5 +421,6 @@ package-lock.json
 docs/
 html/
 book/
+src/temp/
 src/everything.lagda.md
 SUMMARY.md
