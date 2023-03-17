@@ -125,6 +125,17 @@ module _
         ( id-equiv)
         ( p)
 
+    is-contr-total-equiv-subuniverse' :
+      (s : type-subuniverse P) →
+      is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse t s))
+    is-contr-total-equiv-subuniverse' (pair X p) =
+      is-contr-total-Eq-subtype
+        ( is-contr-total-equiv' X)
+        ( is-subtype-subuniverse P)
+        ( X)
+        ( id-equiv)
+        ( p)
+
   abstract
     is-equiv-equiv-eq-subuniverse :
       (s t : type-subuniverse P) → is-equiv (equiv-eq-subuniverse s t)
