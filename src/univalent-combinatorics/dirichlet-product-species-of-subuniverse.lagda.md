@@ -15,27 +15,31 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.product-decompositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.product-decompositions
 
-open import univalent-combinatorics.species-of-subuniverses
 open import univalent-combinatorics.equivalences-species-of-subuniverses
+open import univalent-combinatorics.species-of-subuniverses
 ```
 
 </details>
 
 ## Idea
 
-The Dirichlet product of two species of subuniverse `S` and `T` from `P` to `Q` on `X` is defined as
+The Dirichlet product of two species of subuniverse `S` and `T` from `P` to `Q`
+on `X` is defined as
+
 ```md
   Σ (k : P) (Σ (k' : P) (Σ (e : k × k' ≃ X) S(k) × T(k')))
 ```
-If `Q` is stable by product and dependent pair type over `P` type, then the dirichlet product is also a species of subuniverse from `P` to `Q`
+
+If `Q` is stable by product and dependent pair type over `P` type, then the
+dirichlet product is also a species of subuniverse from `P` to `Q`
 
 ## Definition
 
