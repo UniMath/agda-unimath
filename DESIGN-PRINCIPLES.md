@@ -1,9 +1,8 @@
 # Library Design Principles
 
-The `agda-unimath` library is a repository of formalized mathematics in Agda.
-Understanding the design principles, structure, and philosophy behind this
-library is essential for effectively navigating and contributing to it. This
-document aims to provide a clear and concise introduction.
+Understanding the design principles, structure, and philosophy behind the
+`agda-unimath` library is essential for effectively navigating and contributing
+to it. This document aims to provide a clear and concise introduction.
 
 ## Postulates and Assumptions
 
