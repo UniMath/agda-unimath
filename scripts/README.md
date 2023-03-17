@@ -1,15 +1,17 @@
 # Scripts/hooks
 
-We have included Python scripts/hooks which should run on almost any platform.
+We have included Python scripts/hooks for continuous integration which should
+run on almost any platform. To run these, first install pre-commit and the other
+Python requirements by running the following command in the terminal:
 
-Install pre-commit
-
-```md
-pip install pre-commit
+```shell
+pip install -r requirements.txt
 ```
 
-Next time you commit, pre-commit will run the hooks.
+Now, before you commit next time, run `pre-commit` by executing
 
-```md
+```shell
 make pre-commit
 ```
+
+in the terminal. This will run all the hooks.

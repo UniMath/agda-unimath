@@ -90,7 +90,7 @@ improve the readability.
 - The `where` keyword is positioned on a new line after the variable
   declarations, with a 2-space indentation level.
 
-```md
+```agda
 module _
   {l : Level} (G : Group l)
   where
@@ -106,7 +106,7 @@ module _
 - Types should be provided for each of the terms, and all terms should be on
   lines after the `where`, e.g.
 
-  ```md
+  ```agda
   statement : Statement
   statement = proof
     where
