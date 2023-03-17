@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "check",
+      "type": "shell",
+      "command": "make check",
+      "problemMatcher": []
+    },
+    {
+      "label": "pre-commit",
+      "type": "shell",
+      "command": "make pre-commit",
+      "problemMatcher": []
+    }
+  ]
+}
