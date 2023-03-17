@@ -583,7 +583,6 @@ needed.
       ( λ f H H₁ H₂ →
         pre-extensionality-∈-cumulative-hierarchy
           f x H₁ H₂)
-<<<<<<< HEAD
 ```
 
 ### Empty set axiom
