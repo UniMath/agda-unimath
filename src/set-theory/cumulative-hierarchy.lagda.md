@@ -739,8 +739,6 @@ needed.
                         ( ∈-cumulative-hierarchy-mere-preimage K))})
                     ( H))))))})
       ( underlying-function-cumulative-hierarchy x)
-=======
->>>>>>> master
 ```
 
 ## References
