@@ -29,10 +29,8 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
-open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
