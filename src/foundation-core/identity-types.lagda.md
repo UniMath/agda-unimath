@@ -34,8 +34,8 @@ on your keyboard, but it is the
 [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
 Note that the full width equals sign is slightly wider, and it is highlighted in
 blue just like all the other defined constructions in Agda. In order to type the
-full width equals sign in Agda emacs mode, you need to add it to your agda input
-method as follows:
+full width equals sign in Agda's Emacs Mode, you need to add it to your agda
+input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.

@@ -6,7 +6,7 @@ using the provided Nix flake, if you're using Nix. You should also have an
 editor capable of working with Agda file. We recommend either of `Emacs` and
 `VSCode`.
 
-### Installation guides
+## Installation guides
 
 Get a copy of our library on your machine using
 
@@ -16,13 +16,13 @@ git clone git@github.com:UniMath/agda-unimath.git
 
 then install Agda as described in the next section.
 
-#### Without Nix
+### Without Nix
 
 Go to the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
 on the Agda documentation page for instructions to install Agda.
 
-#### With Nix
+### With Nix
 
 The library comes with a development shell described in the flake.nix file. To
 activate the shell, open a terminal in the directory where you cloned the
@@ -48,11 +48,11 @@ which is a modified version of the usual agda2-mode setup provided by Agda,
 except it checks if Agda is available, so that it doesn't cause errors when
 opening Emacs outside the project.
 
-### Setting up emacs for literate Agda files
+### Setting up Emacs for literate Agda files
 
 The `agda-unimath` library is written in literate markdown agda. This means that
 all the files in the formalization have the extension `.lagda.md` and they
-consist of markdown text and `agda` code blocks. For your emacs to handle these
+consist of markdown text and `agda` code blocks. For your Emacs to handle these
 files correctly, you need to add the following line to your `.emacs` file:
 
 ```elisp
@@ -65,7 +65,7 @@ If you're new to Agda, see the
 [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
 to learn how to use Agda.
 
-### Setting up emacs for special symbols
+### Setting up Emacs for special symbols
 
 In the `agda-unimath` library, we use two notations for the identity type. The
 identity type is first introduced using Martin-Löf's original notation `Id`.
@@ -76,8 +76,8 @@ on your keyboard, but it is the
 [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
 Note that the full width equals sign is slightly wider, and it is highlighted in
 blue just like all the other defined constructions in Agda. In order to type the
-full width equals sign in Agda emacs mode, you need to add it to your Agda input
-method as follows:
+full width equals sign in Agda's Emacs Mode, you need to add it to your Agda
+input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
@@ -122,7 +122,7 @@ Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaV
 
 ### After the setup
 
-With Agda installed and emacs correctly set up, you can start using the library.
+With Agda installed and Emacs correctly set up, you can start using the library.
 There is no need to install anything further. To compile the library, which is
 optional, run `make check` from the main folder of the repository. This
 generates the file `everything.lagda.md`, which imports all the files in the
