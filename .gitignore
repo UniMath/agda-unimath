@@ -1,8 +1,7 @@
 
 ### Agda ###
 *.agdai
-MAlonzo/**
-_build/**
+MAlonzo/
 _build/
 agdaFiles
 src/**/*.html
