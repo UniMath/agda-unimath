@@ -74,7 +74,7 @@ module _
 module _
   {l : Level} (R : Commutative-Semiring l)
   where
-  
+
   distributive-power-mul-Commutative-Semiring :
     (n : ℕ) (x y : type-Commutative-Semiring R) →
     power-Commutative-Semiring R n (mul-Commutative-Semiring R x y) ＝

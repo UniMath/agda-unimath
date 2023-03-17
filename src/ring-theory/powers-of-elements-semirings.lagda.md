@@ -182,7 +182,7 @@ module _
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   distributive-power-mul-Semiring :
     (n : ℕ) {x y : type-Semiring R} →
     (H : mul-Semiring R x y ＝ mul-Semiring R y x) →
@@ -222,4 +222,3 @@ module _
               ( inv (power-succ-Semiring R n x))
               ( inv (power-succ-Semiring R n y)))))))
 ```
-

@@ -73,7 +73,7 @@ module _
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-  
+
   distributive-power-mul-Commutative-Ring :
     (n : ℕ) (x y : type-Commutative-Ring R) →
     power-Commutative-Ring R n (mul-Commutative-Ring R x y) ＝

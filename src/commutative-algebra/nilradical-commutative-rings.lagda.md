@@ -7,9 +7,9 @@ module commutative-algebra.nilradical-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.sums-commutative-rings
 
@@ -67,13 +67,13 @@ is-closed-under-add-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l) →
   is-closed-under-add-subset-Commutative-Ring R
     ( subset-nilradical-Commutative-Ring R)
-is-closed-under-add-nilradical-Commutative-Ring R x y f h = 
-  apply-universal-property-trunc-Prop f 
-    ( subset-nilradical-Commutative-Ring R (add-Commutative-Ring R x y)) 
-    ( λ (n , p) → 
-      apply-universal-property-trunc-Prop h 
-        ( subset-nilradical-Commutative-Ring R (add-Commutative-Ring R x y)) 
-        ( λ (m , q) → 
+is-closed-under-add-nilradical-Commutative-Ring R x y f h =
+  apply-universal-property-trunc-Prop f
+    ( subset-nilradical-Commutative-Ring R (add-Commutative-Ring R x y))
+    ( λ (n , p) →
+      apply-universal-property-trunc-Prop h
+        ( subset-nilradical-Commutative-Ring R (add-Commutative-Ring R x y))
+        ( λ (m , q) →
           intro-∃
             ( add-ℕ n m)
             ( ( binomial-theorem-Commutative-Ring R (add-ℕ n m) x y) ∙
@@ -92,7 +92,7 @@ is-closed-under-add-nilradical-Commutative-Ring R x y f h =
                           ( dist-ℕ
                             ( add-ℕ n m)
                             ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
-                          ( y))))) ∙ 
+                          ( y))))) ∙
                 ( ( ap-add-Commutative-Ring R
                     ( ( htpy-sum-Commutative-Ring R n
                         ( λ i →
@@ -234,13 +234,13 @@ is-closed-under-mul-right-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l) →
   is-closed-under-mul-right-subset-Commutative-Ring R
     ( subset-nilradical-Commutative-Ring R)
-is-closed-under-mul-right-nilradical-Commutative-Ring R x y f = 
-  apply-universal-property-trunc-Prop f 
-    ( subset-nilradical-Commutative-Ring R (mul-Commutative-Ring R x y)) 
+is-closed-under-mul-right-nilradical-Commutative-Ring R x y f =
+  apply-universal-property-trunc-Prop f
+    ( subset-nilradical-Commutative-Ring R (mul-Commutative-Ring R x y))
     ( λ (n , p) →
       intro-∃ n
-        ( ( distributive-power-mul-Commutative-Ring R n x y) ∙ 
-          ( ( ap (mul-Commutative-Ring' R (power-Commutative-Ring R n y)) p) ∙ 
+        ( ( distributive-power-mul-Commutative-Ring R n x y) ∙
+          ( ( ap (mul-Commutative-Ring' R (power-Commutative-Ring R n y)) p) ∙
             ( left-zero-law-mul-Commutative-Ring R
               ( power-Commutative-Ring R n y)))))
 ```

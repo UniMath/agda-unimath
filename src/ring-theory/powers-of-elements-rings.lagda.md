@@ -87,7 +87,7 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   distributive-power-mul-Ring :
     (n : ℕ) {x y : type-Ring R} → mul-Ring R x y ＝ mul-Ring R y x →
     power-Ring R n (mul-Ring R x y) ＝

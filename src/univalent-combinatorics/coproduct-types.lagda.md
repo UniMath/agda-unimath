@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
@@ -23,7 +24,6 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.homotopies
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
@@ -59,11 +59,11 @@ Fin-add-ℕ :
 Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
 
 inl-coprod-Fin :
-  (k l : ℕ) → Fin k → Fin (add-ℕ k l) 
+  (k l : ℕ) → Fin k → Fin (add-ℕ k l)
 inl-coprod-Fin k l = map-coprod-Fin k l ∘ inl
 
 inr-coprod-Fin :
-  (k l : ℕ) → Fin l → Fin (add-ℕ k l) 
+  (k l : ℕ) → Fin l → Fin (add-ℕ k l)
 inr-coprod-Fin k l = map-coprod-Fin k l ∘ inr
 
 compute-inl-coprod-Fin :
@@ -75,8 +75,8 @@ compute-inl-coprod-Fin k x = refl
 
 ```agda
 nat-coprod-Fin :
-  (n m : ℕ) → (x : Fin n + Fin m) → 
-  nat-Fin (add-ℕ n m) (map-coprod-Fin n m x) ＝ 
+  (n m : ℕ) → (x : Fin n + Fin m) →
+  nat-Fin (add-ℕ n m) (map-coprod-Fin n m x) ＝
   ind-coprod _ (nat-Fin n) (λ i → add-ℕ n (nat-Fin m i)) x
 nat-coprod-Fin n zero-ℕ (inl x) = refl
 nat-coprod-Fin n (succ-ℕ m) (inl x) = nat-coprod-Fin n m (inl x)
