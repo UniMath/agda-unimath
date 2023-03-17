@@ -5,6 +5,7 @@ import utils
 from concurrent.futures import ThreadPoolExecutor
 from fix_imports import *
 
+
 def process_agda_file(agda_file, agda_options, root, temp_dir):
 
     def get_agda_module_name(file_path):
@@ -51,7 +52,8 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
 
     modified = len(fast_track_modules) > 0
 
-    namespaces["foundation"] = namespaces["foundation"].difference(fast_track_modules)
+    namespaces["foundation"] = namespaces["foundation"].difference(
+        fast_track_modules)
 
     # Proceed with search
 
@@ -110,7 +112,8 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             with open(agda_file, 'w') as file:
                 file.write(content)
 
-            utils.thread_safe_print(f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
+            utils.thread_safe_print(
+                f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
             return
 
         utils.thread_safe_print(
@@ -130,7 +133,6 @@ if __name__ == "__main__":
     temp_dir = "temp"
     status = 0
     agda_options = "--without-K --exact-split"
-
 
     temp_root = os.path.join(root, temp_dir)
     shutil.rmtree(temp_root, ignore_errors=True)
