@@ -118,5 +118,5 @@ some files might be split in two.
 
 Outside of the `foundation` folder, the library adheres to the
 "one-concept-per-file" design principle. If you find, however, that something
-you were looking for was in a different place than you expected it to be (this happens!)
-please let us know and we will consider it for improvements.
+you were looking for was in a different place than you expected it to be (this
+happens!) please let us know and we will consider it for improvements.
