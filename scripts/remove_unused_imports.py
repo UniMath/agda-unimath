@@ -5,6 +5,7 @@ import utils
 from concurrent.futures import ThreadPoolExecutor
 from fix_imports import *
 
+
 def process_agda_file(agda_file, agda_options, root, temp_dir):
 
     def get_agda_module_name(file_path):
@@ -21,7 +22,8 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
 
     # If no nonpublic imports, skip
     if not nonpublic:
-        utils.thread_safe_print(f"'{agda_module}' Could not find imports. Skipping.")
+        utils.thread_safe_print(
+            f"'{agda_module}' Could not find imports. Skipping.")
         return
 
     # # We can assume the file would compile, as this is usually the case.
@@ -80,7 +82,8 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             with open(agda_file, 'w') as file:
                 file.write(content)
 
-            utils.thread_safe_print(f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
+            utils.thread_safe_print(
+                f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
             return
 
         utils.thread_safe_print(
