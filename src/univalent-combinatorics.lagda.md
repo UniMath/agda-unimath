@@ -33,6 +33,7 @@ open import univalent-combinatorics.dedekind-finite-sets public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-sum-finite-types public
 open import univalent-combinatorics.derivatives-species-of-types public
+open import univalent-combinatorics.dirichlet-product-species-of-subuniverse public
 open import univalent-combinatorics.discrete-sigma-decompositions public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
