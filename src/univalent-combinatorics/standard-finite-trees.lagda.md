@@ -24,7 +24,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A standard finite tree is a finite tree that branches by standard finite sets. In contexts where one wouldn't be interested in considering finite trees to be the same if they differ up to a permutation of trees, people simply call our standard finite trees finite trees. From a univalent perspective, however, a finite tree is a tree built out of finite types, not just the standard finite types. Sometimes, standard finite trees are called planar finite trees, to emphasize that the branching types `Fin n` record the order in which the branches occur.
+A standard finite tree is a finite tree that branches by standard finite sets.
+In contexts where one wouldn't be interested in considering finite trees to be
+the same if they differ up to a permutation of trees, people simply call our
+standard finite trees finite trees. From a univalent perspective, however, a
+finite tree is a tree built out of finite types, not just the standard finite
+types. Sometimes, standard finite trees are called planar finite trees, to
+emphasize that the branching types `Fin n` record the order in which the
+branches occur.
 
 ## Definition
 

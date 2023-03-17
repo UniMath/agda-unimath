@@ -9,14 +9,15 @@ module foundation.shifting-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Given a sequence `f : ℕ → A` and an element `a : A` we define `shift-ℕ a f : ℕ → A` by
+Given a sequence `f : ℕ → A` and an element `a : A` we define
+`shift-ℕ a f : ℕ → A` by
 
 ```md
   shift-ℕ a f zero-ℕ := a

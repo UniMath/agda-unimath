@@ -10,7 +10,6 @@ module commutative-algebra.eisenstein-integers where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 
@@ -31,7 +30,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The Eisenstein integers are the complex numbers of the form `a + bω`, where `ω = -½ + ½√3i`, and where `a` and `b` are integers. Note that `ω` is a solution to the equation `ω² + ω + 1 = 0`.
+The Eisenstein integers are the complex numbers of the form `a + bω`, where
+`ω = -½ + ½√3i`, and where `a` and `b` are integers. Note that `ω` is a solution
+to the equation `ω² + ω + 1 = 0`.
 
 ## Definition
 

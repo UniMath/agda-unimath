@@ -23,7 +23,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A subgroup of a higher group is a pointed set bundle over its classifying type with connected total space.
+A subgroup of a higher group is a pointed set bundle over its classifying type
+with connected total space.
 
 ## Definition
 

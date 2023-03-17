@@ -10,7 +10,6 @@ module univalent-combinatorics.unlabeled-structures-species where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
@@ -21,7 +20,13 @@ open import univalent-combinatorics.species
 
 ## Idea
 
-The type of unlabeled `F`-structures of order `n` of a species `F` is the type of sets `X` of size `n` equipped with an `F`-structure. Two unlabeled `F`-structures of order `n` are considered to be the same if the underlying sets are isomorphic and the `F`-structure of the first transports along this isomorphism to the `F`-structure of the second. It will automatically follow from the univalence axiom that the identity type of the type of unlabeled `F`-structures of order `n` captures this idea.
+The type of unlabeled `F`-structures of order `n` of a species `F` is the type
+of sets `X` of size `n` equipped with an `F`-structure. Two unlabeled
+`F`-structures of order `n` are considered to be the same if the underlying sets
+are isomorphic and the `F`-structure of the first transports along this
+isomorphism to the `F`-structure of the second. It will automatically follow
+from the univalence axiom that the identity type of the type of unlabeled
+`F`-structures of order `n` captures this idea.
 
 ## Definitions
 

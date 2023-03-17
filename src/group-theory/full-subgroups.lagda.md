@@ -8,22 +8,12 @@ module group-theory.full-subgroups where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.full-subtypes
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.subgroups
 ```

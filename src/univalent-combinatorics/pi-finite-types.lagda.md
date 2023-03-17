@@ -34,7 +34,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.images
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.maybe
@@ -75,7 +74,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is `π_n`-finite if it has finitely many connected components and all of its homotopy groups up to level `n` at all base points are finite.
+A type is `π_n`-finite if it has finitely many connected components and all of
+its homotopy groups up to level `n` at all base points are finite.
 
 ## Definition
 

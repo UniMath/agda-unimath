@@ -11,10 +11,11 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.disjunction
-open import foundation.fibers-of-maps
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
+
+open import foundation-core.fibers-of-maps
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -23,7 +24,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The lesser limited principle of omniscience asserts that for any sequence `f : ℕ → Fin 2` containing at most one `1`, either `f n ＝ 0` for all even `n` or `f n ＝ 0` for all odd `n`.
+The lesser limited principle of omniscience asserts that for any sequence
+`f : ℕ → Fin 2` containing at most one `1`, either `f n ＝ 0` for all even `n`
+or `f n ＝ 0` for all odd `n`.
 
 ## Definition
 

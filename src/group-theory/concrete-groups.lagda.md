@@ -10,7 +10,6 @@ module group-theory.concrete-groups where
 open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
@@ -22,8 +21,6 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.higher-groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-higher-groups
 
 open import structured-types.pointed-types
 ```

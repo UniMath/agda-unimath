@@ -7,21 +7,25 @@ module foundation.binary-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Consider two binary operations `f g : (x : A) (y : B x) → C x y`. The type of binary homotopies between f and `g` is defined to be the type of pointwise identifications of `f` and `g`. We show that this characterizes the identity type of `(x : A) (y : B x) → C x y`.
+Consider two binary operations `f g : (x : A) (y : B x) → C x y`. The type of
+binary homotopies between f and `g` is defined to be the type of pointwise
+identifications of `f` and `g`. We show that this characterizes the identity
+type of `(x : A) (y : B x) → C x y`.
 
 ## Definition
 

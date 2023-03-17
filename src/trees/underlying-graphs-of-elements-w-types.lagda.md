@@ -7,16 +7,12 @@ module trees.underlying-graphs-of-elements-w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -25,7 +21,6 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.isolated-points
 open import foundation.negation
-open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
@@ -33,7 +28,6 @@ open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
-open import graph-theory.trails-directed-graphs
 open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
@@ -46,7 +40,9 @@ open import trees.w-types
 
 ## Idea
 
-We assign to each element of a W-type `𝕎 A B` a directed graph. This directed graph is a tree in the graph theoretical sense if and only if each `B x` is a type with decidable equality.
+We assign to each element of a W-type `𝕎 A B` a directed graph. This directed
+graph is a tree in the graph theoretical sense if and only if each `B x` is a
+type with decidable equality.
 
 ## Definition
 
@@ -291,7 +287,10 @@ module _
   node-inclusion-graph-element-𝕎' (tree-𝕎 x α) y n = inl (pair y n)
 ```
 
-Note that it seems unreasonable to expect that `node-inclusion-graph-element-𝕎'` is an embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)` embeds into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node inclusion has the same truncation level as the fiber inclusions
+Note that it seems unreasonable to expect that `node-inclusion-graph-element-𝕎'`
+is an embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)`
+embeds into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node
+inclusion has the same truncation level as the fiber inclusions
 
 ```md
   node-graph-element-𝕎' (α b) → Σ (y : B x), node-graph-element-𝕎' (α y)

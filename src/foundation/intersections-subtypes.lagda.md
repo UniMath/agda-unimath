@@ -9,17 +9,18 @@ module foundation.intersections-subtypes where
 ```agda
 open import foundation.conjunction
 open import foundation.decidable-subtypes
-open import foundation.double-powersets
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.universe-levels
+
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The intersection of two subtypes `A` and `B` is the subtype that contains the elements that are in `A` and in `B`.
+The intersection of two subtypes `A` and `B` is the subtype that contains the
+elements that are in `A` and in `B`.
 
 ## Definition
 

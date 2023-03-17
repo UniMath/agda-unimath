@@ -121,7 +121,7 @@ eq-cong-le-dist-ℕ k x y H K =
   eq-dist-ℕ x y (is-zero-div-ℕ k (dist-ℕ x y) H K)
 ```
 
-```
+```agda
 eq-cong-le-ℕ :
   (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → x ＝ y
 eq-cong-le-ℕ k x y H K =

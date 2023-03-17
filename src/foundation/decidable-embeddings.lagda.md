@@ -40,7 +40,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map is said to be a decidable embedding if it is an embedding and its fibers are decidable types.
+A map is said to be a decidable embedding if it is an embedding and its fibers
+are decidable types.
 
 ## Definitions
 
@@ -65,7 +66,7 @@ is-decidable-map-is-decidable-emb H = pr2 H
 
 ### Decidably propositional maps
 
-```
+```agda
 is-decidable-prop-map :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
 is-decidable-prop-map {Y = Y} f = (y : Y) → is-decidable-prop (fib f y)

@@ -64,13 +64,14 @@ agda-html: src/everything.lagda.md
 	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
+SUMMARY.md:
+	@python3 scripts/generate_main_index_file.py
+
 .PHONY: website
-website: agda-html
+website: agda-html \
+		SUMMARY.md
 	@cp $(METAFILES) docs/
 	@mdbook build
-
-update-contributors:
-	@python update-contributors.py
 
 .phony: serve-website
 serve-website:
@@ -87,5 +88,12 @@ clean:
 
 .PHONY : pre-commit
 pre-commit:
-	@make check
 	@pre-commit run --all-files
+	@make check
+
+website-dev:
+	@curl https://sh.rustup.rs -sSf | sh
+	@cargo install mdbook
+	@cargo install mdbook-linkcheck
+	@cargo install mdbook-katex
+	@cargo install mdbook-pagetoc

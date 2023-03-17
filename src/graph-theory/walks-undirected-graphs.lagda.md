@@ -15,7 +15,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
@@ -36,7 +35,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A walk in an undirected graph consists of a list of edges that connect the starting point with the end point. Walks may repeat edges and pass through the same vertex multiple times.
+A walk in an undirected graph consists of a list of edges that connect the
+starting point with the end point. Walks may repeat edges and pass through the
+same vertex multiple times.
 
 ## Definitions
 
@@ -233,7 +234,6 @@ module _
       ( total-edge-Undirected-Graph G)
       ( is-edge-on-walk-Undirected-Graph' G w)
       ( λ z → pair p e ＝ z))
-
 ```
 
 ### Right unit law for concatenation of walks
@@ -252,7 +252,6 @@ module _
     ap
       ( cons-walk-Undirected-Graph p e)
       ( right-unit-law-concat-walk-Undirected-Graph w)
-
 ```
 
 ### For any walk `w` from `x` to `y` and any vertex `v` on `w`, we can decompose `w` into a walk `w1` from `x` to `v` and a walk `w2` from `v` to `y`.

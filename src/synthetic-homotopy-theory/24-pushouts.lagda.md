@@ -1,8 +1,12 @@
-# Formalisation of the Symmetry Book
+# Formalisation of the Symmetry Book - 24 pushouts
 
 ```agda
 module synthetic-homotopy-theory.24-pushouts where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
@@ -31,7 +35,11 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
+```
 
+</details>
+
+```agda
 -- Exercises
 
 -- Exercise 13.1

@@ -13,9 +13,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.exponents-species
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.species
 ```
@@ -24,7 +22,8 @@ open import univalent-combinatorics.species
 
 ## Idea
 
-The cartesian product of two species `F` and `G` is their pointwise cartesian product.
+The cartesian product of two species `F` and `G` is their pointwise cartesian
+product.
 
 ## Definition
 

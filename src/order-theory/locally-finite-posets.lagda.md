@@ -7,8 +7,6 @@ module order-theory.locally-finite-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -21,7 +19,8 @@ open import order-theory.posets
 
 ## Idea
 
-A poset `X` is said to be locally finite if for every `x, y ∈ X`, the poset `[x, y]` consisting of `z ∈ X` such that `x ≤ z ≤ y`, is finite.
+A poset `X` is said to be locally finite if for every `x, y ∈ X`, the poset
+`[x, y]` consisting of `z ∈ X` such that `x ≤ z ≤ y`, is finite.
 
 ## Definition
 

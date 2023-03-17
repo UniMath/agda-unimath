@@ -10,10 +10,8 @@ module foundation.descent-equivalences where
 open import foundation.equivalences
 
 open import foundation-core.cones-pullbacks
-open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.pullbacks
 open import foundation-core.universe-levels
@@ -23,7 +21,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The descent property of equivalences is a somewhat degenerate form of a descent property. It asserts that in a commuting diagram of the form
+The descent property of equivalences is a somewhat degenerate form of a descent
+property. It asserts that in a commuting diagram of the form
 
 ```md
      p        q
@@ -35,7 +34,8 @@ f|       g|        |h
      i        j
 ```
 
-if the maps `i` and `p` are equivalences, then the right square is a pullback if and only if the outer rectangle is a pullback.
+if the maps `i` and `p` are equivalences, then the right square is a pullback if
+and only if the outer rectangle is a pullback.
 
 ## Theorem
 

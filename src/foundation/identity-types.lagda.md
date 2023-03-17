@@ -10,21 +10,25 @@ module foundation.identity-types where
 open import foundation-core.identity-types public
 
 open import foundation.binary-equivalences
-open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
-open import foundation.universe-levels
 
+open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The equality relation on a type is a reflexive relation, with the universal property that it maps uniquely into any other reflexive relation. In type theory, we introduce the identity type as an inductive family of types, where the induction principle can be understood as expressing that the identity type is the least reflexive relation.
+The equality relation on a type is a reflexive relation, with the universal
+property that it maps uniquely into any other reflexive relation. In type
+theory, we introduce the identity type as an inductive family of types, where
+the induction principle can be understood as expressing that the identity type
+is the least reflexive relation.
 
 ## Properties
 

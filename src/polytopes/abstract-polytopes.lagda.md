@@ -30,9 +30,12 @@ open import univalent-combinatorics
 
 ## Idea
 
-We define abstract polytopes as finitely graded posets satisfying certain axioms. In the classical definition, the grading is a consequence of the axioms. Here, we take finitely graded posets as our starting point
+We define abstract polytopes as finitely graded posets satisfying certain
+axioms. In the classical definition, the grading is a consequence of the axioms.
+Here, we take finitely graded posets as our starting point
 
-The first axiom of polytopes asserts that polytopes have a least and a largest element. This is already defined as
+The first axiom of polytopes asserts that polytopes have a least and a largest
+element. This is already defined as
 
 `least-and-largest-element-finitely-graded-poset-Prop`.
 
@@ -43,7 +46,6 @@ Next, we assert the diamond condition for abstract polytopes.
 ### The diamond condition
 
 ```agda
-
 diamond-condition-finitely-graded-poset-Prop :
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k) →
   Prop (l1 ⊔ l2)
@@ -87,10 +89,11 @@ module _
 
 ### Prepolytopes
 
-We introduce the notion of prepolytopes to be finitely graded posets equipped with a least and a largest element, and satisfying the diamond condition. Before we state the remaining conditions of polytopes, we introduce some terminology
+We introduce the notion of prepolytopes to be finitely graded posets equipped
+with a least and a largest element, and satisfying the diamond condition. Before
+we state the remaining conditions of polytopes, we introduce some terminology
 
 ```agda
-
 Prepolytope : (l1 l2 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2)
 Prepolytope l1 l2 k =
   Σ ( Finitely-Graded-Poset l1 l2 k)
@@ -422,15 +425,17 @@ module _
       is-prop (is-on-path-face-Prepolytope p z)
     is-prop-is-on-path-face-Prepolytope p z =
       is-prop-type-Prop (is-on-path-face-prepolytope-Prop p z)
-
 ```
 
 ### Proof condition P2 of polytopes
 
-The second axiom of polytopes asserts that every maximal chain has k elements. Note that every maximal chain is a path from the bottom element to the top element, which necessarily passes through all dimensions. Therefore, the second axiom follows from our setup. Note that we didn't start with general posets, but with finitely graded posets.
+The second axiom of polytopes asserts that every maximal chain has k elements.
+Note that every maximal chain is a path from the bottom element to the top
+element, which necessarily passes through all dimensions. Therefore, the second
+axiom follows from our setup. Note that we didn't start with general posets, but
+with finitely graded posets.
 
 ```agda
-
 module _
   {l1 l2 : Level} (l : Level) {k : ℕ} (X : Prepolytope l1 l2 k)
   where
@@ -457,12 +462,15 @@ module _
 
 ### Strong connectedness of polytopes
 
-The strong connectedness condition for polytopes asserts that the unordered graph of flags of a polytope is connected. The edges in this graph are punctured flags, i.e., chains that have exactly one element in each dimension except in one dimension that is neither the top nor the bottom dimension. A punctured flag connects the two flags it is a subchain of.
+The strong connectedness condition for polytopes asserts that the unordered
+graph of flags of a polytope is connected. The edges in this graph are punctured
+flags, i.e., chains that have exactly one element in each dimension except in
+one dimension that is neither the top nor the bottom dimension. A punctured flag
+connects the two flags it is a subchain of.
 
 ### The definition of polytopes
 
 ```agda
-
 Polytope :
   (l1 l2 l3 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Polytope l1 l2 l3 k =

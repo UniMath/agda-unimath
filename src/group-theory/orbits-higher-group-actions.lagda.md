@@ -18,7 +18,8 @@ open import group-theory.higher-groups
 
 ## Idea
 
-The type of orbits of a higher group action `X` acted upon by `G` is the total space of `X`.
+The type of orbits of a higher group action `X` acted upon by `G` is the total
+space of `X`.
 
 ## Definition
 

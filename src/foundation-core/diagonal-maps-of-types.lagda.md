@@ -8,7 +8,6 @@ module foundation-core.diagonal-maps-of-types where
 
 ```agda
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
@@ -24,7 +23,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the diagonal into `A × A`.
+The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the
+diagonal into `A × A`.
 
 ## Definition
 

@@ -19,7 +19,8 @@ open import foundation.decidable-types
 
 ## Idea
 
-Euler's totient function `φ : ℕ → ℕ` is the function that maps a natural number `n` to the number of `x < n` that are relatively prime with `n`.
+Euler's totient function `φ : ℕ → ℕ` is the function that maps a natural number
+`n` to the number of `x < n` that are relatively prime with `n`.
 
 ## Definition
 

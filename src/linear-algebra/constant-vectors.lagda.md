@@ -18,7 +18,8 @@ open import linear-algebra.vectors
 
 ## Idea
 
-Diagonal vectors are vectors on the diagonal, i.e., they are vectors of which all coefficients are equal.
+Diagonal vectors are vectors on the diagonal, i.e., they are vectors of which
+all coefficients are equal.
 
 ## Definition
 

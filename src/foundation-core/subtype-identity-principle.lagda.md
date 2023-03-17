@@ -12,7 +12,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.type-arithmetic-dependent-pair-types
@@ -23,11 +22,16 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The subtype identity principle allows us to efficiently characterize the identity type of a subtype, using a characterization of the identity type of the base type.
+The subtype identity principle allows us to efficiently characterize the
+identity type of a subtype, using a characterization of the identity type of the
+base type.
 
 ## Lemma
 
-The following is a general construction that will help us show that the identity type of a subtype agrees with the identity type of the  original type. We already know that the first projection of a family of propositions is an embedding, but the following lemma still has its uses.
+The following is a general construction that will help us show that the identity
+type of a subtype agrees with the identity type of the original type. We already
+know that the first projection of a family of propositions is an embedding, but
+the following lemma still has its uses.
 
 ```agda
 module _

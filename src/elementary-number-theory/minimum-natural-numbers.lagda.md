@@ -23,7 +23,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define the operation of minimum (greatest lower bound) for the natural numbers.
+We define the operation of minimum (greatest lower bound) for the natural
+numbers.
 
 ## Definition
 

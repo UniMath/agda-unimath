@@ -18,7 +18,6 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.groups
 
 open import ring-theory.rings
 ```

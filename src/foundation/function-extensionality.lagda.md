@@ -21,9 +21,13 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The function extensionality axiom asserts that identifications of (dependent) functions are equivalently described as pointwise equalities between them. In other words, a function is completely determined by its values.
+The function extensionality axiom asserts that identifications of (dependent)
+functions are equivalently described as pointwise equalities between them. In
+other words, a function is completely determined by its values.
 
-In this file we postulate the function extensionality axiom. Its statement is defined in [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+In this file we postulate the function extensionality axiom. Its statement is
+defined in
+[`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
 
 ## Postulate
 

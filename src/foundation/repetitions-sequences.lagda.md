@@ -9,20 +9,22 @@ module foundation.repetitions-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions
 open import foundation.sequences
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.negation
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A repetition in a sequence `a : ℕ → A` consists of a pair of distinct natural numbers `m` and `n` such that `a m = a n`.
+A repetition in a sequence `a : ℕ → A` consists of a pair of distinct natural
+numbers `m` and `n` such that `a m = a n`.
 
 ## Definition
 

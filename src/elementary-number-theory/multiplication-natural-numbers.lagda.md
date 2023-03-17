@@ -12,7 +12,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -246,7 +245,7 @@ neq-mul-ℕ m n p =
         ( ap (add-ℕ (succ-ℕ m)) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
 ```
 
-### The multiplicative monoid ℕ*
+### The multiplicative monoid ℕ\*
 
 ```agda
 ℕ*-Semigroup : Semigroup lzero

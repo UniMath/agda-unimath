@@ -35,7 +35,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The greatest common divisor of two natural numbers `x` and `y` is a number `gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and `y` if and only if it is a divisor of `gcd x y`.
+The greatest common divisor of two natural numbers `x` and `y` is a number
+`gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and
+`y` if and only if it is a divisor of `gcd x y`.
 
 ## Definition
 
@@ -390,5 +392,4 @@ is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
 is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
 is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
   ((is-commutative-gcd-ℕ 0 a) ∙ H)
-
 ```

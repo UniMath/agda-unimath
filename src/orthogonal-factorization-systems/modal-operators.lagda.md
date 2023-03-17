@@ -23,7 +23,8 @@ open import foundation.universe-levels
 
 Underlying every modality is a **modal operator**, which is an operation on
 types that construct new types. For a _monadic_ modality `○`, there is moreover
-a **modal unit** that compares every type `X` to its modal type `○ X` (`X → ○ X`).
+a **modal unit** that compares every type `X` to its modal type `○ X`
+(`X → ○ X`).
 
 ## Definitions
 
@@ -125,8 +126,8 @@ module _
 
 ### Locally small modal operators
 
-We say a modal operator is _locally small_ if it maps small types to
-locally small types.
+We say a modal operator is _locally small_ if it maps small types to locally
+small types.
 
 ```agda
 is-locally-small-modal-operator :
@@ -154,9 +155,9 @@ is-locally-small-locally-small-modal-operator = pr2
 ### Σ-closed modal operators
 
 We can say a modal operator `○` is Σ-closed if for every type `X` such that for
-every term of `○ X` and for every family `P` over `X` equipped with a section
-of `○ ∘ P`, there is also a term of `○ (Σ X P)`. Note that this is not
-completely conventional terminology.
+every term of `○ X` and for every family `P` over `X` equipped with a section of
+`○ ∘ P`, there is also a term of `○ (Σ X P)`. Note that this is not completely
+conventional terminology.
 
 ```agda
 is-Σ-closed-modal-operator :
@@ -167,4 +168,7 @@ is-Σ-closed-modal-operator {l1} ○ =
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020 ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526), [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
+  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
+  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
+  [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))

@@ -8,18 +8,29 @@ module foundation.boolean-reflection where
 
 ```agda
 open import foundation.booleans
-open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.empty-types
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The idea of boolean reflection is to use the equality checker of the proof assistant in order to offload proof obligations to the computer. This works in two steps. First, we construct the booleanization, which is a map `is-decidable A → bool`, that sends elements of the form `inl a` to `true` and elements of the form `inr na` to `false`. Then we construct the boolean reflection function, which takes a decision `d : is-decidable A` and an identification `Id (booleanization d) true` to an element of `A`. This allows us to construct an element of `A` if it has elements, by `boolean-reflection d refl`. Indeed, if `A` was nonempty, then the decision `d : is-decidable A` must have been of the form `inl a` for some element `a`, and that `refl` is indeed an identification `Id (booleanization d) true`.
+The idea of boolean reflection is to use the equality checker of the proof
+assistant in order to offload proof obligations to the computer. This works in
+two steps. First, we construct the booleanization, which is a map
+`is-decidable A → bool`, that sends elements of the form `inl a` to `true` and
+elements of the form `inr na` to `false`. Then we construct the boolean
+reflection function, which takes a decision `d : is-decidable A` and an
+identification `Id (booleanization d) true` to an element of `A`. This allows us
+to construct an element of `A` if it has elements, by
+`boolean-reflection d refl`. Indeed, if `A` was nonempty, then the decision
+`d : is-decidable A` must have been of the form `inl a` for some element `a`,
+and that `refl` is indeed an identification `Id (booleanization d) true`.
 
 ## Definition
 

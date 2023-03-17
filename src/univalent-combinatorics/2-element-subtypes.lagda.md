@@ -10,14 +10,11 @@ module univalent-combinatorics.2-element-subtypes where
 open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
@@ -27,11 +24,9 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.surjective-maps
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
@@ -41,7 +36,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A 2-element subtype of a type `A` is a subtype `P` of `A` of which its underlying type `Σ A P` has cardinality 2. Such a subtype is said to be decidable if the proposition `P x` is decidable for every `x : A`.
+A 2-element subtype of a type `A` is a subtype `P` of `A` of which its
+underlying type `Σ A P` has cardinality 2. Such a subtype is said to be
+decidable if the proposition `P x` is decidable for every `x : A`.
 
 ## Definitions
 
@@ -144,7 +141,8 @@ module _
 
 ### Morphisms of 2-element-subtypes
 
-A moprhism of 2-element subtypes `P` and `Q` is just a family of maps `P x → Q x`.
+A moprhism of 2-element subtypes `P` and `Q` is just a family of maps
+`P x → Q x`.
 
 ```agda
 {-

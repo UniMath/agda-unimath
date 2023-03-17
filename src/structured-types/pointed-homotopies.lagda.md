@@ -25,7 +25,10 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed homotopy between pointed dependent functions is a pointed dependent function of the pointed family of pointwise identifications. Since pointed homotopies are defined for pointed dependent functions, a pointed homotopy between pointed homotopies is just an instance of a pointed homotopy.
+A pointed homotopy between pointed dependent functions is a pointed dependent
+function of the pointed family of pointwise identifications. Since pointed
+homotopies are defined for pointed dependent functions, a pointed homotopy
+between pointed homotopies is just an instance of a pointed homotopy.
 
 ## Definition
 

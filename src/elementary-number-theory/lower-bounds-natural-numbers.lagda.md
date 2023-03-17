@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A lower bound for a type family `P` over the natural numbers is a natural number `n` such that `P x → n ≤ x` for all `x : ℕ`.
+A lower bound for a type family `P` over the natural numbers is a natural number
+`n` such that `P x → n ≤ x` for all `x : ℕ`.
 
 ## Definition
 

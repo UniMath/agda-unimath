@@ -15,12 +15,8 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
-open import foundation.mere-equality
 open import foundation.propositional-truncations
-open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups

@@ -7,32 +7,33 @@ module foundation.equality-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negation
-open import foundation.sets
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.negation
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-In order to construct an identification `Id x y` in a coproduct `coprod A B`, both `x` and `y` must be of the form `inl _` or of the form `inr _`. If that is the case, then an identification can be constructed by constructin an identification in A or in B, according to the case. This leads to the characterization of identity types of coproducts.
+In order to construct an identification `Id x y` in a coproduct `coprod A B`,
+both `x` and `y` must be of the form `inl _` or of the form `inr _`. If that is
+the case, then an identification can be constructed by constructin an
+identification in A or in B, according to the case. This leads to the
+characterization of identity types of coproducts.
 
 ## Definition
 
@@ -93,7 +94,8 @@ module _
   pr2 (extensionality-coprod x y) = is-equiv-Eq-eq-coprod x y
 ```
 
-Now we use the characterization of the identity type to obtain the desired equivalences.
+Now we use the characterization of the identity type to obtain the desired
+equivalences.
 
 ```agda
 module _

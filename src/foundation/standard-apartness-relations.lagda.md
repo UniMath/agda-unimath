@@ -8,22 +8,23 @@ module foundation.standard-apartness-relations where
 
 ```agda
 open import foundation.apartness-relations
-open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.law-of-excluded-middle
-open import foundation.logical-equivalences
-open import foundation.negation
 open import foundation.tight-apartness-relations
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.negation
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-An apartness relation `#` is said to be standard if the law of excluded middle implies that `#` is equivalent to negated equality.
+An apartness relation `#` is said to be standard if the law of excluded middle
+implies that `#` is equivalent to negated equality.
 
 ## Definition
 

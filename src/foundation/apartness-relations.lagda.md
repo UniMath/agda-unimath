@@ -8,17 +8,18 @@ module foundation.apartness-relations where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.empty-types
 open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.identity-types
+open import foundation-core.negation
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -27,11 +28,14 @@ open import foundation.universe-levels
 
 An apartness relation on a type `A` is a relation `R` which is
 
-  - Antireflexive: For any `a : A` we have `¬ (R a a)`
-  - Symmetric: For any `a b : A` we have `R a b → R b a`
-  - Cotransitive: For any `a b c : A` we have `R a b → R a c ∨ R b c`.
+- Antireflexive: For any `a : A` we have `¬ (R a a)`
+- Symmetric: For any `a b : A` we have `R a b → R b a`
+- Cotransitive: For any `a b c : A` we have `R a b → R a c ∨ R b c`.
 
-The idea of an apartness relation `R` is that `R a b` holds if you can positively establish a difference between `a` and `b`. For example, two subsets `A` and `B` of a type `X` are apart if we can find an element that is in the symmetric difference of `A` and `B`.
+The idea of an apartness relation `R` is that `R a b` holds if you can
+positively establish a difference between `a` and `b`. For example, two subsets
+`A` and `B` of a type `X` are apart if we can find an element that is in the
+symmetric difference of `A` and `B`.
 
 ## Definitions
 

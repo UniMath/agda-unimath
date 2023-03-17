@@ -7,25 +7,19 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.injective-maps
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
-
-open import foundation-core.universal-property-truncation
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The universal property of n-truncations implies that n-truncations are determined uniquely up to a unique equivalence.
+The universal property of n-truncations implies that n-truncations are
+determined uniquely up to a unique equivalence.
 
 ```agda
 module _

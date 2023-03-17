@@ -7,15 +7,16 @@ module foundation.double-negation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.functions
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -32,7 +33,8 @@ We define double negation and triple negation
 ¬¬¬ P = ¬ (¬ (¬ P))
 ```
 
-We also define the introduction rule for double negation, and the action on maps of double negation.
+We also define the introduction rule for double negation, and the action on maps
+of double negation.
 
 ```agda
 intro-dn : {l : Level} {P : UU l} → P → ¬¬ P

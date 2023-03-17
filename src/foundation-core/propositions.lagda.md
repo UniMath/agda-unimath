@@ -23,7 +23,9 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A type is considered to be a proposition if its identity types are contractible. This condition is equivalent to the condition that it has up to identification at most one element.
+A type is considered to be a proposition if its identity types are contractible.
+This condition is equivalent to the condition that it has up to identification
+at most one element.
 
 ## Definition
 
@@ -50,7 +52,8 @@ module _
 
 ## Examples
 
-We prove here only that any contractible type is a proposition. The fact that the empty type and the unit type are propositions can be found in
+We prove here only that any contractible type is a proposition. The fact that
+the empty type and the unit type are propositions can be found in
 
 ```md
 foundation.empty-types
@@ -61,7 +64,7 @@ foundation.unit-type
 
 ### To show that a type is a proposition, we may assume it is inhabited
 
-```
+```agda
 abstract
   is-prop-is-inhabited :
     {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X

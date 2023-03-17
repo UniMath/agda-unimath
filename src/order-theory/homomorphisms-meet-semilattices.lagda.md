@@ -10,25 +10,21 @@ module order-theory.homomorphisms-meet-semilattices where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
 ```
 
 </details>
 
 ## Idea
-A meet semi-lattice homomorphism is an order preserving map between the underlying posets that also preserves meets.
+
+A meet semi-lattice homomorphism is an order preserving map between the
+underlying posets that also preserves meets.
 
 ```agda
-
 module _
   {l1 l2 l3 l4 : Level} (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
   where
@@ -50,5 +46,4 @@ module _
 
   preserves-meet-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
   preserves-meet-hom-Meet-Semilattice = pr2 ∘ pr2
-
 ```

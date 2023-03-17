@@ -7,31 +7,34 @@ module foundation.universal-property-propositional-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
-open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A map `f : A → P` into a proposition `P` is said to satisfy the universal property of the propositional truncation of `A`, or is simply said to be a propositional truncation of `A`, if any map `g : A → Q` into a proposition `Q` extends uniquely along `f`.
+A map `f : A → P` into a proposition `P` is said to satisfy the universal
+property of the propositional truncation of `A`, or is simply said to be a
+propositional truncation of `A`, if any map `g : A → Q` into a proposition `Q`
+extends uniquely along `f`.
 
 ## Definition
 
@@ -64,7 +67,8 @@ universal-property-propositional-truncation l {A = A} P f =
 
 ### Extension property of the propositional truncation
 
-This is a simplified form of the universal properties, that works because we're mapping into propositions.
+This is a simplified form of the universal properties, that works because we're
+mapping into propositions.
 
 ```agda
 extension-property-propositional-truncation :

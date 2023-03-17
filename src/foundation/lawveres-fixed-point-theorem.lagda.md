@@ -7,21 +7,22 @@ module foundation.lawveres-fixed-point-theorem where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
-open import foundation.universe-levels
 
+open import foundation-core.dependent-pair-types
 open import foundation-core.function-extensionality
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Lawvere's fixed point theorem asserts that if there is a surjective map `A → (A → B)`, then any map `B → B` must have a fixed point.
+Lawvere's fixed point theorem asserts that if there is a surjective map
+`A → (A → B)`, then any map `B → B` must have a fixed point.
 
 ## Theorem
 

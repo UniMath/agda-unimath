@@ -20,7 +20,8 @@ open import trees.w-types
 
 ## Idea
 
-We say that a tree `S` is an element of a tree `tree-𝕎 x α` if `S` can be equipped with an element `y : B x` such that `α y = S`.
+We say that a tree `S` is an element of a tree `tree-𝕎 x α` if `S` can be
+equipped with an element `y : B x` such that `α y = S`.
 
 ## Definition
 

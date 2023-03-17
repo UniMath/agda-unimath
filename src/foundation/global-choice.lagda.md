@@ -7,13 +7,13 @@ module foundation.global-choice where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.negation
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
@@ -23,7 +23,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Global choice is the principle that there is a map from `type-trunc-Prop A` back into `A`, for any type `A`. Here, we say that a type `A` satisfies global choice if there is such a map.
+Global choice is the principle that there is a map from `type-trunc-Prop A` back
+into `A`, for any type `A`. Here, we say that a type `A` satisfies global choice
+if there is such a map.
 
 ## Definition
 

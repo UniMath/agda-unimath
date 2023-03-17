@@ -1,8 +1,12 @@
-# Formalisation of the Symmetry Book
+# Formalisation of the Symmetry Book - 26 descent
 
 ```agda
 module synthetic-homotopy-theory.26-descent where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-pullbacks
 open import foundation.contractible-maps
@@ -10,8 +14,8 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
@@ -31,7 +35,11 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
+```
 
+</details>
+
+```agda
 -- Section 18.1 Five equivalent characterizations of pushouts
 
 dep-cocone :

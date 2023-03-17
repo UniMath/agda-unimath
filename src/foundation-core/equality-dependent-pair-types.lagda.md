@@ -23,12 +23,13 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An identification `(pair x y) ＝ (pair x' y')` in a dependent pair type `Σ A B` is equivalently described as a pair `pair α β` consisting of an identification `α : x ＝ x'` and an identification `β : (tr B α y) ＝ y'`.
+An identification `(pair x y) ＝ (pair x' y')` in a dependent pair type `Σ A B`
+is equivalently described as a pair `pair α β` consisting of an identification
+`α : x ＝ x'` and an identification `β : (tr B α y) ＝ y'`.
 
 ## Definition
 
 ```agda
-
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -111,4 +112,4 @@ module _
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
 - Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-equality-fibers-of-maps.md).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.md).

@@ -21,7 +21,6 @@ open import group-theory.concrete-groups
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-concrete-groups
 
-open import structured-types.fibers-of-pointed-maps
 open import structured-types.pointed-types
 ```
 
@@ -29,7 +28,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The kernel of a concrete group homomorphsim `Bf : BG →* BH` is the connected component at the base point of the fiber of `Bf`.
+The kernel of a concrete group homomorphsim `Bf : BG →* BH` is the connected
+component at the base point of the fiber of `Bf`.
 
 ## Definition
 

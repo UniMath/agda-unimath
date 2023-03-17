@@ -19,7 +19,8 @@ open import ring-theory.nilpotent-elements-rings
 
 ## Idea
 
-The nilradical of a commutative ring is the ideal consisting of all nilpotent elements.
+The nilradical of a commutative ring is the ideal consisting of all nilpotent
+elements.
 
 ## Definitions
 

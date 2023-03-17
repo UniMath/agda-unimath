@@ -28,7 +28,8 @@ open import group-theory.groups
 
 ## Idea
 
-A morphism of group actions from a G-set X to a G-set Y is a map from X to Y preserving the group action.
+A morphism of group actions from a G-set X to a G-set Y is a map from X to Y
+preserving the group action.
 
 ## Definitions
 

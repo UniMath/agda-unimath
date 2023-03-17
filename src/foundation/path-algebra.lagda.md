@@ -10,23 +10,36 @@ module foundation.path-algebra where
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications
-open import foundation.constant-maps
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.universe-levels
+
+open import foundation-core.constant-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-As we iterate identity type (i.e., consider the type of identifications between two identifications), the identity types gain further structure.
+As we iterate identity type (i.e., consider the type of identifications between
+two identifications), the identity types gain further structure.
 
-Identity types of identity types are types of the form `p ＝ q`, where `p q : x ＝ y` and `x y : A`. Using the homotopy interpretation of type theory, elements of such a type are often called *2-paths* and a twice iterated identity type is often called a *type of 2-paths*.
+Identity types of identity types are types of the form `p ＝ q`, where
+`p q : x ＝ y` and `x y : A`. Using the homotopy interpretation of type theory,
+elements of such a type are often called _2-paths_ and a twice iterated identity
+type is often called a _type of 2-paths_.
 
-Since 2-paths are just identifications, they have the usual operations and coherences on paths/identifications. In the context of 2-paths, this famliar concatination operation is called vertical concatination (see `vertical-concat-Id²` below). However, 2-paths have novel operations and coherences derived from the operations and coherences of the boundary 1-paths (these are `p` and `q` in the example above). Since concatination of 1-paths is a functor, it has an induced action on paths. We call this operation horizontal concatination (see `horizontal-concat-Id²` below). It comes with the standard coherences of an action on paths function, as well as coherences induced by coherences on the boundary 1-paths.
+Since 2-paths are just identifications, they have the usual operations and
+coherences on paths/identifications. In the context of 2-paths, this famliar
+concatination operation is called vertical concatination (see
+`vertical-concat-Id²` below). However, 2-paths have novel operations and
+coherences derived from the operations and coherences of the boundary 1-paths
+(these are `p` and `q` in the example above). Since concatination of 1-paths is
+a functor, it has an induced action on paths. We call this operation horizontal
+concatination (see `horizontal-concat-Id²` below). It comes with the standard
+coherences of an action on paths function, as well as coherences induced by
+coherences on the boundary 1-paths.
 
 ## Properties
 
@@ -178,8 +191,8 @@ right-unit-law-horizontal-concat-Id² :
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
 ```
 
-Horizontal concatination satisfies an additional "2-dimensional" unit law (on both the left and right) induced
-by the unit laws on the boundary 1-paths.
+Horizontal concatination satisfies an additional "2-dimensional" unit law (on
+both the left and right) induced by the unit laws on the boundary 1-paths.
 
 ```agda
 module _
@@ -213,7 +226,8 @@ module _
   horizontal-inv-Id² α = ap inv α
 ```
 
-This operation satisfies a left and right idenity induced by the inverse laws on 1-paths
+This operation satisfies a left and right idenity induced by the inverse laws on
+1-paths
 
 ```agda
 module _
@@ -290,7 +304,8 @@ module _
   ap² = (ap (ap f)) α
 ```
 
-Since this is define in terms of `ap`, it comes with the standard coherences. It also has induced cohereces.
+Since this is define in terms of `ap`, it comes with the standard coherences. It
+also has induced cohereces.
 
 Inverse law.
 
@@ -348,13 +363,20 @@ module _
 
 ## Properties of 3-paths
 
-3-paths are identifications of 2-paths. In symbols, a type of 3-paths is a type of the form `α ＝ β` where `α β : p ＝ q` and `p q : x ＝ y`.
+3-paths are identifications of 2-paths. In symbols, a type of 3-paths is a type
+of the form `α ＝ β` where `α β : p ＝ q` and `p q : x ＝ y`.
 
 ### Concatination in a type of 3-paths
 
-Like with 2-paths, 3-paths have the standard operations on equalties, plus the operations induced by the operations on 1-paths. But 3-paths also have operations induced by those on 2-paths. Thus there are three ways to concatenate in triple identity types. We name the three concatenations of triple identity types x-, y-, and z-concatenation, after the standard names for the three axis in 3-dimensional space.
+Like with 2-paths, 3-paths have the standard operations on equalties, plus the
+operations induced by the operations on 1-paths. But 3-paths also have
+operations induced by those on 2-paths. Thus there are three ways to concatenate
+in triple identity types. We name the three concatenations of triple identity
+types x-, y-, and z-concatenation, after the standard names for the three axis
+in 3-dimensional space.
 
-The x-concatenation operation corresponds the standard concatination of equalities.
+The x-concatenation operation corresponds the standard concatination of
+equalities.
 
 ```agda
 x-concat-Id³ :
@@ -363,7 +385,8 @@ x-concat-Id³ :
 x-concat-Id³ σ τ = vertical-concat-Id² σ τ
 ```
 
-The y-concatenation operation corresponds the operation induced by the concatination on 1-paths.
+The y-concatenation operation corresponds the operation induced by the
+concatination on 1-paths.
 
 ```agda
 y-concat-Id³ :
@@ -372,7 +395,8 @@ y-concat-Id³ :
 y-concat-Id³ σ τ = horizontal-concat-Id² σ τ
 ```
 
-The z-concatenation operation corresponds the concatination induced by the horizontal concatination on 2-paths.
+The z-concatenation operation corresponds the concatination induced by the
+horizontal concatination on 2-paths.
 
 ```agda
 z-concat-Id³ :
@@ -451,7 +475,10 @@ interchange-y-z-concat-Id³ refl refl refl refl = inv right-unit
 
 ## Properties of 4-paths
 
-The pattern for concatination of 1, 2, and 3-paths continues. There are four ways to concatenate in quadruple identity types. We name the three non-standard concatenations in quadruple identity types i-, j-, and k-concatenation, after the standard names for the quaternions i, j, and k.
+The pattern for concatination of 1, 2, and 3-paths continues. There are four
+ways to concatenate in quadruple identity types. We name the three non-standard
+concatenations in quadruple identity types i-, j-, and k-concatenation, after
+the standard names for the quaternions i, j, and k.
 
 ### Concatination of four paths.
 

@@ -1,10 +1,8 @@
 # Commuting triangles of maps
 
-<<<<<<< Updated upstream
 ```agda
 {-# OPTIONS --safe #-}
 module foundation-core.commuting-triangles-of-maps where
-
 ```
 
 <details><summary>Imports</summary>
@@ -29,7 +27,8 @@ A triangle of maps
      X
 ```
 
-is said to commute if there is a homotopy between the map on the left and the composite map.
+is said to commute if there is a homotopy between the map on the left and the
+composite map.
 
 ## Definition
 

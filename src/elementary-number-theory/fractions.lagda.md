@@ -23,7 +23,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of fractions is the type of pairs `n/m` consisting of an integer `n` and a positive integer `m`. The type of rational numbers is a retract of the type of fractions.
+The type of fractions is the type of pairs `n/m` consisting of an integer `n`
+and a positive integer `m`. The type of rational numbers is a retract of the
+type of fractions.
 
 ## Definitions
 
@@ -150,5 +152,4 @@ eq-rel-sim-fraction-ℤ = pair (sim-fraction-ℤ-Prop)
   ( pair' (λ {x} → refl-sim-fraction-ℤ x)
     ( pair' (λ {x y} → symm-sim-fraction-ℤ x y)
       (λ {x y z} → trans-sim-fraction-ℤ x y z)))
-
 ```

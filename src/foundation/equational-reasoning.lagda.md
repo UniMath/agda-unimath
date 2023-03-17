@@ -1,8 +1,7 @@
 # Equational reasoning
 
-Elisabeth Bonnevier, 31 May 2022.
-Egbert Rijke, 31 August 2022.
-Szumie Xie, 31 August 2022.
+Elisabeth Bonnevier, 31 May 2022. Egbert Rijke, 31 August 2022. Szumie Xie, 31
+August 2022.
 
 ```agda
 module foundation.equational-reasoning where
@@ -44,11 +43,12 @@ x ≤ a by ineq-1 inside X
 ```
 
 where `equiv-x` and `ineq-x` are proofs of respectively the equivalences or
-inequalities. Note that for inequalities we also need to pass the preorder as an argument.
+inequalities. Note that for inequalities we also need to pass the preorder as an
+argument.
 
 We write Agda code that allows for such reasoning. The code for equational
 reasoning for equalities and equivalences is based on Martín Escardó's Agda code
-[1,2] and the Agda standard library [3].
+and the Agda standard library, see references below.
 
 ## Definitions
 
@@ -194,6 +194,11 @@ preorder X reasoning
 
 ## References
 
-1. Martín Escardó. <https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda>
-2. Martín Escardó. <https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda>
-3. The Agda standard library. <https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda>
+1. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda>
+
+2. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda>
+
+3. The Agda standard library.
+   <https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda>

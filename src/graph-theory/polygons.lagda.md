@@ -12,19 +12,15 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.fibers-of-maps
 open import foundation.functoriality-propositional-truncation
-open import foundation.injective-maps
 open import foundation.mere-equivalences
-open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
-open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.finite-types
@@ -34,7 +30,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A polygon is an undirected graph that is merely equivalent to a graph with vertices `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each `k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a concrete presentation of the dihedral group `D_k`.
+A polygon is an undirected graph that is merely equivalent to a graph with
+vertices `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines
+for each `k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a
+concrete presentation of the dihedral group `D_k`.
 
 ## Definition
 

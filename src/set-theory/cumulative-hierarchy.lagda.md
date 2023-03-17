@@ -27,9 +27,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.transport
 open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -40,13 +38,13 @@ open import orthogonal-factorization-systems.lifts-of-maps
 
 ## Idea
 
-The cumulative hierarchy is a model of set theory.
-Instead of introducing it as a HIT, as in the HoTT Book [1, §10.5], we introduce
-its induction principle, following [2].
+The cumulative hierarchy is a model of set theory. Instead of introducing it as
+a HIT, as in the HoTT Book Section 10.4, we introduce its induction principle,
+following Reference 2 below.
 
 ## Definitions
 
-###
+### Smaller image
 
 ```agda
 has-smaller-image :
@@ -67,7 +65,8 @@ has-same-image {l1} {l2} {l3} {A} {B} {C} f g =
 
 ### Pseudo cumulative hierarchy
 
-A type is a pseudo cumulative hierarchy if it has the structure of a cumulative hierarchy, but not necessarily its induction principle.
+A type is a pseudo cumulative hierarchy if it has the structure of a cumulative
+hierarchy, but not necessarily its induction principle.
 
 ```agda
 has-cumulative-hierarchy-structure :
@@ -396,7 +395,8 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
       eq-iff (τ f g e₁ IH₁ IH₂ hIH₁) (τ g f e₂ IH₂ IH₁ hIH₂)
 ```
 
-Another simplification of the recursion principle, when recursive calls are not needed.
+Another simplification of the recursion principle, when recursive calls are not
+needed.
 
 ```agda
   simple-prop-recursion-principle-cumulative-hierarchy :
@@ -583,6 +583,7 @@ Another simplification of the recursion principle, when recursive calls are not 
       ( λ f H H₁ H₂ →
         pre-extensionality-∈-cumulative-hierarchy
           f x H₁ H₂)
+<<<<<<< HEAD
 ```
 
 ### Empty set axiom
@@ -738,9 +739,15 @@ Another simplification of the recursion principle, when recursive calls are not 
                         ( ∈-cumulative-hierarchy-mere-preimage K))})
                     ( H))))))})
       ( underlying-function-cumulative-hierarchy x)
+=======
+>>>>>>> master
 ```
 
 ## References
 
-1. Institute for Advanced Study. Homotopy Type Theory: Univalent Foundations of Mathematics.
-2. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg and Chuangjie Xu. <https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html>
+1. Institute for Advanced Study. Homotopy Type Theory: Univalent Foundations of
+   Mathematics.
+
+1. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg
+   and Chuangjie Xu.
+   <https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html>

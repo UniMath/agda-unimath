@@ -19,7 +19,8 @@ open import group-theory.transitive-concrete-group-actions
 
 ## Idea
 
-A normal subgroup is a fixed point of the conjugation action on the (large) set of all subgroups
+A normal subgroup is a fixed point of the conjugation action on the (large) set
+of all subgroups
 
 ## Definition
 

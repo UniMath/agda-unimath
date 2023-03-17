@@ -9,12 +9,9 @@ module orthogonal-factorization-systems.orthogonal-maps where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.pullback-hom
 ```
 
@@ -23,9 +20,11 @@ open import orthogonal-factorization-systems.pullback-hom
 ## Idea
 
 The map `f : A → X` is said to be _orthogonal to_ `g : B → Y` if the
-pullback-hom is an equivalence. This means that there is a unique lifting operation between `f` and `g`.
+pullback-hom is an equivalence. This means that there is a unique lifting
+operation between `f` and `g`.
 
-In this case we say that `f` is _left orthogonal_ to `g` and `g` is _right orthogonal_ to `f`.
+In this case we say that `f` is _left orthogonal_ to `g` and `g` is _right
+orthogonal_ to `f`.
 
 ## Definition
 

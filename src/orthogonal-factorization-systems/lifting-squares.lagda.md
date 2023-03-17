@@ -7,25 +7,12 @@ module orthogonal-factorization-systems.lifting-squares where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equational-reasoning
-open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.path-algebra
-open import foundation.structure-identity-principle
-open import foundation.truncation-levels
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
@@ -49,8 +36,7 @@ A _lifting square_ is a commuting square
        i
 ```
 
-together with a diagonal map `j : X → B` such
-that the complete diagram
+together with a diagonal map `j : X → B` such that the complete diagram
 
 ```md
        h
@@ -63,9 +49,8 @@ that the complete diagram
        i
 ```
 
-commutes. This we phrase as `j` being a simultaneous
-extension of `h` along `f` and lift of `i` along `g`,
-satisfying a higher coherence with the original
+commutes. This we phrase as `j` being a simultaneous extension of `h` along `f`
+and lift of `i` along `g`, satisfying a higher coherence with the original
 commutativity proof.
 
 ## Definition

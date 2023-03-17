@@ -10,20 +10,12 @@ module group-theory.symmetric-groups where
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.subtypes
-open import foundation.subuniverses
-open import foundation.truncated-types
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -163,7 +155,6 @@ module _
     is-sec-hom-inv-symmetric-group-equiv-Set
   pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
     is-retr-hom-inv-symmetric-group-equiv-Set
-
 ```
 
 ### The symmetric group and the abstract automorphism group of a set are isomorphic

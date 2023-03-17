@@ -22,7 +22,10 @@ open import foundation-core.universe-levels
 
 ## Definition
 
-Maps `f : A → B` of which the fibers are sets, i.e., 0-truncated types, are called 0-maps. We will show in `foundation-core.faithful-maps` that a map f is a 0-map if and only if f is faithful, i.e., f induces embeddings on identity types.
+Maps `f : A → B` of which the fibers are sets, i.e., 0-truncated types, are
+called 0-maps. We will show in `foundation-core.faithful-maps` that a map f is a
+0-map if and only if f is faithful, i.e., f induces embeddings on identity
+types.
 
 ```agda
 module _
@@ -126,7 +129,8 @@ module _
 
 ### For any type family over the codomain, a 0-map induces a 0-map on total spaces.
 
-In other words, 0-maps are stable under pullbacks. We will come to this point when we introduce homotopy pullbacks.
+In other words, 0-maps are stable under pullbacks. We will come to this point
+when we introduce homotopy pullbacks.
 
 ```agda
 module _

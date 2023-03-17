@@ -11,14 +11,10 @@ open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -39,7 +35,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A normal subgroup of `G` is a subgroup `H` of `G` which is closed under conjugation.
+A normal subgroup of `G` is a subgroup `H` of `G` which is closed under
+conjugation.
 
 ## Definition
 

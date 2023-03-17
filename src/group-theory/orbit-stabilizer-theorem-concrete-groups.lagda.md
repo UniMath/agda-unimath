@@ -7,23 +7,13 @@ module group-theory.orbit-stabilizer-theorem-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.connected-components
 open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.mere-equivalences-concrete-group-actions
 open import group-theory.stabilizer-groups-concrete-group-actions
-open import group-theory.subgroups-concrete-groups
-open import group-theory.transitive-concrete-group-actions
 
 open import structured-types.pointed-types
 ```
@@ -32,19 +22,24 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The orbit stabilizer theorem for concrete groups asserts that the type `Orbit(x)` of orbits of an element `x : X *` is deloopable and fits in a fiber sequence
+The orbit stabilizer theorem for concrete groups asserts that the type
+`Orbit(x)` of orbits of an element `x : X *` is deloopable and fits in a fiber
+sequence
 
 ```md
   BG_x ----> BG ----> B(Orbit(x))
 ```
 
-To see that this is indeed a formulation of the orbit-stabilizer theorem, note that the delooping of `Orbit(x)` gives `Orbit(x)` the structure of a group. Furthermore, this fiber sequence induces a short exact sequence
+To see that this is indeed a formulation of the orbit-stabilizer theorem, note
+that the delooping of `Orbit(x)` gives `Orbit(x)` the structure of a group.
+Furthermore, this fiber sequence induces a short exact sequence
 
 ```md
   G_x ----> G ----> Orbit(x),
 ```
 
-which induces a bijection from the cosets of the stabilizer subgroup `G_x` of `G` to the type `Orbit(x)`.
+which induces a bijection from the cosets of the stabilizer subgroup `G_x` of
+`G` to the type `Orbit(x)`.
 
 ## Definitions
 

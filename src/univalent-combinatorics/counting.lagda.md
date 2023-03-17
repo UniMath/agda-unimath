@@ -34,7 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The elements of a type `X` can be counted by establishing an equivalence `Fin n ≃ X`.
+The elements of a type `X` can be counted by establishing an equivalence
+`Fin n ≃ X`.
 
 ## Definition
 

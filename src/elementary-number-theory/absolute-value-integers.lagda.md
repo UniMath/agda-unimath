@@ -16,8 +16,6 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
@@ -28,7 +26,7 @@ open import foundation.unit-type
 
 # The absolute value of integers
 
-```
+```agda
 abs-ℤ : ℤ → ℕ
 abs-ℤ (inl x) = succ-ℕ x
 abs-ℤ (inr (inl star)) = zero-ℕ
@@ -129,10 +127,10 @@ is-positive-abs-ℤ (inr (inr x)) H = star
 is-nonzero-abs-ℤ :
   (x : ℤ) → is-positive-ℤ x → is-nonzero-ℕ (abs-ℤ x)
 is-nonzero-abs-ℤ (inr (inr x)) H = is-nonzero-succ-ℕ x
-
 ```
 
 ### Absolute value is multiplicative
+
 ```agda
 neg-left-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
 neg-left-abs-ℤ-mul-ℤ x y = equational-reasoning
@@ -202,5 +200,4 @@ multiplicative-abs-ℤ (inr (inr x)) (inr (inl star)) = equational-reasoning
   ＝ mul-ℕ (abs-ℤ (inr (inr x))) zero-ℕ by (inv (right-zero-law-mul-ℕ (abs-ℤ (inr (inr x)))))
 multiplicative-abs-ℤ (inr (inr x)) (inr (inr y)) = is-injective-int-ℕ
   (int-ℕ-abs-ℤ-mult-positive-ints x y)
-
 ```

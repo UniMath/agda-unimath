@@ -19,7 +19,6 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -28,7 +27,6 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.repetitions
-open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -45,7 +43,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-If `f : X → Y` is an injective map between finite types `X` and `Y` with `k` and `l` elements, then `k ≤ l`. Conversely, if `l < k`, then no map `f : X → Y` is injective.
+If `f : X → Y` is an injective map between finite types `X` and `Y` with `k` and
+`l` elements, then `k ≤ l`. Conversely, if `l < k`, then no map `f : X → Y` is
+injective.
 
 ## Theorems
 

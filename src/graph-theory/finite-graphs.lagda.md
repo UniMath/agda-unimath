@@ -7,36 +7,25 @@ module graph-theory.finite-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A finite undirected graph consists of a finite set of vertices and a family of finite types of edges indexed by unordered pairs of vertices.
+A finite undirected graph consists of a finite set of vertices and a family of
+finite types of edges indexed by unordered pairs of vertices.
 
 ## Definitions
 
@@ -92,7 +81,9 @@ Undirected-Graph-𝔽' l1 l2 =
               (x y : type-𝔽 V) → map-equiv ((σ y x) ∘e (σ x y)) ~ id)))
 ```
 
-The degree of a vertex x of a graph G is the set of occurences of x as an endpoint of x. Note that the unordered pair {x,x} adds two elements to the degree of x.
+The degree of a vertex x of a graph G is the set of occurences of x as an
+endpoint of x. Note that the unordered pair {x,x} adds two elements to the
+degree of x.
 
 ```agda
 incident-edges-vertex-Undirected-Graph-𝔽 :

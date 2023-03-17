@@ -12,23 +12,23 @@ open import elementary-number-theory.natural-numbers
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Any finite type is a set because it is merely equivalent to a standard finite type. Moreover, any finite type has decidable equality. In particular, this implies that the type of identifications between any two elements in a finite type is finite.
+Any finite type is a set because it is merely equivalent to a standard finite
+type. Moreover, any finite type has decidable equality. In particular, this
+implies that the type of identifications between any two elements in a finite
+type is finite.
 
 ## Properties
 

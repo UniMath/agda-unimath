@@ -37,7 +37,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a family `B` of types over `A` and an element `a : A`, then the fiber inclusion of `B` at a is a map `B a → Σ A B`.
+Given a family `B` of types over `A` and an element `a : A`, then the fiber
+inclusion of `B` at a is a map `B a → Σ A B`.
 
 ## Definition
 
@@ -63,7 +64,7 @@ module _
 
 ### The fiber inclusions are truncated maps for any type family B if and only if A is truncated
 
-```
+```agda
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1}
   where

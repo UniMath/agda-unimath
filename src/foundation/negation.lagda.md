@@ -9,21 +9,21 @@ module foundation.negation where
 ```agda
 open import foundation-core.negation public
 
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.universe-levels
-
+open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The Curry-Howard interpretation of negation in type theory is the interpretation of the proposition `P ⇒ ⊥` using propositions as types. Thus, the negation of a type `A` is the type `A → empty`.
+The Curry-Howard interpretation of negation in type theory is the interpretation
+of the proposition `P ⇒ ⊥` using propositions as types. Thus, the negation of a
+type `A` is the type `A → empty`.
 
 ## Properties
 

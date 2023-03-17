@@ -44,11 +44,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The cartesian product of finite types is finite. We obtain a cartesian product operation on finite types.
+The cartesian product of finite types is finite. We obtain a cartesian product
+operation on finite types.
 
 ### The standard finite types are closed under cartesian products
 
-```
+```agda
 prod-Fin : (k l : ℕ) → ((Fin k) × (Fin l)) ≃ Fin (mul-ℕ k l)
 prod-Fin zero-ℕ l = left-absorption-prod (Fin l)
 prod-Fin (succ-ℕ k) l =

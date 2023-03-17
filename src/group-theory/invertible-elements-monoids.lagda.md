@@ -23,7 +23,8 @@ open import group-theory.monoids
 
 ## Idea
 
-An element `x ∈ M` in a monoid `M` is said to be invertible if there is an element `y ∈ M` such that `xy = e` and `yx = e`.
+An element `x ∈ M` in a monoid `M` is said to be invertible if there is an
+element `y ∈ M` such that `xy = e` and `yx = e`.
 
 ## Definitions
 

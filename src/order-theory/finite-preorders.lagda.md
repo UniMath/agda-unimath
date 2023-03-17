@@ -33,7 +33,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Finite preorders
 
-We say that a preorder X is finite if X has finitely many elements and the ordering relation on X is decidable.
+We say that a preorder X is finite if X has finitely many elements and the
+ordering relation on X is decidable.
 
 ```agda
 module _
@@ -179,7 +180,6 @@ module _
 ### Decidable sub-preorders of finite preorders
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
   (S : element-Finite-Preorder X → decidable-Prop l3)

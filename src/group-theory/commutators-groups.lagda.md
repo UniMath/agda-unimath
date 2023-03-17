@@ -7,10 +7,8 @@ module group-theory.commutators-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.identity-types
-open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.group-solver
@@ -21,9 +19,11 @@ open import group-theory.groups
 
 ## Idea
 
-A commutator gives an indication of the extent to which a group multiplication fails to be commutative.
+A commutator gives an indication of the extent to which a group multiplication
+fails to be commutative.
 
-The commutator of two elements, g and h, of a group G, is the element `[g, h] = (gh)(hg)⁻¹`.
+The commutator of two elements, g and h, of a group G, is the element
+`[g, h] = (gh)(hg)⁻¹`.
 
 https://en.wikipedia.org/wiki/Commutator#Group_theory
 

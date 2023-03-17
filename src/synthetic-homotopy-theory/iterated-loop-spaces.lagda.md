@@ -9,7 +9,6 @@ module synthetic-homotopy-theory.iterated-loop-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.pointed-types

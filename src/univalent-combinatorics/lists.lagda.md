@@ -37,7 +37,8 @@ open import group-theory.monoids
 
 ## Idea
 
-The type of lists of elements of a type `A` is defined inductively, with an empty list and an operation that extends a list with one element from `A`.
+The type of lists of elements of a type `A` is defined inductively, with an
+empty list and an operation that extends a list with one element from `A`.
 
 ## Definition
 
@@ -599,7 +600,6 @@ module _
   preserves-concat-map-list nil k = refl
   preserves-concat-map-list (cons x l) k =
     ap (cons (f x)) (preserves-concat-map-list l k)
-
 ```
 
 ### Multiplication of a list of elements in a monoid

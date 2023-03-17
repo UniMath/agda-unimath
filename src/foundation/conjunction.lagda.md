@@ -8,18 +8,19 @@ module foundation.conjunction where
 
 ```agda
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
+open import foundation-core.dependent-pair-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The conjunction of two propositions `P` and `Q` is the proposition that both `P` and `Q` hold.
+The conjunction of two propositions `P` and `Q` is the proposition that both `P`
+and `Q` hold.
 
 ## Definition
 
@@ -51,7 +52,7 @@ pr2 (pr2 (conj-decidable-Prop P Q)) =
 
 ### Introduction rule for conjunction
 
-```
+```agda
 intro-conj-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   type-Prop P → type-Prop Q → type-conj-Prop P Q

@@ -18,7 +18,9 @@ open import univalent-combinatorics.2-element-types
 
 ## Idea
 
-Symmetric elements of involutive types are fixed points of the involution. In other words, the type of symmetric elements of an involutive type `A` is defined to be
+Symmetric elements of involutive types are fixed points of the involution. In
+other words, the type of symmetric elements of an involutive type `A` is defined
+to be
 
 ```md
   (X : 2-Element-Type lzero) → A X

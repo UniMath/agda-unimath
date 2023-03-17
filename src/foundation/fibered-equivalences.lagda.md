@@ -14,7 +14,6 @@ open import foundation.pullbacks
 open import foundation.slice
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions

@@ -9,17 +9,13 @@ module group-theory.higher-groups where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 ```
 
@@ -27,7 +23,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-An ∞-group is just a pointed connected type. Its underlying type is its loop space, and the classifying type is the pointed connected type itself.
+An ∞-group is just a pointed connected type. Its underlying type is its loop
+space, and the classifying type is the pointed connected type itself.
 
 ## Definition
 

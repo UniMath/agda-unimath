@@ -14,21 +14,17 @@ module univalent-combinatorics.orientations-complete-undirected-graph where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
 open import finite-group-theory.transpositions
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -37,7 +33,6 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -53,18 +48,13 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
-open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types

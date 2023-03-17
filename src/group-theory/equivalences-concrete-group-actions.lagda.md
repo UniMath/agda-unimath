@@ -13,13 +13,10 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
@@ -31,7 +28,8 @@ open import group-theory.homomorphisms-concrete-group-actions
 
 ## Idea
 
-An equivalence of concrete group actions from `X` to `Y` is a family of equivalences from `X u` to `Y u` indexed by `u : BG`.
+An equivalence of concrete group actions from `X` to `Y` is a family of
+equivalences from `X u` to `Y u` indexed by `u : BG`.
 
 ## Definition
 

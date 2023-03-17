@@ -23,7 +23,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Contractible types are types that have, up to identification, exactly one element.
+Contractible types are types that have, up to identification, exactly one
+element.
 
 ## Definition
 
@@ -61,7 +62,8 @@ abstract
 
 ### The total space of the identity type based at a point is contractible
 
-We prove two cases of this fact: the first keeping the left-hand side fixed, and the second keeping the right-hand side fixed.
+We prove two cases of this fact: the first keeping the left-hand side fixed, and
+the second keeping the right-hand side fixed.
 
 ```agda
 module _

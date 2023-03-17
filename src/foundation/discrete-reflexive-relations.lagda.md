@@ -8,18 +8,21 @@ module foundation.discrete-reflexive-relations where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.reflexive-relations
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A reflexive relation `R` on a type `A` is said to be discrete if for every `x : A` the type `Σ A (R x)` is contractible. The (standard) discrete reflexive relation on a type is its identity type.
+A reflexive relation `R` on a type `A` is said to be discrete if for every
+`x : A` the type `Σ A (R x)` is contractible. The (standard) discrete reflexive
+relation on a type is its identity type.
 
 ## Definitions
 

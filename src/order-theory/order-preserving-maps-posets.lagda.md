@@ -11,11 +11,8 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-preorders
@@ -26,7 +23,8 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two posets is siad to be order preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two posets is siad to be order
+preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 

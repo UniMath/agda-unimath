@@ -28,7 +28,6 @@ open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.sets
-open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -39,21 +38,20 @@ open import group-theory.isomorphisms-groups
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
-open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.pointed-types
 open import structured-types.types-equipped-with-endomorphisms
 
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types
 open import synthetic-homotopy-theory.loop-spaces
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A cyclic type is a type `X` equipped with an endomorphism `f : X → X` such that the pair `(X, f)` is merely equivalent to the pair `(ℤ-Mod k, +1)` for some `k : ℕ`.
+A cyclic type is a type `X` equipped with an endomorphism `f : X → X` such that
+the pair `(X, f)` is merely equivalent to the pair `(ℤ-Mod k, +1)` for some
+`k : ℕ`.
 
 ## Definitions
 

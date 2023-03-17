@@ -7,15 +7,16 @@ module foundation.connected-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-maps
 open import foundation.contractible-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.propositions
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.truncations
-open import foundation.universe-levels
+
+open import foundation-core.constant-maps
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>

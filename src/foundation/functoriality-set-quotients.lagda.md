@@ -11,29 +11,28 @@ module foundation.functoriality-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
-open import foundation.sets
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.uniqueness-set-quotients
-open import foundation.unit-type
 open import foundation.universal-property-set-quotients
-open import foundation.universe-levels
+
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>

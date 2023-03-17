@@ -7,26 +7,29 @@ module foundation.binary-reflecting-maps-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Consider two types `A` and `B` equipped with equivalence relations `R` and `S`. A binary reflecting map from `A` to `B` to `X` is a binary map `f : A → B → X` such that for any to `R`-related elements `x` and `x'` in `A` and any two `S`-related elements `y` and `y'` in `B` we have `f x y ＝ f x' y'` in `X`.
+Consider two types `A` and `B` equipped with equivalence relations `R` and `S`.
+A binary reflecting map from `A` to `B` to `X` is a binary map `f : A → B → X`
+such that for any to `R`-related elements `x` and `x'` in `A` and any two
+`S`-related elements `y` and `y'` in `B` we have `f x y ＝ f x' y'` in `X`.
 
 ```agda
 module _

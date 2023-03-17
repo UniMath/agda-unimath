@@ -17,7 +17,6 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
@@ -29,23 +28,17 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-equivalence-relations
-open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
@@ -56,7 +49,6 @@ open import foundation.propositions
 open import foundation.repetitions
 open import foundation.sets
 open import foundation.unit-type
-open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import univalent-combinatorics.2-element-decidable-subtypes
@@ -74,7 +66,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The orbit of a point `x` for a permutation `f` is the set of point obtained by iterating `f` on `x`.
+The orbit of a point `x` for a permutation `f` is the set of point obtained by
+iterating `f` on `x`.
 
 ## Definition
 

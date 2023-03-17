@@ -9,32 +9,25 @@ module foundation.products-unordered-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.symmetric-operations
-open import foundation.unit-type
 open import foundation.universal-property-maybe
-open import foundation.universe-levels
 open import foundation.unordered-tuples
 open import foundation.unordered-tuples-of-types
 
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
+
 open import univalent-combinatorics.complements-isolated-points
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Given an unordered pair of types, we can take their product. This is a commutative version of the cartesian product operation on types.
+Given an unordered pair of types, we can take their product. This is a
+commutative version of the cartesian product operation on types.
 
 ## Definition
 

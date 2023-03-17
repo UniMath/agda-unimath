@@ -17,7 +17,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-presented-types
 open import foundation.set-truncations
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -31,7 +30,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is said to be finitely presented if it is presented by a standard finite type.
+A type is said to be finitely presented if it is presented by a standard finite
+type.
 
 ## Definition
 

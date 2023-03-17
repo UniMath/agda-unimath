@@ -9,7 +9,6 @@ module foundation-core.commuting-cubes-of-maps where
 ```agda
 open import foundation.hexagons-of-identifications
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
@@ -22,7 +21,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We specify the type of the homotopy witnessing that a cube commutes. Imagine that the cube is presented as a lattice
+We specify the type of the homotopy witnessing that a cube commutes. Imagine
+that the cube is presented as a lattice
 
 ```md
             *
@@ -40,7 +40,10 @@ We specify the type of the homotopy witnessing that a cube commutes. Imagine tha
             *
 ```
 
-with all maps pointing in the downwards direction. Presented in this way, a cube of maps has a top face, a back-left face, a back-right face, a front-left face, a front-right face, and a bottom face, all of which are homotopies. An element of type `coherence-cube-maps` is a homotopy filling the cube.
+with all maps pointing in the downwards direction. Presented in this way, a cube
+of maps has a top face, a back-left face, a back-right face, a front-left face,
+a front-right face, and a bottom face, all of which are homotopies. An element
+of type `coherence-cube-maps` is a homotopy filling the cube.
 
 ## Definition
 
@@ -68,9 +71,17 @@ coherence-cube-maps
 
 ### Symmetries of commuting cubes
 
-The symmetry group D₃ acts on a cube. However, the coherence filling a cube needs to be modified to show that the rotated/reflected cube again commutes. In the following definitions we provide the homotopies witnessing that the rotated/reflected cubes again commute.
+The symmetry group D₃ acts on a cube. However, the coherence filling a cube
+needs to be modified to show that the rotated/reflected cube again commutes. In
+the following definitions we provide the homotopies witnessing that the
+rotated/reflected cubes again commute.
 
-Note: although in principle it ought to be enough to show this for the generators of the symmetry group D₃, in practice it is more straightforward to just do the work for each of the symmetries separately. One reason is that some of the homotopies witnessing that the faces commute will be inverted as the result of an application of a symmetry. Inverting a homotopy twice results in a new homotopy that is only homotopic to the original homotopy.
+Note: although in principle it ought to be enough to show this for the
+generators of the symmetry group D₃, in practice it is more straightforward to
+just do the work for each of the symmetries separately. One reason is that some
+of the homotopies witnessing that the faces commute will be inverted as the
+result of an application of a symmetry. Inverting a homotopy twice results in a
+new homotopy that is only homotopic to the original homotopy.
 
 ```agda
 module _

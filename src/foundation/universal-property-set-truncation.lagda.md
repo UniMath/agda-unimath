@@ -7,32 +7,33 @@ module foundation.universal-property-set-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.mere-equality
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-set-quotients
-open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A map `f : A → B` into a set `B` satisfies the universal property of the set truncation of `A` if any map `A → C` into a set `C` extends uniquely along `f` to a map `B → C`.
+A map `f : A → B` into a set `B` satisfies the universal property of the set
+truncation of `A` if any map `A → C` into a set `C` extends uniquely along `f`
+to a map `B → C`.
 
 ## Definition
 

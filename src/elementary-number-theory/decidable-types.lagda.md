@@ -21,15 +21,14 @@ open import foundation.empty-types
 open import foundation.functions
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-We describe conditions under which dependent sums and dependent products are decidable.
+We describe conditions under which dependent sums and dependent products are
+decidable.
 
 ## Properties
 

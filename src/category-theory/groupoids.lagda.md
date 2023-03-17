@@ -8,7 +8,6 @@ module category-theory.groupoids where
 
 ```agda
 open import category-theory.categories
-open import category-theory.equivalences-categories
 open import category-theory.functors-categories
 open import category-theory.isomorphisms-categories
 open import category-theory.isomorphisms-precategories

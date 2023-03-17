@@ -31,7 +31,9 @@ open import order-theory.posets
 
 ## Idea
 
-The relation `≤` on the natural numbers is the unique relation such that `0` is less than any natural number, and such that `m+1 ≤ n+1` is equivalent to `m ≤ n`.
+The relation `≤` on the natural numbers is the unique relation such that `0` is
+less than any natural number, and such that `m+1 ≤ n+1` is equivalent to
+`m ≤ n`.
 
 ## Definitions
 
@@ -232,7 +234,7 @@ reflects-order-add-ℕ (succ-ℕ k) m n = reflects-order-add-ℕ k m n
 
 ### Multiplication preserves the ordering on ℕ
 
-```
+```agda
 preserves-order-mul-ℕ :
   (k m n : ℕ) → m ≤-ℕ n → (mul-ℕ m k) ≤-ℕ (mul-ℕ n k)
 preserves-order-mul-ℕ k zero-ℕ n p = star

@@ -55,7 +55,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial types are a categorification of the binomial coefficients. The binomial type `(A choose B)` is the type of decidable embeddings from types merely equal to `B` into `A`.
+The binomial types are a categorification of the binomial coefficients. The
+binomial type `(A choose B)` is the type of decidable embeddings from types
+merely equal to `B` into `A`.
 
 ## Definitions
 

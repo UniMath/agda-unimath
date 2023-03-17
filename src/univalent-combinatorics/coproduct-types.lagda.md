@@ -11,7 +11,6 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -35,7 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Coproducts of finite types are finite, giving a coproduct operation on the type 𝔽 of finite types.
+Coproducts of finite types are finite, giving a coproduct operation on the type
+𝔽 of finite types.
 
 ## Properties
 

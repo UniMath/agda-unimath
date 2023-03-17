@@ -7,35 +7,29 @@ module foundation.weak-function-extensionality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.universe-levels
 
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
 open import foundation-core.function-extensionality
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Weak function extensionality is the principle that any dependent product of contractible types is contractible. This principle is equivalent to the function extensionality axiom.
+Weak function extensionality is the principle that any dependent product of
+contractible types is contractible. This principle is equivalent to the function
+extensionality axiom.
 
 ## Definition
 

@@ -13,14 +13,15 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-Invertible elements are elements that have a two-sided multiplicative inverse. Such elements are also called the units of the Ring. The set of units of any ring forms a group.
+Invertible elements are elements that have a two-sided multiplicative inverse.
+Such elements are also called the units of the Ring. The set of units of any
+ring forms a group.
 
 ## Definition
 

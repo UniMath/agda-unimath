@@ -19,7 +19,8 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-A graph is said to be connected if any point can be reached from any point by a walk.
+A graph is said to be connected if any point can be reached from any point by a
+walk.
 
 ## Definition
 

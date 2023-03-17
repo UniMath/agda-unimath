@@ -13,7 +13,6 @@ open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -32,7 +31,8 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges that connect `x` to `y`.
+A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges
+that connect `x` to `y`.
 
 ## Definitions
 

@@ -2,9 +2,12 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
-
 module type-theories.dependent-type-theories where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -14,9 +17,14 @@ open import foundation.propositions
 open import foundation.universe-levels
 ```
 
+</details>
+
 ## Idea
 
-We introduce the cagegory of dependent type theories, following Voevodsky's notion of B-systems. The category of generalised algebraic theories is defined to be this category. It should be equivalent to the category of essentially algebraic theories.
+We introduce the cagegory of dependent type theories, following Voevodsky's
+notion of B-systems. The category of generalised algebraic theories is defined
+to be this category. It should be equivalent to the category of essentially
+algebraic theories.
 
 ```agda
 module dependent where
@@ -1425,3 +1433,4 @@ module c-system where
       ( weakening-type-context A (extension-ctx X Γ) Y)
       ( weakening-context {!!} {!!} {!!})
 -}
+```

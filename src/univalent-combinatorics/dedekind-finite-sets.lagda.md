@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Dedekind finite sets are sets `X` with the property that every embedding `X ↪ X` is an equivalence.
+Dedekind finite sets are sets `X` with the property that every embedding `X ↪ X`
+is an equivalence.
 
 ## Definition
 

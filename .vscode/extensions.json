@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "banacorn.agda-mode",
+    "j-mueller.agda",
+    "bbenoist.nix",
+    "davidanson.vscode-markdownlint",
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ]
+}

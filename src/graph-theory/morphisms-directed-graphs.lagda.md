@@ -13,14 +13,11 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.unordered-pairs
 
 open import graph-theory.directed-graphs
 ```
@@ -61,7 +58,6 @@ module _
 ### Composition of morphisms graphs
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)

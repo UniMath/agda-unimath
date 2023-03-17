@@ -7,24 +7,30 @@ module commutative-algebra.commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-semirings
+
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
+
 open import ring-theory.rings
+open import ring-theory.semirings
 ```
 
 </details>
 
 ## Idea
 
-A ring `R` is said to be commutative if its multiplicative operation is commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
+A ring `R` is said to be commutative if its multiplicative operation is
+commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
 
 ## Definition
 
@@ -53,6 +59,9 @@ module _
 
   ring-Commutative-Ring : Ring l
   ring-Commutative-Ring = pr1 R
+
+  ab-Commutative-Ring : Ab l
+  ab-Commutative-Ring = ab-Ring ring-Commutative-Ring
 
   set-Commutative-Ring : Set l
   set-Commutative-Ring = set-Ring ring-Commutative-Ring
@@ -237,6 +246,19 @@ module _
         ( mul-Commutative-Ring' z)
         ( commutative-mul-Commutative-Ring x y)) ∙
       ( associative-mul-Commutative-Ring y x z))
+
+  multiplicative-commutative-monoid-Commutative-Ring : Commutative-Monoid l
+  pr1 multiplicative-commutative-monoid-Commutative-Ring =
+    multiplicative-monoid-Ring ring-Commutative-Ring
+  pr2 multiplicative-commutative-monoid-Commutative-Ring =
+    commutative-mul-Commutative-Ring
+
+  semiring-Commutative-Ring : Semiring l
+  semiring-Commutative-Ring = semiring-Ring ring-Commutative-Ring
+
+  commutative-semiring-Commutative-Ring : Commutative-Semiring l
+  pr1 commutative-semiring-Commutative-Ring = semiring-Commutative-Ring
+  pr2 commutative-semiring-Commutative-Ring = commutative-mul-Commutative-Ring
 ```
 
 ### Scalar multiplication of elements of a commutative ring by natural numbers

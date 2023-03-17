@@ -7,18 +7,19 @@ module foundation.weakly-constant-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A map `f : A → B` is said to be weakly constant if any two elements in `A` are mapped to identical elements in `B`.
+A map `f : A → B` is said to be weakly constant if any two elements in `A` are
+mapped to identical elements in `B`.
 
 ## Definition
 

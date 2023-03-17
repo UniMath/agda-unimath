@@ -26,7 +26,9 @@ open import group-theory.groups
 
 ## Idea
 
-A congruence relation on a group `G` is an equivalence relation `≡` on `G` such that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we have `x1 · y1 ≡ x2 · y2`.
+A congruence relation on a group `G` is an equivalence relation `≡` on `G` such
+that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we have
+`x1 · y1 ≡ x2 · y2`.
 
 ## Definition
 

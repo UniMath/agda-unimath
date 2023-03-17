@@ -22,7 +22,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-An isomorphism between objects `x y : A` in a precategory `C` is a morphism `f : hom x y` for which there exists a morphism `g : hom y x` such that
+An isomorphism between objects `x y : A` in a precategory `C` is a morphism
+`f : hom x y` for which there exists a morphism `g : hom y x` such that
+
 - `comp g f = id_x` and
 - `comp f g = id_y`.
 
@@ -82,7 +84,8 @@ module _
 
 ### The identity morphisms are isomorphisms
 
-For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism from `x` to `x` since `comp id_x id_x = id_x` (it is its own inverse).
+For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
+from `x` to `x` since `comp id_x id_x = id_x` (it is its own inverse).
 
 ```agda
 module _
@@ -101,7 +104,10 @@ module _
 
 ### Equalities give rise to isomorphisms
 
-An equality between objects `x y : A` gives rise to an isomorphism between them. This is because by the J-rule, it is enough to construct an isomorphism given `refl : Id x x`, from `x` to itself. We take the identity morphism as such an isomorphism.
+An equality between objects `x y : A` gives rise to an isomorphism between them.
+This is because by the J-rule, it is enough to construct an isomorphism given
+`refl : Id x x`, from `x` to itself. We take the identity morphism as such an
+isomorphism.
 
 ```agda
 iso-eq-Large-Precat :
@@ -116,12 +122,10 @@ iso-eq-Large-Precat C X .X refl = id-iso-Large-Precat C
 
 ### Being an isomorphism is a proposition
 
-Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to `f`. It is enough to show that `g = g'` since the equalities are propositions (since the hom-types are sets). But we have the following chain of equalities:
-`g = comp g id_y
-   = comp g (comp f g')
-   = comp (comp g f) g'
-   = comp id_x g'
-   = g'.`
+Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
+`f`. It is enough to show that `g = g'` since the equalities are propositions
+(since the hom-types are sets). But we have the following chain of equalities:
+`g = comp g id_y    = comp g (comp f g')    = comp (comp g f) g'    = comp id_x g'    = g'.`
 
 ```agda
 module _
@@ -165,7 +169,8 @@ module _
 
 ### The type of isomorphisms form a set
 
-The type of isomorphisms between objects `x y : A` is a subtype of the set `hom x y` since being an isomorphism is a proposition.
+The type of isomorphisms between objects `x y : A` is a subtype of the set
+`hom x y` since being an isomorphism is a proposition.
 
 ```agda
 module _
@@ -277,3 +282,4 @@ module _
     is-iso-inv-iso-Large-Precat
       ( hom-iso-Large-Precat C X Y f)
       ( is-iso-hom-iso-Large-Precat C X Y f)
+```

@@ -7,16 +7,18 @@ module foundation.bands where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
 open import foundation.set-truncations
-open import foundation.universe-levels
+
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A band from $X$ to $Y$ is an element of the set-truncation of the type of equivalences from $X$ to $Y$.
+A band from $X$ to $Y$ is an element of the set-truncation of the type of
+equivalences from $X$ to $Y$.
 
 ## Definition
 

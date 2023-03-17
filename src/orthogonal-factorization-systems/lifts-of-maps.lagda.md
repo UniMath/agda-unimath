@@ -22,16 +22,14 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.extensions-of-maps
 ```
 
 </details>
 
 ## Idea
 
-A _lift_ of a map `f : X → B` along a map `i : A → B`
-is a map `g : X → A` such that the composition `i ∘ g` is `f`.
+A _lift_ of a map `f : X → B` along a map `i : A → B` is a map `g : X → A` such
+that the composition `i ∘ g` is `f`.
 
 ```md
            A

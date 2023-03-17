@@ -14,8 +14,6 @@ open import foundation.injective-maps
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-
 open import ring-theory.rings
 ```
 
@@ -23,7 +21,10 @@ open import ring-theory.rings
 
 ## Idea
 
-An integral domain is a commutative ring `R` such that the product of any two nonzero elements in `R` is nonzero. Equivalently, a commutative ring `R` is an integral domain if and only if multiplication by any nonzero element `a` satisfies the cancellation property: `ax = ay ⇒ x = y`.
+An integral domain is a commutative ring `R` such that the product of any two
+nonzero elements in `R` is nonzero. Equivalently, a commutative ring `R` is an
+integral domain if and only if multiplication by any nonzero element `a`
+satisfies the cancellation property: `ax = ay ⇒ x = y`.
 
 ## Definition
 

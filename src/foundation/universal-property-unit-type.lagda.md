@@ -7,25 +7,27 @@ module foundation.universal-property-unit-type where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-maps
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
-open import foundation.identity-types
 open import foundation.unit-type
-open import foundation.universe-levels
 
+open import foundation-core.constant-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
 open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The universal property of the unit type characterizes maps out of the unit type. Similarly, the dependent universal property of the unit type characterizes dependent functions out of the unit type.
+The universal property of the unit type characterizes maps out of the unit type.
+Similarly, the dependent universal property of the unit type characterizes
+dependent functions out of the unit type.
 
-In `foundation.contractible-types` we have alread proven related universal properties of contractible types.
+In `foundation.contractible-types` we have alread proven related universal
+properties of contractible types.
 
 ## Properties
 

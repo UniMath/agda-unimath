@@ -13,11 +13,9 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 
 open import foundation.automorphisms
 open import foundation.booleans
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -28,7 +26,6 @@ open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
@@ -36,7 +33,6 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
@@ -54,7 +50,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of which the underlying type has 2 elements.
+A 2-element decidable subtype of a type `A` is a decidable subtype of `A` of
+which the underlying type has 2 elements.
 
 ## Definition
 
@@ -332,7 +329,6 @@ module _
           is-finite-equiv
             ( inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
             ( is-finite-Fin 2)))
-
 ```
 
 ### 2-element decidable subtypes are closed under precomposition with an equivalence

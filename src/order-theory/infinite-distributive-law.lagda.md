@@ -7,15 +7,12 @@ module order-theory.infinite-distributive-law where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.posets
 open import order-theory.sup-lattices
@@ -24,16 +21,15 @@ open import order-theory.sup-lattices
 </details>
 
 ## Idea
-Let A be a poset that has all binary meets and arbitrary joins (which we call sups).
-We can show that all sup lattices have binary meets (and we plan to in another file),
-but this economy offers little benefit here.
-The infinite distributive law states:
-for all a : A and for all families b : I → A the following identity holds
-                  a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
-Note: One could inquire about the dual infinite distributive law but it is not needed at this time.
+
+Let A be a poset that has all binary meets and arbitrary joins (which we call
+sups). We can show that all sup lattices have binary meets (and we plan to in
+another file), but this economy offers little benefit here. The infinite
+distributive law states: for all a : A and for all families b : I → A the
+following identity holds a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ) Note: One could inquire
+about the dual infinite distributive law but it is not needed at this time.
 
 ```agda
-
 module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
@@ -51,13 +47,11 @@ module _
 Meet-Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Meet-Sup-Lattice l1 l2 l3 =
   Σ (Poset l1 l2) (is-meet-sup-lattice-Poset l3)
-
 ```
 
 ## We need to provide the appropriate components to state the infinite distributive law.
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (A : Meet-Sup-Lattice l1 l2 l3)
   where
@@ -133,7 +127,6 @@ module _
     (I : UU l3) → (I → element-Meet-Sup-Lattice) →
     element-Meet-Sup-Lattice
   sup-Meet-Sup-Lattice I f = pr1 (is-sup-lattice-Meet-Sup-Lattice I f)
-
 ```
 
 ## Characterize the identity type.
@@ -141,17 +134,15 @@ module _
 ## We now state the infinite distributive law
 
 ```agda
-
 distributive-law-meet-sup-lattice : (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
 distributive-law-meet-sup-lattice l1 l2 l3 A =
   (a : element-Meet-Sup-Lattice A) → {I : UU l3} →
   (b : I → element-Meet-Sup-Lattice A) →
   (meet-Meet-Sup-Lattice A a (sup-Meet-Sup-Lattice A I b) ＝
   sup-Meet-Sup-Lattice A I (λ i → (meet-Meet-Sup-Lattice A a (b i))))
-
 ```
 
-This notation is not easy on the eye, but recall, in more familiar notation the identity expressed here is:
-                                a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
+This notation is not easy on the eye, but recall, in more familiar notation the
+identity expressed here is: a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
 
 Show that the identity is a prop.

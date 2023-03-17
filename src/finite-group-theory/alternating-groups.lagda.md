@@ -23,7 +23,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The alternating group on a finite set `X` is the group of even permutations of `X`, i.e. it is the kernel of the sign homomorphism `Aut(X) → Aut(2)`.
+The alternating group on a finite set `X` is the group of even permutations of
+`X`, i.e. it is the kernel of the sign homomorphism `Aut(X) → Aut(2)`.
 
 ## Definition
 

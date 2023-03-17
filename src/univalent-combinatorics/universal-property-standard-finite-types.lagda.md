@@ -27,7 +27,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The universal property of the standard finite types asserts that for any family `A` of types over `Fin n`, the type `Π (i : Fin n), A i` is equivalent to the iterated cartesian product `A 0 × ... × A (n-1)`.
+The universal property of the standard finite types asserts that for any family
+`A` of types over `Fin n`, the type `Π (i : Fin n), A i` is equivalent to the
+iterated Cartesian product `A 0 × ... × A (n-1)`.
 
 ## Definitions
 

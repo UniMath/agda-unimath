@@ -25,8 +25,12 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An inverse for a map `f : A → B` is a map `g : B → A` equipped with homotopies `
-(f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is structure on the map `f`, and not a property. Therefore we include an coherence condition for the homotopies of an inverse. Coherently invertible map `f : A → B` is a map equipped with a two-sided inverse and this additional coherence law. They are also called half-adjoint equivalences.
+An inverse for a map `f : A → B` is a map `g : B → A` equipped with homotopies
+` (f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is structure on the map
+`f`, and not a property. Therefore we include an coherence condition for the
+homotopies of an inverse. Coherently invertible map `f : A → B` is a map
+equipped with a two-sided inverse and this additional coherence law. They are
+also called half-adjoint equivalences.
 
 ## Definition
 

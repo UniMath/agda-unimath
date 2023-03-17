@@ -19,7 +19,8 @@ open import group-theory.isomorphisms-groups
 
 ## Idea
 
-The opposite of a group `G` with multiplication `μ` is a group with the same underlying set as `G` and multiplication given by `x y ↦ μ y x`.
+The opposite of a group `G` with multiplication `μ` is a group with the same
+underlying set as `G` and multiplication given by `x y ↦ μ y x`.
 
 ## Definition
 

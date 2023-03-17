@@ -8,18 +8,21 @@ module foundation.binary-equivalences-unordered-pairs-of-types where
 
 ```agda
 open import foundation.binary-operations-unordered-pairs-of-types
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.products-unordered-pairs-of-types
-open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A binary operation `f : ((i : I) → A i) → B` is a binary equivalence if for each `i : I` and each `x : A i` the map `f ∘ pair x : A (swap i) → B` is an equivalence.
+A binary operation `f : ((i : I) → A i) → B` is a binary equivalence if for each
+`i : I` and each `x : A i` the map `f ∘ pair x : A (swap i) → B` is an
+equivalence.
 
 ## Definition
 

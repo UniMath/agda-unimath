@@ -23,7 +23,9 @@ open import structured-types.wild-quasigroups
 
 ## Idea
 
-The loop space of a pointed type `A` is the pointed type of self-identifications of the base point of `A`. The loop space comes equipped with a groupoidal structure.
+The loop space of a pointed type `A` is the pointed type of self-identifications
+of the base point of `A`. The loop space comes equipped with a groupoidal
+structure.
 
 ## Definitions
 
@@ -119,7 +121,7 @@ module _
 
 -- We compute transport of type-Ω
 
-```
+```agda
 module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
@@ -156,5 +158,4 @@ module _
     (p : Id x y) (q : type-Ω (pair A x)) →
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
-
 ```

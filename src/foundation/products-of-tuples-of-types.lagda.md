@@ -9,10 +9,9 @@ module foundation.products-of-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.equivalences
 open import foundation.tuples-of-types
-open import foundation.universe-levels
+
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -26,6 +25,7 @@ The product of an `n`-tuple of types is just the dependent product.
 ## Definition
 
 ### Products of `n`-tuples of types
+
 ```agda
 product-tuple-types :
   {l : Level} (n : ℕ) → tuple-types l n → UU l

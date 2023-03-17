@@ -9,28 +9,19 @@ module foundation.iterating-functions where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.automorphisms
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.endomorphisms
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.involutions
-open import foundation.sets
-open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.endomorphisms
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
 open import group-theory.monoid-actions
-open import group-theory.monoids
-open import group-theory.semigroups
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

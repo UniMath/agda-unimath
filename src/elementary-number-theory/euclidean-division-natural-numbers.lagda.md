@@ -27,13 +27,16 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Euclidean division is division with remainder, i.e., the Euclidean division of `n` by `d` is the largest natural number `k ≤ n/d`, and the remainder is the unique natural number `r < d` such that `kd + r = n`.
+Euclidean division is division with remainder, i.e., the Euclidean division of
+`n` by `d` is the largest natural number `k ≤ n/d`, and the remainder is the
+unique natural number `r < d` such that `kd + r = n`.
 
 ## Definitions
 
 ### Euclidean division via an array of natural numbers
 
-The following definition produces for each `k : ℕ` a sequence of sequences as follows:
+The following definition produces for each `k : ℕ` a sequence of sequences as
+follows:
 
 ```md
     This is column k
@@ -49,7 +52,10 @@ The following definition produces for each `k : ℕ` a sequence of sequences as 
       ⋮
 ```
 
-This produces an array of natural numbers. We find the quotient of the euclidean division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array. We will arbitrarily set the quotient of the euclidean division of `n` by `0` to `0` in this definition.
+This produces an array of natural numbers. We find the quotient of the euclidean
+division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array.
+We will arbitrarily set the quotient of the euclidean division of `n` by `0` to
+`0` in this definition.
 
 ```agda
 array-quotient-euclidean-division-ℕ : ℕ → ℕ → ℕ → ℕ

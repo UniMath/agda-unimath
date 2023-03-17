@@ -20,15 +20,14 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
-
-open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
 
-Homomorphisms between abelian groups are just homomorphisms between their underlying groups.
+Homomorphisms between abelian groups are just homomorphisms between their
+underlying groups.
 
 ## Definition
 

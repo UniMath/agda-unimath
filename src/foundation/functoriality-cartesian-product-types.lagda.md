@@ -24,7 +24,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Any two maps `f : A → B` and `g : C → D` induce a map `map-prod : A × B → C × D`.
+Any two maps `f : A → B` and `g : C → D` induce a map
+`map-prod : A × B → C × D`.
 
 ## Definition
 

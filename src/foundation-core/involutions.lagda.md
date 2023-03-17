@@ -8,13 +8,10 @@ module foundation-core.involutions where
 
 ```agda
 open import foundation-core.automorphisms
-open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
@@ -26,7 +23,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-An involution on a type `A` is a map (or an equivalence) `f : A → A` such that `(f ∘ f) ~ id`
+An involution on a type `A` is a map (or an equivalence) `f : A → A` such that
+`(f ∘ f) ~ id`
 
 ## Definition
 

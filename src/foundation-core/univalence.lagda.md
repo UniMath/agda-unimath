@@ -11,7 +11,6 @@ open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
@@ -20,9 +19,12 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
+The univalence axiom characterizes the identity types of universes. It asserts
+that the map `Id A B → A ≃ B` is an equivalence.
 
-In this file, we define the statement of the axiom. The axiom itself is postulated in [`foundation.univalence`](foundation.univalence.md) as `univalence`.
+In this file, we define the statement of the axiom. The axiom itself is
+postulated in [`foundation.univalence`](foundation.univalence.md) as
+`univalence`.
 
 ## Definition
 

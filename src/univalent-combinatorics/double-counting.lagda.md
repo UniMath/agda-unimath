@@ -20,7 +20,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given two countings of the same type, we obtain the same number of its elements. Likewise, given two countings of equivalent types, we obtain the same number of their elements.
+Given two countings of the same type, we obtain the same number of its elements.
+Likewise, given two countings of equivalent types, we obtain the same number of
+their elements.
 
 ```agda
 abstract

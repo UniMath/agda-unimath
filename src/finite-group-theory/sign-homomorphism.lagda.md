@@ -41,7 +41,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sign of a permutation is defined as the parity of the length of the decomposition of the permutation into transpositions. We show that each such decomposition as the same parity, so the sign map is well defined. We then show that the sign map is a group homomorphism.
+The sign of a permutation is defined as the parity of the length of the
+decomposition of the permutation into transpositions. We show that each such
+decomposition as the same parity, so the sign map is well defined. We then show
+that the sign map is a group homomorphism.
 
 ## Definitions
 
@@ -347,5 +350,4 @@ module _
       ( equiv-succ-Fin 2)
   eq-sign-homomorphism-transposition Y =
     ap aut-point-Fin-two-ℕ (eq-sign-homomorphism-Fin-two-transposition n X Y)
-
 ```

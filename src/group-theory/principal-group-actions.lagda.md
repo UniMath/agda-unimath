@@ -19,7 +19,8 @@ open import group-theory.groups
 
 ## Idea
 
-The principal group action is the action of a group on itself by multiplication from the left
+The principal group action is the action of a group on itself by multiplication
+from the left
 
 ## Definition
 

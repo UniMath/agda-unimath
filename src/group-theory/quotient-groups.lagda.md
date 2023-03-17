@@ -15,7 +15,6 @@ open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.propositions
@@ -38,11 +37,10 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a normal subgroup `H` of `G`, the quotient group `q : G → G/H`
-such that `H ⊆ ker q`, and such that `q` satisfies the universal group
-with the property that any group homomorphism `f : G → K` such that
-`H ⊆ ker f` extends uniquely along `q` to a group homomorphism
-`G/H → K`.
+Given a normal subgroup `H` of `G`, the quotient group `q : G → G/H` such that
+`H ⊆ ker q`, and such that `q` satisfies the universal group with the property
+that any group homomorphism `f : G → K` such that `H ⊆ ker f` extends uniquely
+along `q` to a group homomorphism `G/H → K`.
 
 ## Definitions
 

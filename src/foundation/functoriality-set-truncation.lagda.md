@@ -7,39 +7,39 @@ module foundation.functoriality-set-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-truncation
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.images
-open import foundation.injective-maps
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.set-truncations
-open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
-open import foundation.truncation-levels
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
-open import foundation.universe-levels
 
-open import foundation-core.function-extensionality
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The universal property of the set truncation implies that the set truncation acts functorially on maps between types.
+The universal property of the set truncation implies that the set truncation
+acts functorially on maps between types.
 
 ## Definition
 
@@ -92,7 +92,7 @@ comp-map-trunc-Set = comp-map-trunc zero-𝕋
 
 ### The functorial action of set truncations preserves homotopies
 
-```
+```agda
 htpy-trunc-Set :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
   (f ~ g) → (map-trunc-Set f ~ map-trunc-Set g)
@@ -206,7 +206,7 @@ module _
 
 ### If the set truncation of a map `f` is surjective, then `f` is surjective
 
-```
+```agda
   abstract
     is-surjective-is-surjective-map-trunc-Set :
       is-surjective (map-trunc-Set f) → is-surjective f

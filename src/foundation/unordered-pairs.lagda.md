@@ -7,27 +7,28 @@ module foundation.unordered-pairs where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.decidable-equality
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
@@ -39,13 +40,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An unordered pair of elements in a type `A` consists of a 2-element type `X` and a map `X → A`.
+An unordered pair of elements in a type `A` consists of a 2-element type `X` and
+a map `X → A`.
 
 ## Definition
 
 ### The definition of unordered pairs
 
-```
+```agda
 unordered-pair : {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
 unordered-pair A = Σ (2-Element-Type lzero) (λ X → type-2-Element-Type X → A)
 ```

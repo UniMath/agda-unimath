@@ -11,8 +11,6 @@ open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -21,8 +19,6 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import linear-algebra.constant-vectors
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
 ```
 
@@ -30,7 +26,9 @@ open import linear-algebra.vectors-on-semirings
 
 ## Idea
 
-Vectors on a commutative semiring `R` are vectors on the underlying type of `R`. The commutative semiring structur on `R` induces further structure on the type of vectors on `R`.
+Vectors on a commutative semiring `R` are vectors on the underlying type of `R`.
+The commutative semiring structur on `R` induces further structure on the type
+of vectors on `R`.
 
 ## Definitions
 

@@ -7,25 +7,26 @@ module foundation.repetitions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.negation
 open import foundation.pairs-of-distinct-elements
-open import foundation.truncated-maps
-open import foundation.universe-levels
+
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.negation
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A repetition of values of a map `f : A → B` consists of a pair of distinct points in `A` that get mapped to the same point in `B`.
+A repetition of values of a map `f : A → B` consists of a pair of distinct
+points in `A` that get mapped to the same point in `B`.
 
 ## Definition
 

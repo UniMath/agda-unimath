@@ -26,7 +26,13 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An equivalence is a map that has a section and a (separate) retraction. This is also called being biinvertible. This may look odd: Why not say that an equivalence is a map that has a 2-sided inverse? The reason is that the latter requirement would put nontrivial structure on the map, whereas having the section and retraction separate yields a property. To quickly see this: if `f` is an equivalence, then it has up to homotopy only one section, and it has up to homotopy only one retraction.
+An equivalence is a map that has a section and a (separate) retraction. This is
+also called being biinvertible. This may look odd: Why not say that an
+equivalence is a map that has a 2-sided inverse? The reason is that the latter
+requirement would put nontrivial structure on the map, whereas having the
+section and retraction separate yields a property. To quickly see this: if `f`
+is an equivalence, then it has up to homotopy only one section, and it has up to
+homotopy only one retraction.
 
 ## Definition
 
@@ -299,7 +305,9 @@ module _
 
 ### Equivalences are closed under homotopies
 
-We show that if `f ~ g`, then `f` is an equivalence if and only if `g` is an equivalence. Furthermore, we show that if `f` and `g` are homotopic equivaleces, then their inverses are also homotopic.
+We show that if `f ~ g`, then `f` is an equivalence if and only if `g` is an
+equivalence. Furthermore, we show that if `f` and `g` are homotopic equivaleces,
+then their inverses are also homotopic.
 
 ```agda
 module _
@@ -517,7 +525,8 @@ module _
 
 ## See also
 
-- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+- For the notions of inverses and coherently invertible maps, also known as
+  half-adjoint equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).

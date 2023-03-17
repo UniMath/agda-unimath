@@ -73,5 +73,4 @@ module _
 
   total-Fam-Inhabited-Types-𝔽 : 𝔽 (l1 ⊔ l2)
   total-Fam-Inhabited-Types-𝔽 = Σ-𝔽 X finite-type-Fam-Inhabited-Types-𝔽
-
 ```

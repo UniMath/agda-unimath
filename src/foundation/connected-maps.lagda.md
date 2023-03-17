@@ -7,30 +7,28 @@ module foundation.connected-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.connected-types
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.truncations
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.truncated-maps
+open import foundation-core.universe-levels
 ```
 
 </details>

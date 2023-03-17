@@ -20,7 +20,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A unary identity system on a type `A` equipped with a point `a : A` consists of a type family `B` over `A` equipped with a point `b : B a` that satisfies an induction principle analogous to the induction principle of the identity type at `a`.
+A unary identity system on a type `A` equipped with a point `a : A` consists of
+a type family `B` over `A` equipped with a point `b : B a` that satisfies an
+induction principle analogous to the induction principle of the identity type at
+`a`.
 
 ```agda
 module _
@@ -37,7 +40,7 @@ module _
 
 ### A type family over `A` is an identity system if and only if it is equivalent to the identity type
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where

@@ -7,7 +7,6 @@ module ring-theory.nontrivial-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets

@@ -28,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary addition operation on a semiring `R` to any family of elements of `R` indexed by a standard finite type.
+The sum operation extends the binary addition operation on a semiring `R` to any
+family of elements of `R` indexed by a standard finite type.
 
 ## Definition
 
@@ -186,7 +187,6 @@ module _
       ( interchange-add-sum-Semiring n
         ( f ∘ inl-Fin n)
         ( g ∘ inl-Fin n)))
-
 ```
 
 ### Extending a sum of elements in a semiring

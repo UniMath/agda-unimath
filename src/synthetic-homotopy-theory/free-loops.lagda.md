@@ -10,7 +10,6 @@ module synthetic-homotopy-theory.free-loops where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -22,7 +21,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A free loop in a type `X` consists of a point `x : X` and an identification `x ＝ x`. The type of free loops in `X` is equivalent to the type of maps `𝕊¹ → X`.
+A free loop in a type `X` consists of a point `x : X` and an identification
+`x ＝ x`. The type of free loops in `X` is equivalent to the type of maps
+`𝕊¹ → X`.
 
 ## Definitions
 

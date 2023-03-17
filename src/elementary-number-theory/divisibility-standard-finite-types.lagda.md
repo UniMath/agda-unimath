@@ -24,7 +24,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given two elements `x y : Fin k`, we say that `x` divides `y` if there is an element `u : Fin k` such that `mul-Fin u x = y`.
+Given two elements `x y : Fin k`, we say that `x` divides `y` if there is an
+element `u : Fin k` such that `mul-Fin u x = y`.
 
 ## Definition
 

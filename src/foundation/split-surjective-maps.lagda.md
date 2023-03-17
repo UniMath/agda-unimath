@@ -14,8 +14,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
-open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.retractions
 open import foundation-core.sections
@@ -26,11 +24,15 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map `f : A → B` is split surjective if we can construct for every `b : B` an element in the fiber of `b`, meaning an element `a : A` equipped with an identification `f a ＝ b`.
+A map `f : A → B` is split surjective if we can construct for every `b : B` an
+element in the fiber of `b`, meaning an element `a : A` equipped with an
+identification `f a ＝ b`.
 
 ## Warning
 
-Note that split-surjectiveness is the Curry-Howard interpretation of surjectiveness. However, this is not a property, and the split surjective maps don't fit in a factorization system along with the injective maps.
+Note that split-surjectiveness is the Curry-Howard interpretation of
+surjectiveness. However, this is not a property, and the split surjective maps
+don't fit in a factorization system along with the injective maps.
 
 ## Definition
 

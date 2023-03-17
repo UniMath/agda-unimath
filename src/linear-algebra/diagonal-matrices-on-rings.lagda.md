@@ -9,7 +9,6 @@ module linear-algebra.diagonal-matrices-on-rings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import linear-algebra.constant-vectors
@@ -40,7 +39,7 @@ module _
 
 ### Scalar matrices
 
-```
+```agda
 module _
   {l : Level} (R : Ring l)
   where

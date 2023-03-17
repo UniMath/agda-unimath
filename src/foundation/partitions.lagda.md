@@ -7,50 +7,50 @@ module foundation.partitions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-maps
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
-open import foundation.fibers-of-maps
-open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
 open import foundation.sigma-decompositions
-open import foundation.singleton-subtypes
 open import foundation.small-types
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A partition of a type `A` is a subset `P` of the type of inhabited subsets of `A` such that for each `a : A` the type
+A partition of a type `A` is a subset `P` of the type of inhabited subsets of
+`A` such that for each `a : A` the type
 
 ```md
   Σ (Q : inhabited-subtype (A)), P(Q) × Q(a)
 ```
 
-is contractible. In other words, it is a collection `P` of inhabited subtypes of `A` such that each element of `A` is in a unique inhabited subtype in `P`.
+is contractible. In other words, it is a collection `P` of inhabited subtypes of
+`A` such that each element of `A` is in a unique inhabited subtype in `P`.
 
 ## Definition
 
@@ -92,9 +92,11 @@ module _
   is-prop-is-block-partition = is-prop-is-in-subtype subtype-partition
 ```
 
-We introduce the type of blocks of a partition. However, we will soon be able to reduce the universe level of this type. Therefore we call this type of blocks `large`.
+We introduce the type of blocks of a partition. However, we will soon be able to
+reduce the universe level of this type. Therefore we call this type of blocks
+`large`.
 
-```
+```agda
   block-partition-Large-Type : UU (l1 ⊔ lsuc l2 ⊔ l3)
   block-partition-Large-Type = type-subtype subtype-partition
 
@@ -193,7 +195,9 @@ We introduce the type of blocks of a partition. However, we will soon be able to
 
 ### The (small) type of blocks of a partition
 
-We will now introduce the type of blocks of a partition, and show that the type of blocks containing a fixed element `a` is contractible. Once this is done, we will have no more use for the large type of blocks of a partition.
+We will now introduce the type of blocks of a partition, and show that the type
+of blocks containing a fixed element `a` is contractible. Once this is done, we
+will have no more use for the large type of blocks of a partition.
 
 ```agda
   block-partition : UU (l1 ⊔ l2)
@@ -665,7 +669,7 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 
 #### The partition obtained from the set-indexed Σ-decomposition induced by a partition has the same blocks as the original partition
 
--- ```agda
+```agda
 -- module _
 --   {l1 l2 l3 : Level} {A : UU l1} (P : partition (l1 ⊔ l2) l3 A)
 --   where
@@ -681,19 +685,14 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 --     apply-universal-property-trunc-Prop
 --       ( is-inhabited-subtype-inhabited-subtype Q)
 --       ( subtype-partition P Q)
---       ( λ (a , q) →
---         {!!})
+--       ( λ (a , q) → {!  !})
 
--- {-
--- i : X
--- H : (x : A) → Q x ≃ (pr1 (inv-equiv (compute-total-block-partition P) x) ＝ i)
--- a : A
--- q : Q a
+{-  i : X  H : (x : A) → Q x ≃ (pr1 (inv-equiv
+(compute-total-block-partition P) x) ＝ i)  a : A  q : Q a
 
--- H a q : pr1 (inv-equiv (compute-total-block-partition P) a) ＝ i
+ H a q : pr1 (inv-equiv (compute-total-block-partition P) a) ＝ i
 
--- H' : (B : block)
--- -}
+ H' : (B : block)  -}
 
 --   is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
 --     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
@@ -702,9 +701,8 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 --       ( partition-Set-Indexed-Σ-Decomposition
 --         ( set-indexed-Σ-decomposition-partition P))
 --       ( Q)
---   is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H =
---     {!!}
-
+--   is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H = {!  !}
+--
 --   has-same-blocks-partition-set-indexed-Σ-decomposition-partition :
 --     has-same-blocks-partition
 --       ( partition-Set-Indexed-Σ-Decomposition
@@ -714,4 +712,4 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 --     is-block-is-block-partition-set-indexed-Σ-decomposition-partition B
 --   pr2 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
 --     is-block-partition-set-indexed-Σ-decomposition-is-block-partition B
--- ```
+```

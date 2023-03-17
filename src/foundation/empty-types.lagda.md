@@ -12,15 +12,11 @@ open import foundation-core.empty-types public
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
-open import foundation-core.homotopies
-open import foundation-core.sets
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
+open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
 
@@ -28,7 +24,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An empty type is a type with no elements. The (standard) empty type is introduced as an inductive type with no constructors. With the standard empty type available, we will say that a type is empty if it maps into the standard empty type.
+An empty type is a type with no elements. The (standard) empty type is
+introduced as an inductive type with no constructors. With the standard empty
+type available, we will say that a type is empty if it maps into the standard
+empty type.
 
 ## Definition
 

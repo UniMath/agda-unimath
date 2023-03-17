@@ -44,7 +44,9 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.
+Some modular arithmetic was already defined in
+`modular-arithmetic-standard-finite-types`. Here we package those results
+together in a more convenient package that also allows congruence modulo 0.
 
 ```agda
 ℤ-Mod : ℕ → UU lzero
@@ -187,7 +189,7 @@ pr2 (equiv-pred-ℤ-Mod k) = is-equiv-pred-ℤ-Mod k
 
 ## Addition on the integers modulo k
 
-```
+```agda
 add-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
 add-ℤ-Mod zero-ℕ = add-ℤ
 add-ℤ-Mod (succ-ℕ k) = add-Fin (succ-ℕ k)

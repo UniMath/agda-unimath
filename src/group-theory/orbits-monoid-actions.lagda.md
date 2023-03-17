@@ -27,7 +27,9 @@ open import group-theory.monoids
 
 ## Idea
 
-Given a monoid action `M → endo-Monoid X` we can define a category in which the objects are the elements of the set `X` and a morphism from `x` to `y` is an element `m` of the monoid `M` such that `mx = y`.
+Given a monoid action `M → endo-Monoid X` we can define a category in which the
+objects are the elements of the set `X` and a morphism from `x` to `y` is an
+element `m` of the monoid `M` such that `mx = y`.
 
 ## Definition
 
@@ -184,5 +186,4 @@ module _
     left-unit-law-comp-hom-orbit-Monoid-Action
   pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
     right-unit-law-comp-hom-orbit-Monoid-Action
-
 ```

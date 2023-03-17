@@ -21,7 +21,8 @@ open import linear-algebra.vectors
 
 ## Idea
 
-The transposition of a matrix is the operation that turns rows into columns and columns into rows.
+The transposition of a matrix is the operation that turns rows into columns and
+columns into rows.
 
 ## Definition
 

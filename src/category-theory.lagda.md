@@ -9,6 +9,7 @@ open import category-theory.categories public
 open import category-theory.coproducts-precategories public
 open import category-theory.discrete-precategories public
 open import category-theory.endomorphisms-of-objects-categories public
+open import category-theory.epimorphisms-large-precategories public
 open import category-theory.equivalences-categories public
 open import category-theory.equivalences-large-precategories public
 open import category-theory.equivalences-precategories public

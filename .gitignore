@@ -4,11 +4,7 @@
 MAlonzo/**
 _build/**
 agdaFiles
-docs/dependency.dot
-docs/graph.png
-src/everything.lagda.md
 src/**/*.html
-book/
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
@@ -256,7 +252,6 @@ _minted*
 *.sympy
 sympy-plots-for-*.tex/
 
-# pdfcomment
 *.upa
 *.upb
 
@@ -419,8 +414,11 @@ node_modules/*
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
-.vscode
 package-lock.json
 
+# mdbook
 docs/
 html/
+book/
+src/everything.lagda.md
+SUMMARY.md

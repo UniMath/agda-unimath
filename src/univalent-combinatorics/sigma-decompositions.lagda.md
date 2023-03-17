@@ -11,10 +11,7 @@ open import foundation.sigma-decompositions public
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -24,7 +21,6 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.dependent-sum-finite-types

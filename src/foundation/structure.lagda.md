@@ -7,19 +7,17 @@ module foundation.structure where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functoriality-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Given a type family `P` on the universe, a `P`-structured type consists of a type `A` equipped with an element of type `P A`.
+Given a type family `P` on the universe, a `P`-structured type consists of a
+type `A` equipped with an element of type `P A`.
 
 ## Definition
 

@@ -33,7 +33,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Axiom L, which is due to Peter Lumsdaine, asserts that for any two types `X` and `Y` in a common universe, the map `X ＝ Y → X ≃ Y` is an embedding. This axiom is a common generalization of the univalence axiom and axiom K, in the sense that both univalence and axiom K imply axiom L.
+Axiom L, which is due to Peter Lumsdaine, asserts that for any two types `X` and
+`Y` in a common universe, the map `X ＝ Y → X ≃ Y` is an embedding. This axiom
+is a common generalization of the univalence axiom and axiom K, in the sense
+that both univalence and axiom K imply axiom L.
 
 ## Definition
 

@@ -7,29 +7,34 @@ module foundation.decidable-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
-open import foundation.retractions
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A type is said to be decidable if we can either construct an element, or we can prove that it is empty. In other words, we interpret decidability via the Curry-Howard interpretation of logic into type theory. A related concept is that a type is either inhabited or empty, where inhabitedness of a type is expressed using the propositional truncation.
+A type is said to be decidable if we can either construct an element, or we can
+prove that it is empty. In other words, we interpret decidability via the
+Curry-Howard interpretation of logic into type theory. A related concept is that
+a type is either inhabited or empty, where inhabitedness of a type is expressed
+using the propositional truncation.
 
 ## Definition
 
@@ -66,7 +71,7 @@ is-merely-decidable A = type-trunc-Prop (is-decidable A)
 
 ### The unit type and the empty type are decidable
 
-```
+```agda
 is-decidable-unit : is-decidable unit
 is-decidable-unit = inl star
 

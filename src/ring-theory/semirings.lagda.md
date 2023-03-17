@@ -10,34 +10,29 @@ module ring-theory.semirings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-embeddings
-open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
-open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
-
-open import univalent-combinatorics.lists
 ```
 
 </details>
 
 ## Idea
 
-The concept of semiring vastly generalizes the arithmetical structure on the natural numbers. A semiring consists of a set equipped with addition and multiplication, where the addition operation gives the ring the structure of a commutative monoid, and the multiplication is associative, unital, and distributive over addition.
+The concept of semiring vastly generalizes the arithmetical structure on the
+natural numbers. A semiring consists of a set equipped with addition and
+multiplication, where the addition operation gives the ring the structure of a
+commutative monoid, and the multiplication is associative, unital, and
+distributive over addition.
 
 ## Definitions
 

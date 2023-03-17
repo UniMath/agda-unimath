@@ -7,24 +7,26 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtype-identity-principle
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Inhabited types are types equipped with an element of its propositional truncation.
+Inhabited types are types equipped with an element of its propositional
+truncation.
 
 ## Definitions
 
@@ -185,9 +187,9 @@ pr2 (Σ-Inhabited-Type X Y) =
 
 ## See also
 
-- The notion of *nonempty types* is treated in
-  [`foundation.empty-types`](foundation.empty-types.md).
-  In particular, every inhabited type is nonempty.
+- The notion of _nonempty types_ is treated in
+  [`foundation.empty-types`](foundation.empty-types.md). In particular, every
+  inhabited type is nonempty.
 
-- For the notion of *pointed types*, see
+- For the notion of _pointed types_, see
   [`structured-types.pointed-types`](structured-types.pointed-types.md).

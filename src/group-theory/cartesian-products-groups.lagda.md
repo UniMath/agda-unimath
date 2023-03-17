@@ -14,7 +14,6 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.cartesian-products-monoids
-open import group-theory.cartesian-products-semigroups
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -24,7 +23,9 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two groups `G` and `H` has the product of the underlying sets of `G` and `H` as its underlying type, and is equipped with pointwise multiplication.
+The cartesian product of two groups `G` and `H` has the product of the
+underlying sets of `G` and `H` as its underlying type, and is equipped with
+pointwise multiplication.
 
 ## Definition
 

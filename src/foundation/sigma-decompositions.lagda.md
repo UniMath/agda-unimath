@@ -8,40 +8,48 @@ module foundation.sigma-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.equational-reasoning
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.transport
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The type `X` is called the indexing type of the Σ-decomposition, the elements of `Y x` are called the cotypes of the Σ-decomposition, and the equivalence `A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
+A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited
+types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The
+type `X` is called the indexing type of the Σ-decomposition, the elements of
+`Y x` are called the cotypes of the Σ-decomposition, and the equivalence
+`A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
 
-Note that types may have many Σ-decomposition. The type of Σ-decompositions of the unit type, for instance, is equivalent to the type of all pointed connected types. Alternatively, we may think of the type of Σ-decompositions of the unit type as the type of higher groupoid structures on a point, i.e., the type of higher group structures.
+Note that types may have many Σ-decomposition. The type of Σ-decompositions of
+the unit type, for instance, is equivalent to the type of all pointed connected
+types. Alternatively, we may think of the type of Σ-decompositions of the unit
+type as the type of higher groupoid structures on a point, i.e., the type of
+higher group structures.
 
-We may restrict to Σ-decompositions where the indexing type is in a given subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
+We may restrict to Σ-decompositions where the indexing type is in a given
+subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
 
-The type of set-indexed Σ-decompositions of a type `A` is equivalent to the type of equivalence relations on `A`.
+The type of set-indexed Σ-decompositions of a type `A` is equivalent to the type
+of equivalence relations on `A`.
 
 ## Definitions
 
@@ -783,7 +791,6 @@ module _
 #### Equivalence between fibered double Σ-Decompositions and displayed double Σ-Decompositions
 
 ```agda
-
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1}
   (fib-D : fibered-Σ-Decomposition l2 l3 l4 l5 A)

@@ -8,7 +8,6 @@ module type-theories.sections-dependent-type-theories where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -157,3 +156,4 @@ module sections-dtt where
       δ   : preserves-generic-element-section-system
               ( fibered-type-theory.δ B)
               ( W)
+```

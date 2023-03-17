@@ -7,23 +7,27 @@ module foundation.monomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-function-types
-open import foundation.identity-types
-open import foundation.propositional-maps
-open import foundation.propositions
-open import foundation.truncation-levels
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A function `f : A → B` is a monomorphism if whenever we have two functions `g h : X → A` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that postcomposition by `f` is an embedding.
+A function `f : A → B` is a monomorphism if whenever we have two functions
+`g h : X → A` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state
+this in Homotopy Type Theory is to say that postcomposition by `f` is an
+embedding.
 
 ## Definition
 
@@ -43,7 +47,9 @@ module _ {l1 l2 : Level} (l3 : Level)
 
 ## Properties
 
-If `f : A → B` is a monomorphism then for any `g h : X → A` we have an equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f ∘ h` then `g = h`.
+If `f : A → B` is a monomorphism then for any `g h : X → A` we have an
+equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f ∘ h` then
+`g = h`.
 
 ```agda
 module _ {l1 l2 : Level} (l3 : Level)

@@ -7,7 +7,6 @@ module ring-theory.local-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
@@ -15,7 +14,6 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings
-open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
 
@@ -23,7 +21,10 @@ open import ring-theory.rings
 
 ## Idea
 
-A local ring is a ring such that whenever a sum of elements is invertible, then one of its summands is invertible. This implies that the non-invertible elements form an ideal. However, the law of excluded middle is needed to show that any ring of which the non-invertible elements form an ideal is a local ring.
+A local ring is a ring such that whenever a sum of elements is invertible, then
+one of its summands is invertible. This implies that the non-invertible elements
+form an ideal. However, the law of excluded middle is needed to show that any
+ring of which the non-invertible elements form an ideal is a local ring.
 
 ## Definition
 

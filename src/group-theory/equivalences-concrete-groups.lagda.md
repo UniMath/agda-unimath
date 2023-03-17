@@ -25,7 +25,8 @@ open import group-theory.higher-groups
 
 ## Idea
 
-An equivalence of concrete groups consists of a pointed equivalence between their classifying types
+An equivalence of concrete groups consists of a pointed equivalence between
+their classifying types
 
 ## Definition
 

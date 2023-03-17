@@ -8,24 +8,29 @@ module foundation.functional-correspondences where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A functional dependent correspondence is a dependent binary correspondence `C : Π (a : A) → B a → 𝒰` from a type `A` to a type family `B` over `A` such that for every `a : A` the type `Σ (b : B a), C a b` is contractible. The type of dependent functions from `A` to `B` is equivalent to the type of functional dependent correspondences.
+A functional dependent correspondence is a dependent binary correspondence
+`C : Π (a : A) → B a → 𝒰` from a type `A` to a type family `B` over `A` such
+that for every `a : A` the type `Σ (b : B a), C a b` is contractible. The type
+of dependent functions from `A` to `B` is equivalent to the type of functional
+dependent correspondences.
 
 ## Definition
 

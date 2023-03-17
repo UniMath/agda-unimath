@@ -7,17 +7,18 @@ module foundation.induction-principle-propositional-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.universe-levels
+open import foundation-core.dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The induction principle for the propositional truncations present propositional truncations as higher inductive types.
+The induction principle for the propositional truncations present propositional
+truncations as higher inductive types.
 
 ## Definition
 

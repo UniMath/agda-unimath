@@ -10,11 +10,11 @@ module foundation.contractible-maps where
 open import foundation-core.contractible-maps public
 
 open import foundation.equivalences
-open import foundation.logical-equivalences
-open import foundation.propositions
 open import foundation.truncated-maps
 
 open import foundation-core.dependent-pair-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 ```
@@ -66,7 +66,8 @@ module _
 
 - For the notion of biinvertible maps see
   [`foundation.equivalences`](foundation.equivalences.md).
-- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+- For the notions of inverses and coherently invertible maps, also known as
+  half-adjoint equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).

@@ -8,16 +8,19 @@ module foundation.dubuc-penon-compact-types where
 
 ```agda
 open import foundation.disjunction
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.universe-levels
+
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A type is said to be Dubuc-Penon compact if for every proposition `P` and every subtype `Q` of `X` such that `P ∨ Q x` holds for all `x`, then either `P` is true or `Q` contains every element of `X`.
+A type is said to be Dubuc-Penon compact if for every proposition `P` and every
+subtype `Q` of `X` such that `P ∨ Q x` holds for all `x`, then either `P` is
+true or `Q` contains every element of `X`.
 
 ## Definition
 

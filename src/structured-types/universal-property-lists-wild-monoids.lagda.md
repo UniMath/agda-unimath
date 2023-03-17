@@ -25,7 +25,8 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-The type of lists of elements of `X` is the initial wild monoid equipped with a map from `X` into it.
+The type of lists of elements of `X` is the initial wild monoid equipped with a
+map from `X` into it.
 
 ## Definition
 
@@ -279,7 +280,7 @@ elim-list-Wild-Monoid M f =
 
 ### Contractibility of the type `hom (list X) M` of morphisms of wild monoids
 
-```
+```agda
 -- htpy-elim-list-Wild-Monoid :
 --   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
 --   (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
