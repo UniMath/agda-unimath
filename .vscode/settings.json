@@ -6,4 +6,13 @@
   "editor.quickSuggestions": {
     "other": "inline"
   },
+  "[agda]": {
+    "editor.tabSize": 2
+  },
+  "[markdown]" : {
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  },
 }

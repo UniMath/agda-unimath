@@ -5,6 +5,7 @@
     "bbenoist.nix",
     "davidanson.vscode-markdownlint",
     "ms-python.python",
-    "ms-python.vscode-pylance"
+    "ms-python.vscode-pylance",
+    "eamodio.gitlens"
   ]
 }
