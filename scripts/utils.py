@@ -1,5 +1,6 @@
 import pathlib
 import os
+import threading
 import subprocess
 
 
@@ -102,3 +103,11 @@ def get_equivalence_classes(equivalence_relation, iterable):
         else:  # Make a new partition for it.
             partitions.append([e])
     return partitions
+
+
+print_lock = threading.Lock()
+
+
+def thread_safe_print(*args, **kwargs):
+    with print_lock:
+        print(*args, **kwargs)
