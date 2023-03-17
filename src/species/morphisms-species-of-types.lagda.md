@@ -1,7 +1,7 @@
 # Morphisms of species
 
 ```agda
-module univalent-combinatorics.morphisms-species-of-types where
+module species.morphisms-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -17,9 +17,10 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import species.species-of-types
+open import species.species-of-types-in-subuniverse
+
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.species-of-subuniverses
-open import univalent-combinatorics.species-of-types
 ```
 
 </details>

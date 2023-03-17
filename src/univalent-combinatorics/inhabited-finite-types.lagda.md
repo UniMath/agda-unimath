@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -56,37 +57,34 @@ module _
   pr1 inhabited-type-Inhabited-Type-𝔽 = type-Inhabited-Type-𝔽
   pr2 inhabited-type-Inhabited-Type-𝔽 = is-inhabited-type-Inhabited-Type-𝔽
 
-equiv-Inhabited-Type-𝔽 :
+compute-Inhabited-Type-𝔽 :
   {l : Level} →
   Inhabited-Type-𝔽 l ≃
     Σ (Inhabited-Type l ) (λ X → is-finite (type-Inhabited-Type X))
-equiv-Inhabited-Type-𝔽 = equiv-right-swap-Σ
+compute-Inhabited-Type-𝔽 = equiv-right-swap-Σ
 
-Inhabited-Type-𝔽-Prop : {l : Level} → UU l → Prop l
-Inhabited-Type-𝔽-Prop X = prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
+is-finite-and-inhabited-Prop : {l : Level} → UU l → Prop l
+is-finite-and-inhabited-Prop X =
+  prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
 
-Inhabited-Type-𝔽' : (l : Level) → UU (lsuc l)
-Inhabited-Type-𝔽' l = Σ (UU l) (λ X → type-Prop (Inhabited-Type-𝔽-Prop X))
+is-finite-and-inhabited : {l : Level} → UU l → UU l
+is-finite-and-inhabited X =
+  type-Prop (is-finite-and-inhabited-Prop X)
 
-module _
-  {l : Level} (X : Inhabited-Type-𝔽' l)
-  where
+compute-Inhabited-Type-𝔽' :
+  {l : Level} →
+  Inhabited-Type-𝔽 l ≃ type-subuniverse is-finite-and-inhabited-Prop
+compute-Inhabited-Type-𝔽' = assoc-Σ _ _ _
 
-  finite-type-Inhabited-Type-𝔽' : 𝔽 l
-  finite-type-Inhabited-Type-𝔽' = (pr1 X , pr1 (pr2 X))
+map-compute-Inhabited-Type-𝔽' :
+  {l : Level} →
+  Inhabited-Type-𝔽 l → type-subuniverse is-finite-and-inhabited-Prop
+map-compute-Inhabited-Type-𝔽' = map-assoc-Σ _ _ _
 
-  type-Inhabited-Type-𝔽' : UU l
-  type-Inhabited-Type-𝔽' = type-𝔽 finite-type-Inhabited-Type-𝔽'
-
-  is-finite-Inhabited-Type-𝔽' : is-finite type-Inhabited-Type-𝔽'
-  is-finite-Inhabited-Type-𝔽' = is-finite-type-𝔽 finite-type-Inhabited-Type-𝔽'
-
-  is-inhabited-type-Inhabited-Type-𝔽' : is-inhabited type-Inhabited-Type-𝔽'
-  is-inhabited-type-Inhabited-Type-𝔽' = pr2 (pr2 X)
-
-  inhabited-type-Inhabited-Type-𝔽' : Inhabited-Type l
-  pr1 inhabited-type-Inhabited-Type-𝔽' = type-Inhabited-Type-𝔽'
-  pr2 inhabited-type-Inhabited-Type-𝔽' = is-inhabited-type-Inhabited-Type-𝔽'
+map-inv-compute-Inhabited-Type-𝔽' :
+  {l : Level} →
+  type-subuniverse is-finite-and-inhabited-Prop → Inhabited-Type-𝔽 l
+map-inv-compute-Inhabited-Type-𝔽' = map-inv-assoc-Σ _ _ _
 ```
 
 ### Families of inhabited types
@@ -115,17 +113,17 @@ module _
   total-Fam-Inhabited-Types-𝔽 : 𝔽 (l1 ⊔ l2)
   total-Fam-Inhabited-Types-𝔽 = Σ-𝔽 X finite-type-Fam-Inhabited-Types-𝔽
 
-equiv-Fam-Inhabited-Type-𝔽 :
+compute-Fam-Inhabited-Type-𝔽 :
   {l1 l2 : Level} → (X : 𝔽 l1) →
   Fam-Inhabited-Types-𝔽 l2 X ≃
     Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
       ( λ Y → ((x : (type-𝔽 X)) → is-finite (type-Inhabited-Type (Y x))))
-equiv-Fam-Inhabited-Type-𝔽 X =
+compute-Fam-Inhabited-Type-𝔽 X =
    ( distributive-Π-Σ ∘e
     ( equiv-Π
       ( λ _ → Σ (Inhabited-Type _) ( is-finite ∘ type-Inhabited-Type))
       ( id-equiv)
-      ( λ _ → equiv-Inhabited-Type-𝔽)))
+      ( λ _ → compute-Inhabited-Type-𝔽)))
 ```
 
 ## Proposition

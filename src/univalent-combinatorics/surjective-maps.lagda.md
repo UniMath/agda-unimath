@@ -42,6 +42,17 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
+## Definition
+
+```agda
+Surjection-𝔽 :
+  {l1 : Level} (l2 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2)
+Surjection-𝔽 l2 A =
+  Σ (𝔽 l2) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
+```
+
+x
+
 ## Properties
 
 ```agda
@@ -74,7 +85,7 @@ module _
                     ( is-prop-type-trunc-Prop)
                     ( is-surjective-map-surjection f x))))
             (Σ _ (fib (pr1 f))) )
-          ( tot-decidable-emb-trunc-Prop-count
+          ( decidable-emb-tot-trunc-Prop-count
             { P = fib (map-surjection f)}
             ( count-fiber-count-Σ
               dec-X

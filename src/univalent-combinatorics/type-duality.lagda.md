@@ -74,12 +74,12 @@ equiv-surjection-𝔽-family-finite-inhabited-type A B =
             ( is-finite-type-𝔽 A)
             ( is-finite-type-𝔽 B)))))))))
 
-Slice-surjection-𝔽 : (l : Level) {l1 : Level} (A : 𝔽 l1) → UU (lsuc l ⊔ l1)
-Slice-surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
+Slice-Surjection-𝔽 : (l : Level) {l1 : Level} (A : 𝔽 l1) → UU (lsuc l ⊔ l1)
+Slice-Surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
 
 equiv-Fib-trunc-Prop-𝔽 :
   (l : Level) {l1 : Level} (A : 𝔽 l1) →
-  Slice-surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-Type-𝔽 (l1 ⊔ l))
+  Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-Type-𝔽 (l1 ⊔ l))
 equiv-Fib-trunc-Prop-𝔽 l A =
   ( equiv-Π
     ( λ _ → Inhabited-Type-𝔽 _)

@@ -177,11 +177,11 @@ module _
 #### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a finite type.
 
 ```agda
-equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 :
+equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →
   Decidable-Equivalence-Relation-𝔽 l1 A ≃
-  Σ (𝔽 l1) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
-equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A =
+  Surjection-𝔽 l1 A
+equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
   ( equiv-Σ-equiv-base
       ( λ X → (type-𝔽 A) ↠ (type-𝔽 X))
       ( equiv-Σ
@@ -213,7 +213,7 @@ equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A =
               ( type-𝔽 A ↠ X)
               ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
           ( ( equiv-prod commutative-prod id-equiv)  ∘e
-          ( ( equiv-add-redondent-prop
+          ( ( equiv-add-redundant-prop
               ( is-prop-type-trunc-Prop)
               ( λ x →
                  apply-universal-property-trunc-Prop
@@ -226,7 +226,7 @@ equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A =
                            is-surjective-precomp-equiv
                              ( is-surjective-map-surjection (pr1 x))
                              ( equiv-count count-A)))))))))))) ∘e
-  ( equiv-surjection-into-set-Dec-Eq-Rel (type-𝔽 A))))))
+  ( equiv-Surjection-Into-Set-Decidable-Equivalence-Relation (type-𝔽 A))))))
 ```
 
 ### The type of decidable equivalence relations on a finite type is finite
@@ -243,10 +243,10 @@ is-finite-Decidable-Relation-𝔽 A =
         ( is-finite-type-𝔽 A)
         ( λ b → is-finite-decidable-Prop))
 
-is-finite-Dec-Eq-Rel-𝔽 :
+is-finite-Decidable-Equivalence-Relation-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →
   is-finite (Decidable-Equivalence-Relation-𝔽 l1 A)
-is-finite-Dec-Eq-Rel-𝔽 A =
+is-finite-Decidable-Equivalence-Relation-𝔽 A =
   is-finite-Σ
     ( is-finite-Decidable-Relation-𝔽 A)
     ( λ R → is-finite-is-equivalence-Dec-Rel-Prop-𝔽 A R)

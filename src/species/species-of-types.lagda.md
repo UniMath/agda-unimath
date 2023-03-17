@@ -1,7 +1,7 @@
 # Species of types
 
 ```agda
-module univalent-combinatorics.species-of-types where
+module species.species-of-types where
 
 open import foundation.equivalences
 open import foundation.identity-types

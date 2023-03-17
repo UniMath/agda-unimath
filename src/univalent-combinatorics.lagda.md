@@ -9,19 +9,15 @@ open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.bracelets public
 open import univalent-combinatorics.cartesian-product-types public
-open import univalent-combinatorics.cartesian-products-species-of-types public
 open import univalent-combinatorics.classical-finite-types public
 open import univalent-combinatorics.complements-isolated-points public
-open import univalent-combinatorics.composition-species-of-subuniverse public
 open import univalent-combinatorics.coproduct-types public
-open import univalent-combinatorics.coproducts-species-of-types public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-pair-types public
 open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.cubes public
-open import univalent-combinatorics.cycle-index-series-species-of-types public
 open import univalent-combinatorics.cycle-partitions public
 open import univalent-combinatorics.cyclic-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
@@ -32,7 +28,6 @@ open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dedekind-finite-sets public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-sum-finite-types public
-open import univalent-combinatorics.derivatives-species-of-types public
 open import univalent-combinatorics.discrete-sigma-decompositions public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
@@ -42,9 +37,7 @@ open import univalent-combinatorics.equality-finite-types public
 open import univalent-combinatorics.equality-standard-finite-types public
 open import univalent-combinatorics.equivalences public
 open import univalent-combinatorics.equivalences-cubes public
-open import univalent-combinatorics.equivalences-species-of-types public
 open import univalent-combinatorics.equivalences-standard-finite-types public
-open import univalent-combinatorics.exponents-species-of-types public
 open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
@@ -60,14 +53,11 @@ open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.involution-standard-finite-types public
 open import univalent-combinatorics.isotopies-latin-squares public
 open import univalent-combinatorics.kuratowsky-finite-sets public
-open import univalent-combinatorics.large-composition-species-of-types public
 open import univalent-combinatorics.latin-squares public
 open import univalent-combinatorics.lists public
 open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public
-open import univalent-combinatorics.morphisms-finite-species public
-open import univalent-combinatorics.morphisms-species-of-types public
 open import univalent-combinatorics.necklaces public
 open import univalent-combinatorics.orientations-complete-undirected-graph public
 open import univalent-combinatorics.orientations-cubes public
@@ -75,8 +65,6 @@ open import univalent-combinatorics.partitions public
 open import univalent-combinatorics.petri-nets public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
-open import univalent-combinatorics.pointing-species-of-types public
-open import univalent-combinatorics.precategory-of-finite-species public
 open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
@@ -86,8 +74,6 @@ open import univalent-combinatorics.set-quotients-of-index-two public
 open import univalent-combinatorics.sigma-decompositions public
 open import univalent-combinatorics.skipping-element-standard-finite-types public
 open import univalent-combinatorics.small-types public
-open import univalent-combinatorics.species-of-subuniverses public
-open import univalent-combinatorics.species-of-types public
 open import univalent-combinatorics.standard-finite-pruned-trees public
 open import univalent-combinatorics.standard-finite-trees public
 open import univalent-combinatorics.standard-finite-types public
@@ -102,6 +88,5 @@ open import univalent-combinatorics.unions-subtypes public
 open import univalent-combinatorics.universal-property-standard-finite-types public
 open import univalent-combinatorics.unlabeled-partitions public
 open import univalent-combinatorics.unlabeled-rooted-trees public
-open import univalent-combinatorics.unlabeled-structures-species public
 open import univalent-combinatorics.unlabeled-trees public
 ```

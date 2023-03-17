@@ -1,7 +1,7 @@
 # Composition of species of subuniverse
 
 ```agda
-module univalent-combinatorics.composition-species-of-subuniverse where
+module species.composition-species-of-subuniverse where
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -39,11 +39,11 @@ open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
-open import univalent-combinatorics.large-composition-species-of-types
+open import species.large-composition-species-of-types
 open import univalent-combinatorics.sigma-decompositions
 open import univalent-combinatorics.small-types
-open import univalent-combinatorics.species-of-subuniverses
-open import univalent-combinatorics.species-of-types
+open import species.species-of-types-in-subuniverse
+open import species.species-of-types
 ```
 
 ## Idea
@@ -92,7 +92,7 @@ module _
     is-small (l1 ⊔ l2) (analytic-comp-species-subuniverse' l2 P Q S T X))
   (C2 :
     ( S T : species-subuniverse P Q ) → (X : type-subuniverse P) →
-    type-Prop (Q (type-is-small (C1 S T X))))
+    ( is-in-subuniverse Q (type-is-small (C1 S T X))))
   (C3 :
     ( ( X : type-subuniverse P) →
       ( Y : (inclusion-subuniverse P X) → type-subuniverse P) →
@@ -153,11 +153,11 @@ module _
         ( _)
         ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse P ∘e
           ( inv-equiv
-            ( equiv-add-redondent-prop
+            ( equiv-add-redundant-prop
               ( is-prop-type-Prop (P X))
               ( λ D →
                 ( tr
-                  ( type-Prop ∘ P)
+                  ( is-in-subuniverse P)
                   ( eq-equiv _ _
                     ( inv-equiv
                       ( matching-correspondence-Σ-Decomposition-subuniverse
@@ -168,7 +168,7 @@ module _
                     ( subuniverse-cotype-Σ-Decomposition-subuniverse P D))))) ∘e
                 commutative-prod))) ∘e
     ( ( inv-assoc-Σ
-        ( type-Prop (P X))
+        ( is-in-subuniverse P X)
         ( λ a → Σ-Decomposition-subuniverse P X)
         ( _)) ∘e
     ( ( equiv-tot (λ p → inv-equiv (equiv-is-small (C1 S T (X , p))))))))))
@@ -178,13 +178,13 @@ module _
 
 ```agda
   module _
-    (C4 : type-Prop (P (raise-unit l1)))
+    (C4 : is-in-subuniverse P (raise-unit l1))
     (C5 :
       ( X : type-subuniverse P) →
-      ( type-Prop
-        ( Q
+      ( is-in-subuniverse
+          ( Q)
           ( type-is-small
-            ( is-small-lmax l2 ( is-contr (inclusion-subuniverse P X)))))))
+            ( is-small-lmax l2 ( is-contr (inclusion-subuniverse P X))))))
     where
 
     analytic-unit-species-subuniverse :
@@ -210,7 +210,7 @@ module _
        is-equiv-has-inverse
          ( λ u →
            ( tr
-             ( type-Prop ∘ P)
+             ( is-in-subuniverse P)
              ( eq-equiv
                ( raise-unit l1)
                ( X)
@@ -423,42 +423,42 @@ module _
 
 ```agda
 equiv-Σ-Decomposition-Inhabited-Type-𝔽-Σ-Decomposition-𝔽 :
-  {l1 l2 : Level} (X : Inhabited-Type-𝔽' l1) →
-  Σ-Decomposition-𝔽 l2 l2 (type-Inhabited-Type-𝔽' X) ≃
-  Σ-Decomposition-subuniverse Inhabited-Type-𝔽-Prop ((type-Inhabited-Type-𝔽' X))
+  {l1 l2 : Level} (X : Inhabited-Type-𝔽 l1) →
+  Σ-Decomposition-𝔽 l2 l2 (type-Inhabited-Type-𝔽 X) ≃
+  Σ-Decomposition-subuniverse is-finite-and-inhabited-Prop ((type-Inhabited-Type-𝔽 X))
 equiv-Σ-Decomposition-Inhabited-Type-𝔽-Σ-Decomposition-𝔽 X =
   ( ( inv-equiv
       ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse
-        Inhabited-Type-𝔽-Prop)) ∘e
+        is-finite-and-inhabited-Prop)) ∘e
   ( ( equiv-tot
       ( λ D →
         equiv-prod
-          ( equiv-add-redondent-prop
+          ( equiv-add-redundant-prop
             ( is-property-is-inhabited _)
             ( λ _ →
               map-Inhabited-Type
                 ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
-                ( is-inhabited-type-Inhabited-Type-𝔽' X)))
+                ( is-inhabited-type-Inhabited-Type-𝔽 X)))
           ( id-equiv))) ∘e
   ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽))))
 
 is-finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 :
-  {l : Level} (X :  Inhabited-Type-𝔽' l) →
+  {l : Level} (X : Inhabited-Type-𝔽 l) →
   is-finite
     ( Σ-Decomposition-subuniverse
-      ( Inhabited-Type-𝔽-Prop {l})
-      ( type-Inhabited-Type-𝔽' X))
+      ( is-finite-and-inhabited-Prop {l})
+      ( type-Inhabited-Type-𝔽 X))
 is-finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X =
   is-finite-equiv
     ( equiv-Σ-Decomposition-Inhabited-Type-𝔽-Σ-Decomposition-𝔽 X)
-    ( is-finite-Σ-Decomposition-𝔽 (finite-type-Inhabited-Type-𝔽' X))
+    ( is-finite-Σ-Decomposition-𝔽 (finite-type-Inhabited-Type-𝔽 X))
 
 finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 :
-  {l : Level} (X :  Inhabited-Type-𝔽' l) → 𝔽 (lsuc l)
+  {l : Level} (X :  Inhabited-Type-𝔽 l) → 𝔽 (lsuc l)
 pr1 (finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 {l} X) =
   Σ-Decomposition-subuniverse
-    ( Inhabited-Type-𝔽-Prop {l})
-    ( type-Inhabited-Type-𝔽' X)
+    ( is-finite-and-inhabited-Prop {l})
+    ( type-Inhabited-Type-𝔽 X)
 pr2 (finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X) =
   is-finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X
 
@@ -466,75 +466,91 @@ module _
   {l1 l2 : Level}
   where
 
-  finite-analytic-comp-species-subuniverse' :
-    ( S T : species-inhab-𝔽 l1 (l1 ⊔ l2) ) (X :  Inhabited-Type-𝔽' l1) →
+  finite-analytic-comp-species-subuniverse :
+    ( S T : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2) ) (X :  Inhabited-Type-𝔽 l1) →
     𝔽 (lsuc l1 ⊔ l2)
-  finite-analytic-comp-species-subuniverse' S T X =
+  finite-analytic-comp-species-subuniverse S T X =
     Σ-𝔽 ( finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X)
-         ( λ D →
+        ( λ D →
            prod-𝔽
              ( S
                ( subuniverse-indexing-type-Σ-Decomposition-subuniverse
-                   Inhabited-Type-𝔽-Prop
+                   is-finite-and-inhabited-Prop
                    D))
              (( Π-𝔽
-               ( finite-type-Inhabited-Type-𝔽'
-                 ( subuniverse-indexing-type-Σ-Decomposition-subuniverse
-                   Inhabited-Type-𝔽-Prop
-                   D))
+               ( finite-type-Inhabited-Type-𝔽
+                 ( map-inv-compute-Inhabited-Type-𝔽'
+                    ( subuniverse-indexing-type-Σ-Decomposition-subuniverse
+                     is-finite-and-inhabited-Prop
+                     D)))
                ( λ x →
                  T
                  ( subuniverse-cotype-Σ-Decomposition-subuniverse
-                     Inhabited-Type-𝔽-Prop
+                     is-finite-and-inhabited-Prop
                      D
                      x)))))
 
   private
     C1 :
-      ( S T : species-inhab-𝔽 l1 (l1 ⊔ l2) ) → (X :  Inhabited-Type-𝔽' l1) →
+      ( S T : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2) ) →
+      ( X :  type-subuniverse is-finite-and-inhabited-Prop) →
       is-small
         (l1 ⊔ l2)
         ( analytic-comp-species-subuniverse'
           l2
-          Inhabited-Type-𝔽-Prop
+          is-finite-and-inhabited-Prop
           is-finite-Prop
           S T X)
     C1 S T X =
       is-small-is-finite
         (l1 ⊔ l2)
-        ( finite-analytic-comp-species-subuniverse' S T X )
+        ( finite-analytic-comp-species-subuniverse S T
+          (map-inv-compute-Inhabited-Type-𝔽' X) )
 
     C2 :
-      ( S T : species-inhab-𝔽 l1 (l1 ⊔ l2) ) → (X : Inhabited-Type-𝔽' l1) →
+      ( S T : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2) ) →
+      (X : type-subuniverse is-finite-and-inhabited-Prop) →
       is-finite (type-is-small (C1 S T X))
     C2 S T X =
       is-finite-equiv
         ( equiv-is-small (C1 S T X))
-        ( is-finite-type-𝔽 (finite-analytic-comp-species-subuniverse' S T X))
+        ( is-finite-type-𝔽
+          ( finite-analytic-comp-species-subuniverse
+            ( S)
+            ( T)
+            ( map-inv-compute-Inhabited-Type-𝔽' X)))
 
     C3 :
-      ( ( X : Inhabited-Type-𝔽' l1) →
-        ( Y : (type-Inhabited-Type-𝔽' X) → Inhabited-Type-𝔽' l1) →
-        is-in-subuniverse Inhabited-Type-𝔽-Prop
-          ( Σ (type-Inhabited-Type-𝔽' X) (λ x → type-Inhabited-Type-𝔽' (Y x))))
+      ( ( X : type-subuniverse {l1} is-finite-and-inhabited-Prop) →
+        ( Y : ( inclusion-subuniverse is-finite-and-inhabited-Prop X) →
+               type-subuniverse {l1} is-finite-and-inhabited-Prop) →
+        is-in-subuniverse is-finite-and-inhabited-Prop
+          ( Σ ( inclusion-subuniverse is-finite-and-inhabited-Prop X)
+              ( λ x → inclusion-subuniverse is-finite-and-inhabited-Prop (Y x))))
     C3 X Y =
       is-finite-Σ
-        ( is-finite-Inhabited-Type-𝔽' X)
-        ( λ x → is-finite-Inhabited-Type-𝔽' (Y x)) ,
+        ( is-finite-Inhabited-Type-𝔽 (map-inv-compute-Inhabited-Type-𝔽' X))
+        ( λ x →
+          is-finite-Inhabited-Type-𝔽 (map-inv-compute-Inhabited-Type-𝔽' (Y x))) ,
       is-inhabited-Σ
-        ( is-inhabited-type-Inhabited-Type-𝔽' X)
-        ( λ x → is-inhabited-type-Inhabited-Type-𝔽' (Y x))
+        ( is-inhabited-type-Inhabited-Type-𝔽
+          ( map-inv-compute-Inhabited-Type-𝔽' X))
+        ( λ x → is-inhabited-type-Inhabited-Type-𝔽
+          ( map-inv-compute-Inhabited-Type-𝔽' (Y x)))
 
-    C4 : type-Prop (Inhabited-Type-𝔽-Prop (raise-unit l1))
+    C4 : is-finite-and-inhabited (raise-unit l1)
     C4 =
       is-finite-is-contr is-contr-raise-unit ,
       is-inhabited-is-contr is-contr-raise-unit
 
     C5 :
-      ( X : Inhabited-Type-𝔽' l1) →
+      ( X : type-subuniverse {l1} is-finite-and-inhabited-Prop) →
       ( is-finite
           ( type-is-small
-            ( is-small-lmax l2 ( is-contr (type-Inhabited-Type-𝔽' X)))))
+            ( is-small-lmax
+              ( l2)
+              ( is-contr
+                (inclusion-subuniverse is-finite-and-inhabited-Prop X)))))
     C5 X =
       is-finite-is-decidable-Prop
         ( _ ,
@@ -542,51 +558,64 @@ module _
             ( inv-equiv
               ( equiv-is-small
                 ( is-small-lmax l2
-                  ( is-contr (type-Inhabited-Type-𝔽' X)))))
+                  ( is-contr
+                    ( type-Inhabited-Type-𝔽
+                      ( map-inv-compute-Inhabited-Type-𝔽' X))))))
                 ( is-property-is-contr))
         ( is-decidable-equiv
           ( inv-equiv
             ( equiv-is-small
-              ( is-small-lmax l2 (is-contr (type-Inhabited-Type-𝔽' X)))))
-          ( is-decidable-is-contr-is-finite (is-finite-Inhabited-Type-𝔽' X)))
+              ( is-small-lmax
+                ( l2)
+                ( is-contr
+                  ( type-Inhabited-Type-𝔽
+                    ( map-inv-compute-Inhabited-Type-𝔽' X))))))
+          ( is-decidable-is-contr-is-finite
+            ( is-finite-Inhabited-Type-𝔽 (map-inv-compute-Inhabited-Type-𝔽' X))))
 
-  analytic-comp-species-inhab-𝔽 :
-    species-inhab-𝔽 l1 (l1 ⊔ l2) →
-    species-inhab-𝔽 l1 (l1 ⊔ l2)→
-    species-inhab-𝔽 l1 (l1 ⊔ l2)
-  analytic-comp-species-inhab-𝔽 =
+  analytic-comp-species-Inhabited-Type-𝔽 :
+    species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2) →
+    species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)→
+    species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)
+  analytic-comp-species-Inhabited-Type-𝔽 =
     analytic-comp-species-subuniverse
       l2
-      Inhabited-Type-𝔽-Prop
+      is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3
 
-  analytic-unit-species-inhab-𝔽 :
-    species-inhab-𝔽 l1 (l1 ⊔ l2)
-  analytic-unit-species-inhab-𝔽 =
+  analytic-unit-species-Inhabited-Type-𝔽 :
+    species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)
+  analytic-unit-species-Inhabited-Type-𝔽 =
     analytic-unit-species-subuniverse
       l2
-      Inhabited-Type-𝔽-Prop
+      is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3 C4 C5
 
-  left-unit-law-comp-species-inhab-𝔽 :
-    ( S : species-inhab-𝔽 l1 (l1 ⊔ l2)) →
-    analytic-comp-species-inhab-𝔽 analytic-unit-species-inhab-𝔽 S ＝ S
-  left-unit-law-comp-species-inhab-𝔽 =
+  left-unit-law-comp-species-Inhabited-Type-𝔽 :
+    ( S : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)) →
+    analytic-comp-species-Inhabited-Type-𝔽
+      analytic-unit-species-Inhabited-Type-𝔽
+      S ＝
+    S
+  left-unit-law-comp-species-Inhabited-Type-𝔽 =
     left-unit-law-comp-species-subuniverse
       l2
-      Inhabited-Type-𝔽-Prop
+      is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3 C4 C5
 
-  right-unit-law-comp-species-inhab-𝔽 :
-    ( S : species-inhab-𝔽 l1 (l1 ⊔ l2)) →
-    analytic-comp-species-inhab-𝔽 S analytic-unit-species-inhab-𝔽 ＝ S
-  right-unit-law-comp-species-inhab-𝔽 =
+  right-unit-law-comp-species-Inhabited-Type-𝔽 :
+    ( S : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)) →
+    analytic-comp-species-Inhabited-Type-𝔽
+      S
+      analytic-unit-species-Inhabited-Type-𝔽 ＝
+    S
+  right-unit-law-comp-species-Inhabited-Type-𝔽 =
     right-unit-law-comp-species-subuniverse
       l2
-      Inhabited-Type-𝔽-Prop
+      is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3 C4 C5
 ```

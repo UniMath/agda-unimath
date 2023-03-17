@@ -1,7 +1,7 @@
 # Morphisms of finite species
 
 ```agda
-module univalent-combinatorics.morphisms-finite-species where
+module species.morphisms-finite-species where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +14,10 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import species.morphisms-species-of-types
+open import species.species-of-types
+
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.morphisms-species-of-types
-open import univalent-combinatorics.species-of-types
 ```
 
 </details>

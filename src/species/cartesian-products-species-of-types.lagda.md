@@ -1,7 +1,7 @@
 # Cartesian products of species
 
 ```agda
-module univalent-combinatorics.cartesian-products-species-of-types where
+module species.cartesian-products-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -13,9 +13,9 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.exponents-species-of-types
-open import univalent-combinatorics.morphisms-species-of-types
-open import univalent-combinatorics.species-of-types
+open import species.exponents-species-of-types
+open import species.morphisms-species-of-types
+open import species.species-of-types
 ```
 
 </details>
