@@ -9,6 +9,7 @@ module commutative-algebra.powers-of-elements-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
@@ -50,20 +51,38 @@ module _
     power-succ-Ring (ring-Commutative-Ring R)
 ```
 
-### Powers distribute over multiplication
+### Powers by sums of natural numbers are products of powers
 
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
   where
 
+  power-add-Commutative-Ring :
+    (m n : ℕ) {x : type-Commutative-Ring R} →
+    power-Commutative-Ring R (add-ℕ m n) x ＝
+    mul-Commutative-Ring R
+      ( power-Commutative-Ring R m x)
+      ( power-Commutative-Ring R n x)
+  power-add-Commutative-Ring = power-add-Ring (ring-Commutative-Ring R)
+```
+
+### Powers distribute over multiplication
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+  
   distributive-power-mul-Commutative-Ring :
-    (n : ℕ) {x y : type-Commutative-Ring R} →
-    power-Commutative-Ring R n (mul-Commutative-Ring R x y) ＝ 
-    mul-Commutative-Ring R (power-Commutative-Ring R n x) (power-Commutative-Ring R n y)
-  distributive-power-mul-Commutative-Ring zero-ℕ {x} {y} = inv (left-unit-law-mul-Commutative-Ring R (one-Commutative-Ring R))
-  distributive-power-mul-Commutative-Ring (succ-ℕ zero-ℕ) {x} {y} = refl
-  distributive-power-mul-Commutative-Ring (succ-ℕ (succ-ℕ n)) {x} {y} = 
-    ap (mul-Commutative-Ring' R (mul-Commutative-Ring R x y)) (distributive-power-mul-Commutative-Ring (succ-ℕ n) {x} {y}) ∙ 
-    (interchange-mul-mul-Commutative-Ring R (power-Commutative-Ring R (succ-ℕ n) x) (power-Commutative-Ring R (succ-ℕ n) y) x y)
+    (n : ℕ) (x y : type-Commutative-Ring R) →
+    power-Commutative-Ring R n (mul-Commutative-Ring R x y) ＝
+    mul-Commutative-Ring R
+      ( power-Commutative-Ring R n x)
+      ( power-Commutative-Ring R n y)
+  distributive-power-mul-Commutative-Ring n x y =
+    distributive-power-mul-Ring
+      ( ring-Commutative-Ring R)
+      ( n)
+      ( commutative-mul-Commutative-Ring R x y)
 ```

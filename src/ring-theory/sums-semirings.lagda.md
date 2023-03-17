@@ -229,3 +229,18 @@ module _
       ( shift-sum-Semiring n
         ( tail-functional-vec-Semiring R n f))
 ```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  sum-zero-Semiring :
+    (n : ℕ) →
+    sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
+  sum-zero-Semiring zero-ℕ = refl
+  sum-zero-Semiring (succ-ℕ n) =
+    right-unit-law-add-Semiring R _ ∙ sum-zero-Semiring n
+```

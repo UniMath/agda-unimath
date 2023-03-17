@@ -7,6 +7,7 @@ module ring-theory.powers-of-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
@@ -45,6 +46,20 @@ module _
   power-succ-Ring = power-succ-Semiring (semiring-Ring R)
 ```
 
+### Powers by sums of natural numbers are products of powers
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  power-add-Ring :
+    (m n : ℕ) {x : type-Ring R} →
+    power-Ring R (add-ℕ m n) x ＝
+    mul-Ring R (power-Ring R m x) (power-Ring R n x)
+  power-add-Ring = power-add-Semiring (semiring-Ring R)
+```
+
 ### If `x` commutes with `y` then so do their powers
 
 ```agda
@@ -64,4 +79,19 @@ module _
     ( mul-Ring R (power-Ring R m x) (power-Ring R n y)) ＝
     ( mul-Ring R (power-Ring R n y) (power-Ring R m x))
   commute-powers-Ring = commute-powers-Semiring (semiring-Ring R)
+```
+
+### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`.
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+  
+  distributive-power-mul-Ring :
+    (n : ℕ) {x y : type-Ring R} → mul-Ring R x y ＝ mul-Ring R y x →
+    power-Ring R n (mul-Ring R x y) ＝
+    mul-Ring R (power-Ring R n x) (power-Ring R n y)
+  distributive-power-mul-Ring =
+    distributive-power-mul-Semiring (semiring-Ring R)
 ```

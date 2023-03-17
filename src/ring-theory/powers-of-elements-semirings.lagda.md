@@ -7,6 +7,7 @@ module ring-theory.powers-of-elements-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
@@ -47,6 +48,33 @@ module _
     power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R (power-Semiring R n x) x
   power-succ-Semiring zero-ℕ x = inv (left-unit-law-mul-Semiring R x)
   power-succ-Semiring (succ-ℕ n) x = refl
+```
+
+### Powers by sums of natural numbers are products of powers
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-add-Semiring :
+    (m n : ℕ) {x : type-Semiring R} →
+    power-Semiring R (add-ℕ m n) x ＝
+    mul-Semiring R (power-Semiring R m x) (power-Semiring R n x)
+  power-add-Semiring m zero-ℕ {x} =
+    inv
+      ( right-unit-law-mul-Semiring R
+        ( power-Semiring R m x))
+  power-add-Semiring m (succ-ℕ n) {x} =
+    ( power-succ-Semiring R (add-ℕ m n) x) ∙
+    ( ( ap (mul-Semiring' R x) (power-add-Semiring m n)) ∙
+      ( ( associative-mul-Semiring R
+          ( power-Semiring R m x)
+          ( power-Semiring R n x)
+          ( x)) ∙
+        ( ap
+          ( mul-Semiring R (power-Semiring R m x))
+          ( inv (power-succ-Semiring R n x)))))
 ```
 
 ### If `x` commutes with `y` then so do their powers
@@ -147,3 +175,51 @@ module _
                 ( mul-Semiring R (power-Semiring R (succ-ℕ n) y))
                 ( inv (power-succ-Semiring R m x))))))))
 ```
+
+### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`.
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+  
+  distributive-power-mul-Semiring :
+    (n : ℕ) {x y : type-Semiring R} →
+    (H : mul-Semiring R x y ＝ mul-Semiring R y x) →
+    power-Semiring R n (mul-Semiring R x y) ＝
+    mul-Semiring R (power-Semiring R n x) (power-Semiring R n y)
+  distributive-power-mul-Semiring zero-ℕ H =
+    inv (left-unit-law-mul-Semiring R (one-Semiring R))
+  distributive-power-mul-Semiring (succ-ℕ n) {x} {y} H =
+    ( power-succ-Semiring R n (mul-Semiring R x y)) ∙
+    ( ( ap
+        ( mul-Semiring' R (mul-Semiring R x y))
+        ( distributive-power-mul-Semiring n H)) ∙
+      ( ( inv
+          ( associative-mul-Semiring R
+            ( mul-Semiring R (power-Semiring R n x) (power-Semiring R n y))
+            ( x)
+            ( y))) ∙
+        ( ( ap
+            ( mul-Semiring' R y)
+            ( ( associative-mul-Semiring R
+                ( power-Semiring R n x)
+                ( power-Semiring R n y)
+                ( x)) ∙
+              ( ( ap
+                  ( mul-Semiring R (power-Semiring R n x))
+                  ( commute-powers-Semiring' R n (inv H))) ∙
+                ( inv
+                  ( associative-mul-Semiring R
+                    ( power-Semiring R n x)
+                    ( x)
+                    ( power-Semiring R n y)))))) ∙
+          ( ( associative-mul-Semiring R
+              ( mul-Semiring R (power-Semiring R n x) x)
+              ( power-Semiring R n y)
+              ( y)) ∙
+            ( ap-mul-Semiring R
+              ( inv (power-succ-Semiring R n x))
+              ( inv (power-succ-Semiring R n y)))))))
+```
+

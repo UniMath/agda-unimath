@@ -292,6 +292,19 @@ module _
   ap-mul-nat-scalar-Commutative-Ring =
     ap-mul-nat-scalar-Ring ring-Commutative-Ring
 
+  left-zero-law-mul-nat-scalar-Commutative-Ring :
+    (x : type-Commutative-Ring) →
+    mul-nat-scalar-Commutative-Ring 0 x ＝ zero-Commutative-Ring
+  left-zero-law-mul-nat-scalar-Commutative-Ring =
+    left-zero-law-mul-nat-scalar-Ring ring-Commutative-Ring
+
+  right-zero-law-mul-nat-scalar-Commutative-Ring :
+    (n : ℕ) →
+    mul-nat-scalar-Commutative-Ring n zero-Commutative-Ring ＝
+    zero-Commutative-Ring
+  right-zero-law-mul-nat-scalar-Commutative-Ring =
+    right-zero-law-mul-nat-scalar-Ring ring-Commutative-Ring
+
   left-unit-law-mul-nat-scalar-Commutative-Ring :
     (x : type-Commutative-Ring) →
     mul-nat-scalar-Commutative-Ring 1 x ＝ x
@@ -329,4 +342,21 @@ module _
       ( mul-nat-scalar-Commutative-Ring n x)
   right-distributive-mul-nat-scalar-add-Commutative-Ring =
     right-distributive-mul-nat-scalar-add-Ring ring-Commutative-Ring
+```
+
+### Computing multiplication with minus one in a ring
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  neg-one-Commutative-Ring : type-Commutative-Ring R
+  neg-one-Commutative-Ring = neg-one-Ring (ring-Commutative-Ring R)
+
+  mul-neg-one-Commutative-Ring :
+    (x : type-Commutative-Ring R) →
+    mul-Commutative-Ring R neg-one-Commutative-Ring x ＝
+    neg-Commutative-Ring R x
+  mul-neg-one-Commutative-Ring = mul-neg-one-Ring (ring-Commutative-Ring R)
 ```

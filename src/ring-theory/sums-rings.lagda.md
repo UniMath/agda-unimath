@@ -167,3 +167,15 @@ module _
     sum-Ring R n f
   shift-sum-Ring = shift-sum-Semiring (semiring-Ring R)
 ```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  sum-zero-Ring :
+    (n : ℕ) → sum-Ring R n (zero-functional-vec-Ring R n) ＝ zero-Ring R
+  sum-zero-Ring = sum-zero-Semiring (semiring-Ring R)
+```

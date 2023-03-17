@@ -128,7 +128,7 @@ module _
     right-distributive-mul-sum-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Interchange law of sums and addition in a commutative ring
+### Interchange law of sums and addition in a commutative semiring
 
 ```agda
 module _
@@ -146,7 +146,7 @@ module _
     interchange-add-sum-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Extending a sum of elements in a commutative ring
+### Extending a sum of elements in a commutative semiring
 
 ```agda
 module _
@@ -164,7 +164,7 @@ module _
     extend-sum-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Shifting a sum of elements in a commutative ring
+### Shifting a sum of elements in a commutative semiring
 
 ```agda
 module _
@@ -181,3 +181,18 @@ module _
   shift-sum-Commutative-Semiring =
     shift-sum-Semiring (semiring-Commutative-Semiring R)
 ```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  sum-zero-Commutative-Semiring :
+    (n : ℕ) →
+    sum-Commutative-Semiring R n
+      ( zero-functional-vec-Commutative-Semiring R n) ＝
+    zero-Commutative-Semiring R
+  sum-zero-Commutative-Semiring =
+    sum-zero-Semiring (semiring-Commutative-Semiring R)

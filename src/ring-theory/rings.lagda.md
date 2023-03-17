@@ -370,6 +370,16 @@ module _
     (m ＝ n) → (x ＝ y) → mul-nat-scalar-Ring m x ＝ mul-nat-scalar-Ring n y
   ap-mul-nat-scalar-Ring = ap-mul-nat-scalar-Semiring (semiring-Ring R)
 
+  left-zero-law-mul-nat-scalar-Ring :
+    (x : type-Ring R) → mul-nat-scalar-Ring 0 x ＝ zero-Ring R
+  left-zero-law-mul-nat-scalar-Ring =
+    left-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
+
+  right-zero-law-mul-nat-scalar-Ring :
+    (n : ℕ) → mul-nat-scalar-Ring n (zero-Ring R) ＝ zero-Ring R
+  right-zero-law-mul-nat-scalar-Ring =
+    right-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
+
   left-unit-law-mul-nat-scalar-Ring :
     (x : type-Ring R) →  mul-nat-scalar-Ring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Ring =

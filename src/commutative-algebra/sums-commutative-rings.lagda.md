@@ -198,3 +198,18 @@ split-sum-Commutative-Ring R n (succ-ℕ m) f =
     ( split-sum-Commutative-Ring R n m (f ∘ inl))) ∙ 
   ( associative-add-Commutative-Ring R _ _ _ )
 ```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  sum-zero-Commutative-Ring :
+    (n : ℕ) →
+    sum-Commutative-Ring R n
+      ( zero-functional-vec-Commutative-Ring R n) ＝
+    zero-Commutative-Ring R
+  sum-zero-Commutative-Ring = sum-zero-Ring (ring-Commutative-Ring R)
+```
