@@ -1,42 +1,72 @@
 # INSTALL
 
-Before you can use the `agda-unimath` library, you should have Agda installed on
-your machine. You can get Agda via following their installation instructions, or
-using the provided Nix flake, if you're using Nix. You should also have an
-editor capable of working with Agda file. We recommend either of `Emacs` and
-`VSCode`.
+To use the `agda-unimath` library, you will need to have Agda and a code editor
+installed. This guide provides instructions for installing Agda as well as
+specific setup instructions for the editors Emacs and Visual Studio Code. By
+following the step-by-step directions, you will create a tailored working
+environment for using the library. Additionally, we provide instructions for
+setting up your environment for making contributions to the library.
 
-## Installation guides
+## Getting a copy of the library
 
-Get a copy of our library on your machine using
+Get a copy of our library on your machine with git using
 
 ```shell
 git clone git@github.com:UniMath/agda-unimath.git
 ```
 
-then install Agda as described in the next section.
+or by going to the
+[`agda-unimath` GitHub page](https://github.com/UniMath/agda-unimath) and
+manually downloading it.
+
+## Installing Agda
+
+Before using the `agda-unimath` library, you must first install Agda. We outline
+two methods for installation: with or without the package manager Nix. Nix
+streamlines the installation of Agda and its dependencies, providing a
+consistent and reproducible environment for the library across different
+systems.
 
 ### Without Nix
 
-Go to the
+To install Agda without Nix, follow the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
-on the Agda documentation page for instructions to install Agda.
+provided on the Agda documentation page.
 
 ### With Nix
 
-The library comes with a development shell described in the flake.nix file. To
+The library comes with a development shell described in the `flake.nix` file. To
 activate the shell, open a terminal in the directory where you cloned the
-library, and run
+library, and run:
 
 ```shell
 nix develop
 ```
 
-Then to make sure that your editor sees the Agda installation, start it from
-within that shell, i.e. run `code` or `emacs` inside the shell.
+Once you've activated the shell, launch your editor from within it by running
+`code` or `emacs`. This ensures your editor recognizes the Agda installation.
 
-To make `emacs` use the correct `agda2-mode` provided by the development
-environment, add the following snippet to your `.emacs` file:
+## Tutorials for Agda
+
+If you're new to Agda, see the
+[list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
+to learn how to use Agda.
+
+## Editor Setup
+
+You can use either [Emacs](https://www.gnu.org/software/emacs/) or
+[Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
+when working with the agda-unimath library. Both editors offer support for Agda
+development, and the choice between them is largely a matter of personal
+preference. Below, you'll find setup instructions for each editor to help you
+configure your preferred environment for working with the library.
+
+### Emacs
+
+#### Agda mode using Nix
+
+If you installed Agda using Nix, add the following snippet to your `.emacs` file
+to use the correct `agda2-mode` provided by the development environment:
 
 ```elisp
 (when (executable-find "agda-mode")
@@ -44,46 +74,36 @@ environment, add the following snippet to your `.emacs` file:
                (shell-command-to-string "agda-mode locate"))))
 ```
 
-which is a modified version of the usual agda2-mode setup provided by Agda,
+This is a modified version of the usual `agda2-mode` setup provided by Agda,
 except it checks if Agda is available, so that it doesn't cause errors when
 opening Emacs outside the project.
 
-### Setting up Emacs for literate Agda files
+#### Literate Agda files
 
-The `agda-unimath` library is written in literate markdown agda. This means that
-all the files in the formalization have the extension `.lagda.md` and they
-consist of markdown text and `agda` code blocks. For your Emacs to handle these
-files correctly, you need to add the following line to your `.emacs` file:
+The `agda-unimath` library is written in literate markdown Agda. Add the
+following line to your `.emacs` file to enable Emacs to handle literate Agda
+files with the `.lagda.md` extension:
 
 ```elisp
 (setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
 ```
 
-### Tutorials for Agda
+#### Special symbols
 
-If you're new to Agda, see the
-[list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
-to learn how to use Agda.
-
-### Setting up Emacs for special symbols
-
-In the `agda-unimath` library, we use two notations for the identity type. The
-identity type is first introduced using Martin-Löf's original notation `Id`.
-Then we introduce as a secondary option the infix notation `_＝_`.
-
-**Note**: The equals sign in the infix notation is not the standard equals sign
-on your keyboard, but it is the
+The `agda-unimath` library employs two notations for the identity type:
+Martin-Löf's original notation `Id` and an infix notation `_＝_`. The infix
+notation's equals sign is not the standard one, but rather the
 [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
-Note that the full width equals sign is slightly wider, and it is highlighted in
-blue just like all the other defined constructions in Agda. In order to type the
-full width equals sign in Agda's Emacs Mode, you need to add it to your Agda
-input method as follows:
+Observe that the full width equals sign is slightly wider, and is highlighted in
+blue just like all the other defined constructions in Agda. To type the full
+width equals sign in Agda's Emacs Mode, you need to add it to your Agda input
+method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
-- Click the `INS` button
+- Press the `INS` key
 - Type the regular equals sign `=` in the Key sequence field.
-- Click the `INS` button
+- Press the `INS` key
 - Type the full width equals sign `＝` in the translations field.
 - Click the `Apply and save` button.
 
@@ -91,12 +111,12 @@ After completing these steps, you can type `\=` in order to obtain the full
 width equals sign `＝`. While you're at it, you can also add the key sequence
 `yo` to obtain the Japanese symbol `ょ` for the Yoneda embedding.
 
-### 80 character limit
+#### 80 character limit
 
 The `agda-unimath` library maintains an 80 character limit on the length of
 lines in the source code. This limit is to improve readability, both in your
-programming environment and on our website. Emacs has an option to display a
-line marking the 80th column. This option can be enabled by adding
+programming environment and on our website. To display a line marking the 80th
+column in Emacs, add:
 
 ```elisp
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
@@ -104,47 +124,93 @@ line marking the 80th column. This option can be enabled by adding
 
 to your `.emacs` file.
 
-### Note on the library's use of unicode characters
+### VSCode
 
-This library makes extensive use of unicode characters. It is therefore
-important to use a font family with wide support for them. For example, we make
-use of the [middle dot](https://www.compart.com/en/unicode/U+00B7) symbol `·`,
-as well as the [bullet operator](https://www.compart.com/en/unicode/U+2219)
-symbol `∙`, which in some fonts are indistinguishable. If these two symbols look
-the same in your editor, we suggest that you change your font.
+The `agda-unimath` library comes with a predefined VSCode workspace. Open the
+folder containing the cloned repository in VSCode, and it should automatically
+recognize the workspace and apply the appropriate settings.
 
-As a suggestion, this website uses the following family of fonts in prioritized
-order (decreasing) to display Agda code:
+#### Extensions
 
-```css
-Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace
-```
+A collection of recommended extensions is included with the workspace to
+streamline your experience while working with the library. These extensions
+should be automatically suggested to you when you open the repository in VSCode.
 
-### After the setup
+##### Agda mode
 
-With Agda installed and Emacs correctly set up, you can start using the library.
-There is no need to install anything further. To compile the library, which is
-optional, run `make check` from the main folder of the repository. This
-generates the file `everything.lagda.md`, which imports all the files in the
-library and subsequently verifies them. You don't need to compile the entire
-library, however. You can simply open the file you're interested in and load it
-with Agda. This will verify the file and any prerequisites that are not already
-compiled.
+One essential extension for interacting with Agda is
+[`agda-mode`](https://marketplace.visualstudio.com/items?itemName=banacorn.agda-mode).
+After installing this extension, you'll be able to verify `.lagda.md` files by
+opening them by and using the `C-c C-l` command. For a full list of commands,
+see the extension's reference page.
 
-## Pre-commit hooks
+#### Special characters
 
-The `agda-unimath` library comes with pre-commit hooks that checks that files
-follow some basic formatting rules. To use these hooks, you need to install the
-`pre-commit` tool. The easiest way to do this is to use the Python package
-manager `pip`:
+The VSCode workspace adds snippets for inserting special symbols like `＝` and
+`ょ`, since there's currently no way to add these to Agda's input mode in
+VSCode.
+
+To insert these symbols in the editor, follow these steps:
+
+1. Begin typing one of the activation sequences listed below.
+2. When the symbol appears as a greyed-out character in your editor, press `TAB`
+   to insert it.
+
+- `＝`: Type `Id` or `equals`
+- `ょ`: Type `yoneda`
+- `⧄`: Type `diagonal` or `lifting`
+
+These snippets are defined in `.vscode/agda.code-snippets`.
+
+#### Autoformatting
+
+For your convenience, the VSCode workspace configuration includes several
+automatic formatting functions. These functions continuously correct minor
+formatting mistakes, ensuring a smoother coding experience.
+
+### Note on the library's use of Unicode characters
+
+This library makes extensive use of Unicode characters. It is therefore
+important to use a font family with wide support for them in your editor. For
+example, we make use of the
+[middle dot](https://www.compart.com/en/unicode/U+00B7) symbol `·`, as well as
+the [bullet operator](https://www.compart.com/en/unicode/U+2219) symbol `∙`,
+which in some fonts are indistinguishable. If these two symbols look the same in
+your editor, we suggest that you change your font.
+
+## After the setup
+
+Congratulations! With Agda installed and your editor expertly configured, you're
+now ready to dive into using the library.
+
+### Verifying the library
+
+To verify a file and its prerequisites wih Agda, simply open and load it. If you
+want to compile the entire library, you can run `make check` from the
+repository's main folder. This generates the `everything.lagda.md` file, which
+imports and verifies all files in the library.
+
+### Contributing
+
+We welcome and appreciate contributions from the community. If you're interested
+in contributing to the `agda-unimath` library, please follow our guidelines and
+best practices, as well as the instructions below to ensure a smooth setup and
+workflow.
+
+#### Pre-commit hooks and Python dependencies
+
+The `agda-unimath` library includes pre-commit hooks that enforce basic
+formatting rules. To utilize these hooks, you'll need to install the
+`pre-commit` tool and the hooks' Python dependencies. The easiest way to
+accomplish this is by using the Python package manager `pip` and running the
+following command:
 
 ```shell
-python3 -pip install pre-commit
+python3 -pip install -r scripts/requirements.txt
 ```
 
-Once you have installed `pre-commit`, next time before you open a new PR, please
-stage all your changes and run the following command:
+Now, before you submit a PR next time, make sure to stage your changes and run
+`make pre-commit` from the repository's main folder.
 
-```shell
-make pre-commit
-```
+Keep in mind that `pre-commit` is also a part of the CI, so any PR that violates
+the enforced conventions will be automatically blocked.
