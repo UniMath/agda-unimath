@@ -91,8 +91,7 @@ pre-commit:
 	@pre-commit run --all-files
 	@make check
 
-website-dev:
-	@curl https://sh.rustup.rs -sSf | sh
+install-website-dev:
 	@cargo install mdbook
 	@cargo install mdbook-linkcheck
 	@cargo install mdbook-katex
