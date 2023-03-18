@@ -3,7 +3,7 @@
 To use the `agda-unimath` library, you will need to have Agda and a code editor
 installed. This guide provides instructions for installing Agda as well as
 specific setup instructions for the editors Emacs and Visual Studio Code. By
-following the step-by-step directions, you will create a tailored working
+following theese step-by-step directions, you will create a tailored working
 environment for using the library. Additionally, we provide instructions for
 setting up your environment for making contributions to the library.
 
@@ -21,7 +21,7 @@ manually downloading it.
 
 ## Installing Agda
 
-Before using the `agda-unimath` library, you must first install Agda. We outline
+The `agda-unimath` library is built and verified with Agda 2.6.3,and we provide
 two methods for installation: with or without the package manager Nix. Nix
 streamlines the installation of Agda and its dependencies, providing a
 consistent and reproducible environment for the library across different
