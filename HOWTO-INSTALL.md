@@ -21,15 +21,15 @@ manually downloading it.
 
 ## Installing Agda
 
-The `agda-unimath` library is built and verified with Agda 2.6.3,and we provide
-two methods for installation: with or without the package manager Nix. Nix
-streamlines the installation of Agda and its dependencies, providing a
+The `agda-unimath` library is built and verified with Agda v2.6.3, and we
+provide two methods for installation: with or without the package manager Nix.
+Nix streamlines the installation of Agda and its dependencies, providing a
 consistent and reproducible environment for the library across different
 systems.
 
 ### Without Nix
 
-To install Agda without Nix, follow the
+To install Agda v2.6.3 without Nix, follow the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
 provided on the Agda documentation page.
 
@@ -54,7 +54,7 @@ with the
 [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
 provided on the Agda documentation page.
 
-## Editor Setup
+## Editor setup
 
 We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
