@@ -599,7 +599,7 @@ module _
 module _
   {l : Level} (G : Group l)
   where
-  
+
   is-abelian-every-element-central-Group :
     ((x : type-Group G) → is-central-element-Group G x) → is-abelian-Group G
   is-abelian-every-element-central-Group H x y = H x y
