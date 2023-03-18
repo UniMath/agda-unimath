@@ -9,6 +9,7 @@ module commutative-algebra.sums-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.functions
@@ -21,6 +22,7 @@ open import linear-algebra.vectors-on-commutative-semirings
 
 open import ring-theory.sums-semirings
 
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -196,4 +198,18 @@ module _
     zero-Commutative-Semiring R
   sum-zero-Commutative-Semiring =
     sum-zero-Semiring (semiring-Commutative-Semiring R)
+```
+
+### Splitting Sums
+
+```agda
+split-sum-Commutative-Semiring :
+  {l : Level} (R : Commutative-Semiring l)
+  (n m : ℕ) (f : functional-vec-Commutative-Semiring R (add-ℕ n m)) →
+  sum-Commutative-Semiring R (add-ℕ n m) f ＝
+  add-Commutative-Semiring R
+    ( sum-Commutative-Semiring R n (f ∘ inl-coprod-Fin n m))
+    ( sum-Commutative-Semiring R m (f ∘ inr-coprod-Fin n m))
+split-sum-Commutative-Semiring R =
+  split-sum-Semiring (semiring-Commutative-Semiring R)
 ```

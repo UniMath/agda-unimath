@@ -76,10 +76,10 @@ module _
 ### Submonoids
 
 ```agda
-is-submonoid-subset-Monoid-Prop :
+is-submonoid-monoid-Prop :
   {l1 l2 : Level} (M : Monoid l1) (P : subset-Monoid l2 M) →
   Prop (l1 ⊔ l2)
-is-submonoid-subset-Monoid-Prop M P =
+is-submonoid-monoid-Prop M P =
   prod-Prop
     ( P (unit-Monoid M))
     ( Π-Prop
@@ -89,15 +89,15 @@ is-submonoid-subset-Monoid-Prop M P =
           ( type-Monoid M)
           ( λ y → hom-Prop (P x) (hom-Prop (P y) (P (mul-Monoid M x y))))))
 
-is-submonoid-subset-Monoid :
+is-submonoid-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (P : subset-Monoid l2 M) → UU (l1 ⊔ l2)
-is-submonoid-subset-Monoid M P =
-  type-Prop (is-submonoid-subset-Monoid-Prop M P)
+is-submonoid-Monoid M P =
+  type-Prop (is-submonoid-monoid-Prop M P)
 
 Submonoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l2)
 Submonoid l2 M =
-  type-subtype (is-submonoid-subset-Monoid-Prop {l2 = l2} M)
+  type-subtype (is-submonoid-monoid-Prop {l2 = l2} M)
 
 module _
   {l1 l2 : Level} (M : Monoid l1) (P : Submonoid l2 M)
@@ -105,9 +105,9 @@ module _
 
   subset-Submonoid : subtype l2 (type-Monoid M)
   subset-Submonoid =
-    inclusion-subtype (is-submonoid-subset-Monoid-Prop M) P
+    inclusion-subtype (is-submonoid-monoid-Prop M) P
 
-  is-submonoid-Submonoid : is-submonoid-subset-Monoid M subset-Submonoid
+  is-submonoid-Submonoid : is-submonoid-Monoid M subset-Submonoid
   is-submonoid-Submonoid = pr2 P
 
   is-in-Submonoid : type-Monoid M → UU l2
@@ -222,7 +222,7 @@ module _
     (K : Submonoid l2 M) → (N ＝ K) ≃ has-same-elements-Submonoid K
   extensionality-Submonoid =
     extensionality-type-subtype
-      ( is-submonoid-subset-Monoid-Prop M)
+      ( is-submonoid-monoid-Prop M)
       ( is-submonoid-Submonoid M N)
       ( λ x → pair id id)
       ( extensionality-subtype (subset-Submonoid M N))

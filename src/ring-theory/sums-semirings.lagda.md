@@ -7,6 +7,7 @@ module ring-theory.sums-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
@@ -21,6 +22,7 @@ open import linear-algebra.vectors-on-semirings
 
 open import ring-theory.semirings
 
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -243,4 +245,23 @@ module _
   sum-zero-Semiring zero-ℕ = refl
   sum-zero-Semiring (succ-ℕ n) =
     right-unit-law-add-Semiring R _ ∙ sum-zero-Semiring n
+```
+
+### Splitting Sums
+
+```agda
+split-sum-Semiring :
+  {l : Level} (R : Semiring l)
+  (n m : ℕ) (f : functional-vec-Semiring R (add-ℕ n m)) →
+  sum-Semiring R (add-ℕ n m) f ＝
+  add-Semiring R
+    ( sum-Semiring R n (f ∘ inl-coprod-Fin n m))
+    ( sum-Semiring R m (f ∘ inr-coprod-Fin n m))
+split-sum-Semiring R n zero-ℕ f =
+  inv (right-unit-law-add-Semiring R (sum-Semiring R n f))
+split-sum-Semiring R n (succ-ℕ m) f =
+  ( ap
+    ( add-Semiring' R (f(inr star)))
+    ( split-sum-Semiring R n m (f ∘ inl))) ∙
+  ( associative-add-Semiring R _ _ _ )
 ```
