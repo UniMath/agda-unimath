@@ -9,6 +9,16 @@
   "Fullwidth equals sign (＝)": {
     "prefix": ["Id", "equals"],
     "body": ["＝"],
-    "description": "Fullwidth Equals Sign"
+    "description": "Fullwidth equals sign"
+  },
+  "Yoneda embedding (ょ)": {
+    "prefix": ["yoneda"],
+    "body": ["ょ"],
+    "description": "Yoneda embedding"
+  },
+  "Diagonal lift (⧄)": {
+    "prefix": ["diagonal", "lifting"],
+    "body": ["⧄"],
+    "description": "Diagonal lift"
   }
 }
