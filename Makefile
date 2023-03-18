@@ -3,7 +3,7 @@ CHECKOPTS :=--without-K --exact-split --guardedness
 everythingOpts :=$(CHECKOPTS)
 AGDAVERBOSE?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
-AGDAFILES := $(shell find src -type f -name "*.lagda.md" \! -name "everything.lagda.md")
+AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) )
 AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
 bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
