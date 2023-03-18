@@ -100,7 +100,7 @@ module _
     distributive-power-mul-Semiring (semiring-Ring R)
 ```
 
-### `(-x)ⁿ = (-1)ⁿxⁿ
+### `(-x)ⁿ = (-1)ⁿxⁿ`
 
 ```agda
 module _

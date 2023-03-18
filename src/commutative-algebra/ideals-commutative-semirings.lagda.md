@@ -25,7 +25,7 @@ open import ring-theory.subsets-semirings
 ## Idea
 
 An ideal in a commutative semiring is a two-sided ideal in the underlying
-semiring
+semiring.
 
 ## Definitions
 

@@ -11,7 +11,9 @@ open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.parity-natural-numbers
 
+open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -85,4 +87,37 @@ module _
       ( ring-Commutative-Ring R)
       ( n)
       ( commutative-mul-Commutative-Ring R x y)
+```
+
+### `(-x)ⁿ = (-1)ⁿxⁿ`
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  power-neg-Commutative-Ring :
+    (n : ℕ) (x : type-Commutative-Ring R) →
+    power-Commutative-Ring R n (neg-Commutative-Ring R x) ＝
+    mul-Commutative-Ring R
+      ( power-Commutative-Ring R n (neg-one-Commutative-Ring R))
+      ( power-Commutative-Ring R n x)
+  power-neg-Commutative-Ring =
+    power-neg-Ring (ring-Commutative-Ring R)
+
+  even-power-neg-Commutative-Ring :
+    (n : ℕ) (x : type-Commutative-Ring R) →
+    is-even-ℕ n →
+    power-Commutative-Ring R n (neg-Commutative-Ring R x) ＝
+    power-Commutative-Ring R n x
+  even-power-neg-Commutative-Ring =
+    even-power-neg-Ring (ring-Commutative-Ring R)
+
+  odd-power-neg-Commutative-Ring :
+    (n : ℕ) (x : type-Commutative-Ring R) →
+    is-odd-ℕ n →
+    power-Commutative-Ring R n (neg-Commutative-Ring R x) ＝
+    neg-Commutative-Ring R (power-Commutative-Ring R n x)
+  odd-power-neg-Commutative-Ring =
+    odd-power-neg-Ring (ring-Commutative-Ring R)
 ```

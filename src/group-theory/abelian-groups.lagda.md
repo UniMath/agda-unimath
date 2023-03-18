@@ -21,6 +21,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.central-elements-groups
 open import group-theory.commutative-monoids
 open import group-theory.conjugation
 open import group-theory.groups
@@ -590,4 +591,20 @@ module _
        ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
   preserves-concat-add-list-Ab =
     preserves-concat-mul-list-Group (group-Ab A)
+```
+
+### A group is abelian if and only if every element is central
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  is-abelian-every-element-central-Group :
+    ((x : type-Group G) → is-central-element-Group G x) → is-abelian-Group G
+  is-abelian-every-element-central-Group H x y = H x y
+
+  every-element-central-is-abelian-Group :
+    is-abelian-Group G → ((x : type-Group G) → is-central-element-Group G x)
+  every-element-central-is-abelian-Group H x y = H x y
 ```
