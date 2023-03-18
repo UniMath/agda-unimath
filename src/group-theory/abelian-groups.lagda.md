@@ -602,9 +602,9 @@ module _
 
   is-abelian-every-element-central-Group :
     ((x : type-Group G) → is-central-element-Group G x) → is-abelian-Group G
-  is-abelian-every-element-central-Group H x y = H x y
+  is-abelian-every-element-central-Group = id
 
   every-element-central-is-abelian-Group :
     is-abelian-Group G → ((x : type-Group G) → is-central-element-Group G x)
-  every-element-central-is-abelian-Group H x y = H x y
+  every-element-central-is-abelian-Group = id
 ```
