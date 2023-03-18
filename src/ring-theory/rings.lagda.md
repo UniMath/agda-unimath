@@ -18,6 +18,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.involutions
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -209,6 +210,14 @@ module _
   right-inverse-law-add-Ring :
     (x : type-Ring R) → Id (add-Ring R x (neg-Ring x)) (zero-Ring R)
   right-inverse-law-add-Ring = right-inverse-law-add-Ab (ab-Ring R)
+
+  neg-neg-Ring : (x : type-Ring R) → neg-Ring (neg-Ring x) ＝ x
+  neg-neg-Ring = neg-neg-Ab (ab-Ring R)
+
+  distributive-neg-add-Ring :
+    (x y : type-Ring R) →
+    neg-Ring (add-Ring R x y) ＝ add-Ring R (neg-Ring x) (neg-Ring y)
+  distributive-neg-add-Ring = distributive-neg-add-Ab (ab-Ring R)
 ```
 
 ### Multiplication in a ring
@@ -342,17 +351,81 @@ module _
   neg-one-Ring = neg-Ring R (one-Ring R)
 
   mul-neg-one-Ring :
-    (x : type-Ring R) → Id (mul-Ring R neg-one-Ring x) (neg-Ring R x)
+    (x : type-Ring R) → mul-Ring R neg-one-Ring x ＝ neg-Ring R x
   mul-neg-one-Ring x =
     is-injective-add-Ring R x
-      ( ( ap
-          ( add-Ring' R (mul-Ring R neg-one-Ring x))
-          ( inv (left-unit-law-mul-Ring R x)) ∙
-        ( ( inv
-            ( right-distributive-mul-add-Ring R (one-Ring R) neg-one-Ring x)) ∙
-          ( ( ap (mul-Ring' R x) (right-inverse-law-add-Ring R (one-Ring R))) ∙
-            ( left-zero-law-mul-Ring R x)))) ∙
+      ( ( ( ap
+            ( add-Ring' R (mul-Ring R neg-one-Ring x))
+            ( inv (left-unit-law-mul-Ring R x))) ∙
+          ( ( inv
+              ( right-distributive-mul-add-Ring R
+                ( one-Ring R)
+                ( neg-one-Ring)
+                ( x))) ∙
+            ( ( ap
+                ( mul-Ring' R x)
+                ( right-inverse-law-add-Ring R (one-Ring R))) ∙
+              ( left-zero-law-mul-Ring R x)))) ∙
         ( inv (right-inverse-law-add-Ring R x)))
+
+  mul-neg-one-Ring' :
+    (x : type-Ring R) → mul-Ring R x neg-one-Ring ＝ neg-Ring R x
+  mul-neg-one-Ring' x =
+    is-injective-add-Ring R x
+      ( ( ap
+          ( add-Ring' R (mul-Ring R x neg-one-Ring))
+          ( inv (right-unit-law-mul-Ring R x))) ∙
+        ( ( inv
+            ( left-distributive-mul-add-Ring R x (one-Ring R) neg-one-Ring)) ∙
+          ( ( ap (mul-Ring R x) (right-inverse-law-add-Ring R (one-Ring R))) ∙
+            ( ( right-zero-law-mul-Ring R x) ∙
+              ( inv (right-inverse-law-add-Ring R x))))))
+
+  is-involution-mul-neg-one-Ring :
+    is-involution (mul-Ring R neg-one-Ring)
+  is-involution-mul-neg-one-Ring x =
+    ( mul-neg-one-Ring (mul-Ring R neg-one-Ring x)) ∙
+    ( ( ap (neg-Ring R) (mul-neg-one-Ring x)) ∙
+      ( neg-neg-Ring R x))
+
+  is-involution-mul-neg-one-Ring' :
+    is-involution (mul-Ring' R neg-one-Ring)
+  is-involution-mul-neg-one-Ring' x =
+    ( mul-neg-one-Ring' (mul-Ring R x neg-one-Ring)) ∙
+    ( ( ap (neg-Ring R) (mul-neg-one-Ring' x)) ∙
+      ( neg-neg-Ring R x))
+```
+
+### Left and right negative laws for multiplication
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-negative-law-mul-Ring :
+    (x y : type-Ring R) →
+    mul-Ring R (neg-Ring R x) y ＝ neg-Ring R (mul-Ring R x y)
+  left-negative-law-mul-Ring x y =
+    ( ap (mul-Ring' R y) (inv (mul-neg-one-Ring R x))) ∙
+    ( ( associative-mul-Ring R (neg-one-Ring R) x y) ∙
+      ( mul-neg-one-Ring R (mul-Ring R x y)))
+
+  right-negative-law-mul-Ring :
+    (x y : type-Ring R) →
+    mul-Ring R x (neg-Ring R y) ＝ neg-Ring R (mul-Ring R x y)
+  right-negative-law-mul-Ring x y =
+    ( ap (mul-Ring R x) (inv (mul-neg-one-Ring' R y))) ∙
+    ( ( inv (associative-mul-Ring R x y (neg-one-Ring R))) ∙
+      ( mul-neg-one-Ring' R (mul-Ring R x y)))
+
+  mul-neg-Ring :
+    (x y : type-Ring R) →
+    mul-Ring R (neg-Ring R x) (neg-Ring R y) ＝ mul-Ring R x y
+  mul-neg-Ring x y =
+    ( left-negative-law-mul-Ring x (neg-Ring R y)) ∙
+    ( ( ap (neg-Ring R) (right-negative-law-mul-Ring x y)) ∙
+      ( neg-neg-Ring R (mul-Ring R x y)))
 ```
 
 ### Scalar multiplication of ring elements by a natural number
@@ -369,6 +442,16 @@ module _
     {m n : ℕ} {x y : type-Ring R} →
     (m ＝ n) → (x ＝ y) → mul-nat-scalar-Ring m x ＝ mul-nat-scalar-Ring n y
   ap-mul-nat-scalar-Ring = ap-mul-nat-scalar-Semiring (semiring-Ring R)
+
+  left-zero-law-mul-nat-scalar-Ring :
+    (x : type-Ring R) → mul-nat-scalar-Ring 0 x ＝ zero-Ring R
+  left-zero-law-mul-nat-scalar-Ring =
+    left-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
+
+  right-zero-law-mul-nat-scalar-Ring :
+    (n : ℕ) → mul-nat-scalar-Ring n (zero-Ring R) ＝ zero-Ring R
+  right-zero-law-mul-nat-scalar-Ring =
+    right-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
 
   left-unit-law-mul-nat-scalar-Ring :
     (x : type-Ring R) →  mul-nat-scalar-Ring 1 x ＝ x

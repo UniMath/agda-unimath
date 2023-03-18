@@ -32,7 +32,7 @@ on `V`.
 categorical-representation-Monoid :
   {l1 l2 l3 : Level} (C : Cat l1 l2) (M : Monoid l3) → UU (l1 ⊔ l2 ⊔ l3)
 categorical-representation-Monoid C M =
-  Σ (obj-Cat C) (λ V → hom-Monoid M (monoid-endo-Cat C V))
+  Σ (obj-Cat C) (λ V → type-hom-Monoid M (monoid-endo-Cat C V))
 
 module _
   {l1 l2 l3 : Level} (C : Cat l1 l2) (M : Monoid l3)
@@ -43,7 +43,7 @@ module _
   obj-categorical-representation-Monoid = pr1 ρ
 
   hom-action-categorical-representation-Monoid :
-    hom-Monoid M (monoid-endo-Cat C obj-categorical-representation-Monoid)
+    type-hom-Monoid M (monoid-endo-Cat C obj-categorical-representation-Monoid)
   hom-action-categorical-representation-Monoid = pr2 ρ
 
   action-categorical-representation-Monoid :

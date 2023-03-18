@@ -59,7 +59,7 @@ emb-group-slice-Subgroup :
   { l1 l2 : Level} (G : Group l1) →
   Subgroup l2 G → emb-Group-Slice (l1 ⊔ l2) G
 pr1 (emb-group-slice-Subgroup G P) = group-Subgroup G P
-pr1 (pr2 (emb-group-slice-Subgroup G P)) = inclusion-group-Subgroup G P
+pr1 (pr2 (emb-group-slice-Subgroup G P)) = hom-inclusion-Subgroup G P
 pr2 (pr2 (emb-group-slice-Subgroup G P)) =
-  is-emb-inclusion-group-Subgroup G P
+  is-emb-inclusion-Subgroup G P
 ```
