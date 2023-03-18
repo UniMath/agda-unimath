@@ -1,7 +1,7 @@
 # Coproducts of species
 
 ```agda
-module univalent-combinatorics.coproducts-species-of-types where
+module species.coproducts-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +15,8 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.morphisms-species-of-types
-open import univalent-combinatorics.species-of-types
+open import species.morphisms-species-of-types
+open import species.species-of-types
 ```
 
 </details>

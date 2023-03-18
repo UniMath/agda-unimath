@@ -60,6 +60,11 @@ A decidable equivalence relation on a type `X` is an equivalence relation `R` on
 ### Decidable equivalence relations
 
 ```agda
+is-decidable-Eq-Rel :
+  {l1 l2 : Level} → {A : UU l1} → Eq-Rel l2 A → UU (l1 ⊔ l2)
+is-decidable-Eq-Rel {A = A} R =
+  (x y : A) → is-decidable ( sim-Eq-Rel R x y)
+
 Decidable-Equivalence-Relation :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
 Decidable-Equivalence-Relation l2 X =
@@ -138,17 +143,16 @@ equiv-equivalence-relation-is-decidable-Dec-Eq-Rel :
   {l1 l2 : Level} {X : UU l1} →
   Decidable-Equivalence-Relation l2 X ≃
   Σ ( Eq-Rel l2 X)
-    ( λ R → ((x y : X) → is-decidable (type-Prop ((pr1 R) x y))))
+    ( λ R → ((x y : X) → is-decidable (sim-Eq-Rel R x y)))
 pr1 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel R =
   ( equivalence-relation-Decidable-Equivalence-Relation R ,
     is-decidable-sim-Decidable-Equivalence-Relation R)
 pr2 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel =
   is-equiv-has-inverse
-    ( λ R →
+    ( λ (R , d) →
       ( map-inv-equiv
           ( equiv-relation-is-decidable-Decidable-Relation)
-          ( (pr1 (pr1 R)) , (pr2 R))  ,
-        pr2 (pr1 R) ))
+          ( prop-Eq-Rel R , d)  , is-equivalence-relation-prop-Eq-Rel R))
     ( refl-htpy)
     ( refl-htpy)
 ```
@@ -473,35 +477,34 @@ module _
 #### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality.
 
 ```agda
-has-dec-eq-if-is-dec-rel-equiv-surj :
-  {l1 : Level} {A : UU l1} (B : Set l1) (f : A ↠ type-Set B)→
+has-decidable-equality-type-Surjection-Into-Set :
+  {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A) →
   ( (x y : A) →
-    is-decidable ( sim-Eq-Rel (eq-rel-Surjection-Into-Set (B , f)) x y)) →
-  has-decidable-equality (type-Set B)
-has-dec-eq-if-is-dec-rel-equiv-surj B f is-dec-rel x y =
+    is-decidable ( sim-Eq-Rel (eq-rel-Surjection-Into-Set surj) x y)) →
+  has-decidable-equality (type-Surjection-Into-Set surj)
+has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
   apply-twice-dependent-universal-property-surj-is-surjective
-    ( map-surjection f)
-    ( is-surjective-map-surjection f)
-    ( λ (s t : (type-Set B)) →
+    ( map-Surjection-Into-Set surj)
+    ( is-surjective-Surjection-Into-Set surj)
+    ( λ (s t : (type-Surjection-Into-Set surj)) →
       ( is-decidable (s ＝ t),
-        is-prop-is-decidable (is-set-type-Set B s t)))
+        is-prop-is-decidable ( is-set-type-Surjection-Into-Set surj s t)))
     ( λ a1 a2 → is-dec-rel a1 a2)
     ( x)
     ( y)
 
-is-dec-rel-equiv-surj-if-has-dec-eq :
-  {l1 : Level} {A : UU l1} (B : Set l1) (f : A ↠ type-Set B)→
-  has-decidable-equality (type-Set B) →
-  ( (x y : A) →
-    is-decidable ( sim-Eq-Rel (eq-rel-Surjection-Into-Set (B , f)) x y))
-is-dec-rel-equiv-surj-if-has-dec-eq B f dec-eq x y =
-  dec-eq (map-surjection f x) (map-surjection f y)
+is-decidable-Eq-Rel-Surjection-Into-Set :
+  {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A)→
+  has-decidable-equality (type-Surjection-Into-Set surj) →
+  is-decidable-Eq-Rel (eq-rel-Surjection-Into-Set surj)
+is-decidable-Eq-Rel-Surjection-Into-Set surj dec-eq x y =
+  dec-eq (map-Surjection-Into-Set surj x) (map-Surjection-Into-Set surj y)
 
-equiv-surjection-into-set-Dec-Eq-Rel :
+equiv-Surjection-Into-Set-Decidable-Equivalence-Relation :
   {l1 : Level} (A : UU l1) →
   Decidable-Equivalence-Relation l1 A ≃
   Σ (UU l1) (λ X → (A ↠ X) × has-decidable-equality X)
-equiv-surjection-into-set-Dec-Eq-Rel {l1} A =
+equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
   ( ( equiv-Σ
       ( λ z → (A ↠ z) × has-decidable-equality z)
       ( id-equiv)
@@ -509,7 +512,7 @@ equiv-surjection-into-set-Dec-Eq-Rel {l1} A =
         ( equiv-prod
          ( id-equiv)
          ( inv-equiv
-             ( equiv-add-redondent-prop
+             ( equiv-add-redundant-prop
                ( is-prop-is-set ( X))
                ( is-set-has-decidable-equality)) ∘e
            commutative-prod) ∘e
@@ -531,14 +534,8 @@ equiv-surjection-into-set-Dec-Eq-Rel {l1} A =
                is-prop-is-decidable
                  ( is-prop-sim-Eq-Rel (eq-rel-Surjection-Into-Set surj) x y))))
      ( λ _ → is-prop-has-decidable-equality)
-     ( λ surj →
-       has-dec-eq-if-is-dec-rel-equiv-surj
-         ( set-Surjection-Into-Set surj)
-         ( surjection-Surjection-Into-Set surj))
-     ( λ surj →
-       is-dec-rel-equiv-surj-if-has-dec-eq
-         ( set-Surjection-Into-Set surj)
-         ( surjection-Surjection-Into-Set surj)) ∘e
+     ( λ surj → has-decidable-equality-type-Surjection-Into-Set surj)
+     ( λ surj → is-decidable-Eq-Rel-Surjection-Into-Set surj) ∘e
   ( ( inv-equiv
       ( equiv-Σ-equiv-base
         ( λ R → ((x y : A) → is-decidable (sim-Eq-Rel R x y)))

@@ -217,11 +217,11 @@ module _
 ### Equivalence between finite decidable equivalence relations and finite Σ-decompositions
 
 ```agda
-  equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽 :
+  equiv-Decidable-Equivalence-Relation-𝔽-Σ-Decomposition-𝔽 :
     Σ-Decomposition-𝔽 l l (type-𝔽 A) ≃
     Decidable-Equivalence-Relation-𝔽 l A
-  equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽 =
-    inv-equiv (equiv-surjection-into-𝔽-Dec-Eq-Rel-𝔽 A) ∘e
+  equiv-Decidable-Equivalence-Relation-𝔽-Σ-Decomposition-𝔽 =
+    inv-equiv (equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A) ∘e
     equiv-finite-surjection-Σ-Decomposition-𝔽
 ```
 
@@ -232,8 +232,8 @@ module _
     is-finite (Σ-Decomposition-𝔽 l l (type-𝔽 A))
   is-finite-Σ-Decomposition-𝔽 =
     is-finite-equiv
-      ( inv-equiv equiv-Dec-Eq-Rel-𝔽-Σ-Decomposition-𝔽)
-      ( is-finite-Dec-Eq-Rel-𝔽 A)
+      ( inv-equiv equiv-Decidable-Equivalence-Relation-𝔽-Σ-Decomposition-𝔽)
+      ( is-finite-Decidable-Equivalence-Relation-𝔽 A)
 ```
 
 ### Characterization of the equality of finite Σ-Decompositions

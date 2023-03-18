@@ -1,7 +1,7 @@
 # Exponents of species
 
 ```agda
-module univalent-combinatorics.exponents-species-of-types where
+module species.exponents-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,8 +12,8 @@ open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.species-of-subuniverses
-open import univalent-combinatorics.species-of-types
+open import species.species-of-types
+open import species.species-of-types-in-subuniverse
 ```
 
 </details>

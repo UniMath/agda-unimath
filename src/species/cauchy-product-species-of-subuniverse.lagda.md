@@ -1,7 +1,7 @@
 # Cauchy products of species of subuniverse
 
 ```agda
-module univalent-combinatorics.cauchy-product-species-of-subuniverse where
+module species.cauchy-product-species-of-subuniverse where
 ```
 
 <details><summary>Imports</summary>
@@ -26,8 +26,7 @@ open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equivalences-species-of-subuniverses
-open import univalent-combinatorics.species-of-subuniverses
+open import species.species-of-types-in-subuniverse
 ```
 
 </details>

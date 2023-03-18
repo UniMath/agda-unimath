@@ -1,7 +1,7 @@
 # Unlabeled structures of a species
 
 ```agda
-module univalent-combinatorics.unlabeled-structures-species where
+module species.unlabeled-structures-species where
 ```
 
 <details><summary>Imports</summary>
@@ -12,8 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import species.species-of-types
+
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.species-of-types
 ```
 
 </details>

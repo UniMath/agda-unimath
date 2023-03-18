@@ -102,4 +102,8 @@ abstract
 Π-𝔽 : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
 pr1 (Π-𝔽 A B) = (x : type-𝔽 A) → type-𝔽 (B x)
 pr2 (Π-𝔽 A B) = is-finite-Π (is-finite-type-𝔽 A) (λ x → is-finite-type-𝔽 (B x))
+
+Π-𝔽' : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
+pr1 (Π-𝔽' A B) = {x : type-𝔽 A} → type-𝔽 (B x)
+pr2 (Π-𝔽' A B) = is-finite-Π' (is-finite-type-𝔽 A) (λ x → is-finite-type-𝔽 (B x))
 ```

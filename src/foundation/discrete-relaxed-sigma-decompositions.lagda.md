@@ -87,7 +87,7 @@ module _
         ( is-equiv-map-equiv ( compute-raise-unit l4)))
   pr2 (pr2 equiv-discrete-is-discrete-Relaxed-Σ-Decomposition) a =
     eq-pair-Σ
-      (  ap ( λ f → map-equiv f a)
+      ( ap ( λ f → map-equiv f a)
         ( ( left-inverse-law-equiv
             ( equiv-pr1 is-discrete ∘e
               matching-correspondence-Relaxed-Σ-Decomposition D))  ∙

@@ -1,7 +1,7 @@
 # Pointing of species
 
 ```agda
-module univalent-combinatorics.pointing-species-of-types where
+module species.pointing-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module univalent-combinatorics.pointing-species-of-types where
 open import foundation.cartesian-product-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.species-of-types
+open import species.species-of-types
 ```
 
 </details>

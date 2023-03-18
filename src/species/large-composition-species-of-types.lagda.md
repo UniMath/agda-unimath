@@ -1,7 +1,7 @@
 # Composition of species of types
 
 ```agda
-module univalent-combinatorics.large-composition-species-of-types where
+module species.large-composition-species-of-types where
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -28,7 +28,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
 
-open import univalent-combinatorics.species-of-types
+open import species.species-of-types
 ```
 
 ## Idea

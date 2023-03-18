@@ -51,7 +51,8 @@ is-decidable-is-emb-is-finite f HA HB =
 ### If `A` can be count, then `trunc-Prop A ↪d A`
 
 ```agda
-decidable-emb-trunc-Prop-count : {l : Level} {A : UU l} →
+decidable-emb-trunc-Prop-count :
+  {l : Level} {A : UU l} →
   count A → type-trunc-Prop (A) ↪d A
 decidable-emb-trunc-Prop-count (zero-ℕ , empty-A) =
   decidable-emb-is-empty (is-empty-type-trunc-Prop ( map-inv-equiv empty-A))
@@ -65,8 +66,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
   where
 
-  tot-decidable-emb-trunc-Prop-count :
+  decidable-emb-tot-trunc-Prop-count :
     ((a : A) → count (P a)) → (Σ A (λ a → type-trunc-Prop (P a)) ↪d Σ A P)
-  tot-decidable-emb-trunc-Prop-count c =
-    tot-decidable-emb ( λ a → decidable-emb-trunc-Prop-count (c a))
+  decidable-emb-tot-trunc-Prop-count c =
+    decidable-emb-tot ( λ a → decidable-emb-trunc-Prop-count (c a))
 ```

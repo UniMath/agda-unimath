@@ -367,8 +367,8 @@ module _
     ( is-emb-tot (λ x → is-emb-is-decidable-emb (H x)) ,
       is-decidable-map-tot λ x → is-decidable-map-is-decidable-emb (H x))
 
-  tot-decidable-emb : ((x : A) → B x ↪d C x) → Σ A B ↪d Σ A C
-  pr1 (tot-decidable-emb f) = tot (λ x → map-decidable-emb (f x))
-  pr2 (tot-decidable-emb f) =
+  decidable-emb-tot : ((x : A) → B x ↪d C x) → Σ A B ↪d Σ A C
+  pr1 (decidable-emb-tot f) = tot (λ x → map-decidable-emb (f x))
+  pr2 (decidable-emb-tot f) =
     is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x))
 ```

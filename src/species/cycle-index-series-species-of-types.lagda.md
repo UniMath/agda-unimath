@@ -1,7 +1,7 @@
 # Cycle index series of species
 
 ```agda
-module univalent-combinatorics.cycle-index-series-species-of-types where
+module species.cycle-index-series-species-of-types where
 ```
 
 <details><summary>Imports</summary>

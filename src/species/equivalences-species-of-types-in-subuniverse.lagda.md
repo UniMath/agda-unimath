@@ -1,7 +1,7 @@
 # Equivalences of species of subuniverses
 
 ```agda
-module univalent-combinatorics.equivalences-species-of-subuniverses where
+module species.equivalences-species-of-types-in-subuniverse where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import univalent-combinatorics.species-of-subuniverses
+open import species.species-of-types-in-subuniverse
 ```
 
 </details>

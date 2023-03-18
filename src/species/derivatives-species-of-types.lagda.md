@@ -1,7 +1,7 @@
 # Derivatives of species
 
 ```agda
-module univalent-combinatorics.derivatives-species-of-types where
+module species.derivatives-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +11,9 @@ open import foundation.coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import species.species-of-types
+
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.species-of-types
 ```
 
 </details>

@@ -33,7 +33,7 @@ module _
     count (type-subtype Q) → count (type-subtype (union-subtype P Q))
   count-union-subtypes-count-has-decidable-equalities dec-A count-P count-Q =
     count-decidable-emb
-      ( tot-decidable-emb-trunc-Prop-count
+      ( decidable-emb-tot-trunc-Prop-count
         ( count-fiber-count-Σ dec-A (count-Σ-coprod count-P count-Q)))
       ( count-Σ-coprod count-P count-Q)
 ```
