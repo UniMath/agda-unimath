@@ -24,7 +24,6 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             f"'{agda_module}' Could not find imports. Skipping.")
         return
 
-
     # Proceed with search for unused imports
     temp_root = os.path.join(root, temp_dir)
     temp_file = agda_file.replace(root, temp_root)
