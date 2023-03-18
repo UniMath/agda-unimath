@@ -76,4 +76,3 @@ module _
   hom-inclusion-center-Monoid =
     hom-inclusion-Submonoid M center-Monoid
 ```
-

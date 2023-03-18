@@ -33,7 +33,7 @@ semigroups that preserve the unit element.
 module _
   {l1 l2 : Level} (M1 : Monoid l1) (M2 : Monoid l2)
   where
-  
+
   preserves-unit-hom-semigroup-Prop :
     type-hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2) → Prop l2
   preserves-unit-hom-semigroup-Prop f =
