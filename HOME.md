@@ -43,7 +43,7 @@ ready for the `agda-unimath` library.
 
 ```bib
 @software{agda-unimath,
-  author = {Rijke, Egbert and Bonnevier, Elisabeth and Prieto-Cubides, Jonathan and {others}},
+  author = {Rijke, Egbert and Bonnevier, Elisabeth and Prieto-Cubides, Jonathan and Bakke, Fredrik and {others}},
   license = {MIT},
   title = {{Univalent mathematics in Agda}},
   url = {https://github.com/UniMath/agda-unimath/}
