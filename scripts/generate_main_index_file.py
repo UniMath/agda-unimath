@@ -16,11 +16,13 @@ entry_template = '- [{title}]({mdfile})'
 def generate_namespace_entry_list(namespace):
     status = 0
     file_names = sorted(os.listdir(os.path.join(root, namespace)))
-    file_paths = map(lambda m: pathlib.Path(os.path.join(root, namespace, m)), file_names)
+    file_paths = map(lambda m: pathlib.Path(
+        os.path.join(root, namespace, m)), file_names)
     lagda_file_paths = tuple(filter(utils.is_agda_file, file_paths))
     modules = tuple(map(lambda p: p.name, lagda_file_paths))
     module_titles = tuple(map(utils.get_lagda_file_title, lagda_file_paths))
-    module_mdfiles = tuple(map(lambda m: utils.get_module_mdfile(namespace, m), modules))
+    module_mdfiles = tuple(
+        map(lambda m: utils.get_module_mdfile(namespace, m), modules))
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):
