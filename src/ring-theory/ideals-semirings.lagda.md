@@ -24,7 +24,8 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-A left ideal of a semiring `R` is an additive subgroup of `R` that is closed under multiplication by elements of `R` from the left.
+A left ideal of a semiring `R` is an additive subgroup of `R` that is closed
+under multiplication by elements of `R` from the left.
 
 ## Definitions
 
@@ -232,7 +233,7 @@ module _
     is-in-two-sided-ideal-Semiring (add-Semiring R x y)
   is-closed-under-add-two-sided-ideal-Semiring H K =
     pr2 is-additive-submonoid-two-sided-ideal-Semiring _ _ H K
-    
+
   is-closed-under-mul-left-two-sided-ideal-Semiring :
     is-closed-under-mul-left-subset-Semiring R subset-two-sided-ideal-Semiring
   is-closed-under-mul-left-two-sided-ideal-Semiring =

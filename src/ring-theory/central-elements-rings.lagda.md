@@ -20,7 +20,8 @@ open import ring-theory.rings
 
 ## Idea
 
-An element `x` of a ring `R` is said to be central if `xy ＝ yx` for every `y : R`.
+An element `x` of a ring `R` is said to be central if `xy ＝ yx` for every
+`y : R`.
 
 ## Definition
 
@@ -28,7 +29,7 @@ An element `x` of a ring `R` is said to be central if `xy ＝ yx` for every `y :
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   is-central-element-ring-Prop : type-Ring R → Prop l
   is-central-element-ring-Prop =
     is-central-element-semiring-Prop (semiring-Ring R)

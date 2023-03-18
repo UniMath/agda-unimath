@@ -21,7 +21,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-An element `x` of a semiring `R` is said to be central if `xy ＝ yx` for every `y : R`.
+An element `x` of a semiring `R` is said to be central if `xy ＝ yx` for every
+`y : R`.
 
 ## Definition
 
@@ -29,7 +30,7 @@ An element `x` of a semiring `R` is said to be central if `xy ＝ yx` for every 
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   is-central-element-semiring-Prop : type-Semiring R → Prop l
   is-central-element-semiring-Prop =
     is-central-element-monoid-Prop
@@ -104,4 +105,3 @@ module _
   is-central-element-mul-Semiring =
     is-central-element-mul-Monoid (multiplicative-monoid-Semiring R)
 ```
-

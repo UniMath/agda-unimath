@@ -211,11 +211,11 @@ is-nilpotent-add-Semiring R x y H f h =
 module _
   {l : Level} (R : Semiring l)
   where
-  
+
   is-nilpotent-element-mul-Semiring :
     (x y : type-Semiring R) →
     mul-Semiring R x y ＝ mul-Semiring R y x →
-    is-nilpotent-element-Semiring R x → 
+    is-nilpotent-element-Semiring R x →
     is-nilpotent-element-Semiring R (mul-Semiring R x y)
   is-nilpotent-element-mul-Semiring x y H f =
     apply-universal-property-trunc-Prop f
