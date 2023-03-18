@@ -654,9 +654,9 @@ needed.
           ( singleton-cumulative-hierarchy (ℕ-map (map-raise x)))
 
   infinity-axiom-cumulative-hierarchy :
-    ∈-cumulative-hierarchy
-      empty-set-cumulative-hierarchy
-      infinity-cumulative-hierarchy ×
+    ( ∈-cumulative-hierarchy
+        empty-set-cumulative-hierarchy
+        infinity-cumulative-hierarchy) ×
     ( ( x : type-pseudo-cumulative-hierarchy V) →
       ∈-cumulative-hierarchy x infinity-cumulative-hierarchy →
       ∈-cumulative-hierarchy
