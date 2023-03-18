@@ -17,6 +17,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -203,6 +204,22 @@ module _
   pr1 (pr2 monoid-Submonoid) = unit-Submonoid
   pr1 (pr2 (pr2 monoid-Submonoid)) = left-unit-law-mul-Submonoid
   pr2 (pr2 (pr2 monoid-Submonoid)) = right-unit-law-mul-Submonoid
+
+  preserves-unit-inclusion-Submonoid :
+    inclusion-Submonoid unit-Submonoid ＝ unit-Monoid M
+  preserves-unit-inclusion-Submonoid = refl
+
+  preserves-mul-inclusion-Submonoid :
+    (x y : type-Submonoid) →
+    inclusion-Submonoid (mul-Submonoid x y) ＝
+    mul-Monoid M (inclusion-Submonoid x) (inclusion-Submonoid y)
+  preserves-mul-inclusion-Submonoid x y = refl
+
+  hom-inclusion-Submonoid :
+    type-hom-Monoid monoid-Submonoid M
+  pr1 (pr1 hom-inclusion-Submonoid) = inclusion-Submonoid
+  pr2 (pr1 hom-inclusion-Submonoid) = preserves-mul-inclusion-Submonoid
+  pr2 hom-inclusion-Submonoid = preserves-unit-inclusion-Submonoid
 ```
 
 ## Properties

@@ -104,10 +104,10 @@ module _
     ( ap (mul-Group' G (inv-Group G y)) (inv (H y))) ∙
     ( isretr-mul-inv-Group' G y x)
 
-  is-central-conjugation-Group :
+  is-central-element-conjugation-Group :
     (x y : type-Group G) → is-central-element-Group G x →
     is-central-element-Group G (conjugation-Group G y x)
-  is-central-conjugation-Group x y H =
+  is-central-element-conjugation-Group x y H =
     is-closed-under-eq-subtype'
       ( is-central-element-group-Prop G)
       ( H)
