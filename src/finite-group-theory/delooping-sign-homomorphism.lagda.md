@@ -32,6 +32,7 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
@@ -49,6 +50,7 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.univalence-action-on-equivalences
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -80,24 +82,9 @@ module _
   { l1 l2 l3 : Level}
   ( D : (n : ℕ) (X : UU-Fin l1 n) → UU l2)
   ( R : (n : ℕ) (X : UU-Fin l1 n) → Eq-Rel l3 (D n X))
-  ( is-decidable-R : (n : ℕ) (X : UU-Fin l1 n) (a b : D n X) →
-    is-decidable (sim-Eq-Rel (R n X) a b))
   ( equiv-D/R-fin-2-equiv : (n : ℕ) (X : UU-Fin l1 n) →
     leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
     Fin 2 ≃ equivalence-class (R n X))
-  ( invertible-action-D-equiv : (n : ℕ) (X X' : UU-Fin l1 n) →
-    (type-UU-Fin n X ≃ type-UU-Fin n X') → D n X ≃ D n X')
-  ( preserves-id-equiv-invertible-action-D-equiv : (n : ℕ) →
-    ( X : UU-Fin l1 n) →
-    Id (invertible-action-D-equiv n X X id-equiv) id-equiv)
-  ( preserves-R-invertible-action-D-equiv : (n : ℕ) →
-    ( X X' : UU-Fin l1 n) (e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-    ( a a' : D n X) →
-    ( sim-Eq-Rel (R n X) a a' ↔
-      sim-Eq-Rel
-        ( R n X')
-        ( map-equiv (invertible-action-D-equiv n X X' e) a)
-        ( map-equiv (invertible-action-D-equiv n X X' e) a')))
   ( quotient-aut-succ-succ-Fin : (n : ℕ) →
     ( raise-Fin l1 (succ-ℕ (succ-ℕ n)) ≃
       raise-Fin l1 (succ-ℕ (succ-ℕ n))) →
@@ -116,8 +103,9 @@ module _
             ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))
         ( quotient-aut-succ-succ-Fin n (transposition Y))
         ( map-equiv
-          ( invertible-action-D-equiv
-            ( succ-ℕ (succ-ℕ n))
+          ( univalent-action-equiv
+            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
+            ( D (succ-ℕ (succ-ℕ n)))
             ( pair
               ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
               ( unit-trunc-Prop
@@ -135,6 +123,40 @@ module _
     l4 : Level
     l4 = l2 ⊔ lsuc l3
 
+    is-decidable-R : (n : ℕ) (X : UU-Fin l1 n) (a b : D n X) →
+      is-decidable (sim-Eq-Rel (R n X) a b)
+    is-decidable-R = {!!}
+
+    invertible-action-D-equiv : (n : ℕ) (X X' : UU-Fin l1 n) →
+      (type-UU-Fin n X ≃ type-UU-Fin n X') → D n X ≃ D n X'
+    invertible-action-D-equiv n =
+      univalent-action-equiv (mere-equiv-Prop (Fin n)) (D n)
+
+    preserves-id-equiv-invertible-action-D-equiv : (n : ℕ) →
+      ( X : UU-Fin l1 n) →
+      Id (invertible-action-D-equiv n X X id-equiv) id-equiv
+    preserves-id-equiv-invertible-action-D-equiv n =
+      preserves-id-equiv-univalent-action-equiv (mere-equiv-Prop (Fin n)) (D n)
+
+    preserves-R-invertible-action-D-equiv : (n : ℕ) →
+      ( X X' : UU-Fin l1 n) (e : type-UU-Fin n X ≃ type-UU-Fin n X') →
+      ( a a' : D n X) →
+      ( sim-Eq-Rel (R n X) a a' ↔
+        sim-Eq-Rel
+          ( R n X')
+          ( map-equiv (invertible-action-D-equiv n X X' e) a)
+          ( map-equiv (invertible-action-D-equiv n X X' e) a'))
+    preserves-R-invertible-action-D-equiv n X X' e =
+      Ind-univalent-action-equiv (mere-equiv-Prop (Fin n)) (D n) X
+        ( λ Y f →
+          ( a a' : D n X) →
+          ( sim-Eq-Rel (R n X) a a' ↔
+            sim-Eq-Rel (R n Y) (map-equiv f a) (map-equiv f a')) )
+        ( λ a a' → pair id id)
+        ( X')
+        ( e)
+
+{-
     raise-UU-Fin-Fin : (n : ℕ) → UU-Fin l1 n
     pr1 (raise-UU-Fin-Fin n) = raise l1 (Fin n)
     pr2 (raise-UU-Fin-Fin n) = unit-trunc-Prop (compute-raise-Fin l1 n)
@@ -1963,4 +1985,5 @@ module _
                     ( hom-inv-symmetric-group-equiv-Set (Fin-Set (succ-ℕ (succ-ℕ n)))
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
+                      -}
 ```
