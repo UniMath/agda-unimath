@@ -10,6 +10,7 @@ module commutative-algebra.ideals-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -44,6 +45,12 @@ module _
   is-prop-is-in-subset-Commutative-Ring =
     is-prop-is-in-subtype S
 
+  is-closed-under-eq-subset-Commutative-Ring :
+    {x y : type-Commutative-Ring R} →
+    is-in-subset-Commutative-Ring x → x ＝ y → is-in-subset-Commutative-Ring y
+  is-closed-under-eq-subset-Commutative-Ring =
+    is-closed-under-eq-subtype S
+
   type-subset-Commutative-Ring : UU (l1 ⊔ l2)
   type-subset-Commutative-Ring = type-subtype S
 
@@ -64,6 +71,21 @@ module _
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R)
   where
+
+  contains-zero-subset-Commutative-Ring : UU l2
+  contains-zero-subset-Commutative-Ring =
+    is-in-subset-Commutative-Ring R S (zero-Commutative-Ring R)
+
+  is-closed-under-add-subset-Commutative-Ring : UU (l1 ⊔ l2)
+  is-closed-under-add-subset-Commutative-Ring =
+    (x y : type-Commutative-Ring R) →
+    is-in-subset-Commutative-Ring R S x → is-in-subset-Commutative-Ring R S y →
+    is-in-subset-Commutative-Ring R S (add-Commutative-Ring R x y)
+
+  is-closed-under-neg-subset-Commutative-Ring : UU (l1 ⊔ l2)
+  is-closed-under-neg-subset-Commutative-Ring =
+    (x : type-Commutative-Ring R) → is-in-subset-Commutative-Ring R S x →
+    is-in-subset-Commutative-Ring R S (neg-Commutative-Ring R x)
 
   is-closed-under-mul-left-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-mul-left-subset-Commutative-Ring =
@@ -145,4 +167,38 @@ module _
     is-closed-under-mul-right-two-sided-ideal-Ring
       ( ring-Commutative-Ring R)
       ( I)
+
+ideal-left-ideal-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
+  contains-zero-subset-Commutative-Ring R S →
+  is-closed-under-add-subset-Commutative-Ring R S →
+  is-closed-under-neg-subset-Commutative-Ring R S →
+  is-closed-under-mul-left-subset-Commutative-Ring R S →
+  ideal-Commutative-Ring l2 R
+pr1 (ideal-left-ideal-Commutative-Ring R S z a n m) = S
+pr1 (pr1 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) = z
+pr1 (pr2 (pr1 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m)))) = a
+pr2 (pr2 (pr1 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m)))) = n
+pr1 (pr2 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) = m
+pr2 (pr2 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) x y H =
+  is-closed-under-eq-subset-Commutative-Ring R S
+    ( m y x H)
+    ( commutative-mul-Commutative-Ring R y x)
+
+ideal-right-ideal-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
+  contains-zero-subset-Commutative-Ring R S →
+  is-closed-under-add-subset-Commutative-Ring R S →
+  is-closed-under-neg-subset-Commutative-Ring R S →
+  is-closed-under-mul-right-subset-Commutative-Ring R S →
+  ideal-Commutative-Ring l2 R
+pr1 (ideal-right-ideal-Commutative-Ring R S z a n m) = S
+pr1 (pr1 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = z
+pr1 (pr2 (pr1 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m)))) = a
+pr2 (pr2 (pr1 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m)))) = n
+pr1 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) x y H =
+  is-closed-under-eq-subset-Commutative-Ring R S
+    ( m y x H)
+    ( commutative-mul-Commutative-Ring R y x)
+pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
 ```
