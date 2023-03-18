@@ -6,6 +6,7 @@
     "ms-python.python",
     "ms-python.vscode-pylance",
     "eamodio.gitlens",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "dbankier.vscode-quick-select"
   ]
 }
