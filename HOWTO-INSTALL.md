@@ -58,8 +58,8 @@ provided on the Agda documentation page.
 
 We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
-when working with the agda-unimath library. Both editors offer support for Agda
-development, and the choice between them is largely a matter of personal
+when working with the `agda-unimath` library. Both editors offer support for
+Agda development, and the choice between them is largely a matter of personal
 preference. Below, you'll find setup instructions for each editor to help you
 configure your preferred environment for working with the library.
 
