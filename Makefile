@@ -6,8 +6,6 @@ AGDAVERBOSE?=-v1
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) )
 AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
-bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
-
 AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
 AGDA ?=agda $(AGDAVERBOSE)
 TIME ?=time
