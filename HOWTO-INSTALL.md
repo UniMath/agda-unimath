@@ -56,7 +56,7 @@ provided on the Agda documentation page.
 
 ## Editor Setup
 
-You can use either [Emacs](https://www.gnu.org/software/emacs/) or
+We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
 when working with the agda-unimath library. Both editors offer support for Agda
 development, and the choice between them is largely a matter of personal
@@ -129,8 +129,8 @@ to your `.emacs` file.
 ### VSCode
 
 The `agda-unimath` library comes with a predefined VSCode workspace. Open the
-folder containing the cloned repository in VSCode, and it should automatically
-recognize the workspace and apply the appropriate settings.
+folder main repository folder in VSCode, and it should automatically recognize
+the workspace and apply the appropriate settings.
 
 #### Extensions
 
