@@ -28,13 +28,6 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             f"'{agda_module}' has no foundation imports. Skipping.")
         return
 
-    # # We can assume the file would compile, as this is usually the case.
-    # # Otherwise, no harm is done, it will just determine that the file does
-    # # not compile with any of the imports demoted either, so the result is the same
-    # if (utils.call_agda(agda_options, agda_file) != 0):
-    #     utils.multithread.thread_safe_print(f" ERROR! did not typecheck. Skipping.")
-    #     return
-
     new_nonpublic = set(nonpublic)
 
     # Fast-track foundation files without definitions

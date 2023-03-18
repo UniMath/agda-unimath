@@ -24,13 +24,6 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             f"'{agda_module}' Could not find imports. Skipping.")
         return
 
-    # # We can assume the file would compile, as this is usually the case.
-    # # Otherwise, no harm is done, it will just determine that the file does
-    # # not compile with any of the imports removed either, so the result is the same
-    # # If file doesn't compile, skip
-    # elif (utils.call_agda(agda_options, agda_file) != 0):
-    #     utils.multithread.thread_safe_print(f"'{agda_file}': ERROR! did not typecheck. Skipping.")
-    #     return
 
     # Proceed with search for unused imports
     temp_root = os.path.join(root, temp_dir)
