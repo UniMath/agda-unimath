@@ -1,10 +1,10 @@
-# Library Design Principles
+# Library design principles
 
 Understanding the design principles, structure, and philosophy behind the
 `agda-unimath` library is essential for effectively navigating and contributing
 to it. This document aims to provide a clear and concise introduction.
 
-## Postulates and Assumptions
+## Postulates and assumptions
 
 The library assumes the `--without-K` and `--exact-split` flags of Agda and
 makes use of several postulates.
@@ -46,7 +46,7 @@ axiom of choice is necessary is not yet developed in `agda-unimath`. However, we
 are also open to any development of classical mathematics within `agda-unimath`,
 and would welcome contributions in that direction.
 
-## Library Structure
+## Library structure
 
 1. The source code of the formalisation can be found in the folder `src`.
 2. The library is organized by mathematical subject, with one folder per
