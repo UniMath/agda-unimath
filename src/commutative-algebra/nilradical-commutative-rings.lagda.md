@@ -126,12 +126,7 @@ is-closed-under-add-nilradical-Commutative-Ring R x y f h =
                                                 ( nat-Fin n i)
                                                 ( n)
                                                 ( add-ℕ n m)
-                                                ( leq-le-ℕ
-                                                  { nat-Fin n i}
-                                                  { n}
-                                                  ( strict-upper-bound-nat-Fin
-                                                    ( n)
-                                                    ( i)))
+                                                ( upper-bound-nat-Fin' n i)
                                                 ( leq-add-ℕ n m))) ∙
                                             ( ap
                                               ( add-ℕ (dist-ℕ (nat-Fin n i) n))
