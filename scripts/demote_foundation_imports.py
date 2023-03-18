@@ -2,38 +2,37 @@ import itertools
 import os
 import shutil
 import utils
+import utils.multithread
 from concurrent.futures import ThreadPoolExecutor
 from fix_imports import *
 
 
 def process_agda_file(agda_file, agda_options, root, temp_dir):
 
-    def get_agda_module_name(file_path):
-        return file_path[len(root) + 1:file_path.rfind('.lagda.md')].replace('/', '.').replace('\\', '.')
-
     with open(agda_file, 'r', encoding='UTF-8') as file:
         content = file.read()
-
     block, start, end = get_imports_block(content)
     public, nonpublic, open_statements = categorize_imports(block)
-    agda_module = get_agda_module_name(agda_file)
+    agda_module = utils.get_agda_module_name(agda_file, root)
 
     if nonpublic is None:
-        print(f"'{agda_module}' Could not find imports. Skipping.")
+        utils.multithread.thread_safe_print(
+            f"'{agda_module}' Could not find imports. Skipping.")
         return
 
         # Subdivide imports into namespaces
     namespaces = subdivide_namespaces_imports(nonpublic)
 
     if not "foundation" in namespaces.keys():
-        print(f"'{agda_module}' has no foundation imports. Skipping.")
+        utils.multithread.thread_safe_print(
+            f"'{agda_module}' has no foundation imports. Skipping.")
         return
 
     # # We can assume the file would compile, as this is usually the case.
     # # Otherwise, no harm is done, it will just determine that the file does
     # # not compile with any of the imports demoted either, so the result is the same
     # if (utils.call_agda(agda_options, agda_file) != 0):
-    #     print(f" ERROR! did not typecheck. Skipping.")
+    #     utils.multithread.thread_safe_print(f" ERROR! did not typecheck. Skipping.")
     #     return
 
     new_nonpublic = set(nonpublic)
@@ -112,14 +111,15 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             with open(agda_file, 'w') as file:
                 file.write(content)
 
-            utils.thread_safe_print(
+            utils.multithread.thread_safe_print(
                 f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
             return
 
-        utils.thread_safe_print(
+        utils.multithread.thread_safe_print(
             f"'{agda_module}' had {len(removed_imports)} unused imports: {removed_imports}")
     else:
-        utils.thread_safe_print(f"'{agda_module}' No unused imports.")
+        utils.multithread.thread_safe_print(
+            f"'{agda_module}' No unused imports.")
 
 
 if __name__ == "__main__":

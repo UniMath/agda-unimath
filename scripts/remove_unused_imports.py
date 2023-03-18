@@ -2,14 +2,12 @@ import os
 import pathlib
 import shutil
 import utils
+import utils.multithread
 from concurrent.futures import ThreadPoolExecutor
 from fix_imports import *
 
 
 def process_agda_file(agda_file, agda_options, root, temp_dir):
-
-    def get_agda_module_name(file_path):
-        return file_path[len(root) + 1:file_path.rfind('.lagda.md')].replace('/', '.').replace('\\', '.')
 
     # Read file
     with open(agda_file, 'r', encoding='UTF-8') as file:
@@ -18,11 +16,11 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
     # Categorize all imports
     block, start, end = get_imports_block(content)
     public, nonpublic, open_statements = categorize_imports(block)
-    agda_module = get_agda_module_name(agda_file)
+    agda_module = utils.get_agda_module_name(agda_file, root)
 
     # If no nonpublic imports, skip
     if not nonpublic:
-        utils.thread_safe_print(
+        utils.multithread.thread_safe_print(
             f"'{agda_module}' Could not find imports. Skipping.")
         return
 
@@ -31,7 +29,7 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
     # # not compile with any of the imports removed either, so the result is the same
     # # If file doesn't compile, skip
     # elif (utils.call_agda(agda_options, agda_file) != 0):
-    #     utils.thread_safe_print(f"'{agda_file}': ERROR! did not typecheck. Skipping.")
+    #     utils.multithread.thread_safe_print(f"'{agda_file}': ERROR! did not typecheck. Skipping.")
     #     return
 
     # Proceed with search for unused imports
@@ -82,14 +80,15 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             with open(agda_file, 'w') as file:
                 file.write(content)
 
-            utils.thread_safe_print(
+            utils.multithread.thread_safe_print(
                 f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
             return
 
-        utils.thread_safe_print(
+        utils.multithread.thread_safe_print(
             f"'{agda_module}' had {len(removed_imports)} unused imports: {removed_imports}")
     else:
-        utils.thread_safe_print(f"'{agda_module}' No unused imports.")
+        utils.multithread.thread_safe_print(
+            f"'{agda_module}' No unused imports.")
 
 
 if __name__ == "__main__":
@@ -105,7 +104,7 @@ if __name__ == "__main__":
         pathlib.Path(f)) and os.path.dirname(f) != root
 
     agda_files = sorted(
-        filter(filter_agda_files, utils.get_files_recursively(root)))
+        filter(filter_agda_files, utils.get_files_recursive(root)))
 
     with ThreadPoolExecutor() as executor:
         executor.map(lambda file: process_agda_file(

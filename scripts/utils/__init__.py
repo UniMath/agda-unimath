@@ -1,10 +1,9 @@
 import pathlib
 import os
-import threading
 import subprocess
 
 
-def get_files_recursively(startpath):
+def get_files_recursive(startpath):
     """
     Recursively list all files in a directory and its subdirectories
     """
@@ -92,6 +91,9 @@ def get_import_statement(namespace, module_file, public=False):
 def get_module_mdfile(namespace, module_file):
     return namespace + "." + module_file.replace(".lagda.md", ".md")
 
+def get_agda_module_name(agda_file_path, root="src"):
+    return agda_file_path[bool(root) * (len(root) + 1):agda_file_path.rfind('.lagda.md')].replace('/', '.').replace('\\', '.')
+
 
 def get_equivalence_classes(equivalence_relation, iterable):
     partitions = []  # Found partitions
@@ -103,11 +105,3 @@ def get_equivalence_classes(equivalence_relation, iterable):
         else:  # Make a new partition for it.
             partitions.append([e])
     return partitions
-
-
-print_lock = threading.Lock()
-
-
-def thread_safe_print(*args, **kwargs):
-    with print_lock:
-        print(*args, **kwargs)
