@@ -4,9 +4,9 @@
 module foundation.type-duality where
 ```
 
+<details><summary>Imports</summary>
+
 ```agda
-open import foundation-core.fibers-of-maps
-open import foundation-core.injective-maps
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -15,8 +15,8 @@ open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
@@ -39,21 +39,9 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.propositions
 open import foundation-core.small-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 
@@ -355,36 +343,20 @@ The type of all function from `A → B` is equivalent to the type of function
 `Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
 
 ```agda
-equiv-fixed-Slice' :
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2)
-  ( slice : Slice l3 B) →
-  ( A ≃ Σ B ( Fib B slice)) ≃ ( A ≃ pr1 slice)
-equiv-fixed-Slice' A B slice =
-  equiv-postcomp-equiv (equiv-total-fib (pr2 slice)) A
-
-equiv-fixed-Slice :
+fib-Σ :
   {l : Level} (X : UU l) (A : UU l) →
   (X → A) ≃
     Σ (A → UU l) (λ Y → X ≃ Σ A Y)
-equiv-fixed-Slice {l} X A =
+fib-Σ {l} X A =
   ( ( equiv-Σ
       ( λ Z → X ≃ Σ A Z)
       ( equiv-Fib l A)
-      ( λ s → inv-equiv ( equiv-fixed-Slice' X A s))) ∘e
+      ( λ s →
+        inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
   ( ( equiv-right-swap-Σ) ∘e
   ( ( inv-left-unit-law-Σ-is-contr
       ( is-contr-total-equiv X)
       ( X , id-equiv )))))
-
-equiv-fixed-Slice-structure' :
-  {l : Level} (P : UU l → UU l) (A : UU l) (B : UU l)
-  ( slice : Slice-structure l P B) →
-  ( A ≃
-      Σ B
-        ( λ b → pr1 ( ( map-equiv (equiv-Fib-structure l P B) slice) b))) ≃
-   ( A ≃ pr1 (slice) )
-equiv-fixed-Slice-structure' P A B slice =
-  equiv-postcomp-equiv (equiv-total-fib (pr1 (pr2 slice))) A
 
 equiv-fixed-Slice-structure :
   {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →
@@ -394,7 +366,8 @@ equiv-fixed-Slice-structure {l} P X A =
   ( ( equiv-Σ
       ( λ Y → X ≃ Σ A (pr1 ∘ Y))
       ( equiv-Fib-structure l P A)
-      ( λ s → inv-equiv (equiv-fixed-Slice-structure' P X A s))) ∘e
+      ( λ s →
+        inv-equiv (equiv-postcomp-equiv (equiv-total-fib (pr1 (pr2 s))) X))) ∘e
   ( ( equiv-right-swap-Σ) ∘e
   ( ( inv-left-unit-law-Σ-is-contr
       ( is-contr-total-equiv X)

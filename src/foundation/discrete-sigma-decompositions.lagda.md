@@ -2,7 +2,11 @@
 
 ```agda
 module foundation.discrete-sigma-decompositions where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -18,6 +22,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
+
+</details>
 
 ## Definition
 

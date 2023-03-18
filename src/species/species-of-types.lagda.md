@@ -2,12 +2,18 @@
 
 ```agda
 module species.species-of-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
 ```
+
+</details>
 
 ### Idea
 

@@ -2,7 +2,11 @@
 
 ```agda
 module species.species-of-types-in-subuniverse where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -13,9 +17,12 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import species.species-of-types
+
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 ```
+
+</details>
 
 ### Idea
 

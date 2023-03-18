@@ -97,25 +97,25 @@ module _
 ### A type `X` is finite if and only if it has decidable equality and there exists a surjection from a finite type to `X`
 
 ```agda
-  is-finite-iff-∃-surjection-has-decidable-equality :
-    is-finite X ≃
-      ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-  is-finite-iff-∃-surjection-has-decidable-equality =
-    equiv-prop
-      ( is-prop-is-finite X)
-      ( is-prop-prod is-prop-has-decidable-equality is-prop-type-trunc-Prop)
-      ( λ fin-X →
-        apply-universal-property-trunc-Prop
-          ( fin-X)
-          ( prod-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
-          ( λ count-X →
-            ( has-decidable-equality-count count-X  ,
-              unit-trunc-Prop
-                ( pr1 count-X ,
-                  ( map-equiv (pr2 count-X)) ,
-                    ( is-surjective-map-equiv (pr2 count-X))))))
-      ( λ dec-X-surj →
-        apply-universal-property-trunc-Prop
+  is-finite-if-∃-surjection-has-decidable-equality :
+    is-finite X →
+    ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+  is-finite-if-∃-surjection-has-decidable-equality fin-X =
+    apply-universal-property-trunc-Prop
+     ( fin-X)
+     ( prod-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
+     ( λ count-X →
+       ( has-decidable-equality-count count-X  ,
+         unit-trunc-Prop
+         ( pr1 count-X ,
+           ( map-equiv (pr2 count-X)) ,
+           ( is-surjective-map-equiv (pr2 count-X)))))
+
+  ∃-surjection-has-decidable-equality-if-is-finite :
+    ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X))) →
+    is-finite X
+  ∃-surjection-has-decidable-equality-if-is-finite dec-X-surj =
+    apply-universal-property-trunc-Prop
           ( pr2 dec-X-surj)
           ( is-finite-Prop X)
           ( λ n-surj →
@@ -123,5 +123,16 @@ module _
               ( count-surjection-has-decidable-equality
                 ( pr1 n-surj)
                 ( pr1 dec-X-surj)
-                ( pr2 n-surj))))
+                ( pr2 n-surj)))
+
+  is-finite-iff-∃-surjection-has-decidable-equality :
+    is-finite X ≃
+    ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+  is-finite-iff-∃-surjection-has-decidable-equality =
+    equiv-prop
+      ( is-prop-is-finite X)
+      ( is-prop-prod is-prop-has-decidable-equality is-prop-type-trunc-Prop)
+      ( λ fin-X → is-finite-if-∃-surjection-has-decidable-equality fin-X)
+      ( λ dec-X-surj →
+        ∃-surjection-has-decidable-equality-if-is-finite dec-X-surj)
 ```

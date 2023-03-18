@@ -2,24 +2,24 @@
 
 ```agda
 module species.large-composition-species-of-types where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-relaxed-sigma-decompositions
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
-open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universe-levels
-open import foundation.universal-property-dependent-pair-types
 open import foundation.relaxed-sigma-decompositions
 open import foundation.trivial-relaxed-sigma-decompositions
 open import foundation.type-arithmetic-cartesian-product-types
@@ -27,9 +27,15 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universe-levels
 
 open import species.species-of-types
 ```
+
+</details>
 
 ## Idea
 

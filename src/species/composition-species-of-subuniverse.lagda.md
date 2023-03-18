@@ -436,7 +436,7 @@ equiv-Σ-Decomposition-Inhabited-Type-𝔽-Σ-Decomposition-𝔽 X =
           ( equiv-add-redundant-prop
             ( is-property-is-inhabited _)
             ( λ _ →
-              map-Inhabited-Type
+              map-is-inhabited
                 ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
                 ( is-inhabited-type-Inhabited-Type-𝔽 X)))
           ( id-equiv))) ∘e

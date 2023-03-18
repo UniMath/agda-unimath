@@ -2,7 +2,11 @@
 
 ```agda
 module univalent-combinatorics.unions-subtypes where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.unions-subtypes public
 
 open import foundation.decidable-equality
@@ -18,6 +22,8 @@ open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
 ```
+
+</details>
 
 ## Properties
 

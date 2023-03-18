@@ -2,7 +2,11 @@
 
 ```agda
 module univalent-combinatorics.discrete-sigma-decompositions where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.discrete-sigma-decompositions public
 
 open import foundation.contractible-types
@@ -15,6 +19,8 @@ open import foundation.universe-levels
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.sigma-decompositions
 ```
+
+</details>
 
 ## Definitions
 
