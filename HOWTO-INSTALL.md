@@ -48,9 +48,11 @@ Once you've activated the shell, launch your editor from within it by running
 
 ## Tutorials for Agda
 
-If you're new to Agda, see the
+If you're new to Agda, there are several resources available to help you learn
+the basics and become proficient in using the language. We recommend starting
+with the
 [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
-to learn how to use Agda.
+provided on the Agda documentation page.
 
 ## Editor Setup
 
