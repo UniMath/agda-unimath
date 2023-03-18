@@ -9,6 +9,7 @@ module commutative-algebra.powers-of-elements-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
@@ -48,4 +49,41 @@ module _
     mul-Commutative-Semiring R (power-Commutative-Semiring R n x) x
   power-succ-Commutative-Semiring =
     power-succ-Semiring (semiring-Commutative-Semiring R)
+```
+
+### Powers by sums of natural numbers are products of powers
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  power-add-Commutative-Semiring :
+    (m n : ℕ) {x : type-Commutative-Semiring R} →
+    power-Commutative-Semiring R (add-ℕ m n) x ＝
+    mul-Commutative-Semiring R
+      ( power-Commutative-Semiring R m x)
+      ( power-Commutative-Semiring R n x)
+  power-add-Commutative-Semiring =
+    power-add-Semiring (semiring-Commutative-Semiring R)
+```
+
+### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`.
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  distributive-power-mul-Commutative-Semiring :
+    (n : ℕ) (x y : type-Commutative-Semiring R) →
+    power-Commutative-Semiring R n (mul-Commutative-Semiring R x y) ＝
+    mul-Commutative-Semiring R
+      ( power-Commutative-Semiring R n x)
+      ( power-Commutative-Semiring R n y)
+  distributive-power-mul-Commutative-Semiring n x y =
+    distributive-power-mul-Semiring
+      ( semiring-Commutative-Semiring R)
+      ( n)
+      ( commutative-mul-Commutative-Semiring R x y)
 ```

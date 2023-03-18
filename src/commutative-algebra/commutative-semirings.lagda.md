@@ -265,6 +265,19 @@ module _
   ap-mul-nat-scalar-Commutative-Semiring =
     ap-mul-nat-scalar-Semiring semiring-Commutative-Semiring
 
+  left-zero-law-mul-nat-scalar-Commutative-Semiring :
+    (x : type-Commutative-Semiring) →
+    mul-nat-scalar-Commutative-Semiring 0 x ＝ zero-Commutative-Semiring
+  left-zero-law-mul-nat-scalar-Commutative-Semiring =
+    left-zero-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
+
+  right-zero-law-mul-nat-scalar-Commutative-Semiring :
+    (n : ℕ) →
+    mul-nat-scalar-Commutative-Semiring n zero-Commutative-Semiring ＝
+    zero-Commutative-Semiring
+  right-zero-law-mul-nat-scalar-Commutative-Semiring =
+    right-zero-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
+
   left-unit-law-mul-nat-scalar-Commutative-Semiring :
     (x : type-Commutative-Semiring) →
     mul-nat-scalar-Commutative-Semiring 1 x ＝ x
