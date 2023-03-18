@@ -585,7 +585,7 @@ needed.
           f x H₁ H₂)
 ```
 
-### Empty set axiom
+### Cumulative hierarchies satisfy the empty set axiom
 
 ```agda
   empty-set-axiom-cumulative-hierarchy :
@@ -597,7 +597,7 @@ needed.
       ( ∈-cumulative-hierarchy-mere-preimage H)
 ```
 
-### Pair axiom
+### Cumulative hierarchies satisfy the pair axiom
 
 ```agda
   pair-cumulative-hierarchy :
@@ -639,7 +639,7 @@ needed.
       ( λ _ → x))
 ```
 
-### Infinity axiom
+### Cumulative hierarchies satisfy the infinity axiom
 
 ```agda
   infinity-cumulative-hierarchy : type-pseudo-cumulative-hierarchy V
@@ -675,15 +675,15 @@ needed.
             ( ∈-cumulative-hierarchy-mere-preimage H)) )
 ```
 
-### ∈-induction axiom
+### Cumulative hierarchies satisfy the ∈-induction axiom
 
 ```agda
   ∈-induction-cumulative-hierarchy :
     {l2 : Level}
     ( P : type-pseudo-cumulative-hierarchy V → UU l2) →
-    (( x : type-pseudo-cumulative-hierarchy V) → is-prop (P x)) →
-    (( x : type-pseudo-cumulative-hierarchy V) →
-      (( y : type-pseudo-cumulative-hierarchy V) →
+    ( ( x : type-pseudo-cumulative-hierarchy V) → is-prop (P x)) →
+    ( ( x : type-pseudo-cumulative-hierarchy V) →
+      ( ( y : type-pseudo-cumulative-hierarchy V) →
         ∈-cumulative-hierarchy y x → P y) →
       P x) →
     ( x : type-pseudo-cumulative-hierarchy V) → P x
@@ -698,7 +698,7 @@ needed.
                ( ∈-cumulative-hierarchy-mere-preimage m)))
 ```
 
-### Replacement axiom
+### Cumulative hierarchies satisfy the replacement axiom
 
 ```agda
   replacement-cumulative-hierarchy :
@@ -734,7 +734,7 @@ needed.
                     ( ∃-Prop A _)
                     ( λ {(z , K , refl) →
                       ( map-trunc-Prop
-                        (λ {(a , refl) → (a , refl)})
+                        ( λ {(a , refl) → (a , refl)})
                         ( ∈-cumulative-hierarchy-mere-preimage K))})
                     ( H))))))})
       ( underlying-function-cumulative-hierarchy x)
