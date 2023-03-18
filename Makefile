@@ -3,7 +3,7 @@ CHECKOPTS :=--without-K --exact-split --guardedness
 everythingOpts :=$(CHECKOPTS)
 AGDAVERBOSE?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
-AGDAFILES := $(wildcard src/**/*.lagda.md)
+AGDAFILES := $(shell find src -type f -name "*.lagda.md" \! -name "everything.lagda.md")
 AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
 bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
@@ -64,7 +64,7 @@ agda-html: src/everything.lagda.md
 	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
-SUMMARY.md:
+SUMMARY.md: ${AGDAFILES}
 	@python3 scripts/generate_main_index_file.py
 
 .PHONY: website
