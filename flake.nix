@@ -13,7 +13,10 @@
         let
           pkgs = nixpkgs.legacyPackages."${system}";
           agda = pkgs.agda;
-          python = pkgs.python3.withPackages (p: with p; [ requests ]);
+          python = pkgs.python3.withPackages (p: with p; [
+            # Keep in sync with scripts/requirements.txt
+            requests
+          ]);
         in
         {
           devShells.default = pkgs.mkShell {
@@ -24,7 +27,7 @@
               agda
               # part of `make check`
               pkgs.time
-              # update-contributors.py
+              # maintanance scripts
               python
               # working on the website
               pkgs.mdbook
