@@ -16,3 +16,18 @@ keywords:
   - type-theory
   - homotopy-type-theory
   - univalent-foundations
+  
+preferred-citation:
+  type: "misc"
+  id: "AgdaUnimath"
+  authors:
+    - family-names: "Rijke"
+      given-names: "Egbert"
+    - family-names: "Bonnevier"
+      given-names: "Elisabeth"
+    - family-names: "Prieto-Cubides"
+      given-names: "Jonathan"
+    - name: "others"
+  title: "Univalent mathematics in Agda"
+  url: "https://github.com/UniMath/agda-unimath/"
+  howpublished: "https://unimath.github.io/agda-unimath/"
