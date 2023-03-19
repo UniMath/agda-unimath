@@ -31,18 +31,6 @@ multiplication by elements of `R` from the left.
 
 ## Definitions
 
-### Additive subgroups
-
-```agda
-module _
-  {l1 : Level} (R : Ring l1)
-  where
-
-  is-additive-subgroup-subset-Ring :
-    {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
-  is-additive-subgroup-subset-Ring = is-subgroup-Ab (ab-Ring R)
-```
-
 ### Left ideals
 
 ```agda
@@ -242,8 +230,10 @@ module _
   subgroup-two-sided-ideal-Ring : Subgroup l2 (group-Ring R)
   pr1 subgroup-two-sided-ideal-Ring = subset-two-sided-ideal-Ring
   pr1 (pr2 subgroup-two-sided-ideal-Ring) = contains-zero-two-sided-ideal-Ring
-  pr1 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x y = is-closed-under-add-two-sided-ideal-Ring
-  pr2 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x = is-closed-under-neg-two-sided-ideal-Ring
+  pr1 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x y =
+    is-closed-under-add-two-sided-ideal-Ring
+  pr2 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x =
+    is-closed-under-neg-two-sided-ideal-Ring
 
   normal-subgroup-two-sided-ideal-Ring : Normal-Subgroup l2 (group-Ring R)
   pr1 normal-subgroup-two-sided-ideal-Ring = subgroup-two-sided-ideal-Ring
@@ -252,9 +242,17 @@ module _
       ( is-in-two-sided-ideal-Ring)
       ( equational-reasoning
         y
-        ＝ add-Ring R y (zero-Ring R)                 by inv (right-unit-law-add-Ring R y)
-        ＝ add-Ring R y (add-Ring R x (neg-Ring R x)) by inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))
-        ＝ add-Ring R (add-Ring R y x) (neg-Ring R x) by inv (associative-add-Ring R y x (neg-Ring R x))
-        ＝ add-Ring R (add-Ring R x y) (neg-Ring R x) by ap (add-Ring' R (neg-Ring R x)) (commutative-add-Ring R y x))
+        ＝ add-Ring R y (zero-Ring R)
+          by
+          inv (right-unit-law-add-Ring R y)
+        ＝ add-Ring R y (add-Ring R x (neg-Ring R x))
+          by
+          inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))
+        ＝ add-Ring R (add-Ring R y x) (neg-Ring R x)
+          by
+          inv (associative-add-Ring R y x (neg-Ring R x))
+        ＝ add-Ring R (add-Ring R x y) (neg-Ring R x)
+          by
+          ap (add-Ring' R (neg-Ring R x)) (commutative-add-Ring R y x))
       ( H)
 ```

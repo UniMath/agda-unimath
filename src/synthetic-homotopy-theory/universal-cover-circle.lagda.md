@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.universal-cover-circle where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
@@ -33,7 +32,6 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle

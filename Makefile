@@ -30,7 +30,7 @@ METAFILES:=CITATION.cff \
 agdaFiles :
 	@rm -rf $@
 	@rm -rf src/everything.lagda.md
-	@find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $@
+	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) -print > $@
 	@sort -o $@ $@
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
@@ -67,13 +67,9 @@ agda-html: src/everything.lagda.md
 SUMMARY.md:
 	@python3 scripts/generate_main_index_file.py
 
-CONTRIBUTORS.md:
-	@python3 scripts/update_contributors.py
-
 .PHONY: website
 website: agda-html \
-		 SUMMARY.md \
-		 CONTRIBUTORS.md
+		SUMMARY.md
 	@cp $(METAFILES) docs/
 	@mdbook build
 

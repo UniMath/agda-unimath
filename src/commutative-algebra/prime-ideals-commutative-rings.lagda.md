@@ -9,6 +9,7 @@ module commutative-algebra.prime-ideals-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -16,6 +17,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
+open import ring-theory.subsets-rings
 ```
 
 </details>
@@ -116,17 +118,17 @@ module _
     is-closed-under-add-ideal-Commutative-Ring R
       ideal-prime-ideal-Commutative-Ring
 
-  is-closed-under-mul-left-prime-ideal-Commutative-Ring :
-    is-closed-under-mul-left-subset-Commutative-Ring R
+  is-closed-under-left-multiplication-prime-ideal-Commutative-Ring :
+    is-closed-under-left-multiplication-subset-Commutative-Ring R
       subset-prime-ideal-Commutative-Ring
-  is-closed-under-mul-left-prime-ideal-Commutative-Ring =
-    is-closed-under-mul-left-ideal-Commutative-Ring R
+  is-closed-under-left-multiplication-prime-ideal-Commutative-Ring =
+    is-closed-under-left-multiplication-ideal-Commutative-Ring R
       ideal-prime-ideal-Commutative-Ring
 
-  is-closed-under-mul-right-prime-ideal-Commutative-Ring :
-    is-closed-under-mul-right-subset-Commutative-Ring R
+  is-closed-under-right-multiplication-prime-ideal-Commutative-Ring :
+    is-closed-under-right-multiplication-subset-Commutative-Ring R
       subset-prime-ideal-Commutative-Ring
-  is-closed-under-mul-right-prime-ideal-Commutative-Ring =
-    is-closed-under-mul-right-ideal-Commutative-Ring R
+  is-closed-under-right-multiplication-prime-ideal-Commutative-Ring =
+    is-closed-under-right-multiplication-ideal-Commutative-Ring R
       ideal-prime-ideal-Commutative-Ring
 ```

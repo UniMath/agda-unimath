@@ -9,6 +9,7 @@ module foundation.lesser-limited-principle-of-omniscience where
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.parity-natural-numbers
 
 open import foundation.disjunction
 

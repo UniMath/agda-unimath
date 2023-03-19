@@ -185,16 +185,31 @@ module _
 ```agda
 split-sum-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l)
-  (n m : ℕ) (f : functional-vec-Commutative-Ring R (add-ℕ n m)) → 
-  sum-Commutative-Ring R (add-ℕ n m) f ＝ 
+  (n m : ℕ) (f : functional-vec-Commutative-Ring R (add-ℕ n m)) →
+  sum-Commutative-Ring R (add-ℕ n m) f ＝
   add-Commutative-Ring R
     ( sum-Commutative-Ring R n (f ∘ inl-coprod-Fin n m))
     ( sum-Commutative-Ring R m (f ∘ inr-coprod-Fin n m))
 split-sum-Commutative-Ring R n zero-ℕ f =
   inv (right-unit-law-add-Commutative-Ring R (sum-Commutative-Ring R n f))
-split-sum-Commutative-Ring R n (succ-ℕ m) f = 
+split-sum-Commutative-Ring R n (succ-ℕ m) f =
   ( ap
     ( add-Commutative-Ring' R (f(inr star)))
-    ( split-sum-Commutative-Ring R n m (f ∘ inl))) ∙ 
+    ( split-sum-Commutative-Ring R n m (f ∘ inl))) ∙
   ( associative-add-Commutative-Ring R _ _ _ )
+```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  sum-zero-Commutative-Ring :
+    (n : ℕ) →
+    sum-Commutative-Ring R n
+      ( zero-functional-vec-Commutative-Ring R n) ＝
+    zero-Commutative-Ring R
+  sum-zero-Commutative-Ring = sum-zero-Ring (ring-Commutative-Ring R)
 ```
