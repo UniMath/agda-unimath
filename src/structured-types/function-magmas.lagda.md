@@ -13,7 +13,7 @@ open import foundation.universe-levels
 open import structured-types.magmas
 ```
 
-<details>
+</details>
 
 ## Idea
 

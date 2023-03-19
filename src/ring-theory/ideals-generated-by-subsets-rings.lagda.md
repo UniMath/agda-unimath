@@ -203,8 +203,10 @@ module _
     contains-zero-left-ideal-Ring R I
   contains-formal-combinations-left-ideal-Ring I H
     ( cons (pair r (pair s K)) c) =
-    is-closed-under-add-left-ideal-Ring R I
-      ( is-closed-under-mul-left-ideal-Ring R I r s (H s K))
+    is-closed-under-addition-left-ideal-Ring R I
+      ( mul-Ring R r s)
+      ( ev-formal-combination-subset-Ring c)
+      ( is-closed-under-left-multiplication-left-ideal-Ring R I r s (H s K))
       ( contains-formal-combinations-left-ideal-Ring I H c)
 
   is-left-ideal-generated-by-subset-left-ideal-subset-Ring :

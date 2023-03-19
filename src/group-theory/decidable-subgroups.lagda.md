@@ -214,20 +214,15 @@ module _
   type-group-Decidable-Subgroup =
     type-group-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  map-inclusion-group-Decidable-Subgroup :
+  map-inclusion-Decidable-Subgroup :
     type-group-Decidable-Subgroup → type-Group G
-  map-inclusion-group-Decidable-Subgroup =
-    map-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
-
-  is-emb-inclusion-group-Decidable-Subgroup :
-    is-emb map-inclusion-group-Decidable-Subgroup
-  is-emb-inclusion-group-Decidable-Subgroup =
-    is-emb-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  map-inclusion-Decidable-Subgroup =
+    map-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   eq-decidable-subgroup-eq-group :
     {x y : type-group-Decidable-Subgroup} →
-    ( map-inclusion-group-Decidable-Subgroup x ＝
-      map-inclusion-group-Decidable-Subgroup y) →
+    ( map-inclusion-Decidable-Subgroup x ＝
+      map-inclusion-Decidable-Subgroup y) →
     x ＝ y
   eq-decidable-subgroup-eq-group =
     eq-subgroup-eq-group G (subgroup-Decidable-Subgroup G H)
@@ -295,35 +290,35 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
 
-  preserves-mul-inclusion-group-Decidable-Subgroup :
+  preserves-mul-inclusion-Decidable-Subgroup :
     preserves-mul-Group
       ( group-Decidable-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Decidable-Subgroup G H)
-  preserves-mul-inclusion-group-Decidable-Subgroup =
-    preserves-mul-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+      ( map-inclusion-Decidable-Subgroup G H)
+  preserves-mul-inclusion-Decidable-Subgroup =
+    preserves-mul-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  preserves-unit-inclusion-group-Decidable-Subgroup :
+  preserves-unit-inclusion-Decidable-Subgroup :
     preserves-unit-Group
       ( group-Decidable-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Decidable-Subgroup G H)
-  preserves-unit-inclusion-group-Decidable-Subgroup =
-    preserves-unit-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+      ( map-inclusion-Decidable-Subgroup G H)
+  preserves-unit-inclusion-Decidable-Subgroup =
+    preserves-unit-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  preserves-inverses-inclusion-group-Decidable-Subgroup :
+  preserves-inverses-inclusion-Decidable-Subgroup :
     preserves-inverses-Group
       ( group-Decidable-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Decidable-Subgroup G H)
-  preserves-inverses-inclusion-group-Decidable-Subgroup =
-    preserves-inverses-inclusion-group-Subgroup G
+      ( map-inclusion-Decidable-Subgroup G H)
+  preserves-inverses-inclusion-Decidable-Subgroup =
+    preserves-inverses-inclusion-Subgroup G
       ( subgroup-Decidable-Subgroup G H)
 
-  inclusion-group-Decidable-Subgroup :
+  hom-inclusion-Decidable-Subgroup :
     type-hom-Group (group-Decidable-Subgroup G H) G
-  inclusion-group-Decidable-Subgroup =
-    inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  hom-inclusion-Decidable-Subgroup =
+    hom-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```
 
 ## Properties
