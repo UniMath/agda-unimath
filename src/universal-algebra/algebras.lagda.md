@@ -7,40 +7,21 @@ module universal-algebra.algebras where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.existential-quantification
-open import foundation.functions
-open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.truncated-types
-open import foundation.unit-type
 open import foundation.universe-levels
-
-open import linear-algebra.vectors
 
 open import group-theory.groups
 
-open import orthogonal-factorization-systems.lifts-of-maps
-
-open import univalent-combinatorics.standard-finite-types
+open import linear-algebra.vectors
 ```
 
 </details>
@@ -48,8 +29,10 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Universal algebra studies many different algebraic structures at the same time.
-Given a signature, that is a collection of function symbols with a given arity, an algebra consists of a carrier set together with an operation `f` of arity `n` for each function symbol `f'` of arity `n`.
-The carrier and operations may also require additional rules involving them.
+Given a signature, that is a collection of function symbols with a given arity,
+an algebra consists of a carrier set together with an operation `f` of arity `n`
+for each function symbol `f'` of arity `n`. The carrier and operations may also
+require additional rules involving them.
 
 ## Definitions
 
@@ -71,7 +54,9 @@ arity-operations-signature Sig = pr2 Sig
 
 ### Models
 
-A model of a signature `Sig` in a type `A` is a dependent function that assings to each function symbol `f` of arity `n` and a vector of `n` elements of `A` an element of `A`.
+A model of a signature `Sig` in a type `A` is a dependent function that assings
+to each function symbol `f` of arity `n` and a vector of `n` elements of `A` an
+element of `A`.
 
 ```agda
 module _ {l1 : Level} (Sig : signature l1) where
@@ -108,8 +93,9 @@ module _ {l1 : Level} (Sig : signature l1) where
 
 ### Terms
 
-A term in a signature, is an abstract representation of a well formed expression which uses only variables and operations in the signature.
-For this particular formalization, we are using de Bruijn variables.
+A term in a signature, is an abstract representation of a well formed expression
+which uses only variables and operations in the signature. For this particular
+formalization, we are using de Bruijn variables.
 
 ```agda
   data Term : UU l1 where
@@ -119,7 +105,8 @@ For this particular formalization, we are using de Bruijn variables.
 
 ### Assignment of variables
 
-An assignment of variables, assigns each de Bruijn variable to an element in a type.
+An assignment of variables, assigns each de Bruijn variable to an element in a
+type.
 
 ```agda
   assignment : {l2 : Level} → (A : UU l2) → UU l2
@@ -128,7 +115,8 @@ An assignment of variables, assigns each de Bruijn variable to an element in a t
 
 ### Evaluation of terms
 
-Given a model of a type `A` and an assignment of variables, any term can be evaluated to a concrete element of the type `A`.
+Given a model of a type `A` and an assignment of variables, any term can be
+evaluated to a concrete element of the type `A`.
 
 ```agda
   eval-term :
@@ -178,12 +166,12 @@ A theory is a family of equations that should hold.
     ( index-Theory Th) →
     Abstract-Equation
   index-Abstract-Equation-Theory Th e = pr2 Th e
-
 ```
 
 ### Algebra
 
-Given a theory, an algebra is a model on a set such that it satisfies all equations.
+Given a theory, an algebra is a model on a set such that it satisfies all
+equations.
 
 ```agda
   is-algebra :
