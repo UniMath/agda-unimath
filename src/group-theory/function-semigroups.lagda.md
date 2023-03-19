@@ -17,7 +17,7 @@ open import group-theory.semigroups
 open import group-theory.dependent-products-semigroups
 ```
 
-<details>
+</details>
 
 ## Idea
 

@@ -19,7 +19,7 @@ open import foundation.negation
 open import foundation.universe-levels
 ```
 
-<details>
+</details>
 
 ## Idea
 

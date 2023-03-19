@@ -19,7 +19,7 @@ open import group-theory.normal-subgroups
 open import group-theory.subgroups
 ```
 
-<details>
+</details>
 
 ## Idea
 

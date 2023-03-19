@@ -18,7 +18,7 @@ open import group-theory.semigroups
 open import group-theory.subsemigroups
 ```
 
-<details>
+</details>
 
 ## Idea
 
