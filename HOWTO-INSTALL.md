@@ -172,13 +172,13 @@ formatting mistakes, ensuring a smoother coding experience.
 
 ### Note on the library's use of Unicode characters
 
-This library makes extensive use of Unicode characters. It is therefore
-important to use a font family with wide support for them in your editor. For
-example, we make use of the
-[middle dot](https://www.compart.com/en/unicode/U+00B7) symbol `·`, as well as
-the [bullet operator](https://www.compart.com/en/unicode/U+2219) symbol `∙`,
-which in some fonts are indistinguishable. If these two symbols look the same in
-your editor, we suggest that you change your font.
+This library relies heavily on Unicode characters, so it's important to use a
+font family with comprehensive Unicode support in your editor. For instance, the
+library utilizes the [middle dot](https://www.compart.com/en/unicode/U+00B7)
+symbol `·` and the [bullet operator](https://www.compart.com/en/unicode/U+2219)
+symbol `∙`. In some fonts, these two symbols appear identical. If you find it
+difficult to distinguish between these symbols in your editor, we recommend
+switching to a different font.
 
 ## After the setup
 
