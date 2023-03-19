@@ -199,20 +199,27 @@ in contributing to the `agda-unimath` library, please follow our guidelines and
 best practices, as well as the instructions below to ensure a smooth setup and
 workflow.
 
-#### Pre-commit hooks and Python dependencies
+#### Pre-commit hooks and Python dependencies {#pre-commit-hooks}
 
 The `agda-unimath` library includes pre-commit hooks that enforce basic
-formatting rules. To utilize these hooks, you'll need to install the
-`pre-commit` tool and the hooks' Python dependencies. The easiest way to
-accomplish this is by using the Python package manager `pip` and running the
-following command:
+formatting rules. To utilize these hooks, if you did not install your
+environment using Nix, you'll need to install the `pre-commit` tool and the
+hooks' Python dependencies. The easiest way to accomplish this is by using the
+Python package manager `pip` and running the following command:
 
 ```shell
-python3 -pip install -r scripts/requirements.txt
+pip install -r scripts/requirements.txt
 ```
 
-Now, before you submit a PR next time, make sure to stage your changes and run
-`make pre-commit` from the repository's main folder.
+Now, before you submit a PR next time, you can run `pre-commit` by staging your
+changes and run the command `make pre-commit` from the repository's main folder.
+
+To make `pre-commit` run automatically on every commit, simply execute the
+command
+
+```shell
+pre-commit install
+```
 
 Keep in mind that `pre-commit` is also a part of the CI, so any PR that violates
 the enforced conventions will be automatically blocked.
