@@ -10,6 +10,7 @@ module commutative-algebra.radical-ideals-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
@@ -22,14 +23,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-An ideal `I` in a commutative ring is said to be **radical** if for every element `f : A` such that there exists an `n` such that `fⁿ ∈ I`, we have `f ∈ I`.
+An ideal `I` in a commutative ring is said to be **radical** if for every
+element `f : A` such that there exists an `n` such that `fⁿ ∈ I`, we have
+`f ∈ I`.
 
 ## Definition
 
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1)
-  
+
   where
 
   is-radical-ideal-commutative-ring-Prop :
@@ -109,17 +112,17 @@ module _
     is-closed-under-add-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
 
-  is-closed-under-mul-left-radical-ideal-Commutative-Ring :
-    is-closed-under-mul-left-subset-Commutative-Ring A
+  is-closed-under-left-multiplication-radical-ideal-Commutative-Ring :
+    is-closed-under-left-multiplication-subset-Commutative-Ring A
       subset-radical-ideal-Commutative-Ring
-  is-closed-under-mul-left-radical-ideal-Commutative-Ring =
-    is-closed-under-mul-left-ideal-Commutative-Ring A
+  is-closed-under-left-multiplication-radical-ideal-Commutative-Ring =
+    is-closed-under-left-multiplication-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
 
-  is-closed-under-mul-right-radical-ideal-Commutative-Ring :
-    is-closed-under-mul-right-subset-Commutative-Ring A
+  is-closed-under-right-multiplication-radical-ideal-Commutative-Ring :
+    is-closed-under-right-multiplication-subset-Commutative-Ring A
       subset-radical-ideal-Commutative-Ring
-  is-closed-under-mul-right-radical-ideal-Commutative-Ring =
-    is-closed-under-mul-right-ideal-Commutative-Ring A
+  is-closed-under-right-multiplication-radical-ideal-Commutative-Ring =
+    is-closed-under-right-multiplication-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
 ```
