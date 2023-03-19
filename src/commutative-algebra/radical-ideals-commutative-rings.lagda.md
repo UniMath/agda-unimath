@@ -25,7 +25,8 @@ open import foundation.universe-levels
 
 An ideal `I` in a commutative ring is said to be **radical** if for every
 element `f : A` such that there exists an `n` such that `fⁿ ∈ I`, we have
-`f ∈ I`. In other words, radical ideals are ideals that contain, for every element `u ∈ I`, also the `n`-th roots of `u` if it has any.
+`f ∈ I`. In other words, radical ideals are ideals that contain, for every
+element `u ∈ I`, also the `n`-th roots of `u` if it has any.
 
 ## Definition
 
