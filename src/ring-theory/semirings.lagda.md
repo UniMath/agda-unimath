@@ -294,6 +294,17 @@ module _
     mul-nat-scalar-Semiring m x ＝ mul-nat-scalar-Semiring n y
   ap-mul-nat-scalar-Semiring p q = ap-binary mul-nat-scalar-Semiring p q
 
+  left-zero-law-mul-nat-scalar-Semiring :
+    (x : type-Semiring R) → mul-nat-scalar-Semiring 0 x ＝ zero-Semiring R
+  left-zero-law-mul-nat-scalar-Semiring x = refl
+
+  right-zero-law-mul-nat-scalar-Semiring :
+    (n : ℕ) → mul-nat-scalar-Semiring n (zero-Semiring R) ＝ zero-Semiring R
+  right-zero-law-mul-nat-scalar-Semiring zero-ℕ = refl
+  right-zero-law-mul-nat-scalar-Semiring (succ-ℕ n) =
+    ( right-unit-law-add-Semiring R _) ∙
+    ( right-zero-law-mul-nat-scalar-Semiring n)
+
   left-unit-law-mul-nat-scalar-Semiring :
     (x : type-Semiring R) →  mul-nat-scalar-Semiring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Semiring x = left-unit-law-add-Semiring R x

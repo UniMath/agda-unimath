@@ -9,6 +9,7 @@ module commutative-algebra.sums-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.functions
@@ -21,6 +22,7 @@ open import linear-algebra.vectors-on-commutative-semirings
 
 open import ring-theory.sums-semirings
 
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -128,7 +130,7 @@ module _
     right-distributive-mul-sum-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Interchange law of sums and addition in a commutative ring
+### Interchange law of sums and addition in a commutative semiring
 
 ```agda
 module _
@@ -146,7 +148,7 @@ module _
     interchange-add-sum-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Extending a sum of elements in a commutative ring
+### Extending a sum of elements in a commutative semiring
 
 ```agda
 module _
@@ -164,7 +166,7 @@ module _
     extend-sum-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Shifting a sum of elements in a commutative ring
+### Shifting a sum of elements in a commutative semiring
 
 ```agda
 module _
@@ -180,4 +182,34 @@ module _
     sum-Commutative-Semiring R n f
   shift-sum-Commutative-Semiring =
     shift-sum-Semiring (semiring-Commutative-Semiring R)
+```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  sum-zero-Commutative-Semiring :
+    (n : ℕ) →
+    sum-Commutative-Semiring R n
+      ( zero-functional-vec-Commutative-Semiring R n) ＝
+    zero-Commutative-Semiring R
+  sum-zero-Commutative-Semiring =
+    sum-zero-Semiring (semiring-Commutative-Semiring R)
+```
+
+### Splitting Sums
+
+```agda
+split-sum-Commutative-Semiring :
+  {l : Level} (R : Commutative-Semiring l)
+  (n m : ℕ) (f : functional-vec-Commutative-Semiring R (add-ℕ n m)) →
+  sum-Commutative-Semiring R (add-ℕ n m) f ＝
+  add-Commutative-Semiring R
+    ( sum-Commutative-Semiring R n (f ∘ inl-coprod-Fin n m))
+    ( sum-Commutative-Semiring R m (f ∘ inr-coprod-Fin n m))
+split-sum-Commutative-Semiring R =
+  split-sum-Semiring (semiring-Commutative-Semiring R)
 ```

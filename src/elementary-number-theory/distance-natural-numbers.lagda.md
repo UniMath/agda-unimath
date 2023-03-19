@@ -134,7 +134,6 @@ triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ =
     ( ( ap (succ-ℕ ∘ succ-ℕ)
            ( ap-add-ℕ (right-unit-law-dist-ℕ m) (left-unit-law-dist-ℕ n))) ∙
       ( inv (left-successor-law-add-ℕ m (succ-ℕ n))))
-
 triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
   triangle-inequality-dist-ℕ m n k
 ```
@@ -145,7 +144,8 @@ triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
 is-additive-right-inverse-dist-ℕ :
   (x y : ℕ) → x ≤-ℕ y → add-ℕ x (dist-ℕ x y) ＝ y
 is-additive-right-inverse-dist-ℕ zero-ℕ zero-ℕ H = refl
-is-additive-right-inverse-dist-ℕ zero-ℕ (succ-ℕ y) star = left-unit-law-add-ℕ (succ-ℕ y)
+is-additive-right-inverse-dist-ℕ zero-ℕ (succ-ℕ y) star =
+  left-unit-law-add-ℕ (succ-ℕ y)
 is-additive-right-inverse-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
   ( left-successor-law-add-ℕ x (dist-ℕ x y)) ∙
   ( ap succ-ℕ (is-additive-right-inverse-dist-ℕ x y H))
@@ -157,8 +157,7 @@ rewrite-left-add-dist-ℕ zero-ℕ (succ-ℕ y) .(succ-ℕ (add-ℕ zero-ℕ y))
   ( inv (dist-eq-ℕ' y)) ∙
   ( inv (ap (dist-ℕ (succ-ℕ y)) (left-unit-law-add-ℕ (succ-ℕ y))))
 rewrite-left-add-dist-ℕ (succ-ℕ x) zero-ℕ .(succ-ℕ x) refl = refl
-rewrite-left-add-dist-ℕ
-  (succ-ℕ x) (succ-ℕ y) .(succ-ℕ (add-ℕ (succ-ℕ x) y)) refl =
+rewrite-left-add-dist-ℕ (succ-ℕ x) (succ-ℕ y) ._ refl =
   rewrite-left-add-dist-ℕ (succ-ℕ x) y (add-ℕ (succ-ℕ x) y) refl
 
 rewrite-left-dist-add-ℕ :
@@ -190,6 +189,16 @@ is-difference-dist-ℕ' :
 is-difference-dist-ℕ' x y H =
   ( commutative-add-ℕ (dist-ℕ x y) x) ∙
   ( is-difference-dist-ℕ x y H)
+```
+
+### The distance from `n` to `n + m` is `m`
+
+```agda
+dist-add-ℕ : (x y : ℕ) → dist-ℕ x (add-ℕ x y) ＝ y
+dist-add-ℕ x y = inv (rewrite-right-add-dist-ℕ x y (add-ℕ x y) refl)
+
+dist-add-ℕ' : (x y : ℕ) → dist-ℕ (add-ℕ x y) x ＝ y
+dist-add-ℕ' x y = symmetric-dist-ℕ (add-ℕ x y) x ∙ dist-add-ℕ x y
 ```
 
 ### If three elements are ordered linearly, then their distances add up

@@ -67,6 +67,7 @@ open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
+open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
