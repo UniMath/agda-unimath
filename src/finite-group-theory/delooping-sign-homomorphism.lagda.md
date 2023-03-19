@@ -1,7 +1,7 @@
 # Deloopings of the sign homomorphism
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
 ```
 
 ```agda
@@ -123,9 +123,14 @@ module _
     l4 : Level
     l4 = l2 ⊔ lsuc l3
 
-    is-decidable-R : (n : ℕ) (X : UU-Fin l1 n) (a b : D n X) →
-      is-decidable (sim-Eq-Rel (R n X) a b)
-    is-decidable-R = {!!}
+    is-decidable-R : (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
+      (a b : D n X) → is-decidable (sim-Eq-Rel (R n X) a b)
+    is-decidable-R n H X a b =
+      apply-universal-property-trunc-Prop
+        ( has-cardinality-type-UU-Fin n X)
+        ( is-decidable-Prop (prop-Eq-Rel (R n X) a b))
+        ( λ h →
+          {!!})
 
     invertible-action-D-equiv : (n : ℕ) (X X' : UU-Fin l1 n) →
       (type-UU-Fin n X ≃ type-UU-Fin n X') → D n X ≃ D n X'
@@ -156,7 +161,6 @@ module _
         ( X')
         ( e)
 
-{-
     raise-UU-Fin-Fin : (n : ℕ) → UU-Fin l1 n
     pr1 (raise-UU-Fin-Fin n) = raise l1 (Fin n)
     pr2 (raise-UU-Fin-Fin n) = unit-trunc-Prop (compute-raise-Fin l1 n)
@@ -481,6 +485,7 @@ module _
     cases-map-quotient-aut-Fin n h
       ( is-decidable-R
         ( succ-ℕ (succ-ℕ n))
+        ( star)
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
         ( quotient-aut-succ-succ-Fin n h)
         ( map-equiv
@@ -512,6 +517,7 @@ module _
       { x =
         is-decidable-R
           ( succ-ℕ (succ-ℕ n))
+          ( star)
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
           ( quotient-aut-succ-succ-Fin n (transposition Y))
           ( map-equiv
@@ -751,7 +757,7 @@ module _
               ( p)))))
   eq-map-quotient-aut-Fin n p =
      cases-eq-map-quotient-aut-Fin n p
-      ( is-decidable-R (succ-ℕ (succ-ℕ n))
+      ( is-decidable-R (succ-ℕ (succ-ℕ n)) star
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
         ( quotient-aut-succ-succ-Fin n
           ( map-hom-symmetric-group-loop-group-Set
@@ -1985,5 +1991,4 @@ module _
                     ( hom-inv-symmetric-group-equiv-Set (Fin-Set (succ-ℕ (succ-ℕ n)))
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
-                      -}
 ```

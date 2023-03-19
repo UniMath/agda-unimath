@@ -560,3 +560,17 @@ pr1 (equiv-surjection-into-set-Eq-Rel A) =
 pr2 (equiv-surjection-into-set-Eq-Rel A) =
   is-equiv-surjection-into-set-Eq-Rel
 ```
+
+### Equality on a set is an equivalence relation
+
+```agda
+module _
+  {l1 : Level} (A : Set l1)
+  where
+
+  Id-Eq-Rel : Eq-Rel l1 (type-Set A)
+  pr1 Id-Eq-Rel = Id-Prop A
+  pr1 (pr2 Id-Eq-Rel) = refl
+  pr1 (pr2 (pr2 Id-Eq-Rel)) = inv
+  pr2 (pr2 (pr2 Id-Eq-Rel)) = λ p q → p ∙ q
+```

@@ -36,11 +36,13 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.logical-equivalences
+open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.unit-type
+open import foundation.univalence-action-on-equivalences
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -662,22 +664,79 @@ module _
   {l : Level}
   where
 
+  not-univalent-action-equiv-transposition : (n : ℕ) →
+    ( Y : 2-Element-Decidable-Subtype l
+      ( raise-Fin l (succ-ℕ (succ-ℕ n)))) →
+    ¬ ( sim-Eq-Rel
+      ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+        ( pair
+          ( raise-Fin l (succ-ℕ (succ-ℕ n)))
+          ( unit-trunc-Prop
+            ( compute-raise-Fin l (succ-ℕ (succ-ℕ n))))))
+        ( sign-comp-aut-succ-succ-Fin n (transposition Y))
+        ( map-equiv
+          ( univalent-action-equiv
+            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
+            ( λ X → Fin (succ-ℕ (succ-ℕ n)) ≃ pr1 X)
+            ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
+              unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
+            ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
+              unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
+            ( transposition Y))
+          ( sign-comp-aut-succ-succ-Fin n (transposition Y))))
+  not-univalent-action-equiv-transposition n =
+    tr
+      ( λ f →
+        ( Y : 2-Element-Decidable-Subtype l
+          ( raise-Fin l (succ-ℕ (succ-ℕ n)))) →
+            ¬ ( sim-Eq-Rel
+              ( sign-comp-Eq-Rel
+                ( succ-ℕ (succ-ℕ n))
+                ( raise-Fin l (succ-ℕ (succ-ℕ n)) ,
+                  unit-trunc-Prop
+                    ( compute-raise-Fin l (succ-ℕ (succ-ℕ n)))))
+                ( sign-comp-aut-succ-succ-Fin n (transposition Y))
+                ( map-equiv
+                  ( f
+                    ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
+                      unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
+                    ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
+                      unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
+                    ( transposition Y))
+                  ( sign-comp-aut-succ-succ-Fin n (transposition Y)))))
+      ( ap pr1
+        { x =
+          simpson-comp-equiv (succ-ℕ (succ-ℕ n)) ,
+            ( preserves-id-equiv-simpson-comp-equiv
+              ( succ-ℕ (succ-ℕ n)))}
+        { y =
+          ( univalent-action-equiv
+            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
+            ( λ X → Fin (succ-ℕ (succ-ℕ n)) ≃ type-UU-Fin (succ-ℕ (succ-ℕ n)) X) ,
+            ( preserves-id-equiv-univalent-action-equiv
+              ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
+              ( λ X → Fin (succ-ℕ (succ-ℕ n)) ≃ type-UU-Fin (succ-ℕ (succ-ℕ n)) X)))}
+        ( eq-is-contr
+          ( is-contr-preserves-id-action-equiv
+            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
+            ( λ X → Fin (succ-ℕ (succ-ℕ n)) ≃ type-UU-Fin (succ-ℕ (succ-ℕ n)) X)
+            ( λ X →
+              is-set-equiv-is-set
+                ( is-set-Fin (succ-ℕ (succ-ℕ n)))
+                ( is-set-type-UU-Fin (succ-ℕ (succ-ℕ n)) X)))))
+      ( not-sign-comp-transposition-count
+        ( succ-ℕ (succ-ℕ n) , (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+        ( star))
+
   simpson-delooping-sign : (n : ℕ) →
     hom-Concrete-Group (UU-Fin-Group l n) (UU-Fin-Group (lsuc lzero ⊔ l) 2)
   simpson-delooping-sign =
     quotient-delooping-sign
       ( λ n X → Fin n ≃ type-UU-Fin n X)
-      ( λ n X → sign-comp-Eq-Rel n X)
-      ( is-decidable-sign-comp-Eq-Rel)
+      ( sign-comp-Eq-Rel)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
-      ( simpson-comp-equiv)
-      ( preserves-id-equiv-simpson-comp-equiv)
-      ( preserves-sign-comp-simpson-comp-equiv)
       ( sign-comp-aut-succ-succ-Fin)
-      ( λ n →
-        not-sign-comp-transposition-count
-          ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-          ( star))
+      ( not-univalent-action-equiv-transposition)
 
   eq-simpson-delooping-sign-homomorphism : (n : ℕ) →
     Id
@@ -715,17 +774,10 @@ module _
             ( UU-Fin-Group (lsuc lzero ⊔ l) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( λ n X → Fin n ≃ type-UU-Fin n X)
-            ( λ n X → sign-comp-Eq-Rel n X)
-            ( is-decidable-sign-comp-Eq-Rel)
+            ( sign-comp-Eq-Rel)
             ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
-            ( simpson-comp-equiv)
-            ( preserves-id-equiv-simpson-comp-equiv)
-            ( preserves-sign-comp-simpson-comp-equiv)
             ( sign-comp-aut-succ-succ-Fin)
-            ( λ n →
-              not-sign-comp-transposition-count
-                ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-                ( star))
+            ( not-univalent-action-equiv-transposition)
             ( n))
           ( sign-homomorphism
             ( succ-ℕ (succ-ℕ n))
@@ -737,15 +789,8 @@ module _
   eq-simpson-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( λ n X → Fin n ≃ type-UU-Fin n X)
-      ( λ n X → sign-comp-Eq-Rel n X)
-      ( is-decidable-sign-comp-Eq-Rel)
+      ( sign-comp-Eq-Rel)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
-      ( simpson-comp-equiv)
-      ( preserves-id-equiv-simpson-comp-equiv)
-      ( preserves-sign-comp-simpson-comp-equiv)
       ( sign-comp-aut-succ-succ-Fin)
-      ( λ n →
-        not-sign-comp-transposition-count
-          ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-          ( star))
+      ( not-univalent-action-equiv-transposition)
 ```
