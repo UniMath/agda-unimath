@@ -8,7 +8,9 @@ module ring-theory.subsets-semirings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositional-extensionality
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -40,11 +42,41 @@ module _
   {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
   where
 
+  is-in-subset-Semiring : type-Semiring R → UU l2
+  is-in-subset-Semiring = is-in-subtype S
+
+  is-prop-is-in-subset-Semiring :
+    (x : type-Semiring R) → is-prop (is-in-subset-Semiring x)
+  is-prop-is-in-subset-Semiring = is-prop-is-in-subtype S
+
   type-subset-Semiring : UU (l1 ⊔ l2)
   type-subset-Semiring = type-subtype S
 
   inclusion-subset-Semiring : type-subset-Semiring → type-Semiring R
-  inclusion-subset-Semiring = pr1
+  inclusion-subset-Semiring = inclusion-subtype S
+
+  ap-inclusion-subset-Semiring :
+    (x y : type-subset-Semiring) →
+    x ＝ y → (inclusion-subset-Semiring x ＝ inclusion-subset-Semiring y)
+  ap-inclusion-subset-Semiring = ap-inclusion-subtype S
+
+  is-in-subset-inclusion-subset-Semiring :
+    (x : type-subset-Semiring) →
+    is-in-subset-Semiring (inclusion-subset-Semiring x)
+  is-in-subset-inclusion-subset-Semiring =
+    is-in-subtype-inclusion-subtype S
+
+  is-closed-under-eq-subset-Semiring :
+    {x y : type-Semiring R} →
+    is-in-subset-Semiring x → (x ＝ y) → is-in-subset-Semiring y
+  is-closed-under-eq-subset-Semiring =
+    is-closed-under-eq-subtype S
+
+  is-closed-under-eq-subset-Semiring' :
+    {x y : type-Semiring R} →
+    is-in-subset-Semiring y → (x ＝ y) → is-in-subset-Semiring x
+  is-closed-under-eq-subset-Semiring' =
+    is-closed-under-eq-subtype' S
 ```
 
 ### The condition that a subset contains zero

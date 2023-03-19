@@ -31,18 +31,6 @@ multiplication by elements of `R` from the left.
 
 ## Definitions
 
-### Additive subgroups
-
-```agda
-module _
-  {l1 : Level} (R : Ring l1)
-  where
-
-  is-additive-subgroup-subset-Ring :
-    {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
-  is-additive-subgroup-subset-Ring = is-subgroup-Ab (ab-Ring R)
-```
-
 ### Left ideals
 
 ```agda
