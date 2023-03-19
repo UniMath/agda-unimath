@@ -13,8 +13,8 @@ def recursive_sub(pattern, repl, string, flags=0):
     return string
 
 
-open_tag_pattern = re.compile(r"\n```(\S+)\n")
-close_tag_pattern = re.compile(r"\n```\n")
+open_tag_pattern = re.compile(r"^```\S+\n", flags=re.MULTILINE)
+close_tag_pattern = re.compile(r"\n```$", flags=re.MULTILINE)
 
 
 def has_well_formed_blocks(mdcode, pos=0):
@@ -73,11 +73,14 @@ if __name__ == "__main__":
             status |= STATUS_FILES_WITH_ILL_FORMED_BLOCKS
         else:
 
-            output = recursive_sub(r"\n\n```\n", "\n```\n", output)
-            output = recursive_sub(r"\n```(\S+)\n\n", r"\n```\1\n", output)
+            output = recursive_sub(
+                r"\n\n```($)", r"\n```\1", output, flags=re.MULTILINE)
+            output = recursive_sub(
+                r"(^)```(\S+)\n\n", r"\1```\2\n", output, flags=re.MULTILINE)
 
             # Empty blocks should have an empty line
-            output = re.sub(r"\n```(\S+)\n```\n", r"\n```\1\n\n```\n", output)
+            output = re.sub(r"(^)```(\S+)\n```($)",
+                            r"\1```\2\n\n```\3", output, flags=re.MULTILINE)
 
         if output != inputText:
             with open(fpath, "w") as f:

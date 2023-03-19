@@ -187,15 +187,15 @@ module _
   type-ab-Subgroup-Ab : UU (l1 ⊔ l2)
   type-ab-Subgroup-Ab = type-group-Subgroup (group-Ab A) B
 
-  map-inclusion-ab-Subgroup-Ab : type-ab-Subgroup-Ab → type-Ab A
-  map-inclusion-ab-Subgroup-Ab = map-inclusion-group-Subgroup (group-Ab A) B
+  map-inclusion-Subgroup-Ab : type-ab-Subgroup-Ab → type-Ab A
+  map-inclusion-Subgroup-Ab = map-inclusion-Subgroup (group-Ab A) B
 
-  is-emb-incl-ab-Subgroup-Ab : is-emb map-inclusion-ab-Subgroup-Ab
-  is-emb-incl-ab-Subgroup-Ab = is-emb-inclusion-group-Subgroup (group-Ab A) B
+  is-emb-incl-ab-Subgroup-Ab : is-emb map-inclusion-Subgroup-Ab
+  is-emb-incl-ab-Subgroup-Ab = is-emb-inclusion-Subgroup (group-Ab A) B
 
   eq-subgroup-ab-eq-ab :
     {x y : type-ab-Subgroup-Ab} →
-    Id (map-inclusion-ab-Subgroup-Ab x) (map-inclusion-ab-Subgroup-Ab y) →
+    Id (map-inclusion-Subgroup-Ab x) (map-inclusion-Subgroup-Ab y) →
     Id x y
   eq-subgroup-ab-eq-ab = eq-subgroup-eq-group (group-Ab A) B
 
@@ -268,26 +268,26 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
 
-  preserves-add-inclusion-ab-Subgroup-Ab :
-    preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
-  preserves-add-inclusion-ab-Subgroup-Ab =
-    preserves-mul-inclusion-group-Subgroup (group-Ab A) B
+  preserves-add-inclusion-Subgroup-Ab :
+    preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
+  preserves-add-inclusion-Subgroup-Ab =
+    preserves-mul-inclusion-Subgroup (group-Ab A) B
 
-  preserves-zero-inclusion-ab-Subgroup-Ab :
-    preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
-  preserves-zero-inclusion-ab-Subgroup-Ab =
-    preserves-unit-inclusion-group-Subgroup (group-Ab A) B
+  preserves-zero-inclusion-Subgroup-Ab :
+    preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
+  preserves-zero-inclusion-Subgroup-Ab =
+    preserves-unit-inclusion-Subgroup (group-Ab A) B
 
-  preserves-negatives-inclusion-ab-Subgroup-Ab :
+  preserves-negatives-inclusion-Subgroup-Ab :
     preserves-negatives-Ab
       ( ab-Subgroup-Ab A B)
       ( A)
-      ( map-inclusion-ab-Subgroup-Ab A B)
-  preserves-negatives-inclusion-ab-Subgroup-Ab =
-    preserves-inverses-inclusion-group-Subgroup (group-Ab A) B
+      ( map-inclusion-Subgroup-Ab A B)
+  preserves-negatives-inclusion-Subgroup-Ab =
+    preserves-inverses-inclusion-Subgroup (group-Ab A) B
 
-  inclusion-ab-Subgroup-Ab : type-hom-Ab (ab-Subgroup-Ab A B) A
-  inclusion-ab-Subgroup-Ab = inclusion-group-Subgroup (group-Ab A) B
+  hom-inclusion-Subgroup-Ab : type-hom-Ab (ab-Subgroup-Ab A B) A
+  hom-inclusion-Subgroup-Ab = hom-inclusion-Subgroup (group-Ab A) B
 ```
 
 ### Normal subgroups of an abelian group
