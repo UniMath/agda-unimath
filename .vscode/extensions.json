@@ -3,8 +3,11 @@
     "banacorn.agda-mode",
     "j-mueller.agda",
     "bbenoist.nix",
-    "davidanson.vscode-markdownlint",
     "ms-python.python",
-    "ms-python.vscode-pylance"
+    "ms-python.vscode-pylance",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "dbankier.vscode-quick-select",
+    "github.vscode-pull-request-github"
   ]
 }
