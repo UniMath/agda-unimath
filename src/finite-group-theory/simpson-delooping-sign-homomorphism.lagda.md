@@ -734,6 +734,7 @@ module _
     quotient-delooping-sign
       ( λ n X → Fin n ≃ type-UU-Fin n X)
       ( sign-comp-Eq-Rel)
+      ( λ n H → is-decidable-sign-comp-Eq-Rel n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)
@@ -775,6 +776,7 @@ module _
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( λ n X → Fin n ≃ type-UU-Fin n X)
             ( sign-comp-Eq-Rel)
+            ( λ n H → is-decidable-sign-comp-Eq-Rel n)
             ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
             ( sign-comp-aut-succ-succ-Fin)
             ( not-univalent-action-equiv-transposition)
@@ -790,6 +792,7 @@ module _
     eq-quotient-delooping-sign-homomorphism
       ( λ n X → Fin n ≃ type-UU-Fin n X)
       ( sign-comp-Eq-Rel)
+      ( λ n H → is-decidable-sign-comp-Eq-Rel n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)

@@ -132,6 +132,7 @@ module _
     quotient-delooping-sign
       ( orientation-Complete-Undirected-Graph)
       ( even-difference-orientation-Complete-Undirected-Graph)
+      ( λ n H → is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
         orientation-aut-count
@@ -176,6 +177,7 @@ module _
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( orientation-Complete-Undirected-Graph)
             ( even-difference-orientation-Complete-Undirected-Graph)
+            ( λ n H → is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
             ( equiv-fin-2-quotient-sign-equiv-Fin)
             ( λ n →
               orientation-aut-count
@@ -194,6 +196,7 @@ module _
     eq-quotient-delooping-sign-homomorphism
       ( orientation-Complete-Undirected-Graph)
       ( even-difference-orientation-Complete-Undirected-Graph)
+      ( λ n H → is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
         orientation-aut-count

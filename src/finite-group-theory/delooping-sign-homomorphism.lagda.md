@@ -1992,7 +1992,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} 
+  { l1 l2 : Level}
   ( Q : (n : ℕ) →
     UU-Fin l1 n → UU-Fin l2 2)
   ( equiv-Q-fin-fin-2 : (n : ℕ) →
@@ -2032,7 +2032,7 @@ module _
     equiv-Q-equivalence-class : (n : ℕ) (X : UU-Fin l1 n) →
       type-UU-Fin 2 (Q n X) ≃
         equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
-    equiv-Q-equivalence-class n X = 
+    equiv-Q-equivalence-class n X =
       equiv-uniqueness-set-quotient
         ( Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
         ( set-UU-Fin 2 (Q n X))
