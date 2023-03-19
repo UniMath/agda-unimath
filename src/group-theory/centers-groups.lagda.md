@@ -13,8 +13,8 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.central-elements-groups
-open import group-theory.homomorphisms-groups
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 ```

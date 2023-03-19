@@ -13,8 +13,8 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.semigroups
 open import group-theory.dependent-products-semigroups
+open import group-theory.semigroups
 ```
 
 </details>
