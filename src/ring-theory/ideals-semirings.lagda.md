@@ -80,6 +80,30 @@ module _
   inclusion-left-ideal-Semiring =
     inclusion-subset-Semiring R subset-left-ideal-Semiring
 
+  ap-inclusion-left-ideal-Semiring :
+    (x y : type-left-ideal-Semiring) → x ＝ y →
+    inclusion-left-ideal-Semiring x ＝ inclusion-left-ideal-Semiring y
+  ap-inclusion-left-ideal-Semiring =
+    ap-inclusion-subset-Semiring R subset-left-ideal-Semiring
+
+  is-in-subset-inclusion-left-ideal-Semiring :
+    (x : type-left-ideal-Semiring) →
+    is-in-left-ideal-Semiring (inclusion-left-ideal-Semiring x)
+  is-in-subset-inclusion-left-ideal-Semiring =
+    is-in-subset-inclusion-subset-Semiring R subset-left-ideal-Semiring
+
+  is-closed-under-eq-left-ideal-Semiring :
+    {x y : type-Semiring R} → is-in-left-ideal-Semiring x →
+    (x ＝ y) → is-in-left-ideal-Semiring y
+  is-closed-under-eq-left-ideal-Semiring =
+    is-closed-under-eq-subset-Semiring R subset-left-ideal-Semiring
+
+  is-closed-under-eq-left-ideal-Semiring' :
+    {x y : type-Semiring R} → is-in-left-ideal-Semiring y →
+    (x ＝ y) → is-in-left-ideal-Semiring x
+  is-closed-under-eq-left-ideal-Semiring' =
+    is-closed-under-eq-subset-Semiring' R subset-left-ideal-Semiring
+
   is-left-ideal-subset-left-ideal-Semiring :
     is-left-ideal-subset-Semiring R subset-left-ideal-Semiring
   is-left-ideal-subset-left-ideal-Semiring = pr2 I
@@ -141,6 +165,30 @@ module _
   inclusion-right-ideal-Semiring : type-right-ideal-Semiring → type-Semiring R
   inclusion-right-ideal-Semiring =
     inclusion-subset-Semiring R subset-right-ideal-Semiring
+
+  ap-inclusion-right-ideal-Semiring :
+    (x y : type-right-ideal-Semiring) → x ＝ y →
+    inclusion-right-ideal-Semiring x ＝ inclusion-right-ideal-Semiring y
+  ap-inclusion-right-ideal-Semiring =
+    ap-inclusion-subset-Semiring R subset-right-ideal-Semiring
+
+  is-in-subset-inclusion-right-ideal-Semiring :
+    (x : type-right-ideal-Semiring) →
+    is-in-right-ideal-Semiring (inclusion-right-ideal-Semiring x)
+  is-in-subset-inclusion-right-ideal-Semiring =
+    is-in-subset-inclusion-subset-Semiring R subset-right-ideal-Semiring
+
+  is-closed-under-eq-right-ideal-Semiring :
+    {x y : type-Semiring R} → is-in-right-ideal-Semiring x →
+    (x ＝ y) → is-in-right-ideal-Semiring y
+  is-closed-under-eq-right-ideal-Semiring =
+    is-closed-under-eq-subset-Semiring R subset-right-ideal-Semiring
+
+  is-closed-under-eq-right-ideal-Semiring' :
+    {x y : type-Semiring R} → is-in-right-ideal-Semiring y →
+    (x ＝ y) → is-in-right-ideal-Semiring x
+  is-closed-under-eq-right-ideal-Semiring' =
+    is-closed-under-eq-subset-Semiring' R subset-right-ideal-Semiring
 
   is-right-ideal-subset-right-ideal-Semiring :
     is-right-ideal-subset-Semiring R subset-right-ideal-Semiring
