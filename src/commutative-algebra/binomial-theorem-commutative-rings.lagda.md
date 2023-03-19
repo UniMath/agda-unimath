@@ -173,3 +173,4 @@ is-linear-combination-power-add-Commutative-Ring :
 is-linear-combination-power-add-Commutative-Ring R =
   is-linear-combination-power-add-Commutative-Semiring
     ( commutative-semiring-Commutative-Ring R)
+```

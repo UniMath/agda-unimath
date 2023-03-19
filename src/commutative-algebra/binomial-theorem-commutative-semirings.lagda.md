@@ -9,7 +9,6 @@ module commutative-algebra.binomial-theorem-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
-open import commutative-algebra.commutative-semirings
 open import commutative-algebra.sums-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
