@@ -211,15 +211,21 @@ Python package manager `pip` and running the following command:
 pip install -r scripts/requirements.txt
 ```
 
-Now, before you submit a PR next time, you can run `pre-commit` by staging your
-changes and run the command `make pre-commit` from the repository's main folder.
+Now, before you submit a Pull Request (PR) next time, you can run `pre-commit`
+by staging your changes and run the command `make pre-commit` from the
+repository's main folder.
 
-To make `pre-commit` run automatically on every commit, simply execute the
-command
+To have `pre-commit` run automatically before every commit, run the following
+command:
 
 ```shell
 pre-commit install
 ```
 
-Keep in mind that `pre-commit` is also a part of the CI, so any PR that violates
-the enforced conventions will be automatically blocked.
+After this, `pre-commit` will inform you of any rule violations in your
+subsequent commits. For most violations, it will also automatically apply the
+required changes. In such cases, simply stage the new changes and commit again.
+
+Keep in mind that `pre-commit` is also a part of the Continuous Integration
+(CI), so any PR that violates the enforced conventions will be automatically
+blocked.
