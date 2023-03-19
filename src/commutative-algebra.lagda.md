@@ -28,6 +28,9 @@ open import commutative-algebra.nilradicals-commutative-semirings public
 open import commutative-algebra.powers-of-elements-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-semirings public
 open import commutative-algebra.prime-ideals-commutative-rings public
+open import commutative-algebra.radical-ideals-commutative-rings public
+open import commutative-algebra.radicals-of-ideals-commutative-rings public
+open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-commutative-rings public
 open import commutative-algebra.sums-commutative-semirings public

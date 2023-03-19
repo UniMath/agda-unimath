@@ -24,8 +24,16 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-A left ideal of a semiring `R` is an additive subgroup of `R` that is closed
-under multiplication by elements of `R` from the left.
+An **ideal** (resp. a **left/right ideal**) of a semiring `R` is an additive
+submodule of `R` that is closed under multiplication by elements of `R` (from
+the left/right).
+
+### Note
+
+This is the standard definition of ideals in semirings. However, such two-sided
+ideals do not correspond uniquely to congruences on `R`. If we ask in addition
+that the underlying additive submodule is normal, then we get unique
+correspondence to congruences. We will call such ideals _normal_.
 
 ## Definitions
 
@@ -49,17 +57,11 @@ module _
   {l1 : Level} (R : Semiring l1)
   where
 
-  is-closed-under-mul-left-subset-Semiring :
-    {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
-  is-closed-under-mul-left-subset-Semiring P =
-    (x : type-Semiring R) (y : type-Semiring R) →
-    type-Prop (P y) → type-Prop (P (mul-Semiring R x y))
-
   is-left-ideal-subset-Semiring :
     {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
   is-left-ideal-subset-Semiring P =
     is-additive-submonoid-Semiring R P ×
-    is-closed-under-mul-left-subset-Semiring P
+    is-closed-under-left-multiplication-subset-Semiring R P
 
 left-ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
@@ -83,6 +85,30 @@ module _
   inclusion-left-ideal-Semiring =
     inclusion-subset-Semiring R subset-left-ideal-Semiring
 
+  ap-inclusion-left-ideal-Semiring :
+    (x y : type-left-ideal-Semiring) → x ＝ y →
+    inclusion-left-ideal-Semiring x ＝ inclusion-left-ideal-Semiring y
+  ap-inclusion-left-ideal-Semiring =
+    ap-inclusion-subset-Semiring R subset-left-ideal-Semiring
+
+  is-in-subset-inclusion-left-ideal-Semiring :
+    (x : type-left-ideal-Semiring) →
+    is-in-left-ideal-Semiring (inclusion-left-ideal-Semiring x)
+  is-in-subset-inclusion-left-ideal-Semiring =
+    is-in-subset-inclusion-subset-Semiring R subset-left-ideal-Semiring
+
+  is-closed-under-eq-left-ideal-Semiring :
+    {x y : type-Semiring R} → is-in-left-ideal-Semiring x →
+    (x ＝ y) → is-in-left-ideal-Semiring y
+  is-closed-under-eq-left-ideal-Semiring =
+    is-closed-under-eq-subset-Semiring R subset-left-ideal-Semiring
+
+  is-closed-under-eq-left-ideal-Semiring' :
+    {x y : type-Semiring R} → is-in-left-ideal-Semiring y →
+    (x ＝ y) → is-in-left-ideal-Semiring x
+  is-closed-under-eq-left-ideal-Semiring' =
+    is-closed-under-eq-subset-Semiring' R subset-left-ideal-Semiring
+
   is-left-ideal-subset-left-ideal-Semiring :
     is-left-ideal-subset-Semiring R subset-left-ideal-Semiring
   is-left-ideal-subset-left-ideal-Semiring = pr2 I
@@ -97,16 +123,15 @@ module _
   contains-zero-left-ideal-Semiring =
     pr1 is-additive-submonoid-left-ideal-Semiring
 
-  is-closed-under-add-left-ideal-Semiring :
-    {x y : type-Semiring R} → is-in-left-ideal-Semiring x →
-    is-in-left-ideal-Semiring y →
-    is-in-left-ideal-Semiring (add-Semiring R x y)
-  is-closed-under-add-left-ideal-Semiring H K =
-    pr2 is-additive-submonoid-left-ideal-Semiring _ _ H K
+  is-closed-under-addition-left-ideal-Semiring :
+    is-closed-under-addition-subset-Semiring R subset-left-ideal-Semiring
+  is-closed-under-addition-left-ideal-Semiring =
+    pr2 is-additive-submonoid-left-ideal-Semiring
 
-  is-closed-under-mul-left-ideal-Semiring :
-    is-closed-under-mul-left-subset-Semiring R subset-left-ideal-Semiring
-  is-closed-under-mul-left-ideal-Semiring =
+  is-closed-under-left-multiplication-left-ideal-Semiring :
+    is-closed-under-left-multiplication-subset-Semiring R
+      subset-left-ideal-Semiring
+  is-closed-under-left-multiplication-left-ideal-Semiring =
     pr2 is-left-ideal-subset-left-ideal-Semiring
 ```
 
@@ -117,17 +142,11 @@ module _
   {l1 : Level} (R : Semiring l1)
   where
 
-  is-closed-under-mul-right-subset-Semiring :
-    {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
-  is-closed-under-mul-right-subset-Semiring P =
-    (x : type-Semiring R) (y : type-Semiring R) →
-    type-Prop (P x) → type-Prop (P (mul-Semiring R x y))
-
   is-right-ideal-subset-Semiring :
     {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
   is-right-ideal-subset-Semiring P =
     is-additive-submonoid-Semiring R P ×
-    is-closed-under-mul-right-subset-Semiring P
+    is-closed-under-right-multiplication-subset-Semiring R P
 
 right-ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
@@ -152,6 +171,30 @@ module _
   inclusion-right-ideal-Semiring =
     inclusion-subset-Semiring R subset-right-ideal-Semiring
 
+  ap-inclusion-right-ideal-Semiring :
+    (x y : type-right-ideal-Semiring) → x ＝ y →
+    inclusion-right-ideal-Semiring x ＝ inclusion-right-ideal-Semiring y
+  ap-inclusion-right-ideal-Semiring =
+    ap-inclusion-subset-Semiring R subset-right-ideal-Semiring
+
+  is-in-subset-inclusion-right-ideal-Semiring :
+    (x : type-right-ideal-Semiring) →
+    is-in-right-ideal-Semiring (inclusion-right-ideal-Semiring x)
+  is-in-subset-inclusion-right-ideal-Semiring =
+    is-in-subset-inclusion-subset-Semiring R subset-right-ideal-Semiring
+
+  is-closed-under-eq-right-ideal-Semiring :
+    {x y : type-Semiring R} → is-in-right-ideal-Semiring x →
+    (x ＝ y) → is-in-right-ideal-Semiring y
+  is-closed-under-eq-right-ideal-Semiring =
+    is-closed-under-eq-subset-Semiring R subset-right-ideal-Semiring
+
+  is-closed-under-eq-right-ideal-Semiring' :
+    {x y : type-Semiring R} → is-in-right-ideal-Semiring y →
+    (x ＝ y) → is-in-right-ideal-Semiring x
+  is-closed-under-eq-right-ideal-Semiring' =
+    is-closed-under-eq-subset-Semiring' R subset-right-ideal-Semiring
+
   is-right-ideal-subset-right-ideal-Semiring :
     is-right-ideal-subset-Semiring R subset-right-ideal-Semiring
   is-right-ideal-subset-right-ideal-Semiring = pr2 I
@@ -166,89 +209,113 @@ module _
   contains-zero-right-ideal-Semiring =
     pr1 is-additive-submonoid-right-ideal-Semiring
 
-  is-closed-under-add-right-ideal-Semiring :
-    {x y : type-Semiring R} → is-in-right-ideal-Semiring x →
-    is-in-right-ideal-Semiring y →
-    is-in-right-ideal-Semiring (add-Semiring R x y)
-  is-closed-under-add-right-ideal-Semiring H K =
-    pr2 is-additive-submonoid-right-ideal-Semiring _ _ H K
+  is-closed-under-addition-right-ideal-Semiring :
+    is-closed-under-addition-subset-Semiring R subset-right-ideal-Semiring
+  is-closed-under-addition-right-ideal-Semiring =
+    pr2 is-additive-submonoid-right-ideal-Semiring
 
-  is-closed-under-mul-right-ideal-Semiring :
-    is-closed-under-mul-right-subset-Semiring R subset-right-ideal-Semiring
-  is-closed-under-mul-right-ideal-Semiring =
+  is-closed-under-right-multiplication-right-ideal-Semiring :
+    is-closed-under-right-multiplication-subset-Semiring R
+      subset-right-ideal-Semiring
+  is-closed-under-right-multiplication-right-ideal-Semiring =
     pr2 is-right-ideal-subset-right-ideal-Semiring
 ```
 
 ### Two-sided ideals
 
 ```agda
-is-two-sided-ideal-subset-Semiring :
+is-ideal-subset-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (P : subset-Semiring l2 R) → UU (l1 ⊔ l2)
-is-two-sided-ideal-subset-Semiring R P =
+is-ideal-subset-Semiring R P =
   is-additive-submonoid-Semiring R P ×
-  ( is-closed-under-mul-left-subset-Semiring R P ×
-    is-closed-under-mul-right-subset-Semiring R P)
+  ( is-closed-under-left-multiplication-subset-Semiring R P ×
+    is-closed-under-right-multiplication-subset-Semiring R P)
 
-two-sided-ideal-Semiring :
+ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
-two-sided-ideal-Semiring l R =
-  Σ (subset-Semiring l R) (is-two-sided-ideal-subset-Semiring R)
+ideal-Semiring l R =
+  Σ (subset-Semiring l R) (is-ideal-subset-Semiring R)
 
 module _
-  {l1 l2 : Level} (R : Semiring l1) (I : two-sided-ideal-Semiring l2 R)
+  {l1 l2 : Level} (R : Semiring l1) (I : ideal-Semiring l2 R)
   where
 
-  subset-two-sided-ideal-Semiring : subset-Semiring l2 R
-  subset-two-sided-ideal-Semiring = pr1 I
+  subset-ideal-Semiring : subset-Semiring l2 R
+  subset-ideal-Semiring = pr1 I
 
-  is-in-two-sided-ideal-Semiring : type-Semiring R → UU l2
-  is-in-two-sided-ideal-Semiring x =
-    type-Prop (subset-two-sided-ideal-Semiring x)
+  is-in-ideal-Semiring : type-Semiring R → UU l2
+  is-in-ideal-Semiring =
+    is-in-subset-Semiring R subset-ideal-Semiring
 
-  type-two-sided-ideal-Semiring : UU (l1 ⊔ l2)
-  type-two-sided-ideal-Semiring =
-    type-subset-Semiring R subset-two-sided-ideal-Semiring
+  is-prop-is-in-ideal-Semiring :
+    (x : type-Semiring R) → is-prop (is-in-ideal-Semiring x)
+  is-prop-is-in-ideal-Semiring =
+    is-prop-is-in-subset-Semiring R subset-ideal-Semiring
 
-  inclusion-two-sided-ideal-Semiring : type-two-sided-ideal-Semiring → type-Semiring R
-  inclusion-two-sided-ideal-Semiring =
-    inclusion-subset-Semiring R subset-two-sided-ideal-Semiring
+  type-ideal-Semiring : UU (l1 ⊔ l2)
+  type-ideal-Semiring =
+    type-subset-Semiring R subset-ideal-Semiring
 
-  is-two-sided-ideal-subset-two-sided-ideal-Semiring :
-    is-two-sided-ideal-subset-Semiring R subset-two-sided-ideal-Semiring
-  is-two-sided-ideal-subset-two-sided-ideal-Semiring = pr2 I
+  inclusion-ideal-Semiring :
+    type-ideal-Semiring → type-Semiring R
+  inclusion-ideal-Semiring =
+    inclusion-subset-Semiring R subset-ideal-Semiring
 
-  is-additive-submonoid-two-sided-ideal-Semiring :
-    is-additive-submonoid-Semiring R subset-two-sided-ideal-Semiring
-  is-additive-submonoid-two-sided-ideal-Semiring =
-    pr1 is-two-sided-ideal-subset-two-sided-ideal-Semiring
+  ap-inclusion-ideal-Semiring :
+    (x y : type-ideal-Semiring) → x ＝ y →
+    inclusion-ideal-Semiring x ＝ inclusion-ideal-Semiring y
+  ap-inclusion-ideal-Semiring =
+    ap-inclusion-subset-Semiring R subset-ideal-Semiring
 
-  contains-zero-two-sided-ideal-Semiring :
-    is-in-two-sided-ideal-Semiring (zero-Semiring R)
-  contains-zero-two-sided-ideal-Semiring =
-    pr1 is-additive-submonoid-two-sided-ideal-Semiring
+  is-in-subset-inclusion-ideal-Semiring :
+    (x : type-ideal-Semiring) →
+    is-in-ideal-Semiring (inclusion-ideal-Semiring x)
+  is-in-subset-inclusion-ideal-Semiring =
+    is-in-subset-inclusion-subset-Semiring R subset-ideal-Semiring
 
-  is-closed-under-add-two-sided-ideal-Semiring :
-    {x y : type-Semiring R} → is-in-two-sided-ideal-Semiring x →
-    is-in-two-sided-ideal-Semiring y →
-    is-in-two-sided-ideal-Semiring (add-Semiring R x y)
-  is-closed-under-add-two-sided-ideal-Semiring H K =
-    pr2 is-additive-submonoid-two-sided-ideal-Semiring _ _ H K
+  is-closed-under-eq-ideal-Semiring :
+    {x y : type-Semiring R} → is-in-ideal-Semiring x →
+    (x ＝ y) → is-in-ideal-Semiring y
+  is-closed-under-eq-ideal-Semiring =
+    is-closed-under-eq-subset-Semiring R subset-ideal-Semiring
 
-  is-closed-under-mul-left-two-sided-ideal-Semiring :
-    is-closed-under-mul-left-subset-Semiring R subset-two-sided-ideal-Semiring
-  is-closed-under-mul-left-two-sided-ideal-Semiring =
-    pr1 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Semiring)
+  is-closed-under-eq-ideal-Semiring' :
+    {x y : type-Semiring R} → is-in-ideal-Semiring y →
+    (x ＝ y) → is-in-ideal-Semiring x
+  is-closed-under-eq-ideal-Semiring' =
+    is-closed-under-eq-subset-Semiring' R subset-ideal-Semiring
 
-  is-closed-under-mul-right-two-sided-ideal-Semiring :
-    is-closed-under-mul-right-subset-Semiring R subset-two-sided-ideal-Semiring
-  is-closed-under-mul-right-two-sided-ideal-Semiring =
-    pr2 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Semiring)
+  is-ideal-subset-ideal-Semiring :
+    is-ideal-subset-Semiring R subset-ideal-Semiring
+  is-ideal-subset-ideal-Semiring = pr2 I
 
-  submonoid-two-sided-ideal-Semiring : Submonoid l2 (additive-monoid-Semiring R)
-  pr1 submonoid-two-sided-ideal-Semiring =
-    subset-two-sided-ideal-Semiring
-  pr1 (pr2 submonoid-two-sided-ideal-Semiring) =
-    contains-zero-two-sided-ideal-Semiring
-  pr2 (pr2 submonoid-two-sided-ideal-Semiring) x y =
-    is-closed-under-add-two-sided-ideal-Semiring
+  is-additive-submonoid-ideal-Semiring :
+    is-additive-submonoid-Semiring R subset-ideal-Semiring
+  is-additive-submonoid-ideal-Semiring =
+    pr1 is-ideal-subset-ideal-Semiring
+
+  contains-zero-ideal-Semiring :
+    is-in-ideal-Semiring (zero-Semiring R)
+  contains-zero-ideal-Semiring =
+    pr1 is-additive-submonoid-ideal-Semiring
+
+  is-closed-under-addition-ideal-Semiring :
+    is-closed-under-addition-subset-Semiring R subset-ideal-Semiring
+  is-closed-under-addition-ideal-Semiring =
+    pr2 is-additive-submonoid-ideal-Semiring
+
+  is-closed-under-left-multiplication-ideal-Semiring :
+    is-closed-under-left-multiplication-subset-Semiring R subset-ideal-Semiring
+  is-closed-under-left-multiplication-ideal-Semiring =
+    pr1 (pr2 is-ideal-subset-ideal-Semiring)
+
+  is-closed-under-right-multiplication-ideal-Semiring :
+    is-closed-under-right-multiplication-subset-Semiring R subset-ideal-Semiring
+  is-closed-under-right-multiplication-ideal-Semiring =
+    pr2 (pr2 is-ideal-subset-ideal-Semiring)
+
+  submonoid-ideal-Semiring : Submonoid l2 (additive-monoid-Semiring R)
+  pr1 submonoid-ideal-Semiring = subset-ideal-Semiring
+  pr1 (pr2 submonoid-ideal-Semiring) = contains-zero-ideal-Semiring
+  pr2 (pr2 submonoid-ideal-Semiring) = is-closed-under-addition-ideal-Semiring
 ```

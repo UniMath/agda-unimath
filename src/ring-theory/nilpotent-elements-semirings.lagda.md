@@ -86,123 +86,13 @@ is-nilpotent-add-Semiring R x y H f h =
         ( λ (m , q) →
           intro-∃
             ( add-ℕ n m)
-            ( ( binomial-theorem-Semiring R (add-ℕ n m) x y H) ∙
-              ( ( split-sum-Semiring R n
-                  ( succ-ℕ m)
-                  ( λ i →
-                    mul-nat-scalar-Semiring R
-                      ( binomial-coefficient-ℕ
-                        ( add-ℕ n m)
-                        ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
-                      ( mul-Semiring R
-                        ( power-Semiring R
-                          ( nat-Fin (add-ℕ n (succ-ℕ m)) i)
-                          ( x))
-                        ( power-Semiring R
-                          ( dist-ℕ
-                            ( add-ℕ n m)
-                            ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
-                          ( y))))) ∙
-                ( ( ap-add-Semiring R
-                    ( ( htpy-sum-Semiring R n
-                        ( λ i →
-                          ( ap
-                            ( λ u →
-                              mul-nat-scalar-Semiring R
-                                ( binomial-coefficient-ℕ (add-ℕ n m) u)
-                                ( mul-Semiring R
-                                  ( power-Semiring R u x)
-                                  ( power-Semiring R
-                                    ( dist-ℕ (add-ℕ n m) u)
-                                    ( y))))
-                            ( nat-inl-coprod-Fin n m i)) ∙
-                          ( ( ( ap
-                                ( mul-nat-scalar-Semiring R
-                                  ( binomial-coefficient-ℕ
-                                    ( add-ℕ n m)
-                                    ( nat-Fin n i)))
-                                ( ( ap
-                                    ( mul-Semiring R
-                                      ( power-Semiring R
-                                        ( nat-Fin n i)
-                                        ( x)))
-                                    ( ( ap
-                                        ( λ u → power-Semiring R u y)
-                                        ( ( symmetric-dist-ℕ
-                                            ( add-ℕ n m)
-                                            ( nat-Fin n i)) ∙
-                                          ( ( inv
-                                              ( triangle-equality-dist-ℕ
-                                                ( nat-Fin n i)
-                                                ( n)
-                                                ( add-ℕ n m)
-                                                ( upper-bound-nat-Fin' n i)
-                                                ( leq-add-ℕ n m))) ∙
-                                            ( ap
-                                              ( add-ℕ (dist-ℕ (nat-Fin n i) n))
-                                              ( dist-add-ℕ n m))))) ∙
-                                      ( ( power-add-Semiring R
-                                          ( dist-ℕ (nat-Fin n i) n)
-                                          ( m)) ∙
-                                        ( ( ap
-                                            ( mul-Semiring R
-                                              ( power-Semiring R
-                                                ( dist-ℕ (nat-Fin n i) n)
-                                                ( y)))
-                                            ( q)) ∙
-                                          ( right-zero-law-mul-Semiring
-                                            ( R)
-                                            ( power-Semiring R
-                                              ( dist-ℕ (nat-Fin n i) n)
-                                              ( y))))))) ∙
-                                  ( right-zero-law-mul-Semiring R
-                                    ( power-Semiring R
-                                      ( nat-Fin n i)
-                                      ( x)))))) ∙
-                            ( right-zero-law-mul-nat-scalar-Semiring R
-                              ( binomial-coefficient-ℕ
-                                ( add-ℕ n m)
-                                ( nat-Fin n i)))))) ∙
-                      ( sum-zero-Semiring R n))
-                    ( ( htpy-sum-Semiring R (succ-ℕ m)
-                        ( λ i →
-                          ( ap
-                            ( λ u →
-                              mul-nat-scalar-Semiring R
-                                ( binomial-coefficient-ℕ (add-ℕ n m) u)
-                                ( mul-Semiring R
-                                  ( power-Semiring R u x)
-                                  ( power-Semiring R
-                                    ( dist-ℕ (add-ℕ n m) u)
-                                    ( y))))
-                            ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙
-                          ( ( ap
-                              ( mul-nat-scalar-Semiring R
-                                ( binomial-coefficient-ℕ
-                                  ( add-ℕ n m)
-                                  ( add-ℕ n (nat-Fin (succ-ℕ m) i))))
-                              ( ( ap
-                                  ( mul-Semiring' R
-                                    ( power-Semiring R
-                                      ( dist-ℕ
-                                        ( add-ℕ n m)
-                                        ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
-                                      ( y)))
-                                  ( ( power-add-Semiring R n
-                                      ( nat-Fin (succ-ℕ m) i)) ∙
-                                    ( ( ap (mul-Semiring' R _) p) ∙
-                                      ( left-zero-law-mul-Semiring R
-                                        ( power-Semiring R
-                                          ( nat-Fin (succ-ℕ m) i)
-                                          ( x)))))) ∙
-                                ( left-zero-law-mul-Semiring R _))) ∙
-                            ( right-zero-law-mul-nat-scalar-Semiring R
-                              ( binomial-coefficient-ℕ
-                                ( add-ℕ n m)
-                                ( add-ℕ n (nat-Fin (succ-ℕ m) i))))))) ∙
-                      ( sum-zero-Semiring R (succ-ℕ m)))) ∙
-                  ( left-unit-law-add-Semiring R
-                    ( zero-Semiring R)))))))
+            ( ( is-linear-combination-power-add-Semiring R n m x y H) ∙
+              ( ( ap-add-Semiring R
+                  ( ( ap (mul-Semiring' R _) q) ∙
+                    ( left-zero-law-mul-Semiring R _))
+                  ( ( ap (mul-Semiring' R _) p) ∙
+                    ( left-zero-law-mul-Semiring R _))) ∙
+                ( left-unit-law-add-Semiring R (zero-Semiring R))))))
 ```
 
 ### If `x` is nilpotent and `y` commutes with `x`, then `xy` is also nilpotent
