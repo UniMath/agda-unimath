@@ -17,7 +17,7 @@ open import group-theory.central-elements-monoids
 open import ring-theory.semirings
 ```
 
-<details>
+</details>
 
 ## Idea
 

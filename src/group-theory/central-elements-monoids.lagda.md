@@ -16,7 +16,7 @@ open import group-theory.central-elements-semigroups
 open import group-theory.monoids
 ```
 
-<details>
+</details>
 
 ## Idea
 

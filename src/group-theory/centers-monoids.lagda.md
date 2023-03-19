@@ -18,7 +18,7 @@ open import group-theory.monoids
 open import group-theory.submonoids
 ```
 
-<details>
+</details>
 
 ## Idea
 
