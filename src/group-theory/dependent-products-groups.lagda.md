@@ -19,7 +19,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 ```
 
-<details>
+</details>
 
 ## Idea
 
