@@ -9,7 +9,11 @@ module commutative-algebra.binomial-theorem-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.sums-commutative-semirings
 
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -129,11 +133,54 @@ binomial-theorem-Commutative-Semiring :
     ( λ i →
       mul-Commutative-Semiring R
       ( power-Commutative-Semiring R (nat-Fin (succ-ℕ n) i) x)
-      ( power-Commutative-Semiring R (dist-ℕ n (nat-Fin (succ-ℕ n) i)) y))
+      ( power-Commutative-Semiring R (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-Commutative-Semiring R n x y =
   binomial-theorem-Semiring
     ( semiring-Commutative-Semiring R)
     ( n)
+    ( x)
+    ( y)
+    ( commutative-mul-Commutative-Semiring R x y)
+```
+
+## Corollaries
+
+### Computing `(x+y)ⁿ⁺ᵐ` as a linear combination of `xⁿ` and `yᵐ`
+
+```agda
+is-linear-combination-power-add-Commutative-Semiring :
+  {l : Level} (R : Commutative-Semiring l) (n m : ℕ)
+  (x y : type-Commutative-Semiring R) →
+  power-Commutative-Semiring R (add-ℕ n m) (add-Commutative-Semiring R x y) ＝
+  add-Commutative-Semiring R
+    ( mul-Commutative-Semiring R
+      ( power-Commutative-Semiring R m y)
+      ( sum-Commutative-Semiring R n
+        ( λ i →
+          mul-nat-scalar-Commutative-Semiring R
+            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+            ( mul-Commutative-Semiring R
+              ( power-Commutative-Semiring R (nat-Fin n i) x)
+              ( power-Commutative-Semiring R (dist-ℕ (nat-Fin n i) n) y)))))
+    ( mul-Commutative-Semiring R
+      ( power-Commutative-Semiring R n x)
+      ( sum-Commutative-Semiring R
+        ( succ-ℕ m)
+        ( λ i →
+          mul-nat-scalar-Commutative-Semiring R
+            ( binomial-coefficient-ℕ
+              ( add-ℕ n m)
+              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+            ( mul-Commutative-Semiring R
+              ( power-Commutative-Semiring R (nat-Fin (succ-ℕ m) i) x)
+              ( power-Commutative-Semiring R
+                ( dist-ℕ (nat-Fin (succ-ℕ m) i) m)
+                ( y))))))
+is-linear-combination-power-add-Commutative-Semiring R n m x y =
+  is-linear-combination-power-add-Semiring
+    ( semiring-Commutative-Semiring R)
+    ( n)
+    ( m)
     ( x)
     ( y)
     ( commutative-mul-Commutative-Semiring R x y)

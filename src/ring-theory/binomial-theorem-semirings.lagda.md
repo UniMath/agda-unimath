@@ -616,16 +616,10 @@ is-linear-combination-power-add-Semiring :
       ( sum-Semiring R n
         ( λ i →
           mul-nat-scalar-Semiring R
-            ( binomial-coefficient-ℕ
-              ( add-ℕ n m)
-              ( nat-Fin n i))
+            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
             ( mul-Semiring R
-              ( power-Semiring R
-                ( nat-Fin n i)
-                ( x))
-              ( power-Semiring R
-                ( dist-ℕ (nat-Fin n i) n)
-                ( y))))))
+              ( power-Semiring R (nat-Fin n i) x)
+              ( power-Semiring R (dist-ℕ (nat-Fin n i) n) y)))))
     ( mul-Semiring R
       ( power-Semiring R n x)
       ( sum-Semiring R
@@ -636,12 +630,8 @@ is-linear-combination-power-add-Semiring :
               ( add-ℕ n m)
               ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
             ( mul-Semiring R
-              ( power-Semiring R
-                ( nat-Fin (succ-ℕ m) i)
-                ( x))
-              ( power-Semiring R
-                ( dist-ℕ (nat-Fin (succ-ℕ m) i) m)
-                ( y))))))
+              ( power-Semiring R (nat-Fin (succ-ℕ m) i) x)
+              ( power-Semiring R (dist-ℕ (nat-Fin (succ-ℕ m) i) m) y)))))
 is-linear-combination-power-add-Semiring R n m x y H =
   ( binomial-theorem-Semiring R (add-ℕ n m) x y H) ∙
   ( ( split-sum-Semiring R n
