@@ -16,7 +16,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import species.species-of-types
-
 ```
 
 </details>
