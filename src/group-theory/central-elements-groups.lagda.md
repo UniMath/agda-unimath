@@ -18,7 +18,7 @@ open import group-theory.conjugation
 open import group-theory.groups
 ```
 
-<details>
+</details>
 
 ## Idea
 

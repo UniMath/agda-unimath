@@ -16,7 +16,7 @@ open import ring-theory.central-elements-semirings
 open import ring-theory.rings
 ```
 
-<details>
+</details>
 
 ## Idea
 
