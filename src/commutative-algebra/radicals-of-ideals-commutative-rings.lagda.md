@@ -68,7 +68,6 @@ module _
       ( zero-Commutative-Ring A)
       ( contains-zero-ideal-Commutative-Ring A I)
 
-{-
   is-closed-under-addition-radical-of-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
@@ -81,46 +80,185 @@ module _
         ( λ (m , q) →
           intro-∃
             ( add-ℕ n m)
-            ( {!is-closed-under-eq-ideal-Commutative-Ring!})))
-            -}
+            ( is-closed-under-eq-ideal-Commutative-Ring' A I
+              {!!}
+              ( ( binomial-theorem-Commutative-Ring A (add-ℕ n m) x y) ∙
+                ( ( split-sum-Commutative-Ring A n
+                    ( succ-ℕ m)
+                    ( λ i →
+                      mul-nat-scalar-Commutative-Ring A
+                        ( binomial-coefficient-ℕ
+                          ( add-ℕ n m)
+                          ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
+                        ( mul-Commutative-Ring A
+                          ( power-Commutative-Ring A
+                            ( nat-Fin (add-ℕ n (succ-ℕ m)) i)
+                            ( x))
+                          ( power-Commutative-Ring A
+                            ( dist-ℕ
+                              ( add-ℕ n m)
+                              ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
+                            ( y))))) ∙
+                  ( ap-add-Commutative-Ring A
+                    ( htpy-sum-Commutative-Ring A n
+                      ( λ i →
+                        ( ap
+                          ( λ u →
+                            mul-nat-scalar-Commutative-Ring A
+                              ( binomial-coefficient-ℕ (add-ℕ n m) u)
+                              ( mul-Commutative-Ring A
+                                ( power-Commutative-Ring A u x)
+                                ( power-Commutative-Ring A
+                                  ( dist-ℕ (add-ℕ n m) u)
+                                  ( y))))
+                          ( nat-inl-coprod-Fin n m i)) ∙
+                        ( ( ( ap
+                              ( mul-nat-scalar-Commutative-Ring A
+                                ( binomial-coefficient-ℕ
+                                  ( add-ℕ n m)
+                                  ( nat-Fin n i)))
+                              ( ( ap
+                                  ( mul-Commutative-Ring A
+                                    ( power-Commutative-Ring A
+                                      ( nat-Fin n i)
+                                      ( x)))
+                                  ( ( ap
+                                      ( λ u → power-Commutative-Ring A u y)
+                                      ( ( symmetric-dist-ℕ
+                                          ( add-ℕ n m)
+                                          ( nat-Fin n i)) ∙
+                                        ( ( inv
+                                            ( triangle-equality-dist-ℕ
+                                              ( nat-Fin n i)
+                                              ( n)
+                                              ( add-ℕ n m)
+                                              ( upper-bound-nat-Fin' n i)
+                                              ( leq-add-ℕ n m))) ∙
+                                          ( ap
+                                            ( add-ℕ (dist-ℕ (nat-Fin n i) n))
+                                            ( dist-add-ℕ n m))))) ∙
+                                    ( ( power-add-Commutative-Ring A
+                                        ( dist-ℕ (nat-Fin n i) n)
+                                        ( m)))))))))))
+                    ( htpy-sum-Commutative-Ring A (succ-ℕ m)
+                      ( λ i →
+                        ( ap
+                          ( λ u →
+                            mul-nat-scalar-Commutative-Ring A
+                              ( binomial-coefficient-ℕ (add-ℕ n m) u)
+                              ( mul-Commutative-Ring A
+                                ( power-Commutative-Ring A u x)
+                                ( power-Commutative-Ring A
+                                  ( dist-ℕ (add-ℕ n m) u)
+                                  ( y))))
+                          ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙
+                        ( ( ap
+                            ( mul-nat-scalar-Commutative-Ring A
+                              ( binomial-coefficient-ℕ
+                                ( add-ℕ n m)
+                                ( add-ℕ n (nat-Fin (succ-ℕ m) i))))
+                            ( ( ap
+                                ( mul-Commutative-Ring' A
+                                  ( power-Commutative-Ring A
+                                    ( dist-ℕ
+                                      ( add-ℕ n m)
+                                      ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+                                    ( y)))
+                                ( ( power-add-Commutative-Ring A n
+                                    ( nat-Fin (succ-ℕ m) i)))))))))))))))
 ```
 
-( binomial-theorem-Commutative-Ring A (add-ℕ n m) x y) ∙ ( (
-split-sum-Commutative-Ring A n ( succ-ℕ m) ( λ i →
-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ ( add-ℕ n m) (
-nat-Fin (add-ℕ n (succ-ℕ m)) i)) ( mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin (add-ℕ n (succ-ℕ m)) i) ( x)) (
-power-Commutative-Ring A ( dist-ℕ ( add-ℕ n m) ( nat-Fin (add-ℕ n (succ-ℕ m))
-i)) ( y))))) ∙ ( ( ap-add-Commutative-Ring A ( ( htpy-sum-Commutative-Ring A n (
-λ i → ( ap ( λ u → mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ
-(add-ℕ n m) u) ( mul-Commutative-Ring A ( power-Commutative-Ring A u x) (
-power-Commutative-Ring A ( dist-ℕ (add-ℕ n m) u) ( y)))) ( nat-inl-coprod-Fin n
-m i)) ∙ ( ( ( ap ( mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (
-add-ℕ n m) ( nat-Fin n i))) ( ( ap ( mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin n i) ( x))) ( ( ap ( λ u →
-power-Commutative-Ring A u y) ( ( symmetric-dist-ℕ ( add-ℕ n m) ( nat-Fin n i))
-∙ ( ( inv ( triangle-equality-dist-ℕ ( nat-Fin n i) ( n) ( add-ℕ n m) (
-upper-bound-nat-Fin' n i) ( leq-add-ℕ n m))) ∙ ( ap ( add-ℕ (dist-ℕ (nat-Fin n
-i) n)) ( dist-add-ℕ n m))))) ∙ ( ( power-add-Commutative-Ring A ( dist-ℕ
-(nat-Fin n i) n) ( m)) ∙ ( ( ap ( mul-Commutative-Ring A (
-power-Commutative-Ring A ( dist-ℕ (nat-Fin n i) n) ( y))) ( q)) ∙ (
-right-zero-law-mul-Commutative-Ring ( A) ( power-Commutative-Ring A ( dist-ℕ
-(nat-Fin n i) n) ( y))))))) ∙ ( right-zero-law-mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin n i) ( x)))))) ∙ (
-right-zero-law-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (
-add-ℕ n m) ( nat-Fin n i)))))) ∙ ( sum-zero-Commutative-Ring A n)) ( (
-htpy-sum-Commutative-Ring A (succ-ℕ m) ( λ i → ( ap ( λ u →
-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (add-ℕ n m) u) (
-mul-Commutative-Ring A ( power-Commutative-Ring A u x) ( power-Commutative-Ring
-A ( dist-ℕ (add-ℕ n m) u) ( y)))) ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙ ( ( ap
-( mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ ( add-ℕ n m) (
-add-ℕ n (nat-Fin (succ-ℕ m) i)))) ( ( ap ( mul-Commutative-Ring' A (
-power-Commutative-Ring A ( dist-ℕ ( add-ℕ n m) ( add-ℕ n (nat-Fin (succ-ℕ m)
-i))) ( y))) ( ( power-add-Commutative-Ring A n ( nat-Fin (succ-ℕ m) i)) ∙ ( ( ap
-(mul-Commutative-Ring' A _) p) ∙ ( left-zero-law-mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin (succ-ℕ m) i) ( x)))))) ∙ (
-left-zero-law-mul-Commutative-Ring A _))) ∙ (
-right-zero-law-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (
-add-ℕ n m) ( add-ℕ n (nat-Fin (succ-ℕ m) i))))))) ∙ ( sum-zero-Commutative-Ring
-A (succ-ℕ m)))) ∙ ( left-unit-law-add-Commutative-Ring A ( zero-Commutative-Ring
-A))))
+```md
+  apply-universal-property-trunc-Prop f
+    ( is-nilpotent-element-semiring-Prop A (add-Commutative-Ring A x y))
+    ( λ (n , p) →
+      apply-universal-property-trunc-Prop h
+        ( is-nilpotent-element-semiring-Prop A (add-Commutative-Ring A x y))
+        ( λ (m , q) →
+          intro-∃
+            ( add-ℕ n m)
+            ( ( binomial-theorem-Commutative-Ring A (add-ℕ n m) x y H) ∙
+              ( ( split-sum-Commutative-Ring A n
+                  ( succ-ℕ m)
+                  ( λ i →
+                    mul-nat-scalar-Commutative-Ring A
+                      ( binomial-coefficient-ℕ
+                        ( add-ℕ n m)
+                        ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
+                      ( mul-Commutative-Ring A
+                        ( power-Commutative-Ring A
+                          ( nat-Fin (add-ℕ n (succ-ℕ m)) i)
+                          ( x))
+                        ( power-Commutative-Ring A
+                          ( dist-ℕ
+                            ( add-ℕ n m)
+                            ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
+                          ( y))))) ∙
+                ( ( ap-add-Commutative-Ring A
+                    ( ( htpy-sum-Commutative-Ring A n
+                        ( λ i →
+                          ( ap
+                            ( λ u →
+                              mul-nat-scalar-Commutative-Ring A
+                                ( binomial-coefficient-ℕ (add-ℕ n m) u)
+                                ( mul-Commutative-Ring A
+                                  ( power-Commutative-Ring A u x)
+                                  ( power-Commutative-Ring A
+                                    ( dist-ℕ (add-ℕ n m) u)
+                                    ( y))))
+                            ( nat-inl-coprod-Fin n m i)) ∙
+                          ( ( ( ap
+                                ( mul-nat-scalar-Commutative-Ring A
+                                  ( binomial-coefficient-ℕ
+                                    ( add-ℕ n m)
+                                    ( nat-Fin n i)))
+                                ( ( ap
+                                    ( mul-Commutative-Ring A
+                                      ( power-Commutative-Ring A
+                                        ( nat-Fin n i)
+                                        ( x)))
+                                    ( ( ap
+                                        ( λ u → power-Commutative-Ring A u y)
+                                        ( ( symmetric-dist-ℕ
+                                            ( add-ℕ n m)
+                                            ( nat-Fin n i)) ∙
+                                          ( ( inv
+                                              ( triangle-equality-dist-ℕ
+                                                ( nat-Fin n i)
+                                                ( n)
+                                                ( add-ℕ n m)
+                                                ( upper-bound-nat-Fin' n i)
+                                                ( leq-add-ℕ n m))) ∙
+                                            ( ap
+                                              ( add-ℕ (dist-ℕ (nat-Fin n i) n))
+                                              ( dist-add-ℕ n m))))) ∙
+                                      ( ( power-add-Commutative-Ring A
+                                          ( dist-ℕ (nat-Fin n i) n)
+                                          ( m))))))))))))
+                    ( ( htpy-sum-Commutative-Ring A (succ-ℕ m)
+                        ( λ i →
+                          ( ap
+                            ( λ u →
+                              mul-nat-scalar-Commutative-Ring A
+                                ( binomial-coefficient-ℕ (add-ℕ n m) u)
+                                ( mul-Commutative-Ring A
+                                  ( power-Commutative-Ring A u x)
+                                  ( power-Commutative-Ring A
+                                    ( dist-ℕ (add-ℕ n m) u)
+                                    ( y))))
+                            ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙
+                          ( ( ap
+                              ( mul-nat-scalar-Commutative-Ring A
+                                ( binomial-coefficient-ℕ
+                                  ( add-ℕ n m)
+                                  ( add-ℕ n (nat-Fin (succ-ℕ m) i))))
+                              ( ( ap
+                                  ( mul-Commutative-Ring' A
+                                    ( power-Commutative-Ring A
+                                      ( dist-ℕ
+                                        ( add-ℕ n m)
+                                        ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+                                      ( y)))
+                                  ( ( power-add-Commutative-Ring A n
+                                      ( nat-Fin (succ-ℕ m) i))))))))))))))))
+```
