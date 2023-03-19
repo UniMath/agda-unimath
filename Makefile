@@ -3,10 +3,8 @@ CHECKOPTS :=--without-K --exact-split --guardedness
 everythingOpts :=$(CHECKOPTS)
 AGDAVERBOSE?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
-AGDAFILES := $(wildcard src/**/*.lagda.md)
+AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
-
-bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
 
 AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
 AGDA ?=agda $(AGDAVERBOSE)
@@ -64,7 +62,7 @@ agda-html: src/everything.lagda.md
 	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
-SUMMARY.md:
+SUMMARY.md: ${AGDAFILES}
 	@python3 scripts/generate_main_index_file.py
 
 .PHONY: website
@@ -91,8 +89,7 @@ pre-commit:
 	@pre-commit run --all-files
 	@make check
 
-website-dev:
-	@curl https://sh.rustup.rs -sSf | sh
+install-website-dev:
 	@cargo install mdbook
 	@cargo install mdbook-linkcheck
 	@cargo install mdbook-katex
