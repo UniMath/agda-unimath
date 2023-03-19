@@ -1,7 +1,7 @@
 # Deloopings of the sign homomorphism
 
 ```agda
-{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
+{-# OPTIONS --lossy-unification #-}
 ```
 
 ```agda
@@ -32,8 +32,8 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
@@ -48,6 +48,7 @@ open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.truncated-types
+open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.univalence-action-on-equivalences
@@ -68,6 +69,7 @@ open import group-theory.symmetric-groups
 open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.standard-finite-types
@@ -82,6 +84,8 @@ module _
   { l1 l2 l3 : Level}
   ( D : (n : ℕ) (X : UU-Fin l1 n) → UU l2)
   ( R : (n : ℕ) (X : UU-Fin l1 n) → Eq-Rel l3 (D n X))
+  ( is-decidable-R : (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
+      (a b : D n X) → is-decidable (sim-Eq-Rel (R n X) a b))
   ( equiv-D/R-fin-2-equiv : (n : ℕ) (X : UU-Fin l1 n) →
     leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
     Fin 2 ≃ equivalence-class (R n X))
@@ -122,15 +126,6 @@ module _
   private
     l4 : Level
     l4 = l2 ⊔ lsuc l3
-
-    is-decidable-R : (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
-      (a b : D n X) → is-decidable (sim-Eq-Rel (R n X) a b)
-    is-decidable-R n H X a b =
-      apply-universal-property-trunc-Prop
-        ( has-cardinality-type-UU-Fin n X)
-        ( is-decidable-Prop (prop-Eq-Rel (R n X) a b))
-        ( λ h →
-          {!!})
 
     invertible-action-D-equiv : (n : ℕ) (X X' : UU-Fin l1 n) →
       (type-UU-Fin n X ≃ type-UU-Fin n X') → D n X ≃ D n X'
@@ -1991,4 +1986,156 @@ module _
                     ( hom-inv-symmetric-group-equiv-Set (Fin-Set (succ-ℕ (succ-ℕ n)))
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
+```
+
+### General case
+
+```agda
+module _
+  { l1 l2 : Level} 
+  ( Q : (n : ℕ) →
+    UU-Fin l1 n → UU-Fin l2 2)
+  ( equiv-Q-fin-fin-2 : (n : ℕ) →
+    leq-ℕ 2 n →
+    Fin 2 ≃
+      type-UU-Fin 2
+        ( Q n
+          ( raise l1 (Fin n) ,
+            ( unit-trunc-Prop (compute-raise-Fin l1 n)))))
+  ( Q-transposition-swap : (n : ℕ) →
+    ( Y : 2-Element-Decidable-Subtype l1
+      ( raise-Fin l1 (succ-ℕ (succ-ℕ n)))) →
+    ( x : type-UU-Fin 2
+      ( Q (succ-ℕ (succ-ℕ n))
+        ( raise l1 (Fin (succ-ℕ (succ-ℕ n))) ,
+          ( unit-trunc-Prop
+            ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))) →
+    ¬ ( x ＝
+        ( map-equiv
+          ( univalent-action-equiv
+            ( mere-equiv-Prop
+              ( Fin (succ-ℕ (succ-ℕ n))))
+            ( λ X → type-UU-Fin 2 (Q (succ-ℕ (succ-ℕ n)) X))
+            ( pair
+              ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
+              ( unit-trunc-Prop
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
+            ( pair
+              ( raise l1 (Fin (succ-ℕ (succ-ℕ n))))
+              ( unit-trunc-Prop
+                ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
+            ( transposition Y))
+          ( x))))
+  where
+
+  private
+    equiv-Q-equivalence-class : (n : ℕ) (X : UU-Fin l1 n) →
+      type-UU-Fin 2 (Q n X) ≃
+        equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+    equiv-Q-equivalence-class n X = 
+      equiv-uniqueness-set-quotient
+        ( Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+        ( set-UU-Fin 2 (Q n X))
+        ( id-reflecting-map-Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+        ( is-set-quotient-id-Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+        ( equivalence-class-Set (Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
+        ( quotient-reflecting-map-equivalence-class
+          ( Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
+        ( is-set-quotient-equivalence-class
+          ( Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
+
+    equiv-fin-2-equivalence-class : (n : ℕ) (X : UU-Fin l1 n) →
+      leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
+      Fin 2 ≃ equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+    equiv-fin-2-equivalence-class n X H h =
+      tr
+        ( λ Y →
+          Fin 2 ≃
+            equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n Y))))
+        ( eq-pair-Σ
+          ( eq-equiv (raise l1 (Fin n)) (type-UU-Fin n X)
+            ( h ∘e inv-equiv (compute-raise-Fin l1 n)))
+          ( eq-is-prop is-prop-type-trunc-Prop))
+        ( equiv-Q-equivalence-class n
+          ( raise l1 (Fin n) ,
+            unit-trunc-Prop (compute-raise-Fin l1 n)) ∘e
+          equiv-Q-fin-fin-2 n H)
+
+  delooping-sign : (n : ℕ) →
+    hom-Concrete-Group (UU-Fin-Group l1 n) (UU-Fin-Group (lsuc l2) 2)
+  delooping-sign =
+    quotient-delooping-sign
+      ( λ n X → type-UU-Fin 2 (Q n X))
+      ( λ n X →
+        Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+      ( λ n H X →
+        has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
+      ( equiv-fin-2-equivalence-class)
+      ( λ n e → map-equiv (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1))
+      ( λ n Y →
+        Q-transposition-swap n Y
+          (pr1 (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1)))
+
+  eq-delooping-sign-homomorphism : (n : ℕ) →
+    Id
+      ( comp-hom-Group
+        ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Group (lsuc l2) 2))
+        ( comp-hom-Group
+          ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Group l1 (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Group (lsuc l2) 2))
+          ( hom-group-hom-Concrete-Group
+            ( UU-Fin-Group l1 (succ-ℕ (succ-ℕ n)))
+            ( UU-Fin-Group (lsuc l2) 2)
+            ( delooping-sign (succ-ℕ (succ-ℕ n))))
+          ( hom-inv-iso-Group
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Group l1 (succ-ℕ (succ-ℕ n))))
+            ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+            ( iso-loop-group-fin-UU-Fin-Group l1 (succ-ℕ (succ-ℕ n)))))
+        ( hom-inv-symmetric-group-loop-group-Set
+          ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))))
+      ( comp-hom-Group
+        ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+        ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Group (lsuc l2) 2))
+        ( comp-hom-Group
+          ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( symmetric-Group (Fin-Set 2))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Group (lsuc l2) 2))
+          ( symmetric-abstract-UU-fin-group-quotient-hom
+            ( λ n X → type-UU-Fin 2 (Q n X))
+            ( λ n X → Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+            ( λ n H X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
+            ( equiv-fin-2-equivalence-class)
+            ( λ n e → pr1 (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1))
+            ( λ n Y →
+              Q-transposition-swap n Y
+                ( pr1 (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1)))
+            ( n))
+          ( sign-homomorphism
+            ( succ-ℕ (succ-ℕ n))
+            ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
+        ( hom-inv-symmetric-group-equiv-Set
+          ( Fin-Set (succ-ℕ (succ-ℕ n)))
+          ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
+          ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))
+  eq-delooping-sign-homomorphism =
+    eq-quotient-delooping-sign-homomorphism
+      ( λ n X → type-UU-Fin 2 (Q n X))
+      ( λ n X → Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+      ( λ n H X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
+      ( equiv-fin-2-equivalence-class)
+      ( λ n e →
+          pr1 (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1))
+      ( λ n Y →
+          Q-transposition-swap n Y
+          (pr1 (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1)))
 ```

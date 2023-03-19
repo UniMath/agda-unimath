@@ -17,6 +17,7 @@ open import foundation.full-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.partitions
 open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sigma-decompositions
 open import foundation.subtypes
@@ -573,4 +574,32 @@ module _
   pr1 (pr2 Id-Eq-Rel) = refl
   pr1 (pr2 (pr2 Id-Eq-Rel)) = inv
   pr2 (pr2 (pr2 Id-Eq-Rel)) = λ p q → p ∙ q
+
+  id-reflects-Id-Eq-Rel : reflects-Eq-Rel Id-Eq-Rel id
+  id-reflects-Id-Eq-Rel = id
+
+  id-reflecting-map-Id-Eq-Rel : reflecting-map-Eq-Rel Id-Eq-Rel (type-Set A)
+  pr1 id-reflecting-map-Id-Eq-Rel = id
+  pr2 id-reflecting-map-Id-Eq-Rel = id-reflects-Id-Eq-Rel
+
+  is-surjective-and-effective-id-Id-Eq-Rel :
+    is-surjective-and-effective Id-Eq-Rel id
+  pr1 is-surjective-and-effective-id-Id-Eq-Rel a =
+    unit-trunc-Prop (a , refl)
+  pr2 is-surjective-and-effective-id-Id-Eq-Rel a b = id-equiv
+```
+
+### For any set ̀A`, `id` is a set quotient for the equality relation.
+
+```agda
+module _
+  {l : Level} (A : Set l)
+  where
+
+  is-set-quotient-id-Id-Eq-Rel : {l' : Level} →
+    is-set-quotient l' (Id-Eq-Rel A) A (id-reflecting-map-Id-Eq-Rel A)
+  is-set-quotient-id-Id-Eq-Rel =
+    is-set-quotient-is-surjective-and-effective (Id-Eq-Rel A) A
+      ( id-reflecting-map-Id-Eq-Rel A)
+      ( is-surjective-and-effective-id-Id-Eq-Rel A)
 ```

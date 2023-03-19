@@ -1,4 +1,4 @@
-# Univalent action on equivalences 
+# Univalent action on equivalences
 
 ```agda
 module foundation.univalence-action-on-equivalences where
@@ -9,8 +9,8 @@ module foundation.univalence-action-on-equivalences where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types

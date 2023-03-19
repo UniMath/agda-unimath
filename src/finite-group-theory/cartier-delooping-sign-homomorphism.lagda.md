@@ -20,8 +20,8 @@ open import finite-group-theory.transpositions
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.negation
@@ -190,7 +190,7 @@ module _
           ( Fin-Set (succ-ℕ (succ-ℕ n)))
           ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
           ( compute-raise l (Fin (succ-ℕ (succ-ℕ n))))))
-  eq-cartier-delooping-sign-homomorphism = 
+  eq-cartier-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( orientation-Complete-Undirected-Graph)
       ( even-difference-orientation-Complete-Undirected-Graph)
