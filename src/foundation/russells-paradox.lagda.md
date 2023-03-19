@@ -34,12 +34,12 @@ open import trees.universal-multiset
 
 ## Idea
 
-Russell's paradox arises when a set of all sets is assumed to exist. In Russell's
-paradox it is of no importance that the elementhood relation takes values in
-propositions. In other words, Russell's paradox arises similarly if there is a
-multiset of all multisets. We will construct Russell's paradox from the
-assumption that a universe `U` is equivalent to a type `A : U`. We conclude that
-there can be no universe that is contained in itself. Furthermore, using
+Russell's paradox arises when a set of all sets is assumed to exist. In
+Russell's paradox it is of no importance that the elementhood relation takes
+values in propositions. In other words, Russell's paradox arises similarly if
+there is a multiset of all multisets. We will construct Russell's paradox from
+the assumption that a universe `U` is equivalent to a type `A : U`. We conclude
+that there can be no universe that is contained in itself. Furthermore, using
 replacement we show that for any type `A : U`, there is no surjective map
 `A → U`.
 

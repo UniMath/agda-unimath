@@ -68,6 +68,7 @@ module _
       ( zero-Commutative-Ring A)
       ( contains-zero-ideal-Commutative-Ring A I)
 
+{-
   is-closed-under-addition-radical-of-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
@@ -81,6 +82,7 @@ module _
           intro-∃
             ( add-ℕ n m)
             ( {!is-closed-under-eq-ideal-Commutative-Ring!})))
+            -}
 ```
 
 ( binomial-theorem-Commutative-Ring A (add-ℕ n m) x y) ∙ ( (

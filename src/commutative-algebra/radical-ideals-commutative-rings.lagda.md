@@ -103,13 +103,13 @@ module _
   contains-zero-radical-ideal-Commutative-Ring =
     contains-zero-ideal-Commutative-Ring A ideal-radical-ideal-Commutative-Ring
 
-  is-closed-under-add-radical-ideal-Commutative-Ring :
+  is-closed-under-addition-radical-ideal-Commutative-Ring :
     {x y : type-Commutative-Ring A} →
     is-in-radical-ideal-Commutative-Ring x →
     is-in-radical-ideal-Commutative-Ring y →
     is-in-radical-ideal-Commutative-Ring (add-Commutative-Ring A x y)
-  is-closed-under-add-radical-ideal-Commutative-Ring =
-    is-closed-under-add-ideal-Commutative-Ring A
+  is-closed-under-addition-radical-ideal-Commutative-Ring =
+    is-closed-under-addition-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
 
   is-closed-under-left-multiplication-radical-ideal-Commutative-Ring :
