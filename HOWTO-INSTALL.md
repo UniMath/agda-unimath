@@ -1,15 +1,15 @@
 # INSTALL
 
 To use the `agda-unimath` library, you will need to have Agda and a code editor
-installed. This guide provides instructions for installing Agda as well as
-specific setup instructions for the editors Emacs and Visual Studio Code. By
-following theese step-by-step directions, you will create a tailored working
-environment for using the library. Additionally, we provide instructions for
-setting up your environment for making contributions to the library.
+set up. This guide provides instructions for installing Agda as well as specific
+setup instructions for the editors Emacs and Visual Studio Code. By following
+theese step-by-step directions, you will create a tailored working environment
+for using the library. Additionally, we provide instructions for setting up your
+environment for making contributions to the library.
 
 ## Getting a copy of the library
 
-Get a copy of our library on your machine with git using
+Get a copy of our library on your machine with `git` using
 
 ```shell
 git clone git@github.com:UniMath/agda-unimath.git
@@ -166,9 +166,9 @@ These snippets are defined in `.vscode/agda.code-snippets`.
 
 #### Autoformatting
 
-For your convenience, the VSCode workspace configuration includes several
-automatic formatting functions. These functions continuously correct minor
-formatting mistakes, ensuring a smoother coding experience.
+For your convenience, the VSCode workspace configures several automatic
+formatting functions. These functions continuously correct minor formatting
+mistakes, ensuring a smoother coding experience.
 
 ### Note on the library's use of Unicode characters
 
