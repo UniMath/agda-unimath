@@ -7,13 +7,21 @@ module set-theory.cumulative-hierarchy where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.booleans
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equational-reasoning
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -22,6 +30,8 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>
@@ -33,6 +43,8 @@ a HIT, as in the HoTT Book Section 10.4, we introduce its induction principle,
 following Reference 2 below.
 
 ## Definitions
+
+### Smaller image
 
 ```agda
 has-smaller-image :
@@ -144,7 +156,7 @@ module _
     IP P σ ρ τ (set-pseudo-cumulative-hierarchy V f) ＝ ρ f IH
 ```
 
-## Properties
+## Examples
 
 ```agda
 module _
@@ -157,17 +169,35 @@ module _
   where
 ```
 
+### The empty set
+
+```agda
+  empty-set-cumulative-hierarchy : type-pseudo-cumulative-hierarchy V
+  empty-set-cumulative-hierarchy =
+    set-pseudo-cumulative-hierarchy V (raise-ex-falso l1)
+```
+
+### The set containing only the empty set
+
+```agda
+  set-empty-set-cumulative-hierarchy : type-pseudo-cumulative-hierarchy V
+  set-empty-set-cumulative-hierarchy =
+    set-pseudo-cumulative-hierarchy V {raise-unit l1}
+      ( λ _ → empty-set-cumulative-hierarchy)
+```
+
+## Properties
+
 ### Every element of the cumulative hierarchy is given by a function into the cumulative hierarchy.
 
 ```agda
   underlying-function-cumulative-hierarchy :
-    { l2 : Level}
     (v : type-pseudo-cumulative-hierarchy V) →
     ∃ ( UU l1)
       ( λ A →
         Σ ( A → type-pseudo-cumulative-hierarchy V)
           ( λ f → set-pseudo-cumulative-hierarchy V f ＝ v))
-  underlying-function-cumulative-hierarchy {l2} =
+  underlying-function-cumulative-hierarchy =
     induction-principle-cumulative-hierarchy-V
       ( lsuc l1) _
       ( λ _ → is-trunc-type-Truncated-Type (set-trunc-Prop _))
@@ -553,6 +583,161 @@ needed.
       ( λ f H H₁ H₂ →
         pre-extensionality-∈-cumulative-hierarchy
           f x H₁ H₂)
+```
+
+### Cumulative hierarchies satisfy the empty set axiom
+
+```agda
+  empty-set-axiom-cumulative-hierarchy :
+    ( x : type-pseudo-cumulative-hierarchy V) →
+    ¬ (∈-cumulative-hierarchy x empty-set-cumulative-hierarchy)
+  empty-set-axiom-cumulative-hierarchy x H =
+    map-universal-property-trunc-Prop empty-Prop
+      ( λ (z , p) → raise-ex-falso l1 z)
+      ( ∈-cumulative-hierarchy-mere-preimage H)
+```
+
+### Cumulative hierarchies satisfy the pair axiom
+
+```agda
+  pair-cumulative-hierarchy :
+    ( x y : type-pseudo-cumulative-hierarchy V) →
+    type-pseudo-cumulative-hierarchy V
+  pair-cumulative-hierarchy x y =
+    set-pseudo-cumulative-hierarchy V bool-map
+    where
+      bool-map : raise-bool l1 → type-pseudo-cumulative-hierarchy V
+      bool-map (map-raise true) = x
+      bool-map (map-raise false) = y
+
+  pair-axiom-cumulative-hierarchy :
+    ( x y v : type-pseudo-cumulative-hierarchy V) →
+    ( ∈-cumulative-hierarchy v (pair-cumulative-hierarchy x y) ↔
+      type-trunc-Prop ( (v ＝ x) + (v ＝ y)))
+  pair-axiom-cumulative-hierarchy x y v =
+    pair
+      ( λ H → map-universal-property-trunc-Prop
+        ( trunc-Prop ((v ＝ x) + (v ＝ y)))
+        ( λ { ( map-raise true , p) → unit-trunc-Prop (inl (inv p)) ;
+              ( map-raise false , p) → unit-trunc-Prop (inr (inv p))})
+        ( ∈-cumulative-hierarchy-mere-preimage H) )
+      ( λ H → mere-preimage-∈-cumulative-hierarchy
+        ( map-trunc-Prop
+          ( λ { ( inl p) → (map-raise true , inv p) ;
+                ( inr p) → (map-raise false , inv p)})
+          ( H)))
+```
+
+### Singleton function
+
+```agda
+  singleton-cumulative-hierarchy :
+    type-pseudo-cumulative-hierarchy V →
+    type-pseudo-cumulative-hierarchy V
+  singleton-cumulative-hierarchy x =
+    ( set-pseudo-cumulative-hierarchy V {raise-unit l1}
+      ( λ _ → x))
+```
+
+### Cumulative hierarchies satisfy the infinity axiom
+
+```agda
+  infinity-cumulative-hierarchy : type-pseudo-cumulative-hierarchy V
+  infinity-cumulative-hierarchy =
+    set-pseudo-cumulative-hierarchy V ℕ-map
+    where
+      ℕ-map : raise l1 ℕ → type-pseudo-cumulative-hierarchy V
+      ℕ-map (map-raise zero-ℕ) = empty-set-cumulative-hierarchy
+      ℕ-map (map-raise (succ-ℕ x)) =
+        pair-cumulative-hierarchy
+          ( ℕ-map (map-raise x))
+          ( singleton-cumulative-hierarchy (ℕ-map (map-raise x)))
+
+  infinity-axiom-cumulative-hierarchy :
+    ( ∈-cumulative-hierarchy
+        empty-set-cumulative-hierarchy
+        infinity-cumulative-hierarchy) ×
+    ( ( x : type-pseudo-cumulative-hierarchy V) →
+      ∈-cumulative-hierarchy x infinity-cumulative-hierarchy →
+      ∈-cumulative-hierarchy
+        ( pair-cumulative-hierarchy x
+          ( singleton-cumulative-hierarchy x))
+        ( infinity-cumulative-hierarchy))
+  infinity-axiom-cumulative-hierarchy =
+    pair
+      ( mere-preimage-∈-cumulative-hierarchy
+        ( unit-trunc-Prop (map-raise zero-ℕ , refl)))
+        ( λ x H →
+          mere-preimage-∈-cumulative-hierarchy
+            ( map-trunc-Prop
+              ( λ {((map-raise n) , refl) →
+                map-raise (succ-ℕ n) , refl})
+            ( ∈-cumulative-hierarchy-mere-preimage H)) )
+```
+
+### Cumulative hierarchies satisfy the ∈-induction axiom
+
+```agda
+  ∈-induction-cumulative-hierarchy :
+    {l2 : Level}
+    ( P : type-pseudo-cumulative-hierarchy V → UU l2) →
+    ( ( x : type-pseudo-cumulative-hierarchy V) → is-prop (P x)) →
+    ( ( x : type-pseudo-cumulative-hierarchy V) →
+      ( ( y : type-pseudo-cumulative-hierarchy V) →
+        ∈-cumulative-hierarchy y x → P y) →
+      P x) →
+    ( x : type-pseudo-cumulative-hierarchy V) → P x
+  ∈-induction-cumulative-hierarchy P P-prop h =
+    prop-ind-principle-cumulative-hierarchy P P-prop
+      ( λ f IH →
+        h (set-pseudo-cumulative-hierarchy V f)
+          ( λ y m →
+             map-universal-property-trunc-Prop
+               ( P y , P-prop y)
+               ( λ (a , p) → tr P p (IH a))
+               ( ∈-cumulative-hierarchy-mere-preimage m)))
+```
+
+### Cumulative hierarchies satisfy the replacement axiom
+
+```agda
+  replacement-cumulative-hierarchy :
+    ( x : type-pseudo-cumulative-hierarchy V) →
+    ( r : type-pseudo-cumulative-hierarchy V →
+      type-pseudo-cumulative-hierarchy V) →
+    ∃ ( type-pseudo-cumulative-hierarchy V)
+      ( λ v →
+        ( y : type-pseudo-cumulative-hierarchy V) →
+        ∈-cumulative-hierarchy y v ↔
+        ∃ ( type-pseudo-cumulative-hierarchy V)
+          ( λ z → (∈-cumulative-hierarchy z x) × (y ＝ r z)))
+  replacement-cumulative-hierarchy x r =
+    map-universal-property-trunc-Prop
+      ( ∃-Prop (type-pseudo-cumulative-hierarchy V) _)
+      ( λ {(A , f , refl) →
+        unit-trunc-Prop
+          ( pair
+            ( set-pseudo-cumulative-hierarchy V (r ∘ f))
+            ( λ y →
+              ( pair
+                ( λ H →
+                  map-trunc-Prop
+                    ( λ {(a , refl) →
+                      pair (f a)
+                        ( pair
+                          ( mere-preimage-∈-cumulative-hierarchy
+                            ( unit-trunc-Prop (a , refl)))
+                          ( refl))})
+                    ( ∈-cumulative-hierarchy-mere-preimage H))
+                ( λ H → mere-preimage-∈-cumulative-hierarchy
+                  ( map-universal-property-trunc-Prop
+                    ( ∃-Prop A _)
+                    ( λ {(z , K , refl) →
+                      ( map-trunc-Prop
+                        ( λ {(a , refl) → (a , refl)})
+                        ( ∈-cumulative-hierarchy-mere-preimage K))})
+                    ( H))))))})
+      ( underlying-function-cumulative-hierarchy x)
 ```
 
 ## References

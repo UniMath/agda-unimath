@@ -10,10 +10,12 @@ module group-theory.centers-groups where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.central-elements-groups
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.normal-subgroups
 open import group-theory.subgroups
 ```
 
@@ -21,51 +23,76 @@ open import group-theory.subgroups
 
 ## Idea
 
-The **center** of a group `G` is the normal subgroup consisting of all elements
-`g : G` that commute with every element of `G`.
+The **center** of a group consists of those elements that are central.
 
 ## Definition
 
 ```agda
 module _
-  {l1 : Level} (G : Group l1)
+  {l : Level} (G : Group l)
   where
 
-  subtype-center-Group : subset-Group l1 G
-  subtype-center-Group g =
-    Π-Prop
-      ( type-Group G)
-      ( λ h → Id-Prop (set-Group G) (mul-Group G g h) (mul-Group G h g))
+  subtype-center-Group : type-Group G → Prop l
+  subtype-center-Group = is-central-element-group-Prop G
 
-  contains-unit-center-Group : contains-unit-subset-Group G subtype-center-Group
-  contains-unit-center-Group h =
-    ( left-unit-law-mul-Group G h) ∙
-    ( inv (right-unit-law-mul-Group G h))
-
-  is-closed-under-mul-center-Group :
-    is-closed-under-mul-subset-Group G subtype-center-Group
-  is-closed-under-mul-center-Group g1 g2 H1 H2 h =
-    ( associative-mul-Group G g1 g2 h) ∙
-    ( ( ap (mul-Group G g1) (H2 h)) ∙
-      ( ( inv (associative-mul-Group G g1 h g2)) ∙
-        ( ( ap (mul-Group' G g2) (H1 h)) ∙
-          ( associative-mul-Group G h g1 g2))))
-
-  is-closed-under-inv-center-Group :
-    is-closed-under-inv-subset-Group G subtype-center-Group
-  is-closed-under-inv-center-Group g H h =
-    ( inv (inv-inv-Group G (mul-Group G (inv-Group G g) h))) ∙
-    ( ( ap (inv-Group G) (distributive-inv-mul-Group G (inv-Group G g) h)) ∙
-      ( ( ap
-          ( inv-Group G)
-          ( ap (mul-Group G (inv-Group G h)) (inv-inv-Group G g))) ∙
-        ( ( inv (ap (inv-Group G) (H (inv-Group G h)))) ∙
-          ( ( distributive-inv-mul-Group G g (inv-Group G h)) ∙
-            ( ap (mul-Group' G (inv-Group G g)) (inv-inv-Group G h))))))
-
-  subgroup-center-Group : Subgroup l1 G
+  subgroup-center-Group : Subgroup l G
   pr1 subgroup-center-Group = subtype-center-Group
-  pr1 (pr2 subgroup-center-Group) = contains-unit-center-Group
-  pr1 (pr2 (pr2 subgroup-center-Group)) = is-closed-under-mul-center-Group
-  pr2 (pr2 (pr2 subgroup-center-Group)) = is-closed-under-inv-center-Group
+  pr1 (pr2 subgroup-center-Group) = is-central-element-unit-Group G
+  pr1 (pr2 (pr2 subgroup-center-Group)) = is-central-element-mul-Group G
+  pr2 (pr2 (pr2 subgroup-center-Group)) = is-central-element-inv-Group G
+
+  group-center-Group : Group l
+  group-center-Group = group-Subgroup G subgroup-center-Group
+
+  type-center-Group : UU l
+  type-center-Group =
+    type-Subgroup G subgroup-center-Group
+
+  mul-center-Group :
+    (x y : type-center-Group) → type-center-Group
+  mul-center-Group = mul-Subgroup G subgroup-center-Group
+
+  associative-mul-center-Group :
+    (x y z : type-center-Group) →
+    mul-center-Group (mul-center-Group x y) z ＝
+    mul-center-Group x (mul-center-Group y z)
+  associative-mul-center-Group =
+    associative-mul-Subgroup G subgroup-center-Group
+
+  inclusion-center-Group :
+    type-center-Group → type-Group G
+  inclusion-center-Group =
+    inclusion-Subgroup G subgroup-center-Group
+
+  is-central-element-inclusion-center-Group :
+    (x : type-center-Group) →
+    is-central-element-Group G (inclusion-center-Group x)
+  is-central-element-inclusion-center-Group x =
+    is-in-subgroup-inclusion-Subgroup G subgroup-center-Group x
+
+  preserves-mul-inclusion-center-Group :
+    (x y : type-center-Group) →
+    inclusion-center-Group (mul-center-Group x y) ＝
+    mul-Group G
+      ( inclusion-center-Group x)
+      ( inclusion-center-Group y)
+  preserves-mul-inclusion-center-Group =
+    preserves-mul-inclusion-Subgroup G subgroup-center-Group
+
+  hom-inclusion-center-Group :
+    type-hom-Group group-center-Group G
+  hom-inclusion-center-Group =
+    hom-inclusion-Subgroup G subgroup-center-Group
+
+  is-normal-subgroup-center-Group :
+    is-normal-Subgroup G subgroup-center-Group
+  is-normal-subgroup-center-Group x y =
+    is-central-element-conjugation-Group G
+      ( inclusion-center-Group y)
+      ( x)
+      ( is-central-element-inclusion-center-Group y)
+
+  center-Group : Normal-Subgroup l G
+  pr1 center-Group = subgroup-center-Group
+  pr2 center-Group = is-normal-subgroup-center-Group
 ```

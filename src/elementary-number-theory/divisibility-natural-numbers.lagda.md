@@ -54,12 +54,6 @@ concatenate-eq-div-eq-ℕ :
   {x y z w : ℕ} → x ＝ y → div-ℕ y z → z ＝ w → div-ℕ x w
 concatenate-eq-div-eq-ℕ refl p refl = p
 
-is-even-ℕ : ℕ → UU lzero
-is-even-ℕ n = div-ℕ 2 n
-
-is-odd-ℕ : ℕ → UU lzero
-is-odd-ℕ n = ¬ (is-even-ℕ n)
-
 div-one-ℕ :
   (x : ℕ) → div-ℕ 1 x
 pr1 (div-one-ℕ x) = x

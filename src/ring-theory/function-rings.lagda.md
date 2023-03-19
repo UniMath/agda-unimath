@@ -21,7 +21,7 @@ open import ring-theory.dependent-products-rings
 open import ring-theory.rings
 ```
 
-<details>
+</details>
 
 ## Idea
 
