@@ -80,7 +80,7 @@ module _
         ( λ (m , q) →
           intro-∃
             ( add-ℕ n m)
-            ( {!!})))
+            ( {!is-closed-under-eq-ideal-Commutative-Ring!})))
 ```
 
 ( binomial-theorem-Commutative-Ring A (add-ℕ n m) x y) ∙ ( (

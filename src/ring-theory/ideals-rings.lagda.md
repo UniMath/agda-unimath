@@ -18,6 +18,7 @@ open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
 
+open import ring-theory.ideals-semirings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```
@@ -38,17 +39,11 @@ module _
   {l1 : Level} (R : Ring l1)
   where
 
-  is-closed-under-mul-left-subset-Ring :
-    {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
-  is-closed-under-mul-left-subset-Ring P =
-    (x : type-Ring R) (y : type-Ring R) →
-    type-Prop (P y) → type-Prop (P (mul-Ring R x y))
-
   is-left-ideal-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-left-ideal-subset-Ring P =
     is-additive-subgroup-subset-Ring R P ×
-    is-closed-under-mul-left-subset-Ring P
+    is-closed-under-left-multiplication-subset-Ring R P
 
 left-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
@@ -70,6 +65,30 @@ module _
   inclusion-left-ideal-Ring : type-left-ideal-Ring → type-Ring R
   inclusion-left-ideal-Ring = inclusion-subset-Ring R subset-left-ideal-Ring
 
+  ap-inclusion-left-ideal-Ring :
+    (x y : type-left-ideal-Ring) → x ＝ y →
+    inclusion-left-ideal-Ring x ＝ inclusion-left-ideal-Ring y
+  ap-inclusion-left-ideal-Ring =
+    ap-inclusion-subset-Ring R subset-left-ideal-Ring
+
+  is-in-subset-inclusion-left-ideal-Ring :
+    (x : type-left-ideal-Ring) →
+    is-in-left-ideal-Ring (inclusion-left-ideal-Ring x)
+  is-in-subset-inclusion-left-ideal-Ring =
+    is-in-subset-inclusion-subset-Ring R subset-left-ideal-Ring
+
+  is-closed-under-eq-left-ideal-Ring :
+    {x y : type-Ring R} → is-in-left-ideal-Ring x →
+    (x ＝ y) → is-in-left-ideal-Ring y
+  is-closed-under-eq-left-ideal-Ring =
+    is-closed-under-eq-subset-Ring R subset-left-ideal-Ring
+
+  is-closed-under-eq-left-ideal-Ring' :
+    {x y : type-Ring R} → is-in-left-ideal-Ring y →
+    (x ＝ y) → is-in-left-ideal-Ring x
+  is-closed-under-eq-left-ideal-Ring' =
+    is-closed-under-eq-subset-Ring' R subset-left-ideal-Ring
+
   is-left-ideal-subset-left-ideal-Ring :
     is-left-ideal-subset-Ring R subset-left-ideal-Ring
   is-left-ideal-subset-left-ideal-Ring = pr2 I
@@ -83,15 +102,14 @@ module _
   contains-zero-left-ideal-Ring =
     pr1 is-additive-subgroup-subset-left-ideal-Ring
 
-  is-closed-under-add-left-ideal-Ring :
-    {x y : type-Ring R} → is-in-left-ideal-Ring x → is-in-left-ideal-Ring y →
-    is-in-left-ideal-Ring (add-Ring R x y)
-  is-closed-under-add-left-ideal-Ring H K =
-    pr1 (pr2 is-additive-subgroup-subset-left-ideal-Ring) _ _ H K
+  is-closed-under-addition-left-ideal-Ring :
+    is-closed-under-addition-subset-Ring R subset-left-ideal-Ring
+  is-closed-under-addition-left-ideal-Ring =
+    pr1 (pr2 is-additive-subgroup-subset-left-ideal-Ring)
 
-  is-closed-under-mul-left-ideal-Ring :
-    is-closed-under-mul-left-subset-Ring R subset-left-ideal-Ring
-  is-closed-under-mul-left-ideal-Ring =
+  is-closed-under-left-multiplication-left-ideal-Ring :
+    is-closed-under-left-multiplication-subset-Ring R subset-left-ideal-Ring
+  is-closed-under-left-multiplication-left-ideal-Ring =
     pr2 is-left-ideal-subset-left-ideal-Ring
 ```
 
@@ -102,17 +120,11 @@ module _
   {l1 : Level} (R : Ring l1)
   where
 
-  is-closed-under-mul-right-subset-Ring :
-    {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
-  is-closed-under-mul-right-subset-Ring P =
-    (x : type-Ring R) (y : type-Ring R) →
-    type-Prop (P x) → type-Prop (P (mul-Ring R x y))
-
   is-right-ideal-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-right-ideal-subset-Ring P =
     is-additive-subgroup-subset-Ring R P ×
-    is-closed-under-mul-right-subset-Ring P
+    is-closed-under-right-multiplication-subset-Ring R P
 
 right-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
@@ -134,6 +146,30 @@ module _
   inclusion-right-ideal-Ring : type-right-ideal-Ring → type-Ring R
   inclusion-right-ideal-Ring = inclusion-subset-Ring R subset-right-ideal-Ring
 
+  ap-inclusion-right-ideal-Ring :
+    (x y : type-right-ideal-Ring) → x ＝ y →
+    inclusion-right-ideal-Ring x ＝ inclusion-right-ideal-Ring y
+  ap-inclusion-right-ideal-Ring =
+    ap-inclusion-subset-Ring R subset-right-ideal-Ring
+
+  is-in-subset-inclusion-right-ideal-Ring :
+    (x : type-right-ideal-Ring) →
+    is-in-right-ideal-Ring (inclusion-right-ideal-Ring x)
+  is-in-subset-inclusion-right-ideal-Ring =
+    is-in-subset-inclusion-subset-Ring R subset-right-ideal-Ring
+
+  is-closed-under-eq-right-ideal-Ring :
+    {x y : type-Ring R} → is-in-right-ideal-Ring x →
+    (x ＝ y) → is-in-right-ideal-Ring y
+  is-closed-under-eq-right-ideal-Ring =
+    is-closed-under-eq-subset-Ring R subset-right-ideal-Ring
+
+  is-closed-under-eq-right-ideal-Ring' :
+    {x y : type-Ring R} → is-in-right-ideal-Ring y →
+    (x ＝ y) → is-in-right-ideal-Ring x
+  is-closed-under-eq-right-ideal-Ring' =
+    is-closed-under-eq-subset-Ring' R subset-right-ideal-Ring
+
   is-right-ideal-subset-right-ideal-Ring :
     is-right-ideal-subset-Ring R subset-right-ideal-Ring
   is-right-ideal-subset-right-ideal-Ring = pr2 I
@@ -147,99 +183,118 @@ module _
   contains-zero-right-ideal-Ring =
     pr1 is-additive-subgroup-subset-right-ideal-Ring
 
-  is-closed-under-add-right-ideal-Ring :
-    {x y : type-Ring R} → is-in-right-ideal-Ring x → is-in-right-ideal-Ring y →
-    is-in-right-ideal-Ring (add-Ring R x y)
-  is-closed-under-add-right-ideal-Ring H K =
-    pr1 (pr2 is-additive-subgroup-subset-right-ideal-Ring) _ _ H K
+  is-closed-under-addition-right-ideal-Ring :
+    is-closed-under-addition-subset-Ring R subset-right-ideal-Ring
+  is-closed-under-addition-right-ideal-Ring =
+    pr1 (pr2 is-additive-subgroup-subset-right-ideal-Ring)
 
-  is-closed-under-mul-right-ideal-Ring :
-    is-closed-under-mul-right-subset-Ring R subset-right-ideal-Ring
-  is-closed-under-mul-right-ideal-Ring =
+  is-closed-under-right-multiplication-right-ideal-Ring :
+    is-closed-under-right-multiplication-subset-Ring R subset-right-ideal-Ring
+  is-closed-under-right-multiplication-right-ideal-Ring =
     pr2 is-right-ideal-subset-right-ideal-Ring
 ```
 
-### Two-sided ideals
+### (Two-sided) ideals
 
 ```agda
-is-two-sided-ideal-subset-Ring :
+is-ideal-subset-Ring :
   {l1 l2 : Level} (R : Ring l1) (P : subset-Ring l2 R) → UU (l1 ⊔ l2)
-is-two-sided-ideal-subset-Ring R P =
+is-ideal-subset-Ring R P =
   is-additive-subgroup-subset-Ring R P ×
-  ( is-closed-under-mul-left-subset-Ring R P ×
-    is-closed-under-mul-right-subset-Ring R P)
+  ( is-closed-under-left-multiplication-subset-Ring R P ×
+    is-closed-under-right-multiplication-subset-Ring R P)
 
-two-sided-ideal-Ring :
+ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
-two-sided-ideal-Ring l R =
-  Σ (subset-Ring l R) (is-two-sided-ideal-subset-Ring R)
+ideal-Ring l R =
+  Σ (subset-Ring l R) (is-ideal-subset-Ring R)
 
 module _
-  {l1 l2 : Level} (R : Ring l1) (I : two-sided-ideal-Ring l2 R)
+  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
   where
 
-  subset-two-sided-ideal-Ring : subset-Ring l2 R
-  subset-two-sided-ideal-Ring = pr1 I
+  subset-ideal-Ring : subset-Ring l2 R
+  subset-ideal-Ring = pr1 I
 
-  is-in-two-sided-ideal-Ring : type-Ring R → UU l2
-  is-in-two-sided-ideal-Ring x = type-Prop (subset-two-sided-ideal-Ring x)
+  is-in-ideal-Ring : type-Ring R → UU l2
+  is-in-ideal-Ring x = type-Prop (subset-ideal-Ring x)
 
-  type-two-sided-ideal-Ring : UU (l1 ⊔ l2)
-  type-two-sided-ideal-Ring = type-subset-Ring R subset-two-sided-ideal-Ring
+  type-ideal-Ring : UU (l1 ⊔ l2)
+  type-ideal-Ring = type-subset-Ring R subset-ideal-Ring
 
-  inclusion-two-sided-ideal-Ring : type-two-sided-ideal-Ring → type-Ring R
-  inclusion-two-sided-ideal-Ring =
-    inclusion-subset-Ring R subset-two-sided-ideal-Ring
+  inclusion-ideal-Ring : type-ideal-Ring → type-Ring R
+  inclusion-ideal-Ring =
+    inclusion-subset-Ring R subset-ideal-Ring
 
-  is-two-sided-ideal-subset-two-sided-ideal-Ring :
-    is-two-sided-ideal-subset-Ring R subset-two-sided-ideal-Ring
-  is-two-sided-ideal-subset-two-sided-ideal-Ring = pr2 I
+  ap-inclusion-ideal-Ring :
+    (x y : type-ideal-Ring) → x ＝ y →
+    inclusion-ideal-Ring x ＝ inclusion-ideal-Ring y
+  ap-inclusion-ideal-Ring = ap-inclusion-subset-Ring R subset-ideal-Ring
 
-  is-additive-subgroup-subset-two-sided-ideal-Ring :
-    is-additive-subgroup-subset-Ring R subset-two-sided-ideal-Ring
-  is-additive-subgroup-subset-two-sided-ideal-Ring =
-    pr1 is-two-sided-ideal-subset-two-sided-ideal-Ring
+  is-in-subset-inclusion-ideal-Ring :
+    (x : type-ideal-Ring) → is-in-ideal-Ring (inclusion-ideal-Ring x)
+  is-in-subset-inclusion-ideal-Ring =
+    is-in-subset-inclusion-subset-Ring R subset-ideal-Ring
 
-  contains-zero-two-sided-ideal-Ring : is-in-two-sided-ideal-Ring (zero-Ring R)
-  contains-zero-two-sided-ideal-Ring =
-    pr1 is-additive-subgroup-subset-two-sided-ideal-Ring
+  is-closed-under-eq-ideal-Ring :
+    {x y : type-Ring R} → is-in-ideal-Ring x → (x ＝ y) → is-in-ideal-Ring y
+  is-closed-under-eq-ideal-Ring =
+    is-closed-under-eq-subset-Ring R subset-ideal-Ring
 
-  is-closed-under-add-two-sided-ideal-Ring :
-    {x y : type-Ring R} → is-in-two-sided-ideal-Ring x →
-    is-in-two-sided-ideal-Ring y →
-    is-in-two-sided-ideal-Ring (add-Ring R x y)
-  is-closed-under-add-two-sided-ideal-Ring H K =
-    pr1 (pr2 is-additive-subgroup-subset-two-sided-ideal-Ring) _ _ H K
+  is-closed-under-eq-ideal-Ring' :
+    {x y : type-Ring R} → is-in-ideal-Ring y → (x ＝ y) → is-in-ideal-Ring x
+  is-closed-under-eq-ideal-Ring' =
+    is-closed-under-eq-subset-Ring' R subset-ideal-Ring
 
-  is-closed-under-mul-left-two-sided-ideal-Ring :
-    is-closed-under-mul-left-subset-Ring R subset-two-sided-ideal-Ring
-  is-closed-under-mul-left-two-sided-ideal-Ring =
-    pr1 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Ring)
+  is-ideal-subset-ideal-Ring :
+    is-ideal-subset-Ring R subset-ideal-Ring
+  is-ideal-subset-ideal-Ring = pr2 I
 
-  is-closed-under-neg-two-sided-ideal-Ring :
-    {x : type-Ring R} → is-in-two-sided-ideal-Ring x →
-    is-in-two-sided-ideal-Ring (neg-Ring R x)
-  is-closed-under-neg-two-sided-ideal-Ring H =
-    pr2 (pr2 is-additive-subgroup-subset-two-sided-ideal-Ring) _ H
+  is-additive-subgroup-subset-ideal-Ring :
+    is-additive-subgroup-subset-Ring R subset-ideal-Ring
+  is-additive-subgroup-subset-ideal-Ring =
+    pr1 is-ideal-subset-ideal-Ring
 
-  is-closed-under-mul-right-two-sided-ideal-Ring :
-    is-closed-under-mul-right-subset-Ring R subset-two-sided-ideal-Ring
-  is-closed-under-mul-right-two-sided-ideal-Ring =
-    pr2 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Ring)
+  contains-zero-ideal-Ring : is-in-ideal-Ring (zero-Ring R)
+  contains-zero-ideal-Ring =
+    pr1 is-additive-subgroup-subset-ideal-Ring
 
-  subgroup-two-sided-ideal-Ring : Subgroup l2 (group-Ring R)
-  pr1 subgroup-two-sided-ideal-Ring = subset-two-sided-ideal-Ring
-  pr1 (pr2 subgroup-two-sided-ideal-Ring) = contains-zero-two-sided-ideal-Ring
-  pr1 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x y =
-    is-closed-under-add-two-sided-ideal-Ring
-  pr2 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x =
-    is-closed-under-neg-two-sided-ideal-Ring
+  is-closed-under-addition-ideal-Ring :
+    {x y : type-Ring R} → is-in-ideal-Ring x →
+    is-in-ideal-Ring y →
+    is-in-ideal-Ring (add-Ring R x y)
+  is-closed-under-addition-ideal-Ring H K =
+    pr1 (pr2 is-additive-subgroup-subset-ideal-Ring) _ _ H K
 
-  normal-subgroup-two-sided-ideal-Ring : Normal-Subgroup l2 (group-Ring R)
-  pr1 normal-subgroup-two-sided-ideal-Ring = subgroup-two-sided-ideal-Ring
-  pr2 normal-subgroup-two-sided-ideal-Ring x (y , H) =
+  is-closed-under-left-multiplication-ideal-Ring :
+    is-closed-under-left-multiplication-subset-Ring R subset-ideal-Ring
+  is-closed-under-left-multiplication-ideal-Ring =
+    pr1 (pr2 is-ideal-subset-ideal-Ring)
+
+  is-closed-under-neg-ideal-Ring :
+    {x : type-Ring R} → is-in-ideal-Ring x →
+    is-in-ideal-Ring (neg-Ring R x)
+  is-closed-under-neg-ideal-Ring H =
+    pr2 (pr2 is-additive-subgroup-subset-ideal-Ring) _ H
+
+  is-closed-under-right-multiplication-ideal-Ring :
+    is-closed-under-right-multiplication-subset-Ring R subset-ideal-Ring
+  is-closed-under-right-multiplication-ideal-Ring =
+    pr2 (pr2 is-ideal-subset-ideal-Ring)
+
+  subgroup-ideal-Ring : Subgroup l2 (group-Ring R)
+  pr1 subgroup-ideal-Ring = subset-ideal-Ring
+  pr1 (pr2 subgroup-ideal-Ring) = contains-zero-ideal-Ring
+  pr1 (pr2 (pr2 subgroup-ideal-Ring)) x y =
+    is-closed-under-addition-ideal-Ring
+  pr2 (pr2 (pr2 subgroup-ideal-Ring)) x =
+    is-closed-under-neg-ideal-Ring
+
+  normal-subgroup-ideal-Ring : Normal-Subgroup l2 (group-Ring R)
+  pr1 normal-subgroup-ideal-Ring = subgroup-ideal-Ring
+  pr2 normal-subgroup-ideal-Ring x (y , H) =
     tr
-      ( is-in-two-sided-ideal-Ring)
+      ( is-in-ideal-Ring)
       ( equational-reasoning
         y
         ＝ add-Ring R y (zero-Ring R)
