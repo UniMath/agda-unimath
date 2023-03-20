@@ -31,7 +31,8 @@ open import universal-algebra.terms-signatures
 
 ## Idea
 
-There is an algebraic theory of groups. They type of all such algebras is equivalent to the type of groups.
+There is an algebraic theory of groups. They type of all such algebras is
+equivalent to the type of groups.
 
 ## Definitions
 

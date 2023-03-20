@@ -37,4 +37,3 @@ module _ {l1 : Level} (Sig : signature l1) where
   rhs-Abstract-Equation : Abstract-Equation → Term Sig
   rhs-Abstract-Equation = pr2
 ```
-

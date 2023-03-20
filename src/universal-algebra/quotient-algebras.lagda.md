@@ -10,14 +10,14 @@ module universal-algebra.quotient-algebras where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
-open import foundation.sets
 open import foundation.set-quotients
+open import foundation.sets
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -32,8 +32,8 @@ open import universal-algebra.signatures
 
 ## Idea
 
-The quotient of an algebra by a congruence is the set quotient by that congruence.
-The operations are inherited by the original algebra.
+The quotient of an algebra by a congruence is the set quotient by that
+congruence. The operations are inherited by the original algebra.
 
 ## Definitions
 

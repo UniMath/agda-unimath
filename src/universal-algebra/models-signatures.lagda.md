@@ -60,4 +60,3 @@ module _ {l1 : Level} (Sig : signature l1) where
     is-set (type-Model M)
   is-set-type-Model M = pr2 (set-Model M)
 ```
-

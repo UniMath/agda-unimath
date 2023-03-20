@@ -22,8 +22,8 @@ open import universal-algebra.signatures
 
 ## Idea
 
-An algebra homomorphism from one algebra to another is function between their underlying
-types such that all the structure is preserved.
+An algebra homomorphism from one algebra to another is function between their
+underlying types such that all the structure is preserved.
 
 ## Definitions
 

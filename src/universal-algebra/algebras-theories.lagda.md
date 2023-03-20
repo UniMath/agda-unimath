@@ -98,4 +98,3 @@ module _
         ( is-prop-Π
           ( λ assign → is-set-type-Model Sig M _ _)))
 ```
-

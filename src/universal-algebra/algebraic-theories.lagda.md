@@ -40,4 +40,3 @@ module _ {l1 : Level} (Sig : signature l1) where
     Abstract-Equation Sig
   index-Abstract-Equation-Theory Th e = pr2 Th e
 ```
-
