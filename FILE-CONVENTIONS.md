@@ -64,9 +64,9 @@ the defined concept.
 
 Use `###` headings for subsections within the main sections. If a code block
 following a heading is very long, you can use `####` headings to subdivide the
-subsections further. The subsection headings should concisely describe the
-content of the block of code that follows. Do not be afraid of writing text
-inside a section however.
+subsections further. Ensure that subsection headings concisely describe the
+content of the following code block. However, don't hesitate to include
+explanatory text within a section when necessary.
 
 ### See also and references
 
