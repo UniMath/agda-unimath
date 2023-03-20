@@ -47,7 +47,7 @@
      `[the univalence axiom](foundation.univalence.md)`, which will be displayed
      as [the univalence axiom](foundation.univalence.md).
    - You can reference another module by module name using
-     `` [`foundation.univalence`](foundation.univalence.md) ``, which will be
+     ``[`foundation.univalence`](foundation.univalence.md)``, which will be
      displayed as [`foundation.univalence`](foundation.univalence.md).
    - If you just want to add a clickable link, use the pattern
      `<https://unimath.github.io/agda-unimath/>`. This will be displayed as
