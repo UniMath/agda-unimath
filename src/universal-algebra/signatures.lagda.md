@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A signature is a collection of function symbols with a given arity.
+A signature is a collection of function symbols with given arities.
 
 ## Definitions
 
@@ -30,14 +30,14 @@ A signature is a collection of function symbols with a given arity.
 signature : (l : Level) → UU (lsuc l)
 signature (l) = Σ (UU l) (λ operations → (operations → ℕ))
 
-operations-signature : {l : Level} → signature l → UU l
-operations-signature Sig = pr1 Sig
+operation-signature : {l : Level} → signature l → UU l
+operation-signature Sg = pr1 Sg
 
-arity-operations-signature :
+arity-operation-signature :
   { l : Level} →
-  ( Sig : signature l) →
-  ( operations-signature Sig → ℕ)
-arity-operations-signature Sig = pr2 Sig
+  ( Sg : signature l) →
+  ( operation-signature Sg → ℕ)
+arity-operation-signature Sg = pr2 Sg
 ```
 
 ### Extension of signatures
@@ -46,37 +46,37 @@ arity-operations-signature Sig = pr2 Sig
 is-extension-signature :
   { l1 l2 : Level} →
   signature l1 → signature l2 → UU (l1 ⊔ l2)
-is-extension-signature Sig1 Sig2 =
-  Σ ( operations-signature Sig2 → operations-signature Sig1)
+is-extension-signature Sg1 Sg2 =
+  Σ ( operation-signature Sg2 → operation-signature Sg1)
     ( λ f → is-emb f ×
-      ( ( op : operations-signature Sig2) →
-        arity-operations-signature Sig2 op ＝
-          arity-operations-signature Sig1 (f op)))
+      ( ( op : operation-signature Sg2) →
+        arity-operation-signature Sg2 op ＝
+          arity-operation-signature Sg1 (f op)))
 
 emb-extension-signature :
   { l1 l2 : Level} →
-  ( Sig1 : signature l1) →
-  ( Sig2 : signature l2) →
-  is-extension-signature Sig1 Sig2 →
-  ( operations-signature Sig2 → operations-signature Sig1)
-emb-extension-signature Sig1 Sig2 ext = pr1 ext
+  ( Sg1 : signature l1) →
+  ( Sg2 : signature l2) →
+  is-extension-signature Sg1 Sg2 →
+  ( operation-signature Sg2 → operation-signature Sg1)
+emb-extension-signature Sg1 Sg2 ext = pr1 ext
 
 is-emb-extension-signature :
   { l1 l2 : Level} →
-  ( Sig1 : signature l1) →
-  ( Sig2 : signature l2) →
-  ( ext : is-extension-signature Sig1 Sig2) →
-  is-emb (emb-extension-signature Sig1 Sig2 ext)
-is-emb-extension-signature Sig1 Sig2 ext = pr1 (pr2 ext)
+  ( Sg1 : signature l1) →
+  ( Sg2 : signature l2) →
+  ( ext : is-extension-signature Sg1 Sg2) →
+  is-emb (emb-extension-signature Sg1 Sg2 ext)
+is-emb-extension-signature Sg1 Sg2 ext = pr1 (pr2 ext)
 
 arity-preserved-extension-signature :
   { l1 l2 : Level} →
-  ( Sig1 : signature l1) →
-  ( Sig2 : signature l2) →
-  ( ext : is-extension-signature Sig1 Sig2) →
-  ( op : operations-signature Sig2) →
-  arity-operations-signature Sig2 op ＝
-    arity-operations-signature Sig1
-      ( emb-extension-signature Sig1 Sig2 ext op)
-arity-preserved-extension-signature Sig1 Sig2 ext = pr2 (pr2 ext)
+  ( Sg1 : signature l1) →
+  ( Sg2 : signature l2) →
+  ( ext : is-extension-signature Sg1 Sg2) →
+  ( op : operation-signature Sg2) →
+  arity-operation-signature Sg2 op ＝
+    arity-operation-signature Sg1
+      ( emb-extension-signature Sg1 Sg2 ext op)
+arity-preserved-extension-signature Sg1 Sg2 ext = pr2 (pr2 ext)
 ```

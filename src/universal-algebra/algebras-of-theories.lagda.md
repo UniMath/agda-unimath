@@ -1,7 +1,7 @@
 # Algebras
 
 ```agda
-module universal-algebra.algebras-theories where
+module universal-algebra.algebras-of-theories where
 ```
 
 <details><summary>Imports</summary>
@@ -13,11 +13,11 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import universal-algebra.abstract-equations
+open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
-open import universal-algebra.models-signatures
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
-open import universal-algebra.terms-signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>
@@ -33,30 +33,30 @@ equations.
 
 ```agda
 module _
-  { l1 : Level} ( Sig : signature l1)
-  { l2 : Level } ( Th : Theory Sig l2)
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level } ( Th : Theory Sg l2)
   where
 
   is-algebra :
     { l3 : Level} →
-    ( X : Model Sig l3) → UU (l2 ⊔ l3)
+    ( X : Model-Signature Sg l3) → UU (l2 ⊔ l3)
   is-algebra M =
-    ( e : index-Theory Sig Th) →
-    ( assign : assignment Sig (type-Model Sig M)) →
-    eval-term Sig (is-model-set-Model Sig M) assign
-      ( lhs-Abstract-Equation Sig (index-Abstract-Equation-Theory Sig Th e)) ＝
-      eval-term Sig (is-model-set-Model Sig M) assign
-        ( rhs-Abstract-Equation Sig (index-Abstract-Equation-Theory Sig Th e))
+    ( e : index-Theory Sg Th) →
+    ( assign : assignment Sg (type-Model-Signature Sg M)) →
+    eval-term Sg (is-model-set-Model-Signature Sg M) assign
+      ( lhs-Abstract-Equation Sg (index-Abstract-Equation-Theory Sg Th e)) ＝
+      eval-term Sg (is-model-set-Model-Signature Sg M) assign
+        ( rhs-Abstract-Equation Sg (index-Abstract-Equation-Theory Sg Th e))
 
   Algebra :
     ( l3 : Level) →
     UU (l1 ⊔ l2 ⊔ lsuc l3)
   Algebra l3 =
-    Σ ( Model Sig l3) (is-algebra)
+    Σ ( Model-Signature Sg l3) (is-algebra)
 
   model-Algebra :
     { l3 : Level} →
-    Algebra l3 → Model Sig l3
+    Algebra l3 → Model-Signature Sg l3
   model-Algebra Alg = pr1 Alg
 
   set-Algebra :
@@ -67,7 +67,7 @@ module _
   is-model-set-Algebra :
     { l3 : Level} →
     ( Alg : Algebra l3) →
-    is-model-Set Sig (set-Algebra Alg)
+    is-model-signature Sg (set-Algebra Alg)
   is-model-set-Algebra Alg = pr2 (pr1 Alg)
 
   type-Algebra :
@@ -75,6 +75,11 @@ module _
     Algebra l3 → UU l3
   type-Algebra Alg =
     pr1 (pr1 (pr1 Alg))
+
+  is-set-Algebra :
+    { l3 : Level} →
+    (Alg : Algebra l3) → is-set (type-Algebra Alg)
+  is-set-Algebra Alg = pr2 (pr1 (pr1 Alg))
 
   is-algebra-Algebra :
     { l3 : Level} →
@@ -90,11 +95,11 @@ module _
 ```agda
   is-prop-is-algebra :
     { l3 : Level} →
-    ( X : Model Sig l3) →
+    ( X : Model-Signature Sg l3) →
     is-prop (is-algebra X)
   is-prop-is-algebra M =
     is-prop-Π
       ( λ e →
         ( is-prop-Π
-          ( λ assign → is-set-type-Model Sig M _ _)))
+          ( λ assign → is-set-type-Model-Signature Sg M _ _)))
 ```

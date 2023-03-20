@@ -10,7 +10,7 @@ module universal-algebra.algebraic-theories where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import universal-algebra.abstract-equations
+open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.signatures
 ```
 
@@ -18,17 +18,20 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A theory is a family of abstract equations that should hold.
+A theory is a collection of abstract equations over a signature `S` that we
+consider to 'hold' in the theory. It is algebraic in the sense that we only
+require equations involving function symbols from the signature, in contrast to,
+say, requiring additional types of relations.
 
 ## Definitions
 
 ### Theories
 
 ```agda
-module _ {l1 : Level} (Sig : signature l1) where
+module _ {l1 : Level} (Sg : signature l1) where
 
   Theory : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation Sig))
+  Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation Sg))
 
   index-Theory : {l2 : Level} → Theory l2 → UU l2
   index-Theory = pr1
@@ -37,6 +40,6 @@ module _ {l1 : Level} (Sig : signature l1) where
     { l2 : Level}
     ( Th : Theory l2) →
     ( index-Theory Th) →
-    Abstract-Equation Sig
+    Abstract-Equation Sg
   index-Abstract-Equation-Theory Th e = pr2 Th e
 ```

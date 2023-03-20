@@ -22,9 +22,9 @@ open import group-theory.groups
 open import linear-algebra.vectors
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-theories
+open import universal-algebra.algebras-of-theories
 open import universal-algebra.signatures
-open import universal-algebra.terms-signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>

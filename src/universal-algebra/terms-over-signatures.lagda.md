@@ -1,7 +1,7 @@
-# Terms
+# Terms over signatures
 
 ```agda
-module universal-algebra.terms-signatures where
+module universal-algebra.terms-over-signatures where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
-open import universal-algebra.models-signatures
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
 
@@ -33,11 +33,11 @@ formalization, we are using de Bruijn variables.
 ### Terms
 
 ```agda
-module _ {l1 : Level} (Sig : signature l1) where
+module _ {l1 : Level} (Sg : signature l1) where
 
   data Term : UU l1 where
     var-Term : ℕ → Term
-    op-Term : is-model Sig Term
+    op-Term : is-model Sg Term
 ```
 
 ### Assignment of variables
@@ -58,11 +58,11 @@ evaluated to a concrete element of the type `A`.
 ```agda
   eval-term :
     {l2 : Level} → {A : UU l2} →
-    is-model Sig A → assignment A → Term → A
+    is-model Sg A → assignment A → Term → A
 
   eval-vec :
     { l2 : Level} → {A : UU l2} {n : ℕ} →
-    is-model Sig A → assignment A → vec Term n → vec A n
+    is-model Sg A → assignment A → vec Term n → vec A n
 
   eval-term m assign (var-Term n) = assign n
   eval-term m assign (op-Term f x) = m f (eval-vec m assign x)
@@ -77,28 +77,28 @@ evaluated to a concrete element of the type `A`.
 ```agda
 translation-term :
   { l1 l2 : Level} →
-  ( Sig1 : signature l1) →
-  ( Sig2 : signature l2) →
-  is-extension-signature Sig1 Sig2 →
-  Term Sig2 → Term Sig1
+  ( Sg1 : signature l1) →
+  ( Sg2 : signature l2) →
+  is-extension-signature Sg1 Sg2 →
+  Term Sg2 → Term Sg1
 
 translation-vec :
   { l1 l2 : Level} →
-  ( Sig1 : signature l1) →
-  ( Sig2 : signature l2) →
+  ( Sg1 : signature l1) →
+  ( Sg2 : signature l2) →
   { n : ℕ} →
-  is-extension-signature Sig1 Sig2 →
-  vec (Term Sig2) n → vec (Term Sig1) n
+  is-extension-signature Sg1 Sg2 →
+  vec (Term Sg2) n → vec (Term Sg1) n
 
-translation-term Sig1 Sig2 ext (var-Term x) = var-Term x
-translation-term Sig1 Sig2 ext (op-Term f v) =
-  op-Term (emb-extension-signature Sig1 Sig2 ext f)
-    ( tr (vec (Term Sig1))
-      ( arity-preserved-extension-signature Sig1 Sig2 ext f)
-      ( translation-vec Sig1 Sig2 ext v))
+translation-term Sg1 Sg2 ext (var-Term x) = var-Term x
+translation-term Sg1 Sg2 ext (op-Term f v) =
+  op-Term (emb-extension-signature Sg1 Sg2 ext f)
+    ( tr (vec (Term Sg1))
+      ( arity-preserved-extension-signature Sg1 Sg2 ext f)
+      ( translation-vec Sg1 Sg2 ext v))
 
-translation-vec Sig1 Sig2 ext empty-vec = empty-vec
-translation-vec Sig1 Sig2 ext (x ∷ v) =
-  ( translation-term Sig1 Sig2 ext x) ∷
-    ( translation-vec Sig1 Sig2 ext v)
+translation-vec Sg1 Sg2 ext empty-vec = empty-vec
+translation-vec Sg1 Sg2 ext (x ∷ v) =
+  ( translation-term Sg1 Sg2 ext x) ∷
+    ( translation-vec Sg1 Sg2 ext v)
 ```

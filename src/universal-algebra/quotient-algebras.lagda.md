@@ -14,17 +14,23 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-theories
-open import universal-algebra.models-signatures
+open import universal-algebra.algebras-of-theories
+open import universal-algebra.congruences
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
 
@@ -33,20 +39,22 @@ open import universal-algebra.signatures
 ## Idea
 
 The quotient of an algebra by a congruence is the set quotient by that
-congruence. The operations are inherited by the original algebra.
+congruence. This quotient again has the structure of an algebra inherited by the
+original one.
 
 ## Definitions
 
 ```agda
 module _
-  { l1 : Level} ( Sig : signature l1)
-  { l2 : Level } ( Th : Theory Sig l2)
-  { l3 : Level } ( Alg : Algebra Sig Th l3)
-  { l4 : Level } ( R : Eq-Rel l4 (type-Algebra Sig Th Alg))
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level } ( Th : Theory Sg l2)
+  { l3 : Level } ( Alg : Algebra Sg Th l3)
+  { l4 : Level } ( R : congruence-Algebra Sg Th Alg l4)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
-  set-quotient-Algebra = quotient-Set R
+  set-quotient-Algebra =
+    quotient-Set ( eq-rel-congruence-Algebra Sg Th Alg R)
 
   type-quotient-Algebra : UU (l3 ⊔ l4)
   type-quotient-Algebra = pr1 set-quotient-Algebra
@@ -55,23 +63,31 @@ module _
   is-set-set-quotient-Algebra = pr2 set-quotient-Algebra
 
   compute-quotient-Algebra :
-    equivalence-class R ≃ type-quotient-Algebra
-  compute-quotient-Algebra = compute-set-quotient R
+    equivalence-class
+      ( eq-rel-congruence-Algebra Sg Th Alg R) ≃
+      ( type-quotient-Algebra)
+  compute-quotient-Algebra =
+    compute-set-quotient
+      ( eq-rel-congruence-Algebra Sg Th Alg R)
 
   set-quotient-equivalence-class-Algebra :
-    equivalence-class R → type-quotient-Algebra
+    equivalence-class
+      ( eq-rel-congruence-Algebra Sg Th Alg R) →
+    type-quotient-Algebra
   set-quotient-equivalence-class-Algebra =
     map-equiv compute-quotient-Algebra
 
   equivalence-class-set-quotient-Algebra :
-    type-quotient-Algebra → equivalence-class R
+    type-quotient-Algebra →
+    equivalence-class
+      ( eq-rel-congruence-Algebra Sg Th Alg R)
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
   vec-type-quotient-vec-type-Algebra :
     { n : ℕ} →
     vec type-quotient-Algebra n →
-    type-trunc-Prop (vec (type-Algebra Sig Th Alg) n)
+    type-trunc-Prop (vec (type-Algebra Sg Th Alg) n)
   vec-type-quotient-vec-type-Algebra empty-vec = unit-trunc-Prop empty-vec
   vec-type-quotient-vec-type-Algebra (x ∷ v) =
     map-universal-property-trunc-Prop
