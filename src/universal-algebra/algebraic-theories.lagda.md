@@ -18,10 +18,10 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A theory is a collection of abstract equations over a signature `S` that we
-consider to 'hold' in the theory. It is algebraic in the sense that we only
-require equations involving function symbols from the signature, in contrast to,
-say, requiring additional types of relations.
+An algebraic theory is a collection of abstract equations over a signature `S`
+that we consider to 'hold' in the theory. It is algebraic in the sense that we
+only require equations involving function symbols from the signature, in
+contrast to, say, requiring additional types of relations.
 
 ## Definitions
 

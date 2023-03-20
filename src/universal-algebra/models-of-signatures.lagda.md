@@ -1,4 +1,4 @@
-# Models
+# Models of signatures
 
 ```agda
 module universal-algebra.models-of-signatures where

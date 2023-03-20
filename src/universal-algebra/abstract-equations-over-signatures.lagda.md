@@ -20,8 +20,8 @@ open import universal-algebra.terms-over-signatures
 ## Idea
 
 An **abstract equation** over a signature `Sg` is a statement of a form "`x`
-equals `y`", where `x` and `y` are terms over `S`. Thus, the data of an abstract
-equation is simply two terms over a common signature.
+equals `y`", where `x` and `y` are terms over `Sg`. Thus, the data of an
+abstract equation is simply two terms over a common signature.
 
 ## Definitions
 

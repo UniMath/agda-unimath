@@ -1,7 +1,7 @@
 # Homomorphisms of algebras
 
 ```agda
-module universal-algebra.homomorphisms-algebras where
+module universal-algebra.homomorphisms-of-algebras where
 ```
 
 <details><summary>Imports</summary>

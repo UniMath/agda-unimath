@@ -25,7 +25,7 @@ open import universal-algebra.terms-over-signatures
 ## Idea
 
 Given a theory, an algebra is a model on a set such that it satisfies all
-equations.
+equations in the theory.
 
 ## Definitions
 
