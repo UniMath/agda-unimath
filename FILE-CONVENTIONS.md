@@ -16,7 +16,7 @@
    # The title of the file
    ```
 
-5. Immediately after the header, there should be an Agda block code beginning
+5. Immediately after the title, there should be an Agda block code beginning
    with: `<details><summary>Imports</summary>` and ending with: `</details>`.
    The Agda block should include the module declaration and all module imports.
    In particular, there should be no further imports later on in the file. The
@@ -47,7 +47,7 @@
      `[the univalence axiom](foundation.univalence.md)`, which will be displayed
      as [the univalence axiom](foundation.univalence.md).
    - You can reference another module by module name using
-     ``[`foundation.univalence`](foundation.univalence.md)``, which will be
+     `` [`foundation.univalence`](foundation.univalence.md) ``, which will be
      displayed as [`foundation.univalence`](foundation.univalence.md).
    - If you just want to add a clickable link, use the pattern
      `<https://unimath.github.io/agda-unimath/>`. This will be displayed as
@@ -60,6 +60,6 @@
 A good reference file for the expected structure of a file is
 [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
 
-Please note that some conventions above are checks enforced by our pre-commit
-hooks, read more about them in
-[HOWTO-INSTALL.md](HOWTO-INSTALL.md#pre-commit-hooks).
+Please note that some of the conventions above are enforced by our `pre-commit`
+hooks. You can read more about them in our
+[installation guide](HOWTO-INSTALL.md#pre-commit-hooks).
