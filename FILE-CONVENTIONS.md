@@ -60,7 +60,7 @@ proceeds to give the main definition that is the focus of the file, then the
 third section proceeds possibly with examples or by deriving basic properties of
 the defined concept.
 
-### Subsections
+#### Subsections
 
 Use `###` headings for subsections within the main sections. If a code block
 following a heading is very long, you can use `####` headings to subdivide the

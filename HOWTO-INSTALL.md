@@ -15,8 +15,7 @@ Get a copy of our library on your machine with `git` using
 git clone git@github.com:UniMath/agda-unimath.git
 ```
 
-or by going to the
-[`agda-unimath` GitHub page](https://github.com/UniMath/agda-unimath) and
+or by going to the [GitHub page](https://github.com/UniMath/agda-unimath) and
 manually downloading it.
 
 ## Installing Agda
