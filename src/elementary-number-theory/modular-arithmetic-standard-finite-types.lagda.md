@@ -1052,10 +1052,4 @@ div-ℕ-decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → decidable-Prop lze
 pr1 (div-ℕ-decidable-Prop d x H) = div-ℕ d x
 pr1 (pr2 (div-ℕ-decidable-Prop d x H)) = is-prop-div-ℕ d x H
 pr2 (pr2 (div-ℕ-decidable-Prop d x H)) = is-decidable-div-ℕ d x
-
-is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
-is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
-
-is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
-is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 ```

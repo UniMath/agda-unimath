@@ -7,9 +7,13 @@ module commutative-algebra.binomial-theorem-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.binomial-theorem-commutative-semirings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.sums-commutative-rings
 
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -123,7 +127,7 @@ binomial-theorem-Commutative-Ring :
     ( λ i →
       mul-Commutative-Ring R
       ( power-Commutative-Ring R (nat-Fin (succ-ℕ n) i) x)
-      ( power-Commutative-Ring R (dist-ℕ n (nat-Fin (succ-ℕ n) i)) y))
+      ( power-Commutative-Ring R (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-Commutative-Ring R n x y =
   binomial-theorem-Ring
     ( ring-Commutative-Ring R)
@@ -131,4 +135,42 @@ binomial-theorem-Commutative-Ring R n x y =
     ( x)
     ( y)
     ( commutative-mul-Commutative-Ring R x y)
+```
+
+## Corollaries
+
+### Computing `(x+y)ⁿ⁺ᵐ` as a linear combination of `xⁿ` and `yᵐ`
+
+```agda
+is-linear-combination-power-add-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l) (n m : ℕ)
+  (x y : type-Commutative-Ring R) →
+  power-Commutative-Ring R (add-ℕ n m) (add-Commutative-Ring R x y) ＝
+  add-Commutative-Ring R
+    ( mul-Commutative-Ring R
+      ( power-Commutative-Ring R m y)
+      ( sum-Commutative-Ring R n
+        ( λ i →
+          mul-nat-scalar-Commutative-Ring R
+            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+            ( mul-Commutative-Ring R
+              ( power-Commutative-Ring R (nat-Fin n i) x)
+              ( power-Commutative-Ring R (dist-ℕ (nat-Fin n i) n) y)))))
+    ( mul-Commutative-Ring R
+      ( power-Commutative-Ring R n x)
+      ( sum-Commutative-Ring R
+        ( succ-ℕ m)
+        ( λ i →
+          mul-nat-scalar-Commutative-Ring R
+            ( binomial-coefficient-ℕ
+              ( add-ℕ n m)
+              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+            ( mul-Commutative-Ring R
+              ( power-Commutative-Ring R (nat-Fin (succ-ℕ m) i) x)
+              ( power-Commutative-Ring R
+                ( dist-ℕ (nat-Fin (succ-ℕ m) i) m)
+                ( y))))))
+is-linear-combination-power-add-Commutative-Ring R =
+  is-linear-combination-power-add-Commutative-Semiring
+    ( commutative-semiring-Commutative-Ring R)
 ```

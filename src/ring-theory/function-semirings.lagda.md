@@ -8,8 +8,6 @@ module ring-theory.function-semirings where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -18,7 +16,6 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 
 open import ring-theory.dependent-products-semirings
-open import ring-theory.rings
 open import ring-theory.semirings
 ```
 

@@ -1,15 +1,15 @@
 # INSTALL
 
 To use the `agda-unimath` library, you will need to have Agda and a code editor
-installed. This guide provides instructions for installing Agda as well as
-specific setup instructions for the editors Emacs and Visual Studio Code. By
-following theese step-by-step directions, you will create a tailored working
-environment for using the library. Additionally, we provide instructions for
-setting up your environment for making contributions to the library.
+set up. This guide provides instructions for installing Agda as well as specific
+setup instructions for the editors Emacs and Visual Studio Code. By following
+theese step-by-step directions, you will create a tailored working environment
+for using the library. Additionally, we provide instructions for setting up your
+environment for making contributions to the library.
 
 ## Getting a copy of the library
 
-Get a copy of our library on your machine with git using
+Get a copy of our library on your machine with `git` using
 
 ```shell
 git clone git@github.com:UniMath/agda-unimath.git
@@ -166,19 +166,19 @@ These snippets are defined in `.vscode/agda.code-snippets`.
 
 #### Autoformatting
 
-For your convenience, the VSCode workspace configuration includes several
-automatic formatting functions. These functions continuously correct minor
-formatting mistakes, ensuring a smoother coding experience.
+For your convenience, the VSCode workspace configures several automatic
+formatting functions. These functions continuously correct minor formatting
+mistakes, ensuring a smoother coding experience.
 
 ### Note on the library's use of Unicode characters
 
-This library makes extensive use of Unicode characters. It is therefore
-important to use a font family with wide support for them in your editor. For
-example, we make use of the
-[middle dot](https://www.compart.com/en/unicode/U+00B7) symbol `·`, as well as
-the [bullet operator](https://www.compart.com/en/unicode/U+2219) symbol `∙`,
-which in some fonts are indistinguishable. If these two symbols look the same in
-your editor, we suggest that you change your font.
+This library relies heavily on Unicode characters, so it's important to use a
+font family with comprehensive Unicode support in your editor. For instance, the
+library utilizes the [middle dot](https://www.compart.com/en/unicode/U+00B7)
+symbol `·` and the [bullet operator](https://www.compart.com/en/unicode/U+2219)
+symbol `∙`. In some fonts, these two symbols appear identical. If you find it
+difficult to distinguish between these symbols in your editor, we recommend
+switching to a different font.
 
 ## After the setup
 
@@ -199,20 +199,33 @@ in contributing to the `agda-unimath` library, please follow our guidelines and
 best practices, as well as the instructions below to ensure a smooth setup and
 workflow.
 
-#### Pre-commit hooks and Python dependencies
+#### Pre-commit hooks and Python dependencies {#pre-commit-hooks}
 
 The `agda-unimath` library includes pre-commit hooks that enforce basic
-formatting rules. To utilize these hooks, you'll need to install the
-`pre-commit` tool and the hooks' Python dependencies. The easiest way to
-accomplish this is by using the Python package manager `pip` and running the
-following command:
+formatting rules. To utilize these hooks, if you did not install your
+environment using Nix, you'll need to install the `pre-commit` tool and the
+hooks' Python dependencies. The easiest way to accomplish this is by using the
+Python package manager `pip` and running the following command:
 
 ```shell
-python3 -pip install -r scripts/requirements.txt
+pip install -r scripts/requirements.txt
 ```
 
-Now, before you submit a PR next time, make sure to stage your changes and run
-`make pre-commit` from the repository's main folder.
+Now, before you submit a Pull Request (PR) next time, you can run `pre-commit`
+by staging your changes and run the command `make pre-commit` from the
+repository's main folder.
 
-Keep in mind that `pre-commit` is also a part of the CI, so any PR that violates
-the enforced conventions will be automatically blocked.
+To have `pre-commit` run automatically before every commit, run the following
+command:
+
+```shell
+pre-commit install
+```
+
+After this, `pre-commit` will inform you of any rule violations in your
+subsequent commits. For most violations, it will also automatically apply the
+required changes. In such cases, simply stage the new changes and commit again.
+
+Keep in mind that `pre-commit` is also a part of the Continuous Integration
+(CI), so any PR that violates the enforced conventions will be automatically
+blocked.

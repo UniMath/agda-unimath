@@ -36,5 +36,6 @@
     "editor.defaultFormatter": "ms-python.python",
     "editor.formatOnType": true,
     "editor.formatOnSave": true
-  }
+  },
+  "files.insertFinalNewline": true
 }

@@ -13,7 +13,10 @@
         let
           pkgs = nixpkgs.legacyPackages."${system}";
           agda = pkgs.agda;
-          python = pkgs.python3.withPackages (p: with p; [ requests ]);
+          python = pkgs.python3.withPackages (p: with p; [
+            # Keep in sync with scripts/requirements.txt
+            requests
+          ]);
         in
         {
           devShells.default = pkgs.mkShell {
@@ -24,12 +27,15 @@
               agda
               # part of `make check`
               pkgs.time
-              # update-contributors.py
+              # maintanance scripts
               python
               # working on the website
               pkgs.mdbook
-	      pkgs.mdbook-katex
-	      # mdbook-toc is not included here and hence must be installed manually
+              pkgs.mdbook-katex
+              pkgs.mdbook-pagetoc
+              pkgs.mdbook-linkcheck
+              # pre-commit checks
+              pkgs.pre-commit
             ];
           };
 

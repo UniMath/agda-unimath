@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -259,6 +260,20 @@ module _
   commutative-semiring-Commutative-Ring : Commutative-Semiring l
   pr1 commutative-semiring-Commutative-Ring = semiring-Commutative-Ring
   pr2 commutative-semiring-Commutative-Ring = commutative-mul-Commutative-Ring
+
+  interchange-mul-mul-Commutative-Ring :
+    (x y z w : type-Commutative-Ring) →
+    mul-Commutative-Ring
+      ( mul-Commutative-Ring x y)
+      ( mul-Commutative-Ring z w) ＝
+    mul-Commutative-Ring
+      ( mul-Commutative-Ring x z)
+      ( mul-Commutative-Ring y w)
+  interchange-mul-mul-Commutative-Ring =
+    interchange-law-commutative-and-associative
+      mul-Commutative-Ring
+      commutative-mul-Commutative-Ring
+      associative-mul-Commutative-Ring
 ```
 
 ### Scalar multiplication of elements of a commutative ring by natural numbers
@@ -276,6 +291,19 @@ module _
     mul-nat-scalar-Commutative-Ring n y
   ap-mul-nat-scalar-Commutative-Ring =
     ap-mul-nat-scalar-Ring ring-Commutative-Ring
+
+  left-zero-law-mul-nat-scalar-Commutative-Ring :
+    (x : type-Commutative-Ring) →
+    mul-nat-scalar-Commutative-Ring 0 x ＝ zero-Commutative-Ring
+  left-zero-law-mul-nat-scalar-Commutative-Ring =
+    left-zero-law-mul-nat-scalar-Ring ring-Commutative-Ring
+
+  right-zero-law-mul-nat-scalar-Commutative-Ring :
+    (n : ℕ) →
+    mul-nat-scalar-Commutative-Ring n zero-Commutative-Ring ＝
+    zero-Commutative-Ring
+  right-zero-law-mul-nat-scalar-Commutative-Ring =
+    right-zero-law-mul-nat-scalar-Ring ring-Commutative-Ring
 
   left-unit-law-mul-nat-scalar-Commutative-Ring :
     (x : type-Commutative-Ring) →
@@ -314,4 +342,21 @@ module _
       ( mul-nat-scalar-Commutative-Ring n x)
   right-distributive-mul-nat-scalar-add-Commutative-Ring =
     right-distributive-mul-nat-scalar-add-Ring ring-Commutative-Ring
+```
+
+### Computing multiplication with minus one in a ring
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  neg-one-Commutative-Ring : type-Commutative-Ring R
+  neg-one-Commutative-Ring = neg-one-Ring (ring-Commutative-Ring R)
+
+  mul-neg-one-Commutative-Ring :
+    (x : type-Commutative-Ring R) →
+    mul-Commutative-Ring R neg-one-Commutative-Ring x ＝
+    neg-Commutative-Ring R x
+  mul-neg-one-Commutative-Ring = mul-neg-one-Ring (ring-Commutative-Ring R)
 ```
