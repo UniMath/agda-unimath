@@ -66,11 +66,6 @@ module _
   revert-vec : {n : ℕ} → vec A n → vec A n
   revert-vec empty-vec = empty-vec
   revert-vec (x ∷ v) = snoc-vec (revert-vec v) x
-
-  map-vec :
-    {l' : Level} {B : UU l'} {n : ℕ} → (A → B) → vec A n → vec B n
-  map-vec f empty-vec = empty-vec
-  map-vec f (x ∷ v) = f x ∷ map-vec f v
 ```
 
 ### The functional type of vectors
@@ -108,11 +103,6 @@ module _
   revert-functional-vec :
     (n : ℕ) → functional-vec A n → functional-vec A n
   revert-functional-vec n v i = v (opposite-Fin n i)
-
-  map-functional-vec :
-    {l' : Level} {B : UU l'} (n : ℕ) → (A → B) →
-    functional-vec A n → functional-vec B n
-  map-functional-vec n f v i = f (v i)
 ```
 
 ## Properties
