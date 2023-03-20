@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 
 open import universal-algebra.algebraic-theories
