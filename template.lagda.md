@@ -1,7 +1,6 @@
-# Template
+# File title
 
 ```agda
-{-# OPTIONS --safe #-}
 module template where
 ```
 
@@ -15,14 +14,14 @@ open import ...
 
 ## Idea
 
-A **concept** is a sort of _insert abstract idea of concept_, and is defined as
-_insert definition using words_.
+A **concept** $C$ is a sort of _insert abstract idea of concept_, and is defined
+as _insert definition using words_.
 
-## Definitions
+## Definition
 
 ```agda
-concept : some-type
-concept = definition
+concept : ...
+concept = ...
 ```
 
 ## Properties
@@ -30,13 +29,23 @@ concept = definition
 ### Concept satisfies specific property
 
 ```agda
-has-specific-property-concept : some-type
-has-specific-property-concept = proof
+has-specific-property-concept : ...
+has-specific-property-concept = ...
+```
+
+## Examples
+
+### A subconcept is a concept
+
+```agda
+concept-subconcept : ...
+concept-subconcept = ...
 ```
 
 ## See also
 
-- Related module [`other-template`](template.md)
+- An instructive example of a file with the expected structure is
+  [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
 
 ## References
 
