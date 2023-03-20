@@ -11,6 +11,7 @@ open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 open import commutative-algebra.sums-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
@@ -63,11 +64,11 @@ contains-zero-nilradical-Commutative-Ring R = intro-∃ 1 refl
 ### The nilradical is closed under addition
 
 ```agda
-is-closed-under-add-nilradical-Commutative-Ring :
+is-closed-under-addition-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l) →
-  is-closed-under-add-subset-Commutative-Ring R
+  is-closed-under-addition-subset-Commutative-Ring R
     ( subset-nilradical-Commutative-Ring R)
-is-closed-under-add-nilradical-Commutative-Ring R x y =
+is-closed-under-addition-nilradical-Commutative-Ring R x y =
   is-nilpotent-add-Ring
     ( ring-Commutative-Ring R)
     ( x)
@@ -78,11 +79,11 @@ is-closed-under-add-nilradical-Commutative-Ring R x y =
 ### The nilradical is closed under negatives
 
 ```agda
-is-closed-under-neg-nilradical-Commutative-Ring :
+is-closed-under-negatives-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l) →
-  is-closed-under-neg-subset-Commutative-Ring R
+  is-closed-under-negatives-subset-Commutative-Ring R
     ( subset-nilradical-Commutative-Ring R)
-is-closed-under-neg-nilradical-Commutative-Ring R x =
+is-closed-under-negatives-nilradical-Commutative-Ring R x =
   is-nilpotent-element-neg-Ring (ring-Commutative-Ring R) x
 ```
 
@@ -93,20 +94,20 @@ module _
   {l : Level} (R : Commutative-Ring l)
   where
 
-  is-closed-under-mul-right-nilradical-Commutative-Ring :
-    is-closed-under-mul-right-subset-Commutative-Ring R
+  is-closed-under-right-multiplication-nilradical-Commutative-Ring :
+    is-closed-under-right-multiplication-subset-Commutative-Ring R
       ( subset-nilradical-Commutative-Ring R)
-  is-closed-under-mul-right-nilradical-Commutative-Ring x y =
+  is-closed-under-right-multiplication-nilradical-Commutative-Ring x y =
     is-nilpotent-element-mul-Ring
       ( ring-Commutative-Ring R)
       ( x)
       ( y)
       ( commutative-mul-Commutative-Ring R x y)
 
-  is-closed-under-mul-left-nilradical-Commutative-Ring :
-    is-closed-under-mul-left-subset-Commutative-Ring R
+  is-closed-under-left-multiplication-nilradical-Commutative-Ring :
+    is-closed-under-left-multiplication-subset-Commutative-Ring R
       ( subset-nilradical-Commutative-Ring R)
-  is-closed-under-mul-left-nilradical-Commutative-Ring x y =
+  is-closed-under-left-multiplication-nilradical-Commutative-Ring x y =
     is-nilpotent-element-mul-Ring'
       ( ring-Commutative-Ring R)
       ( y)
@@ -123,7 +124,7 @@ nilradical-Commutative-Ring R =
   ideal-right-ideal-Commutative-Ring R
     ( subset-nilradical-Commutative-Ring R)
     ( contains-zero-nilradical-Commutative-Ring R)
-    ( is-closed-under-add-nilradical-Commutative-Ring R)
-    ( is-closed-under-neg-nilradical-Commutative-Ring R)
-    ( is-closed-under-mul-right-nilradical-Commutative-Ring R)
+    ( is-closed-under-addition-nilradical-Commutative-Ring R)
+    ( is-closed-under-negatives-nilradical-Commutative-Ring R)
+    ( is-closed-under-right-multiplication-nilradical-Commutative-Ring R)
 ```

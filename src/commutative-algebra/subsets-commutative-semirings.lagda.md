@@ -54,6 +54,14 @@ module _
   inclusion-subset-Commutative-Semiring =
     inclusion-subset-Semiring (semiring-Commutative-Semiring R) S
 
+  ap-inclusion-subset-Commutative-Semiring :
+    (x y : type-subset-Commutative-Semiring) →
+    x ＝ y →
+    ( inclusion-subset-Commutative-Semiring x ＝
+      inclusion-subset-Commutative-Semiring y)
+  ap-inclusion-subset-Commutative-Semiring =
+    ap-inclusion-subset-Semiring (semiring-Commutative-Semiring R) S
+
   is-in-subset-Commutative-Semiring : type-Commutative-Semiring R → UU l2
   is-in-subset-Commutative-Semiring = is-in-subtype S
 

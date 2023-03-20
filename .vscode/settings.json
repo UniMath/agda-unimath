@@ -1,9 +1,41 @@
 {
-  "editor.rulers": [80],
-  "editor.snippetSuggestions": "top",
-  "javascript.suggest.names": false,
-  "editor.wordBasedSuggestions": false,
+  "breadcrumbs.enabled": false,
   "editor.quickSuggestions": {
     "other": "inline"
   },
+  "editor.snippetSuggestions": "top",
+  "editor.wordBasedSuggestions": false,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "javascript.suggest.names": false,
+  "[agda]": {
+    "editor.tabSize": 2,
+    "editor.rulers": [80],
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+  },
+  "[json][jsonc]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "gitlens.codeLens.scopes": ["document"],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+  },
+  "[markdown]": {
+    "editor.tabSize": 2,
+    "editor.rulers": [80],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+  },
+  "files.insertFinalNewline": true
 }
