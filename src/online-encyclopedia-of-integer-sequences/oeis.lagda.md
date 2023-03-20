@@ -11,6 +11,7 @@ open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.fibonacci-sequence
+open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.finite-groups
@@ -27,6 +28,9 @@ A000001 = number-of-groups-of-order
 A000010 : ℕ → ℕ
 A000010 = eulers-totient-function
 
+A000040 : ℕ → ℕ
+A000040 = prime-ℕ
+
 A000045 : ℕ → ℕ
 A000045 = Fibonacci-ℕ
 
@@ -38,6 +42,9 @@ A000142 = factorial-ℕ
 
 A000244 : ℕ → ℕ
 A000244 = exp-ℕ 3
+
+A000720 : ℕ → ℕ
+A000720 = prime-counting-ℕ
 
 A001477 : ℕ → ℕ
 A001477 = id
