@@ -143,7 +143,7 @@ equiv-equivalence-relation-is-decidable-Dec-Eq-Rel :
   {l1 l2 : Level} {X : UU l1} →
   Decidable-Equivalence-Relation l2 X ≃
   Σ ( Eq-Rel l2 X)
-    ( λ R → ((x y : X) → is-decidable (sim-Eq-Rel R x y)))
+    ( λ R → is-decidable-Eq-Rel R)
 pr1 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel R =
   ( equivalence-relation-Decidable-Equivalence-Relation R ,
     is-decidable-sim-Decidable-Equivalence-Relation R)
@@ -479,8 +479,7 @@ module _
 ```agda
 has-decidable-equality-type-Surjection-Into-Set :
   {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A) →
-  ( (x y : A) →
-    is-decidable ( sim-Eq-Rel (eq-rel-Surjection-Into-Set surj) x y)) →
+  ( is-decidable-Eq-Rel (eq-rel-Surjection-Into-Set surj)) →
   has-decidable-equality (type-Surjection-Into-Set surj)
 has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
   apply-twice-dependent-universal-property-surj-is-surjective
@@ -541,7 +540,7 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
             ( λ surj → is-decidable-Eq-Rel-Surjection-Into-Set surj)) ∘e
           ( ( inv-equiv
               ( equiv-Σ-equiv-base
-                ( λ R → ((x y : A) → is-decidable (sim-Eq-Rel R x y)))
+                ( λ R → is-decidable-Eq-Rel R)
                 ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
                   equiv-equivalence-relation-is-decidable-Dec-Eq-Rel )))))
 ```
