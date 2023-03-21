@@ -27,8 +27,8 @@ open import foundation.universe-levels
 
 ## Ideas
 
-Given a subuniverse `P`, any family of types `B` indexed by types of `P`
-has an action on equivalences obtained by using the univalence axiom.
+Given a subuniverse `P`, any family of types `B` indexed by types of `P` has an
+action on equivalences obtained by using the univalence axiom.
 
 ## Definition
 
@@ -44,7 +44,6 @@ module _
 ```
 
 ## Properties
-
 ```
   preserves-id-equiv-univalent-action-equiv : (X : type-subuniverse P) →
     univalent-action-equiv X X id-equiv ＝ id-equiv

@@ -79,7 +79,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Ideas
 
-The delooping of a group homomorphism `f : G → H` is a pointed map `Bf : BG → BH` equiped with an homotopy witnessing that the following square commutes :
+The delooping of a group homomorphism `f : G → H` is a pointed map
+`Bf : BG → BH` equiped with an homotopy witnessing that the following square
+commutes :
+
 ```md
        f
   G -------> H
@@ -91,7 +94,9 @@ The delooping of a group homomorphism `f : G → H` is a pointed map `Bf : BG �
        ΩBf
 ```
 
-In this file, we study the delooping of the sign homomorphism, and, more precisely, how to detect that a pointed map between `BSn` and `BS2` is a delooping of the sign homomorphism.
+In this file, we study the delooping of the sign homomorphism, and, more
+precisely, how to detect that a pointed map between `BSn` and `BS2` is a
+delooping of the sign homomorphism.
 
 ## Definition
 
