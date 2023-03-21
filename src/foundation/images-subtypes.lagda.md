@@ -7,11 +7,18 @@ module foundation.images-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.images
-
-open import foundation-core.functions
-open import foundation-core.subtypes
-open import foundation-core.universe-levels
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.univalence
+open import foundation.universe-levels
 ```
 
 </details>
