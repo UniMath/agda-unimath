@@ -6,7 +6,7 @@ if (link) {
     "CITATION.cff",
     "CODINGSTYLE.md",
     "CONTRIBUTORS.md",
-    "CONVENTIONS.md",
+    "FILE-CONVENTIONS.md",
     "DESIGN-PRINCIPLES.md",
     "HOME.md",
     "HOWTO-INSTALL.md",
