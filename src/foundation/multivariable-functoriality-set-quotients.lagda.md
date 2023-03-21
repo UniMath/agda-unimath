@@ -33,8 +33,8 @@ open import univalent-combinatorics.standard-finite-types
 Say we have a family of types `A1`, ..., `An` each equipped with an equivalence
 relation `Ri`, as well as a type `X` equipped with an equivalence relation `X`,
 Then, any multivariable operation from the `Ai`s to the `X` that respects the
-equivalence relations extends uniquely to a multivariable operation from the `Ai/Ri`s
-to `X/S`.
+equivalence relations extends uniquely to a multivariable operation from the
+`Ai/Ri`s to `X/S`.
 
 ## Definition
 
