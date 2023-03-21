@@ -181,5 +181,5 @@ module _
             ( fundamental-theorem-id'
               ( λ z → extensional-Eq-eq-𝕎)
               ( H (tree-𝕎 x (λ y → w)))))
-          ( λ y →  equiv-tr B {y = y}))
+          ( λ y → equiv-tr B {y = y}))
 ```
