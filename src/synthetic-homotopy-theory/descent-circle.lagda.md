@@ -21,6 +21,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.path-algebra
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -162,7 +163,47 @@ module _
         ( Q))
 ```
 
-### Sections of families over the circle
+### Sections of families over the circle are exactly the fixed points of the associated automorphism
+
+```agda
+module _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  ( Q : X → UU l2) (P : Fam-circle l2) (αβ : Eq-Fam-circle P (ev-Fam-circle l Q))
+  where
+
+  private
+    α : type-Fam-circle P ≃ Q (base-free-loop l)
+    α = pr1 αβ
+
+  map-path-over-loop-fib-aut-Fam-circle :
+    (x y : type-Fam-circle P) → (map-equiv (aut-Fam-circle P) x ＝ y ) →
+    ( path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
+  map-path-over-loop-fib-aut-Fam-circle x y q =
+    inv (pr2 αβ _) ∙ (ap (map-equiv α) q)
+
+  is-equiv-map-path-over-loop-fib-aut-Fam-circle :
+    ( x y : type-Fam-circle P) →
+    is-equiv (map-path-over-loop-fib-aut-Fam-circle x y)
+  is-equiv-map-path-over-loop-fib-aut-Fam-circle x y =
+    fundamental-theorem-id
+      ( is-contr-equiv'
+        ( fib (map-equiv α) _)
+        ( equiv-fib _ _)
+        ( is-contr-map-is-equiv
+          ( is-equiv-map-equiv α)
+          ( _)))
+      ( map-path-over-loop-fib-aut-Fam-circle x)
+      ( _)
+
+  equiv-path-over-loop-fib-aut-Fam-circle :
+    (x y : type-Fam-circle P) →
+    (map-equiv (aut-Fam-circle P) x ＝ y) ≃
+    (path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
+  pr1 (equiv-path-over-loop-fib-aut-Fam-circle x y) =
+    map-path-over-loop-fib-aut-Fam-circle x y
+  pr2 (equiv-path-over-loop-fib-aut-Fam-circle x y) =
+    is-equiv-map-path-over-loop-fib-aut-Fam-circle x y
+```
 
 ```agda
 Section-Fam-circle :
@@ -170,23 +211,90 @@ Section-Fam-circle :
 Section-Fam-circle l P =
   Σ (type-Fam-circle P) (λ p → (map-equiv (aut-Fam-circle P) p) ＝ p)
 
-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  ( {k : Level} → dependent-universal-property-circle k l) →
-  Fam-circle l2 → X → UU l2
-fam-circle {l1} {l2} l dup-circle =
-  map-inv-is-equiv
-    ( is-equiv-ev-Fam-circle-universal-property-circle l
-      ( universal-property-dependent-universal-property-circle l dup-circle))
+module _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  ( Q : X → UU l2) (P : Fam-circle l2)
+  ( αβ : Eq-Fam-circle P (ev-Fam-circle l Q))
+  where
 
-section-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  ( dup-circle : dependent-universal-property-circle l2 l) →
-  ( Q : X → UU l2) (P : Fam-circle l2) →
-  ( e : Eq-Fam-circle P (ev-Fam-circle l Q)) →
-  Section-Fam-circle l P → (x : X) → Q x
-section-fam-circle l dup-circle Q P (e , H) (p , α) =
-  map-inv-is-equiv
-    ( dup-circle Q)
-    ( (map-equiv e p) , ((inv (H p)) ∙ (ap (map-equiv e) α)))
-```
+  private
+    α : type-Fam-circle P ≃ Q (base-free-loop l)
+    α = pr1 αβ
+
+  ev-Section-Fam-circle :
+    ( (x : X) → Q x) → Section-Fam-circle l P
+  pr1 (ev-Section-Fam-circle s) =
+    map-inv-equiv
+      ( α)
+      ( s (base-free-loop l))
+  pr2 (ev-Section-Fam-circle s) =
+    map-inv-is-equiv
+      ( is-equiv-map-path-over-loop-fib-aut-Fam-circle l Q P αβ _ _)
+      ( ( ap (tr Q (loop-free-loop l)) (issec-map-inv-equiv α _)) ∙
+        ( ( apd s (loop-free-loop l)) ∙
+          ( inv (issec-map-inv-equiv α _))))
+
+  equiv-Section-Fam-circle-free-dependent-loop :
+    Section-Fam-circle l P ≃ free-dependent-loop l Q
+  equiv-Section-Fam-circle-free-dependent-loop =
+    equiv-Σ _ α (λ x → equiv-path-over-loop-fib-aut-Fam-circle l Q P αβ x x)
+
+  comparison-Section-Fam-circle :
+    Section-Fam-circle l P → free-dependent-loop l Q
+  comparison-Section-Fam-circle =
+    map-equiv equiv-Section-Fam-circle-free-dependent-loop
+
+  triangle-comparison-Section-Fam-circle :
+    ( ev-free-loop-Π l Q) ~
+    ( comparison-Section-Fam-circle ∘ ev-Section-Fam-circle)
+  triangle-comparison-Section-Fam-circle s =
+    eq-Eq-free-dependent-loop l Q
+      ( ev-free-loop-Π l Q s)
+      ( ( comparison-Section-Fam-circle ∘ ev-Section-Fam-circle) s)
+      ( inv issec-inv-α ,
+        inv
+        ( ( horizontal-concat-Id²
+            ( refl {x = ap _ (inv issec-inv-α)})
+            ( issec-map-inv-is-equiv
+              ( is-equiv-map-path-over-loop-fib-aut-Fam-circle l Q P αβ _ _)
+              ( _))) ∙
+          ( ( inv (assoc (ap _ (inv issec-inv-α)) _ _)) ∙
+            ( horizontal-concat-Id²
+              ( inv
+                ( ap-concat-eq _
+                  ( inv issec-inv-α)
+                  ( issec-inv-α)
+                  ( refl)
+                  ( inv (left-inv issec-inv-α))))
+              ( refl)))))
+    where
+    issec-inv-α : eq-value (map-equiv α ∘ map-inv-equiv α) id (s (base-free-loop l))
+    issec-inv-α = issec-map-inv-equiv α _
+
+  is-equiv-comparison-Section-Fam-circle :
+    is-equiv comparison-Section-Fam-circle
+  is-equiv-comparison-Section-Fam-circle =
+    is-equiv-map-equiv equiv-Section-Fam-circle-free-dependent-loop
+
+  is-equiv-ev-Section-Fam-circle :
+    (dependent-universal-property-circle l2 l) →
+    is-equiv ev-Section-Fam-circle
+  is-equiv-ev-Section-Fam-circle dup =
+    is-equiv-right-factor-htpy
+      ( ev-free-loop-Π l Q)
+      ( comparison-Section-Fam-circle)
+      ( ev-Section-Fam-circle)
+      ( triangle-comparison-Section-Fam-circle)
+      ( is-equiv-comparison-Section-Fam-circle)
+      ( dup Q)
+
+  equiv-ev-Section-Fam-circle :
+    (dependent-universal-property-circle l2 l) →
+    ((x : X) → Q x) ≃ (Section-Fam-circle l P)
+  pr1 (equiv-ev-Section-Fam-circle dup) = ev-Section-Fam-circle
+  pr2 (equiv-ev-Section-Fam-circle dup) = is-equiv-ev-Section-Fam-circle dup
+
+  compute-ev-Section-Fam-circle :
+    ( pr1 ∘ ev-Section-Fam-circle ) ~
+    ( (map-inv-equiv α) ∘ (ev-pt (base-free-loop l) _))
+  compute-ev-Section-Fam-circle = refl-htpy
