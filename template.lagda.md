@@ -14,7 +14,7 @@ open import ...
 
 ## Idea
 
-A **concept** $C$ is a sort of _insert abstract idea of concept_, and is defined
+A **concept** $C$ is a _insert abstract idea of concept_, and is defined
 as _insert definition using words_.
 
 ## Definition
