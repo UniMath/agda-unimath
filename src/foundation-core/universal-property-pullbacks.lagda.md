@@ -122,5 +122,5 @@ module _
         ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
         ( equiv-tot
           ( λ h → extensionality-cone f g (cone-map f g c h) c'))
-        ( is-contr-map-is-equiv (up C')  c')
+        ( is-contr-map-is-equiv (up C') c')
 ```

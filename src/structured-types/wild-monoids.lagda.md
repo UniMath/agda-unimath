@@ -143,12 +143,14 @@ module _
          ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
        ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
   unit-law-110-assoc-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
+```
 
--- In the definition of morphisms of wild monoids we only require the unit and
--- multiplication to be preserved. This is because we would need further
--- coherence in wild monoids if we want morphisms list X → M to preserve the
--- unital associator.
+In the definition of morphisms of wild monoids we only require the unit and
+multiplication to be preserved. This is because we would need further coherence
+in wild monoids if we want morphisms list $X → M$ to preserve the unital
+associator.
 
+```agda
 module _
   {l1 l2 : Level} (M : Wild-Monoid l1) (N : Wild-Monoid l2)
   where

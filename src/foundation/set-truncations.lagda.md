@@ -261,9 +261,11 @@ abstract
       ( trunc-Set A)
       ( unit-trunc-Set)
       ( is-surjective-and-effective-unit-trunc-Set A)
+```
 
--- Uniqueness of trunc-Set
+### Uniqueness of trunc-Set
 
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set B (trunc-Set A)} (H : (h ∘ f) ~ unit-trunc-Set)
@@ -469,9 +471,11 @@ module _
     ( map-coprod unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-coprod-Set =
     pr2 (center distributive-trunc-coprod-Set)
+```
 
--- Set truncations of Σ-types
+### Set truncations of Σ-types
 
+```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
@@ -509,9 +513,11 @@ module _
     type-trunc-Set (Σ A B) → type-trunc-Set (Σ A (λ x → type-trunc-Set (B x)))
   map-equiv-trunc-Σ-Set =
     map-equiv equiv-trunc-Σ-Set
+```
 
--- trunc-Set distributes over products
+### `trunc-Set` distributes over products
 
+```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where

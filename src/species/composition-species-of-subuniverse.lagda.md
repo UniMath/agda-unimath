@@ -9,21 +9,14 @@ module species.composition-species-of-subuniverse where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.relaxed-sigma-decompositions
@@ -35,19 +28,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import species.large-composition-species-of-types
-open import species.species-of-types
 open import species.species-of-types-in-subuniverse
-
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
 ```
 
 </details>

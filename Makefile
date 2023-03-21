@@ -29,7 +29,7 @@ METAFILES:=CITATION.cff \
 agdaFiles :
 	@rm -rf $@
 	@rm -rf src/everything.lagda.md
-	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) -print > $@
+	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda" -o -name "*.lagda.md" \) -print > $@
 	@sort -o $@ $@
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"

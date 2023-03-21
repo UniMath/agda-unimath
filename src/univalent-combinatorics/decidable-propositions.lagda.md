@@ -17,12 +17,10 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

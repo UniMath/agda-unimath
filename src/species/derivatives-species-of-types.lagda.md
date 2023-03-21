@@ -12,8 +12,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import species.species-of-types
-
-open import univalent-combinatorics.finite-types
 ```
 
 </details>

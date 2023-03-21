@@ -310,22 +310,26 @@ is-injective-succ-Fin (succ-ℕ k) {inr star} {inl y} p =
 is-injective-succ-Fin (succ-ℕ k) {inr star} {inr star} p = refl
 ```
 
-```agda
--- We define a function skip-neg-two-Fin in order to define pred-Fin.
+We define a function `skip-neg-two-Fin` in order to define `pred-Fin`.
 
+```agda
 skip-neg-two-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 skip-neg-two-Fin (succ-ℕ k) (inl x) = inl (inl x)
 skip-neg-two-Fin (succ-ℕ k) (inr x) = neg-one-Fin (succ-ℕ k)
+```
 
--- We define the predecessor function on Fin k.
+We define the predecessor function on `Fin k`.
 
+```agda
 pred-Fin : (k : ℕ) → Fin k → Fin k
 pred-Fin (succ-ℕ k) (inl x) = skip-neg-two-Fin k (pred-Fin k x)
 pred-Fin (succ-ℕ k) (inr x) = neg-two-Fin k
+```
 
--- We now turn to the exercise.
+We now turn to the exercise.
 
+```agda
 pred-zero-Fin :
   (k : ℕ) → is-neg-one-Fin (succ-ℕ k) (pred-Fin (succ-ℕ k) (zero-Fin k))
 pred-zero-Fin (zero-ℕ) = refl

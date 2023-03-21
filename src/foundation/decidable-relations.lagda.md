@@ -9,14 +9,13 @@ module foundation.decidable-relations where
 ```agda
 open import foundation.binary-relations
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.propositions
-open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.homotopies
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 </details>

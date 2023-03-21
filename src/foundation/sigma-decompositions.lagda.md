@@ -8,32 +8,24 @@ module foundation.sigma-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.transport
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.unit-type
 open import foundation.univalence
 
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 
@@ -620,7 +612,7 @@ module _
   snd-equiv-fibered-Σ-Decomposition = pr2
 
 module _
-  { l1 l2 l3 l4 l5 : Level}  {A : UU l1}
+  { l1 l2 l3 l4 l5 : Level} {A : UU l1}
   ( D : fibered-Σ-Decomposition l2 l3 l4 l5 A)
   where
 
@@ -651,7 +643,7 @@ module _
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv )
         ( is-contr-total-Eq-structure
           ( λ V f g →
-            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V  u)) id-equiv g) ∘
+            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V u)) id-equiv g) ∘
               ( map-matching-correspondence-Σ-Decomposition Y)) ~
               ( pr1 f))
           ( is-contr-total-equiv-Fam-Inhabited-Types
@@ -753,7 +745,7 @@ module _
   snd-equiv-displayed-Σ-Decomposition = pr2
 
 module _
-  { l1 l2 l3 l4 l5 : Level}  {A : UU l1}
+  { l1 l2 l3 l4 l5 : Level} {A : UU l1}
   ( disp-D : displayed-Σ-Decomposition l2 l3 l4 l5 A)
   where
 
@@ -947,7 +939,7 @@ module _
       ( map-inv-displayed-fibered-Σ-Decomposition
         ( map-displayed-fibered-Σ-Decomposition fib-D))
       ( fib-D)
-      ( ( ( inv-equiv f)  ,
+      ( ( ( inv-equiv f) ,
           ( ( λ x → id-equiv) ,
             ( htpy-matching-correspondence))) ,
         ( ( id-equiv) ,
@@ -979,7 +971,7 @@ module _
 
     htpy-matching-correspondence :
       map-equiv (
-        ( equiv-Σ N id-equiv (inv-equiv ∘ t)  ) ∘e
+        ( equiv-Σ N id-equiv (inv-equiv ∘ t)) ∘e
         matching-correspondence-displayed-fibered-Σ-Decomposition
           (fib-D))
       ~ map-equiv s

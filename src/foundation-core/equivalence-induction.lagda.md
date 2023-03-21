@@ -62,8 +62,8 @@ module _
           ( pair A id-equiv)
           ( pair
             ( pair A id-equiv)
-            ( λ t →  ( inv (contraction c (pair A id-equiv))) ∙
-                     ( contraction c t)))
+            ( λ t → ( inv (contraction c (pair A id-equiv))) ∙
+                    ( contraction c t)))
           ( P))
 
   -- Theorem 17.1.1 (iii) implies (ii)
