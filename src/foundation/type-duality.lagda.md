@@ -7,33 +7,41 @@ module foundation.type-duality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.locally-small-types
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.slice
 open import foundation.structure
+open import foundation.surjective-maps
+open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.propositions
 open import foundation-core.small-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 
@@ -320,7 +328,7 @@ Slice-structure :
 Slice-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
 
 equiv-Fib-structure :
-  {l1 l3 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l3) (B : UU l1) →
+  {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
   Slice-structure (l1 ⊔ l) P B ≃ fam-structure P B
 equiv-Fib-structure {l1} {l3} l P B =
   ( ( inv-distributive-Π-Σ) ∘e
@@ -329,6 +337,41 @@ equiv-Fib-structure {l1} {l3} l P B =
       ( equiv-Fib l B)
       ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
   ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
+```
+
+The type of all function from `A → B` is equivalent to the type of function
+`Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
+
+```agda
+fib-Σ :
+  {l : Level} (X : UU l) (A : UU l) →
+  (X → A) ≃
+    Σ (A → UU l) (λ Y → X ≃ Σ A Y)
+fib-Σ {l} X A =
+  ( ( equiv-Σ
+      ( λ Z → X ≃ Σ A Z)
+      ( equiv-Fib l A)
+      ( λ s →
+        inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
+    ( ( equiv-right-swap-Σ) ∘e
+      ( ( inv-left-unit-law-Σ-is-contr
+          ( is-contr-total-equiv X)
+          ( X , id-equiv )))))
+
+equiv-fixed-Slice-structure :
+  {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →
+  ( hom-structure P X A) ≃
+  ( Σ (A → Σ (UU l) (λ Z → P (Z))) ( λ Y → X ≃ (Σ A (pr1 ∘ Y ))))
+equiv-fixed-Slice-structure {l} P X A =
+  ( ( equiv-Σ
+      ( λ Y → X ≃ Σ A (pr1 ∘ Y))
+      ( equiv-Fib-structure l P A)
+      ( λ s →
+        inv-equiv (equiv-postcomp-equiv (equiv-total-fib (pr1 (pr2 s))) X))) ∘e
+    ( ( equiv-right-swap-Σ) ∘e
+      ( ( inv-left-unit-law-Σ-is-contr
+          ( is-contr-total-equiv X)
+          ( X , id-equiv )))))
 ```
 
 ### Subtype duality
@@ -343,4 +386,13 @@ equiv-Fib-Prop :
 equiv-Fib-Prop l A =
   ( equiv-Fib-structure l is-prop A) ∘e
   ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))
+
+Slice-surjection : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+Slice-surjection l A = Σ (UU l) (λ X → X ↠ A)
+
+equiv-Fib-trunc-Prop :
+  (l : Level) {l1 : Level} (A : UU l1) →
+  Slice-surjection (l1 ⊔ l) A ≃ (A → Inhabited-Type (l1 ⊔ l))
+equiv-Fib-trunc-Prop l A =
+  ( equiv-Fib-structure l is-inhabited A)
 ```
