@@ -1,4 +1,4 @@
-# Σ-decompositions of types
+# Relaxed Σ-decompositions of types
 
 ```agda
 {-# OPTIONS --lossy-unification  #-}
