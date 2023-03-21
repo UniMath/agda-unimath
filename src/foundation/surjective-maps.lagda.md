@@ -294,6 +294,23 @@ apply-dependent-universal-property-surj-is-surjective :
   ((a : A) → type-Prop (C (f a))) → ((y : B) → type-Prop (C y))
 apply-dependent-universal-property-surj-is-surjective f H C =
   map-inv-equiv (equiv-dependent-universal-property-surj-is-surjective f H C)
+
+apply-twice-dependent-universal-property-surj-is-surjective :
+  {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-surjective f → (C : B → B → Prop l) →
+  ((x y : A) → type-Prop (C (f x) (f y))) → ((s t : B) → type-Prop (C s t))
+apply-twice-dependent-universal-property-surj-is-surjective f H C G s =
+  apply-dependent-universal-property-surj-is-surjective
+    ( f)
+    ( H)
+    ( λ b → C s b)
+    ( λ y →
+      apply-dependent-universal-property-surj-is-surjective
+        ( f)
+        ( H)
+        ( λ b → C b (f y))
+        (λ x → G x y)
+        ( s))
 ```
 
 ### A map into a proposition is a propositional truncation if and only if it is surjective

@@ -29,7 +29,7 @@ open import foundation.universe-levels
 
 </details>
 
-# Greatest common divisors of integers
+## Definition
 
 ```agda
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero
@@ -38,9 +38,13 @@ is-common-divisor-ℤ x y d = (div-ℤ d x) × (div-ℤ d y)
 is-gcd-ℤ : ℤ → ℤ → ℤ → UU lzero
 is-gcd-ℤ x y d =
   is-nonnegative-ℤ d × ((k : ℤ) → is-common-divisor-ℤ x y k ↔ div-ℤ k d)
+```
 
--- We relate divisibility and being a gcd on ℕ and on ℤ
+## Properties
 
+### We relate divisibility and being a gcd on ℕ and on ℤ
+
+```agda
 is-common-divisor-int-is-common-divisor-ℕ :
   {x y d : ℕ} →
   is-common-divisor-ℕ x y d → is-common-divisor-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d)

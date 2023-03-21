@@ -13,7 +13,6 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
-open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
 

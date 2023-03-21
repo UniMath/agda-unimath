@@ -1,4 +1,4 @@
-# The Cantor-Schröder-Bernstein-Escardó theorem
+# The Cantor–Schröder–Bernstein–Escardó theorem
 
 ```agda
 module foundation.cantor-schroder-bernstein-escardo where
@@ -111,7 +111,7 @@ module _
           map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d ＝ y
         ψ (inl v') =
           is-retr-inverse-of-perfect-image {is-emb-g = is-emb-map-emb g} y v'
-        ψ (inr v)  = ex-falso (v γ)
+        ψ (inr v) = ex-falso (v γ)
       a (inr γ) = pair x ψ
         where
           w :
@@ -174,5 +174,5 @@ module _
 
 - Escardo M.
   ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6).
-  - https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md
-  - https://github.com/martinescardo/TypeTopology
+  - <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md>
+  - <https://github.com/martinescardo/TypeTopology>

@@ -42,11 +42,13 @@ module _
   pr1 cone-fiberwise-prod = tot (λ x → pr1)
   pr1 (pr2 cone-fiberwise-prod) = tot (λ x → pr2)
   pr2 (pr2 cone-fiberwise-prod) = refl-htpy
+```
 
-  {- We will show that the fiberwise product is a pullback by showing that the
-     gap map is an equivalence. We do this by directly construct an inverse to
-     the gap map. -}
+We will show that the fiberwise product is a pullback by showing that the gap
+map is an equivalence. We do this by directly construct an inverse to the gap
+map.
 
+```agda
   gap-fiberwise-prod :
     Σ X (λ x → (P x) × (Q x)) → canonical-pullback (pr1 {B = P}) (pr1 {B = Q})
   gap-fiberwise-prod = gap pr1 pr1 cone-fiberwise-prod

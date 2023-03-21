@@ -8,6 +8,7 @@ module foundation.inhabited-types where
 
 ```agda
 open import foundation.equality-dependent-function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.univalence
 
@@ -183,6 +184,24 @@ pr2 (Σ-Inhabited-Type X Y) =
   is-inhabited-Σ
     ( is-inhabited-type-Inhabited-Type X)
     ( λ x → is-inhabited-type-Inhabited-Type (Y x))
+```
+
+### Inhabited types are closed under maps
+
+```agda
+map-is-inhabited :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (f : (A → B)) → is-inhabited A → is-inhabited B
+map-is-inhabited f = map-trunc-Prop f
+```
+
+### Contractible types are inhabited
+
+```agda
+is-inhabited-is-contr :
+  {l1 : Level} {A : UU l1} → is-contr A → is-inhabited A
+is-inhabited-is-contr p =
+  unit-trunc-Prop (center p)
 ```
 
 ## See also

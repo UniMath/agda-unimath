@@ -311,10 +311,12 @@ module _
           {c = triple p q H} {triple p' q' H'} (triple Hp Hq HH))
         ( is-equiv-map-equiv-canonical-pullback-htpy Hf Hg)
         ( is-pb-c)
+```
 
-{- In the following part we will relate the type htpy-parallel-cone to the Identity
-   type of cones. Here we will rely on function extensionality. -}
+In the following part we will relate the type htpy-parallel-cone to the identity
+type of cones. Here we will rely on function extensionality.
 
+```agda
 refl-htpy-parallel-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) →
@@ -999,9 +1001,9 @@ cone-ap :
     ( λ (α : Id (p c1) (p c2)) → (ap f α) ∙ (H c2))
     ( λ (β : Id (q c1) (q c2)) → (H c1) ∙ (ap g β))
     ( Id c1 c2)
-pr1 (cone-ap f g (pair p (pair q  H)) c1 c2) = ap p
-pr1 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) = ap q
-pr2 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) γ =
+pr1 (cone-ap f g (pair p (pair q H)) c1 c2) = ap p
+pr1 (pr2 (cone-ap f g (pair p (pair q H)) c1 c2)) = ap q
+pr2 (pr2 (cone-ap f g (pair p (pair q H)) c1 c2)) γ =
   ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
   ( ( inv-nat-htpy H γ) ∙
     ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ)))
@@ -1017,9 +1019,9 @@ cone-ap' :
     ( λ (α : Id (p c1) (p c2)) → tr (λ t → Id (f (p c1)) t) (H c2) (ap f α))
     ( λ (β : Id (q c1) (q c2)) → (H c1) ∙ (ap g β))
     ( Id c1 c2)
-pr1 (cone-ap' f g (pair p (pair q  H)) c1 c2) = ap p
-pr1 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) = ap q
-pr2 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) γ =
+pr1 (cone-ap' f g (pair p (pair q H)) c1 c2) = ap p
+pr1 (pr2 (cone-ap' f g (pair p (pair q H)) c1 c2)) = ap q
+pr2 (pr2 (cone-ap' f g (pair p (pair q H)) c1 c2)) γ =
   ( tr-Id-right (H c2) (ap f (ap p γ))) ∙
   ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
     ( ( inv-nat-htpy H γ) ∙

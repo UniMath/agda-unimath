@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.universal-property-image
@@ -26,7 +27,6 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
@@ -211,6 +211,14 @@ module _
       ( quotient-Set R)
       ( reflecting-map-quotient-map R)
       ( is-surjective-and-effective-quotient-map R)
+
+  inv-precomp-set-quotient :
+    {l : Level} →
+    (X : Set l) →
+    reflecting-map-Eq-Rel R (type-Set X) →
+    (type-hom-Set (quotient-Set R) X)
+  inv-precomp-set-quotient X =
+    pr1 (pr1 (is-set-quotient-set-quotient X))
 ```
 
 ### Induction into propositions on the set quotient
