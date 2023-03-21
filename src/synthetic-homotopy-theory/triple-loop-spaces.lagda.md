@@ -20,6 +20,8 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 </details>
 
+## Definition
+
 ```agda
 module _
   {l : Level}
@@ -34,6 +36,8 @@ module _
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
 ```
+
+## Operations
 
 ```agda
 x-concat-Ω³ :
@@ -64,40 +68,68 @@ ap-z-concat-Ω³ :
 ap-z-concat-Ω³ s t = k-concat-Id⁴ s t
 ```
 
+## Properties
+
 ### The unit laws for the three concatenations on Ω³
 
 ```agda
-left-unit-law-x-concat-Ω³ : {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) → Id
-(x-concat-Ω³ refl-Ω³ α) α left-unit-law-x-concat-Ω³ α = left-unit
+left-unit-law-x-concat-Ω³ :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
+  Id (x-concat-Ω³ refl-Ω³ α) α
+left-unit-law-x-concat-Ω³ α = left-unit
 
-right-unit-law-x-concat-Ω³ : {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) → Id
-(x-concat-Ω³ α refl-Ω³) α right-unit-law-x-concat-Ω³ α = right-unit
+right-unit-law-x-concat-Ω³ :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
+  Id (x-concat-Ω³ α refl-Ω³) α
+right-unit-law-x-concat-Ω³ α = right-unit
 
-left-unit-law-y-concat-Ω³ : {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) → Id
-(y-concat-Ω³ refl-Ω³ α) α left-unit-law-y-concat-Ω³ α =
-left-unit-law-horizontal-concat-Ω²
+left-unit-law-y-concat-Ω³ :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
+  Id (y-concat-Ω³ refl-Ω³ α) α
+left-unit-law-y-concat-Ω³ α = left-unit-law-horizontal-concat-Ω²
 
-right-unit-law-y-concat-Ω³ : {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) → Id
-(y-concat-Ω³ α refl-Ω³) α right-unit-law-y-concat-Ω³ α =
-right-unit-law-horizontal-concat-Ω²
+right-unit-law-y-concat-Ω³ :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
+  Id (y-concat-Ω³ α refl-Ω³) α
+right-unit-law-y-concat-Ω³ α = right-unit-law-horizontal-concat-Ω²
 
-left-unit-law-z-concat-Ω³ : {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) → Id
-(z-concat-Ω³ refl-Ω³ α) α left-unit-law-z-concat-Ω³ α = (
-left-unit-law-z-concat-Id³ α) ∙ ( ( inv right-unit) ∙ ( ( inv-nat-htpy (λ ω →
-left-unit-law-horizontal-concat-Id² ω) α) ∙ ( ( inv right-unit) ∙ ( (
-inv-nat-htpy ap-id α) ∙ ( ap-id α)))))
+left-unit-law-z-concat-Ω³ :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
+  Id (z-concat-Ω³ refl-Ω³ α) α
+left-unit-law-z-concat-Ω³ α =
+  ( left-unit-law-z-concat-Id³ α) ∙
+  ( ( inv right-unit) ∙
+    ( ( inv-nat-htpy (λ ω → left-unit-law-horizontal-concat-Id² ω) α) ∙
+      ( ( inv right-unit) ∙
+        ( ( inv-nat-htpy ap-id α) ∙
+          ( ap-id α)))))
 
-{- super-naturality-right-unit : {l : Level} {A : UU l} {x y z : A} {p q : Id x
-y} {α β : Id p q} (γ : Id α β) (u : Id y z) → Id (ap (λ ω →
-horizontal-concat-Id² ω (refl {x = u})) γ) {!!} super-naturality-right-unit α =
-{!!} -}
+{-
+super-naturality-right-unit :
+  {l : Level} {A : UU l} {x y z : A} {p q : Id x y} {α β : Id p q} (γ : Id α β)
+  (u : Id y z) →
+  Id (ap (λ ω → horizontal-concat-Id² ω (refl {x = u})) γ) {!!}
+super-naturality-right-unit α = {!!}
+-}
 
-{- right-unit-law-z-concat-Ω³ : {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
-Id (z-concat-Ω³ α refl-Ω³) α right-unit-law-z-concat-Ω³ α = (
-right-unit-law-z-concat-Id³ α) ∙ {!!} {- ( ( inv right-unit) ∙ ( ( inv-nat-htpy
-(λ ω → right-unit-law-horizontal-concat-Id² ω) α) ∙ ( left-unit ∙ ( ( inv
-right-unit) ∙ ( ( inv-nat-htpy ( λ z → ( inv right-unit) ∙ ( inv-nat-htpy (λ ω →
-right-unit) z) ∙ ( ap-id z)) α) ∙ ( ap-id α)))))) -} -}
+{-
+right-unit-law-z-concat-Ω³ :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
+  Id (z-concat-Ω³ α refl-Ω³) α
+right-unit-law-z-concat-Ω³ α =
+  ( right-unit-law-z-concat-Id³ α) ∙
+  {!!}
+{-
+  ( ( inv right-unit) ∙
+    ( ( inv-nat-htpy (λ ω → right-unit-law-horizontal-concat-Id² ω) α) ∙
+      ( left-unit ∙
+        ( ( inv right-unit) ∙
+          ( ( inv-nat-htpy
+                ( λ z →
+                  ( inv right-unit) ∙
+                  ( inv-nat-htpy (λ ω → right-unit) z) ∙ ( ap-id z)) α) ∙
+            ( ap-id α))))))
+-}
 ```
 
 ### The interchange laws for Ω³
