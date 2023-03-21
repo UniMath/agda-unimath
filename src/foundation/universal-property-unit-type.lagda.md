@@ -32,8 +32,6 @@ properties of contractible types.
 ## Properties
 
 ```agda
--- We conclude that the properties in the exercise hold for the unit type
-
 ev-star :
   {l : Level} (P : unit → UU l) → ((x : unit) → P x) → P star
 ev-star P f = f star

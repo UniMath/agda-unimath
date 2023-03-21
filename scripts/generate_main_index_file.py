@@ -41,7 +41,7 @@ def generate_namespace_entry_list(namespace):
         print(f"WARNING! Duplicate titles in {namespace}:")
         for ec in equal_titles:
             print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:m.rfind('.lagda.md')] for m in ec)}")
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
 
     module_titles_and_mdfiles = sorted(
         zip(module_titles, module_mdfiles), key=lambda tm: (tm[0].casefold(), tm[1]))
@@ -86,7 +86,7 @@ summary_template = """
     - [Install](HOWTO-INSTALL.md)
     - [Cite the library](CITATION.cff)
   - [Guidelines](CODINGSTYLE.md)
-    - [Structure your file](CONVENTIONS.md)
+    - [Structure your file](FILE-CONVENTIONS.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)

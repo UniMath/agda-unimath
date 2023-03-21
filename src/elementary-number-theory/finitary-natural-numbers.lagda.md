@@ -204,7 +204,7 @@ issec-inv-convert-based-ℕ :
   (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n
 issec-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
 issec-inv-convert-based-ℕ k (succ-ℕ n) =
-  ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ  k n)) ∙
+  ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) ∙
   ( ap succ-ℕ (issec-inv-convert-based-ℕ k n))
 
 isretr-inv-convert-based-ℕ :

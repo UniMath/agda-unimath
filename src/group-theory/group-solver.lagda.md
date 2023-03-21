@@ -53,7 +53,7 @@ data GroupSyntax (n : ℕ) : UU where
   gInv : GroupSyntax n → GroupSyntax n
   inner : Fin n → GroupSyntax n
 
-data SimpleElem  (n : ℕ) : UU where
+data SimpleElem (n : ℕ) : UU where
   inv-SE : Fin n → SimpleElem n
   pure-SE : Fin n → SimpleElem n
 

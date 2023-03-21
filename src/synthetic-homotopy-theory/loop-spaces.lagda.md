@@ -119,7 +119,7 @@ module _
   associative-mul-Ω x y z = assoc x y z
 ```
 
--- We compute transport of type-Ω
+We compute transport of `type-Ω`.
 
 ```agda
 module _

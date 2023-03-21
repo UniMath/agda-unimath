@@ -4,6 +4,14 @@
 module univalent-combinatorics.unlabeled-partitions where
 ```
 
+<details><summary>Imports</summary>
+
+```agda
+
+```
+
+</details>
+
 ## Idea
 
 Unlabeled partitions are
