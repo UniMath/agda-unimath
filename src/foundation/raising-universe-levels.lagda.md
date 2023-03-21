@@ -37,7 +37,7 @@ data raiseω {l1 : Level} (A : UU l1) : UUω where
 
 ## Properties
 
-### A type is equivalent to its raised types
+### Types are equivalent to their raised equivalents
 
 ```agda
 module _

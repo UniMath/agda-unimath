@@ -1,4 +1,4 @@
-# Homotopies
+# Large homotopies
 
 ```agda
 {-# OPTIONS --safe #-}
