@@ -336,11 +336,11 @@ module fibered where
 
 ### Generic element structures on fibered systems equipped with a weakening structure
 
-```agda
-  {- We define what it means for a fibered system equipped with fibered
-     weakening structure over a system equipped with weakening structure and
-     the structure of generic elements to be equipped with generic elements. -}
+We define what it means for a fibered system equipped with fibered weakening
+structure over a system equipped with weakening structure and the structure of
+generic elements to be equipped with generic elements.
 
+```agda
   record fibered-generic-element
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B : fibered-system l3 l4 A}
     {WA : weakening A} (W : fibered-weakening B WA) (δ : generic-element WA) :

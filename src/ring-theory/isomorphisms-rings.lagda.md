@@ -7,6 +7,8 @@ module ring-theory.isomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -38,8 +40,6 @@ open import ring-theory.rings
 ## Definition
 
 ```agda
-{- We introduce ring isomorphisms -}
-
 is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ring R1 R2 → UU (l1 ⊔ l2)
@@ -48,9 +48,11 @@ is-iso-hom-Ring R1 R2 f =
     ( λ g →
       ( Id (comp-hom-Ring R2 R1 R2 f g) (id-hom-Ring R2)) ×
       ( Id (comp-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
+```
 
-{- Infrastructure for invertible ring homomorphisms -}
+### Projections
 
+```agda
 inv-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   is-iso-hom-Ring R1 R2 f → type-hom-Ring R2 R1
@@ -95,9 +97,13 @@ is-retr-inv-map-is-iso-hom-Ring R1 R2 f is-iso-f =
     ( comp-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
     ( id-hom-Ring R1)
     ( is-retr-inv-is-iso-hom-Ring R1 R2 f is-iso-f)
+```
 
-{- Being invertible is a property -}
+## Properties
 
+### Being invertible is a property
+
+```agda
 all-elements-equal-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   all-elements-equal (is-iso-hom-Ring R1 R2 f)
@@ -166,10 +172,12 @@ id-iso-Ring R1 = pair (id-hom-Ring R1) (is-iso-id-hom-Ring R1)
 iso-eq-Ring :
   { l : Level} (R1 R2 : Ring l) → Id R1 R2 → iso-Ring R1 R2
 iso-eq-Ring R1 .R1 refl = id-iso-Ring R1
+```
 
-{- We first show that a ring homomorphism is an isomorphism if and only if
-   the underlying homomorphism of abelian groups is an isomorphism. -}
+We first show that a ring homomorphism is an isomorphism if and only if the
+underlying homomorphism of abelian groups is an isomorphism.
 
+```agda
 is-iso-hom-Ab-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ring R1 R2 → UU (l1 ⊔ l2)

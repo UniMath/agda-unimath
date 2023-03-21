@@ -200,7 +200,7 @@ module _
     sum-zero-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Splitting Sums
+### Splitting sums
 
 ```agda
 split-sum-Commutative-Semiring :

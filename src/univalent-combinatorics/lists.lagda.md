@@ -87,7 +87,14 @@ reverse-list (cons a l) = concat-list (reverse-list l) (in-list a)
 data _∈-list_ {l : Level} {A : UU l} : A → list A → UU l where
   is-head : (a : A) (l : list A) → a ∈-list (cons a l)
   is-in-tail : (a x : A) (l : list A) → a ∈-list l → a ∈-list (cons x l)
+
+unit-list : {l : Level} {A : UU l} → A → list A
+unit-list a = cons a nil
 ```
+
+## Properties
+
+### Characterizing the identity type of lists
 
 ```agda
 Eq-list : {l1 : Level} {A : UU l1} → list A → list A → UU l1
@@ -232,16 +239,14 @@ has-decidable-equality-has-decidable-equality-list d x y =
       ( eq-Eq-list (cons x nil) (cons y nil))
       ( d (cons x nil) (cons y nil)))
     ( raise-star)
+```
 
---------------------------------------------------------------------------------
+### Functoriality of the list operation
 
-unit-list :
-  {l1 : Level} {A : UU l1} → A → list A
-unit-list a = cons a nil
+First we introduce the functoriality of the list operation, because it will come
+in handy when we try to define and prove more advanced things.
 
-{- First we introduce the functoriality of the list operation, because it will
-   come in handy when we try to define and prove more advanced things. -}
-
+```agda
 functor-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   list A → list B
@@ -262,10 +267,14 @@ composition-law-functor-list :
 composition-law-functor-list f g nil = refl
 composition-law-functor-list f g (cons a x) =
   ap (cons (g (f a))) (composition-law-functor-list f g x)
+```
 
-{- Concatenation of lists is an associative operation and nil is the unit for
-   list concatenation. -}
+### List concatenation is associative and unital
 
+Concatenation of lists is an associative operation and nil is the unit for list
+concatenation.
+
+```agda
 assoc-concat-list :
   {l1 : Level} {A : UU l1} (x y z : list A) →
   Id (concat-list (concat-list x y) z) (concat-list x (concat-list y z))
@@ -289,10 +298,11 @@ list-Monoid X =
   pair
     ( pair (list-Set X) (pair concat-list assoc-concat-list))
     ( pair nil (pair left-unit-law-concat-list right-unit-law-concat-list))
+```
 
-{- The length operation or course behaves well with respect to the other list
-   operations. -}
+### The length operation behaves well with respect to the other list operations
 
+```agda
 length-nil :
   {l1 : Level} {A : UU l1} →
   Id (length-list {A = A} nil) zero-ℕ
@@ -312,9 +322,11 @@ length-functor-list :
 length-functor-list f nil = refl
 length-functor-list f (cons x l) =
   ap succ-ℕ (length-functor-list f l)
+```
 
-{- We now prove the properties of flattening. -}
+### Properties of flattening
 
+```agda
 flatten-unit-list :
   {l1 : Level} {A : UU l1} (x : list A) →
   Id (flatten-list (unit-list x)) x
@@ -346,9 +358,11 @@ flatten-flatten-list nil = refl
 flatten-flatten-list (cons a x) =
   ( flatten-concat-list a (flatten-list x)) ∙
   ( ap (concat-list (flatten-list a)) (flatten-flatten-list x))
+```
 
-{- Next, we prove the basic properties of list reversal. -}
+### Properties of list reversal
 
+```agda
 reverse-unit-list :
   {l1 : Level} {A : UU l1} (a : A) →
   Id (reverse-list (unit-list a)) (unit-list a)
@@ -396,12 +410,14 @@ reverse-reverse-list nil = refl
 reverse-reverse-list (cons a x) =
   ( reverse-concat-list (reverse-list x) (unit-list a)) ∙
   ( ap (concat-list (unit-list a)) (reverse-reverse-list x))
+```
 
---------------------------------------------------------------------------------
+## Head and tail operations
 
-{- Next we define the head and tail operations, and we define the operations
-   of picking and removing the last element from a list. -}
+We define the head and tail operations, and we define the operations of picking
+and removing the last element from a list.
 
+```agda
 head-list :
   {l1 : Level} {A : UU l1} → list A → list A
 head-list nil = nil
@@ -428,9 +444,11 @@ remove-last-element-list (cons a (cons b x)) =
 cons' :
   {l1 : Level} {A : UU l1} → list A → A → list A
 cons' x a = concat-list x (unit-list a)
+```
 
-{- We prove the basic properties about heads and tails and their duals. -}
+### Properties of heads and tails and their duals
 
+```agda
 eta-list :
   {l1 : Level} {A : UU l1} (x : list A) →
   Id (concat-list (head-list x) (tail-list x)) x

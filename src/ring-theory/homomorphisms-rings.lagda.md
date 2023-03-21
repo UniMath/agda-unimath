@@ -7,10 +7,13 @@ module ring-theory.homomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.precategories
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -32,11 +35,9 @@ open import ring-theory.rings
 
 Ring homomorphisms are maps between rings that preserve the ring structure
 
-## Definition
+## Definitions
 
 ```agda
-{- Ring homomorphisms -}
-
 preserves-mul-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ab (ab-Ring R1) (ab-Ring R2) → UU (l1 ⊔ l2)
@@ -104,9 +105,11 @@ type-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R : Ring l2) → UU (l1 ⊔ l2)
 type-hom-Ring R1 R2 =
   Σ (type-hom-Ab (ab-Ring R1) (ab-Ring R2)) (is-ring-homomorphism-hom-Ab R1 R2)
+```
 
-{- Basic infrastructure for ring homomorphisms. -}
+### Projections
 
+```agda
 hom-ab-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ring R1 R2 → type-hom-Ab (ab-Ring R1) (ab-Ring R2)
@@ -159,9 +162,11 @@ is-ring-homomorphism-hom-Ring R1 R2 f =
        ( preserves-one-hom-Ring R1 R2 f)
 ```
 
-```agda
-{- We characterize the identity type of ring homomorphisms -}
+## Properties
 
+### Characterizing the identity type of ring homomorphisms
+
+```agda
 htpy-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ring R1 R2 → type-hom-Ring R1 R2 → UU (l1 ⊔ l2)
@@ -225,9 +230,11 @@ hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → Set (l1 ⊔ l2)
 pr1 (hom-Ring R1 R2) = type-hom-Ring R1 R2
 pr2 (hom-Ring R1 R2) = is-set-type-hom-Ring R1 R2
+```
 
-{- We define the categorical structure of rings -}
+### Rings form a precategory
 
+```agda
 preserves-mul-id-hom-Ring :
   {l : Level} (R : Ring l) → preserves-mul-hom-Ab R R (id-hom-Ab (ab-Ring R))
 preserves-mul-id-hom-Ring R x y = refl
@@ -289,9 +296,9 @@ comp-hom-Ring :
 comp-hom-Ring R1 R2 R3 g f =
   pair ( hom-Ab-comp-hom-Ring R1 R2 R3 g f)
        ( is-ring-homomorphism-comp-hom-Ring R1 R2 R3 g f)
+```
 
-{- We prove the laws of a category for Rings -}
-
+```agda
 is-associative-comp-hom-Ring :
   { l1 l2 l3 l4 : Level}
   ( R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) (R4 : Ring l4) →
@@ -348,4 +355,16 @@ comp-law-ab-Ring R1 R2 R3 g f =
     ( ab-Ring R1)
     ( ab-Ring R3)
     ( refl-htpy)
+
+Ring-Precat : (l : Level) → Precat (lsuc l) l
+pr1 (Ring-Precat l) = Ring l
+pr1 (pr2 (Ring-Precat l)) = hom-Ring
+pr1 (pr1 (pr2 (pr2 (Ring-Precat l)))) {R1} {R2} {R3} =
+  comp-hom-Ring R1 R2 R3
+pr2 (pr1 (pr2 (pr2 (Ring-Precat l)))) {R1} {R2} {R3} {R4} =
+  is-associative-comp-hom-Ring R1 R2 R3 R4
+pr1 (pr2 (pr2 (pr2 (Ring-Precat l)))) = id-hom-Ring
+pr1 (pr2 (pr2 (pr2 (pr2 (Ring-Precat l))))) {R1} {R2} f =
+  eq-htpy-hom-Ring R1 R2 (comp-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f refl-htpy
+pr2 (pr2 (pr2 (pr2 (pr2 (Ring-Precat l))))) {R1} {R2} f = refl
 ```

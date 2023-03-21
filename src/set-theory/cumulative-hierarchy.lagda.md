@@ -465,7 +465,7 @@ needed.
   id-∈-cumulative-hierarchy x f =
     ap pr1 (compute-simple-prop-recursion-principle-cumulative-hierarchy _ _ f)
 
-  ∈-cumulative-hierarchy-mere-preimage  :
+  ∈-cumulative-hierarchy-mere-preimage :
     { x : type-pseudo-cumulative-hierarchy V} →
     { A : UU l1}
     { f : A → type-pseudo-cumulative-hierarchy V} →

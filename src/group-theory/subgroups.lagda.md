@@ -231,7 +231,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  type-group-Subgroup :  UU (l1 ⊔ l2)
+  type-group-Subgroup : UU (l1 ⊔ l2)
   type-group-Subgroup = type-subtype (subset-Subgroup G H)
 
   map-inclusion-Subgroup : type-group-Subgroup → type-Group G
