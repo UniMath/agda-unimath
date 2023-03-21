@@ -15,7 +15,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.multivariable-homotopies
 open import foundation.multivariable-operations
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -42,36 +47,102 @@ equivalence relations extends uniquely to a multivariable operation from the
 
 ```agda
 all-sim-Eq-Rel :
-  {l1 l2 : Level}
-  (n : ℕ)
-  (As : functional-vec (UU l1) n)
-  (Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
-  (as : (i : Fin n) → As i) →
-  (a's : (i : Fin n) → As i) →
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  ( as : multivariable-input n As) →
+  ( a's : multivariable-input n As) →
   UU l2
 all-sim-Eq-Rel {l1} {l2} zero-ℕ As Rs as a's =
   raise-unit l2
 all-sim-Eq-Rel {l1} {l2} (succ-ℕ n) As Rs as a's =
-  sim-Eq-Rel (Rs (inr star)) (as (inr star)) (a's (inr star)) ×
-   all-sim-Eq-Rel n
-     ( λ i → As (inl-Fin n i))
-     ( λ i → Rs (inl-Fin n i))
-     ( λ i → as (inl-Fin n i))
-     ( λ i → a's (inl-Fin n i))
+  sim-Eq-Rel (Rs (inr star))
+    ( head-multivariable-input n As as)
+    ( head-multivariable-input n As a's) ×
+  all-sim-Eq-Rel n
+    ( tail-functional-vec n As)
+    ( λ i → Rs (inl-Fin n i))
+    ( tail-multivariable-input n As as)
+    ( tail-multivariable-input n As a's)
 
-preserves-sim-n-ary-map-Eq-Rel :
-  {l1 l2 : Level}
-  (n : ℕ)
-  (As : functional-vec (UU l1) n)
-  (Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
-  (X : UU l1) (S : Eq-Rel l2 X) →
-  multivariable-operation n As X →
-  UU (l1 ⊔ l2)
-preserves-sim-n-ary-map-Eq-Rel n As Rs X S f =
-  ( as : (i : Fin n) → As i) →
-  ( a's : (i : Fin n) → As i) →
-  ( all-sim-Eq-Rel n As Rs as a's) →
-  ( sim-Eq-Rel S
-    ( apply-multivariable-operation n As X f as)
-    ( apply-multivariable-operation n As X f a's))
+module _
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i))
+  ( X : UU l1) (S : Eq-Rel l2 X)
+  where
+
+  preserves-sim-multivariable-map-Eq-Rel :
+    multivariable-operation n As X →
+    UU (l1 ⊔ l2)
+  preserves-sim-multivariable-map-Eq-Rel f =
+    ( as : multivariable-input n As) →
+    ( a's : multivariable-input n As) →
+    ( all-sim-Eq-Rel n As Rs as a's) →
+    ( sim-Eq-Rel S
+      ( apply-multivariable-operation n As X f as)
+      ( apply-multivariable-operation n As X f a's))
+
+  is-prop-preserves-sim-n-ary-map-Eq-Rel :
+    (f : multivariable-operation n As X) →
+    is-prop (preserves-sim-multivariable-map-Eq-Rel f)
+  is-prop-preserves-sim-n-ary-map-Eq-Rel f =
+    is-prop-Π
+      ( λ as →
+        ( is-prop-Π
+          ( λ a's →
+            ( is-prop-Π
+              ( λ _ →
+                ( is-prop-sim-Eq-Rel S
+                  ( apply-multivariable-operation n As X f as)
+                  ( apply-multivariable-operation n As X f a's)))))))
+
+  preserves-sim-multivariable-map-Eq-Rel-Prop :
+    multivariable-operation n As X →
+    Prop (l1 ⊔ l2)
+  preserves-sim-multivariable-map-Eq-Rel-Prop f =
+    pair
+      ( preserves-sim-multivariable-map-Eq-Rel f)
+      ( is-prop-preserves-sim-n-ary-map-Eq-Rel f)
+
+  multivariable-hom-Eq-Rel : UU (l1 ⊔ l2)
+  multivariable-hom-Eq-Rel =
+    type-subtype preserves-sim-multivariable-map-Eq-Rel-Prop
+
+  map-multivariable-hom-Eq-Rel :
+    multivariable-hom-Eq-Rel → multivariable-operation n As X
+  map-multivariable-hom-Eq-Rel = pr1
+
+  preserves-sim-multivariable-hom-Eq-Rel :
+    ( f : multivariable-hom-Eq-Rel) →
+    preserves-sim-multivariable-map-Eq-Rel
+     ( map-multivariable-hom-Eq-Rel f)
+  preserves-sim-multivariable-hom-Eq-Rel = pr2
+```
+
+## Properties
+
+### Characterization of equality of `multivariable-hom-Eq-Rel`
+
+```agda
+  multivariable-htpy-hom-Eq-Rel :
+    (f g : multivariable-hom-Eq-Rel) → UU l1
+  multivariable-htpy-hom-Eq-Rel f g =
+    multivariable-htpy n As X
+      ( map-multivariable-hom-Eq-Rel f)
+      ( map-multivariable-hom-Eq-Rel g)
+
+  refl-multivariable-htpy-hom-Eq-Rel :
+    (f : multivariable-hom-Eq-Rel) → multivariable-htpy-hom-Eq-Rel f f
+  refl-multivariable-htpy-hom-Eq-Rel f =
+    refl-multivariable-htpy n As X
+      ( map-multivariable-hom-Eq-Rel f)
+
+  multivariable-htpy-eq-hom-Eq-Rel :
+    (f g : multivariable-hom-Eq-Rel) → (f ＝ g) →
+    multivariable-htpy-hom-Eq-Rel f g
+  multivariable-htpy-eq-hom-Eq-Rel f .f refl =
+    refl-multivariable-htpy-hom-Eq-Rel f
 ```

@@ -10,6 +10,7 @@ module foundation.multivariable-operations where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
+open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -29,6 +30,58 @@ takes as inputs one element of each type, and returns an element in some type
 ## Definitions
 
 ```agda
+multivariable-input :
+  {l : Level}
+  (n : ℕ)
+  (As : functional-vec (UU l) n) →
+  UU l
+multivariable-input n As = (i : Fin n) → As i
+
+empty-multivariable-input :
+  {l : Level}
+  (As : functional-vec (UU l) 0) →
+  multivariable-input 0 As
+empty-multivariable-input As ()
+
+head-multivariable-input :
+  {l : Level}
+  (n : ℕ)
+  (As : functional-vec (UU l) (succ-ℕ n)) →
+  multivariable-input (succ-ℕ n) As →
+  head-functional-vec n As
+head-multivariable-input n As as =
+  as (neg-one-Fin n)
+
+tail-multivariable-input :
+  {l : Level}
+  (n : ℕ)
+  (As : functional-vec (UU l) (succ-ℕ n)) →
+  multivariable-input (succ-ℕ n) As →
+  multivariable-input n (tail-functional-vec n As)
+tail-multivariable-input n As as =
+  (λ i → as (inl-Fin n i))
+
+cons-multivariable-input :
+  {l : Level}
+  (n : ℕ)
+  (As : functional-vec (UU l) n) →
+  {A : UU l} →
+  A →
+  multivariable-input n As →
+  multivariable-input (succ-ℕ n) (cons-functional-vec n A As)
+cons-multivariable-input n As a as (inl x) = as x
+cons-multivariable-input n As a as (inr x) = a
+
+cons-multivariable-input' :
+  { l1 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) (succ-ℕ n))
+  ( a0 : As (inr star))
+  ( as : multivariable-input n (tail-functional-vec n As)) →
+  multivariable-input (succ-ℕ n) As
+cons-multivariable-input' n As a as (inl x) = as x
+cons-multivariable-input' n As a as (inr star) = a
+
 multivariable-operation :
   {l : Level}
   (n : ℕ)
@@ -38,7 +91,8 @@ multivariable-operation :
 multivariable-operation zero-ℕ As X = X
 multivariable-operation (succ-ℕ n) As X =
   ( head-functional-vec n As) →
-  ( multivariable-operation n (tail-functional-vec n As) X)
+  ( multivariable-operation n
+    ( tail-functional-vec n As) X)
 
 apply-multivariable-operation :
   {l : Level}
@@ -46,12 +100,13 @@ apply-multivariable-operation :
   (As : functional-vec (UU l) n)
   (X : UU l) →
   multivariable-operation n As X →
-  ((i : Fin n) → As i) → X
+  multivariable-input n As →
+  X
 apply-multivariable-operation zero-ℕ As X f as = f
 apply-multivariable-operation (succ-ℕ n) As X f as =
   apply-multivariable-operation n
     ( tail-functional-vec n As)
     ( X)
-    ( f (as (neg-one-Fin n)))
-    ( λ i → as (inl-Fin n i))
+    ( f (head-multivariable-input n As as))
+    ( tail-multivariable-input n As as)
 ```
