@@ -133,7 +133,7 @@ module _
   { l1 l2 : Level} {X : UU l1} (l : free-loop X)
   where
 
-  ev-Descent-data-circle : ( X → UU l2) → Descent-data-circle l2
+  ev-Descent-data-circle : (X → UU l2) → Descent-data-circle l2
   pr1 (ev-Descent-data-circle P) = P (base-free-loop l)
   pr2 (ev-Descent-data-circle P) = equiv-tr P (loop-free-loop l)
 
@@ -143,7 +143,7 @@ module _
   triangle-comparison-Descent-data-circle P =
     eq-Eq-Descent-data-circle
       ( ev-Descent-data-circle P)
-      ( comparison-Descent-data-circle _ (ev-free-loop l (UU _) P))
+      ( comparison-Descent-data-circle _ (ev-free-loop l (UU l2) P))
       ( id-equiv , (htpy-eq (inv (tr-equiv-eq-ap (loop-free-loop l)))))
 
   is-equiv-ev-Descent-data-circle-universal-property-circle :
@@ -316,22 +316,22 @@ module _
   is-equiv-ev-fixpoint-Descent-data-circle :
     ( dependent-universal-property-circle l2 l) →
     is-equiv ev-fixpoint-Descent-data-circle
-  is-equiv-ev-fixpoint-Descent-data-circle dup =
+  is-equiv-ev-fixpoint-Descent-data-circle dup-circle =
     is-equiv-right-factor-htpy
       ( ev-free-loop-Π l Q)
       ( comparison-fixpoint-Descent-data-circle)
       ( ev-fixpoint-Descent-data-circle)
       ( triangle-comparison-fixpoint-Descent-data-circle)
       ( is-equiv-comparison-fixpoint-Descent-data-circle)
-      ( dup Q)
+      ( dup-circle Q)
 
   equiv-ev-fixpoint-Descent-data-circle :
     ( dependent-universal-property-circle l2 l) →
     ( (x : X) → Q x) ≃ (fixpoint-Descent-data-circle l P)
-  pr1 (equiv-ev-fixpoint-Descent-data-circle dup) =
+  pr1 (equiv-ev-fixpoint-Descent-data-circle dup-circle) =
     ev-fixpoint-Descent-data-circle
-  pr2 (equiv-ev-fixpoint-Descent-data-circle dup) =
-    is-equiv-ev-fixpoint-Descent-data-circle dup
+  pr2 (equiv-ev-fixpoint-Descent-data-circle dup-circle) =
+    is-equiv-ev-fixpoint-Descent-data-circle dup-circle
 
   compute-ev-fixpoint-Descent-data-circle :
     ( pr1 ∘ ev-fixpoint-Descent-data-circle ) ~
