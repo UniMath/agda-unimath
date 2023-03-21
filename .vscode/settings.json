@@ -19,6 +19,10 @@
   "javascript.suggest.names": false,
 
   // Autoformatting and file type specific settings
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -29,27 +33,31 @@
     "editor.formatOnType": true,
     "editor.formatOnSave": true
   },
+  "[css]": {
+    "editor.quickSuggestions": {
+      "other": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "gitlens.codeLens.scopes": ["document"],
+    "editor.tabSize": 2
+  },
+  "[javascript]": {
+    "editor.maxTokenizationLineLength": 2500,
+    "editor.tabSize": 2
+  },
   "[json][jsonc]": {
     "editor.quickSuggestions": {
       "strings": true
     },
     "editor.suggest.insertMode": "replace",
-    "gitlens.codeLens.scopes": ["document"],
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true
+    "gitlens.codeLens.scopes": ["document"]
   },
   "[markdown]": {
     "editor.tabSize": 2,
-    "editor.rulers": [80],
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true
+    "editor.rulers": [80]
   },
   "[python]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-python.python",
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "ms-python.python"
   }
 }

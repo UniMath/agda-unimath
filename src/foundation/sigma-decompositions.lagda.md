@@ -593,7 +593,7 @@ module _
   snd-equiv-fibered-Σ-Decomposition = pr2
 
 module _
-  { l1 l2 l3 l4 l5 : Level}  {A : UU l1}
+  { l1 l2 l3 l4 l5 : Level} {A : UU l1}
   ( D : fibered-Σ-Decomposition l2 l3 l4 l5 A)
   where
 
@@ -624,7 +624,7 @@ module _
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv )
         ( is-contr-total-Eq-structure
           ( λ V f g →
-            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V  u)) id-equiv g) ∘
+            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V u)) id-equiv g) ∘
               ( map-matching-correspondence-Σ-Decomposition Y)) ~
               ( pr1 f))
           ( is-contr-total-equiv-Fam-Inhabited-Types
@@ -726,7 +726,7 @@ module _
   snd-equiv-displayed-Σ-Decomposition = pr2
 
 module _
-  { l1 l2 l3 l4 l5 : Level}  {A : UU l1}
+  { l1 l2 l3 l4 l5 : Level} {A : UU l1}
   ( disp-D : displayed-Σ-Decomposition l2 l3 l4 l5 A)
   where
 
@@ -920,7 +920,7 @@ module _
       ( map-inv-displayed-fibered-Σ-Decomposition
         ( map-displayed-fibered-Σ-Decomposition fib-D))
       ( fib-D)
-      ( ( ( inv-equiv f)  ,
+      ( ( ( inv-equiv f) ,
           ( ( λ x → id-equiv) ,
             ( htpy-matching-correspondence))) ,
         ( ( id-equiv) ,
@@ -961,10 +961,10 @@ module _
 
     lemma3 :
       inv-equiv (equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ＝ id-equiv
-    lemma3 = (ap inv-equiv lemma2)  ∙ lemma
+    lemma3 = (ap inv-equiv lemma2) ∙ lemma
 
     lemma4 :
-       ( assoc-Σ M P Y  ∘e
+       ( assoc-Σ M P Y ∘e
          ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
          inv-assoc-Σ M P Y )) ＝ id-equiv
     lemma4 =
@@ -976,7 +976,7 @@ module _
 
     lemma5 :
       ( ( equiv-Σ N id-equiv (inv-equiv ∘ t) ) ∘e
-        ( assoc-Σ M P Y  ∘e
+        ( assoc-Σ M P Y ∘e
           ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
             ( inv-assoc-Σ M P Y ∘e
               ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ∘e
@@ -984,7 +984,7 @@ module _
     lemma5 =
       equational-reasoning
         ( ( equiv-Σ N id-equiv (inv-equiv ∘ t) ) ∘e
-          ( assoc-Σ M P Y  ∘e
+          ( assoc-Σ M P Y ∘e
           ( inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv id-equiv)) ∘e
           ( inv-assoc-Σ M P Y ∘e
           ( equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t ∘e
@@ -1012,7 +1012,7 @@ module _
                   ( N)
                   ( refl-htpy)
                   ( λ m p →
-                    ( ((map-inv-equiv (t m)) ∘ map-equiv (t m)) p  ))
+                    ( ( ( map-inv-equiv (t m)) ∘ map-equiv (t m)) p))
                   ( λ m →
                     htpy-eq-equiv
                       ( left-inverse-law-equiv (t m)))
@@ -1020,7 +1020,7 @@ module _
 
     htpy-matching-correspondence :
       map-equiv (
-        ( equiv-Σ N id-equiv (inv-equiv ∘ t)  ) ∘e
+        ( equiv-Σ N id-equiv (inv-equiv ∘ t)) ∘e
         matching-correspondence-displayed-fibered-Σ-Decomposition
           (fib-D))
       ~ map-equiv s

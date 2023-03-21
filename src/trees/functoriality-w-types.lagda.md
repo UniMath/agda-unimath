@@ -86,7 +86,7 @@ abstract
                     ( λ α →
                       equiv-Π
                         ( λ (b : B a) →
-                          map-𝕎 D f e (α b) ＝  γ (tr D p (map-equiv (e a) b)))
+                          map-𝕎 D f e (α b) ＝ γ (tr D p (map-equiv (e a) b)))
                         ( inv-equiv (e a))
                         ( λ d →
                           ( equiv-concat'
