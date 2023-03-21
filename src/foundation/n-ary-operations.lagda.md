@@ -22,8 +22,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given `n` types, an n-ary operation on them is a function that takes
-as inputs one element of each type, and returs an element in some type `X`.
+Given `n` types, an n-ary operation on them is a function that takes as inputs
+one element of each type, and returs an element in some type `X`.
 
 ## Definitions
 

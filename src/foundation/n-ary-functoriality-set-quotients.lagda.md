@@ -13,11 +13,11 @@ module foundation.n-ary-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.n-ary-operations
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.n-ary-operations
 
 open import foundation-core.equivalence-relations
 
@@ -30,10 +30,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Say we have a family of types `A1`, ..., `An` each equipped with an equivalence relation `Ri`,
-as well as a type `X` equipped with an equivalence relation `X`,
-Then, any n-ary operation from the `Ai`s to the `X` that respects the equivalence relations
-extends uniquely to an n-ary operation from the `Ai/Ri`s to `X/S`.
+Say we have a family of types `A1`, ..., `An` each equipped with an equivalence
+relation `Ri`, as well as a type `X` equipped with an equivalence relation `X`,
+Then, any n-ary operation from the `Ai`s to the `X` that respects the
+equivalence relations extends uniquely to an n-ary operation from the `Ai/Ri`s
+to `X/S`.
 
 ## Definition
 
