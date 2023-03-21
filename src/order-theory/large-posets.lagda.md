@@ -1,4 +1,4 @@
-# Large posets
+# Large Posets
 
 ```agda
 module order-theory.large-posets where

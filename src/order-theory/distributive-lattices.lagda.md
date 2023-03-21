@@ -1,4 +1,4 @@
-# Distributive lattices
+# Distributive Lattices
 
 ```agda
 module order-theory.distributive-lattices where

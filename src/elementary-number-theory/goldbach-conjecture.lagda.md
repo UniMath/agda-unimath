@@ -22,7 +22,7 @@ open import foundation.universe-levels
 
 </details>
 
-## Conjecture
+# The Goldbach Conjecture
 
 ```agda
 Goldbach-conjecture : UU lzero

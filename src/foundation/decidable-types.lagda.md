@@ -38,7 +38,7 @@ using the propositional truncation.
 
 ## Definition
 
-### The Curry–Howard interpretation of decidability
+### The Curry-Howard interpretation of decidability
 
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l

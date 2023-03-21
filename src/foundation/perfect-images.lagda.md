@@ -1,4 +1,4 @@
-# Perfect images
+# Perfect Images
 
 ```agda
 module foundation.perfect-images where
@@ -48,7 +48,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  is-perfect-image : (a : A) → UU (l1 ⊔ l2)
+  is-perfect-image : (a : A) →  UU (l1 ⊔ l2)
   is-perfect-image a =
     (a₀ : A) (n : ℕ) → (iterate n (g ∘ f)) a₀ ＝ a → fib g a₀
 ```
@@ -178,7 +178,7 @@ module _
 
   is-not-perfect-image : (a : A) → UU (l1 ⊔ l2)
   is-not-perfect-image a =
-    Σ A (λ a₀ → (Σ ℕ (λ n → ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
+    Σ A (λ a₀ → (Σ ℕ (λ n →  ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
 ```
 
 If we assume law of excluded middle and `g` is embedding, we can prove that if
@@ -234,7 +234,7 @@ module _
         q = is-injective-is-emb is-emb-g (pr1 u)
 
         a : fib f b
-        a = pair ((iterate n (g ∘ f)) x₀) q
+        a = pair ((iterate n (g ∘ f)) x₀)  q
 
         w : ¬ (is-perfect-image f g ((iterate n (g ∘ f)) x₀))
         w = λ s → pr2 u (s x₀ n refl)

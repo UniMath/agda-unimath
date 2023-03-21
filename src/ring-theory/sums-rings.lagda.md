@@ -182,7 +182,7 @@ module _
   sum-zero-Ring = sum-zero-Semiring (semiring-Ring R)
 ```
 
-### Splitting sums
+### Splitting Sums
 
 ```agda
 split-sum-Ring :

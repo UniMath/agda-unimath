@@ -1,7 +1,7 @@
-# Homomorphisms of meet semilattices
+# Homomorphisms Meet Semilattices
 
 ```agda
-module order-theory.homomorphisms-of-meet-semilattices where
+module order-theory.homomorphisms-meet-semilattices where
 ```
 
 <details><summary>Imports</summary>
@@ -23,8 +23,6 @@ open import order-theory.order-preserving-maps-posets
 
 A meet semi-lattice homomorphism is an order preserving map between the
 underlying posets that also preserves meets.
-
-## Definitions
 
 ```agda
 module _

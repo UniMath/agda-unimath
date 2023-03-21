@@ -1,4 +1,4 @@
-# Boolean reflection
+# Boolean Reflection
 
 ```agda
 module foundation.boolean-reflection where

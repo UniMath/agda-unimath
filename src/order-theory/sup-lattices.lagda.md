@@ -1,4 +1,4 @@
-# Sup lattices
+# Sup Lattices
 
 ```agda
 module order-theory.sup-lattices where
