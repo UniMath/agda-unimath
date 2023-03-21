@@ -667,9 +667,11 @@ abstract
           ( λ k → Id (pr1 s k) (pr1 t k))
           ( (pr1 (pr2 s)) ∙ (inv (pr1 (pr2 t))))
           ( equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t)))
+```
 
--- We finally arrive at the dependent universal property of ℤ
+We finally arrive at the dependent universal property of ℤ
 
+```agda
 abstract
   is-contr-ELIM-ℤ :
     { l1 : Level} (P : ℤ → UU l1) →
@@ -677,9 +679,11 @@ abstract
     is-contr (ELIM-ℤ P p0 pS)
   is-contr-ELIM-ℤ P p0 pS =
     is-proof-irrelevant-is-prop (is-prop-ELIM-ℤ P p0 pS) (Elim-ℤ P p0 pS)
+```
 
--- The universal property of ℤ is now just a special case
+The universal property of ℤ is now just a special case
 
+```agda
 ELIM-ℤ' :
   { l1 : Level} {X : UU l1} (x : X) (e : X ≃ X) → UU l1
 ELIM-ℤ' {X = X} x e = ELIM-ℤ (λ k → X) x (λ k → e)

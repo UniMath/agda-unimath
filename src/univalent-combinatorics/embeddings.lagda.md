@@ -11,7 +11,6 @@ open import foundation.embeddings public
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-types

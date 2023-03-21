@@ -9,7 +9,6 @@ module group-theory.central-elements-groups where
 ```agda
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 

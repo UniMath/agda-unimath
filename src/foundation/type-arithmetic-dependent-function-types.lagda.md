@@ -7,16 +7,17 @@ module foundation.type-arithmetic-dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.univalence
+open import foundation-core.universe-levels
 ```
 
 </details>

@@ -1,4 +1,4 @@
-# Sup Lattices
+# Sup lattices
 
 ```agda
 module order-theory.sup-lattices where
@@ -65,7 +65,7 @@ module _
   poset-Sup-Lattice : Poset l1 l2
   poset-Sup-Lattice = pr1 A
 
-  element-Sup-Lattice : UU l1    {- could we use carrier instead of element? -}
+  element-Sup-Lattice : UU l1
   element-Sup-Lattice = element-Poset poset-Sup-Lattice
 
   leq-sup-lattice-Prop : (x y : element-Sup-Lattice) → Prop l2

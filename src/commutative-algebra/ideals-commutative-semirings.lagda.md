@@ -13,11 +13,9 @@ open import commutative-algebra.subsets-commutative-semirings
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import ring-theory.ideals-semirings
-open import ring-theory.subsets-semirings
 ```
 
 </details>

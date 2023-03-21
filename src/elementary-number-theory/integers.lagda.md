@@ -314,9 +314,6 @@ pr2 positive-ℤ-Set = is-set-positive-ℤ
 int-positive-ℤ : positive-ℤ → ℤ
 int-positive-ℤ = pr1
 
--- arst : (x y : positive-ℤ) → (int-positive-ℤ x ＝ int-positive-ℤ y) → x ＝ y
--- arst (pair (inr (inr x)) is-pos-x) y p = _ -- {!ex-falso is-pos-x!}
-
 is-positive-int-positive-ℤ :
   (x : positive-ℤ) → is-positive-ℤ (int-positive-ℤ x)
 is-positive-int-positive-ℤ = pr2

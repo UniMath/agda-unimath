@@ -31,7 +31,7 @@ Note: It could be that we only want the shapes to be merely preserved.
 
 ```agda
 module _
-  {l1 l2  l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
+  {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
   (G : Enriched-Undirected-Graph l3 l4 A B)
   (H : Enriched-Undirected-Graph l5 l6 A B)
   where

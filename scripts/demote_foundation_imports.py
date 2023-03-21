@@ -17,7 +17,7 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
 
     if nonpublic is None:
         utils.multithread.thread_safe_print(
-            f"'{agda_module}' Could not find imports. Skipping.")
+            f"'{agda_module}' Could not find imports.")
         return
 
         # Subdivide imports into namespaces
@@ -25,7 +25,7 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
 
     if not "foundation" in namespaces.keys():
         utils.multithread.thread_safe_print(
-            f"'{agda_module}' has no foundation imports. Skipping.")
+            f"'{agda_module}' has no foundation imports.")
         return
 
     new_nonpublic = set(nonpublic)
