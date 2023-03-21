@@ -1,4 +1,4 @@
-# Graphs
+# Directed graphs
 
 ```agda
 module graph-theory.directed-graphs where
@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A graph consists of a type of vertices equipped with a binary, type valued
-relation of edges.
+A directed graph consists of a type of vertices equipped with a binary, type
+valued relation of edges.
 
 ## Definition
 

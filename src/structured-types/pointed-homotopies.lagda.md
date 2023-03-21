@@ -87,9 +87,11 @@ module _
   eq-htpy-pointed-map :
     (g : A →* B) → (htpy-pointed-map g) → Id f g
   eq-htpy-pointed-map g = map-inv-equiv (extensionality-pointed-map g)
+```
 
--- The category laws for pointed maps
+### The category laws for pointed maps
 
+```agda
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
   where

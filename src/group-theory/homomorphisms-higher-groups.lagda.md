@@ -81,9 +81,13 @@ module _
     preserves-inv-map-Ω
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
+```
 
--- Homotopies of morphisms of ∞-groups
+## Properties
 
+### Homotopies of morphisms of ∞-groups
+
+```agda
 module _
   {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2) (f : hom-∞-Group G H)
   where
@@ -107,9 +111,11 @@ module _
   eq-htpy-hom-∞-Group :
     (g : hom-∞-Group G H) → (htpy-hom-∞-Group g) → Id f g
   eq-htpy-hom-∞-Group g = map-inv-equiv (extensionality-hom-∞-Group g)
+```
 
--- Wild category structure on higher groups
+### Wild category structure on higher groups
 
+```agda
 module _
   {l : Level} (G : ∞-Group l)
   where

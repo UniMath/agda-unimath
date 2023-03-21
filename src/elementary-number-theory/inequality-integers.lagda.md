@@ -1,4 +1,4 @@
-# Inequality of integers
+# Inequality on the integers
 
 ```agda
 module elementary-number-theory.inequality-integers where
@@ -23,12 +23,16 @@ open import foundation.universe-levels
 
 </details>
 
-# Inequality on the integers
+## Definition
 
 ```agda
 leq-ℤ : ℤ → ℤ → UU lzero
 leq-ℤ x y = is-nonnegative-ℤ (diff-ℤ y x)
+```
 
+## Properties
+
+```agda
 refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
 refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
 
@@ -67,8 +71,6 @@ succ-leq-ℤ k =
 leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
 leq-ℤ-succ-leq-ℤ k l p = trans-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
 
--- Bureaucracy
-
 concatenate-eq-leq-eq-ℤ :
   {x' x y y' : ℤ} → x' ＝ x → leq-ℤ x y → y ＝ y' → leq-ℤ x' y'
 concatenate-eq-leq-eq-ℤ refl H refl = H
@@ -82,16 +84,16 @@ concatenate-eq-leq-ℤ :
 concatenate-eq-leq-ℤ y refl H = H
 ```
 
-## The strict ordering on ℤ
+### The strict ordering on ℤ
 
 ```agda
 le-ℤ : ℤ → ℤ → UU lzero
 le-ℤ x y = is-positive-ℤ (diff-ℤ x y)
 ```
 
-```agda
--- We show that ℤ is an ordered ring
+## ℤ is an ordered ring
 
+```agda
 preserves-order-add-ℤ' :
   {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ x z) (add-ℤ y z)
 preserves-order-add-ℤ' {x} {y} z =
