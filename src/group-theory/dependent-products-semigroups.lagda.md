@@ -16,7 +16,7 @@ open import foundation.universe-levels
 open import group-theory.semigroups
 ```
 
-<details>
+</details>
 
 ## Idea
 

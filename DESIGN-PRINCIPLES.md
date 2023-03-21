@@ -1,10 +1,13 @@
-# Design of the library
+# Library design principles
 
-## Postulates in the library
+Understanding the design principles, structure, and philosophy behind the
+`agda-unimath` library is essential for effectively navigating and contributing
+to it. This document aims to provide a clear and concise introduction.
 
-The `agda-unimath` library is a library of formalized mathematics in vanilla
-Agda. Throughout our library, we assume the `--without-K` and `--exact-split`
-flags of Agda. Furthermore, we assume some postulates.
+## Postulates and assumptions
+
+The library assumes the `--without-K` and `--exact-split` flags of Agda and
+makes use of several postulates.
 
 1. We make full use of Agda's `data` types for introducing inductive types.
 2. We make full use of Agda's universe levels, including `ω`. However, it should
@@ -41,24 +44,22 @@ With these postulates, the `agda-unimath` library is a library for constructive
 univalent mathematics. Mathematics for which the law of excluded middle or the
 axiom of choice is necessary is not yet developed in `agda-unimath`. However, we
 are also open to any development of classical mathematics within `agda-unimath`,
-and we do also welcome contributions in that direction.
+and would welcome contributions in that direction.
 
-## Structure of the library
+## Library structure
 
 1. The source code of the formalisation can be found in the folder `src`.
 2. The library is organized by mathematical subject, with one folder per
-   mathematical subject. For each folder, there is also an Agda file of the same
-   name, which lists the files in that folder by importing them publicly.
-3. The `agda-unimath` library has the goal to be an informative resource of
-   formalised mathematics. We therefore formalise in literate agda, using
-   markdown. We think of the files in the formalisation as pages of a wiki on
-   mathematics.
-4. The files focus sharply on one topic. Typically, a file begins by introducing
-   one new concept, possibly in several equivalent ways, and developing the most
-   basic properties thereof. Alternatively, a file could have the goal to prove
-   an important theorem, and derive immediate corollaries thereof.
+   subject. For each folder, there is also an Agda file of the same name, which
+   lists the files in that folder by importing them publicly.
+3. The `agda-unimath` library aims to be an informative resource for formalised
+   mathematics. We therefore formalise in literate Agda using markdown, treating
+   files as pages of a mathematics wiki.
+4. Each file is focused on a single topic, typically introducing one new concept
+   and establishing its basic properties, or proving a central theorem and
+   deriving immediate corollaries thereof.
 
-## The design philosophy of `agda-unimath`
+## Design philosophy of `agda-unimath`
 
 When a human is looking for something in a library of formalized mathematics,
 they likely have a clear idea of what concept they are looking for. It would be
@@ -114,7 +115,7 @@ folder publicly. Users who are working in areas outside of the foundation can
 just import files directly from `foundation`, and they don't have to worry that
 some files might be split in two.
 
-Outside of the `foundation` folder of the library, we stick to the
-"one-concept-per-file" design principle of our library. If you find, however,
-that something you were looking for was not in the place you expected it to be
-(this happens!) please let us know and we will consider it for improvements.
+Outside of the `foundation` folder, the library adheres to the
+"one-concept-per-file" design principle. If you find, however, that something
+you were looking for was in a different place than you expected it to be (this
+happens!) please let us know and we will consider it for improvements.

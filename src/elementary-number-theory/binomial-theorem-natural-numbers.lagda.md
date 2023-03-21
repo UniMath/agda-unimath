@@ -100,7 +100,7 @@ binomial-theorem-ℕ :
     ( λ i →
       mul-ℕ
       ( power-ℕ (nat-Fin (succ-ℕ n) i) x)
-      ( power-ℕ (dist-ℕ n (nat-Fin (succ-ℕ n) i)) y))
+      ( power-ℕ (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-ℕ =
   binomial-theorem-Commutative-Semiring ℕ-Commutative-Semiring
 ```

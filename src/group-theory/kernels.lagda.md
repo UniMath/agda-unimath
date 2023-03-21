@@ -79,12 +79,12 @@ module _
 
   inclusion-kernel-hom-Group : type-hom-Group group-kernel-hom-Group G
   inclusion-kernel-hom-Group =
-    inclusion-group-Subgroup G subgroup-kernel-hom-Group
+    hom-inclusion-Subgroup G subgroup-kernel-hom-Group
 
   is-emb-inclusion-kernel-hom-Group :
     is-emb-hom-Group group-kernel-hom-Group G inclusion-kernel-hom-Group
   is-emb-inclusion-kernel-hom-Group =
-    is-emb-inclusion-group-Subgroup G subgroup-kernel-hom-Group
+    is-emb-inclusion-Subgroup G subgroup-kernel-hom-Group
 
   emb-inclusion-kernel-hom-Group : emb-Group group-kernel-hom-Group G
   pr1 emb-inclusion-kernel-hom-Group =

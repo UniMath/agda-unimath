@@ -234,18 +234,13 @@ module _
   type-group-Subgroup :  UU (l1 ⊔ l2)
   type-group-Subgroup = type-subtype (subset-Subgroup G H)
 
-  map-inclusion-group-Subgroup : type-group-Subgroup → type-Group G
-  map-inclusion-group-Subgroup =
+  map-inclusion-Subgroup : type-group-Subgroup → type-Group G
+  map-inclusion-Subgroup =
     inclusion-subtype (subset-Subgroup G H)
 
-  is-emb-inclusion-group-Subgroup :
-    is-emb map-inclusion-group-Subgroup
-  is-emb-inclusion-group-Subgroup =
-    is-emb-inclusion-subtype (subset-Subgroup G H)
-
-  eq-subgroup-eq-group : is-injective map-inclusion-group-Subgroup
+  eq-subgroup-eq-group : is-injective map-inclusion-Subgroup
   eq-subgroup-eq-group {x} {y} =
-    map-inv-is-equiv (is-emb-inclusion-group-Subgroup x y)
+    map-inv-is-equiv (is-emb-inclusion-Subgroup G H x y)
 
   set-group-Subgroup : Set (l1 ⊔ l2)
   pr1 set-group-Subgroup = type-group-Subgroup
@@ -321,31 +316,31 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  preserves-mul-inclusion-group-Subgroup :
+  preserves-mul-inclusion-Subgroup :
     preserves-mul-Group
       ( group-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Subgroup G H)
-  preserves-mul-inclusion-group-Subgroup x y = refl
+      ( map-inclusion-Subgroup G H)
+  preserves-mul-inclusion-Subgroup x y = refl
 
-  preserves-unit-inclusion-group-Subgroup :
+  preserves-unit-inclusion-Subgroup :
     preserves-unit-Group
       ( group-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Subgroup G H)
-  preserves-unit-inclusion-group-Subgroup = refl
+      ( map-inclusion-Subgroup G H)
+  preserves-unit-inclusion-Subgroup = refl
 
-  preserves-inverses-inclusion-group-Subgroup :
+  preserves-inverses-inclusion-Subgroup :
     preserves-inverses-Group
       ( group-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Subgroup G H)
-  preserves-inverses-inclusion-group-Subgroup x = refl
+      ( map-inclusion-Subgroup G H)
+  preserves-inverses-inclusion-Subgroup x = refl
 
-  inclusion-group-Subgroup : type-hom-Group (group-Subgroup G H) G
-  pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
-  pr2 inclusion-group-Subgroup =
-    preserves-mul-inclusion-group-Subgroup
+  hom-inclusion-Subgroup :
+    type-hom-Group (group-Subgroup G H) G
+  pr1 hom-inclusion-Subgroup = inclusion-Subgroup G H
+  pr2 hom-inclusion-Subgroup = preserves-mul-inclusion-Subgroup
 ```
 
 ## Properties

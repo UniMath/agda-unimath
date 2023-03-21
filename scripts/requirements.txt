@@ -1,1 +1,3 @@
+# Keep in sync with flake.nix
 requests
+pre-commit
