@@ -11,8 +11,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
 open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
@@ -84,7 +86,24 @@ abstract
           ( is-finite-Prop ((x : A) → B x))
           ( λ h → unit-trunc-Prop (count-Π e h)))
 
+  is-finite-Π' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-finite A → ((x : A) → is-finite (B x)) → is-finite ({x : A} → B x)
+  is-finite-Π' {l1} {l2} {A} {B} f g =
+    is-finite-equiv
+      (( pair
+        ( λ f {x} → f x)
+        ( is-equiv-has-inverse
+          ( λ g x → g {x})
+          ( refl-htpy)
+          ( refl-htpy))))
+      (is-finite-Π f g)
+
 Π-𝔽 : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
 pr1 (Π-𝔽 A B) = (x : type-𝔽 A) → type-𝔽 (B x)
 pr2 (Π-𝔽 A B) = is-finite-Π (is-finite-type-𝔽 A) (λ x → is-finite-type-𝔽 (B x))
+
+Π-𝔽' : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
+pr1 (Π-𝔽' A B) = {x : type-𝔽 A} → type-𝔽 (B x)
+pr2 (Π-𝔽' A B) = is-finite-Π' (is-finite-type-𝔽 A) (λ x → is-finite-type-𝔽 (B x))
 ```
