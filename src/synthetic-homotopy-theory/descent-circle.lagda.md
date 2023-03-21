@@ -115,9 +115,9 @@ module _
   pr1 (ev-Fam-circle P) = P (base-free-loop l)
   pr2 (ev-Fam-circle P) = equiv-tr P (loop-free-loop l)
 
-  triangle-comparison-fam-circle :
+  triangle-comparison-Fam-circle :
     ev-Fam-circle ~ ((comparison-Fam-circle l2) ∘ (ev-free-loop l (UU l2)))
-  triangle-comparison-fam-circle P =
+  triangle-comparison-Fam-circle P =
     eq-Eq-Fam-circle
       ( ev-Fam-circle P)
       ( comparison-Fam-circle _ (ev-free-loop l (UU _) P))
@@ -131,7 +131,7 @@ module _
       ( ev-Fam-circle)
       ( comparison-Fam-circle l2)
       ( ev-free-loop l (UU l2))
-      ( triangle-comparison-fam-circle)
+      ( triangle-comparison-Fam-circle)
       ( up-circle (UU l2))
       ( is-equiv-comparison-Fam-circle l2)
 
