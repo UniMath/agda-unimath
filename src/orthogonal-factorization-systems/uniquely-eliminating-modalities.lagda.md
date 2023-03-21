@@ -13,8 +13,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.propositions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
@@ -81,6 +83,25 @@ module _
 ```
 
 ## Properties
+
+### Being uniquely eliminating is a property
+
+```agda
+module _
+  {l1 l2 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
+  where
+
+  is-prop-is-uniquely-eliminating-modality :
+    is-prop (is-uniquely-eliminating-modality unit-○)
+  is-prop-is-uniquely-eliminating-modality =
+    is-prop-Π λ X → is-prop-Π λ P → is-property-is-local-family unit-○ (○ ∘ P)
+
+  is-uniquely-eliminating-modality-Prop : Prop (lsuc l1 ⊔ l2)
+  pr1 is-uniquely-eliminating-modality-Prop =
+    is-uniquely-eliminating-modality unit-○
+  pr2 is-uniquely-eliminating-modality-Prop =
+    is-prop-is-uniquely-eliminating-modality
+```
 
 ### `○ X` is modal
 
