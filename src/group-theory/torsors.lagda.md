@@ -2,7 +2,11 @@
 
 ```agda
 module group-theory.torsors where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -18,9 +22,9 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import group-theory.group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-group-actions
+open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-groups
@@ -28,7 +32,11 @@ open import group-theory.isomorphisms-groups
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.principal-group-actions
 open import group-theory.symmetric-groups
+```
 
+</details>
+
+```agda
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where

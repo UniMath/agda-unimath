@@ -119,10 +119,13 @@ number-well-ordering-principle-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) (nP : Σ ℕ P) → ℕ
 number-well-ordering-principle-ℕ P d nP =
   pr1 (well-ordering-principle-ℕ P d nP)
+```
 
-{- Also show that the well-ordering principle returns 0 if P 0 holds,
-   independently of the input (pair n p) : Σ ℕ P. -}
+### The well-ordering principle returns `0` if `P 0` holds
 
+This is independently of the input `(pair n p) : Σ ℕ P`.
+
+```agda
 is-zero-well-ordering-principle-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
   (n : ℕ) (p : P (succ-ℕ n)) (d0 : is-decidable (P zero-ℕ)) →

@@ -9,7 +9,6 @@ module ring-theory.central-elements-rings where
 ```agda
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.universe-levels
 
 open import ring-theory.central-elements-semirings

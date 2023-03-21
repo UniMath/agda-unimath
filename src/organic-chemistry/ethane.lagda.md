@@ -152,7 +152,7 @@ module _
 
   is-contr-standard-edge-ethane :
     (c : vertex-ethane) →
-    is-contr (Σ (vertex-ethane)  (λ c' → standard-edge-ethane c c'))
+    is-contr (Σ (vertex-ethane) (λ c' → standard-edge-ethane c c'))
   pr1 (pr1 (is-contr-standard-edge-ethane (inl (inr star)))) = one-Fin 1
   pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
     unit-trunc-Prop (zero-Fin 1 , refl)

@@ -1324,7 +1324,7 @@ module _
                               ( Fin-UU-Fin l1 (succ-ℕ (succ-ℕ n)))
                               ( star)
                               ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n))))))))
-                  (  inv
+                  ( inv
                     ( comp-eq-equiv
                       ( raise l4 (Fin 2))
                       ( equivalence-class

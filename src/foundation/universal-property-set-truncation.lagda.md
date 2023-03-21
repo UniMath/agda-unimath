@@ -55,7 +55,7 @@ universal-property-set-truncation :
   (B : Set l2) (f : A → type-Set B) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-set-truncation l {A = A} B f =
   (C : Set l) (g : A → type-Set C) →
-  is-contr (Σ (type-hom-Set B C) (λ h → (h ∘ f) ~  g))
+  is-contr (Σ (type-hom-Set B C) (λ h → (h ∘ f) ~ g))
 ```
 
 ### The dependent universal property of set truncations

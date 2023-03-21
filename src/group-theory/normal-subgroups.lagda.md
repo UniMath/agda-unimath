@@ -82,7 +82,7 @@ is-normal-is-normal-Subgroup G H K x y =
 is-normal-is-normal-Subgroup' :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
   is-normal-Subgroup' G H → is-normal-Subgroup G H
-is-normal-is-normal-Subgroup' G H  K x y =
+is-normal-is-normal-Subgroup' G H K x y =
   tr
     ( is-in-Subgroup G H)
     ( inv (htpy-conjugation-Group' G x (inclusion-Subgroup G H y)))

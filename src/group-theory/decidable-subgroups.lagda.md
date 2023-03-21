@@ -210,7 +210,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
   where
 
-  type-group-Decidable-Subgroup :  UU (l1 ⊔ l2)
+  type-group-Decidable-Subgroup : UU (l1 ⊔ l2)
   type-group-Decidable-Subgroup =
     type-group-Subgroup G (subgroup-Decidable-Subgroup G H)
 

@@ -48,7 +48,7 @@ module _
   leq-poset-Prop : (x y : element-Poset) → Prop l2
   leq-poset-Prop = pr1 (pr2 X)
 
-  leq-Poset : (x y : element-Poset) →  UU l2
+  leq-Poset : (x y : element-Poset) → UU l2
   leq-Poset x y = type-Prop (leq-poset-Prop x y)
 
   is-prop-leq-Poset : (x y : element-Poset) → is-prop (leq-Poset x y)

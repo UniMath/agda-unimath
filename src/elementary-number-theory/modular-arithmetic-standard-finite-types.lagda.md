@@ -446,7 +446,7 @@ is-add-one-succ-Fin' :
 is-add-one-succ-Fin' zero-ℕ (inr star) = refl
 is-add-one-succ-Fin' (succ-ℕ k) x =
   ( ap (succ-Fin (succ-ℕ (succ-ℕ k))) (inv (issec-nat-Fin (succ-ℕ k) x))) ∙
-  ( ap ( mod-succ-ℕ  (succ-ℕ k))
+  ( ap ( mod-succ-ℕ (succ-ℕ k))
        ( ap
          ( add-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))
          ( inv (is-one-nat-one-Fin (succ-ℕ k)))))

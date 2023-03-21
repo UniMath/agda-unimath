@@ -1451,7 +1451,7 @@ module _
         ( ( inv (eq-orientation-two-elements-count i j np)) ∙
           ( ap
             ( λ Y' → pr1 (orientation-two-elements-count i j np Y'))
-            (  eq-equal-elements-standard-2-Element-Decidable-Subtype
+            ( eq-equal-elements-standard-2-Element-Decidable-Subtype
               ( has-decidable-equality-count eX)
               ( np)
               ( λ p → np' (inv p))
@@ -1555,7 +1555,7 @@ module _
                     ( np)))
                 ( x))
               ( x)))))) ∙
-      (  ap
+      ( ap
         ( λ w →
           pr1
             ( cases-orientation-two-elements-count i j Y
@@ -2287,7 +2287,7 @@ module _
                   ( np))))))
         ( nq)
         ( nr)) ∙
-      (  is-fixed-point-standard-transposition
+      ( is-fixed-point-standard-transposition
         ( has-decidable-equality-count eX)
         ( np)
         ( x)
@@ -2668,7 +2668,7 @@ module _
        ex-falso
         ( pr2 T
           ( eq-pair-Σ
-            (  inward-edge-right-two-elements-orientation-count i j np
+            ( inward-edge-right-two-elements-orientation-count i j np
               ( pr1 T)
               ( y)
               ( tr

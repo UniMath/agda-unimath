@@ -8,7 +8,6 @@ module elementary-number-theory.goldbach-conjecture where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
@@ -22,7 +21,7 @@ open import foundation.universe-levels
 
 </details>
 
-# The Goldbach Conjecture
+## Conjecture
 
 ```agda
 Goldbach-conjecture : UU lzero

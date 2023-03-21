@@ -4,6 +4,14 @@
 module commutative-algebra.maximal-ideals-commutative-rings where
 ```
 
+<details><summary>Imports</summary>
+
+```agda
+
+```
+
+</details>
+
 ## Idea
 
 Maximal ideals in a commutative ring `R` are proper ideals `I` such that any
