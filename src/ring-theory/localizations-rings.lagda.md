@@ -15,14 +15,10 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.invertible-elements-monoids
-
 open import ring-theory.homomorphisms-rings
-open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings

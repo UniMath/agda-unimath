@@ -9,7 +9,6 @@ module group-theory.central-elements-monoids where
 ```agda
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.central-elements-semigroups

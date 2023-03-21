@@ -12,13 +12,10 @@ open import foundation.type-duality public
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.full-subtypes
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
-open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.structure
@@ -26,7 +23,6 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.fibers-of-maps

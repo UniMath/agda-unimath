@@ -11,15 +11,10 @@ open import foundation.trivial-sigma-decompositions public
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types

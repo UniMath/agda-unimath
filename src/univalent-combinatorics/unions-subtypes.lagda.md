@@ -12,7 +12,6 @@ open import foundation.unions-subtypes public
 open import foundation.decidable-equality
 open import foundation.propositional-truncations
 open import foundation.subtypes
-open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import univalent-combinatorics.coproduct-types

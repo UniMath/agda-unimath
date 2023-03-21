@@ -16,8 +16,6 @@ open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
-open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.functions
@@ -25,7 +23,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

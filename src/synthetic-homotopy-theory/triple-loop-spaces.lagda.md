@@ -119,6 +119,7 @@ right-unit-law-z-concat-Ω³ :
 right-unit-law-z-concat-Ω³ α =
   ( right-unit-law-z-concat-Id³ α) ∙
   {!!}
+-}
 {-
   ( ( inv right-unit) ∙
     ( ( inv-nat-htpy (λ ω → right-unit-law-horizontal-concat-Id² ω) α) ∙

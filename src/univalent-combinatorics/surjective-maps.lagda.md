@@ -17,26 +17,18 @@ open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

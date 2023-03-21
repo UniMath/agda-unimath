@@ -2,7 +2,11 @@
 
 ```agda
 module univalent-combinatorics.symmetric-difference where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.symmetric-difference public
 
 open import elementary-number-theory.addition-natural-numbers
@@ -25,6 +29,8 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```
+
+</details>
 
 ```agda
 module _
@@ -52,24 +58,24 @@ module _
               ( F)))))
   eq-symmetric-difference =
     ( ( coprod-eq-is-finite
-      ( is-finite-type-decidable-subtype P F)
-      ( is-finite-type-decidable-subtype Q F))) ∙
+        ( is-finite-type-decidable-subtype P F)
+        ( is-finite-type-decidable-subtype Q F))) ∙
       ( ( ap
-        ( number-of-elements-has-finite-cardinality)
-        ( all-elements-equal-has-finite-cardinality
-          ( has-finite-cardinality-is-finite
-            ( is-finite-coprod
-              ( is-finite-type-decidable-subtype P F)
-              ( is-finite-type-decidable-subtype Q F)))
-          ( pair
-            ( number-of-elements-is-finite
-              ( is-finite-coprod-symmetric-difference))
-            ( transitive-mere-equiv
-              ( mere-equiv-has-finite-cardinality
-                ( has-finite-cardinality-is-finite
-                  ( is-finite-coprod-symmetric-difference)))
-              ( unit-trunc-Prop
-                ( inv-equiv (equiv-symmetric-difference P Q))))))) ∙
+          ( number-of-elements-has-finite-cardinality)
+          ( all-elements-equal-has-finite-cardinality
+            ( has-finite-cardinality-is-finite
+              ( is-finite-coprod
+                ( is-finite-type-decidable-subtype P F)
+                ( is-finite-type-decidable-subtype Q F)))
+            ( pair
+              ( number-of-elements-is-finite
+                ( is-finite-coprod-symmetric-difference))
+              ( transitive-mere-equiv
+                ( mere-equiv-has-finite-cardinality
+                  ( has-finite-cardinality-is-finite
+                    ( is-finite-coprod-symmetric-difference)))
+                ( unit-trunc-Prop
+                  ( inv-equiv (equiv-symmetric-difference P Q))))))) ∙
         ( inv
           ( coprod-eq-is-finite
             ( is-finite-type-decidable-subtype
@@ -82,9 +88,9 @@ module _
                   ( symmetric-difference-decidable-subtype P Q))
                 ( n))
             ( ( inv
-              ( coprod-eq-is-finite
-                ( is-finite-intersection)
-                ( is-finite-intersection))) ∙
+                ( coprod-eq-is-finite
+                  ( is-finite-intersection)
+                  ( is-finite-intersection))) ∙
               ( ap
                 ( λ n →
                   add-ℕ

@@ -11,7 +11,6 @@ open import foundation.binary-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.universe-levels

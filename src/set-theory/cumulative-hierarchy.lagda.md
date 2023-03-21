@@ -15,7 +15,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equational-reasoning
-open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.functions
 open import foundation.functoriality-propositional-truncation
@@ -30,8 +29,6 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>

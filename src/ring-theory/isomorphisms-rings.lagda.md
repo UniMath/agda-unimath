@@ -7,8 +7,6 @@ module ring-theory.isomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

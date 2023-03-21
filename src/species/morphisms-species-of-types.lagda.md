@@ -18,9 +18,6 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import species.species-of-types
-open import species.species-of-types-in-subuniverse
-
-open import univalent-combinatorics.finite-types
 ```
 
 </details>

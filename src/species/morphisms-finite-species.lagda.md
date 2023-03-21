@@ -19,7 +19,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import species.morphisms-species-of-types
 open import species.species-of-finite-types
 
 open import univalent-combinatorics.finite-types
