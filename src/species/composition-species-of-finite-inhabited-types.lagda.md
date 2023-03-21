@@ -54,18 +54,18 @@ equiv-Σ-Decomposition-Inhabited-Type-𝔽-Σ-Decomposition-𝔽 X =
       ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse
         ( is-finite-and-inhabited-Prop)
         ( map-compute-Inhabited-Type-𝔽' X))) ∘e
-  ( ( equiv-tot
-      ( λ D →
-        equiv-prod
-          ( equiv-add-redundant-prop
-            ( is-property-is-inhabited _)
-            ( λ _ →
-              map-is-inhabited
-                ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
-                ( is-inhabited-type-Inhabited-Type-𝔽 X)))
-          ( id-equiv))) ∘e
-  ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽
-      (finite-type-Inhabited-Type-𝔽 X)))))
+    ( ( equiv-tot
+        ( λ D →
+          equiv-prod
+            ( equiv-add-redundant-prop
+              ( is-property-is-inhabited _)
+              ( λ _ →
+                map-is-inhabited
+                  ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
+                  ( is-inhabited-type-Inhabited-Type-𝔽 X)))
+            ( id-equiv))) ∘e
+      ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽
+          (finite-type-Inhabited-Type-𝔽 X)))))
 
 is-finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 :
   {l : Level} (X : Inhabited-Type-𝔽 l) →

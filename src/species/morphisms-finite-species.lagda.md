@@ -143,7 +143,7 @@ pr2 (extensionality-hom-species-𝔽 F G f g) =
 
 ### The type of homomorphisms of finite species is a set
 
-````agda
+```agda
 is-set-type-hom-species-𝔽 :
   {l1 l2 l3 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3) →
   is-set (type-hom-species-𝔽 F G)
@@ -162,4 +162,3 @@ hom-species-𝔽 :
 pr1 (hom-species-𝔽 F G) = type-hom-species-𝔽 F G
 pr2 (hom-species-𝔽 F G) = is-set-type-hom-species-𝔽 F G
 ```
-````

@@ -353,10 +353,10 @@ fib-Σ {l} X A =
       ( equiv-Fib l A)
       ( λ s →
         inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
-  ( ( equiv-right-swap-Σ) ∘e
-  ( ( inv-left-unit-law-Σ-is-contr
-      ( is-contr-total-equiv X)
-      ( X , id-equiv )))))
+    ( ( equiv-right-swap-Σ) ∘e
+      ( ( inv-left-unit-law-Σ-is-contr
+          ( is-contr-total-equiv X)
+          ( X , id-equiv )))))
 
 equiv-fixed-Slice-structure :
   {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →
@@ -368,10 +368,10 @@ equiv-fixed-Slice-structure {l} P X A =
       ( equiv-Fib-structure l P A)
       ( λ s →
         inv-equiv (equiv-postcomp-equiv (equiv-total-fib (pr1 (pr2 s))) X))) ∘e
-  ( ( equiv-right-swap-Σ) ∘e
-  ( ( inv-left-unit-law-Σ-is-contr
-      ( is-contr-total-equiv X)
-      ( X , id-equiv )))))
+    ( ( equiv-right-swap-Σ) ∘e
+      ( ( inv-left-unit-law-Σ-is-contr
+          ( is-contr-total-equiv X)
+          ( X , id-equiv )))))
 ```
 
 ### Subtype duality

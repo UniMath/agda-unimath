@@ -189,44 +189,46 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
           ( id-equiv)
           ( λ X →
             inv-equiv is-finite-iff-∃-surjection-has-decidable-equality)) ∘e
-  ( ( inv-assoc-Σ
-        ( UU _)
-        ( λ X →
-            has-decidable-equality X ×
-            type-trunc-Prop (Σ ℕ (λ n → Fin n ↠  X)))
-        ( λ X → type-𝔽 A ↠ pr1 X)  ) ∘e
-  ( ( equiv-Σ
-        (λ X →
-            Σ ( has-decidable-equality X ×
-                type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-              ( λ _ → pr1 A ↠ X))
-        ( id-equiv)
-        ( λ X →
-          ( ( inv-equiv
-              ( assoc-prod
-                ( has-decidable-equality X)
-                ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-                ( type-𝔽 A ↠ X))) ∘e
-          ( ( equiv-prod id-equiv commutative-prod) ∘e
-          ( ( assoc-prod
-              ( has-decidable-equality (map-equiv id-equiv X))
-              ( type-𝔽 A ↠ X)
-              ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
-          ( ( equiv-prod commutative-prod id-equiv)  ∘e
-          ( ( equiv-add-redundant-prop
-              ( is-prop-type-trunc-Prop)
-              ( λ x →
-                 apply-universal-property-trunc-Prop
-                   ( is-finite-type-𝔽 A)
-                   ( trunc-Prop ( Σ ℕ (λ n → Fin n ↠ X)))
-                   ( λ count-A →
-                     unit-trunc-Prop
-                       ( number-of-elements-count count-A ,
-                         ( (map-surjection (pr1 x) ∘ map-equiv-count count-A) ,
-                           is-surjective-precomp-equiv
-                             ( is-surjective-map-surjection (pr1 x))
-                             ( equiv-count count-A)))))))))))) ∘e
-  ( equiv-Surjection-Into-Set-Decidable-Equivalence-Relation (type-𝔽 A))))))
+    ( ( inv-assoc-Σ
+          ( UU _)
+          ( λ X →
+              has-decidable-equality X ×
+              type-trunc-Prop (Σ ℕ (λ n → Fin n ↠  X)))
+          ( λ X → type-𝔽 A ↠ pr1 X)  ) ∘e
+      ( ( equiv-Σ
+            (λ X →
+                Σ ( has-decidable-equality X ×
+                    type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+                  ( λ _ → pr1 A ↠ X))
+            ( id-equiv)
+            ( λ X →
+              ( ( inv-equiv
+                  ( assoc-prod
+                    ( has-decidable-equality X)
+                    ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+                    ( type-𝔽 A ↠ X))) ∘e
+                ( ( equiv-prod id-equiv commutative-prod) ∘e
+                  ( ( assoc-prod
+                      ( has-decidable-equality (map-equiv id-equiv X))
+                      ( type-𝔽 A ↠ X)
+                      ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
+                  ( ( equiv-prod commutative-prod id-equiv)  ∘e
+                    ( ( equiv-add-redundant-prop
+                        ( is-prop-type-trunc-Prop)
+                        ( λ x →
+                           apply-universal-property-trunc-Prop
+                             ( is-finite-type-𝔽 A)
+                             ( trunc-Prop ( Σ ℕ (λ n → Fin n ↠ X)))
+                             ( λ count-A →
+                               unit-trunc-Prop
+                                 ( number-of-elements-count count-A ,
+                                   ( ( map-surjection (pr1 x) ∘
+                                       map-equiv-count count-A) ,
+                                     is-surjective-precomp-equiv
+                                       ( is-surjective-map-surjection (pr1 x))
+                                       ( equiv-count count-A)))))))))))) ∘e
+        ( equiv-Surjection-Into-Set-Decidable-Equivalence-Relation
+          ( type-𝔽 A))))))
 ```
 
 ### The type of decidable equivalence relations on a finite type is finite
