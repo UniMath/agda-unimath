@@ -86,7 +86,7 @@ summary_template = """
     - [Install](HOWTO-INSTALL.md)
     - [Cite the library](CITATION.cff)
   - [Guidelines](CODINGSTYLE.md)
-    - [Structure your file](FILE-CONVENTIONS.md)
+    - [Structure your file](CONVENTIONS.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)
