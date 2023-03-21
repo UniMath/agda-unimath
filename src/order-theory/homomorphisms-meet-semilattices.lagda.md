@@ -1,7 +1,7 @@
 # Homomorphisms of meet semilattices
 
 ```agda
-module order-theory.homomorphisms-of-meet-semilattices where
+module order-theory.homomorphisms-meet-semilattices where
 ```
 
 <details><summary>Imports</summary>
