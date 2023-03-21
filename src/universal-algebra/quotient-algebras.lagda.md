@@ -1,4 +1,4 @@
-# Quotient Algebras
+# Quotient algebras
 
 ```agda
 module universal-algebra.quotient-algebras where
