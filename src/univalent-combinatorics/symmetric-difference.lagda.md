@@ -14,16 +14,13 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.intersections-subtypes
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.xor
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.decidable-subtypes
