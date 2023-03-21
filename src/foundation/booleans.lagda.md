@@ -44,7 +44,7 @@ data bool : UU lzero where
   true false : bool
 
 {-# BUILTIN BOOL bool #-}
-{-# BUILTIN TRUE  true  #-}
+{-# BUILTIN TRUE true #-}
 {-# BUILTIN FALSE false #-}
 ```
 
