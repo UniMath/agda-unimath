@@ -319,7 +319,7 @@ skip-neg-two-Fin (succ-ℕ k) (inl x) = inl (inl x)
 skip-neg-two-Fin (succ-ℕ k) (inr x) = neg-one-Fin (succ-ℕ k)
 ```
 
-We define the predecessor function on Fin k.
+We define the predecessor function on `Fin k`.
 
 ```agda
 pred-Fin : (k : ℕ) → Fin k → Fin k
