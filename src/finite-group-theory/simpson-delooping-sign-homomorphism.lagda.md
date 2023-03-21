@@ -64,7 +64,12 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-### Simpson's delooping of the sign homomorphism
+## Ideas
+
+We give a definition of the delooping of the sign homomorphism based on a
+suggestion by Alex Simpson.
+
+## Definitions
 
 ```agda
 module _
@@ -797,3 +802,8 @@ module _
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)
 ```
+
+## References
+
+- Mangel É. and Rijke E.
+  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).

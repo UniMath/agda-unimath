@@ -77,7 +77,25 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-### Deloopings of the sign homomorphism
+## Ideas
+
+The delooping of a group homomorphism `f : G → H` is a pointed map `Bf : BG → BH` equiped with an homotopy witnessing that the following square commutes :
+```md
+       f
+  G -------> H
+  |          |
+ ≅|          |≅
+  |          |
+  v          v
+  BG ------> BH
+       ΩBf
+```
+
+In this file, we study the delooping of the sign homomorphism, and, more precisely, how to detect that a pointed map between `BSn` and `BS2` is a delooping of the sign homomorphism.
+
+## Definition
+
+### Construction of the delooping of the sign homomorphism with quotients (Corollary 25)
 
 ```agda
 module _
@@ -1988,7 +2006,7 @@ module _
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
 ```
 
-### General case
+### General case for the construction of the delooping of sign homomorphism (Proposition 22)
 
 ```agda
 module _
@@ -2139,3 +2157,15 @@ module _
           Q-transposition-swap n Y
           (pr1 (equiv-Q-fin-fin-2 (succ-ℕ (succ-ℕ n)) star) (zero-Fin 1)))
 ```
+
+## See also
+
+- Definition of the delooping of the sign homomorphism based on Cartier
+  ['finite-group-theory.cartier-delooping-sign-homomorphism'](finite-group-theory.cartier-delooping-sign-homomorphism).
+- Definition of the delooping of the sign homomorphism based on Simpson
+  ['finite-group-theory.simpson-delooping-sign-homomorphism'](finite-group-theory.simpson-delooping-sign-homomorphism).
+
+## References
+
+- Mangel É. and Rijke E.
+  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).

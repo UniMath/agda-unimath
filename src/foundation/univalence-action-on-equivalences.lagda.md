@@ -25,6 +25,13 @@ open import foundation.universe-levels
 
 </details>
 
+## Ideas
+
+Given a subuniverse `P`, any family of types `B` indexed by types of `P`
+has an action on equivalences obtained by using the univalence axiom.
+
+## Definition
+
 ```agda
 module _
   { l1 l2 l3 : Level}
@@ -34,7 +41,11 @@ module _
   univalent-action-equiv : (X Y : type-subuniverse P) →
     pr1 X ≃ pr1 Y → B X ≃ B Y
   univalent-action-equiv X Y e = equiv-tr B (eq-equiv-subuniverse P e)
+```
 
+## Properties
+
+```
   preserves-id-equiv-univalent-action-equiv : (X : type-subuniverse P) →
     univalent-action-equiv X X id-equiv ＝ id-equiv
   preserves-id-equiv-univalent-action-equiv X =

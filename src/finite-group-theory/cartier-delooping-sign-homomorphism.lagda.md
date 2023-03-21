@@ -47,6 +47,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
+We define the delooping of the sign homomorphism by using a method of Cartier.
+
 ## Definitions
 
 ```agda
@@ -204,3 +206,8 @@ module _
           ( star))
       ( not-even-difference-univalent-action-equiv)
 ```
+
+## References
+
+- Mangel É. and Rijke E.
+  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).
