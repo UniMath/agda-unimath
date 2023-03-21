@@ -1,28 +1,14 @@
 {
-  // UI settings
   "breadcrumbs.enabled": false,
-
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.expand": false,
-  "explorer.fileNesting.patterns": {
-    "*.agda": "${capture}.agdai, ${capture}.agda~",
-    "*.lagda": "${capture}.agdai, ${capture}.agda~",
-    "*.lagda.md": "${capture}.agdai, ${capture}.agda~"
-  },
-
-  // Snippet setup
   "editor.quickSuggestions": {
     "other": "inline"
   },
   "editor.snippetSuggestions": "top",
   "editor.wordBasedSuggestions": false,
-  "javascript.suggest.names": false,
-
-  // Autoformatting and file type specific settings
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-
+  "javascript.suggest.names": false,
   "[agda]": {
     "editor.tabSize": 2,
     "editor.rulers": [80],
@@ -51,5 +37,13 @@
     "editor.defaultFormatter": "ms-python.python",
     "editor.formatOnType": true,
     "editor.formatOnSave": true
-  }
+  },
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.agda": "${capture}.agdai, ${capture}.agda~",
+    "*.lagda": "${capture}.agdai, ${capture}.agda~",
+    "*.lagda.md": "${capture}.agdai, ${capture}.agda~"
+  },
+  "explorer.fileNesting.expand": false
 }
