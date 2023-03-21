@@ -335,7 +335,7 @@ pr2 (coprod-π-Finite k A B) =
 
 ```agda
 Maybe-π-Finite :
-  {l : Level} (k : ℕ) → π-Finite l k → π-Finite l k
+  {l : Level} (k : ℕ) → π-Finite  l k → π-Finite l k
 Maybe-π-Finite k A =
   coprod-π-Finite k A (unit-π-Finite k)
 

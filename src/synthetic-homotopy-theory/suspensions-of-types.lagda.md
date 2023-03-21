@@ -187,7 +187,7 @@ module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c : suspension-structure X Z}
   where
 
-  refl-htpy-suspension-structure : htpy-suspension-structure c c
+  refl-htpy-suspension-structure :  htpy-suspension-structure c c
   refl-htpy-suspension-structure = refl , (refl , right-unit-htpy)
 
   is-refl-refl-htpy-suspension-structure : refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
@@ -457,7 +457,7 @@ module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where
 
-  equiv-susp-loop-adj : (suspension-Pointed-Type X →* Y) ≃ (X →* Ω Y)
+  equiv-susp-loop-adj : (suspension-Pointed-Type X →* Y)  ≃ (X →* Ω Y)
   equiv-susp-loop-adj =
     ( left-unit-law-Σ-is-contr
       ( is-contr-total-path (pt-Pointed-Type Y))

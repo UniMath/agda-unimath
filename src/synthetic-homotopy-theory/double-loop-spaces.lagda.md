@@ -66,7 +66,7 @@ naturality-right-unit :
 naturality-right-unit {p = refl} refl = refl
 
 naturality-right-unit-Ω² :
-  {l : Level} {A : UU l} {x : A} (α : type-Ω² x) →
+  {l : Level} {A : UU l} {x : A} (α :  type-Ω² x) →
   Id (ap (concat' x refl) α) α
 naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
 

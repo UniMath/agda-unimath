@@ -57,8 +57,8 @@ module _
       ( refl-htpy)
       ( inv (right-inv (preserves-point-function-pointed-Π A B f)))
       ( λ g → equiv-funext)
-      ( λ p → equiv-con-inv refl p (preserves-point-function-pointed-Π A B f) ∘e
-              equiv-inv (preserves-point-function-pointed-Π A B f) p)
+      ( λ p →  equiv-con-inv refl p (preserves-point-function-pointed-Π A B f)
+               ∘e equiv-inv (preserves-point-function-pointed-Π A B f) p)
 
   eq-htpy-pointed-Π :
     (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g

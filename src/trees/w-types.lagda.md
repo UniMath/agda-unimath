@@ -296,7 +296,7 @@ structure-htpy-hom-𝕎-Alg :
     ( structure-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X f))
 structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
   ( ( ( compute-structure-htpy-hom-𝕎-Alg X x α
-        ( htpy-htpy-hom-𝕎-Alg X (pair f μ-f))) ∙
+        ( htpy-htpy-hom-𝕎-Alg X (pair f μ-f)))  ∙
       ( inv right-unit)) ∙
     ( ap ( concat
            ( ap

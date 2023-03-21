@@ -47,7 +47,7 @@ module sections-dtt where
   section-system.slice (precomp-section-system g f) X =
     precomp-section-system
       ( section-system.slice g (section-system.type f X))
-      ( section-system.slice f X)
+      ( section-system.slice  f X)
 
   transpose-bifibered-system :
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : system l1 l2}

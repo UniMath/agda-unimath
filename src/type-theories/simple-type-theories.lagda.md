@@ -430,7 +430,7 @@ module simple where
                     ( generic-element.slice δ X)
 
   record type-theory
-    (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
+    (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc  l2)
     where
     field
       typ : UU l1
