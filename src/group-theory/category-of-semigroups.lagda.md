@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.large-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.isomorphisms-semigroups
@@ -46,7 +47,7 @@ eq-iso-Semigroup :
   {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
 eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
-Semigroup-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
-precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precat
-is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
+Semigroup-Large-Cat : Large-Cat lsuc (_⊔_)
+prω1 Semigroup-Large-Cat = Semigroup-Large-Precat
+prω2 Semigroup-Large-Cat = is-category-Semigroup
 ```

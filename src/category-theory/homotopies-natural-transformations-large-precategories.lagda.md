@@ -7,8 +7,6 @@ module category-theory.homotopies-natural-transformations-large-precategories wh
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
@@ -25,7 +23,7 @@ open import foundation.universe-levels
 Two natural transformations `α β : F ⇒ G` are homotopic if for every object `x`
 there is an identity `Id (α x) (β x)`.
 
-In `Setω` the identity type is not available. If it were, we would be able to
+In `UUω` the identity type is not available. If it were, we would be able to
 characterize the identity type of natural transformations from `F` to `G` as the
 type of homotopies of natural transformations.
 
@@ -39,7 +37,7 @@ module _
   where
 
   htpy-natural-transformation-Large-Precat :
-    (α β : natural-transformation-Large-Precat F G) → Setω
+    (α β : natural-transformation-Large-Precat F G) → UUω
   htpy-natural-transformation-Large-Precat α β =
     {l : Level} (X : obj-Large-Precat C l) →
     ( obj-natural-transformation-Large-Precat α X) ＝

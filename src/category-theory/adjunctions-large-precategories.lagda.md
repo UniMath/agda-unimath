@@ -7,8 +7,6 @@ module category-theory.adjunctions-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
@@ -54,7 +52,7 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat D C γG)
   where
 
-  record is-adjoint-pair-Large-Precat : Setω
+  record is-adjoint-pair-Large-Precat : UUω
     where
     field
       equiv-is-adjoint-pair-Large-Precat :
@@ -143,7 +141,7 @@ module _
   (G : functor-Large-Precat D C γG) (F : functor-Large-Precat C D γF)
   where
 
-  is-left-adjoint-functor-Large-Precat : Setω
+  is-left-adjoint-functor-Large-Precat : UUω
   is-left-adjoint-functor-Large-Precat =
     is-adjoint-pair-Large-Precat F G
 
@@ -153,7 +151,7 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat D C γG)
   where
 
-  is-right-adjoint-functor-Large-Precat : Setω
+  is-right-adjoint-functor-Large-Precat : UUω
   is-right-adjoint-functor-Large-Precat =
     is-adjoint-pair-Large-Precat F G
 
@@ -162,7 +160,7 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-  record Adjunction : Setω where
+  record Adjunction : UUω where
     field
       level-left-adjoint-Adjunction :
         Level → Level

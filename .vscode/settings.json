@@ -5,6 +5,7 @@
   },
   "editor.snippetSuggestions": "top",
   "editor.wordBasedSuggestions": false,
+  "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "javascript.suggest.names": false,
@@ -37,5 +38,12 @@
     "editor.formatOnType": true,
     "editor.formatOnSave": true
   },
-  "files.insertFinalNewline": true
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.agda": "${capture}.agdai, ${capture}.agda~",
+    "*.lagda": "${capture}.agdai, ${capture}.agda~",
+    "*.lagda.md": "${capture}.agdai, ${capture}.agda~"
+  },
+  "explorer.fileNesting.expand": false
 }

@@ -12,6 +12,7 @@ open import category-theory.large-categories
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.large-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -34,6 +35,6 @@ eq-iso-Group : {l : Level} (G H : Group l) → type-iso-Group G H → Id G H
 eq-iso-Group G H = map-inv-is-equiv (is-category-Group G H)
 
 Group-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
-precat-Large-Cat Group-Large-Cat = Group-Large-Precat
-is-category-Large-Cat Group-Large-Cat = is-category-Group
+prω1 Group-Large-Cat = Group-Large-Precat
+prω2 Group-Large-Cat = is-category-Group
 ```
