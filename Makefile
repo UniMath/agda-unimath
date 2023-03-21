@@ -13,7 +13,7 @@ TIME ?=time
 METAFILES:=CITATION.cff \
 			CODINGSTYLE.md \
 			CONTRIBUTORS.md \
-			FILE-CONVENTIONS.md \
+			CONVENTIONS.md \
 			DESIGN-PRINCIPLES.md \
 			HOME.md \
 			HOWTO-INSTALL.md \
@@ -22,7 +22,6 @@ METAFILES:=CITATION.cff \
 			README.md \
 			STATEMENT-OF-INCLUSION.md \
 			SUMMARY.md \
-			template.lagda.md \
 			USERS.md \
 
 .PHONY : agdaFiles
@@ -38,13 +37,13 @@ agdaFiles :
 src/everything.lagda.md : agdaFiles
 	@echo "\`\`\`agda" > $@ ;\
 	echo "{-# OPTIONS $(everythingOpts) #-}" >> $@ ;\
-	echo "" >> $@ ;\
 	echo "module everything where" >> $@ ;\
+	echo "" >> $@ ;\
 	cat agdaFiles \
 		| cut -c 5-               \
 		| cut -f1 -d'.'           \
 		| sed 's/\//\./g'         \
-		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 }' \
+		| sed 's/^/open import /' \
 		>> $@ ;\
 	echo "\`\`\`" >> $@ ;
 
