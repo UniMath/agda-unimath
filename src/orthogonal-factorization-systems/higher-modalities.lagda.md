@@ -234,7 +234,8 @@ module _
       ( Id-○ X x' y')
 ```
 
-### Homogenous higher modalities are closed under identity formation in the usual sense
+Homogenous higher modalities are closed under identity formation in the usual
+sense
 
 ```agda
 module _
@@ -263,25 +264,25 @@ module _
   (X : UU l)
   where
 
-  map-inv-unit-higher-modality : ○ (○ X) → ○ X
-  map-inv-unit-higher-modality = ind-○ (○ X) (λ _ → X) id
+  map-inv-modal-unit : ○ (○ X) → ○ X
+  map-inv-modal-unit = ind-○ (○ X) (λ _ → X) id
 
-  issec-unit-higher-modality : (map-inv-unit-higher-modality ∘ unit-○) ~ id
-  issec-unit-higher-modality = comp-○ (○ X) (λ _ → X) id
+  isretr-map-inv-modal-unit : (map-inv-modal-unit ∘ unit-○) ~ id
+  isretr-map-inv-modal-unit = comp-○ (○ X) (λ _ → X) id
 
-  isretr-unit-higher-modality : (unit-○ ∘ map-inv-unit-higher-modality) ~ id
-  isretr-unit-higher-modality x'' =
+  issec-map-inv-modal-unit : (unit-○ ∘ map-inv-modal-unit) ~ id
+  issec-map-inv-modal-unit x'' =
     map-inv-unit-id-higher-modality
       ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○)
       ( ind-○ (○ X)
-        ( λ x'' → unit-○ (map-inv-unit-higher-modality x'') ＝ x'')
-        ( unit-○ ∘ (ap unit-○ ∘ issec-unit-higher-modality)) x'')
+        ( λ x'' → unit-○ (map-inv-modal-unit x'') ＝ x'')
+        ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-modal-unit)) x'')
 
-  is-modal-higher-modality : is-modal unit-○ (○ X)
-  pr1 (pr1 is-modal-higher-modality) = map-inv-unit-higher-modality
-  pr2 (pr1 is-modal-higher-modality) = isretr-unit-higher-modality
-  pr1 (pr2 is-modal-higher-modality) = map-inv-unit-higher-modality
-  pr2 (pr2 is-modal-higher-modality) = issec-unit-higher-modality
+  is-modal-modal-operator-type : is-modal unit-○ (○ X)
+  pr1 (pr1 is-modal-modal-operator-type) = map-inv-modal-unit
+  pr2 (pr1 is-modal-modal-operator-type) = issec-map-inv-modal-unit
+  pr1 (pr2 is-modal-modal-operator-type) = map-inv-modal-unit
+  pr2 (pr2 is-modal-modal-operator-type) = isretr-map-inv-modal-unit
 ```
 
 ## Higher modalities are uniquely eliminating modalities

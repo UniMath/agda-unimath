@@ -7,14 +7,11 @@ module orthogonal-factorization-systems.uniquely-eliminating-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
@@ -78,47 +75,6 @@ module _
   is-uniquely-eliminating-modality-uniquely-eliminating-modality :
     is-uniquely-eliminating-modality unit-○
   is-uniquely-eliminating-modality-uniquely-eliminating-modality = is-uem-○
-```
-
-## Properties
-
-### `○ X` is modal
-
-```agda
-module _
-  {l : Level}
-  ((○ , unit-○ , is-uem-○) : uniquely-eliminating-modality l l)
-  (X : UU l)
-  where
-
-  map-inv-unit-uniquely-eliminating-modality : ○ (○ X) → ○ X
-  map-inv-unit-uniquely-eliminating-modality =
-    modal-ind-is-uniquely-eliminating-modality is-uem-○ (○ X) (λ _ → X) id
-
-  issec-unit-uniquely-eliminating-modality :
-    (map-inv-unit-uniquely-eliminating-modality ∘ unit-○) ~ id
-  issec-unit-uniquely-eliminating-modality =
-    modal-comp-is-uniquely-eliminating-modality is-uem-○ (○ X) (λ _ → X) id
-
-  isretr-unit-uniquely-eliminating-modality :
-    (unit-○ ∘ map-inv-unit-uniquely-eliminating-modality) ~ id
-  isretr-unit-uniquely-eliminating-modality =
-    htpy-eq
-      ( ap pr1
-        ( eq-is-contr'
-          ( is-contr-map-is-equiv
-            ( is-uem-○ (○ X) (λ _ → ○ X))
-            λ x' → unit-○ x')
-          ( unit-○ ∘ map-inv-unit-uniquely-eliminating-modality ,
-            eq-htpy (ap unit-○ ∘ (issec-unit-uniquely-eliminating-modality)))
-          ( id , refl)))
-
-  is-modal-uniquely-eliminating-modality : is-modal unit-○ (○ X)
-  is-modal-uniquely-eliminating-modality =
-    is-equiv-has-inverse
-      map-inv-unit-uniquely-eliminating-modality
-      isretr-unit-uniquely-eliminating-modality
-      issec-unit-uniquely-eliminating-modality
 ```
 
 ## See also
