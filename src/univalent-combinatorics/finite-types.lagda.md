@@ -30,10 +30,12 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
@@ -222,6 +224,12 @@ pr2 (has-finite-cardinality-is-empty f) =
 abstract
   is-finite-unit : is-finite unit
   is-finite-unit = is-finite-count count-unit
+
+abstract
+  is-finite-raise-unit :
+    {l1 : Level} → is-finite (raise-unit l1)
+  is-finite-raise-unit {l1} =
+    is-finite-equiv (compute-raise-unit l1) is-finite-unit
 
 unit-𝔽 : 𝔽 lzero
 pr1 unit-𝔽 = unit
