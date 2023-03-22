@@ -18,7 +18,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.multivariable-homotopies
 open import foundation.multivariable-operations
 open import foundation.propositions
 open import foundation.subtypes
@@ -135,15 +134,12 @@ module _
   multivariable-htpy-hom-Eq-Rel :
     (f g : multivariable-hom-Eq-Rel) → UU l1
   multivariable-htpy-hom-Eq-Rel f g =
-    multivariable-htpy n As X
-      ( map-multivariable-hom-Eq-Rel f)
+    ( map-multivariable-hom-Eq-Rel f) ~
       ( map-multivariable-hom-Eq-Rel g)
 
   refl-multivariable-htpy-hom-Eq-Rel :
     (f : multivariable-hom-Eq-Rel) → multivariable-htpy-hom-Eq-Rel f f
-  refl-multivariable-htpy-hom-Eq-Rel f =
-    refl-multivariable-htpy n As X
-      ( map-multivariable-hom-Eq-Rel f)
+  refl-multivariable-htpy-hom-Eq-Rel f = refl-htpy
 
   multivariable-htpy-eq-hom-Eq-Rel :
     (f g : multivariable-hom-Eq-Rel) → (f ＝ g) →
