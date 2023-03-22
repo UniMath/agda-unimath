@@ -17,14 +17,6 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-<<<<<<< HEAD
-=======
-open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.homotopies
-open import foundation-core.propositions
-open import foundation-core.universe-levels
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 </details>
@@ -66,8 +58,6 @@ module _
   is-decidable-type-Decidable-Relation x y =
     is-decidable-type-decidable-Prop (R x y)
 
-<<<<<<< HEAD
-=======
 map-inv-equiv-relation-is-decidable-Decidable-Relation :
   {l1 l2 : Level} {X : UU l1} →
   Σ ( Rel-Prop l2 X) (λ R → is-decidable-Rel-Prop R) →
@@ -77,7 +67,6 @@ map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d)  x y =
     ( is-prop-type-Rel-Prop R x y) ,
     ( d x y))
 
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 equiv-relation-is-decidable-Decidable-Relation :
   {l1 l2 : Level} {X : UU l1} →
   Decidable-Relation l2 X ≃
@@ -87,11 +76,7 @@ pr1 equiv-relation-is-decidable-Decidable-Relation dec-R =
     is-decidable-type-Decidable-Relation dec-R)
 pr2 equiv-relation-is-decidable-Decidable-Relation =
   is-equiv-has-inverse
-<<<<<<< HEAD
-    ( λ R → (λ x y → (pr1 (pr1 R x y)) , ((pr2 (pr1 R x y)) , (pr2 R x y)) ) )
-=======
     ( map-inv-equiv-relation-is-decidable-Decidable-Relation )
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     ( refl-htpy)
     ( refl-htpy)
 ```

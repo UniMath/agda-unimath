@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import species.composition-species-of-subuniverse
 open import species.species-of-finite-inhabited-types
+open import species.species-of-types-in-subuniverse
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.decidable-propositions

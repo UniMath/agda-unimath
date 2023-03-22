@@ -2,24 +2,17 @@
 
 ```agda
 module univalent-combinatorics.unions-subtypes where
-<<<<<<< HEAD
-
-=======
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.unions-subtypes public
 
 open import foundation.decidable-equality
 open import foundation.propositional-truncations
 open import foundation.subtypes
-<<<<<<< HEAD
 open import foundation.universal-property-propositional-truncation
-=======
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.universe-levels
 
 open import univalent-combinatorics.coproduct-types
@@ -30,11 +23,8 @@ open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
 ```
 
-<<<<<<< HEAD
-=======
 </details>
 
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ## Properties
 
 ### If `A` has decidable equalities, `P` and `Q` are subtypes of A equipped with a counting, then `P ∪ Q` is equipped with a counting

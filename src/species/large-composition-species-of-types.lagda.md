@@ -2,63 +2,41 @@
 
 ```agda
 module species.large-composition-species-of-types where
-<<<<<<< HEAD
-
-=======
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-relaxed-sigma-decompositions
 open import foundation.equivalences
 open import foundation.function-extensionality
-<<<<<<< HEAD
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
-open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universe-levels
-open import foundation.universal-property-dependent-pair-types
-=======
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.relaxed-sigma-decompositions
 open import foundation.trivial-relaxed-sigma-decompositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-dependent-pair-types
-<<<<<<< HEAD
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
-=======
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
 open import species.species-of-types
 ```
 
-<<<<<<< HEAD
-=======
 </details>
 
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ## Idea
 
 A specie of types `S : UU l1 → UU l2` can be thought of as the analytic
@@ -108,21 +86,6 @@ left-unit-law-comp-species-types {l1} F A =
       ( is-contr-type-trivial-Relaxed-Σ-Decomposition)
       ( trivial-Relaxed-Σ-Decomposition l1 A ,
         is-trivial-trivial-inhabited-Relaxed-Σ-Decomposition {l1} {l1} {A})) ∘e
-<<<<<<< HEAD
-  ( ( inv-assoc-Σ
-      ( Relaxed-Σ-Decomposition l1 l1 A)
-      ( λ D → is-contr (indexing-type-Relaxed-Σ-Decomposition D))
-      ( λ C → F (cotype-Relaxed-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
-  ( ( equiv-Σ
-      ( _)
-      ( id-equiv)
-      ( λ D →
-        equiv-Σ
-          ( λ z → F (cotype-Relaxed-Σ-Decomposition D (center z)))
-          ( id-equiv)
-          ( λ C →
-            ( left-unit-law-Π-is-contr C (center C))))))))
-=======
     ( ( inv-assoc-Σ
         ( Relaxed-Σ-Decomposition l1 l1 A)
         ( λ D → is-contr (indexing-type-Relaxed-Σ-Decomposition D))
@@ -136,7 +99,6 @@ left-unit-law-comp-species-types {l1} F A =
               ( id-equiv)
               ( λ C →
                 ( left-unit-law-Π-is-contr C (center C))))))))
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
 right-unit-law-comp-species-types :
   {l1 l2 : Level}
@@ -147,21 +109,6 @@ right-unit-law-comp-species-types {l1} F A =
       ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
       ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
         is-discrete-discrete-Relaxed-Σ-Decomposition) ) ∘e
-<<<<<<< HEAD
-  ( ( inv-assoc-Σ
-      ( Relaxed-Σ-Decomposition l1 l1 A)
-      ( λ D →
-          ( y : indexing-type-Relaxed-Σ-Decomposition D) →
-            is-contr (cotype-Relaxed-Σ-Decomposition D y))
-      ( λ D → F (indexing-type-Relaxed-Σ-Decomposition (pr1 D)))) ∘e
-  ( equiv-Σ
-      ( λ D →
-        ( (y : indexing-type-Relaxed-Σ-Decomposition D) →
-          analytic-unit-species-types ( cotype-Relaxed-Σ-Decomposition D y)) ×
-        F ( indexing-type-Relaxed-Σ-Decomposition D))
-     ( id-equiv)
-     ( λ _ → commutative-prod))))
-=======
     ( ( inv-assoc-Σ
         ( Relaxed-Σ-Decomposition l1 l1 A)
         ( λ D →
@@ -176,7 +123,6 @@ right-unit-law-comp-species-types {l1} F A =
               F ( indexing-type-Relaxed-Σ-Decomposition D))
          ( id-equiv)
          ( λ _ → commutative-prod)))))
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 ### Associativity of composition of species
@@ -223,32 +169,6 @@ module _
                         ( λ x → U ( cotype-Relaxed-Σ-Decomposition D1 x) ))) ∘e
                       ( inv-equiv equiv-ev-pair))) ∘e
                   ( distributive-Π-Σ)))))))))) ∘e
-<<<<<<< HEAD
-    ( ( assoc-Σ
-        ( Relaxed-Σ-Decomposition l1 l1 A)
-        ( λ D → Relaxed-Σ-Decomposition l1 l1
-          ( indexing-type-Relaxed-Σ-Decomposition D))
-        ( _)) ∘e
-    ( ( inv-equiv
-        ( equiv-Σ-equiv-base
-          ( _ )
-          ( equiv-displayed-fibered-Relaxed-Σ-Decomposition))) ∘e
-    ( ( inv-assoc-Σ
-        ( Relaxed-Σ-Decomposition l1 l1 A)
-        ( λ D →
-          ( x : indexing-type-Relaxed-Σ-Decomposition D) →
-            Relaxed-Σ-Decomposition l1 l1
-              ( cotype-Relaxed-Σ-Decomposition D x))
-        ( _)) ∘e
-    ( ( equiv-Σ
-        ( _)
-        ( id-equiv)
-        ( λ D → left-distributive-prod-Σ)) ∘e
-    ( ( equiv-Σ
-        ( _)
-        ( id-equiv)
-        ( λ D → equiv-prod id-equiv distributive-Π-Σ))))))))
-=======
       ( ( assoc-Σ
           ( Relaxed-Σ-Decomposition l1 l1 A)
           ( λ D → Relaxed-Σ-Decomposition l1 l1
@@ -273,7 +193,6 @@ module _
                   ( _)
                   ( id-equiv)
                   ( λ D → equiv-prod id-equiv distributive-Π-Σ))))))))
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
   htpy-assoc-comp-species-types :
     ( analytic-comp-species-types S (analytic-comp-species-types T  U)) ~

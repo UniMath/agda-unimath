@@ -7,7 +7,6 @@ module foundation.type-arithmetic-dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
-<<<<<<< HEAD
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,19 +17,6 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
-=======
-open import foundation.functoriality-dependent-function-types
-open import foundation.type-arithmetic-unit-type
-open import foundation.unit-type
-
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.univalence
-open import foundation-core.universe-levels
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 </details>
@@ -46,15 +32,6 @@ module _
 
   left-unit-law-Π-is-contr : ((a : A) → (B a)) ≃ B a
   left-unit-law-Π-is-contr =
-<<<<<<< HEAD
-    ( left-unit-law-Π ( λ _ → B a )) ∘e
-    ( equiv-Π
-      ( λ _ → B a)
-      ( terminal-map , is-equiv-terminal-map-is-contr C )
-      ( λ a →
-        equiv-eq
-         ( ap B ( eq-is-contr C))))
-=======
     ( ( left-unit-law-Π ( λ _ → B a )) ∘e
       ( equiv-Π
         ( λ _ → B a)
@@ -62,7 +39,6 @@ module _
         ( λ a →
           equiv-eq
            ( ap B ( eq-is-contr C)))))
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 ### The swap function `((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)` is an equivalence

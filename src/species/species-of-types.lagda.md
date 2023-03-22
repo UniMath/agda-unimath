@@ -2,26 +2,19 @@
 
 ```agda
 module species.species-of-types where
-<<<<<<< HEAD
-
-=======
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
 ```
 
-<<<<<<< HEAD
-=======
 </details>
 
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ### Idea
 
 In this file, we define the type of species of types. A species of types is just

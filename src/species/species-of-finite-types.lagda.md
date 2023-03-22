@@ -14,7 +14,7 @@ open import species.species-of-types-in-subuniverse
 open import univalent-combinatorics.finite-types
 ```
 
-</details>
+<\details>
 
 ## Idea
 

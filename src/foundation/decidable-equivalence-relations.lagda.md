@@ -7,12 +7,9 @@ module foundation.decidable-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
-<<<<<<< HEAD
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
-=======
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-relations
@@ -25,16 +22,12 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-<<<<<<< HEAD
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-=======
-open import foundation.functoriality-cartesian-product-types
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
@@ -45,29 +38,13 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 
-<<<<<<< HEAD
-=======
-open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-<<<<<<< HEAD
-=======
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 
@@ -166,11 +143,7 @@ equiv-equivalence-relation-is-decidable-Dec-Eq-Rel :
   {l1 l2 : Level} {X : UU l1} →
   Decidable-Equivalence-Relation l2 X ≃
   Σ ( Eq-Rel l2 X)
-<<<<<<< HEAD
-    ( λ R → ((x y : X) → is-decidable (sim-Eq-Rel R x y)))
-=======
     ( λ R → is-decidable-Eq-Rel R)
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 pr1 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel R =
   ( equivalence-relation-Decidable-Equivalence-Relation R ,
     is-decidable-sim-Decidable-Equivalence-Relation R)
@@ -506,12 +479,7 @@ module _
 ```agda
 has-decidable-equality-type-Surjection-Into-Set :
   {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A) →
-<<<<<<< HEAD
-  ( (x y : A) →
-    is-decidable ( sim-Eq-Rel (eq-rel-Surjection-Into-Set surj) x y)) →
-=======
   ( is-decidable-Eq-Rel (eq-rel-Surjection-Into-Set surj)) →
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
   has-decidable-equality (type-Surjection-Into-Set surj)
 has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
   apply-twice-dependent-universal-property-surj-is-surjective
@@ -541,39 +509,6 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
       ( id-equiv)
       ( λ X →
         ( equiv-prod
-<<<<<<< HEAD
-         ( id-equiv)
-         ( inv-equiv
-             ( equiv-add-redundant-prop
-               ( is-prop-is-set ( X))
-               ( is-set-has-decidable-equality)) ∘e
-           commutative-prod) ∘e
-        ( equiv-left-swap-Σ )))) ∘e
-  ( ( assoc-Σ
-      ( UU l1)
-      ( λ X → is-set X)
-      ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
-  ( ( assoc-Σ
-      ( Set l1)
-      ( λ X → (A ↠ type-Set X))
-      ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e
-  (  equiv-type-subtype
-     ( λ surj →
-       is-prop-Π
-         ( λ x →
-           is-prop-Π
-             ( λ y →
-               is-prop-is-decidable
-                 ( is-prop-sim-Eq-Rel (eq-rel-Surjection-Into-Set surj) x y))))
-     ( λ _ → is-prop-has-decidable-equality)
-     ( λ surj → has-decidable-equality-type-Surjection-Into-Set surj)
-     ( λ surj → is-decidable-Eq-Rel-Surjection-Into-Set surj) ∘e
-  ( ( inv-equiv
-      ( equiv-Σ-equiv-base
-        ( λ R → ((x y : A) → is-decidable (sim-Eq-Rel R x y)))
-        ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
-          equiv-equivalence-relation-is-decidable-Dec-Eq-Rel )))))
-=======
           ( id-equiv)
           ( inv-equiv
               ( equiv-add-redundant-prop
@@ -608,5 +543,4 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
                 ( λ R → is-decidable-Eq-Rel R)
                 ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
                   equiv-equivalence-relation-is-decidable-Dec-Eq-Rel )))))
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
