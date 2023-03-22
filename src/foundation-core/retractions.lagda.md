@@ -22,7 +22,7 @@ open import foundation-core.universe-levels
 A **retraction** is a map that has a right inverse, i.e. a section. Thus,
 `r : B → A` is a retraction of `f : A → B` if the composition `r ∘ f` is
 homotopic to the identity at `A`. Moreover, in this case we say that `A` _is a
-retract_ of `B`.
+retract of_ `B`.
 
 ## Definition
 
