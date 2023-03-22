@@ -13,7 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
-open import foundation.large-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.isomorphisms-semigroups
