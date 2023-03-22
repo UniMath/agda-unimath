@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+
 # Σ-decompositions of types
+
 =======
+
 # Relaxed Σ-decompositions of types
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
+
+> > > > > > > 796439c910d829eeb768284e48e75d667da1fbb3
 
 ```agda
 {-# OPTIONS --lossy-unification  #-}
@@ -12,7 +16,6 @@ module foundation.relaxed-sigma-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-<<<<<<< HEAD
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -39,24 +42,6 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
-=======
-open import foundation.equational-reasoning
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.structure-identity-principle
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
-
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
->>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 </details>
