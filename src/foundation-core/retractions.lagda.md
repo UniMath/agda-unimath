@@ -19,7 +19,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A retraction is a map that has a section.
+A **retraction** is a map that has a right inverse, i.e. a section. Thus,
+`r : B → A` is a retraction of `f : A → B` if the composition `r ∘ f` is
+homotopic to the identity at `A`. Moreover, in this case we say that `A` _is a
+retract_ of `B`.
 
 ## Definition
 
@@ -29,7 +32,7 @@ module _
   where
 
   retr : (f : A → B) → UU (l1 ⊔ l2)
-  retr f = Σ (B → A) (λ g → (g ∘ f) ~ id)
+  retr f = Σ (B → A) (λ r → (r ∘ f) ~ id)
 
 _retract-of_ :
   {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
@@ -75,14 +78,12 @@ module _
   isretr-ap-retraction i r H x .x refl = left-inv (H x)
 
   retr-ap :
-    (i : A → B) →
-    retr i → (x y : A) → retr (ap i {x} {y})
+    (i : A → B) → retr i → (x y : A) → retr (ap i {x} {y})
   pr1 (retr-ap i (pair r H) x y) = ap-retraction i r H x y
   pr2 (retr-ap i (pair r H) x y) = isretr-ap-retraction i r H x y
 
   retract-eq :
-    (R : A retract-of B) →
-    (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)
+    (R : A retract-of B) → (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)
   pr1 (retract-eq (pair i (pair r H)) x y) = ap i
   pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
 ```
