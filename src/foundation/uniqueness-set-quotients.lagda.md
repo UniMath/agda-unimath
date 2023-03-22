@@ -191,7 +191,7 @@ module _
     pr1 (center uniqueness-set-quotient)
 
   map-equiv-uniqueness-set-quotient : type-Set B → type-Set C
-  map-equiv-uniqueness-set-quotient =  map-equiv equiv-uniqueness-set-quotient
+  map-equiv-uniqueness-set-quotient = map-equiv equiv-uniqueness-set-quotient
 
   triangle-uniqueness-set-quotient :
     ( map-equiv-uniqueness-set-quotient ∘ map-reflecting-map-Eq-Rel R f) ~

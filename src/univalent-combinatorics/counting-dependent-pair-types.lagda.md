@@ -14,6 +14,7 @@ open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -122,12 +123,18 @@ abstract
 ```agda
 count-fiber-count-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  count A → count (Σ A B) → (x : A) → count (B x)
-count-fiber-count-Σ {B = B} e f x =
+  has-decidable-equality A → count (Σ A B) → (x : A) → count (B x)
+count-fiber-count-Σ {B = B} d f x =
   count-equiv
     ( equiv-fib-pr1 B x)
     ( count-Σ f
-      ( λ z → count-eq (has-decidable-equality-count e) (pr1 z) x))
+      ( λ z → count-eq d (pr1 z) x))
+
+count-fiber-count-Σ-count-base :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  count A → count (Σ A B) → (x : A) → count (B x)
+count-fiber-count-Σ-count-base e f x =
+  count-fiber-count-Σ (has-decidable-equality-count e) f x
 ```
 
 ### If Σ A B and each B x can be counted, and if B has a section, then A can be counted
@@ -208,7 +215,7 @@ is-decidable-count-Σ :
   {l1 l2 : Level} {X : UU l1} {P : X → UU l2} →
   count X → count (Σ X P) → (x : X) → is-decidable (P x)
 is-decidable-count-Σ e f x =
-  is-decidable-count (count-fiber-count-Σ e f x)
+  is-decidable-count (count-fiber-count-Σ-count-base e f x)
 ```
 
 ```agda
@@ -227,20 +234,22 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
     (f : count (Σ A B)) →
     Id ( sum-count-ℕ e
-         ( λ x → number-of-elements-count (count-fiber-count-Σ e f x)))
+         ( λ x → number-of-elements-count
+           (count-fiber-count-Σ-count-base e f x)))
        ( number-of-elements-count f)
   sum-number-of-elements-count-fiber-count-Σ e f =
-    ( inv (number-of-elements-count-Σ e (λ x → count-fiber-count-Σ e f x))) ∙
-    ( double-counting (count-Σ e (λ x → count-fiber-count-Σ e f x)) f)
+    ( inv (number-of-elements-count-Σ e (λ x → count-fiber-count-Σ-count-base e f x))) ∙
+    ( double-counting (count-Σ e (λ x → count-fiber-count-Σ-count-base e f x)) f)
 
 abstract
   double-counting-fiber-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
     (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) (x : A) →
     Id ( number-of-elements-count (count-B x))
-       ( number-of-elements-count (count-fiber-count-Σ count-A count-C x))
+       ( number-of-elements-count
+         ( count-fiber-count-Σ-count-base count-A count-C x))
   double-counting-fiber-count-Σ count-A count-B count-C x =
-    double-counting (count-B x) (count-fiber-count-Σ count-A count-C x)
+    double-counting (count-B x) (count-fiber-count-Σ-count-base count-A count-C x)
 
 abstract
   sum-number-of-elements-count-base-count-Σ :

@@ -57,8 +57,8 @@ module _
       ( refl-htpy)
       ( inv (right-inv (preserves-point-function-pointed-Π A B f)))
       ( λ g → equiv-funext)
-      ( λ p →  equiv-con-inv refl p (preserves-point-function-pointed-Π A B f)
-               ∘e equiv-inv (preserves-point-function-pointed-Π A B f) p)
+      ( λ p → equiv-con-inv refl p (preserves-point-function-pointed-Π A B f) ∘e
+              equiv-inv (preserves-point-function-pointed-Π A B f) p)
 
   eq-htpy-pointed-Π :
     (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g
@@ -87,9 +87,11 @@ module _
   eq-htpy-pointed-map :
     (g : A →* B) → (htpy-pointed-map g) → Id f g
   eq-htpy-pointed-map g = map-inv-equiv (extensionality-pointed-map g)
+```
 
--- The category laws for pointed maps
+### The category laws for pointed maps
 
+```agda
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
   where

@@ -122,7 +122,7 @@ module _
         ( λ p →
           ( ap
             ( λ r → eq-pair-Σ (pr1 (pair-eq-Σ p)) r)
-            ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))))  ∙
+            ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
             ( issec-pair-eq-Σ (Fin-UU-Fin l n) (Fin-UU-Fin l n) p)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup

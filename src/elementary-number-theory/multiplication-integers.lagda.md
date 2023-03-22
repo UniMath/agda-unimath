@@ -480,9 +480,11 @@ is-positive-right-factor-mul-ℤ :
   {x y : ℤ} → is-positive-ℤ (mul-ℤ x y) → is-positive-ℤ x → is-positive-ℤ y
 is-positive-right-factor-mul-ℤ {x} {y} H =
   is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
+```
 
--- Lemmas about nonnegative integers
+### Lemmas about nonnegative integers
 
+```agda
 is-nonnegative-mul-ℤ :
   {x y : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ y →
   is-nonnegative-ℤ (mul-ℤ x y)

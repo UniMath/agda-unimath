@@ -23,6 +23,8 @@ open import group-theory.semigroups
 open import group-theory.submonoids
 ```
 
+</details>
+
 ## Idea
 
 A normal submonoid `N` of `M` is a monoid that corresponds uniquely to a

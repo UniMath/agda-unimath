@@ -123,7 +123,7 @@ module _
     is-equiv-has-inverse' (pair g (pair H K))
 
   has-inverse-is-equiv : is-equiv f → has-inverse f
-  pr1 (has-inverse-is-equiv  (pair (pair g G) (pair h H))) = g
+  pr1 (has-inverse-is-equiv (pair (pair g G) (pair h H))) = g
   pr1 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) = G
   pr2 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) =
     (((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H
@@ -352,7 +352,7 @@ module _
 abstract
   is-equiv-is-retraction :
     {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
-    is-equiv f  → (g ∘ f) ~ id → is-equiv g
+    is-equiv f → (g ∘ f) ~ id → is-equiv g
   is-equiv-is-retraction {A = A} {f = f} {g = g} is-equiv-f H =
     is-equiv-left-factor-htpy id g f (inv-htpy H) is-equiv-id is-equiv-f
 ```
