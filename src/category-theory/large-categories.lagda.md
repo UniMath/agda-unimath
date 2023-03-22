@@ -35,7 +35,7 @@ is-category-Large-Precat C =
   {l : Level} (X Y : obj-Large-Precat C l) →
   is-equiv (iso-eq-Large-Precat C X Y)
 
-record Large-Cat (α : Level → Level) (β : Level → Level → Level) : Setω where
+record Large-Cat (α : Level → Level) (β : Level → Level → Level) : UUω where
   constructor make-Large-Cat
   field
     precat-Large-Cat : Large-Precat α β

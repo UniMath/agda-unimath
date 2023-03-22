@@ -23,9 +23,9 @@ open import foundation.universe-levels
 Two natural transformations `α β : F ⇒ G` are homotopic if for every object `x`
 there is an identity `Id (α x) (β x)`.
 
-In `UUω` the identity type is not available. If it were, we would be able to
-characterize the identity type of natural transformations from `F` to `G` as the
-type of homotopies of natural transformations.
+In `UUω` the usual identity type is not available. If it were, we would be able
+to characterize the identity type of natural transformations from `F` to `G` as
+the type of homotopies of natural transformations.
 
 ## Definition
 
