@@ -20,8 +20,8 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.structure-identity-principle
 open import foundation.path-algebra
+open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -116,8 +116,7 @@ eq-Eq-Descent-data-circle P Q =
   map-inv-is-equiv (is-equiv-Eq-eq-Descent-data-circle P Q)
 ```
 
-### Uniqueness of descent data characterizing a particular type family over the
-    circle
+### Uniqueness of descent data characterizing a particular type family over the circle
 
 ```agda
 comparison-Descent-data-circle :
@@ -195,8 +194,7 @@ module _
         ( Q))
 ```
 
-### Sections of type families over the circle are exactly the fixpoints of the
-    automorphism from the characteristic descent data
+### Sections of type families over the circle are exactly the fixpoints of the automorphism from the characteristic descent data
 
 ```agda
 module _
@@ -337,3 +335,4 @@ module _
     ( pr1 ∘ ev-fixpoint-Descent-data-circle ) ~
     ( (map-inv-equiv α) ∘ (ev-pt (base-free-loop l) _))
   compute-ev-fixpoint-Descent-data-circle = refl-htpy
+```
