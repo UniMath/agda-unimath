@@ -157,7 +157,6 @@ open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
 open import foundation.multivariable-functoriality-set-quotients public
-open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.negation public

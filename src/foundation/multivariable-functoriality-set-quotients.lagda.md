@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.multivariable-operations
@@ -24,7 +25,11 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.subtype-identity-principle
 
 open import linear-algebra.vectors
 
@@ -82,8 +87,8 @@ module _
     ( a's : multivariable-input n As) →
     ( all-sim-Eq-Rel n As Rs as a's) →
     ( sim-Eq-Rel S
-      ( apply-multivariable-operation n As X f as)
-      ( apply-multivariable-operation n As X f a's))
+      ( f as)
+      ( f a's))
 
   is-prop-preserves-sim-n-ary-map-Eq-Rel :
     (f : multivariable-operation n As X) →
@@ -96,8 +101,8 @@ module _
             ( is-prop-Π
               ( λ _ →
                 ( is-prop-sim-Eq-Rel S
-                  ( apply-multivariable-operation n As X f as)
-                  ( apply-multivariable-operation n As X f a's)))))))
+                  ( f as)
+                  ( f a's)))))))
 
   preserves-sim-multivariable-map-Eq-Rel-Prop :
     multivariable-operation n As X →
@@ -145,4 +150,37 @@ module _
     multivariable-htpy-hom-Eq-Rel f g
   multivariable-htpy-eq-hom-Eq-Rel f .f refl =
     refl-multivariable-htpy-hom-Eq-Rel f
+
+  is-contr-total-multivariable-htpy-hom-Eq-Rel :
+    (f : multivariable-hom-Eq-Rel) →
+    is-contr (Σ multivariable-hom-Eq-Rel (multivariable-htpy-hom-Eq-Rel f))
+  is-contr-total-multivariable-htpy-hom-Eq-Rel f =
+    is-contr-total-Eq-subtype
+      ( is-contr-total-htpy (map-multivariable-hom-Eq-Rel f))
+      ( is-prop-preserves-sim-n-ary-map-Eq-Rel)
+      ( map-multivariable-hom-Eq-Rel f)
+      ( refl-multivariable-htpy-hom-Eq-Rel f)
+      ( preserves-sim-multivariable-hom-Eq-Rel f)
+
+  is-equiv-multivariable-htpy-eq-hom-Eq-Rel :
+    (f g : multivariable-hom-Eq-Rel) →
+      is-equiv (multivariable-htpy-eq-hom-Eq-Rel f g)
+  is-equiv-multivariable-htpy-eq-hom-Eq-Rel f =
+    fundamental-theorem-id
+      ( is-contr-total-multivariable-htpy-hom-Eq-Rel f)
+      ( multivariable-htpy-eq-hom-Eq-Rel f)
+
+  extensionality-multivariable-hom-Eq-Rel :
+    (f g : multivariable-hom-Eq-Rel) →
+    (f ＝ g) ≃ multivariable-htpy-hom-Eq-Rel f g
+  pr1 (extensionality-multivariable-hom-Eq-Rel f g) =
+    multivariable-htpy-eq-hom-Eq-Rel f g
+  pr2 (extensionality-multivariable-hom-Eq-Rel f g) =
+    is-equiv-multivariable-htpy-eq-hom-Eq-Rel f g
+
+  eq-multivariable-htpy-hom-Eq-Rel :
+    (f g : multivariable-hom-Eq-Rel) →
+    multivariable-htpy-hom-Eq-Rel f g → f ＝ g
+  eq-multivariable-htpy-hom-Eq-Rel f g =
+    map-inv-equiv (extensionality-multivariable-hom-Eq-Rel f g)
 ```

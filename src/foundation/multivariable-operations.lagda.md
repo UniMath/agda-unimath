@@ -83,30 +83,22 @@ cons-multivariable-input' n As a as (inl x) = as x
 cons-multivariable-input' n As a as (inr star) = a
 
 multivariable-operation :
-  {l : Level}
-  (n : ℕ)
-  (As : functional-vec (UU l) n)
-  (X : UU l) →
+  { l : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l) n)
+  ( X : UU l) →
   UU l
-multivariable-operation zero-ℕ As X = X
-multivariable-operation (succ-ℕ n) As X =
-  ( head-functional-vec n As) →
-  ( multivariable-operation n
-    ( tail-functional-vec n As) X)
+multivariable-operation n As X =
+ (multivariable-input n As → X)
 
-apply-multivariable-operation :
-  {l : Level}
-  (n : ℕ)
-  (As : functional-vec (UU l) n)
-  (X : UU l) →
-  multivariable-operation n As X →
-  multivariable-input n As →
-  X
-apply-multivariable-operation zero-ℕ As X f as = f
-apply-multivariable-operation (succ-ℕ n) As X f as =
-  apply-multivariable-operation n
-    ( tail-functional-vec n As)
-    ( X)
-    ( f (head-multivariable-input n As as))
-    ( tail-multivariable-input n As as)
+uncurry-multivariable-operation :
+  { l : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l) (succ-ℕ n))
+  ( X : UU l) →
+  ( multivariable-operation (succ-ℕ n) As X) →
+  ( head-functional-vec n As) →
+  multivariable-operation n (tail-functional-vec n As) X
+uncurry-multivariable-operation n As X f a v =
+  f (cons-multivariable-input' n As a v)
 ```
