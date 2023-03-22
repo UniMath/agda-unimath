@@ -12,8 +12,11 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import species.species-of-types
+<<<<<<< HEAD
 
 open import univalent-combinatorics.finite-types
+=======
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 </details>

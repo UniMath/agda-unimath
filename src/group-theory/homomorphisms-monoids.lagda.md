@@ -57,7 +57,7 @@ module _
       ( hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2))
       ( preserves-unit-hom-semigroup-Prop)
 
-  type-hom-Monoid :  UU (l1 ⊔ l2)
+  type-hom-Monoid : UU (l1 ⊔ l2)
   type-hom-Monoid = type-Set hom-Monoid
 
 module _

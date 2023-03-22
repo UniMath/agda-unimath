@@ -1,4 +1,4 @@
-# Quotient Algebras
+# Quotient algebras
 
 ```agda
 module universal-algebra.quotient-algebras where
@@ -11,18 +11,11 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
-open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -30,7 +23,6 @@ open import linear-algebra.vectors
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
 open import universal-algebra.congruences
-open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
 

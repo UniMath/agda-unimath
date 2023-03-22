@@ -11,7 +11,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
+<<<<<<< HEAD
 open import foundation.homotopies
+=======
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions

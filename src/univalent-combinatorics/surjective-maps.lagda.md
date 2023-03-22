@@ -17,6 +17,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+<<<<<<< HEAD
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -26,17 +27,28 @@ open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+=======
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.type-arithmetic-dependent-pair-types
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-dependent-function-types
+<<<<<<< HEAD
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
+=======
+open import univalent-combinatorics.embeddings
+open import univalent-combinatorics.fibers-of-maps
+open import univalent-combinatorics.finite-types
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -97,6 +109,7 @@ module _
 ### A type `X` is finite if and only if it has decidable equality and there exists a surjection from a finite type to `X`
 
 ```agda
+<<<<<<< HEAD
   is-finite-iff-∃-surjection-has-decidable-equality :
     is-finite X ≃
       ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
@@ -116,6 +129,27 @@ module _
                     ( is-surjective-map-equiv (pr2 count-X))))))
       ( λ dec-X-surj →
         apply-universal-property-trunc-Prop
+=======
+  is-finite-if-∃-surjection-has-decidable-equality :
+    is-finite X →
+    ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+  is-finite-if-∃-surjection-has-decidable-equality fin-X =
+    apply-universal-property-trunc-Prop
+     ( fin-X)
+     ( prod-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
+     ( λ count-X →
+       ( has-decidable-equality-count count-X  ,
+         unit-trunc-Prop
+         ( pr1 count-X ,
+           ( map-equiv (pr2 count-X)) ,
+           ( is-surjective-map-equiv (pr2 count-X)))))
+
+  ∃-surjection-has-decidable-equality-if-is-finite :
+    ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X))) →
+    is-finite X
+  ∃-surjection-has-decidable-equality-if-is-finite dec-X-surj =
+    apply-universal-property-trunc-Prop
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
           ( pr2 dec-X-surj)
           ( is-finite-Prop X)
           ( λ n-surj →
@@ -123,5 +157,20 @@ module _
               ( count-surjection-has-decidable-equality
                 ( pr1 n-surj)
                 ( pr1 dec-X-surj)
+<<<<<<< HEAD
                 ( pr2 n-surj))))
+=======
+                ( pr2 n-surj)))
+
+  is-finite-iff-∃-surjection-has-decidable-equality :
+    is-finite X ≃
+    ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+  is-finite-iff-∃-surjection-has-decidable-equality =
+    equiv-prop
+      ( is-prop-is-finite X)
+      ( is-prop-prod is-prop-has-decidable-equality is-prop-type-trunc-Prop)
+      ( λ fin-X → is-finite-if-∃-surjection-has-decidable-equality fin-X)
+      ( λ dec-X-surj →
+        ∃-surjection-has-decidable-equality-if-is-finite dec-X-surj)
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```

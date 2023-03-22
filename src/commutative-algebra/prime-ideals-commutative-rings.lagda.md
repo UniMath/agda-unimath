@@ -16,7 +16,6 @@ open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings
 open import ring-theory.subsets-rings
 ```
 

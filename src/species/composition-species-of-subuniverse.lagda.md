@@ -2,6 +2,7 @@
 
 ```agda
 module species.composition-species-of-subuniverse where
+<<<<<<< HEAD
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -21,6 +22,24 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.propositional-truncations
+=======
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.raising-universe-levels
 open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-decomposition-subuniverse
@@ -31,6 +50,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
+<<<<<<< HEAD
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 open import univalent-combinatorics.cartesian-product-types
@@ -46,6 +66,16 @@ open import species.species-of-types-in-subuniverse
 open import species.species-of-types
 ```
 
+=======
+open import foundation.universe-levels
+
+open import species.large-composition-species-of-types
+open import species.species-of-types-in-subuniverse
+```
+
+</details>
+
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ## Idea
 
 A species `S : Inhabited-Type → UU l` can be thought of as the analytic
@@ -73,6 +103,7 @@ module _
   analytic-comp-species-subuniverse' :
     type-subuniverse P → UU (lsuc l1 ⊔ l2)
   analytic-comp-species-subuniverse' X =
+<<<<<<< HEAD
     Σ ( Σ-Decomposition-subuniverse P (inclusion-subuniverse P X))
       ( λ D →
         ( inclusion-subuniverse
@@ -82,6 +113,17 @@ module _
           inclusion-subuniverse
           ( Q)
           ( T (subuniverse-cotype-Σ-Decomposition-subuniverse P D x))))
+=======
+    Σ ( Σ-Decomposition-subuniverse P X)
+      ( λ D →
+        ( inclusion-subuniverse
+          ( Q)
+          ( S (subuniverse-indexing-type-Σ-Decomposition-subuniverse P X D))) ×
+        ( (x : indexing-type-Σ-Decomposition-subuniverse P X D ) →
+          inclusion-subuniverse
+          ( Q)
+          ( T (subuniverse-cotype-Σ-Decomposition-subuniverse P X D x))))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
 module _
   {l1 : Level} (l2 : Level)
@@ -142,6 +184,7 @@ module _
           ( ( inv-equiv right-distributive-prod-Σ) ∘e
           ( ( equiv-tot (λ _ → inv-equiv (left-distributive-prod-Σ)))))) ∘e
           ( ( assoc-Σ _ _ _)))) ∘e
+<<<<<<< HEAD
     ( ( assoc-Σ
         ( Relaxed-Σ-Decomposition l1 l1 X)
         ( λ D →
@@ -172,6 +215,48 @@ module _
         ( λ a → Σ-Decomposition-subuniverse P X)
         ( _)) ∘e
     ( ( equiv-tot (λ p → inv-equiv (equiv-is-small (C1 S T (X , p))))))))))
+=======
+      ( ( assoc-Σ
+          ( Relaxed-Σ-Decomposition l1 l1 X)
+          ( λ D →
+              is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
+              ((x : indexing-type-Relaxed-Σ-Decomposition D) →
+               is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
+          ( _)) ∘e
+        ( ( equiv-Σ-equiv-base
+            ( _)
+            ( ( inv-equiv
+                ( equiv-add-redundant-prop
+                  ( is-prop-type-Prop (P X))
+                  ( λ D →
+                    ( tr
+                      ( is-in-subuniverse P)
+                      ( eq-equiv
+                        ( Σ (indexing-type-Relaxed-Σ-Decomposition (pr1 D))
+                          (cotype-Relaxed-Σ-Decomposition (pr1 D)))
+                        ( X)
+                        ( inv-equiv
+                          ( matching-correspondence-Relaxed-Σ-Decomposition
+                            (pr1 D))))
+                      ( C3
+                        ( indexing-type-Relaxed-Σ-Decomposition (pr1 D) ,
+                          pr1 (pr2 D))
+                        ( λ x →
+                          ( cotype-Relaxed-Σ-Decomposition (pr1 D) x ,
+                            pr2 (pr2 D) x)))))) ∘e
+              ( commutative-prod ∘e
+              ( equiv-tot
+                ( λ p →
+                  equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse
+                    ( P)
+                    (X , p))))))) ∘e
+          ( ( inv-assoc-Σ
+              ( is-in-subuniverse P X)
+              ( λ p → Σ-Decomposition-subuniverse P (X , p))
+              ( _)) ∘e
+            ( ( equiv-tot
+                ( λ p → inv-equiv (equiv-is-small (C1 S T (X , p))))))))))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 ### Unit laws for analytic composition of species-subuniverse
@@ -180,11 +265,19 @@ module _
   module _
     (C4 : is-in-subuniverse P (raise-unit l1))
     (C5 :
+<<<<<<< HEAD
       ( X : type-subuniverse P) →
       ( is-in-subuniverse
           ( Q)
           ( type-is-small
             ( is-small-lmax l2 ( is-contr (inclusion-subuniverse P X))))))
+=======
+    ( X : type-subuniverse P) →
+    ( is-in-subuniverse
+    ( Q)
+    ( type-is-small
+    ( is-small-lmax l2 ( is-contr (inclusion-subuniverse P X))))))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     where
 
     analytic-unit-species-subuniverse :
@@ -246,6 +339,7 @@ module _
     htpy-left-unit-law-comp-species-subuniverse S X =
       ( ( inv-equiv
           ( equiv-Σ-extension-species-subuniverse S X ) ) ∘e
+<<<<<<< HEAD
       ( ( left-unit-law-comp-species-types
           ( Σ-extension-species-subuniverse P Q S)
           ( inclusion-subuniverse P X)) ∘e
@@ -264,6 +358,26 @@ module _
             ( analytic-unit-species-subuniverse)
             ( S))
           ( X)))))))
+=======
+        ( ( left-unit-law-comp-species-types
+            ( Σ-extension-species-subuniverse P Q S)
+            ( inclusion-subuniverse P X)) ∘e
+          ( ( equiv-tot
+              ( λ D →
+                equiv-prod
+                  ( equiv-Σ-extension-analytic-unit-subuniverse
+                    ( indexing-type-Relaxed-Σ-Decomposition D))
+                  ( id-equiv))) ∘e
+            ( ( equiv-analytic-comp-extension-species-subuniverse
+                ( analytic-unit-species-subuniverse)
+                ( S)
+                ( inclusion-subuniverse P X)) ∘e
+              ( ( equiv-Σ-extension-species-subuniverse
+                  ( analytic-comp-species-subuniverse
+                    ( analytic-unit-species-subuniverse)
+                    ( S))
+                    ( X)))))))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
     left-unit-law-comp-species-subuniverse :
       ( S : species-subuniverse P Q) →
@@ -288,6 +402,7 @@ module _
       inclusion-subuniverse Q (S X)
     htpy-right-unit-law-comp-species-subuniverse S X =
       ( ( inv-equiv (equiv-Σ-extension-species-subuniverse S X) ) ∘e
+<<<<<<< HEAD
       ( ( right-unit-law-comp-species-types
           ( Σ-extension-species-subuniverse P Q S)
           ( inclusion-subuniverse P X)) ∘e
@@ -310,6 +425,30 @@ module _
               S
               analytic-unit-species-subuniverse)
           X))))))
+=======
+        ( ( right-unit-law-comp-species-types
+            ( Σ-extension-species-subuniverse P Q S)
+            ( inclusion-subuniverse P X)) ∘e
+          ( ( equiv-tot
+              ( λ D →
+                equiv-prod
+                  ( id-equiv)
+                  ( equiv-Π
+                    ( _)
+                    ( id-equiv)
+                    ( λ x →
+                      equiv-Σ-extension-analytic-unit-subuniverse
+                        ( cotype-Relaxed-Σ-Decomposition D x))))) ∘e
+            ( ( equiv-analytic-comp-extension-species-subuniverse
+                  ( S)
+                  ( analytic-unit-species-subuniverse)
+                  ( inclusion-subuniverse P X)) ∘e
+              ( ( equiv-Σ-extension-species-subuniverse
+                  ( analytic-comp-species-subuniverse
+                      S
+                      analytic-unit-species-subuniverse)
+                  ( X)))))))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
     right-unit-law-comp-species-subuniverse :
       ( S : species-subuniverse P Q) →
@@ -324,10 +463,17 @@ module _
       ( htpy-right-unit-law-comp-species-subuniverse S)
 ```
 
+<<<<<<< HEAD
 ### Associativity of composition of species-inhabited-types
 
 ```agda
   htpy-assoc-comp-species-inhabited-types :
+=======
+### Associativity of composition of species of types in subuniverse
+
+```agda
+  htpy-assoc-comp-species-subuniverse :
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     (S : species-subuniverse P Q)
     (T : species-subuniverse P Q)
     (U : species-subuniverse P Q)
@@ -344,12 +490,17 @@ module _
         ( analytic-comp-species-subuniverse S T)
         ( U)
         ( X))
+<<<<<<< HEAD
   htpy-assoc-comp-species-inhabited-types S T U X =
+=======
+  htpy-assoc-comp-species-subuniverse S T U X =
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     ( ( inv-equiv
         ( equiv-Σ-extension-species-subuniverse
           ( analytic-comp-species-subuniverse
             ( analytic-comp-species-subuniverse S T) U)
           ( X))) ∘e
+<<<<<<< HEAD
     ( ( inv-equiv
         ( equiv-analytic-comp-extension-species-subuniverse
           ( analytic-comp-species-subuniverse S T)
@@ -396,6 +547,54 @@ module _
         ( X)))))))))
 
   assoc-comp-species-inhabited-types :
+=======
+      ( ( inv-equiv
+          ( equiv-analytic-comp-extension-species-subuniverse
+            ( analytic-comp-species-subuniverse S T)
+            ( U)
+            ( inclusion-subuniverse P X))) ∘e
+        ( ( equiv-tot
+            λ D →
+              equiv-prod
+               ( inv-equiv
+                 ( equiv-analytic-comp-extension-species-subuniverse
+                   ( S)
+                   ( T)
+                   ( indexing-type-Relaxed-Σ-Decomposition D)))
+               ( id-equiv) ) ∘e
+          ( ( equiv-assoc-comp-species-types
+              ( Σ-extension-species-subuniverse P Q S)
+              ( Σ-extension-species-subuniverse P Q T)
+              ( Σ-extension-species-subuniverse P Q U)
+              ( inclusion-subuniverse P X)) ∘e
+            ( ( equiv-tot
+                ( λ D →
+                  equiv-prod
+                    ( id-equiv)
+                    ( equiv-Π
+                      ( λ y →
+                        ( analytic-comp-species-types
+                          ( Σ-extension-species-subuniverse P Q T)
+                          ( Σ-extension-species-subuniverse P Q U)
+                          ( cotype-Relaxed-Σ-Decomposition D y)))
+                      ( id-equiv)
+                      ( λ y →
+                        ( equiv-analytic-comp-extension-species-subuniverse
+                          ( T)
+                          ( U)
+                          ( cotype-Relaxed-Σ-Decomposition D y)))))) ∘e
+              ( ( equiv-analytic-comp-extension-species-subuniverse
+                  ( S)
+                  ( analytic-comp-species-subuniverse T U)
+                  ( inclusion-subuniverse P X) ) ∘e
+                ( ( equiv-Σ-extension-species-subuniverse
+                    ( analytic-comp-species-subuniverse
+                      ( S)
+                      ( analytic-comp-species-subuniverse T U))
+                    ( X)))))))))
+
+  assoc-comp-species-subuniverse :
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     (S : species-subuniverse P Q)
     (T : species-subuniverse P Q)
     (U : species-subuniverse P Q)→
@@ -405,7 +604,11 @@ module _
     analytic-comp-species-subuniverse
       ( analytic-comp-species-subuniverse S T)
       ( U)
+<<<<<<< HEAD
   assoc-comp-species-inhabited-types S T U =
+=======
+  assoc-comp-species-subuniverse S T U =
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     eq-equiv-fam-subuniverse
       ( Q)
       ( analytic-comp-species-subuniverse
@@ -414,6 +617,7 @@ module _
       ( analytic-comp-species-subuniverse
         ( analytic-comp-species-subuniverse S T)
         ( U))
+<<<<<<< HEAD
       ( htpy-assoc-comp-species-inhabited-types S T U)
 ```
 
@@ -624,4 +828,7 @@ module _
 
 ```agda
 
+=======
+      ( htpy-assoc-comp-species-subuniverse S T U)
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```

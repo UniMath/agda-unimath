@@ -10,8 +10,11 @@ module univalent-combinatorics.sigma-decompositions where
 open import foundation.sigma-decompositions public
 
 open import foundation.cartesian-product-types
+<<<<<<< HEAD
 open import foundation.contractible-types
 open import foundation.decidable-propositions
+=======
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -39,7 +42,10 @@ open import univalent-combinatorics.decidable-equivalence-relations
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
+<<<<<<< HEAD
 open import univalent-combinatorics.quotients-finite-types
+=======
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import univalent-combinatorics.type-duality
 ```
 
@@ -56,7 +62,11 @@ open import univalent-combinatorics.type-duality
   Σ ( 𝔽 l1)
     ( λ X →
       Σ ( type-𝔽 X → Inhabited-Type-𝔽 l2)
+<<<<<<< HEAD
         ( λ Y → A ≃ (Σ (type-𝔽 X) (λ x → type-Inhabited-Type-𝔽 (Y x)))))
+=======
+        ( λ Y → type-𝔽 A ≃ (Σ (type-𝔽 X) (λ x → type-Inhabited-Type-𝔽 (Y x)))))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
 module _
   {l l1 l2 : Level} {A : UU l} (D : Σ-Decomposition-𝔽 l1 l2 A)
@@ -157,14 +167,21 @@ displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
 
 ```agda
 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 :
+<<<<<<< HEAD
   {l1 l2 l3 : Level} {A : UU l1} →
   Σ-Decomposition-𝔽 l2 l3 A ≃
   Σ ( Relaxed-Σ-Decomposition l2 l3 A)
+=======
+  {l1 l2 l3 : Level} (A : 𝔽 l1) →
+  Σ-Decomposition-𝔽 l2 l3 A ≃
+  Σ ( Relaxed-Σ-Decomposition l2 l3 (type-𝔽 A))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     ( λ D →
       is-finite (indexing-type-Relaxed-Σ-Decomposition D) ×
       ((x : indexing-type-Relaxed-Σ-Decomposition D ) →
         is-finite (cotype-Relaxed-Σ-Decomposition D x) ×
         is-inhabited (cotype-Relaxed-Σ-Decomposition D x)))
+<<<<<<< HEAD
 pr1 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 D =
   ( indexing-type-Σ-Decomposition-𝔽 D ,
     ( cotype-Σ-Decomposition-𝔽 D) ,
@@ -173,6 +190,16 @@ pr1 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 D =
     ( λ x → is-finite-cotype-Σ-Decomposition-𝔽 D x ,
             is-inhabited-cotype-Σ-Decomposition-𝔽 D x)
 pr2 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 =
+=======
+pr1 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) D =
+  ( indexing-type-Σ-Decomposition-𝔽 A D ,
+    ( cotype-Σ-Decomposition-𝔽 A D) ,
+    ( matching-correspondence-Σ-Decomposition-𝔽 A D)) ,
+    ( is-finite-indexing-type-Σ-Decomposition-𝔽 A D) ,
+    ( λ x → is-finite-cotype-Σ-Decomposition-𝔽 A D x ,
+            is-inhabited-cotype-Σ-Decomposition-𝔽 A D x)
+pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) =
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
   is-equiv-has-inverse
     ( λ X →
       ( ( pr1 (pr1 X)) ,
@@ -184,6 +211,7 @@ pr2 equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 =
     refl-htpy
 ```
 
+<<<<<<< HEAD
 ### The base type of a finite Σ-Decomposition is finite
 
 ```agda
@@ -198,6 +226,8 @@ is-finite-base-type-Σ-Decomposition-𝔽 D =
       ( λ x → is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 D x)))
 ```
 
+=======
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ### Equivalence between finite surjection and finite Σ-decomposition
 
 ```agda
@@ -206,7 +236,11 @@ module _
   where
 
   equiv-finite-surjection-Σ-Decomposition-𝔽 :
+<<<<<<< HEAD
     Σ-Decomposition-𝔽 l l (type-𝔽 A)  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B) )
+=======
+    Σ-Decomposition-𝔽 l l A  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B) )
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
   equiv-finite-surjection-Σ-Decomposition-𝔽 =
     equiv-Σ
       ( λ B → type-𝔽 A ↠ type-𝔽 B)
@@ -218,7 +252,11 @@ module _
 
 ```agda
   equiv-Decidable-Equivalence-Relation-𝔽-Σ-Decomposition-𝔽 :
+<<<<<<< HEAD
     Σ-Decomposition-𝔽 l l (type-𝔽 A) ≃
+=======
+    Σ-Decomposition-𝔽 l l A ≃
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
     Decidable-Equivalence-Relation-𝔽 l A
   equiv-Decidable-Equivalence-Relation-𝔽-Σ-Decomposition-𝔽 =
     inv-equiv (equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A) ∘e
@@ -229,7 +267,11 @@ module _
 
 ```agda
   is-finite-Σ-Decomposition-𝔽 :
+<<<<<<< HEAD
     is-finite (Σ-Decomposition-𝔽 l l (type-𝔽 A))
+=======
+    is-finite (Σ-Decomposition-𝔽 l l A)
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
   is-finite-Σ-Decomposition-𝔽 =
     is-finite-equiv
       ( inv-equiv equiv-Decidable-Equivalence-Relation-𝔽-Σ-Decomposition-𝔽)
@@ -300,6 +342,7 @@ module _
     is-emb-Σ-Decomposition-Σ-Decomposition-𝔽
 
 equiv-Σ-Decomposition-𝔽 :
+<<<<<<< HEAD
   {l1 l2 l3 l4 l5 : Level} {A : UU l1}
   (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l4 l5 A) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
@@ -310,10 +353,23 @@ equiv-Σ-Decomposition-𝔽 X Y =
 
 module _
   {l1 l2 l3 : Level} {A : UU l1}
+=======
+  {l1 l2 l3 l4 l5 : Level} (A : 𝔽 l1)
+  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l4 l5 A) →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+equiv-Σ-Decomposition-𝔽 A X Y =
+  equiv-Σ-Decomposition
+    ( Σ-Decomposition-Σ-Decomposition-𝔽 A X)
+    ( Σ-Decomposition-Σ-Decomposition-𝔽 A Y)
+
+module _
+  {l1 l2 l3 : Level} (A : 𝔽 l1)
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
   (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l2 l3 A)
   where
 
   extensionality-Σ-Decomposition-𝔽 :
+<<<<<<< HEAD
     (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽 X Y
   extensionality-Σ-Decomposition-𝔽 =
     extensionality-Σ-Decomposition
@@ -323,6 +379,17 @@ module _
 
   eq-equiv-Σ-Decomposition-𝔽 :
     equiv-Σ-Decomposition-𝔽 X Y → (X ＝ Y)
+=======
+    (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽 A X Y
+  extensionality-Σ-Decomposition-𝔽 =
+    extensionality-Σ-Decomposition
+      ( Σ-Decomposition-Σ-Decomposition-𝔽 A X)
+      ( Σ-Decomposition-Σ-Decomposition-𝔽 A Y) ∘e
+    equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-𝔽 A)
+
+  eq-equiv-Σ-Decomposition-𝔽 :
+    equiv-Σ-Decomposition-𝔽 A X Y → (X ＝ Y)
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
   eq-equiv-Σ-Decomposition-𝔽 =
     map-inv-equiv (extensionality-Σ-Decomposition-𝔽)
 ```
@@ -341,9 +408,18 @@ module _
       ( fibered-Σ-Decomposition l2 l3 l4 l5 A)
   is-finite-fibered-Σ-Decomposition D =
     Σ-Prop
+<<<<<<< HEAD
       ( is-finite-Σ-Decomposition (fst-fibered-Σ-Decomposition D))
       ( λ _ →
         is-finite-Σ-Decomposition ( snd-fibered-Σ-Decomposition D) )
+=======
+      ( is-finite-Σ-Decomposition A ( fst-fibered-Σ-Decomposition D))
+      ( λ p →
+        is-finite-Σ-Decomposition
+          ( indexing-type-fst-fibered-Σ-Decomposition D ,
+            (pr1 p))
+          ( snd-fibered-Σ-Decomposition D) )
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
   equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype :
     type-subtype is-finite-fibered-Σ-Decomposition ≃
@@ -351,6 +427,7 @@ module _
   equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype =
     equiv-Σ
        ( λ D →
+<<<<<<< HEAD
          Σ-Decomposition-𝔽 l4 l5 ( indexing-type-Σ-Decomposition-𝔽 D))
        ( equiv-Σ-Decomposition-𝔽-is-finite-subtype )
        ( λ x →
@@ -359,6 +436,25 @@ module _
          ( λ D D' p →
            type-Prop
              ( is-finite-Σ-Decomposition D'))
+=======
+         Σ-Decomposition-𝔽 l4 l5 ( finite-indexing-type-Σ-Decomposition-𝔽 A D))
+       ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A )
+       ( λ x →
+         equiv-Σ-Decomposition-𝔽-is-finite-subtype
+         ( indexing-type-Σ-Decomposition
+           ( inclusion-subtype (is-finite-Σ-Decomposition A) x) ,
+             pr1
+               ( is-in-subtype-inclusion-subtype
+                 ( is-finite-Σ-Decomposition A)
+                 (x))))∘e
+       interchange-Σ-Σ
+         ( λ D D' p →
+           type-Prop
+             ( is-finite-Σ-Decomposition
+               ( indexing-type-Σ-Decomposition D ,
+                 pr1 p)
+               ( D')))
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 #### Displayed finite Σ-Decomposition as a subtype
@@ -375,6 +471,11 @@ module _
           ( indexing-type-fst-displayed-Σ-Decomposition D)
           ( λ x →
             is-finite-Σ-Decomposition
+<<<<<<< HEAD
+=======
+              ( cotype-fst-displayed-Σ-Decomposition D x ,
+                pr2 p x)
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
               ( snd-displayed-Σ-Decomposition D x) ))
 
   equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype :
@@ -388,6 +489,7 @@ module _
        ( equiv-Σ-Decomposition-𝔽-is-finite-subtype)
        ( λ D1 →
          equiv-Π
+<<<<<<< HEAD
            ( λ z →
              Σ-Decomposition-𝔽 l4 l5
                ( cotype-Σ-Decomposition-𝔽
@@ -395,6 +497,18 @@ module _
                    equiv-Σ-Decomposition-𝔽-is-finite-subtype D1) z))
            ( id-equiv)
            ( λ x → equiv-Σ-Decomposition-𝔽-is-finite-subtype) ∘e
+=======
+           ( _)
+           ( id-equiv)
+           ( λ x →
+             equiv-Σ-Decomposition-𝔽-is-finite-subtype
+             ( ( cotype-Σ-Decomposition
+                 ( inclusion-subtype (is-finite-Σ-Decomposition A) D1)
+                 ( x)) ,
+               pr2
+                 ( is-in-subtype-inclusion-subtype
+                   ( is-finite-Σ-Decomposition A) D1) x)) ∘e
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
            inv-distributive-Π-Σ ) ∘e
        interchange-Σ-Σ _
 ```

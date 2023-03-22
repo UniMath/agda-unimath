@@ -105,7 +105,11 @@ module _
   is-inhabited-indexing-type-inhabited-Σ-Decomposition :
     (p : is-inhabited A) → (is-inhabited (indexing-type-Σ-Decomposition))
   is-inhabited-indexing-type-inhabited-Σ-Decomposition p =
+<<<<<<< HEAD
     map-Inhabited-Type (pr1 ∘ map-matching-correspondence-Σ-Decomposition) p
+=======
+    map-is-inhabited (pr1 ∘ map-matching-correspondence-Σ-Decomposition) p
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 
   inhabited-indexing-type-inhabited-Σ-Decomposition :
     (p : is-inhabited A) → (Inhabited-Type l2)
@@ -117,7 +121,11 @@ module _
   is-inhabited-base-is-inhabited-indexing-type-Σ-Decomposition :
     (is-inhabited (indexing-type-Σ-Decomposition)) → (is-inhabited A)
   is-inhabited-base-is-inhabited-indexing-type-Σ-Decomposition p =
+<<<<<<< HEAD
     map-Inhabited-Type
+=======
+    map-is-inhabited
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
       (map-inv-equiv matching-correspondence-Σ-Decomposition)
       ( is-inhabited-Σ p is-inhabited-cotype-Σ-Decomposition)
 ```
@@ -620,7 +628,7 @@ module _
   snd-equiv-fibered-Σ-Decomposition = pr2
 
 module _
-  { l1 l2 l3 l4 l5 : Level}  {A : UU l1}
+  { l1 l2 l3 l4 l5 : Level} {A : UU l1}
   ( D : fibered-Σ-Decomposition l2 l3 l4 l5 A)
   where
 
@@ -651,7 +659,7 @@ module _
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv )
         ( is-contr-total-Eq-structure
           ( λ V f g →
-            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V  u)) id-equiv g) ∘
+            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V u)) id-equiv g) ∘
               ( map-matching-correspondence-Σ-Decomposition Y)) ~
               ( pr1 f))
           ( is-contr-total-equiv-Fam-Inhabited-Types
@@ -753,7 +761,7 @@ module _
   snd-equiv-displayed-Σ-Decomposition = pr2
 
 module _
-  { l1 l2 l3 l4 l5 : Level}  {A : UU l1}
+  { l1 l2 l3 l4 l5 : Level} {A : UU l1}
   ( disp-D : displayed-Σ-Decomposition l2 l3 l4 l5 A)
   where
 
@@ -947,7 +955,7 @@ module _
       ( map-inv-displayed-fibered-Σ-Decomposition
         ( map-displayed-fibered-Σ-Decomposition fib-D))
       ( fib-D)
-      ( ( ( inv-equiv f)  ,
+      ( ( ( inv-equiv f) ,
           ( ( λ x → id-equiv) ,
             ( htpy-matching-correspondence))) ,
         ( ( id-equiv) ,
@@ -979,7 +987,7 @@ module _
 
     htpy-matching-correspondence :
       map-equiv (
-        ( equiv-Σ N id-equiv (inv-equiv ∘ t)  ) ∘e
+        ( equiv-Σ N id-equiv (inv-equiv ∘ t)) ∘e
         matching-correspondence-displayed-fibered-Σ-Decomposition
           (fib-D))
       ~ map-equiv s

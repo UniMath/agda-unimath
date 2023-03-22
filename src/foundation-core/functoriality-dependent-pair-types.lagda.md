@@ -40,9 +40,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (x : A) → B x → C x)
   where
+```
 
-  {- Any family of maps induces a map on the total spaces. -}
+Any family of maps induces a map on the total spaces.
 
+```agda
   tot : Σ A B → Σ A C
   pr1 (tot t) = pr1 t
   pr2 (tot t) = f (pr1 t) (pr2 t)
@@ -128,13 +130,14 @@ tot-comp f g (pair x y) = refl
 
 ### The fibers of `tot`
 
+We show that for any family of maps, the fiber of the induced map on total
+spaces are equivalent to the fibers of the maps in the family.
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (x : A) → B x → C x)
   where
-  {- We show that for any family of maps, the fiber of the induced map on total
-     spaces are equivalent to the fibers of the maps in the family. -}
 
   map-compute-fib-tot : (t : Σ A C) → fib (tot f) t → fib (f (pr1 t)) (pr2 t)
   pr1 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = y

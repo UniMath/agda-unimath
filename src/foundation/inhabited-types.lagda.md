@@ -189,10 +189,17 @@ pr2 (Σ-Inhabited-Type X Y) =
 ### Inhabited types are closed under maps
 
 ```agda
+<<<<<<< HEAD
 map-Inhabited-Type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (f : (A → B)) → is-inhabited A → is-inhabited B
 map-Inhabited-Type f = map-trunc-Prop f
+=======
+map-is-inhabited :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (f : (A → B)) → is-inhabited A → is-inhabited B
+map-is-inhabited f = map-trunc-Prop f
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 ### Contractible types are inhabited

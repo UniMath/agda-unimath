@@ -7,6 +7,7 @@ module species.exponents-species-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+<<<<<<< HEAD
 open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.unit-type
@@ -14,6 +15,11 @@ open import foundation.universe-levels
 
 open import species.species-of-types
 open import species.species-of-types-in-subuniverse
+=======
+open import foundation.universe-levels
+
+open import species.species-of-types
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ```
 
 </details>

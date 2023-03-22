@@ -2,11 +2,20 @@
 
 ```agda
 module species.species-of-types-in-subuniverse where
+<<<<<<< HEAD
 
+=======
+```
+
+<details><summary>Imports</summary>
+
+```agda
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
+<<<<<<< HEAD
 open import foundation.inhabited-types
 open import foundation.subuniverses
 open import foundation.unit-type
@@ -17,6 +26,16 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 ```
 
+=======
+open import foundation.subuniverses
+open import foundation.universe-levels
+
+open import species.species-of-types
+```
+
+</details>
+
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 ### Idea
 
 In this file, we define the type of species of subuniverse. A species of
@@ -63,6 +82,7 @@ module _
   Π-extension-species-subuniverse X =
     (p : is-in-subuniverse P X) → inclusion-subuniverse Q (F (X , p))
 ```
+<<<<<<< HEAD
 
 ## Examples
 
@@ -96,3 +116,5 @@ species-inhabited-types : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 species-inhabited-types l1 l2 =
   species-subuniverse (is-inhabited-Prop {l1}) λ (X : UU l2) → unit-Prop
 ```
+=======
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3

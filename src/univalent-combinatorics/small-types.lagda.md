@@ -13,11 +13,16 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
+<<<<<<< HEAD
 open import foundation.raising-universe-levels
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
+=======
+open import foundation.universe-levels
+
+>>>>>>> 796439c910d829eeb768284e48e75d667da1fbb3
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

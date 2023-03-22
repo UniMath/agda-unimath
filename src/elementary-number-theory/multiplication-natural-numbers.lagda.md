@@ -205,9 +205,11 @@ is-nonzero-left-factor-mul-ℕ .zero-ℕ y H refl = H (left-zero-law-mul-ℕ y)
 is-nonzero-right-factor-mul-ℕ :
   (x y : ℕ) → is-nonzero-ℕ (mul-ℕ x y) → is-nonzero-ℕ y
 is-nonzero-right-factor-mul-ℕ x .zero-ℕ H refl = H (right-zero-law-mul-ℕ x)
+```
 
--- We conclude that y = 1 if (x+1)y = x+1
+We conclude that $y = 1$ if $(x+1)y = x+1$.
 
+```agda
 is-one-is-right-unit-mul-ℕ :
   (x y : ℕ) → mul-ℕ (succ-ℕ x) y ＝ succ-ℕ x → is-one-ℕ y
 is-one-is-right-unit-mul-ℕ x y p =

@@ -239,14 +239,14 @@ module _
   nat-sq-right-inv-Id² =
     (((horizontal-concat-Id² refl (inv (ap-const refl α))) ∙ nat-htpy right-inv α) ∙
       (horizontal-concat-Id² (ap-binary-comp-diagonal (_∙_) id inv α) refl)) ∙
-        ap (λ t → (horizontal-concat-Id² t (horizontal-inv-Id² α)) ∙ right-inv p')  (ap-id α)
+        ap (λ t → (horizontal-concat-Id² t (horizontal-inv-Id² α)) ∙ right-inv p') (ap-id α)
 
   nat-sq-left-inv-Id² :
     coherence-square-identifications (left-inv p) refl (horizontal-concat-Id² (horizontal-inv-Id² α) α) (left-inv p')
   nat-sq-left-inv-Id² =
     ((((horizontal-concat-Id² refl (inv (ap-const refl α))) ∙ nat-htpy left-inv α) ∙
       (horizontal-concat-Id² (ap-binary-comp-diagonal (_∙_) inv id α) refl)) ∙
-        ap (λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')  (ap-id α))
+        ap (λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p') (ap-id α))
 ```
 
 ### Interchange laws for 2-paths
@@ -549,7 +549,7 @@ module _
                ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
                  ( assoc p0̂00 p10̂0 p110̂))))))
        ( ( assoc p000̂ p00̂1 p0̂11) ∙
-         (  ( ap (concat p000̂ x111) p0̂0̂1) ∙
+         ( ( ap (concat p000̂ x111) p0̂0̂1) ∙
            ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
              ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
                ( ( assoc p0̂00 p100̂ p10̂1) ∙
