@@ -44,7 +44,8 @@ module _
 ```
 
 ## Properties
-```
+
+```agda
   preserves-id-equiv-univalent-action-equiv : (X : type-subuniverse P) →
     univalent-action-equiv X X id-equiv ＝ id-equiv
   preserves-id-equiv-univalent-action-equiv X =
