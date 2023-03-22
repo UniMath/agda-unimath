@@ -91,7 +91,7 @@ multivariable-operation :
 multivariable-operation n As X =
  (multivariable-input n As → X)
 
-uncurry-multivariable-operation :
+curry-once-multivariable-operation :
   { l : Level}
   ( n : ℕ)
   ( As : functional-vec (UU l) (succ-ℕ n))
@@ -99,6 +99,6 @@ uncurry-multivariable-operation :
   ( multivariable-operation (succ-ℕ n) As X) →
   ( head-functional-vec n As) →
   multivariable-operation n (tail-functional-vec n As) X
-uncurry-multivariable-operation n As X f a v =
+curry-once-multivariable-operation n As X f a v =
   f (cons-multivariable-input' n As a v)
 ```
