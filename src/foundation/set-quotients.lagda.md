@@ -186,7 +186,7 @@ module _
     map-inv-equiv (is-effective-quotient-map x y)
 
   is-surjective-and-effective-quotient-map :
-    is-surjective-and-effective R (quotient-map R) --
+    is-surjective-and-effective R (quotient-map R)
   pr1 is-surjective-and-effective-quotient-map = is-surjective-quotient-map R
   pr2 is-surjective-and-effective-quotient-map = is-effective-quotient-map
 

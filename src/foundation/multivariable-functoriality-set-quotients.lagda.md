@@ -13,20 +13,28 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-set-quotients
+open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.equivalence-classes
 open import foundation.identity-types
 open import foundation.multivariable-operations
 open import foundation.propositions
+open import foundation.set-quotients
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.small-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.subtype-identity-principle
 
@@ -50,25 +58,114 @@ equivalence relations extends uniquely to a multivariable operation from the
 ### n-ary hom of equivalence relation
 
 ```agda
-all-sim-Eq-Rel :
+all-sim-Rel :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  ( as a's : multivariable-input n As) →
+  UU l2
+all-sim-Rel {l1} {l2} zero-ℕ As Rs as a's =
+  raise-unit l2
+all-sim-Rel {l1} {l2} (succ-ℕ n) As Rs as a's =
+  sim-Eq-Rel (Rs (inr star))
+    ( head-multivariable-input n As as)
+    ( head-multivariable-input n As a's) ×
+  all-sim-Rel n
+    ( tail-functional-vec n As)
+    ( λ i → Rs (inl-Fin n i))
+    ( tail-multivariable-input n As as)
+    ( tail-multivariable-input n As a's)
+
+is-prop-all-sim-Rel :
   { l1 l2 : Level}
   ( n : ℕ)
   ( As : functional-vec (UU l1) n)
   ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
   ( as : multivariable-input n As) →
   ( a's : multivariable-input n As) →
-  UU l2
-all-sim-Eq-Rel {l1} {l2} zero-ℕ As Rs as a's =
-  raise-unit l2
-all-sim-Eq-Rel {l1} {l2} (succ-ℕ n) As Rs as a's =
-  sim-Eq-Rel (Rs (inr star))
-    ( head-multivariable-input n As as)
-    ( head-multivariable-input n As a's) ×
-  all-sim-Eq-Rel n
-    ( tail-functional-vec n As)
-    ( λ i → Rs (inl-Fin n i))
-    ( tail-multivariable-input n As as)
-    ( tail-multivariable-input n As a's)
+  is-prop (all-sim-Rel n As Rs as a's)
+is-prop-all-sim-Rel zero-ℕ As Rs as a's =
+  is-prop-raise-unit 
+is-prop-all-sim-Rel (succ-ℕ n) As Rs as a's =
+  is-prop-prod
+    ( is-prop-sim-Eq-Rel (Rs (neg-one-Fin n)) _ _)
+    ( is-prop-all-sim-Rel n
+      ( tail-functional-vec n As)
+      ( λ i → Rs (inl i))
+      ( tail-multivariable-input n As as)
+      ( tail-multivariable-input n As a's))
+
+all-sim-Rel-Prop :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  ( Rel-Prop l2 (multivariable-input n As))
+all-sim-Rel-Prop n As Rs as a's =
+  pair
+   (all-sim-Rel n As Rs as a's)
+   (is-prop-all-sim-Rel n As Rs as a's)
+
+is-reflexive-all-sim-Rel-Prop :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  is-reflexive-Rel-Prop (all-sim-Rel-Prop n As Rs)
+is-reflexive-all-sim-Rel-Prop zero-ℕ As Rs = raise-star
+is-reflexive-all-sim-Rel-Prop (succ-ℕ n) As Rs =
+  pair
+    ( refl-Eq-Rel (Rs (neg-one-Fin n)))
+    ( is-reflexive-all-sim-Rel-Prop n
+      ( tail-functional-vec n As)
+      ( λ i → Rs (inl i)))
+
+is-symmetric-all-sim-Rel-Prop :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  is-symmetric-Rel-Prop (all-sim-Rel-Prop n As Rs)
+is-symmetric-all-sim-Rel-Prop zero-ℕ As Rs p = raise-star
+is-symmetric-all-sim-Rel-Prop (succ-ℕ n) As Rs (p , p') =
+  pair
+    (symm-Eq-Rel (Rs (neg-one-Fin n)) p)
+    (is-symmetric-all-sim-Rel-Prop n
+      ( tail-functional-vec n As)
+      ( λ i → Rs (inl i))
+      ( p'))
+
+is-transitive-all-sim-Rel-Prop :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  is-transitive-Rel-Prop (all-sim-Rel-Prop n As Rs)
+is-transitive-all-sim-Rel-Prop zero-ℕ As Rs p q = raise-star
+is-transitive-all-sim-Rel-Prop (succ-ℕ n) As Rs (p , p') (q , q') =
+  pair
+    ( trans-Eq-Rel (Rs (neg-one-Fin n)) p q)
+    ( is-transitive-all-sim-Rel-Prop n
+      ( tail-functional-vec n As)
+      ( λ i → Rs (inl i))
+      ( p')
+      ( q'))
+
+all-sim-Eq-Rel :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  ( Eq-Rel l2 (multivariable-input n As))
+all-sim-Eq-Rel {l1} {l2} n As Rs =
+  pair
+   ( all-sim-Rel-Prop n As Rs)
+   ( pair
+     ( is-reflexive-all-sim-Rel-Prop n As Rs)
+     ( pair
+       ( is-symmetric-all-sim-Rel-Prop n As Rs)
+       ( is-transitive-all-sim-Rel-Prop n As Rs)))
 
 module _
   { l1 l2 : Level}
@@ -84,7 +181,7 @@ module _
   preserves-sim-multivariable-map-Eq-Rel f =
     ( as : multivariable-input n As) →
     ( a's : multivariable-input n As) →
-    ( all-sim-Eq-Rel n As Rs as a's) →
+    ( all-sim-Rel n As Rs as a's) →
     ( sim-Eq-Rel S
       ( f as)
       ( f a's))
@@ -180,3 +277,88 @@ module _
   eq-multivariable-htpy-hom-Eq-Rel f g =
     map-inv-equiv (extensionality-multivariable-hom-Eq-Rel f g)
 ```
+
+### The type `multivariable-hom-Eq-Rel R S T` is equivalent to the type `hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T)`
+
+```agda
+module _
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) (succ-ℕ n))
+  ( Rs : (i : Fin (succ-ℕ n)) → Eq-Rel l2 (As i))
+  ( X : UU l1) (S : Eq-Rel l2 X)
+  where
+
+  -- map-hom-multivariable-hom-Eq-Rel :
+  --   multivariable-hom-Eq-Rel n As Rs X →
+  --   ( tail-functional-vec n As)A → hom-Eq-Rel S T
+  -- map-hom-multivariable-hom-Eq-Rel = _
+  -- pr1 (map-hom-multivariable-hom-Eq-Rel f a) = map-multivariable-hom-Eq-Rel R S T f a
+  -- pr2 (map-hom-multivariable-hom-Eq-Rel f a) {x} {y} s =
+  --   preserves-sim-multivariable-hom-Eq-Rel R S T f (refl-Eq-Rel R) s
+
+  equiv-hom-multivariable-hom-Eq-Rel :
+    multivariable-hom-Eq-Rel (succ-ℕ n) As Rs X S ≃
+      hom-Eq-Rel (Rs (neg-one-Fin n))
+        {!!}
+    --    {! (multivariable-hom-Eq-Rel n
+    -- ( tail-functional-vec n As)
+    -- ( λ i → Rs (inl-Fin n i)) X S ) !}
+  equiv-hom-multivariable-hom-Eq-Rel = _
+
+is-set-qARs :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  is-set ((i : Fin n) → set-quotient (Rs i))
+is-set-qARs n As Rs = is-set-Π (λ i → (is-set-set-quotient (Rs i)))
+
+idk :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  reflecting-map-Eq-Rel (all-sim-Eq-Rel n As Rs) ((i : Fin n) → set-quotient (Rs i))
+idk zero-ℕ As Rs = pair (λ _ ()) (λ _  → refl)
+idk (succ-ℕ n) As Rs =
+  pair (λ as i → quotient-map (Rs i) (as i))
+    λ (p , p') → eq-htpy λ i → {!apply-effectiveness-quotient-map' (Rs i) !}
+  -- set-quotient (all-sim-Eq-Rel n As Rs) →
+  -- ((i : Fin n) → set-quotient (Rs i))
+
+
+test :
+  { l1 l2 : Level}
+  ( n : ℕ)
+  ( As : functional-vec (UU l1) n)
+  ( Rs : (i : Fin n) → Eq-Rel l2 (As i)) →
+  set-quotient (all-sim-Eq-Rel n As Rs) →
+  ((i : Fin n) → set-quotient (Rs i))
+test zero-ℕ As Rs qAs ()
+test (succ-ℕ n) As Rs qAs =
+  cons-multivariable-input' n (λ z → set-quotient (Rs z))
+    qa (test n
+      ( tail-functional-vec n As)
+      (  λ i → Rs (inl i))
+      qas    )
+  where
+    qa : set-quotient (Rs (inr star))
+    qa = {!!}
+    qas : set-quotient
+      (all-sim-Eq-Rel n (tail-functional-vec n As) (λ i → Rs (inl i)))
+    qas = {!!}
+
+
+      -- ( tail-functional-vec n As)
+      -- ( λ i → Rs (inl i))
+      -- ( tail-multivariable-input n As as)
+
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  set-quotient' : small-type-Small-Type (equivalence-class-Small-Type R) ＝
+    pr1 (is-small-equivalence-class R)
+  set-quotient' = refl
