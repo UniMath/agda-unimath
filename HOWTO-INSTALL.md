@@ -112,9 +112,9 @@ After completing these steps, you can type `\=` in order to obtain the full
 width equals sign `＝`. While you're at it, you can also add the key sequence
 `yo` to obtain the Japanese symbol `ょ` for the Yoneda embedding.
 
-#### 80 character limit
+#### 80-character limit
 
-The `agda-unimath` library maintains an 80 character limit on the length of
+The `agda-unimath` library maintains an 80-character limit on the length of
 lines in the source code. This limit is to improve readability, both in your
 programming environment and on our website. To display a line marking the 80th
 column in Emacs, add:
@@ -186,8 +186,8 @@ now ready to dive into using the library.
 
 ### Verifying the library
 
-To verify a file and its prerequisites wih Agda, simply open and load it. If you
-want to compile the entire library, you can run `make check` from the
+To verify a file and its prerequisites with Agda, simply open and load it. If
+you want to compile the entire library, you can run `make check` from the
 repository's main folder. This generates the `everything.lagda.md` file, which
 imports and verifies all files in the library.
 
@@ -206,8 +206,8 @@ environment using Nix, you'll need to install the `pre-commit` tool and the
 hooks' Python dependencies. The easiest way to accomplish this is by using the
 Python package manager `pip`.
 
-First, make sure that you have Python installed on your computer. Then run the
-following command from the repository's main folder:
+First, make sure that you have the latest version of Python installed on your
+computer. Then run the following command from the repository's main folder:
 
 ```shell
 pip install -r scripts/requirements.txt

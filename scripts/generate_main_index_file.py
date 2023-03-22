@@ -87,6 +87,7 @@ summary_template = """
     - [Cite the library](CITATION.cff)
   - [Guidelines](CODINGSTYLE.md)
     - [Structure your file](FILE-CONVENTIONS.md)
+        - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)

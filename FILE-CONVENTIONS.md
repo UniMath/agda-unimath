@@ -90,11 +90,11 @@ contents of the file.
 
 ## Notes
 
-- For a template file see [`template.lagda.md`](template.lagda.md).
+- For a template file see [`TEMPLATE.lagda.md`](TEMPLATE.lagda.md).
 
 - An instructive example of a file with the expected structure is
   [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
 
-Please note that some of the conventions above are enforced by our `pre-commit`
-hooks. You can read more about them in our
+Please note that some conventions above are enforced by our `pre-commit` hooks.
+You can read more about them in our
 [installation guide](HOWTO-INSTALL.md#pre-commit-hooks).

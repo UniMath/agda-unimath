@@ -22,7 +22,7 @@ METAFILES:=CITATION.cff \
 			README.md \
 			STATEMENT-OF-INCLUSION.md \
 			SUMMARY.md \
-			template.lagda.md \
+			TEMPLATE.lagda.md \
 			USERS.md \
 
 .PHONY : agdaFiles
