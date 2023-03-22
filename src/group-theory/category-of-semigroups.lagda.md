@@ -48,6 +48,6 @@ eq-iso-Semigroup :
 eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
 Semigroup-Large-Cat : Large-Cat lsuc (_⊔_)
-prω1 Semigroup-Large-Cat = Semigroup-Large-Precat
-prω2 Semigroup-Large-Cat = is-category-Semigroup
+precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precat
+is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
 ```

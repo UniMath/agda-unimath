@@ -11,7 +11,6 @@ open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
 
 open import foundation.equivalences
-open import foundation.large-dependent-pair-types
 open import foundation.universe-levels
 ```
 
@@ -36,16 +35,11 @@ is-category-Large-Precat C =
   {l : Level} (X Y : obj-Large-Precat C l) →
   is-equiv (iso-eq-Large-Precat C X Y)
 
-Large-Cat : (α : Level → Level) (β : Level → Level → Level) → UUω
-Large-Cat α β = Σω (Large-Precat α β) is-category-Large-Precat
+record Large-Cat (α : Level → Level) (β : Level → Level → Level) : Setω where
+  constructor make-Large-Cat
+  field
+    precat-Large-Cat : Large-Precat α β
+    is-category-Large-Cat : is-category-Large-Precat precat-Large-Cat
 
-precat-Large-Cat :
-  {α : Level → Level} {β : Level → Level → Level} →
-  Large-Cat α β → Large-Precat α β
-precat-Large-Cat = prω1
-
-is-category-Large-Cat :
-  {α : Level → Level} {β : Level → Level → Level} →
-  (C : Large-Cat α β) → is-category-Large-Precat (precat-Large-Cat C)
-is-category-Large-Cat = prω2
+open Large-Cat public
 ```
