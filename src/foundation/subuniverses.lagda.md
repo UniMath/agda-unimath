@@ -78,7 +78,7 @@ is-global-subuniverse α P l1 l2 =
 record global-subuniverse (α : Level → Level) : UUω where
   field
     subuniverse-global-subuniverse : (l : Level) → subuniverse l (α l)
-    is-global :
+    is-global-global-subuniverse :
       (l1 l2 : Level) →
       is-global-subuniverse α subuniverse-global-subuniverse l1 l2
 

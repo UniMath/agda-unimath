@@ -52,16 +52,16 @@ module _
     Ql3 = subuniverse-global-subuniverse Q l3
     Ql1+⊔l2⊔l3 = subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3)
 
-  dirichlet-prod-species-subuniverse' :
+  dirichlet-product-species-subuniverse' :
     (S : species-subuniverse P Ql2) (T : species-subuniverse P Ql3)
     (X : type-subuniverse P) → UU (lsuc l1 ⊔ l2 ⊔ l3)
-  dirichlet-prod-species-subuniverse' S T X =
+  dirichlet-product-species-subuniverse' S T X =
     Σ ( binary-product-Decomposition P X)
       ( λ d →
         inclusion-subuniverse Ql2
-          ( S (pr1-binary-product-Decomposition P X d)) ×
+          ( S (left-summand-binary-product-Decomposition P X d)) ×
         inclusion-subuniverse Ql3
-          ( T (pr2-binary-product-Decomposition P X d)))
+          ( T (right-summand-binary-product-Decomposition P X d)))
 
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
@@ -72,7 +72,7 @@ module _
     (X : type-subuniverse P) →
       is-in-subuniverse
         ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l4 ⊔ l5))
-        ( dirichlet-prod-species-subuniverse' P Q S T X)))
+        ( dirichlet-product-species-subuniverse' P Q S T X)))
   where
 
   private
@@ -80,12 +80,12 @@ module _
     Ql3 = subuniverse-global-subuniverse Q l3
     Ql1+⊔l2⊔l3 = subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3)
 
-  dirichlet-prod-species-subuniverse :
+  dirichlet-product-species-subuniverse :
     species-subuniverse P Ql2 → species-subuniverse P Ql3 →
     species-subuniverse P Ql1+⊔l2⊔l3
-  pr1 (dirichlet-prod-species-subuniverse S T X) =
-    dirichlet-prod-species-subuniverse' P Q S T X
-  pr2 (dirichlet-prod-species-subuniverse S T X) = C1 l2 l3 S T X
+  pr1 (dirichlet-product-species-subuniverse S T X) =
+    dirichlet-product-species-subuniverse' P Q S T X
+  pr2 (dirichlet-product-species-subuniverse S T X) = C1 l2 l3 S T X
 
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
@@ -96,7 +96,7 @@ module _
         (X : type-subuniverse P) →
         is-in-subuniverse
           ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l5 ⊔ l6) )
-          ( dirichlet-prod-species-subuniverse' P Q S T X)))
+          ( dirichlet-product-species-subuniverse' P Q S T X)))
   ( C2 :
     (A B : type-subuniverse P) →
     is-in-subuniverse P (inclusion-subuniverse P A × inclusion-subuniverse P B))
@@ -114,79 +114,79 @@ module _
     (X : type-subuniverse P)
     where
 
-    equiv-left-iterated-dirichlet-prod-species-subuniverse :
-      dirichlet-prod-species-subuniverse' P Q
-        ( dirichlet-prod-species-subuniverse P Q C1 S T)
+    equiv-left-iterated-dirichlet-product-species-subuniverse :
+      dirichlet-product-species-subuniverse' P Q
+        ( dirichlet-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
       Σ ( ternary-product-Decomposition P X)
         ( λ d →
           inclusion-subuniverse Ql2
-            ( S (fst-ternary-product-Decomposition P X d)) ×
+            ( S (first-summand-ternary-product-Decomposition P X d)) ×
             ( inclusion-subuniverse Ql3
-              ( T (snd-ternary-product-Decomposition P X d)) ×
+              ( T (second-summand-ternary-product-Decomposition P X d)) ×
               inclusion-subuniverse Ql4
-              ( U (thrd-ternary-product-Decomposition P X d))))
-    equiv-left-iterated-dirichlet-prod-species-subuniverse =
+              ( U (third-summand-ternary-product-Decomposition P X d))))
+    equiv-left-iterated-dirichlet-product-species-subuniverse =
       ( ( equiv-Σ
           ( λ d →
             inclusion-subuniverse Ql2
-            ( S (fst-ternary-product-Decomposition P X d)) ×
+            ( S (first-summand-ternary-product-Decomposition P X d)) ×
             ( inclusion-subuniverse Ql3
-              ( T (snd-ternary-product-Decomposition P X d)) ×
+              ( T (second-summand-ternary-product-Decomposition P X d)) ×
               inclusion-subuniverse Ql4
-              ( U (thrd-ternary-product-Decomposition P X d)))))
+              ( U (third-summand-ternary-product-Decomposition P X d)))))
           ( ( equiv-Σ
               ( _)
               ( assoc-prod _ _ _ ∘e commutative-prod)
               ( λ x →
                 equiv-postcomp-equiv
-                  ( ( ( assoc-prod _ _ _) ∘e
-                    ( ( commutative-prod))) )
+                  ( ( assoc-prod _ _ _ ∘e
+                    ( commutative-prod)) )
                   ( inclusion-subuniverse P X)) ∘e
               equiv-ternary-left-iterated-product-Decomposition P X C2))
           ( λ d → assoc-prod _ _ _) ∘e
-      ( ( inv-assoc-Σ
-          ( binary-product-Decomposition P X)
-          ( λ z → binary-product-Decomposition P (pr1 z))
-          ( _)) ∘e
-      ( ( equiv-tot  λ d → right-distributive-prod-Σ))))
+        ( ( inv-assoc-Σ
+            ( binary-product-Decomposition P X)
+            ( λ z → binary-product-Decomposition P (pr1 z))
+            ( _)) ∘e
+          ( ( equiv-tot  λ d → right-distributive-prod-Σ))))
 
-    equiv-right-iterated-dirichlet-prod-species-subuniverse :
-      dirichlet-prod-species-subuniverse' P Q
+    equiv-right-iterated-dirichlet-product-species-subuniverse :
+      dirichlet-product-species-subuniverse' P Q
         ( S)
-        ( dirichlet-prod-species-subuniverse P Q C1 T U)
+        ( dirichlet-product-species-subuniverse P Q C1 T U)
         ( X) ≃
       Σ ( ternary-product-Decomposition P X)
         ( λ d →
           inclusion-subuniverse Ql2
-            ( S (fst-ternary-product-Decomposition P X d)) ×
+            ( S (first-summand-ternary-product-Decomposition P X d)) ×
             ( inclusion-subuniverse Ql3
-              ( T (snd-ternary-product-Decomposition P X d)) ×
+              ( T (second-summand-ternary-product-Decomposition P X d)) ×
                 inclusion-subuniverse Ql4
-              ( U (thrd-ternary-product-Decomposition P X d))))
-    equiv-right-iterated-dirichlet-prod-species-subuniverse =
+              ( U (third-summand-ternary-product-Decomposition P X d))))
+    equiv-right-iterated-dirichlet-product-species-subuniverse =
       ( ( equiv-Σ-equiv-base
           ( _)
           ( equiv-ternary-right-iterated-product-Decomposition P X C2)) ∘e
-      ( ( inv-assoc-Σ
-          ( binary-product-Decomposition P X)
-          ( λ z → binary-product-Decomposition P (pr1 (pr2 z)))
-          ( _)) ∘e
-      ( ( equiv-tot (λ d → left-distributive-prod-Σ)))))
+        ( ( inv-assoc-Σ
+            ( binary-product-Decomposition P X)
+            ( λ z → binary-product-Decomposition P (pr1 (pr2 z)))
+            ( _)) ∘e
+          ( ( equiv-tot (λ d → left-distributive-prod-Σ)))))
 
-    equiv-assoc-dirichlet-prod-species-subuniverse :
-      dirichlet-prod-species-subuniverse' P Q
-        ( dirichlet-prod-species-subuniverse P Q C1 S T)
+    equiv-associative-dirichlet-product-species-subuniverse :
+      dirichlet-product-species-subuniverse' P Q
+        ( dirichlet-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
-      dirichlet-prod-species-subuniverse' P Q
+      dirichlet-product-species-subuniverse' P Q
         ( S)
-        ( dirichlet-prod-species-subuniverse P Q C1 T U)
+        ( dirichlet-product-species-subuniverse P Q C1 T U)
         ( X)
-    equiv-assoc-dirichlet-prod-species-subuniverse =
-      inv-equiv (equiv-right-iterated-dirichlet-prod-species-subuniverse) ∘e
-      equiv-left-iterated-dirichlet-prod-species-subuniverse
+    equiv-associative-dirichlet-product-species-subuniverse =
+      inv-equiv (equiv-right-iterated-dirichlet-product-species-subuniverse) ∘e
+      equiv-left-iterated-dirichlet-product-species-subuniverse
 
   module _
     (S : species-subuniverse P Ql2)
@@ -194,21 +194,21 @@ module _
     (U : species-subuniverse P Ql4)
     where
 
-    assoc-dirichlet-prod-species-subuniverse :
-      dirichlet-prod-species-subuniverse P Q C1
-        ( dirichlet-prod-species-subuniverse P Q C1 S T)
+    associative-dirichlet-product-species-subuniverse :
+      dirichlet-product-species-subuniverse P Q C1
+        ( dirichlet-product-species-subuniverse P Q C1 S T)
         ( U) ＝
-      dirichlet-prod-species-subuniverse P Q C1
+      dirichlet-product-species-subuniverse P Q C1
         ( S)
-        ( dirichlet-prod-species-subuniverse P Q C1 T U)
-    assoc-dirichlet-prod-species-subuniverse =
+        ( dirichlet-product-species-subuniverse P Q C1 T U)
+    associative-dirichlet-product-species-subuniverse =
       eq-equiv-fam-subuniverse
         ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-        ( dirichlet-prod-species-subuniverse P Q C1
-          ( dirichlet-prod-species-subuniverse P Q C1 S T)
+        ( dirichlet-product-species-subuniverse P Q C1
+          ( dirichlet-product-species-subuniverse P Q C1 S T)
           ( U))
-        ( dirichlet-prod-species-subuniverse P Q C1
+        ( dirichlet-product-species-subuniverse P Q C1
           ( S)
-          ( dirichlet-prod-species-subuniverse P Q C1 T U))
-        ( equiv-assoc-dirichlet-prod-species-subuniverse S T U)
+          ( dirichlet-product-species-subuniverse P Q C1 T U))
+        ( equiv-associative-dirichlet-product-species-subuniverse S T U)
 ```

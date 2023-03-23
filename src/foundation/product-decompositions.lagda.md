@@ -49,24 +49,24 @@ module _
   (d : binary-product-Decomposition P X)
   where
 
-  pr1-binary-product-Decomposition : type-subuniverse P
-  pr1-binary-product-Decomposition = pr1 d
+  left-summand-binary-product-Decomposition : type-subuniverse P
+  left-summand-binary-product-Decomposition = pr1 d
 
-  inclusion-pr1-binary-product-Decomposition : UU l1
-  inclusion-pr1-binary-product-Decomposition =
-    inclusion-subuniverse P pr1-binary-product-Decomposition
+  type-left-summand-binary-product-Decomposition : UU l1
+  type-left-summand-binary-product-Decomposition =
+    inclusion-subuniverse P left-summand-binary-product-Decomposition
 
-  pr2-binary-product-Decomposition : type-subuniverse P
-  pr2-binary-product-Decomposition = pr1 (pr2 d)
+  right-summand-binary-product-Decomposition : type-subuniverse P
+  right-summand-binary-product-Decomposition = pr1 (pr2 d)
 
-  inclusion-pr2-binary-product-Decomposition : UU l1
-  inclusion-pr2-binary-product-Decomposition =
-    inclusion-subuniverse P pr2-binary-product-Decomposition
+  type-right-summand-binary-product-Decomposition : UU l1
+  type-right-summand-binary-product-Decomposition =
+    inclusion-subuniverse P right-summand-binary-product-Decomposition
 
   matching-correspondence-productuct-decomposition :
     inclusion-subuniverse P X ≃
-    ( inclusion-pr1-binary-product-Decomposition ×
-      inclusion-pr2-binary-product-Decomposition)
+    ( type-left-summand-binary-product-Decomposition ×
+      type-right-summand-binary-product-Decomposition)
   matching-correspondence-productuct-decomposition = pr2 (pr2 d)
 ```
 
@@ -83,7 +83,7 @@ module _
       ( λ d →
         binary-product-Decomposition
           ( P)
-          ( pr1-binary-product-Decomposition P X d))
+          ( left-summand-binary-product-Decomposition P X d))
 
   right-iterated-binary-product-Decomposition : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-product-Decomposition =
@@ -91,7 +91,7 @@ module _
        ( λ d →
          binary-product-Decomposition
            ( P)
-           ( pr2-binary-product-Decomposition P X d))
+           ( right-summand-binary-product-Decomposition P X d))
 ```
 
 ### Ternary product Decompositions
@@ -118,23 +118,23 @@ module _
       type-subuniverse P × (type-subuniverse P × type-subuniverse P)
     types-ternary-product-Decomposition = pr1 d
 
-    fst-ternary-product-Decomposition : type-subuniverse P
-    fst-ternary-product-Decomposition =
+    first-summand-ternary-product-Decomposition : type-subuniverse P
+    first-summand-ternary-product-Decomposition =
       (pr1 types-ternary-product-Decomposition)
 
-    snd-ternary-product-Decomposition : type-subuniverse P
-    snd-ternary-product-Decomposition =
+    second-summand-ternary-product-Decomposition : type-subuniverse P
+    second-summand-ternary-product-Decomposition =
       (pr1 (pr2 types-ternary-product-Decomposition))
 
-    thrd-ternary-product-Decomposition : type-subuniverse P
-    thrd-ternary-product-Decomposition =
+    third-summand-ternary-product-Decomposition : type-subuniverse P
+    third-summand-ternary-product-Decomposition =
       (pr2 (pr2 types-ternary-product-Decomposition))
 
     matching-correspondence-ternary-productuct-Decomposition :
       inclusion-subuniverse P X ≃
-      ( inclusion-subuniverse P fst-ternary-product-Decomposition ×
-        ( inclusion-subuniverse P snd-ternary-product-Decomposition ×
-          inclusion-subuniverse P thrd-ternary-product-Decomposition))
+      ( inclusion-subuniverse P first-summand-ternary-product-Decomposition ×
+        ( inclusion-subuniverse P second-summand-ternary-product-Decomposition ×
+          inclusion-subuniverse P third-summand-ternary-product-Decomposition))
     matching-correspondence-ternary-productuct-Decomposition = pr2 d
 ```
 
@@ -154,17 +154,17 @@ module _
         ( type-subuniverse P)
         ( λ _ → type-subuniverse P)
         ( _)) ∘e
-    ( ( equiv-Σ
-        ( _)
-        ( commutative-prod)
-        ( λ x →
-          equiv-postcomp-equiv
-            ( commutative-prod)
-            (inclusion-subuniverse P X))) ∘e
-    ( ( inv-assoc-Σ
-        ( type-subuniverse P)
-        ( λ _ → type-subuniverse P)
-        ( _)))))
+      ( ( equiv-Σ
+          ( _)
+          ( commutative-prod)
+          ( λ x →
+            equiv-postcomp-equiv
+              ( commutative-prod)
+              (inclusion-subuniverse P X))) ∘e
+        ( ( inv-assoc-Σ
+            ( type-subuniverse P)
+            ( λ _ → type-subuniverse P)
+            ( _)))))
 ```
 
 ### Equivalence between iterated product and ternary product decomposition
@@ -240,17 +240,17 @@ module _
           ( ( equiv-postcomp-equiv
               ( commutative-prod)
               ( inclusion-subuniverse P X)) ∘e
-          ( ( left-unit-law-Σ-is-contr
-              ( is-contr-total-equiv-subuniverse'
-                ( P)
-                ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
-                    inclusion-subuniverse P (pr2 (pr2 x))) ,
-                  C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
-              ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
-                    inclusion-subuniverse P (pr2 (pr2 x))) ,
-                  C1 (pr1 (pr2 x)) (pr2 (pr2 x))) ,
-                id-equiv))))) ∘e
-    ( ( equiv-reassociate-left-iterated-product-Decomposition)))
+            ( ( left-unit-law-Σ-is-contr
+                ( is-contr-total-equiv-subuniverse'
+                  ( P)
+                  ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
+                      inclusion-subuniverse P (pr2 (pr2 x))) ,
+                    C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
+                ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
+                      inclusion-subuniverse P (pr2 (pr2 x))) ,
+                    C1 (pr1 (pr2 x)) (pr2 (pr2 x))) ,
+                  id-equiv))))) ∘e
+      ( ( equiv-reassociate-left-iterated-product-Decomposition)))
 
   private
     map-reassociate-right-iterated-product-Decomposition :
@@ -322,5 +322,5 @@ module _
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
                 ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))) ,
               id-equiv))) ∘e
-    ( ( equiv-reassociate-right-iterated-product-Decomposition)))
+      ( ( equiv-reassociate-right-iterated-product-Decomposition)))
 ```
