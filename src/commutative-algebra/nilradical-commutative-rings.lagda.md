@@ -16,8 +16,8 @@ open import commutative-algebra.prime-ideals-commutative-rings
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.propositional-truncations
 open import foundation.propositions
-
 
 open import ring-theory.nilpotent-elements-rings
 ```
@@ -134,6 +134,7 @@ is-in-nilradical-Commutative-Ring-Prop R =
   {-∃-Prop ℕ (λ n → power-Commutative-Ring R n x ＝ zero-Commutative-Ring R)-}
 
 
+{-
 is-contained-in-prime-ideal-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l)
   (P : prime-ideal-Commutative-Ring l R) (x : type-Commutative-Ring R) →
@@ -143,5 +144,5 @@ is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
   apply-universal-property-trunc-Prop p
   {!  !}
   (λ n → {!  !})
-
+-}
 ```
