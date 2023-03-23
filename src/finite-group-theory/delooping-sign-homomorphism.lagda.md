@@ -2166,9 +2166,9 @@ module _
 ## See also
 
 - Definition of the delooping of the sign homomorphism based on Cartier
-  ['finite-group-theory.cartier-delooping-sign-homomorphism'](finite-group-theory.cartier-delooping-sign-homomorphism).
+  ['finite-group-theory.cartier-delooping-sign-homomorphism'](finite-group-theory.cartier-delooping-sign-homomorphism.md).
 - Definition of the delooping of the sign homomorphism based on Simpson
-  ['finite-group-theory.simpson-delooping-sign-homomorphism'](finite-group-theory.simpson-delooping-sign-homomorphism).
+  ['finite-group-theory.simpson-delooping-sign-homomorphism'](finite-group-theory.simpson-delooping-sign-homomorphism.md).
 
 ## References
 
