@@ -29,10 +29,6 @@ open import foundation-core.universe-levels
 
 </details>
 
-## Idea
-
-Any dependent function induces a section of the projection map
-
 ## Properties
 
 ### Sections of the projection map
