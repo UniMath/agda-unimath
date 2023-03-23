@@ -11,7 +11,10 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-decompositions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+<<<<<<< HEAD
 open import foundation.empty-types
+=======
+>>>>>>> 6f6af3034f1d86b6aa8d8a6ba7cdbaa6eb143428
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types

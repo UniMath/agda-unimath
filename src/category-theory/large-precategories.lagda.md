@@ -7,8 +7,6 @@ module category-theory.large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
@@ -26,7 +24,7 @@ type.)
 ## Definition
 
 ```agda
-record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Setω where
+record Large-Precat (α : Level → Level) (β : Level → Level → Level) : UUω where
   constructor make-Large-Precat
   field
     obj-Large-Precat :

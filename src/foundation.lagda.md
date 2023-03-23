@@ -142,6 +142,9 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.large-dependent-pair-types public
+open import foundation.large-homotopies public
+open import foundation.large-identity-types public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
@@ -248,6 +251,7 @@ open import foundation.uniqueness-truncation public
 open import foundation.unit-type public
 open import foundation.unital-binary-operations public
 open import foundation.univalence public
+open import foundation.univalence-action-on-equivalences public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public

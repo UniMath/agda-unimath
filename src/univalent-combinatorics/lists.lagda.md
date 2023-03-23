@@ -47,6 +47,10 @@ data list {l : Level} (A : UU l) : UU l where
   nil : list A
   cons : A → list A → list A
 
+snoc : {l : Level} {A : UU l} → list A → A → list A
+snoc nil a = cons a nil
+snoc (cons b l) a = cons b (snoc l a)
+
 in-list : {l : Level} {A : UU l} → A → list A
 in-list a = cons a nil
 ```
@@ -418,6 +422,11 @@ We define the head and tail operations, and we define the operations of picking
 and removing the last element from a list.
 
 ```agda
+head-snoc-list :
+  {l : Level} {A : UU l} (l : list A) → A → A
+head-snoc-list nil a = a
+head-snoc-list (cons h l) a = h
+
 head-list :
   {l1 : Level} {A : UU l1} → list A → list A
 head-list nil = nil

@@ -7,8 +7,6 @@ module order-theory.large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -29,7 +27,7 @@ relation to any particular universe level is antisymmetric
 
 ```agda
 record
-  Large-Poset (α : Level → Level) (β : Level → Level → Level) : Setω where
+  Large-Poset (α : Level → Level) (β : Level → Level → Level) : UUω where
   constructor
     make-Large-Poset
   field
