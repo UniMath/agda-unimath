@@ -73,6 +73,16 @@ module _
   orientation-Complete-Undirected-Graph =
     ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
     Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x))
+
+  is-set-orientation-Complete-Undirected-Graph :
+    is-set orientation-Complete-Undirected-Graph
+  is-set-orientation-Complete-Undirected-Graph =
+    is-set-Π
+      ( λ (P , H) →
+        is-set-Σ
+          ( is-set-type-UU-Fin n X)
+          ( λ x → is-set-is-prop (is-prop-type-decidable-Prop (P x))))
+
   2-Element-Decidable-Subtype-subtype-pointwise-difference :
     orientation-Complete-Undirected-Graph →
     orientation-Complete-Undirected-Graph →

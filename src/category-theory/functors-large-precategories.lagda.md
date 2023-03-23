@@ -7,8 +7,6 @@ module category-theory.functors-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import category-theory.large-precategories
 
 open import foundation.functions
@@ -36,7 +34,7 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-  record functor-Large-Precat (γ : Level → Level) : Setω
+  record functor-Large-Precat (γ : Level → Level) : UUω
     where
     constructor make-functor
     field
