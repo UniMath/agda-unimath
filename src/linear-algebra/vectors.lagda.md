@@ -161,7 +161,7 @@ module _
       ( isretr-eq-Eq-vec n u v)
 
   extensionality-vec : (n : ℕ) → (u v : vec A n) → Id u v ≃ Eq-vec n u v
-  extensionality-vec n u v =  (Eq-eq-vec n u v , is-equiv-Eq-eq-vec n u v)
+  extensionality-vec n u v = (Eq-eq-vec n u v , is-equiv-Eq-eq-vec n u v)
 ```
 
 ### The types of listed vectors and functional vectors are equivalent

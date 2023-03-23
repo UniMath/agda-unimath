@@ -18,7 +18,7 @@ open import foundation-core.universe-levels
 ## Idea
 
 A binary operation on an unordered pair of types A indexed by a 2-element type I
-is a map `((i : I) → A i) →  B`.
+is a map `((i : I) → A i) → B`.
 
 ## Definition
 

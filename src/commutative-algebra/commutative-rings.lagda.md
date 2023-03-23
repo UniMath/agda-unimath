@@ -18,6 +18,7 @@ open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import foundation.interchange-law
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids

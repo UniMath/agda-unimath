@@ -247,7 +247,7 @@ module _
     right-unit-law-add-Semiring R _ ∙ sum-zero-Semiring n
 ```
 
-### Splitting Sums
+### Splitting sums
 
 ```agda
 split-sum-Semiring :

@@ -28,9 +28,9 @@ open import foundation-core.universe-levels
 We combine the universal property of coproducts and the unit type to obtain a
 universal property of the maybe modality.
 
-```agda
--- The universal property of Maybe
+## Definitions
 
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2}
   where

@@ -1,4 +1,4 @@
-# Graphs
+# Directed graphs
 
 ```agda
 module graph-theory.directed-graphs where
@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A graph consists of a type of vertices equipped with a binary, type valued
-relation of edges.
+A directed graph consists of a type of vertices equipped with a binary, type
+valued relation of edges.
 
 ## Definition
 
@@ -63,8 +63,8 @@ module _
 ```agda
 module alternative where
 
-  Directed-Graph' : (l1 l2 : Level)  → UU (lsuc l1 ⊔ lsuc l2)
-  Directed-Graph' l1 l2 = Σ (UU l1)  λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
+  Directed-Graph' : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+  Directed-Graph' l1 l2 = Σ (UU l1) λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
 
   module _ {l1 l2 : Level} (G : Directed-Graph' l1 l2) where
 
@@ -90,7 +90,7 @@ module equiv {l1 l2 : Level} where
   pr1 (Directed-Graph-to-Directed-Graph' G) = vertex-Directed-Graph G
   pr1 (pr2 (Directed-Graph-to-Directed-Graph' G)) =
     Σ ( vertex-Directed-Graph G)
-      ( λ x → Σ (vertex-Directed-Graph G) λ y → edge-Directed-Graph G  x y)
+      ( λ x → Σ (vertex-Directed-Graph G) λ y → edge-Directed-Graph G x y)
   pr1 (pr2 (pr2 (Directed-Graph-to-Directed-Graph' G))) = pr1
   pr2 (pr2 (pr2 (Directed-Graph-to-Directed-Graph' G))) = pr1 ∘ pr2
 

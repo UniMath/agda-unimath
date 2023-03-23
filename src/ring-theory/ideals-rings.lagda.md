@@ -16,7 +16,6 @@ open import foundation.universe-levels
 
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
-open import group-theory.subgroups-abelian-groups
 
 open import ring-theory.ideals-semirings
 open import ring-theory.rings

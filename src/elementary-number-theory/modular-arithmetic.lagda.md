@@ -135,7 +135,7 @@ is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
 is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
 
 int-ℤ-Mod-bounded : (k : ℕ) → (x : ℤ-Mod (succ-ℕ k))
-  → leq-ℤ (int-ℤ-Mod (succ-ℕ  k) x) (int-ℕ (succ-ℕ k))
+  → leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
 int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ
   (add-ℤ (inr (inr k))

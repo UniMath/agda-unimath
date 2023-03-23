@@ -23,6 +23,8 @@ open import group-theory.semigroups
 open import group-theory.submonoids
 ```
 
+</details>
+
 ## Idea
 
 A normal submonoid `N` of `M` is a monoid that corresponds uniquely to a
@@ -191,5 +193,5 @@ module _
 
 ## References
 
-[1] S. Margolis and J.-É. Pin, Inverse semigroups and extensions of groups by
-semilattices, J. of Algebra 110 (1987), 277-297.
+- S. Margolis and J.-É. Pin, Inverse semigroups and extensions of groups by
+  semilattices, J. of Algebra 110 (1987), 277-297.

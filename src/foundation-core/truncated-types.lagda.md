@@ -143,7 +143,7 @@ abstract
   is-trunc-is-equiv' :
     {l1 l2 : Level} (k : 𝕋) (A : UU l1) {B : UU l2} (f : A → B) →
     is-equiv f → is-trunc k A → is-trunc k B
-  is-trunc-is-equiv' k A  f is-equiv-f is-trunc-A =
+  is-trunc-is-equiv' k A f is-equiv-f is-trunc-A =
     is-trunc-is-equiv k A
       ( map-inv-is-equiv is-equiv-f)
       ( is-equiv-map-inv-is-equiv is-equiv-f)

@@ -33,7 +33,7 @@ open import foundation-core.universe-levels
 ### The type of all sets in a universe is a 1-type
 
 ```agda
-is-1-type-Set : {l : Level}  → is-1-type (Set l)
+is-1-type-Set : {l : Level} → is-1-type (Set l)
 is-1-type-Set = is-trunc-Truncated-Type zero-𝕋
 
 Set-1-Type : (l : Level) → 1-Type (lsuc l)

@@ -454,7 +454,7 @@ module _
     right-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
 
   left-unit-law-mul-nat-scalar-Ring :
-    (x : type-Ring R) →  mul-nat-scalar-Ring 1 x ＝ x
+    (x : type-Ring R) → mul-nat-scalar-Ring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Ring =
     left-unit-law-mul-nat-scalar-Semiring (semiring-Ring R)
 

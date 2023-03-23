@@ -105,9 +105,11 @@ module _
   preserves-mul-hom-Semigroup :
     (f : type-hom-Semigroup) → preserves-mul-Semigroup (map-hom-Semigroup f)
   preserves-mul-hom-Semigroup f = pr2 f
+```
 
-  {- We characterize the identity type of the semigroup homomorphisms. -}
+### Characterizing the identity type of semigroup homomorphisms
 
+```agda
   htpy-hom-Semigroup : (f g : type-hom-Semigroup) → UU (l1 ⊔ l2)
   htpy-hom-Semigroup f g = map-hom-Semigroup f ~ map-hom-Semigroup g
 
