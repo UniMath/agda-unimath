@@ -53,11 +53,10 @@ type-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) → A → A → UU l2
 type-Rel-Prop R x y = pr1 (R x y)
 
-abstract
-  is-prop-type-Rel-Prop :
-    {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
-    (x y : A) → is-prop (type-Rel-Prop R x y)
-  is-prop-type-Rel-Prop R x y = pr2 (R x y)
+is-prop-type-Rel-Prop :
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
+  (x y : A) → is-prop (type-Rel-Prop R x y)
+is-prop-type-Rel-Prop R x y = pr2 (R x y)
 
 total-space-Rel-Prop : {l : Level} {l1 : Level} {A : UU l1}
              → Rel-Prop l A → UU (l ⊔ l1)

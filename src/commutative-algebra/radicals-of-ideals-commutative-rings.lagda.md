@@ -12,24 +12,16 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
-open import commutative-algebra.sums-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -68,59 +60,85 @@ module _
       ( zero-Commutative-Ring A)
       ( contains-zero-ideal-Commutative-Ring A I)
 
-{-
   is-closed-under-addition-radical-of-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-addition-radical-of-ideal-Commutative-Ring x y f h =
-    apply-universal-property-trunc-Prop f
-    ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
-    ( λ (n , p) →
-      apply-universal-property-trunc-Prop h
-        ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
-        ( λ (m , q) →
-          intro-∃
-            ( add-ℕ n m)
-            ( {!!})))
-            -}
-```
+  is-closed-under-addition-radical-of-ideal-Commutative-Ring x y H K =
+    apply-universal-property-trunc-Prop H
+      ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
+      ( λ (n , p) →
+        apply-universal-property-trunc-Prop K
+          ( subset-radical-of-ideal-Commutative-Ring
+            ( add-Commutative-Ring A x y))
+          ( λ (m , q) →
+            intro-∃
+              ( add-ℕ n m)
+              ( is-closed-under-eq-ideal-Commutative-Ring' A I
+                ( is-closed-under-addition-ideal-Commutative-Ring A I
+                  ( is-closed-under-right-multiplication-ideal-Commutative-Ring
+                    ( A)
+                    ( I)
+                    ( power-Commutative-Ring A m y)
+                    ( _)
+                    ( q))
+                  ( is-closed-under-right-multiplication-ideal-Commutative-Ring
+                    ( A)
+                    ( I)
+                    ( power-Commutative-Ring A n x)
+                    ( _)
+                    ( p)))
+                ( is-linear-combination-power-add-Commutative-Ring A n m x y))))
 
-( binomial-theorem-Commutative-Ring A (add-ℕ n m) x y) ∙ ( (
-split-sum-Commutative-Ring A n ( succ-ℕ m) ( λ i →
-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ ( add-ℕ n m) (
-nat-Fin (add-ℕ n (succ-ℕ m)) i)) ( mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin (add-ℕ n (succ-ℕ m)) i) ( x)) (
-power-Commutative-Ring A ( dist-ℕ ( add-ℕ n m) ( nat-Fin (add-ℕ n (succ-ℕ m))
-i)) ( y))))) ∙ ( ( ap-add-Commutative-Ring A ( ( htpy-sum-Commutative-Ring A n (
-λ i → ( ap ( λ u → mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ
-(add-ℕ n m) u) ( mul-Commutative-Ring A ( power-Commutative-Ring A u x) (
-power-Commutative-Ring A ( dist-ℕ (add-ℕ n m) u) ( y)))) ( nat-inl-coprod-Fin n
-m i)) ∙ ( ( ( ap ( mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (
-add-ℕ n m) ( nat-Fin n i))) ( ( ap ( mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin n i) ( x))) ( ( ap ( λ u →
-power-Commutative-Ring A u y) ( ( symmetric-dist-ℕ ( add-ℕ n m) ( nat-Fin n i))
-∙ ( ( inv ( triangle-equality-dist-ℕ ( nat-Fin n i) ( n) ( add-ℕ n m) (
-upper-bound-nat-Fin' n i) ( leq-add-ℕ n m))) ∙ ( ap ( add-ℕ (dist-ℕ (nat-Fin n
-i) n)) ( dist-add-ℕ n m))))) ∙ ( ( power-add-Commutative-Ring A ( dist-ℕ
-(nat-Fin n i) n) ( m)) ∙ ( ( ap ( mul-Commutative-Ring A (
-power-Commutative-Ring A ( dist-ℕ (nat-Fin n i) n) ( y))) ( q)) ∙ (
-right-zero-law-mul-Commutative-Ring ( A) ( power-Commutative-Ring A ( dist-ℕ
-(nat-Fin n i) n) ( y))))))) ∙ ( right-zero-law-mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin n i) ( x)))))) ∙ (
-right-zero-law-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (
-add-ℕ n m) ( nat-Fin n i)))))) ∙ ( sum-zero-Commutative-Ring A n)) ( (
-htpy-sum-Commutative-Ring A (succ-ℕ m) ( λ i → ( ap ( λ u →
-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (add-ℕ n m) u) (
-mul-Commutative-Ring A ( power-Commutative-Ring A u x) ( power-Commutative-Ring
-A ( dist-ℕ (add-ℕ n m) u) ( y)))) ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙ ( ( ap
-( mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ ( add-ℕ n m) (
-add-ℕ n (nat-Fin (succ-ℕ m) i)))) ( ( ap ( mul-Commutative-Ring' A (
-power-Commutative-Ring A ( dist-ℕ ( add-ℕ n m) ( add-ℕ n (nat-Fin (succ-ℕ m)
-i))) ( y))) ( ( power-add-Commutative-Ring A n ( nat-Fin (succ-ℕ m) i)) ∙ ( ( ap
-(mul-Commutative-Ring' A _) p) ∙ ( left-zero-law-mul-Commutative-Ring A (
-power-Commutative-Ring A ( nat-Fin (succ-ℕ m) i) ( x)))))) ∙ (
-left-zero-law-mul-Commutative-Ring A _))) ∙ (
-right-zero-law-mul-nat-scalar-Commutative-Ring A ( binomial-coefficient-ℕ (
-add-ℕ n m) ( add-ℕ n (nat-Fin (succ-ℕ m) i))))))) ∙ ( sum-zero-Commutative-Ring
-A (succ-ℕ m)))) ∙ ( left-unit-law-add-Commutative-Ring A ( zero-Commutative-Ring
-A))))
+  is-closed-under-negatives-radical-of-ideal-Commutative-Ring :
+    is-closed-under-negatives-subset-Commutative-Ring A
+      ( subset-radical-of-ideal-Commutative-Ring)
+  is-closed-under-negatives-radical-of-ideal-Commutative-Ring x H =
+    apply-universal-property-trunc-Prop H
+      ( subset-radical-of-ideal-Commutative-Ring (neg-Commutative-Ring A x))
+      ( λ (n , p) →
+        intro-∃ n
+          ( is-closed-under-eq-ideal-Commutative-Ring' A I
+            ( is-closed-under-left-multiplication-ideal-Commutative-Ring A I _
+              ( power-Commutative-Ring A n x)
+              ( p))
+            ( power-neg-Commutative-Ring A n x)))
+
+  is-closed-under-right-multiplication-radical-of-ideal-Commutative-Ring :
+    is-closed-under-right-multiplication-subset-Commutative-Ring A
+      ( subset-radical-of-ideal-Commutative-Ring)
+  is-closed-under-right-multiplication-radical-of-ideal-Commutative-Ring x y H =
+    apply-universal-property-trunc-Prop H
+      ( subset-radical-of-ideal-Commutative-Ring (mul-Commutative-Ring A x y))
+      ( λ (n , p) →
+        intro-∃ n
+          ( is-closed-under-eq-ideal-Commutative-Ring' A I
+            ( is-closed-under-right-multiplication-ideal-Commutative-Ring A I
+              ( power-Commutative-Ring A n x)
+              ( power-Commutative-Ring A n y)
+              ( p))
+            ( distributive-power-mul-Commutative-Ring A n x y)))
+
+  is-closed-under-left-multiplication-radical-of-ideal-Commutative-Ring :
+    is-closed-under-left-multiplication-subset-Commutative-Ring A
+      ( subset-radical-of-ideal-Commutative-Ring)
+  is-closed-under-left-multiplication-radical-of-ideal-Commutative-Ring x y H =
+    apply-universal-property-trunc-Prop H
+      ( subset-radical-of-ideal-Commutative-Ring (mul-Commutative-Ring A x y))
+      ( λ (n , p) →
+        intro-∃ n
+          ( is-closed-under-eq-ideal-Commutative-Ring' A I
+            ( is-closed-under-left-multiplication-ideal-Commutative-Ring A I
+              ( power-Commutative-Ring A n x)
+              ( power-Commutative-Ring A n y)
+              ( p))
+            ( distributive-power-mul-Commutative-Ring A n x y)))
+
+  radical-of-ideal-Commutative-Ring : ideal-Commutative-Ring l2 A
+  radical-of-ideal-Commutative-Ring =
+    ideal-right-ideal-Commutative-Ring A
+      subset-radical-of-ideal-Commutative-Ring
+      contains-zero-radical-of-ideal-Commutative-Ring
+      is-closed-under-addition-radical-of-ideal-Commutative-Ring
+      is-closed-under-negatives-radical-of-ideal-Commutative-Ring
+      is-closed-under-right-multiplication-radical-of-ideal-Commutative-Ring
+```

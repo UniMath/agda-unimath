@@ -1,4 +1,4 @@
-# Homomorphisms Meet Sup Lattice
+# Homomorphisms of meet sup lattices
 
 ```agda
 module order-theory.homomorphisms-meet-sup-lattices where
@@ -27,6 +27,8 @@ underlying posets that preserves meets and sup. In fact any sup lattice
 neccesarily has binary meets but we have yet to give a proof of this fact in the
 library. Thus, we opt (for now) to treat the two structures as existing
 independently.
+
+## Definitions
 
 ```agda
 module _

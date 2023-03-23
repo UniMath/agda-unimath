@@ -1,9 +1,63 @@
 {
-  "editor.rulers": [80],
-  "editor.snippetSuggestions": "top",
-  "javascript.suggest.names": false,
-  "editor.wordBasedSuggestions": false,
+  // UI settings
+  "breadcrumbs.enabled": false,
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.agda": "${capture}.agdai, ${capture}.agda~",
+    "*.lagda": "${capture}.agdai, ${capture}.agda~",
+    "*.lagda.md": "${capture}.agdai, ${capture}.agda~"
+  },
+
+  // Snippet setup
   "editor.quickSuggestions": {
     "other": "inline"
   },
+  "editor.snippetSuggestions": "top",
+  "editor.wordBasedSuggestions": false,
+  "javascript.suggest.names": false,
+
+  // Autoformatting and file type specific settings
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  "[agda]": {
+    "editor.tabSize": 2,
+    "editor.rulers": [80],
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.quickSuggestions": {
+      "other": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "gitlens.codeLens.scopes": ["document"],
+    "editor.tabSize": 2
+  },
+  "[javascript]": {
+    "editor.maxTokenizationLineLength": 2500,
+    "editor.tabSize": 2
+  },
+  "[json][jsonc]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "gitlens.codeLens.scopes": ["document"]
+  },
+  "[markdown]": {
+    "editor.tabSize": 2,
+    "editor.rulers": [80]
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.python"
+  }
 }

@@ -25,7 +25,8 @@ open import foundation.universe-levels
 
 An ideal `I` in a commutative ring is said to be **radical** if for every
 element `f : A` such that there exists an `n` such that `fⁿ ∈ I`, we have
-`f ∈ I`.
+`f ∈ I`. In other words, radical ideals are ideals that contain, for every
+element `u ∈ I`, also the `n`-th roots of `u` if it has any.
 
 ## Definition
 
@@ -103,13 +104,13 @@ module _
   contains-zero-radical-ideal-Commutative-Ring =
     contains-zero-ideal-Commutative-Ring A ideal-radical-ideal-Commutative-Ring
 
-  is-closed-under-add-radical-ideal-Commutative-Ring :
+  is-closed-under-addition-radical-ideal-Commutative-Ring :
     {x y : type-Commutative-Ring A} →
     is-in-radical-ideal-Commutative-Ring x →
     is-in-radical-ideal-Commutative-Ring y →
     is-in-radical-ideal-Commutative-Ring (add-Commutative-Ring A x y)
-  is-closed-under-add-radical-ideal-Commutative-Ring =
-    is-closed-under-add-ideal-Commutative-Ring A
+  is-closed-under-addition-radical-ideal-Commutative-Ring =
+    is-closed-under-addition-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
 
   is-closed-under-left-multiplication-radical-ideal-Commutative-Ring :

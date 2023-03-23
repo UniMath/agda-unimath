@@ -19,7 +19,7 @@ open import univalent-combinatorics.finite-types
 
 </details>
 
-## Finite Posets
+## Definitions
 
 We say that a poset is finite if its underlying preorder is finite.
 

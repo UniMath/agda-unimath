@@ -1,4 +1,4 @@
-# Foundation Core
+# Foundation core
 
 ```agda
 module foundation-core where

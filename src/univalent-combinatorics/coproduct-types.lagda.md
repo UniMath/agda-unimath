@@ -113,6 +113,17 @@ abstract
   number-of-elements-count-coprod (pair k e) (pair l f) = refl
 ```
 
+### If both `Σ A P` and `Σ A Q` have a count, then `Σ A P + Q` have a count
+
+```agda
+count-Σ-coprod :
+  {l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3} →
+  count (Σ A P) → count (Σ A Q) → count (Σ A (λ x → (P x) + (Q x)))
+pr1 (count-Σ-coprod count-P count-Q) = pr1 (count-coprod count-P count-Q)
+pr2 (count-Σ-coprod count-P count-Q) =
+  inv-equiv (left-distributive-Σ-coprod _ _ _) ∘e (pr2 (count-coprod count-P count-Q))
+```
+
 ### If `X + Y` has a count, then both `X` and `Y` have a count
 
 ```agda

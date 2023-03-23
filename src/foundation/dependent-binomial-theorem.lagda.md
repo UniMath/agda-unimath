@@ -39,7 +39,7 @@ module _
   where
 
   fam-coprod :
-    Fin 2  → UU (l1 ⊔ l2)
+    Fin 2 → UU (l1 ⊔ l2)
   fam-coprod (inl (inr star)) = raise l2 A
   fam-coprod (inr star) = raise l1 B
 

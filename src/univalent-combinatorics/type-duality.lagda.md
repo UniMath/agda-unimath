@@ -1,0 +1,109 @@
+# Type duality
+
+```agda
+module univalent-combinatorics.type-duality where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.type-duality public
+
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.full-subtypes
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
+open import foundation.inhabited-types
+open import foundation.propositions
+open import foundation.structure
+open import foundation.surjective-maps
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
+
+open import univalent-combinatorics.fibers-of-maps
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
+```
+
+</details>
+
+## Properties
+
+### Subtype duality
+
+```agda
+equiv-surjection-𝔽-family-finite-inhabited-type :
+  {l : Level} (A : 𝔽 l) (B : 𝔽 l) →
+  ( (type-𝔽 A ↠ type-𝔽 B) ≃
+    ( Σ ( (type-𝔽 B) → Inhabited-Type-𝔽 l)
+        ( λ Y → (type-𝔽 A) ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-Type-𝔽 (Y b)))))
+equiv-surjection-𝔽-family-finite-inhabited-type A B =
+  ( ( equiv-Σ
+      ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-Type-𝔽 (Y b)))
+      ( equiv-postcomp
+        ( type-𝔽 B)
+        ( inv-assoc-Σ ( UU _) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
+          equiv-Σ
+            ( λ z → is-finite z × is-inhabited z)
+            ( id-equiv)
+            ( λ _ → commutative-prod)) )
+      ( λ b → id-equiv )) ∘e
+    ( ( equiv-fixed-Slice-structure
+        ( λ x → (is-inhabited x )× (is-finite x))
+        ( type-𝔽 A)
+        ( type-𝔽 B)) ∘e
+      ( ( equiv-Σ
+          ( structure-map (λ x → is-inhabited x × is-finite x))
+          ( id-equiv)
+          ( λ _ → inv-equiv distributive-Π-Σ)) ∘e
+        ( ( assoc-Σ
+            ( type-𝔽 A → type-𝔽 B)
+            ( structure-map is-inhabited )
+            ( _)) ∘e
+          ( ( inv-equiv
+              ( equiv-inclusion-is-full-subtype
+                ( λ f → Π-Prop (type-𝔽 B) (λ b → is-finite-Prop (fib (pr1 f) b)))
+                ( λ f →
+                  is-finite-fib
+                    ( pr1 f)
+                    ( is-finite-type-𝔽 A)
+                    ( is-finite-type-𝔽 B)))))))))
+
+Slice-Surjection-𝔽 : (l : Level) {l1 : Level} (A : 𝔽 l1) → UU (lsuc l ⊔ l1)
+Slice-Surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
+
+equiv-Fib-trunc-Prop-𝔽 :
+  (l : Level) {l1 : Level} (A : 𝔽 l1) →
+  Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-Type-𝔽 (l1 ⊔ l))
+equiv-Fib-trunc-Prop-𝔽 l A =
+  ( ( equiv-Π
+      ( λ _ → Inhabited-Type-𝔽 _)
+      ( id-equiv)
+      ( λ a → inv-assoc-Σ _ _ _) ∘e
+      ( ( equiv-Fib-structure
+          ( l)
+          ( λ X → is-finite X × is-inhabited X) (type-𝔽 A)))) ∘e
+    ( ( equiv-Σ
+        ( _)
+        ( id-equiv)
+        ( λ X →
+          ( equiv-Σ
+            ( _)
+            ( id-equiv)
+            ( λ f →
+              ( inv-equiv distributive-Π-Σ) ∘e
+              ( equiv-Σ-equiv-base
+                ( _)
+                ( inv-equiv
+                  ( equiv-is-finite-domain-is-finite-fib A f)))))) ∘e
+      ( ( equiv-Σ
+          ( _)
+          ( id-equiv)
+          ( λ _ → equiv-left-swap-Σ)) ∘e
+        ( assoc-Σ (UU _ ) (λ z → is-finite z) _)))))
+```

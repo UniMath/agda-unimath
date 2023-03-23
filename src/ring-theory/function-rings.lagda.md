@@ -7,14 +7,11 @@ module ring-theory.function-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.function-abelian-groups
-open import group-theory.function-monoids
 open import group-theory.monoids
 
 open import ring-theory.dependent-products-rings

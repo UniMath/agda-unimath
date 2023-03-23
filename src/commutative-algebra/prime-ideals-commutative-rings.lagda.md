@@ -16,7 +16,6 @@ open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings
 open import ring-theory.subsets-rings
 ```
 
@@ -109,13 +108,13 @@ module _
   contains-zero-prime-ideal-Commutative-Ring =
     contains-zero-ideal-Commutative-Ring R ideal-prime-ideal-Commutative-Ring
 
-  is-closed-under-add-prime-ideal-Commutative-Ring :
+  is-closed-under-addition-prime-ideal-Commutative-Ring :
     {x y : type-Commutative-Ring R} →
     is-in-prime-ideal-Commutative-Ring x →
     is-in-prime-ideal-Commutative-Ring y →
     is-in-prime-ideal-Commutative-Ring (add-Commutative-Ring R x y)
-  is-closed-under-add-prime-ideal-Commutative-Ring =
-    is-closed-under-add-ideal-Commutative-Ring R
+  is-closed-under-addition-prime-ideal-Commutative-Ring =
+    is-closed-under-addition-ideal-Commutative-Ring R
       ideal-prime-ideal-Commutative-Ring
 
   is-closed-under-left-multiplication-prime-ideal-Commutative-Ring :

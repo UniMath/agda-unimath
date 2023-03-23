@@ -39,7 +39,7 @@ anafunctor-Precat l C D =
       Σ ( (X Y : obj-Precat C) (U : obj-Precat D) (u : F₀ X U) →
           (V : obj-Precat D) (v : F₀ Y V) →
           (f : type-hom-Precat C X Y) → type-hom-Precat D U V)
-        ( λ  F₁ →
+        ( λ F₁ →
           ( ( X : obj-Precat C) → type-trunc-Prop (Σ (obj-Precat D) (F₀ X))) ×
           ( ( ( X : obj-Precat C) (U : obj-Precat D) (u : F₀ X U) →
               F₁ X X U u U u (id-hom-Precat C) ＝ id-hom-Precat D) ×

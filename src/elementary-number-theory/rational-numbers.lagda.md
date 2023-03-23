@@ -39,7 +39,7 @@ equivalence relation given by `(n/m) ~ (n'/m') := Id (mul-ℤ n m') (mul-ℤ n' 
 
 ## Definitions
 
-### Reduced Fraction
+### Reduced fraction
 
 ```agda
 is-reduced-fraction-ℤ : fraction-ℤ → UU lzero

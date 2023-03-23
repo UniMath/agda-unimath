@@ -5,6 +5,7 @@
 import os
 import sys
 import utils
+import pathlib
 
 STATUS_FLAG_NO_TITLE = 1
 STATUS_FLAG_DUPLICATE_TITLE = 2
@@ -14,9 +15,12 @@ entry_template = '- [{title}]({mdfile})'
 
 def generate_namespace_entry_list(namespace):
     status = 0
-    modules = sorted(os.listdir(os.path.join(root, namespace)))
-    module_titles = tuple(map(lambda m: utils.get_lagda_file_title(
-        os.path.join(root, namespace, m)), modules))
+    file_names = sorted(os.listdir(os.path.join(root, namespace)))
+    file_paths = map(lambda m: pathlib.Path(
+        os.path.join(root, namespace, m)), file_names)
+    lagda_file_paths = tuple(filter(utils.is_agda_file, file_paths))
+    modules = tuple(map(lambda p: p.name, lagda_file_paths))
+    module_titles = tuple(map(utils.get_lagda_file_title, lagda_file_paths))
     module_mdfiles = tuple(
         map(lambda m: utils.get_module_mdfile(namespace, m), modules))
 
@@ -37,7 +41,7 @@ def generate_namespace_entry_list(namespace):
         print(f"WARNING! Duplicate titles in {namespace}:")
         for ec in equal_titles:
             print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:m.rfind('.lagda.md')] for m in ec)}")
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
 
     module_titles_and_mdfiles = sorted(
         zip(module_titles, module_mdfiles), key=lambda tm: (tm[0].casefold(), tm[1]))
@@ -82,7 +86,8 @@ summary_template = """
     - [Install](HOWTO-INSTALL.md)
     - [Cite the library](CITATION.cff)
   - [Guidelines](CODINGSTYLE.md)
-    - [Structure your file](CONVENTIONS.md)
+    - [Structure your file](FILE-CONVENTIONS.md)
+        - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)
@@ -96,6 +101,8 @@ if __name__ == "__main__":
 
     summary_path = "SUMMARY.md"
     index_header = "# Formalisation in Agda"
+
+    print(f"Generating {summary_path}")
 
     index_content, status = generate_index(root, index_header)
     if status == 0:

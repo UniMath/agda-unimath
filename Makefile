@@ -3,10 +3,8 @@ CHECKOPTS :=--without-K --exact-split --guardedness
 everythingOpts :=$(CHECKOPTS)
 AGDAVERBOSE?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
-AGDAFILES := $(wildcard src/**/*.lagda.md)
+AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
-
-bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
 
 AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
 AGDA ?=agda $(AGDAVERBOSE)
@@ -15,7 +13,7 @@ TIME ?=time
 METAFILES:=CITATION.cff \
 			CODINGSTYLE.md \
 			CONTRIBUTORS.md \
-			CONVENTIONS.md \
+			FILE-CONVENTIONS.md \
 			DESIGN-PRINCIPLES.md \
 			HOME.md \
 			HOWTO-INSTALL.md \
@@ -24,13 +22,14 @@ METAFILES:=CITATION.cff \
 			README.md \
 			STATEMENT-OF-INCLUSION.md \
 			SUMMARY.md \
+			TEMPLATE.lagda.md \
 			USERS.md \
 
 .PHONY : agdaFiles
 agdaFiles :
 	@rm -rf $@
 	@rm -rf src/everything.lagda.md
-	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) -print > $@
+	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda" -o -name "*.lagda.md" \) -print > $@
 	@sort -o $@ $@
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
@@ -39,13 +38,13 @@ agdaFiles :
 src/everything.lagda.md : agdaFiles
 	@echo "\`\`\`agda" > $@ ;\
 	echo "{-# OPTIONS $(everythingOpts) #-}" >> $@ ;\
-	echo "module everything where" >> $@ ;\
 	echo "" >> $@ ;\
+	echo "module everything where" >> $@ ;\
 	cat agdaFiles \
 		| cut -c 5-               \
 		| cut -f1 -d'.'           \
 		| sed 's/\//\./g'         \
-		| sed 's/^/open import /' \
+		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 }' \
 		>> $@ ;\
 	echo "\`\`\`" >> $@ ;
 
@@ -64,7 +63,7 @@ agda-html: src/everything.lagda.md
 	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
-SUMMARY.md:
+SUMMARY.md: ${AGDAFILES}
 	@python3 scripts/generate_main_index_file.py
 
 .PHONY: website
@@ -91,8 +90,7 @@ pre-commit:
 	@pre-commit run --all-files
 	@make check
 
-website-dev:
-	@curl https://sh.rustup.rs -sSf | sh
+install-website-dev:
 	@cargo install mdbook
 	@cargo install mdbook-linkcheck
 	@cargo install mdbook-katex

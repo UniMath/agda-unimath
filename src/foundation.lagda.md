@@ -71,6 +71,8 @@ open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
 open import foundation.discrete-reflexive-relations public
+open import foundation.discrete-relaxed-sigma-decompositions public
+open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjunction public
 open import foundation.double-negation public
@@ -181,6 +183,7 @@ open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
+open import foundation.relaxed-sigma-decompositions public
 open import foundation.repetitions public
 open import foundation.repetitions-sequences public
 open import foundation.replacement public
@@ -193,6 +196,7 @@ open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.shifting-sequences public
+open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public
@@ -215,6 +219,8 @@ open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.transport public
+open import foundation.trivial-relaxed-sigma-decompositions public
+open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
