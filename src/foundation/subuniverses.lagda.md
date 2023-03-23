@@ -74,6 +74,15 @@ is-global-subuniverse :
   (l1 l2 : Level) → UU _
 is-global-subuniverse α P l1 l2 =
   (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
+
+record global-subuniverse (α : Level → Level) : UUω where
+  field
+    subuniverse-global-subuniverse : (l : Level) → subuniverse l (α l)
+    is-global-global-subuniverse :
+      (l1 l2 : Level) →
+      is-global-subuniverse α subuniverse-global-subuniverse l1 l2
+
+open global-subuniverse public
 ```
 
 ## Properties
@@ -111,6 +120,17 @@ module _
     is-contr-total-equiv-subuniverse (pair X p) =
       is-contr-total-Eq-subtype
         ( is-contr-total-equiv X)
+        ( is-subtype-subuniverse P)
+        ( X)
+        ( id-equiv)
+        ( p)
+
+    is-contr-total-equiv-subuniverse' :
+      (s : type-subuniverse P) →
+      is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse t s))
+    is-contr-total-equiv-subuniverse' (pair X p) =
+      is-contr-total-Eq-subtype
+        ( is-contr-total-equiv' X)
         ( is-subtype-subuniverse P)
         ( X)
         ( id-equiv)
