@@ -12,6 +12,7 @@ open import foundation.embeddings
 open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.reflecting-maps-equivalence-relations
@@ -219,6 +220,37 @@ module _
     (type-hom-Set (quotient-Set R) X)
   inv-precomp-set-quotient X =
     pr1 (pr1 (is-set-quotient-set-quotient X))
+
+  issec-inv-precomp-set-quotient :
+    {l : Level} →
+    (X : Set l) →
+    (f : reflecting-map-Eq-Rel R (type-Set X)) →
+    (a : A) →
+    inv-precomp-set-quotient X f (quotient-map R a) ＝
+      map-reflecting-map-Eq-Rel R f a
+  issec-inv-precomp-set-quotient X f =
+    htpy-eq
+      ( ap
+        ( map-reflecting-map-Eq-Rel R)
+        ( issec-map-inv-is-equiv
+          ( is-set-quotient-set-quotient X)
+          ( f)))
+
+  isretr-inv-precomp-set-quotient :
+    { l : Level} →
+    ( X : Set l) →
+    ( f : type-hom-Set (quotient-Set R) X) →
+    inv-precomp-set-quotient X
+      ( precomp-Set-Quotient R
+        ( quotient-Set R)
+        ( reflecting-map-quotient-map R)
+        ( X)
+        ( f)) ＝
+      f
+  isretr-inv-precomp-set-quotient X f =
+      ( isretr-map-inv-is-equiv
+        ( is-set-quotient-set-quotient X)
+        ( f))
 ```
 
 ### Induction into propositions on the set quotient
