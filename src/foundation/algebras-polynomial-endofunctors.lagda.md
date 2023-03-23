@@ -55,8 +55,6 @@ structure-algebra-polynomial-endofunctor X = pr2 X
 ### Morphisms of algebras for polynomial endofunctors
 
 ```agda
--- Morphisms of algebras for polynomial endofunctors
-
 hom-algebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
   (X : algebra-polynomial-endofunctor-UU l3 A B) →

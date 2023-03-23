@@ -125,7 +125,7 @@ iso-eq-Large-Precat C X .X refl = id-iso-Large-Precat C
 Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 `f`. It is enough to show that `g = g'` since the equalities are propositions
 (since the hom-types are sets). But we have the following chain of equalities:
-`g = comp g id_y    = comp g (comp f g')    = comp (comp g f) g'    = comp id_x g'    = g'.`
+`g = comp g id_y = comp g (comp f g') = comp (comp g f) g' = comp id_x g' = g'`.
 
 ```agda
 module _

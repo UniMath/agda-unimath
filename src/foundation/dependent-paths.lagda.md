@@ -143,7 +143,7 @@ module _
   where
 
   d-concat : path-over B (p01 ∙ p12) b0 b2
-  d-concat =   (tr-concat {B = B} p01 p12 b0)  ∙ ((ap (tr B p12) q01) ∙ (q12))
+  d-concat = (tr-concat {B = B} p01 p12 b0) ∙ ((ap (tr B p12) q01) ∙ (q12))
 
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (p01 : a0 ＝ a1) {b0 : B a0} {b1 : B a1}
@@ -151,7 +151,7 @@ module _
   where
 
   d-inv : path-over B (inv p01) b1 b0
-  d-inv =  (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
+  d-inv = (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
     ap (λ t → tr B t b0) (right-inv p01)))
 ```
 
@@ -181,7 +181,7 @@ module _
     d-concat B p01 q01 p12 q12) p23 q23)) ＝
     d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23)
   d-assoc' p01 q01 p12 q12 p23 q23 =
-    tr-path-over-path-over² B  (assoc p01 p12 p23)
+    tr-path-over-path-over² B (assoc p01 p12 p23)
     (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)
     (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
     (d-assoc p01 q01 p12 q12 p23 q23)
@@ -213,14 +213,14 @@ module _
   d-right-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat B p q (inv p) (d-inv B p q))) ＝ (
      refl-path-over B a0 b0)
-  d-right-inv' p q  = tr-path-over-path-over² B (right-inv p)
+  d-right-inv' p q = tr-path-over-path-over² B (right-inv p)
     (d-concat B p q (inv p) (d-inv B p q)) (refl-path-over B a0 b0) (d-right-inv p q)
 
   d-left-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (left-inv p) (d-concat B (inv p) (d-inv B p q) p q) (refl-path-over B a1 b1)
   d-left-inv refl refl = refl
 
-  d-left-inv' :  (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-left-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b1 b1) (left-inv p) (d-concat B (inv p) (d-inv B p q) p q)) ＝ (
      refl-path-over B a1 b1)
   d-left-inv' p q = tr-path-over-path-over² B (left-inv p)

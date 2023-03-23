@@ -570,8 +570,6 @@ preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
 
 --------------------------------------------------------------------------------
 
--- We prove some lemmas about inequalities --
-
 leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (add-ℕ m n)
 leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
 leq-add-ℕ m (succ-ℕ n) =

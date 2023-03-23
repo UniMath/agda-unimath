@@ -152,7 +152,7 @@ module _
     is-not-contractible-coprod-is-contr :
       is-contr A → is-contr B → is-not-contractible (A + B)
     is-not-contractible-coprod-is-contr HA HB HAB =
-      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr  HAB)
+      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr HAB)
 ```
 
 ### Coproducts of mutually exclusive propositions are propositions

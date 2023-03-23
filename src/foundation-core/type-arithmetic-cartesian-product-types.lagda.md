@@ -10,10 +10,12 @@ module foundation-core.type-arithmetic-cartesian-product-types where
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
@@ -117,6 +119,20 @@ module _
   equiv-pr2-prod-is-contr : (A × B) ≃ B
   pr1 equiv-pr2-prod-is-contr = pr2
   pr2 equiv-pr2-prod-is-contr = is-equiv-pr2-prod-is-contr
+```
+
+### Adding redundant property
+
+```agda
+equiv-add-redundant-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (is-prop B) → (f : A → B) → (A ≃ (A × B))
+pr1 (equiv-add-redundant-prop is-prop-B f) a = a , f a
+pr2 (equiv-add-redundant-prop is-prop-B f) =
+  is-equiv-has-inverse
+    ( pr1)
+    ( λ p → eq-pair refl (eq-is-prop is-prop-B))
+    ( λ a → refl)
 ```
 
 ## See also

@@ -61,7 +61,7 @@ abstract
             ( Id-Prop C (g b) (h b))
             ( λ u →
               ( inv (ap g (pr2 u))) ∙
-              ( ( htpy-eq p (pr1 u))  ∙
+              ( ( htpy-eq p (pr1 u)) ∙
                 ( ap h (pr2 u))))))
 ```
 

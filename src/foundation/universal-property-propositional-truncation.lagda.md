@@ -62,7 +62,7 @@ universal-property-propositional-truncation :
   (P : Prop l2) (f : A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-propositional-truncation l {A = A} P f =
   (Q : Prop l) (g : A → type-Prop Q) →
-  is-contr (Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ~  g))
+  is-contr (Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ~ g))
 ```
 
 ### Extension property of the propositional truncation
@@ -207,7 +207,7 @@ abstract
       ( is-property-is-equiv)
       ( map-is-propositional-truncation P f is-ptr-f P' f')
       ( htpy-is-propositional-truncation P f is-ptr-f P' f')
-      ( is-equiv-is-ptruncation-is-ptruncation  P P' f f'
+      ( is-equiv-is-ptruncation-is-ptruncation P P' f f'
         ( map-is-propositional-truncation P f is-ptr-f P' f')
         ( htpy-is-propositional-truncation P f is-ptr-f P' f')
         ( λ {l} → is-ptr-f)

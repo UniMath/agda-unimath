@@ -4,6 +4,14 @@
 module univalent-combinatorics.presented-pi-finite-types where
 ```
 
+<details><summary>Imports</summary>
+
+```agda
+
+```
+
+</details>
+
 ## Idea
 
 A type `A` is said to be finitely `π_0`-presented if there is a standard pruned
