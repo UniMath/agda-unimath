@@ -91,7 +91,7 @@ le-ℤ : ℤ → ℤ → UU lzero
 le-ℤ x y = is-positive-ℤ (diff-ℤ x y)
 ```
 
-## ℤ is an ordered ring
+### ℤ is an ordered ring
 
 ```agda
 preserves-order-add-ℤ' :
