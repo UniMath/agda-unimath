@@ -15,21 +15,20 @@ Get a copy of our library on your machine with `git` using
 git clone git@github.com:UniMath/agda-unimath.git
 ```
 
-or by going to the
-[`agda-unimath` GitHub page](https://github.com/UniMath/agda-unimath) and
+or by going to the [GitHub page](https://github.com/UniMath/agda-unimath) and
 manually downloading it.
 
 ## Installing Agda
 
-The `agda-unimath` library is built and verified with Agda v2.6.3, and we
-provide two methods for installation: with or without the package manager Nix.
-Nix streamlines the installation of Agda and its dependencies, providing a
+The `agda-unimath` library is built and verified with Agda 2.6.3, and we provide
+two methods for installation: with or without the package manager Nix. Nix
+streamlines the installation of Agda and its dependencies, providing a
 consistent and reproducible environment for the library across different
 systems.
 
 ### Without Nix
 
-To install Agda v2.6.3 without Nix, follow the
+To install Agda 2.6.3 without Nix, follow the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
 provided on the Agda documentation page.
 
@@ -113,9 +112,9 @@ After completing these steps, you can type `\=` in order to obtain the full
 width equals sign `＝`. While you're at it, you can also add the key sequence
 `yo` to obtain the Japanese symbol `ょ` for the Yoneda embedding.
 
-#### 80 character limit
+#### 80-character limit
 
-The `agda-unimath` library maintains an 80 character limit on the length of
+The `agda-unimath` library maintains an 80-character limit on the length of
 lines in the source code. This limit is to improve readability, both in your
 programming environment and on our website. To display a line marking the 80th
 column in Emacs, add:
@@ -143,8 +142,8 @@ should be automatically suggested to you when you open the repository in VSCode.
 One essential extension for interacting with Agda is
 [`agda-mode`](https://marketplace.visualstudio.com/items?itemName=banacorn.agda-mode).
 After installing this extension, you'll be able to verify `.lagda.md` files by
-opening them by and using the `C-c C-l` command. For a full list of commands,
-see the extension's reference page.
+opening them and using the `C-c C-l` command. For a full list of commands, see
+the extension's reference page.
 
 #### Special characters
 
@@ -187,8 +186,8 @@ now ready to dive into using the library.
 
 ### Verifying the library
 
-To verify a file and its prerequisites wih Agda, simply open and load it. If you
-want to compile the entire library, you can run `make check` from the
+To verify a file and its prerequisites with Agda, simply open and load it. If
+you want to compile the entire library, you can run `make check` from the
 repository's main folder. This generates the `everything.lagda.md` file, which
 imports and verifies all files in the library.
 
@@ -199,20 +198,23 @@ in contributing to the `agda-unimath` library, please follow our guidelines and
 best practices, as well as the instructions below to ensure a smooth setup and
 workflow.
 
-#### Pre-commit hooks and Python dependencies {#pre-commit-hooks}
+#### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
 The `agda-unimath` library includes pre-commit hooks that enforce basic
 formatting rules. To utilize these hooks, if you did not install your
 environment using Nix, you'll need to install the `pre-commit` tool and the
 hooks' Python dependencies. The easiest way to accomplish this is by using the
-Python package manager `pip` and running the following command:
+Python package manager `pip`.
+
+First, make sure that you have the latest version of Python installed on your
+computer. Then run the following command from the repository's main folder:
 
 ```shell
 pip install -r scripts/requirements.txt
 ```
 
 Now, before you submit a Pull Request (PR) next time, you can run `pre-commit`
-by staging your changes and run the command `make pre-commit` from the
+by staging your changes and executing the command `make pre-commit` from the
 repository's main folder.
 
 To have `pre-commit` run automatically before every commit, run the following
