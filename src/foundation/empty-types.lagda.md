@@ -9,14 +9,18 @@ module foundation.empty-types where
 ```agda
 open import foundation-core.empty-types public
 
+open import foundation.contractible-types
 open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.subuniverses
+open import foundation.univalence
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
-open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
 
@@ -114,4 +118,22 @@ abstract
   is-empty-raise-empty :
     {l1 : Level} → is-empty (raise-empty l1)
   is-empty-raise-empty {l1} = map-inv-equiv (compute-raise-empty l1)
+```
+
+### The type of all empty types of a given universe is contractible
+
+```agda
+is-contr-type-is-empty :
+  (l : Level) →
+  is-contr (type-subuniverse is-empty-Prop)
+pr1 (is-contr-type-is-empty l) = raise-empty l , is-empty-raise-empty
+pr2 (is-contr-type-is-empty l) x =
+  eq-pair-Σ
+    ( eq-equiv
+      ( raise-empty l)
+      ( inclusion-subuniverse is-empty-Prop x)
+      ( equiv-is-empty
+        is-empty-raise-empty
+        ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
+    ( eq-is-prop is-prop-is-empty)
 ```
