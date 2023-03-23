@@ -11,30 +11,21 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-<<<<<<< HEAD
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-=======
->>>>>>> 6f6af3034f1d86b6aa8d8a6ba7cdbaa6eb143428
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-<<<<<<< HEAD
 open import foundation.mere-equivalences
 open import foundation.propositions
-=======
->>>>>>> 6f6af3034f1d86b6aa8d8a6ba7cdbaa6eb143428
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
-<<<<<<< HEAD
 open import foundation.type-arithmetic-empty-type
-=======
->>>>>>> 6f6af3034f1d86b6aa8d8a6ba7cdbaa6eb143428
 open import foundation.univalence
 open import foundation.universe-levels
 ```
