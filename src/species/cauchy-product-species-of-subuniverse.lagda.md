@@ -257,6 +257,14 @@ module _
 ### Unit laws of Cauchy product
 
 ```agda
+unit-cauchy-product-species-subuniverse :
+  {l1 : Level} → (P : subuniverse l1 l1) → (Q : subuniverse l1 l1) →
+  ( (X : type-subuniverse P) →
+    is-in-subuniverse Q ( is-empty (inclusion-subuniverse P X))) →
+  species-subuniverse P Q
+unit-cauchy-product-species-subuniverse P Q C X =
+  is-empty (inclusion-subuniverse P X) , C X
+
 module _
   {l1 l2 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
   (C1 :
@@ -276,19 +284,17 @@ module _
   (S : species-subuniverse P ( subuniverse-global-subuniverse Q l2))
   where
 
-  unit-cauchy-product-species-subuniverse :
-    species-subuniverse P (subuniverse-global-subuniverse Q l1)
-  unit-cauchy-product-species-subuniverse X =
-    is-empty (inclusion-subuniverse P X) , C3 X
-
   equiv-right-unit-law-cauchy-product-species-subuniverse :
     {l : Level} →
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l)) →
     (X : type-subuniverse P) →
     cauchy-product-species-subuniverse' P Q
-      S
-      unit-cauchy-product-species-subuniverse
-      X ≃
+      ( S)
+      ( unit-cauchy-product-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l1)
+        ( C3))
+      ( X) ≃
     inclusion-subuniverse (subuniverse-global-subuniverse Q l) (S X)
   equiv-right-unit-law-cauchy-product-species-subuniverse {l} S X =
     ( ( left-unit-law-Σ-is-contr
@@ -309,6 +315,9 @@ module _
               inclusion-subuniverse
                 ( subuniverse-global-subuniverse Q l1)
                 ( unit-cauchy-product-species-subuniverse
+                  ( P)
+                  ( subuniverse-global-subuniverse Q l1)
+                  ( C3)
                   ( right-summand-binary-coproduct-Decomposition P X d)))
             ( λ z →
               inclusion-subuniverse
@@ -325,17 +334,23 @@ module _
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l)) →
     (X : type-subuniverse P) →
     cauchy-product-species-subuniverse' P Q
-      unit-cauchy-product-species-subuniverse
-      S
-      X ≃
+      ( unit-cauchy-product-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l1)
+        ( C3))
+      ( S)
+      ( X) ≃
     inclusion-subuniverse (subuniverse-global-subuniverse Q l) (S X)
   equiv-left-unit-law-cauchy-product-species-subuniverse {l} S X =
     equiv-right-unit-law-cauchy-product-species-subuniverse S X ∘e
     equiv-commutative-cauchy-product-species-subuniverse
-      P
-      Q
-      C1
-      unit-cauchy-product-species-subuniverse
-      S
-      X
+      ( P)
+      ( Q)
+      ( C1)
+      ( unit-cauchy-product-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l1)
+        ( C3))
+      ( S)
+      ( X)
 ```
