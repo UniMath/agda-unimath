@@ -11,16 +11,21 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.mere-equivalences
+open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
@@ -51,12 +56,12 @@ module _
   (d : binary-coproduct-Decomposition P X)
   where
 
-  left-summand-coproduct-Decomposition : type-subuniverse P
-  left-summand-coproduct-Decomposition = pr1 d
+  left-summand-binary-coproduct-Decomposition : type-subuniverse P
+  left-summand-binary-coproduct-Decomposition = pr1 d
 
   type-left-summand-binary-coproduct-Decomposition : UU l1
   type-left-summand-binary-coproduct-Decomposition =
-    inclusion-subuniverse P left-summand-coproduct-Decomposition
+    inclusion-subuniverse P left-summand-binary-coproduct-Decomposition
 
   right-summand-binary-coproduct-Decomposition : type-subuniverse P
   right-summand-binary-coproduct-Decomposition = pr1 (pr2 d)
@@ -85,7 +90,7 @@ module _
       ( λ d →
         binary-coproduct-Decomposition
           ( P)
-          ( left-summand-coproduct-Decomposition P X d))
+          ( left-summand-binary-coproduct-Decomposition P X d))
 
   right-iterated-binary-coproduct-Decomposition : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-coproduct-Decomposition =
@@ -329,4 +334,52 @@ module _
                 ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))) ,
               id-equiv))) ∘e
       ( ( equiv-reassociate-right-iterated-coproduct-Decomposition)))
+```
+
+### Coproduct-decomposition with empty right summand
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
+  (C1 : is-in-subuniverse P (raise-empty l1))
+  where
+
+  equiv-is-empty-right-summand-binary-coproduct-Decomposition :
+    ( Σ ( binary-coproduct-Decomposition P X)
+        ( λ d →
+          is-empty
+            ( inclusion-subuniverse P
+              ( right-summand-binary-coproduct-Decomposition P X d)))) ≃
+    Σ ( type-subuniverse P)
+      ( λ Y → inclusion-subuniverse P X ≃ pr1 Y)
+  equiv-is-empty-right-summand-binary-coproduct-Decomposition =
+    ( ( equiv-tot
+          ( λ x →
+            ( ( equiv-postcomp-equiv
+                ( right-unit-law-coprod-is-empty
+                  ( inclusion-subuniverse P x)
+                  ( raise-empty l1)
+                  ( is-empty-raise-empty))
+                ( inclusion-subuniverse P X)) ∘e
+              ( ( left-unit-law-Σ-is-contr
+                     ( ( ( ( raise-empty l1) ,
+                           C1) ,
+                         is-empty-raise-empty) ,
+                       ( λ x →
+                         eq-pair-Σ
+                           ( eq-pair-Σ
+                             ( eq-equiv
+                               ( raise-empty l1)
+                               ( inclusion-subuniverse P (pr1 x))
+                               ( equiv-is-empty
+                                 is-empty-raise-empty
+                                 ( ( pr2 x))))
+                             ( eq-is-prop (is-prop-type-Prop (P _))))
+                           ( eq-is-prop is-prop-is-empty)))
+                     ( ( raise-empty l1 , C1) ,
+                       is-empty-raise-empty)) ∘e
+                ( ( inv-assoc-Σ _ _ _) ∘e
+                  ( ( equiv-tot (λ _ → commutative-prod)) ∘e
+                    ( ( assoc-Σ _ _ _)))))))) ∘e
+        ( ( assoc-Σ _ _ _)))
 ```

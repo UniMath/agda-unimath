@@ -59,6 +59,10 @@ module _
   inclusion-subuniverse : type-subuniverse → UU l1
   inclusion-subuniverse = inclusion-subtype P
 
+  is-in-subuniverse-inclusion-subuniverse :
+    (x : type-subuniverse) → is-in-subuniverse (inclusion-subuniverse x)
+  is-in-subuniverse-inclusion-subuniverse x = pr2 x
+
   is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
   is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
 

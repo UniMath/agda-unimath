@@ -10,15 +10,18 @@ module foundation.product-decompositions where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 ```
@@ -323,4 +326,49 @@ module _
                 ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))) ,
               id-equiv))) ∘e
       ( ( equiv-reassociate-right-iterated-product-Decomposition)))
+```
+
+### Product-decomposition with contractible right summand
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
+  (C1 : is-in-subuniverse P (raise-unit l1))
+  where
+
+  equiv-is-contr-right-summand-binary-product-Decomposition :
+    ( Σ ( binary-product-Decomposition P X)
+        ( λ d →
+          is-contr
+            ( inclusion-subuniverse P
+              ( right-summand-binary-product-Decomposition P X d)))) ≃
+    Σ ( type-subuniverse P)
+      ( λ Y → inclusion-subuniverse P X ≃ pr1 Y)
+  equiv-is-contr-right-summand-binary-product-Decomposition =
+    ( ( equiv-tot
+          ( λ x →
+            ( ( equiv-postcomp-equiv
+                ( right-unit-law-prod-is-contr is-contr-raise-unit)
+                ( inclusion-subuniverse P X)) ∘e
+              ( ( left-unit-law-Σ-is-contr
+                     ( ( ( ( raise-unit l1) ,
+                           C1) ,
+                         is-contr-raise-unit) ,
+                       ( λ x →
+                         eq-pair-Σ
+                           ( eq-pair-Σ
+                             ( eq-equiv
+                               ( raise-unit l1)
+                               ( inclusion-subuniverse P (pr1 x))
+                               ( equiv-is-contr
+                                 is-contr-raise-unit
+                                 ( ( pr2 x))))
+                             ( eq-is-prop (is-prop-type-Prop (P _))))
+                           ( eq-is-prop is-property-is-contr)))
+                     ( ( raise-unit l1 , C1) ,
+                       is-contr-raise-unit)) ∘e
+                ( ( inv-assoc-Σ _ _ _) ∘e
+                  ( ( equiv-tot (λ _ → commutative-prod)) ∘e
+                    ( ( assoc-Σ _ _ _)))))))) ∘e
+        ( ( assoc-Σ _ _ _)))
 ```
