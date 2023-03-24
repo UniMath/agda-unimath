@@ -19,10 +19,10 @@ open import foundation.coproduct-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equational-reasoning
 open import foundation.equivalence-classes
-open import foundation.raising-universe-levels
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.multivariable-operations
+open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets

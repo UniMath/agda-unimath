@@ -18,15 +18,15 @@ open import foundation.sets
 open import foundation.universal-property-set-quotients
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.retractions
-open import foundation-core.homotopies
-open import foundation-core.sections
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
 
@@ -194,7 +194,6 @@ module _
       ( pair
         ( inv-precomp-set-quotient-prod-set-quotient X)
         ( isretr-inv-precomp-set-quotient-prod-set-quotient X))
-
 
   quotient-prod : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   quotient-prod = quotient-Set prod-Eq-Rel
