@@ -13,28 +13,28 @@ module foundation.vectors-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.univalence
-open import foundation.function-extensionality
-open import foundation.equivalence-classes
-open import foundation.propositional-truncations
-open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
-open import foundation.logical-equivalences
+open import foundation.binary-relations
 open import foundation.cartesian-products-set-quotients
 open import foundation.coproduct-types
-open import foundation.unit-type
-open import foundation.identity-types
-open import foundation.multivariable-operations
-open import foundation.set-quotients
 open import foundation.equality-cartesian-product-types
-open import foundation.binary-relations
-open import foundation.sets
-open import foundation.reflecting-maps-equivalence-relations
 open import foundation.equational-reasoning
+open import foundation.equivalence-classes
+open import foundation.function-extensionality
+open import foundation.functoriality-propositional-truncation
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.multivariable-operations
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.univalence
 
-open import foundation-core.equality-dependent-pair-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -51,8 +51,8 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Say we have a family of types `A1`, ..., `An` each equipped with an equivalence
-relation `Ri`. Then, the set quotient of a vector with these types is the
-vector of the set quotients of each `Ai`.
+relation `Ri`. Then, the set quotient of a vector with these types is the vector
+of the set quotients of each `Ai`.
 
 ## Definition
 
