@@ -53,6 +53,7 @@ open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public

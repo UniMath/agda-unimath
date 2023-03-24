@@ -2,9 +2,6 @@
 
 ```agda
 {-# OPTIONS --safe #-}
-```
-
-```agda
 module foundation-core.sections where
 ```
 
@@ -21,7 +18,11 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Any dependent function induces a section of the projection map
+A **section** is a map that has a left inverse, i.e. a retraction. Thus,
+`s : B → A` is a section of `f : A → B` if the composition `f ∘ s` is homotopic
+to the identity at `B`.
+
+For example, every dependent function induces a section of the projection map.
 
 ## Definition
 
@@ -31,7 +32,7 @@ module _
   where
 
   sec : (A → B) → UU (l1 ⊔ l2)
-  sec f = Σ (B → A) (λ g → (f ∘ g) ~ id)
+  sec f = Σ (B → A) (λ s → (f ∘ s) ~ id)
 ```
 
 ## Properties

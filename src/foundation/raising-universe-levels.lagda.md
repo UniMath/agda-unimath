@@ -31,6 +31,15 @@ overlap. Using `data` types we can construct for any type `A` of universe level
 data raise (l : Level) {l1 : Level} (A : UU l1) : UU (l1 ⊔ l) where
   map-raise : A → raise l A
 
+data raiseω {l1 : Level} (A : UU l1) : UUω where
+  map-raiseω : A → raiseω A
+```
+
+## Properties
+
+### Types are equivalent to their raised equivalents
+
+```agda
 module _
   {l l1 : Level} {A : UU l1}
   where

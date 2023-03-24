@@ -37,7 +37,7 @@ open Σ public
 {-# BUILTIN SIGMA Σ #-}
 
 infixr 10 _,_
-pattern _,_ a  b = pair a b
+pattern _,_ a b = pair a b
 ```
 
 ## Constructions

@@ -49,6 +49,7 @@ open import foundation.connected-types public
 open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
+open import foundation.coproduct-decompositions public
 open import foundation.coproduct-types public
 open import foundation.coslice public
 open import foundation.cospans public
@@ -142,6 +143,9 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.large-dependent-pair-types public
+open import foundation.large-homotopies public
+open import foundation.large-identity-types public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
@@ -172,6 +176,7 @@ open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
+open import foundation.product-decompositions public
 open import foundation.products-of-tuples-of-types public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
@@ -249,6 +254,7 @@ open import foundation.uniqueness-truncation public
 open import foundation.unit-type public
 open import foundation.unital-binary-operations public
 open import foundation.univalence public
+open import foundation.univalence-action-on-equivalences public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public
