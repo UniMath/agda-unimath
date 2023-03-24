@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "banacorn.agda-mode",
-    "j-mueller.agda",
     "bbenoist.nix",
     "ms-python.python",
     "ms-python.vscode-pylance",

@@ -31,7 +31,8 @@
     "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.formatOnType": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.autoClosingBrackets": "never"
   },
   "[css]": {
     "editor.quickSuggestions": {
@@ -54,7 +55,8 @@
   },
   "[markdown]": {
     "editor.tabSize": 2,
-    "editor.rulers": [80]
+    "editor.rulers": [80],
+    "editor.autoClosingBrackets": "never"
   },
   "[python]": {
     "editor.tabSize": 4,
