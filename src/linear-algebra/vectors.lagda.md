@@ -342,3 +342,16 @@ module _
   cons-head-tail-functional-vec n v =
     eq-htpy (htpy-cons-head-tail-functional-vec n v)
 ```
+
+###
+
+```agda
+-- module _
+--   {l : Level}
+--   {n : ℕ}
+--   {A : functional-vec (UU l) (succ-ℕ n)}
+--   where
+
+--   arst : A ≃ ?
+--   arst = _
+```

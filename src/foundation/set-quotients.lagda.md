@@ -19,6 +19,7 @@ open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 
@@ -395,4 +396,23 @@ module _
     ( x y z : set-quotient R) → type-Prop (P x y z)
   triple-induction-set-quotient' =
     triple-induction-set-quotient R R R P
+```
+
+### Every set quotient is equivalent to the set quotient
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
+  (Uf : {l : Level} → is-set-quotient l R B f)
+  where
+
+  equiv-uniqueness-set-quotient-set-quotient :
+    set-quotient R ≃ type-Set B
+  equiv-uniqueness-set-quotient-set-quotient =
+    equiv-uniqueness-set-quotient R
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( is-set-quotient-set-quotient R)
+      B f Uf
 ```

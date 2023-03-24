@@ -1,4 +1,4 @@
-# Binary functoriality of set quotients
+# Cartesian products of set quotients
 
 ```agda
 module foundation.cartesian-products-set-quotients where
@@ -7,32 +7,21 @@ module foundation.cartesian-products-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-homotopies
-open import foundation.exponents-set-quotients
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
-open import foundation.equality-cartesian-product-types
-open import foundation-core.equality-dependent-pair-types
 open import foundation.sets
-open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.subtypes
 open import foundation-core.universe-levels
 ```
 
@@ -40,17 +29,15 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given two types `A` and `B`, equipped with equivalence relations `R` and
-`S`, respectively, the cartesian product of their set quotients is the
-set quotient of their product
+Given two types `A` and `B`, equipped with equivalence relations `R` and `S`,
+respectively, the cartesian product of their set quotients is the set quotient
+of their product.
 
 ## Definition
 
-### Binary hom of equivalence relation
-
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
+  {l1 l2 l3 l4 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
   {B : UU l3} (S : Eq-Rel l4 B)
   where
@@ -150,110 +137,41 @@ module _
         ( λ f →
           ( eq-htpy
             ( λ (qa , qb) →
-              htpy-eq (htpy-eq (lemma f ∙ lemma3 f) qa) qb))))
-    where
-    module _
-      (F  : type-hom-Set prod-set-quotient-Set X)
-      where
-      f : A × B → type-Set X
-      f = pr1 (precomp-Set-Quotient
-          prod-Eq-Rel
-          prod-set-quotient-Set
-          reflecting-map-prod-quotient-map X F)
-      H : reflects-Eq-Rel prod-Eq-Rel f
-      H = pr2 (precomp-Set-Quotient
-          prod-Eq-Rel
-          prod-set-quotient-Set
-          reflecting-map-prod-quotient-map X F)
-      mapB :
-        ( a : A ) →
-        reflecting-map-Eq-Rel S (type-Set X)
-      mapB a =
-        ( pair
-            (λ b → f (a , b))
-            (λ p → H (pair (refl-Eq-Rel R) p)))
-      lemma1 :
-        ( a : A ) →
-        ( mapB a) ＝
-         ( precomp-Set-Quotient S
-           ( quotient-Set S)
-           ( reflecting-map-quotient-map S)
-           ( X)
-           ( λ qb → F (quotient-map R a , qb)))
-      lemma1 a =
-        eq-pair-Σ refl
-          (eq-is-prop' ( is-prop-reflects-Eq-Rel S X _ ) _ _ )
-      lemma2 :
-        ( pair
-          ( λ a qb' →
-            inv-precomp-set-quotient S X
-              ( pair
-                (λ b → f (a , b))
-                (λ p → H (pair (refl-Eq-Rel R) p)))
-              qb')
-          ( λ {a1} {a2} p →
-            ( ap (inv-precomp-set-quotient S X)
-              ( eq-pair-Σ
-                (eq-htpy (λ b → H (pair p (refl-Eq-Rel S))))
-                ( eq-is-prop'
-                  ( is-prop-reflects-Eq-Rel S X _ ) _ _))))) ＝
-          ( precomp-Set-Quotient R
-            ( quotient-Set R)
-            ( reflecting-map-quotient-map R)
-            ( hom-Set (quotient-Set S) X )
-            ( λ qa qb → F (qa , qb)))
-      lemma2 =
-        eq-pair-Σ
-          (eq-htpy λ a → ap (inv-precomp-set-quotient S X) (lemma1 a) ∙
-            isretr-inv-precomp-set-quotient S X _ )
-          ((eq-is-prop' (is-prop-reflects-Eq-Rel R (( hom-Set (quotient-Set S) X ) ) _ ) _ _ ) )
-      lemma :
-        inv-precomp-set-quotient
-          ( R)
-          ( hom-Set (quotient-Set S) X)
-          ( pair
-            ( λ a qb' →
-              inv-precomp-set-quotient S X
-                ( pair
-                  (λ b → f (a , b))
-                  (λ p → H (pair (refl-Eq-Rel R) p)))
-                qb')
-            ( λ {a1} {a2} p →
-              ( ap (inv-precomp-set-quotient S X)
-                ( eq-pair-Σ
-                  (eq-htpy (λ b → H (pair p (refl-Eq-Rel S))))
-                  ( eq-is-prop'
-                    ( is-prop-reflects-Eq-Rel S X _ ) _ _)))))
-           ＝
-        inv-precomp-set-quotient
-          ( R)
-          ( hom-Set (quotient-Set S) X)
-          ( precomp-Set-Quotient R
-            ( quotient-Set R)
-            ( reflecting-map-quotient-map R)
-            ( hom-Set (quotient-Set S) X )
-            ( λ qa qb → F (qa , qb)))
-      lemma =
-       ap
-        (inv-precomp-set-quotient
-          ( R)
-          ( hom-Set (quotient-Set S) X)) (lemma2 )
-      lemma3 :
-        inv-precomp-set-quotient
-          ( R)
-          ( hom-Set (quotient-Set S) X)
-          ( precomp-Set-Quotient R
-            ( quotient-Set R)
-            ( reflecting-map-quotient-map R)
-            ( hom-Set (quotient-Set S) X )
-            ( λ qa qb → F (qa , qb)))
-         ＝ λ qa₁ qb₁ → F (qa₁ , qb₁)
-      lemma3 = isretr-inv-precomp-set-quotient
-          R ( hom-Set (quotient-Set S) X)
-          ( λ qa qb → F (qa , qb))
-          
-        
+              htpy-eq
+              ( htpy-eq
+                ( ap
+                  ( inv-precomp-set-quotient
+                    ( R)
+                    ( hom-Set (quotient-Set S) X))
+                    ( eq-pair-Σ
+                      ( eq-htpy λ a →
+                        ( ap
+                          ( inv-precomp-set-quotient S X)
+                          ( eq-pair-Σ refl
+                            ( eq-is-prop'
+                              ( is-prop-reflects-Eq-Rel S X _ ) _ _ ))) ∙
+                          ( isretr-inv-precomp-set-quotient S X _ ))
+                      ( eq-is-prop'
+                        ( is-prop-reflects-Eq-Rel R
+                          (hom-Set (quotient-Set S) X) _ ) _ _ )) ∙
+                  ( isretr-inv-precomp-set-quotient R
+                      ( hom-Set (quotient-Set S) X)
+                      ( λ qa qb → f (qa , qb))))
+                ( qa))
+                ( qb)))))
 
   quotient-prod : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   quotient-prod = quotient-Set prod-Eq-Rel
+
+  type-quotient-prod : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  type-quotient-prod = pr1 quotient-prod
+
+  equiv-quotient-prod-prod-set-quotient :
+    type-Set (quotient-prod) ≃ prod-set-quotient
+  equiv-quotient-prod-prod-set-quotient =
+    equiv-uniqueness-set-quotient-set-quotient
+      prod-Eq-Rel
+      prod-set-quotient-Set
+      reflecting-map-prod-quotient-map
+      is-set-quotient-prod-set-quotient
 ```
