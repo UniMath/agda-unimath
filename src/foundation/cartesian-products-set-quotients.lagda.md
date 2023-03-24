@@ -7,6 +7,7 @@ module foundation.cartesian-products-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
@@ -46,27 +47,34 @@ module _
   {B : UU l3} (S : Eq-Rel l4 B)
   where
 
+  prod-Rel-Prop :
+    Rel-Prop (l2 ⊔ l4) (A × B)
+  prod-Rel-Prop (a , b) (a' , b') =
+    prod-Prop
+      ( prop-Eq-Rel R a a')
+      ( prop-Eq-Rel S b b')
+
+  reflexive-prod-Rel-Prop :
+    is-reflexive-Rel-Prop prod-Rel-Prop
+  pr1 (reflexive-prod-Rel-Prop) = refl-Eq-Rel R
+  pr2 (reflexive-prod-Rel-Prop) = refl-Eq-Rel S
+
+  symmetric-prod-Rel-Prop :
+    is-symmetric-Rel-Prop prod-Rel-Prop
+  pr1 (symmetric-prod-Rel-Prop (p , q)) = symm-Eq-Rel R p
+  pr2 (symmetric-prod-Rel-Prop (p , q)) = symm-Eq-Rel S q
+
+  transitive-prod-Rel-Prop :
+    is-transitive-Rel-Prop prod-Rel-Prop
+  pr1 (transitive-prod-Rel-Prop (p , q) (p' , q')) = trans-Eq-Rel R p p'
+  pr2 (transitive-prod-Rel-Prop (p , q) (p' , q')) = trans-Eq-Rel S q q'
+
   prod-Eq-Rel :
     Eq-Rel (l2 ⊔ l4) (A × B)
-  prod-Eq-Rel =
-    pair
-      ( λ (a , b) (a' , b') →
-        prod-Prop
-          ( prop-Eq-Rel R a a')
-          ( prop-Eq-Rel S b b'))
-      ( pair
-        ( pair
-          ( refl-Eq-Rel R )
-          ( refl-Eq-Rel S ))
-        ( pair
-          ( λ (p , q) →
-            pair
-              ( symm-Eq-Rel R p)
-              ( symm-Eq-Rel S q))
-          ( λ (p , q) (p' , q') →
-            pair
-              ( trans-Eq-Rel R p p')
-              ( trans-Eq-Rel S q q'))))
+  pr1 prod-Eq-Rel = prod-Rel-Prop
+  pr1 (pr2 prod-Eq-Rel) = reflexive-prod-Rel-Prop
+  pr1 (pr2 (pr2 prod-Eq-Rel)) = symmetric-prod-Rel-Prop
+  pr2 (pr2 (pr2 prod-Eq-Rel)) = transitive-prod-Rel-Prop
 
   prod-set-quotient-Set : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   prod-set-quotient-Set = prod-Set (quotient-Set R) (quotient-Set S)

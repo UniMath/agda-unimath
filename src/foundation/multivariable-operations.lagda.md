@@ -35,75 +35,51 @@ takes as inputs one element of each type, and returns an element in some type
 multivariable-input :
   {l : Level}
   (n : ℕ)
-  (As : functional-vec (UU l) n) →
+  (A : functional-vec (UU l) n) →
   UU l
-multivariable-input zero-ℕ As = raise-unit _
-multivariable-input (succ-ℕ n) As =
-  As (inr star) × multivariable-input n (tail-functional-vec n As)
---(i : Fin n) → As i
+multivariable-input zero-ℕ A = raise-unit _
+multivariable-input (succ-ℕ n) A =
+  A (inr star) × multivariable-input n (tail-functional-vec n A)
 
--- empty-multivariable-input :
---   {l : Level}
---   (As : functional-vec (UU l) 0) →
---   multivariable-input 0 As
--- empty-multivariable-input As ()
+empty-multivariable-input :
+  {l : Level}
+  (A : functional-vec (UU l) 0) →
+  multivariable-input 0 A
+empty-multivariable-input A = raise-star
 
--- head-multivariable-input :
---   {l : Level}
---   (n : ℕ)
---   (As : functional-vec (UU l) (succ-ℕ n)) →
---   multivariable-input (succ-ℕ n) As →
---   head-functional-vec n As
--- head-multivariable-input n As as =
---   as (neg-one-Fin n)
+head-multivariable-input :
+  {l : Level}
+  (n : ℕ)
+  (A : functional-vec (UU l) (succ-ℕ n)) →
+  multivariable-input (succ-ℕ n) A →
+  head-functional-vec n A
+head-multivariable-input n A (a0 , a) = a0
 
 tail-multivariable-input :
   {l : Level}
   (n : ℕ)
-  (As : functional-vec (UU l) (succ-ℕ n)) →
-  multivariable-input (succ-ℕ n) As →
-  multivariable-input n (tail-functional-vec n As)
-tail-multivariable-input n As (a , a0) = a0
-  -- (λ i → as (inl-Fin n i))
+  (A : functional-vec (UU l) (succ-ℕ n)) →
+  multivariable-input (succ-ℕ n) A →
+  multivariable-input n (tail-functional-vec n A)
+tail-multivariable-input n A (a0 , a) = a
 
--- cons-multivariable-input :
---   {l : Level}
---   (n : ℕ)
---   (As : functional-vec (UU l) n) →
---   {A : UU l} →
---   A →
---   multivariable-input n As →
---   multivariable-input (succ-ℕ n) (cons-functional-vec n A As)
--- cons-multivariable-input n As a as (inl x) = as x
--- cons-multivariable-input n As a as (inr x) = a
+cons-multivariable-input :
+  {l : Level}
+  (n : ℕ)
+  (A : functional-vec (UU l) n) →
+  {A0 : UU l} →
+  A0 →
+  multivariable-input n A →
+  multivariable-input (succ-ℕ n) (cons-functional-vec n A0 A)
+pr1 (cons-multivariable-input n A a0 a) = a0
+pr2 (cons-multivariable-input n A a0 a) = a
 
--- cons-multivariable-input' :
---   { l1 : Level}
---   ( n : ℕ)
---   ( As : functional-vec (UU l1) (succ-ℕ n))
---   ( a0 : As (inr star))
---   ( as : multivariable-input n (tail-functional-vec n As)) →
---   multivariable-input (succ-ℕ n) As
--- cons-multivariable-input' n As a as (inl x) = as x
--- cons-multivariable-input' n As a as (inr star) = a
-
--- multivariable-operation :
---   { l : Level}
---   ( n : ℕ)
---   ( As : functional-vec (UU l) n)
---   ( X : UU l) →
---   UU l
--- multivariable-operation n As X =
---  (multivariable-input n As → X)
-
--- curry-once-multivariable-operation :
---   { l : Level}
---   ( n : ℕ)
---   ( As : functional-vec (UU l) (succ-ℕ n))
---   ( X : UU l) →
---   ( multivariable-operation (succ-ℕ n) As X) →
---   ( head-functional-vec n As) →
---   multivariable-operation n (tail-functional-vec n As) X
--- curry-once-multivariable-operation n As X f a v =
---   f (cons-multivariable-input' n As a v)
+multivariable-operation :
+  { l : Level}
+  ( n : ℕ)
+  ( A : functional-vec (UU l) n)
+  ( X : UU l) →
+  UU l
+multivariable-operation n A X =
+ (multivariable-input n A → X)
 ```
