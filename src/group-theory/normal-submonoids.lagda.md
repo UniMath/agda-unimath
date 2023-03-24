@@ -7,7 +7,10 @@ module group-theory.normal-submonoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
@@ -18,9 +21,11 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.congruence-relations-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 open import group-theory.submonoids
+open import group-theory.subsets-monoids
 ```
 
 </details>
@@ -96,6 +101,18 @@ module _
   is-prop-is-in-Normal-Submonoid =
     is-prop-is-in-Submonoid M submonoid-Normal-Submonoid
 
+  is-closed-under-eq-Normal-Submonoid :
+    {x y : type-Monoid M} → is-in-Normal-Submonoid x → (x ＝ y) →
+    is-in-Normal-Submonoid y
+  is-closed-under-eq-Normal-Submonoid =
+    is-closed-under-eq-subtype subset-Normal-Submonoid
+
+  is-closed-under-eq-Normal-Submonoid' :
+    {x y : type-Monoid M} → is-in-Normal-Submonoid y →
+    (x ＝ y) → is-in-Normal-Submonoid x
+  is-closed-under-eq-Normal-Submonoid' =
+    is-closed-under-eq-subtype' subset-Normal-Submonoid
+
   type-Normal-Submonoid : UU (l1 ⊔ l2)
   type-Normal-Submonoid = type-Submonoid M submonoid-Normal-Submonoid
 
@@ -167,7 +184,7 @@ module _
 
 ## Properties
 
-### Extensionality of the type of all submonoids
+### Extensionality of the type of all normal submonoids
 
 ```agda
 module _
@@ -189,6 +206,115 @@ module _
       ( is-normal-Normal-Submonoid M N)
       ( λ x → (id , id))
       ( extensionality-Submonoid M (submonoid-Normal-Submonoid M N))
+```
+
+### The congruence relation of a normal submonoid
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Normal-Submonoid l2 M)
+  where
+
+  rel-congruence-Normal-Submonoid : Rel-Prop (l1 ⊔ l2) (type-Monoid M)
+  rel-congruence-Normal-Submonoid x y =
+    Π-Prop
+      ( type-Monoid M)
+      ( λ u →
+        Π-Prop
+          ( type-Monoid M)
+          ( λ v →
+            iff-Prop
+              ( subset-Normal-Submonoid M N
+                ( mul-Monoid M (mul-Monoid M u x) v))
+              ( subset-Normal-Submonoid M N
+                ( mul-Monoid M (mul-Monoid M u y) v))))
+
+  sim-congruence-Normal-Submonoid : (x y : type-Monoid M) → UU (l1 ⊔ l2)
+  sim-congruence-Normal-Submonoid x y =
+    type-Prop (rel-congruence-Normal-Submonoid x y)
+
+  refl-congruence-Normal-Submonoid :
+    is-reflexive-Rel-Prop rel-congruence-Normal-Submonoid
+  pr1 (refl-congruence-Normal-Submonoid u v) = id
+  pr2 (refl-congruence-Normal-Submonoid u v) = id
+
+  symmetric-congruence-Normal-Submonoid :
+    is-symmetric-Rel-Prop rel-congruence-Normal-Submonoid
+  pr1 (symmetric-congruence-Normal-Submonoid H u v) = pr2 (H u v)
+  pr2 (symmetric-congruence-Normal-Submonoid H u v) = pr1 (H u v)
+
+  transitive-congruence-Normal-Submonoid :
+    is-transitive-Rel-Prop rel-congruence-Normal-Submonoid
+  transitive-congruence-Normal-Submonoid H K u v = (K u v) ∘iff (H u v)
+
+  eq-rel-congruence-Normal-Submonoid : Eq-Rel (l1 ⊔ l2) (type-Monoid M)
+  pr1 eq-rel-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
+  pr1 (pr2 eq-rel-congruence-Normal-Submonoid) =
+    refl-congruence-Normal-Submonoid
+  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Submonoid)) =
+    symmetric-congruence-Normal-Submonoid
+  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Submonoid)) =
+    transitive-congruence-Normal-Submonoid
+
+  is-congruence-congruence-Normal-Submonoid :
+    is-congruence-Monoid M eq-rel-congruence-Normal-Submonoid
+  pr1 (is-congruence-congruence-Normal-Submonoid {x} {x'} {y} {y'} H K u v) L =
+    is-closed-under-eq-Normal-Submonoid M N
+      ( forward-implication
+        ( H u (mul-Monoid M y' v))
+        ( is-closed-under-eq-Normal-Submonoid M N
+          ( forward-implication
+            ( K (mul-Monoid M u x) v)
+            ( is-closed-under-eq-Normal-Submonoid M N L
+              ( ap (mul-Monoid' M v) (inv (associative-mul-Monoid M u x y)))))
+          ( associative-mul-Monoid M (mul-Monoid M u x) y' v)))
+      ( ( inv (associative-mul-Monoid M (mul-Monoid M u x') y' v)) ∙
+        ( ap (mul-Monoid' M v) (associative-mul-Monoid M u x' y')))
+  pr2 (is-congruence-congruence-Normal-Submonoid {x} {x'} {y} {y'} H K u v) L =
+    is-closed-under-eq-Normal-Submonoid M N
+      ( backward-implication
+        ( H u (mul-Monoid M y v))
+        ( is-closed-under-eq-Normal-Submonoid M N
+          ( backward-implication
+            ( K (mul-Monoid M u x') v)
+            ( is-closed-under-eq-Normal-Submonoid M N L
+              ( ap (mul-Monoid' M v) (inv (associative-mul-Monoid M u x' y')))))
+          ( associative-mul-Monoid M (mul-Monoid M u x') y v)))
+      ( ( inv (associative-mul-Monoid M (mul-Monoid M u x) y v)) ∙
+        ( ap (mul-Monoid' M v) (associative-mul-Monoid M u x y)))
+
+  congruence-Normal-Submonoid : congruence-Monoid (l1 ⊔ l2) M
+  pr1 congruence-Normal-Submonoid = eq-rel-congruence-Normal-Submonoid
+  pr2 congruence-Normal-Submonoid = is-congruence-congruence-Normal-Submonoid
+```
+
+### The normal submonoid obtained from a congruence relation
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
+  where
+
+  subset-normal-submonoid-congruence-Monoid :
+    subtype l2 (type-Monoid M)
+  subset-normal-submonoid-congruence-Monoid x =
+    prop-congruence-Monoid M R x (unit-Monoid M)
+
+  is-in-normal-submonoid-congruence-Monoid : type-Monoid M → UU l2
+  is-in-normal-submonoid-congruence-Monoid =
+    is-in-subtype subset-normal-submonoid-congruence-Monoid
+
+  contains-unit-normal-submonoid-congruence-Monoid :
+    is-in-normal-submonoid-congruence-Monoid (unit-Monoid M)
+  contains-unit-normal-submonoid-congruence-Monoid =
+    refl-congruence-Monoid M R
+
+  is-closed-under-multiplication-normal-submonoid-congruence-Monoid :
+    is-closed-under-multiplication-subset-Monoid M
+      subset-normal-submonoid-congruence-Monoid
+  is-closed-under-multiplication-normal-submonoid-congruence-Monoid =
+    {!!}
+    
 ```
 
 ## References
