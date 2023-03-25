@@ -10,6 +10,7 @@ module foundation.cartesian-products-set-quotients where
 open import foundation.binary-relations
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.uniqueness-set-quotients
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.reflecting-maps-equivalence-relations
@@ -39,6 +40,8 @@ respectively, the cartesian product of their set quotients is the set quotient
 of their product.
 
 ## Definition
+
+### The product of two relations
 
 ```agda
 module _
@@ -75,7 +78,11 @@ module _
   pr1 (pr2 prod-Eq-Rel) = reflexive-prod-Rel-Prop
   pr1 (pr2 (pr2 prod-Eq-Rel)) = symmetric-prod-Rel-Prop
   pr2 (pr2 (pr2 prod-Eq-Rel)) = transitive-prod-Rel-Prop
+```
 
+### The product of set quotients
+
+```agda
   prod-set-quotient-Set : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   prod-set-quotient-Set = prod-Set (quotient-Set R) (quotient-Set S)
 
@@ -98,7 +105,13 @@ module _
         ( eq-pair
           ( apply-effectiveness-quotient-map' R p)
           ( apply-effectiveness-quotient-map' S q)))
+```
 
+## Properties
+
+### The product of sets quotients is a set quotient
+
+```agda
   inv-precomp-set-quotient-prod-set-quotient :
     {l : Level}
     (X : Set l) →
@@ -118,9 +131,9 @@ module _
         ( λ {a1} {a2} p →
           ( ap (inv-precomp-set-quotient S X)
             ( eq-pair-Σ
-              (eq-htpy (λ b → H (pair p (refl-Eq-Rel S))))
-              ( eq-is-prop'
-                ( is-prop-reflects-Eq-Rel S X _ ) _ _)))))
+              ( eq-htpy (λ b → H (pair p (refl-Eq-Rel S))))
+              ( eq-is-prop
+                ( is-prop-reflects-Eq-Rel S X _ ))))))
       ( qa) ( qb)
 
   issec-inv-precomp-set-quotient-prod-set-quotient :
@@ -202,11 +215,28 @@ module _
   type-quotient-prod = pr1 quotient-prod
 
   equiv-quotient-prod-prod-set-quotient :
-    type-Set (quotient-prod) ≃ prod-set-quotient
+    prod-set-quotient ≃ type-Set (quotient-prod)
   equiv-quotient-prod-prod-set-quotient =
-    equiv-uniqueness-set-quotient-set-quotient
-      prod-Eq-Rel
+   equiv-uniqueness-set-quotient
+    prod-Eq-Rel
       prod-set-quotient-Set
       reflecting-map-prod-quotient-map
       is-set-quotient-prod-set-quotient
+       quotient-prod
+       (( reflecting-map-quotient-map prod-Eq-Rel))
+       (is-set-quotient-set-quotient prod-Eq-Rel)
+
+  triangle-uniqueness-prod-set-quotient :
+    ( map-equiv equiv-quotient-prod-prod-set-quotient ∘
+      prod-set-quotient-map) ~
+    quotient-map prod-Eq-Rel
+  triangle-uniqueness-prod-set-quotient =
+    triangle-uniqueness-set-quotient
+      ( prod-Eq-Rel)
+      ( prod-set-quotient-Set)
+      ( reflecting-map-prod-quotient-map)
+      ( is-set-quotient-prod-set-quotient)
+      ( quotient-prod)
+      ( reflecting-map-quotient-map prod-Eq-Rel)
+      ( is-set-quotient-set-quotient prod-Eq-Rel)
 ```
