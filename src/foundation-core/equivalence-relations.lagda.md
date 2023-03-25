@@ -147,13 +147,20 @@ equiv-trans-Eq-Rel' R r =
 
 ## Examples
 
-### The trivial equivalence relation that always holds
+### The indiscrete equivalence relation on a type
 
 ```agda
-always-holds-Eq-Rel :
+indiscrete-Eq-Rel :
+  {l1 : Level} (A : UU l1) → Eq-Rel lzero A
+pr1 (indiscrete-Eq-Rel A) x y = unit-Prop
+pr1 (pr2 (indiscrete-Eq-Rel A)) = star
+pr1 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ = star
+pr2 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ _ = star
+
+raise-indiscrete-Eq-Rel :
   {l1 : Level} (l2 : Level) (A : UU l1) → Eq-Rel l2 A
-pr1 (always-holds-Eq-Rel l A) x y = raise-unit-Prop l
-pr1 (pr2 (always-holds-Eq-Rel l A)) = raise-star
-pr1 (pr2 (pr2 (always-holds-Eq-Rel l A))) _ = raise-star
-pr2 (pr2 (pr2 (always-holds-Eq-Rel l A))) _ _ = raise-star
+pr1 (raise-indiscrete-Eq-Rel l A) x y = raise-unit-Prop l
+pr1 (pr2 (raise-indiscrete-Eq-Rel l A)) = raise-star
+pr1 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ = raise-star
+pr2 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ _ = raise-star
 ```

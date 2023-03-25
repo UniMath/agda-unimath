@@ -67,7 +67,7 @@ all-sim-Eq-Rel :
   ( A : functional-vec (UU l1) n)
   ( R : (i : Fin n) → Eq-Rel l2 (A i)) →
   ( Eq-Rel l2 (multivariable-input n A))
-all-sim-Eq-Rel {l1} {l2} zero-ℕ A R = always-holds-Eq-Rel l2 (raise-unit l1)
+all-sim-Eq-Rel {l1} {l2} zero-ℕ A R = raise-indiscrete-Eq-Rel l2 (raise-unit l1)
 all-sim-Eq-Rel (succ-ℕ n) A R =
   prod-Eq-Rel (R (inr star))
     ( all-sim-Eq-Rel n
@@ -165,7 +165,7 @@ pr1 (equiv-set-quotient-vector zero-ℕ A R) _ = quotient-map _ raise-star
 pr1 (pr1 (pr2 (equiv-set-quotient-vector zero-ℕ A R))) _ = raise-star
 pr2 (pr1 (pr2 (equiv-set-quotient-vector {l1} {l2} zero-ℕ A R))) =
   induction-set-quotient
-    ( always-holds-Eq-Rel l2 (raise-unit l1))
+    ( raise-indiscrete-Eq-Rel l2 (raise-unit l1))
     ( λ x → pair _ (is-set-set-quotient _ _ x))
     ( λ x → apply-effectiveness-quotient-map' _ raise-star)
 pr1 (pr2 (pr2 (equiv-set-quotient-vector zero-ℕ A R))) _ = raise-star
@@ -265,12 +265,12 @@ issec-inv-precomp-vector-set-quotient :
       ( X)))
 pr1 (issec-inv-precomp-vector-set-quotient n A R X) =
   inv-precomp-vector-set-quotient n A R X
-pr2 (issec-inv-precomp-vector-set-quotient {l1} {l2} {l3} zero-ℕ A R X) f =
+pr2 (issec-inv-precomp-vector-set-quotient {l} {l1} {l2} zero-ℕ A R X) f =
   eq-pair-Σ
     ( eq-htpy (λ {(map-raise star) → refl}))
     ( eq-is-prop
       ( is-prop-reflects-Eq-Rel
-        ( always-holds-Eq-Rel l3 (raise-unit l2))
+        ( raise-indiscrete-Eq-Rel l2 (raise-unit l1))
         ( X)
         ( map-reflecting-map-Eq-Rel _ f)))
 pr2 (issec-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
@@ -317,7 +317,7 @@ pr1 (isretr-inv-precomp-vector-set-quotient n A R X) =
 pr2 (isretr-inv-precomp-vector-set-quotient zero-ℕ A R X) f =
   eq-htpy (λ {(map-raise star) → refl})
 pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
-  ap (λ - → - ∘ set-quotient-vector-prod-set-quotient)
+  ap (_∘ set-quotient-vector-prod-set-quotient)
     is-inv-map-inv-equiv-f ∙ lemma-f
   where
   precomp-f :
@@ -399,9 +399,9 @@ pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
         ( λ x → R (inl x)))
         ( X))
       ( eq-pair-Σ
-        ( ap (λ - → - ∘ quotient-vector-map _ A R) (inv lemma-f) ∙
+        ( ap ( _∘ quotient-vector-map _ A R) (inv lemma-f) ∙
           ( ap
-            ( λ - → map-inv-equiv-f ∘ -)
+            ( map-inv-equiv-f ∘_)
             ( eq-htpy
               ( λ (a0 , a) →
                 ( eq-pair-Σ

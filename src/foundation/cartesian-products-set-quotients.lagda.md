@@ -200,13 +200,13 @@ module _
       prod-set-quotient-Set
       reflecting-map-prod-quotient-map)
   pr1 (pr1 (is-set-quotient-prod-set-quotient X)) =
-    ( inv-precomp-set-quotient-prod-set-quotient X)
+    inv-precomp-set-quotient-prod-set-quotient X
   pr2 (pr1 (is-set-quotient-prod-set-quotient X)) =
-    ( issec-inv-precomp-set-quotient-prod-set-quotient X)
+    issec-inv-precomp-set-quotient-prod-set-quotient X
   pr1 (pr2 (is-set-quotient-prod-set-quotient X)) =
-    ( inv-precomp-set-quotient-prod-set-quotient X)
+    inv-precomp-set-quotient-prod-set-quotient X
   pr2 (pr2 (is-set-quotient-prod-set-quotient X)) =
-    ( isretr-inv-precomp-set-quotient-prod-set-quotient X)
+    isretr-inv-precomp-set-quotient-prod-set-quotient X
 
   quotient-prod : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   quotient-prod = quotient-Set prod-Eq-Rel
