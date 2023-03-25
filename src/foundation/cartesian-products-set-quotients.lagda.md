@@ -10,12 +10,12 @@ module foundation.cartesian-products-set-quotients where
 open import foundation.binary-relations
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.uniqueness-set-quotients
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients
 
 open import foundation-core.cartesian-product-types
@@ -199,14 +199,14 @@ module _
       prod-Eq-Rel
       prod-set-quotient-Set
       reflecting-map-prod-quotient-map)
-  is-set-quotient-prod-set-quotient X =
-    pair
-      (pair
-        ( inv-precomp-set-quotient-prod-set-quotient X)
-        ( issec-inv-precomp-set-quotient-prod-set-quotient X))
-      ( pair
-        ( inv-precomp-set-quotient-prod-set-quotient X)
-        ( isretr-inv-precomp-set-quotient-prod-set-quotient X))
+  pr1 (pr1 (is-set-quotient-prod-set-quotient X)) =
+    ( inv-precomp-set-quotient-prod-set-quotient X)
+  pr2 (pr1 (is-set-quotient-prod-set-quotient X)) =
+    ( issec-inv-precomp-set-quotient-prod-set-quotient X)
+  pr1 (pr2 (is-set-quotient-prod-set-quotient X)) =
+    ( inv-precomp-set-quotient-prod-set-quotient X)
+  pr2 (pr2 (is-set-quotient-prod-set-quotient X)) =
+    ( isretr-inv-precomp-set-quotient-prod-set-quotient X)
 
   quotient-prod : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   quotient-prod = quotient-Set prod-Eq-Rel
@@ -217,14 +217,14 @@ module _
   equiv-quotient-prod-prod-set-quotient :
     prod-set-quotient ≃ type-Set (quotient-prod)
   equiv-quotient-prod-prod-set-quotient =
-   equiv-uniqueness-set-quotient
-    prod-Eq-Rel
-      prod-set-quotient-Set
-      reflecting-map-prod-quotient-map
-      is-set-quotient-prod-set-quotient
-       quotient-prod
-       (( reflecting-map-quotient-map prod-Eq-Rel))
-       (is-set-quotient-set-quotient prod-Eq-Rel)
+    equiv-uniqueness-set-quotient
+      ( prod-Eq-Rel)
+      ( prod-set-quotient-Set)
+      ( reflecting-map-prod-quotient-map)
+      ( is-set-quotient-prod-set-quotient)
+      ( quotient-prod)
+      ( reflecting-map-quotient-map prod-Eq-Rel)
+      ( is-set-quotient-set-quotient prod-Eq-Rel)
 
   triangle-uniqueness-prod-set-quotient :
     ( map-equiv equiv-quotient-prod-prod-set-quotient ∘
