@@ -20,7 +20,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given two equivalence relations `R` and `S`, their product is an equivalence relation.
+Given two equivalence relations `R` and `S`, their product is an equivalence
+relation.
 
 ## Definition
 
