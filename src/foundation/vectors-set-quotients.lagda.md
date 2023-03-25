@@ -24,6 +24,7 @@ open import foundation.equivalence-classes
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.multivariable-operations
+open import foundation.products-equivalence-relations
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients

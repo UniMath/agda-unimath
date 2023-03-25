@@ -7,11 +7,11 @@ module foundation.cartesian-products-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
+open import foundation.products-equivalence-relations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
@@ -50,39 +50,6 @@ module _
   {B : UU l3} (S : Eq-Rel l4 B)
   where
 
-  prod-Rel-Prop :
-    Rel-Prop (l2 ⊔ l4) (A × B)
-  prod-Rel-Prop (a , b) (a' , b') =
-    prod-Prop
-      ( prop-Eq-Rel R a a')
-      ( prop-Eq-Rel S b b')
-
-  reflexive-prod-Rel-Prop :
-    is-reflexive-Rel-Prop prod-Rel-Prop
-  pr1 (reflexive-prod-Rel-Prop) = refl-Eq-Rel R
-  pr2 (reflexive-prod-Rel-Prop) = refl-Eq-Rel S
-
-  symmetric-prod-Rel-Prop :
-    is-symmetric-Rel-Prop prod-Rel-Prop
-  pr1 (symmetric-prod-Rel-Prop (p , q)) = symm-Eq-Rel R p
-  pr2 (symmetric-prod-Rel-Prop (p , q)) = symm-Eq-Rel S q
-
-  transitive-prod-Rel-Prop :
-    is-transitive-Rel-Prop prod-Rel-Prop
-  pr1 (transitive-prod-Rel-Prop (p , q) (p' , q')) = trans-Eq-Rel R p p'
-  pr2 (transitive-prod-Rel-Prop (p , q) (p' , q')) = trans-Eq-Rel S q q'
-
-  prod-Eq-Rel :
-    Eq-Rel (l2 ⊔ l4) (A × B)
-  pr1 prod-Eq-Rel = prod-Rel-Prop
-  pr1 (pr2 prod-Eq-Rel) = reflexive-prod-Rel-Prop
-  pr1 (pr2 (pr2 prod-Eq-Rel)) = symmetric-prod-Rel-Prop
-  pr2 (pr2 (pr2 prod-Eq-Rel)) = transitive-prod-Rel-Prop
-```
-
-### The product of set quotients
-
-```agda
   prod-set-quotient-Set : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   prod-set-quotient-Set = prod-Set (quotient-Set R) (quotient-Set S)
 
@@ -97,7 +64,7 @@ module _
     pair (quotient-map R a) (quotient-map S b)
 
   reflecting-map-prod-quotient-map :
-    reflecting-map-Eq-Rel prod-Eq-Rel prod-set-quotient
+    reflecting-map-Eq-Rel (prod-Eq-Rel R S) prod-set-quotient
   reflecting-map-prod-quotient-map =
     pair
       prod-set-quotient-map
@@ -115,7 +82,7 @@ module _
   inv-precomp-set-quotient-prod-set-quotient :
     {l : Level}
     (X : Set l) →
-    reflecting-map-Eq-Rel prod-Eq-Rel (type-Set X) →
+    reflecting-map-Eq-Rel (prod-Eq-Rel R S) (type-Set X) →
     type-hom-Set prod-set-quotient-Set X
   inv-precomp-set-quotient-prod-set-quotient X (f , H) (qa , qb) =
     inv-precomp-set-quotient
@@ -141,9 +108,10 @@ module _
     { l : Level}
     ( X : Set l ) →
     ( precomp-Set-Quotient
-      prod-Eq-Rel
-      prod-set-quotient-Set
-      reflecting-map-prod-quotient-map X ∘
+      ( prod-Eq-Rel R S)
+      ( prod-set-quotient-Set)
+      ( reflecting-map-prod-quotient-map)
+      ( X) ∘
       ( inv-precomp-set-quotient-prod-set-quotient X)) ~
     ( id)
   issec-inv-precomp-set-quotient-prod-set-quotient X (f , H) =
@@ -156,16 +124,17 @@ module _
             ( quotient-map S b) ∙
           ( issec-inv-precomp-set-quotient S X _ b))))
       ( eq-is-prop'
-        ( is-prop-reflects-Eq-Rel prod-Eq-Rel X f) _ _)
+        ( is-prop-reflects-Eq-Rel (prod-Eq-Rel R S) X f) _ _)
 
   isretr-inv-precomp-set-quotient-prod-set-quotient :
     { l : Level}
     ( X : Set l ) →
     ( ( inv-precomp-set-quotient-prod-set-quotient X) ∘
-      precomp-Set-Quotient
-      prod-Eq-Rel
-      prod-set-quotient-Set
-      reflecting-map-prod-quotient-map X) ~
+      ( precomp-Set-Quotient)
+      ( prod-Eq-Rel R S)
+      ( prod-set-quotient-Set)
+      ( reflecting-map-prod-quotient-map)
+      ( X)) ~
     ( id)
   isretr-inv-precomp-set-quotient-prod-set-quotient X f =
     ( eq-htpy
@@ -196,7 +165,7 @@ module _
   is-set-quotient-prod-set-quotient :
     { l : Level} →
     ( is-set-quotient l
-      prod-Eq-Rel
+      (prod-Eq-Rel R S)
       prod-set-quotient-Set
       reflecting-map-prod-quotient-map)
   pr1 (pr1 (is-set-quotient-prod-set-quotient X)) =
@@ -209,7 +178,7 @@ module _
     isretr-inv-precomp-set-quotient-prod-set-quotient X
 
   quotient-prod : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  quotient-prod = quotient-Set prod-Eq-Rel
+  quotient-prod = quotient-Set (prod-Eq-Rel R S)
 
   type-quotient-prod : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   type-quotient-prod = pr1 quotient-prod
@@ -218,25 +187,25 @@ module _
     prod-set-quotient ≃ type-Set (quotient-prod)
   equiv-quotient-prod-prod-set-quotient =
     equiv-uniqueness-set-quotient
-      ( prod-Eq-Rel)
+      ( prod-Eq-Rel R S)
       ( prod-set-quotient-Set)
       ( reflecting-map-prod-quotient-map)
       ( is-set-quotient-prod-set-quotient)
       ( quotient-prod)
-      ( reflecting-map-quotient-map prod-Eq-Rel)
-      ( is-set-quotient-set-quotient prod-Eq-Rel)
+      ( reflecting-map-quotient-map (prod-Eq-Rel R S))
+      ( is-set-quotient-set-quotient (prod-Eq-Rel R S))
 
   triangle-uniqueness-prod-set-quotient :
     ( map-equiv equiv-quotient-prod-prod-set-quotient ∘
       prod-set-quotient-map) ~
-    quotient-map prod-Eq-Rel
+    quotient-map (prod-Eq-Rel R S)
   triangle-uniqueness-prod-set-quotient =
     triangle-uniqueness-set-quotient
-      ( prod-Eq-Rel)
+      ( prod-Eq-Rel R S)
       ( prod-set-quotient-Set)
       ( reflecting-map-prod-quotient-map)
       ( is-set-quotient-prod-set-quotient)
       ( quotient-prod)
-      ( reflecting-map-quotient-map prod-Eq-Rel)
-      ( is-set-quotient-set-quotient prod-Eq-Rel)
+      ( reflecting-map-quotient-map (prod-Eq-Rel R S))
+      ( is-set-quotient-set-quotient (prod-Eq-Rel R S))
 ```
