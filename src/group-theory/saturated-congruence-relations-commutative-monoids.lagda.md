@@ -30,7 +30,10 @@ open import group-theory.monoids
 
 ## Idea
 
-For any commutative monoid `M`, the type of normal submonoids is a retract of the type of congruence relations on `M`. A congruence relation on `M` is said to be **saturated** if it is in the image of the inclusion of the normal submonoids of `M` into the congruence relations on `M`.
+For any commutative monoid `M`, the type of normal submonoids is a retract of
+the type of congruence relations on `M`. A congruence relation on `M` is said to
+be **saturated** if it is in the image of the inclusion of the normal submonoids
+of `M` into the congruence relations on `M`.
 
 ## Definition
 
@@ -39,7 +42,7 @@ module _
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R : congruence-Commutative-Monoid l2 M)
   where
-  
+
   is-saturated-congruence-commutative-monoid-Prop : Prop (l1 ⊔ l2)
   is-saturated-congruence-commutative-monoid-Prop =
     Π-Prop
@@ -245,4 +248,6 @@ eq-relate-same-elements-saturated-congruence-Commutative-Monoid M R S =
 
 ## See also
 
-- Not every congruence relation on a commutative monoid is saturated. For an example, see the commutative monoid [`ℕ-Max`](elementary-number-theory.monoid-of-natural-numbers-with-maximum.md).
+- Not every congruence relation on a commutative monoid is saturated. For an
+  example, see the commutative monoid
+  [`ℕ-Max`](elementary-number-theory.monoid-of-natural-numbers-with-maximum.md).

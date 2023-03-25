@@ -28,7 +28,10 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-The type `ℕ` of natural numbers equipped with `0` and `max-ℕ` forms a monoid. Normal submonoids of this monoid are initial segments of the natural numbers. Furthermore, the identity relation is a nonsaturated congruence relation on `ℕ-Max`.
+The type `ℕ` of natural numbers equipped with `0` and `max-ℕ` forms a monoid.
+Normal submonoids of this monoid are initial segments of the natural numbers.
+Furthermore, the identity relation is a nonsaturated congruence relation on
+`ℕ-Max`.
 
 ## Definition
 

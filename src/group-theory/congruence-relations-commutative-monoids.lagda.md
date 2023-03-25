@@ -27,7 +27,8 @@ open import group-theory.monoids
 
 ## Idea
 
-A congruence relation on a commutative monoid `M` is a congruence relation on the underlying monoid of `M`.
+A congruence relation on a commutative monoid `M` is a congruence relation on
+the underlying monoid of `M`.
 
 ## Definition
 

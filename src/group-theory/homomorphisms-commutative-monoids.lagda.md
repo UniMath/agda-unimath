@@ -14,16 +14,17 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.commutative-monoids
 open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
-open import group-theory.commutative-monoids
 ```
 
 </details>
 
 ## Idea
 
-Homomorphisms between two commutative monoids are homomorphisms between their underlying monoids.
+Homomorphisms between two commutative monoids are homomorphisms between their
+underlying monoids.
 
 ## Definition
 

@@ -22,7 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-An **initial segment** of the natural numbers is a subtype `P : ℕ → Prop` such that the implication
+An **initial segment** of the natural numbers is a subtype `P : ℕ → Prop` such
+that the implication
 
 ```md
   P (n + 1) → P n

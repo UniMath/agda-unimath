@@ -28,7 +28,10 @@ open import group-theory.monoids
 
 ## Idea
 
-For any monoid `M`, the type of normal submonoids is a retract of the type of congruence relations on `M`. A congruence relation on `M` is said to be **saturated** if it is in the image of the inclusion of the normal submonoids of `M` into the congruence relations on `M`.
+For any monoid `M`, the type of normal submonoids is a retract of the type of
+congruence relations on `M`. A congruence relation on `M` is said to be
+**saturated** if it is in the image of the inclusion of the normal submonoids of
+`M` into the congruence relations on `M`.
 
 ## Definition
 
@@ -36,7 +39,7 @@ For any monoid `M`, the type of normal submonoids is a retract of the type of co
 module _
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
   where
-  
+
   is-saturated-congruence-monoid-Prop : Prop (l1 ⊔ l2)
   is-saturated-congruence-monoid-Prop =
     Π-Prop
@@ -211,4 +214,6 @@ eq-relate-same-elements-saturated-congruence-Monoid M R S =
 
 ## See also
 
-- Not every congruence relation on a monoid is saturated. For an example, see the monoid [`ℕ-Max`](elementary-number-theory.monoid-of-natural-numbers-with-maximum.md).
+- Not every congruence relation on a monoid is saturated. For an example, see
+  the monoid
+  [`ℕ-Max`](elementary-number-theory.monoid-of-natural-numbers-with-maximum.md).

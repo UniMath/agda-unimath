@@ -34,9 +34,15 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-A normal submonoid `N` of `M` is a monoid for which there exists a congruence relation `~` on `M` such that the elements of `N` are precisely the elements `x ~ 1`. Such a congruence relation is rarely unique. However, one can show that the normal submonoids form a retract of the type of congruence relations on `M`, and that the normal submonoids correspond uniquely to *saturated* congruence relations.
+A normal submonoid `N` of `M` is a monoid for which there exists a congruence
+relation `~` on `M` such that the elements of `N` are precisely the elements
+`x ~ 1`. Such a congruence relation is rarely unique. However, one can show that
+the normal submonoids form a retract of the type of congruence relations on `M`,
+and that the normal submonoids correspond uniquely to _saturated_ congruence
+relations.
 
-A submonoid `N` of `M` is normal if and only if for all `x y : M` and `u : N` we have
+A submonoid `N` of `M` is normal if and only if for all `x y : M` and `u : N` we
+have
 
 ```md
   xuy ∈ N ⇔ xy ∈ N.
@@ -409,7 +415,7 @@ module _
 module _
   {l1 l2 : Level} (M : Monoid l1) (N : Normal-Submonoid l2 M)
   where
-  
+
   is-saturated-congruence-Normal-Submonoid :
     is-saturated-congruence-Monoid M (congruence-Normal-Submonoid M N)
   is-saturated-congruence-Normal-Submonoid x y H u v =

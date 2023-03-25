@@ -29,7 +29,8 @@ open import group-theory.subsets-commutative-monoids
 
 ## Idea
 
-A submonoid of a commutative monoid `M` is a subset of `M` that contains the unit of `M` and is closed under multiplication.
+A submonoid of a commutative monoid `M` is a subset of `M` that contains the
+unit of `M` and is closed under multiplication.
 
 ## Definitions
 
@@ -219,4 +220,3 @@ module _
   extensionality-Commutative-Submonoid =
     extensionality-Submonoid (monoid-Commutative-Monoid M) N
 ```
-

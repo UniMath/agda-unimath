@@ -35,7 +35,10 @@ open import group-theory.subsets-commutative-monoids
 
 ## Idea
 
-A normal submonoid `N` of of a commutative monoid `M` is a monoid that corresponds uniquely to a saturated congruence relation ~ on `M` consisting of the elements congruent to `1`. This is the case if and only if for all `x : M` and `u : N` we have
+A normal submonoid `N` of of a commutative monoid `M` is a monoid that
+corresponds uniquely to a saturated congruence relation ~ on `M` consisting of
+the elements congruent to `1`. This is the case if and only if for all `x : M`
+and `u : N` we have
 
 ```md
   xu ∈ N → x ∈ N
@@ -468,7 +471,7 @@ module _
 module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
   where
-  
+
   is-saturated-congruence-Normal-Commutative-Submonoid :
     is-saturated-congruence-Commutative-Monoid M
       ( congruence-Normal-Commutative-Submonoid M N)
@@ -607,4 +610,3 @@ pr1 (equiv-normal-submonoid-saturated-congruence-Commutative-Monoid l2 M) =
 pr2 (equiv-normal-submonoid-saturated-congruence-Commutative-Monoid l2 M) =
   is-equiv-normal-submonoid-saturated-congruence-Commutative-Monoid l2 M
 ```
-
