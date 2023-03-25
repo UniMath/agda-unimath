@@ -133,8 +133,9 @@ module _
             ( eq-pair-Σ
               ( eq-htpy (λ b → H (pair p (refl-Eq-Rel S))))
               ( eq-is-prop
-                ( is-prop-reflects-Eq-Rel S X _ ))))))
-      ( qa) ( qb)
+                ( is-prop-reflects-Eq-Rel S X _))))))
+      ( qa)
+      ( qb)
 
   issec-inv-precomp-set-quotient-prod-set-quotient :
     { l : Level}
@@ -164,8 +165,7 @@ module _
       precomp-Set-Quotient
       prod-Eq-Rel
       prod-set-quotient-Set
-      reflecting-map-prod-quotient-map X
-      ) ~
+      reflecting-map-prod-quotient-map X) ~
     ( id)
   isretr-inv-precomp-set-quotient-prod-set-quotient X f =
     ( eq-htpy
@@ -182,11 +182,11 @@ module _
                     ( inv-precomp-set-quotient S X)
                     ( eq-pair-Σ refl
                       ( eq-is-prop'
-                        ( is-prop-reflects-Eq-Rel S X _ ) _ _ ))) ∙
-                    ( isretr-inv-precomp-set-quotient S X _ ))
+                        ( is-prop-reflects-Eq-Rel S X _) _ _))) ∙
+                    ( isretr-inv-precomp-set-quotient S X _))
                 ( eq-is-prop'
                   ( is-prop-reflects-Eq-Rel R
-                    (hom-Set (quotient-Set S) X) _ ) _ _ )) ∙
+                    (hom-Set (quotient-Set S) X) _) _ _)) ∙
             ( isretr-inv-precomp-set-quotient R
                 ( hom-Set (quotient-Set S) X)
                 ( λ qa qb → f (qa , qb))))
