@@ -192,7 +192,8 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Submonoid l2 M)
   where
 
-  has-same-elements-Submonoid : Submonoid l2 M → UU (l1 ⊔ l2)
+  has-same-elements-Submonoid :
+    {l3 : Level} → Submonoid l3 M → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Submonoid K =
     has-same-elements-subtype (subset-Submonoid M N) (subset-Submonoid M K)
 
