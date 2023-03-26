@@ -1,16 +1,17 @@
-# Dependent sums of finite types
+# Dependent pair types of finite types
 
 ```agda
-module univalent-combinatorics.dependent-sum-finite-types where
+module univalent-combinatorics.dependent-pair-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types public
+
 open import foundation.complements
 open import foundation.contractible-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -40,46 +41,54 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A dependent sum of finite types indexed by a finite type is finite.
+In this file we study finiteness in relation to dependent pair types.
+
+## Properties
+
+### A dependent sum of finite types indexed by a finite type is finite
 
 ```agda
 abstract
   is-finite-Σ :
-    {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
-    is-finite X → ((x : X) → is-finite (Y x)) → is-finite (Σ X Y)
-  is-finite-Σ {X = X} {Y} is-finite-X is-finite-Y =
-    apply-universal-property-trunc-Prop is-finite-X
-      ( is-finite-Prop (Σ X Y))
-      ( λ (e : count X) →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-finite A → ((a : A) → is-finite (B a)) → is-finite (Σ A B)
+  is-finite-Σ {A = A} {B} H K =
+    apply-universal-property-trunc-Prop H
+      ( is-finite-Prop (Σ A B))
+      ( λ (e : count A) →
         apply-universal-property-trunc-Prop
-          ( finite-choice is-finite-X is-finite-Y)
-          ( is-finite-Prop (Σ X Y))
+          ( finite-choice H K)
+          ( is-finite-Prop (Σ A B))
           ( is-finite-count ∘ (count-Σ e)))
 
-Σ-𝔽 : {l1 l2 : Level} (X : 𝔽 l1) (Y : type-𝔽 X → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
-pr1 (Σ-𝔽 X Y) = Σ (type-𝔽 X) (λ x → type-𝔽 (Y x))
-pr2 (Σ-𝔽 X Y) =
+Σ-𝔽 : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
+pr1 (Σ-𝔽 A B) = Σ (type-𝔽 A) (λ a → type-𝔽 (B a))
+pr2 (Σ-𝔽 A B) =
   is-finite-Σ
-    ( is-finite-type-𝔽 X)
-    ( λ x → is-finite-type-𝔽 (Y x))
+    ( is-finite-type-𝔽 A)
+    ( λ a → is-finite-type-𝔽 (B a))
+```
 
--- Theorem 16.3.6 (iii) (a) and (c) implies (b)
+### If `A` and `Σ A B` are finite, then eacy `B a` is finite
 
+```agda
 abstract
   is-finite-fiber-is-finite-Σ :
-    {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
-    is-finite X → is-finite (Σ X Y) → (x : X) → is-finite (Y x)
-  is-finite-fiber-is-finite-Σ {l1} {l2} {X} {Y} f g x =
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-finite A → is-finite (Σ A B) → (a : A) → is-finite (B a)
+  is-finite-fiber-is-finite-Σ {l1} {l2} {A} {B} f g a =
     apply-universal-property-trunc-Prop f
-      ( is-finite-Prop (Y x))
-      ( λ e → map-trunc-Prop (λ h → count-fiber-count-Σ-count-base e h x) g)
+      ( is-finite-Prop (B a))
+      ( λ e → map-trunc-Prop (λ h → count-fiber-count-Σ-count-base e h a) g)
+```
 
--- Theorem 16.3.6 (iii) (b), (c), B has a section implies (a)
+### If `B` is a family of finite types over `A` equipped with a (mere) section and `Σ A B` is finite, then `A` is finite
 
+```agda
 abstract
   is-finite-base-is-finite-Σ-section :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
-    is-finite (Σ A B) → ((x : A) → is-finite (B x)) → is-finite A
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (a : A) → B a) →
+    is-finite (Σ A B) → ((a : A) → is-finite (B a)) → is-finite A
   is-finite-base-is-finite-Σ-section {l1} {l2} {A} {B} b f g =
     apply-universal-property-trunc-Prop f
       ( is-finite-Prop A)
@@ -106,20 +115,22 @@ abstract
 abstract
   is-finite-base-is-finite-Σ-mere-section :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    type-trunc-Prop ((x : A) → B x) →
-    is-finite (Σ A B) → ((x : A) → is-finite (B x)) → is-finite A
+    type-trunc-Prop ((a : A) → B a) →
+    is-finite (Σ A B) → ((a : A) → is-finite (B a)) → is-finite A
   is-finite-base-is-finite-Σ-mere-section {l1} {l2} {A} {B} H f g =
     apply-universal-property-trunc-Prop H
       ( is-finite-Prop A)
       ( λ b → is-finite-base-is-finite-Σ-section b f g)
 ```
 
+### If `B` is a family of finite inhabited types over a set `A` and `Σ A B` is finite, then `A` is finite
+
 ```agda
 abstract
   is-finite-base-is-finite-Σ-merely-inhabited :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    is-set A → (b : (x : A) → type-trunc-Prop (B x)) →
-    is-finite (Σ A B) → ((x : A) → is-finite (B x)) → is-finite A
+    is-set A → (b : (a : A) → type-trunc-Prop (B a)) →
+    is-finite (Σ A B) → ((a : A) → is-finite (B a)) → is-finite A
   is-finite-base-is-finite-Σ-merely-inhabited {l1} {l2} {A} {B} K b f g =
     is-finite-base-is-finite-Σ-mere-section
       ( choice-is-finite-Σ-is-finite-fiber K f g b)
@@ -127,11 +138,13 @@ abstract
       ( g)
 ```
 
+### If `B` is a family of finite types over `A` with finite complement, and if `Σ A B` is finite, then `A` is finite
+
 ```agda
 abstract
   is-finite-base-is-finite-complement :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-set A →
-    is-finite (Σ A B) → (g : (x : A) → is-finite (B x)) →
+    is-finite (Σ A B) → (g : (a : A) → is-finite (B a)) →
     is-finite (complement B) → is-finite A
   is-finite-base-is-finite-complement {l1} {l2} {A} {B} K f g h =
     is-finite-equiv

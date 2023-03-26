@@ -14,6 +14,7 @@ open import elementary-number-theory.binomial-theorem-integers public
 open import elementary-number-theory.binomial-theorem-natural-numbers public
 open import elementary-number-theory.bounded-sums-arithmetic-functions public
 open import elementary-number-theory.catalan-numbers public
+open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-ring-of-integers public
@@ -69,6 +70,7 @@ open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
+open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public

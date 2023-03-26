@@ -10,6 +10,7 @@ module univalent-combinatorics.pigeonhole-principle where
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
 open import foundation.cartesian-product-types
@@ -27,16 +28,20 @@ open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.repetitions
+open import foundation.repetitions-of-values
+open import foundation.repetitions-sequences
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.embeddings-standard-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.repetitions-of-values
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -50,125 +55,121 @@ injective.
 
 ## Theorems
 
-### The pigeonhole principle for the standard finite types
+### The pigeonhole principle for standard finite types
+
+#### Given an embedding `Fin k ↪ Fin l`, it follows that `k ≤ l`
 
 ```agda
-abstract
-  leq-emb-Fin :
-    (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
-  leq-emb-Fin zero-ℕ zero-ℕ f = refl-leq-ℕ zero-ℕ
-  leq-emb-Fin (succ-ℕ k) zero-ℕ f = ex-falso (map-emb f (inr star))
-  leq-emb-Fin zero-ℕ (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
-  leq-emb-Fin (succ-ℕ k) (succ-ℕ l) f = leq-emb-Fin k l (reduce-emb-Fin k l f)
+leq-emb-Fin :
+  (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
+leq-emb-Fin zero-ℕ zero-ℕ f = refl-leq-ℕ zero-ℕ
+leq-emb-Fin (succ-ℕ k) zero-ℕ f = ex-falso (map-emb f (inr star))
+leq-emb-Fin zero-ℕ (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
+leq-emb-Fin (succ-ℕ k) (succ-ℕ l) f = leq-emb-Fin k l (reduce-emb-Fin k l f)
 
-abstract
-  leq-is-emb-Fin :
-    (k l : ℕ) {f : Fin k → Fin l} → is-emb f → k ≤-ℕ l
-  leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (pair f H)
-
-abstract
-  leq-is-injective-Fin :
-    (k l : ℕ) {f : Fin k → Fin l} → is-injective f → k ≤-ℕ l
-  leq-is-injective-Fin k l H =
-    leq-is-emb-Fin k l (is-emb-is-injective (is-set-Fin l) H)
-
-abstract
-  is-not-emb-le-Fin :
-    (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
-  is-not-emb-le-Fin k l f p =
-    map-neg (leq-is-emb-Fin k l) (contradiction-le-ℕ l k p)
-
-abstract
-  is-not-injective-le-Fin :
-    (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-injective f)
-  is-not-injective-le-Fin k l f p =
-    map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin k l f p)
-
-abstract
-  is-not-injective-map-Fin-succ-Fin :
-    (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → ¬ (is-injective f)
-  is-not-injective-map-Fin-succ-Fin k f =
-    is-not-injective-le-Fin (succ-ℕ k) k f (le-succ-ℕ {k})
-
-abstract
-  no-embedding-ℕ-Fin :
-    (k : ℕ) → ¬ (ℕ ↪ Fin k)
-  no-embedding-ℕ-Fin k e =
-    contradiction-leq-ℕ k k
-      ( refl-leq-ℕ k)
-      ( leq-emb-Fin (succ-ℕ k) k (comp-emb e (emb-nat-Fin (succ-ℕ k))))
+leq-is-emb-Fin :
+  (k l : ℕ) {f : Fin k → Fin l} → is-emb f → k ≤-ℕ l
+leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (pair f H)
 ```
 
-### For any `f : Fin k → Fin l`, where `l < k`, we construct a pair of distinct elements of `Fin k` on which `f` assumes the same value
+#### Given an injective map `Fin k → Fin l`, it follows that `k ≤ l`
+
+```agda
+leq-is-injective-Fin :
+  (k l : ℕ) {f : Fin k → Fin l} → is-injective f → k ≤-ℕ l
+leq-is-injective-Fin k l H =
+  leq-is-emb-Fin k l (is-emb-is-injective (is-set-Fin l) H)
+```
+
+#### If `l < k`, then any map `f : Fin k → Fin l` is not an embedding
+
+```agda
+is-not-emb-le-Fin :
+  (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
+is-not-emb-le-Fin k l f p =
+  map-neg (leq-is-emb-Fin k l) (contradiction-le-ℕ l k p)
+```
+
+#### If `l < k`, then any map `f : Fin k → Fin l` is not injective
+
+```agda
+is-not-injective-le-Fin :
+  (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → is-not-injective f
+is-not-injective-le-Fin k l f p =
+  map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin k l f p)
+```
+
+#### There is no injective map `Fin (k + 1) → Fin k`
+
+```agda
+is-not-injective-map-Fin-succ-Fin :
+  (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → is-not-injective f
+is-not-injective-map-Fin-succ-Fin k f =
+  is-not-injective-le-Fin (succ-ℕ k) k f (le-succ-ℕ {k})
+```
+
+#### There is no embedding `ℕ ↪ Fin k`
+
+```agda
+no-embedding-ℕ-Fin :
+  (k : ℕ) → ¬ (ℕ ↪ Fin k)
+no-embedding-ℕ-Fin k e =
+  contradiction-leq-ℕ k k
+    ( refl-leq-ℕ k)
+    ( leq-emb-Fin (succ-ℕ k) k (comp-emb e (emb-nat-Fin (succ-ℕ k))))
+```
+
+#### For any `f : Fin k → Fin l`, where `l < k`, we construct a pair of distinct elements of `Fin k` on which `f` assumes the same value
 
 ```agda
 module _
   (k l : ℕ) (f : Fin k → Fin l) (p : le-ℕ l k)
   where
 
-  abstract
-    repetition-le-Fin : repetition f
-    repetition-le-Fin =
-      pair (pair x (pair y (pr2 w))) (pr1 w)
-      where
-      u : Σ (Fin k) (λ x → ¬ ((y : Fin k) → Id (f x) (f y) → Id x y))
-      u =
-        exists-not-not-forall-Fin k
-          ( λ x →
-            is-decidable-Π-Fin k
-              ( λ y →
-                is-decidable-function-type
-                  ( has-decidable-equality-Fin l (f x) (f y))
-                  ( has-decidable-equality-Fin k x y)))
-          ( λ q → is-not-injective-le-Fin k l f p (λ {x} {y} r → q x y r))
-      x : Fin k
-      x = pr1 u
-      H : ¬ ((y : Fin k) → Id (f x) (f y) → Id x y)
-      H = pr2 u
-      v : Σ (Fin k) (λ y → ¬ (Id (f x) (f y) → Id x y))
-      v = exists-not-not-forall-Fin k
-          ( λ y →
-            is-decidable-function-type
-              ( has-decidable-equality-Fin l (f x) (f y))
-              ( has-decidable-equality-Fin k x y))
-          ( H)
-      y : Fin k
-      y = pr1 v
-      K : ¬ (Id (f x) (f y) → Id x y)
-      K = pr2 v
-      w : Id (f x) (f y) × ¬ (Id x y)
-      w = exists-not-not-forall-count
-          ( λ _ → Id x y)
-          ( λ _ →
-            has-decidable-equality-Fin k x y)
-          ( count-is-decidable-is-prop
-            ( is-set-Fin l (f x) (f y))
-            ( has-decidable-equality-Fin l (f x) (f y)))
-          ( K)
+  repetition-of-values-le-Fin : repetition-of-values f
+  repetition-of-values-le-Fin =
+    repetition-of-values-is-not-injective-Fin k l f
+      ( is-not-injective-le-Fin k l f p)
 
-  pair-of-distinct-elements-repetition-le-Fin :
+  pair-of-distinct-elements-repetition-of-values-le-Fin :
     pair-of-distinct-elements (Fin k)
-  pair-of-distinct-elements-repetition-le-Fin = pr1 repetition-le-Fin
+  pair-of-distinct-elements-repetition-of-values-le-Fin =
+    pr1 repetition-of-values-le-Fin
 
-  fst-repetition-le-Fin : Fin k
-  fst-repetition-le-Fin =
-    fst-pair-of-distinct-elements pair-of-distinct-elements-repetition-le-Fin
+  first-repetition-of-values-le-Fin : Fin k
+  first-repetition-of-values-le-Fin =
+    first-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-le-Fin
 
-  snd-repetition-le-Fin : Fin k
-  snd-repetition-le-Fin =
-    snd-pair-of-distinct-elements pair-of-distinct-elements-repetition-le-Fin
+  second-repetition-of-values-le-Fin : Fin k
+  second-repetition-of-values-le-Fin =
+    second-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-le-Fin
 
-  distinction-repetition-le-Fin :
-    ¬ (Id fst-repetition-le-Fin snd-repetition-le-Fin)
-  distinction-repetition-le-Fin =
+  distinction-repetition-of-values-le-Fin :
+    ¬ (Id first-repetition-of-values-le-Fin second-repetition-of-values-le-Fin)
+  distinction-repetition-of-values-le-Fin =
     distinction-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-le-Fin
+      pair-of-distinct-elements-repetition-of-values-le-Fin
 
-  is-repetition-pair-of-distinct-elements-repetition-le-Fin :
-    is-repetition-pair-of-distinct-elements f
-      pair-of-distinct-elements-repetition-le-Fin
-  is-repetition-pair-of-distinct-elements-repetition-le-Fin =
-    is-repetition-pair-of-distinct-elements-repetition f repetition-le-Fin
+  is-repetition-of-values-repetition-of-values-le-Fin :
+    is-repetition-of-values f
+      pair-of-distinct-elements-repetition-of-values-le-Fin
+  is-repetition-of-values-repetition-of-values-le-Fin =
+    is-repetition-of-values-repetition-of-values f
+      repetition-of-values-le-Fin
+
+repetition-of-values-Fin-succ-to-Fin :
+  (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → repetition-of-values f
+repetition-of-values-Fin-succ-to-Fin k f =
+  repetition-of-values-le-Fin (succ-ℕ k) k f (le-succ-ℕ {k})
+
+repetition-of-values-sequence-Fin :
+  (k : ℕ) (f : ℕ → Fin k) → repetition-of-values f
+repetition-of-values-sequence-Fin k f =
+  repetition-of-values-left-factor
+    ( is-emb-nat-Fin (succ-ℕ k))
+    ( repetition-of-values-Fin-succ-to-Fin k (f ∘ nat-Fin (succ-ℕ k)))
 ```
 
 ### The pigeonhole principle for types equipped with a counting
@@ -177,111 +178,140 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (eA : count A) (eB : count B)
   where
+```
 
-  abstract
-    leq-emb-count :
-      (A ↪ B) → (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
-    leq-emb-count f =
-      leq-emb-Fin
-        ( number-of-elements-count eA)
-        ( number-of-elements-count eB)
-        ( comp-emb
-          ( comp-emb (emb-equiv (inv-equiv-count eB)) f)
-          ( emb-equiv (equiv-count eA)))
+#### If `f : A ↪ B` is an embedding between types equipped with a counting, then the number of elements of `A` is less than the number of elements of `B`
 
-  abstract
-    leq-is-emb-count :
-      {f : A → B} → is-emb f →
-      (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
-    leq-is-emb-count {f} H = leq-emb-count (pair f H)
+```agda
+  leq-emb-count :
+    (A ↪ B) → (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
+  leq-emb-count f =
+    leq-emb-Fin
+      ( number-of-elements-count eA)
+      ( number-of-elements-count eB)
+      ( comp-emb
+        ( comp-emb (emb-equiv (inv-equiv-count eB)) f)
+        ( emb-equiv (equiv-count eA)))
 
-  abstract
-    leq-is-injective-count :
-      {f : A → B} → is-injective f →
-      (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
-    leq-is-injective-count H =
-      leq-is-emb-count (is-emb-is-injective (is-set-count eB) H)
+  leq-is-emb-count :
+    {f : A → B} → is-emb f →
+    (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
+  leq-is-emb-count {f} H = leq-emb-count (pair f H)
+```
 
-  abstract
-    is-not-emb-le-count :
-      (f : A → B) →
-      le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
-      ¬ (is-emb f)
-    is-not-emb-le-count f p H =
-      is-not-emb-le-Fin
-        ( number-of-elements-count eA)
-        ( number-of-elements-count eB)
-        ( map-emb h)
-        ( p)
-        ( is-emb-map-emb h)
-      where
-      h : Fin (number-of-elements-count eA) ↪ Fin (number-of-elements-count eB)
-      h = comp-emb
-            ( emb-equiv (inv-equiv-count eB))
-            ( comp-emb (pair f H) (emb-equiv (equiv-count eA)))
+#### If `f : A → B` is an injective map between types equipped with a counting, then the number of elements of `A` is less than the number of elements of `B`
 
-  abstract
-    is-not-injective-le-count :
-      (f : A → B) →
-      le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
-      ¬ (is-injective f)
-    is-not-injective-le-count f p H =
-      is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
+```agda
+  leq-is-injective-count :
+    {f : A → B} → is-injective f →
+    (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
+  leq-is-injective-count H =
+    leq-is-emb-count (is-emb-is-injective (is-set-count eB) H)
+```
 
-abstract
-  no-embedding-ℕ-count :
-    {l : Level} {A : UU l} (e : count A) → ¬ (ℕ ↪ A)
-  no-embedding-ℕ-count e f =
-    no-embedding-ℕ-Fin
-    ( number-of-elements-count e)
-    ( comp-emb (emb-equiv (inv-equiv-count e)) f)
+#### There is no embedding `A ↪ B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
 
+```agda
+  is-not-emb-le-count :
+    (f : A → B) →
+    le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+    ¬ (is-emb f)
+  is-not-emb-le-count f p H =
+    is-not-emb-le-Fin
+      ( number-of-elements-count eA)
+      ( number-of-elements-count eB)
+      ( map-emb h)
+      ( p)
+      ( is-emb-map-emb h)
+    where
+    h : Fin (number-of-elements-count eA) ↪ Fin (number-of-elements-count eB)
+    h = comp-emb
+        ( emb-equiv (inv-equiv-count eB))
+          ( comp-emb (pair f H) (emb-equiv (equiv-count eA)))
+```
+
+#### There is no injective map `A → B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
+
+```agda
+  is-not-injective-le-count :
+    (f : A → B) →
+    le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+    is-not-injective f
+  is-not-injective-le-count f p H =
+    is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
+```
+
+#### There is no embedding `ℕ ↪ A` into a type equipped with a counting
+
+```agda
+no-embedding-ℕ-count :
+  {l : Level} {A : UU l} (e : count A) → ¬ (ℕ ↪ A)
+no-embedding-ℕ-count e f =
+  no-embedding-ℕ-Fin
+  ( number-of-elements-count e)
+  ( comp-emb (emb-equiv (inv-equiv-count e)) f)
+```
+
+#### For any map `f : A → B` between types equipped with a counting, if `|A| < |B|` then we construct a pair of distinct elements of `A` on which `f` assumes the same value
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (eA : count A) (eB : count B)
   (f : A → B)
   (p : le-ℕ (number-of-elements-count eB) (number-of-elements-count eA))
   where
 
-  repetition-le-count : repetition f
-  repetition-le-count =
-    map-equiv-repetition
+  repetition-of-values-le-count : repetition-of-values f
+  repetition-of-values-le-count =
+    map-equiv-repetition-of-values
       ( (map-inv-equiv-count eB ∘ f) ∘ (map-equiv-count eA))
       ( f)
       ( equiv-count eA)
       ( equiv-count eB)
       ( issec-map-inv-equiv-count eB ·r (f ∘ (map-equiv-count eA)))
-      ( repetition-le-Fin
+      ( repetition-of-values-le-Fin
         ( number-of-elements-count eA)
         ( number-of-elements-count eB)
         ( (map-inv-equiv-count eB ∘ f) ∘ (map-equiv-count eA))
         ( p))
 
-  pair-of-distinct-elements-repetition-le-count :
+  pair-of-distinct-elements-repetition-of-values-le-count :
     pair-of-distinct-elements A
-  pair-of-distinct-elements-repetition-le-count = pr1 repetition-le-count
+  pair-of-distinct-elements-repetition-of-values-le-count =
+    pr1 repetition-of-values-le-count
 
-  fst-repetition-le-count : A
-  fst-repetition-le-count =
-    fst-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-le-count
+  first-repetition-of-values-le-count : A
+  first-repetition-of-values-le-count =
+    first-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-le-count
 
-  snd-repetition-le-count : A
-  snd-repetition-le-count =
-    snd-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-le-count
+  second-repetition-of-values-le-count : A
+  second-repetition-of-values-le-count =
+    second-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-le-count
 
-  distinction-repetition-le-count :
-    ¬ (Id fst-repetition-le-count snd-repetition-le-count)
-  distinction-repetition-le-count =
+  distinction-repetition-of-values-le-count :
+    ¬ ( first-repetition-of-values-le-count ＝
+        second-repetition-of-values-le-count)
+  distinction-repetition-of-values-le-count =
     distinction-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-le-count
+      pair-of-distinct-elements-repetition-of-values-le-count
 
-  is-repetition-pair-of-distinct-elements-repetition-le-count :
-    is-repetition-pair-of-distinct-elements f
-      pair-of-distinct-elements-repetition-le-count
-  is-repetition-pair-of-distinct-elements-repetition-le-count =
-    is-repetition-pair-of-distinct-elements-repetition f
-      repetition-le-count
+  is-repetition-of-values-repetition-of-values-le-count :
+    is-repetition-of-values f
+      pair-of-distinct-elements-repetition-of-values-le-count
+  is-repetition-of-values-repetition-of-values-le-count =
+    is-repetition-of-values-repetition-of-values f
+      repetition-of-values-le-count
+
+repetition-of-values-nat-to-count :
+  {l : Level} {A : UU l} (e : count A) (f : ℕ → A) → repetition-of-values f
+repetition-of-values-nat-to-count e f =
+  repetition-of-values-right-factor
+    ( is-emb-is-equiv (is-equiv-map-inv-equiv (equiv-count e)))
+    ( repetition-of-values-sequence-Fin
+      ( number-of-elements-count e)
+      ( map-inv-equiv-count e ∘ f))
 ```
 
 ### The pigeonhole principle for finite types
@@ -290,269 +320,137 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : is-finite A) (K : is-finite B)
   where
-
-  abstract
-    leq-emb-is-finite :
-      (A ↪ B) →
-      (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
-    leq-emb-is-finite f =
-      apply-universal-property-trunc-Prop H P
-        ( λ eA →
-          apply-universal-property-trunc-Prop K P
-            ( λ eB →
-              concatenate-eq-leq-eq-ℕ
-                ( inv (compute-number-of-elements-is-finite eA H))
-                ( leq-emb-count eA eB f)
-                ( compute-number-of-elements-is-finite eB K)))
-      where
-      P : Prop lzero
-      P = leq-ℕ-Prop
-            ( number-of-elements-is-finite H)
-            ( number-of-elements-is-finite K)
-
-  abstract
-    leq-is-emb-is-finite :
-      {f : A → B} → is-emb f →
-      (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
-    leq-is-emb-is-finite {f} H =
-      leq-emb-is-finite (pair f H)
-
-  abstract
-    leq-is-injective-is-finite :
-      {f : A → B} → is-injective f →
-      (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
-    leq-is-injective-is-finite I =
-      leq-is-emb-is-finite (is-emb-is-injective (is-set-is-finite K) I)
-
-  abstract
-    is-not-emb-le-is-finite :
-      (f : A → B) →
-      le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
-      ¬ (is-emb f)
-    is-not-emb-le-is-finite f p E =
-      apply-universal-property-trunc-Prop H empty-Prop
-        ( λ e →
-          apply-universal-property-trunc-Prop K empty-Prop
-            ( λ d → is-not-emb-le-count e d f
-              ( concatenate-eq-le-eq-ℕ
-                ( compute-number-of-elements-is-finite d K)
-                ( p)
-                ( inv (compute-number-of-elements-is-finite e H)))
-              ( E)))
-
-  abstract
-    is-not-injective-le-is-finite :
-      (f : A → B) →
-      le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
-      ¬ (is-injective f)
-    is-not-injective-le-is-finite f p I =
-      is-not-emb-le-is-finite f p (is-emb-is-injective (is-set-is-finite K) I)
-
-abstract
-  no-embedding-ℕ-is-finite :
-    {l : Level} {A : UU l} (H : is-finite A) → ¬ (ℕ ↪ A)
-  no-embedding-ℕ-is-finite H f =
-    apply-universal-property-trunc-Prop H empty-Prop
-      ( λ e → no-embedding-ℕ-count e f)
 ```
 
-###
+#### If `A ↪ B` is an embedding between finite types, then `|A| ≤ |B|`
 
 ```agda
--- We define the predicate that the value of f at x is a value of f at another y
-
-is-repetition :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (a : A) → UU (l1 ⊔ l2)
-is-repetition {l1} {l2} {A} {B} f a = Σ A (λ x → ¬ (Id a x) × (Id (f a) (f x)))
-
--- On the standard finite sets, is-repetition f a is decidable
-
-is-decidable-is-repetition-Fin :
-  {k l : ℕ} (f : Fin k → Fin l) (x : Fin k) → is-decidable (is-repetition f x)
-is-decidable-is-repetition-Fin f x =
-  is-decidable-Σ-Fin
-    ( λ y →
-      is-decidable-prod
-        ( is-decidable-neg (has-decidable-equality-Fin x y))
-        ( has-decidable-equality-Fin (f x) (f y)))
-
--- We define the predicate that f maps two different elements to the same value
-
-has-repetition :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → UU (l1 ⊔ l2)
-has-repetition {A = A} f = Σ A (is-repetition f)
-
-has-repetition-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
-  {f : A → B} → has-repetition f → has-repetition (g ∘ f)
-has-repetition-comp g (pair x (pair y (pair s t))) =
-  pair x (pair y (pair s (ap g t)))
-
-has-repetition-left-factor :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {g : B → C}
-  {f : A → B} → is-emb f → has-repetition (g ∘ f) → has-repetition g
-has-repetition-left-factor {g = g} {f} H (pair a (pair b (pair K p))) =
-  pair (f a) (pair (f b) (pair (λ q → K (is-injective-is-emb H q)) p))
-
-has-repetition-right-factor :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {g : B → C}
-  {f : A → B} → is-emb g → has-repetition (g ∘ f) → has-repetition f
-has-repetition-right-factor {g = g} {f} H (pair a (pair b (pair K p))) =
-  pair a (pair b (pair K (is-injective-is-emb H p)))
-
--- On the standard finite sets, has-repetition f is decidable
-
-is-decidable-has-repetition-Fin :
-  {k l : ℕ} (f : Fin k → Fin l) → is-decidable (has-repetition f)
-is-decidable-has-repetition-Fin f =
-  is-decidable-Σ-Fin (is-decidable-is-repetition-Fin f)
-
--- If f is not injective, then it has a repetition.
-
-is-injective-map-Fin-zero-Fin :
-  {k : ℕ} (f : Fin zero-ℕ → Fin k) → is-injective f
-is-injective-map-Fin-zero-Fin f {()} {y}
-
-is-injective-map-Fin-one-Fin :
-  {k : ℕ} (f : Fin one-ℕ → Fin k) → is-injective f
-is-injective-map-Fin-one-Fin f {inr star} {inr star} p = refl
-
-has-repetition-is-not-injective-Fin :
-  {k l : ℕ} (f : Fin l → Fin k) → is-not-injective f → has-repetition f
-has-repetition-is-not-injective-Fin {l = zero-ℕ} f H =
-  ex-falso (H (is-injective-map-Fin-zero-Fin f))
-has-repetition-is-not-injective-Fin {l = succ-ℕ l} f H with
-  is-decidable-is-repetition-Fin f (inr star)
-... | inl r = pair (inr star) r
-... | inr g = α (has-repetition-is-not-injective-Fin {l = l} (f ∘ inl) K)
-  where
-  K : is-not-injective (f ∘ inl)
-  K I = H (λ {x} {y} → J x y)
+  leq-emb-is-finite :
+    (A ↪ B) →
+    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
+  leq-emb-is-finite f =
+    apply-universal-property-trunc-Prop H P
+      ( λ eA →
+        apply-universal-property-trunc-Prop K P
+          ( λ eB →
+            concatenate-eq-leq-eq-ℕ
+              ( inv (compute-number-of-elements-is-finite eA H))
+              ( leq-emb-count eA eB f)
+              ( compute-number-of-elements-is-finite eB K)))
     where
-    J : (x y : Fin (succ-ℕ l)) → Id (f x) (f y) → Id x y
-    J (inl x) (inl y) p = ap inl (I p)
-    J (inl x) (inr star) p = ex-falso (g (triple (inl x) Eq-Fin-eq (inv p)))
-    J (inr star) (inl y) p = ex-falso (g (triple (inl y) Eq-Fin-eq p))
-    J (inr star) (inr star) p = refl
-  α : has-repetition (f ∘ inl) → has-repetition f
-  α (pair x (pair y (pair h q))) =
-    pair (inl x) (pair (inl y) (pair (λ r → h (is-injective-inl r)) q))
+    P : Prop lzero
+    P = leq-ℕ-Prop
+        ( number-of-elements-is-finite H)
+          ( number-of-elements-is-finite K)
+
+  leq-is-emb-is-finite :
+    {f : A → B} → is-emb f →
+    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
+  leq-is-emb-is-finite {f} H =
+    leq-emb-is-finite (pair f H)
 ```
 
+#### If `A → B` is an injective map between finite types, then `|A| ≤ |B|`
+
 ```agda
-has-repetition-le-Fin :
-  {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → has-repetition f
-has-repetition-le-Fin f p =
-  has-repetition-is-not-injective-Fin f (is-not-injective-le-Fin f p)
-
-has-repetition-le-count :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (eA : count A) (eB : count B) →
-  (f : A → B) →
-  le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
-  has-repetition f
-has-repetition-le-count eA eB f p =
-  has-repetition-right-factor
-    ( is-emb-is-equiv (is-equiv-map-inv-equiv (equiv-count eB)))
-    ( has-repetition-left-factor
-      ( is-emb-is-equiv (is-equiv-map-equiv (equiv-count eA)))
-      ( has-repetition-le-Fin
-        ( map-equiv (inv-equiv-count eB) ∘ (f ∘ map-equiv-count eA))
-        ( p)))
-
-has-repetition-Fin-succ-to-Fin :
-  {k : ℕ} (f : Fin (succ-ℕ k) → Fin k) → has-repetition f
-has-repetition-Fin-succ-to-Fin {k} f =
-  has-repetition-le-Fin f (le-succ-ℕ {k})
-
-has-repetition-nat-to-Fin :
-  {k : ℕ} (f : ℕ → Fin k) → has-repetition f
-has-repetition-nat-to-Fin {k} f =
-  has-repetition-left-factor
-    ( is-emb-nat-Fin {succ-ℕ k})
-    ( has-repetition-Fin-succ-to-Fin (f ∘ nat-Fin))
-
-has-repetition-nat-to-count :
-  {l : Level} {A : UU l} (e : count A) (f : ℕ → A) → has-repetition f
-has-repetition-nat-to-count e f =
-  has-repetition-right-factor
-    ( is-emb-is-equiv (is-equiv-map-inv-equiv (equiv-count e)))
-    ( has-repetition-nat-to-Fin (map-inv-equiv-count e ∘ f))
+  leq-is-injective-is-finite :
+    {f : A → B} → is-injective f →
+    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
+  leq-is-injective-is-finite I =
+    leq-is-emb-is-finite (is-emb-is-injective (is-set-is-finite K) I)
 ```
 
-### Ordered repetitions of maps out of the natural numbers
+#### There are no embeddings between finite types `A` and `B` such that `|B| < |A|
 
 ```agda
-is-ordered-repetition-ℕ :
-  {l1 : Level} {A : UU l1} (f : ℕ → A) (x : ℕ) → UU l1
-is-ordered-repetition-ℕ f x = Σ ℕ (λ y → (le-ℕ y x) × Id (f y) (f x))
+  is-not-emb-le-is-finite :
+    (f : A → B) →
+    le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
+    ¬ (is-emb f)
+  is-not-emb-le-is-finite f p E =
+    apply-universal-property-trunc-Prop H empty-Prop
+      ( λ e →
+        apply-universal-property-trunc-Prop K empty-Prop
+          ( λ d → is-not-emb-le-count e d f
+            ( concatenate-eq-le-eq-ℕ
+              ( compute-number-of-elements-is-finite d K)
+              ( p)
+              ( inv (compute-number-of-elements-is-finite e H)))
+            ( E)))
+```
 
-is-decidable-is-ordered-repetition-ℕ-Fin :
-  {k : ℕ} (f : ℕ → Fin k) (x : ℕ) → is-decidable (is-ordered-repetition-ℕ f x)
-is-decidable-is-ordered-repetition-ℕ-Fin f x =
-  is-decidable-strictly-bounded-Σ-ℕ' x
-    ( λ y → Id (f y) (f x))
-    ( λ y → has-decidable-equality-Fin (f y) (f x))
+#### There are no injective maps between finite types `A` and `B` such that `|B| < |A|
 
-is-decidable-is-ordered-repetition-ℕ-count :
-  {l : Level} {A : UU l} (e : count A) (f : ℕ → A) (x : ℕ) →
-  is-decidable (is-ordered-repetition-ℕ f x)
-is-decidable-is-ordered-repetition-ℕ-count e f x =
-  is-decidable-strictly-bounded-Σ-ℕ' x
-    ( λ y → Id (f y) (f x))
-    ( λ y → has-decidable-equality-count e (f y) (f x))
+```agda
+  is-not-injective-le-is-finite :
+    (f : A → B) →
+    le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
+    is-not-injective f
+  is-not-injective-le-is-finite f p I =
+    is-not-emb-le-is-finite f p (is-emb-is-injective (is-set-is-finite K) I)
+```
 
-has-ordered-repetition-ℕ :
-  {l1 : Level} {A : UU l1} (f : ℕ → A) → UU l1
-has-ordered-repetition-ℕ f = Σ ℕ (is-ordered-repetition-ℕ f)
+#### There are no embeddings `ℕ ↪ A` into a finite type `A`
 
-has-ordered-repetition-comp-ℕ :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : A → B) {f : ℕ → A} →
-  has-ordered-repetition-ℕ f → has-ordered-repetition-ℕ (g ∘ f)
-has-ordered-repetition-comp-ℕ g (pair a (pair b (pair H p))) =
-  pair a (pair b (pair H (ap g p)))
+```agda
+no-embedding-ℕ-is-finite :
+  {l : Level} {A : UU l} (H : is-finite A) → ¬ (ℕ ↪ A)
+no-embedding-ℕ-is-finite H f =
+  apply-universal-property-trunc-Prop H empty-Prop
+    ( λ e → no-embedding-ℕ-count e f)
+```
 
-has-ordered-repetition-right-factor-ℕ :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {g : A → B} {f : ℕ → A} →
-  is-emb g → has-ordered-repetition-ℕ (g ∘ f) → has-ordered-repetition-ℕ f
-has-ordered-repetition-right-factor-ℕ E (pair a (pair b (pair H p))) =
-  pair a (pair b (pair H (is-injective-is-emb E p)))
+### Ordered repetitions of values of maps out of the natural numbers
 
-has-ordered-repetition-nat-to-Fin :
-  {k : ℕ} (f : ℕ → Fin k) → has-ordered-repetition-ℕ f
-has-ordered-repetition-nat-to-Fin f with
-  has-repetition-nat-to-Fin f
-... | pair x (pair y (pair H p)) with is-decidable-le-ℕ y x
-... | inl t = pair x (pair y (pair t (inv p)))
-... | inr t = pair y (pair x (pair L p))
-  where
-  L : le-ℕ x y
-  L = map-left-unit-law-coprod-is-empty
-        ( Id y x)
-        ( le-ℕ x y)
-        ( λ q → H (inv q))
-        ( map-left-unit-law-coprod-is-empty
-          ( le-ℕ y x)
-          ( coprod (Id y x)
-          ( le-ℕ x y))
-          ( t)
-          ( linear-le-ℕ y x))
+```agda
+ordered-repetition-of-values-sequence-Fin :
+  (k : ℕ) (f : ℕ → Fin k) → ordered-repetition-of-values-ℕ f
+ordered-repetition-of-values-sequence-Fin k f =
+  ordered-repetition-of-values-repetition-of-values-ℕ f
+    (repetition-of-values-sequence-Fin k f)
 
-has-ordered-repetition-nat-to-count :
-  {l : Level} {A : UU l} (e : count A) (f : ℕ → A) → has-ordered-repetition-ℕ f
-has-ordered-repetition-nat-to-count e f =
-  has-ordered-repetition-right-factor-ℕ
+ordered-repetition-of-values-nat-to-count :
+  {l : Level} {A : UU l} (e : count A) (f : ℕ → A) →
+  ordered-repetition-of-values-ℕ f
+ordered-repetition-of-values-nat-to-count e f =
+  ordered-repetition-of-values-right-factor-ℕ
     ( is-emb-is-equiv (is-equiv-map-inv-equiv (equiv-count e)))
-    ( has-ordered-repetition-nat-to-Fin
+    ( ordered-repetition-of-values-sequence-Fin
+      ( number-of-elements-count e)
       ( map-inv-equiv-count e ∘ f))
 
-first-repetition-nat-to-Fin :
-  {k : ℕ} (f : ℕ → Fin k) →
-  minimal-element-ℕ (λ x → Σ ℕ (λ y → (le-ℕ y x) × (Id (f y) (f x))))
-first-repetition-nat-to-Fin f =
+first-repetition-of-values-sequence-Fin :
+  (k : ℕ) (f : ℕ → Fin k) →
+  minimal-element-ℕ (λ x → Σ ℕ (λ y → (le-ℕ y x) × (f y ＝ f x)))
+first-repetition-of-values-sequence-Fin k f =
   well-ordering-principle-ℕ
     ( λ x → Σ ℕ (λ y → (le-ℕ y x) × (Id (f y) (f x))))
-    ( λ x → is-decidable-strictly-bounded-Σ-ℕ' x
-              ( λ y → Id (f y) (f x))
-              ( λ y → has-decidable-equality-Fin (f y) (f x)))
-    ( has-ordered-repetition-nat-to-Fin f)
+    ( λ x →
+      is-decidable-strictly-bounded-Σ-ℕ' x
+        ( λ y → f y ＝ f x)
+        ( λ y → has-decidable-equality-Fin k (f y) (f x)))
+    ( v , u , H , p)
+  where
+  r = ordered-repetition-of-values-sequence-Fin k f
+  u = pr1 (pr1 r)
+  v = pr1 (pr2 (pr1 r))
+  H = pr2 (pr2 (pr1 r))
+  p = pr2 r
+
+first-repetition-of-values-sequence-count :
+  {l : Level} {A : UU l} (e : count A) (f : ℕ → A) →
+  minimal-element-ℕ (λ x → Σ ℕ (λ y → (le-ℕ y x) × (f y ＝ f x)))
+first-repetition-of-values-sequence-count (k , e) f =
+  ( ( n) ,
+    ( ( u) ,
+      ( H) ,
+      ( is-injective-is-emb (is-emb-is-equiv (is-equiv-map-inv-equiv e)) p)) ,
+    ( λ t (v , K , q) → l t (v , K , ap (map-inv-equiv e) q)))
+  where
+  m = first-repetition-of-values-sequence-Fin k (map-inv-equiv e ∘ f)
+  n = pr1 m
+  u = pr1 (pr1 (pr2 m))
+  H = pr1 (pr2 (pr1 (pr2 m)))
+  p = pr2 (pr2 (pr1 (pr2 m)))
+  l = pr2 (pr2 m)
 ```

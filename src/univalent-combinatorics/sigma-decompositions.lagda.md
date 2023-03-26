@@ -10,7 +10,6 @@ module univalent-combinatorics.sigma-decompositions where
 open import foundation.sigma-decompositions public
 
 open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
@@ -27,7 +26,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import univalent-combinatorics.decidable-equivalence-relations
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.type-duality

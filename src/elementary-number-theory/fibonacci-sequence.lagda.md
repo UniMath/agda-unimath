@@ -123,8 +123,8 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
 
 ### A 3-for-2 property of divisibility of Fibonacci numbers
 
-We prove that if an two of the following three properties hold, then so does
-the third:
+We prove that if an two of the following three properties hold, then so does the
+third:
 
 1. `d | Fibonacci-ℕ m`
 2. `d | Fibonacci-ℕ n`
