@@ -1,4 +1,4 @@
-# Saturated congruences on monoids
+# Saturated congruence relations on monoids
 
 ```agda
 module group-theory.saturated-congruence-relations-monoids where

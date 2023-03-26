@@ -46,7 +46,7 @@ min-Fin-ℕ (succ-ℕ n) f = min-ℕ (f (inr star)) (min-Fin-ℕ n (λ k → f (
 
 ## Properties
 
-### Minimum is a greatest lower bound
+### The minimum of two natural numbers is a greatest lower bound
 
 ```agda
 leq-min-ℕ :
@@ -83,7 +83,7 @@ is-greatest-lower-bound-min-ℕ l m =
   λ x (x≤l , x≤m) → leq-min-ℕ x l m x≤l x≤m
 ```
 
-### Minimum is associative
+### Associativity of `min-ℕ`
 
 ```agda
 associative-min-ℕ :
@@ -125,7 +125,7 @@ idempotent-min-ℕ zero-ℕ = refl
 idempotent-min-ℕ (succ-ℕ x) = ap succ-ℕ (idempotent-min-ℕ x)
 ```
 
-### Addition distributes over min
+### Addition distributes over `min-ℕ`
 
 ```agda
 left-distributive-add-min-ℕ :

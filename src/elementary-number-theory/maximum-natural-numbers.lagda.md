@@ -89,7 +89,7 @@ is-least-upper-bound-max-ℕ m n =
   λ x (m≤x , n≤x) → leq-max-ℕ x m n m≤x n≤x
 ```
 
-### Maximum is associative
+### Associativity of `max-ℕ`
 
 ```agda
 associative-max-ℕ :
@@ -145,7 +145,7 @@ right-successor-diagonal-law-max-ℕ (succ-ℕ x) =
   ap succ-ℕ (right-successor-diagonal-law-max-ℕ x)
 ```
 
-### Addition distributes over max
+### Addition distributes over `max-ℕ`
 
 ```agda
 left-distributive-add-max-ℕ :

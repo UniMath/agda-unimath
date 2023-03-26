@@ -1,4 +1,4 @@
-# Saturated congruences on commutative monoids
+# Saturated congruence relations on commutative monoids
 
 ```agda
 module group-theory.saturated-congruence-relations-commutative-monoids where
@@ -175,7 +175,7 @@ module _
 
 ## Properties
 
-### Extensionality of the type of saturated congruence relations on a monoid
+### Extensionality of the type of saturated congruence relations on a commutative monoid
 
 ```agda
 relate-same-elements-saturated-congruence-Commutative-Monoid :

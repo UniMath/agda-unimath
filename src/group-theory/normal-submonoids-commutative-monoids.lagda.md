@@ -35,8 +35,8 @@ open import group-theory.subsets-commutative-monoids
 
 ## Idea
 
-A normal submonoid `N` of of a commutative monoid `M` is a monoid that
-corresponds uniquely to a saturated congruence relation ~ on `M` consisting of
+A normal submonoid `N` of of a commutative monoid `M` is a submonoid that
+corresponds uniquely to a saturated congruence relation `~` on `M` consisting of
 the elements congruent to `1`. This is the case if and only if for all `x : M`
 and `u : N` we have
 
