@@ -14,6 +14,7 @@ open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.kolakoski-sequence
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.pisano-periods
 
 open import finite-group-theory.finite-groups
 
@@ -85,6 +86,13 @@ A000244 = exp-ℕ 3
 ```agda
 A000720 : ℕ → ℕ
 A000720 = prime-counting-ℕ
+```
+
+### [A001175](https://oeis.org/A001175) Pisano periods
+
+```agda
+A001175 : ℕ → ℕ
+A001175 = pisano-period
 ```
 
 ### [A001477](https://oeis.org/A001477) The natural numbers
