@@ -52,6 +52,7 @@ open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinitude-of-primes public
+open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
 open import elementary-number-theory.kolakoski-sequence public
@@ -63,6 +64,7 @@ open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
 open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
+open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiset-coefficients public

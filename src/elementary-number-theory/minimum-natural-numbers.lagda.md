@@ -7,11 +7,13 @@ module elementary-number-theory.minimum-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.unit-type
 
 open import order-theory.greatest-lower-bounds-posets
@@ -34,6 +36,9 @@ min-ℕ 0 n = 0
 min-ℕ (succ-ℕ m) 0 = 0
 min-ℕ (succ-ℕ m) (succ-ℕ n) = succ-ℕ (min-ℕ m n)
 
+ap-min-ℕ : {x x' y y' : ℕ} → x ＝ x' → y ＝ y' → min-ℕ x y ＝ min-ℕ x' y'
+ap-min-ℕ p q = ap-binary min-ℕ p q
+
 min-Fin-ℕ : (n : ℕ) → (Fin (succ-ℕ n) → ℕ) → ℕ
 min-Fin-ℕ zero-ℕ f = f (inr star)
 min-Fin-ℕ (succ-ℕ n) f = min-ℕ (f (inr star)) (min-Fin-ℕ n (λ k → f (inl k)))
@@ -41,7 +46,7 @@ min-Fin-ℕ (succ-ℕ n) f = min-ℕ (f (inr star)) (min-Fin-ℕ n (λ k → f (
 
 ## Properties
 
-### Minimum is a greatest lower bound
+### The minimum of two natural numbers is a greatest lower bound
 
 ```agda
 leq-min-ℕ :
@@ -76,4 +81,69 @@ is-greatest-lower-bound-min-ℕ l m =
   ( leq-left-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m)),
     leq-right-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m))),
   λ x (x≤l , x≤m) → leq-min-ℕ x l m x≤l x≤m
+```
+
+### Associativity of `min-ℕ`
+
+```agda
+associative-min-ℕ :
+  (x y z : ℕ) → min-ℕ (min-ℕ x y) z ＝ min-ℕ x (min-ℕ y z)
+associative-min-ℕ zero-ℕ y z = refl
+associative-min-ℕ (succ-ℕ x) zero-ℕ zero-ℕ = refl
+associative-min-ℕ (succ-ℕ x) zero-ℕ (succ-ℕ z) = refl
+associative-min-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ = refl
+associative-min-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
+  ap succ-ℕ (associative-min-ℕ x y z)
+```
+
+### Zero laws for `min-ℕ`
+
+```agda
+left-zero-law-min-ℕ : (x : ℕ) → min-ℕ 0 x ＝ 0
+left-zero-law-min-ℕ x = refl
+
+right-zero-law-min-ℕ : (x : ℕ) → min-ℕ x 0 ＝ 0
+right-zero-law-min-ℕ zero-ℕ = refl
+right-zero-law-min-ℕ (succ-ℕ x) = refl
+```
+
+### Commutativity of `min-ℕ`
+
+```agda
+commutative-min-ℕ : (x y : ℕ) → min-ℕ x y ＝ min-ℕ y x
+commutative-min-ℕ zero-ℕ zero-ℕ = refl
+commutative-min-ℕ zero-ℕ (succ-ℕ y) = refl
+commutative-min-ℕ (succ-ℕ x) zero-ℕ = refl
+commutative-min-ℕ (succ-ℕ x) (succ-ℕ y) = ap succ-ℕ (commutative-min-ℕ x y)
+```
+
+### `min-ℕ` is idempotent
+
+```agda
+idempotent-min-ℕ : (x : ℕ) → min-ℕ x x ＝ x
+idempotent-min-ℕ zero-ℕ = refl
+idempotent-min-ℕ (succ-ℕ x) = ap succ-ℕ (idempotent-min-ℕ x)
+```
+
+### Addition distributes over `min-ℕ`
+
+```agda
+left-distributive-add-min-ℕ :
+  (x y z : ℕ) → add-ℕ x (min-ℕ y z) ＝ min-ℕ (add-ℕ x y) (add-ℕ x z)
+left-distributive-add-min-ℕ zero-ℕ y z =
+  ( left-unit-law-add-ℕ (min-ℕ y z)) ∙
+  ( ap-min-ℕ (inv (left-unit-law-add-ℕ y)) (inv (left-unit-law-add-ℕ z)))
+left-distributive-add-min-ℕ (succ-ℕ x) y z =
+  ( left-successor-law-add-ℕ x (min-ℕ y z)) ∙
+  ( ( ap succ-ℕ (left-distributive-add-min-ℕ x y z)) ∙
+    ( ap-min-ℕ
+      ( inv (left-successor-law-add-ℕ x y))
+      ( inv (left-successor-law-add-ℕ x z))))
+
+right-distributive-add-min-ℕ :
+  (x y z : ℕ) → add-ℕ (min-ℕ x y) z ＝ min-ℕ (add-ℕ x z) (add-ℕ y z)
+right-distributive-add-min-ℕ x y z =
+  ( commutative-add-ℕ (min-ℕ x y) z) ∙
+  ( ( left-distributive-add-min-ℕ z x y) ∙
+    ( ap-min-ℕ (commutative-add-ℕ z x) (commutative-add-ℕ z y)))
 ```
