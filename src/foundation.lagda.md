@@ -28,6 +28,7 @@ open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
+open import foundation.cartesian-products-set-quotients public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
 open import foundation.commuting-3-simplices-of-homotopies public
@@ -160,6 +161,8 @@ open import foundation.morphisms-cospans public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
+open import foundation.multivariable-functoriality-set-quotients public
+open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.negation public
 open import foundation.noncontractible-types public
@@ -174,6 +177,8 @@ open import foundation.powersets public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
+open import foundation.products-binary-relations public
+open import foundation.products-equivalence-relations public
 open import foundation.products-of-tuples-of-types public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
@@ -276,6 +281,7 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
+open import foundation.vectors-set-quotients public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public

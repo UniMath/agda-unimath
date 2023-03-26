@@ -299,3 +299,46 @@ functional-vec-Set : {l : Level} → Set l → ℕ → Set l
 pr1 (functional-vec-Set A n) = functional-vec (type-Set A) n
 pr2 (functional-vec-Set A n) = is-set-functional-vec n (is-set-type-Set A)
 ```
+
+### Adding the tail to the head gives the same vector
+
+#### Adding the tail to the head gives the same listed vector
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  cons-head-tail-vec :
+    (n : ℕ) →
+    (v : vec A (succ-ℕ n)) →
+    ((head-vec v) ∷ (tail-vec v)) ＝ v
+  cons-head-tail-vec n (x ∷ v) = refl
+```
+
+#### Adding the tail to the head gives the same functional vector
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+  htpy-cons-head-tail-functional-vec :
+    ( n : ℕ) →
+    ( v : functional-vec A (succ-ℕ n)) →
+    ( cons-functional-vec n
+      ( head-functional-vec n v)
+      ( tail-functional-vec n v)) ~
+      ( v)
+  htpy-cons-head-tail-functional-vec n v (inl x) = refl
+  htpy-cons-head-tail-functional-vec n v (inr star) = refl
+
+  cons-head-tail-functional-vec :
+    ( n : ℕ) →
+    ( v : functional-vec A (succ-ℕ n)) →
+    ( cons-functional-vec n
+      ( head-functional-vec n v)
+      ( tail-functional-vec n v)) ＝
+      ( v)
+  cons-head-tail-functional-vec n v =
+    eq-htpy (htpy-cons-head-tail-functional-vec n v)
+```
