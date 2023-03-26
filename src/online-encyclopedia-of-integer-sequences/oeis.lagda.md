@@ -12,6 +12,7 @@ open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
+open import elementary-number-theory.kolakoski-sequence
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.finite-groups
@@ -28,6 +29,13 @@ open import foundation.functions
 ```agda
 A000001 : ℕ → ℕ
 A000001 = number-of-groups-of-order
+```
+
+### [A000002](https://oeis.org/A000002) The Kolakoski sequence
+
+```agda
+A000002 : ℕ → ℕ
+A000002 = kolakoski
 ```
 
 ### [A000010](https://oeis.org/A000010) Euler's totient function

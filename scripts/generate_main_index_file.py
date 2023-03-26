@@ -44,7 +44,7 @@ def generate_namespace_entry_list(namespace):
                 f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
 
     module_titles_and_mdfiles = sorted(
-        zip(module_titles, module_mdfiles), key=lambda tm: (tm[0].casefold(), tm[1]))
+        zip(module_titles, module_mdfiles), key=lambda tm: (tm[1].split(".")))
 
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
@@ -87,6 +87,7 @@ summary_template = """
     - [Cite the library](CITATION.cff)
   - [Guidelines](CODINGSTYLE.md)
     - [Structure your file](FILE-CONVENTIONS.md)
+        - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
     - [Library coding style](CODINGSTYLE.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
   - [Everything](everything.md)
