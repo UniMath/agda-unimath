@@ -25,6 +25,7 @@ open import group-theory.commutators-groups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.congruence-relations-abelian-groups public
+open import group-theory.congruence-relations-commutative-monoids public
 open import group-theory.congruence-relations-groups public
 open import group-theory.congruence-relations-monoids public
 open import group-theory.congruence-relations-semigroups public
@@ -65,6 +66,7 @@ open import group-theory.groups public
 open import group-theory.higher-group-actions public
 open import group-theory.higher-groups public
 open import group-theory.homomorphisms-abelian-groups public
+open import group-theory.homomorphisms-commutative-monoids public
 open import group-theory.homomorphisms-concrete-group-actions public
 open import group-theory.homomorphisms-concrete-groups public
 open import group-theory.homomorphisms-generated-subgroups public
@@ -94,6 +96,7 @@ open import group-theory.monomorphisms-groups public
 open import group-theory.normal-subgroups public
 open import group-theory.normal-subgroups-concrete-groups public
 open import group-theory.normal-submonoids public
+open import group-theory.normal-submonoids-commutative-monoids public
 open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public
@@ -112,6 +115,8 @@ open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
 open import group-theory.representations-monoids public
+open import group-theory.saturated-congruence-relations-commutative-monoids public
+open import group-theory.saturated-congruence-relations-monoids public
 open import group-theory.semigroups public
 open import group-theory.sheargroups public
 open import group-theory.shriek-concrete-group-actions public
@@ -123,7 +128,10 @@ open import group-theory.subgroups-concrete-groups public
 open import group-theory.subgroups-generated-by-subsets-groups public
 open import group-theory.subgroups-higher-groups public
 open import group-theory.submonoids public
+open import group-theory.submonoids-commutative-monoids public
 open import group-theory.subsemigroups public
+open import group-theory.subsets-commutative-monoids public
+open import group-theory.subsets-monoids public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.symmetric-concrete-groups public
