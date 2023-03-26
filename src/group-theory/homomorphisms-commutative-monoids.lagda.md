@@ -7,11 +7,7 @@ module group-theory.homomorphisms-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids

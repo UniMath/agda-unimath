@@ -10,7 +10,6 @@ module foundation.multivariable-functoriality-set-quotients where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.functoriality-set-quotients
-open import foundation.multivariable-operations
 open import foundation.set-quotients
 open import foundation.universe-levels
 open import foundation.vectors-set-quotients

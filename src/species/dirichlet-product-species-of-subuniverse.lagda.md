@@ -12,17 +12,13 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.product-decompositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.species-of-types-in-subuniverse

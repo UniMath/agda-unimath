@@ -7,7 +7,6 @@ module foundation.repetitions-sequences where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
 
@@ -18,8 +17,8 @@ open import foundation.repetitions-of-values
 open import foundation.sequences
 open import foundation.unit-type
 
-open import foundation-core.embeddings
 open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.injective-maps

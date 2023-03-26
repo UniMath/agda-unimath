@@ -46,7 +46,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.repetitions
+open import foundation.repetitions-of-values
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -116,11 +116,11 @@ module _
   -- The map `i ↦ eⁱ a` repeats itself
 
   repetition-iterate-automorphism-Fin :
-    repetition
+    repetition-of-values
       ( λ (k : Fin (succ-ℕ (number-of-elements-count eX))) →
         iterate (nat-Fin (succ-ℕ (number-of-elements-count eX)) k) (map-equiv f) a)
   repetition-iterate-automorphism-Fin =
-    repetition-le-count
+    repetition-of-values-le-count
       ( count-Fin (succ-ℕ (number-of-elements-count eX)))
       ( eX)
       ( λ k → iterate (nat-Fin (succ-ℕ (number-of-elements-count eX)) k) (map-equiv f) a)

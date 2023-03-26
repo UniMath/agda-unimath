@@ -14,15 +14,12 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 
-open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
