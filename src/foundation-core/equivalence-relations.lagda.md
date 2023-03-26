@@ -10,6 +10,7 @@ module foundation-core.equivalence-relations where
 open import foundation.binary-relations
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
+open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
@@ -142,4 +143,24 @@ equiv-trans-Eq-Rel' :
   sim-Eq-Rel R y z → (sim-Eq-Rel R x y ≃ sim-Eq-Rel R x z)
 equiv-trans-Eq-Rel' R r =
   equiv-iff' (prop-Eq-Rel R _ _) (prop-Eq-Rel R _ _) (iff-trans-Eq-Rel' R r)
+```
+
+## Examples
+
+### The indiscrete equivalence relation on a type
+
+```agda
+indiscrete-Eq-Rel :
+  {l1 : Level} (A : UU l1) → Eq-Rel lzero A
+pr1 (indiscrete-Eq-Rel A) x y = unit-Prop
+pr1 (pr2 (indiscrete-Eq-Rel A)) = star
+pr1 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ = star
+pr2 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ _ = star
+
+raise-indiscrete-Eq-Rel :
+  {l1 : Level} (l2 : Level) (A : UU l1) → Eq-Rel l2 A
+pr1 (raise-indiscrete-Eq-Rel l A) x y = raise-unit-Prop l
+pr1 (pr2 (raise-indiscrete-Eq-Rel l A)) = raise-star
+pr1 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ = raise-star
+pr2 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ _ = raise-star
 ```
