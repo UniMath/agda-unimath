@@ -7,6 +7,7 @@ module online-encyclopedia-of-integer-sequences.oeis where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.ackermann-function
 open import elementary-number-theory.cofibonacci
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
@@ -108,4 +109,11 @@ A001177 = cofibonacci
 ```agda
 A001477 : ℕ → ℕ
 A001477 = id
+```
+
+### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann-Péter function
+
+```agda
+A046859 : ℕ → ℕ
+A046859 n = ackermann n n
 ```
