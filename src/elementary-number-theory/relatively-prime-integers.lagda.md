@@ -66,6 +66,5 @@ relatively-prime-quotient-div-ℤ :
 relatively-prime-quotient-div-ℤ H =
   is-relatively-prime-is-relatively-prime-abs-ℤ
     {!!}
-
 -}
 ```

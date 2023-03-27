@@ -322,13 +322,13 @@ is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
 ```agda
 simplify-mul-quotient-div-ℕ :
   {a b c : ℕ}  → is-nonzero-ℕ c →
-  (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) → 
+  (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
   ( mul-ℕ (quotient-div-ℕ b a H) (quotient-div-ℕ c b K)) ＝
   ( quotient-div-ℕ c a L)
 simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
   is-injective-mul-ℕ' c nz
     ( equational-reasoning
-      mul-ℕ (mul-ℕ a/b b/c) c 
+      mul-ℕ (mul-ℕ a/b b/c) c
       ＝ mul-ℕ a/b (mul-ℕ b/c c)   by associative-mul-ℕ a/b b/c c
       ＝ mul-ℕ a/b b               by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
       ＝ a                         by eq-quotient-div-ℕ b a H
@@ -365,13 +365,13 @@ pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
         ＝ mul-ℕ (quotient-div-ℕ d a H) d  by inv (eq-quotient-div-ℕ d a H))
 ```
 
-### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero`. If `d` divides `b/c` then `d` divides `a/c`.
+### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero`. If `d`divides`b/c`then`d`divides`a/c`.
 
 ```agda
 div-quotient-div-div-quotient-div-ℕ :
   {a b c d : ℕ} → is-nonzero-ℕ c → (H : div-ℕ b a)
   (K : div-ℕ c b) (L : div-ℕ c a) →
-  div-ℕ d (quotient-div-ℕ c b K) → 
+  div-ℕ d (quotient-div-ℕ c b K) →
   div-ℕ d (quotient-div-ℕ c a L)
 div-quotient-div-div-quotient-div-ℕ {a} {b} {c} {d} nz H K L M =
   tr

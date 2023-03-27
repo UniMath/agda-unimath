@@ -412,7 +412,7 @@ is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
 is-common-divisor-quotients-div-quotient-ℕ :
   {a b d e n : ℕ} → is-nonzero-ℕ e → (H : is-common-divisor-ℕ a b d)
   (K : div-ℕ e d) → div-ℕ n (quotient-div-ℕ e d K) →
-  (M : is-common-divisor-ℕ a b e) → 
+  (M : is-common-divisor-ℕ a b e) →
   is-common-divisor-ℕ
     ( quotient-div-ℕ e a (pr1 M))
     ( quotient-div-ℕ e b (pr2 M))
