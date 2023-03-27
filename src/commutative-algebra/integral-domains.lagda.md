@@ -8,7 +8,7 @@ module commutative-algebra.integral-domains where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import commutative-algebra.zero-commutative-rings
+open import commutative-algebra.trivial-commutative-rings
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -48,7 +48,7 @@ Integral-Domain l =
   Σ ( Commutative-Ring l)
     ( λ R →
       cancellation-property-Commutative-Ring R ×
-      is-nonzero-commutative-ring-Commutative-Ring R)
+      is-nontrivial-Commutative-Ring R)
 
 module _
   {l : Level} (R : Integral-Domain l)
