@@ -66,6 +66,10 @@ module _
   revert-vec : {n : ℕ} → vec A n → vec A n
   revert-vec empty-vec = empty-vec
   revert-vec (x ∷ v) = snoc-vec (revert-vec v) x
+
+  all-vec : {l2 : Level} {n : ℕ} → (P : A → UU l2) → vec A n → UU l2
+  all-vec P empty-vec = raise-unit _
+  all-vec P (x ∷ v) = P x × all-vec P v
 ```
 
 ### The functional type of vectors
