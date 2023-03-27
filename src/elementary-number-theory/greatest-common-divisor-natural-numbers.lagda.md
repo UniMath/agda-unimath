@@ -242,9 +242,9 @@ is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
 ### Any divisor of `gcd a b` is a common divisor of `a` and `b`
 
 ```agda
-is-divisor-left-div-gcd-ℕ :
+div-left-factor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x a
-is-divisor-left-div-gcd-ℕ a b x d with
+div-left-factor-div-gcd-ℕ a b x d with
   is-decidable-is-zero-ℕ (add-ℕ a b)
 ... | inl p =
   concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-left-is-zero-add-ℕ a b p))
@@ -268,9 +268,9 @@ is-divisor-left-div-gcd-ℕ a b x d with
        ( is-nonzero-gcd-ℕ a b np)
   β = eq-euclidean-division-ℕ (gcd-ℕ a b) a
 
-is-divisor-right-div-gcd-ℕ :
+div-right-factor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x b
-is-divisor-right-div-gcd-ℕ a b x d with
+div-right-factor-div-gcd-ℕ a b x d with
   is-decidable-is-zero-ℕ (add-ℕ a b)
 ... | inl p =
   concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-right-is-zero-add-ℕ a b p))
@@ -295,13 +295,23 @@ is-divisor-right-div-gcd-ℕ a b x d with
 
 is-common-divisor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → is-common-divisor-ℕ a b x
-pr1 (is-common-divisor-div-gcd-ℕ a b x d) = is-divisor-left-div-gcd-ℕ a b x d
-pr2 (is-common-divisor-div-gcd-ℕ a b x d) = is-divisor-right-div-gcd-ℕ a b x d
+pr1 (is-common-divisor-div-gcd-ℕ a b x d) =
+  div-left-factor-div-gcd-ℕ a b x d
+pr2 (is-common-divisor-div-gcd-ℕ a b x d) =
+  div-right-factor-div-gcd-ℕ a b x d
 ```
 
 ### The gcd of `a` and `b` is a common divisor
 
 ```agda
+div-left-factor-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) a
+div-left-factor-gcd-ℕ a b =
+  div-left-factor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+
+div-right-factor-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) b
+div-right-factor-gcd-ℕ a b =
+  div-right-factor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+
 is-common-divisor-gcd-ℕ : (a b : ℕ) → is-common-divisor-ℕ a b (gcd-ℕ a b)
 is-common-divisor-gcd-ℕ a b =
   is-common-divisor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))

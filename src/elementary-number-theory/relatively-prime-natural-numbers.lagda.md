@@ -7,8 +7,10 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-propositions

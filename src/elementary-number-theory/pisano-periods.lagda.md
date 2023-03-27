@@ -29,6 +29,8 @@ open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.repetitions-of-values
+open import univalent-combinatorics.repetitions-of-values-sequences
+open import univalent-combinatorics.sequences-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -138,7 +140,7 @@ is-ordered-repetition-fibonacci-pair-Fin k x =
 minimal-ordered-repetition-fibonacci-pair-Fin :
   (k : ℕ) → minimal-element-ℕ (is-ordered-repetition-fibonacci-pair-Fin k)
 minimal-ordered-repetition-fibonacci-pair-Fin k =
-  first-repetition-of-values-sequence-count
+  minimal-element-repetition-of-values-sequence-count
     ( count-prod (count-Fin (succ-ℕ k)) (count-Fin (succ-ℕ k)))
     ( fibonacci-pair-Fin k)
 ```

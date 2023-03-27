@@ -7,6 +7,7 @@ module online-encyclopedia-of-integer-sequences.oeis where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.cofibonacci
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
@@ -93,6 +94,13 @@ A000720 = prime-counting-ℕ
 ```agda
 A001175 : ℕ → ℕ
 A001175 = pisano-period
+```
+
+### [A001177](https://oeis.org/A001177) The cofibonacci sequence
+
+```agda
+A001177 : ℕ → ℕ
+A001177 = cofibonacci
 ```
 
 ### [A001477](https://oeis.org/A001477) The natural numbers

@@ -9,11 +9,14 @@ module elementary-number-theory.fibonacci-sequence where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negation
 ```
 
 </details>
@@ -119,6 +122,28 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
                   ( Fibonacci-ℕ (succ-ℕ m))
                   ( Fibonacci-ℕ (succ-ℕ n))
                   ( Fibonacci-ℕ n)))))))))
+```
+
+### Consecutive Fibonacci numbers are relatively prime
+
+```agda
+is-one-div-fibonacci-succ-div-fibonacci-ℕ :
+  (d n : ℕ) → div-ℕ d (Fibonacci-ℕ n) → div-ℕ d (Fibonacci-ℕ (succ-ℕ n)) →
+  is-one-ℕ d
+is-one-div-fibonacci-succ-div-fibonacci-ℕ d zero-ℕ H K = is-one-div-one-ℕ d K
+is-one-div-fibonacci-succ-div-fibonacci-ℕ d (succ-ℕ n) H K =
+  is-one-div-fibonacci-succ-div-fibonacci-ℕ d n
+    ( div-right-summand-ℕ d (Fibonacci-ℕ (succ-ℕ n)) (Fibonacci-ℕ n) H K)
+    ( H)
+
+relatively-prime-fibonacci-fibonacci-succ-ℕ :
+  (n : ℕ) → relatively-prime-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n))
+relatively-prime-fibonacci-fibonacci-succ-ℕ n =
+  is-one-div-fibonacci-succ-div-fibonacci-ℕ
+    ( gcd-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n)))
+    ( n)
+    ( div-left-factor-gcd-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n)))
+    ( div-right-factor-gcd-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n)))
 ```
 
 ### A 3-for-2 property of divisibility of Fibonacci numbers

@@ -7,6 +7,7 @@ module univalent-combinatorics.sequences-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
@@ -18,6 +19,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
@@ -26,6 +28,7 @@ open import foundation.sequences
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -121,10 +124,10 @@ ordered-repetition-of-values-nat-to-count e f =
       ( number-of-elements-count e)
       ( map-inv-equiv-count e ∘ f))
 
-first-repetition-of-values-sequence-Fin :
+minimal-element-repetition-of-values-sequence-Fin :
   (k : ℕ) (f : ℕ → Fin k) →
   minimal-element-ℕ (λ x → Σ ℕ (λ y → (le-ℕ y x) × (f y ＝ f x)))
-first-repetition-of-values-sequence-Fin k f =
+minimal-element-repetition-of-values-sequence-Fin k f =
   well-ordering-principle-ℕ
     ( λ x → Σ ℕ (λ y → (le-ℕ y x) × (Id (f y) (f x))))
     ( λ x →
@@ -139,17 +142,17 @@ first-repetition-of-values-sequence-Fin k f =
   H = pr2 (pr2 (pr1 r))
   p = pr2 r
 
-first-repetition-of-values-sequence-count :
+minimal-element-repetition-of-values-sequence-count :
   {l : Level} {A : UU l} (e : count A) (f : ℕ → A) →
   minimal-element-ℕ (λ x → Σ ℕ (λ y → (le-ℕ y x) × (f y ＝ f x)))
-first-repetition-of-values-sequence-count (k , e) f =
+minimal-element-repetition-of-values-sequence-count (k , e) f =
   ( ( n) ,
     ( ( u) ,
       ( H) ,
       ( is-injective-is-emb (is-emb-is-equiv (is-equiv-map-inv-equiv e)) p)) ,
     ( λ t (v , K , q) → l t (v , K , ap (map-inv-equiv e) q)))
   where
-  m = first-repetition-of-values-sequence-Fin k (map-inv-equiv e ∘ f)
+  m = minimal-element-repetition-of-values-sequence-Fin k (map-inv-equiv e ∘ f)
   n = pr1 m
   u = pr1 (pr1 (pr2 m))
   H = pr1 (pr2 (pr1 (pr2 m)))
