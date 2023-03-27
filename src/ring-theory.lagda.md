@@ -30,7 +30,6 @@ open import ring-theory.modules-rings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
-open import ring-theory.nontrivial-rings public
 open import ring-theory.opposite-rings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
@@ -43,4 +42,5 @@ open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
 open import ring-theory.sums-rings public
 open import ring-theory.sums-semirings public
+open import ring-theory.trivial-rings public
 ```
