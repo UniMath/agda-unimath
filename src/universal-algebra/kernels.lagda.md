@@ -22,16 +22,16 @@ open import linear-algebra.vectors
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
 open import universal-algebra.congruences
-open import universal-algebra.signatures
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.signatures
 ```
 
 </details>
 
 ## Idea
 
-The kernel of a homomorphism `f` of algebras is the congruence
-relation given by `x ~ y` iff `f x ~ f y`.
+The kernel of a homomorphism `f` of algebras is the congruence relation given by
+`x ~ y` iff `f x ~ f y`.
 
 ## Definitions
 
