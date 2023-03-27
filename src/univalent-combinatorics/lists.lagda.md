@@ -14,7 +14,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.negation
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -25,6 +24,7 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types

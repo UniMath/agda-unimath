@@ -77,4 +77,10 @@ module _
     { l4 : Level } →
     congruence-Algebra l4 → ( Eq-Rel l4 (type-Algebra Sg Th Alg))
   eq-rel-congruence-Algebra = pr1
+
+  respects-operations-congruence-Algebra :
+    { l4 : Level } →
+    ( R : congruence-Algebra l4) →
+    ( respects-operations (eq-rel-congruence-Algebra R))
+  respects-operations-congruence-Algebra = pr2
 ```
