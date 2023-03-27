@@ -82,6 +82,7 @@ open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.repetitions-of-values public
+open import univalent-combinatorics.repetitions-of-values-sequences public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public
 open import univalent-combinatorics.set-quotients-of-index-two public

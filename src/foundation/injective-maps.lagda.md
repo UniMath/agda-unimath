@@ -34,7 +34,7 @@ is recommended to use the notion of embedding.
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-not-injective : (A → B) → UU (l1 ⊔ l2)
   is-not-injective f = ¬ (is-injective f)
 ```

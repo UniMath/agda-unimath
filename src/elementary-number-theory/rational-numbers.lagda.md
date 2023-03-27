@@ -7,7 +7,7 @@ module elementary-number-theory.rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.bezouts-lemma
+open import elementary-number-theory.bezouts-lemma-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.fractions

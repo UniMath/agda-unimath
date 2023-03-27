@@ -32,7 +32,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The sieve of Erathostenes is a sequence of subsets of the natural numbers used to prove the infinitude of primes.
+The sieve of Erathostenes is a sequence of subsets of the natural numbers used
+to prove the infinitude of primes.
 
 ## Definition
 

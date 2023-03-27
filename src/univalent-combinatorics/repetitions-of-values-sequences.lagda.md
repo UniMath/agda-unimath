@@ -7,9 +7,9 @@ module univalent-combinatorics.repetitions-of-values-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.decidable-types
 
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -42,7 +42,6 @@ is-decidable-is-ordered-repetition-of-values-ℕ-Fin k f x = {!!}
     ( λ y → Id (f y) (f x))
     ( λ y → has-decidable-equality-Fin k (f y) (f x))
 -}
-
 
 {-
 is-decidable-is-ordered-repetition-of-values-ℕ-count :

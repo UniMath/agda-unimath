@@ -112,7 +112,7 @@ ordered-repetition-of-values-right-factor-ℕ E ((a , b , H) , p) =
 
 ```agda
 module _
-  {l : Level} {A : UU l} 
+  {l : Level} {A : UU l}
   where
 
   ordered-repetition-of-values-repetition-of-values-ℕ' :

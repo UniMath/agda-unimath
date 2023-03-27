@@ -137,7 +137,7 @@ div-is-one-ℕ .1 x refl = div-one-ℕ x
 
 ### `x | 1` implies `x ＝ 1`
 
-```agda 
+```agda
 is-one-div-one-ℕ : (x : ℕ) → div-ℕ x 1 → is-one-ℕ x
 is-one-div-one-ℕ x H = antisymmetric-div-ℕ x 1 H (div-one-ℕ x)
 ```

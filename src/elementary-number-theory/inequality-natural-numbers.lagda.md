@@ -412,4 +412,5 @@ leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 
 ## See also
 
-- Strict inequality of the natural numbers is defined in [`strict-inequality-natural-numbers`](elementary-number-theory.strict-inequality-natural-numbers.md)
+- Strict inequality of the natural numbers is defined in
+  [`strict-inequality-natural-numbers`](elementary-number-theory.strict-inequality-natural-numbers.md)

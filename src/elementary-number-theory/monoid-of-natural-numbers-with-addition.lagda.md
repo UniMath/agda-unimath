@@ -52,4 +52,3 @@ pr2 (pr2 (pr2 ℕ-Monoid)) = right-unit-law-add-ℕ
 pr1 ℕ-Commutative-Monoid = ℕ-Monoid
 pr2 ℕ-Commutative-Monoid = commutative-add-ℕ
 ```
-

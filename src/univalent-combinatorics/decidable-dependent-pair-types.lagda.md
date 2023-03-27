@@ -31,7 +31,8 @@ We describe conditions under which dependent sums are decidable.
 
 ## Note
 
-It is *not* the case for a family `B` of decidable types over a finite type `A`, that the dependent pair type `Σ A B` is decidable.
+It is _not_ the case for a family `B` of decidable types over a finite type `A`,
+that the dependent pair type `Σ A B` is decidable.
 
 ## Properties
 

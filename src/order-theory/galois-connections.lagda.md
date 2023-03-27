@@ -24,7 +24,8 @@ open import order-theory.posets
 
 ## Idea
 
-A **Galois connection** between posets `P` and `Q` is a pair of order preserving maps `f : P → Q` and `g : Q → P` such that the logical equivalence
+A **Galois connection** between posets `P` and `Q` is a pair of order preserving
+maps `f : P → Q` and `g : Q → P` such that the logical equivalence
 
 ```md
   (f x ≤ y) ↔ (x ≤ g y)
@@ -423,7 +424,7 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   (G : Galois-Connection P Q)
   where
-  
+
   compute-upper-lower-upper-adjoint-Galois-Connection :
     (y : element-Poset Q) →
     map-upper-adjoint-Galois-Connection P Q G y ＝
@@ -540,4 +541,5 @@ module _
 
 ## References
 
-- Erné, Koslowski, Melton, Strecker. A primer on Galois connections. Annals New York Academy of Sciences 704 (1993)
+- Erné, Koslowski, Melton, Strecker. A primer on Galois connections. Annals New
+  York Academy of Sciences 704 (1993)

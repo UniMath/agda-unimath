@@ -7,11 +7,11 @@ module elementary-number-theory.pisano-periods where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers

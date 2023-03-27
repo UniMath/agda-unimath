@@ -162,7 +162,8 @@ is-prime-prime-ℕ (succ-ℕ n) = pr1 (pr2 (infinitude-of-primes-ℕ (prime-ℕ 
 
 ### The prime counting function
 
-The prime counting function is defined such that `prime-counting-ℕ n` is the number of primes `≤ n`
+The prime counting function is defined such that `prime-counting-ℕ n` is the
+number of primes `≤ n`
 
 ```agda
 prime-counting-succ-ℕ :

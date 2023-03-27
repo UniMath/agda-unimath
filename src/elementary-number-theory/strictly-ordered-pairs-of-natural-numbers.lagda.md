@@ -26,7 +26,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A strictly ordered pair of natural numbers consists of `x y : ℕ` such that `x < y`.
+A strictly ordered pair of natural numbers consists of `x y : ℕ` such that
+`x < y`.
 
 ## Definition
 

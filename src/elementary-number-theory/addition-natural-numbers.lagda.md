@@ -187,4 +187,5 @@ neq-add-ℕ (succ-ℕ m) n p =
 
 ## See also
 
-- The commutative monoid of the natural numbers with addition is defined in [`monoid-of-natural-numbers-with-addition`](elementary-number-theory.monoid-of-natural-numbers-with-addition.md).
+- The commutative monoid of the natural numbers with addition is defined in
+  [`monoid-of-natural-numbers-with-addition`](elementary-number-theory.monoid-of-natural-numbers-with-addition.md).

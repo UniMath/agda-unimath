@@ -27,7 +27,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **fundamental theorem of arithmetic** asserts that every nonzero natural number can be written as a product of primes, and this product is unique up to the order of the factors.
+The **fundamental theorem of arithmetic** asserts that every nonzero natural
+number can be written as a product of primes, and this product is unique up to
+the order of the factors.
 
 ## Definitions
 
