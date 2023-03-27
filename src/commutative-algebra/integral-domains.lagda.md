@@ -8,7 +8,9 @@ module commutative-algebra.integral-domains where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.zero-commutative-rings
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.injective-maps
 open import foundation.sets
@@ -21,9 +23,9 @@ open import ring-theory.rings
 
 ## Idea
 
-An integral domain is a commutative ring `R` such that the product of any two
-nonzero elements in `R` is nonzero. Equivalently, a commutative ring `R` is an
-integral domain if and only if multiplication by any nonzero element `a`
+An integral domain is a nonzero commutative ring `R` such that the product of
+any two nonzero elements in `R` is nonzero. Equivalently, a commutative ring `R`
+is an integral domain if and only if multiplication by any nonzero element `a`
 satisfies the cancellation property: `ax = ay ⇒ x = y`.
 
 ## Definition
@@ -43,7 +45,10 @@ cancellation-property-Commutative-Ring R =
 ```agda
 Integral-Domain : (l : Level) → UU (lsuc l)
 Integral-Domain l =
-  Σ (Commutative-Ring l) cancellation-property-Commutative-Ring
+  Σ ( Commutative-Ring l)
+    ( λ R →
+      cancellation-property-Commutative-Ring R ×
+      is-nonzero-commutative-ring-Commutative-Ring R)
 
 module _
   {l : Level} (R : Integral-Domain l)
