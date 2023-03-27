@@ -7,6 +7,7 @@ module elementary-number-theory.fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 
@@ -93,11 +94,13 @@ is-prop-sim-fraction-ℤ x y = is-prop-type-Prop (sim-fraction-ℤ-Prop x y)
 refl-sim-fraction-ℤ : (x : fraction-ℤ) → sim-fraction-ℤ x x
 refl-sim-fraction-ℤ x = refl
 
-symm-sim-fraction-ℤ : (x y : fraction-ℤ) → sim-fraction-ℤ x y → sim-fraction-ℤ y x
+symm-sim-fraction-ℤ :
+  (x y : fraction-ℤ) → sim-fraction-ℤ x y → sim-fraction-ℤ y x
 symm-sim-fraction-ℤ x y r = inv r
 
 trans-sim-fraction-ℤ :
-  (x y z : fraction-ℤ) → sim-fraction-ℤ x y → sim-fraction-ℤ y z → sim-fraction-ℤ x z
+  (x y z : fraction-ℤ) →
+  sim-fraction-ℤ x y → sim-fraction-ℤ y z → sim-fraction-ℤ x z
 trans-sim-fraction-ℤ x y z r s =
   is-injective-mul-ℤ'
     ( denominator-fraction-ℤ y)
@@ -152,4 +155,25 @@ eq-rel-sim-fraction-ℤ = pair (sim-fraction-ℤ-Prop)
   ( pair' (λ {x} → refl-sim-fraction-ℤ x)
     ( pair' (λ {x y} → symm-sim-fraction-ℤ x y)
       (λ {x y z} → trans-sim-fraction-ℤ x y z)))
+```
+
+### The greatest common divisor of the numerator and a denominator of a fraction is always a positive integer
+
+```agda
+is-positive-gcd-numerator-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-positive-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+is-positive-gcd-numerator-denominator-fraction-ℤ x =
+  is-positive-gcd-is-positive-right-ℤ
+    ( numerator-fraction-ℤ x)
+    ( denominator-fraction-ℤ x)
+    ( is-positive-denominator-fraction-ℤ x)
+
+is-nonzero-gcd-numerator-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-nonzero-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
+  is-nonzero-is-positive-ℤ
+    ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+    ( is-positive-gcd-numerator-denominator-fraction-ℤ x)
 ```

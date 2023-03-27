@@ -26,6 +26,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equational-reasoning
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -403,4 +404,68 @@ is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
 is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
 is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
   ((is-commutative-gcd-ℕ 0 a) ∙ H)
+```
+
+### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`.
+
+```agda
+is-common-divisor-quotients-div-quotient-ℕ :
+  {a b d e n : ℕ} → is-nonzero-ℕ e → (H : is-common-divisor-ℕ a b d)
+  (K : div-ℕ e d) → div-ℕ n (quotient-div-ℕ e d K) →
+  (M : is-common-divisor-ℕ a b e) → 
+  is-common-divisor-ℕ
+    ( quotient-div-ℕ e a (pr1 M))
+    ( quotient-div-ℕ e b (pr2 M))
+    ( n)
+pr1 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
+  div-quotient-div-div-quotient-div-ℕ nz (pr1 H) K (pr1 M) L
+pr2 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
+  div-quotient-div-div-quotient-div-ℕ nz (pr2 H) K (pr2 M) L
+
+simplify-is-common-divisor-quotient-div-ℕ :
+  {a b d x : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
+  is-common-divisor-ℕ
+    ( quotient-div-ℕ d a (pr1 H))
+    ( quotient-div-ℕ d b (pr2 H))
+    ( x) ↔
+  is-common-divisor-ℕ a b (mul-ℕ x d)
+pr1 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  forward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
+pr2 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  forward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
+pr1 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  backward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
+pr2 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  backward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
+```
+
+### The greatest common divisor of `a/d` and `b/d` is `gcd(a,b)/d`
+
+```agda
+is-gcd-quotient-div-gcd-ℕ :
+  {a b d : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
+  is-gcd-ℕ
+    ( quotient-div-ℕ d a (pr1 H))
+    ( quotient-div-ℕ d b (pr2 H))
+    ( quotient-div-ℕ d
+      ( gcd-ℕ a b)
+      ( div-gcd-is-common-divisor-ℕ a b d H))
+is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
+  logical-equivalence-reasoning
+    is-common-divisor-ℕ
+      ( quotient-div-ℕ d a (pr1 H))
+      ( quotient-div-ℕ d b (pr2 H))
+      ( x)
+    ↔ is-common-divisor-ℕ a b (mul-ℕ x d)
+      by simplify-is-common-divisor-quotient-div-ℕ nz H
+    ↔ div-ℕ (mul-ℕ x d) (gcd-ℕ a b)
+      by is-gcd-gcd-ℕ a b (mul-ℕ x d)
+    ↔ div-ℕ x
+        ( quotient-div-ℕ d
+          ( gcd-ℕ a b)
+          ( div-gcd-is-common-divisor-ℕ a b d H))
+      by
+      inv-iff
+        ( simplify-div-quotient-div-ℕ nz
+          ( div-gcd-is-common-divisor-ℕ a b d H))
 ```

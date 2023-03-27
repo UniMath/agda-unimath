@@ -16,7 +16,9 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equational-reasoning
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -194,6 +196,11 @@ div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (mul-ℕ k y)
 div-mul-ℕ k x y H =
   transitive-div-ℕ x y (mul-ℕ k y) H (pair k refl)
+
+div-mul-ℕ' :
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (mul-ℕ y k)
+div-mul-ℕ' k x y H =
+  tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
 ```
 
 ### A 3-for-2 property of division with respect to addition
@@ -298,4 +305,81 @@ is-nonzero-quotient-div-ℕ :
   is-nonzero-ℕ x → is-nonzero-ℕ (quotient-div-ℕ d x H)
 is-nonzero-quotient-div-ℕ {d} {.(mul-ℕ k d)} (pair k refl) =
   is-nonzero-left-factor-mul-ℕ k d
+```
+
+### `a/a ＝ 1`
+
+```agda
+is-idempotent-quotient-div-ℕ :
+  (a : ℕ) → is-nonzero-ℕ a → (H : div-ℕ a a) → is-one-ℕ (quotient-div-ℕ a a H)
+is-idempotent-quotient-div-ℕ zero-ℕ nz (u , p) = ex-falso (nz refl)
+is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
+  is-one-is-left-unit-mul-ℕ u a p
+```
+
+### If `b` divides `a` and `c` divides `b` and `c` is nonzero, then `a/b · b/c ＝ a/c`
+
+```agda
+simplify-mul-quotient-div-ℕ :
+  {a b c : ℕ}  → is-nonzero-ℕ c →
+  (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) → 
+  ( mul-ℕ (quotient-div-ℕ b a H) (quotient-div-ℕ c b K)) ＝
+  ( quotient-div-ℕ c a L)
+simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
+  is-injective-mul-ℕ' c nz
+    ( equational-reasoning
+      mul-ℕ (mul-ℕ a/b b/c) c 
+      ＝ mul-ℕ a/b (mul-ℕ b/c c)   by associative-mul-ℕ a/b b/c c
+      ＝ mul-ℕ a/b b               by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
+      ＝ a                         by eq-quotient-div-ℕ b a H
+      ＝ mul-ℕ a/c c               by inv (eq-quotient-div-ℕ c a L))
+  where
+  a/b : ℕ
+  a/b = quotient-div-ℕ b a H
+  b/c : ℕ
+  b/c = quotient-div-ℕ c b K
+  a/c : ℕ
+  a/c = quotient-div-ℕ c a L
+```
+
+### If `d | a` and `d` is nonzero, then `x | a/d` if and only if `xd | a`
+
+```agda
+simplify-div-quotient-div-ℕ :
+  {a d x : ℕ} → is-nonzero-ℕ d → (H : div-ℕ d a) →
+  (div-ℕ x (quotient-div-ℕ d a H)) ↔ (div-ℕ (mul-ℕ x d) a)
+pr1 (pr1 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
+pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
+  equational-reasoning
+    mul-ℕ u (mul-ℕ x d)
+    ＝ mul-ℕ (mul-ℕ u x) d                 by inv (associative-mul-ℕ u x d)
+    ＝ mul-ℕ (quotient-div-ℕ d a H) d      by ap (mul-ℕ' d) p
+    ＝ a                                   by eq-quotient-div-ℕ d a H
+pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
+pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
+  is-injective-mul-ℕ' d nz
+    ( equational-reasoning
+        mul-ℕ (mul-ℕ u x) d
+        ＝ mul-ℕ u (mul-ℕ x d)             by associative-mul-ℕ u x d
+        ＝ a                               by p
+        ＝ mul-ℕ (quotient-div-ℕ d a H) d  by inv (eq-quotient-div-ℕ d a H))
+```
+
+### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero`. If `d` divides `b/c` then `d` divides `a/c`.
+
+```agda
+div-quotient-div-div-quotient-div-ℕ :
+  {a b c d : ℕ} → is-nonzero-ℕ c → (H : div-ℕ b a)
+  (K : div-ℕ c b) (L : div-ℕ c a) →
+  div-ℕ d (quotient-div-ℕ c b K) → 
+  div-ℕ d (quotient-div-ℕ c a L)
+div-quotient-div-div-quotient-div-ℕ {a} {b} {c} {d} nz H K L M =
+  tr
+    ( div-ℕ d)
+    ( simplify-mul-quotient-div-ℕ nz H K L)
+    ( div-mul-ℕ
+      ( quotient-div-ℕ b a H)
+      ( d)
+      ( quotient-div-ℕ c b K)
+      ( M))
 ```
