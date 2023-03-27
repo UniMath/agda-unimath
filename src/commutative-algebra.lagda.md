@@ -34,5 +34,6 @@ open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-commutative-rings public
 open import commutative-algebra.sums-commutative-semirings public
+open import commutative-algebra.trivial-commutative-rings public
 open import commutative-algebra.zariski-topology public
 ```
