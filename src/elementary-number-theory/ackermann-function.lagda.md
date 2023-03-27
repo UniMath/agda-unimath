@@ -12,6 +12,10 @@ open import elementary-number-theory.natural-numbers
 
 </details>
 
+## Idea
+
+The Ackermann function is a fast growing binary operation on the natural numbers.
+
 ## Definition
 
 ```agda
