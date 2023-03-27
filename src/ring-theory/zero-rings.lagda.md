@@ -21,7 +21,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A zero ring is a ring that has `0 = 1`. This implies that it only has one element.
+A zero ring is a ring that has `0 = 1`. This implies that it only has one
+element.
 
 ## Definition
 

@@ -23,8 +23,8 @@ open import ring-theory.zero-rings
 
 ## Idea
 
-A zero commutative ring is a commutative ring that has `0 = 1`.
-This implies that it only has one element.
+A zero commutative ring is a commutative ring that has `0 = 1`. This implies
+that it only has one element.
 
 ## Definition
 
@@ -50,5 +50,5 @@ is-contr-is-zero-commutative-ring-Commutative-Ring :
   is-zero-commutative-ring-Commutative-Ring R →
   is-contr (type-Commutative-Ring R)
 is-contr-is-zero-commutative-ring-Commutative-Ring R p =
-  is-contr-is-zero-ring-Ring (ring-Commutative-Ring R) p 
+  is-contr-is-zero-ring-Ring (ring-Commutative-Ring R) p
 ```
