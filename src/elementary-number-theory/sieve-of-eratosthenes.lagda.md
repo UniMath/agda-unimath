@@ -15,6 +15,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -87,7 +88,7 @@ pr1 (in-sieve-of-eratosthenes-succ-factorial-ℕ (succ-ℕ n)) =
     { factorial-ℕ (succ-ℕ n)}
     { succ-ℕ (factorial-ℕ (succ-ℕ n))}
     ( leq-factorial-ℕ (succ-ℕ n))
-    ( le-succ-ℕ {factorial-ℕ (succ-ℕ n)})
+    ( succ-le-ℕ (factorial-ℕ (succ-ℕ n)))
 pr2 (in-sieve-of-eratosthenes-succ-factorial-ℕ (succ-ℕ n)) x l (pair y p) with
   is-decidable-is-zero-ℕ x
 ... | inl refl =

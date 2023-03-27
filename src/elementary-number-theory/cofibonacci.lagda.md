@@ -127,6 +127,7 @@ forward-is-left-adjoint-cofibonacci (succ-ℕ m) (succ-ℕ n) H =
         ( succ-ℕ m)
         ( is-nonzero-succ-ℕ m)))
 
+{-
 converse-is-left-adjoint-cofibonacci :
   (m n : ℕ) → div-ℕ m (Fibonacci-ℕ n) → div-ℕ (cofibonacci m) n
 converse-is-left-adjoint-cofibonacci m n H = {!!}
@@ -134,6 +135,7 @@ converse-is-left-adjoint-cofibonacci m n H = {!!}
 is-left-adjoint-cofibonacci :
   (m n : ℕ) → div-ℕ (cofibonacci m) n ↔ div-ℕ m (Fibonacci-ℕ n)
 is-left-adjoint-cofibonacci m n = {!!}
+-}
 ```
 
 ## References

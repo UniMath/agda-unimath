@@ -9,6 +9,7 @@ module elementary-number-theory.upper-bounds-natural-numbers where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.universe-levels
 ```

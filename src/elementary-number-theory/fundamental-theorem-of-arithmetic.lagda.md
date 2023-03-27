@@ -12,6 +12,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.cartesian-product-types
@@ -98,10 +99,11 @@ is-nonzero-least-nontrivial-divisor-ℕ n H =
 ### The least nontrivial divisor of a number `> 1` is prime
 
 ```agda
+{-
 is-prime-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
-  ?
+  {!dn-elim-is-decidable!}
   where
   N : le-ℕ x (nat-least-nontrivial-divisor-ℕ n H)
   N = le-div-ℕ x (nat-least-nontrivial-divisor-ℕ n H) (is-nonzero-least-nontrivial-divisor-ℕ n H) L K
@@ -109,4 +111,5 @@ pr1 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
   neq-le-ℕ (le-one-least-nontrivial-divisor-ℕ n H)
 pr2 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
   div-one-ℕ _
+-}
 ```

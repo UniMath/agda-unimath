@@ -10,6 +10,7 @@ module univalent-combinatorics.sequences-finite-types where
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.cartesian-product-types
@@ -93,7 +94,7 @@ le-first-repetition-of-values-sequence-Fin k f =
         ( succ-ℕ k)
         ( k)
         ( f ∘ nat-Fin (succ-ℕ k))
-        ( le-succ-ℕ {k})))
+        ( succ-le-ℕ k)))
 ```
 
 ### Ordered repetitions of values of maps out of the natural numbers

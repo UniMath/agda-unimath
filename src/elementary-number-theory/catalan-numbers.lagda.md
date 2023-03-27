@@ -12,6 +12,7 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 

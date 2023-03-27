@@ -12,6 +12,7 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -222,7 +223,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
       ( ( ap
           ( mul-ℕ' (succ-ℕ d))
           ( is-additive-right-inverse-dist-ℕ m n
-            ( leq-leq-mul-ℕ' m n d
+            ( reflects-order-mul-ℕ d m n
               ( concatenate-eq-leq-eq-ℕ q
                 ( leq-add-ℕ' y x)
                 ( inv p))))) ∙

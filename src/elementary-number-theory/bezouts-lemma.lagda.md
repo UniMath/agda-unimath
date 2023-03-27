@@ -29,6 +29,7 @@ open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.cartesian-product-types
@@ -123,7 +124,7 @@ div-mod-is-distance-between-multiples-ℕ :
   (x y z : ℕ) →
   is-distance-between-multiples-ℕ x y z → div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)
 div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) =
-  kxly-case-split (decide-leq-ℕ (mul-ℕ k x) (mul-ℕ l y))
+  kxly-case-split (linear-leq-ℕ (mul-ℕ k x) (mul-ℕ l y))
   where
     kxly-case-split :
       (leq-ℕ (mul-ℕ k x) (mul-ℕ l y) + leq-ℕ (mul-ℕ l y) (mul-ℕ k x))
@@ -669,7 +670,7 @@ remainder-min-dist-succ-x-is-distance : (x y : ℕ) →
   (is-distance-between-multiples-ℕ (succ-ℕ x) y
     (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
 remainder-min-dist-succ-x-is-distance x y =
-  sx-ty-case-split (decide-leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y))
+  sx-ty-case-split (linear-leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y))
   where
   d : ℕ
   d = minimal-positive-distance (succ-ℕ x) y
@@ -824,7 +825,8 @@ remainder-min-dist-succ-x-is-distance x y =
 
     dist-eqn : r ＝ dist-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))
       (mul-ℕ (mul-ℕ q t) y)
-    dist-eqn = equational-reasoning r
+    dist-eqn =
+      equational-reasoning r
       ＝ abs-ℤ (int-ℕ r) by (inv (abs-int-ℕ r))
       ＝ dist-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) one-ℤ)
           (int-ℕ (succ-ℕ x)))
@@ -1161,7 +1163,7 @@ gcd-ℕ-div-y-mults x y z d = div-mul-ℕ
 
 gcd-ℕ-div-dist-between-mult : (x y z : ℕ) → is-distance-between-multiples-ℕ x y z → div-ℕ (gcd-ℕ x y) z
 gcd-ℕ-div-dist-between-mult x y z dist =
-  sx-ty-case-split (decide-leq-ℕ (mul-ℕ s x) (mul-ℕ t y))
+  sx-ty-case-split (linear-leq-ℕ (mul-ℕ s x) (mul-ℕ t y))
   where
   s : ℕ
   s = is-distance-between-multiples-fst-coeff-ℕ dist

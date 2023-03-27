@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.constant-maps
 open import foundation.coproduct-types
@@ -57,7 +58,7 @@ bounded-sum-ℕ zero-ℕ f = zero-ℕ
 bounded-sum-ℕ (succ-ℕ u) f =
   add-ℕ
     ( bounded-sum-ℕ u (λ x H → f x (preserves-le-succ-ℕ x u H)))
-    ( f u (le-succ-ℕ {u}))
+    ( f u (succ-le-ℕ u))
 ```
 
 ## Properties

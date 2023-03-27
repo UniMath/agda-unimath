@@ -79,6 +79,14 @@ is-nonzero-le-ℕ : (m n : ℕ) → le-ℕ m n → is-nonzero-ℕ n
 is-nonzero-le-ℕ m .zero-ℕ () refl
 ```
 
+### Any nonzero natural number is strictly greater than `0`
+
+```agda
+le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
+le-is-nonzero-ℕ zero-ℕ H = H refl
+le-is-nonzero-ℕ (succ-ℕ n) H = star
+```
+
 ### No natural number is strictly less than zero
 
 ```agda
@@ -155,6 +163,25 @@ linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
 linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
 linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
   map-coprod id (map-coprod (ap succ-ℕ) id) (linear-le-ℕ x y)
+```
+
+### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
+
+```agda
+subtraction-le-ℕ :
+  (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (add-ℕ l n ＝ m))
+subtraction-le-ℕ zero-ℕ m p = pair m (pair (is-nonzero-le-ℕ zero-ℕ m p) refl)
+subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p =
+  pair (pr1 P) (pair (pr1 (pr2 P)) (ap succ-ℕ (pr2 (pr2 P))))
+  where
+  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (add-ℕ l' n ＝ m))
+  P = subtraction-le-ℕ n m p
+
+le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → add-ℕ l n ＝ m → le-ℕ n m
+le-subtraction-ℕ zero-ℕ m l q p =
+  tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
+le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p =
+  le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
 ```
 
 ### Any natural number is strictly less than its successor
@@ -243,14 +270,6 @@ leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
 ```
 
-### Any natural number is strictly less than its successor
-
-```agda
-le-succ-ℕ : {x : ℕ} → le-ℕ x (succ-ℕ x)
-le-succ-ℕ {zero-ℕ} = star
-le-succ-ℕ {succ-ℕ x} = le-succ-ℕ {x}
-```
-
 ### If `x ≤ y` and `x ≠ y` then `x < y`
 
 ```agda
@@ -259,31 +278,4 @@ le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
 le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
-```
-
-### Any nonzero natural number is strictly greater than `0`
-
-```agda
-le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
-le-is-nonzero-ℕ zero-ℕ H = H refl
-le-is-nonzero-ℕ (succ-ℕ n) H = concatenate-leq-le-ℕ {x = zero-ℕ} {y = n} {z = succ-ℕ n} (leq-zero-ℕ n) (succ-le-ℕ n)
-```
-
-### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
-
-```agda
-subtraction-le-ℕ :
-  (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (add-ℕ l n ＝ m))
-subtraction-le-ℕ zero-ℕ m p = pair m (pair (is-nonzero-le-ℕ zero-ℕ m p) refl)
-subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p =
-  pair (pr1 P) (pair (pr1 (pr2 P)) (ap succ-ℕ (pr2 (pr2 P))))
-  where
-  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (add-ℕ l' n ＝ m))
-  P = subtraction-le-ℕ n m p
-
-le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → add-ℕ l n ＝ m → le-ℕ n m
-le-subtraction-ℕ zero-ℕ m l q p =
-  tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
-le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p =
-  le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
 ```

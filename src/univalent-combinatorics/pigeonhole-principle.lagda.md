@@ -9,6 +9,7 @@ module univalent-combinatorics.pigeonhole-principle where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -93,7 +94,7 @@ is-not-injective-le-Fin k l f p =
 is-not-injective-map-Fin-succ-Fin :
   (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → is-not-injective f
 is-not-injective-map-Fin-succ-Fin k f =
-  is-not-injective-le-Fin (succ-ℕ k) k f (le-succ-ℕ {k})
+  is-not-injective-le-Fin (succ-ℕ k) k f (succ-le-ℕ k)
 ```
 
 #### There is no embedding `ℕ ↪ Fin k`
@@ -150,7 +151,7 @@ module _
 repetition-of-values-Fin-succ-to-Fin :
   (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → repetition-of-values f
 repetition-of-values-Fin-succ-to-Fin k f =
-  repetition-of-values-le-Fin (succ-ℕ k) k f (le-succ-ℕ {k})
+  repetition-of-values-le-Fin (succ-ℕ k) k f (succ-le-ℕ k)
 ```
 
 ### The pigeonhole principle for types equipped with a counting

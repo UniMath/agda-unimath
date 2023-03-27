@@ -9,6 +9,7 @@ module univalent-combinatorics.standard-finite-types where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types

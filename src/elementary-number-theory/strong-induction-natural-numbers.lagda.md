@@ -9,6 +9,7 @@ module elementary-number-theory.strong-induction-natural-numbers where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -83,7 +84,7 @@ cases-htpy-succ-strong-ind-ℕ :
 cases-htpy-succ-strong-ind-ℕ P pS k H m (inl p) q =
   ap (H m) (eq-is-prop (is-prop-leq-ℕ m k))
 cases-htpy-succ-strong-ind-ℕ P pS k H m (inr α) q =
-  ex-falso (neg-succ-leq-ℕ k (leq-eq-left-ℕ α k q))
+  ex-falso (neg-succ-leq-ℕ k (concatenate-eq-leq-ℕ k (inv α) q))
 
 htpy-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) → (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
