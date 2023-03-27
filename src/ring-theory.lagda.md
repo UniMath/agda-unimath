@@ -43,5 +43,4 @@ open import ring-theory.subsets-semirings public
 open import ring-theory.sums-rings public
 open import ring-theory.sums-semirings public
 open import ring-theory.trivial-rings public
-open import ring-theory.zero-rings public
 ```
