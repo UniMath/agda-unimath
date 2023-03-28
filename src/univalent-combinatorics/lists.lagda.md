@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -23,6 +24,7 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types
@@ -42,22 +44,37 @@ empty list and an operation that extends a list with one element from `A`.
 
 ## Definition
 
+### The inductive definition of the type of lists
+
 ```agda
 data list {l : Level} (A : UU l) : UU l where
   nil : list A
   cons : A → list A → list A
+```
 
+### Predicates on the type of lists
+
+```agda
+is-nil-list : {l : Level} {A : UU l} → list A → UU l
+is-nil-list l = (l ＝ nil)
+
+is-nonnil-list : {l : Level} {A : UU l} → list A → UU l
+is-nonnil-list l = ¬ (is-nil-list l)
+
+is-cons-list : {l : Level} {A : UU l} → list A → UU l
+is-cons-list {l1} {A} l = Σ (A × list A) (λ (a , l') → l ＝ cons a l')
+```
+
+### Operations
+
+```agda
 snoc : {l : Level} {A : UU l} → list A → A → list A
 snoc nil a = cons a nil
 snoc (cons b l) a = cons b (snoc l a)
 
 in-list : {l : Level} {A : UU l} → A → list A
 in-list a = cons a nil
-```
 
-## Operations
-
-```agda
 fold-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
   list A → B
@@ -88,6 +105,24 @@ reverse-list : {l : Level} {A : UU l} → list A → list A
 reverse-list nil = nil
 reverse-list (cons a l) = concat-list (reverse-list l) (in-list a)
 
+elem-list :
+  {l1 : Level} {A : UU l1} →
+  has-decidable-equality A →
+  A → list A → bool
+elem-list d x nil = false
+elem-list d x (cons x' l) with (d x x')
+... | inl _ = true
+... | inr _ = elem-list d x l
+
+union-list :
+  {l1 : Level} {A : UU l1} →
+  has-decidable-equality A →
+  list A → list A → list A
+union-list d nil l' = l'
+union-list d (cons x l) l' with (elem-list d x l')
+... | true = l'
+... | false = cons x l'
+
 data _∈-list_ {l : Level} {A : UU l} : A → list A → UU l where
   is-head : (a : A) (l : list A) → a ∈-list (cons a l)
   is-in-tail : (a x : A) (l : list A) → a ∈-list l → a ∈-list (cons x l)
@@ -97,6 +132,43 @@ unit-list a = cons a nil
 ```
 
 ## Properties
+
+### A list that uses cons is not nil
+
+```agda
+is-nonnil-cons-list :
+  {l : Level} {A : UU l} →
+  (a : A) → (l : list A) → is-nonnil-list (cons a l)
+is-nonnil-cons-list a l ()
+
+is-nonnil-is-cons-list :
+  {l : Level} {A : UU l} →
+  (l : list A) → is-cons-list l → is-nonnil-list l
+is-nonnil-is-cons-list l ((a , l') , refl) q =
+  is-nonnil-cons-list a l' q
+```
+
+### A list that uses cons is not nil
+
+```agda
+is-cons-is-nonnil-list :
+  {l : Level} {A : UU l} →
+  (l : list A) → is-nonnil-list l → is-cons-list l
+is-cons-is-nonnil-list nil p = ex-falso (p refl)
+is-cons-is-nonnil-list (cons x l) p = ((x , l) , refl)
+
+head-is-nonnil-list :
+  {l : Level} {A : UU l} →
+  (l : list A) → is-nonnil-list l → A
+head-is-nonnil-list l p =
+  pr1 (pr1 (is-cons-is-nonnil-list l p))
+
+tail-is-nonnil-list :
+  {l : Level} {A : UU l} →
+  (l : list A) → is-nonnil-list l → list A
+tail-is-nonnil-list l p =
+  pr2 (pr1 (is-cons-is-nonnil-list l p))
+```
 
 ### Characterizing the identity type of lists
 
@@ -326,6 +398,36 @@ length-functor-list :
 length-functor-list f nil = refl
 length-functor-list f (cons x l) =
   ap succ-ℕ (length-functor-list f l)
+
+is-nil-is-zero-length-list :
+  {l1 : Level} {A : UU l1}
+  (l : list A) →
+  is-zero-ℕ (length-list l) →
+  is-nil-list l
+is-nil-is-zero-length-list nil p = refl
+
+is-nonnil-is-nonzero-length-list :
+  {l1 : Level} {A : UU l1}
+  (l : list A) →
+  is-nonzero-ℕ (length-list l) →
+  is-nonnil-list l
+is-nonnil-is-nonzero-length-list nil p q = p refl
+is-nonnil-is-nonzero-length-list (cons x l) p ()
+
+is-nonzero-length-is-nonnil-list :
+  {l1 : Level} {A : UU l1}
+  (l : list A) →
+  is-nonnil-list l →
+  is-nonzero-ℕ (length-list l)
+is-nonzero-length-is-nonnil-list nil p q = p refl
+
+lenght-tail-is-nonnil-list :
+  {l1 : Level} {A : UU l1}
+  (l : list A) → (p : is-nonnil-list l) →
+  succ-ℕ (length-list (tail-is-nonnil-list l p)) ＝
+    length-list l
+lenght-tail-is-nonnil-list nil p = ex-falso (p refl)
+lenght-tail-is-nonnil-list (cons x l) p = refl
 ```
 
 ### Properties of flattening
@@ -627,6 +729,38 @@ module _
   preserves-concat-map-list nil k = refl
   preserves-concat-map-list (cons x l) k =
     ap (cons (f x)) (preserves-concat-map-list l k)
+```
+
+### If a list has an element then it is non empty
+
+```agda
+is-nonnil-elem-list :
+  {l : Level} {A : UU l} →
+  (d : has-decidable-equality A) →
+  (a : A) →
+  (l : list A) →
+  elem-list d a l ＝ true →
+  is-nonnil-list l
+is-nonnil-elem-list d a nil ()
+is-nonnil-elem-list d a (cons x l) p ()
+```
+
+### If the union of two lists is empty, then these two lists are empty
+
+```agda
+is-nil-union-is-nil-list :
+  {l : Level} {A : UU l} →
+  (d : has-decidable-equality A) →
+  (l l' : list A) →
+  union-list d l l' ＝ nil →
+  is-nil-list l × is-nil-list l'
+is-nil-union-is-nil-list d nil l' p = (refl , p)
+is-nil-union-is-nil-list d (cons x l) l' p with (elem-list d x l') in q
+... | true =
+  ex-falso (is-nonnil-elem-list d x l' q p )
+    -- ( is-nonnil-elem-list d x l' q
+    --   (pr2 (is-nil-union-is-nil-list d l l' p)))
+... | false = ex-falso (is-nonnil-cons-list x l' p) -- (is-nonnil-cons-list x (union-list d l l') p)
 ```
 
 ### Multiplication of a list of elements in a monoid
