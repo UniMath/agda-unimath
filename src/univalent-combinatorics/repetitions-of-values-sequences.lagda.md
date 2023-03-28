@@ -7,23 +7,7 @@ module univalent-combinatorics.repetitions-of-values-sequences where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-types
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.pairs-of-distinct-elements
-open import foundation.repetitions-of-values
-open import foundation.repetitions-sequences
-open import foundation.sequences
-open import foundation.universe-levels
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

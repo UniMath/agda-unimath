@@ -18,11 +18,6 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.negation
-open import foundation.universe-levels
-
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
 ```
 
 </details>

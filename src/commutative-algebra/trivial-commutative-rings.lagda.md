@@ -10,14 +10,11 @@ module commutative-algebra.trivial-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import ring-theory.rings
 open import ring-theory.trivial-rings
 ```
 

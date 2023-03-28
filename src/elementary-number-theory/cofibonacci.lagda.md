@@ -21,7 +21,6 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.universe-levels
 ```
 

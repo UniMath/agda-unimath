@@ -11,7 +11,6 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
-open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
@@ -28,9 +27,6 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.pigeonhole-principle
-open import univalent-combinatorics.repetitions-of-values
-open import univalent-combinatorics.repetitions-of-values-sequences
 open import univalent-combinatorics.sequences-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

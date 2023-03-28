@@ -7,7 +7,6 @@ module elementary-number-theory.strictly-ordered-pairs-of-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 

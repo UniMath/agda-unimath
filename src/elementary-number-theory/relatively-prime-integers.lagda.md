@@ -8,12 +8,10 @@ module elementary-number-theory.relatively-prime-integers where
 
 ```agda
 open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 
-open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels

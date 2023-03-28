@@ -10,7 +10,6 @@ module elementary-number-theory.infinitude-of-primes where
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.factorials
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
@@ -24,8 +23,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.negation

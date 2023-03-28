@@ -10,7 +10,6 @@ module elementary-number-theory.euclidean-division-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers

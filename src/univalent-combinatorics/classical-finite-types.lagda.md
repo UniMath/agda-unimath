@@ -8,7 +8,6 @@ module univalent-combinatorics.classical-finite-types where
 
 ```agda
 open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
