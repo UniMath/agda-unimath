@@ -136,7 +136,7 @@ is-one-div-fibonacci-succ-div-fibonacci-ℕ d (succ-ℕ n) H K =
     ( H)
 
 relatively-prime-fibonacci-fibonacci-succ-ℕ :
-  (n : ℕ) → relatively-prime-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n))
+  (n : ℕ) → is-relatively-prime-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n))
 relatively-prime-fibonacci-fibonacci-succ-ℕ n =
   is-one-div-fibonacci-succ-div-fibonacci-ℕ
     ( gcd-ℕ (Fibonacci-ℕ n) (Fibonacci-ℕ (succ-ℕ n)))

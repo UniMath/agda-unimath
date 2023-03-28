@@ -202,6 +202,19 @@ is-zero-leq-zero-ℕ' :
 is-zero-leq-zero-ℕ' zero-ℕ star = refl
 ```
 
+### Any number is nonzero natural number if it is at least `1`
+
+```agda
+leq-one-is-nonzero-ℕ :
+  (x : ℕ) → is-nonzero-ℕ x → leq-ℕ 1 x
+leq-one-is-nonzero-ℕ zero-ℕ H = ex-falso (H refl)
+leq-one-is-nonzero-ℕ (succ-ℕ x) H = star
+
+is-nonzero-leq-one-ℕ :
+  (x : ℕ) → leq-ℕ 1 x → is-nonzero-ℕ x
+is-nonzero-leq-one-ℕ .zero-ℕ () refl
+```
+
 ### Any natural number is less than or equal to its own successor
 
 ```agda

@@ -35,7 +35,7 @@ A prime number is a natural number of which 1 is the only proper divisor.
 
 ## Definition
 
-### Definition 1
+### The main definition of prime numbers
 
 This is a direct interpretation of what it means to be prime.
 
@@ -44,7 +44,7 @@ is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 ```
 
-### Definition 2
+### Second definition of prime numbers
 
 This is an implementation of the idea of being prime, which is usually taken as
 the definition.
@@ -58,7 +58,7 @@ is-prime-easy-ℕ : ℕ → UU lzero
 is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
 ```
 
-### Definition 3
+### Third definition of prime numbers
 
 ```agda
 has-unique-proper-divisor-ℕ : ℕ → UU lzero
@@ -67,7 +67,7 @@ has-unique-proper-divisor-ℕ n = is-contr (Σ ℕ (is-proper-divisor-ℕ n))
 
 ## Properties
 
-### Definitions 1, 2, and 3 of prime numbers are equivalent
+### The three definitions of prime numbers are equivalent
 
 ```agda
 is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
@@ -153,3 +153,7 @@ is-prime-two-ℕ : is-prime-ℕ 2
 is-prime-two-ℕ =
   is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
 ```
+
+## See also
+
+- The fundamental theorem of arithmetic asserts that every positive natural number can be written uniquely as a product of primes. This theorem is proven in [`fundamental-theorem-arithmetic`](elementary-number-theory.fundamental-theorem-arithmetic.md).

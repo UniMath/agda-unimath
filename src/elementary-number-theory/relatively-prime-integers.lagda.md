@@ -44,11 +44,13 @@ is-prop-is-relative-prime-ℤ x y = is-set-ℤ (gcd-ℤ x y) one-ℤ
 
 ```agda
 is-relatively-prime-abs-is-relatively-prime-ℤ :
-  {a b : ℤ} → is-relative-prime-ℤ a b → relatively-prime-ℕ (abs-ℤ a) (abs-ℤ b)
+  {a b : ℤ} → is-relative-prime-ℤ a b →
+  is-relatively-prime-ℕ (abs-ℤ a) (abs-ℤ b)
 is-relatively-prime-abs-is-relatively-prime-ℤ {a} {b} H = is-injective-int-ℕ H
 
 is-relatively-prime-is-relatively-prime-abs-ℤ :
-  {a b : ℤ} → relatively-prime-ℕ (abs-ℤ a) (abs-ℤ b) → is-relative-prime-ℤ a b
+  {a b : ℤ} → is-relatively-prime-ℕ (abs-ℤ a) (abs-ℤ b) →
+  is-relative-prime-ℤ a b
 is-relatively-prime-is-relatively-prime-abs-ℤ {a} {b} H = ap int-ℕ H
 ```
 

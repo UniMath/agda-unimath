@@ -31,8 +31,8 @@ greatest common divisor is `1`.
 ## Definition
 
 ```agda
-relatively-prime-ℕ : ℕ → ℕ → UU lzero
-relatively-prime-ℕ x y = is-one-ℕ (gcd-ℕ x y)
+is-relatively-prime-ℕ : ℕ → ℕ → UU lzero
+is-relatively-prime-ℕ x y = is-one-ℕ (gcd-ℕ x y)
 ```
 
 ## Properties
@@ -40,38 +40,72 @@ relatively-prime-ℕ x y = is-one-ℕ (gcd-ℕ x y)
 ### Being relatively prime is a proposition
 
 ```agda
-is-prop-relatively-prime-ℕ : (x y : ℕ) → is-prop (relatively-prime-ℕ x y)
-is-prop-relatively-prime-ℕ x y = is-set-ℕ (gcd-ℕ x y) 1
+is-prop-is-relatively-prime-ℕ : (x y : ℕ) → is-prop (is-relatively-prime-ℕ x y)
+is-prop-is-relatively-prime-ℕ x y = is-set-ℕ (gcd-ℕ x y) 1
 
-relatively-prime-ℕ-Prop : ℕ → ℕ → Prop lzero
-pr1 (relatively-prime-ℕ-Prop x y) = relatively-prime-ℕ x y
-pr2 (relatively-prime-ℕ-Prop x y) = is-prop-relatively-prime-ℕ x y
+is-relatively-prime-ℕ-Prop : ℕ → ℕ → Prop lzero
+pr1 (is-relatively-prime-ℕ-Prop x y) = is-relatively-prime-ℕ x y
+pr2 (is-relatively-prime-ℕ-Prop x y) = is-prop-is-relatively-prime-ℕ x y
 ```
 
 ### Being relatively prime is decidable
 
 ```agda
-is-decidable-relatively-prime-ℕ :
-  (x y : ℕ) → is-decidable (relatively-prime-ℕ x y)
-is-decidable-relatively-prime-ℕ x y = is-decidable-is-one-ℕ (gcd-ℕ x y)
+is-decidable-is-relatively-prime-ℕ :
+  (x y : ℕ) → is-decidable (is-relatively-prime-ℕ x y)
+is-decidable-is-relatively-prime-ℕ x y = is-decidable-is-one-ℕ (gcd-ℕ x y)
 
-is-decidable-prop-relatively-prime-ℕ :
-  (x y : ℕ) → is-decidable-prop (relatively-prime-ℕ x y)
-pr1 (is-decidable-prop-relatively-prime-ℕ x y) =
-  is-prop-relatively-prime-ℕ x y
-pr2 (is-decidable-prop-relatively-prime-ℕ x y) =
-  is-decidable-relatively-prime-ℕ x y
+is-decidable-prop-is-relatively-prime-ℕ :
+  (x y : ℕ) → is-decidable-prop (is-relatively-prime-ℕ x y)
+pr1 (is-decidable-prop-is-relatively-prime-ℕ x y) =
+  is-prop-is-relatively-prime-ℕ x y
+pr2 (is-decidable-prop-is-relatively-prime-ℕ x y) =
+  is-decidable-is-relatively-prime-ℕ x y
+```
+
+### `a` and `b` are relatively prime if and only if any common divisor is equal to `1`
+
+```agda
+is-one-is-common-divisor-is-relatively-prime-ℕ :
+  (x y d : ℕ) →
+  is-relatively-prime-ℕ x y → is-common-divisor-ℕ x y d → is-one-ℕ d
+is-one-is-common-divisor-is-relatively-prime-ℕ x y d H K =
+  is-one-div-one-ℕ d
+    ( tr
+      ( div-ℕ d)
+      ( H)
+      ( div-gcd-is-common-divisor-ℕ x y d K))
+
+is-relatively-prime-is-one-is-common-divisor-ℕ :
+  (x y : ℕ) →
+  ((d : ℕ) → is-common-divisor-ℕ x y d → is-one-ℕ d) → is-relatively-prime-ℕ x y
+is-relatively-prime-is-one-is-common-divisor-ℕ x y H =
+  H (gcd-ℕ x y) (is-common-divisor-gcd-ℕ x y)
+```
+
+### If `a` and `b` are relatively prime, then so are any divisors of `a` and `b`
+
+```agda
+is-relatively-prime-div-ℕ :
+  (a b c d : ℕ) → div-ℕ c a → div-ℕ d b →
+  is-relatively-prime-ℕ a b → is-relatively-prime-ℕ c d
+is-relatively-prime-div-ℕ a b c d H K L =
+  is-one-is-common-divisor-is-relatively-prime-ℕ a b
+    ( gcd-ℕ c d)
+    ( L)
+    ( transitive-div-ℕ (gcd-ℕ c d) c a (div-left-factor-gcd-ℕ c d) H ,
+      transitive-div-ℕ (gcd-ℕ c d) d b (div-right-factor-gcd-ℕ c d) K)
 ```
 
 ### For any two natural numbers `a` and `b` such that `a + b ≠ 0`, the numbers `a/gcd(a,b)` and `b/gcd(a,b)` are relatively prime
 
 ```agda
-relatively-prime-quotient-div-gcd-ℕ :
+is-relatively-prime-quotient-div-gcd-ℕ :
   (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) →
-  relatively-prime-ℕ
+  is-relatively-prime-ℕ
     ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-factor-gcd-ℕ a b))
     ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-factor-gcd-ℕ a b))
-relatively-prime-quotient-div-gcd-ℕ a b nz =
+is-relatively-prime-quotient-div-gcd-ℕ a b nz =
   ( uniqueness-is-gcd-ℕ
     ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-factor-gcd-ℕ a b))
     ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-factor-gcd-ℕ a b))

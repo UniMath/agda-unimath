@@ -175,6 +175,15 @@ is-nonzero-div-ℕ :
 is-nonzero-div-ℕ .zero-ℕ x H K refl = K (is-zero-div-zero-ℕ x H)
 ```
 
+### Any divisor of a number at least `1` is at least `1`
+
+```agda
+leq-one-div-ℕ :
+  (k x : ℕ) → div-ℕ k x → leq-ℕ 1 x → leq-ℕ 1 k
+leq-one-div-ℕ k x H L =
+  leq-one-is-nonzero-ℕ k (is-nonzero-div-ℕ k x H (is-nonzero-leq-one-ℕ x L))
+```
+
 ### If `x < d` and `d | x`, then `x` must be `0`
 
 ```agda

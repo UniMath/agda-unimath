@@ -203,7 +203,7 @@ is-zero-add-is-zero-gcd-ℕ a b H =
     ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
 
-### If at least one of `a` and `b` is nonzero, then their gcd is nonzer
+### If at least one of `a` and `b` is nonzero, then their gcd is nonzero
 
 ```agda
 is-nonzero-gcd-ℕ :
