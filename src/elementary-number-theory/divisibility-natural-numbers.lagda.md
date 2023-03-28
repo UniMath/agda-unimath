@@ -22,6 +22,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 
@@ -45,6 +46,15 @@ eq-quotient-div-ℕ' :
 eq-quotient-div-ℕ' x y H =
   commutative-mul-ℕ x (quotient-div-ℕ x y H) ∙ eq-quotient-div-ℕ x y H
 
+div-quotient-div-ℕ :
+  (d x : ℕ) (H : div-ℕ d x) → div-ℕ (quotient-div-ℕ d x H) x
+pr1 (div-quotient-div-ℕ d x (u , p)) = d
+pr2 (div-quotient-div-ℕ d x (u , p)) = commutative-mul-ℕ d u ∙ p
+```
+
+### Concatenating equality and divisibility
+
+```agda
 concatenate-eq-div-ℕ :
   {x y z : ℕ} → x ＝ y → div-ℕ y z → div-ℕ x z
 concatenate-eq-div-ℕ refl p = p
@@ -111,6 +121,11 @@ leq-div-succ-ℕ d x (pair (succ-ℕ k) p) =
 leq-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → leq-ℕ d x
 leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
 ... | (pair y refl) = leq-div-succ-ℕ d y H
+
+leq-quotient-div-ℕ :
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → leq-ℕ (quotient-div-ℕ d x H) x
+leq-quotient-div-ℕ d x f H =
+  leq-div-ℕ (quotient-div-ℕ d x H) x f (div-quotient-div-ℕ d x H)
 ```
 
 ### If `x` is nonzero, if `d | x` and `d ≠ x`, then `d < x`
@@ -171,7 +186,7 @@ is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
 
 ```agda
 is-nonzero-div-ℕ :
-  (k x : ℕ) → div-ℕ k x → is-nonzero-ℕ x → is-nonzero-ℕ k
+  (d x : ℕ) → div-ℕ d x → is-nonzero-ℕ x → is-nonzero-ℕ d
 is-nonzero-div-ℕ .zero-ℕ x H K refl = K (is-zero-div-zero-ℕ x H)
 ```
 
@@ -179,9 +194,9 @@ is-nonzero-div-ℕ .zero-ℕ x H K refl = K (is-zero-div-zero-ℕ x H)
 
 ```agda
 leq-one-div-ℕ :
-  (k x : ℕ) → div-ℕ k x → leq-ℕ 1 x → leq-ℕ 1 k
-leq-one-div-ℕ k x H L =
-  leq-one-is-nonzero-ℕ k (is-nonzero-div-ℕ k x H (is-nonzero-leq-one-ℕ x L))
+  (d x : ℕ) → div-ℕ d x → leq-ℕ 1 x → leq-ℕ 1 d
+leq-one-div-ℕ d x H L =
+  leq-one-is-nonzero-ℕ d (is-nonzero-div-ℕ d x H (is-nonzero-leq-one-ℕ x L))
 ```
 
 ### If `x < d` and `d | x`, then `x` must be `0`
@@ -316,6 +331,19 @@ is-nonzero-quotient-div-ℕ {d} {.(mul-ℕ k d)} (pair k refl) =
   is-nonzero-left-factor-mul-ℕ k d
 ```
 
+### If `d` divides a number `1 ≤ x`, then `1 ≤ x/d`
+
+```agda
+leq-one-quotient-div-ℕ :
+  (d x : ℕ) (H : div-ℕ d x) → leq-ℕ 1 x → leq-ℕ 1 (quotient-div-ℕ d x H)
+leq-one-quotient-div-ℕ d x H K =
+  leq-one-div-ℕ
+    ( quotient-div-ℕ d x H)
+    ( x)
+    ( div-quotient-div-ℕ d x H)
+    ( K)
+```
+
 ### `a/a ＝ 1`
 
 ```agda
@@ -391,4 +419,49 @@ div-quotient-div-div-quotient-div-ℕ {a} {b} {c} {d} nz H K L M =
       ( d)
       ( quotient-div-ℕ c b K)
       ( M))
+```
+
+### If `x` is nonzero and `d | x`, then `x/d ＝ 1` if and only if `d ＝ x`
+
+```agda
+is-one-quotient-div-ℕ :
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → (d ＝ x) →
+  is-one-ℕ (quotient-div-ℕ d x H)
+is-one-quotient-div-ℕ d .d f H refl = is-idempotent-quotient-div-ℕ d f H
+
+eq-is-one-quotient-div-ℕ :
+  (d x : ℕ) → (H : div-ℕ d x) → is-one-ℕ (quotient-div-ℕ d x H) → d ＝ x
+eq-is-one-quotient-div-ℕ d x (.1 , q) refl = inv (left-unit-law-mul-ℕ d) ∙ q
+```
+
+### If `x` is nonzero and `d | x`, then `x/d ＝ x` if and only if `d ＝ 1`
+
+```agda
+compute-quotient-div-is-one-ℕ :
+  (d x : ℕ) → (H : div-ℕ d x) → is-one-ℕ d → quotient-div-ℕ d x H ＝ x
+compute-quotient-div-is-one-ℕ .1 x (u , q) refl =
+  inv (right-unit-law-mul-ℕ u) ∙ q
+
+is-one-divisor-ℕ :
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
+  quotient-div-ℕ d x H ＝ x → is-one-ℕ d
+is-one-divisor-ℕ d x f (.x , q) refl =
+  is-injective-mul-ℕ x f (q ∙ inv (right-unit-law-mul-ℕ x))
+```
+
+### If `x` is nonzero and `d | x` is a nontrivial divisor, then `x/d < x`
+
+```agda
+le-quotient-div-ℕ :
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → ¬ (is-one-ℕ d) →
+  le-ℕ (quotient-div-ℕ d x H) x
+le-quotient-div-ℕ d x f H g =
+  map-left-unit-law-coprod-is-empty
+    ( quotient-div-ℕ d x H ＝ x)
+    ( le-ℕ (quotient-div-ℕ d x H) x)
+    ( map-neg (is-one-divisor-ℕ d x f H) g)
+    ( eq-or-le-leq-ℕ
+      ( quotient-div-ℕ d x H)
+      ( x)
+      ( leq-quotient-div-ℕ d x f H))
 ```

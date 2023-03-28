@@ -22,6 +22,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.lists
@@ -35,11 +36,17 @@ The **fundamental theorem of arithmetic** asserts that every nonzero natural
 number can be written as a product of primes, and this product is unique up to
 the order of the factors.
 
-The uniqueness of the prime factorization of a natural number can be expressed in several ways:
-- We can find a unique list of primes `p₁ ≤ p₂ ≤ ⋯ ≤ pᵢ` of which the product is equal to `n`
-- The type of finite sets `X` equipped with functions `p : X → Σ ℕ is-prime-ℕ` and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is equal to `n` is contractible.
+The uniqueness of the prime factorization of a natural number can be expressed
+in several ways:
 
-Note that the univalence axiom is neccessary to prove the second uniqueness property of prime factorizations.
+- We can find a unique list of primes `p₁ ≤ p₂ ≤ ⋯ ≤ pᵢ` of which the product is
+  equal to `n`
+- The type of finite sets `X` equipped with functions `p : X → Σ ℕ is-prime-ℕ`
+  and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is equal to `n` is
+  contractible.
+
+Note that the univalence axiom is neccessary to prove the second uniqueness
+property of prime factorizations.
 
 ## Definitions
 
@@ -138,21 +145,47 @@ pr2 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
   div-one-ℕ _
 ```
 
+### The least prime divisor of a number `1 < n`
+
+```agda
+nat-least-prime-divisor-ℕ : (x : ℕ) → le-ℕ 1 x → ℕ
+nat-least-prime-divisor-ℕ x H = nat-least-nontrivial-divisor-ℕ x H
+
+is-prime-least-prime-divisor-ℕ :
+  (x : ℕ) (H : le-ℕ 1 x) → is-prime-ℕ (nat-least-prime-divisor-ℕ x H)
+is-prime-least-prime-divisor-ℕ x H = is-prime-least-nontrivial-divisor-ℕ x H
+
+least-prime-divisor-ℕ : (x : ℕ) → le-ℕ 1 x → Prime-ℕ
+pr1 (least-prime-divisor-ℕ x H) = nat-least-prime-divisor-ℕ x H
+pr2 (least-prime-divisor-ℕ x H) = is-prime-least-prime-divisor-ℕ x H
+
+div-least-prime-divisor-ℕ :
+  (x : ℕ) (H : le-ℕ 1 x) → div-ℕ (nat-least-prime-divisor-ℕ x H) x
+div-least-prime-divisor-ℕ x H = div-least-nontrivial-divisor-ℕ x H
+
+quotient-div-least-prime-divisor-ℕ :
+  (x : ℕ) (H : le-ℕ 1 x) → ℕ
+quotient-div-least-prime-divisor-ℕ x H =
+  quotient-div-ℕ
+    ( nat-least-prime-divisor-ℕ x H)
+    ( x)
+    ( div-least-prime-divisor-ℕ x H)
+```
+
 ### The fundamental theorem of arithmetic
 
 ```agda
-{-
 list-primes-fundamental-theorem-arithmetic-ℕ :
-  (x : ℕ) → list (Σ ℕ (λ p → is-prime-ℕ p × div-ℕ p (succ-ℕ x)))
-
-list-primes-fundamental-theorem-arithmetic-ℕ :
-  (x : ℕ) → is-nonzero-ℕ x → list (Σ ℕ (λ p → is-prime-ℕ p × div-ℕ p x))
+  (x : ℕ) → is-nonzero-ℕ x → list Prime-ℕ
 list-primes-fundamental-theorem-arithmetic-ℕ zero-ℕ H = ex-falso (H refl)
 list-primes-fundamental-theorem-arithmetic-ℕ (succ-ℕ x) H =
   strong-ind-ℕ
-    ( λ _ → list (Σ ℕ (λ p → is-prime-ℕ p × div-ℕ p (succ-ℕ x))))
+    ( λ _ → list Prime-ℕ)
     ( nil)
-    ( λ k f → {!!})
-    {!!}
-    -}
+    ( λ k f →
+      cons
+        ( least-prime-divisor-ℕ (succ-ℕ (succ-ℕ k)) star)
+        ( f ( quotient-div-least-prime-divisor-ℕ (succ-ℕ (succ-ℕ k)) star)
+            ( leq-le-succ-ℕ {!!})))
+    ( succ-ℕ x)
 ```

@@ -42,6 +42,19 @@ This is a direct interpretation of what it means to be prime.
 ```agda
 is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
+
+Prime-ℕ : UU lzero
+Prime-ℕ = Σ ℕ is-prime-ℕ
+
+module _
+  (p : Prime-ℕ)
+  where
+
+  nat-Prime-ℕ : ℕ
+  nat-Prime-ℕ = pr1 p
+
+  is-prime-Prime-ℕ : is-prime-ℕ nat-Prime-ℕ
+  is-prime-Prime-ℕ = pr2 p
 ```
 
 ### Second definition of prime numbers
@@ -156,4 +169,7 @@ is-prime-two-ℕ =
 
 ## See also
 
-- The fundamental theorem of arithmetic asserts that every positive natural number can be written uniquely as a product of primes. This theorem is proven in [`fundamental-theorem-of-arithmetic`](elementary-number-theory.fundamental-theorem-of-arithmetic.md).
+- The fundamental theorem of arithmetic asserts that every positive natural
+  number can be written uniquely as a product of primes. This theorem is proven
+  in
+  [`fundamental-theorem-of-arithmetic`](elementary-number-theory.fundamental-theorem-of-arithmetic.md).
