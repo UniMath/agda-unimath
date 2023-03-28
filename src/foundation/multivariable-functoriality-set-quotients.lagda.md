@@ -9,7 +9,9 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.functions
 open import foundation.functoriality-set-quotients
+open import foundation.homotopies
 open import foundation.set-quotients
 open import foundation.universe-levels
 open import foundation.vectors-set-quotients
@@ -40,15 +42,39 @@ equivalence relations extends uniquely to a multivariable operation from the
 module _
   { l1 l2 l3 l4 : Level}
   ( n : ℕ)
-  ( As : functional-vec (UU l1) n)
-  ( Rs : (i : Fin n) → Eq-Rel l2 (As i))
+  ( A : functional-vec (UU l1) n)
+  ( R : (i : Fin n) → Eq-Rel l2 (A i))
   { X : UU l3} (S : Eq-Rel l4 X)
   where
 
   multivariable-map-set-quotient :
-    (h : hom-Eq-Rel (all-sim-Eq-Rel n As Rs) S) →
-    set-quotient-vector n As Rs → set-quotient S
-  multivariable-map-set-quotient h as =
-    map-set-quotient (all-sim-Eq-Rel n As Rs) S h
-      ( map-equiv (equiv-set-quotient-vector n As Rs) as)
+    ( h : hom-Eq-Rel (all-sim-Eq-Rel n A R) S) →
+    set-quotient-vector n A R → set-quotient S
+  multivariable-map-set-quotient =
+    map-is-set-quotient
+      ( all-sim-Eq-Rel n A R)
+      ( set-quotient-vector-Set n A R)
+      ( reflecting-map-quotient-vector-map n A R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-vector-set-quotient n A R)
+      ( is-set-quotient-set-quotient S)
+
+  compute-multivariable-map-set-quotient :
+    ( h : hom-Eq-Rel (all-sim-Eq-Rel n A R) S) →
+    ( multivariable-map-set-quotient h ∘
+      quotient-vector-map n A R ) ~
+    ( quotient-map S ∘
+      map-hom-Eq-Rel (all-sim-Eq-Rel n A R) S h)
+  compute-multivariable-map-set-quotient =
+     coherence-square-map-is-set-quotient
+      ( all-sim-Eq-Rel n A R)
+      ( set-quotient-vector-Set n A R)
+      ( reflecting-map-quotient-vector-map n A R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-vector-set-quotient n A R)
+      ( is-set-quotient-set-quotient S)
 ```
