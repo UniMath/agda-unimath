@@ -156,4 +156,4 @@ is-prime-two-ℕ =
 
 ## See also
 
-- The fundamental theorem of arithmetic asserts that every positive natural number can be written uniquely as a product of primes. This theorem is proven in [`fundamental-theorem-arithmetic`](elementary-number-theory.fundamental-theorem-arithmetic.md).
+- The fundamental theorem of arithmetic asserts that every positive natural number can be written uniquely as a product of primes. This theorem is proven in [`fundamental-theorem-of-arithmetic`](elementary-number-theory.fundamental-theorem-of-arithmetic.md).
