@@ -64,7 +64,7 @@ module _
 ```agda
 fixpoint-Descent-data-circle :
   { l1 l2 : Level} {X : UU l1} (l : free-loop X)
-  ( P : Descent-data-circle l2) → UU _
+  ( P : Descent-data-circle l2) → UU l2
 fixpoint-Descent-data-circle l P =
   Σ ( type-Descent-data-circle P)
     ( λ p → (map-equiv (aut-Descent-data-circle P) p) ＝ p)
