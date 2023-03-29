@@ -145,9 +145,9 @@ abstract
     ( {k : Level} → dependent-universal-property-circle k l) →
     Σ ( X → UU lzero)
       ( λ P →
-        Eq-Descent-data-circle
+        Eq-descent-data-circle
         ( pair ℤ equiv-succ-ℤ)
-        ( ev-Descent-data-circle l P))
+        ( ev-descent-data-circle l P))
   Fundamental-cover-circle {l1} l dup-circle =
     center
       ( unique-family-property-universal-property-circle l
