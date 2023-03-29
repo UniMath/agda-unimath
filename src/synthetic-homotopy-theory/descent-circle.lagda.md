@@ -77,9 +77,11 @@ hom-descent-data-circle :
   { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   ( P : descent-data-circle l2) (Q : descent-data-circle l3) →
   UU (l2 ⊔ l3)
-hom-descent-data-circle _ (Y , e) (Z , f) =
-  Σ ( Y → Z)
-    ( λ h → (h ∘ (map-equiv e)) ~ ((map-equiv f) ∘ h))
+hom-descent-data-circle _ P Q =
+  Σ ( (type-descent-data-circle P) → (type-descent-data-circle Q))
+    ( λ h →
+      ( h ∘ (map-equiv (aut-descent-data-circle P))) ~
+      ( (map-equiv (aut-descent-data-circle Q)) ∘ h))
 ```
 
 ## Properties
@@ -99,7 +101,7 @@ Eq-descent-data-circle P Q =
 refl-Eq-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
   Eq-descent-data-circle P P
-refl-Eq-descent-data-circle (X , e) = id-equiv , refl-htpy
+refl-Eq-descent-data-circle P = id-equiv , refl-htpy
 
 Eq-eq-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →
@@ -109,13 +111,14 @@ Eq-eq-descent-data-circle P .P refl = refl-Eq-descent-data-circle P
 is-contr-total-Eq-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
   is-contr (Σ (descent-data-circle l1) (Eq-descent-data-circle P))
-is-contr-total-Eq-descent-data-circle (X , e) =
+is-contr-total-Eq-descent-data-circle P =
   is-contr-total-Eq-structure
     ( λ Y f h →
-      ((map-equiv h) ∘ (map-equiv e)) ~ ((map-equiv f) ∘ (map-equiv h)))
-    ( is-contr-total-equiv X)
-    ( X , id-equiv)
-  ( is-contr-total-htpy-equiv e)
+      ( (map-equiv h) ∘ (map-equiv (aut-descent-data-circle P))) ~
+      ( (map-equiv f) ∘ (map-equiv h)))
+    ( is-contr-total-equiv (type-descent-data-circle P))
+    ( type-descent-data-circle P , id-equiv)
+  ( is-contr-total-htpy-equiv (aut-descent-data-circle P))
 
 is-equiv-Eq-eq-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →
