@@ -80,8 +80,11 @@ hom-descent-data-circle :
 hom-descent-data-circle _ P Q =
   Σ ( (type-descent-data-circle P) → (type-descent-data-circle Q))
     ( λ h →
-      ( h ∘ (map-equiv (aut-descent-data-circle P))) ~
-      ( (map-equiv (aut-descent-data-circle Q)) ∘ h))
+      coherence-square-maps
+        ( h)
+        ( map-equiv (aut-descent-data-circle P))
+        ( map-equiv (aut-descent-data-circle Q))
+        ( h))
 ```
 
 ## Properties
@@ -95,8 +98,11 @@ Eq-descent-data-circle :
 Eq-descent-data-circle P Q =
   Σ ( (type-descent-data-circle P) ≃ (type-descent-data-circle Q))
     ( λ h →
-      ( (map-equiv h) ∘ (map-equiv (aut-descent-data-circle P))) ~
-      ( (map-equiv (aut-descent-data-circle Q)) ∘ (map-equiv h)))
+      coherence-square-maps
+        ( map-equiv h)
+        ( map-equiv (aut-descent-data-circle P))
+        ( map-equiv (aut-descent-data-circle Q))
+        ( map-equiv h))
 
 refl-Eq-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
@@ -114,8 +120,11 @@ is-contr-total-Eq-descent-data-circle :
 is-contr-total-Eq-descent-data-circle P =
   is-contr-total-Eq-structure
     ( λ Y f h →
-      ( (map-equiv h) ∘ (map-equiv (aut-descent-data-circle P))) ~
-      ( (map-equiv f) ∘ (map-equiv h)))
+      coherence-square-maps
+        ( map-equiv h)
+        ( map-equiv (aut-descent-data-circle P))
+        ( map-equiv f)
+        ( map-equiv h))
     ( is-contr-total-equiv (type-descent-data-circle P))
     ( type-descent-data-circle P , id-equiv)
   ( is-contr-total-htpy-equiv (aut-descent-data-circle P))
@@ -156,8 +165,10 @@ module _
   pr2 (ev-descent-data-circle P) = equiv-tr P (loop-free-loop l)
 
   triangle-comparison-descent-data-circle :
-    ev-descent-data-circle ~
-    ( (comparison-descent-data-circle l2) ∘ (ev-free-loop l (UU l2)))
+    coherence-triangle-maps
+      ( ev-descent-data-circle)
+      ( comparison-descent-data-circle l2)
+      ( ev-free-loop l (UU l2))
   triangle-comparison-descent-data-circle P =
     eq-Eq-descent-data-circle
       ( ev-descent-data-circle P)
@@ -304,9 +315,10 @@ module _
     map-equiv equiv-fixpoint-descent-data-circle-free-dependent-loop
 
   triangle-comparison-fixpoint-descent-data-circle :
-    ( ev-free-loop-Π l Q) ~
-    ( comparison-fixpoint-descent-data-circle ∘
-      ev-fixpoint-descent-data-circle)
+    coherence-triangle-maps
+      ( ev-free-loop-Π l Q)
+      ( comparison-fixpoint-descent-data-circle)
+      ( ev-fixpoint-descent-data-circle)
   triangle-comparison-fixpoint-descent-data-circle s =
     eq-Eq-free-dependent-loop l Q
       ( ev-free-loop-Π l Q s)
@@ -365,8 +377,11 @@ module _
     is-equiv-ev-fixpoint-descent-data-circle dup-circle
 
   compute-ev-fixpoint-descent-data-circle :
-    ( pr1 ∘ ev-fixpoint-descent-data-circle ) ~
-    ( (map-inv-equiv α) ∘ (ev-pt (base-free-loop l) Q))
+    coherence-square-maps
+      ( ev-fixpoint-descent-data-circle)
+      ( ev-pt (base-free-loop l) Q)
+      ( pr1)
+      ( map-inv-equiv α)
   compute-ev-fixpoint-descent-data-circle = refl-htpy
 ```
 
