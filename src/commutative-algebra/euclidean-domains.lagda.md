@@ -7,14 +7,14 @@ module commutative-algebra.euclidean-domains where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.integral-domains
+open import commutative-algebra.trivial-commutative-rings
+
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.integral-domains
-open import commutative-algebra.commutative-semirings
-open import commutative-algebra.trivial-commutative-rings
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -50,8 +50,8 @@ open import univalent-combinatorics.lists
 ## Idea
 
 An euclidean domain is an integral domain `R` that has an euclidean valuation.
-That is, a function `v : R → ℕ` such that for every `x y : R`, if `y` is non-zero then
-there are `q r : R` with `x = q y + r` and `v r < v y`.
+That is, a function `v : R → ℕ` such that for every `x y : R`, if `y` is
+non-zero then there are `q r : R` with `x = q y + r` and `v r < v y`.
 
 ## Definition
 
@@ -677,7 +677,7 @@ module _
           ( y))
         ( remainder-euclidean-division-Euclidean-Domain x y p)))
   equation-euclidean-division-Euclidean-Domain x y p =
-     pr1 (pr2 (pr2 is-euclidean-domain-Euclidean-Domain x y p)) 
+     pr1 (pr2 (pr2 is-euclidean-domain-Euclidean-Domain x y p))
 
   remainder-condition-euclidean-division-Euclidean-Domain :
     ( x y : type-Euclidean-Domain) →

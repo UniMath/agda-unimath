@@ -7,6 +7,8 @@ module linear-algebra.vectors-on-euclidean-domains where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.euclidean-domains
+
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
@@ -26,14 +28,14 @@ open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 
 open import ring-theory.rings
-open import commutative-algebra.euclidean-domains
 ```
 
 </details>
 
 ## Idea
 
-Given an euclidean domain `R`, the type `vec n R` of `R`-vectors is an `R`-module.
+Given an euclidean domain `R`, the type `vec n R` of `R`-vectors is an
+`R`-module.
 
 ## Definitions
 

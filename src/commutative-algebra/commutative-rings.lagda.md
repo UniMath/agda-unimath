@@ -546,4 +546,3 @@ module _
   preserves-concat-add-list-Commutative-Ring =
     preserves-concat-add-list-Ring ring-Commutative-Ring
 ```
-
