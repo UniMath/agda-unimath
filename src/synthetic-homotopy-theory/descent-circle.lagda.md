@@ -224,7 +224,10 @@ module _
         ( Q))
 ```
 
-### Sections of type families over the circle are exactly the fixpoints of the automorphism from the characteristic descent data
+### Characterization of sections of type families over the circle
+
+Sections of type families over the circle are exactly the fixpoints of the
+automorphism from the characteristic descent data.
 
 ```agda
 module _
@@ -385,7 +388,10 @@ module _
   compute-ev-fixpoint-descent-data-circle = refl-htpy
 ```
 
-### Families of maps over the circle are maps commuting with the respective automorphisms
+### Characterization of families of maps over the circle
+
+Families of maps over the circle are maps commuting with the respective
+automorphisms.
 
 ```agda
 module _
