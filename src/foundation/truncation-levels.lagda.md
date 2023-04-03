@@ -28,6 +28,15 @@ truncation-level-ℕ : ℕ → 𝕋
 truncation-level-ℕ = succ-𝕋 ∘ truncation-level-minus-one-ℕ
 ```
 
+### Inclusions of the truncation levels into the natural numbers
+
+```agda
+ℕ-plus-two-truncation-level : 𝕋 → ℕ
+ℕ-plus-two-truncation-level neg-two-𝕋 = zero-ℕ
+ℕ-plus-two-truncation-level (succ-𝕋 n) =
+  succ-ℕ (ℕ-plus-two-truncation-level n)
+```
+
 ### Addition of truncation levels
 
 ```agda
