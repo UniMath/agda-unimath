@@ -338,19 +338,20 @@ The type of all function from `A → B` is equivalent to the type of function
 
 ```agda
 fib-Σ :
-  {l : Level} (X : UU l) (A : UU l) →
+  {l1 l2 : Level} (X : UU l1) (A : UU l2) →
   (X → A) ≃
-    Σ (A → UU l) (λ Y → X ≃ Σ A Y)
-fib-Σ {l} X A =
+    Σ (A → UU (l2 ⊔ l1)) (λ Y → X ≃ Σ A Y)
+fib-Σ {l1} {l2} X A =
   ( ( equiv-Σ
       ( λ Z → X ≃ Σ A Z)
-      ( equiv-Fib l A)
+      ( equiv-Fib l1 A)
       ( λ s →
         inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
-          ( is-contr-total-equiv X)
-          ( X , id-equiv )))))
+          ( is-contr-is-small-lmax l2 X )
+          ( is-small-lmax l2 X )) ∘e
+        ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A))))
 
 equiv-fixed-Slice-structure :
   {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →

@@ -116,9 +116,18 @@ pr2 is-small' = id-equiv
 ### Every type of universe level `l1` is `l1 ⊔ l2`-small
 
 ```agda
-is-small-lmax : {l1 : Level} (l2 : Level) (X : UU l1) → is-small (l1 ⊔ l2) X
-pr1 (is-small-lmax l2 X) = raise l2 X
-pr2 (is-small-lmax l2 X) = compute-raise l2 X
+module _
+  {l1 : Level} (l2 : Level) (X : UU l1)
+  where
+
+  is-small-lmax : is-small (l1 ⊔ l2) X
+  pr1 is-small-lmax = raise l2 X
+  pr2 is-small-lmax = compute-raise l2 X
+
+  is-contr-is-small-lmax :
+    is-contr (is-small (l1 ⊔ l2) X)
+  pr1 is-contr-is-small-lmax = is-small-lmax
+  pr2 is-contr-is-small-lmax x = eq-is-prop (is-prop-is-small (l1 ⊔ l2) X)
 ```
 
 ### Every type of universe level `l` is `UU (lsuc l)`-small

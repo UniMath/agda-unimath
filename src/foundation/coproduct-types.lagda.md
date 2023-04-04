@@ -34,6 +34,7 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
+
   is-left-Prop : X + Y → Prop lzero
   is-left-Prop (inl x) = unit-Prop
   is-left-Prop (inr x) = empty-Prop
@@ -53,6 +54,10 @@ module _
 
   is-prop-is-right : (x : X + Y) → is-prop (is-right x)
   is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
+
+  is-left-or-is-right : (x : X + Y) → is-left x + is-right x
+  is-left-or-is-right (inl x) = inl star
+  is-left-or-is-right (inr x) = inr star
 ```
 
 ## Properties
