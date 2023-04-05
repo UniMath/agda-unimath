@@ -10,6 +10,7 @@ module foundation.coproduct-decompositions where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.coproduct-decompositions-subuniverse
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
@@ -80,6 +81,51 @@ module _
 ```
 
 ## Propositions
+
+### Coproduct decomposition is equivalent to coproduct decomposition of a full subuniverse
+
+```agda
+equiv-coproduct-Decomposition-full-subuniverse :
+  {l1 : Level} → (X : UU l1) →
+  binary-coproduct-Decomposition l1 l1 X ≃
+  binary-coproduct-Decomposition-subuniverse (λ _ → unit-Prop) (X , star)
+pr1 (equiv-coproduct-Decomposition-full-subuniverse X) d =
+  ( left-summand-binary-coproduct-Decomposition d , star) ,
+  ( right-summand-binary-coproduct-Decomposition d , star) ,
+  ( matching-correspondence-binary-coproduct-Decomposition d)
+pr2 (equiv-coproduct-Decomposition-full-subuniverse X) =
+  is-equiv-has-inverse
+    ( λ d →
+      type-left-summand-binary-coproduct-Decomposition-subuniverse
+        ( λ _ → unit-Prop)
+        ( X , star)
+        ( d) ,
+     type-right-summand-binary-coproduct-Decomposition-subuniverse
+       ( λ _ → unit-Prop)
+       ( X , star)
+       ( d) ,
+     matching-correspondence-binary-coproduct-Decomposition-subuniverse
+       ( λ _ → unit-Prop)
+       ( X , star)
+       ( d))
+    ( λ d →
+      eq-equiv-binary-coproduct-Decomposition-subuniverse
+        ( λ _ → unit-Prop)
+        ( X , star)
+        ( _)
+        ( d)
+        ( id-equiv ,
+          ( id-equiv ,
+            htpy-right-whisk
+              ( id-map-coprod _ _)
+              ( map-equiv
+                ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
+                  ( λ _ → unit-Prop)
+                  ( X , star)
+                  ( d))))))
+    ( refl-htpy)
+
+```
 
 ### Characterization of equality of binary coproduct Decomposition
 
@@ -153,15 +199,11 @@ module _
           ( equiv-binary-coproduct-Decomposition X))
   is-contr-total-equiv-binary-coproduct-Decomposition =
     is-contr-total-Eq-structure
-      ( λ x z el →
-          Σ (pr1 (pr2 X) ≃ pr1 z)
-          (λ er →
-             (map-coprod (pr1 el) (pr1 er) ∘ pr1 (pr2 (pr2 X))) ~ pr1 (pr2 z)))
+      ( _)
       ( is-contr-total-equiv ( left-summand-binary-coproduct-Decomposition  X) )
       ( left-summand-binary-coproduct-Decomposition X , id-equiv)
       ( is-contr-total-Eq-structure
-        ( λ x z er →
-            (map-coprod (pr1 id-equiv) (pr1 er) ∘ pr1 (pr2 (pr2 X))) ~ pr1 z)
+        ( _)
         ( is-contr-total-equiv (right-summand-binary-coproduct-Decomposition X))
         ( right-summand-binary-coproduct-Decomposition X , id-equiv)
         ( is-contr-total-htpy-equiv
@@ -198,8 +240,6 @@ module _
 ```
 
 ### Equivalence between `X → Fin 2` and `binary-coproduct-Decomposition l1 l1 X`
-
-
 
 ```agda
 module _

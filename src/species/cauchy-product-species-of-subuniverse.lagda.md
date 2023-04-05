@@ -8,7 +8,7 @@ module species.cauchy-product-species-of-subuniverse where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.coproduct-decompositions
+open import foundation.coproduct-decompositions-subuniverse
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -56,12 +56,12 @@ module _
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     (X : type-subuniverse P) → UU (lsuc l1 ⊔ l2 ⊔ l3)
   cauchy-product-species-subuniverse' S T X =
-    Σ ( binary-coproduct-Decomposition P X)
+    Σ ( binary-coproduct-Decomposition-subuniverse P X)
       ( λ d →
         inclusion-subuniverse (subuniverse-global-subuniverse Q l2)
-          ( S (left-summand-binary-coproduct-Decomposition P X d)) ×
+          ( S (left-summand-binary-coproduct-Decomposition-subuniverse P X d)) ×
         inclusion-subuniverse (subuniverse-global-subuniverse Q l3)
-          ( T (right-summand-binary-coproduct-Decomposition P X d)))
+          ( T (right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
 
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
@@ -116,23 +116,23 @@ module _
         ( cauchy-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
-      Σ ( ternary-coproduct-Decomposition P X)
+      Σ ( ternary-coproduct-Decomposition-subuniverse P X)
         ( λ d →
           inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-            ( S (first-summand-ternary-coproduct-Decomposition P X d)) ×
+            ( S (first-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
             ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-              ( T (second-summand-ternary-coproduct-Decomposition P X d)) ×
+              ( T (second-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
               inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( U (third-summand-ternary-coproduct-Decomposition P X d))))
+              ( U (third-summand-ternary-coproduct-Decomposition-subuniverse P X d))))
     equiv-left-iterated-cauchy-product-species-subuniverse =
       ( ( equiv-Σ
           ( λ d →
             inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-            ( S (first-summand-ternary-coproduct-Decomposition P X d)) ×
+            ( S (first-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
             ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-              ( T (second-summand-ternary-coproduct-Decomposition P X d)) ×
+              ( T (second-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
               inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( U (third-summand-ternary-coproduct-Decomposition P X d)))))
+              ( U (third-summand-ternary-coproduct-Decomposition-subuniverse P X d)))))
           ( ( equiv-Σ
               ( _)
               ( assoc-prod _ _ _ ∘e commutative-prod)
@@ -141,11 +141,11 @@ module _
                   ( ( ( assoc-coprod) ∘e
                     ( ( commutative-coprod  _ _))) )
                   ( inclusion-subuniverse P X)) ∘e
-              equiv-ternary-left-iterated-coproduct-Decomposition P X C2))
+              equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse P X C2))
           ( λ d → assoc-prod _ _ _) ∘e
         ( ( inv-assoc-Σ
-            ( binary-coproduct-Decomposition P X)
-            ( λ z → binary-coproduct-Decomposition P (pr1 z))
+            ( binary-coproduct-Decomposition-subuniverse P X)
+            ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 z))
             ( _)) ∘e
           ( ( equiv-tot  λ d → right-distributive-prod-Σ))))
 
@@ -154,21 +154,21 @@ module _
         ( S)
         ( cauchy-product-species-subuniverse P Q C1 T U)
         ( X) ≃
-      Σ ( ternary-coproduct-Decomposition P X)
+      Σ ( ternary-coproduct-Decomposition-subuniverse P X)
         ( λ d →
           inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-            ( S (first-summand-ternary-coproduct-Decomposition P X d)) ×
+            ( S (first-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
             ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-              ( T (second-summand-ternary-coproduct-Decomposition P X d)) ×
+              ( T (second-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
                 inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( U (third-summand-ternary-coproduct-Decomposition P X d))))
+              ( U (third-summand-ternary-coproduct-Decomposition-subuniverse P X d))))
     equiv-right-iterated-cauchy-product-species-subuniverse =
       ( ( equiv-Σ-equiv-base
           ( _)
-          ( equiv-ternary-right-iterated-coproduct-Decomposition P X C2)) ∘e
+          ( equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse P X C2)) ∘e
         ( ( inv-assoc-Σ
-            ( binary-coproduct-Decomposition P X)
-            ( λ z → binary-coproduct-Decomposition P (pr1 (pr2 z)))
+            ( binary-coproduct-Decomposition-subuniverse P X)
+            ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 (pr2 z)))
             ( _)) ∘e
           ( ( equiv-tot (λ d → left-distributive-prod-Σ)))))
 
@@ -237,10 +237,10 @@ module _
     equiv-Σ
       ( λ d →
         inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-          ( T (left-summand-binary-coproduct-Decomposition P X d)) ×
+          ( T (left-summand-binary-coproduct-Decomposition-subuniverse P X d)) ×
         inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-          ( S (right-summand-binary-coproduct-Decomposition P X d)))
-      ( equiv-commutative-binary-coproduct-Decomposition P X)
+          ( S (right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
+      ( equiv-commutative-binary-coproduct-Decomposition-subuniverse P X)
       ( λ _ → commutative-prod)
 
   commutative-cauchy-product-species-subuniverse :
@@ -305,12 +305,12 @@ module _
             inclusion-subuniverse
               ( subuniverse-global-subuniverse Q l)
               ( S (pr1 (p))))
-          ( equiv-is-empty-right-summand-binary-coproduct-Decomposition
+          ( equiv-is-empty-right-summand-binary-coproduct-Decomposition-subuniverse
             P
             X
             C2)) ∘e
         ( ( inv-assoc-Σ
-            ( binary-coproduct-Decomposition P X)
+            ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ d →
               inclusion-subuniverse
                 ( subuniverse-global-subuniverse Q l1)
@@ -318,12 +318,12 @@ module _
                   ( P)
                   ( subuniverse-global-subuniverse Q l1)
                   ( C3)
-                  ( right-summand-binary-coproduct-Decomposition P X d)))
+                  ( right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
             ( λ z →
               inclusion-subuniverse
                 ( subuniverse-global-subuniverse Q l)
                 ( S
-                  ( left-summand-binary-coproduct-Decomposition
+                  ( left-summand-binary-coproduct-Decomposition-subuniverse
                     P
                     X
                     (pr1 z))))) ∘e
