@@ -8,6 +8,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-truncation
 open import foundation.identity-types
 open import foundation.truncation-levels
 open import foundation.truncations
@@ -53,7 +54,6 @@ module _
   Eq-unit-trunc-im : A → A → UU (l1 ⊔ l2)
   Eq-unit-trunc-im x y = trunc-im k (ap f {x} {y})
 
-{-
   extensionality-trunc-im :
     (x y : A) →
     ( unit-trunc-im (succ-𝕋 k) f x ＝ unit-trunc-im (succ-𝕋 k) f y) ≃
@@ -61,9 +61,11 @@ module _
   extensionality-trunc-im x y =
     ( equiv-tot
       ( λ q →
-        {!!})) ∘e
+        equiv-trunc k (equiv-tot (λ p → equiv-concat (inv right-unit) q) ∘e equiv-Eq-eq-fib f (f y)) ∘e
+        ( inv-equiv (effectiveness-trunc k (x , q) (y , refl)) ∘e
+          ( equiv-concat (ap unit-trunc (inv (tr-fib f q refl))) (unit-trunc (y , refl)) ∘e
+            equiv-concat (preserves-tr (λ _ → unit-trunc) q (x , refl)) (unit-trunc (y , refl)))))) ∘e
     ( equiv-pair-eq-Σ
       ( unit-trunc-im (succ-𝕋 k) f x)
       ( unit-trunc-im (succ-𝕋 k) f y))
--}
 ```
