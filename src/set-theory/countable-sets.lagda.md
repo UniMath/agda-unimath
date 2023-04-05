@@ -70,7 +70,7 @@ is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 
 ## Properties
 
-If a set `X` is inhabited, then it is countable if and only if there is
+### If a set `X` is inhabited, then it is countable if and only if there is
 a surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 
 ```agda
@@ -84,6 +84,7 @@ is-prop-is-directly-countable : {l : Level} (X : Set l) →
   is-prop (is-directly-countable X)
 is-prop-is-directly-countable X = is-prop-type-Prop
   (is-directly-countable-Prop X)
+
 
 module _
   {l : Level} (X : Set l) (a : type-Set X)
@@ -124,6 +125,29 @@ module _
 
 ### The two definitions of countability are equivalent
 
+```agda
+module _
+  {l : Level} (X : Set l)
+  where
+{-
+  is-countable-is-countable' : {l : Level} (X : Set l) →
+    is-countable' X → is-countable X
+  is-countable-is-countable' X H =
+    apply-universal-property-trunc-Prop H
+      ( is-countable-Prop X)
+      ( λ { (P , f) →
+         unit-trunc-Prop
+           ( pair
+             ( {!!} ∘ {!!})
+             {!!})})
+             -}
+```
+
+-- ℕ → Σ (n : ℕ), P' n + ¬ (P' n) -- → (Σ (n : ℕ), P' n) + (Σ (n : ℕ), ¬ (P' n))
+-- → X + 1
+
+-- P' := shift-ℕ ∅ P
+
 ## Examples
 
 The set of natural numbers ℕ is itself countable.
@@ -137,4 +161,6 @@ is-countable-ℕ =
       ( λ {
         (inl n) → unit-trunc-Prop (pair (succ-ℕ n) refl) ;
         (inr star) → unit-trunc-Prop (pair zero-ℕ refl)}))
+
 ```
+
