@@ -183,6 +183,9 @@ module _
   is-zero-ring-Prop : type-Ring R → Prop l
   is-zero-ring-Prop x = Id-Prop (set-Ring R) x zero-Ring
 
+  is-nonzero-ring-Prop : type-Ring R → Prop l
+  is-nonzero-ring-Prop x = neg-Prop (is-zero-ring-Prop x)
+
   left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x
   left-unit-law-add-Ring = left-unit-law-add-Ab (ab-Ring R)
 
