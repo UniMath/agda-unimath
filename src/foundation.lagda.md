@@ -50,6 +50,7 @@ open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
 open import foundation.coproduct-decompositions public
+open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
 open import foundation.coslice public
 open import foundation.cospans public

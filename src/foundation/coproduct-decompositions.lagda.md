@@ -9,17 +9,16 @@ module foundation.coproduct-decompositions where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.coproduct-decompositions-subuniverse
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
@@ -29,22 +28,24 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositions
-open import foundation.subuniverses
 open import foundation.structure-identity-principle
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.2-element-types
+open import foundation.subuniverses
 open import foundation.transport
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.type-duality
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
+
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -124,7 +125,6 @@ pr2 (equiv-coproduct-Decomposition-full-subuniverse X) =
                   ( X , star)
                   ( d))))))
     ( refl-htpy)
-
 ```
 
 ### Characterization of equality of binary coproduct Decomposition
@@ -174,8 +174,6 @@ module _
     right-summand-binary-coproduct-Decomposition Y
   map-equiv-right-summand-equiv-binary-coproduct-Decomposition =
     map-equiv (equiv-right-summand-equiv-binary-coproduct-Decomposition)
-
-
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} (X : binary-coproduct-Decomposition l2 l3 A)

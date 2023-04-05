@@ -14,8 +14,8 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
-open import foundation.subtypes
 open import foundation.structure-identity-principle
+open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type

@@ -34,7 +34,6 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-
   is-left-Prop : X + Y → Prop lzero
   is-left-Prop (inl x) = unit-Prop
   is-left-Prop (inr x) = empty-Prop

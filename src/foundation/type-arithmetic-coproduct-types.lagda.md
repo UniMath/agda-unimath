@@ -9,8 +9,8 @@ module foundation.type-arithmetic-coproduct-types where
 ```agda
 open import foundation.coproduct-types
 open import foundation.equality-coproduct-types
-open import foundation.unit-type
 open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
