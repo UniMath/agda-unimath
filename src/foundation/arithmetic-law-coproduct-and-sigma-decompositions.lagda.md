@@ -12,6 +12,7 @@ open import foundation.coproduct-decompositions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -125,4 +126,42 @@ module _
                               ( is-contr-total-equiv' (A + B))
                               ((A + B) , id-equiv))))))))) ∘e
       ( reassociate)))
+
+  compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition :
+    ( D : Σ ( Relaxed-Σ-Decomposition l l X)
+            ( λ D →
+              binary-coproduct-Decomposition
+                l l
+                ( indexing-type-Relaxed-Σ-Decomposition D))) →
+    ( a : left-summand-binary-coproduct-Decomposition (pr2 D)) →
+    ( cotype-Relaxed-Σ-Decomposition (pr1 D)
+      ( map-inv-equiv
+        ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
+        ( inl a))) ＝
+    cotype-Relaxed-Σ-Decomposition
+      ( pr1
+        ( pr2
+          ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+      ( a)
+  compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition D a =
+    {!!}
+
+  compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition :
+    ( D : Σ ( Relaxed-Σ-Decomposition l l X)
+            ( λ D →
+              binary-coproduct-Decomposition
+                l l
+                ( indexing-type-Relaxed-Σ-Decomposition D))) →
+    ( b : right-summand-binary-coproduct-Decomposition (pr2 D)) →
+    ( cotype-Relaxed-Σ-Decomposition (pr1 D)
+      ( map-inv-equiv
+        ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
+        ( inr b))) ＝
+    cotype-Relaxed-Σ-Decomposition
+      ( pr2
+        ( pr2
+          ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+      ( b)
+  compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition =
+    {!!}
 ```
