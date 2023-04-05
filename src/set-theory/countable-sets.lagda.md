@@ -70,7 +70,7 @@ is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 
 ## Properties
 
-### If a set `X` is inhabited, then it is countable if and only if there is
+If a set `X` is inhabited, then it is countable if and only if there is
 a surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 
 ```agda
@@ -129,8 +129,8 @@ module _
 The set of natural numbers ℕ is itself countable.
 
 ```agda
-is-ℕ-countable : is-countable ℕ-Set 
-is-ℕ-countable =
+is-countable-ℕ : is-countable ℕ-Set 
+is-countable-ℕ =
   unit-trunc-Prop
     (pair
       ( λ { zero-ℕ → inr star ; (succ-ℕ n) → inl n})
