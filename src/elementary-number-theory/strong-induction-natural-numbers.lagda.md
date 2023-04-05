@@ -7,6 +7,7 @@ module elementary-number-theory.strong-induction-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -32,7 +33,7 @@ the inductive hypothesis is satisfied at all smaller values.
 
 ## Definition
 
-### A `□`-modality on families indexed by `ℕ`
+### The `□`-modality on families indexed by `ℕ`
 
 ```agda
 □-≤-ℕ : {l : Level} → (ℕ → UU l) → ℕ → UU l
@@ -45,6 +46,8 @@ the inductive hypothesis is satisfied at all smaller values.
   {l : Level} {P : ℕ → UU l} → ((n : ℕ) → □-≤-ℕ P n) → ((n : ℕ) → P n)
 ε-□-≤-ℕ f n = f n n (refl-leq-ℕ n)
 ```
+
+## Theorem
 
 ### The base case of the strong induction principle
 
@@ -59,7 +62,7 @@ eq-zero-strong-ind-ℕ :
 eq-zero-strong-ind-ℕ P p0 t = refl
 ```
 
-### Preparing induction
+### The successor case of the strong induction principle
 
 ```agda
 cases-succ-strong-ind-ℕ :
@@ -119,20 +122,20 @@ eq-succ-strong-ind-ℕ P pS k H p =
 induction-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) → (□-≤-ℕ P zero-ℕ) →
   ((k : ℕ) → (□-≤-ℕ P k) → (□-≤-ℕ P (succ-ℕ k))) → (n : ℕ) → □-≤-ℕ P n
-induction-strong-ind-ℕ P q0 qS zero-ℕ = q0
-induction-strong-ind-ℕ P q0 qS (succ-ℕ n) =
-  qS n (induction-strong-ind-ℕ P q0 qS n)
+induction-strong-ind-ℕ P p0 pS zero-ℕ = p0
+induction-strong-ind-ℕ P p0 pS (succ-ℕ n) =
+  pS n (induction-strong-ind-ℕ P p0 pS n)
 
 computation-succ-strong-ind-ℕ :
-  {l : Level} (P : ℕ → UU l) (q0 : □-≤-ℕ P zero-ℕ) →
-  (qS : (k : ℕ) → (□-≤-ℕ P k) → (□-≤-ℕ P (succ-ℕ k))) →
+  {l : Level} (P : ℕ → UU l) (p0 : □-≤-ℕ P zero-ℕ) →
+  (pS : (k : ℕ) → (□-≤-ℕ P k) → (□-≤-ℕ P (succ-ℕ k))) →
   (n : ℕ) →
-  ( induction-strong-ind-ℕ P q0 qS (succ-ℕ n)) ＝
-  ( qS n (induction-strong-ind-ℕ P q0 qS n))
-computation-succ-strong-ind-ℕ P q0 qS n = refl
+  ( induction-strong-ind-ℕ P p0 pS (succ-ℕ n)) ＝
+  ( pS n (induction-strong-ind-ℕ P p0 pS n))
+computation-succ-strong-ind-ℕ P p0 pS n = refl
 ```
 
-### We condluce the strong induction principle
+### The strong induction principle
 
 ```agda
 strong-ind-ℕ :
@@ -149,12 +152,6 @@ comp-zero-strong-ind-ℕ :
   (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   strong-ind-ℕ P p0 pS zero-ℕ ＝ p0
 comp-zero-strong-ind-ℕ P p0 pS = refl
-
-cases-leq-succ-reflexive-leq-ℕ :
-  {n : ℕ} → cases-leq-succ-ℕ {succ-ℕ n} {n} (refl-leq-ℕ n) ＝ inr refl
-cases-leq-succ-reflexive-leq-ℕ {zero-ℕ} = refl
-cases-leq-succ-reflexive-leq-ℕ {succ-ℕ n} =
-  ap (map-coprod id (ap succ-ℕ)) cases-leq-succ-reflexive-leq-ℕ
 
 cases-eq-comp-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
@@ -196,7 +193,7 @@ cases-eq-comp-succ-strong-ind-ℕ P p0 pS n α .(succ-ℕ n) p (inr refl) =
             cases-succ-strong-ind-ℕ P pS k H m (cases-leq-succ-ℕ p₁))
           n)
         ( succ-ℕ n))
-       cases-leq-succ-reflexive-leq-ℕ))
+      ( cases-leq-succ-reflexive-leq-ℕ)))
 
 eq-comp-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
@@ -209,7 +206,6 @@ eq-comp-succ-strong-ind-ℕ :
     n m p) ＝
   ( strong-ind-ℕ P p0 pS m)
 eq-comp-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ star = refl
-eq-comp-succ-strong-ind-ℕ P p0 pS zero-ℕ (succ-ℕ m) ()
 eq-comp-succ-strong-ind-ℕ P p0 pS (succ-ℕ n) m p =
   cases-eq-comp-succ-strong-ind-ℕ P p0 pS n
     ( eq-comp-succ-strong-ind-ℕ P p0 pS n) m p
@@ -229,8 +225,9 @@ comp-succ-strong-ind-ℕ P p0 pS n =
     ( refl-leq-ℕ n)) ∙
   ( ap ( pS n)
        ( eq-htpy
-         ( λ m → eq-htpy
-           ( λ p → eq-comp-succ-strong-ind-ℕ P p0 pS n m p))))
+         ( λ m →
+           eq-htpy
+             ( λ p → eq-comp-succ-strong-ind-ℕ P p0 pS n m p))))
 
 total-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
@@ -243,3 +240,7 @@ pr1 (total-strong-ind-ℕ P p0 pS) = strong-ind-ℕ P p0 pS
 pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = comp-zero-strong-ind-ℕ P p0 pS
 pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = comp-succ-strong-ind-ℕ P p0 pS
 ```
+
+## See also
+
+- The based strong induction principle is defined in [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).

@@ -187,7 +187,7 @@ upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
 upper-bound-nat-Fin' :
   (k : ℕ) (x : Fin k) → leq-ℕ (nat-Fin k x) k
 upper-bound-nat-Fin' k x =
-  leq-le-ℕ {nat-Fin k x} {k} (strict-upper-bound-nat-Fin k x)
+  leq-le-ℕ (nat-Fin k x) k (strict-upper-bound-nat-Fin k x)
 
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =

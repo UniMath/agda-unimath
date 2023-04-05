@@ -243,18 +243,18 @@ leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
 
 ```agda
 leq-le-ℕ :
-  {x y : ℕ} → le-ℕ x y → x ≤-ℕ y
-leq-le-ℕ {zero-ℕ} {succ-ℕ y} H = star
-leq-le-ℕ {succ-ℕ x} {succ-ℕ y} H = leq-le-ℕ {x} {y} H
+  (x y : ℕ) → le-ℕ x y → x ≤-ℕ y
+leq-le-ℕ zero-ℕ (succ-ℕ y) H = star
+leq-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-ℕ x y H
 ```
 
 ### If `x < y + 1` then `x ≤ y`
 
 ```agda
 leq-le-succ-ℕ :
-  {x y : ℕ} → le-ℕ x (succ-ℕ y) → x ≤-ℕ y
-leq-le-succ-ℕ {zero-ℕ} {y} H = star
-leq-le-succ-ℕ {succ-ℕ x} {succ-ℕ y} H = leq-le-succ-ℕ {x} {y} H
+  (x y : ℕ) → le-ℕ x (succ-ℕ y) → x ≤-ℕ y
+leq-le-succ-ℕ zero-ℕ y H = star
+leq-le-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-succ-ℕ x y H
 ```
 
 ### If `x < y` then `x + 1 ≤ y`
@@ -264,6 +264,16 @@ leq-succ-le-ℕ :
   (x y : ℕ) → le-ℕ x y → leq-ℕ (succ-ℕ x) y
 leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
+```
+
+### If `x ≤ y` then `x < y + 1`
+
+```agda
+le-succ-leq-ℕ :
+  (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
+le-succ-leq-ℕ zero-ℕ zero-ℕ H = star
+le-succ-leq-ℕ zero-ℕ (succ-ℕ y) H = star
+le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 ```
 
 ### `x ≤ y` if and only if `(x ＝ y) + (x < y)`
@@ -283,7 +293,7 @@ eq-or-le-leq-ℕ' x y H = map-coprod inv id (eq-or-le-leq-ℕ x y H)
 leq-eq-or-le-ℕ :
   (x y : ℕ) → ((x ＝ y) + (le-ℕ x y)) → leq-ℕ x y
 leq-eq-or-le-ℕ x .x (inl refl) = refl-leq-ℕ x
-leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ {x} {y} l
+leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
 ```
 
 ### If `x ≤ y` and `x ≠ y` then `x < y`

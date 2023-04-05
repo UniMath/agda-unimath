@@ -263,6 +263,12 @@ cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
   inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))
 cases-leq-succ-ℕ {succ-ℕ m} {succ-ℕ n} p =
   map-coprod id (ap succ-ℕ) (cases-leq-succ-ℕ p)
+
+cases-leq-succ-reflexive-leq-ℕ :
+  {n : ℕ} → cases-leq-succ-ℕ {succ-ℕ n} {n} (refl-leq-ℕ n) ＝ inr refl
+cases-leq-succ-reflexive-leq-ℕ {zero-ℕ} = refl
+cases-leq-succ-reflexive-leq-ℕ {succ-ℕ n} =
+  ap (map-coprod id (ap succ-ℕ)) cases-leq-succ-reflexive-leq-ℕ
 ```
 
 ### `m ≤ n` if and only if `n + 1 ≰ m`

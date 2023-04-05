@@ -136,7 +136,7 @@ pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
       ( leq-one-div-ℕ x n
         ( transitive-div-ℕ x l n L
           ( div-least-nontrivial-divisor-ℕ n H))
-        ( leq-le-ℕ {1} {n} H)))
+        ( leq-le-ℕ 1 n H)))
   where
   l = nat-least-nontrivial-divisor-ℕ n H
 pr1 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
@@ -170,22 +170,44 @@ quotient-div-least-prime-divisor-ℕ x H =
     ( nat-least-prime-divisor-ℕ x H)
     ( x)
     ( div-least-prime-divisor-ℕ x H)
+
+leq-quotient-div-least-prime-divisor-ℕ :
+  (x : ℕ) (H : le-ℕ 1 (succ-ℕ x)) →
+  leq-ℕ (quotient-div-least-prime-divisor-ℕ (succ-ℕ x) H) x
+leq-quotient-div-least-prime-divisor-ℕ x H =
+  leq-quotient-div-is-prime-ℕ
+    ( nat-least-prime-divisor-ℕ (succ-ℕ x) H)
+    ( x)
+    ( is-prime-least-prime-divisor-ℕ (succ-ℕ x) H)
+    ( div-least-prime-divisor-ℕ (succ-ℕ x) H)
 ```
 
 ### The fundamental theorem of arithmetic
 
 ```agda
 list-primes-fundamental-theorem-arithmetic-ℕ :
-  (x : ℕ) → is-nonzero-ℕ x → list Prime-ℕ
-list-primes-fundamental-theorem-arithmetic-ℕ zero-ℕ H = ex-falso (H refl)
+  (x : ℕ) → leq-ℕ 1 x → list Prime-ℕ
+list-primes-fundamental-theorem-arithmetic-ℕ zero-ℕ ()
 list-primes-fundamental-theorem-arithmetic-ℕ (succ-ℕ x) H =
-  strong-ind-ℕ
+  based-strong-ind-ℕ 1
     ( λ _ → list Prime-ℕ)
     ( nil)
-    ( λ k f →
+    ( λ n N f →
       cons
-        ( least-prime-divisor-ℕ (succ-ℕ (succ-ℕ k)) star)
-        ( f ( quotient-div-least-prime-divisor-ℕ (succ-ℕ (succ-ℕ k)) star)
-            ( leq-le-succ-ℕ {!!})))
+        ( least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+        ( f
+          ( quotient-div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+          ( leq-one-quotient-div-ℕ
+            ( nat-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+            ( succ-ℕ n)
+            ( div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+            ( preserves-leq-succ-ℕ 1 n N))
+          ( leq-quotient-div-least-prime-divisor-ℕ n (le-succ-leq-ℕ 1 n N))))
     ( succ-ℕ x)
+    ( H)
+
+list-fundamental-theorem-arithmetic-ℕ :
+  (x : ℕ) → leq-ℕ 1 x → list ℕ
+list-fundamental-theorem-arithmetic-ℕ x H =
+  map-list nat-Prime-ℕ (list-primes-fundamental-theorem-arithmetic-ℕ x H)
 ```

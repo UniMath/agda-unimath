@@ -51,5 +51,5 @@ is-upper-bound-is-strict-upper-bound-ℕ :
   {l : Level} (P : ℕ → UU l) (n : ℕ) →
   is-strict-upper-bound-ℕ P n → is-upper-bound-ℕ P n
 is-upper-bound-is-strict-upper-bound-ℕ P n H x p =
-  leq-le-ℕ {x} {n} (H x p)
+  leq-le-ℕ x n (H x p)
 ```
