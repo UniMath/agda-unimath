@@ -124,30 +124,7 @@ module _
 
 ### The two definitions of countability are equivalent
 
-```agda
-module _
-  {l : Level} (X : Set l)
-  where
-{-
-  is-countable-is-countable' : {l : Level} (X : Set l) →
-    is-countable' X → is-countable X
-  is-countable-is-countable' X H =
-    apply-universal-property-trunc-Prop H
-      ( is-countable-Prop X)
-      ( λ { (P , f) →
-         unit-trunc-Prop
-           ( pair
-             ( {!!} ∘ {!!})
-             {!!})})
-             -}
-```
-
--- ℕ → Σ (n : ℕ), P' n + ¬ (P' n) -- → (Σ (n : ℕ), P' n) + (Σ (n : ℕ), ¬ (P' n))
--- → X + 1
-
--- P' := shift-ℕ ∅ P
-
-##Examples
+## Examples
 
 The set of natural numbers ℕ is itself countable.
 
