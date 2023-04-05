@@ -85,7 +85,6 @@ is-prop-is-directly-countable : {l : Level} (X : Set l) →
 is-prop-is-directly-countable X = is-prop-type-Prop
   (is-directly-countable-Prop X)
 
-
 module _
   {l : Level} (X : Set l) (a : type-Set X)
   where
@@ -161,5 +160,4 @@ is-ℕ-countable =
       ( λ {
         (inl n) → unit-trunc-Prop (pair (succ-ℕ n) refl) ;
         (inr star) → unit-trunc-Prop (pair zero-ℕ refl)}))
-
 ```
