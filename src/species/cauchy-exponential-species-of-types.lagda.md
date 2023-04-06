@@ -111,8 +111,28 @@ module _
             ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
             ( λ D →
               equiv-prod
-                ( equiv-Π _ id-equiv λ a' → {!!} )
-                ( equiv-Π _ id-equiv λ b' → {!!}))) ∘e
+                ( equiv-Π
+                    ( _)
+                    ( id-equiv)
+                    ( λ a' →
+                      equiv-eq
+                        ( ap
+                          ( S)
+                          ( inv
+                            ( compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition
+                                D
+                                a')))))
+                ( equiv-Π
+                    ( _)
+                    ( id-equiv)
+                    ( λ b' →
+                      equiv-eq
+                        ( ap
+                          ( T)
+                          ( inv
+                            ( compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition
+                                 D
+                                 b'))))))) ∘e
         ( ( inv-assoc-Σ
               ( Relaxed-Σ-Decomposition l1 l1 X)
               ( λ d →

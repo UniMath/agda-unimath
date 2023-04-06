@@ -8,15 +8,19 @@ module foundation.arithmetic-law-coproduct-and-sigma-decompositions where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.coproduct-decompositions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.relaxed-sigma-decompositions
+open import foundation.singleton-induction
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
@@ -127,41 +131,79 @@ module _
                               ((A + B) , id-equiv))))))))) ∘e
       ( reassociate)))
 
-  compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition :
+  module _ 
     ( D : Σ ( Relaxed-Σ-Decomposition l l X)
             ( λ D →
               binary-coproduct-Decomposition
                 l l
-                ( indexing-type-Relaxed-Σ-Decomposition D))) →
-    ( a : left-summand-binary-coproduct-Decomposition (pr2 D)) →
-    ( cotype-Relaxed-Σ-Decomposition (pr1 D)
-      ( map-inv-equiv
-        ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
-        ( inl a))) ＝
-    cotype-Relaxed-Σ-Decomposition
-      ( pr1
-        ( pr2
-          ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
-      ( a)
-  compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition D a =
-    {!!}
+                ( indexing-type-Relaxed-Σ-Decomposition D)))
+    where
 
-  compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition :
-    ( D : Σ ( Relaxed-Σ-Decomposition l l X)
-            ( λ D →
-              binary-coproduct-Decomposition
-                l l
-                ( indexing-type-Relaxed-Σ-Decomposition D))) →
-    ( b : right-summand-binary-coproduct-Decomposition (pr2 D)) →
-    ( cotype-Relaxed-Σ-Decomposition (pr1 D)
-      ( map-inv-equiv
+    private
+      tr-total-equiv :
+        {l1 l3 l4 : Level} {X Y : UU l1 } (e : Y ≃ X) →
+        (h : Id {A = Σ (UU l1) λ Y → Y ≃ X} (X , id-equiv) (Y , e)) →
+        {C : (X : UU l1) → (X → UU l3) → UU l4}  →
+        {f : Σ (Y → UU l3) (λ Z → C Y Z)} →
+        (x : X) →
+        pr1
+          ( tr
+            ( λ Y →
+              ( Σ ( pr1 Y → UU l3)
+                  ( λ Z → C (pr1 Y) Z) →
+                Σ ( X → UU l3)
+                  ( λ Z → C X Z)))
+            ( h)
+            ( id)
+            ( f))
+          ( x)  ＝
+        pr1 f (map-inv-equiv e x)
+      tr-total-equiv e refl x = refl
+
+    compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition :
+      ( a : left-summand-binary-coproduct-Decomposition (pr2 D)) →
+      cotype-Relaxed-Σ-Decomposition
+        ( pr1
+          ( pr2
+            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+        ( a) ＝
+      cotype-Relaxed-Σ-Decomposition
+        ( pr1 D)
+        ( map-inv-equiv
+          ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
+          ( inl a))
+    compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition a =
+      tr-total-equiv
         ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
-        ( inr b))) ＝
-    cotype-Relaxed-Σ-Decomposition
-      ( pr2
+        ( inv
+            ( contraction
+                ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                ( (pr1 (pr2 D) + pr1 (pr2 (pr2 D))) , id-equiv)) ∙
+          contraction
+            ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                ( pr1 (pr1 D) , pr2 (pr2 (pr2 D))))
+        ( inl a)
+
+    compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition :
+      ( b : right-summand-binary-coproduct-Decomposition (pr2 D)) →
+      cotype-Relaxed-Σ-Decomposition
         ( pr2
-          ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
-      ( b)
-  compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition =
-    {!!}
+          ( pr2
+            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+        ( b) ＝
+      cotype-Relaxed-Σ-Decomposition (pr1 D)
+        ( map-inv-equiv
+          ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
+          ( inr b))
+    compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition b =
+      tr-total-equiv
+          ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
+          ( inv
+              ( contraction
+                  ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                  ( (pr1 (pr2 D) + pr1 (pr2 (pr2 D))) , id-equiv)) ∙
+            contraction
+              ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                  ( pr1 (pr1 D) , pr2 (pr2 (pr2 D))))
+          ( inr b)
 ```
