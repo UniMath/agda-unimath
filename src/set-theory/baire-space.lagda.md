@@ -42,6 +42,7 @@ The Baire space is the type of functions `ℕ → ℕ`.
 baire-space : UU lzero
 baire-space = ℕ → ℕ
 ```
+
 ## Properties
 
 ### The Baire Space is a set.
@@ -81,6 +82,5 @@ is-baire-space-uncountable P =
           reductio-ad-absurdum
             (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))
   where
-    Q = is-directly-countable-is-countable baire-space-Set succ-ℕ P
-    
+    Q = is-directly-countable-is-countable baire-space-Set succ-ℕ P    
 ```

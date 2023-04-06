@@ -72,9 +72,8 @@ is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 
 ## Properties
 
-If a set `X` is inhabited, then it is countable if and only if there
-is a surjective map `f : ℕ → X`. Let us call the latter as
-"directly countable".
+If a set `X` is inhabited, then it is countable if and only if there is a
+surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 
 ```agda
 is-directly-countable-Prop : {l : Level} → Set l → Prop l
@@ -147,5 +146,4 @@ is-countable-ℕ =
       ( λ {
         (inl n) → unit-trunc-Prop (pair (succ-ℕ n) refl) ;
         (inr star) → unit-trunc-Prop (pair zero-ℕ refl)}))
-
 ```
