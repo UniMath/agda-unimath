@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.lawveres-fixed-point-theorem 
+open import foundation.lawveres-fixed-point-theorem
 open import foundation.maybe
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -21,10 +21,9 @@ open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
-open import foundation-core.function-extensionality
 open import foundation-core.homotopies
-open import foundation-core.propositions
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sets
 
 open import set-theory.countable-sets

@@ -12,10 +12,10 @@ open import elementary-number-theory.natural-numbers
 open import foundation.decidable-subtypes
 open import foundation.existential-quantification
 open import foundation.maybe
+open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.propositional-truncations 
 open import foundation.sets
-open import foundation.shifting-sequences 
+open import foundation.shifting-sequences
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -33,10 +33,9 @@ open import foundation-core.negation
 
 ## Idea
 
-A set `X` is said to be countable if there is a surjective map
-`f : ℕ → X + 1`. Equivalently, a set `X` is countable if there is a
-surjective map `f : type-decidable-subset P → X` for some decidable
-subset `P` of `X`.
+A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`.
+Equivalently, a set `X` is countable if there is a surjective map
+`f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
 
 ## Definition
 
@@ -140,7 +139,7 @@ module _
 The set of natural numbers ℕ is itself countable.
 
 ```agda
-is-countable-ℕ : is-countable ℕ-Set 
+is-countable-ℕ : is-countable ℕ-Set
 is-countable-ℕ =
   unit-trunc-Prop
     (pair
