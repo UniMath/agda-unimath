@@ -6,6 +6,7 @@ module species where
 open import species.cartesian-products-species-of-types public
 open import species.cauchy-exponential-species-of-types public
 open import species.cauchy-product-species-of-subuniverse public
+open import species.cauchy-product-species-of-types public
 open import species.composition-species-of-finite-inhabited-types public
 open import species.composition-species-of-subuniverse public
 open import species.coproducts-species-of-types public

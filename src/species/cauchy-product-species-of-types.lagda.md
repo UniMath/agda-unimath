@@ -34,8 +34,7 @@ open import species.species-of-types
 
 ## Idea
 
-The Cauchy product of two species of types `S` and `T` on
-`X` is defined as
+The Cauchy product of two species of types `S` and `T` on `X` is defined as
 
 ```md
   Σ (k : UU) (Σ (k' : UU) (Σ (e : k + k' ≃ X) S(k) × T(k')))

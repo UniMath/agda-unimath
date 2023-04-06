@@ -9,17 +9,15 @@ module species.cauchy-exponential-species-of-types where
 ```agda
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions
 open import foundation.cartesian-product-types
-open import species.coproducts-species-of-types
 open import foundation.contractible-types
 open import foundation.coproduct-decompositions
+open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
-open import species.equivalences-species-of-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -34,10 +32,11 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.dependent-binomial-theorem
 
-open import species.species-of-types
 open import species.cauchy-product-species-of-types
+open import species.coproducts-species-of-types
+open import species.equivalences-species-of-types
+open import species.species-of-types
 ```
 
 </details>
