@@ -1,9 +1,10 @@
-# Elementary Number Theory
+# Elementary number theory
 
 ```agda
 module elementary-number-theory where
 
 open import elementary-number-theory.absolute-value-integers public
+open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-rationals public
@@ -40,7 +41,6 @@ open import elementary-number-theory.falling-factorials public
 open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
-open import elementary-number-theory.fractions public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
@@ -52,6 +52,7 @@ open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.initial-segments-natural-numbers public
+open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
 open import elementary-number-theory.kolakoski-sequence public
@@ -77,6 +78,7 @@ open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.pythagorean-triples public
 open import elementary-number-theory.rational-numbers public
+open import elementary-number-theory.reduced-integer-fractions public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
