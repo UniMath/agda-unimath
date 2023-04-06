@@ -8,17 +8,16 @@ module elementary-number-theory.addition-integer-fractions where
 
 ```agda
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.integers
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.equality-dependent-pair-types
-open import foundation.equality-cartesian-product-types
 ```
 
 </details>

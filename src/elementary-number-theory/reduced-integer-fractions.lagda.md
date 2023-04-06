@@ -10,8 +10,8 @@ module elementary-number-theory.reduced-integer-fractions where
 open import elementary-number-theory.bezouts-lemma
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
-open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
@@ -26,10 +26,10 @@ open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.sets
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.universe-levels
+open import foundation.sets
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 ```
 
 </details>
