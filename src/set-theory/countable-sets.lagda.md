@@ -33,9 +33,10 @@ open import foundation-core.negation
 
 ## Idea
 
-A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`.
-Equivalently, a set `X` is countable if there is a surjective map
-`f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
+A set `X` is said to be countable if there is a surjective map
+`f : ℕ → X + 1`. Equivalently, a set `X` is countable if there is a
+surjective map `f : type-decidable-subset P → X` for some decidable
+subset `P` of `X`.
 
 ## Definition
 
@@ -48,7 +49,8 @@ is-countable-Prop X = ∃-Prop (ℕ → Maybe (type-Set X)) is-surjective
 is-countable : {l : Level} → Set l → UU l
 is-countable X = type-Prop (is-countable-Prop X)
 
-is-prop-is-countable : {l : Level} (X : Set l) → is-prop (is-countable X)
+is-prop-is-countable : {l : Level} (X : Set l) →
+  is-prop (is-countable X)
 is-prop-is-countable X = is-prop-type-Prop (is-countable-Prop X)
 ```
 
@@ -64,18 +66,21 @@ is-countable-Prop' X =
 is-countable' : {l : Level} → Set l → UU (lsuc lzero ⊔ l)
 is-countable' X = type-Prop (is-countable-Prop' X)
 
-is-prop-is-countable' : {l : Level} (X : Set l) → is-prop (is-countable' X)
+is-prop-is-countable' : {l : Level} (X : Set l) →
+  is-prop (is-countable' X)
 is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 ```
 
 ## Properties
 
-If a set `X` is inhabited, then it is countable if and only if there is
-a surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
+If a set `X` is inhabited, then it is countable if and only if there
+is a surjective map `f : ℕ → X`. Let us call the latter as
+"directly countable".
 
 ```agda
 is-directly-countable-Prop : {l : Level} → Set l → Prop l
-is-directly-countable-Prop X = ∃-Prop (ℕ → type-Set X) is-surjective
+is-directly-countable-Prop X =
+  ∃-Prop (ℕ → type-Set X) is-surjective
 
 is-directly-countable : {l : Level} → Set l → UU l
 is-directly-countable X = type-Prop (is-directly-countable-Prop X)
@@ -89,7 +94,8 @@ module _
   {l : Level} (X : Set l) (a : type-Set X)
   where
 
-  is-directly-countable-is-countable : is-countable X → is-directly-countable X
+  is-directly-countable-is-countable : is-countable X →
+    is-directly-countable X
   is-directly-countable-is-countable H =
     apply-universal-property-trunc-Prop H
       (is-directly-countable-Prop X)
@@ -106,20 +112,25 @@ module _
      is-surjective-f : is-surjective f
      is-surjective-f x = unit-trunc-Prop (pair (inl x) refl)
 
-  is-countable-is-directly-countable : is-directly-countable X → is-countable X
+  is-countable-is-directly-countable : is-directly-countable X
+    → is-countable X
   is-countable-is-directly-countable H =
     apply-universal-property-trunc-Prop H
       (is-countable-Prop X)
       λ P →
         unit-trunc-Prop
           (pair
-            (λ { zero-ℕ → inr star ; (succ-ℕ n) → inl ((shift-ℕ a (pr1 P)) n)})
-            λ { (inl x) →
-              apply-universal-property-trunc-Prop (pr2 P x)
-                (trunc-Prop (fib _ (inl x)))
-                λ { (pair n p) →
-                  unit-trunc-Prop (pair (succ-ℕ (succ-ℕ n)) (ap inl p))} ;
-                (inr star) → unit-trunc-Prop (pair zero-ℕ refl)})
+            ( λ {
+              zero-ℕ → inr star ;
+              (succ-ℕ n) → inl ((shift-ℕ a (pr1 P)) n)})
+            ( λ {
+              (inl x) →
+                apply-universal-property-trunc-Prop (pr2 P x)
+                  (trunc-Prop (fib _ (inl x)))
+                  λ { (pair n p) →
+                    unit-trunc-Prop
+                      (pair (succ-ℕ (succ-ℕ n)) (ap inl p))} ;
+              (inr star) → unit-trunc-Prop (pair zero-ℕ refl)}))
 ```
 
 ### The two definitions of countability are equivalent
@@ -137,4 +148,5 @@ is-countable-ℕ =
       ( λ {
         (inl n) → unit-trunc-Prop (pair (succ-ℕ n) refl) ;
         (inr star) → unit-trunc-Prop (pair zero-ℕ refl)}))
+
 ```
