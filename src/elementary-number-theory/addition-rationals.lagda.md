@@ -67,3 +67,16 @@ right-unit-law-add-ℚ (x , p) =
     ( right-unit-law-add-fraction-ℤ x) ∙
   in-fraction-fraction-ℚ (x , p)
 ```
+
+### Addition is commutative
+
+```agda
+commutative-add-ℚ :
+  (x y  : ℚ) →
+  x +ℚ y ＝ y +ℚ x
+commutative-add-ℚ (x , px) (y , py) =
+  eq-ℚ-sim-fractions-ℤ
+    ( add-fraction-ℤ x y)
+    ( add-fraction-ℤ y x)
+    ( commutative-add-fraction-ℤ x y)
+```
