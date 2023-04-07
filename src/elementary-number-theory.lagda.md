@@ -23,6 +23,7 @@ open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-types public
+open import elementary-number-theory.dedekind-real-numbers public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
@@ -47,8 +48,10 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers pub
 open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.groups-of-modular-arithmetic public
 open import elementary-number-theory.half-integers public
+open import elementary-number-theory.inequality-integer-fractions public
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
+open import elementary-number-theory.inequality-rational-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.initial-segments-natural-numbers public
