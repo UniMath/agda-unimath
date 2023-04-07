@@ -48,18 +48,17 @@ comp-is-singleton a H B = pr2 (H B)
 ### A type satisfies singleton induction if and only if it is contractible
 
 ```agda
-abstract
-  ind-singleton-is-contr :
-    {i j : Level} {A : UU i} (a : A) (is-contr-A : is-contr A) (B : A → UU j) →
-    B a → (x : A) → B x
-  ind-singleton-is-contr a is-contr-A B b x =
-    tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
+ind-singleton-is-contr :
+  {i j : Level} {A : UU i} (a : A) (is-contr-A : is-contr A) (B : A → UU j) →
+  B a → (x : A) → B x
+ind-singleton-is-contr a is-contr-A B b x =
+  tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
 
-  comp-singleton-is-contr :
-    {i j : Level} {A : UU i} (a : A) (is-contr-A : is-contr A) (B : A → UU j) →
-    ((ev-pt a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
-  comp-singleton-is-contr a is-contr-A B b =
-    ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
+comp-singleton-is-contr :
+  {i j : Level} {A : UU i} (a : A) (is-contr-A : is-contr A) (B : A → UU j) →
+  ((ev-pt a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
+comp-singleton-is-contr a is-contr-A B b =
+  ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
 
 is-singleton-is-contr :
   {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
