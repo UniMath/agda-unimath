@@ -30,8 +30,8 @@ open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverse
 open import species.cauchy-product-species-of-types
+open import species.species-of-types-in-subuniverse
 ```
 
 </details>
@@ -477,4 +477,3 @@ module _
                             ( pr2 p))))))) ∘e
         ( ( reassociate))))
 ```
-

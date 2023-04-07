@@ -9,9 +9,9 @@ module species.cauchy-exponential-species-of-subuniverse where
 ```agda
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.contractible-types
 open import foundation.coproduct-decompositions
+open import foundation.coproduct-types
 open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -35,14 +35,14 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import species.cauchy-product-species-of-types
-open import species.cauchy-product-species-of-subuniverse
-open import species.coproducts-species-of-types
-open import species.equivalences-species-of-types
 open import species.cauchy-exponential-species-of-types
+open import species.cauchy-product-species-of-subuniverse
+open import species.cauchy-product-species-of-types
+open import species.coproducts-species-of-types
+open import species.coproducts-species-of-types-in-subuniverse
+open import species.equivalences-species-of-types
 open import species.species-of-types
 open import species.species-of-types-in-subuniverse
-open import species.coproducts-species-of-types-in-subuniverse
 ```
 
 </details>
@@ -64,7 +64,6 @@ module _
         ( inclusion-subuniverse
             ( subuniverse-global-subuniverse Q l2)
             ( S (subuniverse-cotype-Σ-Decomposition-subuniverse P X D b))))
-
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
@@ -199,7 +198,6 @@ module _
                           ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
                           ( λ _ → pr2 X)))))))) ∘e
         ( ( reassociate))))
-
 ```
 
 ### The Cauchy exponential of the sum of a species is equivalent to the Cauchy product of the exponential of the two species

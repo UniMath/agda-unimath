@@ -9,9 +9,9 @@ module species.coproducts-species-of-types-in-subuniverse where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -24,17 +24,19 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import species.morphisms-species-of-types
-open import species.species-of-types-in-subuniverse
-open import species.species-of-types
 open import species.coproducts-species-of-types
+open import species.morphisms-species-of-types
+open import species.species-of-types
+open import species.species-of-types-in-subuniverse
 ```
 
 </details>
 
 ## Idea
 
-The coproduct of two species of types of subuniverse `F` and `G` is the pointwise coproduct provided that the domain subuniverse of `F` and `G` is stable by coproduct.
+The coproduct of two species of types of subuniverse `F` and `G` is the
+pointwise coproduct provided that the domain subuniverse of `F` and `G` is
+stable by coproduct.
 
 ## Definition
 
