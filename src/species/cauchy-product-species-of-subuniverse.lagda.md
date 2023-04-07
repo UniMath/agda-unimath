@@ -8,6 +8,7 @@ module species.cauchy-product-species-of-subuniverse where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.coproduct-decompositions
 open import foundation.coproduct-decompositions-subuniverse
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -17,7 +18,9 @@ open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
@@ -28,6 +31,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import species.species-of-types-in-subuniverse
+open import species.cauchy-product-species-of-types
 ```
 
 </details>
@@ -354,3 +358,123 @@ module _
       ( S)
       ( X)
 ```
+
+### Equivalent form with species of types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
+  ( C1 :
+    ( (l4 l5 : Level)
+    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
+    (X : type-subuniverse P) →
+      is-in-subuniverse
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l4 ⊔ l5))
+        ( cauchy-product-species-subuniverse' P Q S T X)))
+  ( C2 :
+    ( A B : UU l1) →
+    is-in-subuniverse P A →
+    is-in-subuniverse P B →
+    is-in-subuniverse P (A + B))
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l2))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (X : UU l1)
+  where
+
+  private
+    reassociate :
+      Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+        ( cauchy-product-species-subuniverse P Q C1 S T)
+        ( X) ≃
+      Σ ( binary-coproduct-Decomposition l1 l1 X )
+        ( λ (A , B , e) →
+          Σ ( ( is-in-subuniverse P A × is-in-subuniverse P B) ×
+              is-in-subuniverse P X)
+            ( λ ((pA , pB) , pX) →
+              inclusion-subuniverse
+                ( subuniverse-global-subuniverse Q l2)
+                ( S (A , pA)) ×
+              inclusion-subuniverse
+                ( subuniverse-global-subuniverse Q l3)
+                ( T (B , pB)) ))
+    pr1 reassociate (pX , ((A , pA) , (B , pB) , e) , s , t) =
+      (A , B , e) , ((pA , pB) , pX) , (s , t)
+    pr2 reassociate = is-equiv-has-inverse
+      ( λ ((A , B , e) , ((pA , pB) , pX) , (s , t)) →
+        ( pX , ((A , pA) , (B , pB) , e) , s , t))
+      ( refl-htpy)
+      ( refl-htpy)
+
+    reassociate' :
+      Σ ( binary-coproduct-Decomposition l1 l1 X )
+        ( λ d →
+           Σ ( Σ (pr1 (P (pr1 d))) (λ v → pr1 (P (pr1 (pr2 d)))))
+           (λ p → pr1 (S (pr1 d , pr1 p)) × pr1 (T (pr1 (pr2 d) , pr2 p))))
+      ≃
+      cauchy-product-species-types
+      (Σ-extension-species-subuniverse P
+       (subuniverse-global-subuniverse Q l2) S)
+      (Σ-extension-species-subuniverse P
+       (subuniverse-global-subuniverse Q l3) T)
+      X
+    pr1 reassociate' (d , (pA , pB) , s , t) =
+      d , (pA , s) , (pB , t)
+    pr2 reassociate' =
+      is-equiv-has-inverse
+        ( λ ( d , (pA , s) , (pB , t)) → (d , (pA , pB) , s , t))
+        ( refl-htpy)
+        ( refl-htpy)
+
+  equiv-cauchy-product-Σ-extension-species-subuniverse :
+    Σ-extension-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+      ( cauchy-product-species-subuniverse P Q C1 S T)
+      ( X) ≃
+    cauchy-product-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l2)
+        ( S))
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( T))
+      ( X)
+  equiv-cauchy-product-Σ-extension-species-subuniverse =
+    ( ( reassociate') ∘e
+      ( ( equiv-tot
+            ( λ d →
+              equiv-Σ-equiv-base
+                (λ p →
+                    ( inclusion-subuniverse
+                        ( subuniverse-global-subuniverse Q l2)
+                        ( S ( left-summand-binary-coproduct-Decomposition d ,
+                              pr1 p))) ×
+                    ( inclusion-subuniverse
+                        ( subuniverse-global-subuniverse Q l3)
+                        ( T ( right-summand-binary-coproduct-Decomposition d ,
+                              pr2 p))))
+                ( inv-equiv
+                    ( equiv-add-redundant-prop
+                      ( is-prop-type-Prop (P X))
+                      ( λ p →
+                        tr
+                          ( is-in-subuniverse P)
+                          ( inv
+                            ( eq-equiv
+                                ( X)
+                                ( left-summand-binary-coproduct-Decomposition d +
+                                  right-summand-binary-coproduct-Decomposition d)
+                                ( matching-correspondence-binary-coproduct-Decomposition d)))
+                          ( C2
+                            ( left-summand-binary-coproduct-Decomposition d)
+                            ( right-summand-binary-coproduct-Decomposition d)
+                            ( pr1 p)
+                            ( pr2 p))))))) ∘e
+        ( ( reassociate))))
+```
+

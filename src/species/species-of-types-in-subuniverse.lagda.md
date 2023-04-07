@@ -13,6 +13,8 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.subuniverses
 open import foundation.universe-levels
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.propositions
 
 open import species.species-of-types
 ```
@@ -52,16 +54,27 @@ tr-species-subuniverse P Q F X Y e =
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
-  (F : species-subuniverse P Q)
+  (S : species-subuniverse P Q)
   where
 
   Σ-extension-species-subuniverse :
     species-types l1 (l2 ⊔ l3)
   Σ-extension-species-subuniverse X =
-    Σ (is-in-subuniverse P X) (λ p → inclusion-subuniverse Q (F (X , p)))
+    Σ (is-in-subuniverse P X) (λ p → inclusion-subuniverse Q (S (X , p)))
 
   Π-extension-species-subuniverse :
     species-types l1 (l2 ⊔ l3)
   Π-extension-species-subuniverse X =
-    (p : is-in-subuniverse P X) → inclusion-subuniverse Q (F (X , p))
+    (p : is-in-subuniverse P X) → inclusion-subuniverse Q (S (X , p))
+
+  equiv-Σ-extension-species-subuniverse :
+    ( X : type-subuniverse P) →
+    inclusion-subuniverse Q (S X) ≃
+    Σ-extension-species-subuniverse (inclusion-subuniverse P X)
+  equiv-Σ-extension-species-subuniverse X =
+    inv-left-unit-law-Σ-is-contr
+      ( is-proof-irrelevant-is-prop
+        ( is-subtype-subuniverse P (inclusion-subuniverse P X))
+        ( pr2 X))
+      ( pr2 X)
 ```

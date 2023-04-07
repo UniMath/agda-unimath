@@ -94,7 +94,7 @@ module _
 
   equiv-cauchy-exponential-sum-species-types :
     equiv-species-types
-      ( cauchy-exponential-species-types (coprod-species-types S T) )
+      ( cauchy-exponential-species-types (coproduct-species-types S T) )
       ( cauchy-product-species-types
         ( cauchy-exponential-species-types S)
         ( cauchy-exponential-species-types T))
