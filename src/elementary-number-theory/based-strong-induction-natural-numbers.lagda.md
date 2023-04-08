@@ -1,8 +1,6 @@
 # Based strong induction for the natural numbers
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module elementary-number-theory.based-strong-induction-natural-numbers where
 ```
 
@@ -155,7 +153,7 @@ module _
   {l : Level} (k : ℕ) (P : ℕ → UU l) (z : based-□-≤-ℕ k P k)
   (s : (m : ℕ) → k ≤-ℕ m → based-□-≤-ℕ k P m → based-□-≤-ℕ k P (succ-ℕ m))
   where
-  
+
   inductive-step-based-strong-ind-ℕ : (n : ℕ) → k ≤-ℕ n → based-□-≤-ℕ k P n
   inductive-step-based-strong-ind-ℕ =
     based-ind-ℕ k (based-□-≤-ℕ k P) z s
@@ -246,7 +244,7 @@ cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ :
        ( M)
        ( m)
        ( M)
-       ( refl-leq-ℕ m)) → 
+       ( refl-leq-ℕ m)) →
   inductive-step-based-strong-ind-ℕ k P
     ( base-based-strong-ind-ℕ k P p0)
     ( succ-based-strong-ind-ℕ k P pS)
@@ -262,7 +260,7 @@ cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ :
     ( M)
     ( m)
     ( M)
-    ( refl-leq-ℕ m)  
+    ( refl-leq-ℕ m)
 cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
   k P p0 pS n N N' m M H (inl H') α =
   ( comp-succ-inductive-step-based-strong-ind-ℕ k P

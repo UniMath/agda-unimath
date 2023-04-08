@@ -34,7 +34,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-An integer `m` is said to **divide** an integer `n` if there exists an integer `k` equipped with an identification `km ＝ n`. Using the Curry-Howard interpretation of logic into type theory, we express divisibility as follows:
+An integer `m` is said to **divide** an integer `n` if there exists an integer
+`k` equipped with an identification `km ＝ n`. Using the Curry-Howard
+interpretation of logic into type theory, we express divisibility as follows:
 
 ```md
   div-ℤ m n := Σ (k : ℤ), mul-ℤ k m ＝ n.
@@ -43,7 +45,11 @@ An integer `m` is said to **divide** an integer `n` if there exists an integer `
 If `n` is a nonzero integer, then `div-ℤ m n` is always a proposition in the
 sense that the type `div-ℤ m n` contains at most one element.
 
-We also introduce **unit integers**, which are integers that divide the integer `1`, and an equivalence relation `sim-unit-ℤ` on the integers in which two integers `x` and `y` are equivalent if there exists a unit integer `u` such that `ux ＝ y`. These two concepts help establish further properties of the divisibility relation on the integers.
+We also introduce **unit integers**, which are integers that divide the integer
+`1`, and an equivalence relation `sim-unit-ℤ` on the integers in which two
+integers `x` and `y` are equivalent if there exists a unit integer `u` such that
+`ux ＝ y`. These two concepts help establish further properties of the
+divisibility relation on the integers.
 
 ## Definitions
 
@@ -105,7 +111,8 @@ pr2 (div-is-unit-ℤ x y (pair d p)) =
 
 ### The equivalence relation `sim-unit-ℤ`
 
-We define the equivalence relation `sim-unit-ℤ` in such a way that `sim-unit-ℤ x y` is always a proposition.
+We define the equivalence relation `sim-unit-ℤ` in such a way that
+`sim-unit-ℤ x y` is always a proposition.
 
 ```agda
 presim-unit-ℤ : ℤ → ℤ → UU lzero

@@ -28,8 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The [**cofibonacci sequence**][1] is the unique function G : ℕ → ℕ satisfying the
-property that
+The [**cofibonacci sequence**][1] is the unique function G : ℕ → ℕ satisfying
+the property that
 
 ```md
   div-ℕ (G m) n ↔ div-ℕ m (Fibonacci-ℕ n).
