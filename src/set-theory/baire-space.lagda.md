@@ -48,8 +48,8 @@ baire-space = ℕ → ℕ
 ### The Baire Space is a set.
 
 ```agda
-is-baire-space-set : is-set baire-space
-is-baire-space-set f g =
+is-set-baire-space : is-set baire-space
+is-set-baire-space f g =
   is-prop-all-elements-equal
     λ p q →
       inv (isretr-eq-htpy p) ∙
@@ -70,8 +70,8 @@ pr2 baire-space-Set = is-baire-space-set
 ### The Baire Space is uncountable.
 
 ```agda
-is-baire-space-uncountable : is-uncountable baire-space-Set
-is-baire-space-uncountable P =
+is-uncountable-baire-space : is-uncountable baire-space-Set
+is-uncountable-baire-space P =
   apply-universal-property-trunc-Prop Q
     empty-Prop
     λ H →
