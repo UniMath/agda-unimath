@@ -11,6 +11,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.automorphisms
+open import foundation.cartesian-product-types
 open import foundation.connected-components-universes
 open import foundation.contractible-maps
 open import foundation.contractible-types
