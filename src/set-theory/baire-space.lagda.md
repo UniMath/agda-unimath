@@ -55,7 +55,7 @@ is-set-baire-space f g =
       ( inv (isretr-eq-htpy p)) ∙
       ( ap
          eq-htpy
-           ( eq-htpy 
+           ( eq-htpy
              ( λ n →
                 eq-is-prop'
                   ( is-set-ℕ (f n) (g n))
