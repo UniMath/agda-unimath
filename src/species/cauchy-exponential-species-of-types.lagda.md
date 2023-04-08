@@ -41,6 +41,17 @@ open import species.species-of-types
 
 </details>
 
+## Idea
+
+The Cauchy exponential of a species of types `S` is defined as the following
+species of types :
+
+```md
+(X : UU) →
+Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
+  ( (u : U) → S (V u))
+```
+
 ## Definition
 
 ```agda

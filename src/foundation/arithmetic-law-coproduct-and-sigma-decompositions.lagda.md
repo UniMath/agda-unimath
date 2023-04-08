@@ -30,6 +30,20 @@ open import foundation.universe-levels
 
 </details>
 
+## Idea
+
+Let `X` be a type, we have the following equivalence :
+
+```md
+ Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
+   ( binary-coproduct-Decomposition U) ≃
+ Σ ( (A , B , e) : binary-coproduct-Decomposition X)
+   ( Relaxed-Σ-Decomposition A ×
+     Relaxed-Σ-Decomposition B )
+```
+
+We also show a computational rule to simplify the use of this equivalence.
+
 ## Propositions
 
 ### Coproduct decomposition of the indexing type of a relaxed Σ-decomposition are equivalent to relaxed Σ-decomposition of the left and right summand of a coproduct decomposition.

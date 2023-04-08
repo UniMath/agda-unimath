@@ -47,6 +47,20 @@ open import species.species-of-types-in-subuniverse
 
 </details>
 
+## Idea
+
+The Cauchy exponential of a species `S` of types in subuniverse from `P` to `Q`
+at `X` in `P` is defined to be :
+
+```md
+Σ ( (U , V , e) : Σ-Decomposition-subuniverse P X)
+  ( (u : U) → S (V u))
+```
+
+If `Q` is a global subuniverse, and if the previous definition is in `Q`, then
+the Cauchy exponential is also a species of types in subuniverse from `P` to
+`Q`.
+
 ## Definition
 
 ```agda

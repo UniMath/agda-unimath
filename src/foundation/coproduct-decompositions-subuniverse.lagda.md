@@ -37,6 +37,12 @@ open import foundation.universe-levels
 
 </details>
 
+## Idea
+
+Let `P` be a subuniverse and `X` a type in `P`. A binary coproduct decomposition
+of `X` is defined to be two types `A` and `B` in `P` and an equivalence from `X`
+to `A+B`.
+
 ## Definitions
 
 ### Binary coproduct decomposition
