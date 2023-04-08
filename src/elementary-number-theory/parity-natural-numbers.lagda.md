@@ -87,7 +87,7 @@ is-odd-succ-succ-is-odd-ℕ :
 is-odd-succ-succ-is-odd-ℕ n = map-neg (is-even-is-even-succ-succ-ℕ n)
 ```
 
-### If a natural number `x` is odd, then `x + 1` is even. Similarly, if `x` is even, then `x + 1` is odd.
+### If a natural number `x` is odd, then `x + 1` is even
 
 ```agda
 is-even-succ-is-odd-ℕ :
@@ -98,7 +98,11 @@ is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
   is-even-succ-succ-is-even-ℕ
     (succ-ℕ n)
     (is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
+```
 
+### If a natural number `x` is even, then `x + 1` is odd
+
+```agda
 is-odd-succ-is-even-ℕ :
   (n : ℕ) → is-even-ℕ n → is-odd-ℕ (succ-ℕ n)
 is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
