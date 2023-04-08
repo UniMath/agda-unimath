@@ -1,7 +1,7 @@
-# Fractions
+# Integer fractions
 
 ```agda
-module elementary-number-theory.fractions where
+module elementary-number-theory.integer-fractions where
 ```
 
 <details><summary>Imports</summary>
@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -23,9 +24,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of fractions is the type of pairs `n/m` consisting of an integer `n`
-and a positive integer `m`. The type of rational numbers is a retract of the
-type of fractions.
+The type of integer fractions is the type of pairs `n/m` consisting of an
+integer `n` and a positive integer `m`. The type of rational numbers is a
+retract of the type of fractions.
 
 ## Definitions
 
@@ -55,6 +56,39 @@ denominator-fraction-ℤ x = pr1 (positive-denominator-fraction-ℤ x)
 is-positive-denominator-fraction-ℤ :
   (x : fraction-ℤ) → is-positive-ℤ (denominator-fraction-ℤ x)
 is-positive-denominator-fraction-ℤ x = pr2 (positive-denominator-fraction-ℤ x)
+```
+
+### Inclusion of the integers
+
+```agda
+in-fraction-ℤ-ℤ : ℤ → fraction-ℤ
+pr1 (in-fraction-ℤ-ℤ x) = x
+pr2 (in-fraction-ℤ-ℤ x) = one-positive-ℤ
+```
+
+### Negative one, zero and one
+
+```agda
+neg-one-fraction-ℤ : fraction-ℤ
+neg-one-fraction-ℤ = in-fraction-ℤ-ℤ neg-one-ℤ
+
+is-neg-one-fraction-ℤ : fraction-ℤ → UU lzero
+is-neg-one-fraction-ℤ x = (x ＝ neg-one-fraction-ℤ)
+
+zero-fraction-ℤ : fraction-ℤ
+zero-fraction-ℤ = in-fraction-ℤ-ℤ zero-ℤ
+
+is-zero-fraction-ℤ : fraction-ℤ → UU lzero
+is-zero-fraction-ℤ x = (x ＝ zero-fraction-ℤ)
+
+is-nonzero-fraction-ℤ : fraction-ℤ → UU lzero
+is-nonzero-fraction-ℤ k = ¬ (is-zero-fraction-ℤ k)
+
+one-fraction-ℤ : fraction-ℤ
+one-fraction-ℤ = in-fraction-ℤ-ℤ one-ℤ
+
+is-one-fraction-ℤ : fraction-ℤ → UU lzero
+is-one-fraction-ℤ x = (x ＝ one-fraction-ℤ)
 ```
 
 ## Properties
