@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
@@ -84,4 +85,27 @@ is-odd-is-odd-succ-succ-ℕ n = map-neg (is-even-succ-succ-is-even-ℕ n)
 is-odd-succ-succ-is-odd-ℕ :
   (n : ℕ) → is-odd-ℕ n → is-odd-ℕ (succ-ℕ (succ-ℕ n))
 is-odd-succ-succ-is-odd-ℕ n = map-neg (is-even-is-even-succ-succ-ℕ n)
+```
+
+### If a natural number `x` is odd, then `x + 1` is even. Similarly,
+### if `x` is even, then `x + 1` is odd.
+
+```agda
+is-even-succ-is-odd-ℕ :
+  (n : ℕ) → is-odd-ℕ n → is-even-ℕ (succ-ℕ n)
+is-even-succ-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
+is-even-succ-is-odd-ℕ (succ-ℕ zero-ℕ) p = (1 , refl)
+is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
+  is-even-succ-succ-is-even-ℕ
+    (succ-ℕ n)
+    (is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
+
+is-odd-succ-is-even-ℕ :
+  (n : ℕ) → is-even-ℕ n → is-odd-ℕ (succ-ℕ n)
+is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
+is-odd-succ-is-even-ℕ (succ-ℕ zero-ℕ) p = ex-falso (is-odd-one-ℕ p)
+is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
+  is-odd-succ-succ-is-odd-ℕ
+    (succ-ℕ n)
+    (is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
 ```
