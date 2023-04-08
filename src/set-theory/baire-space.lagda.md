@@ -51,7 +51,7 @@ baire-space = ℕ → ℕ
 is-set-baire-space : is-set baire-space
 is-set-baire-space f g =
   is-prop-all-elements-equal
-    λ p q →
+    ( λ p q →
       inv (isretr-eq-htpy p) ∙
       ( ap
          eq-htpy
@@ -60,7 +60,7 @@ is-set-baire-space f g =
                 ( is-set-ℕ (f n) (g n))
                 ( htpy-eq p n)
                 ( htpy-eq q n))) ∙
-      isretr-eq-htpy q)
+      isretr-eq-htpy q))
 
 baire-space-Set : Set lzero
 pr1 baire-space-Set = baire-space
@@ -74,13 +74,13 @@ is-uncountable-baire-space : is-uncountable baire-space-Set
 is-uncountable-baire-space P =
   apply-universal-property-trunc-Prop Q
     empty-Prop
-    λ H →
+    ( λ H →
       apply-universal-property-trunc-Prop
-        (fixed-point-theorem-Lawvere (pr2 H) succ-ℕ)
-        empty-Prop
-        λ F →
+        ( fixed-point-theorem-Lawvere (pr2 H) succ-ℕ)
+          empty-Prop
+        ( λ F →
           reductio-ad-absurdum
-            (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))
+            (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
   where
     Q = is-directly-countable-is-countable baire-space-Set succ-ℕ P
 ```
