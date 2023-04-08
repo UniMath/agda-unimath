@@ -52,14 +52,15 @@ is-set-baire-space : is-set baire-space
 is-set-baire-space f g =
   is-prop-all-elements-equal
     ( λ p q →
-      inv (isretr-eq-htpy p) ∙
+      ( inv (isretr-eq-htpy p)) ∙
       ( ap
          eq-htpy
-           ( eq-htpy (λ n →
-              eq-is-prop'
-                ( is-set-ℕ (f n) (g n))
-                ( htpy-eq p n)
-                ( htpy-eq q n))) ∙
+           ( eq-htpy 
+             ( λ n →
+                eq-is-prop'
+                  ( is-set-ℕ (f n) (g n))
+                  ( htpy-eq p n)
+                  ( htpy-eq q n))) ∙
       isretr-eq-htpy q))
 
 baire-space-Set : Set lzero
