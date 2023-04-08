@@ -96,11 +96,11 @@ module _
     is-countable X → is-directly-countable X
   is-directly-countable-is-countable H =
     apply-universal-property-trunc-Prop H
-      (is-directly-countable-Prop X)
-      (λ P →
+      ( is-directly-countable-Prop X)
+      ( λ P →
         unit-trunc-Prop
-          (pair
-            (f ∘ (pr1 P))
+          ( pair
+            ( f ∘ (pr1 P))
             ( is-surjective-comp is-surjective-f (pr2 P))))
     where
      f : Maybe (type-Set X) → type-Set X
@@ -114,20 +114,20 @@ module _
     is-directly-countable X → is-countable X
   is-countable-is-directly-countable H =
     apply-universal-property-trunc-Prop H
-      (is-countable-Prop X)
-      (λ P →
+      ( is-countable-Prop X)
+      ( λ P →
         unit-trunc-Prop
-          (pair
+          ( pair
             ( λ {
               zero-ℕ → inr star ;
               (succ-ℕ n) → inl ((shift-ℕ a (pr1 P)) n)})
             ( λ {
               (inl x) →
                 apply-universal-property-trunc-Prop (pr2 P x)
-                  (trunc-Prop (fib _ (inl x)))
-                  λ { (pair n p) →
+                  ( trunc-Prop (fib _ (inl x)))
+                  ( λ { (pair n p) →
                     unit-trunc-Prop
-                      (pair (succ-ℕ (succ-ℕ n)) (ap inl p))} ;
+                      ( pair (succ-ℕ (succ-ℕ n)) (ap inl p))}) ;
               (inr star) → unit-trunc-Prop (pair zero-ℕ refl)})))
 ```
 
@@ -143,7 +143,7 @@ The set of natural numbers ℕ is itself countable.
 is-countable-ℕ : is-countable ℕ-Set
 is-countable-ℕ =
   unit-trunc-Prop
-    (pair
+    ( pair
       ( λ { zero-ℕ → inr star ; (succ-ℕ n) → inl n})
       ( λ {
         (inl n) → unit-trunc-Prop (pair (succ-ℕ n) refl) ;
