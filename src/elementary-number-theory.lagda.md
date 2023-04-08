@@ -4,17 +4,22 @@
 module elementary-number-theory where
 
 open import elementary-number-theory.absolute-value-integers public
+open import elementary-number-theory.ackermann-function public
 open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-rationals public
 open import elementary-number-theory.arithmetic-functions public
-open import elementary-number-theory.bezouts-lemma public
+open import elementary-number-theory.based-induction-natural-numbers public
+open import elementary-number-theory.based-strong-induction-natural-numbers public
+open import elementary-number-theory.bezouts-lemma-integers public
+open import elementary-number-theory.bezouts-lemma-natural-numbers public
 open import elementary-number-theory.binomial-coefficients public
 open import elementary-number-theory.binomial-theorem-integers public
 open import elementary-number-theory.binomial-theorem-natural-numbers public
 open import elementary-number-theory.bounded-sums-arithmetic-functions public
 open import elementary-number-theory.catalan-numbers public
+open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-ring-of-integers public
@@ -23,7 +28,6 @@ open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-types public
-open import elementary-number-theory.dedekind-real-numbers public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
@@ -42,6 +46,7 @@ open import elementary-number-theory.falling-factorials public
 open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
+open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
@@ -67,6 +72,7 @@ open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
 open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
+open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
@@ -75,6 +81,7 @@ open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
+open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
@@ -86,8 +93,11 @@ open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
 open import elementary-number-theory.retracts-of-natural-numbers public
+open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public
+open import elementary-number-theory.strict-inequality-natural-numbers public
+open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.telephone-numbers public

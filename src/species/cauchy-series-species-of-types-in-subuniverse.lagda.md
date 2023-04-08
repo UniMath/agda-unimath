@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import species.cauchy-series-species-of-types
 open import species.species-of-types-in-subuniverse
 ```
 

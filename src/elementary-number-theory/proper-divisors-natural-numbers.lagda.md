@@ -13,6 +13,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
@@ -21,6 +22,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 
@@ -74,4 +76,20 @@ pr1 (is-proper-divisor-one-is-proper-divisor-ℕ {.1} {x} H) refl =
 pr1 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) = n
 pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
   right-unit-law-mul-ℕ n
+```
+
+### If `x` is nonzero and `d | x` is a proper divisor, then `1 < x/d`
+
+```agda
+le-one-quotient-div-is-proper-divisor-ℕ :
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
+  ¬ (d ＝ x) → le-ℕ 1 (quotient-div-ℕ d x H)
+le-one-quotient-div-is-proper-divisor-ℕ d x f H g =
+  map-left-unit-law-coprod-is-empty
+    ( is-one-ℕ (quotient-div-ℕ d x H))
+    ( le-ℕ 1 (quotient-div-ℕ d x H))
+    ( map-neg (eq-is-one-quotient-div-ℕ d x H) g)
+    ( eq-or-le-leq-ℕ' 1
+      ( quotient-div-ℕ d x H)
+      ( leq-one-quotient-div-ℕ d x H (leq-one-is-nonzero-ℕ x f)))
 ```

@@ -22,11 +22,9 @@ open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
-open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.identity-types
-open import foundation-core.negation
 ```
 
 </details>

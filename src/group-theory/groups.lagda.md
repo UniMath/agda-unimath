@@ -26,12 +26,14 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.monoids
+open import group-theory.products-of-elements-monoids
 open import group-theory.semigroups
+
+open import lists.concatenation-lists
+open import lists.lists
 
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
-
-open import univalent-combinatorics.lists
 ```
 
 </details>
@@ -483,7 +485,7 @@ module _
     Id ( mul-list-Group (concat-list l1 l2))
        ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
   preserves-concat-mul-list-Group =
-    distributive-mul-list-Monoid (monoid-Group G)
+    distributive-mul-concat-list-Monoid (monoid-Group G)
 ```
 
 ### Any group element yields a type equipped with an automorphism

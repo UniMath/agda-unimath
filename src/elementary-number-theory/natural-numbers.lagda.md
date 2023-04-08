@@ -221,3 +221,12 @@ pr2 equiv-ℕ =
     issec-map-inv-equiv-ℕ
     isretr-map-inv-equiv-ℕ
 ```
+
+## See also
+
+- The based induction principle is defined in
+  [`based-induction-natural-numbers`](elementary-number-theory.based-induction-natural-numbers.md).
+- The strong induction principle is defined in
+  [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
+- The based strong induction principle is defined in
+  [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).

@@ -196,7 +196,7 @@ open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
 open import foundation.relaxed-sigma-decompositions public
-open import foundation.repetitions public
+open import foundation.repetitions-of-values public
 open import foundation.repetitions-sequences public
 open import foundation.replacement public
 open import foundation.retractions public

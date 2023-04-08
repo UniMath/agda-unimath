@@ -12,6 +12,7 @@ open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

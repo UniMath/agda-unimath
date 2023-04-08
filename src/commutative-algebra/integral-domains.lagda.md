@@ -36,10 +36,11 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
+open import lists.concatenation-lists
+open import lists.lists
+
 open import ring-theory.rings
 open import ring-theory.semirings
-
-open import univalent-combinatorics.lists
 ```
 
 </details>

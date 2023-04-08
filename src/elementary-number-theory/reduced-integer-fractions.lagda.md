@@ -1,4 +1,4 @@
-# The rational numbers
+# Reduced integer fractions
 
 ```agda
 module elementary-number-theory.reduced-integer-fractions where
@@ -7,7 +7,7 @@ module elementary-number-theory.reduced-integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.bezouts-lemma
+open import elementary-number-theory.bezouts-lemma-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-integers
@@ -26,9 +26,6 @@ open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
-open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
 
@@ -71,7 +68,7 @@ reduce-numerator-fraction-ℤ :
     ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
     ( numerator-fraction-ℤ x)
 reduce-numerator-fraction-ℤ x =
-  div-ℤ-gcd-left (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
+  div-left-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
 
 int-reduce-numerator-fraction-ℤ : fraction-ℤ → ℤ
 int-reduce-numerator-fraction-ℤ x = pr1 (reduce-numerator-fraction-ℤ x)
@@ -90,7 +87,7 @@ reduce-denominator-fraction-ℤ :
     ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
     ( denominator-fraction-ℤ x)
 reduce-denominator-fraction-ℤ x =
-  div-ℤ-gcd-right (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
+  div-right-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
 
 int-reduce-denominator-fraction-ℤ : fraction-ℤ → ℤ
 int-reduce-denominator-fraction-ℤ x =
@@ -154,7 +151,8 @@ is-reduced-reduce-fraction-ℤ x =
             (mul-ℤ alpha d)
           ( pair
             -- alpha * d divides the numerator of x
-            ( tr ( λ - → div-ℤ - (numerator-fraction-ℤ x))
+            ( tr
+              ( λ u → div-ℤ u (numerator-fraction-ℤ x))
               ( commutative-mul-ℤ d alpha)
               ( div-div-quotient-div-ℤ alpha (numerator-fraction-ℤ x) d
                 ( pr1 ( is-common-divisor-gcd-ℤ
@@ -164,7 +162,8 @@ is-reduced-reduce-fraction-ℤ x =
                   ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
                   ( denominator-fraction-ℤ (reduce-fraction-ℤ x))))))
             -- alpha * d divides the denominator of x
-            ( tr ( λ - → div-ℤ - (denominator-fraction-ℤ x))
+            ( tr
+              ( λ u → div-ℤ u (denominator-fraction-ℤ x))
               ( commutative-mul-ℤ d alpha)
               ( div-div-quotient-div-ℤ alpha (denominator-fraction-ℤ x) d
                 ( pr2 ( is-common-divisor-gcd-ℤ

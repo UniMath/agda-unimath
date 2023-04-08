@@ -8,7 +8,6 @@ module group-theory.normal-submonoids where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences

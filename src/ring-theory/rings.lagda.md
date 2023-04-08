@@ -31,9 +31,10 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import ring-theory.semirings
+open import lists.concatenation-lists
+open import lists.lists
 
-open import univalent-combinatorics.lists
+open import ring-theory.semirings
 ```
 
 </details>

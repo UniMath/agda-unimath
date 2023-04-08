@@ -10,23 +10,17 @@ module universal-algebra.terms-over-signatures where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equational-reasoning
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 
-open import univalent-combinatorics.lists
+open import lists.lists
+open import lists.lists-discrete-types
 
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures

@@ -14,7 +14,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
@@ -23,8 +22,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
