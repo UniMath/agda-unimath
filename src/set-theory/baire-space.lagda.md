@@ -64,7 +64,7 @@ is-set-baire-space f g =
 
 baire-space-Set : Set lzero
 pr1 baire-space-Set = baire-space
-pr2 baire-space-Set = is-baire-space-set
+pr2 baire-space-Set = is-set-baire-space
 ```
 
 ### The Baire Space is uncountable.
