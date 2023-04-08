@@ -15,6 +15,7 @@ open import commutative-algebra.trivial-commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences

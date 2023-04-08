@@ -204,7 +204,7 @@ module _
               has-decidable-equality-count eX
                 ( iterate n (map-equiv f) a)
                 ( iterate m (map-equiv f) a))
-            ( λ m p → leq-le-ℕ {m} {n} p))
+            ( λ m p → leq-le-ℕ m n p))
         ( two-points-iterate-ordered-ℕ
           ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
 
@@ -495,54 +495,56 @@ module _
       is-decidable-iterate-is-decidable-bounded h a b (inr np) =
         inr
           ( λ p →
-            np ( pair
-                 ( remainder-euclidean-division-ℕ m (pr1 p))
-                 ( pair
-                   ( leq-le-ℕ
-                     { x = remainder-euclidean-division-ℕ m (pr1 p)}
-                     ( concatenate-le-leq-ℕ
-                       { y = m}
-                       ( strict-upper-bound-remainder-euclidean-division-ℕ
-                         ( m)
-                         ( pr1 p)
-                         ( pr1
-                           ( pr2
-                             ( has-finite-orbits-permutation
-                               ( type-UU-Fin n X)
-                               ( pair n h)
-                               ( f)
-                               ( a)))))
-                       ( leq-has-finite-orbits-permutation-number-elements
-                         ( type-UU-Fin n X)
-                         ( pair n h)
-                         ( f)
-                         ( a))))
-                   ( ( ap
-                       ( iterate
-                         ( remainder-euclidean-division-ℕ m (pr1 p))
-                         ( map-equiv f))
-                       ( inv
-                         ( mult-has-finite-orbits-permutation
-                           ( type-UU-Fin n X)
-                           ( pair n h)
-                           ( f)
-                           ( a)
-                           ( quotient-euclidean-division-ℕ m (pr1 p))))) ∙
-                     ( ( inv
-                         ( iterate-add-ℕ
-                           ( remainder-euclidean-division-ℕ m (pr1 p))
-                           ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
-                           ( map-equiv f)
-                           ( a))) ∙
-                       ( ( ap
-                           ( λ x → iterate x (map-equiv f) a)
-                           ( ( commutative-add-ℕ
-                               ( remainder-euclidean-division-ℕ m (pr1 p))
-                               ( mul-ℕ
-                                 ( quotient-euclidean-division-ℕ m (pr1 p))
-                                 ( m))) ∙
-                             ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
-                         ( pr2 p)))))))
+            np
+              ( pair
+                ( remainder-euclidean-division-ℕ m (pr1 p))
+                ( pair
+                  ( leq-le-ℕ
+                    ( remainder-euclidean-division-ℕ m (pr1 p))
+                    ( n)
+                    ( concatenate-le-leq-ℕ
+                      { y = m}
+                      ( strict-upper-bound-remainder-euclidean-division-ℕ
+                        ( m)
+                        ( pr1 p)
+                        ( pr1
+                          ( pr2
+                            ( has-finite-orbits-permutation
+                              ( type-UU-Fin n X)
+                              ( pair n h)
+                              ( f)
+                              ( a)))))
+                      ( leq-has-finite-orbits-permutation-number-elements
+                        ( type-UU-Fin n X)
+                        ( pair n h)
+                        ( f)
+                        ( a))))
+                  ( ( ap
+                      ( iterate
+                        ( remainder-euclidean-division-ℕ m (pr1 p))
+                        ( map-equiv f))
+                      ( inv
+                        ( mult-has-finite-orbits-permutation
+                          ( type-UU-Fin n X)
+                          ( pair n h)
+                          ( f)
+                          ( a)
+                          ( quotient-euclidean-division-ℕ m (pr1 p))))) ∙
+                    ( ( inv
+                        ( iterate-add-ℕ
+                          ( remainder-euclidean-division-ℕ m (pr1 p))
+                          ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
+                          ( map-equiv f)
+                          ( a))) ∙
+                      ( ( ap
+                          ( λ x → iterate x (map-equiv f) a)
+                          ( ( commutative-add-ℕ
+                              ( remainder-euclidean-division-ℕ m (pr1 p))
+                              ( mul-ℕ
+                                ( quotient-euclidean-division-ℕ m (pr1 p))
+                                ( m))) ∙
+                            ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
+                        ( pr2 p)))))))
         where
         m : ℕ
         m = pr1
