@@ -11,9 +11,13 @@ open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.functions
 open import foundation.identity-types
+open import foundation.raising-universe-levels
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.lists
@@ -26,6 +30,40 @@ open import lists.lists
 In this file we study lists of elements in discrete types.
 
 ## Definitions
+
+### The type of lists of a discrete type is discrete
+
+```agda
+has-decidable-equality-list :
+  {l1 : Level} {A : UU l1} →
+  has-decidable-equality A → has-decidable-equality (list A)
+has-decidable-equality-list d nil nil = inl refl
+has-decidable-equality-list d nil (cons x l) =
+  inr (map-inv-raise ∘ Eq-eq-list nil (cons x l))
+has-decidable-equality-list d (cons x l) nil =
+  inr (map-inv-raise ∘ Eq-eq-list (cons x l) nil)
+has-decidable-equality-list d (cons x l) (cons x' l') =
+  is-decidable-iff
+    ( eq-Eq-list (cons x l) (cons x' l'))
+    ( Eq-eq-list (cons x l) (cons x' l'))
+    ( is-decidable-prod
+      ( d x x')
+      ( is-decidable-iff
+        ( Eq-eq-list l l')
+        ( eq-Eq-list l l')
+        ( has-decidable-equality-list d l l')))
+
+has-decidable-equality-has-decidable-equality-list :
+  {l1 : Level} {A : UU l1} →
+  has-decidable-equality (list A) → has-decidable-equality A
+has-decidable-equality-has-decidable-equality-list d x y =
+  is-decidable-left-factor
+    ( is-decidable-iff
+      ( Eq-eq-list (cons x nil) (cons y nil))
+      ( eq-Eq-list (cons x nil) (cons y nil))
+      ( d (cons x nil) (cons y nil)))
+    ( raise-star)
+```
 
 ### Testing whether an element of a discrete type is in a list
 

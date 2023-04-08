@@ -7,16 +7,11 @@ module lists.lists where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -32,8 +27,6 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import group-theory.monoids
 ```
 
 </details>
@@ -250,48 +243,6 @@ is-set-list = is-trunc-list neg-two-𝕋
 
 list-Set : {l : Level} → Set l → Set l
 list-Set A = pair (list (type-Set A)) (is-set-list (is-set-type-Set A))
-
-has-decidable-equality-list :
-  {l1 : Level} {A : UU l1} →
-  has-decidable-equality A → has-decidable-equality (list A)
-has-decidable-equality-list d nil nil = inl refl
-has-decidable-equality-list d nil (cons x l) =
-  inr (map-inv-raise ∘ Eq-eq-list nil (cons x l))
-has-decidable-equality-list d (cons x l) nil =
-  inr (map-inv-raise ∘ Eq-eq-list (cons x l) nil)
-has-decidable-equality-list d (cons x l) (cons x' l') =
-  is-decidable-iff
-    ( eq-Eq-list (cons x l) (cons x' l'))
-    ( Eq-eq-list (cons x l) (cons x' l'))
-    ( is-decidable-prod
-      ( d x x')
-      ( is-decidable-iff
-        ( Eq-eq-list l l')
-        ( eq-Eq-list l l')
-        ( has-decidable-equality-list d l l')))
-
-is-decidable-left-factor :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-decidable (A × B) → B → is-decidable A
-is-decidable-left-factor (inl (pair x y)) b = inl x
-is-decidable-left-factor (inr f) b = inr (λ a → f (pair a b))
-
-is-decidable-right-factor :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-decidable (A × B) → A → is-decidable B
-is-decidable-right-factor (inl (pair x y)) a = inl y
-is-decidable-right-factor (inr f) a = inr (λ b → f (pair a b))
-
-has-decidable-equality-has-decidable-equality-list :
-  {l1 : Level} {A : UU l1} →
-  has-decidable-equality (list A) → has-decidable-equality A
-has-decidable-equality-has-decidable-equality-list d x y =
-  is-decidable-left-factor
-    ( is-decidable-iff
-      ( Eq-eq-list (cons x nil) (cons y nil))
-      ( eq-Eq-list (cons x nil) (cons y nil))
-      ( d (cons x nil) (cons y nil)))
-    ( raise-star)
 ```
 
 ### The length operation behaves well with respect to the other list operations
