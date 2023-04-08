@@ -70,7 +70,7 @@ is-prop-is-countable' :
 is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 ```
 
-## Properties
+### Third definition of countable types
 
 If a set `X` is inhabited, then it is countable if and only if there is a
 surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
@@ -130,6 +130,8 @@ module _
                       (pair (succ-ℕ (succ-ℕ n)) (ap inl p))} ;
               (inr star) → unit-trunc-Prop (pair zero-ℕ refl)})))
 ```
+
+## Properties
 
 ### The two definitions of countability are equivalent
 
