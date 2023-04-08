@@ -22,7 +22,8 @@ open import lists.lists
 
 ## Idea
 
-Given a functiion `f : A → B`, we obtain a function `map-list f : list A → list B`.
+Given a functiion `f : A → B`, we obtain a function
+`map-list f : list A → list B`.
 
 ## Definition
 

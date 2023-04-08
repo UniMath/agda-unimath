@@ -21,7 +21,8 @@ open import lists.lists
 
 ## Idea
 
-Given a list of elements in a monoid, the elements in that list can be multiplied.
+Given a list of elements in a monoid, the elements in that list can be
+multiplied.
 
 ## Definition
 

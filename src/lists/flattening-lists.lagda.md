@@ -22,7 +22,8 @@ open import lists.lists
 
 ## Idea
 
-Any list of lists of elements of `A` can be flattened to form a list of elements of `A`
+Any list of lists of elements of `A` can be flattened to form a list of elements
+of `A`
 
 ## Definition
 
@@ -76,4 +77,3 @@ flatten-snoc-list (cons b x) a =
   ( ap (concat-list b) (flatten-snoc-list x a)) ∙
   ( inv (associative-concat-list b (flatten-list x) a))
 ```
-

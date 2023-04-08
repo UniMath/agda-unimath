@@ -23,7 +23,8 @@ open import lists.lists
 
 ## Idea
 
-The reverse of a list of elements in `A` lists the elements of `A` in the reversed order.
+The reverse of a list of elements in `A` lists the elements of `A` in the
+reversed order.
 
 ## Definition
 
@@ -90,7 +91,7 @@ reverse-reverse-list :
 reverse-reverse-list nil = refl
 reverse-reverse-list (cons a x) =
   ( reverse-snoc-list (reverse-list x) a) ∙
-  ( ap (cons a) (reverse-reverse-list x))  
+  ( ap (cons a) (reverse-reverse-list x))
 ```
 
 ```agda
