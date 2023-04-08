@@ -96,8 +96,8 @@ is-even-succ-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
 is-even-succ-is-odd-ℕ (succ-ℕ zero-ℕ) p = (1 , refl)
 is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
   is-even-succ-succ-is-even-ℕ
-    (succ-ℕ n)
-    (is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
+    ( succ-ℕ n)
+    ( is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
 ```
 
 ### If a natural number `x` is even, then `x + 1` is odd
@@ -109,6 +109,6 @@ is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
 is-odd-succ-is-even-ℕ (succ-ℕ zero-ℕ) p = ex-falso (is-odd-one-ℕ p)
 is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
   is-odd-succ-succ-is-odd-ℕ
-    (succ-ℕ n)
-    (is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
+    ( succ-ℕ n)
+    ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
 ```
