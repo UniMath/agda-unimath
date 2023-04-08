@@ -36,13 +36,14 @@ catalan-numbers =
         ( λ i →
           mul-ℕ
             ( C ( nat-Fin k i)
-                ( leq-le-ℕ {x = nat-Fin k i} (strict-upper-bound-nat-Fin k i)))
+                ( leq-le-ℕ (nat-Fin k i) k (strict-upper-bound-nat-Fin k i)))
             ( C ( dist-ℕ (nat-Fin k i) k)
                 ( leq-dist-ℕ
                   ( nat-Fin k i)
                   ( k)
                   ( leq-le-ℕ
-                    { x = nat-Fin k i}
+                    ( nat-Fin k i)
+                    ( k)
                     ( strict-upper-bound-nat-Fin k i))))))
 
 catalan-numbers-binomial : ℕ → ℕ

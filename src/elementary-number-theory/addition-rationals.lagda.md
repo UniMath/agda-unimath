@@ -1,18 +1,26 @@
 # Addition on the rationals
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.addition-rationals where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositions
 ```
 
 </details>
@@ -21,16 +29,13 @@ open import foundation.identity-types
 
 We introduce addition on the rationals and derive its basic properties.
 Properties of addition with respect to inequality are derived in
-`inequality-ratonals`.
+`inequality-rationals`.
 
 ## Definition
 
 ```agda
 add-ℚ : ℚ → ℚ → ℚ
-add-ℚ (pair (pair m (pair n (n-pos))) p) (pair (pair m' (pair n' (n'-pos))) p') =
-  in-fraction-ℤ
-    ( pair (add-ℤ (mul-ℤ m n') (mul-ℤ m' n))
-    ( pair (mul-ℤ n n') (is-positive-mul-ℤ n-pos n'-pos)))
+add-ℚ (x , p) (y , q) = in-fraction-ℤ (add-fraction-ℤ x y)
 
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
@@ -48,12 +53,32 @@ ap-add-ℚ p q = ap-binary add-ℚ p q
 ### Unit laws
 
 ```agda
--- abstract
-  -- left-unit-law-add-ℚ : (k : ℚ) → zero-ℚ +ℚ k ＝ k
-  -- left-unit-law-add-ℚ k =
-  --   eq-pair-Σ
-  --     ( {!!} )
-  --     ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (pr1 k)))
+left-unit-law-add-ℚ : (x : ℚ) → zero-ℚ +ℚ x ＝ x
+left-unit-law-add-ℚ (x , p) =
+  eq-ℚ-sim-fractions-ℤ
+    ( add-fraction-ℤ zero-fraction-ℤ x)
+    ( x)
+    ( left-unit-law-add-fraction-ℤ x) ∙
+  in-fraction-fraction-ℚ (x , p)
 
---   right-unit-law-add-ℚ : (k : ℚ) → ℚ +ℚ zero-ℚ ＝ k
+right-unit-law-add-ℚ : (x : ℚ) → x +ℚ zero-ℚ ＝ x
+right-unit-law-add-ℚ (x , p) =
+  eq-ℚ-sim-fractions-ℤ
+    ( add-fraction-ℤ x zero-fraction-ℤ)
+    ( x)
+    ( right-unit-law-add-fraction-ℤ x) ∙
+  in-fraction-fraction-ℚ (x , p)
+```
+
+### Addition is commutative
+
+```agda
+commutative-add-ℚ :
+  (x y  : ℚ) →
+  x +ℚ y ＝ y +ℚ x
+commutative-add-ℚ (x , px) (y , py) =
+  eq-ℚ-sim-fractions-ℤ
+    ( add-fraction-ℤ x y)
+    ( add-fraction-ℤ y x)
+    ( commutative-add-fraction-ℤ x y)
 ```

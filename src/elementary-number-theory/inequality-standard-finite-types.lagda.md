@@ -87,7 +87,7 @@ preserves-leq-nat-Fin :
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   preserves-leq-nat-Fin k H
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H =
-  leq-le-ℕ {nat-Fin k x} {k} (strict-upper-bound-nat-Fin k x)
+  leq-le-ℕ (nat-Fin k x) k (strict-upper-bound-nat-Fin k x)
 preserves-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H =
   refl-leq-ℕ k
 

@@ -106,6 +106,21 @@ is-zero-div-zero-ℤ :
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 ```
 
+### The quotient of `x` by one is `x`
+
+```agda
+is-one-quotient-ℤ :
+ (k x : ℤ) → is-one-ℤ k → (k-div-x : div-ℤ k x) →
+ quotient-div-ℤ k x k-div-x ＝ x
+is-one-quotient-ℤ .one-ℤ x refl k-div-x =
+  tr (λ - → pr1 - ＝ x)
+    ( eq-is-prop'
+      ( is-prop-div-ℤ one-ℤ x (λ ()))
+      ( div-one-ℤ x)
+      ( k-div-x))
+    ( refl)
+```
+
 ### If `k` divides `x` and `k` is 0 then `x` is 0
 
 ```agda

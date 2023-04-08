@@ -7,13 +7,13 @@ module elementary-number-theory.fundamental-theorem-of-arithmetic where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.based-strong-induction-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.cartesian-product-types
