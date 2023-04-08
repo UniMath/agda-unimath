@@ -223,6 +223,81 @@ comp-base-based-strong-ind-ℕ k P p0 pS =
     ( refl-leq-ℕ k)) ∙
   ( eq-base-based-strong-ind-ℕ k P p0 (refl-leq-ℕ k) (refl-leq-ℕ k))
 
+cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ :
+  { l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
+  ( pS : (x : ℕ) → k ≤-ℕ x → based-□-≤-ℕ k P x → P (succ-ℕ x))
+  ( n : ℕ) (N : k ≤-ℕ n) (N' : k ≤-ℕ succ-ℕ n)
+  ( m : ℕ) (M : k ≤-ℕ m) (H : m ≤-ℕ succ-ℕ n) →
+  ( c : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) →
+  ( α :
+    (I : k ≤-ℕ n) (J : m ≤-ℕ n) →
+     inductive-step-based-strong-ind-ℕ k P
+       ( base-based-strong-ind-ℕ k P p0)
+       ( succ-based-strong-ind-ℕ k P pS)
+       ( n)
+       ( I)
+       ( m)
+       ( M)
+       ( J) ＝
+     inductive-step-based-strong-ind-ℕ k P
+       ( base-based-strong-ind-ℕ k P p0)
+       ( succ-based-strong-ind-ℕ k P pS)
+       ( m)
+       ( M)
+       ( m)
+       ( M)
+       ( refl-leq-ℕ m)) → 
+  inductive-step-based-strong-ind-ℕ k P
+    ( base-based-strong-ind-ℕ k P p0)
+    ( succ-based-strong-ind-ℕ k P pS)
+    ( succ-ℕ n)
+    ( N')
+    ( m)
+    ( M)
+    ( H) ＝
+  inductive-step-based-strong-ind-ℕ k P
+    ( base-based-strong-ind-ℕ k P p0)
+    ( succ-based-strong-ind-ℕ k P pS)
+    ( m)
+    ( M)
+    ( m)
+    ( M)
+    ( refl-leq-ℕ m)  
+cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
+  k P p0 pS n N N' m M H (inl H') α =
+  ( comp-succ-inductive-step-based-strong-ind-ℕ k P
+    ( base-based-strong-ind-ℕ k P p0)
+    ( succ-based-strong-ind-ℕ k P pS)
+    ( n)
+    ( N)
+    ( N')
+    ( m)
+    ( M)
+    ( H)) ∙
+  ( ( htpy-succ-based-strong-ind-ℕ k P pS n N
+      (  inductive-step-based-strong-ind-ℕ k P
+        ( base-based-strong-ind-ℕ k P p0)
+        ( succ-based-strong-ind-ℕ k P pS)
+        ( n)
+        ( N))
+      ( m)
+      ( M)
+      ( H)
+      ( H')) ∙
+    ( α N H'))
+cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
+  k P p0 pS n N N' m M H (inr p) α =
+  ap-inductive-step-based-strong-ind-ℕ k P
+    ( base-based-strong-ind-ℕ k P p0)
+    ( succ-based-strong-ind-ℕ k P pS)
+    ( inv p)
+    ( N')
+    ( M)
+    ( m)
+    ( M)
+    ( H)
+    ( refl-leq-ℕ m)
+
 eq-inductive-step-comp-succ-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
   (pS : (x : ℕ) → k ≤-ℕ x → based-□-≤-ℕ k P x → P (succ-ℕ x))
@@ -244,7 +319,7 @@ eq-inductive-step-comp-succ-based-strong-ind-ℕ :
     ( m)
     ( M)
     ( refl-leq-ℕ m)
-eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M H =
+eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M =
   based-ind-ℕ k
     ( λ i →
       (I : k ≤-ℕ i) (J : m ≤-ℕ i) →
@@ -275,122 +350,14 @@ eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M H =
         ( M)
         ( J)
         ( refl-leq-ℕ m))
-    ( λ i I' α I J → {!!})
+    ( λ i I' α I J →
+      cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS i I' I m M
+        ( J)
+        ( cases-leq-succ-ℕ J)
+        ( α))
     ( n)
     ( N)
     ( N)
-    ( H)
-
-cases-eq-comp-succ-based-strong-ind-ℕ :
-  { l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
-  ( pS : (x : ℕ) → k ≤-ℕ x → (based-□-≤-ℕ k P x) → P (succ-ℕ x)) →
-  ( n : ℕ) (N : k ≤-ℕ n) →
-  ( α :
-    ( m : ℕ) (M : k ≤-ℕ m) (H : leq-ℕ m n) →
-    inductive-step-based-strong-ind-ℕ k P
-      ( base-based-strong-ind-ℕ k P p0)
-      ( λ x lx f i I J →
-        cases-succ-based-strong-ind-ℕ k P pS x lx f i I (cases-leq-succ-ℕ J))
-      ( n)
-      ( N)
-      ( m)
-      ( M)
-      ( H) ＝
-    based-strong-ind-ℕ k P p0 pS m M) →
-  ( m : ℕ) (M : k ≤-ℕ m) (H : leq-ℕ m (succ-ℕ n)) →
-  ( K : (leq-ℕ m n) + (m ＝ succ-ℕ n)) →
-  ( succ-based-strong-ind-ℕ k P pS n N
-    ( inductive-step-based-strong-ind-ℕ k P
-      ( base-based-strong-ind-ℕ k P p0)
-      ( succ-based-strong-ind-ℕ k P pS) n N) m M H) ＝
-  ( based-strong-ind-ℕ k P p0 pS m M)
-cases-eq-comp-succ-based-strong-ind-ℕ k P p0 pS n N α m M H (inl K) =
-  ( htpy-succ-based-strong-ind-ℕ k P pS n N
-    ( inductive-step-based-strong-ind-ℕ k P
-      ( base-based-strong-ind-ℕ k P p0)
-      ( succ-based-strong-ind-ℕ k P pS)
-      ( n)
-      ( N))
-    ( m)
-    ( M)
-    ( H)
-    ( K)) ∙
-  ( α m M K)
-cases-eq-comp-succ-based-strong-ind-ℕ
-  k P p0 pS n N α .(succ-ℕ n) M H (inr refl) =
-  ( eq-succ-based-strong-ind-ℕ k P pS n N
-    ( inductive-step-based-strong-ind-ℕ k P
-      ( base-based-strong-ind-ℕ k P p0)
-      ( succ-based-strong-ind-ℕ k P pS)
-      ( n)
-      ( N))
-    ( M)
-    ( H)) ∙
-  ( ( inv
-      ( eq-succ-based-strong-ind-ℕ k P pS n N _ M (refl-leq-ℕ n))) ∙
-    ( inv
-      ( htpy-eq
-        ( htpy-eq
-          ( htpy-eq
-            ( comp-succ-based-ind-ℕ k
-              ( based-□-≤-ℕ k P)
-              ( base-based-strong-ind-ℕ k P p0)
-              ( succ-based-strong-ind-ℕ k P pS)
-              ( n)
-              ( N)
-              ( M))
-            ( succ-ℕ n))
-          ( M))
-        ( refl-leq-ℕ n))))
-
-eq-comp-succ-based-strong-ind-ℕ :
-  { l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
-  ( pS : (x : ℕ) → k ≤-ℕ x → (based-□-≤-ℕ k P x) → P (succ-ℕ x)) →
-  ( n : ℕ) (N : k ≤-ℕ n) →
-  ( m : ℕ) (M : k ≤-ℕ m) (H : leq-ℕ m n) →
-  ( inductive-step-based-strong-ind-ℕ k P
-    ( base-based-strong-ind-ℕ k P p0)
-    ( succ-based-strong-ind-ℕ k P pS)
-    ( n)
-    ( N)
-    ( m)
-    ( M)
-    ( H)) ＝
-  ( based-strong-ind-ℕ k P p0 pS m M)
-eq-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M H =
-  based-ind-ℕ k
-    ( λ x →
-      (K : k ≤-ℕ x) (L : leq-ℕ x n) →
-      inductive-step-based-strong-ind-ℕ k P
-        ( base-based-strong-ind-ℕ k P p0)
-        ( succ-based-strong-ind-ℕ k P pS)
-        n N x K L ＝
-      based-strong-ind-ℕ k P p0 pS x K)
-    ( λ K L →
-      {!!})
-    ( λ x K α U V →
-      {!!})
-    ( m)
-    ( M)
-    ( M)
-    ( H)
-{-
-  {!!} ∙
-  ( cases-eq-comp-succ-based-strong-ind-ℕ k P p0 pS n N (λ x U V → {!!}) m M (preserves-leq-succ-ℕ m n H) (cases-leq-succ-ℕ (preserves-leq-succ-ℕ m n H)))
-  -}
-{-
-eq-comp-succ-based-strong-ind-ℕ zero-ℕ P p0 pS zero-ℕ star zero-ℕ star star =
-  refl
-eq-comp-succ-based-strong-ind-ℕ zero-ℕ P p0 pS (succ-ℕ n) star m M H =
-  cases-eq-comp-succ-based-strong-ind-ℕ 0 P p0 pS n star
-    ( eq-comp-succ-based-strong-ind-ℕ 0 P p0 pS n star)
-    ( m)
-    ( M)
-    ( H)
-    ( cases-leq-succ-ℕ H)
-eq-comp-succ-based-strong-ind-ℕ (succ-ℕ k) P p0 pS (succ-ℕ n) N (succ-ℕ m) M H =
-  {!!} ∙
-  cases-eq-comp-succ-based-strong-ind-ℕ (succ-ℕ k) P p0 pS (succ-ℕ n) N {!!} (succ-ℕ m) M (preserves-leq-succ-ℕ m n H) (cases-leq-succ-ℕ (preserves-leq-succ-ℕ m n H)) -}
 
 comp-succ-based-strong-ind-ℕ :
   { l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
@@ -399,5 +366,30 @@ comp-succ-based-strong-ind-ℕ :
   based-strong-ind-ℕ k P p0 pS (succ-ℕ n) N' ＝
   pS n N (λ m M H → based-strong-ind-ℕ k P p0 pS m M)
 comp-succ-based-strong-ind-ℕ k P p0 pS n N N' =
-  {!!}
+  ( comp-succ-inductive-step-based-strong-ind-ℕ k P
+    ( base-based-strong-ind-ℕ k P p0)
+    ( succ-based-strong-ind-ℕ k P pS)
+    ( n)
+    ( N)
+    ( N')
+    ( succ-ℕ n)
+    ( N')
+    ( refl-leq-ℕ (succ-ℕ n))) ∙
+  ( ( eq-succ-based-strong-ind-ℕ k P pS n N
+      ( inductive-step-based-strong-ind-ℕ k P
+        ( base-based-strong-ind-ℕ k P p0)
+        ( succ-based-strong-ind-ℕ k P pS)
+        ( n)
+        ( N))
+      ( N')
+      ( refl-leq-ℕ n)) ∙
+    ( ap
+      ( pS n N)
+      ( eq-htpy
+        ( λ m →
+          eq-htpy
+            ( λ M →
+              eq-htpy
+                ( eq-inductive-step-comp-succ-based-strong-ind-ℕ
+                  k P p0 pS n N m M))))))
 ```
