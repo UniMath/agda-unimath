@@ -17,11 +17,13 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import lists.concatenation-lists
+open import lists.functoriality-lists
+open import lists.lists
+
 open import ring-theory.ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
-
-open import univalent-combinatorics.lists
 ```
 
 </details>

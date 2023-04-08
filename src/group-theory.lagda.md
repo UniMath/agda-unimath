@@ -110,6 +110,7 @@ open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
+open import group-theory.products-of-elements-monoids public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public

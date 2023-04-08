@@ -26,8 +26,6 @@ open import group-theory.semigroups
 open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
-
-open import ring-theory.rings
 ```
 
 </details>

@@ -30,10 +30,13 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.symmetric-groups
 
+open import lists.concatenation-lists
+open import lists.functoriality-lists
+open import lists.lists
+
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -189,7 +192,7 @@ module _
           ( inr star)
           ( unit-trunc-Prop
             ( pair
-              ( in-list Y)
+              ( unit-list Y)
               ( pair refl (inv (right-unit-law-equiv (transposition Y))))))}
       ( eq-is-contr
         ( is-contr-parity-transposition-permutation n X (transposition Y)))
@@ -255,12 +258,18 @@ module _
                             ( list-conjugation h))))))})) ∙
           ( ( ap
             ( mod-two-ℕ)
-            ( ( length-functor-list
+            ( ( length-map-list
               ( map-equiv
-                ( equiv-universes-2-Element-Decidable-Subtype (type-UU-Fin n Y) l l'))
+                ( equiv-universes-2-Element-Decidable-Subtype
+                  ( type-UU-Fin n Y)
+                  ( l)
+                  ( l')))
               ( list-conjugation h)) ∙
-              ( length-functor-list
-              ( transposition-conjugation-equiv (type-UU-Fin n X) (type-UU-Fin n Y) g)
+              ( length-map-list
+              ( transposition-conjugation-equiv
+                ( type-UU-Fin n X)
+                ( type-UU-Fin n Y)
+                ( g))
               ( list-trans h)))) ∙
             ( ap
               ( pr1)

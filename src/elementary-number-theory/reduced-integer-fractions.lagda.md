@@ -26,9 +26,6 @@ open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
-open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
 

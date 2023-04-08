@@ -17,7 +17,6 @@ open import foundation.universe-levels
 open import foundation.vectors-set-quotients
 
 open import foundation-core.equivalence-relations
-open import foundation-core.equivalences
 
 open import linear-algebra.vectors
 

@@ -8,8 +8,6 @@ module elementary-number-theory.inequality-rational-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-integer-fractions
-open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types

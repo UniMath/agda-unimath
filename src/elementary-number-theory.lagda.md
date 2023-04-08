@@ -84,6 +84,7 @@ open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.prime-numbers public
+open import elementary-number-theory.products-natural-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.pythagorean-triples public
@@ -99,6 +100,7 @@ open import elementary-number-theory.stirling-numbers-of-the-second-kind public
 open import elementary-number-theory.strict-inequality-natural-numbers public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
+open import elementary-number-theory.sums-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public

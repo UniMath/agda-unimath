@@ -13,7 +13,6 @@ open import commutative-algebra.integral-domains
 open import commutative-algebra.trivial-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
@@ -40,10 +39,11 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
+open import lists.concatenation-lists
+open import lists.lists
+
 open import ring-theory.rings
 open import ring-theory.semirings
-
-open import univalent-combinatorics.lists
 ```
 
 </details>

@@ -14,7 +14,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -34,10 +33,11 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
+open import lists.concatenation-lists
+open import lists.lists
+
 open import ring-theory.rings
 open import ring-theory.semirings
-
-open import univalent-combinatorics.lists
 ```
 
 </details>

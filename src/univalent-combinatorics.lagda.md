@@ -67,7 +67,6 @@ open import univalent-combinatorics.involution-standard-finite-types public
 open import univalent-combinatorics.isotopies-latin-squares public
 open import univalent-combinatorics.kuratowsky-finite-sets public
 open import univalent-combinatorics.latin-squares public
-open import univalent-combinatorics.lists public
 open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public

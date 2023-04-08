@@ -19,13 +19,12 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.lists
+open import lists.functoriality-lists
+open import lists.lists
 ```
 
 </details>

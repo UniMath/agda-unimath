@@ -7,7 +7,6 @@ module elementary-number-theory.strong-induction-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -17,7 +16,6 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unit-type

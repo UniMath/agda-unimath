@@ -28,7 +28,8 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.lists
+open import lists.concatenation-lists
+open import lists.lists
 ```
 
 </details>

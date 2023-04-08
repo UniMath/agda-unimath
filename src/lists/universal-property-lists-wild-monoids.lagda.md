@@ -1,7 +1,7 @@
 # The universal property of lists with respect to wild monoids
 
 ```agda
-module structured-types.universal-property-lists-wild-monoids where
+module lists.universal-property-lists-wild-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -14,11 +14,12 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
 
+open import lists.concatenation-lists
+open import lists.lists
+
 open import structured-types.coherent-h-spaces
 open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.wild-monoids
-
-open import univalent-combinatorics.lists
 ```
 
 </details>
@@ -48,60 +49,63 @@ list-Coherent-H-Space X =
 ### The wild monoid of lists of elements of `X`
 
 ```agda
-unit-law-011-assoc-concat-list :
+unit-law-011-associative-concat-list :
   {l1 : Level} {X : UU l1} (y z : list X) →
-  Id ( ( assoc-concat-list nil y z) ∙
+  Id ( ( associative-concat-list nil y z) ∙
        ( left-unit-law-concat-list (concat-list y z)))
      ( ap (λ t → concat-list t z) (left-unit-law-concat-list y))
-unit-law-011-assoc-concat-list y z = refl
+unit-law-011-associative-concat-list y z = refl
 
 concat-list' : {l : Level} {A : UU l} → list A → list A → list A
 concat-list' x y = concat-list y x
 
-unit-law-101-assoc-concat-list :
+unit-law-101-associative-concat-list :
   {l1 : Level} {X : UU l1} (x z : list X) →
-  Id ( ( assoc-concat-list x nil z) ∙
+  Id ( ( associative-concat-list x nil z) ∙
        ( ap (concat-list x) (left-unit-law-concat-list z)))
      ( ap (λ t → concat-list t z) (right-unit-law-concat-list x))
-unit-law-101-assoc-concat-list nil z = refl
-unit-law-101-assoc-concat-list (cons x l) z =
+unit-law-101-associative-concat-list nil z = refl
+unit-law-101-associative-concat-list (cons x l) z =
   ( ( ( inv
         ( ap-concat
           ( cons x)
-          ( assoc-concat-list l nil z)
+          ( associative-concat-list l nil z)
           ( ap (concat-list l) (left-unit-law-concat-list z)))) ∙
-      ( ap (ap (cons x)) (unit-law-101-assoc-concat-list l z))) ∙
+      ( ap (ap (cons x)) (unit-law-101-associative-concat-list l z))) ∙
     ( inv (ap-comp (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
   ( ap-comp (concat-list' z) (cons x) (right-unit-law-concat-list l))
 
-unit-law-110-assoc-concat-list :
+unit-law-110-associative-concat-list :
   {l1 : Level} {X : UU l1} (x y : list X) →
-  Id ( ( assoc-concat-list x y nil) ∙
+  Id ( ( associative-concat-list x y nil) ∙
        ( ap (concat-list x) (right-unit-law-concat-list y)))
      ( right-unit-law-concat-list (concat-list x y))
-unit-law-110-assoc-concat-list nil y = ap-id (right-unit-law-concat-list y)
-unit-law-110-assoc-concat-list (cons a x) y =
+unit-law-110-associative-concat-list nil y =
+  ap-id (right-unit-law-concat-list y)
+unit-law-110-associative-concat-list (cons a x) y =
   ( ap
-    ( concat (assoc-concat-list (cons a x) y nil) (concat-list (cons a x) y))
+    ( concat
+      ( associative-concat-list (cons a x) y nil)
+      ( concat-list (cons a x) y))
     ( ap-comp (cons a) (concat-list x) (right-unit-law-concat-list y))) ∙
   ( ( inv
       ( ap-concat
         ( cons a)
-        ( assoc-concat-list x y nil)
+        ( associative-concat-list x y nil)
         ( ap (concat-list x) (right-unit-law-concat-list y)))) ∙
-    ( ap (ap (cons a)) (unit-law-110-assoc-concat-list x y)))
+    ( ap (ap (cons a)) (unit-law-110-associative-concat-list x y)))
 
 list-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
 list-Wild-Monoid X =
   pair
     ( list-Coherent-H-Space X)
     ( pair
-      ( assoc-concat-list)
+      ( associative-concat-list)
       ( pair
-        ( unit-law-011-assoc-concat-list)
+        ( unit-law-011-associative-concat-list)
         ( pair
-          ( unit-law-101-assoc-concat-list)
-          ( pair unit-law-110-assoc-concat-list star))))
+          ( unit-law-101-associative-concat-list)
+          ( pair unit-law-110-associative-concat-list star))))
 ```
 
 ## Properties
