@@ -1,4 +1,4 @@
-# Coproduct decompositions
+# Coproduct decompositions in a subuniverse
 
 ```agda
 module foundation.coproduct-decompositions-subuniverse where
