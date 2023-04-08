@@ -22,6 +22,8 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.lists
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -33,6 +35,13 @@ open import univalent-combinatorics.standard-finite-types
 The values of a map `f : X → ℕ` out of a finite type `X` can be summed up.
 
 ## Definition
+
+### Sums of lists of natural numbers
+
+```agda
+sum-list-ℕ : list ℕ → ℕ
+sum-list-ℕ = fold-list 0 add-ℕ
+```
 
 ### Sums of natural numbers indexed by a standard finite type
 
