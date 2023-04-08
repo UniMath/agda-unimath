@@ -20,18 +20,21 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **based induction principle** for the natural numbers asserts that for any family `P` of types over `ℕ` and any natural number `k : ℕ`, equipped with
+The **based induction principle** for the natural numbers asserts that for any
+family `P` of types over `ℕ` and any natural number `k : ℕ`, equipped with
+
 1. An element `p0 : P k`
-2. A function `pS : (x : ℕ) → k ≤-ℕ x → P x → P (x + 1)`
-there is a function
+2. A function `pS : (x : ℕ) → k ≤-ℕ x → P x → P (x + 1)` there is a function
 
 ```md
   based-ind-ℕ k P p0 pS : (x : ℕ) → k ≤-ℕ x → P x
 ```
 
 such that
+
 1. `based-ind-ℕ k P p0 pS k K ＝ p0` for any `K : k ≤-ℕ k, and
-2. `based-ind-ℕ k P p0 pS (n + 1) N' ＝ pS n N (based-ind-ℕ k P p0 pS n N` for any `N : k ≤-ℕ n` and any `N' : k ≤-ℕ n + 1`.
+2. `based-ind-ℕ k P p0 pS (n + 1) N' ＝ pS n N (based-ind-ℕ k P p0 pS n N` for
+   any `N : k ≤-ℕ n` and any `N' : k ≤-ℕ n + 1`.
 
 ## Theorem
 
@@ -69,4 +72,5 @@ comp-succ-based-ind-ℕ (succ-ℕ k) P p0 pS (succ-ℕ n) =
 
 ## See also
 
-- The based strong induction principle is defined in [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).
+- The based strong induction principle is defined in
+  [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).

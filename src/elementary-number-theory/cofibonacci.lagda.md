@@ -28,7 +28,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **cofibonacci sequence** [1] is the unique function G : ℕ → ℕ satisfying the
+The [**cofibonacci sequence**][1] is the unique function G : ℕ → ℕ satisfying the
 property that
 
 ```md
@@ -139,4 +139,4 @@ is-left-adjoint-cofibonacci m n = {!!}
 
 ## References
 
-- [1] https://oeis.org/A001177
+[1]: https://oeis.org/A001177

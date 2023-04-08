@@ -28,7 +28,20 @@ open import foundation.universe-levels
 
 </details>
 
-# Divisibility on the natural numbers
+## Idea
+
+A natural number `m` is said to **divide** a natural number `n` if there exists a natural number `k` equipped with an identification `km ＝ n`. Using the
+Curry-Howard interpretation of logic into type theory, we express divisibility
+as follows:
+
+```md
+  div-ℕ m n := Σ (k : ℕ), mul-ℕ k m ＝ n.
+```
+
+If `n` is a nonzero natural number, then `div-ℕ m n` is always a proposition in
+the sense that the type `div-ℕ m n` contains at most one element.
+
+## Definitions
 
 ```agda
 div-ℕ : ℕ → ℕ → UU lzero

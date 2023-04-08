@@ -1,4 +1,4 @@
-# The rational numbers
+# Reduced integer fractions
 
 ```agda
 module elementary-number-theory.reduced-integer-fractions where
@@ -154,7 +154,8 @@ is-reduced-reduce-fraction-ℤ x =
             (mul-ℤ alpha d)
           ( pair
             -- alpha * d divides the numerator of x
-            ( tr ( λ - → div-ℤ - (numerator-fraction-ℤ x))
+            ( tr
+              ( λ u → div-ℤ u (numerator-fraction-ℤ x))
               ( commutative-mul-ℤ d alpha)
               ( div-div-quotient-div-ℤ alpha (numerator-fraction-ℤ x) d
                 ( pr1 ( is-common-divisor-gcd-ℤ
@@ -164,7 +165,8 @@ is-reduced-reduce-fraction-ℤ x =
                   ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
                   ( denominator-fraction-ℤ (reduce-fraction-ℤ x))))))
             -- alpha * d divides the denominator of x
-            ( tr ( λ - → div-ℤ - (denominator-fraction-ℤ x))
+            ( tr
+              ( λ u → div-ℤ u (denominator-fraction-ℤ x))
               ( commutative-mul-ℤ d alpha)
               ( div-div-quotient-div-ℤ alpha (denominator-fraction-ℤ x) d
                 ( pr2 ( is-common-divisor-gcd-ℤ

@@ -10,6 +10,8 @@ open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-rationals public
 open import elementary-number-theory.arithmetic-functions public
+open import elementary-number-theory.based-induction-natural-numbers public
+open import elementary-number-theory.based-strong-induction-natural-numbers public
 open import elementary-number-theory.bezouts-lemma-integers public
 open import elementary-number-theory.bezouts-lemma-natural-numbers public
 open import elementary-number-theory.binomial-coefficients public
@@ -26,7 +28,6 @@ open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-types public
-open import elementary-number-theory.dedekind-real-numbers public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public

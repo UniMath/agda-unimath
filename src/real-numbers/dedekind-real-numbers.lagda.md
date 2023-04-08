@@ -1,7 +1,7 @@
 # Dedekind real numbers
 
 ```agda
-module elementary-number-theory.dedekind-real-numbers where
+module real-numbers.dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>

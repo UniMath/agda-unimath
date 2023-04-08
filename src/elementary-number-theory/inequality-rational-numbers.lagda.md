@@ -1,4 +1,4 @@
-# Inequality on integer fractions
+# Inequality on the rational numbers
 
 ```agda
 module elementary-number-theory.inequality-rational-numbers where

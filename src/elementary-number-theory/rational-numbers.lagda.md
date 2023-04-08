@@ -127,9 +127,9 @@ in-fraction-fraction-ℚ : (x : ℚ) → in-fraction-ℤ (fraction-ℚ x) ＝ x
 in-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
   eq-pair-Σ
     ( eq-pair
-      ( is-one-quotient-ℤ _ _ p (div-left-gcd-ℤ m n))
+      ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
       ( eq-pair-Σ
-        ( is-one-quotient-ℤ _ _ p (div-right-gcd-ℤ m n))
+        ( eq-quotient-div-is-one-ℤ _ _ p (div-right-gcd-ℤ m n))
         ( eq-is-prop (is-prop-is-positive-ℤ n ))))
     ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
 ```
