@@ -124,10 +124,10 @@ module _
             ( λ {
               (inl x) →
                 apply-universal-property-trunc-Prop (pr2 P x)
-                  (trunc-Prop (fib _ (inl x)))
-                  λ { (pair n p) →
+                  ( trunc-Prop (fib _ (inl x)))
+                  ( λ { (pair n p) →
                     unit-trunc-Prop
-                      (pair (succ-ℕ (succ-ℕ n)) (ap inl p))} ;
+                      ( pair (succ-ℕ (succ-ℕ n)) (ap inl p))}) ;
               (inr star) → unit-trunc-Prop (pair zero-ℕ refl)})))
 ```
 
