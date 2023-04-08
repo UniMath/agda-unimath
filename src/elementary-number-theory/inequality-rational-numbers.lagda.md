@@ -19,8 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A rational number `x` is less (or equal) to a rational number `y` if and only if the underlying fraction
-of `x` is less (or equal) than the underlying fraction of `y`.
+A rational number `x` is less (or equal) to a rational number `y` if and only if
+the underlying fraction of `x` is less (or equal) than the underlying fraction
+of `y`.
 
 ## Definition
 

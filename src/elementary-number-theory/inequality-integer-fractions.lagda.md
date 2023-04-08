@@ -45,7 +45,7 @@ is-prop-leq-fraction-ℤ x y = is-prop-type-Prop (leq-fraction-ℤ-Prop x y)
 le-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 le-fraction-ℤ-Prop (m , n , p) (m' , n' , p') =
   le-ℤ-Prop (mul-ℤ m n') (mul-ℤ m' n)
-  
+
 le-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 le-fraction-ℤ x y = type-Prop (le-fraction-ℤ-Prop x y)
 

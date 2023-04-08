@@ -25,11 +25,23 @@ open import foundation.universe-levels
 
 ## Idea
 
-A dedekind real number `x` is a pair of maps `(L , U)` from `ℚ` to `Prop`, with
-`L` representing all the rationals smaller than `x`, and `U` representing all
-the rationals greater than `x`.
+A **Dedekind cut** consists a pair `(L , U)` of subtypes of `ℚ`, satisfying the
+following four conditions
+
+1. _Inhabitedness_. Both `L` and `U` are inhabited subtypes of `ℚ`.
+2. _Roundedness_. A rational number `q` is in `L` if and only if there exists
+   `q < r` such that `r ∈ L`, and a rational number `r` is in `U` if and only if
+   there exists `q < r` such that `q ∈ U`.
+3. _Disjointness_. `L` and `U` are disjoint subsets of `ℚ`.
+4. _Locatedness_. If `q < r` then `q ∈ L` or `r ∈ U`.
+
+The type of Dedekind real numbers is the type of all dedekind cuts. The Dedekind
+real numbers will be taken as the standard definition of the real numbers in the
+`agda-unimath` library.
 
 ## Definition
+
+### Dedekind cuts
 
 ```agda
 is-dedekind-cut-Prop :
@@ -58,11 +70,15 @@ is-dedekind-cut-Prop L U =
                 implication-Prop
                   ( le-ℚ-Prop q r)
                   ( disj-Prop (L q) (U r)))))))
-                  
+
 is-dedekind-cut :
   {l : Level} → (ℚ → Prop l) → (ℚ → Prop l) → UU l
 is-dedekind-cut L U = type-Prop (is-dedekind-cut-Prop L U)
+```
 
-dedekind-ℝ : (l : Level) → UU (lsuc l)
-dedekind-ℝ l = Σ (ℚ → Prop l) (λ L → Σ (ℚ → Prop l) (is-dedekind-cut L))
+### The Dedekind real numbers
+
+```agda
+ℝ : (l : Level) → UU (lsuc l)
+ℝ l = Σ (ℚ → Prop l) (λ L → Σ (ℚ → Prop l) (is-dedekind-cut L))
 ```
