@@ -1,7 +1,7 @@
-# The underlying graphs of elements of W-types
+# The underlying trees of elements of W-types
 
 ```agda
-module trees.underlying-graphs-of-elements-w-types where
+module trees.underlying-trees-of-elements-of-w-types where
 ```
 
 <details><summary>Imports</summary>
@@ -32,6 +32,7 @@ open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
+open import trees.enriched-directed-trees
 open import trees.inequality-w-types
 open import trees.w-types
 ```
@@ -41,12 +42,13 @@ open import trees.w-types
 ## Idea
 
 We assign to each element of a W-type `𝕎 A B` a directed graph. This directed
-graph is a tree in the graph theoretical sense if and only if each `B x` is a
-type with decidable equality.
+graph is in fact a directed tree, and furthermore, it can be given the structure
+of an enriched directed tree. We show that the map from `𝕎 A B` to enriched
+directed trees is an embedding.
 
 ## Definition
 
-### The type of nodes of the underlying graph of an element of a W-type
+### The underlying graph of an element of a W-type
 
 ```agda
 module _
@@ -287,9 +289,9 @@ module _
   node-inclusion-graph-element-𝕎' (tree-𝕎 x α) y n = inl (pair y n)
 ```
 
-Note that it seems unreasonable to expect that `node-inclusion-graph-element-𝕎'`
-is an embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)`
-embeds into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node
+Note that we don't expect that `node-inclusion-graph-element-𝕎'` is an
+embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)` embeds
+into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node
 inclusion has the same truncation level as the fiber inclusions
 
 ```md
@@ -544,3 +546,96 @@ module _
 ```
 
 ### The external graph of an element of a W-type is equivalent to the underlying graph
+
+### The underlying graph of an element of a W-type can be given the structure of an enriched directed tree
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  shape-node-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) → node-graph-element-𝕎 w → A
+  shape-node-directed-tree-element-𝕎 w root-𝕎 = symbol-𝕎 w
+  shape-node-directed-tree-element-𝕎 w
+    ( node-inclusion-graph-element-𝕎 {u} H y) =
+    shape-node-directed-tree-element-𝕎 u y
+
+  map-equiv-children-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    B (shape-node-directed-tree-element-𝕎 w x) →
+    Σ (node-graph-element-𝕎 w) (λ y → edge-graph-element-𝕎 w y x)
+  pr1 (map-equiv-children-directed-tree-element-𝕎 w root-𝕎 b) =
+    node-inclusion-graph-element-𝕎 (b , refl) root-𝕎
+  pr2 (map-equiv-children-directed-tree-element-𝕎 w root-𝕎 b) =
+    edge-to-root-graph-element-𝕎 (b , refl)
+  map-equiv-children-directed-tree-element-𝕎 w
+    ( node-inclusion-graph-element-𝕎 {u} H y) b =
+    map-Σ
+      ( λ z →
+        edge-graph-element-𝕎 w z (node-inclusion-graph-element-𝕎 H y))
+      ( node-inclusion-graph-element-𝕎 H)
+      ( λ z → edge-inclusion-graph-element-𝕎 H)
+      ( map-equiv-children-directed-tree-element-𝕎 u y b)
+
+  map-inv-equiv-children-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    Σ (node-graph-element-𝕎 w) (λ y → edge-graph-element-𝕎 w y x) →
+    B (shape-node-directed-tree-element-𝕎 w x)
+  map-inv-equiv-children-directed-tree-element-𝕎 w .root-𝕎
+    ( ._ , edge-to-root-graph-element-𝕎 H) = pr1 H
+  map-inv-equiv-children-directed-tree-element-𝕎 w ._
+    ( ._ , edge-inclusion-graph-element-𝕎 {u} H {x} {y} e) =
+    map-inv-equiv-children-directed-tree-element-𝕎 u y (x , e)
+
+  issec-map-inv-equiv-children-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    ( map-equiv-children-directed-tree-element-𝕎 w x ∘
+      map-inv-equiv-children-directed-tree-element-𝕎 w x) ~ id
+  issec-map-inv-equiv-children-directed-tree-element-𝕎 w .root-𝕎
+    ( ._ , edge-to-root-graph-element-𝕎 (b , refl)) = refl
+  issec-map-inv-equiv-children-directed-tree-element-𝕎 w ._
+    ( ._ , edge-inclusion-graph-element-𝕎 {u} H {x} {y} e) =
+    ap
+      ( map-Σ
+        ( λ z →
+          edge-graph-element-𝕎 w z (node-inclusion-graph-element-𝕎 H y))
+        ( node-inclusion-graph-element-𝕎 H)
+        ( λ z → edge-inclusion-graph-element-𝕎 H))
+      ( issec-map-inv-equiv-children-directed-tree-element-𝕎 u y (x , e))
+
+  isretr-map-inv-equiv-children-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    ( map-inv-equiv-children-directed-tree-element-𝕎 w x ∘
+      map-equiv-children-directed-tree-element-𝕎 w x) ~ id
+  isretr-map-inv-equiv-children-directed-tree-element-𝕎 w root-𝕎 b = refl
+  isretr-map-inv-equiv-children-directed-tree-element-𝕎 w
+    ( node-inclusion-graph-element-𝕎 {u} H y) b =
+    isretr-map-inv-equiv-children-directed-tree-element-𝕎 u y b
+
+  is-equiv-map-equiv-children-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    is-equiv (map-equiv-children-directed-tree-element-𝕎 w x)
+  is-equiv-map-equiv-children-directed-tree-element-𝕎 w x =
+    is-equiv-has-inverse
+      ( map-inv-equiv-children-directed-tree-element-𝕎 w x)
+      ( issec-map-inv-equiv-children-directed-tree-element-𝕎 w x)
+      ( isretr-map-inv-equiv-children-directed-tree-element-𝕎 w x)
+
+  equiv-children-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    B (shape-node-directed-tree-element-𝕎 w x) ≃
+    Σ (node-graph-element-𝕎 w) (λ y → edge-graph-element-𝕎 w y x)
+  pr1 (equiv-children-directed-tree-element-𝕎 w x) =
+    map-equiv-children-directed-tree-element-𝕎 w x
+  pr2 (equiv-children-directed-tree-element-𝕎 w x) =
+    is-equiv-map-equiv-children-directed-tree-element-𝕎 w x
+
+  enriched-directed-tree-element-𝕎 :
+    𝕎 A B → Enriched-Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2) A B
+  pr1 (enriched-directed-tree-element-𝕎 w) = directed-tree-element-𝕎 w
+  pr1 (pr2 (enriched-directed-tree-element-𝕎 w)) =
+    shape-node-directed-tree-element-𝕎 w
+  pr2 (pr2 (enriched-directed-tree-element-𝕎 w)) =
+    equiv-children-directed-tree-element-𝕎 w
+```
