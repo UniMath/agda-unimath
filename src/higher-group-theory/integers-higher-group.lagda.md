@@ -1,7 +1,7 @@
 # The higher group of integers
 
 ```agda
-module group-theory.integers-higher-group where
+module higher-group-theory.integers-higher-group where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module group-theory.integers-higher-group where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 

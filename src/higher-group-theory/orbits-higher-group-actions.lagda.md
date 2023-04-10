@@ -1,7 +1,7 @@
 # Orbits of higher group actions
 
 ```agda
-module group-theory.orbits-higher-group-actions where
+module higher-group-theory.orbits-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +10,8 @@ module group-theory.orbits-higher-group-actions where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
 ```
 
 </details>
