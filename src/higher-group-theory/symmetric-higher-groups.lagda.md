@@ -1,7 +1,7 @@
 # Symmetric higher groups
 
 ```agda
-module group-theory.symmetric-higher-groups where
+module higher-group-theory.symmetric-higher-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.mere-equivalences
 open import foundation.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

@@ -1,7 +1,7 @@
 # Homomorphisms of higher group actions
 
 ```agda
-module group-theory.homomorphisms-higher-group-actions where
+module higher-group-theory.homomorphisms-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -14,8 +14,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
 ```
 
 </details>
