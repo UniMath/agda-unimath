@@ -21,7 +21,7 @@ open import trees.rooted-undirected-trees public
 open import trees.small-multisets public
 open import trees.submultisets public
 open import trees.transitive-multisets public
-open import trees.underlying-graphs-of-elements-w-types public
+open import trees.underlying-trees-of-elements-of-w-types public
 open import trees.undirected-trees public
 open import trees.universal-multiset public
 open import trees.w-type-of-natural-numbers public
