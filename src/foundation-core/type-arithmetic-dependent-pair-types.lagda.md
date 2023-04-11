@@ -68,14 +68,13 @@ module _
           ( ap ( λ f → f y)
                ( comp-singleton-is-contr a C (λ x → B x → B a) id))))
 
-  abstract
-    is-equiv-map-left-unit-law-Σ-is-contr :
-      is-equiv map-left-unit-law-Σ-is-contr
-    is-equiv-map-left-unit-law-Σ-is-contr =
-      is-equiv-has-inverse
-        map-inv-left-unit-law-Σ-is-contr
-        issec-map-inv-left-unit-law-Σ-is-contr
-        isretr-map-inv-left-unit-law-Σ-is-contr
+  is-equiv-map-left-unit-law-Σ-is-contr :
+    is-equiv map-left-unit-law-Σ-is-contr
+  is-equiv-map-left-unit-law-Σ-is-contr =
+    is-equiv-has-inverse
+      map-inv-left-unit-law-Σ-is-contr
+      issec-map-inv-left-unit-law-Σ-is-contr
+      isretr-map-inv-left-unit-law-Σ-is-contr
 
   left-unit-law-Σ-is-contr : Σ A B ≃ B a
   pr1 left-unit-law-Σ-is-contr = map-left-unit-law-Σ-is-contr

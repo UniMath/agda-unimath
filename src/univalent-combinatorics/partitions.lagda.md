@@ -10,7 +10,6 @@ module univalent-combinatorics.partitions where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
@@ -26,7 +25,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 ```
 

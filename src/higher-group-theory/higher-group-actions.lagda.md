@@ -1,7 +1,7 @@
 # Higher group actions
 
 ```agda
-module group-theory.higher-group-actions where
+module higher-group-theory.higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module group-theory.higher-group-actions where
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 ```
 
 </details>

@@ -17,13 +17,10 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
 open import group-theory.congruence-relations-commutative-monoids
-open import group-theory.congruence-relations-monoids
-open import group-theory.monoids
 ```
 
 </details>

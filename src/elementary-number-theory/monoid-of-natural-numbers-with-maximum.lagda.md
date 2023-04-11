@@ -12,8 +12,6 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -21,7 +19,6 @@ open import group-theory.monoids
 open import group-theory.normal-submonoids-commutative-monoids
 open import group-theory.semigroups
 open import group-theory.submonoids-commutative-monoids
-open import group-theory.subsets-monoids
 ```
 
 </details>

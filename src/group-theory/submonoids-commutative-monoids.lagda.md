@@ -9,11 +9,9 @@ module group-theory.submonoids-commutative-monoids where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 

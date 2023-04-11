@@ -51,6 +51,12 @@ Eq-Fin (succ-ℕ k) (inl x) (inr y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inl y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inr y) = unit
 
+is-prop-Eq-Fin : (k : ℕ) → (x : Fin k) → (y : Fin k) → is-prop (Eq-Fin k x y)
+is-prop-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-prop-Eq-Fin k x y
+is-prop-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-prop-empty
+is-prop-Eq-Fin (succ-ℕ k) (inl x) (inr y) = is-prop-empty
+is-prop-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-prop-unit
+
 refl-Eq-Fin : (k : ℕ) (x : Fin k) → Eq-Fin k x x
 refl-Eq-Fin (succ-ℕ k) (inl x) = refl-Eq-Fin k x
 refl-Eq-Fin (succ-ℕ k) (inr x) = star
@@ -62,6 +68,17 @@ eq-Eq-Fin :
   (k : ℕ) {x y : Fin k} → Eq-Fin k x y → Id x y
 eq-Eq-Fin (succ-ℕ k) {inl x} {inl y} e = ap inl (eq-Eq-Fin k e)
 eq-Eq-Fin (succ-ℕ k) {inr star} {inr star} star = refl
+
+extensionality-Fin :
+  (k : ℕ)
+  (x y : Fin k) →
+  (x ＝ y) ≃ (Eq-Fin k x y)
+pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
+pr2 (extensionality-Fin k x y) =
+  is-equiv-is-prop
+    ( is-set-Fin k x y )
+    ( is-prop-Eq-Fin k x y)
+    ( eq-Eq-Fin k)
 
 is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
 is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-Eq-Fin k x y

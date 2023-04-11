@@ -10,6 +10,7 @@ open import foundation.1-types public
 open import foundation.2-types public
 open import foundation.algebras-polynomial-endofunctors public
 open import foundation.apartness-relations public
+open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-l public
 open import foundation.axiom-of-choice public
@@ -50,6 +51,7 @@ open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
 open import foundation.coproduct-decompositions public
+open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
 open import foundation.coslice public
 open import foundation.cospans public
@@ -194,7 +196,7 @@ open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
 open import foundation.relaxed-sigma-decompositions public
-open import foundation.repetitions public
+open import foundation.repetitions-of-values public
 open import foundation.repetitions-sequences public
 open import foundation.replacement public
 open import foundation.retractions public

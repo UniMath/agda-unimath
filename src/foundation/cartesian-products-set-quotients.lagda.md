@@ -9,7 +9,6 @@ module foundation.cartesian-products-set-quotients where
 ```agda
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.products-equivalence-relations
 open import foundation.reflecting-maps-equivalence-relations
@@ -26,8 +25,6 @@ open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.universe-levels
 ```
 

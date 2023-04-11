@@ -33,7 +33,6 @@ open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
-open import structured-types.universal-property-lists-wild-monoids public
 open import structured-types.unpointed-maps public
 open import structured-types.wild-groups public
 open import structured-types.wild-loops public

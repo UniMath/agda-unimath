@@ -15,7 +15,6 @@ open import foundation.decidable-equality
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.functions
@@ -31,7 +30,7 @@ open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types

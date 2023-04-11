@@ -9,9 +9,9 @@ module elementary-number-theory.catalan-numbers where
 ```agda
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 
@@ -36,13 +36,14 @@ catalan-numbers =
         ( λ i →
           mul-ℕ
             ( C ( nat-Fin k i)
-                ( leq-le-ℕ {x = nat-Fin k i} (strict-upper-bound-nat-Fin k i)))
+                ( leq-le-ℕ (nat-Fin k i) k (strict-upper-bound-nat-Fin k i)))
             ( C ( dist-ℕ (nat-Fin k i) k)
                 ( leq-dist-ℕ
                   ( nat-Fin k i)
                   ( k)
                   ( leq-le-ℕ
-                    { x = nat-Fin k i}
+                    ( nat-Fin k i)
+                    ( k)
                     ( strict-upper-bound-nat-Fin k i))))))
 
 catalan-numbers-binomial : ℕ → ℕ

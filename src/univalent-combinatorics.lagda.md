@@ -40,7 +40,7 @@ open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dedekind-finite-sets public
 open import univalent-combinatorics.dependent-function-types public
-open import univalent-combinatorics.dependent-sum-finite-types public
+open import univalent-combinatorics.dependent-pair-types public
 open import univalent-combinatorics.discrete-sigma-decompositions public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
@@ -67,7 +67,6 @@ open import univalent-combinatorics.involution-standard-finite-types public
 open import univalent-combinatorics.isotopies-latin-squares public
 open import univalent-combinatorics.kuratowsky-finite-sets public
 open import univalent-combinatorics.latin-squares public
-open import univalent-combinatorics.lists public
 open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public
@@ -81,6 +80,8 @@ open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
+open import univalent-combinatorics.repetitions-of-values public
+open import univalent-combinatorics.repetitions-of-values-sequences public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public
 open import univalent-combinatorics.set-quotients-of-index-two public

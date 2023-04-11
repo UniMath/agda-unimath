@@ -14,8 +14,6 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-semigroups
