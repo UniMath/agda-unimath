@@ -10,8 +10,8 @@ module set-theory.countable-sets where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-subtypes
-open import foundation.existential-quantification
 open import foundation.equality-coproduct-types
+open import foundation.existential-quantification
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.maybe
