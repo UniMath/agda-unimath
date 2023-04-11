@@ -1,4 +1,4 @@
-# Pairing Function
+# Bezout's lemma in the integers
 
 ```agda
 module elementary-number-theory.pairing-function where
