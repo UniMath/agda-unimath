@@ -1,7 +1,7 @@
 # Fixed points of higher group actions
 
 ```agda
-module group-theory.fixed-points-higher-group-actions where
+module higher-group-theory.fixed-points-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +9,8 @@ module group-theory.fixed-points-higher-group-actions where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
 ```
 
 </details>

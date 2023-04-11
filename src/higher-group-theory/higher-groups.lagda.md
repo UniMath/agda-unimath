@@ -1,7 +1,7 @@
 # Higher groups
 
 ```agda
-module group-theory.higher-groups where
+module higher-group-theory.higher-groups where
 ```
 
 <details><summary>Imports</summary>

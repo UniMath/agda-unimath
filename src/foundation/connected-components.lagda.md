@@ -18,7 +18,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

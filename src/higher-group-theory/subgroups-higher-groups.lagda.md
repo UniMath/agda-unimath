@@ -1,7 +1,7 @@
 # Subgroups of higher groups
 
 ```agda
-module group-theory.subgroups-higher-groups where
+module higher-group-theory.subgroups-higher-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +14,7 @@ open import foundation.functions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

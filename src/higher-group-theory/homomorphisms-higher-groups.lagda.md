@@ -1,7 +1,7 @@
 # Homomorphisms of higher groups
 
 ```agda
-module group-theory.homomorphisms-higher-groups where
+module higher-group-theory.homomorphisms-higher-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +11,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps

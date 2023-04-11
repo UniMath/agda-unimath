@@ -1,7 +1,7 @@
 # Free higher group actions
 
 ```agda
-module group-theory.free-higher-group-actions where
+module higher-group-theory.free-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -12,9 +12,9 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
-open import group-theory.orbits-higher-group-actions
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
+open import higher-group-theory.orbits-higher-group-actions
 ```
 
 </details>

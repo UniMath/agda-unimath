@@ -17,8 +17,9 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
-open import group-theory.equivalences-higher-groups
-open import group-theory.higher-groups
+
+open import higher-group-theory.equivalences-higher-groups
+open import higher-group-theory.higher-groups
 ```
 
 </details>
