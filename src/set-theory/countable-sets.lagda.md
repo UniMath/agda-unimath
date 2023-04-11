@@ -214,6 +214,18 @@ is-countable-ℕ+ℕ =
         ( is-equiv-map-ℕ-to-ℕ+ℕ))))
 ```
 
+The integers type `ℤ` is countable.
+
+```agda
+is-countable-ℤ : is-countable (ℤ-Set)
+is-countable-ℤ =
+  is-countable-is-directly-countable
+    ( ℤ-Set)
+    ( zero-ℤ)
+    ( unit-trunc-Prop
+      ( map-ℕ-to-ℤ , is-surjective-is-equiv (is-equiv-map-ℕ-to-ℤ)))
+```
+
 If `X` and `Y` are countable sets, then so is their coproduct `X + Y`.
 
 ```agda
