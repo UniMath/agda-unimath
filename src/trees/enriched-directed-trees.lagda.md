@@ -87,9 +87,16 @@ module _
   shape-Enriched-Directed-Tree : node-Enriched-Directed-Tree → A
   shape-Enriched-Directed-Tree = pr1 (pr2 T)
 
-  equiv-children-Enriched-Directed-Tree :
+  enrichment-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
     B (shape-Enriched-Directed-Tree x) ≃
     Σ (node-Enriched-Directed-Tree) (λ y → edge-Enriched-Directed-Tree y x)
-  equiv-children-Enriched-Directed-Tree = pr2 (pr2 T)
+  enrichment-Enriched-Directed-Tree = pr2 (pr2 T)
+
+  map-enrichment-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) →
+    B (shape-Enriched-Directed-Tree x) →
+    Σ (node-Enriched-Directed-Tree) (λ y → edge-Enriched-Directed-Tree y x)
+  map-enrichment-Enriched-Directed-Tree x =
+    map-equiv (enrichment-Enriched-Directed-Tree x)
 ```

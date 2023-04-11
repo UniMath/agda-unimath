@@ -41,7 +41,9 @@ module _
         (x y : vertex-Directed-Graph G) →
         edge-Directed-Graph G x y → edge-Directed-Graph H (α x) (α y))
 
-  module _ (f : hom-Directed-Graph) where
+  module _
+    ( f : hom-Directed-Graph)
+    where
 
     vertex-hom-Directed-Graph :
       vertex-Directed-Graph G → vertex-Directed-Graph H
@@ -106,6 +108,24 @@ module _
           ( α y)
           ( edge-hom-Directed-Graph G H f e) ＝
         edge-hom-Directed-Graph G H g e)
+
+  module _
+    (f g : hom-Directed-Graph G H) (α : htpy-hom-Directed-Graph f g)
+    where
+
+    vertex-htpy-hom-Directed-Graph :
+      vertex-hom-Directed-Graph G H f ~ vertex-hom-Directed-Graph G H g
+    vertex-htpy-hom-Directed-Graph = pr1 α
+
+    edge-htpy-hom-Directed-Graph :
+      (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
+      binary-tr
+        ( edge-Directed-Graph H)
+        ( vertex-htpy-hom-Directed-Graph x)
+        ( vertex-htpy-hom-Directed-Graph y)
+        ( edge-hom-Directed-Graph G H f e) ＝
+      edge-hom-Directed-Graph G H g e
+    edge-htpy-hom-Directed-Graph = pr2 α
 
   refl-htpy-hom-Directed-Graph :
     (f : hom-Directed-Graph G H) → htpy-hom-Directed-Graph f f

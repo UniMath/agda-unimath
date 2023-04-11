@@ -33,6 +33,7 @@ open import graph-theory.walks-directed-graphs
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
 open import trees.enriched-directed-trees
+open import trees.equivalences-enriched-directed-trees
 open import trees.inequality-w-types
 open import trees.w-types
 ```
@@ -551,7 +552,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   shape-node-directed-tree-element-𝕎 :
@@ -638,4 +639,42 @@ module _
     shape-node-directed-tree-element-𝕎 w
   pr2 (pr2 (enriched-directed-tree-element-𝕎 w)) =
     equiv-children-directed-tree-element-𝕎 w
+```
+
+### The map `enriched-directed-tree-element-𝕎` is an embedding
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (w : 𝕎 A B)
+  where
+
+  center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+    Σ ( 𝕎 A B)
+      ( λ v →
+        equiv-Enriched-Directed-Tree A B
+          ( enriched-directed-tree-element-𝕎 v)
+          ( enriched-directed-tree-element-𝕎 w))
+  pr1 center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 = w
+  pr2 center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 =
+    id-equiv-Enriched-Directed-Tree A B
+      ( enriched-directed-tree-element-𝕎 w)
+
+  contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+    ( x :
+      Σ ( 𝕎 A B)
+        ( λ v →
+          equiv-Enriched-Directed-Tree A B
+            ( enriched-directed-tree-element-𝕎 v)
+            ( enriched-directed-tree-element-𝕎 w))) →
+    center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 ＝ x
+  contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 (v , e) = {!!}
+
+  is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+    is-contr
+      ( Σ ( 𝕎 A B)
+          ( λ v →
+            equiv-Enriched-Directed-Tree A B
+              ( enriched-directed-tree-element-𝕎 v)
+              ( enriched-directed-tree-element-𝕎 w)))
+  is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 = {!!}
 ```
