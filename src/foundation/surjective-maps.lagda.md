@@ -22,8 +22,8 @@ open import foundation.universal-property-propositional-truncation
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences
 open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
