@@ -233,4 +233,3 @@ pr2 equiv-ℕ =
   [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
 - The based strong induction principle is defined in
   [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).
-  
