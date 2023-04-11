@@ -14,8 +14,9 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
-open import foundation.structure-identity-principle
 open import foundation.propositional-truncations
+open import foundation.structure-identity-principle
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 
@@ -32,7 +33,6 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation.surjective-maps
 open import foundation-core.universe-levels
 ```
 
