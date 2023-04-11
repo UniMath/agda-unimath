@@ -132,6 +132,9 @@ is-nonzero-one-ℕ ()
 is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
 is-not-one-zero-ℕ ()
 
+is-nonzero-two-ℕ : is-nonzero-ℕ 2
+is-nonzero-two-ℕ = is-nonzero-succ-ℕ 1
+
 is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
 ```
@@ -230,3 +233,4 @@ pr2 equiv-ℕ =
   [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
 - The based strong induction principle is defined in
   [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).
+  
