@@ -22,6 +22,7 @@ open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.functoriality-coproduct-types
 open import foundation.split-surjective-maps
+open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
