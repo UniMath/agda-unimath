@@ -10,6 +10,7 @@ open import species.cauchy-product-species-of-subuniverse public
 open import species.cauchy-product-species-of-types public
 open import species.cauchy-series-species-of-types public
 open import species.cauchy-series-species-of-types-in-subuniverse public
+open import species.composition-cauchy-series-species-of-types public
 open import species.composition-species-of-finite-inhabited-types public
 open import species.composition-species-of-subuniverse public
 open import species.coproducts-species-of-types public
@@ -25,6 +26,7 @@ open import species.morphisms-finite-species public
 open import species.morphisms-species-of-types public
 open import species.pointing-species-of-types public
 open import species.precategory-of-finite-species public
+open import species.product-cauchy-series-species-of-types public
 open import species.species-of-finite-inhabited-types public
 open import species.species-of-finite-types public
 open import species.species-of-inhabited-types public

@@ -79,12 +79,11 @@ module _
         ( refl-htpy)
         ( refl-htpy)
 
-
   equiv-cauchy-series-cauchy-product-species-types :
     cauchy-series-species-types (cauchy-product-species-types S T) X ≃
     product-cauchy-series-species-types S T X
   equiv-cauchy-series-cauchy-product-species-types =
-     ( ( reassociate') ∘e
+                                                   ( ( reassociate') ∘e
        ( ( equiv-tot
              ( λ A →
                equiv-tot
