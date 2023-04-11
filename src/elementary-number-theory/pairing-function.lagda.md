@@ -1,4 +1,4 @@
-# Pairing function
+# Bezout's lemma in the integers
 
 ```agda
 module elementary-number-theory.pairing-function where
@@ -7,20 +7,19 @@ module elementary-number-theory.pairing-function where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.functoriality-coproduct-types
 open import foundation.split-surjective-maps
-open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
@@ -33,15 +32,16 @@ open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
+open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A pairing function is a process to uniquely encode two natural numbers into a
-single natural number. In other words, a pairing function is a bijection from
-`ℕ × ℕ` to `ℕ`.
+A pairing function is a process to uniquely encode two natural numbers
+into a single natural number. In other words, a pairing function is a
+bijection from `ℕ × ℕ` to `ℕ`.
 
 ### Any natural number `x` can be written as `(2^u(2v-1))-1` for some pair of natural numbers '(u , v)`
 

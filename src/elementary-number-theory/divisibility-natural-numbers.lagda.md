@@ -23,8 +23,8 @@ open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.unit-type
 ```
 
 </details>
