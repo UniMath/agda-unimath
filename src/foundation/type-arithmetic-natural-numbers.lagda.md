@@ -130,3 +130,36 @@ map-ℕ-to-ℕ×ℕ = map-inv-is-equiv (pr2 ℕ×ℕ≃ℕ)
 is-equiv-map-ℕ-to-ℕ×ℕ : is-equiv map-ℕ-to-ℕ×ℕ
 is-equiv-map-ℕ-to-ℕ×ℕ = is-equiv-map-inv-is-equiv (pr2 ℕ×ℕ≃ℕ)
 ```
+
+### The coproduct `1 + ℕ` is equivalent to `N`
+
+```agda
+map-ℕ-to-1+ℕ : ℕ → unit + ℕ
+map-ℕ-to-1+ℕ zero-ℕ = inl star
+map-ℕ-to-1+ℕ (succ-ℕ n) = inr n
+
+map-1+ℕ-to-ℕ : unit + ℕ → ℕ
+map-1+ℕ-to-ℕ (inr n) = succ-ℕ n
+map-1+ℕ-to-ℕ (inl star) = zero-ℕ
+
+is-equiv-map-1+ℕ-to-ℕ : is-equiv map-1+ℕ-to-ℕ
+is-equiv-map-1+ℕ-to-ℕ =
+  ( map-ℕ-to-1+ℕ ,
+    ( λ {
+      ( zero-ℕ) → refl ;
+      ( succ-ℕ x) → refl})) ,
+  ( map-ℕ-to-1+ℕ ,
+    ( λ {
+      ( inr x) → refl ;
+      ( inl star) → refl}))
+
+1+ℕ≃ℕ : (unit + ℕ) ≃ ℕ
+1+ℕ≃ℕ = map-1+ℕ-to-ℕ , is-equiv-map-1+ℕ-to-ℕ
+```
+
+### The integers `ℤ` is equivalent to `ℕ`
+
+```agda
+ℤ≃ℕ : ℤ ≃ ℕ
+ℤ≃ℕ = (ℕ+ℕ≃ℕ) ∘e (equiv-coprod id-equiv 1+ℕ≃ℕ)
+```
