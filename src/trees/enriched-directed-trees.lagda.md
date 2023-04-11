@@ -7,8 +7,12 @@ module trees.enriched-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -99,4 +103,14 @@ module _
     Σ (node-Enriched-Directed-Tree) (λ y → edge-Enriched-Directed-Tree y x)
   map-enrichment-Enriched-Directed-Tree x =
     map-equiv (enrichment-Enriched-Directed-Tree x)
+
+  coherence-square-map-enrichment-Enriched-Directed-Tree :
+    {x y : node-Enriched-Directed-Tree} (p : x ＝ y) →
+    coherence-square-maps
+      ( tr B (ap shape-Enriched-Directed-Tree p))
+      ( map-enrichment-Enriched-Directed-Tree x)
+      ( map-enrichment-Enriched-Directed-Tree y)
+      ( tot ( λ y → tr (edge-Enriched-Directed-Tree y) p))
+  coherence-square-map-enrichment-Enriched-Directed-Tree refl =
+    tot-id _ ·r (map-enrichment-Enriched-Directed-Tree _)
 ```

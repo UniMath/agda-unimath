@@ -146,8 +146,10 @@ module _
     ( α : htpy-hom-Directed-Tree) →
     ( x : node-Directed-Tree S) →
     ( ( tot
-        ( λ y → tr (edge-Directed-Tree T y)
-        ( node-htpy-hom-Directed-Tree α x))) ∘
+        ( λ y →
+          tr
+            ( edge-Directed-Tree T y)
+            ( node-htpy-hom-Directed-Tree α x))) ∘
       ( children-hom-Directed-Tree S T f x)) ~
     ( children-hom-Directed-Tree S T g x)
   children-htpy-hom-Directed-Tree α x (y , e) =

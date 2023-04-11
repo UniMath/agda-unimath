@@ -128,6 +128,14 @@ module _
       ( λ y → edge-Directed-Tree T y (node-equiv-Directed-Tree x))
       ( equiv-node-equiv-Directed-Tree)
       ( λ y → equiv-edge-equiv-Directed-Tree y x)
+
+  children-equiv-Directed-Tree :
+    (x : node-Directed-Tree S) →
+    Σ (node-Directed-Tree S) (λ y → edge-Directed-Tree S y x) →
+    Σ ( node-Directed-Tree T)
+      ( λ y → edge-Directed-Tree T y (node-equiv-Directed-Tree x))
+  children-equiv-Directed-Tree x =
+    map-equiv (equiv-children-equiv-Directed-Tree x)
 ```
 
 ### Identity equivalences of directed trees

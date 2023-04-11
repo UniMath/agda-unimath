@@ -645,36 +645,46 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (w : 𝕎 A B)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) →
     Σ ( 𝕎 A B)
       ( λ v →
         equiv-Enriched-Directed-Tree A B
           ( enriched-directed-tree-element-𝕎 v)
           ( enriched-directed-tree-element-𝕎 w))
-  pr1 center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 = w
-  pr2 center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 =
+  pr1 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w )= w
+  pr2 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w )=
     id-equiv-Enriched-Directed-Tree A B
       ( enriched-directed-tree-element-𝕎 w)
 
-  contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+  base-contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) →
     ( x :
       Σ ( 𝕎 A B)
         ( λ v →
           equiv-Enriched-Directed-Tree A B
             ( enriched-directed-tree-element-𝕎 v)
             ( enriched-directed-tree-element-𝕎 w))) →
-    center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 ＝ x
-  contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 (v , e) = {!!}
+    w ＝ pr1 x
+  base-contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎
+    (tree-𝕎 a α)
+    (tree-𝕎 b β , e) =
+    eq-Eq-𝕎
+      ( tree-𝕎 a α)
+      ( tree-𝕎 b β)
+      ( ({!!} ∙ inv (shape-equiv-Enriched-Directed-Tree A B (enriched-directed-tree-element-𝕎 (tree-𝕎 b β)) (enriched-directed-tree-element-𝕎 (tree-𝕎 a α)) e (root-𝕎))) ,
+        {!!})
 
   is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
+    (w : 𝕎 A B) →
     is-contr
       ( Σ ( 𝕎 A B)
           ( λ v →
             equiv-Enriched-Directed-Tree A B
               ( enriched-directed-tree-element-𝕎 v)
               ( enriched-directed-tree-element-𝕎 w)))
-  is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 = {!!}
+  is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w = {!!}
 ```

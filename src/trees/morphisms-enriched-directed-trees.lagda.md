@@ -136,7 +136,7 @@ module _
   (f g : hom-Enriched-Directed-Tree A B S T)
   where
 
-  htpy-hom-Enriched-Directed-Tree : UU {!!}
+  htpy-hom-Enriched-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   htpy-hom-Enriched-Directed-Tree =
     Σ ( htpy-hom-Directed-Tree
         ( directed-tree-Enriched-Directed-Tree A B S)
@@ -153,5 +153,42 @@ module _
                   ( directed-tree-hom-Enriched-Directed-Tree A B S T g)
                   ( H)))) ~
             ( shape-hom-Enriched-Directed-Tree A B S T g))
-          ( λ K → {!!}))
+          ( λ K →
+            ( x : node-Enriched-Directed-Tree A B S) →
+            ( ( ( tot
+                  ( λ y →
+                    tr
+                      ( edge-Enriched-Directed-Tree A B T y)
+                      ( node-htpy-hom-Directed-Tree
+                        ( directed-tree-Enriched-Directed-Tree A B S)
+                        ( directed-tree-Enriched-Directed-Tree A B T)
+                        ( directed-tree-hom-Enriched-Directed-Tree A B S T f)
+                        ( directed-tree-hom-Enriched-Directed-Tree A B S T g)
+                        ( H)
+                        ( x)))) ·l
+                ( enrichment-hom-Enriched-Directed-Tree A B S T f x)) ∙h
+              ( ( ( coherence-square-map-enrichment-Enriched-Directed-Tree
+                    A B T (pr1 H x)) ·r
+                  ( tr B (shape-hom-Enriched-Directed-Tree A B S T f x))) ∙h
+                ( λ b →
+                  ap
+                    ( map-enrichment-Enriched-Directed-Tree A B T
+                      ( node-hom-Enriched-Directed-Tree A B S T g x))
+                    ( ( inv
+                        ( tr-concat
+                          ( shape-hom-Enriched-Directed-Tree A B S T f x)
+                          ( ap
+                            ( shape-Enriched-Directed-Tree A B T)
+                            ( pr1 H x))
+                          ( b))) ∙
+                      ( ap (λ q → tr B q b) (K x)))))) ~
+            ( ( ( children-htpy-hom-Directed-Tree
+                  ( directed-tree-Enriched-Directed-Tree A B S)
+                  ( directed-tree-Enriched-Directed-Tree A B T)
+                  ( directed-tree-hom-Enriched-Directed-Tree A B S T f)
+                  ( directed-tree-hom-Enriched-Directed-Tree A B S T g)
+                  ( H)
+                  ( x)) ·r
+                ( map-enrichment-Enriched-Directed-Tree A B S x)) ∙h
+              ( enrichment-hom-Enriched-Directed-Tree A B S T g x))))
 ```

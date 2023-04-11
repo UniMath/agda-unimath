@@ -123,10 +123,69 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
 
+  equiv-children-equiv-Enriched-Directed-Tree :
+    ( x : node-Enriched-Directed-Tree A B S) →
+    Σ ( node-Enriched-Directed-Tree A B S)
+      ( λ y → edge-Enriched-Directed-Tree A B S y x) ≃
+    Σ ( node-Enriched-Directed-Tree A B T)
+      ( λ y →
+        edge-Enriched-Directed-Tree A B T y
+          ( node-equiv-Enriched-Directed-Tree x))
+  equiv-children-equiv-Enriched-Directed-Tree =
+    equiv-children-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
+
+  children-equiv-Enriched-Directed-Tree :
+    ( x : node-Enriched-Directed-Tree A B S) →
+    Σ ( node-Enriched-Directed-Tree A B S)
+      ( λ y → edge-Enriched-Directed-Tree A B S y x) →
+    Σ ( node-Enriched-Directed-Tree A B T)
+      ( λ y →
+        edge-Enriched-Directed-Tree A B T y
+          ( node-equiv-Enriched-Directed-Tree x))
+  children-equiv-Enriched-Directed-Tree =
+    children-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
+
   shape-equiv-Enriched-Directed-Tree :
     ( shape-Enriched-Directed-Tree A B S) ~
     ( shape-Enriched-Directed-Tree A B T ∘ node-equiv-Enriched-Directed-Tree)
   shape-equiv-Enriched-Directed-Tree = pr1 (pr2 e)
+
+  enrichment-equiv-Enriched-Directed-Tree :
+    ( x : node-Enriched-Directed-Tree A B S) →
+    ( ( children-equiv-Enriched-Directed-Tree x) ∘
+      ( map-enrichment-Enriched-Directed-Tree A B S x)) ~
+    ( ( map-enrichment-Enriched-Directed-Tree A B T
+        ( node-equiv-Directed-Tree
+          ( directed-tree-Enriched-Directed-Tree A B S)
+          ( directed-tree-Enriched-Directed-Tree A B T)
+          ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
+          ( x))) ∘
+        ( tr B (shape-equiv-Enriched-Directed-Tree x)))
+  enrichment-equiv-Enriched-Directed-Tree = pr2 (pr2 e)
+
+  hom-equiv-Enriched-Directed-Tree :
+    hom-Enriched-Directed-Tree A B S T
+  pr1 hom-equiv-Enriched-Directed-Tree =
+    hom-directed-tree-equiv-Enriched-Directed-Tree
+  pr1 (pr2 hom-equiv-Enriched-Directed-Tree) =
+    shape-equiv-Enriched-Directed-Tree
+  pr2 (pr2 hom-equiv-Enriched-Directed-Tree) =
+    enrichment-equiv-Enriched-Directed-Tree
+
+  preserves-root-equiv-Enriched-Directed-Tree :
+    node-equiv-Enriched-Directed-Tree (root-Enriched-Directed-Tree A B S) ＝
+    root-Enriched-Directed-Tree A B T
+  preserves-root-equiv-Enriched-Directed-Tree =
+    preserves-root-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
 ```
 
 ### The identity equivalence of enriched directed trees
@@ -148,7 +207,10 @@ pr2 (pr2 (id-equiv-Enriched-Directed-Tree A B T)) x = refl-htpy
 htpy-equiv-Enriched-Directed-Tree :
   {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2) →
   (S : Enriched-Directed-Tree l3 l4 A B) (T : Enriched-Directed-Tree l5 l6 A B)
-  (e f : equiv-Enriched-Directed-Tree A B S T) → UU {!!}
+  (e f : equiv-Enriched-Directed-Tree A B S T) →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
 htpy-equiv-Enriched-Directed-Tree A B S T e f =
-  htpy-hom-Enriched-Directed-Tree ? ? ? ? ? ?
+  htpy-hom-Enriched-Directed-Tree A B S T
+    ( hom-equiv-Enriched-Directed-Tree A B S T e)
+    ( hom-equiv-Enriched-Directed-Tree A B S T f)
 ```
