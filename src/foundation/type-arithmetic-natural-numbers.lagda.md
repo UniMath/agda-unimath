@@ -1,4 +1,4 @@
-# Type arithmetic with the booleans
+# Type arithmetic with natural numbers
 
 ```agda
 module foundation.type-arithmetic-natural-numbers where
