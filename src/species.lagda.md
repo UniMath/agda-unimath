@@ -20,6 +20,7 @@ open import species.derivatives-species-of-types public
 open import species.dirichlet-product-species-of-subuniverse public
 open import species.equivalences-species-of-types public
 open import species.equivalences-species-of-types-in-subuniverse public
+open import species.exponential-cauchy-series-of-types public
 open import species.exponents-species-of-types public
 open import species.large-composition-species-of-types public
 open import species.morphisms-finite-species public

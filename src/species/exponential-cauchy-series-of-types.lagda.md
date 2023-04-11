@@ -30,7 +30,6 @@ open import species.large-composition-species-of-types
 
 ## Idea
 
-
 ## Definition
 
 ```agda

@@ -19,16 +19,16 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.relaxed-sigma-decompositions
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.univalence
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import species.large-composition-species-of-types
 open import species.cauchy-product-species-of-types
 open import species.coproducts-species-of-types
 open import species.equivalences-species-of-types
+open import species.large-composition-species-of-types
 open import species.species-of-types
 ```
 
