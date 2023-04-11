@@ -15,6 +15,7 @@ open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
+open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 
@@ -31,6 +32,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation.surjective-maps
 open import foundation-core.universe-levels
 ```
 
@@ -217,6 +219,28 @@ module _
   pr1 (equiv-coprod e e') = map-equiv-coprod e e'
   pr2 (equiv-coprod e e') =
     is-equiv-map-coprod (is-equiv-map-equiv e) (is-equiv-map-equiv e')
+```
+
+### Functoriality of coproducts preserves being surjective
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+  abstract
+    is-surjective-map-coprod :
+      {f : A → A'} {g : B → B'} →
+      is-surjective f → is-surjective g →
+      is-surjective (map-coprod f g)
+    is-surjective-map-coprod s s' (inl x) =
+      apply-universal-property-trunc-Prop (s x)
+        ( trunc-Prop (fib (map-coprod _ _) (inl x)))
+        ( λ {(a , p) → unit-trunc-Prop (inl a , ap inl p)})
+    is-surjective-map-coprod s s' (inr x) =
+      apply-universal-property-trunc-Prop (s' x)
+        ( trunc-Prop (fib (map-coprod _ _) (inr x)))
+        ( λ {(a , p) → unit-trunc-Prop (inr a , ap inr p)})
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`.
