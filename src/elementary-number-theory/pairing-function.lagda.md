@@ -39,9 +39,7 @@ open import foundation-core.negation
 
 ## Idea
 
-A pairing function is a process to uniquely encode two natural numbers into a
-single natural number. In other words, a pairing function is a bijection from
-`ℕ × ℕ` to `ℕ`.
+A pairing function is a bijection between `ℕ × ℕ` and `ℕ`.
 
 ### Any natural number `x` can be written as `(2^u(2v-1))-1` for some pair of natural numbers '(u , v)`
 
