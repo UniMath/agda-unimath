@@ -162,4 +162,10 @@ is-equiv-map-1+ℕ-to-ℕ =
 ```agda
 ℤ≃ℕ : ℤ ≃ ℕ
 ℤ≃ℕ = (ℕ+ℕ≃ℕ) ∘e (equiv-coprod id-equiv 1+ℕ≃ℕ)
+
+map-ℕ-to-ℤ : ℕ → ℤ
+map-ℕ-to-ℤ = map-inv-is-equiv (pr2 ℤ≃ℕ)
+
+is-equiv-map-ℕ-to-ℤ : is-equiv map-ℕ-to-ℤ
+is-equiv-map-ℕ-to-ℤ = is-equiv-map-inv-is-equiv (pr2 ℤ≃ℕ)
 ```
