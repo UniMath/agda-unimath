@@ -7,6 +7,7 @@ module foundation.type-arithmetic-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
