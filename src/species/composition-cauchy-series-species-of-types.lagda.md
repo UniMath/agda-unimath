@@ -30,7 +30,8 @@ open import species.cauchy-product-species-of-types
 
 ## Idea
 
-The composition of Cauchy series of two species of types `S` and `T` at `X` is defined as the Cauchy series of `S` applied to the Cauchy series of `T` at `X`
+The composition of Cauchy series of two species of types `S` and `T` at `X` is
+defined as the Cauchy series of `S` applied to the Cauchy series of `T` at `X`
 
 ## Definition
 

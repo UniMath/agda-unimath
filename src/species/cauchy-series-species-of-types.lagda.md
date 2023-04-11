@@ -7,9 +7,12 @@ module species.cauchy-series-species-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-cartesian-product-types
 
 open import species.species-of-types
 ```
@@ -46,4 +49,22 @@ cauchy-series-species-types :
   UU (lsuc l1 ⊔ l2 ⊔ l3)
 cauchy-series-species-types {l1} S X =
   Σ (UU l1) (λ U → S U × (U → X))
+```
+
+## Property
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (S : species-types l1 l2)
+  (T : species-types l1 l3)
+  (f : (F : UU l1) → (S F ≃ T F))
+  (X : UU l4)
+  where
+
+  equiv-cauchy-series-equiv-species-types :
+    cauchy-series-species-types S X ≃ cauchy-series-species-types T X
+  equiv-cauchy-series-equiv-species-types =
+    equiv-tot λ X → equiv-prod (f X) id-equiv
+
 ```

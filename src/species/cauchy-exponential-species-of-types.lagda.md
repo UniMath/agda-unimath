@@ -20,9 +20,12 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.relaxed-sigma-decompositions
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.univalence
+open import foundation.unit-type
 open import foundation.universe-levels
 
+open import species.large-composition-species-of-types
 open import species.cauchy-product-species-of-types
 open import species.coproducts-species-of-types
 open import species.equivalences-species-of-types
@@ -55,6 +58,22 @@ cauchy-exponential-species-types {l1} {l2} S X =
 ```
 
 ## Propositions
+
+### The Cauchy exponential in term of composition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (S : species-types l1 l2)
+  (X : UU l1)
+  where
+
+  equiv-cauchy-exponential-composition-unit :
+    analytic-comp-species-types (λ _ → unit) S X ≃
+    cauchy-exponential-species-types S X
+  equiv-cauchy-exponential-composition-unit =
+    equiv-tot λ _ → left-unit-law-prod-is-contr is-contr-unit
+```
 
 ### The Cauchy exponential of the sum of a species is equivalent to the Cauchy product of the exponential of the two species
 
