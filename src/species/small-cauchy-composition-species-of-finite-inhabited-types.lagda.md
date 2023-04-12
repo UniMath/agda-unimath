@@ -1,7 +1,7 @@
-# (Small) Composition of species of finite inhabited types
+# Small Composition of species of finite inhabited types
 
 ```agda
-module species.composition-species-of-finite-inhabited-types where
+module species.small-cauchy-composition-species-of-finite-inhabited-types where
 ```
 
 <details><summary>Imports</summary>
@@ -23,7 +23,7 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.composition-species-of-subuniverse
+open import species.small-cauchy-composition-species-of-types-in-subuniverse
 open import species.species-of-finite-inhabited-types
 
 open import univalent-combinatorics.cartesian-product-types
@@ -89,10 +89,10 @@ module _
   {l1 l2 : Level}
   where
 
-  finite-analytic-comp-species-subuniverse :
+  finite-small-cauchy-composition-species-subuniverse :
     ( S T : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2) ) (X :  Inhabited-Type-𝔽 l1) →
     𝔽 (lsuc l1 ⊔ l2)
-  finite-analytic-comp-species-subuniverse S T X =
+  finite-small-cauchy-composition-species-subuniverse S T X =
     Σ-𝔽 ( finite-Σ-Decomposition-subuniverse-Inhabited-Type-𝔽 X)
         ( λ D →
            prod-𝔽
@@ -122,15 +122,14 @@ module _
       ( X :  type-subuniverse is-finite-and-inhabited-Prop) →
       is-small
         (l1 ⊔ l2)
-        ( analytic-comp-species-subuniverse'
-          l2
+        ( small-cauchy-composition-species-subuniverse'
           is-finite-and-inhabited-Prop
           is-finite-Prop
           S T X)
     C1 S T X =
       is-small-is-finite
         (l1 ⊔ l2)
-        ( finite-analytic-comp-species-subuniverse S T
+        ( finite-small-cauchy-composition-species-subuniverse S T
           (map-inv-compute-Inhabited-Type-𝔽' X) )
 
     C2 :
@@ -141,7 +140,7 @@ module _
       is-finite-equiv
         ( equiv-is-small (C1 S T X))
         ( is-finite-type-𝔽
-          ( finite-analytic-comp-species-subuniverse
+          ( finite-small-cauchy-composition-species-subuniverse
             ( S)
             ( T)
             ( map-inv-compute-Inhabited-Type-𝔽' X)))
@@ -169,15 +168,15 @@ module _
       is-finite-is-contr is-contr-raise-unit ,
       is-inhabited-is-contr is-contr-raise-unit
 
-    C5 :
+    C5 : (X : UU l1) → is-small (l1 ⊔ l2) (is-contr X)
+    C5 X = is-small-lmax l2 (is-contr X)
+
+    C6 :
       ( X : type-subuniverse {l1} is-finite-and-inhabited-Prop) →
       ( is-finite
-          ( type-is-small
-            ( is-small-lmax
-              ( l2)
-              ( is-contr
-                (inclusion-subuniverse is-finite-and-inhabited-Prop X)))))
-    C5 X =
+        ( type-is-small
+            ( C5 ( inclusion-subuniverse is-finite-and-inhabited-Prop X))))
+    C6 X =
       is-finite-is-decidable-Prop
         ( _ ,
           is-prop-equiv
@@ -199,63 +198,59 @@ module _
           ( is-decidable-is-contr-is-finite
             ( is-finite-Inhabited-Type-𝔽 (map-inv-compute-Inhabited-Type-𝔽' X))))
 
-  analytic-comp-species-Inhabited-Type-𝔽 :
+  small-cauchy-composition-species-Inhabited-Type-𝔽 :
     species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2) →
     species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)→
     species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)
-  analytic-comp-species-Inhabited-Type-𝔽 =
-    analytic-comp-species-subuniverse
-      l2
+  small-cauchy-composition-species-Inhabited-Type-𝔽 =
+    small-cauchy-composition-species-subuniverse
       is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3
 
-  analytic-unit-species-Inhabited-Type-𝔽 :
+  small-cauchy-composition-unit-species-Inhabited-Type-𝔽 :
     species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)
-  analytic-unit-species-Inhabited-Type-𝔽 =
-    analytic-unit-species-subuniverse
-      l2
+  small-cauchy-composition-unit-species-Inhabited-Type-𝔽 =
+    small-cauchy-composition-unit-species-subuniverse
       is-finite-and-inhabited-Prop
       is-finite-Prop
-      C1 C2 C3 C4 C5
+      C1 C2 C3 C4 C5 C6
 
-  left-unit-law-comp-species-Inhabited-Type-𝔽 :
+
+  left-unit-law-small-cauchy-composition-species-Inhabited-Type-𝔽 :
     ( S : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)) →
-    analytic-comp-species-Inhabited-Type-𝔽
-      analytic-unit-species-Inhabited-Type-𝔽
+    small-cauchy-composition-species-Inhabited-Type-𝔽
+      small-cauchy-composition-unit-species-Inhabited-Type-𝔽
       S ＝
     S
-  left-unit-law-comp-species-Inhabited-Type-𝔽 =
-    left-unit-law-comp-species-subuniverse
-      l2
+  left-unit-law-small-cauchy-composition-species-Inhabited-Type-𝔽 =
+    left-unit-law-small-cauchy-composition-species-subuniverse
       is-finite-and-inhabited-Prop
       is-finite-Prop
-      C1 C2 C3 C4 C5
+      C1 C2 C3 C4 C5 C6
 
-  right-unit-law-comp-species-Inhabited-Type-𝔽 :
+  right-unit-law-small-cauchy-composition-species-Inhabited-Type-𝔽 :
     ( S : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)) →
-    analytic-comp-species-Inhabited-Type-𝔽
+    small-cauchy-composition-species-Inhabited-Type-𝔽
       S
-      analytic-unit-species-Inhabited-Type-𝔽 ＝
+      small-cauchy-composition-unit-species-Inhabited-Type-𝔽 ＝
     S
-  right-unit-law-comp-species-Inhabited-Type-𝔽 =
-    right-unit-law-comp-species-subuniverse
-      l2
+  right-unit-law-small-cauchy-composition-species-Inhabited-Type-𝔽 =
+    right-unit-law-small-cauchy-composition-species-subuniverse
       is-finite-and-inhabited-Prop
       is-finite-Prop
-      C1 C2 C3 C4 C5
+      C1 C2 C3 C4 C5 C6
 
-  assoc-comp-species-Inhabited-Type-𝔽 :
+  assoc-small-cauchy-composition-species-Inhabited-Type-𝔽 :
     (S T U : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)) →
-    analytic-comp-species-Inhabited-Type-𝔽
+    small-cauchy-composition-species-Inhabited-Type-𝔽
       ( S)
-      ( analytic-comp-species-Inhabited-Type-𝔽 T U) ＝
-    analytic-comp-species-Inhabited-Type-𝔽
-      ( analytic-comp-species-Inhabited-Type-𝔽 S T)
+      ( small-cauchy-composition-species-Inhabited-Type-𝔽 T U) ＝
+    small-cauchy-composition-species-Inhabited-Type-𝔽
+      ( small-cauchy-composition-species-Inhabited-Type-𝔽 S T)
       ( U)
-  assoc-comp-species-Inhabited-Type-𝔽 =
-    assoc-comp-species-subuniverse
-      l2
+  assoc-small-cauchy-composition-species-Inhabited-Type-𝔽 =
+    assoc-small-cauchy-composition-species-subuniverse
       is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3

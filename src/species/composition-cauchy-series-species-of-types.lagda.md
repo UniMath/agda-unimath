@@ -22,7 +22,7 @@ open import foundation.univalence
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 
-open import species.large-composition-species-of-types
+open import species.cauchy-composition-species-of-types
 open import species.species-of-types
 open import species.cauchy-series-species-of-types
 open import species.cauchy-product-species-of-types
@@ -57,7 +57,7 @@ module _
 
   private
     reassociate :
-      cauchy-series-species-types (analytic-comp-species-types S T) X ≃
+      cauchy-series-species-types (cauchy-composition-species-types S T) X ≃
       Σ ( UU l1)
         ( λ U →
            Σ ( U → UU l1)
@@ -75,7 +75,7 @@ module _
 
   equiv-cauchy-series-composition-species-types :
     cauchy-series-species-types
-      ( analytic-comp-species-types S T)
+      ( cauchy-composition-species-types S T)
       ( X) ≃
     composition-cauchy-series-species-types S T X
   equiv-cauchy-series-composition-species-types =

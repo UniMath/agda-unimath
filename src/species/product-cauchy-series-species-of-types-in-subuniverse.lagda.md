@@ -25,7 +25,7 @@ open import species.species-of-types-in-subuniverse
 open import species.cauchy-series-species-of-types
 open import species.cauchy-series-species-of-types-in-subuniverse
 open import species.cauchy-product-species-of-types
-open import species.cauchy-product-species-of-subuniverse
+open import species.cauchy-product-species-of-types-in-subuniverse
 open import species.product-cauchy-series-species-of-types
 ```
 
@@ -53,6 +53,47 @@ module _
 ```
 
 ## Property
+
+### Equivalent with species of types
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2)
+  (Q : global-subuniverse id)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : UU l5)
+  where
+
+  equiv-product-cauchy-series-Σ-extension-species-subuniverse :
+    ( product-cauchy-series-species-types
+       ( Σ-extension-species-subuniverse
+           ( P)
+           ( subuniverse-global-subuniverse Q l3)
+           ( S))
+       ( Σ-extension-species-subuniverse
+           ( P)
+           ( subuniverse-global-subuniverse Q l4)
+           ( T))
+       X)
+      ≃
+    product-cauchy-series-species-subuniverse P Q S T X
+  equiv-product-cauchy-series-Σ-extension-species-subuniverse =
+    equiv-prod
+          ( inv-equiv
+            ( equiv-cauchy-series-Σ-extension-species-subuniverse
+                ( P)
+                ( subuniverse-global-subuniverse Q l3)
+                ( S)
+                ( X)))
+          ( inv-equiv
+            ( equiv-cauchy-series-Σ-extension-species-subuniverse
+                ( P)
+                ( subuniverse-global-subuniverse Q l4)
+                ( T)
+                ( X)))
+```
 
 ### The Cauchy series associated to the Cauchy product of `S` and `T` is equal to the product of theirs Cauchy series
 
@@ -87,19 +128,7 @@ module _
       ( X) ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-cauchy-series-cauchy-product-species-subuniverse =
-    ( ( equiv-prod
-          ( inv-equiv
-            ( equiv-cauchy-series-Σ-extension-species-subuniverse
-                ( P)
-                ( subuniverse-global-subuniverse Q l3)
-                ( S)
-                ( X)))
-          ( inv-equiv
-            ( equiv-cauchy-series-Σ-extension-species-subuniverse
-                ( P)
-                ( subuniverse-global-subuniverse Q l4)
-                ( T)
-                ( X)))) ∘e
+    ( ( equiv-product-cauchy-series-Σ-extension-species-subuniverse P Q S T X) ∘e
       ( ( equiv-cauchy-series-cauchy-product-species-types
             ( Σ-extension-species-subuniverse
                 ( P)

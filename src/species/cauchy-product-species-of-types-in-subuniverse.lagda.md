@@ -1,7 +1,7 @@
 # Cauchy products of species of subuniverse
 
 ```agda
-module species.cauchy-product-species-of-subuniverse where
+module species.cauchy-product-species-of-types-in-subuniverse where
 ```
 
 <details><summary>Imports</summary>
