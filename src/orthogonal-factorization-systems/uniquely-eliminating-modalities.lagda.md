@@ -10,17 +10,21 @@ module orthogonal-factorization-systems.uniquely-eliminating-modalities where
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.propositions
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.reflective-subuniverses
 ```
 
 </details>
@@ -127,9 +131,7 @@ module _
     htpy-eq
       ( ap pr1
         ( eq-is-contr'
-          ( is-contr-map-is-equiv
-            ( is-uem-○ (○ X) (λ _ → ○ X))
-            λ x' → unit-○ x')
+          ( is-contr-map-is-equiv (is-uem-○ (○ X) (λ _ → ○ X)) unit-○)
           ( unit-○ ∘ map-inv-unit-uniquely-eliminating-modality ,
             eq-htpy (ap unit-○ ∘ (issec-unit-uniquely-eliminating-modality)))
           ( id , refl)))
@@ -142,12 +144,67 @@ module _
       issec-unit-uniquely-eliminating-modality
 ```
 
+### Uniquely eliminating modalities are uniquely determined by their modal types
+
+This can also be seen as characterizing the identity type of uniquely
+eliminating modalities.
+
+Suppose given two uniquely eliminating modalities ○ and ●. They are equal if and
+only if they have the same modal types.
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  htpy-uniquely-eliminating-modality :
+    (○ ● : uniquely-eliminating-modality l1 l2) → UU (lsuc l1 ⊔ l2)
+  htpy-uniquely-eliminating-modality ○ ● =
+    equiv-fam
+      ( is-modal (modal-unit-uniquely-eliminating-modality ○))
+      ( is-modal (modal-unit-uniquely-eliminating-modality ●))
+
+  refl-htpy-uniquely-eliminating-modality :
+    (○ : uniquely-eliminating-modality l1 l2) →
+    htpy-uniquely-eliminating-modality ○ ○
+  refl-htpy-uniquely-eliminating-modality ○ X = id-equiv
+
+  htpy-eq-uniquely-eliminating-modality :
+    (○ ● : uniquely-eliminating-modality l1 l2) →
+    ○ ＝ ● → htpy-uniquely-eliminating-modality ○ ●
+  htpy-eq-uniquely-eliminating-modality ○ .○ refl =
+    refl-htpy-uniquely-eliminating-modality ○
+
+  -- eq-htpy-uniquely-eliminating-modality :
+  --   (○ ● : uniquely-eliminating-modality l1 l2) →
+  --   htpy-uniquely-eliminating-modality ○ ● → ○ ＝ ●
+  -- eq-htpy-uniquely-eliminating-modality ○ ● e = eq-pair-Σ (eq-htpy (λ X → {!   !})) {!   !}
+```
+
+### A uniquely eliminating modality determines a Σ-closed reflective subuniverse
+
+```agda
+module _
+  {l : Level}
+  ((○ , unit-○ , is-uem-○) : uniquely-eliminating-modality l l)
+  where
+
+  -- is-reflective-subuniverse-uniquely-eliminating-modality :
+  --   is-reflective-subuniverse unit-○ (is-modal-Prop unit-○)
+  -- pr1 is-reflective-subuniverse-uniquely-eliminating-modality =
+  --   is-modal-uniquely-eliminating-modality (○ , unit-○ , is-uem-○)
+  -- pr2 is-reflective-subuniverse-uniquely-eliminating-modality =
+  --   λ X is-modal-X Y → {! is-uem-○ ? ? !}
+  -- -- X is modal, so X ≃ ○ X, now apply is-uem-○ to ○ X
+  -- --TODO: can this be proven without univalence?
+```
+
 ## See also
 
 The equivalent notions of
 
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
-- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
+- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses.md)
 - [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
 
 ## References

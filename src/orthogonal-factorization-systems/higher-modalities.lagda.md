@@ -205,13 +205,11 @@ module _
 ### The modal operator's action on maps
 
 ```agda
-module _
-  {l : Level}
-  {○ : modal-operator l l} (unit-○ : modal-unit ○)
-  where
-
-  map-modal-rec : (rec-○ : modal-rec unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
-  map-modal-rec rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+map-modal-rec :
+  {l : Level} {○ : modal-operator l l}
+  (unit-○ : modal-unit ○) (rec-○ : modal-rec unit-○)
+  {X Y : UU l} → (X → Y) → ○ X → ○ Y
+map-modal-rec unit-○ rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
 ```
 
 ### Modal identity elimination
@@ -234,7 +232,7 @@ module _
       ( Id-○ X x' y')
 ```
 
-### Homogenous higher modalities are closed under identity formation in the usual sense
+### The identity types of modal types are modal for homogenous higher modalities
 
 ```agda
 module _
@@ -284,7 +282,7 @@ module _
   pr2 (pr2 is-modal-higher-modality) = issec-unit-higher-modality
 ```
 
-## Higher modalities are uniquely eliminating modalities
+### Higher modalities are uniquely eliminating modalities
 
 ```agda
 module _
@@ -329,7 +327,7 @@ module _
 The equivalent notions of
 
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
+- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses.md)
 - [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
 
 ## References
