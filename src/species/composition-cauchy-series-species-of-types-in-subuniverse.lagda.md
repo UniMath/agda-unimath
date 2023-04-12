@@ -34,8 +34,9 @@ open import species.cauchy-series-species-of-types-in-subuniverse
 
 ## Idea
 
-The composition of Cauchy series of two species of subuniverse `S` and `T` at `X` is
-defined as the Cauchy series of `S` applied to the Cauchy series of `T` at `X`
+The composition of Cauchy series of two species of subuniverse `S` and `T` at
+`X` is defined as the Cauchy series of `S` applied to the Cauchy series of `T`
+at `X`
 
 ## Definition
 
@@ -123,7 +124,6 @@ module _
                   ( subuniverse-global-subuniverse Q l4)
                   ( T)
                   ( X)))))
-
 ```
 
 ### The Cauchy series associated to the composition of the species `S` and `T` is the composition of their Cauchy series

@@ -103,7 +103,7 @@ module _
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
   (C1 :
-    ( (l5 l6 : Level)
+    ( {l5 l6 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
     (X : type-subuniverse P) →
@@ -163,5 +163,4 @@ module _
                 ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
                 ( cauchy-product-species-subuniverse P Q C1 S T)
                 ( X))))))
-
 ```

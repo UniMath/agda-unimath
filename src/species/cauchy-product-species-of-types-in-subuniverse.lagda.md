@@ -66,7 +66,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   ( C1 :
-    ( (l4 l5 : Level)
+    ( {l4 l5 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (X : type-subuniverse P) →
@@ -81,7 +81,7 @@ module _
     species-subuniverse P (subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
   pr1 (cauchy-product-species-subuniverse S T X) =
     cauchy-product-species-subuniverse' P Q S T X
-  pr2 (cauchy-product-species-subuniverse S T X) = C1 l3 l4 S T X
+  pr2 (cauchy-product-species-subuniverse S T X) = C1 S T X
 ```
 
 ## Properties
@@ -92,7 +92,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   ( C1 :
-      ( (l6 l7 : Level)
+      ( {l6 l7 : Level}
         (S : species-subuniverse P (subuniverse-global-subuniverse Q l6))
         (T : species-subuniverse P (subuniverse-global-subuniverse Q l7))
         (X : type-subuniverse P) →
@@ -218,7 +218,7 @@ module _
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
   ( C1 :
-    ( (l5 l6 : Level)
+    ( {l5 l6 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
     (X : type-subuniverse P) →
@@ -268,7 +268,7 @@ unit-cauchy-product-species-subuniverse P Q C X =
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   (C1 :
-    ( (l5 l6 : Level)
+    ( {l5 l6 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
     (X : type-subuniverse P) →
@@ -357,7 +357,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   ( C1 :
-    ( (l5 l6 : Level)
+    ( {l5 l6 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
     (X : type-subuniverse P) →

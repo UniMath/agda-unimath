@@ -25,7 +25,7 @@ open import species.species-of-types
 open import species.cauchy-series-species-of-types
 open import species.cauchy-exponential-species-of-types
 open import species.composition-cauchy-series-species-of-types
-open import species.large-composition-species-of-types
+open import species.cauchy-composition-species-of-types
 ```
 
 ## Idea
@@ -69,7 +69,9 @@ module _
       ( ( equiv-cauchy-series-composition-species-types (λ _ → unit) S X) ∘e
         ( equiv-cauchy-series-equiv-species-types
             ( cauchy-exponential-species-types S)
-            ( analytic-comp-species-types (λ _ → unit) S )
-            ( λ F → inv-equiv (equiv-cauchy-exponential-composition-unit S F))
+            ( cauchy-composition-species-types (λ _ → unit) S )
+            ( λ F →
+              inv-equiv
+                ( equiv-cauchy-exponential-composition-unit-species-types S F))
             ( X))))
 ```

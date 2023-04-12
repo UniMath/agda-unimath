@@ -10,8 +10,8 @@ module species.small-cauchy-composition-species-of-types-in-subuniverse where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
@@ -218,7 +218,6 @@ module _
             ( eq-is-prop
                 ( is-prop-equiv
                     ( inv-equiv (equiv-is-small (C5 X))) is-property-is-contr)))
-
 
     htpy-left-unit-law-small-cauchy-composition-species-subuniverse :
       ( S : species-subuniverse P Q)

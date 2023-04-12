@@ -216,7 +216,6 @@ module _
       is-finite-Prop
       C1 C2 C3 C4 C5 C6
 
-
   left-unit-law-small-cauchy-composition-species-Inhabited-Type-𝔽 :
     ( S : species-Inhabited-Type-𝔽 l1 (l1 ⊔ l2)) →
     small-cauchy-composition-species-Inhabited-Type-𝔽
