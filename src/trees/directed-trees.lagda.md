@@ -10,6 +10,7 @@ module trees.directed-trees where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
@@ -35,7 +36,7 @@ open import graph-theory.walks-directed-graphs
 ## Idea
 
 A directed tree is a directed graph `G` equipped with a rood `r : G` such that
-for every vertex `x : G` the type of trails from `x` to `r` is contractible.
+for every vertex `x : G` the type of walks from `x` to `r` is contractible.
 
 ## Definition
 
@@ -91,6 +92,9 @@ module _
   root-Directed-Tree : node-Directed-Tree
   root-Directed-Tree = pr1 is-tree-Directed-Tree
 
+  is-root-Directed-Tree : node-Directed-Tree → UU l1
+  is-root-Directed-Tree x = root-Directed-Tree ＝ x
+
   is-tree-Directed-Tree' :
     is-tree-Directed-Graph' graph-Directed-Tree root-Directed-Tree
   is-tree-Directed-Tree' = pr2 is-tree-Directed-Tree
@@ -134,6 +138,72 @@ uniqueness-root-Directed-Tree T =
   uniqueness-root-is-tree-Directed-Graph
     ( graph-Directed-Tree T)
     ( is-tree-Directed-Tree T)
+```
+
+### The root in a tree is an isolated element
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  is-decidable-is-root-walk-Directed-Tree :
+    (x : node-Directed-Tree T)
+    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+    is-decidable (is-root-Directed-Tree T x)
+  is-decidable-is-root-walk-Directed-Tree ._ refl-walk-Directed-Graph =
+    inl refl
+  is-decidable-is-root-walk-Directed-Tree x
+    ( cons-walk-Directed-Graph {.x} {y} e w) =
+    inr
+      ( λ { refl →
+            neq-cons-refl-walk-Directed-Graph
+              ( graph-Directed-Tree T)
+              ( x)
+              ( y)
+              ( e)
+              ( w)
+              ( eq-is-contr (is-tree-Directed-Tree' T x))})
+
+  is-isolated-root-Directed-Tree : is-isolated (root-Directed-Tree T)
+  is-isolated-root-Directed-Tree x =
+    is-decidable-is-root-walk-Directed-Tree x (walk-to-root-Directed-Tree T x)
+
+  is-contr-loop-space-root-Directed-Tree :
+    is-contr (root-Directed-Tree T ＝ root-Directed-Tree T)
+  is-contr-loop-space-root-Directed-Tree =
+    is-contr-loop-space-isolated-point
+      ( root-Directed-Tree T)
+      ( is-isolated-root-Directed-Tree)
+
+  eq-refl-root-Directed-Tree :
+    (p : root-Directed-Tree T ＝ root-Directed-Tree T) → p ＝ refl
+  eq-refl-root-Directed-Tree p =
+    eq-is-contr is-contr-loop-space-root-Directed-Tree
+
+  eq-refl-root-Directed-Tree' :
+    (p : root-Directed-Tree T ＝ root-Directed-Tree T) → refl ＝ p
+  eq-refl-root-Directed-Tree' p =
+    eq-is-contr is-contr-loop-space-root-Directed-Tree
+```
+
+### The root has no parents
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  no-parent-root-Directed-Tree :
+    ¬ (Σ (node-Directed-Tree T) (edge-Directed-Tree T (root-Directed-Tree T)))
+  no-parent-root-Directed-Tree (x , e) =
+    neq-cons-refl-walk-Directed-Graph
+      ( graph-Directed-Tree T)
+      ( root-Directed-Tree T)
+      ( x)
+      ( e)
+      ( walk-to-root-Directed-Tree T x)
+      ( eq-is-contr (is-tree-Directed-Tree' T (root-Directed-Tree T)))
 ```
 
 ### Graphs in which vertices have unique parents are trees if for every vertex `x` there is a walk from `x` to the root
@@ -257,4 +327,84 @@ module _
     is-tree-Directed-Graph' G r
   is-tree-unique-parent-Directed-Graph' H w x =
     is-proof-irrelevant-walk-unique-parent-Directed-Graph H x (w x)
+
+  is-tree-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph →
+    ((x : vertex-Directed-Graph G) → walk-Directed-Graph G x r) →
+    is-tree-Directed-Graph G
+  pr1 (is-tree-unique-parent-Directed-Graph H w) = r
+  pr2 (is-tree-unique-parent-Directed-Graph H w) =
+    is-tree-unique-parent-Directed-Graph' H w
+```
+
+### Nodes in trees have unique parents
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  center-walk-unique-parent-Directed-Tree :
+    (x : node-Directed-Tree T)
+    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+    is-root-Directed-Tree T x +
+    Σ (node-Directed-Tree T) (edge-Directed-Tree T x)
+  center-walk-unique-parent-Directed-Tree .(root-Directed-Tree T)
+    refl-walk-Directed-Graph =
+    inl refl
+  center-walk-unique-parent-Directed-Tree x
+    ( cons-walk-Directed-Graph {.x} {y} e w) =
+    inr (y , e)
+
+  center-unique-parent-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-root-Directed-Tree T x +
+    Σ (node-Directed-Tree T) (edge-Directed-Tree T x)
+  center-unique-parent-Directed-Tree x =
+    center-walk-unique-parent-Directed-Tree x (walk-to-root-Directed-Tree T x)
+
+  contraction-walk-unique-parent-Directed-Tree :
+    (x : node-Directed-Tree T)
+    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+    (p : is-root-Directed-Tree T x +
+         Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    center-walk-unique-parent-Directed-Tree x w ＝ p
+  contraction-walk-unique-parent-Directed-Tree ._ refl-walk-Directed-Graph
+    ( inl p) = ap inl (eq-refl-root-Directed-Tree' T p)
+  contraction-walk-unique-parent-Directed-Tree ._ refl-walk-Directed-Graph
+    ( inr (y , e)) =
+    ex-falso (no-parent-root-Directed-Tree T (y , e))
+  contraction-walk-unique-parent-Directed-Tree _
+    ( cons-walk-Directed-Graph {._} {y} e w)
+    ( inl refl) =
+    ex-falso (no-parent-root-Directed-Tree T (y , e))
+  contraction-walk-unique-parent-Directed-Tree _
+    ( cons-walk-Directed-Graph {x} {y} e w)
+    ( inr (z , f)) =
+    ap
+      ( inr)
+      ( eq-parent-eq-cons-walk-Directed-Graph
+        ( graph-Directed-Tree T)
+        ( x)
+        ( e)
+        ( f)
+        ( walk-to-root-Directed-Tree T y)
+        ( walk-to-root-Directed-Tree T z)
+        ( eq-is-contr (is-tree-Directed-Tree' T x)))
+
+  contraction-unique-parent-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    (p : is-root-Directed-Tree T x +
+         Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    center-unique-parent-Directed-Tree x ＝ p
+  contraction-unique-parent-Directed-Tree x =
+    contraction-walk-unique-parent-Directed-Tree x
+      ( walk-to-root-Directed-Tree T x)
+
+  unique-parent-Directed-Tree :
+    unique-parent-Directed-Graph (graph-Directed-Tree T) (root-Directed-Tree T)
+  pr1 (unique-parent-Directed-Tree x) =
+    center-unique-parent-Directed-Tree x
+  pr2 (unique-parent-Directed-Tree x) =
+    contraction-unique-parent-Directed-Tree x
 ```

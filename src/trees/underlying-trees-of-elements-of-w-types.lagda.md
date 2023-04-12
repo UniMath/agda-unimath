@@ -1,6 +1,8 @@
 # The underlying trees of elements of W-types
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module trees.underlying-trees-of-elements-of-w-types where
 ```
 

@@ -27,7 +27,8 @@ open import trees.directed-trees
 
 ## Idea
 
-A **morphism of directed trees** from `S` to `T` is simply a morphism between their underlying directed graphs.
+A **morphism of directed trees** from `S` to `T` is simply a morphism between
+their underlying directed graphs.
 
 ## Definitions
 
@@ -107,7 +108,7 @@ module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
   (f g : hom-Directed-Tree S T)
   where
-  
+
   htpy-hom-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-hom-Directed-Tree =
     htpy-hom-Directed-Graph
@@ -185,7 +186,7 @@ module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
   (f : hom-Directed-Tree S T)
   where
-  
+
   is-contr-total-htpy-hom-Directed-Tree :
     is-contr (Σ (hom-Directed-Tree S T) (htpy-hom-Directed-Tree S T f))
   is-contr-total-htpy-hom-Directed-Tree =

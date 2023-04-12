@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -19,6 +20,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
@@ -225,6 +227,54 @@ module _
   pr1 (compute-walk-Directed-Graph x y) = map-compute-walk-Directed-Graph x y
   pr2 (compute-walk-Directed-Graph x y) =
     is-equiv-map-compute-walk-Directed-Graph x y
+```
+
+### Walks of length `0` are identifications
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (x : vertex-Directed-Graph G)
+  where
+
+  is-contr-total-walk-of-length-zero-Directed-Graph :
+    is-contr
+      ( Σ ( vertex-Directed-Graph G)
+          ( λ y → walk-of-length-Directed-Graph G 0 x y))
+  is-contr-total-walk-of-length-zero-Directed-Graph =
+    is-contr-equiv'
+      ( Σ (vertex-Directed-Graph G) (λ y → y ＝ x))
+      ( equiv-tot (λ y → compute-raise l2 (y ＝ x)))
+      ( is-contr-total-path' x)
+```
+
+### `cons-walk e w ≠ refl-walk`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (x : vertex-Directed-Graph G)
+  where
+
+  neq-cons-refl-walk-Directed-Graph :
+    (y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
+    (w : walk-Directed-Graph G y x) →
+    ¬ (cons-walk-Directed-Graph e w ＝ refl-walk-Directed-Graph)
+  neq-cons-refl-walk-Directed-Graph y e w ()
+```
+
+### If `cons-walk e w ＝ cons-walk e' w'`, then `(y , e) ＝ (y' , e')`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (x : vertex-Directed-Graph G)
+  where
+
+  eq-parent-eq-cons-walk-Directed-Graph :
+    {y y' z : vertex-Directed-Graph G}
+    (e : edge-Directed-Graph G x y) (e' : edge-Directed-Graph G x y')
+    (w : walk-Directed-Graph G y z) (w' : walk-Directed-Graph G y' z) →
+    cons-walk-Directed-Graph e w ＝ cons-walk-Directed-Graph e' w' →
+    (y , e) ＝ (y' , e')
+  eq-parent-eq-cons-walk-Directed-Graph {y} {.y} {z} e .e w .w refl = refl
 ```
 
 ### Vertices on a walk

@@ -18,8 +18,8 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import graph-theory.equivalences-directed-graphs
-open import graph-theory.walks-directed-graphs
 open import graph-theory.morphisms-directed-graphs
+open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 open import trees.morphisms-directed-trees
@@ -29,7 +29,10 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-**Equivalences of directed trees** are morphisms of directed trees of which the actions on nodes and on edges are both equivalences. In other words, equivalences of directed trees are just equivalences between their underlying directed graphs.
+**Equivalences of directed trees** are morphisms of directed trees of which the
+actions on nodes and on edges are both equivalences. In other words,
+equivalences of directed trees are just equivalences between their underlying
+directed graphs.
 
 ## Definitions
 
@@ -154,7 +157,7 @@ module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
   (f g : equiv-Directed-Tree S T)
   where
-  
+
   htpy-equiv-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-equiv-Directed-Tree =
     htpy-hom-Directed-Tree S T

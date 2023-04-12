@@ -139,7 +139,7 @@ module _
 id-equiv-Directed-Graph :
   {l1 l2 : Level} (G : Directed-Graph l1 l2) → equiv-Directed-Graph G G
 pr1 (id-equiv-Directed-Graph G) = id-equiv
-pr2 (id-equiv-Directed-Graph G) x y = id-equiv  
+pr2 (id-equiv-Directed-Graph G) x y = id-equiv
 ```
 
 ### Composition of equivalences of directed graphs

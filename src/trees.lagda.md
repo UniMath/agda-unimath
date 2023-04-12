@@ -3,6 +3,7 @@
 ```agda
 module trees where
 
+open import trees.combinator-directed-trees public
 open import trees.directed-trees public
 open import trees.elementhood-relation-w-types public
 open import trees.enriched-directed-trees public
@@ -14,6 +15,8 @@ open import trees.indexed-w-types public
 open import trees.induction-w-types public
 open import trees.inequality-w-types public
 open import trees.lower-types-w-types public
+open import trees.morphisms-directed-trees public
+open import trees.morphisms-enriched-directed-trees public
 open import trees.multisets public
 open import trees.ranks-of-elements-w-types public
 open import trees.rooted-quasitrees public
