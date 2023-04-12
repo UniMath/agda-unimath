@@ -39,9 +39,11 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-```agda
--- trunc-Set distributes over Π indexed by Fin
+## Theorem
 
+`trunc-Set` distributes over `Π` indexed by `Fin`.
+
+```agda
 abstract
   distributive-trunc-Π-Fin-Set :
     {l : Level} (k : ℕ) (A : Fin k → UU l) →

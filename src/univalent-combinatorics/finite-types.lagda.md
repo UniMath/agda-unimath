@@ -30,12 +30,10 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
-open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting

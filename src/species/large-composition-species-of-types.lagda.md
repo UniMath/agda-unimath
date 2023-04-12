@@ -18,16 +18,12 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
 open import foundation.relaxed-sigma-decompositions
 open import foundation.trivial-relaxed-sigma-decompositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels

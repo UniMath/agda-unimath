@@ -53,6 +53,10 @@ module _
 
   is-prop-is-right : (x : X + Y) → is-prop (is-right x)
   is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
+
+  is-left-or-is-right : (x : X + Y) → is-left x + is-right x
+  is-left-or-is-right (inl x) = inl star
+  is-left-or-is-right (inr x) = inr star
 ```
 
 ## Properties
@@ -152,7 +156,7 @@ module _
     is-not-contractible-coprod-is-contr :
       is-contr A → is-contr B → is-not-contractible (A + B)
     is-not-contractible-coprod-is-contr HA HB HAB =
-      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr  HAB)
+      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr HAB)
 ```
 
 ### Coproducts of mutually exclusive propositions are propositions

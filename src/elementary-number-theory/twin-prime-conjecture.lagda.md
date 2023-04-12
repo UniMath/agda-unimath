@@ -20,13 +20,13 @@ open import foundation.universe-levels
 
 # The twin prime conjecture
 
+The twin prime conjecture asserts that there are infinitely many twin primes. We
+assert that there are infinitely twin primes by asserting that for every n : ℕ
+there is a twin prime that is larger than n.
+
 ```agda
 is-twin-prime-ℕ : ℕ → UU lzero
 is-twin-prime-ℕ n = (is-prime-ℕ n) × (is-prime-ℕ (succ-ℕ (succ-ℕ n)))
-
-{- The twin prime conjecture asserts that there are infinitely many twin
-   primes. We assert that there are infinitely twin primes by asserting that
-   for every n : ℕ there is a twin prime that is larger than n. -}
 
 twin-prime-conjecture : UU lzero
 twin-prime-conjecture =

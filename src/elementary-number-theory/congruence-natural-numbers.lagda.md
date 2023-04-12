@@ -10,9 +10,9 @@ module elementary-number-theory.congruence-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -160,7 +160,7 @@ is-one-cong-succ-ℕ {k} x H =
 
 ```agda
 scalar-invariant-cong-ℕ :
-  (k x y z : ℕ) → cong-ℕ k x y →  cong-ℕ k (mul-ℕ z x) (mul-ℕ z y)
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (mul-ℕ z x) (mul-ℕ z y)
 pr1 (scalar-invariant-cong-ℕ k x y z (pair d p)) = mul-ℕ z d
 pr2 (scalar-invariant-cong-ℕ k x y z (pair d p)) =
   ( associative-mul-ℕ z d k) ∙
@@ -181,7 +181,7 @@ scalar-invariant-cong-ℕ' k x y z H =
 ```agda
 congruence-mul-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
-  cong-ℕ  k x x' → cong-ℕ k y y' → cong-ℕ k (mul-ℕ x y) (mul-ℕ x' y')
+  cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (mul-ℕ x y) (mul-ℕ x' y')
 congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
   trans-cong-ℕ k (mul-ℕ x y) (mul-ℕ x y') (mul-ℕ x' y')
     ( scalar-invariant-cong-ℕ k y y' x K)

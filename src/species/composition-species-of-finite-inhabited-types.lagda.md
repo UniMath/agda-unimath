@@ -9,7 +9,6 @@ module species.composition-species-of-finite-inhabited-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -26,12 +25,11 @@ open import foundation.universe-levels
 
 open import species.composition-species-of-subuniverse
 open import species.species-of-finite-inhabited-types
-open import species.species-of-types-in-subuniverse
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.sigma-decompositions

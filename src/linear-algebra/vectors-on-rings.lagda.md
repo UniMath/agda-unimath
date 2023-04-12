@@ -32,7 +32,7 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module
+Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module.
 
 ## Definitions
 

@@ -7,41 +7,35 @@ module foundation.type-duality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.locally-small-types
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.slice
 open import foundation.structure
 open import foundation.surjective-maps
-open import foundation.transport
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.propositions
 open import foundation-core.small-types
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 
@@ -344,19 +338,20 @@ The type of all function from `A → B` is equivalent to the type of function
 
 ```agda
 fib-Σ :
-  {l : Level} (X : UU l) (A : UU l) →
+  {l1 l2 : Level} (X : UU l1) (A : UU l2) →
   (X → A) ≃
-    Σ (A → UU l) (λ Y → X ≃ Σ A Y)
-fib-Σ {l} X A =
+    Σ (A → UU (l2 ⊔ l1)) (λ Y → X ≃ Σ A Y)
+fib-Σ {l1} {l2} X A =
   ( ( equiv-Σ
       ( λ Z → X ≃ Σ A Z)
-      ( equiv-Fib l A)
+      ( equiv-Fib l1 A)
       ( λ s →
         inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
-          ( is-contr-total-equiv X)
-          ( X , id-equiv )))))
+          ( is-contr-is-small-lmax l2 X )
+          ( is-small-lmax l2 X )) ∘e
+        ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A))))
 
 equiv-fixed-Slice-structure :
   {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →

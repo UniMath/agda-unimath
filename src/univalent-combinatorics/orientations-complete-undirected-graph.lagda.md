@@ -73,6 +73,16 @@ module _
   orientation-Complete-Undirected-Graph =
     ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
     Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x))
+
+  is-set-orientation-Complete-Undirected-Graph :
+    is-set orientation-Complete-Undirected-Graph
+  is-set-orientation-Complete-Undirected-Graph =
+    is-set-Π
+      ( λ (P , H) →
+        is-set-Σ
+          ( is-set-type-UU-Fin n X)
+          ( λ x → is-set-is-prop (is-prop-type-decidable-Prop (P x))))
+
   2-Element-Decidable-Subtype-subtype-pointwise-difference :
     orientation-Complete-Undirected-Graph →
     orientation-Complete-Undirected-Graph →
@@ -1441,7 +1451,7 @@ module _
         ( ( inv (eq-orientation-two-elements-count i j np)) ∙
           ( ap
             ( λ Y' → pr1 (orientation-two-elements-count i j np Y'))
-            (  eq-equal-elements-standard-2-Element-Decidable-Subtype
+            ( eq-equal-elements-standard-2-Element-Decidable-Subtype
               ( has-decidable-equality-count eX)
               ( np)
               ( λ p → np' (inv p))
@@ -1545,7 +1555,7 @@ module _
                     ( np)))
                 ( x))
               ( x)))))) ∙
-      (  ap
+      ( ap
         ( λ w →
           pr1
             ( cases-orientation-two-elements-count i j Y
@@ -2277,7 +2287,7 @@ module _
                   ( np))))))
         ( nq)
         ( nr)) ∙
-      (  is-fixed-point-standard-transposition
+      ( is-fixed-point-standard-transposition
         ( has-decidable-equality-count eX)
         ( np)
         ( x)
@@ -2658,7 +2668,7 @@ module _
        ex-falso
         ( pr2 T
           ( eq-pair-Σ
-            (  inward-edge-right-two-elements-orientation-count i j np
+            ( inward-edge-right-two-elements-orientation-count i j np
               ( pr1 T)
               ( y)
               ( tr

@@ -205,9 +205,11 @@ hom-Coherent-H-Space :
 hom-Coherent-H-Space M N =
   Σ ( pointed-type-Coherent-H-Space M →* pointed-type-Coherent-H-Space N)
     ( preserves-unital-mul M N)
+```
 
--- Homotopies of morphisms of wild unital magmas
+### Homotopies of morphisms of wild unital magmas
 
+```agda
 preserves-mul-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (μA : A → A → A) (μB : B → B → B) →
   {f g : A → B} (μf : preserves-mul μA μB f) (μg : preserves-mul μA μB g) →

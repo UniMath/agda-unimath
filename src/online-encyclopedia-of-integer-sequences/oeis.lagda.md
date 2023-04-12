@@ -7,12 +7,16 @@ module online-encyclopedia-of-integer-sequences.oeis where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.ackermann-function
+open import elementary-number-theory.cofibonacci
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
+open import elementary-number-theory.kolakoski-sequence
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.pisano-periods
 
 open import finite-group-theory.finite-groups
 
@@ -28,6 +32,13 @@ open import foundation.functions
 ```agda
 A000001 : ℕ → ℕ
 A000001 = number-of-groups-of-order
+```
+
+### [A000002](https://oeis.org/A000002) The Kolakoski sequence
+
+```agda
+A000002 : ℕ → ℕ
+A000002 = kolakoski
 ```
 
 ### [A000010](https://oeis.org/A000010) Euler's totient function
@@ -79,9 +90,30 @@ A000720 : ℕ → ℕ
 A000720 = prime-counting-ℕ
 ```
 
+### [A001175](https://oeis.org/A001175) Pisano periods
+
+```agda
+A001175 : ℕ → ℕ
+A001175 = pisano-period
+```
+
+### [A001177](https://oeis.org/A001177) The cofibonacci sequence
+
+```agda
+A001177 : ℕ → ℕ
+A001177 = cofibonacci
+```
+
 ### [A001477](https://oeis.org/A001477) The natural numbers
 
 ```agda
 A001477 : ℕ → ℕ
 A001477 = id
+```
+
+### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann-Péter function
+
+```agda
+A046859 : ℕ → ℕ
+A046859 n = ackermann n n
 ```

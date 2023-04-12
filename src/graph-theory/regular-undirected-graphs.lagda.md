@@ -2,7 +2,11 @@
 
 ```agda
 module graph-theory.regular-undirected-graphs where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
@@ -10,6 +14,8 @@ open import foundation.universe-levels
 open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
+
+</details>
 
 ## Idea
 

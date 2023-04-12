@@ -306,7 +306,7 @@ module _
     ( right-zero-law-mul-nat-scalar-Semiring n)
 
   left-unit-law-mul-nat-scalar-Semiring :
-    (x : type-Semiring R) →  mul-nat-scalar-Semiring 1 x ＝ x
+    (x : type-Semiring R) → mul-nat-scalar-Semiring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Semiring x = left-unit-law-add-Semiring R x
 
   left-nat-scalar-law-mul-Semiring :

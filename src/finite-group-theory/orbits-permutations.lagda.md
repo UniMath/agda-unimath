@@ -19,6 +19,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import finite-group-theory.transpositions
@@ -46,10 +47,12 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.repetitions
+open import foundation.repetitions-of-values
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import lists.lists
 
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
@@ -57,7 +60,6 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps
-open import univalent-combinatorics.lists
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -116,11 +118,11 @@ module _
   -- The map `i ↦ eⁱ a` repeats itself
 
   repetition-iterate-automorphism-Fin :
-    repetition
+    repetition-of-values
       ( λ (k : Fin (succ-ℕ (number-of-elements-count eX))) →
         iterate (nat-Fin (succ-ℕ (number-of-elements-count eX)) k) (map-equiv f) a)
   repetition-iterate-automorphism-Fin =
-    repetition-le-count
+    repetition-of-values-le-count
       ( count-Fin (succ-ℕ (number-of-elements-count eX)))
       ( eX)
       ( λ k → iterate (nat-Fin (succ-ℕ (number-of-elements-count eX)) k) (map-equiv f) a)
@@ -203,9 +205,9 @@ module _
               has-decidable-equality-count eX
                 ( iterate n (map-equiv f) a)
                 ( iterate m (map-equiv f) a))
-            ( λ m p → leq-le-ℕ {m} {n} p))
+            ( λ m p → leq-le-ℕ m n p))
         ( two-points-iterate-ordered-ℕ
-          ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
+          ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
 
     first-point-min-repeating : ℕ
     first-point-min-repeating = pr1 min-repeating
@@ -238,17 +240,17 @@ module _
       ( first-point-min-repeating)
       ( pr1
         ( two-points-iterate-ordered-ℕ
-          ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ)))
+          ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ)))
       ( number-of-elements-count eX)
       ( leq-greater-point-number-elements
-        ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
+        ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
       ( is-lower-bound-min-reporting
         ( pr1
           ( two-points-iterate-ordered-ℕ
-            ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ)))
+            ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ)))
         ( pr2
           ( two-points-iterate-ordered-ℕ
-            ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))))
+            ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))))
 
   abstract
     not-not-eq-second-point-zero-min-reporting :
@@ -494,54 +496,56 @@ module _
       is-decidable-iterate-is-decidable-bounded h a b (inr np) =
         inr
           ( λ p →
-            np ( pair
-                 ( remainder-euclidean-division-ℕ m (pr1 p))
-                 ( pair
-                   ( leq-le-ℕ
-                     { x = remainder-euclidean-division-ℕ m (pr1 p)}
-                     ( concatenate-le-leq-ℕ
-                       { y = m}
-                       ( strict-upper-bound-remainder-euclidean-division-ℕ
-                         ( m)
-                         ( pr1 p)
-                         ( pr1
-                           ( pr2
-                             ( has-finite-orbits-permutation
-                               ( type-UU-Fin n X)
-                               ( pair n h)
-                               ( f)
-                               ( a)))))
-                       ( leq-has-finite-orbits-permutation-number-elements
-                         ( type-UU-Fin n X)
-                         ( pair n h)
-                         ( f)
-                         ( a))))
-                   ( ( ap
-                       ( iterate
-                         ( remainder-euclidean-division-ℕ m (pr1 p))
-                         ( map-equiv f))
-                       ( inv
-                         ( mult-has-finite-orbits-permutation
-                           ( type-UU-Fin n X)
-                           ( pair n h)
-                           ( f)
-                           ( a)
-                           ( quotient-euclidean-division-ℕ m (pr1 p))))) ∙
-                     ( ( inv
-                         ( iterate-add-ℕ
-                           ( remainder-euclidean-division-ℕ m (pr1 p))
-                           ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
-                           ( map-equiv f)
-                           ( a))) ∙
-                       ( ( ap
-                           ( λ x → iterate x (map-equiv f) a)
-                           ( ( commutative-add-ℕ
-                               ( remainder-euclidean-division-ℕ m (pr1 p))
-                               ( mul-ℕ
-                                 ( quotient-euclidean-division-ℕ m (pr1 p))
-                                 ( m))) ∙
-                             ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
-                         ( pr2 p)))))))
+            np
+              ( pair
+                ( remainder-euclidean-division-ℕ m (pr1 p))
+                ( pair
+                  ( leq-le-ℕ
+                    ( remainder-euclidean-division-ℕ m (pr1 p))
+                    ( n)
+                    ( concatenate-le-leq-ℕ
+                      { y = m}
+                      ( strict-upper-bound-remainder-euclidean-division-ℕ
+                        ( m)
+                        ( pr1 p)
+                        ( pr1
+                          ( pr2
+                            ( has-finite-orbits-permutation
+                              ( type-UU-Fin n X)
+                              ( pair n h)
+                              ( f)
+                              ( a)))))
+                      ( leq-has-finite-orbits-permutation-number-elements
+                        ( type-UU-Fin n X)
+                        ( pair n h)
+                        ( f)
+                        ( a))))
+                  ( ( ap
+                      ( iterate
+                        ( remainder-euclidean-division-ℕ m (pr1 p))
+                        ( map-equiv f))
+                      ( inv
+                        ( mult-has-finite-orbits-permutation
+                          ( type-UU-Fin n X)
+                          ( pair n h)
+                          ( f)
+                          ( a)
+                          ( quotient-euclidean-division-ℕ m (pr1 p))))) ∙
+                    ( ( inv
+                        ( iterate-add-ℕ
+                          ( remainder-euclidean-division-ℕ m (pr1 p))
+                          ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
+                          ( map-equiv f)
+                          ( a))) ∙
+                      ( ( ap
+                          ( λ x → iterate x (map-equiv f) a)
+                          ( ( commutative-add-ℕ
+                              ( remainder-euclidean-division-ℕ m (pr1 p))
+                              ( mul-ℕ
+                                ( quotient-euclidean-division-ℕ m (pr1 p))
+                                ( m))) ∙
+                            ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
+                        ( pr2 p)))))))
         where
         m : ℕ
         m = pr1
@@ -859,7 +863,7 @@ module _
         equal-iterate-transposition a g
           ( λ k' → (is-nonzero-ℕ k') × (le-ℕ k' (pr1 (minimal-element-iterate g a b pa))))
           ( neq-iterate-nonzero-le-minimal-element pa)
-          ( λ n (pair _ s) nz → pair nz (transitive-le-ℕ n (succ-ℕ n) (pr1 (minimal-element-iterate g a b pa)) (le-succ-ℕ {x = n}) s))
+          ( λ n (pair _ s) nz → pair nz (transitive-le-ℕ n (succ-ℕ n) (pr1 (minimal-element-iterate g a b pa)) (succ-le-ℕ n) s))
           ( k)
           ( cases-equal-iterate-transposition-a (has-decidable-equality-ℕ k zero-ℕ))
         where
@@ -880,7 +884,7 @@ module _
             ( (ap
               ( map-equiv (composition-transposition-a-b g))
                 ( equal-iterate-transposition-a pa (pr1 is-successor-k1)
-                  ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
+                  ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (succ-le-ℕ (pr1 is-successor-k1))))) ∙
               ( (ap
                 ( λ n →
                   map-standard-transposition
@@ -984,7 +988,7 @@ module _
             ( λ r → ( contradiction-le-ℕ k' (pr1 (minimal-element-iterate-2-a-b g pa)) p
               ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inr r)))))
           ( λ k' ineq' _ →
-            (transitive-le-ℕ k' (succ-ℕ k') (pr1 (minimal-element-iterate-2-a-b g pa)) (le-succ-ℕ {x = k'}) ineq'))
+            (transitive-le-ℕ k' (succ-ℕ k') (pr1 (minimal-element-iterate-2-a-b g pa)) (succ-le-ℕ k') ineq'))
           k (inr ineq)
       lemma2 : (g : X ≃ X) (pa : Σ ℕ (λ k → (Id (iterate k (map-equiv g) x) a) + (Id (iterate k (map-equiv g) x) b))) →
         ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a) +
@@ -1015,7 +1019,7 @@ module _
                 ( (ap
                   ( map-equiv (composition-transposition-a-b g))
                   ( equal-iterate-transposition-same-orbits g pa (pr1 is-successor-k1)
-                    ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
+                    ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (succ-le-ℕ (pr1 is-successor-k1))))) ∙
                   ( (ap
                     ( λ n →
                       map-standard-transposition
@@ -1043,7 +1047,7 @@ module _
                 ( (ap
                   ( map-equiv (composition-transposition-a-b g))
                   ( equal-iterate-transposition-same-orbits g pa (pr1 is-successor-k1)
-                    ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
+                    ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (succ-le-ℕ (pr1 is-successor-k1))))) ∙
                   ( (ap
                     ( λ n →
                       map-standard-transposition
@@ -1504,7 +1508,7 @@ module _
         equal-iterate-transposition a g
           ( λ k' → (is-nonzero-ℕ k') × (le-ℕ k' (pr1 minimal-element-iterate-repeating)))
           ( neq-iterate-nonzero-le-minimal-element)
-          ( λ n (pair _ s) nz → pair nz (transitive-le-ℕ n (succ-ℕ n) (pr1 minimal-element-iterate-repeating) (le-succ-ℕ {x = n}) s))
+          ( λ n (pair _ s) nz → pair nz (transitive-le-ℕ n (succ-ℕ n) (pr1 minimal-element-iterate-repeating) (succ-le-ℕ n) s))
           ( k)
           ( cases-equal-iterate-transposition-a (has-decidable-equality-ℕ k zero-ℕ))
         where
@@ -1520,7 +1524,7 @@ module _
             ( (ap
               ( map-equiv (composition-transposition-a-b g))
                 ( equal-iterate-transposition-a (pr1 is-successor-k1)
-                  ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
+                  ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (succ-le-ℕ (pr1 is-successor-k1))))) ∙
               ( (ap
                 ( λ n →
                   map-standard-transposition

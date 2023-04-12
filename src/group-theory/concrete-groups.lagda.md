@@ -20,7 +20,8 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.higher-groups
+
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

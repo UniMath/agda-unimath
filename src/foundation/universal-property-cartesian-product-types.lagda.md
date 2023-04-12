@@ -39,16 +39,20 @@ product
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
+```
 
-  {- We construct the cone for two maps into the unit type. -}
+We construct the cone for two maps into the unit type.
 
+```agda
   cone-prod : cone (const A unit star) (const B unit star) (A × B)
   pr1 cone-prod = pr1
   pr1 (pr2 cone-prod) = pr2
   pr2 (pr2 cone-prod) = refl-htpy
+```
 
-  {- Cartesian products are a special case of pullbacks. -}
+Cartesian products are a special case of pullbacks.
 
+```agda
   gap-prod : A × B → canonical-pullback (const A unit star) (const B unit star)
   gap-prod = gap (const A unit star) (const B unit star) cone-prod
 
@@ -79,10 +83,11 @@ module _
         inv-gap-prod
         issec-inv-gap-prod
         isretr-inv-gap-prod
+```
 
-  {- We conclude that cartesian products satisfy the universal property of
-     pullbacks. -}
+We conclude that cartesian products satisfy the universal property of pullbacks.
 
+```agda
   abstract
     universal-property-pullback-prod :
       {l : Level} →

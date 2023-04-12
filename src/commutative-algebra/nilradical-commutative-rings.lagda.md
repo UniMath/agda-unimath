@@ -7,30 +7,15 @@ module commutative-algebra.nilradical-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
-open import commutative-algebra.sums-commutative-rings
 
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import ring-theory.nilpotent-elements-rings
-
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

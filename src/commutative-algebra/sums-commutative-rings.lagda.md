@@ -180,7 +180,7 @@ module _
   shift-sum-Commutative-Ring = shift-sum-Ring (ring-Commutative-Ring R)
 ```
 
-### Splitting Sums
+### Splitting sums
 
 ```agda
 split-sum-Commutative-Ring :

@@ -19,9 +19,13 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
     agda_module = utils.get_agda_module_name(agda_file, root)
 
     # If no nonpublic imports, skip
-    if not nonpublic:
+    if nonpublic is None:
         utils.multithread.thread_safe_print(
-            f"'{agda_module}' Could not find imports. Skipping.")
+            f"'{agda_module}' Could not find imports.")
+        return
+    elif len(nonpublic) == 0:
+        utils.multithread.thread_safe_print(
+            f"'{agda_module}' No nonpublic imports.")
         return
 
     # Proceed with search for unused imports
@@ -87,7 +91,7 @@ if __name__ == "__main__":
     root = "src"
     temp_dir = "temp"
     status = 0
-    agda_options = "--without-K --exact-split"
+    agda_options = "--without-K --exact-split --no-import-sorts --auto-inline --no-caching"
 
     temp_root = os.path.join(root, temp_dir)
     shutil.rmtree(temp_root, ignore_errors=True)

@@ -9,7 +9,6 @@ module ring-theory.ideals-semirings where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels

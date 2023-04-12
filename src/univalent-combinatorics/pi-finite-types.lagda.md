@@ -17,7 +17,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
@@ -60,7 +59,7 @@ open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -335,7 +334,7 @@ pr2 (coprod-π-Finite k A B) =
 
 ```agda
 Maybe-π-Finite :
-  {l : Level} (k : ℕ) → π-Finite  l k → π-Finite l k
+  {l : Level} (k : ℕ) → π-Finite l k → π-Finite l k
 Maybe-π-Finite k A =
   coprod-π-Finite k A (unit-π-Finite k)
 

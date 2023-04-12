@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-higher-groups
+
+open import higher-group-theory.homomorphisms-higher-groups
 ```
 
 </details>

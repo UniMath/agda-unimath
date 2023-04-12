@@ -48,11 +48,19 @@ module _
   leq-poset-Prop : (x y : element-Poset) → Prop l2
   leq-poset-Prop = pr1 (pr2 X)
 
-  leq-Poset : (x y : element-Poset) →  UU l2
+  leq-Poset : (x y : element-Poset) → UU l2
   leq-Poset x y = type-Prop (leq-poset-Prop x y)
 
   is-prop-leq-Poset : (x y : element-Poset) → is-prop (leq-Poset x y)
   is-prop-leq-Poset x y = is-prop-type-Prop (leq-poset-Prop x y)
+
+  concatenate-eq-leq-Poset :
+    {x y z : element-Poset} → x ＝ y → leq-Poset y z → leq-Poset x z
+  concatenate-eq-leq-Poset refl H = H
+
+  concatenate-leq-eq-Poset :
+    {x y z : element-Poset} → leq-Poset x y → y ＝ z → leq-Poset x z
+  concatenate-leq-eq-Poset H refl = H
 
   refl-leq-Poset : (x : element-Poset) → leq-Poset x x
   refl-leq-Poset = pr1 (pr1 (pr2 (pr2 X)))

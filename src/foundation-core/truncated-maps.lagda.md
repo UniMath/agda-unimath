@@ -314,7 +314,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (k : 𝕋)  {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   {f : (x : A) → B x → C x}
   where
 

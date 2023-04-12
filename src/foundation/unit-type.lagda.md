@@ -153,4 +153,13 @@ raise-unit-Prop :
   (l1 : Level) → Prop l1
 pr1 (raise-unit-Prop l1) = raise-unit l1
 pr2 (raise-unit-Prop l1) = is-prop-raise-unit
+
+abstract
+  is-set-raise-unit :
+    {l1 : Level} → is-set (raise-unit l1)
+  is-set-raise-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-raise-unit
+
+raise-unit-Set : Set lzero
+pr1 raise-unit-Set = unit
+pr2 raise-unit-Set = is-set-unit
 ```
