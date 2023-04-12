@@ -26,6 +26,10 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.agda": "agda",
+    "*.md": "markdown"
+  },
 
   "[agda]": {
     "editor.tabSize": 2,
