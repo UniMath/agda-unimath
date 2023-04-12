@@ -45,23 +45,21 @@ module _
   {l1 : Level} (P : ℕ → Prop l1)
   where
 
-  abstract
-    all-elements-equal-minimal-element-ℕ :
-      all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
-    all-elements-equal-minimal-element-ℕ
-      (pair x (pair p l)) (pair y (pair q k)) =
-      eq-type-subtype
-        ( λ n →
-          prod-Prop
-            ( pair _ (is-prop-type-Prop (P n)))
-            ( is-lower-bound-ℕ-Prop n))
-        ( antisymmetric-leq-ℕ x y (l y q) (k x p))
+  all-elements-equal-minimal-element-ℕ :
+    all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
+  all-elements-equal-minimal-element-ℕ
+    (pair x (pair p l)) (pair y (pair q k)) =
+    eq-type-subtype
+      ( λ n →
+        prod-Prop
+          ( pair _ (is-prop-type-Prop (P n)))
+          ( is-lower-bound-ℕ-Prop n))
+      ( antisymmetric-leq-ℕ x y (l y q) (k x p))
 
-  abstract
-    is-prop-minimal-element-ℕ :
-      is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
-    is-prop-minimal-element-ℕ =
-      is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
+  is-prop-minimal-element-ℕ :
+    is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
+  is-prop-minimal-element-ℕ =
+    is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
 
   minimal-element-ℕ-Prop : Prop l1
   pr1 minimal-element-ℕ-Prop = minimal-element-ℕ (λ n → type-Prop (P n))
@@ -86,21 +84,10 @@ well-ordering-principle-succ-ℕ :
   (n : ℕ) (p : P (succ-ℕ n)) →
   is-decidable (P zero-ℕ) →
   minimal-element-ℕ (λ m → P (succ-ℕ m)) → minimal-element-ℕ P
-pr1 (well-ordering-principle-succ-ℕ P d n p (inl p0) _) = zero-ℕ
-pr1 (pr2 (well-ordering-principle-succ-ℕ P d n p (inl p0) _)) = p0
-pr2 (pr2 (well-ordering-principle-succ-ℕ P d n p (inl p0) _)) m q = leq-zero-ℕ m
-pr1
-  ( well-ordering-principle-succ-ℕ P d n p
-    (inr neg-p0) (pair m (pair pm is-min-m))) = succ-ℕ m
-pr1
-  ( pr2
-    ( well-ordering-principle-succ-ℕ P d n p
-      (inr neg-p0) (pair m (pair pm is-min-m)))) = pm
-pr2
-  ( pr2
-    ( well-ordering-principle-succ-ℕ P d n p
-      (inr neg-p0) (pair m (pair pm is-min-m)))) =
-  is-minimal-element-succ-ℕ P d m pm is-min-m neg-p0
+well-ordering-principle-succ-ℕ P d n p (inl p0) u =
+  ( 0 , p0 , λ m q → leq-zero-ℕ m)
+well-ordering-principle-succ-ℕ P d n p (inr neg-p0) (m , pm , is-min-m) =
+  ( succ-ℕ m , pm , is-minimal-element-succ-ℕ P d m pm is-min-m neg-p0)
 
 well-ordering-principle-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →

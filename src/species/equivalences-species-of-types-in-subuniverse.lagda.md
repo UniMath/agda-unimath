@@ -10,7 +10,6 @@ module species.equivalences-species-of-types-in-subuniverse where
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.subuniverses
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.species-of-types-in-subuniverse

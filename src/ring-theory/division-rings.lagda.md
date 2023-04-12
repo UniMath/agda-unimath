@@ -13,8 +13,8 @@ open import foundation.negation
 open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings
-open import ring-theory.nontrivial-rings
 open import ring-theory.rings
+open import ring-theory.trivial-rings
 ```
 
 </details>

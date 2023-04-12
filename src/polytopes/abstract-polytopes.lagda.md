@@ -11,7 +11,6 @@ open import elementary-number-theory
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations

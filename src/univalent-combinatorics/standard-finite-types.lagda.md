@@ -9,6 +9,7 @@ module univalent-combinatorics.standard-finite-types where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -186,7 +187,7 @@ upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
 upper-bound-nat-Fin' :
   (k : ℕ) (x : Fin k) → leq-ℕ (nat-Fin k x) k
 upper-bound-nat-Fin' k x =
-  leq-le-ℕ {nat-Fin k x} {k} (strict-upper-bound-nat-Fin k x)
+  leq-le-ℕ (nat-Fin k x) k (strict-upper-bound-nat-Fin k x)
 
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =

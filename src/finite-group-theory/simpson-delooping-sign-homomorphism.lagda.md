@@ -53,12 +53,13 @@ open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
 open import group-theory.symmetric-groups
 
+open import lists.lists
+
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
 

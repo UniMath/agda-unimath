@@ -110,6 +110,18 @@ is-decidable-prod' (inl a) d with d a
 ... | inl b = inl (pair a b)
 ... | inr nb = inr (nb ∘ pr2)
 is-decidable-prod' (inr na) d = inr (na ∘ pr1)
+
+is-decidable-left-factor :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable (A × B) → B → is-decidable A
+is-decidable-left-factor (inl (pair x y)) b = inl x
+is-decidable-left-factor (inr f) b = inr (λ a → f (pair a b))
+
+is-decidable-right-factor :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable (A × B) → A → is-decidable B
+is-decidable-right-factor (inl (pair x y)) a = inl y
+is-decidable-right-factor (inr f) a = inr (λ b → f (pair a b))
 ```
 
 ### Function types of decidable types are decidable

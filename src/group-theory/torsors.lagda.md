@@ -26,12 +26,13 @@ open import group-theory.concrete-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.group-actions
 open import group-theory.groups
-open import group-theory.higher-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.principal-group-actions
 open import group-theory.symmetric-groups
+
+open import higher-group-theory.higher-groups
 ```
 
 </details>

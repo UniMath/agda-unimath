@@ -8,10 +8,10 @@ module elementary-number-theory.goldbach-conjecture where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

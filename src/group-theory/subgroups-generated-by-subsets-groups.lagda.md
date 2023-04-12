@@ -23,7 +23,9 @@ open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.subgroups
 
-open import univalent-combinatorics.lists
+open import lists.concatenation-lists
+open import lists.lists
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -105,7 +107,7 @@ module _
   inv-formal-combination-subset-Group (cons (pair s x) u) =
     concat-list
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (succ-Fin 2 s) x))
+      ( unit-list (pair (succ-Fin 2 s) x))
 
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →
@@ -117,7 +119,7 @@ module _
   preserves-inv-ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (inr star) x))) ∙
+      ( unit-list (pair (inr star) x))) ∙
       ( ( ap
         ( λ y → mul-Group G y (mul-Group G (inclusion-subtype S x) (unit-Group G)))
         ( preserves-inv-ev-formal-combination-subset-Group u)) ∙
@@ -132,7 +134,7 @@ module _
   preserves-inv-ev-formal-combination-subset-Group (cons (pair (inr star) x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (inl (inr star)) x))) ∙
+      ( unit-list (pair (inl (inr star)) x))) ∙
       ( ( ap
         ( λ y →
           mul-Group G y (mul-Group G (inv-Group G (inclusion-subtype S x)) (unit-Group G)))
@@ -216,7 +218,7 @@ module _
   contains-subset-subgroup-subset-Group s H =
     unit-trunc-Prop
       ( pair
-        ( in-list (pair (inr star) (pair s H)))
+        ( unit-list (pair (inr star) (pair s H)))
         ( right-unit-law-mul-Group G (inclusion-subtype S (pair s H))))
 
   contains-formal-combinations-Subgroup :
