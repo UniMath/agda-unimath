@@ -21,11 +21,9 @@ open import orthogonal-factorization-systems.modal-operators
 ## Idea
 
 A **reflective subuniverse** is a subuniverse `P` together with a modal operator
-`○` such that `○ A` is in `P` for all small types `A` and a modal unit with the
-property that the types in `P` are local at the modal unit of all small types
-`A`.
-
-Hence the modal types with respect to `○` are precisely the types in the
+`○` such that `○ A` is in `P` for all small types `A`, and a modal unit with the
+property that the types in `P` are local at the modal unit for all small types
+`A`. Hence the modal types with respect to `○` are precisely the types in the
 reflective subuniverse.
 
 ## Definition
