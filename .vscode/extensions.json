@@ -7,6 +7,7 @@
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
     "dbankier.vscode-quick-select",
-    "github.vscode-pull-request-github"
+    "github.vscode-pull-request-github",
+    "fredrikbakke.agda-syntax"
   ]
 }
