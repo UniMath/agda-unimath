@@ -1,8 +1,6 @@
 # The combinator of directed trees
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module trees.combinator-directed-trees where
 ```
 
@@ -16,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.isolated-points
 open import foundation.negation
 open import foundation.universe-levels
 
@@ -109,12 +108,11 @@ module _
     node-combinator-Directed-Tree → UU (l1 ⊔ l2)
   is-root-combinator-Directed-Tree x = root-combinator-Directed-Tree ＝ x
 
-  is-decidable-is-root-combinator-Directed-Tree :
-    (x : node-combinator-Directed-Tree) →
-    is-decidable (is-root-combinator-Directed-Tree x)
-  is-decidable-is-root-combinator-Directed-Tree root-combinator-Directed-Tree =
+  is-isolated-root-combinator-Directed-Tree :
+    is-isolated root-combinator-Directed-Tree
+  is-isolated-root-combinator-Directed-Tree root-combinator-Directed-Tree =
     inl refl
-  is-decidable-is-root-combinator-Directed-Tree
+  is-isolated-root-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree a x) =
     inr (λ ())
 
@@ -132,7 +130,7 @@ module _
         ( node-inclusion-combinator-Directed-Tree a x))
       ( node-inclusion-combinator-Directed-Tree a)
       ( edge-inclusion-combinator-Directed-Tree a x)
-      ( {!!} , {!!})
+      ( parent-is-not-root-Directed-Tree (T a) x f)
 
   center-unique-parent-combinator-Directed-Tree' :
     ( x : node-combinator-Directed-Tree) →
@@ -141,18 +139,109 @@ module _
   center-unique-parent-combinator-Directed-Tree'
     root-combinator-Directed-Tree f = ex-falso (f refl)
   center-unique-parent-combinator-Directed-Tree'
-    ( node-inclusion-combinator-Directed-Tree a x) f = {!!}
+    ( node-inclusion-combinator-Directed-Tree a x) f =
+    cases-center-unique-parent-combinator-Directed-Tree' a x
+      ( is-isolated-root-Directed-Tree (T a) x)
 
-  unique-parent-combinator-Directed-Tree' :
-    ( x : node-combinator-Directed-Tree) →
-    ¬ (is-root-combinator-Directed-Tree x) →
-    is-contr
-      ( Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x))
-  unique-parent-combinator-Directed-Tree' x f = {!!}
+  cases-center-unique-parent-combinator-Directed-Tree :
+    (a : A) (x : node-Directed-Tree (T a)) →
+    is-decidable (is-root-Directed-Tree (T a) x) →
+    Σ ( node-combinator-Directed-Tree)
+      ( edge-combinator-Directed-Tree
+        ( node-inclusion-combinator-Directed-Tree a x))
+  cases-center-unique-parent-combinator-Directed-Tree a ._ (inl refl) =
+    root-combinator-Directed-Tree ,
+    edge-to-root-combinator-Directed-Tree a
+  cases-center-unique-parent-combinator-Directed-Tree a x (inr f) =
+    map-Σ
+      ( edge-combinator-Directed-Tree
+        ( node-inclusion-combinator-Directed-Tree a x))
+      ( node-inclusion-combinator-Directed-Tree a)
+      ( edge-inclusion-combinator-Directed-Tree a x)
+      ( parent-is-not-root-Directed-Tree (T a) x f)
+
+  center-unique-parent-combinator-Directed-Tree :
+    (x : node-combinator-Directed-Tree) →
+    is-root-combinator-Directed-Tree x +
+    Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)
+  center-unique-parent-combinator-Directed-Tree root-combinator-Directed-Tree =
+    inl refl
+  center-unique-parent-combinator-Directed-Tree
+    ( node-inclusion-combinator-Directed-Tree a x) =
+    inr
+      ( cases-center-unique-parent-combinator-Directed-Tree a x
+        ( is-isolated-root-Directed-Tree (T a) x))
+
+  cases-contraction-unique-parent-combinator-Directed-Tree :
+    (a : A) (x : node-Directed-Tree (T a)) →
+    (d : is-decidable (is-root-Directed-Tree (T a) x)) →
+    ( p :
+      Σ ( node-combinator-Directed-Tree)
+        ( edge-combinator-Directed-Tree
+          ( node-inclusion-combinator-Directed-Tree a x))) →
+    cases-center-unique-parent-combinator-Directed-Tree a x d ＝ p
+  cases-contraction-unique-parent-combinator-Directed-Tree a ._
+    ( inl r)
+    ( ._ , edge-to-root-combinator-Directed-Tree .a) =
+    ap
+      ( λ u →
+        cases-center-unique-parent-combinator-Directed-Tree a
+          ( root-Directed-Tree (T a))
+          ( inl u))
+      ( eq-refl-root-Directed-Tree (T a) r)
+  cases-contraction-unique-parent-combinator-Directed-Tree a ._
+    ( inr f)
+    ( ._ , edge-to-root-combinator-Directed-Tree .a) =
+    ex-falso (f refl)
+  cases-contraction-unique-parent-combinator-Directed-Tree a ._
+    ( inl refl)
+    ( ._ , edge-inclusion-combinator-Directed-Tree .a ._ y e) =
+    ex-falso (no-parent-root-Directed-Tree (T a) (y , e))
+  cases-contraction-unique-parent-combinator-Directed-Tree a x
+    ( inr f)
+    ( ._ , edge-inclusion-combinator-Directed-Tree .a .x y e) =
+    ap
+      ( map-Σ
+        ( edge-combinator-Directed-Tree
+          ( node-inclusion-combinator-Directed-Tree a x))
+        ( node-inclusion-combinator-Directed-Tree a)
+        ( edge-inclusion-combinator-Directed-Tree a x))
+      ( eq-is-contr (unique-parent-is-not-root-Directed-Tree (T a) x f))
+
+  contraction-unique-parent-combinator-Directed-Tree :
+    (x : node-combinator-Directed-Tree) →
+    (p : is-root-combinator-Directed-Tree x +
+         Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)) →
+    center-unique-parent-combinator-Directed-Tree x ＝ p
+  contraction-unique-parent-combinator-Directed-Tree ._ (inl refl) = refl
+  contraction-unique-parent-combinator-Directed-Tree
+    ( node-inclusion-combinator-Directed-Tree a x)
+    ( inr (y , e)) =
+    ap
+      ( inr)
+      ( cases-contraction-unique-parent-combinator-Directed-Tree a x
+        ( is-isolated-root-Directed-Tree (T a) x)
+        ( y , e))
 
   unique-parent-combinator-Directed-Tree :
     unique-parent-Directed-Graph
       ( graph-combinator-Directed-Tree)
       ( root-combinator-Directed-Tree)
-  unique-parent-combinator-Directed-Tree = {!!}
+  pr1 (unique-parent-combinator-Directed-Tree x) =
+    center-unique-parent-combinator-Directed-Tree x
+  pr2 (unique-parent-combinator-Directed-Tree x) =
+    contraction-unique-parent-combinator-Directed-Tree x
+
+  is-tree-combinator-Directed-Tree :
+    is-tree-Directed-Graph graph-combinator-Directed-Tree
+  is-tree-combinator-Directed-Tree =
+    is-tree-unique-parent-Directed-Graph
+      graph-combinator-Directed-Tree
+      root-combinator-Directed-Tree
+      unique-parent-combinator-Directed-Tree
+      walk-to-root-combinator-Directed-Tree
+
+  combinator-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2 ⊔ l3)
+  pr1 combinator-Directed-Tree = graph-combinator-Directed-Tree
+  pr2 combinator-Directed-Tree = is-tree-combinator-Directed-Tree
 ```

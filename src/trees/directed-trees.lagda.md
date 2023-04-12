@@ -407,4 +407,23 @@ module _
     center-unique-parent-Directed-Tree x
   pr2 (unique-parent-Directed-Tree x) =
     contraction-unique-parent-Directed-Tree x
+
+  unique-parent-is-not-root-Directed-Tree :
+    (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
+    is-contr (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+  unique-parent-is-not-root-Directed-Tree x f =
+    is-contr-equiv'
+      ( ( is-root-Directed-Tree T x) +
+        ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x)))
+      ( left-unit-law-coprod-is-empty
+        ( is-root-Directed-Tree T x)
+        ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+        ( f))
+      ( unique-parent-Directed-Tree x)
+
+  parent-is-not-root-Directed-Tree :
+    (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
+    Σ (node-Directed-Tree T) (edge-Directed-Tree T x)
+  parent-is-not-root-Directed-Tree x f =
+    center (unique-parent-is-not-root-Directed-Tree x f)
 ```
