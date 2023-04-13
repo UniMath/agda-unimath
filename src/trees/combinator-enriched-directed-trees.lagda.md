@@ -24,7 +24,9 @@ open import trees.enriched-directed-trees
 
 ## Idea
 
-Given an element `a : A` and a map `T : B(a) → Enriched-Directed-Tree A B`, we construct an enriched directed tree that combines the trees `T` into a single tree.
+Given an element `a : A` and a map `T : B(a) → Enriched-Directed-Tree A B`, we
+construct an enriched directed tree that combines the trees `T` into a single
+tree.
 
 ## Definition
 
