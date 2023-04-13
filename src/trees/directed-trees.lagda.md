@@ -86,6 +86,15 @@ module _
   walk-Directed-Tree : (x y : node-Directed-Tree) → UU (l1 ⊔ l2)
   walk-Directed-Tree = walk-Directed-Graph graph-Directed-Tree
 
+  refl-walk-Directed-Tree :
+    {x : node-Directed-Tree} → walk-Directed-Tree x x
+  refl-walk-Directed-Tree = refl-walk-Directed-Graph
+
+  cons-walk-Directed-Tree :
+    {x y z : node-Directed-Tree} (e : edge-Directed-Tree x y) →
+    walk-Directed-Tree y z → walk-Directed-Tree x z
+  cons-walk-Directed-Tree = cons-walk-Directed-Graph
+
   is-tree-Directed-Tree : is-tree-Directed-Graph graph-Directed-Tree
   is-tree-Directed-Tree = pr2 T
 
