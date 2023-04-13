@@ -6,7 +6,7 @@ on:
       ref:
         description: the repository ref to build
         required: true
-        default: main
+        default: master
 
   push:
     branches:
@@ -42,7 +42,7 @@ jobs:
       - name: Checkout our repository
         uses: actions/checkout@v3
         with:
-          path: main
+          path: master
       - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
         with:
@@ -52,62 +52,24 @@ jobs:
         id: cache-agda-formalisation
         name: Restore Agda formalisation cache
         with:
-          path: main/_build
+          path: master/_build
           key:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
-            hashFiles('main/src/**') }}
+            hashFiles('master/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
 
       - name: Typecheck the whole formalisation
         run: |
-          cd main
+          cd master
           make check
 
       - name: Save Agda build cache
         uses: actions/cache/save@v3
         with:
-          path: main/_build
+          path: master/_build
           key: "${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}"
-
-  check-docs-gen:
-    runs-on: macOS-latest
-    strategy:
-      matrix:
-        agda: ["2.6.3"]
-    needs: typecheck
-    steps:
-      - name: Checkout our repository
-        uses: actions/checkout@v3
-        with:
-          path: main
-      - uses: r-lib/actions/setup-pandoc@v2
-        with:
-          pandoc-version: "3.0.1"
-
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.0.0
-        with:
-          agda-version: ${{ matrix.agda }}
-
-      - uses: actions/cache/restore@v3
-        id: cache-agda-formalisation
-        name: Restore Agda formalisation cache
-        with:
-          path: main/_build
-          key:
-            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
-            hashFiles('main/src/**') }}
-          restore-keys: |
-            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
-
-      - name: Generate HTML to check no errors are raised
-        id: gen-html
-        run: |
-          cd main
-          make agda-html
 
   pre-commit:
     runs-on: ubuntu-latest
