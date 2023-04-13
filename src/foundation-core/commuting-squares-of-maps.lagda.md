@@ -79,5 +79,3 @@ coherence-square-maps-comp-vertical
   top left-top right-top mid left-bottom right-bottom bottom sq-top sq-bottom =
   (sq-bottom ·r left-top) ∙h (right-bottom ·l sq-top)
 ```
-
-### Any commuting square of maps induces a commuting square of function spaces

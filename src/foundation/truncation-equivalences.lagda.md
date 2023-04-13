@@ -1,4 +1,4 @@
-# `k`-equivalences
+# `k`-Equivalences
 
 ```agda
 module foundation.truncation-equivalences where
@@ -15,8 +15,8 @@ open import foundation.functoriality-function-types
 open import foundation.functoriality-truncation
 open import foundation.homotopies
 open import foundation.truncated-types
-open import foundation.truncations
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.universe-levels
 ```
 
@@ -24,7 +24,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A map `f : A → B` is said to be a `k`-equivalence if the map `map-trunc k f : trunc k A → trunc k B` is an equivalence.
+A map `f : A → B` is said to be a `k`-equivalence if the map
+`map-trunc k f : trunc k A → trunc k B` is an equivalence.
 
 ## Definition
 
@@ -65,7 +66,11 @@ is-equiv-precomp-is-truncation-equivalence k f H X =
     ( precomp unit-trunc (type-Truncated-Type X))
     ( precomp (map-trunc k f) (type-Truncated-Type X))
     ( precomp f (type-Truncated-Type X))
-    ( htpy-precomp
+    ( precomp-coherence-square-maps
+      ( unit-trunc)
+      ( f)
+      ( map-trunc k f)
+      ( unit-trunc)
       ( inv-htpy (coherence-square-map-trunc k f))
       ( type-Truncated-Type X))
     ( is-truncation-trunc X)
@@ -88,10 +93,29 @@ is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
         ( precomp unit-trunc (type-Truncated-Type X))
         ( precomp (map-trunc k f) (type-Truncated-Type X))
         ( precomp f (type-Truncated-Type X))
-        ( htpy-precomp
+        ( precomp-coherence-square-maps
+          ( unit-trunc)
+          ( f)
+          ( map-trunc k f)
+          ( unit-trunc)
           ( inv-htpy (coherence-square-map-trunc k f))
           ( type-Truncated-Type X))
         ( is-truncation-trunc X)
         ( is-truncation-trunc X)
         ( H _ X))
 ```
+
+## References
+
+The notion of `k`-equivalence is a special case of the notion of
+`L`-equivalence, where `L` is a reflective subuniverse. They were studied in the
+paper
+
+- J. D. Christensen, M. Opie, E. Rijke, and L. Scoccola. Localization in
+  Homotopy Type Theory. Higher Structures, 2020.
+
+The class of `k`-equivalences is left orthogonal to the class of `k`-étale maps.
+This was shown in
+
+- F. Cherubini, and E. Rijke. Modal descent. Mathematical Structures in Computer
+  Science, 2021.

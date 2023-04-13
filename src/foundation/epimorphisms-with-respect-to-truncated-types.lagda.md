@@ -7,14 +7,18 @@ module foundation.epimorphisms-with-respect-to-truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-maps
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-function-types
+open import foundation.functoriality-truncation
+open import foundation.homotopies
 open import foundation.propositions
 open import foundation.truncated-types
 open import foundation.truncation-equivalences
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.universe-levels
 ```
 
@@ -22,7 +26,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A map `f : A → B` is said to be a **`k`-epimorphism** if the precomposition function
+A map `f : A → B` is said to be a **`k`-epimorphism** if the precomposition
+function
 
 ```md
   - ∘ f : (B → X) → (A → X)
@@ -76,4 +81,32 @@ is-epimorphism-is-truncation-equivalence-Truncated-Type :
   is-epimorphism-Truncated-Type l k f
 is-epimorphism-is-truncation-equivalence-Truncated-Type l k f H X =
   is-emb-is-equiv (is-equiv-precomp-is-truncation-equivalence k f H X)
+```
+
+### A map is a `k`-epimorphism if and only if its `k`-truncation is a `k`-epimorphism
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-epimorphism-is-epimorphism-map-trunc-Truncated-Type :
+    is-epimorphism-Truncated-Type l3 k (map-trunc k f) →
+    is-epimorphism-Truncated-Type l3 k f
+  is-epimorphism-is-epimorphism-map-trunc-Truncated-Type H X =
+    is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps
+      ( precomp (map-trunc k f) (type-Truncated-Type X))
+      ( precomp unit-trunc (type-Truncated-Type X))
+      ( precomp unit-trunc (type-Truncated-Type X))
+      ( precomp f (type-Truncated-Type X))
+      ( precomp-coherence-square-maps
+        ( unit-trunc)
+        ( f)
+        ( map-trunc k f)
+        ( unit-trunc)
+        ( inv-htpy (coherence-square-map-trunc k f))
+        ( type-Truncated-Type X))
+      ( is-truncation-trunc X)
+      ( is-truncation-trunc X)
+      ( H X)
 ```

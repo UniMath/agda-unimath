@@ -16,7 +16,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A map `f : A → B` is said to be an **epimorphism** if the precomposition function
+A map `f : A → B` is said to be an **epimorphism** if the precomposition
+function
 
 ```md
   - ∘ f : (B → X) → (A → X)
@@ -32,4 +33,3 @@ is-epimorphism :
   (A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
 is-epimorphism l f = (X : UU l) → is-emb (precomp f X)
 ```
-

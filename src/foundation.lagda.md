@@ -86,7 +86,9 @@ open import foundation.effective-maps-equivalence-relations public
 open import foundation.embeddings public
 open import foundation.empty-types public
 open import foundation.endomorphisms public
+open import foundation.epimorphisms public
 open import foundation.epimorphisms-with-respect-to-sets public
+open import foundation.epimorphisms-with-respect-to-truncated-types public
 open import foundation.equality-cartesian-product-types public
 open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
@@ -236,6 +238,7 @@ open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
+open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncations public

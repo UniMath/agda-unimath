@@ -9,6 +9,7 @@ module foundation.embeddings where
 ```agda
 open import foundation-core.embeddings public
 
+open import foundation.commuting-squares-of-maps
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.truncated-maps
@@ -293,4 +294,53 @@ module _
       is-emb-is-prop-map
         ( is-trunc-is-pullback' neg-one-𝕋 f g c pb
           ( is-prop-map-is-emb is-emb-f))
+```
+
+### In a commuting square of which the sides are embeddings, the top map is an embedding if and only if the bottom map is an embedding
+
+### In a commuting square of which the sides are equivalences, the top map is an embedding if and only if the bottom map is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (H : coherence-square-maps top left right bottom)
+  where
+
+  is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps :
+    is-equiv left → is-equiv right → is-emb bottom → is-emb top
+  is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps K L M =
+    is-emb-right-factor
+      ( right)
+      ( top)
+      ( is-emb-is-equiv L)
+      ( is-emb-htpy'
+        ( bottom ∘ left)
+        ( right ∘ top)
+        ( H)
+        ( is-emb-comp bottom left M (is-emb-is-equiv K)))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (H : coherence-square-maps top left right bottom)
+  where
+
+  is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps :
+    is-equiv left → is-equiv right → is-emb top → is-emb bottom
+  is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps K L M =
+    is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps
+      ( bottom)
+      ( map-inv-is-equiv K)
+      ( map-inv-is-equiv L)
+      ( top)
+      ( coherence-square-inv-vertical
+        ( top)
+        ( left , K)
+        ( right , L)
+        ( bottom)
+        ( H))
+      ( is-equiv-map-inv-is-equiv K)
+      ( is-equiv-map-inv-is-equiv L)
+      ( M)
 ```

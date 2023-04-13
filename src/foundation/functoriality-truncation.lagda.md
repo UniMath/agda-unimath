@@ -34,7 +34,7 @@ action of truncations.
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   unique-map-trunc :
     is-contr
       ( Σ ( type-trunc k A → type-trunc k B)
