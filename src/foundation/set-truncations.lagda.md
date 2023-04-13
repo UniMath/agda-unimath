@@ -417,6 +417,21 @@ module _
     pr2 (center uniqueness-trunc-Set')
 ```
 
+### The set truncation of a set is equivalent to the set
+
+```agda
+module _
+  {l : Level} (A : Set l)
+  where
+
+  equiv-unit-trunc-set :
+    type-Set A ≃ type-trunc-Set (type-Set A)
+  equiv-unit-trunc-set =
+    equiv-unit-trunc A
+```
+
+### Distributive of set truncation over coproduct
+
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)

@@ -37,6 +37,15 @@ open import higher-group-theory.higher-groups
 
 </details>
 
+## Idea
+
+A torsor of `G` is a group action wich equivalent to the principal group action
+of `G`.
+
+## Definitions
+
+### Torsors
+
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
@@ -105,13 +114,23 @@ module _
     {l : Level} (X : Torsor-Abstract-Group l) →
     is-torsor-Abstract-Group G (action-Torsor-Abstract-Group X)
   is-torsor-action-Torsor-Abstract-Group = pr2
+```
 
+### Principal torsor
+
+```agda
   principal-Torsor-Abstract-Group : Torsor-Abstract-Group l1
   pr1 principal-Torsor-Abstract-Group = principal-Abstract-Group-Action G
   pr2 principal-Torsor-Abstract-Group =
     unit-trunc-Prop
       ( id-equiv-Abstract-Group-Action G (principal-Abstract-Group-Action G))
+```
 
+## Properties
+
+### Characterization of the identity type of `Torsor-Abstract-Group`
+
+```agda
 module _
   {l1 l2 : Level} (G : Group l1) (X : Torsor-Abstract-Group G l2)
   where
@@ -162,7 +181,11 @@ module _
     equiv-eq-Torsor-Abstract-Group Y
   pr2 (extensionality-Torsor-Abstract-Group Y) =
     is-equiv-equiv-eq-Torsor-Abstract-Group Y
+```
 
+### Characterization of the identity type of equivalences between `Torsor-Abstract-Group`
+
+```agda
 module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Torsor-Abstract-Group G l2)
   (Y : Torsor-Abstract-Group G l3) (e : equiv-Torsor-Abstract-Group G X Y)
@@ -219,7 +242,11 @@ module _
     htpy-equiv-Torsor-Abstract-Group f → Id e f
   eq-htpy-equiv-Torsor-Abstract-Group f =
     map-inv-is-equiv (is-equiv-htpy-eq-equiv-Torsor-Abstract-Group f)
+```
 
+### Definition of the Group `aut-principal-Torsor-Abstract-Group` from a `Torsor-Abstract-Group`
+
+```agda
 module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Torsor-Abstract-Group G l2)
   (Y : Torsor-Abstract-Group G l3)
@@ -411,7 +438,11 @@ module _
     right-inverse-law-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
+```
 
+### The type `Torsor-Abstract-Group` is `0-connected`
+
+```agda
 module _
   {l1 l2 : Level} (G : Group l1) (X : Torsor-Abstract-Group G l2)
   where
@@ -449,7 +480,11 @@ module _
     is-0-connected-mere-eq
       ( principal-Torsor-Abstract-Group G)
       ( mere-eq-Torsor-Abstract-Group G (principal-Torsor-Abstract-Group G))
+```
 
+### The group `aut-principal-Torsor-Abstract-Group` is isomorphic to `G`
+
+```agda
 module _
   {l1 : Level} (G : Group l1)
   where
@@ -584,7 +619,11 @@ module _
         ( principal-Torsor-Abstract-Group G)
         ( principal-Torsor-Abstract-Group G)
         ( q)))
+```
 
+### From torsors to concrete group
+
+```agda
   ∞-group-Group : ∞-Group (lsuc l1)
   pr1 (pr1 ∞-group-Group) = Torsor-Abstract-Group G l1
   pr2 (pr1 ∞-group-Group) = principal-Torsor-Abstract-Group G

@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositions
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
@@ -108,4 +109,13 @@ module _
     (x : type-∞-Group) → Id (mul-∞-Group x (inv-∞-Group x)) unit-∞-Group
   right-inverse-law-mul-∞-Group =
     right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
+```
+
+### Unit type as a higher group
+
+```agda
+unit-type-∞-Group : {l : Level} → ∞-Group l
+unit-type-∞-Group =
+  ( (raise-unit _) , raise-star) ,
+  is-0-connected-is-contr (raise-unit _) is-contr-raise-unit
 ```
