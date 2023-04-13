@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
+open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 ```
@@ -21,7 +22,9 @@ open import trees.directed-trees
 
 ## Idea
 
-The fiber of a directed tree `T` at a node `x` consists of all nodes `y` equipped with a walk `w : walk T y x`. An edge from `(y, w)` to `(z , v)` consists of an edge `e : edge T x y` such that `w ＝ cons-walk e v`.
+The fiber of a directed tree `T` at a node `x` consists of all nodes `y`
+equipped with a walk `w : walk T y x`. An edge from `(y, w)` to `(z , v)`
+consists of an edge `e : edge T x y` such that `w ＝ cons-walk e v`.
 
 ## Definitions
 
@@ -84,6 +87,26 @@ module _
   graph-fiber-Directed-Tree : Directed-Graph (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 graph-fiber-Directed-Tree = node-fiber-Directed-Tree
   pr2 graph-fiber-Directed-Tree = edge-fiber-Directed-Tree
+
+  walk-fiber-Directed-Tree : (y z : node-fiber-Directed-Tree) → UU (l1 ⊔ l2)
+  walk-fiber-Directed-Tree = walk-Directed-Graph graph-fiber-Directed-Tree
+
+  walk-to-root-fiber-walk-Directed-Tree :
+    (y : node-Directed-Tree T) (w : walk-Directed-Tree T y x) →
+    walk-fiber-Directed-Tree (y , w) root-fiber-Directed-Tree
+  walk-to-root-fiber-walk-Directed-Tree y refl-walk-Directed-Graph =
+    refl-walk-Directed-Graph
+  walk-to-root-fiber-walk-Directed-Tree .y
+    ( cons-walk-Directed-Graph {y} {z} e w) =
+    cons-walk-Directed-Graph
+      ( e , refl)
+      ( walk-to-root-fiber-walk-Directed-Tree z w)
+
+  walk-to-root-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree) →
+    walk-fiber-Directed-Tree y root-fiber-Directed-Tree
+  walk-to-root-fiber-Directed-Tree (y , w) =
+    walk-to-root-fiber-walk-Directed-Tree y w
 ```
 
 ### The fiber of `T` at `x`
@@ -93,10 +116,41 @@ module _
     (y : node-fiber-Directed-Tree) →
     ( is-root-fiber-Directed-Tree y) +
     ( Σ ( node-fiber-Directed-Tree) ( edge-fiber-Directed-Tree y))
-  center-unique-parent-fiber-Directed-Tree y = {!!}
+  center-unique-parent-fiber-Directed-Tree (y , refl-walk-Directed-Graph) =
+    inl refl
+  center-unique-parent-fiber-Directed-Tree
+    ( y , cons-walk-Directed-Graph {y} {z} e w) = inr ((z , w) , (e , refl))
+
+  contraction-unique-parent-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree) →
+    ( p :
+      ( is-root-fiber-Directed-Tree y) +
+      ( Σ ( node-fiber-Directed-Tree) (edge-fiber-Directed-Tree y))) →
+    center-unique-parent-fiber-Directed-Tree y ＝ p
+  contraction-unique-parent-fiber-Directed-Tree ._ (inl refl) = refl
+  contraction-unique-parent-fiber-Directed-Tree
+    ( y , .(cons-walk-Directed-Graph e v)) (inr ((z , v) , e , refl)) =
+    refl
 
   unique-parent-fiber-Directed-Tree :
-    ( x : node-fiber-Directed-Tree) →
-    unique-parent-Directed-Graph (graph-fiber-Directed-Tree) x
-  unique-parent-fiber-Directed-Tree x = {!!}
+    unique-parent-Directed-Graph
+      ( graph-fiber-Directed-Tree)
+      ( root-fiber-Directed-Tree)
+  pr1 (unique-parent-fiber-Directed-Tree y) =
+    center-unique-parent-fiber-Directed-Tree y
+  pr2 (unique-parent-fiber-Directed-Tree y) =
+    contraction-unique-parent-fiber-Directed-Tree y
+
+  is-tree-fiber-Directed-Tree :
+    is-tree-Directed-Graph graph-fiber-Directed-Tree
+  is-tree-fiber-Directed-Tree =
+    is-tree-unique-parent-Directed-Graph
+      graph-fiber-Directed-Tree
+      root-fiber-Directed-Tree
+      unique-parent-fiber-Directed-Tree
+      walk-to-root-fiber-Directed-Tree
+
+  fiber-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
+  pr1 fiber-Directed-Tree = graph-fiber-Directed-Tree
+  pr2 fiber-Directed-Tree = is-tree-fiber-Directed-Tree
 ```
