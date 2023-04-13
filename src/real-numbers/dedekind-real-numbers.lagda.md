@@ -90,15 +90,21 @@ is-dedekind-cut L U = type-Prop (is-dedekind-cut-Prop L U)
 ### ℝ is a set
 
 ```agda
-is-set-ℝ : (l : Level) → is-set (ℝ l)
-is-set-ℝ l =
-  is-set-Σ
-    ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
-    ( λ x →
-      ( is-set-Σ
-        ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
-        ( λ y →
-          ( is-set-is-prop
-            ( is-prop-type-Prop
-              ( is-dedekind-cut-Prop x y))))))
+abstract
+
+  is-set-ℝ : (l : Level) → is-set (ℝ l)
+  is-set-ℝ l =
+    is-set-Σ
+      ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+      ( λ x →
+        ( is-set-Σ
+          ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+          ( λ y →
+            ( is-set-is-prop
+              ( is-prop-type-Prop
+                ( is-dedekind-cut-Prop x y))))))
+
+ℝ-Set : (l : Level) → Set (lsuc l)
+pr1 (ℝ-Set l) = ℝ l
+pr2 (ℝ-Set l) = is-set-ℝ l
 ```
