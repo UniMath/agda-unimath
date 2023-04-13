@@ -19,7 +19,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
-open import foundation.truncated-types 
+open import foundation.truncated-types
 open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
