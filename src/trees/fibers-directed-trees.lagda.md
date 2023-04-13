@@ -7,6 +7,7 @@ module trees.fibers-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -23,6 +24,8 @@ open import trees.directed-trees
 The fiber of a directed tree `T` at a node `x` consists of all nodes `y` equipped with a walk `w : walk T y x`. An edge from `(y, w)` to `(z , v)` consists of an edge `e : edge T x y` such that `w ＝ cons-walk e v`.
 
 ## Definitions
+
+### The underlying graph of the fiber of `T` at `x`
 
 ```agda
 module _
@@ -43,6 +46,13 @@ module _
     walk-node-inclusion-fiber-Directed-Tree :
       walk-Directed-Tree T node-inclusion-fiber-Directed-Tree x
     walk-node-inclusion-fiber-Directed-Tree = pr2 u
+
+  root-fiber-Directed-Tree : node-fiber-Directed-Tree
+  pr1 root-fiber-Directed-Tree = x
+  pr2 root-fiber-Directed-Tree = refl-walk-Directed-Tree T
+
+  is-root-fiber-Directed-Tree : node-fiber-Directed-Tree → UU (l1 ⊔ l2)
+  is-root-fiber-Directed-Tree y = root-fiber-Directed-Tree ＝ y
 
   edge-fiber-Directed-Tree : (y z : node-fiber-Directed-Tree) → UU (l1 ⊔ l2)
   edge-fiber-Directed-Tree y z =
@@ -74,4 +84,19 @@ module _
   graph-fiber-Directed-Tree : Directed-Graph (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 graph-fiber-Directed-Tree = node-fiber-Directed-Tree
   pr2 graph-fiber-Directed-Tree = edge-fiber-Directed-Tree
+```
+
+### The fiber of `T` at `x`
+
+```agda
+  center-unique-parent-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree) →
+    ( is-root-fiber-Directed-Tree y) +
+    ( Σ ( node-fiber-Directed-Tree) ( edge-fiber-Directed-Tree y))
+  center-unique-parent-fiber-Directed-Tree y = {!!}
+
+  unique-parent-fiber-Directed-Tree :
+    ( x : node-fiber-Directed-Tree) →
+    unique-parent-Directed-Graph (graph-fiber-Directed-Tree) x
+  unique-parent-fiber-Directed-Tree x = {!!}
 ```
