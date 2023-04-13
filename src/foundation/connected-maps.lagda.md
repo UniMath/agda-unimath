@@ -395,6 +395,17 @@ is-connected-map-neg-two-𝕋 :
 is-connected-map-neg-two-𝕋 f b = is-trunc-type-trunc
 ```
 
+### A `(k+1)`-connected map is `k`-connected
+
+```agda
+is-connected-map-is-connected-map-succ-𝕋 :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  {f : A → B} → is-connected-map (succ-𝕋 k) f →
+  is-connected-map k f
+is-connected-map-is-connected-map-succ-𝕋 k H b =
+  is-connected-is-connected-succ-𝕋 k (H b)
+```
+
 ### An equivalence is a `k`-connected map for any `k`
 
 ```agda
@@ -410,10 +421,10 @@ is-connected-map-is-equiv k H b =
 ```agda
 is-connected-map-comp :
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3}
-  {f : A → B} {g : B → C} →
-  is-connected-map k f → is-connected-map k g →
+  (g : B → C) (f : A → B) →
+  is-connected-map k g → is-connected-map k f →
   is-connected-map k (g ∘ f)
-is-connected-map-comp k {f = f} {g = g} H K c =
+is-connected-map-comp k g f K H c =
   is-connected-equiv
     ( k)
     ( equiv-compute-fib-comp g f c)

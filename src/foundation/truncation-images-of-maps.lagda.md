@@ -92,9 +92,9 @@ module _
 
   is-connected-map-unit-trunc-im : is-connected-map k (unit-trunc-im k f)
   is-connected-map-unit-trunc-im =
-    is-connected-map-comp k
-      ( is-connected-map-is-equiv k (is-equiv-map-inv-equiv-total-fib f))
+    is-connected-map-comp k _ _
       ( is-connected-map-tot-is-fiberwise-connected-map k
         ( λ b → unit-trunc)
         ( λ b → is-connected-map-unit-trunc k))
+      ( is-connected-map-is-equiv k (is-equiv-map-inv-equiv-total-fib f))
 ```

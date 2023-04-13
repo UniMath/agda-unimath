@@ -78,6 +78,17 @@ is-connected-is-contr k H =
     λ B → is-equiv-diagonal-is-contr H (type-Truncated-Type B)
 ```
 
+### A type that is `(k+1)`-connected is `k`-connected
+
+```agda
+is-connected-is-connected-succ-𝕋 :
+  {l1 : Level} (k : 𝕋) {A : UU l1} →
+  is-connected (succ-𝕋 k) A → is-connected k A
+is-connected-is-connected-succ-𝕋 k H =
+  is-connected-is-equiv-diagonal
+    λ B → is-equiv-diagonal-is-connected (truncated-type-succ-Truncated-Type k B) H
+```
+
 ### Any type that is equivalent to a `k`-connected type is `k`-connected
 
 ```agda

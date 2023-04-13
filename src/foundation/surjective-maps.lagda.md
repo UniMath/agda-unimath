@@ -464,6 +464,27 @@ is-neg-one-connected-map-is-surjective :
   is-surjective f → is-connected-map neg-one-𝕋 f
 is-neg-one-connected-map-is-surjective H b =
   is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
+
+is-surjective-is-neg-one-connected-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-connected-map neg-one-𝕋 f → is-surjective f
+is-surjective-is-neg-one-connected-map H b = center (H b)
+```
+
+### A (k+1)-connected map is surjective
+
+```agda
+is-surjective-is-connected-map :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  {f : A → B} → is-connected-map (succ-𝕋 k) f →
+  is-surjective f
+is-surjective-is-connected-map neg-two-𝕋 H = is-surjective-is-neg-one-connected-map H
+is-surjective-is-connected-map (succ-𝕋 k) H =
+  is-surjective-is-connected-map
+    ( k)
+    ( is-connected-map-is-connected-map-succ-𝕋
+      ( succ-𝕋 k)
+      ( H))
 ```
 
 ### Precomposing functions into a family of (k+1)-types by a surjective map is a k-truncated map
