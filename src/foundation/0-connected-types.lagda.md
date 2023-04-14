@@ -166,7 +166,7 @@ is-0-connected-equiv' :
 is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
 ```
 
-### `0-connected` types are stable by cartesian products
+### `0-connected` types are closed under cartesian products
 
 ```agda
 module _

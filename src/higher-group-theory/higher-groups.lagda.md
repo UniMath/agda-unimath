@@ -111,11 +111,11 @@ module _
     right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
 ```
 
-### Unit type as a higher group
+### The trivial higher group
 
 ```agda
-unit-type-∞-Group : {l : Level} → ∞-Group l
-unit-type-∞-Group =
+trivial-∞-Group : {l : Level} → ∞-Group l
+trivial-∞-Group =
   ( (raise-unit _) , raise-star) ,
   is-0-connected-is-contr (raise-unit _) is-contr-raise-unit
 ```

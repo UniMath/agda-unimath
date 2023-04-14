@@ -188,12 +188,12 @@ module _
 
 ## Example
 
-### Unit type as concrete group
+### The trivial concrete group
 
 ```agda
-unit-type-Concrete-Group : {l : Level} → Concrete-Group l
-unit-type-Concrete-Group =
-  unit-type-∞-Group ,
+trivial-Concrete-Group : {l : Level} → Concrete-Group l
+trivial-Concrete-Group =
+  trivial-∞-Group ,
   is-trunc-is-contr
      (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
      is-contr-raise-unit
