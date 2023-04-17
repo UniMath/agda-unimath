@@ -39,7 +39,8 @@ open import foundation-core.negation
 
 ## Idea
 
-Any natural number `x` can be written as `(2^u(2v-1))-1` for some pair of natural numbers `(u , v)`
+Any natural number `x` can be written as `(2^u(2v-1))-1` for some pair of
+natural numbers `(u , v)`
 
 ```agda
 pair-expansion : ℕ → UU lzero
