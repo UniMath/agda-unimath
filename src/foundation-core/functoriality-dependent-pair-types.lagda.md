@@ -143,7 +143,8 @@ module _
   pr1 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = y
   pr2 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = refl
 
-  map-inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib (tot f) t
+  map-inv-compute-fib-tot :
+    (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib (tot f) t
   pr1 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = a
   pr2 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = y
   pr2 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl)) = refl
@@ -414,6 +415,17 @@ module _
         ( is-equiv-map-equiv-total-fib f)
         ( is-equiv-map-equiv-total-fib g)
         ( is-equiv-tot-is-fiberwise-equiv E)
+```
+
+### `map-Σ` preserves identity maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  id-map-Σ : map-Σ B id (λ x → id) ~ id
+  id-map-Σ = refl-htpy
 ```
 
 ## See also

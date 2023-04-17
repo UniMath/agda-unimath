@@ -15,6 +15,8 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import graph-theory.equivalences-directed-graphs
@@ -279,4 +281,37 @@ module _
                   ( e)))
               ( is-tree-Directed-Tree' S
                 ( inv-node-equiv-Directed-Tree S T e y)))))
+```
+
+### Equivalences characterize identifications of trees
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  extensionality-Directed-Tree :
+    (S : Directed-Tree l1 l2) → (T ＝ S) ≃ equiv-Directed-Tree T S
+  extensionality-Directed-Tree =
+    extensionality-type-subtype
+      ( is-tree-directed-graph-Prop)
+      ( is-tree-Directed-Tree T)
+      ( id-equiv-Directed-Graph (graph-Directed-Tree T))
+      ( extensionality-Directed-Graph (graph-Directed-Tree T))
+
+  equiv-eq-Directed-Tree :
+    (S : Directed-Tree l1 l2) → (T ＝ S) → equiv-Directed-Tree T S
+  equiv-eq-Directed-Tree S = map-equiv (extensionality-Directed-Tree S)
+
+  eq-equiv-Directed-Tree :
+    (S : Directed-Tree l1 l2) → equiv-Directed-Tree T S → (T ＝ S)
+  eq-equiv-Directed-Tree S = map-inv-equiv (extensionality-Directed-Tree S)
+
+  is-contr-total-equiv-Directed-Tree :
+    is-contr (Σ (Directed-Tree l1 l2) (equiv-Directed-Tree T))
+  is-contr-total-equiv-Directed-Tree =
+    is-contr-equiv'
+      ( Σ (Directed-Tree l1 l2) (λ S → T ＝ S))
+      ( equiv-tot extensionality-Directed-Tree)
+      ( is-contr-total-path T)
 ```

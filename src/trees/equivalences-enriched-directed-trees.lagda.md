@@ -7,13 +7,17 @@ module trees.equivalences-enriched-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import trees.enriched-directed-trees
@@ -213,4 +217,87 @@ htpy-equiv-Enriched-Directed-Tree A B S T e f =
   htpy-hom-Enriched-Directed-Tree A B S T
     ( hom-equiv-Enriched-Directed-Tree A B S T e)
     ( hom-equiv-Enriched-Directed-Tree A B S T f)
+```
+
+## Properties
+
+### Equivalences characterize identifications of enriched directed trees
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
+  (T : Enriched-Directed-Tree l3 l4 A B)
+  where
+
+  extensionality-Enriched-Directed-Tree :
+    (S : Enriched-Directed-Tree l3 l4 A B) →
+    (T ＝ S) ≃ equiv-Enriched-Directed-Tree A B T S
+  extensionality-Enriched-Directed-Tree =
+    extensionality-Σ
+      ( λ {S} sh-enr e →
+        Σ ( ( shape-Enriched-Directed-Tree A B T) ~
+            ( ( pr1 sh-enr) ∘
+              ( node-equiv-Directed-Tree
+                ( directed-tree-Enriched-Directed-Tree A B T)
+                ( S)
+                ( e))))
+          ( λ H →
+            ( x : node-Enriched-Directed-Tree A B T) →
+            ( ( children-equiv-Directed-Tree
+                ( directed-tree-Enriched-Directed-Tree A B T)
+                ( S)
+                ( e)
+                ( x)) ∘
+              ( map-enrichment-Enriched-Directed-Tree A B T x)) ~
+            ( ( map-equiv
+                ( pr2 sh-enr
+                  ( node-equiv-Directed-Tree
+                    ( directed-tree-Enriched-Directed-Tree A B T)
+                    ( S)
+                    ( e)
+                    ( x)))) ∘
+              ( tr B (H x)))))
+      ( id-equiv-Directed-Tree (directed-tree-Enriched-Directed-Tree A B T))
+      ( ( refl-htpy) ,
+        ( λ x → refl-htpy))
+      ( extensionality-Directed-Tree
+        ( directed-tree-Enriched-Directed-Tree A B T))
+      ( extensionality-Σ
+        ( λ {sh} enr H →
+          ( x : node-Enriched-Directed-Tree A B T) →
+          ( map-enrichment-Enriched-Directed-Tree A B T x) ~
+          ( map-equiv (enr x) ∘ tr B (H x)))
+        ( refl-htpy)
+        ( λ x → refl-htpy)
+        ( λ sh → equiv-funext)
+        ( extensionality-Π
+            ( enrichment-Enriched-Directed-Tree A B T)
+            ( λ x e →
+              ( map-enrichment-Enriched-Directed-Tree A B T x) ~
+              ( map-equiv e))
+            ( λ x →
+              extensionality-equiv
+                ( enrichment-Enriched-Directed-Tree A B T x))))
+
+  equiv-eq-Enriched-Directed-Tree :
+    (S : Enriched-Directed-Tree l3 l4 A B) →
+    (T ＝ S) → equiv-Enriched-Directed-Tree A B T S
+  equiv-eq-Enriched-Directed-Tree S =
+    map-equiv (extensionality-Enriched-Directed-Tree S)
+
+  eq-equiv-Enriched-Directed-Tree :
+    (S : Enriched-Directed-Tree l3 l4 A B) →
+    equiv-Enriched-Directed-Tree A B T S → T ＝ S
+  eq-equiv-Enriched-Directed-Tree S =
+    map-inv-equiv (extensionality-Enriched-Directed-Tree S)
+
+  is-contr-total-equiv-Enriched-Directed-Tree :
+    is-contr
+      ( Σ ( Enriched-Directed-Tree l3 l4 A B)
+          ( equiv-Enriched-Directed-Tree A B T))
+  is-contr-total-equiv-Enriched-Directed-Tree =
+    is-contr-equiv'
+      ( Σ (Enriched-Directed-Tree l3 l4 A B) (λ S → T ＝ S))
+      ( equiv-tot extensionality-Enriched-Directed-Tree)
+      ( is-contr-total-path T)
 ```

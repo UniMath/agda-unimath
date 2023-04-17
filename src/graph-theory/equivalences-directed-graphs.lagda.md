@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -23,6 +24,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -243,4 +245,48 @@ module _
     htpy-equiv-Directed-Graph G H e f → e ＝ f
   eq-htpy-equiv-Directed-Graph f =
     map-inv-equiv (extensionality-equiv-Directed-Graph f)
+```
+
+### Equivalences of directed graphs characterize identifications of directed graphs
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  extensionality-Directed-Graph :
+    (H : Directed-Graph l1 l2) → (G ＝ H) ≃ equiv-Directed-Graph G H
+  extensionality-Directed-Graph =
+    extensionality-Σ
+      ( λ {V} E e →
+        ( x y : vertex-Directed-Graph G) →
+        edge-Directed-Graph G x y ≃ E (map-equiv e x) (map-equiv e y))
+      ( id-equiv)
+      ( λ x y → id-equiv)
+      ( λ X → equiv-univalence)
+      ( extensionality-Π
+          ( λ x y → edge-Directed-Graph G x y)
+          ( λ x F →
+            (y : vertex-Directed-Graph G) → edge-Directed-Graph G x y ≃ F y)
+          ( λ x →
+            extensionality-Π
+              ( λ y → edge-Directed-Graph G x y)
+              ( λ y X → edge-Directed-Graph G x y ≃ X)
+              ( λ y X → equiv-univalence)))
+
+  equiv-eq-Directed-Graph :
+    (H : Directed-Graph l1 l2) → (G ＝ H) → equiv-Directed-Graph G H
+  equiv-eq-Directed-Graph H = map-equiv (extensionality-Directed-Graph H)
+
+  eq-equiv-Directed-Graph :
+    (H : Directed-Graph l1 l2) → equiv-Directed-Graph G H → (G ＝ H)
+  eq-equiv-Directed-Graph H = map-inv-equiv (extensionality-Directed-Graph H)
+
+  is-contr-total-equiv-Directed-Graph :
+    is-contr (Σ (Directed-Graph l1 l2) (equiv-Directed-Graph G))
+  is-contr-total-equiv-Directed-Graph =
+    is-contr-equiv'
+      ( Σ (Directed-Graph l1 l2) (λ H → G ＝ H))
+      ( equiv-tot extensionality-Directed-Graph)
+      ( is-contr-total-path G)
 ```

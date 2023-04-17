@@ -26,6 +26,7 @@ open import graph-theory.morphisms-directed-graphs
 open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
+open import trees.fibers-directed-trees
 ```
 
 </details>
@@ -310,4 +311,19 @@ module _
     map-children-combinator-Directed-Tree
   pr2 children-combinator-Directed-Tree =
     is-equiv-map-children-combinator-Directed-Tree
+```
+
+### If `e` is an edge from `node-inclusion i x` to `node-inclusion j y`, then `i ＝ j`
+
+```agda
+eq-index-edge-combinator-Directed-Tree :
+  {l1 l2 l3 : Level} {I : UU l1} (T : I → Directed-Tree l2 l3)
+  {i : I} (x : node-Directed-Tree (T i))
+  {j : I} (y : node-Directed-Tree (T j)) →
+  edge-combinator-Directed-Tree T
+    ( node-inclusion-combinator-Directed-Tree i x)
+    ( node-inclusion-combinator-Directed-Tree j y) →
+  i ＝ j
+eq-index-edge-combinator-Directed-Tree T x y
+  ( edge-inclusion-combinator-Directed-Tree _ .x .y e) = refl
 ```

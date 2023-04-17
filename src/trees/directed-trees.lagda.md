@@ -139,6 +139,10 @@ module _
           ( is-tree-Directed-Graph-Prop' G)
           ( uniqueness-root-is-tree-Directed-Graph H K))
 
+  is-tree-directed-graph-Prop : Prop (l1 ⊔ l2)
+  pr1 is-tree-directed-graph-Prop = is-tree-Directed-Graph G
+  pr2 is-tree-directed-graph-Prop = is-prop-is-tree-Directed-Graph
+
 uniqueness-root-Directed-Tree :
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   (H : is-tree-Directed-Graph (graph-Directed-Tree T)) →
