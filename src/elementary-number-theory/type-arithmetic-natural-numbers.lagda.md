@@ -7,26 +7,26 @@ module elementary-number-theory.type-arithmetic-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.powers-of-two
 open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.powers-of-two
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
-open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-unit-type
-open import foundation.iterating-functions 
-open import foundation.type-arithmetic-empty-type
+open import foundation.functoriality-coproduct-types
+open import foundation.iterating-functions  
 open import foundation.split-surjective-maps
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
