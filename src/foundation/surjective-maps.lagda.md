@@ -10,6 +10,7 @@ module foundation.surjective-maps where
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.embeddings
+open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -21,6 +22,7 @@ open import foundation.universal-property-propositional-truncation
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -379,6 +381,28 @@ module _
     is-surjective g → is-surjective h → is-surjective (g ∘ h)
   is-surjective-comp {g} {h} =
     is-surjective-comp-htpy (g ∘ h) g h refl-htpy
+```
+
+### Functoriality of products preserves being surjective
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  is-surjective-map-prod :
+    {f : A → C} {g : B → D} →
+    is-surjective f → is-surjective g → is-surjective (map-prod f g)
+  is-surjective-map-prod {f} {g} s s' (c , d) =
+    apply-twice-universal-property-trunc-Prop
+      ( s c)
+      ( s' d)
+      ( trunc-Prop (fib (map-prod f g) (c , d)))
+      ( λ x y →
+        unit-trunc-Prop
+          ( pair
+            ( (pr1 x) , (pr1 y))
+            ( eq-pair (pr2 x) (pr2 y))))
 ```
 
 ### The composite of a surjective map with an equivalence is surjective
