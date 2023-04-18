@@ -13,6 +13,7 @@ open import trees.equivalences-enriched-directed-trees public
 open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
+open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-w-types public
 open import trees.indexed-w-types public
 open import trees.induction-w-types public
@@ -22,6 +23,7 @@ open import trees.morphisms-directed-trees public
 open import trees.morphisms-enriched-directed-trees public
 open import trees.multisets public
 open import trees.ranks-of-elements-w-types public
+open import trees.rooted-morphisms-directed-trees public
 open import trees.rooted-quasitrees public
 open import trees.rooted-undirected-trees public
 open import trees.small-multisets public

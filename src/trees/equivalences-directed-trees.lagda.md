@@ -25,6 +25,7 @@ open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 open import trees.morphisms-directed-trees
+open import trees.rooted-morphisms-directed-trees
 ```
 
 </details>
@@ -259,8 +260,7 @@ module _
   where
 
   preserves-root-equiv-Directed-Tree :
-    node-equiv-Directed-Tree S T e (root-Directed-Tree S) ＝
-    root-Directed-Tree T
+    preserves-root-hom-Directed-Tree S T (hom-equiv-Directed-Tree S T e)
   preserves-root-equiv-Directed-Tree =
     inv
       ( uniqueness-root-Directed-Tree T
@@ -281,6 +281,11 @@ module _
                   ( e)))
               ( is-tree-Directed-Tree' S
                 ( inv-node-equiv-Directed-Tree S T e y)))))
+
+  rooted-hom-equiv-Directed-Tree :
+    rooted-hom-Directed-Tree S T
+  pr1 rooted-hom-equiv-Directed-Tree = hom-equiv-Directed-Tree S T e
+  pr2 rooted-hom-equiv-Directed-Tree = preserves-root-equiv-Directed-Tree
 ```
 
 ### Equivalences characterize identifications of trees

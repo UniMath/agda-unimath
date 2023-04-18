@@ -227,3 +227,8 @@ module _
       ( graph-Directed-Tree T)
       ( f)
 ```
+
+## See also
+
+- Root-preserving morphisms of directed trees are introduced in
+  [`rooted-morphisms-directed-trees`](trees.rooted-morphisms-directed-trees.md)
