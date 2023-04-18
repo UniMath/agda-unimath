@@ -296,18 +296,18 @@ preserves-tr :
 preserves-tr f refl x = refl
 
 tr-Id-left :
-  {l : Level} {A : UU l} {a b c : A} (q : Id b c) (p : Id b a) →
-  Id (tr (λ y → Id y a) q p) ((inv q) ∙ p)
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  (tr (_＝ a) q p) ＝ ((inv q) ∙ p)
 tr-Id-left refl p  = refl
 
 tr-Id-right :
-  {l : Level} {A : UU l} {a b c : A} (q : Id b c) (p : Id a b) →
-  Id (tr (λ y → Id a y) q p) (p ∙ q)
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
 tr-Id-right refl refl = refl
 
 tr-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : Id x y) (b : B) →
-  Id (tr (λ (a : A) → B) p b) b
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : x ＝ y) (b : B) →
+  tr (λ (a : A) → B) p b ＝ b
 tr-const refl b = refl
 ```
 
@@ -316,12 +316,12 @@ tr-const refl b = refl
 ```agda
 apd :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) {x y : A}
-  (p : x ＝ y) → (tr B p (f x)) ＝ (f y)
+  (p : x ＝ y) → tr B p (f x) ＝ f y
 apd f refl = refl
 
 apd-const :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : Id x y) → Id (apd f p) ((tr-const p (f x)) ∙ (ap f p))
+  (p : x ＝ y) → apd f p ＝ ((tr-const p (f x)) ∙ (ap f p))
 apd-const f refl = refl
 ```
 
