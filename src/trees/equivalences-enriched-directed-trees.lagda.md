@@ -234,9 +234,9 @@ module _
     (T ＝ S) ≃ equiv-Enriched-Directed-Tree A B T S
   extensionality-Enriched-Directed-Tree =
     extensionality-Σ
-      ( λ {S} sh-enr e →
+      ( λ {S} (sh , enr) e →
         Σ ( ( shape-Enriched-Directed-Tree A B T) ~
-            ( ( pr1 sh-enr) ∘
+            ( ( sh) ∘
               ( node-equiv-Directed-Tree
                 ( directed-tree-Enriched-Directed-Tree A B T)
                 ( S)
@@ -250,7 +250,7 @@ module _
                 ( x)) ∘
               ( map-enrichment-Enriched-Directed-Tree A B T x)) ~
             ( ( map-equiv
-                ( pr2 sh-enr
+                ( enr
                   ( node-equiv-Directed-Tree
                     ( directed-tree-Enriched-Directed-Tree A B T)
                     ( S)
@@ -271,13 +271,13 @@ module _
         ( λ x → refl-htpy)
         ( λ sh → equiv-funext)
         ( extensionality-Π
-            ( enrichment-Enriched-Directed-Tree A B T)
-            ( λ x e →
-              ( map-enrichment-Enriched-Directed-Tree A B T x) ~
-              ( map-equiv e))
-            ( λ x →
-              extensionality-equiv
-                ( enrichment-Enriched-Directed-Tree A B T x))))
+          ( enrichment-Enriched-Directed-Tree A B T)
+          ( λ x e →
+            ( map-enrichment-Enriched-Directed-Tree A B T x) ~
+            ( map-equiv e))
+          ( λ x →
+            extensionality-equiv
+            ( enrichment-Enriched-Directed-Tree A B T x))))
 
   equiv-eq-Enriched-Directed-Tree :
     (S : Enriched-Directed-Tree l3 l4 A B) →
