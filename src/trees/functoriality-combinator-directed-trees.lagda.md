@@ -8,6 +8,7 @@ module trees.functoriality-combinator-directed-trees where
 
 ```agda
 open import foundation.binary-transport
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
@@ -173,29 +174,33 @@ module _
   pr1 comp-rooted-hom-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x) =
     refl
-  pr2 comp-rooted-hom-combinator-Directed-Tree .(node-inclusion-combinator-Directed-Tree i (root-Directed-Tree (R i))) .root-combinator-Directed-Tree (edge-to-root-combinator-Directed-Tree i) = {!!}
+  pr2 comp-rooted-hom-combinator-Directed-Tree ._ ._
+    ( edge-to-root-combinator-Directed-Tree i) =
+    eq-is-contr
+      ( is-proof-irrelevant-edge-to-root-Directed-Tree
+        ( combinator-Directed-Tree T)
+        ( pr1
+          ( comp-hom-Directed-Tree
+            ( combinator-Directed-Tree R)
+            ( combinator-Directed-Tree S)
+            ( combinator-Directed-Tree T)
+            ( hom-combinator-Directed-Tree S T g)
+            ( hom-combinator-Directed-Tree R S f))
+            ( node-inclusion-combinator-Directed-Tree i
+              ( root-Directed-Tree (R i))))
+        ( tr
+          ( λ u →
+            edge-combinator-Directed-Tree T u root-combinator-Directed-Tree)
+          ( ap
+            ( node-inclusion-combinator-Directed-Tree i)
+            ( ( preserves-root-rooted-hom-Directed-Tree (S i) (T i) (g i)) ∙
+              ( ap
+                ( node-rooted-hom-Directed-Tree (S i) (T i) (g i))
+                ( preserves-root-rooted-hom-Directed-Tree (R i) (S i) (f i)))))
+          ( edge-to-root-combinator-Directed-Tree i)))
   pr2 comp-rooted-hom-combinator-Directed-Tree ._ ._
     ( edge-inclusion-combinator-Directed-Tree i x y e) =
     refl
-
-{-
-tr
-(λ u →
-   edge-combinator-Directed-Tree T u root-combinator-Directed-Tree)
-(ap (node-inclusion-combinator-Directed-Tree i)
- (pr2 (g i) ∙ ap (pr1 (pr1 (g i))) (pr2 (f i))))
-(edge-to-root-combinator-Directed-Tree i)
-
-edge-rooted-hom-combinator-Directed-Tree S T g
-(node-inclusion-combinator-Directed-Tree i
- (pr1 (pr1 (f i)) (pr1 (pr2 (R i)))))
-root-combinator-Directed-Tree
-(tr
- (λ u →
-    edge-combinator-Directed-Tree S u root-combinator-Directed-Tree)
- (ap (node-inclusion-combinator-Directed-Tree i) (pr2 (f i)))
- (edge-to-root-combinator-Directed-Tree i))
--}
 ```
 
 ### The action of the combinator on families of equivalences of directed trees

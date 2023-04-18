@@ -20,6 +20,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
@@ -62,6 +63,12 @@ module _
     cons-walk-Directed-Graph e refl-walk-Directed-Graph
   snoc-walk-Directed-Graph (cons-walk-Directed-Graph f w) e =
     cons-walk-Directed-Graph f (snoc-walk-Directed-Graph w e)
+
+  unit-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G} (e : edge-Directed-Graph G x y) →
+    walk-Directed-Graph x y
+  unit-walk-Directed-Graph e =
+    cons-walk-Directed-Graph e refl-walk-Directed-Graph
 ```
 
 ### The type of walks of length `n` from `x` to `y` in `G`
@@ -563,4 +570,17 @@ module _
   is-refl-right-is-refl-concat-walk-Directed-Graph
     refl-walk-Directed-Graph .refl-walk-Directed-Graph refl =
     refl
+```
+
+### The function `unit-walk` is injective
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+  
+  is-injective-unit-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    is-injective (unit-walk-Directed-Graph G {x} {y})
+  is-injective-unit-walk-Directed-Graph refl = refl
 ```

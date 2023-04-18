@@ -231,6 +231,30 @@ module _
       ( eq-is-contr (is-tree-Directed-Tree' T (root-Directed-Tree T)))
 ```
 
+### The type of edges to the root is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  is-proof-irrelevant-edge-to-root-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-proof-irrelevant (edge-Directed-Tree T x (root-Directed-Tree T))
+  pr1 (is-proof-irrelevant-edge-to-root-Directed-Tree x e) = e
+  pr2 (is-proof-irrelevant-edge-to-root-Directed-Tree x e) e' =
+    is-injective-unit-walk-Directed-Graph
+      ( graph-Directed-Tree T)
+      ( eq-is-contr (is-tree-Directed-Tree' T x))
+
+  is-prop-edge-to-root-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-prop (edge-Directed-Tree T x (root-Directed-Tree T))
+  is-prop-edge-to-root-Directed-Tree x =
+    is-prop-is-proof-irrelevant
+      ( is-proof-irrelevant-edge-to-root-Directed-Tree x)
+```
+
 ### Graphs in which vertices have unique parents are trees if for every vertex `x` there is a walk from `x` to the root
 
 ```agda
