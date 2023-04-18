@@ -11,8 +11,8 @@ module elementary-number-theory.addition-rationals where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
