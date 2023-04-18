@@ -87,18 +87,44 @@ id-hom-Directed-Tree T =
 ### Composition of morphisms of directed trees
 
 ```agda
-comp-hom-Directed-Tree :
+module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (R : Directed-Tree l1 l2) (S : Directed-Tree l3 l4) (T : Directed-Tree l5 l6)
-  (g : hom-Directed-Tree S T) (f : hom-Directed-Tree R S) →
-  hom-Directed-Tree R T
-comp-hom-Directed-Tree R S T g f =
-  comp-hom-Directed-Graph
-    ( graph-Directed-Tree R)
-    ( graph-Directed-Tree S)
-    ( graph-Directed-Tree T)
-    ( g)
-    ( f)
+  (g : hom-Directed-Tree S T) (f : hom-Directed-Tree R S)
+  where
+
+  node-comp-hom-Directed-Tree :
+    node-Directed-Tree R → node-Directed-Tree T
+  node-comp-hom-Directed-Tree =
+    vertex-comp-hom-Directed-Graph
+      ( graph-Directed-Tree R)
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( g)
+      ( f)
+
+  edge-comp-hom-Directed-Tree :
+    (x y : node-Directed-Tree R) (e : edge-Directed-Tree R x y) →
+    edge-Directed-Tree T
+      ( node-comp-hom-Directed-Tree x)
+      ( node-comp-hom-Directed-Tree y)
+  edge-comp-hom-Directed-Tree =
+    edge-comp-hom-Directed-Graph
+      ( graph-Directed-Tree R)
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( g)
+      ( f)
+
+  comp-hom-Directed-Tree :
+    hom-Directed-Tree R T
+  comp-hom-Directed-Tree =
+    comp-hom-Directed-Graph
+      ( graph-Directed-Tree R)
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( g)
+      ( f)
 ```
 
 ### Homotopies of morphisms of directed trees

@@ -112,7 +112,7 @@ module _
     ( ap
       ( node-rooted-hom-Directed-Tree S T g)
       ( preserves-root-rooted-hom-Directed-Tree R S f))
-  
+
   comp-rooted-hom-Directed-Tree :
     rooted-hom-Directed-Tree R T
   pr1 comp-rooted-hom-Directed-Tree = hom-comp-rooted-hom-Directed-Tree

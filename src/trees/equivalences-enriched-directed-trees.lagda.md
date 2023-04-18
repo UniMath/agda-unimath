@@ -24,6 +24,7 @@ open import trees.enriched-directed-trees
 open import trees.equivalences-directed-trees
 open import trees.morphisms-directed-trees
 open import trees.morphisms-enriched-directed-trees
+open import trees.rooted-morphisms-enriched-directed-trees
 ```
 
 </details>
@@ -183,13 +184,20 @@ module _
     enrichment-equiv-Enriched-Directed-Tree
 
   preserves-root-equiv-Enriched-Directed-Tree :
-    node-equiv-Enriched-Directed-Tree (root-Enriched-Directed-Tree A B S) ＝
-    root-Enriched-Directed-Tree A B T
+    preserves-root-hom-Enriched-Directed-Tree A B S T
+      hom-equiv-Enriched-Directed-Tree
   preserves-root-equiv-Enriched-Directed-Tree =
     preserves-root-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B S)
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
+
+  rooted-hom-equiv-Enriched-Directed-Tree :
+    rooted-hom-Enriched-Directed-Tree A B S T
+  pr1 rooted-hom-equiv-Enriched-Directed-Tree =
+    hom-equiv-Enriched-Directed-Tree
+  pr2 rooted-hom-equiv-Enriched-Directed-Tree =
+    preserves-root-equiv-Enriched-Directed-Tree
 ```
 
 ### The identity equivalence of enriched directed trees

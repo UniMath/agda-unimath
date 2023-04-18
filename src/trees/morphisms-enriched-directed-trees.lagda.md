@@ -193,3 +193,19 @@ module _
                 ( map-enrichment-Enriched-Directed-Tree A B S x)) ∙h
               ( enrichment-hom-Enriched-Directed-Tree A B S T g x))))
 ```
+
+### Identity morphisms of enriched directed trees
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
+  (T : Enriched-Directed-Tree l3 l4 A B)
+  where
+
+  id-hom-Enriched-Directed-Tree :
+    hom-Enriched-Directed-Tree A B T T
+  pr1 id-hom-Enriched-Directed-Tree =
+    id-hom-Directed-Tree (directed-tree-Enriched-Directed-Tree A B T)
+  pr1 (pr2 id-hom-Enriched-Directed-Tree) = refl-htpy
+  pr2 (pr2 id-hom-Enriched-Directed-Tree) x = refl-htpy
+```

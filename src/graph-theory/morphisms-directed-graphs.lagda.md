@@ -66,13 +66,27 @@ module _
   (K : Directed-Graph l5 l6)
   where
 
+  vertex-comp-hom-Directed-Graph :
+    hom-Directed-Graph H K → hom-Directed-Graph G H →
+    vertex-Directed-Graph G → vertex-Directed-Graph K
+  vertex-comp-hom-Directed-Graph g f =
+    (vertex-hom-Directed-Graph H K g) ∘ (vertex-hom-Directed-Graph G H f)
+
+  edge-comp-hom-Directed-Graph :
+    (g : hom-Directed-Graph H K) (f : hom-Directed-Graph G H)
+    (x y : vertex-Directed-Graph G) →
+    edge-Directed-Graph G x y →
+    edge-Directed-Graph K
+      ( vertex-comp-hom-Directed-Graph g f x)
+      ( vertex-comp-hom-Directed-Graph g f y)
+  edge-comp-hom-Directed-Graph g f x y e =
+    edge-hom-Directed-Graph H K g (edge-hom-Directed-Graph G H f e)
+
   comp-hom-Directed-Graph :
     hom-Directed-Graph H K → hom-Directed-Graph G H →
     hom-Directed-Graph G K
-  pr1 (comp-hom-Directed-Graph g f) =
-    (vertex-hom-Directed-Graph H K g) ∘ (vertex-hom-Directed-Graph G H f)
-  pr2 (comp-hom-Directed-Graph g f) x y e =
-    edge-hom-Directed-Graph H K g (edge-hom-Directed-Graph G H f e)
+  pr1 (comp-hom-Directed-Graph g f) = vertex-comp-hom-Directed-Graph g f
+  pr2 (comp-hom-Directed-Graph g f) = edge-comp-hom-Directed-Graph g f
 ```
 
 ### Identity morphisms graphs

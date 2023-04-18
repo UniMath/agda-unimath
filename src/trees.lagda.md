@@ -24,6 +24,7 @@ open import trees.morphisms-enriched-directed-trees public
 open import trees.multisets public
 open import trees.ranks-of-elements-w-types public
 open import trees.rooted-morphisms-directed-trees public
+open import trees.rooted-morphisms-enriched-directed-trees public
 open import trees.rooted-quasitrees public
 open import trees.rooted-undirected-trees public
 open import trees.small-multisets public

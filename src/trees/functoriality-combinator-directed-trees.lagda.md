@@ -179,15 +179,14 @@ module _
     eq-is-contr
       ( is-proof-irrelevant-edge-to-root-Directed-Tree
         ( combinator-Directed-Tree T)
-        ( pr1
-          ( comp-hom-Directed-Tree
-            ( combinator-Directed-Tree R)
-            ( combinator-Directed-Tree S)
-            ( combinator-Directed-Tree T)
-            ( hom-combinator-Directed-Tree S T g)
-            ( hom-combinator-Directed-Tree R S f))
-            ( node-inclusion-combinator-Directed-Tree i
-              ( root-Directed-Tree (R i))))
+        ( node-comp-hom-Directed-Tree
+          ( combinator-Directed-Tree R)
+          ( combinator-Directed-Tree S)
+          ( combinator-Directed-Tree T)
+          ( hom-combinator-Directed-Tree S T g)
+          ( hom-combinator-Directed-Tree R S f)
+          ( node-inclusion-combinator-Directed-Tree i
+            ( root-Directed-Tree (R i))))
         ( tr
           ( λ u →
             edge-combinator-Directed-Tree T u root-combinator-Directed-Tree)

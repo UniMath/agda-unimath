@@ -578,7 +578,7 @@ module _
 module _
   {l1 l2 : Level} (G : Directed-Graph l1 l2)
   where
-  
+
   is-injective-unit-walk-Directed-Graph :
     {x y : vertex-Directed-Graph G} →
     is-injective (unit-walk-Directed-Graph G {x} {y})

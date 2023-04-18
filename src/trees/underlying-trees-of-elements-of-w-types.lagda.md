@@ -925,12 +925,13 @@ module _
       ( enriched-directed-tree-element-𝕎 w)
       ( e)
       ( root-𝕎)) ∙
-    ( ap
-      ( shape-node-directed-tree-element-𝕎 w)
-      ( preserves-root-equiv-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-𝕎 v)
-        ( enriched-directed-tree-element-𝕎 w)
-        ( e)))
+    ( inv
+      ( ap
+        ( shape-node-directed-tree-element-𝕎 w)
+        ( preserves-root-equiv-Enriched-Directed-Tree A B
+          ( enriched-directed-tree-element-𝕎 v)
+          ( enriched-directed-tree-element-𝕎 w)
+          ( e))))
 
   htpy-component-equiv-enriched-directed-tree-element-𝕎 :
     (v w : 𝕎 A B) →
