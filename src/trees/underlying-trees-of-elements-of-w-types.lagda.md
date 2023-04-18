@@ -297,10 +297,10 @@ module _
   node-inclusion-element-𝕎' (tree-𝕎 x α) y n = inl (pair y n)
 ```
 
-Note that we don't expect that `node-inclusion-element-𝕎'` is an
-embedding. The total space `Σ (y : B x), node-element-𝕎' (α y)` embeds
-into `node-element-𝕎' (tree-𝕎 x α)`, and this implies that the node
-inclusion has the same truncation level as the fiber inclusions
+Note that we don't expect that `node-inclusion-element-𝕎'` is an embedding. The
+total space `Σ (y : B x), node-element-𝕎' (α y)` embeds into
+`node-element-𝕎' (tree-𝕎 x α)`, and this implies that the node inclusion has the
+same truncation level as the fiber inclusions
 
 ```md
   node-element-𝕎' (α b) → Σ (y : B x), node-element-𝕎' (α y)
