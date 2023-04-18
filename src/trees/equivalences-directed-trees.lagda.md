@@ -8,6 +8,7 @@ module trees.equivalences-directed-trees where
 
 ```agda
 open import foundation.binary-transport
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -39,6 +40,16 @@ directed graphs.
 
 ## Definitions
 
+### The condition of being an equivalence of directed trees
+
+```agda
+is-equiv-hom-Directed-Tree :
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4) →
+  hom-Directed-Tree S T → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+is-equiv-hom-Directed-Tree S T =
+  is-equiv-hom-Directed-Graph (graph-Directed-Tree S) (graph-Directed-Tree T)
+```
+
 ### Equivalences of directed trees
 
 ```agda
@@ -47,6 +58,24 @@ equiv-Directed-Tree :
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 equiv-Directed-Tree S T =
   equiv-Directed-Graph (graph-Directed-Tree S) (graph-Directed-Tree T)
+
+equiv-is-equiv-hom-Directed-Tree :
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4) →
+  (f : hom-Directed-Tree S T) → is-equiv-hom-Directed-Tree S T f →
+  equiv-Directed-Tree S T
+equiv-is-equiv-hom-Directed-Tree S T =
+  equiv-is-equiv-hom-Directed-Graph
+    ( graph-Directed-Tree S)
+    ( graph-Directed-Tree T)
+
+compute-equiv-Directed-Tree :
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4) →
+  equiv-Directed-Tree S T ≃
+  Σ (hom-Directed-Tree S T) (is-equiv-hom-Directed-Tree S T)
+compute-equiv-Directed-Tree S T =
+  compute-equiv-Directed-Graph
+    ( graph-Directed-Tree S)
+    ( graph-Directed-Tree T)
 
 module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
@@ -65,6 +94,13 @@ module _
     node-Directed-Tree S → node-Directed-Tree T
   node-equiv-Directed-Tree =
     vertex-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( e)
+
+  is-equiv-node-equiv-Directed-Tree : is-equiv node-equiv-Directed-Tree
+  is-equiv-node-equiv-Directed-Tree =
+    is-equiv-vertex-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( e)
@@ -117,9 +153,25 @@ module _
       ( graph-Directed-Tree T)
       ( e)
 
+  is-equiv-edge-equiv-Directed-Tree :
+    (x y : node-Directed-Tree S) → is-equiv (edge-equiv-Directed-Tree x y)
+  is-equiv-edge-equiv-Directed-Tree =
+    is-equiv-edge-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( e)
+
   hom-equiv-Directed-Tree : hom-Directed-Tree S T
   hom-equiv-Directed-Tree =
     hom-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( e)
+
+  is-equiv-equiv-Directed-Tree :
+    is-equiv-hom-Directed-Tree S T hom-equiv-Directed-Tree
+  is-equiv-equiv-Directed-Tree =
+    is-equiv-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( e)
@@ -262,25 +314,24 @@ module _
   preserves-root-equiv-Directed-Tree :
     preserves-root-hom-Directed-Tree S T (hom-equiv-Directed-Tree S T e)
   preserves-root-equiv-Directed-Tree =
-    inv
-      ( uniqueness-root-Directed-Tree T
-        ( pair
-          ( node-equiv-Directed-Tree S T e (root-Directed-Tree S))
-          ( λ y →
-            is-contr-equiv'
-              ( walk-Directed-Tree S
-                ( inv-node-equiv-Directed-Tree S T e y)
-                ( root-Directed-Tree S))
-              ( ( equiv-binary-tr
-                  ( walk-Directed-Graph (graph-Directed-Tree T))
-                  ( issec-inv-node-equiv-Directed-Tree S T e y)
-                  ( refl)) ∘e
-                ( equiv-walk-equiv-Directed-Graph
-                  ( graph-Directed-Tree S)
-                  ( graph-Directed-Tree T)
-                  ( e)))
-              ( is-tree-Directed-Tree' S
-                ( inv-node-equiv-Directed-Tree S T e y)))))
+    uniqueness-root-Directed-Tree T
+      ( pair
+        ( node-equiv-Directed-Tree S T e (root-Directed-Tree S))
+        ( λ y →
+          is-contr-equiv'
+            ( walk-Directed-Tree S
+              ( inv-node-equiv-Directed-Tree S T e y)
+              ( root-Directed-Tree S))
+            ( ( equiv-binary-tr
+                ( walk-Directed-Graph (graph-Directed-Tree T))
+                ( issec-inv-node-equiv-Directed-Tree S T e y)
+                ( refl)) ∘e
+              ( equiv-walk-equiv-Directed-Graph
+                ( graph-Directed-Tree S)
+                ( graph-Directed-Tree T)
+                ( e)))
+            ( is-tree-Directed-Tree' S
+              ( inv-node-equiv-Directed-Tree S T e y))))
 
   rooted-hom-equiv-Directed-Tree :
     rooted-hom-Directed-Tree S T

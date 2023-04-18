@@ -61,6 +61,11 @@ module _
     vertex-Directed-Graph G → vertex-Directed-Graph H
   vertex-equiv-Directed-Graph = map-equiv equiv-vertex-equiv-Directed-Graph
 
+  is-equiv-vertex-equiv-Directed-Graph :
+    is-equiv vertex-equiv-Directed-Graph
+  is-equiv-vertex-equiv-Directed-Graph =
+    is-equiv-map-equiv equiv-vertex-equiv-Directed-Graph
+
   inv-vertex-equiv-Directed-Graph :
     vertex-Directed-Graph H → vertex-Directed-Graph G
   inv-vertex-equiv-Directed-Graph =
@@ -92,6 +97,11 @@ module _
       ( vertex-equiv-Directed-Graph y)
   edge-equiv-Directed-Graph x y =
     map-equiv (equiv-edge-equiv-Directed-Graph x y)
+
+  is-equiv-edge-equiv-Directed-Graph :
+    (x y : vertex-Directed-Graph G) → is-equiv (edge-equiv-Directed-Graph x y)
+  is-equiv-edge-equiv-Directed-Graph x y =
+    is-equiv-map-equiv (equiv-edge-equiv-Directed-Graph x y)
 ```
 
 ### The condition on a morphism of directed graphs to be an equivalence
@@ -107,6 +117,14 @@ module _
     ( is-equiv (vertex-hom-Directed-Graph G H f)) ×
     ( (x y : vertex-Directed-Graph G) →
       is-equiv (edge-hom-Directed-Graph G H f {x} {y}))
+
+  equiv-is-equiv-hom-Directed-Graph :
+    (f : hom-Directed-Graph G H) →
+    is-equiv-hom-Directed-Graph f → equiv-Directed-Graph G H
+  pr1 (equiv-is-equiv-hom-Directed-Graph f (K , L)) =
+    ( vertex-hom-Directed-Graph G H f , K)
+  pr2 (equiv-is-equiv-hom-Directed-Graph f (K , L)) x y =
+    ( edge-hom-Directed-Graph G H f , L x y)
 
   compute-equiv-Directed-Graph :
     equiv-Directed-Graph G H ≃

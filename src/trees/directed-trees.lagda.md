@@ -182,6 +182,18 @@ module _
   is-isolated-root-Directed-Tree x =
     is-decidable-is-root-walk-Directed-Tree x (walk-to-root-Directed-Tree T x)
 
+  is-prop-is-root-Directed-Tree :
+    (x : node-Directed-Tree T) → is-prop (is-root-Directed-Tree T x)
+  is-prop-is-root-Directed-Tree =
+    is-prop-eq-isolated-point
+      ( root-Directed-Tree T)
+      ( is-isolated-root-Directed-Tree)
+
+  is-root-directed-tree-Prop :
+    (x : node-Directed-Tree T) → Prop l1
+  pr1 (is-root-directed-tree-Prop x) = is-root-Directed-Tree T x
+  pr2 (is-root-directed-tree-Prop x) = is-prop-is-root-Directed-Tree x
+
   is-contr-loop-space-root-Directed-Tree :
     is-contr (root-Directed-Tree T ＝ root-Directed-Tree T)
   is-contr-loop-space-root-Directed-Tree =
