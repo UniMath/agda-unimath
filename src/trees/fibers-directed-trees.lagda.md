@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import graph-theory.directed-graphs
 open import graph-theory.walks-directed-graphs
 
+open import trees.bases-directed-trees
 open import trees.directed-trees
 ```
 
@@ -153,4 +154,29 @@ module _
   fiber-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 fiber-Directed-Tree = graph-fiber-Directed-Tree
   pr2 fiber-Directed-Tree = is-tree-fiber-Directed-Tree
+```
+
+### The fiber of a tree at a base node
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2) (b : base-Directed-Tree T)
+  where
+
+  fiber-base-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
+  fiber-base-Directed-Tree = fiber-Directed-Tree T (node-base-Directed-Tree T b)
+
+  node-fiber-base-Directed-Tree : UU (l1 ⊔ l2)
+  node-fiber-base-Directed-Tree = node-Directed-Tree fiber-base-Directed-Tree
+
+  edge-fiber-base-Directed-Tree :
+    (x y : node-fiber-base-Directed-Tree) → UU (l1 ⊔ l2)
+  edge-fiber-base-Directed-Tree = edge-Directed-Tree fiber-base-Directed-Tree
+
+  root-fiber-base-Directed-Tree : node-fiber-base-Directed-Tree
+  root-fiber-base-Directed-Tree = root-Directed-Tree fiber-base-Directed-Tree
+
+  walk-fiber-base-Directed-Tree :
+    (x y : node-fiber-base-Directed-Tree) → UU (l1 ⊔ l2)
+  walk-fiber-base-Directed-Tree = walk-Directed-Tree fiber-base-Directed-Tree
 ```

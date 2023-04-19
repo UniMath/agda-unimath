@@ -17,6 +17,7 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import graph-theory.walks-directed-graphs
@@ -218,4 +219,62 @@ module _
   contraction-walk-to-base-Directed-Tree x =
     cases-contraction-walk-to-base-Directed-Tree
       ( walk-to-root-Directed-Tree T x)
+
+  unique-walk-to-base-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-contr
+      ( is-root-Directed-Tree T x +
+        Σ ( base-Directed-Tree T)
+          ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
+  pr1 (unique-walk-to-base-Directed-Tree x) =
+    center-walk-to-base-Directed-Tree x
+  pr2 (unique-walk-to-base-Directed-Tree x) =
+    contraction-walk-to-base-Directed-Tree x
+
+  is-root-or-walk-to-base-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-root-Directed-Tree T x +
+    Σ ( base-Directed-Tree T)
+      ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T)
+  is-root-or-walk-to-base-Directed-Tree x =
+    center (unique-walk-to-base-Directed-Tree x)
+
+  is-root-is-root-or-walk-to-base-root-Directed-Tree :
+    is-root-or-walk-to-base-Directed-Tree (root-Directed-Tree T) ＝
+    inl refl
+  is-root-is-root-or-walk-to-base-root-Directed-Tree =
+    eq-is-contr (unique-walk-to-base-Directed-Tree (root-Directed-Tree T))
+
+  unique-walk-to-base-is-not-root-Directed-Tree :
+    (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
+    is-contr
+      ( Σ ( base-Directed-Tree T)
+          ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
+  unique-walk-to-base-is-not-root-Directed-Tree x f =
+    is-contr-equiv'
+      ( is-root-Directed-Tree T x +
+        Σ ( base-Directed-Tree T)
+          ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
+      ( left-unit-law-coprod-is-empty
+        ( is-root-Directed-Tree T x)
+        ( Σ ( base-Directed-Tree T)
+          ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
+        ( f))
+      ( unique-walk-to-base-Directed-Tree x)
+
+  unique-walk-to-base-parent-Directed-Tree :
+    (x : node-Directed-Tree T)
+    (u : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    is-contr
+      ( Σ ( base-Directed-Tree T)
+          ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
+  unique-walk-to-base-parent-Directed-Tree x u =
+    unique-walk-to-base-is-not-root-Directed-Tree x
+      ( is-not-root-parent-Directed-Tree T (pr2 u))
+
+{-
+  is-walk-to-root-is-root-or-walk-to-root-Directed-Tree :
+    (x : node-Directed-Tree T)
+    (u : Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+    -}
 ```

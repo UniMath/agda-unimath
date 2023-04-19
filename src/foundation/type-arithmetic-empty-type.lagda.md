@@ -10,6 +10,8 @@ module foundation.type-arithmetic-empty-type where
 open import foundation.coproduct-types
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
@@ -246,13 +248,28 @@ module _
   pr1 left-unit-law-coprod-is-empty = map-left-unit-law-coprod-is-empty
   pr2 left-unit-law-coprod-is-empty = is-equiv-map-left-unit-law-coprod-is-empty
 
-  inv-left-unit-law-coprod-is-empty : B ≃ (A + B)
-  pr1 inv-left-unit-law-coprod-is-empty = map-inv-left-unit-law-coprod-is-empty
-  pr2 inv-left-unit-law-coprod-is-empty =
+  is-equiv-inr-is-empty :
+    is-equiv inr
+  is-equiv-inr-is-empty =
     is-equiv-has-inverse
       ( map-left-unit-law-coprod-is-empty)
       ( isretr-map-inv-left-unit-law-coprod-is-empty)
       ( issec-map-inv-left-unit-law-coprod-is-empty)
+
+  inv-left-unit-law-coprod-is-empty : B ≃ (A + B)
+  pr1 inv-left-unit-law-coprod-is-empty = map-inv-left-unit-law-coprod-is-empty
+  pr2 inv-left-unit-law-coprod-is-empty = is-equiv-inr-is-empty
+
+  is-contr-map-left-unit-law-coprod-is-empty :
+    is-contr-map map-left-unit-law-coprod-is-empty
+  is-contr-map-left-unit-law-coprod-is-empty =
+    is-contr-map-is-equiv is-equiv-map-left-unit-law-coprod-is-empty
+
+  is-contr-map-inr-is-empty : is-contr-map map-inv-left-unit-law-coprod-is-empty
+  is-contr-map-inr-is-empty = is-contr-map-is-equiv is-equiv-inr-is-empty
+
+  is-right-coprod-is-empty : (x : A + B) → Σ B (λ b → inr b ＝ x)
+  is-right-coprod-is-empty x = center (is-contr-map-inr-is-empty x)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -340,11 +357,19 @@ module _
 
   inv-right-unit-law-coprod-is-empty : A ≃ (A + B)
   pr1 inv-right-unit-law-coprod-is-empty = inl
-  pr2 inv-right-unit-law-coprod-is-empty =
-    is-equiv-has-inverse
-      ( map-right-unit-law-coprod-is-empty)
-      ( isretr-map-inv-right-unit-law-coprod-is-empty)
-      ( issec-map-inv-right-unit-law-coprod-is-empty)
+  pr2 inv-right-unit-law-coprod-is-empty = is-equiv-inl-is-empty
+
+  is-contr-map-right-unit-law-coprod-is-empty :
+    is-contr-map map-right-unit-law-coprod-is-empty
+  is-contr-map-right-unit-law-coprod-is-empty =
+    is-contr-map-is-equiv is-equiv-map-right-unit-law-coprod-is-empty
+
+  is-contr-map-inl-is-empty : is-contr-map inl
+  is-contr-map-inl-is-empty = is-contr-map-is-equiv is-equiv-inl-is-empty
+
+  is-left-coprod-is-empty :
+    (x : A + B) → Σ A (λ a → inl a ＝ x)
+  is-left-coprod-is-empty x = center (is-contr-map-inl-is-empty x)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
