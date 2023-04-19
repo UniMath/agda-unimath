@@ -7,23 +7,25 @@ module reflection.metavariables where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import lists.lists
-open import foundation-core.dependent-pair-types
-open import foundation.cartesian-product-types
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.booleans
-open import foundation.universe-levels
-open import foundation.strings
+open import foundation.cartesian-product-types
 open import foundation.characters
 open import foundation.floats
-open import foundation.machine-integers
-open import foundation.unit-type
 open import foundation.identity-types
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.addition-integers
+open import foundation.machine-integers
+open import foundation.strings
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import reflection.names
+open import foundation-core.dependent-pair-types
+
+open import lists.lists
+
 open import reflection.fixity
+open import reflection.names
 ```
 
 </details>
@@ -45,4 +47,3 @@ primitive
   primMetaToNat    : Meta → ℕ
   primMetaToNatInjective : ∀ a b → primMetaToNat a ＝ primMetaToNat b → a ＝ b
 ```
-

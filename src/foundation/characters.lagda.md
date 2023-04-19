@@ -7,17 +7,18 @@ module foundation.characters where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.booleans
 open import foundation.universe-levels
-open import elementary-number-theory.natural-numbers
 ```
 
 </details>
 
 ## Idea
 
-The `Char` type represents a character. Agda provides primitive functions to manipulate them.
-Characters are written between single quotes, e.g. `'a'`.
+The `Char` type represents a character. Agda provides primitive functions to
+manipulate them. Characters are written between single quotes, e.g. `'a'`.
 
 ## Definitions
 

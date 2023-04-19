@@ -30,6 +30,7 @@ open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
+open import foundation.characters public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
 open import foundation.commuting-3-simplices-of-homotopies public
@@ -107,6 +108,7 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.floats public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.functional-correspondences public
@@ -154,6 +156,7 @@ open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.machine-integers public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -218,6 +221,7 @@ open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.strings public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public

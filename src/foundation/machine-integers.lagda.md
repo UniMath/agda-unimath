@@ -7,19 +7,21 @@ module foundation.machine-integers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.booleans
-open import foundation.maybe
-open import foundation.universe-levels
-open import foundation.strings
 open import elementary-number-theory.natural-numbers
+
+open import foundation.booleans
+open import foundation.identity-types
+open import foundation.maybe
+open import foundation.strings
+open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The `Word64` type represents 64-bit machine words. Agda provides primitive functions to manipulate them.
+The `Word64` type represents 64-bit machine words. Agda provides primitive
+functions to manipulate them.
 
 ## Definitions
 

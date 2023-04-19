@@ -7,20 +7,22 @@ module reflection.fixity where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import lists.lists
-open import foundation-core.dependent-pair-types
-open import foundation.cartesian-product-types
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.booleans
-open import foundation.universe-levels
-open import foundation.strings
+open import foundation.cartesian-product-types
 open import foundation.characters
 open import foundation.floats
-open import foundation.machine-integers
-open import foundation.unit-type
 open import foundation.identity-types
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.addition-integers
+open import foundation.machine-integers
+open import foundation.strings
+open import foundation.unit-type
+open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+
+open import lists.lists
 
 open import reflection.names
 ```
@@ -30,8 +32,10 @@ open import reflection.names
 ## Idea
 
 The fixity of a quoted name is given by
+
 - An associativity, i.e. it is left-associative, right-associative or neither.
-- A precedence, i.e. it is unrelated (it has no precedence) or it is related and has a float precedence.
+- A precedence, i.e. it is unrelated (it has no precedence) or it is related and
+  has a float precedence.
 
 ## Definition
 

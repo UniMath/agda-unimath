@@ -7,29 +7,32 @@ module reflection.names where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import lists.lists
-open import foundation-core.dependent-pair-types
-open import foundation.cartesian-product-types
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.booleans
-open import foundation.universe-levels
-open import foundation.strings
+open import foundation.cartesian-product-types
 open import foundation.characters
 open import foundation.floats
-open import foundation.machine-integers
-open import foundation.unit-type
 open import foundation.identity-types
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.addition-integers
+open import foundation.machine-integers
+open import foundation.strings
+open import foundation.unit-type
+open import foundation.universe-levels
+
+open import foundation-core.dependent-pair-types
+
+open import lists.lists
 ```
 
 </details>
 
 ## Idea
 
-The `Name` type represents quoted names, i.e. they are an abstract syntactic representation of terms.
-Agda provides primitive functions to manipulate them, giving them an equality and ordering.
-A closed term can be converted to a quoted name by means of the `quote` primitive, e.g. `quote bool`.
+The `Name` type represents quoted names, i.e. they are an abstract syntactic
+representation of terms. Agda provides primitive functions to manipulate them,
+giving them an equality and ordering. A closed term can be converted to a quoted
+name by means of the `quote` primitive, e.g. `quote bool`.
 
 ## Definition
 

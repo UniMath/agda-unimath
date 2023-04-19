@@ -7,21 +7,23 @@ module foundation.floats where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.booleans
-open import foundation.maybe
-open import foundation.universe-levels
-open import foundation.strings
-open import foundation.machine-integers
 open import elementary-number-theory.natural-numbers
+
+open import foundation.booleans
+open import foundation.identity-types
+open import foundation.machine-integers
+open import foundation.maybe
+open import foundation.strings
+open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The `Float` type represents IEEE754 floats. Agda provides primitive functions to manipulate them.
-Floats can be written as usual, using dots as separators, e.g. `3.14`.
+The `Float` type represents IEEE754 floats. Agda provides primitive functions to
+manipulate them. Floats can be written as usual, using dots as separators, e.g.
+`3.14`.
 
 ## Definitions
 
