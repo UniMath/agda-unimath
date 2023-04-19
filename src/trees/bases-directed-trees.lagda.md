@@ -28,7 +28,8 @@ open import trees.directed-trees
 
 ## Idea
 
-The base of a directed tree consists of the nodes equipped with an edge to the root.
+The base of a directed tree consists of the nodes equipped with an edge to the
+root.
 
 ## Definition
 
@@ -36,7 +37,7 @@ The base of a directed tree consists of the nodes equipped with an edge to the r
 module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
-  
+
   base-Directed-Tree : UU (l1 ⊔ l2)
   base-Directed-Tree = children-Directed-Tree T (root-Directed-Tree T)
 
@@ -133,7 +134,7 @@ module _
     inr (cons-cases-center-walk-to-base-Directed-Tree e w)
 
   center-walk-to-base-Directed-Tree :
-    (x : node-Directed-Tree T) → 
+    (x : node-Directed-Tree T) →
     is-root-Directed-Tree T x +
     Σ (base-Directed-Tree T) (walk-Directed-Tree T x ∘ pr1)
   center-walk-to-base-Directed-Tree x =
@@ -189,7 +190,7 @@ module _
   cases-contraction-walk-to-base-Directed-Tree :
     {x : node-Directed-Tree T}
     (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
-    (u : 
+    (u :
       is-root-Directed-Tree T x +
       Σ (base-Directed-Tree T) (walk-Directed-Tree T x ∘ pr1)) →
     cases-center-walk-to-base-Directed-Tree w ＝ u
@@ -207,7 +208,7 @@ module _
   cases-contraction-walk-to-base-Directed-Tree
     ( cons-walk-Directed-Graph e w) (inr u) =
     ap inr (cons-cases-contraction-walk-to-base-Directed-Tree e w u)
-  
+
   contraction-walk-to-base-Directed-Tree :
     (x : node-Directed-Tree T)
     ( w :

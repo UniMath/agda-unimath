@@ -334,8 +334,4 @@ eq-index-edge-combinator-Directed-Tree T x y
 module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
-
-  private
-    fib-T : (i : base-Directed-Tree T) → Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
-    fib-T (x , e) = fiber-Directed-Tree T x
 ```
