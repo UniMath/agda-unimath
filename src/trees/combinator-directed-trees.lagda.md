@@ -327,3 +327,15 @@ eq-index-edge-combinator-Directed-Tree :
 eq-index-edge-combinator-Directed-Tree T x y
   ( edge-inclusion-combinator-Directed-Tree _ .x .y e) = refl
 ```
+
+### Any tree is the combinator tree of the fibers at the nodes equipped with edges to the root
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  private
+    fib-T : (i : base-Directed-Tree T) → Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
+    fib-T (x , e) = fiber-Directed-Tree T x
+```

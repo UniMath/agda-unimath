@@ -7,6 +7,8 @@ module trees.directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -17,6 +19,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
@@ -83,6 +86,9 @@ module _
   edge-Directed-Tree : (x y : node-Directed-Tree) → UU l2
   edge-Directed-Tree = edge-Directed-Graph graph-Directed-Tree
 
+  children-Directed-Tree : node-Directed-Tree → UU (l1 ⊔ l2)
+  children-Directed-Tree x = Σ node-Directed-Tree (λ y → edge-Directed-Tree y x)
+
   walk-Directed-Tree : (x y : node-Directed-Tree) → UU (l1 ⊔ l2)
   walk-Directed-Tree = walk-Directed-Graph graph-Directed-Tree
 
@@ -94,6 +100,16 @@ module _
     {x y z : node-Directed-Tree} (e : edge-Directed-Tree x y) →
     walk-Directed-Tree y z → walk-Directed-Tree x z
   cons-walk-Directed-Tree = cons-walk-Directed-Graph
+
+  unit-walk-Directed-Tree :
+    {x y : node-Directed-Tree} →
+    edge-Directed-Tree x y → walk-Directed-Tree x y
+  unit-walk-Directed-Tree = unit-walk-Directed-Graph graph-Directed-Tree
+
+  length-walk-Directed-Tree :
+    {x y : node-Directed-Tree} → walk-Directed-Tree x y → ℕ
+  length-walk-Directed-Tree =
+    length-walk-Directed-Graph graph-Directed-Tree
 
   is-tree-Directed-Tree : is-tree-Directed-Graph graph-Directed-Tree
   is-tree-Directed-Tree = pr2 T
@@ -229,6 +245,12 @@ module _
       ( e)
       ( walk-to-root-Directed-Tree T x)
       ( eq-is-contr (is-tree-Directed-Tree' T (root-Directed-Tree T)))
+
+  is-not-root-parent-Directed-Tree :
+    {x y : node-Directed-Tree T} (e : edge-Directed-Tree T x y) →
+    ¬ (is-root-Directed-Tree T x)
+  is-not-root-parent-Directed-Tree e refl =
+    no-parent-root-Directed-Tree (_ , e)
 ```
 
 ### The type of edges to the root is a proposition
@@ -470,9 +492,65 @@ module _
         ( f))
       ( unique-parent-Directed-Tree x)
 
+  is-proof-irrelevant-parent-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+  is-proof-irrelevant-parent-Directed-Tree x (y , e) =
+    unique-parent-is-not-root-Directed-Tree x
+      ( λ { refl → no-parent-root-Directed-Tree T (y , e)})
+
+  is-prop-parent-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-prop (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+  is-prop-parent-Directed-Tree x =
+    is-prop-is-proof-irrelevant (is-proof-irrelevant-parent-Directed-Tree x)
+
+  eq-parent-Directed-Tree :
+    {x : node-Directed-Tree T}
+    (u v : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) → u ＝ v
+  eq-parent-Directed-Tree {x} =
+    eq-is-prop' (is-prop-parent-Directed-Tree x)
+
   parent-is-not-root-Directed-Tree :
     (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
     Σ (node-Directed-Tree T) (edge-Directed-Tree T x)
   parent-is-not-root-Directed-Tree x f =
     center (unique-parent-is-not-root-Directed-Tree x f)
+```
+
+### Transporting walks in directed trees
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  tr-walk-eq-parent-Directed-Tree :
+    {x y : node-Directed-Tree T}
+    (u v : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    walk-Directed-Tree T (pr1 u) y → walk-Directed-Tree T (pr1 v) y
+  tr-walk-eq-parent-Directed-Tree {x} {y} u v =
+    tr
+      ( λ r → walk-Directed-Tree T (pr1 r) y)
+      ( eq-parent-Directed-Tree T u v)
+
+  eq-tr-walk-eq-parent-Directed-Tree' :
+    {x y : node-Directed-Tree T}
+    (u v : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    (w : walk-Directed-Tree T (pr1 u) y) →
+    (p : u ＝ v) →
+    cons-walk-Directed-Graph
+      ( pr2 v)
+      ( tr (λ r → walk-Directed-Tree T (pr1 r) y) p w) ＝
+    cons-walk-Directed-Graph (pr2 u) w
+  eq-tr-walk-eq-parent-Directed-Tree' u .u w refl = refl
+
+  eq-tr-walk-eq-parent-Directed-Tree :
+    {x y : node-Directed-Tree T}
+    (u v : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    (w : walk-Directed-Tree T (pr1 u) y) →
+    cons-walk-Directed-Graph (pr2 v) (tr-walk-eq-parent-Directed-Tree u v w) ＝
+    cons-walk-Directed-Graph (pr2 u) w
+  eq-tr-walk-eq-parent-Directed-Tree u v w =
+    eq-tr-walk-eq-parent-Directed-Tree' u v w (eq-parent-Directed-Tree T u v)
 ```

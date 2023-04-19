@@ -71,6 +71,21 @@ module _
     cons-walk-Directed-Graph e refl-walk-Directed-Graph
 ```
 
+### The length of a walk in `G`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  length-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    walk-Directed-Graph G x y → ℕ
+  length-walk-Directed-Graph refl-walk-Directed-Graph = 0
+  length-walk-Directed-Graph (cons-walk-Directed-Graph x w) =
+    succ-ℕ (length-walk-Directed-Graph w)
+```
+
 ### The type of walks of length `n` from `x` to `y` in `G`
 
 ```agda
