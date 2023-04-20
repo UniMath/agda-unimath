@@ -275,6 +275,12 @@ module _
   is-prop-edge-to-root-Directed-Tree x =
     is-prop-is-proof-irrelevant
       ( is-proof-irrelevant-edge-to-root-Directed-Tree x)
+
+  eq-edge-to-root-Directed-Tree :
+    (x : node-Directed-Tree T)
+    (e e' : edge-Directed-Tree T x (root-Directed-Tree T)) → e ＝ e'
+  eq-edge-to-root-Directed-Tree x e e' =
+    eq-is-prop (is-prop-edge-to-root-Directed-Tree x)
 ```
 
 ### Graphs in which vertices have unique parents are trees if for every vertex `x` there is a walk from `x` to the root

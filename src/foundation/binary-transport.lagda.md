@@ -55,3 +55,21 @@ module _
     tr (C x') q (tr (λ a → C a y) p u) ＝ binary-tr p q u
   compute-binary-tr' refl refl u = refl
 ```
+
+## Properties
+
+### Binary transport along paths of the form `ap f p` and `ap g q`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  {E : A → C → UU l5} (E' : B → D → UU l6)
+  {f : A → B} {g : C → D} (h : (a : A) (c : C) → E a c → E' (f a) (g c))
+  where
+
+  binary-tr-ap :
+    {x x' : A} (p : x ＝ x') {y y' : C} (q : y ＝ y') →
+    {u : E x y} {v : E x' y'} (r : binary-tr E p q u ＝ v) →
+    binary-tr E' (ap f p) (ap g q) (h x y u) ＝ h x' y' v
+  binary-tr-ap refl refl refl = refl
+```

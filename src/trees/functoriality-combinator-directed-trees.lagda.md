@@ -146,7 +146,7 @@ module _
     edge-id-rooted-hom-combinator-Directed-Tree
 ```
 
-#### The action of the combinator preserves composition
+#### The action of the combinator on morphisms preserves composition
 
 ```agda
 module _
@@ -200,6 +200,59 @@ module _
   pr2 comp-rooted-hom-combinator-Directed-Tree ._ ._
     ( edge-inclusion-combinator-Directed-Tree i x y e) =
     refl
+```
+
+#### The action of the combinator on morphisms preserves homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
+  (S : I → Directed-Tree l2 l3) (T : I → Directed-Tree l4 l5)
+  (f g : (i : I) → rooted-hom-Directed-Tree (S i) (T i))
+  (H : (i : I) → htpy-rooted-hom-Directed-Tree (S i) (T i) (f i) (g i))
+  where
+
+  node-htpy-hom-combinator-Directed-Tree :
+    node-rooted-hom-combinator-Directed-Tree S T f ~
+    node-rooted-hom-combinator-Directed-Tree S T g
+  node-htpy-hom-combinator-Directed-Tree root-combinator-Directed-Tree = refl
+  node-htpy-hom-combinator-Directed-Tree
+    ( node-inclusion-combinator-Directed-Tree i x) =
+    ap
+      ( node-inclusion-combinator-Directed-Tree i)
+      ( node-htpy-rooted-hom-Directed-Tree (S i) (T i) (f i) (g i) (H i) x)
+
+  edge-htpy-hom-combinator-Directed-Tree :
+    ( x y : node-combinator-Directed-Tree S)
+    ( e : edge-combinator-Directed-Tree S x y) →
+    binary-tr
+      ( edge-combinator-Directed-Tree T)
+      ( node-htpy-hom-combinator-Directed-Tree x)
+      ( node-htpy-hom-combinator-Directed-Tree y)
+      ( edge-rooted-hom-combinator-Directed-Tree S T f x y e) ＝
+    edge-rooted-hom-combinator-Directed-Tree S T g x y e
+  edge-htpy-hom-combinator-Directed-Tree ._ ._
+    ( edge-to-root-combinator-Directed-Tree i) =
+    eq-edge-to-root-Directed-Tree (combinator-Directed-Tree T) _ _ _
+  edge-htpy-hom-combinator-Directed-Tree ._ ._
+    ( edge-inclusion-combinator-Directed-Tree i x y e) =
+    binary-tr-ap
+      ( edge-combinator-Directed-Tree T)
+      ( edge-inclusion-combinator-Directed-Tree i)
+      ( node-htpy-rooted-hom-Directed-Tree (S i) (T i) (f i) (g i) (H i) x)
+      ( node-htpy-rooted-hom-Directed-Tree (S i) (T i) (f i) (g i) (H i) y)
+      ( edge-htpy-rooted-hom-Directed-Tree (S i) (T i) (f i) (g i) (H i) x y e)
+
+  htpy-hom-combinator-Directed-Tree :
+    htpy-hom-Directed-Tree
+      ( combinator-Directed-Tree S)
+      ( combinator-Directed-Tree T)
+      ( hom-combinator-Directed-Tree S T f)
+      ( hom-combinator-Directed-Tree S T g)
+  pr1 htpy-hom-combinator-Directed-Tree =
+    node-htpy-hom-combinator-Directed-Tree
+  pr2 htpy-hom-combinator-Directed-Tree =
+    edge-htpy-hom-combinator-Directed-Tree
 ```
 
 ### The action of the combinator on families of equivalences of directed trees
