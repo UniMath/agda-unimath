@@ -24,6 +24,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.empty-types
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -59,6 +60,10 @@ module _
   tail-vec : {n : ℕ} → vec A (succ-ℕ n) → vec A n
   tail-vec (x ∷ v) = v
 
+  id-tail-head-vec :
+    {n : ℕ} → (v : vec A (succ-ℕ n)) → ((head-vec v) ∷ tail-vec v) ＝ v
+  id-tail-head-vec (x ∷ v) = refl
+
   snoc-vec : {n : ℕ} → vec A n → A → vec A (succ-ℕ n)
   snoc-vec empty-vec a = a ∷ empty-vec
   snoc-vec (x ∷ v) a = x ∷ (snoc-vec v a)
@@ -70,6 +75,10 @@ module _
   all-vec : {l2 : Level} {n : ℕ} → (P : A → UU l2) → vec A n → UU l2
   all-vec P empty-vec = raise-unit _
   all-vec P (x ∷ v) = P x × all-vec P v
+
+  data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
+    is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
+    is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)
 ```
 
 ### The functional type of vectors
@@ -211,6 +220,8 @@ module _
   pr1 (compute-vec n) = listed-vec-functional-vec n
   pr2 (compute-vec n) = is-equiv-listed-vec-functional-vec n
 ```
+
+
 
 ### The type of vectors of elements in a truncated type is truncated
 

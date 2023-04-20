@@ -27,6 +27,10 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.equality-dependent-pair-types
+open import foundation.function-extensionality
+
+open import linear-algebra.vectors
 ```
 
 </details>
@@ -381,4 +385,47 @@ is-equiv-map-algebra-list A =
     ( inv-map-algebra-list A)
     ( issec-inv-map-algebra-list A)
     ( isretr-inv-map-algebra-list A)
+```
+
+### Equivalence between `list` and `vector`
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  list-vec-helper : (n : ℕ)  → (vec A n) → list A
+  list-vec-helper zero-ℕ  _ = nil
+  list-vec-helper (succ-ℕ n) (x ∷ l) = cons x (list-vec-helper n l)
+
+  list-vec : Σ ℕ (λ n → vec A n) → list A
+  list-vec (n , v) = list-vec-helper n v
+
+  vec-list-helper : (l : list A) → vec A (length-list l)
+  vec-list-helper nil = empty-vec
+  vec-list-helper (cons x l) = x ∷ vec-list-helper l
+
+  vec-list : list A → (Σ ℕ (λ n → vec A n))
+  vec-list l = length-list l , vec-list-helper l
+
+  issec-vec-list : (list-vec ∘ vec-list) ~ id
+  issec-vec-list nil = refl
+  issec-vec-list (cons x l) = ap (cons x) (issec-vec-list l)
+
+  isretr-vec-list : (vec-list ∘ list-vec) ~ id
+  isretr-vec-list (zero-ℕ , empty-vec) = refl
+  isretr-vec-list (succ-ℕ n , (x ∷ v)) =
+    ap
+      ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
+      ( isretr-vec-list (n , v))
+
+  equiv-list-vec : Σ ℕ (λ n → vec A n) ≃ list A
+  pr1 equiv-list-vec = list-vec
+  pr2 equiv-list-vec =
+    is-equiv-has-inverse vec-list issec-vec-list isretr-vec-list
+
+  equiv-vec-list : list A ≃ Σ ℕ (λ n → vec A n)
+  pr1 equiv-vec-list = vec-list
+  pr2 equiv-vec-list =
+    is-equiv-has-inverse list-vec isretr-vec-list issec-vec-list
 ```
