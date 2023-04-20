@@ -31,6 +31,7 @@ open import trees.bases-directed-trees
 open import trees.directed-trees
 open import trees.equivalences-directed-trees
 open import trees.fibers-directed-trees
+open import trees.morphisms-directed-trees
 ```
 
 </details>
@@ -428,62 +429,35 @@ module _
   edge-combinator-fiber-base-Directed-Tree ._ ._
     ( edge-inclusion-combinator-Directed-Tree i (u , ._) y (e , refl)) = e
 
-  cases-map-inv-edge-combinator-fiber-base-Directed-Tree' :
-    (x y : node-Directed-Tree T) →
-    ( H :
-      is-root-Directed-Tree T x +
-      Σ ( base-Directed-Tree T)
-        ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-    ( K :
-      is-root-Directed-Tree T y +
-      Σ ( base-Directed-Tree T)
-        ( walk-Directed-Tree T y ∘ node-base-Directed-Tree T)) →
-    edge-Directed-Tree T x y →
-    edge-combinator-Directed-Tree
-      ( fiber-base-Directed-Tree T)
-      ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x H)
-      ( cases-map-inv-node-combinator-fiber-base-Directed-Tree y K)
-  cases-map-inv-edge-combinator-fiber-base-Directed-Tree' ._ ._
-    (inl refl) (inl refl) e =
-    ex-falso (no-parent-root-Directed-Tree T (root-Directed-Tree T , e))
-  cases-map-inv-edge-combinator-fiber-base-Directed-Tree' ._ y
-    (inl refl) (inr (b , w)) e =
-    ex-falso (no-parent-root-Directed-Tree T (y , e))
-  cases-map-inv-edge-combinator-fiber-base-Directed-Tree' x ._
-    ( inr (b , w)) (inl refl) e =
-    ind-singleton-is-contr
-      ( inr ((x , e) , refl-walk-Directed-Graph))
-      ( unique-walk-to-base-Directed-Tree T x)
-      ( λ L →
-        edge-combinator-Directed-Tree
-          ( fiber-base-Directed-Tree T)
-          ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x L)
-          ( root-combinator-Directed-Tree))
-      ( edge-to-root-combinator-Directed-Tree (x , e))
-      ( inr (b , w))
-  cases-map-inv-edge-combinator-fiber-base-Directed-Tree' x y
-    ( inr ((b , f) , w))
-    ( inr ((c , g) , v)) e =
-    ind-singleton-is-contr
-      ( inr ((c , g) , cons-walk-Directed-Graph e v))
-      ( unique-walk-to-base-Directed-Tree T x)
-      ( λ L →
-        edge-combinator-Directed-Tree
-          ( fiber-base-Directed-Tree T)
-          ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x L)
-          ( node-inclusion-combinator-Directed-Tree (c , g) (y , v)))
-      ( edge-inclusion-combinator-Directed-Tree
-        ( c , g)
-        ( x , cons-walk-Directed-Graph e v)
-        ( y , v)
-        ( e , refl))
-      ( inr ((b , f) , w))
+  hom-combinator-fiber-base-Directed-Tree :
+    hom-Directed-Tree
+      ( combinator-Directed-Tree (fiber-base-Directed-Tree T))
+      ( T)
+  pr1 hom-combinator-fiber-base-Directed-Tree =
+    node-combinator-fiber-base-Directed-Tree
+  pr2 hom-combinator-fiber-base-Directed-Tree =
+    edge-combinator-fiber-base-Directed-Tree
 
-{-
+  is-equiv-combinator-fiber-base-Directed-Tree :
+    is-equiv-hom-Directed-Tree
+      ( combinator-Directed-Tree (fiber-base-Directed-Tree T))
+      ( T)
+      ( hom-combinator-fiber-base-Directed-Tree)
+  is-equiv-combinator-fiber-base-Directed-Tree =
+    is-equiv-is-equiv-node-hom-Directed-Tree
+      ( combinator-Directed-Tree (fiber-base-Directed-Tree T))
+      ( T)
+      ( hom-combinator-fiber-base-Directed-Tree)
+      ( is-equiv-node-combinator-fiber-base-Directed-Tree)
+
   combinator-fiber-base-Directed-Tree :
     equiv-Directed-Tree
       ( combinator-Directed-Tree (fiber-base-Directed-Tree T))
       ( T)
-  combinator-fiber-base-Directed-Tree = {!!}
--}
+  combinator-fiber-base-Directed-Tree =
+    equiv-is-equiv-hom-Directed-Tree
+      ( combinator-Directed-Tree (fiber-base-Directed-Tree T))
+      ( T)
+      ( hom-combinator-fiber-base-Directed-Tree)
+      ( is-equiv-combinator-fiber-base-Directed-Tree)
 ```

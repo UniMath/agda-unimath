@@ -16,6 +16,8 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import graph-theory.morphisms-directed-graphs
@@ -252,6 +254,39 @@ module _
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)
+```
+
+### If `f x` is the root of `T`, then `x` is the root of `S`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
+  (f : hom-Directed-Tree S T)
+  where
+
+  is-root-is-root-node-hom-Directed-Tree :
+    (x : node-Directed-Tree S) →
+    is-root-Directed-Tree T (node-hom-Directed-Tree S T f x) →
+    is-root-Directed-Tree S x
+  is-root-is-root-node-hom-Directed-Tree x H =
+    map-right-unit-law-coprod-is-empty
+      ( is-root-Directed-Tree S x)
+      ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
+      ( λ (y , e) →
+        no-parent-root-Directed-Tree T
+          ( tr
+            ( λ u → Σ (node-Directed-Tree T) (edge-Directed-Tree T u))
+            ( inv H)
+            ( node-hom-Directed-Tree S T f y ,
+              edge-hom-Directed-Tree S T f e)))
+      ( center (unique-parent-Directed-Tree S x))
+
+  is-not-root-node-hom-is-not-root-Directed-Tree :
+    (x : node-Directed-Tree S) →
+    ¬ (is-root-Directed-Tree S x) →
+    ¬ (is-root-Directed-Tree T (node-hom-Directed-Tree S T f x))
+  is-not-root-node-hom-is-not-root-Directed-Tree x =
+    map-neg (is-root-is-root-node-hom-Directed-Tree x)
 ```
 
 ## See also

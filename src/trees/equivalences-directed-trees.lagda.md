@@ -10,7 +10,9 @@ module trees.equivalences-directed-trees where
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -308,30 +310,32 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
+  (f : hom-Directed-Tree S T)
+  where
+
+  preserves-root-is-equiv-node-hom-Directed-Tree :
+    is-equiv (node-hom-Directed-Tree S T f) →
+    preserves-root-hom-Directed-Tree S T f
+  preserves-root-is-equiv-node-hom-Directed-Tree H =
+    ( inv (issec-map-inv-is-equiv H (root-Directed-Tree T))) ∙
+    ( inv
+      ( ap
+        ( node-hom-Directed-Tree S T f)
+        ( is-root-is-root-node-hom-Directed-Tree S T f
+          ( map-inv-is-equiv H (root-Directed-Tree T))
+          ( inv (issec-map-inv-is-equiv H (root-Directed-Tree T))))))
+
+module _
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
   (e : equiv-Directed-Tree S T)
   where
 
   preserves-root-equiv-Directed-Tree :
     preserves-root-hom-Directed-Tree S T (hom-equiv-Directed-Tree S T e)
   preserves-root-equiv-Directed-Tree =
-    uniqueness-root-Directed-Tree T
-      ( pair
-        ( node-equiv-Directed-Tree S T e (root-Directed-Tree S))
-        ( λ y →
-          is-contr-equiv'
-            ( walk-Directed-Tree S
-              ( inv-node-equiv-Directed-Tree S T e y)
-              ( root-Directed-Tree S))
-            ( ( equiv-binary-tr
-                ( walk-Directed-Graph (graph-Directed-Tree T))
-                ( issec-inv-node-equiv-Directed-Tree S T e y)
-                ( refl)) ∘e
-              ( equiv-walk-equiv-Directed-Graph
-                ( graph-Directed-Tree S)
-                ( graph-Directed-Tree T)
-                ( e)))
-            ( is-tree-Directed-Tree' S
-              ( inv-node-equiv-Directed-Tree S T e y))))
+    preserves-root-is-equiv-node-hom-Directed-Tree S T
+      ( hom-equiv-Directed-Tree S T e)
+      ( is-equiv-node-equiv-Directed-Tree S T e)
 
   rooted-hom-equiv-Directed-Tree :
     rooted-hom-Directed-Tree S T
@@ -370,4 +374,49 @@ module _
       ( Σ (Directed-Tree l1 l2) (λ S → T ＝ S))
       ( equiv-tot extensionality-Directed-Tree)
       ( is-contr-total-path T)
+```
+
+### A morphism of directed trees is an equivalence if it is an equivalence on the nodes
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
+  (f : hom-Directed-Tree S T)
+  where
+
+  is-equiv-total-edge-is-equiv-node-hom-Directed-Tree :
+    is-equiv (node-hom-Directed-Tree S T f) → (x : node-Directed-Tree S) →
+    is-equiv
+      ( map-Σ
+        ( edge-Directed-Tree T (node-hom-Directed-Tree S T f x))
+        ( node-hom-Directed-Tree S T f)
+        ( λ y → edge-hom-Directed-Tree S T f {x} {y}))
+  is-equiv-total-edge-is-equiv-node-hom-Directed-Tree H x with
+    is-isolated-root-Directed-Tree S x
+  ... | inl refl =
+    is-equiv-is-empty _
+      ( λ u →
+        no-parent-root-Directed-Tree T
+          ( tr
+            ( λ v → Σ (node-Directed-Tree T) (edge-Directed-Tree T v))
+            ( inv (preserves-root-is-equiv-node-hom-Directed-Tree S T f H))
+            ( u)))
+  ... | inr p =
+    is-equiv-is-contr _
+      ( unique-parent-is-not-root-Directed-Tree S x p)
+      ( unique-parent-is-not-root-Directed-Tree T
+        ( node-hom-Directed-Tree S T f x)
+        ( is-not-root-node-hom-is-not-root-Directed-Tree S T f x p))
+
+  is-equiv-is-equiv-node-hom-Directed-Tree :
+    is-equiv (node-hom-Directed-Tree S T f) →
+    is-equiv-hom-Directed-Tree S T f
+  pr1 (is-equiv-is-equiv-node-hom-Directed-Tree H) = H
+  pr2 (is-equiv-is-equiv-node-hom-Directed-Tree H) x =
+    is-fiberwise-equiv-is-equiv-map-Σ
+      ( edge-Directed-Tree T (node-hom-Directed-Tree S T f x))
+      ( node-hom-Directed-Tree S T f)
+      ( λ y → edge-hom-Directed-Tree S T f {x} {y})
+      ( H)
+      ( is-equiv-total-edge-is-equiv-node-hom-Directed-Tree H x)
 ```

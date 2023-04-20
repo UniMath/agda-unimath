@@ -184,9 +184,6 @@ module _
     ( ap
       ( pair (u , f))
       ( eq-tr-walk-eq-parent-Directed-Tree T (y' , e') (y , e) v))
-    where
-    p : (y , e) ＝ (y' , e')
-    p = eq-parent-Directed-Tree T (y , e) (y' , e')
 
   cases-contraction-walk-to-base-Directed-Tree :
     {x : node-Directed-Tree T}
@@ -271,10 +268,4 @@ module _
   unique-walk-to-base-parent-Directed-Tree x u =
     unique-walk-to-base-is-not-root-Directed-Tree x
       ( is-not-root-parent-Directed-Tree T (pr2 u))
-
-{-
-  is-walk-to-root-is-root-or-walk-to-root-Directed-Tree :
-    (x : node-Directed-Tree T)
-    (u : Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
-    -}
 ```
