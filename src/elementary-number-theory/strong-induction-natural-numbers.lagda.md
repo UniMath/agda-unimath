@@ -222,10 +222,7 @@ comp-succ-strong-ind-ℕ P p0 pS n =
       ( n))
     ( refl-leq-ℕ n)) ∙
   ( ap ( pS n)
-       ( eq-htpy
-         ( λ m →
-           eq-htpy
-             ( λ p → eq-comp-succ-strong-ind-ℕ P p0 pS n m p))))
+       ( eq-htpy (eq-htpy ∘ eq-comp-succ-strong-ind-ℕ P p0 pS n)))
 
 total-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
