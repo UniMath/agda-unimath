@@ -4,6 +4,7 @@
 module trees where
 
 open import trees.bases-directed-trees public
+open import trees.bases-enriched-directed-trees public
 open import trees.combinator-directed-trees public
 open import trees.combinator-enriched-directed-trees public
 open import trees.directed-trees public

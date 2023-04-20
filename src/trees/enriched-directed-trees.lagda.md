@@ -207,6 +207,50 @@ module _
   walk-to-root-Enriched-Directed-Tree =
     walk-to-root-Directed-Tree directed-tree-Enriched-Directed-Tree
 
+  unique-parent-Enriched-Directed-Tree :
+    unique-parent-Directed-Graph
+      graph-Enriched-Directed-Tree
+      root-Enriched-Directed-Tree
+  unique-parent-Enriched-Directed-Tree =
+    unique-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+
+  unique-parent-is-not-root-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) →
+    ¬ (is-root-Enriched-Directed-Tree x) →
+    is-contr ( Σ node-Enriched-Directed-Tree (edge-Enriched-Directed-Tree x))
+  unique-parent-is-not-root-Enriched-Directed-Tree =
+    unique-parent-is-not-root-Directed-Tree
+      directed-tree-Enriched-Directed-Tree
+
+  is-proof-irrelevant-parent-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) →
+    is-proof-irrelevant
+      ( Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x))
+  is-proof-irrelevant-parent-Enriched-Directed-Tree =
+    is-proof-irrelevant-parent-Directed-Tree
+      directed-tree-Enriched-Directed-Tree
+
+  is-prop-parent-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) →
+    is-prop
+      ( Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x))
+  is-prop-parent-Enriched-Directed-Tree =
+    is-prop-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+
+  eq-parent-Enriched-Directed-Tree :
+    {x : node-Enriched-Directed-Tree}
+    ( u v : Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x)) →
+    u ＝ v
+  eq-parent-Enriched-Directed-Tree =
+    eq-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+
+  parent-is-not-root-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) →
+    ¬ (is-root-Enriched-Directed-Tree x) →
+    Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x)
+  parent-is-not-root-Enriched-Directed-Tree =
+    parent-is-not-root-Directed-Tree directed-tree-Enriched-Directed-Tree
+
   shape-Enriched-Directed-Tree : node-Enriched-Directed-Tree → A
   shape-Enriched-Directed-Tree = pr1 (pr2 T)
 
