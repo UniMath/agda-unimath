@@ -162,7 +162,7 @@ module _
 uniqueness-root-Directed-Tree :
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   (H : is-tree-Directed-Graph (graph-Directed-Tree T)) →
-  root-Directed-Tree T ＝ pr1 H
+  is-root-Directed-Tree T (pr1 H)
 uniqueness-root-Directed-Tree T =
   uniqueness-root-is-tree-Directed-Graph
     ( graph-Directed-Tree T)
