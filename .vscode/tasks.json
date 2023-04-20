@@ -4,13 +4,15 @@
     {
       "label": "check",
       "type": "shell",
-      "command": "make check",
+      "command": "make",
+      "args": ["check"],
       "problemMatcher": []
     },
     {
       "label": "pre-commit",
       "type": "shell",
-      "command": "make pre-commit",
+      "command": "make",
+      "args": ["pre-commit"],
       "problemMatcher": []
     }
   ]
