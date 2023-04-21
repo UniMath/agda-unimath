@@ -22,13 +22,17 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **acyclic** undirected graph is an undirected graph of which the geometric realization is contractible.
+An **acyclic** undirected graph is an undirected graph of which the geometric
+realization is contractible.
 
 ## Definition
 
 ### Acyclic undirected graphs
 
-The following is a preliminary definition that requires us to parametrize over an extra universe level. This will not be necessary anymore if we constructed a geometric realization of every undirected graph. Once we did that, we would simply say that the geometric realization of `G` is contractible.
+The following is a preliminary definition that requires us to parametrize over
+an extra universe level. This will not be necessary anymore if we constructed a
+geometric realization of every undirected graph. Once we did that, we would
+simply say that the geometric realization of `G` is contractible.
 
 ```agda
 is-acyclic-Undirected-Graph :
@@ -38,3 +42,13 @@ is-acyclic-Undirected-Graph l G =
   is-geometric-realization-reflecting-map-Undirected-Graph l G
     ( terminal-reflecting-map-Undirected-Graph G)
 ```
+
+## See also
+
+- Not all acyclic undirected graphs are
+  [undirected trees](trees.undirected-trees.md). Indeed, there are types `A` of
+  which the suspension is contractible. Such types are called
+  [acyclic types](synthetic-homotopy-theory.acyclic-types.md). The suspension
+  diagram of any type `A` can be turned into an undirected graph of which the
+  geometric realization is the suspension of `A`, which is contractible if `A`
+  is an acyclic type.

@@ -254,6 +254,10 @@ module _
   shape-Enriched-Directed-Tree : node-Enriched-Directed-Tree → A
   shape-Enriched-Directed-Tree = pr1 (pr2 T)
 
+  shape-root-Enriched-Directed-Tree : A
+  shape-root-Enriched-Directed-Tree =
+    shape-Enriched-Directed-Tree root-Enriched-Directed-Tree
+
   enrichment-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
     B (shape-Enriched-Directed-Tree x) ≃
@@ -274,6 +278,5 @@ module _
       ( map-enrichment-Enriched-Directed-Tree x)
       ( map-enrichment-Enriched-Directed-Tree y)
       ( tot ( λ y → tr (edge-Enriched-Directed-Tree y) p))
-  coherence-square-map-enrichment-Enriched-Directed-Tree refl =
-    tot-id _ ·r (map-enrichment-Enriched-Directed-Tree _)
+  coherence-square-map-enrichment-Enriched-Directed-Tree refl = refl-htpy
 ```

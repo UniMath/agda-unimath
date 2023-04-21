@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import graph-theory.walks-directed-graphs
 
+open import trees.bases-enriched-directed-trees
 open import trees.directed-trees
 open import trees.enriched-directed-trees
 open import trees.fibers-directed-trees
@@ -80,4 +81,52 @@ module _
   pr1 (pr2 fiber-Enriched-Directed-Tree) = shape-fiber-Enriched-Directed-Tree
   pr2 (pr2 fiber-Enriched-Directed-Tree) =
     enrichment-fiber-Enriched-Directed-Tree
+```
+
+### The fiber of a tree at a base node
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
+  (T : Enriched-Directed-Tree l3 l4 A B)
+  (b : B (shape-root-Enriched-Directed-Tree A B T))
+  where
+
+  fiber-base-Enriched-Directed-Tree :
+    Enriched-Directed-Tree (l3 ⊔ l4) (l3 ⊔ l4) A B
+  fiber-base-Enriched-Directed-Tree =
+    fiber-Enriched-Directed-Tree A B T
+      ( node-base-Enriched-Directed-Tree A B T {!!})
+
+  node-fiber-base-Enriched-Directed-Tree : UU (l3 ⊔ l4)
+  node-fiber-base-Enriched-Directed-Tree =
+    node-Enriched-Directed-Tree A B fiber-base-Enriched-Directed-Tree
+
+  edge-fiber-base-Enriched-Directed-Tree :
+    (x y : node-fiber-base-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
+  edge-fiber-base-Enriched-Directed-Tree =
+    edge-Enriched-Directed-Tree A B fiber-base-Enriched-Directed-Tree
+
+  root-fiber-base-Enriched-Directed-Tree :
+    node-fiber-base-Enriched-Directed-Tree
+  root-fiber-base-Enriched-Directed-Tree =
+    root-Enriched-Directed-Tree A B fiber-base-Enriched-Directed-Tree
+
+  walk-fiber-base-Enriched-Directed-Tree :
+    (x y : node-fiber-base-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
+  walk-fiber-base-Enriched-Directed-Tree =
+    walk-Enriched-Directed-Tree A B fiber-base-Enriched-Directed-Tree
+
+  shape-fiber-base-Enriched-Directed-Tree :
+    node-fiber-base-Enriched-Directed-Tree → A
+  shape-fiber-base-Enriched-Directed-Tree =
+    shape-Enriched-Directed-Tree A B fiber-base-Enriched-Directed-Tree
+
+  enrichment-fiber-base-Enriched-Directed-Tree :
+    (y : node-fiber-base-Enriched-Directed-Tree) →
+    B (shape-fiber-base-Enriched-Directed-Tree y) ≃
+    Σ ( node-fiber-base-Enriched-Directed-Tree)
+      ( λ z → edge-fiber-base-Enriched-Directed-Tree z y)
+  enrichment-fiber-base-Enriched-Directed-Tree =
+    enrichment-Enriched-Directed-Tree A B fiber-base-Enriched-Directed-Tree
 ```

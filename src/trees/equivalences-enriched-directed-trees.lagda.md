@@ -31,6 +31,35 @@ open import trees.rooted-morphisms-enriched-directed-trees
 
 ## Definition
 
+### The condition of being an equivalence of enriched directed trees
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
+  (S : Enriched-Directed-Tree l3 l4 A B)
+  (T : Enriched-Directed-Tree l5 l6 A B)
+  where
+
+  is-equiv-hom-Enriched-Directed-Tree :
+    hom-Enriched-Directed-Tree A B S T → UU (l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  is-equiv-hom-Enriched-Directed-Tree f =
+    is-equiv-hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( directed-tree-hom-Enriched-Directed-Tree A B S T f)
+
+  preserves-root-is-equiv-node-hom-Enriched-Directed-Tree :
+    ( f : hom-Enriched-Directed-Tree A B S T) →
+    is-equiv
+      ( node-hom-Enriched-Directed-Tree A B S T f) →
+    preserves-root-hom-Enriched-Directed-Tree A B S T f
+  preserves-root-is-equiv-node-hom-Enriched-Directed-Tree f =
+    preserves-root-is-equiv-node-hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( directed-tree-hom-Enriched-Directed-Tree A B S T f)
+```
+
 ### Equivalences of enriched directed trees
 
 ```agda
@@ -65,6 +94,24 @@ equiv-Enriched-Directed-Tree A B S T =
                   ( e)
                   ( x))) ∘e
               ( equiv-tr B (H x)))))
+
+equiv-is-equiv-hom-Enriched-Directed-Tree :
+  {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
+  (S : Enriched-Directed-Tree l3 l4 A B)
+  (T : Enriched-Directed-Tree l5 l6 A B) →
+  (f : hom-Enriched-Directed-Tree A B S T) →
+  is-equiv-hom-Enriched-Directed-Tree A B S T f →
+  equiv-Enriched-Directed-Tree A B S T
+equiv-is-equiv-hom-Enriched-Directed-Tree A B S T f H =
+  map-Σ-map-base
+    ( equiv-is-equiv-hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( directed-tree-hom-Enriched-Directed-Tree A B S T f))
+    ( _)
+    ( H ,
+      shape-hom-Enriched-Directed-Tree A B S T f ,
+      enrichment-hom-Enriched-Directed-Tree A B S T f)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
@@ -308,4 +355,24 @@ module _
       ( Σ (Enriched-Directed-Tree l3 l4 A B) (λ S → T ＝ S))
       ( equiv-tot extensionality-Enriched-Directed-Tree)
       ( is-contr-total-path T)
+```
+
+### A morphism of enriched directed trees is an equivalence if it is an equivalence on the nodes
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
+  (S : Enriched-Directed-Tree l3 l4 A B)
+  (T : Enriched-Directed-Tree l5 l6 A B)
+  (f : hom-Enriched-Directed-Tree A B S T)
+  where
+
+  is-equiv-is-equiv-node-hom-Enriched-Directed-Tree :
+    is-equiv (node-hom-Enriched-Directed-Tree A B S T f) →
+    is-equiv-hom-Enriched-Directed-Tree A B S T f
+  is-equiv-is-equiv-node-hom-Enriched-Directed-Tree =
+    is-equiv-is-equiv-node-hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( directed-tree-hom-Enriched-Directed-Tree A B S T f)
 ```

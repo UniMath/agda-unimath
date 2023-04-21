@@ -3,6 +3,7 @@
 ```agda
 module graph-theory where
 
+open import graph-theory.acyclic-undirected-graphs public
 open import graph-theory.circuits-undirected-graphs public
 open import graph-theory.closed-walks-undirected-graphs public
 open import graph-theory.complete-bipartite-graphs public
