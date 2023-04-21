@@ -67,7 +67,8 @@ glue-join :
 glue-join A B = pr2 (pr2 (cocone-join A B))
 
 cogap-join :
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (X : UU l3) → cocone pr1 pr2 X → A * B → X
+  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (X : UU l3) →
+  cocone pr1 pr2 X → A * B → X
 cogap-join A B X = map-inv-is-equiv (up-join A B X)
 ```
 
@@ -227,9 +228,11 @@ right-zero-law-join-is-contr A B is-contr-B =
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
+
   is-proof-irrelevant-join-is-proof-irrelevant :
     is-proof-irrelevant A → is-proof-irrelevant B → is-proof-irrelevant (A * B)
-  is-proof-irrelevant-join-is-proof-irrelevant is-proof-irrelevant-A is-proof-irrelevant-B =
+  is-proof-irrelevant-join-is-proof-irrelevant
+    is-proof-irrelevant-A is-proof-irrelevant-B =
     cogap-join A B (is-contr (A * B))
       ( pair
         ( left-zero-law-join-is-contr A B ∘ is-proof-irrelevant-A)
@@ -268,7 +271,7 @@ module _
   inr-join-Prop = inr-join A B
 ```
 
-### Disjunction is join of propositions
+### Disjunction is the join of propositions
 
 ```agda
 module _
@@ -290,18 +293,26 @@ module _
 
   map-join-disj-Prop : type-disj-Prop A B → type-join-Prop A B
   map-join-disj-Prop =
-    elim-disj-Prop A B (join-Prop A B) (pair (inl-join-Prop A B) (inr-join-Prop A B))
+    elim-disj-Prop A B
+      ( join-Prop A B)
+      ( pair (inl-join-Prop A B) (inr-join-Prop A B))
 
   is-equiv-map-disj-join-Prop : is-equiv map-disj-join-Prop
   is-equiv-map-disj-join-Prop =
-    is-equiv-is-prop (is-prop-type-join-Prop A B) (is-prop-type-disj-Prop A B) map-join-disj-Prop
+    is-equiv-is-prop
+      ( is-prop-type-join-Prop A B)
+      ( is-prop-type-disj-Prop A B)
+      ( map-join-disj-Prop)
 
   equiv-disj-join-Prop : (type-join-Prop A B) ≃ (type-disj-Prop A B)
   equiv-disj-join-Prop = pair map-disj-join-Prop is-equiv-map-disj-join-Prop
 
   is-equiv-map-join-disj-Prop : is-equiv map-join-disj-Prop
   is-equiv-map-join-disj-Prop =
-    is-equiv-is-prop (is-prop-type-disj-Prop A B) (is-prop-type-join-Prop A B) map-disj-join-Prop
+    is-equiv-is-prop
+      ( is-prop-type-disj-Prop A B)
+      ( is-prop-type-join-Prop A B)
+      ( map-disj-join-Prop)
 
   equiv-join-disj-Prop : (type-disj-Prop A B) ≃ (type-join-Prop A B)
   equiv-join-disj-Prop = pair map-join-disj-Prop is-equiv-map-join-disj-Prop
@@ -315,12 +326,16 @@ module _
       ( cocone-disj)
       ( map-disj-join-Prop)
       ( pair
-        ( λ a → eq-is-prop (is-prop-type-disj-Prop A B))
+        ( λ _ → eq-is-prop (is-prop-type-disj-Prop A B))
         ( pair
-          ( λ b → eq-is-prop (is-prop-type-disj-Prop A B))
+          ( λ _ → eq-is-prop (is-prop-type-disj-Prop A B))
           ( λ (a , b) → eq-is-contr
             ( is-prop-type-disj-Prop A B
-              ( horizontal-map-cocone pr1 pr2 (cocone-map pr1 pr2 (cocone-join (pr1 A) (pr1 B)) map-disj-join-Prop) a)
+              ( horizontal-map-cocone pr1 pr2
+                ( cocone-map pr1 pr2
+                  ( cocone-join (pr1 A) (pr1 B))
+                  ( map-disj-join-Prop))
+                ( a))
               ( vertical-map-cocone pr1 pr2 cocone-disj b)))))
       ( is-equiv-map-disj-join-Prop)
       ( up-join (pr1 A) (pr1 B))
