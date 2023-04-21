@@ -96,7 +96,10 @@ module _
     Enriched-Directed-Tree (l3 ⊔ l4) (l3 ⊔ l4) A B
   fiber-base-Enriched-Directed-Tree =
     fiber-Enriched-Directed-Tree A B T
-      ( node-base-Enriched-Directed-Tree A B T {!!})
+      ( node-base-Enriched-Directed-Tree A B T
+        ( map-enrichment-Enriched-Directed-Tree A B T
+          ( root-Enriched-Directed-Tree A B T)
+          ( b)))
 
   node-fiber-base-Enriched-Directed-Tree : UU (l3 ⊔ l4)
   node-fiber-base-Enriched-Directed-Tree =
