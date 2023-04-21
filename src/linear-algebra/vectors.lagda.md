@@ -60,10 +60,6 @@ module _
   tail-vec : {n : ℕ} → vec A (succ-ℕ n) → vec A n
   tail-vec (x ∷ v) = v
 
-  id-tail-head-vec :
-    {n : ℕ} → (v : vec A (succ-ℕ n)) → ((head-vec v) ∷ tail-vec v) ＝ v
-  id-tail-head-vec (x ∷ v) = refl
-
   snoc-vec : {n : ℕ} → vec A n → A → vec A (succ-ℕ n)
   snoc-vec empty-vec a = a ∷ empty-vec
   snoc-vec (x ∷ v) a = x ∷ (snoc-vec v a)

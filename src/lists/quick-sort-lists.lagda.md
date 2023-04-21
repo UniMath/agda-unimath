@@ -1,7 +1,7 @@
-# Quick sort for vectors
+# Quick sort for lists
 
 ```agda
-module lists.quick-sort-vectors where
+module lists.quick-sort-lists where
 ```
 
 <details><summary>Imports</summary>
@@ -23,9 +23,6 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-
-open import lists.arrays
 open import lists.concatenation-lists
 open import lists.lists
 open import lists.permutation-lists
@@ -40,7 +37,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In these file, we define the quick sort.
+In these file, we define the quick sort for lists.
 
 ## Definition
 

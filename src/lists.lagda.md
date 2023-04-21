@@ -10,7 +10,8 @@ open import lists.functoriality-lists public
 open import lists.lists public
 open import lists.lists-discrete-types public
 open import lists.permutation-lists public
-open import lists.quick-sort-vectors public
+open import lists.permutation-vectors public
+open import lists.quick-sort-lists public
 open import lists.reversing-lists public
 open import lists.sort-by-insertion-vectors public
 open import lists.sorted-lists public

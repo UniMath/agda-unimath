@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
-open import lists.permutation-lists
+open import lists.permutation-vectors
 
 open import order-theory.total-decidable-posets
 
