@@ -202,7 +202,7 @@ eq-index-edge-combinator-Enriched-Directed-Tree A B a T =
 
 ### Any tree is the combinator tree of the fibers at the nodes equipped with edges to the root
 
-````agda
+```agda
 module _
   {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
   (T : Enriched-Directed-Tree l3 l4 A B)
