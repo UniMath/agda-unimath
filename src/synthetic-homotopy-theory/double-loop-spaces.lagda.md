@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.double-loop-spaces where
 
 ```agda
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
 
@@ -108,4 +109,10 @@ eckmann-hilton-Ω² :
 eckmann-hilton-Ω² α β =
   ( inv (outer-eckmann-hilton-connection-Ω² α β)) ∙
   ( inner-eckmann-hilton-connection-Ω² α β)
+
+interchange-concat-Ω² :
+  {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
+  ((α ∙ β) ∙ (γ ∙ δ)) ＝ ((α ∙ γ) ∙ (β ∙ δ))
+interchange-concat-Ω² =
+  interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² assoc
 ```
