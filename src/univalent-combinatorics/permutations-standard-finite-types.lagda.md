@@ -121,27 +121,27 @@ module _
   (n : ℕ)
   where
 
-  map-swap-two-last-element-permutation :
+  map-swap-two-last-elements-permutation :
     Fin (succ-ℕ (succ-ℕ n)) → Fin (succ-ℕ (succ-ℕ n))
-  map-swap-two-last-element-permutation (inl (inl x)) = inl (inl x)
-  map-swap-two-last-element-permutation (inl (inr star)) = inr star
-  map-swap-two-last-element-permutation (inr star) = inl (inr star)
+  map-swap-two-last-elements-permutation (inl (inl x)) = inl (inl x)
+  map-swap-two-last-elements-permutation (inl (inr star)) = inr star
+  map-swap-two-last-elements-permutation (inr star) = inl (inr star)
 
-  is-involution-map-swap-two-last-element-permutation :
-    ( map-swap-two-last-element-permutation ∘
-      map-swap-two-last-element-permutation) ~
+  is-involution-map-swap-two-last-elements-permutation :
+    ( map-swap-two-last-elements-permutation ∘
+      map-swap-two-last-elements-permutation) ~
     id
-  is-involution-map-swap-two-last-element-permutation (inl (inl x)) = refl
-  is-involution-map-swap-two-last-element-permutation (inl (inr star)) = refl
-  is-involution-map-swap-two-last-element-permutation (inr star) = refl
+  is-involution-map-swap-two-last-elements-permutation (inl (inl x)) = refl
+  is-involution-map-swap-two-last-elements-permutation (inl (inr star)) = refl
+  is-involution-map-swap-two-last-elements-permutation (inr star) = refl
 
-  swap-two-last-element-permutation : Permutation (succ-ℕ (succ-ℕ n))
-  pr1 swap-two-last-element-permutation = map-swap-two-last-element-permutation
-  pr2 swap-two-last-element-permutation =
+  swap-two-last-elements-permutation : Permutation (succ-ℕ (succ-ℕ n))
+  pr1 swap-two-last-elements-permutation = map-swap-two-last-elements-permutation
+  pr2 swap-two-last-elements-permutation =
     is-equiv-has-inverse
-      map-swap-two-last-element-permutation
-      is-involution-map-swap-two-last-element-permutation
-      is-involution-map-swap-two-last-element-permutation
+      map-swap-two-last-elements-permutation
+      is-involution-map-swap-two-last-elements-permutation
+      is-involution-map-swap-two-last-elements-permutation
 ```
 
 
