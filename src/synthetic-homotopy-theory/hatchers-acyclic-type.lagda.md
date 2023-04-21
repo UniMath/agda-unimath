@@ -34,7 +34,9 @@ open import synthetic-homotopy-theory.powers-of-loops
 
 ## Idea
 
-**Hatcher's** example of an acyclic type is a higher inductive type equipped with a point and two loops `a` and `b`, and identifications witnessing that `a⁵ ＝ b³` and `b³ = (ab)²`.
+**Hatcher's** example of an acyclic type is a higher inductive type equipped
+with a point and two loops `a` and `b`, and identifications witnessing that
+`a⁵ ＝ b³` and `b³ = (ab)²`.
 
 ## Definitions
 

@@ -29,7 +29,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-The `n`-th power of a loop `ω` in a type `A` is defined by iterated concatenation of `ω` with itself.
+The `n`-th power of a loop `ω` in a type `A` is defined by iterated
+concatenation of `ω` with itself.
 
 ## Definitions
 
