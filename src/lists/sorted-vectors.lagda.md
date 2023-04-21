@@ -9,22 +9,22 @@ module lists.sorted-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
 open import foundation.propositions
 open import foundation.unit-type
-open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.equivalences
-open import foundation.coproduct-types
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
 open import lists.permutation-lists
 
+open import order-theory.total-decidable-posets
+
 open import univalent-combinatorics.permutations-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
-
-open import order-theory.total-decidable-posets
 ```
 
 </details>

@@ -8,9 +8,9 @@ module order-theory.decidable-preorders where
 
 ```agda
 open import foundation.decidable-propositions
-open import foundation.universe-levels
-open import foundation.propositions
 open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import order-theory.preorders
 ```

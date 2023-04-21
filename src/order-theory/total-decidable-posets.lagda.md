@@ -7,22 +7,22 @@ module order-theory.total-decidable-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.sets
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import order-theory.posets
-open import order-theory.total-posets
 open import order-theory.decidable-posets
+open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.total-decidable-preorders
+open import order-theory.total-posets
 ```
 
 </details>

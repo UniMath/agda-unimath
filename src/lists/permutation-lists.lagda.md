@@ -9,30 +9,32 @@ module lists.permutation-lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.equivalences
-open import foundation.identity-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
 open import foundation.unit-type
-
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.involution-standard-finite-types
-open import univalent-combinatorics.permutations-standard-finite-types
-
-open import lists.lists
-open import lists.arrays
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
+
+open import lists.arrays
+open import lists.lists
+
+open import univalent-combinatorics.involution-standard-finite-types
+open import univalent-combinatorics.permutations-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Given an array `t` of length `n` and a automorphism `σ` of `Fin n`, the permutation of `t` according to `σ` is the array where the index are permuted by `σ`.
-Then, we can define what is a permutation of a list of length `n` via the equivalence between arrays and lists.
+Given an array `t` of length `n` and a automorphism `σ` of `Fin n`, the
+permutation of `t` according to `σ` is the array where the index are permuted by
+`σ`. Then, we can define what is a permutation of a list of length `n` via the
+equivalence between arrays and lists.
 
 ## Definitions
 

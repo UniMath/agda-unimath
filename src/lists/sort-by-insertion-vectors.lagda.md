@@ -9,32 +9,33 @@ module lists.sort-by-insertion-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
-open import foundation.unit-type
 open import foundation.coproduct-types
-open import foundation.functoriality-coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.functions
 open import foundation.equivalences
-
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.permutations-standard-finite-types
-
-open import lists.sorted-vectors
-open import lists.permutation-lists
-open import lists.sorting-algorithms-vectors
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
+open import lists.permutation-lists
+open import lists.sorted-vectors
+open import lists.sorting-algorithms-vectors
+
 open import order-theory.total-decidable-posets
+
+open import univalent-combinatorics.permutations-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-In these file, we define the sort by insertion on vectors and we prove its correcteness.
+In these file, we define the sort by insertion on vectors and we prove its
+correcteness.
 
 ## Definition
 
@@ -225,7 +226,6 @@ module _
 ```
 
 ### Sort by insertion is sorting vectors
-
 
 ```agda
   is-sorting-insertion-sort-vec-helper :

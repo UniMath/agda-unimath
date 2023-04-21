@@ -31,6 +31,7 @@ open import univalent-combinatorics.counting-dependent-pair-types public
 open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.cubes public
+open import univalent-combinatorics.cycle-decomposition-natural-numbers public
 open import univalent-combinatorics.cycle-partitions public
 open import univalent-combinatorics.cyclic-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
@@ -74,6 +75,7 @@ open import univalent-combinatorics.necklaces public
 open import univalent-combinatorics.orientations-complete-undirected-graph public
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.partitions public
+open import univalent-combinatorics.permutations-standard-finite-types public
 open import univalent-combinatorics.petri-nets public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public

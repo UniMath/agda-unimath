@@ -13,6 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
@@ -24,7 +25,6 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.empty-types
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -220,8 +220,6 @@ module _
   pr1 (compute-vec n) = listed-vec-functional-vec n
   pr2 (compute-vec n) = is-equiv-listed-vec-functional-vec n
 ```
-
-
 
 ### The type of vectors of elements in a truncated type is truncated
 

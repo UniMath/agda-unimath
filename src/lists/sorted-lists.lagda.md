@@ -9,9 +9,9 @@ module lists.sorted-lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
 open import foundation.propositions
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import lists.lists
 

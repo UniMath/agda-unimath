@@ -143,5 +143,3 @@ module _
       is-involution-map-swap-two-last-elements-permutation
       is-involution-map-swap-two-last-elements-permutation
 ```
-
-
