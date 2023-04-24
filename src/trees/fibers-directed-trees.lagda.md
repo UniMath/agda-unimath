@@ -7,10 +7,16 @@ module trees.fibers-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -18,6 +24,7 @@ open import graph-theory.walks-directed-graphs
 
 open import trees.bases-directed-trees
 open import trees.directed-trees
+open import trees.morphisms-directed-trees
 ```
 
 <details>
@@ -155,6 +162,85 @@ module _
   fiber-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 fiber-Directed-Tree = graph-fiber-Directed-Tree
   pr2 fiber-Directed-Tree = is-tree-fiber-Directed-Tree
+
+  inclusion-fiber-Directed-Tree :
+    hom-Directed-Tree fiber-Directed-Tree T
+  pr1 inclusion-fiber-Directed-Tree = node-inclusion-fiber-Directed-Tree
+  pr2 inclusion-fiber-Directed-Tree = edge-inclusion-fiber-Directed-Tree
+```
+
+### Computing the children of a node in a fiber
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2) (x : node-Directed-Tree T)
+  where
+
+  children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) → UU (l1 ⊔ l2)
+  children-fiber-Directed-Tree =
+    children-Directed-Tree (fiber-Directed-Tree T x)
+
+  children-inclusion-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    children-fiber-Directed-Tree y →
+    children-Directed-Tree T (node-inclusion-fiber-Directed-Tree T x y)
+  children-inclusion-fiber-Directed-Tree =
+    children-hom-Directed-Tree
+      ( fiber-Directed-Tree T x)
+      ( T)
+      ( inclusion-fiber-Directed-Tree T x)
+
+  compute-children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    children-fiber-Directed-Tree y ≃
+    children-Directed-Tree T (node-inclusion-fiber-Directed-Tree T x y)
+  compute-children-fiber-Directed-Tree y =
+    ( right-unit-law-Σ-is-contr (λ (u , e) → is-contr-total-path' _)) ∘e
+    ( interchange-Σ-Σ _)
+
+  map-compute-children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    children-fiber-Directed-Tree y →
+    children-Directed-Tree T (node-inclusion-fiber-Directed-Tree T x y)
+  map-compute-children-fiber-Directed-Tree y =
+    map-equiv (compute-children-fiber-Directed-Tree y)
+
+  htpy-compute-children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    children-inclusion-fiber-Directed-Tree y ~
+    map-compute-children-fiber-Directed-Tree y
+  htpy-compute-children-fiber-Directed-Tree y t = refl
+
+  inv-compute-children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    children-Directed-Tree T (node-inclusion-fiber-Directed-Tree T x y) ≃
+    children-fiber-Directed-Tree y
+  inv-compute-children-fiber-Directed-Tree y =
+    inv-equiv (compute-children-fiber-Directed-Tree y)
+
+  Eq-children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    (u v : children-fiber-Directed-Tree y) → UU (l1 ⊔ l2)
+  Eq-children-fiber-Directed-Tree y u v =
+    Σ ( pr1 (children-inclusion-fiber-Directed-Tree y u) ＝
+        pr1 (children-inclusion-fiber-Directed-Tree y v))
+      ( λ p →
+        tr
+          ( λ t →
+            edge-Directed-Tree T t (node-inclusion-fiber-Directed-Tree T x y))
+          ( p)
+          ( pr2 (children-inclusion-fiber-Directed-Tree y u)) ＝
+            pr2 (children-inclusion-fiber-Directed-Tree y v))
+
+  eq-Eq-children-fiber-Directed-Tree :
+    (y : node-fiber-Directed-Tree T x) →
+    ( u v : children-fiber-Directed-Tree y) →
+    Eq-children-fiber-Directed-Tree y u v → u ＝ v
+  eq-Eq-children-fiber-Directed-Tree y u v p =
+    map-inv-equiv
+      ( equiv-ap (compute-children-fiber-Directed-Tree y) u v)
+      ( eq-pair-Σ' p)
 ```
 
 ### The fiber of a tree at a base node

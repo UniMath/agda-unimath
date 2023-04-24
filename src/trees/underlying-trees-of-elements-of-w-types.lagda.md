@@ -91,7 +91,7 @@ module _
   inclusion-graph-element-𝕎 :
     {u v : 𝕎 A B} → u ∈-𝕎 v →
     hom-Directed-Graph (graph-element-𝕎 u) (graph-element-𝕎 v)
-  inclusion-graph-element-𝕎 = inclusion-graph-element-coalgebra (𝕎-Coalg A B)
+  inclusion-graph-element-𝕎 = inclusion-element-coalgebra (𝕎-Coalg A B)
 ```
 
 #### Nodes of the underlying directed tree of an element of a W-type
@@ -172,7 +172,7 @@ module _
     (w : 𝕎 A B) →
     is-empty (Σ (node-element-𝕎 w) (edge-element-𝕎 w (root-𝕎 w)))
   no-edge-from-root-graph-element-𝕎 =
-    no-edge-from-root-graph-element-coalgebra (𝕎-Coalg A B)
+    no-edge-from-root-element-coalgebra (𝕎-Coalg A B)
 
   is-empty-eq-root-node-inclusion-element-𝕎 :
     {v w : 𝕎 A B} (H : v ∈-𝕎 w) (x : node-element-𝕎 v) →
@@ -202,13 +202,13 @@ module _
     is-contr
       ((root-𝕎 w ＝ x) + Σ (node-element-𝕎 w) (edge-element-𝕎 w x))
   has-unique-predecessor-graph-element-𝕎 =
-    has-unique-predecessor-graph-element-coalgebra (𝕎-Coalg A B)
+    has-unique-predecessor-element-coalgebra (𝕎-Coalg A B)
 
   walk-to-root-graph-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
     walk-Directed-Graph (graph-element-𝕎 w) x (root-𝕎 w)
   walk-to-root-graph-element-𝕎 =
-    walk-to-root-graph-element-coalgebra (𝕎-Coalg A B)
+    walk-to-root-element-coalgebra (𝕎-Coalg A B)
 
   unique-walk-to-root-element-𝕎 :
     (w : 𝕎 A B) → is-tree-Directed-Graph' (graph-element-𝕎 w) (root-𝕎 w)
