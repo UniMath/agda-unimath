@@ -113,7 +113,7 @@ module _
     map-inv-is-equiv (is-equiv-Eq-Eq-ext-eq-𝕎 x y u v)
 
   equiv-total-Eq-ext-𝕎 :
-    (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (symbol-𝕎 x) ≃ B a)
+    (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (shape-𝕎 x) ≃ B a)
   equiv-total-Eq-ext-𝕎 (tree-𝕎 a f) =
     ( ( equiv-tot
             ( λ x →

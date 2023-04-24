@@ -188,12 +188,12 @@ module _
   is-tree-Enriched-Directed-Tree =
     is-tree-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  is-tree-Enriched-Directed-Tree' :
+  unique-walk-to-root-Enriched-Directed-Tree :
     is-tree-Directed-Graph'
       graph-Enriched-Directed-Tree
       root-Enriched-Directed-Tree
-  is-tree-Enriched-Directed-Tree' =
-    is-tree-Directed-Tree' directed-tree-Enriched-Directed-Tree
+  unique-walk-to-root-Enriched-Directed-Tree =
+    unique-walk-to-root-Directed-Tree directed-tree-Enriched-Directed-Tree
 
   uniqueness-root-Enriched-Directed-Tree :
     (H : is-tree-Directed-Graph graph-Enriched-Directed-Tree) →

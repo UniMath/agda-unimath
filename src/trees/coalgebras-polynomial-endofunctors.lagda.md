@@ -47,4 +47,16 @@ module _
     type-coalgebra-polynomial-endofunctor →
     type-polynomial-endofunctor A B type-coalgebra-polynomial-endofunctor
   structure-coalgebra-polynomial-endofunctor = pr2 X
+
+  shape-coalgebra-polynomial-endofunctor :
+    type-coalgebra-polynomial-endofunctor → A
+  shape-coalgebra-polynomial-endofunctor x =
+    pr1 (structure-coalgebra-polynomial-endofunctor x)
+
+  component-coalgebra-polynomial-endofunctor :
+    (x : type-coalgebra-polynomial-endofunctor) →
+    B (shape-coalgebra-polynomial-endofunctor x) →
+    type-coalgebra-polynomial-endofunctor
+  component-coalgebra-polynomial-endofunctor x =
+    pr2 (structure-coalgebra-polynomial-endofunctor x)
 ```

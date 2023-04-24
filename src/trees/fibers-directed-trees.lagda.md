@@ -10,6 +10,7 @@ module trees.fibers-directed-trees where
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

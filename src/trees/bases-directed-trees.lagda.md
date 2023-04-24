@@ -100,7 +100,8 @@ module _
         ( ap
           ( length-walk-Directed-Graph (graph-Directed-Tree T))
           ( eq-is-contr'
-            ( is-tree-Directed-Tree' T (node-base-Directed-Tree T a))
+            ( unique-walk-to-root-Directed-Tree T
+              ( node-base-Directed-Tree T a))
             ( cons-walk-Directed-Tree T e
               ( unit-walk-Directed-Tree T (edge-base-Directed-Tree T b)))
             ( unit-walk-Directed-Tree T (edge-base-Directed-Tree T a)))))

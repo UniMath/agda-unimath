@@ -120,14 +120,14 @@ module _
   is-root-Directed-Tree : node-Directed-Tree → UU l1
   is-root-Directed-Tree x = root-Directed-Tree ＝ x
 
-  is-tree-Directed-Tree' :
+  unique-walk-to-root-Directed-Tree :
     is-tree-Directed-Graph' graph-Directed-Tree root-Directed-Tree
-  is-tree-Directed-Tree' = pr2 is-tree-Directed-Tree
+  unique-walk-to-root-Directed-Tree = pr2 is-tree-Directed-Tree
 
   walk-to-root-Directed-Tree :
     (x : node-Directed-Tree) → walk-Directed-Tree x root-Directed-Tree
   walk-to-root-Directed-Tree x =
-    center (is-tree-Directed-Tree' x)
+    center (unique-walk-to-root-Directed-Tree x)
 ```
 
 ## Properties
@@ -192,7 +192,7 @@ module _
               ( y)
               ( e)
               ( w)
-              ( eq-is-contr (is-tree-Directed-Tree' T x))})
+              ( eq-is-contr (unique-walk-to-root-Directed-Tree T x))})
 
   is-isolated-root-Directed-Tree : is-isolated (root-Directed-Tree T)
   is-isolated-root-Directed-Tree x =
@@ -244,7 +244,7 @@ module _
       ( x)
       ( e)
       ( walk-to-root-Directed-Tree T x)
-      ( eq-is-contr (is-tree-Directed-Tree' T (root-Directed-Tree T)))
+      ( eq-is-contr (unique-walk-to-root-Directed-Tree T (root-Directed-Tree T)))
 
   is-not-root-parent-Directed-Tree :
     {x y : node-Directed-Tree T} (e : edge-Directed-Tree T x y) →
@@ -267,7 +267,7 @@ module _
   pr2 (is-proof-irrelevant-edge-to-root-Directed-Tree x e) e' =
     is-injective-unit-walk-Directed-Graph
       ( graph-Directed-Tree T)
-      ( eq-is-contr (is-tree-Directed-Tree' T x))
+      ( eq-is-contr (unique-walk-to-root-Directed-Tree T x))
 
   is-prop-edge-to-root-Directed-Tree :
     (x : node-Directed-Tree T) →
@@ -467,7 +467,7 @@ module _
         ( f)
         ( walk-to-root-Directed-Tree T y)
         ( walk-to-root-Directed-Tree T z)
-        ( eq-is-contr (is-tree-Directed-Tree' T x)))
+        ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
 
   contraction-unique-parent-Directed-Tree :
     (x : node-Directed-Tree T) →

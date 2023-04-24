@@ -35,7 +35,9 @@ open import graph-theory.morphisms-directed-graphs
 ## Idea
 
 A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges
-that connect `x` to `y`.
+that connect `x` to `y`. Since every journey begins with a single step, we
+define the cons operation on walks in directed graphs with an edge from the
+source in the first argument, and a walk to the target in the second argument.
 
 ## Definitions
 

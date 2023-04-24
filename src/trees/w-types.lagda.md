@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import foundation-core.truncation-levels
 
 open import trees.algebras-polynomial-endofunctors
+open import trees.coalgebras-polynomial-endofunctors
 open import trees.morphisms-algebras-polynomial-endofunctors
 open import trees.polynomial-endofunctors
 ```
@@ -49,14 +50,39 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  symbol-𝕎 : 𝕎 A B → A
-  symbol-𝕎 (tree-𝕎 x α) = x
+  shape-𝕎 : 𝕎 A B → A
+  shape-𝕎 (tree-𝕎 x α) = x
 
-  component-𝕎 : (x : 𝕎 A B) → B (symbol-𝕎 x) → 𝕎 A B
+  component-𝕎 : (x : 𝕎 A B) → B (shape-𝕎 x) → 𝕎 A B
   component-𝕎 (tree-𝕎 x α) = α
 
-  η-𝕎 : (x : 𝕎 A B) → tree-𝕎 (symbol-𝕎 x) (component-𝕎 x) ＝ x
+  η-𝕎 : (x : 𝕎 A B) → tree-𝕎 (shape-𝕎 x) (component-𝕎 x) ＝ x
   η-𝕎 (tree-𝕎 x α) = refl
+```
+
+### W-types as algebras for a polynomial endofunctor
+
+```agda
+structure-𝕎-Alg :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  type-polynomial-endofunctor A B (𝕎 A B) → 𝕎 A B
+structure-𝕎-Alg (pair x α) = tree-𝕎 x α
+
+𝕎-Alg :
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
+  algebra-polynomial-endofunctor (l1 ⊔ l2) A B
+𝕎-Alg A B = pair (𝕎 A B) structure-𝕎-Alg
+```
+
+### W-types as coalgebras for a polynomial endofunctor
+
+```agda
+𝕎-Coalg :
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
+  coalgebra-polynomial-endofunctor (l1 ⊔ l2) A B
+pr1 (𝕎-Coalg A B) = 𝕎 A B
+pr1 (pr2 (𝕎-Coalg A B) x) = shape-𝕎 x
+pr2 (pr2 (𝕎-Coalg A B) x) = component-𝕎 x
 ```
 
 ## Properties
@@ -72,7 +98,7 @@ module _
   constant-𝕎 x h = tree-𝕎 x (ex-falso ∘ h)
 
   is-constant-𝕎 : 𝕎 A B → UU l2
-  is-constant-𝕎 x = is-empty (B (symbol-𝕎 x))
+  is-constant-𝕎 x = is-empty (B (shape-𝕎 x))
 ```
 
 ### If each `B x` is inhabited, then the type `W A B` is empty
@@ -165,19 +191,9 @@ module _
   is-set-𝕎 = is-trunc-𝕎 neg-one-𝕋
 ```
 
-### W-types are algebras for polynomial endofunctors
+### The structure map of the algebra `𝕎 A B` is an equivalence
 
 ```agda
-structure-𝕎-Alg :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  type-polynomial-endofunctor A B (𝕎 A B) → 𝕎 A B
-structure-𝕎-Alg (pair x α) = tree-𝕎 x α
-
-𝕎-Alg :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
-  algebra-polynomial-endofunctor (l1 ⊔ l2) A B
-𝕎-Alg A B = pair (𝕎 A B) structure-𝕎-Alg
-
 map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   𝕎 A B → type-polynomial-endofunctor A B (𝕎 A B)
