@@ -8,7 +8,6 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
-open import foundation.algebras-polynomial-endofunctors public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.automorphisms public
@@ -174,7 +173,6 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
-open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public

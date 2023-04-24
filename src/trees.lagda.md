@@ -3,8 +3,11 @@
 ```agda
 module trees where
 
+open import trees.algebras-polynomial-endofunctors public
 open import trees.bases-directed-trees public
 open import trees.bases-enriched-directed-trees public
+open import trees.coalgebra-structure-type-of-trees public
+open import trees.coalgebras-polynomial-endofunctors public
 open import trees.combinator-directed-trees public
 open import trees.combinator-enriched-directed-trees public
 open import trees.directed-trees public
@@ -21,9 +24,12 @@ open import trees.indexed-w-types public
 open import trees.induction-w-types public
 open import trees.inequality-w-types public
 open import trees.lower-types-w-types public
+open import trees.morphisms-algebras-polynomial-endofunctors public
+open import trees.morphisms-coalgebras-polynomial-endofunctors public
 open import trees.morphisms-directed-trees public
 open import trees.morphisms-enriched-directed-trees public
 open import trees.multisets public
+open import trees.polynomial-endofunctors public
 open import trees.ranks-of-elements-w-types public
 open import trees.rooted-morphisms-directed-trees public
 open import trees.rooted-morphisms-enriched-directed-trees public

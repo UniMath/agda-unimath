@@ -1,6 +1,8 @@
 # Functoriality of the combinator of directed trees
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module trees.functoriality-combinator-directed-trees where
 ```
 
@@ -10,6 +12,7 @@ module trees.functoriality-combinator-directed-trees where
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
@@ -299,4 +302,12 @@ module _
       ( combinator-Directed-Tree S)
       ( combinator-Directed-Tree T)
       ( hom-equiv-combinator-Directed-Tree)
+
+  map-inv-node-equiv-combinator-Directed-Tree :
+    node-combinator-Directed-Tree T → node-combinator-Directed-Tree S
+  map-inv-node-equiv-combinator-Directed-Tree = {!!}
+
+  is-equiv-node-equiv-combinator-Directed-Tree :
+    is-equiv node-equiv-combinator-Directed-Tree
+  is-equiv-node-equiv-combinator-Directed-Tree = {!!}
 ```

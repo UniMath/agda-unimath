@@ -1,6 +1,8 @@
 # Equivalences of directed trees
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module trees.equivalences-directed-trees where
 ```
 
@@ -419,4 +421,165 @@ module _
       ( λ y → edge-hom-Directed-Tree S T f {x} {y})
       ( H)
       ( is-equiv-total-edge-is-equiv-node-hom-Directed-Tree H x)
+```
+
+### The inverse of an equivalence of directed trees
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
+  (f : equiv-Directed-Tree S T)
+  where
+
+  inv-equiv-node-equiv-Directed-Tree :
+    node-Directed-Tree T ≃ node-Directed-Tree S
+  inv-equiv-node-equiv-Directed-Tree =
+    inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+
+  node-inv-equiv-Directed-Tree :
+    node-Directed-Tree T → node-Directed-Tree S
+  node-inv-equiv-Directed-Tree =
+    map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+
+  is-equiv-node-inv-equiv-Directed-Tree :
+    is-equiv node-inv-equiv-Directed-Tree
+  is-equiv-node-inv-equiv-Directed-Tree =
+    is-equiv-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+
+  edge-inv-equiv-Directed-Tree :
+    (x y : node-Directed-Tree T) →
+    edge-Directed-Tree T x y →
+    edge-Directed-Tree S
+      ( node-inv-equiv-Directed-Tree x)
+      ( node-inv-equiv-Directed-Tree y)
+  edge-inv-equiv-Directed-Tree x y e =
+    map-inv-equiv
+      ( equiv-edge-equiv-Directed-Tree S T f
+        ( node-inv-equiv-Directed-Tree x)
+        ( node-inv-equiv-Directed-Tree y))
+      ( binary-tr
+        ( edge-Directed-Tree T)
+        ( inv (issec-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f) x))
+        ( inv (issec-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f) y))
+        ( e))
+
+  hom-inv-equiv-Directed-Tree : hom-Directed-Tree T S
+  pr1 hom-inv-equiv-Directed-Tree = node-inv-equiv-Directed-Tree
+  pr2 hom-inv-equiv-Directed-Tree = edge-inv-equiv-Directed-Tree
+
+  is-equiv-hom-inv-equiv-Directed-Tree :
+    is-equiv-hom-Directed-Tree T S hom-inv-equiv-Directed-Tree
+  is-equiv-hom-inv-equiv-Directed-Tree =
+    is-equiv-is-equiv-node-hom-Directed-Tree T S
+      hom-inv-equiv-Directed-Tree
+      is-equiv-node-inv-equiv-Directed-Tree
+
+  inv-equiv-Directed-Tree : equiv-Directed-Tree T S
+  inv-equiv-Directed-Tree =
+    equiv-is-equiv-hom-Directed-Tree T S
+      hom-inv-equiv-Directed-Tree
+      is-equiv-hom-inv-equiv-Directed-Tree
+
+  node-issec-inv-equiv-Directed-Tree :
+    ( node-equiv-Directed-Tree S T f ∘ node-inv-equiv-Directed-Tree) ~ id
+  node-issec-inv-equiv-Directed-Tree =
+    issec-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+
+  edge-issec-inv-equiv-Directed-Tree :
+    (x y : node-Directed-Tree T) (e : edge-Directed-Tree T x y) →
+    binary-tr
+      ( edge-Directed-Tree T)
+      ( node-issec-inv-equiv-Directed-Tree x)
+      ( node-issec-inv-equiv-Directed-Tree y)
+      ( edge-equiv-Directed-Tree S T f
+        ( node-inv-equiv-Directed-Tree x)
+        ( node-inv-equiv-Directed-Tree y)
+        ( edge-inv-equiv-Directed-Tree x y e)) ＝ e
+  edge-issec-inv-equiv-Directed-Tree x y e =
+    ( ap
+      ( binary-tr
+        ( edge-Directed-Tree T)
+        ( node-issec-inv-equiv-Directed-Tree x)
+        ( node-issec-inv-equiv-Directed-Tree y))
+        ( issec-map-inv-equiv
+          ( equiv-edge-equiv-Directed-Tree S T f
+            ( node-inv-equiv-Directed-Tree x)
+            ( node-inv-equiv-Directed-Tree y))
+          ( binary-tr
+            ( edge-Directed-Tree T)
+            ( inv (issec-map-inv-equiv (pr1 f) x))
+            ( inv (issec-map-inv-equiv (pr1 f) y))
+            ( e)))) ∙
+    ( ( inv
+        ( binary-tr-concat
+          ( edge-Directed-Tree T)
+          ( inv (node-issec-inv-equiv-Directed-Tree x))
+          ( node-issec-inv-equiv-Directed-Tree x)
+          ( inv (node-issec-inv-equiv-Directed-Tree y))
+          ( node-issec-inv-equiv-Directed-Tree y)
+          ( e))) ∙
+      ( ap-binary
+        ( λ p q → binary-tr (edge-Directed-Tree T) p q e)
+        ( left-inv (node-issec-inv-equiv-Directed-Tree x))
+        ( left-inv (node-issec-inv-equiv-Directed-Tree y))))
+
+  issec-inv-equiv-Directed-Tree :
+    htpy-hom-Directed-Tree T T
+      ( comp-hom-Directed-Tree T S T
+        ( hom-equiv-Directed-Tree S T f)
+        ( hom-inv-equiv-Directed-Tree))
+      ( id-hom-Directed-Tree T)
+  pr1 issec-inv-equiv-Directed-Tree =
+    node-issec-inv-equiv-Directed-Tree
+  pr2 issec-inv-equiv-Directed-Tree =
+    edge-issec-inv-equiv-Directed-Tree
+
+  node-isretr-inv-equiv-Directed-Tree :
+    ( node-inv-equiv-Directed-Tree ∘ node-equiv-Directed-Tree S T f) ~ id
+  node-isretr-inv-equiv-Directed-Tree =
+    isretr-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+
+  edge-isretr-inv-equiv-Directed-Tree :
+    (x y : node-Directed-Tree S) (e : edge-Directed-Tree S x y) →
+    binary-tr
+      ( edge-Directed-Tree S)
+      ( node-isretr-inv-equiv-Directed-Tree x)
+      ( node-isretr-inv-equiv-Directed-Tree y)
+      ( edge-inv-equiv-Directed-Tree
+        ( node-equiv-Directed-Tree S T f x)
+        ( node-equiv-Directed-Tree S T f y)
+        ( edge-equiv-Directed-Tree S T f x y e)) ＝ e
+  edge-isretr-inv-equiv-Directed-Tree x y e =
+    {!!}
+
+{-
+binary-tr
+  ( edge-Directed-Tree S)
+  ( isretr-map-inv-is-equiv-node-equiv-Directed-Tree S T f
+    ( x))
+  ( isretr-map-inv-is-equiv-node-equiv-Directed-Tree S T f
+    ( y))
+  ( map-inv-edge-equiv-Directed-Tree S T f
+    ( node-inv-equiv-Directed-Tree (node-equiv-Directed-Tree S T f x))
+    ( node-inv-equiv-Directed-Tree (node-equiv-Directed-Tree S T f y)))
+    ( binary-tr
+      ( edge-Directed-Tree T)
+      ( inv
+        ( issec-map-inv-is-equiv-node-equiv-Directed-Tree S T f
+          ( pr1 (pr1 f) x)))
+      ( inv
+        ( issec--map-inv-is-equiv-node-equiv-Directed-Tree S T f
+          ( pr1 (pr1 f) y)))
+      ( pr1 (pr2 f x y) e)))
+-}
+
+  isretr-inv-equiv-Directed-Tree :
+    htpy-hom-Directed-Tree S S
+      ( comp-hom-Directed-Tree S T S
+        ( hom-inv-equiv-Directed-Tree)
+        ( hom-equiv-Directed-Tree S T f))
+      ( id-hom-Directed-Tree S)
+  pr1 isretr-inv-equiv-Directed-Tree =
+    node-isretr-inv-equiv-Directed-Tree
+  pr2 isretr-inv-equiv-Directed-Tree = {!!}
 ```

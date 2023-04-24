@@ -58,6 +58,22 @@ module _
 
 ## Properties
 
+### Binary transport along concatenated paths
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A → B → UU l3)
+  where
+
+  binary-tr-concat :
+    {x1 x2 x3 : A} (p : x1 ＝ x2) (p' : x2 ＝ x3)
+    {y1 y2 y3 : B} (q : y1 ＝ y2) (q' : y2 ＝ y3) →
+    (c : C x1 y1) →
+    binary-tr C (p ∙ p') (q ∙ q') c ＝
+    binary-tr C p' q' (binary-tr C p q c)
+  binary-tr-concat refl refl refl refl c = refl
+```
+
 ### Binary transport along paths of the form `ap f p` and `ap g q`
 
 ```agda
