@@ -32,7 +32,7 @@ open import reflection.names
 
 ## Idea
 
--- TODO
+The `Meta` type represents metavariables in Agda.
 
 ## Definition
 

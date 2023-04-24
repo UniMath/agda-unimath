@@ -7,23 +7,15 @@ module reflection.definitions where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
-open import foundation.cartesian-product-types
-open import foundation.characters
-open import foundation.floats
+open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.machine-integers
 open import foundation.propositional-truncations
-open import foundation.strings
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 
-open import group-theory.precategory-of-groups
 
 open import lists.lists
 
@@ -34,15 +26,13 @@ open import reflection.literals
 open import reflection.metavariables
 open import reflection.names
 open import reflection.terms
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
--- TODO
+The `Definition` type represents a definition in Agda.
 
 ## Definition
 
@@ -65,23 +55,17 @@ data Definition : UU lzero where
 
 ## Examples
 
+### Constructors and definitions
+
 ```agda
 _ : quoteTerm ℕ ＝ def (quote ℕ) nil
 _ = refl
 
 _ :
-  quoteTerm (λ (x : ℕ) → x) ＝ lam visible (abs "x" (var 0 nil))
-_ = refl
-
-_ :
-  quoteTerm (Fin 2) ＝
-  def
-    ( quote Fin)
-    ( cons
-      ( arg
-        ( arg-info visible (modality relevant quantity-ω))
-        ( lit (nat 2)))
-      ( nil))
+  quoteTerm (succ-ℕ zero-ℕ) ＝
+  con
+    ( quote succ-ℕ)
+    ( unit-list (visible-Arg (con (quote zero-ℕ) nil)))
 _ = refl
 
 _ :
@@ -90,21 +74,131 @@ _ :
   def
     ( quote type-trunc-Prop)
     ( cons
-      ( arg
-        ( arg-info hidden (modality relevant quantity-ω))
-      ( var 1 nil))
+      ( hidden-Arg (var 1 nil))
+      ( unit-list (visible-Arg (var 0 nil))))
+_ = refl
+```
+
+### Lambda abstractions
+
+```agda
+_ :
+  quoteTerm (λ (x : ℕ) → x) ＝ lam visible (abs "x" (var 0 nil))
+_ = refl
+
+_ :
+  quoteTerm (λ {x : ℕ} (y : ℕ) → x) ＝
+  lam hidden (abs "x" (lam visible (abs "y" (var 1 nil))))
+_ = refl
+
+private
+  helper : (A : UU lzero) → A → A
+  helper A x = x
+
+  _ :
+    quoteTerm (helper (ℕ → ℕ) (λ { zero-ℕ → zero-ℕ ; (succ-ℕ x) → x })) ＝
+    def
+      ( quote helper)
       ( cons
-        ( arg
-          ( arg-info visible (modality relevant quantity-ω))
-          (var 0 nil))
-        ( nil)))
+        -- ℕ → ℕ
+        ( visible-Arg
+          ( pi
+            ( visible-Arg (def (quote ℕ) nil))
+            ( abs "_" (def (quote ℕ) nil))))
+        ( unit-list
+          -- The pattern matching lambda
+          ( visible-Arg
+            ( pat-lam
+              ( cons
+                -- zero-ℕ clause
+                ( clause
+                  -- No telescope
+                  ( nil)
+                  -- Left side of the first lambda case
+                  ( unit-list (visible-Arg (con (quote zero-ℕ) nil)))
+                  -- Right side of the first lambda case
+                  ( con (quote zero-ℕ) nil))
+                ( unit-list
+                  -- succ-ℕ clause
+                  ( clause
+                    -- Telescope matching the "x"
+                    ( unit-list ("x" , visible-Arg (def (quote ℕ) nil)))
+                    -- Left side of the second lambda case
+                    ( unit-list
+                      ( visible-Arg
+                        ( con
+                          ( quote succ-ℕ)
+                          ( unit-list ( visible-Arg (var 0))))))
+                    -- Right side of the second lambda case
+                    ( var 0 nil))))
+              ( nil)))))
+  _ = refl
+
+  _ :
+    quoteTerm (helper (empty → ℕ) (λ ())) ＝
+    def
+      ( quote helper)
+      ( cons
+        ( visible-Arg
+          ( pi (visible-Arg (def (quote empty) nil))
+          ( abs "_" (def (quote ℕ) nil))))
+        ( unit-list
+          ( visible-Arg
+            -- Lambda
+            ( pat-lam
+              ( unit-list
+                -- Clause
+                ( absurd-clause
+                  ( unit-list
+                    ( "()" , visible-Arg (def (quote empty) nil)))
+                  ( unit-list
+                    ( visible-Arg (absurd 0)))))
+              ( nil)))))
+  _ = refl
+--
+
+```
+
+### Pi terms
+
+```agda
+_ : quoteTerm (ℕ → ℕ) ＝
+    pi
+      ( visible-Arg (def (quote ℕ) nil))
+      ( abs "_" (def (quote ℕ) nil))
 _ = refl
 
-_ :
-  quoteTerm (UU (lsuc lzero)) ＝ agda-sort (lit 1)
+_ : quoteTerm ((x : ℕ) → is-zero-ℕ x) ＝
+    pi
+      ( visible-Arg (def (quote ℕ) nil))
+      ( abs "x"
+        ( def
+          ( quote is-zero-ℕ)
+          ( cons
+            ( visible-Arg (var 0 nil))
+            ( nil))))
+_ = refl
+```
+
+### Universes
+
+```agda
+_ : {l : Level} → quoteTerm (UU l) ＝ agda-sort (set (var 0 nil))
 _ = refl
 
-_ :
-  quoteTerm Group-Large-Precat ＝ def (quote Group-Large-Precat) nil
+_ : quoteTerm (UU (lsuc lzero)) ＝ agda-sort (lit 1)
+_ = refl
+
+_ : quoteTerm (UUω) ＝ agda-sort (inf 0)
+_ = refl
+```
+
+### Literals
+
+```agda
+_ : quoteTerm 3 ＝ lit (nat 3)
+_ = refl
+
+_ : quoteTerm "hello" ＝ lit (string "hello")
 _ = refl
 ```

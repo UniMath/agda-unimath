@@ -7,49 +7,37 @@ module reflection.type-checking-monad where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
 open import foundation.cartesian-product-types
-open import foundation.characters
-open import foundation.floats
 open import foundation.identity-types
-open import foundation.machine-integers
-open import foundation.propositional-truncations
+open import foundation.maybe
 open import foundation.strings
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.dependent-pair-types
 
-open import group-theory.precategory-of-groups
-
 open import lists.lists
 
-open import reflection.abstractions
 open import reflection.arguments
 open import reflection.definitions
-open import reflection.fixity
-open import reflection.literals
 open import reflection.metavariables
 open import reflection.names
 open import reflection.terms
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
--- TODO
+The type-checking monad allows us to interact directly with Agda's type
+checking mechanism. Additionally to primitives (see below), Agda includes
+the some keywords to handle, notably `unquote`.
 
 ## Definition
-
-## The TC monad
-
-To drive meta computations, we have the TC monad, reflecting Agda's `TCM` monad.
 
 ```agda
 data ErrorPart : UU lzero where
@@ -59,15 +47,20 @@ data ErrorPart : UU lzero where
   nameErr : Name → ErrorPart
 
 postulate
+  -- The type checking monad
   TC               : ∀ {a} → UU a → UU a
   returnTC         : ∀ {a} {A : UU a} → A → TC A
   bindTC           : ∀ {a b} {A : UU a} {B : UU b} → TC A → (A → TC B) → TC B
+  -- Tries the unify the first term with the second
   unify            : Term → Term → TC unit
+  -- Gives an error
   typeError        : ∀ {a} {A : UU a} → list ErrorPart → TC A
+  -- Infers the type of a goal
   inferType        : Term → TC Term
   checkType        : Term → Term → TC Term
   normalise        : Term → TC Term
   reduce           : Term → TC Term
+  -- Tries the first computation, if it fails tries the second
   catchTC          : ∀ {a} {A : UU a} → TC A → TC A → TC A
   quoteTC          : ∀ {a} {A : UU a} → A → TC Term
   unquoteTC        : ∀ {a} {A : UU a} → Term → TC A
@@ -127,10 +120,7 @@ postulate
   defineData       : Name → list (Σ Name (λ _ → Term)) → TC unit
 ```
 
-<details>
-<summary>And now we bind the whole shebang above to the
-`BUILTIN`{.agda}s that Agda knows about.
-</summary>
+<details><summary>Bindings</summary>
 
 ```agda
 {-# BUILTIN AGDAERRORPART       ErrorPart #-}
@@ -167,16 +157,135 @@ postulate
 {-# BUILTIN AGDATCMWITHNORMALISATION          withNormalisation          #-}
 {-# BUILTIN AGDATCMFORMATERRORPARTS           formatErrorParts           #-}
 {-# BUILTIN AGDATCMDEBUGPRINT                 debugPrint                 #-}
-{-# BUILTIN AGDATCMWITHRECONSTRUCTED          withReconstructed          #-}
-{-# BUILTIN AGDATCMWITHEXPANDLAST             withExpandLast             #-}
-{-# BUILTIN AGDATCMWITHREDUCEDEFS             withReduceDefs             #-}
-{-# BUILTIN AGDATCMASKNORMALISATION           askNormalisation           #-}
-{-# BUILTIN AGDATCMASKRECONSTRUCTED           askReconstructed           #-}
-{-# BUILTIN AGDATCMASKEXPANDLAST              askExpandLast              #-}
-{-# BUILTIN AGDATCMASKREDUCEDEFS              askReduceDefs              #-}
+-- {-# BUILTIN AGDATCMWITHRECONSTRUCTED          withReconstructed          #-}
+-- {-# BUILTIN AGDATCMWITHEXPANDLAST             withExpandLast             #-}
+-- {-# BUILTIN AGDATCMWITHREDUCEDEFS             withReduceDefs             #-}
+-- {-# BUILTIN AGDATCMASKNORMALISATION           askNormalisation           #-}
+-- {-# BUILTIN AGDATCMASKRECONSTRUCTED           askReconstructed           #-}
+-- {-# BUILTIN AGDATCMASKEXPANDLAST              askExpandLast              #-}
+-- {-# BUILTIN AGDATCMASKREDUCEDEFS              askReduceDefs              #-}
 {-# BUILTIN AGDATCMNOCONSTRAINTS              noConstraints              #-}
 {-# BUILTIN AGDATCMRUNSPECULATIVE             runSpeculative             #-}
 {-# BUILTIN AGDATCMGETINSTANCES               getInstances               #-}
 {-# BUILTIN AGDATCMDECLAREDATA                declareData                #-}
 {-# BUILTIN AGDATCMDEFINEDATA                 defineData                 #-}
+```
+
+</details>
+
+## Monad syntax
+
+```agda
+infixl 3 _<|>_
+_<|>_ : {l : Level} {A : UU l} → TC A → TC A → TC A
+_<|>_ = catchTC
+
+infixl 1 _>>=_ _>>_ _<&>_
+_>>=_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  TC A → (A → TC B) → TC B
+_>>=_ = bindTC
+
+_>>_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  TC A → TC B → TC B
+xs >> ys = bindTC xs (λ _ → ys)
+
+_<&>_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  TC A → (A → B) → TC B
+xs <&> f = bindTC xs (λ x → returnTC (f x))
+```
+
+## Examples
+
+The following examples show how the type-checking monad can be used.
+They were adapted from alhassy's [_gentle intro to reflection_](https://github.com/alhassy/gentle-intro-to-reflection).
+
+### Unifying a goal with a constant
+
+#### Manually
+
+```agda
+private
+  numTCM : Term → TC unit
+  numTCM h = unify (quoteTerm 314) h
+
+  _ : unquote numTCM ＝ 314
+  _ = refl
+```
+
+#### By use of a macro
+
+```agda
+  macro
+    numTCM' : Term → TC unit
+    numTCM' h = unify (quoteTerm 1) h
+
+  _ : numTCM' ＝ 1
+  _ = refl
+```
+
+### Modifying a term
+
+```agda
+  macro
+    swap-add : Term → Term → TC unit
+    swap-add (def (quote add-ℕ) (cons a (cons b nil))) hole =
+      unify hole (def (quote add-ℕ) (cons b (cons a nil)))
+    {-# CATCHALL #-}
+    swap-add v hole = unify hole v
+
+  ex1 : (a b : ℕ) → swap-add (add-ℕ a b) ＝ (add-ℕ b a)
+  ex1 a b = refl
+
+  ex2 : (a b : ℕ) → swap-add a ＝ a
+  ex2 a b = refl
+```
+
+### Trying a path
+
+The following example tries to solve a goal by using path `p` or `inv p`.
+This example was addapted from
+
+```agda
+  _∷_ : Arg Term → list (Arg Term) → list (Arg Term)
+  _∷_ = cons
+  infixr 1 _∷_
+
+  ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
+  ＝-type-info (def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
+    returnTC (𝓁 , 𝒯 , l , r)
+  {-# CATCHALL #-}
+  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
+
+  macro
+    try-path! : Term → Term → TC unit
+    try-path! p goal =
+
+      ( unify goal p) <|>
+      ( do
+        p-type ← inferType p
+        -- typeError (unit-list (termErr p-type)))
+        𝓁 , 𝒯 , l , r ← ＝-type-info p-type
+        unify goal
+          ( def (quote inv)
+            ( 𝓁 ∷ 𝒯 ∷ hidden-Arg l ∷ hidden-Arg r ∷ visible-Arg p ∷ nil)))
+
+  module _ (a b : ℕ) (p : a ＝ b) where
+    ex3 : Id a b
+    ex3 = try-path! p
+
+    ex4 : Id b a
+    ex4 = try-path! p
+```
+
+### Getting the lhs and rhs of a goal
+
+```agda
+boundary-TCM : Term → TC (Term × Term)
+boundary-TCM (def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
+  returnTC (l , r)
+{-# CATCHALL #-}
+boundary-TCM _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
 ```

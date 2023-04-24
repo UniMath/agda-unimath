@@ -35,7 +35,12 @@ open import reflection.names
 
 ## Idea
 
--- TODO
+In this module we represent the terms of agda by an inductive definition of the type `Term`.
+See the comments for details on the constructors.
+
+We can obtain a `Term` from an agda term through the keyword `quoteTerm`.
+
+For concrete examples, see [`reflection.definitions`](reflection.definitions).
 
 ## Definition
 
@@ -47,23 +52,37 @@ data Clause  : UU lzero
 Telescope = list (String × Arg Term)
 
 data Term where
+  -- Variables, where the natural number is a de Bruijn index
   var       : (x : ℕ) (args : list (Arg Term)) → Term
+  -- An application of a constructor or definition
   con       : (c : Name) (args : list (Arg Term)) → Term
   def       : (f : Name) (args : list (Arg Term)) → Term
+  -- A lambda abstraction
   lam       : (v : Visibility) (t : Abs Term) → Term
   pat-lam   : (cs : list Clause) (args : list (Arg Term)) → Term
+  -- A Pi term
   pi        : (a : Arg Term) (b : Abs Term) → Term
+  -- A sort, also called a universe
   agda-sort : (s : Sort) → Term
+  -- A literal, e.g. `3`
   lit       : (l : Literal) → Term
+  -- A metavariable
   meta      : (x : Meta) → list (Arg Term) → Term
+  -- A hole
   unknown   : Term
 
 data Sort where
+  -- A universe of a given (possibly neutral) level
   set     : (t : Term) → Sort
+  -- A universe of a given concrete level
   lit     : (n : ℕ) → Sort
+  -- A Prop of a given (possibly neutral) level
   prop    : (t : Term) → Sort
+  -- A Prop of a given concrete level
   propLit : (n : ℕ) → Sort
+  -- UUωi of a given concrete level i.
   inf     : (n : ℕ) → Sort
+  -- A hole
   unknown : Sort
 
 data Pattern where
@@ -72,12 +91,18 @@ data Pattern where
   var    : (x : ℕ)       → Pattern
   lit    : (l : Literal) → Pattern
   proj   : (f : Name)    → Pattern
-  absurd : (x : ℕ)       → Pattern  -- absurd patterns counts as variables
+  -- Absurd pattern with a de Bruijn index
+  absurd : (x : ℕ)       → Pattern
 
+-- A clause on a pattern matching lambda
 data Clause where
   clause        : (tel : Telescope) (ps : list (Arg Pattern)) (t : Term) → Clause
   absurd-clause : (tel : Telescope) (ps : list (Arg Pattern)) → Clause
+```
 
+<details><summary>Bindings</summary>
+
+```agda
 {-# BUILTIN AGDATERM      Term    #-}
 {-# BUILTIN AGDASORT      Sort    #-}
 {-# BUILTIN AGDAPATTERN   Pattern #-}
@@ -110,4 +135,15 @@ data Clause where
 
 {-# BUILTIN AGDACLAUSECLAUSE clause        #-}
 {-# BUILTIN AGDACLAUSEABSURD absurd-clause #-}
+```
+
+</details>
+
+## Helpers
+
+```agda
+replicate-hidden-Arg : ℕ → list (Arg Term)
+replicate-hidden-Arg zero-ℕ = nil
+replicate-hidden-Arg (succ-ℕ n) =
+  cons (hidden-Arg (unknown)) (replicate-hidden-Arg n)
 ```

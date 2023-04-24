@@ -7,9 +7,6 @@ module reflection.names where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.natural-numbers
-
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.characters
