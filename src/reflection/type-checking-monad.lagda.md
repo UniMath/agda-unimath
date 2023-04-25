@@ -1,6 +1,7 @@
 # The type checking monad
 
 ```agda
+{-# OPTIONS --no-exact-split  #-}
 module reflection.type-checking-monad where
 ```
 
@@ -249,24 +250,21 @@ The following example tries to solve a goal by using path `p` or `inv p`.
 This example was addapted from
 
 ```agda
-  _∷_ : Arg Term → list (Arg Term) → list (Arg Term)
-  _∷_ = cons
-  infixr 1 _∷_
+  private
+    infixr 10 _∷_
+    pattern _∷_ x xs = cons x xs
 
   ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
   ＝-type-info (def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
     returnTC (𝓁 , 𝒯 , l , r)
-  {-# CATCHALL #-}
   ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
 
   macro
     try-path! : Term → Term → TC unit
     try-path! p goal =
-
       ( unify goal p) <|>
       ( do
         p-type ← inferType p
-        -- typeError (unit-list (termErr p-type)))
         𝓁 , 𝒯 , l , r ← ＝-type-info p-type
         unify goal
           ( def (quote inv)
@@ -284,8 +282,15 @@ This example was addapted from
 
 ```agda
 boundary-TCM : Term → TC (Term × Term)
-boundary-TCM (def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
+boundary-TCM
+  ( def
+    ( quote _＝_)
+    ( 𝓁 ∷ 𝒯 ∷ arg _ l ∷ arg _ r ∷ nil)) =
   returnTC (l , r)
-{-# CATCHALL #-}
-boundary-TCM _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
+boundary-TCM t =
+  typeError
+    ( strErr "The term\n  " ∷
+      termErr t ∷
+      strErr "\nis not a ＝-type." ∷
+      nil)
 ```
