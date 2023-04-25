@@ -32,6 +32,8 @@ open import species.cauchy-series-species-of-types
 open import species.cauchy-series-species-of-types-in-subuniverse
 ```
 
+</details>
+
 ## Idea
 
 The composition of Cauchy series of two species of subuniverse `S` and `T` at

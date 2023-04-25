@@ -28,6 +28,8 @@ open import species.composition-cauchy-series-species-of-types
 open import species.cauchy-composition-species-of-types
 ```
 
+</details>
+
 ## Idea
 
 ## Definition

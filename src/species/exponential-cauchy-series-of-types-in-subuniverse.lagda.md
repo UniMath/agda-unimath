@@ -31,6 +31,8 @@ open import species.cauchy-composition-species-of-types-in-subuniverse
 open import species.exponential-cauchy-series-of-types
 ```
 
+</details>
+
 ## Definition
 
 ```agda

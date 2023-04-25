@@ -24,6 +24,8 @@ open import species.cauchy-series-species-of-types
 open import species.cauchy-product-species-of-types
 ```
 
+</details>
+
 ## Idea
 
 The product of two Cauchy series is just the pointwise product.

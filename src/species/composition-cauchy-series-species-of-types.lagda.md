@@ -28,6 +28,8 @@ open import species.cauchy-series-species-of-types
 open import species.cauchy-product-species-of-types
 ```
 
+</details>
+
 ## Idea
 
 The composition of Cauchy series of two species of types `S` and `T` at `X` is
