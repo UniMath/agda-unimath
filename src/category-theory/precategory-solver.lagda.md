@@ -238,7 +238,8 @@ macro
 ```
 
 ## Examples
-```
+
+```agda
 module _
   {l1 l2 : Level}
   {C : Precat l1 l2}
