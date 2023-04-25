@@ -285,7 +285,7 @@ example was addapted from
 boundary-TCM : Term → TC (Term × Term)
 boundary-TCM
   ( def
-    ( quote _＝_)
+    ( quote Id)
     ( 𝓁 ∷ 𝒯 ∷ arg _ l ∷ arg _ r ∷ nil)) =
   returnTC (l , r)
 boundary-TCM t =

@@ -156,21 +156,53 @@ private
   _++_ = concat-list
   infixr 5 _++_
 
+  pattern apply-pr1 xs =
+    def (quote pr1)
+      ( hidden-Arg unknown ∷
+        hidden-Arg unknown ∷
+        hidden-Arg unknown ∷
+        hidden-Arg unknown ∷
+        xs)
+
+  pattern apply-pr2 xs =
+    def (quote pr2)
+      ( hidden-Arg unknown ∷
+        hidden-Arg unknown ∷
+        hidden-Arg unknown ∷
+        hidden-Arg unknown ∷
+        xs)
+
 -- Builds a term of `Precat-Expr C x y` from a term of type `type-hom-Precat C x y`
 build-Precat-Expr : Term → Term
 build-Precat-Expr
-  ( def
-    ( quote id-hom-Precat)
-    ( l1 ∷ l2 ∷ C ∷ x ∷ nil)) =
+  ( apply-pr1
+    ( visible-Arg
+      ( apply-pr2
+        ( visible-Arg
+          ( apply-pr2
+            ( visible-Arg
+              ( apply-pr2 (visible-Arg C ∷ nil)) ∷
+              ( nil))) ∷
+            ( nil))) ∷
+          ( visible-Arg x) ∷
+          nil)) =
   con (quote id-hom-Precat-Expr) nil
 build-Precat-Expr
-  ( def
-    ( quote comp-hom-Precat)
-    ( l1 ∷ l2 ∷ C ∷ x ∷ y ∷ z ∷ arg _ f ∷ arg _ g ∷ nil)) =
+   ( apply-pr1
+     ( visible-Arg
+       ( apply-pr1
+         ( visible-Arg
+           ( apply-pr2
+             ( visible-Arg
+               ( apply-pr2
+                 (visible-Arg C ∷ nil)) ∷ nil))
+              ∷ nil)) ∷
+       hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
+       visible-Arg g ∷ visible-Arg f ∷ nil)) =
   con
     ( quote comp-hom-Precat-Expr)
-    ( visible-Arg (build-Precat-Expr f) ∷
-      visible-Arg (build-Precat-Expr g) ∷
+    ( visible-Arg (build-Precat-Expr g) ∷
+      visible-Arg (build-Precat-Expr f) ∷
       nil)
 build-Precat-Expr f =
   con (quote type-hom-Precat-Expr) (visible-Arg f ∷ nil)
@@ -198,14 +230,15 @@ apply-solve-Precat-Expr cat lhs rhs =
 macro
   solve-Precat! : Term → Term → TC unit
   solve-Precat! cat hole = do
-    goal <- inferType hole
-    (lhs , rhs) <- boundary-TCM goal
-    built-lhs ← (returnTC ∘ build-Precat-Expr) lhs
-    built-rhs ← (returnTC ∘ build-Precat-Expr) rhs
+    goal ← inferType hole >>= reduce
+    (lhs , rhs) ← boundary-TCM goal
+    built-lhs ← normalise lhs >>= (returnTC ∘ build-Precat-Expr)
+    built-rhs ← normalise rhs >>= (returnTC ∘ build-Precat-Expr)
     unify hole (apply-solve-Precat-Expr cat built-lhs built-rhs)
 ```
 
 ## Examples
+
 ```
 module _
   {l1 l2 : Level}
@@ -222,6 +255,14 @@ module _
     _ :
       {x : obj-Precat C} →
       id-hom-Precat C {x} ＝ id-hom-Precat C {x}
+    _ = solve-Precat! C
+
+    _ :
+      {a b c : obj-Precat C}
+      {f : type-hom-Precat C a b}
+      {g : type-hom-Precat C b c} →
+      (comp-hom-Precat C g f) ＝
+      comp-hom-Precat C g f
     _ = solve-Precat! C
 
     _ :

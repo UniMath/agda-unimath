@@ -99,12 +99,12 @@ data Arg {l} (A : UU l) : UU l where
 
 ## Helpers
 
-We create helper functions for the two most common type of arguments.
+We create helper patterns for the two most common type of arguments.
 
 ```agda
-visible-Arg : {l : Level} {A : UU l} → A → Arg A
-visible-Arg t = arg (arg-info visible (modality relevant quantity-ω)) t
+-- visible-Arg : {l : Level} {A : UU l} → A → Arg A
+pattern visible-Arg t = arg (arg-info visible (modality relevant quantity-ω)) t
 
-hidden-Arg : {l : Level} {A : UU l} → A → Arg A
-hidden-Arg t = arg (arg-info hidden (modality relevant quantity-ω)) t
+-- hidden-Arg : {l : Level} {A : UU l} → A → Arg A
+pattern hidden-Arg t = arg (arg-info hidden (modality relevant quantity-ω)) t
 ```
