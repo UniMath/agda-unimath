@@ -238,7 +238,6 @@ macro
 ```
 
 ## Examples
-
 ```
 module _
   {l1 l2 : Level}
