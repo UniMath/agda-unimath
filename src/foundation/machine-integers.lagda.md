@@ -32,4 +32,6 @@ postulate Word64 : UU lzero
 primitive
   primWord64ToNat   : Word64 → ℕ
   primWord64FromNat : ℕ → Word64
+  primWord64ToNatInjective :
+    ∀ a b → primWord64ToNat a ＝ primWord64ToNat b → a ＝ b
 ```
