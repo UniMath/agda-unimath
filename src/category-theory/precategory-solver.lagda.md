@@ -10,17 +10,19 @@ module category-theory.precategory-solver where
 ```agda
 open import category-theory.precategories
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.cartesian-product-types
-open import reflection.arguments
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.equational-reasoning
-open import lists.lists
+
 open import lists.concatenation-lists
+open import lists.lists
+
+open import reflection.arguments
 open import reflection.terms
 open import reflection.type-checking-monad
 ```
@@ -29,20 +31,20 @@ open import reflection.type-checking-monad
 
 ## Idea
 
-This module defines a macro, `solve-Precat!` that solves any equation
-between morphisms of a precategory,
-as long as it's derivable from the axioms of precategories.
+This module defines a macro, `solve-Precat!` that solves any equation between
+morphisms of a precategory, as long as it's derivable from the axioms of
+precategories.
 
 To do this, we introduce the type `Precat-Expr`, which is a syntactic
-representation of a morphism.
-Then, noting that every morphism is represented by an expression (through `in-Precat-Expr`),
-it will be sufficient to prove an equality of expresions to prove an equality of morphisms.
-However, if two morphisms are equal, then their normalized expressions are equal by reflexivity,
-so that the problem is reduced to finding which `Precat-Expr` represents a given morphism.
+representation of a morphism. Then, noting that every morphism is represented by
+an expression (through `in-Precat-Expr`), it will be sufficient to prove an
+equality of expresions to prove an equality of morphisms. However, if two
+morphisms are equal, then their normalized expressions are equal by reflexivity,
+so that the problem is reduced to finding which `Precat-Expr` represents a given
+morphism.
 
 This last problem, as well as the application of the `solve-Precat-Expr` lemma,
 is what the macro automates.
-
 
 ## Definition
 
@@ -204,7 +206,6 @@ macro
 ```
 
 ## Examples
-
 ```
 module _
   {l1 l2 : Level}

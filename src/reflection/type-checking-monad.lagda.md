@@ -34,9 +34,9 @@ open import reflection.terms
 
 ## Idea
 
-The type-checking monad allows us to interact directly with Agda's type
-checking mechanism. Additionally to primitives (see below), Agda includes
-the some keywords to handle, notably `unquote`.
+The type-checking monad allows us to interact directly with Agda's type checking
+mechanism. Additionally to primitives (see below), Agda includes the some
+keywords to handle, notably `unquote`.
 
 ## Definition
 
@@ -200,8 +200,9 @@ xs <&> f = bindTC xs (λ x → returnTC (f x))
 
 ## Examples
 
-The following examples show how the type-checking monad can be used.
-They were adapted from alhassy's [_gentle intro to reflection_](https://github.com/alhassy/gentle-intro-to-reflection).
+The following examples show how the type-checking monad can be used. They were
+adapted from alhassy's
+[_gentle intro to reflection_](https://github.com/alhassy/gentle-intro-to-reflection).
 
 ### Unifying a goal with a constant
 
@@ -246,8 +247,8 @@ private
 
 ### Trying a path
 
-The following example tries to solve a goal by using path `p` or `inv p`.
-This example was addapted from
+The following example tries to solve a goal by using path `p` or `inv p`. This
+example was addapted from
 
 ```agda
   private

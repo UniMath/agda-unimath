@@ -33,13 +33,17 @@ open import reflection.names
 
 ## Idea
 
-An argument to a function is a term together with some information about it.
-The argument has three properties:
-1. Visibility: whether they are visible, hidden, or an instance
-2. Relevance: whether they are relevant or not (see, [docs](https://agda.readthedocs.io/en/latest/language/irrelevance.html))
-3. Quantity: whether they are run-time relevant or not (see, [docs](https://agda.readthedocs.io/en/latest/language/runtime-irrelevance.html))
+An argument to a function is a term together with some information about it. The
+argument has three properties:
 
-The properties of `Relevance` and `Quantity` are combined in one, called `Modality`.
+1. Visibility: whether they are visible, hidden, or an instance
+2. Relevance: whether they are relevant or not (see,
+   [docs](https://agda.readthedocs.io/en/latest/language/irrelevance.html))
+3. Quantity: whether they are run-time relevant or not (see,
+   [docs](https://agda.readthedocs.io/en/latest/language/runtime-irrelevance.html))
+
+The properties of `Relevance` and `Quantity` are combined in one, called
+`Modality`.
 
 For concrete examples, see [`reflection.definitions`](reflection.definitions).
 

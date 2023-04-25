@@ -9,13 +9,11 @@ module reflection.definitions where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
-
-open import foundation.dependent-pair-types
-
 
 open import lists.lists
 
@@ -156,7 +154,6 @@ private
               ( nil)))))
   _ = refl
 --
-
 ```
 
 ### Pi terms

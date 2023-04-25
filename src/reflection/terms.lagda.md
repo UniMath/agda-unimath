@@ -35,8 +35,8 @@ open import reflection.names
 
 ## Idea
 
-In this module we represent the terms of agda by an inductive definition of the type `Term`.
-See the comments for details on the constructors.
+In this module we represent the terms of agda by an inductive definition of the
+type `Term`. See the comments for details on the constructors.
 
 We can obtain a `Term` from an agda term through the keyword `quoteTerm`.
 
