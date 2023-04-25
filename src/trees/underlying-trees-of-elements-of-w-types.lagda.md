@@ -223,50 +223,50 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  shape-node-directed-tree-element-𝕎 :
+  shape-element-𝕎 :
     (w : 𝕎 A B) → node-element-𝕎 w → A
-  shape-node-directed-tree-element-𝕎 =
-    shape-node-directed-tree-element-coalgebra (𝕎-Coalg A B)
+  shape-element-𝕎 =
+    shape-element-coalgebra (𝕎-Coalg A B)
 
-  map-enrichment-directed-tree-element-𝕎 :
+  map-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    B (shape-node-directed-tree-element-𝕎 w x) →
+    B (shape-element-𝕎 w x) →
     Σ (node-element-𝕎 w) (λ y → edge-element-𝕎 w y x)
-  map-enrichment-directed-tree-element-𝕎 =
-    map-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
+  map-enrichment-element-𝕎 =
+    map-enrichment-element-coalgebra (𝕎-Coalg A B)
 
-  map-inv-enrichment-directed-tree-element-𝕎 :
+  map-inv-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
     Σ (node-element-𝕎 w) (λ y → edge-element-𝕎 w y x) →
-    B (shape-node-directed-tree-element-𝕎 w x)
-  map-inv-enrichment-directed-tree-element-𝕎 =
+    B (shape-element-𝕎 w x)
+  map-inv-enrichment-element-𝕎 =
     map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
 
-  issec-map-inv-enrichment-directed-tree-element-𝕎 :
+  issec-map-inv-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    ( map-enrichment-directed-tree-element-𝕎 w x ∘
-      map-inv-enrichment-directed-tree-element-𝕎 w x) ~ id
-  issec-map-inv-enrichment-directed-tree-element-𝕎 =
+    ( map-enrichment-element-𝕎 w x ∘
+      map-inv-enrichment-element-𝕎 w x) ~ id
+  issec-map-inv-enrichment-element-𝕎 =
     issec-map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
 
-  isretr-map-inv-enrichment-directed-tree-element-𝕎 :
+  isretr-map-inv-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    ( map-inv-enrichment-directed-tree-element-𝕎 w x ∘
-      map-enrichment-directed-tree-element-𝕎 w x) ~ id
-  isretr-map-inv-enrichment-directed-tree-element-𝕎 =
+    ( map-inv-enrichment-element-𝕎 w x ∘
+      map-enrichment-element-𝕎 w x) ~ id
+  isretr-map-inv-enrichment-element-𝕎 =
     isretr-map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
 
-  is-equiv-map-enrichment-directed-tree-element-𝕎 :
+  is-equiv-map-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    is-equiv (map-enrichment-directed-tree-element-𝕎 w x)
-  is-equiv-map-enrichment-directed-tree-element-𝕎 =
-    is-equiv-map-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
+    is-equiv (map-enrichment-element-𝕎 w x)
+  is-equiv-map-enrichment-element-𝕎 =
+    is-equiv-map-enrichment-element-coalgebra (𝕎-Coalg A B)
 
-  enrichment-directed-tree-element-𝕎 :
+  enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    B (shape-node-directed-tree-element-𝕎 w x) ≃
+    B (shape-element-𝕎 w x) ≃
     Σ (node-element-𝕎 w) (λ y → edge-element-𝕎 w y x)
-  enrichment-directed-tree-element-𝕎 =
+  enrichment-element-𝕎 =
     enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
 ```
 
@@ -439,7 +439,7 @@ module _
     compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
   shape-compute-enriched-directed-tree-element-𝕎 :
-    shape-node-directed-tree-element-𝕎 w ~
+    shape-element-𝕎 w ~
     ( ( shape-combinator-Enriched-Directed-Tree A B
         ( shape-𝕎 w)
         ( λ b → enriched-directed-tree-element-𝕎 (component-𝕎 w b))) ∘
@@ -456,7 +456,7 @@ module _
             ( λ b → directed-tree-element-𝕎 (component-𝕎 w b)))
           ( compute-directed-tree-element-𝕎)
           ( x)) ∘e
-        ( enrichment-directed-tree-element-𝕎 w x))
+        ( enrichment-element-𝕎 w x))
       ( ( enrichment-combinator-Enriched-Directed-Tree A B
           ( shape-𝕎 w)
           ( λ b → enriched-directed-tree-element-𝕎 (component-𝕎 w b))
@@ -509,7 +509,7 @@ module _
       ( root-𝕎 v)) ∙
     ( inv
       ( ap
-        ( shape-node-directed-tree-element-𝕎 w)
+        ( shape-element-𝕎 w)
         ( preserves-root-equiv-Enriched-Directed-Tree A B
           ( enriched-directed-tree-element-𝕎 v)
           ( enriched-directed-tree-element-𝕎 w)

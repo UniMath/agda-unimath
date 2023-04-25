@@ -985,6 +985,17 @@ module _
         ( component-coalgebra-polynomial-endofunctor X w b)
         ( x))
 
+  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra :
+    (w : type-coalgebra-polynomial-endofunctor X)
+    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
+    node-fiber-base-Enriched-Directed-Tree A B
+      ( enriched-directed-tree-element-coalgebra X w) b →
+    node-element-coalgebra X
+      ( component-coalgebra-polynomial-endofunctor X w b)
+  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra w b (.(node-base-Enriched-Directed-Tree A B (enriched-directed-tree-element-coalgebra X w) b) , refl-walk-Directed-Graph) = root-coalgebra (component-coalgebra-polynomial-endofunctor X w b)
+  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra w b (.(node-inclusion-element-coalgebra (c , refl) (root-coalgebra (pr2 (pr2 X w) c))) , cons-walk-Directed-Graph (edge-to-root-element-coalgebra (c , refl)) v) = {!!}
+  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra w b (.(node-inclusion-element-coalgebra H _) , cons-walk-Directed-Graph (edge-inclusion-element-coalgebra H e) v) = {!!}
+
   edge-compute-fiber-base-enriched-directed-tree-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
     (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
@@ -1142,5 +1153,5 @@ module _
       ( fiber-base-Enriched-Directed-Tree A B
         ( enriched-directed-tree-element-coalgebra X x) b)
   compute-fiber-base-enriched-directed-tree-element-coalgebra =
-    {!!}
+    {! !}
 ```
