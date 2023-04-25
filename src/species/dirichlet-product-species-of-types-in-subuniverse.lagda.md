@@ -1,7 +1,7 @@
 # Dirichlet products of species of subuniverse
 
 ```agda
-module species.dirichlet-product-species-of-subuniverse where
+module species.dirichlet-product-species-of-types-in-subuniverse where
 ```
 
 <details><summary>Imports</summary>
