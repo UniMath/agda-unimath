@@ -11,6 +11,7 @@ open import commutative-algebra.powers-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -66,4 +67,14 @@ exp-mul-ℕ x (succ-ℕ y) z =
   ( left-distributive-exp-add-ℕ x (mul-ℕ y z) z) ∙
   ( ( ap (mul-ℕ' (exp-ℕ x z)) (exp-mul-ℕ x y z)) ∙
     ( inv (right-distributive-exp-mul-ℕ (exp-ℕ x y) x z)))
+```
+
+### The exponent `m^n` is always nonzero
+
+```agda
+is-nonzero-exp-ℕ :
+  (m n : ℕ) → is-nonzero-ℕ m → is-nonzero-ℕ (exp-ℕ m n)
+is-nonzero-exp-ℕ m zero-ℕ p = is-nonzero-one-ℕ
+is-nonzero-exp-ℕ m (succ-ℕ n) p =
+  is-nonzero-mul-ℕ (exp-ℕ m n) m (is-nonzero-exp-ℕ m n p) p
 ```

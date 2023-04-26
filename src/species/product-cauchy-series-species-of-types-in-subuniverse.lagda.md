@@ -1,4 +1,4 @@
-e# Product of Cauchy series of species of types in a subuniverse
+# Product of Cauchy series of species of types in a subuniverse
 
 ```agda
 module species.product-cauchy-series-species-of-types-in-subuniverse where
@@ -7,27 +7,29 @@ module species.product-cauchy-series-species-of-types-in-subuniverse where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.universal-property-coproduct-types
-open import foundation.cartesian-product-types
-open import foundation.universe-levels
 open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.univalence
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
+open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverse
-open import species.cauchy-series-species-of-types
-open import species.cauchy-series-species-of-types-in-subuniverse
 open import species.cauchy-product-species-of-types
 open import species.cauchy-product-species-of-types-in-subuniverse
+open import species.cauchy-series-species-of-types
+open import species.cauchy-series-species-of-types-in-subuniverse
 open import species.product-cauchy-series-species-of-types
+open import species.species-of-types-in-subuniverse
 ```
+
+</details>
 
 ## Idea
 
