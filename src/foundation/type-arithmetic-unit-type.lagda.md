@@ -198,6 +198,22 @@ module _
   {l : Level} (A : UU l)
   where
 
+  map-left-unit-law-function-types : (unit → A) → A
+  map-left-unit-law-function-types = map-left-unit-law-Π (λ _ → A)
+
+  map-inv-left-unit-law-function-types : A → (unit → A)
+  map-inv-left-unit-law-function-types = map-inv-left-unit-law-Π (λ _ → A)
+
+  is-equiv-map-left-unit-law-function-types :
+    is-equiv map-left-unit-law-function-types
+  is-equiv-map-left-unit-law-function-types =
+    is-equiv-map-left-unit-law-Π λ _ → A
+
+  is-equiv-map-inv-left-unit-law-function-types :
+    is-equiv map-inv-left-unit-law-function-types
+  is-equiv-map-inv-left-unit-law-function-types =
+    is-equiv-map-inv-left-unit-law-Π λ _ → A
+
   left-unit-law-function-types : (unit → A) ≃ A
   left-unit-law-function-types = left-unit-law-Π (λ _ → A)
 
