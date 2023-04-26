@@ -151,21 +151,21 @@ module _
                   T ( cotype-Relaxed-Σ-Decomposition D2 x))
                 _))) ∘e
         ( ( equiv-Σ
-          ( _)
-          ( id-equiv)
-          ( λ D2 →
-            ( equiv-prod
-              ( id-equiv)
-              ( ( equiv-prod
-                  ( id-equiv)
-                  ( ( inv-equiv
-                      ( equiv-precomp-Π
-                        ( inv-equiv
-                          ( matching-correspondence-Relaxed-Σ-Decomposition
-                            D2))
-                      ( λ x → U ( cotype-Relaxed-Σ-Decomposition D1 x)))) ∘e
-                    ( inv-equiv equiv-ev-pair))) ∘e
-                ( distributive-Π-Σ)))))))))) ∘e
+            ( _)
+            ( id-equiv)
+            ( λ D2 →
+              ( equiv-prod
+                ( id-equiv)
+                ( ( equiv-prod
+                    ( id-equiv)
+                    ( ( inv-equiv
+                        ( equiv-precomp-Π
+                          ( inv-equiv
+                            ( matching-correspondence-Relaxed-Σ-Decomposition
+                              D2))
+                        ( λ x → U ( cotype-Relaxed-Σ-Decomposition D1 x)))) ∘e
+                      ( inv-equiv equiv-ev-pair))) ∘e
+                  ( distributive-Π-Σ)))))))))) ∘e
     ( ( assoc-Σ
         ( Relaxed-Σ-Decomposition l1 l1 A)
         ( λ D → Relaxed-Σ-Decomposition l1 l1
