@@ -19,6 +19,6 @@ open import foundation-core.universe-levels
 ## Definition
 
 ```agda
-const : {i j : Level} (A : UU i) (B : UU j) (b : B) → A → B
+const : {l1 l2 : Level} (A : UU l1) (B : UU l2) → B → A → B
 const A B b x = b
 ```

@@ -9,8 +9,8 @@ module foundation.idempotent-maps where
 ```agda
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.sets
 open import foundation-core.propositions
+open import foundation-core.sets
 open import foundation-core.universe-levels
 ```
 

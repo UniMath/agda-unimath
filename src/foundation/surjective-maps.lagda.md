@@ -51,8 +51,7 @@ A map `f : A → B` is surjective if all of its fibers are inhabited.
 ```agda
 is-surjective-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
-is-surjective-Prop {B = B} f =
-  Π-Prop B (λ b → trunc-Prop (fib f b))
+is-surjective-Prop {B = B} f = Π-Prop B (trunc-Prop ∘ fib f)
 
 is-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
@@ -63,8 +62,7 @@ is-prop-is-surjective :
   is-prop (is-surjective f)
 is-prop-is-surjective f = is-prop-type-Prop (is-surjective-Prop f)
 
-_↠_ :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+_↠_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↠ B = Σ (A → B) is-surjective
 
 module _
@@ -82,7 +80,7 @@ module _
 
 ```agda
 Surjection : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-Surjection l2 A = Σ (UU l2) (λ X → A ↠ X)
+Surjection l2 A = Σ (UU l2) (A ↠_)
 
 module _
   {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)
