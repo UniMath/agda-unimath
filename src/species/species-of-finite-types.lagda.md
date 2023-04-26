@@ -9,7 +9,7 @@ module species.species-of-finite-types where
 ```agda
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 
 open import univalent-combinatorics.finite-types
 ```

@@ -1,7 +1,7 @@
 # Composition of Cauchy series of species of types in subuniverse
 
 ```agda
-module species.composition-cauchy-series-species-of-types-in-subuniverse where
+module species.composition-cauchy-series-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -25,11 +25,11 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-composition-species-of-types-in-subuniverse
+open import species.cauchy-composition-species-of-types-in-subuniverses
 open import species.cauchy-series-species-of-types
-open import species.cauchy-series-species-of-types-in-subuniverse
+open import species.cauchy-series-species-of-types-in-subuniverses
 open import species.composition-cauchy-series-species-of-types
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

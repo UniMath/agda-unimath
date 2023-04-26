@@ -11,7 +11,7 @@ open import foundation.inhabited-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

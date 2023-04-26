@@ -1,7 +1,7 @@
 # Cauchy products of species of types in a subuniverse
 
 ```agda
-module species.cauchy-product-species-of-types-in-subuniverse where
+module species.cauchy-products-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -26,8 +26,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import species.cauchy-product-species-of-types
-open import species.species-of-types-in-subuniverse
+open import species.cauchy-products-species-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

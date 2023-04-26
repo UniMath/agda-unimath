@@ -1,7 +1,7 @@
 # Species of types in subuniverses
 
 ```agda
-module species.species-of-types-in-subuniverse where
+module species.species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>

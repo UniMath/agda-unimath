@@ -1,7 +1,7 @@
 # Product of Cauchy series of species of types
 
 ```agda
-module species.product-cauchy-series-species-of-types where
+module species.products-cauchy-series-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import species.cauchy-product-species-of-types
+open import species.cauchy-products-species-of-types
 open import species.cauchy-series-species-of-types
 open import species.species-of-types
 ```

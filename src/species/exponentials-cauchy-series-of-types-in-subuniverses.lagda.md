@@ -1,7 +1,7 @@
 # Exponential of Cauchy series of species of types in subuniverse
 
 ```agda
-module species.exponential-cauchy-series-of-types-in-subuniverse where
+module species.exponentials-cauchy-series-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -23,12 +23,12 @@ open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types-in-subuniverse
-open import species.cauchy-exponentials-species-of-types-in-subuniverse
-open import species.cauchy-series-species-of-types-in-subuniverse
-open import species.composition-cauchy-series-species-of-types-in-subuniverse
-open import species.exponential-cauchy-series-of-types
-open import species.species-of-types-in-subuniverse
+open import species.cauchy-composition-species-of-types-in-subuniverses
+open import species.cauchy-exponentials-species-of-types-in-subuniverses
+open import species.cauchy-series-species-of-types-in-subuniverses
+open import species.composition-cauchy-series-species-of-types-in-subuniverses
+open import species.exponentials-cauchy-series-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

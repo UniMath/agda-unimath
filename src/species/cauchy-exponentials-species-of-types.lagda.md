@@ -26,7 +26,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-product-species-of-types
+open import species.cauchy-products-species-of-types
 open import species.coproducts-species-of-types
 open import species.equivalences-species-of-types
 open import species.species-of-types

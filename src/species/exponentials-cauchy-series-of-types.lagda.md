@@ -1,7 +1,7 @@
 # Exponential of Cauchy series of species of types
 
 ```agda
-module species.exponential-cauchy-series-of-types where
+module species.exponentials-cauchy-series-of-types where
 ```
 
 <details><summary>Imports</summary>
