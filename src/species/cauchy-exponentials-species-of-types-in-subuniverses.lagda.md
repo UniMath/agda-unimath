@@ -104,14 +104,7 @@ module _
         ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l4))
         ( cauchy-exponential-species-subuniverse' P Q S X)))
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
-  (C3 :
-    {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-    is-in-subuniverse
-      (subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-      (cauchy-composition-species-subuniverse' P Q S T X))
+  (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C4 :
     ( ( X : type-subuniverse P) →
       ( Y : (inclusion-subuniverse P X) → type-subuniverse P) →
@@ -266,14 +259,7 @@ module _
       is-in-subuniverse
         ( subuniverse-global-subuniverse Q (l4 ⊔ l5))
         ( coproduct-species-subuniverse' P Q S T X)))
-  ( C3 :
-    ( {l4 l5 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l4 ⊔ l5))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  ( C3 : is-closed-under-cauchy-product-species-subuniverse P Q)
   ( C4 :
     ( U : UU l1) →
     ( V : U → UU l1) →

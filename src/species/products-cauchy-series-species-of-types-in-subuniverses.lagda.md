@@ -104,14 +104,7 @@ module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
-  (C1 :
-    ( {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (C2 :
     ( A B : UU l1) →
     is-in-subuniverse P A →

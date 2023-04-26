@@ -32,19 +32,23 @@ open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
 open import species.species-of-types-in-subuniverses
+open import species.unit-cauchy-composition-species-of-types
+open import species.unit-cauchy-composition-species-of-types-in-subuniverses
 ```
 
 </details>
 
 ## Idea
 
-A species `S : Inhabited-Type l1 → UU l2` induces its [Cauchy series](species.cauchy-series-species-of-types-in-subuniverses)
+A species `S : type-subuniverse P → type-subuniverse Q` induces its
+[Cauchy series](species.cauchy-series-species-of-types-in-subuniverses)
 
 ```md
-  X ↦ Σ (A : Inhabited-Type l1) (S A) × (A → X)
+  X ↦ Σ (A : type-subuniverse P), (S A) × (A → X)
 ```
 
-The **Cauchy composition** of species `S` and `T` is obtained from the coefficients of the composite of the Cauchy series of `S` and `T`.
+The **Cauchy composition** of species `S` and `T` is obtained from the
+coefficients of the composite of the Cauchy series of `S` and `T`.
 
 ## Definition
 
@@ -81,7 +85,7 @@ module _
     ( X : type-subuniverse P) →
     is-in-global-subuniverse id Q
       ( type-cauchy-composition-species-subuniverse S T X)
-    
+
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
@@ -97,7 +101,7 @@ module _
       ( P)
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
   cauchy-composition-species-subuniverse X =
-    type-cauchy-composition-species-subuniverse P Q S T X , C1 S T X
+    ( type-cauchy-composition-species-subuniverse P Q S T X , C1 S T X)
 ```
 
 ## Properties
@@ -181,21 +185,6 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
-  (C4 :
-    is-closed-under-is-contr-subuniverses P
-      ( subuniverse-global-subuniverse Q l1))
-  where
-  
-  cauchy-composition-unit-species-subuniverse :
-    species-subuniverse P (subuniverse-global-subuniverse Q l1)
-  cauchy-composition-unit-species-subuniverse X =
-    (is-contr (inclusion-subuniverse P X)) ,
-    C4 X
-
-module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   ( C3 : is-in-subuniverse P (raise-unit l1))
   ( C4 :
@@ -209,11 +198,11 @@ module _
       ( subuniverse-global-subuniverse Q l1)
       ( cauchy-composition-unit-species-subuniverse P Q C4)
       ( X) →
-    cauchy-composition-unit-species-types X
+    unit-species-types X
   map-equiv-Σ-extension-cauchy-composition-unit-subuniverse (p , H) = H
 
   map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
-    cauchy-composition-unit-species-types X →
+    unit-species-types X →
     Σ-extension-species-subuniverse P
       ( subuniverse-global-subuniverse Q l1)
       ( cauchy-composition-unit-species-subuniverse P Q C4)
@@ -250,7 +239,7 @@ module _
       ( subuniverse-global-subuniverse Q l1)
       ( cauchy-composition-unit-species-subuniverse P Q C4)
       ( X) ≃
-    cauchy-composition-unit-species-types X
+    unit-species-types X
   pr1 equiv-Σ-extension-cauchy-composition-unit-subuniverse =
     map-equiv-Σ-extension-cauchy-composition-unit-subuniverse
   pr2 equiv-Σ-extension-cauchy-composition-unit-subuniverse =

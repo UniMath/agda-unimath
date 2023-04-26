@@ -27,8 +27,8 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The Cauchy series of a species `S` of types in subuniverse from `P` to `Q` at
-`X` is defined as :
+The **Cauchy series** of a species `S` of types in subuniverse from `P` to `Q`
+at `X` is defined as :
 
 ```md
 Σ (U : type-subuniverse P) (S(U) × (U → X))

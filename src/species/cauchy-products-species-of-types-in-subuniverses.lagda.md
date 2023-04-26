@@ -46,41 +46,59 @@ the Cauchy product is also a species of subuniverse from `P` to `Q`.
 
 ## Definition
 
+### The underlying type of the Cauchy product of species in a subuniverse
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   where
 
-  cauchy-product-species-subuniverse' :
+  type-cauchy-product-species-subuniverse :
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (X : type-subuniverse P) → UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  cauchy-product-species-subuniverse' S T X =
+  type-cauchy-product-species-subuniverse S T X =
     Σ ( binary-coproduct-Decomposition-subuniverse P X)
       ( λ d →
-        inclusion-subuniverse (subuniverse-global-subuniverse Q l3)
+        inclusion-subuniverse
+          ( subuniverse-global-subuniverse Q l3)
           ( S (left-summand-binary-coproduct-Decomposition-subuniverse P X d)) ×
-        inclusion-subuniverse (subuniverse-global-subuniverse Q l4)
+        inclusion-subuniverse
+          ( subuniverse-global-subuniverse Q l4)
           ( T (right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
+```
 
+### Subuniverses closed under the Cauchy product of species in a subuniverse
+
+```agda
+is-closed-under-cauchy-product-species-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  UUω
+is-closed-under-cauchy-product-species-subuniverse {l1} {l2} P Q =
+  {l3 l4 : Level}
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : type-subuniverse P) →
+  is-in-subuniverse
+    ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+    ( type-cauchy-product-species-subuniverse P Q S T X)
+```
+
+### The Cauchy product of species in a subuniverse
+
+```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
-  ( C1 :
-    ( {l4 l5 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l4 ⊔ l5))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   where
 
   cauchy-product-species-subuniverse :
     species-subuniverse P (subuniverse-global-subuniverse Q l3) →
     species-subuniverse P (subuniverse-global-subuniverse Q l4) →
-    species-subuniverse P (subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+    species-subuniverse P
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
   pr1 (cauchy-product-species-subuniverse S T X) =
-    cauchy-product-species-subuniverse' P Q S T X
+    type-cauchy-product-species-subuniverse P Q S T X
   pr2 (cauchy-product-species-subuniverse S T X) = C1 S T X
 ```
 
@@ -91,17 +109,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
-  ( C1 :
-      ( {l6 l7 : Level}
-        (S : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-        (T : species-subuniverse P (subuniverse-global-subuniverse Q l7))
-        (X : type-subuniverse P) →
-        is-in-subuniverse
-          ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l6 ⊔ l7) )
-          ( cauchy-product-species-subuniverse' P Q S T X)))
-  ( C2 :
-    (A B : type-subuniverse P) →
-    is-in-subuniverse P (inclusion-subuniverse P A + inclusion-subuniverse P B))
+  ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
+  ( C2 : is-closed-under-coproducts-subuniverse P)
   where
 
   module _
@@ -112,7 +121,7 @@ module _
     where
 
     equiv-left-iterated-cauchy-product-species-subuniverse :
-      cauchy-product-species-subuniverse' P Q
+      type-cauchy-product-species-subuniverse P Q
         ( cauchy-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
@@ -150,7 +159,7 @@ module _
           ( ( equiv-tot  λ d → right-distributive-prod-Σ))))
 
     equiv-right-iterated-cauchy-product-species-subuniverse :
-      cauchy-product-species-subuniverse' P Q
+      type-cauchy-product-species-subuniverse P Q
         ( S)
         ( cauchy-product-species-subuniverse P Q C1 T U)
         ( X) ≃
@@ -173,11 +182,11 @@ module _
           ( ( equiv-tot (λ d → left-distributive-prod-Σ)))))
 
     equiv-associative-cauchy-product-species-subuniverse :
-      cauchy-product-species-subuniverse' P Q
+      type-cauchy-product-species-subuniverse P Q
         ( cauchy-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
-      cauchy-product-species-subuniverse' P Q
+      type-cauchy-product-species-subuniverse P Q
         ( S)
         ( cauchy-product-species-subuniverse P Q C1 T U)
         ( X)
@@ -217,22 +226,15 @@ module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
-  ( C1 :
-    ( {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
   where
 
   equiv-commutative-cauchy-product-species-subuniverse :
     (X : type-subuniverse P) →
-    cauchy-product-species-subuniverse' P Q S T X ≃
-    cauchy-product-species-subuniverse' P Q T S X
+    type-cauchy-product-species-subuniverse P Q S T X ≃
+    type-cauchy-product-species-subuniverse P Q T S X
   equiv-commutative-cauchy-product-species-subuniverse X =
     equiv-Σ
       ( λ d →
@@ -267,14 +269,7 @@ unit-cauchy-product-species-subuniverse P Q C X =
 
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
-  (C1 :
-    ( {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (C2 : is-in-subuniverse P (raise-empty l1))
   (C3 :
     (X : type-subuniverse P) →
@@ -286,7 +281,7 @@ module _
 
   equiv-right-unit-law-cauchy-product-species-subuniverse :
     (X : type-subuniverse P) →
-    cauchy-product-species-subuniverse' P Q
+    type-cauchy-product-species-subuniverse P Q
       ( S)
       ( unit-cauchy-product-species-subuniverse
         ( P)
@@ -329,7 +324,7 @@ module _
 
   equiv-left-unit-law-cauchy-product-species-subuniverse :
     (X : type-subuniverse P) →
-    cauchy-product-species-subuniverse' P Q
+    type-cauchy-product-species-subuniverse P Q
       ( unit-cauchy-product-species-subuniverse
         ( P)
         ( subuniverse-global-subuniverse Q l1)
@@ -356,14 +351,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
-  ( C1 :
-    ( {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   ( C2 :
     ( A B : UU l1) →
     is-in-subuniverse P A →
