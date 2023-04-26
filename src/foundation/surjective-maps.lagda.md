@@ -11,11 +11,15 @@ open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 
@@ -718,3 +722,5 @@ module _
       ( is-surjective-map-surjection f)
       ( is-emb-map-emb g)
 ```
+
+### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`

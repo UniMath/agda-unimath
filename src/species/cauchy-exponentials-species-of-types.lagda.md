@@ -1,7 +1,7 @@
-# Cauchy exponential of species of types
+# Cauchy exponentials of species of types
 
 ```agda
-module species.cauchy-exponential-species-of-types where
+module species.cauchy-exponentials-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -26,7 +26,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-product-species-of-types
+open import species.cauchy-products-species-of-types
 open import species.coproducts-species-of-types
 open import species.equivalences-species-of-types
 open import species.species-of-types
@@ -36,13 +36,13 @@ open import species.species-of-types
 
 ## Idea
 
-The Cauchy exponential of a species of types `S` is defined as the following
+The **Cauchy exponential** of a species of types `S` can be thought of as the
+Cauchy composite `exp ∘ S`. Since the exponent species is defined as `X ↦ 𝟙`,
+the coefficients of the Cauchy exponential of `S` are defined as follows:
 species of types :
 
 ```md
-(X : UU) →
-Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
-  ( (u : U) → S (V u))
+  X ↦ Σ ((U , V , e) : Relaxed-Σ-Decomposition X),  Π (u : U) → S (V u).
 ```
 
 ## Definition
@@ -88,18 +88,16 @@ module _
     reassociate :
       ( X : UU l1) →
       Σ ( Σ ( binary-coproduct-Decomposition l1 l1 X)
-             ( λ d →
-               Relaxed-Σ-Decomposition
-                 l1 l1
-                 ( left-summand-binary-coproduct-Decomposition d) ×
-               Relaxed-Σ-Decomposition
-                 l1 l1
-                 ( right-summand-binary-coproduct-Decomposition d)))
+            ( λ d →
+              ( Relaxed-Σ-Decomposition l1 l1
+                ( left-summand-binary-coproduct-Decomposition d)) ×
+              ( Relaxed-Σ-Decomposition l1 l1
+                ( right-summand-binary-coproduct-Decomposition d))))
         ( λ  D →
-          ( (b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
-            S ( cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b)) ×
-          ( (b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
-            T ( cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b))) ≃
+          ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
+            ( S ( cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b))) ×
+            ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
+              T ( cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b))) ≃
       cauchy-product-species-types
         ( cauchy-exponential-species-types S)
         ( cauchy-exponential-species-types T)
@@ -119,46 +117,40 @@ module _
         ( cauchy-exponential-species-types S)
         ( cauchy-exponential-species-types T))
   equiv-cauchy-exponential-sum-species-types X =
-    ( ( reassociate X) ∘e
-      ( ( equiv-Σ
-            ( λ D →
-                  ((b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
-                   S (cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b))
-                  ×
-                  ((b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
-                   T (cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b)))
-            ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
-            ( λ D →
-              equiv-prod
-                ( equiv-Π
-                    ( _)
-                    ( id-equiv)
-                    ( λ a' →
-                      equiv-eq
-                        ( ap
-                          ( S)
-                          ( inv
-                            ( compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition
-                                D
-                                a')))))
-                ( equiv-Π
-                    ( _)
-                    ( id-equiv)
-                    ( λ b' →
-                      equiv-eq
-                        ( ap
-                          ( T)
-                          ( inv
-                            ( compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition
-                                 D
-                                 b'))))))) ∘e
-        ( ( inv-assoc-Σ
-              ( Relaxed-Σ-Decomposition l1 l1 X)
-              ( λ d →
-                binary-coproduct-Decomposition
-                  l1 l1
-                  ( indexing-type-Relaxed-Σ-Decomposition d))
+    ( reassociate X) ∘e
+    ( ( equiv-Σ
+        ( λ D →
+          ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
+            ( S (cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b))) ×
+            ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
+              T (cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b)))
+        ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
+        ( λ D →
+          equiv-prod
+            ( equiv-Π
+              ( _)
+              ( id-equiv)
+              ( λ a' →
+                equiv-eq
+                  ( ap S
+                    ( inv
+                      ( compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition
+                        ( D)
+                        ( a'))))))
+            ( equiv-map-Π
+              ( λ b' →
+                equiv-eq
+                  ( ap T
+                    ( inv
+                      ( compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition
+                        ( D)
+                        ( b')))))))) ∘e
+      ( ( inv-assoc-Σ
+          ( Relaxed-Σ-Decomposition l1 l1 X)
+          ( λ d →
+            binary-coproduct-Decomposition l1 l1
+              ( indexing-type-Relaxed-Σ-Decomposition d))
               ( _)) ∘e
-          ( equiv-tot
-              ( λ d → distributive-Π-coprod-binary-coproduct-Decomposition)))))
+        ( equiv-tot
+          ( λ d → distributive-Π-coprod-binary-coproduct-Decomposition))))
 ```

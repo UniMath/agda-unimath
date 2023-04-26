@@ -52,12 +52,11 @@ module _
   binary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   binary-coproduct-Decomposition-subuniverse =
     Σ ( type-subuniverse P)
-        ( λ k1 →
-          Σ ( type-subuniverse P)
-            ( λ k2 →
-              ( inclusion-subuniverse P X ≃
-                ( (inclusion-subuniverse P k1) +
-                  (inclusion-subuniverse P k2)))))
+      ( λ k1 →
+        Σ ( type-subuniverse P)
+          ( λ k2 →
+            ( inclusion-subuniverse P X) ≃
+            ( inclusion-subuniverse P k1 + inclusion-subuniverse P k2)))
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
@@ -69,8 +68,7 @@ module _
 
   type-left-summand-binary-coproduct-Decomposition-subuniverse : UU l1
   type-left-summand-binary-coproduct-Decomposition-subuniverse =
-    inclusion-subuniverse
-      P
+    inclusion-subuniverse P
       left-summand-binary-coproduct-Decomposition-subuniverse
 
   right-summand-binary-coproduct-Decomposition-subuniverse : type-subuniverse P
@@ -78,8 +76,7 @@ module _
 
   type-right-summand-binary-coproduct-Decomposition-subuniverse : UU l1
   type-right-summand-binary-coproduct-Decomposition-subuniverse =
-    inclusion-subuniverse
-      P
+    inclusion-subuniverse P
       right-summand-binary-coproduct-Decomposition-subuniverse
 
   matching-correspondence-binary-coproduct-Decomposition-subuniverse :
@@ -101,16 +98,14 @@ module _
   left-iterated-binary-coproduct-Decomposition-subuniverse =
     Σ ( binary-coproduct-Decomposition-subuniverse P X)
       ( λ d →
-        binary-coproduct-Decomposition-subuniverse
-          ( P)
+        binary-coproduct-Decomposition-subuniverse P
           ( left-summand-binary-coproduct-Decomposition-subuniverse P X d))
 
   right-iterated-binary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-coproduct-Decomposition-subuniverse =
     Σ ( binary-coproduct-Decomposition-subuniverse P X)
        ( λ d →
-         binary-coproduct-Decomposition-subuniverse
-           ( P)
+         binary-coproduct-Decomposition-subuniverse P
            ( right-summand-binary-coproduct-Decomposition-subuniverse P X d))
 ```
 
@@ -141,29 +136,26 @@ module _
     first-summand-ternary-coproduct-Decomposition-subuniverse :
       type-subuniverse P
     first-summand-ternary-coproduct-Decomposition-subuniverse =
-      (pr1 types-ternary-coproduct-Decomposition-subuniverse)
+      ( pr1 types-ternary-coproduct-Decomposition-subuniverse)
 
     second-summand-ternary-coproduct-Decomposition-subuniverse :
       type-subuniverse P
     second-summand-ternary-coproduct-Decomposition-subuniverse =
-      (pr1 (pr2 types-ternary-coproduct-Decomposition-subuniverse))
+      ( pr1 (pr2 types-ternary-coproduct-Decomposition-subuniverse))
 
     third-summand-ternary-coproduct-Decomposition-subuniverse :
       type-subuniverse P
     third-summand-ternary-coproduct-Decomposition-subuniverse =
-      (pr2 (pr2 types-ternary-coproduct-Decomposition-subuniverse))
+      ( pr2 (pr2 types-ternary-coproduct-Decomposition-subuniverse))
 
     matching-correspondence-ternary-coproductuct-Decomposition-subuniverse :
-      inclusion-subuniverse P X ≃
-      ( inclusion-subuniverse
-          P
-          first-summand-ternary-coproduct-Decomposition-subuniverse +
-        ( inclusion-subuniverse
-            P
-            second-summand-ternary-coproduct-Decomposition-subuniverse +
-          inclusion-subuniverse
-            P
-            third-summand-ternary-coproduct-Decomposition-subuniverse))
+      ( inclusion-subuniverse P X) ≃
+      ( ( inclusion-subuniverse P
+          first-summand-ternary-coproduct-Decomposition-subuniverse) +
+        ( ( inclusion-subuniverse P
+            second-summand-ternary-coproduct-Decomposition-subuniverse) +
+          ( inclusion-subuniverse P
+            third-summand-ternary-coproduct-Decomposition-subuniverse)))
     matching-correspondence-ternary-coproductuct-Decomposition-subuniverse =
       pr2 d
 ```
@@ -188,8 +180,8 @@ equiv-binary-coproduct-Decomposition-subuniverse P A X Y =
           ( map-coprod (map-equiv el) (map-equiv er) ∘
             map-equiv
               ( matching-correspondence-binary-coproduct-Decomposition-subuniverse P A X)) ~
-          map-equiv
-            ( matching-correspondence-binary-coproduct-Decomposition-subuniverse P A Y)))
+          ( map-equiv
+            ( matching-correspondence-binary-coproduct-Decomposition-subuniverse P A Y))))
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (A : type-subuniverse P)
@@ -207,7 +199,8 @@ module _
     type-left-summand-binary-coproduct-Decomposition-subuniverse P A X →
     type-left-summand-binary-coproduct-Decomposition-subuniverse P A Y
   map-equiv-left-summand-equiv-binary-coproduct-Decomposition-subuniverse =
-    map-equiv equiv-left-summand-equiv-binary-coproduct-Decomposition-subuniverse
+    map-equiv
+      equiv-left-summand-equiv-binary-coproduct-Decomposition-subuniverse
 
   equiv-right-summand-equiv-binary-coproduct-Decomposition-subuniverse :
     type-right-summand-binary-coproduct-Decomposition-subuniverse P A X ≃
@@ -236,7 +229,8 @@ module _
       ( type-left-summand-binary-coproduct-Decomposition-subuniverse P A X)
       ( type-right-summand-binary-coproduct-Decomposition-subuniverse P A X)
       ( map-equiv
-        ( matching-correspondence-binary-coproduct-Decomposition-subuniverse P A X)
+        ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
+          P A X)
         ( x))
 
   is-contr-total-equiv-binary-coproduct-Decomposition-subuniverse :
@@ -246,19 +240,20 @@ module _
   is-contr-total-equiv-binary-coproduct-Decomposition-subuniverse =
     is-contr-total-Eq-structure
       ( _)
-      ( is-contr-total-equiv-subuniverse
-        ( P)
+      ( is-contr-total-equiv-subuniverse P
         ( left-summand-binary-coproduct-Decomposition-subuniverse P A X))
-      ( left-summand-binary-coproduct-Decomposition-subuniverse P A X , id-equiv)
+      ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
+        id-equiv)
       ( is-contr-total-Eq-structure
         ( _)
-        ( is-contr-total-equiv-subuniverse
-          ( P)
+        ( is-contr-total-equiv-subuniverse P
           ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
-        ( right-summand-binary-coproduct-Decomposition-subuniverse P A X , id-equiv)
+        ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,
+          id-equiv)
         ( is-contr-total-htpy-equiv
           ( equiv-coprod id-equiv id-equiv ∘e
-            matching-correspondence-binary-coproduct-Decomposition-subuniverse P A X)))
+            matching-correspondence-binary-coproduct-Decomposition-subuniverse
+              P A X)))
 
   equiv-eq-binary-coproduct-Decomposition-subuniverse :
     (Y : binary-coproduct-Decomposition-subuniverse P A) → (X ＝ Y) →
@@ -300,23 +295,23 @@ module _
     binary-coproduct-Decomposition-subuniverse P X ≃
     binary-coproduct-Decomposition-subuniverse P X
   equiv-commutative-binary-coproduct-Decomposition-subuniverse =
-    ( ( assoc-Σ
-        ( type-subuniverse P)
-        ( λ _ → type-subuniverse P)
-        ( _)) ∘e
-      ( ( equiv-Σ
-          ( _)
-          ( commutative-prod)
-          ( λ x →
-            equiv-postcomp-equiv
-              ( commutative-coprod
-                ( inclusion-subuniverse P (pr1 x))
-                ( inclusion-subuniverse P (pr2 x)))
-              (inclusion-subuniverse P X))) ∘e
-        ( ( inv-assoc-Σ
-            ( type-subuniverse P)
-            ( λ _ → type-subuniverse P)
-            ( _)))))
+    ( assoc-Σ
+      ( type-subuniverse P)
+      ( λ _ → type-subuniverse P)
+      ( _)) ∘e
+    ( ( equiv-Σ
+        ( _)
+        ( commutative-prod)
+        ( λ x →
+          equiv-postcomp-equiv
+            ( commutative-coprod
+              ( inclusion-subuniverse P (pr1 x))
+              ( inclusion-subuniverse P (pr2 x)))
+            (inclusion-subuniverse P X))) ∘e
+      ( ( inv-assoc-Σ
+          ( type-subuniverse P)
+          ( λ _ → type-subuniverse P)
+          ( _))))
 ```
 
 ### Equivalence between iterated coproduct and ternary coproduct decomposition
@@ -324,9 +319,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
-  (C1 :
-    (A : type-subuniverse P) → (B : type-subuniverse P) →
-    is-in-subuniverse P (inclusion-subuniverse P A + inclusion-subuniverse P B))
+  (C1 : is-closed-under-coproducts-subuniverse P)
   where
 
   private
@@ -336,14 +329,15 @@ module _
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
                 ( λ A →
-                  inclusion-subuniverse P A ≃
+                  ( inclusion-subuniverse P A) ≃
                   ( inclusion-subuniverse P (pr1 (pr2 x)) +
                     inclusion-subuniverse P (pr2 (pr2 x)))))
             ( λ A →
-              inclusion-subuniverse P X ≃
+              ( inclusion-subuniverse P X) ≃
               ( inclusion-subuniverse P (pr1 A) +
                 inclusion-subuniverse P (pr1 x))))
-    map-reassociate-left-iterated-coproduct-Decomposition-subuniverse ((A , B , e) , C , D , f) =
+    map-reassociate-left-iterated-coproduct-Decomposition-subuniverse
+      ( (A , B , e) , C , D , f) =
       ( (B , C , D) , (A , f) , e )
 
     map-inv-reassociate-left-iterated-coproduct-Decomposition-subuniverse :
@@ -359,8 +353,9 @@ module _
               ( inclusion-subuniverse P (pr1 A) +
                 inclusion-subuniverse P (pr1 x)))) →
       left-iterated-binary-coproduct-Decomposition-subuniverse P X
-    map-inv-reassociate-left-iterated-coproduct-Decomposition-subuniverse ( (B , C , D) , (A , f) , e ) =
-      ((A , B , e) , C , D , f)
+    map-inv-reassociate-left-iterated-coproduct-Decomposition-subuniverse
+      ( (B , C , D) , (A , f) , e ) =
+      ( (A , B , e) , C , D , f)
 
     equiv-reassociate-left-iterated-coproduct-Decomposition-subuniverse :
       left-iterated-binary-coproduct-Decomposition-subuniverse P X ≃
@@ -387,22 +382,21 @@ module _
     left-iterated-binary-coproduct-Decomposition-subuniverse P X ≃
     ternary-coproduct-Decomposition-subuniverse P X
   equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse =
-    ( ( equiv-tot
-        ( λ x →
-          ( ( equiv-postcomp-equiv
-              ( commutative-coprod _ _)
-              ( inclusion-subuniverse P X)) ∘e
-          ( ( left-unit-law-Σ-is-contr
-              ( is-contr-total-equiv-subuniverse'
-                ( P)
-                ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
-                    inclusion-subuniverse P (pr2 (pr2 x))) ,
-                  C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
-              ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
-                    inclusion-subuniverse P (pr2 (pr2 x))) ,
-                  C1 (pr1 (pr2 x)) (pr2 (pr2 x))) ,
-                id-equiv))))) ∘e
-      ( ( equiv-reassociate-left-iterated-coproduct-Decomposition-subuniverse)))
+    ( equiv-tot
+      ( λ x →
+        ( ( equiv-postcomp-equiv
+            ( commutative-coprod _ _)
+            ( inclusion-subuniverse P X)) ∘e
+        ( ( left-unit-law-Σ-is-contr
+            ( is-contr-total-equiv-subuniverse' P
+              ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
+                  inclusion-subuniverse P (pr2 (pr2 x))) ,
+                ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x)))))))
+            ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
+                  inclusion-subuniverse P (pr2 (pr2 x))) ,
+                ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))) ,
+              ( id-equiv)))))) ∘e
+    ( equiv-reassociate-left-iterated-coproduct-Decomposition-subuniverse)
 
   private
     map-reassociate-right-iterated-coproduct-Decomposition-subuniverse :
@@ -411,14 +405,15 @@ module _
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
                 ( λ B →
-                  inclusion-subuniverse P B ≃
+                  ( inclusion-subuniverse P B) ≃
                   ( inclusion-subuniverse P (pr1 (pr2 x)) +
                     inclusion-subuniverse P (pr2 (pr2 x)))))
             ( λ B →
-              inclusion-subuniverse P X ≃
+              ( inclusion-subuniverse P X) ≃
               ( inclusion-subuniverse P (pr1 x) +
                 inclusion-subuniverse P (pr1 B))))
-    map-reassociate-right-iterated-coproduct-Decomposition-subuniverse ((A , B , e) , C , D , f) =
+    map-reassociate-right-iterated-coproduct-Decomposition-subuniverse
+      ( (A , B , e) , C , D , f) =
       ( (A , C , D) , (B , f) , e )
 
     map-inv-reassociate-right-iterated-coproduct-Decomposition-subuniverse :
@@ -426,16 +421,17 @@ module _
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
                 ( λ B →
-                  inclusion-subuniverse P B ≃
+                  ( inclusion-subuniverse P B) ≃
                   ( inclusion-subuniverse P (pr1 (pr2 x)) +
                     inclusion-subuniverse P (pr2 (pr2 x)))))
             ( λ B →
-              inclusion-subuniverse P X ≃
+              ( inclusion-subuniverse P X) ≃
               ( inclusion-subuniverse P (pr1 x) +
                 inclusion-subuniverse P (pr1 B)))) →
       right-iterated-binary-coproduct-Decomposition-subuniverse P X
-    map-inv-reassociate-right-iterated-coproduct-Decomposition-subuniverse ( (A , C , D) , (B , f) , e ) =
-      ((A , B , e) , C , D , f)
+    map-inv-reassociate-right-iterated-coproduct-Decomposition-subuniverse
+      ( (A , C , D) , (B , f) , e ) =
+      ( (A , B , e) , C , D , f)
 
     equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse :
       right-iterated-binary-coproduct-Decomposition-subuniverse P X ≃
@@ -443,11 +439,11 @@ module _
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
                 ( λ B →
-                  inclusion-subuniverse P B ≃
+                  ( inclusion-subuniverse P B) ≃
                   ( inclusion-subuniverse P (pr1 (pr2 x)) +
                     inclusion-subuniverse P (pr2 (pr2 x)))))
             ( λ B →
-              inclusion-subuniverse P X ≃
+              ( inclusion-subuniverse P X) ≃
               ( inclusion-subuniverse P (pr1 x) +
                 inclusion-subuniverse P (pr1 B))))
     pr1 equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse =
@@ -462,19 +458,18 @@ module _
     right-iterated-binary-coproduct-Decomposition-subuniverse P X ≃
     ternary-coproduct-Decomposition-subuniverse P X
   equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse =
-    ( ( equiv-tot
-        ( λ x →
-          left-unit-law-Σ-is-contr
-            ( is-contr-total-equiv-subuniverse'
-              ( P)
-              ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
-                  inclusion-subuniverse P (pr2 (pr2 x))) ,
-                ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
-            ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
-                  inclusion-subuniverse P (pr2 (pr2 x))) ,
-                ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))) ,
-              id-equiv))) ∘e
-      ( ( equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse)))
+    ( equiv-tot
+      ( λ x →
+        left-unit-law-Σ-is-contr
+          ( is-contr-total-equiv-subuniverse' P
+            ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
+                inclusion-subuniverse P (pr2 (pr2 x))) ,
+              ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))))
+          ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
+                inclusion-subuniverse P (pr2 (pr2 x))) ,
+              ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))) ,
+            ( id-equiv)))) ∘e
+    ( equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse)
 ```
 
 ### Coproduct-decomposition with empty right summand
@@ -486,44 +481,37 @@ module _
   where
 
   equiv-is-empty-right-summand-binary-coproduct-Decomposition-subuniverse :
-    ( Σ ( binary-coproduct-Decomposition-subuniverse P X)
-        ( λ d →
-          is-empty
-            ( inclusion-subuniverse P
-              ( right-summand-binary-coproduct-Decomposition-subuniverse
-                  P
-                  X
-                  d)))) ≃
+    Σ ( binary-coproduct-Decomposition-subuniverse P X)
+      ( λ d →
+        is-empty
+          ( inclusion-subuniverse P
+            ( right-summand-binary-coproduct-Decomposition-subuniverse
+              P X d))) ≃
     Σ ( type-subuniverse P)
       ( λ Y → inclusion-subuniverse P X ≃ pr1 Y)
   equiv-is-empty-right-summand-binary-coproduct-Decomposition-subuniverse =
-    ( ( equiv-tot
-          ( λ x →
-            ( ( equiv-postcomp-equiv
-                ( right-unit-law-coprod-is-empty
-                  ( inclusion-subuniverse P x)
-                  ( raise-empty l1)
-                  ( is-empty-raise-empty))
-                ( inclusion-subuniverse P X)) ∘e
-              ( ( left-unit-law-Σ-is-contr
-                     ( ( ( ( raise-empty l1) ,
-                           C1) ,
-                         is-empty-raise-empty) ,
-                       ( λ x →
-                         eq-pair-Σ
-                           ( eq-pair-Σ
-                             ( eq-equiv
-                               ( raise-empty l1)
-                               ( inclusion-subuniverse P (pr1 x))
-                               ( equiv-is-empty
-                                 is-empty-raise-empty
-                                 ( ( pr2 x))))
-                             ( eq-is-prop (is-prop-type-Prop (P _))))
-                           ( eq-is-prop is-prop-is-empty)))
-                     ( ( raise-empty l1 , C1) ,
-                       is-empty-raise-empty)) ∘e
-                ( ( inv-assoc-Σ _ _ _) ∘e
-                  ( ( equiv-tot (λ _ → commutative-prod)) ∘e
-                    ( ( assoc-Σ _ _ _)))))))) ∘e
-        ( ( assoc-Σ _ _ _)))
+    ( equiv-tot
+      ( λ x →
+        ( equiv-postcomp-equiv
+          ( right-unit-law-coprod-is-empty
+            ( inclusion-subuniverse P x)
+            ( raise-empty l1)
+            ( is-empty-raise-empty))
+          ( inclusion-subuniverse P X)) ∘e
+        ( ( left-unit-law-Σ-is-contr
+            ( ( ( raise-empty l1 , C1) , is-empty-raise-empty) ,
+              ( λ x →
+                eq-pair-Σ
+                  ( eq-pair-Σ
+                    ( eq-equiv
+                      ( raise-empty l1)
+                      ( inclusion-subuniverse P (pr1 x))
+                      ( equiv-is-empty is-empty-raise-empty ( pr2 x)))
+                    ( eq-is-prop (is-prop-type-Prop (P _))))
+                  ( eq-is-prop is-prop-is-empty)))
+            ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e
+          ( ( inv-assoc-Σ _ _ _) ∘e
+            ( ( equiv-tot (λ _ → commutative-prod)) ∘e
+              ( ( assoc-Σ _ _ _))))))) ∘e
+    ( ( assoc-Σ _ _ _))
 ```

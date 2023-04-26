@@ -1,7 +1,7 @@
 # Product of Cauchy series of species of types in a subuniverse
 
 ```agda
-module species.product-cauchy-series-species-of-types-in-subuniverse where
+module species.products-cauchy-series-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -21,12 +21,12 @@ open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import species.cauchy-product-species-of-types
-open import species.cauchy-product-species-of-types-in-subuniverse
+open import species.cauchy-products-species-of-types
+open import species.cauchy-products-species-of-types-in-subuniverses
 open import species.cauchy-series-species-of-types
-open import species.cauchy-series-species-of-types-in-subuniverse
-open import species.product-cauchy-series-species-of-types
-open import species.species-of-types-in-subuniverse
+open import species.cauchy-series-species-of-types-in-subuniverses
+open import species.products-cauchy-series-species-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>
@@ -104,14 +104,7 @@ module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
-  (C1 :
-    ( {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-        ( cauchy-product-species-subuniverse' P Q S T X)))
+  (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (C2 :
     ( A B : UU l1) →
     is-in-subuniverse P A →

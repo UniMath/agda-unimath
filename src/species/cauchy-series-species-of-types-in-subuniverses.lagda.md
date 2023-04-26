@@ -1,7 +1,7 @@
 # Cauchy series of species of types in a subuniverse
 
 ```agda
-module species.cauchy-series-species-of-types-in-subuniverse where
+module species.cauchy-series-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -20,15 +20,15 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import species.cauchy-series-species-of-types
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>
 
 ## Idea
 
-The Cauchy series of a species `S` of types in subuniverse from `P` to `Q` at
-`X` is defined as :
+The **Cauchy series** of a species `S` of types in subuniverse from `P` to `Q`
+at `X` is defined as :
 
 ```md
 Σ (U : type-subuniverse P) (S(U) × (U → X))
