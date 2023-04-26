@@ -9,6 +9,7 @@ module foundation.functoriality-truncation where
 ```agda
 open import foundation.truncations
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -30,19 +31,23 @@ action of truncations.
 ## Definition
 
 ```agda
-unique-map-trunc :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
-  is-contr
-    ( Σ ( type-trunc k A → type-trunc k B)
-        ( λ h → (h ∘ unit-trunc) ~ (unit-trunc ∘ f)))
-unique-map-trunc {l1} {l2} {A} {B} k f =
-  universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
-map-trunc :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
-  (A → B) → type-trunc k A → type-trunc k B
-map-trunc k f =
-  pr1 (center (unique-map-trunc k f))
+  unique-map-trunc :
+    is-contr
+      ( Σ ( type-trunc k A → type-trunc k B)
+          ( coherence-square-maps f unit-trunc unit-trunc))
+  unique-map-trunc =
+    universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
+
+  map-trunc : type-trunc k A → type-trunc k B
+  map-trunc =  pr1 (center unique-map-trunc)
+
+  coherence-square-map-trunc :
+    coherence-square-maps f unit-trunc unit-trunc map-trunc
+  coherence-square-map-trunc = pr2 (center unique-map-trunc)
 ```
 
 ## Properties
