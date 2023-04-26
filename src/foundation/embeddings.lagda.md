@@ -298,8 +298,6 @@ module _
 
 ### In a commuting square of which the sides are embeddings, the top map is an embedding if and only if the bottom map is an embedding
 
-### In a commuting square of which the sides are equivalences, the top map is an embedding if and only if the bottom map is an embedding
-
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}

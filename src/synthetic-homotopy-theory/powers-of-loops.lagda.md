@@ -85,7 +85,7 @@ power-nat-succ-Ω' (succ-ℕ n) A ω =
   ( assoc ω (power-nat-Ω n A ω) ω)
 ```
 
-### `ωᵐ⁺ⁿ ＝ ωᵐ ∙ ωⁿ
+### `ωᵐ⁺ⁿ ＝ ωᵐ ∙ ωⁿ`
 
 ```agda
 power-nat-add-Ω :
@@ -97,7 +97,7 @@ power-nat-add-Ω m (succ-ℕ n) A ω =
   ( assoc (power-nat-Ω m A ω) (power-nat-Ω n A ω) ω)
 ```
 
-### `ωᵐⁿ = (ωᵐ)ⁿ
+### `ωᵐⁿ = (ωᵐ)ⁿ`
 
 ```agda
 power-nat-mul-Ω :
