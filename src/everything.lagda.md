@@ -3,6 +3,7 @@
 
 module everything where
 
+open import category-theory
 open import category-theory.adjunctions-large-precategories
 open import category-theory.anafunctors
 open import category-theory.categories
@@ -23,7 +24,6 @@ open import category-theory.initial-objects-precategories
 open import category-theory.isomorphisms-categories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.isomorphisms-precategories
-open import category-theory
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.monomorphisms-large-precategories
@@ -43,6 +43,7 @@ open import category-theory.sieves-categories
 open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 
+open import commutative-algebra
 open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.binomial-theorem-commutative-semirings
 open import commutative-algebra.boolean-rings
@@ -62,7 +63,6 @@ open import commutative-algebra.ideals-commutative-semirings
 open import commutative-algebra.integral-domains
 open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
-open import commutative-algebra
 open import commutative-algebra.local-commutative-rings
 open import commutative-algebra.maximal-ideals-commutative-rings
 open import commutative-algebra.nilradical-commutative-rings
@@ -79,6 +79,7 @@ open import commutative-algebra.sums-commutative-semirings
 open import commutative-algebra.trivial-commutative-rings
 open import commutative-algebra.zariski-topology
 
+open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.ackermann-function
 open import elementary-number-theory.addition-integer-fractions
@@ -140,15 +141,14 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integer-partitions
 open import elementary-number-theory.integers
 open import elementary-number-theory.kolakoski-sequence
-open import elementary-number-theory
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.maximum-standard-finite-types
 open import elementary-number-theory.mersenne-primes
 open import elementary-number-theory.minimum-natural-numbers
 open import elementary-number-theory.minimum-standard-finite-types
-open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum
 open import elementary-number-theory.multiplication-integers
@@ -189,6 +189,7 @@ open import elementary-number-theory.upper-bounds-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
+open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
 open import finite-group-theory.alternating-concrete-groups
 open import finite-group-theory.alternating-groups
@@ -200,7 +201,6 @@ open import finite-group-theory.finite-monoids
 open import finite-group-theory.finite-semigroups
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.groups-of-order-2
-open import finite-group-theory
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
@@ -209,57 +209,7 @@ open import finite-group-theory.subgroups-finite-groups
 open import finite-group-theory.tetrahedra-in-3-space
 open import finite-group-theory.transpositions
 
-open import foundation.0-connected-types
-open import foundation.0-images-of-maps
-open import foundation.0-maps
-open import foundation.1-types
-open import foundation.2-types
-open import foundation.algebras-polynomial-endofunctors
-open import foundation.apartness-relations
-open import foundation.arithmetic-law-coproduct-and-sigma-decompositions
-open import foundation.automorphisms
-open import foundation.axiom-l
-open import foundation.axiom-of-choice
-open import foundation.bands
-open import foundation.binary-embeddings
-open import foundation.binary-equivalences
-open import foundation.binary-equivalences-unordered-pairs-of-types
-open import foundation.binary-functoriality-set-quotients
-open import foundation.binary-homotopies
-open import foundation.binary-operations-unordered-pairs-of-types
-open import foundation.binary-reflecting-maps-equivalence-relations
-open import foundation.binary-relations
-open import foundation.binary-transport
-open import foundation.boolean-reflection
-open import foundation.booleans
-open import foundation.cantor-schroder-bernstein-escardo
-open import foundation.cantors-diagonal-argument
-open import foundation.cartesian-products-set-quotients
-open import foundation.cartesian-product-types
-open import foundation.choice-of-representatives-equivalence-relation
-open import foundation.coherently-invertible-maps
-open import foundation.commuting-3-simplices-of-homotopies
-open import foundation.commuting-3-simplices-of-maps
-open import foundation.commuting-cubes-of-maps
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-homotopies
-open import foundation.commuting-triangles-of-maps
-open import foundation.complements
-open import foundation.complements-subtypes
-open import foundation.cones-pullbacks
-open import foundation.conjunction
-open import foundation.connected-components
-open import foundation.connected-components-universes
-open import foundation.connected-maps
-open import foundation.connected-types
-open import foundation.constant-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.coproduct-decompositions
-open import foundation.coproduct-decompositions-subuniverse
-open import foundation.coproduct-types
-
+open import foundation-core
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.automorphisms
@@ -304,7 +254,6 @@ open import foundation-core.identity-systems
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.involutions
-open import foundation-core
 open import foundation-core.logical-equivalences
 open import foundation-core.morphisms-cospans
 open import foundation-core.negation
@@ -329,6 +278,57 @@ open import foundation-core.universal-property-pullbacks
 open import foundation-core.universal-property-truncation
 open import foundation-core.universe-levels
 
+open import foundation
+open import foundation.0-connected-types
+open import foundation.0-images-of-maps
+open import foundation.0-maps
+open import foundation.1-types
+open import foundation.2-types
+open import foundation.algebras-polynomial-endofunctors
+open import foundation.apartness-relations
+open import foundation.arithmetic-law-coproduct-and-sigma-decompositions
+open import foundation.automorphisms
+open import foundation.axiom-l
+open import foundation.axiom-of-choice
+open import foundation.bands
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences-unordered-pairs-of-types
+open import foundation.binary-equivalences
+open import foundation.binary-functoriality-set-quotients
+open import foundation.binary-homotopies
+open import foundation.binary-operations-unordered-pairs-of-types
+open import foundation.binary-reflecting-maps-equivalence-relations
+open import foundation.binary-relations
+open import foundation.binary-transport
+open import foundation.boolean-reflection
+open import foundation.booleans
+open import foundation.cantor-schroder-bernstein-escardo
+open import foundation.cantors-diagonal-argument
+open import foundation.cartesian-product-types
+open import foundation.cartesian-products-set-quotients
+open import foundation.choice-of-representatives-equivalence-relation
+open import foundation.coherently-invertible-maps
+open import foundation.commuting-3-simplices-of-homotopies
+open import foundation.commuting-3-simplices-of-maps
+open import foundation.commuting-cubes-of-maps
+open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-homotopies
+open import foundation.commuting-triangles-of-maps
+open import foundation.complements-subtypes
+open import foundation.complements
+open import foundation.cones-pullbacks
+open import foundation.conjunction
+open import foundation.connected-components-universes
+open import foundation.connected-components
+open import foundation.connected-maps
+open import foundation.connected-types
+open import foundation.constant-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.coproduct-decompositions-subuniverse
+open import foundation.coproduct-decompositions
+open import foundation.coproduct-types
 open import foundation.coslice
 open import foundation.cospans
 open import foundation.decidable-dependent-function-types
@@ -373,19 +373,19 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
 open import foundation.equivalence-relations
-open import foundation.equivalences
 open import foundation.equivalences-maybe
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.exponents-set-quotients
 open import foundation.faithful-maps
+open import foundation.fiber-inclusions
 open import foundation.fibered-equivalences
 open import foundation.fibered-involutions
 open import foundation.fibered-maps
-open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.full-subtypes
-open import foundation.functional-correspondences
 open import foundation.function-extensionality
+open import foundation.functional-correspondences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -405,8 +405,8 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-truncated-types
 open import foundation.identity-types
-open import foundation.images
 open import foundation.images-subtypes
+open import foundation.images
 open import foundation.impredicative-encodings
 open import foundation.impredicative-universes
 open import foundation.induction-principle-propositional-truncation
@@ -421,7 +421,6 @@ open import foundation.isomorphisms-of-sets
 open import foundation.iterating-automorphisms
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
-open import foundation
 open import foundation.large-dependent-pair-types
 open import foundation.large-homotopies
 open import foundation.large-identity-types
@@ -482,11 +481,11 @@ open import foundation.sections
 open import foundation.sequences
 open import foundation.set-presented-types
 open import foundation.set-quotients
-open import foundation.sets
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.shifting-sequences
-open import foundation.sigma-decompositions
 open import foundation.sigma-decomposition-subuniverse
+open import foundation.sigma-decompositions
 open import foundation.singleton-induction
 open import foundation.singleton-subtypes
 open import foundation.slice
@@ -498,7 +497,9 @@ open import foundation.standard-apartness-relations
 open import foundation.strongly-extensional-maps
 open import foundation.structure-identity-principle
 open import foundation.structure
+open import foundation.structured-type-duality
 open import foundation.subterminal-types
+open import foundation.subtype-duality
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.subuniverses
@@ -532,8 +533,8 @@ open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations
 open import foundation.uniqueness-truncation
-open import foundation.unital-binary-operations
 open import foundation.unit-type
+open import foundation.unital-binary-operations
 open import foundation.univalence-action-on-equivalences
 open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
@@ -555,16 +556,17 @@ open import foundation.universal-property-set-truncation
 open import foundation.universal-property-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs
 open import foundation.unordered-pairs-of-types
-open import foundation.unordered-tuples
+open import foundation.unordered-pairs
 open import foundation.unordered-tuples-of-types
+open import foundation.unordered-tuples
 open import foundation.vectors-set-quotients
 open import foundation.weak-function-extensionality
 open import foundation.weak-limited-principle-of-omniscience
 open import foundation.weakly-constant-maps
 open import foundation.xor
 
+open import graph-theory
 open import graph-theory.circuits-undirected-graphs
 open import graph-theory.closed-walks-undirected-graphs
 open import graph-theory.complete-bipartite-graphs
@@ -572,8 +574,8 @@ open import graph-theory.complete-multipartite-graphs
 open import graph-theory.complete-undirected-graphs
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.cycles-undirected-graphs
-open import graph-theory.directed-graphs
 open import graph-theory.directed-graph-structures-on-standard-finite-sets
+open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-directed-graphs
 open import graph-theory.embeddings-undirected-graphs
@@ -586,7 +588,6 @@ open import graph-theory.faithful-morphisms-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.geometric-realizations-undirected-graphs
 open import graph-theory.hypergraphs
-open import graph-theory
 open import graph-theory.matchings
 open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.morphisms-directed-graphs
@@ -603,13 +604,14 @@ open import graph-theory.stereoisomerism-enriched-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.trails-directed-graphs
 open import graph-theory.trails-undirected-graphs
-open import graph-theory.undirected-graphs
 open import graph-theory.undirected-graph-structures-on-standard-finite-sets
+open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
 open import graph-theory.voltage-graphs
 open import graph-theory.walks-directed-graphs
 open import graph-theory.walks-undirected-graphs
 
+open import group-theory
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.automorphism-groups
@@ -665,8 +667,8 @@ open import group-theory.function-monoids
 open import group-theory.function-semigroups
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
-open import group-theory.groups
 open import group-theory.group-solver
+open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-concrete-group-actions
@@ -685,7 +687,6 @@ open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.kernels-homomorphisms-concrete-groups
 open import group-theory.kernels
-open import group-theory
 open import group-theory.loop-groups-sets
 open import group-theory.mere-equivalences-concrete-group-actions
 open import group-theory.mere-equivalences-group-actions
@@ -698,10 +699,10 @@ open import group-theory.normal-subgroups
 open import group-theory.normal-submonoids-commutative-monoids
 open import group-theory.normal-submonoids
 open import group-theory.opposite-groups
+open import group-theory.orbit-stabilizer-theorem-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-monoid-actions
-open import group-theory.orbit-stabilizer-theorem-concrete-groups
 open import group-theory.orders-of-elements-groups
 open import group-theory.precategory-of-concrete-groups
 open import group-theory.precategory-of-group-actions
@@ -741,6 +742,7 @@ open import group-theory.transitive-group-actions
 open import group-theory.trivial-subgroups
 open import group-theory.unordered-tuples-of-elements-commutative-monoids
 
+open import higher-group-theory
 open import higher-group-theory.equivalences-higher-groups
 open import higher-group-theory.fixed-points-higher-group-actions
 open import higher-group-theory.free-higher-group-actions
@@ -749,35 +751,34 @@ open import higher-group-theory.higher-groups
 open import higher-group-theory.homomorphisms-higher-group-actions
 open import higher-group-theory.homomorphisms-higher-groups
 open import higher-group-theory.integers-higher-group
-open import higher-group-theory
 open import higher-group-theory.orbits-higher-group-actions
 open import higher-group-theory.subgroups-higher-groups
 open import higher-group-theory.symmetric-higher-groups
 
+open import linear-algebra
 open import linear-algebra.constant-matrices
 open import linear-algebra.constant-vectors
 open import linear-algebra.diagonal-matrices-on-rings
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.functoriality-vectors
-open import linear-algebra
-open import linear-algebra.matrices
 open import linear-algebra.matrices-on-rings
+open import linear-algebra.matrices
 open import linear-algebra.multiplication-matrices
 open import linear-algebra.scalar-multiplication-matrices
-open import linear-algebra.scalar-multiplication-vectors
 open import linear-algebra.scalar-multiplication-vectors-on-rings
+open import linear-algebra.scalar-multiplication-vectors
 open import linear-algebra.transposition-matrices
-open import linear-algebra.vectors
 open import linear-algebra.vectors-on-commutative-rings
 open import linear-algebra.vectors-on-commutative-semirings
 open import linear-algebra.vectors-on-euclidean-domains
 open import linear-algebra.vectors-on-rings
 open import linear-algebra.vectors-on-semirings
+open import linear-algebra.vectors
 
+open import lists
 open import lists.concatenation-lists
 open import lists.flattening-lists
 open import lists.functoriality-lists
-open import lists
 open import lists.lists-discrete-types
 open import lists.lists
 open import lists.reversing-lists
@@ -786,6 +787,7 @@ open import lists.universal-property-lists-wild-monoids
 open import online-encyclopedia-of-integer-sequences
 open import online-encyclopedia-of-integer-sequences.oeis
 
+open import order-theory
 open import order-theory.chains-posets
 open import order-theory.chains-preorders
 open import order-theory.decidable-subposets
@@ -793,9 +795,9 @@ open import order-theory.decidable-subpreorders
 open import order-theory.directed-complete-posets
 open import order-theory.directed-families
 open import order-theory.distributive-lattices
-open import order-theory.finitely-graded-posets
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
+open import order-theory.finitely-graded-posets
 open import order-theory.frames
 open import order-theory.galois-connections
 open import order-theory.greatest-lower-bounds-posets
@@ -807,7 +809,6 @@ open import order-theory.ideals-preorders
 open import order-theory.infinite-distributive-law
 open import order-theory.interval-subposets
 open import order-theory.join-semilattices
-open import order-theory
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.largest-elements-posets
@@ -832,22 +833,22 @@ open import order-theory.sup-lattices
 open import order-theory.total-posets
 open import order-theory.total-preorders
 
+open import organic-chemistry
 open import organic-chemistry.alcohols
 open import organic-chemistry.alkanes
 open import organic-chemistry.alkenes
 open import organic-chemistry.alkynes
 open import organic-chemistry.ethane
 open import organic-chemistry.hydrocarbons
-open import organic-chemistry
 open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons
 
+open import orthogonal-factorization-systems
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.factorization-operations
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes
 open import orthogonal-factorization-systems.higher-modalities
-open import orthogonal-factorization-systems
 open import orthogonal-factorization-systems.lifting-operations
 open import orthogonal-factorization-systems.lifting-squares
 open import orthogonal-factorization-systems.lifts-of-maps
@@ -861,12 +862,13 @@ open import orthogonal-factorization-systems.reflective-subuniverses
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 open import orthogonal-factorization-systems.wide-function-classes
 
-open import polytopes.abstract-polytopes
 open import polytopes
+open import polytopes.abstract-polytopes
 
-open import real-numbers.dedekind-real-numbers
 open import real-numbers
+open import real-numbers.dedekind-real-numbers
 
+open import ring-theory
 open import ring-theory.algebras-rings
 open import ring-theory.binomial-theorem-rings
 open import ring-theory.binomial-theorem-semirings
@@ -887,9 +889,8 @@ open import ring-theory.idempotent-elements-rings
 open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
-open import ring-theory
-open import ring-theory.localizations-rings
 open import ring-theory.local-rings
+open import ring-theory.localizations-rings
 open import ring-theory.maximal-ideals-rings
 open import ring-theory.modules-rings
 open import ring-theory.nil-ideals-rings
@@ -909,38 +910,45 @@ open import ring-theory.sums-rings
 open import ring-theory.sums-semirings
 open import ring-theory.trivial-rings
 
+open import set-theory
 open import set-theory.baire-space
 open import set-theory.cantor-space
 open import set-theory.cardinalities
 open import set-theory.countable-sets
 open import set-theory.cumulative-hierarchy
 open import set-theory.infinite-sets
-open import set-theory
 open import set-theory.uncountable-sets
 
+open import species
 open import species.cartesian-products-species-of-types
-open import species.cauchy-exponential-species-of-subuniverse
+open import species.cauchy-composition-species-of-types-in-subuniverse
+open import species.cauchy-composition-species-of-types
+open import species.cauchy-exponential-species-of-types-in-subuniverse
 open import species.cauchy-exponential-species-of-types
-open import species.cauchy-product-species-of-subuniverse
+open import species.cauchy-product-species-of-types-in-subuniverse
 open import species.cauchy-product-species-of-types
 open import species.cauchy-series-species-of-types-in-subuniverse
 open import species.cauchy-series-species-of-types
-open import species.composition-species-of-finite-inhabited-types
-open import species.composition-species-of-subuniverse
+open import species.composition-cauchy-series-species-of-types-in-subuniverse
+open import species.composition-cauchy-series-species-of-types
 open import species.coproducts-species-of-types-in-subuniverse
 open import species.coproducts-species-of-types
 open import species.cycle-index-series-species-of-types
 open import species.derivatives-species-of-types
-open import species.dirichlet-product-species-of-subuniverse
+open import species.dirichlet-product-species-of-types-in-subuniverse
 open import species.equivalences-species-of-types-in-subuniverse
 open import species.equivalences-species-of-types
+open import species.exponential-cauchy-series-of-types-in-subuniverse
+open import species.exponential-cauchy-series-of-types
 open import species.exponents-species-of-types
-open import species
-open import species.large-composition-species-of-types
 open import species.morphisms-finite-species
 open import species.morphisms-species-of-types
 open import species.pointing-species-of-types
 open import species.precategory-of-finite-species
+open import species.product-cauchy-series-species-of-types-in-subuniverse
+open import species.product-cauchy-series-species-of-types
+open import species.small-cauchy-composition-species-of-finite-inhabited-types
+open import species.small-cauchy-composition-species-of-types-in-subuniverse
 open import species.species-of-finite-inhabited-types
 open import species.species-of-finite-types
 open import species.species-of-inhabited-types
@@ -948,6 +956,7 @@ open import species.species-of-types-in-subuniverse
 open import species.species-of-types
 open import species.unlabeled-structures-species
 
+open import structured-types
 open import structured-types.central-h-spaces
 open import structured-types.coherent-h-spaces
 open import structured-types.constant-maps-pointed-types
@@ -961,7 +970,6 @@ open import structured-types.h-spaces
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.involutive-type-of-h-space-structures
 open import structured-types.involutive-types
-open import structured-types
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-coherent-h-spaces
@@ -986,6 +994,7 @@ open import structured-types.wild-monoids
 open import structured-types.wild-quasigroups
 open import structured-types.wild-semigroups
 
+open import synthetic-homotopy-theory
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
@@ -1003,7 +1012,6 @@ open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.joins-of-types
-open import synthetic-homotopy-theory
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.multiplication-circle
 open import synthetic-homotopy-theory.prespectra
@@ -1017,6 +1025,7 @@ open import synthetic-homotopy-theory.universal-property-circle
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.wedges-of-pointed-types
 
+open import trees
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
 open import trees.enriched-directed-trees
@@ -1027,7 +1036,6 @@ open import trees.functoriality-w-types
 open import trees.indexed-w-types
 open import trees.induction-w-types
 open import trees.inequality-w-types
-open import trees
 open import trees.lower-types-w-types
 open import trees.multisets
 open import trees.ranks-of-elements-w-types
@@ -1043,14 +1051,15 @@ open import trees.w-type-of-natural-numbers
 open import trees.w-type-of-propositions
 open import trees.w-types
 
+open import type-theories
 open import type-theories.comprehension-type-theories
 open import type-theories.dependent-type-theories
 open import type-theories.fibered-dependent-type-theories
-open import type-theories
 open import type-theories.sections-dependent-type-theories
 open import type-theories.simple-type-theories
 open import type-theories.unityped-type-theories
 
+open import univalent-combinatorics
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
@@ -1063,8 +1072,8 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.counting-fibers-of-maps
-open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-maybe
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.cycle-partitions
 open import univalent-combinatorics.cyclic-types
@@ -1079,20 +1088,20 @@ open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.discrete-sigma-decompositions
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.embeddings-standard-finite-types
+open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences-cubes
-open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.equivalences-standard-finite-types
+open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.ferrers-diagrams
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-connected-components
-open import univalent-combinatorics.finitely-presented-types
 open import univalent-combinatorics.finite-presentations
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-presented-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
@@ -1101,7 +1110,6 @@ open import univalent-combinatorics.injective-maps
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.isotopies-latin-squares
 open import univalent-combinatorics.kuratowsky-finite-sets
-open import univalent-combinatorics
 open import univalent-combinatorics.latin-squares
 open import univalent-combinatorics.main-classes-of-latin-hypercubes
 open import univalent-combinatorics.main-classes-of-latin-squares
@@ -1116,8 +1124,8 @@ open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.quotients-finite-types
 open import univalent-combinatorics.ramsey-theory
-open import univalent-combinatorics.repetitions-of-values
 open import univalent-combinatorics.repetitions-of-values-sequences
+open import univalent-combinatorics.repetitions-of-values
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.sequences-finite-types
 open import univalent-combinatorics.set-quotients-of-index-two
@@ -1140,6 +1148,7 @@ open import univalent-combinatorics.unlabeled-partitions
 open import univalent-combinatorics.unlabeled-rooted-trees
 open import univalent-combinatorics.unlabeled-trees
 
+open import universal-algebra
 open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebraic-theory-of-groups
@@ -1147,7 +1156,6 @@ open import universal-algebra.algebras-of-theories
 open import universal-algebra.congruences
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.kernels
-open import universal-algebra
 open import universal-algebra.models-of-signatures
 open import universal-algebra.quotient-algebras
 open import universal-algebra.signatures

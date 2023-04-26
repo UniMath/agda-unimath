@@ -1,4 +1,4 @@
-# Species of subuniverses
+# Species of types in subuniverses
 
 ```agda
 module species.species-of-types-in-subuniverse where
@@ -23,8 +23,7 @@ open import species.species-of-types
 
 ### Idea
 
-In this file, we define the type of species of subuniverse. A species of
-subuniverse is just a map from a subuniverse `P` to a subuniverse `Q`.
+A **species of types in a subuniverse** is a map from a subuniverse `P` to a subuniverse `Q`.
 
 ## Definitions
 
@@ -40,36 +39,35 @@ species-subuniverse P Q =  type-subuniverse P → type-subuniverse Q
 ### Transport in species
 
 ```agda
-tr-species-subuniverse :
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4) →
-  (F : species-subuniverse P Q) (X Y : type-subuniverse P) →
-  inclusion-subuniverse P X ≃ inclusion-subuniverse P Y →
-  inclusion-subuniverse Q (F X) → inclusion-subuniverse Q (F Y)
-tr-species-subuniverse P Q F X Y e =
-  tr ((inclusion-subuniverse Q) ∘ F) (eq-equiv-subuniverse P e)
+module _
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
+  (F : species-subuniverse P Q)
+  where
+
+  tr-species-subuniverse :
+    (X Y : type-subuniverse P) →
+    inclusion-subuniverse P X ≃ inclusion-subuniverse P Y →
+    inclusion-subuniverse Q (F X) → inclusion-subuniverse Q (F Y)
+  tr-species-subuniverse X Y e =
+    tr ((inclusion-subuniverse Q) ∘ F) (eq-equiv-subuniverse P e)
 ```
 
-### Extension into species of types
+### Σ-extension to species of types
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
-  (S : species-subuniverse P Q)
+  (F : species-subuniverse P Q)
   where
 
   Σ-extension-species-subuniverse :
     species-types l1 (l2 ⊔ l3)
   Σ-extension-species-subuniverse X =
-    Σ (is-in-subuniverse P X) (λ p → inclusion-subuniverse Q (S (X , p)))
-
-  Π-extension-species-subuniverse :
-    species-types l1 (l2 ⊔ l3)
-  Π-extension-species-subuniverse X =
-    (p : is-in-subuniverse P X) → inclusion-subuniverse Q (S (X , p))
+    Σ (is-in-subuniverse P X) (λ p → inclusion-subuniverse Q (F (X , p)))
 
   equiv-Σ-extension-species-subuniverse :
     ( X : type-subuniverse P) →
-    inclusion-subuniverse Q (S X) ≃
+    inclusion-subuniverse Q (F X) ≃
     Σ-extension-species-subuniverse (inclusion-subuniverse P X)
   equiv-Σ-extension-species-subuniverse X =
     inv-left-unit-law-Σ-is-contr
@@ -77,4 +75,18 @@ module _
         ( is-subtype-subuniverse P (inclusion-subuniverse P X))
         ( pr2 X))
       ( pr2 X)
+```
+
+### Π-extension to species of types
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
+  (S : species-subuniverse P Q)
+  where
+
+  Π-extension-species-subuniverse :
+    species-types l1 (l2 ⊔ l3)
+  Π-extension-species-subuniverse X =
+    (p : is-in-subuniverse P X) → inclusion-subuniverse Q (S (X , p))
 ```

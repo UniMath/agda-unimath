@@ -16,6 +16,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-maps
+open import foundation.structured-type-duality
 open import foundation.type-duality
 open import foundation.type-theoretic-principle-of-choice
 
