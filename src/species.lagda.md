@@ -3,6 +3,7 @@
 ```agda
 module species where
 
+open import species.cartesian-exponents-species-of-types public
 open import species.cartesian-products-species-of-types public
 open import species.cauchy-composition-species-of-types public
 open import species.cauchy-composition-species-of-types-in-subuniverses public
@@ -23,7 +24,6 @@ open import species.equivalences-species-of-types public
 open import species.equivalences-species-of-types-in-subuniverses public
 open import species.exponentials-cauchy-series-of-types public
 open import species.exponentials-cauchy-series-of-types-in-subuniverses public
-open import species.exponents-species-of-types public
 open import species.morphisms-finite-species public
 open import species.morphisms-species-of-types public
 open import species.pointing-species-of-types public

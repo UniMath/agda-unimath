@@ -13,7 +13,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import species.exponents-species-of-types
+open import species.cartesian-exponents-species-of-types
 open import species.morphisms-species-of-types
 open import species.species-of-types
 ```
