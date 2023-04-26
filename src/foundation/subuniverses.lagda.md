@@ -87,6 +87,53 @@ record global-subuniverse (α : Level → Level) : UUω where
       is-global-subuniverse α subuniverse-global-subuniverse l1 l2
 
 open global-subuniverse public
+
+module _
+  (α : Level → Level) (P : global-subuniverse α)
+  where
+
+  is-in-global-subuniverse :
+    {l : Level} → UU l → UU (α l)
+  is-in-global-subuniverse X =
+    is-in-subuniverse (subuniverse-global-subuniverse P _) X
+```
+
+### The predicate that a subuniverse is closed under Σ
+
+We state a general form involving three universes, and a more traditional form using a single universe
+
+```agda
+is-closed-under-Σ-subuniverses :
+  {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
+  (R : subuniverse (l1 ⊔ l3) l5) → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+is-closed-under-Σ-subuniverses P Q R =
+  (X : type-subuniverse P)
+  (Y : inclusion-subuniverse P X → type-subuniverse Q) →
+  is-in-subuniverse R
+    ( Σ (inclusion-subuniverse P X) (λ x → inclusion-subuniverse Q (Y x)))
+
+is-closed-under-Σ-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
+is-closed-under-Σ-subuniverse P = is-closed-under-Σ-subuniverses P P P
+```
+
+### The predicate that a subuniverse is closed under the `is-contr` predicate
+
+We state a general form involving two universes, and a more traditional form using a single universe
+
+```agda
+is-closed-under-is-contr-subuniverses :
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
+  UU (lsuc l1 ⊔ l2 ⊔ l3)
+is-closed-under-is-contr-subuniverses P Q =
+  (X : type-subuniverse P) →
+  is-in-subuniverse Q (is-contr (inclusion-subuniverse P X))
+
+is-closed-under-is-contr-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
+is-closed-under-is-contr-subuniverse P =
+  is-closed-under-is-contr-subuniverses P P
 ```
 
 ## Properties
@@ -94,13 +141,15 @@ open global-subuniverse public
 ### Subuniverses are closed under equivalences
 
 ```agda
-in-subuniverse-equiv :
-  {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P X → P Y
-in-subuniverse-equiv P e = tr P (eq-equiv _ _ e)
+is-in-subuniverse-equiv :
+  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1} →
+  X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
+is-in-subuniverse-equiv P e = tr (is-in-subuniverse P) (eq-equiv _ _ e)
 
-in-subuniverse-equiv' :
-  {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P Y → P X
-in-subuniverse-equiv' P e = tr P (inv (eq-equiv _ _ e))
+is-in-subuniverse-equiv' :
+  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1} →
+  X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
+is-in-subuniverse-equiv' P e = tr (is-in-subuniverse P) (inv (eq-equiv _ _ e))
 ```
 
 ### Characterization of the identity type of subuniverses
