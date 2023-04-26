@@ -33,7 +33,7 @@ A square of maps
 
 is said to commute if there is a homotopy between both composites.
 
-## Definition
+## Definitions
 
 ```agda
 coherence-square-maps :

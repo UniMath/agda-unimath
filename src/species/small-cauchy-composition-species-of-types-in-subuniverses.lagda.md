@@ -1,7 +1,7 @@
 # Small Cauchy composition of species of subuniverse
 
 ```agda
-module species.small-cauchy-composition-species-of-types-in-subuniverse where
+module species.small-cauchy-composition-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -32,8 +32,9 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-composition-species-of-types-in-subuniverse
-open import species.species-of-types-in-subuniverse
+open import species.cauchy-composition-species-of-types-in-subuniverses
+open import species.species-of-types-in-subuniverses
+open import species.unit-cauchy-composition-species-of-types
 ```
 
 </details>
@@ -193,7 +194,7 @@ module _
         ( Q)
         ( small-cauchy-composition-unit-species-subuniverse)
         ( X) ≃
-      cauchy-composition-unit-species-types X
+      unit-species-types X
     pr1 (equiv-Σ-extension-small-cauchy-composition-unit-subuniverse X) S =
       map-inv-equiv-is-small
         ( C5 X)

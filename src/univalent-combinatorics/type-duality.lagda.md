@@ -1,4 +1,4 @@
-# Type duality
+# Type duality of finite types
 
 ```agda
 module univalent-combinatorics.type-duality where
@@ -19,6 +19,7 @@ open import foundation.functoriality-function-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.structure
+open import foundation.structured-type-duality
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -40,11 +41,11 @@ open import univalent-combinatorics.inhabited-finite-types
 equiv-surjection-𝔽-family-finite-inhabited-type :
   {l : Level} (A : 𝔽 l) (B : 𝔽 l) →
   ( (type-𝔽 A ↠ type-𝔽 B) ≃
-    ( Σ ( (type-𝔽 B) → Inhabited-Type-𝔽 l)
-        ( λ Y → (type-𝔽 A) ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-Type-𝔽 (Y b)))))
+    ( Σ ( (type-𝔽 B) → Inhabited-𝔽 l)
+        ( λ Y → (type-𝔽 A) ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))))
 equiv-surjection-𝔽-family-finite-inhabited-type A B =
   ( ( equiv-Σ
-      ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-Type-𝔽 (Y b)))
+      ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))
       ( equiv-postcomp
         ( type-𝔽 B)
         ( inv-assoc-Σ ( UU _) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
@@ -67,7 +68,8 @@ equiv-surjection-𝔽-family-finite-inhabited-type A B =
             ( _)) ∘e
           ( ( inv-equiv
               ( equiv-inclusion-is-full-subtype
-                ( λ f → Π-Prop (type-𝔽 B) (λ b → is-finite-Prop (fib (pr1 f) b)))
+                ( λ f →
+                  Π-Prop (type-𝔽 B) (λ b → is-finite-Prop (fib (pr1 f) b)))
                 ( λ f →
                   is-finite-fib
                     ( pr1 f)
@@ -79,10 +81,10 @@ Slice-Surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
 
 equiv-Fib-trunc-Prop-𝔽 :
   (l : Level) {l1 : Level} (A : 𝔽 l1) →
-  Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-Type-𝔽 (l1 ⊔ l))
+  Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-𝔽 (l1 ⊔ l))
 equiv-Fib-trunc-Prop-𝔽 l A =
   ( ( equiv-Π
-      ( λ _ → Inhabited-Type-𝔽 _)
+      ( λ _ → Inhabited-𝔽 _)
       ( id-equiv)
       ( λ a → inv-assoc-Σ _ _ _) ∘e
       ( ( equiv-Fib-structure

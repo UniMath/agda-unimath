@@ -1,4 +1,4 @@
-# Composition of species of types
+# Cauchy composition of species of types
 
 ```agda
 module species.cauchy-composition-species-of-types where
@@ -29,13 +29,14 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import species.species-of-types
+open import species.unit-cauchy-composition-species-of-types
 ```
 
 </details>
 
 ## Idea
 
-A specie of types `S : UU l1 → UU l2` can be thought of as the analytic
+A species of types `S : UU l1 → UU l2` can be thought of as the polynomial
 endofunctor
 
 ```md
@@ -43,7 +44,7 @@ endofunctor
 ```
 
 Using the formula for composition of analytic endofunctors, we obtain a way to
-compose species.
+compose species, which is called the **Cauchy composition** of species.
 
 ## Definition
 
@@ -56,16 +57,9 @@ cauchy-composition-species-types :
 cauchy-composition-species-types {l1} {l2} {l3} S T X =
   Σ ( Relaxed-Σ-Decomposition l1 l1 X)
     ( λ D →
-      ( S (indexing-type-Relaxed-Σ-Decomposition D) ×
-      ( (y : indexing-type-Relaxed-Σ-Decomposition D) →
-      T (cotype-Relaxed-Σ-Decomposition D y ))))
-```
-
-### The unit for Cauchy composition of species
-
-```agda
-cauchy-composition-unit-species-types : {l1 : Level} → species-types l1 l1
-cauchy-composition-unit-species-types X = is-contr X
+      ( S (indexing-type-Relaxed-Σ-Decomposition D)) ×
+      ( ( y : indexing-type-Relaxed-Σ-Decomposition D) →
+        T (cotype-Relaxed-Σ-Decomposition D y )))
 ```
 
 ## Properties
@@ -76,49 +70,49 @@ cauchy-composition-unit-species-types X = is-contr X
 left-unit-law-cauchy-composition-species-types :
   {l1 l2 : Level}
   (F : species-types l1 l2) → (A : UU l1) →
-  cauchy-composition-species-types cauchy-composition-unit-species-types F A ≃ F A
+  cauchy-composition-species-types unit-species-types F A ≃ F A
 left-unit-law-cauchy-composition-species-types {l1} F A =
-  ( ( left-unit-law-Σ-is-contr
-      ( is-contr-type-trivial-Relaxed-Σ-Decomposition)
-      ( trivial-Relaxed-Σ-Decomposition l1 A ,
-        is-trivial-trivial-inhabited-Relaxed-Σ-Decomposition {l1} {l1} {A})) ∘e
-    ( ( inv-assoc-Σ
-        ( Relaxed-Σ-Decomposition l1 l1 A)
-        ( λ D → is-contr (indexing-type-Relaxed-Σ-Decomposition D))
-        ( λ C → F (cotype-Relaxed-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
-      ( ( equiv-Σ
-          ( _)
-          ( id-equiv)
-          ( λ D →
-            equiv-Σ
-              ( λ z → F (cotype-Relaxed-Σ-Decomposition D (center z)))
-              ( id-equiv)
-              ( λ C →
-                ( left-unit-law-Π-is-contr C (center C))))))))
+  ( left-unit-law-Σ-is-contr
+    ( is-contr-type-trivial-Relaxed-Σ-Decomposition)
+    ( trivial-Relaxed-Σ-Decomposition l1 A ,
+      is-trivial-trivial-Relaxed-Σ-Decomposition {l1} {l1} {A})) ∘e
+  ( ( inv-assoc-Σ
+      ( Relaxed-Σ-Decomposition l1 l1 A)
+      ( λ D → is-contr (indexing-type-Relaxed-Σ-Decomposition D))
+      ( λ C → F (cotype-Relaxed-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
+    ( ( equiv-Σ
+        ( _)
+        ( id-equiv)
+        ( λ D →
+          equiv-Σ
+            ( λ z → F (cotype-Relaxed-Σ-Decomposition D (center z)))
+            ( id-equiv)
+            ( λ C →
+              ( left-unit-law-Π-is-contr C (center C)))))))
 
 right-unit-law-cauchy-composition-species-types :
   {l1 l2 : Level}
   (F : species-types l1 l2) → (A : UU l1)  →
-  cauchy-composition-species-types F cauchy-composition-unit-species-types A ≃ F A
+  cauchy-composition-species-types F unit-species-types A ≃ F A
 right-unit-law-cauchy-composition-species-types {l1} F A =
-  ( ( left-unit-law-Σ-is-contr
-      ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
-      ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
-        is-discrete-discrete-Relaxed-Σ-Decomposition) ) ∘e
-    ( ( inv-assoc-Σ
-        ( Relaxed-Σ-Decomposition l1 l1 A)
+  ( left-unit-law-Σ-is-contr
+    ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
+    ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
+      is-discrete-discrete-Relaxed-Σ-Decomposition) ) ∘e
+  ( ( inv-assoc-Σ
+      ( Relaxed-Σ-Decomposition l1 l1 A)
+      ( λ D →
+          ( y : indexing-type-Relaxed-Σ-Decomposition D) →
+            is-contr (cotype-Relaxed-Σ-Decomposition D y))
+      ( λ D → F (indexing-type-Relaxed-Σ-Decomposition (pr1 D)))) ∘e
+    ( ( equiv-Σ
         ( λ D →
-            ( y : indexing-type-Relaxed-Σ-Decomposition D) →
-              is-contr (cotype-Relaxed-Σ-Decomposition D y))
-        ( λ D → F (indexing-type-Relaxed-Σ-Decomposition (pr1 D)))) ∘e
-      ( ( equiv-Σ
-          ( λ D →
-            ( ( y : indexing-type-Relaxed-Σ-Decomposition D) →
-              cauchy-composition-unit-species-types
-                ( cotype-Relaxed-Σ-Decomposition D y)) ×
-              F ( indexing-type-Relaxed-Σ-Decomposition D))
-         ( id-equiv)
-         ( λ _ → commutative-prod)))))
+          ( ( y : indexing-type-Relaxed-Σ-Decomposition D) →
+            unit-species-types
+              ( cotype-Relaxed-Σ-Decomposition D y)) ×
+            F ( indexing-type-Relaxed-Σ-Decomposition D))
+        ( id-equiv)
+        ( λ _ → commutative-prod))))
 ```
 
 ### Associativity of composition of species
@@ -132,31 +126,31 @@ module _
 
   equiv-assoc-cauchy-composition-species-types :
     (A : UU l1) →
-    ( cauchy-composition-species-types
-        ( S)
-        ( cauchy-composition-species-types T  U)
-        ( A)) ≃
-    ( cauchy-composition-species-types
-        ( cauchy-composition-species-types S T)
-        ( U)
-        ( A))
+    cauchy-composition-species-types
+      ( S)
+      ( cauchy-composition-species-types T  U)
+      ( A) ≃
+    cauchy-composition-species-types
+      ( cauchy-composition-species-types S T)
+      ( U)
+      ( A)
   equiv-assoc-cauchy-composition-species-types A =
-    ( ( equiv-Σ
-        ( _)
-        ( id-equiv)
-        ( λ D1 →
-          ( ( inv-equiv right-distributive-prod-Σ)  ∘e
-          ( ( equiv-Σ
-              ( _)
-              ( id-equiv)
-              ( λ D2 →
-                ( inv-assoc-Σ
-                  ( S (indexing-type-Relaxed-Σ-Decomposition D2))
-                  ( λ _ →
-                    ( x : indexing-type-Relaxed-Σ-Decomposition D2) →
-                    T ( cotype-Relaxed-Σ-Decomposition D2 x))
-                  _))) ∘e
-          ( ( equiv-Σ
+    ( equiv-Σ
+      ( _)
+      ( id-equiv)
+      ( λ D1 →
+        ( ( inv-equiv right-distributive-prod-Σ)  ∘e
+        ( ( equiv-Σ
+            ( _)
+            ( id-equiv)
+            ( λ D2 →
+              ( inv-assoc-Σ
+                ( S (indexing-type-Relaxed-Σ-Decomposition D2))
+                ( λ _ →
+                  ( x : indexing-type-Relaxed-Σ-Decomposition D2) →
+                  T ( cotype-Relaxed-Σ-Decomposition D2 x))
+                _))) ∘e
+        ( ( equiv-Σ
             ( _)
             ( id-equiv)
             ( λ D2 →
@@ -168,52 +162,55 @@ module _
                         ( equiv-precomp-Π
                           ( inv-equiv
                             ( matching-correspondence-Relaxed-Σ-Decomposition
-                                D2))
+                              D2))
                         ( λ x → U ( cotype-Relaxed-Σ-Decomposition D1 x)))) ∘e
                       ( inv-equiv equiv-ev-pair))) ∘e
                   ( distributive-Π-Σ)))))))))) ∘e
-      ( ( assoc-Σ
-          ( Relaxed-Σ-Decomposition l1 l1 A)
-          ( λ D → Relaxed-Σ-Decomposition l1 l1
-            ( indexing-type-Relaxed-Σ-Decomposition D))
-          ( _)) ∘e
-        ( ( inv-equiv
-            ( equiv-Σ-equiv-base
-              ( _ )
-              ( equiv-displayed-fibered-Relaxed-Σ-Decomposition))) ∘e
-          ( ( inv-assoc-Σ
-              ( Relaxed-Σ-Decomposition l1 l1 A)
-              ( λ D →
-                ( x : indexing-type-Relaxed-Σ-Decomposition D) →
-                  Relaxed-Σ-Decomposition l1 l1
-                    ( cotype-Relaxed-Σ-Decomposition D x))
-              ( _)) ∘e
+    ( ( assoc-Σ
+        ( Relaxed-Σ-Decomposition l1 l1 A)
+        ( λ D → Relaxed-Σ-Decomposition l1 l1
+          ( indexing-type-Relaxed-Σ-Decomposition D))
+        ( _)) ∘e
+      ( ( inv-equiv
+          ( equiv-Σ-equiv-base
+            ( _ )
+            ( equiv-displayed-fibered-Relaxed-Σ-Decomposition))) ∘e
+        ( ( inv-assoc-Σ
+            ( Relaxed-Σ-Decomposition l1 l1 A)
+            ( λ D →
+              ( x : indexing-type-Relaxed-Σ-Decomposition D) →
+                Relaxed-Σ-Decomposition l1 l1
+                  ( cotype-Relaxed-Σ-Decomposition D x))
+            ( _)) ∘e
+          ( ( equiv-Σ
+              ( _)
+              ( id-equiv)
+              ( λ D → left-distributive-prod-Σ)) ∘e
             ( ( equiv-Σ
                 ( _)
                 ( id-equiv)
-                ( λ D → left-distributive-prod-Σ)) ∘e
-              ( ( equiv-Σ
-                  ( _)
-                  ( id-equiv)
-                  ( λ D → equiv-prod id-equiv distributive-Π-Σ))))))))
+                ( λ D → equiv-prod id-equiv distributive-Π-Σ)))))))
 
   htpy-assoc-cauchy-composition-species-types :
-    ( cauchy-composition-species-types
-        ( S)
-        ( cauchy-composition-species-types T U)) ~
-    ( cauchy-composition-species-types (cauchy-composition-species-types S T) U)
+    cauchy-composition-species-types
+      ( S)
+      ( cauchy-composition-species-types T U) ~
+    cauchy-composition-species-types (cauchy-composition-species-types S T) U
   htpy-assoc-cauchy-composition-species-types A =
     eq-equiv
-      ( cauchy-composition-species-types S (cauchy-composition-species-types T U)
-        A)
-      ( cauchy-composition-species-types (cauchy-composition-species-types S T) U
-        A)
+      ( cauchy-composition-species-types S
+        ( cauchy-composition-species-types T U)
+        ( A))
+      ( cauchy-composition-species-types
+        ( cauchy-composition-species-types S T)
+        ( U)
+        ( A))
       ( equiv-assoc-cauchy-composition-species-types A)
 
   assoc-cauchy-composition-species-types :
     ( cauchy-composition-species-types
-        ( S)
-        ( cauchy-composition-species-types T U)) ＝
+      ( S)
+      ( cauchy-composition-species-types T U)) ＝
     ( cauchy-composition-species-types (cauchy-composition-species-types S T) U)
   assoc-cauchy-composition-species-types =
     eq-htpy htpy-assoc-cauchy-composition-species-types

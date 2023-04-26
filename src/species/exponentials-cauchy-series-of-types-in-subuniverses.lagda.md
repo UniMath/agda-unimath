@@ -1,35 +1,37 @@
 # Exponential of Cauchy series of species of types in subuniverse
 
 ```agda
-module species.exponential-cauchy-series-of-types-in-subuniverse where
+module species.exponentials-cauchy-series-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.universal-property-coproduct-types
-open import foundation.cartesian-product-types
-open import foundation.universe-levels
 open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.univalence
-open import foundation.unit-type
-open import foundation.subuniverses
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.subuniverses
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverse
-open import species.cauchy-series-species-of-types-in-subuniverse
-open import species.cauchy-exponential-species-of-types-in-subuniverse
-open import species.composition-cauchy-series-species-of-types-in-subuniverse
-open import species.cauchy-composition-species-of-types-in-subuniverse
-open import species.exponential-cauchy-series-of-types
+open import species.cauchy-composition-species-of-types-in-subuniverses
+open import species.cauchy-exponentials-species-of-types-in-subuniverses
+open import species.cauchy-series-species-of-types-in-subuniverses
+open import species.composition-cauchy-series-species-of-types-in-subuniverses
+open import species.exponentials-cauchy-series-of-types
+open import species.species-of-types-in-subuniverses
 ```
+
+</details>
 
 ## Definition
 
@@ -94,14 +96,7 @@ module _
         ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l4))
         ( cauchy-exponential-species-subuniverse' P Q S X)))
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
-  (C3 :
-    {l5 l6 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-    is-in-subuniverse
-      (subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l5 ⊔ l6))
-      (cauchy-composition-species-subuniverse' P Q S T X))
+  (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C4 :
     ( ( X : type-subuniverse P) →
       ( Y : (inclusion-subuniverse P X) → type-subuniverse P) →

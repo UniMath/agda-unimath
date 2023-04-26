@@ -1,7 +1,7 @@
 # Coproducts of species of types of subuniverse
 
 ```agda
-module species.coproducts-species-of-types-in-subuniverse where
+module species.coproducts-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,7 @@ open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import species.coproducts-species-of-types
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>
