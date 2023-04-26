@@ -22,7 +22,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-exponential-species-of-types
+open import species.cauchy-exponentials-species-of-types
 open import species.cauchy-series-species-of-types
 open import species.composition-cauchy-series-species-of-types
 open import species.species-of-types

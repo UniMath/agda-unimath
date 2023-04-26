@@ -1,7 +1,7 @@
-# Cauchy exponential of species of types
+# Cauchy exponentials of species of types
 
 ```agda
-module species.cauchy-exponential-species-of-types where
+module species.cauchy-exponentials-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -36,13 +36,11 @@ open import species.species-of-types
 
 ## Idea
 
-The Cauchy exponential of a species of types `S` is defined as the following
+The **Cauchy exponential** of a species of types `S` is defined as the following
 species of types :
 
 ```md
-(X : UU) →
-Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
-  ( (u : U) → S (V u))
+  X ↦ Σ ((U , V , e) : Relaxed-Σ-Decomposition X),  Π (u : U) → S (V u).
 ```
 
 ## Definition

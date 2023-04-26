@@ -1,7 +1,7 @@
-# Cauchy exponential of species of types in a subuniverse
+# Cauchy exponentials of species of types in a subuniverse
 
 ```agda
-module species.cauchy-exponential-species-of-types-in-subuniverse where
+module species.cauchy-exponentials-species-of-types-in-subuniverse where
 ```
 
 <details><summary>Imports</summary>
@@ -28,7 +28,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types-in-subuniverse
-open import species.cauchy-exponential-species-of-types
+open import species.cauchy-exponentials-species-of-types
 open import species.cauchy-product-species-of-types-in-subuniverse
 open import species.coproducts-species-of-types
 open import species.coproducts-species-of-types-in-subuniverse
@@ -39,12 +39,11 @@ open import species.species-of-types-in-subuniverse
 
 ## Idea
 
-The Cauchy exponential of a species `S` of types in subuniverse from `P` to `Q`
-at `X` in `P` is defined to be :
+The **Cauchy exponential** of a species `S : P → Q` of types in subuniverse is
+defined by
 
 ```md
-Σ ( (U , V , e) : Σ-Decomposition-subuniverse P X)
-  ( (u : U) → S (V u))
+  X ↦ Σ ((U , V , e) : Σ-Decomposition-subuniverse P X),  Π (u : U) → S (V u).
 ```
 
 If `Q` is a global subuniverse, and if the previous definition is in `Q`, then

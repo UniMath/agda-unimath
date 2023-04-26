@@ -1,4 +1,4 @@
-# Cauchy products of species of subuniverse
+# Cauchy products of species of types in a subuniverse
 
 ```agda
 module species.cauchy-product-species-of-types-in-subuniverse where
@@ -34,15 +34,15 @@ open import species.species-of-types-in-subuniverse
 
 ## Idea
 
-The Cauchy product of two species of subuniverse `S` and `T` from `P` to `Q` on
-`X` is defined as
+The **Cauchy product** of two species `S` and `T` from `P` to `Q` of types in a
+subuniverse is defined by
 
 ```md
-  Σ (k : P) (Σ (k' : P) (Σ (e : k + k' ≃ X) S(k) × T(k')))
+  X ↦ Σ (k : P), Σ (k' : P), Σ (e : k + k' ≃ X), S(k) × T(k')
 ```
 
-If `Q` is stable by product and dependent pair type over `P` type, then the
-cauchy product is also a species of subuniverse from `P` to `Q`
+If `Q` is closed under products and dependent pair types over types in `P`, then
+the Cauchy product is also a species of subuniverse from `P` to `Q`.
 
 ## Definition
 

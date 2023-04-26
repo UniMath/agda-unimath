@@ -24,7 +24,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types-in-subuniverse
-open import species.cauchy-exponential-species-of-types-in-subuniverse
+open import species.cauchy-exponentials-species-of-types-in-subuniverse
 open import species.cauchy-series-species-of-types-in-subuniverse
 open import species.composition-cauchy-series-species-of-types-in-subuniverse
 open import species.exponential-cauchy-series-of-types

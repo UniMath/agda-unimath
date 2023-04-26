@@ -18,11 +18,12 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A species of finite type is a map from `𝔽` to a `𝔽`.
+A **species of finite types** is a map from `𝔽` to a `𝔽`.
 
 ## Definition
 
 ```agda
 species-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-species-𝔽 l1 l2 = species-subuniverse (is-finite-Prop {l1}) (is-finite-Prop {l2})
+species-𝔽 l1 l2 =
+  species-subuniverse (is-finite-Prop {l1}) (is-finite-Prop {l2})
 ```

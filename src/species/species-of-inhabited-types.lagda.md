@@ -1,4 +1,4 @@
-# Species of inhabited-types
+# Species of inhabited types
 
 ```agda
 module species.species-of-inhabited-types where
@@ -18,8 +18,8 @@ open import species.species-of-types-in-subuniverse
 
 ## Idea
 
-A species of inhabited type is a map from the subuniverse of inhabited types to
-a universe.
+A **species of inhabited types** is a map from the subuniverse of inhabited
+types to a universe.
 
 ## Definition
 

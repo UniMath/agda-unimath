@@ -923,8 +923,8 @@ open import species
 open import species.cartesian-products-species-of-types
 open import species.cauchy-composition-species-of-types-in-subuniverse
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-exponential-species-of-types-in-subuniverse
-open import species.cauchy-exponential-species-of-types
+open import species.cauchy-exponentials-species-of-types-in-subuniverse
+open import species.cauchy-exponentials-species-of-types
 open import species.cauchy-product-species-of-types-in-subuniverse
 open import species.cauchy-product-species-of-types
 open import species.cauchy-series-species-of-types-in-subuniverse

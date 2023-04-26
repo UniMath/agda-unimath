@@ -8,9 +8,9 @@ module foundation.structured-type-duality where
 
 ```agda
 open import foundation.equivalences
+open import foundation.structure
 open import foundation.type-duality
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.structure
 open import foundation.univalence
 
 open import foundation-core.dependent-pair-types
@@ -48,7 +48,7 @@ equiv-Fib-structure {l1} {l3} l P B =
   ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
 ```
 
-### 
+###
 
 ```agda
 equiv-fixed-Slice-structure :

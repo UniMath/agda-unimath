@@ -46,7 +46,7 @@ endofunctor
 ```
 
 Using the formula for composition of analytic endofunctors, we obtain a way to
-compose species.
+compose species, which is called the **Cauchy composition** of species.
 
 ## Definition
 

@@ -1,4 +1,4 @@
-# Composition of species of types
+# Cauchy composition of species of types
 
 ```agda
 module species.cauchy-composition-species-of-types where
@@ -35,7 +35,7 @@ open import species.species-of-types
 
 ## Idea
 
-A specie of types `S : UU l1 → UU l2` can be thought of as the analytic
+A species of types `S : UU l1 → UU l2` can be thought of as the polynomial
 endofunctor
 
 ```md
@@ -43,7 +43,7 @@ endofunctor
 ```
 
 Using the formula for composition of analytic endofunctors, we obtain a way to
-compose species.
+compose species, which is called the **Cauchy composition** of species.
 
 ## Definition
 

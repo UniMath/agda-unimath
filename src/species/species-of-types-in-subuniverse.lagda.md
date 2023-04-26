@@ -23,11 +23,12 @@ open import species.species-of-types
 
 ### Idea
 
-A **species of types in a subuniverse** is a map from a subuniverse `P` to a subuniverse `Q`.
+A **species of types in a subuniverse** is a map from a subuniverse `P` to a
+subuniverse `Q`.
 
 ## Definitions
 
-### Species of subuniverses
+### Species of types in subuniverses
 
 ```agda
 species-subuniverse :
@@ -36,7 +37,7 @@ species-subuniverse :
 species-subuniverse P Q =  type-subuniverse P → type-subuniverse Q
 ```
 
-### Transport in species
+### Transport along equivalences of in species of types in subuniverses
 
 ```agda
 module _
@@ -49,10 +50,10 @@ module _
     inclusion-subuniverse P X ≃ inclusion-subuniverse P Y →
     inclusion-subuniverse Q (F X) → inclusion-subuniverse Q (F Y)
   tr-species-subuniverse X Y e =
-    tr ((inclusion-subuniverse Q) ∘ F) (eq-equiv-subuniverse P e)
+    tr (inclusion-subuniverse Q ∘ F) (eq-equiv-subuniverse P e)
 ```
 
-### Σ-extension to species of types
+### Σ-extension to species of types in subuniverses
 
 ```agda
 module _
@@ -77,7 +78,7 @@ module _
       ( pr2 X)
 ```
 
-### Π-extension to species of types
+### Π-extension to species of types in subuniverses
 
 ```agda
 module _

@@ -19,7 +19,8 @@ open import univalent-combinatorics.inhabited-finite-types
 
 ## Idea
 
-A **species of finite inhabited types** is a map from the subuniverse of finite inhabited types to a universe of finite types.
+A **species of finite inhabited types** is a map from the subuniverse of finite
+inhabited types to a universe of finite types.
 
 ## Definition
 
