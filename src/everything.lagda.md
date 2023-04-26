@@ -363,6 +363,8 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.endomorphisms
 open import foundation.epimorphisms-with-respect-to-sets
+open import foundation.epimorphisms-with-respect-to-truncated-types
+open import foundation.epimorphisms
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
@@ -514,6 +516,7 @@ open import foundation.trivial-sigma-decompositions
 open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
+open import foundation.truncation-equivalences
 open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.truncations
@@ -999,6 +1002,8 @@ open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
+open import synthetic-homotopy-theory.acyclic-maps
+open import synthetic-homotopy-theory.acyclic-types
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.cofibers
@@ -1007,6 +1012,7 @@ open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types
+open import synthetic-homotopy-theory.hatchers-acyclic-type
 open import synthetic-homotopy-theory.infinite-complex-projective-space
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
@@ -1014,6 +1020,8 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.multiplication-circle
+open import synthetic-homotopy-theory.plus-principle
+open import synthetic-homotopy-theory.powers-of-loops
 open import synthetic-homotopy-theory.prespectra
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.spectra
