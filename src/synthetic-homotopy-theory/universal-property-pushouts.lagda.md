@@ -17,6 +17,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
@@ -89,17 +90,6 @@ commuting square, and then we introduce the type pullback-property-pushout,
 which states that the above square is a pullback.
 
 ```agda
-htpy-precomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {f g : A → B} (H : f ~ g) (C : UU l3) →
-  (precomp f C) ~ (precomp g C)
-htpy-precomp H C h = eq-htpy (h ·l H)
-
-compute-htpy-precomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
-  (htpy-precomp (refl-htpy' f) C) ~ refl-htpy
-compute-htpy-precomp f C h = eq-htpy-refl-htpy (h ∘ f)
-
 cone-pullback-property-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (Y : UU l) →
@@ -116,7 +106,8 @@ pullback-property-pushout :
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 pullback-property-pushout l {S} {A} {B} f g {X} c =
-  (Y : UU l) → is-pullback
+  (Y : UU l) →
+  is-pullback
     ( precomp f Y)
     ( precomp g Y)
     ( cone-pullback-property-pushout f g c Y)
