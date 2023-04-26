@@ -29,4 +29,3 @@ The **unit** of Cauchy composition of species of types is the species
 unit-species-types : {l1 : Level} → species-types l1 l1
 unit-species-types = is-contr
 ```
-
