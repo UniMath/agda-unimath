@@ -30,7 +30,8 @@ def generate_namespace_entry_list(namespace):
     for title, module in zip(module_titles, modules):
         if title is None:
             status |= STATUS_FLAG_NO_TITLE
-            print(f"WARNING! {namespace}.{module} no title was found")
+            print(
+                f"WARNING! {namespace}.{module} no title was found", file=sys.stderr)
 
     # Check duplicate titles
     equal_titles = utils.get_equivalence_classes(
@@ -40,10 +41,10 @@ def generate_namespace_entry_list(namespace):
 
     if (len(equal_titles) > 0):
         status |= STATUS_FLAG_DUPLICATE_TITLE
-        print(f"WARNING! Duplicate titles in {namespace}:")
+        print(f"WARNING! Duplicate titles in {namespace}:", file=sys.stderr)
         for ec in equal_titles:
             print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}", file=sys.stderr)
 
     module_titles_and_mdfiles = sorted(
         zip(module_titles, module_mdfiles), key=lambda tm: (tm[1].split(".")))
