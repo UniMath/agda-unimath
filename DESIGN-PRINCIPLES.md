@@ -28,7 +28,7 @@ makes use of several postulates.
    [`synthetic-homotopy-theory.circle`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.circle.html)
 9. **Pushouts** are postulated in
    [`synthetic-homotopy-theory.pushouts`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
-10. **Agda built-in types** are postulate in
+10. **Agda built-in types** are postulated in
     [`primitive-types`](https://unimath.github.io/agda-unimath/primitive-types.html)
     and in
     [`reflection`](https://unimath.github.io/agda-unimath/reflection.html).
