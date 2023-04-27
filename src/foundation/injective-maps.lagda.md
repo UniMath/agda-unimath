@@ -18,7 +18,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map `f : A → B` is injective if `Id (f x) (f y)` implies `Id x y`.
+A map `f : A → B` is injective if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 

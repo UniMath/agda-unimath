@@ -36,10 +36,10 @@ module _
 
   function-pointed-Π :
     pointed-Π → (x : type-Pointed-Type A) → fam-Pointed-Fam A B x
-  function-pointed-Π f = pr1 f
+  function-pointed-Π = pr1
 
   preserves-point-function-pointed-Π :
     (f : pointed-Π) →
     Id (function-pointed-Π f (pt-Pointed-Type A)) (pt-Pointed-Fam A B)
-  preserves-point-function-pointed-Π f = pr2 f
+  preserves-point-function-pointed-Π = pr2
 ```

@@ -7,7 +7,7 @@ module foundation.descent-empty-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.pullbacks

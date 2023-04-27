@@ -13,7 +13,7 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 

@@ -88,14 +88,14 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
   object-pullback : obj-Precat C
   object-pullback = pr1 (t x y z f g)
 
-  proj₁-pullback : type-hom-Precat C object-pullback y
-  proj₁-pullback = pr1 (pr2 (t x y z f g))
+  pr1-pullback : type-hom-Precat C object-pullback y
+  pr1-pullback = pr1 (pr2 (t x y z f g))
 
-  proj₂-pullback : type-hom-Precat C object-pullback z
-  proj₂-pullback = pr1 (pr2 (pr2 (t x y z f g)))
+  pr2-pullback : type-hom-Precat C object-pullback z
+  pr2-pullback = pr1 (pr2 (pr2 (t x y z f g)))
 
   pullback-square-comm :
-    comp-hom-Precat C f proj₁-pullback ＝ comp-hom-Precat C g proj₂-pullback
+    comp-hom-Precat C f pr1-pullback ＝ comp-hom-Precat C g pr2-pullback
   pullback-square-comm = pr1 (pr2 (pr2 (pr2 (t x y z f g))))
 
   module _ (w' : obj-Precat C)
@@ -107,20 +107,20 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
     morphism-into-pullback =
       pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
 
-    morphism-into-pullback-comm-proj₁ :
-      comp-hom-Precat C proj₁-pullback morphism-into-pullback ＝ p₁'
-    morphism-into-pullback-comm-proj₁ =
+    morphism-into-pullback-comm-pr1 :
+      comp-hom-Precat C pr1-pullback morphism-into-pullback ＝ p₁'
+    morphism-into-pullback-comm-pr1 =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
-    morphism-into-pullback-comm-proj₂ :
-      comp-hom-Precat C proj₂-pullback morphism-into-pullback ＝ p₂'
-    morphism-into-pullback-comm-proj₂ =
+    morphism-into-pullback-comm-pr2 :
+      comp-hom-Precat C pr2-pullback morphism-into-pullback ＝ p₂'
+    morphism-into-pullback-comm-pr2 =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
     is-unique-morphism-into-pullback :
       (h' : type-hom-Precat C w' object-pullback) →
-      comp-hom-Precat C proj₁-pullback h' ＝ p₁' →
-      comp-hom-Precat C proj₂-pullback h' ＝ p₂' →
+      comp-hom-Precat C pr1-pullback h' ＝ p₁' →
+      comp-hom-Precat C pr2-pullback h' ＝ p₂' →
       morphism-into-pullback ＝ h'
     is-unique-morphism-into-pullback h' α₁ α₂ =
       ap pr1 (pr2 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α) (h' , α₁ , α₂))

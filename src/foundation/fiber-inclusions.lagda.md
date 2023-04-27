@@ -13,7 +13,7 @@ open import foundation.unit-type
 
 open import foundation-core.0-maps
 open import foundation-core.1-types
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings

@@ -27,8 +27,9 @@ and `Q` hold.
 ```agda
 conj-Prop = prod-Prop
 
-type-conj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
+_∧_ = conj-Prop
+
+type-conj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-conj-Prop P Q = type-Prop (conj-Prop P Q)
 
 abstract

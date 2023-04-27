@@ -51,9 +51,33 @@ _≃_ :
 A ≃ B = Σ (A → B) is-equiv
 ```
 
-### Immediate structure of equivalences
+### Projections for equivalences
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  sec-is-equiv : is-equiv f → sec f
+  sec-is-equiv = pr1
+
+  retr-is-equiv : is-equiv f → retr f
+  retr-is-equiv = pr2
+
+  map-sec-is-equiv : is-equiv f → B → A
+  map-sec-is-equiv = pr1 ∘ pr1
+
+  map-retr-is-equiv : is-equiv f → B → A
+  map-retr-is-equiv = pr1 ∘ pr2
+
+  isretr-is-equiv :
+    (is-equiv-f : is-equiv f) → (f ∘ map-sec-is-equiv is-equiv-f) ~ id
+  isretr-is-equiv is-equiv-f = pr2 (pr1 is-equiv-f)
+
+  issec-is-equiv :
+    (is-equiv-f : is-equiv f) → (map-retr-is-equiv is-equiv-f ∘ f) ~ id
+  issec-is-equiv is-equiv-f = pr2 (pr2 is-equiv-f)
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -63,6 +87,20 @@ module _
 
   is-equiv-map-equiv : (e : A ≃ B) → is-equiv (map-equiv e)
   is-equiv-map-equiv e = pr2 e
+
+  retr-map-equiv : (e : A ≃ B) → retr (map-equiv e)
+  retr-map-equiv = retr-is-equiv ∘ is-equiv-map-equiv
+
+  sec-map-equiv : (e : A ≃ B) → sec (map-equiv e)
+  sec-map-equiv = sec-is-equiv ∘ is-equiv-map-equiv
+
+  isretr-map-equiv :
+    (e : A ≃ B) → (map-equiv e ∘ map-sec-is-equiv (is-equiv-map-equiv e)) ~ id
+  isretr-map-equiv = isretr-is-equiv ∘ is-equiv-map-equiv
+
+  issec-map-equiv :
+    (e : A ≃ B) → (map-retr-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
+  issec-map-equiv = issec-is-equiv ∘ is-equiv-map-equiv
 ```
 
 ### Families of equivalences

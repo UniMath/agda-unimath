@@ -25,9 +25,11 @@ open import order-theory.sup-lattices
 Let A be a poset that has all binary meets and arbitrary joins (which we call
 sups). We can show that all sup lattices have binary meets (and we plan to in
 another file), but this economy offers little benefit here. The infinite
-distributive law states: for all a : A and for all families b : I → A the
-following identity holds a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ) Note: One could inquire
-about the dual infinite distributive law but it is not needed at this time.
+distributive law states: for all `a : A` and for all families `b : I → A`the
+following identity holds: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
+
+Note: One could inquire about the dual infinite distributive law but it is not
+needed at this time.
 
 ```agda
 module _
@@ -143,6 +145,6 @@ distributive-law-meet-sup-lattice l1 l2 l3 A =
 ```
 
 This notation is not easy on the eye, but recall, in more familiar notation the
-identity expressed here is: a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
+identity expressed here is: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
 
 Show that the identity is a prop.

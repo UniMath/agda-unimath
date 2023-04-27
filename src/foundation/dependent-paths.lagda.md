@@ -23,7 +23,7 @@ open import foundation-core.universe-levels
 
 </details>
 
-We characterize dependent paths in the family λ t → path-over B t b0 b1
+We characterize dependent paths in the family `λ t → path-over B t b0 b1`.
 
 ```agda
 module _

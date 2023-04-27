@@ -38,7 +38,7 @@ module _
   (f : pointed-Π A B)
   where
 
-  htpy-pointed-Π : (g : pointed-Π A B) → UU (l1 ⊔ l2)
+  htpy-pointed-Π : pointed-Π A B → UU (l1 ⊔ l2)
   htpy-pointed-Π g =
     pointed-Π A
       ( pair
@@ -52,8 +52,10 @@ module _
   extensionality-pointed-Π =
     extensionality-Σ
       ( λ {g} q H →
-          Id (H (pt-Pointed-Type A))
-             (preserves-point-function-pointed-Π A B f ∙ inv (preserves-point-function-pointed-Π A B (pair g q))))
+          Id
+            ( H (pt-Pointed-Type A))
+            ( preserves-point-function-pointed-Π A B f ∙
+              inv (preserves-point-function-pointed-Π A B (g , q))))
       ( refl-htpy)
       ( inv (right-inv (preserves-point-function-pointed-Π A B f)))
       ( λ g → equiv-funext)
@@ -63,6 +65,11 @@ module _
   eq-htpy-pointed-Π :
     (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g
   eq-htpy-pointed-Π g = map-inv-equiv (extensionality-pointed-Π g)
+
+_~*_ :
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
+  pointed-Π A B → pointed-Π A B → UU (l1 ⊔ l2)
+_~*_ {A = A} {B} = htpy-pointed-Π A B
 ```
 
 ## Properties
