@@ -17,8 +17,7 @@ open import foundation.universe-levels
 
 ### Idea
 
-In this file, we define the type of species of types. A species of types is just
-a map from an universe to another one.
+A **species of types** is defined to be a map from a universe to a universe.
 
 ## Definitions
 

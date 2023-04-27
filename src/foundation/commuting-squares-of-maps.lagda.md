@@ -10,14 +10,18 @@ module foundation.commuting-squares-of-maps where
 open import foundation-core.commuting-squares-of-maps public
 
 open import foundation.equivalences
+open import foundation.functoriality-function-types
 
+open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
 
 </details>
 
-## Composing and inverting squares horizontally and vertically
+## Properties
+
+### Composing and inverting squares horizontally and vertically
 
 If the horizontal/vertical maps in a commuting square are both equivalences,
 then the square remains commuting if we invert those equivalences.
@@ -67,4 +71,21 @@ coherence-square-inv-all top left right bottom H =
       ( map-equiv right)
       ( bottom)
       ( H))
+```
+
+### Any commuting square of maps induces a commuting square of function spaces
+
+```agda
+precomp-coherence-square-maps :
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
+  coherence-square-maps top left right bottom → (X : UU l5) →
+  coherence-square-maps
+    ( precomp right X)
+    ( precomp bottom X)
+    ( precomp top X)
+    ( precomp left X)
+precomp-coherence-square-maps top leeft right bottom H X =
+  htpy-precomp H X
 ```

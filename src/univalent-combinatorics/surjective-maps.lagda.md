@@ -43,8 +43,6 @@ Surjection-𝔽 l2 A =
   Σ (𝔽 l2) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
 ```
 
-x
-
 ## Properties
 
 ```agda

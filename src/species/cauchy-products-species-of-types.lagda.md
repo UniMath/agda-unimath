@@ -1,7 +1,7 @@
 # Cauchy products of species of types
 
 ```agda
-module species.cauchy-product-species-of-types where
+module species.cauchy-products-species-of-types where
 ```
 
 <details><summary>Imports</summary>

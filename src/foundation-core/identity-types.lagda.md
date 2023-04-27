@@ -165,22 +165,6 @@ con-inv :
 con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
 
-### Concatenation is injective
-
-```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  is-injective-concat :
-    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → (p ∙ q) ＝ (p ∙ r) → q ＝ r
-  is-injective-concat refl s = s
-
-  is-injective-concat' :
-    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → (p ∙ r) ＝ (q ∙ r) → p ＝ q
-  is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
-```
-
 ### The functorial action of functions on identity types
 
 ```agda
@@ -323,6 +307,60 @@ apd-const :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
   (p : x ＝ y) → apd f p ＝ ((tr-const p (f x)) ∙ (ap f p))
 apd-const f refl = refl
+```
+
+### Concatenation is injective
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → (p ∙ q) ＝ (p ∙ r) → q ＝ r
+  is-injective-concat refl s = s
+
+  issec-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : (p ∙ q) ＝ (p ∙ r)) →
+    ap (concat p z) (is-injective-concat p s) ＝ s
+  issec-is-injective-concat refl refl = refl
+
+  is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → (p ∙ r) ＝ (q ∙ r) → p ＝ q
+  is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
+
+  cases-issec-is-injective-concat' :
+    {x y : A} {p q : x ＝ y} (s : p ＝ q) →
+    ( ap
+      ( concat' x refl)
+      ( is-injective-concat' refl (right-unit ∙ (s ∙ inv right-unit)))) ＝
+    ( right-unit ∙ (s ∙ inv right-unit))
+  cases-issec-is-injective-concat' {p = refl} refl = refl
+
+  issec-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} (s : (p ∙ r) ＝ (q ∙ r)) →
+    ap (concat' x r) (is-injective-concat' r s) ＝ s
+  issec-is-injective-concat' refl s =
+    ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α) ∙
+    ( ( cases-issec-is-injective-concat' (inv right-unit ∙ (s ∙ right-unit))) ∙
+      α)
+    where
+    α :
+      ( ( right-unit) ∙
+        ( ( inv right-unit ∙ (s ∙ right-unit)) ∙
+          ( inv right-unit))) ＝
+      ( s)
+    α =
+      ( ap
+        ( concat right-unit _)
+        ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
+          ( ( ap
+              ( concat (inv right-unit) _)
+              ( ( assoc s right-unit (inv right-unit)) ∙
+                ( ( ap (concat s _) (right-inv right-unit)) ∙
+                  ( right-unit))))))) ∙
+      ( ( inv (assoc right-unit (inv right-unit) s)) ∙
+        ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
 ### The Mac Lane pentagon for identity types
