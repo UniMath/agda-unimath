@@ -50,7 +50,7 @@ _≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = Σ (A → B) is-equiv
 ```
 
-### Projections for equivalences
+### Components of an equivalence
 
 ```agda
 module _
