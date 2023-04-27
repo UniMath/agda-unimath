@@ -1,7 +1,7 @@
 # Strings
 
 ```agda
-module foundation.strings where
+module primitive-types.strings where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module foundation.strings where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
-open import foundation.characters
+open import primitive-types.characters
 open import foundation.dependent-pair-types
 open import foundation.maybe
 open import foundation.universe-levels

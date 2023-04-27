@@ -1,7 +1,7 @@
 # Characters
 
 ```agda
-module foundation.characters where
+module primitive-types.characters where
 ```
 
 <details><summary>Imports</summary>

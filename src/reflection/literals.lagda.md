@@ -9,13 +9,14 @@ module reflection.literals where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.characters
-open import foundation.floats
-open import foundation.machine-integers
-open import foundation.strings
 open import foundation.universe-levels
 
 open import lists.lists
+
+open import primitive-types.characters
+open import primitive-types.floats
+open import primitive-types.machine-integers
+open import primitive-types.strings
 
 open import reflection.fixity
 open import reflection.metavariables
