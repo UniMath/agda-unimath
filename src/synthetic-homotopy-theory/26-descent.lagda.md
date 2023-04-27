@@ -8,7 +8,7 @@ module synthetic-homotopy-theory.26-descent where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-pullbacks
+open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -31,7 +31,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 

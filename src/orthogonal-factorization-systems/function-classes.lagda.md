@@ -7,10 +7,13 @@ module orthogonal-factorization-systems.function-classes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.propositions
+open import foundation.pullback-squares
+open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
 
@@ -68,6 +71,26 @@ composition-closed-function-class l1 l2 =
   Σ (function-class l1 l1 l2) (is-composition-closed-function-class)
 ```
 
+## Pullback stable function classes
+
+A function class is said to be **pullback stable** if given a function in it,
+then its pullback along any map is also in the function class.
+
+```agda
+is-pullback-stable-function-class :
+  {l1 l2 l3 : Level} (l : Level) → function-class l1 l2 l3 →
+  UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
+is-pullback-stable-function-class {l1} {l2} l F =
+   (A : UU l1) (B C : UU l2) (f : A → C) (g : B → C)
+   (c : Σ (UU l1) (pullback-cone l f g)) →
+   type-Prop (F f) → type-Prop (F (horizontal-map-pullback-cone f g (pr2 c)))
+
+pullback-stable-function-class :
+  (l1 l2 l3 l4 : Level) → UU (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4))
+pullback-stable-function-class l1 l2 l3 l4 =
+  Σ (function-class l1 l2 l3) (is-pullback-stable-function-class l4)
+```
+
 ## Properties
 
 ### Having identities is a property
@@ -119,4 +142,23 @@ pr1 (is-composition-closed-function-class-Prop c) =
   is-composition-closed-function-class c
 pr2 (is-composition-closed-function-class-Prop c) =
   is-prop-is-composition-closed-function-class c
+```
+
+### Being pullback stable is a property
+
+```agda
+is-prop-is-pullback-stable-function-class :
+  {l1 l2 l3 : Level} (l : Level) (F : function-class l1 l2 l3) →
+  is-prop (is-pullback-stable-function-class l F)
+is-prop-is-pullback-stable-function-class l F =
+  is-prop-Π λ A → is-prop-Π λ B → is-prop-Π λ C → is-prop-Π
+  λ f → is-prop-Π λ g → is-prop-Π λ c → is-prop-function-type (is-prop-type-Prop (F (horizontal-map-pullback-cone f g (pr2 c))))
+
+is-pullback-stable-function-class-Prop :
+  {l1 l2 l3 : Level} (l : Level) (F : function-class l1 l2 l3) →
+  Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
+pr1 (is-pullback-stable-function-class-Prop l F) =
+  is-pullback-stable-function-class l F
+pr2 (is-pullback-stable-function-class-Prop l F) =
+  is-prop-is-pullback-stable-function-class l F
 ```

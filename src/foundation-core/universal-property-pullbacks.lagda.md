@@ -7,7 +7,7 @@ module foundation-core.universal-property-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -29,11 +29,12 @@ open import foundation-core.universe-levels
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (l : Level) {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
+  (f : A → X) (g : B → X) {C : UU l4}
   where
 
-  universal-property-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-  universal-property-pullback =
+  universal-property-pullback :
+    (c : cone f g C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  universal-property-pullback c =
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
 ```
 

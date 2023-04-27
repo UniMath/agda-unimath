@@ -1,7 +1,7 @@
-# Cocones for pushouts
+# Cocones under spans
 
 ```agda
-module synthetic-homotopy-theory.cocones-pushouts where
+module synthetic-homotopy-theory.cocones-under-spans where
 ```
 
 <details><summary>Imports</summary>

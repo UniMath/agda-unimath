@@ -9,7 +9,7 @@ module foundation.descent-coproduct-types where
 ```agda
 open import foundation.functoriality-coproduct-types
 
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types

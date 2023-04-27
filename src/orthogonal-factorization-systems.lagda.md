@@ -7,6 +7,7 @@ open import orthogonal-factorization-systems.dependent-pair-closed-reflective-su
 open import orthogonal-factorization-systems.extensions-of-maps public
 open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorizations-of-maps public
+open import orthogonal-factorization-systems.function-class-factorization-operations public
 open import orthogonal-factorization-systems.function-classes public
 open import orthogonal-factorization-systems.higher-modalities public
 open import orthogonal-factorization-systems.lifting-operations public
@@ -20,6 +21,7 @@ open import orthogonal-factorization-systems.orthogonal-factorization-systems pu
 open import orthogonal-factorization-systems.orthogonal-maps public
 open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.reflective-subuniverses public
+open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 ```

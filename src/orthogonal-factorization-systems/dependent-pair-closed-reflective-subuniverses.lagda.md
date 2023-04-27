@@ -44,7 +44,7 @@ The equivalent notions of
 
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
+- [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
 
 ## References
 
