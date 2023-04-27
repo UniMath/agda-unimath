@@ -11,15 +11,12 @@ open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 
@@ -31,6 +28,8 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -39,6 +38,7 @@ open import foundation-core.sets
 open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
