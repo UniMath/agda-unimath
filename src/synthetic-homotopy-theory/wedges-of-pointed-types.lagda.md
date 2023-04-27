@@ -24,9 +24,10 @@ open import synthetic-homotopy-theory.pushouts
 </details>
 
 ```agda
-_∨_ :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-A ∨ B =
+_∨*_ :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  Pointed-Type (l1 ⊔ l2)
+A ∨* B =
   pair
     ( pushout
       ( const unit (pr1 A) (pr2 A))
@@ -45,7 +46,7 @@ indexed-wedge I A =
 
 wedge-inclusion :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  pr1 (A ∨ B) → (pr1 A) × (pr1 B)
+  pr1 (A ∨* B) → (pr1 A) × (pr1 B)
 wedge-inclusion {l1} {l2} (pair A a) (pair B b) =
   map-inv-is-equiv
     ( up-pushout
