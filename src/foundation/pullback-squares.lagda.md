@@ -46,11 +46,7 @@ module _
           ( λ g →
             Σ ( cone f g X)
               (universal-property-pullback l f g)))
-```
 
-## Projections
-
-```agda
 module _
   {l1 l2 l3 l4 l : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
   (f : A → C) (g : B → C) (c : pullback-cone l f g X)

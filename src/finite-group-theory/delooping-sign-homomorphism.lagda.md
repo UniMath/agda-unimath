@@ -198,8 +198,7 @@ module _
 
     that-thing :
       (n : ℕ) →
-      Σ ( Fin 2 → equivalence-class (R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2))))
-        ( is-equiv)
+      Fin 2 ≃ equivalence-class (R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
     that-thing n =
       equiv-D/R-fin-2-equiv
         ( n +ℕ 2)

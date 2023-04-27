@@ -44,20 +44,20 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
     type-hom-Precat C p x →
     type-hom-Precat C p y →
     UU (l1 ⊔ l2)
-  is-product x y p pr1 pr2 =
+  is-product x y p l r =
     (z : obj-Precat C)
     (f : type-hom-Precat C z x) →
     (g : type-hom-Precat C z y) →
     (∃! (type-hom-Precat C z p) λ h →
-        (comp-hom-Precat C pr1 h ＝ f)
-        × (comp-hom-Precat C pr2 h ＝ g))
+        (comp-hom-Precat C l h ＝ f)
+        × (comp-hom-Precat C r h ＝ g))
 
   product : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   product x y =
     Σ (obj-Precat C) λ p →
-    Σ (type-hom-Precat C p x) λ pr1 →
-    Σ (type-hom-Precat C p y) λ pr2 →
-      is-product x y p pr1 pr2
+    Σ (type-hom-Precat C p x) λ l →
+    Σ (type-hom-Precat C p y) λ r →
+      is-product x y p l r
 
   has-all-binary-products : UU (l1 ⊔ l2)
   has-all-binary-products = (x y : obj-Precat C) → product x y

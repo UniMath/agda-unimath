@@ -33,9 +33,8 @@ add-ℕ' : ℕ → ℕ → ℕ
 add-ℕ' m n = add-ℕ n m
 
 _+ℕ_ = add-ℕ
-_+ℕ'_ = add-ℕ'
 
-infix 30 _+ℕ_ _+ℕ'_
+infix 30 _+ℕ_
 
 ap-add-ℕ :
   {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → add-ℕ m n ＝ add-ℕ m' n'
