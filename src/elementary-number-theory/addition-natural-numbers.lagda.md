@@ -32,6 +32,11 @@ add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 add-ℕ' : ℕ → ℕ → ℕ
 add-ℕ' m n = add-ℕ n m
 
+_+ℕ_ = add-ℕ
+_+ℕ'_ = add-ℕ'
+
+infix 30 _+ℕ_ _+ℕ'_
+
 ap-add-ℕ :
   {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → add-ℕ m n ＝ add-ℕ m' n'
 ap-add-ℕ p q = ap-binary add-ℕ p q
