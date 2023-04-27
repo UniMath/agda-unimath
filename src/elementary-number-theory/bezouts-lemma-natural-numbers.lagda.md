@@ -764,9 +764,9 @@ is-decidable-is-distance-between-multiples-ℕ x y z =
     (is-decidable-div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))
   where
   decidable-div-ℤ-case-split :
-    (div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)
-      + ¬(div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)))
-    → is-decidable (is-distance-between-multiples-ℕ x y z)
+    ( div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z) +
+      ¬ ( div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))) →
+    is-decidable (is-distance-between-multiples-ℕ x y z)
   decidable-div-ℤ-case-split (inl div-Mod) =
      inl (is-distance-between-multiples-div-mod-ℕ x y z div-Mod)
   decidable-div-ℤ-case-split (inr neg-div-Mod) =
@@ -902,10 +902,11 @@ remainder-min-dist-succ-x-is-distance x y =
   dist-sx-ty-eq-d = minimal-positive-distance-succ-eqn x y
 
   sx-ty-case-split :
-    (leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y)
-      + leq-ℕ (mul-ℕ t y) (mul-ℕ s (succ-ℕ x)))
-    → (is-distance-between-multiples-ℕ (succ-ℕ x) y r)
-  sx-ty-case-split (inl sxty) = (add-ℕ (mul-ℕ q s) 1 , mul-ℕ q t , inv (dist-eqn))
+    ( leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y) +
+      leq-ℕ (mul-ℕ t y) (mul-ℕ s (succ-ℕ x))) →
+    is-distance-between-multiples-ℕ (succ-ℕ x) y r
+  sx-ty-case-split (inl sxty) =
+    (add-ℕ (mul-ℕ q s) 1 , mul-ℕ q t , inv (dist-eqn))
     where
     add-dist-eqn : int-ℕ d ＝ add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y))
       (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
@@ -1332,12 +1333,15 @@ remainder-min-dist-succ-x-is-zero x y =
         (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
   where
   is-zero-case-split :
-    (is-zero-ℕ (remainder-euclidean-division-ℕ
-        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-     + is-nonzero-ℕ (remainder-euclidean-division-ℕ
-        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-    → is-zero-ℕ (remainder-euclidean-division-ℕ
-        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
+    ( is-zero-ℕ
+      ( remainder-euclidean-division-ℕ
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) +
+      is-nonzero-ℕ
+      ( remainder-euclidean-division-ℕ
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) →
+      is-zero-ℕ
+        ( remainder-euclidean-division-ℕ
+          (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
   is-zero-case-split (inl z) = z
   is-zero-case-split (inr nz) = ex-falso
     (remainder-min-dist-succ-x-not-is-nonzero x y nz)
@@ -1383,9 +1387,8 @@ gcd-ℕ-div-dist-between-mult x y z dist =
   t = is-distance-between-multiples-snd-coeff-ℕ dist
 
   sx-ty-case-split :
-    (leq-ℕ (mul-ℕ s x) (mul-ℕ t y)
-    + leq-ℕ (mul-ℕ t y) (mul-ℕ s x))
-    → div-ℕ (gcd-ℕ x y) z
+    (leq-ℕ (mul-ℕ s x) (mul-ℕ t y) + leq-ℕ (mul-ℕ t y) (mul-ℕ s x)) →
+    div-ℕ (gcd-ℕ x y) z
   sx-ty-case-split (inl sxty) =
     div-right-summand-ℕ (gcd-ℕ x y) (mul-ℕ s x) z
       (gcd-ℕ-div-x-mults x y z dist)

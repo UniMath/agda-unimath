@@ -435,10 +435,9 @@ module _
   (¬PQ' : P → ¬ Q')
   where
 
-  left-to-left : (e : (P + Q) ≃ (P' + Q'))
-               → (u : P + Q)
-               → is-left u
-               → is-left (map-equiv e u)
+  left-to-left :
+    (e : (P + Q) ≃ (P' + Q')) →
+    (u : P + Q) → is-left u → is-left (map-equiv e u)
   left-to-left e (inl p) _ =
     ind-coprod is-left (λ _ → star) (λ q' → ¬PQ' p q') (map-equiv e (inl p))
   left-to-left e (inr q) ()
@@ -449,10 +448,9 @@ module _
   (¬P'Q : P' → ¬ Q)
   where
 
-  right-to-right : (e : (P + Q) ≃ (P' + Q'))
-                 → (u : P + Q)
-                 → is-right u
-                 → is-right (map-equiv e u)
+  right-to-right :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
+    is-right u → is-right (map-equiv e u)
   right-to-right e (inl p) ()
   right-to-right e (inr q) _ =
     ind-coprod is-right (λ p' → ¬P'Q p' q) (λ _ → star) (map-equiv e (inr q))
@@ -463,9 +461,8 @@ module _
   (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q)
   where
 
-  equiv-left-to-left : (e : (P + Q) ≃ (P' + Q'))
-                     → (u : P + Q)
-                     → is-left u ≃ is-left (map-equiv e u)
+  equiv-left-to-left :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) → is-left u ≃ is-left (map-equiv e u)
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
     is-equiv-has-inverse
@@ -474,9 +471,9 @@ module _
       (λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-left u))
 
-  equiv-right-to-right : (e : (P + Q) ≃ (P' + Q'))
-                       → (u : P + Q)
-                       → is-right u ≃ is-right (map-equiv e u)
+  equiv-right-to-right :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
+    is-right u ≃ is-right (map-equiv e u)
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
     is-equiv-has-inverse
@@ -485,8 +482,7 @@ module _
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-right u))
 
-  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q')
-                                → (P ≃ P') × (Q ≃ Q')
+  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q') → (P ≃ P') × (Q ≃ Q')
   pr1 (map-mutually-exclusive-coprod e) =
     equiv-left-summand ∘e
     ( equiv-Σ _ e (equiv-left-to-left e) ∘e
@@ -496,8 +492,7 @@ module _
     ( equiv-Σ _ e (equiv-right-to-right e) ∘e
       inv-equiv (equiv-right-summand))
 
-  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q')
-                                    → (P + Q) ≃ (P' + Q')
+  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q') → (P + Q) ≃ (P' + Q')
   map-inv-mutually-exclusive-coprod (pair e₁ e₂) = equiv-coprod e₁ e₂
 
   isretr-map-inv-mutually-exclusive-coprod :

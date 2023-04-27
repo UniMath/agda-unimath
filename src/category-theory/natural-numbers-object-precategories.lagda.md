@@ -34,10 +34,9 @@ module _
   {l1 l2 : Level} (C : Precat l1 l2) ((t , _) : terminal-object-Precat C)
   where
 
-  is-natural-numbers-object-Precat : (n : obj-Precat C)
-                            → type-hom-Precat C t n
-                            → type-hom-Precat C n n
-                            → UU (l1 ⊔ l2)
+  is-natural-numbers-object-Precat :
+    (n : obj-Precat C) →
+    type-hom-Precat C t n → type-hom-Precat C n n → UU (l1 ⊔ l2)
   is-natural-numbers-object-Precat n z s =
     (x : obj-Precat C)
     (q : type-hom-Precat C t x)

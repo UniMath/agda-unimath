@@ -12,10 +12,9 @@ open import category-theory.isomorphisms-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
-open import foundation.dependent-pair-types
-open import foundation.functions
-open import foundation.propositions
-open import foundation.universe-levels
+open import foundation.dependent-pair-types open import foundation.functions
+
+open import foundation.propositions open import foundation.universe-levels
 ```
 
 </details>
@@ -55,10 +54,10 @@ follows from the fact that being an isomorphism is a proposition.
 
 ```agda
 is-prop-is-nat-iso-Precat :
-  ∀ {l1 l2 l3 l4} →
-  (C : Precat l1 l2) →
-  (D : Precat l3 l4) →
-  (F G : functor-Precat C D) →
+  {l1 l2 l3 l4 : Level}
+  (C : Precat l1 l2)
+  (D : Precat l3 l4)
+  (F G : functor-Precat C D)
   (γ : nat-trans-Precat C D F G) →
   is-prop (is-nat-iso-Precat C D F G γ)
 is-prop-is-nat-iso-Precat C D F G γ =

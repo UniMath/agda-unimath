@@ -37,8 +37,8 @@ say that the relation is valued in propositions.
 Rel : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Rel l A = A → A → UU l
 
-total-space-Rel : {l1 l : Level} {A : UU l1}
-        → Rel l A → UU (l1 ⊔ l)
+total-space-Rel :
+  {l1 l : Level} {A : UU l1} → Rel l A → UU (l1 ⊔ l)
 total-space-Rel {A = A} R = Σ (A × A) λ (pair a a') → R a a'
 ```
 
@@ -58,8 +58,8 @@ is-prop-type-Rel-Prop :
   (x y : A) → is-prop (type-Rel-Prop R x y)
 is-prop-type-Rel-Prop R x y = pr2 (R x y)
 
-total-space-Rel-Prop : {l : Level} {l1 : Level} {A : UU l1}
-             → Rel-Prop l A → UU (l ⊔ l1)
+total-space-Rel-Prop :
+  {l : Level} {l1 : Level} {A : UU l1} → Rel-Prop l A → UU (l ⊔ l1)
 total-space-Rel-Prop {A = A} R = Σ (A × A) λ (pair a a') → type-Rel-Prop R a a'
 ```
 

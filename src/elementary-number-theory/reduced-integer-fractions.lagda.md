@@ -131,11 +131,15 @@ is-reduced-reduce-fraction-ℤ x =
          (denominator-fraction-ℤ (reduce-fraction-ℤ x))))
   where
   is-zero-gcd-case-split :
-    (is-zero-ℤ (gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-        (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
-    + ¬ (is-zero-ℤ (gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-        (denominator-fraction-ℤ (reduce-fraction-ℤ x)))))
-    → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
+    ( is-zero-ℤ
+      ( gcd-ℤ
+        ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) +
+      ¬ (is-zero-ℤ
+        ( gcd-ℤ
+          ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+          ( denominator-fraction-ℤ (reduce-fraction-ℤ x))))) →
+    is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
   is-zero-gcd-case-split (inl z) =
     ex-falso (tr is-positive-ℤ
       ( is-zero-right-is-zero-gcd-ℤ
@@ -181,8 +185,8 @@ is-reduced-reduce-fraction-ℤ x =
     d : ℤ
     d = gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
     is-plus-or-minus-case-split :
-      (is-plus-or-minus-ℤ (mul-ℤ alpha d) d)
-      → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
+      (is-plus-or-minus-ℤ (mul-ℤ alpha d) d) →
+      is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
     is-plus-or-minus-case-split (inl pos) =
       ( is-injective-mul-ℤ' d
         ( λ r → tr is-positive-ℤ r
@@ -303,9 +307,9 @@ unique-numerator-reduce-fraction-ℤ x y H =
     (is-decidable-is-zero-ℤ (int-reduce-numerator-fraction-ℤ x))
   where
   is-zero-num-case-split :
-    (is-zero-ℤ (int-reduce-numerator-fraction-ℤ x)
-    + ¬ (is-zero-ℤ (int-reduce-numerator-fraction-ℤ x)))
-    → int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
+    ( is-zero-ℤ (int-reduce-numerator-fraction-ℤ x) +
+      ¬ (is-zero-ℤ (int-reduce-numerator-fraction-ℤ x))) →
+    int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
   is-zero-num-case-split (inl z) =
     z ∙ inv (is-zero-sim-unit-ℤ
       (sim-unique-numerator-reduce-fraction-ℤ x y H) z)
@@ -314,9 +318,10 @@ unique-numerator-reduce-fraction-ℤ x y H =
       (is-plus-or-minus-sim-unit-ℤ (sim-unique-numerator-reduce-fraction-ℤ x y H))
     where
     is-plus-or-minus-case-split :
-      is-plus-or-minus-ℤ (int-reduce-numerator-fraction-ℤ x)
-        (int-reduce-numerator-fraction-ℤ y)
-      → int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
+      is-plus-or-minus-ℤ
+        ( int-reduce-numerator-fraction-ℤ x)
+        ( int-reduce-numerator-fraction-ℤ y) →
+      int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
     is-plus-or-minus-case-split (inl pos) = pos
     is-plus-or-minus-case-split (inr neg) = ex-falso (Eq-eq-ℤ contra)
       where

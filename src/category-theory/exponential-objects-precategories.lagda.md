@@ -90,12 +90,11 @@ module _
     morphism-into-exponential-Precat-comm = pr2 (pr1 (pr2 (pr2 (t x y)) z f))
 
     is-unique-morphism-into-exponential-Precat :
-      (g : type-hom-Precat C z object-exponential-Precat)
-      → comp-hom-Precat C
-          eval-exponential-Precat
-          (map-product-Precat C p g (id-hom-Precat C))
-        ＝ f
-      → morphism-into-exponential-Precat ＝ g
+      ( g : type-hom-Precat C z object-exponential-Precat) →
+      ( comp-hom-Precat C
+        ( eval-exponential-Precat)
+        ( map-product-Precat C p g (id-hom-Precat C)) ＝ f) →
+      morphism-into-exponential-Precat ＝ g
     is-unique-morphism-into-exponential-Precat g q =
       ap pr1 (pr2 (pr2 (pr2 (t x y)) z f) (g , q))
 ```

@@ -114,7 +114,7 @@ module _
 
 ```agda
 module _
-  {l1 l2} (P : subuniverse l1 l2) (X : type-subuniverse P)
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
   ternary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)

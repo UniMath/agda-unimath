@@ -36,8 +36,8 @@ module _
   where
   is-saturated-carbon-hydrocarbon : vertex-hydrocarbon H → UU (l1 ⊔ l2)
   is-saturated-carbon-hydrocarbon c =
-      (c' : vertex-hydrocarbon H)
-    → is-prop (edge-hydrocarbon H (standard-unordered-pair c c'))
+      (c' : vertex-hydrocarbon H) →
+      is-prop (edge-hydrocarbon H (standard-unordered-pair c c'))
 ```
 
 Type-theoretically, the saturation condition on a carbon atom (fix one and call

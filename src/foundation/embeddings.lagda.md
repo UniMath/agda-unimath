@@ -180,8 +180,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  is-emb-tot : {f : (x : A) → B x → C x}
-    → ((x : A) → is-emb (f x)) → is-emb (tot f)
+  is-emb-tot :
+    {f : (x : A) → B x → C x} → ((x : A) → is-emb (f x)) → is-emb (tot f)
   is-emb-tot H =
     is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
 
@@ -198,8 +198,8 @@ module _
   where
 
   abstract
-    is-emb-map-Σ-map-base : {f : A → B} (C : B → UU l3)
-      → is-emb f → is-emb (map-Σ-map-base f C)
+    is-emb-map-Σ-map-base :
+      {f : A → B} (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
     is-emb-map-Σ-map-base C H =
       is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
 
@@ -213,8 +213,9 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   where
 
-  is-emb-map-Σ : (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
-    → is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
+  is-emb-map-Σ :
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+    is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
   is-emb-map-Σ D H K =
     is-emb-is-prop-map
       ( is-prop-map-map-Σ D

@@ -35,11 +35,15 @@ open import foundation.unit-type
 
 ```agda
 bezouts-lemma-eqn-to-int :
-  (x y : ℤ) → (H : is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y)))
-    → nat-gcd-ℤ x y ＝
-      dist-ℕ
-        (abs-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H)) x))
-        (abs-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H)) y))
+  (x y : ℤ) → (H : is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))) →
+  nat-gcd-ℤ x y ＝
+  dist-ℕ
+    ( abs-ℤ
+      ( mul-ℤ
+        ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H)) x))
+    ( abs-ℤ
+      ( mul-ℤ
+        ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H)) y))
 bezouts-lemma-eqn-to-int x y H =
   equational-reasoning
     nat-gcd-ℤ x y
@@ -70,14 +74,23 @@ bezouts-lemma-eqn-to-int x y H =
       by (ap (λ K → dist-ℕ (abs-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H)) x)) K)
       (inv (multiplicative-abs-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H)) y)))
 
-refactor-pos-cond : (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) → is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
+refactor-pos-cond :
+  (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) →
+  is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
 refactor-pos-cond x y H K = (λ F → (is-nonzero-abs-ℤ x H) (is-zero-left-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y) F))
 
-bezouts-lemma-refactor-hypotheses : (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y)
-  → nat-gcd-ℤ x y ＝
-      abs-ℤ (diff-ℤ
-        (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x)
-        (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))
+bezouts-lemma-refactor-hypotheses :
+  (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) →
+  nat-gcd-ℤ x y ＝
+  abs-ℤ (diff-ℤ
+    (mul-ℤ
+      ( int-ℕ
+        ( minimal-positive-distance-x-coeff
+          (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x)
+    (mul-ℤ
+      ( int-ℕ
+        ( minimal-positive-distance-y-coeff
+          (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))
 bezouts-lemma-refactor-hypotheses x y H K = (equational-reasoning
     nat-gcd-ℤ x y
     ＝ dist-ℕ
@@ -116,9 +129,9 @@ bezouts-lemma-pos-ints x y H K =
     (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))
 
   sx-ty-nonneg-case-split :
-    (is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))
-    + is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
-    → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+    ( is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) +
+      is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)))) →
+    Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
   sx-ty-nonneg-case-split (inl pos) = (s , (neg-ℤ t) ,
     inv (equational-reasoning
       gcd-ℤ x y

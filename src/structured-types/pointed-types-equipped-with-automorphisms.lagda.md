@@ -163,8 +163,8 @@ is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
                    ( ( x : type-Pointed-Type-With-Aut X) →
                      ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
                      ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
-        ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2)
-      → ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
+        ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2) →
+        ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
           ( ( H (pt-Pointed-Type-With-Aut X)) ∙
             ( pr1 str-h2)))
         ×
@@ -186,8 +186,8 @@ is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
               ( map-aut-Pointed-Type-With-Aut X x)) ＝
             ( map-aut-Pointed-Type-With-Aut Y
               ( map-hom-Pointed-Type-With-Aut X Y h1 x)))
-          ( α : preserves-point-map-hom-Pointed-Type-With-Aut X Y h1 ＝ pt-h2)
-        → ( ( x : type-Pointed-Type-With-Aut X) →
+          ( α : preserves-point-map-hom-Pointed-Type-With-Aut X Y h1 ＝ pt-h2) →
+          ( ( x : type-Pointed-Type-With-Aut X) →
             ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
               ( refl)) ＝
             ( aut-h2 x)))

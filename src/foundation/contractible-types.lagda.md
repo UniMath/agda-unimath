@@ -120,8 +120,8 @@ is-closed-under-is-contr-subuniverse P =
 ### If two types are equivalent then so are the propositions that they are contractible
 
 ```agda
-equiv-is-contr-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  → A ≃ B → is-contr A ≃ is-contr B
+equiv-is-contr-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ≃ B → is-contr A ≃ is-contr B
 equiv-is-contr-equiv {A = A} {B = B} e =
   equiv-prop
     ( is-property-is-contr)

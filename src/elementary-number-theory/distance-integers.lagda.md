@@ -52,8 +52,8 @@ dist-int-ℕ (succ-ℕ x) (succ-ℕ y) =
   ( dist-int-ℕ x y)
 
 dist-abs-ℤ :
-  (x y : ℤ) → (H : is-nonnegative-ℤ x) → (K : is-nonnegative-ℤ y)
-    → dist-ℕ (abs-ℤ x) (abs-ℤ y) ＝ dist-ℤ x y
+  (x y : ℤ) → (H : is-nonnegative-ℤ x) → (K : is-nonnegative-ℤ y) →
+  dist-ℕ (abs-ℤ x) (abs-ℤ y) ＝ dist-ℤ x y
 dist-abs-ℤ (inr (inl star)) y H K = equational-reasoning
   dist-ℕ 0 (abs-ℤ y)
   ＝ abs-ℤ y by left-unit-law-dist-ℕ (abs-ℤ y)
