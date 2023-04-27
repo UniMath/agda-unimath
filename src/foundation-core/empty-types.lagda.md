@@ -8,6 +8,7 @@ module foundation-core.empty-types where
 
 ```agda
 open import foundation.propositions
+open import foundation.subuniverses
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -29,6 +30,8 @@ type available, we will say that a type is empty if it maps into the standard
 empty type.
 
 ## Definition
+
+### Empty types
 
 ```agda
 data empty : UU lzero where

@@ -313,26 +313,6 @@ pr1 (equiv-Pr1 l2 A) = Pr1 A
 pr2 (equiv-Pr1 l2 A) = is-equiv-Pr1 l2 A
 ```
 
-### Structured type duality
-
-```agda
-Slice-structure :
-  {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
-  UU (l1 ⊔ l2 ⊔ lsuc l)
-Slice-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
-
-equiv-Fib-structure :
-  {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
-  Slice-structure (l1 ⊔ l) P B ≃ fam-structure P B
-equiv-Fib-structure {l1} {l3} l P B =
-  ( ( inv-distributive-Π-Σ) ∘e
-    ( equiv-Σ
-      ( λ C → (b : B) → P (C b))
-      ( equiv-Fib l B)
-      ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
-  ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
-```
-
 The type of all function from `A → B` is equivalent to the type of function
 `Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
 
@@ -352,42 +332,4 @@ fib-Σ {l1} {l2} X A =
           ( is-contr-is-small-lmax l2 X )
           ( is-small-lmax l2 X )) ∘e
         ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A))))
-
-equiv-fixed-Slice-structure :
-  {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →
-  ( hom-structure P X A) ≃
-  ( Σ (A → Σ (UU l) (λ Z → P (Z))) ( λ Y → X ≃ (Σ A (pr1 ∘ Y ))))
-equiv-fixed-Slice-structure {l} P X A =
-  ( ( equiv-Σ
-      ( λ Y → X ≃ Σ A (pr1 ∘ Y))
-      ( equiv-Fib-structure l P A)
-      ( λ s →
-        inv-equiv (equiv-postcomp-equiv (equiv-total-fib (pr1 (pr2 s))) X))) ∘e
-    ( ( equiv-right-swap-Σ) ∘e
-      ( ( inv-left-unit-law-Σ-is-contr
-          ( is-contr-total-equiv X)
-          ( X , id-equiv )))))
-```
-
-### Subtype duality
-
-```agda
-Slice-emb : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-Slice-emb l A = Σ (UU l) (λ X → X ↪ A)
-
-equiv-Fib-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) →
-  Slice-emb (l1 ⊔ l) A ≃ (A → Prop (l1 ⊔ l))
-equiv-Fib-Prop l A =
-  ( equiv-Fib-structure l is-prop A) ∘e
-  ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))
-
-Slice-surjection : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-Slice-surjection l A = Σ (UU l) (λ X → X ↠ A)
-
-equiv-Fib-trunc-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) →
-  Slice-surjection (l1 ⊔ l) A ≃ (A → Inhabited-Type (l1 ⊔ l))
-equiv-Fib-trunc-Prop l A =
-  ( equiv-Fib-structure l is-inhabited A)
 ```

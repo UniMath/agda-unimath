@@ -1,7 +1,7 @@
 # Dirichlet products of species of subuniverse
 
 ```agda
-module species.dirichlet-product-species-of-subuniverse where
+module species.dirichlet-products-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -21,7 +21,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

@@ -1,7 +1,7 @@
 # Coproducts of species of types of subuniverse
 
 ```agda
-module species.coproducts-species-of-types-in-subuniverse where
+module species.coproducts-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,7 @@ open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import species.coproducts-species-of-types
-open import species.species-of-types-in-subuniverse
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>
@@ -32,25 +32,25 @@ stable by coproduct.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   where
 
   coproduct-species-subuniverse' :
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l2))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-    (X : type-subuniverse P) → UU (l2 ⊔ l3)
+    (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+    (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+    (X : type-subuniverse P) → UU (l3 ⊔ l4)
   coproduct-species-subuniverse' S T X =
     inclusion-subuniverse
-      ( subuniverse-global-subuniverse Q l2)
+      ( subuniverse-global-subuniverse Q l3)
       ( S X) +
     inclusion-subuniverse
-      ( subuniverse-global-subuniverse Q l3)
+      ( subuniverse-global-subuniverse Q l4)
       ( T X)
 
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   ( C1 :
-    ( (l4 l5 : Level)
+    ( {l4 l5 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (X : type-subuniverse P) →
@@ -60,12 +60,12 @@ module _
   where
 
   coproduct-species-subuniverse :
-    species-subuniverse P (subuniverse-global-subuniverse Q l2) →
     species-subuniverse P (subuniverse-global-subuniverse Q l3) →
-    species-subuniverse P (subuniverse-global-subuniverse Q (l2 ⊔ l3))
+    species-subuniverse P (subuniverse-global-subuniverse Q l4) →
+    species-subuniverse P (subuniverse-global-subuniverse Q (l3 ⊔ l4))
   pr1 (coproduct-species-subuniverse S T X) =
     coproduct-species-subuniverse' P Q S T X
-  pr2 (coproduct-species-subuniverse S T X) = C1 l2 l3 S T X
+  pr2 (coproduct-species-subuniverse S T X) = C1 S T X
 ```
 
 ## Properties
@@ -74,34 +74,34 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   ( C1 :
-    ( (l4 l5 : Level)
+    ( {l4 l5 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (X : type-subuniverse P) →
       is-in-subuniverse
         ( subuniverse-global-subuniverse Q (l4 ⊔ l5))
         ( coproduct-species-subuniverse' P Q S T X)))
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l2))
-  ( T : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   ( X : UU l1)
   where
 
   map-coproduct-Σ-extension-species-subuniverse :
     Σ-extension-species-subuniverse
       ( P)
-      ( subuniverse-global-subuniverse Q (l2 ⊔ l3))
+      ( subuniverse-global-subuniverse Q (l3 ⊔ l4))
       ( coproduct-species-subuniverse P Q C1 S T)
       ( X) →
     coproduct-species-types
       ( Σ-extension-species-subuniverse
           ( P)
-          ( subuniverse-global-subuniverse Q l2)
+          ( subuniverse-global-subuniverse Q l3)
           ( S))
       ( Σ-extension-species-subuniverse
           ( P)
-          ( subuniverse-global-subuniverse Q l3)
+          ( subuniverse-global-subuniverse Q l4)
           ( T))
       ( X)
   map-coproduct-Σ-extension-species-subuniverse (p , inl x) = inl ( p , x)
@@ -111,16 +111,16 @@ module _
     coproduct-species-types
       ( Σ-extension-species-subuniverse
           ( P)
-          ( subuniverse-global-subuniverse Q l2)
+          ( subuniverse-global-subuniverse Q l3)
           ( S))
       ( Σ-extension-species-subuniverse
           ( P)
-          ( subuniverse-global-subuniverse Q l3)
+          ( subuniverse-global-subuniverse Q l4)
           ( T))
       ( X) →
     Σ-extension-species-subuniverse
       ( P)
-      ( subuniverse-global-subuniverse Q (l2 ⊔ l3))
+      ( subuniverse-global-subuniverse Q (l3 ⊔ l4))
       ( coproduct-species-subuniverse P Q C1 S T)
       ( X)
   map-inv-coproduct-Σ-extension-species-subuniverse (inl x) = pr1 x , inl (pr2 x)
@@ -147,17 +147,17 @@ module _
   equiv-coproduct-Σ-extension-species-subuniverse :
     Σ-extension-species-subuniverse
       ( P)
-      ( subuniverse-global-subuniverse Q (l2 ⊔ l3))
+      ( subuniverse-global-subuniverse Q (l3 ⊔ l4))
       ( coproduct-species-subuniverse P Q C1 S T)
       ( X) ≃
     coproduct-species-types
       ( Σ-extension-species-subuniverse
           ( P)
-          ( subuniverse-global-subuniverse Q l2)
+          ( subuniverse-global-subuniverse Q l3)
           ( S))
       ( Σ-extension-species-subuniverse
           ( P)
-          ( subuniverse-global-subuniverse Q l3)
+          ( subuniverse-global-subuniverse Q l4)
           ( T))
       ( X)
   pr1 equiv-coproduct-Σ-extension-species-subuniverse =
