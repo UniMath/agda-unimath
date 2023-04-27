@@ -61,16 +61,16 @@ module _
     cauchy-series-species-subuniverse ≃
     cauchy-series-species-types (Σ-extension-species-subuniverse P Q S) X
   equiv-cauchy-series-Σ-extension-species-subuniverse =
-    ( ( equiv-tot
-          ( λ U →
-            inv-assoc-Σ
-              ( type-Prop (P U))
-              ( λ p → inclusion-subuniverse Q (S (U , p)))
-              ( λ _ → U → X))) ∘e
-      ( assoc-Σ
-          ( UU l1)
-          ( λ U → type-Prop (P U))
-          ( λ U →  Σ ( inclusion-subuniverse Q (S U)) (λ _ → pr1 U → X))))
+    ( equiv-tot
+      ( λ U →
+        inv-assoc-Σ
+          ( type-Prop (P U))
+          ( λ p → inclusion-subuniverse Q (S (U , p)))
+          ( λ _ → U → X))) ∘e
+    ( assoc-Σ
+      ( UU l1)
+      ( λ U → type-Prop (P U))
+      ( λ U →  Σ ( inclusion-subuniverse Q (S U)) (λ _ → pr1 U → X)))
 ```
 
 ### Equivalences
@@ -84,8 +84,8 @@ module _
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (f :
     (F : type-subuniverse P) →
-      ( inclusion-subuniverse (subuniverse-global-subuniverse Q l3) (S F) ≃
-        inclusion-subuniverse (subuniverse-global-subuniverse Q l4) (T F)))
+    inclusion-subuniverse (subuniverse-global-subuniverse Q l3) (S F) ≃
+    inclusion-subuniverse (subuniverse-global-subuniverse Q l4) (T F))
   (X : UU l5)
   where
 
@@ -118,5 +118,6 @@ module _
     cauchy-series-species-subuniverse P Q S Y
   equiv-cauchy-series-species-subuniverse =
     equiv-tot
-      ( λ F → equiv-prod id-equiv (equiv-postcomp (inclusion-subuniverse P F) e))
+      ( λ F →
+        equiv-prod id-equiv (equiv-postcomp (inclusion-subuniverse P F) e))
 ```

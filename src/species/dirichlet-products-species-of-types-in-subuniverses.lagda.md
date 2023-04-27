@@ -72,7 +72,8 @@ module _
   dirichlet-product-species-subuniverse :
     species-subuniverse P ( subuniverse-global-subuniverse Q l2) →
     species-subuniverse P ( subuniverse-global-subuniverse Q l3) →
-    species-subuniverse P ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+    species-subuniverse P
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
   pr1 (dirichlet-product-species-subuniverse S T X) =
     dirichlet-product-species-subuniverse' P Q S T X
   pr2 (dirichlet-product-species-subuniverse S T X) = C1 l2 l3 S T X
@@ -80,16 +81,14 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
   ( C1 :
-      ( (l5 l6 : Level)
-        (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-        (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-        (X : type-subuniverse P) →
-        is-in-subuniverse
-          ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l5 ⊔ l6) )
-          ( dirichlet-product-species-subuniverse' P Q S T X)))
-  ( C2 :
-    (A B : type-subuniverse P) →
-    is-in-subuniverse P (inclusion-subuniverse P A × inclusion-subuniverse P B))
+    (l5 l6 : Level)
+    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
+    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
+    (X : type-subuniverse P) →
+    is-in-subuniverse
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l5 ⊔ l6))
+      ( dirichlet-product-species-subuniverse' P Q S T X))
+  ( C2 : is-closed-under-products-subuniverse P)
   where
 
   module _
