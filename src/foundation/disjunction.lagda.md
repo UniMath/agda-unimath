@@ -30,12 +30,12 @@ holds or `Q` holds.
 ## Definition
 
 ```agda
-disj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
+disj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 disj-Prop P Q = trunc-Prop (type-Prop P + type-Prop Q)
 
-type-disj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
+_∨_ = disj-Prop
+
+type-disj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-disj-Prop P Q = type-Prop (disj-Prop P Q)
 
 abstract

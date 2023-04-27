@@ -28,5 +28,5 @@ pointed-section-Pointed-Type :
   (A →* B) → UU (l1 ⊔ l2)
 pointed-section-Pointed-Type A B f =
   Σ ( B →* A)
-    ( λ g → htpy-pointed-map B B (comp-pointed-map B A B f g) id-pointed-map)
+    ( λ g → (f ∘* g) ~* id-pointed-map)
 ```

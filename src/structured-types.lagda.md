@@ -21,7 +21,9 @@ open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-coherent-h-spaces public
 open import structured-types.morphisms-magmas public
 open import structured-types.morphisms-types-equipped-with-endomorphisms public
+open import structured-types.pointed-cartesian-product-types public
 open import structured-types.pointed-dependent-functions public
+open import structured-types.pointed-dependent-pair-types public
 open import structured-types.pointed-equivalences public
 open import structured-types.pointed-families-of-types public
 open import structured-types.pointed-homotopies public

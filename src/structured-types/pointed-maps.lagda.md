@@ -54,8 +54,7 @@ module _
   map-pointed-map f = pr1 f
 
   preserves-point-pointed-map :
-    (f : A →* B) →
-    map-pointed-map f (pt-Pointed-Type A) ＝ pt-Pointed-Type B
+    (f : A →* B) → map-pointed-map f (pt-Pointed-Type A) ＝ pt-Pointed-Type B
   preserves-point-pointed-map f = pr2 f
 ```
 
@@ -95,8 +94,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
-  (C : Pointed-Type l3)
+  {l1 l2 l3 : Level}
+  (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3)
   where
 
   map-comp-pointed-map :
@@ -117,6 +116,12 @@ module _
 
   precomp-pointed-map : A →* B → B →* C → A →* C
   precomp-pointed-map f g = comp-pointed-map g f
+
+_∘*_ :
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
+  B →* C → A →* B → A →* C
+_∘*_ {A = A} {B} {C} = comp-pointed-map A B C
 ```
 
 ### The identity pointed map
