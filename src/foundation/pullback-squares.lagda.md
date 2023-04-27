@@ -9,15 +9,7 @@ module foundation.pullback-squares where
 ```agda
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.cones-over-cospans
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 ```

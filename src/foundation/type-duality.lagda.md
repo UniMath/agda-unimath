@@ -10,13 +10,9 @@ module foundation.type-duality where
 open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.inhabited-types
 open import foundation.locally-small-types
 open import foundation.polynomial-endofunctors
 open import foundation.slice
-open import foundation.structure
-open import foundation.surjective-maps
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 
@@ -32,8 +28,6 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.propositional-maps
-open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels

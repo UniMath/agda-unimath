@@ -9,16 +9,11 @@ module elementary-number-theory.type-arithmetic-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.powers-of-two
-open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -33,9 +28,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
