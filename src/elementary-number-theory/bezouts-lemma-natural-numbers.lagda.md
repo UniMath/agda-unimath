@@ -1034,8 +1034,8 @@ remainder-min-dist-succ-x-is-distance x y =
           by ap (λ H → add-ℤ H (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))))
             (ap (λ H → add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) ((int-ℕ s)))
               (int-ℕ (succ-ℕ x))) H)
-              (left-unit-law-mul-ℤ (int-ℕ (succ-ℕ x)))
-            ∙ inv (right-distributive-mul-add-ℤ (mul-ℤ (int-ℕ q)
+              (left-unit-law-mul-ℤ (int-ℕ (succ-ℕ x))) ∙
+              inv (right-distributive-mul-add-ℤ (mul-ℤ (int-ℕ q)
               (int-ℕ s)) one-ℤ (int-ℕ (succ-ℕ x))))
 
     dist-eqn : r ＝ dist-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))
@@ -1425,9 +1425,10 @@ gcd-ℕ-div-dist-between-mult x y z dist =
       (concatenate-div-eq-ℕ (gcd-ℕ-div-x-mults x y z dist) (inv rewrite-dist))
     where
     rewrite-dist : add-ℕ (mul-ℕ t y) z ＝ mul-ℕ s x
-    rewrite-dist = rewrite-right-dist-add-ℕ (mul-ℕ t y) z (mul-ℕ s x) tysx
-      (inv (is-distance-between-multiples-eqn-ℕ dist)
-        ∙ symmetric-dist-ℕ (mul-ℕ s x) (mul-ℕ t y))
+    rewrite-dist =
+      rewrite-right-dist-add-ℕ (mul-ℕ t y) z (mul-ℕ s x) tysx
+        ( inv (is-distance-between-multiples-eqn-ℕ dist) ∙
+          symmetric-dist-ℕ (mul-ℕ s x) (mul-ℕ t y))
 
     div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ s x)
     div-gcd-x = div-mul-ℕ s (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
