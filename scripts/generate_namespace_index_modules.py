@@ -38,6 +38,8 @@ def generate_agda_block(root, namespace):
 
 if __name__ == "__main__":
 
+    CHANGES_WERE_MADE_FLAG = 1
+    MISPLACED_TITLE_FLAG = 2
     status = 0
     root = "src"
 
@@ -58,6 +60,7 @@ if __name__ == "__main__":
         if title_index > 0:
             print(
                 f"Warning! Namespace file {namespace_filename} has title after first line.")
+            status |= MISPLACED_TITLE_FLAG
         elif title_index == -1:  # Missing title. Generate it
             contents = generate_title(namespace) + contents
 
@@ -84,7 +87,7 @@ if __name__ == "__main__":
                     generated_block + contents[agda_block_end:]
 
         if oldcontents != contents:
-            status |= 1
+            status |= CHANGES_WERE_MADE_FLAG
             with open(namespace_filename, "w") as f:
                 f.write(contents)
 
