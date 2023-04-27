@@ -139,8 +139,7 @@ module _
           Σ (pr1 (pr2 s) ＝ pr1 u)
           (λ q →
              ((pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) q) ＝
-              (ap (power-nat-Ω 5 A) p ∙ pr1 (pr2 u)))
-             ×
+              (ap (power-nat-Ω 5 A) p ∙ pr1 (pr2 u))) ×
              ((pr2 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 2 A) (ap-binary _∙_ p q)) ＝
               (ap (power-nat-Ω 3 A) q ∙ pr2 (pr2 u)))))
       ( is-contr-total-path (pr1 s))

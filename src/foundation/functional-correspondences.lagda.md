@@ -169,8 +169,7 @@ module _
   isretr-function-functional-correspondence :
     (f : (x : A) → B x) →
     function-functional-correspondence
-      ( functional-correspondence-function f)
-    ＝ f
+      ( functional-correspondence-function f) ＝ f
   isretr-function-functional-correspondence f =
     eq-htpy
       ( λ x →

@@ -42,8 +42,8 @@ module _
     (q : type-hom-Precat C t x)
     (f : type-hom-Precat C x x) →
     ∃! (type-hom-Precat C n x) λ u →
-       (comp-hom-Precat C u z ＝ q)
-     × (comp-hom-Precat C u s ＝ comp-hom-Precat C f u)
+       (comp-hom-Precat C u z ＝ q) ×
+       (comp-hom-Precat C u s ＝ comp-hom-Precat C f u)
 
   natural-numbers-object-Precat : UU (l1 ⊔ l2)
   natural-numbers-object-Precat =

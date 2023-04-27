@@ -519,13 +519,12 @@ module _
             ( left-summand-binary-coproduct-Decomposition d)
             ( right-summand-binary-coproduct-Decomposition d)
             ( λ y →
-                map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
-                d y
-                ＝ inl (inr star))) ∘e
+              map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
+                d y ＝ inl (inr star))) ∘e
           ( equiv-Σ-equiv-base
             ( λ y →
-              map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d y ＝
-              inl (inr star))
+              map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
+                d y ＝ inl (inr star))
             ( matching-correspondence-binary-coproduct-Decomposition d)))))
 
   equiv-right-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :

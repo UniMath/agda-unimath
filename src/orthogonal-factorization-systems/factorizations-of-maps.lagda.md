@@ -161,8 +161,8 @@ module _
   htpy-factorization-through F F' =
     Σ ( right-map-factorization-through F ~ right-map-factorization-through F')
       ( λ R →
-        Σ ( left-map-factorization-through F
-            ~ left-map-factorization-through F')
+        Σ ( left-map-factorization-through F ~
+            left-map-factorization-through F')
           ( coherence-htpy-factorization-through F F' R))
 
   refl-htpy-factorization-through :

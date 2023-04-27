@@ -94,31 +94,34 @@ module _
       ( components-nat-trans-Precat C D F G α x)
   pr2 (comp-nat-trans-Precat F G H β α) f =
     equational-reasoning
-       comp-hom-Precat D (hom-functor-Precat C D H f)
-         (comp-hom-Precat D (components-nat-trans-Precat C D G H β _)
-          (pr1 α _))
-    ＝ comp-hom-Precat D
-        (comp-hom-Precat D (hom-functor-Precat C D H f)
-         (components-nat-trans-Precat C D G H β _))
-        (pr1 α _)
-      by inv (assoc-comp-hom-Precat D _ _ _)
-    ＝ comp-hom-Precat D
-        (comp-hom-Precat D (pr1 β _) (hom-functor-Precat C D G f))
-        (components-nat-trans-Precat C D F G α _)
-      by ap (λ x → comp-hom-Precat D x _) (squares-nat-trans-Precat C D G H β f)
-    ＝ comp-hom-Precat D (pr1 β _)
-        (comp-hom-Precat D (hom-functor-Precat C D G f)
-         (components-nat-trans-Precat C D F G α _))
-      by assoc-comp-hom-Precat D _ _ _
-    ＝ comp-hom-Precat D (pr1 β _)
-        (comp-hom-Precat D (components-nat-trans-Precat C D F G α _)
-         (hom-functor-Precat C D F f))
-      by ap (λ x → comp-hom-Precat D _ x) (squares-nat-trans-Precat C D F G α f)
-    ＝ comp-hom-Precat D
-        (comp-hom-Precat D (pr1 β _)
-         (components-nat-trans-Precat C D F G α _))
-        (hom-functor-Precat C D F f)
-      by inv (assoc-comp-hom-Precat D _ _ _)
+      comp-hom-Precat D
+        ( hom-functor-Precat C D H f)
+        ( comp-hom-Precat D (components-nat-trans-Precat C D G H β _) (pr1 α _))
+      ＝ comp-hom-Precat D
+          ( comp-hom-Precat D (hom-functor-Precat C D H f)
+            ( components-nat-trans-Precat C D G H β _))
+          ( pr1 α _)
+        by inv (assoc-comp-hom-Precat D _ _ _)
+      ＝ comp-hom-Precat D
+          ( comp-hom-Precat D (pr1 β _) (hom-functor-Precat C D G f))
+          ( components-nat-trans-Precat C D F G α _)
+        by ap (λ x → comp-hom-Precat D x _) (squares-nat-trans-Precat C D G H β f)
+      ＝ comp-hom-Precat D (pr1 β _)
+          ( comp-hom-Precat D
+            ( hom-functor-Precat C D G f)
+            ( components-nat-trans-Precat C D F G α _))
+        by assoc-comp-hom-Precat D _ _ _
+      ＝ comp-hom-Precat D (pr1 β _)
+          ( comp-hom-Precat D
+            ( components-nat-trans-Precat C D F G α _)
+            ( hom-functor-Precat C D F f))
+        by ap (comp-hom-Precat D _) (squares-nat-trans-Precat C D F G α f)
+      ＝ comp-hom-Precat D
+          ( comp-hom-Precat D
+            ( pr1 β _)
+            ( components-nat-trans-Precat C D F G α _))
+          ( hom-functor-Precat C D F f)
+        by inv (assoc-comp-hom-Precat D _ _ _)
 ```
 
 ## Properties

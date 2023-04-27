@@ -215,22 +215,23 @@ is-reduced-reduce-fraction-ℤ x =
             ( inr ( is-positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))))))
 
 sim-reduced-fraction-ℤ : (x : fraction-ℤ) → (sim-fraction-ℤ x (reduce-fraction-ℤ x))
-sim-reduced-fraction-ℤ x = equational-reasoning
-  mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ (reduce-fraction-ℤ x))
-  ＝ mul-ℤ (mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
-      (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
-      (denominator-fraction-ℤ (reduce-fraction-ℤ x))
-    by ap (λ H → mul-ℤ H (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
-        (inv (eq-reduce-numerator-fraction-ℤ x))
-  ＝ mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
-    (mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-      (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
-    by associative-mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
-      (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-      (denominator-fraction-ℤ (reduce-fraction-ℤ x))
-  ＝ mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) (denominator-fraction-ℤ x)
-    by ap (λ H → mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) H)
-      (commutative-mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) (denominator-fraction-ℤ (reduce-fraction-ℤ x)) ∙ eq-reduce-denominator-fraction-ℤ x)
+sim-reduced-fraction-ℤ x =
+  equational-reasoning
+    mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ (reduce-fraction-ℤ x))
+    ＝ mul-ℤ (mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
+        (denominator-fraction-ℤ (reduce-fraction-ℤ x))
+      by ap (λ H → mul-ℤ H (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
+          (inv (eq-reduce-numerator-fraction-ℤ x))
+    ＝ mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
+      (mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+        (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
+      by associative-mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+        (denominator-fraction-ℤ (reduce-fraction-ℤ x))
+    ＝ mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) (denominator-fraction-ℤ x)
+      by ap (λ H → mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) H)
+        (commutative-mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) (denominator-fraction-ℤ (reduce-fraction-ℤ x)) ∙ eq-reduce-denominator-fraction-ℤ x)
 
 reduce-preserves-sim-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
   sim-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y)
@@ -331,15 +332,16 @@ unique-numerator-reduce-fraction-ℤ x y H =
       reduced-eqn :
         mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
         ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))
-      reduced-eqn = equational-reasoning
-        mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
-        ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x)
-        by reduce-preserves-sim-ℤ x y H
-        ＝ mul-ℤ (mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ)
-          (int-reduce-denominator-fraction-ℤ x)
-        by ap (λ K → mul-ℤ K (int-reduce-denominator-fraction-ℤ x)) (inv neg ∙ commutative-mul-ℤ neg-one-ℤ (int-reduce-numerator-fraction-ℤ x))
-        ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))
-          by associative-mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)
+      reduced-eqn =
+        equational-reasoning
+          mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
+          ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x)
+            by reduce-preserves-sim-ℤ x y H
+          ＝ mul-ℤ (mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ)
+            (int-reduce-denominator-fraction-ℤ x)
+            by ap (λ K → mul-ℤ K (int-reduce-denominator-fraction-ℤ x)) (inv neg ∙ commutative-mul-ℤ neg-one-ℤ (int-reduce-numerator-fraction-ℤ x))
+          ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))
+            by associative-mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)
 
       x-nat : ℕ
       x-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x))
@@ -348,14 +350,15 @@ unique-numerator-reduce-fraction-ℤ x y H =
       y-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y))
 
       contra : inr (inr y-nat) ＝ neg-ℤ (inr (inr x-nat))
-      contra = equational-reasoning
-        inr (inr y-nat)
-        ＝ (int-reduce-denominator-fraction-ℤ y)
-        by inv (pr2 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)))
-        ＝ neg-ℤ (int-reduce-denominator-fraction-ℤ x)
-        by is-injective-mul-ℤ (int-reduce-numerator-fraction-ℤ x) nz reduced-eqn
-        ＝ neg-ℤ (inr (inr x-nat))
-        by ap neg-ℤ (pr2 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x)))
+      contra =
+        equational-reasoning
+          inr (inr y-nat)
+          ＝ (int-reduce-denominator-fraction-ℤ y)
+            by inv (pr2 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)))
+          ＝ neg-ℤ (int-reduce-denominator-fraction-ℤ x)
+            by is-injective-mul-ℤ (int-reduce-numerator-fraction-ℤ x) nz reduced-eqn
+          ＝ neg-ℤ (inr (inr x-nat))
+            by ap neg-ℤ (pr2 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x)))
 
 sim-unique-denominator-reduce-fraction-ℤ :
   ( x y : fraction-ℤ) →

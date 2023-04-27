@@ -51,8 +51,7 @@ module _
     (f : type-hom-Precat C z x) →
     (g : type-hom-Precat C z y) →
     (∃! (type-hom-Precat C z p) λ h →
-        (comp-hom-Precat C l h ＝ f)
-        × (comp-hom-Precat C r h ＝ g))
+        (comp-hom-Precat C l h ＝ f) × (comp-hom-Precat C r h ＝ g))
 
   product-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   product-Precat x y =

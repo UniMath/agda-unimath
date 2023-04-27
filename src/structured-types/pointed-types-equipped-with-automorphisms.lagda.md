@@ -87,8 +87,7 @@ hom-Pointed-Type-With-Aut :
 hom-Pointed-Type-With-Aut {l1} {l2} X Y =
   Σ ( type-Pointed-Type-With-Aut X → type-Pointed-Type-With-Aut Y)
     ( λ f →
-      (f (pt-Pointed-Type-With-Aut X) ＝ pt-Pointed-Type-With-Aut Y)
-      ×
+      (f (pt-Pointed-Type-With-Aut X) ＝ pt-Pointed-Type-With-Aut Y) ×
       ( ( f ∘ (map-aut-Pointed-Type-With-Aut X)) ~
         ( (map-aut-Pointed-Type-With-Aut Y) ∘ f)))
 
@@ -127,8 +126,7 @@ htpy-hom-Pointed-Type-With-Aut X Y h1 h2 =
     ( λ H →
       ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
         ( ( H (pt-Pointed-Type-With-Aut X)) ∙
-          ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h2)))
-      ×
+          ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h2))) ×
       ( ( x : type-Pointed-Type-With-Aut X) →
         ( ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
             ( ap (map-aut-Pointed-Type-With-Aut Y) (H x))) ＝
@@ -166,8 +164,7 @@ is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
         ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2) →
         ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
           ( ( H (pt-Pointed-Type-With-Aut X)) ∙
-            ( pr1 str-h2)))
-        ×
+            ( pr1 str-h2))) ×
         ( ( x : type-Pointed-Type-With-Aut X) →
           ( ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
               ( ap (map-aut-Pointed-Type-With-Aut Y) (H x))) ＝
