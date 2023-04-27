@@ -46,7 +46,8 @@ argument has three properties:
 The properties of `Relevance` and `Quantity` are combined in one, called
 `Modality`.
 
-For concrete examples, see [`reflection.definitions`](reflection.definitions.md).
+For concrete examples, see
+[`reflection.definitions`](reflection.definitions.md).
 
 ## Definitions
 

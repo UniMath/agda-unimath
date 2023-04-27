@@ -29,7 +29,8 @@ open import reflection.names
 
 The `Literal` type represents literals in Agda.
 
-For concrete examples, see [`reflection.definitions`](reflection.definitions.md).
+For concrete examples, see
+[`reflection.definitions`](reflection.definitions.md).
 
 ## Definition
 
