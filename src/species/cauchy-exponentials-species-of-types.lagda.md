@@ -95,9 +95,9 @@ module _
                 ( right-summand-binary-coproduct-Decomposition d))))
         ( λ  D →
           ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
-            ( S ( cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b))) ×
-            ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
-              T ( cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b))) ≃
+            S ( cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b)) ×
+          ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
+            T ( cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b))) ≃
       cauchy-product-species-types
         ( cauchy-exponential-species-types S)
         ( cauchy-exponential-species-types T)
@@ -121,15 +121,13 @@ module _
     ( ( equiv-Σ
         ( λ D →
           ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
-            ( S (cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b))) ×
-            ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
-              T (cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b)))
+            S (cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b)) ×
+          ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →
+            T (cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b)))
         ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
         ( λ D →
           equiv-prod
-            ( equiv-Π
-              ( _)
-              ( id-equiv)
+            ( equiv-map-Π
               ( λ a' →
                 equiv-eq
                   ( ap S

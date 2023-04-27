@@ -1,4 +1,4 @@
-# Product of Cauchy series of species of types in a subuniverse
+# Product of Cauchy series of species of types in subuniverses
 
 ```agda
 module species.products-cauchy-series-species-of-types-in-subuniverses where
@@ -105,11 +105,7 @@ module _
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
   (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
-  (C2 :
-    ( A B : UU l1) →
-    is-in-subuniverse P A →
-    is-in-subuniverse P B →
-    is-in-subuniverse P (A + B))
+  (C2 : is-closed-under-coproducts-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)

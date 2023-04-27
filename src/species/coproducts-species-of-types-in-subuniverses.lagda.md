@@ -1,4 +1,4 @@
-# Coproducts of species of types of subuniverse
+# Coproducts of species of types in subuniverses
 
 ```agda
 module species.coproducts-species-of-types-in-subuniverses where
@@ -54,9 +54,9 @@ module _
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
     (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (l4 ⊔ l5))
-        ( coproduct-species-subuniverse' P Q S T X)))
+    is-in-subuniverse
+      ( subuniverse-global-subuniverse Q (l4 ⊔ l5))
+      ( coproduct-species-subuniverse' P Q S T X)))
   where
 
   coproduct-species-subuniverse :
@@ -123,13 +123,14 @@ module _
       ( subuniverse-global-subuniverse Q (l3 ⊔ l4))
       ( coproduct-species-subuniverse P Q C1 S T)
       ( X)
-  map-inv-coproduct-Σ-extension-species-subuniverse (inl x) = pr1 x , inl (pr2 x)
-  map-inv-coproduct-Σ-extension-species-subuniverse (inr x) = pr1 x , inr (pr2 x)
+  map-inv-coproduct-Σ-extension-species-subuniverse (inl x) =
+    pr1 x , inl (pr2 x)
+  map-inv-coproduct-Σ-extension-species-subuniverse (inr x) =
+    pr1 x , inr (pr2 x)
 
   issec-map-inv-coproduct-Σ-extension-species-subuniverse :
     ( map-coproduct-Σ-extension-species-subuniverse ∘
-      map-inv-coproduct-Σ-extension-species-subuniverse) ~
-    id
+      map-inv-coproduct-Σ-extension-species-subuniverse) ~ id
   issec-map-inv-coproduct-Σ-extension-species-subuniverse (inl (p , x)) =
     refl
   issec-map-inv-coproduct-Σ-extension-species-subuniverse (inr (p , x)) =
