@@ -1,7 +1,6 @@
 # Function class factorization operations
 
 ```agda
-
 module orthogonal-factorization-systems.function-class-factorization-operations
   where
 ```

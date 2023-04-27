@@ -12,10 +12,10 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.wide-function-classes
 open import orthogonal-factorization-systems.function-class-factorization-operations
+open import orthogonal-factorization-systems.function-classes
 open import orthogonal-factorization-systems.orthogonal-factorization-systems
+open import orthogonal-factorization-systems.wide-function-classes
 ```
 
 </details>
