@@ -144,12 +144,12 @@ module _
     l4 : Level
     l4 = l2 ⊔ lsuc l3
 
-    this-thing :
+    eq-counting-equivalence-class-R :
       (n : ℕ) →
       Id
         ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
         ( raise (l2 ⊔ lsuc l3) (Fin 2))
-    this-thing n =
+    eq-counting-equivalence-class-R n =
       eq-equiv
         ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
         ( raise l4 (Fin 2))
@@ -268,7 +268,9 @@ module _
   pr2 (quotient-delooping-sign 0) = refl
   pr2 (quotient-delooping-sign 1) = refl
   pr2 (quotient-delooping-sign (succ-ℕ (succ-ℕ n))) =
-    eq-pair-Σ (this-thing n) (eq-is-prop is-prop-type-trunc-Prop)
+    eq-pair-Σ
+      ( eq-counting-equivalence-class-R n)
+      ( eq-is-prop is-prop-type-trunc-Prop)
 
   map-quotient-delooping-sign-loop :
     ( n : ℕ)
@@ -1113,7 +1115,7 @@ module _
                       ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))))
                   ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))) ∙
                 ( ap
-                  ( _∙ this-thing n)
+                  ( _∙ eq-counting-equivalence-class-R n)
                   ( inv
                     ( comp-eq-equiv
                       ( raise l4 (Fin 2))
@@ -1149,7 +1151,7 @@ module _
                             inv-equiv (that-thing n)))) ∙
                       ( ap
                         ( λ e →
-                          inv (this-thing n) ∙
+                          inv (eq-counting-equivalence-class-R n) ∙
                             ( map-equiv e
                               ( inv
                                 ( ap
@@ -1158,22 +1160,22 @@ module _
                                     ( eq-is-prop is-prop-type-trunc-Prop))))))
                         ( left-inverse-law-equiv equiv-univalence)))))) ∙
               ( distributive-inv-concat
-                ( inv (this-thing n) ∙
+                ( inv (eq-counting-equivalence-class-R n) ∙
                   ( inv
                     ( ap
                       ( equivalence-class ∘ R (n +ℕ 2))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))
-                ( this-thing n) ∙
+                ( eq-counting-equivalence-class-R n) ∙
                 ( ap
-                  ( inv (this-thing n) ∙_)
+                  ( inv (eq-counting-equivalence-class-R n) ∙_)
                   ( distributive-inv-concat
-                    ( inv (this-thing n))
+                    ( inv (eq-counting-equivalence-class-R n))
                     ( inv
                       ( ap
                         ( equivalence-class ∘ R (n +ℕ 2))
                         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))) ∙
                     ( ap
-                      ( _∙ inv (inv (this-thing n)))
+                      ( _∙ inv (inv (eq-counting-equivalence-class-R n)))
                       ( inv-inv
                         ( ap
                           ( equivalence-class ∘ R (n +ℕ 2))
@@ -1184,14 +1186,14 @@ module _
                           ( equivalence-class ∘ R (n +ℕ 2))
                           ( eq-pair-Σ p
                             ( eq-is-prop is-prop-type-trunc-Prop)) ∙_)
-                        ( inv-inv (this-thing n)))))))) ∙
+                        ( inv-inv (eq-counting-equivalence-class-R n)))))))) ∙
             ( ( ap
               ( eq-pair-Σ
-                ( inv (this-thing n) ∙
+                ( inv (eq-counting-equivalence-class-R n) ∙
                   ( ap
                     ( equivalence-class ∘ R (n +ℕ 2))
                     ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
-                    ( this-thing n))))
+                    ( eq-counting-equivalence-class-R n))))
               ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
               ( inv
                 ( comp-eq-pair-Σ
@@ -1201,16 +1203,16 @@ module _
                     ( Fin-UU-Fin l1 (n +ℕ 2))
                     ( star))
                   ( pr2 (Fin-UU-Fin l4 2))
-                  ( inv (this-thing n))
+                  ( inv (eq-counting-equivalence-class-R n))
                   ( ap
                     ( equivalence-class ∘ R (n +ℕ 2))
                     ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
-                    ( this-thing n))
+                    ( eq-counting-equivalence-class-R n))
                   ( eq-is-prop is-prop-type-trunc-Prop)
                   ( _)) ∙
                 ( ap
                   ( eq-pair-Σ
-                    ( inv (this-thing n))
+                    ( inv (eq-counting-equivalence-class-R n))
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
                   ( inv
                     ( comp-eq-pair-Σ
@@ -1226,7 +1228,7 @@ module _
                       ( ap
                         ( equivalence-class ∘ R (n +ℕ 2))
                         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
-                      ( this-thing n)
+                      ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop)
                       ( eq-is-prop is-prop-type-trunc-Prop)) ∙
                     ( ap
@@ -1275,10 +1277,10 @@ module _
                       ( map-quotient-delooping-sign (n +ℕ 2))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
                       ( eq-pair-Σ
-                        ( this-thing n)
+                        ( eq-counting-equivalence-class-R n)
                         ( eq-is-prop is-prop-type-trunc-Prop))))
                 ( ap
-                  ( eq-pair-Σ (inv (this-thing n)))
+                  ( eq-pair-Σ (inv (eq-counting-equivalence-class-R n)))
                   ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
                   ( inv
                     ( inv-eq-pair-Σ
@@ -1287,12 +1289,12 @@ module _
                         ( Fin-UU-Fin l1 (n +ℕ 2))
                         ( star))
                       ( pr2 (Fin-UU-Fin l4 2))
-                      ( this-thing n)
+                      ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
                 ( inv
                   ( eq-tr-type-Ω
                     ( eq-pair-Σ
-                      ( this-thing n)
+                      ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop))
                     ( ap (map-quotient-delooping-sign (n +ℕ 2))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))))))
