@@ -381,7 +381,7 @@ comp-succ-based-strong-ind-ℕ k P p0 pS n N N' =
       ( pS n N)
       ( eq-htpy
         ( λ m →
-        eq-htpy
+          eq-htpy
           ( eq-htpy ∘
             eq-inductive-step-comp-succ-based-strong-ind-ℕ
               k P p0 pS n N m)))))
