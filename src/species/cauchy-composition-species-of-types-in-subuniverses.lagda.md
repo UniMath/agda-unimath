@@ -41,7 +41,7 @@ open import species.unit-cauchy-composition-species-of-types-in-subuniverses
 ## Idea
 
 A species `S : type-subuniverse P → type-subuniverse Q` induces its
-[Cauchy series](species.cauchy-series-species-of-types-in-subuniverses)
+[Cauchy series](species.cauchy-series-species-of-types-in-subuniverses.md)
 
 ```md
   X ↦ Σ (A : type-subuniverse P), (S A) × (A → X)
