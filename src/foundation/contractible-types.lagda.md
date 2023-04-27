@@ -147,7 +147,9 @@ module _
 ### Contractibility of Σ-types where the dependent type is a proposition
 
 ```agda
-module _ {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) where
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
+  where
 
   is-contr-Σ-is-prop :
     ((x : A) → is-prop (B x)) → ((x : A) → B x → a ＝ x) → is-contr (Σ A B)

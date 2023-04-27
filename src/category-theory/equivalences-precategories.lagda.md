@@ -29,9 +29,11 @@ A functor `F : C → D` is an equivalence of categories if there is a functor
 ## Definition
 
 ```agda
-module _ {l1 l2 l3 l4}
+module _
+  {l1 l2 l3 l4 : Level}
   (C : Precat l1 l2)
-  (D : Precat l3 l4) where
+  (D : Precat l3 l4)
+  where
 
   is-equiv-functor-Precat : functor-Precat C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-functor-Precat F =

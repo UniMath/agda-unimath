@@ -239,7 +239,8 @@ abstract
 ### Any function from a proposition into a set is an embedding
 
 ```agda
-module _ {l1 l2 : Level} {A : UU l1} {B : UU l2} where
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} where
 
   is-emb-is-prop-is-set : is-prop A → is-set B → {f : A → B} → is-emb f
   is-emb-is-prop-is-set is-prop-A is-set-B {f} =

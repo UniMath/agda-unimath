@@ -24,7 +24,8 @@ of `A` and `B`.
 ## Definition
 
 ```agda
-data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2) where
+data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)
+  where
   inl : A → A + B
   inr : B → A + B
 

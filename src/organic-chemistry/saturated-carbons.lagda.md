@@ -32,7 +32,8 @@ bonds.
 
 ```agda
 module _
-  {l1 l2 : Level} (H : hydrocarbon l1 l2) where
+  {l1 l2 : Level} (H : hydrocarbon l1 l2)
+  where
   is-saturated-carbon-hydrocarbon : vertex-hydrocarbon H → UU (l1 ⊔ l2)
   is-saturated-carbon-hydrocarbon c =
       (c' : vertex-hydrocarbon H)

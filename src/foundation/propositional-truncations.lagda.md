@@ -360,7 +360,8 @@ pr2 inv-distributive-trunc-prod-Prop =
 ### Propositional truncations of coproducts of types with themselves
 
 ```agda
-module _ {l : Level} {A : UU l} where
+module _
+  {l : Level} {A : UU l} where
   map-trunc-Prop-diagonal-coprod : type-trunc-Prop (A + A) → type-trunc-Prop A
   map-trunc-Prop-diagonal-coprod =
     map-universal-property-trunc-Prop

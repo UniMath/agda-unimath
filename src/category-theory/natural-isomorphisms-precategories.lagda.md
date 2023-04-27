@@ -13,6 +13,7 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -28,13 +29,17 @@ an isomorphism, for every object `x` in `C`.
 ## Definition
 
 ```agda
-module _ {l1 l2 l3 l4}
+module _
+  {l1 l2 l3 l4 : Level}
   (C : Precat l1 l2)
   (D : Precat l3 l4)
-  (F G : functor-Precat C D) where
+  (F G : functor-Precat C D)
+  where
 
   is-nat-iso-Precat : nat-trans-Precat C D F G → UU (l1 ⊔ l4)
-  is-nat-iso-Precat γ = (x : obj-Precat C) → is-iso-Precat D (components-nat-trans-Precat C D F G γ x)
+  is-nat-iso-Precat γ =
+    (x : obj-Precat C) →
+    is-iso-Precat D (components-nat-trans-Precat C D F G γ x)
 
   nat-iso-Precat : UU (l1 ⊔ l2 ⊔ l4)
   nat-iso-Precat =
@@ -57,5 +62,5 @@ is-prop-is-nat-iso-Precat :
   (γ : nat-trans-Precat C D F G) →
   is-prop (is-nat-iso-Precat C D F G γ)
 is-prop-is-nat-iso-Precat C D F G γ =
-  is-prop-Π (λ x → is-prop-is-iso-Precat D (components-nat-trans-Precat C D F G γ x))
+  is-prop-Π (is-prop-is-iso-Precat D ∘ components-nat-trans-Precat C D F G γ)
 ```

@@ -37,14 +37,16 @@ each pair of objects in `C`.
 ## Definition
 
 ```agda
-module _ {l1 l2 : Level} (C : Precat l1 l2) where
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  where
 
-  is-product :
+  is-product-Precat :
     (x y p : obj-Precat C) →
     type-hom-Precat C p x →
     type-hom-Precat C p y →
     UU (l1 ⊔ l2)
-  is-product x y p l r =
+  is-product-Precat x y p l r =
     (z : obj-Precat C)
     (f : type-hom-Precat C z x) →
     (g : type-hom-Precat C z y) →
@@ -52,68 +54,81 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
         (comp-hom-Precat C l h ＝ f)
         × (comp-hom-Precat C r h ＝ g))
 
-  product : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
-  product x y =
+  product-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
+  product-Precat x y =
     Σ (obj-Precat C) λ p →
     Σ (type-hom-Precat C p x) λ l →
     Σ (type-hom-Precat C p y) λ r →
-      is-product x y p l r
+      is-product-Precat x y p l r
 
-  has-all-binary-products : UU (l1 ⊔ l2)
-  has-all-binary-products = (x y : obj-Precat C) → product x y
+  has-all-binary-products-Precat : UU (l1 ⊔ l2)
+  has-all-binary-products-Precat = (x y : obj-Precat C) → product-Precat x y
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (t : has-all-binary-products C) where
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  (t : has-all-binary-products-Precat C)
+  where
 
-  object-product : obj-Precat C → obj-Precat C → obj-Precat C
-  object-product x y = pr1 (t x y)
+  object-product-Precat : obj-Precat C → obj-Precat C → obj-Precat C
+  object-product-Precat x y = pr1 (t x y)
 
-  pr1-product : (x y : obj-Precat C) → type-hom-Precat C (object-product x y) x
-  pr1-product x y = pr1 (pr2 (t x y))
+  pr1-product-Precat :
+    (x y : obj-Precat C) → type-hom-Precat C (object-product-Precat x y) x
+  pr1-product-Precat x y = pr1 (pr2 (t x y))
 
-  pr2-product : (x y : obj-Precat C) → type-hom-Precat C (object-product x y) y
-  pr2-product x y = pr1 (pr2 (pr2 (t x y)))
+  pr2-product-Precat :
+    (x y : obj-Precat C) → type-hom-Precat C (object-product-Precat x y) y
+  pr2-product-Precat x y = pr1 (pr2 (pr2 (t x y)))
 
-  module _ (x y z : obj-Precat C)
+  module _
+    (x y z : obj-Precat C)
     (f : type-hom-Precat C z x)
-    (g : type-hom-Precat C z y) where
+    (g : type-hom-Precat C z y)
+    where
 
-    morphism-into-product : type-hom-Precat C z (object-product x y)
-    morphism-into-product = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
+    morphism-into-product-Precat :
+      type-hom-Precat C z (object-product-Precat x y)
+    morphism-into-product-Precat = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
-    morphism-into-product-comm-pr1 :
-      comp-hom-Precat C (pr1-product x y) morphism-into-product ＝ f
-    morphism-into-product-comm-pr1 =
+    morphism-into-product-Precat-comm-pr1 :
+      comp-hom-Precat C
+        ( pr1-product-Precat x y)
+        ( morphism-into-product-Precat) ＝ f
+    morphism-into-product-Precat-comm-pr1 =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    morphism-into-product-comm-pr2 :
-      comp-hom-Precat C (pr2-product x y) morphism-into-product ＝ g
-    morphism-into-product-comm-pr2 =
+    morphism-into-product-Precat-comm-pr2 :
+      comp-hom-Precat C
+        ( pr2-product-Precat x y)
+        ( morphism-into-product-Precat) ＝ g
+    morphism-into-product-Precat-comm-pr2 =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    is-unique-morphism-into-product :
-      (h : type-hom-Precat C z (object-product x y)) →
-      comp-hom-Precat C (pr1-product x y) h ＝ f →
-      comp-hom-Precat C (pr2-product x y) h ＝ g →
-      morphism-into-product ＝ h
-    is-unique-morphism-into-product h comm1 comm2 =
+    is-unique-morphism-into-product-Precat :
+      (h : type-hom-Precat C z (object-product-Precat x y)) →
+      comp-hom-Precat C (pr1-product-Precat x y) h ＝ f →
+      comp-hom-Precat C (pr2-product-Precat x y) h ＝ g →
+      morphism-into-product-Precat ＝ h
+    is-unique-morphism-into-product-Precat h comm1 comm2 =
       ap pr1 ((pr2 (pr2 (pr2 (pr2 (t x y))) z f g)) (h , (comm1 , comm2)))
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
   (x y p : obj-Precat C)
   (l : type-hom-Precat C p x)
-  (r : type-hom-Precat C p y) where
+  (r : type-hom-Precat C p y)
+  where
 
-  is-prop-is-product : is-prop (is-product C x y p l r)
-  is-prop-is-product =
+  is-prop-is-product-Precat : is-prop (is-product-Precat C x y p l r)
+  is-prop-is-product-Precat =
     is-prop-Π (λ z →
       is-prop-Π (λ f →
         is-prop-Π (λ g →
           is-property-is-contr)))
 
-  is-product-Prop : Prop (l1 ⊔ l2)
-  pr1 is-product-Prop = is-product C x y p l r
-  pr2 is-product-Prop = is-prop-is-product
+  is-product-Precat-Prop : Prop (l1 ⊔ l2)
+  pr1 is-product-Precat-Prop = is-product-Precat C x y p l r
+  pr2 is-product-Precat-Prop = is-prop-is-product-Precat
 ```
 
 ## Properties
@@ -125,18 +140,20 @@ and `g : hom x₂ y₂` we can construct a morphism
 `f × g : hom (x₁ × x₂) (y₁ × y₂)`.
 
 ```agda
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (t : has-all-binary-products C)
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  (t : has-all-binary-products-Precat C)
   {x₁ x₂ y₁ y₂ : obj-Precat C}
   (f : type-hom-Precat C x₁ y₁)
-  (g : type-hom-Precat C x₂ y₂) where
+  (g : type-hom-Precat C x₂ y₂)
+  where
 
-  product-of-morphisms :
+  map-product-Precat :
     type-hom-Precat C
-      (object-product C t x₁ x₂)
-      (object-product C t y₁ y₂)
-  product-of-morphisms =
-    morphism-into-product C t _ _ _
-      (comp-hom-Precat C f (pr1-product C t x₁ x₂))
-      (comp-hom-Precat C g (pr2-product C t x₁ x₂))
+      (object-product-Precat C t x₁ x₂)
+      (object-product-Precat C t y₁ y₂)
+  map-product-Precat =
+    morphism-into-product-Precat C t _ _ _
+      (comp-hom-Precat C f (pr1-product-Precat C t x₁ x₂))
+      (comp-hom-Precat C g (pr2-product-Precat C t x₁ x₂))
 ```

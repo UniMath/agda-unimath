@@ -66,7 +66,9 @@ module alternative where
   Directed-Graph' : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
   Directed-Graph' l1 l2 = Σ (UU l1) λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
 
-  module _ {l1 l2 : Level} (G : Directed-Graph' l1 l2) where
+  module _
+    {l1 l2 : Level} (G : Directed-Graph' l1 l2)
+    where
 
     vertex-Directed-Graph' : UU l1
     vertex-Directed-Graph' = pr1 G

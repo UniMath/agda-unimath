@@ -30,13 +30,15 @@ unique `u : hom n x` such that:
 - u ∘ s = f ∘ u.
 
 ```agda
-module _ {l1 l2} (C : Precat l1 l2) ((t , _) : terminal-object C) where
+module _
+  {l1 l2 : Level} (C : Precat l1 l2) ((t , _) : terminal-object-Precat C)
+  where
 
-  is-natural-numbers-object : (n : obj-Precat C)
+  is-natural-numbers-object-Precat : (n : obj-Precat C)
                             → type-hom-Precat C t n
                             → type-hom-Precat C n n
                             → UU (l1 ⊔ l2)
-  is-natural-numbers-object n z s =
+  is-natural-numbers-object-Precat n z s =
     (x : obj-Precat C)
     (q : type-hom-Precat C t x)
     (f : type-hom-Precat C x x) →
@@ -44,45 +46,63 @@ module _ {l1 l2} (C : Precat l1 l2) ((t , _) : terminal-object C) where
        (comp-hom-Precat C u z ＝ q)
      × (comp-hom-Precat C u s ＝ comp-hom-Precat C f u)
 
-  natural-numbers-object : UU (l1 ⊔ l2)
-  natural-numbers-object =
+  natural-numbers-object-Precat : UU (l1 ⊔ l2)
+  natural-numbers-object-Precat =
     Σ (obj-Precat C) λ n →
     Σ (type-hom-Precat C t n) λ z →
     Σ (type-hom-Precat C n n) λ s →
-      is-natural-numbers-object n z s
+      is-natural-numbers-object-Precat n z s
 
-module _ {l1 l2} (C : Precat l1 l2) ((t , p) : terminal-object C)
-  (nno : natural-numbers-object C (t , p)) where
+module _
+  {l1 l2 : Level} (C : Precat l1 l2) ((t , p) : terminal-object-Precat C)
+  (nno : natural-numbers-object-Precat C (t , p))
+  where
 
-  object-natural-numbers-object : obj-Precat C
-  object-natural-numbers-object = pr1 nno
+  object-natural-numbers-object-Precat : obj-Precat C
+  object-natural-numbers-object-Precat = pr1 nno
 
-  zero-natural-numbers-object : type-hom-Precat C t object-natural-numbers-object
-  zero-natural-numbers-object = pr1 (pr2 nno)
+  zero-natural-numbers-object-Precat :
+    type-hom-Precat C t object-natural-numbers-object-Precat
+  zero-natural-numbers-object-Precat = pr1 (pr2 nno)
 
-  succ-natural-numbers-object : type-hom-Precat C object-natural-numbers-object object-natural-numbers-object
-  succ-natural-numbers-object = pr1 (pr2 (pr2 nno))
+  succ-natural-numbers-object-Precat :
+    type-hom-Precat C
+      ( object-natural-numbers-object-Precat)
+      ( object-natural-numbers-object-Precat)
+  succ-natural-numbers-object-Precat = pr1 (pr2 (pr2 nno))
 
-  module _ (x : obj-Precat C) (q : type-hom-Precat C t x)
-    (f : type-hom-Precat C x x) where
+  module _
+    (x : obj-Precat C)
+    (q : type-hom-Precat C t x)
+    (f : type-hom-Precat C x x)
+    where
 
-    morphism-natural-numbers-object : type-hom-Precat C object-natural-numbers-object x
-    morphism-natural-numbers-object = pr1 (pr1 (pr2 (pr2 (pr2 nno)) x q f))
+    morphism-natural-numbers-object-Precat :
+      type-hom-Precat C object-natural-numbers-object-Precat x
+    morphism-natural-numbers-object-Precat =
+      pr1 (pr1 (pr2 (pr2 (pr2 nno)) x q f))
 
-    morphism-natural-numbers-object-zero-comm :
-      comp-hom-Precat C morphism-natural-numbers-object zero-natural-numbers-object ＝ q
-    morphism-natural-numbers-object-zero-comm = pr1 (pr2 (pr1 (pr2 (pr2 (pr2 nno)) x q f)))
+    morphism-natural-numbers-object-Precat-zero-comm :
+      comp-hom-Precat C morphism-natural-numbers-object-Precat
+        ( zero-natural-numbers-object-Precat) ＝ q
+    morphism-natural-numbers-object-Precat-zero-comm =
+      pr1 (pr2 (pr1 (pr2 (pr2 (pr2 nno)) x q f)))
 
-    morphism-natural-numbers-object-succ-comm :
-      comp-hom-Precat C morphism-natural-numbers-object succ-natural-numbers-object ＝
-      comp-hom-Precat C f morphism-natural-numbers-object
-    morphism-natural-numbers-object-succ-comm = pr2 (pr2 (pr1 (pr2 (pr2 (pr2 nno)) x q f)))
+    morphism-natural-numbers-object-Precat-succ-comm :
+      comp-hom-Precat
+        ( C)
+        ( morphism-natural-numbers-object-Precat)
+        ( succ-natural-numbers-object-Precat) ＝
+      comp-hom-Precat (C) (f) (morphism-natural-numbers-object-Precat)
+    morphism-natural-numbers-object-Precat-succ-comm =
+      pr2 (pr2 (pr1 (pr2 (pr2 (pr2 nno)) x q f)))
 
-    is-unique-morphism-natural-numbers-object :
-      (u' : type-hom-Precat C object-natural-numbers-object x) →
-      comp-hom-Precat C u' zero-natural-numbers-object ＝ q →
-      comp-hom-Precat C u' succ-natural-numbers-object ＝ comp-hom-Precat C f u' →
-      morphism-natural-numbers-object ＝ u'
-    is-unique-morphism-natural-numbers-object u' α β =
+    is-unique-morphism-natural-numbers-object-Precat :
+      (u' : type-hom-Precat C object-natural-numbers-object-Precat x) →
+      comp-hom-Precat C u' zero-natural-numbers-object-Precat ＝ q →
+      comp-hom-Precat C u' succ-natural-numbers-object-Precat ＝
+      comp-hom-Precat C f u' →
+      morphism-natural-numbers-object-Precat ＝ u'
+    is-unique-morphism-natural-numbers-object-Precat u' α β =
       ap pr1 (pr2 (pr2 (pr2 (pr2 nno)) x q f) (u' , α , β))
 ```
