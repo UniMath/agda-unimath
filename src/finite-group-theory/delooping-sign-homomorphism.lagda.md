@@ -108,41 +108,36 @@ module _
   { l1 l2 l3 : Level}
   ( D : (n : ℕ) (X : UU-Fin l1 n) → UU l2)
   ( R : (n : ℕ) (X : UU-Fin l1 n) → Eq-Rel l3 (D n X))
-  ( is-decidable-R : (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
-      (a b : D n X) → is-decidable (sim-Eq-Rel (R n X) a b))
-  ( equiv-D/R-fin-2-equiv : (n : ℕ) (X : UU-Fin l1 n) →
+  ( is-decidable-R :
+    (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
+    (a b : D n X) → is-decidable (sim-Eq-Rel (R n X) a b))
+  ( equiv-D/R-fin-2-equiv :
+    (n : ℕ) (X : UU-Fin l1 n) →
     leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
     Fin 2 ≃ equivalence-class (R n X))
   ( quotient-aut-succ-succ-Fin : (n : ℕ) →
-    ( raise-Fin l1 (n +ℕ 2) ≃
-      raise-Fin l1 (n +ℕ 2)) →
+    ( raise-Fin l1 (n +ℕ 2) ≃ raise-Fin l1 (n +ℕ 2)) →
     D ( n +ℕ 2)
       ( raise-Fin l1 (n +ℕ 2),
         unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
   ( not-R-transposition-fin-succ-succ : (n : ℕ) →
-    ( Y : 2-Element-Decidable-Subtype l1
-      ( raise-Fin l1 (n +ℕ 2))) →
+    ( Y : 2-Element-Decidable-Subtype l1 (raise-Fin l1 (n +ℕ 2))) →
     ¬ ( sim-Eq-Rel
-      ( R (n +ℕ 2)
-        ( pair
-          ( raise-Fin l1 (n +ℕ 2))
-          ( unit-trunc-Prop
-            ( compute-raise-Fin l1 (n +ℕ 2)))))
-        ( quotient-aut-succ-succ-Fin n (transposition Y))
-        ( map-equiv
-          ( univalent-action-equiv
-            ( mere-equiv-Prop (Fin (n +ℕ 2)))
-            ( D (n +ℕ 2))
-            ( pair
-              ( raise l1 (Fin (n +ℕ 2)))
-              ( unit-trunc-Prop
-                ( compute-raise-Fin l1 (n +ℕ 2))))
-            ( pair
-              ( raise l1 (Fin (n +ℕ 2)))
-              ( unit-trunc-Prop
-                ( compute-raise-Fin l1 (n +ℕ 2))))
-            ( transposition Y))
-          ( quotient-aut-succ-succ-Fin n (transposition Y)))))
+      ( R
+        ( n +ℕ 2)
+        ( raise-Fin l1 (n +ℕ 2) ,
+          unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
+      ( quotient-aut-succ-succ-Fin n (transposition Y))
+      ( map-equiv
+        ( univalent-action-equiv
+          ( mere-equiv-Prop (Fin (n +ℕ 2)))
+          ( D (n +ℕ 2))
+          ( raise l1 (Fin (n +ℕ 2)) ,
+            unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
+          ( raise l1 (Fin (n +ℕ 2)) ,
+            unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
+          ( transposition Y))
+        ( quotient-aut-succ-succ-Fin n (transposition Y)))))
   where
 
   private
@@ -194,7 +189,7 @@ module _
           ( a a' : D n X) →
           ( sim-Eq-Rel (R n X) a a' ↔
             sim-Eq-Rel (R n Y) (map-equiv f a) (map-equiv f a')))
-        ( λ a a' → pair id id)
+        ( λ a a' → id , id)
         ( X')
 
     raise-UU-Fin-Fin : (n : ℕ) → UU-Fin l1 n
@@ -283,8 +278,8 @@ module _
     ( eY : mere-equiv (Fin (n +ℕ 2)) Y) →
     Id X Y →
     Id
-      ( equivalence-class (R (n +ℕ 2) (pair X eX)))
-      ( equivalence-class (R (n +ℕ 2) (pair Y eY)))
+      ( equivalence-class (R (n +ℕ 2) (X , eX)))
+      ( equivalence-class (R (n +ℕ 2) (Y , eY)))
   map-quotient-delooping-sign-loop n X Y eX eY p =
     ap
       ( equivalence-class ∘ R (n +ℕ 2))
@@ -345,18 +340,15 @@ module _
         ( map-equiv
           ( invertible-action-D-equiv
             ( n +ℕ 2)
-            ( pair Y eY)
-            ( pair X eX)
-            ( map-hom-symmetric-group-loop-group-Set
-              ( pair X sX)
-              ( pair Y sY)
-              ( p))))
-        ( class (R (n +ℕ 2) (pair Y eY)))
-        ( class (R (n +ℕ 2) (pair X eX)))
+            ( Y , eY)
+            ( X , eX)
+            ( map-hom-symmetric-group-loop-group-Set (X , sX) (Y , sY) (p))))
+        ( class (R (n +ℕ 2) (Y , eY)))
+        ( class (R (n +ℕ 2) (X , eX)))
         ( map-equiv
           ( map-hom-symmetric-group-loop-group-Set
-            ( equivalence-class-Set (R (n +ℕ 2) (pair X eX)))
-            ( equivalence-class-Set (R (n +ℕ 2) (pair Y eY)))
+            ( equivalence-class-Set (R (n +ℕ 2) (X , eX)))
+            ( equivalence-class-Set (R (n +ℕ 2) (Y , eY)))
             ( map-quotient-delooping-sign-loop n X Y eX eY p)))
     coherence-square-map-quotient-delooping-sign-loop-Set
       n X .X eX .eX refl refl sX sY x =
@@ -364,10 +356,10 @@ module _
         ( λ w →
           map-equiv
             ( map-hom-symmetric-group-loop-group-Set
-              ( equivalence-class-Set (R (n +ℕ 2) (pair X eX)))
-              ( equivalence-class-Set (R (n +ℕ 2) (pair X eX)))
+              ( equivalence-class-Set (R (n +ℕ 2) (X , eX)))
+              ( equivalence-class-Set (R (n +ℕ 2) (X , eX)))
               ( w))
-            ( class (R (n +ℕ 2) (pair X eX)) (x)))
+            ( class (R (n +ℕ 2) (X , eX)) (x)))
         ( ap
           ( λ w → ap (equivalence-class ∘ R (n +ℕ 2)) (eq-pair-Σ refl w))
           { x = eq-is-prop is-prop-type-trunc-Prop}
@@ -377,10 +369,10 @@ module _
                 ( tr (mere-equiv (Fin (n +ℕ 2))) refl eX)
                 ( eX)))))) ∙
       ( ap
-        ( class (R (n +ℕ 2) (pair X (tr (mere-equiv (Fin (n +ℕ 2))) refl eX))))
+        ( class (R (n +ℕ 2) (X , tr (mere-equiv (Fin (n +ℕ 2))) refl eX)))
         ( inv
           ( htpy-eq-equiv
-            ( preserves-id-equiv-invertible-action-D-equiv (n +ℕ 2) (pair X eX))
+            ( preserves-id-equiv-invertible-action-D-equiv (n +ℕ 2) (X , eX))
             ( x))))
 
   coherence-square-map-quotient-delooping-sign-loop-Fin :
@@ -470,8 +462,7 @@ module _
     ( h : type-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))) →
     ( is-decidable
       ( sim-Eq-Rel
-        ( R (n +ℕ 2)
-          ( raise-UU-Fin-Fin (n +ℕ 2)))
+        ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
         ( quotient-aut-succ-succ-Fin n h)
         ( map-equiv
           ( invertible-action-D-equiv
@@ -480,18 +471,15 @@ module _
             ( raise-UU-Fin-Fin (n +ℕ 2))
             ( h))
           ( quotient-aut-succ-succ-Fin n h)))) →
-    type-Group
-      ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
+    type-Group (symmetric-Group (quotient-set-Fin (n +ℕ 2)))
   cases-map-quotient-aut-Fin n h (inl D) = id-equiv
   cases-map-quotient-aut-Fin n h (inr ND) =
-     that-thing n ∘e
-      ( equiv-succ-Fin 2 ∘e
-        ( inv-equiv (that-thing n)))
+     that-thing n ∘e (equiv-succ-Fin 2 ∘e (inv-equiv (that-thing n)))
 
-  map-quotient-aut-Fin : (n : ℕ) →
+  map-quotient-aut-Fin :
+    (n : ℕ) →
     type-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2))) →
-    type-Group
-      ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
+    type-Group (symmetric-Group (quotient-set-Fin (n +ℕ 2)))
   map-quotient-aut-Fin n h =
     cases-map-quotient-aut-Fin n h
       ( is-decidable-R
@@ -546,9 +534,8 @@ module _
     this-third-thing :
       (n : ℕ) (p : type-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))) →
       D ( n +ℕ 2)
-        ( pair
-          ( raise-Fin l1 (n +ℕ 2))
-          ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
+        ( raise-Fin l1 (n +ℕ 2) ,
+          unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
     this-third-thing n p =
       quotient-aut-succ-succ-Fin n
         ( map-hom-symmetric-group-loop-group-Set
@@ -717,7 +704,7 @@ module _
             ( p))))
 
   eq-quotient-delooping-sign-loop-sign-homomorphism :
-    {l4 : Level} (n : ℕ) →
+    (n : ℕ) →
     Id
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -746,7 +733,7 @@ module _
               ( that-thing n)))
           ( sign-homomorphism
             ( n +ℕ 2)
-            ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
+            ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (n +ℕ 2))
           ( raise-Fin-Set l1 (n +ℕ 2))
@@ -760,17 +747,16 @@ module _
           ( tr
             ( λ s →
               is-generating-subset-Group
-                ( symmetric-Group (pair (raise l1 (Fin (n +ℕ 2))) s))
+                ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s))
                 ( is-transposition-permutation-Prop))
             ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
             ( is-generated-transposition-symmetric-Fin-Level
               ( n +ℕ 2)
-              ( pair
-                ( raise l1 (Fin (n +ℕ 2)))
-                ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))))
+              ( raise l1 (Fin (n +ℕ 2)) ,
+                unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))))
       ( eq-htpy
-        ( λ (pair f s) →
+        ( λ (f , s) →
           apply-universal-property-trunc-Prop s
             ( Id-Prop (set-Group (loop-group-Set (quotient-set-Fin (n +ℕ 2))))
               ( map-emb
@@ -780,14 +766,13 @@ module _
                   ( tr
                     ( λ s₁ →
                       is-generating-subset-Group
-                        ( symmetric-Group (pair (raise l1 (Fin (n +ℕ 2))) s₁))
+                        ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                         ( is-transposition-permutation-Prop))
                     ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
                     ( is-generated-transposition-symmetric-Fin-Level
                       ( n +ℕ 2)
-                      ( pair
-                        ( raise l1 (Fin (n +ℕ 2)))
-                        ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))))
+                      ( raise l1 (Fin (n +ℕ 2)) ,
+                        unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
                   ( loop-group-Set (quotient-set-Fin (n +ℕ 2))))
                 ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -796,7 +781,7 @@ module _
                   ( quotient-delooping-sign-loop n)
                   ( hom-inv-symmetric-group-loop-group-Set
                     ( raise-Fin-Set l1 (n +ℕ 2))))
-                ( pair f s))
+                ( f , s))
               ( map-emb
                 ( restriction-generating-subset-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -804,14 +789,13 @@ module _
                   ( tr
                     ( λ s₁ →
                       is-generating-subset-Group
-                        ( symmetric-Group (pair (raise l1 (Fin (n +ℕ 2))) s₁))
+                        ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                         ( is-transposition-permutation-Prop))
                     ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
                     ( is-generated-transposition-symmetric-Fin-Level
                       ( n +ℕ 2)
-                      ( pair
-                        ( raise l1 (Fin (n +ℕ 2)))
-                        ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))))
+                      ( raise l1 (Fin (n +ℕ 2)) ,
+                        unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
                     ( loop-group-Set (quotient-set-Fin (n +ℕ 2))))
                   ( comp-hom-Group
                     ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -832,27 +816,26 @@ module _
                           ( quotient-set-Fin (n +ℕ 2))
                           ( that-thing n)))
                       ( sign-homomorphism (n +ℕ 2)
-                        ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
+                        ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
                     ( hom-inv-symmetric-group-equiv-Set
                       ( Fin-Set (n +ℕ 2))
                       ( raise-Fin-Set l1 (n +ℕ 2))
                       ( compute-raise-Fin l1 (n +ℕ 2))))
-                ( pair f s)))
-            λ (pair Y q) →
+                ( f , s)))
+            λ (Y , q) →
             ( eq-map-restriction-generating-subset-Group
               ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
               ( is-transposition-permutation-Prop)
               ( tr
                 ( λ s₁ →
                   is-generating-subset-Group
-                    ( symmetric-Group (pair (raise l1 (Fin (n +ℕ 2))) s₁))
+                    ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                     ( is-transposition-permutation-Prop))
                 ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
                 ( is-generated-transposition-symmetric-Fin-Level
                   ( n +ℕ 2)
-                  ( pair
-                    ( raise l1 (Fin (n +ℕ 2)))
-                    ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))))
+                  ( raise l1 (Fin (n +ℕ 2)) ,
+                    unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
               ( comp-hom-Group
                 ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -861,7 +844,7 @@ module _
                 ( quotient-delooping-sign-loop n)
                 ( hom-inv-symmetric-group-loop-group-Set
                   ( raise-Fin-Set l1 (n +ℕ 2))))
-              ( pair f s)) ∙
+              ( f , s)) ∙
             ( htpy-eq-hom-Group
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -925,8 +908,8 @@ module _
                     ( ap inv-equiv
                       ( ap
                         ( map-hom-symmetric-group-loop-group-Set
-                            ( raise-Fin-Set l1 (n +ℕ 2))
-                            ( raise-Fin-Set l1 (n +ℕ 2)))
+                          ( raise-Fin-Set l1 (n +ℕ 2))
+                          ( raise-Fin-Set l1 (n +ℕ 2)))
                         ( ap
                           ( eq-equiv
                             ( raise l1 (Fin (n +ℕ 2)))
@@ -973,9 +956,7 @@ module _
                           ( inv
                             ( eq-sign-homomorphism-transposition
                               ( n +ℕ 2)
-                              ( pair
-                                ( Fin (n +ℕ 2))
-                                ( unit-trunc-Prop id-equiv))
+                              ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)
                               ( map-equiv
                                 ( equiv-universes-2-Element-Decidable-Subtype
                                   ( Fin (n +ℕ 2))
@@ -990,15 +971,11 @@ module _
                               ( map-hom-Group
                                 ( symmetric-Group
                                   ( set-UU-Fin (n +ℕ 2)
-                                    ( pair
-                                      ( Fin (n +ℕ 2))
-                                      ( unit-trunc-Prop id-equiv))))
+                                    ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
                                 ( symmetric-Group (Fin-Set 2))
                                 ( sign-homomorphism
                                   ( n +ℕ 2)
-                                  ( pair
-                                    ( Fin (n +ℕ 2))
-                                    ( unit-trunc-Prop id-equiv))))
+                                  ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
                               ( inv
                                 ( eq-equiv-universes-transposition
                                   ( Fin (n +ℕ 2))
@@ -1048,10 +1025,8 @@ module _
                             ( is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
                           ( is-generated-transposition-symmetric-Fin-Level
                             ( n +ℕ 2)
-                            ( pair
-                              ( raise l1 (Fin (n +ℕ 2)))
-                              ( unit-trunc-Prop
-                                ( compute-raise-Fin l1 (n +ℕ 2))))))
+                            ( raise l1 (Fin (n +ℕ 2)) ,
+                              unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
                         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                         ( comp-hom-Group
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -1073,16 +1048,15 @@ module _
                                 ( that-thing n)))
                             ( sign-homomorphism
                               ( n +ℕ 2)
-                              ( pair
-                                ( Fin (n +ℕ 2))
-                                ( unit-trunc-Prop id-equiv))))
+                              ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
                           ( hom-inv-symmetric-group-equiv-Set
                             ( Fin-Set (n +ℕ 2))
                             ( raise-Fin-Set l1 (n +ℕ 2))
                             ( compute-raise-Fin l1 (n +ℕ 2))))
-                        ( pair f s)))))))))
+                        ( f , s)))))))))
 
-  eq-quotient-delooping-loop-UU-Fin-Group : (n : ℕ) →
+  eq-quotient-delooping-loop-UU-Fin-Group :
+    (n : ℕ) →
     Id
       ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
@@ -1228,8 +1202,7 @@ module _
                     ( Fin-UU-Fin l1 (n +ℕ 2))
                     ( star))
                   ( pr2 (Fin-UU-Fin l4 2))
-                  ( inv
-                    ( this-thing n))
+                  ( inv (this-thing n))
                   ( ap
                     ( equivalence-class ∘ R (n +ℕ 2))
                     ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
@@ -1238,8 +1211,7 @@ module _
                   ( _)) ∙
                 ( ap
                   ( eq-pair-Σ
-                    ( inv
-                      ( this-thing n))
+                    ( inv (this-thing n))
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
                   ( inv
                     ( comp-eq-pair-Σ
@@ -1412,7 +1384,7 @@ module _
           ( symmetric-abstract-UU-fin-group-quotient-hom n)
           ( sign-homomorphism
             ( n +ℕ 2)
-            ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
+            ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (n +ℕ 2))
           ( raise-Fin-Set l1 (n +ℕ 2))
@@ -1469,7 +1441,7 @@ module _
                   ( quotient-set-Fin (n +ℕ 2))
                   ( raise-Set l4 (Fin-Set 2))
                   ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))))))
-        ( eq-quotient-delooping-sign-loop-sign-homomorphism {l4 = l4} n) ∙
+        ( eq-quotient-delooping-sign-loop-sign-homomorphism n) ∙
         ( eq-pair-Σ
           ( refl)
           ( eq-is-prop
@@ -1517,8 +1489,9 @@ module _
                         ( Fin-Set 2)
                         ( quotient-set-Fin (n +ℕ 2))
                         ( that-thing n)))
-                    ( sign-homomorphism (n +ℕ 2)
-                      ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
+                    ( sign-homomorphism
+                      ( n +ℕ 2)
+                      ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
                   ( hom-inv-symmetric-group-equiv-Set (Fin-Set (n +ℕ 2))
                     ( raise-Fin-Set l1 (n +ℕ 2))
                     ( compute-raise-Fin l1 (n +ℕ 2))))))))))
@@ -1534,27 +1507,23 @@ module _
     (n : ℕ) →
     leq-ℕ 2 n →
     Fin 2 ≃
-    type-UU-Fin 2
-      ( Q n (raise l1 (Fin n) , unit-trunc-Prop (compute-raise-Fin l1 n))))
+    ( type-UU-Fin 2
+      ( Q n (raise l1 (Fin n) , unit-trunc-Prop (compute-raise-Fin l1 n)))))
   ( Q-transposition-swap : (n : ℕ) →
-    ( Y : 2-Element-Decidable-Subtype l1
-      ( raise-Fin l1 (n +ℕ 2))) →
+    ( Y : 2-Element-Decidable-Subtype l1 (raise-Fin l1 (n +ℕ 2))) →
     ( x : type-UU-Fin 2
-      ( Q
-        ( n +ℕ 2)
-        ( raise l1 (Fin (n +ℕ 2)) ,
-          unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))) →
+      ( Q ( n +ℕ 2)
+          ( raise l1 (Fin (n +ℕ 2)) ,
+            unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))) →
     ¬ ( x ＝
         ( map-equiv
           ( univalent-action-equiv
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( type-UU-Fin 2 ∘ Q (n +ℕ 2))
-            ( pair
-              ( raise l1 (Fin (n +ℕ 2)))
-              ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
-            ( pair
-              ( raise l1 (Fin (n +ℕ 2)))
-              ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
+            ( raise l1 (Fin (n +ℕ 2)) ,
+              unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
+            ( raise l1 (Fin (n +ℕ 2)) ,
+              unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
             ( transposition Y))
           ( x))))
   where
@@ -1577,8 +1546,8 @@ module _
           ( Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
 
     equiv-fin-2-equivalence-class :
-      (n : ℕ) (X : UU-Fin l1 n) →
-      leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
+      (n : ℕ) (X : UU-Fin l1 n) → leq-ℕ 2 n →
+      Fin n ≃ type-UU-Fin n X →
       Fin 2 ≃ equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
     equiv-fin-2-equivalence-class n X H h =
       tr
@@ -1591,8 +1560,8 @@ module _
           ( raise l1 (Fin n) ,
             unit-trunc-Prop (compute-raise-Fin l1 n)) ∘e equiv-Q-fin-fin-2 n H)
 
-  delooping-sign : (n : ℕ) →
-    hom-Concrete-Group (UU-Fin-Group l1 n) (UU-Fin-Group (lsuc l2) 2)
+  delooping-sign :
+    (n : ℕ) → hom-Concrete-Group (UU-Fin-Group l1 n) (UU-Fin-Group (lsuc l2) 2)
   delooping-sign =
     quotient-delooping-sign
       ( λ n X → type-UU-Fin 2 (Q n X))
@@ -1643,7 +1612,7 @@ module _
             ( n))
           ( sign-homomorphism
             ( n +ℕ 2)
-            ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
+            ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (n +ℕ 2))
           ( raise-Fin-Set l1 (n +ℕ 2))
@@ -1656,7 +1625,7 @@ module _
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
       ( λ n Y →
-          Q-transposition-swap n Y
+        Q-transposition-swap n Y
           ( pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1)))
 ```
 

@@ -62,24 +62,23 @@ module _
     ¬ ( sim-Eq-Rel
       ( even-difference-orientation-Complete-Undirected-Graph
         ( n +ℕ 2)
-        ( pair
-          ( raise-Fin l (n +ℕ 2))
-          ( unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))))
-        ( orientation-aut-count
-          ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
-          ( star)
+        ( raise-Fin l (n +ℕ 2) ,
+          unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2))))
+      ( orientation-aut-count
+        ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
+        ( star)
+        ( transposition Y))
+      ( map-equiv
+        ( univalent-action-equiv
+          ( mere-equiv-Prop (Fin (n +ℕ 2)))
+          ( orientation-Complete-Undirected-Graph (n +ℕ 2))
+          ( raise l (Fin (n +ℕ 2)) ,
+            unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
+          ( raise l (Fin (n +ℕ 2)) ,
+            unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
           ( transposition Y))
-        ( map-equiv
-          ( univalent-action-equiv
-            ( mere-equiv-Prop (Fin (n +ℕ 2)))
-            ( orientation-Complete-Undirected-Graph (n +ℕ 2))
-            ( raise l (Fin (n +ℕ 2)) ,
-              unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
-            ( raise l (Fin (n +ℕ 2)) ,
-              unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
-            ( transposition Y))
-          ( orientation-aut-count
-            (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) star (transposition Y))))
+        ( orientation-aut-count
+          (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) star (transposition Y))))
   not-even-difference-univalent-action-equiv n =
     tr
       ( λ f →
@@ -87,10 +86,9 @@ module _
           ( raise-Fin l (n +ℕ 2))) →
             ¬ ( sim-Eq-Rel
               ( even-difference-orientation-Complete-Undirected-Graph
-                (n +ℕ 2)
-                ( pair
-                  ( raise-Fin l (n +ℕ 2))
-                  ( unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))))
+                ( n +ℕ 2)
+                ( raise-Fin l (n +ℕ 2) ,
+                  unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2))))
               ( orientation-aut-count
                   ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
                   ( star)
@@ -176,13 +174,13 @@ module _
             ( equiv-fin-2-quotient-sign-equiv-Fin)
             ( λ n →
               orientation-aut-count
-                ( pair (n +ℕ 2) (compute-raise l (Fin (n +ℕ 2))))
+                ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
                 ( star))
             ( not-even-difference-univalent-action-equiv)
             ( n))
           ( sign-homomorphism
             ( n +ℕ 2)
-            ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
+            ( Fin (n +ℕ 2) , unit-trunc-Prop id-equiv)))
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (n +ℕ 2))
           ( raise-Fin-Set l (n +ℕ 2))
