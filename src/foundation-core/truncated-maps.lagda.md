@@ -84,6 +84,17 @@ is-trunc-map-is-equiv k H =
   is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
 ```
 
+### Any (-1)-truncated map is (k+1)-truncated
+
+```agda
+is-trunc-map-neg-one-trunc-map :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-trunc-map neg-one-𝕋 f → is-trunc-map (succ-𝕋 k) f
+is-trunc-map-neg-one-trunc-map neg-two-𝕋 p = p
+is-trunc-map-neg-one-trunc-map (succ-𝕋 k) p =
+  is-trunc-map-succ-is-trunc-map (succ-𝕋 k) (is-trunc-map-neg-one-trunc-map k p)
+```
+
 ### A map is (k+1)-truncated if and only if its action on identifications is k-truncated
 
 ```agda
