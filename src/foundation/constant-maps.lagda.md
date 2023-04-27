@@ -57,6 +57,7 @@ module _
         ( fib-const x y)
         ( is-trunc-A x y)
 
+  abstract
     is-trunc-is-trunc-map-const :
       (k : 𝕋) → ((x : A) → is-trunc-map k (const unit A x)) →
       is-trunc (succ-𝕋 k) A
@@ -66,52 +67,64 @@ module _
         ( left-unit-law-Σ (λ _ → x ＝ y))
         ( is-trunc-const x y)
 
+  abstract
     is-contr-map-const-is-prop :
       is-prop A → (x : A) → is-contr-map (const unit A x)
     is-contr-map-const-is-prop = is-trunc-map-const-is-trunc neg-two-𝕋
 
+  abstract
     is-equiv-const-is-prop :
       is-prop A → (x : A) → is-equiv (const unit A x)
     is-equiv-const-is-prop H x =
       is-equiv-is-contr-map (is-contr-map-const-is-prop H x)
 
+  abstract
     is-prop-map-const-is-set :
       is-set A → (x : A) → is-prop-map (const unit A x)
     is-prop-map-const-is-set = is-trunc-map-const-is-trunc neg-one-𝕋
 
+  abstract
     is-emb-const-is-set : is-set A → (x : A) → is-emb (const unit A x)
     is-emb-const-is-set H x = is-emb-is-prop-map (is-prop-map-const-is-set H x)
 
+  abstract
     is-0-map-const-is-1-type : is-1-type A → (x : A) → is-0-map (const unit A x)
     is-0-map-const-is-1-type = is-trunc-map-const-is-trunc zero-𝕋
 
+  abstract
     is-faithful-const-is-1-type :
       is-1-type A → (x : A) → is-faithful (const unit A x)
     is-faithful-const-is-1-type H x =
       is-faithful-is-0-map (is-0-map-const-is-1-type H x)
 
+  abstract
     is-prop-is-contr-map-const :
       ((x : A) → is-contr-map (const unit A x)) → is-prop A
     is-prop-is-contr-map-const = is-trunc-is-trunc-map-const neg-two-𝕋
 
+  abstract
     is-prop-is-equiv-const :
       ((x : A) → is-equiv (const unit A x)) → is-prop A
     is-prop-is-equiv-const H =
       is-prop-is-contr-map-const (is-contr-map-is-equiv ∘ H)
 
+  abstract
     is-set-is-prop-map-const :
       ((x : A) → is-prop-map (const unit A x)) → is-set A
     is-set-is-prop-map-const = is-trunc-is-trunc-map-const neg-one-𝕋
 
+  abstract
     is-set-is-emb-const :
       ((x : A) → is-emb (const unit A x)) → is-set A
     is-set-is-emb-const H =
       is-set-is-prop-map-const (is-prop-map-is-emb ∘ H)
 
+  abstract
     is-1-type-is-0-map-const :
       ((x : A) → is-0-map (const unit A x)) → is-1-type A
     is-1-type-is-0-map-const = is-trunc-is-trunc-map-const zero-𝕋
 
+  abstract
     is-1-type-is-faithful-const :
       ((x : A) → is-faithful (const unit A x)) → is-1-type A
     is-1-type-is-faithful-const H =
@@ -135,7 +148,7 @@ pr2 (const-faithful-map A x) =
   is-faithful-const-is-1-type (is-1-type-type-1-Type A) x
 ```
 
-### The constant map is injective viewed as a function `B → (A → B)` if there is a term of `A`
+### Given a term of `A`, the constant map is injective viewed as a function `B → (A → B)`
 
 ```agda
 is-injective-const :
