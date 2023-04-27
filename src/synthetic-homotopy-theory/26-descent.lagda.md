@@ -701,7 +701,7 @@ htpy-precompose-total-lifts {A = A} {B} P {f} {g} H =
    computes to refl-htpy. -}
 
 tr-id-left-subst :
-  {i j : Level} {A : UU i} {B : UU j} {f : A → B} {x y : A}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {x y : A}
   (p : Id x y) (b : B) → (q : Id (f x) b) →
   Id (tr (λ (a : A) → Id (f a) b) p q) ((inv (ap f p)) ∙ q)
 tr-id-left-subst refl b q = refl

@@ -429,8 +429,8 @@ module _
 If `P → ¬ Q'` and `P' → ¬ Q` then `(P + Q ≃ P' + Q') ≃ ((P ≃ P') × (Q ≃ Q'))`.
 
 ```agda
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
+module _ {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
   (¬PQ' : P → ¬ Q') where
 
   left-to-left : (e : (P + Q) ≃ (P' + Q'))
@@ -441,8 +441,8 @@ module _ {i j k l : Level}
     ind-coprod is-left (λ _ → star) (λ q' → ¬PQ' p q') (map-equiv e (inl p))
   left-to-left e (inr q) ()
 
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
+module _ {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
   (¬P'Q : P' → ¬ Q) where
 
   right-to-right : (e : (P + Q) ≃ (P' + Q'))
@@ -453,8 +453,8 @@ module _ {i j k l : Level}
   right-to-right e (inr q) _ =
     ind-coprod is-right (λ p' → ¬P'Q p' q) (λ _ → star) (map-equiv e (inr q))
 
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
+module _ {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
   (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q) where
 
   equiv-left-to-left : (e : (P + Q) ≃ (P' + Q'))

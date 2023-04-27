@@ -82,7 +82,7 @@ is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
 
 ```agda
 ind-ℕ :
-  {i : Level} {P : ℕ → UU i} →
+  {l : Level} {P : ℕ → UU l} →
   P 0 → ((n : ℕ) → P n → P(succ-ℕ n)) → ((n : ℕ) → P n)
 ind-ℕ p0 pS 0 = p0
 ind-ℕ p0 pS (succ-ℕ n) = pS n (ind-ℕ p0 pS n)

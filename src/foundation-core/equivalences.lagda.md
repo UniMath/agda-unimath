@@ -46,8 +46,7 @@ module _
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = sec f × retr f
 
-_≃_ :
-  {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
+_≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = Σ (A → B) is-equiv
 ```
 
@@ -389,7 +388,7 @@ module _
 ```agda
 abstract
   is-equiv-is-retraction :
-    {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
     is-equiv f → (g ∘ f) ~ id → is-equiv g
   is-equiv-is-retraction {A = A} {f = f} {g = g} is-equiv-f H =
     is-equiv-left-factor-htpy id g f (inv-htpy H) is-equiv-id is-equiv-f
@@ -400,7 +399,7 @@ abstract
 ```agda
 abstract
   is-equiv-is-section :
-    {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
     is-equiv f → (f ∘ g) ~ id → is-equiv g
   is-equiv-is-section {B = B} {f = f} {g = g} is-equiv-f H =
     is-equiv-right-factor-htpy id f g (inv-htpy H) is-equiv-f is-equiv-id

@@ -88,7 +88,7 @@ module _
 
 ```agda
 module _
-  {i j : Level} {A : UU i} {B : A → UU j} (a : A)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
   where
 
   abstract
