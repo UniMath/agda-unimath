@@ -128,7 +128,6 @@ open import foundation.global-choice public
 open import foundation.hexagons-of-identifications public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
-open import foundation.idempotent-maps public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
 open import foundation.identity-types public
@@ -179,6 +178,7 @@ open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
+open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
