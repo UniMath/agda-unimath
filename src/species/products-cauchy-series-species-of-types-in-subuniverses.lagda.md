@@ -1,4 +1,4 @@
-# Product of Cauchy series of species of types in a subuniverse
+# Product of Cauchy series of species of types in subuniverses
 
 ```agda
 module species.products-cauchy-series-species-of-types-in-subuniverses where

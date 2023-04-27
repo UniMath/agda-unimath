@@ -1,4 +1,4 @@
-# Equivalences of species of subuniverses
+# Equivalences of species of types in subuniverses
 
 ```agda
 module species.equivalences-species-of-types-in-subuniverses where

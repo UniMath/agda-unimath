@@ -1,4 +1,4 @@
-# Dirichlet products of species of subuniverse
+# Dirichlet products of species of types in subuniverses
 
 ```agda
 module species.dirichlet-products-species-of-types-in-subuniverses where

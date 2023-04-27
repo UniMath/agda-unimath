@@ -1,4 +1,4 @@
-# Coproducts of species of types of subuniverse
+# Coproducts of species of types in subuniverses
 
 ```agda
 module species.coproducts-species-of-types-in-subuniverses where

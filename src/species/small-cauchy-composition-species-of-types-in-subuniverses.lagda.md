@@ -1,4 +1,4 @@
-# Small Cauchy composition of species of subuniverse
+# Small Cauchy composition of species types in subuniverses
 
 ```agda
 module species.small-cauchy-composition-species-of-types-in-subuniverses where

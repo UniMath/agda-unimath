@@ -1,4 +1,4 @@
-# Morphisms of species
+# Morphisms of species of types
 
 ```agda
 module species.morphisms-species-of-types where

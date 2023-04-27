@@ -1,4 +1,4 @@
-# Equivalences of species
+# Equivalences of species of types
 
 ```agda
 module species.equivalences-species-of-types where
