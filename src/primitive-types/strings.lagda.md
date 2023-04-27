@@ -10,12 +10,13 @@ module primitive-types.strings where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
-open import primitive-types.characters
 open import foundation.dependent-pair-types
 open import foundation.maybe
 open import foundation.universe-levels
 
 open import lists.lists
+
+open import primitive-types.characters
 ```
 
 </details>

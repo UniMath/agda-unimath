@@ -12,8 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.identity-types
 open import foundation.maybe
-open import primitive-types.strings
 open import foundation.universe-levels
+
+open import primitive-types.strings
 ```
 
 </details>
