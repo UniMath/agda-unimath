@@ -31,23 +31,21 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
   is-coproduct :
     (x y p : obj-Precat C) →
     type-hom-Precat C x p → type-hom-Precat C y p → UU (l1 ⊔ l2)
-  is-coproduct x y p inj₁ inj₂ =
+  is-coproduct x y p l r =
     (z : obj-Precat C)
     (f : type-hom-Precat C x z) →
     (g : type-hom-Precat C y z) →
     (∃! ( type-hom-Precat C p z)
-        ( λ h →
-          ( comp-hom-Precat C h inj₁ ＝ f) × (comp-hom-Precat C h inj₂ ＝ g)))
+        ( λ h → (comp-hom-Precat C h l ＝ f) × (comp-hom-Precat C h r ＝ g)))
 
   coproduct : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   coproduct x y =
     Σ ( obj-Precat C)
       ( λ p →
         Σ ( type-hom-Precat C x p)
-          ( λ inj₁ →
+          ( λ l →
             Σ (type-hom-Precat C y p)
-              ( λ inj₂ →
-                  is-coproduct x y p inj₁ inj₂)))
+              ( is-coproduct x y p l)))
 
   has-all-binary-coproducts : UU (l1 ⊔ l2)
   has-all-binary-coproducts = (x y : obj-Precat C) → coproduct x y
@@ -58,13 +56,13 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
   object-coproduct : obj-Precat C → obj-Precat C → obj-Precat C
   object-coproduct x y = pr1 (t x y)
 
-  inj₁-coproduct :
+  inl-coproduct :
     (x y : obj-Precat C) → type-hom-Precat C x (object-coproduct x y)
-  inj₁-coproduct x y = pr1 (pr2 (t x y))
+  inl-coproduct x y = pr1 (pr2 (t x y))
 
-  inj₂-coproduct :
+  inr-coproduct :
     (x y : obj-Precat C) → type-hom-Precat C y (object-coproduct x y)
-  inj₂-coproduct x y = pr1 (pr2 (pr2 (t x y)))
+  inr-coproduct x y = pr1 (pr2 (pr2 (t x y)))
 
   module _ (x y z : obj-Precat C)
     (f : type-hom-Precat C x z)
@@ -73,30 +71,30 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
     morphism-out-of-coproduct : type-hom-Precat C (object-coproduct x y) z
     morphism-out-of-coproduct = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
-    morphism-out-of-coproduct-comm-inj₁ :
-      comp-hom-Precat C morphism-out-of-coproduct (inj₁-coproduct x y) ＝ f
-    morphism-out-of-coproduct-comm-inj₁ =
+    morphism-out-of-coproduct-comm-inl :
+      comp-hom-Precat C morphism-out-of-coproduct (inl-coproduct x y) ＝ f
+    morphism-out-of-coproduct-comm-inl =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    morphism-out-of-coproduct-comm-inj₂ :
-      comp-hom-Precat C morphism-out-of-coproduct (inj₂-coproduct x y) ＝ g
-    morphism-out-of-coproduct-comm-inj₂ =
+    morphism-out-of-coproduct-comm-inr :
+      comp-hom-Precat C morphism-out-of-coproduct (inr-coproduct x y) ＝ g
+    morphism-out-of-coproduct-comm-inr =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
     is-unique-morphism-out-of-coproduct :
       (h : type-hom-Precat C (object-coproduct x y) z) →
-      comp-hom-Precat C h (inj₁-coproduct x y) ＝ f →
-      comp-hom-Precat C h (inj₂-coproduct x y) ＝ g →
+      comp-hom-Precat C h (inl-coproduct x y) ＝ f →
+      comp-hom-Precat C h (inr-coproduct x y) ＝ g →
       morphism-out-of-coproduct ＝ h
     is-unique-morphism-out-of-coproduct h comm1 comm2 =
       ap pr1 ((pr2 (pr2 (pr2 (pr2 (t x y))) z f g)) (h , (comm1 , comm2)))
 
 module _ {l1 l2 : Level} (C : Precat l1 l2)
   (x y p : obj-Precat C)
-  (inj₁ : type-hom-Precat C x p)
-  (inj₂ : type-hom-Precat C y p) where
+  (l : type-hom-Precat C x p)
+  (r : type-hom-Precat C y p) where
 
-  is-prop-is-coproduct : is-prop (is-coproduct C x y p inj₁ inj₂)
+  is-prop-is-coproduct : is-prop (is-coproduct C x y p l r)
   is-prop-is-coproduct =
     is-prop-Π (λ z →
       is-prop-Π (λ f →
@@ -104,7 +102,7 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
           is-property-is-contr)))
 
   is-coproduct-Prop : Prop (l1 ⊔ l2)
-  pr1 is-coproduct-Prop = is-coproduct C x y p inj₁ inj₂
+  pr1 is-coproduct-Prop = is-coproduct C x y p l r
   pr2 is-coproduct-Prop = is-prop-is-coproduct
 ```
 
@@ -129,6 +127,6 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
       (object-coproduct C t y₁ y₂)
   coproduct-of-morphisms =
     morphism-out-of-coproduct C t _ _ _
-      (comp-hom-Precat C (inj₁-coproduct C t y₁ y₂) f)
-      (comp-hom-Precat C (inj₂-coproduct C t y₁ y₂) g)
+      (comp-hom-Precat C (inl-coproduct C t y₁ y₂) f)
+      (comp-hom-Precat C (inr-coproduct C t y₁ y₂) g)
 ```
