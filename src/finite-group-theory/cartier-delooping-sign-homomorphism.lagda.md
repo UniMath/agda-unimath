@@ -11,6 +11,7 @@ module finite-group-theory.cartier-delooping-sign-homomorphism where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.delooping-sign-homomorphism
@@ -56,154 +57,145 @@ module _
   { l : Level}
   where
 
-  not-even-difference-univalent-action-equiv : (n : ℕ) →
-    ( Y : 2-Element-Decidable-Subtype l
-      ( raise-Fin l (succ-ℕ (succ-ℕ n)))) →
+  not-even-difference-univalent-action-equiv :
+    (n : ℕ) (Y : 2-Element-Decidable-Subtype l (raise-Fin l (n +ℕ 2))) →
     ¬ ( sim-Eq-Rel
       ( even-difference-orientation-Complete-Undirected-Graph
-        (succ-ℕ (succ-ℕ n))
+        ( n +ℕ 2)
         ( pair
-          ( raise-Fin l (succ-ℕ (succ-ℕ n)))
-          ( unit-trunc-Prop
-            ( compute-raise-Fin l (succ-ℕ (succ-ℕ n))))))
+          ( raise-Fin l (n +ℕ 2))
+          ( unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))))
         ( orientation-aut-count
-          ( succ-ℕ (succ-ℕ n) , compute-raise l (Fin (succ-ℕ (succ-ℕ n))))
-          star (transposition Y))
+          ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
+          ( star)
+          ( transposition Y))
         ( map-equiv
           ( univalent-action-equiv
-            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
-            ( orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n)))
-            ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
-              unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
-            ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
-              unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
+            ( mere-equiv-Prop (Fin (n +ℕ 2)))
+            ( orientation-Complete-Undirected-Graph (n +ℕ 2))
+            ( raise l (Fin (n +ℕ 2)) ,
+              unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
+            ( raise l (Fin (n +ℕ 2)) ,
+              unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
             ( transposition Y))
           ( orientation-aut-count
-            ( succ-ℕ (succ-ℕ n) , compute-raise l (Fin (succ-ℕ (succ-ℕ n))))
-            star (transposition Y))))
+            (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) star (transposition Y))))
   not-even-difference-univalent-action-equiv n =
     tr
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
-          ( raise-Fin l (succ-ℕ (succ-ℕ n)))) →
+          ( raise-Fin l (n +ℕ 2))) →
             ¬ ( sim-Eq-Rel
               ( even-difference-orientation-Complete-Undirected-Graph
-                (succ-ℕ (succ-ℕ n))
+                (n +ℕ 2)
                 ( pair
-                ( raise-Fin l (succ-ℕ (succ-ℕ n)))
-                ( unit-trunc-Prop
-                    ( compute-raise-Fin l (succ-ℕ (succ-ℕ n))))))
+                  ( raise-Fin l (n +ℕ 2))
+                  ( unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))))
+              ( orientation-aut-count
+                  ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
+                  ( star)
+                  ( transposition Y))
+              ( map-equiv
+                ( f
+                  ( raise l (Fin (n +ℕ 2)) ,
+                    unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
+                  ( raise l (Fin (n +ℕ 2)) ,
+                    unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
+                  ( transposition Y))
                 ( orientation-aut-count
-                    ( succ-ℕ (succ-ℕ n) , compute-raise l (Fin (succ-ℕ (succ-ℕ n))))
-                    star (transposition Y))
-                ( map-equiv
-                  ( f
-                    ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
-                      unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
-                    ( raise l (Fin (succ-ℕ (succ-ℕ n))) ,
-                      unit-trunc-Prop (compute-raise-Fin l (succ-ℕ (succ-ℕ n))))
-                    ( transposition Y))
-                  ( orientation-aut-count
-                    ( succ-ℕ (succ-ℕ n) , compute-raise l (Fin (succ-ℕ (succ-ℕ n))))
-                    star (transposition Y)))))
+                  ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
+                  ( star)
+                  ( transposition Y)))))
       ( ap pr1
         { x =
-          orientation-complete-undirected-graph-equiv (succ-ℕ (succ-ℕ n)) ,
-            ( preserves-id-equiv-orientation-complete-undirected-graph-equiv
-              ( succ-ℕ (succ-ℕ n)))}
+          orientation-complete-undirected-graph-equiv (n +ℕ 2) ,
+          preserves-id-equiv-orientation-complete-undirected-graph-equiv
+            ( n +ℕ 2)}
         { y =
           ( univalent-action-equiv
-            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
-            ( orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n)))) ,
-            ( preserves-id-equiv-univalent-action-equiv
-              ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
-              ( orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n))))}
+            ( mere-equiv-Prop (Fin (n +ℕ 2)))
+            ( orientation-Complete-Undirected-Graph (n +ℕ 2))) ,
+          ( preserves-id-equiv-univalent-action-equiv
+            ( mere-equiv-Prop (Fin (n +ℕ 2)))
+            ( orientation-Complete-Undirected-Graph (n +ℕ 2)))}
         ( eq-is-contr
           ( is-contr-preserves-id-action-equiv
-            ( mere-equiv-Prop (Fin (succ-ℕ (succ-ℕ n))))
-            ( orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n)))
-            ( λ X →
-              is-set-orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n)) X))))
+            ( mere-equiv-Prop (Fin (n +ℕ 2)))
+            ( orientation-Complete-Undirected-Graph (n +ℕ 2))
+            ( is-set-orientation-Complete-Undirected-Graph (n +ℕ 2)))))
       ( not-even-difference-orientation-aut-transposition-count
-        ( succ-ℕ (succ-ℕ n) , (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-        ( star))
+        (n +ℕ 2 , (compute-raise l (Fin (n +ℕ 2)))) (star))
 
-  cartier-delooping-sign : (n : ℕ) →
-    hom-Concrete-Group (UU-Fin-Group l n) (UU-Fin-Group (lsuc l) 2)
+  cartier-delooping-sign :
+    (n : ℕ) → hom-Concrete-Group (UU-Fin-Group l n) (UU-Fin-Group (lsuc l) 2)
   cartier-delooping-sign =
     quotient-delooping-sign
       ( orientation-Complete-Undirected-Graph)
       ( even-difference-orientation-Complete-Undirected-Graph)
-      ( λ n H → is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
+      ( λ n _ →
+        is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
-        orientation-aut-count
-          ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-          ( star))
+        orientation-aut-count (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) (star))
       ( not-even-difference-univalent-action-equiv)
 
-  eq-cartier-delooping-sign-homomorphism : (n : ℕ) →
+  eq-cartier-delooping-sign-homomorphism :
+    (n : ℕ) →
     Id
       ( comp-hom-Group
-        ( symmetric-Group (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
-        ( loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
-        ( abstract-group-Concrete-Group
-          ( UU-Fin-Group (lsuc l) 2))
+        ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
+        ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
+        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
         ( comp-hom-Group
-          ( loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
-          ( abstract-group-Concrete-Group
-            ( UU-Fin-Group l (succ-ℕ (succ-ℕ n))))
-          ( abstract-group-Concrete-Group
-            ( UU-Fin-Group (lsuc l) 2))
+          ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
+          ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
           ( hom-group-hom-Concrete-Group
-            ( UU-Fin-Group l (succ-ℕ (succ-ℕ n)))
+            ( UU-Fin-Group l (n +ℕ 2))
             ( UU-Fin-Group (lsuc l) 2)
-            ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+            ( cartier-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( abstract-group-Concrete-Group
-              ( UU-Fin-Group l (succ-ℕ (succ-ℕ n))))
-            ( loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
-            ( iso-loop-group-fin-UU-Fin-Group l (succ-ℕ (succ-ℕ n)))))
-        ( hom-inv-symmetric-group-loop-group-Set
-          ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))))
+            ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+            ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
+            ( iso-loop-group-fin-UU-Fin-Group l (n +ℕ 2))))
+        ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
       ( comp-hom-Group
-        ( symmetric-Group (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
-        ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
-        ( abstract-group-Concrete-Group
-          ( UU-Fin-Group (lsuc l) 2))
+        ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
+        ( symmetric-Group (Fin-Set (n +ℕ 2)))
+        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
         ( comp-hom-Group
-          ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( abstract-group-Concrete-Group
-            ( UU-Fin-Group (lsuc l) 2))
+          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( orientation-Complete-Undirected-Graph)
             ( even-difference-orientation-Complete-Undirected-Graph)
-            ( λ n H → is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
+            ( λ n _ →
+              is-decidable-even-difference-orientation-Complete-Undirected-Graph
+                ( n))
             ( equiv-fin-2-quotient-sign-equiv-Fin)
             ( λ n →
               orientation-aut-count
-                ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                ( pair (n +ℕ 2) (compute-raise l (Fin (n +ℕ 2))))
                 ( star))
             ( not-even-difference-univalent-action-equiv)
             ( n))
           ( sign-homomorphism
-            ( succ-ℕ (succ-ℕ n))
-            ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
+            ( n +ℕ 2)
+            ( pair (Fin (n +ℕ 2)) (unit-trunc-Prop id-equiv))))
         ( hom-inv-symmetric-group-equiv-Set
-          ( Fin-Set (succ-ℕ (succ-ℕ n)))
-          ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
-          ( compute-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+          ( Fin-Set (n +ℕ 2))
+          ( raise-Fin-Set l (n +ℕ 2))
+          ( compute-raise l (Fin (n +ℕ 2)))))
   eq-cartier-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( orientation-Complete-Undirected-Graph)
       ( even-difference-orientation-Complete-Undirected-Graph)
-      ( λ n H → is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
+      ( λ n _ →
+        is-decidable-even-difference-orientation-Complete-Undirected-Graph n)
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
-        orientation-aut-count
-          ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-          ( star))
+        orientation-aut-count (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) (star))
       ( not-even-difference-univalent-action-equiv)
 ```
 
