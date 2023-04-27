@@ -13,10 +13,10 @@ open import foundation.universe-levels
 
 open import lists.lists
 
-open import primitive-types.characters
-open import primitive-types.floats
-open import primitive-types.machine-integers
-open import primitive-types.strings
+open import primitives.characters
+open import primitives.floats
+open import primitives.machine-integers
+open import primitives.strings
 
 open import reflection.fixity
 open import reflection.metavariables

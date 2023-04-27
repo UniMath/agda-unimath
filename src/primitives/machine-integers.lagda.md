@@ -1,7 +1,7 @@
 # Machine integers
 
 ```agda
-module primitive-types.machine-integers where
+module primitives.machine-integers where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +14,7 @@ open import foundation.identity-types
 open import foundation.maybe
 open import foundation.universe-levels
 
-open import primitive-types.strings
+open import primitives.strings
 ```
 
 </details>

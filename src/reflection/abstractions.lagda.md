@@ -9,7 +9,7 @@ module reflection.abstractions where
 ```agda
 open import foundation.universe-levels
 
-open import primitive-types.strings
+open import primitives.strings
 ```
 
 </details>

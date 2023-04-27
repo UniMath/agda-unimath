@@ -12,7 +12,7 @@ open import elementary-number-theory.addition-integers
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import primitive-types.floats
+open import primitives.floats
 
 open import reflection.names
 ```

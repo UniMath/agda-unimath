@@ -1,7 +1,7 @@
 # Strings
 
 ```agda
-module primitive-types.strings where
+module primitives.strings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 open import lists.lists
 
-open import primitive-types.characters
+open import primitives.characters
 ```
 
 </details>

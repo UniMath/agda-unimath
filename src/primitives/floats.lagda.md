@@ -1,7 +1,7 @@
 # Floats
 
 ```agda
-module primitive-types.floats where
+module primitives.floats where
 ```
 
 <details><summary>Imports</summary>
@@ -14,8 +14,8 @@ open import foundation.identity-types
 open import foundation.maybe
 open import foundation.universe-levels
 
-open import primitive-types.machine-integers
-open import primitive-types.strings
+open import primitives.machine-integers
+open import primitives.strings
 ```
 
 </details>

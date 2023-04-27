@@ -29,9 +29,8 @@ makes use of several postulates.
 9. **Pushouts** are postulated in
    [`synthetic-homotopy-theory.pushouts`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
 10. **Agda built-in types** are postulated in
-    [`primitive-types`](https://unimath.github.io/agda-unimath/primitive-types.html)
-    and in
-    [`reflection`](https://unimath.github.io/agda-unimath/reflection.html).
+    [`primitives`](https://unimath.github.io/agda-unimath/primitives.html) and
+    in [`reflection`](https://unimath.github.io/agda-unimath/reflection.html).
 
 Note that there is some redundancy in the postulates we assume. For example, the
 [univalence axiom implies function extensionality](https://unimath.github.io/agda-unimath/foundation.univalence-implies-function-extensionality.html),
