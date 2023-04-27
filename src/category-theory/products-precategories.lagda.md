@@ -25,11 +25,11 @@ open import foundation.universe-levels
 A product of two objects `x` and `x` in a category `C` consists of:
 
 - an object `p`
-- morphisms `pr1 : hom p x` and `pr2 : hom p y` such that for every object `z`
-  and morphisms `f : hom z x` and `g : hom z y` there exists a unique morphism
+- morphisms `l : hom p x` and `r : hom p y` such that for every object `z` and
+  morphisms `f : hom z x` and `g : hom z y` there exists a unique morphism
   `h : hom z p` such that
-- `comp pr1 h = f`
-- `comp pr2 h = g`.
+- `comp l h = f`
+- `comp r h = g`.
 
 We say that `C` has all binary products if there is a choice of a product for
 each pair of objects in `C`.
