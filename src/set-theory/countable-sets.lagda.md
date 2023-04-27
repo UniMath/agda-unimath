@@ -7,7 +7,6 @@ module set-theory.countable-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
@@ -28,14 +27,12 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.shifting-sequences
-open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.identity-types

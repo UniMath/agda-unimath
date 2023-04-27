@@ -11,15 +11,12 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.small-types
@@ -32,7 +29,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types
-open import species.cauchy-composition-species-of-types-in-subuniverses
 open import species.species-of-types-in-subuniverses
 open import species.unit-cauchy-composition-species-of-types
 ```

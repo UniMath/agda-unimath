@@ -8,17 +8,11 @@ module species.exponentials-cauchy-series-of-types where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types

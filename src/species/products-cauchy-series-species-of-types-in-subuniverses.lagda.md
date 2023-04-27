@@ -9,16 +9,10 @@ module species.products-cauchy-series-species-of-types-in-subuniverses where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.subuniverses
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
-open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import species.cauchy-products-species-of-types

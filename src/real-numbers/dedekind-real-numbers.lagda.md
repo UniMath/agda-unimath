@@ -10,8 +10,6 @@ module real-numbers.dedekind-real-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification

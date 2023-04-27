@@ -8,26 +8,19 @@ module species.exponentials-cauchy-series-of-types-in-subuniverses where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types-in-subuniverses
 open import species.cauchy-exponentials-species-of-types-in-subuniverses
 open import species.cauchy-series-species-of-types-in-subuniverses
 open import species.composition-cauchy-series-species-of-types-in-subuniverses
-open import species.exponentials-cauchy-series-of-types
 open import species.species-of-types-in-subuniverses
 ```
 
