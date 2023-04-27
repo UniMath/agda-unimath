@@ -25,7 +25,7 @@ open import order-theory.sup-lattices
 Let A be a poset that has all binary meets and arbitrary joins (which we call
 sups). We can show that all sup lattices have binary meets (and we plan to in
 another file), but this economy offers little benefit here. The infinite
-distributive law states: for all `a : A` and for all families `b : I → A`the
+distributive law states: for all `a : A` and for all families `b : I → A` the
 following identity holds: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
 
 Note: One could inquire about the dual infinite distributive law but it is not
