@@ -15,12 +15,17 @@ entry_template = '- [{title}]({mdfile})'
 
 def generate_namespace_entry_list(namespace):
     status = 0
+    MISSING_TITLE_FLAG = 8
+
     file_names = sorted(os.listdir(os.path.join(root, namespace)))
     file_paths = map(lambda m: pathlib.Path(
         os.path.join(root, namespace, m)), file_names)
     lagda_file_paths = tuple(filter(utils.is_agda_file, file_paths))
     modules = tuple(map(lambda p: p.name, lagda_file_paths))
-    module_titles = tuple(map(utils.get_lagda_file_title, lagda_file_paths))
+    module_titles = tuple(map(utils.get_lagda_md_file_title, lagda_file_paths))
+    if not all(module_titles):
+        status |= MISSING_TITLE_FLAG
+
     module_mdfiles = tuple(
         map(lambda m: utils.get_module_mdfile(namespace, m), modules))
 
@@ -49,7 +54,7 @@ def generate_namespace_entry_list(namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_file_title(
+    namespace_title = utils.get_lagda_md_file_title(
         os.path.join(root, namespace) + ".lagda.md")
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + ".md")
@@ -62,6 +67,9 @@ def generate_index(root, header):
     status = 0
     entry_lists = []
     for namespace in sorted(utils.get_subdirectories_recursive(root)):
+        if namespace == "temp":
+            continue
+
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s
@@ -101,8 +109,6 @@ if __name__ == "__main__":
 
     summary_path = "SUMMARY.md"
     index_header = "# Formalisation in Agda"
-
-    print(f"Generating {summary_path}")
 
     index_content, status = generate_index(root, index_header)
     if status == 0:
