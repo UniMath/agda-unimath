@@ -41,7 +41,8 @@ type `Term`. See the comments for details on the constructors.
 
 We can obtain a `Term` from an agda term through the keyword `quoteTerm`.
 
-For concrete examples, see [`reflection.definitions`](reflection.definitions).
+For concrete examples, see
+[`reflection.definitions`](reflection.definitions.md).
 
 ## Definition
 
