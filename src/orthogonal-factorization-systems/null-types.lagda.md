@@ -56,15 +56,15 @@ module _
   is-local-is-null =
     is-equiv-comp
       ( const Y A)
-      ( map-left-unit-law-function-types A)
-      ( is-equiv-map-left-unit-law-function-types A)
+      ( map-left-unit-law-function-type A)
+      ( is-equiv-map-left-unit-law-function-type A)
 
   is-null-is-local : is-local-type (λ y → star) A → is-null Y A
   is-null-is-local =
     is-equiv-comp
       ( precomp (λ y → star) A)
-      ( map-inv-left-unit-law-function-types A)
-      ( is-equiv-map-inv-left-unit-law-function-types A)
+      ( map-inv-left-unit-law-function-type A)
+      ( is-equiv-map-inv-left-unit-law-function-type A)
 
   equiv-is-local-is-null : is-null Y A ≃ is-local-type (λ y → star) A
   equiv-is-local-is-null =
