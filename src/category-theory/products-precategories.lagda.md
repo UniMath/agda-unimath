@@ -101,10 +101,10 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
 
 module _ {l1 l2 : Level} (C : Precat l1 l2)
   (x y p : obj-Precat C)
-  (pr1 : type-hom-Precat C p x)
-  (pr2 : type-hom-Precat C p y) where
+  (l : type-hom-Precat C p x)
+  (r : type-hom-Precat C p y) where
 
-  is-prop-is-product : is-prop (is-product C x y p pr1 pr2)
+  is-prop-is-product : is-prop (is-product C x y p l r)
   is-prop-is-product =
     is-prop-Π (λ z →
       is-prop-Π (λ f →
@@ -112,7 +112,7 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
           is-property-is-contr)))
 
   is-product-Prop : Prop (l1 ⊔ l2)
-  pr1 is-product-Prop = is-product C x y p pr1 pr2
+  pr1 is-product-Prop = is-product C x y p l r
   pr2 is-product-Prop = is-prop-is-product
 ```
 
