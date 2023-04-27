@@ -41,7 +41,7 @@ uniquely-eliminating-modality l1 l2 =
         ( is-uniquely-eliminating-modality))
 ```
 
-### Projections for uniquely eliminating modalities
+### Components of a uniquely eliminating modality
 
 ```agda
 module _

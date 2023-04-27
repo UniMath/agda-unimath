@@ -66,7 +66,7 @@ module _
   factorization l3 = Σ (UU l3) (factorization-through)
 ```
 
-### Projections for factorizations
+### Components of a factorization
 
 ```agda
 module _

@@ -48,7 +48,7 @@ is-iso-hom-Ring R1 R2 f =
       ( Id (comp-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
 ```
 
-### Projections
+### Components of a ring isomorphism
 
 ```agda
 inv-is-iso-hom-Ring :

@@ -106,7 +106,7 @@ type-hom-Ring R1 R2 =
   Σ (type-hom-Ab (ab-Ring R1) (ab-Ring R2)) (is-ring-homomorphism-hom-Ab R1 R2)
 ```
 
-### Projections
+### Components of a ring homomorphism
 
 ```agda
 hom-ab-hom-Ring :

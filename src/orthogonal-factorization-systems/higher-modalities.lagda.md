@@ -101,7 +101,7 @@ module _
     modal-universal-property (unit-○) × is-modal-identity-types
 ```
 
-### Projections for the `is-higher-modality` predicate
+### Components of a `is-higher-modality` proof
 
 ```agda
   modal-ind-is-higher-modality : is-higher-modality → modal-ind unit-○
@@ -132,7 +132,7 @@ higher-modality l1 l2 =
         ( is-higher-modality ○))
 ```
 
-### Projections for `higher-modality`
+### Compoents of a higher modality
 
 ```agda
 module _
