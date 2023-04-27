@@ -29,6 +29,7 @@ exponents, such as
 
 ```agda
 function-species-types :
-  {l1 l2 l3 : Level} → species-types l1 l2 → species-types l1 l3 → UU l1 → UU (l2 ⊔ l3)
+  {l1 l2 l3 : Level} →
+  species-types l1 l2 → species-types l1 l3 → species-types l1 (l2 ⊔ l3)
 function-species-types F G X = F X → G X
 ```

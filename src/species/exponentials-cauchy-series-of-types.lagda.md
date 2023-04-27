@@ -42,7 +42,7 @@ module _
       ( λ F → F → (Σ ( UU l1) (λ U → S U × (U → X))))
 ```
 
-## Property
+## Properties
 
 ### The exponential of a Cauchy series as a composition
 
@@ -61,13 +61,13 @@ module _
     cauchy-series-species-types (cauchy-exponential-species-types S) X ≃
     exponential-cauchy-series-species-types
   equiv-cauchy-series-cauchy-exponential-species-types =
-    ( ( equiv-exponential-cauchy-series-composition-unit-species-types) ∘e
-      ( ( equiv-cauchy-series-composition-species-types (λ _ → unit) S X) ∘e
-        ( equiv-cauchy-series-equiv-species-types
-            ( cauchy-exponential-species-types S)
-            ( cauchy-composition-species-types (λ _ → unit) S )
-            ( λ F →
-              inv-equiv
-                ( equiv-cauchy-exponential-composition-unit-species-types S F))
-            ( X))))
+    ( equiv-exponential-cauchy-series-composition-unit-species-types) ∘e
+    ( ( equiv-cauchy-series-composition-species-types (λ _ → unit) S X) ∘e
+      ( equiv-cauchy-series-equiv-species-types
+        ( cauchy-exponential-species-types S)
+        ( cauchy-composition-species-types (λ _ → unit) S)
+        ( λ F →
+          inv-equiv
+            ( equiv-cauchy-exponential-composition-unit-species-types S F))
+            ( X)))
 ```

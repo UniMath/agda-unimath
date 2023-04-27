@@ -173,9 +173,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
-  (C1 :
-    (A : type-subuniverse P) → (B : type-subuniverse P) →
-    is-in-subuniverse P (inclusion-subuniverse P A × inclusion-subuniverse P B))
+  (C1 : is-closed-under-products-subuniverse P)
   where
 
   private
@@ -246,10 +244,10 @@ module _
                   ( P)
                   ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                       inclusion-subuniverse P (pr2 (pr2 x))) ,
-                    C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
+                    C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))))
                 ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                       inclusion-subuniverse P (pr2 (pr2 x))) ,
-                    C1 (pr1 (pr2 x)) (pr2 (pr2 x))) ,
+                    C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x)))) ,
                   id-equiv))))) ∘e
       ( ( equiv-reassociate-left-iterated-product-Decomposition)))
 
@@ -318,10 +316,10 @@ module _
               ( P)
               ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
-                ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
+                ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))))
             ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
-                ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))) ,
+                ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))) ,
               id-equiv))) ∘e
       ( ( equiv-reassociate-right-iterated-product-Decomposition)))
 ```

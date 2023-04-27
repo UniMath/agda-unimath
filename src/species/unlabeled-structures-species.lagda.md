@@ -1,4 +1,4 @@
-# Unlabeled structures of a species
+# Unlabeled structures of finite species
 
 ```agda
 module species.unlabeled-structures-species where

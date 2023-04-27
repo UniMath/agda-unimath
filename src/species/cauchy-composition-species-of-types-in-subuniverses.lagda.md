@@ -1,4 +1,4 @@
-# Cauchy composition of species of subuniverse
+# Cauchy composition of species of types in a subuniverse
 
 ```agda
 module species.cauchy-composition-species-of-types-in-subuniverses where
@@ -66,15 +66,15 @@ module _
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l4)) →
     type-subuniverse P → UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   type-cauchy-composition-species-subuniverse {l3} {l4} S T X =
-    Σ ( Σ-Decomposition-subuniverse P X)
+    Σ ( Σ-Decomposition-Subuniverse P X)
       ( λ D →
         ( inclusion-subuniverse
           ( subuniverse-global-subuniverse Q l3)
-          ( S (subuniverse-indexing-type-Σ-Decomposition-subuniverse P X D))) ×
-        ( (x : indexing-type-Σ-Decomposition-subuniverse P X D ) →
+          ( S (subuniverse-indexing-type-Σ-Decomposition-Subuniverse P X D))) ×
+        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D ) →
           inclusion-subuniverse
           ( subuniverse-global-subuniverse Q l4)
-          ( T (subuniverse-cotype-Σ-Decomposition-subuniverse P X D x))))
+          ( T (subuniverse-cotype-Σ-Decomposition-Subuniverse P X D x))))
 
   is-closed-under-cauchy-composition-species-subuniverse : UUω
   is-closed-under-cauchy-composition-species-subuniverse =
@@ -171,12 +171,12 @@ module _
               ( commutative-prod ∘e
               ( equiv-tot
                 ( λ p →
-                  equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse
+                  equiv-total-is-in-subuniverse-Σ-Decomposition
                     ( P)
                     (X , p))))))) ∘e
           ( ( inv-assoc-Σ
               ( is-in-subuniverse P X)
-              ( λ p → Σ-Decomposition-subuniverse P (X , p))
+              ( λ p → Σ-Decomposition-Subuniverse P (X , p))
               ( _))))))
 ```
 
