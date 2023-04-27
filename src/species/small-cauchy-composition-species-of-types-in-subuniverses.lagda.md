@@ -67,15 +67,15 @@ module _
   small-cauchy-composition-species-subuniverse' :
     type-subuniverse P → UU (lsuc l1 ⊔ l2 ⊔ l3)
   small-cauchy-composition-species-subuniverse' X =
-    Σ ( Σ-Decomposition-subuniverse P X)
+    Σ ( Σ-Decomposition-Subuniverse P X)
       ( λ D →
         ( inclusion-subuniverse
           ( Q)
-          ( S (subuniverse-indexing-type-Σ-Decomposition-subuniverse P X D))) ×
-        ( (x : indexing-type-Σ-Decomposition-subuniverse P X D ) →
+          ( S (subuniverse-indexing-type-Σ-Decomposition-Subuniverse P X D))) ×
+        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D ) →
           inclusion-subuniverse
           ( Q)
-          ( T (subuniverse-cotype-Σ-Decomposition-subuniverse P X D x))))
+          ( T (subuniverse-cotype-Σ-Decomposition-Subuniverse P X D x))))
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -87,11 +87,7 @@ module _
   (C2 :
     ( S T : species-subuniverse P Q ) → (X : type-subuniverse P) →
     ( is-in-subuniverse Q (type-is-small (C1 S T X))))
-  (C3 :
-    ( ( X : type-subuniverse P) →
-      ( Y : (inclusion-subuniverse P X) → type-subuniverse P) →
-      is-in-subuniverse P
-        ( Σ (inclusion-subuniverse P X) (λ x → inclusion-subuniverse P (Y x)))))
+  (C3 : is-closed-under-Σ-subuniverse P)
   where
 
   small-cauchy-composition-species-subuniverse :
@@ -156,12 +152,12 @@ module _
               ( commutative-prod ∘e
               ( equiv-tot
                 ( λ p →
-                  equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse
+                  equiv-total-is-in-subuniverse-Σ-Decomposition
                     ( P)
                     (X , p))))))) ∘e
           ( ( inv-assoc-Σ
               ( is-in-subuniverse P X)
-              ( λ p → Σ-Decomposition-subuniverse P (X , p))
+              ( λ p → Σ-Decomposition-Subuniverse P (X , p))
               ( _)) ∘e
             ( ( equiv-tot
                 ( λ p → inv-equiv (equiv-is-small (C1 S T (X , p))))))))))
@@ -321,7 +317,7 @@ module _
     (S : species-subuniverse P Q)
     (T : species-subuniverse P Q)
     (U : species-subuniverse P Q)
-    (X : type-subuniverse P)→
+    (X : type-subuniverse P) →
     inclusion-subuniverse
       ( Q)
       ( small-cauchy-composition-species-subuniverse
