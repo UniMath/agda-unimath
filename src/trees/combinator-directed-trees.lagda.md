@@ -260,6 +260,16 @@ module _
 
   base-combinator-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3)
   base-combinator-Directed-Tree = base-Directed-Tree combinator-Directed-Tree
+
+  proper-node-combinator-Directed-Tree : UU (l1 ⊔ l2)
+  proper-node-combinator-Directed-Tree =
+    proper-node-Directed-Tree combinator-Directed-Tree
+
+  is-proper-node-inclusion-combinator-Directed-Tree :
+    {i : I} {x : node-Directed-Tree T i} →
+    is-proper-node-combinator-Directed-Tree
+      ( node-inclusion-combinator-Directed-Tree i x)
+  is-proper-node-inclusion-combinator-Directed-Tree = ?
 ```
 
 ## Properties
@@ -572,6 +582,20 @@ module _
   pr2 compute-node-combinator-Directed-Tree =
     is-equiv-map-compute-node-combinator-Directed-Tree
 ```
+
+### The type of proper nodes of the combinator tree of `T` is equivalent to the dependent sum of the types of nodes of each `T i`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} (T : I → Directed-Tree l2 l3)
+  where
+
+  map-compute-proper-node-combinator-Directed-Tree :
+    Σ I (node-Directed-Tree ∘ T) →
+    proper-node-combinator-Directed-Tree T
+  map-compute-proper-node-combinator-Directed-Tree (i , x) = {!!}
+```
+
 
 ### The fibers at a base element `b` of the comibinator of a family `T` of trees is equivalent to `T (index-base b)`
 
