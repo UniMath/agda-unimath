@@ -36,14 +36,15 @@ module _
   (F G : functor-Precat C D)
   where
 
-  is-nat-iso-Precat : nat-trans-Precat C D F G → UU (l1 ⊔ l4)
-  is-nat-iso-Precat γ =
+  is-natural-isomorphism-Precat :
+    natural-transformation-Precat C D F G → UU (l1 ⊔ l4)
+  is-natural-isomorphism-Precat γ =
     (x : obj-Precat C) →
-    is-iso-Precat D (components-nat-trans-Precat C D F G γ x)
+    is-iso-Precat D (components-natural-transformation-Precat C D F G γ x)
 
-  nat-iso-Precat : UU (l1 ⊔ l2 ⊔ l4)
-  nat-iso-Precat =
-    Σ (nat-trans-Precat C D F G) is-nat-iso-Precat
+  natural-isomorphism-Precat : UU (l1 ⊔ l2 ⊔ l4)
+  natural-isomorphism-Precat =
+    Σ (natural-transformation-Precat C D F G) is-natural-isomorphism-Precat
 ```
 
 ## Propositions
@@ -54,13 +55,14 @@ That a natural transformation is a natural isomorphism is a proposition. This
 follows from the fact that being an isomorphism is a proposition.
 
 ```agda
-is-prop-is-nat-iso-Precat :
+is-prop-is-natural-isomorphism-Precat :
   {l1 l2 l3 l4 : Level}
   (C : Precat l1 l2)
   (D : Precat l3 l4)
   (F G : functor-Precat C D)
-  (γ : nat-trans-Precat C D F G) →
-  is-prop (is-nat-iso-Precat C D F G γ)
-is-prop-is-nat-iso-Precat C D F G γ =
-  is-prop-Π (is-prop-is-iso-Precat D ∘ components-nat-trans-Precat C D F G γ)
+  (γ : natural-transformation-Precat C D F G) →
+  is-prop (is-natural-isomorphism-Precat C D F G γ)
+is-prop-is-natural-isomorphism-Precat C D F G γ =
+  is-prop-Π (is-prop-is-iso-Precat D ∘
+  components-natural-transformation-Precat C D F G γ)
 ```
