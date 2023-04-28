@@ -38,8 +38,7 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-Any family of directed trees can be combined into a single directed tree with a
-new root.
+The **combinator operation** on directed trees combines a family of directed trees into a single directed tree with a new root.
 
 ## Definitions
 

@@ -50,10 +50,7 @@ open import trees.w-types
 
 ## Idea
 
-We assign to each element of a W-type `𝕎 A B` a directed graph. This directed
-graph is in fact a directed tree, and furthermore, it can be given the structure
-of an enriched directed tree. We show that the map from `𝕎 A B` to enriched
-directed trees is an embedding.
+The **underlying (enriched) directed tree** of an element of a W-type is the underlying (enriched) directed tree of that element obtained via the coalgebra structure of `𝕎 A B`.
 
 ## Definitions
 

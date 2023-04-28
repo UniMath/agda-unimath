@@ -27,7 +27,7 @@ open import trees.enriched-directed-trees
 
 ## Idea
 
-The base of an enriched directed tree consists of its nodes equipped with an
+The **base** of an enriched directed tree consists of its nodes equipped with an
 edge to the root.
 
 ## Definition

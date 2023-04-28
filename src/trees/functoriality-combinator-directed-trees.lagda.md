@@ -37,9 +37,7 @@ morphism
 ```
 
 of directed trees. Furthermore, `f` is a family of equivalences of directed
-trees if and only if `combinator f` is an equivalence, and moreover this induces
-an equivlence between families of equivalences `Sᵢ ≃ Tᵢ` and equivalences
-`combinator S ≃ combinator T`.
+trees if and only if `combinator f` is an equivalence.
 
 ## Definitions
 

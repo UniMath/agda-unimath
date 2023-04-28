@@ -23,8 +23,8 @@ open import trees.rooted-morphisms-directed-trees
 
 ## Idea
 
-Rooted morphisms of enriched directed graphs are root preserving morphisms of
-enriched directed graphs.
+**Rooted morphisms of enriched directed trees** are root preserving morphisms of
+enriched directed trees.
 
 ## Definitions
 

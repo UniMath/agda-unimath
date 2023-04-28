@@ -25,8 +25,8 @@ open import trees.undirected-trees
 
 ## Idea
 
-A rooted tree is a tree equipped with a marked node. The marked node is called
-the **root** of the tree.
+A **rooted undirected tree** is a tree equipped with a marked node.
+The marked node is called the **root** of the undirected tree.
 
 ## Definition
 

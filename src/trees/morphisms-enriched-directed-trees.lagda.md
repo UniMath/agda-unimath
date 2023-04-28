@@ -24,7 +24,7 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-A morphism of enriched directed trees is a morphism of directed trees that
+A **morphism of enriched directed trees** is a morphism of directed trees that
 preserves the enrichment structure.
 
 ## Definitions

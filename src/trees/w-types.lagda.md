@@ -36,9 +36,9 @@ open import trees.polynomial-endofunctors
 
 Consider a type `A` equipped with a type family `B` over `A`. The type `W`
 generated inductively by a constructor `B x → W` for each `x : A` is called the
-W-typpe `W A B` of `B`. The elements of `A` can be thought of as symbols for the
-constructors of `W A B`, and the functions `B x → W A B` are the constructors.
-The elements of `W A B` are well-founded trees.
+**W-type** `W A B` of `B`. The elements of `A` can be thought of as symbols for
+the constructors of `W A B`, and the functions `B x → W A B` are the
+constructors. The elements of `W A B` can be thought of as well-founded trees.
 
 ## Definition
 

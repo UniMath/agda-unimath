@@ -26,7 +26,7 @@ open import trees.fibers-directed-trees
 
 ## Idea
 
-The fiber of an enriched directed tree at a node `x` is the fiber of the
+The **fiber** of an enriched directed tree at a node `x` is the fiber of the
 underlying directed tree at `x` equipped with the inherited enriched structure.
 
 ## Definition

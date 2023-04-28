@@ -30,8 +30,7 @@ open import trees.directed-trees
 
 ## Idea
 
-Consider a type `A` and a type family `B` over `A`. An `(A,B)`-enriched directed
-tree is a directed tree `T` equipped with a map
+Consider a type `A` and a type family `B` over `A`. An **`(A,B)`-enriched directed tree** is a directed tree `T` equipped with a map
 
 ```md
   shape : node-Directed-Tree T → A
@@ -44,8 +43,7 @@ and for each node `x` an equivalence
 ```
 
 By this equivalence, there is a higher group action of `Ω (A , f x)` on the type
-of children of `x`. We construct an embedding from `𝕎 A B` into the type of
-`(A , B)`-enriched directed trees.
+of children of `x`.
 
 ## Definition
 

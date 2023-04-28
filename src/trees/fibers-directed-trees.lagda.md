@@ -31,7 +31,7 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-The fiber of a directed tree `T` at a node `x` consists of all nodes `y`
+The **fiber** of a directed tree `T` at a node `x` consists of all nodes `y`
 equipped with a walk `w : walk T y x`. An edge from `(y, w)` to `(z , v)`
 consists of an edge `e : edge T x y` such that `w ＝ cons-walk e v`.
 

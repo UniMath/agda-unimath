@@ -18,6 +18,7 @@ open import trees.coalgebras-polynomial-endofunctors
 open import trees.directed-trees
 open import trees.fibers-directed-trees
 open import trees.morphisms-coalgebras-polynomial-endofunctors
+open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors
 ```
 
 </details>
@@ -53,7 +54,7 @@ module _
 
   map-hom-coalgebra-Directed-Tree :
     type-coalgebra-polynomial-endofunctor X → Directed-Tree l l
-  map-hom-coalgebra-Directed-Tree x = {!!}
+  map-hom-coalgebra-Directed-Tree = directed-tree-element-coalgebra X
 
   hom-coalgebra-Directed-Tree :
     hom-coalgebra-polynomial-endofunctor X (coalgebra-Directed-Tree l)

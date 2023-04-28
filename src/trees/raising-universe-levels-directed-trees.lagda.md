@@ -25,7 +25,9 @@ open import trees.equivalences-directed-trees
 
 ## Idea
 
-We raise the universe levels of directed trees
+We define the operation that raises the universe level of a directed tree.
+
+## Definitions
 
 ```agda
 module _

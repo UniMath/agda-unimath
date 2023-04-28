@@ -29,6 +29,10 @@ open import trees.rooted-morphisms-enriched-directed-trees
 
 </details>
 
+## Idea
+
+An **equivalence of `(A,B)`-enriched directed trees** from `S` to `T` is a shape-preserving equivalence between their underlying trees, which also preserves the enrichment equivalences.
+
 ## Definition
 
 ### The condition of being an equivalence of enriched directed trees
