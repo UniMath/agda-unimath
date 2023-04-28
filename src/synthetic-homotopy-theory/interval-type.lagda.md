@@ -114,8 +114,8 @@ module _
 inv-ev-𝕀 : {l : Level} {P : 𝕀 → UU l} → Data-𝕀 P → (x : 𝕀) → P x
 inv-ev-𝕀 x = ind-𝕀 _ (pr1 x) (pr1 (pr2 x)) (pr2 (pr2 x))
 
-issec-inv-ev-𝕀 : {l : Level} {P : 𝕀 → UU l} (x : Data-𝕀 P) →
-  Id (ev-𝕀 (inv-ev-𝕀 x)) x
+issec-inv-ev-𝕀 :
+  {l : Level} {P : 𝕀 → UU l} (x : Data-𝕀 P) → ev-𝕀 (inv-ev-𝕀 x) ＝ x
 issec-inv-ev-𝕀 (pair u (pair v q)) =
   eq-Eq-Data-𝕀
     ( comp-source-𝕀 u v q)
@@ -125,7 +125,8 @@ issec-inv-ev-𝕀 (pair u (pair v q)) =
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
   (p : Id x y) (q : Id (f x) (g x)) (r : Id (f y) (g y)) →
-  Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) → Id (tr (λ x → Id (f x) (g x)) p q) r
+  Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) →
+  Id (tr (λ x → Id (f x) (g x)) p q) r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 
 isretr-inv-ev-𝕀 :

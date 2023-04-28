@@ -325,13 +325,13 @@ module _
           ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
 
   equiv-up-suspension :
-    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-structure X Z)
+    {l : Level} (Z : UU l) → (suspension X → Z) ≃ (suspension-structure X Z)
   pr1 (equiv-up-suspension Z) =
     ev-suspension (suspension-structure-suspension X) Z
   pr2 (equiv-up-suspension Z) = up-suspension Z
 
-  map-inv-up-suspension : {l : Level} (Z : UU l) →
-    (suspension-structure X Z) → ((suspension X) → Z)
+  map-inv-up-suspension :
+    {l : Level} (Z : UU l) → suspension-structure X Z → suspension X → Z
   map-inv-up-suspension Z =
     map-inv-equiv (equiv-up-suspension Z)
 
@@ -341,7 +341,8 @@ module _
       ( map-inv-up-suspension Z)) ~ id
   issec-map-inv-up-suspension Z = issec-map-inv-is-equiv (up-suspension Z)
 
-  isretr-map-inv-up-suspension : {l : Level} (Z : UU l) →
+  isretr-map-inv-up-suspension :
+    {l : Level} (Z : UU l) →
     ( ( map-inv-up-suspension Z) ∘
       ( ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
   isretr-map-inv-up-suspension Z = isretr-map-inv-is-equiv (up-suspension Z)

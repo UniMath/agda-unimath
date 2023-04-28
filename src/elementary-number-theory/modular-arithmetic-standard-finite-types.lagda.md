@@ -198,7 +198,8 @@ cong-add-Fin :
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
 
-cong-add-ℕ : {k : ℕ} (x y : ℕ) →
+cong-add-ℕ :
+  {k : ℕ} (x y : ℕ) →
   cong-ℕ
     ( succ-ℕ k)
     ( add-ℕ

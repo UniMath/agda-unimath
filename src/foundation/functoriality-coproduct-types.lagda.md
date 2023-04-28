@@ -509,8 +509,8 @@ module _
       λ { (inl p) → ap pr1 (isretr-map-inv-equiv-left-summand (pair (map-equiv e (inl p)) (left-to-left ¬PQ' e (inl p) star)));
           (inr q) → ap pr1 (isretr-map-inv-equiv-right-summand (pair (map-equiv e (inr q)) (right-to-right ¬P'Q e (inr q) star))) })
 
-  equiv-mutually-exclusive-coprod : ((P + Q) ≃ (P' + Q'))
-                                  ≃ ((P ≃ P') × (Q ≃ Q'))
+  equiv-mutually-exclusive-coprod :
+    ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))
   pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
   pr2 equiv-mutually-exclusive-coprod =
     is-equiv-has-inverse

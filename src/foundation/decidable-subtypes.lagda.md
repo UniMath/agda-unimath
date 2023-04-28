@@ -145,15 +145,16 @@ module _
   {l1 : Level} (X : UU l1)
   where
 
-  equiv-universes-decidable-subtype : (l l' : Level) →
-    decidable-subtype l X ≃ decidable-subtype l' X
+  equiv-universes-decidable-subtype :
+    (l l' : Level) → decidable-subtype l X ≃ decidable-subtype l' X
   equiv-universes-decidable-subtype l l' =
     equiv-Π
       ( λ _ → Decidable-Prop l')
       ( id-equiv)
       ( λ _ → equiv-universes-Decidable-Prop l l')
 
-  iff-universes-decidable-subtype : (l l' : Level) (S : decidable-subtype l X) →
+  iff-universes-decidable-subtype :
+    (l l' : Level) (S : decidable-subtype l X) →
     ( (x : X) →
       prop-Decidable-Prop (S x) ⇔
       prop-Decidable-Prop (map-equiv (equiv-universes-decidable-subtype l l') S x))

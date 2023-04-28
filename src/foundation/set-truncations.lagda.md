@@ -123,7 +123,8 @@ module _
 ### The universal property of set truncations
 
 ```agda
-universal-property-trunc-Set : {l1 l2 : Level} (A : UU l1) →
+universal-property-trunc-Set :
+  {l1 l2 : Level} (A : UU l1) →
   universal-property-set-truncation l2
     ( trunc-Set A)
     ( unit-trunc-Set)

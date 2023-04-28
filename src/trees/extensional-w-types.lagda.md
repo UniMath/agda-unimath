@@ -144,13 +144,14 @@ module _
           ( inv-equiv-structure-𝕎-Alg)
           ( H))
     where
-    H : (z : 𝕎 A (λ x → B x)) →
-        Eq-ext-𝕎 ( tree-𝕎 a f) z ≃
-        Eq-ext-𝕎
-          ( tree-𝕎 a f)
-          ( tree-𝕎
-            ( pr1 (map-equiv inv-equiv-structure-𝕎-Alg z))
-            ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
+    H :
+      ( z : 𝕎 A (λ x → B x)) →
+      Eq-ext-𝕎 ( tree-𝕎 a f) z ≃
+      Eq-ext-𝕎
+        ( tree-𝕎 a f)
+        ( tree-𝕎
+          ( pr1 (map-equiv inv-equiv-structure-𝕎-Alg z))
+          ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
     H (tree-𝕎 b g) = id-equiv
 
   is-contr-total-Eq-ext-is-univalent-𝕎 :

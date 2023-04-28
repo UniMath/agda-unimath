@@ -200,7 +200,8 @@ module _
   (Z : obj-Large-Precat C l3)
   where
 
-  is-iso-comp-iso-Large-Precat : (g : type-hom-Large-Precat C Y Z) →
+  is-iso-comp-iso-Large-Precat :
+    (g : type-hom-Large-Precat C Y Z) →
     (f : type-hom-Large-Precat C X Y) →
     is-iso-Large-Precat C g → is-iso-Large-Precat C f →
     is-iso-Large-Precat C (comp-hom-Large-Precat C g f)
@@ -242,7 +243,8 @@ module _
             ( left-unit-law-comp-hom-Large-Precat C f)))) ∙
         ( is-retr-hom-inv-iso-Large-Precat C X Y (pair f p)))
 
-  comp-iso-Large-Precat : iso-Large-Precat C Y Z →
+  comp-iso-Large-Precat :
+    iso-Large-Precat C Y Z →
     iso-Large-Precat C X Y →
     iso-Large-Precat C X Z
   pr1 (comp-iso-Large-Precat g f) =
@@ -266,7 +268,8 @@ module _
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
 
-  is-iso-inv-iso-Large-Precat : (f : type-hom-Large-Precat C X Y) →
+  is-iso-inv-iso-Large-Precat :
+    (f : type-hom-Large-Precat C X Y) →
     (p : is-iso-Large-Precat C f) →
     is-iso-Large-Precat C (hom-inv-iso-Large-Precat C X Y (pair f p))
   pr1 (is-iso-inv-iso-Large-Precat f p) = f
@@ -275,7 +278,8 @@ module _
   pr2 (pr2 (is-iso-inv-iso-Large-Precat f p)) =
     is-sec-hom-inv-iso-Large-Precat C X Y (pair f p)
 
-  inv-iso-Large-Precat : iso-Large-Precat C X Y →
+  inv-iso-Large-Precat :
+    iso-Large-Precat C X Y →
     iso-Large-Precat C Y X
   pr1 (inv-iso-Large-Precat f) = hom-inv-iso-Large-Precat C X Y f
   pr2 (inv-iso-Large-Precat f) =

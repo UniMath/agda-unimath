@@ -125,7 +125,8 @@ abstract
 
 ```agda
 abstract
-  universal-property-trunc-Prop : {l1 l2 : Level} (A : UU l1) →
+  universal-property-trunc-Prop :
+    {l1 l2 : Level} (A : UU l1) →
     universal-property-propositional-truncation l2
       ( trunc-Prop A)
       ( unit-trunc-Prop)

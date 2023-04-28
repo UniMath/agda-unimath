@@ -133,12 +133,13 @@ module _
 ### Types of decidable propositions of any universe level are equivalent
 
 ```agda
-equiv-universes-Decidable-Prop : (l l' : Level) →
-  Decidable-Prop l ≃ Decidable-Prop l'
+equiv-universes-Decidable-Prop :
+  (l l' : Level) → Decidable-Prop l ≃ Decidable-Prop l'
 equiv-universes-Decidable-Prop l l' =
   inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Decidable-Prop
 
-iff-universes-Decidable-Prop : (l l' : Level) (P : Decidable-Prop l) →
+iff-universes-Decidable-Prop :
+  (l l' : Level) (P : Decidable-Prop l) →
   ( prop-Decidable-Prop P ⇔
     prop-Decidable-Prop (map-equiv (equiv-universes-Decidable-Prop l l') P))
 pr1 (iff-universes-Decidable-Prop l l' P) p =

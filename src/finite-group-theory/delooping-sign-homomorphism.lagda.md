@@ -1574,7 +1574,8 @@ module _
         Q-transposition-swap n Y
           ( pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1)))
 
-  eq-delooping-sign-homomorphism : (n : ℕ) →
+  eq-delooping-sign-homomorphism :
+    (n : ℕ) →
     Id
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))

@@ -208,20 +208,25 @@ module _
       ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂) =
       is-contr-Σ-is-prop c d q σ
       where
-        c : type-hom-Precat
-          (Slice-Precat C A) (Z , comp-hom-Precat C f h₁) (W , p)
+        c :
+          type-hom-Precat
+            ( Slice-Precat C A)
+            ( Z , comp-hom-Precat C f h₁)
+            ( W , p)
         pr1 c = pr1 (pr1 (ϕ Z h₁ h₂ β₂))
         pr2 c =
           ap (comp-hom-Precat C f) (inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))) ∙
           (inv (assoc-comp-hom-Precat C f p₁ _) ∙
           ap (λ k → comp-hom-Precat C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂)))) (inv α₁))
 
-        d : (comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) c ＝ (h₁ , refl)) ×
-            (comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) c ＝ (h₂ , β₂))
+        d :
+          ( comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) c ＝ (h₁ , refl)) ×
+          ( comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) c ＝ (h₂ , β₂))
         pr1 d = eq-hom-Slice-Precat C A _ _ (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
         pr2 d = eq-hom-Slice-Precat C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
 
-        q : ∀ k →
+        q :
+          ∀ k →
           is-prop
             ( (comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
             ( (comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂))))
@@ -230,7 +235,8 @@ module _
             ( is-set-type-Set (hom-Slice-Precat C A _ _) _ _)
             ( is-set-type-Set (hom-Slice-Precat C A _ _) _ _)
 
-        σ : ∀ k →
+        σ :
+          ∀ k →
           ( comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
           ( comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂)) →
           c ＝ k
@@ -265,7 +271,8 @@ module _
                 ( pr1
                   ( ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
 
-        q : ∀ k' →
+        q :
+          ∀ k' →
           is-prop
             (( comp-hom-Precat C p₁ k' ＝ p₁') ×
             ( comp-hom-Precat C p₂ k' ＝ p₂'))
@@ -274,10 +281,11 @@ module _
             ( is-set-type-Set (hom-Precat C _ _) _ _)
             ( is-set-type-Set (hom-Precat C _ _) _ _)
 
-        σ : (k' : type-hom-Precat C W' W) →
-            (γ' :
-              (comp-hom-Precat C p₁ k' ＝ p₁') ×
-              (comp-hom-Precat C p₂ k' ＝ p₂')) →
+        σ :
+          ( k' : type-hom-Precat C W' W) →
+          ( γ' :
+            ( comp-hom-Precat C p₁ k' ＝ p₁') ×
+            ( comp-hom-Precat C p₂ k' ＝ p₂')) →
             k ＝ k'
         σ k' (γ₁ , γ₂) =
           ap (pr1 ∘ pr1)

@@ -140,15 +140,22 @@ module _
           (inr (inr (pair x (pair p q)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-Decidable-Prop (P x))))
         ( refl)
-    left-cases-sec : (x : X) → (p : type-Decidable-Prop (P x)) → (q : is-decidable (type-Decidable-Prop (Q x))) →
+    left-cases-sec :
+      (x : X)
+      (p : type-Decidable-Prop (P x))
+      (q : is-decidable (type-Decidable-Prop (Q x))) →
       inv (left-cases-equiv-symmetric-difference P Q x p q) ＝ inl (pair x p)
     left-cases-sec x p (inl q) = refl
     left-cases-sec x p (inr nq) = refl
-    right-cases-sec : (x : X) → (q : type-Decidable-Prop (Q x)) → (p : is-decidable (type-Decidable-Prop (P x))) →
+    right-cases-sec :
+      (x : X)
+      (q : type-Decidable-Prop (Q x))
+      (p : is-decidable (type-Decidable-Prop (P x))) →
       inv (right-cases-equiv-symmetric-difference P Q x q p) ＝ inr (pair x q)
     right-cases-sec x q (inl p) = refl
     right-cases-sec x q (inr np) = refl
-    sec : (C : type-decidable-subtype P + type-decidable-subtype Q) →
+    sec :
+      (C : type-decidable-subtype P + type-decidable-subtype Q) →
       (inv ∘ pr1 (equiv-symmetric-difference P Q)) C ＝ C
     sec (inl (pair x p)) = left-cases-sec x p (is-decidable-type-Decidable-Prop (Q x))
     sec (inr (pair x q)) = right-cases-sec x q (is-decidable-type-Decidable-Prop (P x))

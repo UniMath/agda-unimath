@@ -418,10 +418,12 @@ module _
               ( pair (unit-trunc y) (map-compute-Eq-trunc y q)))
           ( r y))
     where
-    r : (y : A) (p : a ＝ y) →
-        Id { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
-           ( pair (unit-trunc a) refl-Eq-trunc)
-           ( pair (unit-trunc y) (map-compute-Eq-trunc y (unit-trunc p)))
+    r :
+      (y : A) (p : a ＝ y) →
+      Id
+        { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
+        ( pair (unit-trunc a) refl-Eq-trunc)
+        ( pair (unit-trunc y) (map-compute-Eq-trunc y (unit-trunc p)))
     r .a refl = refl
 
   Eq-eq-trunc : (x : type-trunc (succ-𝕋 k) A) → (unit-trunc a ＝ x) → Eq-trunc x

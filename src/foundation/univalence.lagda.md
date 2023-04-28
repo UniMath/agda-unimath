@@ -49,12 +49,14 @@ pr1 equiv-univalence = equiv-eq
 pr2 equiv-univalence = univalence _ _
 
 abstract
-  is-contr-total-equiv : {l : Level} (A : UU l) →
+  is-contr-total-equiv :
+    {l : Level} (A : UU l) →
     is-contr (Σ (UU l) (λ X → A ≃ X))
   is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
 
 abstract
-  is-contr-total-equiv' : {l : Level} (A : UU l) →
+  is-contr-total-equiv' :
+    {l : Level} (A : UU l) →
     is-contr (Σ (UU l) (λ X → X ≃ A))
   is-contr-total-equiv' {l} A =
     is-contr-equiv'
@@ -109,11 +111,13 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ## Properties
 
 ```agda
-comp-equiv-eq : {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
+comp-equiv-eq :
+  {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
 comp-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
 
-comp-eq-equiv : {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
+comp-eq-equiv :
+  {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
 comp-eq-equiv A B C f g =
   is-injective-map-equiv
@@ -125,11 +129,13 @@ comp-eq-equiv A B C f g =
         ( ( ap (λ e → g ∘e map-equiv e f) (right-inverse-law-equiv equiv-univalence)) ∙
           ( ap (λ e → map-equiv e (g ∘e f)) (inv (right-inverse-law-equiv equiv-univalence))))))
 
-commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : A ＝ B) →
+commutativity-inv-equiv-eq :
+  {l : Level} (A B : UU l) (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
 commutativity-inv-equiv-eq A .A refl = eq-equiv-eq-map-equiv refl
 
-commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
+commutativity-inv-eq-equiv :
+  {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
 commutativity-inv-eq-equiv A B f =
   is-injective-map-equiv

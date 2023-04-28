@@ -674,8 +674,10 @@ module _
                 ( refl)
                 ( refl))))
     where
-    f : (h : type-2-Element-Type X ≃ Fin 2) → (y : type-2-Element-Type X) →
-        ( k1 k2 k3 : Fin 2) →
+    f :
+      ( h : type-2-Element-Type X ≃ Fin 2)
+      ( y : type-2-Element-Type X) →
+      ( k1 k2 k3 : Fin 2) →
         map-equiv h x ＝ k1 → map-equiv h y ＝ k2 →
         map-equiv h (map-equiv (swap-2-Element-Type X) y) ＝ k3 →
         map-equiv (swap-2-Element-Type X) y ＝ y

@@ -785,8 +785,8 @@ pos-distance-between-multiples : (x y z : ℕ) → UU lzero
 pos-distance-between-multiples x y z = is-nonzero-ℕ (add-ℕ x y) →
   (is-nonzero-ℕ z) × (is-distance-between-multiples-ℕ x y z)
 
-is-inhabited-pos-distance-between-multiples : (x y : ℕ) →
-  Σ ℕ (pos-distance-between-multiples x y)
+is-inhabited-pos-distance-between-multiples :
+  (x y : ℕ) → Σ ℕ (pos-distance-between-multiples x y)
 is-inhabited-pos-distance-between-multiples zero-ℕ zero-ℕ =
   pair zero-ℕ (λ H → ex-falso (H refl))
 is-inhabited-pos-distance-between-multiples zero-ℕ (succ-ℕ y) =
@@ -796,8 +796,8 @@ is-inhabited-pos-distance-between-multiples (succ-ℕ x) y = pair (succ-ℕ x)
   (λ H → pair' (is-nonzero-succ-ℕ x)
     (pair 1 (pair zero-ℕ (ap succ-ℕ (left-unit-law-add-ℕ x)))))
 
-minimal-pos-distance-between-multiples : (x y : ℕ) →
-  minimal-element-ℕ (pos-distance-between-multiples x y)
+minimal-pos-distance-between-multiples :
+  (x y : ℕ) → minimal-element-ℕ (pos-distance-between-multiples x y)
 minimal-pos-distance-between-multiples x y = well-ordering-principle-ℕ
   (pos-distance-between-multiples x y)
   (λ z → is-decidable-function-type
@@ -852,12 +852,28 @@ minimal-positive-distance-succ-y-coeff x y = minimal-positive-distance-y-coeff (
 minimal-positive-distance-eqn : (x y : ℕ) → (H : is-nonzero-ℕ (add-ℕ x y)) → dist-ℕ (mul-ℕ (minimal-positive-distance-x-coeff x y H) x) (mul-ℕ (minimal-positive-distance-y-coeff x y H) y) ＝ minimal-positive-distance x y
 minimal-positive-distance-eqn x y H = pr2 (pr2 (minimal-positive-distance-is-distance x y H))
 
-minimal-positive-distance-succ-eqn : (x y : ℕ) → dist-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)) (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) ＝ minimal-positive-distance (succ-ℕ x) y
+minimal-positive-distance-succ-eqn :
+  (x y : ℕ) →
+  dist-ℕ
+    ( mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))
+    ( mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) ＝
+  minimal-positive-distance (succ-ℕ x) y
 minimal-positive-distance-succ-eqn x y = minimal-positive-distance-eqn (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
 
-minimal-positive-distance-div-succ-x-eqn : (x y : ℕ) → add-ℤ
-    (mul-ℤ (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) (int-ℕ (minimal-positive-distance (succ-ℕ x) y)))
-    (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) ＝ int-ℕ (succ-ℕ x)
+minimal-positive-distance-div-succ-x-eqn :
+  (x y : ℕ) →
+  add-ℤ
+    ( mul-ℤ
+      ( int-ℕ
+        ( quotient-euclidean-division-ℕ
+          ( minimal-positive-distance (succ-ℕ x) y)
+          ( succ-ℕ x)))
+      ( int-ℕ (minimal-positive-distance (succ-ℕ x) y)))
+    ( int-ℕ
+      ( remainder-euclidean-division-ℕ
+        ( minimal-positive-distance (succ-ℕ x) y)
+        ( succ-ℕ x))) ＝
+      int-ℕ (succ-ℕ x)
 minimal-positive-distance-div-succ-x-eqn x y =
     equational-reasoning
       add-ℤ
@@ -874,12 +890,33 @@ minimal-positive-distance-div-succ-x-eqn x y =
        ＝ int-ℕ (succ-ℕ x)
           by ap (int-ℕ) (eq-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
 
-remainder-min-dist-succ-x-le-min-dist : (x y : ℕ) → le-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)
-remainder-min-dist-succ-x-le-min-dist x y = strict-upper-bound-remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x) (minimal-positive-distance-nonzero (succ-ℕ x) y (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y))))
+remainder-min-dist-succ-x-le-min-dist :
+  (x y : ℕ) →
+  le-ℕ
+    ( remainder-euclidean-division-ℕ
+      ( minimal-positive-distance (succ-ℕ x) y)
+      ( succ-ℕ x))
+    ( minimal-positive-distance (succ-ℕ x) y)
+remainder-min-dist-succ-x-le-min-dist x y =
+  strict-upper-bound-remainder-euclidean-division-ℕ
+    ( minimal-positive-distance (succ-ℕ x) y)
+    ( succ-ℕ x)
+    ( minimal-positive-distance-nonzero
+      ( succ-ℕ x)
+      ( y)
+      ( tr
+        ( is-nonzero-ℕ)
+        ( inv (left-successor-law-add-ℕ x y))
+        ( is-nonzero-succ-ℕ (add-ℕ x y))))
 
-remainder-min-dist-succ-x-is-distance : (x y : ℕ) →
-  (is-distance-between-multiples-ℕ (succ-ℕ x) y
-    (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
+remainder-min-dist-succ-x-is-distance :
+  (x y : ℕ) →
+  (is-distance-between-multiples-ℕ
+    ( succ-ℕ x)
+    ( y)
+    ( remainder-euclidean-division-ℕ
+      ( minimal-positive-distance (succ-ℕ x) y)
+      ( succ-ℕ x)))
 remainder-min-dist-succ-x-is-distance x y =
   sx-ty-case-split (linear-leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y))
   where
@@ -908,8 +945,11 @@ remainder-min-dist-succ-x-is-distance x y =
   sx-ty-case-split (inl sxty) =
     (add-ℕ (mul-ℕ q s) 1 , mul-ℕ q t , inv (dist-eqn))
     where
-    add-dist-eqn : int-ℕ d ＝ add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y))
-      (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+    add-dist-eqn :
+      int-ℕ d ＝
+      add-ℤ
+        ( mul-ℤ (int-ℕ t) (int-ℕ y))
+        ( mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
     add-dist-eqn =
       equational-reasoning
         int-ℕ d
@@ -937,10 +977,16 @@ remainder-min-dist-succ-x-is-distance x y =
           by ap (λ H → add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) H)
             (inv (left-negative-law-mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))
 
-    isolate-rem-eqn : int-ℕ r ＝
-      add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y))
-        (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
-        (int-ℕ (succ-ℕ x))
+    isolate-rem-eqn :
+      int-ℕ r ＝
+      add-ℤ
+        ( neg-ℤ
+          ( mul-ℤ
+            ( int-ℕ q)
+            ( add-ℤ
+              ( mul-ℤ (int-ℕ t) (int-ℕ y))
+              ( mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+        ( int-ℕ (succ-ℕ x))
     isolate-rem-eqn =
       equational-reasoning
         int-ℕ r
@@ -1038,8 +1084,8 @@ remainder-min-dist-succ-x-is-distance x y =
               inv (right-distributive-mul-add-ℤ (mul-ℤ (int-ℕ q)
               (int-ℕ s)) one-ℤ (int-ℕ (succ-ℕ x))))
 
-    dist-eqn : r ＝ dist-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))
-      (mul-ℕ (mul-ℕ q t) y)
+    dist-eqn :
+      r ＝ dist-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x)) (mul-ℕ (mul-ℕ q t) y)
     dist-eqn =
       equational-reasoning
         r
@@ -1135,8 +1181,11 @@ remainder-min-dist-succ-x-is-distance x y =
           (is-nonzero-mul-ℕ q s quotient-min-dist-succ-x-nonzero
             min-dist-succ-x-coeff-nonzero))))
 
-    add-dist-eqn : int-ℕ d
-      ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))
+    add-dist-eqn :
+      int-ℕ d ＝
+      add-ℤ
+        ( mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y))
+        ( mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))
     add-dist-eqn =
       equational-reasoning
         int-ℕ d
@@ -1153,10 +1202,16 @@ remainder-min-dist-succ-x-is-distance x y =
         ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))
           by ap (λ H → add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) H) (inv (mul-int-ℕ s (succ-ℕ x)))
 
-    isolate-rem-eqn : int-ℕ r ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q)
-      (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y))
-        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))))
-      (int-ℕ (succ-ℕ x))
+    isolate-rem-eqn :
+      int-ℕ r ＝
+      add-ℤ
+        ( neg-ℤ
+          ( mul-ℤ
+            ( int-ℕ q)
+            ( add-ℤ
+              ( mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y))
+              ( mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))))
+        ( int-ℕ (succ-ℕ x))
     isolate-rem-eqn =
       equational-reasoning
         int-ℕ r
@@ -1275,9 +1330,13 @@ remainder-min-dist-succ-x-is-distance x y =
               (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
               (int-ℕ (succ-ℕ x)))
 
-    dist-eqn : r ＝ dist-ℕ
-      (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))) (succ-ℕ x))
-      (mul-ℕ (mul-ℕ q t) y)
+    dist-eqn :
+      r ＝
+      dist-ℕ
+        ( mul-ℕ
+          ( abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)))
+          ( succ-ℕ x))
+        ( mul-ℕ (mul-ℕ q t) y)
     dist-eqn =
       equational-reasoning
         r

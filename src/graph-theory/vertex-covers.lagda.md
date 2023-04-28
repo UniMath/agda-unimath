@@ -31,8 +31,8 @@ one extremity of each edge of the graph
 ## Definitions
 
 ```agda
-vertex-cover : {l1 l2 : Level} → Undirected-Graph l1 l2 →
-  UU (lsuc lzero ⊔ l1 ⊔ l2)
+vertex-cover :
+  {l1 l2 : Level} → Undirected-Graph l1 l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
 vertex-cover G =
   Σ ( vertex-Undirected-Graph G → Fin 2)
     ( λ c →

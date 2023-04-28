@@ -54,7 +54,8 @@ module _
   value-connected-component X = pr1 X
 
   abstract
-    mere-equality-connected-component : (X : connected-component) →
+    mere-equality-connected-component :
+      (X : connected-component) →
       type-trunc-Prop (value-connected-component X ＝ a)
     mere-equality-connected-component X = pr2 X
 ```

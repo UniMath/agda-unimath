@@ -387,10 +387,11 @@ module _
                       ( hom-left-adjoint-Adjunction C D FG f))
                     ( η X))))))))
     where
-    η : {l : Level} (X : obj-Large-Precat C l) →
-        type-hom-Large-Precat C X
-          ( obj-right-adjoint-Adjunction C D FG
-            ( obj-left-adjoint-Adjunction C D FG X))
+    η :
+      {l : Level} (X : obj-Large-Precat C l) →
+      type-hom-Large-Precat C X
+        ( obj-right-adjoint-Adjunction C D FG
+          ( obj-left-adjoint-Adjunction C D FG X))
     η = obj-natural-transformation-Large-Precat (unit-Adjunction FG)
 ```
 
@@ -466,8 +467,9 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
               ( right-unit-law-comp-hom-Large-Precat D
                 ( comp-hom-Large-Precat D f (ε X))))))))
     where
-    ε : {l : Level} (Y : obj-Large-Precat D l) →
-        type-hom-Large-Precat D
+    ε :
+      {l : Level} (Y : obj-Large-Precat D l) →
+      type-hom-Large-Precat D
         ( obj-left-adjoint-Adjunction C D FG
           ( obj-right-adjoint-Adjunction C D FG Y))
         ( Y)

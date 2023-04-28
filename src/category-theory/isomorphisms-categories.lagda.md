@@ -355,7 +355,8 @@ module _
 #### Left inverse law
 
 ```agda
-  left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+  left-inverse-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
   left-inverse-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
@@ -367,7 +368,8 @@ module _
 #### Right inverse law
 
 ```agda
-  right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+  right-inverse-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
   right-inverse-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C

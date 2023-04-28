@@ -149,7 +149,8 @@ module _
             ( f Y)
             ( g Y))
       where
-      f : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
+      f :
+        (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
         type-Prop
           ( prop-Decidable-Prop
             ( symmetric-difference-decidable-subtype
@@ -183,7 +184,8 @@ module _
                   ( d2 Y))
                 ( nnp))) ∙
             ( r))
-      cases-g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
+      cases-g :
+        (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
         ¬ (Id (d1 Y) (d3 Y)) → (is-decidable (Id (d1 Y) (d2 Y))) →
         is-decidable (Id (d2 Y) (d3 Y)) →
         (¬ (Id (d1 Y) (d2 Y)) × ¬ (¬ (Id (d2 Y) (d3 Y)))) +
@@ -205,7 +207,8 @@ module _
                 ( np)
                 ( nq)
                 ( nr)))
-      g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
+      g :
+        (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
         type-Decidable-Prop
           ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y) →
         type-Decidable-Prop
@@ -418,14 +421,16 @@ module _
 module _
   {l : Level} (n : ℕ)
   where
-  map-orientation-complete-undirected-graph-equiv : (X X' : UU-Fin l n) →
+  map-orientation-complete-undirected-graph-equiv :
+    (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') → orientation-Complete-Undirected-Graph n X →
     orientation-Complete-Undirected-Graph n X'
   pr1 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
     map-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
   pr2 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
     pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
-  orientation-complete-undirected-graph-equiv : (X X' : UU-Fin l n) →
+  orientation-complete-undirected-graph-equiv :
+    (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') →
     orientation-Complete-Undirected-Graph n X ≃ orientation-Complete-Undirected-Graph n X'
   pr1 (orientation-complete-undirected-graph-equiv X X' e) =
@@ -617,11 +622,13 @@ module _
 
 ```agda
 module _
-  {l : Level} {X : UU l} (eX : count X) (ineq : leq-ℕ 2 (number-of-elements-count eX))
+  {l : Level} {X : UU l}
+  (eX : count X) (ineq : leq-ℕ 2 (number-of-elements-count eX))
   where
 
-  cases-orientation-aut-count : (e : X ≃ X) →
-    ( Y : 2-Element-Decidable-Subtype l X) →
+  cases-orientation-aut-count :
+    (e : X ≃ X)
+    ( Y : 2-Element-Decidable-Subtype l X)
     ( two-elements : Σ X
       ( λ x → Σ X
         ( λ y → Σ (¬ (Id x y))
@@ -641,7 +648,8 @@ module _
   cases-orientation-aut-count e Y (pair x (pair y (pair np P))) (inr nq) (inr nr) =
     pair x (tr (λ Z → type-Decidable-Prop (pr1 Z x)) P (inl refl))
 
-  orientation-aut-count : X ≃ X →
+  orientation-aut-count :
+    X ≃ X →
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -655,8 +663,9 @@ module _
         ( map-equiv e (pr1 (pr2 (two-elements-transposition eX Y))))
         ( pr1 (pr2 (two-elements-transposition eX Y))))
 
-  cases-orientation-two-elements-count : (i j : X)
-    (Y : 2-Element-Decidable-Subtype l X) →
+  cases-orientation-two-elements-count :
+    ( i j : X)
+    ( Y : 2-Element-Decidable-Subtype l X)
     ( two-elements : Σ X
       ( λ x → Σ X
         ( λ y → Σ (¬ (Id x y))
@@ -679,7 +688,8 @@ module _
   cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inr nr) s =
     pair x (tr (λ Z → type-Decidable-Prop (pr1 Z x)) P (inl refl))
 
-  orientation-two-elements-count : (i j : X) → ¬ (Id i j) →
+  orientation-two-elements-count :
+    (i j : X) → ¬ (Id i j) →
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -1249,7 +1259,9 @@ module _
       cases-inward-edge-right-transposition-orientation-count i j np Y x nq nr
         ( eq-two-elements-transposition eX Y x j nr p1 p2)
 
-    cases-eq-orientation-two-elements-count : (i j : X) (np : ¬ (Id i j)) →
+    cases-eq-orientation-two-elements-count :
+      ( i j : X)
+      ( np : ¬ (Id i j))
       ( two-elements : Σ X
         ( λ x → Σ X
           ( λ y → Σ (¬ (Id x y))
@@ -1314,7 +1326,8 @@ module _
           ( λ eq → nr (inv (pr1 (pair-eq-Σ eq))))
           ( λ eq → nq (inv (pr1 (pair-eq-Σ eq)))))
 
-    eq-orientation-two-elements-count : (i j : X) (np : ¬ (Id i j)) →
+    eq-orientation-two-elements-count :
+      (i j : X) (np : ¬ (Id i j)) →
       Id
         ( pr1
           ( orientation-two-elements-count i j np
@@ -2953,8 +2966,11 @@ module _
   inv-orientation T (inl P) = inl (inr star)
   inv-orientation T (inr NP) = inr star
 
-  equiv-fin-2-quotient-sign-count : Fin 2 ≃
-    (quotient-sign (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
+  equiv-fin-2-quotient-sign-count :
+    Fin 2 ≃
+    ( quotient-sign
+      ( number-of-elements-count eX)
+      ( pair X (unit-trunc-Prop (equiv-count eX))))
   pr1 equiv-fin-2-quotient-sign-count (inl (inr star)) =
     class
       ( even-difference-orientation-Complete-Undirected-Graph
@@ -3171,7 +3187,8 @@ module _
                   ( t)
                   ( canonical-orientation-count))
               ( refl)))
-    sec-orientation : (k : Fin 2) →
+    sec-orientation :
+      (k : Fin 2)
       ( D : is-decidable
         ( is-in-equivalence-class
           ( even-difference-orientation-Complete-Undirected-Graph
@@ -3214,8 +3231,8 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
 
-  equiv-fin-2-quotient-sign-equiv-Fin : (h : Fin n ≃ type-UU-Fin n X) →
-    ( Fin 2 ≃ quotient-sign n X)
+  equiv-fin-2-quotient-sign-equiv-Fin :
+    (h : Fin n ≃ type-UU-Fin n X) → Fin 2 ≃ quotient-sign n X
   equiv-fin-2-quotient-sign-equiv-Fin h =
     tr
       ( λ e → Fin 2 ≃ quotient-sign n (pair (type-UU-Fin n X) e))

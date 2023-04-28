@@ -394,7 +394,8 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
   where
 
-  distributive-inv-comp-equiv : (e : X ≃ Y) (f : Y ≃ Z) →
+  distributive-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
     (inv-equiv (f ∘e e)) ＝ ((inv-equiv e) ∘e (inv-equiv f))
   distributive-inv-comp-equiv e f =
     eq-htpy-equiv

@@ -59,9 +59,9 @@ is-small-universal-multiset-𝕍 l {l1} (pair (pair U e) H) =
              ( pr2 (H X)))))
     ( f)
     where
-    f : (X : 𝕍 l1) →
-        is-small-𝕍 l
-          ( resize-𝕍 X (is-small-multiset-𝕍 is-small-lsuc X))
+    f :
+      (X : 𝕍 l1) →
+      is-small-𝕍 l (resize-𝕍 X (is-small-multiset-𝕍 is-small-lsuc X))
     f (tree-𝕎 A α) =
       pair
         ( pair

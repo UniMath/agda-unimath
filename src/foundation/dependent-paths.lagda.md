@@ -186,7 +186,8 @@ module _
     (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
     (d-assoc p01 q01 p12 q12 p23 q23)
 
-  d-right-unit : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-right-unit :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (right-unit {p = p}) (d-concat B p q refl (refl-path-over B a1 b1)) q
   d-right-unit refl refl = refl
 
@@ -196,41 +197,49 @@ module _
   d-right-unit' p q = tr-path-over-path-over² B (right-unit {p = p})
     (d-concat B p q refl (refl-path-over B a1 b1)) q (d-right-unit p q)
 
-  d-left-unit : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-left-unit :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (left-unit {p = p}) (d-concat B refl (refl-path-over B a0 b0) p q) q
   d-left-unit p q = refl
 
-  d-left-unit' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-left-unit' :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b1) (left-unit) (d-concat B refl (refl-path-over B a0 b0) p q)) ＝ q
   d-left-unit' p q = tr-path-over-path-over² B (left-unit {p = p})
     (d-concat B refl (refl-path-over B a0 b0) p q) q (d-left-unit p q)
 
-  d-right-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-right-inv :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (right-inv p) (d-concat B p q (inv p) (d-inv B p q))
     (refl-path-over B a0 b0)
   d-right-inv refl refl = refl
 
-  d-right-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-right-inv' :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat B p q (inv p) (d-inv B p q))) ＝ (
      refl-path-over B a0 b0)
   d-right-inv' p q = tr-path-over-path-over² B (right-inv p)
     (d-concat B p q (inv p) (d-inv B p q)) (refl-path-over B a0 b0) (d-right-inv p q)
 
-  d-left-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-left-inv :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (left-inv p) (d-concat B (inv p) (d-inv B p q) p q) (refl-path-over B a1 b1)
   d-left-inv refl refl = refl
 
-  d-left-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-left-inv' :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b1 b1) (left-inv p) (d-concat B (inv p) (d-inv B p q) p q)) ＝ (
      refl-path-over B a1 b1)
   d-left-inv' p q = tr-path-over-path-over² B (left-inv p)
     (d-concat B (inv p) (d-inv B p q) p q) (refl-path-over B a1 b1) (d-left-inv p q)
 
-  d-inv-d-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-inv-d-inv :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (inv-inv p) (d-inv B (inv p) (d-inv B p q)) q
   d-inv-d-inv refl refl = refl
 
-  d-inv-d-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+  d-inv-d-inv' :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b1) (inv-inv p) (d-inv B (inv p) (d-inv B p q))) ＝ q
   d-inv-d-inv' p q = tr-path-over-path-over² B (inv-inv p)
     (d-inv B (inv p) (d-inv B p q)) q (d-inv-d-inv p q)

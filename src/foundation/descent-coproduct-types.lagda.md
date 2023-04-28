@@ -104,9 +104,12 @@ module _
         ( cone-descent-coprod (triple h f' H) (triple k g' K))
         ( α)
       where
-      α : is-fiberwise-equiv
-          ( map-fib-cone (ind-coprod (λ _ → X) f g) i
-          ( cone-descent-coprod (triple h f' H) (triple k g' K)))
+      α :
+        is-fiberwise-equiv
+          ( map-fib-cone
+            ( ind-coprod (λ _ → X) f g)
+            ( i)
+            ( cone-descent-coprod (triple h f' H) (triple k g' K)))
       α (inl x) =
         is-equiv-left-factor-htpy
           ( map-fib-cone f i (triple h f' H) x)

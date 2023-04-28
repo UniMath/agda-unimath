@@ -403,9 +403,12 @@ module _
                 ( inr star))))))
       ( λ f → eq-equiv-eq-map-equiv refl)
     where
-    p : (f : ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
-                 ( λ e → map-equiv e (inr star) ＝ inr star)))
-      (b : unit) → map-equiv (pr1 f) (inr b) ＝ inr b
+    p :
+      ( f :
+        ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
+            ( λ e → map-equiv e (inr star) ＝ inr star)))
+      ( b : unit) →
+      map-equiv (pr1 f) (inr b) ＝ inr b
     p f star = pr2 f
 
   computation-extend-equiv-Maybe :
@@ -423,7 +426,8 @@ module _
       ( pr1 (pair-eq-Σ (pr2 (pr1 (pr2 extend-equiv-Maybe)) (pair f p))))
       ( inl x)
 
-  comp-extend-equiv-Maybe : (f g : type-Set X ≃ type-Set X) →
+  comp-extend-equiv-Maybe :
+    (f g : type-Set X ≃ type-Set X) →
     htpy-equiv
       ( pr1 (map-equiv extend-equiv-Maybe (f ∘e g)))
       ( ( pr1 (map-equiv extend-equiv-Maybe f)) ∘e

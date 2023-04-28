@@ -441,7 +441,8 @@ module _
       Σ ℕ (λ l → (is-nonzero-ℕ l) × Id (iterate l (map-equiv f) a) a)
     has-finite-orbits-permutation-a h =
       has-finite-orbits-permutation (type-UU-Fin n X) (pair n h) f a
-    lemma : (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
+    lemma :
+      (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
           Id (add-ℕ j k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
@@ -776,7 +777,8 @@ module _
               ( λ r' → r (inv r')))))
 
   abstract
-    conserves-other-orbits-transposition : (g : X ≃ X) (x y : X) →
+    conserves-other-orbits-transposition :
+      (g : X ≃ X) (x y : X) →
       ¬ (sim-Eq-Rel (same-orbits-permutation-count g) x a) →
       ¬ (sim-Eq-Rel (same-orbits-permutation-count g) x b) →
       ( ( sim-Eq-Rel (same-orbits-permutation-count g) x y) ≃
@@ -813,7 +815,8 @@ module _
               ( λ r → NB (unit-trunc-Prop (pair k' r))))
           (λ _ _ _ → star) k (inr star)
 
-  conserves-other-orbits-transposition-quotient : (g : X ≃ X) →
+  conserves-other-orbits-transposition-quotient :
+    (g : X ≃ X)
     (T : equivalence-class (same-orbits-permutation-count g)) →
     ¬ (is-in-equivalence-class (same-orbits-permutation-count g) T a) →
     ¬ (is-in-equivalence-class (same-orbits-permutation-count g) T b) →
@@ -840,7 +843,8 @@ module _
                     ( Q y))))))
 
   abstract
-    not-same-orbits-transposition-same-orbits : (g : X ≃ X) →
+    not-same-orbits-transposition-same-orbits :
+      ( g : X ≃ X)
       ( P :
         ( sim-Eq-Rel
           ( same-orbits-permutation
@@ -1953,8 +1957,8 @@ module _
                   ( composition-transposition-a-b g))
                 ( b))
               ( refl)))
-      sec-h' : (k : Fin (succ-ℕ (number-of-elements-count h))) →
-        Id (inv-h' (h' k)) k
+      sec-h' :
+        (k : Fin (succ-ℕ (number-of-elements-count h))) → Id (inv-h' (h' k)) k
       sec-h' (inl k) =
         sec-h'-inl k Q R
           ( is-decidable-is-in-equivalence-class-same-orbits-permutation

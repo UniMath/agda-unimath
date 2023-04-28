@@ -88,11 +88,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  _∙h_ : {f g h : (x : A) → B x} →
+  _∙h_ :
+    {f g h : (x : A) → B x} →
     f ~ g → g ~ h → f ~ h
   (H ∙h K) x = (H x) ∙ (K x)
 
-  concat-htpy : {f g : (x : A) → B x} →
+  concat-htpy :
+    {f g : (x : A) → B x} →
     f ~ g → (h : (x : A) → B x) → g ~ h → f ~ h
   concat-htpy H h K x = concat (H x) (h x) (K x)
 

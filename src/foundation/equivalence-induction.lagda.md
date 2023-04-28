@@ -28,14 +28,16 @@ Equivalence induction is a condition equivalent to the univalence axiom
 
 ```agda
 abstract
-  Ind-equiv : {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
+  Ind-equiv :
+    {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
     sec (ev-id P)
   Ind-equiv A P =
     IND-EQUIV-is-contr-total-equiv
     ( is-contr-total-equiv A)
     ( λ t → P (pr1 t) (pr2 t))
 
-ind-equiv : {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
+ind-equiv :
+  {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
   P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
 ind-equiv A P p {B} = pr1 (Ind-equiv A P) p B
 ```

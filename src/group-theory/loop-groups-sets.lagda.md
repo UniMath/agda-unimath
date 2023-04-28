@@ -90,11 +90,13 @@ module _
   {l : Level}
   where
 
-  map-hom-symmetric-group-loop-group-Set : (X Y : Set l) →
+  map-hom-symmetric-group-loop-group-Set :
+    (X Y : Set l) →
     Id (type-Set X) (type-Set Y) → (type-Set Y) ≃ (type-Set X)
   map-hom-symmetric-group-loop-group-Set X Y p = equiv-eq (inv p)
 
-  map-hom-inv-symmetric-group-loop-group-Set : (X Y : Set l) →
+  map-hom-inv-symmetric-group-loop-group-Set :
+    (X Y : Set l) →
     (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
   map-hom-inv-symmetric-group-loop-group-Set X Y f =
     inv (eq-equiv (type-Set X) (type-Set Y) f)

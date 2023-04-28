@@ -355,8 +355,9 @@ is-π-finite-Group-of-Order {l} k n =
         is-π-finite-is-finite k
           ( is-finite-is-group n X)))
   where
-  e : Group-of-Order l n ≃
-      Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))
+  e :
+    Group-of-Order l n ≃
+    Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))
   e = equiv-right-swap-Σ
 
 number-of-groups-of-order : ℕ → ℕ

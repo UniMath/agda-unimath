@@ -435,7 +435,8 @@ module _
   {l1 : Level} (X : UU l1)
   where
 
-  equiv-universes-2-Element-Decidable-Subtype : (l l' : Level) →
+  equiv-universes-2-Element-Decidable-Subtype :
+    (l l' : Level) →
     2-Element-Decidable-Subtype l X ≃ 2-Element-Decidable-Subtype l' X
   equiv-universes-2-Element-Decidable-Subtype l l' =
     equiv-subtype-equiv

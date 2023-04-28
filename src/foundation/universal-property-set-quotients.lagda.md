@@ -271,10 +271,13 @@ module _
           ( Id-Prop B x y)
           ( α p))
     where
-    α : {x y : type-Set B}
-        (p : ( map-emb-is-surjective-and-effective H x) ＝
-             ( map-emb-is-surjective-and-effective H y)) →
-        fib q y → type-Prop (Id-Prop B x y)
+    α :
+      {x y : type-Set B}
+      (p :
+        ( map-emb-is-surjective-and-effective H x) ＝
+        ( map-emb-is-surjective-and-effective H y)) →
+      fib q y →
+      type-Prop (Id-Prop B x y)
     α {x} p (pair a refl) =
       map-inv-equiv
         ( ( inv-equiv
@@ -305,10 +308,13 @@ module _
           ( Id-Prop B x y)
           ( α p))
     where
-    α : {x y : type-Set B}
-        (p : ( large-map-emb-is-surjective-and-effective e x) ＝
-             ( large-map-emb-is-surjective-and-effective e y)) →
-        fib q y → type-Prop (Id-Prop B x y)
+    α :
+      {x y : type-Set B}
+      (p :
+        ( large-map-emb-is-surjective-and-effective e x) ＝
+        ( large-map-emb-is-surjective-and-effective e y)) →
+      fib q y →
+      type-Prop (Id-Prop B x y)
     α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
 
   large-emb-is-surjective-and-effective :
@@ -372,8 +378,9 @@ module _
                   ( map-reflecting-map-Eq-Rel R q)
                   ( is-set-type-Set B))))
           ( pair (map-unit-im (map-reflecting-map-Eq-Rel R q)) α)
-    γ : (β ∘ (map-reflecting-map-Eq-Rel R q)) ~
-        map-unit-im (map-reflecting-map-Eq-Rel R q)
+    γ :
+      ( β ∘ (map-reflecting-map-Eq-Rel R q)) ~
+      ( map-unit-im (map-reflecting-map-Eq-Rel R q))
     γ = htpy-eq
         ( ap pr1
              ( issec-map-inv-is-equiv
@@ -383,11 +390,13 @@ module _
                        ( map-reflecting-map-Eq-Rel R q)
                        ( is-set-type-Set B))))
                ( pair (map-unit-im (map-reflecting-map-Eq-Rel R q)) α)))
-    δ : ( ( inclusion-im (map-reflecting-map-Eq-Rel R q) ∘ β) ∘
-          ( map-reflecting-map-Eq-Rel R q)) ~
-        ( map-reflecting-map-Eq-Rel R q)
-    δ = ( inclusion-im (map-reflecting-map-Eq-Rel R q) ·l γ) ∙h
-        ( triangle-unit-im (map-reflecting-map-Eq-Rel R q))
+    δ :
+      ( ( inclusion-im (map-reflecting-map-Eq-Rel R q) ∘ β) ∘
+        ( map-reflecting-map-Eq-Rel R q)) ~
+      ( map-reflecting-map-Eq-Rel R q)
+    δ =
+      ( inclusion-im (map-reflecting-map-Eq-Rel R q) ·l γ) ∙h
+      ( triangle-unit-im (map-reflecting-map-Eq-Rel R q))
 ```
 
 ### Any set quotient `q : A → B` of an equivalence relation `R` on `A` is effective
@@ -442,13 +451,13 @@ module _
             ( pr2 v)))
     is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
     is-contr-total-P = pair center-total-P contraction-total-P
-    β : (b : type-Set B) →
-        map-reflecting-map-Eq-Rel R q x ＝ b → type-Prop (P b)
+    β :
+      (b : type-Set B) → map-reflecting-map-Eq-Rel R q x ＝ b → type-Prop (P b)
     β .(map-reflecting-map-Eq-Rel R q x) refl = point-P
     γ : (b : type-Set B) → is-equiv (β b)
     γ = fundamental-theorem-id is-contr-total-P β
-    δ : (b : type-Set B) →
-        (map-reflecting-map-Eq-Rel R q x ＝ b) ≃ type-Prop (P b)
+    δ :
+      (b : type-Set B) → (map-reflecting-map-Eq-Rel R q x ＝ b) ≃ type-Prop (P b)
     δ b = pair (β b) (γ b)
 
   apply-effectiveness-is-set-quotient :
@@ -538,9 +547,10 @@ module _
                 ( is-prop-total-P b)))
           ( λ a → pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
 
-      β : (a : A) →
-          ( α (map-reflecting-map-Eq-Rel R q a)) ＝
-          ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
+      β :
+        (a : A) →
+        ( α (map-reflecting-map-Eq-Rel R q a)) ＝
+        ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
       β = htpy-eq
             ( issec-map-inv-is-equiv
               ( dependent-universal-property-surj-is-surjective

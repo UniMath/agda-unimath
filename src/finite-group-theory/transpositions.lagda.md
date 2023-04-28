@@ -443,7 +443,8 @@ module _
             ( refl))
 
   abstract
-    cases-eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
+    cases-eq-two-elements-transposition :
+      (x y : X) (np : ¬ (Id x y)) →
       (type-Decidable-Prop (pr1 Y x)) →
       (type-Decidable-Prop (pr1 Y y)) →
       is-decidable (Id (pr1 two-elements-transposition) x) →
@@ -522,7 +523,8 @@ module _
           ( λ p → nr (pr1 (pair-eq-Σ p)))
           ( λ p → nq (pr1 (pair-eq-Σ p))))
 
-    eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
+    eq-two-elements-transposition :
+      (x y : X) (np : ¬ (Id x y)) →
       (type-Decidable-Prop (pr1 Y x)) →
       (type-Decidable-Prop (pr1 Y y)) →
       ( ( Id (pr1 two-elements-transposition) x) ×
@@ -676,7 +678,8 @@ module _
 ### For all `n : ℕ`, for each transposition of `Fin n`, there exists a matching transposition in `Fin (succ-ℕ n)`.
 
 ```agda
-Fin-succ-Fin-transposition : (n : ℕ) →
+Fin-succ-Fin-transposition :
+  (n : ℕ) →
   ( Σ
     ( Fin n → Decidable-Prop lzero)
     ( λ P → has-cardinality 2 (Σ (Fin n) (λ x → type-Decidable-Prop (P x))))) →
@@ -707,10 +710,11 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
        type-Decidable-Prop
        (pr1 (Fin-succ-Fin-transposition n (pair P H)) x))
   f (inl (pair x p)) = pair (inl x) p
-  inv-f : Σ (Fin (succ-ℕ n))
-    (λ x →
-       type-Decidable-Prop
-       (pr1 (Fin-succ-Fin-transposition n (pair P H)) x)) →
+  inv-f :
+    Σ ( Fin (succ-ℕ n))
+      ( λ x →
+        type-Decidable-Prop
+        (pr1 (Fin-succ-Fin-transposition n (pair P H)) x)) →
     (Σ (Fin n) (λ x → type-Decidable-Prop (P x))) + (Σ unit (λ x → empty))
   inv-f (pair (inl x) p) = inl (pair x p)
   retr-f : (f ∘ inv-f) ~ id
@@ -718,7 +722,8 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
   sec-f : (inv-f ∘ f) ~ id
   sec-f (inl (pair x p)) = refl
 
-correct-Fin-succ-Fin-transposition : (n : ℕ) →
+correct-Fin-succ-Fin-transposition :
+  (n : ℕ) →
   (t : Σ
     ( Fin n → Decidable-Prop lzero)
     ( λ P → has-cardinality 2 (Σ (Fin n) (λ x → type-Decidable-Prop (P x))))) →
@@ -751,7 +756,8 @@ correct-Fin-succ-Fin-transposition n t (inl x) | inl p =
 correct-Fin-succ-Fin-transposition n t (inl x) | inr np = refl
 correct-Fin-succ-Fin-transposition n t (inr star) = refl
 
-correct-Fin-succ-Fin-transposition-list : (n : ℕ) →
+correct-Fin-succ-Fin-transposition-list :
+  (n : ℕ)
   (l : list
     ( Σ
       ( Fin n → Decidable-Prop lzero)
@@ -817,7 +823,8 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype {l} {X} H {x} {y} 
                 ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))))))
     ( eq-is-prop is-prop-type-trunc-Prop)
   where
-  f : (z : X) →
+  f :
+    (z : X) →
     pr1
       ( pr1
         ( precomp-equiv-2-Element-Decidable-Subtype
@@ -836,7 +843,8 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype {l} {X} H {x} {y} 
         ( standard-transposition H np)
         ( ( left-computation-standard-transposition H np) ∙
           ( p)))
-  g : (z : X) →
+  g :
+    (z : X) →
     pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z) →
     pr1
       ( pr1
@@ -892,7 +900,8 @@ eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
                 ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))))))
     ( eq-is-prop is-prop-type-trunc-Prop)
   where
-  f : (u : X) →
+  f :
+    (u : X) →
     pr1
       ( pr1
         ( precomp-equiv-2-Element-Decidable-Subtype
@@ -911,7 +920,8 @@ eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
         ( standard-transposition H np)
         ( ( is-fixed-point-standard-transposition H np w nq2 nq4) ∙
           ( p)))
-  g : (u : X) →
+  g :
+    (u : X) →
     pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u) →
     pr1
       ( pr1

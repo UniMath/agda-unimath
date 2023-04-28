@@ -596,7 +596,8 @@ module _
   {l : Level} (A : Set l)
   where
 
-  is-set-quotient-id-Id-Eq-Rel : {l' : Level} →
+  is-set-quotient-id-Id-Eq-Rel :
+    {l' : Level} →
     is-set-quotient l' (Id-Eq-Rel A) A (id-reflecting-map-Id-Eq-Rel A)
   is-set-quotient-id-Id-Eq-Rel =
     is-set-quotient-is-surjective-and-effective (Id-Eq-Rel A) A

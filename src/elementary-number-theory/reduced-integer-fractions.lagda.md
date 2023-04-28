@@ -233,7 +233,8 @@ sim-reduced-fraction-ℤ x =
       by ap (λ H → mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) H)
         (commutative-mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) (denominator-fraction-ℤ (reduce-fraction-ℤ x)) ∙ eq-reduce-denominator-fraction-ℤ x)
 
-reduce-preserves-sim-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
+reduce-preserves-sim-ℤ :
+  (x y : fraction-ℤ) (H : sim-fraction-ℤ x y) →
   sim-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y)
 reduce-preserves-sim-ℤ x y H =
   trans-sim-fraction-ℤ (reduce-fraction-ℤ x) y (reduce-fraction-ℤ y)

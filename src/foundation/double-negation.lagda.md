@@ -40,8 +40,7 @@ of double negation.
 intro-dn : {l : Level} {P : UU l} → P → ¬¬ P
 intro-dn p f = f p
 
-map-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  (P → Q) → (¬¬ P → ¬¬ Q)
+map-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → (¬¬ P → ¬¬ Q)
 map-dn f = map-neg (map-neg f)
 ```
 
