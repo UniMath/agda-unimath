@@ -296,7 +296,7 @@ module _
 module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
-  
+
   compute-proper-node-Directed-Tree :
     proper-node-Directed-Tree T ≃
     Σ ( base-Directed-Tree T)

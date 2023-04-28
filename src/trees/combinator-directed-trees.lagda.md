@@ -601,7 +601,6 @@ module _
   map-compute-proper-node-combinator-Directed-Tree (i , x) = {!!}
 ```
 
-
 ### The fibers at a base element `b` of the comibinator of a family `T` of trees is equivalent to `T (index-base b)`
 
 ```agda
