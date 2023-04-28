@@ -66,9 +66,9 @@ module _
     type-hom-Precat D (obj-functor-Precat C D F x) (obj-functor-Precat C D G x)
   components-nat-trans-Precat = pr1
 
-  squares-nat-trans-Precat :
+  coherence-square-nat-trans-Precat :
     (γ : nat-trans-Precat) → is-nat-trans-Precat (components-nat-trans-Precat γ)
-  squares-nat-trans-Precat = pr2
+  coherence-square-nat-trans-Precat = pr2
 ```
 
 ## Composition and identity of natural transformations
@@ -105,7 +105,10 @@ module _
       ＝ comp-hom-Precat D
           ( comp-hom-Precat D (pr1 β _) (hom-functor-Precat C D G f))
           ( components-nat-trans-Precat C D F G α _)
-        by ap (λ x → comp-hom-Precat D x _) (squares-nat-trans-Precat C D G H β f)
+        by
+          ap
+            ( λ x → comp-hom-Precat D x _)
+            ( coherence-square-nat-trans-Precat C D G H β f)
       ＝ comp-hom-Precat D (pr1 β _)
           ( comp-hom-Precat D
             ( hom-functor-Precat C D G f)
@@ -115,7 +118,10 @@ module _
           ( comp-hom-Precat D
             ( components-nat-trans-Precat C D F G α _)
             ( hom-functor-Precat C D F f))
-        by ap (comp-hom-Precat D _) (squares-nat-trans-Precat C D F G α f)
+        by
+          ap
+            ( comp-hom-Precat D _)
+            ( coherence-square-nat-trans-Precat C D F G α f)
       ＝ comp-hom-Precat D
           ( comp-hom-Precat D
             ( pr1 β _)
