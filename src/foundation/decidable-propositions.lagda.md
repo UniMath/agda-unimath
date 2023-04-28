@@ -56,8 +56,7 @@ is-emb-prop-Decidable-Prop =
       is-emb-inclusion-subtype
         ( λ H → pair (is-decidable X) (is-prop-is-decidable H)))
 
-emb-prop-Decidable-Prop :
-  {l : Level} → Decidable-Prop l ↪ Prop l
+emb-prop-Decidable-Prop : {l : Level} → Decidable-Prop l ↪ Prop l
 pr1 emb-prop-Decidable-Prop = prop-Decidable-Prop
 pr2 emb-prop-Decidable-Prop = is-emb-prop-Decidable-Prop
 ```

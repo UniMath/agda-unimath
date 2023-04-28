@@ -33,7 +33,7 @@ LEM l = (P : Prop l) → is-decidable (type-Prop P)
 
 ## Properties
 
-### Given LEM, we obtain a map from the type of propositions to the type of all propositions
+### Given LEM, we obtain a map from the type of propositions to the type of decidable propositions
 
 ```agda
 decidable-prop-Prop :
