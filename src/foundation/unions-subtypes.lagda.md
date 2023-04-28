@@ -40,7 +40,7 @@ module _
 ```agda
   union-decidable-subtype : decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
-  union-decidable-subtype P Q x = disj-decidable-Prop (P x) (Q x)
+  union-decidable-subtype P Q x = disj-Decidable-Prop (P x) (Q x)
 ```
 
 ### Unions of families of subtypes

@@ -134,13 +134,13 @@ module _
   count-left-summand e =
     count-equiv
       ( equiv-left-summand)
-      ( count-decidable-subtype is-left-decidable-Prop e)
+      ( count-decidable-subtype is-left-Decidable-Prop e)
 
   count-right-summand : count (X + Y) → count Y
   count-right-summand e =
     count-equiv
       ( equiv-right-summand)
-      ( count-decidable-subtype is-right-decidable-Prop e)
+      ( count-decidable-subtype is-right-Decidable-Prop e)
 ```
 
 ### If each of `A`, `B`, and `A + B` come equipped with countings, then the number of elements of `A` and of `B` add up to the number of elements of `A + B`

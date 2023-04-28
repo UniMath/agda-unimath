@@ -144,7 +144,7 @@ is-contr-is-zero-or-one-Fin-two-ℕ x =
 
 ```agda
 decidable-Eq-Fin :
-  (n : ℕ) (i j : Fin n) → decidable-Prop lzero
+  (n : ℕ) (i j : Fin n) → Decidable-Prop lzero
 pr1 (decidable-Eq-Fin n i j) = Id i j
 pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
 pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin n i j

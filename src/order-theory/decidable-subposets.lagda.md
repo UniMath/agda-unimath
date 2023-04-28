@@ -25,7 +25,7 @@ open import order-theory.subposets
 ```agda
 module _
   {l1 l2 l3 : Level} (X : Poset l1 l2)
-  (S : element-Poset X → decidable-Prop l3)
+  (S : element-Poset X → Decidable-Prop l3)
   where
 
   element-decidable-sub-Poset : UU (l1 ⊔ l3)

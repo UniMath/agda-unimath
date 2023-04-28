@@ -171,10 +171,10 @@ pr2 (decidable-subtype-decidable-emb f y) =
 ### The type of all decidable embeddings into a type `A` is equivalent to the type of decidable subtypes of `A`
 
 ```agda
-equiv-Fib-decidable-Prop :
+equiv-Fib-Decidable-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
   Σ (UU (l1 ⊔ l)) (λ X → X ↪d A) ≃ (decidable-subtype (l1 ⊔ l) A)
-equiv-Fib-decidable-Prop l A =
+equiv-Fib-Decidable-Prop l A =
   ( equiv-Fib-structure l is-decidable-prop A) ∘e
   ( equiv-tot
     ( λ X →

@@ -116,7 +116,7 @@ module _
     (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (type-Decidable-Relation R x y)
   is-finite-relation-Decidable-Relation-𝔽 x y =
      unit-trunc-Prop
-       ( count-decidable-Prop
+       ( count-Decidable-Prop
          ( relation-Decidable-Relation R x y )
          ( is-decidable-type-Decidable-Relation R x y))
 
@@ -239,7 +239,7 @@ is-finite-Decidable-Relation-𝔽 A =
     ( λ a →
       is-finite-Π
         ( is-finite-type-𝔽 A)
-        ( λ b → is-finite-decidable-Prop))
+        ( λ b → is-finite-Decidable-Prop))
 
 is-finite-Decidable-Equivalence-Relation-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →

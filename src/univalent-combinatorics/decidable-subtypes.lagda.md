@@ -93,7 +93,7 @@ is-finite-decidable-subtype-is-finite :
   {l1 l2 : Level} {X : UU l1} →
   is-finite X → is-finite (decidable-subtype l2 X)
 is-finite-decidable-subtype-is-finite H =
-  is-finite-function-type H is-finite-decidable-Prop
+  is-finite-function-type H is-finite-Decidable-Prop
 
 Subset-𝔽 :
   {l1 : Level} (l2 : Level) → 𝔽 l1 → 𝔽 (l1 ⊔ lsuc l2)
@@ -122,8 +122,8 @@ is-finite-type-decidable-subtype P H =
   is-finite-Σ H
     ( λ x →
       is-finite-is-decidable-Prop
-        ( prop-decidable-Prop (P x))
-        ( is-decidable-type-decidable-Prop (P x)))
+        ( prop-Decidable-Prop (P x))
+        ( is-decidable-type-Decidable-Prop (P x)))
 
 is-finite-type-subset-𝔽 :
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) →

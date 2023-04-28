@@ -353,7 +353,7 @@ is-countable-empty : is-countable empty-Set
 is-countable-empty =
   is-countable-is-countable' empty-Set
     (unit-trunc-Prop
-      ( ( λ x → empty-decidable-Prop) ,
+      ( ( λ x → empty-Decidable-Prop) ,
         ( λ {()}) , λ {()}))
 ```
 
