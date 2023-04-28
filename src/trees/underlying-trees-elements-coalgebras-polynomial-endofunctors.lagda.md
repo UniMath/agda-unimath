@@ -1119,7 +1119,7 @@ module _
            ( root-coalgebra _))
          ( a))
       ( {!!} , {!!})
-  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b (node-inclusion-element-coalgebra x₁ u) a = {!!}
+  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b (node-inclusion-element-coalgebra x₁ u) a = {! !}
 
 {-
     eq-Eq-children-fiber-Enriched-Directed-Tree A B

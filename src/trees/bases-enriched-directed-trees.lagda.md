@@ -84,12 +84,12 @@ module _
   (T : Enriched-Directed-Tree l3 l4 A B)
   where
 
-  is-not-root-node-base-Enriched-Directed-Tree :
+  is-proper-node-base-Enriched-Directed-Tree :
     (b : base-Enriched-Directed-Tree A B T) →
-    ¬ ( is-root-Enriched-Directed-Tree A B T
-        ( node-base-Enriched-Directed-Tree A B T b))
-  is-not-root-node-base-Enriched-Directed-Tree b =
-    is-not-root-node-base-Directed-Tree
+    is-proper-node-Enriched-Directed-Tree A B T
+      ( node-base-Enriched-Directed-Tree A B T b)
+  is-proper-node-base-Enriched-Directed-Tree b =
+    is-proper-node-base-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( map-compute-base-Enriched-Directed-Tree A B T b)
 
@@ -205,5 +205,5 @@ module _
             node-base-Enriched-Directed-Tree A B T))
   unique-walk-to-base-parent-Enriched-Directed-Tree x (y , e) =
     unique-walk-to-base-is-not-root-Enriched-Directed-Tree x
-      ( is-not-root-parent-Enriched-Directed-Tree A B T e)
+      ( is-proper-node-parent-Enriched-Directed-Tree A B T e)
 ```

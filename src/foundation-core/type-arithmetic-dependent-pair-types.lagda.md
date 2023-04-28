@@ -11,6 +11,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -124,6 +125,37 @@ module _
         ( fib pr1 a)
         ( equiv-fib-pr1 B a)
         ( is-contr-map-is-equiv is-equiv-pr1-B a)
+
+  map-inv-right-unit-law-Σ-is-contr :
+    ((a : A) → is-contr (B a)) → A → Σ A B
+  pr1 (map-inv-right-unit-law-Σ-is-contr H a) = a
+  pr2 (map-inv-right-unit-law-Σ-is-contr H a) = center (H a)
+
+  issec-map-inv-right-unit-law-Σ-is-contr :
+    (H : (a : A) → is-contr (B a)) →
+    ( pr1 ∘ map-inv-right-unit-law-Σ-is-contr H) ~ id
+  issec-map-inv-right-unit-law-Σ-is-contr H = refl-htpy
+
+  isretr-map-inv-right-unit-law-Σ-is-contr :
+    (H : (a : A) → is-contr (B a)) →
+    ( map-inv-right-unit-law-Σ-is-contr H ∘ pr1) ~ id
+  isretr-map-inv-right-unit-law-Σ-is-contr H (a , b) =
+    eq-pair-Σ refl (eq-is-contr (H a))
+
+  is-equiv-map-inv-right-unit-law-Σ-is-contr :
+    (H : (a : A) → is-contr (B a)) →
+    is-equiv (map-inv-right-unit-law-Σ-is-contr H)
+  is-equiv-map-inv-right-unit-law-Σ-is-contr H =
+    is-equiv-has-inverse
+      ( pr1)
+      ( isretr-map-inv-right-unit-law-Σ-is-contr H)
+      ( issec-map-inv-right-unit-law-Σ-is-contr H)
+
+  inv-right-unit-law-Σ-is-contr :
+    (H : (a : A) → is-contr (B a)) → A ≃ Σ A B
+  pr1 (inv-right-unit-law-Σ-is-contr H) = map-inv-right-unit-law-Σ-is-contr H
+  pr2 (inv-right-unit-law-Σ-is-contr H) =
+    is-equiv-map-inv-right-unit-law-Σ-is-contr H
 ```
 
 ### Associativity of dependent pair types

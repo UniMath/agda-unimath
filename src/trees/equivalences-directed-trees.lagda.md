@@ -405,8 +405,8 @@ module _
             ( u)))
   ... | inr p =
     is-equiv-is-contr _
-      ( unique-parent-is-not-root-Directed-Tree S x p)
-      ( unique-parent-is-not-root-Directed-Tree T
+      ( unique-parent-is-proper-node-Directed-Tree S x p)
+      ( unique-parent-is-proper-node-Directed-Tree T
         ( node-hom-Directed-Tree S T f x)
         ( is-not-root-node-hom-is-not-root-Directed-Tree S T f x p))
 

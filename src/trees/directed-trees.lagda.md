@@ -130,6 +130,45 @@ module _
     center (unique-walk-to-root-Directed-Tree x)
 ```
 
+### Proper nodes of directed trees
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  is-proper-node-Directed-Tree-Prop : node-Directed-Tree T → Prop l1
+  is-proper-node-Directed-Tree-Prop x = neg-Prop' (is-root-Directed-Tree T x)
+  
+  is-proper-node-Directed-Tree : node-Directed-Tree T → UU l1
+  is-proper-node-Directed-Tree x =
+    type-Prop (is-proper-node-Directed-Tree-Prop x)
+
+  is-prop-is-proper-node-Directed-Tree :
+    (x : node-Directed-Tree T) → is-prop (is-proper-node-Directed-Tree x)
+  is-prop-is-proper-node-Directed-Tree x =
+    is-prop-type-Prop (is-proper-node-Directed-Tree-Prop x)
+
+  is-proof-irrelevant-is-proper-node-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-proof-irrelevant (is-proper-node-Directed-Tree x)
+  is-proof-irrelevant-is-proper-node-Directed-Tree x =
+    is-proof-irrelevant-is-prop (is-prop-is-proper-node-Directed-Tree x)
+
+  proper-node-Directed-Tree : UU l1
+  proper-node-Directed-Tree =
+    Σ (node-Directed-Tree T) is-proper-node-Directed-Tree
+
+  node-proper-node-Directed-Tree :
+    proper-node-Directed-Tree → node-Directed-Tree T
+  node-proper-node-Directed-Tree = pr1
+
+  is-proper-node-proper-node-Directed-Tree :
+    (x : proper-node-Directed-Tree) →
+    is-proper-node-Directed-Tree (node-proper-node-Directed-Tree x)
+  is-proper-node-proper-node-Directed-Tree = pr2
+```
+
 ## Properties
 
 ### Being a tree is a proposition
@@ -244,12 +283,13 @@ module _
       ( x)
       ( e)
       ( walk-to-root-Directed-Tree T x)
-      ( eq-is-contr (unique-walk-to-root-Directed-Tree T (root-Directed-Tree T)))
+      ( eq-is-contr
+        ( unique-walk-to-root-Directed-Tree T (root-Directed-Tree T)))
 
-  is-not-root-parent-Directed-Tree :
+  is-proper-node-parent-Directed-Tree :
     {x y : node-Directed-Tree T} (e : edge-Directed-Tree T x y) →
     ¬ (is-root-Directed-Tree T x)
-  is-not-root-parent-Directed-Tree e refl =
+  is-proper-node-parent-Directed-Tree e refl =
     no-parent-root-Directed-Tree (_ , e)
 ```
 
@@ -485,10 +525,10 @@ module _
   pr2 (unique-parent-Directed-Tree x) =
     contraction-unique-parent-Directed-Tree x
 
-  unique-parent-is-not-root-Directed-Tree :
-    (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
+  unique-parent-is-proper-node-Directed-Tree :
+    (x : node-Directed-Tree T) → is-proper-node-Directed-Tree T x →
     is-contr (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
-  unique-parent-is-not-root-Directed-Tree x f =
+  unique-parent-is-proper-node-Directed-Tree x f =
     is-contr-equiv'
       ( ( is-root-Directed-Tree T x) +
         ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x)))
@@ -502,7 +542,7 @@ module _
     (x : node-Directed-Tree T) →
     is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
   is-proof-irrelevant-parent-Directed-Tree x (y , e) =
-    unique-parent-is-not-root-Directed-Tree x
+    unique-parent-is-proper-node-Directed-Tree x
       ( λ { refl → no-parent-root-Directed-Tree T (y , e)})
 
   is-prop-parent-Directed-Tree :
@@ -517,11 +557,11 @@ module _
   eq-parent-Directed-Tree {x} =
     eq-is-prop' (is-prop-parent-Directed-Tree x)
 
-  parent-is-not-root-Directed-Tree :
-    (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
+  parent-is-proper-node-Directed-Tree :
+    (x : node-Directed-Tree T) → is-proper-node-Directed-Tree T x →
     Σ (node-Directed-Tree T) (edge-Directed-Tree T x)
-  parent-is-not-root-Directed-Tree x f =
-    center (unique-parent-is-not-root-Directed-Tree x f)
+  parent-is-proper-node-Directed-Tree x f =
+    center (unique-parent-is-proper-node-Directed-Tree x f)
 ```
 
 ### Transporting walks in directed trees

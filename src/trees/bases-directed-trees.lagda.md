@@ -13,10 +13,12 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
@@ -63,10 +65,10 @@ module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
 
-  is-not-root-node-base-Directed-Tree :
+  is-proper-node-base-Directed-Tree :
     (b : base-Directed-Tree T) →
-    ¬ (is-root-Directed-Tree T (node-base-Directed-Tree T b))
-  is-not-root-node-base-Directed-Tree (x , e) refl =
+    is-proper-node-Directed-Tree T (node-base-Directed-Tree T b)
+  is-proper-node-base-Directed-Tree (x , e) refl =
     no-parent-root-Directed-Tree T (x , e)
 
   no-walk-to-base-root-Directed-Tree :
@@ -80,6 +82,23 @@ module _
     no-parent-root-Directed-Tree T (root-Directed-Tree T , e)
   no-walk-to-base-root-Directed-Tree b (cons-walk-Directed-Graph e w) =
     no-parent-root-Directed-Tree T (_ , e)
+```
+
+### Any node which has a walk to a base element is a proper node
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  is-proper-node-walk-to-base-Directed-Tree :
+    (x : node-Directed-Tree T) (b : base-Directed-Tree T) →
+    walk-Directed-Tree T x (node-base-Directed-Tree T b) →
+    is-proper-node-Directed-Tree T x
+  is-proper-node-walk-to-base-Directed-Tree ._ b refl-walk-Directed-Graph =
+    is-proper-node-base-Directed-Tree T b
+  is-proper-node-walk-to-base-Directed-Tree x b (cons-walk-Directed-Graph e w) =
+    is-proper-node-parent-Directed-Tree T e
 ```
 
 ### There are no edges between base elements
@@ -243,12 +262,12 @@ module _
   is-root-is-root-or-walk-to-base-root-Directed-Tree =
     eq-is-contr (unique-walk-to-base-Directed-Tree (root-Directed-Tree T))
 
-  unique-walk-to-base-is-not-root-Directed-Tree :
-    (x : node-Directed-Tree T) → ¬ (is-root-Directed-Tree T x) →
+  unique-walk-to-base-is-proper-node-Directed-Tree :
+    (x : node-Directed-Tree T) → is-proper-node-Directed-Tree T x →
     is-contr
       ( Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-  unique-walk-to-base-is-not-root-Directed-Tree x f =
+  unique-walk-to-base-is-proper-node-Directed-Tree x f =
     is-contr-equiv'
       ( is-root-Directed-Tree T x +
         Σ ( base-Directed-Tree T)
@@ -267,6 +286,33 @@ module _
       ( Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
   unique-walk-to-base-parent-Directed-Tree x u =
-    unique-walk-to-base-is-not-root-Directed-Tree x
-      ( is-not-root-parent-Directed-Tree T (pr2 u))
+    unique-walk-to-base-is-proper-node-Directed-Tree x
+      ( is-proper-node-parent-Directed-Tree T (pr2 u))
+```
+
+### The type of proper nodes of a directed tree is equivalent to the type of nodes equipped with a base element `b` and a walk to `b`
+
+```agda
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+  
+  compute-proper-node-Directed-Tree :
+    proper-node-Directed-Tree T ≃
+    Σ ( base-Directed-Tree T)
+      ( λ b →
+        Σ ( node-Directed-Tree T)
+          ( λ x → walk-Directed-Tree T x (node-base-Directed-Tree T b)))
+  compute-proper-node-Directed-Tree =
+    ( equiv-tot
+      ( λ b →
+        ( right-unit-law-Σ-is-contr
+          ( λ (x , w) →
+            is-proof-irrelevant-is-proper-node-Directed-Tree T x
+              ( is-proper-node-walk-to-base-Directed-Tree T x b w))) ∘e
+        ( equiv-right-swap-Σ))) ∘e
+    ( ( equiv-left-swap-Σ) ∘e
+      ( inv-right-unit-law-Σ-is-contr
+        ( λ (x , H) →
+          unique-walk-to-base-is-proper-node-Directed-Tree T x H)))
 ```
