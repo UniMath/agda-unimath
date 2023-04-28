@@ -128,8 +128,7 @@ module _
 
   map-inv-right-unit-law-Σ-is-contr :
     ((a : A) → is-contr (B a)) → A → Σ A B
-  pr1 (map-inv-right-unit-law-Σ-is-contr H a) = a
-  pr2 (map-inv-right-unit-law-Σ-is-contr H a) = center (H a)
+  map-inv-right-unit-law-Σ-is-contr H a = (a , center (H a))
 
   issec-map-inv-right-unit-law-Σ-is-contr :
     (H : (a : A) → is-contr (B a)) →

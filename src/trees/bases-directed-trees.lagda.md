@@ -17,7 +17,9 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
@@ -243,10 +245,9 @@ module _
       ( is-root-Directed-Tree T x +
         Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-  pr1 (unique-walk-to-base-Directed-Tree x) =
-    center-walk-to-base-Directed-Tree x
-  pr2 (unique-walk-to-base-Directed-Tree x) =
-    contraction-walk-to-base-Directed-Tree x
+  unique-walk-to-base-Directed-Tree x =
+    ( center-walk-to-base-Directed-Tree x ,
+      contraction-walk-to-base-Directed-Tree x)
 
   is-root-or-walk-to-base-Directed-Tree :
     (x : node-Directed-Tree T) →
@@ -279,6 +280,13 @@ module _
         ( f))
       ( unique-walk-to-base-Directed-Tree x)
 
+  walk-to-base-is-proper-node-Directed-Tree :
+    (x : node-Directed-Tree T) → is-proper-node-Directed-Tree T x →
+    Σ ( base-Directed-Tree T)
+      ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T)
+  walk-to-base-is-proper-node-Directed-Tree x H =
+    center (unique-walk-to-base-is-proper-node-Directed-Tree x H)
+
   unique-walk-to-base-parent-Directed-Tree :
     (x : node-Directed-Tree T)
     (u : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
@@ -288,6 +296,31 @@ module _
   unique-walk-to-base-parent-Directed-Tree x u =
     unique-walk-to-base-is-proper-node-Directed-Tree x
       ( is-proper-node-parent-Directed-Tree T (pr2 u))
+
+  is-proof-irrelevant-walk-to-base-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-proof-irrelevant
+      ( Σ ( base-Directed-Tree T)
+          ( λ b → walk-Directed-Tree T x (node-base-Directed-Tree T b)))
+  is-proof-irrelevant-walk-to-base-Directed-Tree x (b , w) =
+    unique-walk-to-base-is-proper-node-Directed-Tree x
+      ( is-proper-node-walk-to-base-Directed-Tree T x b w)
+
+  is-prop-walk-to-base-Directed-Tree :
+    (x : node-Directed-Tree T) →
+    is-prop
+      ( Σ ( base-Directed-Tree T)
+          ( λ b → walk-Directed-Tree T x (node-base-Directed-Tree T b)))
+  is-prop-walk-to-base-Directed-Tree x =
+    is-prop-is-proof-irrelevant
+      ( is-proof-irrelevant-walk-to-base-Directed-Tree x)
+
+  walk-to-base-Directed-Tree-Prop : node-Directed-Tree T → Prop (l1 ⊔ l2)
+  pr1 (walk-to-base-Directed-Tree-Prop x) =
+    Σ ( base-Directed-Tree T)
+      ( λ b → walk-Directed-Tree T x (node-base-Directed-Tree T b))
+  pr2 (walk-to-base-Directed-Tree-Prop x) =
+    is-prop-walk-to-base-Directed-Tree x
 ```
 
 ### The type of proper nodes of a directed tree is equivalent to the type of nodes equipped with a base element `b` and a walk to `b`
@@ -304,15 +337,31 @@ module _
         Σ ( node-Directed-Tree T)
           ( λ x → walk-Directed-Tree T x (node-base-Directed-Tree T b)))
   compute-proper-node-Directed-Tree =
+    ( equiv-left-swap-Σ) ∘e
     ( equiv-tot
+      ( λ x →
+        equiv-iff
+          ( is-proper-node-Directed-Tree-Prop T x)
+          ( walk-to-base-Directed-Tree-Prop T x)
+          ( walk-to-base-is-proper-node-Directed-Tree T x)
+          ( λ (b , w) → is-proper-node-walk-to-base-Directed-Tree T x b w)))
+
+  map-compute-proper-node-Directed-Tree :
+    proper-node-Directed-Tree T →
+    Σ ( base-Directed-Tree T)
       ( λ b →
-        ( right-unit-law-Σ-is-contr
-          ( λ (x , w) →
-            is-proof-irrelevant-is-proper-node-Directed-Tree T x
-              ( is-proper-node-walk-to-base-Directed-Tree T x b w))) ∘e
-        ( equiv-right-swap-Σ))) ∘e
-    ( ( equiv-left-swap-Σ) ∘e
-      ( inv-right-unit-law-Σ-is-contr
-        ( λ (x , H) →
-          unique-walk-to-base-is-proper-node-Directed-Tree T x H)))
+        Σ ( node-Directed-Tree T)
+          ( λ x → walk-Directed-Tree T x (node-base-Directed-Tree T b)))
+  map-compute-proper-node-Directed-Tree =
+    map-equiv compute-proper-node-Directed-Tree
+
+  eq-compute-proper-node-Directed-Tree :
+    {x : node-Directed-Tree T} (H : is-proper-node-Directed-Tree T x)
+    (b : base-Directed-Tree T)
+    (w : walk-Directed-Tree T x (node-base-Directed-Tree T b)) →
+    map-compute-proper-node-Directed-Tree (x , H) ＝ (b , x , w)
+  eq-compute-proper-node-Directed-Tree {x} H b w =
+    ap
+      ( map-equiv equiv-left-swap-Σ)
+      ( ap (pair x) (eq-is-prop (is-prop-walk-to-base-Directed-Tree T x)))
 ```
