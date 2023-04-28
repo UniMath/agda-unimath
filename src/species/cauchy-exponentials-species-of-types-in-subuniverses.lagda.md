@@ -61,12 +61,12 @@ module _
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     (X : type-subuniverse P) → UU (lsuc l1 ⊔ l2 ⊔ l3)
   cauchy-exponential-species-subuniverse' S X =
-    Σ ( Σ-Decomposition-subuniverse P X)
+    Σ ( Σ-Decomposition-Subuniverse P X)
       ( λ D →
-        ( b : indexing-type-Σ-Decomposition-subuniverse P X D) →
+        ( b : indexing-type-Σ-Decomposition-Subuniverse P X D) →
         ( inclusion-subuniverse
             ( subuniverse-global-subuniverse Q l3)
-            ( S (subuniverse-cotype-Σ-Decomposition-subuniverse P X D b))))
+            ( S (subuniverse-cotype-Σ-Decomposition-Subuniverse P X D b))))
 
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
@@ -105,11 +105,7 @@ module _
         ( cauchy-exponential-species-subuniverse' P Q S X)))
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)
-  (C4 :
-    ( ( X : type-subuniverse P) →
-      ( Y : (inclusion-subuniverse P X) → type-subuniverse P) →
-      is-in-subuniverse P
-        ( Σ (inclusion-subuniverse P X) (λ x → inclusion-subuniverse P (Y x)))))
+  (C4 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (X : type-subuniverse P)
   where
@@ -117,7 +113,8 @@ module _
   equiv-cauchy-exponential-composition-unit-species-subuniverse :
     inclusion-subuniverse
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ lzero ⊔ l3))
-      ( cauchy-composition-species-subuniverse P Q C3 C4 (λ _ → unit , C2) S X) ≃
+      ( cauchy-composition-species-subuniverse
+        P Q C3 C4 (λ _ → unit , C2) S X) ≃
     inclusion-subuniverse
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
       ( cauchy-exponential-species-subuniverse P Q C1 S X)
@@ -131,18 +128,17 @@ module _
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   ( C1 :
-    ( {l4 : Level}
+    {l4 : Level}
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (X : type-subuniverse P) →
       is-in-subuniverse
         ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l4))
-        ( cauchy-exponential-species-subuniverse' P Q S X)))
+        ( cauchy-exponential-species-subuniverse' P Q S X))
   ( C2 :
     ( U : UU l1) →
     ( V : U → UU l1) →
     ( (u : U) → is-in-subuniverse P (V u)) →
-      ( is-in-subuniverse P (Σ U V)) →
-      ( is-in-subuniverse P U))
+    is-in-subuniverse P (Σ U V) → is-in-subuniverse P U)
   ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   ( X : type-subuniverse P)
   where
@@ -205,38 +201,38 @@ module _
         ( S))
       ( inclusion-subuniverse P X)
   equiv-cauchy-exponential-Σ-extension-species-subuniverse =
-    ( ( reassociate') ∘e
-      ( ( equiv-tot
-            ( λ d →
-              equiv-Σ-equiv-base
-                ( λ p →
-                  (u : indexing-type-Relaxed-Σ-Decomposition d) →
-                  inclusion-subuniverse
-                    ( subuniverse-global-subuniverse Q l3)
-                    ( S (cotype-Relaxed-Σ-Decomposition d u , p u)))
-                ( ( ( inv-equiv
-                      ( equiv-add-redundant-prop
-                          ( is-prop-type-Prop
-                              ( P (indexing-type-Relaxed-Σ-Decomposition d)))
-                          ( λ pV →
-                            ( C2
-                                ( indexing-type-Relaxed-Σ-Decomposition d)
-                                ( cotype-Relaxed-Σ-Decomposition d)
-                                ( pV)
-                                ( tr
-                                    ( is-in-subuniverse P)
-                                    ( eq-equiv
-                                        ( pr1 X)
-                                        ( Σ ( indexing-type-Relaxed-Σ-Decomposition d)
-                                            ( cotype-Relaxed-Σ-Decomposition d))
-                                        ( matching-correspondence-Relaxed-Σ-Decomposition d))
-                                    ( pr2 X) ))))) ∘e
-                    ( ( commutative-prod) ∘e
-                      ( inv-equiv
-                        ( equiv-add-redundant-prop
-                          ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
-                          ( λ _ → pr2 X)))))))) ∘e
-        ( ( reassociate))))
+    ( reassociate') ∘e
+    ( ( equiv-tot
+        ( λ d →
+          equiv-Σ-equiv-base
+            ( λ p →
+              ( u : indexing-type-Relaxed-Σ-Decomposition d) →
+              inclusion-subuniverse
+                ( subuniverse-global-subuniverse Q l3)
+                ( S (cotype-Relaxed-Σ-Decomposition d u , p u)))
+            ( ( inv-equiv
+                ( equiv-add-redundant-prop
+                  ( is-prop-type-Prop
+                    ( P (indexing-type-Relaxed-Σ-Decomposition d)))
+                  ( λ pV →
+                    C2
+                      ( indexing-type-Relaxed-Σ-Decomposition d)
+                      ( cotype-Relaxed-Σ-Decomposition d)
+                      ( pV)
+                      ( tr
+                        ( is-in-subuniverse P)
+                        ( eq-equiv
+                          ( pr1 X)
+                          ( Σ ( indexing-type-Relaxed-Σ-Decomposition d)
+                              ( cotype-Relaxed-Σ-Decomposition d))
+                          ( matching-correspondence-Relaxed-Σ-Decomposition d))
+                        ( pr2 X))))) ∘e
+              ( ( commutative-prod) ∘e
+                ( inv-equiv
+                  ( equiv-add-redundant-prop
+                    ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
+                    ( λ _ → pr2 X))))))) ∘e
+      ( reassociate))
 ```
 
 ### The Cauchy exponential of the sum of a species is equivalent to the Cauchy product of the exponential of the two species
@@ -266,11 +262,7 @@ module _
     ( (u : U) → is-in-subuniverse P (V u)) →
       ( is-in-subuniverse P (Σ U V)) →
       ( is-in-subuniverse P U))
-  ( C5 :
-    ( A B : UU l1) →
-    is-in-subuniverse P A →
-    is-in-subuniverse P B →
-    is-in-subuniverse P (A + B))
+  ( C5 : is-closed-under-coproducts-subuniverse P)
   ( C6 :
     ( A B : UU l1) →
     is-in-subuniverse P (A + B) →

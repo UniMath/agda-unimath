@@ -352,11 +352,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
   ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
-  ( C2 :
-    ( A B : UU l1) →
-    is-in-subuniverse P A →
-    is-in-subuniverse P B →
-    is-in-subuniverse P (A + B))
+  ( C2 : is-closed-under-coproducts-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l1)
@@ -451,8 +447,6 @@ module _
                                   right-summand-binary-coproduct-Decomposition d)
                                 ( matching-correspondence-binary-coproduct-Decomposition d)))
                           ( C2
-                            ( left-summand-binary-coproduct-Decomposition d)
-                            ( right-summand-binary-coproduct-Decomposition d)
                             ( pr1 p)
                             ( pr2 p))))))) ∘e
         ( ( reassociate))))

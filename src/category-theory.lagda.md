@@ -35,6 +35,7 @@ open import category-theory.natural-transformations-large-precategories public
 open import category-theory.natural-transformations-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-functors public
+open import category-theory.precategory-solver public
 open import category-theory.pregroupoids public
 open import category-theory.products-precategories public
 open import category-theory.pullbacks-precategories public

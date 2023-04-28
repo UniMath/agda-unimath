@@ -70,8 +70,8 @@ module _
 
     reassociate' :
       Σ ( UU l1)
-        ( λ A → Σ (UU l1) (λ B → (S A × T B) × ((A → X) × (B → X))))
-      ≃ product-cauchy-series-species-types S T X
+        ( λ A → Σ (UU l1) (λ B → (S A × T B) × ((A → X) × (B → X)))) ≃
+      product-cauchy-series-species-types S T X
     pr1 reassociate' (A , B , (s , t) , (fs , ft)) =
       ((A , (s , fs)) , (B , (t , ft)))
     pr2 reassociate' =
@@ -85,16 +85,16 @@ module _
     cauchy-series-species-types (cauchy-product-species-types S T) X ≃
     product-cauchy-series-species-types S T X
   equiv-cauchy-series-cauchy-product-species-types =
-     ( ( reassociate') ∘e
-       ( ( equiv-tot
-             ( λ A →
-               equiv-tot
-                 ( λ B →
-                   ( ( equiv-prod
-                         ( id-equiv)
-                         ( equiv-universal-property-coprod X)) ∘e
-                     ( ( left-unit-law-Σ-is-contr
-                           ( is-contr-total-equiv' (A + B))
-                           ( A + B , id-equiv))))))) ∘e
-         ( reassociate)))
+     ( reassociate') ∘e
+     ( ( equiv-tot
+         ( λ A →
+           equiv-tot
+             ( λ B →
+               ( equiv-prod
+                 ( id-equiv)
+                 ( equiv-universal-property-coprod X)) ∘e
+               ( left-unit-law-Σ-is-contr
+                 ( is-contr-total-equiv' (A + B))
+                 ( A + B , id-equiv))))) ∘e
+       ( reassociate))
 ```

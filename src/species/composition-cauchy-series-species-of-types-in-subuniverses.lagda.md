@@ -1,4 +1,4 @@
-# Composition of Cauchy series of species of types in subuniverse
+# Composition of Cauchy series of species of types in subuniverses
 
 ```agda
 module species.composition-cauchy-series-species-of-types-in-subuniverses where

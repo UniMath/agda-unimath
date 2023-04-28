@@ -1,6 +1,8 @@
 # Small Composition of species of finite inhabited types
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module species.small-cauchy-composition-species-of-finite-inhabited-types where
 ```
 
@@ -44,46 +46,46 @@ open import univalent-combinatorics.small-types
 equiv-Σ-Decomposition-Inhabited-𝔽-Σ-Decomposition-𝔽 :
   {l : Level} (X : Inhabited-𝔽 l) →
   Σ-Decomposition-𝔽 l l (finite-type-Inhabited-𝔽 X) ≃
-  Σ-Decomposition-subuniverse
+  Σ-Decomposition-Subuniverse
     ( is-finite-and-inhabited-Prop)
     ( map-compute-Inhabited-𝔽' X)
 equiv-Σ-Decomposition-Inhabited-𝔽-Σ-Decomposition-𝔽 X =
-  ( ( inv-equiv
-      ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-subuniverse
-        ( is-finite-and-inhabited-Prop)
-        ( map-compute-Inhabited-𝔽' X))) ∘e
-    ( ( equiv-tot
-        ( λ D →
-          equiv-prod
-            ( equiv-add-redundant-prop
-              ( is-property-is-inhabited _)
-              ( λ _ →
-                map-is-inhabited
-                  ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
-                  ( is-inhabited-type-Inhabited-𝔽 X)))
-            ( id-equiv))) ∘e
-      ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽
-          (finite-type-Inhabited-𝔽 X)))))
+  ( inv-equiv
+    ( equiv-total-is-in-subuniverse-Σ-Decomposition
+      ( is-finite-and-inhabited-Prop)
+      ( map-compute-Inhabited-𝔽' X))) ∘e
+  ( ( equiv-tot
+      ( λ D →
+        equiv-prod
+          ( equiv-add-redundant-prop
+            ( is-property-is-inhabited _)
+            ( λ _ →
+              map-is-inhabited
+                ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
+                ( is-inhabited-type-Inhabited-𝔽 X)))
+          ( id-equiv))) ∘e
+    ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽
+        (finite-type-Inhabited-𝔽 X))))
 
-is-finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 :
+is-finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 :
   {l : Level} (X : Inhabited-𝔽 l) →
   is-finite
-    ( Σ-Decomposition-subuniverse
+    ( Σ-Decomposition-Subuniverse
       ( is-finite-and-inhabited-Prop {l})
       ( map-compute-Inhabited-𝔽' X))
-is-finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 X =
+is-finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 X =
   is-finite-equiv
     ( equiv-Σ-Decomposition-Inhabited-𝔽-Σ-Decomposition-𝔽 X)
     ( is-finite-Σ-Decomposition-𝔽 (finite-type-Inhabited-𝔽 X))
 
-finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 :
+finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 :
   {l : Level} (X :  Inhabited-𝔽 l) → 𝔽 (lsuc l)
-pr1 (finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 {l} X) =
-  Σ-Decomposition-subuniverse
+pr1 (finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 {l} X) =
+  Σ-Decomposition-Subuniverse
     ( is-finite-and-inhabited-Prop {l})
     ( map-compute-Inhabited-𝔽' X)
-pr2 (finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 X) =
-  is-finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 X
+pr2 (finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 X) =
+  is-finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 X
 
 module _
   {l1 l2 : Level}
@@ -93,28 +95,27 @@ module _
     ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2) ) (X :  Inhabited-𝔽 l1) →
     𝔽 (lsuc l1 ⊔ l2)
   finite-small-cauchy-composition-species-subuniverse S T X =
-    Σ-𝔽 ( finite-Σ-Decomposition-subuniverse-Inhabited-𝔽 X)
-        ( λ D →
-           prod-𝔽
-             ( S
-               ( subuniverse-indexing-type-Σ-Decomposition-subuniverse
-                   ( is-finite-and-inhabited-Prop)
-                   ( map-compute-Inhabited-𝔽' X)
-                   ( D)))
-             (( Π-𝔽
-               ( finite-type-Inhabited-𝔽
-                 ( map-inv-compute-Inhabited-𝔽'
-                    ( subuniverse-indexing-type-Σ-Decomposition-subuniverse
-                     ( is-finite-and-inhabited-Prop)
-                     ( map-compute-Inhabited-𝔽' X)
-                     ( D))))
-               ( λ x →
-                 T
-                 ( subuniverse-cotype-Σ-Decomposition-subuniverse
-                     ( is-finite-and-inhabited-Prop)
-                     ( map-compute-Inhabited-𝔽' X)
-                     D
-                     x)))))
+    Σ-𝔽
+      ( finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 X)
+      ( λ D →
+        prod-𝔽
+          ( S ( subuniverse-indexing-type-Σ-Decomposition-Subuniverse
+                ( is-finite-and-inhabited-Prop)
+                ( map-compute-Inhabited-𝔽' X)
+                ( D)))
+          ( Π-𝔽
+            ( finite-type-Inhabited-𝔽
+              ( map-inv-compute-Inhabited-𝔽'
+                ( subuniverse-indexing-type-Σ-Decomposition-Subuniverse
+                  ( is-finite-and-inhabited-Prop)
+                  ( map-compute-Inhabited-𝔽' X)
+                  ( D))))
+            ( λ x →
+              T ( subuniverse-cotype-Σ-Decomposition-Subuniverse
+                  ( is-finite-and-inhabited-Prop)
+                  ( map-compute-Inhabited-𝔽' X)
+                  ( D)
+                   ( x)))))
 
   private
     C1 :
@@ -145,13 +146,7 @@ module _
             ( T)
             ( map-inv-compute-Inhabited-𝔽' X)))
 
-    C3 :
-      ( ( X : type-subuniverse {l1} is-finite-and-inhabited-Prop) →
-        ( Y : ( inclusion-subuniverse is-finite-and-inhabited-Prop X) →
-               type-subuniverse {l1} is-finite-and-inhabited-Prop) →
-        is-in-subuniverse is-finite-and-inhabited-Prop
-          ( Σ ( inclusion-subuniverse is-finite-and-inhabited-Prop X)
-              ( λ x → inclusion-subuniverse is-finite-and-inhabited-Prop (Y x))))
+    C3 : is-closed-under-Σ-subuniverse (is-finite-and-inhabited-Prop {l1})
     C3 X Y =
       is-finite-Σ
         ( is-finite-Inhabited-𝔽 (map-inv-compute-Inhabited-𝔽' X))

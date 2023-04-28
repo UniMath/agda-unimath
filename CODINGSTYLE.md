@@ -52,7 +52,7 @@ improve the readability.
   code.
 - If a symbol is not available, the concept is described in words or abbreviated
   words.
-- The readability of the code has high priority. Therefore we try to avoid
+- The readability of the code has high priority. Therefore, we try to avoid
   subtly different variations of the same symbol. The only exception to this
   rule is the use of the
   [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm)

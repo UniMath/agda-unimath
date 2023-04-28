@@ -32,27 +32,27 @@ is the formal series in `x` :
 The categorified version of this series is :
 
 ```md
-Σ (F : 𝔽) (S(F) × (F → X))
+  Σ (F : 𝔽), S(F) × (F → X)
 ```
 
 Remarks that we can generalized this to species of types with the following
 definition :
 
 ```md
-Σ (U : UU) (S(U) × (U → X))
+  Σ (U : UU), S(U) × (U → X)
 ```
 
 ## Definition
 
 ```agda
 cauchy-series-species-types :
-  {l1 l2 l3 : Level} → species-types l1 l2 → UU l3 →
-  UU (lsuc l1 ⊔ l2 ⊔ l3)
-cauchy-series-species-types {l1} S X =
-  Σ (UU l1) (λ U → S U × (U → X))
+  {l1 l2 l3 : Level} → species-types l1 l2 → UU l3 → UU (lsuc l1 ⊔ l2 ⊔ l3)
+cauchy-series-species-types {l1} S X = Σ (UU l1) (λ U → S U × (U → X))
 ```
 
 ## Properties
+
+### Equivalent species of types have equivalent Cauchy series
 
 ```agda
 module _
@@ -67,7 +67,11 @@ module _
     cauchy-series-species-types S X ≃ cauchy-series-species-types T X
   equiv-cauchy-series-equiv-species-types =
     equiv-tot λ X → equiv-prod (f X) id-equiv
+```
 
+### Cauchy series of types are equivalence invariant
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (S : species-types l1 l2)
@@ -79,5 +83,5 @@ module _
   equiv-cauchy-series-species-types :
     cauchy-series-species-types S X ≃ cauchy-series-species-types S Y
   equiv-cauchy-series-species-types =
-    equiv-tot λ F → equiv-prod id-equiv (equiv-postcomp F e)
+    equiv-tot (λ F → equiv-prod id-equiv (equiv-postcomp F e))
 ```

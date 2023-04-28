@@ -28,14 +28,19 @@ makes use of several postulates.
    [`synthetic-homotopy-theory.circle`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.circle.html)
 9. **Pushouts** are postulated in
    [`synthetic-homotopy-theory.pushouts`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
+10. **Agda built-in types** are postulated in
+    [`primitives`](https://unimath.github.io/agda-unimath/primitives.html) and
+    in [`reflection`](https://unimath.github.io/agda-unimath/reflection.html).
 
 Note that there is some redundancy in the postulates we assume. For example, the
 [univalence axiom implies function extensionality](https://unimath.github.io/agda-unimath/foundation.univalence-implies-function-extensionality.html),
 but we still assume function extensionality separately. Furthermore, The
 interval type is contractible, so there is no need at all to postulate it. The
 circle can be constructed as the type of `ℤ`-torsors, and the replacement axiom
-can be used to prove there is a circle in `UU lzero`. Finally, the replacement
-axiom can be proven by the join construction, which only uses pushouts.
+can be used to prove there is a circle in `UU lzero`. Adittionally, the
+replacement axiom can be proven by the join construction, which only uses
+pushouts. Finally, the Agda built-in types do not change the semantics of the
+theory, they only give convenience to the user of the library.
 
 We also note that the higher inductive types in the `agda-unimath` library only
 have computation rules up to identification.
