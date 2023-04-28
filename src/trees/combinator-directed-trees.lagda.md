@@ -261,15 +261,20 @@ module _
   base-combinator-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3)
   base-combinator-Directed-Tree = base-Directed-Tree combinator-Directed-Tree
 
+  is-proper-node-combinator-Directed-Tree :
+    node-combinator-Directed-Tree → UU (l1 ⊔ l2)
+  is-proper-node-combinator-Directed-Tree =
+    is-proper-node-Directed-Tree combinator-Directed-Tree
+
   proper-node-combinator-Directed-Tree : UU (l1 ⊔ l2)
   proper-node-combinator-Directed-Tree =
     proper-node-Directed-Tree combinator-Directed-Tree
 
   is-proper-node-inclusion-combinator-Directed-Tree :
-    {i : I} {x : node-Directed-Tree T i} →
+    {i : I} {x : node-Directed-Tree (T i)} →
     is-proper-node-combinator-Directed-Tree
       ( node-inclusion-combinator-Directed-Tree i x)
-  is-proper-node-inclusion-combinator-Directed-Tree = ?
+  is-proper-node-inclusion-combinator-Directed-Tree {i} {x} ()
 ```
 
 ## Properties
