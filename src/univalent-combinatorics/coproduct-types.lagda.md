@@ -22,7 +22,6 @@ open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting

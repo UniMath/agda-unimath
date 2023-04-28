@@ -26,7 +26,6 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 

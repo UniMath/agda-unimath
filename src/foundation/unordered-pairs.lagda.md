@@ -14,7 +14,6 @@ open import foundation.homotopies
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
-open import foundation.unit-type
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types

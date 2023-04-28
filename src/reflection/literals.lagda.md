@@ -11,14 +11,11 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import lists.lists
-
 open import primitives.characters
 open import primitives.floats
 open import primitives.machine-integers
 open import primitives.strings
 
-open import reflection.fixity
 open import reflection.metavariables
 open import reflection.names
 ```

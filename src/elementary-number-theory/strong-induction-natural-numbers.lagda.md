@@ -18,7 +18,6 @@ open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 

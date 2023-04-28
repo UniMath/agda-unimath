@@ -10,12 +10,10 @@ module category-theory.precategory-solver where
 ```agda
 open import category-theory.precategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 

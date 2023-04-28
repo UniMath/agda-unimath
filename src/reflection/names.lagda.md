@@ -13,12 +13,6 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
-
-open import lists.lists
-
-open import primitives.characters
-open import primitives.floats
 open import primitives.machine-integers
 open import primitives.strings
 ```

@@ -13,7 +13,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.equivalence-extensionality
 open import foundation.iterating-functions
-open import foundation.unit-type
 
 open import foundation-core.automorphisms
 open import foundation-core.coproduct-types

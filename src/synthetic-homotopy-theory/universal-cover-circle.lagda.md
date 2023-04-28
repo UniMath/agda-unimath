@@ -29,7 +29,6 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.descent-circle

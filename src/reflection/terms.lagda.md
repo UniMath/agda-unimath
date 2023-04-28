@@ -7,22 +7,13 @@ module reflection.terms where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.cartesian-product-types
-open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.dependent-pair-types
 
 open import lists.lists
 
-open import primitives.characters
-open import primitives.floats
-open import primitives.machine-integers
 open import primitives.strings
 
 open import reflection.abstractions

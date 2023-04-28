@@ -12,7 +12,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 

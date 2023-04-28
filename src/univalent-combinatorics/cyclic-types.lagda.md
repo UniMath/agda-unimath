@@ -30,7 +30,6 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups

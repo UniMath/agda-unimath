@@ -25,7 +25,6 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types

@@ -12,7 +12,6 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.unit-type
 open import foundation.unordered-pairs
 
 open import foundation-core.contractible-types

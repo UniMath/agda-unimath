@@ -9,12 +9,8 @@ module primitives.machine-integers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.identity-types
-open import foundation.maybe
 open import foundation.universe-levels
-
-open import primitives.strings
 ```
 
 </details>

@@ -19,9 +19,7 @@ open import lists.lists
 
 open import reflection.abstractions
 open import reflection.arguments
-open import reflection.fixity
 open import reflection.literals
-open import reflection.metavariables
 open import reflection.names
 open import reflection.terms
 ```
