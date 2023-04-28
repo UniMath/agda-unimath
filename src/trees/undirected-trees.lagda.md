@@ -31,7 +31,8 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-An **undirected tree** is an undirected graph such that the type of trails from x to y is contractible for any two vertices x and y.
+An **undirected tree** is an undirected graph such that the type of trails from
+x to y is contractible for any two vertices x and y.
 
 ## Definition
 
@@ -407,6 +408,10 @@ has-decidable-equality-node-Undirected-Tree T x y =
 
 ## See also
 
-There are many variations of the notion of trees, all of which are subtly different:
-- Directed trees can be found in [`trees.directed-trees`](trees.directed-trees.md).
-- Acyclic undirected graphs can be found in [`graph-theory.acyclic-undirected-graphs`](graph-theory.acyclic-undirected-graphs.md).
+There are many variations of the notion of trees, all of which are subtly
+different:
+
+- Directed trees can be found in
+  [`trees.directed-trees`](trees.directed-trees.md).
+- Acyclic undirected graphs can be found in
+  [`graph-theory.acyclic-undirected-graphs`](graph-theory.acyclic-undirected-graphs.md).

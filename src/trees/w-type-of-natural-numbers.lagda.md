@@ -28,7 +28,8 @@ open import trees.w-types
 
 ## Idea
 
-Since the type of natural numbers is an initial algebra for the polynomial endofunctor
+Since the type of natural numbers is an initial algebra for the polynomial
+endofunctor
 
 ```md
   X ↦ X + 𝟙,

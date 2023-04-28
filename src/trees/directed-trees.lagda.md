@@ -38,7 +38,8 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A **directed tree** is a directed graph `G` equipped with a rood `r : G` such that for every vertex `x : G` the type of walks from `x` to `r` is contractible.
+A **directed tree** is a directed graph `G` equipped with a rood `r : G` such
+that for every vertex `x : G` the type of walks from `x` to `r` is contractible.
 
 ## Definition
 
@@ -562,6 +563,10 @@ module _
 
 ## See also
 
-There are many variations of the notion of trees, all of which are subtly different:
-- Undirected trees can be found in [`trees.undirected-trees`](trees.undirected-trees.md).
-- Acyclic undirected graphs can be found in [`graph-theory.acyclic-undirected-graphs`](graph-theory.acyclic-undirected-graphs.md).
+There are many variations of the notion of trees, all of which are subtly
+different:
+
+- Undirected trees can be found in
+  [`trees.undirected-trees`](trees.undirected-trees.md).
+- Acyclic undirected graphs can be found in
+  [`graph-theory.acyclic-undirected-graphs`](graph-theory.acyclic-undirected-graphs.md).

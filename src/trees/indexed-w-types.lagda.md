@@ -14,7 +14,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-**Indexed W-types** are a generalization of ordinary W-types using indexed containers. The main idea is that indexed W-types are initial algebras for the polynomial endofunctor
+**Indexed W-types** are a generalization of ordinary W-types using indexed
+containers. The main idea is that indexed W-types are initial algebras for the
+polynomial endofunctor
 
 ```md
   (X : I → UU) ↦ Σ (a : A i), Π (b : B i a), X (f i a b),

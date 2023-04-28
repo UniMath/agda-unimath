@@ -45,4 +45,15 @@ is-acyclic-Undirected-Graph l G =
 
 ## See also
 
-The notion of acyclic graphs is a generalization of the notion of [undirected trees](trees.undirected-trees.md). Note that in this library, an undirected tree is an undirected graph in which the type of trails between any two points is contractible. The type of nodes of such undirected trees consequently has decidable equality. On the other hand, there are acyclic undirected graphs that are not undirected trees in this sense. One way to obtain them is via [acyclic types](synthetic-homotopy-theory.acyclic-types.md), which are types of which the [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is contractible. The undirected suspension diagram of such types is an acyclic graph. Furthermore, any [directed tree](trees.directed-trees.md) induces an acyclic undirected graph by forgetting the directions of the edges.
+The notion of acyclic graphs is a generalization of the notion of
+[undirected trees](trees.undirected-trees.md). Note that in this library, an
+undirected tree is an undirected graph in which the type of trails between any
+two points is contractible. The type of nodes of such undirected trees
+consequently has decidable equality. On the other hand, there are acyclic
+undirected graphs that are not undirected trees in this sense. One way to obtain
+them is via [acyclic types](synthetic-homotopy-theory.acyclic-types.md), which
+are types of which the
+[suspension](synthetic-homotopy-theory.suspensions-of-types.md) is contractible.
+The undirected suspension diagram of such types is an acyclic graph.
+Furthermore, any [directed tree](trees.directed-trees.md) induces an acyclic
+undirected graph by forgetting the directions of the edges.

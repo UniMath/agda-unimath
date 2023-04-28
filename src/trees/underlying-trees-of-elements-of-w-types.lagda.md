@@ -50,7 +50,9 @@ open import trees.w-types
 
 ## Idea
 
-The **underlying (enriched) directed tree** of an element of a W-type is the underlying (enriched) directed tree of that element obtained via the coalgebra structure of `𝕎 A B`.
+The **underlying (enriched) directed tree** of an element of a W-type is the
+underlying (enriched) directed tree of that element obtained via the coalgebra
+structure of `𝕎 A B`.
 
 ## Definitions
 

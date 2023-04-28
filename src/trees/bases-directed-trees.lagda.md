@@ -29,7 +29,8 @@ open import trees.directed-trees
 
 ## Idea
 
-The **base** of a directed tree consists of the nodes equipped with an edge to the root.
+The **base** of a directed tree consists of the nodes equipped with an edge to
+the root.
 
 ## Definition
 

@@ -28,7 +28,10 @@ open import trees.morphisms-enriched-directed-trees
 
 ## Idea
 
-The **combinator operation** on enriched directed trees combines, for any element `a : A`, a family of enriched directed trees `T : B(a) → Enriched-Directed-Tree A B` indexed by `B a` into a single tree enriched directed tree with a new root.
+The **combinator operation** on enriched directed trees combines, for any
+element `a : A`, a family of enriched directed trees
+`T : B(a) → Enriched-Directed-Tree A B` indexed by `B a` into a single tree
+enriched directed tree with a new root.
 
 ## Definition
 

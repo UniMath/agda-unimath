@@ -23,7 +23,10 @@ open import trees.coalgebras-polynomial-endofunctors
 ## Idea
 
 Given two elements `x y : X` in the underlying type of a coalgebra of a
-polynomial endofunctor, We say that **`x` is an element of `y`**, i.e.,  `x ∈ y`, if there is an element `b : B (shape y)` equipped with an identification `component y b ＝ x`. Note that this elementhood relation of an arbitrary coalgebra needs not be irreflexive.
+polynomial endofunctor, We say that **`x` is an element of `y`**, i.e., `x ∈ y`,
+if there is an element `b : B (shape y)` equipped with an identification
+`component y b ＝ x`. Note that this elementhood relation of an arbitrary
+coalgebra needs not be irreflexive.
 
 By the elementhood relation on coalgebras we obtain for each coalgebra a
 directed graph.

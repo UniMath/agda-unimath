@@ -51,8 +51,8 @@ open import trees.morphisms-directed-trees
 ## Idea
 
 For every element `x` of a coalgebra of a polynomial endofunctor we can
-inductively define an enriched directed tree.
-This tree is called the **underlying enriched directed tree** of `x`.
+inductively define an enriched directed tree. This tree is called the
+**underlying enriched directed tree** of `x`.
 
 ## Definition
 

@@ -30,7 +30,8 @@ open import trees.directed-trees
 
 ## Idea
 
-Consider a type `A` and a type family `B` over `A`. An **`(A,B)`-enriched directed tree** is a directed tree `T` equipped with a map
+Consider a type `A` and a type family `B` over `A`. An **`(A,B)`-enriched
+directed tree** is a directed tree `T` equipped with a map
 
 ```md
   shape : node-Directed-Tree T → A
