@@ -36,8 +36,8 @@ left map (by diagrammatic ordering) `l` is in `L` and the right map `r` is in
 is-orthogonal-factorization-system :
   {l lL lR : Level}
   (L : function-class l l lL)
-  (R : function-class l l lR)
-  → UU (lsuc l ⊔ lL ⊔ lR)
+  (R : function-class l l lR) →
+  UU (lsuc l ⊔ lL ⊔ lR)
 is-orthogonal-factorization-system {l} L R =
   ( is-wide-function-class L) ×
   ( ( is-wide-function-class R) ×

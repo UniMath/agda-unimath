@@ -42,7 +42,7 @@ module _
         edge-Directed-Graph G x y → edge-Directed-Graph H (α x) (α y))
 
   module _
-    ( f : hom-Directed-Graph)
+    (f : hom-Directed-Graph)
     where
 
     vertex-hom-Directed-Graph :

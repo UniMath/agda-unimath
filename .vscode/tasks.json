@@ -3,14 +3,25 @@
   "tasks": [
     {
       "label": "check",
+      "detail": "Typecheck the entire library.",
       "type": "shell",
-      "command": "make check",
+      "command": "make",
+      "args": ["check"],
       "problemMatcher": []
     },
     {
       "label": "pre-commit",
+      "detail": "Quality assurance for the library.",
       "type": "shell",
-      "command": "make pre-commit",
+      "command": "make",
+      "args": ["pre-commit"],
+      "problemMatcher": []
+    },
+    {
+      "label": "imports",
+      "detail": "Search for and remove unused imports. Warning: very slow!",
+      "type": "shell",
+      "command": "python scripts/demote_foundation_imports.py && python scripts/remove_unused_imports.py",
       "problemMatcher": []
     }
   ]

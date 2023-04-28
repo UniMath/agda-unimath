@@ -144,8 +144,8 @@ reflects-order-add-ℤ {x} {y} {z} =
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
 leq-int-ℕ zero-ℕ y H = tr (is-nonnegative-ℤ) (inv (right-unit-law-add-ℤ (int-ℕ y))) (is-nonnegative-int-ℕ y)
 leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
-  (inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x))
-    ∙ (ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y)
-    ∙ ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
+  ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x)) ∙
+    ( ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
+      ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
   (leq-int-ℕ x y H)
 ```

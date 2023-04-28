@@ -134,36 +134,37 @@ associative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
     eq-num :
       mul-ℤ ((mul-ℤ nx dy) +ℤ (mul-ℤ ny dx)) dz +ℤ mul-ℤ nz (mul-ℤ dx dy) ＝
       mul-ℤ nx (mul-ℤ dy dz) +ℤ (mul-ℤ (mul-ℤ ny dz +ℤ mul-ℤ nz dy) dx)
-    eq-num = equational-reasoning
-      mul-ℤ ((mul-ℤ nx dy) +ℤ (mul-ℤ ny dx)) dz +ℤ mul-ℤ nz (mul-ℤ dx dy)
-      ＝ (mul-ℤ (mul-ℤ nx dy) dz +ℤ mul-ℤ (mul-ℤ ny dx) dz) +ℤ
-          mul-ℤ nz (mul-ℤ dx dy)
-        by ap-add-ℤ
-          (right-distributive-mul-add-ℤ (mul-ℤ nx dy) (mul-ℤ ny dx) dz) refl
-      ＝ mul-ℤ (mul-ℤ nx dy) dz +ℤ
-          (mul-ℤ (mul-ℤ ny dx) dz +ℤ mul-ℤ nz (mul-ℤ dx dy))
-        by associative-add-ℤ
-          (mul-ℤ (mul-ℤ nx dy) dz) (mul-ℤ (mul-ℤ ny dx) dz) _
-      ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ
-          (mul-ℤ (mul-ℤ ny dx) dz +ℤ mul-ℤ nz (mul-ℤ dx dy))
-        by ap-add-ℤ (associative-mul-ℤ nx dy dz) refl
-      ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ
-          (mul-ℤ ny (mul-ℤ dz dx) +ℤ mul-ℤ nz (mul-ℤ dy dx))
-        by ap-add-ℤ
-          (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
-          (ap-add-ℤ
-            (associative-mul-ℤ ny dx dz ∙ ap-mul-ℤ (refl {x = ny})
-              (commutative-mul-ℤ dx dz))
-            (ap-mul-ℤ (refl {x = nz}) (commutative-mul-ℤ dx dy)))
-      ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ
-          (mul-ℤ (mul-ℤ ny dz) dx +ℤ mul-ℤ (mul-ℤ nz dy) dx)
-        by ap-add-ℤ
-          (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
-          (inv (ap-add-ℤ (associative-mul-ℤ ny dz dx) (associative-mul-ℤ nz dy dx)))
-      ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ (mul-ℤ (mul-ℤ ny dz +ℤ mul-ℤ nz dy) dx)
-        by ap-add-ℤ
-          (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
-          (inv (right-distributive-mul-add-ℤ (mul-ℤ ny dz) (mul-ℤ nz dy) dx))
+    eq-num =
+      equational-reasoning
+        mul-ℤ ((mul-ℤ nx dy) +ℤ (mul-ℤ ny dx)) dz +ℤ mul-ℤ nz (mul-ℤ dx dy)
+        ＝ (mul-ℤ (mul-ℤ nx dy) dz +ℤ mul-ℤ (mul-ℤ ny dx) dz) +ℤ
+            mul-ℤ nz (mul-ℤ dx dy)
+          by ap-add-ℤ
+            (right-distributive-mul-add-ℤ (mul-ℤ nx dy) (mul-ℤ ny dx) dz) refl
+        ＝ mul-ℤ (mul-ℤ nx dy) dz +ℤ
+            (mul-ℤ (mul-ℤ ny dx) dz +ℤ mul-ℤ nz (mul-ℤ dx dy))
+          by associative-add-ℤ
+            (mul-ℤ (mul-ℤ nx dy) dz) (mul-ℤ (mul-ℤ ny dx) dz) _
+        ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ
+            (mul-ℤ (mul-ℤ ny dx) dz +ℤ mul-ℤ nz (mul-ℤ dx dy))
+          by ap-add-ℤ (associative-mul-ℤ nx dy dz) refl
+        ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ
+            (mul-ℤ ny (mul-ℤ dz dx) +ℤ mul-ℤ nz (mul-ℤ dy dx))
+          by ap-add-ℤ
+            (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
+            (ap-add-ℤ
+              (associative-mul-ℤ ny dx dz ∙ ap-mul-ℤ (refl {x = ny})
+                (commutative-mul-ℤ dx dz))
+              (ap-mul-ℤ (refl {x = nz}) (commutative-mul-ℤ dx dy)))
+        ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ
+            (mul-ℤ (mul-ℤ ny dz) dx +ℤ mul-ℤ (mul-ℤ nz dy) dx)
+          by ap-add-ℤ
+            (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
+            (inv (ap-add-ℤ (associative-mul-ℤ ny dz dx) (associative-mul-ℤ nz dy dx)))
+        ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ (mul-ℤ (mul-ℤ ny dz +ℤ mul-ℤ nz dy) dx)
+          by ap-add-ℤ
+            (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
+            (inv (right-distributive-mul-add-ℤ (mul-ℤ ny dz) (mul-ℤ nz dy) dx))
 ```
 
 ### Addition is commutative

@@ -33,7 +33,8 @@ module _
   pr1 (pr2 functor-Precat-Precat) F G = nat-trans-Precat-Set C D F G
   pr1 (pr2 (pr2 functor-Precat-Precat)) =
     (λ {F} {G} {H} α β → comp-nat-trans-Precat C D F G H α β) ,
-    λ {F} {G} {H} {I} h g f → assoc-comp-nat-trans-Precat C D {F} {G} {H} {I} f g h
+    λ {F} {G} {H} {I} h g f →
+    assoc-comp-nat-trans-Precat C D {F} {G} {H} {I} f g h
   pr2 (pr2 (pr2 functor-Precat-Precat)) =
     (λ F → id-nat-trans-Precat C D F) ,
     (λ {F} {G} α → left-unit-law-comp-nat-trans-Precat C D {F} {G} α) ,

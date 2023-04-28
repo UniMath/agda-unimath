@@ -267,9 +267,11 @@ module _
       tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁) ＝ ρ g IH₂
     τ' {A} {B} f g e IH₁ IH₂ hIH₁ hIH₂ =
       equational-reasoning
-      tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
-        ＝ ρ f IH₁ by tr-const path-f-g (ρ f IH₁)
-        ＝ ρ g IH₂ by τ f g e IH₁ IH₂ hIH₁' hIH₂'
+        tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
+        ＝ ρ f IH₁
+          by tr-const path-f-g (ρ f IH₁)
+        ＝ ρ g IH₂
+          by τ f g e IH₁ IH₂ hIH₁' hIH₂'
       where
       path-f-g :
         set-pseudo-cumulative-hierarchy V f
@@ -312,9 +314,11 @@ module _
       tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁) ＝ ρ g IH₂
     τ' {A} {B} f g e IH₁ IH₂ hIH₁ hIH₂ =
       equational-reasoning
-      tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
-        ＝ ρ f IH₁ by tr-const path-f-g (ρ f IH₁)
-        ＝ ρ g IH₂ by τ f g e IH₁ IH₂ hIH₁' hIH₂'
+        tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
+        ＝ ρ f IH₁
+          by tr-const path-f-g (ρ f IH₁)
+        ＝ ρ g IH₂
+          by τ f g e IH₁ IH₂ hIH₁' hIH₂'
       where
       path-f-g :
         set-pseudo-cumulative-hierarchy V f
@@ -457,8 +461,8 @@ needed.
   id-∈-cumulative-hierarchy :
     ( x : type-pseudo-cumulative-hierarchy V) {A : UU l1}
     ( f : A → type-pseudo-cumulative-hierarchy V) →
-    ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f))
-      ＝ ∃ A (λ a → f a ＝ x)
+    ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f)) ＝
+      ∃ A (λ a → f a ＝ x)
   id-∈-cumulative-hierarchy x f =
     ap pr1 (compute-simple-prop-recursion-principle-cumulative-hierarchy _ _ f)
 

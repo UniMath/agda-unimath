@@ -9,18 +9,18 @@ module foundation.empty-types where
 ```agda
 open import foundation-core.empty-types public
 
-open import foundation.contractible-types
 open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subuniverses
 open import foundation.univalence
 
+open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functions
+open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
 

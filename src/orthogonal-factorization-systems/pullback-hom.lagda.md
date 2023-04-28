@@ -1,4 +1,4 @@
-# Pullback-hom
+# The pullback-hom
 
 ```agda
 module orthogonal-factorization-systems.pullback-hom where
@@ -7,7 +7,7 @@ module orthogonal-factorization-systems.pullback-hom where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-pullbacks
+open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibered-maps
@@ -36,11 +36,11 @@ g ∘ - |            | g ∘ -
           - ∘ f
 ```
 
-The _pullback-hom_ of `f` and `g` is the comparison map from `B → X` to the
+The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
 pullback of the cospan:
 
 ```md
-      P -------> B → A
+      ∙ -------> B → A
       |  ⌟         |
       |            | g ∘ -
       V            V
@@ -48,8 +48,8 @@ pullback of the cospan:
           - ∘ f
 ```
 
-This pullback can be canonically understood as the type of fibered maps from `f`
-to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
+This pullback type can be canonically understood as the type of fibered maps
+from `f` to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
 
 ## Definition
 
@@ -71,7 +71,7 @@ module _
   gap-pullback-hom = gap (precomp f Y) (postcomp A g)
 ```
 
-### The pullback-hom
+### The pullback-hom map
 
 The pullback-hom is the canonical gap map `(X → B) → type-pullback-hom` and can
 be interpreted as the map that takes a diagonal map `j` from the codomain of `f`
@@ -85,7 +85,7 @@ to the domain of `g` to the fibered map `((g ∘ j) , (j ∘ f) , refl-htpy)`.
 
 ## Properties
 
-### Functoriality of the pullback-hom type
+### Functoriality of the pullback-hom construction
 
 ```agda
 module _

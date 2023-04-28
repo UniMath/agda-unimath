@@ -38,6 +38,8 @@ def generate_agda_block(root, namespace):
 
 if __name__ == "__main__":
 
+    CHANGES_WERE_MADE_FLAG = 1
+    MISPLACED_TITLE_FLAG = 2
     status = 0
     root = "src"
 
@@ -57,7 +59,8 @@ if __name__ == "__main__":
         title_index = contents.find("# ")
         if title_index > 0:
             print(
-                f"Warning! Namespace file {namespace_filename} has title after first line.")
+                f"Warning! Namespace file {namespace_filename} has title after first line.", file=sys.stderr)
+            status |= MISPLACED_TITLE_FLAG
         elif title_index == -1:  # Missing title. Generate it
             contents = generate_title(namespace) + contents
 
@@ -76,7 +79,7 @@ if __name__ == "__main__":
                 # An agda block is opened but not closed.
                 # This is an error, but we can fix it
                 print(
-                    f"WARNING! agda-block was opened but not closed in {namespace_filename}.")
+                    f"WARNING! agda-block was opened but not closed in {namespace_filename}.", file=sys.stderr)
                 contents = contents[:agda_block_start] + generated_block
             else:
                 agda_block_end += len("\n```\n")
@@ -84,7 +87,7 @@ if __name__ == "__main__":
                     generated_block + contents[agda_block_end:]
 
         if oldcontents != contents:
-            status |= 1
+            status |= CHANGES_WERE_MADE_FLAG
             with open(namespace_filename, "w") as f:
                 f.write(contents)
 

@@ -1591,7 +1591,7 @@ module _
 
   abstract
     sign-list-transpositions-count :
-      ( li : list (Σ (X → decidable-Prop l) (λ P → has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))) →
+      ( li : list (Σ (X → Decidable-Prop l) (λ P → has-cardinality 2 (Σ X (λ x → type-Decidable-Prop (P x)))))) →
       Id
         ( iterate (length-list li) (succ-Fin 2)
           ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) id-equiv))

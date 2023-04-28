@@ -105,7 +105,7 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
                 file.write(content)
 
             utils.multithread.thread_safe_print(
-                f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.")
+                f"'{agda_module}' ERROR! The temporary file '{temp_file} typechecked with imports {removed_imports} removed, but not the actual file '{agda_file}'. Please report this.", file=sys.stderr)
             return
 
         utils.multithread.thread_safe_print(

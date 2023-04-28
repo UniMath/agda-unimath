@@ -30,8 +30,7 @@ at most one element.
 ## Definition
 
 ```agda
-is-prop :
-  {i : Level} (A : UU i) → UU i
+is-prop : {l : Level} (A : UU l) → UU l
 is-prop A = (x y : A) → is-contr (x ＝ y)
 
 Prop :

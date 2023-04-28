@@ -95,10 +95,10 @@ module _
     is-prop-is-iso-Precat f =
       is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
 
-  is-iso-precat-Prop :
+  is-iso-Precat-Prop :
     {x y : obj-Precat C} (f : type-hom-Precat C x y) → Prop l2
-  pr1 (is-iso-precat-Prop f) = is-iso-Precat f
-  pr2 (is-iso-precat-Prop f) = is-prop-is-iso-Precat f
+  pr1 (is-iso-Precat-Prop f) = is-iso-Precat f
+  pr2 (is-iso-Precat-Prop f) = is-prop-is-iso-Precat f
 ```
 
 ### The type of isomorphisms between two objects in a precategory
@@ -109,17 +109,17 @@ module _
   where
 
   iso-Precat : (x y : obj-Precat C) → UU l2
-  iso-Precat x y = type-subtype (is-iso-precat-Prop C {x} {y})
+  iso-Precat x y = type-subtype (is-iso-Precat-Prop C {x} {y})
 
   hom-iso-Precat :
     {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C x y
-  hom-iso-Precat f = inclusion-subtype (is-iso-precat-Prop C) f
+  hom-iso-Precat f = inclusion-subtype (is-iso-Precat-Prop C) f
 
   is-iso-hom-iso-Precat :
     {x y : obj-Precat C} (f : iso-Precat x y) →
     is-iso-Precat C (hom-iso-Precat f)
   is-iso-hom-iso-Precat f =
-    is-in-subtype-inclusion-subtype (is-iso-precat-Prop C) f
+    is-in-subtype-inclusion-subtype (is-iso-Precat-Prop C) f
 
   hom-inv-iso-Precat :
     {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C y x
@@ -184,7 +184,7 @@ iso-eq-Precat C x .x refl = id-iso-Precat C
 Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 `f`. It is enough to show that `g = g'` since the equalities are propositions
 (since the hom-types are sets). But we have the following chain of equalities:
-`g = comp g id_y    = comp g (comp f g')    = comp (comp g f) g'    = comp id_x g'    = g'.`
+`g = comp g id_y = comp g (comp f g') = comp (comp g f) g' = comp id_x g' = g'.`
 
 ```agda
 module _
@@ -205,7 +205,7 @@ module _
   is-set-iso-Precat : (x y : obj-Precat C) → is-set (iso-Precat C x y)
   is-set-iso-Precat x y =
     is-set-type-subtype
-      ( is-iso-precat-Prop C)
+      ( is-iso-Precat-Prop C)
       ( is-set-type-hom-Precat C x y)
 
   iso-Precat-Set : (x y : obj-Precat C) → Set l2

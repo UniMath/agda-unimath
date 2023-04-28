@@ -368,8 +368,8 @@ module _
       ( H (pr1 y))
 
   abstract
-    is-prop-map-map-Σ-map-base : {f : A → B} (C : B → UU l3)
-      → is-prop-map f → is-prop-map (map-Σ-map-base f C)
+    is-prop-map-map-Σ-map-base :
+      {f : A → B} (C : B → UU l3) → is-prop-map f → is-prop-map (map-Σ-map-base f C)
     is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
 
 module _

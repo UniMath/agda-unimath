@@ -15,12 +15,14 @@ entry_template = '- [{title}]({mdfile})'
 
 def generate_namespace_entry_list(namespace):
     status = 0
+
     file_names = sorted(os.listdir(os.path.join(root, namespace)))
     file_paths = map(lambda m: pathlib.Path(
         os.path.join(root, namespace, m)), file_names)
     lagda_file_paths = tuple(filter(utils.is_agda_file, file_paths))
     modules = tuple(map(lambda p: p.name, lagda_file_paths))
-    module_titles = tuple(map(utils.get_lagda_file_title, lagda_file_paths))
+    module_titles = tuple(map(utils.get_lagda_md_file_title, lagda_file_paths))
+
     module_mdfiles = tuple(
         map(lambda m: utils.get_module_mdfile(namespace, m), modules))
 
@@ -28,7 +30,8 @@ def generate_namespace_entry_list(namespace):
     for title, module in zip(module_titles, modules):
         if title is None:
             status |= STATUS_FLAG_NO_TITLE
-            print(f"WARNING! {namespace}.{module} no title was found")
+            print(
+                f"WARNING! {namespace}.{module} no title was found", file=sys.stderr)
 
     # Check duplicate titles
     equal_titles = utils.get_equivalence_classes(
@@ -38,10 +41,10 @@ def generate_namespace_entry_list(namespace):
 
     if (len(equal_titles) > 0):
         status |= STATUS_FLAG_DUPLICATE_TITLE
-        print(f"WARNING! Duplicate titles in {namespace}:")
+        print(f"WARNING! Duplicate titles in {namespace}:", file=sys.stderr)
         for ec in equal_titles:
             print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}", file=sys.stderr)
 
     module_titles_and_mdfiles = sorted(
         zip(module_titles, module_mdfiles), key=lambda tm: (tm[1].split(".")))
@@ -49,7 +52,7 @@ def generate_namespace_entry_list(namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_file_title(
+    namespace_title = utils.get_lagda_md_file_title(
         os.path.join(root, namespace) + ".lagda.md")
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + ".md")
@@ -62,6 +65,9 @@ def generate_index(root, header):
     status = 0
     entry_lists = []
     for namespace in sorted(utils.get_subdirectories_recursive(root)):
+        if namespace == "temp":
+            continue
+
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s
@@ -101,8 +107,6 @@ if __name__ == "__main__":
 
     summary_path = "SUMMARY.md"
     index_header = "# Formalisation in Agda"
-
-    print(f"Generating {summary_path}")
 
     index_content, status = generate_index(root, index_header)
     if status == 0:

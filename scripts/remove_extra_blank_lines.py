@@ -68,7 +68,7 @@ if __name__ == "__main__":
         # Remove blank lines after a code block starts, and blank lines before a code block ends
         if not has_well_formed_blocks(output):
             print(
-                f"Error! File '{fpath}' has ill-formed code blocks. Please check if there is an opening or closing code block tag (```) without a corresponding closing/opening tag.")
+                f"Error! File '{fpath}' has ill-formed code blocks. Please check if there is an opening or closing code block tag (```) without a corresponding closing/opening tag.", file=sys.stderr)
 
             status |= STATUS_FILES_WITH_ILL_FORMED_BLOCKS
         else:

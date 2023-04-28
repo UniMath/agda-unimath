@@ -80,8 +80,8 @@ leq-right-leq-min-Fin (succ-ℕ k) (inr x) (inl x₁) (inl x₂) p = p
 leq-right-leq-min-Fin (succ-ℕ k) (inr x) (inr x₁) (inl x₂) p = p
 
 is-greatest-lower-bound-min-Fin :
-  (k : ℕ) (l m : Fin k)
-  → is-greatest-binary-lower-bound-Poset (fin-Poset k) l m (min-Fin k l m)
+  (k : ℕ) (l m : Fin k) →
+  is-greatest-binary-lower-bound-Poset (fin-Poset k) l m (min-Fin k l m)
 pr1 (pr1 (is-greatest-lower-bound-min-Fin k l m)) =
   leq-left-leq-min-Fin k (min-Fin k l m) l m (refl-leq-Fin k (min-Fin k l m))
 pr2 (pr1 (is-greatest-lower-bound-min-Fin k l m)) =

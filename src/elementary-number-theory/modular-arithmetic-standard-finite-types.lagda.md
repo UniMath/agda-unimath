@@ -1048,8 +1048,8 @@ is-decidable-div-ℕ (succ-ℕ d) x =
     ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
 
-div-ℕ-decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → decidable-Prop lzero
-pr1 (div-ℕ-decidable-Prop d x H) = div-ℕ d x
-pr1 (pr2 (div-ℕ-decidable-Prop d x H)) = is-prop-div-ℕ d x H
-pr2 (pr2 (div-ℕ-decidable-Prop d x H)) = is-decidable-div-ℕ d x
+div-ℕ-Decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → Decidable-Prop lzero
+pr1 (div-ℕ-Decidable-Prop d x H) = div-ℕ d x
+pr1 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-prop-div-ℕ d x H
+pr2 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-decidable-div-ℕ d x
 ```

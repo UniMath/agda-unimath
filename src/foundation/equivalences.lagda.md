@@ -15,7 +15,7 @@ open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
 
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

@@ -970,11 +970,11 @@ module _
       ( snd-fibered-Σ-Decomposition fib-D)
 
     htpy-matching-correspondence :
-      map-equiv (
-        ( equiv-Σ N id-equiv (inv-equiv ∘ t)) ∘e
-        matching-correspondence-displayed-fibered-Σ-Decomposition
-          (fib-D))
-      ~ map-equiv s
+      map-equiv
+        ( equiv-Σ N id-equiv (inv-equiv ∘ t) ∘e
+          matching-correspondence-displayed-fibered-Σ-Decomposition
+            (fib-D)) ~
+      map-equiv s
     htpy-matching-correspondence x =
       ( ap
         ( λ f → map-equiv (equiv-tot (inv-equiv ∘ t)) f)

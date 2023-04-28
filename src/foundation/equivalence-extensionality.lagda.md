@@ -70,14 +70,14 @@ module _
       (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
     is-contr-total-htpy-equiv e =
       fundamental-theorem-id'
-        ( λ f → map-equiv (extensionality-equiv e f))
-        ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
+        ( map-equiv ∘ extensionality-equiv e)
+        ( is-equiv-map-equiv ∘ extensionality-equiv e)
 
   refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
   refl-htpy-equiv e = refl-htpy
 
-  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → e ＝ e'
-  eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
+  eq-htpy-equiv : {e e' : A ≃ B} → htpy-equiv e e' → e ＝ e'
+  eq-htpy-equiv {e} {e'} = map-inv-equiv (extensionality-equiv e e')
 
   htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
   htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')

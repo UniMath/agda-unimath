@@ -56,7 +56,7 @@ AGDAMDFILES: $(AGDAMDFILES)
 
 docs/%.md: src/%.lagda.md
 	@echo "... $@"
-	@${AGDA} ${AGDAHTMLFLAfoGS} $<
+	@${AGDA} ${AGDAHTMLFLAGS} $<
 
 agda-html: src/everything.lagda.md
 	@rm -rf docs/
@@ -72,7 +72,7 @@ website: agda-html \
 	@cp $(METAFILES) docs/
 	@mdbook build
 
-.phony: serve-website
+.PHONY: serve-website
 serve-website:
 	@mdbook serve -p 8080 --open -d ./book/html
 

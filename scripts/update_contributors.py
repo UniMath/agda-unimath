@@ -1,4 +1,5 @@
 import requests
+import sys
 import json
 
 s = requests.Session()
@@ -11,7 +12,7 @@ response = s.get(url)
 
 if response.status_code != 200:
     print(f"Failed to retrieve contributors for repository {repo}. "
-          f"Status code: {response.status_code}")
+          f"Status code: {response.status_code}", file=sys.stderr)
     exit(1)
 
 contributors = json.loads(response.text)
@@ -38,7 +39,7 @@ def get_github_user_name(username):
 
     if response.status_code != 200:
         print(f"Failed to retrieve information for user {username}. "
-              f"Status code: {response.status_code}")
+              f"Status code: {response.status_code}", file=sys.stderr)
         return ""
 
     user_info = json.loads(response.text)

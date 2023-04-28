@@ -429,37 +429,40 @@ module _
 If `P → ¬ Q'` and `P' → ¬ Q` then `(P + Q ≃ P' + Q') ≃ ((P ≃ P') × (Q ≃ Q'))`.
 
 ```agda
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
-  (¬PQ' : P → ¬ Q') where
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
+  (¬PQ' : P → ¬ Q')
+  where
 
-  left-to-left : (e : (P + Q) ≃ (P' + Q'))
-               → (u : P + Q)
-               → is-left u
-               → is-left (map-equiv e u)
+  left-to-left :
+    (e : (P + Q) ≃ (P' + Q')) →
+    (u : P + Q) → is-left u → is-left (map-equiv e u)
   left-to-left e (inl p) _ =
     ind-coprod is-left (λ _ → star) (λ q' → ¬PQ' p q') (map-equiv e (inl p))
   left-to-left e (inr q) ()
 
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
-  (¬P'Q : P' → ¬ Q) where
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
+  (¬P'Q : P' → ¬ Q)
+  where
 
-  right-to-right : (e : (P + Q) ≃ (P' + Q'))
-                 → (u : P + Q)
-                 → is-right u
-                 → is-right (map-equiv e u)
+  right-to-right :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
+    is-right u → is-right (map-equiv e u)
   right-to-right e (inl p) ()
   right-to-right e (inr q) _ =
     ind-coprod is-right (λ p' → ¬P'Q p' q) (λ _ → star) (map-equiv e (inr q))
 
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
-  (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q) where
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
+  (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q)
+  where
 
-  equiv-left-to-left : (e : (P + Q) ≃ (P' + Q'))
-                     → (u : P + Q)
-                     → is-left u ≃ is-left (map-equiv e u)
+  equiv-left-to-left :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) → is-left u ≃ is-left (map-equiv e u)
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
     is-equiv-has-inverse
@@ -468,9 +471,9 @@ module _ {i j k l : Level}
       (λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-left u))
 
-  equiv-right-to-right : (e : (P + Q) ≃ (P' + Q'))
-                       → (u : P + Q)
-                       → is-right u ≃ is-right (map-equiv e u)
+  equiv-right-to-right :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
+    is-right u ≃ is-right (map-equiv e u)
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
     is-equiv-has-inverse
@@ -479,8 +482,7 @@ module _ {i j k l : Level}
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-right u))
 
-  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q')
-                                → (P ≃ P') × (Q ≃ Q')
+  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q') → (P ≃ P') × (Q ≃ Q')
   pr1 (map-mutually-exclusive-coprod e) =
     equiv-left-summand ∘e
     ( equiv-Σ _ e (equiv-left-to-left e) ∘e
@@ -490,8 +492,7 @@ module _ {i j k l : Level}
     ( equiv-Σ _ e (equiv-right-to-right e) ∘e
       inv-equiv (equiv-right-summand))
 
-  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q')
-                                    → (P + Q) ≃ (P' + Q')
+  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q') → (P + Q) ≃ (P' + Q')
   map-inv-mutually-exclusive-coprod (pair e₁ e₂) = equiv-coprod e₁ e₂
 
   isretr-map-inv-mutually-exclusive-coprod :

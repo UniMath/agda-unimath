@@ -28,7 +28,9 @@ abstract equation is simply two terms over a common signature.
 ### Abstract equations
 
 ```agda
-module _ {l1 : Level} (Sg : signature l1) where
+module _
+  {l1 : Level} (Sg : signature l1)
+  where
 
   Abstract-Equation : UU l1
   Abstract-Equation = Term Sg × Term Sg

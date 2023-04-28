@@ -29,7 +29,9 @@ The alternating group on a finite set `X` is the group of even permutations of
 ## Definition
 
 ```agda
-module _ {l} (n : ℕ) (X : UU-Fin l n) where
+module _
+  {l} (n : ℕ) (X : UU-Fin l n)
+  where
   alternating-Group : Group l
   alternating-Group = group-kernel-hom-Group
     ( symmetric-Group (set-UU-Fin n X))

@@ -47,10 +47,8 @@ module _
 
   associative-composition-structure-Set : UU (l1 ⊔ l2)
   associative-composition-structure-Set =
-    Σ ( {x y z : A}
-        → type-Set (hom y z)
-        → type-Set (hom x y)
-        → type-Set (hom x z))
+    Σ ( {x y z : A} →
+        type-Set (hom y z) → type-Set (hom x y) → type-Set (hom x z))
       ( λ μ →
         {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
         (f : type-Set (hom x y)) → μ (μ h g) f ＝ μ h (μ g f))
