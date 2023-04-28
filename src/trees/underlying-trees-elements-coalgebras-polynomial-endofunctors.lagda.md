@@ -908,7 +908,6 @@ module _
   shape-compute-enriched-directed-tree-element-coalgebra :
     shape-element-coalgebra X w ~
     ( ( shape-combinator-Enriched-Directed-Tree A B
-        ( shape-coalgebra-polynomial-endofunctor X w)
         ( λ b →
           enriched-directed-tree-element-coalgebra X
             ( component-coalgebra-polynomial-endofunctor X w b))) ∘
@@ -932,7 +931,6 @@ module _
           ( x)) ∘e
         ( enrichment-directed-tree-element-coalgebra X w x))
       ( ( enrichment-combinator-Enriched-Directed-Tree A B
-          ( shape-coalgebra-polynomial-endofunctor X w)
           ( λ b →
             enriched-directed-tree-element-coalgebra X
               ( component-coalgebra-polynomial-endofunctor X w b))
@@ -950,7 +948,6 @@ module _
     equiv-Enriched-Directed-Tree A B
       ( enriched-directed-tree-element-coalgebra X w)
       ( combinator-Enriched-Directed-Tree A B
-        ( shape-coalgebra-polynomial-endofunctor X w)
         ( λ b →
           enriched-directed-tree-element-coalgebra X
             ( component-coalgebra-polynomial-endofunctor X w b)))

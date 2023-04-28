@@ -15,12 +15,16 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import graph-theory.directed-graphs
+
 open import trees.bases-enriched-directed-trees
 open import trees.combinator-directed-trees
 open import trees.directed-trees
 open import trees.enriched-directed-trees
+open import trees.equivalences-directed-trees
 open import trees.equivalences-enriched-directed-trees
 open import trees.fibers-enriched-directed-trees
+open import trees.morphisms-directed-trees
 open import trees.morphisms-enriched-directed-trees
 ```
 
@@ -37,7 +41,7 @@ enriched directed tree with a new root.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) (a : A)
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {a : A}
   (T : B a → Enriched-Directed-Tree l3 l4 A B)
   where
 
@@ -50,6 +54,12 @@ module _
   node-combinator-Enriched-Directed-Tree =
     node-combinator-Directed-Tree (directed-tree-Enriched-Directed-Tree A B ∘ T)
 
+  node-inclusion-combinator-Enriched-Directed-Tree :
+    (b : B a) → node-Enriched-Directed-Tree A B (T b) →
+    node-combinator-Enriched-Directed-Tree
+  node-inclusion-combinator-Enriched-Directed-Tree =
+    node-inclusion-combinator-Directed-Tree
+
   root-combinator-Enriched-Directed-Tree :
     node-combinator-Enriched-Directed-Tree
   root-combinator-Enriched-Directed-Tree = root-combinator-Directed-Tree
@@ -58,6 +68,89 @@ module _
     (x y : node-combinator-Enriched-Directed-Tree) → UU (l2 ⊔ l3 ⊔ l4)
   edge-combinator-Enriched-Directed-Tree =
     edge-combinator-Directed-Tree (directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  graph-combinator-Enriched-Directed-Tree :
+    Directed-Graph (l2 ⊔ l3) (l2 ⊔ l3 ⊔ l4)
+  graph-combinator-Enriched-Directed-Tree =
+    graph-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  directed-tree-inclusion-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B (T b))
+      ( directed-tree-combinator-Enriched-Directed-Tree)
+  directed-tree-inclusion-combinator-Enriched-Directed-Tree =
+    inclusion-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  walk-combinator-Enriched-Directed-Tree :
+    (x y : node-combinator-Enriched-Directed-Tree) → UU (l2 ⊔ l3 ⊔ l4)
+  walk-combinator-Enriched-Directed-Tree =
+    walk-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  walk-inclusion-combinator-Enriched-Directed-Tree :
+    (b : B a) (x y : node-Enriched-Directed-Tree A B (T b)) →
+    walk-Enriched-Directed-Tree A B (T b) x y →
+    walk-combinator-Enriched-Directed-Tree
+      ( node-inclusion-combinator-Enriched-Directed-Tree b x)
+      ( node-inclusion-combinator-Enriched-Directed-Tree b y)
+  walk-inclusion-combinator-Enriched-Directed-Tree =
+    walk-inclusion-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  walk-to-root-combinator-Enriched-Directed-Tree :
+    (x : node-combinator-Enriched-Directed-Tree) →
+    walk-combinator-Enriched-Directed-Tree x
+      root-combinator-Enriched-Directed-Tree
+  walk-to-root-combinator-Enriched-Directed-Tree =
+    walk-to-root-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-root-combinator-Enriched-Directed-Tree :
+    node-combinator-Enriched-Directed-Tree → UU (l2 ⊔ l3)
+  is-root-combinator-Enriched-Directed-Tree =
+    is-root-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  unique-parent-combinator-Enriched-Directed-Tree :
+    unique-parent-Directed-Graph
+      ( graph-combinator-Enriched-Directed-Tree)
+      ( root-combinator-Enriched-Directed-Tree)
+  unique-parent-combinator-Enriched-Directed-Tree =
+    unique-parent-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-tree-combinator-Enriched-Directed-Tree :
+    is-tree-Directed-Graph graph-combinator-Enriched-Directed-Tree
+  is-tree-combinator-Enriched-Directed-Tree =
+    is-tree-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  base-combinator-Enriched-Directed-Tree : UU (l2 ⊔ l3 ⊔ l4)
+  base-combinator-Enriched-Directed-Tree =
+    base-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-proper-node-combinator-Enriched-Directed-Tree :
+    node-combinator-Enriched-Directed-Tree → UU (l2 ⊔ l3)
+  is-proper-node-combinator-Enriched-Directed-Tree =
+    is-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  proper-node-combinator-Enriched-Directed-Tree : UU (l2 ⊔ l3)
+  proper-node-combinator-Enriched-Directed-Tree =
+    proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-proper-node-inclusion-combinator-Enriched-Directed-Tree :
+    {b : B a} {x : node-Enriched-Directed-Tree A B (T b)} →
+    is-proper-node-combinator-Enriched-Directed-Tree
+      ( node-inclusion-combinator-Enriched-Directed-Tree b x)
+  is-proper-node-inclusion-combinator-Enriched-Directed-Tree =
+    is-proper-node-inclusion-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
   shape-combinator-Enriched-Directed-Tree :
     node-combinator-Enriched-Directed-Tree → A
@@ -124,7 +217,7 @@ module _
     root-enrichment-combinator-Enriched-Directed-Tree
   enrichment-combinator-Enriched-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree b x) =
-    ( children-combinator-Directed-Tree
+    ( compute-children-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T) b x) ∘e
     ( enrichment-Enriched-Directed-Tree A B (T b) x)
 
@@ -149,15 +242,18 @@ module _
   (x : node-Enriched-Directed-Tree A B (T b))
   where
 
+  children-combinator-Enriched-Directed-Tree : UU (l2 ⊔ l3 ⊔ l4)
+  children-combinator-Enriched-Directed-Tree =
+    children-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+      ( b)
+      ( x)
+
   map-children-combinator-Enriched-Directed-Tree :
-    Σ ( node-Enriched-Directed-Tree A B (T b))
-      ( λ y → edge-Enriched-Directed-Tree A B (T b) y x) →
-    Σ ( node-combinator-Enriched-Directed-Tree A B a T)
-      ( λ y →
-        edge-combinator-Enriched-Directed-Tree A B a T y
-          ( node-inclusion-combinator-Directed-Tree b x))
+    children-Enriched-Directed-Tree A B (T b) x →
+    children-combinator-Enriched-Directed-Tree
   map-children-combinator-Enriched-Directed-Tree =
-    map-children-combinator-Directed-Tree
+    map-compute-children-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
@@ -165,20 +261,16 @@ module _
   is-equiv-map-children-combinator-Enriched-Directed-Tree :
     is-equiv map-children-combinator-Enriched-Directed-Tree
   is-equiv-map-children-combinator-Enriched-Directed-Tree =
-    is-equiv-map-children-combinator-Directed-Tree
+    is-equiv-map-compute-children-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
 
-  children-combinator-Enriched-Directed-Tree :
-    Σ ( node-Enriched-Directed-Tree A B (T b))
-      ( λ y → edge-Enriched-Directed-Tree A B (T b) y x) ≃
-    Σ ( node-combinator-Enriched-Directed-Tree A B a T)
-      ( λ y →
-        edge-combinator-Enriched-Directed-Tree A B a T y
-          ( node-inclusion-combinator-Directed-Tree b x))
-  children-combinator-Enriched-Directed-Tree =
-    children-combinator-Directed-Tree
+  compute-children-combinator-Enriched-Directed-Tree :
+    children-Enriched-Directed-Tree A B (T b) x ≃
+    children-combinator-Enriched-Directed-Tree
+  compute-children-combinator-Enriched-Directed-Tree =
+    compute-children-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
@@ -192,20 +284,11 @@ eq-index-edge-combinator-Enriched-Directed-Tree :
   (T : B a → Enriched-Directed-Tree l3 l4 A B)
   {b : B a} (x : node-Enriched-Directed-Tree A B (T b))
   {c : B a} (y : node-Enriched-Directed-Tree A B (T c)) →
-  edge-combinator-Enriched-Directed-Tree A B a T
+  edge-combinator-Enriched-Directed-Tree A B T
     ( node-inclusion-combinator-Directed-Tree b x)
     ( node-inclusion-combinator-Directed-Tree c y) →
   b ＝ c
 eq-index-edge-combinator-Enriched-Directed-Tree A B a T =
   eq-index-edge-combinator-Directed-Tree
     ( directed-tree-Enriched-Directed-Tree A B ∘ T)
-```
-
-### Any tree is the combinator tree of the fibers at the nodes equipped with edges to the root
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
-  (T : Enriched-Directed-Tree l3 l4 A B)
-  where
 ```

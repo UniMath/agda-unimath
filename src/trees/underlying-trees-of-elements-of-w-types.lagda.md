@@ -440,7 +440,6 @@ module _
   shape-compute-enriched-directed-tree-element-𝕎 :
     shape-element-𝕎 w ~
     ( ( shape-combinator-Enriched-Directed-Tree A B
-        ( shape-𝕎 w)
         ( λ b → enriched-directed-tree-element-𝕎 (component-𝕎 w b))) ∘
       ( node-compute-directed-tree-element-𝕎))
   shape-compute-enriched-directed-tree-element-𝕎 =
@@ -457,7 +456,6 @@ module _
           ( x)) ∘e
         ( enrichment-element-𝕎 w x))
       ( ( enrichment-combinator-Enriched-Directed-Tree A B
-          ( shape-𝕎 w)
           ( λ b → enriched-directed-tree-element-𝕎 (component-𝕎 w b))
           ( node-compute-directed-tree-element-𝕎 x)) ∘e
         ( equiv-tr B
@@ -469,7 +467,6 @@ module _
     equiv-Enriched-Directed-Tree A B
       ( enriched-directed-tree-element-𝕎 w)
       ( combinator-Enriched-Directed-Tree A B
-        ( shape-𝕎 w)
         ( λ b → enriched-directed-tree-element-𝕎 (component-𝕎 w b)))
   compute-enriched-directed-tree-element-𝕎 =
     compute-enriched-directed-tree-element-coalgebra (𝕎-Coalg A B) w
