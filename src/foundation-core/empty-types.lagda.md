@@ -8,7 +8,6 @@ module foundation-core.empty-types where
 
 ```agda
 open import foundation.propositions
-open import foundation.subuniverses
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings

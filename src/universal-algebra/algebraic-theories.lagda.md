@@ -28,7 +28,9 @@ contrast to, say, requiring additional types of relations.
 ### Theories
 
 ```agda
-module _ {l1 : Level} (Sg : signature l1) where
+module _
+  {l1 : Level} (Sg : signature l1)
+  where
 
   Theory : (l2 : Level) → UU (l1 ⊔ lsuc l2)
   Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation Sg))

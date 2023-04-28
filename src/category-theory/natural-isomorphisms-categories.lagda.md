@@ -25,10 +25,12 @@ between the functors on the underlying precategories.
 ## Definition
 
 ```agda
-module _ {l1 l2 l3 l4}
+module _
+  {l1 l2 l3 l4 : Level}
   (C : Cat l1 l2)
   (D : Cat l3 l4)
-  (F G : functor-Cat C D) where
+  (F G : functor-Cat C D)
+  where
 
   is-nat-iso-Cat : nat-trans-Cat C D F G → UU (l1 ⊔ l4)
   is-nat-iso-Cat = is-nat-iso-Precat (precat-Cat C) (precat-Cat D) F G

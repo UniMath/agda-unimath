@@ -368,8 +368,10 @@ module _
   inv-left-div-Group x y =
     equational-reasoning
       inv-Group G (left-div-Group x y)
-        ＝ left-div-Group y (inv-Group G (inv-Group G x))    by distributive-inv-mul-Group (inv-Group G x) y
-        ＝ left-div-Group y x                                by ap (left-div-Group y) (inv-inv-Group x)
+      ＝ left-div-Group y (inv-Group G (inv-Group G x))
+        by distributive-inv-mul-Group (inv-Group G x) y
+      ＝ left-div-Group y x
+        by ap (left-div-Group y) (inv-inv-Group x)
 ```
 
 ### The inverse of `xy⁻¹` is `yx⁻¹`
@@ -380,8 +382,10 @@ module _
   inv-right-div-Group x y =
     equational-reasoning
       inv-Group G (right-div-Group x y)
-        ＝ right-div-Group (inv-Group G (inv-Group G y)) x   by distributive-inv-mul-Group x (inv-Group G y)
-        ＝ right-div-Group y x                               by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
+      ＝ right-div-Group (inv-Group G (inv-Group G y)) x
+        by distributive-inv-mul-Group x (inv-Group G y)
+      ＝ right-div-Group y x
+        by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
 ```
 
 ### The multiple of `x⁻¹y` and `y⁻¹z` is `x⁻¹z`
@@ -432,13 +436,18 @@ abstract
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
-        ( λ x →
-          equational-reasoning
-          i x ＝ μ e (i x)            by inv (left-unit-G (i x))
-              ＝ μ (μ (i' x) x) (i x) by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
-              ＝ μ (i' x) (μ x (i x)) by assoc-G (i' x) x (i x)
-              ＝ μ (i' x) e           by ap (μ (i' x)) (right-inv-i x)
-              ＝ i' x                 by right-unit-G (i' x)))
+        ( λ x → equational-reasoning
+          i x
+          ＝ μ e (i x)
+            by inv (left-unit-G (i x))
+          ＝ μ (μ (i' x) x) (i x)
+            by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
+          ＝ μ (i' x) (μ x (i x))
+            by assoc-G (i' x) x (i x)
+          ＝ μ (i' x) e
+            by ap (μ (i' x)) (right-inv-i x)
+          ＝ i' x
+            by right-unit-G (i' x)))
 
 abstract
   is-prop-is-group :

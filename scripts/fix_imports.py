@@ -34,7 +34,7 @@ def categorize_imports(block):
         if l.startswith('module') or l.startswith('{-# OPTIONS'):
             print(
                 'Error: module decl./pragmas can not be in the details import block\n\
-                Please put it in the first Agda block after the first header:\n\t' + str(fpath))
+                Please put it in the first Agda block after the first header:\n\t' + str(fpath), file=sys.stderr)
             sys.exit(1)
         elif 'open import' in l:
             if l.endswith('public'):
@@ -44,10 +44,11 @@ def categorize_imports(block):
         elif 'open' in l:
             openStatements.append(l)
         else:
-            print('Error: unknown statement in details import block:\n\t' + str(fpath))
+            print('Error: unknown statement in details import block:\n\t' +
+                  str(fpath), file=sys.stderr)
     if len(openStatements) > 0:
         print(
-            'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath))
+            'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath), file=sys.stderr)
 
     return (publicImports, nonPublicImports, openStatements)
 
@@ -130,7 +131,7 @@ if __name__ == "__main__":
             agdaBlockStart = utils.find_index(contents, '```agda')
             if len(agdaBlockStart) > 1:
                 print(
-                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
+                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath), file=sys.stderr)
                 status |= 1  # Flag
             continue
 

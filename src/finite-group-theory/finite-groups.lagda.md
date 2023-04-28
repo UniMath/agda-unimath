@@ -156,10 +156,10 @@ module _
   is-unit-finite-group-Prop : type-Group-𝔽 → Prop l
   is-unit-finite-group-Prop = is-unit-group-Prop group-Group-𝔽
 
-  is-unit-finite-group-decidable-Prop : type-Group-𝔽 → decidable-Prop l
-  pr1 (is-unit-finite-group-decidable-Prop x) =
+  is-unit-finite-group-Decidable-Prop : type-Group-𝔽 → Decidable-Prop l
+  pr1 (is-unit-finite-group-Decidable-Prop x) =
     is-unit-Group-𝔽 x
-  pr2 (is-unit-finite-group-decidable-Prop x) =
+  pr2 (is-unit-finite-group-Decidable-Prop x) =
     is-decidable-prop-is-unit-Group-𝔽 x
 
   left-unit-law-mul-Group-𝔽 :

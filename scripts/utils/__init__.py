@@ -72,7 +72,7 @@ def call_agda(options, filepath):
     return subprocess.call(f"agda {options} {filepath}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def get_lagda_file_title(lagda_filepath):
+def get_lagda_md_file_title(lagda_filepath):
     with open(lagda_filepath, "r") as file:
         contents = file.read()
         title_index = contents.find("# ")

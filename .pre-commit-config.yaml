@@ -10,19 +10,6 @@ repos:
       - id: check-case-conflict
       - id: check-merge-conflict
 
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: "v2.0.2"
-    hooks:
-      - id: autopep8
-        name: Python scripts formatting
-
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v3.0.0-alpha.6"
-    hooks:
-      - id: prettier
-        name: CSS, JS, YAML and Markdown (no codeblocks) formatting
-        types_or: [css, javascript, yaml, markdown]
-
   - repo: local
     hooks:
       - id: remove-extra-blank-lines
@@ -57,6 +44,16 @@ repos:
         args: []
         require_serial: false
 
+      - id: generate-main-index-file
+        name: Generate main index file
+        entry: scripts/generate_main_index_file.py
+        language: python
+        always_run: true
+        verbose: true
+        types_or: [markdown, text]
+        args: []
+        require_serial: false
+
       - id: max-line-length
         name: Check the maximum line length is respected
         entry: scripts/max_line_length.py
@@ -65,6 +62,19 @@ repos:
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
         require_serial: false
+
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: "v2.0.2"
+    hooks:
+      - id: autopep8
+        name: Python scripts formatting
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.0.0-alpha.6"
+    hooks:
+      - id: prettier
+        name: CSS, JS, YAML and Markdown (no codeblocks) formatting
+        types_or: [css, javascript, yaml, markdown]
 
       # Experimental hooks
 

@@ -82,7 +82,7 @@ module _
 There is an identity functor on any precategory.
 
 ```agda
-id-functor-Precat : ∀ {l1 l2} (C : Precat l1 l2) → functor-Precat C C
+id-functor-Precat : {l1 l2 : Level} (C : Precat l1 l2) → functor-Precat C C
 pr1 (id-functor-Precat C) = id
 pr1 (pr2 (id-functor-Precat C)) = id
 pr1 (pr2 (pr2 (id-functor-Precat C))) g f = refl

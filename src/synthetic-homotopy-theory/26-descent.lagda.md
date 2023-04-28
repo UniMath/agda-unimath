@@ -8,7 +8,7 @@ module synthetic-homotopy-theory.26-descent where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-pullbacks
+open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -32,7 +32,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -388,7 +388,7 @@ triangle-dependent-pullback-property-pushout :
       ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
       ( cone-dependent-pullback-property-pushout f g c P)))
 triangle-dependent-pullback-property-pushout f g (pair i (pair j H)) P h =
-  eq-pair-Σ refl (eq-pair-Σ refl (inv (issec-eq-htpy (λ x → apd h (H x)))))
+  eq-pair-Σ refl (eq-pair-Σ refl (inv (issec-eq-htpy (apd h ∘ H))))
 
 dependent-pullback-property-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -701,7 +701,7 @@ htpy-precompose-total-lifts {A = A} {B} P {f} {g} H =
    computes to refl-htpy. -}
 
 tr-id-left-subst :
-  {i j : Level} {A : UU i} {B : UU j} {f : A → B} {x y : A}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {x y : A}
   (p : Id x y) (b : B) → (q : Id (f x) b) →
   Id (tr (λ (a : A) → Id (f a) b) p q) ((inv (ap f p)) ∙ q)
 tr-id-left-subst refl b q = refl

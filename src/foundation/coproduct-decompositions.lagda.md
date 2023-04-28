@@ -7,30 +7,31 @@ module foundation.coproduct-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.coproduct-decompositions-subuniverse
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -518,13 +519,12 @@ module _
             ( left-summand-binary-coproduct-Decomposition d)
             ( right-summand-binary-coproduct-Decomposition d)
             ( λ y →
-                map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
-                d y
-                ＝ inl (inr star))) ∘e
+              map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
+                d y ＝ inl (inr star))) ∘e
           ( equiv-Σ-equiv-base
             ( λ y →
-              map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d y ＝
-              inl (inr star))
+              map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
+                d y ＝ inl (inr star))
             ( matching-correspondence-binary-coproduct-Decomposition d)))))
 
   equiv-right-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :

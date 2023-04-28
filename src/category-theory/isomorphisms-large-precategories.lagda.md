@@ -161,10 +161,10 @@ module _
   is-prop-is-iso-Large-Precat f =
     is-prop-all-elements-equal (all-elements-equal-is-iso-Large-Precat f)
 
-  is-iso-large-precat-Prop :
+  is-iso-Large-Precat-Prop :
     (f : type-hom-Large-Precat C X Y) → Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
-  pr1 (is-iso-large-precat-Prop f) = is-iso-Large-Precat C f
-  pr2 (is-iso-large-precat-Prop f) = is-prop-is-iso-Large-Precat f
+  pr1 (is-iso-Large-Precat-Prop f) = is-iso-Large-Precat C f
+  pr2 (is-iso-Large-Precat-Prop f) = is-prop-is-iso-Large-Precat f
 ```
 
 ### The type of isomorphisms form a set
@@ -182,7 +182,7 @@ module _
   is-set-iso-Large-Precat : is-set (iso-Large-Precat C X Y)
   is-set-iso-Large-Precat =
     is-set-type-subtype
-      ( is-iso-large-precat-Prop C X Y)
+      ( is-iso-Large-Precat-Prop C X Y)
       ( is-set-type-hom-Large-Precat C X Y)
 
   iso-Large-Precat-Set : Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)

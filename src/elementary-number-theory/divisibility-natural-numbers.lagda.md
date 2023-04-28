@@ -387,10 +387,14 @@ simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
   is-injective-mul-ℕ' c nz
     ( equational-reasoning
       mul-ℕ (mul-ℕ a/b b/c) c
-      ＝ mul-ℕ a/b (mul-ℕ b/c c)   by associative-mul-ℕ a/b b/c c
-      ＝ mul-ℕ a/b b               by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
-      ＝ a                         by eq-quotient-div-ℕ b a H
-      ＝ mul-ℕ a/c c               by inv (eq-quotient-div-ℕ c a L))
+      ＝ mul-ℕ a/b (mul-ℕ b/c c)
+        by associative-mul-ℕ a/b b/c c
+      ＝ mul-ℕ a/b b
+        by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
+      ＝ a
+        by eq-quotient-div-ℕ b a H
+      ＝ mul-ℕ a/c c
+        by inv (eq-quotient-div-ℕ c a L))
   where
   a/b : ℕ
   a/b = quotient-div-ℕ b a H
@@ -410,17 +414,23 @@ pr1 (pr1 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
   equational-reasoning
     mul-ℕ u (mul-ℕ x d)
-    ＝ mul-ℕ (mul-ℕ u x) d                 by inv (associative-mul-ℕ u x d)
-    ＝ mul-ℕ (quotient-div-ℕ d a H) d      by ap (mul-ℕ' d) p
-    ＝ a                                   by eq-quotient-div-ℕ d a H
+    ＝ mul-ℕ (mul-ℕ u x) d
+      by inv (associative-mul-ℕ u x d)
+    ＝ mul-ℕ (quotient-div-ℕ d a H) d
+      by ap (mul-ℕ' d) p
+    ＝ a
+      by eq-quotient-div-ℕ d a H
 pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
   is-injective-mul-ℕ' d nz
     ( equational-reasoning
         mul-ℕ (mul-ℕ u x) d
-        ＝ mul-ℕ u (mul-ℕ x d)             by associative-mul-ℕ u x d
-        ＝ a                               by p
-        ＝ mul-ℕ (quotient-div-ℕ d a H) d  by inv (eq-quotient-div-ℕ d a H))
+        ＝ mul-ℕ u (mul-ℕ x d)
+          by associative-mul-ℕ u x d
+        ＝ a
+          by p
+        ＝ mul-ℕ (quotient-div-ℕ d a H) d
+          by inv (eq-quotient-div-ℕ d a H))
 ```
 
 ### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero`. If `d`divides`b/c`then`d`divides`a/c`.

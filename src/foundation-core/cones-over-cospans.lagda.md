@@ -1,7 +1,7 @@
 # Cones on pullback diagrams
 
 ```agda
-module foundation-core.cones-pullbacks where
+module foundation-core.cones-over-cospans where
 ```
 
 <details><summary>Imports</summary>

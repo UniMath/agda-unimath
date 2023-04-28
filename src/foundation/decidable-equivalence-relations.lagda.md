@@ -288,7 +288,7 @@ module _
                 ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
             ( eq-htpy
               ( λ y →
-                eq-iff-decidable-Prop
+                eq-iff-Decidable-Prop
                   ( pr1 R a y)
                   ( pr1 R x y)
                   ( transitive-Decidable-Equivalence-Relation R H)

@@ -35,7 +35,9 @@ open import univalent-combinatorics.finite-types
 ## Definition
 
 ```agda
-module _ (t : tetrahedron-in-3-space) where
+module _
+  (t : tetrahedron-in-3-space)
+  where
 
   methane : hydrocarbon lzero lzero
   methane = (unit-𝔽 , (λ x → empty-𝔽))

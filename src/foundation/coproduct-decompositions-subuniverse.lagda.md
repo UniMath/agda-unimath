@@ -7,29 +7,30 @@ module foundation.coproduct-decompositions-subuniverse where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subuniverses
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.type-arithmetic-cartesian-product-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -113,7 +114,7 @@ module _
 
 ```agda
 module _
-  {l1 l2} (P : subuniverse l1 l2) (X : type-subuniverse P)
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
   ternary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)

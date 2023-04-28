@@ -66,7 +66,7 @@ module _
   factorization l3 = Σ (UU l3) (factorization-through)
 ```
 
-### Projections for factorizations
+### Components of a factorization
 
 ```agda
 module _
@@ -161,8 +161,8 @@ module _
   htpy-factorization-through F F' =
     Σ ( right-map-factorization-through F ~ right-map-factorization-through F')
       ( λ R →
-        Σ ( left-map-factorization-through F
-            ~ left-map-factorization-through F')
+        Σ ( left-map-factorization-through F ~
+            left-map-factorization-through F')
           ( coherence-htpy-factorization-through F F' R))
 
   refl-htpy-factorization-through :

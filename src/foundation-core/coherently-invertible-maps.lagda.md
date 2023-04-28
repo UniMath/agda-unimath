@@ -85,7 +85,7 @@ module _
 
 ```agda
 coh-is-coherently-invertible-id :
-  {i : Level} {A : UU i} {f : A → A} (H : f ~ (λ x → x)) →
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ (λ x → x)) →
   (x : A) → H (f x) ＝ ap f (H x)
 coh-is-coherently-invertible-id {_} {A} {f} H x =
   is-injective-concat' (H x)

@@ -7,9 +7,7 @@ module foundation.cartesian-products-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.identity-types
 open import foundation.products-equivalence-relations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
@@ -19,11 +17,13 @@ open import foundation.universal-property-set-quotients
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```

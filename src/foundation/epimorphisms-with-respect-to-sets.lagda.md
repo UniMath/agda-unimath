@@ -14,15 +14,14 @@ open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.surjective-maps
-open import foundation.truncation-levels
 open import foundation.unit-type
 
 open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.truncation-levels
 open import foundation-core.univalence
 open import foundation-core.universe-levels
 ```

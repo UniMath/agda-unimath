@@ -11,15 +11,11 @@ open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 
@@ -57,8 +53,7 @@ A map `f : A → B` is surjective if all of its fibers are inhabited.
 ```agda
 is-surjective-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
-is-surjective-Prop {B = B} f =
-  Π-Prop B (λ b → trunc-Prop (fib f b))
+is-surjective-Prop {B = B} f = Π-Prop B (trunc-Prop ∘ fib f)
 
 is-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
@@ -69,8 +64,7 @@ is-prop-is-surjective :
   is-prop (is-surjective f)
 is-prop-is-surjective f = is-prop-type-Prop (is-surjective-Prop f)
 
-_↠_ :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+_↠_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↠ B = Σ (A → B) is-surjective
 
 module _
@@ -88,7 +82,7 @@ module _
 
 ```agda
 Surjection : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-Surjection l2 A = Σ (UU l2) (λ X → A ↠ X)
+Surjection l2 A = Σ (UU l2) (A ↠_)
 
 module _
   {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)

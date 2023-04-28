@@ -59,9 +59,9 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 ### A type `A` is said to be merely decidable if it comes equipped with an element of `type-trunc-Prop (is-decidable A)`.
 
 ```agda
-is-merely-decidable-Prop :
+is-merely-Decidable-Prop :
   {l : Level} → UU l → Prop l
-is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
+is-merely-Decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
 is-merely-decidable A = type-trunc-Prop (is-decidable A)

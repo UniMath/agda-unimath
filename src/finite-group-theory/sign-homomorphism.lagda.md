@@ -137,19 +137,19 @@ module _
       ( f' : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x)))))
     list-trans f' h =
       list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f'
     list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin n X) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n X) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x)))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
@@ -294,12 +294,12 @@ module _
     list-trans :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
                 ( Σ
                   ( type-UU-Fin n X)
-                  ( λ x → type-decidable-Prop (P x)))))
+                  ( λ x → type-Decidable-Prop (P x)))))
     list-trans h =
       list-transpositions-permutation-count
         ( type-UU-Fin n X)
@@ -308,12 +308,12 @@ module _
     list-conjugation :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin n Y) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n Y) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
                 ( Σ
                   ( type-UU-Fin n Y)
-                  ( λ x → type-decidable-Prop (P x)))))
+                  ( λ x → type-Decidable-Prop (P x)))))
     list-conjugation h =
       map-list
         ( transposition-conjugation-equiv {l4 = l} (type-UU-Fin n X) (type-UU-Fin n Y) g)

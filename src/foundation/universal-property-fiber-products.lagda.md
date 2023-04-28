@@ -8,7 +8,7 @@ module foundation.universal-property-fiber-products where
 
 ```agda
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types

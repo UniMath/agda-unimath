@@ -7,19 +7,20 @@ module foundation.univalence-action-on-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.injective-maps
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>

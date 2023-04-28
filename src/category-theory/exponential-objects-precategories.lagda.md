@@ -35,60 +35,66 @@ each pair of objects.
 ## Definition
 
 ```agda
-module _ {l1 l2 : Level} (C : Precat l1 l2) (p : has-all-binary-products C) where
+module _
+  {l1 l2 : Level} (C : Precat l1 l2) (p : has-all-binary-products-Precat C)
+  where
 
-  is-exponential :
+  is-exponential-Precat :
     (x y e : obj-Precat C) →
-    type-hom-Precat C (object-product C p e x) y →
+    type-hom-Precat C (object-product-Precat C p e x) y →
     UU (l1 ⊔ l2)
-  is-exponential x y e ev =
+  is-exponential-Precat x y e ev =
     (z : obj-Precat C)
-    (f : type-hom-Precat C (object-product C p z x) y) →
+    (f : type-hom-Precat C (object-product-Precat C p z x) y) →
     ∃! (type-hom-Precat C z e) λ g →
-       comp-hom-Precat C ev (product-of-morphisms C p g (id-hom-Precat C)) ＝ f
+       comp-hom-Precat C ev (map-product-Precat C p g (id-hom-Precat C)) ＝ f
 
-  exponential : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
-  exponential x y =
+  exponential-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
+  exponential-Precat x y =
     Σ (obj-Precat C) (λ e →
-    Σ (type-hom-Precat C (object-product C p e x) y) λ ev →
-      is-exponential x y e ev)
+    Σ (type-hom-Precat C (object-product-Precat C p e x) y) λ ev →
+      is-exponential-Precat x y e ev)
 
-  has-all-exponentials : UU (l1 ⊔ l2)
-  has-all-exponentials = (x y : obj-Precat C) → exponential x y
+  has-all-exponentials-Precat : UU (l1 ⊔ l2)
+  has-all-exponentials-Precat = (x y : obj-Precat C) → exponential-Precat x y
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (p : has-all-binary-products C)
-  (t : has-all-exponentials C p)
-  (x y : obj-Precat C) where
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  (p : has-all-binary-products-Precat C)
+  (t : has-all-exponentials-Precat C p)
+  (x y : obj-Precat C)
+  where
 
-  object-exponential : obj-Precat C
-  object-exponential = pr1 (t x y)
+  object-exponential-Precat : obj-Precat C
+  object-exponential-Precat = pr1 (t x y)
 
-  eval-exponential : type-hom-Precat C (object-product C p object-exponential x) y
-  eval-exponential = pr1 (pr2 (t x y))
+  eval-exponential-Precat :
+    type-hom-Precat C (object-product-Precat C p object-exponential-Precat x) y
+  eval-exponential-Precat = pr1 (pr2 (t x y))
 
-  module _ (z : obj-Precat C)
-    (f : type-hom-Precat C (object-product C p z x) y) where
+  module _
+    (z : obj-Precat C)
+    (f : type-hom-Precat C (object-product-Precat C p z x) y)
+    where
 
-    morphism-into-exponential : type-hom-Precat C z object-exponential
-    morphism-into-exponential = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
+    morphism-into-exponential-Precat :
+      type-hom-Precat C z object-exponential-Precat
+    morphism-into-exponential-Precat = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
 
-    morphism-into-exponential-comm :
+    morphism-into-exponential-Precat-comm :
       comp-hom-Precat C
-          eval-exponential
-          (product-of-morphisms C p
-            (morphism-into-exponential)
-            (id-hom-Precat C))
-      ＝ f
-    morphism-into-exponential-comm = pr2 (pr1 (pr2 (pr2 (t x y)) z f))
+          ( eval-exponential-Precat)
+          ( map-product-Precat C p
+            (morphism-into-exponential-Precat)
+            (id-hom-Precat C)) ＝ f
+    morphism-into-exponential-Precat-comm = pr2 (pr1 (pr2 (pr2 (t x y)) z f))
 
-    is-unique-morphism-into-exponential :
-      (g : type-hom-Precat C z object-exponential)
-      → comp-hom-Precat C
-          eval-exponential
-          (product-of-morphisms C p g (id-hom-Precat C))
-        ＝ f
-      → morphism-into-exponential ＝ g
-    is-unique-morphism-into-exponential g q =
+    is-unique-morphism-into-exponential-Precat :
+      ( g : type-hom-Precat C z object-exponential-Precat) →
+      ( comp-hom-Precat C
+        ( eval-exponential-Precat)
+        ( map-product-Precat C p g (id-hom-Precat C)) ＝ f) →
+      morphism-into-exponential-Precat ＝ g
+    is-unique-morphism-into-exponential-Precat g q =
       ap pr1 (pr2 (pr2 (pr2 (t x y)) z f) (g , q))
 ```

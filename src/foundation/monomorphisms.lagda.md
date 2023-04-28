@@ -32,8 +32,10 @@ embedding.
 ## Definition
 
 ```agda
-module _ {l1 l2 : Level} (l3 : Level)
-  {A : UU l1} {B : UU l2} (f : A → B) where
+module _
+  {l1 l2 : Level} (l3 : Level)
+  {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
   is-mono-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Prop = Π-Prop (UU l3) λ X → is-emb-Prop (postcomp X f)
@@ -52,9 +54,11 @@ equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f �
 `g = h`.
 
 ```agda
-module _ {l1 l2 : Level} (l3 : Level)
+module _
+  {l1 l2 : Level} (l3 : Level)
   {A : UU l1} {B : UU l2} (f : A → B)
-  (p : is-mono l3 f) {X : UU l3} (g h : X → A) where
+  (p : is-mono l3 f) {X : UU l3} (g h : X → A)
+  where
 
   equiv-postcomp-is-mono : (g ＝ h) ≃ ((f ∘ g) ＝ (f ∘ h))
   pr1 equiv-postcomp-is-mono = ap (f ∘_)
@@ -67,7 +71,9 @@ module _ {l1 l2 : Level} (l3 : Level)
 A function is a monomorphism if and only if it is an embedding.
 
 ```agda
-module _ {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) where
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
   is-mono-is-emb : is-emb f → {l3 : Level} → is-mono l3 f
   is-mono-is-emb f-is-emb X =

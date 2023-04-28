@@ -52,5 +52,5 @@ module _
   constant-Pointed-Fam :
     (A : Pointed-Type l1) → Pointed-Type l2 → Pointed-Fam l2 A
   constant-Pointed-Fam A B =
-    pair (λ x → type-Pointed-Type B) (pt-Pointed-Type B)
+    pair (λ _ → type-Pointed-Type B) (pt-Pointed-Type B)
 ```
