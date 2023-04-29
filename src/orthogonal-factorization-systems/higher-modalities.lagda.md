@@ -240,7 +240,8 @@ sense
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  ( ((○ , is-locally-small-○) ,
+    unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
   where
 
   map-inv-unit-id-higher-modality :
@@ -260,7 +261,8 @@ module _
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  ( ((○ , is-locally-small-○) ,
+    unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
   (X : UU l)
   where
 
@@ -290,7 +292,8 @@ module _
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  ( ((○ , is-locally-small-○) ,
+    unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
   where
 
   isretr-modal-ind :
