@@ -49,6 +49,13 @@ def check_wrap_line_definition(line, i, lines):
     return line
 
 
+def check_wrap_line_definition_parameters(line):
+    m = re.match(r'^((\s*)[^\s.;{}()@"]+)\s+([^.;{}()@"]+\s+=)$', line)
+    if m:
+        line = f'{m.group(1)}\n{m.group(2)}  {m.group(3)}'
+    return line
+
+
 if __name__ == '__main__':
 
     agda_block_start = re.compile(r'^```agda\b')
@@ -74,6 +81,7 @@ if __name__ == '__main__':
                         not max_line_length.can_forgive_line(line):
                     line = check_wrap_line_type_signature(line, i, lines)
                     line = check_wrap_line_definition(line, i, lines)
+                    line = check_wrap_line_definition_parameters(line)
             lines[i] = line
 
         new_contents = '\n'.join(lines)
