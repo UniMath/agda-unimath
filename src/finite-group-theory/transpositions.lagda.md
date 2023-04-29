@@ -152,7 +152,8 @@ module _
   is-transposition-permutation : X ≃ X → UU (l1 ⊔ lsuc l2)
   is-transposition-permutation f = type-Prop (is-transposition-permutation-Prop f)
 
-  is-prop-is-transposition-permutation : (f : X ≃ X) → is-prop (is-transposition-permutation f)
+  is-prop-is-transposition-permutation :
+    (f : X ≃ X) → is-prop (is-transposition-permutation f)
   is-prop-is-transposition-permutation f = is-prop-type-Prop (is-transposition-permutation-Prop f)
 ```
 

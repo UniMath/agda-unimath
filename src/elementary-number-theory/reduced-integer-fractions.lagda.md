@@ -214,7 +214,8 @@ is-reduced-reduce-fraction-ℤ x =
             ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
             ( inr ( is-positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))))))
 
-sim-reduced-fraction-ℤ : (x : fraction-ℤ) → (sim-fraction-ℤ x (reduce-fraction-ℤ x))
+sim-reduced-fraction-ℤ :
+  (x : fraction-ℤ) → (sim-fraction-ℤ x (reduce-fraction-ℤ x))
 sim-reduced-fraction-ℤ x =
   equational-reasoning
     mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ (reduce-fraction-ℤ x))
@@ -278,7 +279,8 @@ sim-unique-numerator-reduce-fraction-ℤ x y H =
   red-x-coprime :
     gcd-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ x) ＝ one-ℤ
   red-x-coprime = is-reduced-reduce-fraction-ℤ x
-  div-red-x-red-y : div-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-numerator-fraction-ℤ y)
+  div-red-x-red-y :
+    div-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-numerator-fraction-ℤ y)
   div-red-x-red-y = div-right-factor-coprime-ℤ
     (int-reduce-numerator-fraction-ℤ x)
     (int-reduce-denominator-fraction-ℤ x)
@@ -297,7 +299,8 @@ sim-unique-numerator-reduce-fraction-ℤ x y H =
   red-y-coprime :
     gcd-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ y) ＝ one-ℤ
   red-y-coprime = is-reduced-reduce-fraction-ℤ y
-  div-red-y-red-x : div-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-numerator-fraction-ℤ x)
+  div-red-y-red-x :
+    div-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-numerator-fraction-ℤ x)
   div-red-y-red-x = div-right-factor-coprime-ℤ
     (int-reduce-numerator-fraction-ℤ y)
     (int-reduce-denominator-fraction-ℤ y)
@@ -391,7 +394,8 @@ sim-unique-denominator-reduce-fraction-ℤ x y H = antisymmetric-div-ℤ
       ( int-reduce-denominator-fraction-ℤ x)
       ( int-reduce-numerator-fraction-ℤ x) ∙
     is-reduced-reduce-fraction-ℤ x
-  div-red-x-red-y : div-ℤ (int-reduce-denominator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
+  div-red-x-red-y :
+    div-ℤ (int-reduce-denominator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
   div-red-x-red-y = div-right-factor-coprime-ℤ
     (int-reduce-denominator-fraction-ℤ x)
     (int-reduce-numerator-fraction-ℤ x)
@@ -408,21 +412,24 @@ sim-unique-denominator-reduce-fraction-ℤ x y H = antisymmetric-div-ℤ
       ( int-reduce-denominator-fraction-ℤ y)
       ( int-reduce-numerator-fraction-ℤ y) ∙
     is-reduced-reduce-fraction-ℤ y
-  div-red-y-red-x : div-ℤ (int-reduce-denominator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x)
+  div-red-y-red-x :
+    div-ℤ (int-reduce-denominator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x)
   div-red-y-red-x = div-right-factor-coprime-ℤ
     (int-reduce-denominator-fraction-ℤ y)
     (int-reduce-numerator-fraction-ℤ y)
     (int-reduce-denominator-fraction-ℤ x)
     div-red-y-num red-y-coprime
 
-unique-denominator-reduce-fraction-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → int-reduce-denominator-fraction-ℤ x ＝ int-reduce-denominator-fraction-ℤ y
+unique-denominator-reduce-fraction-ℤ :
+  (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → int-reduce-denominator-fraction-ℤ x ＝ int-reduce-denominator-fraction-ℤ y
 unique-denominator-reduce-fraction-ℤ x y H =
   eq-sim-unit-is-nonnegative-ℤ
     (is-nonnegative-is-positive-ℤ (is-positive-int-reduce-denominator-fraction-ℤ x))
     (is-nonnegative-is-positive-ℤ (is-positive-int-reduce-denominator-fraction-ℤ y))
     (sim-unique-denominator-reduce-fraction-ℤ x y H)
 
-unique-reduce-fraction-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → reduce-fraction-ℤ x ＝ reduce-fraction-ℤ y
+unique-reduce-fraction-ℤ :
+  (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → reduce-fraction-ℤ x ＝ reduce-fraction-ℤ y
 unique-reduce-fraction-ℤ x y H =
   eq-pair' (pair
     (unique-numerator-reduce-fraction-ℤ x y H)

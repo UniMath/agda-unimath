@@ -243,14 +243,16 @@ abstract
           has-cardinality 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
-    P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
+    P :
+      Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
       ( transposition t ∘e f)
       ( ( ap (λ y → map-transposition t y) p) ∙
         right-computation-standard-transposition (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl)
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
-    lemma : Id (map-equiv (pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) (inl y)) (inl x)
+    lemma :
+      Id (map-equiv (pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) (inl y)) (inl x)
     lemma =
       ( ap (λ e → map-equiv (pr1 (map-equiv e P)) (inl y)) (right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
         ( ap (map-equiv (transposition t)) q ∙
@@ -437,7 +439,8 @@ module _
             ( λ li → Id k (mod-two-ℕ (length-list li)) × Id f (permutation-list-transpositions li))))
 
     abstract
-      is-contr-parity-transposition-permutation : is-contr parity-transposition-permutation
+      is-contr-parity-transposition-permutation :
+        is-contr parity-transposition-permutation
       is-contr-parity-transposition-permutation =
         apply-universal-property-trunc-Prop
           ( has-cardinality-type-UU-Fin n X)

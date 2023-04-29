@@ -176,7 +176,8 @@ module _
   pr1 (pr2 (refl-htpy-fibered-map m)) = refl-htpy
   pr2 (pr2 (refl-htpy-fibered-map m)) = inv-htpy-left-unit-htpy ∙h right-unit-htpy
 
-  htpy-eq-fibered-map : (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
+  htpy-eq-fibered-map :
+    (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
   htpy-eq-fibered-map m .m refl = refl-htpy-fibered-map m
 
   is-contr-total-htpy-fibered-map :
@@ -204,7 +205,8 @@ module _
   pr1 (extensionality-fibered-map m m') = htpy-eq-fibered-map m m'
   pr2 (extensionality-fibered-map m m') = is-equiv-htpy-eq-fibered-map m m'
 
-  eq-htpy-fibered-map : (m m' : fibered-map f g) → htpy-fibered-map m m' → m ＝ m'
+  eq-htpy-fibered-map :
+    (m m' : fibered-map f g) → htpy-fibered-map m m' → m ＝ m'
   eq-htpy-fibered-map m m' = map-inv-equiv (extensionality-fibered-map m m')
 ```
 

@@ -49,12 +49,15 @@ module _
     preserves-order-Poset (poset-Frame A) (poset-Frame B) (map-hom-Frame H)
   preserves-order-hom-Frame = pr1 ∘ pr2
 
-  preserves-meets-sups-hom-Frame : (H : hom-Frame) → preserves-meets-sups (meet-sup-lattice-Frame A) (meet-sup-lattice-Frame B) (map-hom-Frame H)
+  preserves-meets-sups-hom-Frame :
+    (H : hom-Frame) → preserves-meets-sups (meet-sup-lattice-Frame A) (meet-sup-lattice-Frame B) (map-hom-Frame H)
   preserves-meets-sups-hom-Frame = pr2 ∘ pr2
 
-  preserves-meets-hom-Frame : (H : hom-Frame) → preserves-meets (meet-semilattice-Frame A) (meet-semilattice-Frame B) (map-hom-Frame H)
+  preserves-meets-hom-Frame :
+    (H : hom-Frame) → preserves-meets (meet-semilattice-Frame A) (meet-semilattice-Frame B) (map-hom-Frame H)
   preserves-meets-hom-Frame = pr1 ∘ preserves-meets-sups-hom-Frame
 
-  preserves-sups-hom-Frame : (H : hom-Frame) → preserves-sups (sup-lattice-Frame A) (sup-lattice-Frame B) (map-hom-Frame H)
+  preserves-sups-hom-Frame :
+    (H : hom-Frame) → preserves-sups (sup-lattice-Frame A) (sup-lattice-Frame B) (map-hom-Frame H)
   preserves-sups-hom-Frame = pr2 ∘ preserves-meets-sups-hom-Frame
 ```

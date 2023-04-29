@@ -723,7 +723,8 @@ module _
             ( ineq))))
 
   abstract
-    distinct-two-elements-count : ¬ (Id first-element-count second-element-count)
+    distinct-two-elements-count :
+      ¬ (Id first-element-count second-element-count)
     distinct-two-elements-count p =
       pr2
         ( pr2

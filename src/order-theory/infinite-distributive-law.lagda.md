@@ -136,7 +136,8 @@ module _
 ## We now state the infinite distributive law
 
 ```agda
-distributive-law-meet-sup-lattice : (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
+distributive-law-meet-sup-lattice :
+  (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
 distributive-law-meet-sup-lattice l1 l2 l3 A =
   (a : element-Meet-Sup-Lattice A) → {I : UU l3} →
   (b : I → element-Meet-Sup-Lattice A) →

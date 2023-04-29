@@ -1377,7 +1377,8 @@ module c-system where
     {l1 l2 : Level} {A : type-theory l1 l2} : (Γ : context A) → UU {!substitution.type (type-theory.S A) !}
     where
     element-empty-context : element-context empty-ctx
-    element-extension-ctx : {!(X : system.type (type-theory.sys A)) (Γ : context (slice-dtt A X)) (x : system.element (type-theory.sys A) X) (y : element-context (context-hom (substitution.type (type-theory.S A) x) Γ)) → element-context (extension-ctx X Γ)!}
+    element-extension-ctx :
+      {!(X : system.type (type-theory.sys A)) (Γ : context (slice-dtt A X)) (x : system.element (type-theory.sys A) X) (y : element-context (context-hom (substitution.type (type-theory.S A) x) Γ)) → element-context (extension-ctx X Γ)!}
 -}
   -- We interpret types in context in a dependent type theory
   type :

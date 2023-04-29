@@ -53,6 +53,7 @@ module _
     preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) (map-hom-Meet-Semilattice H)
   preserves-order-hom-Meet-Semilattice = pr1 ∘ pr2
 
-  preserves-meet-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
+  preserves-meet-hom-Meet-Semilattice :
+    (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
   preserves-meet-hom-Meet-Semilattice = pr2 ∘ pr2
 ```

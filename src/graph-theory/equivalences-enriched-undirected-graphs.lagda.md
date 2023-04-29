@@ -42,7 +42,8 @@ module _
   (G : Enriched-Undirected-Graph l3 l4 A B) (H : Enriched-Undirected-Graph l5 l6 A B)
   where
 
-  equiv-Enriched-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  equiv-Enriched-Undirected-Graph :
+    UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   equiv-Enriched-Undirected-Graph =
     Σ ( equiv-Undirected-Graph
         ( undirected-graph-Enriched-Undirected-Graph A B G)

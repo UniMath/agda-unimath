@@ -190,7 +190,8 @@ module _
   refl-htpy-suspension-structure : htpy-suspension-structure c c
   refl-htpy-suspension-structure = refl , (refl , right-unit-htpy)
 
-  is-refl-refl-htpy-suspension-structure : refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
+  is-refl-refl-htpy-suspension-structure :
+    refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
   is-refl-refl-htpy-suspension-structure = refl
 
 module _

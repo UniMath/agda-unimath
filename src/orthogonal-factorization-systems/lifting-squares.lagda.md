@@ -140,7 +140,8 @@ module _
       ( right-whisk-coherence-triangle-homotopies (g ·l K) L f)
       ( coherence-lifting-square l')
 
-  htpy-lifting-square : (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-lifting-square :
+    (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-lifting-square l l' =
     Σ ( map-diagonal-lifting-square l ~ map-diagonal-lifting-square l')
       ( λ K →
@@ -182,7 +183,8 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  is-lifting-square-diagonal : (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
+  is-lifting-square-diagonal :
+    (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
   pr1 (is-lifting-square-diagonal j) = refl-htpy
   pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
   pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy

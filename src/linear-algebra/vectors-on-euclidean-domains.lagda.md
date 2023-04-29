@@ -47,13 +47,16 @@ module _
   vec-Euclidean-Domain : ℕ → UU l
   vec-Euclidean-Domain = vec (type-Euclidean-Domain R)
 
-  head-vec-Euclidean-Domain : {n : ℕ} → vec-Euclidean-Domain (succ-ℕ n) → type-Euclidean-Domain R
+  head-vec-Euclidean-Domain :
+    {n : ℕ} → vec-Euclidean-Domain (succ-ℕ n) → type-Euclidean-Domain R
   head-vec-Euclidean-Domain v = head-vec v
 
-  tail-vec-Euclidean-Domain : {n : ℕ} → vec-Euclidean-Domain (succ-ℕ n) → vec-Euclidean-Domain n
+  tail-vec-Euclidean-Domain :
+    {n : ℕ} → vec-Euclidean-Domain (succ-ℕ n) → vec-Euclidean-Domain n
   tail-vec-Euclidean-Domain v = tail-vec v
 
-  snoc-vec-Euclidean-Domain : {n : ℕ} → vec-Euclidean-Domain n → type-Euclidean-Domain R → vec-Euclidean-Domain (succ-ℕ n)
+  snoc-vec-Euclidean-Domain :
+    {n : ℕ} → vec-Euclidean-Domain n → type-Euclidean-Domain R → vec-Euclidean-Domain (succ-ℕ n)
   snoc-vec-Euclidean-Domain v r = snoc-vec v r
 ```
 
@@ -106,7 +109,8 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  zero-functional-vec-Euclidean-Domain : (n : ℕ) → functional-vec-Euclidean-Domain R n
+  zero-functional-vec-Euclidean-Domain :
+    (n : ℕ) → functional-vec-Euclidean-Domain R n
   zero-functional-vec-Euclidean-Domain n i = zero-Euclidean-Domain R
 ```
 
@@ -119,7 +123,8 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  add-vec-Euclidean-Domain : {n : ℕ} → vec-Euclidean-Domain R n → vec-Euclidean-Domain R n → vec-Euclidean-Domain R n
+  add-vec-Euclidean-Domain :
+    {n : ℕ} → vec-Euclidean-Domain R n → vec-Euclidean-Domain R n → vec-Euclidean-Domain R n
   add-vec-Euclidean-Domain = binary-map-vec (add-Euclidean-Domain R)
 
   associative-add-vec-Euclidean-Domain :
@@ -238,7 +243,8 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  neg-vec-Euclidean-Domain : {n : ℕ} → vec-Euclidean-Domain R n → vec-Euclidean-Domain R n
+  neg-vec-Euclidean-Domain :
+    {n : ℕ} → vec-Euclidean-Domain R n → vec-Euclidean-Domain R n
   neg-vec-Euclidean-Domain = map-vec (neg-Euclidean-Domain R)
 
   left-inverse-law-add-vec-Euclidean-Domain :
@@ -259,12 +265,14 @@ module _
       ( right-inverse-law-add-Euclidean-Domain R x)
       ( right-inverse-law-add-vec-Euclidean-Domain v)
 
-  is-unital-vec-Euclidean-Domain : (n : ℕ) → is-unital (add-vec-Euclidean-Domain R {n})
+  is-unital-vec-Euclidean-Domain :
+    (n : ℕ) → is-unital (add-vec-Euclidean-Domain R {n})
   pr1 (is-unital-vec-Euclidean-Domain n) = zero-vec-Euclidean-Domain R
   pr1 (pr2 (is-unital-vec-Euclidean-Domain n)) = left-unit-law-add-vec-Euclidean-Domain R
   pr2 (pr2 (is-unital-vec-Euclidean-Domain n)) = right-unit-law-add-vec-Euclidean-Domain R
 
-  is-group-vec-Euclidean-Domain : (n : ℕ) → is-group (vec-Euclidean-Domain-Semigroup R n)
+  is-group-vec-Euclidean-Domain :
+    (n : ℕ) → is-group (vec-Euclidean-Domain-Semigroup R n)
   pr1 (is-group-vec-Euclidean-Domain n) = is-unital-vec-Euclidean-Domain n
   pr1 (pr2 (is-group-vec-Euclidean-Domain n)) = neg-vec-Euclidean-Domain
   pr1 (pr2 (pr2 (is-group-vec-Euclidean-Domain n))) = left-inverse-law-add-vec-Euclidean-Domain
