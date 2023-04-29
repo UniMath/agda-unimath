@@ -41,6 +41,15 @@ repos:
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
+      - id: easily-fixable-long-lines
+        name: Easily fixable long lines of Agda code
+        entry: scripts/easily_fixable_long_lines.py
+        language: python
+        always_run: true
+        verbose: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+
       - id: max-line-length
         name: Check the maximum line length is respected
         entry: scripts/max_line_length.py
