@@ -33,6 +33,23 @@ repos:
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
+      - id: spaces-convention-simple
+        name: Simple Agda space conventions
+        entry: scripts/spaces_convention_simple.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+
+      - id: max-line-length
+        name: Check the maximum line length is respected
+        entry: scripts/max_line_length.py
+        language: python
+        files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
+        types_or: [markdown, text]
+        require_serial: true
+        verbose: true
+
       - id: generate-namespace-index-modules
         name: Generate Agda namespace index modules
         entry: scripts/generate_namespace_index_modules.py
@@ -48,15 +65,6 @@ repos:
         always_run: true
         pass_filenames: false
         require_serial: true
-
-      - id: max-line-length
-        name: Check the maximum line length is respected
-        entry: scripts/max_line_length.py
-        language: python
-        files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
-        types_or: [markdown, text]
-        require_serial: true
-        verbose: true
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: "v2.0.2"
