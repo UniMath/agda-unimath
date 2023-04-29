@@ -239,7 +239,8 @@ module _
       ( m)
       ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
         d' d)
-  is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d' m p =
+  is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
+    d d' m p =
     ( p) ∙
     ( ap
       ( mod-two-ℕ ∘ number-of-elements-has-finite-cardinality)
