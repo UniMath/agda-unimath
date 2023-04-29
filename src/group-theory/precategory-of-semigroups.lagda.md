@@ -36,9 +36,9 @@ instance
   id-hom-Large-Precat Semigroup-Large-Precat
     {X = G} =
     id-hom-Semigroup G
-  associative-compose-hom-Large-Precat Semigroup-Large-Precat
+  assoc-compose-hom-Large-Precat Semigroup-Large-Precat
     {X = G} {H} {K} {L} =
-    associative-compose-hom-Semigroup G H K L
+    assoc-compose-hom-Semigroup G H K L
   left-unit-law-compose-hom-Large-Precat Semigroup-Large-Precat
     {X = G} {H} =
     left-unit-law-compose-hom-Semigroup G H

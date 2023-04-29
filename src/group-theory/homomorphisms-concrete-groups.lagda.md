@@ -155,7 +155,7 @@ compose-hom-Concrete-Group G H K =
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)
 
-associative-compose-hom-Concrete-Group :
+assoc-compose-hom-Concrete-Group :
   {l1 l2 l3 l4 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2)
   (K : Concrete-Group l3) (L : Concrete-Group l4)
@@ -164,8 +164,8 @@ associative-compose-hom-Concrete-Group :
   htpy-hom-Concrete-Group G L
     ( compose-hom-Concrete-Group G H L (compose-hom-Concrete-Group H K L h g) f)
     ( compose-hom-Concrete-Group G K L h (compose-hom-Concrete-Group G H K g f))
-associative-compose-hom-Concrete-Group G H K L =
-  associative-compose-hom-∞-Group
+assoc-compose-hom-Concrete-Group G H K L =
+  assoc-compose-hom-∞-Group
     ( ∞-group-Concrete-Group G)
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)

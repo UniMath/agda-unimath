@@ -31,9 +31,9 @@ compose-hom-Large-Precat (species-𝔽-Large-Precat l1) {X = F} {G} {H} =
   compose-hom-species-𝔽 F G H
 id-hom-Large-Precat (species-𝔽-Large-Precat l1) {X = F} =
   id-hom-species-𝔽 F
-associative-compose-hom-Large-Precat
+assoc-compose-hom-Large-Precat
   ( species-𝔽-Large-Precat l1) {X = F} {G} {H} {K} h g f =
-  associative-compose-hom-species-𝔽 F G H K h g f
+  assoc-compose-hom-species-𝔽 F G H K h g f
 left-unit-law-compose-hom-Large-Precat
   ( species-𝔽-Large-Precat l1) {X = F} {G} f =
   left-unit-law-compose-hom-species-𝔽 F G f

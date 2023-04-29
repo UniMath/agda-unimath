@@ -196,10 +196,10 @@ module _
   (h : hom-Preorder R S) (g : hom-Preorder Q R) (f : hom-Preorder P Q)
   where
 
-  associative-compose-hom-Preorder :
+  assoc-compose-hom-Preorder :
     Id ( compose-hom-Preorder P Q S (compose-hom-Preorder Q R S h g) f)
        ( compose-hom-Preorder P R S h (compose-hom-Preorder P Q R g f))
-  associative-compose-hom-Preorder =
+  assoc-compose-hom-Preorder =
     eq-htpy-hom-Preorder P S
       ( compose-hom-Preorder P Q S (compose-hom-Preorder Q R S h g) f)
       ( compose-hom-Preorder P R S h (compose-hom-Preorder P Q R g f))

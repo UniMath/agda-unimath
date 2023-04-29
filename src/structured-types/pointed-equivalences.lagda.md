@@ -323,7 +323,7 @@ module _
                     ( compose-pointed-map A A B f
                       ( compose-pointed-map A B A g f))
                     ( f)
-                    ( associative-compose-pointed-map A B A B f g f)
+                    ( assoc-compose-pointed-map A B A B f g f)
                     ( concat-htpy-pointed-map A B
                       ( compose-pointed-map A A B f
                         ( compose-pointed-map A B A g f))
@@ -366,7 +366,7 @@ module _
               ( compose-pointed-map A B C (compose-pointed-map B A C k h) f)
               ( compose-pointed-map A A C k (compose-pointed-map A B A h f))
               ( k)
-              ( associative-compose-pointed-map A B A C k h f)
+              ( assoc-compose-pointed-map A B A C k h f)
               ( concat-htpy-pointed-map A C
                 ( compose-pointed-map A A C k (compose-pointed-map A B A h f))
                 ( compose-pointed-map A A C k id-pointed-map)
@@ -386,7 +386,7 @@ module _
               ( compose-pointed-map B A C (compose-pointed-map A B C k f) g)
               ( compose-pointed-map B B C k (compose-pointed-map B A B f g))
               ( k)
-              ( associative-compose-pointed-map B A B C k f g)
+              ( assoc-compose-pointed-map B A B C k f g)
               ( concat-htpy-pointed-map B C
                 ( compose-pointed-map B B C k (compose-pointed-map B A B f g))
                 ( compose-pointed-map B B C k id-pointed-map)
@@ -452,7 +452,7 @@ module _
                       ( compose-pointed-map A B B
                         ( compose-pointed-map B A B f g) f)
                       ( f)
-                      ( inv-associative-compose-pointed-map A B A B f g f)
+                      ( inv-assoc-compose-pointed-map A B A B f g f)
                       ( concat-htpy-pointed-map A B
                         ( compose-pointed-map A B B
                           ( compose-pointed-map B A B f g)
@@ -496,7 +496,7 @@ module _
               ( compose-pointed-map X A B f (compose-pointed-map X B A g k))
               ( compose-pointed-map X B B (compose-pointed-map B A B f g) k)
               ( k)
-              ( inv-associative-compose-pointed-map X B A B f g k)
+              ( inv-assoc-compose-pointed-map X B A B f g k)
               ( concat-htpy-pointed-map X B
                 ( compose-pointed-map X B B (compose-pointed-map B A B f g) k)
                 ( compose-pointed-map X B B id-pointed-map k)
@@ -517,7 +517,7 @@ module _
               ( compose-pointed-map X B A h (compose-pointed-map X A B f k))
               ( compose-pointed-map X A A (compose-pointed-map A B A h f) k)
               ( k)
-              ( inv-associative-compose-pointed-map X A B A h f k)
+              ( inv-assoc-compose-pointed-map X A B A h f k)
               ( concat-htpy-pointed-map X A
                 ( compose-pointed-map X A A (compose-pointed-map A B A h f) k)
                 ( compose-pointed-map X A A id-pointed-map k)

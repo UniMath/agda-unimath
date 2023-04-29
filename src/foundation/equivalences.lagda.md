@@ -344,11 +344,11 @@ module _
 ### The groupoid laws for equivalences
 
 ```agda
-associative-compose-equiv :
+assoc-compose-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
   ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
-associative-compose-equiv e f g = eq-equiv-eq-map-equiv refl
+assoc-compose-equiv e f g = eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}

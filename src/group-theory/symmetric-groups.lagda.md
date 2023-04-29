@@ -47,7 +47,7 @@ is-set-type-symmetric-Group X = is-set-type-Set (set-symmetric-Group X)
 has-associative-mul-aut-Set :
   {l : Level} (X : Set l) → has-associative-mul-Set (Aut-Set X)
 pr1 (has-associative-mul-aut-Set X) f e = f ∘e e
-pr2 (has-associative-mul-aut-Set X) e f g = associative-compose-equiv g f e
+pr2 (has-associative-mul-aut-Set X) e f g = assoc-compose-equiv g f e
 
 symmetric-Semigroup :
   {l : Level} (X : Set l) → Semigroup l

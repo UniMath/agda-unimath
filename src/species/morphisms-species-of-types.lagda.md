@@ -101,14 +101,14 @@ eq-htpy-hom-species-types {f = f} {g = g} =
 ### Associativity of composition
 
 ```agda
-associative-compose-hom-species-types :
+assoc-compose-hom-species-types :
   {l1 l2 l3 l4 l5 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   {H : species-types l1 l4} {K : species-types l1 l5}
   (h : hom-species-types H K) (g : hom-species-types G H)
   (f : hom-species-types F G) →
   Id ( compose-hom-species-types (compose-hom-species-types h g) f)
      ( compose-hom-species-types h (compose-hom-species-types g f))
-associative-compose-hom-species-types h g f = refl
+assoc-compose-hom-species-types h g f = refl
 ```
 
 ### Unit laws of composition

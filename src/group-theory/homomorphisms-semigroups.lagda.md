@@ -193,7 +193,7 @@ pr2 (compose-hom-Semigroup G H K g f) x y =
 ### Associativity of composition of homomorphisms of semigroups
 
 ```agda
-associative-compose-hom-Semigroup :
+assoc-compose-hom-Semigroup :
   { l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( K : Semigroup l3) (L : Semigroup l4) (h : type-hom-Semigroup K L) →
   ( g : type-hom-Semigroup H K) (f : type-hom-Semigroup G H) →
@@ -201,7 +201,7 @@ associative-compose-hom-Semigroup :
        ( compose-hom-Semigroup H K L h g) f)
      ( compose-hom-Semigroup G K L h
        ( compose-hom-Semigroup G H K g f))
-associative-compose-hom-Semigroup
+assoc-compose-hom-Semigroup
   G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
   eq-htpy-hom-Semigroup G L refl-htpy
 ```

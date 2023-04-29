@@ -152,7 +152,7 @@ module _
             ( id-hom-Large-Precat C)))
       ( ( inv (right-unit-law-compose-hom-Large-Precat C g)) ∙
         ( ( ap ( compose-hom-Large-Precat C g) (inv p')) ∙
-          ( ( inv (associative-compose-hom-Large-Precat C g f g')) ∙
+          ( ( inv (assoc-compose-hom-Large-Precat C g f g')) ∙
             ( ( ap ( compose-hom-Large-Precat' C g') q) ∙
               ( left-unit-law-compose-hom-Large-Precat C g')))))
 
@@ -210,12 +210,12 @@ module _
       ( hom-inv-iso-Large-Precat C X Y (pair f p))
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
   pr1 (pr2 (is-iso-compose-iso-Large-Precat g f q p)) =
-    ( associative-compose-hom-Large-Precat C g f
+    ( assoc-compose-hom-Large-Precat C g f
       ( pr1 (is-iso-compose-iso-Large-Precat g f q p))) ∙
       ( ( ap
         ( compose-hom-Large-Precat C g)
         ( ( inv
-          ( associative-compose-hom-Large-Precat C f
+          ( assoc-compose-hom-Large-Precat C f
             ( hom-inv-iso-Large-Precat C X Y (pair f p))
             ( hom-inv-iso-Large-Precat C Y Z (pair g q)))) ∙
           ( ( ap
@@ -227,7 +227,7 @@ module _
               ( hom-inv-iso-Large-Precat C Y Z (pair g q)))))) ∙
         ( is-sec-hom-inv-iso-Large-Precat C Y Z (pair g q)))
   pr2 (pr2 (is-iso-compose-iso-Large-Precat g f q p)) =
-    ( associative-compose-hom-Large-Precat C
+    ( assoc-compose-hom-Large-Precat C
       ( hom-inv-iso-Large-Precat C X Y (pair f p))
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
       ( compose-hom-Large-Precat C g f)) ∙
@@ -236,7 +236,7 @@ module _
           ( C)
           ( hom-inv-iso-Large-Precat C X Y (pair f p)))
         ( ( inv
-          ( associative-compose-hom-Large-Precat C
+          ( assoc-compose-hom-Large-Precat C
             ( hom-inv-iso-Large-Precat C Y Z (pair g q))
             ( g)
             ( f))) ∙

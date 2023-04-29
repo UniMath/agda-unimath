@@ -50,7 +50,7 @@ module _
     right-inverse-law-add-hom-Ab A A
   pr2 (pr1 endomorphism-ring-Ab) = commutative-add-hom-Ab A A
   pr1 (pr1 (pr2 endomorphism-ring-Ab)) = compose-hom-Ab A A A
-  pr2 (pr1 (pr2 endomorphism-ring-Ab)) = associative-compose-hom-Ab A A A A
+  pr2 (pr1 (pr2 endomorphism-ring-Ab)) = assoc-compose-hom-Ab A A A A
   pr1 (pr1 (pr2 (pr2 endomorphism-ring-Ab))) = id-hom-Ab A
   pr1 (pr2 (pr1 (pr2 (pr2 endomorphism-ring-Ab)))) =
     left-unit-law-compose-hom-Ab A A

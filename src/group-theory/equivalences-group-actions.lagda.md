@@ -284,7 +284,7 @@ module _
   (X4 : Abstract-Group-Action G l5)
   where
 
-  associative-compose-equiv-Abstract-Group-Action :
+  assoc-compose-equiv-Abstract-Group-Action :
     (h : equiv-Abstract-Group-Action G X3 X4)
     (g : equiv-Abstract-Group-Action G X2 X3)
     (f : equiv-Abstract-Group-Action G X1 X2) →
@@ -293,7 +293,7 @@ module _
          ( f))
        ( compose-equiv-Abstract-Group-Action G X1 X3 X4 h
          ( compose-equiv-Abstract-Group-Action G X1 X2 X3 g f))
-  associative-compose-equiv-Abstract-Group-Action h g f =
+  assoc-compose-equiv-Abstract-Group-Action h g f =
     eq-htpy-equiv-Abstract-Group-Action G X1 X4
       ( compose-equiv-Abstract-Group-Action G X1 X2 X4
         ( compose-equiv-Abstract-Group-Action G X2 X3 X4 h g)

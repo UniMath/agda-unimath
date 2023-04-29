@@ -338,7 +338,7 @@ module _
             ( preserves-id-right-adjoint-Adjunction C D FG
               ( obj-left-adjoint-Adjunction C D FG Y)))) ∙
         ( ( inv
-            ( associative-compose-hom-Large-Precat C
+            ( assoc-compose-hom-Large-Precat C
               ( hom-right-adjoint-Adjunction C D FG (id-hom-Large-Precat D))
               ( map-inv-equiv-is-adjoint-pair-Adjunction C D FG Y
                 ( obj-left-adjoint-Adjunction C D FG Y)
@@ -351,7 +351,7 @@ module _
             ( ( ap
                 ( map-inv-equiv-is-adjoint-pair-Adjunction C D FG X
                   ( obj-left-adjoint-Adjunction C D FG Y))
-                  ( ( associative-compose-hom-Large-Precat D
+                  ( ( assoc-compose-hom-Large-Precat D
                       ( id-hom-Large-Precat D)
                       ( id-hom-Large-Precat D)
                       ( hom-left-adjoint-Adjunction C D FG f)) ∙
@@ -422,7 +422,7 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
         ( hom-left-adjoint-Adjunction C D FG
           ( hom-right-adjoint-Adjunction C D FG f))))) ∙
     ( ( inv
-        ( associative-compose-hom-Large-Precat D
+        ( assoc-compose-hom-Large-Precat D
           ( id-hom-Large-Precat D)
           ( map-equiv-is-adjoint-pair-Adjunction C D FG
             ( obj-right-adjoint-Adjunction C D FG Y)
