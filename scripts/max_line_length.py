@@ -15,7 +15,7 @@ import sys
 import utils
 
 named_module = re.compile(r'^module\s+\S+\s+where')
-irreducible_line1 = re.compile(r'^\s*([({] )*[^\s.;{}()@"]+[)}]*$')
+irreducible_line1 = re.compile(r'^\s*([({] ?)*[^\s.;{}()@"]+[)}]*$')
 irreducible_line2 = re.compile(r'^\s*[^\s.;{}()@"]+ [:=]$')
 comment_line = re.compile(r'^\s*--.*$')
 
