@@ -357,14 +357,14 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
               ( inv (right-inverse-law-equiv e))
               ( id-equiv))))
 
-preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
+preserves-compose-precomp-equiv-2-Element-Decidable-Subtype :
   { l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} (e : X ≃ Y) →
   ( f : Y ≃ Z) →
   Id
     ( precomp-equiv-2-Element-Decidable-Subtype {l3 = l4} (f ∘e e))
     ( ( precomp-equiv-2-Element-Decidable-Subtype e) ∘
       ( precomp-equiv-2-Element-Decidable-Subtype f))
-preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f =
+preserves-compose-precomp-equiv-2-Element-Decidable-Subtype e f =
   eq-htpy
     ( λ (pair P H) →
       eq-pair-Σ

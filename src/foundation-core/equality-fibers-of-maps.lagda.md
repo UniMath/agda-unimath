@@ -56,7 +56,7 @@ module _
     is-fiberwise-equiv-fib-ap-eq-fib-fiberwise :
       (s t : fib f b) → is-fiberwise-equiv (fib-ap-eq-fib-fiberwise s t)
     is-fiberwise-equiv-fib-ap-eq-fib-fiberwise (pair x y) (pair .x refl) refl =
-      is-equiv-comp
+      is-equiv-compose
         ( inv)
         ( concat right-unit refl)
         ( is-equiv-concat right-unit refl)
@@ -77,7 +77,7 @@ module _
   abstract
     is-equiv-fib-ap-eq-fib : (s t : fib f b) → is-equiv (fib-ap-eq-fib s t)
     is-equiv-fib-ap-eq-fib s t =
-      is-equiv-comp-htpy
+      is-equiv-compose-htpy
         ( fib-ap-eq-fib s t)
         ( tot (fib-ap-eq-fib-fiberwise s t))
         ( pair-eq-Σ {s = s} {t})
@@ -105,7 +105,7 @@ module _
     is-equiv-eq-fib-fib-ap :
       (q : (f x) ＝ (f y)) → is-equiv (eq-fib-fib-ap q)
     is-equiv-eq-fib-fib-ap q =
-      is-equiv-comp
+      is-equiv-compose
         ( tr (fib (ap f)) right-unit)
         ( fib-ap-eq-fib f (pair x q) (pair y refl))
         ( is-equiv-fib-ap-eq-fib f (pair x q) (pair y refl))

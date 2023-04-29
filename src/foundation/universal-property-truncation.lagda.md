@@ -410,7 +410,7 @@ map-id-trunc-Set {l1} {A} =
         { pair (map-trunc-Set id) (naturality-trunc-Set id)}
         { pair id refl-htpy}))
 
-map-comp-trunc-Set :
+map--trunc-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-trunc-Set (g ∘ f) ~ (map-trunc-Set g ∘ map-trunc-Set f)
@@ -495,7 +495,7 @@ module _
             ( ev-inl-inr (λ x → type-Set C))
             ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
             ( universal-property-coprod (type-Set C))
-            ( is-equiv-comp
+            ( is-equiv-compose
               ( map-prod
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))
@@ -667,7 +667,7 @@ abstract
         is-equiv-left-factor
           ( precomp (map-Π (λ x → unit-trunc-Set)) (type-Set B))
           ( precomp (ev-Maybe {B = type-trunc-Set ∘ A}) (type-Set B))
-          ( is-equiv-comp
+          ( is-equiv-compose
             ( precomp ev-Maybe (type-Set B))
             ( precomp
               ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)

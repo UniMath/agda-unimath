@@ -85,7 +85,7 @@ precomp-nullifying-hom-Group :
   (K : Group l3) (f : nullifying-hom-Group G K H)
   (L : Group l4) → type-hom-Group K L → nullifying-hom-Group G L H
 pr1 (precomp-nullifying-hom-Group G H K f L g) =
-  comp-hom-Group G K L g (hom-nullifying-hom-Group G K H f)
+  compose-hom-Group G K L g (hom-nullifying-hom-Group G K H f)
 pr2 (precomp-nullifying-hom-Group G H K f L g) h p =
   ( ap
     ( map-hom-Group K L g)

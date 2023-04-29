@@ -86,7 +86,7 @@ module _
   abstract
     is-equiv-map-equiv-Π : is-equiv map-equiv-Π
     is-equiv-map-equiv-Π =
-      is-equiv-comp
+      is-equiv-compose
         ( map-Π (λ a →
           ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
           ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
@@ -96,7 +96,7 @@ module _
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
         ( is-equiv-map-Π _
-          ( λ a → is-equiv-comp
+          ( λ a → is-equiv-compose
             ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a))
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
             ( is-equiv-map-equiv
@@ -239,14 +239,14 @@ abstract
       ( htpy-map-equiv-Π-refl-htpy B e)
       e' H f f' K
 
-  comp-htpy-map-equiv-Π :
+  compute-htpy-map-equiv-Π :
     { l1 l2 l3 l4 : Level}
     { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
     ( e : A' ≃ A) →
     ( htpy-map-equiv-Π {B' = B'} B e e (refl-htpy-equiv e)) ＝
     ( ( htpy-map-equiv-Π-refl-htpy B e))
-  comp-htpy-map-equiv-Π {B' = B'} B e =
-    comp-htpy-equiv e
+  compute-htpy-map-equiv-Π {B' = B'} B e =
+    compute-htpy-equiv e
       ( HTPY-map-equiv-Π B' B e)
       ( htpy-map-equiv-Π-refl-htpy B e)
 
@@ -264,7 +264,7 @@ abstract
     ( e : A ≃ A) (f : (a : A) → B a ≃ B (map-equiv e a)) →
     is-equiv (map-automorphism-Π e f)
   is-equiv-map-automorphism-Π {B = B} e f =
-    is-equiv-comp _ _
+    is-equiv-compose _ _
       ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
       ( is-equiv-map-Π _
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))

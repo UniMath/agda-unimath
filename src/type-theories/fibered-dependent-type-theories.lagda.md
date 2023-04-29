@@ -207,22 +207,22 @@ module fibered where
   section-fibered-system.slice (id-hom-fibered-system B) Y =
     id-hom-fibered-system (fibered-system.slice B Y)
 
-  comp-hom-fibered-system :
+  compose-hom-fibered-system :
     {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 : Level}
     {A : system l1 l2} {B : system l3 l4} {C : system l5 l6}
     {g : hom-system B C} {f : hom-system A B}
     {D : fibered-system l7 l8 A} {E : fibered-system l9 l10 B}
     {F : fibered-system l11 l12 C}
     (k : hom-fibered-system g E F) (h : hom-fibered-system f D E) →
-    hom-fibered-system (comp-hom-system g f) D F
-  section-fibered-system.type (comp-hom-fibered-system k h) Y =
+    hom-fibered-system (compose-hom-system g f) D F
+  section-fibered-system.type (compose-hom-fibered-system k h) Y =
     section-fibered-system.type k
       ( section-fibered-system.type h Y)
-  section-fibered-system.element (comp-hom-fibered-system k h) y =
+  section-fibered-system.element (compose-hom-fibered-system k h) y =
     section-fibered-system.element k
       ( section-fibered-system.element h y)
-  section-fibered-system.slice (comp-hom-fibered-system k h) Y =
-    comp-hom-fibered-system
+  section-fibered-system.slice (compose-hom-fibered-system k h) Y =
+    compose-hom-fibered-system
       ( section-fibered-system.slice k (section-fibered-system.type h Y))
       ( section-fibered-system.slice h Y)
 
@@ -268,10 +268,10 @@ module fibered where
       type  : {X : system.type A} (Y : fibered-system.type B X) →
               htpy-hom-fibered-system
                 ( preserves-weakening.type Wf X)
-                ( comp-hom-fibered-system
+                ( compose-hom-fibered-system
                   ( section-fibered-system.slice g Y)
                   ( fibered-weakening.type WB Y))
-                ( comp-hom-fibered-system
+                ( compose-hom-fibered-system
                   ( fibered-weakening.type WD
                     ( section-fibered-system.type g Y))
                   ( g))
@@ -318,10 +318,10 @@ module fibered where
               {x : system.element A X} (y : fibered-system.element B Y x) →
               htpy-hom-fibered-system
                 ( preserves-substitution.type Sf x)
-                ( comp-hom-fibered-system
+                ( compose-hom-fibered-system
                   ( g)
                   ( fibered-substitution.type SB y))
-                ( comp-hom-fibered-system
+                ( compose-hom-fibered-system
                   ( fibered-substitution.type SD
                     ( section-fibered-system.element g y))
                   ( section-fibered-system.slice g Y))
@@ -543,7 +543,7 @@ generic elements to be equipped with generic elements.
               {x : system.element A X} (y : fibered-system.element B Y x) →
               htpy-hom-fibered-system
                 ( substitution-cancels-weakening.type S!WA x)
-                ( comp-hom-fibered-system
+                ( compose-hom-fibered-system
                   ( fibered-substitution.type SB y)
                   ( fibered-weakening.type WB Y))
                 ( id-hom-fibered-system B)
@@ -600,7 +600,7 @@ generic elements to be equipped with generic elements.
       type  : {X : system.type A} (Y : fibered-system.type B X) →
               htpy-hom-fibered-system
                 ( substitution-by-generic-element.type Sδ! X)
-                ( comp-hom-fibered-system
+                ( compose-hom-fibered-system
                   ( fibered-substitution.type
                     ( fibered-substitution.slice SB Y)
                     ( fibered-generic-element.type δB Y))

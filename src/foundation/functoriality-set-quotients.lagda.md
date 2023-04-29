@@ -253,12 +253,12 @@ module _
   {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B) {C : UU l5}
   where
 
-  comp-reflecting-map-Eq-Rel :
+  compose-reflecting-map-Eq-Rel :
     reflecting-map-Eq-Rel S C → hom-Eq-Rel R S →
     reflecting-map-Eq-Rel R C
-  pr1 (comp-reflecting-map-Eq-Rel g f) =
+  pr1 (compose-reflecting-map-Eq-Rel g f) =
     map-reflecting-map-Eq-Rel S g ∘ map-hom-Eq-Rel R S f
-  pr2 (comp-reflecting-map-Eq-Rel g f) {x} {y} r =
+  pr2 (compose-reflecting-map-Eq-Rel g f) {x} {y} r =
     reflects-map-reflecting-map-Eq-Rel S g (preserves-sim-hom-Eq-Rel R S f r)
 ```
 
@@ -331,10 +331,10 @@ module _
               ( map-equiv h')))
   unique-equiv-is-set-quotient Uf Ug h =
     uniqueness-set-quotient R QR f Uf QS
-      ( comp-reflecting-map-Eq-Rel R S g (hom-equiv-Eq-Rel R S h))
+      ( compose-reflecting-map-Eq-Rel R S g (hom-equiv-Eq-Rel R S h))
       ( is-set-quotient-is-surjective-and-effective R QS
-        ( comp-reflecting-map-Eq-Rel R S g (hom-equiv-Eq-Rel R S h))
-        ( ( is-surjective-comp
+        ( compose-reflecting-map-Eq-Rel R S g (hom-equiv-Eq-Rel R S h))
+        ( ( is-surjective-compose
             ( is-surjective-is-set-quotient S QS g Ug)
             ( is-surjective-is-equiv (is-equiv-map-equiv-Eq-Rel R S h))) ,
           ( λ x y →

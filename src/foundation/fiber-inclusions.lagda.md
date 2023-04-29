@@ -152,7 +152,7 @@ module _
     is-pullback-cone-fiber-fam :
       is-pullback (pr1 {B = B}) (pt a) cone-fiber-fam
     is-pullback-cone-fiber-fam =
-      is-equiv-comp
+      is-equiv-compose
         ( gap (pr1 {B = B}) (pt a) (cone-fiber (pr1 {B = B}) a))
         ( map-inv-fib-pr1 B a)
         ( is-equiv-map-inv-fib-pr1 B a)

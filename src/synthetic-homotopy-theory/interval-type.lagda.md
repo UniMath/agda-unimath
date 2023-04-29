@@ -40,19 +40,19 @@ postulate
     {l : Level} (P : 𝕀 → UU l) (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) → (x : 𝕀) → P x
 
-  comp-source-𝕀 :
+  compute-source-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) → Id (ind-𝕀 P u v q source-𝕀) u
 
-  comp-target-𝕀 :
+  compute-target-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) → Id (ind-𝕀 P u v q target-𝕀) v
 
-  comp-path-𝕀 :
+  compute-path-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) →
-    Id ( apd (ind-𝕀 P u v q) path-𝕀 ∙ comp-target-𝕀 u v q)
-       ( ap (tr P path-𝕀) (comp-source-𝕀 u v q) ∙ q)
+    Id ( apd (ind-𝕀 P u v q) path-𝕀 ∙ compute-target-𝕀 u v q)
+       ( ap (tr P path-𝕀) (compute-source-𝕀 u v q) ∙ q)
 ```
 
 ## Properties
@@ -118,9 +118,9 @@ issec-inv-ev-𝕀 :
   {l : Level} {P : 𝕀 → UU l} (x : Data-𝕀 P) → ev-𝕀 (inv-ev-𝕀 x) ＝ x
 issec-inv-ev-𝕀 (pair u (pair v q)) =
   eq-Eq-Data-𝕀
-    ( comp-source-𝕀 u v q)
-    ( comp-target-𝕀 u v q)
-    ( comp-path-𝕀 u v q)
+    ( compute-source-𝕀 u v q)
+    ( compute-target-𝕀 u v q)
+    ( compute-path-𝕀 u v q)
 
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
@@ -135,12 +135,12 @@ isretr-inv-ev-𝕀 {l} {P} f =
   eq-htpy
     ( ind-𝕀
       ( λ x → Id (inv-ev-𝕀 (ev-𝕀 f) x) (f x))
-      ( comp-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-      ( comp-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+      ( compute-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+      ( compute-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
       ( tr-value (inv-ev-𝕀 (ev-𝕀 f)) f path-𝕀
-        ( comp-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-        ( comp-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-        ( comp-path-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))))
+        ( compute-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+        ( compute-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+        ( compute-path-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))))
 
 abstract
   is-equiv-ev-𝕀 :

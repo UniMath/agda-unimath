@@ -82,7 +82,7 @@ module _
       ({l : Level} → universal-property-pullback l f g c) →
       ({l : Level} → universal-property-pullback l f g c')
     up-pullback-up-pullback-is-equiv is-equiv-h up D =
-      is-equiv-comp-htpy
+      is-equiv-compose-htpy
         ( cone-map f g c')
         ( cone-map f g c)
         ( λ k → h ∘ k)

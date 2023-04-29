@@ -52,11 +52,11 @@ id-hom-species-𝔽 F = λ X x → x
 ### Composition of morphisms of finite species
 
 ```agda
-comp-hom-species-𝔽 :
+compose-hom-species-𝔽 :
   {l1 l2 l3 l4 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)
   (H : species-𝔽 l1 l4) → type-hom-species-𝔽 G H →
   type-hom-species-𝔽 F G → type-hom-species-𝔽 F H
-comp-hom-species-𝔽 F G H f g X = (f X) ∘ (g X)
+compose-hom-species-𝔽 F G H f g X = (f X) ∘ (g X)
 ```
 
 ### Homotopies of morphisms of finite species
@@ -79,30 +79,30 @@ refl-htpy-hom-species-𝔽 F G f X = refl-htpy
 ### Associativity of composition of homomorphisms of finite species
 
 ```agda
-associative-comp-hom-species-𝔽 :
+associative-compose-hom-species-𝔽 :
   {l1 l2 l3 l4 l5 : Level} (F : species-𝔽 l1 l2)
   (G : species-𝔽 l1 l3) (H : species-𝔽 l1 l4) (K : species-𝔽 l1 l5)
   (h : type-hom-species-𝔽 H K)
   (g : type-hom-species-𝔽 G H) (f : type-hom-species-𝔽 F G) →
-  Id ( comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f)
-     ( comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f))
-associative-comp-hom-species-𝔽 F G H K h g f = refl
+  Id ( compose-hom-species-𝔽 F G K (compose-hom-species-𝔽 G H K h g) f)
+     ( compose-hom-species-𝔽 F H K h (compose-hom-species-𝔽 F G H g f))
+associative-compose-hom-species-𝔽 F G H K h g f = refl
 ```
 
 ### The unit laws for composition of homomorphisms of finite species
 
 ```agda
-left-unit-law-comp-hom-species-𝔽 :
+left-unit-law-compose-hom-species-𝔽 :
   {l1 l2 l3 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)
   (f : type-hom-species-𝔽 F G) →
-  Id (comp-hom-species-𝔽 F G G (id-hom-species-𝔽 G) f) f
-left-unit-law-comp-hom-species-𝔽 F G f = refl
+  Id (compose-hom-species-𝔽 F G G (id-hom-species-𝔽 G) f) f
+left-unit-law-compose-hom-species-𝔽 F G f = refl
 
-right-unit-law-comp-hom-species-𝔽 :
+right-unit-law-compose-hom-species-𝔽 :
   {l1 l2 l3 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)
   (f : type-hom-species-𝔽 F G) →
-  Id (comp-hom-species-𝔽 F F G f (id-hom-species-𝔽 F)) f
-right-unit-law-comp-hom-species-𝔽 F G f = refl
+  Id (compose-hom-species-𝔽 F F G f (id-hom-species-𝔽 F)) f
+right-unit-law-compose-hom-species-𝔽 F G f = refl
 ```
 
 ### Characterization of the identity type of homomorphisms of finite species

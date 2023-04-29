@@ -44,13 +44,13 @@ module _
     type-hom-Cat D (obj-functor-Cat F x) (obj-functor-Cat F y)
   hom-functor-Cat F = pr1 (pr2 F)
 
-  respects-comp-functor-Cat :
+  respects-compose-functor-Cat :
     (F : functor-Cat) →
     {x y z : obj-Cat C} (g : type-hom-Cat C y z) (f : type-hom-Cat C x y) →
-    ( hom-functor-Cat F (comp-hom-Cat C g f)) ＝
-    ( comp-hom-Cat D (hom-functor-Cat F g) (hom-functor-Cat F f))
-  respects-comp-functor-Cat F =
-    respects-comp-functor-Precat (precat-Cat C) (precat-Cat D) F
+    ( hom-functor-Cat F (compose-hom-Cat C g f)) ＝
+    ( compose-hom-Cat D (hom-functor-Cat F g) (hom-functor-Cat F f))
+  respects-compose-functor-Cat F =
+    respects-compose-functor-Precat (precat-Cat C) (precat-Cat D) F
 
   respects-id-functor-Cat :
     (F : functor-Cat) (x : obj-Cat C) →
@@ -75,10 +75,10 @@ id-functor-Cat C = id-functor-Precat (precat-Cat C)
 Any two compatible functors can be composed to a new functor.
 
 ```agda
-comp-functor-Cat :
+compose-functor-Cat :
   {l1 l2 l3 l4 l5 l6 : Level}
   (C : Cat l1 l2) (D : Cat l3 l4) (E : Cat l5 l6) →
   functor-Cat D E → functor-Cat C D → functor-Cat C E
-comp-functor-Cat C D E G F =
-  comp-functor-Precat (precat-Cat C) (precat-Cat D) (precat-Cat E) G F
+compose-functor-Cat C D E G F =
+  compose-functor-Precat (precat-Cat C) (precat-Cat D) (precat-Cat E) G F
 ```

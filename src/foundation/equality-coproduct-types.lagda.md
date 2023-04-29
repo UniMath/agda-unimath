@@ -268,7 +268,7 @@ module _
       ( ap f)
       ( ap (ind-coprod (λ x → C) f g))
       ( ap inl)
-      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inl p)
+      ( λ p → ap-compose (ind-coprod (λ x → C) f g) inl p)
       ( H a a')
       ( is-emb-inl A B a a')
   is-emb-coprod H K L (inl a) (inr b') =
@@ -280,7 +280,7 @@ module _
       ( ap g)
       ( ap (ind-coprod (λ x → C) f g))
       ( ap inr)
-      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inr p)
+      ( λ p → ap-compose (ind-coprod (λ x → C) f g) inr p)
       ( K b b')
       ( is-emb-inr A B b b')
 ```

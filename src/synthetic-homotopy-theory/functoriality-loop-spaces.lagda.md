@@ -76,7 +76,7 @@ is-emb-map-Ω :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   (f : A →* B) → is-faithful (map-pointed-map A B f) → is-emb (map-Ω A B f)
 is-emb-map-Ω A B f H =
-  is-emb-comp
+  is-emb-compose
     ( tr-type-Ω (preserves-point-pointed-map A B f))
     ( ap (map-pointed-map A B f))
     ( is-emb-is-equiv (is-equiv-tr-type-Ω (preserves-point-pointed-map A B f)))

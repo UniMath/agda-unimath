@@ -55,7 +55,7 @@ map-inv-is-iso-hom-Ab A B f is-iso-f =
 is-sec-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   ( is-iso-f : is-iso-hom-Ab A B f) →
-  Id (comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f)) (id-hom-Ab B)
+  Id (compose-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f)) (id-hom-Ab B)
 is-sec-inv-is-iso-hom-Ab A B f is-iso-f = pr1 (pr2 is-iso-f)
 
 is-sec-map-inv-is-iso-hom-Ab :
@@ -65,14 +65,14 @@ is-sec-map-inv-is-iso-hom-Ab :
   id
 is-sec-map-inv-is-iso-hom-Ab A B f is-iso-f =
   htpy-eq-hom-Ab B B
-    ( comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f))
+    ( compose-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f))
     ( id-hom-Ab B)
     ( is-sec-inv-is-iso-hom-Ab A B f is-iso-f)
 
 is-retr-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   ( is-iso-f : is-iso-hom-Ab A B f) →
-  Id (comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f) (id-hom-Ab A)
+  Id (compose-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f) (id-hom-Ab A)
 is-retr-inv-is-iso-hom-Ab A B f is-iso-f = pr2 (pr2 is-iso-f)
 
 is-retr-map-inv-is-iso-hom-Ab :
@@ -81,7 +81,7 @@ is-retr-map-inv-is-iso-hom-Ab :
   ( (map-inv-is-iso-hom-Ab A B f is-iso-f) ∘ (map-hom-Ab A B f)) ~ id
 is-retr-map-inv-is-iso-hom-Ab A B f is-iso-f =
   htpy-eq-hom-Ab A A
-    ( comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f)
+    ( compose-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f)
     ( id-hom-Ab A)
     ( is-retr-inv-is-iso-hom-Ab A B f is-iso-f)
 

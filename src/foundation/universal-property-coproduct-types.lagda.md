@@ -85,7 +85,7 @@ module _
       (l4 : Level) (Y : UU l4) →
         is-equiv (λ (s : X → Y) → pair' (s ∘ i) (s ∘ j))
     universal-property-coprod-is-equiv-ind-coprod X i j H l Y =
-      is-equiv-comp
+      is-equiv-compose
         ( ev-inl-inr (λ t → Y))
         ( precomp (ind-coprod (λ t → X) i j) Y)
         ( is-equiv-precomp-is-equiv

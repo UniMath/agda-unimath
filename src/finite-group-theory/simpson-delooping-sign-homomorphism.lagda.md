@@ -131,7 +131,7 @@ module _
                 (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))) ∙
               ( ap
                 ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
-                ( distributive-inv-comp-equiv g (inv-equiv f) ∙
+                ( distributive-inv-compose-equiv g (inv-equiv f) ∙
                   ap (inv-equiv g ∘e_) (inv-inv-equiv f)))))))
   pr2 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} {h} P Q =
     ( ap mod-two-ℕ
@@ -149,10 +149,10 @@ module _
         (Fin-UU-Fin' n) (inv-equiv f ∘e g) (inv-equiv g ∘e h)) ∙
       ( ap
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
-        ( associative-comp-equiv (inv-equiv g ∘e h) g (inv-equiv f) ∙
+        ( associative-compose-equiv (inv-equiv g ∘e h) g (inv-equiv f) ∙
           ( ap
             ( inv-equiv f ∘e_)
-            ( inv (associative-comp-equiv h (inv-equiv g) g) ∙
+            ( inv (associative-compose-equiv h (inv-equiv g) g) ∙
               ( ap (_∘e h) (right-inverse-law-equiv g) ∙
                 left-unit-law-equiv h))))))
 
@@ -215,7 +215,7 @@ module _
             ( ap
               ( _∘e transposition-eX)
               ( inv (left-inverse-law-equiv (equiv-count eX))) ∙
-              ( associative-comp-equiv
+              ( associative-compose-equiv
                 ( transposition-eX)
                 ( equiv-count eX)
                 ( inv-equiv (equiv-count eX))))))
@@ -238,7 +238,7 @@ module _
           ( ap
             ( inv-equiv (transposition Y ∘e equiv-count eX) ∘e_)
             ( inv
-              ( associative-comp-equiv
+              ( associative-compose-equiv
                 (equiv-count eX) (transposition Y) (transposition Y)) ∙
               ( ap
                 ( _∘e equiv-count eX)
@@ -246,9 +246,9 @@ module _
                 ( left-unit-law-equiv (equiv-count eX)))) ∙
             ( ap
               ( _∘e equiv-count eX)
-              ( distributive-inv-comp-equiv
+              ( distributive-inv-compose-equiv
                 (equiv-count eX) (transposition Y)) ∙
-              ( associative-comp-equiv
+              ( associative-compose-equiv
                 ( equiv-count eX)
                 ( inv-equiv (transposition Y))
                 ( inv-equiv (equiv-count eX)) ∙
@@ -418,7 +418,7 @@ module _
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
                   ( Fin-UU-Fin' (number-of-elements-count eX)))
-                ( associative-comp-equiv
+                ( associative-compose-equiv
                   ( inv-equiv (equiv-count eX) ∘e
                     ( equiv-count eX ∘e transposition-eX))
                   ( equiv-count eX)
@@ -426,7 +426,7 @@ module _
                   ( ap
                     ( λ h → inv-equiv f ∘e (equiv-count eX ∘e h))
                     ( inv
-                      ( associative-comp-equiv
+                      ( associative-compose-equiv
                         ( transposition-eX)
                         ( equiv-count eX)
                         ( inv-equiv (equiv-count eX))) ∙
@@ -531,10 +531,10 @@ module _
                     ( Fin-UU-Fin' (number-of-elements-count eX)))
                   ( ap
                     ( _∘e equiv-count eX)
-                    ( distributive-inv-comp-equiv
+                    ( distributive-inv-compose-equiv
                       ( transposition-eX)
                       ( equiv-count eX)) ∙
-                    ( associative-comp-equiv
+                    ( associative-compose-equiv
                       ( equiv-count eX)
                       ( inv-equiv (equiv-count eX))
                       ( inv-equiv transposition-eX) ∙
@@ -558,7 +558,7 @@ module _
                                   ( inv
                                     ( left-inverse-law-equiv
                                       ( equiv-count eX))) ∙
-                                ( associative-comp-equiv
+                                ( associative-compose-equiv
                                   ( transposition-eX)
                                   ( equiv-count eX)
                                   ( inv-equiv (equiv-count eX)))))))))))))))
@@ -568,9 +568,9 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
 
-  equiv-fin-2-quotient-sign-comp-equiv-Fin :
+  equiv-fin-2-quotient-sign-compose-equiv-Fin :
     (Fin n ≃ type-UU-Fin n X) → (Fin 2 ≃ quotient-sign-comp n X)
-  equiv-fin-2-quotient-sign-comp-equiv-Fin h =
+  equiv-fin-2-quotient-sign-compose-equiv-Fin h =
     tr
       ( λ e → Fin 2 ≃ quotient-sign-comp n (type-UU-Fin n X , e))
       ( all-elements-equal-type-trunc-Prop
@@ -583,43 +583,43 @@ module _
   {l : Level} (n : ℕ)
   where
 
-  map-simpson-comp-equiv :
+  map-simpson-compose-equiv :
     (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') →
     (Fin n ≃ type-UU-Fin n X) → (Fin n ≃ type-UU-Fin n X')
-  map-simpson-comp-equiv X X' e f = e ∘e f
+  map-simpson-compose-equiv X X' e f = e ∘e f
 
-  simpson-comp-equiv :
+  simpson-compose-equiv :
     (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') →
     (Fin n ≃ type-UU-Fin n X) ≃ (Fin n ≃ type-UU-Fin n X')
-  pr1 (simpson-comp-equiv X X' e) = map-simpson-comp-equiv X X' e
-  pr2 (simpson-comp-equiv X X' e) =
+  pr1 (simpson-compose-equiv X X' e) = map-simpson-compose-equiv X X' e
+  pr2 (simpson-compose-equiv X X' e) =
     is-equiv-has-inverse
-      ( map-simpson-comp-equiv X' X (inv-equiv e))
+      ( map-simpson-compose-equiv X' X (inv-equiv e))
       ( λ f →
-        ( inv (associative-comp-equiv f (inv-equiv e) e)) ∙
+        ( inv (associative-compose-equiv f (inv-equiv e) e)) ∙
         ( ap (_∘e f) (right-inverse-law-equiv e) ∙ left-unit-law-equiv f))
       ( λ f →
-        ( inv (associative-comp-equiv f e (inv-equiv e))) ∙
+        ( inv (associative-compose-equiv f e (inv-equiv e))) ∙
         ( ap (_∘e f) (left-inverse-law-equiv e) ∙ left-unit-law-equiv f))
 
   abstract
-    preserves-id-equiv-simpson-comp-equiv :
-      (X : UU-Fin l n) → Id (simpson-comp-equiv X X id-equiv) id-equiv
-    preserves-id-equiv-simpson-comp-equiv X =
+    preserves-id-equiv-simpson-compose-equiv :
+      (X : UU-Fin l n) → Id (simpson-compose-equiv X X id-equiv) id-equiv
+    preserves-id-equiv-simpson-compose-equiv X =
       eq-htpy-equiv left-unit-law-equiv
 
-    preserves-comp-simpson-comp-equiv :
+    preserves-compose-simpson-compose-equiv :
       ( X Y Z : UU-Fin l n)
       ( e : type-UU-Fin n X ≃ type-UU-Fin n Y) →
       ( f : type-UU-Fin n Y ≃ type-UU-Fin n Z) →
       Id
-        ( simpson-comp-equiv X Z (f ∘e e))
-        ( simpson-comp-equiv Y Z f ∘e simpson-comp-equiv X Y e)
-    preserves-comp-simpson-comp-equiv X Y Z e f =
+        ( simpson-compose-equiv X Z (f ∘e e))
+        ( simpson-compose-equiv Y Z f ∘e simpson-compose-equiv X Y e)
+    preserves-compose-simpson-compose-equiv X Y Z e f =
       eq-htpy-equiv
-        ( λ h → associative-comp-equiv h e f)
+        ( λ h → associative-compose-equiv h e f)
 
   private
     lemma-sign-comp :
@@ -629,8 +629,8 @@ module _
       Id
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e f'))
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n)
-          ( inv-equiv ( map-simpson-comp-equiv X X' e f) ∘e
-            map-simpson-comp-equiv X X' e f'))
+          ( inv-equiv ( map-simpson-compose-equiv X X' e f) ∘e
+            map-simpson-compose-equiv X X' e f'))
     lemma-sign-comp X X' e f f' =
        ap
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
@@ -638,24 +638,25 @@ module _
           ( inv-equiv f ∘e_)
           ( inv (left-unit-law-equiv f') ∙
             ( ap (_∘e f') (inv (left-inverse-law-equiv e)) ∙
-              ( associative-comp-equiv f' e (inv-equiv e)))) ∙
-          ( inv (associative-comp-equiv (e ∘e f') (inv-equiv e) (inv-equiv f)) ∙
+              ( associative-compose-equiv f' e (inv-equiv e)))) ∙
+          ( inv
+            ( associative-compose-equiv (e ∘e f') (inv-equiv e) (inv-equiv f)) ∙
             ( ap
-              ( _∘e map-simpson-comp-equiv X X' e f')
-              ( inv (distributive-inv-comp-equiv f e)))))
+              ( _∘e map-simpson-compose-equiv X X' e f')
+              ( inv (distributive-inv-compose-equiv f e)))))
 
-  preserves-sign-comp-simpson-comp-equiv :
+  preserves-sign-comp-simpson-compose-equiv :
     ( X X' : UU-Fin l n)
     ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
     ( f f' : (Fin n ≃ type-UU-Fin n X)) →
     ( sim-Eq-Rel (sign-comp-Eq-Rel n X) f f' ↔
       sim-Eq-Rel
         ( sign-comp-Eq-Rel n X')
-        ( map-simpson-comp-equiv X X' e f)
-        ( map-simpson-comp-equiv X X' e f'))
-  pr1 (preserves-sign-comp-simpson-comp-equiv X X' e f f') =
+        ( map-simpson-compose-equiv X X' e f)
+        ( map-simpson-compose-equiv X X' e f'))
+  pr1 (preserves-sign-comp-simpson-compose-equiv X X' e f f') =
     _∙ lemma-sign-comp X X' e f f'
-  pr2 (preserves-sign-comp-simpson-comp-equiv X X' e f f') =
+  pr2 (preserves-sign-comp-simpson-compose-equiv X X' e f f') =
     _∙ inv (lemma-sign-comp X X' e f f')
 ```
 
@@ -710,8 +711,8 @@ module _
                 ( sign-comp-aut-succ-succ-Fin n (transposition Y)))))
       ( ap pr1
         { x =
-          simpson-comp-equiv (n +ℕ 2) ,
-          preserves-id-equiv-simpson-comp-equiv (n +ℕ 2)}
+          simpson-compose-equiv (n +ℕ 2) ,
+          preserves-id-equiv-simpson-compose-equiv (n +ℕ 2)}
         { y =
           ( univalent-action-equiv
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
@@ -738,18 +739,18 @@ module _
       ( λ n X → Fin n ≃ type-UU-Fin n X)
       ( sign-comp-Eq-Rel)
       ( λ n _ → is-decidable-sign-comp-Eq-Rel n)
-      ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
+      ( equiv-fin-2-quotient-sign-compose-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)
 
   eq-simpson-delooping-sign-homomorphism :
     (n : ℕ) →
     Id
-      ( comp-hom-Group
+      ( compose-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
-        ( comp-hom-Group
+        ( compose-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
@@ -762,11 +763,11 @@ module _
             ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
-      ( comp-hom-Group
+      ( compose-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
-        ( comp-hom-Group
+        ( compose-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
@@ -774,7 +775,7 @@ module _
             ( λ n X → Fin n ≃ type-UU-Fin n X)
             ( sign-comp-Eq-Rel)
             ( λ n H → is-decidable-sign-comp-Eq-Rel n)
-            ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
+            ( equiv-fin-2-quotient-sign-compose-equiv-Fin)
             ( sign-comp-aut-succ-succ-Fin)
             ( not-univalent-action-equiv-transposition)
             ( n))
@@ -790,7 +791,7 @@ module _
       ( λ n X → Fin n ≃ type-UU-Fin n X)
       ( sign-comp-Eq-Rel)
       ( λ n _ → is-decidable-sign-comp-Eq-Rel n)
-      ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
+      ( equiv-fin-2-quotient-sign-compose-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)
 ```

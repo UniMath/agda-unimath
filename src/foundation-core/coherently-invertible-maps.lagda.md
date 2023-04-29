@@ -127,7 +127,7 @@ module _
             ( ap f (pr2 (pr2 H) x))
             ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
             ( pr1 (pr2 H) (f x))
-            ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
+            ( ( ap-compose f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
               ( inv
                 ( ap (ap f) (coh-is-coherently-invertible-id (pr2 (pr2 H)) x))))
             ( nat-htpy (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))

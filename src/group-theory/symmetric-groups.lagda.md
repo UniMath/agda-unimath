@@ -47,7 +47,7 @@ is-set-type-symmetric-Group X = is-set-type-Set (set-symmetric-Group X)
 has-associative-mul-aut-Set :
   {l : Level} (X : Set l) → has-associative-mul-Set (Aut-Set X)
 pr1 (has-associative-mul-aut-Set X) f e = f ∘e e
-pr2 (has-associative-mul-aut-Set X) e f g = associative-comp-equiv g f e
+pr2 (has-associative-mul-aut-Set X) e f g = associative-compose-equiv g f e
 
 symmetric-Semigroup :
   {l : Level} (X : Set l) → Semigroup l
@@ -105,7 +105,7 @@ module _
 
   is-sec-hom-inv-symmetric-group-equiv-Set :
     Id
-      ( comp-hom-Group
+      ( compose-hom-Group
         ( symmetric-Group Y)
         ( symmetric-Group X)
         ( symmetric-Group Y)
@@ -127,7 +127,7 @@ module _
 
   is-retr-hom-inv-symmetric-group-equiv-Set :
     Id
-      ( comp-hom-Group
+      ( compose-hom-Group
         ( symmetric-Group X)
         ( symmetric-Group Y)
         ( symmetric-Group X)
@@ -213,7 +213,7 @@ module _
       ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group =
-    comp-iso-Group
+    compose-iso-Group
       ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
       ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)

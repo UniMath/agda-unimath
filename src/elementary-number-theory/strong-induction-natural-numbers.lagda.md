@@ -144,13 +144,13 @@ strong-ind-ℕ P p0 pS =
       ( zero-strong-ind-ℕ P p0)
       ( succ-strong-ind-ℕ P pS))
 
-comp-zero-strong-ind-ℕ :
+compute-zero-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
   (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   strong-ind-ℕ P p0 pS zero-ℕ ＝ p0
-comp-zero-strong-ind-ℕ P p0 pS = refl
+compute-zero-strong-ind-ℕ P p0 pS = refl
 
-cases-eq-comp-succ-strong-ind-ℕ :
+cases-eq-compute-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
   ( pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   ( n : ℕ) →
@@ -168,14 +168,14 @@ cases-eq-comp-succ-strong-ind-ℕ :
       ( zero-strong-ind-ℕ P p0)
       ( succ-strong-ind-ℕ P pS) n) m p) ＝
   ( strong-ind-ℕ P p0 pS m)
-cases-eq-comp-succ-strong-ind-ℕ P p0 pS n α m p (inl x) =
+cases-eq-compute-succ-strong-ind-ℕ P p0 pS n α m p (inl x) =
   ( htpy-succ-strong-ind-ℕ P pS n
     ( induction-strong-ind-ℕ P
       ( zero-strong-ind-ℕ P p0)
       ( succ-strong-ind-ℕ P pS) n)
     m p x) ∙
   ( α m x)
-cases-eq-comp-succ-strong-ind-ℕ P p0 pS n α .(succ-ℕ n) p (inr refl) =
+cases-eq-compute-succ-strong-ind-ℕ P p0 pS n α .(succ-ℕ n) p (inr refl) =
   ( eq-succ-strong-ind-ℕ P pS n
     ( induction-strong-ind-ℕ P
       ( zero-strong-ind-ℕ P p0)
@@ -192,7 +192,7 @@ cases-eq-comp-succ-strong-ind-ℕ P p0 pS n α .(succ-ℕ n) p (inr refl) =
         ( succ-ℕ n))
       ( cases-leq-succ-reflexive-leq-ℕ)))
 
-eq-comp-succ-strong-ind-ℕ :
+eq-compute-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
   ( pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   ( n : ℕ) →
@@ -202,18 +202,18 @@ eq-comp-succ-strong-ind-ℕ :
       cases-succ-strong-ind-ℕ P pS k z m₁ (cases-leq-succ-ℕ z₁))
     n m p) ＝
   ( strong-ind-ℕ P p0 pS m)
-eq-comp-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ star = refl
-eq-comp-succ-strong-ind-ℕ P p0 pS (succ-ℕ n) m p =
-  cases-eq-comp-succ-strong-ind-ℕ P p0 pS n
-    ( eq-comp-succ-strong-ind-ℕ P p0 pS n) m p
+eq-compute-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ star = refl
+eq-compute-succ-strong-ind-ℕ P p0 pS (succ-ℕ n) m p =
+  cases-eq-compute-succ-strong-ind-ℕ P p0 pS n
+    ( eq-compute-succ-strong-ind-ℕ P p0 pS n) m p
     ( cases-leq-succ-ℕ p)
 
-comp-succ-strong-ind-ℕ :
+compute-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
   ( pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   ( n : ℕ) →
   strong-ind-ℕ P p0 pS (succ-ℕ n) ＝ pS n (λ m p → strong-ind-ℕ P p0 pS m)
-comp-succ-strong-ind-ℕ P p0 pS n =
+compute-succ-strong-ind-ℕ P p0 pS n =
   ( eq-succ-strong-ind-ℕ P pS n
     ( induction-strong-ind-ℕ P
       ( zero-strong-ind-ℕ P p0)
@@ -221,7 +221,7 @@ comp-succ-strong-ind-ℕ P p0 pS n =
       ( n))
     ( refl-leq-ℕ n)) ∙
   ( ap ( pS n)
-       ( eq-htpy (eq-htpy ∘ eq-comp-succ-strong-ind-ℕ P p0 pS n)))
+       ( eq-htpy (eq-htpy ∘ eq-compute-succ-strong-ind-ℕ P p0 pS n)))
 
 total-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
@@ -231,8 +231,8 @@ total-strong-ind-ℕ :
       ( h zero-ℕ ＝ p0) ×
       ( (n : ℕ) → h (succ-ℕ n) ＝ pS n (λ m p → h m)))
 pr1 (total-strong-ind-ℕ P p0 pS) = strong-ind-ℕ P p0 pS
-pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = comp-zero-strong-ind-ℕ P p0 pS
-pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = comp-succ-strong-ind-ℕ P p0 pS
+pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-zero-strong-ind-ℕ P p0 pS
+pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-succ-strong-ind-ℕ P p0 pS
 ```
 
 ## See also

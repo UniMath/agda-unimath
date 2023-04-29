@@ -495,14 +495,14 @@ module _
 
   htpy-idempotent-lower-upper-Galois-Connection :
     htpy-hom-Poset Q Q
-      ( comp-hom-Poset Q Q Q
-        ( comp-hom-Poset Q P Q
+      ( compose-hom-Poset Q Q Q
+        ( compose-hom-Poset Q P Q
           ( lower-adjoint-Galois-Connection P Q G)
           ( upper-adjoint-Galois-Connection P Q G))
-        ( comp-hom-Poset Q P Q
+        ( compose-hom-Poset Q P Q
           ( lower-adjoint-Galois-Connection P Q G)
           ( upper-adjoint-Galois-Connection P Q G)))
-      ( comp-hom-Poset Q P Q
+      ( compose-hom-Poset Q P Q
         ( lower-adjoint-Galois-Connection P Q G)
         ( upper-adjoint-Galois-Connection P Q G))
   htpy-idempotent-lower-upper-Galois-Connection x =
@@ -522,14 +522,14 @@ module _
 
   htpy-idempotent-upper-lower-Galois-Connection :
     htpy-hom-Poset P P
-      ( comp-hom-Poset P P P
-        ( comp-hom-Poset P Q P
+      ( compose-hom-Poset P P P
+        ( compose-hom-Poset P Q P
           ( upper-adjoint-Galois-Connection P Q G)
           ( lower-adjoint-Galois-Connection P Q G))
-        ( comp-hom-Poset P Q P
+        ( compose-hom-Poset P Q P
           ( upper-adjoint-Galois-Connection P Q G)
           ( lower-adjoint-Galois-Connection P Q G)))
-      ( comp-hom-Poset P Q P
+      ( compose-hom-Poset P Q P
         ( upper-adjoint-Galois-Connection P Q G)
         ( lower-adjoint-Galois-Connection P Q G))
   htpy-idempotent-upper-lower-Galois-Connection y =

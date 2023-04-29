@@ -35,7 +35,7 @@ precomp-quotient-Ring :
     ( λ g →
       (x : type-Ring R) →
       is-in-ideal-Ring R I x → map-hom-Ring R T g x ＝ zero-Ring T)
-pr1 (precomp-quotient-Ring R I S T f H h) = comp-hom-Ring R S T h f
+pr1 (precomp-quotient-Ring R I S T f H h) = compose-hom-Ring R S T h f
 pr2 (precomp-quotient-Ring R I S T f H h) x K =
   ap (map-hom-Ring S T h) (H x K) ∙ preserves-zero-hom-Ring S T h
 

@@ -23,7 +23,7 @@ Given large precategories `C` and `D`, a natural transformation from a functor
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
   identity holds:
-- `comp (G f) (γ x) = comp (γ y) (F f)`, for all `f : hom x y`.
+- `compose (G f) (γ x) = compose (γ y) (F f)`, for all `f : hom x y`.
 
 ## Definition
 
@@ -38,7 +38,7 @@ square-Large-Precat :
   (right : type-hom-Large-Precat C B Y) (bottom : type-hom-Large-Precat C X Y) →
   UU (βC l1 l4)
 square-Large-Precat C top left right bottom =
-  comp-hom-Large-Precat C bottom left ＝ comp-hom-Large-Precat C right top
+  compose-hom-Large-Precat C bottom left ＝ compose-hom-Large-Precat C right top
 
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
@@ -83,8 +83,8 @@ obj-natural-transformation-Large-Precat
     id-hom-Large-Precat D
 coherence-square-natural-transformation-Large-Precat
   (id-natural-transformation-Large-Precat {D = D} F) f =
-    ( left-unit-law-comp-hom-Large-Precat D (hom-functor-Large-Precat F f)) ∙
+    ( left-unit-law-compose-hom-Large-Precat D (hom-functor-Large-Precat F f)) ∙
     ( inv
-      ( right-unit-law-comp-hom-Large-Precat D
+      ( right-unit-law-compose-hom-Large-Precat D
         ( hom-functor-Large-Precat F f)))
 ```

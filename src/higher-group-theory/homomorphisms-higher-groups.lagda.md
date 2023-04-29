@@ -127,10 +127,10 @@ module _
   {l1 l2 l3 : Level} (G : ∞-Group l1) (H : ∞-Group l2) (K : ∞-Group l3)
   where
 
-  comp-hom-∞-Group :
+  compose-hom-∞-Group :
     hom-∞-Group H K → hom-∞-Group G H → hom-∞-Group G K
-  comp-hom-∞-Group =
-    comp-pointed-map
+  compose-hom-∞-Group =
+    compose-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
       ( classifying-pointed-type-∞-Group K)
@@ -140,13 +140,13 @@ module _
   (G : ∞-Group l1) (H : ∞-Group l2) (K : ∞-Group l3) (L : ∞-Group l4)
   where
 
-  assoc-comp-hom-∞-Group :
+  associative-compose-hom-∞-Group :
     (h : hom-∞-Group K L) (g : hom-∞-Group H K) (f : hom-∞-Group G H) →
     htpy-hom-∞-Group G L
-      ( comp-hom-∞-Group G H L (comp-hom-∞-Group H K L h g) f)
-      ( comp-hom-∞-Group G K L h (comp-hom-∞-Group G H K g f))
-  assoc-comp-hom-∞-Group =
-    assoc-comp-pointed-map
+      ( compose-hom-∞-Group G H L (compose-hom-∞-Group H K L h g) f)
+      ( compose-hom-∞-Group G K L h (compose-hom-∞-Group G H K g f))
+  associative-compose-hom-∞-Group =
+    associative-compose-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
       ( classifying-pointed-type-∞-Group K)
@@ -156,19 +156,19 @@ module _
   {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
   where
 
-  left-unit-law-comp-hom-∞-Group :
+  left-unit-law-compose-hom-∞-Group :
     (f : hom-∞-Group G H) →
-    htpy-hom-∞-Group G H (comp-hom-∞-Group G H H (id-hom-∞-Group H) f) f
-  left-unit-law-comp-hom-∞-Group =
-    left-unit-law-comp-pointed-map
+    htpy-hom-∞-Group G H (compose-hom-∞-Group G H H (id-hom-∞-Group H) f) f
+  left-unit-law-compose-hom-∞-Group =
+    left-unit-law-compose-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
 
-  right-unit-law-comp-hom-∞-Group :
+  right-unit-law-compose-hom-∞-Group :
     (f : hom-∞-Group G H) →
-    htpy-hom-∞-Group G H (comp-hom-∞-Group G G H f (id-hom-∞-Group G)) f
-  right-unit-law-comp-hom-∞-Group =
-    right-unit-law-comp-pointed-map
+    htpy-hom-∞-Group G H (compose-hom-∞-Group G G H f (id-hom-∞-Group G)) f
+  right-unit-law-compose-hom-∞-Group =
+    right-unit-law-compose-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
 ```

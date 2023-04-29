@@ -54,7 +54,8 @@ module _
                       ( type-hom-Cat C Z Y)
                       ( λ g →
                         S Z X
-                          (comp-hom-Cat C (inclusion-subtype (S Y X) f) g))))))
+                          ( compose-hom-Cat
+                              C (inclusion-subtype (S Y X) f) g))))))
 
   is-sieve-Cat :
     {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →

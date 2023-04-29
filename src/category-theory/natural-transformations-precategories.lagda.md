@@ -32,7 +32,7 @@ Given precategories `C` and `D`, a natural transformation from a functor
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
   identity holds:
-- `comp (G f) (γ x) = comp (γ y) (F f)`, for all `f : hom x y`.
+- `compose (G f) (γ x) = compose (γ y) (F f)`, for all `f : hom x y`.
 
 ## Definition
 
@@ -50,8 +50,8 @@ module _
     UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Precat γ =
     {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-    ( comp-hom-Precat D (hom-functor-Precat C D G f) (γ x)) ＝
-    ( comp-hom-Precat D (γ y) (hom-functor-Precat C D F f))
+    ( compose-hom-Precat D (hom-functor-Precat C D G f) (γ x)) ＝
+    ( compose-hom-Precat D (γ y) (hom-functor-Precat C D F f))
 
   natural-transformation-Precat : UU (l1 ⊔ l2 ⊔ l4)
   natural-transformation-Precat =
@@ -84,55 +84,56 @@ module _
     (F : functor-Precat C D) → natural-transformation-Precat C D F F
   pr1 (id-natural-transformation-Precat F) x = id-hom-Precat D
   pr2 (id-natural-transformation-Precat F) f =
-    right-unit-law-comp-hom-Precat D _ ∙ inv (left-unit-law-comp-hom-Precat D _)
+    right-unit-law-compose-hom-Precat D _ ∙
+    inv (left-unit-law-compose-hom-Precat D _)
 
-  comp-natural-transformation-Precat :
+  compose-natural-transformation-Precat :
      (F G H : functor-Precat C D) →
      natural-transformation-Precat C D G H →
      natural-transformation-Precat C D F G →
      natural-transformation-Precat C D F H
-  pr1 (comp-natural-transformation-Precat F G H β α) x =
-    comp-hom-Precat D
+  pr1 (compose-natural-transformation-Precat F G H β α) x =
+    compose-hom-Precat D
       ( components-natural-transformation-Precat C D G H β x)
       ( components-natural-transformation-Precat C D F G α x)
-  pr2 (comp-natural-transformation-Precat F G H β α) f =
+  pr2 (compose-natural-transformation-Precat F G H β α) f =
     equational-reasoning
-      comp-hom-Precat D
+      compose-hom-Precat D
         ( hom-functor-Precat C D H f)
-        ( comp-hom-Precat D
+        ( compose-hom-Precat D
           ( components-natural-transformation-Precat C D G H β _)
           ( pr1 α _))
-      ＝ comp-hom-Precat D
-          ( comp-hom-Precat D (hom-functor-Precat C D H f)
+      ＝ compose-hom-Precat D
+          ( compose-hom-Precat D (hom-functor-Precat C D H f)
             ( components-natural-transformation-Precat C D G H β _))
           ( pr1 α _)
-        by inv (assoc-comp-hom-Precat D _ _ _)
-      ＝ comp-hom-Precat D
-          ( comp-hom-Precat D (pr1 β _) (hom-functor-Precat C D G f))
+        by inv (assoc-compose-hom-Precat D _ _ _)
+      ＝ compose-hom-Precat D
+          ( compose-hom-Precat D (pr1 β _) (hom-functor-Precat C D G f))
           ( components-natural-transformation-Precat C D F G α _)
         by
           ap
-            ( λ x → comp-hom-Precat D x _)
+            ( λ x → compose-hom-Precat D x _)
             ( coherence-square-natural-transformation-Precat C D G H β f)
-      ＝ comp-hom-Precat D (pr1 β _)
-          ( comp-hom-Precat D
+      ＝ compose-hom-Precat D (pr1 β _)
+          ( compose-hom-Precat D
             ( hom-functor-Precat C D G f)
             ( components-natural-transformation-Precat C D F G α _))
-        by assoc-comp-hom-Precat D _ _ _
-      ＝ comp-hom-Precat D (pr1 β _)
-          ( comp-hom-Precat D
+        by assoc-compose-hom-Precat D _ _ _
+      ＝ compose-hom-Precat D (pr1 β _)
+          ( compose-hom-Precat D
             ( components-natural-transformation-Precat C D F G α _)
             ( hom-functor-Precat C D F f))
         by
           ap
-            ( comp-hom-Precat D _)
+            ( compose-hom-Precat D _)
             ( coherence-square-natural-transformation-Precat C D F G α f)
-      ＝ comp-hom-Precat D
-          ( comp-hom-Precat D
+      ＝ compose-hom-Precat D
+          ( compose-hom-Precat D
             ( pr1 β _)
             ( components-natural-transformation-Precat C D F G α _))
           ( hom-functor-Precat C D F f)
-        by inv (assoc-comp-hom-Precat D _ _ _)
+        by inv (assoc-compose-hom-Precat D _ _ _)
 ```
 
 ## Properties
@@ -161,8 +162,8 @@ is-prop-is-natural-transformation-Precat C D F G γ =
               is-set-type-hom-Precat D
                 ( obj-functor-Precat C D F x)
                 ( obj-functor-Precat C D G y)
-                ( comp-hom-Precat D (hom-functor-Precat C D G f) (γ x))
-                ( comp-hom-Precat D (γ y) (hom-functor-Precat C D F f)))))
+                ( compose-hom-Precat D (hom-functor-Precat C D G f) (γ x))
+                ( compose-hom-Precat D (γ y) (hom-functor-Precat C D F f)))))
 
 is-natural-transformation-Precat-Prop :
   { l1 l2 l3 l4 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
@@ -218,46 +219,46 @@ module _
     is-injective-is-emb
       ( components-natural-transformation-Precat-is-emb C D F G)
 
-  right-unit-law-comp-natural-transformation-Precat :
+  right-unit-law-compose-natural-transformation-Precat :
     {F G : functor-Precat C D} (α : natural-transformation-Precat C D F G) →
-    comp-natural-transformation-Precat C D F F G α
+    compose-natural-transformation-Precat C D F F G α
       ( id-natural-transformation-Precat C D F) ＝ α
-  right-unit-law-comp-natural-transformation-Precat {F} {G} α =
+  right-unit-law-compose-natural-transformation-Precat {F} {G} α =
     eq-natural-transformation-Precat F G
-      ( comp-natural-transformation-Precat C D F F G α
+      ( compose-natural-transformation-Precat C D F F G α
         ( id-natural-transformation-Precat C D F))
       ( α)
       ( eq-htpy
-        ( right-unit-law-comp-hom-Precat D ∘
+        ( right-unit-law-compose-hom-Precat D ∘
           components-natural-transformation-Precat C D F G α))
 
-  left-unit-law-comp-natural-transformation-Precat :
+  left-unit-law-compose-natural-transformation-Precat :
     {F G : functor-Precat C D}
     (α : natural-transformation-Precat C D F G) →
-    comp-natural-transformation-Precat C D F G G
+    compose-natural-transformation-Precat C D F G G
       ( id-natural-transformation-Precat C D G) α ＝ α
-  left-unit-law-comp-natural-transformation-Precat {F} {G} α =
+  left-unit-law-compose-natural-transformation-Precat {F} {G} α =
     eq-natural-transformation-Precat F G
-      ( comp-natural-transformation-Precat C D F G G
+      ( compose-natural-transformation-Precat C D F G G
         ( id-natural-transformation-Precat C D G) α)
       ( α)
       ( eq-htpy
-        ( left-unit-law-comp-hom-Precat D ∘
+        ( left-unit-law-compose-hom-Precat D ∘
           components-natural-transformation-Precat C D F G α))
 
-  assoc-comp-natural-transformation-Precat :
+  assoc-compose-natural-transformation-Precat :
     {F G H I : functor-Precat C D}
     (α : natural-transformation-Precat C D F G)
     (β : natural-transformation-Precat C D G H)
     (γ : natural-transformation-Precat C D H I) →
-    comp-natural-transformation-Precat C D F G I
-      ( comp-natural-transformation-Precat C D G H I γ β) α ＝
-    comp-natural-transformation-Precat C D F H I γ
-      ( comp-natural-transformation-Precat C D F G H β α)
-  assoc-comp-natural-transformation-Precat {F} {G} {H} {I} α β γ =
+    compose-natural-transformation-Precat C D F G I
+      ( compose-natural-transformation-Precat C D G H I γ β) α ＝
+    compose-natural-transformation-Precat C D F H I γ
+      ( compose-natural-transformation-Precat C D F G H β α)
+  assoc-compose-natural-transformation-Precat {F} {G} {H} {I} α β γ =
     eq-natural-transformation-Precat F I _ _
     ( eq-htpy λ x →
-      assoc-comp-hom-Precat D
+      assoc-compose-hom-Precat D
         ( components-natural-transformation-Precat C D H I γ x)
         ( components-natural-transformation-Precat C D G H β x)
         ( components-natural-transformation-Precat C D F G α x))

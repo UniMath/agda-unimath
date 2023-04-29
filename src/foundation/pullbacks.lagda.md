@@ -126,7 +126,7 @@ abstract
     is-pullback f g c
   is-pullback-is-pullback-exponent f g c is-pb-exp =
     is-pullback-universal-property-pullback f g c
-      ( λ T → is-equiv-comp-htpy
+      ( λ T → is-equiv-compose-htpy
         ( cone-map f g c)
         ( map-canonical-pullback-exponent f g T)
         ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
@@ -238,7 +238,7 @@ module _
     is-equiv-map-equiv-canonical-pullback-htpy =
       is-equiv-tot-is-fiberwise-equiv (λ a →
         is-equiv-tot-is-fiberwise-equiv (λ b →
-          is-equiv-comp
+          is-equiv-compose
             ( concat' (f a) (inv (Hg b)))
             ( concat (Hf a) (g' b))
             ( is-equiv-concat (Hf a) (g' b))
@@ -286,7 +286,7 @@ module _
     is-pullback-htpy
       {c = pair p (pair q H)} (pair p' (pair q' H'))
       (pair Hp (pair Hq HH)) is-pb-c' =
-      is-equiv-comp-htpy
+      is-equiv-compose-htpy
         ( gap f g (triple p q H))
         ( map-equiv-canonical-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
@@ -354,7 +354,7 @@ abstract
     (pair p (pair q H)) (pair p' (pair q' H')) =
     is-equiv-tot-is-fiberwise-equiv
       ( λ K → is-equiv-tot-is-fiberwise-equiv
-        ( λ L → is-equiv-comp
+        ( λ L → is-equiv-compose
           ( concat-htpy
             ( ap-concat-htpy H _ _ right-unit-htpy)
             ( ((f ·l K) ∙h refl-htpy) ∙h H'))
@@ -487,7 +487,7 @@ abstract
     ( htpy-eq-square f g c c')
   comp-htpy-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
-      ( htpy-eq (htpy-eq (htpy-eq (comp-htpy g
+      ( htpy-eq (htpy-eq (htpy-eq (compute-htpy g
         ( λ g'' Hg' →
           ( c : cone f g C) (c' : cone f g'' C) →
             Id (tr (λ g'' → cone f g'' C) (eq-htpy Hg')
@@ -524,7 +524,7 @@ abstract
     ( htpy-eq-square f g c c')
   comp-htpy-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
-      ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (comp-htpy f
+      ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-htpy f
         ( λ f'' Hf' →
           ( g g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
             ( Id ( tr (λ g'' → cone f'' g'' C) (eq-htpy Hg)
@@ -899,10 +899,10 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( pair hB (pair h' front-left))
       is-equiv-hD is-equiv-hB)
     ( is-pullback-htpy' refl-htpy front-right
-      ( cone-comp-vertical h k hC
+      ( cone-compose-vertical h k hC
         ( pair f (pair g bottom))
         ( pair hA (pair g' back-right)))
-      { c' = cone-comp-vertical h hD k'
+      { c' = cone-compose-vertical h hD k'
         ( pair hB (pair h' front-left))
         ( pair f' (pair g' top))}
       ( pair back-left
@@ -1007,9 +1007,9 @@ cone-ap :
 pr1 (cone-ap f g (pair p (pair q H)) c1 c2) = ap p
 pr1 (pr2 (cone-ap f g (pair p (pair q H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap f g (pair p (pair q H)) c1 c2)) γ =
-  ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
+  ( ap (λ t → t ∙ (H c2)) (inv (ap-compose f p γ))) ∙
   ( ( inv-nat-htpy H γ) ∙
-    ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ)))
+    ( ap (λ t → (H c1) ∙ t) (ap-compose g q γ)))
 
 cone-ap' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
@@ -1026,9 +1026,9 @@ pr1 (cone-ap' f g (pair p (pair q H)) c1 c2) = ap p
 pr1 (pr2 (cone-ap' f g (pair p (pair q H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap' f g (pair p (pair q H)) c1 c2)) γ =
   ( tr-Id-right (H c2) (ap f (ap p γ))) ∙
-  ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
+  ( ( ap (λ t → t ∙ (H c2)) (inv (ap-compose f p γ))) ∙
     ( ( inv-nat-htpy H γ) ∙
-      ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ))))
+      ( ap (λ t → (H c1) ∙ t) (ap-compose g q γ))))
 
 is-pullback-cone-ap :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}

@@ -204,7 +204,7 @@ module _
         ( endomorphism-ring-ab-left-module-Ring)
         ( mul-hom-left-module-Ring)
         ( mul-Ring R r s))
-      ( comp-hom-Ab
+      ( compose-hom-Ab
         ( ab-left-module-Ring)
         ( ab-left-module-Ring)
         ( ab-left-module-Ring)
@@ -445,7 +445,7 @@ module _
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
         ( mul-hom-right-module-Ring)
         ( mul-Ring R r s))
-      ( comp-hom-Ab
+      ( compose-hom-Ab
         ( ab-right-module-Ring)
         ( ab-right-module-Ring)
         ( ab-right-module-Ring)

@@ -73,11 +73,11 @@ module _
   (K : Undirected-Graph l5 l6)
   where
 
-  comp-hom-Undirected-Graph :
+  compose-hom-Undirected-Graph :
     hom-Undirected-Graph H K → hom-Undirected-Graph G H →
     hom-Undirected-Graph G K
-  pr1 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) = gV ∘ fV
-  pr2 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) p e =
+  pr1 (compose-hom-Undirected-Graph (pair gV gE) (pair fV fE)) = gV ∘ fV
+  pr2 (compose-hom-Undirected-Graph (pair gV gE) (pair fV fE)) p e =
     gE (map-unordered-pair fV p) (fE p e)
 ```
 

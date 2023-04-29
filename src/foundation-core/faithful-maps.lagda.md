@@ -154,22 +154,22 @@ module _
   where
 
   abstract
-    is-faithful-comp :
+    is-faithful-compose :
       (g : B → X) (h : A → B) →
       is-faithful g → is-faithful h → is-faithful (g ∘ h)
-    is-faithful-comp g h is-faithful-g is-faithful-h =
+    is-faithful-compose g h is-faithful-g is-faithful-h =
       is-faithful-is-0-map
-        ( is-0-map-comp g h
+        ( is-0-map-compose g h
           ( is-0-map-is-faithful is-faithful-g)
           ( is-0-map-is-faithful is-faithful-h))
 
   abstract
-    is-faithful-comp-htpy :
+    is-faithful-compose-htpy :
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-faithful g → is-faithful h → is-faithful f
-    is-faithful-comp-htpy f g h H is-faithful-g is-faithful-h =
+    is-faithful-compose-htpy f g h H is-faithful-g is-faithful-h =
       is-faithful-is-0-map
-        ( is-0-map-comp-htpy f g h H
+        ( is-0-map-compose-htpy f g h H
           ( is-0-map-is-faithful is-faithful-g)
           ( is-0-map-is-faithful is-faithful-h))
 ```

@@ -183,13 +183,13 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  cone-comp-horizontal :
+  cone-compose-horizontal :
     (c : cone j h B) → cone i (vertical-map-cone j h c) A → cone (j ∘ i) h A
-  pr1 (cone-comp-horizontal c (pair f (pair p H))) = f
-  pr1 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
+  pr1 (cone-compose-horizontal c (pair f (pair p H))) = f
+  pr1 (pr2 (cone-compose-horizontal c (pair f (pair p H)))) =
     (horizontal-map-cone j h c) ∘ p
-  pr2 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
-    coherence-square-maps-comp-horizontal p
+  pr2 (pr2 (cone-compose-horizontal c (pair f (pair p H)))) =
+    coherence-square-maps-compose-horizontal p
       ( horizontal-map-cone j h c)
       ( f)
       ( vertical-map-cone j h c)
@@ -209,13 +209,13 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  cone-comp-vertical :
+  cone-compose-vertical :
     (c : cone f g B) → cone (horizontal-map-cone f g c) h A → cone f (g ∘ h) A
-  pr1 (cone-comp-vertical c (pair p' (pair q' H'))) =
+  pr1 (cone-compose-vertical c (pair p' (pair q' H'))) =
     ( vertical-map-cone f g c) ∘ p'
-  pr1 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) = q'
-  pr2 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) =
-    coherence-square-maps-comp-vertical q' p' h
+  pr1 (pr2 (cone-compose-vertical c (pair p' (pair q' H')))) = q'
+  pr2 (pr2 (cone-compose-vertical c (pair p' (pair q' H')))) =
+    coherence-square-maps-compose-vertical q' p' h
       ( horizontal-map-cone f g c)
       ( vertical-map-cone f g c)
       ( g)

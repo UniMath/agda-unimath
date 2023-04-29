@@ -989,7 +989,10 @@ module _
                   ( issec-map-inv-assoc-Σ M P Y
                     ( map-equiv (equiv-tot t ∘e s) x))))))))  ∙
       ( inv
-        ( tot-comp (map-equiv ∘ t) (map-inv-equiv ∘ t) (map-equiv s x)) ∙
+        ( preserves-compose-tot
+          ( map-equiv ∘ t)
+          ( map-inv-equiv ∘ t)
+          ( map-equiv s x)) ∙
       ( tot-htpy (λ z → isretr-map-inv-equiv (t z)) (map-equiv s x) ∙
       ( tot-id
         ( λ z → cotype-fst-displayed-Σ-Decomposition disp-D z)

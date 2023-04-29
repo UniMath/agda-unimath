@@ -76,7 +76,7 @@ module _
 
   issec-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
-    Id ( comp-hom-Abstract-Group-Action G Y X Y
+    Id ( compose-hom-Abstract-Group-Action G Y X Y
          ( hom-iso-Abstract-Group-Action f)
          ( hom-inv-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G Y)
@@ -85,7 +85,7 @@ module _
 
   isretr-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
-    Id ( comp-hom-Abstract-Group-Action G X Y X
+    Id ( compose-hom-Abstract-Group-Action G X Y X
          ( hom-inv-iso-Abstract-Group-Action f)
          ( hom-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G X)
@@ -105,13 +105,13 @@ module _
     is-equiv-has-inverse
       ( map-hom-inv-iso-Abstract-Group-Action f)
       ( htpy-eq-hom-Abstract-Group-Action G Y Y
-        ( comp-hom-Abstract-Group-Action G Y X Y
+        ( compose-hom-Abstract-Group-Action G Y X Y
           ( hom-iso-Abstract-Group-Action f)
           ( hom-inv-iso-Abstract-Group-Action f))
         ( id-hom-Abstract-Group-Action G Y)
         ( issec-hom-inv-iso-Abstract-Group-Action f))
       ( htpy-eq-hom-Abstract-Group-Action G X X
-        ( comp-hom-Abstract-Group-Action G X Y X
+        ( compose-hom-Abstract-Group-Action G X Y X
           ( hom-inv-iso-Abstract-Group-Action f)
           ( hom-iso-Abstract-Group-Action f))
         ( id-hom-Abstract-Group-Action G X)

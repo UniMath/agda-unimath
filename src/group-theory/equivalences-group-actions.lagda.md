@@ -196,12 +196,12 @@ module _
   (Z : Abstract-Group-Action G l4)
   where
 
-  comp-equiv-Abstract-Group-Action :
+  compose-equiv-Abstract-Group-Action :
     equiv-Abstract-Group-Action G Y Z → equiv-Abstract-Group-Action G X Y →
     equiv-Abstract-Group-Action G X Z
-  pr1 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) = f ∘e e
-  pr2 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) g =
-    coherence-square-maps-comp-horizontal
+  pr1 (compose-equiv-Abstract-Group-Action (pair f K) (pair e H)) = f ∘e e
+  pr2 (compose-equiv-Abstract-Group-Action (pair f K) (pair e H)) g =
+    coherence-square-maps-compose-horizontal
       ( map-equiv e)
       ( map-equiv f)
       ( mul-Abstract-Group-Action G X g)
@@ -284,22 +284,22 @@ module _
   (X4 : Abstract-Group-Action G l5)
   where
 
-  associative-comp-equiv-Abstract-Group-Action :
+  associative-compose-equiv-Abstract-Group-Action :
     (h : equiv-Abstract-Group-Action G X3 X4)
     (g : equiv-Abstract-Group-Action G X2 X3)
     (f : equiv-Abstract-Group-Action G X1 X2) →
-    Id ( comp-equiv-Abstract-Group-Action G X1 X2 X4
-         ( comp-equiv-Abstract-Group-Action G X2 X3 X4 h g)
+    Id ( compose-equiv-Abstract-Group-Action G X1 X2 X4
+         ( compose-equiv-Abstract-Group-Action G X2 X3 X4 h g)
          ( f))
-       ( comp-equiv-Abstract-Group-Action G X1 X3 X4 h
-         ( comp-equiv-Abstract-Group-Action G X1 X2 X3 g f))
-  associative-comp-equiv-Abstract-Group-Action h g f =
+       ( compose-equiv-Abstract-Group-Action G X1 X3 X4 h
+         ( compose-equiv-Abstract-Group-Action G X1 X2 X3 g f))
+  associative-compose-equiv-Abstract-Group-Action h g f =
     eq-htpy-equiv-Abstract-Group-Action G X1 X4
-      ( comp-equiv-Abstract-Group-Action G X1 X2 X4
-        ( comp-equiv-Abstract-Group-Action G X2 X3 X4 h g)
+      ( compose-equiv-Abstract-Group-Action G X1 X2 X4
+        ( compose-equiv-Abstract-Group-Action G X2 X3 X4 h g)
         ( f))
-      ( comp-equiv-Abstract-Group-Action G X1 X3 X4 h
-        ( comp-equiv-Abstract-Group-Action G X1 X2 X3 g f))
+      ( compose-equiv-Abstract-Group-Action G X1 X3 X4 h
+        ( compose-equiv-Abstract-Group-Action G X1 X2 X3 g f))
       ( refl-htpy)
 
 module _
@@ -307,54 +307,54 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
-  left-unit-law-comp-equiv-Abstract-Group-Action :
+  left-unit-law-compose-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G X Y Y
+    Id ( compose-equiv-Abstract-Group-Action G X Y Y
          ( id-equiv-Abstract-Group-Action G Y)
          ( f))
        ( f)
-  left-unit-law-comp-equiv-Abstract-Group-Action f =
+  left-unit-law-compose-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X Y
-      ( comp-equiv-Abstract-Group-Action G X Y Y
+      ( compose-equiv-Abstract-Group-Action G X Y Y
         ( id-equiv-Abstract-Group-Action G Y)
         ( f))
       ( f)
       ( refl-htpy)
 
-  right-unit-law-comp-equiv-Abstract-Group-Action :
+  right-unit-law-compose-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G X X Y f
+    Id ( compose-equiv-Abstract-Group-Action G X X Y f
          ( id-equiv-Abstract-Group-Action G X))
        ( f)
-  right-unit-law-comp-equiv-Abstract-Group-Action f =
+  right-unit-law-compose-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X Y
-      ( comp-equiv-Abstract-Group-Action G X X Y f
+      ( compose-equiv-Abstract-Group-Action G X X Y f
         ( id-equiv-Abstract-Group-Action G X))
       ( f)
       ( refl-htpy)
 
-  left-inverse-law-comp-equiv-Abstract-Group-Action :
+  left-inverse-law-compose-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G X Y X
+    Id ( compose-equiv-Abstract-Group-Action G X Y X
          ( inv-equiv-Abstract-Group-Action G X Y f)
          ( f))
        ( id-equiv-Abstract-Group-Action G X)
-  left-inverse-law-comp-equiv-Abstract-Group-Action f =
+  left-inverse-law-compose-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X X
-      ( comp-equiv-Abstract-Group-Action G X Y X
+      ( compose-equiv-Abstract-Group-Action G X Y X
         ( inv-equiv-Abstract-Group-Action G X Y f)
         ( f))
       ( id-equiv-Abstract-Group-Action G X)
       ( isretr-map-inv-equiv (pr1 f))
 
-  right-inverse-law-comp-equiv-Abstract-Group-Action :
+  right-inverse-law-compose-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G Y X Y f
+    Id ( compose-equiv-Abstract-Group-Action G Y X Y f
          ( inv-equiv-Abstract-Group-Action G X Y f))
        ( id-equiv-Abstract-Group-Action G Y)
-  right-inverse-law-comp-equiv-Abstract-Group-Action f =
+  right-inverse-law-compose-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G Y Y
-      ( comp-equiv-Abstract-Group-Action G Y X Y f
+      ( compose-equiv-Abstract-Group-Action G Y X Y f
         ( inv-equiv-Abstract-Group-Action G X Y f))
       ( id-equiv-Abstract-Group-Action G Y)
       ( issec-map-inv-equiv (pr1 f))

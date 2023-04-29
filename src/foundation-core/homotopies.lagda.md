@@ -147,11 +147,11 @@ module _
   {f f' : A → B} {g g' : B → C}
   where
 
-  htpy-comp-horizontal : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
-  htpy-comp-horizontal F G = (g ·l F) ∙h (G ·r f')
+  htpy-compose-horizontal : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-compose-horizontal F G = (g ·l F) ∙h (G ·r f')
 
-  htpy-comp-horizontal' : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
-  htpy-comp-horizontal' F G = (G ·r f) ∙h (g' ·l F)
+  htpy-compose-horizontal' : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-compose-horizontal' F G = (G ·r f) ∙h (g' ·l F)
 ```
 
 ### Transposition of homotopies

@@ -23,8 +23,8 @@ open import foundation.universe-levels
 A functor `F : C → D` is an equivalence of categories if there is a functor
 `G : D → C` such that:
 
-- `comp G F` is naturally isomorphic to the identity functor on `C`,
-- `comp F G` is naturally isomorphic to the identity functor on `D`.
+- `compose G F` is naturally isomorphic to the identity functor on `C`,
+- `compose F G` is naturally isomorphic to the identity functor on `D`.
 
 ## Definition
 
@@ -40,12 +40,12 @@ module _
     Σ ( functor-Precat D C)
       ( λ G →
         ( natural-isomorphism-Precat C C
-          ( comp-functor-Precat C D C G F)
+          ( compose-functor-Precat C D C G F)
           ( id-functor-Precat C))) ×
     Σ ( functor-Precat D C)
       ( λ G →
         ( natural-isomorphism-Precat D D
-          ( comp-functor-Precat D C D F G)
+          ( compose-functor-Precat D C D F G)
           ( id-functor-Precat D)))
 
   equiv-Precat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

@@ -101,7 +101,7 @@ module _
         ( is-inhabited-base-type-is-trivial-Σ-Decomposition))
   pr1 equiv-trivial-is-trivial-Σ-Decomposition =
     ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
-      is-equiv-comp
+      is-equiv-compose
         ( map-equiv (compute-raise-unit l4))
         ( terminal-map)
         ( is-equiv-terminal-map-is-contr is-trivial)

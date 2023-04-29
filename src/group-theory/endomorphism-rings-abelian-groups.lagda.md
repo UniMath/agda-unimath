@@ -49,15 +49,15 @@ module _
   pr2 (pr2 (pr2 (pr2 (pr1 (pr1 endomorphism-ring-Ab))))) =
     right-inverse-law-add-hom-Ab A A
   pr2 (pr1 endomorphism-ring-Ab) = commutative-add-hom-Ab A A
-  pr1 (pr1 (pr2 endomorphism-ring-Ab)) = comp-hom-Ab A A A
-  pr2 (pr1 (pr2 endomorphism-ring-Ab)) = associative-comp-hom-Ab A A A A
+  pr1 (pr1 (pr2 endomorphism-ring-Ab)) = compose-hom-Ab A A A
+  pr2 (pr1 (pr2 endomorphism-ring-Ab)) = associative-compose-hom-Ab A A A A
   pr1 (pr1 (pr2 (pr2 endomorphism-ring-Ab))) = id-hom-Ab A
   pr1 (pr2 (pr1 (pr2 (pr2 endomorphism-ring-Ab)))) =
-    left-unit-law-comp-hom-Ab A A
+    left-unit-law-compose-hom-Ab A A
   pr2 (pr2 (pr1 (pr2 (pr2 endomorphism-ring-Ab)))) =
-    right-unit-law-comp-hom-Ab A A
+    right-unit-law-compose-hom-Ab A A
   pr1 (pr2 (pr2 (pr2 endomorphism-ring-Ab))) =
-    left-distributive-comp-add-hom-Ab A A A
+    left-distributive-compose-add-hom-Ab A A A
   pr2 (pr2 (pr2 (pr2 endomorphism-ring-Ab))) =
-    right-distributive-comp-add-hom-Ab A A A
+    right-distributive-compose-add-hom-Ab A A A
 ```

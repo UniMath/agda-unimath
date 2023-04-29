@@ -163,7 +163,7 @@ cocone-map-id :
   Id (cocone-map f g c id) c
 cocone-map-id f g c =
   eq-pair-Σ refl
-    ( eq-pair-Σ refl (eq-htpy (λ s → ap-id (coherence-square-cocone f g c s))))
+    ( eq-pair-Σ refl (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
 
 cocone-map-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -171,7 +171,7 @@ cocone-map-comp :
   {Y : UU l5} (h : X → Y) {Z : UU l6} (k : Y → Z) →
   Id (cocone-map f g c (k ∘ h)) (cocone-map f g (cocone-map f g c h) k)
 cocone-map-comp f g (pair i (pair j H)) h k =
-  eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (λ s → ap-comp k h (H s))))
+  eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-compose k h ∘ H)))
 ```
 
 ### Horizontal composition of cocones

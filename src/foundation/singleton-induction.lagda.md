@@ -37,10 +37,10 @@ ind-is-singleton :
   B a → (x : A) → B x
 ind-is-singleton a is-sing-A B = pr1 (is-sing-A B)
 
-comp-is-singleton :
+compute-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) (H : {l : Level} → is-singleton l A a) →
   (B : A → UU l2) → (ev-pt a B ∘ ind-is-singleton a H B) ~ id
-comp-is-singleton a H B = pr2 (H B)
+compute-is-singleton a H B = pr2 (H B)
 ```
 
 ## Properties
@@ -55,11 +55,11 @@ abstract
   ind-singleton-is-contr a is-contr-A B b x =
     tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
 
-  comp-singleton-is-contr :
+  compute-singleton-is-contr :
     {l1 l2 : Level} {A : UU l1}
     (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
     ((ev-pt a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
-  comp-singleton-is-contr a is-contr-A B b =
+  compute-singleton-is-contr a is-contr-A B b =
     ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
 
 is-singleton-is-contr :
@@ -67,7 +67,7 @@ is-singleton-is-contr :
 pr1 (is-singleton-is-contr a is-contr-A B) =
   ind-singleton-is-contr a is-contr-A B
 pr2 (is-singleton-is-contr a is-contr-A B) =
-  comp-singleton-is-contr a is-contr-A B
+  compute-singleton-is-contr a is-contr-A B
 
 abstract
   is-contr-ind-singleton :

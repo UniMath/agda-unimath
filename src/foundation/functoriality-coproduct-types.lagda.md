@@ -81,10 +81,10 @@ module _
   (f : A → A') (f' : A' → A'') (g : B → B') (g' : B' → B'')
   where
 
-  compose-map-coprod :
+  preserves-compose-map-coprod :
     (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
-  compose-map-coprod (inl x) = refl
-  compose-map-coprod (inr y) = refl
+  preserves-compose-map-coprod (inl x) = refl
+  preserves-compose-map-coprod (inr y) = refl
 ```
 
 ### Functoriality of coproducts preserves homotopies
@@ -193,7 +193,7 @@ module _
         ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
-      ( ( inv-htpy (compose-map-coprod sf f sg g)) ∙h
+      ( ( inv-htpy (preserves-compose-map-coprod sf f sg g)) ∙h
         ( htpy-map-coprod Sf Sg)) ∙h
       ( id-map-coprod A' B')
     pr1
@@ -206,7 +206,7 @@ module _
         ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
-      ( ( inv-htpy (compose-map-coprod f rf g rg)) ∙h
+      ( ( inv-htpy (preserves-compose-map-coprod f rf g rg)) ∙h
         ( htpy-map-coprod Rf Rg)) ∙h
       ( id-map-coprod A B)
 

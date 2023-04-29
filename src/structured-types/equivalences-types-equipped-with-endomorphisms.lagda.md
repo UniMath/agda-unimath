@@ -78,12 +78,12 @@ module _
 ### Composition for equivalences of types equipped with endomorphisms
 
 ```agda
-comp-equiv-Endo :
+compose-equiv-Endo :
   {l1 l2 l3 : Level} (X : Endo l1) (Y : Endo l2) (Z : Endo l3) →
   equiv-Endo Y Z → equiv-Endo X Y → equiv-Endo X Z
-pr1 (comp-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
-pr2 (comp-equiv-Endo X Y Z f e) =
-  coherence-square-maps-comp-horizontal
+pr1 (compose-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
+pr2 (compose-equiv-Endo X Y Z f e) =
+  coherence-square-maps-compose-horizontal
     ( map-equiv-Endo X Y e)
     ( map-equiv-Endo Y Z f)
     ( endomorphism-Endo X)
@@ -173,11 +173,11 @@ module _
   {l1 l2 : Level} (X : Endo l1) (Y : Endo l2)
   where
 
-  left-unit-law-comp-equiv-Endo :
-    (e : equiv-Endo X Y) → Id (comp-equiv-Endo X Y Y (id-equiv-Endo Y) e) e
-  left-unit-law-comp-equiv-Endo e =
+  left-unit-law-compose-equiv-Endo :
+    (e : equiv-Endo X Y) → Id (compose-equiv-Endo X Y Y (id-equiv-Endo Y) e) e
+  left-unit-law-compose-equiv-Endo e =
     eq-htpy-equiv-Endo X Y
-      ( comp-equiv-Endo X Y Y (id-equiv-Endo Y) e)
+      ( compose-equiv-Endo X Y Y (id-equiv-Endo Y) e)
       ( e)
       ( pair
         ( refl-htpy)
@@ -186,11 +186,11 @@ module _
             ( ( right-unit) ∙
               ( right-unit ∙ ap-id (coherence-square-equiv-Endo X Y e x)))))
 
-  right-unit-law-comp-equiv-Endo :
-    (e : equiv-Endo X Y) → Id (comp-equiv-Endo X X Y e (id-equiv-Endo X)) e
-  right-unit-law-comp-equiv-Endo e =
+  right-unit-law-compose-equiv-Endo :
+    (e : equiv-Endo X Y) → Id (compose-equiv-Endo X X Y e (id-equiv-Endo X)) e
+  right-unit-law-compose-equiv-Endo e =
     eq-htpy-equiv-Endo X Y
-      ( comp-equiv-Endo X X Y e (id-equiv-Endo X))
+      ( compose-equiv-Endo X X Y e (id-equiv-Endo X))
       ( e)
       ( pair
         ( refl-htpy)
@@ -231,7 +231,7 @@ module _
   preserves-concat-equiv-eq-Endo :
     (p : Id X Y) (q : Id Y Z) →
     Id ( equiv-eq-Endo X Z (p ∙ q))
-       ( comp-equiv-Endo X Y Z (equiv-eq-Endo Y Z q) (equiv-eq-Endo X Y p))
+       ( compose-equiv-Endo X Y Z (equiv-eq-Endo Y Z q) (equiv-eq-Endo X Y p))
   preserves-concat-equiv-eq-Endo refl q =
-    inv (right-unit-law-comp-equiv-Endo X Z (equiv-eq-Endo X Z q))
+    inv (right-unit-law-compose-equiv-Endo X Z (equiv-eq-Endo X Z q))
 ```

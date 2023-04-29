@@ -260,11 +260,11 @@ abstract
     is-surjective f →
     ({l : Level} → dependent-universal-property-surj l f)
   dependent-universal-property-surj-is-surjective f is-surj-f P =
-    is-equiv-comp
+    is-equiv-compose
       ( λ h x → h (f x) (pair x refl))
       ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
         ( λ h y → const (type-trunc-Prop (fib f y)) (type-Prop (P y)) (h y)))
-      ( is-equiv-comp
+      ( is-equiv-compose
         ( λ h y → (h y) ∘ unit-trunc-Prop)
         ( λ h y → const (type-trunc-Prop (fib f y)) (type-Prop (P y)) (h y))
         ( is-equiv-map-Π
@@ -360,10 +360,10 @@ module _
   where
 
   abstract
-    is-surjective-comp-htpy :
+    is-surjective-compose-htpy :
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-surjective g → is-surjective h → is-surjective f
-    is-surjective-comp-htpy f g h H is-surj-g is-surj-h x =
+    is-surjective-compose-htpy f g h H is-surj-g is-surj-h x =
       apply-universal-property-trunc-Prop
         ( is-surj-g x)
         ( trunc-Prop (fib f x))
@@ -374,11 +374,11 @@ module _
             ( λ { (pair a refl) →
               unit-trunc-Prop (pair a (H a))})})
 
-  is-surjective-comp :
+  is-surjective-compose :
     {g : B → X} {h : A → B} →
     is-surjective g → is-surjective h → is-surjective (g ∘ h)
-  is-surjective-comp {g} {h} =
-    is-surjective-comp-htpy (g ∘ h) g h refl-htpy
+  is-surjective-compose {g} {h} =
+    is-surjective-compose-htpy (g ∘ h) g h refl-htpy
 ```
 
 ### Functoriality of products preserves being surjective
@@ -406,11 +406,11 @@ module _
 ### The composite of a surjective map with an equivalence is surjective
 
 ```agda
-is-surjective-comp-equiv :
+is-surjective-compose-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (e : B ≃ C) → {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
-is-surjective-comp-equiv e =
-  is-surjective-comp (is-surjective-map-equiv e)
+is-surjective-compose-equiv e =
+  is-surjective-compose (is-surjective-map-equiv e)
 ```
 
 ### The precomposite of a surjective map with an equivalence is surjective
@@ -420,7 +420,7 @@ is-surjective-precomp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : B → C} →
   is-surjective f → (e : A ≃ B) → is-surjective (f ∘ map-equiv e)
 is-surjective-precomp-equiv H e =
-  is-surjective-comp H (is-surjective-map-equiv e)
+  is-surjective-compose H (is-surjective-map-equiv e)
 ```
 
 ### If a composite is surjective, then so is its left factor

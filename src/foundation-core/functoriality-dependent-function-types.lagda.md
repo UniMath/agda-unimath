@@ -89,7 +89,7 @@ is-equiv-precomp-Π-fiber-condition :
   ((b : B) → is-equiv (λ (c : C b) → const (fib f b) (C b) c)) →
   is-equiv (precomp-Π f C)
 is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
-  is-equiv-comp
+  is-equiv-compose
     ( map-reduce-Π-fib f (λ b u → C b))
     ( map-Π (λ b u t → u))
     ( is-equiv-map-Π (λ b u t → u) H)

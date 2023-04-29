@@ -58,7 +58,7 @@ module _
     id-hom-Precat-Expr : {x : obj-Precat C} → Precat-Expr x x
     type-hom-Precat-Expr :
       {x y : obj-Precat C} → type-hom-Precat C x y → Precat-Expr x y
-    comp-hom-Precat-Expr :
+    compose-hom-Precat-Expr :
       {x y z : obj-Precat C} →
       Precat-Expr y z → Precat-Expr x y → Precat-Expr x z
 ```
@@ -72,8 +72,8 @@ module _
     type-hom-Precat C x y
   in-Precat-Expr id-hom-Precat-Expr = id-hom-Precat C
   in-Precat-Expr (type-hom-Precat-Expr f) = f
-  in-Precat-Expr (comp-hom-Precat-Expr f g) =
-    comp-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g)
+  in-Precat-Expr (compose-hom-Precat-Expr f g) =
+    compose-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g)
 ```
 
 ### The normalization of the syntactic representation of a morphism
@@ -85,32 +85,36 @@ module _
     type-hom-Precat C x y →
     type-hom-Precat C x z
   eval-Precat-Expr id-hom-Precat-Expr f = f
-  eval-Precat-Expr (type-hom-Precat-Expr f) g = comp-hom-Precat C f g
-  eval-Precat-Expr (comp-hom-Precat-Expr f g) h =
+  eval-Precat-Expr (type-hom-Precat-Expr f) g = compose-hom-Precat C f g
+  eval-Precat-Expr (compose-hom-Precat-Expr f g) h =
     eval-Precat-Expr f (eval-Precat-Expr g h)
 
   is-sound-eval-Precat-Expr :
     {x y z : obj-Precat C}
     (e : Precat-Expr y z)
     (f : type-hom-Precat C x y) →
-    (eval-Precat-Expr e f) ＝ (comp-hom-Precat C (in-Precat-Expr e) f)
+    (eval-Precat-Expr e f) ＝ (compose-hom-Precat C (in-Precat-Expr e) f)
   is-sound-eval-Precat-Expr id-hom-Precat-Expr f =
-    inv (left-unit-law-comp-hom-Precat C f)
+    inv (left-unit-law-compose-hom-Precat C f)
   is-sound-eval-Precat-Expr (type-hom-Precat-Expr f) g = refl
-  is-sound-eval-Precat-Expr (comp-hom-Precat-Expr f g) h = equational-reasoning
+  is-sound-eval-Precat-Expr (compose-hom-Precat-Expr f g) h =
+    equational-reasoning
     eval-Precat-Expr f (eval-Precat-Expr g h)
-      ＝ comp-hom-Precat C (in-Precat-Expr f) (eval-Precat-Expr g h)
+      ＝ compose-hom-Precat C (in-Precat-Expr f) (eval-Precat-Expr g h)
         by is-sound-eval-Precat-Expr f (eval-Precat-Expr g h)
-      ＝ comp-hom-Precat C
+      ＝ compose-hom-Precat C
           (in-Precat-Expr f)
-          (comp-hom-Precat C (in-Precat-Expr g) h)
+          (compose-hom-Precat C (in-Precat-Expr g) h)
         by ap
-          ( comp-hom-Precat C (in-Precat-Expr f))
+          ( compose-hom-Precat C (in-Precat-Expr f))
           ( is-sound-eval-Precat-Expr g h)
-      ＝ comp-hom-Precat C
-          (comp-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g))
+      ＝ compose-hom-Precat C
+          (compose-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g))
           h
-        by inv (assoc-comp-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g) h)
+        by
+          inv
+            ( assoc-compose-hom-Preca
+              C (in-Precat-Expr f) (in-Precat-Expr g) h)
 
   normalize-Precat-Expr :
     {x y : obj-Precat C} →
@@ -124,10 +128,10 @@ module _
     normalize-Precat-Expr e ＝ in-Precat-Expr e
   is-sound-normalize-Precat-Expr e = equational-reasoning
     eval-Precat-Expr e (id-hom-Precat C)
-      ＝ comp-hom-Precat C (in-Precat-Expr e) (id-hom-Precat C)
+      ＝ compose-hom-Precat C (in-Precat-Expr e) (id-hom-Precat C)
         by is-sound-eval-Precat-Expr e (id-hom-Precat C)
       ＝ in-Precat-Expr e
-        by right-unit-law-comp-hom-Precat C (in-Precat-Expr e)
+        by right-unit-law-compose-hom-Precat C (in-Precat-Expr e)
 
   abstract
     solve-Precat-Expr :
@@ -201,7 +205,7 @@ build-Precat-Expr
        hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
        visible-Arg g ∷ visible-Arg f ∷ nil)) =
   con
-    ( quote comp-hom-Precat-Expr)
+    ( quote compose-hom-Precat-Expr)
     ( visible-Arg (build-Precat-Expr g) ∷
       visible-Arg (build-Precat-Expr f) ∷
       nil)
@@ -262,8 +266,8 @@ module _
       {a b c : obj-Precat C}
       {f : type-hom-Precat C a b}
       {g : type-hom-Precat C b c} →
-      (comp-hom-Precat C g f) ＝
-      comp-hom-Precat C g f
+      (compose-hom-Precat C g f) ＝
+      compose-hom-Precat C g f
     _ = solve-Precat! C
 
     _ :
@@ -271,8 +275,8 @@ module _
       {f : type-hom-Precat C a b}
       {g : type-hom-Precat C b c} →
       {h : type-hom-Precat C c d} →
-      comp-hom-Precat C h (comp-hom-Precat C g f) ＝
-      comp-hom-Precat C (comp-hom-Precat C h g) f
+      compose-hom-Precat C h (compose-hom-Precat C g f) ＝
+      compose-hom-Precat C (compose-hom-Precat C h g) f
     _ = solve-Precat! C
 
     _ :
@@ -280,11 +284,11 @@ module _
       {f : type-hom-Precat C a b}
       {g : type-hom-Precat C b c} →
       {h : type-hom-Precat C c d} →
-      comp-hom-Precat C
-        ( comp-hom-Precat C h (id-hom-Precat C))
-        ( comp-hom-Precat C g f) ＝
-      comp-hom-Precat C
-        ( comp-hom-Precat C h g)
-        ( comp-hom-Precat C (id-hom-Precat C) f)
+      compose-hom-Precat C
+        ( compose-hom-Precat C h (id-hom-Precat C))
+        ( compose-hom-Precat C g f) ＝
+      compose-hom-Precat C
+        ( compose-hom-Precat C h g)
+        ( compose-hom-Precat C (id-hom-Precat C) f)
     _ = solve-Precat! C
 ```

@@ -192,7 +192,7 @@ abstract
       is-set-quotient l (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)) →
     is-set-truncation l3 B f
   is-set-truncation-is-set-quotient {A = A} B f H X =
-    is-equiv-comp
+    is-equiv-compose
       ( pr1)
       ( precomp-Set-Quotient
         ( mere-eq-Eq-Rel A)

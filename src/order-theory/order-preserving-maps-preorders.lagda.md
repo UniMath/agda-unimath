@@ -143,22 +143,22 @@ module _
   (P : Preorder l1 l2) (Q : Preorder l3 l4) (R : Preorder l5 l6)
   where
 
-  preserves-order-comp-Preorder :
+  preserves-order-compose-Preorder :
     (g : hom-Preorder Q R) (f : hom-Preorder P Q) →
     preserves-order-Preorder P R
       ( map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f)
-  preserves-order-comp-Preorder g f x y H =
+  preserves-order-compose-Preorder g f x y H =
     preserves-order-map-hom-Preorder Q R g
       ( map-hom-Preorder P Q f x)
       ( map-hom-Preorder P Q f y)
       ( preserves-order-map-hom-Preorder P Q f x y H)
 
-  comp-hom-Preorder :
+  compose-hom-Preorder :
     (g : hom-Preorder Q R) (f : hom-Preorder P Q) → hom-Preorder P R
-  pr1 (comp-hom-Preorder g f) =
+  pr1 (compose-hom-Preorder g f) =
      map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f
-  pr2 (comp-hom-Preorder g f) =
-    preserves-order-comp-Preorder g f
+  pr2 (compose-hom-Preorder g f) =
+    preserves-order-compose-Preorder g f
 ```
 
 ### Unit laws for composition of order preserving maps
@@ -168,21 +168,21 @@ module _
   {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
   where
 
-  left-unit-law-comp-hom-Preorder :
+  left-unit-law-compose-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f) f
-  left-unit-law-comp-hom-Preorder f =
+    Id ( compose-hom-Preorder P Q Q (id-hom-Preorder Q) f) f
+  left-unit-law-compose-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
-      ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f)
+      ( compose-hom-Preorder P Q Q (id-hom-Preorder Q) f)
       ( f)
       ( refl-htpy)
 
-  right-unit-law-comp-hom-Preorder :
+  right-unit-law-compose-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id (comp-hom-Preorder P P Q f (id-hom-Preorder P)) f
-  right-unit-law-comp-hom-Preorder f =
+    Id (compose-hom-Preorder P P Q f (id-hom-Preorder P)) f
+  right-unit-law-compose-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
-      ( comp-hom-Preorder P P Q f (id-hom-Preorder P))
+      ( compose-hom-Preorder P P Q f (id-hom-Preorder P))
       ( f)
       ( refl-htpy)
 ```
@@ -196,12 +196,12 @@ module _
   (h : hom-Preorder R S) (g : hom-Preorder Q R) (f : hom-Preorder P Q)
   where
 
-  associative-comp-hom-Preorder :
-    Id ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
-       ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
-  associative-comp-hom-Preorder =
+  associative-compose-hom-Preorder :
+    Id ( compose-hom-Preorder P Q S (compose-hom-Preorder Q R S h g) f)
+       ( compose-hom-Preorder P R S h (compose-hom-Preorder P Q R g f))
+  associative-compose-hom-Preorder =
     eq-htpy-hom-Preorder P S
-      ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
-      ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
+      ( compose-hom-Preorder P Q S (compose-hom-Preorder Q R S h g) f)
+      ( compose-hom-Preorder P R S h (compose-hom-Preorder P Q R g f))
       ( refl-htpy)
 ```

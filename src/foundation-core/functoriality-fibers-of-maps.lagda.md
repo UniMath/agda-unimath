@@ -58,11 +58,11 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  map-fib-cone-comp-horizontal :
+  map-fib-cone-compose-horizontal :
     (c : cone j h B) (d : cone i (pr1 c) A) → (x : X) →
-    ( map-fib-cone (j ∘ i) h (cone-comp-horizontal i j h c d) x) ~
+    ( map-fib-cone (j ∘ i) h (cone-compose-horizontal i j h c d) x) ~
     ( (map-fib-cone j h c (i x)) ∘ (map-fib-cone i (pr1 c) d x))
-  map-fib-cone-comp-horizontal
+  map-fib-cone-compose-horizontal
     (pair g (pair q K)) (pair f (pair p H)) .(f a) (pair a refl) =
     eq-pair-Σ
       ( refl)
@@ -85,16 +85,16 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  map-fib-cone-comp-vertical :
+  map-fib-cone-compose-vertical :
     (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
-    ( ( map-fib-cone f (g ∘ h) (cone-comp-vertical f g h c d) x) ∘
-      ( inv-map-compute-fib-comp (pr1 c) (pr1 d) x)) ~
-    ( ( inv-map-compute-fib-comp g h (f x)) ∘
+    ( ( map-fib-cone f (g ∘ h) (cone-compose-vertical f g h c d) x) ∘
+      ( inv-map-compute-fib-compose (pr1 c) (pr1 d) x)) ~
+    ( ( inv-map-compute-fib-compose g h (f x)) ∘
       ( map-Σ
         ( λ t → fib h (pr1 t))
         ( map-fib-cone f g c x)
         ( λ t → map-fib-cone (pr1 (pr2 c)) h d (pr1 t))))
-  map-fib-cone-comp-vertical
+  map-fib-cone-compose-vertical
     (pair p (pair q H)) (pair p' (pair q' H')) .(p (p' a))
     (pair (pair .(p' a) refl) (pair a refl)) =
     eq-pair-Σ refl

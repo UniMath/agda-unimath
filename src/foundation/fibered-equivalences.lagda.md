@@ -127,7 +127,7 @@ module _
 
   emb-map-over-equiv-over : equiv-over f g i ↪ map-over f g i
   emb-map-over-equiv-over =
-    comp-emb
+    compose-emb
       ( emb-subtype (is-equiv-Prop ∘ pr1))
       ( emb-equiv equiv-Σ-is-equiv-equiv-over)
 
@@ -212,7 +212,7 @@ module _
 
   emb-fibered-map-fibered-equiv : fibered-equiv f g ↪ fibered-map f g
   emb-fibered-map-fibered-equiv =
-    comp-emb
+    compose-emb
       ( emb-subtype is-fibered-equiv-fibered-map-Prop)
       ( emb-equiv equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
 

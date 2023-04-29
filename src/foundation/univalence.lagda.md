@@ -111,18 +111,18 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ## Properties
 
 ```agda
-comp-equiv-eq :
+compose-equiv-eq :
   {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-comp-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
+compose-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
 
-comp-eq-equiv :
+compute-eq-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
-comp-eq-equiv A B C f g =
+compute-eq-equiv A B C f g =
   is-injective-map-equiv
     ( equiv-univalence)
-    ( ( inv ( comp-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
+    ( ( inv ( compose-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
         ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
         ( right-inverse-law-equiv equiv-univalence)) ∙

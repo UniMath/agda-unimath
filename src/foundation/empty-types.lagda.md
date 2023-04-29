@@ -87,7 +87,7 @@ raise-ex-falso-emb :
   (l1 : Level) {l2 : Level} {A : UU l2} →
   raise-empty l1 ↪ A
 raise-ex-falso-emb l =
-  comp-emb ex-falso-emb (emb-equiv (inv-equiv (compute-raise-empty l)))
+  compose-emb ex-falso-emb (emb-equiv (inv-equiv (compute-raise-empty l)))
 ```
 
 ### Being empty is a proposition

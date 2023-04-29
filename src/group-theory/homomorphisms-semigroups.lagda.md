@@ -176,13 +176,13 @@ pr2 (id-hom-Semigroup G) = preserves-mul-id-Semigroup G
 ### Composition of morphisms of semigroups
 
 ```agda
-comp-hom-Semigroup :
+compose-hom-Semigroup :
   {l1 l2 l3 : Level} →
   (G : Semigroup l1) (H : Semigroup l2) (K : Semigroup l3) →
   type-hom-Semigroup H K → type-hom-Semigroup G H → type-hom-Semigroup G K
-pr1 (comp-hom-Semigroup G H K g f) =
+pr1 (compose-hom-Semigroup G H K g f) =
   (map-hom-Semigroup H K g) ∘ (map-hom-Semigroup G H f)
-pr2 (comp-hom-Semigroup G H K g f) x y =
+pr2 (compose-hom-Semigroup G H K g f) x y =
   ( ap ( map-hom-Semigroup H K g)
        ( preserves-mul-hom-Semigroup G H f x y)) ∙
   ( preserves-mul-hom-Semigroup H K g
@@ -193,36 +193,37 @@ pr2 (comp-hom-Semigroup G H K g f) x y =
 ### Associativity of composition of homomorphisms of semigroups
 
 ```agda
-associative-comp-hom-Semigroup :
+associative-compose-hom-Semigroup :
   { l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( K : Semigroup l3) (L : Semigroup l4) (h : type-hom-Semigroup K L) →
   ( g : type-hom-Semigroup H K) (f : type-hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G H L
-       ( comp-hom-Semigroup H K L h g) f)
-     ( comp-hom-Semigroup G K L h
-       ( comp-hom-Semigroup G H K g f))
-associative-comp-hom-Semigroup G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
+  Id ( compose-hom-Semigroup G H L
+       ( compose-hom-Semigroup H K L h g) f)
+     ( compose-hom-Semigroup G K L h
+       ( compose-hom-Semigroup G H K g f))
+associative-compose-hom-Semigroup
+  G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
   eq-htpy-hom-Semigroup G L refl-htpy
 ```
 
 ### The left and right unit laws for composition of homomorphisms of semigroups
 
 ```agda
-left-unit-law-comp-hom-Semigroup :
+left-unit-law-compose-hom-Semigroup :
   { l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( f : type-hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G H H (id-hom-Semigroup H) f) f
-left-unit-law-comp-hom-Semigroup G
+  Id ( compose-hom-Semigroup G H H (id-hom-Semigroup H) f) f
+left-unit-law-compose-hom-Semigroup G
   (pair (pair H is-set-H) (pair μ-H assoc-H)) (pair f μ-f) =
   eq-htpy-hom-Semigroup G
     ( pair (pair H is-set-H) (pair μ-H assoc-H))
     ( refl-htpy)
 
-right-unit-law-comp-hom-Semigroup :
+right-unit-law-compose-hom-Semigroup :
   { l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( f : type-hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G G H f (id-hom-Semigroup G)) f
-right-unit-law-comp-hom-Semigroup
+  Id ( compose-hom-Semigroup G G H f (id-hom-Semigroup G)) f
+right-unit-law-compose-hom-Semigroup
   (pair (pair G is-set-G) (pair μ-G assoc-G)) H (pair f μ-f) =
   eq-htpy-hom-Semigroup
     ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy

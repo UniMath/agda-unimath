@@ -44,8 +44,8 @@ is-iso-hom-Ring :
 is-iso-hom-Ring R1 R2 f =
   Σ ( type-hom-Ring R2 R1)
     ( λ g →
-      ( Id (comp-hom-Ring R2 R1 R2 f g) (id-hom-Ring R2)) ×
-      ( Id (comp-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
+      ( Id (compose-hom-Ring R2 R1 R2 f g) (id-hom-Ring R2)) ×
+      ( Id (compose-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
 ```
 
 ### Components of a ring isomorphism
@@ -59,14 +59,14 @@ inv-is-iso-hom-Ring R1 R2 f = pr1
 is-sec-inv-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   ( is-iso-f : is-iso-hom-Ring R1 R2 f) →
-  Id (comp-hom-Ring R2 R1 R2 f (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
+  Id (compose-hom-Ring R2 R1 R2 f (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
      (id-hom-Ring R2)
 is-sec-inv-is-iso-hom-Ring R1 R2 f is-iso-f = pr1 (pr2 is-iso-f)
 
 is-retr-inv-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   ( is-iso-f : is-iso-hom-Ring R1 R2 f) →
-  Id (comp-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
+  Id (compose-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
      (id-hom-Ring R1)
 is-retr-inv-is-iso-hom-Ring R1 R2 f is-iso-f = pr2 (pr2 is-iso-f)
 
@@ -82,7 +82,7 @@ is-sec-inv-map-is-iso-hom-Ring :
   ( (map-hom-Ring R1 R2 f) ∘ (inv-map-is-iso-hom-Ring R1 R2 f is-iso-f)) ~ id
 is-sec-inv-map-is-iso-hom-Ring R1 R2 f is-iso-f =
   htpy-eq-hom-Ring R2 R2
-    ( comp-hom-Ring R2 R1 R2 f (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
+    ( compose-hom-Ring R2 R1 R2 f (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
     ( id-hom-Ring R2)
     ( is-sec-inv-is-iso-hom-Ring R1 R2 f is-iso-f)
 
@@ -92,7 +92,7 @@ is-retr-inv-map-is-iso-hom-Ring :
   ( (inv-map-is-iso-hom-Ring R1 R2 f is-iso-f) ∘ (map-hom-Ring R1 R2 f)) ~ id
 is-retr-inv-map-is-iso-hom-Ring R1 R2 f is-iso-f =
   htpy-eq-hom-Ring R1 R1
-    ( comp-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
+    ( compose-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
     ( id-hom-Ring R1)
     ( is-retr-inv-is-iso-hom-Ring R1 R2 f is-iso-f)
 ```
@@ -111,11 +111,11 @@ all-elements-equal-is-iso-hom-Ring R1 R2 f inv-f inv-f' =
       prod-Prop
         ( Id-Prop
           ( hom-Ring R2 R2)
-          ( comp-hom-Ring R2 R1 R2 f g)
+          ( compose-hom-Ring R2 R1 R2 f g)
           ( id-hom-Ring R2))
         ( Id-Prop
           ( hom-Ring R1 R1)
-          ( comp-hom-Ring R1 R2 R1 g f)
+          ( compose-hom-Ring R1 R2 R1 g f)
           ( id-hom-Ring R1)))
     ( eq-htpy-hom-Ring R2 R1
       ( inv-is-iso-hom-Ring R1 R2 f inv-f)
@@ -160,8 +160,8 @@ is-iso-id-hom-Ring :
 is-iso-id-hom-Ring R1 =
   pair ( id-hom-Ring R1)
        ( pair
-         ( left-unit-law-comp-hom-Ring R1 R1 (id-hom-Ring R1))
-         ( left-unit-law-comp-hom-Ring R1 R1 (id-hom-Ring R1)))
+         ( left-unit-law-compose-hom-Ring R1 R1 (id-hom-Ring R1))
+         ( left-unit-law-compose-hom-Ring R1 R1 (id-hom-Ring R1)))
 
 id-iso-Ring :
   { l1 : Level} (R1 : Ring l1) → iso-Ring R1 R1
@@ -291,12 +291,12 @@ abstract
       ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
       ( pair
         ( eq-htpy-hom-Ring R2 R2
-          ( comp-hom-Ring R2 R1 R2 f
+          ( compose-hom-Ring R2 R1 R2 f
             ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f))
           ( id-hom-Ring R2)
           ( htpy-eq-hom-Ab (ab-Ring R2) (ab-Ring R2)
             ( hom-ab-hom-Ring R2 R2
-              ( comp-hom-Ring R2 R1 R2 f
+              ( compose-hom-Ring R2 R1 R2 f
                 ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)))
             ( id-hom-Ab (ab-Ring R2))
             ( is-sec-inv-is-iso-hom-Ab
@@ -305,13 +305,13 @@ abstract
               ( hom-ab-hom-Ring R1 R2 f)
               ( is-iso-f))))
         ( eq-htpy-hom-Ring R1 R1
-          ( comp-hom-Ring R1 R2 R1
+          ( compose-hom-Ring R1 R2 R1
             ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
             ( f))
           ( id-hom-Ring R1)
           ( htpy-eq-hom-Ab (ab-Ring R1) (ab-Ring R1)
             ( hom-ab-hom-Ring R1 R1
-              ( comp-hom-Ring R1 R2 R1
+              ( compose-hom-Ring R1 R2 R1
                 ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
                 ( f)))
             ( id-hom-Ab (ab-Ring R1))

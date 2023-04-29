@@ -128,7 +128,7 @@ int-ℤ-Mod (succ-ℕ k) x = int-ℕ (nat-Fin (succ-ℕ k) x)
 is-injective-int-ℤ-Mod : (k : ℕ) → is-injective (int-ℤ-Mod k)
 is-injective-int-ℤ-Mod zero-ℕ = is-injective-id
 is-injective-int-ℤ-Mod (succ-ℕ k) =
-  is-injective-comp (is-injective-nat-Fin (succ-ℕ k)) is-injective-int-ℕ
+  is-injective-compose (is-injective-nat-Fin (succ-ℕ k)) is-injective-int-ℕ
 
 is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
 is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl

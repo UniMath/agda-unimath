@@ -133,7 +133,7 @@ module _
         unit-trunc-Prop
           ( pair
             ( f ∘ (pr1 P))
-            ( is-surjective-comp is-surjective-f (pr2 P))))
+            ( is-surjective-compose is-surjective-f (pr2 P))))
     where
      f : Maybe (type-Set X) → type-Set X
      f (inl x) = x
@@ -386,9 +386,9 @@ module _
           ( pair
             ( map-maybe-coprod ∘
               ( map-coprod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ+ℕ))
-            ( is-surjective-comp
+            ( is-surjective-compose
               ( is-surjective-map-maybe-coprod)
-              ( is-surjective-comp
+              ( is-surjective-compose
                 ( is-surjective-map-coprod (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
@@ -410,9 +410,9 @@ module _
           ( pair
             ( map-maybe-prod ∘
               ( map-prod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
-            ( is-surjective-comp
+            ( is-surjective-compose
               ( is-surjective-map-maybe-prod)
-              ( is-surjective-comp
+              ( is-surjective-compose
                 ( is-surjective-map-prod (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ×ℕ)))))))
 ```

@@ -93,10 +93,10 @@ is-repeated-value {l1} {l2} {A} {B} f a =
 ### Repetitions of values of composite maps
 
 ```agda
-repetition-of-values-comp :
+repetition-of-values-compose :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
   {f : A → B} → repetition-of-values f → repetition-of-values (g ∘ f)
-repetition-of-values-comp g ((x , y , s) , t) =
+repetition-of-values-compose g ((x , y , s) , t) =
   ((x , y , s) , ap g t)
 
 repetition-of-values-left-factor :

@@ -85,15 +85,15 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
-  is-0-map-comp :
+  is-0-map-compose :
     (g : B → X) (h : A → B) →
     is-0-map g → is-0-map h → is-0-map (g ∘ h)
-  is-0-map-comp = is-trunc-map-comp zero-𝕋
+  is-0-map-compose = is-trunc-map-compose zero-𝕋
 
-  is-0-map-comp-htpy :
+  is-0-map-compose-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-0-map g → is-0-map h → is-0-map f
-  is-0-map-comp-htpy = is-trunc-map-comp-htpy zero-𝕋
+  is-0-map-compose-htpy = is-trunc-map-compose-htpy zero-𝕋
 ```
 
 ### If a composite is a 0-map, then so is its right factor

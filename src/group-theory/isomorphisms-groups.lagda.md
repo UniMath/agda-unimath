@@ -124,9 +124,9 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
   where
 
-  comp-iso-Group :
+  compose-iso-Group :
     type-iso-Group H K → type-iso-Group G H → type-iso-Group G K
-  comp-iso-Group = comp-iso-Large-Precat Group-Large-Precat G H K
+  compose-iso-Group = compose-iso-Large-Precat Group-Large-Precat G H K
 ```
 
 ### Group isomorphisms are stable by inversion

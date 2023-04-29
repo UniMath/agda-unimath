@@ -67,20 +67,20 @@ module _
 ### Composites of sections are sections
 
 ```agda
-  section-comp :
+  section-compose :
     (g : B → X) (h : A → B) → sec h → sec g → sec (g ∘ h)
-  pr1 (section-comp g h sec-h sec-g) = pr1 sec-h ∘ pr1 sec-g
-  pr2 (section-comp g h sec-h sec-g) =
+  pr1 (section-compose g h sec-h sec-g) = pr1 sec-h ∘ pr1 sec-g
+  pr2 (section-compose g h sec-h sec-g) =
     (g ·l (pr2 sec-h ·r (pr1 sec-g))) ∙h (pr2 sec-g)
 
-  section-comp-htpy :
+  section-compose-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     sec h → sec g → sec f
-  pr1 (section-comp-htpy f g h H sec-h sec-g) =
-    pr1 (section-comp g h sec-h sec-g)
-  pr2 (section-comp-htpy f g h H sec-h sec-g) =
-    (H ·r pr1 (section-comp g h sec-h sec-g)) ∙h
-    (pr2 (section-comp g h sec-h sec-g))
+  pr1 (section-compose-htpy f g h H sec-h sec-g) =
+    pr1 (section-compose g h sec-h sec-g)
+  pr2 (section-compose-htpy f g h H sec-h sec-g) =
+    (H ·r pr1 (section-compose g h sec-h sec-g)) ∙h
+    (pr2 (section-compose g h sec-h sec-g))
 
   inv-triangle-section :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))

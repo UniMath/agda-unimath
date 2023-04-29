@@ -442,7 +442,7 @@ module _
             ( ev-inl-inr (λ x → type-Set C))
             ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
             ( universal-property-coprod (type-Set C))
-            ( is-equiv-comp
+            ( is-equiv-compose
               ( map-prod
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))

@@ -340,7 +340,7 @@ abstract
       ( refl-htpy)
       ( is-equiv-ev-pair)
       ( is-equiv-ev-pair)
-      ( is-equiv-comp
+      ( is-equiv-compose
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
         ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))

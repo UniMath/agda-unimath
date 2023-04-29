@@ -33,11 +33,13 @@ module _
   pr1 (pr2 functor-Precat-Precat) F G =
     natural-transformation-Precat-Set C D F G
   pr1 (pr2 (pr2 functor-Precat-Precat)) =
-    (λ {F} {G} {H} → comp-natural-transformation-Precat C D F G H) ,
+    (λ {F} {G} {H} → compose-natural-transformation-Precat C D F G H) ,
     λ {F} {G} {H} {I} h g f →
-    assoc-comp-natural-transformation-Precat C D {F} {G} {H} {I} f g h
+    assoc-compose-natural-transformation-Precat C D {F} {G} {H} {I} f g h
   pr2 (pr2 (pr2 functor-Precat-Precat)) =
     (id-natural-transformation-Precat C D) ,
-    (λ {F} {G} → left-unit-law-comp-natural-transformation-Precat C D {F} {G}) ,
-    (λ {F} {G} → right-unit-law-comp-natural-transformation-Precat C D {F} {G})
+    ( λ {F} {G} →
+      left-unit-law-compose-natural-transformation-Precat C D {F} {G}) ,
+    ( λ {F} {G} →
+      right-unit-law-compose-natural-transformation-Precat C D {F} {G})
 ```

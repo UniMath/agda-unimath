@@ -65,7 +65,7 @@ module _
 
   issec-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
-    Id ( comp-hom-Semigroup H G H
+    Id ( compose-hom-Semigroup H G H
          ( hom-iso-Semigroup f)
          ( hom-inv-iso-Semigroup f))
        ( id-hom-Semigroup H)
@@ -74,7 +74,7 @@ module _
 
   isretr-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
-    Id ( comp-hom-Semigroup G H G
+    Id ( compose-hom-Semigroup G H G
          ( hom-inv-iso-Semigroup f)
          ( hom-iso-Semigroup f))
        ( id-hom-Semigroup G)

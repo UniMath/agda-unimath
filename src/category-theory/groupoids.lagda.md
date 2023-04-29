@@ -69,27 +69,29 @@ module _
     {x : obj-Groupoid} → type-hom-Groupoid x x
   id-hom-Groupoid = id-hom-Cat cat-Groupoid
 
-  comp-hom-Groupoid :
+  compose-hom-Groupoid :
     {x y z : obj-Groupoid} → type-hom-Groupoid y z →
     type-hom-Groupoid x y → type-hom-Groupoid x z
-  comp-hom-Groupoid = comp-hom-Cat cat-Groupoid
+  compose-hom-Groupoid = compose-hom-Cat cat-Groupoid
 
-  assoc-comp-hom-Groupoid :
+  assoc-compose-hom-Groupoid :
     {x y z w : obj-Groupoid} (h : type-hom-Groupoid z w)
     (g : type-hom-Groupoid y z) (f : type-hom-Groupoid x y) →
-    ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
-    ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
-  assoc-comp-hom-Groupoid = assoc-comp-hom-Cat cat-Groupoid
+    ( compose-hom-Groupoid (compose-hom-Groupoid h g) f) ＝
+    ( compose-hom-Groupoid h (compose-hom-Groupoid g f))
+  assoc-compose-hom-Groupoid = assoc-compose-hom-Cat cat-Groupoid
 
-  left-unit-law-comp-hom-Groupoid :
+  left-unit-law-compose-hom-Groupoid :
     {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
-    ( comp-hom-Groupoid id-hom-Groupoid f) ＝ f
-  left-unit-law-comp-hom-Groupoid = left-unit-law-comp-hom-Cat cat-Groupoid
+    ( compose-hom-Groupoid id-hom-Groupoid f) ＝ f
+  left-unit-law-compose-hom-Groupoid =
+    left-unit-law-compose-hom-Cat cat-Groupoid
 
-  right-unit-law-comp-hom-Groupoid :
+  right-unit-law-compose-hom-Groupoid :
     {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
-    ( comp-hom-Groupoid f id-hom-Groupoid) ＝ f
-  right-unit-law-comp-hom-Groupoid = right-unit-law-comp-hom-Cat cat-Groupoid
+    ( compose-hom-Groupoid f id-hom-Groupoid) ＝ f
+  right-unit-law-compose-hom-Groupoid =
+    right-unit-law-compose-hom-Cat cat-Groupoid
 
   iso-Groupoid : (x y : obj-Groupoid) → UU l2
   iso-Groupoid = iso-Cat cat-Groupoid
@@ -197,7 +199,7 @@ module _
   pr1 (pr2 functor-equiv-groupoid-1-type-Groupoid) {x} {.x} refl =
     id-hom-Groupoid G
   pr1 (pr2 (pr2 functor-equiv-groupoid-1-type-Groupoid)) {x} refl refl =
-    inv (right-unit-law-comp-hom-Groupoid G (id-hom-Groupoid G))
+    inv (right-unit-law-compose-hom-Groupoid G (id-hom-Groupoid G))
   pr2 (pr2 (pr2 functor-equiv-groupoid-1-type-Groupoid)) x = refl
 ```
 

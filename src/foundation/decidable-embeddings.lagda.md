@@ -226,18 +226,18 @@ abstract
 
 ```agda
 abstract
-  is-decidable-emb-comp :
+  is-decidable-emb-compose :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
     {g : B → C} {f : A → B} →
     is-decidable-emb f → is-decidable-emb g → is-decidable-emb (g ∘ f)
-  pr1 (is-decidable-emb-comp {g = g} {f} H K) =
-    is-emb-comp _ _ (pr1 K) (pr1 H)
-  pr2 (is-decidable-emb-comp {g = g} {f} H K) x =
+  pr1 (is-decidable-emb-compose {g = g} {f} H K) =
+    is-emb-compose _ _ (pr1 K) (pr1 H)
+  pr2 (is-decidable-emb-compose {g = g} {f} H K) x =
     ind-coprod
       ( λ t → is-decidable (fib (g ∘ f) x))
       ( λ u →
         is-decidable-equiv
-          ( equiv-compute-fib-comp g f x)
+          ( equiv-compute-fib-compose g f x)
           ( is-decidable-equiv
             ( left-unit-law-Σ-is-contr
               ( is-proof-irrelevant-is-prop
@@ -321,11 +321,11 @@ equiv-precomp-decidable-emb-equiv e C =
       equiv-prop
         ( is-prop-is-decidable-emb g)
         ( is-prop-is-decidable-emb (g ∘ map-equiv e))
-        ( is-decidable-emb-comp (is-decidable-emb-is-equiv (pr2 e)))
+        ( is-decidable-emb-compose (is-decidable-emb-is-equiv (pr2 e)))
         ( λ d →
           is-decidable-emb-htpy
             ( λ b → ap g (inv (issec-map-inv-equiv e b)))
-            ( is-decidable-emb-comp
+            ( is-decidable-emb-compose
               ( is-decidable-emb-is-equiv (is-equiv-map-inv-equiv e))
               ( d))))
 ```

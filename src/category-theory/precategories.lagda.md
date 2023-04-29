@@ -26,13 +26,13 @@ A precategory in Homotopy Type Theory consists of:
 
 - a type `A` of objects,
 - for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
-  together with a composition operation `comp : hom y z → hom x y → hom x z`
+  together with a composition operation `compose : hom y z → hom x y → hom x z`
   such that:
-- `comp (comp h g) f = comp h (comp g f)` for any morphisms `h : hom z w`,
-  `g : hom y z` and `f : hom x y`,
+- `compose (compose h g) f = compose h (compose g f)` for any morphisms
+  `h : hom z w`, `g : hom y z` and `f : hom x y`,
 - for each object `x : A` there is a morphism `id_x : hom x x` such that
-  `comp id_x f = f` and `comp g id_x = g` for any morphisms `f : hom x y` and
-  `g : hom z x`.
+  `compose id_x f = f` and `compose g id_x = g` for any morphisms `f : hom x y`
+  and `g : hom z x`.
 
 The reason this is called a *pre*category and not a category in Homotopy Type
 Theory is that we want to reserve that name for precategories where the
@@ -91,30 +91,30 @@ module _
     associative-composition-structure-Set hom-Precat
   associative-composition-Precat = pr1 (pr2 (pr2 C))
 
-  comp-hom-Precat : {x y z : obj-Precat} →
+  compose-hom-Precat : {x y z : obj-Precat} →
     type-hom-Precat y z → type-hom-Precat x y → type-hom-Precat x z
-  comp-hom-Precat = pr1 associative-composition-Precat
+  compose-hom-Precat = pr1 associative-composition-Precat
 
-  comp-hom-Precat' : {x y z : obj-Precat} →
+  compose-hom-Precat' : {x y z : obj-Precat} →
     type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
-  comp-hom-Precat' f g = comp-hom-Precat g f
+  compose-hom-Precat' f g = compose-hom-Precat g f
 
   precomp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
     type-hom-Precat y z → type-hom-Precat x z
-  precomp-hom-Precat f z g = comp-hom-Precat g f
+  precomp-hom-Precat f z g = compose-hom-Precat g f
 
   postcomp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
     type-hom-Precat z x → type-hom-Precat z y
-  postcomp-hom-Precat f z = comp-hom-Precat f
+  postcomp-hom-Precat f z = compose-hom-Precat f
 
-  assoc-comp-hom-Precat :
+  assoc-compose-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
-    ( comp-hom-Precat (comp-hom-Precat h g) f) ＝
-    ( comp-hom-Precat h (comp-hom-Precat g f))
-  assoc-comp-hom-Precat = pr2 associative-composition-Precat
+    ( compose-hom-Precat (compose-hom-Precat h g) f) ＝
+    ( compose-hom-Precat h (compose-hom-Precat g f))
+  assoc-compose-hom-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
     is-unital-composition-structure-Set
@@ -125,15 +125,15 @@ module _
   id-hom-Precat : {x : obj-Precat} → type-hom-Precat x x
   id-hom-Precat {x} = pr1 is-unital-Precat x
 
-  left-unit-law-comp-hom-Precat :
+  left-unit-law-compose-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    comp-hom-Precat id-hom-Precat f ＝ f
-  left-unit-law-comp-hom-Precat = pr1 (pr2 is-unital-Precat)
+    compose-hom-Precat id-hom-Precat f ＝ f
+  left-unit-law-compose-hom-Precat = pr1 (pr2 is-unital-Precat)
 
-  right-unit-law-comp-hom-Precat :
+  right-unit-law-compose-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    comp-hom-Precat f id-hom-Precat ＝ f
-  right-unit-law-comp-hom-Precat = pr2 (pr2 is-unital-Precat)
+    compose-hom-Precat f id-hom-Precat ＝ f
+  right-unit-law-compose-hom-Precat = pr2 (pr2 is-unital-Precat)
 ```
 
 ## Examples
@@ -158,10 +158,10 @@ pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 ### The property of having identity morphisms is a proposition
 
 Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to
-`comp`. It is enough to show that `e = e'` since the right and left unit laws
+`compose`. It is enough to show that `e = e'` since the right and left unit laws
 are propositions (because all hom-types are sets). By function extensionality,
 it is enough to show that `e x = e' x` for all `x : A`. But by the unit laws we
-have the following chain of equalities: `e x = comp (e' x) (e x) = e' x.`
+have the following chain of equalities: `e x = compose (e' x) (e x) = e' x.`
 
 ```agda
 module _

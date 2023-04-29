@@ -87,7 +87,7 @@ module _
         matching-correspondence-Σ-Decomposition D))
   pr1 (pr2 equiv-discrete-is-discrete-Σ-Decomposition) x =
     ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
-      is-equiv-comp
+      is-equiv-compose
         ( map-equiv (compute-raise-unit l4))
         ( terminal-map)
         ( is-equiv-terminal-map-is-contr (is-discrete x))

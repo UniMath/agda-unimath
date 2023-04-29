@@ -49,7 +49,7 @@ is-equiv-diagonal-is-connected :
   is-connected k A →
   is-equiv (λ (b : type-Truncated-Type B) → const A (type-Truncated-Type B) b)
 is-equiv-diagonal-is-connected B H =
-  is-equiv-comp
+  is-equiv-compose
     ( precomp unit-trunc (type-Truncated-Type B))
     ( λ b → const _ _ b)
     ( is-equiv-diagonal-is-contr H (type-Truncated-Type B))

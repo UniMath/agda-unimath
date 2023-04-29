@@ -34,7 +34,7 @@ module _
   {B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i))
   {B' : UU l4} (i' : B' ↪ X) (q' : hom-slice f (map-emb i'))
   (h : hom-slice (map-emb i) (map-emb i'))
-  -- (p : Id (comp-hom-slice f (map-emb i) (map-emb i') h q) q')
+  -- (p : Id (compose-hom-slice f (map-emb i) (map-emb i') h q) q')
   where
 
   abstract
@@ -53,7 +53,7 @@ module _
     is-image-is-image-is-equiv is-equiv-h up-i {l} =
       is-image-is-image' l f i' q'
         ( λ C j r →
-          comp-hom-slice
+          compose-hom-slice
             ( map-emb i')
             ( map-emb i)
             ( map-emb j)
@@ -76,7 +76,7 @@ module _
     is-image-is-equiv-is-image up-i' is-equiv-h {l} =
       is-image-is-image' l f i q
         ( λ C j r →
-          comp-hom-slice
+          compose-hom-slice
             ( map-emb i)
             ( map-emb i')
             ( map-emb j)
@@ -98,7 +98,7 @@ module _
             ( λ e →
               htpy-hom-slice f
                 ( map-emb i')
-                ( comp-hom-slice f
+                ( compose-hom-slice f
                   ( map-emb i)
                   ( map-emb i')
                   ( hom-equiv-slice (map-emb i) (map-emb i') e)
@@ -110,7 +110,7 @@ module _
                 ( λ h →
                   htpy-hom-slice f
                     ( map-emb i')
-                    ( comp-hom-slice f (map-emb i) (map-emb i') h q)
+                    ( compose-hom-slice f (map-emb i) (map-emb i') h q)
                     ( q')))
             ( λ h → is-equiv (pr1 (pr1 h))))
         ( ( equiv-right-swap-Σ) ∘e
@@ -118,7 +118,7 @@ module _
             ( λ h →
               htpy-hom-slice f
                 ( map-emb i')
-                ( comp-hom-slice f (map-emb i) (map-emb i') (pr1 h) q)
+                ( compose-hom-slice f (map-emb i) (map-emb i') (pr1 h) q)
                 ( q'))
             ( equiv-right-swap-Σ)
             ( λ { (pair (pair e E) H) → id-equiv})))
@@ -170,7 +170,7 @@ module _
   htpy-equiv-slice-uniqueness-image :
     htpy-hom-slice f
       ( map-emb i')
-      ( comp-hom-slice f
+      ( compose-hom-slice f
         ( map-emb i)
         ( map-emb i')
         ( hom-equiv-slice-uniqueness-image)
@@ -211,7 +211,7 @@ module _
             ( λ e →
               htpy-hom-slice f
                 ( map-emb i)
-                ( comp-hom-slice f
+                ( compose-hom-slice f
                   ( inclusion-im f)
                   ( map-emb i)
                   ( hom-equiv-slice (inclusion-im f) (map-emb i) e)
@@ -254,7 +254,7 @@ module _
   htpy-equiv-slice-uniqueness-im :
     htpy-hom-slice f
       ( map-emb i)
-      ( comp-hom-slice f
+      ( compose-hom-slice f
         ( inclusion-im f)
         ( map-emb i)
         ( hom-equiv-slice-uniqueness-im)

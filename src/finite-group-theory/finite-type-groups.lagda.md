@@ -61,7 +61,7 @@ module _
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
   pr2 hom-loop-group-fin-UU-Fin-Group p q =
-    inv (comp-pair-eq-Σ p q)
+    inv (compute-pair-eq-Σ p q)
 
   hom-inv-loop-group-fin-UU-Fin-Group :
     type-hom-Group
@@ -74,7 +74,7 @@ module _
       ( λ r → eq-pair-Σ (p ∙ q) r)
       ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
       ( inv
-        ( comp-eq-pair-Σ
+        ( compute-eq-pair-Σ
           ( pr2 (Fin-UU-Fin l n))
           ( pr2 (Fin-UU-Fin l n))
           ( pr2 (Fin-UU-Fin l n))
@@ -85,7 +85,7 @@ module _
 
   is-sec-hom-inv-loop-group-fin-UU-Fin-Group :
     Id
-      ( comp-hom-Group
+      ( compose-hom-Group
         ( loop-group-Set (raise-Set l (Fin-Set n)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
@@ -109,7 +109,7 @@ module _
 
   is-retr-hom-inv-loop-group-fin-UU-Fin-Group :
     Id
-      ( comp-hom-Group
+      ( compose-hom-Group
         ( abstract-group-Concrete-Group (UU-Fin-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l n))

@@ -32,36 +32,37 @@ module _
   endo-Cat : UU l2
   endo-Cat = type-hom-Cat C X X
 
-  comp-endo-Cat : endo-Cat → endo-Cat → endo-Cat
-  comp-endo-Cat g f = comp-hom-Cat C g f
+  compose-endo-Cat : endo-Cat → endo-Cat → endo-Cat
+  compose-endo-Cat g f = compose-hom-Cat C g f
 
   id-endo-Cat : endo-Cat
   id-endo-Cat = id-hom-Cat C
 
-  assoc-comp-endo-Cat :
+  assoc-compose-endo-Cat :
     (h g f : endo-Cat) →
-    (comp-endo-Cat (comp-endo-Cat h g) f) ＝ comp-endo-Cat h (comp-endo-Cat g f)
-  assoc-comp-endo-Cat = assoc-comp-hom-Cat C
+    ( compose-endo-Cat (compose-endo-Cat h g) f) ＝
+    ( compose-endo-Cat h (compose-endo-Cat g f))
+  assoc-compose-endo-Cat = assoc-compose-hom-Cat C
 
-  left-unit-law-comp-endo-Cat :
-    (f : endo-Cat) → comp-endo-Cat id-endo-Cat f ＝ f
-  left-unit-law-comp-endo-Cat = left-unit-law-comp-hom-Cat C
+  left-unit-law-compose-endo-Cat :
+    (f : endo-Cat) → compose-endo-Cat id-endo-Cat f ＝ f
+  left-unit-law-compose-endo-Cat = left-unit-law-compose-hom-Cat C
 
-  right-unit-law-comp-endo-Cat :
-    (f : endo-Cat) → comp-endo-Cat f id-endo-Cat ＝ f
-  right-unit-law-comp-endo-Cat = right-unit-law-comp-hom-Cat C
+  right-unit-law-compose-endo-Cat :
+    (f : endo-Cat) → compose-endo-Cat f id-endo-Cat ＝ f
+  right-unit-law-compose-endo-Cat = right-unit-law-compose-hom-Cat C
 
   set-endo-Cat : Set l2
   set-endo-Cat = hom-Cat C X X
 
   semigroup-endo-Cat : Semigroup l2
   pr1 semigroup-endo-Cat = set-endo-Cat
-  pr1 (pr2 semigroup-endo-Cat) = comp-endo-Cat
-  pr2 (pr2 semigroup-endo-Cat) = assoc-comp-endo-Cat
+  pr1 (pr2 semigroup-endo-Cat) = compose-endo-Cat
+  pr2 (pr2 semigroup-endo-Cat) = assoc-compose-endo-Cat
 
   monoid-endo-Cat : Monoid l2
   pr1 monoid-endo-Cat = semigroup-endo-Cat
   pr1 (pr2 monoid-endo-Cat) = id-endo-Cat
-  pr1 (pr2 (pr2 monoid-endo-Cat)) = left-unit-law-comp-endo-Cat
-  pr2 (pr2 (pr2 monoid-endo-Cat)) = right-unit-law-comp-endo-Cat
+  pr1 (pr2 (pr2 monoid-endo-Cat)) = left-unit-law-compose-endo-Cat
+  pr2 (pr2 (pr2 monoid-endo-Cat)) = right-unit-law-compose-endo-Cat
 ```

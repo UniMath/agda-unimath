@@ -27,7 +27,7 @@ an exponential (often denoted y^x) consists of:
 - an object `e`
 - a morphism `ev : hom (e × x) y` such that for every object `z` and morphism
   `f : hom (z × x) y` there exists a unique morphism `g : hom z e` such that
-- `comp (g × id x) ev = f`.
+- `compose (g × id x) ev = f`.
 
 We say that `C` has all exponentials if there is a choice of an exponential for
 each pair of objects.
@@ -47,7 +47,7 @@ module _
     (z : obj-Precat C)
     (f : type-hom-Precat C (object-product-Precat C p z x) y) →
     ∃! (type-hom-Precat C z e) λ g →
-       comp-hom-Precat C ev (map-product-Precat C p g (id-hom-Precat C)) ＝ f
+       compose-hom-Precat C ev (map-product-Precat C p g (id-hom-Precat C)) ＝ f
 
   exponential-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   exponential-Precat x y =
@@ -82,7 +82,7 @@ module _
     morphism-into-exponential-Precat = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
 
     morphism-into-exponential-Precat-comm :
-      comp-hom-Precat C
+      compose-hom-Precat C
           ( eval-exponential-Precat)
           ( map-product-Precat C p
             (morphism-into-exponential-Precat)
@@ -91,7 +91,7 @@ module _
 
     is-unique-morphism-into-exponential-Precat :
       ( g : type-hom-Precat C z object-exponential-Precat) →
-      ( comp-hom-Precat C
+      ( compose-hom-Precat C
         ( eval-exponential-Precat)
         ( map-product-Precat C p g (id-hom-Precat C)) ＝ f) →
       morphism-into-exponential-Precat ＝ g

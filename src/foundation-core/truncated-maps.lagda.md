@@ -197,15 +197,15 @@ module _
 
 ```agda
 abstract
-  is-trunc-map-comp :
+  is-trunc-map-compose :
     {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
     {X : UU l3} (g : B → X) (h : A → B) →
     is-trunc-map k g → is-trunc-map k h → is-trunc-map k (g ∘ h)
-  is-trunc-map-comp k g h is-trunc-g is-trunc-h x =
+  is-trunc-map-compose k g h is-trunc-g is-trunc-h x =
     is-trunc-is-equiv k
         ( Σ (fib g x) (λ t → fib h (pr1 t)))
-        ( map-compute-fib-comp g h x)
-        ( is-equiv-map-compute-fib-comp g h x)
+        ( map-compute-fib-compose g h x)
+        ( is-equiv-map-compute-fib-compose g h x)
         ( is-trunc-Σ
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t)))
@@ -215,33 +215,33 @@ module _
   (g : B → X) (h : A → B)
   where
 
-  is-contr-map-comp : is-contr-map g → is-contr-map h → is-contr-map (g ∘ h)
-  is-contr-map-comp = is-trunc-map-comp neg-two-𝕋 g h
+  is-contr-map-compose : is-contr-map g → is-contr-map h → is-contr-map (g ∘ h)
+  is-contr-map-compose = is-trunc-map-compose neg-two-𝕋 g h
 
-  is-prop-map-comp : is-prop-map g → is-prop-map h → is-prop-map (g ∘ h)
-  is-prop-map-comp = is-trunc-map-comp neg-one-𝕋 g h
+  is-prop-map-compose : is-prop-map g → is-prop-map h → is-prop-map (g ∘ h)
+  is-prop-map-compose = is-trunc-map-compose neg-one-𝕋 g h
 
 abstract
-  is-trunc-map-comp-htpy :
+  is-trunc-map-compose-htpy :
     {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
     {X : UU l3} (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-trunc-map k g → is-trunc-map k h → is-trunc-map k f
-  is-trunc-map-comp-htpy k f g h H is-trunc-g is-trunc-h =
+  is-trunc-map-compose-htpy k f g h H is-trunc-g is-trunc-h =
     is-trunc-map-htpy k H
-      ( is-trunc-map-comp k g h is-trunc-g is-trunc-h)
+      ( is-trunc-map-compose k g h is-trunc-g is-trunc-h)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  is-contr-map-comp-htpy :
+  is-contr-map-compose-htpy :
     is-contr-map g → is-contr-map h → is-contr-map f
-  is-contr-map-comp-htpy = is-trunc-map-comp-htpy neg-two-𝕋 f g h H
+  is-contr-map-compose-htpy = is-trunc-map-compose-htpy neg-two-𝕋 f g h H
 
-  is-prop-map-comp-htpy :
+  is-prop-map-compose-htpy :
     is-prop-map g → is-prop-map h → is-prop-map f
-  is-prop-map-comp-htpy = is-trunc-map-comp-htpy neg-one-𝕋 f g h H
+  is-prop-map-compose-htpy = is-trunc-map-compose-htpy neg-one-𝕋 f g h H
 ```
 
 ### If a composite is truncated, then its right factor is truncated
@@ -257,8 +257,8 @@ abstract
       ( is-trunc-g (g b))
       ( is-trunc-is-equiv' k
         ( Σ A (λ z → g (h z) ＝ g b))
-        ( map-compute-fib-comp g h (g b))
-        ( is-equiv-map-compute-fib-comp g h (g b))
+        ( map-compute-fib-compose g h (g b))
+        ( is-equiv-map-compute-fib-compose g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
       ( pair b refl)
 
@@ -314,7 +314,7 @@ module _
   is-trunc-map-top-is-trunc-map-bottom-is-equiv K L M =
     is-trunc-map-right-factor-htpy k (i ∘ g) h f H
       ( is-trunc-map-is-equiv k L)
-      ( is-trunc-map-comp k i g M
+      ( is-trunc-map-compose k i g M
         ( is-trunc-map-is-equiv k K))
 ```
 
@@ -390,7 +390,7 @@ module _
     is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
     is-trunc-map k (map-Σ D f g)
   is-trunc-map-map-Σ k D {f} {g} H K =
-    is-trunc-map-comp-htpy k
+    is-trunc-map-compose-htpy k
       ( map-Σ D f g)
       ( map-Σ-map-base f D)
       ( tot g)

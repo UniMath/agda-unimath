@@ -198,43 +198,43 @@ ind-pushout :
 ind-pushout f g c ind-c P =
   pr1 (ind-c P)
 
-comp-pushout :
+compute-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
   ( f : S → A) (g : S → B) (c : cocone f g X) →
   ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dep-cocone f g c P) →
   htpy-dep-cocone f g c P
     ( dep-cocone-map f g c P (ind-pushout f g c ind-c P h))
     ( h)
-comp-pushout f g c ind-c P h =
+compute-pushout f g c ind-c P h =
   htpy-dep-cocone-eq f g c P (pr2 (ind-c P) h)
 
-left-comp-pushout :
+left-compute-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
   ( f : S → A) (g : S → B) (c : cocone f g X) →
   ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dep-cocone f g c P) →
   ( a : A) → Id (ind-pushout f g c ind-c P h (pr1 c a)) (pr1 h a)
-left-comp-pushout f g c ind-c P h =
-  pr1 (comp-pushout f g c ind-c P h)
+left-compute-pushout f g c ind-c P h =
+  pr1 (compute-pushout f g c ind-c P h)
 
-right-comp-pushout :
+right-compute-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
   ( f : S → A) (g : S → B) (c : cocone f g X) →
   ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dep-cocone f g c P) →
   ( b : B) → Id (ind-pushout f g c ind-c P h (pr1 (pr2 c) b)) (pr1 (pr2 h) b)
-right-comp-pushout f g c ind-c P h =
-  pr1 (pr2 (comp-pushout f g c ind-c P h))
+right-compute-pushout f g c ind-c P h =
+  pr1 (pr2 (compute-pushout f g c ind-c P h))
 
-path-comp-pushout :
+path-compute-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
   ( f : S → A) (g : S → B) (c : cocone f g X) →
   ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dep-cocone f g c P) →
   coherence-htpy-dep-cocone f g c P
     ( dep-cocone-map f g c P (ind-pushout f g c ind-c P h))
     ( h)
-    ( left-comp-pushout f g c ind-c P h)
-    ( right-comp-pushout f g c ind-c P h)
-path-comp-pushout f g c ind-c P h =
-  pr2 (pr2 (comp-pushout f g c ind-c P h))
+    ( left-compute-pushout f g c ind-c P h)
+    ( right-compute-pushout f g c ind-c P h)
+path-compute-pushout f g c ind-c P h =
+  pr2 (pr2 (compute-pushout f g c ind-c P h))
 
 abstract
   uniqueness-dependent-universal-property-pushout :
@@ -425,7 +425,7 @@ dependent-universal-property-dependent-pullback-property-pushout :
 dependent-universal-property-dependent-pullback-property-pushout
   f g (pair i (pair j H)) dpullback-c l P =
   let c = (pair i (pair j H)) in
-  is-equiv-comp-htpy
+  is-equiv-compose-htpy
     ( dep-cocone-map f g c P)
     ( tot (λ h → tot λ h' → htpy-eq))
     ( gap
@@ -537,7 +537,7 @@ abstract
     Id  ( tr-eq-htpy-fam-lifts P h (refl-htpy' f))
         ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
   compute-tr-eq-htpy-fam-lifts P h f =
-    comp-htpy f
+    compute-htpy f
       ( λ g H → TR-EQ-HTPY-FAM-LIFTS P h H)
       ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
 
@@ -584,7 +584,7 @@ compute-triangle-precompose-lifts :
     ( triangle-precompose-lifts P (refl-htpy' f))
     ( triangle-precompose-lifts-refl-htpy P f)
 compute-triangle-precompose-lifts P f =
-  comp-htpy f
+  compute-htpy f
     ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
     ( triangle-precompose-lifts-refl-htpy P f)
 
@@ -651,7 +651,7 @@ abstract
       Id  ( coherence-triangle-precompose-lifts P (refl-htpy' f))
           ( coherence-triangle-precompose-lifts-refl-htpy P f)
   compute-coherence-triangle-precompose-lifts P f =
-    comp-htpy f
+    compute-htpy f
       ( λ g H → COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS P H)
       ( coherence-triangle-precompose-lifts-refl-htpy P f)
 
@@ -1063,7 +1063,7 @@ is-equiv-desc-fam :
   ((l' : Level) → universal-property-pushout l' f g c) →
   is-equiv (desc-fam {l = l} {f = f} {g} c)
 is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
-  is-equiv-comp-htpy
+  is-equiv-compose-htpy
     ( desc-fam c)
     ( Fam-pushout-cocone-UU l)
     ( cocone-map f g c)
@@ -1116,35 +1116,35 @@ issec-fam-Fam-pushout {f = f} {g} c up-X P =
   inv
     ( eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
 
-comp-left-fam-Fam-pushout :
+compute-left-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( up-X : (l' : Level) → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   ( a : A) → (pr1 P a) ≃ (fam-Fam-pushout c up-X P (pr1 c a))
-comp-left-fam-Fam-pushout {f = f} {g} c up-X P =
+compute-left-fam-Fam-pushout {f = f} {g} c up-X P =
   pr1 (pr2 (center (uniqueness-Fam-pushout f g c up-X P)))
 
-comp-right-fam-Fam-pushout :
+compute-right-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( up-X : (l' : Level) → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   ( b : B) → (pr1 (pr2 P) b) ≃ (fam-Fam-pushout c up-X P (pr1 (pr2 c) b))
-comp-right-fam-Fam-pushout {f = f} {g} c up-X P =
+compute-right-fam-Fam-pushout {f = f} {g} c up-X P =
   pr1 (pr2 (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
 
-comp-path-fam-Fam-pushout :
+compute-path-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( up-X : (l' : Level) → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   ( s : S) →
-    ( ( map-equiv (comp-right-fam-Fam-pushout c up-X P (g s))) ∘
+    ( ( map-equiv (compute-right-fam-Fam-pushout c up-X P (g s))) ∘
       ( map-equiv (pr2 (pr2 P) s))) ~
     ( ( tr (fam-Fam-pushout c up-X P) (pr2 (pr2 c) s)) ∘
-      ( map-equiv (comp-left-fam-Fam-pushout c up-X P (f s))))
-comp-path-fam-Fam-pushout {f = f} {g} c up-X P =
+      ( map-equiv (compute-left-fam-Fam-pushout c up-X P (f s))))
+compute-path-fam-Fam-pushout {f = f} {g} c up-X P =
   pr2 (pr2 (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
 
 {-

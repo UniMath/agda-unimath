@@ -235,7 +235,7 @@ will have no more use for the large type of blocks of a partition.
   is-emb-inhabited-subtype-block-partition :
     is-emb inhabited-subtype-block-partition
   is-emb-inhabited-subtype-block-partition =
-    is-emb-comp
+    is-emb-compose
       ( inhabited-subtype-block-partition-Large-Type)
       ( map-inv-compute-block-partition)
       ( is-emb-inhabited-subtype-block-partition-Large-Type)
@@ -487,7 +487,7 @@ module _
   emb-inclusion-block-partition :
     (B : block-partition P) → type-block-partition P B ↪ A
   emb-inclusion-block-partition B =
-    comp-emb
+    compose-emb
       ( emb-equiv (compute-base-type-partition P))
       ( emb-fiber-inclusion
         ( type-block-partition P)

@@ -42,8 +42,8 @@ module _
     (q : type-hom-Precat C t x)
     (f : type-hom-Precat C x x) →
     ∃! (type-hom-Precat C n x) λ u →
-       (comp-hom-Precat C u z ＝ q) ×
-       (comp-hom-Precat C u s ＝ comp-hom-Precat C f u)
+       (compose-hom-Precat C u z ＝ q) ×
+       (compose-hom-Precat C u s ＝ compose-hom-Precat C f u)
 
   natural-numbers-object-Precat : UU (l1 ⊔ l2)
   natural-numbers-object-Precat =
@@ -82,25 +82,25 @@ module _
       pr1 (pr1 (pr2 (pr2 (pr2 nno)) x q f))
 
     morphism-natural-numbers-object-Precat-zero-comm :
-      comp-hom-Precat C morphism-natural-numbers-object-Precat
+      compose-hom-Precat C morphism-natural-numbers-object-Precat
         ( zero-natural-numbers-object-Precat) ＝ q
     morphism-natural-numbers-object-Precat-zero-comm =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 nno)) x q f)))
 
     morphism-natural-numbers-object-Precat-succ-comm :
-      comp-hom-Precat
+      compose-hom-Precat
         ( C)
         ( morphism-natural-numbers-object-Precat)
         ( succ-natural-numbers-object-Precat) ＝
-      comp-hom-Precat (C) (f) (morphism-natural-numbers-object-Precat)
+      compose-hom-Precat (C) (f) (morphism-natural-numbers-object-Precat)
     morphism-natural-numbers-object-Precat-succ-comm =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 nno)) x q f)))
 
     is-unique-morphism-natural-numbers-object-Precat :
       (u' : type-hom-Precat C object-natural-numbers-object-Precat x) →
-      comp-hom-Precat C u' zero-natural-numbers-object-Precat ＝ q →
-      comp-hom-Precat C u' succ-natural-numbers-object-Precat ＝
-      comp-hom-Precat C f u' →
+      compose-hom-Precat C u' zero-natural-numbers-object-Precat ＝ q →
+      compose-hom-Precat C u' succ-natural-numbers-object-Precat ＝
+      compose-hom-Precat C f u' →
       morphism-natural-numbers-object-Precat ＝ u'
     is-unique-morphism-natural-numbers-object-Precat u' α β =
       ap pr1 (pr2 (pr2 (pr2 (pr2 nno)) x q f) (u' , α , β))

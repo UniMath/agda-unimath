@@ -355,9 +355,9 @@ module _
   map-sign-homomorphism f =
     aut-point-Fin-two-ℕ (sign-homomorphism-Fin-two n X f)
 
-  preserves-comp-map-sign-homomorphism :
+  preserves-compose-map-sign-homomorphism :
     preserves-mul _∘e_ _∘e_ map-sign-homomorphism
-  preserves-comp-map-sign-homomorphism f g =
+  preserves-compose-map-sign-homomorphism f g =
     ( ap
       ( aut-point-Fin-two-ℕ)
       ( preserves-add-sign-homomorphism-Fin-two n X f g)) ∙
@@ -370,7 +370,7 @@ module _
       ( symmetric-Group (set-UU-Fin n X))
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism
-  pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
+  pr2 sign-homomorphism = preserves-compose-map-sign-homomorphism
 
   eq-sign-homomorphism-transposition :
     ( Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →

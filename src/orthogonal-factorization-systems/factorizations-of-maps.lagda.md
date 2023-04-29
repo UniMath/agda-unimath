@@ -153,7 +153,7 @@ module _
     left-map-factorization-through F ~ left-map-factorization-through F' →
     UU (l1 ⊔ l2)
   coherence-htpy-factorization-through F F' R L =
-    ( is-factorization-factorization-through F ∙h htpy-comp-horizontal L R) ~
+    ( is-factorization-factorization-through F ∙h htpy-compose-horizontal L R) ~
     is-factorization-factorization-through F'
 
   htpy-factorization-through :

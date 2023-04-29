@@ -184,7 +184,7 @@ is-equiv-square-path-over-fam-maps :
   { x x' : A} (p : Id x x') (f : B x → C x) (f' : B x' → C x') →
   is-equiv (square-path-over-fam-maps p f f')
 is-equiv-square-path-over-fam-maps refl f f' =
-  is-equiv-comp htpy-eq inv (is-equiv-inv f f') (funext f' f)
+  is-equiv-compose htpy-eq inv (is-equiv-inv f f') (funext f' f)
 
 is-equiv-hom-Fam-pushout-dep-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -245,7 +245,7 @@ is-equiv-hom-Fam-pushout-map :
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
-  is-equiv-comp-htpy
+  is-equiv-compose-htpy
     ( hom-Fam-pushout-map c P Q)
     ( hom-Fam-pushout-dep-cocone c P Q)
     ( dep-cocone-map f g c (λ x → P x → Q x))
@@ -347,17 +347,17 @@ id-hom-Fam-pushout P =
       ( λ b → id)
       ( λ s → refl-htpy))
 
-comp-hom-Fam-pushout :
+compose-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
   ( P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) (R : Fam-pushout l6 f g) →
   hom-Fam-pushout Q R → hom-Fam-pushout P Q → hom-Fam-pushout P R
-comp-hom-Fam-pushout {f = f} {g} P Q R k h =
+compose-hom-Fam-pushout {f = f} {g} P Q R k h =
   pair
     ( λ a → (pr1 k a) ∘ (pr1 h a))
     ( pair
       ( λ b → (pr1 (pr2 k) b) ∘ (pr1 (pr2 h) b))
-      ( λ s → coherence-square-maps-comp-horizontal
+      ( λ s → coherence-square-maps-compose-horizontal
         ( pr1 h (f s))
         ( pr1 k (f s))
         ( map-equiv (pr2 (pr2 P) s))
@@ -376,10 +376,10 @@ has-inverse-hom-Fam-pushout :
 has-inverse-hom-Fam-pushout P Q h =
   Σ ( hom-Fam-pushout Q P) (λ k →
     ( htpy-hom-Fam-pushout Q Q
-      ( comp-hom-Fam-pushout Q P Q h k)
+      ( compose-hom-Fam-pushout Q P Q h k)
       ( id-hom-Fam-pushout Q)) ×
     ( htpy-hom-Fam-pushout P P
-      ( comp-hom-Fam-pushout P Q P k h)
+      ( compose-hom-Fam-pushout P Q P k h)
       ( id-hom-Fam-pushout P)))
 
 is-equiv-hom-Fam-pushout :

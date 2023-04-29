@@ -187,7 +187,7 @@ module _
       {l : Level} →
       universal-property-pullback l f g (cone-canonical-pullback f g)
     universal-property-pullback-canonical-pullback C =
-      is-equiv-comp
+      is-equiv-compose
         ( tot (λ p → map-distributive-Π-Σ))
         ( mapping-into-Σ)
         ( is-equiv-mapping-into-Σ)
@@ -347,7 +347,7 @@ abstract
     (f : A → X) (g : B → X) (c : cone f g C) →
     is-pullback f g c → is-pullback g f (swap-cone f g c)
   is-pullback-swap-cone f g c is-pb-c =
-    is-equiv-comp-htpy
+    is-equiv-compose-htpy
       ( gap g f (swap-cone f g c))
       ( map-commutative-canonical-pullback f g)
       ( gap f g c)
@@ -474,7 +474,7 @@ abstract
     is-pullback f g c →
     is-pullback (map-prod f g) (diagonal X) (fold-cone f g c)
   is-pullback-fold-cone-is-pullback f g c is-pb-c =
-    is-equiv-comp-htpy
+    is-equiv-compose-htpy
       ( gap (map-prod f g) (diagonal _) (fold-cone f g c))
       ( map-fold-cone f g)
       ( gap f g c)
@@ -511,9 +511,9 @@ prod-cone :
 pr1 (prod-cone f g f' g' (p , q , H) (p' , q' , H')) = map-prod p p'
 pr1 (pr2 (prod-cone f g f' g' (p , q , H) (p' , q' , H'))) = map-prod q q'
 pr2 (pr2 (prod-cone f g f' g' (p , q , H) (p' , q' , H'))) =
-  ( inv-htpy (map-prod-comp p p' f f')) ∙h
+  ( inv-htpy (map-prod-compose p p' f f')) ∙h
   ( ( htpy-map-prod H H') ∙h
-    ( map-prod-comp q q' g g'))
+    ( map-prod-compose q q' g g'))
 
 map-prod-cone :
   {l1 l2 l3 l1' l2' l3' : Level}
@@ -549,20 +549,20 @@ abstract
     (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X') →
     is-equiv (map-prod-cone f g f' g')
   is-equiv-map-prod-cone f g f' g' =
-    is-equiv-comp
+    is-equiv-compose
       ( tot ( λ t →
         ( tot (λ s → eq-pair')) ∘
         ( map-interchange-Σ-Σ _)))
       ( map-interchange-Σ-Σ _)
       ( is-equiv-map-interchange-Σ-Σ _)
       ( is-equiv-tot-is-fiberwise-equiv
-        ( λ t → is-equiv-comp
+        ( λ t → is-equiv-compose
           ( tot (λ s → eq-pair'))
           ( map-interchange-Σ-Σ
             ( λ y p y' → Id (f' (pr2 t)) (g' y')))
           ( is-equiv-map-interchange-Σ-Σ _)
           ( is-equiv-tot-is-fiberwise-equiv
-            ( λ s → is-equiv-comp
+            ( λ s → is-equiv-compose
               ( eq-pair')
               ( id)
               ( is-equiv-id)
@@ -581,7 +581,7 @@ abstract
     is-pullback
       ( map-prod f f') (map-prod g g') (prod-cone f g f' g' c c')
   is-pullback-prod-is-pullback-pair f g c f' g' c' is-pb-c is-pb-c' =
-    is-equiv-comp-htpy
+    is-equiv-compose-htpy
       ( gap (map-prod f f') (map-prod g g') (prod-cone f g f' g' c c'))
       ( map-prod-cone f g f' g')
       ( map-prod (gap f g c) (gap f' g' c'))
@@ -657,7 +657,7 @@ module _
     is-pullback-is-fiberwise-equiv :
       is-fiberwise-equiv g → is-pullback f (pr1 {B = Q}) cone-map-Σ
     is-pullback-is-fiberwise-equiv is-equiv-g =
-      is-equiv-comp
+      is-equiv-compose
         ( gap f pr1 (cone-canonical-pullback-Σ f Q))
         ( tot g)
         ( is-equiv-tot-is-fiberwise-equiv is-equiv-g)
@@ -757,15 +757,15 @@ module _
     is-pullback-rectangle-is-pullback-left-square :
       (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
       is-pullback j h c → is-pullback i (vertical-map-cone j h c) d →
-      is-pullback (j ∘ i) h (cone-comp-horizontal i j h c d)
+      is-pullback (j ∘ i) h (cone-compose-horizontal i j h c d)
     is-pullback-rectangle-is-pullback-left-square c d is-pb-c is-pb-d =
       is-pullback-is-fiberwise-equiv-map-fib-cone (j ∘ i) h
-        ( cone-comp-horizontal i j h c d)
-        ( λ x → is-equiv-comp-htpy
-          ( map-fib-cone (j ∘ i) h (cone-comp-horizontal i j h c d) x)
+        ( cone-compose-horizontal i j h c d)
+        ( λ x → is-equiv-compose-htpy
+          ( map-fib-cone (j ∘ i) h (cone-compose-horizontal i j h c d) x)
           ( map-fib-cone j h c (i x))
           ( map-fib-cone i (vertical-map-cone j h c) d x)
-          ( map-fib-cone-comp-horizontal i j h c d x)
+          ( map-fib-cone-compose-horizontal i j h c d x)
           ( is-fiberwise-equiv-map-fib-cone-is-pullback i
             ( vertical-map-cone j h c)
             ( d)
@@ -777,20 +777,20 @@ module _
     is-pullback-left-square-is-pullback-rectangle :
       (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
       is-pullback j h c →
-      is-pullback (j ∘ i) h (cone-comp-horizontal i j h c d) →
+      is-pullback (j ∘ i) h (cone-compose-horizontal i j h c d) →
       is-pullback i (vertical-map-cone j h c) d
     is-pullback-left-square-is-pullback-rectangle c d is-pb-c is-pb-rect =
       is-pullback-is-fiberwise-equiv-map-fib-cone i
         ( vertical-map-cone j h c)
         ( d)
         ( λ x → is-equiv-right-factor-htpy
-          ( map-fib-cone (j ∘ i) h (cone-comp-horizontal i j h c d) x)
+          ( map-fib-cone (j ∘ i) h (cone-compose-horizontal i j h c d) x)
           ( map-fib-cone j h c (i x))
           ( map-fib-cone i (vertical-map-cone j h c) d x)
-          ( map-fib-cone-comp-horizontal i j h c d x)
+          ( map-fib-cone-compose-horizontal i j h c d x)
           ( is-fiberwise-equiv-map-fib-cone-is-pullback j h c is-pb-c (i x))
           ( is-fiberwise-equiv-map-fib-cone-is-pullback (j ∘ i) h
-            ( cone-comp-horizontal i j h c d) is-pb-rect x))
+            ( cone-compose-horizontal i j h c d) is-pb-rect x))
 ```
 
 ### The vertical pullback pasting property
@@ -806,7 +806,7 @@ module _
     is-pullback-top-is-pullback-rectangle :
       (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
-      is-pullback f (g ∘ h) (cone-comp-vertical f g h c d) →
+      is-pullback f (g ∘ h) (cone-compose-vertical f g h c d) →
       is-pullback (horizontal-map-cone f g c) h d
     is-pullback-top-is-pullback-rectangle c d is-pb-c is-pb-dc =
       is-pullback-is-fiberwise-equiv-map-fib-cone
@@ -821,30 +821,30 @@ module _
             ( is-fiberwise-equiv-map-fib-cone-is-pullback f g c is-pb-c
               ( vertical-map-cone f g c x))
             ( is-equiv-top-is-equiv-bottom-square
-              ( inv-map-compute-fib-comp
+              ( inv-map-compute-fib-compose
                 ( vertical-map-cone f g c)
                 ( vertical-map-cone (horizontal-map-cone f g c) h d)
                 ( vertical-map-cone f g c x))
-              ( inv-map-compute-fib-comp g h (f (vertical-map-cone f g c x)))
+              ( inv-map-compute-fib-compose g h (f (vertical-map-cone f g c x)))
               ( map-Σ
                 ( λ t → fib h (pr1 t))
                 ( map-fib-cone f g c (vertical-map-cone f g c x))
                 ( λ t → map-fib-cone (horizontal-map-cone f g c) h d (pr1 t)))
               ( map-fib-cone f
                 ( g ∘ h)
-                ( cone-comp-vertical f g h c d)
+                ( cone-compose-vertical f g h c d)
                 ( vertical-map-cone f g c x))
-              ( map-fib-cone-comp-vertical f g h c d
+              ( map-fib-cone-compose-vertical f g h c d
                 ( vertical-map-cone f g c x))
-              ( is-equiv-inv-map-compute-fib-comp
+              ( is-equiv-inv-map-compute-fib-compose
                 ( vertical-map-cone f g c)
                 ( vertical-map-cone (horizontal-map-cone f g c) h d)
                 ( vertical-map-cone f g c x))
-              ( is-equiv-inv-map-compute-fib-comp g h
+              ( is-equiv-inv-map-compute-fib-compose g h
                 ( f (vertical-map-cone f g c x)))
               ( is-fiberwise-equiv-map-fib-cone-is-pullback f
                 ( g ∘ h)
-                ( cone-comp-vertical f g h c d)
+                ( cone-compose-vertical f g h c d)
                 ( is-pb-dc)
                 ( vertical-map-cone f g c x)))
             ( pair x refl))
@@ -854,27 +854,27 @@ module _
       (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback (horizontal-map-cone f g c) h d →
-      is-pullback f (g ∘ h) (cone-comp-vertical f g h c d)
+      is-pullback f (g ∘ h) (cone-compose-vertical f g h c d)
     is-pullback-rectangle-is-pullback-top c d is-pb-c is-pb-d =
       is-pullback-is-fiberwise-equiv-map-fib-cone f (g ∘ h)
-        ( cone-comp-vertical f g h c d)
+        ( cone-compose-vertical f g h c d)
         ( λ x → is-equiv-bottom-is-equiv-top-square
-          ( inv-map-compute-fib-comp
+          ( inv-map-compute-fib-compose
             ( vertical-map-cone f g c)
             ( vertical-map-cone (horizontal-map-cone f g c) h d)
             ( x))
-          ( inv-map-compute-fib-comp g h (f x))
+          ( inv-map-compute-fib-compose g h (f x))
           ( map-Σ
             ( λ t → fib h (pr1 t))
             ( map-fib-cone f g c x)
             ( λ t → map-fib-cone (horizontal-map-cone f g c) h d (pr1 t)))
-          ( map-fib-cone f (g ∘ h) (cone-comp-vertical f g h c d) x)
-          ( map-fib-cone-comp-vertical f g h c d x)
-          ( is-equiv-inv-map-compute-fib-comp
+          ( map-fib-cone f (g ∘ h) (cone-compose-vertical f g h c d) x)
+          ( map-fib-cone-compose-vertical f g h c d x)
+          ( is-equiv-inv-map-compute-fib-compose
             ( vertical-map-cone f g c)
             ( vertical-map-cone (horizontal-map-cone f g c) h d)
             ( x))
-          ( is-equiv-inv-map-compute-fib-comp g h (f x))
+          ( is-equiv-inv-map-compute-fib-compose g h (f x))
           ( is-equiv-map-Σ
             ( λ t → fib h (pr1 t))
             ( map-fib-cone f g c x)

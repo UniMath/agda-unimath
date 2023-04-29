@@ -102,7 +102,7 @@ module _
             ( λ h →
               htpy-hom-slice f
                 ( map-emb j)
-                ( comp-hom-slice f (map-emb i) (map-emb j) h q)
+                ( compose-hom-slice f (map-emb i) (map-emb j) h q)
                 ( r)))
     universal-property-image =
       is-contr-equiv'
@@ -131,7 +131,7 @@ module _
   htpy-hom-slice-universal-property-image :
     htpy-hom-slice f
       ( map-emb j)
-      ( comp-hom-slice f
+      ( compose-hom-slice f
         ( map-emb i)
         ( map-emb j)
         ( hom-slice-universal-property-image)
@@ -144,7 +144,7 @@ module _
     htpy-map-hom-slice-universal-property-image :
       map-hom-slice f
         ( map-emb j)
-        ( comp-hom-slice f
+        ( compose-hom-slice f
           ( map-emb i)
           ( map-emb j)
           ( hom-slice-universal-property-image)
@@ -247,7 +247,7 @@ abstract
     g : type-subtype (trunc-Prop ∘ fib (map-hom-slice f (map-emb i) q)) → X
     g = map-emb i ∘ pr1
     is-emb-g : is-emb g
-    is-emb-g = is-emb-comp (map-emb i) pr1
+    is-emb-g = is-emb-compose (map-emb i) pr1
       ( is-emb-map-emb i)
       ( is-emb-inclusion-subtype (λ x → trunc-Prop _))
     α : hom-slice (map-emb i) g

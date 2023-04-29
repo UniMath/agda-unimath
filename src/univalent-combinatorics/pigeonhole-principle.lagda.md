@@ -105,7 +105,7 @@ no-embedding-ℕ-Fin :
 no-embedding-ℕ-Fin k e =
   contradiction-leq-ℕ k k
     ( refl-leq-ℕ k)
-    ( leq-emb-Fin (succ-ℕ k) k (comp-emb e (emb-nat-Fin (succ-ℕ k))))
+    ( leq-emb-Fin (succ-ℕ k) k (compose-emb e (emb-nat-Fin (succ-ℕ k))))
 ```
 
 #### For any `f : Fin k → Fin l`, where `l < k`, we construct a pair of distinct elements of `Fin k` on which `f` assumes the same value
@@ -171,8 +171,8 @@ module _
     leq-emb-Fin
       ( number-of-elements-count eA)
       ( number-of-elements-count eB)
-      ( comp-emb
-        ( comp-emb (emb-equiv (inv-equiv-count eB)) f)
+      ( compose-emb
+        ( compose-emb (emb-equiv (inv-equiv-count eB)) f)
         ( emb-equiv (equiv-count eA)))
 
   leq-is-emb-count :
@@ -207,9 +207,9 @@ module _
       ( is-emb-map-emb h)
     where
     h : Fin (number-of-elements-count eA) ↪ Fin (number-of-elements-count eB)
-    h = comp-emb
+    h = compose-emb
         ( emb-equiv (inv-equiv-count eB))
-          ( comp-emb (pair f H) (emb-equiv (equiv-count eA)))
+          ( compose-emb (pair f H) (emb-equiv (equiv-count eA)))
 ```
 
 #### There is no injective map `A → B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
@@ -231,7 +231,7 @@ no-embedding-ℕ-count :
 no-embedding-ℕ-count e f =
   no-embedding-ℕ-Fin
   ( number-of-elements-count e)
-  ( comp-emb (emb-equiv (inv-equiv-count e)) f)
+  ( compose-emb (emb-equiv (inv-equiv-count e)) f)
 ```
 
 #### For any map `f : A → B` between types equipped with a counting, if `|A| < |B|` then we construct a pair of distinct elements of `A` on which `f` assumes the same value

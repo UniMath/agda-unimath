@@ -520,7 +520,7 @@ module _
                 ( eq-is-prop
                   ( is-prop-type-Decidable-Prop
                     ( pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
-    preserves-comp-orientation-complete-undirected-graph-equiv :
+    preserves-compose-orientation-complete-undirected-graph-equiv :
       ( X Y Z : UU-Fin l n)
       (e : type-UU-Fin n X ≃ type-UU-Fin n Y) →
       (f : type-UU-Fin n Y ≃ type-UU-Fin n Z) →
@@ -528,7 +528,7 @@ module _
         ( orientation-complete-undirected-graph-equiv X Z (f ∘e e))
         ( ( orientation-complete-undirected-graph-equiv Y Z f) ∘e
           ( orientation-complete-undirected-graph-equiv X Y e))
-    preserves-comp-orientation-complete-undirected-graph-equiv X Y Z e f =
+    preserves-compose-orientation-complete-undirected-graph-equiv X Y Z e f =
       eq-htpy-equiv
         ( λ d →
           eq-htpy
@@ -537,7 +537,7 @@ module _
                 ( ap
                   ( λ S' → map-equiv (f ∘e e) (pr1 (d S')))
                   ( htpy-eq
-                    ( preserves-comp-precomp-equiv-2-Element-Decidable-Subtype
+                    ( preserves-compose-precomp-equiv-2-Element-Decidable-Subtype
                         e f)
                     ( S)))
                 ( eq-is-prop
@@ -671,7 +671,7 @@ module _
           orientation-complete-undirected-graph-equiv X X' e}
         { y = id-equiv}
         ( ( inv
-            ( preserves-comp-orientation-complete-undirected-graph-equiv
+            ( preserves-compose-orientation-complete-undirected-graph-equiv
                 X X' X e (inv-equiv e))) ∙
           ( ( ap
               ( orientation-complete-undirected-graph-equiv X X)

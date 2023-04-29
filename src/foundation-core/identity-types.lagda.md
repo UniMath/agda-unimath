@@ -181,10 +181,10 @@ ap-id :
   {l : Level} {A : UU l} {x y : A} (p : x ＝ y) → (ap id p) ＝ p
 ap-id refl = refl
 
-ap-comp :
+ap-compose :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
   (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
-ap-comp g f refl = refl
+ap-compose g f refl = refl
 
 ap-refl :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →
@@ -425,29 +425,29 @@ right-unit-ap-binary :
   (ap-binary f p refl) ＝ (ap (λ z → f z y) p)
 right-unit-ap-binary f refl = refl
 
-ap-binary-comp :
+ap-binary-compute :
   {l1 l2 l3 l4 l5 : Level} {X : UU l4} {Y : UU l5}
   {A : UU l1} {B : UU l2} {C : UU l3} (H : A → B → C)
   (f : X → A) (g : Y → B) {x0 x1 : X} (p : x0 ＝ x1)
   {y0 y1 : Y} (q : y0 ＝ y1) → (ap-binary (λ x y → H (f x) (g y)) p q) ＝
     ap-binary H (ap f p) (ap g q)
-ap-binary-comp H f g refl refl = refl
+ap-binary-compute H f g refl refl = refl
 
-ap-binary-comp-diagonal :
+ap-binary-compute-diagonal :
   {l1 l2 l3 l4 : Level} {A' : UU l4} {A : UU l1}
   {B : UU l2} {C : UU l3} (H : A → B → C)
   (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
   (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
-ap-binary-comp-diagonal H f g p =
+ap-binary-compute-diagonal H f g p =
   ( inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p)) ∙
-  ( ap-binary-comp H f g p p)
+  ( ap-binary-compute H f g p p)
 
-ap-binary-comp' :
+ap-binary-compute' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
   {C : UU l3} {D : UU l4} (f : C → D) (H : A → B → C)
   {a0 a1 : A} (p : a0 ＝ a1) {b0 b1 : B} (q : b0 ＝ b1) →
   (ap-binary (λ a b → f (H a b)) p q) ＝ (ap f (ap-binary H p q))
-ap-binary-comp' f H refl refl = refl
+ap-binary-compute' f H refl refl = refl
 
 ap-binary-permute :
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}

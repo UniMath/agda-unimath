@@ -108,7 +108,7 @@ abstract
   is-equiv-invertible-id-htpy-id-id :
     {l : Level} (A : UU l) → is-equiv (is-invertible-id-htpy-id-id A)
   is-equiv-invertible-id-htpy-id-id A =
-    is-equiv-comp-htpy
+    is-equiv-compose-htpy
       ( is-invertible-id-htpy-id-id A)
       ( map-assoc-Σ (A → A) (λ g → (id ∘ g) ~ id) (λ s → ((pr1 s) ∘ id) ~ id))
       ( map-inv-left-unit-law-Σ-is-contr

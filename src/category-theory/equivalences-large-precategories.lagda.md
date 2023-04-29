@@ -21,8 +21,8 @@ open import foundation.universe-levels
 The large precategories `C` and `D` are equivalent if there are functors
 `F : C → D` and `G : D → C` such that
 
-- `comp G F` is naturally isomorphic to the identity functor on `C`,
-- `comp F G` is naturally isomorphic to the identity functor on `D`.
+- `compose G F` is naturally isomorphic to the identity functor on `C`,
+- `compose F G` is naturally isomorphic to the identity functor on `D`.
 
 ## Definition
 
@@ -39,13 +39,13 @@ module _
       functor-inv-equivalence-Large-Precat : functor-Large-Precat D C γ-back
       issec-functor-inv-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          ( comp-functor-Large-Precat
+          ( compose-functor-Large-Precat
             functor-equivalence-Large-Precat
             functor-inv-equivalence-Large-Precat)
           (id-functor-Large-Precat)
       isretr-functor-inv-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          ( comp-functor-Large-Precat
+          ( compose-functor-Large-Precat
             functor-inv-equivalence-Large-Precat
             functor-equivalence-Large-Precat)
           (id-functor-Large-Precat)

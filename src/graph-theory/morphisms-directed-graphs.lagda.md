@@ -66,12 +66,12 @@ module _
   (K : Directed-Graph l5 l6)
   where
 
-  comp-hom-Directed-Graph :
+  compose-hom-Directed-Graph :
     hom-Directed-Graph H K → hom-Directed-Graph G H →
     hom-Directed-Graph G K
-  pr1 (comp-hom-Directed-Graph g f) =
+  pr1 (compose-hom-Directed-Graph g f) =
     (vertex-hom-Directed-Graph H K g) ∘ (vertex-hom-Directed-Graph G H f)
-  pr2 (comp-hom-Directed-Graph g f) x y e =
+  pr2 (compose-hom-Directed-Graph g f) x y e =
     edge-hom-Directed-Graph H K g (edge-hom-Directed-Graph G H f e)
 ```
 

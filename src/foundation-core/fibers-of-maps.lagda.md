@@ -299,55 +299,55 @@ module _
   (g : B → X) (h : A → B) (x : X)
   where
 
-  map-compute-fib-comp :
+  map-compute-fib-compose :
     fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
-  pr1 (pr1 (map-compute-fib-comp (a , p))) = h a
-  pr2 (pr1 (map-compute-fib-comp (a , p))) = p
-  pr1 (pr2 (map-compute-fib-comp (a , p))) = a
-  pr2 (pr2 (map-compute-fib-comp (a , p))) = refl
+  pr1 (pr1 (map-compute-fib-compose (a , p))) = h a
+  pr2 (pr1 (map-compute-fib-compose (a , p))) = p
+  pr1 (pr2 (map-compute-fib-compose (a , p))) = a
+  pr2 (pr2 (map-compute-fib-compose (a , p))) = refl
 
-  inv-map-compute-fib-comp :
+  inv-map-compute-fib-compose :
     Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
-  pr1 (inv-map-compute-fib-comp t) = pr1 (pr2 t)
-  pr2 (inv-map-compute-fib-comp t) =
+  pr1 (inv-map-compute-fib-compose t) = pr1 (pr2 t)
+  pr2 (inv-map-compute-fib-compose t) =
     ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
-  issec-inv-map-compute-fib-comp :
-    (map-compute-fib-comp ∘ inv-map-compute-fib-comp) ~ id
-  issec-inv-map-compute-fib-comp
+  issec-inv-map-compute-fib-compose :
+    (map-compute-fib-compose ∘ inv-map-compute-fib-compose) ~ id
+  issec-inv-map-compute-fib-compose
     ((.(h a) , refl) , (a , refl)) = refl
 
-  isretr-inv-map-compute-fib-comp :
-    (inv-map-compute-fib-comp ∘ map-compute-fib-comp) ~ id
-  isretr-inv-map-compute-fib-comp (a , refl) = refl
+  isretr-inv-map-compute-fib-compose :
+    (inv-map-compute-fib-compose ∘ map-compute-fib-compose) ~ id
+  isretr-inv-map-compute-fib-compose (a , refl) = refl
 
   abstract
-    is-equiv-map-compute-fib-comp :
-      is-equiv map-compute-fib-comp
-    is-equiv-map-compute-fib-comp =
+    is-equiv-map-compute-fib-compose :
+      is-equiv map-compute-fib-compose
+    is-equiv-map-compute-fib-compose =
       is-equiv-has-inverse
-        ( inv-map-compute-fib-comp)
-        ( issec-inv-map-compute-fib-comp)
-        ( isretr-inv-map-compute-fib-comp)
+        ( inv-map-compute-fib-compose)
+        ( issec-inv-map-compute-fib-compose)
+        ( isretr-inv-map-compute-fib-compose)
 
-  equiv-compute-fib-comp :
+  equiv-compute-fib-compose :
     fib (g ∘ h) x ≃ Σ (fib g x) (λ t → fib h (pr1 t))
-  pr1 equiv-compute-fib-comp = map-compute-fib-comp
-  pr2 equiv-compute-fib-comp = is-equiv-map-compute-fib-comp
+  pr1 equiv-compute-fib-compose = map-compute-fib-compose
+  pr2 equiv-compute-fib-compose = is-equiv-map-compute-fib-compose
 
   abstract
-    is-equiv-inv-map-compute-fib-comp :
-      is-equiv inv-map-compute-fib-comp
-    is-equiv-inv-map-compute-fib-comp =
+    is-equiv-inv-map-compute-fib-compose :
+      is-equiv inv-map-compute-fib-compose
+    is-equiv-inv-map-compute-fib-compose =
         is-equiv-has-inverse
-          ( map-compute-fib-comp)
-          ( isretr-inv-map-compute-fib-comp)
-          ( issec-inv-map-compute-fib-comp)
+          ( map-compute-fib-compose)
+          ( isretr-inv-map-compute-fib-compose)
+          ( issec-inv-map-compute-fib-compose)
 
-  inv-equiv-compute-fib-comp :
+  inv-equiv-compute-fib-compose :
     Σ (fib g x) (λ t → fib h (pr1 t)) ≃ fib (g ∘ h) x
-  pr1 inv-equiv-compute-fib-comp = inv-map-compute-fib-comp
-  pr2 inv-equiv-compute-fib-comp = is-equiv-inv-map-compute-fib-comp
+  pr1 inv-equiv-compute-fib-compose = inv-map-compute-fib-compose
+  pr2 inv-equiv-compute-fib-compose = is-equiv-inv-map-compute-fib-compose
 ```
 
 ### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.

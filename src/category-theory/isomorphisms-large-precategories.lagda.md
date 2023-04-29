@@ -25,8 +25,8 @@ open import foundation.universe-levels
 An isomorphism between objects `x y : A` in a precategory `C` is a morphism
 `f : hom x y` for which there exists a morphism `g : hom y x` such that
 
-- `comp g f = id_x` and
-- `comp f g = id_y`.
+- `compose g f = id_x` and
+- `compose f g = id_y`.
 
 ## Definition
 
@@ -39,8 +39,8 @@ is-iso-Large-Precat :
 is-iso-Large-Precat C {X = X} {Y = Y} f =
   Σ ( type-hom-Large-Precat C Y X)
     ( λ g →
-      ( comp-hom-Large-Precat C f g ＝ id-hom-Large-Precat C) ×
-      ( comp-hom-Large-Precat C g f ＝ id-hom-Large-Precat C))
+      ( compose-hom-Large-Precat C f g ＝ id-hom-Large-Precat C) ×
+      ( compose-hom-Large-Precat C g f ＝ id-hom-Large-Precat C))
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
@@ -65,7 +65,7 @@ module _
 
   is-sec-hom-inv-iso-Large-Precat :
     (f : iso-Large-Precat) →
-    ( comp-hom-Large-Precat C
+    ( compose-hom-Large-Precat C
       ( hom-iso-Large-Precat f)
       ( hom-inv-iso-Large-Precat f)) ＝
     ( id-hom-Large-Precat C)
@@ -73,7 +73,7 @@ module _
 
   is-retr-hom-inv-iso-Large-Precat :
     (f : iso-Large-Precat) →
-    ( comp-hom-Large-Precat C
+    ( compose-hom-Large-Precat C
       ( hom-inv-iso-Large-Precat f)
       ( hom-iso-Large-Precat f)) ＝
     ( id-hom-Large-Precat C)
@@ -85,7 +85,7 @@ module _
 ### The identity morphisms are isomorphisms
 
 For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
-from `x` to `x` since `comp id_x id_x = id_x` (it is its own inverse).
+from `x` to `x` since `compose id_x id_x = id_x` (it is its own inverse).
 
 ```agda
 module _
@@ -97,9 +97,9 @@ module _
   pr1 id-iso-Large-Precat = id-hom-Large-Precat C
   pr1 (pr2 id-iso-Large-Precat) = id-hom-Large-Precat C
   pr1 (pr2 (pr2 id-iso-Large-Precat)) =
-    left-unit-law-comp-hom-Large-Precat C (id-hom-Large-Precat C)
+    left-unit-law-compose-hom-Large-Precat C (id-hom-Large-Precat C)
   pr2 (pr2 (pr2 id-iso-Large-Precat)) =
-    left-unit-law-comp-hom-Large-Precat C (id-hom-Large-Precat C)
+    left-unit-law-compose-hom-Large-Precat C (id-hom-Large-Precat C)
 ```
 
 ### Equalities give rise to isomorphisms
@@ -125,7 +125,7 @@ iso-eq-Large-Precat C X .X refl = id-iso-Large-Precat C
 Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 `f`. It is enough to show that `g = g'` since the equalities are propositions
 (since the hom-types are sets). But we have the following chain of equalities:
-`g = comp g id_y = comp g (comp f g') = comp (comp g f) g' = comp id_x g' = g'`.
+`g = compose g id_y = compose g (compose f g') = compose (compose g f) g' = compose id_x g' = g'`.
 
 ```agda
 module _
@@ -144,17 +144,17 @@ module _
         prod-Prop
           ( Id-Prop
             ( hom-Large-Precat C Y Y)
-            ( comp-hom-Large-Precat C f g)
+            ( compose-hom-Large-Precat C f g)
             ( id-hom-Large-Precat C))
           ( Id-Prop
             ( hom-Large-Precat C X X)
-            ( comp-hom-Large-Precat C g f)
+            ( compose-hom-Large-Precat C g f)
             ( id-hom-Large-Precat C)))
-      ( ( inv (right-unit-law-comp-hom-Large-Precat C g)) ∙
-        ( ( ap ( comp-hom-Large-Precat C g) (inv p')) ∙
-          ( ( inv (associative-comp-hom-Large-Precat C g f g')) ∙
-            ( ( ap ( comp-hom-Large-Precat' C g') q) ∙
-              ( left-unit-law-comp-hom-Large-Precat C g')))))
+      ( ( inv (right-unit-law-compose-hom-Large-Precat C g)) ∙
+        ( ( ap ( compose-hom-Large-Precat C g) (inv p')) ∙
+          ( ( inv (associative-compose-hom-Large-Precat C g f g')) ∙
+            ( ( ap ( compose-hom-Large-Precat' C g') q) ∙
+              ( left-unit-law-compose-hom-Large-Precat C g')))))
 
   is-prop-is-iso-Large-Precat :
     (f : type-hom-Large-Precat C X Y) → is-prop (is-iso-Large-Precat C f)
@@ -200,60 +200,62 @@ module _
   (Z : obj-Large-Precat C l3)
   where
 
-  is-iso-comp-iso-Large-Precat :
+  is-iso-compose-iso-Large-Precat :
     (g : type-hom-Large-Precat C Y Z) →
     (f : type-hom-Large-Precat C X Y) →
     is-iso-Large-Precat C g → is-iso-Large-Precat C f →
-    is-iso-Large-Precat C (comp-hom-Large-Precat C g f)
-  pr1 (is-iso-comp-iso-Large-Precat g f q p) =
-    comp-hom-Large-Precat C
+    is-iso-Large-Precat C (compose-hom-Large-Precat C g f)
+  pr1 (is-iso-compose-iso-Large-Precat g f q p) =
+    compose-hom-Large-Precat C
       ( hom-inv-iso-Large-Precat C X Y (pair f p))
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
-  pr1 (pr2 (is-iso-comp-iso-Large-Precat g f q p)) =
-    ( associative-comp-hom-Large-Precat C g f
-      ( pr1 (is-iso-comp-iso-Large-Precat g f q p))) ∙
+  pr1 (pr2 (is-iso-compose-iso-Large-Precat g f q p)) =
+    ( associative-compose-hom-Large-Precat C g f
+      ( pr1 (is-iso-compose-iso-Large-Precat g f q p))) ∙
       ( ( ap
-        ( comp-hom-Large-Precat C g)
+        ( compose-hom-Large-Precat C g)
         ( ( inv
-          ( associative-comp-hom-Large-Precat C f
+          ( associative-compose-hom-Large-Precat C f
             ( hom-inv-iso-Large-Precat C X Y (pair f p))
             ( hom-inv-iso-Large-Precat C Y Z (pair g q)))) ∙
           ( ( ap
             ( λ h →
-              comp-hom-Large-Precat C h
+              compose-hom-Large-Precat C h
                 (hom-inv-iso-Large-Precat C Y Z (pair g q)))
             ( is-sec-hom-inv-iso-Large-Precat C X Y (pair f p))) ∙
-            ( left-unit-law-comp-hom-Large-Precat C
+            ( left-unit-law-compose-hom-Large-Precat C
               ( hom-inv-iso-Large-Precat C Y Z (pair g q)))))) ∙
         ( is-sec-hom-inv-iso-Large-Precat C Y Z (pair g q)))
-  pr2 (pr2 (is-iso-comp-iso-Large-Precat g f q p)) =
-    ( associative-comp-hom-Large-Precat C
+  pr2 (pr2 (is-iso-compose-iso-Large-Precat g f q p)) =
+    ( associative-compose-hom-Large-Precat C
       ( hom-inv-iso-Large-Precat C X Y (pair f p))
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
-      ( comp-hom-Large-Precat C g f)) ∙
+      ( compose-hom-Large-Precat C g f)) ∙
       ( ( ap
-        ( comp-hom-Large-Precat C (hom-inv-iso-Large-Precat C X Y (pair f p)))
+        ( compose-hom-Large-Precat
+          ( C)
+          ( hom-inv-iso-Large-Precat C X Y (pair f p)))
         ( ( inv
-          ( associative-comp-hom-Large-Precat C
+          ( associative-compose-hom-Large-Precat C
             ( hom-inv-iso-Large-Precat C Y Z (pair g q))
             ( g)
             ( f))) ∙
           ( ( ap
-            ( λ h → comp-hom-Large-Precat C h f)
+            ( λ h → compose-hom-Large-Precat C h f)
             ( is-retr-hom-inv-iso-Large-Precat C Y Z (pair g q))) ∙
-            ( left-unit-law-comp-hom-Large-Precat C f)))) ∙
+            ( left-unit-law-compose-hom-Large-Precat C f)))) ∙
         ( is-retr-hom-inv-iso-Large-Precat C X Y (pair f p)))
 
-  comp-iso-Large-Precat :
+  compose-iso-Large-Precat :
     iso-Large-Precat C Y Z →
     iso-Large-Precat C X Y →
     iso-Large-Precat C X Z
-  pr1 (comp-iso-Large-Precat g f) =
-    comp-hom-Large-Precat C
+  pr1 (compose-iso-Large-Precat g f) =
+    compose-hom-Large-Precat C
       ( hom-iso-Large-Precat C Y Z g)
       ( hom-iso-Large-Precat C X Y f)
-  pr2 (comp-iso-Large-Precat f g) =
-    is-iso-comp-iso-Large-Precat
+  pr2 (compose-iso-Large-Precat f g) =
+    is-iso-compose-iso-Large-Precat
       ( hom-iso-Large-Precat C Y Z f)
       ( hom-iso-Large-Precat C X Y g)
       ( is-iso-hom-iso-Large-Precat C Y Z f)

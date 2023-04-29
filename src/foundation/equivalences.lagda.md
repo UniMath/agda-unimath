@@ -334,21 +334,21 @@ module _
     P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
   ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
 
-  comp-htpy-equiv :
+  compute-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
     ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+  compute-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
 ### The groupoid laws for equivalences
 
 ```agda
-associative-comp-equiv :
+associative-compose-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
   ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
-associative-comp-equiv e f g = eq-equiv-eq-map-equiv refl
+associative-compose-equiv e f g = eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
@@ -395,10 +395,10 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
   where
 
-  distributive-inv-comp-equiv :
+  distributive-inv-compose-equiv :
     (e : X ≃ Y) (f : Y ≃ Z) →
     (inv-equiv (f ∘e e)) ＝ ((inv-equiv e) ∘e (inv-equiv f))
-  distributive-inv-comp-equiv e f =
+  distributive-inv-compose-equiv e f =
     eq-htpy-equiv
       ( λ x →
         map-eq-transpose-equiv'
@@ -421,10 +421,10 @@ compose-equiv-compose-inv-equiv :
 compose-equiv-compose-inv-equiv f e =
   eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
 
-is-equiv-comp-equiv :
+is-equiv-compose-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (A : UU l1) → is-equiv (λ (e : A ≃ B) → f ∘e e)
-is-equiv-comp-equiv f A =
+is-equiv-compose-equiv f A =
   is-equiv-has-inverse
     ( λ e → inv-equiv f ∘e e)
     ( compose-equiv-compose-inv-equiv f)
@@ -434,7 +434,7 @@ equiv-postcomp-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3} →
   (f : B ≃ C) → (A : UU l1) → (A ≃ B) ≃ (A ≃ C)
 pr1 (equiv-postcomp-equiv f A) e = f ∘e e
-pr2 (equiv-postcomp-equiv f A) = is-equiv-comp-equiv f A
+pr2 (equiv-postcomp-equiv f A) = is-equiv-compose-equiv f A
 ```
 
 ```agda
@@ -448,7 +448,7 @@ equiv-precomp-equiv e C =
     ( is-equiv-Prop)
     ( λ g →
       pair
-        ( is-equiv-comp g (map-equiv e) (is-equiv-map-equiv e))
+        ( is-equiv-compose g (map-equiv e) (is-equiv-map-equiv e))
         ( λ is-equiv-eg →
           is-equiv-left-factor
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))

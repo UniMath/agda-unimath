@@ -110,7 +110,7 @@ module _
 
   is-equiv-pr2-prod-is-contr : is-equiv (pr2 {B = λ a → B})
   is-equiv-pr2-prod-is-contr =
-    is-equiv-comp
+    is-equiv-compose
       ( pr1)
       ( map-commutative-prod)
       ( is-equiv-map-commutative-prod)
