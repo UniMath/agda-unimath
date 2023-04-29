@@ -11,9 +11,16 @@ import max_line_length
 
 
 def check_wrap_line_type_signature(line):
+    """
+    Check if line is of the form
+    ```agda
+    my-very-long-verbose-term : Type-Stuff
+    ```
+    and if so add a line wrap after the colon.
+    """
     m = re.match(r'^((\s*)[^\s.;{}()@"]+\s+:)\s(.*)$', line)
     if m:
-        # Check that the next line is not indented more than this one, just to be sure
+        # Check that the next line is not indented more than this one
         # if i+1 >= len(lines) or not re.match(rf'^{m.group(2)}\s', lines[i+1]):
         line = f'{m.group(1)}\n{m.group(2)}  {m.group(3)}'
     return line
@@ -29,26 +36,44 @@ def get_top_level_equality(line, open_delimiters='({', close_delimiters=')}'):
         elif char in close_delimiters:
             if not stack or stack.pop() != mapping[char]:
                 return None
-        elif char == '=' and not stack and i > 0 and i+1 < len(line) and line[i-1] in ' })' and line[i+1] in ' {(':
+        elif char == '=' and not stack and\
+                (i == 0 or line[i-1] in ' })') and\
+                (i+1 >= len(line) or line[i+1] in ' {('):
             return i
 
 
 def check_wrap_line_definition(line):
+    """
+    Check if line is of the form
+    ```agda
+    pr1 (my-term-definition {A = A} x y z) a b = some-more-stuff
+    ```
+    and if so add a line wrap after the equals sign.
+    """
     tle = get_top_level_equality(line)
     if tle:
         m = re.match(r'^((\s*)\S.*)$', line[:tle+1])
         if m:
-            # # Check that the next line is not indented more than this one, just to be sure
+            # # Check that the next line is not indented more than this one
             # if i+1 >= len(lines) or not re.match(rf'^{m.group(2)}\s', lines[i+1]):
             line = f'{m.group(1)}\n{m.group(2)}  {line[tle+1:].lstrip()}'
     return line
 
 
 def check_wrap_line_definition_parameters(line):
-    m = re.match(r'^((\s*)[^\s.;{}()@"]+)\s+([^.;{}()@"]+\s+=)$', line)
-    if m:
-        line = f'{m.group(1)}\n{m.group(2)}  {m.group(3)}'
-    return line
+    """
+    Check if line is of the form
+    ```agda
+    my-term-definition {A = A} x y z =
+    ```
+    and if so add a line wrap after the first token.
+    """
+    tle = get_top_level_equality(line)
+    if tle and tle == len(line) - 1:
+        m = re.match(r'^((\s*)[^\s.;{}()@"]+)\s+([^.;()@"]+\s+=)$', line)
+        if m:
+            line = f'{m.group(1)}\n{m.group(2)}  {m.group(3)}'
+        return line
 
 
 if __name__ == '__main__':

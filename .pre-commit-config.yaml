@@ -46,7 +46,6 @@ repos:
         entry: scripts/easily_fixable_long_lines.py
         language: python
         always_run: true
-        verbose: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
@@ -57,7 +56,6 @@ repos:
         files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
         types_or: [markdown, text]
         require_serial: true
-        verbose: true
 
       - id: generate-namespace-index-modules
         name: Generate Agda namespace index modules
