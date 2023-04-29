@@ -28,7 +28,8 @@ underlying posets that also preserves meets.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
   where
 
   preserves-meets :
@@ -41,8 +42,13 @@ module _
 
   hom-Meet-Semilattice : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Meet-Semilattice =
-    Σ (element-Meet-Semilattice A → element-Meet-Semilattice B)
-    λ f → preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) f × preserves-meets f
+    Σ ( element-Meet-Semilattice A → element-Meet-Semilattice B)
+      ( λ f →
+        preserves-order-Poset
+          ( poset-Meet-Semilattice A)
+          ( poset-Meet-Semilattice B)
+          ( f) ×
+        preserves-meets f)
 
   map-hom-Meet-Semilattice :
     hom-Meet-Semilattice →
@@ -51,7 +57,10 @@ module _
 
   preserves-order-hom-Meet-Semilattice :
     (H : hom-Meet-Semilattice) →
-    preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) (map-hom-Meet-Semilattice H)
+    preserves-order-Poset
+      ( poset-Meet-Semilattice A)
+      ( poset-Meet-Semilattice B)
+      ( map-hom-Meet-Semilattice H)
   preserves-order-hom-Meet-Semilattice = pr1 ∘ pr2
 
   preserves-meet-hom-Meet-Semilattice :

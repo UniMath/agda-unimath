@@ -73,7 +73,8 @@ module _
     is-involution i × is-involution h
 
   map-Σ-is-fibered-involution-fibered-map-fibered-involution :
-    (fibered-involution f g) → Σ (fibered-map f g) (is-fibered-involution-fibered-map)
+    (fibered-involution f g) →
+    Σ (fibered-map f g) (is-fibered-involution-fibered-map)
   pr1 (pr1 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
     ((i , is-involution-i) , (h , is-involution-h) , H))) = i
   pr1 (pr2 (pr1 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
@@ -86,7 +87,8 @@ module _
     ((i , is-involution-i) , (h , is-involution-h) , H))) = is-involution-h
 
   map-fibered-involution-Σ-is-fibered-involution-fibered-map :
-    (Σ (fibered-map f g) (is-fibered-involution-fibered-map)) → (fibered-involution f g)
+    Σ (fibered-map f g) (is-fibered-involution-fibered-map) →
+    fibered-involution f g
   pr1 (pr1 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
     ((i , h , H) , is-involution-i , is-involution-h))) = i
   pr2 (pr1 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
@@ -107,7 +109,8 @@ module _
       ( refl-htpy)
 
   equiv-Σ-is-fibered-involution-fibered-map-fibered-involution :
-    (fibered-involution f g) ≃ Σ (fibered-map f g) (is-fibered-involution-fibered-map)
+    ( fibered-involution f g) ≃
+    ( Σ (fibered-map f g) (is-fibered-involution-fibered-map))
   pr1 equiv-Σ-is-fibered-involution-fibered-map-fibered-involution =
     map-Σ-is-fibered-involution-fibered-map-fibered-involution
   pr2 equiv-Σ-is-fibered-involution-fibered-map-fibered-involution =
@@ -122,7 +125,8 @@ module _
       ( refl-htpy)
 
   equiv-fibered-involution-Σ-is-fibered-involution-fibered-map :
-    Σ (fibered-map f g) (is-fibered-involution-fibered-map) ≃ (fibered-involution f g)
+    ( Σ (fibered-map f g) (is-fibered-involution-fibered-map)) ≃
+    ( fibered-involution f g)
   pr1 equiv-fibered-involution-Σ-is-fibered-involution-fibered-map =
     map-fibered-involution-Σ-is-fibered-involution-fibered-map
   pr2 equiv-fibered-involution-Σ-is-fibered-involution-fibered-map =

@@ -199,13 +199,26 @@ module _
   where
 
   ind-htpy-suspension-structure :
-    {l : Level} (P : (c' : suspension-structure X Z) → (htpy-suspension-structure c c') → UU l) →
-    (P c refl-htpy-suspension-structure) → ((c' : suspension-structure X Z) (H : htpy-suspension-structure c c') → P c' H)
+    { l : Level}
+    ( P :
+      ( c' : suspension-structure X Z) →
+      ( htpy-suspension-structure c c') →
+      UU l) →
+    ( P c refl-htpy-suspension-structure) →
+    ( ( c' : suspension-structure X Z)
+      ( H : htpy-suspension-structure c c') →
+      P c' H)
   ind-htpy-suspension-structure P =
-    pr1 (Ind-identity-system c refl-htpy-suspension-structure
-      (is-contr-equiv (Σ (suspension-structure X Z) (λ c' → c ＝ c'))
-        (inv-equiv (equiv-tot (λ c' → extensionality-suspension-structure c c')))
-        (is-contr-total-path c)) P)
+    pr1
+      ( Ind-identity-system
+        ( c)
+        ( refl-htpy-suspension-structure)
+        ( is-contr-equiv
+          ( Σ (suspension-structure X Z) (λ c' → c ＝ c'))
+          ( inv-equiv
+            ( equiv-tot (extensionality-suspension-structure c)))
+          ( is-contr-total-path c))
+        ( P))
 ```
 
 #### The action of paths of the projections have the expected effect
@@ -220,16 +233,21 @@ module _
     (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H)
   ap-pr1-eq-htpy-suspension-structure =
     ind-htpy-suspension-structure
-      (λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
-      ((ap (λ t → ap pr1 t) (isretr-map-inv-equiv (extensionality-suspension-structure c c) refl)))
+      ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
+      ( (ap
+        ( ap pr1)
+        ( isretr-map-inv-equiv (extensionality-suspension-structure c c) refl)))
 
   ap-pr1∘pr2-eq-htpy-suspension-structure :
     (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
     (ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H)) ＝ ((pr1 ∘ pr2) H)
   ap-pr1∘pr2-eq-htpy-suspension-structure =
     ind-htpy-suspension-structure
-      (λ c' H → ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
-      (ap (λ t → ap (pr1 ∘ pr2) t) (isretr-map-inv-equiv (extensionality-suspension-structure c c) refl))
+      ( λ c' H →
+        ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
+      ( ap
+        ( ap (pr1 ∘ pr2))
+        ( isretr-map-inv-equiv (extensionality-suspension-structure c c) refl))
 ```
 
 ### The universal property of the suspension as a pushout

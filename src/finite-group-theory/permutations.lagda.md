@@ -69,7 +69,7 @@ list-transpositions-permutation-Fin' :
       ( Fin (succ-ℕ n) → Decidable-Prop lzero)
       ( λ P →
         has-cardinality 2
-          ( Σ (Fin (succ-ℕ n)) (λ x → type-Decidable-Prop (P x))))))
+          ( Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P)))))
 list-transpositions-permutation-Fin' zero-ℕ f x p = nil
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   cons
@@ -353,7 +353,7 @@ module _
       ( Σ
         ( X → Decidable-Prop l2)
         ( λ P →
-          has-cardinality 2 (Σ X (λ x → type-Decidable-Prop (P x)))))
+          has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))
   list-transpositions-permutation-count =
     map-list
       ( transposition-conjugation-equiv (Fin (number-of-elements-count eX)) X (equiv-count eX))
@@ -439,7 +439,7 @@ module _
           (Σ
             ( list
               ( Σ ((type-UU-Fin n X) → Decidable-Prop l)
-                ( λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x))))))
+                ( λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P)))))
             ( λ li → Id k (mod-two-ℕ (length-list li)) × Id f (permutation-list-transpositions li))))
 
     abstract
@@ -489,7 +489,7 @@ module _
           (h : Fin n ≃ (type-UU-Fin n X)) →
           list
             (Σ (type-UU-Fin n X → Decidable-Prop l)
-            (λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x)))))
+            (λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))))
         list-transposition-f h =
           list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f
         is-injective-iterate-involution :

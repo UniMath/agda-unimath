@@ -891,7 +891,9 @@ module dependent where
     {WA : weakening A} {WB : weakening B} {WC : weakening C} →
     preserves-weakening WB WC g → preserves-weakening WA WB f →
     preserves-weakening WA WC (comp-hom-system g f)
-  preserves-weakening.type (preserves-weakening-comp-hom-system {g = g} {f} {WA} {WB} {WC} Wg Wf) X =
+  preserves-weakening.type
+    ( preserves-weakening-comp-hom-system {g = g} {f} {WA} {WB} {WC} Wg Wf)
+    ( X) =
     concat-htpy-hom-system
       ( assoc-comp-hom-system
         ( section-system.slice g (section-system.type f X))
@@ -929,7 +931,8 @@ module dependent where
     preserves-substitution SB SC g → preserves-substitution SA SB f →
     preserves-substitution SA SC (comp-hom-system g f)
   preserves-substitution.type
-    ( preserves-substitution-comp-hom-system {g = g} {f} {SA} {SB} {SC} Sg Sf) {X} x =
+    ( preserves-substitution-comp-hom-system
+      {g = g} {f} {SA} {SB} {SC} Sg Sf) {X} x =
     concat-htpy-hom-system
       ( assoc-comp-hom-system g f (substitution.type SA x))
       ( concat-htpy-hom-system
@@ -1168,13 +1171,19 @@ module dependent where
     hom-system (system-Slice X) (system-Slice (Σ X Y))
   section-system.type (hom-system-weakening-system-Slice X Y) Z (pair x y) =
     Z x
-  section-system.element (hom-system-weakening-system-Slice X Y) Z g (pair x y) =
+  section-system.element
+    (hom-system-weakening-system-Slice X Y) Z g (pair x y) =
     g x
-  section-system.type (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W (pair (pair x y) z) =
+  section-system.type
+    (section-system.slice (hom-system-weakening-system-Slice X Y) Z)
+    W (pair (pair x y) z) =
     W (pair x z)
-  section-system.element (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W h (pair (pair x y) z) =
+  section-system.element
+    (section-system.slice (hom-system-weakening-system-Slice X Y) Z)
+    W h (pair (pair x y) z) =
     h (pair x z)
-  section-system.slice (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W =
+  section-system.slice
+    (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W =
     {!section-system.slice (hom-system-weakening-system-Slice X Y) ?!}
 
   weakening-system-Slice :
@@ -1198,12 +1207,14 @@ module dependent where
   weakening-UU : (l : Level) → weakening (system-UU l)
   section-system.type (weakening.type (weakening-UU l) X) Y x = Y
   section-system.element (weakening.type (weakening-UU l) X) Y y x = y
-  section-system.type (section-system.slice (weakening.type (weakening-UU l) X) Y) Z t =
+  section-system.type
+    (section-system.slice (weakening.type (weakening-UU l) X) Y) Z t =
     Z (pr2 t)
   section-system.element
     ( section-system.slice (weakening.type (weakening-UU l) X) Y) Z f t =
     f (pr2 t)
-  section-system.slice (section-system.slice (weakening.type (weakening-UU l) X) Y) Z =
+  section-system.slice
+    (section-system.slice (weakening.type (weakening-UU l) X) Y) Z =
     {!!}
   section-system.type
     ( weakening.type (weakening.slice (weakening-UU l) X) Y) Z (pair x y) =
@@ -1211,7 +1222,8 @@ module dependent where
   section-system.element
     ( weakening.type (weakening.slice (weakening-UU l) X) Y) Z f (pair x y) =
     f x
-  section-system.slice (weakening.type (weakening.slice (weakening-UU l) X) Y) Z =
+  section-system.slice
+    (weakening.type (weakening.slice (weakening-UU l) X) Y) Z =
     {!!}
   weakening.slice (weakening.slice (weakening-UU l) X) Y =
     weakening.slice (weakening-UU l) (Σ X Y)
@@ -1280,7 +1292,9 @@ module dependent where
       ( natural-numbers.zero N)
   natural-numbers.succ (natural-numbers-slice A Π N X) =
     tr ( system.element (type-theory.sys (slice-dtt A X)))
-       {! (section-system.type (preserves-weakening.type (hom-dtt.W (function-types.sys Π (natural-numbers.N N))) ?) ?)!}
+       {! (section-system.type
+          (preserves-weakening.type
+          (hom-dtt.W (function-types.sys Π (natural-numbers.N N))) ?) ?)!}
     {-
     Id ( section-system.type
          ( weakening.type (type-theory.W A) X)
@@ -1338,7 +1352,8 @@ module dependent where
     (K : htpy-hom-system g h) → htpy-hom-system f h
   htpy-hom-system'.type (concat-htpy-hom-system H K) =
     section-system.type H ∙h section-system.type K
-  htpy-hom-system'.element (concat-htpy-hom-system {A = A} {B = B} {f} H K) X x =
+  htpy-hom-system'.element
+    ( concat-htpy-hom-system {A = A} {B = B} {f} H K) X x =
     ( ( tr-concat
         ( section-system.type H X)
         ( section-system.type K X)
@@ -1378,11 +1393,17 @@ module c-system where
 {-
   -- We define elements of contexts
   data element-context
-    {l1 l2 : Level} {A : type-theory l1 l2} : (Γ : context A) → UU {!substitution.type (type-theory.S A) !}
+    {l1 l2 : Level} {A : type-theory l1 l2} :
+    (Γ : context A) → UU {!substitution.type (type-theory.S A) !}
     where
     element-empty-context : element-context empty-ctx
     element-extension-ctx :
-      {!(X : system.type (type-theory.sys A)) (Γ : context (slice-dtt A X)) (x : system.element (type-theory.sys A) X) (y : element-context (context-hom (substitution.type (type-theory.S A) x) Γ)) → element-context (extension-ctx X Γ)!}
+      {!(X : system.type (type-theory.sys A))
+        (Γ : context (slice-dtt A X))
+        (x : system.element (type-theory.sys A) X)
+        (y : element-context
+              (context-hom (substitution.type (type-theory.S A) x) Γ)) →
+        element-context (extension-ctx X Γ)!}
 -}
   -- We interpret types in context in a dependent type theory
   type :

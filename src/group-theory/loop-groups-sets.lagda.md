@@ -147,7 +147,9 @@ module _
       ( eq-htpy
         ( λ f →
           ( ap equiv-eq (inv-inv (eq-equiv (type-Set X) (type-Set X) f))) ∙
-            ( ap (λ e → map-equiv e f) (right-inverse-law-equiv equiv-univalence))))
+            ( ap
+              ( λ e → map-equiv e f)
+              ( right-inverse-law-equiv equiv-univalence))))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (symmetric-Group X))
@@ -167,7 +169,11 @@ module _
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
-          ( ap inv (ap (λ e → map-equiv e (inv p)) (left-inverse-law-equiv equiv-univalence))) ∙
+          ( ap
+            ( inv)
+            ( ap
+              ( λ e → map-equiv e (inv p))
+              ( left-inverse-law-equiv equiv-univalence))) ∙
             ( inv-inv p)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup

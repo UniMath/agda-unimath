@@ -72,7 +72,7 @@ module _
   orientation-Complete-Undirected-Graph : UU (lsuc l)
   orientation-Complete-Undirected-Graph =
     ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
-    Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x))
+    Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P)
 
   is-set-orientation-Complete-Undirected-Graph :
     is-set orientation-Complete-Undirected-Graph

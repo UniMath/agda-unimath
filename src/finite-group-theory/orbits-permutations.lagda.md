@@ -206,7 +206,7 @@ module _
               ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
         ( λ n →
           is-decidable-bounded-Σ-ℕ n ( λ m → le-ℕ m n)
-            ( λ m → (Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a)))
+            ( λ m → Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))
             ( λ m → is-decidable-le-ℕ m n)
             ( λ m →
               has-decidable-equality-count eX
@@ -1172,7 +1172,11 @@ module _
                 ( p)
                 ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inr r))))
           ( λ k' ineq' _ →
-            transitive-le-ℕ k' (succ-ℕ k') (pr1 (minimal-element-iterate-2-a-b g pa)) (succ-le-ℕ k') ineq')
+            transitive-le-ℕ k'
+              ( succ-ℕ k')
+              ( pr1 (minimal-element-iterate-2-a-b g pa))
+              ( succ-le-ℕ k')
+              ( ineq'))
           k (inr ineq)
       lemma2 :
         ( g : X ≃ X)
@@ -1457,7 +1461,8 @@ module _
       inv-h' :
         ( T :
           equivalence-class
-            ( same-orbits-permutation-count (composition-transposition-a-b g))) →
+            ( same-orbits-permutation-count
+              ( composition-transposition-a-b g))) →
         Fin (succ-ℕ (number-of-elements-count h))
       inv-h' T =
         cases-inv-h' T
@@ -2148,7 +2153,8 @@ module _
       unit-trunc-Prop (pair (pr1 minimal-element-iterate-repeating) lemma)
       where
       minimal-element-iterate-repeating :
-        minimal-element-ℕ (λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) a) a)
+        minimal-element-ℕ
+          ( λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) a) a)
       minimal-element-iterate-repeating =
         minimal-element-iterate-nonzero
           ( g)
@@ -2344,7 +2350,7 @@ module _
         list
           ( Σ ( X → Decidable-Prop l)
               ( λ P →
-                has-cardinality 2 (Σ X (λ x → type-Decidable-Prop (P x)))))) →
+                has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))) →
       Id
         ( iterate
           ( length-list li)

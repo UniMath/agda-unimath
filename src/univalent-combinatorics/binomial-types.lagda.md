@@ -137,14 +137,14 @@ binomial-type-Level' :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 binomial-type-Level' l A B =
   Σ ( A → Decidable-Prop l)
-    ( λ P → mere-equiv B (Σ A (λ x → type-Decidable-Prop (P x))))
+    ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
 
 compute-binomial-type-Level :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type-Level (l1 ⊔ l) A B ≃ binomial-type-Level' (l1 ⊔ l) A B
 compute-binomial-type-Level l {l1} {l2} A B =
   ( ( ( equiv-Σ
-        ( λ P → mere-equiv B (Σ A (λ x → type-Decidable-Prop (P x))))
+        ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
         ( equiv-Fib-Decidable-Prop l A)
         ( λ e →
           equiv-trunc-Prop

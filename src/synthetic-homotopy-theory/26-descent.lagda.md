@@ -46,23 +46,27 @@ dep-cocone :
   ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
 dep-cocone {S = S} {A} {B} f g c P =
-  Σ ((a : A) → P ((pr1 c) a)) (λ hA →
-    Σ ((b : B) → P (pr1 (pr2 c) b)) (λ hB →
-      (s : S) → Id (tr P (pr2 (pr2 c) s) (hA (f s))) (hB (g s))))
+  Σ ( (a : A) → P ((pr1 c) a))
+    ( λ hA →
+      Σ ( (b : B) → P (pr1 (pr2 c) b))
+        ( λ hB → (s : S) → Id (tr P (pr2 (pr2 c) s) (hA (f s))) (hB (g s))))
 
 dep-cocone-map :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5) →
   ( (x : X) → P x) → dep-cocone f g c P
 dep-cocone-map f g c P h =
-  pair (λ a → h (pr1 c a)) (pair (λ b → h (pr1 (pr2 c) b)) (λ s → apd h (pr2 (pr2 c) s)))
+  ( λ a → h (pr1 c a)) ,
+  ( λ b → h (pr1 (pr2 c) b)) ,
+  ( λ s → apd h (pr2 (pr2 c) s))
 
 {- Definition 18.1.1 The induction principle of pushouts -}
 
 Ind-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) →
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) → UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  ( f : S → A) (g : S → B) (c : cocone f g X) →
+  UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
 Ind-pushout l {X = X} f g c =
   (P : X → UU l) → sec (dep-cocone-map f g c P)
 
@@ -764,12 +768,15 @@ coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
     ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P refl-htpy))
     ( refl-htpy)
     ( λ h →
-      ap (ap map-inv-distributive-Π-Σ) (compute-htpy-precompose-total-lifts P f h))) ∙h
+      ap
+        ( ap map-inv-distributive-Π-Σ)
+        ( compute-htpy-precompose-total-lifts P f h))) ∙h
   ( ap-concat-htpy'
     ( refl-htpy)
     ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
     ( refl-htpy)
-    ( inv-htpy (λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
+    ( inv-htpy
+      ( λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
 
 abstract
   coherence-inv-htpy-distributive-Π-Σ :
@@ -1106,7 +1113,8 @@ issec-fam-Fam-pushout :
   (up-X : (l' : Level) → universal-property-pushout l' f g c) →
   ((desc-fam {l = l} c) ∘ (fam-Fam-pushout c up-X)) ~ id
 issec-fam-Fam-pushout {f = f} {g} c up-X P =
-  inv (eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
+  inv
+    ( eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
 
 comp-left-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -1202,7 +1210,8 @@ coherence-cube-flattening-lemma :
          ( coherence-bottom-flattening-lemma H K (ev-pair h) a)))
      ( ap ev-pair
        ( htpy-precomp (htpy-map-Σ Q H g K) T h))
-coherence-cube-flattening-lemma {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} K =
+coherence-cube-flattening-lemma
+  {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} K =
   ind-htpy f
     ( λ f' H' →
       (g : (a : A) → P a → Q (f a)) (g' : (a : A) → P a → Q (f' a))
@@ -1215,9 +1224,12 @@ coherence-cube-flattening-lemma {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} 
     ( λ g g' K h → {!ind-htpy g (λ g' K' → (h : Σ B Q → T) →
       Id ( eq-htpy
            ( λ a → eq-htpy
-             ( coherence-bottom-flattening-lemma refl-htpy (λ a → htpy-eq (K' a)) (ev-pair h) a)))
+             ( coherence-bottom-flattening-lemma
+                refl-htpy (λ a → htpy-eq (K' a)) (ev-pair h) a)))
          ( ap ev-pair
-           ( htpy-precomp (htpy-map-Σ Q refl-htpy g (λ a → htpy-eq (K' a))) T h))) ? (λ a → eq-htpy (K a)) h!})
+           ( htpy-precomp
+              ( htpy-map-Σ Q refl-htpy g
+                (λ a → htpy-eq (K' a))) T h))) ? (λ a → eq-htpy (K a)) h!})
     H g g' K
 
 flattening-pushout' :

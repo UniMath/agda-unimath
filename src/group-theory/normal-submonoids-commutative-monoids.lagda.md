@@ -270,7 +270,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
+  {l1 l2 : Level}
+  (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
   where
 
   rel-congruence-Normal-Commutative-Submonoid :
@@ -421,7 +422,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
+  {l1 l2 : Level}
+  (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
   where
 
   has-same-elements-normal-submonoid-congruence-Normal-Commutative-Submonoid :
@@ -468,18 +470,23 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
+  {l1 l2 : Level}
+  (M : Commutative-Monoid l1) (N : Normal-Commutative-Submonoid l2 M)
   where
 
   is-saturated-congruence-Normal-Commutative-Submonoid :
     is-saturated-congruence-Commutative-Monoid M
       ( congruence-Normal-Commutative-Submonoid M N)
   is-saturated-congruence-Normal-Commutative-Submonoid x y H u =
-    ( ( has-same-elements-normal-submonoid-congruence-Normal-Commutative-Submonoid M N
+    ( ( has-same-elements-normal-submonoid-congruence-Normal-Commutative-Submonoid
+        ( M)
+        ( N)
         ( mul-Commutative-Monoid M u y)) ∘iff
       ( H u)) ∘iff
     ( inv-iff
-      ( has-same-elements-normal-submonoid-congruence-Normal-Commutative-Submonoid M N
+      ( has-same-elements-normal-submonoid-congruence-Normal-Commutative-Submonoid
+        ( M)
+        ( N)
         ( mul-Commutative-Monoid M u x)))
 
   saturated-congruence-Normal-Commutative-Submonoid :
@@ -494,7 +501,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Commutative-Monoid l1) (R : saturated-congruence-Commutative-Monoid l2 M)
+  {l1 l2 : Level}
+  (M : Commutative-Monoid l1) (R : saturated-congruence-Commutative-Monoid l2 M)
   where
 
   normal-submonoid-saturated-congruence-Commutative-Monoid :
@@ -508,11 +516,17 @@ module _
       ( saturated-congruence-Normal-Commutative-Submonoid M
         ( normal-submonoid-saturated-congruence-Commutative-Monoid))
       ( R)
-  pr1 (relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid x y) H =
+  pr1
+    ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid
+      ( x)
+      ( y))
+    ( H) =
     is-saturated-saturated-congruence-Commutative-Monoid M R x y H
   pr1
     ( pr2
-      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid x y)
+      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid
+        ( x)
+        ( y))
       ( H)
       ( u)) =
     trans-saturated-congruence-Commutative-Monoid M R
@@ -521,7 +535,9 @@ module _
         ( symm-saturated-congruence-Commutative-Monoid M R H))
   pr2
     ( pr2
-      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid x y)
+      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid
+        ( x)
+        ( y))
       ( H)
       ( u)) =
     trans-saturated-congruence-Commutative-Monoid M R

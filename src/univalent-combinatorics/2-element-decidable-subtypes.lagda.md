@@ -310,12 +310,12 @@ module _
       (λ P →
         pair
           ( has-cardinality 2
-            ( Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x))))
+            ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P)))
           ( pair
             ( is-prop-type-trunc-Prop)
             ( is-decidable-equiv
               ( equiv-has-cardinality-id-number-of-elements-is-finite
-                ( Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x)))
+                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))
                 ( is-finite-type-decidable-subtype P
                   ( is-finite-type-UU-Fin n X))
                 ( 2))
