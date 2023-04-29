@@ -11,7 +11,16 @@ import max_line_length
 
 
 def check_wrap_line_type_signature(line, i, lines):
-    m = re.match(r'^((\s*)[^\s.;{}()@"]+\s+:)\s(.*)', line)
+    m = re.match(r'^((\s*)[^\s.;{}()@"]+\s+:)\s(.*)$', line)
+    if m:
+        # Check that the next line is not indented more than this one, just to be sure
+        if i+1 >= len(lines) or not re.match(rf'^{m.group(2)}\s', lines[i+1]):
+            line = f'{m.group(1)}\n{m.group(2)}  {m.group(3)}'
+    return line
+
+
+def check_wrap_line_definition(line, i, lines):
+    m = re.match(r'^((\s*)(?![{}()])[^\s.;@"]+\s+=)\s(.*)$', line)
     if m:
         # Check that the next line is not indented more than this one, just to be sure
         if i+1 >= len(lines) or not re.match(rf'^{m.group(2)}\s', lines[i+1]):
@@ -43,6 +52,7 @@ if __name__ == '__main__':
                 if len(line) > MAX_LINE_LENGTH and\
                         not max_line_length.can_forgive_line(line):
                     line = check_wrap_line_type_signature(line, i, lines)
+                    line = check_wrap_line_definition(line, i, lines)
             lines[i] = line
 
         new_contents = '\n'.join(lines)
