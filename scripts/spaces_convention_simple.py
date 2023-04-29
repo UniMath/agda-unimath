@@ -9,7 +9,7 @@ import re
 
 
 def no_repeat_whitespace_inside_line(line):
-    return utils.recursive_sub(r'(\S)\s{2,}', r'\1 ', line)
+    return re.sub(r'(\S)\s{2,}', r'\1 ', line)
 
 
 def space_before_semicolon(line):
@@ -32,6 +32,8 @@ if __name__ == '__main__':
 
     agda_block_start = re.compile(r'^```agda\b')
     agda_block_end = re.compile(r'^```$')
+    block_comment_start = re.compile(r'\{-(?!#)')
+    block_comment_end = re.compile(r'(?<!#)-\}')
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
 
@@ -39,6 +41,7 @@ if __name__ == '__main__':
             contents = f.read()
 
         is_in_agda_block = False
+        block_comment_level = 0
 
         lines = contents.split('\n')
         for i, line in enumerate(lines):
@@ -47,12 +50,24 @@ if __name__ == '__main__':
             elif agda_block_end.match(line):
                 is_in_agda_block = False
             elif is_in_agda_block:
-                # line = no_repeat_whitespace_inside_line(line) # TODO: determine if we want this
-                line = space_before_semicolon(line)
-                line = space_after_semicolon(line)
-                line = no_whitespace_before_closing_parenthesis(line)
-                line = no_whitespace_before_closing_curly_brace(line)
-                # line = space_after_opening_parenthesis_on_new_line(line)
+
+                line, comment = utils.split_agda_line_comment(line)
+
+                block_comment_level += len(
+                    block_comment_start.findall(line))
+
+                if block_comment_level == 0:
+                    line = no_repeat_whitespace_inside_line(
+                        line)
+                    line = space_before_semicolon(line)
+                    line = space_after_semicolon(line)
+                    line = no_whitespace_before_closing_parenthesis(line)
+                    line = no_whitespace_before_closing_curly_brace(line)
+                    # line = space_after_opening_parenthesis_on_new_line(line)
+
+                block_comment_level -= len(
+                    block_comment_end.findall(line))
+                line += comment
             lines[i] = line
 
         new_contents = '\n'.join(lines)
