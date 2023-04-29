@@ -113,7 +113,7 @@ module _
           h
         by
           inv
-            ( assoc-compose-hom-Preca
+            ( assoc-compose-hom-Precat
               C (in-Precat-Expr f) (in-Precat-Expr g) h)
 
   normalize-Precat-Expr :
