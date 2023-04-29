@@ -1155,13 +1155,15 @@ remainder-min-dist-succ-x-is-distance x y =
             by (left-unit-law-add-ℕ r)
 
       le-x-d : le-ℕ (succ-ℕ x) d
-      le-x-d = tr (λ n → le-ℕ n d) (inv (x-r-equality)) (remainder-min-dist-succ-x-le-min-dist x y)
+      le-x-d =
+        tr (λ n → le-ℕ n d) (inv (x-r-equality)) (remainder-min-dist-succ-x-le-min-dist x y)
 
       x-pos-dist : pos-distance-between-multiples (succ-ℕ x) y (succ-ℕ x)
       x-pos-dist H = pair' (is-nonzero-succ-ℕ x) (pair 1 (pair 0 (ap succ-ℕ (left-unit-law-add-ℕ x))))
 
       leq-d-x : leq-ℕ d (succ-ℕ x)
-      leq-d-x = minimal-positive-distance-is-minimal (succ-ℕ x) y (succ-ℕ x) x-pos-dist
+      leq-d-x =
+        minimal-positive-distance-is-minimal (succ-ℕ x) y (succ-ℕ x) x-pos-dist
 
     min-dist-succ-x-coeff-nonzero : is-nonzero-ℕ s
     min-dist-succ-x-coeff-nonzero iszero = minimal-positive-distance-nonzero (succ-ℕ x) y (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y))) d-is-zero

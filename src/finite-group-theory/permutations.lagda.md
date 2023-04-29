@@ -242,7 +242,8 @@ abstract
         ( λ P →
           has-cardinality 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
-    t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
+    t =
+      standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
     P :
       Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
@@ -282,7 +283,8 @@ abstract
         ( λ P →
           has-cardinality 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
-    t = standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
+    t =
+      standard-2-Element-Decidable-Subtype (has-decidable-equality-Fin (succ-ℕ (succ-ℕ n))) {inr star} {inl x} neq-inr-inl
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' =
       map-inv-equiv

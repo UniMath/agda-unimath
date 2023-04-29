@@ -352,10 +352,12 @@ unique-numerator-reduce-fraction-ℤ x y H =
             by associative-mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)
 
       x-nat : ℕ
-      x-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x))
+      x-nat =
+        pr1 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x))
 
       y-nat : ℕ
-      y-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y))
+      y-nat =
+        pr1 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y))
 
       contra : inr (inr y-nat) ＝ neg-ℤ (inr (inr x-nat))
       contra =

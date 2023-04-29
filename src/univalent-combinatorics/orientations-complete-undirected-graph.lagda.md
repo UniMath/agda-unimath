@@ -376,9 +376,11 @@ module _
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
           ( is-finite-2-Element-Decidable-Subtype n X))
     k1 : ℕ
-    k1 = number-of-elements-is-finite (is-finite-subtype-pointwise-difference d1 d2)
+    k1 =
+      number-of-elements-is-finite (is-finite-subtype-pointwise-difference d1 d2)
     k2 : ℕ
-    k2 = number-of-elements-is-finite (is-finite-subtype-pointwise-difference d2 d3)
+    k2 =
+      number-of-elements-is-finite (is-finite-subtype-pointwise-difference d2 d3)
     k' : ℕ
     k' =
       number-of-elements-is-finite
@@ -415,9 +417,11 @@ module _
         ( zero-Fin 1)
         ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph Y Y')
   quotient-sign : UU (lsuc l)
-  quotient-sign = equivalence-class even-difference-orientation-Complete-Undirected-Graph
+  quotient-sign =
+    equivalence-class even-difference-orientation-Complete-Undirected-Graph
   quotient-sign-Set : Set (lsuc l)
-  quotient-sign-Set = equivalence-class-Set even-difference-orientation-Complete-Undirected-Graph
+  quotient-sign-Set =
+    equivalence-class-Set even-difference-orientation-Complete-Undirected-Graph
 module _
   {l : Level} (n : ℕ)
   where

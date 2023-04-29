@@ -893,7 +893,8 @@ module _
             ( λ l →
               is-nonzero-ℕ l ×
               Id (add-ℕ l k) (pr1 (minimal-element-iterate g a b pa)))
-        pair-k2 = (subtraction-le-ℕ k (pr1 (minimal-element-iterate g a b pa)) ineq)
+        pair-k2 =
+          (subtraction-le-ℕ k (pr1 (minimal-element-iterate g a b pa)) ineq)
       pr2 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) r =
         ex-falso
           ( contradiction-le-ℕ k (pr1 (minimal-element-iterate g a b pa))
