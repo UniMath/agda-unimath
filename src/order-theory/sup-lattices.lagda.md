@@ -116,5 +116,6 @@ module _
     (I : UU l3) → (f : I → element-Sup-Lattice) →
     is-least-upper-bound-family-Poset poset-Sup-Lattice f
       (sup-Sup-Lattice I f)
-  is-least-upper-bound-family-sup-Sup-Lattice I f = pr2 (is-sup-lattice-Sup-Lattice I f)
+  is-least-upper-bound-family-sup-Sup-Lattice I f =
+    pr2 (is-sup-lattice-Sup-Lattice I f)
 ```

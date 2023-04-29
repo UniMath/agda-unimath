@@ -56,7 +56,8 @@ abstract
     tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
 
   comp-singleton-is-contr :
-    {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
+    {l1 l2 : Level} {A : UU l1}
+    (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
     ((ev-pt a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
   comp-singleton-is-contr a is-contr-A B b =
     ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))

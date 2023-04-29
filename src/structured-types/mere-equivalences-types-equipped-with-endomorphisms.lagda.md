@@ -1,7 +1,8 @@
 # Mere equivalences of types equipped with endomorphisms
 
 ```agda
-module structured-types.mere-equivalences-types-equipped-with-endomorphisms where
+module structured-types.mere-equivalences-types-equipped-with-endomorphisms
+  where
 ```
 
 <details><summary>Imports</summary>

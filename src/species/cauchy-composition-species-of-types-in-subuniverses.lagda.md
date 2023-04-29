@@ -423,32 +423,32 @@ module _
               ( subuniverse-global-subuniverse Q l5)
               ( U))
             ( inclusion-subuniverse P X)) ∘e
-          ( ( equiv-tot
-              ( λ D →
-                equiv-prod
-                  ( id-equiv)
-                  ( equiv-Π
-                    ( λ y →
-                      cauchy-composition-species-types
-                        ( Σ-extension-species-subuniverse
-                          ( P)
-                          ( subuniverse-global-subuniverse Q l4)
-                          ( T))
-                        ( Σ-extension-species-subuniverse
-                          ( P)
-                          ( subuniverse-global-subuniverse Q l5)
-                          ( U))
-                        ( cotype-Relaxed-Σ-Decomposition D y))
-                    ( id-equiv)
-                    ( λ y →
-                      preserves-cauchy-composition-Σ-extension-species-subuniverse
+          ( equiv-tot
+            ( λ D →
+              equiv-prod
+                ( id-equiv)
+                ( equiv-Π
+                  ( λ y →
+                    cauchy-composition-species-types
+                      ( Σ-extension-species-subuniverse
+                        ( P)
+                        ( subuniverse-global-subuniverse Q l4)
+                        ( T))
+                      ( Σ-extension-species-subuniverse
                         ( P)
-                        ( Q)
-                        ( C1)
-                        ( C2)
-                        ( T)
-                        ( U)
-                        ( cotype-Relaxed-Σ-Decomposition D y))))) ∘e
+                        ( subuniverse-global-subuniverse Q l5)
+                        ( U))
+                      ( cotype-Relaxed-Σ-Decomposition D y))
+                  ( id-equiv)
+                  ( λ y →
+                    preserves-cauchy-composition-Σ-extension-species-subuniverse
+                      ( P)
+                      ( Q)
+                      ( C1)
+                      ( C2)
+                      ( T)
+                      ( U)
+                      ( cotype-Relaxed-Σ-Decomposition D y)))) ∘e
             ( ( preserves-cauchy-composition-Σ-extension-species-subuniverse
                 ( P)
                 ( Q)

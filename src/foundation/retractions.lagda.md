@@ -49,7 +49,8 @@ module _
 isretr-retraction-comp-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (retr-g : retr g) →
-  ((retraction-right-factor-htpy f g h H) ∘ (retraction-comp-htpy f g h H retr-g)) ~ id
+  ( ( retraction-right-factor-htpy f g h H) ∘
+    ( retraction-comp-htpy f g h H retr-g)) ~ id
 isretr-retraction-comp-htpy f g h H (pair l L) (pair k K) =
   eq-htpy-retr
     ( ( retraction-right-factor-htpy f g h H

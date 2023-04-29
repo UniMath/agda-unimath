@@ -230,7 +230,8 @@ module _
     preserves-inv-hom-Group :
       (f : type-hom-Group G H) → preserves-inverses-Group (map-hom-Group G H f)
     preserves-inv-hom-Group f x =
-      ( inv ( right-unit-law-mul-Group H (map-hom-Group G H f (inv-Group G x)))) ∙
+      ( inv
+        ( right-unit-law-mul-Group H (map-hom-Group G H f (inv-Group G x)))) ∙
       ( ( ap
           ( mul-Group H (map-hom-Group G H f (inv-Group G x)))
           ( inv (right-inverse-law-mul-Group H (map-hom-Group G H f x)))) ∙

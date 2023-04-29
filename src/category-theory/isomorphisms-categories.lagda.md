@@ -341,7 +341,8 @@ module _
   assoc-comp-iso-Cat :
     {x y z w : obj-Cat C}
     (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    comp-iso-Cat C (comp-iso-Cat C h g) f ＝ comp-iso-Cat C h (comp-iso-Cat C g f)
+    comp-iso-Cat C (comp-iso-Cat C h g) f ＝
+    comp-iso-Cat C h (comp-iso-Cat C g f)
   assoc-comp-iso-Cat h g f =
     eq-Eq-iso-Cat C
       ( comp-iso-Cat C (comp-iso-Cat C h g) f)

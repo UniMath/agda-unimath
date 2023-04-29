@@ -676,13 +676,15 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : ( (X : system.type (type-theory.sys A)) →
-                is-prop (fibered-system.type (fibered-type-theory.sys B) X)) ×
-              ( (X : system.type (type-theory.sys A))
-                ( Y : fibered-system.type (fibered-type-theory.sys B) X)
-                ( x : system.element (type-theory.sys A) X) →
-                is-prop (fibered-system.element (fibered-type-theory.sys B) Y x))
-      slice : (X : system.type (type-theory.sys A)) →
-              is-subtype-theory (slice-fibered-type-theory B X)
+      type  :
+        ( (X : system.type (type-theory.sys A)) →
+          is-prop (fibered-system.type (fibered-type-theory.sys B) X)) ×
+        ( (X : system.type (type-theory.sys A))
+          ( Y : fibered-system.type (fibered-type-theory.sys B) X)
+          ( x : system.element (type-theory.sys A) X) →
+          is-prop (fibered-system.element (fibered-type-theory.sys B) Y x))
+      slice :
+        (X : system.type (type-theory.sys A)) →
+        is-subtype-theory (slice-fibered-type-theory B X)
 -}
 ```

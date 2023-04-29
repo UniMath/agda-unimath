@@ -295,7 +295,8 @@ universal-property-pushout-is-equiv :
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv f → is-equiv (pr1 (pr2 c)) →
   ({l : Level} → universal-property-pushout l f g c)
-universal-property-pushout-is-equiv f g (pair i (pair j H)) is-equiv-f is-equiv-j {l} =
+universal-property-pushout-is-equiv
+  f g (pair i (pair j H)) is-equiv-f is-equiv-j {l} =
   let c = (pair i (pair j H)) in
   universal-property-pushout-pullback-property-pushout l f g c
     ( λ T → is-pullback-is-equiv'

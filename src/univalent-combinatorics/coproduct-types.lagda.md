@@ -119,7 +119,8 @@ count-Σ-coprod :
   count (Σ A P) → count (Σ A Q) → count (Σ A (λ x → (P x) + (Q x)))
 pr1 (count-Σ-coprod count-P count-Q) = pr1 (count-coprod count-P count-Q)
 pr2 (count-Σ-coprod count-P count-Q) =
-  inv-equiv (left-distributive-Σ-coprod _ _ _) ∘e (pr2 (count-coprod count-P count-Q))
+  ( inv-equiv (left-distributive-Σ-coprod _ _ _)) ∘e
+  ( pr2 (count-coprod count-P count-Q))
 ```
 
 ### If `X + Y` has a count, then both `X` and `Y` have a count

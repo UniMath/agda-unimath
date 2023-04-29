@@ -136,7 +136,8 @@ module _
 
   eq-htpy-hom-Concrete-Group :
     (g : hom-Concrete-Group G H) → (htpy-hom-Concrete-Group g) → Id f g
-  eq-htpy-hom-Concrete-Group g = map-inv-equiv (extensionality-hom-Concrete-Group g)
+  eq-htpy-hom-Concrete-Group g =
+    map-inv-equiv (extensionality-hom-Concrete-Group g)
 ```
 
 ```agda

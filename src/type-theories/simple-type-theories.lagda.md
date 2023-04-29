@@ -594,7 +594,8 @@ module dependent-simple
     dependent.htpy-hom-system (hom-system g) (hom-system h)
   dependent.section-system.type (htpy-hom-system H) = refl-htpy
   dependent.section-system.element (htpy-hom-system {f = f} H) {X} x =
-    simple.section-system.element {f = {!!}} H x --simple.section-system.element H {X} x
+    simple.section-system.element {f = {!!}} H x
+    --simple.section-system.element H {X} x
   dependent.section-system.slice (htpy-hom-system H) X =
     {!!} --htpy-hom-system (simple.section-system.slice H X)
 

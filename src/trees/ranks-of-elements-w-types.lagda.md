@@ -152,7 +152,9 @@ module _
   strong-≼-≼-𝕎 : {x y : 𝕎 A B} → (x ≼-𝕎 y) → (x strong-≼-𝕎 y)
   strong-≼-≼-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} H .(α b) (pair b refl) =
     apply-universal-property-trunc-Prop (H b)
-      ( exists-Prop (𝕎 A B) ((λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → (α b) ≼-𝕎-Prop v))))
+      ( exists-Prop
+        ( 𝕎 A B)
+        ( (λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → (α b) ≼-𝕎-Prop v))))
       ( f)
       where
       f :
