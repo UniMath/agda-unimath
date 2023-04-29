@@ -832,7 +832,8 @@ minimal-positive-distance-nonzero x y nonzero =
 
 minimal-positive-distance-leq-sym :
   (x y : ℕ) → leq-ℕ (minimal-positive-distance x y) (minimal-positive-distance y x)
-minimal-positive-distance-leq-sym x y = minimal-positive-distance-is-minimal x y (minimal-positive-distance y x)
+minimal-positive-distance-leq-sym x y =
+  minimal-positive-distance-is-minimal x y (minimal-positive-distance y x)
   (λ H → pair'
     (minimal-positive-distance-nonzero y x (λ K → H (commutative-add-ℕ x y ∙ K)))
      (is-distance-between-multiples-sym-ℕ y x (minimal-positive-distance y x) (minimal-positive-distance-is-distance y x (λ K → H (commutative-add-ℕ x y ∙ K)))))
@@ -1148,7 +1149,8 @@ remainder-min-dist-succ-x-is-distance x y =
         (inv (dist-sx-ty-eq-d) ∙ symmetric-dist-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y))
 
     quotient-min-dist-succ-x-nonzero : is-nonzero-ℕ q
-    quotient-min-dist-succ-x-nonzero iszero = contradiction-le-ℕ (succ-ℕ x) d le-x-d leq-d-x
+    quotient-min-dist-succ-x-nonzero iszero =
+      contradiction-le-ℕ (succ-ℕ x) d le-x-d leq-d-x
       where
       x-r-equality : succ-ℕ x ＝ r
       x-r-equality =
@@ -1176,7 +1178,8 @@ remainder-min-dist-succ-x-is-distance x y =
         minimal-positive-distance-is-minimal (succ-ℕ x) y (succ-ℕ x) x-pos-dist
 
     min-dist-succ-x-coeff-nonzero : is-nonzero-ℕ s
-    min-dist-succ-x-coeff-nonzero iszero = minimal-positive-distance-nonzero (succ-ℕ x) y (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y))) d-is-zero
+    min-dist-succ-x-coeff-nonzero iszero =
+      minimal-positive-distance-nonzero (succ-ℕ x) y (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y))) d-is-zero
       where
       zero-addition : add-ℕ (mul-ℕ t y) d ＝ 0
       zero-addition =
@@ -1450,7 +1453,8 @@ minimal-positive-distance-div-fst :
   (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x
 minimal-positive-distance-div-fst zero-ℕ y =
   pair zero-ℕ (left-zero-law-mul-ℕ (minimal-positive-distance zero-ℕ y))
-minimal-positive-distance-div-fst (succ-ℕ x) y = pair (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) eqn
+minimal-positive-distance-div-fst (succ-ℕ x) y =
+  pair (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) eqn
   where
   eqn :
     mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y) ＝ (succ-ℕ x)

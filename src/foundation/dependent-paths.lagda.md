@@ -151,7 +151,8 @@ module _
   where
 
   d-inv : path-over B (inv p01) b1 b0
-  d-inv = (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
+  d-inv =
+    (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
     ap (λ t → tr B t b0) (right-inv p01)))
 ```
 

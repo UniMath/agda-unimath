@@ -201,7 +201,8 @@ module _
   ind-htpy-suspension-structure :
     {l : Level} (P : (c' : suspension-structure X Z) → (htpy-suspension-structure c c') → UU l) →
     (P c refl-htpy-suspension-structure) → ((c' : suspension-structure X Z) (H : htpy-suspension-structure c c') → P c' H)
-  ind-htpy-suspension-structure P = pr1 (Ind-identity-system c refl-htpy-suspension-structure
+  ind-htpy-suspension-structure P =
+    pr1 (Ind-identity-system c refl-htpy-suspension-structure
       (is-contr-equiv (Σ (suspension-structure X Z) (λ c' → c ＝ c'))
         (inv-equiv (equiv-tot (λ c' → extensionality-suspension-structure c c')))
         (is-contr-total-path c)) P)

@@ -40,7 +40,8 @@ module _
       (poset-Meet-Semilattice B) (f x) (f y) (f (meet-Meet-Semilattice A x y))
 
   hom-Meet-Semilattice : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-Meet-Semilattice = Σ (element-Meet-Semilattice A → element-Meet-Semilattice B)
+  hom-Meet-Semilattice =
+    Σ (element-Meet-Semilattice A → element-Meet-Semilattice B)
     λ f → preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) f × preserves-meets f
 
   map-hom-Meet-Semilattice :

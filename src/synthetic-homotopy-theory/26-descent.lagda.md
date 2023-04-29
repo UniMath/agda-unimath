@@ -1202,7 +1202,8 @@ coherence-cube-flattening-lemma :
          ( coherence-bottom-flattening-lemma H K (ev-pair h) a)))
      ( ap ev-pair
        ( htpy-precomp (htpy-map-Σ Q H g K) T h))
-coherence-cube-flattening-lemma {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} K = ind-htpy f
+coherence-cube-flattening-lemma {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} K =
+  ind-htpy f
     ( λ f' H' →
       (g : (a : A) → P a → Q (f a)) (g' : (a : A) → P a → Q (f' a))
       (K : (a : A) → ((tr Q (H' a)) ∘ (g a)) ~ (g' a)) (h : Σ B Q → T) →
