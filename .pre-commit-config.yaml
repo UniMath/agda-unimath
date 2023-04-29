@@ -51,7 +51,7 @@ repos:
         name: Check the maximum line length is respected
         entry: scripts/max_line_length.py
         language: python
-        files: ^src\/.+\.lagda\.md$
+        files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
         types_or: [markdown, text]
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
