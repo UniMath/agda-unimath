@@ -9,19 +9,19 @@ import re
 
 
 def no_repeat_whitespace_inside_line(line):
-    return re.sub(r'(\S)(\s{2,})', r'\1 ', line)
+    return utils.recursive_sub(r'(\S)(\s{2,})', r'\1 ', line)
 
 
 def space_before_semicolon(line):
-    return re.sub(r'(?<=\S);', ' ;', line)
+    return utils.recursive_sub(r'(?<=\S);', ' ;', line)
 
 
 def no_whitespace_before_closing_parenthesis(line):
-    return re.sub(r'(\S)\s+\)', r'\1)', line)
+    return utils.recursive_sub(r'(\S)\s+\)', r'\1)', line)
 
 
 def no_whitespace_before_closing_curly_brace(line):
-    return re.sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
+    return utils.recursive_sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
 
 
 def space_after_opening_parenthesis_on_new_line(line):

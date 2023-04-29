@@ -223,7 +223,7 @@ module _
       inclusion-subuniverse Q (S X)
     htpy-left-unit-law-small-cauchy-composition-species-subuniverse S X =
       ( ( inv-equiv
-          ( equiv-Σ-extension-species-subuniverse P Q S X) ) ∘e
+          ( equiv-Σ-extension-species-subuniverse P Q S X)) ∘e
         ( ( left-unit-law-cauchy-composition-species-types
             ( Σ-extension-species-subuniverse P Q S)
             ( inclusion-subuniverse P X)) ∘e

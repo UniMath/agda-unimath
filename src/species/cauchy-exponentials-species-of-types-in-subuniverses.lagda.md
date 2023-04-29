@@ -366,7 +366,7 @@ module _
                   ( P)
                   ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
                   ( cauchy-exponential-species-subuniverse P Q C1
-                    ( coproduct-species-subuniverse P Q C2 S T) )
+                    ( coproduct-species-subuniverse P Q C2 S T))
                   ( X))))))))
     where
     lemma-C6 =

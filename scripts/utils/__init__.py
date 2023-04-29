@@ -1,3 +1,4 @@
+import re
 import pathlib
 import os
 import subprocess
@@ -106,3 +107,9 @@ def get_equivalence_classes(equivalence_relation, iterable):
         else:  # Make a new partition for it.
             partitions.append([e])
     return partitions
+
+
+def recursive_sub(pattern, repl, string, flags=0):
+    while re.search(pattern, string, flags=flags):
+        string = re.sub(pattern, repl, string, flags=flags)
+    return string

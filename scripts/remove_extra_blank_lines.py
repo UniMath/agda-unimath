@@ -6,13 +6,6 @@ import sys
 import utils
 import re
 
-
-def recursive_sub(pattern, repl, string, flags=0):
-    while re.search(pattern, string, flags=flags):
-        string = re.sub(pattern, repl, string, flags=flags)
-    return string
-
-
 open_tag_pattern = re.compile(r'^```\S+\n', flags=re.MULTILINE)
 close_tag_pattern = re.compile(r'\n```$', flags=re.MULTILINE)
 
@@ -62,8 +55,9 @@ if __name__ == '__main__':
         with open(fpath, 'r') as f:
             inputText = f.read()
 
-        output = recursive_sub(r'[ \t]+$', '', inputText, flags=re.MULTILINE)
-        output = recursive_sub(r'\n\s*\n\s*\n', '\n\n', output)
+        output = utils.recursive_sub(
+            r'[ \t]+$', '', inputText, flags=re.MULTILINE)
+        output = utils.recursive_sub(r'\n\s*\n\s*\n', '\n\n', output)
 
         # Remove blank lines after a code block starts, and blank lines before a code block ends
         if not has_well_formed_blocks(output):
@@ -73,9 +67,9 @@ if __name__ == '__main__':
             status |= STATUS_FILES_WITH_ILL_FORMED_BLOCKS
         else:
 
-            output = recursive_sub(
+            output = utils.recursive_sub(
                 r'\n\n```($)', r'\n```\1', output, flags=re.MULTILINE)
-            output = recursive_sub(
+            output = utils.recursive_sub(
                 r'(^)```(\S+)\n\n', r'\1```\2\n', output, flags=re.MULTILINE)
 
             # Empty blocks should have an empty line
