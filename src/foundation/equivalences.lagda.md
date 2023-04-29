@@ -387,7 +387,8 @@ module _
 
 coh-unit-laws-equiv :
   {l : Level} {X : UU l} →
-  left-unit-law-equiv (id-equiv {A = X}) ＝ right-unit-law-equiv (id-equiv {A = X})
+  left-unit-law-equiv (id-equiv {A = X}) ＝
+  right-unit-law-equiv (id-equiv {A = X})
 coh-unit-laws-equiv {l} {X} = ap eq-equiv-eq-map-equiv refl
 
 module _

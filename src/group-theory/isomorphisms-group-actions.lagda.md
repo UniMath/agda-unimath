@@ -89,7 +89,8 @@ module _
          ( hom-inv-iso-Abstract-Group-Action f)
          ( hom-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G X)
-  isretr-hom-inv-iso-Abstract-Group-Action = is-retr-hom-inv-iso-Large-Precat C X Y
+  isretr-hom-inv-iso-Abstract-Group-Action =
+    is-retr-hom-inv-iso-Large-Precat C X Y
 
   is-iso-hom-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →

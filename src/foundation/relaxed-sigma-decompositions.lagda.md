@@ -73,8 +73,8 @@ fibered-Relaxed-Σ-Decomposition :
   {l1 : Level} (l2 l3 l4 l5 : Level) (A : UU l1) →
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
 fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A =
-  Σ (Relaxed-Σ-Decomposition l2 l3 A)
-    ( λ D → Relaxed-Σ-Decomposition l4 l5 (indexing-type-Relaxed-Σ-Decomposition D))
+  Σ ( Relaxed-Σ-Decomposition l2 l3 A)
+    ( Relaxed-Σ-Decomposition l4 l5 ∘ indexing-type-Relaxed-Σ-Decomposition)
 
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1}
@@ -95,21 +95,25 @@ module _
 
   matching-correspondence-fst-fibered-Relaxed-Σ-Decomposition :
     A ≃
-    Σ (indexing-type-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition)
-      (cotype-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition)
+    Σ ( indexing-type-Relaxed-Σ-Decomposition
+        ( fst-fibered-Relaxed-Σ-Decomposition))
+      ( cotype-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition)
   matching-correspondence-fst-fibered-Relaxed-Σ-Decomposition =
-    matching-correspondence-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition
+    matching-correspondence-Relaxed-Σ-Decomposition
+      ( fst-fibered-Relaxed-Σ-Decomposition)
 
   map-matching-correspondence-fst-fibered-Relaxed-Σ-Decomposition :
     A →
-    Σ (indexing-type-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition)
-      (cotype-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition)
+    Σ ( indexing-type-Relaxed-Σ-Decomposition
+        ( fst-fibered-Relaxed-Σ-Decomposition))
+      ( cotype-Relaxed-Σ-Decomposition fst-fibered-Relaxed-Σ-Decomposition)
   map-matching-correspondence-fst-fibered-Relaxed-Σ-Decomposition  =
     map-matching-correspondence-Relaxed-Σ-Decomposition
       fst-fibered-Relaxed-Σ-Decomposition
 
   snd-fibered-Relaxed-Σ-Decomposition :
-      Relaxed-Σ-Decomposition l4 l5 indexing-type-fst-fibered-Relaxed-Σ-Decomposition
+      Relaxed-Σ-Decomposition l4 l5
+        ( indexing-type-fst-fibered-Relaxed-Σ-Decomposition)
   snd-fibered-Relaxed-Σ-Decomposition = pr2 X
 
   indexing-type-snd-fibered-Relaxed-Σ-Decomposition : UU l4
@@ -123,18 +127,21 @@ module _
 
   matching-correspondence-snd-fibered-Relaxed-Σ-Decomposition :
     indexing-type-fst-fibered-Relaxed-Σ-Decomposition ≃
-    Σ (indexing-type-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition)
-      (cotype-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition)
+    Σ ( indexing-type-Relaxed-Σ-Decomposition
+        ( snd-fibered-Relaxed-Σ-Decomposition))
+      ( cotype-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition)
   matching-correspondence-snd-fibered-Relaxed-Σ-Decomposition =
-    matching-correspondence-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition
+    matching-correspondence-Relaxed-Σ-Decomposition
+      ( snd-fibered-Relaxed-Σ-Decomposition)
 
   map-matching-correspondence-snd-fibered-Relaxed-Σ-Decomposition :
     indexing-type-fst-fibered-Relaxed-Σ-Decomposition →
-    Σ (indexing-type-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition)
-      (cotype-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition)
+    Σ ( indexing-type-Relaxed-Σ-Decomposition
+        ( snd-fibered-Relaxed-Σ-Decomposition))
+      ( cotype-Relaxed-Σ-Decomposition snd-fibered-Relaxed-Σ-Decomposition)
   map-matching-correspondence-snd-fibered-Relaxed-Σ-Decomposition =
     map-matching-correspondence-Relaxed-Σ-Decomposition
-      snd-fibered-Relaxed-Σ-Decomposition
+      ( snd-fibered-Relaxed-Σ-Decomposition)
 ```
 
 #### Displayed double Σ-decompositions
@@ -230,7 +237,8 @@ module _
 ```agda
 equiv-Relaxed-Σ-Decomposition :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1}
-  (X : Relaxed-Σ-Decomposition l2 l3 A) (Y : Relaxed-Σ-Decomposition l4 l5 A) →
+  (X : Relaxed-Σ-Decomposition l2 l3 A)
+  (Y : Relaxed-Σ-Decomposition l4 l5 A) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
 equiv-Relaxed-Σ-Decomposition X Y =
   Σ ( indexing-type-Relaxed-Σ-Decomposition X ≃
@@ -363,7 +371,8 @@ module _
   map-equiv-tr-Relaxed-Σ-Decomposition :
     {l3 l4 : Level} →
     Relaxed-Σ-Decomposition l3 l4 A → Relaxed-Σ-Decomposition l3 l4 B
-  map-equiv-tr-Relaxed-Σ-Decomposition = map-equiv equiv-tr-Relaxed-Σ-Decomposition
+  map-equiv-tr-Relaxed-Σ-Decomposition =
+    map-equiv equiv-tr-Relaxed-Σ-Decomposition
 ```
 
 ### Iterated Σ-decompositions
@@ -459,7 +468,8 @@ module _
 
   id-equiv-fibered-Relaxed-Σ-Decomposition :
     equiv-fibered-Relaxed-Σ-Decomposition D D
-  pr1 id-equiv-fibered-Relaxed-Σ-Decomposition = id-equiv-Relaxed-Σ-Decomposition X
+  pr1 id-equiv-fibered-Relaxed-Σ-Decomposition =
+    id-equiv-Relaxed-Σ-Decomposition X
   pr1 (pr2 id-equiv-fibered-Relaxed-Σ-Decomposition) = id-equiv
   pr1 (pr2 (pr2 id-equiv-fibered-Relaxed-Σ-Decomposition)) x = id-equiv
   pr2 (pr2 (pr2 id-equiv-fibered-Relaxed-Σ-Decomposition)) = refl-htpy
@@ -575,7 +585,8 @@ module _
 
   id-equiv-displayed-Relaxed-Σ-Decomposition :
     equiv-displayed-Relaxed-Σ-Decomposition disp-D disp-D
-  pr1 id-equiv-displayed-Relaxed-Σ-Decomposition = id-equiv-Relaxed-Σ-Decomposition X
+  pr1 id-equiv-displayed-Relaxed-Σ-Decomposition =
+    id-equiv-Relaxed-Σ-Decomposition X
   pr1 (pr2 id-equiv-displayed-Relaxed-Σ-Decomposition x) = id-equiv
   pr1 (pr2 (pr2 id-equiv-displayed-Relaxed-Σ-Decomposition x)) y = id-equiv
   pr2 (pr2 (pr2 id-equiv-displayed-Relaxed-Σ-Decomposition x)) = refl-htpy
@@ -604,7 +615,8 @@ module _
 
   eq-equiv-displayed-Relaxed-Σ-Decomposition :
     (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
-    (equiv-displayed-Relaxed-Σ-Decomposition disp-D disp-D') → (disp-D ＝ disp-D')
+    (equiv-displayed-Relaxed-Σ-Decomposition disp-D disp-D') →
+    (disp-D ＝ disp-D')
   eq-equiv-displayed-Relaxed-Σ-Decomposition D =
     map-inv-equiv
       (extensionality-displayed-Relaxed-Σ-Decomposition D)
@@ -711,10 +723,10 @@ module _
     t = matching-correspondence-snd-displayed-Relaxed-Σ-Decomposition disp-D
 
     htpy-matching-correspondence :
-      ( map-equiv
-        ( ( equiv-Σ Y (inv-equiv f) (λ (m , p) → id-equiv)) ∘e
-          ( matching-correspondence-inv-displayed-fibered-Relaxed-Σ-Decomposition
-            ( disp-D)))) ~
+      map-equiv
+        ( equiv-Σ Y (inv-equiv f) (λ _ → id-equiv) ∘e
+          matching-correspondence-inv-displayed-fibered-Relaxed-Σ-Decomposition
+            ( disp-D)) ~
       ( map-equiv e)
     htpy-matching-correspondence a =
       htpy-eq-equiv

@@ -226,7 +226,8 @@ abstract
   is-finite-is-decidable-Prop :
     {l : Level} (P : Prop l) →
     is-decidable (type-Prop P) → is-finite (type-Prop P)
-  is-finite-is-decidable-Prop P x = is-finite-count (count-is-decidable-Prop P x)
+  is-finite-is-decidable-Prop P x =
+    is-finite-count (count-is-decidable-Prop P x)
 ```
 
 ### The type of decidable propositions of any universe level is finite

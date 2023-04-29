@@ -36,7 +36,8 @@ vertex-cover :
 vertex-cover G =
   Σ ( vertex-Undirected-Graph G → Fin 2)
     ( λ c →
-      ( p : unordered-pair-vertices-Undirected-Graph G) → edge-Undirected-Graph G p →
+      (p : unordered-pair-vertices-Undirected-Graph G) →
+      edge-Undirected-Graph G p →
         type-trunc-Prop
           ( Σ (vertex-Undirected-Graph G)
             ( λ x → is-in-unordered-pair p x × Id (c x) (inr star))))

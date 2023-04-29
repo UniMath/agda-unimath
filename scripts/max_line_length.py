@@ -38,7 +38,11 @@ if __name__ == '__main__':
                     is_in_agda_block = True
                 elif '```' in line:
                     is_in_agda_block = False
-                elif is_in_agda_block and len(line) > MAX_LINE_LENGTH:
+                elif is_in_agda_block and \
+                        len(line) > MAX_LINE_LENGTH and \
+                        not line.startswith('open import ') and \
+                        not line.startswith('module '):  # Some module names are just too long
+
                     if status & MAX_LENGTH_EXCEEDED_FLAG == 0:
                         print(
                             f'The following lines exceed {MAX_LINE_LENGTH} characters in width:')

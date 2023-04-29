@@ -44,7 +44,8 @@ power-ℕ = power-Commutative-Semiring ℕ-Commutative-Semiring
 ```agda
 annihilation-law-exp-ℕ : (n : ℕ) → exp-ℕ 1 n ＝ 1
 annihilation-law-exp-ℕ zero-ℕ = refl
-annihilation-law-exp-ℕ (succ-ℕ n) = right-unit-law-mul-ℕ (exp-ℕ 1 n) ∙ annihilation-law-exp-ℕ n
+annihilation-law-exp-ℕ (succ-ℕ n) =
+  right-unit-law-mul-ℕ (exp-ℕ 1 n) ∙ annihilation-law-exp-ℕ n
 
 left-distributive-exp-add-ℕ :
   (x y z : ℕ) → exp-ℕ x (add-ℕ y z) ＝ mul-ℕ (exp-ℕ x y) (exp-ℕ x z)

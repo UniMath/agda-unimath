@@ -44,7 +44,8 @@ has-presentation-of-cardinality-Prop k A =
   has-set-presentation-Prop (Fin-Set k) A
 
 has-presentation-of-cardinality : {l1 : Level} (k : ℕ) (A : UU l1) → UU l1
-has-presentation-of-cardinality k A = type-Prop (has-presentation-of-cardinality-Prop k A)
+has-presentation-of-cardinality k A =
+  type-Prop (has-presentation-of-cardinality-Prop k A)
 ```
 
 ### Finitely presented types

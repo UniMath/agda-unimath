@@ -89,8 +89,10 @@ data Pattern where
 
 -- A clause on a pattern matching lambda
 data Clause where
-  clause        : (tel : Telescope) (ps : list (Arg Pattern)) (t : Term) → Clause
-  absurd-clause : (tel : Telescope) (ps : list (Arg Pattern)) → Clause
+  clause :
+    (tel : Telescope) (ps : list (Arg Pattern)) (t : Term) → Clause
+  absurd-clause :
+    (tel : Telescope) (ps : list (Arg Pattern)) → Clause
 ```
 
 <details><summary>Bindings</summary>

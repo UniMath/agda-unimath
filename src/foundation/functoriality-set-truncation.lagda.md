@@ -369,7 +369,8 @@ module _
           unit-trunc-Prop
             ( pair
               ( unit-trunc-Set (pr1 u))
-              ( naturality-unit-trunc-Set f (pr1 u) ∙ ap unit-trunc-Set (pr2 u)))))
+              ( naturality-unit-trunc-Set f (pr1 u) ∙
+                ap unit-trunc-Set (pr2 u)))))
 
   left-square-unit-im-map-trunc-Set :
     ( map-unit-im (map-trunc-Set f) ∘ unit-trunc-Set) ~

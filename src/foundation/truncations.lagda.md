@@ -349,7 +349,8 @@ module _
       issec-map-inv-unit-trunc
       isretr-map-inv-unit-trunc
 
-  equiv-unit-trunc : type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
+  equiv-unit-trunc :
+    type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
   pr1 equiv-unit-trunc = unit-trunc
   pr2 equiv-unit-trunc = is-equiv-unit-trunc
 ```

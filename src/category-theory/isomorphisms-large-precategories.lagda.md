@@ -210,7 +210,8 @@ module _
       ( hom-inv-iso-Large-Precat C X Y (pair f p))
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
   pr1 (pr2 (is-iso-comp-iso-Large-Precat g f q p)) =
-    ( associative-comp-hom-Large-Precat C g f (pr1 (is-iso-comp-iso-Large-Precat g f q p))) ∙
+    ( associative-comp-hom-Large-Precat C g f
+      ( pr1 (is-iso-comp-iso-Large-Precat g f q p))) ∙
       ( ( ap
         ( comp-hom-Large-Precat C g)
         ( ( inv

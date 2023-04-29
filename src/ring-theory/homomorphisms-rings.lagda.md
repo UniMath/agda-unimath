@@ -143,12 +143,14 @@ preserves-neg-hom-Ring R1 R2 f =
 
 preserves-mul-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  (f : type-hom-Ring R1 R2) → preserves-mul-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
+  (f : type-hom-Ring R1 R2) →
+  preserves-mul-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
 preserves-mul-hom-Ring R1 R2 f = pr1 (pr2 f)
 
 preserves-one-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  (f : type-hom-Ring R1 R2) → preserves-one-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
+  (f : type-hom-Ring R1 R2) →
+  preserves-one-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
 preserves-one-hom-Ring R1 R2 f = pr2 (pr2 f)
 
 is-ring-homomorphism-hom-Ring :
@@ -243,13 +245,15 @@ preserves-one-id-hom-Ring :
 preserves-one-id-hom-Ring R = refl
 
 is-ring-homomorphism-id-hom-Ring :
-  {l : Level} (R : Ring l) → is-ring-homomorphism-hom-Ab R R (id-hom-Ab (ab-Ring R))
+  {l : Level} (R : Ring l) →
+  is-ring-homomorphism-hom-Ab R R (id-hom-Ab (ab-Ring R))
 is-ring-homomorphism-id-hom-Ring R =
   pair (preserves-mul-id-hom-Ring R) (preserves-one-id-hom-Ring R)
 
 id-hom-Ring :
   {l : Level} (R : Ring l) → type-hom-Ring R R
-id-hom-Ring R = pair (id-hom-Ab (ab-Ring R)) (is-ring-homomorphism-id-hom-Ring R)
+id-hom-Ring R =
+  pair (id-hom-Ab (ab-Ring R)) (is-ring-homomorphism-id-hom-Ring R)
 
 hom-Ab-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
@@ -301,7 +305,9 @@ comp-hom-Ring R1 R2 R3 g f =
 is-associative-comp-hom-Ring :
   { l1 l2 l3 l4 : Level}
   ( R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) (R4 : Ring l4) →
-  ( h : type-hom-Ring R3 R4) (g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
+  ( h : type-hom-Ring R3 R4)
+  ( g : type-hom-Ring R2 R3)
+  ( f : type-hom-Ring R1 R2) →
   Id (comp-hom-Ring R1 R2 R4 (comp-hom-Ring R2 R3 R4 h g) f)
      (comp-hom-Ring R1 R3 R4 h (comp-hom-Ring R1 R2 R3 g f))
 is-associative-comp-hom-Ring R1 R2 R3 R4 h g f =

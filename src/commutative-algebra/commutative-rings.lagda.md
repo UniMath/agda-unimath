@@ -288,7 +288,8 @@ module _
 
   multiplicative-semigroup-Commutative-Ring : Semigroup l
   pr1 multiplicative-semigroup-Commutative-Ring = set-Commutative-Ring
-  pr2 multiplicative-semigroup-Commutative-Ring = has-associative-mul-Commutative-Ring
+  pr2 multiplicative-semigroup-Commutative-Ring =
+    has-associative-mul-Commutative-Ring
 
   left-distributive-mul-add-Commutative-Ring :
     (x y z : type-Commutative-Ring) →
@@ -321,7 +322,8 @@ module _
   is-unital-Commutative-Ring = is-unital-Ring ring-Commutative-Ring
 
   multiplicative-monoid-Commutative-Ring : Monoid l
-  multiplicative-monoid-Commutative-Ring = multiplicative-monoid-Ring ring-Commutative-Ring
+  multiplicative-monoid-Commutative-Ring =
+    multiplicative-monoid-Ring ring-Commutative-Ring
 
   one-Commutative-Ring : type-Commutative-Ring
   one-Commutative-Ring = one-Ring ring-Commutative-Ring

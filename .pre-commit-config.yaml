@@ -39,6 +39,7 @@ repos:
         language: python
         always_run: true
         pass_filenames: false
+        require_serial: true
 
       - id: generate-main-index-file
         name: Generate main index file
@@ -46,6 +47,7 @@ repos:
         language: python
         always_run: true
         pass_filenames: false
+        require_serial: true
 
       - id: max-line-length
         name: Check the maximum line length is respected
@@ -53,6 +55,7 @@ repos:
         language: python
         files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
         types_or: [markdown, text]
+        require_serial: true
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: "v2.0.2"

@@ -351,7 +351,8 @@ module _
                   ( inv (left-inv issec-inv-α))))
               ( refl)))))
     where
-    issec-inv-α : eq-value (map-equiv α ∘ map-inv-equiv α) id (s (base-free-loop l))
+    issec-inv-α :
+      eq-value (map-equiv α ∘ map-inv-equiv α) id (s (base-free-loop l))
     issec-inv-α = issec-map-inv-equiv α (s (base-free-loop l))
 
   is-equiv-comparison-fixpoint-descent-data-circle :

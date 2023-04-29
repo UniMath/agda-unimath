@@ -335,7 +335,8 @@ htpy-parallel-cone-refl-htpy-htpy-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) →
   (c c' : cone f g C) →
-  htpy-cone f g c c' → htpy-parallel-cone (refl-htpy {f = f}) (refl-htpy {f = g}) c c'
+  htpy-cone f g c c' →
+  htpy-parallel-cone (refl-htpy {f = f}) (refl-htpy {f = g}) c c'
 htpy-parallel-cone-refl-htpy-htpy-cone f g
   (pair p (pair q H)) (pair p' (pair q' H')) =
   tot
@@ -372,7 +373,8 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) →
     (c : cone f g C) →
-    is-contr (Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
+    is-contr
+      ( Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
   is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy {A = A} {B} {X} {C}
     f g (pair p (pair q H)) =
     let c = triple p q H in
@@ -401,7 +403,8 @@ abstract
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
     is-contr (Σ (cone f' g' C) (htpy-parallel-cone Hf Hg c))
-  is-contr-total-htpy-parallel-cone {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
+  is-contr-total-htpy-parallel-cone
+    {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
     ind-htpy
       { A = A}
       { B = λ t → X}

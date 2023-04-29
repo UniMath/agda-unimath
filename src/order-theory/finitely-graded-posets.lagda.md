@@ -163,7 +163,8 @@ module _
     path-faces-Finitely-Graded-Poset x y
 
   refl-path-elements-Finitely-Graded-Poset :
-    (x : element-Finitely-Graded-Poset) → path-elements-Finitely-Graded-Poset x x
+    (x : element-Finitely-Graded-Poset) →
+    path-elements-Finitely-Graded-Poset x x
   refl-path-elements-Finitely-Graded-Poset x =
     refl-path-faces-Finitely-Graded-Poset
 

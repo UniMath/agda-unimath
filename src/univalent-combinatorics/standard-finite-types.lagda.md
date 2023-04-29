@@ -287,7 +287,8 @@ is-injective-inl-Fin k refl = refl
 -- Exercise 7.5 (c)
 
 neq-zero-succ-Fin :
-  {k : ℕ} {x : Fin k} → is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
+  {k : ℕ} {x : Fin k} →
+  is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
 neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
   neq-zero-succ-Fin (is-injective-inl-Fin (succ-ℕ k) p)
 neq-zero-succ-Fin {succ-ℕ k} {inr star} ()

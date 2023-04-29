@@ -77,7 +77,8 @@ _≤-cardinality_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 �
 X ≤-cardinality Y = type-Prop (leq-cardinality-Prop X Y)
 
 is-prop-≤-cardinality :
-  {l1 l2 : Level} {X : cardinal l1} {Y : cardinal l2} → is-prop (X ≤-cardinality Y)
+  {l1 l2 : Level} {X : cardinal l1} {Y : cardinal l2} →
+  is-prop (X ≤-cardinality Y)
 is-prop-≤-cardinality {X = X} {Y = Y} =
   is-prop-type-Prop (leq-cardinality-Prop X Y)
 

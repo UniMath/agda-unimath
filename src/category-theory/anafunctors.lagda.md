@@ -153,7 +153,9 @@ module _
                       ( hom-iso-Precat D v)))))))) ∙
         ( assoc-comp-hom-Precat D
           ( comp-hom-Precat D
-            ( comp-hom-Precat D (hom-iso-Precat D w) (hom-functor-Precat C D F g))
+            ( comp-hom-Precat D
+              ( hom-iso-Precat D w)
+              ( hom-functor-Precat C D F g))
             ( hom-inv-iso-Precat D v))
           ( hom-iso-Precat D v)
           ( hom-functor-Precat C D F f)))) ∙

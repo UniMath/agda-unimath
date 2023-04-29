@@ -37,7 +37,8 @@ primitive
   primQNameLess     : Name → Name → bool
   primShowQName     : Name → String
   primQNameToWord64s : Name → Word64 × Word64
-  primQNameToWord64sInjective : ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
+  primQNameToWord64sInjective :
+    ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
 ```
 
 ## Examples

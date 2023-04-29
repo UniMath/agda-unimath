@@ -31,5 +31,7 @@ equivalence.
 is-central-h-space :
   {l : Level} (A : Pointed-Type l) → UU l
 is-central-h-space A =
-  is-equiv {A = type-Pointed-Type A → type-Pointed-Type A} (ev-pt-Pointed-Type A)
+  is-equiv
+    { A = type-Pointed-Type A → type-Pointed-Type A}
+    ( ev-pt-Pointed-Type A)
 ```

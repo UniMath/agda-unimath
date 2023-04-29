@@ -337,7 +337,8 @@ module unityped where
     iterated-weakening :
       {l : Level} {A : type-theory l} {m n : ℕ} →
       El A n → El A (succ-ℕ (add-ℕ m n))
-    iterated-weakening {l} {A} {zero-ℕ} {n} x = {!hom-system.element (weakening.element (type-theory.W A))!}
+    iterated-weakening {l} {A} {zero-ℕ} {n} x =
+      {!hom-system.element (weakening.element (type-theory.W A))!}
     iterated-weakening {l} {A} {succ-ℕ m} {n} x = {!!}
 
     -- hom(X,Y) := Tm(W(X,Y))

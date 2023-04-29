@@ -143,7 +143,8 @@ module _
   pr1 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = y
   pr2 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = refl
 
-  map-inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib (tot f) t
+  map-inv-compute-fib-tot :
+    (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib (tot f) t
   pr1 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = a
   pr2 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = y
   pr2 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl)) = refl

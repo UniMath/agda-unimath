@@ -7,8 +7,6 @@ module univalent-combinatorics.pi-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
@@ -62,6 +60,7 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-presented-types

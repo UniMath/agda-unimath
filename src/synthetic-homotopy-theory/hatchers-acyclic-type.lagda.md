@@ -95,7 +95,8 @@ hom-algebra-Hatcher-Acyclic-Type
 
 ```agda
 is-initial-algebra-Hatcher-Acyclic-Type :
-  {l1 : Level} (l : Level) (A : algebra-Hatcher-Acyclic-Type l1) → UU (l1 ⊔ lsuc l)
+  {l1 : Level} (l : Level)
+  (A : algebra-Hatcher-Acyclic-Type l1) → UU (l1 ⊔ lsuc l)
 is-initial-algebra-Hatcher-Acyclic-Type l A =
   (B : algebra-Hatcher-Acyclic-Type l) →
   is-contr (hom-algebra-Hatcher-Acyclic-Type A B)
