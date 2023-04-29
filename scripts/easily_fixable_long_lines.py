@@ -99,6 +99,7 @@ if __name__ == '__main__':
             elif is_in_agda_block:
                 if len(line) > MAX_LINE_LENGTH and\
                         not max_line_length.can_forgive_line(line):
+
                     line = check_wrap_line_type_signature(line)
                     line = check_wrap_line_definition(line)
                     line = check_wrap_line_definition_parameters(line)

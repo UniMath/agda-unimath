@@ -117,14 +117,20 @@ def recursive_sub(pattern, repl, string, flags=0):
 
 def split_agda_line_comment(line):
     in_pragma = 0
+    in_block_comment = 0
 
-    for match in re.finditer(r'(--)|(\{-#)|(#-\})', line):
-        if not in_pragma and match.group(1):  # Double dash
+    for match in re.finditer(r'(--)|(\{-#)|(#-\})|(\{-(?<!#))|((?!#)-\})', line):
+        # Double dash
+        if not in_pragma and not in_block_comment and match.group(1):
             comment_start = match.start()
             return line[:comment_start], line[comment_start:]
         elif match.group(2):  # Pragma start
             in_pragma += 1
         elif match.group(3):  # Pragma end
             in_pragma -= 1
+        elif match.group(4):  # Block comment start
+            in_block_comment += 1
+        elif match.group(5):  # Block comment end
+            in_block_comment -= 1
 
     return line, ''
