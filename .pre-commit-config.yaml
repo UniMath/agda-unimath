@@ -5,10 +5,15 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: double-quote-string-fixer
+      - id: check-ast
       - id: check-yaml
-      - id: check-added-large-files
+      # - id: check-json # Doesn't accept json with comments
+      # - id: requirements-txt-fixer # Can't handle comments
       - id: check-case-conflict
       - id: check-merge-conflict
+      - id: check-added-large-files
 
   - repo: local
     hooks:
@@ -17,51 +22,37 @@ repos:
         entry: scripts/remove_extra_blank_lines.py
         language: python
         always_run: true
-        verbose: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
-        args: []
-        require_serial: false
 
       - id: fix-imports
         name: Format Agda imports
         entry: scripts/fix_imports.py
         language: python
         always_run: true
-        verbose: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
-        args: []
-        require_serial: false
 
       - id: generate-namespace-index-modules
         name: Generate Agda namespace index modules
         entry: scripts/generate_namespace_index_modules.py
         language: python
         always_run: true
-        verbose: true
-        types_or: [markdown, text]
-        args: []
-        require_serial: false
+        pass_filenames: false
 
       - id: generate-main-index-file
         name: Generate main index file
         entry: scripts/generate_main_index_file.py
         language: python
         always_run: true
-        verbose: true
-        types_or: [markdown, text]
-        args: []
-        require_serial: false
+        pass_filenames: false
 
       - id: max-line-length
         name: Check the maximum line length is respected
         entry: scripts/max_line_length.py
         language: python
-        verbose: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
-        require_serial: false
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: "v2.0.2"

@@ -37,16 +37,16 @@ def extract_agda_code(lagda_filepath):
     Extracts just the agda code from a literate agda markdown file.
     """
     contents = None
-    with open(lagda_filepath, "r") as lagda_file:
+    with open(lagda_filepath, 'r') as lagda_file:
         contents = lagda_file.read()
 
     def find_blocks(loc=0):
-        loc = contents.find("```agda\n", loc)
+        loc = contents.find('```agda\n', loc)
         if loc == -1:
             return
-        block_start = loc + len("```agda\n")
+        block_start = loc + len('```agda\n')
 
-        loc = contents.find("\n```", block_start)
+        loc = contents.find('\n```', block_start)
         if loc == -1:
             yield contents[block_start:]
             return
@@ -56,7 +56,7 @@ def extract_agda_code(lagda_filepath):
 
         yield from find_blocks(block_end + 1)
 
-    return "\n\n".join(find_blocks())
+    return '\n\n'.join(find_blocks())
 
 
 def has_no_definitions(lagda_filepath):
@@ -69,18 +69,18 @@ def has_no_definitions(lagda_filepath):
 
 
 def call_agda(options, filepath):
-    return subprocess.call(f"agda {options} {filepath}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.call(f'agda {options} {filepath}', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def get_lagda_md_file_title(lagda_filepath):
-    with open(lagda_filepath, "r") as file:
+    with open(lagda_filepath, 'r') as file:
         contents = file.read()
-        title_index = contents.find("# ")
+        title_index = contents.find('# ')
         if title_index != 0:
             return None
 
-        title_start = title_index + len("# ")
-        title_end = contents.find("\n", len("# "))
+        title_start = title_index + len('# ')
+        title_end = contents.find('\n', len('# '))
         return contents[title_start:title_end]
 
 
@@ -89,10 +89,10 @@ def get_import_statement(namespace, module_file, public=False):
 
 
 def get_module_mdfile(namespace, module_file):
-    return namespace + "." + module_file.replace(".lagda.md", ".md")
+    return namespace + '.' + module_file.replace('.lagda.md', '.md')
 
 
-def get_agda_module_name(agda_file_path, root="src"):
+def get_agda_module_name(agda_file_path, root='src'):
     return agda_file_path[bool(root) * (len(root) + 1):agda_file_path.rfind('.lagda.md')].replace('/', '.').replace('\\', '.')
 
 
