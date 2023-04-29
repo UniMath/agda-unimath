@@ -232,8 +232,10 @@ module _
   restriction-generating-subset-Subgroup :
     type-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' ↪
       ( type-subtype S → type-Group G')
-  pr1 restriction-generating-subset-Subgroup = map-restriction-generating-subset-Subgroup
-  pr2 restriction-generating-subset-Subgroup = is-emb-map-restriction-generating-subset-Subgroup
+  pr1 restriction-generating-subset-Subgroup =
+    map-restriction-generating-subset-Subgroup
+  pr2 restriction-generating-subset-Subgroup =
+    is-emb-map-restriction-generating-subset-Subgroup
 
 module _
   {l1 l2 l3 : Level} (G : Group l1) (S : subset-Group l2 G) (H : is-generating-subset-Group G S)

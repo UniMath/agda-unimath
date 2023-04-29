@@ -1170,9 +1170,12 @@ module dependent where
     Z x
   section-system.element (hom-system-weakening-system-Slice X Y) Z g (pair x y) =
     g x
-  section-system.type (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W (pair (pair x y) z) = W (pair x z)
-  section-system.element (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W h (pair (pair x y) z) = h (pair x z)
-  section-system.slice (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W = {!section-system.slice (hom-system-weakening-system-Slice X Y) ?!}
+  section-system.type (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W (pair (pair x y) z) =
+    W (pair x z)
+  section-system.element (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W h (pair (pair x y) z) =
+    h (pair x z)
+  section-system.slice (section-system.slice (hom-system-weakening-system-Slice X Y) Z) W =
+    {!section-system.slice (hom-system-weakening-system-Slice X Y) ?!}
 
   weakening-system-Slice :
     {l : Level} (X : UU l) → weakening (system-Slice X)
@@ -1210,7 +1213,8 @@ module dependent where
     f x
   section-system.slice (weakening.type (weakening.slice (weakening-UU l) X) Y) Z =
     {!!}
-  weakening.slice (weakening.slice (weakening-UU l) X) Y = weakening.slice (weakening-UU l) (Σ X Y)
+  weakening.slice (weakening.slice (weakening-UU l) X) Y =
+    weakening.slice (weakening-UU l) (Σ X Y)
 -}
 
   ------------------------------------------------------------------------------
@@ -1410,7 +1414,8 @@ module c-system where
     {l1 l2 : Level} {A : type-theory l1 l2}
     (X : system.type (type-theory.sys A)) →
     context A → context (slice-dtt A X)
-  weakening-by-type-context {A = A} X Δ = context-hom {!weakening.type (type-theory.W A) X!} Δ
+  weakening-by-type-context {A = A} X Δ =
+    context-hom {!weakening.type (type-theory.W A) X!} Δ
 -}
 
   weakening-type-context :

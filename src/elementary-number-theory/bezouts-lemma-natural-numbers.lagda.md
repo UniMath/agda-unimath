@@ -817,15 +817,18 @@ form `dist-ℕ (kx,ly)`, it follows that `gcd x y | d`, and hence that
 ```agda
 minimal-positive-distance-is-distance :
   (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → (is-distance-between-multiples-ℕ x y (minimal-positive-distance x y))
-minimal-positive-distance-is-distance x y nonzero = pr2 ((pr1 (pr2 (minimal-pos-distance-between-multiples x y))) nonzero)
+minimal-positive-distance-is-distance x y nonzero =
+  pr2 ((pr1 (pr2 (minimal-pos-distance-between-multiples x y))) nonzero)
 
 minimal-positive-distance-is-minimal :
   (x y : ℕ) → is-lower-bound-ℕ (pos-distance-between-multiples x y) (minimal-positive-distance x y)
-minimal-positive-distance-is-minimal x y = pr2 (pr2 (minimal-pos-distance-between-multiples x y))
+minimal-positive-distance-is-minimal x y =
+  pr2 (pr2 (minimal-pos-distance-between-multiples x y))
 
 minimal-positive-distance-nonzero :
   (x y : ℕ) → (is-nonzero-ℕ (add-ℕ x y)) → (is-nonzero-ℕ (minimal-positive-distance x y))
-minimal-positive-distance-nonzero x y nonzero = pr1 ((pr1 (pr2 (minimal-pos-distance-between-multiples x y))) nonzero)
+minimal-positive-distance-nonzero x y nonzero =
+  pr1 ((pr1 (pr2 (minimal-pos-distance-between-multiples x y))) nonzero)
 
 minimal-positive-distance-leq-sym :
   (x y : ℕ) → leq-ℕ (minimal-positive-distance x y) (minimal-positive-distance y x)
@@ -843,20 +846,25 @@ minimal-positive-distance-sym x y = antisymmetric-leq-ℕ
   (minimal-positive-distance-leq-sym y x)
 
 minimal-positive-distance-x-coeff : (x y : ℕ) → (is-nonzero-ℕ (add-ℕ x y)) → ℕ
-minimal-positive-distance-x-coeff x y H = pr1 (minimal-positive-distance-is-distance x y H)
+minimal-positive-distance-x-coeff x y H =
+  pr1 (minimal-positive-distance-is-distance x y H)
 
 minimal-positive-distance-succ-x-coeff : (x y : ℕ) → ℕ
-minimal-positive-distance-succ-x-coeff x y = minimal-positive-distance-x-coeff (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
+minimal-positive-distance-succ-x-coeff x y =
+  minimal-positive-distance-x-coeff (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
 
 minimal-positive-distance-y-coeff : (x y : ℕ) → (is-nonzero-ℕ (add-ℕ x y)) → ℕ
-minimal-positive-distance-y-coeff x y H = pr1 (pr2 (minimal-positive-distance-is-distance x y H))
+minimal-positive-distance-y-coeff x y H =
+  pr1 (pr2 (minimal-positive-distance-is-distance x y H))
 
 minimal-positive-distance-succ-y-coeff : (x y : ℕ) → ℕ
-minimal-positive-distance-succ-y-coeff x y = minimal-positive-distance-y-coeff (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
+minimal-positive-distance-succ-y-coeff x y =
+  minimal-positive-distance-y-coeff (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
 
 minimal-positive-distance-eqn :
   (x y : ℕ) → (H : is-nonzero-ℕ (add-ℕ x y)) → dist-ℕ (mul-ℕ (minimal-positive-distance-x-coeff x y H) x) (mul-ℕ (minimal-positive-distance-y-coeff x y H) y) ＝ minimal-positive-distance x y
-minimal-positive-distance-eqn x y H = pr2 (pr2 (minimal-positive-distance-is-distance x y H))
+minimal-positive-distance-eqn x y H =
+  pr2 (pr2 (minimal-positive-distance-is-distance x y H))
 
 minimal-positive-distance-succ-eqn :
   (x y : ℕ) →
@@ -864,7 +872,8 @@ minimal-positive-distance-succ-eqn :
     ( mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))
     ( mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) ＝
   minimal-positive-distance (succ-ℕ x) y
-minimal-positive-distance-succ-eqn x y = minimal-positive-distance-eqn (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
+minimal-positive-distance-succ-eqn x y =
+  minimal-positive-distance-eqn (succ-ℕ x) y (tr is-nonzero-ℕ (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))
 
 minimal-positive-distance-div-succ-x-eqn :
   (x y : ℕ) →
@@ -1159,7 +1168,8 @@ remainder-min-dist-succ-x-is-distance x y =
         tr (λ n → le-ℕ n d) (inv (x-r-equality)) (remainder-min-dist-succ-x-le-min-dist x y)
 
       x-pos-dist : pos-distance-between-multiples (succ-ℕ x) y (succ-ℕ x)
-      x-pos-dist H = pair' (is-nonzero-succ-ℕ x) (pair 1 (pair 0 (ap succ-ℕ (left-unit-law-add-ℕ x))))
+      x-pos-dist H =
+        pair' (is-nonzero-succ-ℕ x) (pair 1 (pair 0 (ap succ-ℕ (left-unit-law-add-ℕ x))))
 
       leq-d-x : leq-ℕ d (succ-ℕ x)
       leq-d-x =
@@ -1438,7 +1448,8 @@ remainder-min-dist-succ-x-is-zero x y =
 
 minimal-positive-distance-div-fst :
   (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x
-minimal-positive-distance-div-fst zero-ℕ y = pair zero-ℕ (left-zero-law-mul-ℕ (minimal-positive-distance zero-ℕ y))
+minimal-positive-distance-div-fst zero-ℕ y =
+  pair zero-ℕ (left-zero-law-mul-ℕ (minimal-positive-distance zero-ℕ y))
 minimal-positive-distance-div-fst (succ-ℕ x) y = pair (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) eqn
   where
   eqn :
@@ -1454,11 +1465,13 @@ minimal-positive-distance-div-fst (succ-ℕ x) y = pair (quotient-euclidean-divi
 
 minimal-positive-distance-div-snd :
   (x y : ℕ) → div-ℕ (minimal-positive-distance x y) y
-minimal-positive-distance-div-snd x y = concatenate-eq-div-ℕ (minimal-positive-distance-sym x y) (minimal-positive-distance-div-fst y x)
+minimal-positive-distance-div-snd x y =
+  concatenate-eq-div-ℕ (minimal-positive-distance-sym x y) (minimal-positive-distance-div-fst y x)
 
 minimal-positive-distance-div-gcd-ℕ :
   (x y : ℕ) → div-ℕ (minimal-positive-distance x y) (gcd-ℕ x y)
-minimal-positive-distance-div-gcd-ℕ x y = div-gcd-is-common-divisor-ℕ x y (minimal-positive-distance x y) (pair' (minimal-positive-distance-div-fst x y) (minimal-positive-distance-div-snd x y))
+minimal-positive-distance-div-gcd-ℕ x y =
+  div-gcd-is-common-divisor-ℕ x y (minimal-positive-distance x y) (pair' (minimal-positive-distance-div-fst x y) (minimal-positive-distance-div-snd x y))
 
 gcd-ℕ-div-x-mults :
   (x y z : ℕ) → (d : is-distance-between-multiples-ℕ x y z) → div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ d) x)
@@ -1513,13 +1526,16 @@ gcd-ℕ-div-dist-between-mult x y z dist =
 
 gcd-ℕ-div-minimal-positive-distance :
   (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → div-ℕ (gcd-ℕ x y) (minimal-positive-distance x y)
-gcd-ℕ-div-minimal-positive-distance x y H = gcd-ℕ-div-dist-between-mult x y (minimal-positive-distance x y) (minimal-positive-distance-is-distance x y H)
+gcd-ℕ-div-minimal-positive-distance x y H =
+  gcd-ℕ-div-dist-between-mult x y (minimal-positive-distance x y) (minimal-positive-distance-is-distance x y H)
 
 bezouts-lemma-ℕ :
   (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → minimal-positive-distance x y ＝ gcd-ℕ x y
-bezouts-lemma-ℕ x y H = antisymmetric-div-ℕ (minimal-positive-distance x y) (gcd-ℕ x y) (minimal-positive-distance-div-gcd-ℕ x y) (gcd-ℕ-div-minimal-positive-distance x y H)
+bezouts-lemma-ℕ x y H =
+  antisymmetric-div-ℕ (minimal-positive-distance x y) (gcd-ℕ x y) (minimal-positive-distance-div-gcd-ℕ x y) (gcd-ℕ-div-minimal-positive-distance x y H)
 
 bezouts-lemma-eqn-ℕ :
   (x y : ℕ) → (H : is-nonzero-ℕ (add-ℕ x y)) → dist-ℕ (mul-ℕ (minimal-positive-distance-x-coeff x y H) x) (mul-ℕ (minimal-positive-distance-y-coeff x y H) y) ＝ gcd-ℕ x y
-bezouts-lemma-eqn-ℕ x y H = minimal-positive-distance-eqn x y H ∙ bezouts-lemma-ℕ x y H
+bezouts-lemma-eqn-ℕ x y H =
+  minimal-positive-distance-eqn x y H ∙ bezouts-lemma-ℕ x y H
 ```

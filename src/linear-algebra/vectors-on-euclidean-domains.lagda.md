@@ -140,7 +140,8 @@ module _
   vec-Euclidean-Domain-Semigroup : ℕ → Semigroup l
   pr1 (vec-Euclidean-Domain-Semigroup n) = vec-Set (set-Euclidean-Domain R) n
   pr1 (pr2 (vec-Euclidean-Domain-Semigroup n)) = add-vec-Euclidean-Domain
-  pr2 (pr2 (vec-Euclidean-Domain-Semigroup n)) = associative-add-vec-Euclidean-Domain
+  pr2 (pr2 (vec-Euclidean-Domain-Semigroup n)) =
+    associative-add-vec-Euclidean-Domain
 
   left-unit-law-add-vec-Euclidean-Domain :
     {n : ℕ} (v : vec-Euclidean-Domain R n) → Id (add-vec-Euclidean-Domain (zero-vec-Euclidean-Domain R) v) v
@@ -161,8 +162,10 @@ module _
   vec-Euclidean-Domain-Monoid : ℕ → Monoid l
   pr1 (vec-Euclidean-Domain-Monoid n) = vec-Euclidean-Domain-Semigroup n
   pr1 (pr2 (vec-Euclidean-Domain-Monoid n)) = zero-vec-Euclidean-Domain R
-  pr1 (pr2 (pr2 (vec-Euclidean-Domain-Monoid n))) = left-unit-law-add-vec-Euclidean-Domain
-  pr2 (pr2 (pr2 (vec-Euclidean-Domain-Monoid n))) = right-unit-law-add-vec-Euclidean-Domain
+  pr1 (pr2 (pr2 (vec-Euclidean-Domain-Monoid n))) =
+    left-unit-law-add-vec-Euclidean-Domain
+  pr2 (pr2 (pr2 (vec-Euclidean-Domain-Monoid n))) =
+    right-unit-law-add-vec-Euclidean-Domain
 
   commutative-add-vec-Euclidean-Domain :
     {n : ℕ} (v w : vec-Euclidean-Domain R n) → Id (add-vec-Euclidean-Domain v w) (add-vec-Euclidean-Domain w v)
@@ -173,8 +176,10 @@ module _
       ( commutative-add-vec-Euclidean-Domain v w)
 
   vec-Euclidean-Domain-Commutative-Monoid : ℕ → Commutative-Monoid l
-  pr1 (vec-Euclidean-Domain-Commutative-Monoid n) = vec-Euclidean-Domain-Monoid n
-  pr2 (vec-Euclidean-Domain-Commutative-Monoid n) = commutative-add-vec-Euclidean-Domain
+  pr1 (vec-Euclidean-Domain-Commutative-Monoid n) =
+    vec-Euclidean-Domain-Monoid n
+  pr2 (vec-Euclidean-Domain-Commutative-Monoid n) =
+    commutative-add-vec-Euclidean-Domain
 ```
 
 #### Pointwise addition of functional vectors on a euclidean domain
@@ -186,7 +191,8 @@ module _
 
   add-functional-vec-Euclidean-Domain :
     (n : ℕ) (v w : functional-vec-Euclidean-Domain R n) → functional-vec-Euclidean-Domain R n
-  add-functional-vec-Euclidean-Domain n = binary-map-functional-vec n (add-Euclidean-Domain R)
+  add-functional-vec-Euclidean-Domain n =
+    binary-map-functional-vec n (add-Euclidean-Domain R)
 
   associative-add-functional-vec-Euclidean-Domain :
     (n : ℕ) (v1 v2 v3 : functional-vec-Euclidean-Domain R n) →
@@ -196,8 +202,10 @@ module _
     eq-htpy (λ i → associative-add-Euclidean-Domain R (v1 i) (v2 i) (v3 i))
 
   functional-vec-Euclidean-Domain-Semigroup : ℕ → Semigroup l
-  pr1 (functional-vec-Euclidean-Domain-Semigroup n) = functional-vec-Set (set-Euclidean-Domain R) n
-  pr1 (pr2 (functional-vec-Euclidean-Domain-Semigroup n)) = add-functional-vec-Euclidean-Domain n
+  pr1 (functional-vec-Euclidean-Domain-Semigroup n) =
+    functional-vec-Set (set-Euclidean-Domain R) n
+  pr1 (pr2 (functional-vec-Euclidean-Domain-Semigroup n)) =
+    add-functional-vec-Euclidean-Domain n
   pr2 (pr2 (functional-vec-Euclidean-Domain-Semigroup n)) =
     associative-add-functional-vec-Euclidean-Domain n
 
@@ -268,15 +276,19 @@ module _
   is-unital-vec-Euclidean-Domain :
     (n : ℕ) → is-unital (add-vec-Euclidean-Domain R {n})
   pr1 (is-unital-vec-Euclidean-Domain n) = zero-vec-Euclidean-Domain R
-  pr1 (pr2 (is-unital-vec-Euclidean-Domain n)) = left-unit-law-add-vec-Euclidean-Domain R
-  pr2 (pr2 (is-unital-vec-Euclidean-Domain n)) = right-unit-law-add-vec-Euclidean-Domain R
+  pr1 (pr2 (is-unital-vec-Euclidean-Domain n)) =
+    left-unit-law-add-vec-Euclidean-Domain R
+  pr2 (pr2 (is-unital-vec-Euclidean-Domain n)) =
+    right-unit-law-add-vec-Euclidean-Domain R
 
   is-group-vec-Euclidean-Domain :
     (n : ℕ) → is-group (vec-Euclidean-Domain-Semigroup R n)
   pr1 (is-group-vec-Euclidean-Domain n) = is-unital-vec-Euclidean-Domain n
   pr1 (pr2 (is-group-vec-Euclidean-Domain n)) = neg-vec-Euclidean-Domain
-  pr1 (pr2 (pr2 (is-group-vec-Euclidean-Domain n))) = left-inverse-law-add-vec-Euclidean-Domain
-  pr2 (pr2 (pr2 (is-group-vec-Euclidean-Domain n))) = right-inverse-law-add-vec-Euclidean-Domain
+  pr1 (pr2 (pr2 (is-group-vec-Euclidean-Domain n))) =
+    left-inverse-law-add-vec-Euclidean-Domain
+  pr2 (pr2 (pr2 (is-group-vec-Euclidean-Domain n))) =
+    right-inverse-law-add-vec-Euclidean-Domain
 
   vec-Euclidean-Domain-Group : ℕ → Group l
   pr1 (vec-Euclidean-Domain-Group n) = vec-Euclidean-Domain-Semigroup R n

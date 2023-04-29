@@ -147,14 +147,17 @@ module _
   where
 
   is-transposition-permutation-Prop : X ≃ X → Prop (l1 ⊔ lsuc l2)
-  is-transposition-permutation-Prop f = trunc-Prop (fib (transposition {l2 = l2}) f)
+  is-transposition-permutation-Prop f =
+    trunc-Prop (fib (transposition {l2 = l2}) f)
 
   is-transposition-permutation : X ≃ X → UU (l1 ⊔ lsuc l2)
-  is-transposition-permutation f = type-Prop (is-transposition-permutation-Prop f)
+  is-transposition-permutation f =
+    type-Prop (is-transposition-permutation-Prop f)
 
   is-prop-is-transposition-permutation :
     (f : X ≃ X) → is-prop (is-transposition-permutation f)
-  is-prop-is-transposition-permutation f = is-prop-type-Prop (is-transposition-permutation-Prop f)
+  is-prop-is-transposition-permutation f =
+    is-prop-type-Prop (is-transposition-permutation-Prop f)
 ```
 
 ### The standard transposition obtained from a pair of distinct points
@@ -559,7 +562,8 @@ module _
         ( λ P →
           has-cardinality 2
             ( Σ Y (λ x → type-Decidable-Prop (P x)))))
-  pr1 (pr1 (transposition-conjugation-equiv (pair P H)) x) = raise l4 (type-Decidable-Prop (P (map-inv-equiv e x)))
+  pr1 (pr1 (transposition-conjugation-equiv (pair P H)) x) =
+    raise l4 (type-Decidable-Prop (P (map-inv-equiv e x)))
   pr1 (pr2 (pr1 (transposition-conjugation-equiv (pair P H)) x)) =
     is-prop-all-elements-equal
       (λ p1 p2 →
@@ -648,7 +652,8 @@ module _
           map-swap-2-Element-Type
             (pair (Σ X (λ y → type-Decidable-Prop (pr1 t y))) (pr2 t))
             (pair (map-inv-equiv e x) p)
-      cases-correct-transposition-conjugation-equiv (inr np) = ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv e))
+      cases-correct-transposition-conjugation-equiv (inr np) =
+        ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv e))
 
     correct-transposition-conjugation-equiv-list :
       (li : list
@@ -770,7 +775,8 @@ correct-Fin-succ-Fin-transposition-list :
       ( map-equiv
         ( extend-equiv-Maybe (Fin-Set n))
         ( permutation-list-transpositions l)))
-correct-Fin-succ-Fin-transposition-list n nil = inv-htpy (id-map-coprod (Fin n) unit)
+correct-Fin-succ-Fin-transposition-list n nil =
+  inv-htpy (id-map-coprod (Fin n) unit)
 correct-Fin-succ-Fin-transposition-list n (cons t l) x =
   correct-Fin-succ-Fin-transposition
     ( n)

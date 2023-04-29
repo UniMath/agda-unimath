@@ -178,9 +178,12 @@ module _
   iso-symmetric-group-loop-group-Set :
     type-iso-Group (loop-group-Set X) (symmetric-Group X)
   pr1 iso-symmetric-group-loop-group-Set = hom-symmetric-group-loop-group-Set
-  pr1 (pr2 iso-symmetric-group-loop-group-Set) = hom-inv-symmetric-group-loop-group-Set
-  pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-sec-hom-inv-symmetric-group-loop-group-Set
-  pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-retr-hom-inv-symmetric-group-loop-group-Set
+  pr1 (pr2 iso-symmetric-group-loop-group-Set) =
+    hom-inv-symmetric-group-loop-group-Set
+  pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
+    is-sec-hom-inv-symmetric-group-loop-group-Set
+  pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
+    is-retr-hom-inv-symmetric-group-loop-group-Set
 ```
 
 ### The abstacted automorphism group and the loop group of a set are isomorphic
@@ -325,10 +328,14 @@ module _
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
-  pr1 iso-abstract-automorphism-group-loop-group-Set = hom-abstract-automorphism-group-loop-group-Set
-  pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) = hom-inv-abstract-automorphism-group-loop-group-Set
-  pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
-  pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
+  pr1 iso-abstract-automorphism-group-loop-group-Set =
+    hom-abstract-automorphism-group-loop-group-Set
+  pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) =
+    hom-inv-abstract-automorphism-group-loop-group-Set
+  pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) =
+    is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
+  pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) =
+    is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
 ```
 
 ### The loop groups of two equivalent sets are isomorphic

@@ -210,8 +210,10 @@ module _
   subgroup-subset-Group : Subgroup (l1 ⊔ l2) G
   pr1 subgroup-subset-Group = subset-subgroup-subset-Group
   pr1 (pr2 subgroup-subset-Group) = contains-unit-subgroup-subset-Group
-  pr1 (pr2 (pr2 subgroup-subset-Group)) = is-closed-under-mul-subgroup-subset-Group
-  pr2 (pr2 (pr2 subgroup-subset-Group)) = is-closed-under-inv-subgroup-subset-Group
+  pr1 (pr2 (pr2 subgroup-subset-Group)) =
+    is-closed-under-mul-subgroup-subset-Group
+  pr2 (pr2 (pr2 subgroup-subset-Group)) =
+    is-closed-under-inv-subgroup-subset-Group
 
   contains-subset-subgroup-subset-Group :
     S ⊆ subset-subgroup-subset-Group

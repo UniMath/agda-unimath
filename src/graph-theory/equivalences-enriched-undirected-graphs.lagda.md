@@ -261,7 +261,8 @@ module _
   equiv-eq-Enriched-Undirected-Graph :
     (H : Enriched-Undirected-Graph l3 l4 A B) →
     (G ＝ H) → equiv-Enriched-Undirected-Graph A B G H
-  equiv-eq-Enriched-Undirected-Graph H refl = id-equiv-Enriched-Undirected-Graph A B G
+  equiv-eq-Enriched-Undirected-Graph H refl =
+    id-equiv-Enriched-Undirected-Graph A B G
 
   is-equiv-equiv-eq-Enriched-Undirected-Graph :
     (H : Enriched-Undirected-Graph l3 l4 A B) →
@@ -274,7 +275,8 @@ module _
   extensionality-Enriched-Undirected-Graph :
     (H : Enriched-Undirected-Graph l3 l4 A B) →
     (G ＝ H) ≃ equiv-Enriched-Undirected-Graph A B G H
-  pr1 (extensionality-Enriched-Undirected-Graph H) = equiv-eq-Enriched-Undirected-Graph H
+  pr1 (extensionality-Enriched-Undirected-Graph H) =
+    equiv-eq-Enriched-Undirected-Graph H
   pr2 (extensionality-Enriched-Undirected-Graph H) =
     is-equiv-equiv-eq-Enriched-Undirected-Graph H
 

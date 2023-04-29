@@ -484,7 +484,8 @@ module _
 
   saturated-congruence-Normal-Commutative-Submonoid :
     saturated-congruence-Commutative-Monoid (l1 ⊔ l2) M
-  pr1 saturated-congruence-Normal-Commutative-Submonoid = congruence-Normal-Commutative-Submonoid M N
+  pr1 saturated-congruence-Normal-Commutative-Submonoid =
+    congruence-Normal-Commutative-Submonoid M N
   pr2 saturated-congruence-Normal-Commutative-Submonoid =
     is-saturated-congruence-Normal-Commutative-Submonoid
 ```

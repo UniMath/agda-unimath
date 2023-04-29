@@ -115,7 +115,8 @@ list-transpositions-permutation-Fin :
       ( Fin n → Decidable-Prop lzero)
       ( λ P → has-cardinality 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))))
 list-transpositions-permutation-Fin zero-ℕ f = nil
-list-transpositions-permutation-Fin (succ-ℕ n) f = list-transpositions-permutation-Fin' n f (map-equiv f (inr star)) refl
+list-transpositions-permutation-Fin (succ-ℕ n) f =
+  list-transpositions-permutation-Fin' n f (map-equiv f (inr star)) refl
 
 abstract
   retr-permutation-list-transpositions-Fin' :
@@ -128,7 +129,8 @@ abstract
           ( list-transpositions-permutation-Fin (succ-ℕ n) f))
         ( y))
       ( map-equiv f y)
-  retr-permutation-list-transpositions-Fin' zero-ℕ f (inr star) p (inr star) z q = inv p
+  retr-permutation-list-transpositions-Fin' zero-ℕ f (inr star) p (inr star) z q =
+    inv p
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inl z) q =
     ap
       (λ w →
@@ -488,15 +490,21 @@ module _
           list
             (Σ (type-UU-Fin n X → Decidable-Prop l)
             (λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (λ x → type-Decidable-Prop (P x)))))
-        list-transposition-f h = list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f
+        list-transposition-f h =
+          list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f
         is-injective-iterate-involution :
           (k k' x : Fin 2) →
           Id (iterate (nat-Fin 2 k) (succ-Fin 2) x) (iterate (nat-Fin 2 k') (succ-Fin 2) x) →
           Id k k'
-        is-injective-iterate-involution (inl (inr star)) (inl (inr star)) x p = refl
-        is-injective-iterate-involution (inl (inr star)) (inr star) (inl (inr star)) p = ex-falso (neq-inl-inr p)
-        is-injective-iterate-involution (inl (inr star)) (inr star) (inr star) p = ex-falso (neq-inr-inl p)
-        is-injective-iterate-involution (inr star) (inl (inr star)) (inl (inr star)) p = ex-falso (neq-inr-inl p)
-        is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
+        is-injective-iterate-involution (inl (inr star)) (inl (inr star)) x p =
+          refl
+        is-injective-iterate-involution (inl (inr star)) (inr star) (inl (inr star)) p =
+          ex-falso (neq-inl-inr p)
+        is-injective-iterate-involution (inl (inr star)) (inr star) (inr star) p =
+          ex-falso (neq-inr-inl p)
+        is-injective-iterate-involution (inr star) (inl (inr star)) (inl (inr star)) p =
+          ex-falso (neq-inr-inl p)
+        is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p =
+          ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
 ```

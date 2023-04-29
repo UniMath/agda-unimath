@@ -174,7 +174,8 @@ module _
   refl-htpy-fibered-map : (m : fibered-map f g) → htpy-fibered-map m m
   pr1 (refl-htpy-fibered-map m) = refl-htpy
   pr1 (pr2 (refl-htpy-fibered-map m)) = refl-htpy
-  pr2 (pr2 (refl-htpy-fibered-map m)) = inv-htpy-left-unit-htpy ∙h right-unit-htpy
+  pr2 (pr2 (refl-htpy-fibered-map m)) =
+    inv-htpy-left-unit-htpy ∙h right-unit-htpy
 
   htpy-eq-fibered-map :
     (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'

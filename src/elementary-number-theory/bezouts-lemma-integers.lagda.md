@@ -77,7 +77,8 @@ bezouts-lemma-eqn-to-int x y H =
 refactor-pos-cond :
   (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) →
   is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
-refactor-pos-cond x y H K = (λ F → (is-nonzero-abs-ℤ x H) (is-zero-left-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y) F))
+refactor-pos-cond x y H K =
+  (λ F → (is-nonzero-abs-ℤ x H) (is-zero-left-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y) F))
 
 bezouts-lemma-refactor-hypotheses :
   (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) →
@@ -306,7 +307,8 @@ bezouts-lemma-ℤ (inr (inr x)) (inr (inl star)) = pair one-ℤ (pair one-ℤ eq
         by right-unit-law-add-ℤ (inr (inr x))
       ＝ gcd-ℤ (inr (inr x)) zero-ℤ
         by inv (is-id-is-gcd-zero-ℤ' {inr (inr x)} {gcd-ℤ (inr (inr x)) zero-ℤ} refl)
-bezouts-lemma-ℤ (inr (inr x)) (inr (inr y)) = bezouts-lemma-pos-ints (inr (inr x)) (inr (inr y)) star star
+bezouts-lemma-ℤ (inr (inr x)) (inr (inr y)) =
+  bezouts-lemma-pos-ints (inr (inr x)) (inr (inr y)) star star
 ```
 
 Now that Bezout's Lemma has been established, we establish a few corollaries of

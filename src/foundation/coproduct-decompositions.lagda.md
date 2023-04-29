@@ -400,7 +400,8 @@ module _
       map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d t) →
     Σ ( left-summand-binary-coproduct-Decomposition d)
       ( λ a → inl a ＝ t)
-  compute-left-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d (inl y) x = y , refl
+  compute-left-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d (inl y) x =
+    y , refl
 
   compute-left-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
     (d : binary-coproduct-Decomposition l1 l1 X) →
@@ -426,7 +427,8 @@ module _
       map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d t) →
     Σ ( right-summand-binary-coproduct-Decomposition d)
       ( λ a → inr a ＝ t)
-  compute-right-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d (inr y) x = y , refl
+  compute-right-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d (inr y) x =
+    y , refl
 
   compute-right-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
     (d : binary-coproduct-Decomposition l1 l1 X) →

@@ -77,7 +77,8 @@ module _
     Id (mul-vector-matrix mulK addK zero a (add-Mat addK b c))
       (add-vec addK (mul-vector-matrix mulK addK zero a b)
                     (mul-vector-matrix mulK addK zero a c))
-  left-distributive-vector-matrix id-vec _ _ _ empty-vec empty-vec empty-vec = id-vec
+  left-distributive-vector-matrix id-vec _ _ _ empty-vec empty-vec empty-vec =
+    id-vec
   left-distributive-vector-matrix id-vec k-distr addK-comm addK-assoc (a ∷ as) (r1 ∷ r1s) (r2 ∷ r2s) =
       ap (λ r → add-vec addK r (mul-vector-matrix mulK addK zero as (add-Mat addK r1s r2s)))
         (left-distributive-scalar-vector {zero = zero} k-distr a r1 r2)
@@ -134,8 +135,10 @@ module _
        (add-Mat addK (mul-Mat mulK addK zero b d)
                      (mul-Mat mulK addK zero c d))
   right-distributive-matrices _ _ _ _ empty-vec empty-vec _ = refl
-  right-distributive-matrices {p = .zero-ℕ} id-vec k-distr addK-comm addK-assoc (b ∷ bs) (c ∷ cs) empty-vec = {!!}
-  right-distributive-matrices id-vec k-distr addK-comm addK-assoc (b ∷ bs) (c ∷ cs) (d ∷ ds) = {!!}
+  right-distributive-matrices {p = .zero-ℕ} id-vec k-distr addK-comm addK-assoc (b ∷ bs) (c ∷ cs) empty-vec =
+    {!!}
+  right-distributive-matrices id-vec k-distr addK-comm addK-assoc (b ∷ bs) (c ∷ cs) (d ∷ ds) =
+    {!!}
   -- this might also need a proof that zero is the additive identity
 
   TODO: associativity
