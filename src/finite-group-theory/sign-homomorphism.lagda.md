@@ -20,6 +20,7 @@ open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
