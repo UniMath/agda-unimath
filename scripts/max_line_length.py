@@ -71,9 +71,13 @@ if __name__ == '__main__':
                           .format(max=MAX_LINE_LENGTH,
                                   fpath=fpath,
                                   numline=numline + 1))
-        print('\nTop offending files:')
-        print(*map(lambda kv: f'  {kv[0]}: {kv[1]} lines',
-              sorted(offender_files.items(), key=lambda kv: kv[1])), sep='\n')
-        print(
-            f'\nTotal number of lines in library over character limit: {sum(offender_files.values())}.')
+
+        if status & MAX_LENGTH_EXCEEDED_FLAG != 0:
+
+            print('\nTop offending files:')
+            print(*map(lambda kv: f'  {kv[0]}: {kv[1]} lines',
+                       sorted(offender_files.items(), key=lambda kv: kv[1])), sep='\n')
+            print(
+                f'\nTotal number of lines in library over character limit: {sum(offender_files.values())}.')
+            print('Tip: if you haven\'t already, we recommend you enable a vertical ruler at the character limit in your IDE.')
     sys.exit(status)
