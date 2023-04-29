@@ -513,7 +513,7 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
                 ( is-prop-is-set ( X))
                 ( is-set-has-decidable-equality)) ∘e
             commutative-prod) ∘e
-        ( equiv-left-swap-Σ )))) ∘e
+        ( equiv-left-swap-Σ)))) ∘e
     ( ( assoc-Σ
         ( UU l1)
         ( λ X → is-set X)
@@ -540,5 +540,5 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
               ( equiv-Σ-equiv-base
                 ( λ R → is-decidable-Eq-Rel R)
                 ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
-                  equiv-equivalence-relation-is-decidable-Dec-Eq-Rel )))))
+                  equiv-equivalence-relation-is-decidable-Dec-Eq-Rel)))))
 ```

@@ -112,7 +112,7 @@ module _
              inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
-    (d : ternary-product-Decomposition )
+    (d : ternary-product-Decomposition)
     where
 
     types-ternary-product-Decomposition :
@@ -192,7 +192,7 @@ module _
                 inclusion-subuniverse P (pr1 x))))
     map-reassociate-left-iterated-product-Decomposition
       ( (A , B , e) , C , D , f) =
-      ( (B , C , D) , (A , f) , e )
+      ( (B , C , D) , (A , f) , e)
 
     map-inv-reassociate-left-iterated-product-Decomposition :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
@@ -269,7 +269,7 @@ module _
                 inclusion-subuniverse P (pr1 B))))
     map-reassociate-right-iterated-product-Decomposition
       ( (A , B , e) , C , D , f) =
-      ( (A , C , D) , (B , f) , e )
+      ( (A , C , D) , (B , f) , e)
 
     map-inv-reassociate-right-iterated-product-Decomposition :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))

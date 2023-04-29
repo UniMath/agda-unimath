@@ -460,7 +460,7 @@ module _
                 ( eq-pair-Σ
                   ( ap
                     ( λ h → pr1 Y ∘ map-equiv h)
-                    ( right-inverse-law-equiv (inv-equiv e)) )
+                    ( right-inverse-law-equiv (inv-equiv e)))
                   ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( ap (λ h → map-equiv h (pr1 (d Y))) (right-inverse-law-equiv (inv-equiv e))))
               ( eq-is-prop (is-prop-type-Decidable-Prop (pr1 Y (pr1 (id d Y)))))))
@@ -796,7 +796,7 @@ module _
               ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)
               ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
         { x = ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)}
-        { y = inl r1 }
+        { y = inl r1}
         ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))) ∙
         ( r2)
 

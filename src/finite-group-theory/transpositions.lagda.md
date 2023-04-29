@@ -372,7 +372,7 @@ module _
     cases-coprod-id-type-t :
       (x : X) (p : is-in-2-Element-Decidable-Subtype Y x) →
       (h : Fin 2 ≃ type-2-Element-Decidable-Subtype Y) →
-      (k1 k2 k3 : Fin 2 ) →
+      (k1 k2 k3 : Fin 2) →
       Id ( map-inv-equiv h (pair x p)) k1 →
       Id ( map-inv-equiv h
            ( pair

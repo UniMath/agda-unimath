@@ -31,8 +31,8 @@ underlying types such that all the structure is preserved.
 ```agda
 module _
   { l1 : Level} ( Sg : signature l1)
-  { l2 : Level } ( Th : Theory Sg l2)
-  { l3 l4 : Level }
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 l4 : Level}
   ( Alg1 : Algebra Sg Th l3)
   ( Alg2 : Algebra Sg Th l4)
   where

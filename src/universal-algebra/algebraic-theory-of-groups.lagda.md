@@ -46,8 +46,8 @@ group-signature : signature lzero
 group-signature =
   pair
     group-ops
-    ( λ { unit-group-op → 0;
-          mul-group-op → 2;
+    ( λ { unit-group-op → 0 ;
+          mul-group-op → 2 ;
           inv-group-op → 1})
 
 data group-laws : UU lzero where
@@ -69,21 +69,21 @@ group-Theory =
                 ( var 2) ∷ empty-vec))
               ( op mul-group-op
                 ( var 0 ∷
-                ( op mul-group-op (var 1 ∷ var 2 ∷ empty-vec)) ∷ empty-vec));
+                ( op mul-group-op (var 1 ∷ var 2 ∷ empty-vec)) ∷ empty-vec)) ;
           invl-l-group-laws →
             pair
               ( op mul-group-op
                 ( op inv-group-op (var 0 ∷ empty-vec) ∷ var 0 ∷ empty-vec))
-              (op unit-group-op empty-vec);
+              (op unit-group-op empty-vec) ;
           invr-r-group-laws →
             pair
               ( op mul-group-op
                 ( var 0 ∷ op inv-group-op (var 0 ∷ empty-vec) ∷ empty-vec))
-              (op unit-group-op empty-vec);
+              (op unit-group-op empty-vec) ;
           idl-l-group-laws →
             pair
               (op mul-group-op (op unit-group-op empty-vec ∷ var 0 ∷ empty-vec))
-              (var 0);
+              (var 0) ;
           idr-r-group-laws →
             pair
               (op mul-group-op (var 0 ∷ op unit-group-op empty-vec ∷ empty-vec))
@@ -114,8 +114,8 @@ group-Algebra-Group (((A , is-set-A) , models-A) , satisfies-A) =
           ( models-A mul-group-op (x ∷ y ∷ empty-vec)))
         ( λ x y z →
           ( satisfies-A assoc-l-group-laws
-            ( λ { zero-ℕ → x;
-                ( succ-ℕ zero-ℕ) → y;
+            ( λ { zero-ℕ → x ;
+                ( succ-ℕ zero-ℕ) → y ;
                 ( succ-ℕ (succ-ℕ n)) → z})))))
     ( pair
       ( pair
@@ -137,17 +137,17 @@ Group-group-Algebra G =
   pair
     ( pair
       ( ( set-Group G))
-      ( λ { unit-group-op v → unit-Group G;
-            mul-group-op (x ∷ y ∷ empty-vec) → mul-Group G x y;
+      ( λ { unit-group-op v → unit-Group G ;
+            mul-group-op (x ∷ y ∷ empty-vec) → mul-Group G x y ;
             inv-group-op (x ∷ empty-vec) → inv-Group G x}))
     ( λ { assoc-l-group-laws assign →
-            associative-mul-Group G (assign 0) (assign 1) (assign 2);
+            associative-mul-Group G (assign 0) (assign 1) (assign 2) ;
           invl-l-group-laws assign →
-            left-inverse-law-mul-Group G (assign 0);
+            left-inverse-law-mul-Group G (assign 0) ;
           invr-r-group-laws assign →
-            right-inverse-law-mul-Group G (assign 0);
+            right-inverse-law-mul-Group G (assign 0) ;
           idl-l-group-laws assign →
-            left-unit-law-mul-Group G (assign 0);
+            left-unit-law-mul-Group G (assign 0) ;
           idr-r-group-laws assign →
             right-unit-law-mul-Group G (assign 0)})
 
@@ -173,9 +173,9 @@ equiv-group-Algebra-Group =
               ( refl)
               ( eq-htpy
                 ( λ { unit-group-op →
-                      ( eq-htpy λ {empty-vec → refl});
+                      ( eq-htpy λ {empty-vec → refl}) ;
                       mul-group-op →
-                      ( eq-htpy λ { (x ∷ y ∷ empty-vec) → refl});
+                      ( eq-htpy λ { (x ∷ y ∷ empty-vec) → refl}) ;
                       inv-group-op →
                       ( eq-htpy λ { (x ∷ empty-vec) → refl})}))))
           ( eq-is-prop

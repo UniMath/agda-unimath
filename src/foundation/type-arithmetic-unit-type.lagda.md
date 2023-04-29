@@ -166,7 +166,7 @@ module _
 
   isretr-map-inv-left-unit-law-Π :
     ( map-inv-left-unit-law-Π ∘ map-left-unit-law-Π) ~ id
-  isretr-map-inv-left-unit-law-Π f = eq-htpy (λ { star → refl })
+  isretr-map-inv-left-unit-law-Π f = eq-htpy (λ { star → refl})
 
   is-equiv-map-left-unit-law-Π : is-equiv map-left-unit-law-Π
   is-equiv-map-left-unit-law-Π =

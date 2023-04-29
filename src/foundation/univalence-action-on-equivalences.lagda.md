@@ -112,7 +112,7 @@ module _
     lemma1 f g h X .X pX pX' refl = h X pX pX'
     lemma2 :
       ( f g : (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y) →
-      ( (X : type-subuniverse P) → f X X id-equiv ＝ g X X id-equiv ) →
+      ( (X : type-subuniverse P) → f X X id-equiv ＝ g X X id-equiv) →
       ( X Y : type-subuniverse P) (e : pr1 X ≃ pr1 Y) →
       f X Y e ＝ g X Y e
     lemma2 f g h X Y e =

@@ -242,7 +242,7 @@ module _
 
   map-compute-path-over-loop-circle :
     ( x y : type-descent-data-circle P) →
-    ( map-equiv (aut-descent-data-circle P) x ＝ y ) →
+    ( map-equiv (aut-descent-data-circle P) x ＝ y) →
     ( path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
   map-compute-path-over-loop-circle x y q =
     inv (pr2 αH x) ∙ (ap (map-equiv α) q)

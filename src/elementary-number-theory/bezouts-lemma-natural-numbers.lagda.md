@@ -885,7 +885,7 @@ minimal-positive-distance-div-succ-x-eqn x y =
           by (ap (λ H → add-ℤ H (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))) (mul-int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)))
        ＝ int-ℕ (add-ℕ
         (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y))
-        (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) )
+        (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
           by (add-int-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)) (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
        ＝ int-ℕ (succ-ℕ x)
           by ap (int-ℕ) (eq-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
@@ -1433,7 +1433,7 @@ minimal-positive-distance-div-fst (succ-ℕ x) y = pair (quotient-euclidean-divi
     equational-reasoning
       mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)
       ＝ add-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)) zero-ℕ
-        by (inv (right-unit-law-add-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)) ))
+        by (inv (right-unit-law-add-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y))))
       ＝ add-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)) (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
         by (ap (λ H → add-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)) H) (inv (remainder-min-dist-succ-x-is-zero x y)))
       ＝ succ-ℕ x by eq-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)

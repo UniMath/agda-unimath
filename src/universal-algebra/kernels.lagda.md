@@ -38,8 +38,8 @@ The kernel of a homomorphism `f` of algebras is the congruence relation given by
 ```agda
 module _
   { l1 : Level} ( Sg : signature l1)
-  { l2 : Level } ( Th : Theory Sg l2)
-  { l3 l4 : Level }
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 l4 : Level}
   ( Alg1 : Algebra Sg Th l3)
   ( Alg2 : Algebra Sg Th l4)
   ( F : type-hom-Algebra Sg Th Alg1 Alg2)

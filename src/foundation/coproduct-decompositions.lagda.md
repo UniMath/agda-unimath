@@ -187,7 +187,7 @@ module _
   is-contr-total-equiv-binary-coproduct-Decomposition =
     is-contr-total-Eq-structure
       ( _)
-      ( is-contr-total-equiv ( left-summand-binary-coproduct-Decomposition  X) )
+      ( is-contr-total-equiv ( left-summand-binary-coproduct-Decomposition  X))
       ( left-summand-binary-coproduct-Decomposition X , id-equiv)
       ( is-contr-total-Eq-structure
         ( _)
@@ -195,7 +195,7 @@ module _
         ( right-summand-binary-coproduct-Decomposition X , id-equiv)
         ( is-contr-total-htpy-equiv
           ( equiv-coprod id-equiv id-equiv ∘e
-            matching-correspondence-binary-coproduct-Decomposition X )))
+            matching-correspondence-binary-coproduct-Decomposition X)))
 
   equiv-eq-binary-coproduct-Decomposition :
     (Y : binary-coproduct-Decomposition l2 l3 A) → (X ＝ Y) →
@@ -245,11 +245,11 @@ module _
           ( left-unit-law-Σ-is-contr ( is-contr-Fin-one-ℕ) ( inr star))
           ( left-unit-law-Σ-is-contr  is-contr-unit star)) ∘e
         ( ( right-distributive-Σ-coprod ( Fin 1) unit (λ x → fib f x) ∘e
-            ( inv-equiv-total-fib f ))))
+            ( inv-equiv-total-fib f))))
 
     compute-left-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
       (x : X) →
-      (inl (inr star) ＝ f x ) →
+      (inl (inr star) ＝ f x) →
       Σ ( Σ ( fib f (inl (inr star)))
             ( λ y →
               inl y ＝
@@ -279,7 +279,7 @@ module _
                 ( inv-map-eq-transpose-equiv
                   ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star))
                   ( refl))))),
-          refl )
+          refl)
 
     compute-left-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ :
       (y : fib f (inl (inr star))) →
@@ -307,7 +307,7 @@ module _
 
     compute-right-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
       (x : X) →
-      (inr star ＝ f x ) →
+      (inr star ＝ f x) →
       Σ ( Σ ( fib f (inr star))
             ( λ y →
               inr y ＝
@@ -397,7 +397,7 @@ module _
       ( left-summand-binary-coproduct-Decomposition d) +
       ( right-summand-binary-coproduct-Decomposition d)) →
     ( inl (inr star) ＝
-      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d t ) →
+      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d t) →
     Σ ( left-summand-binary-coproduct-Decomposition d)
       ( λ a → inl a ＝ t)
   compute-left-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d (inl y) x = y , refl
@@ -423,7 +423,7 @@ module _
       ( left-summand-binary-coproduct-Decomposition d) +
       ( right-summand-binary-coproduct-Decomposition d)) →
     ( inr star ＝
-      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d t ) →
+      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d t) →
     Σ ( right-summand-binary-coproduct-Decomposition d)
       ( λ a → inr a ＝ t)
   compute-right-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d (inr y) x = y , refl
@@ -463,7 +463,7 @@ module _
                 f
                 x
                 y)))) ∙
-      y )
+      y)
   isretr-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper f x (inr y) =
     ( inv
       ( ap
@@ -502,7 +502,7 @@ module _
     (d : binary-coproduct-Decomposition l1 l1 X) →
     left-summand-binary-coproduct-Decomposition
       ( map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
-        ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d )) ≃
+        ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d)) ≃
     left-summand-binary-coproduct-Decomposition d
   equiv-left-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d =
     ( ( right-unit-law-coprod
@@ -531,7 +531,7 @@ module _
     (d : binary-coproduct-Decomposition l1 l1 X) →
     right-summand-binary-coproduct-Decomposition
       ( map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
-        ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d )) ≃
+        ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d)) ≃
     right-summand-binary-coproduct-Decomposition d
   equiv-right-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d =
    ( ( left-unit-law-coprod
@@ -549,7 +549,7 @@ module _
             ( right-summand-binary-coproduct-Decomposition d)
             ( λ y →
               map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
-                d y ＝ inr star) ) ∘e
+                d y ＝ inr star)) ∘e
           ( equiv-Σ-equiv-base
             ( λ y →
               map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper d y ＝
@@ -630,7 +630,7 @@ module _
                    ( right-summand-binary-coproduct-Decomposition d)
                    ( λ y →
                      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
-                       d y ＝ inr star) )))))
+                       d y ＝ inr star))))))
            ( x)))
       ( eq-pair-Σ
         {t =
@@ -659,7 +659,7 @@ module _
     ( d : binary-coproduct-Decomposition l1 l1 X) →
     ( x : X) →
     ( ( inl (inr star) ＝
-        ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d) x ) +
+        ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d) x) +
       ( inr star ＝
         ( map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d) x)) →
     ( map-coprod
@@ -758,7 +758,7 @@ module _
   value-map-into-Fin-Two-ℕ-eq-zero-or-one :
     (f : X → Fin 2) →
     (x : X) →
-    (inl (inr star) ＝ f x ) + (inr star ＝ f x)
+    (inl (inr star) ＝ f x) + (inr star ＝ f x)
   value-map-into-Fin-Two-ℕ-eq-zero-or-one f x =
     value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper (f x)
 
@@ -793,7 +793,7 @@ module _
       ( d)
       ( equiv-left-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d ,
         equiv-right-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d ,
-          matching-correspondence-htpy-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d )
+          matching-correspondence-htpy-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d)
 
   is-equiv-map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
     is-equiv map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ

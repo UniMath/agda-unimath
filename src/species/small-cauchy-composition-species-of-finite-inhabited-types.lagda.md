@@ -92,7 +92,7 @@ module _
   where
 
   finite-small-cauchy-composition-species-subuniverse :
-    ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2) ) (X :  Inhabited-𝔽 l1) →
+    ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) (X :  Inhabited-𝔽 l1) →
     𝔽 (lsuc l1 ⊔ l2)
   finite-small-cauchy-composition-species-subuniverse S T X =
     Σ-𝔽
@@ -119,7 +119,7 @@ module _
 
   private
     C1 :
-      ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2) ) →
+      ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) →
       ( X :  type-subuniverse is-finite-and-inhabited-Prop) →
       is-small
         (l1 ⊔ l2)
@@ -131,10 +131,10 @@ module _
       is-small-is-finite
         (l1 ⊔ l2)
         ( finite-small-cauchy-composition-species-subuniverse S T
-          (map-inv-compute-Inhabited-𝔽' X) )
+          (map-inv-compute-Inhabited-𝔽' X))
 
     C2 :
-      ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2) ) →
+      ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) →
       (X : type-subuniverse is-finite-and-inhabited-Prop) →
       is-finite (type-is-small (C1 S T X))
     C2 S T X =

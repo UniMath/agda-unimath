@@ -102,14 +102,14 @@ module _
   is-meet-semilattice-Meet-Sup-Lattice = pr1 (pr2 A)
 
   meet-semilattice-Meet-Sup-Lattice : Meet-Semilattice l1 l2
-  meet-semilattice-Meet-Sup-Lattice = ( poset-Meet-Sup-Lattice , is-meet-semilattice-Meet-Sup-Lattice )
+  meet-semilattice-Meet-Sup-Lattice = ( poset-Meet-Sup-Lattice , is-meet-semilattice-Meet-Sup-Lattice)
 
   is-sup-lattice-Meet-Sup-Lattice :
     is-sup-lattice-Poset l3 poset-Meet-Sup-Lattice
   is-sup-lattice-Meet-Sup-Lattice = pr2 (pr2 A)
 
   sup-lattice-Meet-Sup-Lattice : Sup-Lattice l1 l2 l3
-  sup-lattice-Meet-Sup-Lattice = ( poset-Meet-Sup-Lattice , is-sup-lattice-Meet-Sup-Lattice )
+  sup-lattice-Meet-Sup-Lattice = ( poset-Meet-Sup-Lattice , is-sup-lattice-Meet-Sup-Lattice)
 
   meet-sup-lattice-Meet-Sup-Lattice :
     Meet-Sup-Lattice l1 l2 l3

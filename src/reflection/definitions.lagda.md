@@ -92,7 +92,7 @@ private
   helper A x = x
 
   _ :
-    quoteTerm (helper (ℕ → ℕ) (λ { zero-ℕ → zero-ℕ ; (succ-ℕ x) → x })) ＝
+    quoteTerm (helper (ℕ → ℕ) (λ { zero-ℕ → zero-ℕ ; (succ-ℕ x) → x})) ＝
     def
       ( quote helper)
       ( cons

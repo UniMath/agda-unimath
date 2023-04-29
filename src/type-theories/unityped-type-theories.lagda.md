@@ -311,13 +311,13 @@ module unityped where
     weakening-preserves-weakening.slice (type-theory.WW T)
   type-theory.SS (slice-type-theory T) =
     substitution-preserves-substitution.slice (type-theory.SS T)
-  type-theory.WS (slice-type-theory T ) =
+  type-theory.WS (slice-type-theory T) =
     weakening-preserves-substitution.slice (type-theory.WS T)
-  type-theory.SW (slice-type-theory T ) =
+  type-theory.SW (slice-type-theory T) =
     substitution-preserves-weakening.slice (type-theory.SW T)
-  type-theory.Wδ (slice-type-theory T ) =
+  type-theory.Wδ (slice-type-theory T) =
     weakening-preserves-generic-element.slice (type-theory.Wδ T)
-  type-theory.Sδ (slice-type-theory T ) =
+  type-theory.Sδ (slice-type-theory T) =
     substitution-preserves-generic-element.slice (type-theory.Sδ T)
   type-theory.S!W (slice-type-theory T) =
     substitution-cancels-weakening.slice (type-theory.S!W T)

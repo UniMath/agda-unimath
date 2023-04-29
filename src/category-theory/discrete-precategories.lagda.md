@@ -31,7 +31,7 @@ module _
   Discrete-Precat = type-Set X , disc-Hom , comp-struct , id-struct
     where
       disc-Hom : type-Set X → type-Set X → Set l
-      disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y )
+      disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y)
 
       comp-struct : associative-composition-structure-Set disc-Hom
       pr1 comp-struct refl refl = refl

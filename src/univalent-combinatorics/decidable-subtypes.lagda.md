@@ -190,7 +190,7 @@ is-decidable-subtype-is-finite-has-decidable-eq S dec-A fin-S a =
     ( λ count-S →
       ind-coprod
         ( λ _ → type-Prop (is-decidable-Prop (S a)))
-        ( λ x → inl (tr (type-Prop ∘ S) (inv (pr2 x)) (pr2 (pr1 x))) )
-        ( λ x → inr λ S-a → x (( (a , S-a) , refl ) ))
+        ( λ x → inl (tr (type-Prop ∘ S) (inv (pr2 x)) (pr2 (pr1 x))))
+        ( λ x → inr λ S-a → x (( (a , S-a) , refl) ))
         ( is-decidable-Σ-count count-S λ s → dec-A a (pr1 s)))
 ```

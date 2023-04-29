@@ -119,7 +119,7 @@ is-nil-union-is-nil-list :
 is-nil-union-is-nil-list d nil l' p = (refl , p)
 is-nil-union-is-nil-list d (cons x l) l' p with (elem-list d x l') in q
 ... | true =
-  ex-falso (is-nonnil-elem-list d x l' q p )
+  ex-falso (is-nonnil-elem-list d x l' q p)
     -- ( is-nonnil-elem-list d x l' q
     --   (pr2 (is-nil-union-is-nil-list d l l' p)))
 ... | false = ex-falso (is-nonnil-cons-list x l' p)

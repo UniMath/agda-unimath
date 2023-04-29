@@ -78,7 +78,7 @@ has-pair-expansion-is-even-or-odd n =
               s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
            in pair
              ( (succ-ℕ (pr1 (pr1 s))) , pr2 (pr1 s))
-             ( ( ap (λ a → mul-ℕ a (succ-ℕ (mul-ℕ (pr2 (pr1 s) ) 2)))
+             ( ( ap (λ a → mul-ℕ a (succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2)))
                ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
              ( ( associative-mul-ℕ 2 (exp-ℕ 2 (pr1 (pr1 s)))
                ( succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2))) ∙

@@ -501,7 +501,7 @@ is-locally-finite-Π-count :
   ((x : A) → is-locally-finite (B x)) → is-locally-finite ((x : A) → B x)
 is-locally-finite-Π-count {l1} {l2} {A} {B} (pair k e) g =
   is-locally-finite-equiv
-    ( equiv-precomp-Π e B )
+    ( equiv-precomp-Π e B)
     ( is-locally-finite-Π-Fin k (λ x → g (map-equiv e x)))
 
 is-locally-finite-Π :

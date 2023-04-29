@@ -56,7 +56,7 @@ coefficients of the composite of the Cauchy series of `S` and `T`.
 ```agda
 module _
   {l1 l2 : Level}
-  (P : subuniverse l1 l2 )
+  (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
   where
 
@@ -71,7 +71,7 @@ module _
         ( inclusion-subuniverse
           ( subuniverse-global-subuniverse Q l3)
           ( S (subuniverse-indexing-type-Σ-Decomposition-Subuniverse P X D))) ×
-        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D ) →
+        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D) →
           inclusion-subuniverse
           ( subuniverse-global-subuniverse Q l4)
           ( T (subuniverse-cotype-Σ-Decomposition-Subuniverse P X D x))))
@@ -456,7 +456,7 @@ module _
                 ( C2)
                 ( S)
                 ( cauchy-composition-species-subuniverse P Q C1 C2 T U)
-                ( inclusion-subuniverse P X) ) ∘e
+                ( inclusion-subuniverse P X)) ∘e
               ( equiv-Σ-extension-species-subuniverse P
                 ( subuniverse-global-subuniverse Q
                   ( lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))

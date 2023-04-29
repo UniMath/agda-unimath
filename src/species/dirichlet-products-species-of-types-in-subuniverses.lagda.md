@@ -42,7 +42,7 @@ dirichlet product is also a species of subuniverse from `P` to `Q`
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
+  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
   where
 
   dirichlet-product-species-subuniverse' :
@@ -58,7 +58,7 @@ module _
           ( T (right-summand-binary-product-Decomposition P X d)))
 
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id )
+  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
   ( C1 :
     ( (l4 l5 : Level)
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
@@ -126,7 +126,7 @@ module _
               ( λ x →
                 equiv-postcomp-equiv
                   ( ( assoc-prod _ _ _ ∘e
-                    ( commutative-prod)) )
+                    ( commutative-prod)))
                   ( inclusion-subuniverse P X)) ∘e
               equiv-ternary-left-iterated-product-Decomposition P X C2))
           ( λ d → assoc-prod _ _ _) ∘e
@@ -246,7 +246,7 @@ module _
 ```agda
 unit-dirichlet-product-species-subuniverse :
   {l1 : Level} →
-  (P Q : subuniverse l1 l1 ) →
+  (P Q : subuniverse l1 l1) →
   ( (X : type-subuniverse P) →
     is-in-subuniverse Q ( is-contr (inclusion-subuniverse P X))) →
   species-subuniverse P Q

@@ -99,12 +99,12 @@ Too bad I thought of this only after writing everything out...oops -}
     (inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))))) ∙
     ((ap (λ x → tr-path-over B α q0 ∙
     pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
-    (inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 (inv (tr-path-over B α q0) ∙ z) ∙ x ))
+    (inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 (inv (tr-path-over B α q0) ∙ z) ∙ x))
     (right-inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
     ((ap (λ x → tr-path-over B α q0 ∙ pr1 (pr1 (is-equiv-inv-con
     (inv (ap (λ t → tr B t b0) α)) q0 q1)) x) right-unit) ∙
     ((ap (λ x → tr-path-over B α q0 ∙ x) ( isretr-map-inv-equiv
-    (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1) (inv (tr-path-over B α q0) ∙ z) )) ∙
+    (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1) (inv (tr-path-over B α q0) ∙ z))) ∙
     (inv (assoc (tr-path-over B α q0) (inv (tr-path-over B α q0)) z) ∙
     (ap (λ t → t ∙ z) (right-inv (tr-path-over B α q0)))))))
 
@@ -115,7 +115,7 @@ Too bad I thought of this only after writing everything out...oops -}
     ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
     (inv (assoc (inv (tr-path-over B α q0)) (tr-path-over B α q0)
     (pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
-    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))))) ) ∙
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))))))) ∙
     (ap (λ x → inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1
     (x ∙ pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
     (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙

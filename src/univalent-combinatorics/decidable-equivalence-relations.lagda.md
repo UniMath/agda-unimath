@@ -117,7 +117,7 @@ module _
   is-finite-relation-Decidable-Relation-𝔽 x y =
      unit-trunc-Prop
        ( count-Decidable-Prop
-         ( relation-Decidable-Relation R x y )
+         ( relation-Decidable-Relation R x y)
          ( is-decidable-type-Decidable-Relation R x y))
 
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 :
@@ -125,7 +125,7 @@ module _
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 =
     is-finite-Π'
       ( is-finite-type-𝔽 A)
-      (λ x → is-finite-relation-Decidable-Relation-𝔽 x x )
+      (λ x → is-finite-relation-Decidable-Relation-𝔽 x x)
 
   is-finite-is-symmetric-Dec-Rel-Prop-𝔽 :
     is-finite (is-symmetric-Rel-Prop (relation-Decidable-Relation R))
@@ -156,7 +156,7 @@ module _
                   ( is-finite-relation-Decidable-Relation-𝔽 x y)
                   ( is-finite-function-type
                      ( is-finite-relation-Decidable-Relation-𝔽 y z)
-                     ( is-finite-relation-Decidable-Relation-𝔽 x z)) )))
+                     ( is-finite-relation-Decidable-Relation-𝔽 x z)))))
 
   is-finite-is-equivalence-Dec-Rel-Prop-𝔽 :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
@@ -190,7 +190,7 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
           ( λ X →
               has-decidable-equality X ×
               type-trunc-Prop (Σ ℕ (λ n → Fin n ↠  X)))
-          ( λ X → type-𝔽 A ↠ pr1 X)  ) ∘e
+          ( λ X → type-𝔽 A ↠ pr1 X)) ∘e
       ( ( equiv-Σ
             (λ X →
                 Σ ( has-decidable-equality X ×

@@ -117,7 +117,7 @@ module _
     left-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   right-unit-law-mul-Wild-Monoid :
-    (x : type-Wild-Monoid ) → Id (mul-Wild-Monoid x unit-Wild-Monoid) x
+    (x : type-Wild-Monoid) → Id (mul-Wild-Monoid x unit-Wild-Monoid) x
   right-unit-law-mul-Wild-Monoid =
     right-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 

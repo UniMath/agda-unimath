@@ -828,7 +828,7 @@ module _
       ( T2)
       ( is-equivalence-class-Prop
         ( same-orbits-permutation-count (composition-transposition-a-b g))
-        ( T1) )
+        ( T1))
       ( λ (pair x Q) →
         unit-trunc-Prop
           ( pair x

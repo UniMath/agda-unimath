@@ -58,7 +58,7 @@ module _
 compute-Inhabited-𝔽 :
   {l : Level} →
   Inhabited-𝔽 l ≃
-    Σ (Inhabited-Type l ) (λ X → is-finite (type-Inhabited-Type X))
+    Σ (Inhabited-Type l) (λ X → is-finite (type-Inhabited-Type X))
 compute-Inhabited-𝔽 = equiv-right-swap-Σ
 
 is-finite-and-inhabited-Prop : {l : Level} → UU l → Prop l

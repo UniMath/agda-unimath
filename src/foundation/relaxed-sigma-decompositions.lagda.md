@@ -451,7 +451,7 @@ module _
                    ( map-matching-correspondence-Relaxed-Σ-Decomposition Y)) ~
                  ( map-equiv (pr2 Vs))))))
         ( is-contr-total-equiv (indexing-type-Relaxed-Σ-Decomposition Y))
-        ( pair (indexing-type-Relaxed-Σ-Decomposition Y) id-equiv )
+        ( pair (indexing-type-Relaxed-Σ-Decomposition Y) id-equiv)
         ( is-contr-total-Eq-structure
           ( λ V f g →
             ( ( map-equiv-Σ (λ u → V  u) id-equiv g) ∘
@@ -475,13 +475,13 @@ module _
   pr2 (pr2 (pr2 id-equiv-fibered-Relaxed-Σ-Decomposition)) = refl-htpy
 
   equiv-eq-fibered-Relaxed-Σ-Decomposition :
-    (D' : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (D' : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     (D ＝ D') → equiv-fibered-Relaxed-Σ-Decomposition D D'
   equiv-eq-fibered-Relaxed-Σ-Decomposition .D refl =
     id-equiv-fibered-Relaxed-Σ-Decomposition
 
   is-equiv-equiv-eq-fibered-Relaxed-Σ-Decomposition :
-    (D' : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (D' : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     is-equiv (equiv-eq-fibered-Relaxed-Σ-Decomposition D')
   is-equiv-equiv-eq-fibered-Relaxed-Σ-Decomposition =
     fundamental-theorem-id
@@ -497,7 +497,7 @@ module _
     is-equiv-equiv-eq-fibered-Relaxed-Σ-Decomposition D'
 
   eq-equiv-fibered-Relaxed-Σ-Decomposition :
-    (D' : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (D' : fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     (equiv-fibered-Relaxed-Σ-Decomposition D D') → (D ＝ D')
   eq-equiv-fibered-Relaxed-Σ-Decomposition D' =
     map-inv-equiv (extensionality-fibered-Relaxed-Σ-Decomposition D')
@@ -567,7 +567,7 @@ module _
 
   is-contr-total-equiv-displayed-Relaxed-Σ-Decomposition :
     is-contr
-      ( Σ ( displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A )
+      ( Σ ( displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A)
           ( equiv-displayed-Relaxed-Σ-Decomposition disp-D))
   is-contr-total-equiv-displayed-Relaxed-Σ-Decomposition =
     is-contr-total-Eq-structure
@@ -592,13 +592,13 @@ module _
   pr2 (pr2 (pr2 id-equiv-displayed-Relaxed-Σ-Decomposition x)) = refl-htpy
 
   equiv-eq-displayed-Relaxed-Σ-Decomposition :
-    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     (disp-D ＝ disp-D') → equiv-displayed-Relaxed-Σ-Decomposition disp-D disp-D'
   equiv-eq-displayed-Relaxed-Σ-Decomposition .disp-D refl =
     id-equiv-displayed-Relaxed-Σ-Decomposition
 
   is-equiv-equiv-eq-displayed-Relaxed-Σ-Decomposition :
-    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     is-equiv (equiv-eq-displayed-Relaxed-Σ-Decomposition disp-D')
   is-equiv-equiv-eq-displayed-Relaxed-Σ-Decomposition =
     fundamental-theorem-id
@@ -606,7 +606,7 @@ module _
       equiv-eq-displayed-Relaxed-Σ-Decomposition
 
   extensionality-displayed-Relaxed-Σ-Decomposition :
-    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     (disp-D ＝ disp-D') ≃ equiv-displayed-Relaxed-Σ-Decomposition disp-D disp-D'
   pr1 (extensionality-displayed-Relaxed-Σ-Decomposition D) =
     equiv-eq-displayed-Relaxed-Σ-Decomposition D
@@ -614,7 +614,7 @@ module _
     is-equiv-equiv-eq-displayed-Relaxed-Σ-Decomposition D
 
   eq-equiv-displayed-Relaxed-Σ-Decomposition :
-    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A ) →
+    (disp-D' : displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A) →
     (equiv-displayed-Relaxed-Σ-Decomposition disp-D disp-D') →
     (disp-D ＝ disp-D')
   eq-equiv-displayed-Relaxed-Σ-Decomposition D =
@@ -803,7 +803,7 @@ module _
     disp-D
   issec-map-inv-displayed-fibered-Relaxed-Σ-Decomposition =
      eq-equiv-displayed-Relaxed-Σ-Decomposition
-      ( map-displayed-fibered-Relaxed-Σ-Decomposition fib-D )
+      ( map-displayed-fibered-Relaxed-Σ-Decomposition fib-D)
       ( disp-D)
       ( ( ( id-equiv) ,
           ( ( inv-equiv ∘ t) ,

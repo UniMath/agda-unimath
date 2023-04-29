@@ -58,7 +58,7 @@ is-decidable-is-surjective-is-finite f HA HB =
 
 ```agda
 module _
-  {l1 : Level} {X : UU l1 }
+  {l1 : Level} {X : UU l1}
   where
 
   count-surjection-has-decidable-equality :
@@ -74,7 +74,7 @@ module _
                   is-proof-irrelevant-is-prop
                     ( is-prop-type-trunc-Prop)
                     ( is-surjective-map-surjection f x))))
-            (Σ _ (fib (pr1 f))) )
+            (Σ _ (fib (pr1 f))))
           ( decidable-emb-tot-trunc-Prop-count
             { P = fib (map-surjection f)}
             ( count-fiber-count-Σ

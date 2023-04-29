@@ -114,7 +114,7 @@ element of `A`.
   eval-constant-term :
     { l2 : Level} {A : UU l2} →
     ( is-model Sg A) →
-    ( t : Term ) →
+    ( t : Term) →
     (de-bruijn-variables-term t ＝ nil) →
     A
 

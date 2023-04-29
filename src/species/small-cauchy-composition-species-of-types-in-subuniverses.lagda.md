@@ -54,7 +54,7 @@ compose species.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (P : subuniverse l1 l2 )
+  (P : subuniverse l1 l2)
   (Q : subuniverse l3 l4)
   (S : species-subuniverse P Q)
   (T : species-subuniverse P Q)
@@ -68,7 +68,7 @@ module _
         ( inclusion-subuniverse
           ( Q)
           ( S (subuniverse-indexing-type-Σ-Decomposition-Subuniverse P X D))) ×
-        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D ) →
+        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D) →
           inclusion-subuniverse
           ( Q)
           ( T (subuniverse-cotype-Σ-Decomposition-Subuniverse P X D x))))
@@ -78,10 +78,10 @@ module _
   (P : subuniverse l1 l2)
   (Q : subuniverse l3 l4)
   (C1 :
-    ( S T : species-subuniverse P Q ) → (X : type-subuniverse P) →
+    ( S T : species-subuniverse P Q) → (X : type-subuniverse P) →
     is-small l3 (small-cauchy-composition-species-subuniverse'  P Q S T X))
   (C2 :
-    ( S T : species-subuniverse P Q ) → (X : type-subuniverse P) →
+    ( S T : species-subuniverse P Q) → (X : type-subuniverse P) →
     ( is-in-subuniverse Q (type-is-small (C1 S T X))))
   (C3 : is-closed-under-Σ-subuniverse P)
   where
@@ -223,7 +223,7 @@ module _
       inclusion-subuniverse Q (S X)
     htpy-left-unit-law-small-cauchy-composition-species-subuniverse S X =
       ( ( inv-equiv
-          ( equiv-Σ-extension-species-subuniverse P Q S X ) ) ∘e
+          ( equiv-Σ-extension-species-subuniverse P Q S X) ) ∘e
         ( ( left-unit-law-cauchy-composition-species-types
             ( Σ-extension-species-subuniverse P Q S)
             ( inclusion-subuniverse P X)) ∘e
@@ -267,7 +267,7 @@ module _
           ( small-cauchy-composition-unit-species-subuniverse) X) ≃
       inclusion-subuniverse Q (S X)
     htpy-right-unit-law-small-cauchy-composition-species-subuniverse S X =
-      ( ( inv-equiv (equiv-Σ-extension-species-subuniverse P Q S X) ) ∘e
+      ( ( inv-equiv (equiv-Σ-extension-species-subuniverse P Q S X)) ∘e
         ( ( right-unit-law-cauchy-composition-species-types
             ( Σ-extension-species-subuniverse P Q S)
             ( inclusion-subuniverse P X)) ∘e
@@ -345,7 +345,7 @@ module _
                    ( S)
                    ( T)
                    ( indexing-type-Relaxed-Σ-Decomposition D)))
-               ( id-equiv) ) ∘e
+               ( id-equiv)) ∘e
           ( ( equiv-assoc-cauchy-composition-species-types
               ( Σ-extension-species-subuniverse P Q S)
               ( Σ-extension-species-subuniverse P Q T)
@@ -370,7 +370,7 @@ module _
               ( ( equiv-small-cauchy-composition-Σ-extension-species-subuniverse
                   ( S)
                   ( small-cauchy-composition-species-subuniverse T U)
-                  ( inclusion-subuniverse P X) ) ∘e
+                  ( inclusion-subuniverse P X)) ∘e
                 ( ( equiv-Σ-extension-species-subuniverse P Q
                     ( small-cauchy-composition-species-subuniverse
                       ( S)

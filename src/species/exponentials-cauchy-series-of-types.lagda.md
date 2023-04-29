@@ -36,7 +36,7 @@ module _
   where
 
   exponential-cauchy-series-species-types :
-    UU (lsuc l1 ⊔ l2 ⊔ l3 )
+    UU (lsuc l1 ⊔ l2 ⊔ l3)
   exponential-cauchy-series-species-types =
     Σ ( UU l1)
       ( λ F → F → (Σ ( UU l1) (λ U → S U × (U → X))))

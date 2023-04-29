@@ -161,7 +161,7 @@ module _
         ( λ u →
           set-Prop
             ( function-Prop (map-trunc-Set f u ＝ map-trunc-Set f y)
-            ( Id-Prop (trunc-Set A) u y) ))
+            ( Id-Prop (trunc-Set A) u y)))
         ( λ a →
           apply-dependent-universal-property-trunc-Set'
           ( λ v →

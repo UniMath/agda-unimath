@@ -47,7 +47,7 @@ to `A+B`.
 
 ```agda
 module _
-  {l1 l2 : Level} (P : subuniverse l1 l2 ) (X : type-subuniverse P)
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
   binary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
@@ -127,7 +127,7 @@ module _
              inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
-    (d : ternary-coproduct-Decomposition-subuniverse )
+    (d : ternary-coproduct-Decomposition-subuniverse)
     where
 
     types-ternary-coproduct-Decomposition-subuniverse :
@@ -341,7 +341,7 @@ module _
                 inclusion-subuniverse P (pr1 x))))
     map-reassociate-left-iterated-coproduct-Decomposition-subuniverse
       ( (A , B , e) , C , D , f) =
-      ( (B , C , D) , (A , f) , e )
+      ( (B , C , D) , (A , f) , e)
 
     map-inv-reassociate-left-iterated-coproduct-Decomposition-subuniverse :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
@@ -357,7 +357,7 @@ module _
                 inclusion-subuniverse P (pr1 x)))) →
       left-iterated-binary-coproduct-Decomposition-subuniverse P X
     map-inv-reassociate-left-iterated-coproduct-Decomposition-subuniverse
-      ( (B , C , D) , (A , f) , e ) =
+      ( (B , C , D) , (A , f) , e) =
       ( (A , B , e) , C , D , f)
 
     equiv-reassociate-left-iterated-coproduct-Decomposition-subuniverse :
@@ -417,7 +417,7 @@ module _
                 inclusion-subuniverse P (pr1 B))))
     map-reassociate-right-iterated-coproduct-Decomposition-subuniverse
       ( (A , B , e) , C , D , f) =
-      ( (A , C , D) , (B , f) , e )
+      ( (A , C , D) , (B , f) , e)
 
     map-inv-reassociate-right-iterated-coproduct-Decomposition-subuniverse :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
@@ -433,7 +433,7 @@ module _
                 inclusion-subuniverse P (pr1 B)))) →
       right-iterated-binary-coproduct-Decomposition-subuniverse P X
     map-inv-reassociate-right-iterated-coproduct-Decomposition-subuniverse
-      ( (A , C , D) , (B , f) , e ) =
+      ( (A , C , D) , (B , f) , e) =
       ( (A , B , e) , C , D , f)
 
     equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse :

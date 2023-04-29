@@ -50,7 +50,7 @@ the Cauchy product is also a species of subuniverse from `P` to `Q`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   where
 
   type-cauchy-product-species-subuniverse :
@@ -160,7 +160,7 @@ module _
               ( λ x →
                 equiv-postcomp-equiv
                   ( ( ( assoc-coprod) ∘e
-                    ( ( commutative-coprod  _ _))) )
+                    ( ( commutative-coprod  _ _))))
                   ( inclusion-subuniverse P X)) ∘e
               equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))
@@ -371,7 +371,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   ( C2 : is-closed-under-coproducts-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -386,7 +386,7 @@ module _
         ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
         ( cauchy-product-species-subuniverse P Q C1 S T)
         ( X) ≃
-      Σ ( binary-coproduct-Decomposition l1 l1 X )
+      Σ ( binary-coproduct-Decomposition l1 l1 X)
         ( λ (A , B , e) →
           Σ ( ( is-in-subuniverse P A × is-in-subuniverse P B) ×
               is-in-subuniverse P X)
@@ -396,7 +396,7 @@ module _
                 ( S (A , pA)) ×
               inclusion-subuniverse
                 ( subuniverse-global-subuniverse Q l4)
-                ( T (B , pB)) ))
+                ( T (B , pB))))
     pr1 reassociate (pX , ((A , pA) , (B , pB) , e) , s , t) =
       (A , B , e) , ((pA , pB) , pX) , (s , t)
     pr2 reassociate = is-equiv-has-inverse
@@ -406,7 +406,7 @@ module _
       ( refl-htpy)
 
     reassociate' :
-      Σ ( binary-coproduct-Decomposition l1 l1 X )
+      Σ ( binary-coproduct-Decomposition l1 l1 X)
         ( λ d →
            Σ ( Σ (pr1 (P (pr1 d))) (λ v → pr1 (P (pr1 (pr2 d)))))
            (λ p → pr1 (S (pr1 d , pr1 p)) × pr1 (T (pr1 (pr2 d) , pr2 p))))

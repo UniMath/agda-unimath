@@ -70,7 +70,7 @@ module _
   pr2 (equiv-diagonal-is-prop is-prop-A) =
     is-equiv-has-inverse
       ( pr1)
-      ( λ pair-a → eq-pair (eq-is-prop is-prop-A ) (eq-is-prop is-prop-A))
+      ( λ pair-a → eq-pair (eq-is-prop is-prop-A) (eq-is-prop is-prop-A))
       ( λ a → eq-is-prop is-prop-A)
 ```
 

@@ -347,7 +347,7 @@ left-distributive-prod-Σ =
 
 right-distributive-prod-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
-  ((Σ A B) × C) ≃ Σ A (λ a → B a × C )
+  ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
 right-distributive-prod-Σ {A} =
   assoc-Σ _ _  _
 ```

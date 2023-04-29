@@ -81,7 +81,7 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
     ( succ-ℕ x)
-    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x) )
+    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( cong-nat-mod-succ-ℕ k x)
 ```
 

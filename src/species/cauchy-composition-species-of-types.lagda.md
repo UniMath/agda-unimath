@@ -59,7 +59,7 @@ cauchy-composition-species-types {l1} {l2} {l3} S T X =
     ( λ D →
       ( S (indexing-type-Relaxed-Σ-Decomposition D)) ×
       ( ( y : indexing-type-Relaxed-Σ-Decomposition D) →
-        T (cotype-Relaxed-Σ-Decomposition D y )))
+        T (cotype-Relaxed-Σ-Decomposition D y)))
 ```
 
 ## Properties
@@ -98,7 +98,7 @@ right-unit-law-cauchy-composition-species-types {l1} F A =
   ( left-unit-law-Σ-is-contr
     ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
     ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
-      is-discrete-discrete-Relaxed-Σ-Decomposition) ) ∘e
+      is-discrete-discrete-Relaxed-Σ-Decomposition)) ∘e
   ( ( inv-assoc-Σ
       ( Relaxed-Σ-Decomposition l1 l1 A)
       ( λ D →
@@ -173,7 +173,7 @@ module _
         ( _)) ∘e
       ( ( inv-equiv
           ( equiv-Σ-equiv-base
-            ( _ )
+            ( _)
             ( equiv-displayed-fibered-Relaxed-Σ-Decomposition))) ∘e
         ( ( inv-assoc-Σ
             ( Relaxed-Σ-Decomposition l1 l1 A)

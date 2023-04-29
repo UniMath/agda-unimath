@@ -51,15 +51,15 @@ left-distributive-exp-add-ℕ :
   (x y z : ℕ) → exp-ℕ x (add-ℕ y z) ＝ mul-ℕ (exp-ℕ x y) (exp-ℕ x z)
 left-distributive-exp-add-ℕ x y zero-ℕ = inv (right-unit-law-mul-ℕ (exp-ℕ x y))
 left-distributive-exp-add-ℕ x y (succ-ℕ z) =
-  ( ap (mul-ℕ' x) (left-distributive-exp-add-ℕ x y z) ) ∙
-  ( associative-mul-ℕ (exp-ℕ x y) (exp-ℕ x z) x )
+  ( ap (mul-ℕ' x) (left-distributive-exp-add-ℕ x y z)) ∙
+  ( associative-mul-ℕ (exp-ℕ x y) (exp-ℕ x z) x)
 
 right-distributive-exp-mul-ℕ :
   (x y z : ℕ) → exp-ℕ (mul-ℕ x y) z ＝ mul-ℕ (exp-ℕ x z) (exp-ℕ y z)
 right-distributive-exp-mul-ℕ x y zero-ℕ = refl
 right-distributive-exp-mul-ℕ x y (succ-ℕ z) =
-  ( ap (mul-ℕ' (mul-ℕ x y)) (right-distributive-exp-mul-ℕ x y z) ) ∙
-  ( interchange-law-mul-mul-ℕ (exp-ℕ x z) (exp-ℕ y z) x y )
+  ( ap (mul-ℕ' (mul-ℕ x y)) (right-distributive-exp-mul-ℕ x y z)) ∙
+  ( interchange-law-mul-mul-ℕ (exp-ℕ x z) (exp-ℕ y z) x y)
 
 exp-mul-ℕ : (x y z : ℕ) → exp-ℕ x (mul-ℕ y z) ＝ exp-ℕ (exp-ℕ x y) z
 exp-mul-ℕ x zero-ℕ z = inv (annihilation-law-exp-ℕ z)

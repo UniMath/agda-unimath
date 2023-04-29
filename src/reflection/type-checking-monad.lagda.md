@@ -259,7 +259,7 @@ example was addapted from
   ＝-type-info
     ( def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
     returnTC (𝓁 , 𝒯 , l , r)
-  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
+  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type."))
 
   macro
     try-path! : Term → Term → TC unit
