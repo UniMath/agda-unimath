@@ -19,12 +19,33 @@ def check_wrap_line_type_signature(line, i, lines):
     return line
 
 
+def get_top_level_equality(line, open_delimiters='({', close_delimiters=')}'):
+    stack = []
+    mapping = dict(zip(close_delimiters, open_delimiters))
+    top_level_equal_signs = 0
+    top_level_equal_sign_pos = None
+
+    for i, char in enumerate(line):
+        if char in open_delimiters:
+            stack.append(char)
+        elif char in close_delimiters:
+            if not stack or stack.pop() != mapping[char]:
+                return None
+        elif char == '=' and not stack and i > 0 and i+1 < len(line) and line[i-1] in ' })' and line[i+1] in ' {(':
+            top_level_equal_signs += 1
+            top_level_equal_sign_pos = i
+
+    return top_level_equal_sign_pos if not stack and top_level_equal_signs == 1 else None
+
+
 def check_wrap_line_definition(line, i, lines):
-    m = re.match(r'^((\s*)(?![{}()])[^\s.;@"]+\s+=)\s(.*)$', line)
-    if m:
-        # Check that the next line is not indented more than this one, just to be sure
-        if i+1 >= len(lines) or not re.match(rf'^{m.group(2)}\s', lines[i+1]):
-            line = f'{m.group(1)}\n{m.group(2)}  {m.group(3)}'
+    tle = get_top_level_equality(line)
+    if tle:
+        m = re.match(r'^((\s*)\S.*)$', line[:tle+1])
+        if m:
+            # Check that the next line is not indented more than this one, just to be sure
+            if i+1 >= len(lines) or not re.match(rf'^{m.group(2)}\s', lines[i+1]):
+                line = f'{m.group(1)}\n{m.group(2)}  {line[tle+1:].lstrip()}'
     return line
 
 

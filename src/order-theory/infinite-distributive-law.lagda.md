@@ -38,7 +38,9 @@ module _
 
   is-meet-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-meet-sup-lattice-poset-Prop =
-    prod-Prop (is-meet-semilattice-poset-Prop P) (is-sup-lattice-poset-Prop l3 P)
+    prod-Prop
+      ( is-meet-semilattice-poset-Prop P)
+      ( is-sup-lattice-poset-Prop l3 P)
 
   is-meet-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-meet-sup-lattice-Poset = type-Prop is-meet-sup-lattice-poset-Prop
