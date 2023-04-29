@@ -1,7 +1,7 @@
 # A precategory solver
 
 ```agda
-{-# OPTIONS --no-exact-split  #-}
+{-# OPTIONS --no-exact-split #-}
 module category-theory.precategory-solver where
 ```
 

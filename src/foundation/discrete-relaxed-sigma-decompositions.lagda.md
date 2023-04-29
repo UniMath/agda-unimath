@@ -95,7 +95,7 @@ module _
       ( ap ( λ f → map-equiv f a)
         ( ( left-inverse-law-equiv
             ( equiv-pr1 is-discrete ∘e
-              matching-correspondence-Relaxed-Σ-Decomposition D))  ∙
+              matching-correspondence-Relaxed-Σ-Decomposition D)) ∙
         ( ( inv
             ( right-inverse-law-equiv
               ( equiv-pr1 ( λ _ → is-contr-raise-unit)))))))

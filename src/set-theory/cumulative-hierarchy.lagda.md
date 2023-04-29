@@ -475,7 +475,7 @@ needed.
   ∈-cumulative-hierarchy-mere-preimage {x} {A} {f} =
     tr id (id-∈-cumulative-hierarchy x f)
 
-  mere-preimage-∈-cumulative-hierarchy  :
+  mere-preimage-∈-cumulative-hierarchy :
     { x : type-pseudo-cumulative-hierarchy V} →
     { A : UU l1}
     { f : A → type-pseudo-cumulative-hierarchy V} →

@@ -24,6 +24,6 @@ The `Abs` type represents a lambda abstraction.
 data Abs {l} (A : UU l) : UU l where
   abs : String → A → Abs A
 
-{-# BUILTIN ABS    Abs #-}
+{-# BUILTIN ABS Abs #-}
 {-# BUILTIN ABSABS abs #-}
 ```

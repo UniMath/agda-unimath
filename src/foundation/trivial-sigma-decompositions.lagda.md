@@ -38,7 +38,7 @@ module _
   trivial-inhabited-Σ-Decomposition :
     (p : is-inhabited A) → Σ-Decomposition l2 l1 A
   pr1 (trivial-inhabited-Σ-Decomposition p) = raise-unit l2
-  pr1 (pr2 (trivial-inhabited-Σ-Decomposition p))  = λ _ → (A , p)
+  pr1 (pr2 (trivial-inhabited-Σ-Decomposition p)) = λ _ → (A , p)
   pr2 (pr2 (trivial-inhabited-Σ-Decomposition p)) =
     inv-left-unit-law-Σ-is-contr
       ( is-contr-raise-unit)

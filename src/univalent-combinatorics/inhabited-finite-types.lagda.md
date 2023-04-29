@@ -134,7 +134,7 @@ eq-equiv-Inhabited-𝔽 :
   type-Inhabited-𝔽 X ≃ type-Inhabited-𝔽 Y → X ＝ Y
 eq-equiv-Inhabited-𝔽 X Y e =
   eq-type-subtype
-    ( λ X  → is-inhabited-Prop (type-𝔽 X))
+    ( λ X → is-inhabited-Prop (type-𝔽 X))
     ( eq-equiv-𝔽
       ( finite-type-Inhabited-𝔽 X)
       ( finite-type-Inhabited-𝔽 Y)

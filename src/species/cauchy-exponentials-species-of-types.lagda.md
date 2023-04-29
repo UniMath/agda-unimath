@@ -93,7 +93,7 @@ module _
                 ( left-summand-binary-coproduct-Decomposition d)) ×
               ( Relaxed-Σ-Decomposition l1 l1
                 ( right-summand-binary-coproduct-Decomposition d))))
-        ( λ  D →
+        ( λ D →
           ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr1 (pr2 D))) →
             S ( cotype-Relaxed-Σ-Decomposition (pr1 (pr2 D)) b)) ×
           ( ( b : indexing-type-Relaxed-Σ-Decomposition (pr2 (pr2 D))) →

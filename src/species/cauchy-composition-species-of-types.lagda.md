@@ -92,7 +92,7 @@ left-unit-law-cauchy-composition-species-types {l1} F A =
 
 right-unit-law-cauchy-composition-species-types :
   {l1 l2 : Level}
-  (F : species-types l1 l2) → (A : UU l1)  →
+  (F : species-types l1 l2) → (A : UU l1) →
   cauchy-composition-species-types F unit-species-types A ≃ F A
 right-unit-law-cauchy-composition-species-types {l1} F A =
   ( left-unit-law-Σ-is-contr
@@ -128,7 +128,7 @@ module _
     (A : UU l1) →
     cauchy-composition-species-types
       ( S)
-      ( cauchy-composition-species-types T  U)
+      ( cauchy-composition-species-types T U)
       ( A) ≃
     cauchy-composition-species-types
       ( cauchy-composition-species-types S T)
@@ -139,7 +139,7 @@ module _
       ( _)
       ( id-equiv)
       ( λ D1 →
-        ( ( inv-equiv right-distributive-prod-Σ)  ∘e
+        ( ( inv-equiv right-distributive-prod-Σ) ∘e
         ( ( equiv-Σ
             ( _)
             ( id-equiv)

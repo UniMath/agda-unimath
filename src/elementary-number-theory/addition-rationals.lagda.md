@@ -95,7 +95,7 @@ associative-add-ℚ (x , px) (y , py) (z , pz) =
 
 ```agda
 commutative-add-ℚ :
-  (x y  : ℚ) →
+  (x y : ℚ) →
   x +ℚ y ＝ y +ℚ x
 commutative-add-ℚ (x , px) (y , py) =
   eq-ℚ-sim-fractions-ℤ

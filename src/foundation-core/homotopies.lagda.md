@@ -201,7 +201,7 @@ module _
   left-unit-htpy : (refl-htpy ∙h H) ~ H
   left-unit-htpy x = left-unit
 
-  inv-htpy-left-unit-htpy :  H ~ (refl-htpy ∙h H)
+  inv-htpy-left-unit-htpy : H ~ (refl-htpy ∙h H)
   inv-htpy-left-unit-htpy = inv-htpy left-unit-htpy
 
   right-unit-htpy : (H ∙h refl-htpy) ~ H

@@ -79,7 +79,7 @@ is-finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 X =
     ( is-finite-Σ-Decomposition-𝔽 (finite-type-Inhabited-𝔽 X))
 
 finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 :
-  {l : Level} (X :  Inhabited-𝔽 l) → 𝔽 (lsuc l)
+  {l : Level} (X : Inhabited-𝔽 l) → 𝔽 (lsuc l)
 pr1 (finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 {l} X) =
   Σ-Decomposition-Subuniverse
     ( is-finite-and-inhabited-Prop {l})
@@ -92,7 +92,7 @@ module _
   where
 
   finite-small-cauchy-composition-species-subuniverse :
-    ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) (X :  Inhabited-𝔽 l1) →
+    ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) (X : Inhabited-𝔽 l1) →
     𝔽 (lsuc l1 ⊔ l2)
   finite-small-cauchy-composition-species-subuniverse S T X =
     Σ-𝔽
@@ -120,7 +120,7 @@ module _
   private
     C1 :
       ( S T : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) →
-      ( X :  type-subuniverse is-finite-and-inhabited-Prop) →
+      ( X : type-subuniverse is-finite-and-inhabited-Prop) →
       is-small
         (l1 ⊔ l2)
         ( small-cauchy-composition-species-subuniverse'

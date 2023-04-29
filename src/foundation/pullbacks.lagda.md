@@ -417,7 +417,7 @@ abstract
 tr-tr-refl-htpy-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) →
-  let tr-c    = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+  let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
       tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy {f = g})) tr-c
   in
   tr-tr-c ＝ c
@@ -434,7 +434,7 @@ tr-tr-refl-htpy-cone {C = C} f g c =
 htpy-eq-square-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c c' : cone f g C) →
-  let tr-c    = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+  let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
       tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy {f = g})) tr-c
   in
   tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
@@ -463,7 +463,7 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f g' C) →
-    let tr-c    = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+    let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
         tr-tr-c = tr (λ y → cone f y C) (eq-htpy Hg) tr-c
     in
     tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) Hg c c'
@@ -502,7 +502,7 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f' g' C) →
-    let tr-c    = tr (λ x → cone x g C) (eq-htpy Hf) c
+    let tr-c = tr (λ x → cone x g C) (eq-htpy Hf) c
         tr-tr-c = tr (λ y → cone f' y C) (eq-htpy Hg) tr-c
     in
     Id tr-tr-c c' → htpy-parallel-cone Hf Hg c c'
@@ -572,7 +572,7 @@ eq-htpy-parallel-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
   (c : cone f g C) (c' : cone f' g' C) →
-  let tr-c    = tr (λ x → cone x g C) (eq-htpy Hf) c
+  let tr-c = tr (λ x → cone x g C) (eq-htpy Hf) c
       tr-tr-c = tr (λ y → cone f' y C) (eq-htpy Hg) tr-c
   in
   htpy-parallel-cone Hf Hg c c' → Id tr-tr-c c'

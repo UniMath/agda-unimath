@@ -33,20 +33,20 @@ For concrete examples, see
 
 ```agda
 data Literal : UU lzero where
-  nat    : (n : ℕ)    → Literal
+  nat : (n : ℕ) → Literal
   word64 : (n : Word64) → Literal
-  float  : (x : Float)  → Literal
-  char   : (c : Char)   → Literal
+  float : (x : Float) → Literal
+  char : (c : Char) → Literal
   string : (s : String) → Literal
-  name   : (x : Name)   → Literal
-  meta   : (x : Meta)   → Literal
+  name : (x : Name) → Literal
+  meta : (x : Meta) → Literal
 
-{-# BUILTIN AGDALITERAL   Literal #-}
-{-# BUILTIN AGDALITNAT    nat     #-}
-{-# BUILTIN AGDALITWORD64 word64  #-}
-{-# BUILTIN AGDALITFLOAT  float   #-}
-{-# BUILTIN AGDALITCHAR   char    #-}
-{-# BUILTIN AGDALITSTRING string  #-}
-{-# BUILTIN AGDALITQNAME  name    #-}
-{-# BUILTIN AGDALITMETA   meta    #-}
+{-# BUILTIN AGDALITERAL Literal #-}
+{-# BUILTIN AGDALITNAT nat #-}
+{-# BUILTIN AGDALITWORD64 word64 #-}
+{-# BUILTIN AGDALITFLOAT float #-}
+{-# BUILTIN AGDALITCHAR char #-}
+{-# BUILTIN AGDALITSTRING string #-}
+{-# BUILTIN AGDALITQNAME name #-}
+{-# BUILTIN AGDALITMETA meta #-}
 ```

@@ -34,13 +34,13 @@ module fibered where
     where
     coinductive
     field
-      type    : {X : system.type A} (Y : fibered-system.type B X)
+      type : {X : system.type A} (Y : fibered-system.type B X)
                 (Z : fibered-system.type C X) → UU l7
       element : {X : system.type A} {Y : fibered-system.type B X}
                 {Z : fibered-system.type C X} {x : system.element A X}
                 (W : type Y Z) (y : fibered-system.element B Y x)
                 (z : fibered-system.element C Z x) → UU l8
-      slice   : {X : system.type A} {Y : fibered-system.type B X}
+      slice : {X : system.type A} {Y : fibered-system.type B X}
                 {Z : fibered-system.type C X} → type Y Z →
                 bifibered-system l7 l8
                   ( fibered-system.slice B Y)
@@ -67,7 +67,7 @@ module fibered where
     where
     coinductive
     field
-      type    : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
                 bifibered-system.type D Y (section-system.type f X)
       element : {X : system.type A} {Y : fibered-system.type B X} →
                 {x : system.element A X} (y : fibered-system.element B Y x) →
@@ -75,7 +75,7 @@ module fibered where
                   ( type Y)
                   ( y)
                   ( section-system.element f x)
-      slice   : {X : system.type A} (Y : fibered-system.type B X) →
+      slice : {X : system.type A} (Y : fibered-system.type B X) →
                 section-fibered-system
                   ( section-system.slice f X)
                   ( bifibered-system.slice D (type Y))
@@ -244,7 +244,7 @@ module fibered where
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               hom-fibered-system
                 ( weakening.type W X)
                 ( B)
@@ -265,7 +265,7 @@ module fibered where
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               htpy-hom-fibered-system
                 ( preserves-weakening.type Wf X)
                 ( compose-hom-fibered-system
@@ -292,7 +292,7 @@ module fibered where
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               hom-fibered-system
                 ( substitution.type S x)
@@ -314,7 +314,7 @@ module fibered where
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               htpy-hom-fibered-system
                 ( preserves-substitution.type Sf x)
@@ -348,7 +348,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               fibered-system.element
                 ( fibered-system.slice B Y)
                 ( section-fibered-system.type (fibered-weakening.type W Y) Y)
@@ -373,7 +373,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               Id ( double-tr
                    ( λ Z u v →
                      fibered-system.element
@@ -408,7 +408,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               preserves-fibered-weakening
                 ( W)
                 ( fibered-weakening.slice W Y)
@@ -426,7 +426,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               preserves-fibered-substitution
                 ( fibered-substitution.slice S Y)
@@ -447,7 +447,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               preserves-fibered-substitution
                 ( S)
                 ( fibered-substitution.slice S Y)
@@ -468,7 +468,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               preserves-fibered-weakening
                 ( fibered-weakening.slice W Y)
@@ -493,7 +493,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               preserves-fibered-generic-element
                 ( δ)
                 ( fibered-generic-element.slice δ Y)
@@ -517,7 +517,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               preserves-fibered-generic-element
                 ( fibered-generic-element.slice δB Y)
@@ -539,7 +539,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               htpy-hom-fibered-system
                 ( substitution-cancels-weakening.type S!WA x)
@@ -565,7 +565,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} {Y : fibered-system.type B X}
+      type : {X : system.type A} {Y : fibered-system.type B X}
               {x : system.element A X} (y : fibered-system.element B Y x) →
               Id ( double-tr
                    ( λ α β γ → fibered-system.element B {X = α} β γ)
@@ -597,7 +597,7 @@ generic elements to be equipped with generic elements.
     where
     coinductive
     field
-      type  : {X : system.type A} (Y : fibered-system.type B X) →
+      type : {X : system.type A} (Y : fibered-system.type B X) →
               htpy-hom-fibered-system
                 ( substitution-by-generic-element.type Sδ! X)
                 ( compose-hom-fibered-system
@@ -627,15 +627,15 @@ generic elements to be equipped with generic elements.
     coinductive
     field
       sys : fibered-system l3 l4 (type-theory.sys A)
-      W   : fibered-weakening sys (type-theory.W A)
-      S   : fibered-substitution sys (type-theory.S A)
-      δ   : fibered-generic-element W (type-theory.δ A)
-      WW  : fibered-weakening-preserves-weakening (type-theory.WW A) W
-      SS  : fibered-substitution-preserves-substitution (type-theory.SS A) S
-      WS  : fibered-weakening-preserves-substitution (type-theory.WS A) W S
-      SW  : fibered-substitution-preserves-weakening (type-theory.SW A) W S
-      Wδ  : fibered-weakening-preserves-generic-element (type-theory.Wδ A) WW δ
-      Sδ  : fibered-substitution-preserves-generic-element
+      W : fibered-weakening sys (type-theory.W A)
+      S : fibered-substitution sys (type-theory.S A)
+      δ : fibered-generic-element W (type-theory.δ A)
+      WW : fibered-weakening-preserves-weakening (type-theory.WW A) W
+      SS : fibered-substitution-preserves-substitution (type-theory.SS A) S
+      WS : fibered-weakening-preserves-substitution (type-theory.WS A) W S
+      SW : fibered-substitution-preserves-weakening (type-theory.SW A) W S
+      Wδ : fibered-weakening-preserves-generic-element (type-theory.Wδ A) WW δ
+      Sδ : fibered-substitution-preserves-generic-element
               (type-theory.Sδ A) SW δ
       S!W : fibered-substitution-cancels-weakening (type-theory.S!W A) W S
       δid : fibered-generic-element-is-identity

@@ -30,8 +30,8 @@ postulate Meta : UU lzero
 
 primitive
   primMetaEquality : Meta → Meta → bool
-  primMetaLess     : Meta → Meta → bool
-  primShowMeta     : Meta → String
-  primMetaToNat    : Meta → ℕ
+  primMetaLess : Meta → Meta → bool
+  primShowMeta : Meta → String
+  primMetaToNat : Meta → ℕ
   primMetaToNatInjective : ∀ a b → primMetaToNat a ＝ primMetaToNat b → a ＝ b
 ```

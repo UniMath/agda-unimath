@@ -38,54 +38,54 @@ For concrete examples, see
 ## Definition
 
 ```agda
-data Term    : UU lzero
-data Sort    : UU lzero
+data Term : UU lzero
+data Sort : UU lzero
 data Pattern : UU lzero
-data Clause  : UU lzero
+data Clause : UU lzero
 Telescope = list (String × Arg Term)
 
 data Term where
   -- Variables, where the natural number is a de Bruijn index
-  var       : (x : ℕ) (args : list (Arg Term)) → Term
+  var : (x : ℕ) (args : list (Arg Term)) → Term
   -- An application of a constructor or definition
-  con       : (c : Name) (args : list (Arg Term)) → Term
-  def       : (f : Name) (args : list (Arg Term)) → Term
+  con : (c : Name) (args : list (Arg Term)) → Term
+  def : (f : Name) (args : list (Arg Term)) → Term
   -- A lambda abstraction
-  lam       : (v : Visibility) (t : Abs Term) → Term
-  pat-lam   : (cs : list Clause) (args : list (Arg Term)) → Term
+  lam : (v : Visibility) (t : Abs Term) → Term
+  pat-lam : (cs : list Clause) (args : list (Arg Term)) → Term
   -- A Pi term
-  pi        : (a : Arg Term) (b : Abs Term) → Term
+  pi : (a : Arg Term) (b : Abs Term) → Term
   -- A sort, also called a universe
   agda-sort : (s : Sort) → Term
   -- A literal, e.g. `3`
-  lit       : (l : Literal) → Term
+  lit : (l : Literal) → Term
   -- A metavariable
-  meta      : (x : Meta) → list (Arg Term) → Term
+  meta : (x : Meta) → list (Arg Term) → Term
   -- A hole
-  unknown   : Term
+  unknown : Term
 
 data Sort where
   -- A universe of a given (possibly neutral) level
-  set     : (t : Term) → Sort
+  set : (t : Term) → Sort
   -- A universe of a given concrete level
-  lit     : (n : ℕ) → Sort
+  lit : (n : ℕ) → Sort
   -- A Prop of a given (possibly neutral) level
-  prop    : (t : Term) → Sort
+  prop : (t : Term) → Sort
   -- A Prop of a given concrete level
   propLit : (n : ℕ) → Sort
   -- UUωi of a given concrete level i.
-  inf     : (n : ℕ) → Sort
+  inf : (n : ℕ) → Sort
   -- A hole
   unknown : Sort
 
 data Pattern where
-  con    : (c : Name) (ps : list (Arg Pattern)) → Pattern
-  dot    : (t : Term)    → Pattern
-  var    : (x : ℕ)       → Pattern
-  lit    : (l : Literal) → Pattern
-  proj   : (f : Name)    → Pattern
+  con : (c : Name) (ps : list (Arg Pattern)) → Pattern
+  dot : (t : Term) → Pattern
+  var : (x : ℕ) → Pattern
+  lit : (l : Literal) → Pattern
+  proj : (f : Name) → Pattern
   -- Absurd pattern with a de Bruijn index
-  absurd : (x : ℕ)       → Pattern
+  absurd : (x : ℕ) → Pattern
 
 -- A clause on a pattern matching lambda
 data Clause where
@@ -98,37 +98,37 @@ data Clause where
 <details><summary>Bindings</summary>
 
 ```agda
-{-# BUILTIN AGDATERM      Term    #-}
-{-# BUILTIN AGDASORT      Sort    #-}
-{-# BUILTIN AGDAPATTERN   Pattern #-}
-{-# BUILTIN AGDACLAUSE    Clause  #-}
+{-# BUILTIN AGDATERM Term #-}
+{-# BUILTIN AGDASORT Sort #-}
+{-# BUILTIN AGDAPATTERN Pattern #-}
+{-# BUILTIN AGDACLAUSE Clause #-}
 
-{-# BUILTIN AGDATERMVAR         var       #-}
-{-# BUILTIN AGDATERMCON         con       #-}
-{-# BUILTIN AGDATERMDEF         def       #-}
-{-# BUILTIN AGDATERMMETA        meta      #-}
-{-# BUILTIN AGDATERMLAM         lam       #-}
-{-# BUILTIN AGDATERMEXTLAM      pat-lam   #-}
-{-# BUILTIN AGDATERMPI          pi        #-}
-{-# BUILTIN AGDATERMSORT        agda-sort #-}
-{-# BUILTIN AGDATERMLIT         lit       #-}
-{-# BUILTIN AGDATERMUNSUPPORTED unknown   #-}
+{-# BUILTIN AGDATERMVAR var #-}
+{-# BUILTIN AGDATERMCON con #-}
+{-# BUILTIN AGDATERMDEF def #-}
+{-# BUILTIN AGDATERMMETA meta #-}
+{-# BUILTIN AGDATERMLAM lam #-}
+{-# BUILTIN AGDATERMEXTLAM pat-lam #-}
+{-# BUILTIN AGDATERMPI pi #-}
+{-# BUILTIN AGDATERMSORT agda-sort #-}
+{-# BUILTIN AGDATERMLIT lit #-}
+{-# BUILTIN AGDATERMUNSUPPORTED unknown #-}
 
-{-# BUILTIN AGDASORTSET         set     #-}
-{-# BUILTIN AGDASORTLIT         lit     #-}
-{-# BUILTIN AGDASORTPROP        prop    #-}
-{-# BUILTIN AGDASORTPROPLIT     propLit #-}
-{-# BUILTIN AGDASORTINF         inf     #-}
+{-# BUILTIN AGDASORTSET set #-}
+{-# BUILTIN AGDASORTLIT lit #-}
+{-# BUILTIN AGDASORTPROP prop #-}
+{-# BUILTIN AGDASORTPROPLIT propLit #-}
+{-# BUILTIN AGDASORTINF inf #-}
 {-# BUILTIN AGDASORTUNSUPPORTED unknown #-}
 
-{-# BUILTIN AGDAPATCON    con     #-}
-{-# BUILTIN AGDAPATDOT    dot     #-}
-{-# BUILTIN AGDAPATVAR    var     #-}
-{-# BUILTIN AGDAPATLIT    lit     #-}
-{-# BUILTIN AGDAPATPROJ   proj    #-}
-{-# BUILTIN AGDAPATABSURD absurd  #-}
+{-# BUILTIN AGDAPATCON con #-}
+{-# BUILTIN AGDAPATDOT dot #-}
+{-# BUILTIN AGDAPATVAR var #-}
+{-# BUILTIN AGDAPATLIT lit #-}
+{-# BUILTIN AGDAPATPROJ proj #-}
+{-# BUILTIN AGDAPATABSURD absurd #-}
 
-{-# BUILTIN AGDACLAUSECLAUSE clause        #-}
+{-# BUILTIN AGDACLAUSECLAUSE clause #-}
 {-# BUILTIN AGDACLAUSEABSURD absurd-clause #-}
 ```
 

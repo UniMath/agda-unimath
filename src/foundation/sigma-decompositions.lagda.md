@@ -1,7 +1,7 @@
 # Σ-decompositions of types
 
 ```agda
-{-# OPTIONS --lossy-unification  #-}
+{-# OPTIONS --lossy-unification #-}
 module foundation.sigma-decompositions where
 ```
 
@@ -214,7 +214,7 @@ module _
     A →
     Σ (indexing-type-Σ-Decomposition fst-fibered-Σ-Decomposition)
       (cotype-Σ-Decomposition fst-fibered-Σ-Decomposition)
-  map-matching-correspondence-fst-fibered-Σ-Decomposition  =
+  map-matching-correspondence-fst-fibered-Σ-Decomposition =
     map-matching-correspondence-Σ-Decomposition
       fst-fibered-Σ-Decomposition
 
@@ -290,7 +290,7 @@ module _
     A ≃
     Σ (indexing-type-Σ-Decomposition fst-displayed-Σ-Decomposition)
       (cotype-Σ-Decomposition fst-displayed-Σ-Decomposition)
-  matching-correspondence-fst-displayed-Σ-Decomposition  =
+  matching-correspondence-fst-displayed-Σ-Decomposition =
     matching-correspondence-Σ-Decomposition
       fst-displayed-Σ-Decomposition
 
@@ -298,7 +298,7 @@ module _
     A →
     Σ (indexing-type-Σ-Decomposition fst-displayed-Σ-Decomposition)
       (cotype-Σ-Decomposition fst-displayed-Σ-Decomposition)
-  map-matching-correspondence-fst-displayed-Σ-Decomposition  =
+  map-matching-correspondence-fst-displayed-Σ-Decomposition =
     map-matching-correspondence-Σ-Decomposition
       fst-displayed-Σ-Decomposition
 
@@ -817,7 +817,7 @@ module _
 
   private
     X = indexing-type-fst-fibered-Σ-Decomposition fib-D
-    Y = cotype-fst-fibered-Σ-Decomposition  fib-D
+    Y = cotype-fst-fibered-Σ-Decomposition fib-D
     Y-Inhabited-Type = inhabited-cotype-fst-fibered-Σ-Decomposition fib-D
     e = matching-correspondence-Σ-Decomposition
       ( fst-fibered-Σ-Decomposition fib-D)
@@ -904,7 +904,7 @@ module _
 
   private
     X = indexing-type-fst-fibered-Σ-Decomposition fib-D
-    Y = cotype-fst-fibered-Σ-Decomposition  fib-D
+    Y = cotype-fst-fibered-Σ-Decomposition fib-D
     e = matching-correspondence-Σ-Decomposition
       ( fst-fibered-Σ-Decomposition fib-D)
     U = indexing-type-snd-fibered-Σ-Decomposition fib-D
@@ -961,7 +961,7 @@ module _
     t = matching-correspondence-snd-displayed-Σ-Decomposition disp-D
     fib-D = map-inv-displayed-fibered-Σ-Decomposition disp-D
     X = indexing-type-fst-fibered-Σ-Decomposition fib-D
-    Y = cotype-fst-fibered-Σ-Decomposition  fib-D
+    Y = cotype-fst-fibered-Σ-Decomposition fib-D
     e = matching-correspondence-Σ-Decomposition
       ( fst-fibered-Σ-Decomposition fib-D)
     U = indexing-type-snd-fibered-Σ-Decomposition fib-D
@@ -987,7 +987,7 @@ module _
                 ( map-eq-transpose-equiv
                   ( assoc-Σ M P Y)
                   ( issec-map-inv-assoc-Σ M P Y
-                    ( map-equiv (equiv-tot t ∘e s) x))))))))  ∙
+                    ( map-equiv (equiv-tot t ∘e s) x)))))))) ∙
       ( inv
         ( preserves-compose-tot
           ( map-equiv ∘ t)

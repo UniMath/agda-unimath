@@ -134,7 +134,7 @@ module _
             ( binary-product-Decomposition P X)
             ( λ z → binary-product-Decomposition P (pr1 z))
             ( _)) ∘e
-          ( ( equiv-tot  λ d → right-distributive-prod-Σ))))
+          ( ( equiv-tot λ d → right-distributive-prod-Σ))))
 
     equiv-right-iterated-dirichlet-product-species-subuniverse :
       dirichlet-product-species-subuniverse' P Q

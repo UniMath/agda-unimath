@@ -45,9 +45,9 @@ module dependent where
   record system (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2) where
     coinductive
     field
-      type    : UU l1
+      type : UU l1
       element : type → UU l2
-      slice   : (X : type) → system l1 l2
+      slice : (X : type) → system l1 l2
 
   record fibered-system
     {l1 l2 : Level} (l3 l4 : Level) (A : system l1 l2) :
@@ -55,9 +55,9 @@ module dependent where
     where
     coinductive
     field
-      type    : system.type A → UU l3
+      type : system.type A → UU l3
       element : {X : system.type A} → type X → system.element A X → UU l4
-      slice   : {X : system.type A} → type X →
+      slice : {X : system.type A} → type X →
                 fibered-system l3 l4 (system.slice A X)
 
   record section-system
@@ -66,10 +66,10 @@ module dependent where
     where
     coinductive
     field
-      type    : (X : system.type A) → fibered-system.type B X
+      type : (X : system.type A) → fibered-system.type B X
       element : {X : system.type A} (x : system.element A X) →
                 fibered-system.element B (type X) x
-      slice   : (X : system.type A) →
+      slice : (X : system.type A) →
                 section-system (fibered-system.slice B (type X))
 
   ------------------------------------------------------------------------------
@@ -437,7 +437,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) → hom-system A (system.slice A X)
+      type : (X : system.type A) → hom-system A (system.slice A X)
       slice : (X : system.type A) → weakening (system.slice A X)
 
   -- We state what it means for a morphism to preserve weakening structure
@@ -449,7 +449,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               htpy-hom-system
                 ( compose-hom-system
                   ( section-system.slice h X)
@@ -472,7 +472,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               hom-system (system.slice A X) A
       slice : (X : system.type A) → substitution (system.slice A X)
 
@@ -485,7 +485,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               htpy-hom-system
                 ( compose-hom-system
                   ( h)
@@ -511,7 +511,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               system.element
                 ( system.slice A X)
                   ( section-system.type (weakening.type W X) X)
@@ -527,7 +527,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               Id ( tr
                    ( system.element (system.slice B (section-system.type h X)))
                    ( section-system.type
@@ -569,7 +569,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               preserves-weakening W (weakening.slice W X) (weakening.type W X)
       slice : (X : system.type A) →
               weakening-preserves-weakening (weakening.slice W X)
@@ -579,7 +579,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               preserves-substitution
                 ( substitution.slice S X)
                 ( S)
@@ -593,7 +593,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               preserves-substitution
                 ( S)
                 ( substitution.slice S X)
@@ -609,7 +609,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               preserves-weakening
                 ( weakening.slice W X)
                 ( W)
@@ -626,7 +626,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               preserves-generic-element
                 ( δ)
                 ( generic-element.slice δ X)
@@ -645,7 +645,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               preserves-generic-element
                 ( generic-element.slice δ X)
                 ( δ)
@@ -663,7 +663,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               htpy-hom-system
                 ( compose-hom-system
                   ( substitution.type S x)
@@ -681,7 +681,7 @@ module dependent where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               Id ( tr
                    ( system.element A)
                    ( section-system.type
@@ -704,7 +704,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               htpy-hom-system
                 ( compose-hom-system
                   ( substitution.type
@@ -729,15 +729,15 @@ module dependent where
     where
     field
       sys : system l1 l2
-      W   : weakening sys
-      S   : substitution sys
-      δ   : generic-element W
-      WW  : weakening-preserves-weakening W
-      SS  : substitution-preserves-substitution S
-      WS  : weakening-preserves-substitution S W
-      SW  : substitution-preserves-weakening W S
-      Wδ  : weakening-preserves-generic-element W WW δ
-      Sδ  : substitution-preserves-generic-element W δ S SW
+      W : weakening sys
+      S : substitution sys
+      δ : generic-element W
+      WW : weakening-preserves-weakening W
+      SS : substitution-preserves-substitution S
+      WS : weakening-preserves-substitution S W
+      SW : substitution-preserves-weakening W S
+      Wδ : weakening-preserves-generic-element W WW δ
+      Sδ : substitution-preserves-generic-element W δ S SW
       S!W : substitution-cancels-weakening W S
       δid : generic-element-is-identity W S δ S!W
       Sδ! : substitution-by-generic-element W S δ
@@ -805,15 +805,15 @@ module dependent where
       sys : hom-system
               ( type-theory.sys A)
               ( type-theory.sys B)
-      W   : preserves-weakening
+      W : preserves-weakening
               ( type-theory.W A)
               ( type-theory.W B)
               ( sys)
-      S   : preserves-substitution
+      S : preserves-substitution
               ( type-theory.S A)
               ( type-theory.S B)
               ( sys)
-      δ   : preserves-generic-element
+      δ : preserves-generic-element
               ( type-theory.δ A)
               ( type-theory.δ B)
               ( W)
@@ -1098,7 +1098,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type (type-theory.sys A)) →
+      type : (X : system.type (type-theory.sys A)) →
               is-equiv
                 ( section-system.type
                   ( weakening.type (type-theory.W A) X))
@@ -1122,7 +1122,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type A) → is-equiv (section-system.element h {X})
+      type : (X : system.type A) → is-equiv (section-system.element h {X})
       slice : (X : system.type A) →
               is-equiv-on-elements-hom-system
                 ( system.slice A X)
@@ -1137,9 +1137,9 @@ module dependent where
     {l1 l2 : Level} (A : type-theory l1 l2) : UU (lsuc l1 ⊔ lsuc l2)
     where
     field
-      dtt       : type-theory l1 l2
+      dtt : type-theory l1 l2
       is-simple : is-simple-type-theory A
-      is-unary  : (X Y : system.type (type-theory.sys A)) →
+      is-unary : (X Y : system.type (type-theory.sys A)) →
                   is-equiv-on-elements-hom-system
                     ( system.slice (type-theory.sys A) Y)
                     ( system.slice
@@ -1159,7 +1159,7 @@ module dependent where
     where
     coinductive
     field
-      type  : (X : system.type (type-theory.sys A)) →
+      type : (X : system.type (type-theory.sys A)) →
               is-prop (system.element (type-theory.sys A) X)
       slice : (X : system.type (type-theory.sys A)) →
               is-proof-irrelevant-type-theory (slice-dtt A X)
@@ -1244,9 +1244,9 @@ module dependent where
     where
     coinductive
     field
-      sys   : (X : system.type (type-theory.sys A)) →
+      sys : (X : system.type (type-theory.sys A)) →
               hom-dtt (slice-dtt A X) A
-      app   : (X : system.type (type-theory.sys A)) →
+      app : (X : system.type (type-theory.sys A)) →
               is-equiv-on-elements-hom-system
                 ( type-theory.sys (slice-dtt A X))
                 ( type-theory.sys A)
@@ -1273,7 +1273,7 @@ module dependent where
     UU (l1 ⊔ l2)
     where
     field
-      N    : closed-type-dtt A
+      N : closed-type-dtt A
       zero : global-element-dtt A N
       succ : global-element-dtt A
                ( section-system.type
@@ -1381,7 +1381,7 @@ module c-system where
   data context
     {l1 l2 : Level} (A : type-theory l1 l2) : UU l1
     where
-    empty-ctx     : context A
+    empty-ctx : context A
     extension-ctx : (X : system.type (type-theory.sys A))
                     (Γ : context (slice-dtt A X)) → context A
 

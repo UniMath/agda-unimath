@@ -61,7 +61,7 @@ map-inv-equiv-relation-is-decidable-Decidable-Relation :
   {l1 l2 : Level} {X : UU l1} →
   Σ ( Rel-Prop l2 X) (λ R → is-decidable-Rel-Prop R) →
   Decidable-Relation l2 X
-map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d)  x y =
+map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d) x y =
   ( ( type-Rel-Prop R x y) ,
     ( is-prop-type-Rel-Prop R x y) ,
     ( d x y))

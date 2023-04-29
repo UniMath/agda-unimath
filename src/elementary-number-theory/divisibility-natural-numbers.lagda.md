@@ -381,7 +381,7 @@ is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
 
 ```agda
 simplify-mul-quotient-div-ℕ :
-  {a b c : ℕ}  → is-nonzero-ℕ c →
+  {a b c : ℕ} → is-nonzero-ℕ c →
   (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
   ( mul-ℕ (quotient-div-ℕ b a H) (quotient-div-ℕ c b K)) ＝
   ( quotient-div-ℕ c a L)

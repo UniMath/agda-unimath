@@ -79,7 +79,7 @@ module _
   (Q : subuniverse l3 l4)
   (C1 :
     ( S T : species-subuniverse P Q) → (X : type-subuniverse P) →
-    is-small l3 (small-cauchy-composition-species-subuniverse'  P Q S T X))
+    is-small l3 (small-cauchy-composition-species-subuniverse' P Q S T X))
   (C2 :
     ( S T : species-subuniverse P Q) → (X : type-subuniverse P) →
     ( is-in-subuniverse Q (type-is-small (C1 S T X))))
@@ -318,7 +318,7 @@ module _
       ( Q)
       ( small-cauchy-composition-species-subuniverse
         ( S)
-        ( small-cauchy-composition-species-subuniverse T  U)
+        ( small-cauchy-composition-species-subuniverse T U)
         ( X)) ≃
     inclusion-subuniverse
       ( Q)
@@ -383,7 +383,7 @@ module _
     (U : species-subuniverse P Q)→
     small-cauchy-composition-species-subuniverse
       ( S)
-      ( small-cauchy-composition-species-subuniverse T  U) ＝
+      ( small-cauchy-composition-species-subuniverse T U) ＝
     small-cauchy-composition-species-subuniverse
       ( small-cauchy-composition-species-subuniverse S T)
       ( U)

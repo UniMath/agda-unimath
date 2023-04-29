@@ -181,7 +181,7 @@ module _
   where
 
   equiv-finite-surjection-Σ-Decomposition-𝔽 :
-    Σ-Decomposition-𝔽 l l A  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
+    Σ-Decomposition-𝔽 l l A ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
   equiv-finite-surjection-Σ-Decomposition-𝔽 =
     equiv-Σ
       ( λ B → type-𝔽 A ↠ type-𝔽 B)

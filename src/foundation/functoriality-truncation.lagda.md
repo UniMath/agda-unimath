@@ -43,7 +43,7 @@ module _
     universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
 
   map-trunc : type-trunc k A → type-trunc k B
-  map-trunc =  pr1 (center unique-map-trunc)
+  map-trunc = pr1 (center unique-map-trunc)
 
   coherence-square-map-trunc :
     coherence-square-maps f unit-trunc unit-trunc map-trunc

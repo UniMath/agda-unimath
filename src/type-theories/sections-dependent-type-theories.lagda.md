@@ -83,7 +83,7 @@ module sections-dtt where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               htpy-section-system
                 ( precomp-section-system
                   ( section-system.slice f X)
@@ -103,7 +103,7 @@ module sections-dtt where
     where
     coinductive
     field
-      type  : {X : system.type A} (x : system.element A X) →
+      type : {X : system.type A} (x : system.element A X) →
               htpy-section-system
                 ( precomp-section-system f (substitution.type SA x))
                 ( postcomp-section-system
@@ -123,7 +123,7 @@ module sections-dtt where
     where
     coinductive
     field
-      type  : (X : system.type A) →
+      type : (X : system.type A) →
               Id ( tr ( λ t →
                         fibered-system.element
                           ( fibered-system.slice B (section-system.type f X))
@@ -147,13 +147,13 @@ module sections-dtt where
     where
     field
       sys : section-system (fibered-type-theory.sys B)
-      W   : preserves-weakening-section-system
+      W : preserves-weakening-section-system
               ( fibered-type-theory.W B)
               ( sys)
-      S   : preserves-substitution-section-system
+      S : preserves-substitution-section-system
               ( fibered-type-theory.S B)
               ( sys)
-      δ   : preserves-generic-element-section-system
+      δ : preserves-generic-element-section-system
               ( fibered-type-theory.δ B)
               ( W)
 ```

@@ -54,27 +54,27 @@ data Arg {l} (A : UU l) : UU l where
 <details><summary>Bindings</summary>
 
 ```agda
-{-# BUILTIN HIDING   Visibility #-}
-{-# BUILTIN VISIBLE  visible    #-}
-{-# BUILTIN HIDDEN   hidden     #-}
-{-# BUILTIN INSTANCE instance′  #-}
+{-# BUILTIN HIDING Visibility #-}
+{-# BUILTIN VISIBLE visible #-}
+{-# BUILTIN HIDDEN hidden #-}
+{-# BUILTIN INSTANCE instance′ #-}
 
-{-# BUILTIN RELEVANCE  Relevance  #-}
-{-# BUILTIN RELEVANT   relevant   #-}
+{-# BUILTIN RELEVANCE Relevance #-}
+{-# BUILTIN RELEVANT relevant #-}
 {-# BUILTIN IRRELEVANT irrelevant #-}
 
-{-# BUILTIN QUANTITY   Quantity   #-}
+{-# BUILTIN QUANTITY Quantity #-}
 {-# BUILTIN QUANTITY-0 quantity-0 #-}
 {-# BUILTIN QUANTITY-ω quantity-ω #-}
 
-{-# BUILTIN MODALITY             Modality #-}
+{-# BUILTIN MODALITY Modality #-}
 {-# BUILTIN MODALITY-CONSTRUCTOR modality #-}
 
-{-# BUILTIN ARGINFO    ArgInfo  #-}
+{-# BUILTIN ARGINFO ArgInfo #-}
 {-# BUILTIN ARGARGINFO arg-info #-}
 
-{-# BUILTIN ARG        Arg      #-}
-{-# BUILTIN ARGARG     arg      #-}
+{-# BUILTIN ARG Arg #-}
+{-# BUILTIN ARGARG arg #-}
 ```
 
 </details>

@@ -36,14 +36,14 @@ module unityped where
     coinductive
     field
       element : UU l
-      slice   : system l
+      slice : system l
 
   record system-Set (l : Level) : UU (lsuc l)
     where
     coinductive
     field
       element : Set l
-      slice   : system-Set l
+      slice : system-Set l
 
   record hom-system
     {l1 l2 : Level} (σ : system l1) (T : system l2) : UU (l1 ⊔ l2)
@@ -51,7 +51,7 @@ module unityped where
     coinductive
     field
       element : system.element σ → system.element T
-      slice   : hom-system (system.slice σ) (system.slice T)
+      slice : hom-system (system.slice σ) (system.slice T)
 
   id-hom-system :
     {l : Level} (σ : system l) → hom-system σ σ
@@ -73,7 +73,7 @@ module unityped where
     coinductive
     field
       element : hom-system.element g ~ hom-system.element h
-      slice   : htpy-hom-system (hom-system.slice g) (hom-system.slice h)
+      slice : htpy-hom-system (hom-system.slice g) (hom-system.slice h)
 
   record weakening
     {l : Level} (σ : system l) : UU l
@@ -81,7 +81,7 @@ module unityped where
     coinductive
     field
       element : hom-system σ (system.slice σ)
-      slice   : weakening (system.slice σ)
+      slice : weakening (system.slice σ)
 
   record preserves-weakening
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (Wσ : weakening σ)
@@ -96,7 +96,7 @@ module unityped where
                   ( compose-hom-system
                     ( weakening.element Wτ)
                     ( h))
-      slice   : preserves-weakening
+      slice : preserves-weakening
                   ( weakening.slice Wσ)
                   ( weakening.slice Wτ)
                   ( hom-system.slice h)
@@ -108,7 +108,7 @@ module unityped where
     field
       element : (x : system.element σ) →
                 hom-system (system.slice σ) σ
-      slice   : substitution (system.slice σ)
+      slice : substitution (system.slice σ)
 
   record preserves-substitution
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (Sσ : substitution σ)
@@ -125,7 +125,7 @@ module unityped where
                     ( substitution.element Sτ
                       ( hom-system.element h x))
                     ( hom-system.slice h))
-      slice   : preserves-substitution
+      slice : preserves-substitution
                   ( substitution.slice Sσ)
                   ( substitution.slice Sτ)
                   ( hom-system.slice h)
@@ -136,7 +136,7 @@ module unityped where
     coinductive
     field
       element : system.element (system.slice σ)
-      slice   : generic-element (system.slice σ)
+      slice : generic-element (system.slice σ)
 
   record preserves-generic-element
     {l1 l2 : Level} {σ : system l1} {τ : system l2} (δσ : generic-element σ)
@@ -148,7 +148,7 @@ module unityped where
                      ( hom-system.slice h)
                      ( generic-element.element δσ))
                    ( generic-element.element δτ)
-      slice   : preserves-generic-element
+      slice : preserves-generic-element
                   ( generic-element.slice δσ)
                   ( generic-element.slice δτ)
                   ( hom-system.slice h)
@@ -162,7 +162,7 @@ module unityped where
                   ( W)
                   ( weakening.slice W)
                   ( weakening.element W)
-      slice   : weakening-preserves-weakening (weakening.slice W)
+      slice : weakening-preserves-weakening (weakening.slice W)
 
   record substitution-preserves-substitution
     {l : Level} {σ : system l} (S : substitution σ) : UU l
@@ -174,7 +174,7 @@ module unityped where
                   ( substitution.slice S)
                   ( S)
                   ( substitution.element S x)
-      slice   : substitution-preserves-substitution (substitution.slice S)
+      slice : substitution-preserves-substitution (substitution.slice S)
 
   record weakening-preserves-substitution
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
@@ -185,7 +185,7 @@ module unityped where
                   ( S)
                   ( substitution.slice S)
                   ( weakening.element W)
-      slice   : weakening-preserves-substitution
+      slice : weakening-preserves-substitution
                   ( weakening.slice W)
                   ( substitution.slice S)
 
@@ -199,7 +199,7 @@ module unityped where
                   ( weakening.slice W)
                   ( W)
                   ( substitution.element S x)
-      slice   : substitution-preserves-weakening
+      slice : substitution-preserves-weakening
                   ( weakening.slice W)
                   ( substitution.slice S)
 
@@ -212,7 +212,7 @@ module unityped where
                   ( δ)
                   ( generic-element.slice δ)
                   ( weakening.element W)
-      slice   : weakening-preserves-generic-element
+      slice : weakening-preserves-generic-element
                   ( weakening.slice W)
                   ( generic-element.slice δ)
 
@@ -227,7 +227,7 @@ module unityped where
                   ( generic-element.slice δ)
                   ( δ)
                   ( substitution.element S x)
-      slice   : substitution-preserves-generic-element
+      slice : substitution-preserves-generic-element
                   ( substitution.slice S)
                   ( generic-element.slice δ)
 
@@ -242,7 +242,7 @@ module unityped where
                     ( substitution.element S x)
                     ( weakening.element W))
                   ( id-hom-system σ)
-      slice   : substitution-cancels-weakening
+      slice : substitution-cancels-weakening
                   ( weakening.slice W)
                   ( substitution.slice S)
 
@@ -257,7 +257,7 @@ module unityped where
                      ( substitution.element S x)
                      ( generic-element.element δ))
                    ( x)
-      slice   : generic-element-is-identity
+      slice : generic-element-is-identity
                   ( substitution.slice S)
                   ( generic-element.slice δ)
 
@@ -274,7 +274,7 @@ module unityped where
                       ( generic-element.element δ))
                     ( weakening.element (weakening.slice W)))
                   ( id-hom-system (system.slice σ))
-      slice   : substitution-by-generic-element
+      slice : substitution-by-generic-element
                   ( weakening.slice W)
                   ( substitution.slice S)
                   ( generic-element.slice δ)
@@ -284,15 +284,15 @@ module unityped where
     where
     field
       sys : system l
-      W   : weakening sys
-      S   : substitution sys
-      δ   : generic-element sys
-      WW  : weakening-preserves-weakening W
-      SS  : substitution-preserves-substitution S
-      WS  : weakening-preserves-substitution W S
-      SW  : substitution-preserves-weakening W S
-      Wδ  : weakening-preserves-generic-element W δ
-      Sδ  : substitution-preserves-generic-element S δ
+      W : weakening sys
+      S : substitution sys
+      δ : generic-element sys
+      WW : weakening-preserves-weakening W
+      SS : substitution-preserves-substitution S
+      WS : weakening-preserves-substitution W S
+      SW : substitution-preserves-weakening W S
+      Wδ : weakening-preserves-generic-element W δ
+      Sδ : substitution-preserves-generic-element S δ
       S!W : substitution-cancels-weakening W S
       δid : generic-element-is-identity S δ
       Sδ! : substitution-by-generic-element W S δ

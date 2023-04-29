@@ -160,7 +160,7 @@ module _
               ( λ x →
                 equiv-postcomp-equiv
                   ( ( ( assoc-coprod) ∘e
-                    ( ( commutative-coprod  _ _))))
+                    ( ( commutative-coprod _ _))))
                   ( inclusion-subuniverse P X)) ∘e
               equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))
@@ -169,7 +169,7 @@ module _
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 z))
             ( _)) ∘e
-          ( ( equiv-tot  λ d → right-distributive-prod-Σ))))
+          ( ( equiv-tot λ d → right-distributive-prod-Σ))))
 
     equiv-right-iterated-cauchy-product-species-subuniverse :
       type-cauchy-product-species-subuniverse P Q

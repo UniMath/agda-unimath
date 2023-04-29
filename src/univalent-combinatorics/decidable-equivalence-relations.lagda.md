@@ -189,7 +189,7 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
           ( UU _)
           ( λ X →
               has-decidable-equality X ×
-              type-trunc-Prop (Σ ℕ (λ n → Fin n ↠  X)))
+              type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
           ( λ X → type-𝔽 A ↠ pr1 X)) ∘e
       ( ( equiv-Σ
             (λ X →
@@ -208,7 +208,7 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
                       ( has-decidable-equality (map-equiv id-equiv X))
                       ( type-𝔽 A ↠ X)
                       ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
-                  ( ( equiv-prod commutative-prod id-equiv)  ∘e
+                  ( ( equiv-prod commutative-prod id-equiv) ∘e
                     ( ( equiv-add-redundant-prop
                         ( is-prop-type-trunc-Prop)
                         ( λ x →

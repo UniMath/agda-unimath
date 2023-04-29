@@ -189,7 +189,7 @@ module _
   is-contr-total-equiv-binary-coproduct-Decomposition =
     is-contr-total-Eq-structure
       ( _)
-      ( is-contr-total-equiv ( left-summand-binary-coproduct-Decomposition  X))
+      ( is-contr-total-equiv ( left-summand-binary-coproduct-Decomposition X))
       ( left-summand-binary-coproduct-Decomposition X , id-equiv)
       ( is-contr-total-Eq-structure
         ( _)
@@ -245,7 +245,7 @@ module _
     matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ =
       ( ( equiv-coprod
           ( left-unit-law-Σ-is-contr ( is-contr-Fin-one-ℕ) ( inr star))
-          ( left-unit-law-Σ-is-contr  is-contr-unit star)) ∘e
+          ( left-unit-law-Σ-is-contr is-contr-unit star)) ∘e
         ( ( right-distributive-Σ-coprod ( Fin 1) unit (λ x → fib f x) ∘e
             ( inv-equiv-total-fib f))))
 
@@ -536,7 +536,7 @@ module _
     ( ( right-unit-law-coprod
           ( left-summand-binary-coproduct-Decomposition d)) ∘e
       ( ( equiv-coprod
-          ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit)  ∘e
+          ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit) ∘e
             equiv-tot
               ( λ _ → extensionality-Fin 2 (inl (inr star)) (inl (inr star))))
           ( right-absorption-Σ
@@ -570,7 +570,7 @@ module _
               ( left-summand-binary-coproduct-Decomposition d) ∘e
             equiv-tot
               ( λ _ → extensionality-Fin 2 (inl (inr star)) (inr star)))
-          ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit)  ∘e
+          ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit) ∘e
             equiv-tot
               ( λ _ → extensionality-Fin 2 (inr star) (inr star)))) ∘e
         ( ( right-distributive-Σ-coprod
@@ -603,7 +603,7 @@ module _
             ( ( right-unit-law-coprod
                 ( left-summand-binary-coproduct-Decomposition d)) ∘e
               ( ( equiv-coprod
-                  ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit)  ∘e
+                  ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit) ∘e
                     equiv-tot
                       ( λ _ →
                         extensionality-Fin 2 (inl (inr star)) (inl (inr star))))
@@ -664,7 +664,7 @@ module _
                       equiv-tot
                         ( λ _ →
                           extensionality-Fin 2 (inl (inr star)) (inr star)))
-                    ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit)  ∘e
+                    ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit) ∘e
                       equiv-tot
                         ( λ _ → extensionality-Fin 2 (inr star) (inr star)))) ∘e
                   ( ( right-distributive-Σ-coprod

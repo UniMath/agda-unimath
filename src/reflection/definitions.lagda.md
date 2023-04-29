@@ -34,19 +34,19 @@ The `Definition` type represents a definition in Agda.
 
 ```agda
 data Definition : UU lzero where
-  function    : (cs : list Clause) → Definition
-  data-type   : (pars : ℕ) (cs : list Name) → Definition
+  function : (cs : list Clause) → Definition
+  data-type : (pars : ℕ) (cs : list Name) → Definition
   record-type : (c : Name) (fs : list (Arg Name)) → Definition
-  data-cons   : (d : Name) → Definition
-  axiom       : Definition
-  prim-fun    : Definition
-{-# BUILTIN AGDADEFINITION                Definition  #-}
-{-# BUILTIN AGDADEFINITIONFUNDEF          function    #-}
-{-# BUILTIN AGDADEFINITIONDATADEF         data-type   #-}
-{-# BUILTIN AGDADEFINITIONRECORDDEF       record-type #-}
-{-# BUILTIN AGDADEFINITIONDATACONSTRUCTOR data-cons   #-}
-{-# BUILTIN AGDADEFINITIONPOSTULATE       axiom       #-}
-{-# BUILTIN AGDADEFINITIONPRIMITIVE       prim-fun    #-}
+  data-cons : (d : Name) → Definition
+  axiom : Definition
+  prim-fun : Definition
+{-# BUILTIN AGDADEFINITION Definition #-}
+{-# BUILTIN AGDADEFINITIONFUNDEF function #-}
+{-# BUILTIN AGDADEFINITIONDATADEF data-type #-}
+{-# BUILTIN AGDADEFINITIONRECORDDEF record-type #-}
+{-# BUILTIN AGDADEFINITIONDATACONSTRUCTOR data-cons #-}
+{-# BUILTIN AGDADEFINITIONPOSTULATE axiom #-}
+{-# BUILTIN AGDADEFINITIONPRIMITIVE prim-fun #-}
 ```
 
 ## Examples

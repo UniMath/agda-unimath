@@ -534,7 +534,7 @@ abstract
   compute-tr-eq-htpy-fam-lifts :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4) →
     (h : B → X) (f : A → B) →
-    Id  ( tr-eq-htpy-fam-lifts P h (refl-htpy' f))
+    Id ( tr-eq-htpy-fam-lifts P h (refl-htpy' f))
         ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
   compute-tr-eq-htpy-fam-lifts P h f =
     compute-htpy f
@@ -648,7 +648,7 @@ abstract
   compute-coherence-triangle-precompose-lifts :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
     (f : A → B) →
-      Id  ( coherence-triangle-precompose-lifts P (refl-htpy' f))
+      Id ( coherence-triangle-precompose-lifts P (refl-htpy' f))
           ( coherence-triangle-precompose-lifts-refl-htpy P f)
   compute-coherence-triangle-precompose-lifts P f =
     compute-htpy f

@@ -236,7 +236,7 @@ tr :
 tr B refl b = b
 
 path-over :
-  {l1 l2 : Level} {A :  UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
   B x → B x' → UU l2
 path-over B p y y' = (tr B p y) ＝ y'
 
@@ -283,7 +283,7 @@ preserves-tr f refl x = refl
 tr-Id-left :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
   (tr (_＝ a) q p) ＝ ((inv q) ∙ p)
-tr-Id-left refl p  = refl
+tr-Id-left refl p = refl
 
 tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
@@ -463,5 +463,5 @@ ap-binary-concat :
   (q : b0 ＝ b1) (q' : b1 ＝ b2) →
   (ap-binary f (p ∙ p') (q ∙ q')) ＝
     ((ap-binary f p q) ∙ (ap-binary f p' q'))
-ap-binary-concat f refl refl refl refl  = refl
+ap-binary-concat f refl refl refl refl = refl
 ```

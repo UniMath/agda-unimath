@@ -208,7 +208,7 @@ identities are not well typed. So these identities involve transporting.
 ```agda
 module _
   {l1 l2 : Level}
-  {A : UU l1} {a0 a1 : A} (B : A → UU l2) {b0 : B a0} {b1  : B a1}
+  {A : UU l1} {a0 a1 : A} (B : A → UU l2) {b0 : B a0} {b1 : B a1}
   where
 
   d-assoc :

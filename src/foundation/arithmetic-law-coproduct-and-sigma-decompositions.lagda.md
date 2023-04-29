@@ -156,7 +156,7 @@ module _
       tr-total-equiv :
         {l1 l3 l4 : Level} {X Y : UU l1} (e : Y ≃ X) →
         (h : Id {A = Σ (UU l1) λ Y → Y ≃ X} (X , id-equiv) (Y , e)) →
-        {C : (X : UU l1) → (X → UU l3) → UU l4}  →
+        {C : (X : UU l1) → (X → UU l3) → UU l4} →
         {f : Σ (Y → UU l3) (λ Z → C Y Z)} →
         (x : X) →
         pr1
@@ -169,7 +169,7 @@ module _
             ( h)
             ( id)
             ( f))
-          ( x)  ＝
+          ( x) ＝
         pr1 f (map-inv-equiv e x)
       tr-total-equiv e refl x = refl
 

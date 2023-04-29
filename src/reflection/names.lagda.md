@@ -34,8 +34,8 @@ postulate Name : UU lzero
 
 primitive
   primQNameEquality : Name → Name → bool
-  primQNameLess     : Name → Name → bool
-  primShowQName     : Name → String
+  primQNameLess : Name → Name → bool
+  primShowQName : Name → String
   primQNameToWord64s : Name → Word64 × Word64
   primQNameToWord64sInjective :
     ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b

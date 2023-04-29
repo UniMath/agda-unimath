@@ -269,7 +269,7 @@ cases-eq-inductive-step-compute-succ-based-strong-ind-ℕ
     ( M)
     ( H)) ∙
   ( ( htpy-succ-based-strong-ind-ℕ k P pS n N
-      (  inductive-step-based-strong-ind-ℕ k P
+      ( inductive-step-based-strong-ind-ℕ k P
         ( base-based-strong-ind-ℕ k P p0)
         ( succ-based-strong-ind-ℕ k P pS)
         ( n)

@@ -321,7 +321,7 @@ module _
                   ( C4)
                   ( T)
                   ( right-summand-binary-coproduct-Decomposition d ,
-                    pr2  (lemma-C6 d))))) ∘e
+                    pr2 (lemma-C6 d))))) ∘e
           ( equiv-cauchy-exponential-sum-species-types
             ( Σ-extension-species-subuniverse
               ( P)

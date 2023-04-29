@@ -95,7 +95,7 @@ module _
      ( fin-X)
      ( prod-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
      ( λ count-X →
-       ( has-decidable-equality-count count-X  ,
+       ( has-decidable-equality-count count-X ,
          unit-trunc-Prop
          ( pr1 count-X ,
            ( map-equiv (pr2 count-X)) ,

@@ -28,7 +28,7 @@ multiplicative operation and the unit are given pointwise.
 
 ```agda
 module _
-  {l1 l2 : Level} (M :  Commutative-Monoid l1) (X : UU l2)
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (X : UU l2)
   where
 
   function-Commutative-Monoid : Commutative-Monoid (l1 ⊔ l2)

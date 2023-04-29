@@ -150,7 +150,7 @@ pr2 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel =
     ( λ (R , d) →
       ( map-inv-equiv
           ( equiv-relation-is-decidable-Decidable-Relation)
-          ( prop-Eq-Rel R , d)  , is-equivalence-relation-prop-Eq-Rel R))
+          ( prop-Eq-Rel R , d) , is-equivalence-relation-prop-Eq-Rel R))
     ( refl-htpy)
     ( refl-htpy)
 ```

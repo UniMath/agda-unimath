@@ -33,16 +33,16 @@ module simple where
     coinductive
     field
       element : T → UU l2
-      slice   : (X : T) → system l2 T
+      slice : (X : T) → system l2 T
 
   record fibered-system
-    {l1 l2 l3 : Level} (l4 : Level) {T  : UU l1} (S : T → UU l2)
+    {l1 l2 l3 : Level} (l4 : Level) {T : UU l1} (S : T → UU l2)
     (A : system l3 T) : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
     where
     coinductive
     field
       element : {X : T} → S X → system.element A X → UU l4
-      slice   : {X : T} → S X → fibered-system l4 S (system.slice A X)
+      slice : {X : T} → S X → fibered-system l4 S (system.slice A X)
 
   record section-system
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : T → UU l2} {A : system l3 T}
@@ -52,7 +52,7 @@ module simple where
     field
       element : {X : T} (x : system.element A X) →
                 fibered-system.element B (f X) x
-      slice   : (X : T) → section-system (fibered-system.slice B (f X)) f
+      slice : (X : T) → section-system (fibered-system.slice B (f X)) f
 
   ------------------------------------------------------------------------------
 
@@ -207,7 +207,7 @@ module simple where
     coinductive
     field
       element : (X : T) → hom-system id A (system.slice A X)
-      slice   : (X : T) → weakening (system.slice A X)
+      slice : (X : T) → weakening (system.slice A X)
 
   record preserves-weakening
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S}
@@ -224,7 +224,7 @@ module simple where
                   ( compose-hom-system
                     ( weakening.element WB (f X))
                     ( h))
-      slice   : (X : T) →
+      slice : (X : T) →
                 preserves-weakening
                   ( weakening.slice WA X)
                   ( weakening.slice WB (f X))
@@ -237,7 +237,7 @@ module simple where
     field
       element : {X : T} (x : system.element A X) →
                 hom-system id (system.slice A X) A
-      slice   : (X : T) → substitution (system.slice A X)
+      slice : (X : T) → substitution (system.slice A X)
 
   record preserves-substitution
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S} {A : system l3 T}
@@ -255,7 +255,7 @@ module simple where
                     ( substitution.element SB
                       ( section-system.element h x))
                     ( section-system.slice h X))
-      slice   : (X : T) →
+      slice : (X : T) →
                 preserves-substitution
                   ( substitution.slice SA X)
                   ( substitution.slice SB (f X))
@@ -267,7 +267,7 @@ module simple where
     coinductive
     field
       element : (X : T) → system.element (system.slice A X) X
-      slice   : (X : T) → generic-element (system.slice A X)
+      slice : (X : T) → generic-element (system.slice A X)
 
   record preserves-generic-element
     {l1 l2 l3 l4 : Level} {T : UU l1} {S : UU l2} {f : T → S}
@@ -281,7 +281,7 @@ module simple where
                      ( section-system.slice h X)
                      ( generic-element.element δA X))
                    ( generic-element.element δB (f X))
-      slice   : (X : T) →
+      slice : (X : T) →
                 preserves-generic-element
                   ( generic-element.slice δA X)
                   ( generic-element.slice δB (f X))
@@ -301,7 +301,7 @@ module simple where
                     ( W)
                     ( weakening.slice W X)
                     ( weakening.element W X)
-        slice   : (X : T) → weakening-preserves-weakening (weakening.slice W  X)
+        slice : (X : T) → weakening-preserves-weakening (weakening.slice W X)
 
     record substitution-preserves-substitution
       {A : system l2 T} (S : substitution A) : UU (l1 ⊔ l2)
@@ -313,7 +313,7 @@ module simple where
                     ( substitution.slice S X)
                     ( S)
                     ( substitution.element S x)
-        slice   : (X : T) →
+        slice : (X : T) →
                   substitution-preserves-substitution (substitution.slice S X)
 
     record weakening-preserves-substitution
@@ -326,7 +326,7 @@ module simple where
                     ( S)
                     ( substitution.slice S X)
                     ( weakening.element W X)
-        slice   : (X : T) →
+        slice : (X : T) →
                   weakening-preserves-substitution
                     ( weakening.slice W X)
                     ( substitution.slice S X)
@@ -341,7 +341,7 @@ module simple where
                     ( weakening.slice W X)
                     ( W)
                     ( substitution.element S x)
-        slice   : (X : T) →
+        slice : (X : T) →
                   substitution-preserves-weakening
                     ( weakening.slice W X)
                     ( substitution.slice S X)
@@ -356,7 +356,7 @@ module simple where
                     ( δ)
                     ( generic-element.slice δ X)
                     ( weakening.element W X)
-        slice   : (X : T) →
+        slice : (X : T) →
                   weakening-preserves-generic-element
                     ( weakening.slice W X)
                     ( generic-element.slice δ X)
@@ -372,7 +372,7 @@ module simple where
                     ( generic-element.slice δ X)
                     ( δ)
                     ( substitution.element S x)
-        slice   : (X : T) →
+        slice : (X : T) →
                   substitution-preserves-generic-element
                     ( substitution.slice S X)
                     ( generic-element.slice δ X)
@@ -388,7 +388,7 @@ module simple where
                       ( substitution.element S x)
                       ( weakening.element W X))
                     ( id-hom-system A)
-        slice   : (X : T) →
+        slice : (X : T) →
                   substitution-cancels-weakening
                     ( weakening.slice W X)
                     ( substitution.slice S X)
@@ -404,7 +404,7 @@ module simple where
                        ( substitution.element S x)
                        ( generic-element.element δ X))
                      ( x)
-        slice   : (X : T) →
+        slice : (X : T) →
                   generic-element-is-identity
                     ( substitution.slice S X)
                     ( generic-element.slice δ X)
@@ -423,7 +423,7 @@ module simple where
                         ( generic-element.element δ X))
                       ( weakening.element (weakening.slice W X) X))
                     ( id-hom-system (system.slice A X))
-        slice   : (X : T) →
+        slice : (X : T) →
                   substitution-by-generic-element
                     ( weakening.slice W X)
                     ( substitution.slice S X)
@@ -435,15 +435,15 @@ module simple where
     field
       typ : UU l1
       sys : system l2 typ
-      W   : weakening sys
-      S   : substitution sys
-      δ   : generic-element sys
-      WW  : weakening-preserves-weakening W
-      SS  : substitution-preserves-substitution S
-      WS  : weakening-preserves-substitution W S
-      SW  : substitution-preserves-weakening W S
-      Wδ  : weakening-preserves-generic-element W δ
-      Sδ  : substitution-preserves-generic-element S δ
+      W : weakening sys
+      S : substitution sys
+      δ : generic-element sys
+      WW : weakening-preserves-weakening W
+      SS : substitution-preserves-substitution S
+      WS : weakening-preserves-substitution W S
+      SW : substitution-preserves-weakening W S
+      Wδ : weakening-preserves-generic-element W δ
+      Sδ : substitution-preserves-generic-element S δ
       S!W : substitution-cancels-weakening W S
       δid : generic-element-is-identity S δ
       Sδ! : substitution-by-generic-element W S δ

@@ -34,12 +34,12 @@ postulate String : UU lzero
 {-# BUILTIN STRING String #-}
 
 primitive
-  primStringUncons   : String → Maybe' (Σ Char (λ _ → String))
-  primStringToList   : String → list Char
+  primStringUncons : String → Maybe' (Σ Char (λ _ → String))
+  primStringToList : String → list Char
   primStringFromList : list Char → String
-  primStringAppend   : String → String → String
+  primStringAppend : String → String → String
   primStringEquality : String → String → bool
-  primShowChar       : Char → String
-  primShowString     : String → String
-  primShowNat        : ℕ → String
+  primShowChar : Char → String
+  primShowString : String → String
+  primShowNat : ℕ → String
 ```
