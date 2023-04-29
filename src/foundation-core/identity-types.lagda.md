@@ -208,7 +208,8 @@ ap-concat f refl q = refl
 
 ap-concat-eq :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
+  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z)
+  (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
 ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
 
 ap-inv :
@@ -438,7 +439,8 @@ ap-binary-comp-diagonal :
   (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
   (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
 ap-binary-comp-diagonal H f g p =
-  inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
+  ( inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p)) ∙
+  ( ap-binary-comp H f g p p)
 
 ap-binary-comp' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}

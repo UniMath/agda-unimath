@@ -792,8 +792,8 @@ module _
         d)
       ( d)
       ( equiv-left-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d ,
-        ( equiv-right-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d ,
-          matching-correspondence-htpy-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d ))
+        equiv-right-summand-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d ,
+          matching-correspondence-htpy-issec-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ d )
 
   is-equiv-map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
     is-equiv map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ

@@ -126,8 +126,10 @@ equiv-is-contr-equiv {A = A} {B = B} e =
   equiv-prop
     ( is-property-is-contr)
     ( is-property-is-contr)
-    ( is-contr-retract-of A (pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
-    ( is-contr-retract-of B (pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
+    ( is-contr-retract-of A
+      ( pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
+    ( is-contr-retract-of B
+      ( pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
 ```
 
 ### Contractible types are k-truncated for any k.

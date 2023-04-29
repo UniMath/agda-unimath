@@ -451,11 +451,15 @@ module _
         ( normal-submonoid-saturated-congruence-Monoid))
       ( R)
   pr1
-    ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid x y) H =
+    ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid
+      x y)
+    H =
     is-saturated-saturated-congruence-Monoid M R x y H
   pr1
     ( pr2
-      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid x y) H u v) =
+      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid
+        x y)
+      H u v) =
     trans-saturated-congruence-Monoid M R
       ( mul-saturated-congruence-Monoid M R
         ( mul-saturated-congruence-Monoid M R
@@ -464,7 +468,9 @@ module _
         ( refl-saturated-congruence-Monoid M R))
   pr2
     ( pr2
-      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid x y) H u v) =
+      ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid
+        x y)
+      H u v) =
     trans-saturated-congruence-Monoid M R
       ( mul-saturated-congruence-Monoid M R
         ( mul-saturated-congruence-Monoid M R

@@ -506,8 +506,16 @@ module _
     (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
   issec-map-inv-mutually-exclusive-coprod e =
     eq-htpy-equiv (
-      λ { (inl p) → ap pr1 (isretr-map-inv-equiv-left-summand (pair (map-equiv e (inl p)) (left-to-left ¬PQ' e (inl p) star)));
-          (inr q) → ap pr1 (isretr-map-inv-equiv-right-summand (pair (map-equiv e (inr q)) (right-to-right ¬P'Q e (inr q) star))) })
+      λ { (inl p) →
+          ap
+            ( pr1)
+            ( isretr-map-inv-equiv-left-summand
+              ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star)) ;
+          (inr q) →
+          ap
+            ( pr1)
+            ( isretr-map-inv-equiv-right-summand
+              ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star))})
 
   equiv-mutually-exclusive-coprod :
     ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))

@@ -137,7 +137,7 @@ module _
         ( ( (u : left-summand-binary-coproduct-Decomposition d) →
             ( A
               ( map-inv-equiv
-                ( matching-correspondence-binary-coproduct-Decomposition d )
+                ( matching-correspondence-binary-coproduct-Decomposition d)
                 ( inl u)))) ×
           ( ( v : right-summand-binary-coproduct-Decomposition d) →
             ( B
@@ -168,7 +168,9 @@ module _
               ( λ z →
                   A
                   ( map-inv-equiv
-                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X f)
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      ( X)
+                      ( f))
                     ( inl z)))
               ( id-equiv)
               ( λ a →
@@ -184,7 +186,8 @@ module _
               ( λ z →
                   B
                   ( map-inv-equiv
-                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X f)
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      X f)
                     ( inr z)))
               ( id-equiv)
               ( λ a →

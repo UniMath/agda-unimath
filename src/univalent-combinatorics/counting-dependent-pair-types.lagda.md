@@ -238,8 +238,9 @@ abstract
            (count-fiber-count-Σ-count-base e f x)))
        ( number-of-elements-count f)
   sum-number-of-elements-count-fiber-count-Σ e f =
-    ( inv (number-of-elements-count-Σ e (λ x → count-fiber-count-Σ-count-base e f x))) ∙
-    ( double-counting (count-Σ e (λ x → count-fiber-count-Σ-count-base e f x)) f)
+    ( inv
+      ( number-of-elements-count-Σ e (count-fiber-count-Σ-count-base e f))) ∙
+    ( double-counting (count-Σ e (count-fiber-count-Σ-count-base e f)) f)
 
 abstract
   double-counting-fiber-count-Σ :
@@ -249,7 +250,9 @@ abstract
        ( number-of-elements-count
          ( count-fiber-count-Σ-count-base count-A count-C x))
   double-counting-fiber-count-Σ count-A count-B count-C x =
-    double-counting (count-B x) (count-fiber-count-Σ-count-base count-A count-C x)
+    double-counting
+      ( count-B x)
+      ( count-fiber-count-Σ-count-base count-A count-C x)
 
 abstract
   sum-number-of-elements-count-base-count-Σ :

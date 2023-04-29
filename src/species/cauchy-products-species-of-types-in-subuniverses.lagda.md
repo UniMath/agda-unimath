@@ -88,7 +88,7 @@ is-closed-under-cauchy-product-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id )
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   where
 
@@ -128,20 +128,32 @@ module _
       Σ ( ternary-coproduct-Decomposition-subuniverse P X)
         ( λ d →
           inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-            ( S (first-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
+            ( S
+              ( first-summand-ternary-coproduct-Decomposition-subuniverse
+                P X d)) ×
             ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( T (second-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
+              ( T
+                ( second-summand-ternary-coproduct-Decomposition-subuniverse
+                  P X d)) ×
               inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
-              ( U (third-summand-ternary-coproduct-Decomposition-subuniverse P X d))))
+              ( U
+                ( third-summand-ternary-coproduct-Decomposition-subuniverse
+                  P X d))))
     equiv-left-iterated-cauchy-product-species-subuniverse =
       ( ( equiv-Σ
           ( λ d →
             inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-            ( S (first-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
+            ( S
+              ( first-summand-ternary-coproduct-Decomposition-subuniverse
+                  P X d)) ×
             ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( T (second-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
+              ( T
+                ( second-summand-ternary-coproduct-Decomposition-subuniverse
+                    P X d)) ×
               inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
-              ( U (third-summand-ternary-coproduct-Decomposition-subuniverse P X d)))))
+              ( U
+                ( third-summand-ternary-coproduct-Decomposition-subuniverse
+                    P X d)))))
           ( ( equiv-Σ
               ( _)
               ( assoc-prod _ _ _ ∘e commutative-prod)
@@ -150,7 +162,8 @@ module _
                   ( ( ( assoc-coprod) ∘e
                     ( ( commutative-coprod  _ _))) )
                   ( inclusion-subuniverse P X)) ∘e
-              equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse P X C2))
+              equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
+                P X C2))
           ( λ d → assoc-prod _ _ _) ∘e
         ( ( inv-assoc-Σ
             ( binary-coproduct-Decomposition-subuniverse P X)
@@ -166,15 +179,22 @@ module _
       Σ ( ternary-coproduct-Decomposition-subuniverse P X)
         ( λ d →
           inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-            ( S (first-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
+            ( S
+              ( first-summand-ternary-coproduct-Decomposition-subuniverse
+                P X d)) ×
             ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( T (second-summand-ternary-coproduct-Decomposition-subuniverse P X d)) ×
-                inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
-              ( U (third-summand-ternary-coproduct-Decomposition-subuniverse P X d))))
+              ( T
+                ( second-summand-ternary-coproduct-Decomposition-subuniverse
+                  P X d)) ×
+              inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
+              ( U
+                ( third-summand-ternary-coproduct-Decomposition-subuniverse
+                  P X d))))
     equiv-right-iterated-cauchy-product-species-subuniverse =
       ( ( equiv-Σ-equiv-base
           ( _)
-          ( equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse P X C2)) ∘e
+          ( equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse
+              P X C2)) ∘e
         ( ( inv-assoc-Σ
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 (pr2 z)))
@@ -311,7 +331,8 @@ module _
                   ( P)
                   ( subuniverse-global-subuniverse Q l1)
                   ( C3)
-                  ( right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
+                  ( right-summand-binary-coproduct-Decomposition-subuniverse
+                      P X d)))
             ( λ z →
               inclusion-subuniverse
                 ( subuniverse-global-subuniverse Q l3)
@@ -428,26 +449,29 @@ module _
                 (λ p →
                     ( inclusion-subuniverse
                         ( subuniverse-global-subuniverse Q l3)
-                        ( S ( left-summand-binary-coproduct-Decomposition d ,
-                              pr1 p))) ×
+                        ( S
+                          ( left-summand-binary-coproduct-Decomposition d ,
+                            pr1 p))) ×
                     ( inclusion-subuniverse
                         ( subuniverse-global-subuniverse Q l4)
-                        ( T ( right-summand-binary-coproduct-Decomposition d ,
-                              pr2 p))))
+                        ( T
+                          ( right-summand-binary-coproduct-Decomposition d ,
+                            pr2 p))))
                 ( inv-equiv
-                    ( equiv-add-redundant-prop
-                      ( is-prop-type-Prop (P X))
-                      ( λ p →
-                        tr
-                          ( is-in-subuniverse P)
-                          ( inv
-                            ( eq-equiv
-                                ( X)
-                                ( left-summand-binary-coproduct-Decomposition d +
-                                  right-summand-binary-coproduct-Decomposition d)
-                                ( matching-correspondence-binary-coproduct-Decomposition d)))
-                          ( C2
-                            ( pr1 p)
-                            ( pr2 p))))))) ∘e
-        ( ( reassociate))))
+                  ( equiv-add-redundant-prop
+                    ( is-prop-type-Prop (P X))
+                    ( λ p →
+                      tr
+                        ( is-in-subuniverse P)
+                        ( inv
+                          ( eq-equiv
+                            ( X)
+                            ( left-summand-binary-coproduct-Decomposition d +
+                              right-summand-binary-coproduct-Decomposition d)
+                            ( matching-correspondence-binary-coproduct-Decomposition
+                                d)))
+                        ( C2
+                          ( pr1 p)
+                          ( pr2 p))))))) ∘e
+        ( reassociate)))
 ```

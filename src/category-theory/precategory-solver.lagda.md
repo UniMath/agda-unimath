@@ -59,7 +59,8 @@ module _
     type-hom-Precat-Expr :
       {x y : obj-Precat C} → type-hom-Precat C x y → Precat-Expr x y
     comp-hom-Precat-Expr :
-      {x y z : obj-Precat C} → Precat-Expr y z → Precat-Expr x y → Precat-Expr x z
+      {x y z : obj-Precat C} →
+      Precat-Expr y z → Precat-Expr x y → Precat-Expr x z
 ```
 
 ### The syntactic representation of a morphism
@@ -103,7 +104,9 @@ module _
       ＝ comp-hom-Precat C
           (in-Precat-Expr f)
           (comp-hom-Precat C (in-Precat-Expr g) h)
-        by ap (comp-hom-Precat C (in-Precat-Expr f)) (is-sound-eval-Precat-Expr g h)
+        by ap
+          ( comp-hom-Precat C (in-Precat-Expr f))
+          ( is-sound-eval-Precat-Expr g h)
       ＝ comp-hom-Precat C
           (comp-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g))
           h

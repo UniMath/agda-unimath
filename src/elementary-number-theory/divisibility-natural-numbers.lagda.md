@@ -145,8 +145,10 @@ leq-quotient-div-ℕ d x f H =
 leq-quotient-div-ℕ' :
   (d x : ℕ) → is-nonzero-ℕ d → (H : div-ℕ d x) → leq-ℕ (quotient-div-ℕ d x H) x
 leq-quotient-div-ℕ' d zero-ℕ f (zero-ℕ , p) = star
-leq-quotient-div-ℕ' d zero-ℕ f (succ-ℕ n , p) = f (is-zero-right-is-zero-add-ℕ _ d p)
-leq-quotient-div-ℕ' d (succ-ℕ x) f H = leq-quotient-div-ℕ d (succ-ℕ x) (is-nonzero-succ-ℕ x) H
+leq-quotient-div-ℕ' d zero-ℕ f (succ-ℕ n , p) =
+  f (is-zero-right-is-zero-add-ℕ _ d p)
+leq-quotient-div-ℕ' d (succ-ℕ x) f H =
+  leq-quotient-div-ℕ d (succ-ℕ x) (is-nonzero-succ-ℕ x) H
 ```
 
 ### If `x` is nonzero, if `d | x` and `d ≠ x`, then `d < x`

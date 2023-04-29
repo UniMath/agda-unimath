@@ -267,11 +267,15 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  is-contr-map-right-factor-htpy : is-contr-map g → is-contr-map f → is-contr-map h
-  is-contr-map-right-factor-htpy = is-trunc-map-right-factor-htpy neg-two-𝕋 f g h H
+  is-contr-map-right-factor-htpy :
+    is-contr-map g → is-contr-map f → is-contr-map h
+  is-contr-map-right-factor-htpy =
+    is-trunc-map-right-factor-htpy neg-two-𝕋 f g h H
 
-  is-prop-map-right-factor-htpy : is-prop-map g → is-prop-map f → is-prop-map h
-  is-prop-map-right-factor-htpy = is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
+  is-prop-map-right-factor-htpy :
+    is-prop-map g → is-prop-map f → is-prop-map h
+  is-prop-map-right-factor-htpy =
+    is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
 
 is-trunc-map-right-factor :
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
@@ -285,11 +289,15 @@ module _
   (g : B → X) (h : A → B)
   where
 
-  is-contr-map-right-factor : is-contr-map g → is-contr-map (g ∘ h) → is-contr-map h
-  is-contr-map-right-factor = is-trunc-map-right-factor neg-two-𝕋 g h
+  is-contr-map-right-factor :
+    is-contr-map g → is-contr-map (g ∘ h) → is-contr-map h
+  is-contr-map-right-factor =
+    is-trunc-map-right-factor neg-two-𝕋 g h
 
-  is-prop-map-right-factor : is-prop-map g → is-prop-map (g ∘ h) → is-prop-map h
-  is-prop-map-right-factor = is-trunc-map-right-factor neg-one-𝕋 g h
+  is-prop-map-right-factor :
+    is-prop-map g → is-prop-map (g ∘ h) → is-prop-map h
+  is-prop-map-right-factor =
+    is-trunc-map-right-factor neg-one-𝕋 g h
 ```
 
 ### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
@@ -369,7 +377,8 @@ module _
 
   abstract
     is-prop-map-map-Σ-map-base :
-      {f : A → B} (C : B → UU l3) → is-prop-map f → is-prop-map (map-Σ-map-base f C)
+      {f : A → B} (C : B → UU l3) →
+      is-prop-map f → is-prop-map (map-Σ-map-base f C)
     is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
 
 module _

@@ -28,7 +28,8 @@ simply motivated by a desire to avoid iterated sigma types.
 
 ```agda
 Frame : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Frame l1 l2 l3 = Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3 )
+Frame l1 l2 l3 =
+  Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3)
 ```
 
 ## Now we retrieve all the information from a frame (i.e. break up all of it's components, etc.)
@@ -108,7 +109,8 @@ module _
     element-Frame
   sup-Frame I b = pr1 (is-sup-lattice-Frame I b)
 
-  distributive-law-Frame : distributive-law-meet-sup-lattice l1 l2 l3 meet-sup-lattice-Frame
+  distributive-law-Frame :
+    distributive-law-meet-sup-lattice l1 l2 l3 meet-sup-lattice-Frame
   distributive-law-Frame = pr2 A
 
   frame-Frame : Frame l1 l2 l3

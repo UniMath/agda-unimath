@@ -157,6 +157,8 @@ module _
     sec :
       (C : type-decidable-subtype P + type-decidable-subtype Q) →
       (inv ∘ pr1 (equiv-symmetric-difference P Q)) C ＝ C
-    sec (inl (pair x p)) = left-cases-sec x p (is-decidable-type-Decidable-Prop (Q x))
-    sec (inr (pair x q)) = right-cases-sec x q (is-decidable-type-Decidable-Prop (P x))
+    sec (inl (pair x p)) =
+      left-cases-sec x p (is-decidable-type-Decidable-Prop (Q x))
+    sec (inr (pair x q)) =
+      right-cases-sec x q (is-decidable-type-Decidable-Prop (P x))
 ```

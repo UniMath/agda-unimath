@@ -10,8 +10,28 @@ To deactivate the check, run:
 
 import collections
 import os
+import re
 import sys
 import utils
+
+named_module = re.compile(r'^module\s+\S+\s+where')
+irreducible_line1 = re.compile(r'^\s*([({] )*[^\s.;{}()@"]+[)}]*$')
+irreducible_line2 = re.compile(r'^\s*[^\s.;{}()@"]+ [:=]$')
+comment_line = re.compile(r'^\s*--.*$')
+
+
+def can_forgive_line(line):
+    """
+    Determines when a line of longer length than 80 characters can be forgiven.
+    """
+
+    return\
+        line.startswith('open import ') or\
+        named_module.match(line) or\
+        irreducible_line1.match(line) or\
+        irreducible_line2.match(line) or\
+        comment_line.match(
+            line)  # Comments should really not be there in the first place
 
 
 MSG = """  {fpath}:line {numline}"""
@@ -38,10 +58,9 @@ if __name__ == '__main__':
                     is_in_agda_block = True
                 elif '```' in line:
                     is_in_agda_block = False
-                elif is_in_agda_block and \
-                        len(line) > MAX_LINE_LENGTH and \
-                        not line.startswith('open import ') and \
-                        not line.startswith('module '):  # Some module names are just too long
+                elif is_in_agda_block and\
+                        len(line) > MAX_LINE_LENGTH and\
+                        not can_forgive_line(line):
 
                     if status & MAX_LENGTH_EXCEEDED_FLAG == 0:
                         print(

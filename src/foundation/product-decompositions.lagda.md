@@ -190,7 +190,8 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x))))
-    map-reassociate-left-iterated-product-Decomposition ((A , B , e) , C , D , f) =
+    map-reassociate-left-iterated-product-Decomposition
+      ( (A , B , e) , C , D , f) =
       ( (B , C , D) , (A , f) , e )
 
     map-inv-reassociate-left-iterated-product-Decomposition :
@@ -206,8 +207,9 @@ module _
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x)))) →
       left-iterated-binary-product-Decomposition P X
-    map-inv-reassociate-left-iterated-product-Decomposition ( (B , C , D) , (A , f) , e ) =
-      ((A , B , e) , C , D , f)
+    map-inv-reassociate-left-iterated-product-Decomposition
+      ( (B , C , D) , (A , f) , e) =
+      ( (A , B , e) , C , D , f)
 
     equiv-reassociate-left-iterated-product-Decomposition :
       left-iterated-binary-product-Decomposition P X ≃
@@ -265,7 +267,8 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B))))
-    map-reassociate-right-iterated-product-Decomposition ((A , B , e) , C , D , f) =
+    map-reassociate-right-iterated-product-Decomposition
+      ( (A , B , e) , C , D , f) =
       ( (A , C , D) , (B , f) , e )
 
     map-inv-reassociate-right-iterated-product-Decomposition :
@@ -281,8 +284,9 @@ module _
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B)))) →
       right-iterated-binary-product-Decomposition P X
-    map-inv-reassociate-right-iterated-product-Decomposition ( (A , C , D) , (B , f) , e ) =
-      ((A , B , e) , C , D , f)
+    map-inv-reassociate-right-iterated-product-Decomposition
+      ( (A , C , D) , (B , f) , e) =
+      ( (A , B , e) , C , D , f)
 
     equiv-reassociate-right-iterated-product-Decomposition :
       right-iterated-binary-product-Decomposition P X ≃

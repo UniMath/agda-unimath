@@ -419,8 +419,10 @@ is-vertex-on-walk-is-vertex-on-second-segment-walk-Undirected-Graph :
   (u : vertex-Undirected-Graph G) →
   is-vertex-on-second-segment-walk-Undirected-Graph G w v u →
   is-vertex-on-walk-Undirected-Graph G w u
-is-vertex-on-walk-is-vertex-on-second-segment-walk-Undirected-Graph G refl-walk-Undirected-Graph (v , refl) .v refl = refl
-is-vertex-on-walk-is-vertex-on-second-segment-walk-Undirected-Graph G (cons-walk-Undirected-Graph p e w) (v , inl K) u (inl H) =
+is-vertex-on-walk-is-vertex-on-second-segment-walk-Undirected-Graph
+  G refl-walk-Undirected-Graph (v , refl) .v refl = refl
+is-vertex-on-walk-is-vertex-on-second-segment-walk-Undirected-Graph
+  G (cons-walk-Undirected-Graph p e w) (v , inl K) u (inl H) =
   is-vertex-on-walk-cons-walk-Undirected-Graph G p e w
     ( is-vertex-on-walk-is-vertex-on-second-segment-walk-Undirected-Graph
       G w (pair v K) u H)

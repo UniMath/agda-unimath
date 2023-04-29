@@ -178,7 +178,8 @@ module _
       cotype-Relaxed-Σ-Decomposition
         ( pr1
           ( pr2
-            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition
+              ( D))))
         ( a) ＝
       cotype-Relaxed-Σ-Decomposition
         ( pr1 D)
@@ -202,7 +203,8 @@ module _
       cotype-Relaxed-Σ-Decomposition
         ( pr2
           ( pr2
-            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition
+              ( D))))
         ( b) ＝
       cotype-Relaxed-Σ-Decomposition (pr1 D)
         ( map-inv-equiv

@@ -134,8 +134,12 @@ module _
     type-iso-Group
       ( abstract-group-Concrete-Group (UU-Fin-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
-  pr1 iso-loop-group-fin-UU-Fin-Group = hom-loop-group-fin-UU-Fin-Group
-  pr1 (pr2 iso-loop-group-fin-UU-Fin-Group) = hom-inv-loop-group-fin-UU-Fin-Group
-  pr1 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-sec-hom-inv-loop-group-fin-UU-Fin-Group
-  pr2 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) = is-retr-hom-inv-loop-group-fin-UU-Fin-Group
+  pr1 iso-loop-group-fin-UU-Fin-Group =
+    hom-loop-group-fin-UU-Fin-Group
+  pr1 (pr2 iso-loop-group-fin-UU-Fin-Group) =
+    hom-inv-loop-group-fin-UU-Fin-Group
+  pr1 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) =
+    is-sec-hom-inv-loop-group-fin-UU-Fin-Group
+  pr2 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) =
+    is-retr-hom-inv-loop-group-fin-UU-Fin-Group
 ```

@@ -126,8 +126,12 @@ comp-eq-equiv A B C f g =
       ( ( ap
         ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
         ( right-inverse-law-equiv equiv-univalence)) ∙
-        ( ( ap (λ e → g ∘e map-equiv e f) (right-inverse-law-equiv equiv-univalence)) ∙
-          ( ap (λ e → map-equiv e (g ∘e f)) (inv (right-inverse-law-equiv equiv-univalence))))))
+        ( ( ap
+            ( λ e → g ∘e map-equiv e f)
+            ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( ap
+            ( λ e → map-equiv e (g ∘e f))
+            ( inv (right-inverse-law-equiv equiv-univalence))))))
 
 commutativity-inv-equiv-eq :
   {l : Level} (A B : UU l) (p : A ＝ B) →

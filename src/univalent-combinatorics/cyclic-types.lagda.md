@@ -483,7 +483,9 @@ preserves-concat-equiv-eq-Cyclic-Type :
        ( equiv-eq-Cyclic-Type k Y Z q)
        ( equiv-eq-Cyclic-Type k X Y p))
 preserves-concat-equiv-eq-Cyclic-Type k X .X Z refl q =
-  inv (right-unit-law-comp-equiv-Cyclic-Type k X Z (equiv-eq-Cyclic-Type k X Z q))
+  inv
+    ( right-unit-law-comp-equiv-Cyclic-Type
+        k X Z (equiv-eq-Cyclic-Type k X Z q))
 
 preserves-comp-Eq-equiv-Cyclic-Type :
   (k : ℕ)
@@ -548,7 +550,8 @@ is-set-type-Ω-Cyclic-Type k =
     ( pair (Cyclic-Type lzero k) (ℤ-Mod-Cyclic-Type k))
     ( is-set-type-Ω-Cyclic-Type k)
 
-equiv-Ω-Cyclic-Type-Group : (k : ℕ) → equiv-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
+equiv-Ω-Cyclic-Type-Group :
+  (k : ℕ) → equiv-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
 pr1 (equiv-Ω-Cyclic-Type-Group k) = equiv-compute-Ω-Cyclic-Type k
 pr2 (equiv-Ω-Cyclic-Type-Group k) =
   preserves-concat-equiv-compute-Ω-Cyclic-Type k

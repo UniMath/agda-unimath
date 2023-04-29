@@ -61,7 +61,8 @@ module hom-Fam-pushout
     Σ ( (x : A) → (PA x) → (QA x)) (λ hA →
       Σ ( (y : B) → (PB y) → (QB y)) (λ hB →
         ( s : S) →
-          ( (hB (g s)) ∘ (map-equiv (PS s))) ~ ((map-equiv (QS s)) ∘ (hA (f s)))))
+          ( (hB (g s)) ∘ (map-equiv (PS s))) ~
+          ( (map-equiv (QS s)) ∘ (hA (f s)))))
 
   {- Remark 19.1.2. We characterize the identity type of hom-Fam-pushout. -}
 
@@ -200,7 +201,8 @@ is-equiv-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
           ( hB (g s)))))
 
 coherence-naturality-fam-maps :
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (P : B → UU l3) (Q : B → UU l4) →
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (P : B → UU l3) (Q : B → UU l4) →
   { f f' : A → B} (H : f ~ f') (h : (b : B) → P b → Q b) (a : A) →
   Id ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
      ( naturality-fam-maps h (H a))

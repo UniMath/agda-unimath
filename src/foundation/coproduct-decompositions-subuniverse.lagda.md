@@ -180,9 +180,11 @@ equiv-binary-coproduct-Decomposition-subuniverse P A X Y =
         ( λ er →
           ( map-coprod (map-equiv el) (map-equiv er) ∘
             map-equiv
-              ( matching-correspondence-binary-coproduct-Decomposition-subuniverse P A X)) ~
+              ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
+                  P A X)) ~
           ( map-equiv
-            ( matching-correspondence-binary-coproduct-Decomposition-subuniverse P A Y))))
+            ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
+                P A Y))))
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (A : type-subuniverse P)

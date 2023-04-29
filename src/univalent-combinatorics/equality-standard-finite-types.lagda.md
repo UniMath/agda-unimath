@@ -162,9 +162,12 @@ equiv-unit-trunc-Fin-Set k = equiv-unit-trunc-Set (Fin-Set k)
 ```agda
 two-distinct-elements-leq-2-Fin :
   (n : ℕ) → leq-ℕ 2 n → Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
-pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) = inr star
-pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = inl (inr star)
-pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = neq-inr-inl
+pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) =
+  inr star
+pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =
+  inl (inr star)
+pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =
+  neq-inr-inl
 ```
 
 ### The standard finite type with a (tight) apartness relation

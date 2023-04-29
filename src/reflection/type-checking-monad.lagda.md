@@ -256,7 +256,8 @@ example was addapted from
     pattern _∷_ x xs = cons x xs
 
   ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
-  ＝-type-info (def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
+  ＝-type-info
+    ( def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
     returnTC (𝓁 , 𝒯 , l , r)
   ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
 

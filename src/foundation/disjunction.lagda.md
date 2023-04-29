@@ -45,8 +45,10 @@ abstract
   is-prop-type-disj-Prop P Q = is-prop-type-Prop (disj-Prop P Q)
 
 disj-Decidable-Prop :
-  {l1 l2 : Level} → Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)
-pr1 (disj-Decidable-Prop P Q) = type-disj-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+  {l1 l2 : Level} →
+  Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)
+pr1 (disj-Decidable-Prop P Q) =
+  type-disj-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 pr1 (pr2 (disj-Decidable-Prop P Q)) =
   is-prop-type-disj-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 pr2 (pr2 (disj-Decidable-Prop P Q)) =
