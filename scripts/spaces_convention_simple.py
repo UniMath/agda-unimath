@@ -9,11 +9,15 @@ import re
 
 
 def no_repeat_whitespace_inside_line(line):
-    return utils.recursive_sub(r'(\S)(\s{2,})', r'\1 ', line)
+    return utils.recursive_sub(r'(\S)\s{2,}', r'\1 ', line)
 
 
 def space_before_semicolon(line):
     return utils.recursive_sub(r'(?<=\S);', ' ;', line)
+
+
+def space_after_semicolon(line):
+    return utils.recursive_sub(r';(?=\S)', '; ', line)
 
 
 def no_whitespace_before_closing_parenthesis(line):
@@ -22,18 +26,6 @@ def no_whitespace_before_closing_parenthesis(line):
 
 def no_whitespace_before_closing_curly_brace(line):
     return utils.recursive_sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
-
-
-def space_after_opening_parenthesis_on_new_line(line):
-    #! UNFINISHED
-    s = line
-    s = re.sub(r'^(\s*([({]\s)*)\((?=\S)', r'\1( ', s)
-    s = re.sub(r'^(\s*([({]\s)*)\{(?=\S)(?![!-{])', r'\1{ ', s)
-    while s != line:
-        line = s
-        s = re.sub(r'^(\s*([({]\s)*)\((?=\S)', r'\1( ', s)
-        s = re.sub(r'^(\s*([({]\s)*)\{(?=\S)(?![!-{])', r'\1{ ', s)
-    return s
 
 
 if __name__ == '__main__':
@@ -57,9 +49,10 @@ if __name__ == '__main__':
             elif is_in_agda_block:
                 # line = no_repeat_whitespace_inside_line(line) # TODO: determine if we want this
                 line = space_before_semicolon(line)
+                line = space_after_semicolon(line)
                 line = no_whitespace_before_closing_parenthesis(line)
                 line = no_whitespace_before_closing_curly_brace(line)
-                # line = space_after_opening_parenthesis_on_new_line(line) #! UNFINISHED
+                # line = space_after_opening_parenthesis_on_new_line(line)
             lines[i] = line
 
         new_contents = '\n'.join(lines)
