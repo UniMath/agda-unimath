@@ -789,7 +789,10 @@ module _
     conserves-other-orbits-transposition g x y NA NB =
       pair
         ( λ P' → apply-universal-property-trunc-Prop P'
-          ( prop-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x y)
+          ( prop-Eq-Rel
+            ( same-orbits-permutation-count (composition-transposition-a-b g))
+            ( x)
+            ( y))
           ( λ (pair k p) → unit-trunc-Prop
             (pair k
               ( (equal-iterate-transposition-other-orbits k) ∙
