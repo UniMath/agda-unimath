@@ -176,8 +176,12 @@ private
         hidden-Arg unknown ∷
         hidden-Arg unknown ∷
         xs)
+```
 
--- Builds a term of `Precat-Expr C x y` from a term of type `type-hom-Precat C x y`
+Builds a term of `Precat-Expr C x y` from a term of type
+`type-hom-Precat C x y`.
+
+```agda
 build-Precat-Expr : Term → Term
 build-Precat-Expr
   ( apply-pr1

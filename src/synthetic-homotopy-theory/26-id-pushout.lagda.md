@@ -31,9 +31,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 </details>
 
-```agda
--- Section 19.1 Characterizing families of maps over pushouts
+## Section 19.1 Characterizing families of maps over pushouts
 
+```agda
 module hom-Fam-pushout
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1}
@@ -67,7 +67,7 @@ module hom-Fam-pushout
           ( (map-equiv (QS s)) ∘ (hA (f s)))))
 ```
 
-### Remark 19.1.2. We characterize the identity type of hom-Fam-pushout.
+### Remark 19.1.2 We characterize the identity type of `hom-Fam-pushout`
 
 ```agda
   htpy-hom-Fam-pushout :
@@ -137,7 +137,7 @@ module hom-Fam-pushout
 open hom-Fam-pushout public
 ```
 
-### Definition 19.1.3.
+### Definition 19.1.3
 
 Given a cocone structure on $X$ and a family of maps indexed by$X$, we obtain a
 morphism of descent data.
@@ -168,7 +168,7 @@ hom-Fam-pushout-map {f = f} {g} c P Q h =
       ( λ s → naturality-fam-maps h (pr2 (pr2 c) s)))
 ```
 
-### Theorem 19.1.4. The function hom-Fam-pushout-map is an equivalence.
+### Theorem 19.1.4 The function `hom-Fam-pushout-map` is an equivalence
 
 ```agda
 square-path-over-fam-maps :
@@ -277,7 +277,7 @@ equiv-hom-Fam-pushout-map c up-X P Q =
     ( is-equiv-hom-Fam-pushout-map c up-X P Q)
 ```
 
-### Definition 19.2.1. Universal families over spans
+### Definition 19.2.1 Universal families over spans
 
 ```agda
 ev-pt-hom-Fam-pushout :
@@ -294,7 +294,7 @@ is-universal-Fam-pushout l {f = f} {g} P a p =
   ( Q : Fam-pushout l f g) → is-equiv (ev-pt-hom-Fam-pushout P Q p)
 ```
 
-### Lemma 19.2.2. The descent data of the identity type is a universal family.
+### Lemma 19.2.2 The descent data of the identity type is a universal family
 
 ```agda
 triangle-is-universal-id-Fam-pushout' :
@@ -436,7 +436,7 @@ equiv-is-equiv-hom-Fam-pushout P Q h is-equiv-h =
       ( pr2 (pr2 h)))
 ```
 
-### Theorem 19.1.3. Characterization of identity types of pushouts.
+### Theorem 19.1.3 Characterization of identity types of pushouts
 
 ```agda
 {-

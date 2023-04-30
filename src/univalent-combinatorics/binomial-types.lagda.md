@@ -97,9 +97,13 @@ abstract
     is-emb (map-decidable-emb-binomial-type-Level Z)
   is-emb-map-emb-binomial-type-Level Z =
     is-emb-map-decidable-emb (decidable-emb-binomial-type-Level Z)
+```
 
--- We now define the standard binomial types
+### The standard binomial types
 
+We now define the standard binomial types.
+
+```agda
 binomial-type : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc (l1 ⊔ l2))
 binomial-type {l1} {l2} X Y = binomial-type-Level (l1 ⊔ l2) X Y
 
@@ -130,9 +134,11 @@ abstract
     is-emb (map-decidable-emb-binomial-type Z)
   is-emb-map-emb-binomial-type Z =
     is-emb-map-decidable-emb (decidable-emb-binomial-type Z)
+```
 
--- Proposition 17.5.6
+### Proposition 17.5.6
 
+```agda
 binomial-type-Level' :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 binomial-type-Level' l A B =
@@ -166,11 +172,13 @@ compute-binomial-type :
   binomial-type A B ≃ binomial-type' A B
 compute-binomial-type {l1} {l2} A B =
   compute-binomial-type-Level (l1 ⊔ l2) A B
+```
 
--- Remark 17.5.7
+### Remark 17.5.7
 
--- Note that the universe level of small-binomial-type is lower
+Note that the universe level of `small-binomial-type` is lower.
 
+```agda
 small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 small-binomial-type A B =
@@ -324,9 +332,11 @@ abstract
         ( compute-binomial-type A (Maybe B))) ∘e
       ( recursion-binomial-type' A B)) ∘e
     ( compute-binomial-type (Maybe A) (Maybe B))
+```
 
--- Theorem 17.5.9
+### Theorem 17.5.9
 
+```agda
 equiv-small-binomial-type :
   {l1 l2 l3 l4 : Level} {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} →
   (A ≃ A') → (B ≃ B') → small-binomial-type A' B' ≃ small-binomial-type A B

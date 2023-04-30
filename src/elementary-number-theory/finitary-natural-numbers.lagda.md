@@ -127,7 +127,11 @@ is-injective-convert-based-ℕ
   ( succ-ℕ k)
   { unary-op-based-ℕ .(succ-ℕ k) x n}
   { unary-op-based-ℕ .(succ-ℕ k) y m} p with
-  -- the following term has type Id x y
+```
+
+the following term has type `Id x y`.
+
+```agda
   is-injective-nat-Fin (succ-ℕ k) {x} {y}
     ( eq-cong-le-ℕ
       ( succ-ℕ k)

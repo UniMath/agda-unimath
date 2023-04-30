@@ -250,5 +250,4 @@ is-finite-Decidable-Equivalence-Relation-𝔽 A =
     ( λ R → is-finite-is-equivalence-Dec-Rel-Prop-𝔽 A R)
 ```
 
--- ### The number of decidable equivalence relations on a finite type is a
-Stirling number of the second kind
+### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind

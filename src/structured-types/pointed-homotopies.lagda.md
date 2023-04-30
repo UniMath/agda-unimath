@@ -81,8 +81,6 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
   where
 
-  -- Pointed homotopies of pointed maps
-
   htpy-pointed-map : (g : A →* B) → UU (l1 ⊔ l2)
   htpy-pointed-map = htpy-pointed-Π A (constant-Pointed-Fam A B) f
 

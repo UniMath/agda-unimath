@@ -468,11 +468,13 @@ is-π-finite-is-truncated-π-finite zero-ℕ H =
 pr1 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) = pr1 H
 pr2 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
   is-π-finite-is-truncated-π-finite k (pr2 H x y)
+```
 
--- Proposition 1.5
+### Proposition 1.5
 
--- Dependent product of locally finite types
+### Dependent product of locally finite types
 
+```agda
 is-locally-finite-prod :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-locally-finite A → is-locally-finite B → is-locally-finite (A × B)
@@ -511,9 +513,11 @@ is-locally-finite-Π {l1} {l2} {A} {B} f g =
   apply-universal-property-trunc-Prop f
     ( is-locally-finite-Prop ((x : A) → B x))
     ( λ e → is-locally-finite-Π-count e g)
+```
 
--- Finite products of π-finite types
+### Finite products of π-finite types
 
+```agda
 is-π-finite-Π :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
   is-finite A → ((a : A) → is-π-finite k (B a)) →
@@ -537,9 +541,11 @@ pr2 (π-Finite-Π k A B) =
   is-π-finite-Π k
     ( is-finite-type-𝔽 A)
     ( λ x → is-π-finite-type-π-Finite k (B x))
+```
 
--- Proposition 1.6
+### Proposition 1.6
 
+```agda
 is-locally-finite-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-locally-finite A → ((x : A) → is-locally-finite (B x)) →
@@ -548,9 +554,11 @@ is-locally-finite-Σ {B = B} H K (pair x y) (pair x' y') =
   is-finite-equiv'
     ( equiv-pair-eq-Σ (pair x y) (pair x' y'))
     ( is-finite-Σ (H x x') (λ p → K x' (tr B p y) y'))
+```
 
--- Proposition 1.7
+### Proposition 1.7
 
+```agda
 has-finite-connected-components-Σ-is-0-connected :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-0-connected A → is-π-finite 1 A →
@@ -687,9 +695,11 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                                   ( unit-trunc-Prop r)))}) ∘
                         ( pair-eq-Σ)))
                   ( f)
+```
 
--- Proposition 1.8
+### Proposition 1.8
 
+```agda
 module _
   {l1 l2 l3 : Level} {A1 : UU l1} {A2 : UU l2} {B : UU l3}
   (f : A1 + A2 → B) (e : (A1 + A2) ≃ type-trunc-Set B)

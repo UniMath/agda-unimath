@@ -46,9 +46,11 @@ module _
     ( ( ev-id (λ X e → P (pair X e))) ∘
       ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P}))
   triangle-ev-id P f = refl
+```
 
-  -- Theorem 17.1.1 (ii) implies (iii)
+### Theorem 17.1.1 (ii) implies (iii)
 
+```agda
   abstract
     IND-EQUIV-is-contr-total-equiv :
       is-contr (Σ (UU l1) (λ X → A ≃ X)) →
@@ -65,9 +67,11 @@ module _
             ( λ t → ( inv (contraction c (pair A id-equiv))) ∙
                     ( contraction c t)))
           ( P))
+```
 
-  -- Theorem 17.1.1 (iii) implies (ii)
+### Theorem 17.1.1 (iii) implies (ii)
 
+```agda
   abstract
     is-contr-total-equiv-IND-EQUIV :
       ( {l : Level} (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →

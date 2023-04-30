@@ -392,9 +392,11 @@ module _
         ( x))
       ( λ p →
         inv (eq-path-faces-Prepolytope x face-largest-element-Prepolytope p))
+```
 
-  -- Flags are equivalently described as paths from the least to the largest element
+### Flags are equivalently described as paths from the least to the largest element
 
+```agda
   is-on-path-face-prepolytope-Prop :
     {i1 i2 : Fin (succ-ℕ k)} {x : face-Prepolytope i1} {y : face-Prepolytope i2}
     (p : path-faces-Prepolytope x y) →

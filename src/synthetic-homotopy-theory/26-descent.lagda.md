@@ -38,9 +38,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 </details>
 
-```agda
--- Section 18.1 Five equivalent characterizations of pushouts
+## Section 18.1 Five equivalent characterizations of pushouts
 
+```agda
 dep-cocone :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5) →
@@ -83,7 +83,7 @@ dependent-universal-property-pushout l f g {X} c =
   (P : X → UU l) → is-equiv (dep-cocone-map f g c P)
 ```
 
-### Remark 18.1.3. Computation of the identity type of `dep-cocone`
+### Remark 18.1.3 Computation of the identity type of `dep-cocone`
 
 We compute the identity type of `dep-cocone` in order to express the computation
 rules of the induction principle for pushouts.
@@ -310,29 +310,22 @@ dependent-pullback-property-pushout l {S} {A} {B} f g {X}
     4. dependent-universal-property-pushout
     5. Ind-pushout
 
-We have already shown that 1 ↔ 2. Therefore we will first show that 3 ↔ 4 ↔ 5.
-Finally, we will show that 2 ↔ 3. Here are the precise references to the proofs
-of those parts:
+We have already shown that (1) ↔ (2). Therefore we will first show that (3) ↔
+(4) ↔ (5). Finally, we will show that (2) ↔ (3). Here are the precise references
+to the proofs of those parts:
 
-Proof of 1 → 2. `pullback-property-pushout-universal-property-pushout`
+- Proof of (1) → (2): `pullback-property-pushout-universal-property-pushout`
+- Proof of (2) → (1): `universal-property-pushout-pullback-property-pushout`
+- Proof of (2) → (3): `dependent-pullback-property-pullback-property-pushout`
+- Proof of (3) → (2): `pullback-property-dependent-pullback-property-pushout`
+- Proof of (3) → (4):
+  `dependent-universal-property-dependent-pullback-property-pushout`
+- Proof of (4) → (3):
+  `dependent-pullback-property-dependent-universal-property-pushout`
+- Proof of (4) → (5): `Ind-pushout-dependent-universal-property-pushout`
+- Proof of (5) → (4): `dependent-universal-property-pushout-Ind-pushout`
 
-Proof of 2 → 1 `universal-property-pushout-pullback-property-pushout`
-
-Proof of 2 → 3 `dependent-pullback-property-pullback-property-pushout`
-
-Proof of 3 → 2 `pullback-property-dependent-pullback-property-pushout`
-
-Proof of 3 → 4
-`dependent-universal-property-dependent-pullback-property-pushout`
-
-Proof of 4 → 3
-`dependent-pullback-property-dependent-universal-property-pushout`
-
-Proof of 4 → 5 `Ind-pushout-dependent-universal-property-pushout`
-
-Proof of 5 → 4 `dependent-universal-property-pushout-Ind-pushout`
-
-### Proof of Theorem 18.1.4, (v) implies (iv).
+### Proof of Theorem 18.1.4, (5) implies (4).
 
 ```agda
 dependent-naturality-square :
@@ -374,7 +367,7 @@ dependent-universal-property-pushout-Ind-pushout f g c ind-c l P =
       ( pr2 (ind-c l P) (dep-cocone-map f g c P h))))
 ```
 
-### Proof of Theorem 18.1.4, (iv) implies (v).
+### Proof of Theorem 18.1.4, (4) implies (5).
 
 ```agda
 Ind-pushout-dependent-universal-property-pushout :
@@ -386,7 +379,7 @@ Ind-pushout-dependent-universal-property-pushout f g c dup-c l P =
   pr1 (dup-c l P)
 ```
 
-### Proof of Theorem 18.1.4, (iv) implies (iii).
+### Proof of Theorem 18.1.4, (4) implies (3).
 
 ```agda
 triangle-dependent-pullback-property-pushout :
@@ -427,7 +420,7 @@ dependent-pullback-property-dependent-universal-property-pushout
     ( I l P)
 ```
 
-### Proof of Theorem 18.1.4, (iv) implies (iii).
+### Proof of Theorem 18.1.4, (4) implies (3).
 
 ```agda
 dependent-universal-property-dependent-pullback-property-pushout :
@@ -452,7 +445,7 @@ dependent-universal-property-dependent-pullback-property-pushout
         ( λ h' → funext (λ x → tr P (H x) (h (f x))) (λ x → h' (g x)))))
 ```
 
-### Proof of Theorem 18.1.4, (iii) implies (ii).
+### Proof of Theorem 18.1.4, (3) implies (2).
 
 ```agda
 concat-eq-htpy :
@@ -510,13 +503,9 @@ pullback-property-dependent-pullback-property-pushout
     ( dpb (λ x → Y))
 ```
 
-### Proof of Theorem 18.1.4, (ii) implies (iii).
+### Proof of Theorem 18.1.4, (2) implies (3).
 
-```agda
-
-```
-
-### We first define the family of lifts, which is indexed by maps $Y → X$.
+We first define the family of lifts, which is indexed by maps $Y → X$.
 
 ```agda
 fam-lifts :
@@ -764,24 +753,6 @@ compute-htpy-precompose-total-lifts {A = A} P f (pair h h') =
               ( htpy-eq (compute-triangle-precompose-lifts P f) h) h')) ∙
           ( left-inv (triangle-precompose-lifts-refl-htpy P f h h')))))
 
-{-
--- pr1 (pr1 (funext (λ a → h (f a)) (λ a → h (f a)))) (λ x → refl)
-
-  ap eq-pair-Σ'
-    ( eq-pair-Σ
-      ( eq-htpy-refl-htpy (h ∘ f))
-      ( ( tr-id-left-subst
-          { f = α}
-          ( eq-htpy-refl-htpy (h ∘ f))
-          ( λ a → h' (f a))
-          ( triangle-precompose-lifts P refl-htpy h h')) ∙
-        ( ( ap
-            ( λ t → inv (ap α (eq-htpy-refl-htpy (λ a → h (f a)))) ∙ t)
-            ( htpy-eq
-              ( htpy-eq (compute-triangle-precompose-lifts P f) h) h')) ∙
-          ( left-inv (triangle-precompose-lifts-refl-htpy P f h h')))))
-          -}
-
 COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   {f g : A → B} (H : f ~ g) → UU _
@@ -903,13 +874,9 @@ dependent-pullback-property-pullback-property-pushout
     ( is-pullback-cone-family-dependent-pullback-property f g c pullback-c P id)
 ```
 
-### This concludes the proof of Theorem 18.1.4.
+This concludes the proof of Theorem 18.1.4.
 
-```agda
-
-```
-
-### We give some further useful implications
+We give some further useful implications.
 
 ```agda
 dependent-universal-property-universal-property-pushout :
@@ -922,9 +889,9 @@ dependent-universal-property-universal-property-pushout f g c up-X =
     ( dependent-pullback-property-pullback-property-pushout f g c
       ( λ l → pullback-property-pushout-universal-property-pushout l f g c
         ( up-X l)))
-
--- Section 16.2 Families over pushouts
 ```
+
+## Section 16.2 Families over pushouts
 
 ### Definition 18.2.1
 
@@ -938,7 +905,7 @@ Fam-pushout l {S} {A} {B} f g =
       ( λ PB → (s : S) → PA (f s) ≃ PB (g s)))
 ```
 
-### We characterize the identity type of Fam-pushout.
+### Characterizing the identity type of `Fam-pushout`
 
 ```agda
 coherence-equiv-Fam-pushout :
@@ -1047,11 +1014,7 @@ isretr-eq-equiv-Fam-pushout {P = P} {Q} =
   isretr-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
 ```
 
-### This concludes the characterization of the identity type of Fam-pushout.
-
-```agda
-
-```
+This concludes the characterization of the identity type of `Fam-pushout`.
 
 ### Definition 18.2.2
 

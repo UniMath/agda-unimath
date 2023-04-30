@@ -42,7 +42,7 @@ map-seq :
 map-seq A = pr2 A
 ```
 
-### We characterize the identity type of `Sequence`.
+### Characterizing the identity type of `Sequence`
 
 ```agda
 naturality-hom-Seq :
@@ -97,7 +97,7 @@ eq-equiv-Seq {A = A} {B} =
   map-inv-is-equiv (is-equiv-equiv-eq-Seq A B)
 ```
 
-### We introduce cocones on a type sequence.
+### Cocones on a type sequence
 
 ```agda
 cocone-sequence :
@@ -180,7 +180,7 @@ is-equiv-htpy-cocone-sequence-eq A c =
     ( htpy-cocone-sequence-eq A c)
 ```
 
-### We introduce the universal property of sequential colimits.
+### The universal property of sequential colimits
 
 ```agda
 cocone-sequence-map :

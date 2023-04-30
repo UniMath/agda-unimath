@@ -81,10 +81,12 @@ module _
             ( f)
             ( pr2 (center K))
             -}
+```
 
+### Uniqueness of set truncations
+
+```agda
 {-
--- Uniqueness of set truncations
-
 module _
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (C : Set l3) (g : A → type-Set C) {h : type-hom-Set B C}

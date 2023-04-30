@@ -151,7 +151,6 @@ private
                     ( visible-Arg (absurd 0)))))
               ( nil)))))
   _ = refl
---
 ```
 
 ### Pi terms

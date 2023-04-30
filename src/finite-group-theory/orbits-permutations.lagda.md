@@ -110,12 +110,12 @@ module _
 
 ### For type equipped with a counting, orbits of permutations are finite
 
+The map `i ↦ eⁱ a` repeats itself.
+
 ```agda
 module _
   {l : Level} (X : UU l) (eX : count X) (f : Aut X) (a : X)
   where
-
-  -- The map `i ↦ eⁱ a` repeats itself
 
   repetition-iterate-automorphism-Fin :
     repetition-of-values
