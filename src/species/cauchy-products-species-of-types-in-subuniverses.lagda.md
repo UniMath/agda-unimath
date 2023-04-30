@@ -104,7 +104,7 @@ module _
 
 ## Properties
 
-### Cauchy product is associative
+### Cauchy product is assoc
 
 ```agda
 module _

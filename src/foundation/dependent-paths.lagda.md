@@ -104,7 +104,7 @@ thought of this only after writing everything out...oops
   issec-path-over²-tr-path-over z =
     (ap (λ x → tr-path-over B α q0 ∙
     pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)) x)
-    ( associative
+    ( assoc
       ( inv-con
         ( inv (ap (λ t → tr B t b0) α))
         ( q0)
@@ -123,7 +123,7 @@ thought of this only after writing everything out...oops
     ((ap (λ x → tr-path-over B α q0 ∙ x) ( isretr-map-inv-equiv
     (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)
     (inv (tr-path-over B α q0) ∙ z))) ∙
-    (inv (associative (tr-path-over B α q0) (inv (tr-path-over B α q0)) z) ∙
+    (inv (assoc (tr-path-over B α q0) (inv (tr-path-over B α q0)) z) ∙
     (ap (λ t → t ∙ z) (right-inv (tr-path-over B α q0)))))))
 
   isretr-path-over²-tr-path-over :
@@ -134,7 +134,7 @@ thought of this only after writing everything out...oops
         ( inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 x) ∙
         (ap (_∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))
       ( inv
-        ( associative
+        ( assoc
           ( inv (tr-path-over B α q0))
           ( tr-path-over B α q0)
           ( pr1
@@ -157,7 +157,7 @@ thought of this only after writing everything out...oops
         ( issec-map-inv-equiv
           ( equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)
           ( z ∙ inv (ap (_∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
-        ( associative
+        ( assoc
           ( z)
           ( inv (ap (_∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))
           ( ap (_∙ q1) (inv-inv (ap (λ t → tr B t b0) α))) ∙
@@ -216,7 +216,7 @@ module _
     (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1)
     (p12 : a1 ＝ a2) (q12 : path-over B p12 b1 b2)
     (p23 : a2 ＝ a3) (q23 : path-over B p23 b2 b3) →
-    path-over² B (associative p01 p12 p23)
+    path-over² B (assoc p01 p12 p23)
       (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)
       (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
   d-associative refl refl p12 q12 p23 q23 = refl
@@ -229,11 +229,11 @@ module _
     (q23 : path-over B p23 b2 b3) →
     ( tr
       ( λ t → path-over B t b0 b3)
-      ( associative p01 p12 p23)
+      ( assoc p01 p12 p23)
       ( d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)) ＝
     ( d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
   d-associative' p01 q01 p12 q12 p23 q23 =
-    tr-path-over-path-over² B (associative p01 p12 p23)
+    tr-path-over-path-over² B (assoc p01 p12 p23)
     (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)
     (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
     (d-associative p01 q01 p12 q12 p23 q23)

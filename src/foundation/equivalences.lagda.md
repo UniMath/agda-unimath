@@ -94,7 +94,7 @@ module _
          ( issec-map-inv-equiv
            ( equiv-ap e x (map-inv-equiv e y))
            ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
-    ( ( associative
+    ( ( assoc
         ( p)
         ( inv (issec-map-inv-equiv e y))
         ( issec-map-inv-equiv e y)) ∙

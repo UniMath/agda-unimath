@@ -118,7 +118,7 @@ module _
   pr1 precat-groupoid-1-Type = obj-groupoid-1-Type
   pr1 (pr2 precat-groupoid-1-Type) = Id-Set X
   pr1 (pr1 (pr2 (pr2 precat-groupoid-1-Type))) q p = p ∙ q
-  pr2 (pr1 (pr2 (pr2 precat-groupoid-1-Type))) r q p = inv (associative p q r)
+  pr2 (pr1 (pr2 (pr2 precat-groupoid-1-Type))) r q p = inv (assoc p q r)
   pr1 (pr2 (pr2 (pr2 precat-groupoid-1-Type))) x = refl
   pr1 (pr2 (pr2 (pr2 (pr2 precat-groupoid-1-Type)))) p = right-unit
   pr2 (pr2 (pr2 (pr2 (pr2 precat-groupoid-1-Type)))) p = left-unit

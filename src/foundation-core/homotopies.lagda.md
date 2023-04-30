@@ -184,7 +184,7 @@ module _
   where
 
   associative-htpy : ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
-  associative-htpy x = associative (H x) (K x) (L x)
+  associative-htpy x = assoc (H x) (K x) (L x)
 
   inv-htpy-associative-htpy : (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
   inv-htpy-associative-htpy = inv-htpy associative-htpy

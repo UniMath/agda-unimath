@@ -36,9 +36,9 @@ concat-list {l} {A} = fold-list id (λ a f → (cons a) ∘ f)
 
 ## Properties
 
-### List concatenation is associative and unital
+### List concatenation is assoc and unital
 
-Concatenation of lists is an associative operation and nil is the unit for list
+Concatenation of lists is an assoc operation and nil is the unit for list
 concatenation.
 
 ```agda

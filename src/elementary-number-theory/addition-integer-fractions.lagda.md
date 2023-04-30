@@ -119,7 +119,7 @@ right-unit-law-add-fraction-ℤ (m , n , p) =
    ( inv (right-unit-law-mul-ℤ n))
 ```
 
-### Addition is associative
+### Addition is assoc
 
 ```agda
 associative-add-fraction-ℤ :

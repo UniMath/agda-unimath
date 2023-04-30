@@ -164,10 +164,10 @@ module _
     pair
       ( pr1 G ∙h pr1 H)
       ( ( ap-binary (λ p q → p ∙ q) (pr2 G) (pr2 H)) ∙
-        ( ( associative (pr2 f) (inv (pr2 g)) (pr2 g ∙ inv (pr2 h))) ∙
+        ( ( assoc (pr2 f) (inv (pr2 g)) (pr2 g ∙ inv (pr2 h))) ∙
           ( ap
             ( concat (pr2 f) (function-pointed-Π A B h (point-Pointed-Type A)))
-            ( ( inv (associative (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
+            ( ( inv (assoc (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
               ( ap
                 ( concat' (pt-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
@@ -211,7 +211,7 @@ module _
                       ( pr1 g (pt-Pointed-Fam A (constant-Pointed-Fam A B)))
                       ( inv (ap (pr1 g) (pr2 f2)))))
                   ( inv (right-inv (pr2 g)))) ∙
-                ( associative
+                ( assoc
                   ( pr2 g)
                   ( inv (pr2 g))
                   ( inv (ap (pr1 g) (pr2 f2))))) ∙
@@ -225,7 +225,7 @@ module _
                     ( ap (pr1 g) (pr2 f2))
                     ( pr2 g))))))) ∙
         ( inv
-          ( associative
+          ( assoc
             ( ap (pr1 g) (pr2 f1))
             ( pr2 g)
             ( inv (ap (pr1 g) (pr2 f2) ∙ pr2 g)))))

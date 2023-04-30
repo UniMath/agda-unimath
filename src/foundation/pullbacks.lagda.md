@@ -269,7 +269,7 @@ module _
       ( Hp z)
       ( Hq z)
       ( ( inv
-          ( associative
+          ( assoc
             ( ap f (Hp z))
             ( (Hf (p' z)) ∙ (H' z))
             ( inv (Hg (q' z))))) ∙
@@ -278,9 +278,9 @@ module _
             ( (H z) ∙ (ap g (Hq z)))
             ( Hg (q' z))
             ( ( ap f (Hp z)) ∙ ((Hf (p' z)) ∙ (H' z)))
-            ( ( associative (H z) (ap g (Hq z)) (Hg (q' z))) ∙
+            ( ( assoc (H z) (ap g (Hq z)) (Hg (q' z))) ∙
               ( ( HH z) ∙
-                ( associative (ap f (Hp z)) (Hf (p' z)) (H' z)))))))
+                ( assoc (ap f (Hp z)) (Hf (p' z)) (H' z)))))))
 
   abstract
     is-pullback-htpy :

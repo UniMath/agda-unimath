@@ -82,7 +82,7 @@ power-nat-succ-Ω' :
 power-nat-succ-Ω' zero-ℕ A ω = inv right-unit
 power-nat-succ-Ω' (succ-ℕ n) A ω =
   ( ap (concat' (point-Pointed-Type A) ω) (power-nat-succ-Ω' n A ω)) ∙
-  ( associative ω (power-nat-Ω n A ω) ω)
+  ( assoc ω (power-nat-Ω n A ω) ω)
 ```
 
 ### `ωᵐ⁺ⁿ ＝ ωᵐ ∙ ωⁿ`
@@ -94,7 +94,7 @@ power-nat-add-Ω :
 power-nat-add-Ω m zero-ℕ A ω = inv right-unit
 power-nat-add-Ω m (succ-ℕ n) A ω =
   ( ap (concat' (point-Pointed-Type A) ω) (power-nat-add-Ω m n A ω)) ∙
-  ( associative (power-nat-Ω m A ω) (power-nat-Ω n A ω) ω)
+  ( assoc (power-nat-Ω m A ω) (power-nat-Ω n A ω) ω)
 ```
 
 ### `ωᵐⁿ = (ωᵐ)ⁿ`

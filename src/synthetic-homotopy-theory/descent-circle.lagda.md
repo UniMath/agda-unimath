@@ -341,7 +341,7 @@ module _
                 ( map-inv-equiv α (s (base-free-loop l)))
                 ( pr1 (ev-fixpoint-descent-data-circle s)))
               ( _))) ∙
-          ( ( inv (associative (ap _ (inv issec-inv-α)) _ _)) ∙
+          ( ( inv (assoc (ap _ (inv issec-inv-α)) _ _)) ∙
             ( horizontal-concat-Id²
               ( inv
                 ( ap-concat-eq (tr Q (loop-free-loop l))

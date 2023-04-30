@@ -66,7 +66,7 @@ right-unit-law-add-ℚ (x , p) =
   in-fraction-fraction-ℚ (x , p)
 ```
 
-### Addition is associative
+### Addition is assoc
 
 ```agda
 associative-add-ℚ :

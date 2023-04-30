@@ -35,7 +35,7 @@ module _
   loop-space-Semigroup : is-set (type-Ω A) → Semigroup l
   pr1 (loop-space-Semigroup is-set-Ω) = loop-space-Set is-set-Ω
   pr1 (pr2 (loop-space-Semigroup is-set-Ω)) p q = p ∙ q
-  pr2 (pr2 (loop-space-Semigroup is-set-Ω)) = associative
+  pr2 (pr2 (loop-space-Semigroup is-set-Ω)) = assoc
 
   loop-space-Group : is-set (type-Ω A) → Group l
   pr1 (loop-space-Group is-set-Ω) = loop-space-Semigroup is-set-Ω

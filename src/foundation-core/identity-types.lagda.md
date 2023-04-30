@@ -122,10 +122,10 @@ module _
   {l : Level} {A : UU l}
   where
 
-  associative :
+  assoc :
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r))
-  associative refl q r = refl
+  assoc refl q r = refl
 
   left-unit : {x y : A} {p : x ＝ y} → (refl ∙ p) ＝ p
   left-unit = refl
@@ -354,13 +354,13 @@ module _
     α =
       ( ap
         ( concat right-unit _)
-        ( ( associative (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
+        ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
           ( ( ap
               ( concat (inv right-unit) _)
-              ( ( associative s right-unit (inv right-unit)) ∙
+              ( ( assoc s right-unit (inv right-unit)) ∙
                 ( ( ap (concat s _) (right-inv right-unit)) ∙
                   ( right-unit))))))) ∙
-      ( ( inv (associative right-unit (inv right-unit) s)) ∙
+      ( ( inv (assoc right-unit (inv right-unit) s)) ∙
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
@@ -370,11 +370,11 @@ module _
 Mac-Lane-pentagon :
   {l : Level} {A : UU l} {a b c d e : A}
   (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
-  let α₁ = (ap (λ t → t ∙ s) (associative p q r))
-      α₂ = (associative p (q ∙ r) s)
-      α₃ = (ap (λ t → p ∙ t) (associative q r s))
-      α₄ = (associative (p ∙ q) r s)
-      α₅ = (associative p q (r ∙ s))
+  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
+      α₂ = (assoc p (q ∙ r) s)
+      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
+      α₄ = (assoc (p ∙ q) r s)
+      α₅ = (assoc p q (r ∙ s))
   in
   ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
 Mac-Lane-pentagon refl refl refl refl = refl

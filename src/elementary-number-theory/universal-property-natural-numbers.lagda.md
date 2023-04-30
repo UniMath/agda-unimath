@@ -114,7 +114,7 @@ module _
     γ n = ( ( inv right-unit) ∙
             ( ap (λ q → (ap f (α n) ∙ q)) (inv (left-inv (pr2 (pr2 h) n))))) ∙
           ( inv
-            ( associative (ap f (α n)) (inv (pr2 (pr2 h) n)) (pr2 (pr2 h) n)))
+            ( assoc (ap f (α n)) (inv (pr2 (pr2 h) n)) (pr2 (pr2 h) n)))
 
   is-contr-structure-preserving-map-ℕ : is-contr structure-preserving-map-ℕ
   pr1 is-contr-structure-preserving-map-ℕ = center-structure-preserving-map-ℕ

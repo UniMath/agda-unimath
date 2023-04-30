@@ -114,5 +114,5 @@ interchange-concat-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
   ((α ∙ β) ∙ (γ ∙ δ)) ＝ ((α ∙ γ) ∙ (β ∙ δ))
 interchange-concat-Ω² =
-  interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² associative
+  interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² assoc
 ```

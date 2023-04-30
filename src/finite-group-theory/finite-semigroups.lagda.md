@@ -106,7 +106,7 @@ Semigroup-of-Order l n =
 
 ## Properties
 
-### If `X` is finite, then there are finitely many associative operations on `X`
+### If `X` is finite, then there are finitely many assoc operations on `X`
 
 ```agda
 is-finite-has-associative-mul :
