@@ -9,52 +9,45 @@ import re
 
 
 def no_repeat_whitespace_inside_line(line):
-    return re.sub(r'(\S)\s{2,}', r'\1 ', line)
+    return re.sub(r'(?<=\S)\s{2,}', ' ', line)
 
 
 def space_before_semicolon(line):
-    return utils.recursive_sub(r'(?<=\S);', ' ;', line)
+    return re.sub(r'(?<=\S);', ' ;', line)
 
 
 def space_after_semicolon(line):
-    return utils.recursive_sub(r';(?=\S)', '; ', line)
+    return re.sub(r';(?=\S)', '; ', line)
 
 
 def no_whitespace_before_closing_parenthesis(line):
-    return utils.recursive_sub(r'(\S)\s+\)', r'\1)', line)
+    return re.sub(r'(?<=\S)\s+\)', ')', line)
 
 
 def no_whitespace_before_closing_curly_brace(line):
-    return utils.recursive_sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
+    return re.sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
 
 
 if __name__ == '__main__':
 
-    agda_block_start = re.compile(r'^```agda\b')
-    agda_block_end = re.compile(r'^```$')
-    block_comment_start = re.compile(r'\{-(?!#)')
-    block_comment_end = re.compile(r'(?<!#)-\}')
-
     for fpath in utils.get_agda_files(sys.argv[1:]):
 
         with open(fpath, 'r') as f:
-            contents = f.read()
+            lines = f.read().splitlines()
 
-        is_in_agda_block = False
-        block_comment_level = 0
+        old_lines = list(lines)
+        is_in_agda_block: bool = False
+        block_comment_level: int = 0
 
-        lines = contents.split('\n')
         for i, line in enumerate(lines):
-            if agda_block_start.match(line):
-                is_in_agda_block = True
-            elif agda_block_end.match(line):
-                is_in_agda_block = False
+            is_tag, is_opening = utils.is_agda_opening_or_closing_tag(line)
+            if is_tag:
+                is_in_agda_block = is_opening
             elif is_in_agda_block:
+                line, comment, block_comment_delta_pos, block_comment_delta_neg = utils.split_agda_line_comment_and_get_block_comment_delta(
+                    line)
 
-                line, comment = utils.split_agda_line_comment(line)
-
-                block_comment_level += len(
-                    block_comment_start.findall(line))
+                block_comment_level += block_comment_delta_pos
 
                 if block_comment_level == 0:
                     line = no_repeat_whitespace_inside_line(
@@ -65,15 +58,14 @@ if __name__ == '__main__':
                     line = no_whitespace_before_closing_curly_brace(line)
                     # line = space_after_opening_parenthesis_on_new_line(line)
 
-                block_comment_level -= len(
-                    block_comment_end.findall(line))
+                block_comment_level -= block_comment_delta_neg
+
                 line += comment
             lines[i] = line
 
-        new_contents = '\n'.join(lines)
-
-        if new_contents != contents:
+        if old_lines != lines:
+            print('blabla')
             with open(fpath, 'w') as f:
-                f.write(new_contents)
+                f.writelines(lines)
 
     sys.exit(0)

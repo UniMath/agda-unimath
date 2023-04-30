@@ -22,7 +22,7 @@ def categorize_imports(block):
         return (None, None, None)
     # Strip all lines. There should not be any indentation in this block
     block = filter(lambda l: l != '', map(
-        lambda l: l.strip(), block.split('\n')))
+        lambda l: l.strip(), block.splitlines()))
     # Don't want repeat import statements
     publicImports = set()
     nonPublicImports = set()

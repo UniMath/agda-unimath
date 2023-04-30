@@ -55,9 +55,8 @@ if __name__ == '__main__':
         with open(fpath, 'r') as f:
             inputText = f.read()
 
-        output = utils.recursive_sub(
-            r'[ \t]+$', '', inputText, flags=re.MULTILINE)
-        output = utils.recursive_sub(r'\n\s*\n\s*\n', '\n\n', output)
+        output = re.sub(r'[ \t]+$', '', inputText, flags=re.MULTILINE)
+        output = re.sub(r'\n(\s*\n){2,}', '\n\n', output)
 
         # Remove blank lines after a code block starts, and blank lines before a code block ends
         if not has_well_formed_blocks(output):
@@ -67,14 +66,14 @@ if __name__ == '__main__':
             status |= STATUS_FILES_WITH_ILL_FORMED_BLOCKS
         else:
 
-            output = utils.recursive_sub(
-                r'\n\n```($)', r'\n```\1', output, flags=re.MULTILINE)
-            output = utils.recursive_sub(
-                r'(^)```(\S+)\n\n', r'\1```\2\n', output, flags=re.MULTILINE)
+            output = re.sub(
+                r'\n{2,}```$', r'\n```', output, flags=re.MULTILINE)
+            output = re.sub(
+                r'^```(\S+)\n{2,}', r'```\1\n', output, flags=re.MULTILINE)
 
             # Empty blocks should have an empty line
-            output = re.sub(r'(^)```(\S+)\n```($)',
-                            r'\1```\2\n\n```\3', output, flags=re.MULTILINE)
+            output = re.sub(r'^```(\S+)\n```$',
+                            r'```\1\n\n```', output, flags=re.MULTILINE)
 
         if output != inputText:
             with open(fpath, 'w') as f:

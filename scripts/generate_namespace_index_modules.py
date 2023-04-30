@@ -56,9 +56,9 @@ if __name__ == '__main__':
         oldcontents = contents
 
         title_index = contents.find('# ')
-        if title_index > 0:
+        if title_index != 0:
             print(
-                f'Warning! Namespace file {namespace_filename} has title after first line.', file=sys.stderr)
+                f'Warning! Namespace file {namespace_filename} does not start with a title.', file=sys.stderr)
             status |= MISPLACED_TITLE_FLAG
         elif title_index == -1:  # Missing title. Generate it
             contents = generate_title(namespace) + contents

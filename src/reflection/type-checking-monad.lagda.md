@@ -158,13 +158,13 @@ postulate
 {-# BUILTIN AGDATCMWITHNORMALISATION withNormalisation #-}
 {-# BUILTIN AGDATCMFORMATERRORPARTS formatErrorParts #-}
 {-# BUILTIN AGDATCMDEBUGPRINT debugPrint #-}
--- {-# BUILTIN AGDATCMWITHRECONSTRUCTED          withReconstructed          #-}
--- {-# BUILTIN AGDATCMWITHEXPANDLAST             withExpandLast             #-}
--- {-# BUILTIN AGDATCMWITHREDUCEDEFS             withReduceDefs             #-}
--- {-# BUILTIN AGDATCMASKNORMALISATION           askNormalisation           #-}
--- {-# BUILTIN AGDATCMASKRECONSTRUCTED           askReconstructed           #-}
--- {-# BUILTIN AGDATCMASKEXPANDLAST              askExpandLast              #-}
--- {-# BUILTIN AGDATCMASKREDUCEDEFS              askReduceDefs              #-}
+-- {-# BUILTIN AGDATCMWITHRECONSTRUCTED withReconstructed #-}
+-- {-# BUILTIN AGDATCMWITHEXPANDLAST withExpandLast #-}
+-- {-# BUILTIN AGDATCMWITHREDUCEDEFS withReduceDefs #-}
+-- {-# BUILTIN AGDATCMASKNORMALISATION askNormalisation #-}
+-- {-# BUILTIN AGDATCMASKRECONSTRUCTED askReconstructed #-}
+-- {-# BUILTIN AGDATCMASKEXPANDLAST askExpandLast #-}
+-- {-# BUILTIN AGDATCMASKREDUCEDEFS askReduceDefs #-}
 {-# BUILTIN AGDATCMNOCONSTRAINTS noConstraints #-}
 {-# BUILTIN AGDATCMRUNSPECULATIVE runSpeculative #-}
 {-# BUILTIN AGDATCMGETINSTANCES getInstances #-}

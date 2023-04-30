@@ -27,7 +27,7 @@ if __name__ == '__main__':
         holec = r'!\}'
         hole = r'\{!.*!\}'
 
-        lines = contents.split('\n')
+        lines = contents.splitlines()
         for I, line in enumerate(lines):
             if re.match(block_start, line):
                 current_block = []
@@ -61,7 +61,7 @@ if __name__ == '__main__':
                 block = re.sub(r'@CLOSEH@', r'!}', block)
 
                 lines[I+1:last_line] = map(lambda x: x.rstrip(),
-                                           block.split('\n'))
+                                           block.splitlines())
         new_contents = '\n'.join(lines)
 
         with open(fpath, 'w') as f:

@@ -115,22 +115,45 @@ def recursive_sub(pattern, repl, string, flags=0):
     return string
 
 
-def split_agda_line_comment(line):
+agda_comment_regex = re.compile(
+    r'((^|(?<=[\s.;{}()@"]))--)|(\{-#)|(#-\})|(\{-(?<!#))|((?!#)-\})')
+
+
+def split_agda_line_comment_and_get_block_comment_delta(line):
+    """
+    Splits a line of agda code at a line comment, and also returns deltas in block comment level
+    """
     in_pragma = 0
-    in_block_comment = 0
+    block_comment_delta_pos = 0
+    block_comment_delta_neg = 0
 
-    for match in re.finditer(r'(--)|(\{-#)|(#-\})|(\{-(?<!#))|((?!#)-\})', line):
+    for match in agda_comment_regex.finditer(line):
         # Double dash
-        if not in_pragma and not in_block_comment and match.group(1):
+        if not in_pragma and\
+            not block_comment_delta_pos - block_comment_delta_neg\
+                and match.group(1):
             comment_start = match.start()
-            return line[:comment_start], line[comment_start:]
-        elif match.group(2):  # Pragma start
+            return line[:comment_start], line[comment_start:], block_comment_delta_pos, block_comment_delta_neg
+        elif match.group(3):  # Pragma start
             in_pragma += 1
-        elif match.group(3):  # Pragma end
+        elif match.group(4):  # Pragma end
             in_pragma -= 1
-        elif match.group(4):  # Block comment start
-            in_block_comment += 1
-        elif match.group(5):  # Block comment end
-            in_block_comment -= 1
+        elif match.group(5):  # Block comment start
+            block_comment_delta_pos += 1
+        elif match.group(6):  # Block comment end
+            block_comment_delta_neg += 1
 
-    return line, ''
+    return line, '', block_comment_delta_pos, block_comment_delta_neg
+
+
+agda_block_tag_regex = re.compile(r'^```(agda)?((?=\s)|$)')
+
+
+def is_agda_opening_or_closing_tag(line):
+    """
+    Returns two booleans.
+    The first one signifies that the line is a opening or closing tag.
+    The second boolean signifies whether it is an opening tag.
+    """
+    tag_match = agda_block_tag_regex.match(line)
+    return bool(tag_match), tag_match and bool(tag_match.group(1))
