@@ -44,19 +44,19 @@ module _
     type-hom-Cat D (obj-functor-Cat F x) (obj-functor-Cat F y)
   hom-functor-Cat F = pr1 (pr2 F)
 
-  respects-compose-functor-Cat :
+  preserves-compose-functor-Cat :
     (F : functor-Cat) →
     {x y z : obj-Cat C} (g : type-hom-Cat C y z) (f : type-hom-Cat C x y) →
     ( hom-functor-Cat F (compose-hom-Cat C g f)) ＝
     ( compose-hom-Cat D (hom-functor-Cat F g) (hom-functor-Cat F f))
-  respects-compose-functor-Cat F =
-    respects-compose-functor-Precat (precat-Cat C) (precat-Cat D) F
+  preserves-compose-functor-Cat F =
+    preserves-compose-functor-Precat (precat-Cat C) (precat-Cat D) F
 
-  respects-id-functor-Cat :
+  preserves-id-functor-Cat :
     (F : functor-Cat) (x : obj-Cat C) →
     hom-functor-Cat F (id-hom-Cat C {x}) ＝ id-hom-Cat D {obj-functor-Cat F x}
-  respects-id-functor-Cat F =
-    respects-id-functor-Precat (precat-Cat C) (precat-Cat D) F
+  preserves-id-functor-Cat F =
+    preserves-id-functor-Precat (precat-Cat C) (precat-Cat D) F
 ```
 
 ## Examples

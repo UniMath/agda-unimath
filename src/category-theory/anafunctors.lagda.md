@@ -117,7 +117,7 @@ module _
       ( compose-hom-Precat' D (hom-inv-iso-Precat D u))
       ( ( ap
           ( compose-hom-Precat D (hom-iso-Precat D u))
-          ( respects-id-functor-Precat C D F X)) ∙
+          ( preserves-id-functor-Precat C D F X)) ∙
         ( right-unit-law-compose-hom-Precat D (hom-iso-Precat D u)))) ∙
     ( issec-hom-inv-iso-Precat D u)
   pr2 (pr2 (pr2 (pr2 (anafunctor-functor-Precat F)))) X Y Z U u V v W w g f =
@@ -125,7 +125,7 @@ module _
       ( compose-hom-Precat' D (hom-inv-iso-Precat D u))
       ( ( ( ap
             ( compose-hom-Precat D (hom-iso-Precat D w))
-            ( respects-compose-functor-Precat C D F g f)) ∙
+            ( preserves-compose-functor-Precat C D F g f)) ∙
           ( ( inv
               ( associative-compose-hom-Precat D
                 ( hom-iso-Precat D w)

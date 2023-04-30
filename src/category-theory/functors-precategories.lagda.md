@@ -62,18 +62,18 @@ module _
     type-hom-Precat D (obj-functor-Precat F x) (obj-functor-Precat F y)
   hom-functor-Precat F = pr1 (pr2 F)
 
-  respects-compose-functor-Precat :
+  preserves-compose-functor-Precat :
     (F : functor-Precat) {x y z : obj-Precat C}
     (g : type-hom-Precat C y z) (f : type-hom-Precat C x y) →
     ( hom-functor-Precat F (compose-hom-Precat C g f)) ＝
     ( compose-hom-Precat D (hom-functor-Precat F g) (hom-functor-Precat F f))
-  respects-compose-functor-Precat F = pr1 (pr2 (pr2 F))
+  preserves-compose-functor-Precat F = pr1 (pr2 (pr2 F))
 
-  respects-id-functor-Precat :
+  preserves-id-functor-Precat :
     (F : functor-Precat) (x : obj-Precat C) →
     ( hom-functor-Precat F (id-hom-Precat C {x})) ＝
     ( id-hom-Precat D {obj-functor-Precat F x})
-  respects-id-functor-Precat F = pr2 (pr2 (pr2 F))
+  preserves-id-functor-Precat F = pr2 (pr2 (pr2 F))
 ```
 
 ## Examples
@@ -104,13 +104,15 @@ pr1 (compose-functor-Precat C D E G F) =
 pr1 (pr2 (compose-functor-Precat C D E G F)) =
   hom-functor-Precat D E G ∘ hom-functor-Precat C D F
 pr1 (pr2 (pr2 (compose-functor-Precat C D E G F))) g f =
-  ( ap (hom-functor-Precat D E G) (respects-compose-functor-Precat C D F g f)) ∙
-  ( respects-compose-functor-Precat D E G
+  ( ap
+    ( hom-functor-Precat D E G)
+    ( preserves-compose-functor-Precat C D F g f)) ∙
+  ( preserves-compose-functor-Precat D E G
     ( hom-functor-Precat C D F g)
     ( hom-functor-Precat C D F f))
 pr2 (pr2 (pr2 (compose-functor-Precat C D E G F))) x =
-  ( ap (hom-functor-Precat D E G) (respects-id-functor-Precat C D F x)) ∙
-  ( respects-id-functor-Precat D E G (obj-functor-Precat C D F x))
+  ( ap (hom-functor-Precat D E G) (preserves-id-functor-Precat C D F x)) ∙
+  ( preserves-id-functor-Precat D E G (obj-functor-Precat C D F x))
 ```
 
 ## Properties
@@ -127,7 +129,7 @@ module _
   (F : functor-Precat C D)
   where
 
-  is-prop-respects-compose-hom-Precat :
+  is-prop-preserves-compose-hom-Precat :
     is-prop
       ( {x y z : obj-Precat C}
         (g : type-hom-Precat C y z) (f : type-hom-Precat C x y) →
@@ -135,7 +137,7 @@ module _
         ( compose-hom-Precat D
           ( hom-functor-Precat C D F g)
           ( hom-functor-Precat C D F f)))
-  is-prop-respects-compose-hom-Precat =
+  is-prop-preserves-compose-hom-Precat =
     is-prop-Π'
       ( λ x →
         is-prop-Π'
@@ -154,12 +156,12 @@ module _
                             ( hom-functor-Precat C D F g)
                             ( hom-functor-Precat C D F f)))))))
 
-  is-prop-respects-id-hom-Precat :
+  is-prop-preserves-id-hom-Precat :
     is-prop
       ( (x : obj-Precat C) →
         ( hom-functor-Precat C D F (id-hom-Precat C {x})) ＝
         ( id-hom-Precat D {obj-functor-Precat C D F x}))
-  is-prop-respects-id-hom-Precat =
+  is-prop-preserves-id-hom-Precat =
     is-prop-Π
       ( λ x →
         is-set-type-hom-Precat D

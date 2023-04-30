@@ -428,10 +428,10 @@ module _
     {x y : obj-Cat C} (p : x ＝ y) → eq-iso-Cat (iso-eq-Cat C p) ＝ p
   isretr-eq-iso-Cat {x} {y} = isretr-map-inv-equiv (extensionality-obj-Cat x y)
 
-  preserves-composite-eq-iso-Cat :
+  preserves-compose-eq-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
     eq-iso-Cat (compose-iso-Cat C g f) ＝ (eq-iso-Cat f ∙ eq-iso-Cat g)
-  preserves-composite-eq-iso-Cat g f =
+  preserves-compose-eq-iso-Cat g f =
     equational-reasoning
       eq-iso-Cat (compose-iso-Cat C g f)
       ＝ eq-iso-Cat

@@ -129,7 +129,7 @@ module _
               ( type-Algebra Sg Th Alg)
               ( v)))
         ( λ {v} {v'} p →
-          respects-operations-congruence-Algebra Sg Th Alg R op
+          preserves-operations-congruence-Algebra Sg Th Alg R op
             ( vector-multivariable-input
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)
