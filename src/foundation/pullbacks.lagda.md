@@ -912,10 +912,10 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( pair back-left
         ( pair
           ( refl-htpy)
-          ( ( ( ( associative-htpy
+          ( ( ( ( assoc-htpy
                     ( bottom ·r hA) (k ·l back-right) (front-right ·r g')) ∙h
                 ( inv-htpy c)) ∙h
-              ( associative-htpy
+              ( assoc-htpy
                   ( h ·l back-left) (front-left ·r f') (hD ·l top))) ∙h
             ( ap-concat-htpy'
               ( h ·l back-left)

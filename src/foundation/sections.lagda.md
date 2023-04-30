@@ -160,7 +160,7 @@ isretr-section-comp-htpy f g h H (pair k K) (pair l L) =
       ( pair l L))
     ( pair l L)
     ( K ·r l)
-    ( ( inv-htpy-associative-htpy
+    ( ( inv-htpy-assoc-htpy
         ( inv-htpy (H ·r (k ∘ l)))
         ( H ·r (k ∘ l))
         ( (g ·l (K ·r l)) ∙h L)) ∙h
