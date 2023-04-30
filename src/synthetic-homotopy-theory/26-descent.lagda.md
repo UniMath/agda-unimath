@@ -1205,6 +1205,7 @@ compute-path-fam-Fam-pushout {f = f} {g} c up-X P =
 ### Definition 18.3.1
 
 ```agda
+{-
 cocone-flattening-pushout :
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -1229,11 +1230,13 @@ cocone-flattening-pushout f g c P Q e =
         ( pr2 (pr2 c))
         ( λ s → map-equiv (pr1 e (f s)))
         ( λ s → inv-htpy (pr2 (pr2 e) s))))
+-}
 ```
 
 ### Theorem 18.3.2 The flattening lemma
 
 ```agda
+{-
 coherence-bottom-flattening-lemma' :
   {l1 l2 l3 : Level} {B : UU l1} {Q : B → UU l2} {T : UU l3}
   {b b' : B} (α : Id b b') {y : Q b} {y' : Q b'} (β : Id (tr Q α y) y')
@@ -1251,7 +1254,6 @@ coherence-bottom-flattening-lemma :
   Id (h (f a) (g a p)) (h (f' a) (g' a p))
 coherence-bottom-flattening-lemma H K h a p =
   coherence-bottom-flattening-lemma' (H a) (K a p) h
-
 coherence-cube-flattening-lemma :
   {l1 l2 l3 l4 l5 : Level}
   {A : UU l1} {B : UU l2} {P : A → UU l3} {Q : B → UU l4} {T : UU l5}
