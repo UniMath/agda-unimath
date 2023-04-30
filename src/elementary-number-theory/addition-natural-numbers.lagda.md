@@ -70,7 +70,7 @@ right-successor-law-add-ℕ :
 right-successor-law-add-ℕ x y = refl
 ```
 
-### Addition is assoc
+### Addition is associative
 
 ```agda
 associative-add-ℕ :

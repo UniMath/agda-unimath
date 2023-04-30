@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 We use counting methods to prove identities of sums of natural numbers
 
-### Finite sums are assoc
+### Finite sums are associative
 
 ```agda
 abstract

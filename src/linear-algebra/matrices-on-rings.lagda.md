@@ -60,7 +60,7 @@ module _
 
 ## Properties
 
-### Addition of matrices is assoc
+### Addition of matrices is associative
 
 ```agda
 module _

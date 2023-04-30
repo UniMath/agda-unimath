@@ -195,7 +195,7 @@ module _
   pr2 hom-Abstract-Group-Action = is-set-type-hom-Abstract-Group-Action
 ```
 
-### Composition is assoc
+### Composition is associative
 
 ```agda
 module _
