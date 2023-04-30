@@ -172,12 +172,13 @@ abstract
       ( inv-gap-cone-Id x y)
       ( issec-inv-gap-cone-Id x y)
       ( isretr-inv-gap-cone-Id x y)
+```
 
-{- One way to solve this exercise is to show that Id (pr1 t) (pr2 t) is a
-   pullback for every t : A × A. This allows one to use path induction to
-   show that the inverse of the gap map is a section.
--}
+One way to solve this exercise is to show that `Id (pr1 t) (pr2 t)` is a
+pullback for every `t : A × A`. This allows one to use path induction to show
+that the inverse of the gap map is a section.
 
+```agda
 cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →
   cone (const unit (A × A) t) (diagonal A) (pr1 t ＝ pr2 t)

@@ -179,10 +179,11 @@ htpy-universal-property-localization-Ring :
 htpy-universal-property-localization-Ring R S T x f H up-f h K =
   pr2 ( center-unique-extension-universal-property-localization-Ring
         R S T x f H up-f h K)
+```
 
-{- We show that the type of localizations of a ring R at an element x is
-   contractible. -}
+### The type of localizations of a ring $R$ at an element $x$ is contractible
 
+```agda
 {-
 is-equiv-up-localization-up-localization-Ring :
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3) (x : type-Ring R)
