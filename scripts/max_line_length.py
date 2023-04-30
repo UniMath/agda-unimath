@@ -6,13 +6,12 @@ import re
 import sys
 import utils
 
-open_import = r'^\s*open import '
 named_module = r'^module\s\S+\swhere$'
-irreducible_line1 = r'^\s*([({] ?)*[^\s.;{}()@"]+[)}]*$'
-irreducible_line2 = r'^\s*[^\s.;{}()@"]+ [:=]$'
+open_import = r'^\s*open import '
+# Forgives lines like this `( ( {{ my-very.long-token.that-is-too-long}})) =`
+irreducible_line1 = r'^\s*([({] ?)*[^\s;{}()@"]+[)}]*( ?[;:=→])?$'
 
-forgive_patterns = (open_import, named_module,
-                    irreducible_line1, irreducible_line2)
+forgive_patterns = (named_module, open_import, irreducible_line1)
 
 forgive_regex = re.compile(
     '(' + ')|('.join(forgive_patterns) + ')')
