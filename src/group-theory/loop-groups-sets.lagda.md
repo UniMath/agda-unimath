@@ -121,7 +121,7 @@ module _
     map-hom-symmetric-group-loop-group-Set X X
   pr2 hom-symmetric-group-loop-group-Set p q =
     ( ap equiv-eq (distributive-inv-concat p q)) ∙
-      ( inv (compose-equiv-eq (inv q) (inv p)))
+      ( inv (compute-equiv-eq (inv q) (inv p)))
 
   hom-inv-symmetric-group-loop-group-Set :
     type-hom-Group (symmetric-Group X) (loop-group-Set X)

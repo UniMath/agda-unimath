@@ -540,6 +540,7 @@ module _
     ( map-coprod unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-coprod-Set =
     pr2 (center distributive-trunc-coprod-Set)
+-}
 ```
 
 ### Set truncations of Σ-types

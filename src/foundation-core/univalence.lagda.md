@@ -26,7 +26,7 @@ In this file, we define the statement of the axiom. The axiom itself is
 postulated in [`foundation.univalence`](foundation.univalence.md) as
 `univalence`.
 
-## Definition
+## Statement
 
 ```agda
 equiv-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A ≃ B
