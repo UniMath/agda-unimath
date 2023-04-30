@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.maybe
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -249,18 +250,18 @@ module _
       ( b)
       ( x)
 
-  map-children-combinator-Enriched-Directed-Tree :
+  map-compute-children-combinator-Enriched-Directed-Tree :
     children-Enriched-Directed-Tree A B (T b) x →
     children-combinator-Enriched-Directed-Tree
-  map-children-combinator-Enriched-Directed-Tree =
+  map-compute-children-combinator-Enriched-Directed-Tree =
     map-compute-children-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
 
-  is-equiv-map-children-combinator-Enriched-Directed-Tree :
-    is-equiv map-children-combinator-Enriched-Directed-Tree
-  is-equiv-map-children-combinator-Enriched-Directed-Tree =
+  is-equiv-map-compute-children-combinator-Enriched-Directed-Tree :
+    is-equiv map-compute-children-combinator-Enriched-Directed-Tree
+  is-equiv-map-compute-children-combinator-Enriched-Directed-Tree =
     is-equiv-map-compute-children-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
@@ -291,4 +292,292 @@ eq-index-edge-combinator-Enriched-Directed-Tree :
 eq-index-edge-combinator-Enriched-Directed-Tree A B a T =
   eq-index-edge-combinator-Directed-Tree
     ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+```
+
+### The base of the combinator tree of a family `T` of enriched directed tree indexed by `B a` is equivalent to `B a`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {a : A}
+  (T : B a → Enriched-Directed-Tree l3 l4 A B)
+  where
+
+  node-base-index-combinator-Enriched-Directed-Tree :
+    B a → node-combinator-Enriched-Directed-Tree A B T
+  node-base-index-combinator-Enriched-Directed-Tree =
+    node-base-index-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  edge-base-index-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    edge-combinator-Enriched-Directed-Tree A B T
+      ( node-base-index-combinator-Enriched-Directed-Tree b)
+      ( root-combinator-Enriched-Directed-Tree A B T)
+  edge-base-index-combinator-Enriched-Directed-Tree =
+    edge-base-index-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  base-index-combinator-Enriched-Directed-Tree :
+    B a → base-combinator-Enriched-Directed-Tree A B T
+  base-index-combinator-Enriched-Directed-Tree =
+    base-index-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  index-base-combinator-Enriched-Directed-Tree :
+    base-combinator-Enriched-Directed-Tree A B T → B a
+  index-base-combinator-Enriched-Directed-Tree =
+    index-base-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  issec-index-base-combinator-Enriched-Directed-Tree :
+    ( base-index-combinator-Enriched-Directed-Tree ∘
+      index-base-combinator-Enriched-Directed-Tree) ~ id
+  issec-index-base-combinator-Enriched-Directed-Tree =
+    issec-index-base-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  isretr-index-base-combinator-Enriched-Directed-Tree :
+    ( index-base-combinator-Enriched-Directed-Tree ∘
+      base-index-combinator-Enriched-Directed-Tree) ~ id
+  isretr-index-base-combinator-Enriched-Directed-Tree =
+    isretr-index-base-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-equiv-base-index-combinator-Enriched-Directed-Tree :
+    is-equiv base-index-combinator-Enriched-Directed-Tree
+  is-equiv-base-index-combinator-Enriched-Directed-Tree =
+    is-equiv-base-index-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  equiv-base-index-combinator-Enriched-Directed-Tree :
+    B a ≃ base-combinator-Enriched-Directed-Tree A B T
+  equiv-base-index-combinator-Enriched-Directed-Tree =
+    equiv-base-index-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+```
+
+### The type of nodes of the combinator tree of `T` is equivalent to the dependent sum of the types of nodes of each `T b`, plus a root
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {a : A}
+  (T : B a → Enriched-Directed-Tree l3 l4 A B)
+  where
+
+  map-compute-node-combinator-Enriched-Directed-Tree :
+    Maybe (Σ (B a) (node-Enriched-Directed-Tree A B ∘ T)) →
+    node-combinator-Enriched-Directed-Tree A B T
+  map-compute-node-combinator-Enriched-Directed-Tree =
+    map-compute-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  map-inv-compute-node-combinator-Enriched-Directed-Tree :
+    node-combinator-Enriched-Directed-Tree A B T →
+    Maybe (Σ (B a) (node-Enriched-Directed-Tree A B ∘ T))
+  map-inv-compute-node-combinator-Enriched-Directed-Tree =
+    map-inv-compute-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  issec-map-inv-compute-node-combinator-Enriched-Directed-Tree :
+    ( map-compute-node-combinator-Enriched-Directed-Tree ∘
+      map-inv-compute-node-combinator-Enriched-Directed-Tree) ~ id
+  issec-map-inv-compute-node-combinator-Enriched-Directed-Tree =
+    issec-map-inv-compute-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  isretr-map-inv-compute-node-combinator-Enriched-Directed-Tree :
+    ( map-inv-compute-node-combinator-Enriched-Directed-Tree ∘
+      map-compute-node-combinator-Enriched-Directed-Tree) ~ id
+  isretr-map-inv-compute-node-combinator-Enriched-Directed-Tree =
+    isretr-map-inv-compute-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-equiv-map-compute-node-combinator-Enriched-Directed-Tree :
+    is-equiv map-compute-node-combinator-Enriched-Directed-Tree
+  is-equiv-map-compute-node-combinator-Enriched-Directed-Tree =
+    is-equiv-map-compute-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  compute-node-combinator-Enriched-Directed-Tree :
+    Maybe (Σ (B a) (node-Enriched-Directed-Tree A B ∘ T)) ≃
+    node-combinator-Enriched-Directed-Tree A B T
+  compute-node-combinator-Enriched-Directed-Tree =
+    compute-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+```
+
+### The type of proper nodes of the combinator tree of `T` is equivalent to the dependent sum of the types of nodes of each `T b`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {a : A}
+  (T : B a → Enriched-Directed-Tree l3 l4 A B)
+  where
+
+  map-compute-proper-node-combinator-Enriched-Directed-Tree :
+    Σ (B a) (node-Enriched-Directed-Tree A B ∘ T) →
+    proper-node-combinator-Enriched-Directed-Tree A B T
+  map-compute-proper-node-combinator-Enriched-Directed-Tree =
+    map-compute-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
+    proper-node-combinator-Enriched-Directed-Tree A B T →
+    Σ (B a) (node-Enriched-Directed-Tree A B ∘ T)
+  map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
+    map-inv-compute-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  issec-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
+    ( map-compute-proper-node-combinator-Enriched-Directed-Tree ∘
+      map-inv-compute-proper-node-combinator-Enriched-Directed-Tree) ~ id
+  issec-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
+    issec-map-inv-compute-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  isretr-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
+    ( map-inv-compute-proper-node-combinator-Enriched-Directed-Tree ∘
+      map-compute-proper-node-combinator-Enriched-Directed-Tree) ~ id
+  isretr-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
+    isretr-map-inv-compute-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  is-equiv-map-compute-proper-node-combinator-Enriched-Directed-Tree :
+    is-equiv map-compute-proper-node-combinator-Enriched-Directed-Tree
+  is-equiv-map-compute-proper-node-combinator-Enriched-Directed-Tree =
+    is-equiv-map-compute-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  compute-proper-node-combinator-Enriched-Directed-Tree :
+    Σ (B a) (node-Enriched-Directed-Tree A B ∘ T) ≃
+    proper-node-combinator-Enriched-Directed-Tree A B T
+  compute-proper-node-combinator-Enriched-Directed-Tree =
+    compute-proper-node-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+```
+
+### The fibers at a base element `b : B a` of the comibinator of a family `T` of trees is equivalent to `T b`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {a : A}
+  (T : B a → Enriched-Directed-Tree l3 l4 A B)
+  where
+
+  node-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    node-Enriched-Directed-Tree A B (T b) →
+    node-fiber-Enriched-Directed-Tree A B
+      ( combinator-Enriched-Directed-Tree A B T)
+      ( node-base-index-combinator-Enriched-Directed-Tree A B T b)
+  node-fiber-combinator-Enriched-Directed-Tree =
+    node-fiber-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  edge-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) (x y : node-Enriched-Directed-Tree A B (T b)) →
+    edge-Enriched-Directed-Tree A B (T b) x y →
+    edge-fiber-Enriched-Directed-Tree A B
+      ( combinator-Enriched-Directed-Tree A B T)
+      ( node-base-index-combinator-Enriched-Directed-Tree A B T b)
+      ( node-fiber-combinator-Enriched-Directed-Tree b x)
+      ( node-fiber-combinator-Enriched-Directed-Tree b y)
+  edge-fiber-combinator-Enriched-Directed-Tree =
+    edge-fiber-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  directed-tree-hom-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B (T b))
+      ( directed-tree-fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( node-base-index-combinator-Enriched-Directed-Tree A B T b))
+  directed-tree-hom-fiber-combinator-Enriched-Directed-Tree =
+    hom-fiber-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  children-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) (x : node-Enriched-Directed-Tree A B (T b)) →
+    children-Enriched-Directed-Tree A B (T b) x →
+    children-fiber-Enriched-Directed-Tree A B
+      ( combinator-Enriched-Directed-Tree A B T)
+      ( node-base-index-combinator-Enriched-Directed-Tree A B T b)
+      ( node-fiber-combinator-Enriched-Directed-Tree b x)
+  children-fiber-combinator-Enriched-Directed-Tree b =
+    children-hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B (T b))
+      ( directed-tree-fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( node-base-index-combinator-Enriched-Directed-Tree A B T b))
+      ( directed-tree-hom-fiber-combinator-Enriched-Directed-Tree b)
+
+  is-equiv-directed-tree-hom-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    is-equiv-hom-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B (T b))
+      ( directed-tree-fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( node-base-index-combinator-Enriched-Directed-Tree A B T b))
+      ( directed-tree-hom-fiber-combinator-Enriched-Directed-Tree b)
+  is-equiv-directed-tree-hom-fiber-combinator-Enriched-Directed-Tree =
+    is-equiv-hom-fiber-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  equiv-directed-tree-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B (T b))
+      ( directed-tree-fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( node-base-index-combinator-Enriched-Directed-Tree A B T b))
+  equiv-directed-tree-fiber-combinator-Enriched-Directed-Tree =
+    fiber-combinator-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B ∘ T)
+
+  shape-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    ( shape-Enriched-Directed-Tree A B (T b)) ~
+    ( ( shape-fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( node-base-index-combinator-Enriched-Directed-Tree A B T b)) ∘
+      ( node-fiber-combinator-Enriched-Directed-Tree b))
+  shape-fiber-combinator-Enriched-Directed-Tree b x = refl
+
+  enrichment-fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) (x : node-Enriched-Directed-Tree A B (T b)) →
+    ( ( children-fiber-combinator-Enriched-Directed-Tree b x) ∘
+      ( map-enrichment-Enriched-Directed-Tree A B (T b) x)) ~
+    ( map-enrichment-fiber-base-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( b)
+      ( node-fiber-combinator-Enriched-Directed-Tree b x))
+  enrichment-fiber-combinator-Enriched-Directed-Tree b x y =
+    eq-map-enrichment-fiber-Enriched-Directed-Tree A B
+      ( combinator-Enriched-Directed-Tree A B T)
+      ( node-base-index-combinator-Enriched-Directed-Tree A B T b)
+      ( node-fiber-combinator-Enriched-Directed-Tree b x)
+      ( y)
+      ( pr2
+        ( pr1
+          ( children-fiber-combinator-Enriched-Directed-Tree b x
+            ( map-enrichment-Enriched-Directed-Tree A B (T b) x y))))
+      ( pr2
+        ( pr2
+          ( children-fiber-combinator-Enriched-Directed-Tree b x
+            ( map-enrichment-Enriched-Directed-Tree A B (T b) x y))))
+
+  fiber-combinator-Enriched-Directed-Tree :
+    (b : B a) →
+    equiv-Enriched-Directed-Tree A B
+      ( T b)
+      ( fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B T)
+        ( node-base-index-combinator-Enriched-Directed-Tree A B T b))
+  pr1 (fiber-combinator-Enriched-Directed-Tree b) =
+    equiv-directed-tree-fiber-combinator-Enriched-Directed-Tree b
+  pr1 (pr2 (fiber-combinator-Enriched-Directed-Tree b)) =
+    shape-fiber-combinator-Enriched-Directed-Tree b
+  pr2 (pr2 (fiber-combinator-Enriched-Directed-Tree b)) =
+    enrichment-fiber-combinator-Enriched-Directed-Tree b
 ```

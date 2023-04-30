@@ -87,6 +87,18 @@ module _
   children-Enriched-Directed-Tree =
     children-Directed-Tree directed-tree-Enriched-Directed-Tree
 
+  node-children-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) →
+    children-Enriched-Directed-Tree x → node-Enriched-Directed-Tree
+  node-children-Enriched-Directed-Tree =
+    node-children-Directed-Tree directed-tree-Enriched-Directed-Tree
+
+  edge-children-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) (y : children-Enriched-Directed-Tree x) →
+    edge-Enriched-Directed-Tree (node-children-Enriched-Directed-Tree x y) x
+  edge-children-Enriched-Directed-Tree =
+    edge-children-Directed-Tree directed-tree-Enriched-Directed-Tree
+
   walk-Enriched-Directed-Tree :
     (x y : node-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
   walk-Enriched-Directed-Tree =
@@ -270,10 +282,21 @@ module _
 
   map-enrichment-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
-    B (shape-Enriched-Directed-Tree x) →
-    Σ (node-Enriched-Directed-Tree) (λ y → edge-Enriched-Directed-Tree y x)
+    B (shape-Enriched-Directed-Tree x) → children-Enriched-Directed-Tree x
   map-enrichment-Enriched-Directed-Tree x =
     map-equiv (enrichment-Enriched-Directed-Tree x)
+
+  node-enrichment-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) (b : B (shape-Enriched-Directed-Tree x)) →
+    node-Enriched-Directed-Tree
+  node-enrichment-Enriched-Directed-Tree x b =
+    pr1 (map-enrichment-Enriched-Directed-Tree x b)
+
+  edge-enrichment-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) (b : B (shape-Enriched-Directed-Tree x)) →
+    edge-Enriched-Directed-Tree (node-enrichment-Enriched-Directed-Tree x b) x
+  edge-enrichment-Enriched-Directed-Tree x b =
+    pr2 (map-enrichment-Enriched-Directed-Tree x b)
 
   coherence-square-map-enrichment-Enriched-Directed-Tree :
     {x y : node-Enriched-Directed-Tree} (p : x ＝ y) →

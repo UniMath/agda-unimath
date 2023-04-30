@@ -205,8 +205,7 @@ module _
 ```agda
 id-equiv-Directed-Tree :
   {l1 l2 : Level} (T : Directed-Tree l1 l2) → equiv-Directed-Tree T T
-pr1 (id-equiv-Directed-Tree T) = id-equiv
-pr2 (id-equiv-Directed-Tree T) x y = id-equiv
+id-equiv-Directed-Tree T = id-equiv-Directed-Graph (graph-Directed-Tree T)
 ```
 
 ### Homotopies of equivalences of directed trees

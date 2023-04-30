@@ -358,25 +358,25 @@ module _
   {l1 l2 l3 : Level} {I : UU l1} (T : I → Directed-Tree l2 l3)
   where
 
-  node-base-combinator-index-Directed-Tree :
+  node-base-index-combinator-Directed-Tree :
     I → node-combinator-Directed-Tree T
-  node-base-combinator-index-Directed-Tree i =
+  node-base-index-combinator-Directed-Tree i =
     node-inclusion-combinator-Directed-Tree i (root-Directed-Tree (T i))
 
-  edge-base-combinator-index-Directed-Tree :
+  edge-base-index-combinator-Directed-Tree :
     (i : I) →
     edge-combinator-Directed-Tree T
-      ( node-base-combinator-index-Directed-Tree i)
+      ( node-base-index-combinator-Directed-Tree i)
       ( root-combinator-Directed-Tree)
-  edge-base-combinator-index-Directed-Tree i =
+  edge-base-index-combinator-Directed-Tree i =
     edge-to-root-combinator-Directed-Tree i
 
-  base-combinator-index-Directed-Tree :
+  base-index-combinator-Directed-Tree :
     I → base-combinator-Directed-Tree T
-  pr1 (base-combinator-index-Directed-Tree i) =
-    node-base-combinator-index-Directed-Tree i
-  pr2 (base-combinator-index-Directed-Tree i) =
-    edge-base-combinator-index-Directed-Tree i
+  pr1 (base-index-combinator-Directed-Tree i) =
+    node-base-index-combinator-Directed-Tree i
+  pr2 (base-index-combinator-Directed-Tree i) =
+    edge-base-index-combinator-Directed-Tree i
 
   index-base-combinator-Directed-Tree :
     base-combinator-Directed-Tree T → I
@@ -385,7 +385,7 @@ module _
     i
 
   issec-index-base-combinator-Directed-Tree :
-    ( base-combinator-index-Directed-Tree ∘
+    ( base-index-combinator-Directed-Tree ∘
       index-base-combinator-Directed-Tree) ~ id
   issec-index-base-combinator-Directed-Tree
     ( ._ , edge-to-root-combinator-Directed-Tree i) =
@@ -393,23 +393,23 @@ module _
 
   isretr-index-base-combinator-Directed-Tree :
     ( index-base-combinator-Directed-Tree ∘
-      base-combinator-index-Directed-Tree) ~ id
+      base-index-combinator-Directed-Tree) ~ id
   isretr-index-base-combinator-Directed-Tree i = refl
 
-  is-equiv-base-combinator-index-Directed-Tree :
-    is-equiv base-combinator-index-Directed-Tree
-  is-equiv-base-combinator-index-Directed-Tree =
+  is-equiv-base-index-combinator-Directed-Tree :
+    is-equiv base-index-combinator-Directed-Tree
+  is-equiv-base-index-combinator-Directed-Tree =
     is-equiv-has-inverse
       index-base-combinator-Directed-Tree
       issec-index-base-combinator-Directed-Tree
       isretr-index-base-combinator-Directed-Tree
 
-  equiv-base-combinator-index-Directed-Tree :
+  equiv-base-index-combinator-Directed-Tree :
     I ≃ base-combinator-Directed-Tree T
-  pr1 equiv-base-combinator-index-Directed-Tree =
-    base-combinator-index-Directed-Tree
-  pr2 equiv-base-combinator-index-Directed-Tree =
-    is-equiv-base-combinator-index-Directed-Tree
+  pr1 equiv-base-index-combinator-Directed-Tree =
+    base-index-combinator-Directed-Tree
+  pr2 equiv-base-index-combinator-Directed-Tree =
+    is-equiv-base-index-combinator-Directed-Tree
 ```
 
 ### The type of nodes of the combinator tree of `T` is equivalent to the dependent sum of the types of nodes of each `T i`, plus a root
@@ -539,7 +539,7 @@ module _
     node-Directed-Tree (T i) →
     node-fiber-Directed-Tree
       ( combinator-Directed-Tree T)
-      ( node-base-combinator-index-Directed-Tree T i)
+      ( node-base-index-combinator-Directed-Tree T i)
   pr1 (node-fiber-combinator-Directed-Tree i x) =
     node-inclusion-combinator-Directed-Tree i x
   pr2 (node-fiber-combinator-Directed-Tree i x) =
@@ -554,7 +554,7 @@ module _
           ( λ x →
             walk-combinator-Directed-Tree T x
               ( node-base-Directed-Tree (combinator-Directed-Tree T) b)))
-      ( base-combinator-index-Directed-Tree T)
+      ( base-index-combinator-Directed-Tree T)
       ( node-fiber-combinator-Directed-Tree)) ~
     map-equiv
       ( ( compute-proper-node-Directed-Tree (combinator-Directed-Tree T)) ∘e
@@ -564,7 +564,7 @@ module _
       ( eq-compute-proper-node-Directed-Tree
         ( combinator-Directed-Tree T)
         ( is-proper-node-inclusion-combinator-Directed-Tree T)
-        ( base-combinator-index-Directed-Tree T i)
+        ( base-index-combinator-Directed-Tree T i)
         ( walk-inclusion-combinator-Directed-Tree T i x
           ( root-Directed-Tree (T i)) (walk-to-root-Directed-Tree (T i) x)))
 
@@ -576,7 +576,7 @@ module _
             ( λ x →
               walk-combinator-Directed-Tree T x
                 ( node-base-Directed-Tree (combinator-Directed-Tree T) b)))
-        ( base-combinator-index-Directed-Tree T)
+        ( base-index-combinator-Directed-Tree T)
         ( node-fiber-combinator-Directed-Tree))
   is-equiv-map-Σ-node-fiber-combinator-Directed-Tree =
     is-equiv-htpy
@@ -597,9 +597,9 @@ module _
           ( λ x →
             walk-combinator-Directed-Tree T x
               ( node-base-Directed-Tree (combinator-Directed-Tree T) b)))
-      ( base-combinator-index-Directed-Tree T)
+      ( base-index-combinator-Directed-Tree T)
       ( node-fiber-combinator-Directed-Tree)
-      ( is-equiv-base-combinator-index-Directed-Tree T)
+      ( is-equiv-base-index-combinator-Directed-Tree T)
       ( is-equiv-map-Σ-node-fiber-combinator-Directed-Tree)
 
   edge-fiber-combinator-Directed-Tree :
@@ -607,7 +607,7 @@ module _
     edge-Directed-Tree (T i) x y →
     edge-fiber-Directed-Tree
       ( combinator-Directed-Tree T)
-      ( node-base-combinator-index-Directed-Tree T i)
+      ( node-base-index-combinator-Directed-Tree T i)
       ( node-fiber-combinator-Directed-Tree i x)
       ( node-fiber-combinator-Directed-Tree i y)
   pr1 (edge-fiber-combinator-Directed-Tree i x y e) =
@@ -624,7 +624,7 @@ module _
       ( T i)
       ( fiber-Directed-Tree
         ( combinator-Directed-Tree T)
-        ( node-base-combinator-index-Directed-Tree T i))
+        ( node-base-index-combinator-Directed-Tree T i))
   pr1 (hom-fiber-combinator-Directed-Tree i) =
     node-fiber-combinator-Directed-Tree i
   pr2 (hom-fiber-combinator-Directed-Tree i) =
@@ -636,14 +636,14 @@ module _
       ( T i)
       ( fiber-Directed-Tree
         ( combinator-Directed-Tree T)
-        ( node-base-combinator-index-Directed-Tree T i))
+        ( node-base-index-combinator-Directed-Tree T i))
       ( hom-fiber-combinator-Directed-Tree i)
   is-equiv-hom-fiber-combinator-Directed-Tree i =
     is-equiv-is-equiv-node-hom-Directed-Tree
       ( T i)
       ( fiber-Directed-Tree
         ( combinator-Directed-Tree T)
-        ( node-base-combinator-index-Directed-Tree T i))
+        ( node-base-index-combinator-Directed-Tree T i))
       ( hom-fiber-combinator-Directed-Tree i)
       ( is-equiv-node-fiber-combinator-Directed-Tree i)
 
@@ -653,13 +653,13 @@ module _
       ( T i)
       ( fiber-Directed-Tree
         ( combinator-Directed-Tree T)
-        ( node-base-combinator-index-Directed-Tree T i))
+        ( node-base-index-combinator-Directed-Tree T i))
   fiber-combinator-Directed-Tree i =
     equiv-is-equiv-hom-Directed-Tree
       ( T i)
       ( fiber-Directed-Tree
         ( combinator-Directed-Tree T)
-        ( node-base-combinator-index-Directed-Tree T i))
+        ( node-base-index-combinator-Directed-Tree T i))
       ( hom-fiber-combinator-Directed-Tree i)
       ( is-equiv-hom-fiber-combinator-Directed-Tree i)
 ```

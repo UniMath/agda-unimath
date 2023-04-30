@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import trees.coalgebras-polynomial-endofunctors
+open import trees.combinator-enriched-directed-trees
 open import trees.enriched-directed-trees
 open import trees.equivalences-enriched-directed-trees
 open import trees.fibers-enriched-directed-trees

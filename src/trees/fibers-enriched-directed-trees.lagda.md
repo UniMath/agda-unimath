@@ -52,10 +52,36 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 
+  walk-node-inclusion-fiber-Enriched-Directed-Tree :
+    ( y : node-fiber-Enriched-Directed-Tree) →
+    walk-Enriched-Directed-Tree A B T
+      ( node-inclusion-fiber-Enriched-Directed-Tree y)
+      ( x)
+  walk-node-inclusion-fiber-Enriched-Directed-Tree =
+    walk-node-inclusion-fiber-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( x)
+
   edge-fiber-Enriched-Directed-Tree :
     (y z : node-fiber-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
   edge-fiber-Enriched-Directed-Tree =
     edge-fiber-Directed-Tree (directed-tree-Enriched-Directed-Tree A B T) x
+
+  edge-inclusion-fiber-Enriched-Directed-Tree :
+    (y z : node-fiber-Enriched-Directed-Tree) →
+    edge-fiber-Enriched-Directed-Tree y z →
+    edge-Enriched-Directed-Tree A B T
+      ( node-inclusion-fiber-Enriched-Directed-Tree y)
+      ( node-inclusion-fiber-Enriched-Directed-Tree z)
+  edge-inclusion-fiber-Enriched-Directed-Tree =
+    edge-inclusion-fiber-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( x)
+
+  children-fiber-Enriched-Directed-Tree :
+    (x : node-fiber-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
+  children-fiber-Enriched-Directed-Tree =
+    children-fiber-Directed-Tree (directed-tree-Enriched-Directed-Tree A B T) x
 
   shape-fiber-Enriched-Directed-Tree :
     node-fiber-Enriched-Directed-Tree → A
@@ -66,14 +92,12 @@ module _
   enrichment-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree) →
     B (shape-fiber-Enriched-Directed-Tree y) ≃
-    Σ ( node-fiber-Enriched-Directed-Tree)
-      ( λ z → edge-fiber-Enriched-Directed-Tree z y)
+    children-fiber-Enriched-Directed-Tree y
   enrichment-fiber-Enriched-Directed-Tree (y , w) =
     ( interchange-Σ-Σ (λ u e v → v ＝ cons-walk-Directed-Graph e w)) ∘e
-    ( ( inv-equiv
-        ( right-unit-law-Σ-is-contr
-          ( λ i →
-            is-contr-total-path' (cons-walk-Directed-Graph (pr2 i) w)))) ∘e
+    ( ( inv-right-unit-law-Σ-is-contr
+        ( λ i →
+          is-contr-total-path' (cons-walk-Directed-Graph (pr2 i) w))) ∘e
       ( enrichment-Enriched-Directed-Tree A B T y))
 
   fiber-Enriched-Directed-Tree : Enriched-Directed-Tree (l3 ⊔ l4) (l3 ⊔ l4) A B
@@ -81,6 +105,62 @@ module _
   pr1 (pr2 fiber-Enriched-Directed-Tree) = shape-fiber-Enriched-Directed-Tree
   pr2 (pr2 fiber-Enriched-Directed-Tree) =
     enrichment-fiber-Enriched-Directed-Tree
+
+  map-enrichment-fiber-Enriched-Directed-Tree :
+    (y : node-fiber-Enriched-Directed-Tree) →
+    B ( shape-fiber-Enriched-Directed-Tree y) →
+    children-fiber-Enriched-Directed-Tree y
+  map-enrichment-fiber-Enriched-Directed-Tree =
+    map-enrichment-Enriched-Directed-Tree A B fiber-Enriched-Directed-Tree
+
+  node-enrichment-fiber-Enriched-Directed-Tree :
+    (y : node-fiber-Enriched-Directed-Tree)
+    (b : B (shape-fiber-Enriched-Directed-Tree y)) →
+    node-fiber-Enriched-Directed-Tree
+  node-enrichment-fiber-Enriched-Directed-Tree =
+    node-enrichment-Enriched-Directed-Tree A B fiber-Enriched-Directed-Tree
+
+  edge-enrichment-fiber-Enriched-Directed-Tree :
+    (y : node-fiber-Enriched-Directed-Tree)
+    (b : B (shape-fiber-Enriched-Directed-Tree y)) →
+    edge-fiber-Enriched-Directed-Tree
+      ( node-enrichment-fiber-Enriched-Directed-Tree y b)
+      ( y)
+  edge-enrichment-fiber-Enriched-Directed-Tree =
+    edge-enrichment-Enriched-Directed-Tree A B fiber-Enriched-Directed-Tree
+
+  eq-map-enrichment-fiber-Enriched-Directed-Tree :
+    (y : node-fiber-Enriched-Directed-Tree)
+    (b : B (shape-fiber-Enriched-Directed-Tree y)) →
+    (w :
+      walk-Enriched-Directed-Tree A B T
+        ( node-inclusion-fiber-Enriched-Directed-Tree
+          ( node-enrichment-fiber-Enriched-Directed-Tree y b))
+        ( x)) →
+    (p :
+      ( w) ＝
+      ( cons-walk-Directed-Graph
+        ( edge-enrichment-Enriched-Directed-Tree A B T
+          ( node-inclusion-fiber-Enriched-Directed-Tree y)
+          ( b))
+        ( walk-node-inclusion-fiber-Enriched-Directed-Tree y))) →
+    ( ( ( node-inclusion-fiber-Enriched-Directed-Tree
+          ( node-enrichment-fiber-Enriched-Directed-Tree y b)) ,
+        ( w)) ,
+      ( edge-inclusion-fiber-Enriched-Directed-Tree
+        ( node-enrichment-fiber-Enriched-Directed-Tree y b)
+        ( y)
+        ( edge-enrichment-fiber-Enriched-Directed-Tree y b)) ,
+      ( p)) ＝
+    map-enrichment-fiber-Enriched-Directed-Tree y b
+  eq-map-enrichment-fiber-Enriched-Directed-Tree y b w p =
+    eq-interchange-Σ-Σ-is-contr _
+      ( is-contr-total-path'
+        ( cons-walk-Directed-Graph
+          ( edge-enrichment-Enriched-Directed-Tree A B T
+            ( node-inclusion-fiber-Enriched-Directed-Tree y)
+            ( b))
+          ( walk-node-inclusion-fiber-Enriched-Directed-Tree y)))
 ```
 
 ### Computing the children of a node in a fiber
@@ -92,16 +172,9 @@ module _
   (x : node-Enriched-Directed-Tree A B T)
   where
 
-  children-fiber-Enriched-Directed-Tree :
-    (y : node-fiber-Enriched-Directed-Tree A B T x) → UU (l3 ⊔ l4)
-  children-fiber-Enriched-Directed-Tree =
-    children-fiber-Directed-Tree
-      ( directed-tree-Enriched-Directed-Tree A B T)
-      ( x)
-
   compute-children-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    children-fiber-Enriched-Directed-Tree y ≃
+    children-fiber-Enriched-Directed-Tree A B T x y ≃
     children-Enriched-Directed-Tree A B T
       ( node-inclusion-fiber-Enriched-Directed-Tree A B T x y)
   compute-children-fiber-Enriched-Directed-Tree =
@@ -111,7 +184,7 @@ module _
 
   map-compute-children-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    children-fiber-Enriched-Directed-Tree y →
+    children-fiber-Enriched-Directed-Tree A B T x y →
     children-Enriched-Directed-Tree A B T
       ( node-inclusion-fiber-Enriched-Directed-Tree A B T x y)
   map-compute-children-fiber-Enriched-Directed-Tree =
@@ -123,7 +196,7 @@ module _
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
     children-Enriched-Directed-Tree A B T
       ( node-inclusion-fiber-Enriched-Directed-Tree A B T x y) ≃
-    children-fiber-Enriched-Directed-Tree y
+    children-fiber-Enriched-Directed-Tree A B T x y
   inv-compute-children-fiber-Enriched-Directed-Tree =
     inv-compute-children-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
@@ -131,7 +204,7 @@ module _
 
   Eq-children-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    (u v : children-fiber-Enriched-Directed-Tree y) → UU (l3 ⊔ l4)
+    (u v : children-fiber-Enriched-Directed-Tree A B T x y) → UU (l3 ⊔ l4)
   Eq-children-fiber-Enriched-Directed-Tree =
     Eq-children-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
@@ -139,7 +212,7 @@ module _
 
   eq-Eq-children-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    ( u v : children-fiber-Enriched-Directed-Tree y) →
+    ( u v : children-fiber-Enriched-Directed-Tree A B T x y) →
     Eq-children-fiber-Enriched-Directed-Tree y u v → u ＝ v
   eq-Eq-children-fiber-Enriched-Directed-Tree =
     eq-Eq-children-fiber-Directed-Tree
