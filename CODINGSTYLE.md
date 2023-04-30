@@ -143,8 +143,8 @@ the rule are as follows:
 
 - Named module declarations
 - Open import statements
-- Lines consisting of a single, possibly parenthesized (`(){}`), token followed
-  possibly by one of the symbols (`;:=→`).
+- Lines consisting of a single, possibly parenthesized (`(){}`), token that is
+  potentially followed by one of the symbols `;`, `:`, `=`, or `→`.
 
 ## Coding practices we avoid
 
