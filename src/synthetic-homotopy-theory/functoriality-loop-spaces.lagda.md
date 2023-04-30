@@ -80,7 +80,7 @@ is-emb-map-Ω A B f H =
     ( tr-type-Ω (preserves-point-pointed-map A B f))
     ( ap (map-pointed-map A B f))
     ( is-emb-is-equiv (is-equiv-tr-type-Ω (preserves-point-pointed-map A B f)))
-    ( H (pt-Pointed-Type A) (pt-Pointed-Type A))
+    ( H (point-Pointed-Type A) (point-Pointed-Type A))
 
 emb-Ω :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →

@@ -39,7 +39,7 @@ module _
 
   constant-pointed-map : (A : Pointed-Type l1) (B : Pointed-Type l2) → A →* B
   pr1 (constant-pointed-map A B) =
-    const (type-Pointed-Type A) (type-Pointed-Type B) (pt-Pointed-Type B)
+    const (type-Pointed-Type A) (type-Pointed-Type B) (point-Pointed-Type B)
   pr2 (constant-pointed-map A B) = refl
 
   [_→*_] : Pointed-Type l1 → Pointed-Type l2 → Pointed-Type (l1 ⊔ l2)
@@ -54,7 +54,8 @@ module _
   map-pointed-map f = pr1 f
 
   preserves-point-pointed-map :
-    (f : A →* B) → map-pointed-map f (pt-Pointed-Type A) ＝ pt-Pointed-Type B
+    (f : A →* B) →
+    map-pointed-map f (point-Pointed-Type A) ＝ point-Pointed-Type B
   preserves-point-pointed-map f = pr2 f
 ```
 
@@ -105,7 +106,7 @@ module _
 
   preserves-point-compose-pointed-map :
     (g : B →* C) (f : A →* B) →
-    (map-compose-pointed-map g f (pt-Pointed-Type A)) ＝ pt-Pointed-Type C
+    (map-compose-pointed-map g f (point-Pointed-Type A)) ＝ point-Pointed-Type C
   preserves-point-compose-pointed-map g f =
     ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
     ( preserves-point-pointed-map B C g)

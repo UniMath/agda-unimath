@@ -53,7 +53,7 @@ module _
     extensionality-Σ
       ( λ {g} q H →
           Id
-            ( H (pt-Pointed-Type A))
+            ( H (point-Pointed-Type A))
             ( preserves-point-function-pointed-Π A B f ∙
               inv (preserves-point-function-pointed-Π A B (g , q))))
       ( refl-htpy)
@@ -108,7 +108,9 @@ module _
       ( refl-htpy)
       ( ( inv (right-inv (pr2 f))) ∙
         ( ap
-          ( concat' (map-pointed-map A B f (pt-Pointed-Type A)) (inv (pr2 f)))
+          ( concat'
+            ( map-pointed-map A B f (point-Pointed-Type A))
+            ( inv (pr2 f)))
           ( ( inv (ap-id (pr2 f))) ∙
             ( inv right-unit))))
 
@@ -164,7 +166,7 @@ module _
       ( ( ap-binary (λ p q → p ∙ q) (pr2 G) (pr2 H)) ∙
         ( ( associative (pr2 f) (inv (pr2 g)) (pr2 g ∙ inv (pr2 h))) ∙
           ( ap
-            ( concat (pr2 f) (function-pointed-Π A B h (pt-Pointed-Type A)))
+            ( concat (pr2 f) (function-pointed-Π A B h (point-Pointed-Type A)))
             ( ( inv (associative (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
               ( ap
                 ( concat' (pt-Pointed-Fam A B) (inv (pr2 h)))
@@ -179,7 +181,7 @@ module _
         ( ( distributive-inv-concat (pr2 f) (inv (pr2 g))) ∙
           ( ap
             ( concat'
-              ( function-pointed-Π A B g (pt-Pointed-Type A))
+              ( function-pointed-Π A B g (point-Pointed-Type A))
               ( inv (pr2 f)))
             ( inv-inv (pr2 g)))))
 
@@ -202,7 +204,7 @@ module _
             ( concat
               ( ap (pr1 g) (pr2 f1))
               ( map-pointed-map B C g
-                ( map-pointed-map A B f2 (pt-Pointed-Type A))))
+                ( map-pointed-map A B f2 (point-Pointed-Type A))))
             ( ( ( ( ap-inv (pr1 g) (pr2 f2)) ∙
                   ( ap
                     ( concat'
@@ -217,7 +219,7 @@ module _
                 ( concat
                   ( pr2 g)
                   ( map-pointed-map B C g
-                    ( map-pointed-map A B f2 (pt-Pointed-Type A))))
+                    ( map-pointed-map A B f2 (point-Pointed-Type A))))
                 ( inv
                   ( distributive-inv-concat
                     ( ap (pr1 g) (pr2 f2))

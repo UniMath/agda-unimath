@@ -33,5 +33,5 @@ is-central-h-space :
 is-central-h-space A =
   is-equiv
     { A = type-Pointed-Type A → type-Pointed-Type A}
-    ( ev-pt-Pointed-Type A)
+    ( ev-point-Pointed-Type A)
 ```

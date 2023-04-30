@@ -415,34 +415,34 @@ module _
   where
 
   shift : (type-Ω (suspension-Pointed-Type X)) → (N-susp ＝ S-susp)
-  shift l = l ∙ (merid-susp (pt-Pointed-Type X))
+  shift l = l ∙ (merid-susp (point-Pointed-Type X))
 
   shift* :
     Ω (suspension-Pointed-Type X) →*
-    ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
+    ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
   pr1 shift* = shift
   pr2 shift* = refl
 
   unshift : (N-susp ＝ S-susp) → (type-Ω (suspension-Pointed-Type X))
-  unshift p = p ∙ inv (merid-susp (pt-Pointed-Type X))
+  unshift p = p ∙ inv (merid-susp (point-Pointed-Type X))
 
   unshift* :
-    ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X))) →*
+    ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X))) →*
     Ω (suspension-Pointed-Type X)
   pr1 unshift* = unshift
-  pr2 unshift* = right-inv (merid-susp (pt-Pointed-Type X))
+  pr2 unshift* = right-inv (merid-susp (point-Pointed-Type X))
 
   is-equiv-shift : is-equiv shift
-  is-equiv-shift = is-equiv-concat' N-susp (merid-susp (pt-Pointed-Type X))
+  is-equiv-shift = is-equiv-concat' N-susp (merid-susp (point-Pointed-Type X))
 
   pointed-equiv-shift :
     ( Ω (suspension-Pointed-Type X)) ≃*
-    ( (N-susp ＝ S-susp) , merid-susp (pt-Pointed-Type X))
+    ( (N-susp ＝ S-susp) , merid-susp (point-Pointed-Type X))
   pr1 (pr1 pointed-equiv-shift) = shift
   pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
   pr2 pointed-equiv-shift = preserves-point-pointed-map _ _ shift*
 
-  merid-susp* : X →* ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
+  merid-susp* : X →* ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
   pr1 merid-susp* = merid-susp
   pr2 merid-susp* = refl
 
@@ -456,8 +456,8 @@ module _
   counit-susp-loop-adj =
     map-inv-is-equiv
       ( up-suspension (type-Ω X) (type-Pointed-Type X))
-      ( ( pt-Pointed-Type X) ,
-        ( pt-Pointed-Type X) ,
+      ( ( point-Pointed-Type X) ,
+        ( point-Pointed-Type X) ,
         ( id))
 
   counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →* X
@@ -466,8 +466,8 @@ module _
     up-suspension-N-susp
       ( type-Ω X)
       ( type-Pointed-Type X)
-      ( ( pt-Pointed-Type X) ,
-        ( pt-Pointed-Type X) ,
+      ( ( point-Pointed-Type X) ,
+        ( point-Pointed-Type X) ,
         ( id))
 ```
 
@@ -481,34 +481,35 @@ module _
   equiv-susp-loop-adj : (suspension-Pointed-Type X →* Y) ≃ (X →* Ω Y)
   equiv-susp-loop-adj =
     ( left-unit-law-Σ-is-contr
-      ( is-contr-total-path (pt-Pointed-Type Y))
-      ( (pt-Pointed-Type Y) , refl)) ∘e
+      ( is-contr-total-path (point-Pointed-Type Y))
+      ( (point-Pointed-Type Y) , refl)) ∘e
     ( ( inv-equiv
         ( associative-Σ
           ( type-Pointed-Type Y)
-          ( λ z → (pt-Pointed-Type Y) ＝ z)
+          ( λ z → (point-Pointed-Type Y) ＝ z)
           ( λ t →
-            Σ ( type-Pointed-Type X → (pt-Pointed-Type Y) ＝ (pr1 t))
-              ( λ f → f (pt-Pointed-Type X) ＝ (pr2 t))))) ∘e
+            Σ ( type-Pointed-Type X → (point-Pointed-Type Y) ＝ (pr1 t))
+              ( λ f → f (point-Pointed-Type X) ＝ (pr2 t))))) ∘e
       ( ( equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
         ( ( associative-Σ
             ( type-Pointed-Type Y)
-            ( λ y1 → type-Pointed-Type X → (pt-Pointed-Type Y) ＝ y1)
+            ( λ y1 → type-Pointed-Type X → (point-Pointed-Type Y) ＝ y1)
             ( λ z →
-              Σ ( Id (pt-Pointed-Type Y) (pr1 z))
-                ( λ x → pr2 z (pt-Pointed-Type X) ＝ x))) ∘e
+              Σ ( Id (point-Pointed-Type Y) (pr1 z))
+                ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
           ( ( inv-equiv
               ( right-unit-law-Σ-is-contr
                 ( λ ( z : Σ ( type-Pointed-Type Y)
                             ( λ y1 →
-                              type-Pointed-Type X → pt-Pointed-Type Y ＝ y1)) →
-                  is-contr-total-path ((pr2 z) (pt-Pointed-Type X))))) ∘e
+                              type-Pointed-Type X →
+                              point-Pointed-Type Y ＝ y1)) →
+                  is-contr-total-path ((pr2 z) (point-Pointed-Type X))))) ∘e
             ( ( left-unit-law-Σ-is-contr
-                ( is-contr-total-path' (pt-Pointed-Type Y))
-                ( (pt-Pointed-Type Y) , refl)) ∘e
+                ( is-contr-total-path' (point-Pointed-Type Y))
+                ( (point-Pointed-Type Y) , refl)) ∘e
               ( ( equiv-right-swap-Σ) ∘e
                 ( equiv-Σ-equiv-base
-                  ( λ c → (pr1 c) ＝ (pt-Pointed-Type Y))
+                  ( λ c → (pr1 c) ＝ (point-Pointed-Type Y))
                   ( equiv-up-suspension
                     ( type-Pointed-Type X)
                     ( type-Pointed-Type Y)))))))))

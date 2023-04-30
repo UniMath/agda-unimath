@@ -45,7 +45,7 @@ module _
 
   shape-∞-Group : classifying-type-∞-Group
   shape-∞-Group =
-    pt-Pointed-Type classifying-pointed-type-∞-Group
+    point-Pointed-Type classifying-pointed-type-∞-Group
 
   is-0-connected-classifying-type-∞-Group :
     is-0-connected classifying-type-∞-Group

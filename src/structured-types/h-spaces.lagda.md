@@ -31,7 +31,7 @@ H-space, then `λ x → μ a x` and `λ x → μ x a` are equivalences for each 
 unit-laws-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
-unit-laws-mul-Pointed-Type A μ = unit-laws μ (pt-Pointed-Type A)
+unit-laws-mul-Pointed-Type A μ = unit-laws μ (point-Pointed-Type A)
 
 unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
@@ -47,7 +47,7 @@ h-space-structure :
   {l : Level} (A : Pointed-Type l) → UU l
 h-space-structure A =
   Σ ( (x y : type-Pointed-Type A) → type-Pointed-Type A)
-    ( λ μ → unit-laws μ (pt-Pointed-Type A))
+    ( λ μ → unit-laws μ (point-Pointed-Type A))
 
 H-Space : (l : Level) → UU (lsuc l)
 H-Space l = Σ (Pointed-Type l) h-space-structure
@@ -63,7 +63,7 @@ module _
   type-H-Space = type-Pointed-Type pointed-type-H-Space
 
   pt-H-Space : type-H-Space
-  pt-H-Space = pt-Pointed-Type pointed-type-H-Space
+  pt-H-Space = point-Pointed-Type pointed-type-H-Space
 
   mul-H-Space : type-H-Space → type-H-Space → type-H-Space
   mul-H-Space = pr1 (pr2 A)

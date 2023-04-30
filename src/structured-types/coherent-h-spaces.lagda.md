@@ -42,7 +42,7 @@ coherent-unit-laws-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
 coherent-unit-laws-mul-Pointed-Type A μ =
-  coherent-unit-laws μ (pt-Pointed-Type A)
+  coherent-unit-laws μ (point-Pointed-Type A)
 
 coherent-unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
@@ -69,7 +69,7 @@ module _
   type-Coherent-H-Space = type-Pointed-Type pointed-type-Coherent-H-Space
 
   unit-Coherent-H-Space : type-Coherent-H-Space
-  unit-Coherent-H-Space = pt-Pointed-Type pointed-type-Coherent-H-Space
+  unit-Coherent-H-Space = point-Pointed-Type pointed-type-Coherent-H-Space
 
   coherent-unital-mul-Coherent-H-Space :
     coherent-unital-mul-Pointed-Type pointed-type-Coherent-H-Space
@@ -136,17 +136,17 @@ module _
   {l : Level} (A : Pointed-Type l)
   where
 
-  pointed-section-ev-pt-Pointed-Type : UU l
-  pointed-section-ev-pt-Pointed-Type =
+  pointed-section-ev-point-Pointed-Type : UU l
+  pointed-section-ev-point-Pointed-Type =
     pointed-section-Pointed-Type
       ( endo-Pointed-Type (type-Pointed-Type A))
       ( A)
-      ( pair (ev-pt-Pointed-Type A) refl)
+      ( pair (ev-point-Pointed-Type A) refl)
 
-compute-pointed-section-ev-pt-Pointed-Type :
+compute-pointed-section-ev-point-Pointed-Type :
   {l : Level} (A : Pointed-Type l) →
-  pointed-section-ev-pt-Pointed-Type A ≃ coherent-unital-mul-Pointed-Type A
-compute-pointed-section-ev-pt-Pointed-Type (pair A a) =
+  pointed-section-ev-point-Pointed-Type A ≃ coherent-unital-mul-Pointed-Type A
+compute-pointed-section-ev-point-Pointed-Type (pair A a) =
   ( equiv-tot
     ( λ μ →
       ( equiv-Σ
