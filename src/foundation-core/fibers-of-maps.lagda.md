@@ -350,7 +350,7 @@ module _
   pr2 inv-equiv-compute-fib-compose = is-equiv-inv-map-compute-fib-compose
 ```
 
-### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.
+### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map
 
 ```agda
 module _

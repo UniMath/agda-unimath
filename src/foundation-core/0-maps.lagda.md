@@ -127,7 +127,7 @@ module _
     is-0-map-tot = is-trunc-map-tot zero-𝕋
 ```
 
-### For any type family over the codomain, a 0-map induces a 0-map on total spaces.
+### For any type family over the codomain, a 0-map induces a 0-map on total spaces
 
 In other words, 0-maps are stable under pullbacks. We will come to this point
 when we introduce homotopy pullbacks.
@@ -142,7 +142,7 @@ module _
     is-0-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base zero-𝕋 C
 ```
 
-### The functorial action of `Σ` preserves 0-maps.
+### The functorial action of `Σ` preserves 0-maps
 
 ```agda
 module _

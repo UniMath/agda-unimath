@@ -323,7 +323,7 @@ pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
           ( p))))
 ```
 
-### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`
 
 ```agda
 div-quotient-div-div-ℕ :
@@ -435,7 +435,7 @@ pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
           by inv (eq-quotient-div-ℕ d a H))
 ```
 
-### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero`. If `d`divides`b/c`then`d`divides`a/c`.
+### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero. If `d` divides `b/c` then `d` divides `a/c`.
 
 ```agda
 div-quotient-div-div-quotient-div-ℕ :

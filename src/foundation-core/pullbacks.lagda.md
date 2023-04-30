@@ -640,7 +640,7 @@ abstract
         ( is-pb-cc'))
 ```
 
-### A family of maps over a base map induces a pullback square if and only if it is a family of equivalences.
+### A family of maps over a base map induces a pullback square if and only if it is a family of equivalences
 
 ```agda
 module _

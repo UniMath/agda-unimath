@@ -119,7 +119,7 @@ triangle-cocone-sequence :
 triangle-cocone-sequence A c = pr2 c
 ```
 
-### We characterize the identity type of cocone-sequence.
+### We characterize the identity type of `cocone-sequence`
 
 ```agda
 naturality-htpy-cocone-sequence :

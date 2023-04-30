@@ -54,7 +54,8 @@ Meet-Sup-Lattice l1 l2 l3 =
   Σ (Poset l1 l2) (is-meet-sup-lattice-Poset l3)
 ```
 
-## We need to provide the appropriate components to state the infinite distributive law.
+We need to provide the appropriate components to state the infinite distributive
+law.
 
 ```agda
 module _
@@ -136,9 +137,7 @@ module _
   sup-Meet-Sup-Lattice I f = pr1 (is-sup-lattice-Meet-Sup-Lattice I f)
 ```
 
-## Characterize the identity type.
-
-## We now state the infinite distributive law
+## Statement of the infinite distributive law
 
 ```agda
 distributive-law-meet-sup-lattice :
@@ -152,5 +151,3 @@ distributive-law-meet-sup-lattice l1 l2 l3 A =
 
 This notation is not easy on the eye, but recall, in more familiar notation the
 identity expressed here is: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
-
-Show that the identity is a prop.

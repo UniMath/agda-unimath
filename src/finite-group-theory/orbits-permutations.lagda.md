@@ -401,7 +401,7 @@ module _
       ( mult-has-finite-orbits-permutation k))
 ```
 
-### For finite types, the number of orbits-permutation of a permutation is finite.
+### For finite types, the number of orbits-permutation of a permutation is finite
 
 ```agda
 module _

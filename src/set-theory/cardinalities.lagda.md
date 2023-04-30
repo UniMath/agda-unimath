@@ -151,7 +151,8 @@ transitive-≤-cardinality {l1} {l2} {l3} X Y Z =
 
 ## Properties
 
-### Given two sets `X` and `Y`, the type `# X ＝ # Y` is equivalent to the type of mere equivalences from `X` to `Y`.
+For sets, the type `# X ＝ # Y` is equivalent to the type of mere equivalences
+from `X` to `Y`.
 
 ```agda
 is-effective-cardinality :
@@ -162,7 +163,8 @@ is-effective-cardinality X Y =
   ( is-effective-unit-trunc-Set (Set _) X Y)
 ```
 
-### Using this and assuming excluded middle , we can show `≤-cardinality` is a partial order by showing that it is antisymmetric.
+Using this and assuming excluded middle , we can show `≤-cardinality` is a
+partial order by showing that it is antisymmetric.
 
 ```agda
 antisymmetric-≤-cardinality :

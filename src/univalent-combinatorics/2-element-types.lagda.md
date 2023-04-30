@@ -382,7 +382,7 @@ eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
 
-### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type.
+### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type
 
 ```agda
 module _
@@ -406,7 +406,7 @@ module _
   pr2 Aut-2-Element-Type = has-two-elements-Aut-2-Element-Type
 ```
 
-### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence.
+### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence
 
 ```agda
 module _
@@ -752,7 +752,7 @@ is-coprod-Σ-Fin-two-ℕ P =
   ( right-distributive-Σ-coprod (Fin 1) unit P)
 ```
 
-### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`.
+### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`
 
 ```agda
 module _

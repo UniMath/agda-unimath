@@ -104,7 +104,7 @@ module _
   set-ext-pseudo-cumulative-hierarchy = pr2 (pr2 (pr2 V))
 ```
 
-### The induction principle of the cumulative hierarchy together with its computation rule.
+### The induction principle and computation rule of the cumulative hierarchy
 
 ```agda
 module _
@@ -185,7 +185,7 @@ module _
 
 ## Properties
 
-### Every element of the cumulative hierarchy is given by a function into the cumulative hierarchy.
+### Every element of the cumulative hierarchy is given by a function into the cumulative hierarchy
 
 ```agda
   underlying-function-cumulative-hierarchy :
@@ -236,7 +236,7 @@ module _
       ( λ _ g _ _ _ _ _ → eq-is-prop (σ (set-pseudo-cumulative-hierarchy V g)))
 ```
 
-### The recursion principle of the cumulative hierarchy together with its computation rule.
+### The recursion principle and its computation rule for the cumulative hierarchy
 
 ```agda
   recursion-principle-cumulative-hierarchy :

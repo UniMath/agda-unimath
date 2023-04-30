@@ -472,7 +472,7 @@ module _
           ( F t a))
 ```
 
-#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality.
+#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality
 
 ```agda
 has-decidable-equality-type-Surjection-Into-Set :

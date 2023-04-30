@@ -188,7 +188,7 @@ eq-quotient-div-is-one-ℤ .one-ℤ x refl H =
         ( H)))
 ```
 
-### If `k` divides `x` and `k` is 0 then `x` is `0`
+### If `k` divides `x` and `k` is `0` then `x` is `0`
 
 ```agda
 is-zero-is-zero-div-ℤ : (x k : ℤ) → div-ℤ k x → is-zero-ℤ k → is-zero-ℤ x

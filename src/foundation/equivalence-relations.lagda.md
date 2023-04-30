@@ -541,7 +541,7 @@ issec-eq-rel-Surjection-Into-Set f =
     ( equiv-surjection-into-set-eq-rel-Surjection-Into-Set f)
 ```
 
-#### The type of equivalence relations on `A` is equivalent to the type of surjections from `A` into a set.
+#### The type of equivalence relations on `A` is equivalent to the type of surjections from `A` into a set
 
 ```agda
 is-equiv-surjection-into-set-Eq-Rel :
@@ -589,7 +589,7 @@ module _
   pr2 is-surjective-and-effective-id-Id-Eq-Rel a b = id-equiv
 ```
 
-### For any set ̀A`, `id` is a set quotient for the equality relation.
+### For any set `A`, `Id` is a set quotient for the equality relation
 
 ```agda
 module _

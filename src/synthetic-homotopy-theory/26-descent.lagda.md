@@ -325,7 +325,7 @@ to the proofs of those parts:
 - Proof of (4) → (5): `Ind-pushout-dependent-universal-property-pushout`
 - Proof of (5) → (4): `dependent-universal-property-pushout-Ind-pushout`
 
-### Proof of Theorem 18.1.4, (5) implies (4).
+### Proof of Theorem 18.1.4, (5) implies (4)
 
 ```agda
 dependent-naturality-square :
@@ -367,7 +367,7 @@ dependent-universal-property-pushout-Ind-pushout f g c ind-c l P =
       ( pr2 (ind-c l P) (dep-cocone-map f g c P h))))
 ```
 
-### Proof of Theorem 18.1.4, (4) implies (5).
+### Proof of Theorem 18.1.4, (4) implies (5)
 
 ```agda
 Ind-pushout-dependent-universal-property-pushout :
@@ -379,7 +379,7 @@ Ind-pushout-dependent-universal-property-pushout f g c dup-c l P =
   pr1 (dup-c l P)
 ```
 
-### Proof of Theorem 18.1.4, (4) implies (3).
+### Proof of Theorem 18.1.4, (4) implies (3)
 
 ```agda
 triangle-dependent-pullback-property-pushout :
@@ -420,7 +420,7 @@ dependent-pullback-property-dependent-universal-property-pushout
     ( I l P)
 ```
 
-### Proof of Theorem 18.1.4, (4) implies (3).
+### Proof of Theorem 18.1.4, (4) implies (3)
 
 ```agda
 dependent-universal-property-dependent-pullback-property-pushout :
@@ -445,7 +445,7 @@ dependent-universal-property-dependent-pullback-property-pushout
         ( λ h' → funext (λ x → tr P (H x) (h (f x))) (λ x → h' (g x)))))
 ```
 
-### Proof of Theorem 18.1.4, (3) implies (2).
+### Proof of Theorem 18.1.4, (3) implies (2)
 
 ```agda
 concat-eq-htpy :
@@ -503,7 +503,7 @@ pullback-property-dependent-pullback-property-pushout
     ( dpb (λ x → Y))
 ```
 
-### Proof of Theorem 18.1.4, (2) implies (3).
+### Proof of Theorem 18.1.4, (2) implies (3)
 
 We first define the family of lifts, which is indexed by maps $Y → X$.
 

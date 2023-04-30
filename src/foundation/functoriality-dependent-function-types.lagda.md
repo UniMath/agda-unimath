@@ -117,7 +117,7 @@ id-map-equiv-Π :
 id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ a → id-equiv) h)
 ```
 
-### The fibers of `map-Π'`.
+### The fibers of `map-Π'`
 
 ```agda
 equiv-fib-map-Π' :

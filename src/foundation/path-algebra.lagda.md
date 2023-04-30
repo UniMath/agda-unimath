@@ -515,7 +515,7 @@ ways to concatenate in quadruple identity types. We name the three non-standard
 concatenations in quadruple identity types i-, j-, and k-concatenation, after
 the standard names for the quaternions i, j, and k.
 
-### Concatination of four paths.
+### Concatenation of four paths
 
 #### The standard concatination
 

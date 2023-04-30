@@ -233,7 +233,7 @@ module _
     unit-trunc-Prop (refl-Eq-unordered-pair p)
 ```
 
-### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`.
+### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`
 
 ```agda
 is-commutative-standard-unordered-pair :

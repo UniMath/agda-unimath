@@ -29,7 +29,7 @@ tuple-types l n = Fin n → UU l
 
 ## Properties
 
-### The tuple of types `A j` for `i ≠ j`, given `i`.
+### The tuple of types `A j` for `i ≠ j`, given `i`
 
 ```agda
 {-

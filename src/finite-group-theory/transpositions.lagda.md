@@ -735,7 +735,7 @@ module _
             ( left-inverse-law-equiv e)))
 ```
 
-### For all `n : ℕ`, for each transposition of `Fin n`, there exists a matching transposition in `Fin (succ-ℕ n)`.
+### For all `n : ℕ` and for each transposition of `Fin n`, there exists a matching transposition in `Fin (succ-ℕ n)`
 
 ```agda
 Fin-succ-Fin-transposition :

@@ -43,7 +43,7 @@ module _
   eq-htpy-retr g h = eq-htpy-hom-coslice g h
 ```
 
-### If the left factor of a composite has a retraction, then the type of retractions of the right factor is a retract of the type of retractions of the composite.
+### If the left factor of a composite has a retraction, then the type of retractions of the right factor is a retract of the type of retractions of the composite
 
 ```agda
 isretr-retraction-compose-htpy :

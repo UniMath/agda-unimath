@@ -441,7 +441,7 @@ abstract
       n f (map-equiv f (inr star)) refl y (map-equiv f y) refl
 ```
 
-### Every permutation of a type equipped with a counting can be described as a product of transpositions.
+### Every permutation of a type equipped with a counting can be described as a product of transpositions
 
 ```agda
 module _

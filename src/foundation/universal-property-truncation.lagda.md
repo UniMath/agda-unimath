@@ -546,6 +546,7 @@ module _
 ### Set truncations of Σ-types
 
 ```agda
+{-
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
@@ -606,11 +607,13 @@ module _
       is-equiv-htpy-equiv
         ( equiv-trunc-Σ-Set)
         ( htpy-map-equiv-trunc-Σ-Set)
+-}
 ```
 
 ### `trunc-Set` distributes over products
 
 ```agda
+{-
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
@@ -654,11 +657,13 @@ module _
     ( map-prod unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-prod-Set =
     pr2 (center distributive-trunc-prod-Set)
+-}
 ```
 
 ### `trunc-Set` distributes over Π-types indexed by `Fin`
 
 ```agda
+{-
 abstract
   distributive-trunc-Π-Fin-Set :
     {l : Level} (k : ℕ) (A : Fin k → UU l) →
@@ -907,5 +912,5 @@ module _
     ( map-Π (λ x → unit-trunc-Set))
   triangle-distributive-trunc-Π-is-finite-Set =
     pr2 (center distributive-trunc-Π-is-finite-Set)
-    -}
+-}
 ```

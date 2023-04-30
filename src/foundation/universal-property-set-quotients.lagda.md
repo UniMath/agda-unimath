@@ -338,7 +338,7 @@ module _
       ( pr1 H)
 ```
 
-### Any set quotient `q : A → B` of an equivalence relation `R` on `A` is surjective.
+### Any set quotient `q : A → B` of an equivalence relation `R` on `A` is surjective
 
 ```agda
 module _

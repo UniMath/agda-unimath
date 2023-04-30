@@ -45,7 +45,7 @@ segment of `n`.
 
 ## Definition
 
-### The standard finite types in universe level zero.
+### The standard finite types in universe level zero
 
 ```agda
 Fin-Set : ℕ → Set lzero

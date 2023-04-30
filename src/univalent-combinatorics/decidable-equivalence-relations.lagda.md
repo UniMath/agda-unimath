@@ -170,7 +170,7 @@ module _
 
 ## Properties
 
-#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a finite type.
+#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a finite type
 
 ```agda
 equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 :

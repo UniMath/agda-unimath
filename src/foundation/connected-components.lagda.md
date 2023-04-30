@@ -88,7 +88,7 @@ pr1 (connected-component-∞-Group A a) = connected-component-Pointed-Type A a
 pr2 (connected-component-∞-Group A a) = is-0-connected-connected-component A a
 ```
 
-### If `A` is (k+1)-truncated, then the connected component of `a` in `A` is (k+1)-truncated.
+### If `A` is $(k+1)$-truncated, then the connected component of `a` in `A` is $(k+1)$-truncated
 
 ```agda
 is-trunc-connected-component :

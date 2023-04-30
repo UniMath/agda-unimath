@@ -66,7 +66,7 @@ equiv-eq-maybe-structure Y .Y refl = id-equiv-maybe-structure Y
 
 ## Properties
 
-### If `f : Maybe X → Maybe Y` is an injective map and f (inl x) is an exception, then f exception is not an exception.
+### If `f : Maybe X → Maybe Y` is an injective map and `f (inl x)` is an exception, then `f exception` is not an exception
 
 ```agda
 abstract
@@ -378,7 +378,7 @@ pr1 (equiv-equiv-Maybe e) = map-equiv-equiv-Maybe e
 pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
 ```
 
-### For any set `X`, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception.
+### For any set `X`, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception
 
 ```agda
 module _

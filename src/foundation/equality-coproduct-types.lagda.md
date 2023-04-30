@@ -50,7 +50,7 @@ module _
 
 ## Properties
 
-### The type `Eq-coprod x y` is equivalent to `Id x y`.
+### The type `Eq-coprod x y` is equivalent to `Id x y`
 
 We will use the fundamental theorem of identity types.
 

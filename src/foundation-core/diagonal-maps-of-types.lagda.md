@@ -49,7 +49,7 @@ ap-diagonal :
 ap-diagonal refl = refl
 ```
 
-### If the diagonal of `A` is an equivalence, then `A` is a proposition.
+### If the diagonal of `A` is an equivalence, then `A` is a proposition
 
 ```agda
 module _

@@ -131,7 +131,7 @@ is-prop-is-zero-or-one-Fin-two-ℕ x =
     ( is-prop-is-one-Fin 1 x)
 ```
 
-### Every element in the standard two-element type is either 0 or 1.
+### Every element in the standard two-element type is either 0 or 1
 
 ```agda
 is-contr-is-zero-or-one-Fin-two-ℕ :

@@ -146,7 +146,7 @@ module _
     map-inv-equiv (extensionality-sec s t) (pair H K)
 ```
 
-### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite.
+### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite
 
 ```agda
 isretr-section-compose-htpy :
