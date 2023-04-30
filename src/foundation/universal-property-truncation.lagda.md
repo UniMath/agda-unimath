@@ -410,7 +410,7 @@ map-id-trunc-Set {l1} {A} =
         { pair (map-trunc-Set id) (naturality-trunc-Set id)}
         { pair id refl-htpy}))
 
-map--trunc-Set :
+map-comp-trunc-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-trunc-Set (g ∘ f) ~ (map-trunc-Set g ∘ map-trunc-Set f)
