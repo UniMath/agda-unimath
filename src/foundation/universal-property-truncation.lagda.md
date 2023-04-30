@@ -420,11 +420,11 @@ map-id-trunc-Set {l1} {A} =
         { pair (map-trunc-Set id) (naturality-trunc-Set id)}
         { pair id refl-htpy}))
 
-map-comp-trunc-Set :
+map-compose-trunc-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-trunc-Set (g ∘ f) ~ (map-trunc-Set g ∘ map-trunc-Set f)
-map-comp-trunc-Set {A = A} {C = C} g f =
+map-compose-trunc-Set {A = A} {C = C} g f =
   htpy-eq
     ( ap pr1
       ( eq-is-contr
@@ -459,12 +459,12 @@ abstract
     pair
       ( pair
         ( map-trunc-Set (pr1 (pr1 H)))
-        ( ( inv-htpy (map-comp-trunc-Set f (pr1 (pr1 H)))) ∙h
+        ( ( inv-htpy (map-compose-trunc-Set f (pr1 (pr1 H)))) ∙h
           ( ( htpy-trunc-Set (pr2 (pr1 H))) ∙h
             ( map-id-trunc-Set))))
       ( pair
         ( map-trunc-Set (pr1 (pr2 H)))
-        ( ( inv-htpy (map-comp-trunc-Set (pr1 (pr2 H)) f)) ∙h
+        ( ( inv-htpy (map-compose-trunc-Set (pr1 (pr2 H)) f)) ∙h
           ( ( htpy-trunc-Set (pr2 (pr2 H))) ∙h
             ( map-id-trunc-Set))))
 
