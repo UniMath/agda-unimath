@@ -463,23 +463,23 @@ is-equiv-equiv' {f = f} {g} i j H K =
     ( is-equiv-map-equiv i)
 ```
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
-  where
+We assumed a commuting square
 
-  {-
-
-  We assumed a commuting square
-
+```md
           h
     A --------> C
     |           |
    f|           |g
     V           V
     B --------> D
-          i                                                                   -}
+          i
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
+  where
 
   abstract
     is-equiv-top-is-equiv-left-square :

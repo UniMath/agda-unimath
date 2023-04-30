@@ -59,9 +59,11 @@ dep-cocone-map f g c P h =
   ( λ a → h (pr1 c a)) ,
   ( λ b → h (pr1 (pr2 c) b)) ,
   ( λ s → apd h (pr2 (pr2 c) s))
+```
 
-{- Definition 18.1.1 The induction principle of pushouts -}
+### Definition 18.1.1 The induction principle of pushouts
 
+```agda
 Ind-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) →
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
@@ -69,18 +71,24 @@ Ind-pushout :
   UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
 Ind-pushout l {X = X} f g c =
   (P : X → UU l) → sec (dep-cocone-map f g c P)
+```
 
-{- Definition 18.1.2 The dependent universal property of pushouts -}
+### Definition 18.1.2 The dependent universal property of pushouts
 
+```agda
 dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) → UU _
 dependent-universal-property-pushout l f g {X} c =
   (P : X → UU l) → is-equiv (dep-cocone-map f g c P)
+```
 
-{- Remark 18.1.3. We compute the identity type of dep-cocone in order to
-   express the computation rules of the induction principle for pushouts. -}
+### Remark 18.1.3. Computation of the identity type of `dep-cocone`
 
+We compute the identity type of `dep-cocone` in order to express the computation
+rules of the induction principle for pushouts.
+
+```agda
 coherence-htpy-dep-cocone :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
@@ -253,12 +261,14 @@ abstract
         ( λ k → is-equiv-htpy-dep-cocone-eq f g c P
           ( dep-cocone-map f g c P k) h))
       ( is-contr-map-is-equiv (dup-c P) h)
+```
 
-{- This finishes the formalization of remark 18.1.3. -}
+This finishes the formalization of remark 18.1.3.
 
-{- Before we state the main theorem of this section, we also state a dependent
-   version of the pullback property of pushouts. -}
+Before we state the main theorem of this section, we also state a dependent
+version of the pullback property of pushouts.
 
+```agda
 cone-dependent-pullback-property-pushout :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
@@ -288,46 +298,43 @@ dependent-pullback-property-pushout l {S} {A} {B} f g {X}
     ( λ (h : (a : A) → P (i a)) → λ s → tr P (H s) (h (f s)))
     ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
     ( cone-dependent-pullback-property-pushout f g (pair i (pair j H)) P)
+```
 
-{- Theorem 18.1.4 The following properties are all equivalent:
+## Theorem 18.1.4
 
-   1. universal-property-pushout
-   2. pullback-property-pushout
-   3. dependent-pullback-property-pushout
-   4. dependent-universal-property-pushout
-   5. Ind-pushout
+    The following properties are all equivalent:
 
-   We have already shown that 1 ↔ 2. Therefore we will first show that
-   3 ↔ 4 ↔ 5. Finally, we will show that 2 ↔ 3. Here are the precise references
-   to the proofs of those parts:
+    1. universal-property-pushout
+    2. pullback-property-pushout
+    3. dependent-pullback-property-pushout
+    4. dependent-universal-property-pushout
+    5. Ind-pushout
 
-   Proof of 1 → 2.
-   pullback-property-pushout-universal-property-pushout
+We have already shown that 1 ↔ 2. Therefore we will first show that 3 ↔ 4 ↔ 5.
+Finally, we will show that 2 ↔ 3. Here are the precise references to the proofs
+of those parts:
 
-   Proof of 2 → 1
-   universal-property-pushout-pullback-property-pushout
+Proof of 1 → 2. `pullback-property-pushout-universal-property-pushout`
 
-   Proof of 2 → 3
-   dependent-pullback-property-pullback-property-pushout
+Proof of 2 → 1 `universal-property-pushout-pullback-property-pushout`
 
-   Proof of 3 → 2
-   pullback-property-dependent-pullback-property-pushout
+Proof of 2 → 3 `dependent-pullback-property-pullback-property-pushout`
 
-   Proof of 3 → 4
-   dependent-universal-property-dependent-pullback-property-pushout
+Proof of 3 → 2 `pullback-property-dependent-pullback-property-pushout`
 
-   Proof of 4 → 3
-   dependent-pullback-property-dependent-universal-property-pushout
+Proof of 3 → 4
+`dependent-universal-property-dependent-pullback-property-pushout`
 
-   Proof of 4 → 5
-   Ind-pushout-dependent-universal-property-pushout
+Proof of 4 → 3
+`dependent-pullback-property-dependent-universal-property-pushout`
 
-   Proof of 5 → 4
-   dependent-universal-property-pushout-Ind-pushout
-   -}
+Proof of 4 → 5 `Ind-pushout-dependent-universal-property-pushout`
 
-{- Proof of Theorem 18.1.4, (v) implies (iv). -}
+Proof of 5 → 4 `dependent-universal-property-pushout-Ind-pushout`
 
+### Proof of Theorem 18.1.4, (v) implies (iv).
+
+```agda
 dependent-naturality-square :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f f' : (x : A) → B x)
   {x x' : A} (p : Id x x') {q : Id (f x) (f' x)} {q' : Id (f x') (f' x')} →
@@ -365,9 +372,11 @@ dependent-universal-property-pushout-Ind-pushout f g c ind-c l P =
       ( ind-pushout f g c (ind-c l) P (dep-cocone-map f g c P h))
       ( h)
       ( pr2 (ind-c l P) (dep-cocone-map f g c P h))))
+```
 
-{- Proof of Theorem 18.1.4, (iv) implies (v). -}
+### Proof of Theorem 18.1.4, (iv) implies (v).
 
+```agda
 Ind-pushout-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
@@ -375,9 +384,11 @@ Ind-pushout-dependent-universal-property-pushout :
   ((l : Level) → Ind-pushout l f g c)
 Ind-pushout-dependent-universal-property-pushout f g c dup-c l P =
   pr1 (dup-c l P)
+```
 
-{- Proof of Theorem 18.1.4, (iv) implies (iii). -}
+### Proof of Theorem 18.1.4, (iv) implies (iii).
 
+```agda
 triangle-dependent-pullback-property-pushout :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
@@ -414,9 +425,11 @@ dependent-pullback-property-dependent-universal-property-pushout
       ( λ h → is-equiv-tot-is-fiberwise-equiv
         ( λ h' → funext (λ x → tr P (H x) (h (f x))) (λ x → h' (g x)))))
     ( I l P)
+```
 
-{- Proof of Theorem 18.1.4, (iv) implies (iii). -}
+### Proof of Theorem 18.1.4, (iv) implies (iii).
 
+```agda
 dependent-universal-property-dependent-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
@@ -437,9 +450,11 @@ dependent-universal-property-dependent-pullback-property-pushout
     ( is-equiv-tot-is-fiberwise-equiv
       ( λ h → is-equiv-tot-is-fiberwise-equiv
         ( λ h' → funext (λ x → tr P (H x) (h (f x))) (λ x → h' (g x)))))
+```
 
-{- Proof of Theorem 18.1.4, (iii) implies (ii). -}
+### Proof of Theorem 18.1.4, (iii) implies (ii).
 
+```agda
 concat-eq-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
   (H : f ~ g) (K : g ~ h) → Id (eq-htpy (H ∙h K)) ((eq-htpy H) ∙ (eq-htpy K))
@@ -493,11 +508,17 @@ pullback-property-dependent-pullback-property-pushout
               ( λ s → inv (tr-triv (H s) (h (i (f s)))))
               ( λ s → apd h (H s)))))))
     ( dpb (λ x → Y))
+```
 
-{- Proof of Theorem 18.1.4, (ii) implies (iii). -}
+### Proof of Theorem 18.1.4, (ii) implies (iii).
 
-{- We first define the family of lifts, which is indexed by maps Y → X. -}
+```agda
 
+```
+
+### We first define the family of lifts, which is indexed by maps $Y → X$.
+
+```agda
 fam-lifts :
   {l1 l2 l3 : Level} (Y : UU l1) {X : UU l2} (P : X → UU l3) →
   (Y → X) → UU (l1 ⊔ l3)
@@ -540,20 +561,23 @@ abstract
     compute-htpy f
       ( λ g H → TR-EQ-HTPY-FAM-LIFTS P h H)
       ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
+```
 
-{- One of the basic operations on lifts is precomposition by an ordinary
-   function. -}
+One of the basic operations on lifts is precomposition by an ordinary function.
 
+```agda
 precompose-lifts :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) → (f : A → B) → (h : B → X) →
   (fam-lifts B P h) → (fam-lifts A P (h ∘ f))
 precompose-lifts P f h h' a = h' (f a)
+```
 
-{- Given two homotopic maps, their precomposition functions have different
-   codomains. However, there is a commuting triangle. We obtain this triangle
-   by homotopy induction. -}
+Given two homotopic maps, their precomposition functions have different
+codomains. However, there is a commuting triangle. We obtain this triangle by
+homotopy induction.
 
+```agda
 TRIANGLE-PRECOMPOSE-LIFTS :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   ( P : X → UU l4) {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -585,13 +609,15 @@ compute-triangle-precompose-lifts :
     ( triangle-precompose-lifts-refl-htpy P f)
 compute-triangle-precompose-lifts P f =
   compute-htpy f
-    ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
+    ( λ g → TRIANGLE-PRECOMPOSE-LIFTS P)
     ( triangle-precompose-lifts-refl-htpy P f)
+```
 
-{- There is a similar commuting triangle with the computed transport function.
-   This time we don't use homotopy induction to construct the homotopy. We
-   give an explicit definition instead. -}
+There is a similar commuting triangle with the computed transport function. This
+time we don't use homotopy induction to construct the homotopy. We give an
+explicit definition instead.
 
+```agda
 triangle-precompose-lifts' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) {f g : A → B} (H : f ~ g) → (h : B → X) →
@@ -605,10 +631,12 @@ compute-triangle-precompose-lifts' :
   ( triangle-precompose-lifts' P (refl-htpy' f) h) ~
   ( refl-htpy' ( precompose-lifts P f h))
 compute-triangle-precompose-lifts' P f h k = eq-htpy-refl-htpy _
+```
 
-{- There is a coherence between the two commuting triangles. This coherence
-   is again constructed by homotopy induction. -}
+There is a coherence between the two commuting triangles. This coherence is
+again constructed by homotopy induction.
 
+```agda
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -679,11 +707,13 @@ coherence-square-map-inv-distributive-Π-Σ :
     ( map-inv-distributive-Π-Σ)
     ( λ h → h ∘ f)
 coherence-square-map-inv-distributive-Π-Σ P f = refl-htpy
+```
 
-{- Our goal is now to produce a homotopy between (precompose-total-lifts P f)
-   and (precompose-total-lifts P g) for homotopic maps f and g, and a coherence
-   filling a cilinder. -}
+Our goal is now to produce a homotopy between `precompose-total-lifts P f` and
+`precompose-total-lifts P g` for homotopic maps `f` and `g`, and a coherence
+filling a cylinder.
 
+```agda
 HTPY-PRECOMPOSE-TOTAL-LIFTS :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) {f g : A → B} (H : f ~ g) →
@@ -700,10 +730,12 @@ htpy-precompose-total-lifts {A = A} {B} P {f} {g} H =
     ( λ h → eq-htpy (h ·l H))
     ( precompose-lifts P f)
     ( triangle-precompose-lifts P H)
+```
 
-{- We show that when htpy-precompose-total-lifts is applied to refl-htpy, it
-   computes to refl-htpy. -}
+We show that when `htpy-precompose-total-lifts` is applied to `refl-htpy`, it
+computes to `refl-htpy`.
 
+```agda
 tr-id-left-subst :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {x y : A}
   (p : Id x y) (b : B) → (q : Id (f x) b) →
@@ -869,11 +901,17 @@ dependent-pullback-property-pullback-property-pushout
       ( pair refl-htpy
         ( right-unit-htpy ∙h (coherence-triangle-precompose-lifts P H id))))
     ( is-pullback-cone-family-dependent-pullback-property f g c pullback-c P id)
+```
 
-{- This concludes the proof of Theorem 18.1.4. -}
+### This concludes the proof of Theorem 18.1.4.
 
-{- We give some further useful implications -}
+```agda
 
+```
+
+### We give some further useful implications
+
+```agda
 dependent-universal-property-universal-property-pushout :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X) →
@@ -886,9 +924,11 @@ dependent-universal-property-universal-property-pushout f g c up-X =
         ( up-X l)))
 
 -- Section 16.2 Families over pushouts
+```
 
-{- Definition 18.2.1 -}
+### Definition 18.2.1
 
+```agda
 Fam-pushout :
   {l1 l2 l3 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
@@ -896,9 +936,11 @@ Fam-pushout l {S} {A} {B} f g =
   Σ ( A → UU l)
     ( λ PA → Σ (B → UU l)
       ( λ PB → (s : S) → PA (f s) ≃ PB (g s)))
+```
 
-{- We characterize the identity type of Fam-pushout. -}
+### We characterize the identity type of Fam-pushout.
 
+```agda
 coherence-equiv-Fam-pushout :
   { l1 l2 l3 l l' : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B}
@@ -1003,11 +1045,17 @@ isretr-eq-equiv-Fam-pushout :
     ( equiv-Fam-pushout-eq {P = P} {Q})) ~ id
 isretr-eq-equiv-Fam-pushout {P = P} {Q} =
   isretr-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
+```
 
-{- This concludes the characterization of the identity type of Fam-pushout. -}
+### This concludes the characterization of the identity type of Fam-pushout.
 
-{- Definition 18.2.2 -}
+```agda
 
+```
+
+### Definition 18.2.2
+
+```agda
 desc-fam :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
@@ -1018,9 +1066,11 @@ desc-fam c P =
     ( pair
       ( P ∘ (pr1 (pr2 c)))
       ( λ s → (pair (tr P (pr2 (pr2 c) s)) (is-equiv-tr P (pr2 (pr2 c) s)))))
+```
 
-{- Theorem 18.2.3 -}
+### Theorem 18.2.3
 
+```agda
 Fam-pushout-cocone-UU :
   {l1 l2 l3 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} → cocone f g (UU l) → Fam-pushout l f g
@@ -1080,9 +1130,11 @@ equiv-desc-fam c up-c =
   pair
     ( desc-fam c)
     ( is-equiv-desc-fam c up-c)
+```
 
-{- Corollary 18.2.4 -}
+### Corollary 18.2.4
 
+```agda
 uniqueness-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →
@@ -1147,11 +1199,13 @@ compute-path-fam-Fam-pushout :
 compute-path-fam-Fam-pushout {f = f} {g} c up-X P =
   pr2 (pr2 (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
 
-{-
--- Section 18.3 The Flattening lemma for pushouts
+```
 
-{- Definition 18.3.1 -}
+## Section 18.3 The Flattening lemma for pushouts
 
+### Definition 18.3.1
+
+```agda
 cocone-flattening-pushout :
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -1176,9 +1230,11 @@ cocone-flattening-pushout f g c P Q e =
         ( pr2 (pr2 c))
         ( λ s → map-equiv (pr1 e (f s)))
         ( λ s → inv-htpy (pr2 (pr2 e) s))))
+```
 
-{- Theorem 18.3.2 The flattening lemma -}
+### Theorem 18.3.2 The flattening lemma
 
+```agda
 coherence-bottom-flattening-lemma' :
   {l1 l2 l3 : Level} {B : UU l1} {Q : B → UU l2} {T : UU l3}
   {b b' : B} (α : Id b b') {y : Q b} {y' : Q b'} (β : Id (tr Q α y) y')

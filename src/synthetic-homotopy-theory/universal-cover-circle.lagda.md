@@ -38,13 +38,13 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 </details>
 
+### 12.2 The fundamental cover of the circle
+
+We show that if a type with a free loop satisfies the induction principle of the
+circle with respect to any universe level, then it satisfies the induction
+principle with respect to the zeroth universe level.
+
 ```agda
-{- Section 12.2 The fundamental cover of the circle -}
-
-{- We show that if a type with a free loop satisfies the induction principle
-   of the circle with respect to any universe level, then it satisfies the
-   induction principle with respect to the zeroth universe level. -}
-
 naturality-tr-fiberwise-transformation :
   { l1 l2 l3 : Level} {X : UU l1} {P : X → UU l2} {Q : X → UU l3}
   ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y) (p : P x) →
@@ -133,11 +133,11 @@ abstract
     dependent-universal-property-circle lzero l
   lower-lzero-dependent-universal-property-circle =
     lower-dependent-universal-property-circle lzero
+```
 
-{- The definition of the fundamental cover -}
+### The fundamental cover
 
-{- The fundamental cover -}
-
+```agda
 abstract
   Fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
@@ -177,9 +177,11 @@ abstract
       ( map-equiv (compute-fiber-fundamental-cover-circle l dup-circle)))
   compute-tr-fundamental-cover-circle l dup-circle =
     pr2 ( pr2 ( Fundamental-cover-circle l dup-circle))
+```
 
-{- We show that the fundamental cover of the circle is a family of sets. -}
+### The fundamental cover of the circle is a family of sets
 
+```agda
 abstract
   is-set-fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
@@ -195,9 +197,11 @@ abstract
         ( is-equiv-map-equiv
           ( compute-fiber-fundamental-cover-circle l dup-circle))
         ( is-set-ℤ))
+```
 
-{- Contractibility of a general total space -}
+### Contractibility of a general total space
 
+```agda
 contraction-total-space :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (center : Σ A B) →
   ( x : A) → UU (l1 ⊔ l2)
@@ -376,10 +380,12 @@ equiv-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' =
             ( equiv-contraction-total-space c x e'))
           ( map-inv-equiv (equiv-contraction-total-space c x e) h)
           ( map-inv-equiv (equiv-contraction-total-space c x e') h')))))
+```
 
-{- We use the above construction to provide sufficient conditions for the total
-   space of the fundamental cover to be contractible. -}
+We use the above construction to provide sufficient conditions for the total
+space of the fundamental cover to be contractible.
 
+```agda
 center-total-fundamental-cover-circle :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
@@ -491,9 +497,11 @@ is-contr-total-fundamental-cover-circle-data l dup-circle h p =
   pair
     ( center-total-fundamental-cover-circle l dup-circle)
     ( contraction-total-fundamental-cover-circle-data l dup-circle h p)
+```
 
-{- Section 12.4 The dependent universal property of ℤ -}
+### Section 12.4 The dependent universal property of ℤ
 
+```agda
 abstract
   elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
@@ -695,9 +703,11 @@ abstract
   universal-property-ℤ :
     { l1 : Level} {X : UU l1} (x : X) (e : X ≃ X) → is-contr (ELIM-ℤ' x e)
   universal-property-ℤ {X = X} x e = is-contr-ELIM-ℤ (λ k → X) x (λ k → e)
+```
 
-{- Section 12.5 The identity type of the circle -}
+### Section 12.5 The identity type of the circle
 
+```agda
 path-total-fundamental-cover-circle :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l)
