@@ -1198,7 +1198,6 @@ compute-path-fam-Fam-pushout :
       ( map-equiv (compute-left-fam-Fam-pushout c up-X P (f s))))
 compute-path-fam-Fam-pushout {f = f} {g} c up-X P =
   pr2 (pr2 (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
-
 ```
 
 ## Section 18.3 The Flattening lemma for pushouts
