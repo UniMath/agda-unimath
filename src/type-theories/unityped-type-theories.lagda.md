@@ -67,7 +67,8 @@ module unityped where
     compose-hom-system (hom-system.slice β) (hom-system.slice α)
 
   record htpy-hom-system
-    {l1 l2 : Level} {σ : system l1} {τ : system l2} (g h : hom-system σ τ) :
+    {l1 l2 : Level}
+    {σ : system l1} {τ : system l2} (g h : hom-system σ τ) :
     UU (l1 ⊔ l2)
     where
     coinductive
@@ -84,51 +85,59 @@ module unityped where
       slice : weakening (system.slice σ)
 
   record preserves-weakening
-    {l1 l2 : Level} {σ : system l1} {τ : system l2} (Wσ : weakening σ)
-    (Wτ : weakening τ) (h : hom-system σ τ) : UU (l1 ⊔ l2)
+    {l1 l2 : Level}
+    {σ : system l1} {τ : system l2}
+    (Wσ : weakening σ) (Wτ : weakening τ)
+    (h : hom-system σ τ) : UU (l1 ⊔ l2)
     where
     coinductive
     field
-      element : htpy-hom-system
-                  ( compose-hom-system
-                    ( hom-system.slice h)
-                    ( weakening.element Wσ))
-                  ( compose-hom-system
-                    ( weakening.element Wτ)
-                    ( h))
-      slice : preserves-weakening
-                  ( weakening.slice Wσ)
-                  ( weakening.slice Wτ)
-                  ( hom-system.slice h)
+      element :
+        htpy-hom-system
+          ( compose-hom-system
+            ( hom-system.slice h)
+            ( weakening.element Wσ))
+          ( compose-hom-system
+            ( weakening.element Wτ)
+            ( h))
+      slice :
+        preserves-weakening
+          ( weakening.slice Wσ)
+          ( weakening.slice Wτ)
+          ( hom-system.slice h)
 
   record substitution
     {l : Level} (σ : system l) : UU l
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                hom-system (system.slice σ) σ
+      element :
+        system.element σ → hom-system (system.slice σ) σ
       slice : substitution (system.slice σ)
 
   record preserves-substitution
-    {l1 l2 : Level} {σ : system l1} {τ : system l2} (Sσ : substitution σ)
-    (Sτ : substitution τ) (h : hom-system σ τ) : UU (l1 ⊔ l2)
+    {l1 l2 : Level}
+    {σ : system l1} {τ : system l2}
+    (Sσ : substitution σ) (Sτ : substitution τ)
+    (h : hom-system σ τ) : UU (l1 ⊔ l2)
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                htpy-hom-system
-                  ( compose-hom-system
-                    ( h)
-                    ( substitution.element Sσ x))
-                  ( compose-hom-system
-                    ( substitution.element Sτ
-                      ( hom-system.element h x))
-                    ( hom-system.slice h))
-      slice : preserves-substitution
-                  ( substitution.slice Sσ)
-                  ( substitution.slice Sτ)
-                  ( hom-system.slice h)
+      element :
+        (x : system.element σ) →
+        htpy-hom-system
+          ( compose-hom-system
+            ( h)
+            ( substitution.element Sσ x))
+          ( compose-hom-system
+            ( substitution.element Sτ
+              ( hom-system.element h x))
+            ( hom-system.slice h))
+      slice :
+        preserves-substitution
+          ( substitution.slice Sσ)
+          ( substitution.slice Sτ)
+          ( hom-system.slice h)
 
   record generic-element
     {l : Level} (σ : system l) : UU l
@@ -139,82 +148,97 @@ module unityped where
       slice : generic-element (system.slice σ)
 
   record preserves-generic-element
-    {l1 l2 : Level} {σ : system l1} {τ : system l2} (δσ : generic-element σ)
-    (δτ : generic-element τ) (h : hom-system σ τ) : UU (l1 ⊔ l2)
+    {l1 l2 : Level} {σ : system l1} {τ : system l2}
+    (δσ : generic-element σ) (δτ : generic-element τ)
+    (h : hom-system σ τ) : UU (l1 ⊔ l2)
     where
     coinductive
     field
-      element : Id ( hom-system.element
-                     ( hom-system.slice h)
-                     ( generic-element.element δσ))
-                   ( generic-element.element δτ)
-      slice : preserves-generic-element
-                  ( generic-element.slice δσ)
-                  ( generic-element.slice δτ)
-                  ( hom-system.slice h)
+      element :
+        Id
+          ( hom-system.element
+            ( hom-system.slice h)
+            ( generic-element.element δσ))
+          ( generic-element.element δτ)
+      slice :
+        preserves-generic-element
+          ( generic-element.slice δσ)
+          ( generic-element.slice δτ)
+          ( hom-system.slice h)
 
   record weakening-preserves-weakening
     {l : Level} {σ : system l} (W : weakening σ) : UU l
     where
     coinductive
     field
-      element : preserves-weakening
-                  ( W)
-                  ( weakening.slice W)
-                  ( weakening.element W)
-      slice : weakening-preserves-weakening (weakening.slice W)
+      element :
+        preserves-weakening
+          ( W)
+          ( weakening.slice W)
+          ( weakening.element W)
+      slice :
+        weakening-preserves-weakening (weakening.slice W)
 
   record substitution-preserves-substitution
     {l : Level} {σ : system l} (S : substitution σ) : UU l
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                preserves-substitution
-                  ( substitution.slice S)
-                  ( S)
-                  ( substitution.element S x)
-      slice : substitution-preserves-substitution (substitution.slice S)
+      element :
+        (x : system.element σ) →
+        preserves-substitution
+          ( substitution.slice S)
+          ( S)
+          ( substitution.element S x)
+      slice :
+        substitution-preserves-substitution (substitution.slice S)
 
   record weakening-preserves-substitution
-    {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
+    {l : Level} {σ : system l}
+    (W : weakening σ) (S : substitution σ) : UU l
     where
     coinductive
     field
-      element : preserves-substitution
-                  ( S)
-                  ( substitution.slice S)
-                  ( weakening.element W)
-      slice : weakening-preserves-substitution
-                  ( weakening.slice W)
-                  ( substitution.slice S)
+      element :
+        preserves-substitution
+          ( S)
+          ( substitution.slice S)
+          ( weakening.element W)
+      slice :
+        weakening-preserves-substitution
+          ( weakening.slice W)
+          ( substitution.slice S)
 
   record substitution-preserves-weakening
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                preserves-weakening
-                  ( weakening.slice W)
-                  ( W)
-                  ( substitution.element S x)
-      slice : substitution-preserves-weakening
-                  ( weakening.slice W)
-                  ( substitution.slice S)
+      element :
+        (x : system.element σ) →
+        preserves-weakening
+          ( weakening.slice W)
+          ( W)
+          ( substitution.element S x)
+      slice :
+        substitution-preserves-weakening
+          ( weakening.slice W)
+          ( substitution.slice S)
 
   record weakening-preserves-generic-element
     {l : Level} {σ : system l} (W : weakening σ) (δ : generic-element σ) : UU l
     where
     coinductive
     field
-      element : preserves-generic-element
-                  ( δ)
-                  ( generic-element.slice δ)
-                  ( weakening.element W)
-      slice : weakening-preserves-generic-element
-                  ( weakening.slice W)
-                  ( generic-element.slice δ)
+      element :
+        preserves-generic-element
+          ( δ)
+          ( generic-element.slice δ)
+          ( weakening.element W)
+      slice :
+        weakening-preserves-generic-element
+          ( weakening.slice W)
+          ( generic-element.slice δ)
 
   record substitution-preserves-generic-element
     {l : Level} {σ : system l} (S : substitution σ) (δ : generic-element σ) :
@@ -222,29 +246,33 @@ module unityped where
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                preserves-generic-element
-                  ( generic-element.slice δ)
-                  ( δ)
-                  ( substitution.element S x)
-      slice : substitution-preserves-generic-element
-                  ( substitution.slice S)
-                  ( generic-element.slice δ)
+      element :
+        (x : system.element σ) →
+        preserves-generic-element
+          ( generic-element.slice δ)
+          ( δ)
+          ( substitution.element S x)
+      slice :
+        substitution-preserves-generic-element
+          ( substitution.slice S)
+          ( generic-element.slice δ)
 
   record substitution-cancels-weakening
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ) : UU l
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                htpy-hom-system
-                  ( compose-hom-system
-                    ( substitution.element S x)
-                    ( weakening.element W))
-                  ( id-hom-system σ)
-      slice : substitution-cancels-weakening
-                  ( weakening.slice W)
-                  ( substitution.slice S)
+      element :
+        (x : system.element σ) →
+        htpy-hom-system
+          ( compose-hom-system
+            ( substitution.element S x)
+            ( weakening.element W))
+          ( id-hom-system σ)
+      slice :
+        substitution-cancels-weakening
+          ( weakening.slice W)
+          ( substitution.slice S)
 
   record generic-element-is-identity
     {l : Level} {σ : system l} (S : substitution σ) (δ : generic-element σ) :
@@ -252,14 +280,16 @@ module unityped where
     where
     coinductive
     field
-      element : (x : system.element σ) →
-                Id ( hom-system.element
-                     ( substitution.element S x)
-                     ( generic-element.element δ))
-                   ( x)
-      slice : generic-element-is-identity
-                  ( substitution.slice S)
-                  ( generic-element.slice δ)
+      element :
+        (x : system.element σ) →
+        Id ( hom-system.element
+              ( substitution.element S x)
+              ( generic-element.element δ))
+            ( x)
+      slice :
+        generic-element-is-identity
+          ( substitution.slice S)
+          ( generic-element.slice δ)
 
   record substitution-by-generic-element
     {l : Level} {σ : system l} (W : weakening σ) (S : substitution σ)
@@ -267,17 +297,19 @@ module unityped where
     where
     coinductive
     field
-      element : htpy-hom-system
-                  ( compose-hom-system
-                    ( substitution.element
-                      ( substitution.slice S)
-                      ( generic-element.element δ))
-                    ( weakening.element (weakening.slice W)))
-                  ( id-hom-system (system.slice σ))
-      slice : substitution-by-generic-element
-                  ( weakening.slice W)
-                  ( substitution.slice S)
-                  ( generic-element.slice δ)
+      element :
+        htpy-hom-system
+          ( compose-hom-system
+            ( substitution.element
+              ( substitution.slice S)
+              ( generic-element.element δ))
+            ( weakening.element (weakening.slice W)))
+          ( id-hom-system (system.slice σ))
+      slice :
+        substitution-by-generic-element
+          ( weakening.slice W)
+          ( substitution.slice S)
+          ( generic-element.slice δ)
 
   record type-theory
     (l : Level) : UU (lsuc l)
@@ -325,9 +357,11 @@ module unityped where
     generic-element-is-identity.slice (type-theory.δid T)
   type-theory.Sδ! (slice-type-theory T) =
     substitution-by-generic-element.slice (type-theory.Sδ! T)
+```
 
---------------------------------------------------------------------------------
+---
 
+```agda
   module C-system where
 
     El : {l : Level} (A : type-theory l) → ℕ → UU l
@@ -340,20 +374,22 @@ module unityped where
     iterated-weakening {l} {A} {zero-ℕ} {n} x =
       {!hom-system.element (weakening.element (type-theory.W A))!}
     iterated-weakening {l} {A} {succ-ℕ m} {n} x = {!!}
+```
 
-    -- hom(X,Y) := Tm(W(X,Y))
+`hom(X,Y) := Tm(W(X,Y))`
 
+```agda
     hom : {l : Level} (A : type-theory l) → ℕ → ℕ → UU l
     hom A m n = El A (succ-ℕ (add-ℕ m n))
 
     id-hom : {l : Level} (A : type-theory l) (n : ℕ) → hom A n n
     id-hom A zero-ℕ = generic-element.element (type-theory.δ A)
     id-hom A (succ-ℕ n) = {!!}
---------------------------------------------------------------------------------
+```
 
-{- We construct the forgetful functor from unityped type theories to simple
-   type theories. -}
+### The forgetful functor from unityped type theories to simple type theories
 
+```agda
 module simple-unityped where
 
 {-
