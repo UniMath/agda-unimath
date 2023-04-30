@@ -37,7 +37,7 @@ module _
   is-mono-hom-Concrete-Group-Prop =
     Π-Prop
       ( Concrete-Group l3)
-      ( λ F → is-emb-Prop (compose-hom-Concrete-Group F G H f))
+      ( λ F → is-emb-Prop (comp-hom-Concrete-Group F G H f))
 
   is-mono-hom-Concrete-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-hom-Concrete-Group = type-Prop is-mono-hom-Concrete-Group-Prop

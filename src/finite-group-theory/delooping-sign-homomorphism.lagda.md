@@ -707,22 +707,22 @@ module _
   eq-quotient-delooping-sign-loop-sign-homomorphism :
     (n : ℕ) →
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
         ( quotient-delooping-sign-loop n)
         ( hom-inv-symmetric-group-loop-group-Set
           ( raise-Fin-Set l1 (n +ℕ 2))))
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-          ( compose-hom-Group
+          ( comp-hom-Group
             ( symmetric-Group (Fin-Set 2))
             ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -775,7 +775,7 @@ module _
                       ( raise l1 (Fin (n +ℕ 2)) ,
                         unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
                   ( loop-group-Set (quotient-set-Fin (n +ℕ 2))))
-                ( compose-hom-Group
+                ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                   ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
                   ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -798,15 +798,15 @@ module _
                       ( raise l1 (Fin (n +ℕ 2)) ,
                         unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
                     ( loop-group-Set (quotient-set-Fin (n +ℕ 2))))
-                  ( compose-hom-Group
+                  ( comp-hom-Group
                     ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                     ( symmetric-Group (Fin-Set (n +ℕ 2)))
                     ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                    ( compose-hom-Group
+                    ( comp-hom-Group
                       ( symmetric-Group (Fin-Set (n +ℕ 2)))
                       ( symmetric-Group (Fin-Set 2))
                       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                      ( compose-hom-Group
+                      ( comp-hom-Group
                         ( symmetric-Group (Fin-Set 2))
                         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -838,7 +838,7 @@ module _
                   ( raise l1 (Fin (n +ℕ 2)) ,
                     unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-              ( compose-hom-Group
+              ( comp-hom-Group
                 ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                 ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
                 ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -850,7 +850,7 @@ module _
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
               ( id-hom-Group (loop-group-Set (quotient-set-Fin (n +ℕ 2))))
-              ( compose-hom-Group
+              ( comp-hom-Group
                 ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                 ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                 ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -924,7 +924,7 @@ module _
                         ( htpy-eq-hom-Group
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
-                          ( compose-hom-Group
+                          ( comp-hom-Group
                             ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
                             ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -993,7 +993,7 @@ module _
                                     ( Fin (n +ℕ 2))
                                     ( inv-equiv (compute-raise-Fin l1 (n +ℕ 2)))
                                     ( Y)) ∙
-                                  ( associative-compose-equiv
+                                  ( associative-comp-equiv
                                     ( inv-equiv
                                       ( inv-equiv
                                         ( compute-raise-Fin l1 (n +ℕ 2))))
@@ -1029,15 +1029,15 @@ module _
                             ( raise l1 (Fin (n +ℕ 2)) ,
                               unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))
                         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                        ( compose-hom-Group
+                        ( comp-hom-Group
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                           ( symmetric-Group (Fin-Set (n +ℕ 2)))
                           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                          ( compose-hom-Group
+                          ( comp-hom-Group
                             ( symmetric-Group (Fin-Set (n +ℕ 2)))
                             ( symmetric-Group (Fin-Set 2))
                             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                            ( compose-hom-Group
+                            ( comp-hom-Group
                               ( symmetric-Group (Fin-Set 2))
                               ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -1059,14 +1059,14 @@ module _
   eq-quotient-delooping-loop-UU-Fin-Group :
     (n : ℕ) →
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
         ( hom-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-          ( compose-iso-Group
+          ( comp-iso-Group
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
             ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1079,7 +1079,7 @@ module _
               ( raise-Set l4 (Fin-Set 2))
               ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n)))))
         ( quotient-delooping-sign-loop n))
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1303,7 +1303,7 @@ module _
           ( semigroup-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
           ( semigroup-Group (abstract-group-Concrete-Group (UU-Fin-Group l4 2)))
           ( pr1
-            ( compose-hom-Group
+            ( comp-hom-Group
               ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
               ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
               ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1325,18 +1325,18 @@ module _
       ( symmetric-Group (Fin-Set 2))
       ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
   symmetric-abstract-UU-fin-group-quotient-hom n =
-    compose-hom-Group
+    comp-hom-Group
       ( symmetric-Group (Fin-Set 2))
       ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
       ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
         ( hom-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-          ( compose-iso-Group
+          ( comp-iso-Group
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
             ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1357,11 +1357,11 @@ module _
   eq-quotient-delooping-sign-homomorphism :
     (n : ℕ) →
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1374,11 +1374,11 @@ module _
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l1 (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1393,14 +1393,14 @@ module _
   eq-quotient-delooping-sign-homomorphism n =
     ( ap
       ( λ f →
-        compose-hom-Group
+        comp-hom-Group
           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
           ( f)
           ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
       ( inv (eq-quotient-delooping-loop-UU-Fin-Group n))) ∙
-    ( associative-compose-hom-Group
+    ( associative-comp-hom-Group
       ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
@@ -1408,7 +1408,7 @@ module _
       ( hom-iso-Group
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-        ( compose-iso-Group
+        ( comp-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
           ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1423,14 +1423,14 @@ module _
       ( quotient-delooping-sign-loop n)
       ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))) ∙
       ( ap
-        ( compose-hom-Group
+        ( comp-hom-Group
             ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
             ( hom-iso-Group
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
               ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-              ( compose-iso-Group
+              ( comp-iso-Group
                 ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                 ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
                 ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1451,26 +1451,26 @@ module _
               ( semigroup-Group
                 ( abstract-group-Concrete-Group (UU-Fin-Group l4 2)))
               ( pr1
-                ( compose-hom-Group
+                ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                   ( symmetric-Group (Fin-Set (n +ℕ 2)))
                   ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-                  ( compose-hom-Group
+                  ( comp-hom-Group
                     ( symmetric-Group (Fin-Set (n +ℕ 2)))
                     ( symmetric-Group (Fin-Set 2))
                     ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-                    ( compose-hom-Group
+                    ( comp-hom-Group
                       ( symmetric-Group (Fin-Set 2))
                       ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                       ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-                      ( compose-hom-Group
+                      ( comp-hom-Group
                         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                         ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
                         ( hom-iso-Group
                           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                           ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
-                          ( compose-iso-Group
+                          ( comp-iso-Group
                             ( loop-group-Set ( quotient-set-Fin (n +ℕ 2)))
                             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
                             ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
@@ -1577,11 +1577,11 @@ module _
   eq-delooping-sign-homomorphism :
     (n : ℕ) →
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
@@ -1594,11 +1594,11 @@ module _
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l1 (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))

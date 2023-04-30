@@ -313,11 +313,11 @@ module _
   restriction-generating-subset-Group :
     type-hom-Group G G' ↪ (type-subtype S → type-Group G')
   restriction-generating-subset-Group =
-    compose-emb
+    comp-emb
       ( restriction-generating-subset-Subgroup G S G')
       ( pair
         ( λ f →
-          compose-hom-Group
+          comp-hom-Group
             ( group-Subgroup G (subgroup-subset-Group G S))
             ( G)
             ( G')

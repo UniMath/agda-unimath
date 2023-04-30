@@ -989,7 +989,7 @@ module _
                   ( issec-map-inv-associative-Σ M P Y
                     ( map-equiv (equiv-tot t ∘e s) x)))))))) ∙
       ( inv
-        ( preserves-compose-tot
+        ( preserves-comp-tot
           ( map-equiv ∘ t)
           ( map-inv-equiv ∘ t)
           ( map-equiv s x)) ∙

@@ -80,7 +80,7 @@ module _
 
   is-surjective-quotient-map : is-surjective quotient-map
   is-surjective-quotient-map =
-    is-surjective-compose-equiv compute-set-quotient (is-surjective-class R)
+    is-surjective-comp-equiv compute-set-quotient (is-surjective-class R)
 
   surjection-quotient-map : A ↠ set-quotient
   pr1 surjection-quotient-map = quotient-map
@@ -88,7 +88,7 @@ module _
 
   emb-subtype-set-quotient : set-quotient ↪ subtype l2 A
   emb-subtype-set-quotient =
-    compose-emb (emb-equivalence-class R) emb-equivalence-class-set-quotient
+    comp-emb (emb-equivalence-class R) emb-equivalence-class-set-quotient
 
   subtype-set-quotient : set-quotient → subtype l2 A
   subtype-set-quotient =

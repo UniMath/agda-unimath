@@ -51,16 +51,16 @@ module _
     (w : obj-Precat C) →
     (p₁ : type-hom-Precat C w y) →
     (p₂ : type-hom-Precat C w z) →
-    compose-hom-Precat C f p₁ ＝ compose-hom-Precat C g p₂ →
+    comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂ →
     UU (l1 ⊔ l2)
   is-pullback-Precat x y z f g w p₁ p₂ _ =
     (w' : obj-Precat C) →
     (p₁' : type-hom-Precat C w' y) →
     (p₂' : type-hom-Precat C w' z) →
-    compose-hom-Precat C f p₁' ＝ compose-hom-Precat C g p₂' →
+    comp-hom-Precat C f p₁' ＝ comp-hom-Precat C g p₂' →
     ∃! (type-hom-Precat C w' w) λ h →
-       (compose-hom-Precat C p₁ h ＝ p₁') ×
-       (compose-hom-Precat C p₂ h ＝ p₂')
+       (comp-hom-Precat C p₁ h ＝ p₁') ×
+       (comp-hom-Precat C p₂ h ＝ p₂')
 
   pullback-Precat :
     (x y z : obj-Precat C) →
@@ -71,7 +71,7 @@ module _
     Σ (obj-Precat C) λ w →
     Σ (type-hom-Precat C w y) λ p₁ →
     Σ (type-hom-Precat C w z) λ p₂ →
-    Σ (compose-hom-Precat C f p₁ ＝ compose-hom-Precat C g p₂) λ α →
+    Σ (comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂) λ α →
       is-pullback-Precat x y z f g w p₁ p₂ α
 
   has-all-pullback-Precat : UU (l1 ⊔ l2)
@@ -99,15 +99,15 @@ module _
   pr2-pullback-Precat = pr1 (pr2 (pr2 (t x y z f g)))
 
   pullback-square-Precat-comm :
-    compose-hom-Precat C f pr1-pullback-Precat ＝
-    compose-hom-Precat C g pr2-pullback-Precat
+    comp-hom-Precat C f pr1-pullback-Precat ＝
+    comp-hom-Precat C g pr2-pullback-Precat
   pullback-square-Precat-comm = pr1 (pr2 (pr2 (pr2 (t x y z f g))))
 
   module _
     (w' : obj-Precat C)
     (p₁' : type-hom-Precat C w' y)
     (p₂' : type-hom-Precat C w' z)
-    (α : compose-hom-Precat C f p₁' ＝ compose-hom-Precat C g p₂')
+    (α : comp-hom-Precat C f p₁' ＝ comp-hom-Precat C g p₂')
     where
 
     morphism-into-pullback-Precat : type-hom-Precat C w' object-pullback-Precat
@@ -115,21 +115,21 @@ module _
       pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
 
     morphism-into-pullback-comm-pr1 :
-      compose-hom-Precat C pr1-pullback-Precat morphism-into-pullback-Precat ＝
+      comp-hom-Precat C pr1-pullback-Precat morphism-into-pullback-Precat ＝
       p₁'
     morphism-into-pullback-comm-pr1 =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
     morphism-into-pullback-comm-pr2 :
-      compose-hom-Precat C pr2-pullback-Precat morphism-into-pullback-Precat ＝
+      comp-hom-Precat C pr2-pullback-Precat morphism-into-pullback-Precat ＝
       p₂'
     morphism-into-pullback-comm-pr2 =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
     is-unique-morphism-into-pullback-Precat :
       (h' : type-hom-Precat C w' object-pullback-Precat) →
-      compose-hom-Precat C pr1-pullback-Precat h' ＝ p₁' →
-      compose-hom-Precat C pr2-pullback-Precat h' ＝ p₂' →
+      comp-hom-Precat C pr1-pullback-Precat h' ＝ p₁' →
+      comp-hom-Precat C pr2-pullback-Precat h' ＝ p₂' →
       morphism-into-pullback-Precat ＝ h'
     is-unique-morphism-into-pullback-Precat h' α₁ α₂ =
       ap
@@ -144,7 +144,7 @@ module _
   (w : obj-Precat C)
   (p₁ : type-hom-Precat C w y)
   (p₂ : type-hom-Precat C w z)
-  (α : compose-hom-Precat C f p₁ ＝ compose-hom-Precat C g p₂)
+  (α : comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂)
   where
 
   is-prop-is-pullback-Precat :

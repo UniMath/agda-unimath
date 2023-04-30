@@ -243,7 +243,7 @@ decidable-emb-isolated-point {l1} {A} a =
   pair
     ( const unit A (pr1 a))
     ( pair
-      ( is-emb-compose
+      ( is-emb-comp
         ( inclusion-isolated-point A)
         ( const unit (isolated-point A) a)
         ( is-emb-inclusion-isolated-point A)

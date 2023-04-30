@@ -225,7 +225,7 @@ module _
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
     is-equiv (map-compute-path-over-eq-value f g p q r)
   is-equiv-map-compute-path-over-eq-value refl q r =
-    is-equiv-compose
+    is-equiv-comp
       ( inv)
       ( concat' r (right-unit ∙ ap-id q))
       ( is-equiv-concat' r (right-unit ∙ ap-id q))
@@ -252,7 +252,7 @@ module _
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (q' : eq-value f g y) →
     is-equiv (map-compute-path-over-eq-value' f g p q q')
   is-equiv-map-compute-path-over-eq-value' refl q q' =
-    is-equiv-compose
+    is-equiv-comp
       ( inv)
       ( concat' q' right-unit)
       ( is-equiv-concat' q' right-unit)

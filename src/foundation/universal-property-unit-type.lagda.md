@@ -89,7 +89,7 @@ abstract
     is-equiv (pt x) →
     ({l2 : Level} (Y : UU l2) → is-equiv (λ (f : X → Y) → f x))
   universal-property-unit-is-equiv-pt x is-equiv-pt Y =
-    is-equiv-compose
+    is-equiv-comp
       ( ev-star' Y)
       ( precomp (pt x) Y)
       ( is-equiv-precomp-is-equiv (pt x) is-equiv-pt Y)

@@ -47,8 +47,8 @@ module _
           ( λ F₁ →
             ( {x y z : obj-Precat C} (g : type-hom-Precat C y z)
               (f : type-hom-Precat C x y) →
-              ( F₁ (compose-hom-Precat C g f)) ＝
-              ( compose-hom-Precat D (F₁ g) (F₁ f))) ×
+              ( F₁ (comp-hom-Precat C g f)) ＝
+              ( comp-hom-Precat D (F₁ g) (F₁ f))) ×
             ( (x : obj-Precat C) →
               F₁ (id-hom-Precat C {x}) ＝ id-hom-Precat D {F₀ x})))
 
@@ -62,12 +62,12 @@ module _
     type-hom-Precat D (obj-functor-Precat F x) (obj-functor-Precat F y)
   hom-functor-Precat F = pr1 (pr2 F)
 
-  preserves-compose-functor-Precat :
+  preserves-comp-functor-Precat :
     (F : functor-Precat) {x y z : obj-Precat C}
     (g : type-hom-Precat C y z) (f : type-hom-Precat C x y) →
-    ( hom-functor-Precat F (compose-hom-Precat C g f)) ＝
-    ( compose-hom-Precat D (hom-functor-Precat F g) (hom-functor-Precat F f))
-  preserves-compose-functor-Precat F = pr1 (pr2 (pr2 F))
+    ( hom-functor-Precat F (comp-hom-Precat C g f)) ＝
+    ( comp-hom-Precat D (hom-functor-Precat F g) (hom-functor-Precat F f))
+  preserves-comp-functor-Precat F = pr1 (pr2 (pr2 F))
 
   preserves-id-functor-Precat :
     (F : functor-Precat) (x : obj-Precat C) →
@@ -95,22 +95,22 @@ pr2 (pr2 (pr2 (id-functor-Precat C))) x = refl
 Any two compatible functors can be composed to a new functor.
 
 ```agda
-compose-functor-Precat :
+comp-functor-Precat :
   {l1 l2 l3 l4 l5 l6 : Level}
   (C : Precat l1 l2) (D : Precat l3 l4) (E : Precat l5 l6) →
   functor-Precat D E → functor-Precat C D → functor-Precat C E
-pr1 (compose-functor-Precat C D E G F) =
+pr1 (comp-functor-Precat C D E G F) =
   obj-functor-Precat D E G ∘ obj-functor-Precat C D F
-pr1 (pr2 (compose-functor-Precat C D E G F)) =
+pr1 (pr2 (comp-functor-Precat C D E G F)) =
   hom-functor-Precat D E G ∘ hom-functor-Precat C D F
-pr1 (pr2 (pr2 (compose-functor-Precat C D E G F))) g f =
+pr1 (pr2 (pr2 (comp-functor-Precat C D E G F))) g f =
   ( ap
     ( hom-functor-Precat D E G)
-    ( preserves-compose-functor-Precat C D F g f)) ∙
-  ( preserves-compose-functor-Precat D E G
+    ( preserves-comp-functor-Precat C D F g f)) ∙
+  ( preserves-comp-functor-Precat D E G
     ( hom-functor-Precat C D F g)
     ( hom-functor-Precat C D F f))
-pr2 (pr2 (pr2 (compose-functor-Precat C D E G F))) x =
+pr2 (pr2 (pr2 (comp-functor-Precat C D E G F))) x =
   ( ap (hom-functor-Precat D E G) (preserves-id-functor-Precat C D F x)) ∙
   ( preserves-id-functor-Precat D E G (obj-functor-Precat C D F x))
 ```
@@ -129,15 +129,15 @@ module _
   (F : functor-Precat C D)
   where
 
-  is-prop-preserves-compose-hom-Precat :
+  is-prop-preserves-comp-hom-Precat :
     is-prop
       ( {x y z : obj-Precat C}
         (g : type-hom-Precat C y z) (f : type-hom-Precat C x y) →
-        ( hom-functor-Precat C D F (compose-hom-Precat C g f)) ＝
-        ( compose-hom-Precat D
+        ( hom-functor-Precat C D F (comp-hom-Precat C g f)) ＝
+        ( comp-hom-Precat D
           ( hom-functor-Precat C D F g)
           ( hom-functor-Precat C D F f)))
-  is-prop-preserves-compose-hom-Precat =
+  is-prop-preserves-comp-hom-Precat =
     is-prop-Π'
       ( λ x →
         is-prop-Π'
@@ -151,8 +151,8 @@ module _
                         is-set-type-hom-Precat D
                           ( obj-functor-Precat C D F x)
                           ( obj-functor-Precat C D F z)
-                          ( hom-functor-Precat C D F (compose-hom-Precat C g f))
-                          ( compose-hom-Precat D
+                          ( hom-functor-Precat C D F (comp-hom-Precat C g f))
+                          ( comp-hom-Precat D
                             ( hom-functor-Precat C D F g)
                             ( hom-functor-Precat C D F f)))))))
 

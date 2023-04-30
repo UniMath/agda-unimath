@@ -99,30 +99,30 @@ module _
   (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3)
   where
 
-  map-compose-pointed-map :
+  map-comp-pointed-map :
     B →* C → A →* B → (type-Pointed-Type A) → (type-Pointed-Type C)
-  map-compose-pointed-map g f =
+  map-comp-pointed-map g f =
     map-pointed-map B C g ∘ map-pointed-map A B f
 
-  preserves-point-compose-pointed-map :
+  preserves-point-comp-pointed-map :
     (g : B →* C) (f : A →* B) →
-    (map-compose-pointed-map g f (point-Pointed-Type A)) ＝ point-Pointed-Type C
-  preserves-point-compose-pointed-map g f =
+    (map-comp-pointed-map g f (point-Pointed-Type A)) ＝ point-Pointed-Type C
+  preserves-point-comp-pointed-map g f =
     ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
     ( preserves-point-pointed-map B C g)
 
-  compose-pointed-map : B →* C → A →* B → A →* C
-  pr1 (compose-pointed-map g f) = map-compose-pointed-map g f
-  pr2 (compose-pointed-map g f) = preserves-point-compose-pointed-map g f
+  comp-pointed-map : B →* C → A →* B → A →* C
+  pr1 (comp-pointed-map g f) = map-comp-pointed-map g f
+  pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
   precomp-pointed-map : A →* B → B →* C → A →* C
-  precomp-pointed-map f g = compose-pointed-map g f
+  precomp-pointed-map f g = comp-pointed-map g f
 
 _∘*_ :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
   B →* C → A →* B → A →* C
-_∘*_ {A = A} {B} {C} = compose-pointed-map A B C
+_∘*_ {A = A} {B} {C} = comp-pointed-map A B C
 ```
 
 ### The identity pointed map

@@ -41,13 +41,13 @@ id-hom-species-types :
   {l1 l2 : Level} → (F : species-types l1 l2) → hom-species-types F F
 id-hom-species-types F = λ X x → x
 
-compose-hom-species-types :
+comp-hom-species-types :
   {l1 l2 l3 l4 : Level}
   {F : species-types l1 l2}
   {G : species-types l1 l3}
   {H : species-types l1 l4} →
   hom-species-types G H → hom-species-types F G → hom-species-types F H
-compose-hom-species-types f g X = (f X) ∘ (g X)
+comp-hom-species-types f g X = (f X) ∘ (g X)
 ```
 
 ### Homotopies between morphisms of species
@@ -101,28 +101,28 @@ eq-htpy-hom-species-types {f = f} {g = g} =
 ### Associativity of composition
 
 ```agda
-associative-compose-hom-species-types :
+associative-comp-hom-species-types :
   {l1 l2 l3 l4 l5 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   {H : species-types l1 l4} {K : species-types l1 l5}
   (h : hom-species-types H K) (g : hom-species-types G H)
   (f : hom-species-types F G) →
-  Id ( compose-hom-species-types (compose-hom-species-types h g) f)
-     ( compose-hom-species-types h (compose-hom-species-types g f))
-associative-compose-hom-species-types h g f = refl
+  Id ( comp-hom-species-types (comp-hom-species-types h g) f)
+     ( comp-hom-species-types h (comp-hom-species-types g f))
+associative-comp-hom-species-types h g f = refl
 ```
 
 ### Unit laws of composition
 
 ```agda
-left-unit-law-compose-hom-species-types :
+left-unit-law-comp-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   (f : hom-species-types F G) →
-  Id (compose-hom-species-types (id-hom-species-types G) f) f
-left-unit-law-compose-hom-species-types f = refl
+  Id (comp-hom-species-types (id-hom-species-types G) f) f
+left-unit-law-comp-hom-species-types f = refl
 
-right-unit-law-compose-hom-species-types :
+right-unit-law-comp-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   (f : hom-species-types F G) →
-  Id (compose-hom-species-types f (id-hom-species-types F)) f
-right-unit-law-compose-hom-species-types f = refl
+  Id (comp-hom-species-types f (id-hom-species-types F)) f
+right-unit-law-comp-hom-species-types f = refl
 ```

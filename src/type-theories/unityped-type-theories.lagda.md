@@ -58,13 +58,13 @@ module unityped where
   hom-system.element (id-hom-system σ) = id
   hom-system.slice (id-hom-system σ) = id-hom-system (system.slice σ)
 
-  compose-hom-system :
+  comp-hom-system :
     {l1 l2 l3 : Level} {σ : system l1} {τ : system l2} {υ : system l3}
     (β : hom-system τ υ) (α : hom-system σ τ) → hom-system σ υ
-  hom-system.element (compose-hom-system β α) =
+  hom-system.element (comp-hom-system β α) =
     hom-system.element β ∘ hom-system.element α
-  hom-system.slice (compose-hom-system β α) =
-    compose-hom-system (hom-system.slice β) (hom-system.slice α)
+  hom-system.slice (comp-hom-system β α) =
+    comp-hom-system (hom-system.slice β) (hom-system.slice α)
 
   record htpy-hom-system
     {l1 l2 : Level}
@@ -94,10 +94,10 @@ module unityped where
     field
       element :
         htpy-hom-system
-          ( compose-hom-system
+          ( comp-hom-system
             ( hom-system.slice h)
             ( weakening.element Wσ))
-          ( compose-hom-system
+          ( comp-hom-system
             ( weakening.element Wτ)
             ( h))
       slice :
@@ -126,10 +126,10 @@ module unityped where
       element :
         (x : system.element σ) →
         htpy-hom-system
-          ( compose-hom-system
+          ( comp-hom-system
             ( h)
             ( substitution.element Sσ x))
-          ( compose-hom-system
+          ( comp-hom-system
             ( substitution.element Sτ
               ( hom-system.element h x))
             ( hom-system.slice h))
@@ -265,7 +265,7 @@ module unityped where
       element :
         (x : system.element σ) →
         htpy-hom-system
-          ( compose-hom-system
+          ( comp-hom-system
             ( substitution.element S x)
             ( weakening.element W))
           ( id-hom-system σ)
@@ -299,7 +299,7 @@ module unityped where
     field
       element :
         htpy-hom-system
-          ( compose-hom-system
+          ( comp-hom-system
             ( substitution.element
               ( substitution.slice S)
               ( generic-element.element δ))
@@ -417,18 +417,18 @@ module simple-unityped where
   simple.htpy-hom-system.slice (id-hom-system A) x =
     id-hom-system (unityped.system.slice A)
 
-  compose-hom-system :
+  comp-hom-system :
     {l1 l2 l3 : Level} {A : unityped.system l1} {B : unityped.system l2}
     {C : unityped.system l3} (g : unityped.hom-system B C)
     (f : unityped.hom-system A B) →
     simple.htpy-hom-system
-      ( hom-system (unityped.compose-hom-system g f))
-      ( simple.compose-hom-system
+      ( hom-system (unityped.comp-hom-system g f))
+      ( simple.comp-hom-system
         ( hom-system g)
         ( hom-system f))
-  simple.htpy-hom-system.element (compose-hom-system g f) x = refl-htpy
-  simple.htpy-hom-system.slice (compose-hom-system g f) x =
-    compose-hom-system
+  simple.htpy-hom-system.element (comp-hom-system g f) x = refl-htpy
+  simple.htpy-hom-system.slice (comp-hom-system g f) x =
+    comp-hom-system
       ( unityped.hom-system.slice g)
       ( unityped.hom-system.slice f)
 

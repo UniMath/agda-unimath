@@ -103,12 +103,12 @@ module _
 ```
 
 ```agda
-compose-hom-slice :
+comp-hom-slice :
   {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (h : C → X) →
   hom-slice g h → hom-slice f g → hom-slice f h
-pr1 (compose-hom-slice f g h j i) = map-hom-slice g h j ∘ map-hom-slice f g i
-pr2 (compose-hom-slice f g h j i) =
+pr1 (comp-hom-slice f g h j i) = map-hom-slice g h j ∘ map-hom-slice f g i
+pr2 (comp-hom-slice f g h j i) =
   ( triangle-hom-slice f g i) ∙h
   ( (triangle-hom-slice g h j) ·r (map-hom-slice f g i))
 

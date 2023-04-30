@@ -40,12 +40,12 @@ module _
     Σ ( functor-Precat D C)
       ( λ G →
         ( natural-isomorphism-Precat C C
-          ( compose-functor-Precat C D C G F)
+          ( comp-functor-Precat C D C G F)
           ( id-functor-Precat C))) ×
     Σ ( functor-Precat D C)
       ( λ G →
         ( natural-isomorphism-Precat D D
-          ( compose-functor-Precat D C D F G)
+          ( comp-functor-Precat D C D F G)
           ( id-functor-Precat D)))
 
   equiv-Precat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

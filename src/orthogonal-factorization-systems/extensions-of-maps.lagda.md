@@ -113,9 +113,9 @@ module _
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
 
-  is-extension-compose-vertical :
+  is-extension-comp-vertical :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
-  is-extension-compose-vertical H G x = G x ∙ H (i x)
+  is-extension-comp-vertical H G x = G x ∙ H (i x)
 ```
 
 ### Horizontal composition of extensions of maps
@@ -138,10 +138,10 @@ module _
   {i : B → C} {j : (z : C) → P z}
   where
 
-  is-extension-Π-compose-horizontal :
+  is-extension-Π-comp-horizontal :
     (I : is-extension f g i) →
     is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
-  is-extension-Π-compose-horizontal I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
+  is-extension-Π-comp-horizontal I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
 #### Horizontal composition of extensions of ordinary maps
@@ -153,9 +153,9 @@ module _
   {i : B → C} {j : C → X}
   where
 
-  is-extension-compose-horizontal :
+  is-extension-comp-horizontal :
     (I : is-extension f g i) → is-extension g h j → is-extension f h (j ∘ i)
-  is-extension-compose-horizontal I J x = (J x) ∙ ap j (I x)
+  is-extension-comp-horizontal I J x = (J x) ∙ ap j (I x)
 ```
 
 ### Left whiskering of extensions of maps

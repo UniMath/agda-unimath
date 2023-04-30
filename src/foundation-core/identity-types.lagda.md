@@ -181,10 +181,10 @@ ap-id :
   {l : Level} {A : UU l} {x y : A} (p : x ＝ y) → (ap id p) ＝ p
 ap-id refl = refl
 
-ap-compose :
+ap-comp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
   (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
-ap-compose g f refl = refl
+ap-comp g f refl = refl
 
 ap-refl :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →

@@ -111,20 +111,20 @@ module _
 ### Composites of retractions are retractions
 
 ```agda
-  retraction-compose :
+  retraction-comp :
     (g : B → X) (h : A → B) → retr g → retr h → retr (g ∘ h)
-  pr1 (retraction-compose g h retr-g retr-h) = pr1 retr-h ∘ pr1 retr-g
-  pr2 (retraction-compose g h retr-g retr-h) =
+  pr1 (retraction-comp g h retr-g retr-h) = pr1 retr-h ∘ pr1 retr-g
+  pr2 (retraction-comp g h retr-g retr-h) =
     ((pr1 retr-h) ·l (pr2 retr-g ·r h)) ∙h (pr2 retr-h)
 
-  retraction-compose-htpy :
+  retraction-comp-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     retr g → retr h → retr f
-  pr1 (retraction-compose-htpy f g h H retr-g retr-h) =
-    pr1 (retraction-compose g h retr-g retr-h)
-  pr2 (retraction-compose-htpy f g h H retr-g retr-h) =
-    ( pr1 (retraction-compose g h retr-g retr-h) ·l H) ∙h
-    pr2 (retraction-compose g h retr-g retr-h)
+  pr1 (retraction-comp-htpy f g h H retr-g retr-h) =
+    pr1 (retraction-comp g h retr-g retr-h)
+  pr2 (retraction-comp-htpy f g h H retr-g retr-h) =
+    ( pr1 (retraction-comp g h retr-g retr-h) ·l H) ∙h
+    pr2 (retraction-comp g h retr-g retr-h)
 
   inv-triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))

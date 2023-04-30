@@ -30,19 +30,19 @@ instance
   Semigroup-Large-Precat : Large-Precat lsuc (_⊔_)
   obj-Large-Precat Semigroup-Large-Precat = Semigroup
   hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
-  compose-hom-Large-Precat Semigroup-Large-Precat
+  comp-hom-Large-Precat Semigroup-Large-Precat
     {X = G} {H} {K} =
-    compose-hom-Semigroup G H K
+    comp-hom-Semigroup G H K
   id-hom-Large-Precat Semigroup-Large-Precat
     {X = G} =
     id-hom-Semigroup G
-  associative-compose-hom-Large-Precat Semigroup-Large-Precat
+  associative-comp-hom-Large-Precat Semigroup-Large-Precat
     {X = G} {H} {K} {L} =
-    associative-compose-hom-Semigroup G H K L
-  left-unit-law-compose-hom-Large-Precat Semigroup-Large-Precat
+    associative-comp-hom-Semigroup G H K L
+  left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat
     {X = G} {H} =
-    left-unit-law-compose-hom-Semigroup G H
-  right-unit-law-compose-hom-Large-Precat Semigroup-Large-Precat
+    left-unit-law-comp-hom-Semigroup G H
+  right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat
     {X = G} {H} =
-    right-unit-law-compose-hom-Semigroup G H
+    right-unit-law-comp-hom-Semigroup G H
 ```

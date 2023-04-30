@@ -49,7 +49,7 @@ module _
   triangle-descent-square-fib-map-coprod-inl-fib x (pair a' p) =
     eq-pair-Σ refl
       ( ap (concat (inv (HA a')) (αA x))
-        ( ap-compose (ind-coprod _ αA αB) inl p))
+        ( ap-comp (ind-coprod _ αA αB) inl p))
 
   triangle-descent-square-fib-map-coprod-inr-fib :
     (y : B) →
@@ -64,7 +64,7 @@ module _
   triangle-descent-square-fib-map-coprod-inr-fib y ( pair b' p) =
     eq-pair-Σ refl
       ( ap (concat (inv (HB b')) (αB y))
-        ( ap-compose (ind-coprod _ αA αB) inr p))
+        ( ap-comp (ind-coprod _ αA αB) inr p))
 
 module _
   {l1 l2 l3 l1' l2' l3' : Level}
@@ -143,7 +143,7 @@ module _
       is-pullback f i cone-A'
     descent-coprod-inl (pair h (pair f' H)) (pair k (pair g' K)) is-pb-dsq =
         is-pullback-is-fiberwise-equiv-map-fib-cone f i (triple h f' H)
-          ( λ a → is-equiv-compose-htpy
+          ( λ a → is-equiv-comp-htpy
             ( map-fib-cone f i (triple h f' H) a)
             ( map-fib-cone (ind-coprod _ f g) i
               ( cone-descent-coprod (triple h f' H) (triple k g' K))
@@ -164,7 +164,7 @@ module _
       is-pullback g i cone-B'
     descent-coprod-inr (pair h (pair f' H)) (pair k (pair g' K)) is-pb-dsq =
         is-pullback-is-fiberwise-equiv-map-fib-cone g i (triple k g' K)
-          ( λ b → is-equiv-compose-htpy
+          ( λ b → is-equiv-comp-htpy
             ( map-fib-cone g i (triple k g' K) b)
             ( map-fib-cone (ind-coprod _ f g) i
               ( cone-descent-coprod (triple h f' H) (triple k g' K))

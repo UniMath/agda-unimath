@@ -101,7 +101,7 @@ module _
   is-equiv-map-canonical-pullback-tot-cone-cone-family :
     is-equiv map-canonical-pullback-tot-cone-cone-family
   is-equiv-map-canonical-pullback-tot-cone-cone-family =
-    is-equiv-compose
+    is-equiv-comp
       ( tot (λ aa' →
         ( tot (λ bb' → eq-pair-Σ')) ∘
         ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')))
@@ -109,7 +109,7 @@ module _
       ( is-equiv-map-interchange-Σ-Σ
         ( λ a bα a' → Σ (PB (pr1 bα))
           ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b'))))
-      ( is-equiv-tot-is-fiberwise-equiv (λ aa' → is-equiv-compose
+      ( is-equiv-tot-is-fiberwise-equiv (λ aa' → is-equiv-comp
         ( tot (λ bb' → eq-pair-Σ'))
         ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')
         ( is-equiv-map-interchange-Σ-Σ _)
@@ -169,7 +169,7 @@ module _
     is-pullback
       (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family
   is-pullback-tot-is-pullback-family is-pb-c is-pb-c' =
-    is-equiv-compose-htpy
+    is-equiv-comp-htpy
       ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
       ( map-canonical-pullback-tot-cone-cone-family)
       ( map-Σ _

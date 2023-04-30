@@ -53,12 +53,12 @@ module _
 
   issec-hom-inv-iso-Cat :
     {x y : obj-Cat C} (f : iso-Cat x y) →
-    compose-hom-Cat C (hom-iso-Cat f) (hom-inv-iso-Cat f) ＝ id-hom-Cat C
+    comp-hom-Cat C (hom-iso-Cat f) (hom-inv-iso-Cat f) ＝ id-hom-Cat C
   issec-hom-inv-iso-Cat f = pr1 (pr2 (is-iso-hom-iso-Cat f))
 
   isretr-hom-inv-iso-Cat :
     {x y : obj-Cat C} (f : iso-Cat x y) →
-    compose-hom-Cat C (hom-inv-iso-Cat f) (hom-iso-Cat f) ＝ id-hom-Cat C
+    comp-hom-Cat C (hom-inv-iso-Cat f) (hom-iso-Cat f) ＝ id-hom-Cat C
   isretr-hom-inv-iso-Cat f = pr2 (pr2 (is-iso-hom-iso-Cat f))
 
   inv-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → iso-Cat y x
@@ -82,7 +82,7 @@ module _
   precomp-iso-Cat :
     {x y z : obj-Cat C} →
     iso-Cat C x y → type-hom-Cat C y z → type-hom-Cat C x z
-  precomp-iso-Cat f g = compose-hom-Cat C g (hom-iso-Cat C f)
+  precomp-iso-Cat f g = comp-hom-Cat C g (hom-iso-Cat C f)
 ```
 
 ### Postcomposing by isomorphisms
@@ -95,7 +95,7 @@ module _
   postcomp-iso-Cat :
     {x y z : obj-Cat C} →
     iso-Cat C y z → type-hom-Cat C x y → type-hom-Cat C x z
-  postcomp-iso-Cat f g = compose-hom-Cat C (hom-iso-Cat C f) g
+  postcomp-iso-Cat f g = comp-hom-Cat C (hom-iso-Cat C f) g
 ```
 
 ## Examples
@@ -121,135 +121,135 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
 
-  hom-compose-iso-Cat :
+  hom-comp-iso-Cat :
     {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → type-hom-Cat C x z
-  hom-compose-iso-Cat g f =
-    compose-hom-Cat C (hom-iso-Cat C g) (hom-iso-Cat C f)
+  hom-comp-iso-Cat g f =
+    comp-hom-Cat C (hom-iso-Cat C g) (hom-iso-Cat C f)
 
-  hom-inv-compose-iso-Cat :
+  hom-inv-comp-iso-Cat :
     {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → type-hom-Cat C z x
-  hom-inv-compose-iso-Cat g f =
-    compose-hom-Cat C (hom-inv-iso-Cat C f) (hom-inv-iso-Cat C g)
+  hom-inv-comp-iso-Cat g f =
+    comp-hom-Cat C (hom-inv-iso-Cat C f) (hom-inv-iso-Cat C g)
 
-  issec-hom-inv-compose-iso-Cat :
+  issec-hom-inv-comp-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    compose-hom-Cat C (hom-compose-iso-Cat g f) (hom-inv-compose-iso-Cat g f) ＝
+    comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f) ＝
     id-hom-Cat C
-  issec-hom-inv-compose-iso-Cat g f =
+  issec-hom-inv-comp-iso-Cat g f =
     equational-reasoning
-      compose-hom-Cat C (hom-compose-iso-Cat g f) (hom-inv-compose-iso-Cat g f)
-      ＝ compose-hom-Cat C
+      comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
           ( hom-iso-Cat C g)
-          ( compose-hom-Cat C
+          ( comp-hom-Cat C
             ( hom-iso-Cat C f)
-            ( hom-inv-compose-iso-Cat g f))
+            ( hom-inv-comp-iso-Cat g f))
         by
-          associative-compose-hom-Cat C
+          associative-comp-hom-Cat C
             ( hom-iso-Cat C g)
             ( hom-iso-Cat C f)
-            ( hom-inv-compose-iso-Cat g f)
-      ＝ compose-hom-Cat C
+            ( hom-inv-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
           ( hom-iso-Cat C g)
-          ( compose-hom-Cat C
-            ( compose-hom-Cat C
+          ( comp-hom-Cat C
+            ( comp-hom-Cat C
               ( hom-iso-Cat C f)
               ( hom-inv-iso-Cat C f))
             ( hom-inv-iso-Cat C g))
         by
           ap
-            ( compose-hom-Cat C (hom-iso-Cat C g))
+            ( comp-hom-Cat C (hom-iso-Cat C g))
             ( inv
-              ( associative-compose-hom-Cat C
+              ( associative-comp-hom-Cat C
                 ( hom-iso-Cat C f)
                 ( hom-inv-iso-Cat C f)
                 ( hom-inv-iso-Cat C g)))
-      ＝ compose-hom-Cat C
+      ＝ comp-hom-Cat C
           ( hom-iso-Cat C g)
-          ( compose-hom-Cat C
+          ( comp-hom-Cat C
             ( id-hom-Cat C)
             ( hom-inv-iso-Cat C g))
         by
           ap
-            ( compose-hom-Cat C (hom-iso-Cat C g))
+            ( comp-hom-Cat C (hom-iso-Cat C g))
             ( ap
-              ( λ h → compose-hom-Cat C h (hom-inv-iso-Cat C g))
+              ( λ h → comp-hom-Cat C h (hom-inv-iso-Cat C g))
               ( issec-hom-inv-iso-Cat C f))
-      ＝ compose-hom-Cat C (hom-iso-Cat C g) (hom-inv-iso-Cat C g)
+      ＝ comp-hom-Cat C (hom-iso-Cat C g) (hom-inv-iso-Cat C g)
         by
           ap
-            ( compose-hom-Cat C (hom-iso-Cat C g))
-            ( left-unit-law-compose-hom-Cat C (hom-inv-iso-Cat C g))
+            ( comp-hom-Cat C (hom-iso-Cat C g))
+            ( left-unit-law-comp-hom-Cat C (hom-inv-iso-Cat C g))
       ＝ id-hom-Cat C
         by issec-hom-inv-iso-Cat C g
 
-  isretr-hom-inv-compose-iso-Cat :
+  isretr-hom-inv-comp-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    ( compose-hom-Cat
+    ( comp-hom-Cat
       ( C)
-      ( hom-inv-compose-iso-Cat g f)
-      ( hom-compose-iso-Cat g f)) ＝
+      ( hom-inv-comp-iso-Cat g f)
+      ( hom-comp-iso-Cat g f)) ＝
     ( id-hom-Cat C)
-  isretr-hom-inv-compose-iso-Cat g f =
+  isretr-hom-inv-comp-iso-Cat g f =
     equational-reasoning
-      compose-hom-Cat C (hom-inv-compose-iso-Cat g f) (hom-compose-iso-Cat g f)
-      ＝ compose-hom-Cat C
+      comp-hom-Cat C (hom-inv-comp-iso-Cat g f) (hom-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
           ( hom-inv-iso-Cat C f)
-          ( compose-hom-Cat C
+          ( comp-hom-Cat C
             ( hom-inv-iso-Cat C g)
-            ( hom-compose-iso-Cat g f))
+            ( hom-comp-iso-Cat g f))
         by
-          associative-compose-hom-Cat C
+          associative-comp-hom-Cat C
             ( hom-inv-iso-Cat C f)
             ( hom-inv-iso-Cat C g)
-            ( hom-compose-iso-Cat g f)
-      ＝ compose-hom-Cat C
+            ( hom-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
           ( hom-inv-iso-Cat C f)
-          ( compose-hom-Cat C
-            ( compose-hom-Cat C
+          ( comp-hom-Cat C
+            ( comp-hom-Cat C
               ( hom-inv-iso-Cat C g)
               ( hom-iso-Cat C g))
             ( hom-iso-Cat C f))
         by
           ap
-            ( compose-hom-Cat C (hom-inv-iso-Cat C f))
+            ( comp-hom-Cat C (hom-inv-iso-Cat C f))
             ( inv
-              ( associative-compose-hom-Cat C
+              ( associative-comp-hom-Cat C
                 ( hom-inv-iso-Cat C g)
                 ( hom-iso-Cat C g)
                 ( hom-iso-Cat C f)))
-      ＝ compose-hom-Cat C
+      ＝ comp-hom-Cat C
           ( hom-inv-iso-Cat C f)
-          ( compose-hom-Cat C
+          ( comp-hom-Cat C
             ( id-hom-Cat C)
             ( hom-iso-Cat C f))
         by
           ap
-            ( compose-hom-Cat C (hom-inv-iso-Cat C f))
+            ( comp-hom-Cat C (hom-inv-iso-Cat C f))
             ( ap
-              ( λ h → compose-hom-Cat C h (hom-iso-Cat C f))
+              ( λ h → comp-hom-Cat C h (hom-iso-Cat C f))
               ( isretr-hom-inv-iso-Cat C g))
-      ＝ compose-hom-Cat C (hom-inv-iso-Cat C f) (hom-iso-Cat C f)
+      ＝ comp-hom-Cat C (hom-inv-iso-Cat C f) (hom-iso-Cat C f)
         by
           ap
-            ( compose-hom-Cat C (hom-inv-iso-Cat C f))
-            ( left-unit-law-compose-hom-Cat C (hom-iso-Cat C f))
+            ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+            ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
       ＝ id-hom-Cat C
         by isretr-hom-inv-iso-Cat C f
 
-  is-iso-hom-compose-iso-Cat :
+  is-iso-hom-comp-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    is-iso-Cat C (hom-compose-iso-Cat g f)
-  pr1 (is-iso-hom-compose-iso-Cat g f) =
-    hom-inv-compose-iso-Cat g f
-  pr1 (pr2 (is-iso-hom-compose-iso-Cat g f)) =
-    issec-hom-inv-compose-iso-Cat g f
-  pr2 (pr2 (is-iso-hom-compose-iso-Cat g f)) =
-    isretr-hom-inv-compose-iso-Cat g f
+    is-iso-Cat C (hom-comp-iso-Cat g f)
+  pr1 (is-iso-hom-comp-iso-Cat g f) =
+    hom-inv-comp-iso-Cat g f
+  pr1 (pr2 (is-iso-hom-comp-iso-Cat g f)) =
+    issec-hom-inv-comp-iso-Cat g f
+  pr2 (pr2 (is-iso-hom-comp-iso-Cat g f)) =
+    isretr-hom-inv-comp-iso-Cat g f
 
-  compose-iso-Cat :
+  comp-iso-Cat :
     {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → iso-Cat C x z
-  pr1 (compose-iso-Cat g f) = hom-compose-iso-Cat g f
-  pr2 (compose-iso-Cat g f) = is-iso-hom-compose-iso-Cat g f
+  pr1 (comp-iso-Cat g f) = hom-comp-iso-Cat g f
+  pr2 (comp-iso-Cat g f) = is-iso-hom-comp-iso-Cat g f
 ```
 
 ## Properties
@@ -316,42 +316,42 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
 
-  left-unit-law-compose-iso-Cat :
+  left-unit-law-comp-iso-Cat :
     {x y : obj-Cat C} (f : iso-Cat C x y) →
-    compose-iso-Cat C (id-iso-Cat C) f ＝ f
-  left-unit-law-compose-iso-Cat f =
+    comp-iso-Cat C (id-iso-Cat C) f ＝ f
+  left-unit-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
-      (compose-iso-Cat C (id-iso-Cat C) f)
+      (comp-iso-Cat C (id-iso-Cat C) f)
       ( f)
-      ( left-unit-law-compose-hom-Cat C (hom-iso-Cat C f))
+      ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
 ```
 
 #### Right unit law
 
 ```agda
-  right-unit-law-compose-iso-Cat :
+  right-unit-law-comp-iso-Cat :
     {x y : obj-Cat C} (f : iso-Cat C x y) →
-    compose-iso-Cat C f (id-iso-Cat C) ＝ f
-  right-unit-law-compose-iso-Cat f =
+    comp-iso-Cat C f (id-iso-Cat C) ＝ f
+  right-unit-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
-      ( compose-iso-Cat C f (id-iso-Cat C))
+      ( comp-iso-Cat C f (id-iso-Cat C))
       ( f)
-      ( right-unit-law-compose-hom-Cat C (hom-iso-Cat C f))
+      ( right-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
 ```
 
 #### Associatitivity
 
 ```agda
-  associative-compose-iso-Cat :
+  associative-comp-iso-Cat :
     {x y z w : obj-Cat C}
     (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    compose-iso-Cat C (compose-iso-Cat C h g) f ＝
-    compose-iso-Cat C h (compose-iso-Cat C g f)
-  associative-compose-iso-Cat h g f =
+    comp-iso-Cat C (comp-iso-Cat C h g) f ＝
+    comp-iso-Cat C h (comp-iso-Cat C g f)
+  associative-comp-iso-Cat h g f =
     eq-Eq-iso-Cat C
-      ( compose-iso-Cat C (compose-iso-Cat C h g) f)
-      ( compose-iso-Cat C h (compose-iso-Cat C g f))
-      ( associative-compose-hom-Cat C
+      ( comp-iso-Cat C (comp-iso-Cat C h g) f)
+      ( comp-iso-Cat C h (comp-iso-Cat C g f))
+      ( associative-comp-hom-Cat C
         ( hom-iso-Cat C h)
         ( hom-iso-Cat C g)
         ( hom-iso-Cat C f))
@@ -360,12 +360,12 @@ module _
 #### Left inverse law
 
 ```agda
-  left-inverse-law-compose-iso-Cat :
+  left-inverse-law-comp-iso-Cat :
     {x y : obj-Cat C} (f : iso-Cat C x y) →
-    compose-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
-  left-inverse-law-compose-iso-Cat f =
+    comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
+  left-inverse-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
-      ( compose-iso-Cat C (inv-iso-Cat C f) f)
+      ( comp-iso-Cat C (inv-iso-Cat C f) f)
       ( id-iso-Cat C)
       ( isretr-hom-inv-iso-Cat C f)
 ```
@@ -373,12 +373,12 @@ module _
 #### Right inverse law
 
 ```agda
-  right-inverse-law-compose-iso-Cat :
+  right-inverse-law-comp-iso-Cat :
     {x y : obj-Cat C} (f : iso-Cat C x y) →
-    compose-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
-  right-inverse-law-compose-iso-Cat f =
+    comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
+  right-inverse-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
-      ( compose-iso-Cat C f (inv-iso-Cat C f))
+      ( comp-iso-Cat C f (inv-iso-Cat C f))
       ( id-iso-Cat C)
       ( issec-hom-inv-iso-Cat C f)
 ```
@@ -396,9 +396,9 @@ module _
   preserves-concat-iso-eq-Cat :
     {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
     iso-eq-Cat (p ∙ q) ＝
-    compose-iso-Cat C (iso-eq-Cat q) (iso-eq-Cat p)
+    comp-iso-Cat C (iso-eq-Cat q) (iso-eq-Cat p)
   preserves-concat-iso-eq-Cat refl q =
-    inv (right-unit-law-compose-iso-Cat C (iso-eq-Cat q))
+    inv (right-unit-law-comp-iso-Cat C (iso-eq-Cat q))
 ```
 
 ## Properties
@@ -428,20 +428,20 @@ module _
     {x y : obj-Cat C} (p : x ＝ y) → eq-iso-Cat (iso-eq-Cat C p) ＝ p
   isretr-eq-iso-Cat {x} {y} = isretr-map-inv-equiv (extensionality-obj-Cat x y)
 
-  preserves-compose-eq-iso-Cat :
+  preserves-comp-eq-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    eq-iso-Cat (compose-iso-Cat C g f) ＝ (eq-iso-Cat f ∙ eq-iso-Cat g)
-  preserves-compose-eq-iso-Cat g f =
+    eq-iso-Cat (comp-iso-Cat C g f) ＝ (eq-iso-Cat f ∙ eq-iso-Cat g)
+  preserves-comp-eq-iso-Cat g f =
     equational-reasoning
-      eq-iso-Cat (compose-iso-Cat C g f)
+      eq-iso-Cat (comp-iso-Cat C g f)
       ＝ eq-iso-Cat
-          ( compose-iso-Cat C
+          ( comp-iso-Cat C
             ( iso-eq-Cat C (eq-iso-Cat g))
             ( iso-eq-Cat C (eq-iso-Cat f)))
         by
           ap eq-iso-Cat
             ( ap-binary
-              ( compose-iso-Cat C)
+              ( comp-iso-Cat C)
               ( inv (issec-eq-iso-Cat g))
               ( inv (issec-eq-iso-Cat f)))
       ＝ eq-iso-Cat (iso-eq-Cat C (eq-iso-Cat f ∙ eq-iso-Cat g))

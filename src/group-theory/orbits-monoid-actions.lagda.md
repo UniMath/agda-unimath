@@ -131,15 +131,15 @@ module _
   pr1 (id-hom-orbit-Monoid-Action x) = unit-Monoid M
   pr2 (id-hom-orbit-Monoid-Action x) = unit-law-mul-Monoid-Action M X x
 
-  compose-hom-orbit-Monoid-Action :
+  comp-hom-orbit-Monoid-Action :
     {x y z : type-Monoid-Action M X} →
     hom-orbit-Monoid-Action y z → hom-orbit-Monoid-Action x y →
     hom-orbit-Monoid-Action x z
-  pr1 (compose-hom-orbit-Monoid-Action g f) =
+  pr1 (comp-hom-orbit-Monoid-Action g f) =
     mul-Monoid M
       ( element-hom-orbit-Monoid-Action g)
       ( element-hom-orbit-Monoid-Action f)
-  pr2 (compose-hom-orbit-Monoid-Action {x} g f) =
+  pr2 (comp-hom-orbit-Monoid-Action {x} g f) =
     ( associative-mul-Monoid-Action M X
       ( element-hom-orbit-Monoid-Action g)
       ( element-hom-orbit-Monoid-Action f)
@@ -147,30 +147,30 @@ module _
     ( ( ap-mul-Monoid-Action M X (eq-hom-orbit-Monoid-Action f)) ∙
       ( eq-hom-orbit-Monoid-Action g))
 
-  associative-compose-hom-orbit-Monoid-Action :
+  associative-comp-hom-orbit-Monoid-Action :
     {x y z w : type-Monoid-Action M X} (h : hom-orbit-Monoid-Action z w)
     (g : hom-orbit-Monoid-Action y z) (f : hom-orbit-Monoid-Action x y) →
     Id
-      ( compose-hom-orbit-Monoid-Action (compose-hom-orbit-Monoid-Action h g) f)
-      ( compose-hom-orbit-Monoid-Action h (compose-hom-orbit-Monoid-Action g f))
-  associative-compose-hom-orbit-Monoid-Action h g f =
+      ( comp-hom-orbit-Monoid-Action (comp-hom-orbit-Monoid-Action h g) f)
+      ( comp-hom-orbit-Monoid-Action h (comp-hom-orbit-Monoid-Action g f))
+  associative-comp-hom-orbit-Monoid-Action h g f =
     eq-htpy-hom-orbit-Monoid-Action
       ( associative-mul-Monoid M
         ( element-hom-orbit-Monoid-Action h)
         ( element-hom-orbit-Monoid-Action g)
         ( element-hom-orbit-Monoid-Action f))
 
-  left-unit-law-compose-hom-orbit-Monoid-Action :
+  left-unit-law-comp-hom-orbit-Monoid-Action :
     {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    Id (compose-hom-orbit-Monoid-Action (id-hom-orbit-Monoid-Action y) f) f
-  left-unit-law-compose-hom-orbit-Monoid-Action f =
+    Id (comp-hom-orbit-Monoid-Action (id-hom-orbit-Monoid-Action y) f) f
+  left-unit-law-comp-hom-orbit-Monoid-Action f =
     eq-htpy-hom-orbit-Monoid-Action
       ( left-unit-law-mul-Monoid M (element-hom-orbit-Monoid-Action f))
 
-  right-unit-law-compose-hom-orbit-Monoid-Action :
+  right-unit-law-comp-hom-orbit-Monoid-Action :
     {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    Id (compose-hom-orbit-Monoid-Action f (id-hom-orbit-Monoid-Action x)) f
-  right-unit-law-compose-hom-orbit-Monoid-Action f =
+    Id (comp-hom-orbit-Monoid-Action f (id-hom-orbit-Monoid-Action x)) f
+  right-unit-law-comp-hom-orbit-Monoid-Action f =
     eq-htpy-hom-orbit-Monoid-Action
       ( right-unit-law-mul-Monoid M (element-hom-orbit-Monoid-Action f))
 
@@ -178,13 +178,13 @@ module _
   pr1 orbit-monoid-action-Precategory = type-Monoid-Action M X
   pr1 (pr2 orbit-monoid-action-Precategory) = hom-orbit-monoid-action-Set
   pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
-    compose-hom-orbit-Monoid-Action
+    comp-hom-orbit-Monoid-Action
   pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
-    associative-compose-hom-orbit-Monoid-Action
+    associative-comp-hom-orbit-Monoid-Action
   pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory))) =
     id-hom-orbit-Monoid-Action
   pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
-    left-unit-law-compose-hom-orbit-Monoid-Action
+    left-unit-law-comp-hom-orbit-Monoid-Action
   pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
-    right-unit-law-compose-hom-orbit-Monoid-Action
+    right-unit-law-comp-hom-orbit-Monoid-Action
 ```

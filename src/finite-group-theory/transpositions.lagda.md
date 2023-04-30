@@ -865,7 +865,7 @@ correct-Fin-succ-Fin-transposition-list n (cons t l) x =
             ( map-equiv (extend-equiv-Maybe (Fin-Set n)) (transposition t))))
         ( correct-Fin-succ-Fin-transposition-list n l x)) ∙
         ( inv
-          ( compose-extend-equiv-Maybe
+          ( comp-extend-equiv-Maybe
             ( Fin-Set n)
             ( transposition t)
             ( permutation-list-transpositions l)

@@ -145,27 +145,27 @@ id-hom-Concrete-Group :
   {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
 id-hom-Concrete-Group G = id-hom-∞-Group ( ∞-group-Concrete-Group G)
 
-compose-hom-Concrete-Group :
+comp-hom-Concrete-Group :
   {l1 l2 l3 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3) →
   hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
-compose-hom-Concrete-Group G H K =
-  compose-hom-∞-Group
+comp-hom-Concrete-Group G H K =
+  comp-hom-∞-Group
     ( ∞-group-Concrete-Group G)
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)
 
-associative-compose-hom-Concrete-Group :
+associative-comp-hom-Concrete-Group :
   {l1 l2 l3 l4 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2)
   (K : Concrete-Group l3) (L : Concrete-Group l4)
   (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
   (f : hom-Concrete-Group G H) →
   htpy-hom-Concrete-Group G L
-    ( compose-hom-Concrete-Group G H L (compose-hom-Concrete-Group H K L h g) f)
-    ( compose-hom-Concrete-Group G K L h (compose-hom-Concrete-Group G H K g f))
-associative-compose-hom-Concrete-Group G H K L =
-  associative-compose-hom-∞-Group
+    ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
+    ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
+associative-comp-hom-Concrete-Group G H K L =
+  associative-comp-hom-∞-Group
     ( ∞-group-Concrete-Group G)
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)
@@ -175,23 +175,23 @@ module _
   {l1 l2 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
   where
 
-  left-unit-law-compose-hom-Concrete-Group :
+  left-unit-law-comp-hom-Concrete-Group :
     (f : hom-Concrete-Group G H) →
     htpy-hom-Concrete-Group G H
-      ( compose-hom-Concrete-Group G H H (id-hom-Concrete-Group H) f)
+      ( comp-hom-Concrete-Group G H H (id-hom-Concrete-Group H) f)
       ( f)
-  left-unit-law-compose-hom-Concrete-Group =
-    left-unit-law-compose-hom-∞-Group
+  left-unit-law-comp-hom-Concrete-Group =
+    left-unit-law-comp-hom-∞-Group
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
 
-  right-unit-law-compose-hom-Concrete-Group :
+  right-unit-law-comp-hom-Concrete-Group :
     (f : hom-Concrete-Group G H) →
     htpy-hom-Concrete-Group G H
-      ( compose-hom-Concrete-Group G G H f (id-hom-Concrete-Group G))
+      ( comp-hom-Concrete-Group G G H f (id-hom-Concrete-Group G))
       ( f)
-  right-unit-law-compose-hom-Concrete-Group =
-    right-unit-law-compose-hom-∞-Group
+  right-unit-law-comp-hom-Concrete-Group =
+    right-unit-law-comp-hom-∞-Group
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
 ```

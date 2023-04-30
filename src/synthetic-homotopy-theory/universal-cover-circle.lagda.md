@@ -99,7 +99,7 @@ abstract
       ( _)
       ( is-equiv-f x)
       ( λ p₀ →
-        is-equiv-compose
+        is-equiv-comp
           ( concat
             ( naturality-tr-fiberwise-transformation f l p₀)
             ( f x p₀))

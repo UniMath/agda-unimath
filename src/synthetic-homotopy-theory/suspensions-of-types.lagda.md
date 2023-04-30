@@ -309,7 +309,7 @@ is-equiv-ev-suspension :
   ( up-Y : universal-property-suspension' l3 X Y susp-str-Y) →
   ( Z : UU l3) → is-equiv (ev-suspension susp-str-Y Z)
 is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
-  is-equiv-compose-htpy
+  is-equiv-comp-htpy
     ( ev-suspension susp-str-Y Z)
     ( map-comparison-suspension-cocone X Z)
     ( cocone-map
@@ -447,7 +447,7 @@ module _
   pr2 merid-susp* = refl
 
   unit-susp-loop-adj* : X →* Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj* = compose-pointed-map _ _ _ unshift* merid-susp*
+  unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
 
   unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*

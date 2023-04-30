@@ -56,7 +56,7 @@ module _
   preserves-mul-action-categorical-representation-Monoid :
     (x y : type-Monoid M) →
     ( action-categorical-representation-Monoid (mul-Monoid M x y)) ＝
-    ( compose-endo-Cat C
+    ( comp-endo-Cat C
       ( obj-categorical-representation-Monoid)
       ( action-categorical-representation-Monoid x)
       ( action-categorical-representation-Monoid y))

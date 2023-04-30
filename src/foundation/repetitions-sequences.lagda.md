@@ -93,11 +93,11 @@ ordered-repetition-of-values-ℕ :
 ordered-repetition-of-values-ℕ f =
   Σ strictly-ordered-pair-ℕ (is-ordered-repetition-of-values-ℕ f)
 
-ordered-repetition-of-values-compose-ℕ :
+ordered-repetition-of-values-comp-ℕ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : A → B) {f : ℕ → A} →
   ordered-repetition-of-values-ℕ f →
   ordered-repetition-of-values-ℕ (g ∘ f)
-ordered-repetition-of-values-compose-ℕ g ((a , b , H) , p) =
+ordered-repetition-of-values-comp-ℕ g ((a , b , H) , p) =
   ((a , b , H) , ap g p)
 
 ordered-repetition-of-values-right-factor-ℕ :

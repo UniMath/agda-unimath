@@ -69,11 +69,11 @@ id-hom-Group G = id-hom-Semigroup (semigroup-Group G)
 ### Composition of group homomorphisms
 
 ```agda
-compose-hom-Group :
+comp-hom-Group :
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3) →
   type-hom-Group H K → type-hom-Group G H → type-hom-Group G K
-compose-hom-Group G H K =
-  compose-hom-Semigroup
+comp-hom-Group G H K =
+  comp-hom-Semigroup
     ( semigroup-Group G)
     ( semigroup-Group H)
     ( semigroup-Group K)
@@ -141,14 +141,14 @@ module _
 ### Associativity of composition of group homomorphisms
 
 ```agda
-associative-compose-hom-Group :
+associative-comp-hom-Group :
   {l1 l2 l3 l4 : Level}
   (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
   (h : type-hom-Group K L) (g : type-hom-Group H K) (f : type-hom-Group G H) →
-  Id ( compose-hom-Group G H L (compose-hom-Group H K L h g) f)
-     ( compose-hom-Group G K L h (compose-hom-Group G H K g f))
-associative-compose-hom-Group G H K L =
-  associative-compose-hom-Semigroup
+  Id ( comp-hom-Group G H L (comp-hom-Group H K L h g) f)
+     ( comp-hom-Group G K L h (comp-hom-Group G H K g f))
+associative-comp-hom-Group G H K L =
+  associative-comp-hom-Semigroup
     ( semigroup-Group G)
     ( semigroup-Group H)
     ( semigroup-Group K)
@@ -158,19 +158,19 @@ associative-compose-hom-Group G H K L =
 ### The left and right unit laws for composition of group homomorphisms
 
 ```agda
-left-unit-law-compose-hom-Group :
+left-unit-law-comp-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H) →
-  Id (compose-hom-Group G H H (id-hom-Group H) f) f
-left-unit-law-compose-hom-Group G H =
-  left-unit-law-compose-hom-Semigroup
+  Id (comp-hom-Group G H H (id-hom-Group H) f) f
+left-unit-law-comp-hom-Group G H =
+  left-unit-law-comp-hom-Semigroup
     ( semigroup-Group G)
     ( semigroup-Group H)
 
-right-unit-law-compose-hom-Group :
+right-unit-law-comp-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H) →
-  Id (compose-hom-Group G G H f (id-hom-Group G)) f
-right-unit-law-compose-hom-Group G H =
-  right-unit-law-compose-hom-Semigroup
+  Id (comp-hom-Group G G H f (id-hom-Group G)) f
+right-unit-law-comp-hom-Group G H =
+  right-unit-law-comp-hom-Semigroup
     ( semigroup-Group G)
     ( semigroup-Group H)
 ```

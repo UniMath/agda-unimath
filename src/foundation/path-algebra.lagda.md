@@ -347,9 +347,9 @@ module _
       ( ap² f (horizontal-inv-Id² α))
       ( ap-inv f p')
   nat-sq-ap-inv-Id² =
-    (inv (horizontal-concat-Id² refl (ap-compose inv (ap f) α)) ∙
+    (inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α)) ∙
       (nat-htpy (ap-inv f) α)) ∙
-        (horizontal-concat-Id² (ap-compose (ap f) inv α) refl)
+        (horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
 ```
 
 Identity law and constant law.
@@ -385,15 +385,15 @@ module _
   {a0 a1 : A} {p p' : a0 ＝ a1} (g : B → C) (f : A → B) (α : p ＝ p')
   where
 
-  nat-sq-ap-compose-Id² :
+  nat-sq-ap-comp-Id² :
     coherence-square-identifications
-      ( ap-compose g f p)
+      ( ap-comp g f p)
       ( (ap² g ∘ ap² f) α)
       ( ap² (g ∘ f) α)
-      ( ap-compose g f p')
-  nat-sq-ap-compose-Id² =
-    (horizontal-concat-Id² refl (inv (ap-compose (ap g) (ap f) α)) ∙
-      (nat-htpy (ap-compose g f) α))
+      ( ap-comp g f p')
+  nat-sq-ap-comp-Id² =
+    (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
+      (nat-htpy (ap-comp g f) α))
 ```
 
 ## Properties of 3-paths

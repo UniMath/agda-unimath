@@ -132,7 +132,7 @@ module _
     is-equiv h → ({l : Level} → is-set-quotient l R B f) →
     {l : Level} → is-set-quotient l R C g
   is-set-quotient-is-set-quotient-is-equiv E Uf {l} X =
-    is-equiv-compose-htpy
+    is-equiv-comp-htpy
       ( precomp-Set-Quotient R C g X)
       ( precomp-Set-Quotient R B f X)
       ( precomp h (type-Set X))

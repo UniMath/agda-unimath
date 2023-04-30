@@ -51,7 +51,7 @@ module _
     (f : type-hom-Precat C z x) →
     (g : type-hom-Precat C z y) →
     (∃! (type-hom-Precat C z p) λ h →
-        (compose-hom-Precat C l h ＝ f) × (compose-hom-Precat C r h ＝ g))
+        (comp-hom-Precat C l h ＝ f) × (comp-hom-Precat C r h ＝ g))
 
   product-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   product-Precat x y =
@@ -90,14 +90,14 @@ module _
     morphism-into-product-Precat = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
     morphism-into-product-Precat-comm-pr1 :
-      compose-hom-Precat C
+      comp-hom-Precat C
         ( pr1-product-Precat x y)
         ( morphism-into-product-Precat) ＝ f
     morphism-into-product-Precat-comm-pr1 =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
     morphism-into-product-Precat-comm-pr2 :
-      compose-hom-Precat C
+      comp-hom-Precat C
         ( pr2-product-Precat x y)
         ( morphism-into-product-Precat) ＝ g
     morphism-into-product-Precat-comm-pr2 =
@@ -105,8 +105,8 @@ module _
 
     is-unique-morphism-into-product-Precat :
       (h : type-hom-Precat C z (object-product-Precat x y)) →
-      compose-hom-Precat C (pr1-product-Precat x y) h ＝ f →
-      compose-hom-Precat C (pr2-product-Precat x y) h ＝ g →
+      comp-hom-Precat C (pr1-product-Precat x y) h ＝ f →
+      comp-hom-Precat C (pr2-product-Precat x y) h ＝ g →
       morphism-into-product-Precat ＝ h
     is-unique-morphism-into-product-Precat h comm1 comm2 =
       ap pr1 ((pr2 (pr2 (pr2 (pr2 (t x y))) z f g)) (h , (comm1 , comm2)))
@@ -153,6 +153,6 @@ module _
       (object-product-Precat C t y₁ y₂)
   map-product-Precat =
     morphism-into-product-Precat C t _ _ _
-      (compose-hom-Precat C f (pr1-product-Precat C t x₁ x₂))
-      (compose-hom-Precat C g (pr2-product-Precat C t x₁ x₂))
+      (comp-hom-Precat C f (pr1-product-Precat C t x₁ x₂))
+      (comp-hom-Precat C g (pr2-product-Precat C t x₁ x₂))
 ```

@@ -242,20 +242,20 @@ module _
   (Z : Torsor-Abstract-Group G l4)
   where
 
-  compose-equiv-Torsor-Abstract-Group :
+  comp-equiv-Torsor-Abstract-Group :
     equiv-Torsor-Abstract-Group G Y Z → equiv-Torsor-Abstract-Group G X Y →
     equiv-Torsor-Abstract-Group G X Z
-  compose-equiv-Torsor-Abstract-Group =
-    compose-equiv-Abstract-Group-Action G
+  comp-equiv-Torsor-Abstract-Group =
+    comp-equiv-Abstract-Group-Action G
       ( action-Torsor-Abstract-Group G X)
       ( action-Torsor-Abstract-Group G Y)
       ( action-Torsor-Abstract-Group G Z)
 
-  compose-equiv-Torsor-Abstract-Group' :
+  comp-equiv-Torsor-Abstract-Group' :
     equiv-Torsor-Abstract-Group G X Y → equiv-Torsor-Abstract-Group G Y Z →
     equiv-Torsor-Abstract-Group G X Z
-  compose-equiv-Torsor-Abstract-Group' e f =
-    compose-equiv-Torsor-Abstract-Group f e
+  comp-equiv-Torsor-Abstract-Group' e f =
+    comp-equiv-Torsor-Abstract-Group f e
 
 module _
   {l1 l2 l3 : Level} (G : Group l1)
@@ -275,22 +275,22 @@ module _
   (X4 : Torsor-Abstract-Group G l5)
   where
 
-  associative-compose-equiv-Torsor-Abstract-Group :
+  associative-comp-equiv-Torsor-Abstract-Group :
     (h : equiv-Torsor-Abstract-Group G X3 X4)
     (g : equiv-Torsor-Abstract-Group G X2 X3)
     (f : equiv-Torsor-Abstract-Group G X1 X2) →
-    Id ( compose-equiv-Torsor-Abstract-Group G X1 X2 X4
-         ( compose-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
+    Id ( comp-equiv-Torsor-Abstract-Group G X1 X2 X4
+         ( comp-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
          ( f))
-       ( compose-equiv-Torsor-Abstract-Group G X1 X3 X4 h
-         ( compose-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
-  associative-compose-equiv-Torsor-Abstract-Group h g f =
+       ( comp-equiv-Torsor-Abstract-Group G X1 X3 X4 h
+         ( comp-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
+  associative-comp-equiv-Torsor-Abstract-Group h g f =
     eq-htpy-equiv-Torsor-Abstract-Group G X1 X4
-      ( compose-equiv-Torsor-Abstract-Group G X1 X2 X4
-        ( compose-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
+      ( comp-equiv-Torsor-Abstract-Group G X1 X2 X4
+        ( comp-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
         ( f))
-      ( compose-equiv-Torsor-Abstract-Group G X1 X3 X4 h
-        ( compose-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
+      ( comp-equiv-Torsor-Abstract-Group G X1 X3 X4 h
+        ( comp-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
       ( refl-htpy)
 
 module _
@@ -298,54 +298,54 @@ module _
   (Y : Torsor-Abstract-Group G l3)
   where
 
-  left-unit-law-compose-equiv-Torsor-Abstract-Group :
+  left-unit-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( compose-equiv-Torsor-Abstract-Group G X Y Y
+    Id ( comp-equiv-Torsor-Abstract-Group G X Y Y
          ( id-equiv-Torsor-Abstract-Group G Y)
          ( f))
        ( f)
-  left-unit-law-compose-equiv-Torsor-Abstract-Group f =
+  left-unit-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X Y
-      ( compose-equiv-Torsor-Abstract-Group G X Y Y
+      ( comp-equiv-Torsor-Abstract-Group G X Y Y
         ( id-equiv-Torsor-Abstract-Group G Y)
         ( f))
       ( f)
       ( refl-htpy)
 
-  right-unit-law-compose-equiv-Torsor-Abstract-Group :
+  right-unit-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( compose-equiv-Torsor-Abstract-Group G X X Y f
+    Id ( comp-equiv-Torsor-Abstract-Group G X X Y f
          ( id-equiv-Torsor-Abstract-Group G X))
        ( f)
-  right-unit-law-compose-equiv-Torsor-Abstract-Group f =
+  right-unit-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X Y
-      ( compose-equiv-Torsor-Abstract-Group G X X Y f
+      ( comp-equiv-Torsor-Abstract-Group G X X Y f
         ( id-equiv-Torsor-Abstract-Group G X))
       ( f)
       ( refl-htpy)
 
-  left-inverse-law-compose-equiv-Torsor-Abstract-Group :
+  left-inverse-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( compose-equiv-Torsor-Abstract-Group G X Y X
+    Id ( comp-equiv-Torsor-Abstract-Group G X Y X
          ( inv-equiv-Torsor-Abstract-Group G X Y f)
          ( f))
        ( id-equiv-Torsor-Abstract-Group G X)
-  left-inverse-law-compose-equiv-Torsor-Abstract-Group f =
+  left-inverse-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X X
-      ( compose-equiv-Torsor-Abstract-Group G X Y X
+      ( comp-equiv-Torsor-Abstract-Group G X Y X
         ( inv-equiv-Torsor-Abstract-Group G X Y f)
         ( f))
       ( id-equiv-Torsor-Abstract-Group G X)
       ( isretr-map-inv-equiv (pr1 f))
 
-  right-inverse-law-compose-equiv-Torsor-Abstract-Group :
+  right-inverse-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( compose-equiv-Torsor-Abstract-Group G Y X Y f
+    Id ( comp-equiv-Torsor-Abstract-Group G Y X Y f
          ( inv-equiv-Torsor-Abstract-Group G X Y f))
        ( id-equiv-Torsor-Abstract-Group G Y)
-  right-inverse-law-compose-equiv-Torsor-Abstract-Group f =
+  right-inverse-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G Y Y
-      ( compose-equiv-Torsor-Abstract-Group G Y X Y f
+      ( comp-equiv-Torsor-Abstract-Group G Y X Y f
         ( inv-equiv-Torsor-Abstract-Group G X Y f))
       ( id-equiv-Torsor-Abstract-Group G Y)
       ( issec-map-inv-equiv (pr1 f))
@@ -358,11 +358,11 @@ module _
     {l2 : Level} (X Y Z : Torsor-Abstract-Group G l2)
     (p : Id X Y) (q : Id Y Z) →
     Id ( equiv-eq-Torsor-Abstract-Group G X Z (p ∙ q))
-       ( compose-equiv-Torsor-Abstract-Group G X Y Z
+       ( comp-equiv-Torsor-Abstract-Group G X Y Z
          ( equiv-eq-Torsor-Abstract-Group G Y Z q)
          ( equiv-eq-Torsor-Abstract-Group G X Y p))
   preserves-mul-equiv-eq-Torsor-Abstract-Group X .X Z refl q =
-    inv ( right-unit-law-compose-equiv-Torsor-Abstract-Group G X Z
+    inv ( right-unit-law-comp-equiv-Torsor-Abstract-Group G X Z
           ( equiv-eq-Torsor-Abstract-Group G X Z q))
 
 module _
@@ -379,12 +379,12 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (pr2 (pr1 aut-principal-Torsor-Abstract-Group)) =
-    compose-equiv-Torsor-Abstract-Group G
+    comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr2 (pr2 (pr1 aut-principal-Torsor-Abstract-Group)) =
-    associative-compose-equiv-Torsor-Abstract-Group G
+    associative-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
@@ -392,11 +392,11 @@ module _
   pr1 (pr1 (pr2 aut-principal-Torsor-Abstract-Group)) =
     id-equiv-Torsor-Abstract-Group G (principal-Torsor-Abstract-Group G)
   pr1 (pr2 (pr1 (pr2 aut-principal-Torsor-Abstract-Group))) =
-    left-unit-law-compose-equiv-Torsor-Abstract-Group G
+    left-unit-law-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr2 (pr2 (pr1 (pr2 aut-principal-Torsor-Abstract-Group))) =
-    right-unit-law-compose-equiv-Torsor-Abstract-Group G
+    right-unit-law-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (pr2 (pr2 aut-principal-Torsor-Abstract-Group)) =
@@ -404,11 +404,11 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (pr2 (pr2 (pr2 aut-principal-Torsor-Abstract-Group))) =
-    left-inverse-law-compose-equiv-Torsor-Abstract-Group G
+    left-inverse-law-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr2 (pr2 (pr2 (pr2 aut-principal-Torsor-Abstract-Group))) =
-    right-inverse-law-compose-equiv-Torsor-Abstract-Group G
+    right-inverse-law-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
 
@@ -429,7 +429,7 @@ module _
           ( λ f →
             unit-trunc-Prop
               ( eq-equiv-Torsor-Abstract-Group G X Y
-                ( compose-equiv-Torsor-Abstract-Group G
+                ( comp-equiv-Torsor-Abstract-Group G
                   ( X)
                   ( principal-Torsor-Abstract-Group G)
                   ( Y)
@@ -474,7 +474,7 @@ module _
            ( principal-Torsor-Abstract-Group G)) →
     Id ( Eq-equiv-Torsor-Abstract-Group
          ( principal-Torsor-Abstract-Group G)
-         ( compose-equiv-Torsor-Abstract-Group G
+         ( comp-equiv-Torsor-Abstract-Group G
            ( principal-Torsor-Abstract-Group G)
            ( principal-Torsor-Abstract-Group G)
            ( principal-Torsor-Abstract-Group G)

@@ -52,7 +52,7 @@ transitive-mere-emb g f =
     ( λ g' →
       apply-universal-property-trunc-Prop f
         ( mere-emb-Prop _ _)
-        ( λ f' → unit-trunc-Prop (compose-emb g' f')))
+        ( λ f' → unit-trunc-Prop (comp-emb g' f')))
 
 mere-emb-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder mere-emb-Large-Preorder l = UU l

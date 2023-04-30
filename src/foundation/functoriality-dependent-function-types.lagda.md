@@ -86,7 +86,7 @@ module _
   abstract
     is-equiv-map-equiv-Π : is-equiv map-equiv-Π
     is-equiv-map-equiv-Π =
-      is-equiv-compose
+      is-equiv-comp
         ( map-Π (λ a →
           ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
           ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
@@ -96,7 +96,7 @@ module _
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
         ( is-equiv-map-Π _
-          ( λ a → is-equiv-compose
+          ( λ a → is-equiv-comp
             ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a))
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
             ( is-equiv-map-equiv
@@ -264,7 +264,7 @@ abstract
     ( e : A ≃ A) (f : (a : A) → B a ≃ B (map-equiv e a)) →
     is-equiv (map-automorphism-Π e f)
   is-equiv-map-automorphism-Π {B = B} e f =
-    is-equiv-compose _ _
+    is-equiv-comp _ _
       ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
       ( is-equiv-map-Π _
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))

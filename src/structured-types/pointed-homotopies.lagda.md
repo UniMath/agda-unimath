@@ -101,9 +101,9 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
   where
 
-  left-unit-law-compose-pointed-map :
-    htpy-pointed-map A B (compose-pointed-map A B B id-pointed-map f) f
-  left-unit-law-compose-pointed-map =
+  left-unit-law-comp-pointed-map :
+    htpy-pointed-map A B (comp-pointed-map A B B id-pointed-map f) f
+  left-unit-law-comp-pointed-map =
     pair
       ( refl-htpy)
       ( ( inv (right-inv (pr2 f))) ∙
@@ -114,9 +114,9 @@ module _
           ( ( inv (ap-id (pr2 f))) ∙
             ( inv right-unit))))
 
-  right-unit-law-compose-pointed-map :
-    htpy-pointed-map A B (compose-pointed-map A A B f id-pointed-map) f
-  right-unit-law-compose-pointed-map =
+  right-unit-law-comp-pointed-map :
+    htpy-pointed-map A B (comp-pointed-map A A B f id-pointed-map) f
+  right-unit-law-comp-pointed-map =
     pair
       ( refl-htpy)
       ( inv (right-inv (pr2 f)))
@@ -125,26 +125,26 @@ module _
   {l1 l2 l3 l4 : Level}
   where
 
-  associative-compose-pointed-map :
+  associative-comp-pointed-map :
     (A : Pointed-Type l1) (B : Pointed-Type l2)
     (C : Pointed-Type l3) (D : Pointed-Type l4)
     (h : C →* D) (g : B →* C) (f : A →* B) →
     htpy-pointed-map A D
-      ( compose-pointed-map A B D (compose-pointed-map B C D h g) f)
-      ( compose-pointed-map A C D h (compose-pointed-map A B C g f))
-  associative-compose-pointed-map
+      ( comp-pointed-map A B D (comp-pointed-map B C D h g) f)
+      ( comp-pointed-map A C D h (comp-pointed-map A B C g f))
+  associative-comp-pointed-map
     (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
 
-  inv-associative-compose-pointed-map :
+  inv-associative-comp-pointed-map :
     (A : Pointed-Type l1) (B : Pointed-Type l2)
     (C : Pointed-Type l3) (D : Pointed-Type l4)
     (h : C →* D) (g : B →* C) (f : A →* B) →
     htpy-pointed-map A D
-      ( compose-pointed-map A C D h (compose-pointed-map A B C g f))
-      ( compose-pointed-map A B D (compose-pointed-map B C D h g) f)
-  inv-associative-compose-pointed-map
+      ( comp-pointed-map A C D h (comp-pointed-map A B C g f))
+      ( comp-pointed-map A B D (comp-pointed-map B C D h g) f)
+  inv-associative-comp-pointed-map
     (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
@@ -193,8 +193,8 @@ module _
   left-whisker-htpy-pointed-map :
     (g : B →* C) (f1 f2 : A →* B) (H : htpy-pointed-map A B f1 f2) →
     htpy-pointed-map A C
-      ( compose-pointed-map A B C g f1)
-      ( compose-pointed-map A B C g f2)
+      ( comp-pointed-map A B C g f1)
+      ( comp-pointed-map A B C g f2)
   left-whisker-htpy-pointed-map g f1 f2 H =
     pair
       ( map-pointed-map B C g ·l (pr1 H))
@@ -238,8 +238,8 @@ module _
     (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3)
     (g1 g2 : B →* C) (H : htpy-pointed-map B C g1 g2) (f : A →* B) →
     htpy-pointed-map A C
-      ( compose-pointed-map A B C g1 f)
-      ( compose-pointed-map A B C g2 f)
+      ( comp-pointed-map A B C g1 f)
+      ( comp-pointed-map A B C g2 f)
   right-whisker-htpy-pointed-map (pair A a) (pair B .(f a)) (pair C c)
     g1 g2 H (pair f refl) =
     pair (pr1 H ·r f) (pr2 H)

@@ -40,7 +40,7 @@ module _
   is-epi-Large-Precat-Prop =
     Π-Prop
       ( obj-Large-Precat C l3)
-      ( λ Z → is-emb-Prop (λ g → compose-hom-Large-Precat C {Z = Z} g f))
+      ( λ Z → is-emb-Prop (λ g → comp-hom-Large-Precat C {Z = Z} g f))
 
   is-epi-Large-Precat : UU (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
   is-epi-Large-Precat = type-Prop is-epi-Large-Precat-Prop
@@ -67,34 +67,34 @@ module _
     is-equiv-has-inverse
       ( λ P →
         ( inv
-          ( right-unit-law-compose-hom-Large-Precat C g)) ∙
+          ( right-unit-law-comp-hom-Large-Precat C g)) ∙
           ( ( ap
-            ( λ h' → compose-hom-Large-Precat C g h')
+            ( λ h' → comp-hom-Large-Precat C g h')
             ( inv (is-sec-hom-inv-iso-Large-Precat C X Y f))) ∙
             ( ( inv
-              ( associative-compose-hom-Large-Precat C
+              ( associative-comp-hom-Large-Precat C
                 ( g)
                 ( hom-iso-Large-Precat C X Y f)
                 ( hom-inv-iso-Large-Precat C X Y f))) ∙
               ( ( ap
                 ( λ h' →
-                  compose-hom-Large-Precat
+                  comp-hom-Large-Precat
                     ( C)
                     ( h')
                     ( hom-inv-iso-Large-Precat C X Y f))
                 ( P)) ∙
-                ( ( associative-compose-hom-Large-Precat C
+                ( ( associative-comp-hom-Large-Precat C
                   ( h)
                   ( hom-iso-Large-Precat C X Y f)
                   ( hom-inv-iso-Large-Precat C X Y f)) ∙
                   ( ( ap
-                    ( compose-hom-Large-Precat C h)
+                    ( comp-hom-Large-Precat C h)
                     ( is-sec-hom-inv-iso-Large-Precat C X Y f)) ∙
-                    ( right-unit-law-compose-hom-Large-Precat C h)))))))
+                    ( right-unit-law-comp-hom-Large-Precat C h)))))))
       ( λ p →
         eq-is-prop
           ( is-set-type-hom-Large-Precat C X Z
-            ( compose-hom-Large-Precat C g (hom-iso-Large-Precat C X Y f))
-            ( compose-hom-Large-Precat C h (hom-iso-Large-Precat C X Y f))))
+            ( comp-hom-Large-Precat C g (hom-iso-Large-Precat C X Y f))
+            ( comp-hom-Large-Precat C h (hom-iso-Large-Precat C X Y f))))
       ( λ p → eq-is-prop (is-set-type-hom-Large-Precat C Y Z g h))
 ```

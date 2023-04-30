@@ -45,7 +45,7 @@ module _
     {l3 : Level} → Abstract-Group-Action H l3 → Abstract-Group-Action G l3
   pr1 (obj-subst-Abstract-Group-Action X) = set-Abstract-Group-Action H X
   pr2 (obj-subst-Abstract-Group-Action X) =
-    compose-hom-Group G H
+    comp-hom-Group G H
       ( symmetric-Group (set-Abstract-Group-Action H X))
       ( pr2 X)
       ( f)
@@ -66,20 +66,20 @@ module _
        ( id-hom-Abstract-Group-Action G (obj-subst-Abstract-Group-Action X))
   preserves-id-subst-Abstract-Group-Action X = refl
 
-  preserves-compose-subst-Abstract-Group-Action :
+  preserves-comp-subst-Abstract-Group-Action :
     {l3 l4 l5 : Level} (X : Abstract-Group-Action H l3)
     (Y : Abstract-Group-Action H l4) (Z : Abstract-Group-Action H l5)
     (g : type-hom-Abstract-Group-Action H Y Z)
     (f : type-hom-Abstract-Group-Action H X Y) →
     Id ( hom-subst-Abstract-Group-Action X Z
-         ( compose-hom-Abstract-Group-Action H X Y Z g f))
-       ( compose-hom-Abstract-Group-Action G
+         ( comp-hom-Abstract-Group-Action H X Y Z g f))
+       ( comp-hom-Abstract-Group-Action G
          ( obj-subst-Abstract-Group-Action X)
          ( obj-subst-Abstract-Group-Action Y)
          ( obj-subst-Abstract-Group-Action Z)
          ( hom-subst-Abstract-Group-Action Y Z g)
          ( hom-subst-Abstract-Group-Action X Y f))
-  preserves-compose-subst-Abstract-Group-Action X Y Z g f = refl
+  preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :
     functor-Large-Precat
@@ -90,9 +90,9 @@ module _
     obj-subst-Abstract-Group-Action
   hom-functor-Large-Precat subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
     hom-subst-Abstract-Group-Action X Y
-  preserves-compose-functor-Large-Precat subst-Abstract-Group-Action
+  preserves-comp-functor-Large-Precat subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =
-    preserves-compose-subst-Abstract-Group-Action X Y Z
+    preserves-comp-subst-Abstract-Group-Action X Y Z
   preserves-id-functor-Large-Precat subst-Abstract-Group-Action {l1} {X} =
     preserves-id-subst-Abstract-Group-Action X
 ```

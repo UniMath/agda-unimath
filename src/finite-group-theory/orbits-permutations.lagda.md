@@ -93,14 +93,14 @@ module _
   pr1 (id-iso-iterative-groupoid-automorphism-𝔽 x) = 0
   pr2 (id-iso-iterative-groupoid-automorphism-𝔽 x) = refl
 
-  compose-iso-iterative-groupoid-automorphism-𝔽 :
+  comp-iso-iterative-groupoid-automorphism-𝔽 :
     {x y z : type-𝔽 X} →
     iso-iterative-groupoid-automorphism-𝔽 y z →
     iso-iterative-groupoid-automorphism-𝔽 x y →
     iso-iterative-groupoid-automorphism-𝔽 x z
-  pr1 (compose-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
+  pr1 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
     add-ℕ n m
-  pr2 (compose-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
+  pr2 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
 

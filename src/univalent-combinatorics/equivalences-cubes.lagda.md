@@ -92,10 +92,10 @@ eq-equiv-cube :
 eq-equiv-cube k X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-cube k X Y)
 
-compose-equiv-cube :
+comp-equiv-cube :
   (k : ℕ) (X Y Z : cube k) →
   equiv-cube k Y Z → equiv-cube k X Y → equiv-cube k X Z
-compose-equiv-cube k X Y Z (pair dim-f axis-f) (pair dim-e axis-e) =
+comp-equiv-cube k X Y Z (pair dim-f axis-f) (pair dim-e axis-e) =
   pair (dim-f ∘e dim-e) (λ d → axis-f (map-equiv (dim-e) d) ∘e axis-e d)
 
 htpy-equiv-cube :

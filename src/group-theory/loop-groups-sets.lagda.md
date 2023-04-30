@@ -137,7 +137,7 @@ module _
 
   is-sec-hom-inv-symmetric-group-loop-group-Set :
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group X)
         ( loop-group-Set X)
         ( symmetric-Group X)
@@ -160,7 +160,7 @@ module _
 
   is-retr-hom-inv-symmetric-group-loop-group-Set :
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( loop-group-Set X)
         ( symmetric-Group X)
         ( loop-group-Set X)
@@ -259,7 +259,7 @@ module _
 
   is-sec-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( abstract-group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X))
         ( loop-group-Set X)
@@ -300,7 +300,7 @@ module _
 
   is-retr-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( loop-group-Set X)
         ( abstract-group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X))
@@ -358,11 +358,11 @@ module _
       ( loop-group-Set X)
       ( loop-group-Set Y)
   iso-loop-group-equiv-Set =
-    compose-iso-Group
+    comp-iso-Group
       ( loop-group-Set X)
       ( symmetric-Group X)
       ( loop-group-Set Y)
-      ( compose-iso-Group
+      ( comp-iso-Group
         ( symmetric-Group X)
         ( symmetric-Group Y)
         ( loop-group-Set Y)

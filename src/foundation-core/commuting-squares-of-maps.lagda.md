@@ -49,7 +49,7 @@ coherence-square-maps top left right bottom =
 ### Composing commuting squares horizontally and vertically
 
 ```agda
-coherence-square-maps-compose-horizontal :
+coherence-square-maps-comp-horizontal :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (top-left : A → B) (top-right : B → C)
@@ -59,11 +59,11 @@ coherence-square-maps-compose-horizontal :
   coherence-square-maps top-right mid right bottom-right →
   coherence-square-maps
     (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
-coherence-square-maps-compose-horizontal
+coherence-square-maps-comp-horizontal
   top-left top-right left mid right bottom-left bottom-right sq-left sq-right =
   (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
 
-coherence-square-maps-compose-vertical :
+coherence-square-maps-comp-vertical :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (top : A → X)
@@ -75,7 +75,7 @@ coherence-square-maps-compose-vertical :
   coherence-square-maps mid left-bottom right-bottom bottom →
   coherence-square-maps
     top (left-bottom ∘ left-top) (right-bottom ∘ right-top) bottom
-coherence-square-maps-compose-vertical
+coherence-square-maps-comp-vertical
   top left-top right-top mid left-bottom right-bottom bottom sq-top sq-bottom =
   (sq-bottom ·r left-top) ∙h (right-bottom ·l sq-top)
 ```

@@ -72,27 +72,27 @@ module _
   is-set-type-hom-Cat : (x y : obj-Cat) → is-set (type-hom-Cat x y)
   is-set-type-hom-Cat = is-set-type-hom-Precat precat-Cat
 
-  compose-hom-Cat :
+  comp-hom-Cat :
     {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
-  compose-hom-Cat = compose-hom-Precat precat-Cat
+  comp-hom-Cat = comp-hom-Precat precat-Cat
 
-  associative-compose-hom-Cat :
+  associative-comp-hom-Cat :
     {x y z w : obj-Cat}
     (h : type-hom-Cat z w) (g : type-hom-Cat y z) (f : type-hom-Cat x y) →
-    compose-hom-Cat (compose-hom-Cat h g) f ＝
-    compose-hom-Cat h (compose-hom-Cat g f)
-  associative-compose-hom-Cat = associative-compose-hom-Precat precat-Cat
+    comp-hom-Cat (comp-hom-Cat h g) f ＝
+    comp-hom-Cat h (comp-hom-Cat g f)
+  associative-comp-hom-Cat = associative-comp-hom-Precat precat-Cat
 
   id-hom-Cat : {x : obj-Cat} → type-hom-Cat x x
   id-hom-Cat = id-hom-Precat precat-Cat
 
-  left-unit-law-compose-hom-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → compose-hom-Cat id-hom-Cat f ＝ f
-  left-unit-law-compose-hom-Cat = left-unit-law-compose-hom-Precat precat-Cat
+  left-unit-law-comp-hom-Cat :
+    {x y : obj-Cat} (f : type-hom-Cat x y) → comp-hom-Cat id-hom-Cat f ＝ f
+  left-unit-law-comp-hom-Cat = left-unit-law-comp-hom-Precat precat-Cat
 
-  right-unit-law-compose-hom-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → compose-hom-Cat f id-hom-Cat ＝ f
-  right-unit-law-compose-hom-Cat = right-unit-law-compose-hom-Precat precat-Cat
+  right-unit-law-comp-hom-Cat :
+    {x y : obj-Cat} (f : type-hom-Cat x y) → comp-hom-Cat f id-hom-Cat ＝ f
+  right-unit-law-comp-hom-Cat = right-unit-law-comp-hom-Precat precat-Cat
 
   is-category-Cat : is-category-Precat precat-Cat
   is-category-Cat = pr2 C

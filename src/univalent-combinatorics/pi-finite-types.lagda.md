@@ -873,7 +873,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
     i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
     is-surjective-i : is-surjective i
     is-surjective-i =
-      is-surjective-compose
+      is-surjective-comp
         ( is-surjective-unit-trunc-Set _)
         ( is-surjective-map-unit-im (f ∘ inl))
     is-emb-i : is-emb i
@@ -885,7 +885,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
         ( ( inv-htpy (naturality-unit-trunc-Set (inclusion-im (f ∘ inl)))) ·r
           ( map-unit-im (f ∘ inl)))
         ( is-emb-inclusion-trunc-im-Set (f ∘ inl))
-        ( is-emb-compose
+        ( is-emb-comp
           ( unit-trunc-Set ∘ f)
           ( inl)
           ( is-emb-is-equiv Eηf)

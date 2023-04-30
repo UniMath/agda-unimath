@@ -39,7 +39,7 @@ module _
     (g : type-hom-Precat C y z) →
     (∃! ( type-hom-Precat C p z)
         ( λ h →
-          (compose-hom-Precat C h l ＝ f) × (compose-hom-Precat C h r ＝ g)))
+          (comp-hom-Precat C h l ＝ f) × (comp-hom-Precat C h r ＝ g)))
 
   coproduct-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   coproduct-Precat x y =
@@ -79,7 +79,7 @@ module _
     morphism-out-of-coproduct-Precat = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
     morphism-out-of-coproduct-Precat-comm-inl :
-      compose-hom-Precat
+      comp-hom-Precat
         ( C)
         ( morphism-out-of-coproduct-Precat)
         ( inl-coproduct-Precat x y) ＝ f
@@ -87,7 +87,7 @@ module _
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
     morphism-out-of-coproduct-Precat-comm-inr :
-      compose-hom-Precat
+      comp-hom-Precat
         ( C)
         ( morphism-out-of-coproduct-Precat)
         ( inr-coproduct-Precat x y) ＝ g
@@ -96,8 +96,8 @@ module _
 
     is-unique-morphism-out-of-coproduct-Precat :
       (h : type-hom-Precat C (object-coproduct-Precat x y) z) →
-      compose-hom-Precat C h (inl-coproduct-Precat x y) ＝ f →
-      compose-hom-Precat C h (inr-coproduct-Precat x y) ＝ g →
+      comp-hom-Precat C h (inl-coproduct-Precat x y) ＝ f →
+      comp-hom-Precat C h (inr-coproduct-Precat x y) ＝ g →
       morphism-out-of-coproduct-Precat ＝ h
     is-unique-morphism-out-of-coproduct-Precat h comm1 comm2 =
       ap pr1 ((pr2 (pr2 (pr2 (pr2 (t x y))) z f g)) (h , (comm1 , comm2)))
@@ -144,6 +144,6 @@ module _
       (object-coproduct-Precat C t y₁ y₂)
   map-coproduct-Precat =
     morphism-out-of-coproduct-Precat C t _ _ _
-      (compose-hom-Precat C (inl-coproduct-Precat C t y₁ y₂) f)
-      (compose-hom-Precat C (inr-coproduct-Precat C t y₁ y₂) g)
+      (comp-hom-Precat C (inl-coproduct-Precat C t y₁ y₂) f)
+      (comp-hom-Precat C (inr-coproduct-Precat C t y₁ y₂) g)
 ```

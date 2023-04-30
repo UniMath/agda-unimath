@@ -99,7 +99,7 @@ is-trunc-map-ev-pt-is-connected :
   is-0-connected A → is-trunc (succ-𝕋 k) B →
   is-trunc-map k (ev-pt a (λ _ → B))
 is-trunc-map-ev-pt-is-connected k {A} {B} a H K =
-  is-trunc-map-compose k
+  is-trunc-map-comp k
     ( ev-pt star (λ _ → B))
     ( precomp (pt a) B)
     ( is-trunc-map-is-equiv k

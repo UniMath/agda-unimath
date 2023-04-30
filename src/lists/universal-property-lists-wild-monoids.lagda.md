@@ -73,8 +73,8 @@ unit-law-101-associative-concat-list (cons x l) z =
           ( ap (concat-list l) (left-unit-law-concat-list z)))) ∙
       ( ap (ap (cons x)) (unit-law-101-associative-concat-list l z))) ∙
     ( inv
-      ( ap-compose (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
-  ( ap-compose (concat-list' z) (cons x) (right-unit-law-concat-list l))
+      ( ap-comp (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
+  ( ap-comp (concat-list' z) (cons x) (right-unit-law-concat-list l))
 
 unit-law-110-associative-concat-list :
   {l1 : Level} {X : UU l1} (x y : list X) →
@@ -88,7 +88,7 @@ unit-law-110-associative-concat-list (cons a x) y =
     ( concat
       ( associative-concat-list (cons a x) y nil)
       ( concat-list (cons a x) y))
-    ( ap-compose (cons a) (concat-list x) (right-unit-law-concat-list y))) ∙
+    ( ap-comp (cons a) (concat-list x) (right-unit-law-concat-list y))) ∙
   ( ( inv
       ( ap-concat
         ( cons a)
@@ -178,11 +178,11 @@ module _
       ( coh-unit-laws-mul-Wild-Monoid M))
   preserves-right-unit-law-map-elim-list-Wild-Monoid (cons a x) =
     ( inv
-      ( ap-compose
+      ( ap-comp
         ( map-elim-list-Wild-Monoid)
         ( cons a)
         ( right-unit-law-concat-list x))) ∙
-    ( ( ap-compose
+    ( ( ap-comp
         ( mul-Wild-Monoid M (f a))
         ( map-elim-list-Wild-Monoid)
         ( right-unit-law-concat-list x)) ∙

@@ -47,8 +47,8 @@ anafunctor-Precat l C D =
               ( U : obj-Precat D) (u : F₀ X U) (V : obj-Precat D) (v : F₀ Y V)
               ( W : obj-Precat D) (w : F₀ Z W) →
               ( g : type-hom-Precat C Y Z) (f : type-hom-Precat C X Y) →
-              ( F₁ X Z U u W w (compose-hom-Precat C g f)) ＝
-              ( compose-hom-Precat D
+              ( F₁ X Z U u W w (comp-hom-Precat C g f)) ＝
+              ( comp-hom-Precat D
                 ( F₁ Y Z V v W w g)
                 ( F₁ X Y U u V v f))))))
 
@@ -105,8 +105,8 @@ module _
   pr1 (anafunctor-functor-Precat F) X Y =
     iso-Precat D (obj-functor-Precat C D F X) Y
   pr1 (pr2 (anafunctor-functor-Precat F)) X Y U u V v f =
-    compose-hom-Precat D
-      ( compose-hom-Precat D
+    comp-hom-Precat D
+      ( comp-hom-Precat D
         ( hom-iso-Precat D v)
         ( hom-functor-Precat C D F f))
       ( hom-inv-iso-Precat D u)
@@ -114,58 +114,58 @@ module _
     unit-trunc-Prop (pair (obj-functor-Precat C D F X) (id-iso-Precat D))
   pr1 (pr2 (pr2 (pr2 (anafunctor-functor-Precat F)))) X U u =
     ( ap
-      ( compose-hom-Precat' D (hom-inv-iso-Precat D u))
+      ( comp-hom-Precat' D (hom-inv-iso-Precat D u))
       ( ( ap
-          ( compose-hom-Precat D (hom-iso-Precat D u))
+          ( comp-hom-Precat D (hom-iso-Precat D u))
           ( preserves-id-functor-Precat C D F X)) ∙
-        ( right-unit-law-compose-hom-Precat D (hom-iso-Precat D u)))) ∙
+        ( right-unit-law-comp-hom-Precat D (hom-iso-Precat D u)))) ∙
     ( issec-hom-inv-iso-Precat D u)
   pr2 (pr2 (pr2 (pr2 (anafunctor-functor-Precat F)))) X Y Z U u V v W w g f =
     ( ap
-      ( compose-hom-Precat' D (hom-inv-iso-Precat D u))
+      ( comp-hom-Precat' D (hom-inv-iso-Precat D u))
       ( ( ( ap
-            ( compose-hom-Precat D (hom-iso-Precat D w))
-            ( preserves-compose-functor-Precat C D F g f)) ∙
+            ( comp-hom-Precat D (hom-iso-Precat D w))
+            ( preserves-comp-functor-Precat C D F g f)) ∙
           ( ( inv
-              ( associative-compose-hom-Precat D
+              ( associative-comp-hom-Precat D
                 ( hom-iso-Precat D w)
                 ( hom-functor-Precat C D F g)
                 ( hom-functor-Precat C D F f))) ∙
             ( ap
-              ( compose-hom-Precat' D (hom-functor-Precat C D F f))
+              ( comp-hom-Precat' D (hom-functor-Precat C D F f))
               ( ( inv
-                  ( right-unit-law-compose-hom-Precat D
-                    ( compose-hom-Precat D
+                  ( right-unit-law-comp-hom-Precat D
+                    ( comp-hom-Precat D
                       ( hom-iso-Precat D w)
                       ( hom-functor-Precat C D F g)))) ∙
                 ( ( ap
-                    ( compose-hom-Precat D
-                      ( compose-hom-Precat D
+                    ( comp-hom-Precat D
+                      ( comp-hom-Precat D
                         ( hom-iso-Precat D w)
                         ( hom-functor-Precat C D F g)))
                       ( inv (isretr-hom-inv-iso-Precat D v))) ∙
                   ( inv
-                    ( associative-compose-hom-Precat D
-                      ( compose-hom-Precat D
+                    ( associative-comp-hom-Precat D
+                      ( comp-hom-Precat D
                         ( hom-iso-Precat D w)
                         ( hom-functor-Precat C D F g))
                       ( hom-inv-iso-Precat D v)
                       ( hom-iso-Precat D v)))))))) ∙
-        ( associative-compose-hom-Precat D
-          ( compose-hom-Precat D
-            ( compose-hom-Precat D
+        ( associative-comp-hom-Precat D
+          ( comp-hom-Precat D
+            ( comp-hom-Precat D
               ( hom-iso-Precat D w)
               ( hom-functor-Precat C D F g))
             ( hom-inv-iso-Precat D v))
           ( hom-iso-Precat D v)
           ( hom-functor-Precat C D F f)))) ∙
-    ( associative-compose-hom-Precat D
-      ( compose-hom-Precat D
-        ( compose-hom-Precat D
+    ( associative-comp-hom-Precat D
+      ( comp-hom-Precat D
+        ( comp-hom-Precat D
           ( hom-iso-Precat D w)
           ( hom-functor-Precat C D F g))
         ( hom-inv-iso-Precat D v))
-      ( compose-hom-Precat D (hom-iso-Precat D v) (hom-functor-Precat C D F f))
+      ( comp-hom-Precat D (hom-iso-Precat D v) (hom-functor-Precat C D F f))
       ( hom-inv-iso-Precat D u))
 ```
 

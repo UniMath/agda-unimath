@@ -63,12 +63,12 @@ module _
   (q-right : z2 ＝ w)
   where
 
-  coherence-square-identifications-compose-horizontal :
+  coherence-square-identifications-comp-horizontal :
     coherence-square-identifications p-left p-bottom p-top middle →
     coherence-square-identifications middle q-bottom q-top q-right →
     coherence-square-identifications
       p-left (p-bottom ∙ q-bottom) (p-top ∙ q-top) q-right
-  coherence-square-identifications-compose-horizontal p q =
+  coherence-square-identifications-comp-horizontal p q =
     ( ( ( inv (assoc p-left p-bottom q-bottom) ∙
           ap-binary (_∙_) p (refl {x = q-bottom})) ∙
         assoc p-top middle q-bottom) ∙
@@ -83,12 +83,12 @@ module _
   {q-right : z2 ＝ w}
   where
 
-  coherence-square-identifications-compose-vertical :
+  coherence-square-identifications-comp-vertical :
     coherence-square-identifications p-left middle p-top p-right →
     coherence-square-identifications q-left q-bottom middle q-right →
     coherence-square-identifications
       (p-left ∙ q-left) q-bottom p-top (p-right ∙ q-right)
-  coherence-square-identifications-compose-vertical p q =
+  coherence-square-identifications-comp-vertical p q =
     ( assoc p-left q-left q-bottom ∙
       ( ( ap-binary (_∙_) (refl {x = p-left}) q ∙
           inv (assoc p-left middle q-right)) ∙

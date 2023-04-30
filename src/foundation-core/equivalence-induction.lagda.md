@@ -81,7 +81,7 @@ module _
       is-contr-is-singleton
         ( Σ (UU l1) (λ X → A ≃ X))
         ( pair A id-equiv)
-        ( λ P → section-compose
+        ( λ P → section-comp
           ( ev-id (λ X e → P (pair X e)))
           ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
           ( pair ind-Σ refl-htpy)

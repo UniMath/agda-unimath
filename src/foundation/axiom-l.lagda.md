@@ -92,8 +92,8 @@ module _
     where
     emb-fib : (x : A) → fib' Id (Id x) ↪ Σ A (Id x)
     emb-fib x =
-      compose-emb
-        ( compose-emb
+      comp-emb
+        ( comp-emb
           ( emb-equiv
             ( equiv-tot
               ( λ y →
@@ -106,7 +106,7 @@ module _
             ( λ y → (z : A) → Id y z ≃ Id x z)
             ( id-emb)
             ( λ y →
-              compose-emb
+              comp-emb
                 ( emb-Π (λ z → emb-L L (Id y z) (Id x z)))
                 ( emb-equiv equiv-funext))))
         ( emb-equiv (inv-equiv (equiv-fib Id (Id x))))

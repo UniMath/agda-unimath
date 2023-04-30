@@ -35,19 +35,19 @@ module _
     Abstract-Group-Action G
   hom-Large-Precat Abstract-Group-Action-Large-Precat =
     hom-Abstract-Group-Action G
-  compose-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
-    compose-hom-Abstract-Group-Action G X Y Z
+  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
+    comp-hom-Abstract-Group-Action G X Y Z
   id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
     id-hom-Abstract-Group-Action G X
-  associative-compose-hom-Large-Precat Abstract-Group-Action-Large-Precat
+  associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
     {X = X} {Y} {Z} {W} =
-    associative-compose-hom-Abstract-Group-Action G X Y Z W
-  left-unit-law-compose-hom-Large-Precat Abstract-Group-Action-Large-Precat
+    associative-comp-hom-Abstract-Group-Action G X Y Z W
+  left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
     {X = X} {Y} =
-    left-unit-law-compose-hom-Abstract-Group-Action G X Y
-  right-unit-law-compose-hom-Large-Precat Abstract-Group-Action-Large-Precat
+    left-unit-law-comp-hom-Abstract-Group-Action G X Y
+  right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
     {X = X} {Y} =
-    right-unit-law-compose-hom-Abstract-Group-Action G X Y
+    right-unit-law-comp-hom-Abstract-Group-Action G X Y
 ```
 
 ### The small precategory of G-sets
@@ -61,13 +61,13 @@ module _
   pr1 (Abstract-Group-Action-Precat l2) = Abstract-Group-Action G l2
   pr1 (pr2 (Abstract-Group-Action-Precat l2)) = hom-Abstract-Group-Action G
   pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} =
-    compose-hom-Abstract-Group-Action G X Y Z
+    comp-hom-Abstract-Group-Action G X Y Z
   pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} {W} =
-    associative-compose-hom-Abstract-Group-Action G X Y Z W
+    associative-comp-hom-Abstract-Group-Action G X Y Z W
   pr1 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) =
     id-hom-Abstract-Group-Action G
   pr1 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =
-    left-unit-law-compose-hom-Abstract-Group-Action G X Y
+    left-unit-law-comp-hom-Abstract-Group-Action G X Y
   pr2 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =
-    right-unit-law-compose-hom-Abstract-Group-Action G X Y
+    right-unit-law-comp-hom-Abstract-Group-Action G X Y
 ```

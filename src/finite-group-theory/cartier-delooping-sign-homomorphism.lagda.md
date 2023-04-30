@@ -140,11 +140,11 @@ module _
   eq-cartier-delooping-sign-homomorphism :
     (n : ℕ) →
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
@@ -157,11 +157,11 @@ module _
             ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
         ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
-        ( compose-hom-Group
+        ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))

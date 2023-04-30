@@ -87,13 +87,13 @@ module _
   (Y : Abstract-Group-Action G l3) (Z : Abstract-Group-Action G l4)
   where
 
-  compose-hom-Abstract-Group-Action :
+  comp-hom-Abstract-Group-Action :
     type-hom-Abstract-Group-Action G Y Z →
     type-hom-Abstract-Group-Action G X Y →
     type-hom-Abstract-Group-Action G X Z
-  pr1 (compose-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
-  pr2 (compose-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
-    coherence-square-maps-compose-horizontal
+  pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
+  pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
+    coherence-square-maps-comp-horizontal
       ( f)
       ( g)
       ( mul-Abstract-Group-Action G X x)
@@ -204,22 +204,22 @@ module _
   (X4 : Abstract-Group-Action G l5)
   where
 
-  associative-compose-hom-Abstract-Group-Action :
+  associative-comp-hom-Abstract-Group-Action :
     (h : type-hom-Abstract-Group-Action G X3 X4)
     (g : type-hom-Abstract-Group-Action G X2 X3)
     (f : type-hom-Abstract-Group-Action G X1 X2) →
-    Id ( compose-hom-Abstract-Group-Action G X1 X2 X4
-         ( compose-hom-Abstract-Group-Action G X2 X3 X4 h g)
+    Id ( comp-hom-Abstract-Group-Action G X1 X2 X4
+         ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
          ( f))
-       ( compose-hom-Abstract-Group-Action G X1 X3 X4 h
-         ( compose-hom-Abstract-Group-Action G X1 X2 X3 g f))
-  associative-compose-hom-Abstract-Group-Action h g f =
+       ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
+         ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
+  associative-comp-hom-Abstract-Group-Action h g f =
     eq-htpy-hom-Abstract-Group-Action G X1 X4
-      ( compose-hom-Abstract-Group-Action G X1 X2 X4
-        ( compose-hom-Abstract-Group-Action G X2 X3 X4 h g)
+      ( comp-hom-Abstract-Group-Action G X1 X2 X4
+        ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
         ( f))
-      ( compose-hom-Abstract-Group-Action G X1 X3 X4 h
-        ( compose-hom-Abstract-Group-Action G X1 X2 X3 g f))
+      ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
+        ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
       ( refl-htpy)
 ```
 
@@ -231,28 +231,28 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
-  left-unit-law-compose-hom-Abstract-Group-Action :
+  left-unit-law-comp-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) →
-    Id ( compose-hom-Abstract-Group-Action G X Y Y
+    Id ( comp-hom-Abstract-Group-Action G X Y Y
          ( id-hom-Abstract-Group-Action G Y)
          ( f))
        ( f)
-  left-unit-law-compose-hom-Abstract-Group-Action f =
+  left-unit-law-comp-hom-Abstract-Group-Action f =
     eq-htpy-hom-Abstract-Group-Action G X Y
-      ( compose-hom-Abstract-Group-Action G X Y Y
+      ( comp-hom-Abstract-Group-Action G X Y Y
         ( id-hom-Abstract-Group-Action G Y)
         ( f))
       ( f)
       ( refl-htpy)
 
-  right-unit-law-compose-hom-Abstract-Group-Action :
+  right-unit-law-comp-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) →
-    Id ( compose-hom-Abstract-Group-Action G X X Y f
+    Id ( comp-hom-Abstract-Group-Action G X X Y f
          ( id-hom-Abstract-Group-Action G X))
        ( f)
-  right-unit-law-compose-hom-Abstract-Group-Action f =
+  right-unit-law-comp-hom-Abstract-Group-Action f =
     eq-htpy-hom-Abstract-Group-Action G X Y
-      ( compose-hom-Abstract-Group-Action G X X Y f
+      ( comp-hom-Abstract-Group-Action G X X Y f
         ( id-hom-Abstract-Group-Action G X))
       ( f)
       ( refl-htpy)

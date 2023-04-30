@@ -84,15 +84,15 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  is-injective-compose :
+  is-injective-comp :
     {g : B → C} {h : A → B} →
     is-injective h → is-injective g → is-injective (g ∘ h)
-  is-injective-compose is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
+  is-injective-comp is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
 
-  is-injective-compose-htpy :
+  is-injective-comp-htpy :
     (f : A → C) (g : B → C) (h : A → B) → f ~ (g ∘ h) →
     is-injective h → is-injective g → is-injective f
-  is-injective-compose-htpy f g h H is-inj-h is-inj-g {x} {x'} p =
+  is-injective-comp-htpy f g h H is-inj-h is-inj-g {x} {x'} p =
     is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
 ```
 

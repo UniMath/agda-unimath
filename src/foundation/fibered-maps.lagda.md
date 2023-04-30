@@ -329,25 +329,25 @@ module _
   {f : A → X} {g : B → Y} {h : C → Z}
   where
 
-  is-map-over-compose-horizontal :
+  is-map-over-comp-horizontal :
     {k : X → Y} {l : Y → Z} {i : A → B} {j : B → C} →
     is-map-over f g k i → is-map-over g h l j →
     is-map-over f h (l ∘ k) (j ∘ i)
-  is-map-over-compose-horizontal {k} {l} {i} {j} =
-    coherence-square-maps-compose-horizontal i j f g h k l
+  is-map-over-comp-horizontal {k} {l} {i} {j} =
+    coherence-square-maps-comp-horizontal i j f g h k l
 
-  map-over-compose-horizontal :
+  map-over-comp-horizontal :
     {k : X → Y} {l : Y → Z} →
     map-over f g k → map-over g h l → map-over f h (l ∘ k)
-  pr1 (map-over-compose-horizontal {k} {l} (i , I) (j , J)) = j ∘ i
-  pr2 (map-over-compose-horizontal {k} {l} (i , I) (j , J)) =
-    is-map-over-compose-horizontal {k} {l} I J
+  pr1 (map-over-comp-horizontal {k} {l} (i , I) (j , J)) = j ∘ i
+  pr2 (map-over-comp-horizontal {k} {l} (i , I) (j , J)) =
+    is-map-over-comp-horizontal {k} {l} I J
 
-  fibered-map-compose-horizontal :
+  fibered-map-comp-horizontal :
     fibered-map f g → fibered-map g h → fibered-map f h
-  pr1 (fibered-map-compose-horizontal (k , iI) (l , jJ)) = l ∘ k
-  pr2 (fibered-map-compose-horizontal (k , iI) (l , jJ)) =
-    map-over-compose-horizontal {k} {l} iI jJ
+  pr1 (fibered-map-comp-horizontal (k , iI) (l , jJ)) = l ∘ k
+  pr2 (fibered-map-comp-horizontal (k , iI) (l , jJ)) =
+    map-over-comp-horizontal {k} {l} iI jJ
 ```
 
 ### Vertical composition for fibered maps
@@ -361,13 +361,13 @@ module _
   {i : A → B} {j : C → D} {k : X → Y}
   where
 
-  is-map-over-compose-vertical :
+  is-map-over-comp-vertical :
     {f : A → C} {g : B → D}
     {f' : C → X} {g' : D → Y} →
     is-map-over f g j i → is-map-over f' g' k j →
     is-map-over (f' ∘ f) (g' ∘ g) k i
-  is-map-over-compose-vertical {f} {g} {f'} {g'} =
-    coherence-square-maps-compose-vertical i f g j f' g' k
+  is-map-over-comp-vertical {f} {g} {f'} {g'} =
+    coherence-square-maps-comp-vertical i f g j f' g' k
 ```
 
 ### The truncation level of the types of fibered maps is bounded by the truncation level of the codomains

@@ -256,11 +256,11 @@ map-unordered-pair :
 pr1 (map-unordered-pair f p) = 2-element-type-unordered-pair p
 pr2 (map-unordered-pair f p) = f ∘ element-unordered-pair p
 
-preserves-compose-map-unordered-pair :
+preserves-comp-map-unordered-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-unordered-pair (g ∘ f) ~ (map-unordered-pair g ∘ map-unordered-pair f)
-preserves-compose-map-unordered-pair g f p = refl
+preserves-comp-map-unordered-pair g f p = refl
 
 preserves-id-map-unordered-pair :
   {l1 : Level} {A : UU l1} →

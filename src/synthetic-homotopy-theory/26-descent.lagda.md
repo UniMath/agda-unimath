@@ -431,7 +431,7 @@ dependent-universal-property-dependent-pullback-property-pushout :
 dependent-universal-property-dependent-pullback-property-pushout
   f g (pair i (pair j H)) dpullback-c l P =
   let c = (pair i (pair j H)) in
-  is-equiv-compose-htpy
+  is-equiv-comp-htpy
     ( dep-cocone-map f g c P)
     ( tot (λ h → tot λ h' → htpy-eq))
     ( gap
@@ -1076,7 +1076,7 @@ is-equiv-desc-fam :
   ((l' : Level) → universal-property-pushout l' f g c) →
   is-equiv (desc-fam {l = l} {f = f} {g} c)
 is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
-  is-equiv-compose-htpy
+  is-equiv-comp-htpy
     ( desc-fam c)
     ( Fam-pushout-cocone-UU l)
     ( cocone-map f g c)

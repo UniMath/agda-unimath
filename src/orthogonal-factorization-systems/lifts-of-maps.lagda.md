@@ -92,8 +92,8 @@ module _
   {i : A → B} {j : B → C} {f : X → B} {h : X → C} {g : X → A}
   where
 
-  is-lift-compose-vertical : is-lift i f g → is-lift j h f → is-lift (j ∘ i) h g
-  is-lift-compose-vertical F H x = H x ∙ ap j (F x)
+  is-lift-comp-vertical : is-lift i f g → is-lift j h f → is-lift (j ∘ i) h g
+  is-lift-comp-vertical F H x = H x ∙ ap j (F x)
 ```
 
 ### Horizontal composition of lifts of maps
@@ -113,9 +113,9 @@ module _
   {f : A → B} {g : B → C} {h : A → X} {i : B → X} {j : C → X}
   where
 
-  is-lift-compose-horizontal :
+  is-lift-comp-horizontal :
     is-lift j i g → is-lift i h f → is-lift j h (g ∘ f)
-  is-lift-compose-horizontal J I x = I x ∙ J (f x)
+  is-lift-comp-horizontal J I x = I x ∙ J (f x)
 ```
 
 ## Left whiskering of lifts of maps

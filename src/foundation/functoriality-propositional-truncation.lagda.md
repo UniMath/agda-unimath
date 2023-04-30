@@ -81,12 +81,12 @@ abstract
 
 ```agda
 abstract
-  preserves-compose-map-trunc-Prop :
+  preserves-comp-map-trunc-Prop :
     { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
     ( g : B → C) (f : A → B) →
     ( map-trunc-Prop (g ∘ f)) ~
     ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))
-  preserves-compose-map-trunc-Prop g f =
+  preserves-comp-map-trunc-Prop g f =
     htpy-uniqueness-map-trunc-Prop
       ( g ∘ f)
       ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))

@@ -24,14 +24,14 @@ instance
   Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
   obj-Large-Precat Group-Large-Precat = Group
   hom-Large-Precat Group-Large-Precat = hom-Group
-  compose-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
-    compose-hom-Group G H K
+  comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
+    comp-hom-Group G H K
   id-hom-Large-Precat Group-Large-Precat {X = G} =
     id-hom-Group G
-  associative-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
-    associative-compose-hom-Group G H K L
-  left-unit-law-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} =
-    left-unit-law-compose-hom-Group G H
-  right-unit-law-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} =
-    right-unit-law-compose-hom-Group G H
+  associative-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
+    associative-comp-hom-Group G H K L
+  left-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+    left-unit-law-comp-hom-Group G H
+  right-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+    right-unit-law-comp-hom-Group G H
 ```

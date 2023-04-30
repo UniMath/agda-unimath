@@ -255,82 +255,82 @@ id-hom-Ring :
 id-hom-Ring R =
   pair (id-hom-Ab (ab-Ring R)) (is-ring-homomorphism-id-hom-Ring R)
 
-hom-Ab-compose-hom-Ring :
+hom-Ab-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
   type-hom-Ab (ab-Ring R1) (ab-Ring R3)
-hom-Ab-compose-hom-Ring R1 R2 R3 g f =
-  compose-hom-Ab
+hom-Ab-comp-hom-Ring R1 R2 R3 g f =
+  comp-hom-Ab
     ( ab-Ring R1)
     ( ab-Ring R2)
     ( ab-Ring R3)
     ( hom-ab-hom-Ring R2 R3 g)
     ( hom-ab-hom-Ring R1 R2 f)
 
-preserves-mul-compose-hom-Ring :
+preserves-mul-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  preserves-mul-hom-Ab R1 R3 (hom-Ab-compose-hom-Ring R1 R2 R3 g f)
-preserves-mul-compose-hom-Ring R1 R2 R3 g f x y =
+  preserves-mul-hom-Ab R1 R3 (hom-Ab-comp-hom-Ring R1 R2 R3 g f)
+preserves-mul-comp-hom-Ring R1 R2 R3 g f x y =
   ( ap (map-hom-Ring R2 R3 g) (preserves-mul-hom-Ring R1 R2 f x y)) ∙
   ( preserves-mul-hom-Ring R2 R3 g
     ( map-hom-Ring R1 R2 f x)
     ( map-hom-Ring R1 R2 f y))
 
-preserves-one-compose-hom-Ring :
+preserves-one-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  preserves-one-hom-Ab R1 R3 (hom-Ab-compose-hom-Ring R1 R2 R3 g f)
-preserves-one-compose-hom-Ring R1 R2 R3 g f =
+  preserves-one-hom-Ab R1 R3 (hom-Ab-comp-hom-Ring R1 R2 R3 g f)
+preserves-one-comp-hom-Ring R1 R2 R3 g f =
   ( ap (map-hom-Ring R2 R3 g) (preserves-one-hom-Ring R1 R2 f)) ∙
   ( preserves-one-hom-Ring R2 R3 g)
 
-is-ring-homomorphism-compose-hom-Ring :
+is-ring-homomorphism-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  is-ring-homomorphism-hom-Ab R1 R3 (hom-Ab-compose-hom-Ring R1 R2 R3 g f)
-is-ring-homomorphism-compose-hom-Ring R1 R2 R3 g f =
-  pair ( preserves-mul-compose-hom-Ring R1 R2 R3 g f)
-       ( preserves-one-compose-hom-Ring R1 R2 R3 g f)
+  is-ring-homomorphism-hom-Ab R1 R3 (hom-Ab-comp-hom-Ring R1 R2 R3 g f)
+is-ring-homomorphism-comp-hom-Ring R1 R2 R3 g f =
+  pair ( preserves-mul-comp-hom-Ring R1 R2 R3 g f)
+       ( preserves-one-comp-hom-Ring R1 R2 R3 g f)
 
-compose-hom-Ring :
+comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   type-hom-Ring R2 R3 → type-hom-Ring R1 R2 → type-hom-Ring R1 R3
-compose-hom-Ring R1 R2 R3 g f =
-  pair ( hom-Ab-compose-hom-Ring R1 R2 R3 g f)
-       ( is-ring-homomorphism-compose-hom-Ring R1 R2 R3 g f)
+comp-hom-Ring R1 R2 R3 g f =
+  pair ( hom-Ab-comp-hom-Ring R1 R2 R3 g f)
+       ( is-ring-homomorphism-comp-hom-Ring R1 R2 R3 g f)
 ```
 
 ```agda
-is-associative-compose-hom-Ring :
+is-associative-comp-hom-Ring :
   { l1 l2 l3 l4 : Level}
   ( R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) (R4 : Ring l4) →
   ( h : type-hom-Ring R3 R4)
   ( g : type-hom-Ring R2 R3)
   ( f : type-hom-Ring R1 R2) →
-  Id (compose-hom-Ring R1 R2 R4 (compose-hom-Ring R2 R3 R4 h g) f)
-     (compose-hom-Ring R1 R3 R4 h (compose-hom-Ring R1 R2 R3 g f))
-is-associative-compose-hom-Ring R1 R2 R3 R4 h g f =
+  Id (comp-hom-Ring R1 R2 R4 (comp-hom-Ring R2 R3 R4 h g) f)
+     (comp-hom-Ring R1 R3 R4 h (comp-hom-Ring R1 R2 R3 g f))
+is-associative-comp-hom-Ring R1 R2 R3 R4 h g f =
   eq-htpy-hom-Ring R1 R4
-    ( compose-hom-Ring R1 R2 R4 (compose-hom-Ring R2 R3 R4 h g) f)
-    ( compose-hom-Ring R1 R3 R4 h (compose-hom-Ring R1 R2 R3 g f))
+    ( comp-hom-Ring R1 R2 R4 (comp-hom-Ring R2 R3 R4 h g) f)
+    ( comp-hom-Ring R1 R3 R4 h (comp-hom-Ring R1 R2 R3 g f))
     ( refl-htpy)
 
-left-unit-law-compose-hom-Ring :
+left-unit-law-comp-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
-  Id (compose-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f
-left-unit-law-compose-hom-Ring R1 R2 f =
+  Id (comp-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f
+left-unit-law-comp-hom-Ring R1 R2 f =
   eq-htpy-hom-Ring R1 R2
-    ( compose-hom-Ring R1 R2 R2 (id-hom-Ring R2) f)
+    ( comp-hom-Ring R1 R2 R2 (id-hom-Ring R2) f)
     ( f)
     ( refl-htpy)
 
-right-unit-law-compose-hom-Ring :
+right-unit-law-comp-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
-  Id (compose-hom-Ring R1 R1 R2 f (id-hom-Ring R1)) f
-right-unit-law-compose-hom-Ring R1 R2 f =
+  Id (comp-hom-Ring R1 R1 R2 f (id-hom-Ring R1)) f
+right-unit-law-comp-hom-Ring R1 R2 f =
   eq-htpy-hom-Ring R1 R2
-    ( compose-hom-Ring R1 R1 R2 f (id-hom-Ring R1))
+    ( comp-hom-Ring R1 R1 R2 f (id-hom-Ring R1))
     ( f)
     ( refl-htpy)
 ```
@@ -345,17 +345,17 @@ id-law-ab-Ring R1 =
     ( ab-Ring R1)
     ( refl-htpy)
 
-compose-law-ab-Ring :
+comp-law-ab-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  Id ( hom-ab-hom-Ring R1 R3 (compose-hom-Ring R1 R2 R3 g f))
-     ( compose-hom-Ab
+  Id ( hom-ab-hom-Ring R1 R3 (comp-hom-Ring R1 R2 R3 g f))
+     ( comp-hom-Ab
        ( ab-Ring R1)
        ( ab-Ring R2)
        ( ab-Ring R3)
        ( hom-ab-hom-Ring R2 R3 g)
        ( hom-ab-hom-Ring R1 R2 f))
-compose-law-ab-Ring R1 R2 R3 g f =
+comp-law-ab-Ring R1 R2 R3 g f =
   eq-htpy-hom-Ab
     ( ab-Ring R1)
     ( ab-Ring R3)
@@ -365,12 +365,12 @@ Ring-Precat : (l : Level) → Precat (lsuc l) l
 pr1 (Ring-Precat l) = Ring l
 pr1 (pr2 (Ring-Precat l)) = hom-Ring
 pr1 (pr1 (pr2 (pr2 (Ring-Precat l)))) {R1} {R2} {R3} =
-  compose-hom-Ring R1 R2 R3
+  comp-hom-Ring R1 R2 R3
 pr2 (pr1 (pr2 (pr2 (Ring-Precat l)))) {R1} {R2} {R3} {R4} =
-  is-associative-compose-hom-Ring R1 R2 R3 R4
+  is-associative-comp-hom-Ring R1 R2 R3 R4
 pr1 (pr2 (pr2 (pr2 (Ring-Precat l)))) = id-hom-Ring
 pr1 (pr2 (pr2 (pr2 (pr2 (Ring-Precat l))))) {R1} {R2} f =
   eq-htpy-hom-Ring
-    R1 R2 (compose-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f refl-htpy
+    R1 R2 (comp-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f refl-htpy
 pr2 (pr2 (pr2 (pr2 (pr2 (Ring-Precat l))))) {R1} {R2} f = refl
 ```

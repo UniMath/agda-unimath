@@ -182,12 +182,12 @@ map-unordered-tuple :
 pr1 (map-unordered-tuple n f t) = type-unordered-tuple-UU-Fin n t
 pr2 (map-unordered-tuple n f t) = f ∘ element-unordered-tuple n t
 
-preserves-compose-map-unordered-tuple :
+preserves-comp-map-unordered-tuple :
   {l1 l2 l3 : Level} (n : ℕ) {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-unordered-tuple n (g ∘ f) ~
   (map-unordered-tuple n g ∘ map-unordered-tuple n f)
-preserves-compose-map-unordered-tuple n g f p = refl
+preserves-comp-map-unordered-tuple n g f p = refl
 
 preserves-id-map-unordered-tuple :
   {l1 : Level} (n : ℕ) {A : UU l1} →

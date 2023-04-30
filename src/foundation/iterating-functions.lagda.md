@@ -61,7 +61,7 @@ module _
     (n : ℕ) → coherence-square-maps f (iterate n s) (iterate n t) f
   coherence-square-iterate {f} H zero-ℕ x = refl
   coherence-square-iterate {f} H (succ-ℕ n) =
-    coherence-square-maps-compose-vertical
+    coherence-square-maps-comp-vertical
       ( f)
       ( iterate n s)
       ( iterate n t)
@@ -114,8 +114,8 @@ module _
   left-unit-law-iterate-add-ℕ (succ-ℕ l) f x =
     ( right-unit) ∙
     ( ( ap (ap f) (left-unit-law-iterate-add-ℕ l f x)) ∙
-      ( ( inv (ap-compose f (λ t → iterate t f x) (left-unit-law-add-ℕ l))) ∙
-        ( ap-compose (λ t → iterate t f x) succ-ℕ (left-unit-law-add-ℕ l))))
+      ( ( inv (ap-comp f (λ t → iterate t f x) (left-unit-law-add-ℕ l))) ∙
+        ( ap-comp (λ t → iterate t f x) succ-ℕ (left-unit-law-add-ℕ l))))
 
   right-unit-law-iterate-add-ℕ :
     (k : ℕ) (f : X → X) (x : X) →

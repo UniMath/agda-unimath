@@ -114,12 +114,12 @@ value-injective-map-exception-Maybe {f = f} is-inj-f x H =
     ( f exception-Maybe)
     ( is-value-injective-map-exception-Maybe is-inj-f x H)
 
-compose-injective-map-exception-Maybe :
+comp-injective-map-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   (is-inj-f : is-injective f) (x : X) (H : is-exception-Maybe (f (inl x))) →
   inl (value-injective-map-exception-Maybe is-inj-f x H) ＝
   f exception-Maybe
-compose-injective-map-exception-Maybe {f = f} is-inj-f x H =
+comp-injective-map-exception-Maybe {f = f} is-inj-f x H =
   eq-is-value-Maybe
     ( f exception-Maybe)
     ( is-value-injective-map-exception-Maybe is-inj-f x H)
@@ -181,7 +181,7 @@ compute-restrict-injective-map-is-exception-Maybe'
   ex-falso (is-not-exception-unit-Maybe y (inv p ∙ q))
 compute-restrict-injective-map-is-exception-Maybe'
   {f = f} is-inj-f x (inr star) p q =
-  compose-injective-map-exception-Maybe is-inj-f x p
+  comp-injective-map-exception-Maybe is-inj-f x p
 
 compute-restrict-injective-map-is-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
@@ -431,12 +431,12 @@ module _
       ( pr1 (pair-eq-Σ (pr2 (pr1 (pr2 extend-equiv-Maybe)) (pair f p))))
       ( inl x)
 
-  compose-extend-equiv-Maybe :
+  comp-extend-equiv-Maybe :
     (f g : type-Set X ≃ type-Set X) →
     htpy-equiv
       ( pr1 (map-equiv extend-equiv-Maybe (f ∘e g)))
       ( ( pr1 (map-equiv extend-equiv-Maybe f)) ∘e
         ( pr1 (map-equiv extend-equiv-Maybe g)))
-  compose-extend-equiv-Maybe f g =
-    preserves-compose-map-coprod (map-equiv g) (map-equiv f) id id
+  comp-extend-equiv-Maybe f g =
+    preserves-comp-map-coprod (map-equiv g) (map-equiv f) id id
 ```

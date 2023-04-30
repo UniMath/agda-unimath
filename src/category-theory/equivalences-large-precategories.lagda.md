@@ -39,13 +39,13 @@ module _
       functor-inv-equivalence-Large-Precat : functor-Large-Precat D C γ-back
       issec-functor-inv-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          ( compose-functor-Large-Precat
+          ( comp-functor-Large-Precat
             functor-equivalence-Large-Precat
             functor-inv-equivalence-Large-Precat)
           (id-functor-Large-Precat)
       isretr-functor-inv-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          ( compose-functor-Large-Precat
+          ( comp-functor-Large-Precat
             functor-inv-equivalence-Large-Precat
             functor-equivalence-Large-Precat)
           (id-functor-Large-Precat)

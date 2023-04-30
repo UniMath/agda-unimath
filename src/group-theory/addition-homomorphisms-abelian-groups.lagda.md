@@ -135,19 +135,19 @@ module _
   {l1 l2 l3 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3)
   where
 
-  left-distributive-compose-add-hom-Ab :
+  left-distributive-comp-add-hom-Ab :
     (h : type-hom-Ab B C) (f g : type-hom-Ab A B) →
-    Id ( compose-hom-Ab A B C h (add-hom-Ab A B f g))
-       ( add-hom-Ab A C (compose-hom-Ab A B C h f) (compose-hom-Ab A B C h g))
-  left-distributive-compose-add-hom-Ab h f g =
+    Id ( comp-hom-Ab A B C h (add-hom-Ab A B f g))
+       ( add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g))
+  left-distributive-comp-add-hom-Ab h f g =
     eq-htpy-hom-Ab A C
       ( λ x →
         preserves-add-hom-Ab B C h (map-hom-Ab A B f x) (map-hom-Ab A B g x))
 
-  right-distributive-compose-add-hom-Ab :
+  right-distributive-comp-add-hom-Ab :
     (g h : type-hom-Ab B C) (f : type-hom-Ab A B) →
-    Id ( compose-hom-Ab A B C (add-hom-Ab B C g h) f)
-       ( add-hom-Ab A C (compose-hom-Ab A B C g f) (compose-hom-Ab A B C h f))
-  right-distributive-compose-add-hom-Ab g h f =
+    Id ( comp-hom-Ab A B C (add-hom-Ab B C g h) f)
+       ( add-hom-Ab A C (comp-hom-Ab A B C g f) (comp-hom-Ab A B C h f))
+  right-distributive-comp-add-hom-Ab g h f =
     eq-htpy-hom-Ab A C (λ x → refl)
 ```

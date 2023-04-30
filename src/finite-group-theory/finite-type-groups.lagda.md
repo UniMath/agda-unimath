@@ -85,7 +85,7 @@ module _
 
   is-sec-hom-inv-loop-group-fin-UU-Fin-Group :
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( loop-group-Set (raise-Set l (Fin-Set n)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
@@ -109,7 +109,7 @@ module _
 
   is-retr-hom-inv-loop-group-fin-UU-Fin-Group :
     Id
-      ( compose-hom-Group
+      ( comp-hom-Group
         ( abstract-group-Concrete-Group (UU-Fin-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
         ( abstract-group-Concrete-Group (UU-Fin-Group l n))

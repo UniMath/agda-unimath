@@ -179,7 +179,7 @@ module _
     ( up-circle : universal-property-circle (lsuc l2) l) →
     is-equiv ev-descent-data-circle
   is-equiv-ev-descent-data-circle-universal-property-circle up-circle =
-     is-equiv-compose-htpy
+     is-equiv-comp-htpy
       ( ev-descent-data-circle)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))
@@ -212,7 +212,7 @@ module _
           inv))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ P →
-          is-equiv-compose _ _
+          is-equiv-comp _ _
             ( is-equiv-inv _ _)
             ( is-equiv-Eq-eq-descent-data-circle
               ( Q)
@@ -432,7 +432,7 @@ module _
     (equiv-postcomp (A (base-free-loop l)) β) ∘e (equiv-precomp (inv-equiv α) Z)
   pr2 eq-descent-data-circle-function-type h =
     ( eq-htpy
-      ( htpy-compose-horizontal
+      ( htpy-comp-horizontal
         ( h ·l
           inv-htpy
             ( coherence-square-inv-all

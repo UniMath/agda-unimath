@@ -213,14 +213,14 @@ We specialize the above definitions to nonhomogenous homotopies.
   section-system.element (id-hom-system A) {X} = id
   section-system.slice (id-hom-system A) X = id-hom-system (system.slice A X)
 
-  compose-hom-system :
+  comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level} {T : UU l1} {S : UU l2} {R : UU l3} {g : S → R}
     {f : T → S} {A : system l4 T} {B : system l5 S} {C : system l6 R}
     (β : hom-system g B C) (α : hom-system f A B) → hom-system (g ∘ f) A C
-  section-system.element (compose-hom-system {f = f} β α) {X} =
+  section-system.element (comp-hom-system {f = f} β α) {X} =
     section-system.element β {f X} ∘ section-system.element α {X}
-  section-system.slice (compose-hom-system {f = f} β α) X =
-    compose-hom-system (section-system.slice β (f X)) (section-system.slice α X)
+  section-system.slice (comp-hom-system {f = f} β α) X =
+    comp-hom-system (section-system.slice β (f X)) (section-system.slice α X)
 
   record weakening
     {l1 l2 : Level} {T : UU l1} (A : system l2 T) : UU (l1 ⊔ l2)
@@ -240,10 +240,10 @@ We specialize the above definitions to nonhomogenous homotopies.
       element :
         (X : T) →
         htpy-hom-system
-          ( compose-hom-system
+          ( comp-hom-system
             ( section-system.slice h X)
             ( weakening.element WA X))
-          ( compose-hom-system
+          ( comp-hom-system
             ( weakening.element WB (f X))
             ( h))
       slice :
@@ -275,10 +275,10 @@ We specialize the above definitions to nonhomogenous homotopies.
       element :
         {X : T} (x : system.element A X) →
         htpy-hom-system
-          ( compose-hom-system
+          ( comp-hom-system
             ( h)
             ( substitution.element SA x))
-          ( compose-hom-system
+          ( comp-hom-system
             ( substitution.element SB
               ( section-system.element h x))
             ( section-system.slice h X))
@@ -431,7 +431,7 @@ We specialize the above definitions to nonhomogenous homotopies.
         element :
           {X : T} (x : system.element A X) →
           htpy-hom-system
-            ( compose-hom-system
+            ( comp-hom-system
               ( substitution.element S x)
               ( weakening.element W X))
             ( id-hom-system A)
@@ -468,7 +468,7 @@ We specialize the above definitions to nonhomogenous homotopies.
         element :
           (X : T) →
           htpy-hom-system
-            ( compose-hom-system
+            ( comp-hom-system
               ( substitution.element
                 ( substitution.slice S X)
                 ( generic-element.element δ X))
@@ -627,7 +627,7 @@ module dependent-simple
   dependent.section-system.slice (hom-system h) X =
     hom-system (simple.section-system.slice h X)
 
-  compose-hom-system :
+  comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level}
     {T : UU l1} {S : UU l2} {R : UU l3}
     {g : S → R} {f : T → S} {A : simple.system l4 T} {B : simple.system l5 S}
@@ -635,14 +635,14 @@ module dependent-simple
     (h : simple.hom-system f A B) →
     dependent.htpy-hom-system
       ( hom-system
-        ( simple.compose-hom-system k h))
-      ( dependent.compose-hom-system
+        ( simple.comp-hom-system k h))
+      ( dependent.comp-hom-system
         ( hom-system k)
         ( hom-system h))
-  dependent.section-system.type (compose-hom-system k h) X = refl
-  dependent.section-system.element (compose-hom-system k h) x = refl
-  dependent.section-system.slice (compose-hom-system {f = f} k h) X =
-    compose-hom-system
+  dependent.section-system.type (comp-hom-system k h) X = refl
+  dependent.section-system.element (comp-hom-system k h) x = refl
+  dependent.section-system.slice (comp-hom-system {f = f} k h) X =
+    comp-hom-system
       ( simple.section-system.slice k (f X))
       ( simple.section-system.slice h X)
 
@@ -683,12 +683,12 @@ module dependent-simple
     ( preserves-weakening {f = f} {WA = WA} {WB} {g = g} Wg) X =
     dependent.concat-htpy-hom-system
       ( dependent.inv-htpy-hom-system
-        ( compose-hom-system
+        ( comp-hom-system
           ( simple.section-system.slice g X)
           ( simple.weakening.element WA X)))
       ( dependent.concat-htpy-hom-system
         ( htpy-hom-system (simple.preserves-weakening.element Wg X))
-        ( compose-hom-system
+        ( comp-hom-system
           ( simple.weakening.element WB (f X))
           ( g)))
   dependent.preserves-weakening.slice (preserves-weakening Wg) X =

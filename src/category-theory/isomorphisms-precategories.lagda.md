@@ -45,8 +45,8 @@ module _
   is-iso-Precat {x} {y} f =
     Σ ( type-hom-Precat C y x)
       ( λ g →
-        (compose-hom-Precat C f g ＝ id-hom-Precat C) ×
-        (compose-hom-Precat C g f ＝ id-hom-Precat C))
+        (comp-hom-Precat C f g ＝ id-hom-Precat C) ×
+        (comp-hom-Precat C g f ＝ id-hom-Precat C))
 
   hom-inv-is-iso-Precat :
     {x y : obj-Precat C} {f : type-hom-Precat C x y} →
@@ -55,12 +55,12 @@ module _
 
   issec-hom-inv-is-iso-Precat :
     {x y : obj-Precat C} {f : type-hom-Precat C x y} (H : is-iso-Precat f) →
-    (compose-hom-Precat C f (hom-inv-is-iso-Precat H)) ＝ id-hom-Precat C
+    (comp-hom-Precat C f (hom-inv-is-iso-Precat H)) ＝ id-hom-Precat C
   issec-hom-inv-is-iso-Precat H = pr1 (pr2 H)
 
   isretr-hom-inv-is-iso-Precat :
     {x y : obj-Precat C} {f : type-hom-Precat C x y} (H : is-iso-Precat f) →
-    (compose-hom-Precat C (hom-inv-is-iso-Precat H) f) ＝ id-hom-Precat C
+    (comp-hom-Precat C (hom-inv-is-iso-Precat H) f) ＝ id-hom-Precat C
   isretr-hom-inv-is-iso-Precat H = pr2 (pr2 H)
 
   abstract
@@ -77,17 +77,17 @@ module _
           prod-Prop
             ( Id-Prop
               ( hom-Precat C y y)
-              ( compose-hom-Precat C f h)
+              ( comp-hom-Precat C f h)
               ( id-hom-Precat C))
             ( Id-Prop
               ( hom-Precat C x x)
-              ( compose-hom-Precat C h f)
+              ( comp-hom-Precat C h f)
               ( id-hom-Precat C)))
-        ( ( inv (right-unit-law-compose-hom-Precat C g)) ∙
-          ( ( ap (compose-hom-Precat C g) (inv p')) ∙
-            ( ( inv (associative-compose-hom-Precat C g f g')) ∙
-              ( ( ap (compose-hom-Precat' C g') q) ∙
-                ( left-unit-law-compose-hom-Precat C g')))))
+        ( ( inv (right-unit-law-comp-hom-Precat C g)) ∙
+          ( ( ap (comp-hom-Precat C g) (inv p')) ∙
+            ( ( inv (associative-comp-hom-Precat C g f g')) ∙
+              ( ( ap (comp-hom-Precat' C g') q) ∙
+                ( left-unit-law-comp-hom-Precat C g')))))
 
     is-prop-is-iso-Precat :
       {x y : obj-Precat C} (f : type-hom-Precat C x y) →
@@ -127,13 +127,13 @@ module _
 
   issec-hom-inv-iso-Precat :
     {x y : obj-Precat C} (f : iso-Precat x y) →
-    ( compose-hom-Precat C (hom-iso-Precat f) (hom-inv-iso-Precat f)) ＝
+    ( comp-hom-Precat C (hom-iso-Precat f) (hom-inv-iso-Precat f)) ＝
     ( id-hom-Precat C)
   issec-hom-inv-iso-Precat f = pr1 (pr2 (is-iso-hom-iso-Precat f))
 
   isretr-hom-inv-iso-Precat :
     {x y : obj-Precat C} (f : iso-Precat x y) →
-    ( compose-hom-Precat C (hom-inv-iso-Precat f) (hom-iso-Precat f)) ＝
+    ( comp-hom-Precat C (hom-inv-iso-Precat f) (hom-iso-Precat f)) ＝
     ( id-hom-Precat C)
   isretr-hom-inv-iso-Precat f = pr2 (pr2 (is-iso-hom-iso-Precat f))
 ```
@@ -154,9 +154,9 @@ module _
     {x : obj-Precat C} → is-iso-Precat C (id-hom-Precat C {x})
   pr1 is-iso-id-hom-Precat = id-hom-Precat C
   pr1 (pr2 is-iso-id-hom-Precat) =
-    left-unit-law-compose-hom-Precat C (id-hom-Precat C)
+    left-unit-law-comp-hom-Precat C (id-hom-Precat C)
   pr2 (pr2 is-iso-id-hom-Precat) =
-    left-unit-law-compose-hom-Precat C (id-hom-Precat C)
+    left-unit-law-comp-hom-Precat C (id-hom-Precat C)
 
   id-iso-Precat : {x : obj-Precat C} → iso-Precat C x x
   pr1 id-iso-Precat = id-hom-Precat C
@@ -232,38 +232,38 @@ module _
     ( precomp-hom-Precat C f z ∘ precomp-hom-inv-is-iso-Precat H z) ~ id
   issec-precomp-hom-inv-is-iso-Precat H z g =
     equational-reasoning
-      compose-hom-Precat
+      comp-hom-Precat
         ( C)
-        ( compose-hom-Precat C g (hom-inv-is-iso-Precat C H))
+        ( comp-hom-Precat C g (hom-inv-is-iso-Precat C H))
         ( f)
-      ＝ compose-hom-Precat
+      ＝ comp-hom-Precat
           ( C)
           ( g)
-          ( compose-hom-Precat C (hom-inv-is-iso-Precat C H) f)
-        by associative-compose-hom-Precat C g (hom-inv-is-iso-Precat C H) f
-      ＝ compose-hom-Precat C g (id-hom-Precat C)
-        by ap (compose-hom-Precat C g) (isretr-hom-inv-is-iso-Precat C H)
+          ( comp-hom-Precat C (hom-inv-is-iso-Precat C H) f)
+        by associative-comp-hom-Precat C g (hom-inv-is-iso-Precat C H) f
+      ＝ comp-hom-Precat C g (id-hom-Precat C)
+        by ap (comp-hom-Precat C g) (isretr-hom-inv-is-iso-Precat C H)
       ＝ g
-        by right-unit-law-compose-hom-Precat C g
+        by right-unit-law-comp-hom-Precat C g
 
   isretr-precomp-hom-inv-is-iso-Precat :
     (H : is-iso-Precat C f) (z : obj-Precat C) →
     (precomp-hom-inv-is-iso-Precat H z ∘ precomp-hom-Precat C f z) ~ id
   isretr-precomp-hom-inv-is-iso-Precat H z g =
     equational-reasoning
-      compose-hom-Precat
+      comp-hom-Precat
         ( C)
-        ( compose-hom-Precat C g f)
+        ( comp-hom-Precat C g f)
         ( hom-inv-is-iso-Precat C H)
-      ＝ compose-hom-Precat
+      ＝ comp-hom-Precat
           ( C)
           ( g)
-          ( compose-hom-Precat C f (hom-inv-is-iso-Precat C H))
-        by associative-compose-hom-Precat C g f (hom-inv-is-iso-Precat C H)
-      ＝ compose-hom-Precat C g (id-hom-Precat C)
-        by ap (compose-hom-Precat C g) (issec-hom-inv-is-iso-Precat C H)
+          ( comp-hom-Precat C f (hom-inv-is-iso-Precat C H))
+        by associative-comp-hom-Precat C g f (hom-inv-is-iso-Precat C H)
+      ＝ comp-hom-Precat C g (id-hom-Precat C)
+        by ap (comp-hom-Precat C g) (issec-hom-inv-is-iso-Precat C H)
       ＝ g
-        by right-unit-law-compose-hom-Precat C g
+        by right-unit-law-comp-hom-Precat C g
 
   is-equiv-precomp-is-iso-Precat :
     (H : is-iso-Precat C f) (z : obj-Precat C) →

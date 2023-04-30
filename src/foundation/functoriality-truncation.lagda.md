@@ -93,12 +93,12 @@ id-map-trunc {l1} {A} k =
 ### The truncation of a composite is the composite of the truncations
 
 ```agda
-preserves-compose-map-trunc :
+preserves-comp-map-trunc :
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (k : 𝕋)
   ( g : B → C) (f : A → B) →
   ( map-trunc k (g ∘ f)) ~
   ( (map-trunc k g) ∘ (map-trunc k f))
-preserves-compose-map-trunc k g f =
+preserves-comp-map-trunc k g f =
   htpy-uniqueness-map-trunc k
     ( g ∘ f)
     ( (map-trunc k g) ∘ (map-trunc k f))
@@ -125,13 +125,13 @@ module _
       ( pair
         ( map-inv-equiv-trunc)
         ( inv-htpy
-          ( preserves-compose-map-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
+          ( preserves-comp-map-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
           ( htpy-trunc (issec-map-inv-equiv e) ∙h
             id-map-trunc k)))
       ( pair
         ( map-inv-equiv-trunc)
         ( inv-htpy
-          ( preserves-compose-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
+          ( preserves-comp-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
           ( htpy-trunc (isretr-map-inv-equiv e) ∙h
             id-map-trunc k)))
 

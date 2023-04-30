@@ -133,20 +133,20 @@ module _
   (P : Poset l1 l2) (Q : Poset l3 l4) (R : Poset l5 l6)
   where
 
-  preserves-order-compose-Poset :
+  preserves-order-comp-Poset :
     (g : hom-Poset Q R) (f : hom-Poset P Q) →
     preserves-order-Poset P R
       ( map-hom-Poset Q R g ∘ map-hom-Poset P Q f)
-  preserves-order-compose-Poset =
-    preserves-order-compose-Preorder
+  preserves-order-comp-Poset =
+    preserves-order-comp-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)
 
-  compose-hom-Poset :
+  comp-hom-Poset :
     (g : hom-Poset Q R) (f : hom-Poset P Q) → hom-Poset P R
-  compose-hom-Poset =
-    compose-hom-Preorder
+  comp-hom-Poset =
+    comp-hom-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)
@@ -159,17 +159,17 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  left-unit-law-compose-hom-Poset :
+  left-unit-law-comp-hom-Poset :
     (f : hom-Poset P Q) →
-    Id ( compose-hom-Poset P Q Q (id-hom-Poset Q) f) f
-  left-unit-law-compose-hom-Poset =
-    left-unit-law-compose-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+    Id ( comp-hom-Poset P Q Q (id-hom-Poset Q) f) f
+  left-unit-law-comp-hom-Poset =
+    left-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  right-unit-law-compose-hom-Poset :
+  right-unit-law-comp-hom-Poset :
     (f : hom-Poset P Q) →
-    Id (compose-hom-Poset P P Q f (id-hom-Poset P)) f
-  right-unit-law-compose-hom-Poset =
-    right-unit-law-compose-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+    Id (comp-hom-Poset P P Q f (id-hom-Poset P)) f
+  right-unit-law-comp-hom-Poset =
+    right-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 ```
 
 ### Associativity of composition of order preserving maps
@@ -180,12 +180,12 @@ module _
   (R : Poset l5 l6) (S : Poset l7 l8)
   where
 
-  associative-compose-hom-Poset :
+  associative-comp-hom-Poset :
     (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
-    Id ( compose-hom-Poset P Q S (compose-hom-Poset Q R S h g) f)
-       ( compose-hom-Poset P R S h (compose-hom-Poset P Q R g f))
-  associative-compose-hom-Poset =
-    associative-compose-hom-Preorder
+    Id ( comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f)
+       ( comp-hom-Poset P R S h (comp-hom-Poset P Q R g f))
+  associative-comp-hom-Poset =
+    associative-comp-hom-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)

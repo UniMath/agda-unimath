@@ -198,7 +198,7 @@ module _
                     ( equiv-is-small
                       ( is-small-Σ H (λ a → is-small' {l} {B a}))))
                   ( pr1 b))
-            by equiv-compute-fib-compose pr1 _ a
+            by equiv-compute-fib-comp pr1 _ a
           ≃ fib (pr1 {B = B}) a
             by
             right-unit-law-Σ-is-contr

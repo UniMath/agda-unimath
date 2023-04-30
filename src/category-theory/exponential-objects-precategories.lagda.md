@@ -47,7 +47,7 @@ module _
     (z : obj-Precat C)
     (f : type-hom-Precat C (object-product-Precat C p z x) y) →
     ∃! (type-hom-Precat C z e) λ g →
-       compose-hom-Precat C ev (map-product-Precat C p g (id-hom-Precat C)) ＝ f
+       comp-hom-Precat C ev (map-product-Precat C p g (id-hom-Precat C)) ＝ f
 
   exponential-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   exponential-Precat x y =
@@ -82,7 +82,7 @@ module _
     morphism-into-exponential-Precat = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
 
     morphism-into-exponential-Precat-comm :
-      compose-hom-Precat C
+      comp-hom-Precat C
           ( eval-exponential-Precat)
           ( map-product-Precat C p
             (morphism-into-exponential-Precat)
@@ -91,7 +91,7 @@ module _
 
     is-unique-morphism-into-exponential-Precat :
       ( g : type-hom-Precat C z object-exponential-Precat) →
-      ( compose-hom-Precat C
+      ( comp-hom-Precat C
         ( eval-exponential-Precat)
         ( map-product-Precat C p g (id-hom-Precat C)) ＝ f) →
       morphism-into-exponential-Precat ＝ g

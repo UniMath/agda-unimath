@@ -141,7 +141,7 @@ module _
     is-equiv-con-inv :
       (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (con-inv p q r)
     is-equiv-con-inv p refl r =
-      is-equiv-compose
+      is-equiv-comp
         ( concat' p (inv right-unit))
         ( concat (inv right-unit) r)
         ( is-equiv-concat (inv right-unit) r)

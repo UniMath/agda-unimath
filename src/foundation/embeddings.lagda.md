@@ -96,23 +96,23 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  is-emb-compose :
+  is-emb-comp :
     (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
-  is-emb-compose g h is-emb-g is-emb-h x y =
-    is-equiv-compose-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-compose g h)
+  is-emb-comp g h is-emb-g is-emb-h x y =
+    is-equiv-comp-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
       ( is-emb-h x y)
       ( is-emb-g (h x) (h y))
 
   abstract
-    is-emb-compose-htpy :
+    is-emb-comp-htpy :
       (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
       is-emb h → is-emb f
-    is-emb-compose-htpy f g h H is-emb-g is-emb-h =
-      is-emb-htpy f (g ∘ h) H (is-emb-compose g h is-emb-g is-emb-h)
+    is-emb-comp-htpy f g h H is-emb-g is-emb-h =
+      is-emb-htpy f (g ∘ h) H (is-emb-comp g h is-emb-g is-emb-h)
 
-  compose-emb :
+  comp-emb :
     (B ↪ C) → (A ↪ B) → (A ↪ C)
-  compose-emb (pair g H) (pair f K) = pair (g ∘ f) (is-emb-compose g f H K)
+  comp-emb (pair g H) (pair f K) = pair (g ∘ f) (is-emb-comp g f H K)
 ```
 
 ### The right factor of a composed embedding is an embedding
@@ -130,7 +130,7 @@ module _
       ( ap (g ∘ h))
       ( ap g)
       ( ap h)
-      ( ap-compose g h)
+      ( ap-comp g h)
       ( is-emb-g (h x) (h y))
       ( is-emb-gh x y)
 
@@ -143,7 +143,7 @@ module _
         ( ap (g ∘ h))
         ( ap g)
         ( ap h)
-        ( ap-compose g h)
+        ( ap-comp g h)
         ( is-emb-g (h x) (h y))
         ( is-emb-htpy (g ∘ h) f (inv-htpy H) is-emb-f x y)
 
@@ -152,7 +152,7 @@ module _
       (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
       is-equiv e → is-emb g → is-emb f
     is-emb-triangle-is-equiv f g e H is-equiv-e is-emb-g =
-      is-emb-compose-htpy f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
+      is-emb-comp-htpy f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -317,7 +317,7 @@ module _
         ( bottom ∘ left)
         ( right ∘ top)
         ( H)
-        ( is-emb-compose bottom left M (is-emb-is-equiv K)))
+        ( is-emb-comp bottom left M (is-emb-is-equiv K)))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}

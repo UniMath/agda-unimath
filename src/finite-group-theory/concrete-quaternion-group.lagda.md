@@ -130,7 +130,7 @@ equiv-cube-with-labelled-faces {k} X Y =
                   ( cube-cube-with-labelled-faces k X)
                   ( cube-cube-with-labelled-faces k Y)
                   e d a))
-              ( compose-equiv-cube k
+              ( comp-equiv-cube k
                 ( standard-cube k)
                 ( face-cube k (pr1 X) d a)
                 ( face-cube k (pr1 Y)

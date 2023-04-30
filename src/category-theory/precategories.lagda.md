@@ -91,30 +91,30 @@ module _
     associative-composition-structure-Set hom-Precat
   associative-composition-Precat = pr1 (pr2 (pr2 C))
 
-  compose-hom-Precat : {x y z : obj-Precat} →
+  comp-hom-Precat : {x y z : obj-Precat} →
     type-hom-Precat y z → type-hom-Precat x y → type-hom-Precat x z
-  compose-hom-Precat = pr1 associative-composition-Precat
+  comp-hom-Precat = pr1 associative-composition-Precat
 
-  compose-hom-Precat' : {x y z : obj-Precat} →
+  comp-hom-Precat' : {x y z : obj-Precat} →
     type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
-  compose-hom-Precat' f g = compose-hom-Precat g f
+  comp-hom-Precat' f g = comp-hom-Precat g f
 
   precomp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
     type-hom-Precat y z → type-hom-Precat x z
-  precomp-hom-Precat f z g = compose-hom-Precat g f
+  precomp-hom-Precat f z g = comp-hom-Precat g f
 
   postcomp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
     type-hom-Precat z x → type-hom-Precat z y
-  postcomp-hom-Precat f z = compose-hom-Precat f
+  postcomp-hom-Precat f z = comp-hom-Precat f
 
-  associative-compose-hom-Precat :
+  associative-comp-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
-    ( compose-hom-Precat (compose-hom-Precat h g) f) ＝
-    ( compose-hom-Precat h (compose-hom-Precat g f))
-  associative-compose-hom-Precat = pr2 associative-composition-Precat
+    ( comp-hom-Precat (comp-hom-Precat h g) f) ＝
+    ( comp-hom-Precat h (comp-hom-Precat g f))
+  associative-comp-hom-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
     is-unital-composition-structure-Set
@@ -125,15 +125,15 @@ module _
   id-hom-Precat : {x : obj-Precat} → type-hom-Precat x x
   id-hom-Precat {x} = pr1 is-unital-Precat x
 
-  left-unit-law-compose-hom-Precat :
+  left-unit-law-comp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    compose-hom-Precat id-hom-Precat f ＝ f
-  left-unit-law-compose-hom-Precat = pr1 (pr2 is-unital-Precat)
+    comp-hom-Precat id-hom-Precat f ＝ f
+  left-unit-law-comp-hom-Precat = pr1 (pr2 is-unital-Precat)
 
-  right-unit-law-compose-hom-Precat :
+  right-unit-law-comp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    compose-hom-Precat f id-hom-Precat ＝ f
-  right-unit-law-compose-hom-Precat = pr2 (pr2 is-unital-Precat)
+    comp-hom-Precat f id-hom-Precat ＝ f
+  right-unit-law-comp-hom-Precat = pr2 (pr2 is-unital-Precat)
 ```
 
 ## Examples

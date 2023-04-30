@@ -82,7 +82,7 @@ module _
     is-modal-is-small →
     is-equiv (unit-○ ∘ map-equiv-is-small is-small-X)
   is-equiv-unit-is-modal-is-small =
-    is-equiv-compose _ _ (is-equiv-map-equiv (equiv-is-small is-small-X))
+    is-equiv-comp _ _ (is-equiv-map-equiv (equiv-is-small is-small-X))
 
   equiv-unit-is-modal-is-small :
     is-modal-is-small → X ≃ ○ (type-is-small is-small-X)
