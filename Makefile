@@ -1,14 +1,14 @@
 
-CHECKOPTS :=--without-K --exact-split --guardedness
-everythingOpts :=$(CHECKOPTS)
+CHECKOPTS := --without-K --exact-split --guardedness
+everythingOpts := $(CHECKOPTS)
 AGDAVERBOSE ?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
-AGDAFILES :=$(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
-AGDAMDFILES :=$(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
+AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
+AGDAMDFILES := $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
-AGDAHTMLFLAGS ?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
-AGDA ?=agda $(AGDAVERBOSE)
-TIME ?=time
+AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
+AGDA ?= agda $(AGDAVERBOSE)
+TIME ?= time
 
 METAFILES :=CITATION.cff \
 			CODINGSTYLE.md \
