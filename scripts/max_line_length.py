@@ -48,6 +48,7 @@ if __name__ == '__main__':
         with open(fpath, 'r') as f:
 
             for numline, line in enumerate(f):
+                line = line.rstrip()
                 is_tag, is_opening = utils.is_agda_opening_or_closing_tag(line)
                 if is_tag:
                     is_in_agda_block = is_opening

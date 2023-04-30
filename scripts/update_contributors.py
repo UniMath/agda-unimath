@@ -24,7 +24,7 @@ template = """
 We are grateful to the following people for their contributions to
 the library.
 
-Name 1
+{names}
 
 Help us to improve the library by contributing to the project!
 Contributions come in many forms, please ask us if you are not sure
@@ -59,7 +59,7 @@ for contributor in contributors:
         name = login
     contributors_list.append(f'- [{name}]({html_url})')
 
-output = template.replace('Name 1', '\n'.join(contributors_list))
+output = template.format(names='\n'.join(contributors_list))
 
 with open('CONTRIBUTORS.md', 'w') as file:
     file.write(output)

@@ -33,9 +33,9 @@ if __name__ == '__main__':
     for fpath in utils.get_agda_files(sys.argv[1:]):
 
         with open(fpath, 'r') as f:
-            lines = f.read().splitlines()
+            contents = f.read()
 
-        old_lines = list(lines)
+        lines = contents.split('\n')
         is_in_agda_block: bool = False
         block_comment_level: int = 0
 
@@ -60,12 +60,11 @@ if __name__ == '__main__':
 
                 block_comment_level -= block_comment_delta_neg
 
-                line += comment
-            lines[i] = line
+                lines[i] = line + comment
 
-        if old_lines != lines:
-            print('blabla')
+        new_contents = '\n'.join(lines)
+        if new_contents != contents:
             with open(fpath, 'w') as f:
-                f.writelines(lines)
+                f.write(new_contents)
 
     sys.exit(0)
