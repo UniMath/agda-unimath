@@ -431,7 +431,7 @@ abstract
     {l : Level} (G : Semigroup l) (e : is-unital-Semigroup G) →
     all-elements-equal (is-group' G e)
   all-elements-equal-is-group
-    ( pair G (pair μ assoc-G))
+    ( pair G (pair μ associative-G))
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
@@ -448,7 +448,7 @@ abstract
           ＝ μ (μ (i' x) x) (i x)
             by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
           ＝ μ (i' x) (μ x (i x))
-            by assoc-G (i' x) x (i x)
+            by associative-G (i' x) x (i x)
           ＝ μ (i' x) e
             by ap (μ (i' x)) (right-inv-i x)
           ＝ i' x

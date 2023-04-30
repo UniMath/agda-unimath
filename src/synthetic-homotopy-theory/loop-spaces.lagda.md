@@ -116,7 +116,7 @@ module _
 
   associative-mul-Ω :
     (x y z : type-Ω A) → Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
-  associative-mul-Ω x y z = assoc x y z
+  associative-mul-Ω x y z = associative x y z
 ```
 
 We compute transport of `type-Ω`.

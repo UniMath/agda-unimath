@@ -648,7 +648,7 @@ module _
       ≃ Σ ( Σ U V) (λ uv → Y ((map-inv-equiv f) uv))
         by inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv f))
       ≃ Σ U ( λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
-        by assoc-Σ U V (λ uv → Y (map-inv-equiv f uv))
+        by associative-Σ U V (λ uv → Y (map-inv-equiv f uv))
 
   map-displayed-fibered-Relaxed-Σ-Decomposition :
     displayed-Relaxed-Σ-Decomposition l4 (l3 ⊔ l5) l5 l3 A
@@ -683,7 +683,7 @@ module _
     A ≃ Σ M N by s
       ≃ Σ M (λ m → Σ (P m) (Q m))by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
       ≃ Σ (Σ M P) (λ (m , p) → Q m p)
-      by inv-assoc-Σ
+      by inv-associative-Σ
         ( M)
         ( λ z → P z)
         ( λ z → Q (pr1 z) (pr2 z))
@@ -781,14 +781,14 @@ module _
       ( ap
         ( λ f → map-equiv (equiv-tot (inv-equiv ∘ t)) f)
         ( inv-map-eq-transpose-equiv
-          ( assoc-Σ M P Y)
+          ( associative-Σ M P Y)
           ( inv
             ( map-eq-transpose-equiv
               ( equiv-Σ-equiv-base Y (inv-equiv id-equiv))
               ( inv
                 ( map-eq-transpose-equiv
-                  ( assoc-Σ M P Y)
-                  ( issec-map-inv-assoc-Σ M P Y
+                  ( associative-Σ M P Y)
+                  ( issec-map-inv-associative-Σ M P Y
                     ( map-equiv (equiv-tot t ∘e s) x)))))))) ∙
       ( inv
         ( preserves-compose-tot

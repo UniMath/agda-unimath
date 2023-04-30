@@ -134,7 +134,7 @@ module _
                 ( equiv-tot
                   ( λ g →
                     inv-equiv (equiv-fam-equiv-equiv-slice f g)))))) ∘e
-          ( assoc-Σ
+          ( associative-Σ
             ( A)
             ( λ x → B x → 𝕎 A B)
             ( λ t → Eq-ext-𝕎 (tree-𝕎 a f) (tree-𝕎 (pr1 t) (pr2 t))))) ∘e

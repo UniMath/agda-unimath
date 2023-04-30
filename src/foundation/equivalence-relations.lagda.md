@@ -163,7 +163,7 @@ module _
       ( Σ ( Σ ( block-partition P)
               ( λ B → is-in-block-partition P B x))
           ( λ B → is-in-block-partition P (pr1 B) y))
-      ( assoc-Σ
+      ( associative-Σ
         ( block-partition P)
         ( λ U → is-in-block-partition P U x)
         ( λ U → is-in-block-partition P (pr1 U) y))
@@ -323,7 +323,7 @@ module _
                         ( ( left-unit-law-Σ-is-contr
                             ( is-contr-block-containing-element-partition P a)
                             ( center-block-containing-element-partition P a)) ∘e
-                          ( inv-assoc-Σ
+                          ( inv-associative-Σ
                             ( block-partition P)
                             ( λ B → is-in-block-partition P B a)
                             ( λ B → is-in-block-partition P (pr1 B) x))))))
@@ -361,7 +361,7 @@ module _
                           ( pair
                             ( make-block-partition P Q H)
                             ( make-is-in-block-partition P Q H a q))) ∘e
-                        ( inv-assoc-Σ
+                        ( inv-associative-Σ
                           ( block-partition P)
                           ( λ B → is-in-block-partition P B a)
                           ( λ B → is-in-block-partition P (pr1 B) x)))))))

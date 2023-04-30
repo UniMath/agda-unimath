@@ -161,7 +161,7 @@ compute-pointed-section-ev-pt-Pointed-Type (pair A a) =
                   ( equiv-concat' (K a) (ap-ev a H))) ∘e
                 ( equiv-concat' (K a) right-unit)) ∘e
               ( equiv-concat' (K a) right-unit)))))) ∘e
-  ( assoc-Σ
+  ( associative-Σ
     ( A → (A → A))
     ( λ μ → μ a ＝ id)
     ( λ μp →

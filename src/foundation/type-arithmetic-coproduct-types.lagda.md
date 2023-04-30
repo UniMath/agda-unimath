@@ -74,47 +74,49 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  map-assoc-coprod : (A + B) + C → A + (B + C)
-  map-assoc-coprod (inl (inl x)) = inl x
-  map-assoc-coprod (inl (inr x)) = inr (inl x)
-  map-assoc-coprod (inr x) = inr (inr x)
+  map-associative-coprod : (A + B) + C → A + (B + C)
+  map-associative-coprod (inl (inl x)) = inl x
+  map-associative-coprod (inl (inr x)) = inr (inl x)
+  map-associative-coprod (inr x) = inr (inr x)
 
-  map-inv-assoc-coprod : A + (B + C) → (A + B) + C
-  map-inv-assoc-coprod (inl x) = inl (inl x)
-  map-inv-assoc-coprod (inr (inl x)) = inl (inr x)
-  map-inv-assoc-coprod (inr (inr x)) = inr x
+  map-inv-associative-coprod : A + (B + C) → (A + B) + C
+  map-inv-associative-coprod (inl x) = inl (inl x)
+  map-inv-associative-coprod (inr (inl x)) = inl (inr x)
+  map-inv-associative-coprod (inr (inr x)) = inr x
 
-  issec-map-inv-assoc-coprod : (map-assoc-coprod ∘ map-inv-assoc-coprod) ~ id
-  issec-map-inv-assoc-coprod (inl x) = refl
-  issec-map-inv-assoc-coprod (inr (inl x)) = refl
-  issec-map-inv-assoc-coprod (inr (inr x)) = refl
+  issec-map-inv-associative-coprod :
+    (map-associative-coprod ∘ map-inv-associative-coprod) ~ id
+  issec-map-inv-associative-coprod (inl x) = refl
+  issec-map-inv-associative-coprod (inr (inl x)) = refl
+  issec-map-inv-associative-coprod (inr (inr x)) = refl
 
-  isretr-map-inv-assoc-coprod : (map-inv-assoc-coprod ∘ map-assoc-coprod) ~ id
-  isretr-map-inv-assoc-coprod (inl (inl x)) = refl
-  isretr-map-inv-assoc-coprod (inl (inr x)) = refl
-  isretr-map-inv-assoc-coprod (inr x) = refl
+  isretr-map-inv-associative-coprod :
+    (map-inv-associative-coprod ∘ map-associative-coprod) ~ id
+  isretr-map-inv-associative-coprod (inl (inl x)) = refl
+  isretr-map-inv-associative-coprod (inl (inr x)) = refl
+  isretr-map-inv-associative-coprod (inr x) = refl
 
-  is-equiv-map-assoc-coprod : is-equiv map-assoc-coprod
-  is-equiv-map-assoc-coprod =
+  is-equiv-map-associative-coprod : is-equiv map-associative-coprod
+  is-equiv-map-associative-coprod =
     is-equiv-has-inverse
-      map-inv-assoc-coprod
-      issec-map-inv-assoc-coprod
-      isretr-map-inv-assoc-coprod
+      map-inv-associative-coprod
+      issec-map-inv-associative-coprod
+      isretr-map-inv-associative-coprod
 
-  is-equiv-map-inv-assoc-coprod : is-equiv map-inv-assoc-coprod
-  is-equiv-map-inv-assoc-coprod =
+  is-equiv-map-inv-associative-coprod : is-equiv map-inv-associative-coprod
+  is-equiv-map-inv-associative-coprod =
     is-equiv-has-inverse
-      map-assoc-coprod
-      isretr-map-inv-assoc-coprod
-      issec-map-inv-assoc-coprod
+      map-associative-coprod
+      isretr-map-inv-associative-coprod
+      issec-map-inv-associative-coprod
 
-  assoc-coprod : ((A + B) + C) ≃ (A + (B + C))
-  pr1 assoc-coprod = map-assoc-coprod
-  pr2 assoc-coprod = is-equiv-map-assoc-coprod
+  associative-coprod : ((A + B) + C) ≃ (A + (B + C))
+  pr1 associative-coprod = map-associative-coprod
+  pr2 associative-coprod = is-equiv-map-associative-coprod
 
-  inv-assoc-coprod : (A + (B + C)) ≃ ((A + B) + C)
-  pr1 inv-assoc-coprod = map-inv-assoc-coprod
-  pr2 inv-assoc-coprod = is-equiv-map-inv-assoc-coprod
+  inv-associative-coprod : (A + (B + C)) ≃ ((A + B) + C)
+  pr1 inv-associative-coprod = map-inv-associative-coprod
+  pr2 inv-associative-coprod = is-equiv-map-inv-associative-coprod
 ```
 
 ### Right distributivity of Σ over coproducts

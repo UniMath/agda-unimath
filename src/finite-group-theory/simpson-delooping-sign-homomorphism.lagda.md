@@ -149,10 +149,10 @@ module _
         (Fin-UU-Fin' n) (inv-equiv f ∘e g) (inv-equiv g ∘e h)) ∙
       ( ap
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
-        ( assoc-compose-equiv (inv-equiv g ∘e h) g (inv-equiv f) ∙
+        ( associative-compose-equiv (inv-equiv g ∘e h) g (inv-equiv f) ∙
           ( ap
             ( inv-equiv f ∘e_)
-            ( inv (assoc-compose-equiv h (inv-equiv g) g) ∙
+            ( inv (associative-compose-equiv h (inv-equiv g) g) ∙
               ( ap (_∘e h) (right-inverse-law-equiv g) ∙
                 left-unit-law-equiv h))))))
 
@@ -215,7 +215,7 @@ module _
             ( ap
               ( _∘e transposition-eX)
               ( inv (left-inverse-law-equiv (equiv-count eX))) ∙
-              ( assoc-compose-equiv
+              ( associative-compose-equiv
                 ( transposition-eX)
                 ( equiv-count eX)
                 ( inv-equiv (equiv-count eX))))))
@@ -238,7 +238,7 @@ module _
           ( ap
             ( inv-equiv (transposition Y ∘e equiv-count eX) ∘e_)
             ( inv
-              ( assoc-compose-equiv
+              ( associative-compose-equiv
                 (equiv-count eX) (transposition Y) (transposition Y)) ∙
               ( ap
                 ( _∘e equiv-count eX)
@@ -248,7 +248,7 @@ module _
               ( _∘e equiv-count eX)
               ( distributive-inv-compose-equiv
                 (equiv-count eX) (transposition Y)) ∙
-              ( assoc-compose-equiv
+              ( associative-compose-equiv
                 ( equiv-count eX)
                 ( inv-equiv (transposition Y))
                 ( inv-equiv (equiv-count eX)) ∙
@@ -418,7 +418,7 @@ module _
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
                   ( Fin-UU-Fin' (number-of-elements-count eX)))
-                ( assoc-compose-equiv
+                ( associative-compose-equiv
                   ( inv-equiv (equiv-count eX) ∘e
                     ( equiv-count eX ∘e transposition-eX))
                   ( equiv-count eX)
@@ -426,7 +426,7 @@ module _
                   ( ap
                     ( λ h → inv-equiv f ∘e (equiv-count eX ∘e h))
                     ( inv
-                      ( assoc-compose-equiv
+                      ( associative-compose-equiv
                         ( transposition-eX)
                         ( equiv-count eX)
                         ( inv-equiv (equiv-count eX))) ∙
@@ -534,7 +534,7 @@ module _
                     ( distributive-inv-compose-equiv
                       ( transposition-eX)
                       ( equiv-count eX)) ∙
-                    ( assoc-compose-equiv
+                    ( associative-compose-equiv
                       ( equiv-count eX)
                       ( inv-equiv (equiv-count eX))
                       ( inv-equiv transposition-eX) ∙
@@ -558,7 +558,7 @@ module _
                                   ( inv
                                     ( left-inverse-law-equiv
                                       ( equiv-count eX))) ∙
-                                ( assoc-compose-equiv
+                                ( associative-compose-equiv
                                   ( transposition-eX)
                                   ( equiv-count eX)
                                   ( inv-equiv (equiv-count eX)))))))))))))))
@@ -598,10 +598,10 @@ module _
     is-equiv-has-inverse
       ( map-simpson-compose-equiv X' X (inv-equiv e))
       ( λ f →
-        ( inv (assoc-compose-equiv f (inv-equiv e) e)) ∙
+        ( inv (associative-compose-equiv f (inv-equiv e) e)) ∙
         ( ap (_∘e f) (right-inverse-law-equiv e) ∙ left-unit-law-equiv f))
       ( λ f →
-        ( inv (assoc-compose-equiv f e (inv-equiv e))) ∙
+        ( inv (associative-compose-equiv f e (inv-equiv e))) ∙
         ( ap (_∘e f) (left-inverse-law-equiv e) ∙ left-unit-law-equiv f))
 
   abstract
@@ -619,7 +619,7 @@ module _
         ( simpson-compose-equiv Y Z f ∘e simpson-compose-equiv X Y e)
     preserves-compose-simpson-compose-equiv X Y Z e f =
       eq-htpy-equiv
-        ( λ h → assoc-compose-equiv h e f)
+        ( λ h → associative-compose-equiv h e f)
 
   private
     lemma-sign-comp :
@@ -638,9 +638,9 @@ module _
           ( inv-equiv f ∘e_)
           ( inv (left-unit-law-equiv f') ∙
             ( ap (_∘e f') (inv (left-inverse-law-equiv e)) ∙
-              ( assoc-compose-equiv f' e (inv-equiv e)))) ∙
+              ( associative-compose-equiv f' e (inv-equiv e)))) ∙
           ( inv
-            ( assoc-compose-equiv (e ∘e f') (inv-equiv e) (inv-equiv f)) ∙
+            ( associative-compose-equiv (e ∘e f') (inv-equiv e) (inv-equiv f)) ∙
             ( ap
               ( _∘e map-simpson-compose-equiv X X' e f')
               ( inv (distributive-inv-compose-equiv f e)))))

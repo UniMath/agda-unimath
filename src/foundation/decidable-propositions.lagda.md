@@ -73,7 +73,7 @@ module _
     ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
   split-Decidable-Prop =
     ( left-distributive-Σ-coprod (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
-    ( inv-assoc-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
+    ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
 
   map-equiv-bool-Decidable-Prop' :
     (Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))) →

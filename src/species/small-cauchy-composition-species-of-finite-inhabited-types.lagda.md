@@ -235,7 +235,7 @@ module _
       is-finite-Prop
       C1 C2 C3 C4 C5 C6
 
-  assoc-small-cauchy-composition-species-Inhabited-𝔽 :
+  associative-small-cauchy-composition-species-Inhabited-𝔽 :
     (S T U : species-Inhabited-𝔽 l1 (l1 ⊔ l2)) →
     small-cauchy-composition-species-Inhabited-𝔽
       ( S)
@@ -243,8 +243,8 @@ module _
     small-cauchy-composition-species-Inhabited-𝔽
       ( small-cauchy-composition-species-Inhabited-𝔽 S T)
       ( U)
-  assoc-small-cauchy-composition-species-Inhabited-𝔽 =
-    assoc-small-cauchy-composition-species-subuniverse
+  associative-small-cauchy-composition-species-Inhabited-𝔽 =
+    associative-small-cauchy-composition-species-subuniverse
       is-finite-and-inhabited-Prop
       is-finite-Prop
       C1 C2 C3

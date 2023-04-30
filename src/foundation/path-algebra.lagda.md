@@ -71,11 +71,11 @@ horizontal-concat-square :
     p-lleft (p-lbottom ∙ p-rbottom) (p-ltop ∙ p-rtop) p-rright
 horizontal-concat-square {a = a} {f = f}
   p-lleft p-lbottom p-rbottom p-middle p-ltop p-rtop p-rright s-left s-right =
-  ( inv (assoc p-lleft p-lbottom p-rbottom)) ∙
+  ( inv (associative p-lleft p-lbottom p-rbottom)) ∙
   ( ( ap (concat' a p-rbottom) s-left) ∙
-    ( ( assoc p-ltop p-middle p-rbottom) ∙
+    ( ( associative p-ltop p-middle p-rbottom) ∙
       ( ( ap (concat p-ltop f) s-right) ∙
-        ( inv (assoc p-ltop p-rtop p-rright)))))
+        ( inv (associative p-ltop p-rtop p-rright)))))
 
 horizontal-unit-square :
   {l : Level} {A : UU l} {a b : A} (p : a ＝ b) →
@@ -105,40 +105,40 @@ vertical-concat-square :
     (p-tleft ∙ p-bleft) p-bbottom p-ttop (p-tright ∙ p-bright)
 vertical-concat-square {a = a} {f = f}
   p-tleft p-bleft p-bbottom p-middle p-ttop p-tright p-bright s-top s-bottom =
-  ( assoc p-tleft p-bleft p-bbottom) ∙
+  ( associative p-tleft p-bleft p-bbottom) ∙
   ( ( ap (concat p-tleft f) s-bottom) ∙
-    ( ( inv (assoc p-tleft p-middle p-bright)) ∙
+    ( ( inv (associative p-tleft p-middle p-bright)) ∙
       ( ( ap (concat' a p-bright) s-top) ∙
-        ( assoc p-ttop p-tright p-bright))))
+        ( associative p-ttop p-tright p-bright))))
 ```
 
 ### Unit laws for the associator
 
 ```agda
-unit-law-assoc-011 :
+unit-law-associative-011 :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  assoc refl p q ＝ refl
-unit-law-assoc-011 p q = refl
+  associative refl p q ＝ refl
+unit-law-associative-011 p q = refl
 
-unit-law-assoc-101 :
+unit-law-associative-101 :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  assoc p refl q ＝ ap (concat' x q) right-unit
-unit-law-assoc-101 refl refl = refl
+  associative p refl q ＝ ap (concat' x q) right-unit
+unit-law-associative-101 refl refl = refl
 
-unit-law-assoc-101' :
+unit-law-associative-101' :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  inv (assoc p refl q) ＝ ap (concat' x q) (inv right-unit)
-unit-law-assoc-101' refl refl = refl
+  inv (associative p refl q) ＝ ap (concat' x q) (inv right-unit)
+unit-law-associative-101' refl refl = refl
 
-unit-law-assoc-110 :
+unit-law-associative-110 :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  (assoc p q refl ∙ ap (concat p z) right-unit) ＝ right-unit
-unit-law-assoc-110 refl refl = refl
+  (associative p q refl ∙ ap (concat p z) right-unit) ＝ right-unit
+unit-law-associative-110 refl refl = refl
 
-unit-law-assoc-110' :
+unit-law-associative-110' :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  (inv right-unit ∙ assoc p q refl) ＝ ap (concat p z) (inv right-unit)
-unit-law-assoc-110' refl refl = refl
+  (inv right-unit ∙ associative p q refl) ＝ ap (concat p z) (inv right-unit)
+unit-law-associative-110' refl refl = refl
 ```
 
 ## Properties of 2-paths
@@ -578,15 +578,15 @@ module _
     p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
     p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
     Id ( ( ap (concat' x000 p0̂11) p00̂0̂) ∙
-         ( ( assoc p00̂0 p010̂ p0̂11) ∙
+         ( ( associative p00̂0 p010̂ p0̂11) ∙
            ( ( ap (concat p00̂0 x111) p0̂10̂) ∙
-             ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
+             ( ( inv (associative p00̂0 p0̂10 p110̂)) ∙
                ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
-                 ( assoc p0̂00 p10̂0 p110̂))))))
-       ( ( assoc p000̂ p00̂1 p0̂11) ∙
+                 ( associative p0̂00 p10̂0 p110̂))))))
+       ( ( associative p000̂ p00̂1 p0̂11) ∙
          ( ( ap (concat p000̂ x111) p0̂0̂1) ∙
-           ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
+           ( ( inv (associative p000̂ p0̂01 p10̂1)) ∙
              ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
-               ( ( assoc p0̂00 p100̂ p10̂1) ∙
+               ( ( associative p0̂00 p100̂ p10̂1) ∙
                  ( ( ap (concat p0̂00 x111) p10̂0̂)))))))
 ```

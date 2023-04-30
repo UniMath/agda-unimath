@@ -48,7 +48,7 @@ equiv-surjection-𝔽-family-finite-inhabited-type A B =
       ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))
       ( equiv-postcomp
         ( type-𝔽 B)
-        ( inv-assoc-Σ ( UU _) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
+        ( inv-associative-Σ ( UU _) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
           equiv-Σ
             ( λ z → is-finite z × is-inhabited z)
             ( id-equiv)
@@ -62,7 +62,7 @@ equiv-surjection-𝔽-family-finite-inhabited-type A B =
           ( structure-map (λ x → is-inhabited x × is-finite x))
           ( id-equiv)
           ( λ _ → inv-equiv distributive-Π-Σ)) ∘e
-        ( ( assoc-Σ
+        ( ( associative-Σ
             ( type-𝔽 A → type-𝔽 B)
             ( structure-map is-inhabited)
             ( _)) ∘e
@@ -86,7 +86,7 @@ equiv-Fib-trunc-Prop-𝔽 l A =
   ( ( equiv-Π
       ( λ _ → Inhabited-𝔽 _)
       ( id-equiv)
-      ( λ a → inv-assoc-Σ _ _ _) ∘e
+      ( λ a → inv-associative-Σ _ _ _) ∘e
       ( ( equiv-Fib-structure
           ( l)
           ( λ X → is-finite X × is-inhabited X) (type-𝔽 A)))) ∘e
@@ -107,5 +107,5 @@ equiv-Fib-trunc-Prop-𝔽 l A =
           ( _)
           ( id-equiv)
           ( λ _ → equiv-left-swap-Σ)) ∘e
-        ( assoc-Σ (UU _) (λ z → is-finite z) _)))))
+        ( associative-Σ (UU _) (λ z → is-finite z) _)))))
 ```

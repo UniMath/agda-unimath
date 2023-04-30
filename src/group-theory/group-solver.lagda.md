@@ -122,8 +122,8 @@ GroupEqualityElem x y → GroupEquality x y singleton-GE x = x ∷GE refl-GE
     ap-gMul p q = ap-gMul-l p ∙GE ap-gMul-r q
 
     -- Group laws
-    assoc-GE : ∀ x y z → GroupEquality (gMul (gMul x y) z) (gMul x (gMul y z))
-    assoc-GE x y z = singleton-GE (xassoc-GE x y z)
+    associative-GE : ∀ x y z → GroupEquality (gMul (gMul x y) z) (gMul x (gMul y z))
+    associative-GE x y z = singleton-GE (xassoc-GE x y z)
     l-unit : ∀ x → GroupEquality (gMul gUnit x) x
     l-unit x = singleton-GE (xl-unit x)
     r-unit : ∀ x → GroupEquality (gMul x gUnit) x
@@ -141,14 +141,14 @@ GroupEqualityElem x y → GroupEquality x y singleton-GE x = x ∷GE refl-GE
     distr-inv-mul-GE : ∀ x y → GroupEquality (gInv (gMul x y)) (gMul (gInv y) (gInv x))
     distr-inv-mul-GE x y = singleton-GE (xdistr-inv-mul-GE x y)
 
-assoc-GE' : ∀ x y z → GroupEquality (gMul x (gMul y z)) (gMul (gMul x y) z)
-assoc-GE' x y z = sym-GE (assoc-GE x y z)
+associative-GE' : ∀ x y z → GroupEquality (gMul x (gMul y z)) (gMul (gMul x y)
+z) associative-GE' x y z = sym-GE (associative-GE x y z)
 
 elim-inverses-remove-valid : ∀ (b : list (SimpleElem n)) (w u : GroupSyntax n) →
 GroupEquality (gMul w u) gUnit → GroupEquality (gMul (unquoteSimpleNonEmpty b w)
 u) (unquoteSimple b) elim-inverses-remove-valid nil w u eq = eq
-elim-inverses-remove-valid (cons x b) w u eq = assoc-GE \_ \_ _ ∙GE ap-gMul-r eq
-∙GE r-unit _
+elim-inverses-remove-valid (cons x b) w u eq = associative-GE \_ \_ _ ∙GE
+ap-gMul-r eq ∙GE r-unit _
 
 elim-inverses-valid : ∀ (x : SimpleElem n) (b : Simple n) → GroupEquality (gMul
 (unquoteSimple b) (unquoteSimpleElem x)) (unquoteSimple (elim-inverses x b))
@@ -165,9 +165,9 @@ concat-simplify-nonempty-valid : ∀ (x : SimpleElem n) (a : list (SimpleElem n)
 (b : Simple n) → GroupEquality (gMul (unquoteSimple b) (unquoteSimple (cons x
 a))) (unquoteSimple (concat-simplify (cons x a) b))
 concat-simplify-nonempty-valid x nil b = elim-inverses-valid x b
-concat-simplify-nonempty-valid x (cons y a) b = assoc-GE' \_ \_ \_ ∙GE ap-gMul-l
-(concat-simplify-nonempty-valid y a b) ∙GE elim-inverses-valid x (elim-inverses
-y (concat-simplify a b))
+concat-simplify-nonempty-valid x (cons y a) b = associative-GE' \_ \_ \_ ∙GE
+ap-gMul-l (concat-simplify-nonempty-valid y a b) ∙GE elim-inverses-valid x
+(elim-inverses y (concat-simplify a b))
 
 concat-simplify-valid : ∀ (u w : Simple n) → GroupEquality (gMul (unquoteSimple
 w) (unquoteSimple u)) (unquoteSimple (concat-simplify u w))
@@ -182,7 +182,7 @@ gMul-concat-nonempty : ∀ (w : GroupSyntax n) (as b : Simple n) → GroupEquali
 (gMul (unquoteSimple b) (unquoteSimpleNonEmpty as w)) (unquoteSimpleNonEmpty
 (concat-list as b) w) gMul-concat-nonempty w nil nil = l-unit w
 gMul-concat-nonempty w nil (cons x b) = refl-GE gMul-concat-nonempty w (cons x
-as) b = assoc-GE' \_ \_ \_ ∙GE ap-gMul-l (gMul-concat-nonempty
+as) b = associative-GE' \_ \_ \_ ∙GE ap-gMul-l (gMul-concat-nonempty
 (unquoteSimpleElem x) as b)
 
 gMul-concat' : ∀ (xs : Simple n) (ys : Simple n) → GroupEquality (gMul

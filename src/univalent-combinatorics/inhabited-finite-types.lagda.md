@@ -72,17 +72,17 @@ is-finite-and-inhabited X =
 compute-Inhabited-𝔽' :
   {l : Level} →
   Inhabited-𝔽 l ≃ type-subuniverse is-finite-and-inhabited-Prop
-compute-Inhabited-𝔽' = assoc-Σ _ _ _
+compute-Inhabited-𝔽' = associative-Σ _ _ _
 
 map-compute-Inhabited-𝔽' :
   {l : Level} →
   Inhabited-𝔽 l → type-subuniverse is-finite-and-inhabited-Prop
-map-compute-Inhabited-𝔽' = map-assoc-Σ _ _ _
+map-compute-Inhabited-𝔽' = map-associative-Σ _ _ _
 
 map-inv-compute-Inhabited-𝔽' :
   {l : Level} →
   type-subuniverse is-finite-and-inhabited-Prop → Inhabited-𝔽 l
-map-inv-compute-Inhabited-𝔽' = map-inv-assoc-Σ _ _ _
+map-inv-compute-Inhabited-𝔽' = map-inv-associative-Σ _ _ _
 ```
 
 ### Families of inhabited types

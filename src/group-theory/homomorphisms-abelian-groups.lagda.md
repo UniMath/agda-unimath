@@ -125,13 +125,13 @@ compose-hom-Ab A B C =
 ### Associativity of composition of morphisms of abelian groups
 
 ```agda
-assoc-compose-hom-Ab :
+associative-compose-hom-Ab :
   { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
   ( h : type-hom-Ab C D) (g : type-hom-Ab B C) (f : type-hom-Ab A B) →
   Id (compose-hom-Ab A B D (compose-hom-Ab B C D h g) f)
      (compose-hom-Ab A C D h (compose-hom-Ab A B C g f))
-assoc-compose-hom-Ab A B C D =
-  assoc-compose-hom-Semigroup
+associative-compose-hom-Ab A B C D =
+  associative-compose-hom-Semigroup
     ( semigroup-Ab A)
     ( semigroup-Ab B)
     ( semigroup-Ab C)
@@ -166,9 +166,9 @@ Large-Precat.compose-hom-Large-Precat ab-Precat
 Large-Precat.id-hom-Large-Precat ab-Precat
   {X = A} =
   id-hom-Ab A
-Large-Precat.assoc-compose-hom-Large-Precat ab-Precat
+Large-Precat.associative-compose-hom-Large-Precat ab-Precat
   {X = A} {B} {C} {D} =
-  assoc-compose-hom-Ab A B C D
+  associative-compose-hom-Ab A B C D
 Large-Precat.left-unit-law-compose-hom-Large-Precat ab-Precat
   {X = A} {B} =
   left-unit-law-compose-hom-Ab A B

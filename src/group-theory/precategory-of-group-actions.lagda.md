@@ -39,9 +39,9 @@ module _
     compose-hom-Abstract-Group-Action G X Y Z
   id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
     id-hom-Abstract-Group-Action G X
-  assoc-compose-hom-Large-Precat Abstract-Group-Action-Large-Precat
+  associative-compose-hom-Large-Precat Abstract-Group-Action-Large-Precat
     {X = X} {Y} {Z} {W} =
-    assoc-compose-hom-Abstract-Group-Action G X Y Z W
+    associative-compose-hom-Abstract-Group-Action G X Y Z W
   left-unit-law-compose-hom-Large-Precat Abstract-Group-Action-Large-Precat
     {X = X} {Y} =
     left-unit-law-compose-hom-Abstract-Group-Action G X Y
@@ -63,7 +63,7 @@ module _
   pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} =
     compose-hom-Abstract-Group-Action G X Y Z
   pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} {W} =
-    assoc-compose-hom-Abstract-Group-Action G X Y Z W
+    associative-compose-hom-Abstract-Group-Action G X Y Z W
   pr1 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) =
     id-hom-Abstract-Group-Action G
   pr1 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =

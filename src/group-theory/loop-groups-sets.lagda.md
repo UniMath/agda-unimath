@@ -57,7 +57,7 @@ module _
 
   has-associative-mul-loop-Set : has-associative-mul-Set (set-loop-Set)
   pr1 has-associative-mul-loop-Set = _∙_
-  pr2 has-associative-mul-loop-Set = assoc
+  pr2 has-associative-mul-loop-Set = associative
 
   loop-semigroup-Set : Semigroup (lsuc l)
   pr1 loop-semigroup-Set = set-loop-Set

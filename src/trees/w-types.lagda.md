@@ -305,7 +305,7 @@ structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
          ( pr2 X (map-polynomial-endofunctor A B f (pair x α))))
          ( inv (left-inv ( μ-f (pair x α)))))) ∙
   ( inv
-    ( assoc
+    ( associative
       ( ap ( λ t → pr2 X (pair x t))
            ( eq-htpy (htpy-htpy-hom-𝕎-Alg X (pair f μ-f) ·r α)))
       ( inv (μ-f (pair x α)))

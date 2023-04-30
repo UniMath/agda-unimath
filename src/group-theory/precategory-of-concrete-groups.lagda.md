@@ -29,10 +29,10 @@ compose-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} {Z = K} =
   compose-hom-Concrete-Group G H K
 id-hom-Large-Precat Concrete-Group-Large-Precat {X = G} =
   id-hom-Concrete-Group G
-assoc-compose-hom-Large-Precat Concrete-Group-Large-Precat
+associative-compose-hom-Large-Precat Concrete-Group-Large-Precat
   {X = G} {Y = H} {Z = K} {W = L} h g f =
   eq-htpy-hom-Concrete-Group G L _ _
-    ( assoc-compose-hom-Concrete-Group G H K L h g f)
+    ( associative-compose-hom-Concrete-Group G H K L h g f)
 left-unit-law-compose-hom-Large-Precat Concrete-Group-Large-Precat
   {X = G} {Y = H} f =
   eq-htpy-hom-Concrete-Group G H _ _

@@ -38,11 +38,11 @@ module _
   id-endo-Cat : endo-Cat
   id-endo-Cat = id-hom-Cat C
 
-  assoc-compose-endo-Cat :
+  associative-compose-endo-Cat :
     (h g f : endo-Cat) →
     ( compose-endo-Cat (compose-endo-Cat h g) f) ＝
     ( compose-endo-Cat h (compose-endo-Cat g f))
-  assoc-compose-endo-Cat = assoc-compose-hom-Cat C
+  associative-compose-endo-Cat = associative-compose-hom-Cat C
 
   left-unit-law-compose-endo-Cat :
     (f : endo-Cat) → compose-endo-Cat id-endo-Cat f ＝ f
@@ -58,7 +58,7 @@ module _
   semigroup-endo-Cat : Semigroup l2
   pr1 semigroup-endo-Cat = set-endo-Cat
   pr1 (pr2 semigroup-endo-Cat) = compose-endo-Cat
-  pr2 (pr2 semigroup-endo-Cat) = assoc-compose-endo-Cat
+  pr2 (pr2 semigroup-endo-Cat) = associative-compose-endo-Cat
 
   monoid-endo-Cat : Monoid l2
   pr1 monoid-endo-Cat = semigroup-endo-Cat

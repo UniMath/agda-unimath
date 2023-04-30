@@ -185,7 +185,7 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
           ( id-equiv)
           ( λ X →
             inv-equiv is-finite-iff-∃-surjection-has-decidable-equality)) ∘e
-    ( ( inv-assoc-Σ
+    ( ( inv-associative-Σ
           ( UU _)
           ( λ X →
               has-decidable-equality X ×
@@ -199,12 +199,12 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
             ( id-equiv)
             ( λ X →
               ( ( inv-equiv
-                  ( assoc-prod
+                  ( associative-prod
                     ( has-decidable-equality X)
                     ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
                     ( type-𝔽 A ↠ X))) ∘e
                 ( ( equiv-prod id-equiv commutative-prod) ∘e
-                  ( ( assoc-prod
+                  ( ( associative-prod
                       ( has-decidable-equality (map-equiv id-equiv X))
                       ( type-𝔽 A ↠ X)
                       ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e

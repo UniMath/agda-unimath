@@ -275,7 +275,7 @@ inv-equiv-Cyclic-Type :
 inv-equiv-Cyclic-Type k X Y =
   inv-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y)
 
-assoc-compose-equiv-Cyclic-Type :
+associative-compose-equiv-Cyclic-Type :
   {l1 l2 l3 l4 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   (Z : Cyclic-Type l3 k) (W : Cyclic-Type l4 k) (g : equiv-Cyclic-Type k Z W)
   (f : equiv-Cyclic-Type k Y Z) (e : equiv-Cyclic-Type k X Y) →
@@ -284,7 +284,7 @@ assoc-compose-equiv-Cyclic-Type :
         k X Y W (compose-equiv-Cyclic-Type k Y Z W g f) e)
     ( compose-equiv-Cyclic-Type
         k X Z W g (compose-equiv-Cyclic-Type k X Y Z f e))
-assoc-compose-equiv-Cyclic-Type k X Y Z W g f e =
+associative-compose-equiv-Cyclic-Type k X Y Z W g f e =
   eq-htpy-equiv-Cyclic-Type k X W
     ( compose-equiv-Cyclic-Type
         k X Y W (compose-equiv-Cyclic-Type k Y Z W g f) e)

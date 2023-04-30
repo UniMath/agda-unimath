@@ -28,8 +28,8 @@ instance
     compose-hom-Group G H K
   id-hom-Large-Precat Group-Large-Precat {X = G} =
     id-hom-Group G
-  assoc-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
-    assoc-compose-hom-Group G H K L
+  associative-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
+    associative-compose-hom-Group G H K L
   left-unit-law-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} =
     left-unit-law-compose-hom-Group G H
   right-unit-law-compose-hom-Large-Precat Group-Large-Precat {X = G} {H} =

@@ -218,7 +218,7 @@ module _
           ( ( ( left-unit-law-Σ-is-contr
                 ( is-contr-total-path' (a ∙ a))
                 ( a ∙ a , refl)) ∘e
-              ( inv-assoc-Σ
+              ( inv-associative-Σ
                 ( type-Ω (Ω A))
                 ( λ b → b ＝ (a ∙ a))
                 ( λ bq →

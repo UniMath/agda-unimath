@@ -144,7 +144,7 @@ module _
             ( hom-iso-Cat C f)
             ( hom-inv-compose-iso-Cat g f))
         by
-          assoc-compose-hom-Cat C
+          associative-compose-hom-Cat C
             ( hom-iso-Cat C g)
             ( hom-iso-Cat C f)
             ( hom-inv-compose-iso-Cat g f)
@@ -159,7 +159,7 @@ module _
           ap
             ( compose-hom-Cat C (hom-iso-Cat C g))
             ( inv
-              ( assoc-compose-hom-Cat C
+              ( associative-compose-hom-Cat C
                 ( hom-iso-Cat C f)
                 ( hom-inv-iso-Cat C f)
                 ( hom-inv-iso-Cat C g)))
@@ -198,7 +198,7 @@ module _
             ( hom-inv-iso-Cat C g)
             ( hom-compose-iso-Cat g f))
         by
-          assoc-compose-hom-Cat C
+          associative-compose-hom-Cat C
             ( hom-inv-iso-Cat C f)
             ( hom-inv-iso-Cat C g)
             ( hom-compose-iso-Cat g f)
@@ -213,7 +213,7 @@ module _
           ap
             ( compose-hom-Cat C (hom-inv-iso-Cat C f))
             ( inv
-              ( assoc-compose-hom-Cat C
+              ( associative-compose-hom-Cat C
                 ( hom-inv-iso-Cat C g)
                 ( hom-iso-Cat C g)
                 ( hom-iso-Cat C f)))
@@ -342,16 +342,16 @@ module _
 #### Associatitivity
 
 ```agda
-  assoc-compose-iso-Cat :
+  associative-compose-iso-Cat :
     {x y z w : obj-Cat C}
     (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
     compose-iso-Cat C (compose-iso-Cat C h g) f ＝
     compose-iso-Cat C h (compose-iso-Cat C g f)
-  assoc-compose-iso-Cat h g f =
+  associative-compose-iso-Cat h g f =
     eq-Eq-iso-Cat C
       ( compose-iso-Cat C (compose-iso-Cat C h g) f)
       ( compose-iso-Cat C h (compose-iso-Cat C g f))
-      ( assoc-compose-hom-Cat C
+      ( associative-compose-hom-Cat C
         ( hom-iso-Cat C h)
         ( hom-iso-Cat C g)
         ( hom-iso-Cat C f))

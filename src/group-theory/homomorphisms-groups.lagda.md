@@ -141,14 +141,14 @@ module _
 ### Associativity of composition of group homomorphisms
 
 ```agda
-assoc-compose-hom-Group :
+associative-compose-hom-Group :
   {l1 l2 l3 l4 : Level}
   (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
   (h : type-hom-Group K L) (g : type-hom-Group H K) (f : type-hom-Group G H) →
   Id ( compose-hom-Group G H L (compose-hom-Group H K L h g) f)
      ( compose-hom-Group G K L h (compose-hom-Group G H K g f))
-assoc-compose-hom-Group G H K L =
-  assoc-compose-hom-Semigroup
+associative-compose-hom-Group G H K L =
+  associative-compose-hom-Semigroup
     ( semigroup-Group G)
     ( semigroup-Group H)
     ( semigroup-Group K)

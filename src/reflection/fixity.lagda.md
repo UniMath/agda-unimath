@@ -31,9 +31,9 @@ The fixity of a quoted name is given by
 
 ```agda
 data Associativity : UU lzero where
-  left-assoc : Associativity
-  right-assoc : Associativity
-  non-assoc : Associativity
+  left-associative : Associativity
+  right-associative : Associativity
+  non-associative : Associativity
 
 data Precedence : UU lzero where
   related : Float → Precedence
@@ -43,9 +43,9 @@ data Fixity : UU lzero where
   fixity : Associativity → Precedence → Fixity
 
 {-# BUILTIN ASSOC Associativity #-}
-{-# BUILTIN ASSOCLEFT left-assoc #-}
-{-# BUILTIN ASSOCRIGHT right-assoc #-}
-{-# BUILTIN ASSOCNON non-assoc #-}
+{-# BUILTIN ASSOCLEFT left-associative #-}
+{-# BUILTIN ASSOCRIGHT right-associative #-}
+{-# BUILTIN ASSOCNON non-associative #-}
 
 {-# BUILTIN PRECEDENCE Precedence #-}
 {-# BUILTIN PRECRELATED related #-}
@@ -61,9 +61,9 @@ primitive
 ## Examples
 
 ```agda
-_ : primQNameFixity (quote add-ℤ) ＝ fixity non-assoc unrelated
+_ : primQNameFixity (quote add-ℤ) ＝ fixity non-associative unrelated
 _ = refl
 
-_ : primQNameFixity (quote (_+ℤ_)) ＝ fixity non-assoc (related 30.0)
+_ : primQNameFixity (quote (_+ℤ_)) ＝ fixity non-associative (related 30.0)
 _ = refl
 ```

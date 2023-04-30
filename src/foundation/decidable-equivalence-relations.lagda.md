@@ -514,11 +514,11 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
                 ( is-set-has-decidable-equality)) ∘e
             commutative-prod) ∘e
         ( equiv-left-swap-Σ)))) ∘e
-    ( ( assoc-Σ
+    ( ( associative-Σ
         ( UU l1)
         ( λ X → is-set X)
         ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
-      ( ( assoc-Σ
+      ( ( associative-Σ
           ( Set l1)
           ( λ X → (A ↠ type-Set X))
           ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e

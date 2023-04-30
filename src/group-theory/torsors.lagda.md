@@ -275,7 +275,7 @@ module _
   (X4 : Torsor-Abstract-Group G l5)
   where
 
-  assoc-compose-equiv-Torsor-Abstract-Group :
+  associative-compose-equiv-Torsor-Abstract-Group :
     (h : equiv-Torsor-Abstract-Group G X3 X4)
     (g : equiv-Torsor-Abstract-Group G X2 X3)
     (f : equiv-Torsor-Abstract-Group G X1 X2) →
@@ -284,7 +284,7 @@ module _
          ( f))
        ( compose-equiv-Torsor-Abstract-Group G X1 X3 X4 h
          ( compose-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
-  assoc-compose-equiv-Torsor-Abstract-Group h g f =
+  associative-compose-equiv-Torsor-Abstract-Group h g f =
     eq-htpy-equiv-Torsor-Abstract-Group G X1 X4
       ( compose-equiv-Torsor-Abstract-Group G X1 X2 X4
         ( compose-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
@@ -384,7 +384,7 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr2 (pr2 (pr1 aut-principal-Torsor-Abstract-Group)) =
-    assoc-compose-equiv-Torsor-Abstract-Group G
+    associative-compose-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)

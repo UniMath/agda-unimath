@@ -414,7 +414,7 @@ abstract
               ( λ t → (eq-pair t (ap pr2 α)))
               ( ( ( inv right-unit) ∙
                   ( inv (ap (concat (ap pr1 α) x) (left-inv (ap pr2 α))))) ∙
-                ( inv (assoc (ap pr1 α) (inv (ap pr2 α)) (ap pr2 α)))))) ∙
+                ( inv (associative (ap pr1 α) (inv (ap pr2 α)) (ap pr2 α)))))) ∙
           ( eq-pair-concat
             ( (ap pr1 α) ∙ (inv (ap pr2 α)))
             ( ap pr2 α)

@@ -94,7 +94,10 @@ module _
          ( issec-map-inv-equiv
            ( equiv-ap e x (map-inv-equiv e y))
            ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
-    ( ( assoc p (inv (issec-map-inv-equiv e y)) (issec-map-inv-equiv e y)) ∙
+    ( ( associative
+        ( p)
+        ( inv (issec-map-inv-equiv e y))
+        ( issec-map-inv-equiv e y)) ∙
       ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
 
   map-eq-transpose-equiv' :
@@ -344,11 +347,11 @@ module _
 ### The groupoid laws for equivalences
 
 ```agda
-assoc-compose-equiv :
+associative-compose-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
   ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
-assoc-compose-equiv e f g = eq-equiv-eq-map-equiv refl
+associative-compose-equiv e f g = eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}

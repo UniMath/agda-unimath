@@ -79,14 +79,14 @@ refl-htpy-hom-species-𝔽 F G f X = refl-htpy
 ### Associativity of composition of homomorphisms of finite species
 
 ```agda
-assoc-compose-hom-species-𝔽 :
+associative-compose-hom-species-𝔽 :
   {l1 l2 l3 l4 l5 : Level} (F : species-𝔽 l1 l2)
   (G : species-𝔽 l1 l3) (H : species-𝔽 l1 l4) (K : species-𝔽 l1 l5)
   (h : type-hom-species-𝔽 H K)
   (g : type-hom-species-𝔽 G H) (f : type-hom-species-𝔽 F G) →
   Id ( compose-hom-species-𝔽 F G K (compose-hom-species-𝔽 G H K h g) f)
      ( compose-hom-species-𝔽 F H K h (compose-hom-species-𝔽 F G H g f))
-assoc-compose-hom-species-𝔽 F G H K h g f = refl
+associative-compose-hom-species-𝔽 F G H K h g f = refl
 ```
 
 ### The unit laws for composition of homomorphisms of finite species

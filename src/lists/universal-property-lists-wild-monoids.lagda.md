@@ -217,7 +217,7 @@ module _
                         ( f a)
                         ( map-elim-list-Wild-Monoid x)
                         ( unit-Wild-Monoid M))))) ∙
-                ( ( assoc
+                ( ( associative
                     ( inv
                       ( associative-mul-Wild-Monoid M
                         ( f a)
@@ -239,11 +239,11 @@ module _
                           ( map-elim-list-Wild-Monoid x)
                           ( unit-Wild-Monoid M)))
                       ( map-elim-list-Wild-Monoid (cons a x)))
-                    ( unit-law-110-assoc-Wild-Monoid M
+                    ( unit-law-110-associative-Wild-Monoid M
                       ( f a)
                       ( map-elim-list-Wild-Monoid x)))))) ∙
             ( inv
-              ( assoc
+              ( associative
                 ( ap
                   ( mul-Wild-Monoid M (f a))
                   ( preserves-mul-map-elim-list-Wild-Monoid x nil))
@@ -323,5 +323,5 @@ elim-list-Wild-Monoid M f =
 --   γ =
 --     ( inv right-unit) ∙
 --     ( ( ap (concat (pr2 g) (pr1 (pr2 M))) (inv (left-inv (pr2 h)))) ∙
---       ( inv (assoc (pr2 g) (inv (pr2 h)) (pr2 h))))
+--       ( inv (associative (pr2 g) (inv (pr2 h)) (pr2 h))))
 ```

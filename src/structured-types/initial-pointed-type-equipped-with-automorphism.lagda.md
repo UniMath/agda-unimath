@@ -188,7 +188,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inl star)) =
            ( preserves-aut-map-hom-Pointed-Type-With-Aut
              ℤ-Pointed-Type-With-Aut X h zero-ℤ)))) ∙
     ( inv
-      ( assoc
+      ( associative
         ( ap
           ( map-aut-Pointed-Type-With-Aut X)
           ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ))
@@ -210,7 +210,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr zero-ℕ)) =
            ( preserves-aut-map-hom-Pointed-Type-With-Aut
              ℤ-Pointed-Type-With-Aut X h one-ℤ)))) ∙
     ( inv
-      ( assoc
+      ( associative
         ( ap
           ( map-aut-Pointed-Type-With-Aut X)
           ( htpy-map-ℤ-Pointed-Type-With-Aut X h one-ℤ))
@@ -232,7 +232,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))) =
            ( preserves-aut-map-hom-Pointed-Type-With-Aut
              ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))))))) ∙
     ( inv
-      ( assoc
+      ( associative
         ( ap
           ( map-aut-Pointed-Type-With-Aut X)
           ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k)))))

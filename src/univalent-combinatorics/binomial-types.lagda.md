@@ -156,12 +156,12 @@ compute-binomial-type-Level l {l1} {l2} A B =
           equiv-trunc-Prop
             ( equiv-postcomp-equiv
               ( inv-equiv (equiv-total-fib (pr1 (pr2 e)))) B))) ∘e
-      ( inv-assoc-Σ
+      ( inv-associative-Σ
         ( UU (l1 ⊔ l))
         ( λ X → X ↪d A)
         ( λ X → mere-equiv B (pr1 X)))) ∘e
     ( equiv-tot (λ X → commutative-prod))) ∘e
-  ( assoc-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪d A))
+  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪d A))
 
 binomial-type' :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc (l1 ⊔ l2))
@@ -295,7 +295,7 @@ abstract
                   ind-Σ
                     ( λ H →
                       ind-coprod _ ( λ q → id-equiv) (λ q → id-equiv)))))))) ∘e
-      ( assoc-Σ
+      ( associative-Σ
         ( A → Decidable-Prop _)
         ( λ a → Decidable-Prop _)
         ( λ t →

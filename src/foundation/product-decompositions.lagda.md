@@ -151,7 +151,7 @@ module _
   equiv-commutative-binary-product-Decomposition :
     binary-product-Decomposition P X ≃ binary-product-Decomposition P X
   equiv-commutative-binary-product-Decomposition =
-    ( ( assoc-Σ
+    ( ( associative-Σ
         ( type-subuniverse P)
         ( λ _ → type-subuniverse P)
         ( _)) ∘e
@@ -162,7 +162,7 @@ module _
             equiv-postcomp-equiv
               ( commutative-prod)
               (inclusion-subuniverse P X))) ∘e
-        ( ( inv-assoc-Σ
+        ( ( inv-associative-Σ
             ( type-subuniverse P)
             ( λ _ → type-subuniverse P)
             ( _)))))
@@ -367,8 +367,8 @@ module _
                            ( eq-is-prop is-property-is-contr)))
                      ( ( raise-unit l1 , C1) ,
                        is-contr-raise-unit)) ∘e
-                ( ( inv-assoc-Σ _ _ _) ∘e
+                ( ( inv-associative-Σ _ _ _) ∘e
                   ( ( equiv-tot (λ _ → commutative-prod)) ∘e
-                    ( ( assoc-Σ _ _ _)))))))) ∘e
-        ( ( assoc-Σ _ _ _)))
+                    ( ( associative-Σ _ _ _)))))))) ∘e
+        ( ( associative-Σ _ _ _)))
 ```

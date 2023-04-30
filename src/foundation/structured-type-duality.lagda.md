@@ -45,7 +45,10 @@ equiv-Fib-structure {l1} {l3} l P B =
       ( λ C → (b : B) → P (C b))
       ( equiv-Fib l B)
       ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
-  ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
+  ( inv-associative-Σ
+    ( UU (l1 ⊔ l))
+    ( λ A → A → B)
+    ( λ f → structure-map P (pr2 f)))
 ```
 
 ###

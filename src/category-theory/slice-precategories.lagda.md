@@ -108,23 +108,23 @@ module _
   pr2 (compose-hom-Slice-Precat g f) =
     ( pr2 f) ∙
     ( ( ap (λ u → compose-hom-Precat C u (pr1 f)) (pr2 g)) ∙
-      ( assoc-compose-hom-Precat C _ (pr1 g) (pr1 f)))
+      ( associative-compose-hom-Precat C _ (pr1 g) (pr1 f)))
 ```
 
 ### Associativity of composition of morphisms in the slice category
 
 ```agda
-  assoc-compose-hom-Slice-Precat :
+  associative-compose-hom-Slice-Precat :
     {A1 A2 A3 A4 : obj-Slice-Precat} →
     (h : type-hom-Slice-Precat A3 A4) (g : type-hom-Slice-Precat A2 A3)
     (f : type-hom-Slice-Precat A1 A2) →
     ( compose-hom-Slice-Precat (compose-hom-Slice-Precat h g) f) ＝
     ( compose-hom-Slice-Precat h (compose-hom-Slice-Precat g f))
-  assoc-compose-hom-Slice-Precat h g f =
+  associative-compose-hom-Slice-Precat h g f =
     eq-hom-Slice-Precat
       ( compose-hom-Slice-Precat (compose-hom-Slice-Precat h g) f)
       ( compose-hom-Slice-Precat h (compose-hom-Slice-Precat g f))
-      ( assoc-compose-hom-Precat C (pr1 h) (pr1 g) (pr1 f))
+      ( associative-compose-hom-Precat C (pr1 h) (pr1 g) (pr1 f))
 ```
 
 ### The left unit law for composition of morphisms in the slice category
@@ -160,7 +160,7 @@ module _
   pr1 Slice-Precat = obj-Slice-Precat
   pr1 (pr2 Slice-Precat) = hom-Slice-Precat
   pr1 (pr1 (pr2 (pr2 Slice-Precat))) = compose-hom-Slice-Precat
-  pr2 (pr1 (pr2 (pr2 Slice-Precat))) = assoc-compose-hom-Slice-Precat
+  pr2 (pr1 (pr2 (pr2 Slice-Precat))) = associative-compose-hom-Slice-Precat
   pr1 (pr2 (pr2 (pr2 Slice-Precat))) = id-hom-Slice-Precat
   pr1 (pr2 (pr2 (pr2 (pr2 Slice-Precat)))) =
     left-unit-law-compose-hom-Slice-Precat
@@ -223,7 +223,7 @@ module _
         pr1 c = pr1 (pr1 (ϕ Z h₁ h₂ β₂))
         pr2 c =
           ap (compose-hom-Precat C f) (inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))) ∙
-          (inv (assoc-compose-hom-Precat C f p₁ _) ∙
+          (inv (associative-compose-hom-Precat C f p₁ _) ∙
           ap (λ k → compose-hom-Precat C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂)))) (inv α₁))
 
         d :
@@ -313,7 +313,7 @@ module _
              (pr2 (ψ (W' , compose-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))
                   (( k' ,
                    ( ap (compose-hom-Precat C f) (inv γ₁) ∙
-                       (inv (assoc-compose-hom-Precat C f p₁ k') ∙
+                       (inv (associative-compose-hom-Precat C f p₁ k') ∙
                        ap (λ l → compose-hom-Precat C l k') (inv α₁)))) ,
                    ( eq-hom-Slice-Precat C A _ _ γ₁) ,
                    ( eq-hom-Slice-Precat C A _ _ γ₂)))

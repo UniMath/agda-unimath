@@ -85,7 +85,7 @@ module _
               ( id-hom-Precat C)))
         ( ( inv (right-unit-law-compose-hom-Precat C g)) ∙
           ( ( ap (compose-hom-Precat C g) (inv p')) ∙
-            ( ( inv (assoc-compose-hom-Precat C g f g')) ∙
+            ( ( inv (associative-compose-hom-Precat C g f g')) ∙
               ( ( ap (compose-hom-Precat' C g') q) ∙
                 ( left-unit-law-compose-hom-Precat C g')))))
 
@@ -240,7 +240,7 @@ module _
           ( C)
           ( g)
           ( compose-hom-Precat C (hom-inv-is-iso-Precat C H) f)
-        by assoc-compose-hom-Precat C g (hom-inv-is-iso-Precat C H) f
+        by associative-compose-hom-Precat C g (hom-inv-is-iso-Precat C H) f
       ＝ compose-hom-Precat C g (id-hom-Precat C)
         by ap (compose-hom-Precat C g) (isretr-hom-inv-is-iso-Precat C H)
       ＝ g
@@ -259,7 +259,7 @@ module _
           ( C)
           ( g)
           ( compose-hom-Precat C f (hom-inv-is-iso-Precat C H))
-        by assoc-compose-hom-Precat C g f (hom-inv-is-iso-Precat C H)
+        by associative-compose-hom-Precat C g f (hom-inv-is-iso-Precat C H)
       ＝ compose-hom-Precat C g (id-hom-Precat C)
         by ap (compose-hom-Precat C g) (issec-hom-inv-is-iso-Precat C H)
       ＝ g

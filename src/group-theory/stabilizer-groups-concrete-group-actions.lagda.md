@@ -51,7 +51,7 @@ module _
       ( action-stabilizer-action-Concrete-Group x)
   is-transitive-action-stabilizer-action-Concrete-Group x =
     is-0-connected-equiv'
-      ( assoc-Σ
+      ( associative-Σ
         ( classifying-type-Concrete-Group G)
         ( type-Set ∘ X)
         ( λ uy →

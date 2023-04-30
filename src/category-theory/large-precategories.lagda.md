@@ -39,7 +39,7 @@ record Large-Precat (α : Level → Level) (β : Level → Level → Level) : UU
       type-Set (hom-Large-Precat X Z)
     id-hom-Large-Precat :
       {l1 : Level} {X : obj-Large-Precat l1} → type-Set (hom-Large-Precat X X)
-    assoc-compose-hom-Large-Precat :
+    associative-compose-hom-Large-Precat :
       {l1 l2 l3 l4 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       {Z : obj-Large-Precat l3} {W : obj-Large-Precat l4} →
       (h : type-Set (hom-Large-Precat Z W))
@@ -101,7 +101,7 @@ obj-Large-Precat Set-Large-Precat = Set
 hom-Large-Precat Set-Large-Precat = hom-Set
 compose-hom-Large-Precat Set-Large-Precat g f = g ∘ f
 id-hom-Large-Precat Set-Large-Precat = id
-assoc-compose-hom-Large-Precat Set-Large-Precat h g f = refl
+associative-compose-hom-Large-Precat Set-Large-Precat h g f = refl
 left-unit-law-compose-hom-Large-Precat Set-Large-Precat f = refl
 right-unit-law-compose-hom-Large-Precat Set-Large-Precat f = refl
 ```

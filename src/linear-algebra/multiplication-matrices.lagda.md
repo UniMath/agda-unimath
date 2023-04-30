@@ -83,7 +83,7 @@ module _
   left-distributive-vector-matrix id-vec _ _ _ empty-vec empty-vec empty-vec =
     id-vec
   left-distributive-vector-matrix
-    id-vec k-distr addK-comm addK-assoc (a ∷ as) (r1 ∷ r1s) (r2 ∷ r2s) =
+    id-vec k-distr addK-comm addK-associative (a ∷ as) (r1 ∷ r1s) (r2 ∷ r2s) =
       ap
         ( λ r →
           add-vec addK r
@@ -92,7 +92,7 @@ module _
         ∙ (ap (λ r → add-vec addK (add-vec addK (map-vec (mulK a) r1)
                                   (mul-scalar-vector mulK a r2)) r)
               (left-distributive-vector-matrix
-                id-vec k-distr addK-comm addK-assoc as r1s r2s)
+                id-vec k-distr addK-comm addK-associative as r1s r2s)
           ∙ lemma-shuffle)
     where
     lemma-shuffle : {n : ℕ} →
@@ -100,19 +100,19 @@ module _
                     Id (add-vec addK (add-vec addK x y) (add-vec addK z w))
                        (add-vec addK (add-vec addK x z) (add-vec addK y w))
     lemma-shuffle {x = x} {y = y} {z = z} {w = w} =
-      associative-add-vectors {zero = zero} addK-assoc (add-vec addK x y) z w
+      associative-add-vectors {zero = zero} addK-associative (add-vec addK x y) z w
         ∙ (commutative-add-vectors
             {zero = zero} addK-comm (add-vec addK (add-vec addK x y) z) w
         ∙ (associative-add-vectors
-            {zero = zero} addK-assoc w (add-vec addK x y) z
+            {zero = zero} addK-associative w (add-vec addK x y) z
         ∙ (ap (λ v → add-vec addK (add-vec addK w v) z)
               (commutative-add-vectors {zero = zero} addK-comm x y)
         ∙ (ap (λ v → add-vec addK v z)
-              (associative-add-vectors {zero = zero} addK-assoc w y x)
+              (associative-add-vectors {zero = zero} addK-associative w y x)
         ∙ (ap (λ v → add-vec addK (add-vec addK v x) z)
               (commutative-add-vectors {zero = zero} addK-comm w y)
         ∙ (inv (associative-add-vectors
-            {zero = zero} addK-assoc (add-vec addK y w) x z)
+            {zero = zero} addK-associative (add-vec addK y w) x z)
         ∙ commutative-add-vectors
             {zero = zero} addK-comm (add-vec addK y w) (add-vec addK x z)))))))
 
@@ -130,14 +130,14 @@ module _
        (add-Mat addK (mul-Mat mulK addK zero a b)
                      (mul-Mat mulK addK zero a c))
   left-distributive-matrices _ _ _ _ empty-vec _ _ = refl
-  left-distributive-matrices id-vec k-distr addK-comm addK-assoc (a ∷ as) b c =
+  left-distributive-matrices id-vec k-distr addK-comm addK-associative (a ∷ as) b c =
     (ap (λ r → r ∷ mul-Mat mulK addK zero as (add-Mat addK b c))
         (left-distributive-vector-matrix
-          id-vec k-distr addK-comm addK-assoc a b c))
+          id-vec k-distr addK-comm addK-associative a b c))
       ∙ ap (_∷_ (add-vec addK (mul-vector-matrix mulK addK zero a b)
                               (mul-vector-matrix mulK addK zero a c)))
           (left-distributive-matrices
-            id-vec k-distr addK-comm addK-assoc as b c)
+            id-vec k-distr addK-comm addK-associative as b c)
 -}
 
 {- TODO: right distributivity
@@ -157,10 +157,10 @@ module _
   right-distributive-matrices _ _ _ _ empty-vec empty-vec _ = refl
   right-distributive-matrices
     {p = .zero-ℕ}
-    id-vec k-distr addK-comm addK-assoc (b ∷ bs) (c ∷ cs) empty-vec =
+    id-vec k-distr addK-comm addK-associative (b ∷ bs) (c ∷ cs) empty-vec =
     {!!}
   right-distributive-matrices
-    id-vec k-distr addK-comm addK-assoc (b ∷ bs) (c ∷ cs) (d ∷ ds) =
+    id-vec k-distr addK-comm addK-associative (b ∷ bs) (c ∷ cs) (d ∷ ds) =
     {!!}
   -- this might also need a proof that zero is the additive identity
 

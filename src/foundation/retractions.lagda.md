@@ -58,7 +58,7 @@ isretr-retraction-compose-htpy f g h H (pair l L) (pair k K) =
           )))
     ( pair k K)
     ( k ·l L)
-    ( ( inv-htpy-assoc-htpy
+    ( ( inv-htpy-associative-htpy
         ( inv-htpy ((k ∘ l) ·l H))
         ( (k ∘ l) ·l H)
         ( (k ·l (L ·r h)) ∙h K)) ∙h

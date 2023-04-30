@@ -127,7 +127,7 @@ module _
             ( compose-hom-Precat D (hom-iso-Precat D w))
             ( respects-compose-functor-Precat C D F g f)) ∙
           ( ( inv
-              ( assoc-compose-hom-Precat D
+              ( associative-compose-hom-Precat D
                 ( hom-iso-Precat D w)
                 ( hom-functor-Precat C D F g)
                 ( hom-functor-Precat C D F f))) ∙
@@ -145,13 +145,13 @@ module _
                         ( hom-functor-Precat C D F g)))
                       ( inv (isretr-hom-inv-iso-Precat D v))) ∙
                   ( inv
-                    ( assoc-compose-hom-Precat D
+                    ( associative-compose-hom-Precat D
                       ( compose-hom-Precat D
                         ( hom-iso-Precat D w)
                         ( hom-functor-Precat C D F g))
                       ( hom-inv-iso-Precat D v)
                       ( hom-iso-Precat D v)))))))) ∙
-        ( assoc-compose-hom-Precat D
+        ( associative-compose-hom-Precat D
           ( compose-hom-Precat D
             ( compose-hom-Precat D
               ( hom-iso-Precat D w)
@@ -159,7 +159,7 @@ module _
             ( hom-inv-iso-Precat D v))
           ( hom-iso-Precat D v)
           ( hom-functor-Precat C D F f)))) ∙
-    ( assoc-compose-hom-Precat D
+    ( associative-compose-hom-Precat D
       ( compose-hom-Precat D
         ( compose-hom-Precat D
           ( hom-iso-Precat D w)

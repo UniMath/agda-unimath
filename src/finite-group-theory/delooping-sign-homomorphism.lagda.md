@@ -993,7 +993,7 @@ module _
                                     ( Fin (n +ℕ 2))
                                     ( inv-equiv (compute-raise-Fin l1 (n +ℕ 2)))
                                     ( Y)) ∙
-                                  ( assoc-compose-equiv
+                                  ( associative-compose-equiv
                                     ( inv-equiv
                                       ( inv-equiv
                                         ( compute-raise-Fin l1 (n +ℕ 2))))
@@ -1400,7 +1400,7 @@ module _
           ( f)
           ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
       ( inv (eq-quotient-delooping-loop-UU-Fin-Group n))) ∙
-    ( assoc-compose-hom-Group
+    ( associative-compose-hom-Group
       ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))

@@ -69,11 +69,11 @@ module _
     coherence-square-identifications
       p-left (p-bottom ∙ q-bottom) (p-top ∙ q-top) q-right
   coherence-square-identifications-compose-horizontal p q =
-    ( ( ( inv (assoc p-left p-bottom q-bottom) ∙
+    ( ( ( inv (associative p-left p-bottom q-bottom) ∙
           ap-binary (_∙_) p (refl {x = q-bottom})) ∙
-        assoc p-top middle q-bottom) ∙
+        associative p-top middle q-bottom) ∙
       ap-binary (_∙_) (refl {x = p-top}) q) ∙
-    inv (assoc p-top q-top q-right)
+    inv (associative p-top q-top q-right)
 
 module _
   {l : Level} {A : UU l} {x y1 y2 z1 z2 w : A}
@@ -89,11 +89,11 @@ module _
     coherence-square-identifications
       (p-left ∙ q-left) q-bottom p-top (p-right ∙ q-right)
   coherence-square-identifications-compose-vertical p q =
-    ( assoc p-left q-left q-bottom ∙
+    ( associative p-left q-left q-bottom ∙
       ( ( ap-binary (_∙_) (refl {x = p-left}) q ∙
-          inv (assoc p-left middle q-right)) ∙
+          inv (associative p-left middle q-right)) ∙
         ap-binary (_∙_) p (refl {x = q-right}))) ∙
-      assoc p-top p-right q-right
+      associative p-top p-right q-right
 ```
 
 ### Pasting of identifications along edges of squares of identifications

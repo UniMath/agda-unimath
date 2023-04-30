@@ -139,8 +139,8 @@ module _
           ( ( equiv-prod id-equiv (inv-equiv distributive-Π-Σ)) ∘e
           ( ( inv-equiv right-distributive-prod-Σ) ∘e
           ( ( equiv-tot (λ _ → inv-equiv (left-distributive-prod-Σ)))))) ∘e
-          ( ( assoc-Σ _ _ _)))) ∘e
-      ( ( assoc-Σ
+          ( ( associative-Σ _ _ _)))) ∘e
+      ( ( associative-Σ
           ( Relaxed-Σ-Decomposition l1 l1 X)
           ( λ D →
               is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
@@ -174,7 +174,7 @@ module _
                   equiv-total-is-in-subuniverse-Σ-Decomposition
                     ( P)
                     (X , p))))))) ∘e
-          ( ( inv-assoc-Σ
+          ( ( inv-associative-Σ
               ( is-in-subuniverse P X)
               ( λ p → Σ-Decomposition-Subuniverse P (X , p))
               ( _))))))
@@ -372,7 +372,7 @@ module _
   ( U : species-subuniverse P (subuniverse-global-subuniverse Q l5))
   where
 
-  equiv-assoc-cauchy-composition-species-subuniverse :
+  equiv-associative-cauchy-composition-species-subuniverse :
     (X : type-subuniverse P) →
     inclusion-subuniverse
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
@@ -385,7 +385,7 @@ module _
         ( cauchy-composition-species-subuniverse P Q C1 C2 S T)
         ( U)
         ( X))
-  equiv-assoc-cauchy-composition-species-subuniverse X =
+  equiv-associative-cauchy-composition-species-subuniverse X =
     ( inv-equiv
       ( equiv-Σ-extension-species-subuniverse
         ( P)
@@ -412,7 +412,7 @@ module _
                   ( T)
                   ( indexing-type-Relaxed-Σ-Decomposition D)))
               ( id-equiv))) ∘e
-        ( ( equiv-assoc-cauchy-composition-species-types
+        ( ( equiv-associative-cauchy-composition-species-types
             ( Σ-extension-species-subuniverse P
               ( subuniverse-global-subuniverse Q l3)
               ( S))

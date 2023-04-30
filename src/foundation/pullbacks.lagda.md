@@ -269,15 +269,18 @@ module _
       ( Hp z)
       ( Hq z)
       ( ( inv
-          ( assoc (ap f (Hp z)) ((Hf (p' z)) ∙ (H' z)) (inv (Hg (q' z))))) ∙
+          ( associative
+            ( ap f (Hp z))
+            ( (Hf (p' z)) ∙ (H' z))
+            ( inv (Hg (q' z))))) ∙
         ( inv
           ( con-inv
             ( (H z) ∙ (ap g (Hq z)))
             ( Hg (q' z))
             ( ( ap f (Hp z)) ∙ ((Hf (p' z)) ∙ (H' z)))
-            ( ( assoc (H z) (ap g (Hq z)) (Hg (q' z))) ∙
+            ( ( associative (H z) (ap g (Hq z)) (Hg (q' z))) ∙
               ( ( HH z) ∙
-                ( assoc (ap f (Hp z)) (Hf (p' z)) (H' z)))))))
+                ( associative (ap f (Hp z)) (Hf (p' z)) (H' z)))))))
 
   abstract
     is-pullback-htpy :
@@ -909,10 +912,10 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( pair back-left
         ( pair
           ( refl-htpy)
-          ( ( ( ( assoc-htpy
+          ( ( ( ( associative-htpy
                     ( bottom ·r hA) (k ·l back-right) (front-right ·r g')) ∙h
                 ( inv-htpy c)) ∙h
-              ( assoc-htpy
+              ( associative-htpy
                   ( h ·l back-left) (front-left ·r f') (hD ·l top))) ∙h
             ( ap-concat-htpy'
               ( h ·l back-left)

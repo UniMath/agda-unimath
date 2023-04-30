@@ -143,7 +143,7 @@ module _
                       ( compute-right-equiv-binary-coproduct-Decomposition-Σ-Decomposition
                         ( D)
                         ( b')))))))) ∘e
-      ( ( inv-assoc-Σ
+      ( ( inv-associative-Σ
           ( Relaxed-Σ-Decomposition l1 l1 X)
           ( λ d →
             binary-coproduct-Decomposition l1 l1

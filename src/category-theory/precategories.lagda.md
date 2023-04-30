@@ -109,12 +109,12 @@ module _
     type-hom-Precat z x → type-hom-Precat z y
   postcomp-hom-Precat f z = compose-hom-Precat f
 
-  assoc-compose-hom-Precat :
+  associative-compose-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
     ( compose-hom-Precat (compose-hom-Precat h g) f) ＝
     ( compose-hom-Precat h (compose-hom-Precat g f))
-  assoc-compose-hom-Precat = pr2 associative-composition-Precat
+  associative-compose-hom-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
     is-unital-composition-structure-Set
@@ -173,7 +173,7 @@ module _
       ( μ : associative-composition-structure-Set hom) →
       all-elements-equal (is-unital-composition-structure-Set hom μ)
     all-elements-equal-is-unital-composition-structure-Set
-      ( pair μ assoc-μ)
+      ( pair μ associative-μ)
       ( pair e (pair left-unit-law-e right-unit-law-e))
       ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
       eq-type-subtype

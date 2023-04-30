@@ -51,7 +51,7 @@ group-signature =
           inv-group-op → 1})
 
 data group-laws : UU lzero where
-  assoc-l-group-laws : group-laws
+  associative-l-group-laws : group-laws
   invl-l-group-laws : group-laws
   invr-r-group-laws : group-laws
   idl-l-group-laws : group-laws
@@ -61,7 +61,7 @@ group-Theory : Theory group-signature lzero
 group-Theory =
   pair
     group-laws
-    ( λ { assoc-l-group-laws →
+    ( λ { associative-l-group-laws →
             pair
               ( op mul-group-op
                 ( ( op mul-group-op
@@ -113,7 +113,7 @@ group-Algebra-Group (((A , is-set-A) , models-A) , satisfies-A) =
         ( λ x y →
           ( models-A mul-group-op (x ∷ y ∷ empty-vec)))
         ( λ x y z →
-          ( satisfies-A assoc-l-group-laws
+          ( satisfies-A associative-l-group-laws
             ( λ { zero-ℕ → x ;
                 ( succ-ℕ zero-ℕ) → y ;
                 ( succ-ℕ (succ-ℕ n)) → z})))))
@@ -140,7 +140,7 @@ Group-group-Algebra G =
       ( λ { unit-group-op v → unit-Group G ;
             mul-group-op (x ∷ y ∷ empty-vec) → mul-Group G x y ;
             inv-group-op (x ∷ empty-vec) → inv-Group G x}))
-    ( λ { assoc-l-group-laws assign →
+    ( λ { associative-l-group-laws assign →
             associative-mul-Group G (assign 0) (assign 1) (assign 2) ;
           invl-l-group-laws assign →
             left-inverse-law-mul-Group G (assign 0) ;

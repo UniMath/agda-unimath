@@ -137,12 +137,12 @@ module _
        ( mul-Wild-Monoid x (mul-Wild-Monoid y z))
   associative-mul-Wild-Monoid = pr1 unital-associator-Wild-Monoid
 
-  unit-law-110-assoc-Wild-Monoid :
+  unit-law-110-associative-Wild-Monoid :
     (x y : type-Wild-Monoid) →
     Id ( ( associative-mul-Wild-Monoid x y unit-Wild-Monoid) ∙
          ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
        ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
-  unit-law-110-assoc-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
+  unit-law-110-associative-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
 ```
 
 In the definition of morphisms of wild monoids we only require the unit and

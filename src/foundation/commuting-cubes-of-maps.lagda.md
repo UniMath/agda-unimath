@@ -58,7 +58,7 @@ coherence-htpy-parallel-cone-coherence-cube-maps :
 coherence-htpy-parallel-cone-coherence-cube-maps
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom c =
-  ( assoc-htpy
+  ( associative-htpy
     ( h ·l (inv-htpy back-left))
     ( bottom ·r hA)
     ( (k ·l back-right) ∙h (refl-htpy' (k ∘ (hC ∘ g'))))) ∙h
@@ -68,12 +68,12 @@ coherence-htpy-parallel-cone-coherence-cube-maps
       ( _)
       ( left-whisk-inv-htpy h back-left)) ∙h
     ( inv-htpy-inv-con-htpy (h ·l back-left) _ _
-      ( ( (inv-htpy-assoc-htpy (h ·l back-left) (front-left ·r f') _) ∙h
-          ( ( inv-htpy-assoc-htpy
+      ( ( (inv-htpy-associative-htpy (h ·l back-left) (front-left ·r f') _) ∙h
+          ( ( inv-htpy-associative-htpy
               ( (h ·l back-left) ∙h (front-left ·r f'))
               ( hD ·l top)
               ( (inv-htpy front-right) ·r g')) ∙h
             ( inv-htpy-con-inv-htpy _ (front-right ·r g') _
-              ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy c))))) ∙h
+              ( (associative-htpy (bottom ·r hA) _ _) ∙h (inv-htpy c))))) ∙h
         ( ap-concat-htpy (bottom ·r hA) _ _ inv-htpy-right-unit-htpy))))
 ```

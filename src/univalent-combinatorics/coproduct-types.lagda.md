@@ -47,7 +47,7 @@ coprod-Fin :
   (k l : ℕ) → (Fin k + Fin l) ≃ Fin (add-ℕ k l)
 coprod-Fin k zero-ℕ = right-unit-law-coprod (Fin k)
 coprod-Fin k (succ-ℕ l) =
-  (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-assoc-coprod
+  (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-associative-coprod
 
 map-coprod-Fin :
   (k l : ℕ) → (Fin k + Fin l) → Fin (add-ℕ k l)

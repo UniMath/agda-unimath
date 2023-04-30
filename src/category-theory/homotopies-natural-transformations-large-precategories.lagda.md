@@ -92,5 +92,5 @@ to form a homotopy from `α` to `γ`. The concatenation is associative.
       ( concat-htpy-natural-transformation-Large-Precat β γ δ K L)
       ( X))
   associative-concat-htpy-natural-transformation-Large-Precat α β γ δ H K L X =
-    assoc (H X) (K X) (L X)
+    associative (H X) (K X) (L X)
 ```

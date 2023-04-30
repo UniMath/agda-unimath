@@ -180,12 +180,12 @@ module _
   (R : Poset l5 l6) (S : Poset l7 l8)
   where
 
-  assoc-compose-hom-Poset :
+  associative-compose-hom-Poset :
     (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
     Id ( compose-hom-Poset P Q S (compose-hom-Poset Q R S h g) f)
        ( compose-hom-Poset P R S h (compose-hom-Poset P Q R g f))
-  assoc-compose-hom-Poset =
-    assoc-compose-hom-Preorder
+  associative-compose-hom-Poset =
+    associative-compose-hom-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)

@@ -156,16 +156,16 @@ module _
                     P X d)))))
           ( ( equiv-Σ
               ( _)
-              ( assoc-prod _ _ _ ∘e commutative-prod)
+              ( associative-prod _ _ _ ∘e commutative-prod)
               ( λ x →
                 equiv-postcomp-equiv
-                  ( ( ( assoc-coprod) ∘e
+                  ( ( ( associative-coprod) ∘e
                     ( ( commutative-coprod _ _))))
                   ( inclusion-subuniverse P X)) ∘e
               equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))
-          ( λ d → assoc-prod _ _ _) ∘e
-        ( ( inv-assoc-Σ
+          ( λ d → associative-prod _ _ _) ∘e
+        ( ( inv-associative-Σ
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 z))
             ( _)) ∘e
@@ -195,7 +195,7 @@ module _
           ( _)
           ( equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse
               P X C2)) ∘e
-        ( ( inv-assoc-Σ
+        ( ( inv-associative-Σ
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 (pr2 z)))
             ( _)) ∘e
@@ -322,7 +322,7 @@ module _
             P
             X
             C2)) ∘e
-        ( ( inv-assoc-Σ
+        ( ( inv-associative-Σ
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ d →
               inclusion-subuniverse

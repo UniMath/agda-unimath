@@ -69,7 +69,7 @@ module _
       ( ( ap
           ( concat' (h (q (p a))) refl)
           ( distributive-inv-concat (ap j (H a)) (K (p a)))) ∙
-        ( ( assoc (inv (K (p a))) (inv (ap j (H a))) refl) ∙
+        ( ( associative (inv (K (p a))) (inv (ap j (H a))) refl) ∙
           ( ap
             ( concat (inv (K (p a))) (j (i (f a))))
             ( ( ap (concat' (j (g (p a))) refl) (inv (ap-inv j (H a)))) ∙

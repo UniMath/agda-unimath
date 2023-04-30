@@ -107,7 +107,7 @@ module _
           ( compose-hom-Precat D (hom-functor-Precat C D H f)
             ( components-natural-transformation-Precat C D G H β _))
           ( pr1 α _)
-        by inv (assoc-compose-hom-Precat D _ _ _)
+        by inv (associative-compose-hom-Precat D _ _ _)
       ＝ compose-hom-Precat D
           ( compose-hom-Precat D (pr1 β _) (hom-functor-Precat C D G f))
           ( components-natural-transformation-Precat C D F G α _)
@@ -119,7 +119,7 @@ module _
           ( compose-hom-Precat D
             ( hom-functor-Precat C D G f)
             ( components-natural-transformation-Precat C D F G α _))
-        by assoc-compose-hom-Precat D _ _ _
+        by associative-compose-hom-Precat D _ _ _
       ＝ compose-hom-Precat D (pr1 β _)
           ( compose-hom-Precat D
             ( components-natural-transformation-Precat C D F G α _)
@@ -133,7 +133,7 @@ module _
             ( pr1 β _)
             ( components-natural-transformation-Precat C D F G α _))
           ( hom-functor-Precat C D F f)
-        by inv (assoc-compose-hom-Precat D _ _ _)
+        by inv (associative-compose-hom-Precat D _ _ _)
 ```
 
 ## Properties
@@ -246,7 +246,7 @@ module _
         ( left-unit-law-compose-hom-Precat D ∘
           components-natural-transformation-Precat C D F G α))
 
-  assoc-compose-natural-transformation-Precat :
+  associative-compose-natural-transformation-Precat :
     {F G H I : functor-Precat C D}
     (α : natural-transformation-Precat C D F G)
     (β : natural-transformation-Precat C D G H)
@@ -255,10 +255,10 @@ module _
       ( compose-natural-transformation-Precat C D G H I γ β) α ＝
     compose-natural-transformation-Precat C D F H I γ
       ( compose-natural-transformation-Precat C D F G H β α)
-  assoc-compose-natural-transformation-Precat {F} {G} {H} {I} α β γ =
+  associative-compose-natural-transformation-Precat {F} {G} {H} {I} α β γ =
     eq-natural-transformation-Precat F I _ _
     ( eq-htpy λ x →
-      assoc-compose-hom-Precat D
+      associative-compose-hom-Precat D
         ( components-natural-transformation-Precat C D H I γ x)
         ( components-natural-transformation-Precat C D G H β x)
         ( components-natural-transformation-Precat C D F G α x))

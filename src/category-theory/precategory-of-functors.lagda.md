@@ -35,7 +35,7 @@ module _
   pr1 (pr2 (pr2 functor-Precat-Precat)) =
     (λ {F} {G} {H} → compose-natural-transformation-Precat C D F G H) ,
     λ {F} {G} {H} {I} h g f →
-    assoc-compose-natural-transformation-Precat C D {F} {G} {H} {I} f g h
+    associative-compose-natural-transformation-Precat C D {F} {G} {H} {I} f g h
   pr2 (pr2 (pr2 functor-Precat-Precat)) =
     (id-natural-transformation-Precat C D) ,
     ( λ {F} {G} →

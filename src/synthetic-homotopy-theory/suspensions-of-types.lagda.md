@@ -484,14 +484,14 @@ module _
       ( is-contr-total-path (pt-Pointed-Type Y))
       ( (pt-Pointed-Type Y) , refl)) ∘e
     ( ( inv-equiv
-        ( assoc-Σ
+        ( associative-Σ
           ( type-Pointed-Type Y)
           ( λ z → (pt-Pointed-Type Y) ＝ z)
           ( λ t →
             Σ ( type-Pointed-Type X → (pt-Pointed-Type Y) ＝ (pr1 t))
               ( λ f → f (pt-Pointed-Type X) ＝ (pr2 t))))) ∘e
       ( ( equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
-        ( ( assoc-Σ
+        ( ( associative-Σ
             ( type-Pointed-Type Y)
             ( λ y1 → type-Pointed-Type X → (pt-Pointed-Type Y) ＝ y1)
             ( λ z →

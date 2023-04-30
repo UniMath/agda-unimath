@@ -123,26 +123,26 @@ module _
   {l1 l2 l3 l4 : Level}
   where
 
-  assoc-compose-pointed-map :
+  associative-compose-pointed-map :
     (A : Pointed-Type l1) (B : Pointed-Type l2)
     (C : Pointed-Type l3) (D : Pointed-Type l4)
     (h : C →* D) (g : B →* C) (f : A →* B) →
     htpy-pointed-map A D
       ( compose-pointed-map A B D (compose-pointed-map B C D h g) f)
       ( compose-pointed-map A C D h (compose-pointed-map A B C g f))
-  assoc-compose-pointed-map
+  associative-compose-pointed-map
     (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
 
-  inv-assoc-compose-pointed-map :
+  inv-associative-compose-pointed-map :
     (A : Pointed-Type l1) (B : Pointed-Type l2)
     (C : Pointed-Type l3) (D : Pointed-Type l4)
     (h : C →* D) (g : B →* C) (f : A →* B) →
     htpy-pointed-map A D
       ( compose-pointed-map A C D h (compose-pointed-map A B C g f))
       ( compose-pointed-map A B D (compose-pointed-map B C D h g) f)
-  inv-assoc-compose-pointed-map
+  inv-associative-compose-pointed-map
     (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
@@ -162,10 +162,10 @@ module _
     pair
       ( pr1 G ∙h pr1 H)
       ( ( ap-binary (λ p q → p ∙ q) (pr2 G) (pr2 H)) ∙
-        ( ( assoc (pr2 f) (inv (pr2 g)) (pr2 g ∙ inv (pr2 h))) ∙
+        ( ( associative (pr2 f) (inv (pr2 g)) (pr2 g ∙ inv (pr2 h))) ∙
           ( ap
             ( concat (pr2 f) (function-pointed-Π A B h (pt-Pointed-Type A)))
-            ( ( inv (assoc (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
+            ( ( inv (associative (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
               ( ap
                 ( concat' (pt-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
@@ -209,7 +209,7 @@ module _
                       ( pr1 g (pt-Pointed-Fam A (constant-Pointed-Fam A B)))
                       ( inv (ap (pr1 g) (pr2 f2)))))
                   ( inv (right-inv (pr2 g)))) ∙
-                ( assoc
+                ( associative
                   ( pr2 g)
                   ( inv (pr2 g))
                   ( inv (ap (pr1 g) (pr2 f2))))) ∙
@@ -223,7 +223,7 @@ module _
                     ( ap (pr1 g) (pr2 f2))
                     ( pr2 g))))))) ∙
         ( inv
-          ( assoc
+          ( associative
             ( ap (pr1 g) (pr2 f1))
             ( pr2 g)
             ( inv (ap (pr1 g) (pr2 f2) ∙ pr2 g)))))

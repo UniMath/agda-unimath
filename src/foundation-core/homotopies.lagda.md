@@ -183,11 +183,11 @@ module _
   (H : f ~ g) (K : g ~ h) (L : h ~ k)
   where
 
-  assoc-htpy : ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
-  assoc-htpy x = assoc (H x) (K x) (L x)
+  associative-htpy : ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
+  associative-htpy x = associative (H x) (K x) (L x)
 
-  inv-htpy-assoc-htpy : (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
-  inv-htpy-assoc-htpy = inv-htpy assoc-htpy
+  inv-htpy-associative-htpy : (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
+  inv-htpy-associative-htpy = inv-htpy associative-htpy
 ```
 
 ### Unit laws for homotopies

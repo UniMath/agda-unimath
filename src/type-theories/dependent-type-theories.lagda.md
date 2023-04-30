@@ -306,17 +306,17 @@ We show that systems form a category.
   section-system.slice (right-unit-law-compose-hom-system f) X =
     right-unit-law-compose-hom-system (section-system.slice f X)
 
-  assoc-compose-hom-system :
+  associative-compose-hom-system :
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : system l1 l2} {B : system l3 l4}
     {C : system l5 l6} {D : system l7 l8} (h : hom-system C D)
     (g : hom-system B C) (f : hom-system A B) →
     htpy-hom-system
       ( compose-hom-system (compose-hom-system h g) f)
       ( compose-hom-system h (compose-hom-system g f))
-  section-system.type (assoc-compose-hom-system h g f) = refl-htpy
-  section-system.element (assoc-compose-hom-system h g f) = refl-htpy
-  section-system.slice (assoc-compose-hom-system h g f) X =
-    assoc-compose-hom-system
+  section-system.type (associative-compose-hom-system h g f) = refl-htpy
+  section-system.element (associative-compose-hom-system h g f) = refl-htpy
+  section-system.slice (associative-compose-hom-system h g f) X =
+    associative-compose-hom-system
       ( section-system.slice h
         ( section-system.type g (section-system.type f X)))
       ( section-system.slice g ( section-system.type f X))
@@ -954,7 +954,7 @@ We introduce the slice of a dependent type theory.
     ( preserves-weakening-compose-hom-system {g = g} {f} {WA} {WB} {WC} Wg Wf)
     ( X) =
     concat-htpy-hom-system
-      ( assoc-compose-hom-system
+      ( associative-compose-hom-system
         ( section-system.slice g (section-system.type f X))
         ( section-system.slice f X)
         ( weakening.type WA X))
@@ -964,7 +964,7 @@ We introduce the slice of a dependent type theory.
           ( preserves-weakening.type Wf X))
         ( concat-htpy-hom-system
           ( inv-htpy-hom-system
-            ( assoc-compose-hom-system
+            ( associative-compose-hom-system
               ( section-system.slice g (section-system.type f X))
               ( weakening.type WB (section-system.type f X))
               ( f)))
@@ -972,7 +972,7 @@ We introduce the slice of a dependent type theory.
             ( right-whisker-htpy-hom-system
               ( preserves-weakening.type Wg (section-system.type f X))
               ( f))
-            ( assoc-compose-hom-system
+            ( associative-compose-hom-system
               ( weakening.type WC
                 ( section-system.type g (section-system.type f X)))
               ( g)
@@ -993,13 +993,13 @@ We introduce the slice of a dependent type theory.
     ( preserves-substitution-compose-hom-system
       {g = g} {f} {SA} {SB} {SC} Sg Sf) {X} x =
     concat-htpy-hom-system
-      ( assoc-compose-hom-system g f (substitution.type SA x))
+      ( associative-compose-hom-system g f (substitution.type SA x))
       ( concat-htpy-hom-system
         ( left-whisker-htpy-hom-system g
           ( preserves-substitution.type Sf x))
         ( concat-htpy-hom-system
           ( inv-htpy-hom-system
-            ( assoc-compose-hom-system g
+            ( associative-compose-hom-system g
               ( substitution.type SB
                 ( section-system.element f x))
               ( section-system.slice f X)))
@@ -1008,7 +1008,7 @@ We introduce the slice of a dependent type theory.
               ( preserves-substitution.type Sg
                 ( section-system.element f x))
               ( section-system.slice f X))
-            ( assoc-compose-hom-system
+            ( associative-compose-hom-system
               ( substitution.type SC
                 ( section-system.element g (section-system.element f x)))
               ( section-system.slice g (section-system.type f X))
@@ -1151,7 +1151,7 @@ We introduce the slice of a dependent type theory.
   right-unit-law-compose-hom-dtt f =
     right-unit-law-compose-hom-system (hom-dtt.sys f)
 
-  assoc-compose-hom-dtt :
+  associative-compose-hom-dtt :
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
     {A : type-theory l1 l2} {B : type-theory l3 l4}
     {C : type-theory l5 l6} {D : type-theory l7 l8}
@@ -1159,8 +1159,8 @@ We introduce the slice of a dependent type theory.
     htpy-hom-dtt
       ( compose-hom-dtt (compose-hom-dtt h g) f)
       ( compose-hom-dtt h (compose-hom-dtt g f))
-  assoc-compose-hom-dtt h g f =
-    assoc-compose-hom-system
+  associative-compose-hom-dtt h g f =
+    associative-compose-hom-system
       (hom-dtt.sys h) (hom-dtt.sys g) (hom-dtt.sys f)
 ```
 

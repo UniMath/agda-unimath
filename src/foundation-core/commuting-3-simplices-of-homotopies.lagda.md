@@ -53,14 +53,14 @@ module _
     ( ( lower-left ∙h
         right-whisk-htpy-coherence-triangle-homotopies
           right lower-right left) ∙h
-      assoc-htpy left diagonal-up right)
+      associative-htpy left diagonal-up right)
 
   coherence-3-simplex-homotopies' : UU (l1 ⊔ l2)
   coherence-3-simplex-homotopies' =
     ( ( lower-left ∙h
         right-whisk-htpy-coherence-triangle-homotopies
           right lower-right left) ∙h
-      assoc-htpy left diagonal-up right) ~
+      associative-htpy left diagonal-up right) ~
     ( upper-right ∙h
       left-whisk-htpy-coherence-triangle-homotopies
         diagonal-up right upper-left)
