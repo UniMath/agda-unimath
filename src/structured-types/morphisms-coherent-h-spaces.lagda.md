@@ -113,11 +113,11 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
       ( ( ap
           ( _∙ (ap id ef))
           ( inv
-            ( associative
+            ( assoc
               ( μf eM eM)
               ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
               ( lN (pr1 f eM))))) ∙
-        ( ( associative
+        ( ( assoc
             ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
             ( lN (pr1 f eM))
             ( ap id ef)) ∙
@@ -125,13 +125,13 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
               ( ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef) ∙_)
               ( nat-htpy lN ef)) ∙
             ( ( inv
-                ( associative
+                ( assoc
                   ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
                   ( ap (μN eN) ef)
                   ( lN eN))) ∙
               ( ( ap
                   ( λ t → t ∙ lN eN)
-                  ( associative
+                  ( assoc
                     ( μf eM eM)
                     ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
                     ( ap (μN eN) ef))) ∙
@@ -145,9 +145,9 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
         ( ( ap
             ( _∙ ap id ef)
             ( inv
-              ( associative
+              ( assoc
                 ( μf eM eM) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))) ∙
-          ( ( associative
+          ( ( assoc
               ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
               ( rN (pr1 f eM))
               ( ap id ef)) ∙
@@ -155,13 +155,13 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                 ( ( μf eM eM ∙ ap (μN (pr1 f eM)) ef) ∙_)
                 ( nat-htpy rN ef)) ∙
               ( ( inv
-                  ( associative
+                  ( assoc
                     ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
                     ( ap (mul-Coherent-H-Space' N eN) ef)
                     ( rN eN))) ∙
                 ( ap
                   ( λ t → t ∙ rN eN)
-                  ( ( associative
+                  ( ( assoc
                       ( μf eM eM)
                       ( ap (μN (pr1 f eM)) ef)
                       ( ap (mul-Coherent-H-Space' N eN) ef)) ∙
