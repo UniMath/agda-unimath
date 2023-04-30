@@ -139,11 +139,11 @@ module _
 The library employs an 80-character line limit to improve readability and
 maintainability. However, there are a few notable exceptions to this rule that
 enable us to have names that are more than 80 characters long. The exceptions to
-the 80-character rule are as follows:
+the rule are as follows:
 
 - Named module declarations
 - Open import statements
-- Lines consisting of a single, possibly parenthesized (`(){}`). token followed
+- Lines consisting of a single, possibly parenthesized (`(){}`), token followed
   possibly by one of the symbols (`;:=→`).
 
 ## Coding practices we avoid
