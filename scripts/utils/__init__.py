@@ -116,7 +116,7 @@ def recursive_sub(pattern, repl, string, flags=0):
 
 
 agda_comment_regex = re.compile(
-    r'((^|(?<=[\s.;{}()@"]))--)|(\{-#)|(#-\})|(\{-(?<!#))|((?!#)-\})')
+    r'(^--|(?<=[\s.;{}()@"])--)|(\{-#)|(#-\})|(\{-(?!#))|((?<!#)-\})')
 
 
 def split_agda_line_comment_and_get_block_comment_delta(line):
@@ -134,13 +134,13 @@ def split_agda_line_comment_and_get_block_comment_delta(line):
                 and match.group(1):
             comment_start = match.start()
             return line[:comment_start], line[comment_start:], block_comment_delta_pos, block_comment_delta_neg
-        elif match.group(3):  # Pragma start
+        elif match.group(2):  # Pragma start
             in_pragma += 1
-        elif match.group(4):  # Pragma end
+        elif match.group(3):  # Pragma end
             in_pragma -= 1
-        elif match.group(5):  # Block comment start
+        elif match.group(4):  # Block comment start
             block_comment_delta_pos += 1
-        elif match.group(6):  # Block comment end
+        elif match.group(5):  # Block comment end
             block_comment_delta_neg += 1
 
     return line, '', block_comment_delta_pos, block_comment_delta_neg

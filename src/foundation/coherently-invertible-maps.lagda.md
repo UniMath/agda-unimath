@@ -44,7 +44,7 @@ abstract
           ( Σ (sec f)
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
               ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
-          ( assoc-Σ (B → A)
+          ( associative-Σ (B → A)
             ( λ g → ((f ∘ g) ~ id))
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
               ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
@@ -97,9 +97,12 @@ pr2 (pr2 (is-invertible-id-htpy-id-id A H)) = H
 triangle-is-invertible-id-htpy-id-id :
   {l : Level} (A : UU l) →
   ( is-invertible-id-htpy-id-id A) ~
-    ( ( map-assoc-Σ (A → A) (λ g → (id ∘ g) ~ id) (λ s → ((pr1 s) ∘ id) ~ id)) ∘
+    ( ( map-associative-Σ
+        ( A → A)
+        ( λ g → (id ∘ g) ~ id)
+        ( λ s → (pr1 s ∘ id) ~ id)) ∘
       ( map-inv-left-unit-law-Σ-is-contr
-        { B = λ s → ((pr1 s) ∘ id) ~ id}
+        { B = λ s → (pr1 s ∘ id) ~ id}
         ( is-contr-sec-is-equiv (is-equiv-id {_} {A}))
         ( pair id refl-htpy)))
 triangle-is-invertible-id-htpy-id-id A H = refl
@@ -110,7 +113,10 @@ abstract
   is-equiv-invertible-id-htpy-id-id A =
     is-equiv-compose-htpy
       ( is-invertible-id-htpy-id-id A)
-      ( map-assoc-Σ (A → A) (λ g → (id ∘ g) ~ id) (λ s → ((pr1 s) ∘ id) ~ id))
+      ( map-associative-Σ
+        ( A → A)
+        ( λ g → (id ∘ g) ~ id)
+        ( λ s → (pr1 s ∘ id) ~ id))
       ( map-inv-left-unit-law-Σ-is-contr
         ( is-contr-sec-is-equiv is-equiv-id)
         ( pair id refl-htpy))
@@ -118,7 +124,7 @@ abstract
       ( is-equiv-map-inv-left-unit-law-Σ-is-contr
         ( is-contr-sec-is-equiv is-equiv-id)
         ( pair id refl-htpy))
-      ( is-equiv-map-assoc-Σ _ _ _)
+      ( is-equiv-map-associative-Σ _ _ _)
 ```
 
 ## See also

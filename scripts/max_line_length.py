@@ -53,9 +53,6 @@ if __name__ == '__main__':
                 if is_tag:
                     is_in_agda_block = is_opening
                 elif is_in_agda_block:
-                    # Fail-fast
-                    if len(line) <= MAX_LINE_LENGTH:
-                        continue
                     # Consider the length of the line with the comment removed
                     line, comment, block_comment_delta_pos, block_comment_delta_neg = utils.split_agda_line_comment_and_get_block_comment_delta(
                         line)
