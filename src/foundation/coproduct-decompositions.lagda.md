@@ -616,9 +616,9 @@ module _
                     ( left-summand-binary-coproduct-Decomposition d)
                     ( right-summand-binary-coproduct-Decomposition d)
                     ( λ y →
-                        map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
-                          d y ＝
-                        inl (inr star))))))
+                      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
+                        d y ＝
+                      inl (inr star))))))
             ( x)))
       ( eq-pair-Σ
         {t =
@@ -656,23 +656,23 @@ module _
       ( λ x →
         inr
           ( map-equiv
-            ( ( ( left-unit-law-coprod
-                  ( right-summand-binary-coproduct-Decomposition d)) ∘e
-                ( ( equiv-coprod
-                    ( right-absorption-Σ
-                        ( left-summand-binary-coproduct-Decomposition d) ∘e
-                      equiv-tot
-                        ( λ _ →
-                          extensionality-Fin 2 (inl (inr star)) (inr star)))
-                    ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit) ∘e
-                      equiv-tot
-                        ( λ _ → extensionality-Fin 2 (inr star) (inr star)))) ∘e
-                  ( ( right-distributive-Σ-coprod
-                      ( left-summand-binary-coproduct-Decomposition d)
-                      ( right-summand-binary-coproduct-Decomposition d)
-                      ( λ y →
-                        map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
-                          d y ＝ inr star))))))
+            ( ( left-unit-law-coprod
+                ( right-summand-binary-coproduct-Decomposition d)) ∘e
+              ( ( equiv-coprod
+                  ( right-absorption-Σ
+                      ( left-summand-binary-coproduct-Decomposition d) ∘e
+                    equiv-tot
+                      ( λ _ →
+                        extensionality-Fin 2 (inl (inr star)) (inr star)))
+                  ( right-unit-law-Σ-is-contr (λ _ → is-contr-unit) ∘e
+                    equiv-tot
+                      ( λ _ → extensionality-Fin 2 (inr star) (inr star)))) ∘e
+                ( ( right-distributive-Σ-coprod
+                    ( left-summand-binary-coproduct-Decomposition d)
+                    ( right-summand-binary-coproduct-Decomposition d)
+                    ( λ y →
+                      map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
+                        d y ＝ inr star)))))
            ( x)))
       ( eq-pair-Σ
         {t =

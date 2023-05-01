@@ -49,7 +49,9 @@ module _
   coherence-3-simplex-homotopies =
     ( upper-right ∙h
       left-whisk-htpy-coherence-triangle-homotopies
-        diagonal-up right upper-left) ~
+        diagonal-up
+        right
+        upper-left) ~
     ( ( lower-left ∙h
         right-whisk-htpy-coherence-triangle-homotopies
           right
