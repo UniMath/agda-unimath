@@ -63,7 +63,9 @@ module _
 
   coherence-square-pullback-cone :
     coherence-square-maps horizontal-map-pullback-cone
-      vertical-map-pullback-cone g f
+      ( vertical-map-pullback-cone)
+      ( g)
+      ( f)
   coherence-square-pullback-cone = coherence-square-cone f g cone-pullback-cone
 
   universal-property-pullback-cone : universal-property-pullback l f g (pr1 c)
