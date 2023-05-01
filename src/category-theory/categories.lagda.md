@@ -76,11 +76,12 @@ module _
     {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
   comp-hom-Cat = comp-hom-Precat precat-Cat
 
-  assoc-comp-hom-Cat :
+  associative-comp-hom-Cat :
     {x y z w : obj-Cat}
     (h : type-hom-Cat z w) (g : type-hom-Cat y z) (f : type-hom-Cat x y) →
-    comp-hom-Cat (comp-hom-Cat h g) f ＝ comp-hom-Cat h (comp-hom-Cat g f)
-  assoc-comp-hom-Cat = assoc-comp-hom-Precat precat-Cat
+    comp-hom-Cat (comp-hom-Cat h g) f ＝
+    comp-hom-Cat h (comp-hom-Cat g f)
+  associative-comp-hom-Cat = associative-comp-hom-Precat precat-Cat
 
   id-hom-Cat : {x : obj-Cat} → type-hom-Cat x x
   id-hom-Cat = id-hom-Precat precat-Cat

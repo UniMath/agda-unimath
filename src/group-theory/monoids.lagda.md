@@ -88,7 +88,7 @@ module _
 abstract
   all-elements-equal-is-unital-Semigroup :
     {l : Level} (G : Semigroup l) → all-elements-equal (is-unital-Semigroup G)
-  all-elements-equal-is-unital-Semigroup (pair X (pair μ assoc-μ))
+  all-elements-equal-is-unital-Semigroup (pair X (pair μ associative-μ))
     (pair e (pair left-unit-e right-unit-e))
     (pair e' (pair left-unit-e' right-unit-e')) =
     eq-type-subtype

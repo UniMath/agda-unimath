@@ -28,17 +28,18 @@ module _
   where
 
   Discrete-Precat : Precat _ _
-  Discrete-Precat = type-Set X , disc-Hom , comp-struct , id-struct
+  Discrete-Precat = type-Set X , disc-Hom , composition-structure , id-structure
     where
       disc-Hom : type-Set X → type-Set X → Set l
-      disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y )
+      disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y)
 
-      comp-struct : associative-composition-structure-Set disc-Hom
-      pr1 comp-struct refl refl = refl
-      pr2 comp-struct refl refl refl = refl
+      composition-structure : associative-composition-structure-Set disc-Hom
+      pr1 composition-structure refl refl = refl
+      pr2 composition-structure refl refl refl = refl
 
-      id-struct : is-unital-composition-structure-Set disc-Hom comp-struct
-      pr1 id-struct x = refl
-      pr1 (pr2 id-struct) refl = refl
-      pr2 (pr2 id-struct) refl = refl
+      id-structure :
+        is-unital-composition-structure-Set disc-Hom composition-structure
+      pr1 id-structure x = refl
+      pr1 (pr2 id-structure) refl = refl
+      pr2 (pr2 id-structure) refl = refl
 ```

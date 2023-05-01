@@ -114,11 +114,12 @@ module _
   mul-Concrete-Group' : (x y : type-Concrete-Group) → type-Concrete-Group
   mul-Concrete-Group' x y = mul-Concrete-Group y x
 
-  assoc-mul-Concrete-Group :
+  associative-mul-Concrete-Group :
     (x y z : type-Concrete-Group) →
     Id (mul-Concrete-Group (mul-Concrete-Group x y) z)
        (mul-Concrete-Group x (mul-Concrete-Group y z))
-  assoc-mul-Concrete-Group = assoc-mul-∞-Group ∞-group-Concrete-Group
+  associative-mul-Concrete-Group =
+    associative-mul-∞-Group ∞-group-Concrete-Group
 
   left-unit-law-mul-Concrete-Group :
     (x : type-Concrete-Group) → Id (mul-Concrete-Group unit-Concrete-Group x) x
@@ -154,7 +155,7 @@ module _
   abstract-group-Concrete-Group : Group l
   pr1 (pr1 abstract-group-Concrete-Group) = set-Concrete-Group
   pr1 (pr2 (pr1 abstract-group-Concrete-Group)) = mul-Concrete-Group
-  pr2 (pr2 (pr1 abstract-group-Concrete-Group)) = assoc-mul-Concrete-Group
+  pr2 (pr2 (pr1 abstract-group-Concrete-Group)) = associative-mul-Concrete-Group
   pr1 (pr1 (pr2 abstract-group-Concrete-Group)) = unit-Concrete-Group
   pr1 (pr2 (pr1 (pr2 abstract-group-Concrete-Group))) =
     left-unit-law-mul-Concrete-Group
@@ -171,7 +172,7 @@ module _
   pr1 (pr1 op-abstract-group-Concrete-Group) = set-Concrete-Group
   pr1 (pr2 (pr1 op-abstract-group-Concrete-Group)) = mul-Concrete-Group'
   pr2 (pr2 (pr1 op-abstract-group-Concrete-Group)) x y z =
-    inv (assoc-mul-Concrete-Group z y x)
+    inv (associative-mul-Concrete-Group z y x)
   pr1 (pr1 (pr2 op-abstract-group-Concrete-Group)) = unit-Concrete-Group
   pr1 (pr2 (pr1 (pr2 op-abstract-group-Concrete-Group))) =
     right-unit-law-mul-Concrete-Group

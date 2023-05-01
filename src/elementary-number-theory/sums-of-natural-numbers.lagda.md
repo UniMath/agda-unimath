@@ -90,7 +90,7 @@ abstract
   htpy-sum-count-ℕ (pair k e) H = htpy-sum-Fin-ℕ k (H ·r (map-equiv e))
 ```
 
-### Summing up the same value `m` times is multiplication by `m`.
+### Summing up the same value `m` times is multiplication by `m`
 
 ```agda
 abstract

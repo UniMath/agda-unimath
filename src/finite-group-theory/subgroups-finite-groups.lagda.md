@@ -378,7 +378,7 @@ module _
 
 ### Every finite subgroup induces two equivalence relations
 
-#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`.
+#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`
 
 ```agda
 module _
@@ -418,7 +418,7 @@ module _
     right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 ```
 
-#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`.
+#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`
 
 ```agda
 module _

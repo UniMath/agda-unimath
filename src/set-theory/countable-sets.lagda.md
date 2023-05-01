@@ -183,7 +183,7 @@ module _
         ( ( is-prop-neg) ,
           ( is-decidable-is-not-exception-Maybe (f n))))
       ( pair
-        ( λ {(n , p) → value-is-not-exception-Maybe (f n) p} )
+        ( λ {(n , p) → value-is-not-exception-Maybe (f n) p})
         ( λ x →
           ( apply-universal-property-trunc-Prop (H (inl x))
             ( trunc-Prop (fib _ x))

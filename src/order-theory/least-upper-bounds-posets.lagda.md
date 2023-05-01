@@ -66,7 +66,8 @@ module _
     type-Prop (is-least-binary-upper-bound-poset-Prop x y z)
 
   is-prop-is-least-binary-upper-bound-Poset :
-    (x y z : element-Poset P) → is-prop (is-least-binary-upper-bound-Poset x y z)
+    (x y z : element-Poset P) →
+    is-prop (is-least-binary-upper-bound-Poset x y z)
   is-prop-is-least-binary-upper-bound-Poset x y z =
     is-prop-type-Prop (is-least-binary-upper-bound-poset-Prop x y z)
 

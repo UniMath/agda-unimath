@@ -114,10 +114,11 @@ width equals sign `＝`. While you're at it, you can also add the key sequence
 
 #### 80-character limit
 
-The `agda-unimath` library maintains an 80-character limit on the length of
-lines in the source code. This limit is to improve readability, both in your
-programming environment and on our website. To display a line marking the 80th
-column in Emacs, add:
+The `agda-unimath` library maintains an 80-character limit on the length of most
+lines in the source code (see [CODINGSTYLE](CODINGSTYLE.md#character-limit) for
+a list of exceptions). This limit is to improve readability, both in your
+programming environment and on our website. To display a vertical ruler marking
+the 80th column in Emacs, add:
 
 ```elisp
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)

@@ -95,7 +95,7 @@ pr1 i-ℤ[i] = zero-ℤ
 pr2 i-ℤ[i] = one-ℤ
 ```
 
-### The Gaussian integer `-i`.
+### The Gaussian integer `-i`
 
 ```agda
 neg-i-ℤ[i] : ℤ[i]

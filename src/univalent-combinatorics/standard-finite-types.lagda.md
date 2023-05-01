@@ -45,7 +45,7 @@ segment of `n`.
 
 ## Definition
 
-### The standard finite types in universe level zero.
+### The standard finite types in universe level zero
 
 ```agda
 Fin-Set : ℕ → Set lzero
@@ -283,17 +283,22 @@ is-one-nat-one-Fin (succ-ℕ k) = is-one-nat-one-Fin k
 ```agda
 is-injective-inl-Fin : (k : ℕ) → is-injective (inl-Fin k)
 is-injective-inl-Fin k refl = refl
+```
 
--- Exercise 7.5 (c)
+### Exercise 7.5 (c)
 
+```agda
 neq-zero-succ-Fin :
-  {k : ℕ} {x : Fin k} → is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
+  {k : ℕ} {x : Fin k} →
+  is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
 neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
   neq-zero-succ-Fin (is-injective-inl-Fin (succ-ℕ k) p)
 neq-zero-succ-Fin {succ-ℕ k} {inr star} ()
+```
 
--- Exercise 7.5 (d)
+### Exercise 7.5 (d)
 
+```agda
 is-injective-skip-zero-Fin : (k : ℕ) → is-injective (skip-zero-Fin k)
 is-injective-skip-zero-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-skip-zero-Fin k (is-injective-inl-Fin (succ-ℕ k) p))

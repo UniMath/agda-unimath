@@ -42,7 +42,7 @@ module _
 
 ## Properties
 
-### The type `Eq-prod s t` is equivalent to `Id s t`.
+### The type `Eq-prod s t` is equivalent to `Id s t`
 
 ```agda
 module _

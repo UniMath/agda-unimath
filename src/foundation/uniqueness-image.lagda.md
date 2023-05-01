@@ -34,7 +34,6 @@ module _
   {B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i))
   {B' : UU l4} (i' : B' ↪ X) (q' : hom-slice f (map-emb i'))
   (h : hom-slice (map-emb i) (map-emb i'))
-  -- (p : Id (comp-hom-slice f (map-emb i) (map-emb i') h q) q')
   where
 
   abstract

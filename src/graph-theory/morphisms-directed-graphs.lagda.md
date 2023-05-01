@@ -36,7 +36,7 @@ module _
 
   hom-Directed-Graph : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Directed-Graph =
-    Σ ( vertex-Directed-Graph G → vertex-Directed-Graph H )
+    Σ ( vertex-Directed-Graph G → vertex-Directed-Graph H)
       ( λ α →
         (x y : vertex-Directed-Graph G) →
         edge-Directed-Graph G x y → edge-Directed-Graph H (α x) (α y))

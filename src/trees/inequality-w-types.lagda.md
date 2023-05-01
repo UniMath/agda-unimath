@@ -63,8 +63,8 @@ module _
 
   data Path-𝕎 : 𝕎 A B → UU (l1 ⊔ l2) where
     root : (w : 𝕎 A B) → Path-𝕎 w
-    cons : (a : A) (f : B a → 𝕎 A B) (b : B a) →
-           Path-𝕎 (f b) → Path-𝕎 (tree-𝕎 a f)
+    cons :
+      (a : A) (f : B a → 𝕎 A B) (b : B a) → Path-𝕎 (f b) → Path-𝕎 (tree-𝕎 a f)
 
   length-Path-𝕎 : (w : 𝕎 A B) → Path-𝕎 w → ℕ
   length-Path-𝕎 w (root .w) = zero-ℕ

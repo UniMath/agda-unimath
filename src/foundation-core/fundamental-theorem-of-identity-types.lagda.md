@@ -101,7 +101,7 @@ module _
           ( is-contr-retract-of (Σ _ (λ y → a ＝ y))
             ( pair (tot i)
               ( pair (tot λ x → pr1 (R x))
-                ( ( inv-htpy (tot-comp i (λ x → pr1 (R x)))) ∙h
+                ( ( inv-htpy (preserves-comp-tot i (λ x → pr1 (R x)))) ∙h
                   ( ( tot-htpy λ x → pr2 (R x)) ∙h (tot-id B)))))
             ( is-contr-total-path a))
           ( is-contr-total-path a))

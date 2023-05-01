@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A cocone on a span `A <-f- S -g-> B` with vertex `X` consists of two maps
+A cocone under a span `A <-f- S -g-> B` with vertex `X` consists of two maps
 `i : A → X` and `j : B → X` equipped with a homotopy witnessing that the square
 
 ```md
@@ -48,7 +48,7 @@ commutes.
 ```agda
 cocone :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) → UU l4 → UU _
+  (f : S → A) (g : S → B) → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 cocone {A = A} {B = B} f g X =
   Σ (A → X) (λ i → Σ (B → X) (λ j → coherence-square-maps g f j i))
 
@@ -163,7 +163,7 @@ cocone-map-id :
   Id (cocone-map f g c id) c
 cocone-map-id f g c =
   eq-pair-Σ refl
-    ( eq-pair-Σ refl (eq-htpy (λ s → ap-id (coherence-square-cocone f g c s))))
+    ( eq-pair-Σ refl (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
 
 cocone-map-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -171,23 +171,23 @@ cocone-map-comp :
   {Y : UU l5} (h : X → Y) {Z : UU l6} (k : Y → Z) →
   Id (cocone-map f g c (k ∘ h)) (cocone-map f g (cocone-map f g c h) k)
 cocone-map-comp f g (pair i (pair j H)) h k =
-  eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (λ s → ap-comp k h (H s))))
+  eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-comp k h ∘ H)))
 ```
 
 ### Horizontal composition of cocones
 
 ```agda
-cocone-compose-horizontal :
+cocone-comp-horizontal :
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   ( f : A → X) (i : A → B) (k : B → C) ( c : cocone f i Y) →
   cocone (vertical-map-cocone f i c) k Z → cocone f (k ∘ i) Z
-pr1 (cocone-compose-horizontal f i k c d) =
+pr1 (cocone-comp-horizontal f i k c d) =
    ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ∘
    ( horizontal-map-cocone f i c)
-pr1 (pr2 (cocone-compose-horizontal f i k c d)) =
+pr1 (pr2 (cocone-comp-horizontal f i k c d)) =
   vertical-map-cocone (vertical-map-cocone f i c) k d
-pr2 (pr2 (cocone-compose-horizontal f i k c d)) =
+pr2 (pr2 (cocone-comp-horizontal f i k c d)) =
   ( ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ·l
     ( coherence-square-cocone f i c)) ∙h
   ( coherence-square-cocone (vertical-map-cocone f i c) k d ·r i)

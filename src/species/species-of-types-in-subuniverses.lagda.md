@@ -34,7 +34,7 @@ subuniverse `Q`.
 species-subuniverse :
   {l1 l2 l3 l4 : Level} → subuniverse l1 l2 → subuniverse l3 l4 →
   UU (lsuc l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
-species-subuniverse P Q =  type-subuniverse P → type-subuniverse Q
+species-subuniverse P Q = type-subuniverse P → type-subuniverse Q
 ```
 
 ### Transport along equivalences of in species of types in subuniverses

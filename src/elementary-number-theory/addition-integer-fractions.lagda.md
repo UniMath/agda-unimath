@@ -88,7 +88,8 @@ sim-fraction-add-fraction-ℤ
     by ap-add-ℤ (associative-mul-ℤ nx' (mul-ℤ dy dx) dy')
       (associative-mul-ℤ ny' (mul-ℤ dx dy) dx')
   ＝ mul-ℤ nx' (mul-ℤ dy' (mul-ℤ dy dx)) +ℤ mul-ℤ ny' (mul-ℤ dx' (mul-ℤ dx dy))
-    by ap-add-ℤ (ap-mul-ℤ (refl {x = nx'}) (commutative-mul-ℤ (mul-ℤ dy dx) dy'))
+    by ap-add-ℤ
+      (ap-mul-ℤ (refl {x = nx'}) (commutative-mul-ℤ (mul-ℤ dy dx) dy'))
       (ap-mul-ℤ (refl {x = ny'}) (commutative-mul-ℤ (mul-ℤ dx dy) dx'))
   ＝ mul-ℤ (mul-ℤ nx' dy') (mul-ℤ dy dx) +ℤ mul-ℤ (mul-ℤ ny' dx') (mul-ℤ dx dy)
     by ap-add-ℤ (inv (associative-mul-ℤ nx' dy' (mul-ℤ dy dx)))
@@ -114,7 +115,7 @@ right-unit-law-add-fraction-ℤ :
   sim-fraction-ℤ (k +fraction-ℤ zero-fraction-ℤ) k
 right-unit-law-add-fraction-ℤ (m , n , p) =
  ap-mul-ℤ
-   ( ap-add-ℤ (right-unit-law-mul-ℤ m) refl ∙ right-unit-law-add-ℤ m )
+   ( ap-add-ℤ (right-unit-law-mul-ℤ m) refl ∙ right-unit-law-add-ℤ m)
    ( inv (right-unit-law-mul-ℤ n))
 ```
 
@@ -160,7 +161,10 @@ associative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
             (mul-ℤ (mul-ℤ ny dz) dx +ℤ mul-ℤ (mul-ℤ nz dy) dx)
           by ap-add-ℤ
             (refl {x = mul-ℤ nx (mul-ℤ dy dz)})
-            (inv (ap-add-ℤ (associative-mul-ℤ ny dz dx) (associative-mul-ℤ nz dy dx)))
+            (inv
+              (ap-add-ℤ
+                ( associative-mul-ℤ ny dz dx)
+                ( associative-mul-ℤ nz dy dx)))
         ＝ mul-ℤ nx (mul-ℤ dy dz) +ℤ (mul-ℤ (mul-ℤ ny dz +ℤ mul-ℤ nz dy) dx)
           by ap-add-ℤ
             (refl {x = mul-ℤ nx (mul-ℤ dy dz)})

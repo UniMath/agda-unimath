@@ -36,7 +36,8 @@ module _
     ( (B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
   ev-id P f = f A id-equiv
 
-  IND-EQUIV : {l : Level} (P : (B : UU l1) (e : A ≃ B) → UU l) → UU _
+  IND-EQUIV :
+    {l : Level} (P : (B : UU l1) (e : A ≃ B) → UU l) → UU (lsuc l1 ⊔ l)
   IND-EQUIV P = sec (ev-id P)
 
   triangle-ev-id :
@@ -46,9 +47,11 @@ module _
     ( ( ev-id (λ X e → P (pair X e))) ∘
       ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P}))
   triangle-ev-id P f = refl
+```
 
-  -- Theorem 17.1.1 (ii) implies (iii)
+### Contractibility of the total space of equivalences implies equivalence induction
 
+```agda
   abstract
     IND-EQUIV-is-contr-total-equiv :
       is-contr (Σ (UU l1) (λ X → A ≃ X)) →
@@ -65,9 +68,11 @@ module _
             ( λ t → ( inv (contraction c (pair A id-equiv))) ∙
                     ( contraction c t)))
           ( P))
+```
 
-  -- Theorem 17.1.1 (iii) implies (ii)
+### Equivalence induction implies contractibility of the total space of equivalences
 
+```agda
   abstract
     is-contr-total-equiv-IND-EQUIV :
       ( {l : Level} (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →

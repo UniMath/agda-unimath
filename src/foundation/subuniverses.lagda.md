@@ -75,7 +75,7 @@ module _
 ```agda
 is-global-subuniverse :
   (α : Level → Level) (P : (l : Level) → subuniverse l (α l)) →
-  (l1 l2 : Level) → UU _
+  (l1 l2 : Level) → UU (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
 is-global-subuniverse α P l1 l2 =
   (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
 

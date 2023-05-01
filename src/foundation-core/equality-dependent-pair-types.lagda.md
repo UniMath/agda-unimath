@@ -40,7 +40,7 @@ module _
 
 ## Properties
 
-### The type `Id s t` is equivalent to `Eq-Σ s t` for any `s t : Σ A B`.
+### The type `Id s t` is equivalent to `Eq-Σ s t` for any `s t : Σ A B`
 
 ```agda
   refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s

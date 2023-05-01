@@ -46,7 +46,9 @@ pr1 (conj-Decidable-Prop P Q) =
 pr1 (pr2 (conj-Decidable-Prop P Q)) =
   is-prop-type-conj-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 pr2 (pr2 (conj-Decidable-Prop P Q)) =
-  is-decidable-prod (is-decidable-type-Decidable-Prop P) (is-decidable-type-Decidable-Prop Q)
+  is-decidable-prod
+    ( is-decidable-type-Decidable-Prop P)
+    ( is-decidable-type-Decidable-Prop Q)
 ```
 
 ## Properties

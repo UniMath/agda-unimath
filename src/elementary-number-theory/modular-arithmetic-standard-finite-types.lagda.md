@@ -25,7 +25,6 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -82,7 +81,7 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
     ( succ-ℕ x)
-    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x) )
+    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( cong-nat-mod-succ-ℕ k x)
 ```
 
@@ -199,7 +198,8 @@ cong-add-Fin :
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
 
-cong-add-ℕ : {k : ℕ} (x y : ℕ) →
+cong-add-ℕ :
+  {k : ℕ} (x y : ℕ) →
   cong-ℕ
     ( succ-ℕ k)
     ( add-ℕ

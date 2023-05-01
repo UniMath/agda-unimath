@@ -430,7 +430,8 @@ preserves-successor-mod-ℕ (succ-ℕ k) x = refl
 
 mod-refl-ℕ : (k : ℕ) → mod-ℕ k k ＝ zero-ℤ-Mod k
 mod-refl-ℕ zero-ℕ = refl
-mod-refl-ℕ (succ-ℕ k) = is-zero-mod-succ-ℕ k (succ-ℕ k) (pair 1 (left-unit-law-mul-ℕ (succ-ℕ k)))
+mod-refl-ℕ (succ-ℕ k) =
+  is-zero-mod-succ-ℕ k (succ-ℕ k) (pair 1 (left-unit-law-mul-ℕ (succ-ℕ k)))
 
 mod-zero-ℤ : (k : ℕ) → mod-ℤ k zero-ℤ ＝ zero-ℤ-Mod k
 mod-zero-ℤ zero-ℕ = refl

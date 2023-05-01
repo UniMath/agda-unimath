@@ -26,7 +26,6 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -50,7 +49,8 @@ module _
        map-reflecting-map-Eq-Rel R f (h x))
   where
 
-  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
+  cases-coherence-square-maps-eq-one-value-emb-is-set-quotient :
+    is-emb h' →
     (y : A) (k k' k'' : Fin 2) →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)) ＝ k →
     map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)) ＝ k' →
@@ -113,7 +113,8 @@ module _
                      ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
 
-  coherence-square-maps-eq-one-value-emb-is-set-quotient : is-emb h' →
+  coherence-square-maps-eq-one-value-emb-is-set-quotient :
+    is-emb h' →
     coherence-square-maps
       ( h)
       ( map-reflecting-map-Eq-Rel R f)

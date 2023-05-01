@@ -43,8 +43,8 @@ holds.
 
 The notion of set-projectiveness generalizes to `n`-projectiveness, for `n : ℕ`.
 A type `X` is said to be `k`-projective if the postcomposition function
-`(X → A) → (X → B)` is surjective for every `(k-1)`-connected map `f : A → B`
-into a `k`-truncated type `B`.
+`(X → A) → (X → B)` is surjective for every `k-1`-connected map `f : A → B` into
+a `k`-truncated type `B`.
 
 ## Definitions
 

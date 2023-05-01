@@ -3,7 +3,7 @@
 - This style guide is here to improve the readability of the code. If an item in
   this guide causes suboptimal readability of the code if applied, please notify
   us and we will try to improve this guide, and possibly our code.
-- The library uses a standard line length of 80 characters.
+- The library uses a [standard line length of 80 characters](#character-limit).
 - All module headers and standard term definitions should have a single empty
   line before and after them.
 - The library uses Lisp-style parentheses, and indent arguments of functions if
@@ -133,6 +133,18 @@ module _
 - The library doesn't use variables at the moment. All variables are declared
   either as parameters of an anonymous module or in the type declaration of a
   construction.
+
+## <a name="character-limit"></a>80-character limit
+
+The library employs an 80-character line limit to improve readability and
+maintainability. However, there are a few notable exceptions to this rule that
+enable us to have names that are more than 80 characters long. The exceptions to
+the rule are as follows:
+
+- Named module declarations
+- Open import statements
+- Lines consisting of a single, possibly parenthesized (`(){}`), token that is
+  potentially followed by one of the symbols `;`, `:`, `=`, or `→`.
 
 ## Coding practices we avoid
 

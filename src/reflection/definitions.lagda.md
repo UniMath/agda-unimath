@@ -19,9 +19,7 @@ open import lists.lists
 
 open import reflection.abstractions
 open import reflection.arguments
-open import reflection.fixity
 open import reflection.literals
-open import reflection.metavariables
 open import reflection.names
 open import reflection.terms
 ```
@@ -36,19 +34,19 @@ The `Definition` type represents a definition in Agda.
 
 ```agda
 data Definition : UU lzero where
-  function    : (cs : list Clause) → Definition
-  data-type   : (pars : ℕ) (cs : list Name) → Definition
+  function : (cs : list Clause) → Definition
+  data-type : (pars : ℕ) (cs : list Name) → Definition
   record-type : (c : Name) (fs : list (Arg Name)) → Definition
-  data-cons   : (d : Name) → Definition
-  axiom       : Definition
-  prim-fun    : Definition
-{-# BUILTIN AGDADEFINITION                Definition  #-}
-{-# BUILTIN AGDADEFINITIONFUNDEF          function    #-}
-{-# BUILTIN AGDADEFINITIONDATADEF         data-type   #-}
-{-# BUILTIN AGDADEFINITIONRECORDDEF       record-type #-}
-{-# BUILTIN AGDADEFINITIONDATACONSTRUCTOR data-cons   #-}
-{-# BUILTIN AGDADEFINITIONPOSTULATE       axiom       #-}
-{-# BUILTIN AGDADEFINITIONPRIMITIVE       prim-fun    #-}
+  data-cons : (d : Name) → Definition
+  axiom : Definition
+  prim-fun : Definition
+{-# BUILTIN AGDADEFINITION Definition #-}
+{-# BUILTIN AGDADEFINITIONFUNDEF function #-}
+{-# BUILTIN AGDADEFINITIONDATADEF data-type #-}
+{-# BUILTIN AGDADEFINITIONRECORDDEF record-type #-}
+{-# BUILTIN AGDADEFINITIONDATACONSTRUCTOR data-cons #-}
+{-# BUILTIN AGDADEFINITIONPOSTULATE axiom #-}
+{-# BUILTIN AGDADEFINITIONPRIMITIVE prim-fun #-}
 ```
 
 ## Examples
@@ -94,7 +92,7 @@ private
   helper A x = x
 
   _ :
-    quoteTerm (helper (ℕ → ℕ) (λ { zero-ℕ → zero-ℕ ; (succ-ℕ x) → x })) ＝
+    quoteTerm (helper (ℕ → ℕ) (λ { zero-ℕ → zero-ℕ ; (succ-ℕ x) → x})) ＝
     def
       ( quote helper)
       ( cons
@@ -153,7 +151,6 @@ private
                     ( visible-Arg (absurd 0)))))
               ( nil)))))
   _ = refl
---
 ```
 
 ### Pi terms

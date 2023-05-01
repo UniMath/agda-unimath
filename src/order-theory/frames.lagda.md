@@ -21,14 +21,18 @@ open import order-theory.sup-lattices
 
 </details>
 
-## Idea: A frame is a poset that has binary meets and arbitrary joins and further satisfies the infinite distributive law.
+## Idea
+
+A frame is a poset that has binary meets and arbitrary joins and further
+satisfies the infinite distributive law.
 
 There are many equivalent ways to formulate this definition. Our choice here is
 simply motivated by a desire to avoid iterated sigma types.
 
 ```agda
 Frame : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Frame l1 l2 l3 = Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3 )
+Frame l1 l2 l3 =
+  Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3)
 ```
 
 ## Now we retrieve all the information from a frame (i.e. break up all of it's components, etc.)
@@ -80,14 +84,14 @@ module _
   is-meet-semilattice-Frame = is-meet-semilattice-Meet-Sup-Lattice (pr1 A)
 
   meet-semilattice-Frame : Meet-Semilattice l1 l2
-  meet-semilattice-Frame = ( poset-Frame , is-meet-semilattice-Frame )
+  meet-semilattice-Frame = ( poset-Frame , is-meet-semilattice-Frame)
 
   is-sup-lattice-Frame :
     is-sup-lattice-Poset l3 poset-Frame
   is-sup-lattice-Frame = is-sup-lattice-Meet-Sup-Lattice (pr1 A)
 
   sup-lattice-Frame : Sup-Lattice l1 l2 l3
-  sup-lattice-Frame = ( poset-Frame , is-sup-lattice-Frame )
+  sup-lattice-Frame = ( poset-Frame , is-sup-lattice-Frame)
 
   meet-sup-lattice-Frame :
     Meet-Sup-Lattice l1 l2 l3
@@ -108,7 +112,8 @@ module _
     element-Frame
   sup-Frame I b = pr1 (is-sup-lattice-Frame I b)
 
-  distributive-law-Frame : distributive-law-meet-sup-lattice l1 l2 l3 meet-sup-lattice-Frame
+  distributive-law-Frame :
+    distributive-law-meet-sup-lattice l1 l2 l3 meet-sup-lattice-Frame
   distributive-law-Frame = pr2 A
 
   frame-Frame : Frame l1 l2 l3

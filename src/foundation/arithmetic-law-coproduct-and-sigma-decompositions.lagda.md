@@ -62,7 +62,7 @@ module _
              Σ ( UU l)
                ( λ B →
                  Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
-                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Σ (pr1 U) Y ))))
+                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Σ (pr1 U) Y))))
     pr1 reassociate ((U , V , f) , A , B , e) = (A , B , (U , e) , V , f)
     pr2 reassociate =
       is-equiv-has-inverse
@@ -86,7 +86,7 @@ module _
         Relaxed-Σ-Decomposition l l
           ( left-summand-binary-coproduct-Decomposition d) ×
         Relaxed-Σ-Decomposition l l
-          ( right-summand-binary-coproduct-Decomposition d) )
+          ( right-summand-binary-coproduct-Decomposition d))
     pr1 reassociate' (A , B , (YA , YB) , (A' , eA) , (B' , eB) , e) =
       (A' , B' , e) , ((A , YA , eA) , B , YB , eB)
     pr2 reassociate' =
@@ -106,7 +106,7 @@ module _
         Relaxed-Σ-Decomposition l l
           ( left-summand-binary-coproduct-Decomposition d) ×
         Relaxed-Σ-Decomposition l l
-          ( right-summand-binary-coproduct-Decomposition d) )
+          ( right-summand-binary-coproduct-Decomposition d))
 
   equiv-binary-coproduct-Decomposition-Σ-Decomposition =
     ( ( reassociate') ∘e
@@ -154,9 +154,9 @@ module _
 
     private
       tr-total-equiv :
-        {l1 l3 l4 : Level} {X Y : UU l1 } (e : Y ≃ X) →
+        {l1 l3 l4 : Level} {X Y : UU l1} (e : Y ≃ X) →
         (h : Id {A = Σ (UU l1) λ Y → Y ≃ X} (X , id-equiv) (Y , e)) →
-        {C : (X : UU l1) → (X → UU l3) → UU l4}  →
+        {C : (X : UU l1) → (X → UU l3) → UU l4} →
         {f : Σ (Y → UU l3) (λ Z → C Y Z)} →
         (x : X) →
         pr1
@@ -169,7 +169,7 @@ module _
             ( h)
             ( id)
             ( f))
-          ( x)  ＝
+          ( x) ＝
         pr1 f (map-inv-equiv e x)
       tr-total-equiv e refl x = refl
 
@@ -178,7 +178,8 @@ module _
       cotype-Relaxed-Σ-Decomposition
         ( pr1
           ( pr2
-            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition
+              ( D))))
         ( a) ＝
       cotype-Relaxed-Σ-Decomposition
         ( pr1 D)
@@ -202,7 +203,8 @@ module _
       cotype-Relaxed-Σ-Decomposition
         ( pr2
           ( pr2
-            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition D)))
+            ( map-equiv equiv-binary-coproduct-Decomposition-Σ-Decomposition
+              ( D))))
         ( b) ＝
       cotype-Relaxed-Σ-Decomposition (pr1 D)
         ( map-inv-equiv

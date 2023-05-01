@@ -59,7 +59,7 @@ decidable-emb-trunc-Prop-count {A = A} (succ-ℕ n , e) =
   decidable-emb-retract-count
     ( succ-ℕ n , e)
     ( λ _ → map-equiv e (inr star))
-    ((λ x → unit-trunc-Prop x) , (λ x → eq-is-prop is-prop-type-trunc-Prop ))
+    ((λ x → unit-trunc-Prop x) , (λ x → eq-is-prop is-prop-type-trunc-Prop))
 
 module _
   {l1 l2 : Level} {A : UU l1} {P : A → UU l2}

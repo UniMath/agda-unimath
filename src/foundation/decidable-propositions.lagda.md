@@ -73,7 +73,7 @@ module _
     ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
   split-Decidable-Prop =
     ( left-distributive-Σ-coprod (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
-    ( inv-assoc-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
+    ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
 
   map-equiv-bool-Decidable-Prop' :
     (Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))) →
@@ -133,12 +133,13 @@ module _
 ### Types of decidable propositions of any universe level are equivalent
 
 ```agda
-equiv-universes-Decidable-Prop : (l l' : Level) →
-  Decidable-Prop l ≃ Decidable-Prop l'
+equiv-universes-Decidable-Prop :
+  (l l' : Level) → Decidable-Prop l ≃ Decidable-Prop l'
 equiv-universes-Decidable-Prop l l' =
   inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Decidable-Prop
 
-iff-universes-Decidable-Prop : (l l' : Level) (P : Decidable-Prop l) →
+iff-universes-Decidable-Prop :
+  (l l' : Level) (P : Decidable-Prop l) →
   ( prop-Decidable-Prop P ⇔
     prop-Decidable-Prop (map-equiv (equiv-universes-Decidable-Prop l l') P))
 pr1 (iff-universes-Decidable-Prop l l' P) p =
@@ -225,7 +226,8 @@ abstract
   is-finite-is-decidable-Prop :
     {l : Level} (P : Prop l) →
     is-decidable (type-Prop P) → is-finite (type-Prop P)
-  is-finite-is-decidable-Prop P x = is-finite-count (count-is-decidable-Prop P x)
+  is-finite-is-decidable-Prop P x =
+    is-finite-count (count-is-decidable-Prop P x)
 ```
 
 ### The type of decidable propositions of any universe level is finite

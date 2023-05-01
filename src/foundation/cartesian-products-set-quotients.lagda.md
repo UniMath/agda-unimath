@@ -103,7 +103,7 @@ module _
 
   issec-inv-precomp-set-quotient-prod-set-quotient :
     { l : Level}
-    ( X : Set l ) →
+    ( X : Set l) →
     ( precomp-Set-Quotient
       ( prod-Eq-Rel R S)
       ( prod-set-quotient-Set)
@@ -125,7 +125,7 @@ module _
 
   isretr-inv-precomp-set-quotient-prod-set-quotient :
     { l : Level}
-    ( X : Set l ) →
+    ( X : Set l) →
     ( ( inv-precomp-set-quotient-prod-set-quotient X) ∘
       ( precomp-Set-Quotient
         ( prod-Eq-Rel R S)

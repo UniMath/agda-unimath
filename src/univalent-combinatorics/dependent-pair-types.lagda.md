@@ -99,7 +99,7 @@ abstract
               ( equiv-tot
                 ( λ t →
                   ( equiv-tot (λ x → equiv-eq-pair-Σ (map-section b x) t)) ∘e
-                  ( ( assoc-Σ A
+                  ( ( associative-Σ A
                       ( λ (x : A) → Id x (pr1 t))
                       ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
                     ( inv-left-unit-law-Σ-is-contr

@@ -54,7 +54,7 @@ compose species.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (P : subuniverse l1 l2 )
+  (P : subuniverse l1 l2)
   (Q : subuniverse l3 l4)
   (S : species-subuniverse P Q)
   (T : species-subuniverse P Q)
@@ -68,7 +68,7 @@ module _
         ( inclusion-subuniverse
           ( Q)
           ( S (subuniverse-indexing-type-Σ-Decomposition-Subuniverse P X D))) ×
-        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D ) →
+        ( (x : indexing-type-Σ-Decomposition-Subuniverse P X D) →
           inclusion-subuniverse
           ( Q)
           ( T (subuniverse-cotype-Σ-Decomposition-Subuniverse P X D x))))
@@ -78,10 +78,10 @@ module _
   (P : subuniverse l1 l2)
   (Q : subuniverse l3 l4)
   (C1 :
-    ( S T : species-subuniverse P Q ) → (X : type-subuniverse P) →
-    is-small l3 (small-cauchy-composition-species-subuniverse'  P Q S T X))
+    ( S T : species-subuniverse P Q) → (X : type-subuniverse P) →
+    is-small l3 (small-cauchy-composition-species-subuniverse' P Q S T X))
   (C2 :
-    ( S T : species-subuniverse P Q ) → (X : type-subuniverse P) →
+    ( S T : species-subuniverse P Q) → (X : type-subuniverse P) →
     ( is-in-subuniverse Q (type-is-small (C1 S T X))))
   (C3 : is-closed-under-Σ-subuniverse P)
   where
@@ -116,8 +116,8 @@ module _
           ( ( equiv-prod id-equiv (inv-equiv distributive-Π-Σ)) ∘e
           ( ( inv-equiv right-distributive-prod-Σ) ∘e
           ( ( equiv-tot (λ _ → inv-equiv (left-distributive-prod-Σ)))))) ∘e
-          ( ( assoc-Σ _ _ _)))) ∘e
-      ( ( assoc-Σ
+          ( ( associative-Σ _ _ _)))) ∘e
+      ( ( associative-Σ
           ( Relaxed-Σ-Decomposition l1 l1 X)
           ( λ D →
               is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
@@ -151,7 +151,7 @@ module _
                   equiv-total-is-in-subuniverse-Σ-Decomposition
                     ( P)
                     (X , p))))))) ∘e
-          ( ( inv-assoc-Σ
+          ( ( inv-associative-Σ
               ( is-in-subuniverse P X)
               ( λ p → Σ-Decomposition-Subuniverse P (X , p))
               ( _)) ∘e
@@ -223,7 +223,7 @@ module _
       inclusion-subuniverse Q (S X)
     htpy-left-unit-law-small-cauchy-composition-species-subuniverse S X =
       ( ( inv-equiv
-          ( equiv-Σ-extension-species-subuniverse P Q S X ) ) ∘e
+          ( equiv-Σ-extension-species-subuniverse P Q S X)) ∘e
         ( ( left-unit-law-cauchy-composition-species-types
             ( Σ-extension-species-subuniverse P Q S)
             ( inclusion-subuniverse P X)) ∘e
@@ -267,7 +267,7 @@ module _
           ( small-cauchy-composition-unit-species-subuniverse) X) ≃
       inclusion-subuniverse Q (S X)
     htpy-right-unit-law-small-cauchy-composition-species-subuniverse S X =
-      ( ( inv-equiv (equiv-Σ-extension-species-subuniverse P Q S X) ) ∘e
+      ( ( inv-equiv (equiv-Σ-extension-species-subuniverse P Q S X)) ∘e
         ( ( right-unit-law-cauchy-composition-species-types
             ( Σ-extension-species-subuniverse P Q S)
             ( inclusion-subuniverse P X)) ∘e
@@ -309,7 +309,7 @@ module _
 ### Associativity of composition of species of types in subuniverse
 
 ```agda
-  htpy-assoc-small-cauchy-composition-species-subuniverse :
+  htpy-associative-small-cauchy-composition-species-subuniverse :
     (S : species-subuniverse P Q)
     (T : species-subuniverse P Q)
     (U : species-subuniverse P Q)
@@ -318,7 +318,7 @@ module _
       ( Q)
       ( small-cauchy-composition-species-subuniverse
         ( S)
-        ( small-cauchy-composition-species-subuniverse T  U)
+        ( small-cauchy-composition-species-subuniverse T U)
         ( X)) ≃
     inclusion-subuniverse
       ( Q)
@@ -326,7 +326,7 @@ module _
         ( small-cauchy-composition-species-subuniverse S T)
         ( U)
         ( X))
-  htpy-assoc-small-cauchy-composition-species-subuniverse S T U X =
+  htpy-associative-small-cauchy-composition-species-subuniverse S T U X =
     ( ( inv-equiv
         ( equiv-Σ-extension-species-subuniverse P Q
           ( small-cauchy-composition-species-subuniverse
@@ -345,8 +345,8 @@ module _
                    ( S)
                    ( T)
                    ( indexing-type-Relaxed-Σ-Decomposition D)))
-               ( id-equiv) ) ∘e
-          ( ( equiv-assoc-cauchy-composition-species-types
+               ( id-equiv)) ∘e
+          ( ( equiv-associative-cauchy-composition-species-types
               ( Σ-extension-species-subuniverse P Q S)
               ( Σ-extension-species-subuniverse P Q T)
               ( Σ-extension-species-subuniverse P Q U)
@@ -370,24 +370,24 @@ module _
               ( ( equiv-small-cauchy-composition-Σ-extension-species-subuniverse
                   ( S)
                   ( small-cauchy-composition-species-subuniverse T U)
-                  ( inclusion-subuniverse P X) ) ∘e
+                  ( inclusion-subuniverse P X)) ∘e
                 ( ( equiv-Σ-extension-species-subuniverse P Q
                     ( small-cauchy-composition-species-subuniverse
                       ( S)
                       ( small-cauchy-composition-species-subuniverse T U))
                     ( X)))))))))
 
-  assoc-small-cauchy-composition-species-subuniverse :
+  associative-small-cauchy-composition-species-subuniverse :
     (S : species-subuniverse P Q)
     (T : species-subuniverse P Q)
     (U : species-subuniverse P Q)→
     small-cauchy-composition-species-subuniverse
       ( S)
-      ( small-cauchy-composition-species-subuniverse T  U) ＝
+      ( small-cauchy-composition-species-subuniverse T U) ＝
     small-cauchy-composition-species-subuniverse
       ( small-cauchy-composition-species-subuniverse S T)
       ( U)
-  assoc-small-cauchy-composition-species-subuniverse S T U =
+  associative-small-cauchy-composition-species-subuniverse S T U =
     eq-equiv-fam-subuniverse
       ( Q)
       ( small-cauchy-composition-species-subuniverse
@@ -396,5 +396,5 @@ module _
       ( small-cauchy-composition-species-subuniverse
         ( small-cauchy-composition-species-subuniverse S T)
         ( U))
-      ( htpy-assoc-small-cauchy-composition-species-subuniverse S T U)
+      ( htpy-associative-small-cauchy-composition-species-subuniverse S T U)
 ```

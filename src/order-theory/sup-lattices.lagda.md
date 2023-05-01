@@ -41,7 +41,7 @@ module _
       (UU l3)
       (λ I →
         Π-Prop
-          ( I → element-Poset P )
+          ( I → element-Poset P)
           ( λ f → has-least-upper-bound-family-poset-Prop P f))
 
   is-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
@@ -116,5 +116,6 @@ module _
     (I : UU l3) → (f : I → element-Sup-Lattice) →
     is-least-upper-bound-family-Poset poset-Sup-Lattice f
       (sup-Sup-Lattice I f)
-  is-least-upper-bound-family-sup-Sup-Lattice I f = pr2 (is-sup-lattice-Sup-Lattice I f)
+  is-least-upper-bound-family-sup-Sup-Lattice I f =
+    pr2 (is-sup-lattice-Sup-Lattice I f)
 ```

@@ -94,7 +94,10 @@ module _
          ( issec-map-inv-equiv
            ( equiv-ap e x (map-inv-equiv e y))
            ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
-    ( ( assoc p (inv (issec-map-inv-equiv e y)) (issec-map-inv-equiv e y)) ∙
+    ( ( assoc
+        ( p)
+        ( inv (issec-map-inv-equiv e y))
+        ( issec-map-inv-equiv e y)) ∙
       ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
 
   map-eq-transpose-equiv' :
@@ -334,11 +337,11 @@ module _
     P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
   ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
 
-  comp-htpy-equiv :
+  compute-ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
     ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
 ### The groupoid laws for equivalences
@@ -387,14 +390,16 @@ module _
 
 coh-unit-laws-equiv :
   {l : Level} {X : UU l} →
-  left-unit-law-equiv (id-equiv {A = X}) ＝ right-unit-law-equiv (id-equiv {A = X})
+  left-unit-law-equiv (id-equiv {A = X}) ＝
+  right-unit-law-equiv (id-equiv {A = X})
 coh-unit-laws-equiv {l} {X} = ap eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
   where
 
-  distributive-inv-comp-equiv : (e : X ≃ Y) (f : Y ≃ Z) →
+  distributive-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
     (inv-equiv (f ∘e e)) ＝ ((inv-equiv e) ∘e (inv-equiv f))
   distributive-inv-comp-equiv e f =
     eq-htpy-equiv
@@ -406,17 +411,17 @@ module _
               ( λ g → map-equiv (f ∘e (g ∘e (inv-equiv f))) x)
               ( inv (right-inverse-law-equiv e)))))
 
-compose-inv-equiv-compose-equiv :
+comp-inv-equiv-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e
-compose-inv-equiv-compose-equiv f e =
+comp-inv-equiv-comp-equiv f e =
   eq-htpy-equiv (λ x → isretr-map-inv-equiv f (map-equiv e x))
 
-compose-equiv-compose-inv-equiv :
+comp-equiv-comp-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ C) →
   (f ∘e (inv-equiv f ∘e e)) ＝ e
-compose-equiv-compose-inv-equiv f e =
+comp-equiv-comp-inv-equiv f e =
   eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
 
 is-equiv-comp-equiv :
@@ -425,8 +430,8 @@ is-equiv-comp-equiv :
 is-equiv-comp-equiv f A =
   is-equiv-has-inverse
     ( λ e → inv-equiv f ∘e e)
-    ( compose-equiv-compose-inv-equiv f)
-    ( compose-inv-equiv-compose-equiv f)
+    ( comp-equiv-comp-inv-equiv f)
+    ( comp-inv-equiv-comp-equiv f)
 
 equiv-postcomp-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3} →

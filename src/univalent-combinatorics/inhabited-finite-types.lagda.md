@@ -58,7 +58,7 @@ module _
 compute-Inhabited-𝔽 :
   {l : Level} →
   Inhabited-𝔽 l ≃
-    Σ (Inhabited-Type l ) (λ X → is-finite (type-Inhabited-Type X))
+    Σ (Inhabited-Type l) (λ X → is-finite (type-Inhabited-Type X))
 compute-Inhabited-𝔽 = equiv-right-swap-Σ
 
 is-finite-and-inhabited-Prop : {l : Level} → UU l → Prop l
@@ -72,17 +72,17 @@ is-finite-and-inhabited X =
 compute-Inhabited-𝔽' :
   {l : Level} →
   Inhabited-𝔽 l ≃ type-subuniverse is-finite-and-inhabited-Prop
-compute-Inhabited-𝔽' = assoc-Σ _ _ _
+compute-Inhabited-𝔽' = associative-Σ _ _ _
 
 map-compute-Inhabited-𝔽' :
   {l : Level} →
   Inhabited-𝔽 l → type-subuniverse is-finite-and-inhabited-Prop
-map-compute-Inhabited-𝔽' = map-assoc-Σ _ _ _
+map-compute-Inhabited-𝔽' = map-associative-Σ _ _ _
 
 map-inv-compute-Inhabited-𝔽' :
   {l : Level} →
   type-subuniverse is-finite-and-inhabited-Prop → Inhabited-𝔽 l
-map-inv-compute-Inhabited-𝔽' = map-inv-assoc-Σ _ _ _
+map-inv-compute-Inhabited-𝔽' = map-inv-associative-Σ _ _ _
 ```
 
 ### Families of inhabited types
@@ -134,7 +134,7 @@ eq-equiv-Inhabited-𝔽 :
   type-Inhabited-𝔽 X ≃ type-Inhabited-𝔽 Y → X ＝ Y
 eq-equiv-Inhabited-𝔽 X Y e =
   eq-type-subtype
-    ( λ X  → is-inhabited-Prop (type-𝔽 X))
+    ( λ X → is-inhabited-Prop (type-𝔽 X))
     ( eq-equiv-𝔽
       ( finite-type-Inhabited-𝔽 X)
       ( finite-type-Inhabited-𝔽 Y)

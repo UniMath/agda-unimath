@@ -52,7 +52,10 @@ module _
     coherence-triangle-maps' right left (map-inv-equiv e)
   equiv-coherence-triangle-maps-inv-top =
     equiv-Π
-      (λ b → left (map-inv-equiv e b) ＝ right b)
+      ( λ b → left (map-inv-equiv e b) ＝ right b)
       ( e)
-      ( λ a → equiv-concat (ap left (isretr-map-inv-equiv e a)) (right (map-equiv e a)))
+      ( λ a →
+        equiv-concat
+          ( ap left (isretr-map-inv-equiv e a))
+          ( right (map-equiv e a)))
 ```

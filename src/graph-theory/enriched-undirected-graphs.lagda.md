@@ -117,13 +117,15 @@ module _
 
   map-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
-    B (shape-vertex-Enriched-Undirected-Graph v) → neighbor-Enriched-Undirected-Graph v
+    B (shape-vertex-Enriched-Undirected-Graph v) →
+    neighbor-Enriched-Undirected-Graph v
   map-equiv-neighbor-Enriched-Undirected-Graph v =
     map-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
   map-inv-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
-    neighbor-Enriched-Undirected-Graph v → B (shape-vertex-Enriched-Undirected-Graph v)
+    neighbor-Enriched-Undirected-Graph v →
+    B (shape-vertex-Enriched-Undirected-Graph v)
   map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
     map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 

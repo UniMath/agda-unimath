@@ -19,7 +19,9 @@ open import foundation-core.universe-levels
 
 </details>
 
-### Propositions are (k+1)-truncated for any k
+## Properties
+
+### Propositions are `k+1`-truncated for any `k`
 
 ```agda
 abstract

@@ -46,9 +46,9 @@ original one.
 ```agda
 module _
   { l1 : Level} ( Sg : signature l1)
-  { l2 : Level } ( Th : Theory Sg l2)
-  { l3 : Level } ( Alg : Algebra Sg Th l3)
-  { l4 : Level } ( R : congruence-Algebra Sg Th Alg l4)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 : Level} ( Alg : Algebra Sg Th l3)
+  { l4 : Level} ( R : congruence-Algebra Sg Th Alg l4)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
@@ -129,7 +129,7 @@ module _
               ( type-Algebra Sg Th Alg)
               ( v)))
         ( λ {v} {v'} p →
-          respects-operations-congruence-Algebra Sg Th Alg R op
+          preserves-operations-congruence-Algebra Sg Th Alg R op
             ( vector-multivariable-input
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)

@@ -38,7 +38,8 @@ module _
     (f : type-hom-Precat C x z) →
     (g : type-hom-Precat C y z) →
     (∃! ( type-hom-Precat C p z)
-        ( λ h → (comp-hom-Precat C h l ＝ f) × (comp-hom-Precat C h r ＝ g)))
+        ( λ h →
+          (comp-hom-Precat C h l ＝ f) × (comp-hom-Precat C h r ＝ g)))
 
   coproduct-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   coproduct-Precat x y =

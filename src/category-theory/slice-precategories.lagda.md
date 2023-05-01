@@ -50,7 +50,8 @@ module _
   hom-Slice-Precat (A , f) (B , g) =
     Σ-Set
       ( hom-Precat C A B)
-      ( λ h → set-Prop (Id-Prop (hom-Precat C A X) f (comp-hom-Precat C g h)))
+      ( λ h →
+        set-Prop (Id-Prop (hom-Precat C A X) f (comp-hom-Precat C g h)))
 
   type-hom-Slice-Precat : obj-Slice-Precat → obj-Slice-Precat → UU l2
   type-hom-Slice-Precat A B = type-Set (hom-Slice-Precat A B)
@@ -74,7 +75,10 @@ module _
   extensionality-hom-Slice-Precat {A} {B} =
     extensionality-type-subtype'
       ( λ h →
-        Id-Prop (hom-Precat C (pr1 A) X) (pr2 A) (comp-hom-Precat C (pr2 B) h))
+        Id-Prop
+          ( hom-Precat C (pr1 A) X)
+          ( pr2 A)
+          ( comp-hom-Precat C (pr2 B) h))
 
   eq-hom-Slice-Precat :
     {A B : obj-Slice-Precat} (f g : type-hom-Slice-Precat A B) →
@@ -89,7 +93,8 @@ module _
   id-hom-Slice-Precat :
     (A : obj-Slice-Precat) → type-hom-Slice-Precat A A
   pr1 (id-hom-Slice-Precat A) = id-hom-Precat C
-  pr2 (id-hom-Slice-Precat A) = inv (right-unit-law-comp-hom-Precat C (pr2 A))
+  pr2 (id-hom-Slice-Precat A) =
+    inv (right-unit-law-comp-hom-Precat C (pr2 A))
 ```
 
 ### Composition of morphisms in the slice category
@@ -103,23 +108,23 @@ module _
   pr2 (comp-hom-Slice-Precat g f) =
     ( pr2 f) ∙
     ( ( ap (λ u → comp-hom-Precat C u (pr1 f)) (pr2 g)) ∙
-      ( assoc-comp-hom-Precat C _ (pr1 g) (pr1 f)))
+      ( associative-comp-hom-Precat C _ (pr1 g) (pr1 f)))
 ```
 
 ### Associativity of composition of morphisms in the slice category
 
 ```agda
-  assoc-comp-hom-Slice-Precat :
+  associative-comp-hom-Slice-Precat :
     {A1 A2 A3 A4 : obj-Slice-Precat} →
     (h : type-hom-Slice-Precat A3 A4) (g : type-hom-Slice-Precat A2 A3)
     (f : type-hom-Slice-Precat A1 A2) →
     ( comp-hom-Slice-Precat (comp-hom-Slice-Precat h g) f) ＝
     ( comp-hom-Slice-Precat h (comp-hom-Slice-Precat g f))
-  assoc-comp-hom-Slice-Precat h g f =
+  associative-comp-hom-Slice-Precat h g f =
     eq-hom-Slice-Precat
       ( comp-hom-Slice-Precat (comp-hom-Slice-Precat h g) f)
       ( comp-hom-Slice-Precat h (comp-hom-Slice-Precat g f))
-      ( assoc-comp-hom-Precat C (pr1 h) (pr1 g) (pr1 f))
+      ( associative-comp-hom-Precat C (pr1 h) (pr1 g) (pr1 f))
 ```
 
 ### The left unit law for composition of morphisms in the slice category
@@ -155,9 +160,10 @@ module _
   pr1 Slice-Precat = obj-Slice-Precat
   pr1 (pr2 Slice-Precat) = hom-Slice-Precat
   pr1 (pr1 (pr2 (pr2 Slice-Precat))) = comp-hom-Slice-Precat
-  pr2 (pr1 (pr2 (pr2 Slice-Precat))) = assoc-comp-hom-Slice-Precat
+  pr2 (pr1 (pr2 (pr2 Slice-Precat))) = associative-comp-hom-Slice-Precat
   pr1 (pr2 (pr2 (pr2 Slice-Precat))) = id-hom-Slice-Precat
-  pr1 (pr2 (pr2 (pr2 (pr2 Slice-Precat)))) = left-unit-law-comp-hom-Slice-Precat
+  pr1 (pr2 (pr2 (pr2 (pr2 Slice-Precat)))) =
+    left-unit-law-comp-hom-Slice-Precat
   pr2 (pr2 (pr2 (pr2 (pr2 Slice-Precat)))) =
     right-unit-law-comp-hom-Slice-Precat
 ```
@@ -180,7 +186,8 @@ module _
   pr2 terminal-object-Precat-Slice-Precat (A , f) =
     is-contr-equiv
       ( Σ (type-hom-Precat C A X) (λ g → f ＝ g))
-      ( equiv-tot (λ g → equiv-concat' f (left-unit-law-comp-hom-Precat C g)))
+      ( equiv-tot
+        ( λ g → equiv-concat' f (left-unit-law-comp-hom-Precat C g)))
       ( is-contr-total-path f)
 ```
 
@@ -208,29 +215,37 @@ module _
       ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂) =
       is-contr-Σ-is-prop c d q σ
       where
-        c : type-hom-Precat
-          (Slice-Precat C A) (Z , comp-hom-Precat C f h₁) (W , p)
+        c :
+          type-hom-Precat
+            ( Slice-Precat C A)
+            ( Z , comp-hom-Precat C f h₁)
+            ( W , p)
         pr1 c = pr1 (pr1 (ϕ Z h₁ h₂ β₂))
         pr2 c =
           ap (comp-hom-Precat C f) (inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))) ∙
-          (inv (assoc-comp-hom-Precat C f p₁ _) ∙
+          (inv (associative-comp-hom-Precat C f p₁ _) ∙
           ap (λ k → comp-hom-Precat C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂)))) (inv α₁))
 
-        d : (comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) c ＝ (h₁ , refl)) ×
-            (comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) c ＝ (h₂ , β₂))
+        d :
+          ( comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) c ＝ (h₁ , refl)) ×
+          ( comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) c ＝ (h₂ , β₂))
         pr1 d = eq-hom-Slice-Precat C A _ _ (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
         pr2 d = eq-hom-Slice-Precat C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
 
-        q : ∀ k →
+        q :
+          ∀ k →
           is-prop
-            ( (comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
-            ( (comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂))))
+            ( ( comp-hom-Precat
+                (Slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
+              ( comp-hom-Precat
+                (Slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂)))
         q k =
           is-prop-prod
             ( is-set-type-Set (hom-Slice-Precat C A _ _) _ _)
             ( is-set-type-Set (hom-Slice-Precat C A _ _) _ _)
 
-        σ : ∀ k →
+        σ :
+          ∀ k →
           ( comp-hom-Precat (Slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
           ( comp-hom-Precat (Slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂)) →
           c ＝ k
@@ -249,23 +264,36 @@ module _
         k =
           pr1
             ( pr1
-              ( pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))))
+              ( pr1
+                ( ψ
+                  ( W' , comp-hom-Precat C f p₁')
+                  ( p₁' , refl)
+                  ( p₂' , α'))))
 
-        γ : (comp-hom-Precat C p₁ k ＝ p₁') × (comp-hom-Precat C p₂ k ＝ p₂')
+        γ :
+          (comp-hom-Precat C p₁ k ＝ p₁') ×
+          (comp-hom-Precat C p₂ k ＝ p₂')
         pr1 γ =
           ap pr1
             ( pr1
               ( pr2
                 ( pr1
-                  ( ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
+                  ( ψ
+                    ( W' , comp-hom-Precat C f p₁')
+                    ( p₁' , refl)
+                    ( p₂' , α')))))
         pr2 γ =
           ap pr1
             ( pr2
               ( pr2
                 ( pr1
-                  ( ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
+                  ( ψ
+                    ( W' , comp-hom-Precat C f p₁')
+                    ( p₁' , refl)
+                    ( p₂' , α')))))
 
-        q : ∀ k' →
+        q :
+          ∀ k' →
           is-prop
             (( comp-hom-Precat C p₁ k' ＝ p₁') ×
             ( comp-hom-Precat C p₂ k' ＝ p₂'))
@@ -274,17 +302,18 @@ module _
             ( is-set-type-Set (hom-Precat C _ _) _ _)
             ( is-set-type-Set (hom-Precat C _ _) _ _)
 
-        σ : (k' : type-hom-Precat C W' W) →
-            (γ' :
-              (comp-hom-Precat C p₁ k' ＝ p₁') ×
-              (comp-hom-Precat C p₂ k' ＝ p₂')) →
+        σ :
+          ( k' : type-hom-Precat C W' W) →
+          ( γ' :
+            ( comp-hom-Precat C p₁ k' ＝ p₁') ×
+            ( comp-hom-Precat C p₂ k' ＝ p₂')) →
             k ＝ k'
         σ k' (γ₁ , γ₂) =
           ap (pr1 ∘ pr1)
              (pr2 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))
                   (( k' ,
                    ( ap (comp-hom-Precat C f) (inv γ₁) ∙
-                       (inv (assoc-comp-hom-Precat C f p₁ k') ∙
+                       (inv (associative-comp-hom-Precat C f p₁ k') ∙
                        ap (λ l → comp-hom-Precat C l k') (inv α₁)))) ,
                    ( eq-hom-Slice-Precat C A _ _ γ₁) ,
                    ( eq-hom-Slice-Precat C A _ _ γ₂)))

@@ -32,11 +32,13 @@ function-class l1 l2 l3 = {A : UU l1} {B : UU l2} → (A → B) → Prop l3
 ```agda
 has-identity-maps-function-class :
   {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-has-identity-maps-function-class {l1} {l2} c = (A : UU l1) → type-Prop (c (id {A = A}))
+has-identity-maps-function-class {l1} {l2} c =
+  (A : UU l1) → type-Prop (c (id {A = A}))
 
 identity-maps-function-class :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-identity-maps-function-class l1 l2 = Σ (function-class l1 l1 l2) (has-identity-maps-function-class)
+identity-maps-function-class l1 l2 =
+  Σ (function-class l1 l1 l2) (has-identity-maps-function-class)
 
 has-equivalences-function-class :
   {l1 l2 l3 : Level} → function-class l1 l2 l3 → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)

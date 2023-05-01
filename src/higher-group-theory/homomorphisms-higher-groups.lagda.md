@@ -140,13 +140,13 @@ module _
   (G : ∞-Group l1) (H : ∞-Group l2) (K : ∞-Group l3) (L : ∞-Group l4)
   where
 
-  assoc-comp-hom-∞-Group :
+  associative-comp-hom-∞-Group :
     (h : hom-∞-Group K L) (g : hom-∞-Group H K) (f : hom-∞-Group G H) →
     htpy-hom-∞-Group G L
       ( comp-hom-∞-Group G H L (comp-hom-∞-Group H K L h g) f)
       ( comp-hom-∞-Group G K L h (comp-hom-∞-Group G H K g f))
-  assoc-comp-hom-∞-Group =
-    assoc-comp-pointed-map
+  associative-comp-hom-∞-Group =
+    associative-comp-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
       ( classifying-pointed-type-∞-Group K)

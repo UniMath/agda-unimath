@@ -31,5 +31,6 @@ of its vertices.
 
 ```agda
 complete-Undirected-Graph-𝔽 : {l : Level} → 𝔽 l → Undirected-Graph-𝔽 l l
-complete-Undirected-Graph-𝔽 X = complete-multipartite-Undirected-Graph-𝔽 X (λ x → unit-𝔽)
+complete-Undirected-Graph-𝔽 X =
+  complete-multipartite-Undirected-Graph-𝔽 X (λ x → unit-𝔽)
 ```

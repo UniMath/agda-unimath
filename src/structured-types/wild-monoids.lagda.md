@@ -117,7 +117,7 @@ module _
     left-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   right-unit-law-mul-Wild-Monoid :
-    (x : type-Wild-Monoid ) → Id (mul-Wild-Monoid x unit-Wild-Monoid) x
+    (x : type-Wild-Monoid) → Id (mul-Wild-Monoid x unit-Wild-Monoid) x
   right-unit-law-mul-Wild-Monoid =
     right-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
@@ -137,12 +137,12 @@ module _
        ( mul-Wild-Monoid x (mul-Wild-Monoid y z))
   associative-mul-Wild-Monoid = pr1 unital-associator-Wild-Monoid
 
-  unit-law-110-assoc-Wild-Monoid :
+  unit-law-110-associative-Wild-Monoid :
     (x y : type-Wild-Monoid) →
     Id ( ( associative-mul-Wild-Monoid x y unit-Wild-Monoid) ∙
          ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
        ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
-  unit-law-110-assoc-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
+  unit-law-110-associative-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
 ```
 
 In the definition of morphisms of wild monoids we only require the unit and
@@ -241,7 +241,8 @@ module _
 --                ( preserves-mul-map-hom-Wild-Monoid M N g x y))))
 --     ( λ Hμ →
 --       Id ( preserves-unit-map-hom-Wild-Monoid M N f)
---          ( pr1 Hμ (unit-Wild-Monoid M) ∙ preserves-unit-map-hom-Wild-Monoid M N g))
+--          ( pr1 Hμ (unit-Wild-Monoid M) ∙
+--          ( preserves-unit-map-hom-Wild-Monoid M N g)))
 
 -- refl-htpy-hom-Wild-Monoid :
 --   {l1 l2 : Level} (M : Wild-Monoid l1) (N : Wild-Monoid l2)

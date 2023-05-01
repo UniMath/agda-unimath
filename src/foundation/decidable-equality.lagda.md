@@ -91,7 +91,7 @@ has-decidable-equality-prod d e =
   has-decidable-equality-prod' (λ y → d) (λ x → e)
 ```
 
-### Decidability of equality of the factors of a cartesian product.
+### Decidability of equality of the factors of a cartesian product
 
 If `A × B` has decidable equality and `B` has an element, then `A` has decidable
 equality; and vice versa.
@@ -225,7 +225,7 @@ abstract
           is-prop-Π
           ( λ y →
             is-prop-coprod
-            ( intro-dn)
+            ( intro-double-negation)
             ( is-set-has-decidable-equality d x y)
             ( is-prop-neg))))
 

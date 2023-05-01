@@ -44,7 +44,7 @@ module _
     map-pointed-map A B pointed-map-faithful-pointed-map
 
   preserves-point-faithful-pointed-map :
-    map-faithful-pointed-map (pt-Pointed-Type A) ＝ pt-Pointed-Type B
+    map-faithful-pointed-map (point-Pointed-Type A) ＝ point-Pointed-Type B
   preserves-point-faithful-pointed-map =
     preserves-point-pointed-map A B pointed-map-faithful-pointed-map
 

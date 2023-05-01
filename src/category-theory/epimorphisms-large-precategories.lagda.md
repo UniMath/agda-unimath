@@ -78,7 +78,10 @@ module _
                 ( hom-inv-iso-Large-Precat C X Y f))) ∙
               ( ( ap
                 ( λ h' →
-                  comp-hom-Large-Precat C h' (hom-inv-iso-Large-Precat C X Y f))
+                  comp-hom-Large-Precat
+                    ( C)
+                    ( h')
+                    ( hom-inv-iso-Large-Precat C X Y f))
                 ( P)) ∙
                 ( ( associative-comp-hom-Large-Precat C
                   ( h)

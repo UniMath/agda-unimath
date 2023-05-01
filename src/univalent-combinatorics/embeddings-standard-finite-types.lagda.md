@@ -40,7 +40,7 @@ emb-Fin k l = Fin k ↪ Fin l
 
 ## Properties
 
-### Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding `Fin k ↪ Fin l`.
+### Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding `Fin k ↪ Fin l`
 
 ```agda
 cases-map-reduce-emb-Fin :

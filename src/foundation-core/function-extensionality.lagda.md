@@ -31,7 +31,7 @@ postulated in
 [`foundation.function-extensionality`](foundation.function-extensionality.md) as
 `funext`.
 
-## Definition
+## Statement
 
 ```agda
 module _
@@ -44,6 +44,8 @@ module _
   FUNEXT : (f : (x : A) → B x) → UU (l1 ⊔ l2)
   FUNEXT f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
 ```
+
+## Properties
 
 ### Naturality of `htpy-eq`
 

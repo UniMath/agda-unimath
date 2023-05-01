@@ -150,7 +150,7 @@ is-decidable-is-prime-ℕ n =
     ( is-decidable-is-prime-easy-ℕ n)
 ```
 
-### The number `2` is a prime.
+### The number `2` is a prime
 
 ```agda
 is-one-is-proper-divisor-two-ℕ : is-one-is-proper-divisor-ℕ 2

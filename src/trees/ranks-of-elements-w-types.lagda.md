@@ -152,11 +152,16 @@ module _
   strong-≼-≼-𝕎 : {x y : 𝕎 A B} → (x ≼-𝕎 y) → (x strong-≼-𝕎 y)
   strong-≼-≼-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} H .(α b) (pair b refl) =
     apply-universal-property-trunc-Prop (H b)
-      ( exists-Prop (𝕎 A B) ((λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → (α b) ≼-𝕎-Prop v))))
+      ( exists-Prop
+        ( 𝕎 A B)
+        ( (λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → (α b) ≼-𝕎-Prop v))))
       ( f)
       where
-      f : Σ (B y) (λ c → pr1 (α b ≼-𝕎-Prop β c)) →
-          exists (𝕎 A B) (λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
+      f :
+        Σ (B y) (λ c → pr1 (α b ≼-𝕎-Prop β c)) →
+        exists
+          ( 𝕎 A B)
+          ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
       f (pair c K) =
         intro-exists
           ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
@@ -173,8 +178,10 @@ module _
       ( exists-Prop (B y) (λ c → α b ≼-𝕎-Prop β c))
       ( f)
     where
-    f : Σ ( 𝕎 A B) (λ v → exists (v ∈-𝕎 tree-𝕎 y β) (λ K → α b ≼-𝕎-Prop v)) →
-        exists (B y) (λ c → α b ≼-𝕎-Prop β c)
+    f :
+      Σ ( 𝕎 A B)
+        ( λ v → exists (v ∈-𝕎 tree-𝕎 y β) (λ K → α b ≼-𝕎-Prop v)) →
+      exists (B y) (λ c → α b ≼-𝕎-Prop β c)
     f (pair v K) =
         apply-universal-property-trunc-Prop K
           ( exists-Prop (B y) (λ c → α b ≼-𝕎-Prop β c))
@@ -315,7 +322,8 @@ module _
   irreflexive-≺-𝕎 {tree-𝕎 x α} H =
     apply-universal-property-trunc-Prop H empty-Prop f
     where
-    f : ¬ ( Σ ( Σ (𝕎 A B) (λ w → w ∈-𝕎 tree-𝕎 x α))
-              ( λ t → tree-𝕎 x α ≼-𝕎 pr1 t))
+    f :
+      ¬ ( Σ ( Σ (𝕎 A B) (λ w → w ∈-𝕎 tree-𝕎 x α))
+            ( λ t → tree-𝕎 x α ≼-𝕎 pr1 t))
     f (pair (pair w K) L) = not-≼-∈-𝕎 {x = w} {tree-𝕎 x α} K L
 ```

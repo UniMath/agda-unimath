@@ -196,7 +196,7 @@ split-sum-Commutative-Ring R n (succ-ℕ m) f =
   ( ap
     ( add-Commutative-Ring' R (f(inr star)))
     ( split-sum-Commutative-Ring R n m (f ∘ inl))) ∙
-  ( associative-add-Commutative-Ring R _ _ _ )
+  ( associative-add-Commutative-Ring R _ _ _)
 ```
 
 ### A sum of zeroes is zero

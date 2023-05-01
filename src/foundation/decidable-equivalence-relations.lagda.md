@@ -150,7 +150,7 @@ pr2 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel =
     ( λ (R , d) →
       ( map-inv-equiv
           ( equiv-relation-is-decidable-Decidable-Relation)
-          ( prop-Eq-Rel R , d)  , is-equivalence-relation-prop-Eq-Rel R))
+          ( prop-Eq-Rel R , d) , is-equivalence-relation-prop-Eq-Rel R))
     ( refl-htpy)
     ( refl-htpy)
 ```
@@ -472,7 +472,7 @@ module _
           ( F t a))
 ```
 
-#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality.
+#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality
 
 ```agda
 has-decidable-equality-type-Surjection-Into-Set :
@@ -513,12 +513,12 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
                 ( is-prop-is-set ( X))
                 ( is-set-has-decidable-equality)) ∘e
             commutative-prod) ∘e
-        ( equiv-left-swap-Σ )))) ∘e
-    ( ( assoc-Σ
+        ( equiv-left-swap-Σ)))) ∘e
+    ( ( associative-Σ
         ( UU l1)
         ( λ X → is-set X)
         ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
-      ( ( assoc-Σ
+      ( ( associative-Σ
           ( Set l1)
           ( λ X → (A ↠ type-Set X))
           ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e
@@ -540,5 +540,5 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
               ( equiv-Σ-equiv-base
                 ( λ R → is-decidable-Eq-Rel R)
                 ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
-                  equiv-equivalence-relation-is-decidable-Dec-Eq-Rel )))))
+                  equiv-equivalence-relation-is-decidable-Dec-Eq-Rel)))))
 ```

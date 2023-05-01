@@ -14,7 +14,6 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 
@@ -138,7 +137,7 @@ module _
         ( ( (u : left-summand-binary-coproduct-Decomposition d) →
             ( A
               ( map-inv-equiv
-                ( matching-correspondence-binary-coproduct-Decomposition d )
+                ( matching-correspondence-binary-coproduct-Decomposition d)
                 ( inl u)))) ×
           ( ( v : right-summand-binary-coproduct-Decomposition d) →
             ( B
@@ -169,7 +168,9 @@ module _
               ( λ z →
                   A
                   ( map-inv-equiv
-                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X f)
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      ( X)
+                      ( f))
                     ( inl z)))
               ( id-equiv)
               ( λ a →
@@ -185,7 +186,8 @@ module _
               ( λ z →
                   B
                   ( map-inv-equiv
-                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X f)
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      X f)
                     ( inr z)))
               ( id-equiv)
               ( λ a →
