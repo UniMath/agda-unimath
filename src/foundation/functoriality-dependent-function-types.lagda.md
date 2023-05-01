@@ -246,7 +246,7 @@ abstract
     ( htpy-map-equiv-Π {B' = B'} B e e (refl-htpy-equiv e)) ＝
     ( ( htpy-map-equiv-Π-refl-htpy B e))
   compute-htpy-map-equiv-Π {B' = B'} B e =
-    compute-htpy-equiv e
+    compute-ind-htpy-equiv e
       ( HTPY-map-equiv-Π B' B e)
       ( htpy-map-equiv-Π-refl-htpy B e)
 

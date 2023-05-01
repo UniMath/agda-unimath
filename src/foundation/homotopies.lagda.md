@@ -113,10 +113,10 @@ module _
       C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
     ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
 
-    compute-htpy :
+    compute-ind-htpy :
       (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
-    compute-htpy f C = pr2 (Ind-htpy f C)
+    compute-ind-htpy f C = pr2 (Ind-htpy f C)
 ```
 
 ### Inverting homotopies is an equivalence

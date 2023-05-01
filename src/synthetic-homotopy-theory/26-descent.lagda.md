@@ -548,7 +548,7 @@ abstract
     Id ( tr-eq-htpy-fam-lifts P h (refl-htpy' f))
         ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
   compute-tr-eq-htpy-fam-lifts P h f =
-    compute-htpy f
+    compute-ind-htpy f
       ( λ g H → TR-EQ-HTPY-FAM-LIFTS P h H)
       ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
 ```
@@ -598,7 +598,7 @@ compute-triangle-precompose-lifts :
     ( triangle-precompose-lifts P (refl-htpy' f))
     ( triangle-precompose-lifts-refl-htpy P f)
 compute-triangle-precompose-lifts P f =
-  compute-htpy f
+  compute-ind-htpy f
     ( λ g → TRIANGLE-PRECOMPOSE-LIFTS P)
     ( triangle-precompose-lifts-refl-htpy P f)
 ```
@@ -669,7 +669,7 @@ abstract
       Id ( coherence-triangle-precompose-lifts P (refl-htpy' f))
           ( coherence-triangle-precompose-lifts-refl-htpy P f)
   compute-coherence-triangle-precompose-lifts P f =
-    compute-htpy f
+    compute-ind-htpy f
       ( λ g H → COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS P H)
       ( coherence-triangle-precompose-lifts-refl-htpy P f)
 

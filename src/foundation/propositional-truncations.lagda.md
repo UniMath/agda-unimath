@@ -102,10 +102,10 @@ abstract
     ind-trunc-Prop' (type-Prop ∘ P) f
       ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
 
-  compute-trunc-Prop :
+  compute-ind-trunc-Prop :
     {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
     ((precomp-Π unit-trunc-Prop (type-Prop ∘ P)) ∘ ind-trunc-Prop P) ~ id
-  compute-trunc-Prop P h =
+  compute-ind-trunc-Prop P h =
     eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
 ```
 
