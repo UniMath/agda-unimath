@@ -78,7 +78,8 @@ Ind-pushout l {X = X} f g c =
 ```agda
 dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) → UU _
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 dependent-universal-property-pushout l f g {X} c =
   (P : X → UU l) → is-equiv (dep-cocone-map f g c P)
 ```
@@ -674,7 +675,7 @@ abstract
 
 total-lifts :
   {l1 l2 l3 : Level} (A : UU l1) {X : UU l2} (P : X → UU l3) →
-  UU _
+  UU (l1 ⊔ l2 ⊔ l3)
 total-lifts A {X} P = universally-structured-Π {A = A} {B = λ a → X} (λ a → P)
 
 precompose-total-lifts :
@@ -755,7 +756,7 @@ compute-htpy-precompose-total-lifts {A = A} P f (pair h h') =
 
 COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
-  {f g : A → B} (H : f ~ g) → UU _
+  {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P {f} {g} H =
   ( ( coherence-square-map-inv-distributive-Π-Σ P f) ∙h
     ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P H))) ~

@@ -61,7 +61,7 @@ coherence-cube-maps :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  UU _
+  UU (l4 ⊔ l1')
 coherence-cube-maps
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =

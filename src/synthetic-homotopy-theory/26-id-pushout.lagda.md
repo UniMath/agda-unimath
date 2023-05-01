@@ -145,7 +145,7 @@ morphism of descent data.
 ```agda
 Naturality-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU _
+  ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU (l2 ⊔ l3)
 Naturality-fam-maps {B = B} {C} f {x} {x'} p =
   (y : B x) → Id (f x' (tr B p y)) (tr C p (f x y))
 

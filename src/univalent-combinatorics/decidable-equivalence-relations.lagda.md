@@ -177,16 +177,16 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →
   Decidable-Equivalence-Relation-𝔽 l1 A ≃
   Surjection-𝔽 l1 A
-equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 A =
+equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 {l1} A =
   ( equiv-Σ-equiv-base
       ( λ X → (type-𝔽 A) ↠ (type-𝔽 X))
       ( equiv-Σ
-          ( λ X → is-finite X)
+          ( is-finite)
           ( id-equiv)
           ( λ X →
             inv-equiv is-finite-iff-∃-surjection-has-decidable-equality)) ∘e
     ( ( inv-associative-Σ
-          ( UU _)
+          ( UU l1)
           ( λ X →
               has-decidable-equality X ×
               type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
