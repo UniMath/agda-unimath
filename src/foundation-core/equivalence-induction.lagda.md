@@ -49,7 +49,7 @@ module _
   triangle-ev-id P f = refl
 ```
 
-### Theorem 17.1.1 (ii) implies (iii)
+### Contractibility of the total space of equivalences implies equivalence induction
 
 ```agda
   abstract
@@ -70,7 +70,7 @@ module _
           ( P))
 ```
 
-### Theorem 17.1.1 (iii) implies (ii)
+### Equivalence induction implies contractibility of the total space of equivalences
 
 ```agda
   abstract
