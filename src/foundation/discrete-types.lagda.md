@@ -61,7 +61,8 @@ module _
   is-tight-apart-Discrete-Type :
     is-tight rel-apart-Discrete-Type
   is-tight-apart-Discrete-Type x y =
-    dn-elim-is-decidable (has-decidable-equality-type-Discrete-Type X x y)
+    double-negation-elim-is-decidable
+      ( has-decidable-equality-type-Discrete-Type X x y)
 
   apartness-relation-Discrete-Type :
     Apartness-Relation l (type-Discrete-Type X)

@@ -490,8 +490,8 @@ abstract
           ( ¬ (pr1 X))
           ( apply-universal-property-trunc-Prop
             ( pr2 X)
-            ( dn-Prop' (pr1 X))
-            ( λ e → intro-dn {l} (map-equiv e (zero-Fin 1))))
+            ( double-negation-Prop' (pr1 X))
+            ( λ e → intro-double-negation {l} (map-equiv e (zero-Fin 1))))
           ( d X))
 ```
 

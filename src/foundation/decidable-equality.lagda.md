@@ -225,7 +225,7 @@ abstract
           is-prop-Π
           ( λ y →
             is-prop-coprod
-            ( intro-dn)
+            ( intro-double-negation)
             ( is-set-has-decidable-equality d x y)
             ( is-prop-neg))))
 
