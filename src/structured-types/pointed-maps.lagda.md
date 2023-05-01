@@ -51,12 +51,12 @@ module _
   where
 
   map-pointed-map : A →* B → type-Pointed-Type A → type-Pointed-Type B
-  map-pointed-map f = pr1 f
+  map-pointed-map = pr1
 
   preserves-point-pointed-map :
     (f : A →* B) →
     map-pointed-map f (point-Pointed-Type A) ＝ point-Pointed-Type B
-  preserves-point-pointed-map f = pr2 f
+  preserves-point-pointed-map = pr2
 ```
 
 ### Precomposing pointed maps
