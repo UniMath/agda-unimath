@@ -123,9 +123,9 @@ triangle-cocone-sequence A c = pr2 c
 
 ```agda
 naturality-htpy-cocone-sequence :
-  { l1 l2 : Level} (A : Sequence l1) {X : UU l2} (c c' : cocone-sequence A X) →
-  ( H : (n : ℕ) →
-    (map-cocone-sequence A c n) ~ (map-cocone-sequence A c' n)) →
+  { l1 l2 : Level} (A : Sequence l1)
+  {X : UU l2} (c c' : cocone-sequence A X) →
+  ( H : (n : ℕ) → (map-cocone-sequence A c n) ~ (map-cocone-sequence A c' n)) →
   ( n : ℕ) → UU (l1 ⊔ l2)
 naturality-htpy-cocone-sequence A c c' H n =
   ( (H n) ∙h (triangle-cocone-sequence A c' n)) ~

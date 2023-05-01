@@ -45,12 +45,11 @@ postulate
 cocone-pushout :
   {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) → cocone f g (pushout f g)
-cocone-pushout f g =
-  pair
-    ( inl-pushout f g)
-    ( pair
-      ( inr-pushout f g)
-      ( glue-pushout f g))
+pr1 (cocone-pushout f g) = inl-pushout f g
+pr1 (pr2 (cocone-pushout f g)) = inr-pushout f g
+pr2 (pr2 (cocone-pushout f g)) = glue-pushout f g
+
+
 
 postulate
   up-pushout :
@@ -60,9 +59,9 @@ postulate
 
 equiv-up-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) (Z : UU l4) → ((pushout f g) → Z) ≃ (cocone f g Z)
-equiv-up-pushout f g Z =
-  (cocone-map f g (cocone-pushout f g)) , (up-pushout f g Z)
+  (f : S → A) (g : S → B) (Z : UU l4) → (pushout f g → Z) ≃ (cocone f g Z)
+pr1 (equiv-up-pushout f g Z) = cocone-map f g (cocone-pushout f g)
+pr2 (equiv-up-pushout f g Z) = up-pushout f g Z
 ```
 
 ## Definitions
@@ -73,11 +72,8 @@ equiv-up-pushout f g Z =
 cogap :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   ( f : S → A) (g : S → B) →
-  { X : UU l4} (c : cocone f g X) → pushout f g → X
-cogap f g =
-  map-universal-property-pushout f g
-    ( cocone-pushout f g)
-    ( up-pushout f g)
+  { X : UU l4} → cocone f g X → pushout f g → X
+cogap f g {X} = map-inv-equiv (equiv-up-pushout f g X)
 ```
 
 ### The `is-pushout` predicate
