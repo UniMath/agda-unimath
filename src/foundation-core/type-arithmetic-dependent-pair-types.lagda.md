@@ -50,7 +50,7 @@ module _
     ( map-left-unit-law-Σ-is-contr ∘ map-inv-left-unit-law-Σ-is-contr) ~ id
   issec-map-inv-left-unit-law-Σ-is-contr b =
     ap ( λ (f : B a → B a) → f b)
-       ( compute-singleton-is-contr a C (λ x → B x → B a) id)
+       ( compute-ind-singleton-is-contr a C (λ x → B x → B a) id)
 
   isretr-map-inv-left-unit-law-Σ-is-contr :
     ( map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr) ~ id
@@ -66,7 +66,7 @@ module _
         ( λ y → ap
           ( map-inv-left-unit-law-Σ-is-contr)
           ( ap ( λ f → f y)
-               ( compute-singleton-is-contr a C (λ x → B x → B a) id))))
+               ( compute-ind-singleton-is-contr a C (λ x → B x → B a) id))))
 
   is-equiv-map-left-unit-law-Σ-is-contr :
     is-equiv map-left-unit-law-Σ-is-contr
