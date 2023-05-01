@@ -868,13 +868,13 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
           ( right-distributive-Σ-coprod
             ( im (f ∘ inl))
             ( im (f ∘ inr))
-            ( ind-coprod (λ x → UU _) (B ∘ pr1) (B ∘ pr1))))
+            ( ind-coprod (λ x → UU l2) (B ∘ pr1) (B ∘ pr1))))
     i : Fin k → type-trunc-Set (im (f ∘ inl))
     i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
     is-surjective-i : is-surjective i
     is-surjective-i =
       is-surjective-comp
-        ( is-surjective-unit-trunc-Set _)
+        ( is-surjective-unit-trunc-Set (im (f ∘ inl)))
         ( is-surjective-map-unit-im (f ∘ inl))
     is-emb-i : is-emb i
     is-emb-i =

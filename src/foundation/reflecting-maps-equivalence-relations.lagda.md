@@ -102,7 +102,7 @@ module _
   where
 
   htpy-reflecting-map-Eq-Rel :
-    (g : reflecting-map-Eq-Rel R (type-Set B)) → UU _
+    (g : reflecting-map-Eq-Rel R (type-Set B)) → UU (l1 ⊔ l3)
   htpy-reflecting-map-Eq-Rel g =
     pr1 f ~ pr1 g
 

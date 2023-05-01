@@ -36,7 +36,8 @@ module _
     ( (B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
   ev-id P f = f A id-equiv
 
-  IND-EQUIV : {l : Level} (P : (B : UU l1) (e : A ≃ B) → UU l) → UU _
+  IND-EQUIV :
+    {l : Level} (P : (B : UU l1) (e : A ≃ B) → UU l) → UU (lsuc l1 ⊔ l)
   IND-EQUIV P = sec (ev-id P)
 
   triangle-ev-id :

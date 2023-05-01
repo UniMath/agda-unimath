@@ -37,7 +37,7 @@ open import synthetic-homotopy-theory.cocones-under-spans
 universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} →
-  cocone f g X → UU _
+  cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 universal-property-pushout l f g c =
   (Y : UU l) → is-equiv (cocone-map f g {Y = Y} c)
 

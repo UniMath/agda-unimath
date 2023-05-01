@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A cocone on a span `A <-f- S -g-> B` with vertex `X` consists of two maps
+A cocone under a span `A <-f- S -g-> B` with vertex `X` consists of two maps
 `i : A → X` and `j : B → X` equipped with a homotopy witnessing that the square
 
 ```md
@@ -48,7 +48,7 @@ commutes.
 ```agda
 cocone :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) → UU l4 → UU _
+  (f : S → A) (g : S → B) → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 cocone {A = A} {B = B} f g X =
   Σ (A → X) (λ i → Σ (B → X) (λ j → coherence-square-maps g f j i))
 

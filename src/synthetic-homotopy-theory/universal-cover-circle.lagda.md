@@ -286,7 +286,7 @@ path-over-contraction-total-space' :
   (H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
   (h : (y : F) → Id c (pair x (map-equiv e y))) →
   (h' : (y' : F') → Id c (pair x' (map-equiv e' y'))) →
-  UU _
+  UU (l1 ⊔ l2 ⊔ l3)
 path-over-contraction-total-space' c {x} {x'} p {F} {F'} f e e' H h h' =
   ( map-Π
     ( λ y → concat' c (segment-Σ p f e e' H y)) h) ~
