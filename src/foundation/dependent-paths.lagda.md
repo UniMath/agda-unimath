@@ -123,7 +123,9 @@ module _
         ( ( ap
             ( λ x →
               tr-path-over B α q0 ∙
-              pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)) x)
+              pr1
+                ( pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+                ( x))
             ( right-unit)) ∙
           ( ( ap
               ( λ x → tr-path-over B α q0 ∙ x)
