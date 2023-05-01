@@ -133,10 +133,10 @@ module _
     (m : map-over f g i) → is-contr (Σ (map-over f g i) (htpy-map-over m))
   is-contr-total-htpy-map-over m =
     is-contr-total-Eq-structure
-      (λ g G → coherence-htpy-map-over m (g , G))
-      (is-contr-total-htpy (map-total-map-over f g i m))
-      (map-total-map-over f g i m , refl-htpy)
-      (is-contr-total-htpy
+      ( λ g G → coherence-htpy-map-over m (g , G))
+      ( is-contr-total-htpy (map-total-map-over f g i m))
+      ( map-total-map-over f g i m , refl-htpy)
+      ( is-contr-total-htpy
         ( is-map-over-map-total-map-over f g i m ∙h refl-htpy))
 
   is-equiv-htpy-eq-map-over :
@@ -203,7 +203,7 @@ module _
             ( refl-htpy))
         ( is-contr-total-htpy (map-total-fibered-map f g m))
         ( map-total-fibered-map f g m , refl-htpy)
-        (is-contr-total-htpy
+        ( is-contr-total-htpy
           ( is-map-over-map-total-fibered-map f g m ∙h refl-htpy)))
 
   is-equiv-htpy-eq-fibered-map :
