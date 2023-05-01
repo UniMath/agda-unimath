@@ -262,7 +262,7 @@ reduce-preserves-sim-ℤ x y H =
         ( reduce-fraction-ℤ x)
         ( sim-reduced-fraction-ℤ x))
       ( H))
-    (sim-reduced-fraction-ℤ y)
+    ( sim-reduced-fraction-ℤ y)
 ```
 
 ### Two similar fractions have equal reduced form

@@ -84,8 +84,7 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
     ( left-unit-law-add-ℕ (nat-Fin (succ-ℕ k) x))
 ```
 
-Any natural number of the form `constant-ℕ k x` is strictly less than any
-natural number of the form `unary-op-ℕ k y m`.
+### Any natural number of the form `constant-ℕ k x` is strictly less than any natural number of the form `unary-op-ℕ k y m`
 
 ```agda
 le-constant-unary-op-ℕ :
@@ -127,11 +126,6 @@ is-injective-convert-based-ℕ
   ( succ-ℕ k)
   { unary-op-based-ℕ .(succ-ℕ k) x n}
   { unary-op-based-ℕ .(succ-ℕ k) y m} p with
-```
-
-the following term has type `Id x y`.
-
-```agda
   is-injective-nat-Fin (succ-ℕ k) {x} {y}
     ( eq-cong-le-ℕ
       ( succ-ℕ k)
@@ -186,7 +180,7 @@ succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr x) n) =
   unary-op-based-ℕ (succ-ℕ k) (zero-Fin k) (succ-based-ℕ (succ-ℕ k) n)
 ```
 
-The inverse map of `convert-based-ℕ`.
+### The inverse map of `convert-based-ℕ`
 
 ```agda
 inv-convert-based-ℕ : (k : ℕ) → ℕ → based-ℕ (succ-ℕ k)
