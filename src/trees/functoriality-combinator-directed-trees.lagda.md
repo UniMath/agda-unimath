@@ -1,8 +1,6 @@
 # Functoriality of the combinator of directed trees
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module trees.functoriality-combinator-directed-trees where
 ```
 
@@ -300,12 +298,4 @@ module _
       ( combinator-Directed-Tree S)
       ( combinator-Directed-Tree T)
       ( hom-equiv-combinator-Directed-Tree)
-
-  map-inv-node-equiv-combinator-Directed-Tree :
-    node-combinator-Directed-Tree T → node-combinator-Directed-Tree S
-  map-inv-node-equiv-combinator-Directed-Tree = {!!}
-
-  is-equiv-node-equiv-combinator-Directed-Tree :
-    is-equiv node-equiv-combinator-Directed-Tree
-  is-equiv-node-equiv-combinator-Directed-Tree = {!!}
 ```

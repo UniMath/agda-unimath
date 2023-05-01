@@ -1,7 +1,7 @@
 # The coalgebra of enriched directed trees
 
 ```agda
-{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
+{-# OPTIONS --lossy-unification #-}
 
 module trees.coalgebra-of-enriched-directed-trees where
 ```
@@ -55,51 +55,4 @@ module _
   pr1 coalgebra-Enriched-Directed-Tree = Enriched-Directed-Tree l3 l3 A B
   pr2 coalgebra-Enriched-Directed-Tree =
     structure-coalgebra-Enriched-Directed-Tree
-```
-
-## Properties
-
-### The coalgebra of enriched directed trees is terminal
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
-  where
-
-  map-hom-coalgebra-Enriched-Directed-Tree :
-    type-coalgebra-polynomial-endofunctor X →
-    Enriched-Directed-Tree (l2 ⊔ l3) (l2 ⊔ l3) A B
-  map-hom-coalgebra-Enriched-Directed-Tree =
-    enriched-directed-tree-element-coalgebra X
-
-  structure-hom-coalgebra-Enriched-Directed-Tree :
-    coherence-square-maps
-      ( map-hom-coalgebra-Enriched-Directed-Tree)
-      ( structure-coalgebra-polynomial-endofunctor X)
-      ( structure-coalgebra-Enriched-Directed-Tree (l2 ⊔ l3) A B)
-      ( map-polynomial-endofunctor A B map-hom-coalgebra-Enriched-Directed-Tree)
-  structure-hom-coalgebra-Enriched-Directed-Tree x =
-    eq-Eq-type-polynomial-endofunctor
-      ( map-polynomial-endofunctor A B
-        ( map-hom-coalgebra-Enriched-Directed-Tree)
-        ( structure-coalgebra-polynomial-endofunctor X x))
-      ( structure-coalgebra-Enriched-Directed-Tree (l2 ⊔ l3) A B
-        ( map-hom-coalgebra-Enriched-Directed-Tree x))
-      ( refl ,
-        λ b →
-        eq-equiv-Enriched-Directed-Tree A B
-          ( enriched-directed-tree-element-coalgebra X
-            ( component-coalgebra-polynomial-endofunctor X x b))
-          ( fiber-base-Enriched-Directed-Tree A B
-            ( enriched-directed-tree-element-coalgebra X x)
-            ( b))
-          {!!})
-
-  hom-coalgebra-Enriched-Directed-Tree :
-    hom-coalgebra-polynomial-endofunctor X
-      ( coalgebra-Enriched-Directed-Tree (l2 ⊔ l3) A B)
-  pr1 hom-coalgebra-Enriched-Directed-Tree =
-    map-hom-coalgebra-Enriched-Directed-Tree
-  pr2 hom-coalgebra-Enriched-Directed-Tree = {!!}
 ```

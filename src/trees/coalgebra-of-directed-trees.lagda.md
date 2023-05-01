@@ -1,8 +1,6 @@
 # The coalgebra of directed trees
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module trees.coalgebra-of-directed-trees where
 ```
 
@@ -41,23 +39,4 @@ coalgebra-Directed-Tree :
 pr1 (coalgebra-Directed-Tree l) = Directed-Tree l l
 pr1 (pr2 (coalgebra-Directed-Tree l) T) = base-Directed-Tree T
 pr2 (pr2 (coalgebra-Directed-Tree l) T) = fiber-base-Directed-Tree T
-```
-
-## Properties
-
-### The coalgebra of directed trees is the terminal coalgebra of `A ↦ Σ (X : UU), X → A`
-
-```agda
-module _
-  {l : Level} (X : coalgebra-polynomial-endofunctor l (UU l) id)
-  where
-
-  map-hom-coalgebra-Directed-Tree :
-    type-coalgebra-polynomial-endofunctor X → Directed-Tree l l
-  map-hom-coalgebra-Directed-Tree = directed-tree-element-coalgebra X
-
-  hom-coalgebra-Directed-Tree :
-    hom-coalgebra-polynomial-endofunctor X (coalgebra-Directed-Tree l)
-  pr1 hom-coalgebra-Directed-Tree = {!!}
-  pr2 hom-coalgebra-Directed-Tree = {!!}
 ```

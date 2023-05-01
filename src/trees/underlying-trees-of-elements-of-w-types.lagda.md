@@ -1,8 +1,6 @@
 # The underlying trees of elements of W-types
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module trees.underlying-trees-of-elements-of-w-types where
 ```
 
@@ -470,86 +468,4 @@ module _
         ( λ b → enriched-directed-tree-element-𝕎 (component-𝕎 w b)))
   compute-enriched-directed-tree-element-𝕎 =
     compute-enriched-directed-tree-element-coalgebra (𝕎-Coalg A B) w
-```
-
-### The map `enriched-directed-tree-element-𝕎` is an embedding
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
-    (w : 𝕎 A B) →
-    Σ ( 𝕎 A B)
-      ( λ v →
-        equiv-Enriched-Directed-Tree A B
-          ( enriched-directed-tree-element-𝕎 v)
-          ( enriched-directed-tree-element-𝕎 w))
-  pr1 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w)= w
-  pr2 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w)=
-    id-equiv-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-𝕎 w)
-
-  eq-shape-equiv-enriched-directed-tree-element-𝕎 :
-    (v w : 𝕎 A B) →
-    equiv-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-𝕎 v)
-      ( enriched-directed-tree-element-𝕎 w) →
-    shape-𝕎 v ＝ shape-𝕎 w
-  eq-shape-equiv-enriched-directed-tree-element-𝕎 v w e =
-    ( shape-equiv-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-𝕎 v)
-      ( enriched-directed-tree-element-𝕎 w)
-      ( e)
-      ( root-𝕎 v)) ∙
-    ( inv
-      ( ap
-        ( shape-element-𝕎 w)
-        ( preserves-root-equiv-Enriched-Directed-Tree A B
-          ( enriched-directed-tree-element-𝕎 v)
-          ( enriched-directed-tree-element-𝕎 w)
-          ( e))))
-
-  htpy-component-equiv-enriched-directed-tree-element-𝕎 :
-    (v w : 𝕎 A B) →
-    ( e :
-      equiv-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-𝕎 v)
-        ( enriched-directed-tree-element-𝕎 w)) →
-    component-𝕎 v ~
-    ( component-𝕎 w ∘
-      tr B (eq-shape-equiv-enriched-directed-tree-element-𝕎 v w e))
-  htpy-component-equiv-enriched-directed-tree-element-𝕎 v w e = {!!}
-
-  base-contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
-    (w : 𝕎 A B) →
-    ( x :
-      Σ ( 𝕎 A B)
-        ( λ v →
-          equiv-Enriched-Directed-Tree A B
-            ( enriched-directed-tree-element-𝕎 v)
-            ( enriched-directed-tree-element-𝕎 w))) →
-    w ＝ pr1 x
-  base-contraction-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎
-    (tree-𝕎 a α)
-    (tree-𝕎 b β , e) =
-    eq-Eq-𝕎
-      ( tree-𝕎 a α)
-      ( tree-𝕎 b β)
-      ( eq-shape-equiv-enriched-directed-tree-element-𝕎
-        ( tree-𝕎 a α)
-        ( tree-𝕎 b β)
-        {!!} ,
-        {!!})
-
-  is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 :
-    (w : 𝕎 A B) →
-    is-contr
-      ( Σ ( 𝕎 A B)
-          ( λ v →
-            equiv-Enriched-Directed-Tree A B
-              ( enriched-directed-tree-element-𝕎 v)
-              ( enriched-directed-tree-element-𝕎 w)))
-  is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w = {!!}
 ```

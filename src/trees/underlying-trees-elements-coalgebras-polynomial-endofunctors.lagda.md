@@ -1,8 +1,6 @@
 # The underlying trees of elements of coalgebras of polynomial endofunctors
 
 ```agda
-{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
-
 module trees.underlying-trees-elements-coalgebras-polynomial-endofunctors where
 ```
 
@@ -957,45 +955,4 @@ module _
     shape-compute-enriched-directed-tree-element-coalgebra
   pr2 (pr2 compute-enriched-directed-tree-element-coalgebra) =
     enrichment-compute-enriched-directed-tree-element-coalgebra
-```
-
-###
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
-  where
-
-  compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (w : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
-    equiv-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X w b))
-      ( fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X w)
-        ( b))
-  compute-fiber-base-enriched-directed-tree-element-coalgebra w b =
-    comp-equiv-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X w b))
-      ( fiber-Enriched-Directed-Tree A B
-        ( combinator-Enriched-Directed-Tree A B
-          ( λ b →
-            enriched-directed-tree-element-coalgebra X
-              ( component-coalgebra-polynomial-endofunctor X w b)))
-        ( node-base-index-combinator-Enriched-Directed-Tree A B
-          ( enriched-directed-tree-element-coalgebra X ∘
-            component-coalgebra-polynomial-endofunctor X w)
-          ( b)))
-      ( fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X w)
-        ( b))
-      {!!}
-      ( compute-fiber-combinator-Enriched-Directed-Tree A B
-        ( λ c →
-          enriched-directed-tree-element-coalgebra X
-            ( component-coalgebra-polynomial-endofunctor X w c))
-        ( b))
 ```
