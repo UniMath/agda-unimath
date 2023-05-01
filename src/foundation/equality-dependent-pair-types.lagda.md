@@ -24,7 +24,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  comp-eq-pair-Σ :
+  compute-eq-pair-Σ :
     {x y z : A} (a : B x) (b : B y) (c : B z) (p : x ＝ y) (q : y ＝ z) →
     ( r : tr B p a ＝ b) (s : tr B q b ＝ c) →
     ( concat
@@ -34,11 +34,11 @@ module _
       ( pair z c)
       ( eq-pair-Σ q s)) ＝
     ( eq-pair-Σ (p ∙ q) (tr-concat {B = B} p q a ∙ (ap (tr B q) r ∙ s)))
-  comp-eq-pair-Σ a .a .a refl refl refl refl = refl
+  compute-eq-pair-Σ a .a .a refl refl refl refl = refl
 
-  comp-pair-eq-Σ : {s t u : Σ A B} (p : s ＝ t) (q : t ＝ u) →
+  compute-pair-eq-Σ : {s t u : Σ A B} (p : s ＝ t) (q : t ＝ u) →
     (pr1 (pair-eq-Σ p) ∙ pr1 (pair-eq-Σ q)) ＝ pr1 (pair-eq-Σ (p ∙ q))
-  comp-pair-eq-Σ refl refl = refl
+  compute-pair-eq-Σ refl refl = refl
 
   ap-pair-eq-Σ : {l3 : Level} (X : UU l3) (f : X → Σ A B)
     (x y : X) (p : x ＝ y) →

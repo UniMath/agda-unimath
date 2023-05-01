@@ -24,10 +24,10 @@ open import foundation.universe-levels
 
 </details>
 
-```agda
-{- We introduce two types of sequences: one with the arrows going up and one
-   with the arrows going down. -}
+We introduce two types of sequences: one with the arrows going up and one with
+the arrows going down.
 
+```agda
 Sequence :
   ( l : Level) → UU (lsuc l)
 Sequence l = Σ (ℕ → UU l) (λ A → (n : ℕ) → A n → A (succ-ℕ n))
@@ -40,9 +40,11 @@ map-seq :
   { l : Level} (A : Sequence l) →
   ( n : ℕ) → (type-seq A n) → (type-seq A (succ-ℕ n))
 map-seq A = pr2 A
+```
 
-{- We characterize the identity type of Sequence l. -}
+### Characterizing the identity type of `Sequence`
 
+```agda
 naturality-hom-Seq :
   { l1 l2 : Level} (A : Sequence l1) (B : Sequence l2)
   ( h : (n : ℕ) → type-seq A n → type-seq B n) (n : ℕ) → UU (l1 ⊔ l2)
@@ -93,9 +95,11 @@ eq-equiv-Seq :
   { l1 : Level} {A B : Sequence l1} → equiv-Seq A B → Id A B
 eq-equiv-Seq {A = A} {B} =
   map-inv-is-equiv (is-equiv-equiv-eq-Seq A B)
+```
 
-{- We introduce cocones on a type sequence. -}
+### Cocones on a type sequence
 
+```agda
 cocone-sequence :
   { l1 l2 : Level} (A : Sequence l1) (X : UU l2) → UU (l1 ⊔ l2)
 cocone-sequence A X =
@@ -113,9 +117,11 @@ triangle-cocone-sequence :
   ( map-cocone-sequence A c n) ~
   ( (map-cocone-sequence A c (succ-ℕ n)) ∘ (map-seq A n))
 triangle-cocone-sequence A c = pr2 c
+```
 
-{- We characterize the identity type of cocone-sequence. -}
+### We characterize the identity type of `cocone-sequence`
 
+```agda
 naturality-htpy-cocone-sequence :
   { l1 l2 : Level} (A : Sequence l1) {X : UU l2} (c c' : cocone-sequence A X) →
   ( H : (n : ℕ) →
@@ -172,9 +178,11 @@ is-equiv-htpy-cocone-sequence-eq A c =
   fundamental-theorem-id
     ( is-contr-total-htpy-cocone-sequence A c)
     ( htpy-cocone-sequence-eq A c)
+```
 
-{- We introduce the universal property of sequential colimits. -}
+### The universal property of sequential colimits
 
+```agda
 cocone-sequence-map :
   { l1 l2 l3 : Level} (A : Sequence l1)
   {X : UU l2} → cocone-sequence A X →

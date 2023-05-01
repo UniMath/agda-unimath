@@ -272,7 +272,7 @@ module _
         (inv-equiv (e x y))
         λ { refl →
               inv (isretr-map-inv-equiv (e x x) refl) ∙
-              ap (map-equiv (inv-equiv (e x x))) (p x) }
+              ap (map-equiv (inv-equiv (e x x))) (p x)}
 ```
 
 ### Embeddings are closed under pullback

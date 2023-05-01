@@ -301,7 +301,9 @@ module _
 ```agda
   distributive-inv-mul-Group :
     (x y : type-Group G) →
-    Id (inv-Group G (mul-Group G x y)) (mul-Group G (inv-Group G y) (inv-Group G x))
+    Id
+      ( inv-Group G (mul-Group G x y))
+      ( mul-Group G (inv-Group G y) (inv-Group G x))
   distributive-inv-mul-Group x y =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
@@ -364,7 +366,8 @@ module _
 
 ```agda
   inv-left-div-Group :
-    (x y : type-Group G) → inv-Group G (left-div-Group x y) ＝ left-div-Group y x
+    (x y : type-Group G) →
+    inv-Group G (left-div-Group x y) ＝ left-div-Group y x
   inv-left-div-Group x y =
     equational-reasoning
       inv-Group G (left-div-Group x y)
@@ -378,7 +381,8 @@ module _
 
 ```agda
   inv-right-div-Group :
-    (x y : type-Group G) → inv-Group G (right-div-Group x y) ＝ right-div-Group y x
+    (x y : type-Group G) →
+    inv-Group G (right-div-Group x y) ＝ right-div-Group y x
   inv-right-div-Group x y =
     equational-reasoning
       inv-Group G (right-div-Group x y)
@@ -408,7 +412,8 @@ module _
 ```agda
   mul-right-div-Group :
     (x y z : type-Group G) →
-    mul-Group G (right-div-Group x y) (right-div-Group y z) ＝ right-div-Group x z
+    mul-Group G (right-div-Group x y) (right-div-Group y z) ＝
+    right-div-Group x z
   mul-right-div-Group x y z =
     equational-reasoning
       mul-Group G (right-div-Group x y) (right-div-Group y z)
@@ -426,7 +431,7 @@ abstract
     {l : Level} (G : Semigroup l) (e : is-unital-Semigroup G) →
     all-elements-equal (is-group' G e)
   all-elements-equal-is-group
-    ( pair G (pair μ assoc-G))
+    ( pair G (pair μ associative-G))
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
@@ -443,7 +448,7 @@ abstract
           ＝ μ (μ (i' x) x) (i x)
             by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
           ＝ μ (i' x) (μ x (i x))
-            by assoc-G (i' x) x (i x)
+            by associative-G (i' x) x (i x)
           ＝ μ (i' x) e
             by ap (μ (i' x)) (right-inv-i x)
           ＝ i' x

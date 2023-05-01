@@ -14,7 +14,6 @@ open import foundation.homotopies
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
-open import foundation.unit-type
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
@@ -148,7 +147,8 @@ module _
   Eq-unordered-pair : (p q : unordered-pair A) → UU l1
   Eq-unordered-pair p q =
     Σ ( type-unordered-pair p ≃ type-unordered-pair q)
-      ( λ e → (element-unordered-pair p) ~ (element-unordered-pair q ∘ map-equiv e))
+      ( λ e →
+        (element-unordered-pair p) ~ (element-unordered-pair q ∘ map-equiv e))
 
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
   pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin {k = 2} X
@@ -186,8 +186,10 @@ module _
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
   eq-Eq-unordered-pair :
-    (p q : unordered-pair A) (e : type-unordered-pair p ≃ type-unordered-pair q) →
-    (element-unordered-pair p ~ (element-unordered-pair q ∘ map-equiv e)) → (p ＝ q)
+    (p q : unordered-pair A)
+    (e : type-unordered-pair p ≃ type-unordered-pair q) →
+    (element-unordered-pair p ~ (element-unordered-pair q ∘ map-equiv e)) →
+    (p ＝ q)
   eq-Eq-unordered-pair p q e H = eq-Eq-unordered-pair' p q (pair e H)
 
   isretr-eq-Eq-unordered-pair :
@@ -231,7 +233,7 @@ module _
     unit-trunc-Prop (refl-Eq-unordered-pair p)
 ```
 
-### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`.
+### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`
 
 ```agda
 is-commutative-standard-unordered-pair :
@@ -329,7 +331,8 @@ element-id-equiv-standard-unordered-pair x y (inl (inr star)) = refl
 element-id-equiv-standard-unordered-pair x y (inr star) = refl
 
 id-equiv-standard-unordered-pair :
-  {l : Level} {A : UU l} (x y : A) → equiv-standard-unordered-pair id-equiv x y ＝ refl
+  {l : Level} {A : UU l} (x y : A) →
+  equiv-standard-unordered-pair id-equiv x y ＝ refl
 id-equiv-standard-unordered-pair x y =
   ( ap
     ( eq-Eq-unordered-pair

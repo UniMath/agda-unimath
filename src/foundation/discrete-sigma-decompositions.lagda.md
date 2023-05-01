@@ -84,7 +84,7 @@ module _
   pr1 equiv-discrete-is-discrete-Σ-Decomposition =
     ( inv-equiv
       ( right-unit-law-Σ-is-contr is-discrete ∘e
-        matching-correspondence-Σ-Decomposition D ))
+        matching-correspondence-Σ-Decomposition D))
   pr1 (pr2 equiv-discrete-is-discrete-Σ-Decomposition) x =
     ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
       is-equiv-comp
@@ -97,7 +97,7 @@ module _
       ( ap ( λ f → map-equiv f a)
         ( ( left-inverse-law-equiv
             ( equiv-pr1 is-discrete ∘e
-              matching-correspondence-Σ-Decomposition D))  ∙
+              matching-correspondence-Σ-Decomposition D)) ∙
         ( ( inv
             ( right-inverse-law-equiv
               ( equiv-pr1 ( λ _ → is-contr-raise-unit)))))))

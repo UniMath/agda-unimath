@@ -246,7 +246,8 @@ module _
   coherence-htpy-parallel-cone :
     {l4 : Level} {C : UU l4} (c : cone f g C) (c' : cone f' g' C)
     (Hp : vertical-map-cone f g c ~ vertical-map-cone f' g' c')
-    (Hq : horizontal-map-cone f g c ~ horizontal-map-cone f' g' c') → UU _
+    (Hq : horizontal-map-cone f g c ~ horizontal-map-cone f' g' c') →
+    UU (l3 ⊔ l4)
   coherence-htpy-parallel-cone c c' Hp Hq =
     ( ( coherence-square-cone f g c) ∙h
       ( (g ·l Hq) ∙h (Hg ·r horizontal-map-cone f' g' c'))) ~
@@ -255,7 +256,7 @@ module _
 
   fam-htpy-parallel-cone :
     {l4 : Level} {C : UU l4} (c : cone f g C) → (c' : cone f' g' C) →
-    (vertical-map-cone f g c ~ vertical-map-cone f' g' c') → UU _
+    (vertical-map-cone f g c ~ vertical-map-cone f' g' c') → UU (l2 ⊔ l3 ⊔ l4)
   fam-htpy-parallel-cone c c' Hp =
     Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f' g' c')
       ( coherence-htpy-parallel-cone c c' Hp)

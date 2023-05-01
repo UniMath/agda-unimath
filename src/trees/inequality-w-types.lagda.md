@@ -63,8 +63,9 @@ module _
 
   data walk-𝕎 : 𝕎 A B → UU (l1 ⊔ l2) where
     root : (w : 𝕎 A B) → walk-𝕎 w
-    cons : (a : A) (f : B a → 𝕎 A B) (b : B a) →
-           walk-𝕎 (f b) → walk-𝕎 (tree-𝕎 a f)
+    cons :
+      (a : A) (f : B a → 𝕎 A B) (b : B a) →
+      walk-𝕎 (f b) → walk-𝕎 (tree-𝕎 a f)
 
   length-walk-𝕎 : (w : 𝕎 A B) → walk-𝕎 w → ℕ
   length-walk-𝕎 w (root .w) = zero-ℕ

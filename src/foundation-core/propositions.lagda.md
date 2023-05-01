@@ -178,7 +178,8 @@ module _
 
 ```agda
 abstract
-  is-prop-Σ : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-prop-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-prop A → ((x : A) → is-prop (B x)) → is-prop (Σ A B)
   is-prop-Σ H K x y =
     is-contr-equiv'

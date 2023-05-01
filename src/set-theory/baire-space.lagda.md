@@ -40,7 +40,7 @@ baire-space = ℕ → ℕ
 
 ## Properties
 
-### The Baire Space is a set.
+### The Baire Space is a set
 
 ```agda
 is-set-baire-space : is-set baire-space
@@ -63,7 +63,7 @@ pr1 baire-space-Set = baire-space
 pr2 baire-space-Set = is-set-baire-space
 ```
 
-### The Baire Space is uncountable.
+### The Baire Space is uncountable
 
 ```agda
 is-uncountable-baire-space : is-uncountable baire-space-Set

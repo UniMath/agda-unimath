@@ -230,9 +230,10 @@ module _
     equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
     equiv-right-swap-Σ
     where
-      α : (h : hom-slice f g) →
-          is-equiv (pr1 h) ≃
-          is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+      α :
+        (h : hom-slice f g) →
+        is-equiv (pr1 h) ≃
+        is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
       α h = equiv-prop
         ( is-property-is-equiv _)
         ( is-prop-Π (λ _ → is-property-is-equiv _))

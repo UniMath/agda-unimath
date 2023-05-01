@@ -146,7 +146,8 @@ module _
 
 ```agda
 abstract
-  is-emb-is-injective' : {l1 l2 : Level} {A : UU l1} (is-set-A : is-set A)
+  is-emb-is-injective' :
+    {l1 l2 : Level} {A : UU l1} (is-set-A : is-set A)
     {B : UU l2} (is-set-B : is-set B) (f : A → B) →
     is-injective f → is-emb f
   is-emb-is-injective' is-set-A is-set-B f is-injective-f x y =

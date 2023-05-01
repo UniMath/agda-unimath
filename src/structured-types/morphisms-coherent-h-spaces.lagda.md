@@ -106,67 +106,68 @@ preserves-coh-unit-laws-mul' :
     ( μf) →
   UU l2
 preserves-coh-unit-laws-mul' M N f μf lf rf =
-  Id { A =
-       Id (ap (pr1 f) (lM eM) ∙ ef) ((μf eM eM ∙ ap-binary μN ef ef) ∙ rN eN)}
-     ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
-       ( ( ap
-           ( λ t → t ∙ (ap id ef))
-           ( inv
-             ( assoc
-               ( μf eM eM)
-               ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
-               ( lN (pr1 f eM))))) ∙
-         ( ( assoc
-             ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
-             ( lN (pr1 f eM))
-             ( ap id ef)) ∙
-           ( ( ap
-               ( λ t →
-                 ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef) ∙ t)
-               ( nat-htpy lN ef)) ∙
-             ( ( inv
-                 ( assoc
-                   ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
-                   ( ap (μN eN) ef)
-                   ( lN eN))) ∙
-               ( ( ap
-                   ( λ t → t ∙ lN eN)
-                   ( assoc
-                     ( μf eM eM)
-                     ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
-                     ( ap (μN eN) ef))) ∙
-                 ( horizontal-concat-Id²
-                   ( ap
-                     ( λ t → μf eM eM ∙ t)
-                     ( inv (triangle-ap-binary μN ef ef)))
-                   ( cN))))))))
-     ( ( ap (λ t → t ∙ ef) (ap (ap (pr1 f)) cM)) ∙
-       ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
-         ( ( ap
-             ( λ t → t ∙ ap id ef)
-             ( inv
-               ( assoc (μf eM eM) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))) ∙
-           ( ( assoc
-               ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
-               ( rN (pr1 f eM))
-               ( ap id ef)) ∙
-             ( ( ap
-                 ( λ t → (μf eM eM ∙ ap (μN (pr1 f eM)) ef) ∙ t)
-                 ( nat-htpy rN ef)) ∙
-               ( ( inv
-                   ( assoc
-                     ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
-                     ( ap (mul-Coherent-H-Space' N eN) ef)
-                     ( rN eN))) ∙
-                 ( ap
-                   ( λ t → t ∙ rN eN)
-                   ( ( assoc
-                       ( μf eM eM)
-                       ( ap (μN (pr1 f eM)) ef)
-                       ( ap (mul-Coherent-H-Space' N eN) ef)) ∙
-                     ( ap
-                       ( λ t → μf eM eM ∙ t)
-                       ( inv (triangle-ap-binary' μN ef ef)))))))))))
+  Id
+    { A =
+      Id (ap (pr1 f) (lM eM) ∙ ef) ((μf eM eM ∙ ap-binary μN ef ef) ∙ rN eN)}
+    ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
+      ( ( ap
+          ( _∙ (ap id ef))
+          ( inv
+            ( assoc
+              ( μf eM eM)
+              ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+              ( lN (pr1 f eM))))) ∙
+        ( ( assoc
+            ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+            ( lN (pr1 f eM))
+            ( ap id ef)) ∙
+          ( ( ap
+              ( ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef) ∙_)
+              ( nat-htpy lN ef)) ∙
+            ( ( inv
+                ( assoc
+                  ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+                  ( ap (μN eN) ef)
+                  ( lN eN))) ∙
+              ( ( ap
+                  ( λ t → t ∙ lN eN)
+                  ( assoc
+                    ( μf eM eM)
+                    ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+                    ( ap (μN eN) ef))) ∙
+                ( horizontal-concat-Id²
+                  ( ap
+                    ( μf eM eM ∙_)
+                    ( inv (triangle-ap-binary μN ef ef)))
+                  ( cN))))))))
+    ( ( ap (_∙ ef) (ap (ap (pr1 f)) cM)) ∙
+      ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
+        ( ( ap
+            ( _∙ ap id ef)
+            ( inv
+              ( assoc
+                ( μf eM eM) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))) ∙
+          ( ( assoc
+              ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
+              ( rN (pr1 f eM))
+              ( ap id ef)) ∙
+            ( ( ap
+                ( ( μf eM eM ∙ ap (μN (pr1 f eM)) ef) ∙_)
+                ( nat-htpy rN ef)) ∙
+              ( ( inv
+                  ( assoc
+                    ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
+                    ( ap (mul-Coherent-H-Space' N eN) ef)
+                    ( rN eN))) ∙
+                ( ap
+                  ( λ t → t ∙ rN eN)
+                  ( ( assoc
+                      ( μf eM eM)
+                      ( ap (μN (pr1 f eM)) ef)
+                      ( ap (mul-Coherent-H-Space' N eN) ef)) ∙
+                    ( ap
+                      ( μf eM eM ∙_)
+                      ( inv (triangle-ap-binary' μN ef ef)))))))))))
   where
   eM = unit-Coherent-H-Space M
   μM = mul-Coherent-H-Space M

@@ -22,7 +22,6 @@ open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
@@ -48,7 +47,7 @@ coprod-Fin :
   (k l : ℕ) → (Fin k + Fin l) ≃ Fin (add-ℕ k l)
 coprod-Fin k zero-ℕ = right-unit-law-coprod (Fin k)
 coprod-Fin k (succ-ℕ l) =
-  (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-assoc-coprod
+  (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-associative-coprod
 
 map-coprod-Fin :
   (k l : ℕ) → (Fin k + Fin l) → Fin (add-ℕ k l)
@@ -120,7 +119,8 @@ count-Σ-coprod :
   count (Σ A P) → count (Σ A Q) → count (Σ A (λ x → (P x) + (Q x)))
 pr1 (count-Σ-coprod count-P count-Q) = pr1 (count-coprod count-P count-Q)
 pr2 (count-Σ-coprod count-P count-Q) =
-  inv-equiv (left-distributive-Σ-coprod _ _ _) ∘e (pr2 (count-coprod count-P count-Q))
+  ( inv-equiv (left-distributive-Σ-coprod _ _ _)) ∘e
+  ( pr2 (count-coprod count-P count-Q))
 ```
 
 ### If `X + Y` has a count, then both `X` and `Y` have a count

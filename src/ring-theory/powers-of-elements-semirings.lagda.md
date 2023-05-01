@@ -176,7 +176,7 @@ module _
                 ( inv (power-succ-Semiring R m x))))))))
 ```
 
-### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`.
+### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`
 
 ```agda
 module _

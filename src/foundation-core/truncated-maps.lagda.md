@@ -27,7 +27,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map is k-truncated if its fibers are k-truncated.
+A map is `k`-truncated if its fibers are `k`-truncated.
 
 ## Definition
 
@@ -57,7 +57,7 @@ module _
 
 ## Properties
 
-### If a map is k-truncated, then it is (k+1)-truncated
+### If a map is `k`-truncated, then it is `k+1`-truncated
 
 ```agda
 abstract
@@ -68,7 +68,7 @@ abstract
     is-trunc-succ-is-trunc k (is-trunc-f b)
 ```
 
-### Any contractible map is k-truncated
+### Any contractible map is `k`-truncated
 
 ```agda
 is-trunc-map-is-contr-map :
@@ -79,7 +79,7 @@ is-trunc-map-is-contr-map (succ-𝕋 k) H =
   is-trunc-map-succ-is-trunc-map k (is-trunc-map-is-contr-map k H)
 ```
 
-### Any equivalence is k-truncated
+### Any equivalence is `k`-truncated
 
 ```agda
 is-trunc-map-is-equiv :
@@ -89,7 +89,7 @@ is-trunc-map-is-equiv k H =
   is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
 ```
 
-### A map is (k+1)-truncated if and only if its action on identifications is k-truncated
+### A map is `k+1`-truncated if and only if its action on identifications is `k`-truncated
 
 ```agda
 module _
@@ -116,7 +116,7 @@ module _
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
 ```
 
-### A family of types is a family of k-truncated types if and only of the projection map is k-truncated
+### A family of types is a family of `k`-truncated types if and only of the projection map is `k`-truncated
 
 ```agda
 module _
@@ -143,7 +143,7 @@ module _
       is-trunc-equiv k (fib pr1 x) (inv-equiv-fib-pr1 B x) (is-trunc-map-pr1 x)
 ```
 
-### Any map between k-truncated types is k-truncated
+### Any map between `k`-truncated types is `k`-truncated
 
 ```agda
 abstract
@@ -154,7 +154,7 @@ abstract
     is-trunc-Σ is-trunc-A (λ x → is-trunc-Id is-trunc-B (f x) b)
 ```
 
-### A type family over a k-truncated type A is a family of k-truncated types if its total space is k-truncated
+### A type family over a `k`-truncated type A is a family of `k`-truncated types if its total space is `k`-truncated
 
 ```agda
 abstract
@@ -267,11 +267,15 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  is-contr-map-right-factor-htpy : is-contr-map g → is-contr-map f → is-contr-map h
-  is-contr-map-right-factor-htpy = is-trunc-map-right-factor-htpy neg-two-𝕋 f g h H
+  is-contr-map-right-factor-htpy :
+    is-contr-map g → is-contr-map f → is-contr-map h
+  is-contr-map-right-factor-htpy =
+    is-trunc-map-right-factor-htpy neg-two-𝕋 f g h H
 
-  is-prop-map-right-factor-htpy : is-prop-map g → is-prop-map f → is-prop-map h
-  is-prop-map-right-factor-htpy = is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
+  is-prop-map-right-factor-htpy :
+    is-prop-map g → is-prop-map f → is-prop-map h
+  is-prop-map-right-factor-htpy =
+    is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
 
 is-trunc-map-right-factor :
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
@@ -285,11 +289,15 @@ module _
   (g : B → X) (h : A → B)
   where
 
-  is-contr-map-right-factor : is-contr-map g → is-contr-map (g ∘ h) → is-contr-map h
-  is-contr-map-right-factor = is-trunc-map-right-factor neg-two-𝕋 g h
+  is-contr-map-right-factor :
+    is-contr-map g → is-contr-map (g ∘ h) → is-contr-map h
+  is-contr-map-right-factor =
+    is-trunc-map-right-factor neg-two-𝕋 g h
 
-  is-prop-map-right-factor : is-prop-map g → is-prop-map (g ∘ h) → is-prop-map h
-  is-prop-map-right-factor = is-trunc-map-right-factor neg-one-𝕋 g h
+  is-prop-map-right-factor :
+    is-prop-map g → is-prop-map (g ∘ h) → is-prop-map h
+  is-prop-map-right-factor =
+    is-trunc-map-right-factor neg-one-𝕋 g h
 ```
 
 ### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
@@ -369,7 +377,8 @@ module _
 
   abstract
     is-prop-map-map-Σ-map-base :
-      {f : A → B} (C : B → UU l3) → is-prop-map f → is-prop-map (map-Σ-map-base f C)
+      {f : A → B} (C : B → UU l3) →
+      is-prop-map f → is-prop-map (map-Σ-map-base f C)
     is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
 
 module _

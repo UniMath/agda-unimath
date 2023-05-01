@@ -27,12 +27,11 @@ consists of:
 
 - an object `w`
 - morphisms `p₁ : hom w y` and `p₂ : hom w z` such that
-- `comp f p₁ = comp g p₂` together with the universal property that for every
-  object `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such
-  that `comp f p₁' = comp g p₂'` there exists a unique morphism `h : hom w' w`
-  such that
-- `comp p₁ h = p₁'`
-- `comp p₂ h = p₂'`.
+- `f ∘ p₁ = g ∘ p₂` together with the universal property that for every object
+  `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such that
+  `f ∘ p₁' = g ∘ p₂'` there exists a unique morphism `h : hom w' w` such that
+- `p₁ ∘ h = p₁'`
+- `p₂ ∘ h = p₂'`.
 
 We say that `C` has all pullbacks if there is a choice of a pullback for each
 object `x` and pair of morphisms into `x` in `C`.
@@ -115,12 +114,14 @@ module _
       pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
 
     morphism-into-pullback-comm-pr1 :
-      comp-hom-Precat C pr1-pullback-Precat morphism-into-pullback-Precat ＝ p₁'
+      comp-hom-Precat C pr1-pullback-Precat morphism-into-pullback-Precat ＝
+      p₁'
     morphism-into-pullback-comm-pr1 =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
     morphism-into-pullback-comm-pr2 :
-      comp-hom-Precat C pr2-pullback-Precat morphism-into-pullback-Precat ＝ p₂'
+      comp-hom-Precat C pr2-pullback-Precat morphism-into-pullback-Precat ＝
+      p₂'
     morphism-into-pullback-comm-pr2 =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 

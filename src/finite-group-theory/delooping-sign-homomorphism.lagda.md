@@ -314,7 +314,7 @@ module _
             ( is-prop-type-trunc-Prop _
               ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))) ∙
         ( inv
-          ( comp-eq-pair-Σ
+          ( compute-eq-pair-Σ
             ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
             ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
             ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
@@ -1102,7 +1102,7 @@ module _
             ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
             ( ap inv
               ( inv
-                ( comp-eq-equiv
+                ( compute-eq-equiv
                   ( raise l4 (Fin 2))
                   ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                   ( raise l4 (Fin 2))
@@ -1117,7 +1117,7 @@ module _
                 ( ap
                   ( _∙ eq-counting-equivalence-class-R n)
                   ( inv
-                    ( comp-eq-equiv
+                    ( compute-eq-equiv
                       ( raise l4 (Fin 2))
                       ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                       ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
@@ -1196,7 +1196,7 @@ module _
                     ( eq-counting-equivalence-class-R n))))
               ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
               ( inv
-                ( comp-eq-pair-Σ
+                ( compute-eq-pair-Σ
                   ( pr2 (Fin-UU-Fin l4 2))
                   ( mere-equiv-D/R-fin-2
                     ( n +ℕ 2)
@@ -1215,7 +1215,7 @@ module _
                     ( inv (eq-counting-equivalence-class-R n))
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
                   ( inv
-                    ( comp-eq-pair-Σ
+                    ( compute-eq-pair-Σ
                       ( mere-equiv-D/R-fin-2
                         ( n +ℕ 2)
                         ( Fin-UU-Fin l1 (n +ℕ 2))
@@ -1574,7 +1574,8 @@ module _
         Q-transposition-swap n Y
           ( pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1)))
 
-  eq-delooping-sign-homomorphism : (n : ℕ) →
+  eq-delooping-sign-homomorphism :
+    (n : ℕ) →
     Id
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))

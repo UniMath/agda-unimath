@@ -41,13 +41,13 @@ The abstract quaternion group of order 8 is the group of the quaternions `1`,
 
 ```agda
 data Q8 : UU lzero where
-  e-Q8  : Q8
+  e-Q8 : Q8
   -e-Q8 : Q8
-  i-Q8  : Q8
+  i-Q8 : Q8
   -i-Q8 : Q8
-  j-Q8  : Q8
+  j-Q8 : Q8
   -j-Q8 : Q8
-  k-Q8  : Q8
+  k-Q8 : Q8
   -k-Q8 : Q8
 
 mul-Q8 : Q8 → Q8 → Q8

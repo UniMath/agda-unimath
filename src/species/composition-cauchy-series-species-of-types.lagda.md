@@ -83,7 +83,7 @@ module _
         ( equiv-prod
           ( id-equiv)
           ( inv-equiv distributive-Π-Σ)) ∘e
-        ( ( inv-equiv left-distributive-prod-Σ)  ∘e
+        ( ( inv-equiv left-distributive-prod-Σ) ∘e
           ( equiv-tot
             ( λ V →
               ( equiv-prod

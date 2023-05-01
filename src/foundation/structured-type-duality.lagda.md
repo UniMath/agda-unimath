@@ -45,7 +45,10 @@ equiv-Fib-structure {l1} {l3} l P B =
       ( λ C → (b : B) → P (C b))
       ( equiv-Fib l B)
       ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
-  ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
+  ( inv-associative-Σ
+    ( UU (l1 ⊔ l))
+    ( λ A → A → B)
+    ( λ f → structure-map P (pr2 f)))
 ```
 
 ###
@@ -54,7 +57,7 @@ equiv-Fib-structure {l1} {l3} l P B =
 equiv-fixed-Slice-structure :
   {l : Level} (P : UU l → UU l) (X : UU l) (A : UU l) →
   ( hom-structure P X A) ≃
-  ( Σ (A → Σ (UU l) (λ Z → P (Z))) ( λ Y → X ≃ (Σ A (pr1 ∘ Y ))))
+  ( Σ (A → Σ (UU l) (λ Z → P (Z))) ( λ Y → X ≃ (Σ A (pr1 ∘ Y))))
 equiv-fixed-Slice-structure {l} P X A =
   ( ( equiv-Σ
       ( λ Y → X ≃ Σ A (pr1 ∘ Y))
@@ -64,5 +67,5 @@ equiv-fixed-Slice-structure {l} P X A =
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
           ( is-contr-total-equiv X)
-          ( X , id-equiv )))))
+          ( X , id-equiv)))))
 ```

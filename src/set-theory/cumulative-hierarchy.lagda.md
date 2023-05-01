@@ -45,14 +45,14 @@ following Reference 2 below.
 
 ```agda
 has-smaller-image :
-  { l1 l2 l3 : Level } →
+  { l1 l2 l3 : Level} →
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
 has-smaller-image {l1} {l2} {l3} {A} {B} {C} f g =
   (a : A) → ∃ B (λ b → g b ＝ f a)
 
 has-same-image :
-  { l1 l2 l3 : Level } →
+  { l1 l2 l3 : Level} →
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
 has-same-image {l1} {l2} {l3} {A} {B} {C} f g =
@@ -104,7 +104,7 @@ module _
   set-ext-pseudo-cumulative-hierarchy = pr2 (pr2 (pr2 V))
 ```
 
-### The induction principle of the cumulative hierarchy together with its computation rule.
+### The induction principle and computation rule of the cumulative hierarchy
 
 ```agda
 module _
@@ -115,7 +115,7 @@ module _
     ( P : type-pseudo-cumulative-hierarchy V → UU l2) →
     ( (x : type-pseudo-cumulative-hierarchy V) → is-set (P x)) →
     ( ρ :
-      { A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V ) →
+      { A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) →
       ( (a : A) → P (f a)) → P (set-pseudo-cumulative-hierarchy V f)) →
     ( { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) →
       ( g : B → type-pseudo-cumulative-hierarchy V)
@@ -135,7 +135,7 @@ module _
     ( P : type-pseudo-cumulative-hierarchy V → UU l2) →
     ( σ : (x : type-pseudo-cumulative-hierarchy V) → is-set (P x)) →
     ( ρ :
-      { A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V ) →
+      { A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) →
       ( (a : A) → P (f a)) → P (set-pseudo-cumulative-hierarchy V f)) →
     ( τ :
       { A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V) →
@@ -185,7 +185,7 @@ module _
 
 ## Properties
 
-### Every element of the cumulative hierarchy is given by a function into the cumulative hierarchy.
+### Every element of the cumulative hierarchy is given by a function into the cumulative hierarchy
 
 ```agda
   underlying-function-cumulative-hierarchy :
@@ -236,7 +236,7 @@ module _
       ( λ _ g _ _ _ _ _ → eq-is-prop (σ (set-pseudo-cumulative-hierarchy V g)))
 ```
 
-### The recursion principle of the cumulative hierarchy together with its computation rule.
+### The recursion principle and its computation rule for the cumulative hierarchy
 
 ```agda
   recursion-principle-cumulative-hierarchy :
@@ -475,7 +475,7 @@ needed.
   ∈-cumulative-hierarchy-mere-preimage {x} {A} {f} =
     tr id (id-∈-cumulative-hierarchy x f)
 
-  mere-preimage-∈-cumulative-hierarchy  :
+  mere-preimage-∈-cumulative-hierarchy :
     { x : type-pseudo-cumulative-hierarchy V} →
     { A : UU l1}
     { f : A → type-pseudo-cumulative-hierarchy V} →
@@ -621,7 +621,7 @@ needed.
         ( trunc-Prop ((v ＝ x) + (v ＝ y)))
         ( λ { ( map-raise true , p) → unit-trunc-Prop (inl (inv p)) ;
               ( map-raise false , p) → unit-trunc-Prop (inr (inv p))})
-        ( ∈-cumulative-hierarchy-mere-preimage H) )
+        ( ∈-cumulative-hierarchy-mere-preimage H))
       ( λ H → mere-preimage-∈-cumulative-hierarchy
         ( map-trunc-Prop
           ( λ { ( inl p) → (map-raise true , inv p) ;
@@ -673,7 +673,7 @@ needed.
             ( map-trunc-Prop
               ( λ {((map-raise n) , refl) →
                 map-raise (succ-ℕ n) , refl})
-            ( ∈-cumulative-hierarchy-mere-preimage H)) )
+            ( ∈-cumulative-hierarchy-mere-preimage H)))
 ```
 
 ### Cumulative hierarchies satisfy the ∈-induction axiom

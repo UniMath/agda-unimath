@@ -14,7 +14,6 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types

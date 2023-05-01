@@ -38,20 +38,24 @@ module _
 
   is-meet-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-meet-sup-lattice-poset-Prop =
-    prod-Prop (is-meet-semilattice-poset-Prop P) (is-sup-lattice-poset-Prop l3 P)
+    prod-Prop
+      ( is-meet-semilattice-poset-Prop P)
+      ( is-sup-lattice-poset-Prop l3 P)
 
   is-meet-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-meet-sup-lattice-Poset = type-Prop is-meet-sup-lattice-poset-Prop
 
   is-prop-is-meet-sup-lattice-Poset : is-prop is-meet-sup-lattice-Poset
-  is-prop-is-meet-sup-lattice-Poset = is-prop-type-Prop is-meet-sup-lattice-poset-Prop
+  is-prop-is-meet-sup-lattice-Poset =
+    is-prop-type-Prop is-meet-sup-lattice-poset-Prop
 
 Meet-Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Meet-Sup-Lattice l1 l2 l3 =
   Σ (Poset l1 l2) (is-meet-sup-lattice-Poset l3)
 ```
 
-## We need to provide the appropriate components to state the infinite distributive law.
+We need to provide the appropriate components to state the infinite distributive
+law.
 
 ```agda
 module _
@@ -102,14 +106,16 @@ module _
   is-meet-semilattice-Meet-Sup-Lattice = pr1 (pr2 A)
 
   meet-semilattice-Meet-Sup-Lattice : Meet-Semilattice l1 l2
-  meet-semilattice-Meet-Sup-Lattice = ( poset-Meet-Sup-Lattice , is-meet-semilattice-Meet-Sup-Lattice )
+  meet-semilattice-Meet-Sup-Lattice =
+    ( poset-Meet-Sup-Lattice , is-meet-semilattice-Meet-Sup-Lattice)
 
   is-sup-lattice-Meet-Sup-Lattice :
     is-sup-lattice-Poset l3 poset-Meet-Sup-Lattice
   is-sup-lattice-Meet-Sup-Lattice = pr2 (pr2 A)
 
   sup-lattice-Meet-Sup-Lattice : Sup-Lattice l1 l2 l3
-  sup-lattice-Meet-Sup-Lattice = ( poset-Meet-Sup-Lattice , is-sup-lattice-Meet-Sup-Lattice )
+  sup-lattice-Meet-Sup-Lattice =
+    ( poset-Meet-Sup-Lattice , is-sup-lattice-Meet-Sup-Lattice)
 
   meet-sup-lattice-Meet-Sup-Lattice :
     Meet-Sup-Lattice l1 l2 l3
@@ -131,12 +137,11 @@ module _
   sup-Meet-Sup-Lattice I f = pr1 (is-sup-lattice-Meet-Sup-Lattice I f)
 ```
 
-## Characterize the identity type.
-
-## We now state the infinite distributive law
+## Statement of the infinite distributive law
 
 ```agda
-distributive-law-meet-sup-lattice : (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
+distributive-law-meet-sup-lattice :
+  (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
 distributive-law-meet-sup-lattice l1 l2 l3 A =
   (a : element-Meet-Sup-Lattice A) → {I : UU l3} →
   (b : I → element-Meet-Sup-Lattice A) →
@@ -146,5 +151,3 @@ distributive-law-meet-sup-lattice l1 l2 l3 A =
 
 This notation is not easy on the eye, but recall, in more familiar notation the
 identity expressed here is: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
-
-Show that the identity is a prop.

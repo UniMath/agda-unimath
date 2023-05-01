@@ -81,10 +81,10 @@ module _
   (f : A → A') (f' : A' → A'') (g : B → B') (g' : B' → B'')
   where
 
-  compose-map-coprod :
+  preserves-comp-map-coprod :
     (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
-  compose-map-coprod (inl x) = refl
-  compose-map-coprod (inr y) = refl
+  preserves-comp-map-coprod (inl x) = refl
+  preserves-comp-map-coprod (inr y) = refl
 ```
 
 ### Functoriality of coproducts preserves homotopies
@@ -193,7 +193,7 @@ module _
         ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
-      ( ( inv-htpy (compose-map-coprod sf f sg g)) ∙h
+      ( ( inv-htpy (preserves-comp-map-coprod sf f sg g)) ∙h
         ( htpy-map-coprod Sf Sg)) ∙h
       ( id-map-coprod A' B')
     pr1
@@ -206,7 +206,7 @@ module _
         ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
-      ( ( inv-htpy (compose-map-coprod f rf g rg)) ∙h
+      ( ( inv-htpy (preserves-comp-map-coprod f rf g rg)) ∙h
         ( htpy-map-coprod Rf Rg)) ∙h
       ( id-map-coprod A B)
 
@@ -506,11 +506,19 @@ module _
     (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
   issec-map-inv-mutually-exclusive-coprod e =
     eq-htpy-equiv (
-      λ { (inl p) → ap pr1 (isretr-map-inv-equiv-left-summand (pair (map-equiv e (inl p)) (left-to-left ¬PQ' e (inl p) star)));
-          (inr q) → ap pr1 (isretr-map-inv-equiv-right-summand (pair (map-equiv e (inr q)) (right-to-right ¬P'Q e (inr q) star))) })
+      λ { (inl p) →
+          ap
+            ( pr1)
+            ( isretr-map-inv-equiv-left-summand
+              ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star)) ;
+          (inr q) →
+          ap
+            ( pr1)
+            ( isretr-map-inv-equiv-right-summand
+              ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star))})
 
-  equiv-mutually-exclusive-coprod : ((P + Q) ≃ (P' + Q'))
-                                  ≃ ((P ≃ P') × (Q ≃ Q'))
+  equiv-mutually-exclusive-coprod :
+    ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))
   pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
   pr2 equiv-mutually-exclusive-coprod =
     is-equiv-has-inverse

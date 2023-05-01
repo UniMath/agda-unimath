@@ -32,7 +32,9 @@ module _
 
   pointed-Π : UU (l1 ⊔ l2)
   pointed-Π =
-    fib (ev-pt (pt-Pointed-Type A) (fam-Pointed-Fam A B)) (pt-Pointed-Fam A B)
+    fib
+      ( ev-pt (point-Pointed-Type A) (fam-Pointed-Fam A B))
+      ( pt-Pointed-Fam A B)
 
   function-pointed-Π :
     pointed-Π → (x : type-Pointed-Type A) → fam-Pointed-Fam A B x
@@ -40,6 +42,6 @@ module _
 
   preserves-point-function-pointed-Π :
     (f : pointed-Π) →
-    Id (function-pointed-Π f (pt-Pointed-Type A)) (pt-Pointed-Fam A B)
+    Id (function-pointed-Π f (point-Pointed-Type A)) (pt-Pointed-Fam A B)
   preserves-point-function-pointed-Π = pr2
 ```

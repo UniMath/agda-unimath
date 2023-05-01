@@ -163,7 +163,7 @@ equiv-coprod-Fin-ℕ zero-ℕ = left-unit-law-coprod ℕ
 equiv-coprod-Fin-ℕ (succ-ℕ n) =
   ( equiv-coprod-Fin-ℕ n) ∘e
     ( equiv-coprod id-equiv (inv-equiv equiv-ℕ) ∘e
-      ( assoc-coprod))
+      ( associative-coprod))
 ```
 
 ### The product `(Fin n) × ℕ` is equivalent to `N` for any standard finite `Fin n` where n is nonzero

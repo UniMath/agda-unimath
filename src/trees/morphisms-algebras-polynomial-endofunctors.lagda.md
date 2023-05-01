@@ -115,7 +115,7 @@ module _
              ( structure-algebra-polynomial-endofunctor Y
                ( map-polynomial-endofunctor A B
                  ( map-hom-algebra-polynomial-endofunctor X Y f) z))
-             ( ap (structure-algebra-polynomial-endofunctor Y ) t))
+             ( ap (structure-algebra-polynomial-endofunctor Y) t))
          ( coh-refl-htpy-polynomial-endofunctor A B
            ( map-hom-algebra-polynomial-endofunctor X Y f) z)) ∙
     ( right-unit)

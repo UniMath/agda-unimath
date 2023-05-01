@@ -151,7 +151,7 @@ equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 :
   Σ ( Relaxed-Σ-Decomposition l2 l3 (type-𝔽 A))
     ( λ D →
       is-finite (indexing-type-Relaxed-Σ-Decomposition D) ×
-      ((x : indexing-type-Relaxed-Σ-Decomposition D ) →
+      ((x : indexing-type-Relaxed-Σ-Decomposition D) →
         is-finite (cotype-Relaxed-Σ-Decomposition D x) ×
         is-inhabited (cotype-Relaxed-Σ-Decomposition D x)))
 pr1 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) D =
@@ -166,7 +166,7 @@ pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) =
     ( λ X →
       ( ( pr1 (pr1 X)) ,
         (pr1 (pr2 X))) ,
-        ((λ x → ((pr1 (pr2 (pr1 X)) x) , pr1 (pr2 (pr2 X) x) ) ,
+        ((λ x → ((pr1 (pr2 (pr1 X)) x) , pr1 (pr2 (pr2 X) x)) ,
                 pr2 (pr2 (pr2 X) x)) ,
       pr2 (pr2 (pr1 X))))
     refl-htpy
@@ -181,7 +181,7 @@ module _
   where
 
   equiv-finite-surjection-Σ-Decomposition-𝔽 :
-    Σ-Decomposition-𝔽 l l A  ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B) )
+    Σ-Decomposition-𝔽 l l A ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
   equiv-finite-surjection-Σ-Decomposition-𝔽 =
     equiv-Σ
       ( λ B → type-𝔽 A ↠ type-𝔽 B)
@@ -231,17 +231,17 @@ module _
   map-Σ-Decomposition-𝔽-subtype-is-finite :
     type-subtype is-finite-Σ-Decomposition → Σ-Decomposition-𝔽 l2 l3 A
   map-Σ-Decomposition-𝔽-subtype-is-finite ((X , (Y , e)) , (fin-X , fin-Y)) =
-    ( ( X , fin-X ) ,
+    ( ( X , fin-X) ,
         ( ( λ x →
             ( (type-Inhabited-Type (Y x)) , (fin-Y x)) ,
               (is-inhabited-type-Inhabited-Type (Y x))) ,
-        e ))
+        e))
 
   map-inv-Σ-Decomposition-𝔽-subtype-is-finite :
     Σ-Decomposition-𝔽 l2 l3 A → type-subtype is-finite-Σ-Decomposition
   map-inv-Σ-Decomposition-𝔽-subtype-is-finite ((X , fin-X) , (Y , e)) =
     ( ( X ,
-        ( ( λ x → inhabited-type-Inhabited-𝔽 (Y x) ) ,
+        ( ( λ x → inhabited-type-Inhabited-𝔽 (Y x)) ,
           ( e))) ,
       (fin-X , (λ x → is-finite-Inhabited-𝔽 (Y x))))
 
@@ -256,7 +256,7 @@ module _
       refl-htpy
 
   is-emb-Σ-Decomposition-Σ-Decomposition-𝔽 :
-    is-emb (Σ-Decomposition-Σ-Decomposition-𝔽 {l1} {l2} {l3} A )
+    is-emb (Σ-Decomposition-Σ-Decomposition-𝔽 {l1} {l2} {l3} A)
   is-emb-Σ-Decomposition-Σ-Decomposition-𝔽 =
     is-emb-triangle-is-equiv
       ( Σ-Decomposition-Σ-Decomposition-𝔽 A)
@@ -321,7 +321,7 @@ module _
         is-finite-Σ-Decomposition
           ( indexing-type-fst-fibered-Σ-Decomposition D ,
             (pr1 p))
-          ( snd-fibered-Σ-Decomposition D) )
+          ( snd-fibered-Σ-Decomposition D))
 
   equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype :
     type-subtype is-finite-fibered-Σ-Decomposition ≃
@@ -330,7 +330,7 @@ module _
     equiv-Σ
        ( λ D →
          Σ-Decomposition-𝔽 l4 l5 ( finite-indexing-type-Σ-Decomposition-𝔽 A D))
-       ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A )
+       ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
        ( λ x →
          equiv-Σ-Decomposition-𝔽-is-finite-subtype
          ( indexing-type-Σ-Decomposition
@@ -364,7 +364,7 @@ module _
             is-finite-Σ-Decomposition
               ( cotype-fst-displayed-Σ-Decomposition D x ,
                 pr2 p x)
-              ( snd-displayed-Σ-Decomposition D x) ))
+              ( snd-displayed-Σ-Decomposition D x)))
 
   equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype :
     type-subtype is-finite-displayed-Σ-Decomposition ≃
@@ -387,7 +387,7 @@ module _
                pr2
                  ( is-in-subtype-inclusion-subtype
                    ( is-finite-Σ-Decomposition A) D1) x)) ∘e
-           inv-distributive-Π-Σ ) ∘e
+           inv-distributive-Π-Σ) ∘e
        interchange-Σ-Σ _
 ```
 
@@ -406,7 +406,7 @@ module _
   pr1 (pr1 (map-is-finite-displayed-fibered-Σ-Decomposition p)) =
     pr1 (pr2 p)
   pr2 (pr1 (map-is-finite-displayed-fibered-Σ-Decomposition p)) =
-    λ u → is-finite-Σ (pr2 (pr2 p) u) (λ v → (pr2 (pr1 p)) _ )
+    λ u → is-finite-Σ (pr2 (pr2 p) u) (λ v → (pr2 (pr1 p)) _)
   pr1 (pr2 (map-is-finite-displayed-fibered-Σ-Decomposition p) u) =
     pr2 (pr2 p) u
   pr2 (pr2 (map-is-finite-displayed-fibered-Σ-Decomposition p) u) =

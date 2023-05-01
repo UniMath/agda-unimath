@@ -13,12 +13,6 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
-
-open import lists.lists
-
-open import primitives.characters
-open import primitives.floats
 open import primitives.machine-integers
 open import primitives.strings
 ```
@@ -40,10 +34,11 @@ postulate Name : UU lzero
 
 primitive
   primQNameEquality : Name → Name → bool
-  primQNameLess     : Name → Name → bool
-  primShowQName     : Name → String
+  primQNameLess : Name → Name → bool
+  primShowQName : Name → String
   primQNameToWord64s : Name → Word64 × Word64
-  primQNameToWord64sInjective : ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
+  primQNameToWord64sInjective :
+    ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
 ```
 
 ## Examples

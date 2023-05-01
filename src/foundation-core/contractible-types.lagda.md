@@ -189,7 +189,7 @@ module _
         ( A × B)
         ( pair
           ( pair (pr1 (center is-contr-AB)))
-          ( pair pr2 (λ x → refl))          )
+          ( pair pr2 (λ x → refl)))
         ( is-contr-AB)
 
 module _

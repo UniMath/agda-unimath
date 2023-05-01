@@ -126,11 +126,13 @@ equiv-is-contr-equiv {A = A} {B = B} e =
   equiv-prop
     ( is-property-is-contr)
     ( is-property-is-contr)
-    ( is-contr-retract-of A (pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
-    ( is-contr-retract-of B (pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
+    ( is-contr-retract-of A
+      ( pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
+    ( is-contr-retract-of B
+      ( pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
 ```
 
-### Contractible types are k-truncated for any k.
+### Contractible types are `k`-truncated for any `k`
 
 ```agda
 module _
@@ -231,12 +233,12 @@ module _
     dependent-universal-property-contr-is-contr a H {l} P =
       is-equiv-has-inverse
         ( ind-singleton-is-contr a H P)
-        ( comp-singleton-is-contr a H P)
+        ( compute-ind-singleton-is-contr a H P)
         ( λ f →
           eq-htpy
             ( ind-singleton-is-contr a H
               ( λ x → ind-singleton-is-contr a H P (f a) x ＝ f x)
-              ( comp-singleton-is-contr a H P (f a))))
+              ( compute-ind-singleton-is-contr a H P (f a))))
 
   equiv-dependent-universal-property-contr :
     (a : A) → is-contr A → {l : Level} (B : A → UU l) → ((x : A) → B x) ≃ B a

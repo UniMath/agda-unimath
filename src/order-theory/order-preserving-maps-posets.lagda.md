@@ -146,7 +146,10 @@ module _
   comp-hom-Poset :
     (g : hom-Poset Q R) (f : hom-Poset P Q) → hom-Poset P R
   comp-hom-Poset =
-    comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q) (preorder-Poset R)
+    comp-hom-Preorder
+      ( preorder-Poset P)
+      ( preorder-Poset Q)
+      ( preorder-Poset R)
 ```
 
 ### Unit laws for composition of order preserving maps

@@ -48,7 +48,7 @@ pr1 (endo-Set A) = endo (type-Set A)
 pr2 (endo-Set A) = is-set-endo (is-set-type-Set A)
 ```
 
-### If the domain is k-truncated the type of endomorphisms is k-truncated
+### If the domain is `k`-truncated the type of endomorphisms is `k`-truncated
 
 ```agda
 is-trunc-endo :

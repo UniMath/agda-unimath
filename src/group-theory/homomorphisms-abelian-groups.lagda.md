@@ -160,12 +160,19 @@ right-unit-law-comp-hom-Ab A B =
 ab-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
 Large-Precat.obj-Large-Precat ab-Precat = Ab
 Large-Precat.hom-Large-Precat ab-Precat = hom-Ab
-Large-Precat.comp-hom-Large-Precat ab-Precat {X = A} {B} {C} = comp-hom-Ab A B C
-Large-Precat.id-hom-Large-Precat ab-Precat {X = A} = id-hom-Ab A
-Large-Precat.associative-comp-hom-Large-Precat ab-Precat {X = A} {B} {C} {D} =
+Large-Precat.comp-hom-Large-Precat ab-Precat
+  {X = A} {B} {C} =
+  comp-hom-Ab A B C
+Large-Precat.id-hom-Large-Precat ab-Precat
+  {X = A} =
+  id-hom-Ab A
+Large-Precat.associative-comp-hom-Large-Precat ab-Precat
+  {X = A} {B} {C} {D} =
   associative-comp-hom-Ab A B C D
-Large-Precat.left-unit-law-comp-hom-Large-Precat ab-Precat {X = A} {B} =
+Large-Precat.left-unit-law-comp-hom-Large-Precat ab-Precat
+  {X = A} {B} =
   left-unit-law-comp-hom-Ab A B
-Large-Precat.right-unit-law-comp-hom-Large-Precat ab-Precat {X = A} {B} =
+Large-Precat.right-unit-law-comp-hom-Large-Precat ab-Precat
+  {X = A} {B} =
   right-unit-law-comp-hom-Ab A B
 ```

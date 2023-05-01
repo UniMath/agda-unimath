@@ -74,22 +74,24 @@ module _
     type-hom-Groupoid x y → type-hom-Groupoid x z
   comp-hom-Groupoid = comp-hom-Cat cat-Groupoid
 
-  assoc-comp-hom-Groupoid :
+  associative-comp-hom-Groupoid :
     {x y z w : obj-Groupoid} (h : type-hom-Groupoid z w)
     (g : type-hom-Groupoid y z) (f : type-hom-Groupoid x y) →
     ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
     ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
-  assoc-comp-hom-Groupoid = assoc-comp-hom-Cat cat-Groupoid
+  associative-comp-hom-Groupoid = associative-comp-hom-Cat cat-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
     ( comp-hom-Groupoid id-hom-Groupoid f) ＝ f
-  left-unit-law-comp-hom-Groupoid = left-unit-law-comp-hom-Cat cat-Groupoid
+  left-unit-law-comp-hom-Groupoid =
+    left-unit-law-comp-hom-Cat cat-Groupoid
 
   right-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
     ( comp-hom-Groupoid f id-hom-Groupoid) ＝ f
-  right-unit-law-comp-hom-Groupoid = right-unit-law-comp-hom-Cat cat-Groupoid
+  right-unit-law-comp-hom-Groupoid =
+    right-unit-law-comp-hom-Cat cat-Groupoid
 
   iso-Groupoid : (x y : obj-Groupoid) → UU l2
   iso-Groupoid = iso-Cat cat-Groupoid
@@ -134,11 +136,11 @@ module _
             ( λ y →
               equiv-tot
                 ( λ p →
-                  assoc-Σ
+                  associative-Σ
                     ( y ＝ x)
                     ( λ q → (q ∙ p) ＝ refl)
                     ( λ qr → (p ∙ pr1 qr) ＝ refl)))) ∘e
-          ( assoc-Σ
+          ( associative-Σ
             ( type-1-Type X)
             ( λ y → x ＝ y)
             ( λ yp →

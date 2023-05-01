@@ -44,7 +44,7 @@ h-space-Involutive-Type A X =
     ( λ μ →
       Σ ( ( f : type-2-Element-Type X → type-Pointed-Type A) →
           ( x : type-2-Element-Type X) →
-          ( p : f x ＝ pt-Pointed-Type A) →
+          ( p : f x ＝ point-Pointed-Type A) →
           μ f ＝ f (map-swap-2-Element-Type X x))
         ( λ ν →
           symmetric-Id
@@ -69,7 +69,7 @@ module _
       ( λ H →
         Σ ( ( f : type-2-Element-Type X → type-Pointed-Type A) →
             ( x : type-2-Element-Type X) →
-            ( p : f x ＝ pt-Pointed-Type A) →
+            ( p : f x ＝ point-Pointed-Type A) →
             pr1 (pr2 μ) f x p ＝ (H f ∙ pr1 (pr2 μ') f x p))
           ( λ K →
             Eq-symmetric-Id
@@ -90,7 +90,7 @@ module _
               ( map-equiv-symmetric-Id
                 ( equiv-concat
                   ( H (const-Pointed-Type _ A))
-                  ( pt-Pointed-Type A))
+                  ( point-Pointed-Type A))
                 ( ( X) ,
                   ( λ x → pr1 (pr2 μ') (const-Pointed-Type _ A) x refl))
                 ( pr2 (pr2 μ')))))

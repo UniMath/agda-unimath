@@ -352,7 +352,8 @@ subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (ap succ-ℕ (pr2
 
 leq-subtraction-ℕ : (n m l : ℕ) → add-ℕ l n ＝ m → n ≤-ℕ m
 leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
-leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p = leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
+leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
+  leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
 ```
 
 ### Multiplication preserves the ordering on ℕ

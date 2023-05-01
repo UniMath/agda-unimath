@@ -17,7 +17,6 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations
 open import foundation.type-arithmetic-coproduct-types
-open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.unordered-pairs
 

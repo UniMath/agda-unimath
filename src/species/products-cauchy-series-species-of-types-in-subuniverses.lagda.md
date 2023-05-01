@@ -44,8 +44,10 @@ module _
   product-cauchy-series-species-subuniverse :
     UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   product-cauchy-series-species-subuniverse =
-    cauchy-series-species-subuniverse P (subuniverse-global-subuniverse Q l3) S X ×
-    cauchy-series-species-subuniverse P (subuniverse-global-subuniverse Q l4) T X
+    ( cauchy-series-species-subuniverse
+      P (subuniverse-global-subuniverse Q l3) S X) ×
+    ( cauchy-series-species-subuniverse
+      P (subuniverse-global-subuniverse Q l4) T X)
 ```
 
 ## Property
@@ -113,7 +115,7 @@ module _
       ( X) ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-cauchy-series-cauchy-product-species-subuniverse =
-    ( ( equiv-product-cauchy-series-Σ-extension-species-subuniverse P Q S T X) ∘e
+    ( equiv-product-cauchy-series-Σ-extension-species-subuniverse P Q S T X ∘e
       ( ( equiv-cauchy-series-cauchy-product-species-types
             ( Σ-extension-species-subuniverse
                 ( P)
@@ -141,7 +143,8 @@ module _
                       ( subuniverse-global-subuniverse Q l4)
                       ( T))
                   z)
-              ( equiv-cauchy-product-Σ-extension-species-subuniverse P Q C1 C2 S T)
+              ( equiv-cauchy-product-Σ-extension-species-subuniverse
+                  P Q C1 C2 S T)
               ( X)) ∘e
           ( ( equiv-cauchy-series-Σ-extension-species-subuniverse
                 ( P)

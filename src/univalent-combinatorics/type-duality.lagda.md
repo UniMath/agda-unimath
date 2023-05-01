@@ -43,28 +43,28 @@ equiv-surjection-𝔽-family-finite-inhabited-type :
   ( (type-𝔽 A ↠ type-𝔽 B) ≃
     ( Σ ( (type-𝔽 B) → Inhabited-𝔽 l)
         ( λ Y → (type-𝔽 A) ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))))
-equiv-surjection-𝔽-family-finite-inhabited-type A B =
+equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
   ( ( equiv-Σ
       ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))
       ( equiv-postcomp
         ( type-𝔽 B)
-        ( inv-assoc-Σ ( UU _) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
+        ( inv-associative-Σ ( UU l) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
           equiv-Σ
             ( λ z → is-finite z × is-inhabited z)
             ( id-equiv)
-            ( λ _ → commutative-prod)) )
-      ( λ b → id-equiv )) ∘e
+            ( λ _ → commutative-prod)))
+      ( λ b → id-equiv)) ∘e
     ( ( equiv-fixed-Slice-structure
-        ( λ x → (is-inhabited x )× (is-finite x))
+        ( λ x → (is-inhabited x)× (is-finite x))
         ( type-𝔽 A)
         ( type-𝔽 B)) ∘e
       ( ( equiv-Σ
           ( structure-map (λ x → is-inhabited x × is-finite x))
           ( id-equiv)
           ( λ _ → inv-equiv distributive-Π-Σ)) ∘e
-        ( ( assoc-Σ
+        ( ( associative-Σ
             ( type-𝔽 A → type-𝔽 B)
-            ( structure-map is-inhabited )
+            ( structure-map is-inhabited)
             ( _)) ∘e
           ( ( inv-equiv
               ( equiv-inclusion-is-full-subtype
@@ -82,11 +82,11 @@ Slice-Surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
 equiv-Fib-trunc-Prop-𝔽 :
   (l : Level) {l1 : Level} (A : 𝔽 l1) →
   Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-𝔽 (l1 ⊔ l))
-equiv-Fib-trunc-Prop-𝔽 l A =
+equiv-Fib-trunc-Prop-𝔽 l {l1} A =
   ( ( equiv-Π
       ( λ _ → Inhabited-𝔽 _)
       ( id-equiv)
-      ( λ a → inv-assoc-Σ _ _ _) ∘e
+      ( λ a → inv-associative-Σ _ _ _) ∘e
       ( ( equiv-Fib-structure
           ( l)
           ( λ X → is-finite X × is-inhabited X) (type-𝔽 A)))) ∘e
@@ -107,5 +107,5 @@ equiv-Fib-trunc-Prop-𝔽 l A =
           ( _)
           ( id-equiv)
           ( λ _ → equiv-left-swap-Σ)) ∘e
-        ( assoc-Σ (UU _ ) (λ z → is-finite z) _)))))
+        ( associative-Σ (UU (l ⊔ l1)) (is-finite) _)))))
 ```

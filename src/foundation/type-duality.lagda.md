@@ -137,7 +137,7 @@ is-emb-map-type-duality
               by inv-equiv (equiv-fam-equiv-equiv-slice f g)
             ≃ ( (X , f) ＝ (Y , g))
               by
-              inv-equiv (extensionality-Slice (X , f) (Y , g)) ))
+              inv-equiv (extensionality-Slice (X , f) (Y , g))))
       ( is-contr-total-path (X , f)))
     ( λ Y → ap (map-type-duality H))
 
@@ -325,7 +325,7 @@ fib-Σ {l1} {l2} X A =
         inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
-          ( is-contr-is-small-lmax l2 X )
-          ( is-small-lmax l2 X )) ∘e
+          ( is-contr-is-small-lmax l2 X)
+          ( is-small-lmax l2 X)) ∘e
         ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A))))
 ```

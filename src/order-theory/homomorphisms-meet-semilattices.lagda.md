@@ -28,24 +28,42 @@ underlying posets that also preserves meets.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
   where
 
-  preserves-meets : (element-Meet-Semilattice A → element-Meet-Semilattice B) → UU (l1 ⊔ l3 ⊔ l4)
-  preserves-meets f = (x y : element-Meet-Semilattice A) →
-    is-greatest-binary-lower-bound-Poset (poset-Meet-Semilattice B) (f x) (f y) (f (meet-Meet-Semilattice A x y))
+  preserves-meets :
+    (element-Meet-Semilattice A → element-Meet-Semilattice B) →
+    UU (l1 ⊔ l3 ⊔ l4)
+  preserves-meets f =
+    (x y : element-Meet-Semilattice A) →
+    is-greatest-binary-lower-bound-Poset
+      (poset-Meet-Semilattice B) (f x) (f y) (f (meet-Meet-Semilattice A x y))
 
   hom-Meet-Semilattice : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-Meet-Semilattice = Σ (element-Meet-Semilattice A → element-Meet-Semilattice B)
-    λ f → preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) f × preserves-meets f
+  hom-Meet-Semilattice =
+    Σ ( element-Meet-Semilattice A → element-Meet-Semilattice B)
+      ( λ f →
+        preserves-order-Poset
+          ( poset-Meet-Semilattice A)
+          ( poset-Meet-Semilattice B)
+          ( f) ×
+        preserves-meets f)
 
-  map-hom-Meet-Semilattice : hom-Meet-Semilattice → element-Meet-Semilattice A → element-Meet-Semilattice B
+  map-hom-Meet-Semilattice :
+    hom-Meet-Semilattice →
+    element-Meet-Semilattice A → element-Meet-Semilattice B
   map-hom-Meet-Semilattice = pr1
 
-  preserves-order-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) →
-    preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) (map-hom-Meet-Semilattice H)
+  preserves-order-hom-Meet-Semilattice :
+    (H : hom-Meet-Semilattice) →
+    preserves-order-Poset
+      ( poset-Meet-Semilattice A)
+      ( poset-Meet-Semilattice B)
+      ( map-hom-Meet-Semilattice H)
   preserves-order-hom-Meet-Semilattice = pr1 ∘ pr2
 
-  preserves-meet-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
+  preserves-meet-hom-Meet-Semilattice :
+    (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
   preserves-meet-hom-Meet-Semilattice = pr2 ∘ pr2
 ```

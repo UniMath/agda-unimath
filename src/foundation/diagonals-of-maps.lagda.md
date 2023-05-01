@@ -87,7 +87,7 @@ abstract
       ( isretr-fib-diagonal-map-fib-ap f t)
 ```
 
-### A map is `(k+1)`-truncated if and only if its diagonal is `k`-truncated
+### A map is `k+1`-truncated if and only if its diagonal is `k`-truncated
 
 ```agda
 abstract

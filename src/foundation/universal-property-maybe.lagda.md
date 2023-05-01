@@ -9,7 +9,6 @@ module foundation.universal-property-maybe where
 ```agda
 open import foundation.function-extensionality
 open import foundation.maybe
-open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types

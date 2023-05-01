@@ -148,7 +148,7 @@ module _
     map-inv-equiv (extensionality-functional-correspondence D)
 ```
 
-### The type of dependent functions `(x : A) → B x` is equivalent to the type of functional dependent correspondences from `A` to `B`.
+### The type of dependent functions `(x : A) → B x` is equivalent to the type of functional dependent correspondences from `A` to `B`
 
 ```agda
 module _

@@ -51,12 +51,12 @@ map-ℤ-Pointed-Type-With-Aut :
 map-ℤ-Pointed-Type-With-Aut X k =
   map-iterate-automorphism-ℤ k
     ( aut-Pointed-Type-With-Aut X)
-    ( pt-Pointed-Type-With-Aut X)
+    ( point-Pointed-Type-With-Aut X)
 
 preserves-point-map-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : Pointed-Type-With-Aut l) →
   ( map-ℤ-Pointed-Type-With-Aut X zero-ℤ) ＝
-  ( pt-Pointed-Type-With-Aut X)
+  ( point-Pointed-Type-With-Aut X)
 preserves-point-map-ℤ-Pointed-Type-With-Aut X = refl
 
 preserves-aut-map-ℤ-Pointed-Type-With-Aut :
@@ -67,7 +67,7 @@ preserves-aut-map-ℤ-Pointed-Type-With-Aut :
 preserves-aut-map-ℤ-Pointed-Type-With-Aut X k =
   iterate-automorphism-succ-ℤ' k
     ( aut-Pointed-Type-With-Aut X)
-    ( pt-Pointed-Type-With-Aut X)
+    ( point-Pointed-Type-With-Aut X)
 
 hom-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : Pointed-Type-With-Aut l) →
@@ -146,7 +146,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
     ( inv-con
       ( issec-map-inv-equiv
         ( aut-Pointed-Type-With-Aut X)
-        ( pt-Pointed-Type-With-Aut X))
+        ( point-Pointed-Type-With-Aut X))
       ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
         ( preserves-aut-map-hom-Pointed-Type-With-Aut
           ℤ-Pointed-Type-With-Aut X h neg-one-ℤ))

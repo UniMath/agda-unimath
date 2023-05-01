@@ -195,7 +195,8 @@ module _
     {l3 : Level} → Abstract-Group-Action G l3 →
     Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   set-left-adjoint-subst-Abstract-Group-Action X =
-    equivalence-class-Set (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+    equivalence-class-Set
+      ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
 
 {-
   obj-left-adjoint-subst-Abstract-Group-Action :

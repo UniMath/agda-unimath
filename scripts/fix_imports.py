@@ -58,10 +58,10 @@ def subdivide_namespaces_imports(imports):
     namespaces = collections.defaultdict(set)
     for statement in imports:
         namespace_start = statement.index(
-            "open import") + len("open import") + 1
+            'open import') + len('open import') + 1
         module = statement[namespace_start:]
         try:
-            namespace = module[:module.rindex(".")]
+            namespace = module[:module.rindex('.')]
             namespaces[namespace].add(module)
         except ValueError:
             namespaces[module].add(module)
@@ -71,14 +71,14 @@ def subdivide_namespaces_imports(imports):
         if k in namespaces[k]:
             namespaces[k] = {k}
 
-    for statement in namespaces["foundation"]:
-        submodule_start = statement.find(".")
+    for statement in namespaces['foundation']:
+        submodule_start = statement.find('.')
         if submodule_start != -1:
-            namespaces["foundation-core"].discard(
-                "foundation-core" + statement[submodule_start:])
+            namespaces['foundation-core'].discard(
+                'foundation-core' + statement[submodule_start:])
 
-    if "foundation" in namespaces["foundation"]:
-        namespaces.pop("foundation-core")
+    if 'foundation' in namespaces['foundation']:
+        namespaces.pop('foundation-core')
 
     # Remove any namespaces that ended up being empty
     return dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
@@ -88,10 +88,10 @@ def normalize_imports(imports):
     # Subdivide imports into namespaces
     namespaces = subdivide_namespaces_imports(imports)
     # Join together with the appropriate line separations
-    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports)))
+    blocks = ('\n'.join(map(lambda module: 'open import ' + module, sorted(namespace_imports)))
               for namespace, namespace_imports in sorted(namespaces.items()))
 
-    return "\n\n".join(blocks)
+    return '\n\n'.join(blocks)
 
 
 def get_imports(contents):
@@ -117,7 +117,7 @@ def prettify_imports_block(block):
     return prettify_imports_to_block(public, nonpublic, openstatements)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     status = 0
 

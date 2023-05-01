@@ -382,7 +382,7 @@ eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
 
-### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type.
+### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type
 
 ```agda
 module _
@@ -406,7 +406,7 @@ module _
   pr2 Aut-2-Element-Type = has-two-elements-Aut-2-Element-Type
 ```
 
-### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence.
+### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence
 
 ```agda
 module _
@@ -490,8 +490,8 @@ abstract
           ( ¬ (pr1 X))
           ( apply-universal-property-trunc-Prop
             ( pr2 X)
-            ( dn-Prop' (pr1 X))
-            ( λ e → intro-dn {l} (map-equiv e (zero-Fin 1))))
+            ( double-negation-Prop' (pr1 X))
+            ( λ e → intro-double-negation {l} (map-equiv e (zero-Fin 1))))
           ( d X))
 ```
 
@@ -674,8 +674,10 @@ module _
                 ( refl)
                 ( refl))))
     where
-    f : (h : type-2-Element-Type X ≃ Fin 2) → (y : type-2-Element-Type X) →
-        ( k1 k2 k3 : Fin 2) →
+    f :
+      ( h : type-2-Element-Type X ≃ Fin 2)
+      ( y : type-2-Element-Type X) →
+      ( k1 k2 k3 : Fin 2) →
         map-equiv h x ＝ k1 → map-equiv h y ＝ k2 →
         map-equiv h (map-equiv (swap-2-Element-Type X) y) ＝ k3 →
         map-equiv (swap-2-Element-Type X) y ＝ y
@@ -750,7 +752,7 @@ is-coprod-Σ-Fin-two-ℕ P =
   ( right-distributive-Σ-coprod (Fin 1) unit P)
 ```
 
-### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`.
+### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`
 
 ```agda
 module _

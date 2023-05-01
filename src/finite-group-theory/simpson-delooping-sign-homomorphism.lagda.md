@@ -625,7 +625,7 @@ module _
     lemma-sign-comp :
       ( X X' : UU-Fin l n)
       ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-      ( f f' : (Fin n ≃ type-UU-Fin n X)) →
+      ( f f' : Fin n ≃ type-UU-Fin n X) →
       Id
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e f'))
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n)
@@ -639,7 +639,8 @@ module _
           ( inv (left-unit-law-equiv f') ∙
             ( ap (_∘e f') (inv (left-inverse-law-equiv e)) ∙
               ( associative-comp-equiv f' e (inv-equiv e)))) ∙
-          ( inv (associative-comp-equiv (e ∘e f') (inv-equiv e) (inv-equiv f)) ∙
+          ( ( inv
+              ( associative-comp-equiv (e ∘e f') (inv-equiv e) (inv-equiv f))) ∙
             ( ap
               ( _∘e map-simpson-comp-equiv X X' e f')
               ( inv (distributive-inv-comp-equiv f e)))))
@@ -647,7 +648,7 @@ module _
   preserves-sign-comp-simpson-comp-equiv :
     ( X X' : UU-Fin l n)
     ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-    ( f f' : (Fin n ≃ type-UU-Fin n X)) →
+    ( f f' : Fin n ≃ type-UU-Fin n X) →
     ( sim-Eq-Rel (sign-comp-Eq-Rel n X) f f' ↔
       sim-Eq-Rel
         ( sign-comp-Eq-Rel n X')

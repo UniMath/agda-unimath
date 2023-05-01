@@ -6,11 +6,11 @@ import sys
 import utils
 import re
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
 
-        with open(fpath, "r") as f:
+        with open(fpath, 'r') as f:
             contents = f.read()
 
         block_start = r'```agda\b'

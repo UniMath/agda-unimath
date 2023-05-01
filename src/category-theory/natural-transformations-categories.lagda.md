@@ -31,18 +31,20 @@ module _
   (F G : functor-Cat C D)
   where
 
-  is-nat-trans-Cat :
+  is-natural-transformation-Cat :
     ( (x : obj-Cat C) →
       type-hom-Cat D (obj-functor-Cat C D F x) (obj-functor-Cat C D G x)) →
     UU (l1 ⊔ l2 ⊔ l4)
-  is-nat-trans-Cat = is-nat-trans-Precat (precat-Cat C) (precat-Cat D) F G
+  is-natural-transformation-Cat =
+    is-natural-transformation-Precat (precat-Cat C) (precat-Cat D) F G
 
-  nat-trans-Cat : UU (l1 ⊔ l2 ⊔ l4)
-  nat-trans-Cat = nat-trans-Precat (precat-Cat C) (precat-Cat D) F G
+  natural-transformation-Cat : UU (l1 ⊔ l2 ⊔ l4)
+  natural-transformation-Cat =
+    natural-transformation-Precat (precat-Cat C) (precat-Cat D) F G
 
-  components-nat-trans-Cat :
-    nat-trans-Cat → (x : obj-Cat C) →
+  components-natural-transformation-Cat :
+    natural-transformation-Cat → (x : obj-Cat C) →
     type-hom-Cat D (obj-functor-Cat C D F x) (obj-functor-Cat C D G x)
-  components-nat-trans-Cat =
-    components-nat-trans-Precat (precat-Cat C) (precat-Cat D) F G
+  components-natural-transformation-Cat =
+    components-natural-transformation-Precat (precat-Cat C) (precat-Cat D) F G
 ```

@@ -39,7 +39,7 @@ concatenation of `ω` with itself.
 ```agda
 power-nat-Ω :
   {l : Level} → ℕ → (A : Pointed-Type l) → type-Ω A → type-Ω A
-power-nat-Ω n A ω = iterate n (concat' (pt-Pointed-Type A) ω) refl
+power-nat-Ω n A ω = iterate n (concat' (point-Pointed-Type A) ω) refl
 ```
 
 ### Powers of loops by integers
@@ -48,7 +48,7 @@ power-nat-Ω n A ω = iterate n (concat' (pt-Pointed-Type A) ω) refl
 equiv-power-int-Ω :
   {l : Level} → ℤ → (A : Pointed-Type l) → type-Ω A → type-Ω A ≃ type-Ω A
 equiv-power-int-Ω k A ω =
-  iterate-automorphism-ℤ k (equiv-concat' (pt-Pointed-Type A) ω)
+  iterate-automorphism-ℤ k (equiv-concat' (point-Pointed-Type A) ω)
 
 power-int-Ω :
   {l : Level} → ℤ → (A : Pointed-Type l) → type-Ω A → type-Ω A
@@ -65,7 +65,7 @@ power-nat-refl-Ω :
   power-nat-Ω n A refl ＝ refl
 power-nat-refl-Ω zero-ℕ A = refl
 power-nat-refl-Ω (succ-ℕ n) A =
-  ap (concat' (pt-Pointed-Type A) refl) (power-nat-refl-Ω n A)
+  ap (concat' (point-Pointed-Type A) refl) (power-nat-refl-Ω n A)
 ```
 
 ### `ωⁿ⁺¹ = ωⁿ ∙ ω`
@@ -81,7 +81,7 @@ power-nat-succ-Ω' :
   power-nat-Ω (succ-ℕ n) A ω ＝ (ω ∙ power-nat-Ω n A ω)
 power-nat-succ-Ω' zero-ℕ A ω = inv right-unit
 power-nat-succ-Ω' (succ-ℕ n) A ω =
-  ( ap (concat' (pt-Pointed-Type A) ω) (power-nat-succ-Ω' n A ω)) ∙
+  ( ap (concat' (point-Pointed-Type A) ω) (power-nat-succ-Ω' n A ω)) ∙
   ( assoc ω (power-nat-Ω n A ω) ω)
 ```
 
@@ -93,7 +93,7 @@ power-nat-add-Ω :
   power-nat-Ω (add-ℕ m n) A ω ＝ (power-nat-Ω m A ω ∙ power-nat-Ω n A ω)
 power-nat-add-Ω m zero-ℕ A ω = inv right-unit
 power-nat-add-Ω m (succ-ℕ n) A ω =
-  ( ap (concat' (pt-Pointed-Type A) ω) (power-nat-add-Ω m n A ω)) ∙
+  ( ap (concat' (point-Pointed-Type A) ω) (power-nat-add-Ω m n A ω)) ∙
   ( assoc (power-nat-Ω m A ω) (power-nat-Ω n A ω) ω)
 ```
 
@@ -107,7 +107,7 @@ power-nat-mul-Ω zero-ℕ n A ω = refl
 power-nat-mul-Ω (succ-ℕ m) n A ω =
   ( power-nat-add-Ω (mul-ℕ m n) n A ω) ∙
   ( ( ap
-      ( concat' (pt-Pointed-Type A) (power-nat-Ω n A ω))
+      ( concat' (point-Pointed-Type A) (power-nat-Ω n A ω))
       ( power-nat-mul-Ω m n A ω)))
 
 power-nat-mul-Ω' :
@@ -129,6 +129,6 @@ map-power-nat-Ω zero-ℕ A B f ω = preserves-refl-map-Ω A B f
 map-power-nat-Ω (succ-ℕ n) A B f ω =
   ( preserves-mul-map-Ω A B f (power-nat-Ω n A ω) ω) ∙
   ( ap
-    ( concat' (pt-Pointed-Type B) (map-Ω A B f ω))
+    ( concat' (point-Pointed-Type B) (map-Ω A B f ω))
     ( map-power-nat-Ω n A B f ω))
 ```

@@ -72,7 +72,8 @@ unit-law-101-associative-concat-list (cons x l) z =
           ( associative-concat-list l nil z)
           ( ap (concat-list l) (left-unit-law-concat-list z)))) ∙
       ( ap (ap (cons x)) (unit-law-101-associative-concat-list l z))) ∙
-    ( inv (ap-comp (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
+    ( inv
+      ( ap-comp (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
   ( ap-comp (concat-list' z) (cons x) (right-unit-law-concat-list l))
 
 unit-law-110-associative-concat-list :
@@ -238,7 +239,7 @@ module _
                           ( map-elim-list-Wild-Monoid x)
                           ( unit-Wild-Monoid M)))
                       ( map-elim-list-Wild-Monoid (cons a x)))
-                    ( unit-law-110-assoc-Wild-Monoid M
+                    ( unit-law-110-associative-Wild-Monoid M
                       ( f a)
                       ( map-elim-list-Wild-Monoid x)))))) ∙
             ( inv

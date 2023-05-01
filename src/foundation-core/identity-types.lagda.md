@@ -208,7 +208,8 @@ ap-concat f refl q = refl
 
 ap-concat-eq :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
+  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z)
+  (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
 ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
 
 ap-inv :
@@ -235,7 +236,7 @@ tr :
 tr B refl b = b
 
 path-over :
-  {l1 l2 : Level} {A :  UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
   B x → B x' → UU l2
 path-over B p y y' = (tr B p y) ＝ y'
 
@@ -282,7 +283,7 @@ preserves-tr f refl x = refl
 tr-Id-left :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
   (tr (_＝ a) q p) ＝ ((inv q) ∙ p)
-tr-Id-left refl p  = refl
+tr-Id-left refl p = refl
 
 tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
@@ -438,7 +439,8 @@ ap-binary-comp-diagonal :
   (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
   (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
 ap-binary-comp-diagonal H f g p =
-  inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
+  ( inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p)) ∙
+  ( ap-binary-comp H f g p p)
 
 ap-binary-comp' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
@@ -461,5 +463,5 @@ ap-binary-concat :
   (q : b0 ＝ b1) (q' : b1 ＝ b2) →
   (ap-binary f (p ∙ p') (q ∙ q')) ＝
     ((ap-binary f p q) ∙ (ap-binary f p' q'))
-ap-binary-concat f refl refl refl refl  = refl
+ap-binary-concat f refl refl refl refl = refl
 ```

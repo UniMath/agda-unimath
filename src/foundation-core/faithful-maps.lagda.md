@@ -96,7 +96,7 @@ module _
   is-faithful-id-faithful-map = is-faithful-map-faithful-map id-faithful-map
 ```
 
-### Any 0-map is faithful
+### Any `0`-map is faithful
 
 ```agda
 module _

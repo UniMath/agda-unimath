@@ -36,8 +36,9 @@ min-Fin (succ-ℕ k) (inr _) (inl x) = inl x
 min-Fin (succ-ℕ k) (inr _) (inr _) = inr star
 
 min-Fin-Fin : (n k : ℕ) → (Fin (succ-ℕ n) → Fin k) → Fin k
-min-Fin-Fin zero-ℕ k f     = f (inr star)
-min-Fin-Fin (succ-ℕ n) k f = min-Fin k (f (inr star)) (min-Fin-Fin n k (λ k → f (inl k)))
+min-Fin-Fin zero-ℕ k f = f (inr star)
+min-Fin-Fin (succ-ℕ n) k f =
+  min-Fin k (f (inr star)) (min-Fin-Fin n k (λ k → f (inl k)))
 ```
 
 ## Properties
@@ -61,7 +62,8 @@ leq-min-Fin (succ-ℕ k) (inr x) (inr y) (inr z) p q = star
 
 leq-left-leq-min-Fin :
   (k : ℕ) (l m n : Fin k) → leq-Fin k l (min-Fin k m n) → leq-Fin k l m
-leq-left-leq-min-Fin (succ-ℕ k) (inl x) (inl y) (inl z) p = leq-left-leq-min-Fin k x y z p
+leq-left-leq-min-Fin (succ-ℕ k) (inl x) (inl y) (inl z) p =
+  leq-left-leq-min-Fin k x y z p
 leq-left-leq-min-Fin (succ-ℕ k) (inl x) (inl y) (inr _) p = p
 leq-left-leq-min-Fin (succ-ℕ k) (inl x) (inr _) (inl _) p = star
 leq-left-leq-min-Fin (succ-ℕ k) (inl x) (inr _) (inr _) p = star
@@ -71,7 +73,8 @@ leq-left-leq-min-Fin (succ-ℕ k) (inr _) (inr _) (inr _) p = star
 
 leq-right-leq-min-Fin :
   (k : ℕ) (l m n : Fin k) → leq-Fin k l (min-Fin k m n) → leq-Fin k l n
-leq-right-leq-min-Fin (succ-ℕ k) (inl x) (inl x₁) (inl x₂) p = leq-right-leq-min-Fin k x x₁ x₂ p
+leq-right-leq-min-Fin (succ-ℕ k) (inl x) (inl x₁) (inl x₂) p =
+  leq-right-leq-min-Fin k x x₁ x₂ p
 leq-right-leq-min-Fin (succ-ℕ k) (inl x) (inl x₁) (inr x₂) p = star
 leq-right-leq-min-Fin (succ-ℕ k) (inl x) (inr x₁) (inl x₂) p = p
 leq-right-leq-min-Fin (succ-ℕ k) (inl x) (inr x₁) (inr x₂) p = star
@@ -86,5 +89,6 @@ pr1 (pr1 (is-greatest-lower-bound-min-Fin k l m)) =
   leq-left-leq-min-Fin k (min-Fin k l m) l m (refl-leq-Fin k (min-Fin k l m))
 pr2 (pr1 (is-greatest-lower-bound-min-Fin k l m)) =
   leq-right-leq-min-Fin k (min-Fin k l m) l m (refl-leq-Fin k (min-Fin k l m))
-pr2 (is-greatest-lower-bound-min-Fin k l m) x (pair H K) = leq-min-Fin k x l m H K
+pr2 (is-greatest-lower-bound-min-Fin k l m) x (pair H K) =
+  leq-min-Fin k x l m H K
 ```

@@ -43,7 +43,9 @@ id-hom-species-types F = λ X x → x
 
 comp-hom-species-types :
   {l1 l2 l3 l4 : Level}
-  {F : species-types l1 l2} {G : species-types l1 l3} {H : species-types l1 l4} →
+  {F : species-types l1 l2}
+  {G : species-types l1 l3}
+  {H : species-types l1 l4} →
   hom-species-types G H → hom-species-types F G → hom-species-types F H
 comp-hom-species-types f g X = (f X) ∘ (g X)
 ```

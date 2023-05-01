@@ -1,7 +1,7 @@
 # A precategory solver
 
 ```agda
-{-# OPTIONS --no-exact-split  #-}
+{-# OPTIONS --no-exact-split #-}
 module category-theory.precategory-solver where
 ```
 
@@ -10,12 +10,10 @@ module category-theory.precategory-solver where
 ```agda
 open import category-theory.precategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -61,7 +59,8 @@ module _
     type-hom-Precat-Expr :
       {x y : obj-Precat C} → type-hom-Precat C x y → Precat-Expr x y
     comp-hom-Precat-Expr :
-      {x y z : obj-Precat C} → Precat-Expr y z → Precat-Expr x y → Precat-Expr x z
+      {x y z : obj-Precat C} →
+      Precat-Expr y z → Precat-Expr x y → Precat-Expr x z
 ```
 
 ### The syntactic representation of a morphism
@@ -98,18 +97,24 @@ module _
   is-sound-eval-Precat-Expr id-hom-Precat-Expr f =
     inv (left-unit-law-comp-hom-Precat C f)
   is-sound-eval-Precat-Expr (type-hom-Precat-Expr f) g = refl
-  is-sound-eval-Precat-Expr (comp-hom-Precat-Expr f g) h = equational-reasoning
+  is-sound-eval-Precat-Expr (comp-hom-Precat-Expr f g) h =
+    equational-reasoning
     eval-Precat-Expr f (eval-Precat-Expr g h)
       ＝ comp-hom-Precat C (in-Precat-Expr f) (eval-Precat-Expr g h)
         by is-sound-eval-Precat-Expr f (eval-Precat-Expr g h)
       ＝ comp-hom-Precat C
           (in-Precat-Expr f)
           (comp-hom-Precat C (in-Precat-Expr g) h)
-        by ap (comp-hom-Precat C (in-Precat-Expr f)) (is-sound-eval-Precat-Expr g h)
+        by ap
+          ( comp-hom-Precat C (in-Precat-Expr f))
+          ( is-sound-eval-Precat-Expr g h)
       ＝ comp-hom-Precat C
           (comp-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g))
           h
-        by inv (assoc-comp-hom-Precat C (in-Precat-Expr f) (in-Precat-Expr g) h)
+        by
+          inv
+            ( associative-comp-hom-Precat
+              C (in-Precat-Expr f) (in-Precat-Expr g) h)
 
   normalize-Precat-Expr :
     {x y : obj-Precat C} →
@@ -171,8 +176,11 @@ private
         hidden-Arg unknown ∷
         hidden-Arg unknown ∷
         xs)
+```
 
--- Builds a term of `Precat-Expr C x y` from a term of type `type-hom-Precat C x y`
+### Building a term of `Precat-Expr C x y` from a term of type `type-hom-Precat C x y`
+
+```agda
 build-Precat-Expr : Term → Term
 build-Precat-Expr
   ( apply-pr1

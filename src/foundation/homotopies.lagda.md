@@ -113,10 +113,10 @@ module _
       C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
     ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
 
-    comp-htpy :
+    compute-ind-htpy :
       (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
-    comp-htpy f C = pr2 (Ind-htpy f C)
+    compute-ind-htpy f C = pr2 (Ind-htpy f C)
 ```
 
 ### Inverting homotopies is an equivalence
@@ -280,9 +280,12 @@ module _
     (map-inv-equiv (compute-path-over-eq-value'
       f g p (H a0) (H a1))) (apd H p) ＝ inv (nat-htpy H p)
   nat-htpy-apd-htpy refl =
-    inv (ap (map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a0)))
-      (ap inv (left-inv right-unit))) ∙
-     (isretr-map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a1)) (inv right-unit))
+    inv
+      ( ap
+        ( map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a0)))
+        ( ap inv (left-inv right-unit))) ∙
+      ( isretr-map-inv-equiv
+        ( compute-path-over-eq-value' f g refl (H a0) (H a1)) (inv right-unit))
 ```
 
 ## See also

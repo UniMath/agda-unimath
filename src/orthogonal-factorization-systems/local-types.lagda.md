@@ -164,7 +164,7 @@ module _
     is-local-family-is-contr (λ _ → A) (λ _ → is-contr-A)
 ```
 
-### A type that is local at the unique map `empty → unit` is contractible.
+### A type that is local at the unique map `empty → unit` is contractible
 
 ```agda
 is-contr-is-local-type :

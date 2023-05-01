@@ -116,10 +116,11 @@ module _
   module _
     {i : Fin (succ-ℕ k)} (x : face-Finitely-Graded-Poset i)
     where
+```
 
-    {- If chains with jumps are never used, we'd like to call the following
-       chains. -}
+If chains with jumps are never used, we'd like to call the following chains.
 
+```agda
     data
       path-faces-Finitely-Graded-Poset :
         {j : Fin (succ-ℕ k)} (y : face-Finitely-Graded-Poset j) →
@@ -163,7 +164,8 @@ module _
     path-faces-Finitely-Graded-Poset x y
 
   refl-path-elements-Finitely-Graded-Poset :
-    (x : element-Finitely-Graded-Poset) → path-elements-Finitely-Graded-Poset x x
+    (x : element-Finitely-Graded-Poset) →
+    path-elements-Finitely-Graded-Poset x x
   refl-path-elements-Finitely-Graded-Poset x =
     refl-path-faces-Finitely-Graded-Poset
 

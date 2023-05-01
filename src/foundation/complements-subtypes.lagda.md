@@ -55,7 +55,7 @@ module _
 
   is-full-union-subtype-complement-subtype :
     (P : subtype l2 A) → is-decidable-subtype P →
-    is-full-subtype (union-subtype P (complement-subtype P) )
+    is-full-subtype (union-subtype P (complement-subtype P))
   is-full-union-subtype-complement-subtype P d x =
     unit-trunc-Prop (d x)
 

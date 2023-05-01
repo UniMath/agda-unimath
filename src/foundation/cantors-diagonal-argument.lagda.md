@@ -42,8 +42,8 @@ abstract
     no-fixed-points-neg-Prop (f x x) (iff-eq (htpy-eq α x))
 
 abstract
-  cantor : {l1 l2 : Level} (X : UU l1) (f : X → (X → Prop l2)) →
-    ¬ (is-surjective f)
+  cantor :
+    {l1 l2 : Level} (X : UU l1) (f : X → X → Prop l2) → ¬ (is-surjective f)
   cantor X f H =
     ( apply-universal-property-trunc-Prop
       ( H (map-cantor X f))

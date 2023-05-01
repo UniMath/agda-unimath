@@ -83,10 +83,11 @@ associative-add-ℚ (x , px) (y , py) (z , pz) =
           ( refl-sim-fraction-ℤ z))
     ＝ in-fraction-ℤ (add-fraction-ℤ x (add-fraction-ℤ y z))
       by eq-ℚ-sim-fractions-ℤ _ _ (associative-add-fraction-ℤ x y z)
-    ＝ in-fraction-ℤ (add-fraction-ℤ x (pr1 (in-fraction-ℤ (add-fraction-ℤ y z))))
+    ＝ in-fraction-ℤ
+        ( add-fraction-ℤ x (pr1 (in-fraction-ℤ (add-fraction-ℤ y z))))
       by eq-ℚ-sim-fractions-ℤ _ _
         ( sim-fraction-add-fraction-ℤ
-          ( refl-sim-fraction-ℤ x )
+          ( refl-sim-fraction-ℤ x)
           ( sim-reduced-fraction-ℤ (add-fraction-ℤ y z)))
 ```
 
@@ -94,7 +95,7 @@ associative-add-ℚ (x , px) (y , py) (z , pz) =
 
 ```agda
 commutative-add-ℚ :
-  (x y  : ℚ) →
+  (x y : ℚ) →
   x +ℚ y ＝ y +ℚ x
 commutative-add-ℚ (x , px) (y , py) =
   eq-ℚ-sim-fractions-ℤ

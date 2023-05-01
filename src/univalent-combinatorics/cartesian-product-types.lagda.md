@@ -86,7 +86,7 @@ equiv-left-factor {l1} {l2} {X} {Y} y =
   ( ( right-unit-law-prod) ∘e
     ( equiv-tot
       ( λ x → equiv-is-contr (is-contr-total-path' y) is-contr-unit))) ∘e
-  ( assoc-Σ X (λ x → Y) (λ t → Id (pr2 t) y))
+  ( associative-Σ X (λ x → Y) (λ t → Id (pr2 t) y))
 
 count-left-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → Y → count X

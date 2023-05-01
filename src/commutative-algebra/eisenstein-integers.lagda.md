@@ -324,7 +324,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                           ( associative-mul-ℤ b d e))) ∙
                       ( ap
                         ( neg-ℤ)
-                        (  ap (mul-ℤ b) (commutative-mul-ℤ d e)))))) ∙
+                        ( ap (mul-ℤ b) (commutative-mul-ℤ d e)))))) ∙
                 ( associative-add-ℤ
                   ( mul-ℤ a ed)
                   ( mul-ℤ ce b)

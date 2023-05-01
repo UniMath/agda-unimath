@@ -56,10 +56,21 @@ module _
     is-coherently-invertible-is-path-split :
       is-path-split f → is-coherently-invertible f
     pr1 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)) = g
-    pr1 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))) = issec-g
-    pr1 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)))) x =
+    pr1
+      ( pr2
+        ( is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))) =
+      issec-g
+    pr1
+      ( pr2
+        ( pr2
+          ( is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))))
+      ( x) =
       pr1 (sec-ap-f (g (f x)) x) (issec-g (f x))
-    pr2 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)))) x =
+    pr2
+      ( pr2
+        ( pr2
+          ( is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))))
+      ( x) =
       inv (pr2 (sec-ap-f (g (f x)) x) (issec-g (f x)))
 
   abstract

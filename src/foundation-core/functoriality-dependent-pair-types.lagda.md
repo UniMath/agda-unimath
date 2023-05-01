@@ -120,12 +120,12 @@ tot-id B (pair x y) = refl
 ### the map `tot` preserves composition
 
 ```agda
-tot-comp :
+preserves-comp-tot :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
   (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
   tot (λ x → (g x) ∘ (f x)) ~ ((tot g) ∘ (tot f))
-tot-comp f g (pair x y) = refl
+preserves-comp-tot f g (pair x y) = refl
 ```
 
 ### The fibers of `tot`

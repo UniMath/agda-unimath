@@ -1,7 +1,7 @@
 # The type checking monad
 
 ```agda
-{-# OPTIONS --no-exact-split  #-}
+{-# OPTIONS --no-exact-split #-}
 module reflection.type-checking-monad where
 ```
 
@@ -14,7 +14,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.identity-types
-open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -43,42 +42,42 @@ keywords to handle, notably `unquote`.
 
 ```agda
 data ErrorPart : UU lzero where
-  strErr  : String → ErrorPart
+  strErr : String → ErrorPart
   termErr : Term → ErrorPart
   pattErr : Pattern → ErrorPart
   nameErr : Name → ErrorPart
 
 postulate
   -- The type checking monad
-  TC               : ∀ {a} → UU a → UU a
-  returnTC         : ∀ {a} {A : UU a} → A → TC A
-  bindTC           : ∀ {a b} {A : UU a} {B : UU b} → TC A → (A → TC B) → TC B
+  TC : ∀ {a} → UU a → UU a
+  returnTC : ∀ {a} {A : UU a} → A → TC A
+  bindTC : ∀ {a b} {A : UU a} {B : UU b} → TC A → (A → TC B) → TC B
   -- Tries the unify the first term with the second
-  unify            : Term → Term → TC unit
+  unify : Term → Term → TC unit
   -- Gives an error
-  typeError        : ∀ {a} {A : UU a} → list ErrorPart → TC A
+  typeError : ∀ {a} {A : UU a} → list ErrorPart → TC A
   -- Infers the type of a goal
-  inferType        : Term → TC Term
-  checkType        : Term → Term → TC Term
-  normalise        : Term → TC Term
-  reduce           : Term → TC Term
+  inferType : Term → TC Term
+  checkType : Term → Term → TC Term
+  normalise : Term → TC Term
+  reduce : Term → TC Term
   -- Tries the first computation, if it fails tries the second
-  catchTC          : ∀ {a} {A : UU a} → TC A → TC A → TC A
-  quoteTC          : ∀ {a} {A : UU a} → A → TC Term
-  unquoteTC        : ∀ {a} {A : UU a} → Term → TC A
-  quoteωTC         : ∀ {A : UUω} → A → TC Term
-  getContext       : TC Telescope
-  extendContext    : ∀ {a} {A : UU a} → String → Arg Term → TC A → TC A
-  inContext        : ∀ {a} {A : UU a} → Telescope → TC A → TC A
-  freshName        : String → TC Name
-  declareDef       : Arg Name → Term → TC unit
+  catchTC : ∀ {a} {A : UU a} → TC A → TC A → TC A
+  quoteTC : ∀ {a} {A : UU a} → A → TC Term
+  unquoteTC : ∀ {a} {A : UU a} → Term → TC A
+  quoteωTC : ∀ {A : UUω} → A → TC Term
+  getContext : TC Telescope
+  extendContext : ∀ {a} {A : UU a} → String → Arg Term → TC A → TC A
+  inContext : ∀ {a} {A : UU a} → Telescope → TC A → TC A
+  freshName : String → TC Name
+  declareDef : Arg Name → Term → TC unit
   declarePostulate : Arg Name → Term → TC unit
-  defineFun        : Name → list Clause → TC unit
-  getType          : Name → TC Term
-  getDefinition    : Name → TC Definition
-  blockOnMeta      : ∀ {a} {A : UU a} → Meta → TC A
-  commitTC         : TC unit
-  isMacro          : Name → TC bool
+  defineFun : Name → list Clause → TC unit
+  getType : Name → TC Term
+  getDefinition : Name → TC Definition
+  blockOnMeta : ∀ {a} {A : UU a} → Meta → TC A
+  commitTC : TC unit
+  isMacro : Name → TC bool
 
   formatErrorParts : list ErrorPart → TC String
 
@@ -89,21 +88,21 @@ postulate
   -- If 'true', makes the following primitives also normalise
   -- their results: inferType, checkType, quoteTC, getType, and getContext
   withNormalisation : ∀ {a} {A : UU a} → bool → TC A → TC A
-  askNormalisation  : TC bool
+  askNormalisation : TC bool
 
   -- If 'true', makes the following primitives to reconstruct hidden arguments:
   -- getDefinition, normalise, reduce, inferType, checkType and getContext
   withReconstructed : ∀ {a} {A : UU a} → bool → TC A → TC A
-  askReconstructed  : TC bool
+  askReconstructed : TC bool
 
   -- Whether implicit arguments at the end should be turned into metavariables
   withExpandLast : ∀ {a} {A : UU a} → bool → TC A → TC A
-  askExpandLast  : TC bool
+  askExpandLast : TC bool
 
   -- White/blacklist specific definitions for reduction while executing the TC computation
   -- 'true' for whitelist, 'false' for blacklist
   withReduceDefs : ∀ {a} {A : UU a} → (Σ bool λ _ → list Name) → TC A → TC A
-  askReduceDefs  : TC (Σ bool λ _ → list Name)
+  askReduceDefs : TC (Σ bool λ _ → list Name)
 
   -- Fail if the given computation gives rise to new, unsolved
   -- "blocking" constraints.
@@ -118,59 +117,59 @@ postulate
   -- variable (it does not have to be an instance meta).
   getInstances : Meta → TC (list Term)
 
-  declareData      : Name → ℕ → Term → TC unit
-  defineData       : Name → list (Σ Name (λ _ → Term)) → TC unit
+  declareData : Name → ℕ → Term → TC unit
+  defineData : Name → list (Σ Name (λ _ → Term)) → TC unit
 ```
 
 <details><summary>Bindings</summary>
 
 ```agda
-{-# BUILTIN AGDAERRORPART       ErrorPart #-}
-{-# BUILTIN AGDAERRORPARTSTRING strErr    #-}
-{-# BUILTIN AGDAERRORPARTTERM   termErr   #-}
-{-# BUILTIN AGDAERRORPARTPATT   pattErr   #-}
-{-# BUILTIN AGDAERRORPARTNAME   nameErr   #-}
+{-# BUILTIN AGDAERRORPART ErrorPart #-}
+{-# BUILTIN AGDAERRORPARTSTRING strErr #-}
+{-# BUILTIN AGDAERRORPARTTERM termErr #-}
+{-# BUILTIN AGDAERRORPARTPATT pattErr #-}
+{-# BUILTIN AGDAERRORPARTNAME nameErr #-}
 
-{-# BUILTIN AGDATCM                           TC                         #-}
-{-# BUILTIN AGDATCMRETURN                     returnTC                   #-}
-{-# BUILTIN AGDATCMBIND                       bindTC                     #-}
-{-# BUILTIN AGDATCMUNIFY                      unify                      #-}
-{-# BUILTIN AGDATCMTYPEERROR                  typeError                  #-}
-{-# BUILTIN AGDATCMINFERTYPE                  inferType                  #-}
-{-# BUILTIN AGDATCMCHECKTYPE                  checkType                  #-}
-{-# BUILTIN AGDATCMNORMALISE                  normalise                  #-}
-{-# BUILTIN AGDATCMREDUCE                     reduce                     #-}
-{-# BUILTIN AGDATCMCATCHERROR                 catchTC                    #-}
-{-# BUILTIN AGDATCMQUOTETERM                  quoteTC                    #-}
-{-# BUILTIN AGDATCMUNQUOTETERM                unquoteTC                  #-}
-{-# BUILTIN AGDATCMQUOTEOMEGATERM             quoteωTC                   #-}
-{-# BUILTIN AGDATCMGETCONTEXT                 getContext                 #-}
-{-# BUILTIN AGDATCMEXTENDCONTEXT              extendContext              #-}
-{-# BUILTIN AGDATCMINCONTEXT                  inContext                  #-}
-{-# BUILTIN AGDATCMFRESHNAME                  freshName                  #-}
-{-# BUILTIN AGDATCMDECLAREDEF                 declareDef                 #-}
-{-# BUILTIN AGDATCMDECLAREPOSTULATE           declarePostulate           #-}
-{-# BUILTIN AGDATCMDEFINEFUN                  defineFun                  #-}
-{-# BUILTIN AGDATCMGETTYPE                    getType                    #-}
-{-# BUILTIN AGDATCMGETDEFINITION              getDefinition              #-}
-{-# BUILTIN AGDATCMBLOCKONMETA                blockOnMeta                #-}
-{-# BUILTIN AGDATCMCOMMIT                     commitTC                   #-}
-{-# BUILTIN AGDATCMISMACRO                    isMacro                    #-}
-{-# BUILTIN AGDATCMWITHNORMALISATION          withNormalisation          #-}
-{-# BUILTIN AGDATCMFORMATERRORPARTS           formatErrorParts           #-}
-{-# BUILTIN AGDATCMDEBUGPRINT                 debugPrint                 #-}
--- {-# BUILTIN AGDATCMWITHRECONSTRUCTED          withReconstructed          #-}
--- {-# BUILTIN AGDATCMWITHEXPANDLAST             withExpandLast             #-}
--- {-# BUILTIN AGDATCMWITHREDUCEDEFS             withReduceDefs             #-}
--- {-# BUILTIN AGDATCMASKNORMALISATION           askNormalisation           #-}
--- {-# BUILTIN AGDATCMASKRECONSTRUCTED           askReconstructed           #-}
--- {-# BUILTIN AGDATCMASKEXPANDLAST              askExpandLast              #-}
--- {-# BUILTIN AGDATCMASKREDUCEDEFS              askReduceDefs              #-}
-{-# BUILTIN AGDATCMNOCONSTRAINTS              noConstraints              #-}
-{-# BUILTIN AGDATCMRUNSPECULATIVE             runSpeculative             #-}
-{-# BUILTIN AGDATCMGETINSTANCES               getInstances               #-}
-{-# BUILTIN AGDATCMDECLAREDATA                declareData                #-}
-{-# BUILTIN AGDATCMDEFINEDATA                 defineData                 #-}
+{-# BUILTIN AGDATCM TC #-}
+{-# BUILTIN AGDATCMRETURN returnTC #-}
+{-# BUILTIN AGDATCMBIND bindTC #-}
+{-# BUILTIN AGDATCMUNIFY unify #-}
+{-# BUILTIN AGDATCMTYPEERROR typeError #-}
+{-# BUILTIN AGDATCMINFERTYPE inferType #-}
+{-# BUILTIN AGDATCMCHECKTYPE checkType #-}
+{-# BUILTIN AGDATCMNORMALISE normalise #-}
+{-# BUILTIN AGDATCMREDUCE reduce #-}
+{-# BUILTIN AGDATCMCATCHERROR catchTC #-}
+{-# BUILTIN AGDATCMQUOTETERM quoteTC #-}
+{-# BUILTIN AGDATCMUNQUOTETERM unquoteTC #-}
+{-# BUILTIN AGDATCMQUOTEOMEGATERM quoteωTC #-}
+{-# BUILTIN AGDATCMGETCONTEXT getContext #-}
+{-# BUILTIN AGDATCMEXTENDCONTEXT extendContext #-}
+{-# BUILTIN AGDATCMINCONTEXT inContext #-}
+{-# BUILTIN AGDATCMFRESHNAME freshName #-}
+{-# BUILTIN AGDATCMDECLAREDEF declareDef #-}
+{-# BUILTIN AGDATCMDECLAREPOSTULATE declarePostulate #-}
+{-# BUILTIN AGDATCMDEFINEFUN defineFun #-}
+{-# BUILTIN AGDATCMGETTYPE getType #-}
+{-# BUILTIN AGDATCMGETDEFINITION getDefinition #-}
+{-# BUILTIN AGDATCMBLOCKONMETA blockOnMeta #-}
+{-# BUILTIN AGDATCMCOMMIT commitTC #-}
+{-# BUILTIN AGDATCMISMACRO isMacro #-}
+{-# BUILTIN AGDATCMWITHNORMALISATION withNormalisation #-}
+{-# BUILTIN AGDATCMFORMATERRORPARTS formatErrorParts #-}
+{-# BUILTIN AGDATCMDEBUGPRINT debugPrint #-}
+-- {-# BUILTIN AGDATCMWITHRECONSTRUCTED withReconstructed #-}
+-- {-# BUILTIN AGDATCMWITHEXPANDLAST withExpandLast #-}
+-- {-# BUILTIN AGDATCMWITHREDUCEDEFS withReduceDefs #-}
+-- {-# BUILTIN AGDATCMASKNORMALISATION askNormalisation #-}
+-- {-# BUILTIN AGDATCMASKRECONSTRUCTED askReconstructed #-}
+-- {-# BUILTIN AGDATCMASKEXPANDLAST askExpandLast #-}
+-- {-# BUILTIN AGDATCMASKREDUCEDEFS askReduceDefs #-}
+{-# BUILTIN AGDATCMNOCONSTRAINTS noConstraints #-}
+{-# BUILTIN AGDATCMRUNSPECULATIVE runSpeculative #-}
+{-# BUILTIN AGDATCMGETINSTANCES getInstances #-}
+{-# BUILTIN AGDATCMDECLAREDATA declareData #-}
+{-# BUILTIN AGDATCMDEFINEDATA defineData #-}
 ```
 
 </details>
@@ -257,9 +256,10 @@ example was addapted from
     pattern _∷_ x xs = cons x xs
 
   ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
-  ＝-type-info (def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
+  ＝-type-info
+    ( def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
     returnTC (𝓁 , 𝒯 , l , r)
-  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type." ))
+  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type."))
 
   macro
     try-path! : Term → Term → TC unit
@@ -291,7 +291,7 @@ boundary-TCM
   returnTC (l , r)
 boundary-TCM t =
   typeError
-    ( strErr "The term\n  " ∷
+    ( strErr "The term\n " ∷
       termErr t ∷
       strErr "\nis not a ＝-type." ∷
       nil)

@@ -389,7 +389,7 @@ number-of-elements-𝔽 : {l : Level} → 𝔽 l → ℕ
 number-of-elements-𝔽 X = number-of-elements-is-finite (is-finite-type-𝔽 X)
 ```
 
-### If a type has cardinality `k` and cardinality `l`, then `k = l`.
+### If a type has cardinality `k` and cardinality `l`, then `k = l`
 
 ```agda
 eq-cardinality :

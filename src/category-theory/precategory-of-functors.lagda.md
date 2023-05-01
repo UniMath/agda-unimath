@@ -30,13 +30,16 @@ module _
 
   functor-Precat-Precat : Precat (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
   pr1 functor-Precat-Precat = functor-Precat C D
-  pr1 (pr2 functor-Precat-Precat) F G = nat-trans-Precat-Set C D F G
+  pr1 (pr2 functor-Precat-Precat) F G =
+    natural-transformation-Precat-Set C D F G
   pr1 (pr2 (pr2 functor-Precat-Precat)) =
-    (λ {F} {G} {H} α β → comp-nat-trans-Precat C D F G H α β) ,
+    (λ {F} {G} {H} → comp-natural-transformation-Precat C D F G H) ,
     λ {F} {G} {H} {I} h g f →
-    assoc-comp-nat-trans-Precat C D {F} {G} {H} {I} f g h
+    associative-comp-natural-transformation-Precat C D {F} {G} {H} {I} f g h
   pr2 (pr2 (pr2 functor-Precat-Precat)) =
-    (λ F → id-nat-trans-Precat C D F) ,
-    (λ {F} {G} α → left-unit-law-comp-nat-trans-Precat C D {F} {G} α) ,
-    (λ {F} {G} α → right-unit-law-comp-nat-trans-Precat C D {F} {G} α)
+    (id-natural-transformation-Precat C D) ,
+    ( λ {F} {G} →
+      left-unit-law-comp-natural-transformation-Precat C D {F} {G}) ,
+    ( λ {F} {G} →
+      right-unit-law-comp-natural-transformation-Precat C D {F} {G})
 ```

@@ -249,5 +249,5 @@ module _
           (λ s → is-prop-neg {A = is-perfect-image f g (pr1 s)})
 
       v : Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      v = dn-elim-is-decidable (lem (pair _ iv)) iii
+      v = double-negation-elim-is-decidable (lem (pair _ iv)) iii
 ```
