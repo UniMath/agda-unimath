@@ -164,7 +164,7 @@ module _
       f Y (inl (pair np nnq)) r =
         np (r ∙
           inv
-            ( dn-elim-is-decidable
+            ( double-negation-elim-is-decidable
               ( has-decidable-equality-is-finite
                 ( is-finite-type-decidable-subtype
                   ( pr1 Y)
@@ -175,7 +175,7 @@ module _
       f Y (inr (pair nq nnp)) r =
         nq
           ( ( inv
-              ( dn-elim-is-decidable
+              ( double-negation-elim-is-decidable
                 ( has-decidable-equality-is-finite
                   ( is-finite-type-decidable-subtype
                     ( pr1 Y)

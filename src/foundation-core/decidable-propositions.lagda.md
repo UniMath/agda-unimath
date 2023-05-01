@@ -41,7 +41,7 @@ is-decidable-prop A = is-prop A × is-decidable A
 is-prop-is-decidable :
   {l : Level} {A : UU l} → is-prop A → is-prop (is-decidable A)
 is-prop-is-decidable is-prop-A =
-  is-prop-coprod intro-dn is-prop-A is-prop-neg
+  is-prop-coprod intro-double-negation is-prop-A is-prop-neg
 
 is-decidable-Prop :
   {l : Level} → Prop l → Prop l
