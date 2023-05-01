@@ -30,8 +30,8 @@ open import foundation-core.universe-levels
 
 The truncatedness of a type is a measure of the complexity of its identity
 types. The simplest case is a contractible type. This is the base case of the
-inductive definition of truncatedness for types. A type is (k+1)-truncated if
-its identity types are k-truncated.
+inductive definition of truncatedness for types. A type is `k+1`-truncated if
+its identity types are `k`-truncated.
 
 ## Definition
 
@@ -84,7 +84,7 @@ pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
 ```
 
-### The identity type of a k-truncated type is k-truncated
+### The identity type of a `k`-truncated type is `k`-truncated
 
 ```agda
 abstract
@@ -107,7 +107,7 @@ pr2 (Id-Truncated-Type' A x y) =
   is-trunc-Id (is-trunc-type-Truncated-Type A) x y
 ```
 
-### k-truncated types are closed under retracts
+### `k`-truncated types are closed under retracts
 
 ```agda
 module _
@@ -122,7 +122,7 @@ module _
     is-trunc-retract-of (retract-eq R x y) (H (pr1 R x) (pr1 R y))
 ```
 
-### k-truncated types are closed under equivalences
+### `k`-truncated types are closed under equivalences
 
 ```agda
 abstract
@@ -157,7 +157,7 @@ abstract
     is-trunc-is-equiv' k A f is-equiv-f
 ```
 
-### If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
+### If a type embeds into a `k+1`-truncated type, then it is (k+1)-truncated
 
 ```agda
 abstract

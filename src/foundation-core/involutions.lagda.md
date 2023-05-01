@@ -74,7 +74,7 @@ pr2 (equiv-is-involution is-involution-f) =
   is-equiv-is-involution is-involution-f
 ```
 
-### If `A` is k-truncated then the type of involutions is k-truncated
+### If `A` is `k`-truncated then the type of involutions is `k`-truncated
 
 ```agda
 is-trunc-is-involution :

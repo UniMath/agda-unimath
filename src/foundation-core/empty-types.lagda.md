@@ -114,7 +114,7 @@ pr1 empty-Set = empty
 pr2 empty-Set = is-set-empty
 ```
 
-### The empty type is k-truncated for any k ≥ 1
+### The empty type is `k`-truncated for any `k` ≥ `1`
 
 ```agda
 abstract
