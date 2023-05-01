@@ -29,8 +29,8 @@ open import foundation-core.universe-levels
 ## Idea
 
 The classical Cantor–Schröder–Bernstein theorem asserts that from any pair of
-injective maps $f : A → B$ and $g : B → A$ we can construct a bijection between
-$A$ and $B$. In a recent generalization, Escardó proved that a
+injective maps `f : A → B` and `g : B → A` we can construct a bijection between
+`A` and `B`. In a recent generalization, Escardó proved that a
 Cantor–Schröder–Bernstein theorem also holds for ∞-groupoids. His generalization
 asserts that given two types that embed into each other, then the types are
 equivalent.

@@ -76,7 +76,7 @@ is-commutative-symmetric-operation f x y =
   ap f (is-commutative-standard-unordered-pair x y)
 ```
 
-### A binary operation from $A$ to $B$ is commutative if and only if it extends to the unordered pairs in $A$
+### A binary operation from `A` to `B` is commutative if and only if it extends to the unordered pairs in `A`
 
 ```agda
 module _
