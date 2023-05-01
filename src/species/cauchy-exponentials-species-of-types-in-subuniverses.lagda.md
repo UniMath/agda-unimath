@@ -284,84 +284,84 @@ module _
         ( cauchy-exponential-species-subuniverse P Q C1 T)
         ( X))
   equiv-cauchy-exponential-sum-species-subuniverse =
-    ( inv-equiv
-      ( equiv-Σ-extension-species-subuniverse
-        ( P)
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-        ( cauchy-product-species-subuniverse P Q C3
-          ( cauchy-exponential-species-subuniverse P Q C1 S)
-          ( cauchy-exponential-species-subuniverse P Q C1 T))
-        ( X)) ∘e
-      ( inv-equiv
-        ( equiv-cauchy-product-Σ-extension-species-subuniverse
+    ( ( inv-equiv
+        ( equiv-Σ-extension-species-subuniverse
           ( P)
-          ( Q)
-          ( C3)
-          ( C5)
-          ( cauchy-exponential-species-subuniverse P Q C1 S)
-          ( cauchy-exponential-species-subuniverse P Q C1 T)
-          ( inclusion-subuniverse P X)) ∘e
-        ( equiv-tot
-          ( λ d →
-            equiv-prod
-              ( inv-equiv
-                ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
-                  ( P)
-                  ( Q)
-                  ( C1)
-                  ( C4)
-                  ( S)
-                  ( left-summand-binary-coproduct-Decomposition d ,
-                    pr1 (lemma-C6 d))))
-              ( inv-equiv
-                ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
-                  ( P)
-                  ( Q)
-                  ( C1)
-                  ( C4)
-                  ( T)
-                  ( right-summand-binary-coproduct-Decomposition d ,
-                    pr2 (lemma-C6 d))))) ∘e
-          ( equiv-cauchy-exponential-sum-species-types
-            ( Σ-extension-species-subuniverse
-              ( P)
-              ( subuniverse-global-subuniverse Q l3)
-              ( S))
-            ( Σ-extension-species-subuniverse
-              ( P)
-              ( subuniverse-global-subuniverse Q l4)
-              ( T))
-            ( pr1 X) ∘e
-            ( equiv-tot
-              ( λ d →
-                equiv-Π
-                  ( λ x →
-                    coproduct-species-types
-                      ( Σ-extension-species-subuniverse
-                        ( P)
-                        ( subuniverse-global-subuniverse Q l3)
-                        ( S))
-                      ( Σ-extension-species-subuniverse
-                        ( P)
-                        ( subuniverse-global-subuniverse Q l4)
-                        ( T))
-                      ( cotype-Relaxed-Σ-Decomposition d x))
-                  ( id-equiv)
-                  ( λ x →
-                    equiv-coproduct-Σ-extension-species-subuniverse
-                      ( P)
-                      ( Q)
-                      ( C2)
-                      ( S)
-                      ( T)
-                      ( cotype-Relaxed-Σ-Decomposition d x))) ∘e
-              ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
+          ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+          ( cauchy-product-species-subuniverse P Q C3
+            ( cauchy-exponential-species-subuniverse P Q C1 S)
+            ( cauchy-exponential-species-subuniverse P Q C1 T))
+          ( X))) ∘e
+      ( ( inv-equiv
+          ( equiv-cauchy-product-Σ-extension-species-subuniverse
+            ( P)
+            ( Q)
+            ( C3)
+            ( C5)
+            ( cauchy-exponential-species-subuniverse P Q C1 S)
+            ( cauchy-exponential-species-subuniverse P Q C1 T)
+            ( inclusion-subuniverse P X))) ∘e
+        ( ( equiv-tot
+            ( λ d →
+              equiv-prod
+                ( inv-equiv
+                  ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
+                    ( P)
+                    ( Q)
+                    ( C1)
+                    ( C4)
+                    ( S)
+                    ( left-summand-binary-coproduct-Decomposition d ,
+                      pr1 (lemma-C6 d))))
+                ( inv-equiv
+                  ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
+                    ( P)
+                    ( Q)
+                    ( C1)
+                    ( C4)
+                    ( T)
+                    ( right-summand-binary-coproduct-Decomposition d ,
+                      pr2 (lemma-C6 d)))))) ∘e
+          ( ( equiv-cauchy-exponential-sum-species-types
+              ( Σ-extension-species-subuniverse
                 ( P)
-                ( Q)
-                ( C1)
-                ( C4)
-                ( coproduct-species-subuniverse P Q C2 S T)
-                ( X) ∘e
+                ( subuniverse-global-subuniverse Q l3)
+                ( S))
+              ( Σ-extension-species-subuniverse
+                ( P)
+                ( subuniverse-global-subuniverse Q l4)
+                ( T))
+              ( pr1 X)) ∘e
+            ( ( equiv-tot
+                ( λ d →
+                  equiv-Π
+                    ( λ x →
+                      coproduct-species-types
+                        ( Σ-extension-species-subuniverse
+                          ( P)
+                          ( subuniverse-global-subuniverse Q l3)
+                          ( S))
+                        ( Σ-extension-species-subuniverse
+                          ( P)
+                          ( subuniverse-global-subuniverse Q l4)
+                          ( T))
+                        ( cotype-Relaxed-Σ-Decomposition d x))
+                    ( id-equiv)
+                    ( λ x →
+                      equiv-coproduct-Σ-extension-species-subuniverse
+                        ( P)
+                        ( Q)
+                        ( C2)
+                        ( S)
+                        ( T)
+                        ( cotype-Relaxed-Σ-Decomposition d x)))) ∘e
+              ( ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
+                  ( P)
+                  ( Q)
+                  ( C1)
+                  ( C4)
+                  ( coproduct-species-subuniverse P Q C2 S T)
+                  ( X)) ∘e
                 ( equiv-Σ-extension-species-subuniverse
                   ( P)
                   ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
