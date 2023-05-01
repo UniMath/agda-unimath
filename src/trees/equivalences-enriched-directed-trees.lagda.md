@@ -1,12 +1,16 @@
 # Equivalences of enriched directed trees
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module trees.equivalences-enriched-directed-trees where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -78,12 +82,13 @@ equiv-Enriched-Directed-Tree A B S T =
       ( directed-tree-Enriched-Directed-Tree A B S)
       ( directed-tree-Enriched-Directed-Tree A B T))
     ( λ e →
-      Σ ( ( shape-Enriched-Directed-Tree A B S) ~
-          ( ( shape-Enriched-Directed-Tree A B T) ∘
-            ( node-equiv-Directed-Tree
-              ( directed-tree-Enriched-Directed-Tree A B S)
-              ( directed-tree-Enriched-Directed-Tree A B T)
-              ( e))))
+      Σ ( coherence-triangle-maps
+          ( shape-Enriched-Directed-Tree A B S)
+          ( shape-Enriched-Directed-Tree A B T)
+          ( node-equiv-Directed-Tree
+            ( directed-tree-Enriched-Directed-Tree A B S)
+            ( directed-tree-Enriched-Directed-Tree A B T)
+            ( e)))
         ( λ H →
           (x : node-Enriched-Directed-Tree A B S) →
           htpy-equiv
@@ -264,6 +269,149 @@ pr1 (id-equiv-Enriched-Directed-Tree A B T) =
   id-equiv-Directed-Tree (directed-tree-Enriched-Directed-Tree A B T)
 pr1 (pr2 (id-equiv-Enriched-Directed-Tree A B T)) = refl-htpy
 pr2 (pr2 (id-equiv-Enriched-Directed-Tree A B T)) x = refl-htpy
+```
+
+### Composition of equivalences of enriched directed trees
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level} (A : UU l1) (B : A → UU l2)
+  (R : Enriched-Directed-Tree l3 l4 A B)
+  (S : Enriched-Directed-Tree l5 l6 A B)
+  (T : Enriched-Directed-Tree l7 l8 A B)
+  (g : equiv-Enriched-Directed-Tree A B S T)
+  (f : equiv-Enriched-Directed-Tree A B R S)
+  where
+
+  equiv-directed-tree-comp-equiv-Enriched-Directed-Tree :
+    equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+  equiv-directed-tree-comp-equiv-Enriched-Directed-Tree =
+    comp-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B S)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-equiv-Enriched-Directed-Tree A B S T g)
+      ( equiv-directed-tree-equiv-Enriched-Directed-Tree A B R S f)
+
+  equiv-node-comp-equiv-Enriched-Directed-Tree :
+    node-Enriched-Directed-Tree A B R ≃
+    node-Enriched-Directed-Tree A B T
+  equiv-node-comp-equiv-Enriched-Directed-Tree =
+    equiv-node-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
+
+  node-comp-equiv-Enriched-Directed-Tree :
+    node-Enriched-Directed-Tree A B R →
+    node-Enriched-Directed-Tree A B T
+  node-comp-equiv-Enriched-Directed-Tree =
+    node-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
+
+  equiv-edge-comp-equiv-Enriched-Directed-Tree :
+    (x y : node-Enriched-Directed-Tree A B R) →
+    edge-Enriched-Directed-Tree A B R x y ≃
+    edge-Enriched-Directed-Tree A B T
+      ( node-comp-equiv-Enriched-Directed-Tree x)
+      ( node-comp-equiv-Enriched-Directed-Tree y)
+  equiv-edge-comp-equiv-Enriched-Directed-Tree =
+    equiv-edge-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
+
+  edge-comp-equiv-Enriched-Directed-Tree :
+    (x y : node-Enriched-Directed-Tree A B R) →
+    edge-Enriched-Directed-Tree A B R x y →
+    edge-Enriched-Directed-Tree A B T
+      ( node-comp-equiv-Enriched-Directed-Tree x)
+      ( node-comp-equiv-Enriched-Directed-Tree y)
+  edge-comp-equiv-Enriched-Directed-Tree =
+    edge-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
+
+  equiv-children-comp-equiv-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree A B R) →
+    children-Enriched-Directed-Tree A B R x ≃
+    children-Enriched-Directed-Tree A B T
+      ( node-comp-equiv-Enriched-Directed-Tree x)
+  equiv-children-comp-equiv-Enriched-Directed-Tree =
+    equiv-children-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
+
+  children-comp-equiv-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree A B R) →
+    children-Enriched-Directed-Tree A B R x →
+    children-Enriched-Directed-Tree A B T
+      ( node-comp-equiv-Enriched-Directed-Tree x)
+  children-comp-equiv-Enriched-Directed-Tree =
+    children-equiv-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B R)
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)  
+
+  shape-comp-equiv-Enriched-Directed-Tree :
+    ( shape-Enriched-Directed-Tree A B R) ~
+    ( shape-Enriched-Directed-Tree A B T ∘
+      node-comp-equiv-Enriched-Directed-Tree)
+  shape-comp-equiv-Enriched-Directed-Tree =
+    concat-coherence-triangle-maps
+      ( shape-Enriched-Directed-Tree A B R)
+      ( shape-Enriched-Directed-Tree A B S)
+      ( shape-Enriched-Directed-Tree A B T)
+      ( node-equiv-Enriched-Directed-Tree A B R S f)
+      ( node-equiv-Enriched-Directed-Tree A B S T g)
+      ( shape-equiv-Enriched-Directed-Tree A B R S f)
+      ( shape-equiv-Enriched-Directed-Tree A B S T g)
+
+  enrichment-comp-equiv-Enriched-Directed-Tree :
+    ( x : node-Enriched-Directed-Tree A B R) →
+    coherence-square-maps
+      ( tr B (shape-comp-equiv-Enriched-Directed-Tree x))
+      ( map-enrichment-Enriched-Directed-Tree A B R x)
+      ( map-enrichment-Enriched-Directed-Tree A B T
+        ( node-comp-equiv-Enriched-Directed-Tree x))
+      ( children-comp-equiv-Enriched-Directed-Tree x)
+  enrichment-comp-equiv-Enriched-Directed-Tree x =
+    concat-htpy-horizontal-coherence-square-maps
+      ( tr B (shape-equiv-Enriched-Directed-Tree A B R S f x))
+      ( tr B
+        ( shape-equiv-Enriched-Directed-Tree A B S T g
+          ( node-equiv-Enriched-Directed-Tree A B R S f x)))
+      ( map-enrichment-Enriched-Directed-Tree A B R x)
+      ( map-enrichment-Enriched-Directed-Tree A B S
+        ( node-equiv-Enriched-Directed-Tree A B R S f x))
+      ( map-enrichment-Enriched-Directed-Tree A B T
+        ( node-comp-equiv-Enriched-Directed-Tree x))
+      ( children-equiv-Enriched-Directed-Tree A B R S f x)
+      ( children-equiv-Enriched-Directed-Tree A B S T g
+        ( node-equiv-Enriched-Directed-Tree A B R S f x))
+      ( tr-concat
+        ( shape-equiv-Enriched-Directed-Tree A B R S f x)
+        ( shape-equiv-Enriched-Directed-Tree A B S T g
+          ( node-equiv-Enriched-Directed-Tree A B R S f x)))
+      ( refl-htpy)
+      ( enrichment-equiv-Enriched-Directed-Tree A B R S f x)
+      ( enrichment-equiv-Enriched-Directed-Tree A B S T g
+        ( node-equiv-Enriched-Directed-Tree A B R S f x))
+
+  comp-equiv-Enriched-Directed-Tree :
+    equiv-Enriched-Directed-Tree A B R T
+  pr1 comp-equiv-Enriched-Directed-Tree =
+    equiv-directed-tree-comp-equiv-Enriched-Directed-Tree
+  pr1 (pr2 comp-equiv-Enriched-Directed-Tree) =
+    shape-comp-equiv-Enriched-Directed-Tree
+  pr2 (pr2 comp-equiv-Enriched-Directed-Tree) =
+    enrichment-comp-equiv-Enriched-Directed-Tree
 ```
 
 ### Homotopies of equivalences of enriched directed trees

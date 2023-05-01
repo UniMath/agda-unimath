@@ -966,6 +966,18 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (X : coalgebra-polynomial-endofunctor l3 A B)
   where
+  
+  compute-fiber-base-enriched-directed-tree-element-coalgebra :
+    (w : type-coalgebra-polynomial-endofunctor X)
+    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
+    equiv-Enriched-Directed-Tree A B
+      ( enriched-directed-tree-element-coalgebra X
+        ( component-coalgebra-polynomial-endofunctor X w b))
+      ( fiber-base-Enriched-Directed-Tree A B
+        ( enriched-directed-tree-element-coalgebra X w)
+        ( b))
+  compute-fiber-base-enriched-directed-tree-element-coalgebra w b =
+    {!comp-equiv-Enriched-Directed-Tree!}
 
   node-compute-fiber-base-enriched-directed-tree-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
@@ -1147,15 +1159,4 @@ module _
          ( a))
       {!!}
 -}
-
-  compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (x : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X x)) →
-    equiv-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X x b))
-      ( fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x) b)
-  compute-fiber-base-enriched-directed-tree-element-coalgebra =
-    {! !}
 ```
