@@ -34,7 +34,7 @@ module _
 
   is-set-hom-Concrete-Group : is-set hom-Concrete-Group
   is-set-hom-Concrete-Group =
-    is-trunc-map-ev-pt-is-connected
+    is-trunc-map-ev-point-is-connected
       ( zero-𝕋)
       ( shape-Concrete-Group G)
       ( is-0-connected-classifying-type-Concrete-Group G)

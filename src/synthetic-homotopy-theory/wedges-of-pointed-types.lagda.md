@@ -62,7 +62,7 @@ pr2 (A ∨* B) =
 indexed-wedge :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
 pr1 (indexed-wedge I A) = cofiber (λ i → i , point-Pointed-Type (A i))
-pr2 (indexed-wedge I A) = pt-cofiber (λ i → i , point-Pointed-Type (A i))
+pr2 (indexed-wedge I A) = point-cofiber (λ i → i , point-Pointed-Type (A i))
 ```
 
 ## Properties

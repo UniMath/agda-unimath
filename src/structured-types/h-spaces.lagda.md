@@ -20,8 +20,9 @@ open import structured-types.pointed-types
 ## Idea
 
 An H-space is a pointed type `A` equipped with a binary operation `μ` and
-homotopies `(λ x → μ pt x) ~ id` and `λ x → μ x pt ~ id`. If `A` is a connected
-H-space, then `λ x → μ a x` and `λ x → μ x a` are equivalences for each `a : A`.
+homotopies `(λ x → μ point x) ~ id` and `λ x → μ x point ~ id`. If `A` is a
+connected H-space, then `λ x → μ a x` and `λ x → μ x a` are equivalences for
+each `a : A`.
 
 ## Definitions
 
@@ -62,22 +63,22 @@ module _
   type-H-Space : UU l
   type-H-Space = type-Pointed-Type pointed-type-H-Space
 
-  pt-H-Space : type-H-Space
-  pt-H-Space = point-Pointed-Type pointed-type-H-Space
+  point-H-Space : type-H-Space
+  point-H-Space = point-Pointed-Type pointed-type-H-Space
 
   mul-H-Space : type-H-Space → type-H-Space → type-H-Space
   mul-H-Space = pr1 (pr2 A)
 
   unit-laws-mul-H-Space :
-    unit-laws mul-H-Space pt-H-Space
+    unit-laws mul-H-Space point-H-Space
   unit-laws-mul-H-Space = pr2 (pr2 A)
 
   left-unit-law-mul-H-Space :
-    (x : type-H-Space) → Id (mul-H-Space pt-H-Space x) x
+    (x : type-H-Space) → Id (mul-H-Space point-H-Space x) x
   left-unit-law-mul-H-Space = pr1 unit-laws-mul-H-Space
 
   right-unit-law-mul-H-Space :
-    (x : type-H-Space) → Id (mul-H-Space x pt-H-Space) x
+    (x : type-H-Space) → Id (mul-H-Space x point-H-Space) x
   right-unit-law-mul-H-Space = pr2 unit-laws-mul-H-Space
 ```
 

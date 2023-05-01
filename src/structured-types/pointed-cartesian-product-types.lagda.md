@@ -8,14 +8,14 @@ module structured-types.pointed-cartesian-product-types where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.equality-cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-open import foundation.embeddings
 
 open import structured-types.pointed-maps
 open import structured-types.pointed-types

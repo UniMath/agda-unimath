@@ -9,22 +9,22 @@ module synthetic-homotopy-theory.smash-products-of-pointed-types where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
-open import foundation.equational-reasoning
-open import foundation.function-extensionality
 open import foundation.dependent-pair-types
+open import foundation.equational-reasoning
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.pointed-types
-open import structured-types.pointed-maps
 open import structured-types.pointed-cartesian-product-types
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.cofibers
-open import synthetic-homotopy-theory.wedges-of-pointed-types
 open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.wedges-of-pointed-types
 ```
 
 </details>

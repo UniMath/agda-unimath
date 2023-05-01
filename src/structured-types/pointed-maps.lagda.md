@@ -73,7 +73,7 @@ module _
     tr
       ( fam-Pointed-Fam B C)
       ( inv (preserves-point-pointed-map A B f))
-      ( pt-Pointed-Fam B C)
+      ( point-Pointed-Fam B C)
 
   precomp-pointed-Π : pointed-Π B C → pointed-Π A precomp-Pointed-Fam
   pr1 (precomp-pointed-Π g) x =

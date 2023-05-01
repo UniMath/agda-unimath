@@ -29,7 +29,7 @@ singleton induction if and only if it is contractible.
 ```agda
 is-singleton :
   (l1 : Level) {l2 : Level} (A : UU l2) → A → UU (lsuc l1 ⊔ l2)
-is-singleton l A a = (B : A → UU l) → sec (ev-pt a B)
+is-singleton l A a = (B : A → UU l) → sec (ev-point a B)
 
 ind-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) →
@@ -39,7 +39,7 @@ ind-is-singleton a is-sing-A B = pr1 (is-sing-A B)
 
 compute-ind-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) (H : {l : Level} → is-singleton l A a) →
-  (B : A → UU l2) → (ev-pt a B ∘ ind-is-singleton a H B) ~ id
+  (B : A → UU l2) → (ev-point a B ∘ ind-is-singleton a H B) ~ id
 compute-ind-is-singleton a H B = pr2 (H B)
 ```
 
@@ -58,7 +58,7 @@ abstract
   compute-ind-singleton-is-contr :
     {l1 l2 : Level} {A : UU l1}
     (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
-    ((ev-pt a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
+    ((ev-point a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
   compute-ind-singleton-is-contr a is-contr-A B b =
     ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
 

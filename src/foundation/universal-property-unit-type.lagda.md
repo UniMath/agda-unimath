@@ -63,36 +63,36 @@ pr1 (equiv-universal-property-unit Y) = ev-star' Y
 pr2 (equiv-universal-property-unit Y) = universal-property-unit Y
 
 abstract
-  is-equiv-pt-is-contr :
+  is-equiv-point-is-contr :
     {l1 : Level} {X : UU l1} (x : X) →
-    is-contr X → is-equiv (pt x)
-  is-equiv-pt-is-contr x is-contr-X =
-    is-equiv-is-contr (pt x) is-contr-unit is-contr-X
+    is-contr X → is-equiv (point x)
+  is-equiv-point-is-contr x is-contr-X =
+    is-equiv-is-contr (point x) is-contr-unit is-contr-X
 
 abstract
-  is-equiv-pt-universal-property-unit :
+  is-equiv-point-universal-property-unit :
     {l1 : Level} (X : UU l1) (x : X) →
     ((l2 : Level) (Y : UU l2) → is-equiv (λ (f : X → Y) → f x)) →
-    is-equiv (pt x)
-  is-equiv-pt-universal-property-unit X x H =
+    is-equiv (point x)
+  is-equiv-point-universal-property-unit X x H =
     is-equiv-is-equiv-precomp
-      ( pt x)
+      ( point x)
       ( λ l Y → is-equiv-right-factor
         ( ev-star' Y)
-        ( precomp (pt x) Y)
+        ( precomp (point x) Y)
         ( universal-property-unit Y)
         ( H _ Y))
 
 abstract
-  universal-property-unit-is-equiv-pt :
+  universal-property-unit-is-equiv-point :
     {l1 : Level} {X : UU l1} (x : X) →
-    is-equiv (pt x) →
+    is-equiv (point x) →
     ({l2 : Level} (Y : UU l2) → is-equiv (λ (f : X → Y) → f x))
-  universal-property-unit-is-equiv-pt x is-equiv-pt Y =
+  universal-property-unit-is-equiv-point x is-equiv-point Y =
     is-equiv-comp
       ( ev-star' Y)
-      ( precomp (pt x) Y)
-      ( is-equiv-precomp-is-equiv (pt x) is-equiv-pt Y)
+      ( precomp (point x) Y)
+      ( is-equiv-precomp-is-equiv (point x) is-equiv-point Y)
       ( universal-property-unit Y)
 
 abstract
@@ -101,16 +101,16 @@ abstract
     is-contr X →
     ({l2 : Level} (Y : UU l2) → is-equiv (λ (f : X → Y) → f x))
   universal-property-unit-is-contr x is-contr-X =
-    universal-property-unit-is-equiv-pt x
-      ( is-equiv-pt-is-contr x is-contr-X)
+    universal-property-unit-is-equiv-point x
+      ( is-equiv-point-is-contr x is-contr-X)
 
 abstract
-  is-equiv-diagonal-is-equiv-pt :
+  is-equiv-diagonal-is-equiv-point :
     {l1 : Level} {X : UU l1} (x : X) →
-    is-equiv (pt x) →
+    is-equiv (point x) →
     ({l2 : Level} (Y : UU l2) → is-equiv (λ y → const X Y y))
-  is-equiv-diagonal-is-equiv-pt {X = X} x is-equiv-pt Y =
+  is-equiv-diagonal-is-equiv-point {X = X} x is-equiv-point Y =
     is-equiv-is-section
-      ( universal-property-unit-is-equiv-pt x is-equiv-pt Y)
+      ( universal-property-unit-is-equiv-point x is-equiv-point Y)
       ( refl-htpy)
 ```
