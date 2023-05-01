@@ -164,7 +164,7 @@ module _
       is-prop-equiv' (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
 ```
 
-### A subtype of a `k+1`-truncated type is $`k+1`-truncated
+### A subtype of a `k+1`-truncated type is `k+1`-truncated
 
 ```agda
 module _
