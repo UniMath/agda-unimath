@@ -19,6 +19,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -98,4 +99,35 @@ module _
               ( map-pointed-map S A f)
               ( map-pointed-map S B g))
             ( preserves-point-pointed-map S A f)
+```
+
+### The cogap map for pushouts of pointed types
+
+```agda
+  map-cogap-Pointed-Type :
+    {l4 : Level}
+    (f : S →* A) (g : S →* B) →
+    {X : Pointed-Type l4} →
+    type-cocone-Pointed-Type f g X →
+    type-Pointed-Type (pushout-Pointed-Type f g) → type-Pointed-Type X
+  map-cogap-Pointed-Type f g c =
+    cogap
+      ( map-pointed-map S A f)
+      ( map-pointed-map S B g)
+      ( cocone-type-cocone-Pointed-Type f g c)
+
+  cogap-Pointed-Type :
+    {l4 : Level}
+    (f : S →* A) (g : S →* B) →
+    {X : Pointed-Type l4} →
+    type-cocone-Pointed-Type f g X → pushout-Pointed-Type f g →* X
+  pr1 (cogap-Pointed-Type f g c) = map-cogap-Pointed-Type f g c
+  pr2 (cogap-Pointed-Type f g {X} c) =
+    ( compute-inl-cogap
+      ( map-pointed-map S A f)
+      ( map-pointed-map S B g)
+      ( cocone-type-cocone-Pointed-Type f g c)
+      ( point-Pointed-Type A)) ∙
+    ( preserves-point-pointed-map A X
+      ( horizontal-pointed-map-cocone-Pointed-Type f g c))
 ```
