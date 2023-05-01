@@ -1,8 +1,6 @@
 # Equivalences of directed trees
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module trees.equivalences-directed-trees where
 ```
 

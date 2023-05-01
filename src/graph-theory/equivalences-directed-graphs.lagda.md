@@ -1,8 +1,6 @@
 # Equivalences of directed graphs
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module graph-theory.equivalences-directed-graphs where
 ```
 

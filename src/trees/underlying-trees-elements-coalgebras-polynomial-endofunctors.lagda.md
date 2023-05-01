@@ -977,186 +977,25 @@ module _
         ( enriched-directed-tree-element-coalgebra X w)
         ( b))
   compute-fiber-base-enriched-directed-tree-element-coalgebra w b =
-    {!comp-equiv-Enriched-Directed-Tree!}
-
-  node-compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (w : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
-    node-element-coalgebra X
-      ( component-coalgebra-polynomial-endofunctor X w b) →
-    node-fiber-base-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X w) b
-  pr1 (node-compute-fiber-base-enriched-directed-tree-element-coalgebra w b x) =
-    node-inclusion-element-coalgebra (b , refl) x
-  pr2 (node-compute-fiber-base-enriched-directed-tree-element-coalgebra w b x) =
-    walk-inclusion-element-coalgebra X
-      ( b , refl)
-      ( walk-to-root-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X w b)
-        ( x))
-
-  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra :
-    (w : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
-    node-fiber-base-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X w) b →
-    node-element-coalgebra X
-      ( component-coalgebra-polynomial-endofunctor X w b)
-  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra =
-    {!!}
-
-  edge-compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (w : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
-    (x y :
-      node-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X w b)) →
-    edge-element-coalgebra X
-      ( component-coalgebra-polynomial-endofunctor X w b)
-      ( x)
-      ( y) →
-    edge-fiber-base-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X w) b
-      ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra w b x)
-      ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra w b y)
-  pr1
-    ( edge-compute-fiber-base-enriched-directed-tree-element-coalgebra
-      w b x y e) =
-    edge-inclusion-element-coalgebra (b , refl) e
-  pr2
-    ( edge-compute-fiber-base-enriched-directed-tree-element-coalgebra
-      w b x y e) =
-    ap
-      ( walk-inclusion-element-coalgebra X (b , refl))
-      ( eq-is-contr
-        ( unique-walk-to-root-element-coalgebra X
-          ( component-coalgebra-polynomial-endofunctor X w b)
-          ( x)))
-
-  directed-tree-compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (w : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
-    hom-Directed-Tree
-      ( directed-tree-element-coalgebra X
+    comp-equiv-Enriched-Directed-Tree A B
+      ( enriched-directed-tree-element-coalgebra X
         ( component-coalgebra-polynomial-endofunctor X w b))
-      ( directed-tree-fiber-base-Enriched-Directed-Tree A B
+      ( fiber-Enriched-Directed-Tree A B
+        ( combinator-Enriched-Directed-Tree A B
+          ( λ b →
+            enriched-directed-tree-element-coalgebra X
+              ( component-coalgebra-polynomial-endofunctor X w b)))
+        ( node-base-index-combinator-Enriched-Directed-Tree A B
+          ( enriched-directed-tree-element-coalgebra X ∘
+            component-coalgebra-polynomial-endofunctor X w)
+          ( b)))
+      ( fiber-base-Enriched-Directed-Tree A B
         ( enriched-directed-tree-element-coalgebra X w)
         ( b))
-  pr1
-    ( directed-tree-compute-fiber-base-enriched-directed-tree-element-coalgebra
-      w b) =
-    node-compute-fiber-base-enriched-directed-tree-element-coalgebra w b
-  pr2
-    ( directed-tree-compute-fiber-base-enriched-directed-tree-element-coalgebra
-      w b) =
-    edge-compute-fiber-base-enriched-directed-tree-element-coalgebra w b
-
-  children-compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (x : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X x)) →
-    (u :
-      node-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X x b)) →
-    children-Directed-Tree
-      ( directed-tree-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X x b))
-      ( u) →
-    children-Directed-Tree
-      ( directed-tree-fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x)
-        ( b))
-      ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra x b u)
-  children-compute-fiber-base-enriched-directed-tree-element-coalgebra x b =
-    children-hom-Directed-Tree
-      ( directed-tree-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X x b))
-      ( directed-tree-fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x)
-        ( b))
-      ( directed-tree-compute-fiber-base-enriched-directed-tree-element-coalgebra
-        ( x)
-        ( b))
-
-  shape-compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (x : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X x)) →
-    ( shape-element-coalgebra X
-      ( component-coalgebra-polynomial-endofunctor X x b)) ~
-    ( ( shape-fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x)
-        ( b)) ∘
-      ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra x b))
-  shape-compute-fiber-base-enriched-directed-tree-element-coalgebra x b u =
-    refl
-
-  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra :
-    (x : type-coalgebra-polynomial-endofunctor X)
-    (b : B (shape-coalgebra-polynomial-endofunctor X x)) →
-    ( u :
-      node-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X x b)) →
-    ( ( children-compute-fiber-base-enriched-directed-tree-element-coalgebra
-        x b u) ∘
-      ( map-enrichment-element-coalgebra X
-        ( component-coalgebra-polynomial-endofunctor X x b)
-        ( u))) ~
-    ( ( map-enrichment-fiber-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x)
-        ( b)
-        ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra
-          x b u)))
-  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b
-    ( root-coalgebra .(component-coalgebra-polynomial-endofunctor X x b))
-    ( a) =
-    eq-Eq-children-fiber-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X x)
-      ( node-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x)
-        ( b))
-      ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra x b
-        ( root-coalgebra _))
-      ( children-compute-fiber-base-enriched-directed-tree-element-coalgebra
-        ( x)
-        ( b)
-        ( root-coalgebra _)
-        ( map-enrichment-element-coalgebra X
-          ( component-coalgebra-polynomial-endofunctor X x b)
-          ( root-coalgebra _)
-          ( a)))
-      ( map-enrichment-fiber-base-Enriched-Directed-Tree A B
-         ( enriched-directed-tree-element-coalgebra X x)
-         ( b)
-         ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra
-           x b
-           ( root-coalgebra _))
-         ( a))
-      ( {!!} , {!!})
-  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b
-    ( node-inclusion-element-coalgebra x₁ u)
-    ( a) =
-    {! !}
-
-{-
-    eq-Eq-children-fiber-Enriched-Directed-Tree A B
-      ( enriched-directed-tree-element-coalgebra X x)
-      ( node-base-Enriched-Directed-Tree A B
-        ( enriched-directed-tree-element-coalgebra X x)
-        ( b))
-      ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra x b u)
-      ( children-compute-fiber-base-enriched-directed-tree-element-coalgebra
-        ( x)
-        ( b)
-        ( u)
-        ( map-enrichment-element-coalgebra X
-          ( component-coalgebra-polynomial-endofunctor X x b)
-          ( u)
-          ( a)))
-      ( map-enrichment-fiber-base-Enriched-Directed-Tree A B
-         ( enriched-directed-tree-element-coalgebra X x)
-         ( b)
-         ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra
-           x b u)
-         ( a))
       {!!}
--}
+      ( compute-fiber-combinator-Enriched-Directed-Tree A B
+        ( λ c →
+          enriched-directed-tree-element-coalgebra X
+            ( component-coalgebra-polynomial-endofunctor X w c))
+        ( b))
 ```
