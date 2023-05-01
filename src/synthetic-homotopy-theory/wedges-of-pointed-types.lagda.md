@@ -12,14 +12,15 @@ open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
-open import foundation.unit-type
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.pointed-types
-open import structured-types.pointed-maps
 open import structured-types.pointed-cartesian-product-types
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.cofibers
 open import synthetic-homotopy-theory.pushouts
 ```
@@ -59,8 +60,8 @@ pr2 (A ∨* B) =
 
 indexed-wedge :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-pr1 (indexed-wedge I A) = cofiber (λ i → i , pt-Pointed-Type (A i))
-pr2 (indexed-wedge I A) = pt-cofiber (λ i → i , pt-Pointed-Type (A i))
+pr1 (indexed-wedge I A) = cofiber (λ i → i , point-Pointed-Type (A i))
+pr2 (indexed-wedge I A) = pt-cofiber (λ i → i , point-Pointed-Type (A i))
 ```
 
 ## Properties
@@ -72,14 +73,37 @@ defined by the cogap map of the cocone defined by the canonical inclusions
 `A → A ×* B ← B`.
 
 ```agda
+cocone-prod-wedge-Pointed-Type :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  cocone
+    { S = unit}
+    ( λ _ → point-Pointed-Type A)
+    ( λ _ → point-Pointed-Type B)
+    ( type-Pointed-Type (A ×* B))
+pr1 (cocone-prod-wedge-Pointed-Type A B) = _, point-Pointed-Type B
+pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = point-Pointed-Type A ,_
+pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = refl-htpy
+
 map-prod-wedge-Pointed-Type :
   {l1 l2 : Level}
   (A : Pointed-Type l1) (B : Pointed-Type l2) →
   type-Pointed-Type (A ∨* B) → type-Pointed-Type (A ×* B)
-map-prod-wedge-Pointed-Type (A , a) (B , b) =
+map-prod-wedge-Pointed-Type A B =
   cogap
-    ( λ _ → a)
-    ( λ _ → b)
-    ( (_, b) , (a ,_) , refl-htpy)
+    ( λ _ → point-Pointed-Type A)
+    ( λ _ → point-Pointed-Type B)
+    ( cocone-prod-wedge-Pointed-Type A B)
 
+pointed-map-prod-wedge-Pointed-Type :
+  {l1 l2 : Level}
+  (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  (A ∨* B) →* (A ×* B)
+pr1 (pointed-map-prod-wedge-Pointed-Type A B) =
+  map-prod-wedge-Pointed-Type A B
+pr2 (pointed-map-prod-wedge-Pointed-Type A B) =
+  compute-inl-cogap
+    ( λ _ → point-Pointed-Type A)
+    ( λ _ → point-Pointed-Type B)
+    ( cocone-prod-wedge-Pointed-Type A B)
+    ( point-Pointed-Type A)
 ```

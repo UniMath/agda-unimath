@@ -9,14 +9,14 @@ module structured-types.pointed-cartesian-product-types where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.functions
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-types
 open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 </details>
@@ -71,14 +71,14 @@ module _
 ```agda
   map-inl-prod-Pointed-Type : type-Pointed-Type A → type-Pointed-Type (A ×* B)
   pr1 (map-inl-prod-Pointed-Type x) = x
-  pr2 (map-inl-prod-Pointed-Type x) = pt-Pointed-Type B
+  pr2 (map-inl-prod-Pointed-Type x) = point-Pointed-Type B
 
   inl-prod-Pointed-Type : A →* (A ×* B)
   pr1 inl-prod-Pointed-Type = map-inl-prod-Pointed-Type
   pr2 inl-prod-Pointed-Type = refl
 
   map-inr-prod-Pointed-Type : type-Pointed-Type B → type-Pointed-Type (A ×* B)
-  pr1 (map-inr-prod-Pointed-Type y) = pt-Pointed-Type A
+  pr1 (map-inr-prod-Pointed-Type y) = point-Pointed-Type A
   pr2 (map-inr-prod-Pointed-Type y) = y
 
   inr-prod-Pointed-Type : B →* (A ×* B)
