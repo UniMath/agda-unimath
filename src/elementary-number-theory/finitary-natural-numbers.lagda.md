@@ -1,4 +1,4 @@
-# The natural numbers base $k$
+# The natural numbers base `k`
 
 ```agda
 module elementary-number-theory.finitary-natural-numbers where
@@ -37,7 +37,7 @@ data based-ℕ : ℕ → UU lzero where
   unary-op-based-ℕ : (k : ℕ) → Fin k → based-ℕ k → based-ℕ k
 ```
 
-### Converting a $k$-ary natural number to a natural number
+### Converting a `k`-ary natural number to a natural number
 
 ```agda
 constant-ℕ : (k : ℕ) → Fin k → ℕ
@@ -160,7 +160,7 @@ the following term has type `Id x y`.
            ( is-injective-add-ℕ' (nat-Fin (succ-ℕ k) x) p))))
 ```
 
-## Exercise 7.10 (c)
+### Exercise 7.10 (c)
 
 We show that the map `convert-based-ℕ` has an inverse.
 
@@ -171,7 +171,7 @@ zero-based-ℕ : (k : ℕ) → based-ℕ (succ-ℕ k)
 zero-based-ℕ k = constant-based-ℕ (succ-ℕ k) (zero-Fin k)
 ```
 
-The successor function on the $k$-ary natural numbers.
+The successor function on the `k`-ary natural numbers.
 
 ```agda
 succ-based-ℕ : (k : ℕ) → based-ℕ k → based-ℕ k

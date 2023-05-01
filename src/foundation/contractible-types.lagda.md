@@ -132,7 +132,7 @@ equiv-is-contr-equiv {A = A} {B = B} e =
       ( pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
 ```
 
-### Contractible types are $k$-truncated for any $k$
+### Contractible types are `k`-truncated for any `k`
 
 ```agda
 module _
