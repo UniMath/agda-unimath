@@ -83,7 +83,7 @@ module _
 tr-eq-pair-diagonal :
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (C : A × A → UU l2)
   (p : a0 ＝ a1) (u : C (a0 , a0)) →
-  (tr C (eq-pair p p) u) ＝ (tr (λ a → C (a , a)) p u)
+  tr C (eq-pair p p) u ＝ tr (λ a → C (a , a)) p u
 tr-eq-pair-diagonal C refl u = refl
 ```
 
