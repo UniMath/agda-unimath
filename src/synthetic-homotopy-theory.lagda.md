@@ -11,6 +11,7 @@ open import synthetic-homotopy-theory.acyclic-maps public
 open import synthetic-homotopy-theory.acyclic-types public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-under-spans public
+open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.descent-circle public
 open import synthetic-homotopy-theory.double-loop-spaces public
