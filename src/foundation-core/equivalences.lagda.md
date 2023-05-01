@@ -463,7 +463,7 @@ is-equiv-equiv' {f = f} {g} i j H K =
     ( is-equiv-map-equiv i)
 ```
 
-We assumed a commuting square
+We will assume a commuting square
 
 ```md
           h
