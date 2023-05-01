@@ -63,8 +63,8 @@ abstract
 ### Computing transport
 
 ```agda
-tr-equiv-eq-ap :
+compute-equiv-eq-ap :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
   (p : x ＝ y) → map-equiv (equiv-eq (ap B p)) ＝ tr B p
-tr-equiv-eq-ap refl = refl
+compute-equiv-eq-ap refl = refl
 ```
