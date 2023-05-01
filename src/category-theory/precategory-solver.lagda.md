@@ -178,8 +178,7 @@ private
         xs)
 ```
 
-Builds a term of `Precat-Expr C x y` from a term of type
-`type-hom-Precat C x y`.
+### Building a term of `Precat-Expr C x y` from a term of type `type-hom-Precat C x y`
 
 ```agda
 build-Precat-Expr : Term → Term

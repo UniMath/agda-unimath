@@ -230,10 +230,14 @@ pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (neg-div-ℤ x y (pair d p)) =
   equational-reasoning
     mul-ℤ (neg-ℤ d) (neg-ℤ x)
-    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x)) by left-negative-law-mul-ℤ d (neg-ℤ x)
-    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x)) by ap neg-ℤ (right-negative-law-mul-ℤ d x)
-    ＝ (mul-ℤ d x) by neg-neg-ℤ (mul-ℤ d x)
-    ＝ y by p
+    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))
+      by left-negative-law-mul-ℤ d (neg-ℤ x)
+    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))
+      by ap neg-ℤ (right-negative-law-mul-ℤ d x)
+    ＝ (mul-ℤ d x)
+      by neg-neg-ℤ (mul-ℤ d x)
+    ＝ y
+      by p
 ```
 
 ### Multiplication preserves divisibility
@@ -657,9 +661,13 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg
   with is-decidable-is-zero-ℤ a
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
   equational-reasoning
-    a ＝ zero-ℤ by z
-      ＝ neg-ℤ a by inv (ap neg-ℤ z)
-      ＝ b by neg
+    a
+    ＝ zero-ℤ
+      by z
+    ＝ neg-ℤ a
+      by inv (ap neg-ℤ z)
+    ＝ b
+      by neg
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
    a H (tr is-nonnegative-ℤ (inv neg) H')))
