@@ -252,10 +252,10 @@ module _
       ( horizontal-concat-Id²
         ( ap-binary-comp-diagonal (_∙_) id inv α)
         ( refl))) ∙
-        ap
-          ( λ t →
-            ( horizontal-concat-Id² t (horizontal-inv-Id² α)) ∙ right-inv p')
-          ( ap-id α)
+    ( ap
+      ( λ t → horizontal-concat-Id² t (horizontal-inv-Id² α) ∙ right-inv p')
+      ( ap-id α))
+
 
   nat-sq-left-inv-Id² :
     coherence-square-identifications
