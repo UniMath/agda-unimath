@@ -44,9 +44,9 @@ _∘_ :
 ### Evaluating at a point
 
 ```agda
-ev-pt :
+ev-point :
   {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
-ev-pt a B f = f a
+ev-point a B f = f a
 ```
 
 ### Precomposition functions

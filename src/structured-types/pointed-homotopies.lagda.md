@@ -169,7 +169,7 @@ module _
             ( concat (pr2 f) (function-pointed-Π A B h (point-Pointed-Type A)))
             ( ( inv (assoc (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
               ( ap
-                ( concat' (pt-Pointed-Fam A B) (inv (pr2 h)))
+                ( concat' (point-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
 
   inv-htpy-pointed-Π :
@@ -208,7 +208,7 @@ module _
             ( ( ( ( ap-inv (pr1 g) (pr2 f2)) ∙
                   ( ap
                     ( concat'
-                      ( pr1 g (pt-Pointed-Fam A (constant-Pointed-Fam A B)))
+                      ( pr1 g (point-Pointed-Fam A (constant-Pointed-Fam A B)))
                       ( inv (ap (pr1 g) (pr2 f2)))))
                   ( inv (right-inv (pr2 g)))) ∙
                 ( assoc

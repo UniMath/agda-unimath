@@ -27,8 +27,8 @@ open import group-theory.transitive-concrete-group-actions
 
 ## Idea
 
-The stabilizer of an element `x : X pt` of a concrete G-set `X : BG → Set` is
-the connected component of `pair pt x` in the type of orbits of `X`. Its loop
+The stabilizer of an element `x : X point` of a concrete G-set `X : BG → Set` is
+the connected component of `pair point x` in the type of orbits of `X`. Its loop
 space is indeed the type of elements `g : G` such that `g x = x`.
 
 ## Definition

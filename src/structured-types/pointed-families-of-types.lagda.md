@@ -37,8 +37,8 @@ module _
   fam-Pointed-Fam : type-Pointed-Type A → UU l2
   fam-Pointed-Fam = pr1 B
 
-  pt-Pointed-Fam : fam-Pointed-Fam (point-Pointed-Type A)
-  pt-Pointed-Fam = pr2 B
+  point-Pointed-Fam : fam-Pointed-Fam (point-Pointed-Type A)
+  point-Pointed-Fam = pr2 B
 ```
 
 ## Examples

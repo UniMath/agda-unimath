@@ -777,11 +777,11 @@ abstract
       ( inv-htpy
         ( pr2 (pr2 (Contraction-fundamental-cover-circle l dup-circle))))
 
-pt-fundamental-cover-circle :
+point-fundamental-cover-circle :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
   fundamental-cover-circle l dup-circle (base-free-loop l)
-pt-fundamental-cover-circle l dup-circle =
+point-fundamental-cover-circle l dup-circle =
   map-equiv (compute-fiber-fundamental-cover-circle l dup-circle) zero-ℤ
 
 fundamental-cover-circle-eq :
@@ -789,7 +789,7 @@ fundamental-cover-circle-eq :
   ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
   ( x : X) → Id (base-free-loop l) x → fundamental-cover-circle l dup-circle x
 fundamental-cover-circle-eq l dup-circle .(base-free-loop l) refl =
-  pt-fundamental-cover-circle l dup-circle
+  point-fundamental-cover-circle l dup-circle
 
 abstract
   is-equiv-fundamental-cover-circle-eq :

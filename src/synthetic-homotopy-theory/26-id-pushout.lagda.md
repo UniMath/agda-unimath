@@ -280,18 +280,18 @@ equiv-hom-Fam-pushout-map c up-X P Q =
 ### Definition 19.2.1 Universal families over spans
 
 ```agda
-ev-pt-hom-Fam-pushout :
+ev-point-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g)
   {a : A} → (pr1 P a) → (hom-Fam-pushout P Q) → pr1 Q a
-ev-pt-hom-Fam-pushout P Q {a} p h = pr1 h a p
+ev-point-hom-Fam-pushout P Q {a} p h = pr1 h a p
 
 is-universal-Fam-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (a : A) (p : pr1 P a) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 is-universal-Fam-pushout l {f = f} {g} P a p =
-  ( Q : Fam-pushout l f g) → is-equiv (ev-pt-hom-Fam-pushout P Q p)
+  ( Q : Fam-pushout l f g) → is-equiv (ev-point-hom-Fam-pushout P Q p)
 ```
 
 ### Lemma 19.2.2 The descent data of the identity type is a universal family
@@ -302,7 +302,7 @@ triangle-is-universal-id-Fam-pushout' :
   { f : S → A} {g : S → B} (c : cocone f g X)
   (a : A) ( Q : (x : X) → UU l) →
   ( ev-refl (pr1 c a) {B = λ x p → Q x}) ~
-  ( ( ev-pt-hom-Fam-pushout
+  ( ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl)) ∘
@@ -315,14 +315,14 @@ is-universal-id-Fam-pushout' :
   ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
   ( Q : (x : X) → UU l) →
   is-equiv
-    ( ev-pt-hom-Fam-pushout
+    ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
   is-equiv-left-factor-htpy
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
-    ( ev-pt-hom-Fam-pushout
+    ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl))
@@ -342,7 +342,7 @@ is-universal-id-Fam-pushout l {S = S} {A} {B} {X} {f} {g} c up-X a Q =
     ( equiv-precomp-Π
       ( equiv-desc-fam c up-X)
       ( λ (Q : Fam-pushout l f g) →
-        is-equiv (ev-pt-hom-Fam-pushout
+        is-equiv (ev-point-hom-Fam-pushout
           ( desc-fam c (Id (pr1 c a))) Q refl)))
     ( is-universal-id-Fam-pushout' c up-X a)
     ( Q)

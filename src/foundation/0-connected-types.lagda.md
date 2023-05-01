@@ -74,10 +74,10 @@ abstract
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
 
-is-0-connected-is-surjective-pt :
+is-0-connected-is-surjective-point :
   {l1 : Level} {A : UU l1} (a : A) →
-  is-surjective (pt a) → is-0-connected A
-is-0-connected-is-surjective-pt a H =
+  is-surjective (point a) → is-0-connected A
+is-0-connected-is-surjective-point a H =
   is-0-connected-mere-eq a
     ( λ x →
       apply-universal-property-trunc-Prop
@@ -85,27 +85,27 @@ is-0-connected-is-surjective-pt a H =
         ( mere-eq-Prop a x)
         ( λ u → unit-trunc-Prop (pr2 u)))
 
-is-surjective-pt-is-0-connected :
+is-surjective-point-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) →
-  is-0-connected A → is-surjective (pt a)
-is-surjective-pt-is-0-connected a H x =
+  is-0-connected A → is-surjective (point a)
+is-surjective-point-is-0-connected a H x =
   apply-universal-property-trunc-Prop
     ( mere-eq-is-0-connected H a x)
-    ( trunc-Prop (fib (pt a) x))
+    ( trunc-Prop (fib (point a) x))
     ( λ {refl → unit-trunc-Prop (pair star refl)})
 
-is-trunc-map-ev-pt-is-connected :
+is-trunc-map-ev-point-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
   is-0-connected A → is-trunc (succ-𝕋 k) B →
-  is-trunc-map k (ev-pt a (λ _ → B))
-is-trunc-map-ev-pt-is-connected k {A} {B} a H K =
+  is-trunc-map k (ev-point a (λ _ → B))
+is-trunc-map-ev-point-is-connected k {A} {B} a H K =
   is-trunc-map-comp k
-    ( ev-pt star (λ _ → B))
-    ( precomp (pt a) B)
+    ( ev-point star (λ _ → B))
+    ( precomp (point a) B)
     ( is-trunc-map-is-equiv k
       ( universal-property-contr-is-contr star is-contr-unit B))
     ( is-trunc-map-precomp-Π-is-surjective k
-      ( is-surjective-pt-is-0-connected a H)
+      ( is-surjective-point-is-0-connected a H)
       ( λ _ → pair B K))
 
 equiv-dependent-universal-property-is-0-connected :
@@ -115,8 +115,8 @@ equiv-dependent-universal-property-is-0-connected :
 equiv-dependent-universal-property-is-0-connected a H P =
   ( equiv-universal-property-unit (type-Prop (P a))) ∘e
   ( equiv-dependent-universal-property-surj-is-surjective
-    ( pt a)
-    ( is-surjective-pt-is-0-connected a H)
+    ( point a)
+    ( is-surjective-point-is-0-connected a H)
     ( P))
 
 apply-dependent-universal-property-is-0-connected :

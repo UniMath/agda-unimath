@@ -65,8 +65,8 @@ terminal-map = const _ unit star
 ### Points as maps out of the unit type
 
 ```agda
-pt : {l : Level} {A : UU l} → A → (unit → A)
-pt a = const unit _ a
+point : {l : Level} {A : UU l} → A → (unit → A)
+point a = const unit _ a
 ```
 
 ### Raising the universe level of the unit type
