@@ -53,9 +53,7 @@ convert-based-ℕ k (unary-op-based-ℕ .k x n) =
   unary-op-ℕ k x (convert-based-ℕ k n)
 ```
 
-### Exercise 7.10 (a)
-
-The type of `0`-ary natural numbers is empty.
+### The type of `0`-ary natural numbers is empty
 
 ```agda
 is-empty-based-zero-ℕ : is-empty (based-ℕ zero-ℕ)
@@ -63,9 +61,7 @@ is-empty-based-zero-ℕ (constant-based-ℕ .zero-ℕ ())
 is-empty-based-zero-ℕ (unary-op-based-ℕ .zero-ℕ () n)
 ```
 
-### Exercise 7.10 (b)
-
-We show that the function `convert-based-ℕ` is injective.
+### The function `convert-based-ℕ` is injective
 
 ```agda
 cong-unary-op-ℕ :
@@ -154,18 +150,14 @@ is-injective-convert-based-ℕ
            ( is-injective-add-ℕ' (nat-Fin (succ-ℕ k) x) p))))
 ```
 
-### Exercise 7.10 (c)
-
-We show that the map `convert-based-ℕ` has an inverse.
-
-The zero-element of the (k+1)-ary natural numbers
+### The zero-element of the `k+1`-ary natural numbers
 
 ```agda
 zero-based-ℕ : (k : ℕ) → based-ℕ (succ-ℕ k)
 zero-based-ℕ k = constant-based-ℕ (succ-ℕ k) (zero-Fin k)
 ```
 
-The successor function on the `k`-ary natural numbers.
+### The successor function on the `k`-ary natural numbers
 
 ```agda
 succ-based-ℕ : (k : ℕ) → based-ℕ k → based-ℕ k

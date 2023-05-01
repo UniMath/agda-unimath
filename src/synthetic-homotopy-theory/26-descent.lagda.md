@@ -264,8 +264,6 @@ abstract
       ( is-contr-map-is-equiv (dup-c P) h)
 ```
 
-This finishes the formalization of remark 18.1.3.
-
 Before we state the main theorem of this section, we also state a dependent
 version of the pullback property of pushouts.
 
