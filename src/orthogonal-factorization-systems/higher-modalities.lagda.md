@@ -51,27 +51,27 @@ module _
   (unit-○ : modal-unit ○)
   where
 
-  ind-modal : UU (lsuc l1 ⊔ l2)
-  ind-modal =
+  ind-modality : UU (lsuc l1 ⊔ l2)
+  ind-modality =
     (X : UU l1) (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) →
     (x' : ○ X) → ○ (P x')
 
-  rec-modal : UU (lsuc l1 ⊔ l2)
-  rec-modal = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
+  rec-modality : UU (lsuc l1 ⊔ l2)
+  rec-modality = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
 
-  compute-modal : ind-modal → UU (lsuc l1 ⊔ l2)
-  compute-modal ind-○ =
+  compute-ind-modality : ind-modality → UU (lsuc l1 ⊔ l2)
+  compute-ind-modality ind-○ =
     (X : UU l1) (P : ○ X → UU l1) →
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
 
   modal-universal-property : UU (lsuc l1 ⊔ l2)
   modal-universal-property =
-    Σ ind-modal compute-modal
+    Σ ind-modality compute-ind-modality
 
-  rec-modal-ind-modal : ind-modal → rec-modal
-  rec-modal-ind-modal ind X Y = ind X (λ _ → Y)
+  rec-modality-ind-modality : ind-modality → rec-modality
+  rec-modality-ind-modality ind X Y = ind X (λ _ → Y)
 ```
 
 ### Closure under identity type formers
@@ -104,17 +104,17 @@ module _
 ### Components of a `is-higher-modality` proof
 
 ```agda
-  ind-modal-is-higher-modality : is-higher-modality → ind-modal unit-○
-  ind-modal-is-higher-modality = pr1 ∘ pr1
+  ind-modality-is-higher-modality : is-higher-modality → ind-modality unit-○
+  ind-modality-is-higher-modality = pr1 ∘ pr1
 
-  rec-modal-is-higher-modality : is-higher-modality → rec-modal unit-○
-  rec-modal-is-higher-modality =
-    rec-modal-ind-modal unit-○ ∘ ind-modal-is-higher-modality
+  rec-modality-is-higher-modality : is-higher-modality → rec-modality unit-○
+  rec-modality-is-higher-modality =
+    rec-modality-ind-modality unit-○ ∘ ind-modality-is-higher-modality
 
-  compute-modal-is-higher-modality :
+  compute-ind-modality-is-higher-modality :
     (h : is-higher-modality) →
-    compute-modal unit-○ (ind-modal-is-higher-modality h)
-  compute-modal-is-higher-modality = pr2 ∘ pr1
+    compute-ind-modality unit-○ (ind-modality-is-higher-modality h)
+  compute-ind-modality-is-higher-modality = pr2 ∘ pr1
 
   is-modal-identity-types-is-higher-modality :
     is-higher-modality → is-modal-identity-types
@@ -164,27 +164,27 @@ module _
       ( modal-unit-higher-modality)
   is-higher-modality-higher-modality = pr2 (pr2 h)
 
-  ind-modal-higher-modality :
-    ind-modal (modal-unit-higher-modality)
-  ind-modal-higher-modality =
-    ind-modal-is-higher-modality
+  ind-modality-higher-modality :
+    ind-modality (modal-unit-higher-modality)
+  ind-modality-higher-modality =
+    ind-modality-is-higher-modality
       ( locally-small-modal-operator-higher-modality)
       ( modal-unit-higher-modality)
       ( is-higher-modality-higher-modality)
 
-  rec-modal-higher-modality :
-    rec-modal (modal-unit-higher-modality)
-  rec-modal-higher-modality =
-    rec-modal-ind-modal
+  rec-modality-higher-modality :
+    rec-modality (modal-unit-higher-modality)
+  rec-modality-higher-modality =
+    rec-modality-ind-modality
       ( modal-unit-higher-modality)
-      ( ind-modal-higher-modality)
+      ( ind-modality-higher-modality)
 
-  compute-modal-higher-modality :
-    compute-modal
+  compute-ind-modality-higher-modality :
+    compute-ind-modality
       ( modal-unit-higher-modality)
-      ( ind-modal-higher-modality)
-  compute-modal-higher-modality =
-    compute-modal-is-higher-modality
+      ( ind-modality-higher-modality)
+  compute-ind-modality-higher-modality =
+    compute-ind-modality-is-higher-modality
       ( locally-small-modal-operator-higher-modality)
       ( modal-unit-higher-modality)
       ( is-higher-modality-higher-modality)
@@ -210,8 +210,9 @@ module _
   {○ : modal-operator l l} (unit-○ : modal-unit ○)
   where
 
-  map-rec-modal : (rec-○ : rec-modal unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
-  map-rec-modal rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+  map-rec-modality :
+    (rec-○ : rec-modality unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
+  map-rec-modality rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
 ```
 
 ### Modal identity elimination
@@ -251,8 +252,8 @@ module _
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y') ∘
-      ( map-rec-modal unit-○
-        ( rec-modal-ind-modal unit-○ ind-○)
+      ( map-rec-modality unit-○
+        ( rec-modality-ind-modality unit-○ ind-○)
         ( map-equiv-is-small ( is-locally-small-○ X x' y')))
 ```
 
@@ -296,13 +297,13 @@ module _
       higher-modality l l)
   where
 
-  isretr-ind-modal :
+  isretr-ind-modality :
     {X : UU l} {P : ○ X → UU l} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ X P) ~ id
-  isretr-ind-modal {X} {P} = eq-htpy ∘ compute-○ X P
+  isretr-ind-modality {X} {P} = eq-htpy ∘ compute-○ X P
 
-  issec-ind-modal :
+  issec-ind-modality :
     {X : UU l} {P : ○ X → UU l} → (ind-○ X P ∘ precomp-Π unit-○ (○ ∘ P)) ~ id
-  issec-ind-modal {X} {P} s =
+  issec-ind-modality {X} {P} s =
     eq-htpy
       ( map-inv-unit-id-higher-modality
         ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-○) , Id-○) ∘
@@ -310,22 +311,22 @@ module _
           ( λ x' → (ind-○ X P ∘ precomp-Π (unit-○) (○ ∘ P)) s x' ＝ s x')
           ( unit-○ ∘ compute-○ X P (s ∘ unit-○))))
 
-  is-equiv-ind-modal : (X : UU l) (P : ○ X → UU l) → is-equiv (ind-○ X P)
-  pr1 (pr1 (is-equiv-ind-modal X P)) = precomp-Π unit-○ (○ ∘ P)
-  pr2 (pr1 (is-equiv-ind-modal X P)) = issec-ind-modal
-  pr1 (pr2 (is-equiv-ind-modal X P)) = precomp-Π unit-○ (○ ∘ P)
-  pr2 (pr2 (is-equiv-ind-modal X P)) = isretr-ind-modal
+  is-equiv-ind-modality : (X : UU l) (P : ○ X → UU l) → is-equiv (ind-○ X P)
+  pr1 (pr1 (is-equiv-ind-modality X P)) = precomp-Π unit-○ (○ ∘ P)
+  pr2 (pr1 (is-equiv-ind-modality X P)) = issec-ind-modality
+  pr1 (pr2 (is-equiv-ind-modality X P)) = precomp-Π unit-○ (○ ∘ P)
+  pr2 (pr2 (is-equiv-ind-modality X P)) = isretr-ind-modality
 
-  equiv-ind-modal :
+  equiv-ind-modality :
     (X : UU l) (P : ○ X → UU l) →
     ((x : X) → ○ (P (unit-○ x))) ≃ ((x' : ○ X) → ○ (P x'))
-  pr1 (equiv-ind-modal X P) = ind-○ X P
-  pr2 (equiv-ind-modal X P) = is-equiv-ind-modal X P
+  pr1 (equiv-ind-modality X P) = ind-○ X P
+  pr2 (equiv-ind-modality X P) = is-equiv-ind-modality X P
 
   is-uniquely-eliminating-modality-higher-modality :
     is-uniquely-eliminating-modality unit-○
   is-uniquely-eliminating-modality-higher-modality X P =
-    is-equiv-map-inv-is-equiv (is-equiv-ind-modal X P)
+    is-equiv-map-inv-is-equiv (is-equiv-ind-modality X P)
 ```
 
 ## See also
