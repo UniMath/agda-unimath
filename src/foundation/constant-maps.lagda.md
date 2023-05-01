@@ -37,7 +37,7 @@ open import foundation-core.universe-levels
 
 ## Properties
 
-### A type is `(k+1)`-truncated if and only if all constant maps into it are `k`-truncated
+### A type is `k+1`-truncated if and only if all constant maps into it are `k`-truncated
 
 ```agda
 module _

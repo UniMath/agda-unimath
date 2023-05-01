@@ -67,7 +67,7 @@ module _
 
 ## Properties
 
-### If a type is `k`-truncated, then it is $(k+1)$-truncated
+### If a type is `k`-truncated, then it is `k+1`-truncated
 
 ```agda
 abstract
