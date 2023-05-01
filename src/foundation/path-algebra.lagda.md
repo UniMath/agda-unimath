@@ -115,30 +115,30 @@ vertical-concat-square {a = a} {f = f}
 ### Unit laws for the associator
 
 ```agda
-unit-law-associative-011 :
+unit-law-assoc-011 :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
   assoc refl p q ＝ refl
-unit-law-associative-011 p q = refl
+unit-law-assoc-011 p q = refl
 
-unit-law-associative-101 :
+unit-law-assoc-101 :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
   assoc p refl q ＝ ap (concat' x q) right-unit
-unit-law-associative-101 refl refl = refl
+unit-law-assoc-101 refl refl = refl
 
-unit-law-associative-101' :
+unit-law-assoc-101' :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
   inv (assoc p refl q) ＝ ap (concat' x q) (inv right-unit)
-unit-law-associative-101' refl refl = refl
+unit-law-assoc-101' refl refl = refl
 
-unit-law-associative-110 :
+unit-law-assoc-110 :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
   (assoc p q refl ∙ ap (concat p z) right-unit) ＝ right-unit
-unit-law-associative-110 refl refl = refl
+unit-law-assoc-110 refl refl = refl
 
-unit-law-associative-110' :
+unit-law-assoc-110' :
   {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
   (inv right-unit ∙ assoc p q refl) ＝ ap (concat p z) (inv right-unit)
-unit-law-associative-110' refl refl = refl
+unit-law-assoc-110' refl refl = refl
 ```
 
 ## Properties of 2-paths
