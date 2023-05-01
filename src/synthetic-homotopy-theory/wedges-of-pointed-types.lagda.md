@@ -66,11 +66,10 @@ pr2 (indexed-wedge I A) = pt-cofiber (λ i → i , point-Pointed-Type (A i))
 
 ## Properties
 
-### The canonical inclusion of the wedge sum into the pointed product
+### The canonical inclusion of the wedge sum `A ∨* B` into the pointed product `A ×* B`
 
 There is a canonical inclusion of the wedge sum into the pointed product that is
-defined by the cogap map of the cocone defined by the canonical inclusions
-`A → A ×* B ← B`.
+defined by the cogap map induced by the canonical inclusions `A → A ×* B ← B`.
 
 ```agda
 cocone-prod-wedge-Pointed-Type :
@@ -107,3 +106,8 @@ pr2 (pointed-map-prod-wedge-Pointed-Type A B) =
     ( cocone-prod-wedge-Pointed-Type A B)
     ( point-Pointed-Type A)
 ```
+
+## See also
+
+- [Smash products of pointed types](synthetic-homotopy-theory.smash-products-of-pointed-types.md)
+  for a related construction.

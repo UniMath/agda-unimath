@@ -40,8 +40,8 @@ as the following pushout
 where the map `A ∨* B → A ×* B` is the canonical inclusion
 `map-wedge-prod-Pointed-Type`.
 
-Note that although the smash product is called a product, it is not a limit
-construction. It is a quotient of the product, so it's a colimit.
+**Note:** although the smash product is called a product, it is in fact a
+quotient of the product, so it's a colimit construction.
 
 ## Definition
 
@@ -53,5 +53,13 @@ pr1 (A ∧* B) =
   pushout
     ( map-prod-wedge-Pointed-Type A B)
     ( λ _ → star)
-pr2 (A ∧* B) = inr-pushout (map-prod-wedge-Pointed-Type A B) (λ _ → star) star
+pr2 (A ∧* B) =
+  inr-pushout
+    ( map-prod-wedge-Pointed-Type A B)
+    ( λ _ → star)
+    ( star)
 ```
+
+## See also
+
+- [Wedges of pointed types](synthetic-homotopy-theory.wedges-of-pointed-types.md)

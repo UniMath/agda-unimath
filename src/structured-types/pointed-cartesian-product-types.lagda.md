@@ -14,6 +14,7 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.embeddings
 
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
@@ -44,7 +45,7 @@ module _
 
 ## Properties
 
-### The pointed projections from the pointed product to `A` and `B`
+### The pointed projections from the pointed product `A ×* B` onto `A` and `B`
 
 ```agda
 module _
@@ -66,7 +67,7 @@ module _
   pr2 pr2-prod-Pointed-Type = refl
 ```
 
-### The pointed product comes equipped with pointed inclusion of `A` and `B`
+### The pointed product `A ×* B` comes equipped with pointed inclusion of `A` and `B`
 
 ```agda
   map-inl-prod-Pointed-Type : type-Pointed-Type A → type-Pointed-Type (A ×* B)
@@ -86,7 +87,7 @@ module _
   pr2 inr-prod-Pointed-Type = refl
 ```
 
-### The pointed inclusions are sections to the pointed projections
+### The pointed inclusions into `A ×* B` are sections to the pointed projections
 
 ```agda
   issec-map-inl-prod-Pointed-Type :
