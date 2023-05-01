@@ -58,6 +58,26 @@ module _
 
 ## Properties
 
+### Transposing binary path-overs
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A → B → UU l3)
+  where
+
+  transpose-binary-path-over :
+    {x1 x2 : A} (p : x1 ＝ x2) {y1 y2 : B} (q : y1 ＝ y2)
+    {c1 : C x1 y1} {c2 : C x2 y2} →
+    c2 ＝ binary-tr C p q c1 → binary-tr C (inv p) (inv q) c2 ＝ c1
+  transpose-binary-path-over refl refl = id
+
+  transpose-binary-path-over' :
+    {x1 x2 : A} (p : x1 ＝ x2) {y1 y2 : B} (q : y1 ＝ y2)
+    {c1 : C x1 y1} {c2 : C x2 y2} →
+    c1 ＝ binary-tr C (inv p) (inv q) c2 → binary-tr C p q c1 ＝ c2
+  transpose-binary-path-over' refl refl = id
+```
+
 ### Binary transport along concatenated paths
 
 ```agda
@@ -79,13 +99,13 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  {E : A → C → UU l5} (E' : B → D → UU l6)
-  {f : A → B} {g : C → D} (h : (a : A) (c : C) → E a c → E' (f a) (g c))
+  {E : A → C → UU l5} (F : B → D → UU l6)
+  {f : A → B} {g : C → D} (h : (a : A) (c : C) → E a c → F (f a) (g c))
   where
 
   binary-tr-ap :
     {x x' : A} (p : x ＝ x') {y y' : C} (q : y ＝ y') →
     {u : E x y} {v : E x' y'} (r : binary-tr E p q u ＝ v) →
-    binary-tr E' (ap f p) (ap g q) (h x y u) ＝ h x' y' v
+    binary-tr F (ap f p) (ap g q) (h x y u) ＝ h x' y' v
   binary-tr-ap refl refl refl = refl
 ```

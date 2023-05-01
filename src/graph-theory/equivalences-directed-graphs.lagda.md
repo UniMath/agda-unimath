@@ -448,7 +448,17 @@ module _
         ( vertex-equiv-Directed-Graph G H f y)
         ( edge-equiv-Directed-Graph G H f x y e)) ＝ e
   edge-isretr-inv-equiv-Directed-Graph x y e =
-    {!!}
+    transpose-binary-path-over'
+      ( edge-Directed-Graph G)
+      ( vertex-isretr-inv-equiv-Directed-Graph x)
+      ( vertex-isretr-inv-equiv-Directed-Graph y)
+      ( map-eq-transpose-equiv'
+        ( equiv-edge-equiv-Directed-Graph G H f
+          ( vertex-inv-equiv-Directed-Graph
+            ( vertex-equiv-Directed-Graph G H f x))
+          ( vertex-inv-equiv-Directed-Graph
+            ( vertex-equiv-Directed-Graph G H f y)))
+        {!!})
 
 {-
 binary-tr
