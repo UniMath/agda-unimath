@@ -486,8 +486,8 @@ module _
         equiv-Enriched-Directed-Tree A B
           ( enriched-directed-tree-element-𝕎 v)
           ( enriched-directed-tree-element-𝕎 w))
-  pr1 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w )= w
-  pr2 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w )=
+  pr1 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w)= w
+  pr2 (center-is-proof-irrelevant-fib-enriched-directed-tree-element-𝕎 w)=
     id-equiv-Enriched-Directed-Tree A B
       ( enriched-directed-tree-element-𝕎 w)
 

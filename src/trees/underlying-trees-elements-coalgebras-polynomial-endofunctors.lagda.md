@@ -990,9 +990,8 @@ module _
       ( enriched-directed-tree-element-coalgebra X w) b →
     node-element-coalgebra X
       ( component-coalgebra-polynomial-endofunctor X w b)
-  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra w b (.(node-base-Enriched-Directed-Tree A B (enriched-directed-tree-element-coalgebra X w) b) , refl-walk-Directed-Graph) = root-coalgebra (component-coalgebra-polynomial-endofunctor X w b)
-  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra w b (.(node-inclusion-element-coalgebra (c , refl) (root-coalgebra (pr2 (pr2 X w) c))) , cons-walk-Directed-Graph (edge-to-root-element-coalgebra (c , refl)) v) = {!!}
-  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra w b (.(node-inclusion-element-coalgebra H _) , cons-walk-Directed-Graph (edge-inclusion-element-coalgebra H e) v) = {!!}
+  map-inv-node-compute-fiber-based-enriched-directed-tree-element-coalgebra =
+    {!!}
 
   edge-compute-fiber-base-enriched-directed-tree-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
@@ -1062,7 +1061,9 @@ module _
       ( directed-tree-fiber-base-Enriched-Directed-Tree A B
         ( enriched-directed-tree-element-coalgebra X x)
         ( b))
-      ( directed-tree-compute-fiber-base-enriched-directed-tree-element-coalgebra x b)
+      ( directed-tree-compute-fiber-base-enriched-directed-tree-element-coalgebra
+        ( x)
+        ( b))
 
   shape-compute-fiber-base-enriched-directed-tree-element-coalgebra :
     (x : type-coalgebra-polynomial-endofunctor X)
@@ -1092,7 +1093,9 @@ module _
         ( b)
         ( node-compute-fiber-base-enriched-directed-tree-element-coalgebra
           x b u)))
-  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b (root-coalgebra .(component-coalgebra-polynomial-endofunctor X x b)) a =
+  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b
+    ( root-coalgebra .(component-coalgebra-polynomial-endofunctor X x b))
+    ( a) =
     eq-Eq-children-fiber-Enriched-Directed-Tree A B
       ( enriched-directed-tree-element-coalgebra X x)
       ( node-base-Enriched-Directed-Tree A B
@@ -1116,7 +1119,10 @@ module _
            ( root-coalgebra _))
          ( a))
       ( {!!} , {!!})
-  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b (node-inclusion-element-coalgebra x₁ u) a = {! !}
+  enrichment-compute-fiber-base-enriched-directed-tree-element-coalgebra x b
+    ( node-inclusion-element-coalgebra x₁ u)
+    ( a) =
+    {! !}
 
 {-
     eq-Eq-children-fiber-Enriched-Directed-Tree A B
