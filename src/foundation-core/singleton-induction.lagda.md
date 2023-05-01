@@ -56,7 +56,8 @@ ind-singleton-is-contr a is-contr-A B b x =
 
 compute-ind-singleton-is-contr :
   {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
-  (B : A → UU l2) → ((ev-point a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
+  (B : A → UU l2) →
+  ((ev-point a B) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
 compute-ind-singleton-is-contr a is-contr-A B b =
   ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
 
