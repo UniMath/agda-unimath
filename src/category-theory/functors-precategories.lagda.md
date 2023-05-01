@@ -27,7 +27,7 @@ A functor from a precategory `C` to a precategory `D` consists of:
 - a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms, such that the following
   identities hold:
 - `F₁ id_x = id_(F₀ x)`,
-- `F₁ (compose g f) = compose (F₁ g) (F₁ f)`.
+- `F₁ (g ∘ f) = F₁ g ∘ F₁ f`.
 
 ## Definition
 

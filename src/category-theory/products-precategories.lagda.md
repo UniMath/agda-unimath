@@ -28,8 +28,8 @@ A product of two objects `x` and `x` in a category `C` consists of:
 - morphisms `l : hom p x` and `r : hom p y` such that for every object `z` and
   morphisms `f : hom z x` and `g : hom z y` there exists a unique morphism
   `h : hom z p` such that
-- `compose l h = f`
-- `compose r h = g`.
+- `l ∘ h = f`
+- `r ∘ h = g`.
 
 We say that `C` has all binary products if there is a choice of a product for
 each pair of objects in `C`.
