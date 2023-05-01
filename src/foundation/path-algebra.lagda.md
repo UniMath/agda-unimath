@@ -256,7 +256,6 @@ module _
       ( λ t → horizontal-concat-Id² t (horizontal-inv-Id² α) ∙ right-inv p')
       ( ap-id α))
 
-
   nat-sq-left-inv-Id² :
     coherence-square-identifications
       ( left-inv p)

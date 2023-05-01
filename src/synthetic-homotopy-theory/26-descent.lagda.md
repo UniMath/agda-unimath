@@ -410,12 +410,12 @@ dependent-pullback-property-dependent-universal-property-pushout
     ( tot (λ h → tot λ h' → htpy-eq))
     ( gap
       ( λ h x → tr P (H x) (h (f x)))
-      ( λ h x → h (g x))
+      ( _∘ g)
       ( cone-dependent-pullback-property-pushout f g c P))
     ( triangle-dependent-pullback-property-pushout f g c P)
     ( is-equiv-tot-is-fiberwise-equiv
       ( λ h → is-equiv-tot-is-fiberwise-equiv
-        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (λ x → h' (g x)))))
+        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
     ( I l P)
 ```
 
@@ -435,13 +435,13 @@ dependent-universal-property-dependent-pullback-property-pushout
     ( tot (λ h → tot λ h' → htpy-eq))
     ( gap
       ( λ h x → tr P (H x) (h (f x)))
-      ( λ h x → h (g x))
+      ( _∘ g)
       ( cone-dependent-pullback-property-pushout f g c P))
     ( triangle-dependent-pullback-property-pushout f g c P)
     ( dpullback-c l P)
     ( is-equiv-tot-is-fiberwise-equiv
       ( λ h → is-equiv-tot-is-fiberwise-equiv
-        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (λ x → h' (g x)))))
+        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
 ```
 
 ### Proof of Theorem 18.1.4, (3) implies (2)
@@ -477,11 +477,11 @@ pullback-property-dependent-pullback-property-pushout
   is-pullback-htpy
     -- ( λ h s → tr (λ x → Y) (H s) (h (f s)))
     ( λ h → eq-htpy (λ s → inv (tr-triv (H s) (h (f s)))))
-    -- ( λ h s → h (g s))
+    -- ( _∘ g)
     ( refl-htpy)
     { c = pair
-      ( λ h a → h (i a))
-      ( pair (λ h b → h (j b)) (λ h → eq-htpy (h ·l H)))}
+      ( _∘ i)
+      ( pair (_∘ j) (λ h → eq-htpy (h ·l H)))}
     ( cone-dependent-pullback-property-pushout
       f g (pair i (pair j H)) (λ x → Y))
     ( pair
