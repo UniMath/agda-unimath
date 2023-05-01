@@ -49,16 +49,16 @@ module _
   (is-uem-○ : is-uniquely-eliminating-modality unit-○)
   where
 
-  ind-modal-is-uniquely-eliminating-modality :
+  ind-modality-is-uniquely-eliminating-modality :
     (X : UU l1) (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) → (x' : ○ X) → ○ (P x')
-  ind-modal-is-uniquely-eliminating-modality X P =
+  ind-modality-is-uniquely-eliminating-modality X P =
     map-inv-is-equiv (is-uem-○ X P)
 
-  compute-modal-is-uniquely-eliminating-modality :
+  compute-ind-modality-is-uniquely-eliminating-modality :
     (X : UU l1) (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
     (pr1 (pr1 (is-uem-○ X P)) f ∘ unit-○) ~ f
-  compute-modal-is-uniquely-eliminating-modality X P =
+  compute-ind-modality-is-uniquely-eliminating-modality X P =
     htpy-eq ∘ pr2 (pr1 (is-uem-○ X P))
 
 module _
