@@ -264,14 +264,14 @@ module _
       ( horizontal-concat-Id² (horizontal-inv-Id² α) α)
       ( left-inv p')
   nat-sq-left-inv-Id² =
-    ( ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
-          ( nat-htpy left-inv α)) ∙
-        ( horizontal-concat-Id²
-          ( ap-binary-comp-diagonal _∙_ inv id α)
-          ( refl))) ∙
-      ap
-        ( λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')
-        ( ap-id α))
+    ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
+        ( nat-htpy left-inv α)) ∙
+      ( horizontal-concat-Id²
+        ( ap-binary-comp-diagonal _∙_ inv id α)
+        ( refl))) ∙
+    ( ap
+      ( λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')
+      ( ap-id α))
 ```
 
 ### Interchange laws for 2-paths
