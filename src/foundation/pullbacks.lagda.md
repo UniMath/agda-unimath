@@ -485,7 +485,7 @@ abstract
     ( htpy-eq-square f g c c')
   comp-htpy-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
-      ( htpy-eq (htpy-eq (htpy-eq (compute-htpy g
+      ( htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy g
         ( λ g'' Hg' →
           ( c : cone f g C) (c' : cone f g'' C) →
             Id (tr (λ g'' → cone f g'' C) (eq-htpy Hg')
@@ -522,7 +522,7 @@ abstract
     ( htpy-eq-square f g c c')
   comp-htpy-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
-      ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-htpy f
+      ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy f
         ( λ f'' Hf' →
           ( g g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
             ( Id ( tr (λ g'' → cone f'' g'' C) (eq-htpy Hg)

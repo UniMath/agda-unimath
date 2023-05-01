@@ -37,10 +37,10 @@ ind-is-singleton :
   B a → (x : A) → B x
 ind-is-singleton a is-sing-A B = pr1 (is-sing-A B)
 
-compute-is-singleton :
+compute-ind-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) (H : {l : Level} → is-singleton l A a) →
   (B : A → UU l2) → (ev-pt a B ∘ ind-is-singleton a H B) ~ id
-compute-is-singleton a H B = pr2 (H B)
+compute-ind-is-singleton a H B = pr2 (H B)
 ```
 
 ## Properties

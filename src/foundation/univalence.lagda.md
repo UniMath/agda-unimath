@@ -67,9 +67,9 @@ module _
       (A B : UU l) → is-equiv (eq-equiv A B)
     is-equiv-eq-equiv A B = is-equiv-map-inv-is-equiv (univalence A B)
 
-    eq-equiv-id-equiv :
+    compute-eq-equiv-id-equiv :
       (A : UU l) → eq-equiv A A id-equiv ＝ refl
-    eq-equiv-id-equiv A = isretr-eq-equiv refl
+    compute-eq-equiv-id-equiv A = isretr-eq-equiv refl
 
     equiv-eq-equiv :
       (A B : UU l) → (A ≃ B) ≃ (A ＝ B)

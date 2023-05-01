@@ -337,11 +337,11 @@ module _
     P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
   ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
 
-  compute-htpy-equiv :
+  compute-ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
     ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  compute-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
 ### The groupoid laws for equivalences
