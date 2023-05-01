@@ -50,13 +50,14 @@ _∨*_ :
   Pointed-Type (l1 ⊔ l2)
 pr1 (A ∨* B) =
   pushout
-    ( const unit (pr1 A) (pr2 A))
-    ( const unit (pr1 B) (pr2 B))
+    { S = unit}
+    ( λ _ → point-Pointed-Type A)
+    ( λ _ → point-Pointed-Type B)
 pr2 (A ∨* B) =
   inl-pushout
-    ( const unit (pr1 A) (pr2 A))
-    ( const unit (pr1 B) (pr2 B))
-    ( pr2 A)
+    ( λ _ → point-Pointed-Type A)
+    ( λ _ → point-Pointed-Type B)
+    ( point-Pointed-Type A)
 
 indexed-wedge :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
@@ -79,8 +80,8 @@ cocone-prod-wedge-Pointed-Type :
     ( λ _ → point-Pointed-Type A)
     ( λ _ → point-Pointed-Type B)
     ( type-Pointed-Type (A ×* B))
-pr1 (cocone-prod-wedge-Pointed-Type A B) = _, point-Pointed-Type B
-pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = point-Pointed-Type A ,_
+pr1 (cocone-prod-wedge-Pointed-Type A B) x = x , point-Pointed-Type B
+pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) y = point-Pointed-Type A , y
 pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = refl-htpy
 
 map-prod-wedge-Pointed-Type :

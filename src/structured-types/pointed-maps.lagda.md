@@ -59,7 +59,7 @@ module _
   preserves-point-pointed-map f = pr2 f
 ```
 
-### Precomposing pointed pointed maps
+### Precomposing pointed maps
 
 ```agda
 module _
@@ -68,27 +68,26 @@ module _
   where
 
   precomp-Pointed-Fam : Pointed-Fam l3 A
-  precomp-Pointed-Fam =
-    pair
-      ( fam-Pointed-Fam B C ∘ map-pointed-map A B f)
-      ( tr
-        ( fam-Pointed-Fam B C)
-        ( inv (preserves-point-pointed-map A B f))
-        ( pt-Pointed-Fam B C))
+  pr1 precomp-Pointed-Fam = fam-Pointed-Fam B C ∘ map-pointed-map A B f
+  pr2 precomp-Pointed-Fam =
+    tr
+      ( fam-Pointed-Fam B C)
+      ( inv (preserves-point-pointed-map A B f))
+      ( pt-Pointed-Fam B C)
 
   precomp-pointed-Π : pointed-Π B C → pointed-Π A precomp-Pointed-Fam
-  precomp-pointed-Π g =
-    pair
-      ( λ x → function-pointed-Π B C g (map-pointed-map A B f x))
-      ( ( inv
-          ( apd
-            ( function-pointed-Π B C g)
-            ( inv (preserves-point-pointed-map A B f)))) ∙
-        ( ap
-          ( tr
-            ( fam-Pointed-Fam B C)
-            ( inv (preserves-point-pointed-map A B f)))
-          ( preserves-point-function-pointed-Π B C g)))
+  pr1 (precomp-pointed-Π g) x =
+    function-pointed-Π B C g (map-pointed-map A B f x)
+  pr2 (precomp-pointed-Π g) =
+    ( inv
+      ( apd
+        ( function-pointed-Π B C g)
+        ( inv (preserves-point-pointed-map A B f)))) ∙
+    ( ap
+      ( tr
+        ( fam-Pointed-Fam B C)
+        ( inv (preserves-point-pointed-map A B f)))
+      ( preserves-point-function-pointed-Π B C g))
 ```
 
 ### Composing pointed maps
@@ -133,5 +132,6 @@ module _
   where
 
   id-pointed-map : A →* A
-  id-pointed-map = pair id refl
+  pr1 id-pointed-map = id
+  pr2 id-pointed-map = refl
 ```

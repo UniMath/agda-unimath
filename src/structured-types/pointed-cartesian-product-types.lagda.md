@@ -8,6 +8,7 @@ module structured-types.pointed-cartesian-product-types where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.equality-cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions
@@ -97,4 +98,25 @@ module _
   issec-map-inr-prod-Pointed-Type :
     (map-pr2-prod-Pointed-Type ∘ map-inr-prod-Pointed-Type) ~ id
   issec-map-inr-prod-Pointed-Type = refl-htpy
+```
+
+### The pointed gap map for the pointed product
+
+```agda
+  map-gap-prod-Pointed-Type :
+    {l3 : Level} (S : Pointed-Type l3)
+    (f : S →* A) (g : S →* B) →
+    type-Pointed-Type S → type-Pointed-Type (A ×* B)
+  pr1 (map-gap-prod-Pointed-Type S f g x) = map-pointed-map S A f x
+  pr2 (map-gap-prod-Pointed-Type S f g x) = map-pointed-map S B g x
+
+  gap-prod-Pointed-Type :
+    {l3 : Level} (S : Pointed-Type l3)
+    (f : S →* A) (g : S →* B) → S →* (A ×* B)
+  pr1 (gap-prod-Pointed-Type S f g) =
+    map-gap-prod-Pointed-Type S f g
+  pr2 (gap-prod-Pointed-Type S f g) =
+     eq-pair
+      ( preserves-point-pointed-map S A f)
+      ( preserves-point-pointed-map S B g)
 ```
