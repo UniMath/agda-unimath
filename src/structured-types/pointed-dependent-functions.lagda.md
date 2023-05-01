@@ -33,7 +33,7 @@ module _
   pointed-Π : UU (l1 ⊔ l2)
   pointed-Π =
     fib
-      ( ev-point (point-Pointed-Type A) (fam-Pointed-Fam A B))
+      ( ev-point (point-Pointed-Type A) {fam-Pointed-Fam A B})
       ( point-Pointed-Fam A B)
 
   function-pointed-Π :

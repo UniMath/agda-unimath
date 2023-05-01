@@ -97,10 +97,10 @@ is-surjective-point-is-0-connected a H x =
 is-trunc-map-ev-point-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
   is-0-connected A → is-trunc (succ-𝕋 k) B →
-  is-trunc-map k (ev-point a (λ _ → B))
+  is-trunc-map k (ev-point' a {B})
 is-trunc-map-ev-point-is-connected k {A} {B} a H K =
   is-trunc-map-comp k
-    ( ev-point star (λ _ → B))
+    ( ev-point' star {B})
     ( precomp (point a) B)
     ( is-trunc-map-is-equiv k
       ( universal-property-contr-is-contr star is-contr-unit B))

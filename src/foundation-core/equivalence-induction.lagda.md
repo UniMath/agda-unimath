@@ -43,7 +43,7 @@ module _
   triangle-ev-id :
     { l : Level}
     ( P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
-    ( ev-point (pair A id-equiv) P) ~
+    ( ev-point (pair A id-equiv) {P}) ~
     ( ( ev-id (λ X e → P (pair X e))) ∘
       ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P}))
   triangle-ev-id P f = refl
