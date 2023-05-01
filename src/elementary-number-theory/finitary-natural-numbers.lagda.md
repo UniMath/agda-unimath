@@ -55,7 +55,7 @@ convert-based-ℕ k (unary-op-based-ℕ .k x n) =
 
 ### Exercise 7.10 (a)
 
-The type of $0$-ary natural numbers is empty.
+The type of `0`-ary natural numbers is empty.
 
 ```agda
 is-empty-based-zero-ℕ : is-empty (based-ℕ zero-ℕ)

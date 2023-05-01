@@ -139,7 +139,7 @@ open hom-Fam-pushout public
 
 ### Definition 19.1.3
 
-Given a cocone structure on $X$ and a family of maps indexed by$X$, we obtain a
+Given a cocone structure on `X` and a family of maps indexed by `X`, we obtain a
 morphism of descent data.
 
 ```agda
