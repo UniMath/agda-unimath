@@ -66,7 +66,7 @@ module _
 ### Concatenation of homotopies
 
 A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `γ`
-to form a homotopy from `α` to `γ`. The concatenation is assoc.
+to form a homotopy from `α` to `γ`. The concatenation is associative.
 
 ```agda
   concat-htpy-natural-transformation-Large-Precat :
