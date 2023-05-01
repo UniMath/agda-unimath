@@ -136,7 +136,9 @@ eq-equiv-fam :
 eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```
 
-## Computations with univalence
+## Properties
+
+### Computations with univalence
 
 ```agda
 compute-equiv-eq :
