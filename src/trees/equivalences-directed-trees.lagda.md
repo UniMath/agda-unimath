@@ -208,6 +208,53 @@ id-equiv-Directed-Tree :
 id-equiv-Directed-Tree T = id-equiv-Directed-Graph (graph-Directed-Tree T)
 ```
 
+### Composition of equivalences of directed trees
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (R : Directed-Tree l1 l2) (S : Directed-Tree l3 l4) (T : Directed-Tree l5 l6)
+  (g : equiv-Directed-Tree S T) (f : equiv-Directed-Tree R S)
+  where
+
+  comp-equiv-Directed-Tree : equiv-Directed-Tree R T
+  comp-equiv-Directed-Tree =
+    comp-equiv-Directed-Graph
+      ( graph-Directed-Tree R)
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( g)
+      ( f)
+
+  equiv-node-comp-equiv-Directed-Tree :
+    node-Directed-Tree R ≃ node-Directed-Tree T
+  equiv-node-comp-equiv-Directed-Tree =
+    equiv-node-equiv-Directed-Tree R T comp-equiv-Directed-Tree
+
+  node-comp-equiv-Directed-Tree :
+    node-Directed-Tree R → node-Directed-Tree T
+  node-comp-equiv-Directed-Tree =
+    node-equiv-Directed-Tree R T comp-equiv-Directed-Tree
+
+  equiv-edge-comp-equiv-Directed-Tree :
+    (x y : node-Directed-Tree R) →
+    edge-Directed-Tree R x y ≃
+    edge-Directed-Tree T
+      ( node-comp-equiv-Directed-Tree x)
+      ( node-comp-equiv-Directed-Tree y)
+  equiv-edge-comp-equiv-Directed-Tree =
+    equiv-edge-equiv-Directed-Tree R T comp-equiv-Directed-Tree
+
+  edge-comp-equiv-Directed-Tree :
+    (x y : node-Directed-Tree R) →
+    edge-Directed-Tree R x y →
+    edge-Directed-Tree T
+      ( node-comp-equiv-Directed-Tree x)
+      ( node-comp-equiv-Directed-Tree y)
+  edge-comp-equiv-Directed-Tree =
+    edge-equiv-Directed-Tree R T comp-equiv-Directed-Tree
+```
+
 ### Homotopies of equivalences of directed trees
 
 ```agda
@@ -430,20 +477,35 @@ module _
   (f : equiv-Directed-Tree S T)
   where
 
-  inv-equiv-node-equiv-Directed-Tree :
+  inv-equiv-Directed-Tree : equiv-Directed-Tree T S
+  inv-equiv-Directed-Tree =
+    inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
+
+  hom-inv-equiv-Directed-Tree : hom-Directed-Tree T S
+  hom-inv-equiv-Directed-Tree =
+    hom-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
+
+  equiv-node-inv-equiv-Directed-Tree :
     node-Directed-Tree T ≃ node-Directed-Tree S
-  inv-equiv-node-equiv-Directed-Tree =
-    inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+  equiv-node-inv-equiv-Directed-Tree =
+    equiv-vertex-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 
   node-inv-equiv-Directed-Tree :
     node-Directed-Tree T → node-Directed-Tree S
   node-inv-equiv-Directed-Tree =
-    map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
-
-  is-equiv-node-inv-equiv-Directed-Tree :
-    is-equiv node-inv-equiv-Directed-Tree
-  is-equiv-node-inv-equiv-Directed-Tree =
-    is-equiv-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
+    vertex-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 
   edge-inv-equiv-Directed-Tree :
     (x y : node-Directed-Tree T) →
@@ -451,134 +513,41 @@ module _
     edge-Directed-Tree S
       ( node-inv-equiv-Directed-Tree x)
       ( node-inv-equiv-Directed-Tree y)
-  edge-inv-equiv-Directed-Tree x y e =
-    map-inv-equiv
-      ( equiv-edge-equiv-Directed-Tree S T f
-        ( node-inv-equiv-Directed-Tree x)
-        ( node-inv-equiv-Directed-Tree y))
-      ( binary-tr
-        ( edge-Directed-Tree T)
-        ( inv (issec-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f) x))
-        ( inv (issec-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f) y))
-        ( e))
+  edge-inv-equiv-Directed-Tree =
+    edge-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 
-  hom-inv-equiv-Directed-Tree : hom-Directed-Tree T S
-  pr1 hom-inv-equiv-Directed-Tree = node-inv-equiv-Directed-Tree
-  pr2 hom-inv-equiv-Directed-Tree = edge-inv-equiv-Directed-Tree
-
-  is-equiv-hom-inv-equiv-Directed-Tree :
-    is-equiv-hom-Directed-Tree T S hom-inv-equiv-Directed-Tree
-  is-equiv-hom-inv-equiv-Directed-Tree =
-    is-equiv-is-equiv-node-hom-Directed-Tree T S
-      hom-inv-equiv-Directed-Tree
-      is-equiv-node-inv-equiv-Directed-Tree
-
-  inv-equiv-Directed-Tree : equiv-Directed-Tree T S
-  inv-equiv-Directed-Tree =
-    equiv-is-equiv-hom-Directed-Tree T S
-      hom-inv-equiv-Directed-Tree
-      is-equiv-hom-inv-equiv-Directed-Tree
-
-  node-issec-inv-equiv-Directed-Tree :
-    ( node-equiv-Directed-Tree S T f ∘ node-inv-equiv-Directed-Tree) ~ id
-  node-issec-inv-equiv-Directed-Tree =
-    issec-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
-
-  edge-issec-inv-equiv-Directed-Tree :
-    (x y : node-Directed-Tree T) (e : edge-Directed-Tree T x y) →
-    binary-tr
-      ( edge-Directed-Tree T)
-      ( node-issec-inv-equiv-Directed-Tree x)
-      ( node-issec-inv-equiv-Directed-Tree y)
-      ( edge-equiv-Directed-Tree S T f
-        ( node-inv-equiv-Directed-Tree x)
-        ( node-inv-equiv-Directed-Tree y)
-        ( edge-inv-equiv-Directed-Tree x y e)) ＝ e
-  edge-issec-inv-equiv-Directed-Tree x y e =
-    ( ap
-      ( binary-tr
-        ( edge-Directed-Tree T)
-        ( node-issec-inv-equiv-Directed-Tree x)
-        ( node-issec-inv-equiv-Directed-Tree y))
-        ( issec-map-inv-equiv
-          ( equiv-edge-equiv-Directed-Tree S T f
-            ( node-inv-equiv-Directed-Tree x)
-            ( node-inv-equiv-Directed-Tree y))
-          ( binary-tr
-            ( edge-Directed-Tree T)
-            ( inv (issec-map-inv-equiv (pr1 f) x))
-            ( inv (issec-map-inv-equiv (pr1 f) y))
-            ( e)))) ∙
-    ( ( inv
-        ( binary-tr-concat
-          ( edge-Directed-Tree T)
-          ( inv (node-issec-inv-equiv-Directed-Tree x))
-          ( node-issec-inv-equiv-Directed-Tree x)
-          ( inv (node-issec-inv-equiv-Directed-Tree y))
-          ( node-issec-inv-equiv-Directed-Tree y)
-          ( e))) ∙
-      ( ap-binary
-        ( λ p q → binary-tr (edge-Directed-Tree T) p q e)
-        ( left-inv (node-issec-inv-equiv-Directed-Tree x))
-        ( left-inv (node-issec-inv-equiv-Directed-Tree y))))
+  equiv-edge-inv-equiv-Directed-Tree :
+    (x y : node-Directed-Tree T) →
+    edge-Directed-Tree T x y ≃
+    edge-Directed-Tree S
+      ( node-inv-equiv-Directed-Tree x)
+      ( node-inv-equiv-Directed-Tree y)
+  equiv-edge-inv-equiv-Directed-Tree =
+    equiv-edge-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 
   issec-inv-equiv-Directed-Tree :
-    htpy-hom-Directed-Tree T T
-      ( comp-hom-Directed-Tree T S T
-        ( hom-equiv-Directed-Tree S T f)
-        ( hom-inv-equiv-Directed-Tree))
-      ( id-hom-Directed-Tree T)
-  pr1 issec-inv-equiv-Directed-Tree =
-    node-issec-inv-equiv-Directed-Tree
-  pr2 issec-inv-equiv-Directed-Tree =
-    edge-issec-inv-equiv-Directed-Tree
-
-  node-isretr-inv-equiv-Directed-Tree :
-    ( node-inv-equiv-Directed-Tree ∘ node-equiv-Directed-Tree S T f) ~ id
-  node-isretr-inv-equiv-Directed-Tree =
-    isretr-map-inv-equiv (equiv-node-equiv-Directed-Tree S T f)
-
-  edge-isretr-inv-equiv-Directed-Tree :
-    (x y : node-Directed-Tree S) (e : edge-Directed-Tree S x y) →
-    binary-tr
-      ( edge-Directed-Tree S)
-      ( node-isretr-inv-equiv-Directed-Tree x)
-      ( node-isretr-inv-equiv-Directed-Tree y)
-      ( edge-inv-equiv-Directed-Tree
-        ( node-equiv-Directed-Tree S T f x)
-        ( node-equiv-Directed-Tree S T f y)
-        ( edge-equiv-Directed-Tree S T f x y e)) ＝ e
-  edge-isretr-inv-equiv-Directed-Tree x y e =
-    {!!}
-
-{-
-binary-tr
-  ( edge-Directed-Tree S)
-  ( isretr-map-inv-is-equiv-node-equiv-Directed-Tree S T f
-    ( x))
-  ( isretr-map-inv-is-equiv-node-equiv-Directed-Tree S T f
-    ( y))
-  ( map-inv-edge-equiv-Directed-Tree S T f
-    ( node-inv-equiv-Directed-Tree (node-equiv-Directed-Tree S T f x))
-    ( node-inv-equiv-Directed-Tree (node-equiv-Directed-Tree S T f y)))
-    ( binary-tr
-      ( edge-Directed-Tree T)
-      ( inv
-        ( issec-map-inv-is-equiv-node-equiv-Directed-Tree S T f
-          ( pr1 (pr1 f) x)))
-      ( inv
-        ( issec--map-inv-is-equiv-node-equiv-Directed-Tree S T f
-          ( pr1 (pr1 f) y)))
-      ( pr1 (pr2 f x y) e)))
--}
+    htpy-equiv-Directed-Tree T T
+      ( comp-equiv-Directed-Tree T S T f inv-equiv-Directed-Tree)
+      ( id-equiv-Directed-Tree T)
+  issec-inv-equiv-Directed-Tree =
+    issec-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 
   isretr-inv-equiv-Directed-Tree :
-    htpy-hom-Directed-Tree S S
-      ( comp-hom-Directed-Tree S T S
-        ( hom-inv-equiv-Directed-Tree)
-        ( hom-equiv-Directed-Tree S T f))
-      ( id-hom-Directed-Tree S)
-  pr1 isretr-inv-equiv-Directed-Tree =
-    node-isretr-inv-equiv-Directed-Tree
-  pr2 isretr-inv-equiv-Directed-Tree = {!!}
+    htpy-equiv-Directed-Tree S S
+      ( comp-equiv-Directed-Tree S T S inv-equiv-Directed-Tree f)
+      ( id-equiv-Directed-Tree S)
+  isretr-inv-equiv-Directed-Tree =
+    isretr-inv-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 ```
