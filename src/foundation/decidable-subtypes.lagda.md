@@ -172,7 +172,7 @@ module _
       ( iff-universes-Decidable-Prop l l' (S x))
 ```
 
-### A decidable subtype of a $(k+1)$-truncated type is $(k+1)$-truncated
+### A decidable subtype of a `k+1`-truncated type is `k+1`-truncated
 
 ```agda
 module _
