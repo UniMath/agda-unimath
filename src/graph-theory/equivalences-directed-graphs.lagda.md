@@ -205,7 +205,7 @@ module _
       ( vertex-comp-equiv-Directed-Graph y)
   edge-comp-equiv-Directed-Graph x y =
     map-equiv (equiv-edge-comp-equiv-Directed-Graph x y)
-    
+
   comp-equiv-Directed-Graph :
     equiv-Directed-Graph G K
   pr1 comp-equiv-Directed-Graph =
