@@ -29,8 +29,8 @@ open import foundation.universe-levels
 An isomorphism between objects `x y : A` in a precategory `C` is a morphism
 `f : hom x y` for which there exists a morphism `g : hom y x` such that
 
-- `compose g f = id_x` and
-- `compose f g = id_y`.
+- `G ∘ F = id_x` and
+- `F ∘ G = id_y`.
 
 ## Definition
 
@@ -143,7 +143,7 @@ module _
 ### The identity morphisms are isomorphisms
 
 For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
-from `x` to `x` since `compose id_x id_x = id_x` (it is its own inverse).
+from `x` to `x` since `id_x ∘ id_x = id_x` (it is its own inverse).
 
 ```agda
 module _
@@ -184,7 +184,7 @@ iso-eq-Precat C x .x refl = id-iso-Precat C
 Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 `f`. It is enough to show that `g = g'` since the equalities are propositions
 (since the hom-types are sets). But we have the following chain of equalities:
-`g = compose g id_y = compose g (compose f g') = compose (compose g f) g' = compose id_x g' = g'.`
+`g = g ∘ id_y = g ∘ (f ∘ g') = (g ∘ f) ∘ g' = id_x ∘ g' = g'.`
 
 ```agda
 module _

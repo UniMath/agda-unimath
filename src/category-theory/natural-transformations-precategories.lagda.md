@@ -32,7 +32,7 @@ Given precategories `C` and `D`, a natural transformation from a functor
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
   identity holds:
-- `compose (G f) (γ x) = compose (γ y) (F f)`, for all `f : hom x y`.
+- `(G f) ∘ (γ x) = (γ y) ∘ (F f)`, for all `f : hom x y`.
 
 ## Definition
 

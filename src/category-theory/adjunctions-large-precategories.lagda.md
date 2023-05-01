@@ -308,7 +308,7 @@ module _
 ### Unit of adjunction
 
 Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
-`η : id → compose G F` called the unit of the adjunction.
+`η : id → G ∘ F` called the unit of the adjunction.
 
 ```agda
 module _
@@ -398,7 +398,7 @@ module _
 ### Counit of adjunction
 
 Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
-`ε : compose F G → id` called the counit of the adjunction.
+`ε : F ∘ G → id` called the counit of the adjunction.
 
 ```agda
   counit-Adjunction :

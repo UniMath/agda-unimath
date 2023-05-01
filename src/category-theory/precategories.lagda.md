@@ -26,13 +26,13 @@ A precategory in Homotopy Type Theory consists of:
 
 - a type `A` of objects,
 - for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
-  together with a composition operation `compose : hom y z → hom x y → hom x z`
-  such that:
-- `compose (compose h g) f = compose h (compose g f)` for any morphisms
-  `h : hom z w`, `g : hom y z` and `f : hom x y`,
+  together with a composition operation `_∘_ : hom y z → hom x y → hom x z` such
+  that:
+- `(h ∘ g) ∘ f = h ∘ (g ∘ f)` for any morphisms `h : hom z w`, `g : hom y z` and
+  `f : hom x y`,
 - for each object `x : A` there is a morphism `id_x : hom x x` such that
-  `compose id_x f = f` and `compose g id_x = g` for any morphisms `f : hom x y`
-  and `g : hom z x`.
+  `id_x ∘ f = f` and `g ∘ id_x = g` for any morphisms `f : hom x y` and
+  `g : hom z x`.
 
 The reason this is called a *pre*category and not a category in Homotopy Type
 Theory is that we want to reserve that name for precategories where the
@@ -158,10 +158,11 @@ pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 ### The property of having identity morphisms is a proposition
 
 Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to
-`compose`. It is enough to show that `e = e'` since the right and left unit laws
-are propositions (because all hom-types are sets). By function extensionality,
-it is enough to show that `e x = e' x` for all `x : A`. But by the unit laws we
-have the following chain of equalities: `e x = compose (e' x) (e x) = e' x.`
+composition. It is enough to show that `e = e'` since the right and left unit
+laws are propositions (because all hom-types are sets). By function
+extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by
+the unit laws we have the following chain of equalities:
+`e x = (e' x) ∘ (e x) = e' x.`
 
 ```agda
 module _

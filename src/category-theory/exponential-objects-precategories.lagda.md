@@ -27,7 +27,7 @@ an exponential (often denoted y^x) consists of:
 - an object `e`
 - a morphism `ev : hom (e × x) y` such that for every object `z` and morphism
   `f : hom (z × x) y` there exists a unique morphism `g : hom z e` such that
-- `compose (g × id x) ev = f`.
+- `(g × id x) ∘ ev = f`.
 
 We say that `C` has all exponentials if there is a choice of an exponential for
 each pair of objects.

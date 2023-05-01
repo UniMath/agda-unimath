@@ -27,12 +27,11 @@ consists of:
 
 - an object `w`
 - morphisms `p₁ : hom w y` and `p₂ : hom w z` such that
-- `compose f p₁ = compose g p₂` together with the universal property that for
-  every object `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z`
-  such that `compose f p₁' = compose g p₂'` there exists a unique morphism
-  `h : hom w' w` such that
-- `compose p₁ h = p₁'`
-- `compose p₂ h = p₂'`.
+- `f ∘ p₁ = g ∘ p₂` together with the universal property that for every object
+  `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such that
+  `f ∘ p₁' = g ∘ p₂'` there exists a unique morphism `h : hom w' w` such that
+- `p₁ ∘ h = p₁'`
+- `p₂ ∘ h = p₂'`.
 
 We say that `C` has all pullbacks if there is a choice of a pullback for each
 object `x` and pair of morphisms into `x` in `C`.
