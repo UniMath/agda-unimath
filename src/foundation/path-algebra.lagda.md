@@ -250,7 +250,7 @@ module _
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy right-inv α)) ∙
       ( horizontal-concat-Id²
-        ( ap-binary-compute-diagonal (_∙_) id inv α)
+        ( ap-binary-comp-diagonal (_∙_) id inv α)
         ( refl))) ∙
         ap
           ( λ t →
@@ -267,7 +267,7 @@ module _
     ( ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
           ( nat-htpy left-inv α)) ∙
         ( horizontal-concat-Id²
-          ( ap-binary-compute-diagonal _∙_ inv id α)
+          ( ap-binary-comp-diagonal _∙_ inv id α)
           ( refl))) ∙
       ap
         ( λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')
