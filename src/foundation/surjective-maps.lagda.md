@@ -447,7 +447,7 @@ module _
     is-surjective-left-factor-htpy (g ∘ h) g h refl-htpy
 ```
 
-### Surjective maps are -1-connected
+### Surjective maps are `-1`-connected
 
 ```agda
 is-neg-one-connected-map-is-surjective :
@@ -457,7 +457,7 @@ is-neg-one-connected-map-is-surjective H b =
   is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
 ```
 
-### Precomposing functions into a family of (k+1)-types by a surjective map is a k-truncated map
+### Precomposing functions into a family of `k+1`-types by a surjective map is a `k`-truncated map
 
 ```agda
 is-trunc-map-precomp-Π-is-surjective :

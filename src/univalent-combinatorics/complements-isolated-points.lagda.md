@@ -120,4 +120,4 @@ equiv-complement-point-UU-Fin
 
 ## Properties
 
-### The map from a pointed (k+1)-element type to the complement of the point is an equivalence
+### The map from a pointed `k+1`-element type to the complement of the point is an equivalence

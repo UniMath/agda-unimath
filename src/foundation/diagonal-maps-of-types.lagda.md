@@ -31,7 +31,7 @@ open import foundation-core.universe-levels
 
 ## Properties
 
-### A type is (k+1)-truncated if and only if the diagonal is k-truncated
+### A type is `k+1`-truncated if and only if the diagonal is `k`-truncated
 
 ```agda
 module _
