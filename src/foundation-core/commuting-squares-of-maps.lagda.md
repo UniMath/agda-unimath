@@ -57,7 +57,7 @@ module _
   (left : A → X) (mid : B → Y) (right : C → Z)
   (bottom-left : X → Y) (bottom-right : Y → Z)
   where
-  
+
   concat-horizontal-coherence-square-maps :
     coherence-square-maps top-left left mid bottom-left →
     coherence-square-maps top-right mid right bottom-right →
@@ -91,7 +91,7 @@ module _
   (left-bottom : B → C) (right-bottom : Y → Z)
   (bottom : C → Z)
   where
-  
+
   concat-vertical-coherence-square-maps :
     coherence-square-maps top left-top right-top mid →
     coherence-square-maps mid left-bottom right-bottom bottom →

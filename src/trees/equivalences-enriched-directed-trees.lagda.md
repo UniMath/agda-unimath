@@ -357,7 +357,7 @@ module _
     children-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B R)
       ( directed-tree-Enriched-Directed-Tree A B T)
-      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)  
+      ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
 
   shape-comp-equiv-Enriched-Directed-Tree :
     ( shape-Enriched-Directed-Tree A B R) ~

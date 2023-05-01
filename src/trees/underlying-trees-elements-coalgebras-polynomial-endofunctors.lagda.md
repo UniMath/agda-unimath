@@ -966,7 +966,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (X : coalgebra-polynomial-endofunctor l3 A B)
   where
-  
+
   compute-fiber-base-enriched-directed-tree-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
     (b : B (shape-coalgebra-polynomial-endofunctor X w)) →
