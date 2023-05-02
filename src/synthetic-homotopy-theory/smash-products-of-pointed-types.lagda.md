@@ -50,7 +50,13 @@ smash-prod-Pointed-Type A B =
     ( gap-pointed-unit (A ∨* B))
 
 _∧*_ = smash-prod-Pointed-Type
+```
 
+The symbol used for the smash product `_∧*_` is the
+"[logical and](https://codepoints.net/U+2227)" symbol `∧` (agda-input: `\wedge`
+or `\and`).
+
+```agda
 cogap-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {X : Pointed-Type l3} →

@@ -50,7 +50,13 @@ wedge-Pointed-Type A B =
     ( cogap-pointed-unit B)
 
 _∨*_ = wedge-Pointed-Type
+```
 
+**Note**: the symbol used for the wedge sum `_∨*_` is the
+"[logical or](https://codepoints.net/U+2228)" symbol `∨` (agda-input: `\vee` or
+`\or`), and not the latin letter `v`.
+
+```agda
 indexed-wedge :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
 pr1 (indexed-wedge I A) = cofiber (λ i → i , point-Pointed-Type (A i))

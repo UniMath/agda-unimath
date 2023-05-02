@@ -28,7 +28,13 @@ and `Q` hold.
 conj-Prop = prod-Prop
 
 _∧_ = conj-Prop
+```
 
+The symbol used for the conjunction `_∧_` is the
+"[logical and](https://codepoints.net/U+2227)" symbol `∧` (agda-input: `\wedge`
+or `\and`).
+
+```agda
 type-conj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-conj-Prop P Q = type-Prop (conj-Prop P Q)
 
