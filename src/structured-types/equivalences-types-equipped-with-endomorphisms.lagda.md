@@ -83,7 +83,7 @@ comp-equiv-Endo :
   equiv-Endo Y Z → equiv-Endo X Y → equiv-Endo X Z
 pr1 (comp-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
 pr2 (comp-equiv-Endo X Y Z f e) =
-  concat-horizontal-coherence-square-maps
+  pasting-horizontal-coherence-square-maps
     ( map-equiv-Endo X Y e)
     ( map-equiv-Endo Y Z f)
     ( endomorphism-Endo X)

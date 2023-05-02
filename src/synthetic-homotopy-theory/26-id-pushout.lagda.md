@@ -374,7 +374,7 @@ comp-hom-Fam-pushout {f = f} {g} P Q R k h =
     ( pair
       ( λ b → (pr1 (pr2 k) b) ∘ (pr1 (pr2 h) b))
       ( λ s →
-        concat-horizontal-coherence-square-maps
+        pasting-horizontal-coherence-square-maps
           ( pr1 h (f s))
           ( pr1 k (f s))
           ( map-equiv (pr2 (pr2 P) s))

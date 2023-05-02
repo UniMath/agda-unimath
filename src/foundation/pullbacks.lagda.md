@@ -897,10 +897,10 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( pair hB (pair h' front-left))
       is-equiv-hD is-equiv-hB)
     ( is-pullback-htpy' refl-htpy front-right
-      ( cone-comp-vertical h k hC
+      ( pasting-vertical-cone h k hC
         ( pair f (pair g bottom))
         ( pair hA (pair g' back-right)))
-      { c' = cone-comp-vertical h hD k'
+      { c' = pasting-vertical-cone h hD k'
         ( pair hB (pair h' front-left))
         ( pair f' (pair g' top))}
       ( pair back-left

@@ -380,7 +380,7 @@ module _
         ( node-comp-equiv-Enriched-Directed-Tree x))
       ( children-comp-equiv-Enriched-Directed-Tree x)
   enrichment-comp-equiv-Enriched-Directed-Tree x =
-    concat-htpy-horizontal-coherence-square-maps
+    pasting-horizontal-up-to-htpy-coherence-square-maps
       ( tr B (shape-equiv-Enriched-Directed-Tree A B R S f x))
       ( tr B
         ( shape-equiv-Enriched-Directed-Tree A B S T g

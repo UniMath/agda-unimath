@@ -47,7 +47,7 @@ coherence-square-maps top left right bottom =
 
 ## Properties
 
-### Composing commuting squares horizontally
+### Pasting commuting squares horizontally
 
 ```agda
 module _
@@ -58,28 +58,28 @@ module _
   (bottom-left : X → Y) (bottom-right : Y → Z)
   where
 
-  concat-horizontal-coherence-square-maps :
+  pasting-horizontal-coherence-square-maps :
     coherence-square-maps top-left left mid bottom-left →
     coherence-square-maps top-right mid right bottom-right →
     coherence-square-maps
       (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
-  concat-horizontal-coherence-square-maps sq-left sq-right =
+  pasting-horizontal-coherence-square-maps sq-left sq-right =
     (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
 
-  concat-htpy-horizontal-coherence-square-maps :
+  pasting-horizontal-up-to-htpy-coherence-square-maps :
     {top : A → C} (H : coherence-triangle-maps top top-right top-left)
     {bottom : X → Z}
     (K : coherence-triangle-maps bottom bottom-right bottom-left) →
     coherence-square-maps top-left left mid bottom-left →
     coherence-square-maps top-right mid right bottom-right →
     coherence-square-maps top left right bottom
-  concat-htpy-horizontal-coherence-square-maps H K sq-left sq-right =
+  pasting-horizontal-up-to-htpy-coherence-square-maps H K sq-left sq-right =
     ( ( K ·r left) ∙h
-      ( concat-horizontal-coherence-square-maps sq-left sq-right)) ∙h
+      ( pasting-horizontal-coherence-square-maps sq-left sq-right)) ∙h
     ( inv-htpy (right ·l H))
 ```
 
-### Composing commuting squares vertically
+### Pasting commuting squares vertically
 
 ```agda
 module _
@@ -92,22 +92,22 @@ module _
   (bottom : C → Z)
   where
 
-  concat-vertical-coherence-square-maps :
+  pasting-vertical-coherence-square-maps :
     coherence-square-maps top left-top right-top mid →
     coherence-square-maps mid left-bottom right-bottom bottom →
     coherence-square-maps
       top (left-bottom ∘ left-top) (right-bottom ∘ right-top) bottom
-  concat-vertical-coherence-square-maps sq-top sq-bottom =
+  pasting-vertical-coherence-square-maps sq-top sq-bottom =
     (sq-bottom ·r left-top) ∙h (right-bottom ·l sq-top)
 
-  concat-htpy-vertical-coherence-square-maps :
+  pasting-vertical-up-to-htpy-coherence-square-maps :
     {left : A → C} (H : coherence-triangle-maps left left-bottom left-top)
     {right : X → Z} (K : coherence-triangle-maps right right-bottom right-top) →
     coherence-square-maps top left-top right-top mid →
     coherence-square-maps mid left-bottom right-bottom bottom →
     coherence-square-maps top left right bottom
-  concat-htpy-vertical-coherence-square-maps H K sq-top sq-bottom =
+  pasting-vertical-up-to-htpy-coherence-square-maps H K sq-top sq-bottom =
     ( ( bottom ·l H) ∙h
-      ( concat-vertical-coherence-square-maps sq-top sq-bottom)) ∙h
+      ( pasting-vertical-coherence-square-maps sq-top sq-bottom)) ∙h
     ( inv-htpy (K ·r top))
 ```
