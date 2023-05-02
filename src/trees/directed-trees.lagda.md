@@ -419,8 +419,8 @@ module _
       ( walk-Directed-Graph G y r)
       ( equivalence-reasoning
         walk-Directed-Graph G x r
-        ≃ walk-Directed-Graph' G x r
-          by compute-walk-Directed-Graph G x r
+        ≃ coproduct-walk-Directed-Graph G x r
+          by compute-coproduct-walk-Directed-Graph G x r
         ≃ Σ ( vertex-Directed-Graph G)
             ( λ y → edge-Directed-Graph G x y × walk-Directed-Graph G y r)
           by
