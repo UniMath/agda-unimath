@@ -41,13 +41,15 @@ The wedge sum is canonically pointed at the (identified) images of `a` and `b`.
 ## Definition
 
 ```agda
-_∨*_ :
+wedge-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   Pointed-Type (l1 ⊔ l2)
-A ∨* B =
+wedge-Pointed-Type A B =
   pushout-Pointed-Type
     ( cogap-pointed-unit A)
     ( cogap-pointed-unit B)
+
+_∨*_ = wedge-Pointed-Type
 
 indexed-wedge :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)

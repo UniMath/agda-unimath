@@ -34,17 +34,20 @@ module _
   {l1 l2 : Level}
   where
 
-  _→*_ : Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
-  A →* B = pointed-Π A (constant-Pointed-Fam A B)
+  pointed-map : Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
+  pointed-map A B = pointed-Π A (constant-Pointed-Fam A B)
+
+  _→*_ = pointed-map
 
   constant-pointed-map : (A : Pointed-Type l1) (B : Pointed-Type l2) → A →* B
   pr1 (constant-pointed-map A B) =
     const (type-Pointed-Type A) (type-Pointed-Type B) (point-Pointed-Type B)
   pr2 (constant-pointed-map A B) = refl
 
-  [_→*_] : Pointed-Type l1 → Pointed-Type l2 → Pointed-Type (l1 ⊔ l2)
-  pr1 [ A →* B ] = A →* B
-  pr2 [ A →* B ] = constant-pointed-map A B
+  pointed-map-Pointed-Type :
+    Pointed-Type l1 → Pointed-Type l2 → Pointed-Type (l1 ⊔ l2)
+  pr1 (pointed-map-Pointed-Type A B) = pointed-map A B
+  pr2 (pointed-map-Pointed-Type A B) = constant-pointed-map A B
 
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
@@ -99,7 +102,7 @@ module _
   where
 
   map-comp-pointed-map :
-    B →* C → A →* B → (type-Pointed-Type A) → (type-Pointed-Type C)
+    B →* C → A →* B → type-Pointed-Type A → type-Pointed-Type C
   map-comp-pointed-map g f =
     map-pointed-map B C g ∘ map-pointed-map A B f
 

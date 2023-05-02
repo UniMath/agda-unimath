@@ -41,13 +41,15 @@ where the map `A ∨* B → A ×* B` is the canonical inclusion
 ## Definition
 
 ```agda
-_∧*_ :
+smash-prod-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   Pointed-Type (l1 ⊔ l2)
-A ∧* B =
+smash-prod-Pointed-Type A B =
   pushout-Pointed-Type
     ( pointed-map-prod-wedge-Pointed-Type A B)
     ( gap-pointed-unit (A ∨* B))
+
+_∧*_ = smash-prod-Pointed-Type
 
 cogap-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}

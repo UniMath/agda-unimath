@@ -38,9 +38,11 @@ The join of `A` and `B` is the pushout of the span `A ← A × B → B`.
 ## Definition
 
 ```agda
-_*_ :
+join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-A * B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
+join A B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
+
+_*_ = join
 
 cocone-join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
