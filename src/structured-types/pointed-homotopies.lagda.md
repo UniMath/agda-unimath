@@ -81,6 +81,11 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
   where
 
+  refl-htpy-pointed-map : f ~∗ f
+  pr1 refl-htpy-pointed-map = refl-htpy
+  pr2 refl-htpy-pointed-map =
+    inv (right-inv (preserves-point-pointed-map A B f))
+
   htpy-pointed-map : (g : A →∗ B) → UU (l1 ⊔ l2)
   htpy-pointed-map = htpy-pointed-Π A (constant-Pointed-Fam A B) f
 

@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.wedges-of-pointed-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.pointed-cartesian-product-types
@@ -81,7 +82,8 @@ cocone-prod-wedge-Pointed-Type :
     ( A ×∗ B)
 pr1 (cocone-prod-wedge-Pointed-Type A B) = inl-prod-Pointed-Type A B
 pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = inr-prod-Pointed-Type A B
-pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = refl-htpy
+pr1 (pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B))) = refl-htpy
+pr2 (pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B))) = refl
 
 pointed-map-prod-wedge-Pointed-Type :
   {l1 l2 : Level}

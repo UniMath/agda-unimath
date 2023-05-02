@@ -7,11 +7,16 @@ module synthetic-homotopy-theory.cocones-under-spans-of-pointed-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.equational-reasoning
+open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
+open import structured-types.commuting-squares-of-pointed-maps
+open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
@@ -38,14 +43,24 @@ module _
     Σ ( A →∗ X)
       ( λ i →
         Σ ( B →∗ X)
-          ( λ j → coherence-square-maps (pr1 g) (pr1 f) (pr1 j) (pr1 i)))
+          ( λ j → coherence-square-pointed-maps g f j i))
 
   cocone-Pointed-Type :
     {l4 : Level} → Pointed-Type l4 → Pointed-Type (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pr1 (cocone-Pointed-Type X) = type-cocone-Pointed-Type X
   pr1 (pr2 (cocone-Pointed-Type X)) = constant-pointed-map A X
   pr1 (pr2 (pr2 (cocone-Pointed-Type X))) = constant-pointed-map B X
-  pr2 (pr2 (pr2 (cocone-Pointed-Type X))) = refl-htpy
+  pr1 (pr2 (pr2 (pr2 (cocone-Pointed-Type X)))) = refl-htpy
+  pr2 (pr2 (pr2 (pr2 (cocone-Pointed-Type X)))) =
+    ( ap
+      ( λ p → inv (p ∙ refl))
+      ( inv (ap-const (pr2 X) (preserves-point-pointed-map S B g)))) ∙
+    ( ap
+      ( λ p →
+        ( p ∙ refl) ∙
+        ( inv
+          ( preserves-point-pointed-map S X (constant-pointed-map B X ∘∗ g))))
+      ( inv (ap-const (pr2 X) (preserves-point-pointed-map S A f))))
 ```
 
 ### Components of a cocone of pointed types
@@ -75,18 +90,18 @@ module _
     pr1 vertical-pointed-map-cocone-Pointed-Type
 
   coherence-square-cocone-Pointed-Type :
-    coherence-square-maps
-      ( pr1 g)
-      ( pr1 f)
-      ( vertical-map-cocone-Pointed-Type)
-      ( horizontal-map-cocone-Pointed-Type)
+    coherence-square-pointed-maps
+      ( g)
+      ( f)
+      ( vertical-pointed-map-cocone-Pointed-Type)
+      ( horizontal-pointed-map-cocone-Pointed-Type)
   coherence-square-cocone-Pointed-Type = pr2 (pr2 c)
 
   cocone-type-cocone-Pointed-Type : cocone (pr1 f) (pr1 g) (pr1 X)
   pr1 cocone-type-cocone-Pointed-Type = horizontal-map-cocone-Pointed-Type
   pr1 (pr2 cocone-type-cocone-Pointed-Type) = vertical-map-cocone-Pointed-Type
   pr2 (pr2 cocone-type-cocone-Pointed-Type) =
-    coherence-square-cocone-Pointed-Type
+    pr1 coherence-square-cocone-Pointed-Type
 ```
 
 ## See also
