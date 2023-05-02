@@ -50,6 +50,11 @@ module _
 ### The pushout of a pointed map along a pointed map is pointed
 
 ```agda
+module _
+  {l1 l2 l3 : Level}
+  {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
+  where
+
   inl-pushout-Pointed-Type :
       (f : S →∗ A) (g : S →∗ B) → A →∗ pushout-Pointed-Type f g
   pr1 (inl-pushout-Pointed-Type f g) =
@@ -61,44 +66,27 @@ module _
   pr1 (inr-pushout-Pointed-Type f g) =
     inr-pushout (map-pointed-map S A f) (map-pointed-map S B g)
   pr2 (inr-pushout-Pointed-Type f g) =
-    equational-reasoning
-      inr-pushout
-        ( map-pointed-map S A f)
-        ( map-pointed-map S B g)
-        ( point-Pointed-Type B)
-      ＝ inr-pushout
-          ( map-pointed-map S A f)
-          ( map-pointed-map S B g)
-          ( map-pointed-map S B g ( point-Pointed-Type S))
-        by
-          ap
-            ( inr-pushout (map-pointed-map S A f) (map-pointed-map S B g))
-            ( inv (preserves-point-pointed-map S B g))
-      ＝ inl-pushout
-          ( map-pointed-map S A f)
-          ( map-pointed-map S B g)
-          ( map-pointed-map S A f (point-Pointed-Type S))
-        by
-          inv
-            ( glue-pushout
-              ( map-pointed-map S A f)
-              ( map-pointed-map S B g)
-              ( point-Pointed-Type S))
-      ＝ inl-pushout
-          ( map-pointed-map S A f)
-          ( map-pointed-map S B g)
-          ( point-Pointed-Type A)
-        by
-          ap
-            ( inl-pushout
-              ( map-pointed-map S A f)
-              ( map-pointed-map S B g))
-            ( preserves-point-pointed-map S A f)
+      ( ( ap
+          ( inr-pushout (map-pointed-map S A f) (map-pointed-map S B g))
+          ( inv (preserves-point-pointed-map S B g))) ∙
+        ( inv
+          ( glue-pushout
+            ( map-pointed-map S A f)
+            ( map-pointed-map S B g)
+            ( point-Pointed-Type S)))) ∙
+      ( ap
+        ( inl-pushout (map-pointed-map S A f) (map-pointed-map S B g))
+        ( preserves-point-pointed-map S A f))
 ```
 
 ### The cogap map for pushouts of pointed types
 
 ```agda
+module _
+  {l1 l2 l3 : Level}
+  {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
+  where
+
   map-cogap-Pointed-Type :
     {l4 : Level}
     (f : S →∗ A) (g : S →∗ B) →
