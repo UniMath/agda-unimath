@@ -9,19 +9,14 @@ module synthetic-homotopy-theory.pushouts-of-pointed-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
 open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>

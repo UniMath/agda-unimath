@@ -8,17 +8,8 @@ module synthetic-homotopy-theory.cocones-under-spans-of-pointed-types where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import structured-types.pointed-maps

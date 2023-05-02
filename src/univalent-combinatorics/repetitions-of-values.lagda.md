@@ -19,7 +19,6 @@ open import foundation.injective-maps
 open import foundation.negation
 
 open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-standard-finite-types
