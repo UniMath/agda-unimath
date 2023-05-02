@@ -33,7 +33,7 @@ defined by the following pushout.
     |          |
     |          |
     v       ⌜  v
-    B -----> A ∨* B
+    B -----> A ∨∗ B
 ```
 
 The wedge sum is canonically pointed at the (identified) images of `a` and `b`.
@@ -49,12 +49,14 @@ wedge-Pointed-Type A B =
     ( inclusion-point-Pointed-Type A)
     ( inclusion-point-Pointed-Type B)
 
-_∨*_ = wedge-Pointed-Type
+_∨∗_ = wedge-Pointed-Type
 ```
 
-**Note**: the symbol used for the wedge sum `_∨*_` is the
-[logical or](https://codepoints.net/U+2228) symbol `∨` (agda-input: `\vee`
-`\or`), and not the latin small letter v `v`.
+**Note**: the symbols used for the wedge sum `_∨∗_` are the
+[logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`) and
+the [asterisk operator](https://codepoints.net/U+2217) `∗` (agda-input: `\ast`),
+not the [latin small letter v](https://codepoints.net/U+0076) `v` or the
+[asterisk](https://codepoints.net/U+002A) `*`.
 
 ```agda
 indexed-wedge :
@@ -65,10 +67,10 @@ pr2 (indexed-wedge I A) = point-cofiber (λ i → i , point-Pointed-Type (A i))
 
 ## Properties
 
-### The canonical inclusion of the wedge sum `A ∨* B` into the pointed product `A ×* B`
+### The canonical inclusion of the wedge sum `A ∨∗ B` into the pointed product `A ×∗ B`
 
 There is a canonical inclusion of the wedge sum into the pointed product that is
-defined by the cogap map induced by the canonical inclusions `A → A ×* B ← B`.
+defined by the cogap map induced by the canonical inclusions `A → A ×∗ B ← B`.
 
 ```agda
 cocone-prod-wedge-Pointed-Type :
@@ -76,7 +78,7 @@ cocone-prod-wedge-Pointed-Type :
   type-cocone-Pointed-Type
     ( inclusion-point-Pointed-Type A)
     ( inclusion-point-Pointed-Type B)
-    ( A ×* B)
+    ( A ×∗ B)
 pr1 (cocone-prod-wedge-Pointed-Type A B) = inl-prod-Pointed-Type A B
 pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = inr-prod-Pointed-Type A B
 pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = refl-htpy
@@ -84,7 +86,7 @@ pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = refl-htpy
 pointed-map-prod-wedge-Pointed-Type :
   {l1 l2 : Level}
   (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  (A ∨* B) →* (A ×* B)
+  (A ∨∗ B) →∗ (A ×∗ B)
 pointed-map-prod-wedge-Pointed-Type A B =
   cogap-Pointed-Type
     ( inclusion-point-Pointed-Type A)
@@ -94,7 +96,7 @@ pointed-map-prod-wedge-Pointed-Type A B =
 map-prod-wedge-Pointed-Type :
   {l1 l2 : Level}
   (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  type-Pointed-Type (A ∨* B) → type-Pointed-Type (A ×* B)
+  type-Pointed-Type (A ∨∗ B) → type-Pointed-Type (A ×∗ B)
 map-prod-wedge-Pointed-Type A B = pr1 (pointed-map-prod-wedge-Pointed-Type A B)
 ```
 

@@ -162,7 +162,7 @@ module _
       ( wild-unital-magma-Wild-Monoid N)
 
   pointed-map-hom-Wild-Monoid :
-    hom-Wild-Monoid → pointed-type-Wild-Monoid M →* pointed-type-Wild-Monoid N
+    hom-Wild-Monoid → pointed-type-Wild-Monoid M →∗ pointed-type-Wild-Monoid N
   pointed-map-hom-Wild-Monoid f = pr1 f
 
   map-hom-Wild-Monoid :

@@ -33,12 +33,12 @@ pr2 unit-Pointed-Type = star
 ## Properties
 
 ```agda
-terminal-pointed-map : {l : Level} (X : Pointed-Type l) → X →* unit-Pointed-Type
+terminal-pointed-map : {l : Level} (X : Pointed-Type l) → X →∗ unit-Pointed-Type
 pr1 (terminal-pointed-map X) _ = star
 pr2 (terminal-pointed-map X) = refl
 
 inclusion-point-Pointed-Type :
-  {l : Level} (X : Pointed-Type l) → unit-Pointed-Type →* X
+  {l : Level} (X : Pointed-Type l) → unit-Pointed-Type →∗ X
 pr1 (inclusion-point-Pointed-Type X) = point (point-Pointed-Type X)
 pr2 (inclusion-point-Pointed-Type X) = refl
 ```

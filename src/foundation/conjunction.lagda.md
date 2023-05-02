@@ -31,8 +31,7 @@ _∧_ = conj-Prop
 ```
 
 **Note**: The symbol used for the conjunction `_∧_` is the
-[logical and](https://codepoints.net/U+2227) symbol `∧` (agda-input: `\wedge`
-`\and`).
+[logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
 
 ```agda
 type-conj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)

@@ -173,11 +173,11 @@ mistakes, ensuring a smoother coding experience.
 
 This library relies heavily on Unicode characters, so it's important to use a
 font family with comprehensive Unicode support in your editor. For instance, the
-library utilizes the [middle dot](https://www.compart.com/en/unicode/U+00B7)
-symbol `·` and the [bullet operator](https://www.compart.com/en/unicode/U+2219)
-symbol `∙`. In some fonts, these two symbols appear identical. If you find it
-difficult to distinguish between these symbols in your editor, we recommend
-switching to a different font.
+library utilizes the [middle dot](https://www.compart.com/en/unicode/U+00B7) `·`
+and the [bullet operator](https://www.compart.com/en/unicode/U+2219) `∙`. In
+some fonts, these two symbols appear identical. If you find it difficult to
+distinguish between these symbols in your editor, we recommend switching to a
+different font.
 
 ## After the setup
 

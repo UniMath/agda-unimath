@@ -29,15 +29,15 @@ module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2}
   {B : Pointed-Type l3}
-  (f : S →* A) (g : S →* B)
+  (f : S →∗ A) (g : S →∗ B)
   where
 
   type-cocone-Pointed-Type :
     {l4 : Level} → Pointed-Type l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   type-cocone-Pointed-Type X =
-    Σ ( A →* X)
+    Σ ( A →∗ X)
       ( λ i →
-        Σ ( B →* X)
+        Σ ( B →∗ X)
           ( λ j → coherence-square-maps (pr1 g) (pr1 f) (pr1 j) (pr1 i)))
 
   cocone-Pointed-Type :
@@ -55,10 +55,10 @@ module _
   {l1 l2 l3 l4 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2}
   {B : Pointed-Type l3} {X : Pointed-Type l4}
-  (f : S →* A) (g : S →* B) (c : type-cocone-Pointed-Type f g X)
+  (f : S →∗ A) (g : S →∗ B) (c : type-cocone-Pointed-Type f g X)
   where
 
-  horizontal-pointed-map-cocone-Pointed-Type : A →* X
+  horizontal-pointed-map-cocone-Pointed-Type : A →∗ X
   horizontal-pointed-map-cocone-Pointed-Type = pr1 c
 
   horizontal-map-cocone-Pointed-Type :
@@ -66,7 +66,7 @@ module _
   horizontal-map-cocone-Pointed-Type =
     pr1 horizontal-pointed-map-cocone-Pointed-Type
 
-  vertical-pointed-map-cocone-Pointed-Type : B →* X
+  vertical-pointed-map-cocone-Pointed-Type : B →∗ X
   vertical-pointed-map-cocone-Pointed-Type = pr1 (pr2 c)
 
   vertical-map-cocone-Pointed-Type :

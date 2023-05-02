@@ -69,7 +69,7 @@ hom-algebra-Hatcher-Acyclic-Type :
   algebra-Hatcher-Acyclic-Type l2 → UU (l1 ⊔ l2)
 hom-algebra-Hatcher-Acyclic-Type
   (A , a1 , a2 , r1 , r2) (B , b1 , b2 , s1 , s2) =
-  Σ ( A →* B)
+  Σ ( A →∗ B)
     ( λ f →
       Σ ( map-Ω A B f a1 ＝ b1)
         ( λ u →

@@ -37,9 +37,16 @@ module _
   pointed-map : Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
   pointed-map A B = pointed-Π A (constant-Pointed-Fam A B)
 
-  _→*_ = pointed-map
+  _→∗_ = pointed-map
+```
 
-  constant-pointed-map : (A : Pointed-Type l1) (B : Pointed-Type l2) → A →* B
+**Note**: the subscript asterisk symbol used for the pointed map type `_→∗_`,
+and pointed type constructions in general, is the
+[asterisk operator](https://codepoints.net/U+2217) `∗` (agda-input: `\ast`), not
+the [asterisk](https://codepoints.net/U+002A) `*`.
+
+```agda
+  constant-pointed-map : (A : Pointed-Type l1) (B : Pointed-Type l2) → A →∗ B
   pr1 (constant-pointed-map A B) =
     const (type-Pointed-Type A) (type-Pointed-Type B) (point-Pointed-Type B)
   pr2 (constant-pointed-map A B) = refl
@@ -53,11 +60,11 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  map-pointed-map : A →* B → type-Pointed-Type A → type-Pointed-Type B
+  map-pointed-map : A →∗ B → type-Pointed-Type A → type-Pointed-Type B
   map-pointed-map = pr1
 
   preserves-point-pointed-map :
-    (f : A →* B) →
+    (f : A →∗ B) →
     map-pointed-map f (point-Pointed-Type A) ＝ point-Pointed-Type B
   preserves-point-pointed-map = pr2
 ```
@@ -67,7 +74,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
-  (C : Pointed-Fam l3 B) (f : A →* B)
+  (C : Pointed-Fam l3 B) (f : A →∗ B)
   where
 
   precomp-Pointed-Fam : Pointed-Fam l3 A
@@ -102,29 +109,29 @@ module _
   where
 
   map-comp-pointed-map :
-    B →* C → A →* B → type-Pointed-Type A → type-Pointed-Type C
+    B →∗ C → A →∗ B → type-Pointed-Type A → type-Pointed-Type C
   map-comp-pointed-map g f =
     map-pointed-map B C g ∘ map-pointed-map A B f
 
   preserves-point-comp-pointed-map :
-    (g : B →* C) (f : A →* B) →
+    (g : B →∗ C) (f : A →∗ B) →
     (map-comp-pointed-map g f (point-Pointed-Type A)) ＝ point-Pointed-Type C
   preserves-point-comp-pointed-map g f =
     ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
     ( preserves-point-pointed-map B C g)
 
-  comp-pointed-map : B →* C → A →* B → A →* C
+  comp-pointed-map : B →∗ C → A →∗ B → A →∗ C
   pr1 (comp-pointed-map g f) = map-comp-pointed-map g f
   pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
-  precomp-pointed-map : A →* B → B →* C → A →* C
+  precomp-pointed-map : A →∗ B → B →∗ C → A →∗ C
   precomp-pointed-map f g = comp-pointed-map g f
 
-_∘*_ :
+_∘∗_ :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
-  B →* C → A →* B → A →* C
-_∘*_ {A = A} {B} {C} = comp-pointed-map A B C
+  B →∗ C → A →∗ B → A →∗ C
+_∘∗_ {A = A} {B} {C} = comp-pointed-map A B C
 ```
 
 ### The identity pointed map
@@ -134,7 +141,7 @@ module _
   {l1 : Level} {A : Pointed-Type l1}
   where
 
-  id-pointed-map : A →* A
+  id-pointed-map : A →∗ A
   pr1 id-pointed-map = id
   pr2 id-pointed-map = refl
 ```

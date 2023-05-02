@@ -129,7 +129,7 @@ pr2 (pr2 (coherent-h-space-H-Space A)) =
   coherent-unit-laws-unit-laws (mul-H-Space A) (unit-laws-mul-H-Space A)
 ```
 
-### The type of coherent H-space structures on `A` is equivalent to the type of sections of `ev_pt : (A → A) →* A`
+### The type of coherent H-space structures on `A` is equivalent to the type of sections of `ev_point : (A → A) →∗ A`
 
 ```agda
 module _

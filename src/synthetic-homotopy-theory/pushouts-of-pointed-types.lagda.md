@@ -35,7 +35,7 @@ module _
   where
 
   pushout-Pointed-Type :
-    (f : S →* A) (g : S →* B) → Pointed-Type (l1 ⊔ l2 ⊔ l3)
+    (f : S →∗ A) (g : S →∗ B) → Pointed-Type (l1 ⊔ l2 ⊔ l3)
   pr1 (pushout-Pointed-Type f g) =
     pushout (map-pointed-map S A f) (map-pointed-map S B g)
   pr2 (pushout-Pointed-Type f g) =
@@ -51,13 +51,13 @@ module _
 
 ```agda
   inl-pushout-Pointed-Type :
-      (f : S →* A) (g : S →* B) → A →* pushout-Pointed-Type f g
+      (f : S →∗ A) (g : S →∗ B) → A →∗ pushout-Pointed-Type f g
   pr1 (inl-pushout-Pointed-Type f g) =
     inl-pushout (map-pointed-map S A f) (map-pointed-map S B g)
   pr2 (inl-pushout-Pointed-Type f g) = refl
 
   inr-pushout-Pointed-Type :
-      (f : S →* A) (g : S →* B) → B →* pushout-Pointed-Type f g
+      (f : S →∗ A) (g : S →∗ B) → B →∗ pushout-Pointed-Type f g
   pr1 (inr-pushout-Pointed-Type f g) =
     inr-pushout (map-pointed-map S A f) (map-pointed-map S B g)
   pr2 (inr-pushout-Pointed-Type f g) =
@@ -101,7 +101,7 @@ module _
 ```agda
   map-cogap-Pointed-Type :
     {l4 : Level}
-    (f : S →* A) (g : S →* B) →
+    (f : S →∗ A) (g : S →∗ B) →
     {X : Pointed-Type l4} →
     type-cocone-Pointed-Type f g X →
     type-Pointed-Type (pushout-Pointed-Type f g) → type-Pointed-Type X
@@ -113,9 +113,9 @@ module _
 
   cogap-Pointed-Type :
     {l4 : Level}
-    (f : S →* A) (g : S →* B) →
+    (f : S →∗ A) (g : S →∗ B) →
     {X : Pointed-Type l4} →
-    type-cocone-Pointed-Type f g X → pushout-Pointed-Type f g →* X
+    type-cocone-Pointed-Type f g X → pushout-Pointed-Type f g →∗ X
   pr1 (cogap-Pointed-Type f g c) = map-cogap-Pointed-Type f g c
   pr2 (cogap-Pointed-Type f g {X} c) =
     ( compute-inl-cogap
