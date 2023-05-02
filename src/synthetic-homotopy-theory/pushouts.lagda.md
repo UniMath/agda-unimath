@@ -113,5 +113,9 @@ compute-inr-cogap f g c =
   pr1
     ( pr2
       ( htpy-cocone-map-universal-property-pushout
-          f g (cocone-pushout f g) (up-pushout f g) c))
+          ( f)
+          ( g)
+          ( cocone-pushout f g)
+          ( up-pushout f g)
+          ( c)))
 ```

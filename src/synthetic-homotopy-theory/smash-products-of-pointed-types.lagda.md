@@ -84,7 +84,7 @@ map-cogap-smash-prod-Pointed-Type c =
 
 ## Properties
 
-### The pointed map from the product to the smash product
+### The canonical pointed map from the product to the smash product
 
 ```agda
 pointed-map-smash-prod-prod-Pointed-Type :
