@@ -42,11 +42,17 @@ join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 join A B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
 
-_*_ = join
+_⋆_ = join
+```
 
+**Note**: The symbol used for the join `_⋆_` is the
+[star operator](https://codepoints.net/U+22c6) symbol `⋆` (agda-input: `\st`
+`\star` `\*`), and not the asterisk `*` or asterisk operator `∗`.
+
+```agda
 cocone-join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  cocone (pr1 {A = A} {B = λ _ → B}) pr2 (A * B)
+  cocone (pr1 {A = A} {B = λ _ → B}) pr2 (A ⋆ B)
 cocone-join A B = cocone-pushout pr1 pr2
 
 up-join :
@@ -56,11 +62,11 @@ up-join :
 up-join A B = up-pushout pr1 pr2
 
 inl-join :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → A * B
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → A ⋆ B
 inl-join A B = pr1 (cocone-join A B)
 
 inr-join :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → B → A * B
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → B → A ⋆ B
 inr-join A B = pr1 (pr2 (cocone-join A B))
 
 glue-join :
@@ -70,7 +76,7 @@ glue-join A B = pr2 (pr2 (cocone-join A B))
 
 cogap-join :
   {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (X : UU l3) →
-  cocone pr1 pr2 X → A * B → X
+  cocone pr1 pr2 X → A ⋆ B → X
 cogap-join A B X = map-inv-is-equiv (up-join A B X)
 ```
 
@@ -90,7 +96,7 @@ is-equiv-inr-join-empty X =
     ( up-join empty X)
 
 left-unit-law-join :
-  {l : Level} (X : UU l) → X ≃ (empty * X)
+  {l : Level} (X : UU l) → X ≃ (empty ⋆ X)
 pr1 (left-unit-law-join X) = inr-join empty X
 pr2 (left-unit-law-join X) = is-equiv-inr-join-empty X
 
@@ -107,7 +113,7 @@ is-equiv-inr-join-is-empty A B is-empty-A =
 
 left-unit-law-join-is-empty :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  is-empty A → B ≃ (A * B)
+  is-empty A → B ≃ (A ⋆ B)
 pr1 (left-unit-law-join-is-empty A B is-empty-A) = inr-join A B
 pr2 (left-unit-law-join-is-empty A B is-empty-A) =
   is-equiv-inr-join-is-empty A B is-empty-A
@@ -127,7 +133,7 @@ is-equiv-inl-join-empty X =
     ( up-join X empty)
 
 right-unit-law-join :
-  {l : Level} (X : UU l) → X ≃ (X * empty)
+  {l : Level} (X : UU l) → X ≃ (X ⋆ empty)
 pr1 (right-unit-law-join X) = inl-join X empty
 pr2 (right-unit-law-join X) = is-equiv-inl-join-empty X
 
@@ -144,7 +150,7 @@ is-equiv-inl-join-is-empty A B is-empty-B =
 
 right-unit-law-join-is-empty :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  is-empty B → A ≃ (A * B)
+  is-empty B → A ≃ (A ⋆ B)
 pr1 (right-unit-law-join-is-empty A B is-empty-B) = inl-join A B
 pr2 (right-unit-law-join-is-empty A B is-empty-B) =
   is-equiv-inl-join-is-empty A B is-empty-B
@@ -164,7 +170,7 @@ is-equiv-inl-join-unit X =
     ( up-join unit X)
 
 left-zero-law-join :
-  {l : Level} (X : UU l) → is-contr (unit * X)
+  {l : Level} (X : UU l) → is-contr (unit ⋆ X)
 left-zero-law-join X =
   is-contr-equiv'
     ( unit)
@@ -182,7 +188,7 @@ is-equiv-inl-join-is-contr A B is-contr-A =
     ( up-join A B)
 
 left-zero-law-join-is-contr :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr A → is-contr (A * B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr A → is-contr (A ⋆ B)
 left-zero-law-join-is-contr A B is-contr-A =
   is-contr-equiv'
     ( A)
@@ -204,7 +210,7 @@ is-equiv-inr-join-unit X =
     ( up-join X unit)
 
 right-zero-law-join :
-  {l : Level} (X : UU l) → is-contr (X * unit)
+  {l : Level} (X : UU l) → is-contr (X ⋆ unit)
 right-zero-law-join X =
   is-contr-equiv'
     ( unit)
@@ -222,7 +228,7 @@ is-equiv-inr-join-is-contr A B is-contr-B =
     ( up-join A B)
 
 right-zero-law-join-is-contr :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr B → is-contr (A * B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr B → is-contr (A ⋆ B)
 right-zero-law-join-is-contr A B is-contr-B =
   is-contr-equiv'
     ( B)
@@ -238,10 +244,10 @@ module _
   where
 
   is-proof-irrelevant-join-is-proof-irrelevant :
-    is-proof-irrelevant A → is-proof-irrelevant B → is-proof-irrelevant (A * B)
+    is-proof-irrelevant A → is-proof-irrelevant B → is-proof-irrelevant (A ⋆ B)
   is-proof-irrelevant-join-is-proof-irrelevant
     is-proof-irrelevant-A is-proof-irrelevant-B =
-    cogap-join A B (is-contr (A * B))
+    cogap-join A B (is-contr (A ⋆ B))
       ( pair
         ( left-zero-law-join-is-contr A B ∘ is-proof-irrelevant-A)
         ( pair
@@ -252,7 +258,7 @@ module _
               ( right-zero-law-join-is-contr A B (is-proof-irrelevant-B b))))))
 
   is-prop-join-is-prop :
-    is-prop A → is-prop B → is-prop (A * B)
+    is-prop A → is-prop B → is-prop (A ⋆ B)
   is-prop-join-is-prop is-prop-A is-prop-B =
     is-prop-is-proof-irrelevant
       ( is-proof-irrelevant-join-is-proof-irrelevant
@@ -264,7 +270,7 @@ module _
   where
 
   join-Prop : Prop (l1 ⊔ l2)
-  pr1 join-Prop = A * B
+  pr1 join-Prop = A ⋆ B
   pr2 join-Prop = is-prop-join-is-prop is-prop-A is-prop-B
 
   type-join-Prop : UU (l1 ⊔ l2)
