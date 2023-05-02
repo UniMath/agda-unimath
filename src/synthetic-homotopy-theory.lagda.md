@@ -9,6 +9,7 @@ open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.27-sequences public
 open import synthetic-homotopy-theory.acyclic-maps public
 open import synthetic-homotopy-theory.acyclic-types public
+open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cofibers public
