@@ -40,14 +40,6 @@ record unit : UU lzero where
 {-# BUILTIN UNIT unit #-}
 ```
 
-### The unit type as a pointed type
-
-```agda
-unit-Pointed-Type : Pointed-Type lzero
-pr1 unit-Pointed-Type = unit
-pr2 unit-Pointed-Type = star
-```
-
 ### The induction principle of the unit type
 
 ```agda

@@ -47,7 +47,7 @@ smash-prod-Pointed-Type :
 smash-prod-Pointed-Type A B =
   pushout-Pointed-Type
     ( pointed-map-prod-wedge-Pointed-Type A B)
-    ( gap-unit-Pointed-Type (A ∨* B))
+    ( terminal-pointed-map (A ∨* B))
 
 _∧*_ = smash-prod-Pointed-Type
 ```
@@ -62,19 +62,19 @@ cogap-smash-prod-Pointed-Type :
   {A : Pointed-Type l1} {B : Pointed-Type l2} {X : Pointed-Type l3} →
   type-cocone-Pointed-Type
     ( pointed-map-prod-wedge-Pointed-Type A B)
-    ( gap-unit-Pointed-Type (A ∨* B)) X →
+    ( terminal-pointed-map (A ∨* B)) X →
   (A ∧* B) →* X
 cogap-smash-prod-Pointed-Type {A = A} {B} =
   cogap-Pointed-Type
     ( pointed-map-prod-wedge-Pointed-Type A B)
-    ( gap-unit-Pointed-Type (A ∨* B))
+    ( terminal-pointed-map (A ∨* B))
 
 map-cogap-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {X : Pointed-Type l3} →
   type-cocone-Pointed-Type
     ( pointed-map-prod-wedge-Pointed-Type A B)
-    ( gap-unit-Pointed-Type (A ∨* B))
+    ( terminal-pointed-map (A ∨* B))
     ( X) →
   type-Pointed-Type (A ∧* B) → type-Pointed-Type X
 map-cogap-smash-prod-Pointed-Type c =
@@ -92,7 +92,7 @@ pointed-map-smash-prod-prod-Pointed-Type :
 pointed-map-smash-prod-prod-Pointed-Type A B =
   inl-pushout-Pointed-Type
     ( pointed-map-prod-wedge-Pointed-Type A B)
-    ( gap-unit-Pointed-Type (A ∨* B))
+    ( terminal-pointed-map (A ∨* B))
 ```
 
 ### The smash product is the product in the category of pointed types
