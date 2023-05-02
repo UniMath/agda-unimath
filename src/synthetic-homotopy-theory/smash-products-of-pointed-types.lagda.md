@@ -7,23 +7,16 @@ module synthetic-homotopy-theory.smash-products-of-pointed-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import structured-types.pointed-cartesian-product-types
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.pointed-unit-type
 
-open import synthetic-homotopy-theory.cofibers
-open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
+open import synthetic-homotopy-theory.pushouts-of-pointed-types
 open import synthetic-homotopy-theory.wedges-of-pointed-types
 ```
 
@@ -51,15 +44,33 @@ where the map `A ∨* B → A ×* B` is the canonical inclusion
 _∧*_ :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   Pointed-Type (l1 ⊔ l2)
-pr1 (A ∧* B) =
-  pushout
-    ( map-prod-wedge-Pointed-Type A B)
-    ( λ _ → star)
-pr2 (A ∧* B) =
-  inr-pushout
-    ( map-prod-wedge-Pointed-Type A B)
-    ( λ _ → star)
-    ( star)
+A ∧* B =
+  pushout-Pointed-Type
+    ( pointed-map-prod-wedge-Pointed-Type A B)
+    ( gap-pointed-unit (A ∨* B))
+
+cogap-smash-prod-Pointed-Type :
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {X : Pointed-Type l3} →
+  type-cocone-Pointed-Type
+    ( pointed-map-prod-wedge-Pointed-Type A B)
+    ( gap-pointed-unit (A ∨* B)) X →
+  (A ∧* B) →* X
+cogap-smash-prod-Pointed-Type {A = A} {B} =
+  cogap-Pointed-Type
+    ( pointed-map-prod-wedge-Pointed-Type A B)
+    ( gap-pointed-unit (A ∨* B))
+
+map-cogap-smash-prod-Pointed-Type :
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {X : Pointed-Type l3} →
+  type-cocone-Pointed-Type
+    ( pointed-map-prod-wedge-Pointed-Type A B)
+    ( gap-pointed-unit (A ∨* B))
+    ( X) →
+  type-Pointed-Type (A ∧* B) → type-Pointed-Type X
+map-cogap-smash-prod-Pointed-Type c =
+  pr1 (cogap-smash-prod-Pointed-Type c)
 ```
 
 ## Properties
@@ -70,37 +81,15 @@ pr2 (A ∧* B) =
 pointed-map-smash-prod-prod-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   (A ×* B) →* (A ∧* B)
-pr1 (pointed-map-smash-prod-prod-Pointed-Type A B) =
-  inl-pushout (map-prod-wedge-Pointed-Type A B) (λ _ → star)
-pr2 (pointed-map-smash-prod-prod-Pointed-Type A B) =
-  ( ap
-    ( inl-pushout
-      ( map-prod-wedge-Pointed-Type A B)
-      ( λ _ → star))
-    ( inv
-      ( preserves-point-pointed-map
-        (A ∨* B)
-        (A ×* B)
-        ( pointed-map-prod-wedge-Pointed-Type A B)))) ∙
-  ( glue-pushout
-    ( map-prod-wedge-Pointed-Type A B)
-    ( λ _ → star)
-    ( point-Pointed-Type (A ∨* B)))
+pointed-map-smash-prod-prod-Pointed-Type A B =
+  inl-pushout-Pointed-Type
+    ( pointed-map-prod-wedge-Pointed-Type A B)
+    ( gap-pointed-unit (A ∨* B))
 ```
 
 ### The smash product is the product in the category of pointed types
 
 ```agda
-map-gap-smash-prod-Pointed-Type :
-  {l1 l2 l3 : Level}
-  (A : Pointed-Type l1) (B : Pointed-Type l2) (S : Pointed-Type l3) →
-  (f : S →* A) (g : S →* B) → type-Pointed-Type S → type-Pointed-Type (A ∧* B)
-map-gap-smash-prod-Pointed-Type A B S f g s =
-  inl-pushout
-    ( map-prod-wedge-Pointed-Type A B)
-    ( λ _ → star)
-    ( map-pointed-map S A f s , map-pointed-map S B g s)
-
 gap-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}
   (A : Pointed-Type l1) (B : Pointed-Type l2) (S : Pointed-Type l3) →
@@ -108,6 +97,13 @@ gap-smash-prod-Pointed-Type :
 gap-smash-prod-Pointed-Type A B S f g =
   pointed-map-smash-prod-prod-Pointed-Type A B ∘*
   gap-prod-Pointed-Type A B S f g
+
+map-gap-smash-prod-Pointed-Type :
+  {l1 l2 l3 : Level}
+  (A : Pointed-Type l1) (B : Pointed-Type l2) (S : Pointed-Type l3) →
+  (f : S →* A) (g : S →* B) → type-Pointed-Type S → type-Pointed-Type (A ∧* B)
+map-gap-smash-prod-Pointed-Type A B S f g =
+  pr1 (gap-smash-prod-Pointed-Type A B S f g)
 ```
 
 It remains to show that this is the correct map, and that it is unique.
