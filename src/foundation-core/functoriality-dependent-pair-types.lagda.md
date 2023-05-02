@@ -424,8 +424,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  id-map-Σ : map-Σ B id (λ x → id) ~ id
-  id-map-Σ = refl-htpy
+  compute-map-Σ-id : map-Σ B id (λ x → id) ~ id
+  compute-map-Σ-id = refl-htpy
 ```
 
 ## See also

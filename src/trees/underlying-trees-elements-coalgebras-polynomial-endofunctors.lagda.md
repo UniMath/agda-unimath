@@ -538,8 +538,6 @@ module _
     unique-walk-to-root-element-coalgebra w
 ```
 
-### The external graph of an element of a W-type is equivalent to the underlying graph
-
 ### The underlying graph of an element of a W-type can be given the structure of an enriched directed tree
 
 ```agda

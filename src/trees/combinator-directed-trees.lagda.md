@@ -566,7 +566,8 @@ module _
         ( is-proper-node-inclusion-combinator-Directed-Tree T)
         ( base-index-combinator-Directed-Tree T i)
         ( walk-inclusion-combinator-Directed-Tree T i x
-          ( root-Directed-Tree (T i)) (walk-to-root-Directed-Tree (T i) x)))
+          ( root-Directed-Tree (T i))
+          ( walk-to-root-Directed-Tree (T i) x)))
 
   is-equiv-map-Σ-node-fiber-combinator-Directed-Tree :
     is-equiv

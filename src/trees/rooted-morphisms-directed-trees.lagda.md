@@ -82,6 +82,15 @@ module _
     edge-rooted-hom-Directed-Tree =
       edge-hom-Directed-Tree S T hom-rooted-hom-Directed-Tree
 
+    walk-rooted-hom-Directed-Tree :
+      {x y : node-Directed-Tree S} →
+      walk-Directed-Tree S x y →
+      walk-Directed-Tree T
+        ( node-rooted-hom-Directed-Tree x)
+        ( node-rooted-hom-Directed-Tree y)
+    walk-rooted-hom-Directed-Tree =
+      walk-hom-Directed-Tree S T hom-rooted-hom-Directed-Tree
+
     children-rooted-hom-Directed-Tree :
       (x : node-Directed-Tree S) →
       children-Directed-Tree S x →

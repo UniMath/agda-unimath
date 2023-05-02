@@ -601,3 +601,41 @@ module _
     is-injective (unit-walk-Directed-Graph G {x} {y})
   is-injective-unit-walk-Directed-Graph refl = refl
 ```
+
+### The last edge on a walk
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  last-stage-walk-Directed-Graph :
+    {x y z : vertex-Directed-Graph G} (e : edge-Directed-Graph G x y) →
+    walk-Directed-Graph G y z →
+    Σ (vertex-Directed-Graph G) (λ u → edge-Directed-Graph G u z)
+  last-stage-walk-Directed-Graph e refl-walk-Directed-Graph = (_ , e)
+  last-stage-walk-Directed-Graph e (cons-walk-Directed-Graph f w) =
+    last-stage-walk-Directed-Graph f w
+
+  vertex-last-stage-walk-Directed-Graph :
+    {x y z : vertex-Directed-Graph G} (e : edge-Directed-Graph G x y) →
+    walk-Directed-Graph G y z → vertex-Directed-Graph G
+  vertex-last-stage-walk-Directed-Graph e w =
+    pr1 (last-stage-walk-Directed-Graph e w)
+
+  edge-last-stage-walk-Directed-Graph :
+    {x y z : vertex-Directed-Graph G} (e : edge-Directed-Graph G x y) →
+    (w : walk-Directed-Graph G y z) →
+    edge-Directed-Graph G (vertex-last-stage-walk-Directed-Graph e w) z
+  edge-last-stage-walk-Directed-Graph e w =
+    pr2 (last-stage-walk-Directed-Graph e w)
+
+  walk-last-stage-walk-Directed-Graph :
+    {x y z : vertex-Directed-Graph G} (e : edge-Directed-Graph G x y) →
+    (w : walk-Directed-Graph G y z) →
+    walk-Directed-Graph G x (vertex-last-stage-walk-Directed-Graph e w)
+  walk-last-stage-walk-Directed-Graph e refl-walk-Directed-Graph =
+    refl-walk-Directed-Graph
+  walk-last-stage-walk-Directed-Graph e (cons-walk-Directed-Graph f w) =
+    cons-walk-Directed-Graph e (walk-last-stage-walk-Directed-Graph f w)
+```

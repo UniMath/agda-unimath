@@ -21,7 +21,10 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-We raise the universe levels of directed graphs
+We raise the universe levels of directed graphs by raising the universe levels
+of the vertices and the edges.
+
+## Definition
 
 ```agda
 module _

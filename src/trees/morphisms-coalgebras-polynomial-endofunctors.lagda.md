@@ -32,7 +32,7 @@ function `f : X → Y` between their underlying types, equipped with a homotopy
 witnessing that the square
 
 ```md
-               f
+              f
       X -------------> Y
       |                |
       |                |
