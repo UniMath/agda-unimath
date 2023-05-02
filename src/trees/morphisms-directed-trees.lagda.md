@@ -21,6 +21,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import graph-theory.morphisms-directed-graphs
+open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 ```
@@ -75,6 +76,16 @@ module _
       ( λ y → edge-Directed-Tree T y (node-hom-Directed-Tree x))
       ( node-hom-Directed-Tree)
       ( λ y → edge-hom-Directed-Tree)
+
+  walk-hom-Directed-Tree :
+    {x y : node-Directed-Tree S} →
+    walk-Directed-Tree S x y →
+    walk-Directed-Tree T (node-hom-Directed-Tree x) (node-hom-Directed-Tree y)
+  walk-hom-Directed-Tree =
+    walk-hom-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( f)
 ```
 
 ### Identity morphisms of directed trees
