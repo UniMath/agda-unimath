@@ -94,11 +94,10 @@ files with the `.lagda.md` extension:
 The `agda-unimath` library employs two notations for the identity type:
 Martin-Löf's original notation `Id` and an infix notation `_＝_`. The infix
 notation's equals sign is not the standard one, but rather the
-[full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
-Observe that the full width equals sign is slightly wider, and is highlighted in
-blue just like all the other defined constructions in Agda. To type the full
-width equals sign in Agda's Emacs Mode, you need to add it to your Agda input
-method as follows:
+[full width equals sign](https://codepoints.net/U+ff1d). Observe that the full
+width equals sign is slightly wider, and is highlighted in blue just like all
+the other defined constructions in Agda. To type the full width equals sign in
+Agda's Emacs Mode, you need to add it to your Agda input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.

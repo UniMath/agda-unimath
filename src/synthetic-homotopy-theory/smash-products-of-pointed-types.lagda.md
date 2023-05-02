@@ -52,9 +52,9 @@ smash-prod-Pointed-Type A B =
 _∧*_ = smash-prod-Pointed-Type
 ```
 
-The symbol used for the smash product `_∧*_` is the
-"[logical and](https://codepoints.net/U+2227)" symbol `∧` (agda-input: `\wedge`
-or `\and`).
+**Note**: The symbol used for the smash product `_∧*_` is the
+[logical and](https://codepoints.net/U+2227) symbol `∧` (agda-input: `\wedge`
+`\and`).
 
 ```agda
 cogap-smash-prod-Pointed-Type :

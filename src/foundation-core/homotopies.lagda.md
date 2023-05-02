@@ -131,9 +131,9 @@ _·r_ = htpy-right-whisk
 ```
 
 **Note**: The infix whiskering operators `_·l_` and `_·r_` use the
-"[middle dot](https://codepoints.net/U+00B7)" symbol `·` (agda-input: `\cdot` or
+[middle dot](https://codepoints.net/U+00B7) symbol `·` (agda-input: `\cdot`
 `\centerdot`), as opposed to the infix homotopy concatenation operator `_∙h_`
-which uses the "[bullet operator](https://codepoints.net/U+2219)" symbol `∙`
+which uses the [bullet operator](https://codepoints.net/U+2219) symbol `∙`
 (agda-input: `\.`). If these look the same in your editor, we suggest that you
 change your font. For a reference, see [How to install](HOWTO-INSTALL.md).
 

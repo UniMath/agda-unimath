@@ -37,8 +37,8 @@ _∨_ = disj-Prop
 ```
 
 **Note**: The symbol used for the disjunction `_∨_` is the
-"[logical or](https://codepoints.net/U+2228)" symbol `∨` (agda-input: `\vee` or
-`\or`), and not the latin letter `v`.
+[logical or](https://codepoints.net/U+2228) symbol `∨` (agda-input: `\vee`
+`\or`), and not the latin small letter v `v`.
 
 ```agda
 type-disj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)

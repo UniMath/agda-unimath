@@ -53,8 +53,8 @@ _∨*_ = wedge-Pointed-Type
 ```
 
 **Note**: the symbol used for the wedge sum `_∨*_` is the
-"[logical or](https://codepoints.net/U+2228)" symbol `∨` (agda-input: `\vee` or
-`\or`), and not the latin letter `v`.
+[logical or](https://codepoints.net/U+2228) symbol `∨` (agda-input: `\vee`
+`\or`), and not the latin small letter v `v`.
 
 ```agda
 indexed-wedge :
