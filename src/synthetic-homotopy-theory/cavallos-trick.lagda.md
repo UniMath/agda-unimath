@@ -23,7 +23,10 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Cavallo's trick is a way of upgrading an unpointed homotopy between pointed maps to a pointed homotopy. Originally, this trick was formulated by Evan Cavallo for homogeneous spaces, but it works as soon as the evaluation map `(id ~ id) → Ω B` has a section.
+Cavallo's trick is a way of upgrading an unpointed homotopy between pointed maps
+to a pointed homotopy. Originally, this trick was formulated by Evan Cavallo for
+homogeneous spaces, but it works as soon as the evaluation map `(id ~ id) → Ω B`
+has a section.
 
 ## Theorem
 
@@ -31,7 +34,7 @@ Cavallo's trick is a way of upgrading an unpointed homotopy between pointed maps
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
-  
+
   cavallos-trick :
     (f g : A →* B) → sec (λ (H : id ~ id) → H (point-Pointed-Type B)) →
     (map-pointed-map A B f ~ map-pointed-map A B g) → f ~* g
@@ -53,5 +56,8 @@ module _
 
 ## References
 
-- Cavallo's trick was originally formalized in the [cubical agda library](https://agda.github.io/cubical/Cubical.Foundations.Pointed.Homogeneous.html).
-- The above generalization was found by Buchholtz, Christensen, Rijke, and Taxerȧs Flaten, in [Central H-spaces and banded types](https://arxiv.org/abs/2301.02636)
+- Cavallo's trick was originally formalized in the
+  [cubical agda library](https://agda.github.io/cubical/Cubical.Foundations.Pointed.Homogeneous.html).
+- The above generalization was found by Buchholtz, Christensen, Rijke, and
+  Taxerȧs Flaten, in
+  [Central H-spaces and banded types](https://arxiv.org/abs/2301.02636)
