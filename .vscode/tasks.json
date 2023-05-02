@@ -21,7 +21,7 @@
       "label": "imports",
       "detail": "Search for and remove unused imports. Warning: very slow!",
       "type": "shell",
-      "command": "python scripts/demote_foundation_imports.py && python scripts/remove_unused_imports.py",
+      "command": "python scripts/remove_unused_imports.py && python scripts/demote_foundation_imports.py",
       "problemMatcher": []
     }
   ]
