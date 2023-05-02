@@ -22,9 +22,7 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 ## Idea
 
-## Definitions
-
-### Cocones
+## Definition
 
 ```agda
 module _
@@ -48,7 +46,11 @@ module _
   pr1 (pr2 (cocone-Pointed-Type X)) = constant-pointed-map A X
   pr1 (pr2 (pr2 (cocone-Pointed-Type X))) = constant-pointed-map B X
   pr2 (pr2 (pr2 (cocone-Pointed-Type X))) = refl-htpy
+```
 
+### Components of a cocone of pointed types
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2}
@@ -86,3 +88,7 @@ module _
   pr2 (pr2 cocone-type-cocone-Pointed-Type) =
     coherence-square-cocone-Pointed-Type
 ```
+
+## See also
+
+- [Pushouts of pointed types](synthetic-homotopy-theory.pushouts-of-pointed-types.md)
