@@ -36,6 +36,15 @@ module _
       ( ev-point (point-Pointed-Type A) {fam-Pointed-Fam A B})
       ( point-Pointed-Fam A B)
 
+  Π∗ = pointed-Π
+```
+
+**Note**: the subscript asterisk symbol used for the pointed dependent function
+type `Π∗`, and pointed type constructions in general, is the
+[asterisk operator](https://codepoints.net/U+2217) `∗` (agda-input: `\ast`), not
+the [asterisk](https://codepoints.net/U+002A) `*`.
+
+```agda
   function-pointed-Π :
     pointed-Π → (x : type-Pointed-Type A) → fam-Pointed-Fam A B x
   function-pointed-Π = pr1
