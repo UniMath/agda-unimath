@@ -25,19 +25,19 @@ The pointed unit type is the initial pointed type.
 ## Definition
 
 ```agda
-pointed-unit : Pointed-Type lzero
-pr1 pointed-unit = unit
-pr2 pointed-unit = star
+unit-Pointed-Type : Pointed-Type lzero
+pr1 unit-Pointed-Type = unit
+pr2 unit-Pointed-Type = star
 ```
 
 ## Properties
 
 ```agda
-gap-pointed-unit : {l : Level} (X : Pointed-Type l) → X →* pointed-unit
-pr1 (gap-pointed-unit X) _ = star
-pr2 (gap-pointed-unit X) = refl
+gap-unit-Pointed-Type : {l : Level} (X : Pointed-Type l) → X →* unit-Pointed-Type
+pr1 (gap-unit-Pointed-Type X) _ = star
+pr2 (gap-unit-Pointed-Type X) = refl
 
-cogap-pointed-unit : {l : Level} (X : Pointed-Type l) → pointed-unit →* X
-pr1 (cogap-pointed-unit X) _ = point-Pointed-Type X
-pr2 (cogap-pointed-unit X) = refl
+cogap-unit-Pointed-Type : {l : Level} (X : Pointed-Type l) → unit-Pointed-Type →* X
+pr1 (cogap-unit-Pointed-Type X) _ = point-Pointed-Type X
+pr2 (cogap-unit-Pointed-Type X) = refl
 ```

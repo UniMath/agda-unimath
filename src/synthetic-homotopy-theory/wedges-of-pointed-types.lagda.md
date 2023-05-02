@@ -46,8 +46,8 @@ wedge-Pointed-Type :
   Pointed-Type (l1 ⊔ l2)
 wedge-Pointed-Type A B =
   pushout-Pointed-Type
-    ( cogap-pointed-unit A)
-    ( cogap-pointed-unit B)
+    ( cogap-unit-Pointed-Type A)
+    ( cogap-unit-Pointed-Type B)
 
 _∨*_ = wedge-Pointed-Type
 ```
@@ -74,8 +74,8 @@ defined by the cogap map induced by the canonical inclusions `A → A ×* B ← 
 cocone-prod-wedge-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   type-cocone-Pointed-Type
-    ( cogap-pointed-unit A)
-    ( cogap-pointed-unit B)
+    ( cogap-unit-Pointed-Type A)
+    ( cogap-unit-Pointed-Type B)
     ( A ×* B)
 pr1 (cocone-prod-wedge-Pointed-Type A B) = inl-prod-Pointed-Type A B
 pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = inr-prod-Pointed-Type A B
@@ -87,8 +87,8 @@ pointed-map-prod-wedge-Pointed-Type :
   (A ∨* B) →* (A ×* B)
 pointed-map-prod-wedge-Pointed-Type A B =
   cogap-Pointed-Type
-    ( cogap-pointed-unit A)
-    ( cogap-pointed-unit B)
+    ( cogap-unit-Pointed-Type A)
+    ( cogap-unit-Pointed-Type B)
     ( cocone-prod-wedge-Pointed-Type A B)
 
 map-prod-wedge-Pointed-Type :
