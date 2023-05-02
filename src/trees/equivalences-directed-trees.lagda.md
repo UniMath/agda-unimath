@@ -196,6 +196,30 @@ module _
       ( λ y → edge-Directed-Tree T y (node-equiv-Directed-Tree x))
   children-equiv-Directed-Tree x =
     map-equiv (equiv-children-equiv-Directed-Tree x)
+
+  equiv-walk-equiv-Directed-Tree :
+    {x y : node-Directed-Tree S} →
+    walk-Directed-Tree S x y ≃
+    walk-Directed-Tree T
+      ( node-equiv-Directed-Tree x)
+      ( node-equiv-Directed-Tree y)
+  equiv-walk-equiv-Directed-Tree =
+    equiv-walk-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( e)
+
+  walk-equiv-Directed-Tree :
+    {x y : node-Directed-Tree S} →
+    walk-Directed-Tree S x y →
+    walk-Directed-Tree T
+      ( node-equiv-Directed-Tree x)
+      ( node-equiv-Directed-Tree y)
+  walk-equiv-Directed-Tree =
+    walk-equiv-Directed-Graph
+      ( graph-Directed-Tree S)
+      ( graph-Directed-Tree T)
+      ( e)
 ```
 
 ### Identity equivalences of directed trees
