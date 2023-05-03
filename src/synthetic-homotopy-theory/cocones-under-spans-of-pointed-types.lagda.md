@@ -52,15 +52,16 @@ module _
   pr1 (pr2 (pr2 (cocone-Pointed-Type X))) = constant-pointed-map B X
   pr1 (pr2 (pr2 (pr2 (cocone-Pointed-Type X)))) = refl-htpy
   pr2 (pr2 (pr2 (pr2 (cocone-Pointed-Type X)))) =
-    ( ap
-      ( λ p → inv (p ∙ refl))
-      ( inv (ap-const (pr2 X) (preserves-point-pointed-map S B g)))) ∙
-    ( ap
-      ( λ p →
-        ( p ∙ refl) ∙
-        ( inv
-          ( preserves-point-pointed-map S X (constant-pointed-map B X ∘∗ g))))
-      ( inv (ap-const (pr2 X) (preserves-point-pointed-map S A f))))
+    inv
+    ( ( ap
+        ( λ p →
+          ( p ∙ refl) ∙
+          ( inv
+            ( preserves-point-pointed-map S X (constant-pointed-map B X ∘∗ g))))
+        ( ap-const (pr2 X) (preserves-point-pointed-map S A f))) ∙
+      ( ap
+        ( λ p → inv (p ∙ refl))
+        ( ap-const (pr2 X) (preserves-point-pointed-map S B g))))
 ```
 
 ### Components of a cocone of pointed types
