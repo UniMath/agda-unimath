@@ -308,10 +308,11 @@ module _
       isretr-map-inv-compute-walk-Directed-Graph
 
   compute-walk-Directed-Graph :
-    {x y : vertex-Directed-Graph G} →
+    (x y : vertex-Directed-Graph G) →
     walk-Directed-Graph G x y ≃ walk-Directed-Graph' G x y
-  pr1 compute-walk-Directed-Graph = map-compute-walk-Directed-Graph
-  pr2 compute-walk-Directed-Graph = is-equiv-map-compute-walk-Directed-Graph
+  pr1 (compute-walk-Directed-Graph x y) = map-compute-walk-Directed-Graph
+  pr2 (compute-walk-Directed-Graph x y) =
+    is-equiv-map-compute-walk-Directed-Graph
 ```
 
 ### The type of walks from `x` to `y` is a coproduct

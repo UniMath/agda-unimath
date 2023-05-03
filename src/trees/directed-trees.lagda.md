@@ -17,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -101,6 +102,15 @@ module _
   walk-Directed-Tree : (x y : node-Directed-Tree) → UU (l1 ⊔ l2)
   walk-Directed-Tree = walk-Directed-Graph graph-Directed-Tree
 
+  walk-Directed-Tree' : (x y : node-Directed-Tree) → UU (l1 ⊔ l2)
+  walk-Directed-Tree' = walk-Directed-Graph' graph-Directed-Tree
+
+  compute-walk-Directed-Tree :
+    (x y : node-Directed-Tree) →
+    walk-Directed-Tree x y ≃ walk-Directed-Tree' x y
+  compute-walk-Directed-Tree =
+    compute-walk-Directed-Graph graph-Directed-Tree
+
   refl-walk-Directed-Tree :
     {x : node-Directed-Tree} → walk-Directed-Tree x x
   refl-walk-Directed-Tree = refl-walk-Directed-Graph
@@ -137,9 +147,25 @@ module _
     (x : node-Directed-Tree) → walk-Directed-Tree x root-Directed-Tree
   walk-to-root-Directed-Tree x =
     center (unique-walk-to-root-Directed-Tree x)
+
+  unique-walk-to-root-Directed-Tree' :
+    (x : node-Directed-Tree) →
+    is-contr (walk-Directed-Tree' x root-Directed-Tree)
+  unique-walk-to-root-Directed-Tree' x =
+    is-contr-equiv'
+      ( walk-Directed-Tree x root-Directed-Tree)
+      ( compute-walk-Directed-Tree x root-Directed-Tree)
+      ( unique-walk-to-root-Directed-Tree x)
+
+  walk-to-root-Directed-Tree' :
+    (x : node-Directed-Tree) → walk-Directed-Tree' x root-Directed-Tree
+  walk-to-root-Directed-Tree' x =
+    center (unique-walk-to-root-Directed-Tree' x)
 ```
 
 ### Proper nodes of directed trees
+
+We define **proper nodes** of a directed tree to be nodes that are distinct from the root.
 
 ```agda
 module _
