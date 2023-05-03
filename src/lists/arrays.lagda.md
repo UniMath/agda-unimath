@@ -37,8 +37,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An array is a pair of a natural number `n`, and a function from `Fin n` to `A`. We show that arrays and
-lists are equivalent.
+An array is a pair of a natural number `n`, and a function from `Fin n` to `A`.
+We show that arrays and lists are equivalent.
 
 ```agda
 array : {l : Level} → UU l  → UU l

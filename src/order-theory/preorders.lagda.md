@@ -9,10 +9,10 @@ module order-theory.preorders where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.negation
-open import foundation.identity-types
 ```
 
 </details>

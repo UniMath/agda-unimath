@@ -23,7 +23,7 @@ open import order-theory.total-preorders
 
 ## Definitions
 
-### Being a totally order poset
+### Being a totally ordered poset
 
 ```agda
 module _

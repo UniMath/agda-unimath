@@ -9,6 +9,8 @@ module lists.sorted-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -23,7 +25,6 @@ open import lists.permutation-vectors
 
 open import order-theory.total-decidable-posets
 
-open import univalent-combinatorics.permutations-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

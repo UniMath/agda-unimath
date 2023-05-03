@@ -45,7 +45,7 @@ module _
   {l1 l2 : Level} (X : decidable-Poset l1 l2)
   where
 
-  poxfset-decidable-Poset : Poset l1 l2
+  poset-decidable-Poset : Poset l1 l2
   poset-decidable-Poset = pr1 X
 
   is-decidable-poset-decidable-Poset : is-decidable-Poset (poset-decidable-Poset)

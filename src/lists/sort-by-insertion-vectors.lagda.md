@@ -9,6 +9,9 @@ module lists.sort-by-insertion-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.transpositions-standard-finite-types
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -26,7 +29,6 @@ open import lists.sorting-algorithms-vectors
 
 open import order-theory.total-decidable-posets
 
-open import univalent-combinatorics.permutations-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -34,8 +36,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In these file, we define the sort by insertion on vectors and we prove its
-correcteness.
+Sort by insertion is a recursive sort on vectors. If a vector is empty or with
+only one element then it is sorted. Otherwise, we recursively sort the tail of
+the vector. Then we compare the head of the vector to the head of the sorted
+tail. If the head is less or equal than the head of the tail the vector is
+sorted. Otherwise we permute the two elements and we recursively sort the tail
+of the vector.
 
 ## Definition
 
@@ -87,9 +93,9 @@ module _
     Permutation (succ-ℕ (succ-ℕ (n)))
   helper-permutation-insertion-sort-vec x y l (inl _) = id-equiv
   helper-permutation-insertion-sort-vec {0} x y empty-vec (inr _) =
-    two-cycle-permutation 2 (zero-Fin 1) (one-Fin 1)
+    swap-two-last-elements-transposition-Fin 0
   helper-permutation-insertion-sort-vec {succ-ℕ n} x y (z ∷ l) (inr _) =
-    ( ( swap-two-last-elements-permutation (succ-ℕ n)) ∘e
+    ( ( swap-two-last-elements-transposition-Fin (succ-ℕ n)) ∘e
       ( ( equiv-coprod
           ( helper-permutation-insertion-sort-vec
             ( x)
@@ -168,7 +174,7 @@ module _
                       ( z)))
                   ( id-equiv))
                 ( inv
-                  ( compute-swap-two-last-elements-permutation-permute-vec
+                  ( compute-swap-two-last-elements-transposition-Fin-permute-vec
                     (succ-ℕ n)
                     ( z ∷ v)
                     ( x)
@@ -177,7 +183,7 @@ module _
                   ( compute-composition-permute-vec
                     (succ-ℕ (succ-ℕ (succ-ℕ n)))
                     ( x ∷ y ∷ z ∷ v)
-                    ( swap-two-last-elements-permutation (succ-ℕ n))
+                    ( swap-two-last-elements-transposition-Fin (succ-ℕ n))
                     ( equiv-coprod
                       ( helper-permutation-insertion-sort-vec
                         ( x)

@@ -9,6 +9,9 @@ module lists.permutation-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.transpositions-standard-finite-types
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -17,7 +20,6 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
-open import univalent-combinatorics.permutations-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -73,22 +75,22 @@ module _
       ( λ f → listed-vec-functional-vec n (f ∘ (map-equiv b)))
       ( inv (isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv a)))
 
-  compute-swap-two-last-elements-permutation-permute-vec :
+  compute-swap-two-last-elements-transposition-Fin-permute-vec :
     (n : ℕ)
     (v : vec A n) →
     (x y : A) →
     permute-vec
       (succ-ℕ (succ-ℕ n))
       (x ∷ y ∷ v)
-      (swap-two-last-elements-permutation n) ＝
+      (swap-two-last-elements-transposition-Fin n) ＝
     (y ∷ x ∷ v)
-  compute-swap-two-last-elements-permutation-permute-vec n v x y =
+  compute-swap-two-last-elements-transposition-Fin-permute-vec n v x y =
     eq-Eq-vec
       ( succ-ℕ (succ-ℕ n))
       ( permute-vec
           ( succ-ℕ (succ-ℕ n))
           ( x ∷ y ∷ v)
-          ( swap-two-last-elements-permutation n))
+          ( swap-two-last-elements-transposition-Fin n))
       ( y ∷ x ∷ v)
       ( refl ,
         refl ,

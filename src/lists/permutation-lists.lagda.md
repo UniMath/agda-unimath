@@ -7,6 +7,8 @@ module lists.permutation-lists where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -17,7 +19,6 @@ open import linear-algebra.vectors
 open import lists.arrays
 open import lists.lists
 
-open import univalent-combinatorics.permutations-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

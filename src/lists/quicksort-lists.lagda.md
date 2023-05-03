@@ -11,6 +11,8 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -29,7 +31,6 @@ open import lists.permutation-lists
 
 open import order-theory.total-decidable-posets
 
-open import univalent-combinatorics.permutations-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -37,7 +38,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Quicksort is a sorting algorithm on lists that works by selecting a pivoting element, dividing the list into elements smaller than the pivoting element and elements greater than the pivoting element, and sorting those two lists by again applying the quicksort algorithm.
+Quicksort is a sorting algorithm on lists that works by selecting a pivoting
+element, dividing the list into elements smaller than the pivoting element and
+elements greater than the pivoting element, and sorting those two lists by again
+applying the quicksort algorithm.
 
 ## Definition
 
