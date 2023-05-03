@@ -325,7 +325,8 @@ translation-invariant-dist-ℕ' k m n =
 left-distributive-mul-dist-ℕ :
   (m n k : ℕ) → mul-ℕ k (dist-ℕ m n) ＝ dist-ℕ (mul-ℕ k m) (mul-ℕ k n)
 left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ zero-ℕ = refl
-left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) = left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ k
+left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) =
+  left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ k
 left-distributive-mul-dist-ℕ zero-ℕ (succ-ℕ n) zero-ℕ = refl
 left-distributive-mul-dist-ℕ zero-ℕ (succ-ℕ n) (succ-ℕ k) =
   ap ( dist-ℕ' (mul-ℕ (succ-ℕ k) (succ-ℕ n)))

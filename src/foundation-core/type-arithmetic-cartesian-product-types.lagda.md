@@ -71,23 +71,28 @@ module _
   {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
   where
 
-  map-assoc-prod : (A × B) × C → A × (B × C)
-  map-assoc-prod = map-assoc-Σ A (λ x → B) (λ w → C)
+  map-associative-prod : (A × B) × C → A × (B × C)
+  map-associative-prod = map-associative-Σ A (λ x → B) (λ w → C)
 
-  map-inv-assoc-prod : A × (B × C) → (A × B) × C
-  map-inv-assoc-prod = map-inv-assoc-Σ A (λ x → B) (λ w → C)
+  map-inv-associative-prod : A × (B × C) → (A × B) × C
+  map-inv-associative-prod = map-inv-associative-Σ A (λ x → B) (λ w → C)
 
-  issec-map-inv-assoc-prod : (map-assoc-prod ∘ map-inv-assoc-prod) ~ id
-  issec-map-inv-assoc-prod = issec-map-inv-assoc-Σ A (λ x → B) (λ w → C)
+  issec-map-inv-associative-prod :
+    (map-associative-prod ∘ map-inv-associative-prod) ~ id
+  issec-map-inv-associative-prod =
+    issec-map-inv-associative-Σ A (λ x → B) (λ w → C)
 
-  isretr-map-inv-assoc-prod : (map-inv-assoc-prod ∘ map-assoc-prod) ~ id
-  isretr-map-inv-assoc-prod = isretr-map-inv-assoc-Σ A (λ x → B) (λ w → C)
+  isretr-map-inv-associative-prod :
+    (map-inv-associative-prod ∘ map-associative-prod) ~ id
+  isretr-map-inv-associative-prod =
+    isretr-map-inv-associative-Σ A (λ x → B) (λ w → C)
 
-  is-equiv-map-assoc-prod : is-equiv map-assoc-prod
-  is-equiv-map-assoc-prod = is-equiv-map-assoc-Σ A (λ x → B) (λ w → C)
+  is-equiv-map-associative-prod : is-equiv map-associative-prod
+  is-equiv-map-associative-prod =
+    is-equiv-map-associative-Σ A (λ x → B) (λ w → C)
 
-  assoc-prod : ((A × B) × C) ≃ (A × (B × C))
-  assoc-prod = assoc-Σ A (λ x → B) (λ w → C)
+  associative-prod : ((A × B) × C) ≃ (A × (B × C))
+  associative-prod = associative-Σ A (λ x → B) (λ w → C)
 ```
 
 ### The unit laws of cartesian product types with respect to contractible types

@@ -9,6 +9,7 @@ module foundation.functoriality-truncation where
 ```agda
 open import foundation.truncations
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
@@ -30,19 +31,23 @@ action of truncations.
 ## Definition
 
 ```agda
-unique-map-trunc :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
-  is-contr
-    ( Σ ( type-trunc k A → type-trunc k B)
-        ( λ h → (h ∘ unit-trunc) ~ (unit-trunc ∘ f)))
-unique-map-trunc {l1} {l2} {A} {B} k f =
-  universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
-map-trunc :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
-  (A → B) → type-trunc k A → type-trunc k B
-map-trunc k f =
-  pr1 (center (unique-map-trunc k f))
+  unique-map-trunc :
+    is-contr
+      ( Σ ( type-trunc k A → type-trunc k B)
+          ( coherence-square-maps f unit-trunc unit-trunc))
+  unique-map-trunc =
+    universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
+
+  map-trunc : type-trunc k A → type-trunc k B
+  map-trunc = pr1 (center unique-map-trunc)
+
+  coherence-square-map-trunc :
+    coherence-square-maps f unit-trunc unit-trunc map-trunc
+  coherence-square-map-trunc = pr2 (center unique-map-trunc)
 ```
 
 ## Properties
@@ -88,12 +93,12 @@ id-map-trunc {l1} {A} k =
 ### The truncation of a composite is the composite of the truncations
 
 ```agda
-comp-map-trunc :
+preserves-comp-map-trunc :
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (k : 𝕋)
   ( g : B → C) (f : A → B) →
   ( map-trunc k (g ∘ f)) ~
   ( (map-trunc k g) ∘ (map-trunc k f))
-comp-map-trunc k g f =
+preserves-comp-map-trunc k g f =
   htpy-uniqueness-map-trunc k
     ( g ∘ f)
     ( (map-trunc k g) ∘ (map-trunc k f))
@@ -119,12 +124,14 @@ module _
     pair
       ( pair
         ( map-inv-equiv-trunc)
-        ( inv-htpy (comp-map-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
+        ( inv-htpy
+          ( preserves-comp-map-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
           ( htpy-trunc (issec-map-inv-equiv e) ∙h
             id-map-trunc k)))
       ( pair
         ( map-inv-equiv-trunc)
-        ( inv-htpy (comp-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
+        ( inv-htpy
+          ( preserves-comp-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
           ( htpy-trunc (isretr-map-inv-equiv e) ∙h
             id-map-trunc k)))
 

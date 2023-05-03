@@ -37,7 +37,7 @@ module _
 
   equiv-∞-Group : UU (l1 ⊔ l2)
   equiv-∞-Group =
-    classifying-pointed-type-∞-Group G ≃* classifying-pointed-type-∞-Group H
+    classifying-pointed-type-∞-Group G ≃∗ classifying-pointed-type-∞-Group H
 
   hom-equiv-∞-Group : equiv-∞-Group → hom-∞-Group G H
   hom-equiv-∞-Group =

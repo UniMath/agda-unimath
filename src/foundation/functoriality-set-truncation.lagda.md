@@ -83,11 +83,11 @@ id-map-trunc-Set = id-map-trunc zero-𝕋
 ### The functorial action of set truncations preserves composition
 
 ```agda
-comp-map-trunc-Set :
+preserves-comp-map-trunc-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-trunc-Set (g ∘ f) ~ (map-trunc-Set g ∘ map-trunc-Set f)
-comp-map-trunc-Set = comp-map-trunc zero-𝕋
+preserves-comp-map-trunc-Set = preserves-comp-map-trunc zero-𝕋
 ```
 
 ### The functorial action of set truncations preserves homotopies
@@ -161,7 +161,7 @@ module _
         ( λ u →
           set-Prop
             ( function-Prop (map-trunc-Set f u ＝ map-trunc-Set f y)
-            ( Id-Prop (trunc-Set A) u y) ))
+            ( Id-Prop (trunc-Set A) u y)))
         ( λ a →
           apply-dependent-universal-property-trunc-Set'
           ( λ v →
@@ -260,7 +260,7 @@ module _
     map-trunc-Set f ~ (inclusion-trunc-im-Set ∘ map-trunc-Set (map-unit-im f))
   triangle-hom-slice-trunc-im-Set =
     ( htpy-trunc-Set (triangle-unit-im f)) ∙h
-    ( comp-map-trunc-Set (inclusion-im f) (map-unit-im f))
+    ( preserves-comp-map-trunc-Set (inclusion-im f) (map-unit-im f))
 
   hom-slice-trunc-im-Set : hom-slice (map-trunc-Set f) inclusion-trunc-im-Set
   hom-slice-trunc-im-Set =
@@ -369,7 +369,8 @@ module _
           unit-trunc-Prop
             ( pair
               ( unit-trunc-Set (pr1 u))
-              ( naturality-unit-trunc-Set f (pr1 u) ∙ ap unit-trunc-Set (pr2 u)))))
+              ( naturality-unit-trunc-Set f (pr1 u) ∙
+                ap unit-trunc-Set (pr2 u)))))
 
   left-square-unit-im-map-trunc-Set :
     ( map-unit-im (map-trunc-Set f) ∘ unit-trunc-Set) ~

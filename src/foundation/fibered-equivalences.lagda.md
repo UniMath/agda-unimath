@@ -240,7 +240,8 @@ module _
     is-fibered-equiv-fibered-map f g ihH →
     is-pullback (pr1 ihH) g (cone-fibered-map f g ihH)
   is-pullback-is-fibered-equiv (is-equiv-i , is-equiv-h) =
-    is-pullback-is-equiv' (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i is-equiv-h
+    is-pullback-is-equiv'
+      (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i is-equiv-h
 
   equiv-is-fibered-equiv-is-pullback :
     is-equiv (pr1 ihH) →
@@ -275,7 +276,10 @@ is-pullback-fibered-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {Y : UU l4} (f : A → X) (g : B → Y)
   (e : fibered-equiv f g) →
-  is-pullback (pr1 (pr1 e)) g (cone-fibered-map f g (map-fibered-map-fibered-equiv f g e))
+  is-pullback
+    ( pr1 (pr1 e))
+    ( g)
+    ( cone-fibered-map f g (map-fibered-map-fibered-equiv f g e))
 is-pullback-fibered-equiv f g ((i , is-equiv-i) , (h , is-equiv-h) , H) =
   is-pullback-is-fibered-equiv f g (i , h , H) (is-equiv-i , is-equiv-h)
 ```

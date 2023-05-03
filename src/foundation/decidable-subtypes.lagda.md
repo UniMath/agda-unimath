@@ -55,7 +55,7 @@ is-prop-is-decidable-subtype :
 is-prop-is-decidable-subtype P = is-prop-type-Prop (is-decidable-subtype-Prop P)
 
 decidable-subtype : {l1 : Level} (l : Level) (X : UU l1) → UU (l1 ⊔ lsuc l)
-decidable-subtype l X = X → decidable-Prop l
+decidable-subtype l X = X → Decidable-Prop l
 ```
 
 ### The underlying subtype of a decidable subtype
@@ -66,12 +66,12 @@ module _
   where
 
   subtype-decidable-subtype : subtype l2 A
-  subtype-decidable-subtype a = prop-decidable-Prop (P a)
+  subtype-decidable-subtype a = prop-Decidable-Prop (P a)
 
   is-decidable-subtype-decidable-subtype :
     is-decidable-subtype subtype-decidable-subtype
   is-decidable-subtype-decidable-subtype a =
-    is-decidable-type-decidable-Prop (P a)
+    is-decidable-type-Decidable-Prop (P a)
 
   is-in-decidable-subtype : A → UU l2
   is-in-decidable-subtype = is-in-subtype subtype-decidable-subtype
@@ -121,19 +121,19 @@ module _
   is-decidable-is-left (inl x) = is-decidable-unit
   is-decidable-is-left (inr x) = is-decidable-empty
 
-  is-left-decidable-Prop : A + B → decidable-Prop lzero
-  pr1 (is-left-decidable-Prop x) = is-left x
-  pr1 (pr2 (is-left-decidable-Prop x)) = is-prop-is-left x
-  pr2 (pr2 (is-left-decidable-Prop x)) = is-decidable-is-left x
+  is-left-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-left-Decidable-Prop x) = is-left x
+  pr1 (pr2 (is-left-Decidable-Prop x)) = is-prop-is-left x
+  pr2 (pr2 (is-left-Decidable-Prop x)) = is-decidable-is-left x
 
   is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
   is-decidable-is-right (inl x) = is-decidable-empty
   is-decidable-is-right (inr x) = is-decidable-unit
 
-  is-right-decidable-Prop : A + B → decidable-Prop lzero
-  pr1 (is-right-decidable-Prop x) = is-right x
-  pr1 (pr2 (is-right-decidable-Prop x)) = is-prop-is-right x
-  pr2 (pr2 (is-right-decidable-Prop x)) = is-decidable-is-right x
+  is-right-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-right-Decidable-Prop x) = is-right x
+  pr1 (pr2 (is-right-Decidable-Prop x)) = is-prop-is-right x
+  pr2 (pr2 (is-right-Decidable-Prop x)) = is-decidable-is-right x
 ```
 
 ## Properties
@@ -145,32 +145,34 @@ module _
   {l1 : Level} (X : UU l1)
   where
 
-  equiv-universes-decidable-subtype : (l l' : Level) →
-    decidable-subtype l X ≃ decidable-subtype l' X
+  equiv-universes-decidable-subtype :
+    (l l' : Level) → decidable-subtype l X ≃ decidable-subtype l' X
   equiv-universes-decidable-subtype l l' =
     equiv-Π
-      ( λ _ → decidable-Prop l')
+      ( λ _ → Decidable-Prop l')
       ( id-equiv)
-      ( λ _ → equiv-universes-decidable-Prop l l')
+      ( λ _ → equiv-universes-Decidable-Prop l l')
 
-  iff-universes-decidable-subtype : (l l' : Level) (S : decidable-subtype l X) →
+  iff-universes-decidable-subtype :
+    (l l' : Level) (S : decidable-subtype l X) →
     ( (x : X) →
-      prop-decidable-Prop (S x) ⇔
-      prop-decidable-Prop (map-equiv (equiv-universes-decidable-subtype l l') S x))
+      prop-Decidable-Prop (S x) ⇔
+      prop-Decidable-Prop
+        ( map-equiv (equiv-universes-decidable-subtype l l') S x))
   iff-universes-decidable-subtype l l' S x =
     tr
-      ( λ P → prop-decidable-Prop (S x) ⇔ prop-decidable-Prop P)
+      ( λ P → prop-Decidable-Prop (S x) ⇔ prop-Decidable-Prop P)
       ( inv
         ( compute-map-equiv-Π
-          ( λ _ → decidable-Prop l')
+          ( λ _ → Decidable-Prop l')
           ( id-equiv)
-          ( λ _ → equiv-universes-decidable-Prop l l')
+          ( λ _ → equiv-universes-Decidable-Prop l l')
           ( S)
           ( x)))
-      ( iff-universes-decidable-Prop l l' (S x))
+      ( iff-universes-Decidable-Prop l l' (S x))
 ```
 
-### A decidable subtype of a (k+1)-truncated type is (k+1)-truncated.
+### A decidable subtype of a `k+1`-truncated type is `k+1`-truncated
 
 ```agda
 module _
@@ -221,7 +223,7 @@ set-decidable-subset A P = set-subset A (subtype-decidable-subtype P)
 is-set-decidable-subtype :
   {l1 l2 : Level} {X : UU l1} → is-set (decidable-subtype l2 X)
 is-set-decidable-subtype {l1} {l2} {X} =
-  is-set-function-type is-set-decidable-Prop
+  is-set-function-type is-set-Decidable-Prop
 ```
 
 ### Extensionality of the type of decidable subtypes
@@ -243,8 +245,8 @@ module _
     (P ＝ Q) ≃ has-same-elements-decidable-subtype Q
   extensionality-decidable-subtype =
     extensionality-Π P
-      ( λ x Q → prop-decidable-Prop (P x) ⇔ prop-decidable-Prop Q)
-      ( λ x Q → extensionality-decidable-Prop (P x) Q)
+      ( λ x Q → prop-Decidable-Prop (P x) ⇔ prop-Decidable-Prop Q)
+      ( λ x Q → extensionality-Decidable-Prop (P x) Q)
 
   has-same-elements-eq-decidable-subtype :
     (Q : decidable-subtype l2 A) →

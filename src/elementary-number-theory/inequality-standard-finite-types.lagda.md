@@ -130,8 +130,8 @@ is-decidable-leq-Fin (succ-ℕ k) (inl x) (inr y) = inl star
 is-decidable-leq-Fin (succ-ℕ k) (inr x) (inl y) = inr (λ x → x)
 is-decidable-leq-Fin (succ-ℕ k) (inr x) (inr y) = inl star
 
-leq-Fin-decidable-Prop : (k : ℕ) → Fin k → Fin k → decidable-Prop lzero
-pr1 (leq-Fin-decidable-Prop k x y) = leq-Fin k x y
-pr1 (pr2 (leq-Fin-decidable-Prop k x y)) = is-prop-leq-Fin k x y
-pr2 (pr2 (leq-Fin-decidable-Prop k x y)) = is-decidable-leq-Fin k x y
+leq-Fin-Decidable-Prop : (k : ℕ) → Fin k → Fin k → Decidable-Prop lzero
+pr1 (leq-Fin-Decidable-Prop k x y) = leq-Fin k x y
+pr1 (pr2 (leq-Fin-Decidable-Prop k x y)) = is-prop-leq-Fin k x y
+pr2 (pr2 (leq-Fin-Decidable-Prop k x y)) = is-decidable-leq-Fin k x y
 ```

@@ -97,9 +97,13 @@ abstract
     is-emb (map-decidable-emb-binomial-type-Level Z)
   is-emb-map-emb-binomial-type-Level Z =
     is-emb-map-decidable-emb (decidable-emb-binomial-type-Level Z)
+```
 
--- We now define the standard binomial types
+### The standard binomial types
 
+We now define the standard binomial types.
+
+```agda
 binomial-type : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc (l1 ⊔ l2))
 binomial-type {l1} {l2} X Y = binomial-type-Level (l1 ⊔ l2) X Y
 
@@ -130,32 +134,34 @@ abstract
     is-emb (map-decidable-emb-binomial-type Z)
   is-emb-map-emb-binomial-type Z =
     is-emb-map-decidable-emb (decidable-emb-binomial-type Z)
+```
 
--- Proposition 17.5.6
+### Proposition 17.5.6
 
+```agda
 binomial-type-Level' :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 binomial-type-Level' l A B =
-  Σ ( A → decidable-Prop l)
-    ( λ P → mere-equiv B (Σ A (λ x → type-decidable-Prop (P x))))
+  Σ ( A → Decidable-Prop l)
+    ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
 
 compute-binomial-type-Level :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type-Level (l1 ⊔ l) A B ≃ binomial-type-Level' (l1 ⊔ l) A B
 compute-binomial-type-Level l {l1} {l2} A B =
   ( ( ( equiv-Σ
-        ( λ P → mere-equiv B (Σ A (λ x → type-decidable-Prop (P x))))
-        ( equiv-Fib-decidable-Prop l A)
+        ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
+        ( equiv-Fib-Decidable-Prop l A)
         ( λ e →
           equiv-trunc-Prop
             ( equiv-postcomp-equiv
               ( inv-equiv (equiv-total-fib (pr1 (pr2 e)))) B))) ∘e
-      ( inv-assoc-Σ
+      ( inv-associative-Σ
         ( UU (l1 ⊔ l))
         ( λ X → X ↪d A)
         ( λ X → mere-equiv B (pr1 X)))) ∘e
     ( equiv-tot (λ X → commutative-prod))) ∘e
-  ( assoc-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪d A))
+  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪d A))
 
 binomial-type' :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc (l1 ⊔ l2))
@@ -166,11 +172,13 @@ compute-binomial-type :
   binomial-type A B ≃ binomial-type' A B
 compute-binomial-type {l1} {l2} A B =
   compute-binomial-type-Level (l1 ⊔ l2) A B
+```
 
--- Remark 17.5.7
+### Remark 17.5.7
 
--- Note that the universe level of small-binomial-type is lower
+Note that the universe level of `small-binomial-type` is lower.
 
+```agda
 small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 small-binomial-type A B =
@@ -182,11 +190,11 @@ compute-small-binomial-type :
 compute-small-binomial-type A B =
   ( equiv-Σ
     ( λ f → mere-equiv B (fib f true))
-    ( equiv-postcomp A equiv-bool-decidable-Prop)
+    ( equiv-postcomp A equiv-bool-Decidable-Prop)
     ( λ P →
       equiv-trunc-Prop
         ( equiv-postcomp-equiv
-          ( equiv-tot (λ a → compute-equiv-bool-decidable-Prop (P a)))
+          ( equiv-tot (λ a → compute-equiv-bool-Decidable-Prop (P a)))
           ( B)))) ∘e
   ( compute-binomial-type A B)
 ```
@@ -228,7 +236,7 @@ abstract
     (binomial-type' A B + binomial-type' A (Maybe B))
   recursion-binomial-type' A B =
     ( ( ( left-distributive-Σ-coprod
-          ( A → decidable-Prop _)
+          ( A → Decidable-Prop _)
           ( λ P → mere-equiv B (Σ A _))
           ( λ P → mere-equiv (Maybe B) (Σ A _))) ∘e
         ( equiv-tot
@@ -274,42 +282,42 @@ abstract
                 ( λ Q →
                   mere-equiv
                     ( Maybe B)
-                    ( ( Σ A (λ a → type-decidable-Prop (P a))) +
+                    ( ( Σ A (λ a → type-Decidable-Prop (P a))) +
                       ( type-Prop (pr1 Q))))
                 ( λ Q →
                   mere-equiv
                     ( Maybe B)
-                    ( ( Σ A (λ a → type-decidable-Prop (P a))) +
+                    ( ( Σ A (λ a → type-Decidable-Prop (P a))) +
                       ( type-Prop (pr1 Q)))))
-              ( split-decidable-Prop)
+              ( split-Decidable-Prop)
               ( ind-Σ
                 ( λ Q →
                   ind-Σ
                     ( λ H →
                       ind-coprod _ ( λ q → id-equiv) (λ q → id-equiv)))))))) ∘e
-      ( assoc-Σ
-        ( A → decidable-Prop _)
-        ( λ a → decidable-Prop _)
+      ( associative-Σ
+        ( A → Decidable-Prop _)
+        ( λ a → Decidable-Prop _)
         ( λ t →
           mere-equiv
             ( Maybe B)
-            ( ( Σ A (λ a → type-decidable-Prop (pr1 t a))) +
-              ( type-decidable-Prop (pr2 t)))))) ∘e
+            ( ( Σ A (λ a → type-Decidable-Prop (pr1 t a))) +
+              ( type-Decidable-Prop (pr2 t)))))) ∘e
     ( equiv-Σ
       ( λ p →
         mere-equiv
           ( Maybe B)
-          ( ( Σ A (λ a → type-decidable-Prop (pr1 p a))) +
-            ( type-decidable-Prop (pr2 p))))
+          ( ( Σ A (λ a → type-Decidable-Prop (pr1 p a))) +
+            ( type-Decidable-Prop (pr2 p))))
       ( equiv-universal-property-Maybe)
       ( λ u →
         equiv-trunc-Prop
           ( equiv-postcomp-equiv
             ( ( equiv-coprod
                 ( id-equiv)
-                ( left-unit-law-Σ (λ y → type-decidable-Prop (u (inr y))))) ∘e
+                ( left-unit-law-Σ (λ y → type-Decidable-Prop (u (inr y))))) ∘e
               ( right-distributive-Σ-coprod A unit
-                ( λ x → type-decidable-Prop (u x))))
+                ( λ x → type-Decidable-Prop (u x))))
             ( Maybe B))))
 
 abstract
@@ -324,9 +332,11 @@ abstract
         ( compute-binomial-type A (Maybe B))) ∘e
       ( recursion-binomial-type' A B)) ∘e
     ( compute-binomial-type (Maybe A) (Maybe B))
+```
 
--- Theorem 17.5.9
+### Theorem 17.5.9
 
+```agda
 equiv-small-binomial-type :
   {l1 l2 l3 l4 : Level} {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} →
   (A ≃ A') → (B ≃ B') → small-binomial-type A' B' ≃ small-binomial-type A B

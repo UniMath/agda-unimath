@@ -85,7 +85,7 @@ module _
   commute-powers-Ring = commute-powers-Semiring (semiring-Ring R)
 ```
 
-### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`.
+### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`
 
 ```agda
 module _

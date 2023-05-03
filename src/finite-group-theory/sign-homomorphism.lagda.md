@@ -20,6 +20,7 @@ open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -72,7 +73,9 @@ module _
       ( Id-Prop
         ( Fin-Set 2)
         ( sign-homomorphism-Fin-two (f ∘e g))
-        ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g)))
+        ( add-Fin 2
+          ( sign-homomorphism-Fin-two f)
+          ( sign-homomorphism-Fin-two g)))
       ( λ h →
         ( ap
           ( pr1)
@@ -137,19 +140,19 @@ module _
       ( f' : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))))
     list-trans f' h =
       list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f'
     list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin n X) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n X) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
@@ -186,7 +189,9 @@ module _
       ( inr star)
   eq-sign-homomorphism-Fin-two-transposition Y =
     ap pr1
-      { x = center (is-contr-parity-transposition-permutation n X (transposition Y))}
+      { x =
+        center
+          ( is-contr-parity-transposition-permutation n X (transposition Y))}
       { y =
         pair
           ( inr star)
@@ -217,22 +222,35 @@ module _
         ( ap
           ( pr1)
             ( eq-is-contr
-              (is-contr-parity-transposition-permutation n Y (g ∘e (f ∘e inv-equiv g)))
+              ( is-contr-parity-transposition-permutation
+                ( n)
+                ( Y)
+                ( g ∘e (f ∘e inv-equiv g)))
               { x =
-                center (is-contr-parity-transposition-permutation n Y (g ∘e (f ∘e inv-equiv g)))}
+                center
+                  ( is-contr-parity-transposition-permutation
+                    ( n)
+                    ( Y)
+                    ( g ∘e (f ∘e inv-equiv g)))}
               { y =
                 pair
                   ( mod-two-ℕ
                     ( length-list
                       ( map-list
                         ( map-equiv
-                          ( equiv-universes-2-Element-Decidable-Subtype (type-UU-Fin n Y) l l'))
+                          ( equiv-universes-2-Element-Decidable-Subtype
+                            ( type-UU-Fin n Y)
+                            ( l)
+                            ( l')))
                         ( list-conjugation h))))
                   ( unit-trunc-Prop
                     ( pair
                       ( map-list
                         ( map-equiv
-                          ( equiv-universes-2-Element-Decidable-Subtype (type-UU-Fin n Y) l l'))
+                          ( equiv-universes-2-Element-Decidable-Subtype
+                            ( type-UU-Fin n Y)
+                            ( l)
+                            ( l')))
                         ( list-conjugation h))
                       ( pair
                         ( refl)
@@ -246,7 +264,9 @@ module _
                             ( ap
                               ( λ h' → g ∘e (h' ∘e inv-equiv g))
                               ( eq-htpy-equiv
-                                { e = permutation-list-transpositions (list-trans h)}
+                                { e =
+                                  permutation-list-transpositions
+                                    ( list-trans h)}
                                 ( retr-permutation-list-transpositions-count
                                   ( type-UU-Fin n X)
                                   ( pair n h)
@@ -294,12 +314,12 @@ module _
     list-trans :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
                 ( Σ
                   ( type-UU-Fin n X)
-                  ( λ x → type-decidable-Prop (P x)))))
+                  ( type-Decidable-Prop ∘ P))))
     list-trans h =
       list-transpositions-permutation-count
         ( type-UU-Fin n X)
@@ -308,15 +328,19 @@ module _
     list-conjugation :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin n Y) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n Y) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
                 ( Σ
                   ( type-UU-Fin n Y)
-                  ( λ x → type-decidable-Prop (P x)))))
+                  ( type-Decidable-Prop ∘ P))))
     list-conjugation h =
       map-list
-        ( transposition-conjugation-equiv {l4 = l} (type-UU-Fin n X) (type-UU-Fin n Y) g)
+        ( transposition-conjugation-equiv
+          { l4 = l}
+          ( type-UU-Fin n X)
+          ( type-UU-Fin n Y)
+          ( g))
         ( list-trans h)
 ```
 

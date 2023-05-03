@@ -29,8 +29,8 @@ open import foundation.universe-levels
 An isomorphism between objects `x y : A` in a precategory `C` is a morphism
 `f : hom x y` for which there exists a morphism `g : hom y x` such that
 
-- `comp g f = id_x` and
-- `comp f g = id_y`.
+- `G ∘ F = id_x` and
+- `F ∘ G = id_y`.
 
 ## Definition
 
@@ -85,7 +85,7 @@ module _
               ( id-hom-Precat C)))
         ( ( inv (right-unit-law-comp-hom-Precat C g)) ∙
           ( ( ap (comp-hom-Precat C g) (inv p')) ∙
-            ( ( inv (assoc-comp-hom-Precat C g f g')) ∙
+            ( ( inv (associative-comp-hom-Precat C g f g')) ∙
               ( ( ap (comp-hom-Precat' C g') q) ∙
                 ( left-unit-law-comp-hom-Precat C g')))))
 
@@ -95,10 +95,10 @@ module _
     is-prop-is-iso-Precat f =
       is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
 
-  is-iso-precat-Prop :
+  is-iso-Precat-Prop :
     {x y : obj-Precat C} (f : type-hom-Precat C x y) → Prop l2
-  pr1 (is-iso-precat-Prop f) = is-iso-Precat f
-  pr2 (is-iso-precat-Prop f) = is-prop-is-iso-Precat f
+  pr1 (is-iso-Precat-Prop f) = is-iso-Precat f
+  pr2 (is-iso-Precat-Prop f) = is-prop-is-iso-Precat f
 ```
 
 ### The type of isomorphisms between two objects in a precategory
@@ -109,17 +109,17 @@ module _
   where
 
   iso-Precat : (x y : obj-Precat C) → UU l2
-  iso-Precat x y = type-subtype (is-iso-precat-Prop C {x} {y})
+  iso-Precat x y = type-subtype (is-iso-Precat-Prop C {x} {y})
 
   hom-iso-Precat :
     {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C x y
-  hom-iso-Precat f = inclusion-subtype (is-iso-precat-Prop C) f
+  hom-iso-Precat f = inclusion-subtype (is-iso-Precat-Prop C) f
 
   is-iso-hom-iso-Precat :
     {x y : obj-Precat C} (f : iso-Precat x y) →
     is-iso-Precat C (hom-iso-Precat f)
   is-iso-hom-iso-Precat f =
-    is-in-subtype-inclusion-subtype (is-iso-precat-Prop C) f
+    is-in-subtype-inclusion-subtype (is-iso-Precat-Prop C) f
 
   hom-inv-iso-Precat :
     {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C y x
@@ -143,7 +143,7 @@ module _
 ### The identity morphisms are isomorphisms
 
 For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
-from `x` to `x` since `comp id_x id_x = id_x` (it is its own inverse).
+from `x` to `x` since `id_x ∘ id_x = id_x` (it is its own inverse).
 
 ```agda
 module _
@@ -184,7 +184,7 @@ iso-eq-Precat C x .x refl = id-iso-Precat C
 Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 `f`. It is enough to show that `g = g'` since the equalities are propositions
 (since the hom-types are sets). But we have the following chain of equalities:
-`g = comp g id_y    = comp g (comp f g')    = comp (comp g f) g'    = comp id_x g'    = g'.`
+`g = g ∘ id_y = g ∘ (f ∘ g') = (g ∘ f) ∘ g' = id_x ∘ g' = g'.`
 
 ```agda
 module _
@@ -205,7 +205,7 @@ module _
   is-set-iso-Precat : (x y : obj-Precat C) → is-set (iso-Precat C x y)
   is-set-iso-Precat x y =
     is-set-type-subtype
-      ( is-iso-precat-Prop C)
+      ( is-iso-Precat-Prop C)
       ( is-set-type-hom-Precat C x y)
 
   iso-Precat-Set : (x y : obj-Precat C) → Set l2
@@ -232,9 +232,15 @@ module _
     ( precomp-hom-Precat C f z ∘ precomp-hom-inv-is-iso-Precat H z) ~ id
   issec-precomp-hom-inv-is-iso-Precat H z g =
     equational-reasoning
-      comp-hom-Precat C (comp-hom-Precat C g (hom-inv-is-iso-Precat C H)) f
-      ＝ comp-hom-Precat C g (comp-hom-Precat C (hom-inv-is-iso-Precat C H) f)
-        by assoc-comp-hom-Precat C g (hom-inv-is-iso-Precat C H) f
+      comp-hom-Precat
+        ( C)
+        ( comp-hom-Precat C g (hom-inv-is-iso-Precat C H))
+        ( f)
+      ＝ comp-hom-Precat
+          ( C)
+          ( g)
+          ( comp-hom-Precat C (hom-inv-is-iso-Precat C H) f)
+        by associative-comp-hom-Precat C g (hom-inv-is-iso-Precat C H) f
       ＝ comp-hom-Precat C g (id-hom-Precat C)
         by ap (comp-hom-Precat C g) (isretr-hom-inv-is-iso-Precat C H)
       ＝ g
@@ -245,9 +251,15 @@ module _
     (precomp-hom-inv-is-iso-Precat H z ∘ precomp-hom-Precat C f z) ~ id
   isretr-precomp-hom-inv-is-iso-Precat H z g =
     equational-reasoning
-      comp-hom-Precat C (comp-hom-Precat C g f) (hom-inv-is-iso-Precat C H)
-      ＝ comp-hom-Precat C g (comp-hom-Precat C f (hom-inv-is-iso-Precat C H))
-        by assoc-comp-hom-Precat C g f (hom-inv-is-iso-Precat C H)
+      comp-hom-Precat
+        ( C)
+        ( comp-hom-Precat C g f)
+        ( hom-inv-is-iso-Precat C H)
+      ＝ comp-hom-Precat
+          ( C)
+          ( g)
+          ( comp-hom-Precat C f (hom-inv-is-iso-Precat C H))
+        by associative-comp-hom-Precat C g f (hom-inv-is-iso-Precat C H)
       ＝ comp-hom-Precat C g (id-hom-Precat C)
         by ap (comp-hom-Precat C g) (issec-hom-inv-is-iso-Precat C H)
       ＝ g

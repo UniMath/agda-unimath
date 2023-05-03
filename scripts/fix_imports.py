@@ -34,7 +34,7 @@ def categorize_imports(block):
         if l.startswith('module') or l.startswith('{-# OPTIONS'):
             print(
                 'Error: module decl./pragmas can not be in the details import block\n\
-                Please put it in the first Agda block after the first header:\n\t' + str(fpath))
+                Please put it in the first Agda block after the first header:\n\t' + str(fpath), file=sys.stderr)
             sys.exit(1)
         elif 'open import' in l:
             if l.endswith('public'):
@@ -44,10 +44,11 @@ def categorize_imports(block):
         elif 'open' in l:
             openStatements.append(l)
         else:
-            print('Error: unknown statement in details import block:\n\t' + str(fpath))
+            print('Error: unknown statement in details import block:\n\t' +
+                  str(fpath), file=sys.stderr)
     if len(openStatements) > 0:
         print(
-            'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath))
+            'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath), file=sys.stderr)
 
     return (publicImports, nonPublicImports, openStatements)
 
@@ -57,10 +58,10 @@ def subdivide_namespaces_imports(imports):
     namespaces = collections.defaultdict(set)
     for statement in imports:
         namespace_start = statement.index(
-            "open import") + len("open import") + 1
+            'open import') + len('open import') + 1
         module = statement[namespace_start:]
         try:
-            namespace = module[:module.rindex(".")]
+            namespace = module[:module.rindex('.')]
             namespaces[namespace].add(module)
         except ValueError:
             namespaces[module].add(module)
@@ -70,14 +71,14 @@ def subdivide_namespaces_imports(imports):
         if k in namespaces[k]:
             namespaces[k] = {k}
 
-    for statement in namespaces["foundation"]:
-        submodule_start = statement.find(".")
+    for statement in namespaces['foundation']:
+        submodule_start = statement.find('.')
         if submodule_start != -1:
-            namespaces["foundation-core"].discard(
-                "foundation-core" + statement[submodule_start:])
+            namespaces['foundation-core'].discard(
+                'foundation-core' + statement[submodule_start:])
 
-    if "foundation" in namespaces["foundation"]:
-        namespaces.pop("foundation-core")
+    if 'foundation' in namespaces['foundation']:
+        namespaces.pop('foundation-core')
 
     # Remove any namespaces that ended up being empty
     return dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
@@ -87,10 +88,10 @@ def normalize_imports(imports):
     # Subdivide imports into namespaces
     namespaces = subdivide_namespaces_imports(imports)
     # Join together with the appropriate line separations
-    blocks = ("\n".join(map(lambda module: "open import " + module, sorted(namespace_imports)))
+    blocks = ('\n'.join(map(lambda module: 'open import ' + module, sorted(namespace_imports)))
               for namespace, namespace_imports in sorted(namespaces.items()))
 
-    return "\n\n".join(blocks)
+    return '\n\n'.join(blocks)
 
 
 def get_imports(contents):
@@ -116,7 +117,7 @@ def prettify_imports_block(block):
     return prettify_imports_to_block(public, nonpublic, openstatements)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     status = 0
 
@@ -130,7 +131,7 @@ if __name__ == "__main__":
             agdaBlockStart = utils.find_index(contents, '```agda')
             if len(agdaBlockStart) > 1:
                 print(
-                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath))
+                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath), file=sys.stderr)
                 status |= 1  # Flag
             continue
 

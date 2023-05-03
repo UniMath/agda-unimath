@@ -90,11 +90,13 @@ module _
   {l : Level}
   where
 
-  map-hom-symmetric-group-loop-group-Set : (X Y : Set l) →
+  map-hom-symmetric-group-loop-group-Set :
+    (X Y : Set l) →
     Id (type-Set X) (type-Set Y) → (type-Set Y) ≃ (type-Set X)
   map-hom-symmetric-group-loop-group-Set X Y p = equiv-eq (inv p)
 
-  map-hom-inv-symmetric-group-loop-group-Set : (X Y : Set l) →
+  map-hom-inv-symmetric-group-loop-group-Set :
+    (X Y : Set l) →
     (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
   map-hom-inv-symmetric-group-loop-group-Set X Y f =
     inv (eq-equiv (type-Set X) (type-Set Y) f)
@@ -119,14 +121,16 @@ module _
     map-hom-symmetric-group-loop-group-Set X X
   pr2 hom-symmetric-group-loop-group-Set p q =
     ( ap equiv-eq (distributive-inv-concat p q)) ∙
-      ( inv (comp-equiv-eq (inv q) (inv p)))
+      ( inv (compute-equiv-eq (inv q) (inv p)))
 
   hom-inv-symmetric-group-loop-group-Set :
     type-hom-Group (symmetric-Group X) (loop-group-Set X)
   pr1 hom-inv-symmetric-group-loop-group-Set =
     map-hom-inv-symmetric-group-loop-group-Set X X
   pr2 hom-inv-symmetric-group-loop-group-Set f g =
-    ( ap inv (inv (comp-eq-equiv (type-Set X) (type-Set X) (type-Set X) g f))) ∙
+    ( ap
+      ( inv)
+      ( inv (compute-eq-equiv (type-Set X) (type-Set X) (type-Set X) g f))) ∙
       ( distributive-inv-concat
         ( eq-equiv (type-Set X) (type-Set X) g)
         ( eq-equiv (type-Set X) (type-Set X) f))
@@ -145,7 +149,9 @@ module _
       ( eq-htpy
         ( λ f →
           ( ap equiv-eq (inv-inv (eq-equiv (type-Set X) (type-Set X) f))) ∙
-            ( ap (λ e → map-equiv e f) (right-inverse-law-equiv equiv-univalence))))
+            ( ap
+              ( λ e → map-equiv e f)
+              ( right-inverse-law-equiv equiv-univalence))))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (symmetric-Group X))
@@ -165,7 +171,11 @@ module _
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
-          ( ap inv (ap (λ e → map-equiv e (inv p)) (left-inverse-law-equiv equiv-univalence))) ∙
+          ( ap
+            ( inv)
+            ( ap
+              ( λ e → map-equiv e (inv p))
+              ( left-inverse-law-equiv equiv-univalence))) ∙
             ( inv-inv p)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
@@ -176,9 +186,12 @@ module _
   iso-symmetric-group-loop-group-Set :
     type-iso-Group (loop-group-Set X) (symmetric-Group X)
   pr1 iso-symmetric-group-loop-group-Set = hom-symmetric-group-loop-group-Set
-  pr1 (pr2 iso-symmetric-group-loop-group-Set) = hom-inv-symmetric-group-loop-group-Set
-  pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-sec-hom-inv-symmetric-group-loop-group-Set
-  pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-retr-hom-inv-symmetric-group-loop-group-Set
+  pr1 (pr2 iso-symmetric-group-loop-group-Set) =
+    hom-inv-symmetric-group-loop-group-Set
+  pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
+    is-sec-hom-inv-symmetric-group-loop-group-Set
+  pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
+    is-retr-hom-inv-symmetric-group-loop-group-Set
 ```
 
 ### The abstacted automorphism group and the loop group of a set are isomorphic
@@ -206,7 +219,7 @@ module _
         ( λ w → eq-pair-Σ (p ∙ q) w)
         ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set X) _ _)))) ∙
         ( inv
-          ( comp-eq-pair-Σ
+          ( compute-eq-pair-Σ
             ( pr2 X)
             ( pr2 X)
             ( pr2 X)
@@ -222,7 +235,7 @@ module _
             ( w)))
         ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
         ( inv
-          ( comp-eq-pair-Σ
+          ( compute-eq-pair-Σ
             ( unit-trunc-Prop refl)
             ( unit-trunc-Prop refl)
             ( unit-trunc-Prop refl)
@@ -241,8 +254,8 @@ module _
   pr2 hom-inv-abstract-automorphism-group-loop-group-Set p q =
     ( ap
       ( λ r → pr1 (pair-eq-Σ r))
-      ( inv (comp-pair-eq-Σ p q))) ∙
-      ( inv (comp-pair-eq-Σ (pr1 (pair-eq-Σ p)) (pr1 (pair-eq-Σ q))))
+      ( inv (compute-pair-eq-Σ p q))) ∙
+      ( inv (compute-pair-eq-Σ (pr1 (pair-eq-Σ p)) (pr1 (pair-eq-Σ q))))
 
   is-sec-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id
@@ -323,10 +336,14 @@ module _
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
-  pr1 iso-abstract-automorphism-group-loop-group-Set = hom-abstract-automorphism-group-loop-group-Set
-  pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) = hom-inv-abstract-automorphism-group-loop-group-Set
-  pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
-  pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
+  pr1 iso-abstract-automorphism-group-loop-group-Set =
+    hom-abstract-automorphism-group-loop-group-Set
+  pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) =
+    hom-inv-abstract-automorphism-group-loop-group-Set
+  pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) =
+    is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
+  pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) =
+    is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
 ```
 
 ### The loop groups of two equivalent sets are isomorphic

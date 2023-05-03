@@ -38,8 +38,8 @@ The kernel of a homomorphism `f` of algebras is the congruence relation given by
 ```agda
 module _
   { l1 : Level} ( Sg : signature l1)
-  { l2 : Level } ( Th : Theory Sg l2)
-  { l3 l4 : Level }
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 l4 : Level}
   ( Alg1 : Algebra Sg Th l3)
   ( Alg2 : Algebra Sg Th l4)
   ( F : type-hom-Algebra Sg Th Alg1 Alg2)
@@ -67,13 +67,15 @@ module _
   pr2 kernel-hom-Algebra op v v' p =
     equational-reasoning
       f (is-model-set-Algebra Sg Th Alg1 op v)
-        ＝ is-model-set-Algebra Sg Th Alg2 op (map-vec f v)
-          by preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v
-        ＝ is-model-set-Algebra Sg Th Alg2 op (map-vec f v')
-          by ap ( is-model-set-Algebra Sg Th Alg2 op)
-                ( map-hom-Algebra-lemma (pr2 Sg op) v v' p)
-        ＝ f (is-model-set-Algebra Sg Th Alg1 op v')
-          by inv (preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v')
+      ＝ is-model-set-Algebra Sg Th Alg2 op (map-vec f v)
+        by preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v
+      ＝ is-model-set-Algebra Sg Th Alg2 op (map-vec f v')
+        by
+          ap
+            ( is-model-set-Algebra Sg Th Alg2 op)
+            ( map-hom-Algebra-lemma (pr2 Sg op) v v' p)
+      ＝ f (is-model-set-Algebra Sg Th Alg1 op v')
+        by inv (preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v')
     where
     f = map-hom-Algebra Sg Th Alg1 Alg2 F
     map-hom-Algebra-lemma :

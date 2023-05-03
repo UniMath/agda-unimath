@@ -34,10 +34,10 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2) (A : obj-Cat C)
   where
 
-  is-sieve-cat-Prop :
+  is-sieve-Cat-Prop :
     {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
     Prop (l1 ⊔ l2 ⊔ l3)
-  is-sieve-cat-Prop S =
+  is-sieve-Cat-Prop S =
     Π-Prop
       ( obj-Cat C)
       ( λ X →
@@ -54,15 +54,16 @@ module _
                       ( type-hom-Cat C Z Y)
                       ( λ g →
                         S Z X
-                          (comp-hom-Cat C (inclusion-subtype (S Y X) f) g))))))
+                          ( comp-hom-Cat
+                              C (inclusion-subtype (S Y X) f) g))))))
 
   is-sieve-Cat :
     {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
     UU (l1 ⊔ l2 ⊔ l3)
-  is-sieve-Cat S = type-Prop (is-sieve-cat-Prop S)
+  is-sieve-Cat S = type-Prop (is-sieve-Cat-Prop S)
 
   is-prop-is-sieve-Cat :
     {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
     is-prop (is-sieve-Cat S)
-  is-prop-is-sieve-Cat S = is-prop-type-Prop (is-sieve-cat-Prop S)
+  is-prop-is-sieve-Cat S = is-prop-type-Prop (is-sieve-Cat-Prop S)
 ```

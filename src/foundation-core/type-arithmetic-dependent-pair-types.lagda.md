@@ -50,7 +50,7 @@ module _
     ( map-left-unit-law-Σ-is-contr ∘ map-inv-left-unit-law-Σ-is-contr) ~ id
   issec-map-inv-left-unit-law-Σ-is-contr b =
     ap ( λ (f : B a → B a) → f b)
-       ( comp-singleton-is-contr a C (λ x → B x → B a) id)
+       ( compute-ind-singleton-is-contr a C (λ x → B x → B a) id)
 
   isretr-map-inv-left-unit-law-Σ-is-contr :
     ( map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr) ~ id
@@ -66,7 +66,7 @@ module _
         ( λ y → ap
           ( map-inv-left-unit-law-Σ-is-contr)
           ( ap ( λ f → f y)
-               ( comp-singleton-is-contr a C (λ x → B x → B a) id))))
+               ( compute-ind-singleton-is-contr a C (λ x → B x → B a) id))))
 
   is-equiv-map-left-unit-law-Σ-is-contr :
     is-equiv map-left-unit-law-Σ-is-contr
@@ -136,41 +136,42 @@ module _
   {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : Σ A B → UU l3)
   where
 
-  map-assoc-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
-  pr1 (map-assoc-Σ ((x , y) , z)) = x
-  pr1 (pr2 (map-assoc-Σ ((x , y) , z))) = y
-  pr2 (pr2 (map-assoc-Σ ((x , y) , z))) = z
+  map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
+  pr1 (map-associative-Σ ((x , y) , z)) = x
+  pr1 (pr2 (map-associative-Σ ((x , y) , z))) = y
+  pr2 (pr2 (map-associative-Σ ((x , y) , z))) = z
 
-  map-inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) → Σ (Σ A B) C
-  pr1 (pr1 (map-inv-assoc-Σ (x , y , z))) = x
-  pr2 (pr1 (map-inv-assoc-Σ (x , y , z))) = y
-  pr2 (map-inv-assoc-Σ (x , y , z)) = z
+  map-inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) → Σ (Σ A B) C
+  pr1 (pr1 (map-inv-associative-Σ (x , y , z))) = x
+  pr2 (pr1 (map-inv-associative-Σ (x , y , z))) = y
+  pr2 (map-inv-associative-Σ (x , y , z)) = z
 
-  isretr-map-inv-assoc-Σ : (map-inv-assoc-Σ ∘ map-assoc-Σ) ~ id
-  isretr-map-inv-assoc-Σ (pair (pair x y) z) = refl
+  isretr-map-inv-associative-Σ :
+    (map-inv-associative-Σ ∘ map-associative-Σ) ~ id
+  isretr-map-inv-associative-Σ (pair (pair x y) z) = refl
 
-  issec-map-inv-assoc-Σ : (map-assoc-Σ ∘ map-inv-assoc-Σ) ~ id
-  issec-map-inv-assoc-Σ (pair x (pair y z)) = refl
+  issec-map-inv-associative-Σ : (map-associative-Σ ∘ map-inv-associative-Σ) ~ id
+  issec-map-inv-associative-Σ (pair x (pair y z)) = refl
 
   abstract
-    is-equiv-map-assoc-Σ : is-equiv map-assoc-Σ
-    is-equiv-map-assoc-Σ =
+    is-equiv-map-associative-Σ : is-equiv map-associative-Σ
+    is-equiv-map-associative-Σ =
       is-equiv-has-inverse
-        map-inv-assoc-Σ
-        issec-map-inv-assoc-Σ
-        isretr-map-inv-assoc-Σ
+        map-inv-associative-Σ
+        issec-map-inv-associative-Σ
+        isretr-map-inv-associative-Σ
 
-  assoc-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
-  pr1 assoc-Σ = map-assoc-Σ
-  pr2 assoc-Σ = is-equiv-map-assoc-Σ
+  associative-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
+  pr1 associative-Σ = map-associative-Σ
+  pr2 associative-Σ = is-equiv-map-associative-Σ
 
-  inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
-  pr1 inv-assoc-Σ = map-inv-assoc-Σ
-  pr2 inv-assoc-Σ =
+  inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
+  pr1 inv-associative-Σ = map-inv-associative-Σ
+  pr2 inv-associative-Σ =
     is-equiv-has-inverse
-      map-assoc-Σ
-      isretr-map-inv-assoc-Σ
-      issec-map-inv-assoc-Σ
+      map-associative-Σ
+      isretr-map-inv-associative-Σ
+      issec-map-inv-associative-Σ
 ```
 
 ### Associativity, second formulation
@@ -180,41 +181,46 @@ module _
   {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : (x : A) → B x → UU l3)
   where
 
-  map-assoc-Σ' : Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) → Σ A (λ x → Σ (B x) (C x))
-  pr1 (map-assoc-Σ' ((x , y) , z)) = x
-  pr1 (pr2 (map-assoc-Σ' ((x , y) , z))) = y
-  pr2 (pr2 (map-assoc-Σ' ((x , y) , z))) = z
+  map-associative-Σ' :
+    Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) → Σ A (λ x → Σ (B x) (C x))
+  pr1 (map-associative-Σ' ((x , y) , z)) = x
+  pr1 (pr2 (map-associative-Σ' ((x , y) , z))) = y
+  pr2 (pr2 (map-associative-Σ' ((x , y) , z))) = z
 
-  map-inv-assoc-Σ' :
+  map-inv-associative-Σ' :
     Σ A (λ x → Σ (B x) (C x)) → Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
-  pr1 (pr1 (map-inv-assoc-Σ' (x , y , z))) = x
-  pr2 (pr1 (map-inv-assoc-Σ' (x , y , z))) = y
-  pr2 (map-inv-assoc-Σ' (x , y , z)) = z
+  pr1 (pr1 (map-inv-associative-Σ' (x , y , z))) = x
+  pr2 (pr1 (map-inv-associative-Σ' (x , y , z))) = y
+  pr2 (map-inv-associative-Σ' (x , y , z)) = z
 
-  issec-map-inv-assoc-Σ' : (map-assoc-Σ' ∘ map-inv-assoc-Σ') ~ id
-  issec-map-inv-assoc-Σ' (pair x (pair y z)) = refl
+  issec-map-inv-associative-Σ' :
+    (map-associative-Σ' ∘ map-inv-associative-Σ') ~ id
+  issec-map-inv-associative-Σ' (pair x (pair y z)) = refl
 
-  isretr-map-inv-assoc-Σ' : ( map-inv-assoc-Σ' ∘ map-assoc-Σ') ~ id
-  isretr-map-inv-assoc-Σ' (pair (pair x y) z) = refl
+  isretr-map-inv-associative-Σ' :
+    ( map-inv-associative-Σ' ∘ map-associative-Σ') ~ id
+  isretr-map-inv-associative-Σ' (pair (pair x y) z) = refl
 
-  is-equiv-map-assoc-Σ' : is-equiv map-assoc-Σ'
-  is-equiv-map-assoc-Σ' =
+  is-equiv-map-associative-Σ' : is-equiv map-associative-Σ'
+  is-equiv-map-associative-Σ' =
     is-equiv-has-inverse
-      map-inv-assoc-Σ'
-      issec-map-inv-assoc-Σ'
-      isretr-map-inv-assoc-Σ'
+      map-inv-associative-Σ'
+      issec-map-inv-associative-Σ'
+      isretr-map-inv-associative-Σ'
 
-  assoc-Σ' : Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) ≃ Σ A (λ x → Σ (B x) (C x))
-  pr1 assoc-Σ' = map-assoc-Σ'
-  pr2 assoc-Σ' = is-equiv-map-assoc-Σ'
+  associative-Σ' :
+    Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) ≃ Σ A (λ x → Σ (B x) (C x))
+  pr1 associative-Σ' = map-associative-Σ'
+  pr2 associative-Σ' = is-equiv-map-associative-Σ'
 
-  inv-assoc-Σ' : Σ A (λ x → Σ (B x) (C x)) ≃ Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
-  pr1 inv-assoc-Σ' = map-inv-assoc-Σ'
-  pr2 inv-assoc-Σ' =
+  inv-associative-Σ' :
+    Σ A (λ x → Σ (B x) (C x)) ≃ Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
+  pr1 inv-associative-Σ' = map-inv-associative-Σ'
+  pr2 inv-associative-Σ' =
     is-equiv-has-inverse
-      map-assoc-Σ'
-      isretr-map-inv-assoc-Σ'
-      issec-map-inv-assoc-Σ'
+      map-associative-Σ'
+      isretr-map-inv-associative-Σ'
+      issec-map-inv-associative-Σ'
 ```
 
 ### The interchange law
@@ -347,9 +353,9 @@ left-distributive-prod-Σ =
 
 right-distributive-prod-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
-  ((Σ A B) × C) ≃ Σ A (λ a → B a × C )
+  ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
 right-distributive-prod-Σ {A} =
-  assoc-Σ _ _  _
+  associative-Σ _ _ _
 ```
 
 ## See also

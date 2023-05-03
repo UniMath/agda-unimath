@@ -8,19 +8,20 @@ module foundation.product-decompositions where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.propositions
+open import foundation-core.type-arithmetic-cartesian-product-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -98,7 +99,7 @@ module _
 
 ```agda
 module _
-  {l1 l2} (P : subuniverse l1 l2) (X : type-subuniverse P)
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
   ternary-product-Decomposition : UU (lsuc l1 ⊔ l2)
@@ -111,7 +112,7 @@ module _
              inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
-    (d : ternary-product-Decomposition )
+    (d : ternary-product-Decomposition)
     where
 
     types-ternary-product-Decomposition :
@@ -150,7 +151,7 @@ module _
   equiv-commutative-binary-product-Decomposition :
     binary-product-Decomposition P X ≃ binary-product-Decomposition P X
   equiv-commutative-binary-product-Decomposition =
-    ( ( assoc-Σ
+    ( ( associative-Σ
         ( type-subuniverse P)
         ( λ _ → type-subuniverse P)
         ( _)) ∘e
@@ -161,7 +162,7 @@ module _
             equiv-postcomp-equiv
               ( commutative-prod)
               (inclusion-subuniverse P X))) ∘e
-        ( ( inv-assoc-Σ
+        ( ( inv-associative-Σ
             ( type-subuniverse P)
             ( λ _ → type-subuniverse P)
             ( _)))))
@@ -172,9 +173,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
-  (C1 :
-    (A : type-subuniverse P) → (B : type-subuniverse P) →
-    is-in-subuniverse P (inclusion-subuniverse P A × inclusion-subuniverse P B))
+  (C1 : is-closed-under-products-subuniverse P)
   where
 
   private
@@ -191,8 +190,9 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x))))
-    map-reassociate-left-iterated-product-Decomposition ((A , B , e) , C , D , f) =
-      ( (B , C , D) , (A , f) , e )
+    map-reassociate-left-iterated-product-Decomposition
+      ( (A , B , e) , C , D , f) =
+      ( (B , C , D) , (A , f) , e)
 
     map-inv-reassociate-left-iterated-product-Decomposition :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
@@ -207,8 +207,9 @@ module _
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x)))) →
       left-iterated-binary-product-Decomposition P X
-    map-inv-reassociate-left-iterated-product-Decomposition ( (B , C , D) , (A , f) , e ) =
-      ((A , B , e) , C , D , f)
+    map-inv-reassociate-left-iterated-product-Decomposition
+      ( (B , C , D) , (A , f) , e) =
+      ( (A , B , e) , C , D , f)
 
     equiv-reassociate-left-iterated-product-Decomposition :
       left-iterated-binary-product-Decomposition P X ≃
@@ -245,10 +246,10 @@ module _
                   ( P)
                   ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                       inclusion-subuniverse P (pr2 (pr2 x))) ,
-                    C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
+                    C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))))
                 ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                       inclusion-subuniverse P (pr2 (pr2 x))) ,
-                    C1 (pr1 (pr2 x)) (pr2 (pr2 x))) ,
+                    C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x)))) ,
                   id-equiv))))) ∘e
       ( ( equiv-reassociate-left-iterated-product-Decomposition)))
 
@@ -266,8 +267,9 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B))))
-    map-reassociate-right-iterated-product-Decomposition ((A , B , e) , C , D , f) =
-      ( (A , C , D) , (B , f) , e )
+    map-reassociate-right-iterated-product-Decomposition
+      ( (A , B , e) , C , D , f) =
+      ( (A , C , D) , (B , f) , e)
 
     map-inv-reassociate-right-iterated-product-Decomposition :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
@@ -282,8 +284,9 @@ module _
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B)))) →
       right-iterated-binary-product-Decomposition P X
-    map-inv-reassociate-right-iterated-product-Decomposition ( (A , C , D) , (B , f) , e ) =
-      ((A , B , e) , C , D , f)
+    map-inv-reassociate-right-iterated-product-Decomposition
+      ( (A , C , D) , (B , f) , e) =
+      ( (A , B , e) , C , D , f)
 
     equiv-reassociate-right-iterated-product-Decomposition :
       right-iterated-binary-product-Decomposition P X ≃
@@ -317,10 +320,10 @@ module _
               ( P)
               ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
-                ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))))
+                ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))))
             ( ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
-                ( C1 (pr1 (pr2 x)) (pr2 (pr2 x)))) ,
+                ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))) ,
               id-equiv))) ∘e
       ( ( equiv-reassociate-right-iterated-product-Decomposition)))
 ```
@@ -364,8 +367,8 @@ module _
                            ( eq-is-prop is-property-is-contr)))
                      ( ( raise-unit l1 , C1) ,
                        is-contr-raise-unit)) ∘e
-                ( ( inv-assoc-Σ _ _ _) ∘e
+                ( ( inv-associative-Σ _ _ _) ∘e
                   ( ( equiv-tot (λ _ → commutative-prod)) ∘e
-                    ( ( assoc-Σ _ _ _)))))))) ∘e
-        ( ( assoc-Σ _ _ _)))
+                    ( ( associative-Σ _ _ _)))))))) ∘e
+        ( ( associative-Σ _ _ _)))
 ```

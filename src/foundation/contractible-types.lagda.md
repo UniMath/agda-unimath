@@ -87,22 +87,52 @@ abstract
   is-contr-Contr l = pair (center-Contr l) contraction-Contr
 ```
 
+### The predicate that a subuniverse contains any contractible types
+
+```agda
+contains-contractible-types-subuniverse :
+  {l1 l2 : Level} → subuniverse l1 l2 → UU (lsuc l1 ⊔ l2)
+contains-contractible-types-subuniverse {l1} P =
+  (X : UU l1) → is-contr X → is-in-subuniverse P X
+```
+
+### The predicate that a subuniverse is closed under the `is-contr` predicate
+
+We state a general form involving two universes, and a more traditional form
+using a single universe
+
+```agda
+is-closed-under-is-contr-subuniverses :
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
+  UU (lsuc l1 ⊔ l2 ⊔ l3)
+is-closed-under-is-contr-subuniverses P Q =
+  (X : type-subuniverse P) →
+  is-in-subuniverse Q (is-contr (inclusion-subuniverse P X))
+
+is-closed-under-is-contr-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
+is-closed-under-is-contr-subuniverse P =
+  is-closed-under-is-contr-subuniverses P P
+```
+
 ## Properties
 
 ### If two types are equivalent then so are the propositions that they are contractible
 
 ```agda
-equiv-is-contr-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  → A ≃ B → is-contr A ≃ is-contr B
+equiv-is-contr-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ≃ B → is-contr A ≃ is-contr B
 equiv-is-contr-equiv {A = A} {B = B} e =
   equiv-prop
     ( is-property-is-contr)
     ( is-property-is-contr)
-    ( is-contr-retract-of A (pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
-    ( is-contr-retract-of B (pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
+    ( is-contr-retract-of A
+      ( pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
+    ( is-contr-retract-of B
+      ( pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
 ```
 
-### Contractible types are k-truncated for any k.
+### Contractible types are `k`-truncated for any `k`
 
 ```agda
 module _
@@ -119,7 +149,9 @@ module _
 ### Contractibility of Σ-types where the dependent type is a proposition
 
 ```agda
-module _ {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) where
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
+  where
 
   is-contr-Σ-is-prop :
     ((x : A) → is-prop (B x)) → ((x : A) → B x → a ＝ x) → is-contr (Σ A B)
@@ -136,12 +168,6 @@ module _ {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) where
 module _
   {l1 : Level} {A : UU l1}
   where
-
-  ev-point : {l2 : Level} (a : A) {P : A → UU l2} → ((x : A) → P x) → P a
-  ev-point a f = f a
-
-  ev-point' : {l2 : Level} (a : A) {X : UU l2} → (A → X) → X
-  ev-point' a f = f a
 
   dependent-universal-property-contr : (l : Level) (a : A) → UU (l1 ⊔ lsuc l)
   dependent-universal-property-contr l a =
@@ -167,7 +193,7 @@ module _
 
   abstract
     is-contr-is-equiv-ev-point :
-      (a : A) → is-equiv (ev-point' a {X = A}) → is-contr A
+      (a : A) → is-equiv (ev-point' a {A}) → is-contr A
     pr1 (is-contr-is-equiv-ev-point a H) = a
     pr2 (is-contr-is-equiv-ev-point a H) =
       htpy-eq
@@ -201,12 +227,12 @@ module _
     dependent-universal-property-contr-is-contr a H {l} P =
       is-equiv-has-inverse
         ( ind-singleton-is-contr a H P)
-        ( comp-singleton-is-contr a H P)
+        ( compute-ind-singleton-is-contr a H P)
         ( λ f →
           eq-htpy
             ( ind-singleton-is-contr a H
               ( λ x → ind-singleton-is-contr a H P (f a) x ＝ f x)
-              ( comp-singleton-is-contr a H P (f a))))
+              ( compute-ind-singleton-is-contr a H P (f a))))
 
   equiv-dependent-universal-property-contr :
     (a : A) → is-contr A → {l : Level} (B : A → UU l) → ((x : A) → B x) ≃ B a

@@ -27,8 +27,14 @@ and `Q` hold.
 ```agda
 conj-Prop = prod-Prop
 
-type-conj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
+_∧_ = conj-Prop
+```
+
+**Note**: The symbol used for the conjunction `_∧_` is the
+[logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
+
+```agda
+type-conj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-conj-Prop P Q = type-Prop (conj-Prop P Q)
 
 abstract
@@ -37,15 +43,17 @@ abstract
     is-prop (type-conj-Prop P Q)
   is-prop-type-conj-Prop P Q = is-prop-type-Prop (conj-Prop P Q)
 
-conj-decidable-Prop :
-  {l1 l2 : Level} → decidable-Prop l1 → decidable-Prop l2 →
-  decidable-Prop (l1 ⊔ l2)
-pr1 (conj-decidable-Prop P Q) =
-  type-conj-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
-pr1 (pr2 (conj-decidable-Prop P Q)) =
-  is-prop-type-conj-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
-pr2 (pr2 (conj-decidable-Prop P Q)) =
-  is-decidable-prod (is-decidable-type-decidable-Prop P) (is-decidable-type-decidable-Prop Q)
+conj-Decidable-Prop :
+  {l1 l2 : Level} → Decidable-Prop l1 → Decidable-Prop l2 →
+  Decidable-Prop (l1 ⊔ l2)
+pr1 (conj-Decidable-Prop P Q) =
+  type-conj-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+pr1 (pr2 (conj-Decidable-Prop P Q)) =
+  is-prop-type-conj-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+pr2 (pr2 (conj-Decidable-Prop P Q)) =
+  is-decidable-prod
+    ( is-decidable-type-Decidable-Prop P)
+    ( is-decidable-type-Decidable-Prop Q)
 ```
 
 ## Properties

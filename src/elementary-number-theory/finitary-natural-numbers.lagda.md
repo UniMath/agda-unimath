@@ -1,4 +1,4 @@
-# The natural numbers base k
+# The natural numbers base `k`
 
 ```agda
 module elementary-number-theory.finitary-natural-numbers where
@@ -20,7 +20,6 @@ open import foundation.empty-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -28,15 +27,19 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-# The finitary natural numbers
+## Definition
+
+### The finitary natural numbers
 
 ```agda
 data based-ℕ : ℕ → UU lzero where
   constant-based-ℕ : (k : ℕ) → Fin k → based-ℕ k
   unary-op-based-ℕ : (k : ℕ) → Fin k → based-ℕ k → based-ℕ k
+```
 
-{- Converting a k-ary natural number to a natural number -}
+### Converting a `k`-ary natural number to a natural number
 
+```agda
 constant-ℕ : (k : ℕ) → Fin k → ℕ
 constant-ℕ k x = nat-Fin k x
 
@@ -48,18 +51,19 @@ convert-based-ℕ k (constant-based-ℕ .k x) =
   constant-ℕ k x
 convert-based-ℕ k (unary-op-based-ℕ .k x n) =
   unary-op-ℕ k x (convert-based-ℕ k n)
+```
 
--- Exercise 7.10 (a)
+### The type of `0`-ary natural numbers is empty
 
-{- The type of 0-ary natural numbers is empty -}
+```agda
 is-empty-based-zero-ℕ : is-empty (based-ℕ zero-ℕ)
 is-empty-based-zero-ℕ (constant-based-ℕ .zero-ℕ ())
 is-empty-based-zero-ℕ (unary-op-based-ℕ .zero-ℕ () n)
+```
 
--- Exercise 7.10 (b)
+### The function `convert-based-ℕ` is injective
 
-{- We show that the function convert-based-ℕ is injective -}
-
+```agda
 cong-unary-op-ℕ :
   (k : ℕ) (x : Fin k) (n : ℕ) →
   cong-ℕ k (unary-op-ℕ k x n) (nat-Fin k x)
@@ -74,10 +78,11 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
       ( nat-Fin (succ-ℕ k) x)
       ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (succ-ℕ k))))
     ( left-unit-law-add-ℕ (nat-Fin (succ-ℕ k) x))
+```
 
-{- Any natural number of the form constant-ℕ k x is strictly less than any
-   natural number of the form unary-op-ℕ k y m -}
+### Any natural number of the form `constant-ℕ k x` is strictly less than any natural number of the form `unary-op-ℕ k y m`
 
+```agda
 le-constant-unary-op-ℕ :
   (k : ℕ) (x y : Fin k) (m : ℕ) → le-ℕ (constant-ℕ k x) (unary-op-ℕ k y m)
 le-constant-unary-op-ℕ k x y m =
@@ -117,7 +122,6 @@ is-injective-convert-based-ℕ
   ( succ-ℕ k)
   { unary-op-based-ℕ .(succ-ℕ k) x n}
   { unary-op-based-ℕ .(succ-ℕ k) y m} p with
-  -- the following term has type Id x y
   is-injective-nat-Fin (succ-ℕ k) {x} {y}
     ( eq-cong-le-ℕ
       ( succ-ℕ k)
@@ -144,27 +148,33 @@ is-injective-convert-based-ℕ
        ( is-injective-succ-ℕ
          ( is-injective-mul-succ-ℕ k
            ( is-injective-add-ℕ' (nat-Fin (succ-ℕ k) x) p))))
+```
 
--- Exercise 7.10 (c)
+### The zero-element of the `k+1`-ary natural numbers
 
-{- We show that the map convert-based-ℕ has an inverse. -}
-
--- The zero-element of the (k+1)-ary natural numbers
+```agda
 zero-based-ℕ : (k : ℕ) → based-ℕ (succ-ℕ k)
 zero-based-ℕ k = constant-based-ℕ (succ-ℕ k) (zero-Fin k)
+```
 
--- The successor function on the k-ary natural numbers
+### The successor function on the `k`-ary natural numbers
+
+```agda
 succ-based-ℕ : (k : ℕ) → based-ℕ k → based-ℕ k
 succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl x)) =
   constant-based-ℕ (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))
 succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
-  unary-op-based-ℕ (succ-ℕ k) (zero-Fin k) (constant-based-ℕ (succ-ℕ k) (zero-Fin k))
+  unary-op-based-ℕ
+    (succ-ℕ k) (zero-Fin k) (constant-based-ℕ (succ-ℕ k) (zero-Fin k))
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
   unary-op-based-ℕ (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) n
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr x) n) =
   unary-op-based-ℕ (succ-ℕ k) (zero-Fin k) (succ-based-ℕ (succ-ℕ k) n)
+```
 
--- The inverse map of convert-based-ℕ
+### The inverse map of `convert-based-ℕ`
+
+```agda
 inv-convert-based-ℕ : (k : ℕ) → ℕ → based-ℕ (succ-ℕ k)
 inv-convert-based-ℕ k zero-ℕ =
   zero-based-ℕ k

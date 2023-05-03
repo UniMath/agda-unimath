@@ -19,7 +19,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -173,11 +173,6 @@ abstract
       ( issec-inv-gap-cone-Id x y)
       ( isretr-inv-gap-cone-Id x y)
 
-{- One way to solve this exercise is to show that Id (pr1 t) (pr2 t) is a
-   pullback for every t : A × A. This allows one to use path induction to
-   show that the inverse of the gap map is a section.
--}
-
 cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →
   cone (const unit (A × A) t) (diagonal A) (pr1 t ＝ pr2 t)
@@ -268,7 +263,10 @@ module _
       ( Hp z)
       ( Hq z)
       ( ( inv
-          ( assoc (ap f (Hp z)) ((Hf (p' z)) ∙ (H' z)) (inv (Hg (q' z))))) ∙
+          ( assoc
+            ( ap f (Hp z))
+            ( (Hf (p' z)) ∙ (H' z))
+            ( inv (Hg (q' z))))) ∙
         ( inv
           ( con-inv
             ( (H z) ∙ (ap g (Hq z)))
@@ -335,7 +333,8 @@ htpy-parallel-cone-refl-htpy-htpy-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) →
   (c c' : cone f g C) →
-  htpy-cone f g c c' → htpy-parallel-cone (refl-htpy {f = f}) (refl-htpy {f = g}) c c'
+  htpy-cone f g c c' →
+  htpy-parallel-cone (refl-htpy {f = f}) (refl-htpy {f = g}) c c'
 htpy-parallel-cone-refl-htpy-htpy-cone f g
   (pair p (pair q H)) (pair p' (pair q' H')) =
   tot
@@ -372,7 +371,8 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) →
     (c : cone f g C) →
-    is-contr (Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
+    is-contr
+      ( Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
   is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy {A = A} {B} {X} {C}
     f g (pair p (pair q H)) =
     let c = triple p q H in
@@ -401,7 +401,8 @@ abstract
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
     is-contr (Σ (cone f' g' C) (htpy-parallel-cone Hf Hg c))
-  is-contr-total-htpy-parallel-cone {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
+  is-contr-total-htpy-parallel-cone
+    {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
     ind-htpy
       { A = A}
       { B = λ t → X}
@@ -414,7 +415,7 @@ abstract
 tr-tr-refl-htpy-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) →
-  let tr-c    = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+  let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
       tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy {f = g})) tr-c
   in
   tr-tr-c ＝ c
@@ -431,7 +432,7 @@ tr-tr-refl-htpy-cone {C = C} f g c =
 htpy-eq-square-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c c' : cone f g C) →
-  let tr-c    = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+  let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
       tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy {f = g})) tr-c
   in
   tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
@@ -460,7 +461,7 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f g' C) →
-    let tr-c    = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+    let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
         tr-tr-c = tr (λ y → cone f y C) (eq-htpy Hg) tr-c
     in
     tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) Hg c c'
@@ -484,7 +485,7 @@ abstract
     ( htpy-eq-square f g c c')
   comp-htpy-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
-      ( htpy-eq (htpy-eq (htpy-eq (comp-htpy g
+      ( htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy g
         ( λ g'' Hg' →
           ( c : cone f g C) (c' : cone f g'' C) →
             Id (tr (λ g'' → cone f g'' C) (eq-htpy Hg')
@@ -499,7 +500,7 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f' g' C) →
-    let tr-c    = tr (λ x → cone x g C) (eq-htpy Hf) c
+    let tr-c = tr (λ x → cone x g C) (eq-htpy Hf) c
         tr-tr-c = tr (λ y → cone f' y C) (eq-htpy Hg) tr-c
     in
     Id tr-tr-c c' → htpy-parallel-cone Hf Hg c c'
@@ -521,7 +522,7 @@ abstract
     ( htpy-eq-square f g c c')
   comp-htpy-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
-      ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (comp-htpy f
+      ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy f
         ( λ f'' Hf' →
           ( g g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
             ( Id ( tr (λ g'' → cone f'' g'' C) (eq-htpy Hg)
@@ -569,7 +570,7 @@ eq-htpy-parallel-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
   (c : cone f g C) (c' : cone f' g' C) →
-  let tr-c    = tr (λ x → cone x g C) (eq-htpy Hf) c
+  let tr-c = tr (λ x → cone x g C) (eq-htpy Hf) c
       tr-tr-c = tr (λ y → cone f' y C) (eq-htpy Hg) tr-c
   in
   htpy-parallel-cone Hf Hg c c' → Id tr-tr-c c'

@@ -79,7 +79,8 @@ is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
 is-small-eq-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
   is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ＝ Y)
-is-small-eq-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (pair (pair Y f) K) =
+is-small-eq-𝕍 l
+  {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (pair (pair Y f) K) =
   is-small-equiv
     ( Eq-𝕎 (tree-𝕎 A α) (tree-𝕎 B β))
     ( equiv-Eq-𝕎-eq (tree-𝕎 A α) (tree-𝕎 B β))

@@ -24,9 +24,11 @@ the underlying precategories.
 ## Definition
 
 ```agda
-module _ {l1 l2 l3 l4}
+module _
+  {l1 l2 l3 l4 : Level}
   (C : Cat l1 l2)
-  (D : Cat l3 l4) where
+  (D : Cat l3 l4)
+  where
 
   is-equiv-functor-Cat : functor-Cat C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-functor-Cat = is-equiv-functor-Precat (precat-Cat C) (precat-Cat D)

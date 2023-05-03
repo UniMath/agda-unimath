@@ -113,9 +113,9 @@ module _
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
 
-  vertical-comp-is-extension :
+  is-extension-comp-vertical :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
-  vertical-comp-is-extension H G x = G x ∙ H (i x)
+  is-extension-comp-vertical H G x = G x ∙ H (i x)
 ```
 
 ### Horizontal composition of extensions of maps

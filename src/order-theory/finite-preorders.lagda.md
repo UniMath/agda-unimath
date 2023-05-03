@@ -71,12 +71,12 @@ Finite-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Finite-Preorder l1 l2 =
   Σ ( 𝔽 l1)
     ( λ X →
-      Σ ( (x y : type-𝔽 X) → decidable-Prop l2)
+      Σ ( (x y : type-𝔽 X) → Decidable-Prop l2)
         ( λ R →
-          ( (x : type-𝔽 X) → type-decidable-Prop (R x x)) ×
+          ( (x : type-𝔽 X) → type-Decidable-Prop (R x x)) ×
           ( (x y z : type-𝔽 X) →
-            type-decidable-Prop (R y z) → type-decidable-Prop (R x y) →
-            type-decidable-Prop (R x z))))
+            type-Decidable-Prop (R y z) → type-Decidable-Prop (R x y) →
+            type-Decidable-Prop (R x z))))
 
 finite-preorder-is-finite-Preorder :
   {l1 l2 : Level} (X : Preorder l1 l2) → is-finite-Preorder X →
@@ -126,30 +126,30 @@ module _
   has-decidable-equality-element-Finite-Preorder =
     has-decidable-equality-is-finite is-finite-element-Finite-Preorder
 
-  leq-finite-preorder-decidable-Prop :
-    (x y : element-Finite-Preorder) → decidable-Prop l2
-  leq-finite-preorder-decidable-Prop = pr1 (pr2 X)
+  leq-finite-preorder-Decidable-Prop :
+    (x y : element-Finite-Preorder) → Decidable-Prop l2
+  leq-finite-preorder-Decidable-Prop = pr1 (pr2 X)
 
   leq-Finite-Preorder : (x y : element-Finite-Preorder) → UU l2
   leq-Finite-Preorder x y =
-    type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
+    type-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
 
   is-decidable-prop-leq-Finite-Preorder :
     (x y : element-Finite-Preorder) →
     is-decidable-prop (leq-Finite-Preorder x y)
   is-decidable-prop-leq-Finite-Preorder x y =
-    is-decidable-prop-type-decidable-Prop
-      ( leq-finite-preorder-decidable-Prop x y)
+    is-decidable-prop-type-Decidable-Prop
+      ( leq-finite-preorder-Decidable-Prop x y)
 
   is-decidable-leq-Finite-Preorder :
     (x y : element-Finite-Preorder) → is-decidable (leq-Finite-Preorder x y)
   is-decidable-leq-Finite-Preorder x y =
-    is-decidable-type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
+    is-decidable-type-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
 
   is-prop-leq-Finite-Preorder :
     (x y : element-Finite-Preorder) → is-prop (leq-Finite-Preorder x y)
   is-prop-leq-Finite-Preorder x y =
-    is-prop-type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
+    is-prop-type-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
 
   leq-Finite-preorder-Prop :
     (x y : element-Finite-Preorder) → Prop l2
@@ -182,7 +182,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
-  (S : element-Finite-Preorder X → decidable-Prop l3)
+  (S : element-Finite-Preorder X → Decidable-Prop l3)
   where
 
   element-finite-sub-Preorder : UU (l1 ⊔ l3)
@@ -198,10 +198,10 @@ module _
   eq-element-finite-sub-Preorder =
     eq-element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 
-  leq-finite-sub-Preorder-decidable-Prop :
-    (x y : element-finite-sub-Preorder) → decidable-Prop l2
-  leq-finite-sub-Preorder-decidable-Prop x y =
-    leq-finite-preorder-decidable-Prop X (pr1 x) (pr1 y)
+  leq-finite-sub-Preorder-Decidable-Prop :
+    (x y : element-finite-sub-Preorder) → Decidable-Prop l2
+  leq-finite-sub-Preorder-Decidable-Prop x y =
+    leq-finite-preorder-Decidable-Prop X (pr1 x) (pr1 y)
 
   leq-finite-sub-preorder-Prop :
     (x y : element-finite-sub-Preorder) → Prop l2
@@ -232,7 +232,7 @@ module _
 
 module _
   {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
-  (S : element-Finite-Preorder X → decidable-Prop l3)
+  (S : element-Finite-Preorder X → Decidable-Prop l3)
   where
 
   element-finite-sub-Preorder-𝔽 : 𝔽 (l1 ⊔ l3)
@@ -241,7 +241,7 @@ module _
 
   finite-sub-Preorder : Finite-Preorder (l1 ⊔ l3) l2
   pr1 finite-sub-Preorder = element-finite-sub-Preorder-𝔽
-  pr1 (pr2 finite-sub-Preorder) = leq-finite-sub-Preorder-decidable-Prop X S
+  pr1 (pr2 finite-sub-Preorder) = leq-finite-sub-Preorder-Decidable-Prop X S
   pr1 (pr2 (pr2 finite-sub-Preorder)) = refl-leq-finite-sub-Preorder X S
   pr2 (pr2 (pr2 finite-sub-Preorder)) = transitive-leq-finite-sub-Preorder X S
 ```

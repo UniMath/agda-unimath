@@ -41,7 +41,7 @@ open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
-open import foundation.cones-pullbacks public
+open import foundation.cones-over-cospans public
 open import foundation.conjunction public
 open import foundation.connected-components public
 open import foundation.connected-components-universes public
@@ -86,7 +86,9 @@ open import foundation.effective-maps-equivalence-relations public
 open import foundation.embeddings public
 open import foundation.empty-types public
 open import foundation.endomorphisms public
+open import foundation.epimorphisms public
 open import foundation.epimorphisms-with-respect-to-sets public
+open import foundation.epimorphisms-with-respect-to-truncated-types public
 open import foundation.equality-cartesian-product-types public
 open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
@@ -176,6 +178,7 @@ open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
+open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
@@ -191,6 +194,7 @@ open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
+open import foundation.pullback-squares public
 open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
@@ -221,7 +225,9 @@ open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
+open import foundation.structured-type-duality public
 open import foundation.subterminal-types public
+open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
 open import foundation.subuniverses public
@@ -236,6 +242,7 @@ open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
+open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncations public

@@ -183,7 +183,8 @@ module _
   listed-vec-functional-vec : (n : ℕ) → functional-vec A n → vec A n
   listed-vec-functional-vec zero-ℕ v = empty-vec
   listed-vec-functional-vec (succ-ℕ n) v =
-    head-functional-vec n v ∷ listed-vec-functional-vec n (tail-functional-vec n v)
+    head-functional-vec n v ∷
+    listed-vec-functional-vec n (tail-functional-vec n v)
 
   functional-vec-vec : (n : ℕ) → vec A n → functional-vec A n
   functional-vec-vec zero-ℕ v = empty-functional-vec
@@ -201,7 +202,8 @@ module _
   isretr-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
   isretr-functional-vec-vec (succ-ℕ n) v =
     eq-htpy
-      ( λ { (inl x) → htpy-eq (isretr-functional-vec-vec n (tail-functional-vec n v)) x ;
+      ( λ { (inl x) →
+            htpy-eq (isretr-functional-vec-vec n (tail-functional-vec n v)) x ;
             (inr star) → refl})
 
   is-equiv-listed-vec-functional-vec :
@@ -240,10 +242,14 @@ module _
   center-is-contr-vec {succ-ℕ n} H = center H ∷ center-is-contr-vec {n} H
 
   contraction-is-contr-vec' :
-    {n : ℕ} (H : is-contr A) → (v : vec A n) → Eq-vec n (center-is-contr-vec H) v
-  contraction-is-contr-vec' {zero-ℕ} H empty-vec = refl-Eq-vec {l} {A} 0 empty-vec
-  pr1 (contraction-is-contr-vec' {succ-ℕ n} H (x ∷ v)) = eq-is-contr H
-  pr2 (contraction-is-contr-vec' {succ-ℕ n} H (x ∷ v)) = contraction-is-contr-vec' {n} H v
+    {n : ℕ} (H : is-contr A) → (v : vec A n) →
+    Eq-vec n (center-is-contr-vec H) v
+  contraction-is-contr-vec' {zero-ℕ} H empty-vec =
+    refl-Eq-vec {l} {A} 0 empty-vec
+  pr1 (contraction-is-contr-vec' {succ-ℕ n} H (x ∷ v)) =
+    eq-is-contr H
+  pr2 (contraction-is-contr-vec' {succ-ℕ n} H (x ∷ v)) =
+    contraction-is-contr-vec' {n} H v
 
   contraction-is-contr-vec :
     {n : ℕ} (H : is-contr A) → (v : vec A n) → (center-is-contr-vec H) ＝ v

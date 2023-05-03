@@ -9,7 +9,7 @@ module foundation.truncated-maps where
 ```agda
 open import foundation-core.truncated-maps public
 
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-fibers-of-maps

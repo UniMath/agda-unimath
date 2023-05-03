@@ -56,15 +56,18 @@ module _
   (A : UU l1) (B : UU l2)
   where
 
-  function-class-factorization-operation : UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
+  function-class-factorization-operation :
+    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   function-class-factorization-operation =
     (f : A → B) → function-class-factorization L R f
 
-  mere-function-class-factorization-property : UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
+  mere-function-class-factorization-property :
+    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   mere-function-class-factorization-property =
     (f : A → B) → is-inhabited (function-class-factorization L R f)
 
-  unique-function-class-factorization-operation : UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
+  unique-function-class-factorization-operation :
+    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   unique-function-class-factorization-operation =
     (f : A → B) → is-contr (function-class-factorization L R f)
 ```

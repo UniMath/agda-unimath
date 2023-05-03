@@ -13,7 +13,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-cartesian-product-types
@@ -640,7 +640,7 @@ abstract
         ( is-pb-cc'))
 ```
 
-### A family of maps over a base map induces a pullback square if and only if it is a family of equivalences.
+### A family of maps over a base map induces a pullback square if and only if it is a family of equivalences
 
 ```agda
 module _

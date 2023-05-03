@@ -29,10 +29,12 @@ embedding.
 ## Definition
 
 ```agda
-module _ {α : Level → Level} {β : Level → Level → Level}
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  (f : type-hom-Large-Precat C X Y) where
+  (f : type-hom-Large-Precat C X Y)
+  where
 
   is-mono-Large-Precat-Prop : Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
   is-mono-Large-Precat-Prop =
@@ -52,10 +54,12 @@ module _ {α : Level → Level} {β : Level → Level → Level}
 ### Isomorphisms are monomorphisms
 
 ```agda
-module _ {α : Level → Level} {β : Level → Level → Level}
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  (f : iso-Large-Precat C X Y) where
+  (f : iso-Large-Precat C X Y)
+  where
 
   is-mono-iso-Large-Precat :
     is-mono-Large-Precat C l3 X Y (hom-iso-Large-Precat C X Y f)

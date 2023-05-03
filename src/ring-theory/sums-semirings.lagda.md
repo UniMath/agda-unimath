@@ -263,5 +263,5 @@ split-sum-Semiring R n (succ-ℕ m) f =
   ( ap
     ( add-Semiring' R (f(inr star)))
     ( split-sum-Semiring R n m (f ∘ inl))) ∙
-  ( associative-add-Semiring R _ _ _ )
+  ( associative-add-Semiring R _ _ _)
 ```

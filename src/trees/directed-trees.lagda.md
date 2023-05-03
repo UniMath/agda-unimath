@@ -238,7 +238,7 @@ module _
           ≃ Σ ( Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x))
               ( λ p → walk-Directed-Graph G (pr1 p) r)
             by
-            inv-assoc-Σ
+            inv-associative-Σ
               ( vertex-Directed-Graph G)
               ( edge-Directed-Graph G x)
               ( λ p → walk-Directed-Graph G (pr1 p) r)

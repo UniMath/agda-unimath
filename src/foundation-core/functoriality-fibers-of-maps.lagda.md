@@ -7,7 +7,7 @@ module foundation-core.functoriality-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps

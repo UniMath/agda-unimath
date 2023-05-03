@@ -40,7 +40,7 @@ is-decidable-map-retr-Fin k =
   is-decidable-map-retr (has-decidable-equality-Fin k)
 ```
 
-### If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite.
+### If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite
 
 ```agda
 is-decidable-map-retr-count :

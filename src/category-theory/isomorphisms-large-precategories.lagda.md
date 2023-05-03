@@ -25,8 +25,8 @@ open import foundation.universe-levels
 An isomorphism between objects `x y : A` in a precategory `C` is a morphism
 `f : hom x y` for which there exists a morphism `g : hom y x` such that
 
-- `comp g f = id_x` and
-- `comp f g = id_y`.
+- `G ∘ F = id_x` and
+- `F ∘ G = id_y`.
 
 ## Definition
 
@@ -85,7 +85,7 @@ module _
 ### The identity morphisms are isomorphisms
 
 For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
-from `x` to `x` since `comp id_x id_x = id_x` (it is its own inverse).
+from `x` to `x` since `id_x ∘ id_x = id_x` (it is its own inverse).
 
 ```agda
 module _
@@ -125,7 +125,7 @@ iso-eq-Large-Precat C X .X refl = id-iso-Large-Precat C
 Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
 `f`. It is enough to show that `g = g'` since the equalities are propositions
 (since the hom-types are sets). But we have the following chain of equalities:
-`g = comp g id_y = comp g (comp f g') = comp (comp g f) g' = comp id_x g' = g'`.
+`g = g ∘ id_y = g ∘ (f ∘ g') = (g ∘ f) ∘ g' = id_x ∘ g' = g'`.
 
 ```agda
 module _
@@ -161,10 +161,10 @@ module _
   is-prop-is-iso-Large-Precat f =
     is-prop-all-elements-equal (all-elements-equal-is-iso-Large-Precat f)
 
-  is-iso-large-precat-Prop :
+  is-iso-Large-Precat-Prop :
     (f : type-hom-Large-Precat C X Y) → Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
-  pr1 (is-iso-large-precat-Prop f) = is-iso-Large-Precat C f
-  pr2 (is-iso-large-precat-Prop f) = is-prop-is-iso-Large-Precat f
+  pr1 (is-iso-Large-Precat-Prop f) = is-iso-Large-Precat C f
+  pr2 (is-iso-Large-Precat-Prop f) = is-prop-is-iso-Large-Precat f
 ```
 
 ### The type of isomorphisms form a set
@@ -182,7 +182,7 @@ module _
   is-set-iso-Large-Precat : is-set (iso-Large-Precat C X Y)
   is-set-iso-Large-Precat =
     is-set-type-subtype
-      ( is-iso-large-precat-Prop C X Y)
+      ( is-iso-Large-Precat-Prop C X Y)
       ( is-set-type-hom-Large-Precat C X Y)
 
   iso-Large-Precat-Set : Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
@@ -200,7 +200,8 @@ module _
   (Z : obj-Large-Precat C l3)
   where
 
-  is-iso-comp-iso-Large-Precat : (g : type-hom-Large-Precat C Y Z) →
+  is-iso-comp-iso-Large-Precat :
+    (g : type-hom-Large-Precat C Y Z) →
     (f : type-hom-Large-Precat C X Y) →
     is-iso-Large-Precat C g → is-iso-Large-Precat C f →
     is-iso-Large-Precat C (comp-hom-Large-Precat C g f)
@@ -209,7 +210,8 @@ module _
       ( hom-inv-iso-Large-Precat C X Y (pair f p))
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
   pr1 (pr2 (is-iso-comp-iso-Large-Precat g f q p)) =
-    ( associative-comp-hom-Large-Precat C g f (pr1 (is-iso-comp-iso-Large-Precat g f q p))) ∙
+    ( associative-comp-hom-Large-Precat C g f
+      ( pr1 (is-iso-comp-iso-Large-Precat g f q p))) ∙
       ( ( ap
         ( comp-hom-Large-Precat C g)
         ( ( inv
@@ -230,7 +232,9 @@ module _
       ( hom-inv-iso-Large-Precat C Y Z (pair g q))
       ( comp-hom-Large-Precat C g f)) ∙
       ( ( ap
-        ( comp-hom-Large-Precat C (hom-inv-iso-Large-Precat C X Y (pair f p)))
+        ( comp-hom-Large-Precat
+          ( C)
+          ( hom-inv-iso-Large-Precat C X Y (pair f p)))
         ( ( inv
           ( associative-comp-hom-Large-Precat C
             ( hom-inv-iso-Large-Precat C Y Z (pair g q))
@@ -242,7 +246,8 @@ module _
             ( left-unit-law-comp-hom-Large-Precat C f)))) ∙
         ( is-retr-hom-inv-iso-Large-Precat C X Y (pair f p)))
 
-  comp-iso-Large-Precat : iso-Large-Precat C Y Z →
+  comp-iso-Large-Precat :
+    iso-Large-Precat C Y Z →
     iso-Large-Precat C X Y →
     iso-Large-Precat C X Z
   pr1 (comp-iso-Large-Precat g f) =
@@ -266,7 +271,8 @@ module _
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
 
-  is-iso-inv-iso-Large-Precat : (f : type-hom-Large-Precat C X Y) →
+  is-iso-inv-iso-Large-Precat :
+    (f : type-hom-Large-Precat C X Y) →
     (p : is-iso-Large-Precat C f) →
     is-iso-Large-Precat C (hom-inv-iso-Large-Precat C X Y (pair f p))
   pr1 (is-iso-inv-iso-Large-Precat f p) = f
@@ -275,7 +281,8 @@ module _
   pr2 (pr2 (is-iso-inv-iso-Large-Precat f p)) =
     is-sec-hom-inv-iso-Large-Precat C X Y (pair f p)
 
-  inv-iso-Large-Precat : iso-Large-Precat C X Y →
+  inv-iso-Large-Precat :
+    iso-Large-Precat C X Y →
     iso-Large-Precat C Y X
   pr1 (inv-iso-Large-Precat f) = hom-inv-iso-Large-Precat C X Y f
   pr2 (inv-iso-Large-Precat f) =

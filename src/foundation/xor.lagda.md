@@ -17,7 +17,6 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations
 open import foundation.type-arithmetic-coproduct-types
-open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.unordered-pairs
 
@@ -391,19 +390,19 @@ is-decidable-xor d e =
     ( is-decidable-prod d (is-decidable-neg e))
     ( is-decidable-prod e (is-decidable-neg d))
 
-xor-decidable-Prop :
-  {l1 l2 : Level} → decidable-Prop l1 → decidable-Prop l2 →
-  decidable-Prop (l1 ⊔ l2)
-pr1 (xor-decidable-Prop P Q) =
-  type-xor-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
-pr1 (pr2 (xor-decidable-Prop P Q)) =
-  is-prop-type-xor-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
-pr2 (pr2 (xor-decidable-Prop P Q)) =
+xor-Decidable-Prop :
+  {l1 l2 : Level} → Decidable-Prop l1 → Decidable-Prop l2 →
+  Decidable-Prop (l1 ⊔ l2)
+pr1 (xor-Decidable-Prop P Q) =
+  type-xor-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+pr1 (pr2 (xor-Decidable-Prop P Q)) =
+  is-prop-type-xor-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+pr2 (pr2 (xor-Decidable-Prop P Q)) =
   is-decidable-coprod
     ( is-decidable-prod
-      ( is-decidable-type-decidable-Prop P)
-      ( is-decidable-neg (is-decidable-type-decidable-Prop Q)))
+      ( is-decidable-type-Decidable-Prop P)
+      ( is-decidable-neg (is-decidable-type-Decidable-Prop Q)))
     ( is-decidable-prod
-      ( is-decidable-type-decidable-Prop Q)
-      ( is-decidable-neg (is-decidable-type-decidable-Prop P)))
+      ( is-decidable-type-Decidable-Prop Q)
+      ( is-decidable-neg (is-decidable-type-Decidable-Prop P)))
 ```

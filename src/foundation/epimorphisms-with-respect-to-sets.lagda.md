@@ -7,6 +7,7 @@ module foundation.epimorphisms-with-respect-to-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.propositional-extensionality
@@ -16,11 +17,11 @@ open import foundation.surjective-maps
 open import foundation.unit-type
 
 open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.truncation-levels
 open import foundation-core.univalence
 open import foundation-core.universe-levels
 ```
@@ -39,7 +40,7 @@ is-epimorphism-Set :
   {l1 l2 : Level} (l : Level) {A : UU l1} {B : UU l2}
   (f : A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
 is-epimorphism-Set l f =
-  (C : Set l) → is-emb (precomp-Set f C)
+  is-epimorphism-Truncated-Type l zero-𝕋 f
 ```
 
 ## Properties

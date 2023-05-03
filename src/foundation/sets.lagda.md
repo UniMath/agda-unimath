@@ -226,20 +226,21 @@ module _
 ```agda
 abstract
   is-set-is-emb :
-    {i j : Level} {A : UU i} {B : UU j} (f : A → B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-emb f → is-set B → is-set A
   is-set-is-emb = is-trunc-is-emb neg-one-𝕋
 
 abstract
   is-set-emb :
-    {i j : Level} {A : UU i} {B : UU j} (f : A ↪ B) → is-set B → is-set A
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-set B → is-set A
   is-set-emb = is-trunc-emb neg-one-𝕋
 ```
 
 ### Any function from a proposition into a set is an embedding
 
 ```agda
-module _ {i j} {A : UU i} {B : UU j} where
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} where
 
   is-emb-is-prop-is-set : is-prop A → is-set B → {f : A → B} → is-emb f
   is-emb-is-prop-is-set is-prop-A is-set-B {f} =

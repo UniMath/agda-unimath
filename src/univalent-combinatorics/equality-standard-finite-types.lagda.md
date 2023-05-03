@@ -76,7 +76,7 @@ extensionality-Fin :
 pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
 pr2 (extensionality-Fin k x y) =
   is-equiv-is-prop
-    ( is-set-Fin k x y )
+    ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)
 
@@ -131,7 +131,7 @@ is-prop-is-zero-or-one-Fin-two-ℕ x =
     ( is-prop-is-one-Fin 1 x)
 ```
 
-### Every element in the standard two-element type is either 0 or 1.
+### Every element in the standard two-element type is either `0` or `1`
 
 ```agda
 is-contr-is-zero-or-one-Fin-two-ℕ :
@@ -144,7 +144,7 @@ is-contr-is-zero-or-one-Fin-two-ℕ x =
 
 ```agda
 decidable-Eq-Fin :
-  (n : ℕ) (i j : Fin n) → decidable-Prop lzero
+  (n : ℕ) (i j : Fin n) → Decidable-Prop lzero
 pr1 (decidable-Eq-Fin n i j) = Id i j
 pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
 pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin n i j
@@ -160,11 +160,14 @@ equiv-unit-trunc-Fin-Set k = equiv-unit-trunc-Set (Fin-Set k)
 ### If `leq-ℕ 2 n`, then there exists two distinct elements in `Fin n`
 
 ```agda
-two-distinct-elements-leq-2-Fin : (n : ℕ) → leq-ℕ 2 n →
-  Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
-pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) = inr star
-pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = inl (inr star)
-pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = neq-inr-inl
+two-distinct-elements-leq-2-Fin :
+  (n : ℕ) → leq-ℕ 2 n → Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
+pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) =
+  inr star
+pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =
+  inl (inr star)
+pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =
+  neq-inr-inl
 ```
 
 ### The standard finite type with a (tight) apartness relation

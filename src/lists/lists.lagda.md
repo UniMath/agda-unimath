@@ -48,6 +48,7 @@ empty list and an operation that extends a list with one element from `A`.
 data list {l : Level} (A : UU l) : UU l where
   nil : list A
   cons : A → list A → list A
+{-# BUILTIN LIST list #-}
 ```
 
 ### Predicates on the type of lists

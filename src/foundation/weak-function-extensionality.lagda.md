@@ -37,7 +37,7 @@ extensionality axiom.
 
 ```agda
 WEAK-FUNEXT :
-  {i j : Level} (A : UU i) (B : A → UU j) → UU (i ⊔ j)
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
 WEAK-FUNEXT A B =
   ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
 ```

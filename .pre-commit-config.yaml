@@ -5,10 +5,73 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: double-quote-string-fixer
+      - id: check-ast
       - id: check-yaml
-      - id: check-added-large-files
+      # - id: check-json # Doesn't accept json with comments
+      # - id: requirements-txt-fixer # Can't handle comments
       - id: check-case-conflict
       - id: check-merge-conflict
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: remove-extra-blank-lines
+        name: Remove extra blank lines in Agda files
+        entry: scripts/remove_extra_blank_lines.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+
+      - id: fix-imports
+        name: Format Agda imports
+        entry: scripts/fix_imports.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+
+      - id: spaces-convention-simple
+        name: Simple Agda space conventions
+        entry: scripts/spaces_convention_simple.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+
+      - id: easily-fixable-long-lines
+        name: Easily fixable long lines of Agda code
+        entry: scripts/easily_fixable_long_lines.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+
+      - id: max-line-length
+        name: Check the maximum line length is respected
+        entry: scripts/max_line_length.py
+        language: python
+        files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
+        types_or: [markdown, text]
+        require_serial: true
+
+      - id: generate-namespace-index-modules
+        name: Generate Agda namespace index modules
+        entry: scripts/generate_namespace_index_modules.py
+        language: python
+        always_run: true
+        pass_filenames: false
+        require_serial: true
+
+      - id: generate-main-index-file
+        name: Generate main index file
+        entry: scripts/generate_main_index_file.py
+        language: python
+        always_run: true
+        pass_filenames: false
+        require_serial: true
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: "v2.0.2"
@@ -22,49 +85,6 @@ repos:
       - id: prettier
         name: CSS, JS, YAML and Markdown (no codeblocks) formatting
         types_or: [css, javascript, yaml, markdown]
-
-  - repo: local
-    hooks:
-      - id: remove-extra-blank-lines
-        name: Remove extra blank lines in Agda files
-        entry: scripts/remove_extra_blank_lines.py
-        language: python
-        always_run: true
-        verbose: true
-        files: ^src\/.+\.lagda\.md$
-        types_or: [markdown, text]
-        args: []
-        require_serial: false
-
-      - id: fix-imports
-        name: Format Agda imports
-        entry: scripts/fix_imports.py
-        language: python
-        always_run: true
-        verbose: true
-        files: ^src\/.+\.lagda\.md$
-        types_or: [markdown, text]
-        args: []
-        require_serial: false
-
-      - id: generate-namespace-index-modules
-        name: Generate Agda namespace index modules
-        entry: scripts/generate_namespace_index_modules.py
-        language: python
-        always_run: true
-        verbose: true
-        types_or: [markdown, text]
-        args: []
-        require_serial: false
-
-      - id: max-line-length
-        name: Check the maximum line length is respected
-        entry: scripts/max_line_length.py
-        language: python
-        verbose: true
-        files: ^src\/.+\.lagda\.md$
-        types_or: [markdown, text]
-        require_serial: false
 
       # Experimental hooks
 

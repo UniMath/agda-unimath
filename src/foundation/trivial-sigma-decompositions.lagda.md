@@ -38,7 +38,7 @@ module _
   trivial-inhabited-Σ-Decomposition :
     (p : is-inhabited A) → Σ-Decomposition l2 l1 A
   pr1 (trivial-inhabited-Σ-Decomposition p) = raise-unit l2
-  pr1 (pr2 (trivial-inhabited-Σ-Decomposition p))  = λ _ → (A , p)
+  pr1 (pr2 (trivial-inhabited-Σ-Decomposition p)) = λ _ → (A , p)
   pr2 (pr2 (trivial-inhabited-Σ-Decomposition p)) =
     inv-left-unit-law-Σ-is-contr
       ( is-contr-raise-unit)
@@ -98,7 +98,7 @@ module _
       ( trivial-inhabited-Σ-Decomposition
         ( l4)
         ( A)
-        ( is-inhabited-base-type-is-trivial-Σ-Decomposition ))
+        ( is-inhabited-base-type-is-trivial-Σ-Decomposition))
   pr1 equiv-trivial-is-trivial-Σ-Decomposition =
     ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
       is-equiv-comp
@@ -109,8 +109,8 @@ module _
   pr1 (pr2 equiv-trivial-is-trivial-Σ-Decomposition) =
     ( λ x →
       ( ( inv-equiv (matching-correspondence-Σ-Decomposition D)) ∘e
-        ( inv-left-unit-law-Σ-is-contr is-trivial x )))
-  pr2 (pr2 equiv-trivial-is-trivial-Σ-Decomposition ) a =
+        ( inv-left-unit-law-Σ-is-contr is-trivial x)))
+  pr2 (pr2 equiv-trivial-is-trivial-Σ-Decomposition) a =
     eq-pair-Σ
       ( refl)
       ( inv-map-eq-transpose-equiv

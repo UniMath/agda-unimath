@@ -349,7 +349,8 @@ module _
       issec-map-inv-unit-trunc
       isretr-map-inv-unit-trunc
 
-  equiv-unit-trunc : type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
+  equiv-unit-trunc :
+    type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
   pr1 equiv-unit-trunc = unit-trunc
   pr2 equiv-unit-trunc = is-equiv-unit-trunc
 ```
@@ -418,10 +419,12 @@ module _
               ( pair (unit-trunc y) (map-compute-Eq-trunc y q)))
           ( r y))
     where
-    r : (y : A) (p : a ＝ y) →
-        Id { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
-           ( pair (unit-trunc a) refl-Eq-trunc)
-           ( pair (unit-trunc y) (map-compute-Eq-trunc y (unit-trunc p)))
+    r :
+      (y : A) (p : a ＝ y) →
+      Id
+        { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
+        ( pair (unit-trunc a) refl-Eq-trunc)
+        ( pair (unit-trunc y) (map-compute-Eq-trunc y (unit-trunc p)))
     r .a refl = refl
 
   Eq-eq-trunc : (x : type-trunc (succ-𝕋 k) A) → (unit-trunc a ＝ x) → Eq-trunc x

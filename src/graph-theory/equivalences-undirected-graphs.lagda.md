@@ -79,7 +79,9 @@ module _
 
   standard-unordered-pair-vertices-equiv-Undirected-Graph :
     (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
-    unordered-pair-vertices-equiv-Undirected-Graph e (standard-unordered-pair x y) ＝
+    unordered-pair-vertices-equiv-Undirected-Graph
+      ( e)
+      ( standard-unordered-pair x y) ＝
     standard-unordered-pair
       ( vertex-equiv-Undirected-Graph e x)
       ( vertex-equiv-Undirected-Graph e y)
@@ -124,7 +126,9 @@ module _
         ( vertex-equiv-Undirected-Graph e x)
         ( vertex-equiv-Undirected-Graph e y))
   edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
-    map-equiv (equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y)
+    map-equiv
+      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+          e x y)
 
   hom-equiv-Undirected-Graph :
     equiv-Undirected-Graph → hom-Undirected-Graph G H
@@ -149,7 +153,9 @@ module _
       ( id-equiv-Undirected-Graph) x y) ~
     ( id)
   edge-standard-unordered-pair-vertices-id-equiv-Undirected-Graph x y e =
-    ap (λ t → tr (edge-Undirected-Graph G) t e) (id-equiv-standard-unordered-pair x y)
+    ap
+      ( λ t → tr (edge-Undirected-Graph G) t e)
+      ( id-equiv-standard-unordered-pair x y)
 ```
 
 ## Properties

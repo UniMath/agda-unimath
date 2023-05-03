@@ -21,7 +21,6 @@ open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups

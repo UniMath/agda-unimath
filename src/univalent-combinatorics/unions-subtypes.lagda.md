@@ -65,5 +65,5 @@ module _
             Q
             dec-A
             count-P
-            count-Q ))
+            count-Q))
 ```

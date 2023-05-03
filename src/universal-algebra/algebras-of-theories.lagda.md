@@ -34,7 +34,7 @@ equations in the theory.
 ```agda
 module _
   { l1 : Level} ( Sg : signature l1)
-  { l2 : Level } ( Th : Theory Sg l2)
+  { l2 : Level} ( Th : Theory Sg l2)
   where
 
   is-algebra :

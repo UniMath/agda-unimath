@@ -33,10 +33,10 @@ module _
 
   left-unit-law-Π-is-contr : ((a : A) → (B a)) ≃ B a
   left-unit-law-Π-is-contr =
-    ( ( left-unit-law-Π ( λ _ → B a )) ∘e
+    ( ( left-unit-law-Π ( λ _ → B a)) ∘e
       ( equiv-Π
         ( λ _ → B a)
-        ( terminal-map , is-equiv-terminal-map-is-contr C )
+        ( terminal-map , is-equiv-terminal-map-is-contr C)
         ( λ a →
           equiv-eq
            ( ap B ( eq-is-contr C)))))

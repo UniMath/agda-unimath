@@ -198,7 +198,7 @@ is-zero-gcd-zero-zero-ℕ = is-zero-gcd-ℕ zero-ℕ zero-ℕ refl
 is-zero-add-is-zero-gcd-ℕ :
   (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (add-ℕ a b)
 is-zero-add-is-zero-gcd-ℕ a b H =
-  dn-elim-is-decidable
+  double-negation-elim-is-decidable
     ( is-decidable-is-zero-ℕ (add-ℕ a b))
     ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
@@ -227,7 +227,7 @@ div-gcd-is-common-divisor-ℕ a b x H with
 ... | inr np = pr2 (is-multiple-of-gcd-gcd-ℕ a b np) x H
 ```
 
-### If every common divisor divides a number r < gcd a b, then r = 0.
+### If every common divisor divides a number `r < gcd a b`, then `r = 0`.
 
 ```agda
 is-zero-is-common-divisor-le-gcd-ℕ :

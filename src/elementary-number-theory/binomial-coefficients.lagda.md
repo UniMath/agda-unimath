@@ -12,7 +12,6 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.identity-types
-open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types
 ```

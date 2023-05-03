@@ -213,10 +213,13 @@ multiplicative-abs-ℤ x y =
 ```agda
 left-negative-law-mul-abs-ℤ :
   (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
-left-negative-law-mul-abs-ℤ x y = equational-reasoning
-  abs-ℤ (mul-ℤ x y)
-  ＝ abs-ℤ (neg-ℤ (mul-ℤ x y)) by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
-  ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y) by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
+left-negative-law-mul-abs-ℤ x y =
+  equational-reasoning
+    abs-ℤ (mul-ℤ x y)
+    ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
+      by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
+    ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
+      by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
 ```
 
 ### `|x(-y)| ＝ |xy|`
@@ -226,11 +229,11 @@ right-negative-law-mul-abs-ℤ :
   (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
 right-negative-law-mul-abs-ℤ x y =
   equational-reasoning
-  abs-ℤ (mul-ℤ x y)
-  ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
-    by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
-  ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
-    by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
+    abs-ℤ (mul-ℤ x y)
+    ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
+      by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
+    ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
+      by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
 ```
 
 ### `|(-x)(-y)| ＝ |xy|`

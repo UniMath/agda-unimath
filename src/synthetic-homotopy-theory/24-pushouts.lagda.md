@@ -20,13 +20,13 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 </details>
 
+## Exercises
+
+### Exercise 13.1
+
+### Exercise 13.2
+
 ```agda
--- Exercises
-
--- Exercise 13.1
-
--- Exercise 13.2
-
 is-equiv-cofiber-point :
   {l : Level} {B : UU l} (b : B) →
   is-equiv (pr1 (cocone-pushout (const unit B b) (const unit unit star)))
@@ -37,9 +37,11 @@ is-equiv-cofiber-point {l} {B} b =
     ( cocone-pushout (const unit B b) (const unit unit star))
     ( is-equiv-is-contr (const unit unit star) is-contr-unit is-contr-unit)
     ( up-pushout (const unit B b) (const unit unit star))
+```
 
--- Exercise 16.2
+### Exercise 16.2
 
+```agda
 -- ev-disjunction :
 --   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
 --   ((type-Prop P) * (type-Prop Q) → (type-Prop R)) →

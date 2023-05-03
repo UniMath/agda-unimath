@@ -25,15 +25,15 @@ open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
 
-```agda
--- Section 19.1 Characterizing families of maps over pushouts
+## Section 19.1 Characterizing families of maps over pushouts
 
+```agda
 module hom-Fam-pushout
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1}
@@ -52,19 +52,24 @@ module hom-Fam-pushout
     QA = pr1 Q
     QB = pr1 (pr2 Q)
     QS = pr2 (pr2 Q)
+```
 
-  {- Definition 19.1.1 -}
+### Definition 19.1.1
 
+```agda
   hom-Fam-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   hom-Fam-pushout =
     Σ ( (x : A) → (PA x) → (QA x)) (λ hA →
       Σ ( (y : B) → (PB y) → (QB y)) (λ hB →
         ( s : S) →
-          ( (hB (g s)) ∘ (map-equiv (PS s))) ~ ((map-equiv (QS s)) ∘ (hA (f s)))))
+          ( (hB (g s)) ∘ (map-equiv (PS s))) ~
+          ( (map-equiv (QS s)) ∘ (hA (f s)))))
+```
 
-  {- Remark 19.1.2. We characterize the identity type of hom-Fam-pushout. -}
+### Remark 19.1.2 We characterize the identity type of `hom-Fam-pushout`
 
+```agda
   htpy-hom-Fam-pushout :
     ( h k : hom-Fam-pushout) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   htpy-hom-Fam-pushout h k =
@@ -130,13 +135,17 @@ module hom-Fam-pushout
     map-inv-is-equiv (is-equiv-htpy-hom-Fam-pushout-eq h k)
 
 open hom-Fam-pushout public
+```
 
-{- Definition 19.1.3. Given a cocone structure on X and a family of maps indexed
-   by X, we obtain a morphism of descent data. -}
+### Definition 19.1.3
 
+Given a cocone structure on `X` and a family of maps indexed by `X`, we obtain a
+morphism of descent data.
+
+```agda
 Naturality-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU _
+  ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU (l2 ⊔ l3)
 Naturality-fam-maps {B = B} {C} f {x} {x'} p =
   (y : B x) → Id (f x' (tr B p y)) (tr C p (f x y))
 
@@ -157,9 +166,11 @@ hom-Fam-pushout-map {f = f} {g} c P Q h =
     ( pair
       ( precomp-Π (pr1 (pr2 c)) (λ x → P x → Q x) h)
       ( λ s → naturality-fam-maps h (pr2 (pr2 c) s)))
+```
 
-{- Theorem 19.1.4. The function hom-Fam-pushout-map is an equivalence. -}
+### Theorem 19.1.4 The function `hom-Fam-pushout-map` is an equivalence
 
+```agda
 square-path-over-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   { x x' : A} (p : Id x x') (f : B x → C x) (f' : B x' → C x') →
@@ -200,7 +211,8 @@ is-equiv-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
           ( hB (g s)))))
 
 coherence-naturality-fam-maps :
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (P : B → UU l3) (Q : B → UU l4) →
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (P : B → UU l3) (Q : B → UU l4) →
   { f f' : A → B} (H : f ~ f') (h : (b : B) → P b → Q b) (a : A) →
   Id ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
      ( naturality-fam-maps h (H a))
@@ -263,30 +275,34 @@ equiv-hom-Fam-pushout-map c up-X P Q =
   pair
     ( hom-Fam-pushout-map c P Q)
     ( is-equiv-hom-Fam-pushout-map c up-X P Q)
+```
 
-{- Definition 19.2.1. Universal families over spans -}
+### Definition 19.2.1 Universal families over spans
 
-ev-pt-hom-Fam-pushout :
+```agda
+ev-point-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g)
   {a : A} → (pr1 P a) → (hom-Fam-pushout P Q) → pr1 Q a
-ev-pt-hom-Fam-pushout P Q {a} p h = pr1 h a p
+ev-point-hom-Fam-pushout P Q {a} p h = pr1 h a p
 
 is-universal-Fam-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (a : A) (p : pr1 P a) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 is-universal-Fam-pushout l {f = f} {g} P a p =
-  ( Q : Fam-pushout l f g) → is-equiv (ev-pt-hom-Fam-pushout P Q p)
+  ( Q : Fam-pushout l f g) → is-equiv (ev-point-hom-Fam-pushout P Q p)
+```
 
-{- Lemma 19.2.2. The descent data of the identity type is a universal family. -}
+### Lemma 19.2.2 The descent data of the identity type is a universal family
 
+```agda
 triangle-is-universal-id-Fam-pushout' :
   { l l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
   (a : A) ( Q : (x : X) → UU l) →
   ( ev-refl (pr1 c a) {B = λ x p → Q x}) ~
-  ( ( ev-pt-hom-Fam-pushout
+  ( ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl)) ∘
@@ -299,14 +315,14 @@ is-universal-id-Fam-pushout' :
   ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
   ( Q : (x : X) → UU l) →
   is-equiv
-    ( ev-pt-hom-Fam-pushout
+    ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
   is-equiv-left-factor-htpy
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
-    ( ev-pt-hom-Fam-pushout
+    ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl))
@@ -326,14 +342,16 @@ is-universal-id-Fam-pushout l {S = S} {A} {B} {X} {f} {g} c up-X a Q =
     ( equiv-precomp-Π
       ( equiv-desc-fam c up-X)
       ( λ (Q : Fam-pushout l f g) →
-        is-equiv (ev-pt-hom-Fam-pushout
+        is-equiv (ev-point-hom-Fam-pushout
           ( desc-fam c (Id (pr1 c a))) Q refl)))
     ( is-universal-id-Fam-pushout' c up-X a)
     ( Q)
+```
 
-{- We construct the identity morphism and composition, and we show that
-   morphisms equipped with two-sided inverses are equivalences. -}
+We construct the identity morphism and composition, and we show that morphisms
+equipped with two-sided inverses are equivalences.
 
+```agda
 id-hom-Fam-pushout :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
@@ -416,9 +434,11 @@ equiv-is-equiv-hom-Fam-pushout P Q h is-equiv-h =
     ( pair
       ( λ b → pair (pr1 (pr2 h) b) (pr2 is-equiv-h b))
       ( pr2 (pr2 h)))
+```
 
-{- Theorem 19.1.3. Characterization of identity types of pushouts. -}
+### Theorem 19.1.3 Characterization of identity types of pushouts
 
+```agda
 {-
 hom-identity-is-universal-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l5}

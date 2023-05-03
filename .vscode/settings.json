@@ -11,9 +11,6 @@
   },
 
   // Snippet setup
-  "editor.quickSuggestions": {
-    "other": "inline"
-  },
   "editor.snippetSuggestions": "top",
   "editor.wordBasedSuggestions": false,
   "javascript.suggest.names": false,
@@ -36,6 +33,9 @@
     "editor.rulers": [80],
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+      "other": "inline"
+    },
     "editor.autoClosingBrackets": "never"
   },
   "[css]": {
@@ -60,6 +60,9 @@
   "[markdown]": {
     "editor.tabSize": 2,
     "editor.rulers": [80],
+    "editor.quickSuggestions": {
+      "other": "inline"
+    },
     "editor.autoClosingBrackets": "never"
   },
   "[python]": {

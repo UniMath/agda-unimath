@@ -78,8 +78,8 @@ module _
   pr2 equiv-concat-equiv =
     is-equiv-has-inverse
       equiv-concat
-      (λ { refl → refl })
-      (λ e → eq-htpy (λ y → eq-htpy-equiv (λ { refl → right-unit })))
+      (λ { refl → refl})
+      (λ e → eq-htpy (λ y → eq-htpy-equiv (λ { refl → right-unit})))
 
   inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
   inv-concat' x q = concat' x (inv q)
@@ -164,7 +164,7 @@ module _
   inv-tr : x ＝ y → B y → B x
   inv-tr p = tr B (inv p)
 
-  isretr-inv-tr : (p : x ＝ y) → ((inv-tr p ) ∘ (tr B p)) ~ id
+  isretr-inv-tr : (p : x ＝ y) → ((inv-tr p) ∘ (tr B p)) ~ id
   isretr-inv-tr refl b = refl
 
   issec-inv-tr : (p : x ＝ y) → ((tr B p) ∘ (inv-tr p)) ~ id
@@ -181,7 +181,8 @@ module _
   pr1 (equiv-tr p) = tr B p
   pr2 (equiv-tr p) = is-equiv-tr p
 
-equiv-tr-refl : {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} →
+equiv-tr-refl :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} →
   equiv-tr B refl ＝ id-equiv {A = B x}
 equiv-tr-refl B = eq-htpy-equiv λ x → refl
 ```
