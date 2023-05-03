@@ -132,7 +132,7 @@ compute-glue-cogap f g c s =
     ( ap (cogap f g c) (glue-pushout f g s))
     ( compute-inr-cogap f g c (g s))
     ( compute-inl-cogap f g c (f s) ∙ coherence-square-cocone f g c s)
-    (pr2
+    ( pr2
       ( pr2
         ( htpy-cocone-map-universal-property-pushout
           ( f)
