@@ -30,7 +30,7 @@ Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A → B → UU l3)
-  {x x' : A} {y y' : B} 
+  {x x' : A} {y y' : B}
   where
 
   binary-tr : (p : x ＝ x') (q : y ＝ y') → C x y → C x' y'
