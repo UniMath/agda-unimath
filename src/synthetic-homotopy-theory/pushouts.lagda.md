@@ -128,24 +128,17 @@ compute-glue-cogap :
   ( ( compute-inl-cogap f g c (f s) ∙ coherence-square-cocone f g c s) ∙
     ( inv (compute-inr-cogap f g c (g s))))
 compute-glue-cogap f g c s =
-  ( inv right-unit) ∙
-  ( ( ap
-      ( ap (cogap f g c) (glue-pushout f g s) ∙_)
-      ( inv (right-inv (compute-inr-cogap f g c (g s))))) ∙
-    ( ( inv
-        ( assoc
-          ( ap (cogap f g c) (glue-pushout f g s))
-          ( compute-inr-cogap f g c (g s))
-          ( inv (compute-inr-cogap f g c (g s))))) ∙
-      ( ap
-        ( _∙ inv (compute-inr-cogap f g c (g s)))
-        ( pr2
-          ( pr2
-            ( htpy-cocone-map-universal-property-pushout
-              ( f)
-              ( g)
-              ( cocone-pushout f g)
-              ( up-pushout f g)
-              ( c)))
-          ( s)))))
+  con-inv
+    ( ap (cogap f g c) (glue-pushout f g s))
+    ( compute-inr-cogap f g c (g s))
+    ( compute-inl-cogap f g c (f s) ∙ coherence-square-cocone f g c s)
+    (pr2
+      ( pr2
+        ( htpy-cocone-map-universal-property-pushout
+          ( f)
+          ( g)
+          ( cocone-pushout f g)
+          ( up-pushout f g)
+          ( c)))
+      ( s))
 ```
