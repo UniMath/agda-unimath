@@ -108,6 +108,21 @@ module _
     comp-htpy f C = pr2 (Ind-htpy f C)
 ```
 
+### Computing eq-htpy of a composition
+
+```agda
+eq-htpy-comp : ∀ {i j k} {A : UU i} {B : UU j} {C : UU k}
+             → (f : A → B) {g h : B → C}
+             → (H : g ~ h)
+             → ap (_∘ f) (eq-htpy H) ＝ eq-htpy (H ∘ f)
+eq-htpy-comp f {g = g} H =
+  ind-htpy
+    (g)
+    (λ h' H' → ap (_∘ f) (eq-htpy H') ＝ eq-htpy (H' ∘ f))
+    (ap (ap (_∘ f)) (eq-htpy-refl-htpy g) ∙ inv (eq-htpy-refl-htpy (g ∘ f)))
+    (H)
+```
+
 ### Inverting homotopies is an equivalence
 
 ```agda
