@@ -22,6 +22,7 @@ open import graph-theory.equivalences-enriched-undirected-graphs public
 open import graph-theory.equivalences-undirected-graphs public
 open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
+open import graph-theory.fibers-directed-graphs public
 open import graph-theory.finite-graphs public
 open import graph-theory.geometric-realizations-undirected-graphs public
 open import graph-theory.hypergraphs public

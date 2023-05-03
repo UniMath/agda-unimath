@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -55,6 +56,26 @@ module _
         ( vertex-hom-Directed-Graph x)
         ( vertex-hom-Directed-Graph y)
     edge-hom-Directed-Graph {x} {y} e = pr2 f x y e
+
+    direct-predecessor-hom-Directed-Graph :
+      (x : vertex-Directed-Graph G) →
+      direct-predecessor-Directed-Graph G x →
+      direct-predecessor-Directed-Graph H (vertex-hom-Directed-Graph x)
+    direct-predecessor-hom-Directed-Graph x =
+      map-Σ
+        ( λ y → edge-Directed-Graph H y (vertex-hom-Directed-Graph x))
+        ( vertex-hom-Directed-Graph)
+        ( λ y → edge-hom-Directed-Graph)
+
+    direct-successor-hom-Directed-Graph :
+      (x : vertex-Directed-Graph G) →
+      direct-successor-Directed-Graph G x →
+      direct-successor-Directed-Graph H (vertex-hom-Directed-Graph x)
+    direct-successor-hom-Directed-Graph x =
+      map-Σ
+        ( edge-Directed-Graph H (vertex-hom-Directed-Graph x))
+        ( vertex-hom-Directed-Graph)
+        ( λ y → edge-hom-Directed-Graph)
 ```
 
 ### Composition of morphisms graphs
