@@ -89,7 +89,8 @@ module _
 
   is-leq-head-head-tail-is-sorted-vec :
     {n : ℕ} → (v : vec (element-total-decidable-Poset X) (succ-ℕ (succ-ℕ n))) →
-    is-sorted-vec v → leq-total-decidable-Poset X (head-vec v) (head-vec (tail-vec v))
+    is-sorted-vec v →
+    leq-total-decidable-Poset X (head-vec v) (head-vec (tail-vec v))
   is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
 ```
 
@@ -226,9 +227,20 @@ module _
     (v : vec (element-total-decidable-Poset X) n) →
     is-least-element-vec x v →
     is-least-element-functional-vec n x (functional-vec-vec n v)
-  is-least-element-functional-vec-is-least-element-vec (succ-ℕ n) x (y ∷ v) (p , q) (inl k) =
+  is-least-element-functional-vec-is-least-element-vec
+    ( succ-ℕ n)
+    ( x)
+    ( y ∷ v)
+    ( p , q)
+    ( inl k) =
     is-least-element-functional-vec-is-least-element-vec n x v q k
-  is-least-element-functional-vec-is-least-element-vec (succ-ℕ n) x (y ∷ v) (p , q) (inr star) = p
+  is-least-element-functional-vec-is-least-element-vec
+    ( succ-ℕ n)
+    ( x)
+    ( y ∷ v)
+    ( p , q)
+    ( inr star) =
+    p
 
   is-least-element-permute-vec :
     {n : ℕ}

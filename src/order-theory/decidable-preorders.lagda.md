@@ -31,7 +31,7 @@ module _
       ( λ x →
         Π-Prop
           ( element-Preorder X)
-          (  λ y → is-decidable-Prop (leq-preorder-Prop X x y)))
+          ( λ y → is-decidable-Prop (leq-preorder-Prop X x y)))
 
   is-decidable-Preorder : UU (l1 ⊔ l2)
   is-decidable-Preorder = type-Prop is-decidable-preorder-Prop
@@ -72,7 +72,7 @@ module _
     is-prop-leq-Preorder preorder-decidable-Preorder
 
   leq-decidable-preorder-decidable-Prop :
-    (x y : element-decidable-Preorder) → decidable-Prop l2
+    (x y : element-decidable-Preorder) → Decidable-Prop l2
   pr1 (leq-decidable-preorder-decidable-Prop x y) =
     leq-decidable-Preorder x y
   pr1 (pr2 (leq-decidable-preorder-decidable-Prop x y)) =

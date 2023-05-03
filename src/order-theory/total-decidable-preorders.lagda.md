@@ -99,7 +99,7 @@ module _
     is-decidable-preorder-total-decidable-Preorder
 
   leq-total-decidable-preorder-decidable-Prop :
-    (x y : element-total-decidable-Preorder) → decidable-Prop l2
+    (x y : element-total-decidable-Preorder) → Decidable-Prop l2
   leq-total-decidable-preorder-decidable-Prop =
     leq-decidable-preorder-decidable-Prop
       decidable-preorder-total-decidable-Preorder

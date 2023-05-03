@@ -48,7 +48,8 @@ module _
   poset-decidable-Poset : Poset l1 l2
   poset-decidable-Poset = pr1 X
 
-  is-decidable-poset-decidable-Poset : is-decidable-Poset (poset-decidable-Poset)
+  is-decidable-poset-decidable-Poset :
+    is-decidable-Poset (poset-decidable-Poset)
   is-decidable-poset-decidable-Poset = pr2 X
 
   element-decidable-Poset : UU l1
@@ -72,7 +73,7 @@ module _
   pr2 decidable-preorder-decidable-Poset = is-decidable-poset-decidable-Poset
 
   leq-decidable-poset-decidable-Prop :
-    (x y : element-decidable-Poset) → decidable-Prop l2
+    (x y : element-decidable-Poset) → Decidable-Prop l2
   leq-decidable-poset-decidable-Prop =
     leq-decidable-preorder-decidable-Prop decidable-preorder-decidable-Poset
 

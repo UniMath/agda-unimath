@@ -75,14 +75,17 @@ module _
   leq-total-Preorder : (x y : element-total-Preorder) → UU l2
   leq-total-Preorder = leq-Preorder preorder-total-Preorder
 
-  is-prop-leq-total-Preorder : (x y : element-total-Preorder) → is-prop (leq-total-Preorder x y)
+  is-prop-leq-total-Preorder :
+    (x y : element-total-Preorder) → is-prop (leq-total-Preorder x y)
   is-prop-leq-total-Preorder = is-prop-leq-Preorder preorder-total-Preorder
 
-  refl-leq-total-Preorder : (x : element-total-Preorder) → leq-total-Preorder x x
+  refl-leq-total-Preorder :
+    (x : element-total-Preorder) → leq-total-Preorder x x
   refl-leq-total-Preorder = refl-leq-Preorder preorder-total-Preorder
 
   transitive-leq-total-Preorder :
     (x y z : element-total-Preorder) →
     leq-total-Preorder y z → leq-total-Preorder x y → leq-total-Preorder x z
-  transitive-leq-total-Preorder = transitive-leq-Preorder preorder-total-Preorder
+  transitive-leq-total-Preorder =
+    transitive-leq-Preorder preorder-total-Preorder
 ```

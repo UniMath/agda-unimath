@@ -41,7 +41,7 @@ An array is a pair of a natural number `n`, and a function from `Fin n` to `A`.
 We show that arrays and lists are equivalent.
 
 ```agda
-array : {l : Level} → UU l  → UU l
+array : {l : Level} → UU l → UU l
 array A = Σ ℕ (λ n → functional-vec A n)
 
 module _
@@ -96,8 +96,8 @@ module _
   {l : Level} {A : UU l}
   where
 
-  list-vec : (n : ℕ)  → (vec A n) → list A
-  list-vec zero-ℕ  _ = nil
+  list-vec : (n : ℕ) → (vec A n) → list A
+  list-vec zero-ℕ _ = nil
   list-vec (succ-ℕ n) (x ∷ l) = cons x (list-vec n l)
 
   vec-list : (l : list A) → vec A (length-list l)

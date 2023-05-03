@@ -73,7 +73,8 @@ module _
   compute-composition-permute-vec n v a b =
     ap
       ( λ f → listed-vec-functional-vec n (f ∘ (map-equiv b)))
-      ( inv (isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv a)))
+      ( inv
+        ( isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv a)))
 
   compute-swap-two-last-elements-transposition-Fin-permute-vec :
     (n : ℕ)

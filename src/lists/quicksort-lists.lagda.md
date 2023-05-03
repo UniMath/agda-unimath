@@ -111,7 +111,7 @@ module _
     inequality-length-quicksort-list-divide-leq x (cons y l) =
       transitive-leq-ℕ
         ( length-list (quicksort-list-divide-leq x (cons y l)))
-        ( length-list (cons y (quicksort-list-divide-leq x l)) )
+        ( length-list (cons y (quicksort-list-divide-leq x l)))
         ( length-list (cons y l))
         ( inequality-length-quicksort-list-divide-leq x l)
         ( helper-inequality-length-quicksort-list-divide-leq
@@ -127,9 +127,17 @@ module _
       (l : list (element-total-decidable-Poset X)) →
       length-list (helper-quicksort-list-divide-strict-greater x y p l) ≤-ℕ
       length-list (cons y l)
-    helper-inequality-length-quicksort-list-divide-strict-greater x y (inl _) l =
+    helper-inequality-length-quicksort-list-divide-strict-greater
+      ( x)
+      ( y)
+      ( inl _)
+      ( l) =
       refl-leq-ℕ (length-list (cons y l))
-    helper-inequality-length-quicksort-list-divide-strict-greater x y (inr _) l =
+    helper-inequality-length-quicksort-list-divide-strict-greater
+      ( x)
+      ( y)
+      ( inr _)
+      ( l) =
       succ-leq-ℕ (length-list l)
 
     inequality-length-quicksort-list-divide-strict-greater :
@@ -140,7 +148,7 @@ module _
     inequality-length-quicksort-list-divide-strict-greater x (cons y l) =
       transitive-leq-ℕ
         ( length-list (quicksort-list-divide-strict-greater x (cons y l)))
-        ( length-list (cons y (quicksort-list-divide-strict-greater x l)) )
+        ( length-list (cons y (quicksort-list-divide-strict-greater x l)))
         ( length-list (cons y l))
         ( inequality-length-quicksort-list-divide-strict-greater x l)
         ( helper-inequality-length-quicksort-list-divide-strict-greater

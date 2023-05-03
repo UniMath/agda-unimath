@@ -80,13 +80,28 @@ module _
     ex-falso (q' refl)
   helper-is-involution-map-transposition-Fin k (inr _) (inl q) (inl _) _ =
     q
-  helper-is-involution-map-transposition-Fin k (inr _) (inl q) (inr _) (inl q') =
+  helper-is-involution-map-transposition-Fin
+    ( k)
+    ( inr _)
+    ( inl q)
+    ( inr _)
+    ( inl q') =
     inv q' ∙ q
-  helper-is-involution-map-transposition-Fin k (inr _) (inl _) (inr p') (inr _) =
+  helper-is-involution-map-transposition-Fin
+    ( k)
+    ( inr _)
+    ( inl _)
+    ( inr p')
+    ( inr _) =
     ex-falso (p' refl)
   helper-is-involution-map-transposition-Fin k (inr p) (inr _) (inl p') _ =
     ex-falso (p p')
-  helper-is-involution-map-transposition-Fin k (inr _) (inr q) (inr _) (inl q') =
+  helper-is-involution-map-transposition-Fin
+    ( k)
+    ( inr _)
+    ( inr q)
+    ( inr _)
+    ( inl q') =
     ex-falso (q q')
   helper-is-involution-map-transposition-Fin k (inr _) (inr _) (inr _) (inr _) =
     refl

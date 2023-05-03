@@ -35,7 +35,7 @@ total-decidable-Poset l1 l2 =
   Σ (Poset l1 l2) (λ X → is-total-Poset X × is-decidable-Poset X)
 
 module _
-  {l1 l2  : Level} (X : total-decidable-Poset l1 l2)
+  {l1 l2 : Level} (X : total-decidable-Poset l1 l2)
   where
 
   poset-total-decidable-Poset : Poset l1 l2
@@ -88,7 +88,7 @@ module _
     is-decidable-poset-total-decidable-Poset
 
   leq-total-decidable-poset-decidable-Prop :
-    (x y : element-total-decidable-Poset) → decidable-Prop l2
+    (x y : element-total-decidable-Poset) → Decidable-Prop l2
   leq-total-decidable-poset-decidable-Prop =
     leq-decidable-poset-decidable-Prop decidable-poset-total-decidable-Poset
 
@@ -118,7 +118,8 @@ module _
   preorder-total-decidable-Poset : Preorder l1 l2
   preorder-total-decidable-Poset = preorder-Poset poset-total-decidable-Poset
 
-  total-decidable-preorder-total-decidable-Poset : total-decidable-Preorder l1 l2
+  total-decidable-preorder-total-decidable-Poset :
+    total-decidable-Preorder l1 l2
   pr1 total-decidable-preorder-total-decidable-Poset =
     preorder-total-decidable-Poset
   pr1 (pr2 total-decidable-preorder-total-decidable-Poset) =

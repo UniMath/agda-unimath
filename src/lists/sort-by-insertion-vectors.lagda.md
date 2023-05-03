@@ -55,7 +55,7 @@ module _
     (x y : element-total-decidable-Poset X)
     (l : vec (element-total-decidable-Poset X) n) →
     leq-or-strict-greater-decidable-Poset X x y →
-    vec (element-total-decidable-Poset X) (succ-ℕ (succ-ℕ (n )))
+    vec (element-total-decidable-Poset X) (succ-ℕ (succ-ℕ (n)))
   helper-insertion-sort-vec x y l (inl p) = x ∷ y ∷ l
   helper-insertion-sort-vec {0} x y empty-vec (inr p) = y ∷ x ∷ empty-vec
   helper-insertion-sort-vec {succ-ℕ n} x y (z ∷ l) (inr p) =
@@ -198,14 +198,14 @@ module _
   is-permutation-insertion-sort-vec :
     {n : ℕ}
     (v : vec (element-total-decidable-Poset X) n) →
-    insertion-sort-vec v  ＝ permute-vec n v (permutation-insertion-sort-vec v)
+    insertion-sort-vec v ＝ permute-vec n v (permutation-insertion-sort-vec v)
   is-permutation-insertion-sort-vec {0} empty-vec = refl
   is-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
   is-permutation-insertion-sort-vec {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
     ( ( helper-is-permutation-insertion-sort-vec
         ( x)
         ( head-vec (insertion-sort-vec (y ∷ v)))
-        ( tail-vec (insertion-sort-vec (y  ∷ v)))
+        ( tail-vec (insertion-sort-vec (y ∷ v)))
         ( is-leq-or-strict-greater-total-decidable-Poset X _ _)) ∙
       ( ( ap-permute-vec
           ( helper-permutation-insertion-sort-vec
