@@ -98,11 +98,11 @@ compute-inl-cogap :
 compute-inl-cogap f g c =
   pr1
     ( htpy-cocone-map-universal-property-pushout
-        ( f)
-        ( g)
-        ( cocone-pushout f g)
-        ( up-pushout f g)
-        ( c))
+      ( f)
+      ( g)
+      ( cocone-pushout f g)
+      ( up-pushout f g)
+      ( c))
 
 compute-inr-cogap :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -113,9 +113,39 @@ compute-inr-cogap f g c =
   pr1
     ( pr2
       ( htpy-cocone-map-universal-property-pushout
-          ( f)
-          ( g)
-          ( cocone-pushout f g)
-          ( up-pushout f g)
-          ( c)))
+        ( f)
+        ( g)
+        ( cocone-pushout f g)
+        ( up-pushout f g)
+        ( c)))
+
+compute-glue-cogap :
+  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  ( f : S → A) (g : S → B) →
+  { X : UU l4} (c : cocone f g X)
+  ( s : S) →
+  ( ap (cogap f g c) (glue-pushout f g s)) ＝
+  ( (compute-inl-cogap f g c (f s) ∙ coherence-square-cocone f g c s) ∙
+    ( inv (compute-inr-cogap f g c (g s))))
+compute-glue-cogap f g c s =
+  ( inv right-unit) ∙
+  ( ( ap
+      ( ap (cogap f g c) (glue-pushout f g s) ∙_)
+      ( inv (right-inv (compute-inr-cogap f g c (g s))))) ∙
+    ( ( inv
+        ( assoc
+          ( ap (cogap f g c) (glue-pushout f g s))
+          ( compute-inr-cogap f g c (g s))
+          ( inv (compute-inr-cogap f g c (g s))))) ∙
+      ( ap
+        ( _∙ inv (compute-inr-cogap f g c (g s)))
+        ( pr2
+          ( pr2
+            ( htpy-cocone-map-universal-property-pushout
+              ( f)
+              ( g)
+              ( cocone-pushout f g)
+              ( up-pushout f g)
+              ( c)))
+          ( s)))))
 ```
