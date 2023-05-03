@@ -36,8 +36,8 @@ module _
   where
 
   cavallos-trick :
-    (f g : A →* B) → sec (λ (H : id ~ id) → H (point-Pointed-Type B)) →
-    (map-pointed-map A B f ~ map-pointed-map A B g) → f ~* g
+    (f g : A →∗ B) → sec (λ (H : id ~ id) → H (point-Pointed-Type B)) →
+    (map-pointed-map A B f ~ map-pointed-map A B g) → f ~∗ g
   pr1 (cavallos-trick (f , refl) (g , q) (K , α) H) a =
     K (inv q ∙ inv (H (point-Pointed-Type A))) (f a) ∙ H a
   pr2 (cavallos-trick (f , refl) (g , q) (K , α) H) =
@@ -59,5 +59,5 @@ module _
 - Cavallo's trick was originally formalized in the
   [cubical agda library](https://agda.github.io/cubical/Cubical.Foundations.Pointed.Homogeneous.html).
 - The above generalization was found by Buchholtz, Christensen, Rijke, and
-  Taxerȧs Flaten, in
+  Taxerås Flaten, in
   [Central H-spaces and banded types](https://arxiv.org/abs/2301.02636)

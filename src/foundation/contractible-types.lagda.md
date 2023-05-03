@@ -169,12 +169,6 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  ev-point : {l2 : Level} (a : A) {P : A → UU l2} → ((x : A) → P x) → P a
-  ev-point a f = f a
-
-  ev-point' : {l2 : Level} (a : A) {X : UU l2} → (A → X) → X
-  ev-point' a f = f a
-
   dependent-universal-property-contr : (l : Level) (a : A) → UU (l1 ⊔ lsuc l)
   dependent-universal-property-contr l a =
     (P : A → UU l) → is-equiv (ev-point a {P})
@@ -199,7 +193,7 @@ module _
 
   abstract
     is-contr-is-equiv-ev-point :
-      (a : A) → is-equiv (ev-point' a {X = A}) → is-contr A
+      (a : A) → is-equiv (ev-point' a {A}) → is-contr A
     pr1 (is-contr-is-equiv-ev-point a H) = a
     pr2 (is-contr-is-equiv-ev-point a H) =
       htpy-eq

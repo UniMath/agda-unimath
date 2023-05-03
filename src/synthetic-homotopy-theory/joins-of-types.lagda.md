@@ -38,13 +38,15 @@ The join of `A` and `B` is the pushout of the span `A ← A × B → B`.
 ## Definition
 
 ```agda
-_*_ :
+join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-A * B = pushout (pr1 {A = A} {B = λ x → B}) pr2
+join A B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
+
+_*_ = join
 
 cocone-join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  cocone (pr1 {A = A} {B = λ x → B}) pr2 (A * B)
+  cocone (pr1 {A = A} {B = λ _ → B}) pr2 (A * B)
 cocone-join A B = cocone-pushout pr1 pr2
 
 up-join :
@@ -74,7 +76,7 @@ cogap-join A B X = map-inv-is-equiv (up-join A B X)
 
 ## Properties
 
-### Left unit law for joins
+### The left unit law for joins
 
 ```agda
 is-equiv-inr-join-empty :
@@ -89,11 +91,12 @@ is-equiv-inr-join-empty X =
 
 left-unit-law-join :
   {l : Level} (X : UU l) → X ≃ (empty * X)
-left-unit-law-join X =
-  pair (inr-join empty X) (is-equiv-inr-join-empty X)
+pr1 (left-unit-law-join X) = inr-join empty X
+pr2 (left-unit-law-join X) = is-equiv-inr-join-empty X
 
 is-equiv-inr-join-is-empty :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty A → is-equiv (inr-join A B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+  is-empty A → is-equiv (inr-join A B)
 is-equiv-inr-join-is-empty A B is-empty-A =
   is-equiv-universal-property-pushout
     ( pr1)
@@ -103,12 +106,14 @@ is-equiv-inr-join-is-empty A B is-empty-A =
     ( up-join A B)
 
 left-unit-law-join-is-empty :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty A → B ≃ (A * B)
-left-unit-law-join-is-empty A B is-empty-A =
-  pair (inr-join A B) (is-equiv-inr-join-is-empty A B is-empty-A)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+  is-empty A → B ≃ (A * B)
+pr1 (left-unit-law-join-is-empty A B is-empty-A) = inr-join A B
+pr2 (left-unit-law-join-is-empty A B is-empty-A) =
+  is-equiv-inr-join-is-empty A B is-empty-A
 ```
 
-### Right unit law for joins
+### The right unit law for joins
 
 ```agda
 is-equiv-inl-join-empty :
@@ -123,11 +128,12 @@ is-equiv-inl-join-empty X =
 
 right-unit-law-join :
   {l : Level} (X : UU l) → X ≃ (X * empty)
-right-unit-law-join X =
-  pair (inl-join X empty) (is-equiv-inl-join-empty X)
+pr1 (right-unit-law-join X) = inl-join X empty
+pr2 (right-unit-law-join X) = is-equiv-inl-join-empty X
 
 is-equiv-inl-join-is-empty :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty B → is-equiv (inl-join A B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+  is-empty B → is-equiv (inl-join A B)
 is-equiv-inl-join-is-empty A B is-empty-B =
   is-equiv-universal-property-pushout'
     ( pr1)
@@ -137,12 +143,14 @@ is-equiv-inl-join-is-empty A B is-empty-B =
     ( up-join A B)
 
 right-unit-law-join-is-empty :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty B → A ≃ (A * B)
-right-unit-law-join-is-empty A B is-empty-B =
-  pair (inl-join A B) (is-equiv-inl-join-is-empty A B is-empty-B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+  is-empty B → A ≃ (A * B)
+pr1 (right-unit-law-join-is-empty A B is-empty-B) = inl-join A B
+pr2 (right-unit-law-join-is-empty A B is-empty-B) =
+  is-equiv-inl-join-is-empty A B is-empty-B
 ```
 
-### Left zero law for joins
+### The left zero law for joins
 
 ```agda
 is-equiv-inl-join-unit :
@@ -182,7 +190,7 @@ left-zero-law-join-is-contr A B is-contr-A =
     ( is-contr-A)
 ```
 
-### Right zero law for joins
+### The right zero law for joins
 
 ```agda
 is-equiv-inr-join-unit :
@@ -256,7 +264,8 @@ module _
   where
 
   join-Prop : Prop (l1 ⊔ l2)
-  join-Prop = (A * B) , is-prop-join-is-prop is-prop-A is-prop-B
+  pr1 join-Prop = A * B
+  pr2 join-Prop = is-prop-join-is-prop is-prop-A is-prop-B
 
   type-join-Prop : UU (l1 ⊔ l2)
   type-join-Prop = type-Prop join-Prop
@@ -305,7 +314,8 @@ module _
       ( map-join-disj-Prop)
 
   equiv-disj-join-Prop : (type-join-Prop A B) ≃ (type-disj-Prop A B)
-  equiv-disj-join-Prop = pair map-disj-join-Prop is-equiv-map-disj-join-Prop
+  pr1 equiv-disj-join-Prop = map-disj-join-Prop
+  pr2 equiv-disj-join-Prop = is-equiv-map-disj-join-Prop
 
   is-equiv-map-join-disj-Prop : is-equiv map-join-disj-Prop
   is-equiv-map-join-disj-Prop =
@@ -315,7 +325,8 @@ module _
       ( map-disj-join-Prop)
 
   equiv-join-disj-Prop : (type-disj-Prop A B) ≃ (type-join-Prop A B)
-  equiv-join-disj-Prop = pair map-join-disj-Prop is-equiv-map-join-disj-Prop
+  pr1 equiv-join-disj-Prop = map-join-disj-Prop
+  pr2 equiv-join-disj-Prop = is-equiv-map-join-disj-Prop
 
   up-join-disj : {l : Level} → universal-property-pushout l pr1 pr2 cocone-disj
   up-join-disj =
@@ -340,3 +351,9 @@ module _
       ( is-equiv-map-disj-join-Prop)
       ( up-join (pr1 A) (pr1 B))
 ```
+
+## References
+
+- Egbert Rijke, _The join construction_, 2017
+  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538),
+  [DOI:10.48550](https://doi.org/10.48550/arXiv.1701.07538))

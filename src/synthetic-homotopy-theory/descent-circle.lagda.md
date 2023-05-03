@@ -383,7 +383,7 @@ module _
   compute-ev-fixpoint-descent-data-circle :
     coherence-square-maps
       ( ev-fixpoint-descent-data-circle)
-      ( ev-pt (base-free-loop l) Q)
+      ( ev-point (base-free-loop l) {Q})
       ( pr1)
       ( map-inv-equiv α)
   compute-ev-fixpoint-descent-data-circle = refl-htpy

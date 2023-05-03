@@ -404,7 +404,7 @@ module _
 
 Here we prove the universal property of the suspension of a pointed type: the
 suspension is left adjoint to the loop space. We do this by constructing an
-equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is
+equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalences is
 given by λ f → Ω(f) ∘ unit
 
 #### The unit and counit of the adjunction
@@ -418,7 +418,7 @@ module _
   shift l = l ∙ (merid-susp (point-Pointed-Type X))
 
   shift* :
-    Ω (suspension-Pointed-Type X) →*
+    Ω (suspension-Pointed-Type X) →∗
     ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
   pr1 shift* = shift
   pr2 shift* = refl
@@ -427,7 +427,7 @@ module _
   unshift p = p ∙ inv (merid-susp (point-Pointed-Type X))
 
   unshift* :
-    ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X))) →*
+    ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X))) →∗
     Ω (suspension-Pointed-Type X)
   pr1 unshift* = unshift
   pr2 unshift* = right-inv (merid-susp (point-Pointed-Type X))
@@ -436,17 +436,17 @@ module _
   is-equiv-shift = is-equiv-concat' N-susp (merid-susp (point-Pointed-Type X))
 
   pointed-equiv-shift :
-    ( Ω (suspension-Pointed-Type X)) ≃*
+    ( Ω (suspension-Pointed-Type X)) ≃∗
     ( (N-susp ＝ S-susp) , merid-susp (point-Pointed-Type X))
   pr1 (pr1 pointed-equiv-shift) = shift
   pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
   pr2 pointed-equiv-shift = preserves-point-pointed-map _ _ shift*
 
-  merid-susp* : X →* ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
+  merid-susp* : X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
   pr1 merid-susp* = merid-susp
   pr2 merid-susp* = refl
 
-  unit-susp-loop-adj* : X →* Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj* : X →∗ Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
 
   unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
@@ -460,7 +460,7 @@ module _
         ( point-Pointed-Type X) ,
         ( id))
 
-  counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →* X
+  counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →∗ X
   pr1 counit-susp-loop-adj* = counit-susp-loop-adj
   pr2 counit-susp-loop-adj* =
     up-suspension-N-susp
@@ -478,7 +478,7 @@ module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where
 
-  equiv-susp-loop-adj : (suspension-Pointed-Type X →* Y) ≃ (X →* Ω Y)
+  equiv-susp-loop-adj : (suspension-Pointed-Type X →∗ Y) ≃ (X →∗ Ω Y)
   equiv-susp-loop-adj =
     ( left-unit-law-Σ-is-contr
       ( is-contr-total-path (point-Pointed-Type Y))
