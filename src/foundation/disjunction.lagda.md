@@ -34,7 +34,13 @@ disj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 disj-Prop P Q = trunc-Prop (type-Prop P + type-Prop Q)
 
 _∨_ = disj-Prop
+```
 
+**Note**: The symbol used for the disjunction `_∨_` is the
+[logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
+not the [latin small letter v](https://codepoints.net/U+0076) `v`.
+
+```agda
 type-disj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-disj-Prop P Q = type-Prop (disj-Prop P Q)
 

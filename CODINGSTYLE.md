@@ -54,8 +54,7 @@ improve the readability.
   words.
 - The readability of the code has high priority. Therefore, we try to avoid
   subtly different variations of the same symbol. The only exception to this
-  rule is the use of the
-  [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm)
+  rule is the use of the [full width equals sign](https://codepoints.net/U+ff1d)
   for identity type formation, as the standard equals sign is a reserved symbol
   in Agda.
 

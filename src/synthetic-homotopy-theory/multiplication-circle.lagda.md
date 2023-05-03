@@ -57,7 +57,7 @@ htpy-id-id-base-𝕊¹ = pr1 (pr2 htpy-id-id-Π-𝕊¹)
 
 ```agda
 Mul-Π-𝕊¹ : 𝕊¹ → UU lzero
-Mul-Π-𝕊¹ x = 𝕊¹-Pointed-Type →* (pair 𝕊¹ x)
+Mul-Π-𝕊¹ x = 𝕊¹-Pointed-Type →∗ (pair 𝕊¹ x)
 
 path-over-Mul-Π-𝕊¹ :
   {x : 𝕊¹} (p : Id base-𝕊¹ x) (q : Mul-Π-𝕊¹ base-𝕊¹) (r : Mul-Π-𝕊¹ x) →

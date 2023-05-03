@@ -99,8 +99,9 @@ if __name__ == '__main__':
     def filter_agda_files(f): return utils.is_agda_file(
         pathlib.Path(f)) and os.path.dirname(f) != root
 
+    # Sort the files by most recently changed
     agda_files = sorted(
-        filter(filter_agda_files, utils.get_files_recursive(root)))
+        filter(filter_agda_files, utils.get_files_recursive(root)), key=lambda t: -os.stat(t).st_mtime)
 
     with ThreadPoolExecutor() as executor:
         executor.map(lambda file: process_agda_file(

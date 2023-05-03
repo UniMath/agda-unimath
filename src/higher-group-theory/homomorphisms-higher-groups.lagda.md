@@ -34,7 +34,7 @@ module _
 
   hom-∞-Group : UU (l1 ⊔ l2)
   hom-∞-Group =
-    classifying-pointed-type-∞-Group G →* classifying-pointed-type-∞-Group H
+    classifying-pointed-type-∞-Group G →∗ classifying-pointed-type-∞-Group H
 
   classifying-map-hom-∞-Group :
     hom-∞-Group → classifying-type-∞-Group G → classifying-type-∞-Group H

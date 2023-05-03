@@ -29,14 +29,14 @@ the underlying map is faithful.
 faithful-pointed-map :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → UU (l1 ⊔ l2)
 faithful-pointed-map A B =
-  Σ (A →* B) (λ f → is-faithful (map-pointed-map A B f))
+  Σ (A →∗ B) (λ f → is-faithful (map-pointed-map A B f))
 
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   (f : faithful-pointed-map A B)
   where
 
-  pointed-map-faithful-pointed-map : A →* B
+  pointed-map-faithful-pointed-map : A →∗ B
   pointed-map-faithful-pointed-map = pr1 f
 
   map-faithful-pointed-map : type-Pointed-Type A → type-Pointed-Type B

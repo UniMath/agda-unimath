@@ -5,6 +5,7 @@ module structured-types where
 
 open import structured-types.central-h-spaces public
 open import structured-types.coherent-h-spaces public
+open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.constant-maps-pointed-types public
 open import structured-types.contractible-pointed-types public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
@@ -31,6 +32,7 @@ open import structured-types.pointed-maps public
 open import structured-types.pointed-sections public
 open import structured-types.pointed-types public
 open import structured-types.pointed-types-equipped-with-automorphisms public
+open import structured-types.pointed-unit-type public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public

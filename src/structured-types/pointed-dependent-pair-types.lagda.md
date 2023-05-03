@@ -33,5 +33,10 @@ module _
   pr1 (Σ-Pointed-Type (A , a) (B , b)) = Σ A B
   pr2 (Σ-Pointed-Type (A , a) (B , b)) = a , b
 
-  Σ* = Σ-Pointed-Type
+  Σ∗ = Σ-Pointed-Type
 ```
+
+**Note**: the subscript asterisk symbol used for the pointed dependent pair type
+`Σ∗`, and pointed type constructions in general, is the
+[asterisk operator](https://codepoints.net/U+2217) `∗` (agda-input: `\ast`), not
+the [asterisk](https://codepoints.net/U+002A) `*`.
