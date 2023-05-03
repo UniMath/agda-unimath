@@ -75,6 +75,16 @@ module _
   pr1 (pr2 (pr2 preorder-Poset)) = refl-leq-Poset
   pr2 (pr2 (pr2 preorder-Poset)) = transitive-leq-Poset
 
+  strict-leq-poset-Prop : (x y : element-Poset) → Prop (l1 ⊔ l2)
+  strict-leq-poset-Prop = strict-leq-preorder-Prop preorder-Poset
+
+  strict-leq-Poset : (x y : element-Poset) → UU (l1 ⊔ l2)
+  strict-leq-Poset = strict-leq-Preorder preorder-Poset
+
+  is-prop-strict-leq-Poset :
+    (x y : element-Poset) → is-prop (strict-leq-Poset x y)
+  is-prop-strict-leq-Poset = is-prop-strict-leq-Preorder preorder-Poset
+
   antisymmetric-leq-Poset :
     (x y : element-Poset) → leq-Poset x y → leq-Poset y x → Id x y
   antisymmetric-leq-Poset = pr2 (pr2 (pr2 X))

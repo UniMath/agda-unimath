@@ -13,6 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
@@ -70,6 +71,10 @@ module _
   all-vec : {l2 : Level} {n : ℕ} → (P : A → UU l2) → vec A n → UU l2
   all-vec P empty-vec = raise-unit _
   all-vec P (x ∷ v) = P x × all-vec P v
+
+  data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
+    is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
+    is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)
 ```
 
 ### The functional type of vectors
