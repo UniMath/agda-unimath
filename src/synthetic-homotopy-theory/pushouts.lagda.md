@@ -125,7 +125,7 @@ compute-glue-cogap :
   { X : UU l4} (c : cocone f g X)
   ( s : S) →
   ( ap (cogap f g c) (glue-pushout f g s)) ＝
-  ( (compute-inl-cogap f g c (f s) ∙ coherence-square-cocone f g c s) ∙
+  ( ( compute-inl-cogap f g c (f s) ∙ coherence-square-cocone f g c s) ∙
     ( inv (compute-inr-cogap f g c (g s))))
 compute-glue-cogap f g c s =
   ( inv right-unit) ∙
