@@ -30,28 +30,26 @@ Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A → B → UU l3)
+  {x x' : A} {y y' : B} 
   where
 
-  binary-tr :
-    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → C x y → C x' y'
+  binary-tr : (p : x ＝ x') (q : y ＝ y') → C x y → C x' y'
   binary-tr refl refl = id
 
-  is-equiv-binary-tr :
-    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → is-equiv (binary-tr p q)
+  is-equiv-binary-tr : (p : x ＝ x') (q : y ＝ y') → is-equiv (binary-tr p q)
   is-equiv-binary-tr refl refl = is-equiv-id
 
-  equiv-binary-tr :
-    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → C x y ≃ C x' y'
+  equiv-binary-tr : (p : x ＝ x') (q : y ＝ y') → C x y ≃ C x' y'
   pr1 (equiv-binary-tr p q) = binary-tr p q
   pr2 (equiv-binary-tr p q) = is-equiv-binary-tr p q
 
   compute-binary-tr :
-    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') (u : C x y) →
+    (p : x ＝ x') (q : y ＝ y') (u : C x y) →
     tr (λ a → C a y') p (tr (C x) q u) ＝ binary-tr p q u
   compute-binary-tr refl refl u = refl
 
   compute-binary-tr' :
-    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') (u : C x y) →
+    (p : x ＝ x') (q : y ＝ y') (u : C x y) →
     tr (C x') q (tr (λ a → C a y) p u) ＝ binary-tr p q u
   compute-binary-tr' refl refl u = refl
 ```
