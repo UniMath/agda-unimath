@@ -39,13 +39,13 @@ module _
   {l1 l2 : Level} (X : total-decidable-Poset l1 l2)
   where
 
-  is-a-sort-vec :
+  is-sort-vec :
     (f :
       {n : ℕ} →
       vec (element-total-decidable-Poset X) n →
       vec (element-total-decidable-Poset X) n) →
     UU (l1 ⊔ l2)
-  is-a-sort-vec f =
+  is-sort-vec f =
     (n : ℕ) →
     is-permutation-vec n f ×
     ((v : vec (element-total-decidable-Poset X) n) → is-sorted-vec X (f v))

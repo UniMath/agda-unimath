@@ -40,7 +40,6 @@ module _
   permute-vec : (n : ℕ) → vec A n → Permutation n → vec A n
   permute-vec n v s =
     listed-vec-functional-vec n (functional-vec-vec n v ∘ (map-equiv s))
--- TODO : Should I replace (map-equiv s) by (map-inv-equiv s)
 ```
 
 ### The predicate that a function from `vec` to `vec` is just permuting vectors.

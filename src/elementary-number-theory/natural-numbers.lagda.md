@@ -164,10 +164,6 @@ eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
 eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
 eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
 
-eq-succ-ℕ :
-  {x y : ℕ} → succ-ℕ x ＝ succ-ℕ y → x ＝ y
-eq-succ-ℕ {x} {y} p = eq-Eq-ℕ x y (Eq-eq-ℕ p)
-
 abstract
   is-set-ℕ : is-set ℕ
   is-set-ℕ =

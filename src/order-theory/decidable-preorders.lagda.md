@@ -46,31 +46,30 @@ module _
   {l1 l2 : Level} (X : decidable-Preorder l1 l2)
   where
 
-  Preorder-decidable-Preorder : Preorder l1 l2
-  Preorder-decidable-Preorder = pr1 X
+  preorder-decidable-Preorder : Preorder l1 l2
+  preorder-decidable-Preorder = pr1 X
 
-  is-decidable-Preorder-decidable-Preorder :
-    is-decidable-Preorder Preorder-decidable-Preorder
-  is-decidable-Preorder-decidable-Preorder = pr2 X
+  is-decidable-preorder-decidable-Preorder :
+    is-decidable-Preorder preorder-decidable-Preorder
+  is-decidable-preorder-decidable-Preorder = pr2 X
 
   element-decidable-Preorder : UU l1
-  element-decidable-Preorder = pr1 Preorder-decidable-Preorder
+  element-decidable-Preorder = element-Preorder preorder-decidable-Preorder
 
   leq-decidable-preorder-Prop :
     (x y : element-decidable-Preorder) → Prop l2
   leq-decidable-preorder-Prop =
-    pr1 (pr2 Preorder-decidable-Preorder)
+    leq-preorder-Prop preorder-decidable-Preorder
 
   leq-decidable-Preorder :
     (x y : element-decidable-Preorder) → UU l2
-  leq-decidable-Preorder x y =
-    type-Prop (leq-decidable-preorder-Prop x y)
+  leq-decidable-Preorder = leq-Preorder preorder-decidable-Preorder
 
   is-prop-leq-decidable-Preorder :
     (x y : element-decidable-Preorder) →
     is-prop (leq-decidable-Preorder x y)
-  is-prop-leq-decidable-Preorder x y =
-    is-prop-type-Prop (leq-decidable-preorder-Prop x y)
+  is-prop-leq-decidable-Preorder =
+    is-prop-leq-Preorder preorder-decidable-Preorder
 
   leq-decidable-preorder-decidable-Prop :
     (x y : element-decidable-Preorder) → decidable-Prop l2
@@ -79,12 +78,11 @@ module _
   pr1 (pr2 (leq-decidable-preorder-decidable-Prop x y)) =
     is-prop-leq-decidable-Preorder x y
   pr2 (pr2 (leq-decidable-preorder-decidable-Prop x y)) =
-    is-decidable-Preorder-decidable-Preorder x y
+    is-decidable-preorder-decidable-Preorder x y
 
   refl-leq-decidable-Preorder :
     (x : element-decidable-Preorder) → leq-decidable-Preorder x x
-  refl-leq-decidable-Preorder =
-    pr1 (pr2 (pr2 Preorder-decidable-Preorder))
+  refl-leq-decidable-Preorder = refl-leq-Preorder preorder-decidable-Preorder
 
   transitive-leq-decidable-Preorder :
     (x y z : element-decidable-Preorder) →
@@ -92,5 +90,5 @@ module _
     leq-decidable-Preorder x y →
     leq-decidable-Preorder x z
   transitive-leq-decidable-Preorder =
-    pr2 (pr2 (pr2 Preorder-decidable-Preorder))
+    transitive-leq-Preorder preorder-decidable-Preorder
 ```

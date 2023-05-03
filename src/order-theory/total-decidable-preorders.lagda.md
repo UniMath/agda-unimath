@@ -39,55 +39,75 @@ module _
   {l1 l2 : Level} (X : total-decidable-Preorder l1 l2)
   where
 
-  Preorder-total-decidable-Preorder : Preorder l1 l2
-  Preorder-total-decidable-Preorder = pr1 X
+  preorder-total-decidable-Preorder : Preorder l1 l2
+  preorder-total-decidable-Preorder = pr1 X
 
-  is-total-Preorder-total-decidable-Preorder :
-    is-total-Preorder Preorder-total-decidable-Preorder
-  is-total-Preorder-total-decidable-Preorder = pr1 (pr2 X)
+  is-total-preorder-total-decidable-Preorder :
+    is-total-Preorder preorder-total-decidable-Preorder
+  is-total-preorder-total-decidable-Preorder = pr1 (pr2 X)
 
-  is-decidable-Preorder-total-decidable-Preorder :
-    is-decidable-Preorder Preorder-total-decidable-Preorder
-  is-decidable-Preorder-total-decidable-Preorder = pr2 (pr2 X)
+  is-decidable-preorder-total-decidable-Preorder :
+    is-decidable-Preorder preorder-total-decidable-Preorder
+  is-decidable-preorder-total-decidable-Preorder = pr2 (pr2 X)
+
+  decidable-preorder-total-decidable-Preorder : decidable-Preorder l1 l2
+  pr1 decidable-preorder-total-decidable-Preorder =
+    preorder-total-decidable-Preorder
+  pr2 decidable-preorder-total-decidable-Preorder =
+    is-decidable-preorder-total-decidable-Preorder
 
   element-total-decidable-Preorder : UU l1
-  element-total-decidable-Preorder = pr1 Preorder-total-decidable-Preorder
+  element-total-decidable-Preorder =
+    element-Preorder preorder-total-decidable-Preorder
 
   leq-total-decidable-preorder-Prop :
     (x y : element-total-decidable-Preorder) → Prop l2
   leq-total-decidable-preorder-Prop =
-    pr1 (pr2 Preorder-total-decidable-Preorder)
+    leq-preorder-Prop preorder-total-decidable-Preorder
 
   leq-total-decidable-Preorder :
     (x y : element-total-decidable-Preorder) → UU l2
-  leq-total-decidable-Preorder x y =
-    type-Prop (leq-total-decidable-preorder-Prop x y)
+  leq-total-decidable-Preorder =
+    leq-Preorder preorder-total-decidable-Preorder
 
   is-prop-leq-total-decidable-Preorder :
     (x y : element-total-decidable-Preorder) →
     is-prop (leq-total-decidable-Preorder x y)
-  is-prop-leq-total-decidable-Preorder x y =
-    is-prop-type-Prop (leq-total-decidable-preorder-Prop x y)
+  is-prop-leq-total-decidable-Preorder =
+    is-prop-leq-Preorder preorder-total-decidable-Preorder
+
+  strict-leq-total-decidable-preorder-Prop :
+    (x y : element-total-decidable-Preorder) → Prop (l1 ⊔ l2)
+  strict-leq-total-decidable-preorder-Prop =
+    strict-leq-preorder-Prop preorder-total-decidable-Preorder
+
+  strict-leq-total-decidable-Preorder :
+    (x y : element-total-decidable-Preorder) → UU (l1 ⊔ l2)
+  strict-leq-total-decidable-Preorder =
+    strict-leq-Preorder preorder-total-decidable-Preorder
+
+  is-prop-strict-leq-total-decidable-Preorder :
+    (x y : element-total-decidable-Preorder) →
+    is-prop (strict-leq-total-decidable-Preorder x y)
+  is-prop-strict-leq-total-decidable-Preorder =
+    is-prop-strict-leq-Preorder preorder-total-decidable-Preorder
 
   is-decidable-leq-total-decidable-Preorder :
     (x y : element-total-decidable-Preorder) →
     is-decidable (leq-total-decidable-Preorder x y)
   is-decidable-leq-total-decidable-Preorder =
-    is-decidable-Preorder-total-decidable-Preorder
+    is-decidable-preorder-total-decidable-Preorder
 
   leq-total-decidable-preorder-decidable-Prop :
     (x y : element-total-decidable-Preorder) → decidable-Prop l2
-  pr1 (leq-total-decidable-preorder-decidable-Prop x y) =
-    leq-total-decidable-Preorder x y
-  pr1 (pr2 (leq-total-decidable-preorder-decidable-Prop x y)) =
-    is-prop-leq-total-decidable-Preorder x y
-  pr2 (pr2 (leq-total-decidable-preorder-decidable-Prop x y)) =
-    is-decidable-leq-total-decidable-Preorder x y
+  leq-total-decidable-preorder-decidable-Prop =
+    leq-decidable-preorder-decidable-Prop
+      decidable-preorder-total-decidable-Preorder
 
   refl-leq-total-decidable-Preorder :
     (x : element-total-decidable-Preorder) → leq-total-decidable-Preorder x x
   refl-leq-total-decidable-Preorder =
-    pr1 (pr2 (pr2 Preorder-total-decidable-Preorder))
+    refl-leq-Preorder preorder-total-decidable-Preorder
 
   transitive-leq-total-decidable-Preorder :
     (x y z : element-total-decidable-Preorder) →
@@ -95,27 +115,27 @@ module _
     leq-total-decidable-Preorder x y →
     leq-total-decidable-Preorder x z
   transitive-leq-total-decidable-Preorder =
-    pr2 (pr2 (pr2 Preorder-total-decidable-Preorder))
+    transitive-leq-Preorder preorder-total-decidable-Preorder
 
   leq-or-strict-greater-decidable-Preorder :
     (x y : element-total-decidable-Preorder) →
     UU (l1 ⊔ l2)
   leq-or-strict-greater-decidable-Preorder x y =
     leq-total-decidable-Preorder x y +
-    (¬(x ＝ y) × leq-total-decidable-Preorder y x)
+    strict-leq-total-decidable-Preorder y x
 
-  is-leq-or-strict-greater-total-decidable-Preorder-helper :
+  helper-is-leq-or-strict-greater-total-decidable-Preorder :
     (x y : element-total-decidable-Preorder) →
     leq-total-decidable-Preorder x y +
     ¬ (leq-total-decidable-Preorder x y)
     → leq-or-strict-greater-decidable-Preorder x y
-  is-leq-or-strict-greater-total-decidable-Preorder-helper x y (inl p) =
+  helper-is-leq-or-strict-greater-total-decidable-Preorder x y (inl p) =
     inl p
-  is-leq-or-strict-greater-total-decidable-Preorder-helper x y (inr p) =
+  helper-is-leq-or-strict-greater-total-decidable-Preorder x y (inr p) =
     inr
-      (( λ {refl → p (refl-leq-total-decidable-Preorder x)}) ,
+      ( ( λ {refl → p (refl-leq-total-decidable-Preorder x)}) ,
          apply-universal-property-trunc-Prop
-           ( is-total-Preorder-total-decidable-Preorder y x)
+           ( is-total-preorder-total-decidable-Preorder y x)
            ( leq-total-decidable-preorder-Prop y x)
            ( ind-coprod
                ( λ _ → leq-total-decidable-Preorder y x)
@@ -126,7 +146,7 @@ module _
     (x y : element-total-decidable-Preorder) →
     leq-or-strict-greater-decidable-Preorder x y
   is-leq-or-strict-greater-total-decidable-Preorder x y =
-    is-leq-or-strict-greater-total-decidable-Preorder-helper
+    helper-is-leq-or-strict-greater-total-decidable-Preorder
       ( x)
       ( y)
       ( is-decidable-leq-total-decidable-Preorder x y)

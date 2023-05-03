@@ -59,19 +59,19 @@ module _
 ### The proposition that a element is less or equal than every element in a vector
 
 ```agda
-  is-leq-all-element-vec-Prop :
+  is-least-element-vec-Prop :
     {n : ℕ} → element-total-decidable-Poset X →
     vec (element-total-decidable-Poset X) n → Prop l2
-  is-leq-all-element-vec-Prop {0} x v = raise-unit-Prop l2
-  is-leq-all-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
+  is-least-element-vec-Prop {0} x v = raise-unit-Prop l2
+  is-least-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
     prod-Prop
       ( leq-total-decidable-poset-Prop X x y)
-      ( is-leq-all-element-vec-Prop x v)
+      ( is-least-element-vec-Prop x v)
 
-  is-leq-all-element-vec :
+  is-least-element-vec :
     {n : ℕ} → element-total-decidable-Poset X →
     vec (element-total-decidable-Poset X) n → UU l2
-  is-leq-all-element-vec x v = type-Prop (is-leq-all-element-vec-Prop x v)
+  is-least-element-vec x v = type-Prop (is-least-element-vec-Prop x v)
 ```
 
 ## Properties
@@ -95,17 +95,17 @@ module _
 ### If a vector `v' ＝ y ∷ v` is sorted then for all element `x` less or equal than `y`, `x` is less or equal than every element in the vector.
 
 ```agda
-  is-leq-all-element-vec-is-leq-head-sorted-vec :
+  is-least-element-vec-is-leq-head-sorted-vec :
     {n : ℕ}
     (x : element-total-decidable-Poset X)
     (v : vec (element-total-decidable-Poset X) (succ-ℕ n)) →
     is-sorted-vec v → leq-total-decidable-Poset X x (head-vec v) →
-    is-leq-all-element-vec x v
-  is-leq-all-element-vec-is-leq-head-sorted-vec {zero-ℕ} x (y ∷ v) s p =
+    is-least-element-vec x v
+  is-least-element-vec-is-leq-head-sorted-vec {zero-ℕ} x (y ∷ v) s p =
     p , raise-star
-  is-leq-all-element-vec-is-leq-head-sorted-vec {succ-ℕ n} x (y ∷ v) s p =
+  is-least-element-vec-is-leq-head-sorted-vec {succ-ℕ n} x (y ∷ v) s p =
     p ,
-    ( is-leq-all-element-vec-is-leq-head-sorted-vec
+    ( is-least-element-vec-is-leq-head-sorted-vec
         ( x)
         ( v)
         ( is-sorted-tail-is-sorted-vec (y ∷ v) s)
@@ -121,46 +121,46 @@ module _
 ### An equivalent definition of being sorted
 
 ```agda
-  is-sorted-leq-all-element-vec-Prop :
+  is-sorted-least-element-vec-Prop :
     {n : ℕ} → vec (element-total-decidable-Poset X) n → Prop l2
-  is-sorted-leq-all-element-vec-Prop {0} v = raise-unit-Prop l2
-  is-sorted-leq-all-element-vec-Prop {1} v = raise-unit-Prop l2
-  is-sorted-leq-all-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
+  is-sorted-least-element-vec-Prop {0} v = raise-unit-Prop l2
+  is-sorted-least-element-vec-Prop {1} v = raise-unit-Prop l2
+  is-sorted-least-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
     prod-Prop
-      ( is-leq-all-element-vec-Prop x v)
-      ( is-sorted-leq-all-element-vec-Prop v)
+      ( is-least-element-vec-Prop x v)
+      ( is-sorted-least-element-vec-Prop v)
 
-  is-sorted-leq-all-element-vec :
+  is-sorted-least-element-vec :
     {n : ℕ} → vec (element-total-decidable-Poset X) n → UU l2
-  is-sorted-leq-all-element-vec v =
-    type-Prop (is-sorted-leq-all-element-vec-Prop v)
+  is-sorted-least-element-vec v =
+    type-Prop (is-sorted-least-element-vec-Prop v)
 
-  is-sorted-leq-all-element-vec-is-sorted-vec :
+  is-sorted-least-element-vec-is-sorted-vec :
     {n : ℕ}
     (v : vec (element-total-decidable-Poset X) n) →
-    is-sorted-vec v → is-sorted-leq-all-element-vec v
-  is-sorted-leq-all-element-vec-is-sorted-vec {0} v x = raise-star
-  is-sorted-leq-all-element-vec-is-sorted-vec {1} v x = raise-star
-  is-sorted-leq-all-element-vec-is-sorted-vec
+    is-sorted-vec v → is-sorted-least-element-vec v
+  is-sorted-least-element-vec-is-sorted-vec {0} v x = raise-star
+  is-sorted-least-element-vec-is-sorted-vec {1} v x = raise-star
+  is-sorted-least-element-vec-is-sorted-vec
     {succ-ℕ (succ-ℕ n)}
     ( x ∷ y ∷ v)
     ( p , q) =
-    is-leq-all-element-vec-is-leq-head-sorted-vec x (y ∷ v) q p ,
-    is-sorted-leq-all-element-vec-is-sorted-vec (y ∷ v) q
+    is-least-element-vec-is-leq-head-sorted-vec x (y ∷ v) q p ,
+    is-sorted-least-element-vec-is-sorted-vec (y ∷ v) q
 
-  is-sorted-vec-is-sorted-leq-all-element-vec-is-sorted-vec :
+  is-sorted-vec-is-sorted-least-element-vec :
     {n : ℕ}
     (v : vec (element-total-decidable-Poset X) n) →
-    is-sorted-leq-all-element-vec v →
+    is-sorted-least-element-vec v →
     is-sorted-vec v
-  is-sorted-vec-is-sorted-leq-all-element-vec-is-sorted-vec {0} v x = raise-star
-  is-sorted-vec-is-sorted-leq-all-element-vec-is-sorted-vec {1} v x = raise-star
-  is-sorted-vec-is-sorted-leq-all-element-vec-is-sorted-vec
+  is-sorted-vec-is-sorted-least-element-vec {0} v x = raise-star
+  is-sorted-vec-is-sorted-least-element-vec {1} v x = raise-star
+  is-sorted-vec-is-sorted-least-element-vec
     {succ-ℕ (succ-ℕ n)}
     (x ∷ y ∷ v)
     (p , q) =
     ( pr1 p) ,
-    ( is-sorted-vec-is-sorted-leq-all-element-vec-is-sorted-vec (y ∷ v) q)
+    ( is-sorted-vec-is-sorted-least-element-vec (y ∷ v) q)
 ```
 
 ### If the tail of a vector `v` is sorted and `x ≤ head-vec v`, then `v` is sorted
@@ -178,73 +178,73 @@ module _
 ### If an element `x` is less or equal than every element of a vector `v`, then it is less or equal than every element of every permutation of `v`
 
 ```agda
-  is-leq-all-element-functional-vec-Prop :
+  is-least-element-functional-vec-Prop :
     (n : ℕ)
     (x : element-total-decidable-Poset X)
     (fv : functional-vec (element-total-decidable-Poset X) n) →
     Prop l2
-  is-leq-all-element-functional-vec-Prop n x fv =
+  is-least-element-functional-vec-Prop n x fv =
     Π-Prop (Fin n) λ k → leq-total-decidable-poset-Prop X x (fv k)
 
-  is-leq-all-element-functional-vec :
+  is-least-element-functional-vec :
     (n : ℕ)
     (x : element-total-decidable-Poset X)
     (fv : functional-vec (element-total-decidable-Poset X) n) →
     UU l2
-  is-leq-all-element-functional-vec n x fv =
-    type-Prop (is-leq-all-element-functional-vec-Prop n x fv)
+  is-least-element-functional-vec n x fv =
+    type-Prop (is-least-element-functional-vec-Prop n x fv)
 
-  is-leq-all-element-functional-vec-permute-functional-vec :
+  is-least-element-permute-functional-vec :
     (n : ℕ)
     (x : element-total-decidable-Poset X)
     (fv : functional-vec (element-total-decidable-Poset X) n)
     (a : Permutation n) →
-    is-leq-all-element-functional-vec n x fv →
-    is-leq-all-element-functional-vec n x (fv ∘ map-equiv a)
-  is-leq-all-element-functional-vec-permute-functional-vec n x fv a p k =
+    is-least-element-functional-vec n x fv →
+    is-least-element-functional-vec n x (fv ∘ map-equiv a)
+  is-least-element-permute-functional-vec n x fv a p k =
     p (map-equiv a k)
 
-  is-leq-all-element-listed-vec-functional-vec :
+  is-least-element-vec-is-least-element-functional-vec :
     (n : ℕ)
     (x : element-total-decidable-Poset X)
     (fv : functional-vec (element-total-decidable-Poset X) n) →
-    is-leq-all-element-functional-vec n x fv →
-    is-leq-all-element-vec x (listed-vec-functional-vec n fv)
-  is-leq-all-element-listed-vec-functional-vec 0 x fv p = raise-star
-  is-leq-all-element-listed-vec-functional-vec (succ-ℕ n) x fv p =
+    is-least-element-functional-vec n x fv →
+    is-least-element-vec x (listed-vec-functional-vec n fv)
+  is-least-element-vec-is-least-element-functional-vec 0 x fv p = raise-star
+  is-least-element-vec-is-least-element-functional-vec (succ-ℕ n) x fv p =
     (p (inr star)) ,
-    ( is-leq-all-element-listed-vec-functional-vec
+    ( is-least-element-vec-is-least-element-functional-vec
         ( n)
         ( x)
         ( tail-functional-vec n fv)
         ( p ∘ inl))
 
-  is-leq-all-element-functional-vec-listed-vec :
+  is-least-element-functional-vec-is-least-element-vec :
     (n : ℕ)
     (x : element-total-decidable-Poset X)
     (v : vec (element-total-decidable-Poset X) n) →
-    is-leq-all-element-vec x v →
-    is-leq-all-element-functional-vec n x (functional-vec-vec n v)
-  is-leq-all-element-functional-vec-listed-vec (succ-ℕ n) x (y ∷ v) (p , q) (inl k) =
-    is-leq-all-element-functional-vec-listed-vec n x v q k
-  is-leq-all-element-functional-vec-listed-vec (succ-ℕ n) x (y ∷ v) (p , q) (inr star) = p
+    is-least-element-vec x v →
+    is-least-element-functional-vec n x (functional-vec-vec n v)
+  is-least-element-functional-vec-is-least-element-vec (succ-ℕ n) x (y ∷ v) (p , q) (inl k) =
+    is-least-element-functional-vec-is-least-element-vec n x v q k
+  is-least-element-functional-vec-is-least-element-vec (succ-ℕ n) x (y ∷ v) (p , q) (inr star) = p
 
-  is-leq-all-element-vec-permute-vec :
+  is-least-element-permute-vec :
     {n : ℕ}
     (x : element-total-decidable-Poset X)
     (v : vec (element-total-decidable-Poset X) n)
     (a : Permutation n) →
-    is-leq-all-element-vec x v →
-    is-leq-all-element-vec x (permute-vec n v a)
-  is-leq-all-element-vec-permute-vec {n} x v a p =
-    is-leq-all-element-listed-vec-functional-vec
+    is-least-element-vec x v →
+    is-least-element-vec x (permute-vec n v a)
+  is-least-element-permute-vec {n} x v a p =
+    is-least-element-vec-is-least-element-functional-vec
       ( n)
       ( x)
       ( functional-vec-vec n v ∘ map-equiv a)
-      ( is-leq-all-element-functional-vec-permute-functional-vec
+      ( is-least-element-permute-functional-vec
           ( n)
           ( x)
           ( functional-vec-vec n v)
           ( a)
-          ( is-leq-all-element-functional-vec-listed-vec n x v p))
+          ( is-least-element-functional-vec-is-least-element-vec n x v p))
 ```

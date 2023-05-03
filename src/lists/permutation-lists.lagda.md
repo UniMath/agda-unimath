@@ -39,9 +39,7 @@ module _
 
   permute-list : (l : list A) → Permutation (length-list l) → list A
   permute-list l s =
-    map-equiv
-      ( equiv-list-array)
-      ( pr1 (map-equiv equiv-array-list l) ,
-        pr2 (map-equiv equiv-array-list l)∘ (map-equiv s))
--- TODO : should I replace (map-equiv s) by (map-inv-equiv s)??
+    list-array
+      ( pr1 (array-list l) ,
+        pr2 (array-list l) ∘ (map-equiv s))
 ```

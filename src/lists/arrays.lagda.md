@@ -37,8 +37,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In these file, we defined the notion of array. An array is a pair of a natural
-number `n`, and a function from `Fin n` to `A`. We also show that arrays and
+An array is a pair of a natural number `n`, and a function from `Fin n` to `A`. We show that arrays and
 lists are equivalent.
 
 ```agda
@@ -90,17 +89,67 @@ module _
 
 ## Properties
 
-### The types of listed and arrays are equivalent
+### The types of lists and arrays are equivalent
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
+  list-vec : (n : ℕ)  → (vec A n) → list A
+  list-vec zero-ℕ  _ = nil
+  list-vec (succ-ℕ n) (x ∷ l) = cons x (list-vec n l)
+
+  vec-list : (l : list A) → vec A (length-list l)
+  vec-list nil = empty-vec
+  vec-list (cons x l) = x ∷ vec-list l
+
+  issec-vec-list : (λ l → list-vec (length-list l) (vec-list l)) ~ id
+  issec-vec-list nil = refl
+  issec-vec-list (cons x l) = ap (cons x) (issec-vec-list l)
+
+  isretr-vec-list :
+    ( λ (x : Σ ℕ (λ n → vec A n)) →
+      ( length-list (list-vec (pr1 x) (pr2 x)) ,
+        vec-list (list-vec (pr1 x) (pr2 x)))) ~
+    id
+  isretr-vec-list (zero-ℕ , empty-vec) = refl
+  isretr-vec-list (succ-ℕ n , (x ∷ v)) =
+    ap
+      ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
+      ( isretr-vec-list (n , v))
+
+  list-array : array A → list A
+  list-array (n , t) = list-vec n (listed-vec-functional-vec n t)
+
+  array-list : list A → array A
+  array-list l =
+    ( length-list l , functional-vec-vec (length-list l) (vec-list l))
+
+  issec-array-list : (list-array ∘ array-list) ~ id
+  issec-array-list nil = refl
+  issec-array-list (cons x l) = ap (cons x) (issec-array-list l)
+
+  isretr-array-list : (array-list ∘ list-array) ~ id
+  isretr-array-list (n , t) =
+    ap
+      ( λ (n , v) → (n , functional-vec-vec n v))
+      ( isretr-vec-list (n , listed-vec-functional-vec n t)) ∙
+    eq-pair-Σ refl (isretr-functional-vec-vec n t)
+
   equiv-list-array : array A ≃ list A
-  equiv-list-array = equiv-list-vec ∘e equiv-tot compute-vec
+  pr1 equiv-list-array = list-array
+  pr2 equiv-list-array =
+    is-equiv-has-inverse
+      array-list
+      issec-array-list
+      isretr-array-list
 
   equiv-array-list : list A ≃ array A
-  equiv-array-list =
-    equiv-tot (λ n → inv-equiv (compute-vec n)) ∘e equiv-vec-list
+  pr1 equiv-array-list = array-list
+  pr2 equiv-array-list =
+    is-equiv-has-inverse
+      list-array
+      isretr-array-list
+      issec-array-list
 ```
