@@ -417,6 +417,17 @@ module _
         ( is-equiv-tot-is-fiberwise-equiv E)
 ```
 
+### `map-Σ` preserves identity maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  compute-map-Σ-id : map-Σ B id (λ x → id) ~ id
+  compute-map-Σ-id = refl-htpy
+```
+
 ## See also
 
 - Arithmetical laws involving dependent pair types are recorded in

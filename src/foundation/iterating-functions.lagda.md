@@ -61,7 +61,7 @@ module _
     (n : ℕ) → coherence-square-maps f (iterate n s) (iterate n t) f
   coherence-square-iterate {f} H zero-ℕ x = refl
   coherence-square-iterate {f} H (succ-ℕ n) =
-    coherence-square-maps-comp-vertical
+    pasting-vertical-coherence-square-maps
       ( f)
       ( iterate n s)
       ( iterate n t)

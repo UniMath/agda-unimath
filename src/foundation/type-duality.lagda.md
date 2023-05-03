@@ -11,7 +11,7 @@ open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.locally-small-types
-open import foundation.polynomial-endofunctors
+open import foundation.propositional-maps
 open import foundation.slice
 open import foundation.unit-type
 open import foundation.univalence
@@ -31,6 +31,8 @@ open import foundation-core.injective-maps
 open import foundation-core.small-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
+
+open import trees.polynomial-endofunctors
 ```
 
 </details>

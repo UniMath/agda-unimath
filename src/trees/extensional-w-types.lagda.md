@@ -33,8 +33,8 @@ open import trees.w-types
 
 ## Idea
 
-A W-type `𝕎 A B` is said to be extensional if for any two elements `S T : 𝕎 A B`
-the induced map
+A W-type `𝕎 A B` is said to be **extensional** if for any two elements
+`S T : 𝕎 A B` the induced map
 
 ```md
   Id S T → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
@@ -113,7 +113,7 @@ module _
     map-inv-is-equiv (is-equiv-Eq-Eq-ext-eq-𝕎 x y u v)
 
   equiv-total-Eq-ext-𝕎 :
-    (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (symbol-𝕎 x) ≃ B a)
+    (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (shape-𝕎 x) ≃ B a)
   equiv-total-Eq-ext-𝕎 (tree-𝕎 a f) =
     ( ( equiv-tot
             ( λ x →

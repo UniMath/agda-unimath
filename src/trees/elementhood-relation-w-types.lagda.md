@@ -13,6 +13,7 @@ open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import trees.elementhood-relation-coalgebras-polynomial-endofunctors
 open import trees.w-types
 ```
 
@@ -20,7 +21,7 @@ open import trees.w-types
 
 ## Idea
 
-We say that a tree `S` is an element of a tree `tree-𝕎 x α` if `S` can be
+We say that a tree `S` is an **element** of a tree `tree-𝕎 x α` if `S` can be
 equipped with an element `y : B x` such that `α y = S`.
 
 ## Definition
@@ -31,7 +32,7 @@ module _
   where
 
   _∈-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
-  x ∈-𝕎 y = fib (component-𝕎 y) x
+  x ∈-𝕎 y = x ∈ y in-coalgebra 𝕎-Coalg A B
 
   _∉-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ∉-𝕎 y = is-empty (x ∈-𝕎 y)

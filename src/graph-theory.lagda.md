@@ -3,6 +3,7 @@
 ```agda
 module graph-theory where
 
+open import graph-theory.acyclic-undirected-graphs public
 open import graph-theory.circuits-undirected-graphs public
 open import graph-theory.closed-walks-undirected-graphs public
 open import graph-theory.complete-bipartite-graphs public
@@ -32,6 +33,7 @@ open import graph-theory.neighbors-undirected-graphs public
 open import graph-theory.orientations-undirected-graphs public
 open import graph-theory.paths-undirected-graphs public
 open import graph-theory.polygons public
+open import graph-theory.raising-universe-levels-directed-graphs public
 open import graph-theory.reflecting-maps-undirected-graphs public
 open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public

@@ -28,7 +28,7 @@ open import trees.w-types
 
 ## Idea
 
-A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe
+A multiset `X := tree-𝕎 A α` is said to be **small** with respect to a universe
 `UU l` if its symbol `A` is a small type with respect to `UU l`, and if each
 `α x` is a small multiset with respect to `UU l`.
 
@@ -64,8 +64,8 @@ resize-𝕍 (tree-𝕎 A α) (pair (pair A' e) H2) =
 
 ```agda
 is-small-comprehension-𝕍 :
-  (l : Level) {l1 : Level} {X : 𝕍 l1} {P : symbol-𝕎 X → UU l1} →
-  is-small-𝕍 l X → ((x : symbol-𝕎 X) → is-small l (P x)) →
+  (l : Level) {l1 : Level} {X : 𝕍 l1} {P : shape-𝕎 X → UU l1} →
+  is-small-𝕍 l X → ((x : shape-𝕎 X) → is-small l (P x)) →
   is-small-𝕍 l (comprehension-𝕍 X P)
 is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
   pair

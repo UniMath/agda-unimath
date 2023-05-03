@@ -1,6 +1,8 @@
 # Set truncations
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.set-truncations where
 ```
 

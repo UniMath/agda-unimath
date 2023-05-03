@@ -7,7 +7,6 @@ module trees.w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.algebras-polynomial-endofunctors
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -17,7 +16,6 @@ open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.polynomial-endofunctors
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.truncated-types
@@ -25,6 +23,11 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
+
+open import trees.algebras-polynomial-endofunctors
+open import trees.coalgebras-polynomial-endofunctors
+open import trees.morphisms-algebras-polynomial-endofunctors
+open import trees.polynomial-endofunctors
 ```
 
 </details>
@@ -33,9 +36,9 @@ open import foundation-core.truncation-levels
 
 Consider a type `A` equipped with a type family `B` over `A`. The type `W`
 generated inductively by a constructor `B x → W` for each `x : A` is called the
-W-typpe `W A B` of `B`. The elements of `A` can be thought of as symbols for the
-constructors of `W A B`, and the functions `B x → W A B` are the constructors.
-The elements of `W A B` are well-founded trees.
+**W-type** `W A B` of `B`. The elements of `A` can be thought of as symbols for
+the constructors of `W A B`, and the functions `B x → W A B` are the
+constructors. The elements of `W A B` can be thought of as well-founded trees.
 
 ## Definition
 
@@ -47,14 +50,39 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  symbol-𝕎 : 𝕎 A B → A
-  symbol-𝕎 (tree-𝕎 x α) = x
+  shape-𝕎 : 𝕎 A B → A
+  shape-𝕎 (tree-𝕎 x α) = x
 
-  component-𝕎 : (x : 𝕎 A B) → B (symbol-𝕎 x) → 𝕎 A B
+  component-𝕎 : (x : 𝕎 A B) → B (shape-𝕎 x) → 𝕎 A B
   component-𝕎 (tree-𝕎 x α) = α
 
-  η-𝕎 : (x : 𝕎 A B) → tree-𝕎 (symbol-𝕎 x) (component-𝕎 x) ＝ x
+  η-𝕎 : (x : 𝕎 A B) → tree-𝕎 (shape-𝕎 x) (component-𝕎 x) ＝ x
   η-𝕎 (tree-𝕎 x α) = refl
+```
+
+### W-types as algebras for a polynomial endofunctor
+
+```agda
+structure-𝕎-Alg :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  type-polynomial-endofunctor A B (𝕎 A B) → 𝕎 A B
+structure-𝕎-Alg (pair x α) = tree-𝕎 x α
+
+𝕎-Alg :
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
+  algebra-polynomial-endofunctor (l1 ⊔ l2) A B
+𝕎-Alg A B = pair (𝕎 A B) structure-𝕎-Alg
+```
+
+### W-types as coalgebras for a polynomial endofunctor
+
+```agda
+𝕎-Coalg :
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
+  coalgebra-polynomial-endofunctor (l1 ⊔ l2) A B
+pr1 (𝕎-Coalg A B) = 𝕎 A B
+pr1 (pr2 (𝕎-Coalg A B) x) = shape-𝕎 x
+pr2 (pr2 (𝕎-Coalg A B) x) = component-𝕎 x
 ```
 
 ## Properties
@@ -70,7 +98,7 @@ module _
   constant-𝕎 x h = tree-𝕎 x (ex-falso ∘ h)
 
   is-constant-𝕎 : 𝕎 A B → UU l2
-  is-constant-𝕎 x = is-empty (B (symbol-𝕎 x))
+  is-constant-𝕎 x = is-empty (B (shape-𝕎 x))
 ```
 
 ### If each `B x` is inhabited, then the type `W A B` is empty
@@ -163,19 +191,9 @@ module _
   is-set-𝕎 = is-trunc-𝕎 neg-one-𝕋
 ```
 
-### W-types are algebras for polynomial endofunctors
+### The structure map of the algebra `𝕎 A B` is an equivalence
 
 ```agda
-structure-𝕎-Alg :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  type-polynomial-endofunctor A B (𝕎 A B) → 𝕎 A B
-structure-𝕎-Alg (pair x α) = tree-𝕎 x α
-
-𝕎-Alg :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
-  algebra-polynomial-endofunctor-UU (l1 ⊔ l2) A B
-𝕎-Alg A B = pair (𝕎 A B) structure-𝕎-Alg
-
 map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   𝕎 A B → type-polynomial-endofunctor A B (𝕎 A B)
@@ -227,7 +245,7 @@ inv-equiv-structure-𝕎-Alg =
 ```agda
 map-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   𝕎 A B → type-algebra-polynomial-endofunctor X
 map-hom-𝕎-Alg X (tree-𝕎 x α) =
   structure-algebra-polynomial-endofunctor X
@@ -235,7 +253,7 @@ map-hom-𝕎-Alg X (tree-𝕎 x α) =
 
 structure-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   ( (map-hom-𝕎-Alg X) ∘ structure-𝕎-Alg) ~
   ( ( structure-algebra-polynomial-endofunctor X) ∘
     ( map-polynomial-endofunctor A B (map-hom-𝕎-Alg X)))
@@ -243,13 +261,13 @@ structure-hom-𝕎-Alg X (pair x α) = refl
 
 hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X
 hom-𝕎-Alg X = pair (map-hom-𝕎-Alg X) (structure-hom-𝕎-Alg X)
 
 htpy-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   map-hom-𝕎-Alg X ~
   map-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X f
@@ -262,7 +280,7 @@ htpy-htpy-hom-𝕎-Alg {A = A} {B} X f (tree-𝕎 x α) =
 
 compute-structure-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) (x : A) (α : B x → 𝕎 A B)
+  (X : algebra-polynomial-endofunctor l3 A B) (x : A) (α : B x → 𝕎 A B)
   {f : 𝕎 A B → type-algebra-polynomial-endofunctor X} →
   (H : map-hom-𝕎-Alg X ~ f) →
   ( ap ( structure-algebra-polynomial-endofunctor X)
@@ -287,7 +305,7 @@ compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
 
 structure-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   ( structure-hom-𝕎-Alg X ∙h
     ( ( structure-algebra-polynomial-endofunctor X) ·l
@@ -313,7 +331,7 @@ structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
 
 htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   htpy-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X (hom-𝕎-Alg X) f
 htpy-hom-𝕎-Alg X f =
@@ -321,7 +339,7 @@ htpy-hom-𝕎-Alg X f =
 
 is-initial-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
   is-contr (hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X)
 is-initial-𝕎-Alg {A = A} {B} X =
   pair

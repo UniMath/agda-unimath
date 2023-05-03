@@ -174,7 +174,7 @@ module _
   pr2 (pr2 (cone-map c h)) = coherence-square-cone f g c ·r h
 ```
 
-### Horizontal composition of cones
+### Pasting cones horizontally
 
 ```agda
 module _
@@ -183,13 +183,13 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  cone-comp-horizontal :
+  pasting-horizontal-cone :
     (c : cone j h B) → cone i (vertical-map-cone j h c) A → cone (j ∘ i) h A
-  pr1 (cone-comp-horizontal c (pair f (pair p H))) = f
-  pr1 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
+  pr1 (pasting-horizontal-cone c (pair f (pair p H))) = f
+  pr1 (pr2 (pasting-horizontal-cone c (pair f (pair p H)))) =
     (horizontal-map-cone j h c) ∘ p
-  pr2 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
-    coherence-square-maps-comp-horizontal p
+  pr2 (pr2 (pasting-horizontal-cone c (pair f (pair p H)))) =
+    pasting-horizontal-coherence-square-maps p
       ( horizontal-map-cone j h c)
       ( f)
       ( vertical-map-cone j h c)
@@ -209,13 +209,13 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  cone-comp-vertical :
+  pasting-vertical-cone :
     (c : cone f g B) → cone (horizontal-map-cone f g c) h A → cone f (g ∘ h) A
-  pr1 (cone-comp-vertical c (pair p' (pair q' H'))) =
+  pr1 (pasting-vertical-cone c (pair p' (pair q' H'))) =
     ( vertical-map-cone f g c) ∘ p'
-  pr1 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) = q'
-  pr2 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) =
-    coherence-square-maps-comp-vertical q' p' h
+  pr1 (pr2 (pasting-vertical-cone c (pair p' (pair q' H')))) = q'
+  pr2 (pr2 (pasting-vertical-cone c (pair p' (pair q' H')))) =
+    pasting-vertical-coherence-square-maps q' p' h
       ( horizontal-map-cone f g c)
       ( vertical-map-cone f g c)
       ( g)

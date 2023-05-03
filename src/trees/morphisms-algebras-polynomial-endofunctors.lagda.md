@@ -1,64 +1,56 @@
-# Algebras for polynomial endofunctors
+# Morphisms of algebras of polynomial endofunctors
 
 ```agda
-module foundation.algebras-polynomial-endofunctors where
+module trees.morphisms-algebras-polynomial-endofunctors where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.polynomial-endofunctors
+open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import trees.algebras-polynomial-endofunctors
+open import trees.polynomial-endofunctors
 ```
 
 </details>
 
 ## Idea
 
-Given a polynomial endofunctor `P A B`, an algebra for `P A B` conisists of a
-type `X` and a map `P A B X → X`.
+A **morphism** of algebras of a polynomial endofunctor `P A B` consists of a map
+`f : X → Y$ between the underlying types, equipped with a homotopy witnessing
+that the square
+
+```md
+           P A B f
+  P A B X ---------> P A B Y
+      |                |
+      |                |
+      V                V
+      X -------------> Y
+               f
+```
+
+commutes.
 
 ## Definitions
-
-### Algebras for polynomial endofunctors
-
-```agda
-algebra-polynomial-endofunctor-UU :
-  (l : Level) {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
-  UU (lsuc l ⊔ l1 ⊔ l2)
-algebra-polynomial-endofunctor-UU l A B =
-  Σ (UU l) (λ X → type-polynomial-endofunctor A B X → X)
-
-type-algebra-polynomial-endofunctor :
-  {l l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  algebra-polynomial-endofunctor-UU l A B → UU l
-type-algebra-polynomial-endofunctor X = pr1 X
-
-structure-algebra-polynomial-endofunctor :
-  {l l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l A B) →
-  type-polynomial-endofunctor A B (type-algebra-polynomial-endofunctor X) →
-  type-algebra-polynomial-endofunctor X
-structure-algebra-polynomial-endofunctor X = pr2 X
-```
 
 ### Morphisms of algebras for polynomial endofunctors
 
 ```agda
 hom-algebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
-  (Y : algebra-polynomial-endofunctor-UU l4 A B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  (X : algebra-polynomial-endofunctor l3 A B) →
+  (Y : algebra-polynomial-endofunctor l4 A B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 hom-algebra-polynomial-endofunctor {A = A} {B} X Y =
   Σ ( type-algebra-polynomial-endofunctor X →
       type-algebra-polynomial-endofunctor Y)
@@ -69,8 +61,8 @@ hom-algebra-polynomial-endofunctor {A = A} {B} X Y =
 
 map-hom-algebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
-  (Y : algebra-polynomial-endofunctor-UU l4 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
+  (Y : algebra-polynomial-endofunctor l4 A B) →
   hom-algebra-polynomial-endofunctor X Y →
   type-algebra-polynomial-endofunctor X →
   type-algebra-polynomial-endofunctor Y
@@ -78,8 +70,8 @@ map-hom-algebra-polynomial-endofunctor X Y f = pr1 f
 
 structure-hom-algebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B) →
-  (Y : algebra-polynomial-endofunctor-UU l4 A B) →
+  (X : algebra-polynomial-endofunctor l3 A B) →
+  (Y : algebra-polynomial-endofunctor l4 A B) →
   (f : hom-algebra-polynomial-endofunctor X Y) →
   ( ( map-hom-algebra-polynomial-endofunctor X Y f) ∘
     ( structure-algebra-polynomial-endofunctor X)) ~
@@ -96,8 +88,8 @@ structure-hom-algebra-polynomial-endofunctor X Y f = pr2 f
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor-UU l3 A B)
-  (Y : algebra-polynomial-endofunctor-UU l4 A B)
+  (X : algebra-polynomial-endofunctor l3 A B)
+  (Y : algebra-polynomial-endofunctor l4 A B)
   (f : hom-algebra-polynomial-endofunctor X Y)
   where
 
