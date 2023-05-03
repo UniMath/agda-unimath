@@ -165,7 +165,8 @@ module _
 
 ### Proper nodes of directed trees
 
-We define **proper nodes** of a directed tree to be nodes that are distinct from the root.
+We define **proper nodes** of a directed tree to be nodes that are distinct from
+the root.
 
 ```agda
 module _
