@@ -108,76 +108,76 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-upper-bound-family-Poset-Prop :
+  is-upper-bound-family-of-elements-Poset-Prop :
     {l : Level} {I : UU l} → (I → element-Poset P) → element-Poset P →
     Prop (l2 ⊔ l)
-  is-upper-bound-family-Poset-Prop {l} {I} f z =
+  is-upper-bound-family-of-elements-Poset-Prop {l} {I} f z =
     Π-Prop I (λ i → leq-Poset-Prop P (f i) z)
 
-  is-upper-bound-family-Poset :
+  is-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} → (I → element-Poset P) → element-Poset P →
     UU (l2 ⊔ l)
-  is-upper-bound-family-Poset f z =
-    type-Prop (is-upper-bound-family-Poset-Prop f z)
+  is-upper-bound-family-of-elements-Poset f z =
+    type-Prop (is-upper-bound-family-of-elements-Poset-Prop f z)
 
-  is-prop-is-upper-bound-family-Poset :
+  is-prop-is-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
-    is-prop (is-upper-bound-family-Poset f z)
-  is-prop-is-upper-bound-family-Poset f z =
-    is-prop-type-Prop (is-upper-bound-family-Poset-Prop f z)
+    is-prop (is-upper-bound-family-of-elements-Poset f z)
+  is-prop-is-upper-bound-family-of-elements-Poset f z =
+    is-prop-type-Prop (is-upper-bound-family-of-elements-Poset-Prop f z)
 
-  is-least-upper-bound-family-Poset-Prop :
+  is-least-upper-bound-family-of-elements-Poset-Prop :
     {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
     Prop (l1 ⊔ l2 ⊔ l)
-  is-least-upper-bound-family-Poset-Prop f z =
+  is-least-upper-bound-family-of-elements-Poset-Prop f z =
     prod-Prop
-      ( is-upper-bound-family-Poset-Prop f z)
+      ( is-upper-bound-family-of-elements-Poset-Prop f z)
       ( Π-Prop
         ( element-Poset P)
         ( λ w →
           function-Prop
-            ( is-upper-bound-family-Poset f w)
+            ( is-upper-bound-family-of-elements-Poset f w)
             ( leq-Poset-Prop P z w)))
 
-  is-least-upper-bound-family-Poset :
+  is-least-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
     UU (l1 ⊔ l2 ⊔ l)
-  is-least-upper-bound-family-Poset f z =
-    type-Prop (is-least-upper-bound-family-Poset-Prop f z)
+  is-least-upper-bound-family-of-elements-Poset f z =
+    type-Prop (is-least-upper-bound-family-of-elements-Poset-Prop f z)
 
-  is-prop-is-least-upper-bound-family-Poset :
+  is-prop-is-least-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
-    is-prop (is-least-upper-bound-family-Poset f z)
-  is-prop-is-least-upper-bound-family-Poset f z =
-    is-prop-type-Prop (is-least-upper-bound-family-Poset-Prop f z)
+    is-prop (is-least-upper-bound-family-of-elements-Poset f z)
+  is-prop-is-least-upper-bound-family-of-elements-Poset f z =
+    is-prop-type-Prop (is-least-upper-bound-family-of-elements-Poset-Prop f z)
 
-  has-least-upper-bound-family-Poset :
+  has-least-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) → UU (l1 ⊔ l2 ⊔ l)
-  has-least-upper-bound-family-Poset f =
-    Σ (element-Poset P) (is-least-upper-bound-family-Poset f)
+  has-least-upper-bound-family-of-elements-Poset f =
+    Σ (element-Poset P) (is-least-upper-bound-family-of-elements-Poset f)
 
-  all-elements-equal-has-least-upper-bound-family-Poset :
+  all-elements-equal-has-least-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) →
-    all-elements-equal (has-least-upper-bound-family-Poset f)
-  all-elements-equal-has-least-upper-bound-family-Poset f
+    all-elements-equal (has-least-upper-bound-family-of-elements-Poset f)
+  all-elements-equal-has-least-upper-bound-family-of-elements-Poset f
     (pair u H) (pair v K) =
     eq-type-subtype
-      ( is-least-upper-bound-family-Poset-Prop f)
+      ( is-least-upper-bound-family-of-elements-Poset-Prop f)
       ( antisymmetric-leq-Poset P u v
         ( pr2 H v (pr1 K))
         ( pr2 K u (pr1 H)))
 
-  is-prop-has-least-upper-bound-family-Poset :
+  is-prop-has-least-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → element-Poset P) →
-    is-prop (has-least-upper-bound-family-Poset f)
-  is-prop-has-least-upper-bound-family-Poset f =
+    is-prop (has-least-upper-bound-family-of-elements-Poset f)
+  is-prop-has-least-upper-bound-family-of-elements-Poset f =
     is-prop-all-elements-equal
-      ( all-elements-equal-has-least-upper-bound-family-Poset f)
+      ( all-elements-equal-has-least-upper-bound-family-of-elements-Poset f)
 
-  has-least-upper-bound-family-Poset-Prop :
+  has-least-upper-bound-family-of-elements-Poset-Prop :
     {l : Level} {I : UU l} (f : I → element-Poset P) → Prop (l1 ⊔ l2 ⊔ l)
-  pr1 (has-least-upper-bound-family-Poset-Prop f) =
-    has-least-upper-bound-family-Poset f
-  pr2 (has-least-upper-bound-family-Poset-Prop f) =
-    is-prop-has-least-upper-bound-family-Poset f
+  pr1 (has-least-upper-bound-family-of-elements-Poset-Prop f) =
+    has-least-upper-bound-family-of-elements-Poset f
+  pr2 (has-least-upper-bound-family-of-elements-Poset-Prop f) =
+    is-prop-has-least-upper-bound-family-of-elements-Poset f
 ```

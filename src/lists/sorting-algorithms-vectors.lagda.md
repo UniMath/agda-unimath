@@ -37,17 +37,17 @@ every vector `v`, `f v` is sorted
 
 ```agda
 module _
-  {l1 l2 : Level} (X : total-decidable-Poset l1 l2)
+  {l1 l2 : Level} (X : total-Decidable-Poset l1 l2)
   where
 
   is-sort-vec :
     (f :
       {n : ℕ} →
-      vec (element-total-decidable-Poset X) n →
-      vec (element-total-decidable-Poset X) n) →
+      vec (element-total-Decidable-Poset X) n →
+      vec (element-total-Decidable-Poset X) n) →
     UU (l1 ⊔ l2)
   is-sort-vec f =
     (n : ℕ) →
     is-permutation-vec n f ×
-    ((v : vec (element-total-decidable-Poset X) n) → is-sorted-vec X (f v))
+    ((v : vec (element-total-Decidable-Poset X) n) → is-sorted-vec X (f v))
 ```

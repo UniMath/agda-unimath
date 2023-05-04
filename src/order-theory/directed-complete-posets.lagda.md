@@ -33,7 +33,7 @@ is-directed-complete-Poset-Prop l3 P =
         ( λ α →
           hom-Prop
             ( is-directed-family-Poset-Prop P I α)
-            ( has-least-upper-bound-family-Poset-Prop P α)))
+            ( has-least-upper-bound-family-of-elements-Poset-Prop P α)))
 
 DCPO : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 DCPO l1 l2 l3 = type-subtype (is-directed-complete-Poset-Prop {l1} {l2} l3)

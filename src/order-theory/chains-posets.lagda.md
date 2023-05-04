@@ -16,6 +16,11 @@ open import order-theory.posets
 
 </details>
 
+## Idea
+
+A **chain** in a poset `P` is a subtype `S` of `P` such that the ordering of `P`
+restricted to `S` is linear.
+
 ## Definition
 
 ```agda

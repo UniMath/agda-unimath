@@ -19,6 +19,11 @@ open import order-theory.total-preorders
 
 </details>
 
+## Idea
+
+A **chain** in a preorder `P` is a subtype `S` of `P` such that the ordering of
+`P` restricted to `S` is linear.
+
 ## Definition
 
 ```agda

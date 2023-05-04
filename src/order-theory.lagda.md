@@ -46,7 +46,7 @@ open import order-theory.posets public
 open import order-theory.preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
-open import order-theory.sup-lattices public
+open import order-theory.suplattices public
 open import order-theory.total-decidable-posets public
 open import order-theory.total-decidable-preorders public
 open import order-theory.total-posets public
