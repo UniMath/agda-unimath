@@ -22,35 +22,36 @@ open import ring-theory.rings
 
 ## Idea
 
-A local ring is a ring such that whenever a sum of elements is invertible, then
-one of its summands is invertible. This implies that the non-invertible elements
-form an ideal. However, the law of excluded middle is needed to show that any
-ring of which the non-invertible elements form an ideal is a local ring.
+A **local ring** is a ring such that whenever a sum of elements is invertible,
+then one of its summands is invertible. This implies that the non-invertible
+elements form an ideal. However, the law of excluded middle is needed to show
+that any ring of which the non-invertible elements form an ideal is a local
+ring.
 
 ## Definition
 
 ```agda
 is-local-commutative-ring-Prop :
-  {l : Level} (R : Commutative-Ring l) → Prop l
-is-local-commutative-ring-Prop R = is-local-ring-Prop (ring-Commutative-Ring R)
+  {l : Level} (A : Commutative-Ring l) → Prop l
+is-local-commutative-ring-Prop A = is-local-ring-Prop (ring-Commutative-Ring A)
 
 is-local-Commutative-Ring : {l : Level} → Commutative-Ring l → UU l
-is-local-Commutative-Ring R = is-local-Ring (ring-Commutative-Ring R)
+is-local-Commutative-Ring A = is-local-Ring (ring-Commutative-Ring A)
 
 is-prop-is-local-Commutative-Ring :
-  {l : Level} (R : Commutative-Ring l) → is-prop (is-local-Commutative-Ring R)
-is-prop-is-local-Commutative-Ring R =
-  is-prop-is-local-Ring (ring-Commutative-Ring R)
+  {l : Level} (A : Commutative-Ring l) → is-prop (is-local-Commutative-Ring A)
+is-prop-is-local-Commutative-Ring A =
+  is-prop-is-local-Ring (ring-Commutative-Ring A)
 
 Local-Commutative-Ring : (l : Level) → UU (lsuc l)
 Local-Commutative-Ring l = Σ (Commutative-Ring l) is-local-Commutative-Ring
 
 module _
-  {l : Level} (R : Local-Commutative-Ring l)
+  {l : Level} (A : Local-Commutative-Ring l)
   where
 
   commutative-ring-Local-Commutative-Ring : Commutative-Ring l
-  commutative-ring-Local-Commutative-Ring = pr1 R
+  commutative-ring-Local-Commutative-Ring = pr1 A
 
   ring-Local-Commutative-Ring : Ring l
   ring-Local-Commutative-Ring =
@@ -65,5 +66,5 @@ module _
 
   is-local-commutative-ring-Local-Commutative-Ring :
     is-local-Commutative-Ring commutative-ring-Local-Commutative-Ring
-  is-local-commutative-ring-Local-Commutative-Ring = pr2 R
+  is-local-commutative-ring-Local-Commutative-Ring = pr2 A
 ```

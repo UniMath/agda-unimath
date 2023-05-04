@@ -50,13 +50,15 @@ open import ring-theory.semirings
 
 ## Idea
 
-An euclidean domain is an integral domain `R` that has an euclidean valuation.
-That is, a function `v : R → ℕ` such that for every `x y : R`, if `y` is
-non-zero then there are `q r : R` with `x = q y + r` and `v r < v y`.
+A **Euclidean domain** is an
+[integral domain](commutative-algebra.integral-domains.md) `R` that has a
+**Euclidean valuation**, i.e., a function `v : R → ℕ` such that for every
+`x y : R`, if `y` is non-zero then there are `q r : R` with `x = q y + r` and
+`v r < v y`.
 
 ## Definition
 
-### The condition of being an euclidean valuation
+### The condition of being a Euclidean valuation
 
 ```agda
 is-euclidean-valuation :
@@ -73,7 +75,7 @@ is-euclidean-valuation R v =
         ( v r < v y)))
 ```
 
-### The condition of being an euclidean domain
+### The condition of being a Euclidean domain
 
 ```agda
 is-euclidean-domain-Integral-Domain :
@@ -82,7 +84,7 @@ is-euclidean-domain-Integral-Domain R =
   Σ (type-Integral-Domain R → ℕ) (is-euclidean-valuation R)
 ```
 
-### Euclidean Domains
+### Euclidean domains
 
 ```agda
 Euclidean-Domain : (l : Level) → UU (lsuc l)
@@ -134,7 +136,7 @@ module _
   is-set-type-Euclidean-Domain = is-set-type-Ring ring-Euclidean-Domain
 ```
 
-### Addition in an euclidean domain
+### Addition in a Euclidean domain
 
 ```agda
   has-associative-add-Euclidean-Domain :
@@ -234,7 +236,7 @@ module _
   is-injective-add-Euclidean-Domain' = is-injective-add-Ab' ab-Euclidean-Domain
 ```
 
-### The zero element of an euclidean domain
+### The zero element of a Euclidean domain
 
 ```agda
   has-zero-Euclidean-Domain : is-unital add-Euclidean-Domain
@@ -274,7 +276,7 @@ module _
     right-unit-law-add-Integral-Domain integral-domain-Euclidean-Domain
 ```
 
-### Additive inverses in an euclidean domain
+### Additive inverses in a Euclidean domain
 
 ```agda
   has-negatives-Euclidean-Domain :
@@ -309,7 +311,7 @@ module _
     distributive-neg-add-Ab ab-Euclidean-Domain
 ```
 
-### Multiplication in an euclidean domain
+### Multiplication in a Euclidean domain
 
 ```agda
   has-associative-mul-Euclidean-Domain :
@@ -372,7 +374,7 @@ module _
       integral-domain-Euclidean-Domain
 ```
 
-### Multiplicative units in an euclidean domain
+### Multiplicative units in a Euclidean domain
 
 ```agda
   is-unital-Euclidean-Domain : is-unital mul-Euclidean-Domain
@@ -441,7 +443,7 @@ module _
       associative-mul-Euclidean-Domain
 ```
 
-### The zero laws for multiplication of a euclidean domains
+### The zero laws for multiplication of a Euclidean domain
 
 ```agda
   left-zero-law-mul-Euclidean-Domain :
@@ -477,7 +479,7 @@ module _
       integral-domain-Euclidean-Domain
 ```
 
-### Computing multiplication with minus one in an euclidean domain
+### Computing multiplication with minus one in a Euclidean domain
 
 ```agda
   neg-one-Euclidean-Domain : type-Euclidean-Domain
@@ -542,7 +544,7 @@ module _
       integral-domain-Euclidean-Domain
 ```
 
-### Scalar multiplication of elements of a euclidean domain by natural numbers
+### Scalar multiplication of elements of a Euclidean domain by natural numbers
 
 ```agda
   mul-nat-scalar-Euclidean-Domain :
@@ -619,7 +621,7 @@ module _
       integral-domain-Euclidean-Domain
 ```
 
-### Addition of a list of elements in an euclidean domain
+### Addition of a list of elements in a Euclidean domain
 
 ```agda
   add-list-Euclidean-Domain :
@@ -638,7 +640,7 @@ module _
       integral-domain-Euclidean-Domain
 ```
 
-### Euclidean division in an euclidean domain
+### Euclidean division in a Euclidean domain
 
 ```agda
   euclidean-valuation-Euclidean-Domain :
