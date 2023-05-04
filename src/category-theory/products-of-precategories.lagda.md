@@ -34,7 +34,7 @@ module _
   where
 
   prod-Precat :
-    Precat _ _
+    Precat (l1 ⊔ l3) (l2 ⊔ l4)
   pr1 prod-Precat = obj-Precat C × obj-Precat D
   pr1 (pr2 prod-Precat) (x , y) (x' , y') =
     prod-Set (hom-Precat C x x') (hom-Precat D y y')
