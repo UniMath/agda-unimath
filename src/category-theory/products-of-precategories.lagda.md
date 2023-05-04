@@ -10,18 +10,19 @@ module category-theory.products-of-precategories where
 open import category-theory.precategories
 
 open import foundation.cartesian-product-types
-open import foundation.sets
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
 open import foundation.equality-cartesian-product-types
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The product of two precategories `C` and `D` has as objects pairs `(x , y)`, for `x` in `obj-Precat C` and `y` in `obj-Precat D`;
-and has a morphism `Hom (x , y) (x' , y)` for each pair of morphisms `f : x → x'` and `g : y → y'`.
+The product of two precategories `C` and `D` has as objects pairs `(x , y)`, for
+`x` in `obj-Precat C` and `y` in `obj-Precat D`; and has a morphism
+`Hom (x , y) (x' , y)` for each pair of morphisms `f : x → x'` and `g : y → y'`.
 Composition of morphisms is given by composing each entry.
 
 ## Definition
