@@ -19,6 +19,7 @@ open import commutative-algebra.gaussian-integers public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.ideals-commutative-rings public
 open import commutative-algebra.ideals-commutative-semirings public
+open import commutative-algebra.ideals-generated-by-subsets-commutative-rings public
 open import commutative-algebra.integral-domains public
 open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public

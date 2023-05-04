@@ -18,14 +18,14 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-A morphism of commutative rings is just a morphism between their underlying
-rings.
+A **homomorphism of commutative rings** is a homomorphism between their
+underlying rings.
 
 ## Definition
 
 ```agda
 type-hom-Commutative-Ring :
   { l1 l2 : Level} → Commutative-Ring l1 → Commutative-Ring l2 → UU (l1 ⊔ l2)
-type-hom-Commutative-Ring R1 R2 =
-  type-hom-Ring (ring-Commutative-Ring R1) (ring-Commutative-Ring R2)
+type-hom-Commutative-Ring A B =
+  type-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
 ```
