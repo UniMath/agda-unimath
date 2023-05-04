@@ -295,18 +295,14 @@ module _
     tr
       ( is-in-ideal-Ring)
       ( equational-reasoning
-        y
-        ＝ add-Ring R y (zero-Ring R)
-          by
-          inv (right-unit-law-add-Ring R y)
-        ＝ add-Ring R y (add-Ring R x (neg-Ring R x))
-          by
-          inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))
-        ＝ add-Ring R (add-Ring R y x) (neg-Ring R x)
-          by
-          inv (associative-add-Ring R y x (neg-Ring R x))
-        ＝ add-Ring R (add-Ring R x y) (neg-Ring R x)
-          by
-          ap (add-Ring' R (neg-Ring R x)) (commutative-add-Ring R y x))
+          y
+          ＝ add-Ring R y (zero-Ring R)
+            by inv (right-unit-law-add-Ring R y)
+          ＝ add-Ring R y (add-Ring R x (neg-Ring R x))
+            by inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))
+          ＝ add-Ring R (add-Ring R y x) (neg-Ring R x)
+            by inv (associative-add-Ring R y x (neg-Ring R x))
+          ＝ add-Ring R (add-Ring R x y) (neg-Ring R x)
+            by ap (add-Ring' R (neg-Ring R x)) (commutative-add-Ring R y x))
       ( H)
 ```

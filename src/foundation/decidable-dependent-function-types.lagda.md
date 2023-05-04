@@ -37,7 +37,7 @@ is-decidable-Π-coprod {C = C} dA dB =
     ( is-decidable-prod dA dB)
 ```
 
-### Decidability of dependent products over `Maybe`.
+### Decidability of dependent products over `Maybe`
 
 ```agda
 is-decidable-Π-Maybe :

@@ -278,6 +278,14 @@ is-nonnegative-succ-ℤ :
   (k : ℤ) → is-nonnegative-ℤ k → is-nonnegative-ℤ (succ-ℤ k)
 is-nonnegative-succ-ℤ (inr (inl star)) p = star
 is-nonnegative-succ-ℤ (inr (inr x)) p = star
+
+is-prop-is-nonnegative-ℤ : (x : ℤ) → is-prop (is-nonnegative-ℤ x)
+is-prop-is-nonnegative-ℤ (inl x) = is-prop-empty
+is-prop-is-nonnegative-ℤ (inr x) = is-prop-unit
+
+is-nonnegative-ℤ-Prop : ℤ → Prop lzero
+pr1 (is-nonnegative-ℤ-Prop x) = is-nonnegative-ℤ x
+pr2 (is-nonnegative-ℤ-Prop x) = is-prop-is-nonnegative-ℤ x
 ```
 
 ### The positive integers
@@ -292,6 +300,10 @@ is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
 is-prop-is-positive-ℤ (inl x) = is-prop-empty
 is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
 is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
+
+is-positive-ℤ-Prop : ℤ → Prop lzero
+pr1 (is-positive-ℤ-Prop x) = is-positive-ℤ x
+pr2 (is-positive-ℤ-Prop x) = is-prop-is-positive-ℤ x
 
 is-set-is-positive-ℤ : (x : ℤ) → is-set (is-positive-ℤ x)
 is-set-is-positive-ℤ (inl x) = is-set-empty
@@ -412,7 +424,8 @@ decide-is-nonnegative-ℤ {inr x} = inl star
 
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
   (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos = refl
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
+  refl
 ```
 
 ```agda

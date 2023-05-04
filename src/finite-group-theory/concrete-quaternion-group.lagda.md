@@ -50,7 +50,9 @@ equiv-face-cube k X Y e d a =
   pair
     ( equiv-complement-point-UU-Fin k
       ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d)
-      ( pair (dim-cube-UU-Fin (succ-ℕ k) Y) (map-dim-equiv-cube (succ-ℕ k) X Y e d))
+      ( pair
+        ( dim-cube-UU-Fin (succ-ℕ k) Y)
+        ( map-dim-equiv-cube (succ-ℕ k) X Y e d))
       ( dim-equiv-cube (succ-ℕ k) X Y e)
       ( refl))
     ( λ d' →

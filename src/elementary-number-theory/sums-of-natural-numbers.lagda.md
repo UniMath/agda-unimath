@@ -8,9 +8,9 @@ module elementary-number-theory.sums-of-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.constant-maps
 open import foundation.coproduct-types
@@ -21,6 +21,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import lists.lists
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
@@ -33,6 +35,13 @@ open import univalent-combinatorics.standard-finite-types
 The values of a map `f : X → ℕ` out of a finite type `X` can be summed up.
 
 ## Definition
+
+### Sums of lists of natural numbers
+
+```agda
+sum-list-ℕ : list ℕ → ℕ
+sum-list-ℕ = fold-list 0 add-ℕ
+```
 
 ### Sums of natural numbers indexed by a standard finite type
 
@@ -57,7 +66,7 @@ bounded-sum-ℕ zero-ℕ f = zero-ℕ
 bounded-sum-ℕ (succ-ℕ u) f =
   add-ℕ
     ( bounded-sum-ℕ u (λ x H → f x (preserves-le-succ-ℕ x u H)))
-    ( f u (le-succ-ℕ {u}))
+    ( f u (succ-le-ℕ u))
 ```
 
 ## Properties
@@ -81,7 +90,7 @@ abstract
   htpy-sum-count-ℕ (pair k e) H = htpy-sum-Fin-ℕ k (H ·r (map-equiv e))
 ```
 
-### Summing up the same value `m` times is multiplication by `m`.
+### Summing up the same value `m` times is multiplication by `m`
 
 ```agda
 abstract

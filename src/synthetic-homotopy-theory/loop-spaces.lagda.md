@@ -37,7 +37,7 @@ module _
   where
 
   type-Ω : UU l
-  type-Ω = Id (pt-Pointed-Type A) (pt-Pointed-Type A)
+  type-Ω = Id (point-Pointed-Type A) (point-Pointed-Type A)
 
   refl-Ω : type-Ω
   refl-Ω = refl
@@ -126,7 +126,7 @@ module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
 
-  equiv-tr-Ω : Id x y → Ω (pair A x) ≃* Ω (pair A y)
+  equiv-tr-Ω : Id x y → Ω (pair A x) ≃∗ Ω (pair A y)
   equiv-tr-Ω refl = pair id-equiv refl
 
   equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)

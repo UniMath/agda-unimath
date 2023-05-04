@@ -150,8 +150,9 @@ module _
   associative-comp-hom-orbit-Monoid-Action :
     {x y z w : type-Monoid-Action M X} (h : hom-orbit-Monoid-Action z w)
     (g : hom-orbit-Monoid-Action y z) (f : hom-orbit-Monoid-Action x y) →
-    Id ( comp-hom-orbit-Monoid-Action (comp-hom-orbit-Monoid-Action h g) f)
-       ( comp-hom-orbit-Monoid-Action h (comp-hom-orbit-Monoid-Action g f))
+    Id
+      ( comp-hom-orbit-Monoid-Action (comp-hom-orbit-Monoid-Action h g) f)
+      ( comp-hom-orbit-Monoid-Action h (comp-hom-orbit-Monoid-Action g f))
   associative-comp-hom-orbit-Monoid-Action h g f =
     eq-htpy-hom-orbit-Monoid-Action
       ( associative-mul-Monoid M

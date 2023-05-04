@@ -8,11 +8,10 @@ module elementary-number-theory.binomial-coefficients where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.identity-types
-open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -67,5 +66,5 @@ is-one-on-diagonal-binomial-coefficient-ℕ zero-ℕ = refl
 is-one-on-diagonal-binomial-coefficient-ℕ (succ-ℕ n) =
   ap-add-ℕ
     ( is-one-on-diagonal-binomial-coefficient-ℕ n)
-    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ n) (le-succ-ℕ {n}))
+    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ n) (succ-le-ℕ n))
 ```

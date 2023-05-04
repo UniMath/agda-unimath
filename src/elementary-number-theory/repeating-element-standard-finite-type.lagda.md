@@ -13,7 +13,6 @@ open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negation
-open import foundation.unit-type
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types

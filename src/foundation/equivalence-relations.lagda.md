@@ -17,6 +17,7 @@ open import foundation.full-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.partitions
 open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sigma-decompositions
 open import foundation.subtypes
@@ -162,7 +163,7 @@ module _
       ( Σ ( Σ ( block-partition P)
               ( λ B → is-in-block-partition P B x))
           ( λ B → is-in-block-partition P (pr1 B) y))
-      ( assoc-Σ
+      ( associative-Σ
         ( block-partition P)
         ( λ U → is-in-block-partition P U x)
         ( λ U → is-in-block-partition P (pr1 U) y))
@@ -322,7 +323,7 @@ module _
                         ( ( left-unit-law-Σ-is-contr
                             ( is-contr-block-containing-element-partition P a)
                             ( center-block-containing-element-partition P a)) ∘e
-                          ( inv-assoc-Σ
+                          ( inv-associative-Σ
                             ( block-partition P)
                             ( λ B → is-in-block-partition P B a)
                             ( λ B → is-in-block-partition P (pr1 B) x))))))
@@ -360,7 +361,7 @@ module _
                           ( pair
                             ( make-block-partition P Q H)
                             ( make-is-in-block-partition P Q H a q))) ∘e
-                        ( inv-assoc-Σ
+                        ( inv-associative-Σ
                           ( block-partition P)
                           ( λ B → is-in-block-partition P B a)
                           ( λ B → is-in-block-partition P (pr1 B) x)))))))
@@ -540,7 +541,7 @@ issec-eq-rel-Surjection-Into-Set f =
     ( equiv-surjection-into-set-eq-rel-Surjection-Into-Set f)
 ```
 
-#### The type of equivalence relations on `A` is equivalent to the type of surjections from `A` into a set.
+#### The type of equivalence relations on `A` is equivalent to the type of surjections from `A` into a set
 
 ```agda
 is-equiv-surjection-into-set-Eq-Rel :
@@ -559,4 +560,47 @@ pr1 (equiv-surjection-into-set-Eq-Rel A) =
   surjection-into-set-Eq-Rel
 pr2 (equiv-surjection-into-set-Eq-Rel A) =
   is-equiv-surjection-into-set-Eq-Rel
+```
+
+### Equality on a set is an equivalence relation
+
+```agda
+module _
+  {l1 : Level} (A : Set l1)
+  where
+
+  Id-Eq-Rel : Eq-Rel l1 (type-Set A)
+  pr1 Id-Eq-Rel = Id-Prop A
+  pr1 (pr2 Id-Eq-Rel) = refl
+  pr1 (pr2 (pr2 Id-Eq-Rel)) = inv
+  pr2 (pr2 (pr2 Id-Eq-Rel)) = λ p q → p ∙ q
+
+  id-reflects-Id-Eq-Rel : reflects-Eq-Rel Id-Eq-Rel id
+  id-reflects-Id-Eq-Rel = id
+
+  id-reflecting-map-Id-Eq-Rel : reflecting-map-Eq-Rel Id-Eq-Rel (type-Set A)
+  pr1 id-reflecting-map-Id-Eq-Rel = id
+  pr2 id-reflecting-map-Id-Eq-Rel = id-reflects-Id-Eq-Rel
+
+  is-surjective-and-effective-id-Id-Eq-Rel :
+    is-surjective-and-effective Id-Eq-Rel id
+  pr1 is-surjective-and-effective-id-Id-Eq-Rel a =
+    unit-trunc-Prop (a , refl)
+  pr2 is-surjective-and-effective-id-Id-Eq-Rel a b = id-equiv
+```
+
+### For any set `A`, `Id` is a set quotient for the equality relation
+
+```agda
+module _
+  {l : Level} (A : Set l)
+  where
+
+  is-set-quotient-id-Id-Eq-Rel :
+    {l' : Level} →
+    is-set-quotient l' (Id-Eq-Rel A) A (id-reflecting-map-Id-Eq-Rel A)
+  is-set-quotient-id-Id-Eq-Rel =
+    is-set-quotient-is-surjective-and-effective (Id-Eq-Rel A) A
+      ( id-reflecting-map-Id-Eq-Rel A)
+      ( is-surjective-and-effective-id-Id-Eq-Rel A)
 ```

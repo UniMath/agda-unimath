@@ -39,10 +39,12 @@ the labeling and the equivalences on the neighbors
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
-  (G : Enriched-Undirected-Graph l3 l4 A B) (H : Enriched-Undirected-Graph l5 l6 A B)
+  (G : Enriched-Undirected-Graph l3 l4 A B)
+  (H : Enriched-Undirected-Graph l5 l6 A B)
   where
 
-  equiv-Enriched-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  equiv-Enriched-Undirected-Graph :
+    UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   equiv-Enriched-Undirected-Graph =
     Σ ( equiv-Undirected-Graph
         ( undirected-graph-Enriched-Undirected-Graph A B G)
@@ -73,7 +75,8 @@ module _
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
-  (G : Enriched-Undirected-Graph l3 l4 A B) (H : Enriched-Undirected-Graph l5 l6 A B)
+  (G : Enriched-Undirected-Graph l3 l4 A B)
+  (H : Enriched-Undirected-Graph l5 l6 A B)
   (e : equiv-Enriched-Undirected-Graph A B G H)
   where
 
@@ -84,7 +87,8 @@ module _
   equiv-undirected-graph-equiv-Enriched-Undirected-Graph = pr1 e
 
   equiv-vertex-equiv-Enriched-Undirected-Graph :
-    vertex-Enriched-Undirected-Graph A B G ≃ vertex-Enriched-Undirected-Graph A B H
+    vertex-Enriched-Undirected-Graph A B G ≃
+    vertex-Enriched-Undirected-Graph A B H
   equiv-vertex-equiv-Enriched-Undirected-Graph =
     equiv-vertex-equiv-Undirected-Graph
       ( undirected-graph-Enriched-Undirected-Graph A B G)
@@ -92,7 +96,8 @@ module _
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
 
   vertex-equiv-Enriched-Undirected-Graph :
-    vertex-Enriched-Undirected-Graph A B G → vertex-Enriched-Undirected-Graph A B H
+    vertex-Enriched-Undirected-Graph A B G →
+    vertex-Enriched-Undirected-Graph A B H
   vertex-equiv-Enriched-Undirected-Graph =
     vertex-equiv-Undirected-Graph
       ( undirected-graph-Enriched-Undirected-Graph A B G)
@@ -209,7 +214,8 @@ module _
         ( undirected-graph-Enriched-Undirected-Graph A B G))
       ( pair
         ( undirected-graph-Enriched-Undirected-Graph A B G)
-        ( id-equiv-Undirected-Graph (undirected-graph-Enriched-Undirected-Graph A B G)))
+        ( id-equiv-Undirected-Graph
+          ( undirected-graph-Enriched-Undirected-Graph A B G)))
       ( is-contr-total-Eq-structure
         ( λ f α K →
           ( x : vertex-Enriched-Undirected-Graph A B G) →
@@ -260,7 +266,8 @@ module _
   equiv-eq-Enriched-Undirected-Graph :
     (H : Enriched-Undirected-Graph l3 l4 A B) →
     (G ＝ H) → equiv-Enriched-Undirected-Graph A B G H
-  equiv-eq-Enriched-Undirected-Graph H refl = id-equiv-Enriched-Undirected-Graph A B G
+  equiv-eq-Enriched-Undirected-Graph H refl =
+    id-equiv-Enriched-Undirected-Graph A B G
 
   is-equiv-equiv-eq-Enriched-Undirected-Graph :
     (H : Enriched-Undirected-Graph l3 l4 A B) →
@@ -273,7 +280,8 @@ module _
   extensionality-Enriched-Undirected-Graph :
     (H : Enriched-Undirected-Graph l3 l4 A B) →
     (G ＝ H) ≃ equiv-Enriched-Undirected-Graph A B G H
-  pr1 (extensionality-Enriched-Undirected-Graph H) = equiv-eq-Enriched-Undirected-Graph H
+  pr1 (extensionality-Enriched-Undirected-Graph H) =
+    equiv-eq-Enriched-Undirected-Graph H
   pr2 (extensionality-Enriched-Undirected-Graph H) =
     is-equiv-equiv-eq-Enriched-Undirected-Graph H
 

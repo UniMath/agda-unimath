@@ -25,25 +25,32 @@ Functions are primitive in Agda. Here we construct some basic functions
 ### The identity function
 
 ```agda
-id : {i : Level} {A : UU i} → A → A
+id : {l : Level} {A : UU l} → A → A
 id a = a
+
+idω : {A : UUω} → A → A
+idω a = a
 ```
 
 ### Dependent composition of functions
 
 ```agda
 _∘_ :
-  {i j k : Level} {A : UU i} {B : A → UU j} {C : (a : A) → B a → UU k} →
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3} →
   ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)
 (g ∘ f) a = g (f a)
 ```
 
-### Evaluating at a point
+### Evaluation at a point
 
 ```agda
-ev-pt :
-  {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
-ev-pt a B f = f a
+ev-point :
+  {l1 l2 : Level} {A : UU l1} (a : A) {P : A → UU l2} → ((x : A) → P x) → P a
+ev-point a f = f a
+
+ev-point' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {X : UU l2} → (A → X) → X
+ev-point' a f = f a
 ```
 
 ### Precomposition functions

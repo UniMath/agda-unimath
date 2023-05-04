@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.powersets
 open import foundation.propositional-truncations
@@ -23,7 +24,9 @@ open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.subgroups
 
-open import univalent-combinatorics.lists
+open import lists.concatenation-lists
+open import lists.lists
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -68,7 +71,9 @@ module _
     formal-combination-subset-Group → type-Group G
   ev-formal-combination-subset-Group nil = unit-Group G
   ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) l) =
-    mul-Group G (inv-Group G (inclusion-subtype S x)) (ev-formal-combination-subset-Group l)
+    mul-Group G
+      ( inv-Group G (inclusion-subtype S x))
+      ( ev-formal-combination-subset-Group l)
   ev-formal-combination-subset-Group (cons (pair (inr star) x) l) =
     mul-Group G (inclusion-subtype S x) (ev-formal-combination-subset-Group l)
 
@@ -80,7 +85,9 @@ module _
          ( ev-formal-combination-subset-Group v))
   preserves-concat-ev-formal-combination-subset-Group nil v =
     inv (left-unit-law-mul-Group G (ev-formal-combination-subset-Group v))
-  preserves-concat-ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) u) v =
+  preserves-concat-ev-formal-combination-subset-Group
+    ( cons (pair (inl (inr star)) x) u)
+    ( v) =
     ( ap
       ( mul-Group G (inv-Group G (inclusion-subtype S x)))
       ( preserves-concat-ev-formal-combination-subset-Group u v)) ∙
@@ -89,7 +96,9 @@ module _
           ( inv-Group G (inclusion-subtype S x))
           ( ev-formal-combination-subset-Group u)
           ( ev-formal-combination-subset-Group v)))
-  preserves-concat-ev-formal-combination-subset-Group (cons (pair (inr star) x) u) v =
+  preserves-concat-ev-formal-combination-subset-Group
+    ( cons (pair (inr star) x) u)
+    ( v) =
     ( ap
       ( mul-Group G (inclusion-subtype S x))
       ( preserves-concat-ev-formal-combination-subset-Group u v)) ∙
@@ -105,7 +114,7 @@ module _
   inv-formal-combination-subset-Group (cons (pair s x) u) =
     concat-list
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (succ-Fin 2 s) x))
+      ( unit-list (pair (succ-Fin 2 s) x))
 
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →
@@ -114,12 +123,14 @@ module _
        ( inv-Group G (ev-formal-combination-subset-Group u))
   preserves-inv-ev-formal-combination-subset-Group nil =
     inv (inv-unit-Group G)
-  preserves-inv-ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) u) =
+  preserves-inv-ev-formal-combination-subset-Group
+    ( cons (pair (inl (inr star)) x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (inr star) x))) ∙
+      ( unit-list (pair (inr star) x))) ∙
       ( ( ap
-        ( λ y → mul-Group G y (mul-Group G (inclusion-subtype S x) (unit-Group G)))
+        ( λ y →
+          mul-Group G y (mul-Group G (inclusion-subtype S x) (unit-Group G)))
         ( preserves-inv-ev-formal-combination-subset-Group u)) ∙
         ( ( ap
           ( mul-Group G (inv-Group G (ev-formal-combination-subset-Group u)))
@@ -129,13 +140,16 @@ module _
             ( distributive-inv-mul-Group G
               ( inv-Group G (inclusion-subtype S x))
               ( ev-formal-combination-subset-Group u)))))
-  preserves-inv-ev-formal-combination-subset-Group (cons (pair (inr star) x) u) =
+  preserves-inv-ev-formal-combination-subset-Group
+    ( cons (pair (inr star) x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (inl (inr star)) x))) ∙
+      ( unit-list (pair (inl (inr star)) x))) ∙
       ( ( ap
         ( λ y →
-          mul-Group G y (mul-Group G (inv-Group G (inclusion-subtype S x)) (unit-Group G)))
+          mul-Group G
+          ( y)
+          ( mul-Group G (inv-Group G (inclusion-subtype S x)) (unit-Group G)))
         ( preserves-inv-ev-formal-combination-subset-Group u)) ∙
         ( ( ap
           ( mul-Group G (inv-Group G (ev-formal-combination-subset-Group u)))
@@ -203,20 +217,22 @@ module _
   is-closed-under-inv-subgroup-subset-Group x H =
     apply-universal-property-trunc-Prop H
       ( subset-subgroup-subset-Group (inv-Group G x))
-      ( λ H' → unit-trunc-Prop (is-closed-under-inv-subgroup-subset-Group' x H'))
+      ( unit-trunc-Prop ∘ is-closed-under-inv-subgroup-subset-Group' x)
 
   subgroup-subset-Group : Subgroup (l1 ⊔ l2) G
   pr1 subgroup-subset-Group = subset-subgroup-subset-Group
   pr1 (pr2 subgroup-subset-Group) = contains-unit-subgroup-subset-Group
-  pr1 (pr2 (pr2 subgroup-subset-Group)) = is-closed-under-mul-subgroup-subset-Group
-  pr2 (pr2 (pr2 subgroup-subset-Group)) = is-closed-under-inv-subgroup-subset-Group
+  pr1 (pr2 (pr2 subgroup-subset-Group)) =
+    is-closed-under-mul-subgroup-subset-Group
+  pr2 (pr2 (pr2 subgroup-subset-Group)) =
+    is-closed-under-inv-subgroup-subset-Group
 
   contains-subset-subgroup-subset-Group :
     S ⊆ subset-subgroup-subset-Group
   contains-subset-subgroup-subset-Group s H =
     unit-trunc-Prop
       ( pair
-        ( in-list (pair (inr star) (pair s H)))
+        ( unit-list (pair (inr star) (pair s H)))
         ( right-unit-law-mul-Group G (inclusion-subtype S (pair s H))))
 
   contains-formal-combinations-Subgroup :
@@ -232,7 +248,10 @@ module _
       ( ev-formal-combination-subset-Group c)
       ( is-closed-under-inv-Subgroup G U s (H s K))
       ( contains-formal-combinations-Subgroup U H c)
-  contains-formal-combinations-Subgroup U H (cons (pair (inr star) (pair s K)) c) =
+  contains-formal-combinations-Subgroup
+    ( U)
+    ( H)
+    ( cons (pair (inr star) (pair s K)) c) =
     is-closed-under-mul-Subgroup G U
       ( inclusion-subtype S (pair s K))
       ( ev-formal-combination-subset-Group c)

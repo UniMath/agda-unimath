@@ -14,7 +14,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functions
 open import foundation.identity-types
@@ -26,7 +25,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import univalent-combinatorics.decidable-dependent-pair-types
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
@@ -94,7 +93,7 @@ is-finite-decidable-subtype-is-finite :
   {l1 l2 : Level} {X : UU l1} →
   is-finite X → is-finite (decidable-subtype l2 X)
 is-finite-decidable-subtype-is-finite H =
-  is-finite-function-type H is-finite-decidable-Prop
+  is-finite-function-type H is-finite-Decidable-Prop
 
 Subset-𝔽 :
   {l1 : Level} (l2 : Level) → 𝔽 l1 → 𝔽 (l1 ⊔ lsuc l2)
@@ -123,8 +122,8 @@ is-finite-type-decidable-subtype P H =
   is-finite-Σ H
     ( λ x →
       is-finite-is-decidable-Prop
-        ( prop-decidable-Prop (P x))
-        ( is-decidable-type-decidable-Prop (P x)))
+        ( prop-Decidable-Prop (P x))
+        ( is-decidable-type-Decidable-Prop (P x)))
 
 is-finite-type-subset-𝔽 :
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) →
@@ -191,7 +190,7 @@ is-decidable-subtype-is-finite-has-decidable-eq S dec-A fin-S a =
     ( λ count-S →
       ind-coprod
         ( λ _ → type-Prop (is-decidable-Prop (S a)))
-        ( λ x → inl (tr (type-Prop ∘ S) (inv (pr2 x)) (pr2 (pr1 x))) )
-        ( λ x → inr λ S-a → x (( (a , S-a) , refl ) ))
+        ( λ x → inl (tr (type-Prop ∘ S) (inv (pr2 x)) (pr2 (pr1 x))))
+        ( λ x → inr λ S-a → x (( (a , S-a) , refl)))
         ( is-decidable-Σ-count count-S λ s → dec-A a (pr1 s)))
 ```

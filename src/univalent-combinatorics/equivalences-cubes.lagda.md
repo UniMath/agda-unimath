@@ -35,7 +35,8 @@ open import univalent-combinatorics.finite-types
 equiv-cube : (k : ℕ) → cube k → cube k → UU lzero
 equiv-cube k X Y =
   Σ ( (dim-cube k X) ≃ (dim-cube k Y))
-    ( λ e → (x : dim-cube k X) → (axis-cube k X x) ≃ (axis-cube k Y (map-equiv e x)))
+    ( λ e →
+      (x : dim-cube k X) → (axis-cube k X x) ≃ (axis-cube k Y (map-equiv e x)))
 
 dim-equiv-cube :
   (k : ℕ) (X Y : cube k) → equiv-cube k X Y → dim-cube k X ≃ dim-cube k Y
@@ -92,7 +93,8 @@ eq-equiv-cube k X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-cube k X Y)
 
 comp-equiv-cube :
-  (k : ℕ) (X Y Z : cube k) → equiv-cube k Y Z → equiv-cube k X Y → equiv-cube k X Z
+  (k : ℕ) (X Y Z : cube k) →
+  equiv-cube k Y Z → equiv-cube k X Y → equiv-cube k X Z
 comp-equiv-cube k X Y Z (pair dim-f axis-f) (pair dim-e axis-e) =
   pair (dim-f ∘e dim-e) (λ d → axis-f (map-equiv (dim-e) d) ∘e axis-e d)
 

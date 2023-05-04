@@ -29,10 +29,12 @@ embedding.
 ## Definition
 
 ```agda
-module _ {α : Level → Level} {β : Level → Level → Level}
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  (f : type-hom-Large-Precat C X Y) where
+  (f : type-hom-Large-Precat C X Y)
+  where
 
   is-epi-Large-Precat-Prop : Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
   is-epi-Large-Precat-Prop =
@@ -52,10 +54,12 @@ module _ {α : Level → Level} {β : Level → Level → Level}
 ### Isomorphisms are epimorphisms
 
 ```agda
-module _ {α : Level → Level} {β : Level → Level → Level}
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  (f : iso-Large-Precat C X Y) where
+  (f : iso-Large-Precat C X Y)
+  where
 
   is-epi-iso-Large-Precat :
     is-epi-Large-Precat C l3 X Y (hom-iso-Large-Precat C X Y f)
@@ -73,7 +77,11 @@ module _ {α : Level → Level} {β : Level → Level → Level}
                 ( hom-iso-Large-Precat C X Y f)
                 ( hom-inv-iso-Large-Precat C X Y f))) ∙
               ( ( ap
-                ( λ h' → comp-hom-Large-Precat C h' (hom-inv-iso-Large-Precat C X Y f))
+                ( λ h' →
+                  comp-hom-Large-Precat
+                    ( C)
+                    ( h')
+                    ( hom-inv-iso-Large-Precat C X Y f))
                 ( P)) ∙
                 ( ( associative-comp-hom-Large-Precat C
                   ( h)

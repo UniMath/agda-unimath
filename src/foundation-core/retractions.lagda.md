@@ -2,9 +2,6 @@
 
 ```agda
 {-# OPTIONS --safe #-}
-```
-
-```agda
 module foundation-core.retractions where
 ```
 
@@ -22,7 +19,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A retraction is a map that has a section
+A **retraction** is a map that has a right inverse, i.e. a section. Thus,
+`r : B → A` is a retraction of `f : A → B` if the composition `r ∘ f` is
+homotopic to the identity at `A`. Moreover, in this case we say that `A` _is a
+retract of_ `B`.
 
 ## Definition
 
@@ -32,10 +32,10 @@ module _
   where
 
   retr : (f : A → B) → UU (l1 ⊔ l2)
-  retr f = Σ (B → A) (λ g → (g ∘ f) ~ id)
+  retr f = Σ (B → A) (λ r → (r ∘ f) ~ id)
 
 _retract-of_ :
-  {i j : Level} → UU i → UU j → UU (i ⊔ j)
+  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A retract-of B = Σ (A → B) retr
 
 module _
@@ -62,30 +62,30 @@ module _
 ### If A is a retraction of B, then the identity types of A are retractions of the identity types of B
 
 ```agda
-ap-retraction :
-  {i j : Level} {A : UU i} {B : UU j}
-  (i : A → B) (r : B → A) (H : (r ∘ i) ~ id)
-  (x y : A) → i x ＝ i y → x ＝ y
-ap-retraction i r H x y p =
-    ( inv (H x)) ∙ ((ap r p) ∙ (H y))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-isretr-ap-retraction :
-  {i j : Level} {A : UU i} {B : UU j}
-  (i : A → B) (r : B → A) (H : (r ∘ i) ~ id)
-  (x y : A) → ((ap-retraction i r H x y) ∘ (ap i {x} {y})) ~ id
-isretr-ap-retraction i r H x .x refl = left-inv (H x)
+  ap-retraction :
+    (i : A → B) (r : B → A) (H : (r ∘ i) ~ id)
+    (x y : A) → i x ＝ i y → x ＝ y
+  ap-retraction i r H x y p =
+      ( inv (H x)) ∙ ((ap r p) ∙ (H y))
 
-retr-ap :
-  {i j : Level} {A : UU i} {B : UU j} (i : A → B) →
-  retr i → (x y : A) → retr (ap i {x} {y})
-pr1 (retr-ap i (pair r H) x y) = ap-retraction i r H x y
-pr2 (retr-ap i (pair r H) x y) = isretr-ap-retraction i r H x y
+  isretr-ap-retraction :
+    (i : A → B) (r : B → A) (H : (r ∘ i) ~ id)
+    (x y : A) → ((ap-retraction i r H x y) ∘ (ap i {x} {y})) ~ id
+  isretr-ap-retraction i r H x .x refl = left-inv (H x)
 
-retract-eq :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) →
-  (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)
-pr1 (retract-eq (pair i (pair r H)) x y) = ap i
-pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
+  retr-ap :
+    (i : A → B) → retr i → (x y : A) → retr (ap i {x} {y})
+  pr1 (retr-ap i (pair r H) x y) = ap-retraction i r H x y
+  pr2 (retr-ap i (pair r H) x y) = isretr-ap-retraction i r H x y
+
+  retract-eq :
+    (R : A retract-of B) → (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)
+  pr1 (retract-eq (pair i (pair r H)) x y) = ap i
+  pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
 ```
 
 ### If `g ∘ f` has a retraction then `f` has a retraction
@@ -129,10 +129,12 @@ module _
   inv-triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
     (retr-g : retr g) → ((pr1 retr-g) ∘ f) ~ h
-  inv-triangle-retraction f g h H retr-g = (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
+  inv-triangle-retraction f g h H retr-g =
+    (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
 
   triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
     (retr-g : retr g) → h ~ ((pr1 retr-g) ∘ f)
-  triangle-retraction f g h H retr-g = inv-htpy (inv-triangle-retraction f g h H retr-g)
+  triangle-retraction f g h H retr-g =
+    inv-htpy (inv-triangle-retraction f g h H retr-g)
 ```

@@ -99,6 +99,15 @@ module _
   eq-htpy-hom-Poset :
     (f g : hom-Poset P Q) → htpy-hom-Poset f g → Id f g
   eq-htpy-hom-Poset = eq-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  is-prop-htpy-hom-Poset :
+    (f g : hom-Poset P Q) → is-prop (htpy-hom-Poset f g)
+  is-prop-htpy-hom-Poset f g =
+    is-prop-Π
+      ( λ x →
+        is-set-element-Poset Q
+          ( map-hom-Poset P Q f x)
+          ( map-hom-Poset P Q g x))
 ```
 
 ### The identity order preserving map
@@ -137,7 +146,10 @@ module _
   comp-hom-Poset :
     (g : hom-Poset Q R) (f : hom-Poset P Q) → hom-Poset P R
   comp-hom-Poset =
-    comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q) (preorder-Poset R)
+    comp-hom-Preorder
+      ( preorder-Poset P)
+      ( preorder-Poset Q)
+      ( preorder-Poset R)
 ```
 
 ### Unit laws for composition of order preserving maps

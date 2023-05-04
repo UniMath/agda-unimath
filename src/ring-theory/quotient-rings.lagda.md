@@ -1,4 +1,4 @@
-# Qutoient rings
+# Quotient rings
 
 ```agda
 module ring-theory.quotient-rings where
@@ -31,7 +31,10 @@ precomp-quotient-Ring :
   ( H : (x : type-Ring R) → is-in-ideal-Ring R I x →
         map-hom-Ring R S f x ＝ zero-Ring S) →
   type-hom-Ring S T →
-  Σ (type-hom-Ring R T) (λ g → (x : type-Ring R) → is-in-ideal-Ring R I x → map-hom-Ring R T g x ＝ zero-Ring T)
+  Σ ( type-hom-Ring R T)
+    ( λ g →
+      (x : type-Ring R) →
+      is-in-ideal-Ring R I x → map-hom-Ring R T g x ＝ zero-Ring T)
 pr1 (precomp-quotient-Ring R I S T f H h) = comp-hom-Ring R S T h f
 pr2 (precomp-quotient-Ring R I S T f H h) x K =
   ap (map-hom-Ring S T h) (H x K) ∙ preserves-zero-hom-Ring S T h

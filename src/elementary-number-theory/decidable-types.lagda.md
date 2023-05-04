@@ -11,6 +11,7 @@ open import foundation.decidable-dependent-pair-types public
 
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
@@ -168,7 +169,7 @@ is-decidable-strictly-bounded-Π-ℕ :
   (dQ : is-decidable-fam Q) (m : ℕ) (H : is-strict-upper-bound-ℕ P m) →
   is-decidable ((x : ℕ) → P x → Q x)
 is-decidable-strictly-bounded-Π-ℕ P Q dP dQ m H =
-  is-decidable-bounded-Π-ℕ P Q dP dQ m (λ x p → leq-le-ℕ {x} {m} (H x p))
+  is-decidable-bounded-Π-ℕ P Q dP dQ m (λ x p → leq-le-ℕ x m (H x p))
 
 is-decidable-strictly-bounded-Π-ℕ' :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) (m : ℕ) →

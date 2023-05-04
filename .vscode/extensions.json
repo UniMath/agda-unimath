@@ -1,13 +1,13 @@
 {
   "recommendations": [
     "banacorn.agda-mode",
-    "j-mueller.agda",
     "bbenoist.nix",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
+    "dbankier.vscode-quick-select",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
-    "dbankier.vscode-quick-select",
-    "github.vscode-pull-request-github"
+    "fredrikbakke.agda-syntax",
+    "github.vscode-pull-request-github",
+    "ms-python.python",
+    "ms-python.vscode-pylance"
   ]
 }

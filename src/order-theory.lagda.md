@@ -5,6 +5,8 @@ module order-theory where
 
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
+open import order-theory.decidable-posets public
+open import order-theory.decidable-preorders public
 open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.directed-complete-posets public
@@ -14,6 +16,7 @@ open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public
 open import order-theory.frames public
+open import order-theory.galois-connections public
 open import order-theory.greatest-lower-bounds-posets public
 open import order-theory.homomorphisms-frames public
 open import order-theory.homomorphisms-meet-semilattices public
@@ -44,6 +47,8 @@ open import order-theory.preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.sup-lattices public
+open import order-theory.total-decidable-posets public
+open import order-theory.total-decidable-preorders public
 open import order-theory.total-posets public
 open import order-theory.total-preorders public
 ```

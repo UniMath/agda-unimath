@@ -17,6 +17,7 @@ open import foundation.coproduct-types
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -26,8 +27,14 @@ open import foundation.universe-levels
 ## Definition
 
 ```agda
+leq-ℤ-Prop : ℤ → ℤ → Prop lzero
+leq-ℤ-Prop x y = is-nonnegative-ℤ-Prop (diff-ℤ y x)
+
 leq-ℤ : ℤ → ℤ → UU lzero
-leq-ℤ x y = is-nonnegative-ℤ (diff-ℤ y x)
+leq-ℤ x y = type-Prop (leq-ℤ-Prop x y)
+
+is-prop-leq-ℤ : (x y : ℤ) → is-prop (leq-ℤ x y)
+is-prop-leq-ℤ x y = is-prop-type-Prop (leq-ℤ-Prop x y)
 ```
 
 ## Properties
@@ -87,11 +94,17 @@ concatenate-eq-leq-ℤ y refl H = H
 ### The strict ordering on ℤ
 
 ```agda
+le-ℤ-Prop : ℤ → ℤ → Prop lzero
+le-ℤ-Prop x y = is-positive-ℤ-Prop (diff-ℤ x y)
+
 le-ℤ : ℤ → ℤ → UU lzero
-le-ℤ x y = is-positive-ℤ (diff-ℤ x y)
+le-ℤ x y = type-Prop (le-ℤ-Prop x y)
+
+is-prop-le-ℤ : (x y : ℤ) → is-prop (le-ℤ x y)
+is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 ```
 
-## ℤ is an ordered ring
+### ℤ is an ordered ring
 
 ```agda
 preserves-order-add-ℤ' :
@@ -129,10 +142,14 @@ reflects-order-add-ℤ {x} {y} {z} =
 
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
-leq-int-ℕ zero-ℕ y H = tr (is-nonnegative-ℤ) (inv (right-unit-law-add-ℤ (int-ℕ y))) (is-nonnegative-int-ℕ y)
+leq-int-ℕ zero-ℕ y H =
+  tr
+    ( is-nonnegative-ℤ)
+    ( inv (right-unit-law-add-ℤ (int-ℕ y)))
+    ( is-nonnegative-int-ℕ y)
 leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
-  (inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x))
-    ∙ (ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y)
-    ∙ ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
+  ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x)) ∙
+    ( ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
+      ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
   (leq-int-ℕ x y H)
 ```

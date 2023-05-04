@@ -27,13 +27,11 @@ A type is a set if its identity types are propositions.
 ## Definition
 
 ```agda
-is-set :
-  {i : Level} → UU i → UU i
+is-set : {l : Level} → UU l → UU l
 is-set A = (x y : A) → is-prop (x ＝ y)
 
-Set :
-  (i : Level) → UU (lsuc i)
-Set i = Σ (UU i) is-set
+Set : (l : Level) → UU (lsuc l)
+Set l = Σ (UU l) is-set
 
 module _
   {l : Level} (X : Set l)
@@ -56,8 +54,7 @@ module _
 ### A type is a set if and only if it satisfies Streicher's axiom K
 
 ```agda
-axiom-K :
-  {i : Level} → UU i → UU i
+axiom-K : {l : Level} → UU l → UU l
 axiom-K A = (x : A) (p : x ＝ x) → refl ＝ p
 
 module _
@@ -121,25 +118,25 @@ set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 ```agda
 abstract
   is-set-is-equiv :
-    {i j : Level} {A : UU i} (B : UU j) (f : A → B) → is-equiv f →
+    {l1 l2 : Level} {A : UU l1} (B : UU l2) (f : A → B) → is-equiv f →
     is-set B → is-set A
   is-set-is-equiv = is-trunc-is-equiv zero-𝕋
 
 abstract
   is-set-equiv :
-    {i j : Level} {A : UU i} (B : UU j) (e : A ≃ B) →
+    {l1 l2 : Level} {A : UU l1} (B : UU l2) (e : A ≃ B) →
     is-set B → is-set A
   is-set-equiv = is-trunc-equiv zero-𝕋
 
 abstract
   is-set-is-equiv' :
-    {i j : Level} (A : UU i) {B : UU j} (f : A → B) → is-equiv f →
+    {l1 l2 : Level} (A : UU l1) {B : UU l2} (f : A → B) → is-equiv f →
     is-set A → is-set B
   is-set-is-equiv' = is-trunc-is-equiv' zero-𝕋
 
 abstract
   is-set-equiv' :
-    {i j : Level} (A : UU i) {B : UU j} (e : A ≃ B) →
+    {l1 l2 : Level} (A : UU l1) {B : UU l2} (e : A ≃ B) →
     is-set A → is-set B
   is-set-equiv' = is-trunc-equiv' zero-𝕋
 ```

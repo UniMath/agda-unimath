@@ -24,9 +24,9 @@ A pregroupoid is a precategory in which every morphism is an isomorphism.
 ## Definition
 
 ```agda
-is-groupoid-precat-Prop :
+is-groupoid-Precat-Prop :
   {l1 l2 : Level} (C : Precat l1 l2) → Prop (l1 ⊔ l2)
-is-groupoid-precat-Prop C =
+is-groupoid-Precat-Prop C =
   Π-Prop
     ( obj-Precat C)
     ( λ x →
@@ -35,10 +35,10 @@ is-groupoid-precat-Prop C =
         ( λ y →
           Π-Prop
             ( type-hom-Precat C x y)
-            ( λ f → is-iso-precat-Prop C f)))
+            ( λ f → is-iso-Precat-Prop C f)))
 
 is-groupoid-Precat : {l1 l2 : Level} (C : Precat l1 l2) → UU (l1 ⊔ l2)
-is-groupoid-Precat C = type-Prop (is-groupoid-precat-Prop C)
+is-groupoid-Precat C = type-Prop (is-groupoid-Precat-Prop C)
 
 Pregroupoid :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

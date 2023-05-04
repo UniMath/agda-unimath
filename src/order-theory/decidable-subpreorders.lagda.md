@@ -30,7 +30,7 @@ element `x : P` it is decidable whether or not `x` is in `Q`.
 ```agda
 module _
   {l1 l2 l3 : Level} (X : Preorder l1 l2)
-  (S : element-Preorder X → decidable-Prop l3)
+  (S : element-Preorder X → Decidable-Prop l3)
   where
 
   element-decidable-sub-Preorder : UU (l1 ⊔ l3)

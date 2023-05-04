@@ -25,7 +25,6 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -82,7 +81,7 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
     ( succ-ℕ x)
-    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x) )
+    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( cong-nat-mod-succ-ℕ k x)
 ```
 
@@ -199,7 +198,8 @@ cong-add-Fin :
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
 
-cong-add-ℕ : {k : ℕ} (x y : ℕ) →
+cong-add-ℕ :
+  {k : ℕ} (x y : ℕ) →
   cong-ℕ
     ( succ-ℕ k)
     ( add-ℕ
@@ -1048,8 +1048,8 @@ is-decidable-div-ℕ (succ-ℕ d) x =
     ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
 
-div-ℕ-decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → decidable-Prop lzero
-pr1 (div-ℕ-decidable-Prop d x H) = div-ℕ d x
-pr1 (pr2 (div-ℕ-decidable-Prop d x H)) = is-prop-div-ℕ d x H
-pr2 (pr2 (div-ℕ-decidable-Prop d x H)) = is-decidable-div-ℕ d x
+div-ℕ-Decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → Decidable-Prop lzero
+pr1 (div-ℕ-Decidable-Prop d x H) = div-ℕ d x
+pr1 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-prop-div-ℕ d x H
+pr2 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-decidable-div-ℕ d x
 ```

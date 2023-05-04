@@ -25,8 +25,8 @@ open import trees.w-types
 
 ## Idea
 
-The universal multiset of universe level `l` is the multiset of level `lsuc l`
-built out of `𝕍 l` and resizings of the multisets it contains
+The **universal multiset** of universe level `l` is the multiset of level
+`lsuc l` built out of `𝕍 l` and resizings of the multisets it contains
 
 ## Definition
 
@@ -59,9 +59,9 @@ is-small-universal-multiset-𝕍 l {l1} (pair (pair U e) H) =
              ( pr2 (H X)))))
     ( f)
     where
-    f : (X : 𝕍 l1) →
-        is-small-𝕍 l
-          ( resize-𝕍 X (is-small-multiset-𝕍 is-small-lsuc X))
+    f :
+      (X : 𝕍 l1) →
+      is-small-𝕍 l (resize-𝕍 X (is-small-multiset-𝕍 is-small-lsuc X))
     f (tree-𝕎 A α) =
       pair
         ( pair

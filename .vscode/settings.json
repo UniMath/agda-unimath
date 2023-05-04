@@ -11,9 +11,6 @@
   },
 
   // Snippet setup
-  "editor.quickSuggestions": {
-    "other": "inline"
-  },
   "editor.snippetSuggestions": "top",
   "editor.wordBasedSuggestions": false,
   "javascript.suggest.names": false,
@@ -26,12 +23,20 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.agda": "agda",
+    "*.md": "markdown"
+  },
 
   "[agda]": {
     "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.formatOnType": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+      "other": "inline"
+    },
+    "editor.autoClosingBrackets": "never"
   },
   "[css]": {
     "editor.quickSuggestions": {
@@ -54,7 +59,11 @@
   },
   "[markdown]": {
     "editor.tabSize": 2,
-    "editor.rulers": [80]
+    "editor.rulers": [80],
+    "editor.quickSuggestions": {
+      "other": "inline"
+    },
+    "editor.autoClosingBrackets": "never"
   },
   "[python]": {
     "editor.tabSize": 4,

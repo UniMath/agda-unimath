@@ -40,7 +40,8 @@ module _
 
   is-binary-lower-bound-Poset :
     (x y z : element-Poset P) → UU l2
-  is-binary-lower-bound-Poset x y z = type-Prop (is-binary-lower-bound-poset-Prop x y z)
+  is-binary-lower-bound-Poset x y z =
+    type-Prop (is-binary-lower-bound-poset-Prop x y z)
 
   is-prop-is-binary-lower-bound-Poset :
     (x y z : element-Poset P) → is-prop (is-binary-lower-bound-Poset x y z)

@@ -18,11 +18,13 @@ open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
+open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
@@ -186,7 +188,7 @@ module _
     map-inv-equiv (is-effective-quotient-map x y)
 
   is-surjective-and-effective-quotient-map :
-    is-surjective-and-effective R (quotient-map R) --
+    is-surjective-and-effective R (quotient-map R)
   pr1 is-surjective-and-effective-quotient-map = is-surjective-quotient-map R
   pr2 is-surjective-and-effective-quotient-map = is-effective-quotient-map
 
@@ -219,6 +221,37 @@ module _
     (type-hom-Set (quotient-Set R) X)
   inv-precomp-set-quotient X =
     pr1 (pr1 (is-set-quotient-set-quotient X))
+
+  issec-inv-precomp-set-quotient :
+    {l : Level} →
+    (X : Set l) →
+    (f : reflecting-map-Eq-Rel R (type-Set X)) →
+    (a : A) →
+    inv-precomp-set-quotient X f (quotient-map R a) ＝
+      map-reflecting-map-Eq-Rel R f a
+  issec-inv-precomp-set-quotient X f =
+    htpy-eq
+      ( ap
+        ( map-reflecting-map-Eq-Rel R)
+        ( issec-map-inv-is-equiv
+          ( is-set-quotient-set-quotient X)
+          ( f)))
+
+  isretr-inv-precomp-set-quotient :
+    { l : Level} →
+    ( X : Set l) →
+    ( f : type-hom-Set (quotient-Set R) X) →
+    inv-precomp-set-quotient X
+      ( precomp-Set-Quotient R
+        ( quotient-Set R)
+        ( reflecting-map-quotient-map R)
+        ( X)
+        ( f)) ＝
+      f
+  isretr-inv-precomp-set-quotient X f =
+      ( isretr-map-inv-is-equiv
+        ( is-set-quotient-set-quotient X)
+        ( f))
 ```
 
 ### Induction into propositions on the set quotient
@@ -363,4 +396,23 @@ module _
     ( x y z : set-quotient R) → type-Prop (P x y z)
   triple-induction-set-quotient' =
     triple-induction-set-quotient R R R P
+```
+
+### Every set quotient is equivalent to the set quotient
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
+  (Uf : {l : Level} → is-set-quotient l R B f)
+  where
+
+  equiv-uniqueness-set-quotient-set-quotient :
+    set-quotient R ≃ type-Set B
+  equiv-uniqueness-set-quotient-set-quotient =
+    equiv-uniqueness-set-quotient R
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( is-set-quotient-set-quotient R)
+      B f Uf
 ```

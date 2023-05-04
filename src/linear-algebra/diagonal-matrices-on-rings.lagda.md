@@ -34,7 +34,8 @@ module _
   diagonal-matrix-Ring : (n : ℕ) → vec-Ring R n → matrix-Ring R n n
   diagonal-matrix-Ring zero-ℕ v = empty-vec
   diagonal-matrix-Ring (succ-ℕ n) (x ∷ v) =
-    (x ∷ zero-vec-Ring R) ∷ map-vec (λ v' → zero-Ring R ∷ v') (diagonal-matrix-Ring n v)
+    ( x ∷ zero-vec-Ring R) ∷
+    ( map-vec (λ v' → zero-Ring R ∷ v') (diagonal-matrix-Ring n v))
 ```
 
 ### Scalar matrices

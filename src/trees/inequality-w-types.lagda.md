@@ -54,21 +54,22 @@ module _
   leq-∈-𝕎 H = propagate-leq-𝕎 H refl-leq-𝕎
 ```
 
-### Paths in W-types
+### Walks in W-types
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  data Path-𝕎 : 𝕎 A B → UU (l1 ⊔ l2) where
-    root : (w : 𝕎 A B) → Path-𝕎 w
-    cons : (a : A) (f : B a → 𝕎 A B) (b : B a) →
-           Path-𝕎 (f b) → Path-𝕎 (tree-𝕎 a f)
+  data walk-𝕎 : 𝕎 A B → UU (l1 ⊔ l2) where
+    root : (w : 𝕎 A B) → walk-𝕎 w
+    cons :
+      (a : A) (f : B a → 𝕎 A B) (b : B a) →
+      walk-𝕎 (f b) → walk-𝕎 (tree-𝕎 a f)
 
-  length-Path-𝕎 : (w : 𝕎 A B) → Path-𝕎 w → ℕ
-  length-Path-𝕎 w (root .w) = zero-ℕ
-  length-Path-𝕎 .(tree-𝕎 a f) (cons a f b p) = succ-ℕ (length-Path-𝕎 (f b) p)
+  length-walk-𝕎 : (w : 𝕎 A B) → walk-𝕎 w → ℕ
+  length-walk-𝕎 w (root .w) = zero-ℕ
+  length-walk-𝕎 .(tree-𝕎 a f) (cons a f b p) = succ-ℕ (length-walk-𝕎 (f b) p)
 ```
 
 ## Properties

@@ -82,7 +82,7 @@ is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
 
 ```agda
 ind-ℕ :
-  {i : Level} {P : ℕ → UU i} →
+  {l : Level} {P : ℕ → UU l} →
   P 0 → ((n : ℕ) → P n → P(succ-ℕ n)) → ((n : ℕ) → P n)
 ind-ℕ p0 pS 0 = p0
 ind-ℕ p0 pS (succ-ℕ n) = pS n (ind-ℕ p0 pS n)
@@ -131,6 +131,9 @@ is-nonzero-one-ℕ ()
 
 is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
 is-not-one-zero-ℕ ()
+
+is-nonzero-two-ℕ : is-nonzero-ℕ 2
+is-nonzero-two-ℕ = is-nonzero-succ-ℕ 1
 
 is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
@@ -221,3 +224,12 @@ pr2 equiv-ℕ =
     issec-map-inv-equiv-ℕ
     isretr-map-inv-equiv-ℕ
 ```
+
+## See also
+
+- The based induction principle is defined in
+  [`based-induction-natural-numbers`](elementary-number-theory.based-induction-natural-numbers.md).
+- The strong induction principle is defined in
+  [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
+- The based strong induction principle is defined in
+  [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).

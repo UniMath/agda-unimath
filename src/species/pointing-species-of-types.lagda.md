@@ -1,4 +1,4 @@
-# Pointing of species
+# Pointing of species of types
 
 ```agda
 module species.pointing-species-of-types where

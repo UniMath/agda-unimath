@@ -42,12 +42,12 @@ count-is-decidable-is-prop H (inl x) =
   count-is-contr (is-proof-irrelevant-is-prop H x)
 count-is-decidable-is-prop H (inr f) = count-is-empty f
 
-count-decidable-Prop :
+count-Decidable-Prop :
   {l1 : Level} (P : Prop l1) →
   is-decidable (type-Prop P) → count (type-Prop P)
-count-decidable-Prop P (inl p) =
+count-Decidable-Prop P (inl p) =
   count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) p)
-count-decidable-Prop P (inr f) = count-is-empty f
+count-Decidable-Prop P (inr f) = count-is-empty f
 ```
 
 ### We can count the elements of an identity type of a type that has decidable equality

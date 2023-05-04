@@ -106,21 +106,26 @@ module _
     left-unit-law-mul-Π-Semiring X (λ _ → R)
 
   right-unit-law-mul-function-Semiring :
-    (x : type-function-Semiring) → mul-function-Semiring x one-function-Semiring ＝ x
+    (x : type-function-Semiring) →
+    mul-function-Semiring x one-function-Semiring ＝ x
   right-unit-law-mul-function-Semiring =
     right-unit-law-mul-Π-Semiring X (λ _ → R)
 
   left-distributive-mul-add-function-Semiring :
     (f g h : type-function-Semiring) →
     mul-function-Semiring f (add-function-Semiring g h) ＝
-    add-function-Semiring (mul-function-Semiring f g) (mul-function-Semiring f h)
+    add-function-Semiring
+      ( mul-function-Semiring f g)
+      ( mul-function-Semiring f h)
   left-distributive-mul-add-function-Semiring =
     left-distributive-mul-add-Π-Semiring X (λ _ → R)
 
   right-distributive-mul-add-function-Semiring :
     (f g h : type-function-Semiring) →
     mul-function-Semiring (add-function-Semiring f g) h ＝
-    add-function-Semiring (mul-function-Semiring f h) (mul-function-Semiring g h)
+    add-function-Semiring
+      ( mul-function-Semiring f h)
+      ( mul-function-Semiring g h)
   right-distributive-mul-add-function-Semiring =
     right-distributive-mul-add-Π-Semiring X (λ _ → R)
 

@@ -18,7 +18,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
-open import group-theory.higher-groups
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```
@@ -54,7 +54,8 @@ module _
   value-connected-component X = pr1 X
 
   abstract
-    mere-equality-connected-component : (X : connected-component) →
+    mere-equality-connected-component :
+      (X : connected-component) →
       type-trunc-Prop (value-connected-component X ＝ a)
     mere-equality-connected-component X = pr2 X
 ```
@@ -87,7 +88,7 @@ pr1 (connected-component-∞-Group A a) = connected-component-Pointed-Type A a
 pr2 (connected-component-∞-Group A a) = is-0-connected-connected-component A a
 ```
 
-### If `A` is (k+1)-truncated, then the connected component of `a` in `A` is (k+1)-truncated.
+### If `A` is `k+1`-truncated, then the connected component of `a` in `A` is `k+1`-truncated
 
 ```agda
 is-trunc-connected-component :

@@ -25,7 +25,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-A map `f : A → B` is injective if `Id (f x) (f y)` implies `Id x y`.
+A map `f : A → B` is injective if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
@@ -38,6 +38,9 @@ is recommended to use the notion of embedding.
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
+
+injection : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+injection A B = Σ (A → B) is-injective
 ```
 
 ## Examples
@@ -47,6 +50,10 @@ is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
 ```agda
 is-injective-id : {l1 : Level} {A : UU l1} → is-injective (id {A = A})
 is-injective-id p = p
+
+id-injection : {l1 : Level} {A : UU l1} → injection A A
+pr1 id-injection = id
+pr2 id-injection = is-injective-id
 ```
 
 ## Properties
@@ -139,7 +146,8 @@ module _
 
 ```agda
 abstract
-  is-emb-is-injective' : {l1 l2 : Level} {A : UU l1} (is-set-A : is-set A)
+  is-emb-is-injective' :
+    {l1 l2 : Level} {A : UU l1} (is-set-A : is-set A)
     {B : UU l2} (is-set-B : is-set B) (f : A → B) →
     is-injective f → is-emb f
   is-emb-is-injective' is-set-A is-set-B f is-injective-f x y =

@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -36,12 +37,14 @@ module _
 
   hom-Directed-Graph : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Directed-Graph =
-    Σ ( vertex-Directed-Graph G → vertex-Directed-Graph H )
+    Σ ( vertex-Directed-Graph G → vertex-Directed-Graph H)
       ( λ α →
         (x y : vertex-Directed-Graph G) →
         edge-Directed-Graph G x y → edge-Directed-Graph H (α x) (α y))
 
-  module _ (f : hom-Directed-Graph) where
+  module _
+    (f : hom-Directed-Graph)
+    where
 
     vertex-hom-Directed-Graph :
       vertex-Directed-Graph G → vertex-Directed-Graph H
@@ -53,6 +56,26 @@ module _
         ( vertex-hom-Directed-Graph x)
         ( vertex-hom-Directed-Graph y)
     edge-hom-Directed-Graph {x} {y} e = pr2 f x y e
+
+    direct-predecessor-hom-Directed-Graph :
+      (x : vertex-Directed-Graph G) →
+      direct-predecessor-Directed-Graph G x →
+      direct-predecessor-Directed-Graph H (vertex-hom-Directed-Graph x)
+    direct-predecessor-hom-Directed-Graph x =
+      map-Σ
+        ( λ y → edge-Directed-Graph H y (vertex-hom-Directed-Graph x))
+        ( vertex-hom-Directed-Graph)
+        ( λ y → edge-hom-Directed-Graph)
+
+    direct-successor-hom-Directed-Graph :
+      (x : vertex-Directed-Graph G) →
+      direct-successor-Directed-Graph G x →
+      direct-successor-Directed-Graph H (vertex-hom-Directed-Graph x)
+    direct-successor-hom-Directed-Graph x =
+      map-Σ
+        ( edge-Directed-Graph H (vertex-hom-Directed-Graph x))
+        ( vertex-hom-Directed-Graph)
+        ( λ y → edge-hom-Directed-Graph)
 ```
 
 ### Composition of morphisms graphs
@@ -64,13 +87,27 @@ module _
   (K : Directed-Graph l5 l6)
   where
 
+  vertex-comp-hom-Directed-Graph :
+    hom-Directed-Graph H K → hom-Directed-Graph G H →
+    vertex-Directed-Graph G → vertex-Directed-Graph K
+  vertex-comp-hom-Directed-Graph g f =
+    (vertex-hom-Directed-Graph H K g) ∘ (vertex-hom-Directed-Graph G H f)
+
+  edge-comp-hom-Directed-Graph :
+    (g : hom-Directed-Graph H K) (f : hom-Directed-Graph G H)
+    (x y : vertex-Directed-Graph G) →
+    edge-Directed-Graph G x y →
+    edge-Directed-Graph K
+      ( vertex-comp-hom-Directed-Graph g f x)
+      ( vertex-comp-hom-Directed-Graph g f y)
+  edge-comp-hom-Directed-Graph g f x y e =
+    edge-hom-Directed-Graph H K g (edge-hom-Directed-Graph G H f e)
+
   comp-hom-Directed-Graph :
     hom-Directed-Graph H K → hom-Directed-Graph G H →
     hom-Directed-Graph G K
-  pr1 (comp-hom-Directed-Graph g f) =
-    (vertex-hom-Directed-Graph H K g) ∘ (vertex-hom-Directed-Graph G H f)
-  pr2 (comp-hom-Directed-Graph g f) x y e =
-    edge-hom-Directed-Graph H K g (edge-hom-Directed-Graph G H f e)
+  pr1 (comp-hom-Directed-Graph g f) = vertex-comp-hom-Directed-Graph g f
+  pr2 (comp-hom-Directed-Graph g f) = edge-comp-hom-Directed-Graph g f
 ```
 
 ### Identity morphisms graphs
@@ -106,6 +143,24 @@ module _
           ( α y)
           ( edge-hom-Directed-Graph G H f e) ＝
         edge-hom-Directed-Graph G H g e)
+
+  module _
+    (f g : hom-Directed-Graph G H) (α : htpy-hom-Directed-Graph f g)
+    where
+
+    vertex-htpy-hom-Directed-Graph :
+      vertex-hom-Directed-Graph G H f ~ vertex-hom-Directed-Graph G H g
+    vertex-htpy-hom-Directed-Graph = pr1 α
+
+    edge-htpy-hom-Directed-Graph :
+      (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
+      binary-tr
+        ( edge-Directed-Graph H)
+        ( vertex-htpy-hom-Directed-Graph x)
+        ( vertex-htpy-hom-Directed-Graph y)
+        ( edge-hom-Directed-Graph G H f e) ＝
+      edge-hom-Directed-Graph G H g e
+    edge-htpy-hom-Directed-Graph = pr2 α
 
   refl-htpy-hom-Directed-Graph :
     (f : hom-Directed-Graph G H) → htpy-hom-Directed-Graph f f

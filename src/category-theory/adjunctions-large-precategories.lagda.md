@@ -7,8 +7,6 @@ module category-theory.adjunctions-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
@@ -54,7 +52,7 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat D C γG)
   where
 
-  record is-adjoint-pair-Large-Precat : Setω
+  record is-adjoint-pair-Large-Precat : UUω
     where
     field
       equiv-is-adjoint-pair-Large-Precat :
@@ -143,7 +141,7 @@ module _
   (G : functor-Large-Precat D C γG) (F : functor-Large-Precat C D γF)
   where
 
-  is-left-adjoint-functor-Large-Precat : Setω
+  is-left-adjoint-functor-Large-Precat : UUω
   is-left-adjoint-functor-Large-Precat =
     is-adjoint-pair-Large-Precat F G
 
@@ -153,7 +151,7 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat D C γG)
   where
 
-  is-right-adjoint-functor-Large-Precat : Setω
+  is-right-adjoint-functor-Large-Precat : UUω
   is-right-adjoint-functor-Large-Precat =
     is-adjoint-pair-Large-Precat F G
 
@@ -162,7 +160,7 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-  record Adjunction : Setω where
+  record Adjunction : UUω where
     field
       level-left-adjoint-Adjunction :
         Level → Level
@@ -310,7 +308,7 @@ module _
 ### Unit of adjunction
 
 Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
-`η : id → comp G F` called the unit of the adjunction.
+`η : id → G ∘ F` called the unit of the adjunction.
 
 ```agda
 module _
@@ -389,17 +387,18 @@ module _
                       ( hom-left-adjoint-Adjunction C D FG f))
                     ( η X))))))))
     where
-    η : {l : Level} (X : obj-Large-Precat C l) →
-        type-hom-Large-Precat C X
-          ( obj-right-adjoint-Adjunction C D FG
-            ( obj-left-adjoint-Adjunction C D FG X))
+    η :
+      {l : Level} (X : obj-Large-Precat C l) →
+      type-hom-Large-Precat C X
+        ( obj-right-adjoint-Adjunction C D FG
+          ( obj-left-adjoint-Adjunction C D FG X))
     η = obj-natural-transformation-Large-Precat (unit-Adjunction FG)
 ```
 
 ### Counit of adjunction
 
 Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
-`ε : comp F G → id` called the counit of the adjunction.
+`ε : F ∘ G → id` called the counit of the adjunction.
 
 ```agda
   counit-Adjunction :
@@ -462,14 +461,17 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
               ( f)
               ( id-hom-Large-Precat C)) ∙
             ( ( ap
-                ( comp-hom-Large-Precat D (comp-hom-Large-Precat D f (ε X)))
+                ( comp-hom-Large-Precat
+                  ( D)
+                  ( comp-hom-Large-Precat D f (ε X)))
                 ( preserves-id-left-adjoint-Adjunction C D FG
                   ( obj-right-adjoint-Adjunction C D FG X))) ∙
               ( right-unit-law-comp-hom-Large-Precat D
                 ( comp-hom-Large-Precat D f (ε X))))))))
     where
-    ε : {l : Level} (Y : obj-Large-Precat D l) →
-        type-hom-Large-Precat D
+    ε :
+      {l : Level} (Y : obj-Large-Precat D l) →
+      type-hom-Large-Precat D
         ( obj-left-adjoint-Adjunction C D FG
           ( obj-right-adjoint-Adjunction C D FG Y))
         ( Y)

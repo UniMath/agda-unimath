@@ -68,7 +68,8 @@ module _
   map-functional-vec n f v = f ∘ v
 
   htpy-functional-vec :
-    (n : ℕ) {f g : A → B} → (f ~ g) → map-functional-vec n f ~ map-functional-vec n g
+    (n : ℕ) {f g : A → B} → (f ~ g) →
+    map-functional-vec n f ~ map-functional-vec n g
   htpy-functional-vec n H v = eq-htpy (H ·r v)
 ```
 
@@ -80,6 +81,7 @@ module _
   where
 
  binary-map-functional-vec :
-   (n : ℕ) → (A → B → C) → functional-vec A n → functional-vec B n → functional-vec C n
+   (n : ℕ) → (A → B → C) →
+   functional-vec A n → functional-vec B n → functional-vec C n
  binary-map-functional-vec n f v w i = f (v i) (w i)
 ```

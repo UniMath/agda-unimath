@@ -14,7 +14,9 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
+open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 
@@ -79,10 +81,10 @@ module _
   (f : A → A') (f' : A' → A'') (g : B → B') (g' : B' → B'')
   where
 
-  compose-map-coprod :
+  preserves-comp-map-coprod :
     (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
-  compose-map-coprod (inl x) = refl
-  compose-map-coprod (inr y) = refl
+  preserves-comp-map-coprod (inl x) = refl
+  preserves-comp-map-coprod (inr y) = refl
 ```
 
 ### Functoriality of coproducts preserves homotopies
@@ -191,7 +193,7 @@ module _
         ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
-      ( ( inv-htpy (compose-map-coprod sf f sg g)) ∙h
+      ( ( inv-htpy (preserves-comp-map-coprod sf f sg g)) ∙h
         ( htpy-map-coprod Sf Sg)) ∙h
       ( id-map-coprod A' B')
     pr1
@@ -204,7 +206,7 @@ module _
         ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
-      ( ( inv-htpy (compose-map-coprod f rf g rg)) ∙h
+      ( ( inv-htpy (preserves-comp-map-coprod f rf g rg)) ∙h
         ( htpy-map-coprod Rf Rg)) ∙h
       ( id-map-coprod A B)
 
@@ -217,6 +219,28 @@ module _
   pr1 (equiv-coprod e e') = map-equiv-coprod e e'
   pr2 (equiv-coprod e e') =
     is-equiv-map-coprod (is-equiv-map-equiv e) (is-equiv-map-equiv e')
+```
+
+### Functoriality of coproducts preserves being surjective
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+  abstract
+    is-surjective-map-coprod :
+      {f : A → A'} {g : B → B'} →
+      is-surjective f → is-surjective g →
+      is-surjective (map-coprod f g)
+    is-surjective-map-coprod s s' (inl x) =
+      apply-universal-property-trunc-Prop (s x)
+        ( trunc-Prop (fib (map-coprod _ _) (inl x)))
+        ( λ {(a , p) → unit-trunc-Prop (inl a , ap inl p)})
+    is-surjective-map-coprod s s' (inr x) =
+      apply-universal-property-trunc-Prop (s' x)
+        ( trunc-Prop (fib (map-coprod _ _) (inr x)))
+        ( λ {(a , p) → unit-trunc-Prop (inr a , ap inr p)})
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`.
@@ -405,37 +429,40 @@ module _
 If `P → ¬ Q'` and `P' → ¬ Q` then `(P + Q ≃ P' + Q') ≃ ((P ≃ P') × (Q ≃ Q'))`.
 
 ```agda
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
-  (¬PQ' : P → ¬ Q') where
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
+  (¬PQ' : P → ¬ Q')
+  where
 
-  left-to-left : (e : (P + Q) ≃ (P' + Q'))
-               → (u : P + Q)
-               → is-left u
-               → is-left (map-equiv e u)
+  left-to-left :
+    (e : (P + Q) ≃ (P' + Q')) →
+    (u : P + Q) → is-left u → is-left (map-equiv e u)
   left-to-left e (inl p) _ =
     ind-coprod is-left (λ _ → star) (λ q' → ¬PQ' p q') (map-equiv e (inl p))
   left-to-left e (inr q) ()
 
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
-  (¬P'Q : P' → ¬ Q) where
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
+  (¬P'Q : P' → ¬ Q)
+  where
 
-  right-to-right : (e : (P + Q) ≃ (P' + Q'))
-                 → (u : P + Q)
-                 → is-right u
-                 → is-right (map-equiv e u)
+  right-to-right :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
+    is-right u → is-right (map-equiv e u)
   right-to-right e (inl p) ()
   right-to-right e (inr q) _ =
     ind-coprod is-right (λ p' → ¬P'Q p' q) (λ _ → star) (map-equiv e (inr q))
 
-module _ {i j k l : Level}
-  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
-  (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q) where
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : UU l1} {Q : UU l2} {P' : UU l3} {Q' : UU l4}
+  (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q)
+  where
 
-  equiv-left-to-left : (e : (P + Q) ≃ (P' + Q'))
-                     → (u : P + Q)
-                     → is-left u ≃ is-left (map-equiv e u)
+  equiv-left-to-left :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) → is-left u ≃ is-left (map-equiv e u)
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
     is-equiv-has-inverse
@@ -444,9 +471,9 @@ module _ {i j k l : Level}
       (λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-left u))
 
-  equiv-right-to-right : (e : (P + Q) ≃ (P' + Q'))
-                       → (u : P + Q)
-                       → is-right u ≃ is-right (map-equiv e u)
+  equiv-right-to-right :
+    (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
+    is-right u ≃ is-right (map-equiv e u)
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
     is-equiv-has-inverse
@@ -455,8 +482,7 @@ module _ {i j k l : Level}
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-right u))
 
-  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q')
-                                → (P ≃ P') × (Q ≃ Q')
+  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q') → (P ≃ P') × (Q ≃ Q')
   pr1 (map-mutually-exclusive-coprod e) =
     equiv-left-summand ∘e
     ( equiv-Σ _ e (equiv-left-to-left e) ∘e
@@ -466,8 +492,7 @@ module _ {i j k l : Level}
     ( equiv-Σ _ e (equiv-right-to-right e) ∘e
       inv-equiv (equiv-right-summand))
 
-  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q')
-                                    → (P + Q) ≃ (P' + Q')
+  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q') → (P + Q) ≃ (P' + Q')
   map-inv-mutually-exclusive-coprod (pair e₁ e₂) = equiv-coprod e₁ e₂
 
   isretr-map-inv-mutually-exclusive-coprod :
@@ -481,11 +506,19 @@ module _ {i j k l : Level}
     (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
   issec-map-inv-mutually-exclusive-coprod e =
     eq-htpy-equiv (
-      λ { (inl p) → ap pr1 (isretr-map-inv-equiv-left-summand (pair (map-equiv e (inl p)) (left-to-left ¬PQ' e (inl p) star)));
-          (inr q) → ap pr1 (isretr-map-inv-equiv-right-summand (pair (map-equiv e (inr q)) (right-to-right ¬P'Q e (inr q) star))) })
+      λ { (inl p) →
+          ap
+            ( pr1)
+            ( isretr-map-inv-equiv-left-summand
+              ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star)) ;
+          (inr q) →
+          ap
+            ( pr1)
+            ( isretr-map-inv-equiv-right-summand
+              ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star))})
 
-  equiv-mutually-exclusive-coprod : ((P + Q) ≃ (P' + Q'))
-                                  ≃ ((P ≃ P') × (Q ≃ Q'))
+  equiv-mutually-exclusive-coprod :
+    ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))
   pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
   pr2 equiv-mutually-exclusive-coprod =
     is-equiv-has-inverse

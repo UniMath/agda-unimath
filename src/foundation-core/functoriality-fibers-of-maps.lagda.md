@@ -7,7 +7,7 @@ module foundation-core.functoriality-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
@@ -49,7 +49,7 @@ map-fib-cone-id g .(g b) (pair b refl) =
 
 ## Properties
 
-### Computing `map-fib-cone` of a horizontal composition of cones
+### Computing `map-fib-cone` of a horizontal pasting of cones
 
 ```agda
 module _
@@ -58,11 +58,11 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  map-fib-cone-comp-horizontal :
+  map-fib-pasting-horizontal-cone :
     (c : cone j h B) (d : cone i (pr1 c) A) → (x : X) →
-    ( map-fib-cone (j ∘ i) h (cone-comp-horizontal i j h c d) x) ~
+    ( map-fib-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
     ( (map-fib-cone j h c (i x)) ∘ (map-fib-cone i (pr1 c) d x))
-  map-fib-cone-comp-horizontal
+  map-fib-pasting-horizontal-cone
     (pair g (pair q K)) (pair f (pair p H)) .(f a) (pair a refl) =
     eq-pair-Σ
       ( refl)
@@ -76,7 +76,7 @@ module _
               ( inv (ap-concat j (inv (H a)) refl))))))
 ```
 
-### Computing `map-fib-cone` of a horizontal composition of cones
+### Computing `map-fib-cone` of a horizontal pasting of cones
 
 ```agda
 module _
@@ -85,16 +85,16 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  map-fib-cone-comp-vertical :
+  map-fib-pasting-vertical-cone :
     (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
-    ( ( map-fib-cone f (g ∘ h) (cone-comp-vertical f g h c d) x) ∘
+    ( ( map-fib-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
       ( inv-map-compute-fib-comp (pr1 c) (pr1 d) x)) ~
     ( ( inv-map-compute-fib-comp g h (f x)) ∘
       ( map-Σ
         ( λ t → fib h (pr1 t))
         ( map-fib-cone f g c x)
         ( λ t → map-fib-cone (pr1 (pr2 c)) h d (pr1 t))))
-  map-fib-cone-comp-vertical
+  map-fib-pasting-vertical-cone
     (pair p (pair q H)) (pair p' (pair q' H')) .(p (p' a))
     (pair (pair .(p' a) refl) (pair a refl)) =
     eq-pair-Σ refl

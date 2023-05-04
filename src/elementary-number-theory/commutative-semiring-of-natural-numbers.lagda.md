@@ -9,13 +9,11 @@ module elementary-number-theory.commutative-semiring-of-natural-numbers where
 ```agda
 open import commutative-algebra.commutative-semirings
 
-open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.monoid-of-natural-numbers-with-addition
 open import elementary-number-theory.multiplication-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
-open import group-theory.commutative-monoids
 
 open import ring-theory.semirings
 ```
@@ -27,10 +25,6 @@ open import ring-theory.semirings
 ### The commutative semiring of natural numbers
 
 ```agda
-ℕ-Commutative-Monoid : Commutative-Monoid lzero
-pr1 ℕ-Commutative-Monoid = ℕ-Monoid
-pr2 ℕ-Commutative-Monoid = commutative-add-ℕ
-
 has-mul-ℕ-Commutative-Monoid :
   has-mul-Commutative-Monoid ℕ-Commutative-Monoid
 pr1 (pr1 has-mul-ℕ-Commutative-Monoid) = mul-ℕ

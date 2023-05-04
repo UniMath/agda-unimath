@@ -29,7 +29,9 @@ element of `A`.
 ### Models
 
 ```agda
-module _ {l1 : Level} (Sg : signature l1) where
+module _
+  {l1 : Level} (Sg : signature l1)
+  where
 
   is-model : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
   is-model X =

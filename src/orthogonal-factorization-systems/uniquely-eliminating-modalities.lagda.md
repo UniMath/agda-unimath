@@ -41,7 +41,7 @@ uniquely-eliminating-modality l1 l2 =
         ( is-uniquely-eliminating-modality))
 ```
 
-### Projections for uniquely eliminating modalities
+### Components of a uniquely eliminating modality
 
 ```agda
 module _
@@ -49,16 +49,16 @@ module _
   (is-uem-○ : is-uniquely-eliminating-modality unit-○)
   where
 
-  modal-ind-is-uniquely-eliminating-modality :
+  ind-modality-is-uniquely-eliminating-modality :
     (X : UU l1) (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) → (x' : ○ X) → ○ (P x')
-  modal-ind-is-uniquely-eliminating-modality X P =
+  ind-modality-is-uniquely-eliminating-modality X P =
     map-inv-is-equiv (is-uem-○ X P)
 
-  modal-comp-is-uniquely-eliminating-modality :
+  compute-ind-modality-is-uniquely-eliminating-modality :
     (X : UU l1) (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
     (pr1 (pr1 (is-uem-○ X P)) f ∘ unit-○) ~ f
-  modal-comp-is-uniquely-eliminating-modality X P =
+  compute-ind-modality-is-uniquely-eliminating-modality X P =
     htpy-eq ∘ pr2 (pr1 (is-uem-○ X P))
 
 module _

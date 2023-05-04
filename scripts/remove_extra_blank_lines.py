@@ -6,15 +6,8 @@ import sys
 import utils
 import re
 
-
-def recursive_sub(pattern, repl, string, flags=0):
-    while re.search(pattern, string, flags=flags):
-        string = re.sub(pattern, repl, string, flags=flags)
-    return string
-
-
-open_tag_pattern = re.compile(r"^```\S+\n", flags=re.MULTILINE)
-close_tag_pattern = re.compile(r"\n```$", flags=re.MULTILINE)
+open_tag_pattern = re.compile(r'^```\S+\n', flags=re.MULTILINE)
+close_tag_pattern = re.compile(r'\n```$', flags=re.MULTILINE)
 
 
 def has_well_formed_blocks(mdcode, pos=0):
@@ -52,38 +45,38 @@ def has_well_formed_blocks(mdcode, pos=0):
     return has_well_formed_blocks(mdcode, close_match.end())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     STATUS_FILES_WITH_ILL_FORMED_BLOCKS = 1
 
     status = 0
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
-        with open(fpath, "r") as f:
+        with open(fpath, 'r') as f:
             inputText = f.read()
 
-        output = recursive_sub(r"[ \t]+$", "", inputText, flags=re.MULTILINE)
-        output = recursive_sub(r"\n\s*\n\s*\n", "\n\n", output)
+        output = re.sub(r'[ \t]+$', '', inputText, flags=re.MULTILINE)
+        output = re.sub(r'\n(\s*\n){2,}', '\n\n', output)
 
         # Remove blank lines after a code block starts, and blank lines before a code block ends
         if not has_well_formed_blocks(output):
             print(
-                f"Error! File '{fpath}' has ill-formed code blocks. Please check if there is an opening or closing code block tag (```) without a corresponding closing/opening tag.")
+                f"Error! File '{fpath}' has ill-formed code blocks. Please check if there is an opening or closing code block tag (```) without a corresponding closing/opening tag.", file=sys.stderr)
 
             status |= STATUS_FILES_WITH_ILL_FORMED_BLOCKS
         else:
 
-            output = recursive_sub(
-                r"\n\n```($)", r"\n```\1", output, flags=re.MULTILINE)
-            output = recursive_sub(
-                r"(^)```(\S+)\n\n", r"\1```\2\n", output, flags=re.MULTILINE)
+            output = re.sub(
+                r'\n{2,}```$', r'\n```', output, flags=re.MULTILINE)
+            output = re.sub(
+                r'^```(\S+)\n{2,}', r'```\1\n', output, flags=re.MULTILINE)
 
             # Empty blocks should have an empty line
-            output = re.sub(r"(^)```(\S+)\n```($)",
-                            r"\1```\2\n\n```\3", output, flags=re.MULTILINE)
+            output = re.sub(r'^```(\S+)\n```$',
+                            r'```\1\n\n```', output, flags=re.MULTILINE)
 
         if output != inputText:
-            with open(fpath, "w") as f:
+            with open(fpath, 'w') as f:
                 f.write(output)
 
     sys.exit(status)

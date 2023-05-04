@@ -33,13 +33,16 @@ An involution on a type `A` is a map (or an equivalence) `f : A → A` such that
 
 ```agda
 htpy-own-inverse-is-involution :
-  {l : Level} {A : UU l} {f : Aut A} → is-involution-aut f → map-inv-equiv f ~ map-equiv f
+  {l : Level} {A : UU l} {f : Aut A} →
+  is-involution-aut f → map-inv-equiv f ~ map-equiv f
 htpy-own-inverse-is-involution {f = f} is-involution-f x =
       is-injective-map-equiv f
-        ( htpy-eq-equiv (right-inverse-law-equiv f) x ∙ inv (is-involution-f x))
+        ( htpy-eq-equiv (right-inverse-law-equiv f) x ∙
+          inv (is-involution-f x))
 
 own-inverse-is-involution :
-  {l : Level} {A : UU l} {f : Aut A} → is-involution-aut f → inv-equiv f ＝ f
+  {l : Level} {A : UU l} {f : Aut A} →
+  is-involution-aut f → inv-equiv f ＝ f
 own-inverse-is-involution {f = f} =
   eq-htpy-equiv ∘ htpy-own-inverse-is-involution {f = f}
 ```

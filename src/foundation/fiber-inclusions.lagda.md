@@ -13,7 +13,7 @@ open import foundation.unit-type
 
 open import foundation-core.0-maps
 open import foundation-core.1-types
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
@@ -143,17 +143,17 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A)
   where
 
-  cone-fiber-fam : cone (pr1 {B = B}) (pt a) (B a)
+  cone-fiber-fam : cone (pr1 {B = B}) (point a) (B a)
   pr1 cone-fiber-fam = fiber-inclusion B a
   pr1 (pr2 cone-fiber-fam) = terminal-map
   pr2 (pr2 cone-fiber-fam) = refl-htpy
 
   abstract
     is-pullback-cone-fiber-fam :
-      is-pullback (pr1 {B = B}) (pt a) cone-fiber-fam
+      is-pullback (pr1 {B = B}) (point a) cone-fiber-fam
     is-pullback-cone-fiber-fam =
       is-equiv-comp
-        ( gap (pr1 {B = B}) (pt a) (cone-fiber (pr1 {B = B}) a))
+        ( gap (pr1 {B = B}) (point a) (cone-fiber (pr1 {B = B}) a))
         ( map-inv-fib-pr1 B a)
         ( is-equiv-map-inv-fib-pr1 B a)
         ( is-pullback-cone-fiber pr1 a)

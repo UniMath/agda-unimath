@@ -9,12 +9,13 @@ module foundation.embeddings where
 ```agda
 open import foundation-core.embeddings public
 
+open import foundation.commuting-squares-of-maps
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.truncated-maps
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
@@ -179,8 +180,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  is-emb-tot : {f : (x : A) → B x → C x}
-    → ((x : A) → is-emb (f x)) → is-emb (tot f)
+  is-emb-tot :
+    {f : (x : A) → B x → C x} → ((x : A) → is-emb (f x)) → is-emb (tot f)
   is-emb-tot H =
     is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
 
@@ -197,8 +198,8 @@ module _
   where
 
   abstract
-    is-emb-map-Σ-map-base : {f : A → B} (C : B → UU l3)
-      → is-emb f → is-emb (map-Σ-map-base f C)
+    is-emb-map-Σ-map-base :
+      {f : A → B} (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
     is-emb-map-Σ-map-base C H =
       is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
 
@@ -212,8 +213,9 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   where
 
-  is-emb-map-Σ : (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
-    → is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
+  is-emb-map-Σ :
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+    is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
   is-emb-map-Σ D H K =
     is-emb-is-prop-map
       ( is-prop-map-map-Σ D
@@ -270,7 +272,7 @@ module _
         (inv-equiv (e x y))
         λ { refl →
               inv (isretr-map-inv-equiv (e x x) refl) ∙
-              ap (map-equiv (inv-equiv (e x x))) (p x) }
+              ap (map-equiv (inv-equiv (e x x))) (p x)}
 ```
 
 ### Embeddings are closed under pullback
@@ -293,4 +295,51 @@ module _
       is-emb-is-prop-map
         ( is-trunc-is-pullback' neg-one-𝕋 f g c pb
           ( is-prop-map-is-emb is-emb-f))
+```
+
+### In a commuting square of which the sides are embeddings, the top map is an embedding if and only if the bottom map is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (H : coherence-square-maps top left right bottom)
+  where
+
+  is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps :
+    is-equiv left → is-equiv right → is-emb bottom → is-emb top
+  is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps K L M =
+    is-emb-right-factor
+      ( right)
+      ( top)
+      ( is-emb-is-equiv L)
+      ( is-emb-htpy'
+        ( bottom ∘ left)
+        ( right ∘ top)
+        ( H)
+        ( is-emb-comp bottom left M (is-emb-is-equiv K)))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (H : coherence-square-maps top left right bottom)
+  where
+
+  is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps :
+    is-equiv left → is-equiv right → is-emb top → is-emb bottom
+  is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps K L M =
+    is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps
+      ( bottom)
+      ( map-inv-is-equiv K)
+      ( map-inv-is-equiv L)
+      ( top)
+      ( coherence-square-inv-vertical
+        ( top)
+        ( left , K)
+        ( right , L)
+        ( bottom)
+        ( H))
+      ( is-equiv-map-inv-is-equiv K)
+      ( is-equiv-map-inv-is-equiv L)
+      ( M)
 ```

@@ -28,23 +28,40 @@ posets that additionally preserves sups (or arbitrary joins of subsets).
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (A : Sup-Lattice l1 l2 l3) (B : Sup-Lattice l4 l5 l6)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (A : Sup-Lattice l1 l2 l3) (B : Sup-Lattice l4 l5 l6)
   where
 
-  preserves-sups : (element-Sup-Lattice A → element-Sup-Lattice B) → UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
-  preserves-sups f = {I : UU l3} → (b : I → element-Sup-Lattice A) →
-    is-least-upper-bound-family-Poset (poset-Sup-Lattice B) (f ∘ b) (f (sup-Sup-Lattice A I b))
+  preserves-sups :
+    (element-Sup-Lattice A → element-Sup-Lattice B) →
+    UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+  preserves-sups f =
+    {I : UU l3} → (b : I → element-Sup-Lattice A) →
+    is-least-upper-bound-family-Poset
+      ( poset-Sup-Lattice B)
+      ( f ∘ b)
+      ( f (sup-Sup-Lattice A I b))
 
   hom-Sup-Lattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
-  hom-Sup-Lattice = Σ (element-Sup-Lattice A → element-Sup-Lattice B)
-    λ f → preserves-order-Poset (poset-Sup-Lattice A) (poset-Sup-Lattice B) f × preserves-sups f
+  hom-Sup-Lattice =
+    Σ ( element-Sup-Lattice A → element-Sup-Lattice B)
+      ( λ f →
+        preserves-order-Poset (poset-Sup-Lattice A) (poset-Sup-Lattice B) f ×
+        preserves-sups f)
 
-  map-hom-Sup-Lattice : hom-Sup-Lattice → element-Sup-Lattice A → element-Sup-Lattice B
+  map-hom-Sup-Lattice :
+    hom-Sup-Lattice → element-Sup-Lattice A → element-Sup-Lattice B
   map-hom-Sup-Lattice = pr1
 
-  preserves-order-hom-Sup-Lattice : (H : hom-Sup-Lattice) → preserves-order-Poset (poset-Sup-Lattice A) (poset-Sup-Lattice B) (map-hom-Sup-Lattice H)
+  preserves-order-hom-Sup-Lattice :
+    (H : hom-Sup-Lattice) →
+    preserves-order-Poset
+      ( poset-Sup-Lattice A)
+      ( poset-Sup-Lattice B)
+      ( map-hom-Sup-Lattice H)
   preserves-order-hom-Sup-Lattice = pr1 ∘ pr2
 
-  preserves-sup-hom-Sup-Lattice : (H : hom-Sup-Lattice) → preserves-sups (map-hom-Sup-Lattice H)
+  preserves-sup-hom-Sup-Lattice :
+    (H : hom-Sup-Lattice) → preserves-sups (map-hom-Sup-Lattice H)
   preserves-sup-hom-Sup-Lattice = pr2 ∘ pr2
 ```

@@ -9,6 +9,7 @@ module elementary-number-theory.inequality-standard-finite-types where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -86,7 +87,7 @@ preserves-leq-nat-Fin :
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   preserves-leq-nat-Fin k H
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H =
-  leq-le-ℕ {nat-Fin k x} {k} (strict-upper-bound-nat-Fin k x)
+  leq-le-ℕ (nat-Fin k x) k (strict-upper-bound-nat-Fin k x)
 preserves-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H =
   refl-leq-ℕ k
 
@@ -129,8 +130,8 @@ is-decidable-leq-Fin (succ-ℕ k) (inl x) (inr y) = inl star
 is-decidable-leq-Fin (succ-ℕ k) (inr x) (inl y) = inr (λ x → x)
 is-decidable-leq-Fin (succ-ℕ k) (inr x) (inr y) = inl star
 
-leq-Fin-decidable-Prop : (k : ℕ) → Fin k → Fin k → decidable-Prop lzero
-pr1 (leq-Fin-decidable-Prop k x y) = leq-Fin k x y
-pr1 (pr2 (leq-Fin-decidable-Prop k x y)) = is-prop-leq-Fin k x y
-pr2 (pr2 (leq-Fin-decidable-Prop k x y)) = is-decidable-leq-Fin k x y
+leq-Fin-Decidable-Prop : (k : ℕ) → Fin k → Fin k → Decidable-Prop lzero
+pr1 (leq-Fin-Decidable-Prop k x y) = leq-Fin k x y
+pr1 (pr2 (leq-Fin-Decidable-Prop k x y)) = is-prop-leq-Fin k x y
+pr2 (pr2 (leq-Fin-Decidable-Prop k x y)) = is-decidable-leq-Fin k x y
 ```

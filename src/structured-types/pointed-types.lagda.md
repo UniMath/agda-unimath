@@ -32,17 +32,17 @@ module _
   type-Pointed-Type : UU l
   type-Pointed-Type = pr1 A
 
-  pt-Pointed-Type : type-Pointed-Type
-  pt-Pointed-Type = pr2 A
+  point-Pointed-Type : type-Pointed-Type
+  point-Pointed-Type = pr2 A
 ```
 
 ### Evaluation at the base point
 
 ```agda
-ev-pt-Pointed-Type :
+ev-point-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) {B : UU l2} →
   (type-Pointed-Type A → B) → B
-ev-pt-Pointed-Type A f = f (pt-Pointed-Type A)
+ev-point-Pointed-Type A f = f (point-Pointed-Type A)
 ```
 
 ## See also

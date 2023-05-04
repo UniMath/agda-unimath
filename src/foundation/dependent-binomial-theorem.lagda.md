@@ -8,21 +8,23 @@ module foundation.dependent-binomial-theorem where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.coproduct-decompositions
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.univalence
 open import foundation-core.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -126,4 +128,82 @@ module _
       ( distributive-Π-Σ)) ∘e
     ( equiv-map-Π
       ( λ x → inv-compute-total-fam-coprod (A x) (B x)))
+
+  type-distributive-Π-coprod-binary-coproduct-Decomposition :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l1 ⊔ lsuc l1)
+  type-distributive-Π-coprod-binary-coproduct-Decomposition =
+    Σ ( binary-coproduct-Decomposition l1 l1 X)
+      ( λ d →
+        ( ( (u : left-summand-binary-coproduct-Decomposition d) →
+            ( A
+              ( map-inv-equiv
+                ( matching-correspondence-binary-coproduct-Decomposition d)
+                ( inl u)))) ×
+          ( ( v : right-summand-binary-coproduct-Decomposition d) →
+            ( B
+              ( map-inv-equiv
+                ( matching-correspondence-binary-coproduct-Decomposition d)
+                ( inr v))))))
+
+  equiv-type-distributive-Π-coprod-binary-coproduct-Decomposition :
+    type-distributive-Π-coprod ≃
+    type-distributive-Π-coprod-binary-coproduct-Decomposition
+  equiv-type-distributive-Π-coprod-binary-coproduct-Decomposition =
+    equiv-Σ
+    ( λ d →
+      ( (u : left-summand-binary-coproduct-Decomposition d) →
+        A
+          ( map-inv-equiv
+            ( matching-correspondence-binary-coproduct-Decomposition d)
+            ( inl u))) ×
+      ( (v : right-summand-binary-coproduct-Decomposition d) →
+        B
+          ( map-inv-equiv
+            ( matching-correspondence-binary-coproduct-Decomposition d)
+            ( inr v))))
+      ( equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X)
+      ( λ f →
+        equiv-prod
+          ( equiv-Π
+              ( λ z →
+                  A
+                  ( map-inv-equiv
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      ( X)
+                      ( f))
+                    ( inl z)))
+              ( id-equiv)
+              ( λ a →
+                equiv-eq
+                  ( ap
+                      ( A)
+                      ( compute-left-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ
+                        ( X)
+                        ( f)
+                        ( a)))) ∘e
+            inv-equiv equiv-ev-pair)
+          ( equiv-Π
+              ( λ z →
+                  B
+                  ( map-inv-equiv
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      X f)
+                    ( inr z)))
+              ( id-equiv)
+              ( λ a →
+                equiv-eq
+                  ( ap
+                      ( B)
+                      ( compute-right-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ
+                        ( X)
+                        ( f)
+                        ( a)))) ∘e
+            inv-equiv equiv-ev-pair))
+
+  distributive-Π-coprod-binary-coproduct-Decomposition :
+    ((x : X) → A x + B x) ≃
+    type-distributive-Π-coprod-binary-coproduct-Decomposition
+  distributive-Π-coprod-binary-coproduct-Decomposition =
+    equiv-type-distributive-Π-coprod-binary-coproduct-Decomposition ∘e
+    distributive-Π-coprod
 ```

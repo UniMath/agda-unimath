@@ -82,7 +82,8 @@ module _
 ```agda
 tr-eq-pair-diagonal :
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (C : A × A → UU l2)
-  (p : a0 ＝ a1) (u : C (a0 , a0)) → (tr C (eq-pair p p) u) ＝ (tr (λ a → C (a , a)) p u)
+  (p : a0 ＝ a1) (u : C (a0 , a0)) →
+  tr C (eq-pair p p) u ＝ tr (λ a → C (a , a)) p u
 tr-eq-pair-diagonal C refl u = refl
 ```
 
@@ -102,8 +103,8 @@ tr-Σ C refl z = refl
 ```agda
 tr-eq-pair-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}
-  {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : (Σ A (λ a → B a)) → UU l3)
-  (p : a0 ＝ a1) (q : path-over (B) p b0 b1) (u : C (a0 , b0)) →
+  {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : (Σ A B) → UU l3)
+  (p : a0 ＝ a1) (q : path-over B p b0 b1) (u : C (a0 , b0)) →
   tr C (eq-pair-Σ p q) u ＝
   tr (λ x → C (a1 , x)) q (tr C (eq-pair-Σ p refl) u)
 tr-eq-pair-Σ C refl refl u = refl
@@ -176,4 +177,13 @@ tr-loop :
   {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
   (tr (λ y → y ＝ y) p l) ＝ (((inv p) ∙ l) ∙ p)
 tr-loop refl l = inv right-unit
+```
+
+### Transport of identifications
+
+```agda
+tr-identification :
+  {l1 : Level} {A : UU l1} {a0 a1 a2 : A} (p : a1 ＝ a2) (l : a0 ＝ a1) →
+  (tr (λ y → a0 ＝ y) p l) ＝ (l ∙ p)
+tr-identification refl refl = refl
 ```

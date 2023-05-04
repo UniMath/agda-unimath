@@ -11,7 +11,6 @@ open import elementary-number-theory
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -61,11 +60,15 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
             ( face-Finitely-Graded-Poset X
               ( succ-Fin
                 ( succ-ℕ (succ-ℕ k))
-                ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
+                ( succ-Fin
+                  ( succ-ℕ (succ-ℕ k))
+                  ( inl-Fin (succ-ℕ k) (inl-Fin k i)))))
             ( λ y →
               has-cardinality-Prop 2
                 ( Σ ( face-Finitely-Graded-Poset X
-                      ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) (inl-Fin k i))))
+                      ( succ-Fin
+                        ( succ-ℕ (succ-ℕ k))
+                        ( inl-Fin (succ-ℕ k) (inl-Fin k i))))
                     ( λ z →
                       adjacent-Finitely-Graded-Poset X (inl-Fin k i) x z ×
                       adjacent-Finitely-Graded-Poset X
@@ -249,7 +252,8 @@ module _
 
   leq-type-path-faces-Prepolytope :
     {i1 i2 : Fin (succ-ℕ k)} (x : face-Prepolytope i1)
-    (y : face-Prepolytope i2) → path-faces-Prepolytope x y → leq-Fin (succ-ℕ k) i1 i2
+    (y : face-Prepolytope i2) →
+    path-faces-Prepolytope x y → leq-Fin (succ-ℕ k) i1 i2
   leq-type-path-faces-Prepolytope =
     leq-type-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
@@ -388,9 +392,11 @@ module _
         ( x))
       ( λ p →
         inv (eq-path-faces-Prepolytope x face-largest-element-Prepolytope p))
+```
 
-  -- Flags are equivalently described as paths from the least to the largest element
+### Flags are equivalently described as paths from the least to the largest element
 
+```agda
   is-on-path-face-prepolytope-Prop :
     {i1 i2 : Fin (succ-ℕ k)} {x : face-Prepolytope i1} {y : face-Prepolytope i2}
     (p : path-faces-Prepolytope x y) →

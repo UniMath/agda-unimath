@@ -13,8 +13,12 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.subuniverses
+open import foundation.univalence
 
+open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.universe-levels
@@ -29,7 +33,7 @@ introduced as an inductive type with no constructors. With the standard empty
 type available, we will say that a type is empty if it maps into the standard
 empty type.
 
-## Definition
+## Definitions
 
 ### We raise the empty type to an arbitrary universe level
 
@@ -44,6 +48,34 @@ raise-ex-falso :
   (l1 : Level) {l2 : Level} {A : UU l2} →
   raise-empty l1 → A
 raise-ex-falso l = ex-falso ∘ map-inv-equiv (compute-raise-empty l)
+```
+
+### The predicate that a subuniverse contains the empty type
+
+```agda
+contains-empty-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU l2
+contains-empty-subuniverse {l1} P = is-in-subuniverse P (raise-empty l1)
+```
+
+### The predicate that a subuniverse contains any empty type
+
+```agda
+contains-empty-types-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
+contains-empty-types-subuniverse {l1} P =
+  (X : UU l1) → is-empty X → is-in-subuniverse P X
+```
+
+### The predicate that a subuniverse is closed under the `is-empty` predicate
+
+```agda
+is-closed-under-is-empty-subuniverses :
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
+  UU (lsuc l1 ⊔ l2 ⊔ l3)
+is-closed-under-is-empty-subuniverses P Q =
+  (X : type-subuniverse P) →
+  is-in-subuniverse Q (is-empty (inclusion-subuniverse P X))
 ```
 
 ## Properties
@@ -114,4 +146,22 @@ abstract
   is-empty-raise-empty :
     {l1 : Level} → is-empty (raise-empty l1)
   is-empty-raise-empty {l1} = map-inv-equiv (compute-raise-empty l1)
+```
+
+### The type of all empty types of a given universe is contractible
+
+```agda
+is-contr-type-is-empty :
+  (l : Level) →
+  is-contr (type-subuniverse is-empty-Prop)
+pr1 (is-contr-type-is-empty l) = raise-empty l , is-empty-raise-empty
+pr2 (is-contr-type-is-empty l) x =
+  eq-pair-Σ
+    ( eq-equiv
+      ( raise-empty l)
+      ( inclusion-subuniverse is-empty-Prop x)
+      ( equiv-is-empty
+        is-empty-raise-empty
+        ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
+    ( eq-is-prop is-prop-is-empty)
 ```

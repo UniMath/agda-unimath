@@ -11,18 +11,25 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
+open import foundation.multivariable-functoriality-set-quotients
+open import foundation.multivariable-operations
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.vectors-set-quotients
 
 open import linear-algebra.vectors
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
 open import universal-algebra.congruences
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
 
@@ -39,9 +46,9 @@ original one.
 ```agda
 module _
   { l1 : Level} ( Sg : signature l1)
-  { l2 : Level } ( Th : Theory Sg l2)
-  { l3 : Level } ( Alg : Algebra Sg Th l3)
-  { l4 : Level } ( R : congruence-Algebra Sg Th Alg l4)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 : Level} ( Alg : Algebra Sg Th l3)
+  { l4 : Level} ( R : congruence-Algebra Sg Th Alg l4)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
@@ -89,4 +96,51 @@ module _
           (λ v' → z ∷ v')
           ( vec-type-quotient-vec-type-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
+
+  relation-holds-all-vec-all-sim-Eq-Rel :
+    { n : ℕ}
+    ( v v' : multivariable-input n ( λ _ → type-Algebra Sg Th Alg)) →
+    ( type-Prop
+      ( prop-Eq-Rel
+        ( all-sim-Eq-Rel n
+          ( λ _ → type-Algebra Sg Th Alg)
+          ( λ _ → eq-rel-congruence-Algebra Sg Th Alg R)) v v')) →
+    relation-holds-all-vec Sg Th Alg
+      ( eq-rel-congruence-Algebra Sg Th Alg R)
+      ( vector-multivariable-input n (type-Algebra Sg Th Alg) v)
+      ( vector-multivariable-input n (type-Algebra Sg Th Alg) v')
+  relation-holds-all-vec-all-sim-Eq-Rel {zero-ℕ} v v' p = raise-star
+  relation-holds-all-vec-all-sim-Eq-Rel {succ-ℕ n} (x , v) (x' , v') (p , p') =
+    pair p (relation-holds-all-vec-all-sim-Eq-Rel v v' p')
+
+  is-model-set-quotient-Algebra :
+    is-model-signature Sg set-quotient-Algebra
+  is-model-set-quotient-Algebra op v =
+    multivariable-map-set-quotient
+      ( arity-operation-signature Sg op)
+      ( λ _ → type-Algebra Sg Th Alg)
+      ( λ _ → eq-rel-congruence-Algebra Sg Th Alg R)
+      ( eq-rel-congruence-Algebra Sg Th Alg R)
+      ( pair
+        ( λ v →
+          is-model-set-Algebra Sg Th Alg op
+            ( vector-multivariable-input
+              ( arity-operation-signature Sg op)
+              ( type-Algebra Sg Th Alg)
+              ( v)))
+        ( λ {v} {v'} p →
+          preserves-operations-congruence-Algebra Sg Th Alg R op
+            ( vector-multivariable-input
+              ( arity-operation-signature Sg op)
+              ( type-Algebra Sg Th Alg)
+              ( v))
+            ( vector-multivariable-input
+              ( arity-operation-signature Sg op)
+              ( type-Algebra Sg Th Alg)
+              ( v'))
+            (relation-holds-all-vec-all-sim-Eq-Rel v v' p)))
+      ( multivariable-input-vector
+        ( arity-operation-signature Sg op)
+        ( type-quotient-Algebra)
+        ( v))
 ```

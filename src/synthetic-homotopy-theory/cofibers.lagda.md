@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -47,13 +47,13 @@ inr-cofiber :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → unit → cofiber f
 inr-cofiber f = pr1 (pr2 (cocone-cofiber f))
 
-pt-cofiber :
+point-cofiber :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → cofiber f
-pt-cofiber {A = A} f = inr-cofiber f star
+point-cofiber {A = A} f = inr-cofiber f star
 
 cofiber-ptd :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → Pointed-Type (l1 ⊔ l2)
-cofiber-ptd f = pair (cofiber f) (pt-cofiber f)
+cofiber-ptd f = pair (cofiber f) (point-cofiber f)
 
 up-cofiber :
   { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →

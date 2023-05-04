@@ -15,7 +15,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.identity-types
-open import foundation.unit-type
 ```
 
 </details>

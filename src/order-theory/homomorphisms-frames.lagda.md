@@ -36,20 +36,40 @@ module _
   hom-Frame : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   hom-Frame = Σ (element-Frame A → element-Frame B)
     (λ f → preserves-order-Poset (poset-Frame A) (poset-Frame B) f ×
-      preserves-meets-sups (meet-sup-lattice-Frame A) (meet-sup-lattice-Frame B) f)
+      preserves-meets-sups
+        ( meet-sup-lattice-Frame A)
+        ( meet-sup-lattice-Frame B)
+        ( f))
 
   map-hom-Frame : hom-Frame → element-Frame A → element-Frame B
   map-hom-Frame = pr1
 
-  preserves-order-hom-Frame : (H : hom-Frame) → preserves-order-Poset (poset-Frame A) (poset-Frame B) (map-hom-Frame H)
+  preserves-order-hom-Frame :
+    (H : hom-Frame) →
+    preserves-order-Poset (poset-Frame A) (poset-Frame B) (map-hom-Frame H)
   preserves-order-hom-Frame = pr1 ∘ pr2
 
-  preserves-meets-sups-hom-Frame : (H : hom-Frame) → preserves-meets-sups (meet-sup-lattice-Frame A) (meet-sup-lattice-Frame B) (map-hom-Frame H)
+  preserves-meets-sups-hom-Frame :
+    (H : hom-Frame) →
+    preserves-meets-sups
+      ( meet-sup-lattice-Frame A)
+      ( meet-sup-lattice-Frame B)
+      ( map-hom-Frame H)
   preserves-meets-sups-hom-Frame = pr2 ∘ pr2
 
-  preserves-meets-hom-Frame : (H : hom-Frame) → preserves-meets (meet-semilattice-Frame A) (meet-semilattice-Frame B) (map-hom-Frame H)
+  preserves-meets-hom-Frame :
+    (H : hom-Frame) →
+    preserves-meets
+      ( meet-semilattice-Frame A)
+      ( meet-semilattice-Frame B)
+      ( map-hom-Frame H)
   preserves-meets-hom-Frame = pr1 ∘ preserves-meets-sups-hom-Frame
 
-  preserves-sups-hom-Frame : (H : hom-Frame) → preserves-sups (sup-lattice-Frame A) (sup-lattice-Frame B) (map-hom-Frame H)
+  preserves-sups-hom-Frame :
+    (H : hom-Frame) →
+    preserves-sups
+      ( sup-lattice-Frame A)
+      ( sup-lattice-Frame B)
+      ( map-hom-Frame H)
   preserves-sups-hom-Frame = pr2 ∘ preserves-meets-sups-hom-Frame
 ```

@@ -8,6 +8,8 @@ module synthetic-homotopy-theory.descent-circle where
 
 ```agda
 open import foundation.automorphisms
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,10 +19,13 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -36,147 +41,431 @@ The descent property uniquely characterizes type families over the circle.
 
 ## Definitions
 
+### Descent data for the circle
+
 ```agda
-Fam-circle :
+descent-data-circle :
   ( l1 : Level) → UU (lsuc l1)
-Fam-circle l1 = Σ (UU l1) Aut
+descent-data-circle l1 = Σ (UU l1) Aut
+
+module _
+  { l1 : Level} (P : descent-data-circle l1)
+  where
+
+  type-descent-data-circle : UU l1
+  type-descent-data-circle = pr1 P
+
+  aut-descent-data-circle : Aut type-descent-data-circle
+  aut-descent-data-circle = pr2 P
+```
+
+### Fixpoints of the descent data
+
+```agda
+fixpoint-descent-data-circle :
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  ( P : descent-data-circle l2) → UU l2
+fixpoint-descent-data-circle l P =
+  Σ ( type-descent-data-circle P)
+    ( λ p → (map-equiv (aut-descent-data-circle P) p) ＝ p)
+```
+
+### Homomorphisms between descent data for the circle
+
+```agda
+hom-descent-data-circle :
+  { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
+  ( P : descent-data-circle l2) (Q : descent-data-circle l3) →
+  UU (l2 ⊔ l3)
+hom-descent-data-circle _ P Q =
+  Σ ( (type-descent-data-circle P) → (type-descent-data-circle Q))
+    ( λ h →
+      coherence-square-maps
+        ( h)
+        ( map-equiv (aut-descent-data-circle P))
+        ( map-equiv (aut-descent-data-circle Q))
+        ( h))
 ```
 
 ## Properties
 
-### Characterization of the identity type of `Fam-circle`
+### Characterization of the identity type of descent data for the circle
 
 ```agda
-Eq-Fam-circle :
-  { l1 : Level} → Fam-circle l1 → Fam-circle l1 → UU l1
-Eq-Fam-circle P Q =
-  Σ ( (pr1 P) ≃ (pr1 Q))
+Eq-descent-data-circle :
+  { l1 : Level} → descent-data-circle l1 → descent-data-circle l1 →
+  UU l1
+Eq-descent-data-circle P Q =
+  Σ ( (type-descent-data-circle P) ≃ (type-descent-data-circle Q))
     ( λ h →
-      ( (map-equiv h) ∘ (map-equiv (pr2 P))) ~ ((map-equiv (pr2 Q)) ∘ (map-equiv h)))
+      coherence-square-maps
+        ( map-equiv h)
+        ( map-equiv (aut-descent-data-circle P))
+        ( map-equiv (aut-descent-data-circle Q))
+        ( map-equiv h))
 
-reflexive-Eq-Fam-circle :
-  { l1 : Level} (P : Fam-circle l1) → Eq-Fam-circle P P
-reflexive-Eq-Fam-circle (pair X e) =
-  pair id-equiv refl-htpy
+refl-Eq-descent-data-circle :
+  { l1 : Level} (P : descent-data-circle l1) →
+  Eq-descent-data-circle P P
+refl-Eq-descent-data-circle P = id-equiv , refl-htpy
 
-Eq-Fam-circle-eq :
-  { l1 : Level} (P Q : Fam-circle l1) → Id P Q → Eq-Fam-circle P Q
-Eq-Fam-circle-eq P .P refl = reflexive-Eq-Fam-circle P
+Eq-eq-descent-data-circle :
+  { l1 : Level} (P Q : descent-data-circle l1) →
+  P ＝ Q → Eq-descent-data-circle P Q
+Eq-eq-descent-data-circle P .P refl = refl-Eq-descent-data-circle P
 
-is-contr-total-Eq-Fam-circle :
-  { l1 : Level} (P : Fam-circle l1) →
-  is-contr (Σ (Fam-circle l1) (Eq-Fam-circle P))
-is-contr-total-Eq-Fam-circle (pair X e) =
+is-contr-total-Eq-descent-data-circle :
+  { l1 : Level} (P : descent-data-circle l1) →
+  is-contr (Σ (descent-data-circle l1) (Eq-descent-data-circle P))
+is-contr-total-Eq-descent-data-circle P =
   is-contr-total-Eq-structure
     ( λ Y f h →
-      ((map-equiv h) ∘ (map-equiv e)) ~ ((map-equiv f) ∘ (map-equiv h)))
-    ( is-contr-total-equiv X)
-    ( pair X id-equiv)
-  ( is-contr-total-htpy-equiv e)
+      coherence-square-maps
+        ( map-equiv h)
+        ( map-equiv (aut-descent-data-circle P))
+        ( map-equiv f)
+        ( map-equiv h))
+    ( is-contr-total-equiv (type-descent-data-circle P))
+    ( type-descent-data-circle P , id-equiv)
+  ( is-contr-total-htpy-equiv (aut-descent-data-circle P))
 
-is-equiv-Eq-Fam-circle-eq :
-  { l1 : Level} (P Q : Fam-circle l1) → is-equiv (Eq-Fam-circle-eq P Q)
-is-equiv-Eq-Fam-circle-eq P =
+is-equiv-Eq-eq-descent-data-circle :
+  { l1 : Level} (P Q : descent-data-circle l1) →
+  is-equiv (Eq-eq-descent-data-circle P Q)
+is-equiv-Eq-eq-descent-data-circle P =
   fundamental-theorem-id
-    ( is-contr-total-Eq-Fam-circle P)
-    ( Eq-Fam-circle-eq P)
+    ( is-contr-total-Eq-descent-data-circle P)
+    ( Eq-eq-descent-data-circle P)
 
-eq-Eq-Fam-circle :
-  { l1 : Level} (P Q : Fam-circle l1) → Eq-Fam-circle P Q → Id P Q
-eq-Eq-Fam-circle P Q = map-inv-is-equiv (is-equiv-Eq-Fam-circle-eq P Q)
+eq-Eq-descent-data-circle :
+  { l1 : Level} (P Q : descent-data-circle l1) →
+  Eq-descent-data-circle P Q → P ＝ Q
+eq-Eq-descent-data-circle P Q =
+  map-inv-is-equiv (is-equiv-Eq-eq-descent-data-circle P Q)
 ```
 
-### Uniqueness of type families defined by `Fam-circle`
+### Uniqueness of descent data characterizing a particular type family over the circle
 
 ```agda
-ev-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  ( X → UU l2) → Fam-circle l2
-ev-fam-circle l P =
-  pair
-    ( P (base-free-loop l))
-    ( equiv-tr P (loop-free-loop l))
+comparison-descent-data-circle :
+  ( l1 : Level) → free-loop (UU l1) → descent-data-circle l1
+comparison-descent-data-circle l1 = tot (λ Y → equiv-eq)
 
-comparison-fam-circle :
-  ( l1 : Level) → free-loop (UU l1) → Fam-circle l1
-comparison-fam-circle l1 = tot (λ Y → equiv-eq)
-
-is-equiv-comparison-fam-circle :
-  ( l1 : Level) → is-equiv (comparison-fam-circle l1)
-is-equiv-comparison-fam-circle l1 =
+is-equiv-comparison-descent-data-circle :
+  ( l1 : Level) → is-equiv (comparison-descent-data-circle l1)
+is-equiv-comparison-descent-data-circle l1 =
   is-equiv-tot-is-fiberwise-equiv (λ Y → univalence Y Y)
 
-triangle-comparison-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  (ev-fam-circle l) ~ ((comparison-fam-circle l2) ∘ (ev-free-loop l (UU l2)))
-triangle-comparison-fam-circle l P =
-  eq-Eq-Fam-circle
-    ( ev-fam-circle l P)
-    ( comparison-fam-circle _ (ev-free-loop l (UU _) P))
-    ( pair id-equiv (htpy-eq (inv (tr-equiv-eq-ap (pr2 l)))))
-
-is-equiv-ev-fam-circle-universal-property-circle :
+module _
   { l1 l2 : Level} {X : UU l1} (l : free-loop X)
-  ( up-circle : universal-property-circle (lsuc l2) l) →
-  is-equiv (ev-fam-circle {l2 = l2} l)
-is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
-  is-equiv-comp-htpy
-    ( ev-fam-circle l)
-    ( comparison-fam-circle l2)
-    ( ev-free-loop l (UU l2))
-    ( triangle-comparison-fam-circle l)
-    ( up-circle (UU l2))
-    ( is-equiv-comparison-fam-circle l2)
+  where
+
+  ev-descent-data-circle : (X → UU l2) → descent-data-circle l2
+  pr1 (ev-descent-data-circle P) = P (base-free-loop l)
+  pr2 (ev-descent-data-circle P) = equiv-tr P (loop-free-loop l)
+
+  triangle-comparison-descent-data-circle :
+    coherence-triangle-maps
+      ( ev-descent-data-circle)
+      ( comparison-descent-data-circle l2)
+      ( ev-free-loop l (UU l2))
+  triangle-comparison-descent-data-circle P =
+    eq-Eq-descent-data-circle
+      ( ev-descent-data-circle P)
+      ( comparison-descent-data-circle l2 (ev-free-loop l (UU l2) P))
+      ( id-equiv , (htpy-eq (inv (compute-equiv-eq-ap (loop-free-loop l)))))
+
+  is-equiv-ev-descent-data-circle-universal-property-circle :
+    ( up-circle : universal-property-circle (lsuc l2) l) →
+    is-equiv ev-descent-data-circle
+  is-equiv-ev-descent-data-circle-universal-property-circle up-circle =
+     is-equiv-comp-htpy
+      ( ev-descent-data-circle)
+      ( comparison-descent-data-circle l2)
+      ( ev-free-loop l (UU l2))
+      ( triangle-comparison-descent-data-circle)
+      ( up-circle (UU l2))
+      ( is-equiv-comparison-descent-data-circle l2)
 
 unique-family-property-circle :
   { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
   UU (l1 ⊔ lsuc l2)
 unique-family-property-circle l2 {X} l =
-  ( Q : Fam-circle l2) →
-    is-contr (Σ (X → UU l2) (λ P → Eq-Fam-circle Q (ev-fam-circle l P)))
+  ( Q : descent-data-circle l2) →
+    is-contr
+    ( Σ (X → UU l2)
+        (λ P → Eq-descent-data-circle Q (ev-descent-data-circle l P)))
 
-unique-family-property-universal-property-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  universal-property-circle (lsuc l2) l → unique-family-property-circle l2 l
-unique-family-property-universal-property-circle l up-circle Q =
-  is-contr-is-equiv'
-    ( fib (ev-fam-circle l) Q)
-    ( tot (λ P → (Eq-Fam-circle-eq Q (ev-fam-circle l P)) ∘ inv))
-    ( is-equiv-tot-is-fiberwise-equiv
-      ( λ P →
-        is-equiv-comp _ _
-          ( is-equiv-inv _ _)
-          ( is-equiv-Eq-Fam-circle-eq Q (ev-fam-circle l P))))
-    ( is-contr-map-is-equiv
-      ( is-equiv-ev-fam-circle-universal-property-circle l up-circle)
-      ( Q))
+module _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  where
+
+  unique-family-property-universal-property-circle :
+    universal-property-circle (lsuc l2) l →
+    unique-family-property-circle l2 l
+  unique-family-property-universal-property-circle up-circle Q =
+    is-contr-is-equiv'
+      ( fib (ev-descent-data-circle l) Q)
+      ( tot
+        ( λ P →
+          Eq-eq-descent-data-circle Q (ev-descent-data-circle l P) ∘
+          inv))
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ P →
+          is-equiv-comp _ _
+            ( is-equiv-inv _ _)
+            ( is-equiv-Eq-eq-descent-data-circle
+              ( Q)
+              ( ev-descent-data-circle l P))))
+      ( is-contr-map-is-equiv
+        ( is-equiv-ev-descent-data-circle-universal-property-circle
+          ( l)
+          ( up-circle))
+        ( Q))
 ```
 
-### Sections of families over the circle
+### Characterization of sections of type families over the circle
+
+Sections of type families over the circle are exactly the fixpoints of the
+automorphism from the characteristic descent data.
 
 ```agda
-Section-Fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) (P : Fam-circle l2) → UU _
-Section-Fam-circle l P =
-  Σ (pr1 P) (λ p → Id (map-equiv (pr2 P) p) p)
+module _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  ( Q : X → UU l2) (P : descent-data-circle l2)
+  ( αH : Eq-descent-data-circle P (ev-descent-data-circle l Q))
+  where
 
-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  ( {k : Level} → dependent-universal-property-circle k l) →
-  Fam-circle l2 → X → UU l2
-fam-circle {l1} {l2} l dup-circle =
-  map-inv-is-equiv
-    ( is-equiv-ev-fam-circle-universal-property-circle l
-      ( universal-property-dependent-universal-property-circle l dup-circle))
+  private
+    α : type-descent-data-circle P ≃ Q (base-free-loop l)
+    α = pr1 αH
 
-section-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-  ( dup-circle : dependent-universal-property-circle l2 l) →
-  ( Q : X → UU l2) (P : Fam-circle l2) →
-  ( e : Eq-Fam-circle P (ev-fam-circle l Q)) →
-  Section-Fam-circle l P → (x : X) → Q x
-section-fam-circle l dup-circle Q P (pair e H) (pair p α) =
-  map-inv-is-equiv
-    ( dup-circle Q)
-    ( pair (map-equiv e p) ((inv (H p)) ∙ (ap (map-equiv e) α)))
+  map-compute-path-over-loop-circle :
+    ( x y : type-descent-data-circle P) →
+    ( map-equiv (aut-descent-data-circle P) x ＝ y) →
+    ( path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
+  map-compute-path-over-loop-circle x y q =
+    inv (pr2 αH x) ∙ (ap (map-equiv α) q)
+
+  is-equiv-map-compute-path-over-loop-circle :
+    ( x y : type-descent-data-circle P) →
+    is-equiv (map-compute-path-over-loop-circle x y)
+  is-equiv-map-compute-path-over-loop-circle x y =
+    fundamental-theorem-id
+      ( is-contr-equiv'
+        ( fib (map-equiv α) (tr Q (loop-free-loop l) (map-equiv α x)))
+        ( equiv-fib _ _)
+        ( is-contr-map-is-equiv
+          ( is-equiv-map-equiv α)
+          ( tr Q (loop-free-loop l) (map-equiv α x))))
+      ( map-compute-path-over-loop-circle x)
+      ( y)
+
+  compute-path-over-loop-circle :
+    ( x y : type-descent-data-circle P) →
+    ( map-equiv (aut-descent-data-circle P) x ＝ y) ≃
+    ( path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
+  pr1 (compute-path-over-loop-circle x y) =
+    map-compute-path-over-loop-circle x y
+  pr2 (compute-path-over-loop-circle x y) =
+    is-equiv-map-compute-path-over-loop-circle x y
+```
+
+```agda
+module _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
+  ( Q : X → UU l2) (P : descent-data-circle l2)
+  ( αH : Eq-descent-data-circle P (ev-descent-data-circle l Q))
+  where
+
+  private
+    α : type-descent-data-circle P ≃ Q (base-free-loop l)
+    α = pr1 αH
+
+  ev-fixpoint-descent-data-circle :
+    ( (x : X) → Q x) → fixpoint-descent-data-circle l P
+  pr1 (ev-fixpoint-descent-data-circle s) =
+    map-inv-equiv
+      ( α)
+      ( s (base-free-loop l))
+  pr2 (ev-fixpoint-descent-data-circle s) =
+    map-inv-is-equiv
+      ( is-equiv-map-compute-path-over-loop-circle
+        ( l)
+        ( Q)
+        ( P)
+        ( αH)
+        ( map-inv-equiv α (s (base-free-loop l)))
+        ( map-inv-equiv α (s (base-free-loop l))))
+      ( ( ap
+          ( tr Q (loop-free-loop l))
+          ( issec-map-inv-equiv α (s (base-free-loop l)))) ∙
+        ( ( apd s (loop-free-loop l)) ∙
+          ( inv (issec-map-inv-equiv α (s (base-free-loop l))))))
+
+  equiv-fixpoint-descent-data-circle-free-dependent-loop :
+    fixpoint-descent-data-circle l P ≃ free-dependent-loop l Q
+  equiv-fixpoint-descent-data-circle-free-dependent-loop =
+    equiv-Σ
+      ( λ x → path-over Q (loop-free-loop l) x x)
+      ( α)
+      ( λ x →
+        compute-path-over-loop-circle l Q P αH x x)
+
+  comparison-fixpoint-descent-data-circle :
+    fixpoint-descent-data-circle l P → free-dependent-loop l Q
+  comparison-fixpoint-descent-data-circle =
+    map-equiv equiv-fixpoint-descent-data-circle-free-dependent-loop
+
+  triangle-comparison-fixpoint-descent-data-circle :
+    coherence-triangle-maps
+      ( ev-free-loop-Π l Q)
+      ( comparison-fixpoint-descent-data-circle)
+      ( ev-fixpoint-descent-data-circle)
+  triangle-comparison-fixpoint-descent-data-circle s =
+    eq-Eq-free-dependent-loop l Q
+      ( ev-free-loop-Π l Q s)
+      ( ( comparison-fixpoint-descent-data-circle ∘
+          ev-fixpoint-descent-data-circle)
+        ( s))
+      ( inv issec-inv-α ,
+        inv
+        ( ( horizontal-concat-Id²
+            ( refl {x = ap (tr Q (loop-free-loop l)) (inv issec-inv-α)})
+            ( issec-map-inv-is-equiv
+              ( is-equiv-map-compute-path-over-loop-circle
+                ( l)
+                ( Q)
+                ( P)
+                ( αH)
+                ( map-inv-equiv α (s (base-free-loop l)))
+                ( pr1 (ev-fixpoint-descent-data-circle s)))
+              ( _))) ∙
+          ( ( inv (assoc (ap _ (inv issec-inv-α)) _ _)) ∙
+            ( horizontal-concat-Id²
+              ( inv
+                ( ap-concat-eq (tr Q (loop-free-loop l))
+                  ( inv issec-inv-α)
+                  ( issec-inv-α)
+                  ( refl)
+                  ( inv (left-inv issec-inv-α))))
+              ( refl)))))
+    where
+    issec-inv-α :
+      eq-value (map-equiv α ∘ map-inv-equiv α) id (s (base-free-loop l))
+    issec-inv-α = issec-map-inv-equiv α (s (base-free-loop l))
+
+  is-equiv-comparison-fixpoint-descent-data-circle :
+    is-equiv comparison-fixpoint-descent-data-circle
+  is-equiv-comparison-fixpoint-descent-data-circle =
+    is-equiv-map-equiv equiv-fixpoint-descent-data-circle-free-dependent-loop
+
+  is-equiv-ev-fixpoint-descent-data-circle :
+    ( dependent-universal-property-circle l2 l) →
+    is-equiv ev-fixpoint-descent-data-circle
+  is-equiv-ev-fixpoint-descent-data-circle dup-circle =
+    is-equiv-right-factor-htpy
+      ( ev-free-loop-Π l Q)
+      ( comparison-fixpoint-descent-data-circle)
+      ( ev-fixpoint-descent-data-circle)
+      ( triangle-comparison-fixpoint-descent-data-circle)
+      ( is-equiv-comparison-fixpoint-descent-data-circle)
+      ( dup-circle Q)
+
+  equiv-ev-fixpoint-descent-data-circle :
+    ( dependent-universal-property-circle l2 l) →
+    ( (x : X) → Q x) ≃ (fixpoint-descent-data-circle l P)
+  pr1 (equiv-ev-fixpoint-descent-data-circle dup-circle) =
+    ev-fixpoint-descent-data-circle
+  pr2 (equiv-ev-fixpoint-descent-data-circle dup-circle) =
+    is-equiv-ev-fixpoint-descent-data-circle dup-circle
+
+  compute-ev-fixpoint-descent-data-circle :
+    coherence-square-maps
+      ( ev-fixpoint-descent-data-circle)
+      ( ev-point (base-free-loop l) {Q})
+      ( pr1)
+      ( map-inv-equiv α)
+  compute-ev-fixpoint-descent-data-circle = refl-htpy
+```
+
+### Characterization of families of maps over the circle
+
+Families of maps over the circle are maps commuting with the respective
+automorphisms.
+
+```agda
+module _
+  { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
+  ( A : X → UU l2) (P : descent-data-circle l2)
+  ( αH : Eq-descent-data-circle P (ev-descent-data-circle l A))
+  ( B : X → UU l3) (Q : descent-data-circle l3)
+  ( βK : Eq-descent-data-circle Q (ev-descent-data-circle l B))
+  where
+
+  private
+    Y : UU l2
+    Y = type-descent-data-circle P
+    e : Aut Y
+    e = aut-descent-data-circle P
+    Z : UU l3
+    Z = type-descent-data-circle Q
+    f : Aut Z
+    f = aut-descent-data-circle Q
+
+    α : Y ≃ A (base-free-loop l)
+    α = pr1 αH
+    β : Z ≃ B (base-free-loop l)
+    β = pr1 βK
+
+  descent-data-circle-function-type : descent-data-circle (l2 ⊔ l3)
+  pr1 descent-data-circle-function-type =
+    Y → Z
+  pr2 descent-data-circle-function-type =
+    (equiv-postcomp Y f) ∘e (equiv-precomp (inv-equiv e) Z)
+
+  eq-descent-data-circle-function-type :
+    Eq-descent-data-circle
+      ( descent-data-circle-function-type)
+      ( ev-descent-data-circle l (λ s → (A s → B s)))
+  pr1 eq-descent-data-circle-function-type =
+    (equiv-postcomp (A (base-free-loop l)) β) ∘e (equiv-precomp (inv-equiv α) Z)
+  pr2 eq-descent-data-circle-function-type h =
+    ( eq-htpy
+      ( htpy-comp-horizontal
+        ( h ·l
+          inv-htpy
+            ( coherence-square-inv-all
+              ( α)
+              ( e)
+              ( equiv-tr A (loop-free-loop l))
+              ( α)
+              ( pr2 αH)))
+        ( pr2 βK))) ∙
+    ( inv
+      ( ( tr-function-type A B (loop-free-loop l))
+        ( map-equiv (pr1 eq-descent-data-circle-function-type) h)))
+
+  equiv-fixpoint-descent-data-circle-function-type-hom :
+    fixpoint-descent-data-circle l descent-data-circle-function-type ≃
+    hom-descent-data-circle l P Q
+  equiv-fixpoint-descent-data-circle-function-type-hom =
+    equiv-tot
+      (λ h →
+        ( equiv-inv-htpy (((map-equiv f) ∘ h)) (h ∘ (map-equiv e))) ∘e
+        ( ( inv-equiv
+            ( equiv-coherence-triangle-maps-inv-top ((map-equiv f) ∘ h) h e)) ∘e
+          ( equiv-funext)))
+
+  equiv-ev-descent-data-circle-function-type-hom :
+    dependent-universal-property-circle (l2 ⊔ l3) l →
+    ((s : X) → A s → B s) ≃ (hom-descent-data-circle l P Q)
+  equiv-ev-descent-data-circle-function-type-hom dup-circle =
+    equiv-fixpoint-descent-data-circle-function-type-hom ∘e
+    ( equiv-ev-fixpoint-descent-data-circle
+      ( l)
+      ( λ s → A s → B s)
+      ( descent-data-circle-function-type)
+      ( eq-descent-data-circle-function-type)
+      ( dup-circle))
 ```

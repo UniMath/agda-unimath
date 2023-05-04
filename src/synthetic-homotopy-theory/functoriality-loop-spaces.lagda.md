@@ -25,14 +25,14 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-Any pointed map `f : A →* B` induces a map `map-Ω f : Ω A →* Ω B`. Furthermore,
+Any pointed map `f : A →∗ B` induces a map `map-Ω f : Ω A →∗ Ω B`. Furthermore,
 this operation respects the groupoidal operations on loop spaces.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
   where
 
   map-Ω : type-Ω A → type-Ω B
@@ -44,7 +44,7 @@ module _
   preserves-refl-map-Ω : Id (map-Ω refl) refl
   preserves-refl-map-Ω = preserves-refl-tr-Ω (pr2 f)
 
-  pointed-map-Ω : Ω A →* Ω B
+  pointed-map-Ω : Ω A →∗ Ω B
   pointed-map-Ω = pair map-Ω preserves-refl-map-Ω
 
   preserves-mul-map-Ω :
@@ -74,13 +74,13 @@ module _
 ```agda
 is-emb-map-Ω :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
-  (f : A →* B) → is-faithful (map-pointed-map A B f) → is-emb (map-Ω A B f)
+  (f : A →∗ B) → is-faithful (map-pointed-map A B f) → is-emb (map-Ω A B f)
 is-emb-map-Ω A B f H =
   is-emb-comp
     ( tr-type-Ω (preserves-point-pointed-map A B f))
     ( ap (map-pointed-map A B f))
     ( is-emb-is-equiv (is-equiv-tr-type-Ω (preserves-point-pointed-map A B f)))
-    ( H (pt-Pointed-Type A) (pt-Pointed-Type A))
+    ( H (point-Pointed-Type A) (point-Pointed-Type A))
 
 emb-Ω :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →

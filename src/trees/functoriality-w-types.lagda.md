@@ -70,7 +70,7 @@ abstract
     (y : 𝕎 C D) → fib (map-𝕎 D f e) y ≃ fib-map-𝕎 D f e y
   equiv-fib-map-𝕎 {A = A} {B} {C} D f e (tree-𝕎 c γ) =
     ( ( ( inv-equiv
-          ( assoc-Σ A
+          ( associative-Σ A
             ( λ a → f a ＝ c)
             ( λ t → (d : D c) → fib (map-𝕎 D f e) (γ d)))) ∘e
         ( equiv-tot
@@ -107,7 +107,7 @@ abstract
                     ( f a)
                     ( ( map-𝕎 D f e) ∘
                       ( α ∘ map-inv-equiv (e a)))) (tree-𝕎 c γ)))))) ∘e
-      ( assoc-Σ A
+      ( associative-Σ A
         ( λ a → B a → 𝕎 A B)
         ( λ t → map-𝕎 D f e (structure-𝕎-Alg t) ＝ tree-𝕎 c γ))) ∘e
     ( equiv-Σ

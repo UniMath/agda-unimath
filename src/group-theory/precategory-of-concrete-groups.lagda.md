@@ -32,7 +32,7 @@ id-hom-Large-Precat Concrete-Group-Large-Precat {X = G} =
 associative-comp-hom-Large-Precat Concrete-Group-Large-Precat
   {X = G} {Y = H} {Z = K} {W = L} h g f =
   eq-htpy-hom-Concrete-Group G L _ _
-    ( assoc-comp-hom-Concrete-Group G H K L h g f)
+    ( associative-comp-hom-Concrete-Group G H K L h g f)
 left-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat
   {X = G} {Y = H} f =
   eq-htpy-hom-Concrete-Group G H _ _

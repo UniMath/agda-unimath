@@ -56,12 +56,15 @@ is-inhabited-or-empty : {l1 : Level} → UU l1 → UU l1
 is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 ```
 
-### A type `A` is said to be merely decidable if it comes equipped with an element of `type-trunc-Prop (is-decidable A)`.
+### Merely decidable types
+
+A type `A` is said to be merely decidable if it comes equipped with an element
+of `type-trunc-Prop (is-decidable A)`.
 
 ```agda
-is-merely-decidable-Prop :
+is-merely-Decidable-Prop :
   {l : Level} → UU l → Prop l
-is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
+is-merely-Decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
 is-merely-decidable A = type-trunc-Prop (is-decidable A)
@@ -110,6 +113,18 @@ is-decidable-prod' (inl a) d with d a
 ... | inl b = inl (pair a b)
 ... | inr nb = inr (nb ∘ pr2)
 is-decidable-prod' (inr na) d = inr (na ∘ pr1)
+
+is-decidable-left-factor :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable (A × B) → B → is-decidable A
+is-decidable-left-factor (inl (pair x y)) b = inl x
+is-decidable-left-factor (inr f) b = inr (λ a → f (pair a b))
+
+is-decidable-right-factor :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable (A × B) → A → is-decidable B
+is-decidable-right-factor (inl (pair x y)) a = inl y
+is-decidable-right-factor (inr f) a = inr (λ b → f (pair a b))
 ```
 
 ### Function types of decidable types are decidable
@@ -179,17 +194,17 @@ is-decidable-equiv' e = is-decidable-equiv (inv-equiv e)
 ### Decidability implies double negation elimination
 
 ```agda
-dn-elim-is-decidable :
+double-negation-elim-is-decidable :
   {l : Level} {P : UU l} → is-decidable P → (¬¬ P → P)
-dn-elim-is-decidable (inl x) p = x
-dn-elim-is-decidable (inr x) p = ex-falso (p x)
+double-negation-elim-is-decidable (inl x) p = x
+double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
 ```
 
 ### The double negation of `is-decidable` is always provable
 
 ```agda
-dn-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
-dn-is-decidable {P = P} f =
+double-negation-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
+double-negation-is-decidable {P = P} f =
   map-neg (inr {A = P} {B = ¬ P}) f
     ( map-neg (inl {A = P} {B = ¬ P}) f)
 ```

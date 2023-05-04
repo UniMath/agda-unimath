@@ -24,7 +24,12 @@ open import foundation.unit-type
 
 </details>
 
-# The absolute value of integers
+## Idea
+
+The absolute value of an integer is the natural number with the same distance
+from `0`.
+
+## Definition
 
 ```agda
 abs-ℤ : ℤ → ℕ
@@ -34,26 +39,48 @@ abs-ℤ (inr (inr x)) = succ-ℕ x
 
 int-abs-ℤ : ℤ → ℤ
 int-abs-ℤ = int-ℕ ∘ abs-ℤ
+```
 
-abs-int-ℕ : (x : ℕ) → abs-ℤ (int-ℕ x) ＝ x
+## Properties
+
+### The absolute value of `int-ℕ n` is `n` itself
+
+```agda
+abs-int-ℕ : (n : ℕ) → abs-ℤ (int-ℕ n) ＝ n
 abs-int-ℕ zero-ℕ = refl
-abs-int-ℕ (succ-ℕ x) = refl
+abs-int-ℕ (succ-ℕ n) = refl
+```
 
+### `|-x| ＝ |x|`
+
+```agda
 abs-neg-ℤ : (x : ℤ) → abs-ℤ (neg-ℤ x) ＝ abs-ℤ x
 abs-neg-ℤ (inl x) = refl
 abs-neg-ℤ (inr (inl star)) = refl
 abs-neg-ℤ (inr (inr x)) = refl
+```
 
+### If `x` is nonnegative, then `int-abs-ℤ x ＝ x`
+
+```agda
 int-abs-is-nonnegative-ℤ : (x : ℤ) → is-nonnegative-ℤ x → int-abs-ℤ x ＝ x
 int-abs-is-nonnegative-ℤ (inr (inl star)) h = refl
 int-abs-is-nonnegative-ℤ (inr (inr x)) h = refl
+```
 
+### `|x| ＝ 0` if and only if `x ＝ 0`
+
+```agda
 eq-abs-ℤ : (x : ℤ) → is-zero-ℕ (abs-ℤ x) → is-zero-ℤ x
 eq-abs-ℤ (inr (inl star)) p = refl
 
 abs-eq-ℤ : (x : ℤ) → is-zero-ℤ x → is-zero-ℕ (abs-ℤ x)
 abs-eq-ℤ .zero-ℤ refl = refl
+```
 
+### `|x - 1| ≤ |x| + 1`
+
+```agda
 predecessor-law-abs-ℤ :
   (x : ℤ) → (abs-ℤ (pred-ℤ x)) ≤-ℕ (succ-ℕ (abs-ℤ x))
 predecessor-law-abs-ℤ (inl x) =
@@ -64,7 +91,11 @@ predecessor-law-abs-ℤ (inr (inr zero-ℕ)) =
   star
 predecessor-law-abs-ℤ (inr (inr (succ-ℕ x))) =
   preserves-leq-succ-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
+```
 
+### `|x + 1| ≤ |x| + 1`
+
+```agda
 successor-law-abs-ℤ :
   (x : ℤ) → (abs-ℤ (succ-ℤ x)) ≤-ℕ (succ-ℕ (abs-ℤ x))
 successor-law-abs-ℤ (inl zero-ℕ) =
@@ -75,7 +106,11 @@ successor-law-abs-ℤ (inr (inl star)) =
   refl-leq-ℕ zero-ℕ
 successor-law-abs-ℤ (inr (inr x)) =
   refl-leq-ℕ (succ-ℕ x)
+```
 
+### The absolute value function is subadditive
+
+```agda
 subadditive-abs-ℤ :
   (x y : ℤ) → (abs-ℤ (add-ℤ x y)) ≤-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
 subadditive-abs-ℤ x (inl zero-ℕ) =
@@ -113,91 +148,99 @@ subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =
       ( subadditive-abs-ℤ x (inr (inr y)))
       ( successor-law-abs-ℤ (add-ℤ x (inr (inr y)))))
     ( refl)
+```
 
+### `|-x| ＝ |x|`
+
+```agda
 negative-law-abs-ℤ :
   (x : ℤ) → abs-ℤ (neg-ℤ x) ＝ abs-ℤ x
 negative-law-abs-ℤ (inl x) = refl
 negative-law-abs-ℤ (inr (inl star)) = refl
 negative-law-abs-ℤ (inr (inr x)) = refl
+```
 
+### If `x` is positive then `|x|` is positive
+
+```agda
 is-positive-abs-ℤ :
   (x : ℤ) → is-positive-ℤ x → is-positive-ℤ (int-abs-ℤ x)
 is-positive-abs-ℤ (inr (inr x)) H = star
+```
 
+### If `x` is nonzero then `|x|` is nonzero
+
+```agda
 is-nonzero-abs-ℤ :
   (x : ℤ) → is-positive-ℤ x → is-nonzero-ℕ (abs-ℤ x)
 is-nonzero-abs-ℤ (inr (inr x)) H = is-nonzero-succ-ℕ x
 ```
 
-### Absolute value is multiplicative
+### The absolute value function is multiplicative
 
 ```agda
-neg-left-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
-neg-left-abs-ℤ-mul-ℤ x y = equational-reasoning
-  abs-ℤ (mul-ℤ x y)
-  ＝ abs-ℤ (neg-ℤ (mul-ℤ x y)) by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
-  ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y) by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
+multiplicative-abs-ℤ' :
+  (x y : ℤ) → abs-ℤ (explicit-mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
+multiplicative-abs-ℤ' (inl x) (inl y) =
+  abs-int-ℕ _
+multiplicative-abs-ℤ' (inl x) (inr (inl star)) =
+  inv (right-zero-law-mul-ℕ x)
+multiplicative-abs-ℤ' (inl x) (inr (inr y)) =
+  ( abs-neg-ℤ (inl (add-ℕ (mul-ℕ x (succ-ℕ y)) y))) ∙
+  ( abs-int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)))
+multiplicative-abs-ℤ' (inr (inl star)) (inl y) =
+  refl
+multiplicative-abs-ℤ' (inr (inr x)) (inl y) =
+  ( abs-neg-ℤ (inl (add-ℕ (mul-ℕ x (succ-ℕ y)) y))) ∙
+  ( abs-int-ℕ (succ-ℕ (add-ℕ (mul-ℕ x (succ-ℕ y)) y)))
+multiplicative-abs-ℤ' (inr (inl star)) (inr (inl star)) =
+  refl
+multiplicative-abs-ℤ' (inr (inl star)) (inr (inr x)) =
+  refl
+multiplicative-abs-ℤ' (inr (inr x)) (inr (inl star)) =
+  inv (right-zero-law-mul-ℕ (succ-ℕ x))
+multiplicative-abs-ℤ' (inr (inr x)) (inr (inr y)) =
+  abs-int-ℕ _
 
-neg-right-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
-neg-right-abs-ℤ-mul-ℤ x y = equational-reasoning
-  abs-ℤ (mul-ℤ x y)
-  ＝ abs-ℤ (neg-ℤ (mul-ℤ x y)) by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
-  ＝ abs-ℤ (mul-ℤ x (neg-ℤ y)) by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
+multiplicative-abs-ℤ :
+  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
+multiplicative-abs-ℤ x y =
+  ap abs-ℤ (compute-mul-ℤ x y) ∙ multiplicative-abs-ℤ' x y
+```
 
-neg-both-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) (neg-ℤ y))
-neg-both-abs-ℤ-mul-ℤ x y = (neg-right-abs-ℤ-mul-ℤ x y) ∙ (neg-left-abs-ℤ-mul-ℤ x (neg-ℤ y))
+### `|(-x)y| ＝ |xy|`
 
-int-ℕ-abs-ℤ-mult-positive-ints : (x y : ℕ) →
-  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
-  ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-int-ℕ-abs-ℤ-mult-positive-ints x y = equational-reasoning
-  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
-    ＝ mul-ℤ (inr (inr x)) (inr (inr y))
-      by (int-abs-is-nonnegative-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))
-        (is-nonnegative-is-positive-ℤ
-          (is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} star star)))
-    ＝ mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) (inr (inr y))
-      by (ap (λ H → mul-ℤ H (inr (inr y)))
-        (int-abs-is-nonnegative-ℤ (inr (inr x))
-          (is-nonnegative-is-positive-ℤ {inr (inr x)} star)))
-    ＝ mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) (int-ℕ (abs-ℤ (inr (inr y))))
-      by (ap (λ H → mul-ℤ (int-ℕ (abs-ℤ (inr (inr x)))) H)
-        (int-abs-is-nonnegative-ℤ (inr (inr y))
-          (is-nonnegative-is-positive-ℤ {inr (inr y)} star)))
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-      by (mul-int-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
+```agda
+left-negative-law-mul-abs-ℤ :
+  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
+left-negative-law-mul-abs-ℤ x y =
+  equational-reasoning
+    abs-ℤ (mul-ℤ x y)
+    ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
+      by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
+    ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
+      by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
+```
 
-multiplicative-abs-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
-multiplicative-abs-ℤ (inl x) (inl y) = is-injective-int-ℕ
-  (equational-reasoning
-    int-ℕ (abs-ℤ (mul-ℤ (inl x) (inl y)))
-    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
-      by (ap int-ℕ (neg-both-abs-ℤ-mul-ℤ (inl x) (inl y)))
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-      by (int-ℕ-abs-ℤ-mult-positive-ints x y))
-multiplicative-abs-ℤ (inl x) (inr (inl star)) = equational-reasoning
-  abs-ℤ (mul-ℤ (inl x) zero-ℤ)
-  ＝ zero-ℕ by (ap (abs-ℤ) (right-zero-law-mul-ℤ (inl x)))
-  ＝ mul-ℕ (abs-ℤ (inl x)) zero-ℕ by (inv (right-zero-law-mul-ℕ (abs-ℤ (inl x))))
-multiplicative-abs-ℤ (inl x) (inr (inr y)) = is-injective-int-ℕ
-  (equational-reasoning
-    int-ℕ (abs-ℤ (mul-ℤ (inl x) (inr (inr y))))
-    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
-      by (ap int-ℕ (neg-left-abs-ℤ-mul-ℤ (inl x) (inr (inr y))))
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-      by (int-ℕ-abs-ℤ-mult-positive-ints x y))
-multiplicative-abs-ℤ (inr (inl star)) y = refl
-multiplicative-abs-ℤ (inr (inr x)) (inl y) = is-injective-int-ℕ
-  (equational-reasoning
-    int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inl y)))
-    ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))))
-      by (ap int-ℕ (neg-right-abs-ℤ-mul-ℤ (inr (inr x)) (inl y)))
-    ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-      by (int-ℕ-abs-ℤ-mult-positive-ints x y))
-multiplicative-abs-ℤ (inr (inr x)) (inr (inl star)) = equational-reasoning
-  abs-ℤ (mul-ℤ (inr (inr x)) zero-ℤ)
-  ＝ zero-ℕ by (ap (abs-ℤ) (right-zero-law-mul-ℤ (inr (inr x))))
-  ＝ mul-ℕ (abs-ℤ (inr (inr x))) zero-ℕ by (inv (right-zero-law-mul-ℕ (abs-ℤ (inr (inr x)))))
-multiplicative-abs-ℤ (inr (inr x)) (inr (inr y)) = is-injective-int-ℕ
-  (int-ℕ-abs-ℤ-mult-positive-ints x y)
+### `|x(-y)| ＝ |xy|`
+
+```agda
+right-negative-law-mul-abs-ℤ :
+  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
+right-negative-law-mul-abs-ℤ x y =
+  equational-reasoning
+    abs-ℤ (mul-ℤ x y)
+    ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
+      by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
+    ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
+      by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
+```
+
+### `|(-x)(-y)| ＝ |xy|`
+
+```agda
+double-negative-law-mul-abs-ℤ :
+  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) (neg-ℤ y))
+double-negative-law-mul-abs-ℤ x y =
+  (right-negative-law-mul-abs-ℤ x y) ∙ (left-negative-law-mul-abs-ℤ x (neg-ℤ y))
 ```

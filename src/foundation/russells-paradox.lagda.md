@@ -130,7 +130,7 @@ paradox-Russell {l} H =
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
             ( is-contr-total-path' R')
             ( pair R' refl)) ∘e
-          ( ( inv-assoc-Σ (𝕍 l) (λ t → t ＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
+          ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
                   ( commutative-prod) ∘e
@@ -142,7 +142,7 @@ paradox-Russell {l} H =
                         ( eq-resize-𝕍
                           ( is-small-multiset-𝕍 is-small-lsuc t)
                           ( is-small-R'))))))) ∘e
-              ( assoc-Σ
+              ( associative-Σ
                 ( 𝕍 l)
                 ( λ t → t ∉-𝕍 t)
                 ( λ t → ( resize-𝕍

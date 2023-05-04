@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.function-extensionality
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.endomorphisms
 open import foundation-core.homotopies
@@ -32,6 +33,8 @@ Any map `f : X → X` can be iterated by repeatedly applying `f`
 
 ## Definition
 
+### Iterating functions
+
 ```agda
 module _
   {l : Level} {X : UU l}
@@ -44,6 +47,30 @@ module _
   iterate' : ℕ → (X → X) → (X → X)
   iterate' zero-ℕ f x = x
   iterate' (succ-ℕ k) f x = iterate' k f (f x)
+```
+
+### Homotopies of iterating functions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (s : A → A) (t : B → B)
+  where
+
+  coherence-square-iterate :
+    {f : A → B} (H : coherence-square-maps f s t f) →
+    (n : ℕ) → coherence-square-maps f (iterate n s) (iterate n t) f
+  coherence-square-iterate {f} H zero-ℕ x = refl
+  coherence-square-iterate {f} H (succ-ℕ n) =
+    pasting-vertical-coherence-square-maps
+      ( f)
+      ( iterate n s)
+      ( iterate n t)
+      ( f)
+      ( s)
+      ( t)
+      ( f)
+      ( coherence-square-iterate H n)
+      ( H)
 ```
 
 ## Properties

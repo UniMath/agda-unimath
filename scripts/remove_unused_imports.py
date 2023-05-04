@@ -32,7 +32,7 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
     temp_root = os.path.join(root, temp_dir)
     temp_file = agda_file.replace(root, temp_root)
     temp_content = content.replace(
-        f"\nmodule {agda_module}", f"\nmodule {temp_dir}.{agda_module}")
+        f'\nmodule {agda_module}', f'\nmodule {temp_dir}.{agda_module}')
     temp_start = start + len(temp_dir) + 1
     temp_end = end + len(temp_dir) + 1
     os.makedirs(os.path.dirname(temp_file), exist_ok=True)
@@ -68,7 +68,7 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
         with open(agda_file, 'w') as file:
             file.write(new_content)
 
-        removed_imports = sorted(map(lambda s: s[len("open import "):], set(
+        removed_imports = sorted(map(lambda s: s[len('open import '):], set(
             nonpublic).difference(new_nonpublic)))
 
         if utils.call_agda(agda_options, agda_file) != 0:
@@ -87,11 +87,11 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             f"'{agda_module}' No unused imports.")
 
 
-if __name__ == "__main__":
-    root = "src"
-    temp_dir = "temp"
+if __name__ == '__main__':
+    root = 'src'
+    temp_dir = 'temp'
     status = 0
-    agda_options = "--without-K --exact-split"
+    agda_options = '--without-K --exact-split --no-import-sorts --auto-inline --no-caching'
 
     temp_root = os.path.join(root, temp_dir)
     shutil.rmtree(temp_root, ignore_errors=True)
@@ -99,8 +99,9 @@ if __name__ == "__main__":
     def filter_agda_files(f): return utils.is_agda_file(
         pathlib.Path(f)) and os.path.dirname(f) != root
 
+    # Sort the files by most recently changed
     agda_files = sorted(
-        filter(filter_agda_files, utils.get_files_recursive(root)))
+        filter(filter_agda_files, utils.get_files_recursive(root)), key=lambda t: -os.stat(t).st_mtime)
 
     with ThreadPoolExecutor() as executor:
         executor.map(lambda file: process_agda_file(

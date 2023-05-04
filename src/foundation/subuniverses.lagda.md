@@ -59,6 +59,10 @@ module _
   inclusion-subuniverse : type-subuniverse → UU l1
   inclusion-subuniverse = inclusion-subtype P
 
+  is-in-subuniverse-inclusion-subuniverse :
+    (x : type-subuniverse) → is-in-subuniverse (inclusion-subuniverse x)
+  is-in-subuniverse-inclusion-subuniverse x = pr2 x
+
   is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
   is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
 
@@ -71,9 +75,48 @@ module _
 ```agda
 is-global-subuniverse :
   (α : Level → Level) (P : (l : Level) → subuniverse l (α l)) →
-  (l1 l2 : Level) → UU _
+  (l1 l2 : Level) → UU (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
 is-global-subuniverse α P l1 l2 =
   (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
+
+record global-subuniverse (α : Level → Level) : UUω where
+  field
+    subuniverse-global-subuniverse : (l : Level) → subuniverse l (α l)
+    is-global-global-subuniverse :
+      (l1 l2 : Level) →
+      is-global-subuniverse α subuniverse-global-subuniverse l1 l2
+
+open global-subuniverse public
+
+module _
+  (α : Level → Level) (P : global-subuniverse α)
+  where
+
+  is-in-global-subuniverse :
+    {l : Level} → UU l → UU (α l)
+  is-in-global-subuniverse X =
+    is-in-subuniverse (subuniverse-global-subuniverse P _) X
+```
+
+### The predicate that a subuniverse is closed under Σ
+
+We state a general form involving three universes, and a more traditional form
+using a single universe
+
+```agda
+is-closed-under-Σ-subuniverses :
+  {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
+  (R : subuniverse (l1 ⊔ l3) l5) → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+is-closed-under-Σ-subuniverses P Q R =
+  (X : type-subuniverse P)
+  (Y : inclusion-subuniverse P X → type-subuniverse Q) →
+  is-in-subuniverse R
+    ( Σ (inclusion-subuniverse P X) (λ x → inclusion-subuniverse Q (Y x)))
+
+is-closed-under-Σ-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
+is-closed-under-Σ-subuniverse P = is-closed-under-Σ-subuniverses P P P
 ```
 
 ## Properties
@@ -81,13 +124,15 @@ is-global-subuniverse α P l1 l2 =
 ### Subuniverses are closed under equivalences
 
 ```agda
-in-subuniverse-equiv :
-  {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P X → P Y
-in-subuniverse-equiv P e = tr P (eq-equiv _ _ e)
+is-in-subuniverse-equiv :
+  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1} →
+  X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
+is-in-subuniverse-equiv P e = tr (is-in-subuniverse P) (eq-equiv _ _ e)
 
-in-subuniverse-equiv' :
-  {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P Y → P X
-in-subuniverse-equiv' P e = tr P (inv (eq-equiv _ _ e))
+is-in-subuniverse-equiv' :
+  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1} →
+  X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
+is-in-subuniverse-equiv' P e = tr (is-in-subuniverse P) (inv (eq-equiv _ _ e))
 ```
 
 ### Characterization of the identity type of subuniverses
@@ -111,6 +156,17 @@ module _
     is-contr-total-equiv-subuniverse (pair X p) =
       is-contr-total-Eq-subtype
         ( is-contr-total-equiv X)
+        ( is-subtype-subuniverse P)
+        ( X)
+        ( id-equiv)
+        ( p)
+
+    is-contr-total-equiv-subuniverse' :
+      (s : type-subuniverse P) →
+      is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse t s))
+    is-contr-total-equiv-subuniverse' (pair X p) =
+      is-contr-total-Eq-subtype
+        ( is-contr-total-equiv' X)
         ( is-subtype-subuniverse P)
         ( X)
         ( id-equiv)

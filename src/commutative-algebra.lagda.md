@@ -12,6 +12,7 @@ open import commutative-algebra.dependent-products-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public
 open import commutative-algebra.eisenstein-integers public
+open import commutative-algebra.euclidean-domains public
 open import commutative-algebra.function-commutative-rings public
 open import commutative-algebra.function-commutative-semirings public
 open import commutative-algebra.gaussian-integers public
@@ -34,5 +35,6 @@ open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-commutative-rings public
 open import commutative-algebra.sums-commutative-semirings public
+open import commutative-algebra.trivial-commutative-rings public
 open import commutative-algebra.zariski-topology public
 ```

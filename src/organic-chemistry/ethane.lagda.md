@@ -23,7 +23,6 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs

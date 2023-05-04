@@ -7,8 +7,6 @@ module category-theory.functors-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import category-theory.large-precategories
 
 open import foundation.functions
@@ -26,7 +24,7 @@ A functor from a large precategory `C` to a large precategory `D` consists of:
 - a map `Fmap : hom x y → hom (F x) (F y)` on morphisms, such that the following
   identities hold:
 - `Fmap id_x = id_(F x)`,
-- `Fmap (comp g f) = comp (F g) (F f)`.
+- `Fmap (g ∘ f) = F g ∘ F f`.
 
 ## Definition
 
@@ -36,7 +34,7 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-  record functor-Large-Precat (γ : Level → Level) : Setω
+  record functor-Large-Precat (γ : Level → Level) : UUω
     where
     constructor make-functor
     field

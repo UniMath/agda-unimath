@@ -36,7 +36,7 @@ component of a universe `UU l1` of types merely equal to `A : UU l2`.
 
 ## Definition
 
-### The connected component of a universe with variable universe.
+### The connected component of a universe with variable universe
 
 ```agda
 component-UU-Level :

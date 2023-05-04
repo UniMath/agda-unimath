@@ -2,9 +2,6 @@
 
 ```agda
 {-# OPTIONS --safe #-}
-```
-
-```agda
 module foundation-core.homotopies where
 ```
 
@@ -66,53 +63,53 @@ module _
 ### Reflexivity
 
 ```agda
-refl-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x} → f ~ f
-refl-htpy x = refl
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
-refl-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) → f ~ f
-refl-htpy' f = refl-htpy
+  refl-htpy : {f : (x : A) → B x} → f ~ f
+  refl-htpy x = refl
+
+  refl-htpy' : (f : (x : A) → B x) → f ~ f
+  refl-htpy' f = refl-htpy
 ```
 
 ### Inverting homotopies
 
 ```agda
-inv-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
-  f ~ g → g ~ f
-inv-htpy H x = inv (H x)
+  inv-htpy : {f g : (x : A) → B x} → f ~ g → g ~ f
+  inv-htpy H x = inv (H x)
 ```
 
 ### Concatenating homotopies
 
 ```agda
-_∙h_ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x} →
-  f ~ g → g ~ h → f ~ h
-(H ∙h K) x = (H x) ∙ (K x)
-
-concat-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
-  f ~ g → (h : (x : A) → B x) → g ~ h → f ~ h
-concat-htpy H h K x = concat (H x) (h x) (K x)
-
-concat-htpy' :
+module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} →
-  g ~ h → f ~ g → f ~ h
-concat-htpy' f K H = H ∙h K
+  where
 
-concat-inv-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
-  f ~ g → (h : (x : A) → B x) → f ~ h → g ~ h
-concat-inv-htpy = concat-htpy ∘ inv-htpy
+  _∙h_ : {f g h : (x : A) → B x} → f ~ g → g ~ h → f ~ h
+  (H ∙h K) x = (H x) ∙ (K x)
 
-concat-inv-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} →
-  (g ~ h) → (f ~ h) → (f ~ g)
-concat-inv-htpy' f K = concat-htpy' f (inv-htpy K)
+  concat-htpy :
+    {f g : (x : A) → B x} →
+    f ~ g → (h : (x : A) → B x) → g ~ h → f ~ h
+  concat-htpy H h K x = concat (H x) (h x) (K x)
+
+  concat-htpy' :
+    (f : (x : A) → B x) {g h : (x : A) → B x} →
+    g ~ h → f ~ g → f ~ h
+  concat-htpy' f K H = H ∙h K
+
+  concat-inv-htpy :
+    {f g : (x : A) → B x} →
+    f ~ g → (h : (x : A) → B x) → f ~ h → g ~ h
+  concat-inv-htpy = concat-htpy ∘ inv-htpy
+
+  concat-inv-htpy' :
+    (f : (x : A) → B x) {g h : (x : A) → B x} →
+    (g ~ h) → (f ~ h) → (f ~ g)
+  concat-inv-htpy' f K = concat-htpy' f (inv-htpy K)
 ```
 
 ### Whiskering of homotopies
@@ -133,12 +130,12 @@ htpy-right-whisk H f x = H (f x)
 _·r_ = htpy-right-whisk
 ```
 
-**Warning**: The infix whiskering operators `_·l_` and `_·r_` use the symbol `·`
-("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`) as opposed
-to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙`
-("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`). If these look the same
-in your editor, we suggest that you change your font. For a reference, see
-[How to install](HOWTO-INSTALL.md).
+**Note**: The infix whiskering operators `_·l_` and `_·r_` use the
+[middle dot](https://codepoints.net/U+00B7) `·` (agda-input: `\cdot`
+`\centerdot`), as opposed to the infix homotopy concatenation operator `_∙h_`
+which uses the [bullet operator](https://codepoints.net/U+2219) `∙` (agda-input:
+`\.`). If these look the same in your editor, we suggest that you change your
+font. For a reference, see [How to install](HOWTO-INSTALL.md).
 
 ### Horizontal composition of homotopies
 
@@ -202,7 +199,7 @@ module _
   left-unit-htpy : (refl-htpy ∙h H) ~ H
   left-unit-htpy x = left-unit
 
-  inv-htpy-left-unit-htpy :  H ~ (refl-htpy ∙h H)
+  inv-htpy-left-unit-htpy : H ~ (refl-htpy ∙h H)
   inv-htpy-left-unit-htpy = inv-htpy left-unit-htpy
 
   right-unit-htpy : (H ∙h refl-htpy) ~ H

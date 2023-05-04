@@ -36,32 +36,32 @@ is-decidable-Rel-Prop {A = A} R =
   (x y : A) → is-decidable ( type-Rel-Prop R x y)
 
 Decidable-Relation : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-Decidable-Relation l2 X = X → X → decidable-Prop l2
+Decidable-Relation l2 X = X → X → Decidable-Prop l2
 
 module _
   {l1 l2 : Level} {X : UU l1} (R : Decidable-Relation l2 X)
   where
 
   relation-Decidable-Relation : X → X → Prop l2
-  relation-Decidable-Relation x y = prop-decidable-Prop (R x y)
+  relation-Decidable-Relation x y = prop-Decidable-Prop (R x y)
 
   type-Decidable-Relation : X → X → UU l2
-  type-Decidable-Relation x y = type-decidable-Prop (R x y)
+  type-Decidable-Relation x y = type-Decidable-Prop (R x y)
 
   is-prop-type-Decidable-Relation :
     (x y : X) → is-prop (type-Decidable-Relation x y)
-  is-prop-type-Decidable-Relation x y = is-prop-type-decidable-Prop (R x y)
+  is-prop-type-Decidable-Relation x y = is-prop-type-Decidable-Prop (R x y)
 
   is-decidable-type-Decidable-Relation :
     (x y : X) → is-decidable (type-Decidable-Relation x y)
   is-decidable-type-Decidable-Relation x y =
-    is-decidable-type-decidable-Prop (R x y)
+    is-decidable-type-Decidable-Prop (R x y)
 
 map-inv-equiv-relation-is-decidable-Decidable-Relation :
   {l1 l2 : Level} {X : UU l1} →
   Σ ( Rel-Prop l2 X) (λ R → is-decidable-Rel-Prop R) →
   Decidable-Relation l2 X
-map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d)  x y =
+map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d) x y =
   ( ( type-Rel-Prop R x y) ,
     ( is-prop-type-Rel-Prop R x y) ,
     ( d x y))
@@ -75,7 +75,7 @@ pr1 equiv-relation-is-decidable-Decidable-Relation dec-R =
     is-decidable-type-Decidable-Relation dec-R)
 pr2 equiv-relation-is-decidable-Decidable-Relation =
   is-equiv-has-inverse
-    ( map-inv-equiv-relation-is-decidable-Decidable-Relation )
+    ( map-inv-equiv-relation-is-decidable-Decidable-Relation)
     ( refl-htpy)
     ( refl-htpy)
 ```

@@ -14,7 +14,6 @@ open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
@@ -28,7 +27,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -113,7 +112,7 @@ abstract
       ( ( ( left-unit-law-Σ-is-contr
             ( is-contr-total-path' y)
             ( pair y refl)) ∘e
-          ( inv-assoc-Σ A
+          ( inv-associative-Σ A
             ( λ x → Id x y)
             ( λ t → Id (tr B (pr2 t) (b (pr1 t))) z))) ∘e
         ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))

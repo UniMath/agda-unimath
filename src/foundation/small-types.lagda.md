@@ -26,7 +26,7 @@ open import foundation-core.universe-levels
 
 ## Properties
 
-### If `f` is a surjective map from a small type into a locally small type, then Replacement implies that the codomain is small.
+### If `f` is a surjective map from a small type into a locally small type, then `Replacement` implies that the codomain is small
 
 ```agda
 is-small-is-surjective :

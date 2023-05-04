@@ -123,7 +123,8 @@ module _
 
   hom-comp-iso-Cat :
     {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → type-hom-Cat C x z
-  hom-comp-iso-Cat g f = comp-hom-Cat C (hom-iso-Cat C g) (hom-iso-Cat C f)
+  hom-comp-iso-Cat g f =
+    comp-hom-Cat C (hom-iso-Cat C g) (hom-iso-Cat C f)
 
   hom-inv-comp-iso-Cat :
     {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → type-hom-Cat C z x
@@ -132,8 +133,8 @@ module _
 
   issec-hom-inv-comp-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
-    ＝ id-hom-Cat C
+    comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f) ＝
+    id-hom-Cat C
   issec-hom-inv-comp-iso-Cat g f =
     equational-reasoning
       comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
@@ -143,10 +144,10 @@ module _
             ( hom-iso-Cat C f)
             ( hom-inv-comp-iso-Cat g f))
         by
-        assoc-comp-hom-Cat C
-          ( hom-iso-Cat C g)
-          ( hom-iso-Cat C f)
-          ( hom-inv-comp-iso-Cat g f)
+          associative-comp-hom-Cat C
+            ( hom-iso-Cat C g)
+            ( hom-iso-Cat C f)
+            ( hom-inv-comp-iso-Cat g f)
       ＝ comp-hom-Cat C
           ( hom-iso-Cat C g)
           ( comp-hom-Cat C
@@ -155,36 +156,38 @@ module _
               ( hom-inv-iso-Cat C f))
             ( hom-inv-iso-Cat C g))
         by
-        ap
-          ( comp-hom-Cat C (hom-iso-Cat C g))
-          ( inv
-            ( assoc-comp-hom-Cat C
-              ( hom-iso-Cat C f)
-              ( hom-inv-iso-Cat C f)
-              ( hom-inv-iso-Cat C g)))
+          ap
+            ( comp-hom-Cat C (hom-iso-Cat C g))
+            ( inv
+              ( associative-comp-hom-Cat C
+                ( hom-iso-Cat C f)
+                ( hom-inv-iso-Cat C f)
+                ( hom-inv-iso-Cat C g)))
       ＝ comp-hom-Cat C
           ( hom-iso-Cat C g)
           ( comp-hom-Cat C
             ( id-hom-Cat C)
             ( hom-inv-iso-Cat C g))
         by
-        ap
-          ( comp-hom-Cat C (hom-iso-Cat C g))
-          ( ap
-            ( λ h → comp-hom-Cat C h (hom-inv-iso-Cat C g))
-            ( issec-hom-inv-iso-Cat C f))
+          ap
+            ( comp-hom-Cat C (hom-iso-Cat C g))
+            ( ap
+              ( λ h → comp-hom-Cat C h (hom-inv-iso-Cat C g))
+              ( issec-hom-inv-iso-Cat C f))
       ＝ comp-hom-Cat C (hom-iso-Cat C g) (hom-inv-iso-Cat C g)
         by
-        ap
-          ( comp-hom-Cat C (hom-iso-Cat C g))
-          ( left-unit-law-comp-hom-Cat C (hom-inv-iso-Cat C g))
+          ap
+            ( comp-hom-Cat C (hom-iso-Cat C g))
+            ( left-unit-law-comp-hom-Cat C (hom-inv-iso-Cat C g))
       ＝ id-hom-Cat C
-        by
-        issec-hom-inv-iso-Cat C g
+        by issec-hom-inv-iso-Cat C g
 
   isretr-hom-inv-comp-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    ( comp-hom-Cat C (hom-inv-comp-iso-Cat g f) (hom-comp-iso-Cat g f)) ＝
+    ( comp-hom-Cat
+      ( C)
+      ( hom-inv-comp-iso-Cat g f)
+      ( hom-comp-iso-Cat g f)) ＝
     ( id-hom-Cat C)
   isretr-hom-inv-comp-iso-Cat g f =
     equational-reasoning
@@ -195,10 +198,10 @@ module _
             ( hom-inv-iso-Cat C g)
             ( hom-comp-iso-Cat g f))
         by
-        assoc-comp-hom-Cat C
-          ( hom-inv-iso-Cat C f)
-          ( hom-inv-iso-Cat C g)
-          ( hom-comp-iso-Cat g f)
+          associative-comp-hom-Cat C
+            ( hom-inv-iso-Cat C f)
+            ( hom-inv-iso-Cat C g)
+            ( hom-comp-iso-Cat g f)
       ＝ comp-hom-Cat C
           ( hom-inv-iso-Cat C f)
           ( comp-hom-Cat C
@@ -207,32 +210,31 @@ module _
               ( hom-iso-Cat C g))
             ( hom-iso-Cat C f))
         by
-        ap
-          ( comp-hom-Cat C (hom-inv-iso-Cat C f))
-          ( inv
-            ( assoc-comp-hom-Cat C
-              ( hom-inv-iso-Cat C g)
-              ( hom-iso-Cat C g)
-              ( hom-iso-Cat C f)))
+          ap
+            ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+            ( inv
+              ( associative-comp-hom-Cat C
+                ( hom-inv-iso-Cat C g)
+                ( hom-iso-Cat C g)
+                ( hom-iso-Cat C f)))
       ＝ comp-hom-Cat C
           ( hom-inv-iso-Cat C f)
           ( comp-hom-Cat C
             ( id-hom-Cat C)
             ( hom-iso-Cat C f))
         by
-        ap
-          ( comp-hom-Cat C (hom-inv-iso-Cat C f))
-          ( ap
-            ( λ h → comp-hom-Cat C h (hom-iso-Cat C f))
-            ( isretr-hom-inv-iso-Cat C g))
+          ap
+            ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+            ( ap
+              ( λ h → comp-hom-Cat C h (hom-iso-Cat C f))
+              ( isretr-hom-inv-iso-Cat C g))
       ＝ comp-hom-Cat C (hom-inv-iso-Cat C f) (hom-iso-Cat C f)
         by
-        ap
-          ( comp-hom-Cat C (hom-inv-iso-Cat C f))
-          ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
+          ap
+            ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+            ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
       ＝ id-hom-Cat C
-        by
-        isretr-hom-inv-iso-Cat C f
+        by isretr-hom-inv-iso-Cat C f
 
   is-iso-hom-comp-iso-Cat :
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
@@ -340,15 +342,16 @@ module _
 #### Associatitivity
 
 ```agda
-  assoc-comp-iso-Cat :
+  associative-comp-iso-Cat :
     {x y z w : obj-Cat C}
     (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
-    comp-iso-Cat C (comp-iso-Cat C h g) f ＝ comp-iso-Cat C h (comp-iso-Cat C g f)
-  assoc-comp-iso-Cat h g f =
+    comp-iso-Cat C (comp-iso-Cat C h g) f ＝
+    comp-iso-Cat C h (comp-iso-Cat C g f)
+  associative-comp-iso-Cat h g f =
     eq-Eq-iso-Cat C
       ( comp-iso-Cat C (comp-iso-Cat C h g) f)
       ( comp-iso-Cat C h (comp-iso-Cat C g f))
-      ( assoc-comp-hom-Cat C
+      ( associative-comp-hom-Cat C
         ( hom-iso-Cat C h)
         ( hom-iso-Cat C g)
         ( hom-iso-Cat C f))
@@ -357,7 +360,8 @@ module _
 #### Left inverse law
 
 ```agda
-  left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+  left-inverse-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
   left-inverse-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
@@ -369,7 +373,8 @@ module _
 #### Right inverse law
 
 ```agda
-  right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+  right-inverse-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
   right-inverse-law-comp-iso-Cat f =
     eq-Eq-iso-Cat C
@@ -434,21 +439,20 @@ module _
             ( iso-eq-Cat C (eq-iso-Cat g))
             ( iso-eq-Cat C (eq-iso-Cat f)))
         by
-        ap eq-iso-Cat
-          ( ap-binary
-            ( comp-iso-Cat C)
-            ( inv (issec-eq-iso-Cat g))
-            ( inv (issec-eq-iso-Cat f)))
+          ap eq-iso-Cat
+            ( ap-binary
+              ( comp-iso-Cat C)
+              ( inv (issec-eq-iso-Cat g))
+              ( inv (issec-eq-iso-Cat f)))
       ＝ eq-iso-Cat (iso-eq-Cat C (eq-iso-Cat f ∙ eq-iso-Cat g))
         by
-        ap eq-iso-Cat
-          ( inv
-            ( preserves-concat-iso-eq-Cat C
-              ( eq-iso-Cat f)
-              ( eq-iso-Cat g)))
+          ap eq-iso-Cat
+            ( inv
+              ( preserves-concat-iso-eq-Cat C
+                ( eq-iso-Cat f)
+                ( eq-iso-Cat g)))
       ＝ eq-iso-Cat f ∙ eq-iso-Cat g
-        by
-        isretr-eq-iso-Cat (eq-iso-Cat f ∙ eq-iso-Cat g)
+        by isretr-eq-iso-Cat (eq-iso-Cat f ∙ eq-iso-Cat g)
 ```
 
 ### The type of isomorphisms forms a set

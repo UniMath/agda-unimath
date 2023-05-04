@@ -1,6 +1,8 @@
 # Set truncations
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.set-truncations where
 ```
 
@@ -85,7 +87,8 @@ equiv-dependent-universal-property-trunc-Set :
   {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → Set l2) →
   ((x : type-trunc-Set A) → type-Set (B x)) ≃
   ((a : A) → type-Set (B (unit-trunc-Set a)))
-equiv-dependent-universal-property-trunc-Set = equiv-dependent-universal-property-trunc
+equiv-dependent-universal-property-trunc-Set =
+  equiv-dependent-universal-property-trunc
 
 module _
   {l1 : Level} {A : UU l1}
@@ -123,7 +126,8 @@ module _
 ### The universal property of set truncations
 
 ```agda
-universal-property-trunc-Set : {l1 l2 : Level} (A : UU l1) →
+universal-property-trunc-Set :
+  {l1 l2 : Level} (A : UU l1) →
   universal-property-set-truncation l2
     ( trunc-Set A)
     ( unit-trunc-Set)
@@ -501,7 +505,8 @@ module _
               ( ( equiv-map-Π
                   ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
                 ( ( equiv-ev-pair) ∘e
-                  ( equiv-universal-property-trunc-Set (Σ A (type-trunc-Set ∘ B)) C)))
+                  ( equiv-universal-property-trunc-Set
+                    ( Σ A (type-trunc-Set ∘ B)) C)))
               ( refl-htpy)))
 
   equiv-trunc-Σ-Set :

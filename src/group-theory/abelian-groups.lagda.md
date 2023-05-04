@@ -28,7 +28,8 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.lists
+open import lists.concatenation-lists
+open import lists.lists
 ```
 
 </details>
@@ -97,7 +98,7 @@ module _
   ap-add-Ab p q = ap-binary add-Ab p q
 
   associative-add-Ab :
-    (x y z : type-Ab ) → add-Ab (add-Ab x y) z ＝ add-Ab x (add-Ab y z)
+    (x y z : type-Ab) → add-Ab (add-Ab x y) z ＝ add-Ab x (add-Ab y z)
   associative-add-Ab = associative-mul-Group group-Ab
 
   semigroup-Ab : Semigroup l

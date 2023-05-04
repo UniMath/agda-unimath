@@ -94,11 +94,10 @@ files with the `.lagda.md` extension:
 The `agda-unimath` library employs two notations for the identity type:
 Martin-Löf's original notation `Id` and an infix notation `_＝_`. The infix
 notation's equals sign is not the standard one, but rather the
-[full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
-Observe that the full width equals sign is slightly wider, and is highlighted in
-blue just like all the other defined constructions in Agda. To type the full
-width equals sign in Agda's Emacs Mode, you need to add it to your Agda input
-method as follows:
+[full width equals sign](https://codepoints.net/U+ff1d). Observe that the full
+width equals sign is slightly wider, and is highlighted in blue just like all
+the other defined constructions in Agda. To type the full width equals sign in
+Agda's Emacs Mode, you need to add it to your Agda input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
@@ -114,10 +113,11 @@ width equals sign `＝`. While you're at it, you can also add the key sequence
 
 #### 80-character limit
 
-The `agda-unimath` library maintains an 80-character limit on the length of
-lines in the source code. This limit is to improve readability, both in your
-programming environment and on our website. To display a line marking the 80th
-column in Emacs, add:
+The `agda-unimath` library maintains an 80-character limit on the length of most
+lines in the source code (see [CODINGSTYLE](CODINGSTYLE.md#character-limit) for
+a list of exceptions). This limit is to improve readability, both in your
+programming environment and on our website. To display a vertical ruler marking
+the 80th column in Emacs, add:
 
 ```elisp
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
@@ -173,11 +173,11 @@ mistakes, ensuring a smoother coding experience.
 
 This library relies heavily on Unicode characters, so it's important to use a
 font family with comprehensive Unicode support in your editor. For instance, the
-library utilizes the [middle dot](https://www.compart.com/en/unicode/U+00B7)
-symbol `·` and the [bullet operator](https://www.compart.com/en/unicode/U+2219)
-symbol `∙`. In some fonts, these two symbols appear identical. If you find it
-difficult to distinguish between these symbols in your editor, we recommend
-switching to a different font.
+library utilizes the [middle dot](https://www.compart.com/en/unicode/U+00B7) `·`
+and the [bullet operator](https://www.compart.com/en/unicode/U+2219) `∙`. In
+some fonts, these two symbols appear identical. If you find it difficult to
+distinguish between these symbols in your editor, we recommend switching to a
+different font.
 
 ## After the setup
 

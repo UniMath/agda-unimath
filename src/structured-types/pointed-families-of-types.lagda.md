@@ -27,7 +27,8 @@ pointed types over `A`.
 ```agda
 Pointed-Fam :
   {l1 : Level} (l : Level) (A : Pointed-Type l1) → UU (lsuc l ⊔ l1)
-Pointed-Fam l A = Σ (type-Pointed-Type A → UU l) (λ P → P (pt-Pointed-Type A))
+Pointed-Fam l A =
+  Σ (type-Pointed-Type A → UU l) (λ P → P (point-Pointed-Type A))
 
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A)
@@ -36,8 +37,8 @@ module _
   fam-Pointed-Fam : type-Pointed-Type A → UU l2
   fam-Pointed-Fam = pr1 B
 
-  pt-Pointed-Fam : fam-Pointed-Fam (pt-Pointed-Type A)
-  pt-Pointed-Fam = pr2 B
+  point-Pointed-Fam : fam-Pointed-Fam (point-Pointed-Type A)
+  point-Pointed-Fam = pr2 B
 ```
 
 ## Examples
@@ -52,5 +53,5 @@ module _
   constant-Pointed-Fam :
     (A : Pointed-Type l1) → Pointed-Type l2 → Pointed-Fam l2 A
   constant-Pointed-Fam A B =
-    pair (λ x → type-Pointed-Type B) (pt-Pointed-Type B)
+    pair (λ _ → type-Pointed-Type B) (point-Pointed-Type B)
 ```

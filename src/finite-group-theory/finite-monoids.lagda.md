@@ -95,8 +95,9 @@ is-π-finite-Monoid-of-Order {l} k n =
         is-π-finite-is-finite k
           ( is-finite-is-unital-Semigroup n X)))
   where
-  e : Monoid-of-Order l n ≃
-      Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
+  e :
+    Monoid-of-Order l n ≃
+    Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
   e = equiv-right-swap-Σ
 ```
 

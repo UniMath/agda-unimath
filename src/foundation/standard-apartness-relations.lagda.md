@@ -45,7 +45,7 @@ is-standard-is-tight-Apartness-Relation :
   {l1 l2 : Level} {A : UU l1} (R : Apartness-Relation l2 A) →
   is-tight-Apartness-Relation R → is-standard-Apartness-Relation l2 R
 pr1 (is-standard-is-tight-Apartness-Relation R H lem x y) np =
-  dn-elim-is-decidable
+  double-negation-elim-is-decidable
     ( lem (rel-Apartness-Relation R x y))
     ( map-neg (H x y) np)
 pr2 (is-standard-is-tight-Apartness-Relation R H lem x .x) r refl =

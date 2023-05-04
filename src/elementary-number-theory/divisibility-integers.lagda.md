@@ -34,11 +34,24 @@ open import foundation.universe-levels
 
 ## Idea
 
-An integer `d` divides an integer `x` if there is an integer `k` such that
-`mul-ℤ k d = x`. In other words, the type `div-ℤ d x` is the fiber
-`fib (mul-ℤ' d) x`.
+An integer `m` is said to **divide** an integer `n` if there exists an integer
+`k` equipped with an identification `km ＝ n`. Using the Curry-Howard
+interpretation of logic into type theory, we express divisibility as follows:
 
-## Definition
+```md
+  div-ℤ m n := Σ (k : ℤ), mul-ℤ k m ＝ n.
+```
+
+If `n` is a nonzero integer, then `div-ℤ m n` is always a proposition in the
+sense that the type `div-ℤ m n` contains at most one element.
+
+We also introduce **unit integers**, which are integers that divide the integer
+`1`, and an equivalence relation `sim-unit-ℤ` on the integers in which two
+integers `x` and `y` are equivalent if there exists a unit integer `u` such that
+`ux ＝ y`. These two concepts help establish further properties of the
+divisibility relation on the integers.
+
+## Definitions
 
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
@@ -55,11 +68,72 @@ eq-quotient-div-ℤ' :
   (x y : ℤ) (H : div-ℤ x y) → mul-ℤ x (quotient-div-ℤ x y H) ＝ y
 eq-quotient-div-ℤ' x y H =
   commutative-mul-ℤ x (quotient-div-ℤ x y H) ∙ eq-quotient-div-ℤ x y H
+
+div-quotient-div-ℤ :
+  (d x : ℤ) (H : div-ℤ d x) → div-ℤ (quotient-div-ℤ d x H) x
+pr1 (div-quotient-div-ℤ d x (u , p)) = d
+pr2 (div-quotient-div-ℤ d x (u , p)) = commutative-mul-ℤ d u ∙ p
+
+concatenate-eq-div-ℤ :
+  {x y z : ℤ} → x ＝ y → div-ℤ y z → div-ℤ x z
+concatenate-eq-div-ℤ refl p = p
+
+concatenate-div-eq-ℤ :
+  {x y z : ℤ} → div-ℤ x y → y ＝ z → div-ℤ x z
+concatenate-div-eq-ℤ p refl = p
+
+concatenate-eq-div-eq-ℤ :
+  {x y z w : ℤ} → x ＝ y → div-ℤ y z → z ＝ w → div-ℤ x w
+concatenate-eq-div-eq-ℤ refl p refl = p
+```
+
+### Unit integers
+
+```agda
+is-unit-ℤ : ℤ → UU lzero
+is-unit-ℤ x = div-ℤ x one-ℤ
+
+unit-ℤ : UU lzero
+unit-ℤ = Σ ℤ is-unit-ℤ
+
+int-unit-ℤ : unit-ℤ → ℤ
+int-unit-ℤ = pr1
+
+is-unit-int-unit-ℤ : (x : unit-ℤ) → is-unit-ℤ (int-unit-ℤ x)
+is-unit-int-unit-ℤ = pr2
+
+div-is-unit-ℤ :
+  (x y : ℤ) → is-unit-ℤ x → div-ℤ x y
+pr1 (div-is-unit-ℤ x y (pair d p)) = mul-ℤ y d
+pr2 (div-is-unit-ℤ x y (pair d p)) =
+  associative-mul-ℤ y d x ∙ (ap (mul-ℤ y) p ∙ right-unit-law-mul-ℤ y)
+```
+
+### The equivalence relation `sim-unit-ℤ`
+
+We define the equivalence relation `sim-unit-ℤ` in such a way that
+`sim-unit-ℤ x y` is always a proposition.
+
+```agda
+presim-unit-ℤ : ℤ → ℤ → UU lzero
+presim-unit-ℤ x y = Σ unit-ℤ (λ u → mul-ℤ (pr1 u) x ＝ y)
+
+sim-unit-ℤ : ℤ → ℤ → UU lzero
+sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
 ```
 
 ## Properties
 
+### Divisibility by a nonzero integer is a property
+
+```agda
+is-prop-div-ℤ : (d x : ℤ) → is-nonzero-ℤ d → is-prop (div-ℤ d x)
+is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-mul-ℤ' d f) x
+```
+
 ### The divisibility relation is a preorder
+
+Note that the divisibility relation on the integers is not antisymmetric.
 
 ```agda
 refl-div-ℤ : (x : ℤ) → div-ℤ x x
@@ -75,14 +149,7 @@ pr2 (trans-div-ℤ x y z (pair d p) (pair e q)) =
       ( q))
 ```
 
-### Divisibility by a nonzero integer is a property
-
-```agda
-is-prop-div-ℤ : (d x : ℤ) → is-nonzero-ℤ d → is-prop (div-ℤ d x)
-is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-mul-ℤ' d f) x
-```
-
-### Every integer is divisible by 1
+### Every integer is divisible by `1`
 
 ```agda
 div-one-ℤ : (x : ℤ) → div-ℤ one-ℤ x
@@ -90,7 +157,7 @@ pr1 (div-one-ℤ x) = x
 pr2 (div-one-ℤ x) = right-unit-law-mul-ℤ x
 ```
 
-### Every integer divides 0
+### Every integer divides `0`
 
 ```agda
 div-zero-ℤ : (x : ℤ) → div-ℤ x zero-ℤ
@@ -98,7 +165,7 @@ pr1 (div-zero-ℤ x) = zero-ℤ
 pr2 (div-zero-ℤ x) = left-zero-law-mul-ℤ x
 ```
 
-### Every integer that is divisible by 0 is 0.
+### Every integer that is divisible by `0` is `0`
 
 ```agda
 is-zero-div-zero-ℤ :
@@ -106,7 +173,22 @@ is-zero-div-zero-ℤ :
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 ```
 
-### If `k` divides `x` and `k` is 0 then `x` is 0
+### The quotient of `x` by one is `x`
+
+```agda
+eq-quotient-div-is-one-ℤ :
+ (k x : ℤ) → is-one-ℤ k → (H : div-ℤ k x) → quotient-div-ℤ k x H ＝ x
+eq-quotient-div-is-one-ℤ .one-ℤ x refl H =
+  ap
+    ( quotient-div-ℤ one-ℤ x)
+    ( inv
+      ( eq-is-prop'
+        ( is-prop-div-ℤ one-ℤ x (λ ()))
+        ( div-one-ℤ x)
+        ( H)))
+```
+
+### If `k` divides `x` and `k` is `0` then `x` is `0`
 
 ```agda
 is-zero-is-zero-div-ℤ : (x k : ℤ) → div-ℤ k x → is-zero-ℤ k → is-zero-ℤ x
@@ -148,10 +230,14 @@ pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (neg-div-ℤ x y (pair d p)) =
   equational-reasoning
     mul-ℤ (neg-ℤ d) (neg-ℤ x)
-    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))   by left-negative-law-mul-ℤ d (neg-ℤ x)
-    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
-    ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
-    ＝ y                           by p
+    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))
+      by left-negative-law-mul-ℤ d (neg-ℤ x)
+    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))
+      by ap neg-ℤ (right-negative-law-mul-ℤ d x)
+    ＝ (mul-ℤ d x)
+      by neg-neg-ℤ (mul-ℤ d x)
+    ＝ y
+      by p
 ```
 
 ### Multiplication preserves divisibility
@@ -202,7 +288,7 @@ div-div-quotient-div-ℤ x y d H K =
      ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
 
-### Comparison of divisibility on ℕ and on ℤ
+### Comparison of divisibility on `ℕ` and on `ℤ`
 
 ```agda
 div-int-div-ℕ :
@@ -230,28 +316,6 @@ pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
               ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
               ( star)))) ∙
         ( p)))
-```
-
-### We introduce units
-
-```agda
-is-unit-ℤ : ℤ → UU lzero
-is-unit-ℤ x = div-ℤ x one-ℤ
-
-unit-ℤ : UU lzero
-unit-ℤ = Σ ℤ is-unit-ℤ
-
-int-unit-ℤ : unit-ℤ → ℤ
-int-unit-ℤ = pr1
-
-is-unit-int-unit-ℤ : (x : unit-ℤ) → is-unit-ℤ (int-unit-ℤ x)
-is-unit-int-unit-ℤ = pr2
-
-div-is-unit-ℤ :
-  (x y : ℤ) → is-unit-ℤ x → div-ℤ x y
-pr1 (div-is-unit-ℤ x y (pair d p)) = mul-ℤ y d
-pr2 (div-is-unit-ℤ x y (pair d p)) =
-  associative-mul-ℤ y d x ∙ (ap (mul-ℤ y) p ∙ right-unit-law-mul-ℤ y)
 ```
 
 ### An integer is a unit if and only if it is `1` or `-1`.
@@ -370,22 +434,6 @@ is-unit-right-factor-ℤ x y (pair d p) =
     ( pair d (ap (mul-ℤ d) (commutative-mul-ℤ y x) ∙ p))
 ```
 
-### We introduce the equivalence relation `ux = y`, where `u` is a unit
-
-```agda
-{- The relation presim-unit-ℤ would be an equivalence relation, except it is not
-   valued in the propositions. Indeed presim-unit-ℤ zero-ℤ zero-ℤ is not a
-   proposition. -}
-presim-unit-ℤ : ℤ → ℤ → UU lzero
-presim-unit-ℤ x y = Σ unit-ℤ (λ u → mul-ℤ (pr1 u) x ＝ y)
-
-{- We could define sim-unit-ℤ x y to be the propositional truncation of
-   presim-unit-ℤ, but that's a waste because presim-unit-ℤ x y is only not a
-   proposition when both x and y are zero. -}
-sim-unit-ℤ : ℤ → ℤ → UU lzero
-sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
-```
-
 ### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are logically equivalent
 
 ```agda
@@ -427,7 +475,7 @@ is-nonzero-sim-unit-ℤ H f =
 is-zero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ x → is-zero-ℤ y
 is-zero-sim-unit-ℤ {x} {y} H p =
-  dn-elim-is-decidable
+  double-negation-elim-is-decidable
     ( has-decidable-equality-ℤ y zero-ℤ)
     ( λ g → g (inv (β g) ∙ (ap (mul-ℤ (u g)) p ∙ right-zero-law-mul-ℤ (u g))))
   where
@@ -502,7 +550,7 @@ trans-sim-unit-ℤ x y z H K f =
     ( K (λ {(pair p q) → f (pair (is-zero-sim-unit-ℤ' H p) q)}))
 ```
 
-### We show that `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`
+### `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`
 
 ```agda
 antisymmetric-div-ℤ :
@@ -523,7 +571,7 @@ antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
   pr2 (f (inr g)) = p
 ```
 
-### We show that `sim-unit-ℤ |x| x` holds
+### `sim-unit-ℤ |x| x` holds
 
 ```agda
 sim-unit-abs-ℤ : (x : ℤ) → sim-unit-ℤ (int-abs-ℤ x) x
@@ -571,40 +619,55 @@ div-div-int-abs-ℤ {x} {y} =
 ### If we have that `sim-unit-ℤ x y`, then they must differ only by sign
 
 ```agda
-is-plus-or-minus-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → is-plus-or-minus-ℤ x y
+is-plus-or-minus-sim-unit-ℤ :
+  {x y : ℤ} → sim-unit-ℤ x y → is-plus-or-minus-ℤ x y
 is-plus-or-minus-sim-unit-ℤ {x} {y} H with ( is-decidable-is-zero-ℤ x)
-is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z = inl (z ∙ inv (is-zero-sim-unit-ℤ H z))
-is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz with ( is-one-or-neg-one-is-unit-ℤ
-        (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -)))))
-        (is-unit-int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) )
-is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos = inl (equational-reasoning
-         x  ＝ mul-ℤ one-ℤ x                             by (inv (left-unit-law-mul-ℤ x))
-            ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by inv (ap (λ - → mul-ℤ - x) pos)
-            ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
-is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr neg = inr (equational-reasoning
-         neg-ℤ x
-         ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by tr (λ - → neg-ℤ x ＝ mul-ℤ - x)
-                                                           (inv neg)
-                                                           (left-neg-unit-law-mul-ℤ x)
-         ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z =
+  inl (z ∙ inv (is-zero-sim-unit-ℤ H z))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz
+  with
+  ( is-one-or-neg-one-is-unit-ℤ
+    ( int-unit-ℤ (pr1 (H (λ u → nz (pr1 u)))))
+    ( is-unit-int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos =
+  inl
+    ( equational-reasoning
+      x
+      ＝ mul-ℤ one-ℤ x
+        by (inv (left-unit-law-mul-ℤ x))
+      ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
+        by inv (ap (mul-ℤ' x) pos)
+      ＝ y
+        by pr2 (H (λ u → nz (pr1 u))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
+  inr
+    ( equational-reasoning
+      neg-ℤ x
+      ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
+        by ap (mul-ℤ' x) (inv p)
+      ＝ y
+        by pr2 (H (λ u → nz (pr1 u))))
 ```
 
-### If we have that `sim-unit-ℤ x y` and both `x` and `y` have the same sign,
-
-then they are the same
+### If `sim-unit-ℤ x y` holds and both `x` and `y` have the same sign, then `x ＝ y`
 
 ```agda
 eq-sim-unit-is-nonnegative-ℤ :
   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with
-  ( is-plus-or-minus-sim-unit-ℤ K )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K
+  with is-plus-or-minus-sim-unit-ℤ K
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg with ( is-decidable-is-zero-ℤ a )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg
+  with is-decidable-is-zero-ℤ a
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
   equational-reasoning
-    a ＝ zero-ℤ   by z
-      ＝ neg-ℤ a  by inv (ap neg-ℤ z)
-      ＝ b        by neg
+    a
+    ＝ zero-ℤ
+      by z
+    ＝ neg-ℤ a
+      by inv (ap neg-ℤ z)
+    ＝ b
+      by neg
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
    a H (tr is-nonnegative-ℤ (inv neg) H')))

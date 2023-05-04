@@ -287,7 +287,7 @@ map-impredicative-id-Prop :
 map-impredicative-id-Prop A x .x refl Q r = r x
 
 inv-map-impredicative-id-Prop :
-  {l : Level} (A : Set l ) (x y : type-Set A) →
+  {l : Level} (A : Set l) (x y : type-Set A) →
   type-impredicative-id-Prop A x y → x ＝ y
 inv-map-impredicative-id-Prop A x y H =
   H (λ a b → pair (a ＝ b) (is-set-type-Set A a b)) (λ a → refl)

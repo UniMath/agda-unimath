@@ -26,12 +26,12 @@ A precategory in Homotopy Type Theory consists of:
 
 - a type `A` of objects,
 - for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
-  together with a composition operation `comp : hom y z → hom x y → hom x z`
-  such that:
-- `comp (comp h g) f = comp h (comp g f)` for any morphisms `h : hom z w`,
-  `g : hom y z` and `f : hom x y`,
+  together with a composition operation `_∘_ : hom y z → hom x y → hom x z` such
+  that:
+- `(h ∘ g) ∘ f = h ∘ (g ∘ f)` for any morphisms `h : hom z w`, `g : hom y z` and
+  `f : hom x y`,
 - for each object `x : A` there is a morphism `id_x : hom x x` such that
-  `comp id_x f = f` and `comp g id_x = g` for any morphisms `f : hom x y` and
+  `id_x ∘ f = f` and `g ∘ id_x = g` for any morphisms `f : hom x y` and
   `g : hom z x`.
 
 The reason this is called a *pre*category and not a category in Homotopy Type
@@ -47,10 +47,8 @@ module _
 
   associative-composition-structure-Set : UU (l1 ⊔ l2)
   associative-composition-structure-Set =
-    Σ ( {x y z : A}
-        → type-Set (hom y z)
-        → type-Set (hom x y)
-        → type-Set (hom x z))
+    Σ ( {x y z : A} →
+        type-Set (hom y z) → type-Set (hom x y) → type-Set (hom x z))
       ( λ μ →
         {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
         (f : type-Set (hom x y)) → μ (μ h g) f ＝ μ h (μ g f))
@@ -111,12 +109,12 @@ module _
     type-hom-Precat z x → type-hom-Precat z y
   postcomp-hom-Precat f z = comp-hom-Precat f
 
-  assoc-comp-hom-Precat :
+  associative-comp-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
     ( comp-hom-Precat (comp-hom-Precat h g) f) ＝
     ( comp-hom-Precat h (comp-hom-Precat g f))
-  assoc-comp-hom-Precat = pr2 associative-composition-Precat
+  associative-comp-hom-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
     is-unital-composition-structure-Set
@@ -160,10 +158,11 @@ pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 ### The property of having identity morphisms is a proposition
 
 Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to
-`comp`. It is enough to show that `e = e'` since the right and left unit laws
-are propositions (because all hom-types are sets). By function extensionality,
-it is enough to show that `e x = e' x` for all `x : A`. But by the unit laws we
-have the following chain of equalities: `e x = comp (e' x) (e x) = e' x.`
+composition. It is enough to show that `e = e'` since the right and left unit
+laws are propositions (because all hom-types are sets). By function
+extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by
+the unit laws we have the following chain of equalities:
+`e x = (e' x) ∘ (e x) = e' x.`
 
 ```agda
 module _
@@ -175,7 +174,7 @@ module _
       ( μ : associative-composition-structure-Set hom) →
       all-elements-equal (is-unital-composition-structure-Set hom μ)
     all-elements-equal-is-unital-composition-structure-Set
-      ( pair μ assoc-μ)
+      ( pair μ associative-μ)
       ( pair e (pair left-unit-law-e right-unit-law-e))
       ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
       eq-type-subtype

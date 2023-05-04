@@ -75,8 +75,8 @@ module _
 ### Finite Ferrers diagrams of finite types
 
 ```agda
-ferrers-diagram-𝔽 : {l1 : Level} (l2 l3 : Level) →
-  (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+ferrers-diagram-𝔽 :
+  {l1 : Level} (l2 l3 : Level) (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 ferrers-diagram-𝔽 {l} l2 l3 A =
   Σ ( 𝔽 l2)
     ( λ X →
