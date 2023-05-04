@@ -15,6 +15,8 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.total-decidable-poset-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
@@ -22,9 +24,12 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
+open import foundation.unit-type
 
 open import lists.functoriality-lists
 open import lists.lists
+open import lists.predicates-on-lists
+open import lists.sorted-lists
 ```
 
 </details>
@@ -48,6 +53,30 @@ Note that the univalence axiom is neccessary to prove the second uniqueness
 property of prime factorizations.
 
 ## Definitions
+
+### Prime decomposition of a natural number with list
+
+```agda
+is-prime-list-ℕ :
+  list ℕ → UU lzero
+is-prime-list-ℕ = for-all-list ℕ is-prime-ℕ-Prop
+
+mul-list-ℕ :
+  list ℕ → ℕ
+mul-list-ℕ = fold-list 1 mul-ℕ
+
+is-decomposition-list-ℕ :
+  ℕ → list ℕ → UU lzero
+is-decomposition-list-ℕ x l =
+  mul-list-ℕ l ＝ x
+
+is-prime-decomposition-list-ℕ :
+  ℕ → list ℕ → UU lzero
+is-prime-decomposition-list-ℕ x l =
+  is-sorted-list ℕ-total-decidable-Poset l ×
+  ( is-prime-list-ℕ l ×
+    is-decomposition-list-ℕ x l)
+```
 
 ### Nontrivial divisors
 
@@ -184,6 +213,12 @@ leq-quotient-div-least-prime-divisor-ℕ x H =
 ### The fundamental theorem of arithmetic
 
 ```agda
+is-prime-list-primes-ℕ :
+  (l : list Prime-ℕ) → is-prime-list-ℕ (map-list nat-Prime-ℕ l)
+is-prime-list-primes-ℕ nil = raise-star
+is-prime-list-primes-ℕ (cons x l) =
+  (is-prime-Prime-ℕ x) , (is-prime-list-primes-ℕ l)
+
 list-primes-fundamental-theorem-arithmetic-ℕ :
   (x : ℕ) → leq-ℕ 1 x → list Prime-ℕ
 list-primes-fundamental-theorem-arithmetic-ℕ zero-ℕ ()
@@ -209,4 +244,17 @@ list-fundamental-theorem-arithmetic-ℕ :
   (x : ℕ) → leq-ℕ 1 x → list ℕ
 list-fundamental-theorem-arithmetic-ℕ x H =
   map-list nat-Prime-ℕ (list-primes-fundamental-theorem-arithmetic-ℕ x H)
+
+is-prime-list-fundamental-theorem-arithmetic-ℕ :
+  (x : ℕ)
+  (p : leq-ℕ 1 x) →
+  is-prime-list-ℕ (list-fundamental-theorem-arithmetic-ℕ x p)
+is-prime-list-fundamental-theorem-arithmetic-ℕ x p =
+  is-prime-list-primes-ℕ (list-primes-fundamental-theorem-arithmetic-ℕ x p)
+
+is-sorted-list-fundamental-theorem-arithmetic-ℕ :
+  (x : ℕ) → (p : leq-ℕ 1 x) →
+  is-sorted-list ℕ-total-decidable-Poset (list-fundamental-theorem-arithmetic-ℕ x p)
+is-sorted-list-fundamental-theorem-arithmetic-ℕ =
+  {!!}
 ```
