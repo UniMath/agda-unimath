@@ -89,6 +89,28 @@ is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
 is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
 ```
 
+### Being a prime is a proposition
+
+```agda
+is-prop-is-prime-ℕ :
+  (n : ℕ) → is-prop (is-prime-ℕ n)
+is-prop-is-prime-ℕ n =
+  is-prop-Π
+    ( λ x →
+      is-prop-prod
+        ( is-prop-Π (λ p → is-set-ℕ x 1))
+        ( is-prop-Π (λ p → is-prop-is-proper-divisor-ℕ n x)))
+
+is-prime-ℕ-Prop :
+  (n : ℕ) → Prop lzero
+pr1 (is-prime-ℕ-Prop n) = is-prime-ℕ n
+pr2 (is-prime-ℕ-Prop n) = is-prop-is-prime-ℕ n
+
+is-prop-has-unique-proper-divisor-ℕ :
+  (n : ℕ) → is-prop (has-unique-proper-divisor-ℕ n)
+is-prop-has-unique-proper-divisor-ℕ n = is-property-is-contr
+```
+
 ### The three definitions of primes are equivalent
 
 ```agda

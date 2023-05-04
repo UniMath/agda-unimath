@@ -25,6 +25,8 @@ open import foundation.identity-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 open import foundation.unit-type
+open import foundation.equality-dependent-pair-types
+open import foundation.propositions
 
 open import lists.functoriality-lists
 open import lists.lists
@@ -240,10 +242,100 @@ list-primes-fundamental-theorem-arithmetic-ℕ (succ-ℕ x) H =
     ( succ-ℕ x)
     ( H)
 
+helper-compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ :
+  (x : ℕ) → (H : leq-ℕ 1 x) →
+  based-strong-ind-ℕ 1
+    ( λ _ → list Prime-ℕ)
+    ( nil)
+    ( λ n N f →
+      cons
+        ( least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+        ( f
+          ( quotient-div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+          ( leq-one-quotient-div-ℕ
+            ( nat-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+            ( succ-ℕ n)
+            ( div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+            ( preserves-leq-succ-ℕ 1 n N))
+          ( leq-quotient-div-least-prime-divisor-ℕ n (le-succ-leq-ℕ 1 n N))))
+    ( x)
+    ( H) ＝
+  list-primes-fundamental-theorem-arithmetic-ℕ x H
+helper-compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ (succ-ℕ x) H = refl
+
+compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ :
+  (x : ℕ) → (H : 1 ≤-ℕ x) →
+  list-primes-fundamental-theorem-arithmetic-ℕ (succ-ℕ x) star ＝
+  cons
+    ( least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+    ( list-primes-fundamental-theorem-arithmetic-ℕ
+      ( quotient-div-least-prime-divisor-ℕ
+        ( succ-ℕ x)
+        ( le-succ-leq-ℕ 1 x H))
+      ( leq-one-quotient-div-ℕ
+        ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( succ-ℕ x)
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( preserves-leq-succ-ℕ 1 x H)))
+compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ x H =
+  compute-succ-based-strong-ind-ℕ
+    ( 1)
+    ( λ _ → list Prime-ℕ)
+    ( nil)
+    ( λ n N f →
+      cons
+        ( least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+        ( f
+          ( quotient-div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+          ( leq-one-quotient-div-ℕ
+            ( nat-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+            ( succ-ℕ n)
+            ( div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+            ( preserves-leq-succ-ℕ 1 n N))
+          ( leq-quotient-div-least-prime-divisor-ℕ n (le-succ-leq-ℕ 1 n N))))
+    ( x)
+    ( H)
+    ( star) ∙
+  ap
+    ( cons (least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H)))
+    ( helper-compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ
+      ( quotient-div-least-prime-divisor-ℕ
+        ( succ-ℕ x)
+        ( le-succ-leq-ℕ 1 x H))
+      ( leq-one-quotient-div-ℕ
+        ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( succ-ℕ x)
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( preserves-leq-succ-ℕ 1 x H)))
+
+is-divisors-list-prime-fundamental-theorem-arithmetic-ℕ :
+  {!(x : ℕ) → (1 ≤-ℕ x) → !}
+is-divisors-list-prime-fundamental-theorem-arithmetic-ℕ =
+  {!!}
+
 list-fundamental-theorem-arithmetic-ℕ :
   (x : ℕ) → leq-ℕ 1 x → list ℕ
 list-fundamental-theorem-arithmetic-ℕ x H =
   map-list nat-Prime-ℕ (list-primes-fundamental-theorem-arithmetic-ℕ x H)
+
+compute-list-fundamental-theorem-arithmetic-succ-ℕ :
+  (x : ℕ) → (H : leq-ℕ 1 x) →
+  list-fundamental-theorem-arithmetic-ℕ (succ-ℕ x) star ＝
+  cons
+    ( nat-Prime-ℕ (least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H)))
+    ( list-fundamental-theorem-arithmetic-ℕ
+      ( quotient-div-least-prime-divisor-ℕ
+        ( succ-ℕ x)
+        ( le-succ-leq-ℕ 1 x H))
+      ( leq-one-quotient-div-ℕ
+        ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( succ-ℕ x)
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( preserves-leq-succ-ℕ 1 x H)))
+compute-list-fundamental-theorem-arithmetic-succ-ℕ x H =
+  ap
+    ( map-list nat-Prime-ℕ)
+    ( compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ x H)
 
 is-prime-list-fundamental-theorem-arithmetic-ℕ :
   (x : ℕ)
@@ -252,9 +344,47 @@ is-prime-list-fundamental-theorem-arithmetic-ℕ :
 is-prime-list-fundamental-theorem-arithmetic-ℕ x p =
   is-prime-list-primes-ℕ (list-primes-fundamental-theorem-arithmetic-ℕ x p)
 
+is-sorted-least-element-list-fundamental-theorem-arithmetic-ℕ :
+  (x : ℕ) → (H : leq-ℕ 1 x) →
+  is-sorted-least-element-list
+    ( ℕ-total-decidable-Poset)
+    ( list-fundamental-theorem-arithmetic-ℕ x H)
+is-sorted-least-element-list-fundamental-theorem-arithmetic-ℕ x H =
+  based-strong-ind-ℕ' 1
+    ( λ x H →
+      is-sorted-least-element-list
+        ( ℕ-total-decidable-Poset)
+        ( list-fundamental-theorem-arithmetic-ℕ x H))
+    ( raise-star)
+    ( λ n N f →
+      tr
+        ( λ l →
+          is-sorted-least-element-list
+            ( ℕ-total-decidable-Poset)
+            ( l))
+        ( inv (compute-list-fundamental-theorem-arithmetic-succ-ℕ n N))
+        ( {!!} ,
+          f
+            ( quotient-div-least-prime-divisor-ℕ
+              ( succ-ℕ n)
+              ( le-succ-leq-ℕ 1 n N))
+            ( leq-one-quotient-div-ℕ
+              ( nat-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+              ( succ-ℕ n)
+              ( div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
+              ( preserves-leq-succ-ℕ 1 n N))
+            ( leq-quotient-div-least-prime-divisor-ℕ n (le-succ-leq-ℕ 1 n N))))
+    ( x)
+    ( H)
+
 is-sorted-list-fundamental-theorem-arithmetic-ℕ :
   (x : ℕ) → (p : leq-ℕ 1 x) →
-  is-sorted-list ℕ-total-decidable-Poset (list-fundamental-theorem-arithmetic-ℕ x p)
+  is-sorted-list
+    ( ℕ-total-decidable-Poset)
+    ( list-fundamental-theorem-arithmetic-ℕ x p)
 is-sorted-list-fundamental-theorem-arithmetic-ℕ =
-  {!!}
+  is-sorted-list-is-sorted-least-element-list
+    ( ℕ-total-decidable-Poset)
+    {!!}
+    {!!}
 ```
