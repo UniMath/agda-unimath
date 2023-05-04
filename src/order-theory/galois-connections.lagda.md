@@ -50,8 +50,8 @@ module _
           ( element-Poset Q)
           ( λ y →
             iff-Prop
-              ( leq-poset-Prop Q (map-hom-Poset P Q f x) y)
-              ( leq-poset-Prop P x (map-hom-Poset Q P g y))))
+              ( leq-Poset-Prop Q (map-hom-Poset P Q f x) y)
+              ( leq-Poset-Prop P x (map-hom-Poset Q P g y))))
 
   is-lower-adjoint-Galois-Connection :
     hom-Poset P Q → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

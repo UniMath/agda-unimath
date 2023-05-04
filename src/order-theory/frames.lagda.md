@@ -16,7 +16,7 @@ open import foundation.universe-levels
 open import order-theory.infinite-distributive-law
 open import order-theory.meet-semilattices
 open import order-theory.posets
-open import order-theory.sup-lattices
+open import order-theory.suplattices
 ```
 
 </details>
@@ -32,7 +32,7 @@ simply motivated by a desire to avoid iterated sigma types.
 ```agda
 Frame : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Frame l1 l2 l3 =
-  Σ (Meet-Sup-Lattice l1 l2 l3) (distributive-law-meet-sup-lattice l1 l2 l3)
+  Σ (Meet-Suplattice l1 l2 l3) (distributive-law-meet-suplattice l1 l2 l3)
 ```
 
 ## Now we retrieve all the information from a frame (i.e. break up all of it's components, etc.)
@@ -43,13 +43,13 @@ module _
   where
 
   poset-Frame : Poset l1 l2
-  poset-Frame = poset-Meet-Sup-Lattice (pr1 A)
+  poset-Frame = poset-Meet-Suplattice (pr1 A)
 
   element-Frame : UU l1
   element-Frame = element-Poset poset-Frame
 
   leq-Frame-Prop : (x y : element-Frame) → Prop l2
-  leq-Frame-Prop = leq-poset-Prop poset-Frame
+  leq-Frame-Prop = leq-Poset-Prop poset-Frame
 
   leq-Frame : (x y : element-Frame) → UU l2
   leq-Frame = leq-Poset poset-Frame
@@ -81,26 +81,26 @@ module _
 
   is-meet-semilattice-Frame :
     is-meet-semilattice-Poset poset-Frame
-  is-meet-semilattice-Frame = is-meet-semilattice-Meet-Sup-Lattice (pr1 A)
+  is-meet-semilattice-Frame = is-meet-semilattice-Meet-Suplattice (pr1 A)
 
   meet-semilattice-Frame : Meet-Semilattice l1 l2
   meet-semilattice-Frame = ( poset-Frame , is-meet-semilattice-Frame)
 
-  is-sup-lattice-Frame :
-    is-sup-lattice-Poset l3 poset-Frame
-  is-sup-lattice-Frame = is-sup-lattice-Meet-Sup-Lattice (pr1 A)
+  is-suplattice-Frame :
+    is-suplattice-Poset l3 poset-Frame
+  is-suplattice-Frame = is-suplattice-Meet-Suplattice (pr1 A)
 
-  sup-lattice-Frame : Sup-Lattice l1 l2 l3
-  sup-lattice-Frame = ( poset-Frame , is-sup-lattice-Frame)
+  suplattice-Frame : Suplattice l1 l2 l3
+  suplattice-Frame = ( poset-Frame , is-suplattice-Frame)
 
-  meet-sup-lattice-Frame :
-    Meet-Sup-Lattice l1 l2 l3
-  pr1 meet-sup-lattice-Frame =
+  meet-suplattice-Frame :
+    Meet-Suplattice l1 l2 l3
+  pr1 meet-suplattice-Frame =
     poset-Frame
-  pr1 (pr2 meet-sup-lattice-Frame) =
+  pr1 (pr2 meet-suplattice-Frame) =
     is-meet-semilattice-Frame
-  pr2 (pr2 meet-sup-lattice-Frame) =
-    is-sup-lattice-Frame
+  pr2 (pr2 meet-suplattice-Frame) =
+    is-suplattice-Frame
 
   meet-Frame :
     (x y : element-Frame) →
@@ -110,13 +110,13 @@ module _
   sup-Frame :
     (I : UU l3) → (I → element-Frame) →
     element-Frame
-  sup-Frame I b = pr1 (is-sup-lattice-Frame I b)
+  sup-Frame I b = pr1 (is-suplattice-Frame I b)
 
   distributive-law-Frame :
-    distributive-law-meet-sup-lattice l1 l2 l3 meet-sup-lattice-Frame
+    distributive-law-meet-suplattice l1 l2 l3 meet-suplattice-Frame
   distributive-law-Frame = pr2 A
 
   frame-Frame : Frame l1 l2 l3
-  pr1 frame-Frame = meet-sup-lattice-Frame
+  pr1 frame-Frame = meet-suplattice-Frame
   pr2 frame-Frame = distributive-law-Frame
 ```

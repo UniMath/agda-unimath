@@ -35,10 +35,10 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-order-poset-Prop :
+  preserves-order-Poset-Prop :
     (element-Poset P → element-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-poset-Prop =
-    preserves-order-preorder-Prop (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-Poset-Prop =
+    preserves-order-Preorder-Prop (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-Poset :
     (element-Poset P → element-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)

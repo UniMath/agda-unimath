@@ -37,8 +37,8 @@ module _
   hom-Frame = Σ (element-Frame A → element-Frame B)
     (λ f → preserves-order-Poset (poset-Frame A) (poset-Frame B) f ×
       preserves-meets-sups
-        ( meet-sup-lattice-Frame A)
-        ( meet-sup-lattice-Frame B)
+        ( meet-suplattice-Frame A)
+        ( meet-suplattice-Frame B)
         ( f))
 
   map-hom-Frame : hom-Frame → element-Frame A → element-Frame B
@@ -52,8 +52,8 @@ module _
   preserves-meets-sups-hom-Frame :
     (H : hom-Frame) →
     preserves-meets-sups
-      ( meet-sup-lattice-Frame A)
-      ( meet-sup-lattice-Frame B)
+      ( meet-suplattice-Frame A)
+      ( meet-suplattice-Frame B)
       ( map-hom-Frame H)
   preserves-meets-sups-hom-Frame = pr2 ∘ pr2
 
@@ -68,8 +68,8 @@ module _
   preserves-sups-hom-Frame :
     (H : hom-Frame) →
     preserves-sups
-      ( sup-lattice-Frame A)
-      ( sup-lattice-Frame B)
+      ( suplattice-Frame A)
+      ( suplattice-Frame B)
       ( map-hom-Frame H)
   preserves-sups-hom-Frame = pr2 ∘ preserves-meets-sups-hom-Frame
 ```

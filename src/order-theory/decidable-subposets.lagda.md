@@ -37,10 +37,10 @@ module _
   eq-element-decidable-sub-Poset =
     eq-element-sub-Poset X (subtype-decidable-subtype S)
 
-  leq-decidable-sub-poset-Prop :
+  leq-decidable-sub-Poset-Prop :
     (x y : element-decidable-sub-Poset) → Prop l2
-  leq-decidable-sub-poset-Prop =
-    leq-sub-poset-Prop X (subtype-decidable-subtype S)
+  leq-decidable-sub-Poset-Prop =
+    leq-sub-Poset-Prop X (subtype-decidable-subtype S)
 
   leq-decidable-sub-Poset : (x y : element-decidable-sub-Poset) → UU l2
   leq-decidable-sub-Poset =

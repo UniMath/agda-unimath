@@ -33,64 +33,64 @@ independently.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (A : Meet-Sup-Lattice l1 l2 l3)
-  (B : Meet-Sup-Lattice l4 l5 l6)
+  (A : Meet-Suplattice l1 l2 l3)
+  (B : Meet-Suplattice l4 l5 l6)
   where
 
   preserves-meets-sups :
-    (element-Meet-Sup-Lattice A → element-Meet-Sup-Lattice B) →
+    (element-Meet-Suplattice A → element-Meet-Suplattice B) →
     UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   preserves-meets-sups f =
     preserves-meets
-      ( meet-semilattice-Meet-Sup-Lattice A)
-      ( meet-semilattice-Meet-Sup-Lattice B)
+      ( meet-semilattice-Meet-Suplattice A)
+      ( meet-semilattice-Meet-Suplattice B)
       ( f) ×
     preserves-sups
-      ( sup-lattice-Meet-Sup-Lattice A)
-      ( sup-lattice-Meet-Sup-Lattice B)
+      ( suplattice-Meet-Suplattice A)
+      ( suplattice-Meet-Suplattice B)
       ( f)
 
-  hom-Meet-Sup-Lattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
-  hom-Meet-Sup-Lattice =
-    Σ ( element-Meet-Sup-Lattice A → element-Meet-Sup-Lattice B)
+  hom-Meet-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+  hom-Meet-Suplattice =
+    Σ ( element-Meet-Suplattice A → element-Meet-Suplattice B)
       ( λ f →
         preserves-order-Poset
-          ( poset-Meet-Sup-Lattice A)
-          ( poset-Meet-Sup-Lattice B)
+          ( poset-Meet-Suplattice A)
+          ( poset-Meet-Suplattice B)
           ( f) ×
         ( preserves-meets-sups f))
 
-  map-hom-Meet-Sup-Lattice :
-    hom-Meet-Sup-Lattice →
-    element-Meet-Sup-Lattice A → element-Meet-Sup-Lattice B
-  map-hom-Meet-Sup-Lattice = pr1
+  map-hom-Meet-Suplattice :
+    hom-Meet-Suplattice →
+    element-Meet-Suplattice A → element-Meet-Suplattice B
+  map-hom-Meet-Suplattice = pr1
 
-  preserves-order-Meet-Sup-Lattice :
-    (H : hom-Meet-Sup-Lattice) →
+  preserves-order-Meet-Suplattice :
+    (H : hom-Meet-Suplattice) →
     preserves-order-Poset
-      ( poset-Meet-Sup-Lattice A)
-      ( poset-Meet-Sup-Lattice B)
-      ( map-hom-Meet-Sup-Lattice H)
-  preserves-order-Meet-Sup-Lattice = pr1 ∘ pr2
+      ( poset-Meet-Suplattice A)
+      ( poset-Meet-Suplattice B)
+      ( map-hom-Meet-Suplattice H)
+  preserves-order-Meet-Suplattice = pr1 ∘ pr2
 
-  preserves-meets-sups-Meet-Sup-Lattice :
-    (H : hom-Meet-Sup-Lattice) →
-    preserves-meets-sups (map-hom-Meet-Sup-Lattice H)
-  preserves-meets-sups-Meet-Sup-Lattice = pr2 ∘ pr2
+  preserves-meets-sups-Meet-Suplattice :
+    (H : hom-Meet-Suplattice) →
+    preserves-meets-sups (map-hom-Meet-Suplattice H)
+  preserves-meets-sups-Meet-Suplattice = pr2 ∘ pr2
 
-  preserves-meets-Meet-Sup-Lattice :
-    (H : hom-Meet-Sup-Lattice) →
+  preserves-meets-Meet-Suplattice :
+    (H : hom-Meet-Suplattice) →
     preserves-meets
-      ( meet-semilattice-Meet-Sup-Lattice A)
-      ( meet-semilattice-Meet-Sup-Lattice B)
-      ( map-hom-Meet-Sup-Lattice H)
-  preserves-meets-Meet-Sup-Lattice = pr1 ∘ preserves-meets-sups-Meet-Sup-Lattice
+      ( meet-semilattice-Meet-Suplattice A)
+      ( meet-semilattice-Meet-Suplattice B)
+      ( map-hom-Meet-Suplattice H)
+  preserves-meets-Meet-Suplattice = pr1 ∘ preserves-meets-sups-Meet-Suplattice
 
-  preserves-sups-Meet-Sup-Lattice :
-    (H : hom-Meet-Sup-Lattice) →
+  preserves-sups-Meet-Suplattice :
+    (H : hom-Meet-Suplattice) →
     preserves-sups
-      ( sup-lattice-Meet-Sup-Lattice A)
-      ( sup-lattice-Meet-Sup-Lattice B)
-      ( map-hom-Meet-Sup-Lattice H)
-  preserves-sups-Meet-Sup-Lattice = pr2 ∘ preserves-meets-sups-Meet-Sup-Lattice
+      ( suplattice-Meet-Suplattice A)
+      ( suplattice-Meet-Suplattice B)
+      ( map-hom-Meet-Suplattice H)
+  preserves-sups-Meet-Suplattice = pr2 ∘ preserves-meets-sups-Meet-Suplattice
 ```

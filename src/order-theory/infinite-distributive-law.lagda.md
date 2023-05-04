@@ -15,7 +15,7 @@ open import foundation.universe-levels
 
 open import order-theory.meet-semilattices
 open import order-theory.posets
-open import order-theory.sup-lattices
+open import order-theory.suplattices
 ```
 
 </details>
@@ -36,22 +36,22 @@ module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
 
-  is-meet-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-meet-sup-lattice-poset-Prop =
+  is-meet-suplattice-Poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-meet-suplattice-Poset-Prop =
     prod-Prop
-      ( is-meet-semilattice-poset-Prop P)
-      ( is-sup-lattice-poset-Prop l3 P)
+      ( is-meet-semilattice-Poset-Prop P)
+      ( is-suplattice-Poset-Prop l3 P)
 
-  is-meet-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-meet-sup-lattice-Poset = type-Prop is-meet-sup-lattice-poset-Prop
+  is-meet-suplattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  is-meet-suplattice-Poset = type-Prop is-meet-suplattice-Poset-Prop
 
-  is-prop-is-meet-sup-lattice-Poset : is-prop is-meet-sup-lattice-Poset
-  is-prop-is-meet-sup-lattice-Poset =
-    is-prop-type-Prop is-meet-sup-lattice-poset-Prop
+  is-prop-is-meet-suplattice-Poset : is-prop is-meet-suplattice-Poset
+  is-prop-is-meet-suplattice-Poset =
+    is-prop-type-Prop is-meet-suplattice-Poset-Prop
 
-Meet-Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Meet-Sup-Lattice l1 l2 l3 =
-  Σ (Poset l1 l2) (is-meet-sup-lattice-Poset l3)
+Meet-Suplattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+Meet-Suplattice l1 l2 l3 =
+  Σ (Poset l1 l2) (is-meet-suplattice-Poset l3)
 ```
 
 We need to provide the appropriate components to state the infinite distributive
@@ -59,94 +59,94 @@ law.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Meet-Sup-Lattice l1 l2 l3)
+  {l1 l2 l3 : Level} (A : Meet-Suplattice l1 l2 l3)
   where
 
-  poset-Meet-Sup-Lattice : Poset l1 l2
-  poset-Meet-Sup-Lattice = pr1 A
+  poset-Meet-Suplattice : Poset l1 l2
+  poset-Meet-Suplattice = pr1 A
 
-  element-Meet-Sup-Lattice : UU l1
-  element-Meet-Sup-Lattice =
-    element-Poset poset-Meet-Sup-Lattice
+  element-Meet-Suplattice : UU l1
+  element-Meet-Suplattice =
+    element-Poset poset-Meet-Suplattice
 
-  leq-meet-sup-lattice-Prop : (x y : element-Meet-Sup-Lattice) → Prop l2
-  leq-meet-sup-lattice-Prop = leq-poset-Prop poset-Meet-Sup-Lattice
+  leq-meet-suplattice-Prop : (x y : element-Meet-Suplattice) → Prop l2
+  leq-meet-suplattice-Prop = leq-Poset-Prop poset-Meet-Suplattice
 
-  leq-Meet-Sup-Lattice : (x y : element-Meet-Sup-Lattice) → UU l2
-  leq-Meet-Sup-Lattice = leq-Poset poset-Meet-Sup-Lattice
+  leq-Meet-Suplattice : (x y : element-Meet-Suplattice) → UU l2
+  leq-Meet-Suplattice = leq-Poset poset-Meet-Suplattice
 
-  is-prop-leq-Meet-Sup-Lattice :
-    (x y : element-Meet-Sup-Lattice) → is-prop (leq-Meet-Sup-Lattice x y)
-  is-prop-leq-Meet-Sup-Lattice = is-prop-leq-Poset poset-Meet-Sup-Lattice
+  is-prop-leq-Meet-Suplattice :
+    (x y : element-Meet-Suplattice) → is-prop (leq-Meet-Suplattice x y)
+  is-prop-leq-Meet-Suplattice = is-prop-leq-Poset poset-Meet-Suplattice
 
-  refl-leq-Meet-Sup-Lattice :
-    (x : element-Meet-Sup-Lattice) → leq-Meet-Sup-Lattice x x
-  refl-leq-Meet-Sup-Lattice = refl-leq-Poset poset-Meet-Sup-Lattice
+  refl-leq-Meet-Suplattice :
+    (x : element-Meet-Suplattice) → leq-Meet-Suplattice x x
+  refl-leq-Meet-Suplattice = refl-leq-Poset poset-Meet-Suplattice
 
-  antisymmetric-leq-Meet-Sup-Lattice :
-    (x y : element-Meet-Sup-Lattice) →
-    leq-Meet-Sup-Lattice x y → leq-Meet-Sup-Lattice y x → x ＝ y
-  antisymmetric-leq-Meet-Sup-Lattice =
-    antisymmetric-leq-Poset poset-Meet-Sup-Lattice
+  antisymmetric-leq-Meet-Suplattice :
+    (x y : element-Meet-Suplattice) →
+    leq-Meet-Suplattice x y → leq-Meet-Suplattice y x → x ＝ y
+  antisymmetric-leq-Meet-Suplattice =
+    antisymmetric-leq-Poset poset-Meet-Suplattice
 
-  transitive-leq-Meet-Sup-Lattice :
-    (x y z : element-Meet-Sup-Lattice) →
-    leq-Meet-Sup-Lattice y z → leq-Meet-Sup-Lattice x y →
-    leq-Meet-Sup-Lattice x z
-  transitive-leq-Meet-Sup-Lattice = transitive-leq-Poset poset-Meet-Sup-Lattice
+  transitive-leq-Meet-Suplattice :
+    (x y z : element-Meet-Suplattice) →
+    leq-Meet-Suplattice y z → leq-Meet-Suplattice x y →
+    leq-Meet-Suplattice x z
+  transitive-leq-Meet-Suplattice = transitive-leq-Poset poset-Meet-Suplattice
 
-  is-set-element-Meet-Sup-Lattice : is-set element-Meet-Sup-Lattice
-  is-set-element-Meet-Sup-Lattice = is-set-element-Poset poset-Meet-Sup-Lattice
+  is-set-element-Meet-Suplattice : is-set element-Meet-Suplattice
+  is-set-element-Meet-Suplattice = is-set-element-Poset poset-Meet-Suplattice
 
-  element-meet-sup-lattice-Set : Set l1
-  element-meet-sup-lattice-Set = element-poset-Set poset-Meet-Sup-Lattice
+  element-meet-suplattice-Set : Set l1
+  element-meet-suplattice-Set = element-poset-Set poset-Meet-Suplattice
 
-  is-meet-semilattice-Meet-Sup-Lattice :
-    is-meet-semilattice-Poset poset-Meet-Sup-Lattice
-  is-meet-semilattice-Meet-Sup-Lattice = pr1 (pr2 A)
+  is-meet-semilattice-Meet-Suplattice :
+    is-meet-semilattice-Poset poset-Meet-Suplattice
+  is-meet-semilattice-Meet-Suplattice = pr1 (pr2 A)
 
-  meet-semilattice-Meet-Sup-Lattice : Meet-Semilattice l1 l2
-  meet-semilattice-Meet-Sup-Lattice =
-    ( poset-Meet-Sup-Lattice , is-meet-semilattice-Meet-Sup-Lattice)
+  meet-semilattice-Meet-Suplattice : Meet-Semilattice l1 l2
+  meet-semilattice-Meet-Suplattice =
+    ( poset-Meet-Suplattice , is-meet-semilattice-Meet-Suplattice)
 
-  is-sup-lattice-Meet-Sup-Lattice :
-    is-sup-lattice-Poset l3 poset-Meet-Sup-Lattice
-  is-sup-lattice-Meet-Sup-Lattice = pr2 (pr2 A)
+  is-suplattice-Meet-Suplattice :
+    is-suplattice-Poset l3 poset-Meet-Suplattice
+  is-suplattice-Meet-Suplattice = pr2 (pr2 A)
 
-  sup-lattice-Meet-Sup-Lattice : Sup-Lattice l1 l2 l3
-  sup-lattice-Meet-Sup-Lattice =
-    ( poset-Meet-Sup-Lattice , is-sup-lattice-Meet-Sup-Lattice)
+  suplattice-Meet-Suplattice : Suplattice l1 l2 l3
+  suplattice-Meet-Suplattice =
+    ( poset-Meet-Suplattice , is-suplattice-Meet-Suplattice)
 
-  meet-sup-lattice-Meet-Sup-Lattice :
-    Meet-Sup-Lattice l1 l2 l3
-  pr1 meet-sup-lattice-Meet-Sup-Lattice =
-    poset-Meet-Sup-Lattice
-  pr1 (pr2 meet-sup-lattice-Meet-Sup-Lattice) =
-    is-meet-semilattice-Meet-Sup-Lattice
-  pr2 (pr2 meet-sup-lattice-Meet-Sup-Lattice) =
-    is-sup-lattice-Meet-Sup-Lattice
+  meet-suplattice-Meet-Suplattice :
+    Meet-Suplattice l1 l2 l3
+  pr1 meet-suplattice-Meet-Suplattice =
+    poset-Meet-Suplattice
+  pr1 (pr2 meet-suplattice-Meet-Suplattice) =
+    is-meet-semilattice-Meet-Suplattice
+  pr2 (pr2 meet-suplattice-Meet-Suplattice) =
+    is-suplattice-Meet-Suplattice
 
-  meet-Meet-Sup-Lattice :
-    (x y : element-Meet-Sup-Lattice) →
-    element-Meet-Sup-Lattice
-  meet-Meet-Sup-Lattice x y = pr1 (is-meet-semilattice-Meet-Sup-Lattice x y)
+  meet-Meet-Suplattice :
+    (x y : element-Meet-Suplattice) →
+    element-Meet-Suplattice
+  meet-Meet-Suplattice x y = pr1 (is-meet-semilattice-Meet-Suplattice x y)
 
-  sup-Meet-Sup-Lattice :
-    (I : UU l3) → (I → element-Meet-Sup-Lattice) →
-    element-Meet-Sup-Lattice
-  sup-Meet-Sup-Lattice I f = pr1 (is-sup-lattice-Meet-Sup-Lattice I f)
+  sup-Meet-Suplattice :
+    (I : UU l3) → (I → element-Meet-Suplattice) →
+    element-Meet-Suplattice
+  sup-Meet-Suplattice I f = pr1 (is-suplattice-Meet-Suplattice I f)
 ```
 
 ## Statement of the infinite distributive law
 
 ```agda
-distributive-law-meet-sup-lattice :
-  (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
-distributive-law-meet-sup-lattice l1 l2 l3 A =
-  (a : element-Meet-Sup-Lattice A) → {I : UU l3} →
-  (b : I → element-Meet-Sup-Lattice A) →
-  (meet-Meet-Sup-Lattice A a (sup-Meet-Sup-Lattice A I b) ＝
-  sup-Meet-Sup-Lattice A I (λ i → (meet-Meet-Sup-Lattice A a (b i))))
+distributive-law-meet-suplattice :
+  (l1 l2 l3 : Level) → (Meet-Suplattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
+distributive-law-meet-suplattice l1 l2 l3 A =
+  (a : element-Meet-Suplattice A) → {I : UU l3} →
+  (b : I → element-Meet-Suplattice A) →
+  (meet-Meet-Suplattice A a (sup-Meet-Suplattice A I b) ＝
+  sup-Meet-Suplattice A I (λ i → (meet-Meet-Suplattice A a (b i))))
 ```
 
 This notation is not easy on the eye, but recall, in more familiar notation the

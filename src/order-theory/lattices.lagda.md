@@ -30,19 +30,19 @@ lower bound) and a join (a least upper bound)
 ### Order theoretic lattices
 
 ```agda
-is-lattice-poset-Prop :
+is-lattice-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
-is-lattice-poset-Prop P =
+is-lattice-Poset-Prop P =
   prod-Prop
-    ( is-meet-semilattice-poset-Prop P)
-    ( is-join-semilattice-poset-Prop P)
+    ( is-meet-semilattice-Poset-Prop P)
+    ( is-join-semilattice-Poset-Prop P)
 
 is-lattice-Poset : {l1 l2 : Level} → Poset l1 l2 → UU (l1 ⊔ l2)
-is-lattice-Poset P = type-Prop (is-lattice-poset-Prop P)
+is-lattice-Poset P = type-Prop (is-lattice-Poset-Prop P)
 
 is-prop-is-lattice-Poset :
   {l1 l2 : Level} (P : Poset l1 l2) → is-prop (is-lattice-Poset P)
-is-prop-is-lattice-Poset P = is-prop-type-Prop (is-lattice-poset-Prop P)
+is-prop-is-lattice-Poset P = is-prop-type-Prop (is-lattice-Poset-Prop P)
 
 Lattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Lattice l1 l2 = Σ (Poset l1 l2) is-lattice-Poset
@@ -58,7 +58,7 @@ module _
   element-Lattice = element-Poset poset-Lattice
 
   leq-lattice-Prop : (x y : element-Lattice) → Prop l2
-  leq-lattice-Prop = leq-poset-Prop poset-Lattice
+  leq-lattice-Prop = leq-Poset-Prop poset-Lattice
 
   leq-Lattice : (x y : element-Lattice) → UU l2
   leq-Lattice = leq-Poset poset-Lattice

@@ -60,10 +60,10 @@ module _
   element-total-decidable-Preorder =
     element-Preorder preorder-total-decidable-Preorder
 
-  leq-total-decidable-preorder-Prop :
+  leq-total-decidable-Preorder-Prop :
     (x y : element-total-decidable-Preorder) → Prop l2
-  leq-total-decidable-preorder-Prop =
-    leq-preorder-Prop preorder-total-decidable-Preorder
+  leq-total-decidable-Preorder-Prop =
+    leq-Preorder-Prop preorder-total-decidable-Preorder
 
   leq-total-decidable-Preorder :
     (x y : element-total-decidable-Preorder) → UU l2
@@ -76,10 +76,10 @@ module _
   is-prop-leq-total-decidable-Preorder =
     is-prop-leq-Preorder preorder-total-decidable-Preorder
 
-  strict-leq-total-decidable-preorder-Prop :
+  strict-leq-total-decidable-Preorder-Prop :
     (x y : element-total-decidable-Preorder) → Prop (l1 ⊔ l2)
-  strict-leq-total-decidable-preorder-Prop =
-    strict-leq-preorder-Prop preorder-total-decidable-Preorder
+  strict-leq-total-decidable-Preorder-Prop =
+    strict-leq-Preorder-Prop preorder-total-decidable-Preorder
 
   strict-leq-total-decidable-Preorder :
     (x y : element-total-decidable-Preorder) → UU (l1 ⊔ l2)
@@ -136,7 +136,7 @@ module _
       ( ( λ {refl → p (refl-leq-total-decidable-Preorder x)}) ,
          apply-universal-property-trunc-Prop
            ( is-total-preorder-total-decidable-Preorder y x)
-           ( leq-total-decidable-preorder-Prop y x)
+           ( leq-total-decidable-Preorder-Prop y x)
            ( ind-coprod
                ( λ _ → leq-total-decidable-Preorder y x)
                ( id)

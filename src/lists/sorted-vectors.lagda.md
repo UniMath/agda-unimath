@@ -40,20 +40,20 @@ In these file, we define sorted vectors.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : total-decidable-Poset l1 l2)
+  {l1 l2 : Level} (X : total-Decidable-Poset l1 l2)
   where
 
   is-sorted-vec-Prop :
-    {n : ℕ} → vec (element-total-decidable-Poset X) n → Prop l2
+    {n : ℕ} → vec (element-total-Decidable-Poset X) n → Prop l2
   is-sorted-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
     prod-Prop
-      ( leq-total-decidable-poset-Prop X x y)
+      ( leq-total-Decidable-Poset-Prop X x y)
       ( is-sorted-vec-Prop (y ∷ v))
 
   is-sorted-vec :
-    {n : ℕ} → vec (element-total-decidable-Poset X) n → UU l2
+    {n : ℕ} → vec (element-total-Decidable-Poset X) n → UU l2
   is-sorted-vec l = type-Prop (is-sorted-vec-Prop l)
 ```
 
@@ -61,17 +61,17 @@ module _
 
 ```agda
   is-least-element-vec-Prop :
-    {n : ℕ} → element-total-decidable-Poset X →
-    vec (element-total-decidable-Poset X) n → Prop l2
+    {n : ℕ} → element-total-Decidable-Poset X →
+    vec (element-total-Decidable-Poset X) n → Prop l2
   is-least-element-vec-Prop {0} x v = raise-unit-Prop l2
   is-least-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
     prod-Prop
-      ( leq-total-decidable-poset-Prop X x y)
+      ( leq-total-Decidable-Poset-Prop X x y)
       ( is-least-element-vec-Prop x v)
 
   is-least-element-vec :
-    {n : ℕ} → element-total-decidable-Poset X →
-    vec (element-total-decidable-Poset X) n → UU l2
+    {n : ℕ} → element-total-Decidable-Poset X →
+    vec (element-total-Decidable-Poset X) n → UU l2
   is-least-element-vec x v = type-Prop (is-least-element-vec-Prop x v)
 ```
 
@@ -82,15 +82,15 @@ module _
 ```agda
   is-sorted-tail-is-sorted-vec :
     {n : ℕ} →
-    (v : vec (element-total-decidable-Poset X) (succ-ℕ n)) →
+    (v : vec (element-total-Decidable-Poset X) (succ-ℕ n)) →
     is-sorted-vec v → is-sorted-vec (tail-vec v)
   is-sorted-tail-is-sorted-vec {zero-ℕ} (x ∷ empty-vec) s = raise-star
   is-sorted-tail-is-sorted-vec {succ-ℕ n} (x ∷ y ∷ v) s = pr2 s
 
   is-leq-head-head-tail-is-sorted-vec :
-    {n : ℕ} → (v : vec (element-total-decidable-Poset X) (succ-ℕ (succ-ℕ n))) →
+    {n : ℕ} → (v : vec (element-total-Decidable-Poset X) (succ-ℕ (succ-ℕ n))) →
     is-sorted-vec v →
-    leq-total-decidable-Poset X (head-vec v) (head-vec (tail-vec v))
+    leq-total-Decidable-Poset X (head-vec v) (head-vec (tail-vec v))
   is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
 ```
 
@@ -99,9 +99,9 @@ module _
 ```agda
   is-least-element-vec-is-leq-head-sorted-vec :
     {n : ℕ}
-    (x : element-total-decidable-Poset X)
-    (v : vec (element-total-decidable-Poset X) (succ-ℕ n)) →
-    is-sorted-vec v → leq-total-decidable-Poset X x (head-vec v) →
+    (x : element-total-Decidable-Poset X)
+    (v : vec (element-total-Decidable-Poset X) (succ-ℕ n)) →
+    is-sorted-vec v → leq-total-Decidable-Poset X x (head-vec v) →
     is-least-element-vec x v
   is-least-element-vec-is-leq-head-sorted-vec {zero-ℕ} x (y ∷ v) s p =
     p , raise-star
@@ -111,7 +111,7 @@ module _
         ( x)
         ( v)
         ( is-sorted-tail-is-sorted-vec (y ∷ v) s)
-        ( transitive-leq-total-decidable-Poset
+        ( transitive-leq-total-Decidable-Poset
             ( X)
             ( x)
             ( y)
@@ -124,7 +124,7 @@ module _
 
 ```agda
   is-sorted-least-element-vec-Prop :
-    {n : ℕ} → vec (element-total-decidable-Poset X) n → Prop l2
+    {n : ℕ} → vec (element-total-Decidable-Poset X) n → Prop l2
   is-sorted-least-element-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
@@ -133,13 +133,13 @@ module _
       ( is-sorted-least-element-vec-Prop v)
 
   is-sorted-least-element-vec :
-    {n : ℕ} → vec (element-total-decidable-Poset X) n → UU l2
+    {n : ℕ} → vec (element-total-Decidable-Poset X) n → UU l2
   is-sorted-least-element-vec v =
     type-Prop (is-sorted-least-element-vec-Prop v)
 
   is-sorted-least-element-vec-is-sorted-vec :
     {n : ℕ}
-    (v : vec (element-total-decidable-Poset X) n) →
+    (v : vec (element-total-Decidable-Poset X) n) →
     is-sorted-vec v → is-sorted-least-element-vec v
   is-sorted-least-element-vec-is-sorted-vec {0} v x = raise-star
   is-sorted-least-element-vec-is-sorted-vec {1} v x = raise-star
@@ -152,7 +152,7 @@ module _
 
   is-sorted-vec-is-sorted-least-element-vec :
     {n : ℕ}
-    (v : vec (element-total-decidable-Poset X) n) →
+    (v : vec (element-total-Decidable-Poset X) n) →
     is-sorted-least-element-vec v →
     is-sorted-vec v
   is-sorted-vec-is-sorted-least-element-vec {0} v x = raise-star
@@ -170,9 +170,9 @@ module _
 ```agda
   is-sorted-vec-is-sorted-tail-is-leq-head-vec :
     {n : ℕ}
-    (v : vec (element-total-decidable-Poset X) (succ-ℕ (succ-ℕ n))) →
+    (v : vec (element-total-Decidable-Poset X) (succ-ℕ (succ-ℕ n))) →
     is-sorted-vec (tail-vec v) →
-    (leq-total-decidable-Poset X (head-vec v) (head-vec (tail-vec v))) →
+    (leq-total-Decidable-Poset X (head-vec v) (head-vec (tail-vec v))) →
     is-sorted-vec v
   is-sorted-vec-is-sorted-tail-is-leq-head-vec (x ∷ y ∷ v) s p = p , s
 ```
@@ -182,24 +182,24 @@ module _
 ```agda
   is-least-element-functional-vec-Prop :
     (n : ℕ)
-    (x : element-total-decidable-Poset X)
-    (fv : functional-vec (element-total-decidable-Poset X) n) →
+    (x : element-total-Decidable-Poset X)
+    (fv : functional-vec (element-total-Decidable-Poset X) n) →
     Prop l2
   is-least-element-functional-vec-Prop n x fv =
-    Π-Prop (Fin n) λ k → leq-total-decidable-poset-Prop X x (fv k)
+    Π-Prop (Fin n) λ k → leq-total-Decidable-Poset-Prop X x (fv k)
 
   is-least-element-functional-vec :
     (n : ℕ)
-    (x : element-total-decidable-Poset X)
-    (fv : functional-vec (element-total-decidable-Poset X) n) →
+    (x : element-total-Decidable-Poset X)
+    (fv : functional-vec (element-total-Decidable-Poset X) n) →
     UU l2
   is-least-element-functional-vec n x fv =
     type-Prop (is-least-element-functional-vec-Prop n x fv)
 
   is-least-element-permute-functional-vec :
     (n : ℕ)
-    (x : element-total-decidable-Poset X)
-    (fv : functional-vec (element-total-decidable-Poset X) n)
+    (x : element-total-Decidable-Poset X)
+    (fv : functional-vec (element-total-Decidable-Poset X) n)
     (a : Permutation n) →
     is-least-element-functional-vec n x fv →
     is-least-element-functional-vec n x (fv ∘ map-equiv a)
@@ -208,8 +208,8 @@ module _
 
   is-least-element-vec-is-least-element-functional-vec :
     (n : ℕ)
-    (x : element-total-decidable-Poset X)
-    (fv : functional-vec (element-total-decidable-Poset X) n) →
+    (x : element-total-Decidable-Poset X)
+    (fv : functional-vec (element-total-Decidable-Poset X) n) →
     is-least-element-functional-vec n x fv →
     is-least-element-vec x (listed-vec-functional-vec n fv)
   is-least-element-vec-is-least-element-functional-vec 0 x fv p = raise-star
@@ -223,8 +223,8 @@ module _
 
   is-least-element-functional-vec-is-least-element-vec :
     (n : ℕ)
-    (x : element-total-decidable-Poset X)
-    (v : vec (element-total-decidable-Poset X) n) →
+    (x : element-total-Decidable-Poset X)
+    (v : vec (element-total-Decidable-Poset X) n) →
     is-least-element-vec x v →
     is-least-element-functional-vec n x (functional-vec-vec n v)
   is-least-element-functional-vec-is-least-element-vec
@@ -244,8 +244,8 @@ module _
 
   is-least-element-permute-vec :
     {n : ℕ}
-    (x : element-total-decidable-Poset X)
-    (v : vec (element-total-decidable-Poset X) n)
+    (x : element-total-Decidable-Poset X)
+    (v : vec (element-total-Decidable-Poset X) n)
     (a : Permutation n) →
     is-least-element-vec x v →
     is-least-element-vec x (permute-vec n v a)

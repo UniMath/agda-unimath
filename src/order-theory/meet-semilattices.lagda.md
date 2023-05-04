@@ -36,22 +36,22 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-meet-semilattice-poset-Prop : Prop (l1 ⊔ l2)
-  is-meet-semilattice-poset-Prop =
+  is-meet-semilattice-Poset-Prop : Prop (l1 ⊔ l2)
+  is-meet-semilattice-Poset-Prop =
     Π-Prop
       ( element-Poset P)
       ( λ x →
         Π-Prop
           ( element-Poset P)
-          ( has-greatest-binary-lower-bound-poset-Prop P x))
+          ( has-greatest-binary-lower-bound-Poset-Prop P x))
 
   is-meet-semilattice-Poset : UU (l1 ⊔ l2)
-  is-meet-semilattice-Poset = type-Prop is-meet-semilattice-poset-Prop
+  is-meet-semilattice-Poset = type-Prop is-meet-semilattice-Poset-Prop
 
   is-prop-is-meet-semilattice-Poset :
     is-prop is-meet-semilattice-Poset
   is-prop-is-meet-semilattice-Poset =
-    is-prop-type-Prop is-meet-semilattice-poset-Prop
+    is-prop-type-Prop is-meet-semilattice-Poset-Prop
 
 Meet-Semilattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Meet-Semilattice l1 l2 = Σ (Poset l1 l2) is-meet-semilattice-Poset
@@ -67,7 +67,7 @@ module _
   element-Meet-Semilattice = element-Poset poset-Meet-Semilattice
 
   leq-meet-semilattice-Prop : (x y : element-Meet-Semilattice) → Prop l2
-  leq-meet-semilattice-Prop = leq-poset-Prop poset-Meet-Semilattice
+  leq-meet-semilattice-Prop = leq-Poset-Prop poset-Meet-Semilattice
 
   leq-Meet-Semilattice : (x y : element-Meet-Semilattice) → UU l2
   leq-Meet-Semilattice = leq-Poset poset-Meet-Semilattice

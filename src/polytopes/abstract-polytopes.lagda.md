@@ -140,7 +140,7 @@ module _
 
     face-prepolytope-Set : Set l1
     face-prepolytope-Set =
-      face-finitely-graded-poset-Set finitely-graded-poset-Prepolytope i
+      face-Finitely-Graded-Poset-Set finitely-graded-poset-Prepolytope i
 
     face-Prepolytope : UU l1
     face-Prepolytope =
@@ -157,7 +157,7 @@ module _
 
     adjancent-prepolytope-Prop : Prop l2
     adjancent-prepolytope-Prop =
-      adjacent-finitely-graded-poset-Prop
+      adjacent-Finitely-Graded-Poset-Prop
         ( finitely-graded-poset-Prepolytope)
         ( i)
         ( y)
@@ -177,7 +177,7 @@ module _
 
   element-prepolytope-Set : Set l1
   element-prepolytope-Set =
-    element-finitely-graded-poset-Set finitely-graded-poset-Prepolytope
+    element-Finitely-Graded-Poset-Set finitely-graded-poset-Prepolytope
 
   element-Prepolytope : UU l1
   element-Prepolytope =
@@ -283,7 +283,7 @@ module _
 
     leq-prepolytope-Prop : Prop (l1 ⊔ l2)
     leq-prepolytope-Prop =
-      leq-finitely-graded-poset-Prop finitely-graded-poset-Prepolytope x y
+      leq-Finitely-Graded-Poset-Prop finitely-graded-poset-Prepolytope x y
 
     leq-Prepolytope : UU (l1 ⊔ l2)
     leq-Prepolytope =
