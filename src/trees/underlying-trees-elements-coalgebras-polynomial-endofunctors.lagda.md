@@ -522,7 +522,7 @@ module _
       ( graph-element-coalgebra X w)
       ( root-coalgebra w)
   unique-walk-to-root-element-coalgebra w =
-    is-tree-unique-parent-Directed-Graph'
+    is-tree-unique-direct-successor-Directed-Graph'
       ( graph-element-coalgebra X w)
       ( root-coalgebra w)
       ( has-unique-predecessor-element-coalgebra w)

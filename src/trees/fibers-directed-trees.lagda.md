@@ -113,34 +113,36 @@ module _
 ### The fiber of `T` at `x`
 
 ```agda
-  center-unique-parent-fiber-Directed-Tree :
+  center-unique-direct-successor-fiber-Directed-Tree :
     (y : node-fiber-Directed-Tree) →
     ( is-root-fiber-Directed-Tree y) +
     ( Σ ( node-fiber-Directed-Tree) ( edge-fiber-Directed-Tree y))
-  center-unique-parent-fiber-Directed-Tree =
-    center-unique-parent-fiber-Directed-Graph (graph-Directed-Tree T) x
+  center-unique-direct-successor-fiber-Directed-Tree =
+    center-unique-direct-successor-fiber-Directed-Graph
+      ( graph-Directed-Tree T) x
 
-  contraction-unique-parent-fiber-Directed-Tree :
+  contraction-unique-direct-successor-fiber-Directed-Tree :
     (y : node-fiber-Directed-Tree) →
     ( p :
       ( is-root-fiber-Directed-Tree y) +
       ( Σ ( node-fiber-Directed-Tree) (edge-fiber-Directed-Tree y))) →
-    center-unique-parent-fiber-Directed-Tree y ＝ p
-  contraction-unique-parent-fiber-Directed-Tree =
-    contraction-unique-parent-fiber-Directed-Graph (graph-Directed-Tree T) x
+    center-unique-direct-successor-fiber-Directed-Tree y ＝ p
+  contraction-unique-direct-successor-fiber-Directed-Tree =
+    contraction-unique-direct-successor-fiber-Directed-Graph
+      ( graph-Directed-Tree T) x
 
-  unique-parent-fiber-Directed-Tree :
-    unique-parent-Directed-Graph
+  unique-direct-successor-fiber-Directed-Tree :
+    unique-direct-successor-Directed-Graph
       ( graph-fiber-Directed-Tree)
       ( root-fiber-Directed-Tree)
-  unique-parent-fiber-Directed-Tree =
-    unique-parent-fiber-Directed-Graph (graph-Directed-Tree T) x
+  unique-direct-successor-fiber-Directed-Tree =
+    unique-direct-successor-fiber-Directed-Graph (graph-Directed-Tree T) x
 
   is-tree-fiber-Directed-Tree :
     is-tree-Directed-Graph graph-fiber-Directed-Tree
   is-tree-fiber-Directed-Tree =
     is-tree-fiber-Directed-Graph (graph-Directed-Tree T) x
-    
+
   fiber-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
   fiber-Directed-Tree = fiber-Directed-Graph (graph-Directed-Tree T) x
 

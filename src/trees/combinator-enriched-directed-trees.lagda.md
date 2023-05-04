@@ -115,12 +115,12 @@ module _
     is-root-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  unique-parent-combinator-Enriched-Directed-Tree :
-    unique-parent-Directed-Graph
+  unique-direct-successor-combinator-Enriched-Directed-Tree :
+    unique-direct-successor-Directed-Graph
       ( graph-combinator-Enriched-Directed-Tree)
       ( root-combinator-Enriched-Directed-Tree)
-  unique-parent-combinator-Enriched-Directed-Tree =
-    unique-parent-combinator-Directed-Tree
+  unique-direct-successor-combinator-Enriched-Directed-Tree =
+    unique-direct-successor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
   is-tree-combinator-Enriched-Directed-Tree :

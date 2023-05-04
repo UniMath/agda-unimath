@@ -284,13 +284,13 @@ module _
       ( is-root-Directed-Tree S x)
       ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
       ( λ (y , e) →
-        no-parent-root-Directed-Tree T
+        no-direct-successor-root-Directed-Tree T
           ( tr
             ( λ u → Σ (node-Directed-Tree T) (edge-Directed-Tree T u))
             ( inv H)
             ( node-hom-Directed-Tree S T f y ,
               edge-hom-Directed-Tree S T f e)))
-      ( center (unique-parent-Directed-Tree S x))
+      ( center (unique-direct-successor-Directed-Tree S x))
 
   is-not-root-node-hom-is-not-root-Directed-Tree :
     (x : node-Directed-Tree S) →

@@ -71,7 +71,7 @@ module _
     (b : base-Directed-Tree T) →
     is-proper-node-Directed-Tree T (node-base-Directed-Tree T b)
   is-proper-node-base-Directed-Tree (x , e) refl =
-    no-parent-root-Directed-Tree T (x , e)
+    no-direct-successor-root-Directed-Tree T (x , e)
 
   no-walk-to-base-root-Directed-Tree :
     (b : base-Directed-Tree T) →
@@ -81,9 +81,9 @@ module _
   no-walk-to-base-root-Directed-Tree
     ( pair .(root-Directed-Tree T) e)
     refl-walk-Directed-Graph =
-    no-parent-root-Directed-Tree T (root-Directed-Tree T , e)
+    no-direct-successor-root-Directed-Tree T (root-Directed-Tree T , e)
   no-walk-to-base-root-Directed-Tree b (cons-walk-Directed-Graph e w) =
-    no-parent-root-Directed-Tree T (_ , e)
+    no-direct-successor-root-Directed-Tree T (_ , e)
 ```
 
 ### Any node which has a walk to a base element is a proper node
@@ -100,7 +100,7 @@ module _
   is-proper-node-walk-to-base-Directed-Tree ._ b refl-walk-Directed-Graph =
     is-proper-node-base-Directed-Tree T b
   is-proper-node-walk-to-base-Directed-Tree x b (cons-walk-Directed-Graph e w) =
-    is-proper-node-parent-Directed-Tree T e
+    is-proper-node-direct-successor-Directed-Tree T e
 ```
 
 ### There are no edges between base elements
@@ -184,17 +184,21 @@ module _
         ( tr
           ( λ u → walk-Directed-Tree T u z)
           ( ap pr1
-            ( eq-parent-Directed-Tree T (y , g) (root-Directed-Tree T , e)))
+            ( eq-direct-successor-Directed-Tree T
+              ( y , g)
+              ( root-Directed-Tree T , e)))
           ( v)))
   cons-cases-contraction-walk-to-base-Directed-Tree e
     ( cons-walk-Directed-Graph {y} {z} g w)
     ( (u , f) , refl-walk-Directed-Graph) =
     ex-falso
-      ( no-parent-root-Directed-Tree T
+      ( no-direct-successor-root-Directed-Tree T
         ( tr
           ( λ i → Σ (node-Directed-Tree T) (edge-Directed-Tree T i))
           ( ap pr1
-            ( eq-parent-Directed-Tree T (y , e) (root-Directed-Tree T , f)))
+            ( eq-direct-successor-Directed-Tree T
+              ( y , e)
+              ( root-Directed-Tree T , f)))
           ( z , g)))
   cons-cases-contraction-walk-to-base-Directed-Tree {x} {y} e
     ( cons-walk-Directed-Graph {y} {z} g w)
@@ -202,10 +206,13 @@ module _
     ( ap
       ( tot (λ u → cons-walk-Directed-Tree T e))
       ( cons-cases-contraction-walk-to-base-Directed-Tree g w
-        ( (u , f) , tr-walk-eq-parent-Directed-Tree T (y' , e') (y , e) v))) ∙
+        ( (u , f) ,
+          ( tr-walk-eq-direct-successor-Directed-Tree T
+            ( y' , e')
+            ( y , e) v)))) ∙
     ( ap
       ( pair (u , f))
-      ( eq-tr-walk-eq-parent-Directed-Tree T (y' , e') (y , e) v))
+      ( eq-tr-walk-eq-direct-successor-Directed-Tree T (y' , e') (y , e) v))
 
   cases-contraction-walk-to-base-Directed-Tree :
     {x : node-Directed-Tree T}
@@ -224,7 +231,7 @@ module _
   cases-contraction-walk-to-base-Directed-Tree
     ( cons-walk-Directed-Graph e w)
     ( inl refl) =
-    ex-falso (no-parent-root-Directed-Tree T (_ , e))
+    ex-falso (no-direct-successor-root-Directed-Tree T (_ , e))
   cases-contraction-walk-to-base-Directed-Tree
     ( cons-walk-Directed-Graph e w) (inr u) =
     ap inr (cons-cases-contraction-walk-to-base-Directed-Tree e w u)
@@ -287,15 +294,15 @@ module _
   walk-to-base-is-proper-node-Directed-Tree x H =
     center (unique-walk-to-base-is-proper-node-Directed-Tree x H)
 
-  unique-walk-to-base-parent-Directed-Tree :
+  unique-walk-to-base-direct-successor-Directed-Tree :
     (x : node-Directed-Tree T)
     (u : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
     is-contr
       ( Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-  unique-walk-to-base-parent-Directed-Tree x u =
+  unique-walk-to-base-direct-successor-Directed-Tree x u =
     unique-walk-to-base-is-proper-node-Directed-Tree x
-      ( is-proper-node-parent-Directed-Tree T (pr2 u))
+      ( is-proper-node-direct-successor-Directed-Tree T (pr2 u))
 
   is-proof-irrelevant-walk-to-base-Directed-Tree :
     (x : node-Directed-Tree T) →

@@ -466,15 +466,15 @@ module _
   ... | inl refl =
     is-equiv-is-empty _
       ( λ u →
-        no-parent-root-Directed-Tree T
+        no-direct-successor-root-Directed-Tree T
           ( tr
             ( λ v → Σ (node-Directed-Tree T) (edge-Directed-Tree T v))
             ( inv (preserves-root-is-equiv-node-hom-Directed-Tree S T f H))
             ( u)))
   ... | inr p =
     is-equiv-is-contr _
-      ( unique-parent-is-proper-node-Directed-Tree S x p)
-      ( unique-parent-is-proper-node-Directed-Tree T
+      ( unique-direct-successor-is-proper-node-Directed-Tree S x p)
+      ( unique-direct-successor-is-proper-node-Directed-Tree T
         ( node-hom-Directed-Tree S T f x)
         ( is-not-root-node-hom-is-not-root-Directed-Tree S T f x p))
 
