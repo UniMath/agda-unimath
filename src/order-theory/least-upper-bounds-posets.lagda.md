@@ -20,14 +20,15 @@ open import order-theory.upper-bounds-posets
 
 ## Idea
 
-An **upper bound** of two elements `x` and `y` in a poset `P` is an element `z`
-such that both `x ≤ z` and `y ≤ z` hold. A **least upper bound** of `x` and `y`
-is an upper bound `z` of `x` and `y` such that `z ≤ w` holds for any upper bound
-`w` of `x` and `y`.
+A **least upper bound** of two elements `x` and `y` in a poset `P` is an upper
+bound `z` of `x` and `y` such that `z ≤ w` holds for any upper bound `w` of `x`
+and `y`. Similarly, a **least upper bound** of a family `x : I → P` of elements
+is an upper bound `z` of `x` such that `z ≤ w` holds for any upper bound `w` of
+`x`.
 
 ## Definitions
 
-### Lower bounds of pairs of elements in a poset
+### Least upper bounds of pairs of elements in a poset
 
 ```agda
 module _
@@ -87,7 +88,7 @@ module _
     is-prop-has-least-binary-upper-bound-Poset x y
 ```
 
-### Least upper bounds of families of elements
+### Least upper bounds of families of elements in a poset
 
 ```agda
 module _
