@@ -37,6 +37,7 @@ open import category-theory.precategories public
 open import category-theory.precategory-of-functors public
 open import category-theory.precategory-solver public
 open import category-theory.pregroupoids public
+open import category-theory.products-of-precategories public
 open import category-theory.products-precategories public
 open import category-theory.pullbacks-precategories public
 open import category-theory.sieves-categories public
