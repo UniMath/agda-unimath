@@ -129,88 +129,91 @@ module _
     ( node-inclusion-combinator-Directed-Tree i x) =
     inr (λ ())
 
-  cases-center-unique-parent-combinator-Directed-Tree' :
+  cases-center-unique-direct-successor-combinator-Directed-Tree' :
     (i : I) (x : node-Directed-Tree (T i)) →
     is-decidable (is-root-Directed-Tree (T i) x) →
     Σ ( node-combinator-Directed-Tree)
       ( edge-combinator-Directed-Tree
         ( node-inclusion-combinator-Directed-Tree i x))
-  cases-center-unique-parent-combinator-Directed-Tree' a ._ (inl refl) =
+  cases-center-unique-direct-successor-combinator-Directed-Tree' a ._
+    ( inl refl) =
     ( root-combinator-Directed-Tree , edge-to-root-combinator-Directed-Tree a)
-  cases-center-unique-parent-combinator-Directed-Tree' i x (inr f) =
+  cases-center-unique-direct-successor-combinator-Directed-Tree' i x (inr f) =
     map-Σ
       ( edge-combinator-Directed-Tree
         ( node-inclusion-combinator-Directed-Tree i x))
       ( node-inclusion-combinator-Directed-Tree i)
       ( edge-inclusion-combinator-Directed-Tree i x)
-      ( parent-is-proper-node-Directed-Tree (T i) x f)
+      ( direct-successor-is-proper-node-Directed-Tree (T i) x f)
 
-  center-unique-parent-combinator-Directed-Tree' :
+  center-unique-direct-successor-combinator-Directed-Tree' :
     ( x : node-combinator-Directed-Tree) →
     ¬ (is-root-combinator-Directed-Tree x) →
     Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)
-  center-unique-parent-combinator-Directed-Tree'
+  center-unique-direct-successor-combinator-Directed-Tree'
     root-combinator-Directed-Tree f = ex-falso (f refl)
-  center-unique-parent-combinator-Directed-Tree'
+  center-unique-direct-successor-combinator-Directed-Tree'
     ( node-inclusion-combinator-Directed-Tree i x) f =
-    cases-center-unique-parent-combinator-Directed-Tree' i x
+    cases-center-unique-direct-successor-combinator-Directed-Tree' i x
       ( is-isolated-root-Directed-Tree (T i) x)
 
-  cases-center-unique-parent-combinator-Directed-Tree :
+  cases-center-unique-direct-successor-combinator-Directed-Tree :
     (i : I) (x : node-Directed-Tree (T i)) →
     is-decidable (is-root-Directed-Tree (T i) x) →
     Σ ( node-combinator-Directed-Tree)
       ( edge-combinator-Directed-Tree
         ( node-inclusion-combinator-Directed-Tree i x))
-  cases-center-unique-parent-combinator-Directed-Tree i ._ (inl refl) =
+  cases-center-unique-direct-successor-combinator-Directed-Tree i ._
+    ( inl refl) =
     root-combinator-Directed-Tree ,
     edge-to-root-combinator-Directed-Tree i
-  cases-center-unique-parent-combinator-Directed-Tree i x (inr f) =
+  cases-center-unique-direct-successor-combinator-Directed-Tree i x (inr f) =
     map-Σ
       ( edge-combinator-Directed-Tree
         ( node-inclusion-combinator-Directed-Tree i x))
       ( node-inclusion-combinator-Directed-Tree i)
       ( edge-inclusion-combinator-Directed-Tree i x)
-      ( parent-is-proper-node-Directed-Tree (T i) x f)
+      ( direct-successor-is-proper-node-Directed-Tree (T i) x f)
 
-  center-unique-parent-combinator-Directed-Tree :
+  center-unique-direct-successor-combinator-Directed-Tree :
     (x : node-combinator-Directed-Tree) →
     is-root-combinator-Directed-Tree x +
     Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)
-  center-unique-parent-combinator-Directed-Tree root-combinator-Directed-Tree =
+  center-unique-direct-successor-combinator-Directed-Tree
+    root-combinator-Directed-Tree =
     inl refl
-  center-unique-parent-combinator-Directed-Tree
+  center-unique-direct-successor-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x) =
     inr
-      ( cases-center-unique-parent-combinator-Directed-Tree i x
+      ( cases-center-unique-direct-successor-combinator-Directed-Tree i x
         ( is-isolated-root-Directed-Tree (T i) x))
 
-  cases-contraction-unique-parent-combinator-Directed-Tree :
+  cases-contraction-unique-direct-successor-combinator-Directed-Tree :
     (i : I) (x : node-Directed-Tree (T i)) →
     (d : is-decidable (is-root-Directed-Tree (T i) x)) →
     ( p :
       Σ ( node-combinator-Directed-Tree)
         ( edge-combinator-Directed-Tree
           ( node-inclusion-combinator-Directed-Tree i x))) →
-    cases-center-unique-parent-combinator-Directed-Tree i x d ＝ p
-  cases-contraction-unique-parent-combinator-Directed-Tree i ._
+    cases-center-unique-direct-successor-combinator-Directed-Tree i x d ＝ p
+  cases-contraction-unique-direct-successor-combinator-Directed-Tree i ._
     ( inl r)
     ( ._ , edge-to-root-combinator-Directed-Tree .i) =
     ap
       ( λ u →
-        cases-center-unique-parent-combinator-Directed-Tree i
+        cases-center-unique-direct-successor-combinator-Directed-Tree i
           ( root-Directed-Tree (T i))
           ( inl u))
       ( eq-refl-root-Directed-Tree (T i) r)
-  cases-contraction-unique-parent-combinator-Directed-Tree i ._
+  cases-contraction-unique-direct-successor-combinator-Directed-Tree i ._
     ( inr f)
     ( ._ , edge-to-root-combinator-Directed-Tree .i) =
     ex-falso (f refl)
-  cases-contraction-unique-parent-combinator-Directed-Tree i ._
+  cases-contraction-unique-direct-successor-combinator-Directed-Tree i ._
     ( inl refl)
     ( ._ , edge-inclusion-combinator-Directed-Tree .i ._ y e) =
-    ex-falso (no-parent-root-Directed-Tree (T i) (y , e))
-  cases-contraction-unique-parent-combinator-Directed-Tree i x
+    ex-falso (no-direct-successor-root-Directed-Tree (T i) (y , e))
+  cases-contraction-unique-direct-successor-combinator-Directed-Tree i x
     ( inr f)
     ( ._ , edge-inclusion-combinator-Directed-Tree .i .x y e) =
     ap
@@ -219,39 +222,41 @@ module _
           ( node-inclusion-combinator-Directed-Tree i x))
         ( node-inclusion-combinator-Directed-Tree i)
         ( edge-inclusion-combinator-Directed-Tree i x))
-      ( eq-is-contr (unique-parent-is-proper-node-Directed-Tree (T i) x f))
+      ( eq-is-contr
+        ( unique-direct-successor-is-proper-node-Directed-Tree (T i) x f))
 
-  contraction-unique-parent-combinator-Directed-Tree :
+  contraction-unique-direct-successor-combinator-Directed-Tree :
     (x : node-combinator-Directed-Tree) →
     (p : is-root-combinator-Directed-Tree x +
          Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)) →
-    center-unique-parent-combinator-Directed-Tree x ＝ p
-  contraction-unique-parent-combinator-Directed-Tree ._ (inl refl) = refl
-  contraction-unique-parent-combinator-Directed-Tree
+    center-unique-direct-successor-combinator-Directed-Tree x ＝ p
+  contraction-unique-direct-successor-combinator-Directed-Tree ._ (inl refl) =
+    refl
+  contraction-unique-direct-successor-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x)
     ( inr (y , e)) =
     ap
       ( inr)
-      ( cases-contraction-unique-parent-combinator-Directed-Tree i x
+      ( cases-contraction-unique-direct-successor-combinator-Directed-Tree i x
         ( is-isolated-root-Directed-Tree (T i) x)
         ( y , e))
 
-  unique-parent-combinator-Directed-Tree :
-    unique-parent-Directed-Graph
+  unique-direct-successor-combinator-Directed-Tree :
+    unique-direct-successor-Directed-Graph
       ( graph-combinator-Directed-Tree)
       ( root-combinator-Directed-Tree)
-  pr1 (unique-parent-combinator-Directed-Tree x) =
-    center-unique-parent-combinator-Directed-Tree x
-  pr2 (unique-parent-combinator-Directed-Tree x) =
-    contraction-unique-parent-combinator-Directed-Tree x
+  pr1 (unique-direct-successor-combinator-Directed-Tree x) =
+    center-unique-direct-successor-combinator-Directed-Tree x
+  pr2 (unique-direct-successor-combinator-Directed-Tree x) =
+    contraction-unique-direct-successor-combinator-Directed-Tree x
 
   is-tree-combinator-Directed-Tree :
     is-tree-Directed-Graph graph-combinator-Directed-Tree
   is-tree-combinator-Directed-Tree =
-    is-tree-unique-parent-Directed-Graph
+    is-tree-unique-direct-successor-Directed-Graph
       graph-combinator-Directed-Tree
       root-combinator-Directed-Tree
-      unique-parent-combinator-Directed-Tree
+      unique-direct-successor-combinator-Directed-Tree
       walk-to-root-combinator-Directed-Tree
 
   combinator-Directed-Tree : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2 ⊔ l3)
@@ -279,7 +284,7 @@ module _
 
 ## Properties
 
-### The type of children of `x : T i` is equivalent to the type of children of the inclusion of `x` in `combinator T`
+### The type of direct predecessors of `x : T i` is equivalent to the type of direct predecessors of the inclusion of `x` in `combinator T`
 
 ```agda
 module _
@@ -287,53 +292,56 @@ module _
   (i : I) (x : node-Directed-Tree (T i))
   where
 
-  children-combinator-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3)
-  children-combinator-Directed-Tree =
+  direct-predecessor-combinator-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3)
+  direct-predecessor-combinator-Directed-Tree =
     Σ ( node-combinator-Directed-Tree T)
       ( λ y →
         edge-combinator-Directed-Tree T y
           ( node-inclusion-combinator-Directed-Tree i x))
 
-  map-compute-children-combinator-Directed-Tree :
-    children-Directed-Tree (T i) x → children-combinator-Directed-Tree
-  pr1 (map-compute-children-combinator-Directed-Tree (y , e)) =
+  map-compute-direct-predecessor-combinator-Directed-Tree :
+    direct-predecessor-Directed-Tree (T i) x →
+    direct-predecessor-combinator-Directed-Tree
+  pr1 (map-compute-direct-predecessor-combinator-Directed-Tree (y , e)) =
     node-inclusion-combinator-Directed-Tree i y
-  pr2 (map-compute-children-combinator-Directed-Tree (y , e)) =
+  pr2 (map-compute-direct-predecessor-combinator-Directed-Tree (y , e)) =
     edge-inclusion-combinator-Directed-Tree i y x e
 
-  map-inv-compute-children-combinator-Directed-Tree :
-    children-combinator-Directed-Tree →
-    children-Directed-Tree (T i) x
-  map-inv-compute-children-combinator-Directed-Tree
+  map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+    direct-predecessor-combinator-Directed-Tree →
+    direct-predecessor-Directed-Tree (T i) x
+  map-inv-compute-direct-predecessor-combinator-Directed-Tree
     ( ._ , edge-inclusion-combinator-Directed-Tree .i y .x e) =
     ( y , e)
 
-  issec-map-inv-compute-children-combinator-Directed-Tree :
-    ( map-compute-children-combinator-Directed-Tree ∘
-      map-inv-compute-children-combinator-Directed-Tree) ~ id
-  issec-map-inv-compute-children-combinator-Directed-Tree
+  issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+    ( map-compute-direct-predecessor-combinator-Directed-Tree ∘
+      map-inv-compute-direct-predecessor-combinator-Directed-Tree) ~ id
+  issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree
     ( ._ , edge-inclusion-combinator-Directed-Tree .i y .x e) =
     refl
 
-  isretr-map-inv-compute-children-combinator-Directed-Tree :
-    ( map-inv-compute-children-combinator-Directed-Tree ∘
-      map-compute-children-combinator-Directed-Tree) ~ id
-  isretr-map-inv-compute-children-combinator-Directed-Tree (y , e) = refl
+  isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+    ( map-inv-compute-direct-predecessor-combinator-Directed-Tree ∘
+      map-compute-direct-predecessor-combinator-Directed-Tree) ~ id
+  isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree (y , e) =
+    refl
 
-  is-equiv-map-compute-children-combinator-Directed-Tree :
-    is-equiv map-compute-children-combinator-Directed-Tree
-  is-equiv-map-compute-children-combinator-Directed-Tree =
+  is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree :
+    is-equiv map-compute-direct-predecessor-combinator-Directed-Tree
+  is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree =
     is-equiv-has-inverse
-      map-inv-compute-children-combinator-Directed-Tree
-      issec-map-inv-compute-children-combinator-Directed-Tree
-      isretr-map-inv-compute-children-combinator-Directed-Tree
+      map-inv-compute-direct-predecessor-combinator-Directed-Tree
+      issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree
+      isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree
 
-  compute-children-combinator-Directed-Tree :
-    children-Directed-Tree (T i) x ≃ children-combinator-Directed-Tree
-  pr1 compute-children-combinator-Directed-Tree =
-    map-compute-children-combinator-Directed-Tree
-  pr2 compute-children-combinator-Directed-Tree =
-    is-equiv-map-compute-children-combinator-Directed-Tree
+  compute-direct-predecessor-combinator-Directed-Tree :
+    direct-predecessor-Directed-Tree (T i) x ≃
+    direct-predecessor-combinator-Directed-Tree
+  pr1 compute-direct-predecessor-combinator-Directed-Tree =
+    map-compute-direct-predecessor-combinator-Directed-Tree
+  pr2 compute-direct-predecessor-combinator-Directed-Tree =
+    is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree
 ```
 
 ### If `e` is an edge from `node-inclusion i x` to `node-inclusion j y`, then `i ＝ j`

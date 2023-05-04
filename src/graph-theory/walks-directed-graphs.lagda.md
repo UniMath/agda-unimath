@@ -422,13 +422,14 @@ module _
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (x : vertex-Directed-Graph G)
   where
 
-  eq-parent-eq-cons-walk-Directed-Graph :
+  eq-direct-successor-eq-cons-walk-Directed-Graph :
     {y y' z : vertex-Directed-Graph G}
     (e : edge-Directed-Graph G x y) (e' : edge-Directed-Graph G x y')
     (w : walk-Directed-Graph G y z) (w' : walk-Directed-Graph G y' z) →
     cons-walk-Directed-Graph e w ＝ cons-walk-Directed-Graph e' w' →
     (y , e) ＝ (y' , e')
-  eq-parent-eq-cons-walk-Directed-Graph {y} {.y} {z} e .e w .w refl = refl
+  eq-direct-successor-eq-cons-walk-Directed-Graph {y} {.y} {z} e .e w .w refl =
+    refl
 ```
 
 ### Vertices on a walk

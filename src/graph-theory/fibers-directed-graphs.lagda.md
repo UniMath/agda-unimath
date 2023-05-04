@@ -124,42 +124,43 @@ module _
 ### The fiber of `G` at `x` as a directed tree
 
 ```agda
-  center-unique-parent-fiber-Directed-Graph :
+  center-unique-direct-successor-fiber-Directed-Graph :
     (y : node-fiber-Directed-Graph) →
     ( is-root-fiber-Directed-Graph y) +
     ( Σ ( node-fiber-Directed-Graph) ( edge-fiber-Directed-Graph y))
-  center-unique-parent-fiber-Directed-Graph (y , refl-walk-Directed-Graph) =
+  center-unique-direct-successor-fiber-Directed-Graph
+    ( y , refl-walk-Directed-Graph) =
     inl refl
-  center-unique-parent-fiber-Directed-Graph
+  center-unique-direct-successor-fiber-Directed-Graph
     ( y , cons-walk-Directed-Graph {y} {z} e w) = inr ((z , w) , (e , refl))
 
-  contraction-unique-parent-fiber-Directed-Graph :
+  contraction-unique-direct-successor-fiber-Directed-Graph :
     (y : node-fiber-Directed-Graph) →
     ( p :
       ( is-root-fiber-Directed-Graph y) +
       ( Σ ( node-fiber-Directed-Graph) (edge-fiber-Directed-Graph y))) →
-    center-unique-parent-fiber-Directed-Graph y ＝ p
-  contraction-unique-parent-fiber-Directed-Graph ._ (inl refl) = refl
-  contraction-unique-parent-fiber-Directed-Graph
+    center-unique-direct-successor-fiber-Directed-Graph y ＝ p
+  contraction-unique-direct-successor-fiber-Directed-Graph ._ (inl refl) = refl
+  contraction-unique-direct-successor-fiber-Directed-Graph
     ( y , .(cons-walk-Directed-Graph e v)) (inr ((z , v) , e , refl)) =
     refl
 
-  unique-parent-fiber-Directed-Graph :
-    unique-parent-Directed-Graph
+  unique-direct-successor-fiber-Directed-Graph :
+    unique-direct-successor-Directed-Graph
       ( graph-fiber-Directed-Graph)
       ( root-fiber-Directed-Graph)
-  pr1 (unique-parent-fiber-Directed-Graph y) =
-    center-unique-parent-fiber-Directed-Graph y
-  pr2 (unique-parent-fiber-Directed-Graph y) =
-    contraction-unique-parent-fiber-Directed-Graph y
+  pr1 (unique-direct-successor-fiber-Directed-Graph y) =
+    center-unique-direct-successor-fiber-Directed-Graph y
+  pr2 (unique-direct-successor-fiber-Directed-Graph y) =
+    contraction-unique-direct-successor-fiber-Directed-Graph y
 
   is-tree-fiber-Directed-Graph :
     is-tree-Directed-Graph graph-fiber-Directed-Graph
   is-tree-fiber-Directed-Graph =
-    is-tree-unique-parent-Directed-Graph
+    is-tree-unique-direct-successor-Directed-Graph
       graph-fiber-Directed-Graph
       root-fiber-Directed-Graph
-      unique-parent-fiber-Directed-Graph
+      unique-direct-successor-fiber-Directed-Graph
       walk-to-root-fiber-Directed-Graph
 
   fiber-Directed-Graph : Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)

@@ -115,12 +115,12 @@ module _
     is-root-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  unique-parent-combinator-Enriched-Directed-Tree :
-    unique-parent-Directed-Graph
+  unique-direct-successor-combinator-Enriched-Directed-Tree :
+    unique-direct-successor-Directed-Graph
       ( graph-combinator-Enriched-Directed-Tree)
       ( root-combinator-Enriched-Directed-Tree)
-  unique-parent-combinator-Enriched-Directed-Tree =
-    unique-parent-combinator-Directed-Tree
+  unique-direct-successor-combinator-Enriched-Directed-Tree =
+    unique-direct-successor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
   is-tree-combinator-Enriched-Directed-Tree :
@@ -218,7 +218,7 @@ module _
     root-enrichment-combinator-Enriched-Directed-Tree
   enrichment-combinator-Enriched-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree b x) =
-    ( compute-children-combinator-Directed-Tree
+    ( compute-direct-predecessor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T) b x) ∘e
     ( enrichment-Enriched-Directed-Tree A B (T b) x)
 
@@ -234,7 +234,7 @@ module _
 
 ## Properties
 
-### The type of children of `x : T b` is equivalent to the type of children of the inclusion of `x` in `combinator T`
+### The type of direct-predecessor of `x : T b` is equivalent to the type of direct-predecessor of the inclusion of `x` in `combinator T`
 
 ```agda
 module _
@@ -243,35 +243,35 @@ module _
   (x : node-Enriched-Directed-Tree A B (T b))
   where
 
-  children-combinator-Enriched-Directed-Tree : UU (l2 ⊔ l3 ⊔ l4)
-  children-combinator-Enriched-Directed-Tree =
-    children-combinator-Directed-Tree
+  direct-predecessor-combinator-Enriched-Directed-Tree : UU (l2 ⊔ l3 ⊔ l4)
+  direct-predecessor-combinator-Enriched-Directed-Tree =
+    direct-predecessor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
 
-  map-compute-children-combinator-Enriched-Directed-Tree :
-    children-Enriched-Directed-Tree A B (T b) x →
-    children-combinator-Enriched-Directed-Tree
-  map-compute-children-combinator-Enriched-Directed-Tree =
-    map-compute-children-combinator-Directed-Tree
+  map-compute-direct-predecessor-combinator-Enriched-Directed-Tree :
+    direct-predecessor-Enriched-Directed-Tree A B (T b) x →
+    direct-predecessor-combinator-Enriched-Directed-Tree
+  map-compute-direct-predecessor-combinator-Enriched-Directed-Tree =
+    map-compute-direct-predecessor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
 
-  is-equiv-map-compute-children-combinator-Enriched-Directed-Tree :
-    is-equiv map-compute-children-combinator-Enriched-Directed-Tree
-  is-equiv-map-compute-children-combinator-Enriched-Directed-Tree =
-    is-equiv-map-compute-children-combinator-Directed-Tree
+  is-equiv-map-compute-direct-predecessor-combinator-Enriched-Directed-Tree :
+    is-equiv map-compute-direct-predecessor-combinator-Enriched-Directed-Tree
+  is-equiv-map-compute-direct-predecessor-combinator-Enriched-Directed-Tree =
+    is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
 
-  compute-children-combinator-Enriched-Directed-Tree :
-    children-Enriched-Directed-Tree A B (T b) x ≃
-    children-combinator-Enriched-Directed-Tree
-  compute-children-combinator-Enriched-Directed-Tree =
-    compute-children-combinator-Directed-Tree
+  compute-direct-predecessor-combinator-Enriched-Directed-Tree :
+    direct-predecessor-Enriched-Directed-Tree A B (T b) x ≃
+    direct-predecessor-combinator-Enriched-Directed-Tree
+  compute-direct-predecessor-combinator-Enriched-Directed-Tree =
+    compute-direct-predecessor-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
       ( b)
       ( x)
@@ -497,15 +497,15 @@ module _
     hom-fiber-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  children-compute-fiber-combinator-Enriched-Directed-Tree :
+  direct-predecessor-compute-fiber-combinator-Enriched-Directed-Tree :
     (b : B a) (x : node-Enriched-Directed-Tree A B (T b)) →
-    children-Enriched-Directed-Tree A B (T b) x →
-    children-fiber-Enriched-Directed-Tree A B
+    direct-predecessor-Enriched-Directed-Tree A B (T b) x →
+    direct-predecessor-fiber-Enriched-Directed-Tree A B
       ( combinator-Enriched-Directed-Tree A B T)
       ( node-base-index-combinator-Enriched-Directed-Tree A B T b)
       ( node-compute-fiber-combinator-Enriched-Directed-Tree b x)
-  children-compute-fiber-combinator-Enriched-Directed-Tree b =
-    children-hom-Directed-Tree
+  direct-predecessor-compute-fiber-combinator-Enriched-Directed-Tree b =
+    direct-predecessor-hom-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B (T b))
       ( directed-tree-fiber-Enriched-Directed-Tree A B
         ( combinator-Enriched-Directed-Tree A B T)
@@ -546,7 +546,9 @@ module _
 
   enrichment-compute-fiber-combinator-Enriched-Directed-Tree :
     (b : B a) (x : node-Enriched-Directed-Tree A B (T b)) →
-    ( ( children-compute-fiber-combinator-Enriched-Directed-Tree b x) ∘
+    ( ( direct-predecessor-compute-fiber-combinator-Enriched-Directed-Tree
+        ( b)
+        ( x)) ∘
       ( map-enrichment-Enriched-Directed-Tree A B (T b) x)) ~
     ( map-enrichment-fiber-base-Enriched-Directed-Tree A B
         ( combinator-Enriched-Directed-Tree A B T)
@@ -560,11 +562,15 @@ module _
       ( y)
       ( pr2
         ( pr1
-          ( children-compute-fiber-combinator-Enriched-Directed-Tree b x
+          ( direct-predecessor-compute-fiber-combinator-Enriched-Directed-Tree
+            ( b)
+            ( x)
             ( map-enrichment-Enriched-Directed-Tree A B (T b) x y))))
       ( pr2
         ( pr2
-          ( children-compute-fiber-combinator-Enriched-Directed-Tree b x
+          ( direct-predecessor-compute-fiber-combinator-Enriched-Directed-Tree
+            ( b)
+            ( x)
             ( map-enrichment-Enriched-Directed-Tree A B (T b) x y))))
 
   compute-fiber-combinator-Enriched-Directed-Tree :

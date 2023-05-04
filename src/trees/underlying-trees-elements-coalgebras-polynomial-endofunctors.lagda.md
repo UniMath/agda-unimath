@@ -522,7 +522,7 @@ module _
       ( graph-element-coalgebra X w)
       ( root-coalgebra w)
   unique-walk-to-root-element-coalgebra w =
-    is-tree-unique-parent-Directed-Graph'
+    is-tree-unique-direct-successor-Directed-Graph'
       ( graph-element-coalgebra X w)
       ( root-coalgebra w)
       ( has-unique-predecessor-element-coalgebra w)
@@ -917,7 +917,7 @@ module _
   enrichment-compute-enriched-directed-tree-element-coalgebra :
     (x : node-element-coalgebra X w) →
     htpy-equiv
-      ( ( equiv-children-equiv-Directed-Tree
+      ( ( equiv-direct-predecessor-equiv-Directed-Tree
           ( directed-tree-element-coalgebra X w)
           ( combinator-Directed-Tree
             ( λ b →

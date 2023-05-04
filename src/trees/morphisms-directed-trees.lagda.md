@@ -66,12 +66,12 @@ module _
       ( graph-Directed-Tree T)
       ( f)
 
-  children-hom-Directed-Tree :
+  direct-predecessor-hom-Directed-Tree :
     (x : node-Directed-Tree S) →
     Σ ( node-Directed-Tree S) (λ y → edge-Directed-Tree S y x) →
     Σ ( node-Directed-Tree T)
       ( λ y → edge-Directed-Tree T y (node-hom-Directed-Tree x))
-  children-hom-Directed-Tree x =
+  direct-predecessor-hom-Directed-Tree x =
     map-Σ
       ( λ y → edge-Directed-Tree T y (node-hom-Directed-Tree x))
       ( node-hom-Directed-Tree)
@@ -182,7 +182,7 @@ module _
       ( f)
       ( g)
 
-  children-htpy-hom-Directed-Tree :
+  direct-predecessor-htpy-hom-Directed-Tree :
     ( α : htpy-hom-Directed-Tree) →
     ( x : node-Directed-Tree S) →
     ( ( tot
@@ -190,9 +190,9 @@ module _
           tr
             ( edge-Directed-Tree T y)
             ( node-htpy-hom-Directed-Tree α x))) ∘
-      ( children-hom-Directed-Tree S T f x)) ~
-    ( children-hom-Directed-Tree S T g x)
-  children-htpy-hom-Directed-Tree α x (y , e) =
+      ( direct-predecessor-hom-Directed-Tree S T f x)) ~
+    ( direct-predecessor-hom-Directed-Tree S T g x)
+  direct-predecessor-htpy-hom-Directed-Tree α x (y , e) =
     eq-pair-Σ
       ( node-htpy-hom-Directed-Tree α y)
       ( ( compute-binary-tr
@@ -284,13 +284,13 @@ module _
       ( is-root-Directed-Tree S x)
       ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
       ( λ (y , e) →
-        no-parent-root-Directed-Tree T
+        no-direct-successor-root-Directed-Tree T
           ( tr
             ( λ u → Σ (node-Directed-Tree T) (edge-Directed-Tree T u))
             ( inv H)
             ( node-hom-Directed-Tree S T f y ,
               edge-hom-Directed-Tree S T f e)))
-      ( center (unique-parent-Directed-Tree S x))
+      ( center (unique-direct-successor-Directed-Tree S x))
 
   is-not-root-node-hom-is-not-root-Directed-Tree :
     (x : node-Directed-Tree S) →

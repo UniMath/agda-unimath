@@ -90,7 +90,7 @@ module _
       edge-hom-Enriched-Directed-Tree A B S T
         ( hom-rooted-hom-Enriched-Directed-Tree)
 
-    children-rooted-hom-Enriched-Directed-Tree :
+    direct-predecessor-rooted-hom-Enriched-Directed-Tree :
       (x : node-Enriched-Directed-Tree A B S) →
       Σ ( node-Enriched-Directed-Tree A B S)
         ( λ y → edge-Enriched-Directed-Tree A B S y x) →
@@ -98,8 +98,8 @@ module _
         ( λ y →
           edge-Enriched-Directed-Tree A B T y
             ( node-rooted-hom-Enriched-Directed-Tree x))
-    children-rooted-hom-Enriched-Directed-Tree =
-      children-hom-Enriched-Directed-Tree A B S T
+    direct-predecessor-rooted-hom-Enriched-Directed-Tree =
+      direct-predecessor-hom-Enriched-Directed-Tree A B S T
         ( hom-rooted-hom-Enriched-Directed-Tree)
 
     shape-rooted-hom-Enriched-Directed-Tree :
@@ -112,7 +112,7 @@ module _
 
     enrichment-rooted-hom-Enriched-Directed-Tree :
       ( x : node-Enriched-Directed-Tree A B S) →
-      ( ( children-rooted-hom-Enriched-Directed-Tree x) ∘
+      ( ( direct-predecessor-rooted-hom-Enriched-Directed-Tree x) ∘
         ( map-enrichment-Enriched-Directed-Tree A B S x)) ~
       ( ( map-enrichment-Enriched-Directed-Tree A B T
           ( node-rooted-hom-Enriched-Directed-Tree x)) ∘

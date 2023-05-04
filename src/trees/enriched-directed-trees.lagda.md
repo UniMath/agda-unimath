@@ -82,22 +82,25 @@ module _
   edge-Enriched-Directed-Tree =
     edge-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  children-Enriched-Directed-Tree :
+  direct-predecessor-Enriched-Directed-Tree :
     node-Enriched-Directed-Tree → UU (l3 ⊔ l4)
-  children-Enriched-Directed-Tree =
-    children-Directed-Tree directed-tree-Enriched-Directed-Tree
+  direct-predecessor-Enriched-Directed-Tree =
+    direct-predecessor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  node-children-Enriched-Directed-Tree :
+  node-direct-predecessor-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
-    children-Enriched-Directed-Tree x → node-Enriched-Directed-Tree
-  node-children-Enriched-Directed-Tree =
-    node-children-Directed-Tree directed-tree-Enriched-Directed-Tree
+    direct-predecessor-Enriched-Directed-Tree x → node-Enriched-Directed-Tree
+  node-direct-predecessor-Enriched-Directed-Tree =
+    node-direct-predecessor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  edge-children-Enriched-Directed-Tree :
-    (x : node-Enriched-Directed-Tree) (y : children-Enriched-Directed-Tree x) →
-    edge-Enriched-Directed-Tree (node-children-Enriched-Directed-Tree x y) x
-  edge-children-Enriched-Directed-Tree =
-    edge-children-Directed-Tree directed-tree-Enriched-Directed-Tree
+  edge-direct-predecessor-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree)
+    (y : direct-predecessor-Enriched-Directed-Tree x) →
+    edge-Enriched-Directed-Tree
+      ( node-direct-predecessor-Enriched-Directed-Tree x y)
+      ( x)
+  edge-direct-predecessor-Enriched-Directed-Tree =
+    edge-direct-predecessor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
   walk-Enriched-Directed-Tree :
     (x y : node-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
@@ -173,17 +176,18 @@ module _
   eq-refl-root-Enriched-Directed-Tree' =
     eq-refl-root-Directed-Tree' directed-tree-Enriched-Directed-Tree
 
-  no-parent-root-Enriched-Directed-Tree :
+  no-direct-successor-root-Enriched-Directed-Tree :
     ¬ ( Σ ( node-Enriched-Directed-Tree)
           ( edge-Enriched-Directed-Tree root-Enriched-Directed-Tree))
-  no-parent-root-Enriched-Directed-Tree =
-    no-parent-root-Directed-Tree directed-tree-Enriched-Directed-Tree
+  no-direct-successor-root-Enriched-Directed-Tree =
+    no-direct-successor-root-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  is-proper-node-parent-Enriched-Directed-Tree :
+  is-proper-node-direct-successor-Enriched-Directed-Tree :
     {x y : node-Enriched-Directed-Tree} (e : edge-Enriched-Directed-Tree x y) →
     ¬ (is-root-Enriched-Directed-Tree x)
-  is-proper-node-parent-Enriched-Directed-Tree =
-    is-proper-node-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+  is-proper-node-direct-successor-Enriched-Directed-Tree =
+    is-proper-node-direct-successor-Directed-Tree
+      directed-tree-Enriched-Directed-Tree
 
   is-proof-irrelevant-edge-to-root-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
@@ -223,49 +227,50 @@ module _
   walk-to-root-Enriched-Directed-Tree =
     walk-to-root-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  unique-parent-Enriched-Directed-Tree :
-    unique-parent-Directed-Graph
+  unique-direct-successor-Enriched-Directed-Tree :
+    unique-direct-successor-Directed-Graph
       graph-Enriched-Directed-Tree
       root-Enriched-Directed-Tree
-  unique-parent-Enriched-Directed-Tree =
-    unique-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+  unique-direct-successor-Enriched-Directed-Tree =
+    unique-direct-successor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  unique-parent-is-proper-node-Enriched-Directed-Tree :
+  unique-direct-successor-is-proper-node-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
     is-proper-node-Enriched-Directed-Tree x →
     is-contr ( Σ node-Enriched-Directed-Tree (edge-Enriched-Directed-Tree x))
-  unique-parent-is-proper-node-Enriched-Directed-Tree =
-    unique-parent-is-proper-node-Directed-Tree
+  unique-direct-successor-is-proper-node-Enriched-Directed-Tree =
+    unique-direct-successor-is-proper-node-Directed-Tree
       directed-tree-Enriched-Directed-Tree
 
-  is-proof-irrelevant-parent-Enriched-Directed-Tree :
+  is-proof-irrelevant-direct-successor-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
     is-proof-irrelevant
       ( Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x))
-  is-proof-irrelevant-parent-Enriched-Directed-Tree =
-    is-proof-irrelevant-parent-Directed-Tree
+  is-proof-irrelevant-direct-successor-Enriched-Directed-Tree =
+    is-proof-irrelevant-direct-successor-Directed-Tree
       directed-tree-Enriched-Directed-Tree
 
-  is-prop-parent-Enriched-Directed-Tree :
+  is-prop-direct-successor-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
     is-prop
       ( Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x))
-  is-prop-parent-Enriched-Directed-Tree =
-    is-prop-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+  is-prop-direct-successor-Enriched-Directed-Tree =
+    is-prop-direct-successor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  eq-parent-Enriched-Directed-Tree :
+  eq-direct-successor-Enriched-Directed-Tree :
     {x : node-Enriched-Directed-Tree}
     ( u v : Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x)) →
     u ＝ v
-  eq-parent-Enriched-Directed-Tree =
-    eq-parent-Directed-Tree directed-tree-Enriched-Directed-Tree
+  eq-direct-successor-Enriched-Directed-Tree =
+    eq-direct-successor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  parent-is-proper-node-Enriched-Directed-Tree :
+  direct-successor-is-proper-node-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
     ¬ (is-root-Enriched-Directed-Tree x) →
     Σ (node-Enriched-Directed-Tree) (edge-Enriched-Directed-Tree x)
-  parent-is-proper-node-Enriched-Directed-Tree =
-    parent-is-proper-node-Directed-Tree directed-tree-Enriched-Directed-Tree
+  direct-successor-is-proper-node-Enriched-Directed-Tree =
+    direct-successor-is-proper-node-Directed-Tree
+      directed-tree-Enriched-Directed-Tree
 
   shape-Enriched-Directed-Tree : node-Enriched-Directed-Tree → A
   shape-Enriched-Directed-Tree = pr1 (pr2 T)
@@ -282,7 +287,8 @@ module _
 
   map-enrichment-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
-    B (shape-Enriched-Directed-Tree x) → children-Enriched-Directed-Tree x
+    B (shape-Enriched-Directed-Tree x) →
+    direct-predecessor-Enriched-Directed-Tree x
   map-enrichment-Enriched-Directed-Tree x =
     map-equiv (enrichment-Enriched-Directed-Tree x)
 
