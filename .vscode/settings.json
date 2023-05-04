@@ -25,7 +25,7 @@
   "files.trimTrailingWhitespace": true,
   "files.associations": {
     "*.agda": "agda",
-    "*.md": "markdown"
+    "*.lagda.mc": "literate agda markdown"
   },
 
   "[agda]": {
