@@ -61,7 +61,7 @@ hom-Enriched-Directed-Tree A B S T =
                 ( directed-tree-Enriched-Directed-Tree A B T)
                 ( f)
                 ( x)))
-            ( children-hom-Directed-Tree
+            ( direct-predecessor-hom-Directed-Tree
               ( directed-tree-Enriched-Directed-Tree A B S)
               ( directed-tree-Enriched-Directed-Tree A B T)
               ( f)
@@ -99,7 +99,7 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( directed-tree-hom-Enriched-Directed-Tree)
 
-  children-hom-Enriched-Directed-Tree :
+  direct-predecessor-hom-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree A B S) →
     Σ ( node-Enriched-Directed-Tree A B S)
       ( λ y → edge-Enriched-Directed-Tree A B S y x) →
@@ -107,8 +107,8 @@ module _
       ( λ y →
         edge-Enriched-Directed-Tree A B T y
           ( node-hom-Enriched-Directed-Tree x))
-  children-hom-Enriched-Directed-Tree =
-    children-hom-Directed-Tree
+  direct-predecessor-hom-Enriched-Directed-Tree =
+    direct-predecessor-hom-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B S)
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( directed-tree-hom-Enriched-Directed-Tree)
@@ -131,7 +131,7 @@ module _
           ( directed-tree-Enriched-Directed-Tree A B T)
           ( directed-tree-hom-Enriched-Directed-Tree)
           ( x)))
-      ( children-hom-Enriched-Directed-Tree x)
+      ( direct-predecessor-hom-Enriched-Directed-Tree x)
   enrichment-hom-Enriched-Directed-Tree = pr2 (pr2 f)
 ```
 
@@ -190,7 +190,7 @@ module _
                             ( pr1 H x))
                           ( b))) ∙
                       ( ap (λ q → tr B q b) (K x)))))) ~
-            ( ( ( children-htpy-hom-Directed-Tree
+            ( ( ( direct-predecessor-htpy-hom-Directed-Tree
                   ( directed-tree-Enriched-Directed-Tree A B S)
                   ( directed-tree-Enriched-Directed-Tree A B T)
                   ( directed-tree-hom-Enriched-Directed-Tree A B S T f)

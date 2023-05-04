@@ -446,7 +446,7 @@ module _
   enrichment-compute-enriched-directed-tree-element-𝕎 :
     (x : node-element-𝕎 w) →
     htpy-equiv
-      ( ( equiv-children-equiv-Directed-Tree
+      ( ( equiv-direct-predecessor-equiv-Directed-Tree
           ( directed-tree-element-𝕎 w)
           ( combinator-Directed-Tree
             ( λ b → directed-tree-element-𝕎 (component-𝕎 w b)))

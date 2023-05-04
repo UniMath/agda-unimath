@@ -917,7 +917,7 @@ module _
   enrichment-compute-enriched-directed-tree-element-coalgebra :
     (x : node-element-coalgebra X w) →
     htpy-equiv
-      ( ( equiv-children-equiv-Directed-Tree
+      ( ( equiv-direct-predecessor-equiv-Directed-Tree
           ( directed-tree-element-coalgebra X w)
           ( combinator-Directed-Tree
             ( λ b →

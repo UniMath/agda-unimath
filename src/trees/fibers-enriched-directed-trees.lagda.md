@@ -78,10 +78,12 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 
-  children-fiber-Enriched-Directed-Tree :
+  direct-predecessor-fiber-Enriched-Directed-Tree :
     (x : node-fiber-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
-  children-fiber-Enriched-Directed-Tree =
-    children-fiber-Directed-Tree (directed-tree-Enriched-Directed-Tree A B T) x
+  direct-predecessor-fiber-Enriched-Directed-Tree =
+    direct-predecessor-fiber-Directed-Tree
+      ( directed-tree-Enriched-Directed-Tree A B T)
+      ( x)
 
   shape-fiber-Enriched-Directed-Tree :
     node-fiber-Enriched-Directed-Tree → A
@@ -92,7 +94,7 @@ module _
   enrichment-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree) →
     B (shape-fiber-Enriched-Directed-Tree y) ≃
-    children-fiber-Enriched-Directed-Tree y
+    direct-predecessor-fiber-Enriched-Directed-Tree y
   enrichment-fiber-Enriched-Directed-Tree (y , w) =
     ( interchange-Σ-Σ (λ u e v → v ＝ cons-walk-Directed-Graph e w)) ∘e
     ( ( inv-right-unit-law-Σ-is-contr
@@ -109,7 +111,7 @@ module _
   map-enrichment-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree) →
     B ( shape-fiber-Enriched-Directed-Tree y) →
-    children-fiber-Enriched-Directed-Tree y
+    direct-predecessor-fiber-Enriched-Directed-Tree y
   map-enrichment-fiber-Enriched-Directed-Tree =
     map-enrichment-Enriched-Directed-Tree A B fiber-Enriched-Directed-Tree
 
@@ -163,7 +165,7 @@ module _
           ( walk-node-inclusion-fiber-Enriched-Directed-Tree y)))
 ```
 
-### Computing the children of a node in a fiber
+### Computing the direct predecessors of a node in a fiber
 
 ```agda
 module _
@@ -172,50 +174,51 @@ module _
   (x : node-Enriched-Directed-Tree A B T)
   where
 
-  compute-children-fiber-Enriched-Directed-Tree :
+  compute-direct-predecessor-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    children-fiber-Enriched-Directed-Tree A B T x y ≃
-    children-Enriched-Directed-Tree A B T
+    direct-predecessor-fiber-Enriched-Directed-Tree A B T x y ≃
+    direct-predecessor-Enriched-Directed-Tree A B T
       ( node-inclusion-fiber-Enriched-Directed-Tree A B T x y)
-  compute-children-fiber-Enriched-Directed-Tree =
-    compute-children-fiber-Directed-Tree
+  compute-direct-predecessor-fiber-Enriched-Directed-Tree =
+    compute-direct-predecessor-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 
-  map-compute-children-fiber-Enriched-Directed-Tree :
+  map-compute-direct-predecessor-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    children-fiber-Enriched-Directed-Tree A B T x y →
-    children-Enriched-Directed-Tree A B T
+    direct-predecessor-fiber-Enriched-Directed-Tree A B T x y →
+    direct-predecessor-Enriched-Directed-Tree A B T
       ( node-inclusion-fiber-Enriched-Directed-Tree A B T x y)
-  map-compute-children-fiber-Enriched-Directed-Tree =
-    map-compute-children-fiber-Directed-Tree
+  map-compute-direct-predecessor-fiber-Enriched-Directed-Tree =
+    map-compute-direct-predecessor-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 
-  inv-compute-children-fiber-Enriched-Directed-Tree :
+  inv-compute-direct-predecessor-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    children-Enriched-Directed-Tree A B T
+    direct-predecessor-Enriched-Directed-Tree A B T
       ( node-inclusion-fiber-Enriched-Directed-Tree A B T x y) ≃
-    children-fiber-Enriched-Directed-Tree A B T x y
-  inv-compute-children-fiber-Enriched-Directed-Tree =
-    inv-compute-children-fiber-Directed-Tree
+    direct-predecessor-fiber-Enriched-Directed-Tree A B T x y
+  inv-compute-direct-predecessor-fiber-Enriched-Directed-Tree =
+    inv-compute-direct-predecessor-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 
-  Eq-children-fiber-Enriched-Directed-Tree :
+  Eq-direct-predecessor-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    (u v : children-fiber-Enriched-Directed-Tree A B T x y) → UU (l3 ⊔ l4)
-  Eq-children-fiber-Enriched-Directed-Tree =
-    Eq-children-fiber-Directed-Tree
+    (u v : direct-predecessor-fiber-Enriched-Directed-Tree A B T x y) →
+    UU (l3 ⊔ l4)
+  Eq-direct-predecessor-fiber-Enriched-Directed-Tree =
+    Eq-direct-predecessor-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 
-  eq-Eq-children-fiber-Enriched-Directed-Tree :
+  eq-Eq-direct-predecessor-fiber-Enriched-Directed-Tree :
     (y : node-fiber-Enriched-Directed-Tree A B T x) →
-    ( u v : children-fiber-Enriched-Directed-Tree A B T x y) →
-    Eq-children-fiber-Enriched-Directed-Tree y u v → u ＝ v
-  eq-Eq-children-fiber-Enriched-Directed-Tree =
-    eq-Eq-children-fiber-Directed-Tree
+    ( u v : direct-predecessor-fiber-Enriched-Directed-Tree A B T x y) →
+    Eq-direct-predecessor-fiber-Enriched-Directed-Tree y u v → u ＝ v
+  eq-Eq-direct-predecessor-fiber-Enriched-Directed-Tree =
+    eq-Eq-direct-predecessor-fiber-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( x)
 ```

@@ -87,17 +87,19 @@ module _
   edge-Directed-Tree : (x y : node-Directed-Tree) → UU l2
   edge-Directed-Tree = edge-Directed-Graph graph-Directed-Tree
 
-  children-Directed-Tree : node-Directed-Tree → UU (l1 ⊔ l2)
-  children-Directed-Tree x = Σ node-Directed-Tree (λ y → edge-Directed-Tree y x)
+  direct-predecessor-Directed-Tree : node-Directed-Tree → UU (l1 ⊔ l2)
+  direct-predecessor-Directed-Tree x =
+    Σ node-Directed-Tree (λ y → edge-Directed-Tree y x)
 
-  node-children-Directed-Tree :
-    (x : node-Directed-Tree) → children-Directed-Tree x → node-Directed-Tree
-  node-children-Directed-Tree x = pr1
+  node-direct-predecessor-Directed-Tree :
+    (x : node-Directed-Tree) →
+    direct-predecessor-Directed-Tree x → node-Directed-Tree
+  node-direct-predecessor-Directed-Tree x = pr1
 
-  edge-children-Directed-Tree :
-    (x : node-Directed-Tree) (y : children-Directed-Tree x) →
-    edge-Directed-Tree (node-children-Directed-Tree x y) x
-  edge-children-Directed-Tree x = pr2
+  edge-direct-predecessor-Directed-Tree :
+    (x : node-Directed-Tree) (y : direct-predecessor-Directed-Tree x) →
+    edge-Directed-Tree (node-direct-predecessor-Directed-Tree x y) x
+  edge-direct-predecessor-Directed-Tree x = pr2
 
   walk-Directed-Tree : (x y : node-Directed-Tree) → UU (l1 ⊔ l2)
   walk-Directed-Tree = walk-Directed-Graph graph-Directed-Tree

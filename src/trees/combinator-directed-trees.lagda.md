@@ -279,7 +279,7 @@ module _
 
 ## Properties
 
-### The type of children of `x : T i` is equivalent to the type of children of the inclusion of `x` in `combinator T`
+### The type of direct predecessors of `x : T i` is equivalent to the type of direct predecessors of the inclusion of `x` in `combinator T`
 
 ```agda
 module _
@@ -287,53 +287,56 @@ module _
   (i : I) (x : node-Directed-Tree (T i))
   where
 
-  children-combinator-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3)
-  children-combinator-Directed-Tree =
+  direct-predecessor-combinator-Directed-Tree : UU (l1 ⊔ l2 ⊔ l3)
+  direct-predecessor-combinator-Directed-Tree =
     Σ ( node-combinator-Directed-Tree T)
       ( λ y →
         edge-combinator-Directed-Tree T y
           ( node-inclusion-combinator-Directed-Tree i x))
 
-  map-compute-children-combinator-Directed-Tree :
-    children-Directed-Tree (T i) x → children-combinator-Directed-Tree
-  pr1 (map-compute-children-combinator-Directed-Tree (y , e)) =
+  map-compute-direct-predecessor-combinator-Directed-Tree :
+    direct-predecessor-Directed-Tree (T i) x →
+    direct-predecessor-combinator-Directed-Tree
+  pr1 (map-compute-direct-predecessor-combinator-Directed-Tree (y , e)) =
     node-inclusion-combinator-Directed-Tree i y
-  pr2 (map-compute-children-combinator-Directed-Tree (y , e)) =
+  pr2 (map-compute-direct-predecessor-combinator-Directed-Tree (y , e)) =
     edge-inclusion-combinator-Directed-Tree i y x e
 
-  map-inv-compute-children-combinator-Directed-Tree :
-    children-combinator-Directed-Tree →
-    children-Directed-Tree (T i) x
-  map-inv-compute-children-combinator-Directed-Tree
+  map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+    direct-predecessor-combinator-Directed-Tree →
+    direct-predecessor-Directed-Tree (T i) x
+  map-inv-compute-direct-predecessor-combinator-Directed-Tree
     ( ._ , edge-inclusion-combinator-Directed-Tree .i y .x e) =
     ( y , e)
 
-  issec-map-inv-compute-children-combinator-Directed-Tree :
-    ( map-compute-children-combinator-Directed-Tree ∘
-      map-inv-compute-children-combinator-Directed-Tree) ~ id
-  issec-map-inv-compute-children-combinator-Directed-Tree
+  issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+    ( map-compute-direct-predecessor-combinator-Directed-Tree ∘
+      map-inv-compute-direct-predecessor-combinator-Directed-Tree) ~ id
+  issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree
     ( ._ , edge-inclusion-combinator-Directed-Tree .i y .x e) =
     refl
 
-  isretr-map-inv-compute-children-combinator-Directed-Tree :
-    ( map-inv-compute-children-combinator-Directed-Tree ∘
-      map-compute-children-combinator-Directed-Tree) ~ id
-  isretr-map-inv-compute-children-combinator-Directed-Tree (y , e) = refl
+  isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+    ( map-inv-compute-direct-predecessor-combinator-Directed-Tree ∘
+      map-compute-direct-predecessor-combinator-Directed-Tree) ~ id
+  isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree (y , e) =
+    refl
 
-  is-equiv-map-compute-children-combinator-Directed-Tree :
-    is-equiv map-compute-children-combinator-Directed-Tree
-  is-equiv-map-compute-children-combinator-Directed-Tree =
+  is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree :
+    is-equiv map-compute-direct-predecessor-combinator-Directed-Tree
+  is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree =
     is-equiv-has-inverse
-      map-inv-compute-children-combinator-Directed-Tree
-      issec-map-inv-compute-children-combinator-Directed-Tree
-      isretr-map-inv-compute-children-combinator-Directed-Tree
+      map-inv-compute-direct-predecessor-combinator-Directed-Tree
+      issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree
+      isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree
 
-  compute-children-combinator-Directed-Tree :
-    children-Directed-Tree (T i) x ≃ children-combinator-Directed-Tree
-  pr1 compute-children-combinator-Directed-Tree =
-    map-compute-children-combinator-Directed-Tree
-  pr2 compute-children-combinator-Directed-Tree =
-    is-equiv-map-compute-children-combinator-Directed-Tree
+  compute-direct-predecessor-combinator-Directed-Tree :
+    direct-predecessor-Directed-Tree (T i) x ≃
+    direct-predecessor-combinator-Directed-Tree
+  pr1 compute-direct-predecessor-combinator-Directed-Tree =
+    map-compute-direct-predecessor-combinator-Directed-Tree
+  pr2 compute-direct-predecessor-combinator-Directed-Tree =
+    is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree
 ```
 
 ### If `e` is an edge from `node-inclusion i x` to `node-inclusion j y`, then `i ＝ j`

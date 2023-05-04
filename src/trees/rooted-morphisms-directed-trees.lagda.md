@@ -91,12 +91,12 @@ module _
     walk-rooted-hom-Directed-Tree =
       walk-hom-Directed-Tree S T hom-rooted-hom-Directed-Tree
 
-    children-rooted-hom-Directed-Tree :
+    direct-predecessor-rooted-hom-Directed-Tree :
       (x : node-Directed-Tree S) →
-      children-Directed-Tree S x →
-      children-Directed-Tree T (node-rooted-hom-Directed-Tree x)
-    children-rooted-hom-Directed-Tree =
-      children-hom-Directed-Tree S T hom-rooted-hom-Directed-Tree
+      direct-predecessor-Directed-Tree S x →
+      direct-predecessor-Directed-Tree T (node-rooted-hom-Directed-Tree x)
+    direct-predecessor-rooted-hom-Directed-Tree =
+      direct-predecessor-hom-Directed-Tree S T hom-rooted-hom-Directed-Tree
 
     preserves-root-rooted-hom-Directed-Tree :
       preserves-root-hom-Directed-Tree hom-rooted-hom-Directed-Tree
@@ -200,17 +200,17 @@ module _
         ( hom-rooted-hom-Directed-Tree S T g)
         ( H)
 
-    children-htpy-rooted-hom-Directed-Tree :
+    direct-predecessor-htpy-rooted-hom-Directed-Tree :
       ( x : node-Directed-Tree S) →
       ( ( tot
           ( λ y →
             tr
               ( edge-Directed-Tree T y)
               ( node-htpy-rooted-hom-Directed-Tree x))) ∘
-        ( children-rooted-hom-Directed-Tree S T f x)) ~
-      ( children-rooted-hom-Directed-Tree S T g x)
-    children-htpy-rooted-hom-Directed-Tree =
-      children-htpy-hom-Directed-Tree S T
+        ( direct-predecessor-rooted-hom-Directed-Tree S T f x)) ~
+      ( direct-predecessor-rooted-hom-Directed-Tree S T g x)
+    direct-predecessor-htpy-rooted-hom-Directed-Tree =
+      direct-predecessor-htpy-hom-Directed-Tree S T
         ( hom-rooted-hom-Directed-Tree S T f)
         ( hom-rooted-hom-Directed-Tree S T g)
         ( H)

@@ -82,22 +82,22 @@ module _
   edge-Enriched-Directed-Tree =
     edge-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  children-Enriched-Directed-Tree :
+  direct-predecessor-Enriched-Directed-Tree :
     node-Enriched-Directed-Tree → UU (l3 ⊔ l4)
-  children-Enriched-Directed-Tree =
-    children-Directed-Tree directed-tree-Enriched-Directed-Tree
+  direct-predecessor-Enriched-Directed-Tree =
+    direct-predecessor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  node-children-Enriched-Directed-Tree :
+  node-direct-predecessor-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
-    children-Enriched-Directed-Tree x → node-Enriched-Directed-Tree
-  node-children-Enriched-Directed-Tree =
-    node-children-Directed-Tree directed-tree-Enriched-Directed-Tree
+    direct-predecessor-Enriched-Directed-Tree x → node-Enriched-Directed-Tree
+  node-direct-predecessor-Enriched-Directed-Tree =
+    node-direct-predecessor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  edge-children-Enriched-Directed-Tree :
-    (x : node-Enriched-Directed-Tree) (y : children-Enriched-Directed-Tree x) →
-    edge-Enriched-Directed-Tree (node-children-Enriched-Directed-Tree x y) x
-  edge-children-Enriched-Directed-Tree =
-    edge-children-Directed-Tree directed-tree-Enriched-Directed-Tree
+  edge-direct-predecessor-Enriched-Directed-Tree :
+    (x : node-Enriched-Directed-Tree) (y : direct-predecessor-Enriched-Directed-Tree x) →
+    edge-Enriched-Directed-Tree (node-direct-predecessor-Enriched-Directed-Tree x y) x
+  edge-direct-predecessor-Enriched-Directed-Tree =
+    edge-direct-predecessor-Directed-Tree directed-tree-Enriched-Directed-Tree
 
   walk-Enriched-Directed-Tree :
     (x y : node-Enriched-Directed-Tree) → UU (l3 ⊔ l4)
@@ -282,7 +282,7 @@ module _
 
   map-enrichment-Enriched-Directed-Tree :
     (x : node-Enriched-Directed-Tree) →
-    B (shape-Enriched-Directed-Tree x) → children-Enriched-Directed-Tree x
+    B (shape-Enriched-Directed-Tree x) → direct-predecessor-Enriched-Directed-Tree x
   map-enrichment-Enriched-Directed-Tree x =
     map-equiv (enrichment-Enriched-Directed-Tree x)
 

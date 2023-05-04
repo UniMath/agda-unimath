@@ -178,24 +178,24 @@ module _
       ( graph-Directed-Tree T)
       ( e)
 
-  equiv-children-equiv-Directed-Tree :
+  equiv-direct-predecessor-equiv-Directed-Tree :
     (x : node-Directed-Tree S) →
     ( Σ (node-Directed-Tree S) (λ y → edge-Directed-Tree S y x)) ≃
     ( Σ ( node-Directed-Tree T)
         ( λ y → edge-Directed-Tree T y (node-equiv-Directed-Tree x)))
-  equiv-children-equiv-Directed-Tree x =
+  equiv-direct-predecessor-equiv-Directed-Tree x =
     equiv-Σ
       ( λ y → edge-Directed-Tree T y (node-equiv-Directed-Tree x))
       ( equiv-node-equiv-Directed-Tree)
       ( λ y → equiv-edge-equiv-Directed-Tree y x)
 
-  children-equiv-Directed-Tree :
+  direct-predecessor-equiv-Directed-Tree :
     (x : node-Directed-Tree S) →
     Σ (node-Directed-Tree S) (λ y → edge-Directed-Tree S y x) →
     Σ ( node-Directed-Tree T)
       ( λ y → edge-Directed-Tree T y (node-equiv-Directed-Tree x))
-  children-equiv-Directed-Tree x =
-    map-equiv (equiv-children-equiv-Directed-Tree x)
+  direct-predecessor-equiv-Directed-Tree x =
+    map-equiv (equiv-direct-predecessor-equiv-Directed-Tree x)
 
   equiv-walk-equiv-Directed-Tree :
     {x y : node-Directed-Tree S} →

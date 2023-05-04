@@ -44,7 +44,7 @@ module _
   where
 
   base-Directed-Tree : UU (l1 ⊔ l2)
-  base-Directed-Tree = children-Directed-Tree T (root-Directed-Tree T)
+  base-Directed-Tree = direct-predecessor-Directed-Tree T (root-Directed-Tree T)
 
   module _
     (b : base-Directed-Tree)
