@@ -12,6 +12,7 @@ open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
+open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 
 open import elementary-number-theory.natural-numbers
@@ -142,6 +143,24 @@ is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
   apply-universal-property-trunc-Prop p
     ( subset-prime-ideal-Commutative-Ring R P x)
     ( λ (n , p) →
-       {!  !})
+      is-radical-prime-ideal-Commutative-Ring R P x n
+      (is-closed-under-eq-prime-ideal-Commutative-Ring' R P
+      (contains-zero-prime-ideal-Commutative-Ring R P) p))
+
+```
+### Nilradical is contained in every radical ideal
+
+```agda
+is-contained-in-radical-ideal-nilradical-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l)
+  (I : radical-ideal-Commutative-Ring l R) (x : type-Commutative-Ring R) →
+  is-in-nilradical-Commutative-Ring R x →
+  is-in-radical-ideal-Commutative-Ring R I x
+is-contained-in-radical-ideal-nilradical-Commutative-Ring R I x p =
+  apply-universal-property-trunc-Prop p
+    ( subset-radical-ideal-Commutative-Ring R I x)
+    ( λ (n , p) → is-radical-radical-ideal-Commutative-Ring R I x n
+    (is-closed-under-eq-radical-ideal-Commutative-Ring' R I
+    (contains-zero-radical-ideal-Commutative-Ring R I) p))
 
 ```

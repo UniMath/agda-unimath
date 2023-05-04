@@ -17,6 +17,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
+open import foundation.identity-types
 ```
 
 </details>
@@ -84,6 +85,18 @@ module _
   is-in-radical-ideal-Commutative-Ring =
     is-in-ideal-Commutative-Ring A ideal-radical-ideal-Commutative-Ring
 
+  is-closed-under-eq-radical-ideal-Commutative-Ring :
+    {x y : type-Commutative-Ring A} → is-in-radical-ideal-Commutative-Ring x →
+    (x ＝ y) → is-in-radical-ideal-Commutative-Ring y
+  is-closed-under-eq-radical-ideal-Commutative-Ring =
+    is-closed-under-eq-subset-Commutative-Ring A subset-radical-ideal-Commutative-Ring
+
+  is-closed-under-eq-radical-ideal-Commutative-Ring' :
+    {x y : type-Commutative-Ring A} → is-in-radical-ideal-Commutative-Ring y →
+    (x ＝ y) → is-in-radical-ideal-Commutative-Ring x
+  is-closed-under-eq-radical-ideal-Commutative-Ring' =
+    is-closed-under-eq-subset-Commutative-Ring' A subset-radical-ideal-Commutative-Ring
+
   type-radical-ideal-Commutative-Ring : UU (l1 ⊔ l2)
   type-radical-ideal-Commutative-Ring =
     type-ideal-Commutative-Ring A ideal-radical-ideal-Commutative-Ring
@@ -126,4 +139,10 @@ module _
   is-closed-under-right-multiplication-radical-ideal-Commutative-Ring =
     is-closed-under-right-multiplication-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
+```
+
+### Intersection of radical ideals is radical
+
+```agda
+
 ```
