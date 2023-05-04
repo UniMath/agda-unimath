@@ -42,10 +42,10 @@ module _
   eq-element-decidable-sub-Preorder =
     eq-element-sub-Preorder X (subtype-decidable-subtype S)
 
-  leq-decidable-sub-preorder-Prop :
+  leq-decidable-sub-Preorder-Prop :
     (x y : element-decidable-sub-Preorder) → Prop l2
-  leq-decidable-sub-preorder-Prop =
-    leq-sub-preorder-Prop X (subtype-decidable-subtype S)
+  leq-decidable-sub-Preorder-Prop =
+    leq-sub-Preorder-Prop X (subtype-decidable-subtype S)
 
   leq-decidable-sub-Preorder : (x y : element-decidable-sub-Preorder) → UU l2
   leq-decidable-sub-Preorder =

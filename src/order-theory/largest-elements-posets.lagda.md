@@ -25,9 +25,9 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-largest-element-poset-Prop : element-Poset X → Prop (l1 ⊔ l2)
-  is-largest-element-poset-Prop =
-    is-largest-element-preorder-Prop (preorder-Poset X)
+  is-largest-element-Poset-Prop : element-Poset X → Prop (l1 ⊔ l2)
+  is-largest-element-Poset-Prop =
+    is-largest-element-Preorder-Prop (preorder-Poset X)
 
   is-largest-element-Poset : element-Poset X → UU (l1 ⊔ l2)
   is-largest-element-Poset = is-largest-element-Preorder (preorder-Poset X)
@@ -44,14 +44,14 @@ module _
     all-elements-equal largest-element-Poset
   all-elements-equal-largest-element-Poset (pair x H) (pair y K) =
     eq-type-subtype
-      ( is-largest-element-poset-Prop)
+      ( is-largest-element-Poset-Prop)
       ( antisymmetric-leq-Poset X x y (K x) (H y))
 
   is-prop-largest-element-Poset : is-prop largest-element-Poset
   is-prop-largest-element-Poset =
     is-prop-all-elements-equal all-elements-equal-largest-element-Poset
 
-  has-largest-element-poset-Prop : Prop (l1 ⊔ l2)
-  pr1 has-largest-element-poset-Prop = largest-element-Poset
-  pr2 has-largest-element-poset-Prop = is-prop-largest-element-Poset
+  has-largest-element-Poset-Prop : Prop (l1 ⊔ l2)
+  pr1 has-largest-element-Poset-Prop = largest-element-Poset
+  pr2 has-largest-element-Poset-Prop = is-prop-largest-element-Poset
 ```

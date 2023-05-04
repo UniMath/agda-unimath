@@ -36,22 +36,22 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-join-semilattice-poset-Prop : Prop (l1 ⊔ l2)
-  is-join-semilattice-poset-Prop =
+  is-join-semilattice-Poset-Prop : Prop (l1 ⊔ l2)
+  is-join-semilattice-Poset-Prop =
     Π-Prop
       ( element-Poset P)
       ( λ x →
         Π-Prop
           ( element-Poset P)
-          ( has-least-binary-upper-bound-poset-Prop P x))
+          ( has-least-binary-upper-bound-Poset-Prop P x))
 
   is-join-semilattice-Poset : UU (l1 ⊔ l2)
-  is-join-semilattice-Poset = type-Prop is-join-semilattice-poset-Prop
+  is-join-semilattice-Poset = type-Prop is-join-semilattice-Poset-Prop
 
   is-prop-is-join-semilattice-Poset :
     is-prop is-join-semilattice-Poset
   is-prop-is-join-semilattice-Poset =
-    is-prop-type-Prop is-join-semilattice-poset-Prop
+    is-prop-type-Prop is-join-semilattice-Poset-Prop
 
 Join-Semilattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Join-Semilattice l1 l2 = Σ (Poset l1 l2) is-join-semilattice-Poset
@@ -67,7 +67,7 @@ module _
   element-Join-Semilattice = element-Poset poset-Join-Semilattice
 
   leq-join-semilattice-Prop : (x y : element-Join-Semilattice) → Prop l2
-  leq-join-semilattice-Prop = leq-poset-Prop poset-Join-Semilattice
+  leq-join-semilattice-Prop = leq-Poset-Prop poset-Join-Semilattice
 
   leq-Join-Semilattice : (x y : element-Join-Semilattice) → UU l2
   leq-Join-Semilattice = leq-Poset poset-Join-Semilattice

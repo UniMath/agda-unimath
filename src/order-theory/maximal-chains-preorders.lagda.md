@@ -24,20 +24,20 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-maximal-chain-preorder-Prop :
+  is-maximal-chain-Preorder-Prop :
     {l3 : Level} → chain-Preorder l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-preorder-Prop {l3} C =
-    Π-Prop (chain-Preorder l3 X) (inclusion-chain-preorder-Prop X C)
+  is-maximal-chain-Preorder-Prop {l3} C =
+    Π-Prop (chain-Preorder l3 X) (inclusion-chain-Preorder-Prop X C)
 
   is-maximal-chain-Preorder :
     {l3 : Level} → chain-Preorder l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-Preorder C = type-Prop (is-maximal-chain-preorder-Prop C)
+  is-maximal-chain-Preorder C = type-Prop (is-maximal-chain-Preorder-Prop C)
 
   is-prop-is-maximal-chain-Preorder :
     {l3 : Level} (C : chain-Preorder l3 X) →
     is-prop (is-maximal-chain-Preorder C)
   is-prop-is-maximal-chain-Preorder C =
-    is-prop-type-Prop (is-maximal-chain-preorder-Prop C)
+    is-prop-type-Prop (is-maximal-chain-Preorder-Prop C)
 
 maximal-chain-Preorder :
   {l1 l2 : Level} (l3 : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)

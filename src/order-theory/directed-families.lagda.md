@@ -21,10 +21,10 @@ open import order-theory.posets
 ## Definition
 
 ```agda
-is-directed-family-poset-Prop :
+is-directed-family-Poset-Prop :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (α : type-Inhabited-Type I → element-Poset P) → Prop (l2 ⊔ l3)
-is-directed-family-poset-Prop P I α =
+is-directed-family-Poset-Prop P I α =
   Π-Prop
     ( type-Inhabited-Type I)
     ( λ i →
@@ -38,5 +38,5 @@ is-directed-family-poset-Prop P I α =
 is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (α : type-Inhabited-Type I → element-Poset P) → UU (l2 ⊔ l3)
-is-directed-family-Poset P I α = type-Prop (is-directed-family-poset-Prop P I α)
+is-directed-family-Poset P I α = type-Prop (is-directed-family-Poset-Prop P I α)
 ```

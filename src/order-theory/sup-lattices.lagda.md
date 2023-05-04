@@ -35,20 +35,20 @@ module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
 
-  is-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-sup-lattice-poset-Prop =
+  is-sup-lattice-Poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-sup-lattice-Poset-Prop =
     Π-Prop
       (UU l3)
       (λ I →
         Π-Prop
           ( I → element-Poset P)
-          ( λ f → has-least-upper-bound-family-poset-Prop P f))
+          ( λ f → has-least-upper-bound-family-Poset-Prop P f))
 
   is-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-sup-lattice-Poset = type-Prop is-sup-lattice-poset-Prop
+  is-sup-lattice-Poset = type-Prop is-sup-lattice-Poset-Prop
 
   is-prop-sup-lattice-Poset : is-prop is-sup-lattice-Poset
-  is-prop-sup-lattice-Poset = is-prop-type-Prop is-sup-lattice-poset-Prop
+  is-prop-sup-lattice-Poset = is-prop-type-Prop is-sup-lattice-Poset-Prop
 
 Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Sup-Lattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-sup-lattice-Poset l3 P)
@@ -69,7 +69,7 @@ module _
   element-Sup-Lattice = element-Poset poset-Sup-Lattice
 
   leq-sup-lattice-Prop : (x y : element-Sup-Lattice) → Prop l2
-  leq-sup-lattice-Prop = leq-poset-Prop poset-Sup-Lattice
+  leq-sup-lattice-Prop = leq-Poset-Prop poset-Sup-Lattice
 
   leq-Sup-Lattice : (x y : element-Sup-Lattice) → UU l2
   leq-Sup-Lattice = leq-Poset poset-Sup-Lattice

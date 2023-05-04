@@ -52,9 +52,9 @@ module _
   element-total-decidable-Poset : UU l1
   element-total-decidable-Poset = element-Poset poset-total-decidable-Poset
 
-  leq-total-decidable-poset-Prop :
+  leq-total-decidable-Poset-Prop :
     (x y : element-total-decidable-Poset) → Prop l2
-  leq-total-decidable-poset-Prop = leq-poset-Prop poset-total-decidable-Poset
+  leq-total-decidable-Poset-Prop = leq-Poset-Prop poset-total-decidable-Poset
 
   leq-total-decidable-Poset :
     (x y : element-total-decidable-Poset) → UU l2
@@ -66,10 +66,10 @@ module _
   is-prop-leq-total-decidable-Poset =
     is-prop-leq-Poset poset-total-decidable-Poset
 
-  strict-leq-total-decidable-poset-Prop :
+  strict-leq-total-decidable-Poset-Prop :
     (x y : element-total-decidable-Poset) → Prop (l1 ⊔ l2)
-  strict-leq-total-decidable-poset-Prop =
-    strict-leq-poset-Prop poset-total-decidable-Poset
+  strict-leq-total-decidable-Poset-Prop =
+    strict-leq-Poset-Prop poset-total-decidable-Poset
 
   strict-leq-total-decidable-Poset :
     (x y : element-total-decidable-Poset) → UU (l1 ⊔ l2)

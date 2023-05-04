@@ -23,17 +23,17 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-largest-element-preorder-Prop : element-Preorder X → Prop (l1 ⊔ l2)
-  is-largest-element-preorder-Prop x =
-    Π-Prop (element-Preorder X) (λ y → leq-preorder-Prop X y x)
+  is-largest-element-Preorder-Prop : element-Preorder X → Prop (l1 ⊔ l2)
+  is-largest-element-Preorder-Prop x =
+    Π-Prop (element-Preorder X) (λ y → leq-Preorder-Prop X y x)
 
   is-largest-element-Preorder : element-Preorder X → UU (l1 ⊔ l2)
-  is-largest-element-Preorder x = type-Prop (is-largest-element-preorder-Prop x)
+  is-largest-element-Preorder x = type-Prop (is-largest-element-Preorder-Prop x)
 
   is-prop-is-largest-element-Preorder :
     (x : element-Preorder X) → is-prop (is-largest-element-Preorder x)
   is-prop-is-largest-element-Preorder x =
-    is-prop-type-Prop (is-largest-element-preorder-Prop x)
+    is-prop-type-Prop (is-largest-element-Preorder-Prop x)
 
   largest-element-Preorder : UU (l1 ⊔ l2)
   largest-element-Preorder = Σ (element-Preorder X) is-largest-element-Preorder

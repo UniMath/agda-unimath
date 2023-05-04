@@ -24,10 +24,10 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-maximal-chain-poset-Prop :
+  is-maximal-chain-Poset-Prop :
     {l3 : Level} → chain-Poset l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-poset-Prop =
-    is-maximal-chain-preorder-Prop (preorder-Poset X)
+  is-maximal-chain-Poset-Prop =
+    is-maximal-chain-Preorder-Prop (preorder-Poset X)
 
   is-maximal-chain-Poset :
     {l3 : Level} → chain-Poset l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)

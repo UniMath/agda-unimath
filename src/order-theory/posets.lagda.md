@@ -45,14 +45,14 @@ module _
   element-Poset : UU l1
   element-Poset = pr1 X
 
-  leq-poset-Prop : (x y : element-Poset) → Prop l2
-  leq-poset-Prop = pr1 (pr2 X)
+  leq-Poset-Prop : (x y : element-Poset) → Prop l2
+  leq-Poset-Prop = pr1 (pr2 X)
 
   leq-Poset : (x y : element-Poset) → UU l2
-  leq-Poset x y = type-Prop (leq-poset-Prop x y)
+  leq-Poset x y = type-Prop (leq-Poset-Prop x y)
 
   is-prop-leq-Poset : (x y : element-Poset) → is-prop (leq-Poset x y)
-  is-prop-leq-Poset x y = is-prop-type-Prop (leq-poset-Prop x y)
+  is-prop-leq-Poset x y = is-prop-type-Prop (leq-Poset-Prop x y)
 
   concatenate-eq-leq-Poset :
     {x y z : element-Poset} → x ＝ y → leq-Poset y z → leq-Poset x z
@@ -71,12 +71,12 @@ module _
 
   preorder-Poset : Preorder l1 l2
   pr1 preorder-Poset = element-Poset
-  pr1 (pr2 preorder-Poset) = leq-poset-Prop
+  pr1 (pr2 preorder-Poset) = leq-Poset-Prop
   pr1 (pr2 (pr2 preorder-Poset)) = refl-leq-Poset
   pr2 (pr2 (pr2 preorder-Poset)) = transitive-leq-Poset
 
-  strict-leq-poset-Prop : (x y : element-Poset) → Prop (l1 ⊔ l2)
-  strict-leq-poset-Prop = strict-leq-preorder-Prop preorder-Poset
+  strict-leq-Poset-Prop : (x y : element-Poset) → Prop (l1 ⊔ l2)
+  strict-leq-Poset-Prop = strict-leq-Preorder-Prop preorder-Poset
 
   strict-leq-Poset : (x y : element-Poset) → UU (l1 ⊔ l2)
   strict-leq-Poset = strict-leq-Preorder preorder-Poset

@@ -35,8 +35,8 @@ module _
     (x y : element-sub-Poset) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-sub-Poset = eq-element-sub-Preorder (preorder-Poset X) S
 
-  leq-sub-poset-Prop : (x y : element-sub-Poset) → Prop l2
-  leq-sub-poset-Prop = leq-sub-preorder-Prop (preorder-Poset X) S
+  leq-sub-Poset-Prop : (x y : element-sub-Poset) → Prop l2
+  leq-sub-Poset-Prop = leq-sub-Preorder-Prop (preorder-Poset X) S
 
   leq-sub-Poset : (x y : element-sub-Poset) → UU l2
   leq-sub-Poset = leq-sub-Preorder (preorder-Poset X) S
@@ -60,7 +60,7 @@ module _
 
   sub-Poset : Poset (l1 ⊔ l3) l2
   pr1 sub-Poset = element-sub-Poset
-  pr1 (pr2 sub-Poset) = leq-sub-poset-Prop
+  pr1 (pr2 sub-Poset) = leq-sub-Poset-Prop
   pr1 (pr1 (pr2 (pr2 sub-Poset))) = refl-leq-sub-Poset
   pr2 (pr1 (pr2 (pr2 sub-Poset))) = transitive-leq-sub-Poset
   pr2 (pr2 (pr2 sub-Poset)) = antisymmetric-leq-sub-Poset
@@ -78,9 +78,9 @@ module _
     (T : element-Poset X → Prop l4)
     where
 
-    inclusion-sub-poset-Prop : Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-poset-Prop =
-      inclusion-sub-preorder-Prop (preorder-Poset X) S T
+    inclusion-sub-Poset-Prop : Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-sub-Poset-Prop =
+      inclusion-sub-Preorder-Prop (preorder-Poset X) S T
 
     inclusion-sub-Poset : UU (l1 ⊔ l3 ⊔ l4)
     inclusion-sub-Poset = inclusion-sub-Preorder (preorder-Poset X) S T
@@ -105,7 +105,7 @@ module _
 
   sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
   pr1 (sub-poset-Preorder l) = element-Poset X → Prop l
-  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-poset-Prop
+  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-Poset-Prop
   pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-sub-Poset
   pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-sub-Poset
 ```

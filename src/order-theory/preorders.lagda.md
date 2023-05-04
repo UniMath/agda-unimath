@@ -42,26 +42,26 @@ module _
   element-Preorder : UU l1
   element-Preorder = pr1 X
 
-  leq-preorder-Prop : (x y : element-Preorder) → Prop l2
-  leq-preorder-Prop = pr1 (pr2 X)
+  leq-Preorder-Prop : (x y : element-Preorder) → Prop l2
+  leq-Preorder-Prop = pr1 (pr2 X)
 
   leq-Preorder : (x y : element-Preorder) → UU l2
-  leq-Preorder x y = type-Prop (leq-preorder-Prop x y)
+  leq-Preorder x y = type-Prop (leq-Preorder-Prop x y)
 
   is-prop-leq-Preorder : (x y : element-Preorder) → is-prop (leq-Preorder x y)
-  is-prop-leq-Preorder x y = is-prop-type-Prop (leq-preorder-Prop x y)
+  is-prop-leq-Preorder x y = is-prop-type-Prop (leq-Preorder-Prop x y)
 
-  strict-leq-preorder-Prop : (x y : element-Preorder) → Prop (l1 ⊔ l2)
-  strict-leq-preorder-Prop x y =
-    prod-Prop (¬ (x ＝ y) , is-prop-neg) (leq-preorder-Prop x y)
+  strict-leq-Preorder-Prop : (x y : element-Preorder) → Prop (l1 ⊔ l2)
+  strict-leq-Preorder-Prop x y =
+    prod-Prop (¬ (x ＝ y) , is-prop-neg) (leq-Preorder-Prop x y)
 
   strict-leq-Preorder : (x y : element-Preorder) → UU (l1 ⊔ l2)
-  strict-leq-Preorder x y = type-Prop (strict-leq-preorder-Prop x y)
+  strict-leq-Preorder x y = type-Prop (strict-leq-Preorder-Prop x y)
 
   is-prop-strict-leq-Preorder :
     (x y : element-Preorder) → is-prop (strict-leq-Preorder x y)
   is-prop-strict-leq-Preorder x y =
-    is-prop-type-Prop (strict-leq-preorder-Prop x y)
+    is-prop-type-Prop (strict-leq-Preorder-Prop x y)
 
   refl-leq-Preorder : (x : element-Preorder) → leq-Preorder x x
   refl-leq-Preorder = pr1 (pr2 (pr2 X))

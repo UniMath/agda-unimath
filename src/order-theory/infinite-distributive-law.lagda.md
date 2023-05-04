@@ -36,18 +36,18 @@ module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
 
-  is-meet-sup-lattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-meet-sup-lattice-poset-Prop =
+  is-meet-sup-lattice-Poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-meet-sup-lattice-Poset-Prop =
     prod-Prop
-      ( is-meet-semilattice-poset-Prop P)
-      ( is-sup-lattice-poset-Prop l3 P)
+      ( is-meet-semilattice-Poset-Prop P)
+      ( is-sup-lattice-Poset-Prop l3 P)
 
   is-meet-sup-lattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-meet-sup-lattice-Poset = type-Prop is-meet-sup-lattice-poset-Prop
+  is-meet-sup-lattice-Poset = type-Prop is-meet-sup-lattice-Poset-Prop
 
   is-prop-is-meet-sup-lattice-Poset : is-prop is-meet-sup-lattice-Poset
   is-prop-is-meet-sup-lattice-Poset =
-    is-prop-type-Prop is-meet-sup-lattice-poset-Prop
+    is-prop-type-Prop is-meet-sup-lattice-Poset-Prop
 
 Meet-Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Meet-Sup-Lattice l1 l2 l3 =
@@ -70,7 +70,7 @@ module _
     element-Poset poset-Meet-Sup-Lattice
 
   leq-meet-sup-lattice-Prop : (x y : element-Meet-Sup-Lattice) → Prop l2
-  leq-meet-sup-lattice-Prop = leq-poset-Prop poset-Meet-Sup-Lattice
+  leq-meet-sup-lattice-Prop = leq-Poset-Prop poset-Meet-Sup-Lattice
 
   leq-Meet-Sup-Lattice : (x y : element-Meet-Sup-Lattice) → UU l2
   leq-Meet-Sup-Lattice = leq-Poset poset-Meet-Sup-Lattice

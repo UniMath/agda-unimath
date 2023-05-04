@@ -35,16 +35,16 @@ module _
     (x y : element-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-sub-Preorder x y = eq-type-subtype S
 
-  leq-sub-preorder-Prop : (x y : element-sub-Preorder) → Prop l2
-  leq-sub-preorder-Prop x y = leq-preorder-Prop X (pr1 x) (pr1 y)
+  leq-sub-Preorder-Prop : (x y : element-sub-Preorder) → Prop l2
+  leq-sub-Preorder-Prop x y = leq-Preorder-Prop X (pr1 x) (pr1 y)
 
   leq-sub-Preorder : (x y : element-sub-Preorder) → UU l2
-  leq-sub-Preorder x y = type-Prop (leq-sub-preorder-Prop x y)
+  leq-sub-Preorder x y = type-Prop (leq-sub-Preorder-Prop x y)
 
   is-prop-leq-sub-Preorder :
     (x y : element-sub-Preorder) → is-prop (leq-sub-Preorder x y)
   is-prop-leq-sub-Preorder x y =
-    is-prop-type-Prop (leq-sub-preorder-Prop x y)
+    is-prop-type-Prop (leq-sub-Preorder-Prop x y)
 
   refl-leq-sub-Preorder : (x : element-sub-Preorder) → leq-sub-Preorder x x
   refl-leq-sub-Preorder x = refl-leq-Preorder X (pr1 x)
@@ -57,7 +57,7 @@ module _
 
   sub-Preorder : Preorder (l1 ⊔ l3) l2
   pr1 sub-Preorder = element-sub-Preorder
-  pr1 (pr2 sub-Preorder) = leq-sub-preorder-Prop
+  pr1 (pr2 sub-Preorder) = leq-sub-Preorder-Prop
   pr1 (pr2 (pr2 sub-Preorder)) = refl-leq-sub-Preorder
   pr2 (pr2 (pr2 sub-Preorder)) = transitive-leq-sub-Preorder
 ```
@@ -74,16 +74,16 @@ module _
     (T : element-Preorder X → Prop l4)
     where
 
-    inclusion-sub-preorder-Prop : Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-preorder-Prop =
+    inclusion-sub-Preorder-Prop : Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-sub-Preorder-Prop =
       Π-Prop (element-Preorder X) (λ x → hom-Prop (S x) (T x))
 
     inclusion-sub-Preorder : UU (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-Preorder = type-Prop inclusion-sub-preorder-Prop
+    inclusion-sub-Preorder = type-Prop inclusion-sub-Preorder-Prop
 
     is-prop-inclusion-sub-Preorder : is-prop inclusion-sub-Preorder
     is-prop-inclusion-sub-Preorder =
-      is-prop-type-Prop inclusion-sub-preorder-Prop
+      is-prop-type-Prop inclusion-sub-Preorder-Prop
 
   refl-inclusion-sub-Preorder :
     {l3 : Level} (S : element-Preorder X → Prop l3) →
@@ -100,7 +100,7 @@ module _
 
   Sub-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
   pr1 (Sub-Preorder l) = element-Preorder X → Prop l
-  pr1 (pr2 (Sub-Preorder l)) = inclusion-sub-preorder-Prop
+  pr1 (pr2 (Sub-Preorder l)) = inclusion-sub-Preorder-Prop
   pr1 (pr2 (pr2 (Sub-Preorder l))) = refl-inclusion-sub-Preorder
   pr2 (pr2 (pr2 (Sub-Preorder l))) = transitive-inclusion-sub-Preorder
 ```

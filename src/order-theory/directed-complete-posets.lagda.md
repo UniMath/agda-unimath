@@ -22,9 +22,9 @@ open import order-theory.posets
 ## Definition
 
 ```agda
-is-directed-complete-poset-Prop :
+is-directed-complete-Poset-Prop :
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2) → Prop (l1 ⊔ l2 ⊔ lsuc l3)
-is-directed-complete-poset-Prop l3 P =
+is-directed-complete-Poset-Prop l3 P =
   Π-Prop
     ( Inhabited-Type l3)
     ( λ I →
@@ -32,9 +32,9 @@ is-directed-complete-poset-Prop l3 P =
         ( type-Inhabited-Type I → element-Poset P)
         ( λ α →
           hom-Prop
-            ( is-directed-family-poset-Prop P I α)
-            ( has-least-upper-bound-family-poset-Prop P α)))
+            ( is-directed-family-Poset-Prop P I α)
+            ( has-least-upper-bound-family-Poset-Prop P α)))
 
 DCPO : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-DCPO l1 l2 l3 = type-subtype (is-directed-complete-poset-Prop {l1} {l2} l3)
+DCPO l1 l2 l3 = type-subtype (is-directed-complete-Poset-Prop {l1} {l2} l3)
 ```

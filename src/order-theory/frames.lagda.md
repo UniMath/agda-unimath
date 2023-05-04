@@ -49,7 +49,7 @@ module _
   element-Frame = element-Poset poset-Frame
 
   leq-Frame-Prop : (x y : element-Frame) → Prop l2
-  leq-Frame-Prop = leq-poset-Prop poset-Frame
+  leq-Frame-Prop = leq-Poset-Prop poset-Frame
 
   leq-Frame : (x y : element-Frame) → UU l2
   leq-Frame = leq-Poset poset-Frame
