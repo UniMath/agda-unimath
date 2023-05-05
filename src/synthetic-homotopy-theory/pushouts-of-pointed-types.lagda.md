@@ -8,7 +8,6 @@ module synthetic-homotopy-theory.pushouts-of-pointed-types where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.universe-levels
 

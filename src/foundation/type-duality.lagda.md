@@ -7,7 +7,6 @@ module foundation.type-duality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.locally-small-types

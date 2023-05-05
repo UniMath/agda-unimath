@@ -11,7 +11,6 @@ open import foundation-core.equivalence-relations public
 
 open import foundation.binary-relations
 open import foundation.effective-maps-equivalence-relations
-open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.full-subtypes
 open import foundation.inhabited-subtypes

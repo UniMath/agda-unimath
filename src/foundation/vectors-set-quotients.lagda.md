@@ -16,7 +16,6 @@ open import foundation-core.identity-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-products-set-quotients
-open import foundation.equational-reasoning
 open import foundation.function-extensionality
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations

@@ -23,7 +23,6 @@ open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
 open import foundation.binary-transport public
-open import foundation.boolean-reflection public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
@@ -93,7 +92,6 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
-open import foundation.equational-reasoning public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public

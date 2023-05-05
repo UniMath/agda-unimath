@@ -58,7 +58,6 @@ open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
 open import group-theory.group-actions public
-open import group-theory.group-solver public
 open import group-theory.groups public
 open import group-theory.homomorphisms-abelian-groups public
 open import group-theory.homomorphisms-commutative-monoids public

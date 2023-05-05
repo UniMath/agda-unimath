@@ -12,7 +12,6 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
