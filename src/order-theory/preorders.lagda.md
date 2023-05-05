@@ -80,3 +80,36 @@ module _
     leq-Preorder y z → leq-Preorder x y → leq-Preorder x z
   transitive-leq-Preorder = pr2 (pr2 (pr2 X))
 ```
+
+## Reasoning with inequalities in preorders
+
+Inequalities in preorders can be constructed by equational reasoning as follows:
+
+```md
+preorder X reasoning
+  x ≤ y by ineq-1 inside X
+    ≤ z by ineq-2 inside X
+    ≤ v by ineq-3 inside X
+```
+
+Note, however, that in our setup of equational reasoning with inequalities it is
+not possible to mix inequalities with equalities or strict inequalities.
+
+```agda
+infixl 1 preorder_reasoning_
+infixl 0 step-preorder-reasoning
+
+preorder_reasoning_ :
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  (x : type-Preorder X) → leq-Preorder X x x
+preorder_reasoning_ = refl-leq-Preorder
+
+step-preorder-reasoning :
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  {x y : type-Preorder X} → leq-Preorder X x y →
+  (z : type-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
+step-preorder-reasoning X {x} {y} u z v =
+  transitive-leq-Preorder X x y z v u
+
+syntax step-preorder-reasoning X u z v = u ≤ z by v inside X
+```

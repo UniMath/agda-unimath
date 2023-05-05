@@ -9,9 +9,9 @@ module foundation.symmetric-difference where
 ```agda
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.exclusive-disjunction
 open import foundation.identity-types hiding (inv)
 open import foundation.intersections-subtypes
-open import foundation.xor
 
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions

@@ -344,6 +344,38 @@ module _
     inv-htpy (right-whisk-inv-htpy H f)
 ```
 
+## Reasoning with homotopies
+
+Homotopies can be constructed by equational reasoning in the following way:
+
+```md
+homotopy-reasoning
+  f ~ g by htpy-1
+    ~ h by htpy-2
+    ~ i by htpy-3
+```
+
+The homotopy obtained in this way is `htpy-1 ∙h (htpy-2 ∙h htpy-3)`, i.e., it is
+associated fully to the right.
+
+```agda
+infixl 1 homotopy-reasoning_
+infixl 0 step-homotopy-reasoning
+
+homotopy-reasoning_ :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  (f : (x : X) → Y x) → f ~ f
+homotopy-reasoning f = refl-htpy
+
+step-homotopy-reasoning :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  {f g : (x : X) → Y x} → (f ~ g) →
+  (h : (x : X) → Y x) → (g ~ h) → (f ~ h)
+step-homotopy-reasoning p h q = p ∙h q
+
+syntax step-homotopy-reasoning p h q = p ~ h by q
+```
+
 ## See also
 
 - We postulate that homotopy is equivalent to identity of functions in

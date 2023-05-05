@@ -9,7 +9,6 @@ module foundation.set-quotients where
 ```agda
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.equivalences
 open import foundation.identity-types

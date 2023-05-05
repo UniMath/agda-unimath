@@ -43,7 +43,6 @@ open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
-open import order-theory.planar-binary-trees public
 open import order-theory.posets public
 open import order-theory.preorders public
 open import order-theory.subposets public

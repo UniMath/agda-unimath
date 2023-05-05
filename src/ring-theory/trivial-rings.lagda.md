@@ -9,7 +9,6 @@ module ring-theory.trivial-rings where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions

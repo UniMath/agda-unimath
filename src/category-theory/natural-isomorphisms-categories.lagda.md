@@ -34,9 +34,13 @@ module _
 
   is-natural-isomorphism-Cat : natural-transformation-Cat C D F G → UU (l1 ⊔ l4)
   is-natural-isomorphism-Cat =
-    is-natural-isomorphism-Precat (precat-Cat C) (precat-Cat D) F G
+    is-natural-isomorphism-Precategory
+      ( precategory-Cat C)
+      ( precategory-Cat D)
+      ( F)
+      ( G)
 
   natural-isomorphism-Cat : UU (l1 ⊔ l2 ⊔ l4)
   natural-isomorphism-Cat =
-    natural-isomorphism-Precat (precat-Cat C) (precat-Cat D) F G
+    natural-isomorphism-Precategory (precategory-Cat C) (precategory-Cat D) F G
 ```

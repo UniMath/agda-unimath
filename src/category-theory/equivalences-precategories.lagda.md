@@ -31,23 +31,24 @@ A functor `F : C → D` is an equivalence of categories if there is a functor
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precat l1 l2)
-  (D : Precat l3 l4)
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
   where
 
-  is-equiv-functor-Precat : functor-Precat C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-equiv-functor-Precat F =
-    Σ ( functor-Precat D C)
+  is-equiv-functor-Precategory :
+    functor-Precategory C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-equiv-functor-Precategory F =
+    Σ ( functor-Precategory D C)
       ( λ G →
-        ( natural-isomorphism-Precat C C
-          ( comp-functor-Precat C D C G F)
-          ( id-functor-Precat C))) ×
-    Σ ( functor-Precat D C)
+        ( natural-isomorphism-Precategory C C
+          ( comp-functor-Precategory C D C G F)
+          ( id-functor-Precategory C))) ×
+    Σ ( functor-Precategory D C)
       ( λ G →
-        ( natural-isomorphism-Precat D D
-          ( comp-functor-Precat D C D F G)
-          ( id-functor-Precat D)))
+        ( natural-isomorphism-Precategory D D
+          ( comp-functor-Precategory D C D F G)
+          ( id-functor-Precategory D)))
 
-  equiv-Precat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-Precat = Σ (functor-Precat C D) is-equiv-functor-Precat
+  equiv-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  equiv-Precategory = Σ (functor-Precategory C D) is-equiv-functor-Precategory
 ```

@@ -15,7 +15,6 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 ```
 

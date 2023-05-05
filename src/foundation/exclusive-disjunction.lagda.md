@@ -1,7 +1,7 @@
 # Exclusive disjunction of propositions
 
 ```agda
-module foundation.xor where
+module foundation.exclusive-disjunction where
 ```
 
 <details><summary>Imports</summary>

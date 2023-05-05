@@ -361,16 +361,16 @@ comp-law-ab-Ring R1 R2 R3 g f =
     ( ab-Ring R3)
     ( refl-htpy)
 
-Ring-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Ring-Precat l) = Ring l
-pr1 (pr2 (Ring-Precat l)) = hom-Ring
-pr1 (pr1 (pr2 (pr2 (Ring-Precat l)))) {R1} {R2} {R3} =
+Ring-Precategory : (l : Level) → Precategory (lsuc l) l
+pr1 (Ring-Precategory l) = Ring l
+pr1 (pr2 (Ring-Precategory l)) = hom-Ring
+pr1 (pr1 (pr2 (pr2 (Ring-Precategory l)))) {R1} {R2} {R3} =
   comp-hom-Ring R1 R2 R3
-pr2 (pr1 (pr2 (pr2 (Ring-Precat l)))) {R1} {R2} {R3} {R4} =
+pr2 (pr1 (pr2 (pr2 (Ring-Precategory l)))) {R1} {R2} {R3} {R4} =
   is-associative-comp-hom-Ring R1 R2 R3 R4
-pr1 (pr2 (pr2 (pr2 (Ring-Precat l)))) = id-hom-Ring
-pr1 (pr2 (pr2 (pr2 (pr2 (Ring-Precat l))))) {R1} {R2} f =
+pr1 (pr2 (pr2 (pr2 (Ring-Precategory l)))) = id-hom-Ring
+pr1 (pr2 (pr2 (pr2 (pr2 (Ring-Precategory l))))) {R1} {R2} f =
   eq-htpy-hom-Ring
     R1 R2 (comp-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f refl-htpy
-pr2 (pr2 (pr2 (pr2 (pr2 (Ring-Precat l))))) {R1} {R2} f = refl
+pr2 (pr2 (pr2 (pr2 (pr2 (Ring-Precategory l))))) {R1} {R2} f = refl
 ```

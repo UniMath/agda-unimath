@@ -121,8 +121,6 @@ module _
   fam-equiv B C = (x : A) → B x ≃ C x
 ```
 
-## Examples
-
 ### The identity map is an equivalence
 
 ```agda
@@ -140,6 +138,8 @@ module _
   pr1 id-equiv = id
   pr2 id-equiv = is-equiv-id
 ```
+
+## Properties
 
 ### A map has an two-sided inverse if and only if it is an equivalence
 
@@ -165,8 +165,6 @@ module _
   pr2 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) =
     (((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H
 ```
-
-## Properties
 
 ### Coherently invertible maps are equivalences
 
@@ -558,6 +556,36 @@ module _
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)
   pr1 (equiv-ap e x y) = ap (map-equiv e)
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
+```
+
+## Equivalence reasoning
+
+Equivalences can be constructed by equational reasoning in the following way:
+
+```md
+equivalence-reasoning
+  X ≃ Y by equiv-1
+    ≃ Z by equiv-2
+    ≃ V by equiv-3
+```
+
+The equivalence constructed in this way is `equiv-1 ∘e (equiv-2 ∘e equiv-3)`,
+i.e., the equivivalence is associated fully to the right.
+
+```agda
+infixl 1 equivalence-reasoning_
+infixl 0 step-equivalence-reasoning
+
+equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ≃ X
+equivalence-reasoning X = id-equiv
+
+step-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
+step-equivalence-reasoning e Z f = f ∘e e
+
+syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 ```
 
 ## See also

@@ -38,10 +38,10 @@ A groupoid is a category in which every morphism is an isomorphism.
 
 ```agda
 is-groupoid-Cat-Prop : {l1 l2 : Level} (C : Cat l1 l2) → Prop (l1 ⊔ l2)
-is-groupoid-Cat-Prop C = is-groupoid-Precat-Prop (precat-Cat C)
+is-groupoid-Cat-Prop C = is-groupoid-Precategory-Prop (precategory-Cat C)
 
 is-groupoid-Cat : {l1 l2 : Level} (C : Cat l1 l2) → UU (l1 ⊔ l2)
-is-groupoid-Cat C = is-groupoid-Precat (precat-Cat C)
+is-groupoid-Cat C = is-groupoid-Precategory (precategory-Cat C)
 
 Groupoid : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Groupoid l1 l2 = Σ (Cat l1 l2) is-groupoid-Cat
@@ -53,8 +53,8 @@ module _
   cat-Groupoid : Cat l1 l2
   cat-Groupoid = pr1 G
 
-  precat-Groupoid : Precat l1 l2
-  precat-Groupoid = precat-Cat cat-Groupoid
+  precat-Groupoid : Precategory l1 l2
+  precat-Groupoid = precategory-Cat cat-Groupoid
 
   obj-Groupoid : UU l1
   obj-Groupoid = obj-Cat cat-Groupoid
@@ -114,7 +114,7 @@ module _
   obj-groupoid-1-Type : UU l
   obj-groupoid-1-Type = type-1-Type X
 
-  precat-groupoid-1-Type : Precat l l
+  precat-groupoid-1-Type : Precategory l l
   pr1 precat-groupoid-1-Type = obj-groupoid-1-Type
   pr1 (pr2 precat-groupoid-1-Type) = Id-Set X
   pr1 (pr1 (pr2 (pr2 precat-groupoid-1-Type))) q p = p ∙ q
@@ -124,7 +124,7 @@ module _
   pr2 (pr2 (pr2 (pr2 (pr2 precat-groupoid-1-Type)))) p = left-unit
 
   is-category-groupoid-1-Type :
-    is-category-Precat precat-groupoid-1-Type
+    is-category-Precategory precat-groupoid-1-Type
   is-category-groupoid-1-Type x =
     fundamental-theorem-id
       ( is-contr-equiv'
@@ -159,10 +159,10 @@ module _
             ( is-proof-irrelevant-is-prop
               ( is-1-type-type-1-Type X x x refl refl)
               ( refl)))))
-      ( iso-eq-Precat precat-groupoid-1-Type x)
+      ( iso-eq-Precategory precat-groupoid-1-Type x)
 
   is-groupoid-groupoid-1-Type :
-    is-groupoid-Precat precat-groupoid-1-Type
+    is-groupoid-Precategory precat-groupoid-1-Type
   pr1 (is-groupoid-groupoid-1-Type x y p) = inv p
   pr1 (pr2 (is-groupoid-groupoid-1-Type x y p)) = left-inv p
   pr2 (pr2 (is-groupoid-groupoid-1-Type x y p)) = right-inv p

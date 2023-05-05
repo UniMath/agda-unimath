@@ -32,6 +32,7 @@ open import trees.morphisms-coalgebras-polynomial-endofunctors public
 open import trees.morphisms-directed-trees public
 open import trees.morphisms-enriched-directed-trees public
 open import trees.multisets public
+open import trees.planar-binary-trees public
 open import trees.polynomial-endofunctors public
 open import trees.raising-universe-levels-directed-trees public
 open import trees.ranks-of-elements-w-types public

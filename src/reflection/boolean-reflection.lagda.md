@@ -1,7 +1,7 @@
 # Boolean reflection
 
 ```agda
-module foundation.boolean-reflection where
+module reflection.boolean-reflection where
 ```
 
 <details><summary>Imports</summary>

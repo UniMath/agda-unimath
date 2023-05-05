@@ -34,7 +34,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
