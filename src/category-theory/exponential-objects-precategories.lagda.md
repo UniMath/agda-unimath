@@ -36,65 +36,75 @@ each pair of objects.
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Precat l1 l2) (p : has-all-binary-products-Precat C)
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (p : has-all-binary-products-Precategory C)
   where
 
-  is-exponential-Precat :
-    (x y e : obj-Precat C) →
-    type-hom-Precat C (object-product-Precat C p e x) y →
+  is-exponential-Precategory :
+    (x y e : obj-Precategory C) →
+    type-hom-Precategory C (object-product-Precategory C p e x) y →
     UU (l1 ⊔ l2)
-  is-exponential-Precat x y e ev =
-    (z : obj-Precat C)
-    (f : type-hom-Precat C (object-product-Precat C p z x) y) →
-    ∃! (type-hom-Precat C z e) λ g →
-       comp-hom-Precat C ev (map-product-Precat C p g (id-hom-Precat C)) ＝ f
+  is-exponential-Precategory x y e ev =
+    (z : obj-Precategory C)
+    (f : type-hom-Precategory C (object-product-Precategory C p z x) y) →
+    ∃! ( type-hom-Precategory C z e)
+       ( λ g →
+         comp-hom-Precategory C ev
+           ( map-product-Precategory C p g (id-hom-Precategory C)) ＝
+           ( f))
 
-  exponential-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
-  exponential-Precat x y =
-    Σ (obj-Precat C) (λ e →
-    Σ (type-hom-Precat C (object-product-Precat C p e x) y) λ ev →
-      is-exponential-Precat x y e ev)
+  exponential-Precategory :
+    obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
+  exponential-Precategory x y =
+    Σ (obj-Precategory C) (λ e →
+    Σ (type-hom-Precategory C (object-product-Precategory C p e x) y) λ ev →
+      is-exponential-Precategory x y e ev)
 
-  has-all-exponentials-Precat : UU (l1 ⊔ l2)
-  has-all-exponentials-Precat = (x y : obj-Precat C) → exponential-Precat x y
+  has-all-exponentials-Precategory : UU (l1 ⊔ l2)
+  has-all-exponentials-Precategory =
+    (x y : obj-Precategory C) → exponential-Precategory x y
 
 module _
-  {l1 l2 : Level} (C : Precat l1 l2)
-  (p : has-all-binary-products-Precat C)
-  (t : has-all-exponentials-Precat C p)
-  (x y : obj-Precat C)
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (p : has-all-binary-products-Precategory C)
+  (t : has-all-exponentials-Precategory C p)
+  (x y : obj-Precategory C)
   where
 
-  object-exponential-Precat : obj-Precat C
-  object-exponential-Precat = pr1 (t x y)
+  object-exponential-Precategory : obj-Precategory C
+  object-exponential-Precategory = pr1 (t x y)
 
-  eval-exponential-Precat :
-    type-hom-Precat C (object-product-Precat C p object-exponential-Precat x) y
-  eval-exponential-Precat = pr1 (pr2 (t x y))
+  eval-exponential-Precategory :
+    type-hom-Precategory C
+      ( object-product-Precategory C p object-exponential-Precategory x)
+      ( y)
+  eval-exponential-Precategory = pr1 (pr2 (t x y))
 
   module _
-    (z : obj-Precat C)
-    (f : type-hom-Precat C (object-product-Precat C p z x) y)
+    (z : obj-Precategory C)
+    (f : type-hom-Precategory C (object-product-Precategory C p z x) y)
     where
 
-    morphism-into-exponential-Precat :
-      type-hom-Precat C z object-exponential-Precat
-    morphism-into-exponential-Precat = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
+    morphism-into-exponential-Precategory :
+      type-hom-Precategory C z object-exponential-Precategory
+    morphism-into-exponential-Precategory = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
 
-    morphism-into-exponential-Precat-comm :
-      comp-hom-Precat C
-          ( eval-exponential-Precat)
-          ( map-product-Precat C p
-            (morphism-into-exponential-Precat)
-            (id-hom-Precat C)) ＝ f
-    morphism-into-exponential-Precat-comm = pr2 (pr1 (pr2 (pr2 (t x y)) z f))
+    morphism-into-exponential-Precategory-comm :
+      ( comp-hom-Precategory C
+        ( eval-exponential-Precategory)
+        ( map-product-Precategory C p
+          ( morphism-into-exponential-Precategory)
+          ( id-hom-Precategory C))) ＝
+      ( f)
+    morphism-into-exponential-Precategory-comm =
+      pr2 (pr1 (pr2 (pr2 (t x y)) z f))
 
-    is-unique-morphism-into-exponential-Precat :
-      ( g : type-hom-Precat C z object-exponential-Precat) →
-      ( comp-hom-Precat C
-        ( eval-exponential-Precat)
-        ( map-product-Precat C p g (id-hom-Precat C)) ＝ f) →
-      morphism-into-exponential-Precat ＝ g
-    is-unique-morphism-into-exponential-Precat g q =
+    is-unique-morphism-into-exponential-Precategory :
+      ( g : type-hom-Precategory C z object-exponential-Precategory) →
+      ( comp-hom-Precategory C
+        ( eval-exponential-Precategory)
+        ( map-product-Precategory C p g (id-hom-Precategory C)) ＝ f) →
+      morphism-into-exponential-Precategory ＝ g
+    is-unique-morphism-into-exponential-Precategory g q =
       ap pr1 (pr2 (pr2 (pr2 (t x y)) z f) (g , q))
 ```

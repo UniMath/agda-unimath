@@ -35,10 +35,10 @@ module _
   where
 
   is-iso-Cat : {x y : obj-Cat C} (f : type-hom-Cat C x y) → UU l2
-  is-iso-Cat = is-iso-Precat (precat-Cat C)
+  is-iso-Cat = is-iso-Precategory (precategory-Cat C)
 
   iso-Cat : (x y : obj-Cat C) → UU l2
-  iso-Cat = iso-Precat (precat-Cat C)
+  iso-Cat = iso-Precategory (precategory-Cat C)
 
   hom-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → type-hom-Cat C x y
   hom-iso-Cat f = pr1 f
@@ -107,10 +107,10 @@ module _
   where
 
   is-iso-id-hom-Cat : {x : obj-Cat C} → is-iso-Cat C (id-hom-Cat C {x})
-  is-iso-id-hom-Cat = is-iso-id-hom-Precat (precat-Cat C)
+  is-iso-id-hom-Cat = is-iso-id-hom-Precategory (precategory-Cat C)
 
   id-iso-Cat : {x : obj-Cat C} → iso-Cat C x x
-  id-iso-Cat = id-iso-Precat (precat-Cat C)
+  id-iso-Cat = id-iso-Precategory (precategory-Cat C)
 ```
 
 ### Compositions of isomorphisms are isomorphisms
@@ -259,7 +259,7 @@ module _
 is-prop-is-iso-Cat :
   {l1 l2 : Level} (C : Cat l1 l2) →
   {x y : obj-Cat C} (f : type-hom-Cat C x y) → is-prop (is-iso-Cat C f)
-is-prop-is-iso-Cat C = is-prop-is-iso-Precat (precat-Cat C)
+is-prop-is-iso-Cat C = is-prop-is-iso-Precategory (precategory-Cat C)
 ```
 
 ### Characterizing equality of isomorphisms
@@ -390,7 +390,7 @@ module _
   where
 
   iso-eq-Cat : {x y : obj-Cat C} → x ＝ y → iso-Cat C x y
-  iso-eq-Cat {x} {y} = iso-eq-Precat (precat-Cat C) x y
+  iso-eq-Cat {x} {y} = iso-eq-Precategory (precategory-Cat C) x y
 
   preserves-concat-iso-eq-Cat :
     {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
@@ -462,10 +462,10 @@ module _
   where
 
   is-set-iso-Cat : (x y : obj-Cat C) → is-set (iso-Cat C x y)
-  is-set-iso-Cat = is-set-iso-Precat (precat-Cat C)
+  is-set-iso-Cat = is-set-iso-Precategory (precategory-Cat C)
 
   iso-Cat-Set : (x y : obj-Cat C) → Set l2
-  iso-Cat-Set = iso-Precat-Set (precat-Cat C)
+  iso-Cat-Set = iso-Precategory-Set (precategory-Cat C)
 ```
 
 ### A morphism is an isomorphism if and only if precomposing by it is an equivalence

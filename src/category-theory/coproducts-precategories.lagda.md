@@ -27,98 +27,106 @@ See the documentation in that file for further information.
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Precat l1 l2)
+  {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
-  is-coproduct-Precat :
-    (x y p : obj-Precat C) →
-    type-hom-Precat C x p → type-hom-Precat C y p → UU (l1 ⊔ l2)
-  is-coproduct-Precat x y p l r =
-    (z : obj-Precat C)
-    (f : type-hom-Precat C x z) →
-    (g : type-hom-Precat C y z) →
-    (∃! ( type-hom-Precat C p z)
-        ( λ h →
-          (comp-hom-Precat C h l ＝ f) × (comp-hom-Precat C h r ＝ g)))
+  is-coproduct-Precategory :
+    (x y p : obj-Precategory C) →
+    type-hom-Precategory C x p → type-hom-Precategory C y p → UU (l1 ⊔ l2)
+  is-coproduct-Precategory x y p l r =
+    (z : obj-Precategory C)
+    (f : type-hom-Precategory C x z) →
+    (g : type-hom-Precategory C y z) →
+    ∃! ( type-hom-Precategory C p z)
+       ( λ h →
+         ( comp-hom-Precategory C h l ＝ f) ×
+         ( comp-hom-Precategory C h r ＝ g))
 
-  coproduct-Precat : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
-  coproduct-Precat x y =
-    Σ ( obj-Precat C)
+  coproduct-Precategory : obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
+  coproduct-Precategory x y =
+    Σ ( obj-Precategory C)
       ( λ p →
-        Σ ( type-hom-Precat C x p)
+        Σ ( type-hom-Precategory C x p)
           ( λ l →
-            Σ (type-hom-Precat C y p)
-              ( is-coproduct-Precat x y p l)))
+            Σ (type-hom-Precategory C y p)
+              ( is-coproduct-Precategory x y p l)))
 
   has-all-binary-coproducts : UU (l1 ⊔ l2)
-  has-all-binary-coproducts = (x y : obj-Precat C) → coproduct-Precat x y
+  has-all-binary-coproducts =
+    (x y : obj-Precategory C) → coproduct-Precategory x y
 
 module _
-  {l1 l2 : Level} (C : Precat l1 l2) (t : has-all-binary-coproducts C)
+  {l1 l2 : Level} (C : Precategory l1 l2) (t : has-all-binary-coproducts C)
   where
 
-  object-coproduct-Precat : obj-Precat C → obj-Precat C → obj-Precat C
-  object-coproduct-Precat x y = pr1 (t x y)
+  object-coproduct-Precategory :
+    obj-Precategory C → obj-Precategory C → obj-Precategory C
+  object-coproduct-Precategory x y = pr1 (t x y)
 
-  inl-coproduct-Precat :
-    (x y : obj-Precat C) → type-hom-Precat C x (object-coproduct-Precat x y)
-  inl-coproduct-Precat x y = pr1 (pr2 (t x y))
+  inl-coproduct-Precategory :
+    (x y : obj-Precategory C) →
+    type-hom-Precategory C x (object-coproduct-Precategory x y)
+  inl-coproduct-Precategory x y = pr1 (pr2 (t x y))
 
-  inr-coproduct-Precat :
-    (x y : obj-Precat C) → type-hom-Precat C y (object-coproduct-Precat x y)
-  inr-coproduct-Precat x y = pr1 (pr2 (pr2 (t x y)))
+  inr-coproduct-Precategory :
+    (x y : obj-Precategory C) →
+    type-hom-Precategory C y (object-coproduct-Precategory x y)
+  inr-coproduct-Precategory x y =
+    pr1 (pr2 (pr2 (t x y)))
 
   module _
-    (x y z : obj-Precat C)
-    (f : type-hom-Precat C x z)
-    (g : type-hom-Precat C y z)
+    (x y z : obj-Precategory C)
+    (f : type-hom-Precategory C x z)
+    (g : type-hom-Precategory C y z)
     where
 
-    morphism-out-of-coproduct-Precat :
-      type-hom-Precat C (object-coproduct-Precat x y) z
-    morphism-out-of-coproduct-Precat = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
+    morphism-out-of-coproduct-Precategory :
+      type-hom-Precategory C (object-coproduct-Precategory x y) z
+    morphism-out-of-coproduct-Precategory =
+      pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
-    morphism-out-of-coproduct-Precat-comm-inl :
-      comp-hom-Precat
+    morphism-out-of-coproduct-Precategory-comm-inl :
+      comp-hom-Precategory
         ( C)
-        ( morphism-out-of-coproduct-Precat)
-        ( inl-coproduct-Precat x y) ＝ f
-    morphism-out-of-coproduct-Precat-comm-inl =
+        ( morphism-out-of-coproduct-Precategory)
+        ( inl-coproduct-Precategory x y) ＝ f
+    morphism-out-of-coproduct-Precategory-comm-inl =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    morphism-out-of-coproduct-Precat-comm-inr :
-      comp-hom-Precat
+    morphism-out-of-coproduct-Precategory-comm-inr :
+      comp-hom-Precategory
         ( C)
-        ( morphism-out-of-coproduct-Precat)
-        ( inr-coproduct-Precat x y) ＝ g
-    morphism-out-of-coproduct-Precat-comm-inr =
+        ( morphism-out-of-coproduct-Precategory)
+        ( inr-coproduct-Precategory x y) ＝ g
+    morphism-out-of-coproduct-Precategory-comm-inr =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    is-unique-morphism-out-of-coproduct-Precat :
-      (h : type-hom-Precat C (object-coproduct-Precat x y) z) →
-      comp-hom-Precat C h (inl-coproduct-Precat x y) ＝ f →
-      comp-hom-Precat C h (inr-coproduct-Precat x y) ＝ g →
-      morphism-out-of-coproduct-Precat ＝ h
-    is-unique-morphism-out-of-coproduct-Precat h comm1 comm2 =
+    is-unique-morphism-out-of-coproduct-Precategory :
+      (h : type-hom-Precategory C (object-coproduct-Precategory x y) z) →
+      comp-hom-Precategory C h (inl-coproduct-Precategory x y) ＝ f →
+      comp-hom-Precategory C h (inr-coproduct-Precategory x y) ＝ g →
+      morphism-out-of-coproduct-Precategory ＝ h
+    is-unique-morphism-out-of-coproduct-Precategory h comm1 comm2 =
       ap pr1 ((pr2 (pr2 (pr2 (pr2 (t x y))) z f g)) (h , (comm1 , comm2)))
 
 module _
-  {l1 l2 : Level} (C : Precat l1 l2)
-  (x y p : obj-Precat C)
-  (l : type-hom-Precat C x p)
-  (r : type-hom-Precat C y p)
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (x y p : obj-Precategory C)
+  (l : type-hom-Precategory C x p)
+  (r : type-hom-Precategory C y p)
   where
 
-  is-prop-is-coproduct-Precat : is-prop (is-coproduct-Precat C x y p l r)
-  is-prop-is-coproduct-Precat =
+  is-prop-is-coproduct-Precategory :
+    is-prop (is-coproduct-Precategory C x y p l r)
+  is-prop-is-coproduct-Precategory =
     is-prop-Π (λ z →
       is-prop-Π (λ f →
         is-prop-Π (λ g →
           is-property-is-contr)))
 
-  is-coproduct-Precat-Prop : Prop (l1 ⊔ l2)
-  pr1 is-coproduct-Precat-Prop = is-coproduct-Precat C x y p l r
-  pr2 is-coproduct-Precat-Prop = is-prop-is-coproduct-Precat
+  is-coproduct-Precategory-Prop : Prop (l1 ⊔ l2)
+  pr1 is-coproduct-Precategory-Prop = is-coproduct-Precategory C x y p l r
+  pr2 is-coproduct-Precategory-Prop = is-prop-is-coproduct-Precategory
 ```
 
 ## Properties
@@ -131,19 +139,19 @@ and `g : hom x₂ y₂` we can construct a morphism
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Precat l1 l2)
+  {l1 l2 : Level} (C : Precategory l1 l2)
   (t : has-all-binary-coproducts C)
-  {x₁ x₂ y₁ y₂ : obj-Precat C}
-  (f : type-hom-Precat C x₁ y₁)
-  (g : type-hom-Precat C x₂ y₂)
+  {x₁ x₂ y₁ y₂ : obj-Precategory C}
+  (f : type-hom-Precategory C x₁ y₁)
+  (g : type-hom-Precategory C x₂ y₂)
   where
 
-  map-coproduct-Precat :
-    type-hom-Precat C
-      (object-coproduct-Precat C t x₁ x₂)
-      (object-coproduct-Precat C t y₁ y₂)
-  map-coproduct-Precat =
-    morphism-out-of-coproduct-Precat C t _ _ _
-      (comp-hom-Precat C (inl-coproduct-Precat C t y₁ y₂) f)
-      (comp-hom-Precat C (inr-coproduct-Precat C t y₁ y₂) g)
+  map-coproduct-Precategory :
+    type-hom-Precategory C
+      (object-coproduct-Precategory C t x₁ x₂)
+      (object-coproduct-Precategory C t y₁ y₂)
+  map-coproduct-Precategory =
+    morphism-out-of-coproduct-Precategory C t _ _ _
+      (comp-hom-Precategory C (inl-coproduct-Precategory C t y₁ y₂) f)
+      (comp-hom-Precategory C (inr-coproduct-Precategory C t y₁ y₂) g)
 ```

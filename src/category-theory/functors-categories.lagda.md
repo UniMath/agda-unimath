@@ -32,7 +32,7 @@ module _
   where
 
   functor-Cat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  functor-Cat = functor-Precat (precat-Cat C) (precat-Cat D)
+  functor-Cat = functor-Precategory (precategory-Cat C) (precategory-Cat D)
 
   obj-functor-Cat : functor-Cat → obj-Cat C → obj-Cat D
   obj-functor-Cat = pr1
@@ -50,13 +50,13 @@ module _
     ( hom-functor-Cat F (comp-hom-Cat C g f)) ＝
     ( comp-hom-Cat D (hom-functor-Cat F g) (hom-functor-Cat F f))
   preserves-comp-functor-Cat F =
-    preserves-comp-functor-Precat (precat-Cat C) (precat-Cat D) F
+    preserves-comp-functor-Precategory (precategory-Cat C) (precategory-Cat D) F
 
   preserves-id-functor-Cat :
     (F : functor-Cat) (x : obj-Cat C) →
     hom-functor-Cat F (id-hom-Cat C {x}) ＝ id-hom-Cat D {obj-functor-Cat F x}
   preserves-id-functor-Cat F =
-    preserves-id-functor-Precat (precat-Cat C) (precat-Cat D) F
+    preserves-id-functor-Precategory (precategory-Cat C) (precategory-Cat D) F
 ```
 
 ## Examples
@@ -67,7 +67,7 @@ There is an identity functor on any category.
 
 ```agda
 id-functor-Cat : {l1 l2 : Level} (C : Cat l1 l2) → functor-Cat C C
-id-functor-Cat C = id-functor-Precat (precat-Cat C)
+id-functor-Cat C = id-functor-Precategory (precategory-Cat C)
 ```
 
 ### Composition of functors
@@ -80,5 +80,10 @@ comp-functor-Cat :
   (C : Cat l1 l2) (D : Cat l3 l4) (E : Cat l5 l6) →
   functor-Cat D E → functor-Cat C D → functor-Cat C E
 comp-functor-Cat C D E G F =
-  comp-functor-Precat (precat-Cat C) (precat-Cat D) (precat-Cat E) G F
+  comp-functor-Precategory
+    ( precategory-Cat C)
+    ( precategory-Cat D)
+    ( precategory-Cat E)
+    ( G)
+    ( F)
 ```

@@ -57,17 +57,18 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  Abstract-Group-Action-Precat : (l2 : Level) → Precat (l1 ⊔ lsuc l2) (l1 ⊔ l2)
-  pr1 (Abstract-Group-Action-Precat l2) = Abstract-Group-Action G l2
-  pr1 (pr2 (Abstract-Group-Action-Precat l2)) = hom-Abstract-Group-Action G
-  pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} =
+  Abstract-Group-Action-Precategory :
+    (l2 : Level) → Precategory (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  pr1 (Abstract-Group-Action-Precategory l2) = Abstract-Group-Action G l2
+  pr1 (pr2 (Abstract-Group-Action-Precategory l2)) = hom-Abstract-Group-Action G
+  pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) {X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
-  pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} {W} =
+  pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) {X} {Y} {Z} {W} =
     associative-comp-hom-Abstract-Group-Action G X Y Z W
-  pr1 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) =
+  pr1 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) =
     id-hom-Abstract-Group-Action G
-  pr1 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =
+  pr1 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precategory l2))))) {X} {Y} =
     left-unit-law-comp-hom-Abstract-Group-Action G X Y
-  pr2 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =
+  pr2 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precategory l2))))) {X} {Y} =
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
 ```

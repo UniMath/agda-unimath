@@ -36,15 +36,27 @@ module _
       type-hom-Cat D (obj-functor-Cat C D F x) (obj-functor-Cat C D G x)) →
     UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Cat =
-    is-natural-transformation-Precat (precat-Cat C) (precat-Cat D) F G
+    is-natural-transformation-Precategory
+      ( precategory-Cat C)
+      ( precategory-Cat D)
+      ( F)
+      ( G)
 
   natural-transformation-Cat : UU (l1 ⊔ l2 ⊔ l4)
   natural-transformation-Cat =
-    natural-transformation-Precat (precat-Cat C) (precat-Cat D) F G
+    natural-transformation-Precategory
+      ( precategory-Cat C)
+      ( precategory-Cat D)
+      ( F)
+      ( G)
 
   components-natural-transformation-Cat :
     natural-transformation-Cat → (x : obj-Cat C) →
     type-hom-Cat D (obj-functor-Cat C D F x) (obj-functor-Cat C D G x)
   components-natural-transformation-Cat =
-    components-natural-transformation-Precat (precat-Cat C) (precat-Cat D) F G
+    components-natural-transformation-Precategory
+      ( precategory-Cat C)
+      ( precategory-Cat D)
+      ( F)
+      ( G)
 ```

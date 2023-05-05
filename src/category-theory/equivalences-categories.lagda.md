@@ -31,8 +31,9 @@ module _
   where
 
   is-equiv-functor-Cat : functor-Cat C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-equiv-functor-Cat = is-equiv-functor-Precat (precat-Cat C) (precat-Cat D)
+  is-equiv-functor-Cat =
+    is-equiv-functor-Precategory (precategory-Cat C) (precategory-Cat D)
 
   equiv-Cat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-Cat = equiv-Precat (precat-Cat C) (precat-Cat D)
+  equiv-Cat = equiv-Precategory (precategory-Cat C) (precategory-Cat D)
 ```
