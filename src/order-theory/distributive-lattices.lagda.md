@@ -40,7 +40,7 @@ module _
               ( element-Lattice L)
               ( λ z →
                 Id-Prop
-                  ( element-lattice-Set L)
+                  ( set-Lattice L)
                   ( meet-Lattice L x (join-Lattice L y z))
                   ( join-Lattice L (meet-Lattice L x y) (meet-Lattice L x z)))))
 

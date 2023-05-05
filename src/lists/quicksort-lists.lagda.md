@@ -29,7 +29,7 @@ open import lists.concatenation-lists
 open import lists.lists
 open import lists.permutation-lists
 
-open import order-theory.total-decidable-posets
+open import order-theory.decidable-total-orders
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -47,55 +47,55 @@ applying the quicksort algorithm.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : total-Decidable-Poset l1 l2)
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
   where
 
   helper-quicksort-list-divide-leq :
-    (x : element-total-Decidable-Poset X) →
-    (y : element-total-Decidable-Poset X) →
+    (x : element-Decidable-Total-Order X) →
+    (y : element-Decidable-Total-Order X) →
     leq-or-strict-greater-Decidable-Poset X x y →
-    list (element-total-Decidable-Poset X) →
-    list (element-total-Decidable-Poset X)
+    list (element-Decidable-Total-Order X) →
+    list (element-Decidable-Total-Order X)
   helper-quicksort-list-divide-leq x y (inl p) l = l
   helper-quicksort-list-divide-leq x y (inr p) l = cons y l
 
   quicksort-list-divide-leq :
-    element-total-Decidable-Poset X → list (element-total-Decidable-Poset X) →
-    list (element-total-Decidable-Poset X)
+    element-Decidable-Total-Order X → list (element-Decidable-Total-Order X) →
+    list (element-Decidable-Total-Order X)
   quicksort-list-divide-leq x nil = nil
   quicksort-list-divide-leq x (cons y l) =
     helper-quicksort-list-divide-leq
       ( x)
       ( y)
-      ( is-leq-or-strict-greater-total-Decidable-Poset X x y)
+      ( is-leq-or-strict-greater-Decidable-Total-Order X x y)
       ( quicksort-list-divide-leq x l)
 
   helper-quicksort-list-divide-strict-greater :
-    (x : element-total-Decidable-Poset X) →
-    (y : element-total-Decidable-Poset X) →
+    (x : element-Decidable-Total-Order X) →
+    (y : element-Decidable-Total-Order X) →
     leq-or-strict-greater-Decidable-Poset X x y →
-    list (element-total-Decidable-Poset X) →
-    list (element-total-Decidable-Poset X)
+    list (element-Decidable-Total-Order X) →
+    list (element-Decidable-Total-Order X)
   helper-quicksort-list-divide-strict-greater x y (inl p) l = cons y l
   helper-quicksort-list-divide-strict-greater x y (inr p) l = l
 
   quicksort-list-divide-strict-greater :
-    element-total-Decidable-Poset X → list (element-total-Decidable-Poset X) →
-    list (element-total-Decidable-Poset X)
+    element-Decidable-Total-Order X → list (element-Decidable-Total-Order X) →
+    list (element-Decidable-Total-Order X)
   quicksort-list-divide-strict-greater x nil = nil
   quicksort-list-divide-strict-greater x (cons y l) =
     helper-quicksort-list-divide-strict-greater
       ( x)
       ( y)
-      ( is-leq-or-strict-greater-total-Decidable-Poset X x y)
+      ( is-leq-or-strict-greater-Decidable-Total-Order X x y)
       ( quicksort-list-divide-strict-greater x l)
 
   private
     helper-inequality-length-quicksort-list-divide-leq :
-      (x : element-total-Decidable-Poset X) →
-      (y : element-total-Decidable-Poset X) →
+      (x : element-Decidable-Total-Order X) →
+      (y : element-Decidable-Total-Order X) →
       (p : leq-or-strict-greater-Decidable-Poset X x y) →
-      (l : list (element-total-Decidable-Poset X)) →
+      (l : list (element-Decidable-Total-Order X)) →
       length-list (helper-quicksort-list-divide-leq x y p l) ≤-ℕ
       length-list (cons y l)
     helper-inequality-length-quicksort-list-divide-leq x y (inl _) l =
@@ -104,8 +104,8 @@ module _
       refl-leq-ℕ (length-list (cons y l))
 
     inequality-length-quicksort-list-divide-leq :
-      (x : element-total-Decidable-Poset X) →
-      (l : list (element-total-Decidable-Poset X)) →
+      (x : element-Decidable-Total-Order X) →
+      (l : list (element-Decidable-Total-Order X)) →
       length-list (quicksort-list-divide-leq x l) ≤-ℕ length-list l
     inequality-length-quicksort-list-divide-leq x nil = star
     inequality-length-quicksort-list-divide-leq x (cons y l) =
@@ -117,14 +117,14 @@ module _
         ( helper-inequality-length-quicksort-list-divide-leq
             ( x)
             ( y)
-            ( is-leq-or-strict-greater-total-Decidable-Poset X x y)
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x y)
             ( quicksort-list-divide-leq x l))
 
     helper-inequality-length-quicksort-list-divide-strict-greater :
-      (x : element-total-Decidable-Poset X) →
-      (y : element-total-Decidable-Poset X) →
+      (x : element-Decidable-Total-Order X) →
+      (y : element-Decidable-Total-Order X) →
       (p : leq-or-strict-greater-Decidable-Poset X x y) →
-      (l : list (element-total-Decidable-Poset X)) →
+      (l : list (element-Decidable-Total-Order X)) →
       length-list (helper-quicksort-list-divide-strict-greater x y p l) ≤-ℕ
       length-list (cons y l)
     helper-inequality-length-quicksort-list-divide-strict-greater
@@ -141,8 +141,8 @@ module _
       succ-leq-ℕ (length-list l)
 
     inequality-length-quicksort-list-divide-strict-greater :
-      (x : element-total-Decidable-Poset X) →
-      (l : list (element-total-Decidable-Poset X)) →
+      (x : element-Decidable-Total-Order X) →
+      (l : list (element-Decidable-Total-Order X)) →
       length-list (quicksort-list-divide-strict-greater x l) ≤-ℕ length-list l
     inequality-length-quicksort-list-divide-strict-greater x nil = star
     inequality-length-quicksort-list-divide-strict-greater x (cons y l) =
@@ -154,23 +154,23 @@ module _
         ( helper-inequality-length-quicksort-list-divide-strict-greater
             ( x)
             ( y)
-            ( is-leq-or-strict-greater-total-Decidable-Poset X x y)
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x y)
             ( quicksort-list-divide-strict-greater x l))
 
   base-quicksort-list :
-    (l : list (element-total-Decidable-Poset X)) → zero-ℕ ＝ length-list l →
-    list (element-total-Decidable-Poset X)
+    (l : list (element-Decidable-Total-Order X)) → zero-ℕ ＝ length-list l →
+    list (element-Decidable-Total-Order X)
   base-quicksort-list nil x = nil
 
   inductive-step-quicksort-list :
     (k : ℕ) →
     □-≤-ℕ
-    ( λ n →
-         (l : list (element-total-Decidable-Poset X)) →
-         n ＝ length-list l → list (element-total-Decidable-Poset X))
-    k →
-    (l : list (element-total-Decidable-Poset X)) →
-    succ-ℕ k ＝ length-list l → list (element-total-Decidable-Poset X)
+      ( λ n →
+        (l : list (element-Decidable-Total-Order X)) →
+        n ＝ length-list l → list (element-Decidable-Total-Order X))
+      ( k) →
+    (l : list (element-Decidable-Total-Order X)) →
+    succ-ℕ k ＝ length-list l → list (element-Decidable-Total-Order X)
   inductive-step-quicksort-list k sort (cons x l) p =
     concat-list
       ( sort
@@ -197,13 +197,13 @@ module _
               ( refl)))
 
   quicksort-list :
-    list (element-total-Decidable-Poset X) →
-    list (element-total-Decidable-Poset X)
+    list (element-Decidable-Total-Order X) →
+    list (element-Decidable-Total-Order X)
   quicksort-list l =
     strong-ind-ℕ
       ( λ n →
-        (l : list (element-total-Decidable-Poset X)) → n ＝ length-list l →
-        list (element-total-Decidable-Poset X))
+        (l : list (element-Decidable-Total-Order X)) → n ＝ length-list l →
+        list (element-Decidable-Total-Order X))
       ( base-quicksort-list)
       ( inductive-step-quicksort-list)
       ( length-list l)

@@ -76,8 +76,8 @@ module _
   is-set-element-Frame : is-set element-Frame
   is-set-element-Frame = is-set-element-Poset poset-Frame
 
-  element-frame-Set : Set l1
-  element-frame-Set = element-poset-Set poset-Frame
+  set-Frame : Set l1
+  set-Frame = set-Poset poset-Frame
 
   is-meet-semilattice-Frame :
     is-meet-semilattice-Poset poset-Frame

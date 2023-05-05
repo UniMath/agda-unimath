@@ -95,8 +95,8 @@ module _
   is-set-element-Suplattice : is-set element-Suplattice
   is-set-element-Suplattice = is-set-element-Poset poset-Suplattice
 
-  element-Suplattice-Set : Set l1
-  element-Suplattice-Set = element-poset-Set poset-Suplattice
+  set-Suplattice : Set l1
+  set-Suplattice = set-Poset poset-Suplattice
 
   is-suplattice-Suplattice :
     is-suplattice-Poset l3 poset-Suplattice

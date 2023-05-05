@@ -95,8 +95,8 @@ module _
   is-set-element-Meet-Semilattice : is-set element-Meet-Semilattice
   is-set-element-Meet-Semilattice = is-set-element-Poset poset-Meet-Semilattice
 
-  element-meet-semilattice-Set : Set l1
-  element-meet-semilattice-Set = element-poset-Set poset-Meet-Semilattice
+  set-Meet-Semilattice : Set l1
+  set-Meet-Semilattice = set-Poset poset-Meet-Semilattice
 
   is-meet-semilattice-Meet-Semilattice :
     is-meet-semilattice-Poset poset-Meet-Semilattice

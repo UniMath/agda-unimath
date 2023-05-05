@@ -27,7 +27,7 @@ open import lists.permutation-vectors
 open import lists.sorted-vectors
 open import lists.sorting-algorithms-vectors
 
-open import order-theory.total-decidable-posets
+open import order-theory.decidable-total-orders
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -47,15 +47,15 @@ of the vector.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : total-Decidable-Poset l1 l2)
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
   where
 
   helper-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-total-Decidable-Poset X)
-    (l : vec (element-total-Decidable-Poset X) n) →
+    (x y : element-Decidable-Total-Order X)
+    (l : vec (element-Decidable-Total-Order X) n) →
     leq-or-strict-greater-Decidable-Poset X x y →
-    vec (element-total-Decidable-Poset X) (succ-ℕ (succ-ℕ (n)))
+    vec (element-Decidable-Total-Order X) (succ-ℕ (succ-ℕ (n)))
   helper-insertion-sort-vec x y l (inl p) = x ∷ y ∷ l
   helper-insertion-sort-vec {0} x y empty-vec (inr p) = y ∷ x ∷ empty-vec
   helper-insertion-sort-vec {succ-ℕ n} x y (z ∷ l) (inr p) =
@@ -64,12 +64,12 @@ module _
       ( x)
       ( z)
       ( l)
-      ( is-leq-or-strict-greater-total-Decidable-Poset X x z))
+      ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
 
   insertion-sort-vec :
     {n : ℕ} →
-    vec (element-total-Decidable-Poset X) n →
-    vec (element-total-Decidable-Poset X) n
+    vec (element-Decidable-Total-Order X) n →
+    vec (element-Decidable-Total-Order X) n
   insertion-sort-vec {zero-ℕ} empty-vec = empty-vec
   insertion-sort-vec {1} l = l
   insertion-sort-vec {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ l) =
@@ -77,7 +77,7 @@ module _
       ( x)
       ( head-vec (insertion-sort-vec (y ∷ l)))
       ( tail-vec (insertion-sort-vec (y ∷ l)))
-      ( is-leq-or-strict-greater-total-Decidable-Poset X _ _)
+      ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)
 ```
 
 ## Properties
@@ -87,8 +87,8 @@ module _
 ```agda
   helper-permutation-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-total-Decidable-Poset X)
-    (l : vec (element-total-Decidable-Poset X) n) →
+    (x y : element-Decidable-Total-Order X)
+    (l : vec (element-Decidable-Total-Order X) n) →
     leq-or-strict-greater-Decidable-Poset X x y →
     Permutation (succ-ℕ (succ-ℕ (n)))
   helper-permutation-insertion-sort-vec x y l (inl _) = id-equiv
@@ -101,12 +101,12 @@ module _
             ( x)
             ( z)
             ( l)
-            ( is-leq-or-strict-greater-total-Decidable-Poset X x z))
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
           ( id-equiv))))
 
   permutation-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (element-total-Decidable-Poset X) n) →
+    (v : vec (element-Decidable-Total-Order X) n) →
     Permutation n
   permutation-insertion-sort-vec {zero-ℕ} empty-vec = id-equiv
   permutation-insertion-sort-vec {1} l = id-equiv
@@ -118,12 +118,12 @@ module _
       ( x)
       ( head-vec (insertion-sort-vec (y ∷ l)))
       ( tail-vec (insertion-sort-vec (y ∷ l)))
-      ( is-leq-or-strict-greater-total-Decidable-Poset X _ _)
+      ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)
 
   helper-is-permutation-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-total-Decidable-Poset X)
-    (v : vec (element-total-Decidable-Poset X) n)
+    (x y : element-Decidable-Total-Order X)
+    (v : vec (element-Decidable-Total-Order X) n)
     (p : leq-or-strict-greater-Decidable-Poset X x y) →
     helper-insertion-sort-vec x y v p ＝
     permute-vec
@@ -149,7 +149,7 @@ module _
             ( x)
             ( z)
             ( v)
-            ( is-leq-or-strict-greater-total-Decidable-Poset X x z))
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
           ( tail-vec
             ( permute-vec
               ( succ-ℕ (succ-ℕ (succ-ℕ n)))
@@ -159,7 +159,7 @@ module _
               ( x)
               ( z)
               ( v)
-              ( is-leq-or-strict-greater-total-Decidable-Poset X x z)) ∙
+              ( is-leq-or-strict-greater-Decidable-Total-Order X x z)) ∙
             ( ap
               ( tail-vec)
               ( ap-permute-vec
@@ -168,7 +168,7 @@ module _
                     ( x)
                     ( z)
                     ( v)
-                    ( is-leq-or-strict-greater-total-Decidable-Poset
+                    ( is-leq-or-strict-greater-Decidable-Total-Order
                       ( X)
                       ( x)
                       ( z)))
@@ -189,7 +189,7 @@ module _
                         ( x)
                         ( z)
                         ( v)
-                        ( is-leq-or-strict-greater-total-Decidable-Poset
+                        ( is-leq-or-strict-greater-Decidable-Total-Order
                           ( X)
                           ( x)
                           ( z)))
@@ -197,7 +197,7 @@ module _
 
   is-permutation-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (element-total-Decidable-Poset X) n) →
+    (v : vec (element-Decidable-Total-Order X) n) →
     insertion-sort-vec v ＝ permute-vec n v (permutation-insertion-sort-vec v)
   is-permutation-insertion-sort-vec {0} empty-vec = refl
   is-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
@@ -206,13 +206,13 @@ module _
         ( x)
         ( head-vec (insertion-sort-vec (y ∷ v)))
         ( tail-vec (insertion-sort-vec (y ∷ v)))
-        ( is-leq-or-strict-greater-total-Decidable-Poset X _ _)) ∙
+        ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)) ∙
       ( ( ap-permute-vec
           ( helper-permutation-insertion-sort-vec
             ( x)
             ( head-vec (insertion-sort-vec (y ∷ v)))
             ( tail-vec (insertion-sort-vec (y ∷ v)))
-            ( is-leq-or-strict-greater-total-Decidable-Poset X _ _))
+            ( is-leq-or-strict-greater-Decidable-Total-Order X _ _))
           ( ap
             ( λ l → x ∷ l)
             ( cons-head-tail-vec n (insertion-sort-vec (y ∷ v)) ∙
@@ -228,7 +228,7 @@ module _
                 ( x)
                 ( head-vec (insertion-sort-vec (y ∷ v)))
                 ( tail-vec (insertion-sort-vec (y ∷ v)))
-                ( is-leq-or-strict-greater-total-Decidable-Poset X _ _)))))))
+                ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)))))))
 ```
 
 ### Sort by insertion is sorting vectors
@@ -236,8 +236,8 @@ module _
 ```agda
   helper-is-sorting-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-total-Decidable-Poset X)
-    (v : vec (element-total-Decidable-Poset X) n) →
+    (x y : element-Decidable-Total-Order X)
+    (v : vec (element-Decidable-Total-Order X) n) →
     (p : leq-or-strict-greater-Decidable-Poset X x y) →
     is-sorted-vec X (y ∷ v) →
     is-sorted-vec X (helper-insertion-sort-vec x y v p)
@@ -258,7 +258,7 @@ module _
             ( x)
             ( z)
             ( v)
-            ( is-leq-or-strict-greater-total-Decidable-Poset X x z)))
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x z)))
         ( is-least-element-permute-vec
           ( X)
           ( y)
@@ -267,7 +267,7 @@ module _
             ( x)
             ( z)
             ( v)
-            ( is-leq-or-strict-greater-total-Decidable-Poset X x z))
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
           ( pr2 p ,
             pr1
               ( is-sorted-least-element-vec-is-sorted-vec
@@ -280,17 +280,17 @@ module _
              ( x)
              ( z)
              ( v)
-             ( is-leq-or-strict-greater-total-Decidable-Poset X x z))
+             ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
            ( helper-is-sorting-insertion-sort-vec
              ( x)
              ( z)
              ( v)
-             ( is-leq-or-strict-greater-total-Decidable-Poset X x z)
+             ( is-leq-or-strict-greater-Decidable-Total-Order X x z)
              ( is-sorted-tail-is-sorted-vec X (y ∷ z ∷ v) s)))
 
   is-sorting-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (element-total-Decidable-Poset X) n) →
+    (v : vec (element-Decidable-Total-Order X) n) →
     is-sorted-vec X (insertion-sort-vec v)
   is-sorting-insertion-sort-vec {0} v = raise-star
   is-sorting-insertion-sort-vec {1} v = raise-star
@@ -299,7 +299,7 @@ module _
       ( x)
       ( head-vec (insertion-sort-vec (y ∷ v)))
       ( tail-vec (insertion-sort-vec (y ∷ v)))
-      ( is-leq-or-strict-greater-total-Decidable-Poset X _ _)
+      ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)
       ( tr
         ( λ l → is-sorted-vec X l)
         ( inv (cons-head-tail-vec n (insertion-sort-vec (y ∷ v))))

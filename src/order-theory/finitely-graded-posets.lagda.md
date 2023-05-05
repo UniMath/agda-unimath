@@ -30,7 +30,7 @@ open import order-theory.largest-elements-posets
 open import order-theory.least-elements-posets
 open import order-theory.posets
 open import order-theory.preorders
-open import order-theory.total-posets
+open import order-theory.total-orders
 
 open import univalent-combinatorics.standard-finite-types
 ```
