@@ -49,7 +49,7 @@ open import order-theory.subpreorders public
 open import order-theory.suplattices public
 open import order-theory.total-decidable-posets public
 open import order-theory.total-decidable-preorders public
-open import order-theory.total-posets public
+open import order-theory.total-orders public
 open import order-theory.total-preorders public
 open import order-theory.upper-bounds-posets public
 ```

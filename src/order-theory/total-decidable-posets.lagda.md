@@ -22,7 +22,7 @@ open import order-theory.decidable-posets
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.total-decidable-preorders
-open import order-theory.total-posets
+open import order-theory.total-orders
 ```
 
 </details>
