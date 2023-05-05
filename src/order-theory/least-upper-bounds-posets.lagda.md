@@ -28,7 +28,7 @@ is an upper bound `z` of `x` such that `z ≤ w` holds for any upper bound `w` o
 
 ## Definitions
 
-### Least upper bounds of pairs of types in a poset
+### Least upper bounds of pairs of elements in a poset
 
 ```agda
 module _
@@ -88,7 +88,7 @@ module _
     is-prop-has-least-binary-upper-bound-Poset x y
 ```
 
-### Least upper bounds of families of types in a poset
+### Least upper bounds of families of elements in a poset
 
 ```agda
 module _

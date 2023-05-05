@@ -57,7 +57,7 @@ module _
   is-sorted-vec l = type-Prop (is-sorted-vec-Prop l)
 ```
 
-### The proposition that a type is less or equal than every type in a vector
+### The proposition that an element is less than or equal to every element in a vector
 
 ```agda
   is-least-element-vec-Prop :
@@ -94,7 +94,7 @@ module _
   is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
 ```
 
-### If a vector `v' ＝ y ∷ v` is sorted then for all type `x` less or equal than `y`, `x` is less or equal than every type in the vector.
+### If a vector `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the vector.
 
 ```agda
   is-least-element-vec-is-leq-head-sorted-vec :
@@ -177,7 +177,7 @@ module _
   is-sorted-vec-is-sorted-tail-is-leq-head-vec (x ∷ y ∷ v) s p = p , s
 ```
 
-### If an type `x` is less or equal than every type of a vector `v`, then it is less or equal than every type of every permutation of `v`
+### If an element `x` is less than or equal to every element of a vector `v`, then it is less than or equal to every element of every permutation of `v`
 
 ```agda
   is-least-element-functional-vec-Prop :

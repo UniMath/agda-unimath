@@ -47,7 +47,7 @@ module _
     is-prop-type-Prop (is-binary-upper-bound-Poset-Prop x y z)
 ```
 
-### Upper bounds of families of types
+### Upper bounds of families of elements
 
 ```agda
 module _
