@@ -104,7 +104,7 @@ reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
 
 ## Properties
 
-### The preordering on the standard Finite types
+### The preordering on the standard finite types
 
 ```agda
 Fin-Preorder : ℕ → Preorder lzero lzero
@@ -118,7 +118,7 @@ pr1 (Fin-Poset k) = Fin-Preorder k
 pr2 (Fin-Poset k) = antisymmetric-leq-Fin k
 ```
 
-### Ordering on the standard Finite types is decidable
+### Ordering on the standard finite types is decidable
 
 ```agda
 is-decidable-leq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (leq-Fin k x y)
