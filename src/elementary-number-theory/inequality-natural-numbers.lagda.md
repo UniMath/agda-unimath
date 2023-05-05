@@ -356,14 +356,6 @@ leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
   leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
 ```
 
-### If `1 ≤ n` then there exists `m` such that `n = succ-ℕ m`
-
-```agda
-is-successor-is-greater-1-ℕ :
-  (n : ℕ) → 1 ≤-ℕ n → is-successor-ℕ n
-is-successor-is-greater-1-ℕ (succ-ℕ n) _ = n , refl
-```
-
 ### Multiplication preserves the ordering on ℕ
 
 ```agda

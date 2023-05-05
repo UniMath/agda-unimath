@@ -27,6 +27,8 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
+open import foundation.unit-type
+open import foundation.negation
 ```
 
 </details>
@@ -82,11 +84,34 @@ has-unique-proper-divisor-ℕ n = is-contr (Σ ℕ (is-proper-divisor-ℕ n))
 
 ## Properties
 
+### The number `0` is not a prime
+
+```agda
+is-nonzero-is-prime-ℕ :
+  (n : ℕ) → is-prime-ℕ n → is-nonzero-ℕ n
+is-nonzero-is-prime-ℕ n H p =
+  is-not-one-two-ℕ
+    ( pr1
+      ( H 2)
+      ( tr (λ n → ¬ (2 ＝ n)) (inv (p)) ( is-nonzero-two-ℕ),
+        tr (λ n → div-ℕ 2 n) (inv p) (0 , refl)))
+```
+
 ### The number `1` is not a prime
 
 ```agda
 is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
 is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
+```
+
+### A prime is strictly greater than `1`
+
+```agda
+le-one-is-prime-ℕ :
+  (n : ℕ) → is-prime-ℕ n → le-ℕ 1 n
+le-one-is-prime-ℕ 0 x = ex-falso (is-nonzero-is-prime-ℕ 0 x refl)
+le-one-is-prime-ℕ 1 x = ex-falso (is-not-one-is-prime-ℕ 1 x refl)
+le-one-is-prime-ℕ (succ-ℕ (succ-ℕ n)) x = star
 ```
 
 ### Being a prime is a proposition

@@ -44,6 +44,10 @@ module _
 
   is-sorted-list : list (element-total-decidable-Poset X) → UU l2
   is-sorted-list l = type-Prop (is-sorted-list-Prop l)
+
+  is-prop-is-sorted-list :
+    (l : list (element-total-decidable-Poset X)) → is-prop (is-sorted-list l)
+  is-prop-is-sorted-list l = is-prop-type-Prop (is-sorted-list-Prop l)
 ```
 
 ### The proposition that a element is less or equal than every element in a list

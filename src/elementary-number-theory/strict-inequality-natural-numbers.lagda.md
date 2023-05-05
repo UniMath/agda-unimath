@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.propositions
 ```
 
 </details>
@@ -31,10 +32,17 @@ open import foundation.universe-levels
 ### The strict ordering of the natural numbers
 
 ```agda
+le-ℕ-Prop : ℕ → ℕ → Prop lzero
+le-ℕ-Prop m zero-ℕ = empty-Prop
+le-ℕ-Prop zero-ℕ (succ-ℕ m) = unit-Prop
+le-ℕ-Prop (succ-ℕ n) (succ-ℕ m) = le-ℕ-Prop n m
+
 le-ℕ : ℕ → ℕ → UU lzero
-le-ℕ m zero-ℕ = empty
-le-ℕ zero-ℕ (succ-ℕ m) = unit
-le-ℕ (succ-ℕ n) (succ-ℕ m) = le-ℕ n m
+le-ℕ n m = type-Prop (le-ℕ-Prop n m)
+
+is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
+is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
+
 
 _<_ = le-ℕ
 ```
