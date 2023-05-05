@@ -27,6 +27,10 @@ open import order-theory.total-orders
 
 </details>
 
+## Idea
+
+A **decidable total order** is a total order of which the inequality relation is decidable.
+
 ## Definitions
 
 ```agda

@@ -84,18 +84,18 @@ module _
 
   sim-Decidable-Equivalence-Relation : X → X → UU l2
   sim-Decidable-Equivalence-Relation =
-    type-Decidable-Relation decidable-relation-Decidable-Equivalence-Relation
+    rel-Decidable-Relation decidable-relation-Decidable-Equivalence-Relation
 
   is-prop-sim-Decidable-Equivalence-Relation :
     (x y : X) → is-prop (sim-Decidable-Equivalence-Relation x y)
   is-prop-sim-Decidable-Equivalence-Relation =
-    is-prop-type-Decidable-Relation
+    is-prop-rel-Decidable-Relation
       decidable-relation-Decidable-Equivalence-Relation
 
   is-decidable-sim-Decidable-Equivalence-Relation :
     (x y : X) → is-decidable (sim-Decidable-Equivalence-Relation x y)
   is-decidable-sim-Decidable-Equivalence-Relation =
-    is-decidable-type-Decidable-Relation
+    is-decidable-Decidable-Relation
       decidable-relation-Decidable-Equivalence-Relation
 
   is-equivalence-relation-Decidable-Equivalence-Relation :

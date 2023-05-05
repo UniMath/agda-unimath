@@ -17,6 +17,10 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **decidable preorder** is a preorder of which the ordering relation is decidable.
+
 ## Definition
 
 ```agda

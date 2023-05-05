@@ -68,10 +68,10 @@ module _
   subtype-decidable-subtype : subtype l2 A
   subtype-decidable-subtype a = prop-Decidable-Prop (P a)
 
-  is-decidable-subtype-decidable-subtype :
+  is-decidable-decidable-subtype :
     is-decidable-subtype subtype-decidable-subtype
-  is-decidable-subtype-decidable-subtype a =
-    is-decidable-type-Decidable-Prop (P a)
+  is-decidable-decidable-subtype a =
+    is-decidable-Decidable-Prop (P a)
 
   is-in-decidable-subtype : A → UU l2
   is-in-decidable-subtype = is-in-subtype subtype-decidable-subtype

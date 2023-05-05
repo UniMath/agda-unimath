@@ -19,7 +19,7 @@ open import order-theory.lattices
 
 ## Idea
 
-A distributive lattice is a lattice in which meets distribute over joins.
+A **distributive lattice** is a lattice in which meets distribute over joins.
 
 ## Definition
 

@@ -33,6 +33,6 @@ module _
   is-in-interval-Poset z =
     prod-Prop (leq-Poset-Prop X x z) (leq-Poset-Prop X z y)
 
-  interval-sub-Poset : Poset (l1 ⊔ l2) l2
-  interval-sub-Poset = sub-Poset X is-in-interval-Poset
+  interval-Subposet : Poset (l1 ⊔ l2) l2
+  interval-Subposet = Subposet X is-in-interval-Poset
 ```

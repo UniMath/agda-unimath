@@ -28,6 +28,10 @@ open import order-theory.total-preorders
 
 </details>
 
+## Idea
+
+A **decidable total preorder** is a total preorder of which the inequality relation is decidable.
+
 ## Definitions
 
 ```agda

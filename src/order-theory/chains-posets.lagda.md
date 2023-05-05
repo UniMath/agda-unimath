@@ -30,16 +30,16 @@ module _
 
   is-chain-sub-Poset-Prop :
     {l3 : Level} (S : element-Poset X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-Poset-Prop = is-chain-sub-Preorder-Prop (preorder-Poset X)
+  is-chain-sub-Poset-Prop = is-chain-Subpreorder-Prop (preorder-Poset X)
 
   is-chain-sub-Poset :
     {l3 : Level} (S : element-Poset X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-Poset = is-chain-sub-Preorder (preorder-Poset X)
+  is-chain-sub-Poset = is-chain-Subpreorder (preorder-Poset X)
 
   is-prop-is-chain-sub-Poset :
     {l3 : Level} (S : element-Poset X → Prop l3) →
     is-prop (is-chain-sub-Poset S)
-  is-prop-is-chain-sub-Poset = is-prop-is-chain-sub-Preorder (preorder-Poset X)
+  is-prop-is-chain-sub-Poset = is-prop-is-chain-Subpreorder (preorder-Poset X)
 
 chain-Poset :
   {l1 l2 : Level} (l : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)

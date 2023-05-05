@@ -65,13 +65,13 @@ module _
   bounded-sum-arithmetic-function-Ring (succ-ℕ zero-ℕ) P f =
     case-one-bounded-sum-arithmetic-function-Ring
       ( P one-nonzero-ℕ)
-      ( is-decidable-type-Decidable-Prop (P one-nonzero-ℕ))
+      ( is-decidable-Decidable-Prop (P one-nonzero-ℕ))
       ( f one-nonzero-ℕ)
   bounded-sum-arithmetic-function-Ring (succ-ℕ (succ-ℕ b)) P f =
     add-Ring R
       ( case-one-bounded-sum-arithmetic-function-Ring
         ( P one-nonzero-ℕ)
-        ( is-decidable-type-Decidable-Prop (P one-nonzero-ℕ))
+        ( is-decidable-Decidable-Prop (P one-nonzero-ℕ))
         ( f one-nonzero-ℕ))
       ( bounded-sum-arithmetic-function-Ring
         ( succ-ℕ b)
