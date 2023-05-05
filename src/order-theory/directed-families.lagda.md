@@ -21,7 +21,7 @@ open import order-theory.posets
 
 ## Idea
 
-A **directed family** of elements in a poset `P` consists of an inhabited type
+A **directed family of elements** in a poset `P` consists of an inhabited type
 `I` and a map `x : I → P` such that for any two elements `i j : I` there exists
 an element `k : I` such that both `x i ≤ x k` and `x j ≤ x k` hold.
 

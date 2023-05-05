@@ -84,11 +84,11 @@ module _
   set-Lattice : Set l1
   set-Lattice = set-Poset poset-Lattice
 
-  is-lattice-poset-Lattice : is-lattice-Poset poset-Lattice
-  is-lattice-poset-Lattice = pr2 A
+  is-lattice-Lattice : is-lattice-Poset poset-Lattice
+  is-lattice-Lattice = pr2 A
 
   is-meet-semilattice-Lattice : is-meet-semilattice-Poset poset-Lattice
-  is-meet-semilattice-Lattice = pr1 is-lattice-poset-Lattice
+  is-meet-semilattice-Lattice = pr1 is-lattice-Lattice
 
   meet-semilattice-Lattice : Meet-Semilattice l1 l2
   pr1 meet-semilattice-Lattice = poset-Lattice
@@ -98,7 +98,7 @@ module _
   meet-Lattice = meet-Meet-Semilattice meet-semilattice-Lattice
 
   is-join-semilattice-Lattice : is-join-semilattice-Poset poset-Lattice
-  is-join-semilattice-Lattice = pr2 is-lattice-poset-Lattice
+  is-join-semilattice-Lattice = pr2 is-lattice-Lattice
 
   join-semilattice-Lattice : Join-Semilattice l1 l2
   pr1 join-semilattice-Lattice = poset-Lattice
