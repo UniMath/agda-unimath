@@ -33,10 +33,10 @@ module _
   where
 
   preserves-sups :
-    (element-Suplattice A → element-Suplattice B) →
+    (type-Suplattice A → type-Suplattice B) →
     UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   preserves-sups f =
-    {I : UU l3} → (b : I → element-Suplattice A) →
+    {I : UU l3} → (b : I → type-Suplattice A) →
     is-least-upper-bound-family-of-elements-Poset
       ( poset-Suplattice B)
       ( f ∘ b)
@@ -44,13 +44,13 @@ module _
 
   hom-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   hom-Suplattice =
-    Σ ( element-Suplattice A → element-Suplattice B)
+    Σ ( type-Suplattice A → type-Suplattice B)
       ( λ f →
         preserves-order-Poset (poset-Suplattice A) (poset-Suplattice B) f ×
         preserves-sups f)
 
   map-hom-Suplattice :
-    hom-Suplattice → element-Suplattice A → element-Suplattice B
+    hom-Suplattice → type-Suplattice A → type-Suplattice B
   map-hom-Suplattice = pr1
 
   preserves-order-hom-Suplattice :

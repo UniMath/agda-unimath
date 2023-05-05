@@ -33,16 +33,16 @@ module _
   where
 
   preserves-meets :
-    (element-Meet-Semilattice A → element-Meet-Semilattice B) →
+    (type-Meet-Semilattice A → type-Meet-Semilattice B) →
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-meets f =
-    (x y : element-Meet-Semilattice A) →
+    (x y : type-Meet-Semilattice A) →
     is-greatest-binary-lower-bound-Poset
       (poset-Meet-Semilattice B) (f x) (f y) (f (meet-Meet-Semilattice A x y))
 
   hom-Meet-Semilattice : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Meet-Semilattice =
-    Σ ( element-Meet-Semilattice A → element-Meet-Semilattice B)
+    Σ ( type-Meet-Semilattice A → type-Meet-Semilattice B)
       ( λ f →
         preserves-order-Poset
           ( poset-Meet-Semilattice A)
@@ -52,7 +52,7 @@ module _
 
   map-hom-Meet-Semilattice :
     hom-Meet-Semilattice →
-    element-Meet-Semilattice A → element-Meet-Semilattice B
+    type-Meet-Semilattice A → type-Meet-Semilattice B
   map-hom-Meet-Semilattice = pr1
 
   preserves-order-hom-Meet-Semilattice :

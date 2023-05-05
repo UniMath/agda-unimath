@@ -19,7 +19,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A **decidable preorder** is a preorder of which the ordering relation is decidable.
+A **decidable preorder** is a preorder of which the ordering relation is
+decidable.
 
 ## Definition
 
@@ -31,10 +32,10 @@ module _
   is-decidable-leq-Preorder-Prop : Prop (l1 ⊔ l2)
   is-decidable-leq-Preorder-Prop =
     Π-Prop
-      ( element-Preorder X)
+      ( type-Preorder X)
       ( λ x →
         Π-Prop
-          ( element-Preorder X)
+          ( type-Preorder X)
           ( λ y → is-decidable-Prop (leq-Preorder-Prop X x y)))
 
   is-decidable-leq-Preorder : UU (l1 ⊔ l2)
@@ -58,26 +59,26 @@ module _
     is-decidable-leq-Preorder preorder-Decidable-Preorder
   is-decidable-leq-Decidable-Preorder = pr2 X
 
-  element-Decidable-Preorder : UU l1
-  element-Decidable-Preorder = element-Preorder preorder-Decidable-Preorder
+  type-Decidable-Preorder : UU l1
+  type-Decidable-Preorder = type-Preorder preorder-Decidable-Preorder
 
   leq-Decidable-Preorder-Prop :
-    (x y : element-Decidable-Preorder) → Prop l2
+    (x y : type-Decidable-Preorder) → Prop l2
   leq-Decidable-Preorder-Prop =
     leq-Preorder-Prop preorder-Decidable-Preorder
 
   leq-Decidable-Preorder :
-    (x y : element-Decidable-Preorder) → UU l2
+    (x y : type-Decidable-Preorder) → UU l2
   leq-Decidable-Preorder = leq-Preorder preorder-Decidable-Preorder
 
   is-prop-leq-Decidable-Preorder :
-    (x y : element-Decidable-Preorder) →
+    (x y : type-Decidable-Preorder) →
     is-prop (leq-Decidable-Preorder x y)
   is-prop-leq-Decidable-Preorder =
     is-prop-leq-Preorder preorder-Decidable-Preorder
 
   leq-Decidable-Preorder-Decidable-Prop :
-    (x y : element-Decidable-Preorder) → Decidable-Prop l2
+    (x y : type-Decidable-Preorder) → Decidable-Prop l2
   pr1 (leq-Decidable-Preorder-Decidable-Prop x y) =
     leq-Decidable-Preorder x y
   pr1 (pr2 (leq-Decidable-Preorder-Decidable-Prop x y)) =
@@ -86,11 +87,11 @@ module _
     is-decidable-leq-Decidable-Preorder x y
 
   refl-leq-Decidable-Preorder :
-    (x : element-Decidable-Preorder) → leq-Decidable-Preorder x x
+    (x : type-Decidable-Preorder) → leq-Decidable-Preorder x x
   refl-leq-Decidable-Preorder = refl-leq-Preorder preorder-Decidable-Preorder
 
   transitive-leq-Decidable-Preorder :
-    (x y z : element-Decidable-Preorder) →
+    (x y z : type-Decidable-Preorder) →
     leq-Decidable-Preorder y z →
     leq-Decidable-Preorder x y →
     leq-Decidable-Preorder x z

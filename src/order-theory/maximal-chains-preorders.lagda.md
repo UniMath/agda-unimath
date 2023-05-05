@@ -55,7 +55,7 @@ module _
     is-maximal-chain-Preorder X chain-maximal-chain-Preorder
   is-maximal-chain-maximal-chain-Preorder = pr2 C
 
-  element-maximal-chain-Preorder : UU (l1 ⊔ l3)
-  element-maximal-chain-Preorder =
-    element-chain-Preorder X chain-maximal-chain-Preorder
+  type-maximal-chain-Preorder : UU (l1 ⊔ l3)
+  type-maximal-chain-Preorder =
+    type-chain-Preorder X chain-maximal-chain-Preorder
 ```

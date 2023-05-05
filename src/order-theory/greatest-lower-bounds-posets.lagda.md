@@ -34,52 +34,52 @@ module _
   where
 
   is-binary-lower-bound-Poset-Prop :
-    (x y z : element-Poset P) → Prop l2
+    (x y z : type-Poset P) → Prop l2
   is-binary-lower-bound-Poset-Prop x y z =
     prod-Prop (leq-Poset-Prop P z x) (leq-Poset-Prop P z y)
 
   is-binary-lower-bound-Poset :
-    (x y z : element-Poset P) → UU l2
+    (x y z : type-Poset P) → UU l2
   is-binary-lower-bound-Poset x y z =
     type-Prop (is-binary-lower-bound-Poset-Prop x y z)
 
   is-prop-is-binary-lower-bound-Poset :
-    (x y z : element-Poset P) → is-prop (is-binary-lower-bound-Poset x y z)
+    (x y z : type-Poset P) → is-prop (is-binary-lower-bound-Poset x y z)
   is-prop-is-binary-lower-bound-Poset x y z =
     is-prop-type-Prop (is-binary-lower-bound-Poset-Prop x y z)
 
   is-greatest-binary-lower-bound-Poset-Prop :
-    (x y z : element-Poset P) → Prop (l1 ⊔ l2)
+    (x y z : type-Poset P) → Prop (l1 ⊔ l2)
   is-greatest-binary-lower-bound-Poset-Prop x y z =
     prod-Prop
       ( is-binary-lower-bound-Poset-Prop x y z)
       ( Π-Prop
-        ( element-Poset P)
+        ( type-Poset P)
         ( λ w →
           function-Prop
             ( is-binary-lower-bound-Poset x y w)
             ( leq-Poset-Prop P w z)))
 
   is-greatest-binary-lower-bound-Poset :
-    (x y z : element-Poset P) → UU (l1 ⊔ l2)
+    (x y z : type-Poset P) → UU (l1 ⊔ l2)
   is-greatest-binary-lower-bound-Poset x y z =
     type-Prop (is-greatest-binary-lower-bound-Poset-Prop x y z)
 
   is-prop-is-greatest-binary-lower-bound-Poset :
-    (x y z : element-Poset P) →
+    (x y z : type-Poset P) →
     is-prop (is-greatest-binary-lower-bound-Poset x y z)
   is-prop-is-greatest-binary-lower-bound-Poset x y z =
     is-prop-type-Prop (is-greatest-binary-lower-bound-Poset-Prop x y z)
 
   has-greatest-binary-lower-bound-Poset :
-    (x y : element-Poset P) → UU (l1 ⊔ l2)
+    (x y : type-Poset P) → UU (l1 ⊔ l2)
   has-greatest-binary-lower-bound-Poset x y =
-    Σ (element-Poset P) (is-greatest-binary-lower-bound-Poset x y)
+    Σ (type-Poset P) (is-greatest-binary-lower-bound-Poset x y)
 
-  all-elements-equal-has-greatest-binary-lower-bound-Poset :
-    (x y : element-Poset P) →
+  all-types-equal-has-greatest-binary-lower-bound-Poset :
+    (x y : type-Poset P) →
     all-elements-equal (has-greatest-binary-lower-bound-Poset x y)
-  all-elements-equal-has-greatest-binary-lower-bound-Poset x y
+  all-types-equal-has-greatest-binary-lower-bound-Poset x y
     (pair u H) (pair v K) =
     eq-type-subtype
       ( is-greatest-binary-lower-bound-Poset-Prop x y)
@@ -88,14 +88,14 @@ module _
         ( pr2 H v (pr1 K)))
 
   is-prop-has-greatest-binary-lower-bound-Poset :
-    (x y : element-Poset P) →
+    (x y : type-Poset P) →
     is-prop (has-greatest-binary-lower-bound-Poset x y)
   is-prop-has-greatest-binary-lower-bound-Poset x y =
     is-prop-all-elements-equal
-      ( all-elements-equal-has-greatest-binary-lower-bound-Poset x y)
+      ( all-types-equal-has-greatest-binary-lower-bound-Poset x y)
 
   has-greatest-binary-lower-bound-Poset-Prop :
-    (x y : element-Poset P) → Prop (l1 ⊔ l2)
+    (x y : type-Poset P) → Prop (l1 ⊔ l2)
   pr1 (has-greatest-binary-lower-bound-Poset-Prop x y) =
     has-greatest-binary-lower-bound-Poset x y
   pr2 (has-greatest-binary-lower-bound-Poset-Prop x y) =

@@ -33,10 +33,10 @@ module _
   is-ideal-lower-type-Preorder :
     {l3 : Level} (L : lower-type-Preorder l3 P) → UU (l1 ⊔ l2 ⊔ l3)
   is-ideal-lower-type-Preorder L =
-    ( is-inhabited (element-lower-type-Preorder P L)) ×
-    ( (x y : element-lower-type-Preorder P L) →
+    ( is-inhabited (type-lower-type-Preorder P L)) ×
+    ( (x y : type-lower-type-Preorder P L) →
       is-inhabited
-        ( Σ ( element-lower-type-Preorder P L)
+        ( Σ ( type-lower-type-Preorder P L)
             ( λ z →
               ( leq-lower-type-Preorder P L x z) ×
               ( leq-lower-type-Preorder P L y z))))

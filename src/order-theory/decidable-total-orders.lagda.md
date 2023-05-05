@@ -29,7 +29,8 @@ open import order-theory.total-orders
 
 ## Idea
 
-A **decidable total order** is a total order of which the inequality relation is decidable.
+A **decidable total order** is a total order of which the inequality relation is
+decidable.
 
 ## Definitions
 
@@ -53,35 +54,35 @@ module _
     is-decidable-leq-Poset (poset-Decidable-Total-Order)
   is-decidable-poset-Decidable-Total-Order = pr2 (pr2 P)
 
-  element-Decidable-Total-Order : UU l1
-  element-Decidable-Total-Order = element-Poset poset-Decidable-Total-Order
+  type-Decidable-Total-Order : UU l1
+  type-Decidable-Total-Order = type-Poset poset-Decidable-Total-Order
 
   leq-Decidable-Total-Order-Prop :
-    (x y : element-Decidable-Total-Order) → Prop l2
+    (x y : type-Decidable-Total-Order) → Prop l2
   leq-Decidable-Total-Order-Prop = leq-Poset-Prop poset-Decidable-Total-Order
 
   leq-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) → UU l2
+    (x y : type-Decidable-Total-Order) → UU l2
   leq-Decidable-Total-Order = leq-Poset poset-Decidable-Total-Order
 
   is-prop-leq-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) →
+    (x y : type-Decidable-Total-Order) →
     is-prop (leq-Decidable-Total-Order x y)
   is-prop-leq-Decidable-Total-Order =
     is-prop-leq-Poset poset-Decidable-Total-Order
 
   le-Decidable-Total-Order-Prop :
-    (x y : element-Decidable-Total-Order) → Prop (l1 ⊔ l2)
+    (x y : type-Decidable-Total-Order) → Prop (l1 ⊔ l2)
   le-Decidable-Total-Order-Prop =
     le-Poset-Prop poset-Decidable-Total-Order
 
   le-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) → UU (l1 ⊔ l2)
+    (x y : type-Decidable-Total-Order) → UU (l1 ⊔ l2)
   le-Decidable-Total-Order =
     le-Poset poset-Decidable-Total-Order
 
   is-prop-le-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) →
+    (x y : type-Decidable-Total-Order) →
     is-prop (le-Decidable-Total-Order x y)
   is-prop-le-Decidable-Total-Order =
     is-prop-le-Poset poset-Decidable-Total-Order
@@ -92,29 +93,29 @@ module _
     is-decidable-poset-Decidable-Total-Order
 
   leq-total-decidable-poset-decidable-Prop :
-    (x y : element-Decidable-Total-Order) → Decidable-Prop l2
+    (x y : type-Decidable-Total-Order) → Decidable-Prop l2
   leq-total-decidable-poset-decidable-Prop =
     leq-decidable-poset-decidable-Prop decidable-poset-Decidable-Total-Order
 
   concatenate-eq-leq-Decidable-Total-Order :
-    {x y z : element-Decidable-Total-Order} → x ＝ y →
+    {x y z : type-Decidable-Total-Order} → x ＝ y →
     leq-Decidable-Total-Order y z → leq-Decidable-Total-Order x z
   concatenate-eq-leq-Decidable-Total-Order =
     concatenate-eq-leq-Poset poset-Decidable-Total-Order
 
   concatenate-leq-eq-Decidable-Total-Order :
-    {x y z : element-Decidable-Total-Order} →
+    {x y z : type-Decidable-Total-Order} →
     leq-Decidable-Total-Order x y → y ＝ z → leq-Decidable-Total-Order x z
   concatenate-leq-eq-Decidable-Total-Order =
     concatenate-leq-eq-Poset poset-Decidable-Total-Order
 
   refl-leq-Decidable-Total-Order :
-    (x : element-Decidable-Total-Order) → leq-Decidable-Total-Order x x
+    (x : type-Decidable-Total-Order) → leq-Decidable-Total-Order x x
   refl-leq-Decidable-Total-Order =
     refl-leq-Poset poset-Decidable-Total-Order
 
   transitive-leq-Decidable-Total-Order :
-    (x y z : element-Decidable-Total-Order) → leq-Decidable-Total-Order y z →
+    (x y z : type-Decidable-Total-Order) → leq-Decidable-Total-Order y z →
     leq-Decidable-Total-Order x y → leq-Decidable-Total-Order x z
   transitive-leq-Decidable-Total-Order =
     transitive-leq-Poset poset-Decidable-Total-Order
@@ -132,26 +133,26 @@ module _
     is-decidable-poset-Decidable-Total-Order
 
   leq-or-strict-greater-Decidable-Poset :
-    (x y : element-Decidable-Total-Order) → UU (l1 ⊔ l2)
+    (x y : type-Decidable-Total-Order) → UU (l1 ⊔ l2)
   leq-or-strict-greater-Decidable-Poset =
     leq-or-strict-greater-Decidable-Preorder
       decidable-total-preorder-Decidable-Total-Order
 
   is-leq-or-strict-greater-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) →
+    (x y : type-Decidable-Total-Order) →
     leq-or-strict-greater-Decidable-Poset x y
   is-leq-or-strict-greater-Decidable-Total-Order =
     is-leq-or-strict-greater-Decidable-Total-Preorder
       decidable-total-preorder-Decidable-Total-Order
 
   antisymmetric-leq-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) →
+    (x y : type-Decidable-Total-Order) →
     leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → Id x y
   antisymmetric-leq-Decidable-Total-Order =
     antisymmetric-leq-Poset poset-Decidable-Total-Order
 
   is-prop-leq-or-strict-greater-Decidable-Total-Order :
-    (x y : element-Decidable-Total-Order) →
+    (x y : type-Decidable-Total-Order) →
     is-prop (leq-or-strict-greater-Decidable-Poset x y)
   is-prop-leq-or-strict-greater-Decidable-Total-Order x y =
     is-prop-coprod
@@ -160,9 +161,9 @@ module _
       ( is-prop-leq-Decidable-Total-Order x y)
       ( is-prop-le-Decidable-Total-Order y x)
 
-  is-set-element-Decidable-Total-Order : is-set element-Decidable-Total-Order
-  is-set-element-Decidable-Total-Order =
-    is-set-element-Poset poset-Decidable-Total-Order
+  is-set-type-Decidable-Total-Order : is-set type-Decidable-Total-Order
+  is-set-type-Decidable-Total-Order =
+    is-set-type-Poset poset-Decidable-Total-Order
 
   set-Decidable-Total-Order : Set l1
   set-Decidable-Total-Order = set-Poset poset-Decidable-Total-Order

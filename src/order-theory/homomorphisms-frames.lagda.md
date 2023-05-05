@@ -34,14 +34,14 @@ module _
   where
 
   hom-Frame : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
-  hom-Frame = Σ (element-Frame A → element-Frame B)
+  hom-Frame = Σ (type-Frame A → type-Frame B)
     (λ f → preserves-order-Poset (poset-Frame A) (poset-Frame B) f ×
       preserves-meets-sups
         ( meet-suplattice-Frame A)
         ( meet-suplattice-Frame B)
         ( f))
 
-  map-hom-Frame : hom-Frame → element-Frame A → element-Frame B
+  map-hom-Frame : hom-Frame → type-Frame A → type-Frame B
   map-hom-Frame = pr1
 
   preserves-order-hom-Frame :

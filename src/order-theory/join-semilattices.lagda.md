@@ -39,10 +39,10 @@ module _
   is-join-semilattice-Poset-Prop : Prop (l1 ⊔ l2)
   is-join-semilattice-Poset-Prop =
     Π-Prop
-      ( element-Poset P)
+      ( type-Poset P)
       ( λ x →
         Π-Prop
-          ( element-Poset P)
+          ( type-Poset P)
           ( has-least-binary-upper-bound-Poset-Prop P x))
 
   is-join-semilattice-Poset : UU (l1 ⊔ l2)
@@ -63,37 +63,37 @@ module _
   poset-Join-Semilattice : Poset l1 l2
   poset-Join-Semilattice = pr1 A
 
-  element-Join-Semilattice : UU l1
-  element-Join-Semilattice = element-Poset poset-Join-Semilattice
+  type-Join-Semilattice : UU l1
+  type-Join-Semilattice = type-Poset poset-Join-Semilattice
 
-  leq-join-semilattice-Prop : (x y : element-Join-Semilattice) → Prop l2
+  leq-join-semilattice-Prop : (x y : type-Join-Semilattice) → Prop l2
   leq-join-semilattice-Prop = leq-Poset-Prop poset-Join-Semilattice
 
-  leq-Join-Semilattice : (x y : element-Join-Semilattice) → UU l2
+  leq-Join-Semilattice : (x y : type-Join-Semilattice) → UU l2
   leq-Join-Semilattice = leq-Poset poset-Join-Semilattice
 
   is-prop-leq-Join-Semilattice :
-    (x y : element-Join-Semilattice) → is-prop (leq-Join-Semilattice x y)
+    (x y : type-Join-Semilattice) → is-prop (leq-Join-Semilattice x y)
   is-prop-leq-Join-Semilattice = is-prop-leq-Poset poset-Join-Semilattice
 
   refl-leq-Join-Semilattice :
-    (x : element-Join-Semilattice) → leq-Join-Semilattice x x
+    (x : type-Join-Semilattice) → leq-Join-Semilattice x x
   refl-leq-Join-Semilattice = refl-leq-Poset poset-Join-Semilattice
 
   antisymmetric-leq-Join-Semilattice :
-    (x y : element-Join-Semilattice) →
+    (x y : type-Join-Semilattice) →
     leq-Join-Semilattice x y → leq-Join-Semilattice y x → Id x y
   antisymmetric-leq-Join-Semilattice =
     antisymmetric-leq-Poset poset-Join-Semilattice
 
   transitive-leq-Join-Semilattice :
-    (x y z : element-Join-Semilattice) →
+    (x y z : type-Join-Semilattice) →
     leq-Join-Semilattice y z → leq-Join-Semilattice x y →
     leq-Join-Semilattice x z
   transitive-leq-Join-Semilattice = transitive-leq-Poset poset-Join-Semilattice
 
-  is-set-element-Join-Semilattice : is-set element-Join-Semilattice
-  is-set-element-Join-Semilattice = is-set-element-Poset poset-Join-Semilattice
+  is-set-type-Join-Semilattice : is-set type-Join-Semilattice
+  is-set-type-Join-Semilattice = is-set-type-Poset poset-Join-Semilattice
 
   set-Join-Semilattice : Set l1
   set-Join-Semilattice = set-Poset poset-Join-Semilattice
@@ -107,12 +107,12 @@ module _
   pr2 join-semilattice-Join-Semilattice = is-join-semilattice-Join-Semilattice
 
   join-Join-Semilattice :
-    (x y : element-Join-Semilattice) → element-Join-Semilattice
+    (x y : type-Join-Semilattice) → type-Join-Semilattice
   join-Join-Semilattice x y =
     pr1 (is-join-semilattice-Join-Semilattice x y)
 
   is-least-binary-upper-bound-join-Join-Semilattice :
-    (x y : element-Join-Semilattice) →
+    (x y : type-Join-Semilattice) →
     is-least-binary-upper-bound-Poset poset-Join-Semilattice x y
       ( join-Join-Semilattice x y)
   is-least-binary-upper-bound-join-Join-Semilattice x y =

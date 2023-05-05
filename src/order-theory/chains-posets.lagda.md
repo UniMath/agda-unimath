@@ -29,15 +29,15 @@ module _
   where
 
   is-chain-sub-Poset-Prop :
-    {l3 : Level} (S : element-Poset X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (S : type-Poset X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
   is-chain-sub-Poset-Prop = is-chain-Subpreorder-Prop (preorder-Poset X)
 
   is-chain-sub-Poset :
-    {l3 : Level} (S : element-Poset X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (S : type-Poset X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
   is-chain-sub-Poset = is-chain-Subpreorder (preorder-Poset X)
 
   is-prop-is-chain-sub-Poset :
-    {l3 : Level} (S : element-Poset X → Prop l3) →
+    {l3 : Level} (S : type-Poset X → Prop l3) →
     is-prop (is-chain-sub-Poset S)
   is-prop-is-chain-sub-Poset = is-prop-is-chain-Subpreorder (preorder-Poset X)
 
@@ -49,12 +49,12 @@ module _
   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
   where
 
-  sub-preorder-chain-Poset : element-Poset X → Prop l3
+  sub-preorder-chain-Poset : type-Poset X → Prop l3
   sub-preorder-chain-Poset =
     sub-preorder-chain-Preorder (preorder-Poset X) C
 
-  element-chain-Poset : UU (l1 ⊔ l3)
-  element-chain-Poset = element-chain-Preorder (preorder-Poset X) C
+  type-chain-Poset : UU (l1 ⊔ l3)
+  type-chain-Poset = type-chain-Preorder (preorder-Poset X) C
 
 module _
   {l1 l2 : Level} (X : Poset l1 l2)

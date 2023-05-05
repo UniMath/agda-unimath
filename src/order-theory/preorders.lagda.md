@@ -39,35 +39,35 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  element-Preorder : UU l1
-  element-Preorder = pr1 X
+  type-Preorder : UU l1
+  type-Preorder = pr1 X
 
-  leq-Preorder-Prop : (x y : element-Preorder) → Prop l2
+  leq-Preorder-Prop : (x y : type-Preorder) → Prop l2
   leq-Preorder-Prop = pr1 (pr2 X)
 
-  leq-Preorder : (x y : element-Preorder) → UU l2
+  leq-Preorder : (x y : type-Preorder) → UU l2
   leq-Preorder x y = type-Prop (leq-Preorder-Prop x y)
 
-  is-prop-leq-Preorder : (x y : element-Preorder) → is-prop (leq-Preorder x y)
+  is-prop-leq-Preorder : (x y : type-Preorder) → is-prop (leq-Preorder x y)
   is-prop-leq-Preorder x y = is-prop-type-Prop (leq-Preorder-Prop x y)
 
-  le-Preorder-Prop : (x y : element-Preorder) → Prop (l1 ⊔ l2)
+  le-Preorder-Prop : (x y : type-Preorder) → Prop (l1 ⊔ l2)
   le-Preorder-Prop x y =
     prod-Prop (¬ (x ＝ y) , is-prop-neg) (leq-Preorder-Prop x y)
 
-  le-Preorder : (x y : element-Preorder) → UU (l1 ⊔ l2)
+  le-Preorder : (x y : type-Preorder) → UU (l1 ⊔ l2)
   le-Preorder x y = type-Prop (le-Preorder-Prop x y)
 
   is-prop-le-Preorder :
-    (x y : element-Preorder) → is-prop (le-Preorder x y)
+    (x y : type-Preorder) → is-prop (le-Preorder x y)
   is-prop-le-Preorder x y =
     is-prop-type-Prop (le-Preorder-Prop x y)
 
-  refl-leq-Preorder : (x : element-Preorder) → leq-Preorder x x
+  refl-leq-Preorder : (x : type-Preorder) → leq-Preorder x x
   refl-leq-Preorder = pr1 (pr2 (pr2 X))
 
   transitive-leq-Preorder :
-    (x y z : element-Preorder) →
+    (x y z : type-Preorder) →
     leq-Preorder y z → leq-Preorder x y → leq-Preorder x z
   transitive-leq-Preorder = pr2 (pr2 (pr2 X))
 ```

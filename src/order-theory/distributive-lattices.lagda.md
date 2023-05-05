@@ -31,13 +31,13 @@ module _
   is-distributive-lattice-Prop : Prop l1
   is-distributive-lattice-Prop =
     Π-Prop
-      ( element-Lattice L)
+      ( type-Lattice L)
       ( λ x →
         Π-Prop
-          ( element-Lattice L)
+          ( type-Lattice L)
           ( λ y →
             Π-Prop
-              ( element-Lattice L)
+              ( type-Lattice L)
               ( λ z →
                 Id-Prop
                   ( set-Lattice L)

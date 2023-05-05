@@ -54,32 +54,32 @@ module _
   poset-Lattice : Poset l1 l2
   poset-Lattice = pr1 A
 
-  element-Lattice : UU l1
-  element-Lattice = element-Poset poset-Lattice
+  type-Lattice : UU l1
+  type-Lattice = type-Poset poset-Lattice
 
-  leq-lattice-Prop : (x y : element-Lattice) → Prop l2
+  leq-lattice-Prop : (x y : type-Lattice) → Prop l2
   leq-lattice-Prop = leq-Poset-Prop poset-Lattice
 
-  leq-Lattice : (x y : element-Lattice) → UU l2
+  leq-Lattice : (x y : type-Lattice) → UU l2
   leq-Lattice = leq-Poset poset-Lattice
 
-  is-prop-leq-Lattice : (x y : element-Lattice) → is-prop (leq-Lattice x y)
+  is-prop-leq-Lattice : (x y : type-Lattice) → is-prop (leq-Lattice x y)
   is-prop-leq-Lattice = is-prop-leq-Poset poset-Lattice
 
-  refl-leq-Lattice : (x : element-Lattice) → leq-Lattice x x
+  refl-leq-Lattice : (x : type-Lattice) → leq-Lattice x x
   refl-leq-Lattice = refl-leq-Poset poset-Lattice
 
   antisymmetric-leq-Lattice :
-    (x y : element-Lattice) → leq-Lattice x y → leq-Lattice y x → Id x y
+    (x y : type-Lattice) → leq-Lattice x y → leq-Lattice y x → Id x y
   antisymmetric-leq-Lattice = antisymmetric-leq-Poset poset-Lattice
 
   transitive-leq-Lattice :
-    (x y z : element-Lattice) →
+    (x y z : type-Lattice) →
     leq-Lattice y z → leq-Lattice x y → leq-Lattice x z
   transitive-leq-Lattice = transitive-leq-Poset poset-Lattice
 
-  is-set-element-Lattice : is-set element-Lattice
-  is-set-element-Lattice = is-set-element-Poset poset-Lattice
+  is-set-type-Lattice : is-set type-Lattice
+  is-set-type-Lattice = is-set-type-Poset poset-Lattice
 
   set-Lattice : Set l1
   set-Lattice = set-Poset poset-Lattice
@@ -94,7 +94,7 @@ module _
   pr1 meet-semilattice-Lattice = poset-Lattice
   pr2 meet-semilattice-Lattice = is-meet-semilattice-Lattice
 
-  meet-Lattice : (x y : element-Lattice) → element-Lattice
+  meet-Lattice : (x y : type-Lattice) → type-Lattice
   meet-Lattice = meet-Meet-Semilattice meet-semilattice-Lattice
 
   is-join-semilattice-Lattice : is-join-semilattice-Poset poset-Lattice
@@ -104,6 +104,6 @@ module _
   pr1 join-semilattice-Lattice = poset-Lattice
   pr2 join-semilattice-Lattice = is-join-semilattice-Lattice
 
-  join-Lattice : (x y : element-Lattice) → element-Lattice
+  join-Lattice : (x y : type-Lattice) → type-Lattice
   join-Lattice = join-Join-Semilattice join-semilattice-Lattice
 ```

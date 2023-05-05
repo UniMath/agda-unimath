@@ -21,7 +21,8 @@ open import univalent-combinatorics.finite-types
 
 ## Definitions
 
-A **finite poset** is a poset of which the underlying type is finite, and of which the ordering relation is decidable.
+A **finite poset** is a poset of which the underlying type is finite, and of
+which the ordering relation is decidable.
 
 ```agda
 module _
@@ -37,14 +38,14 @@ module _
   is-prop-is-finite-Poset : is-prop is-finite-Poset
   is-prop-is-finite-Poset = is-prop-is-finite-Preorder (preorder-Poset P)
 
-  is-finite-element-is-finite-Poset :
-    is-finite-Poset → is-finite (element-Poset P)
-  is-finite-element-is-finite-Poset =
-    is-finite-element-is-finite-Preorder (preorder-Poset P)
+  is-finite-type-is-finite-Poset :
+    is-finite-Poset → is-finite (type-Poset P)
+  is-finite-type-is-finite-Poset =
+    is-finite-type-is-finite-Preorder (preorder-Poset P)
 
   is-decidable-leq-is-finite-Poset :
     is-finite-Poset →
-    (x y : element-Poset P) → is-decidable (leq-Poset P x y)
+    (x y : type-Poset P) → is-decidable (leq-Poset P x y)
   is-decidable-leq-is-finite-Poset =
     is-decidable-leq-is-finite-Preorder (preorder-Poset P)
 ```

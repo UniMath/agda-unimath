@@ -65,38 +65,38 @@ module _
   poset-Meet-Suplattice : Poset l1 l2
   poset-Meet-Suplattice = pr1 A
 
-  element-Meet-Suplattice : UU l1
-  element-Meet-Suplattice =
-    element-Poset poset-Meet-Suplattice
+  type-Meet-Suplattice : UU l1
+  type-Meet-Suplattice =
+    type-Poset poset-Meet-Suplattice
 
-  leq-meet-suplattice-Prop : (x y : element-Meet-Suplattice) → Prop l2
+  leq-meet-suplattice-Prop : (x y : type-Meet-Suplattice) → Prop l2
   leq-meet-suplattice-Prop = leq-Poset-Prop poset-Meet-Suplattice
 
-  leq-Meet-Suplattice : (x y : element-Meet-Suplattice) → UU l2
+  leq-Meet-Suplattice : (x y : type-Meet-Suplattice) → UU l2
   leq-Meet-Suplattice = leq-Poset poset-Meet-Suplattice
 
   is-prop-leq-Meet-Suplattice :
-    (x y : element-Meet-Suplattice) → is-prop (leq-Meet-Suplattice x y)
+    (x y : type-Meet-Suplattice) → is-prop (leq-Meet-Suplattice x y)
   is-prop-leq-Meet-Suplattice = is-prop-leq-Poset poset-Meet-Suplattice
 
   refl-leq-Meet-Suplattice :
-    (x : element-Meet-Suplattice) → leq-Meet-Suplattice x x
+    (x : type-Meet-Suplattice) → leq-Meet-Suplattice x x
   refl-leq-Meet-Suplattice = refl-leq-Poset poset-Meet-Suplattice
 
   antisymmetric-leq-Meet-Suplattice :
-    (x y : element-Meet-Suplattice) →
+    (x y : type-Meet-Suplattice) →
     leq-Meet-Suplattice x y → leq-Meet-Suplattice y x → x ＝ y
   antisymmetric-leq-Meet-Suplattice =
     antisymmetric-leq-Poset poset-Meet-Suplattice
 
   transitive-leq-Meet-Suplattice :
-    (x y z : element-Meet-Suplattice) →
+    (x y z : type-Meet-Suplattice) →
     leq-Meet-Suplattice y z → leq-Meet-Suplattice x y →
     leq-Meet-Suplattice x z
   transitive-leq-Meet-Suplattice = transitive-leq-Poset poset-Meet-Suplattice
 
-  is-set-element-Meet-Suplattice : is-set element-Meet-Suplattice
-  is-set-element-Meet-Suplattice = is-set-element-Poset poset-Meet-Suplattice
+  is-set-type-Meet-Suplattice : is-set type-Meet-Suplattice
+  is-set-type-Meet-Suplattice = is-set-type-Poset poset-Meet-Suplattice
 
   set-Meet-Suplattice : Set l1
   set-Meet-Suplattice = set-Poset poset-Meet-Suplattice
@@ -127,13 +127,13 @@ module _
     is-suplattice-Meet-Suplattice
 
   meet-Meet-Suplattice :
-    (x y : element-Meet-Suplattice) →
-    element-Meet-Suplattice
+    (x y : type-Meet-Suplattice) →
+    type-Meet-Suplattice
   meet-Meet-Suplattice x y = pr1 (is-meet-semilattice-Meet-Suplattice x y)
 
   sup-Meet-Suplattice :
-    (I : UU l3) → (I → element-Meet-Suplattice) →
-    element-Meet-Suplattice
+    (I : UU l3) → (I → type-Meet-Suplattice) →
+    type-Meet-Suplattice
   sup-Meet-Suplattice I f = pr1 (is-suplattice-Meet-Suplattice I f)
 ```
 
@@ -143,8 +143,8 @@ module _
 distributive-law-meet-suplattice :
   (l1 l2 l3 : Level) → (Meet-Suplattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
 distributive-law-meet-suplattice l1 l2 l3 A =
-  (a : element-Meet-Suplattice A) → {I : UU l3} →
-  (b : I → element-Meet-Suplattice A) →
+  (a : type-Meet-Suplattice A) → {I : UU l3} →
+  (b : I → type-Meet-Suplattice A) →
   (meet-Meet-Suplattice A a (sup-Meet-Suplattice A I b) ＝
   sup-Meet-Suplattice A I (λ i → (meet-Meet-Suplattice A a (b i))))
 ```

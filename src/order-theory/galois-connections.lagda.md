@@ -44,10 +44,10 @@ module _
     hom-Poset P Q → hom-Poset Q P → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   adjoint-relation-galois-connection-Prop f g =
     Π-Prop
-      ( element-Poset P)
+      ( type-Poset P)
       ( λ x →
         Π-Prop
-          ( element-Poset Q)
+          ( type-Poset Q)
           ( λ y →
             iff-Prop
               ( leq-Poset-Prop Q (map-hom-Poset P Q f x) y)
@@ -75,7 +75,7 @@ module _
     upper-adjoint-Galois-Connection = pr1 G
 
     map-upper-adjoint-Galois-Connection :
-      element-Poset Q → element-Poset P
+      type-Poset Q → type-Poset P
     map-upper-adjoint-Galois-Connection =
       map-hom-Poset Q P upper-adjoint-Galois-Connection
 
@@ -93,7 +93,7 @@ module _
       pr1 is-upper-adjoint-upper-adjoint-Galois-Connection
 
     map-lower-adjoint-Galois-Connection :
-      element-Poset P → element-Poset Q
+      type-Poset P → type-Poset Q
     map-lower-adjoint-Galois-Connection =
       map-hom-Poset P Q lower-adjoint-Galois-Connection
 
@@ -103,21 +103,21 @@ module _
       preserves-order-map-hom-Poset P Q lower-adjoint-Galois-Connection
 
     adjoint-relation-Galois-Connection :
-      (x : element-Poset P) (y : element-Poset Q) →
+      (x : type-Poset P) (y : type-Poset Q) →
       leq-Poset Q (map-lower-adjoint-Galois-Connection x) y ↔
       leq-Poset P x (map-upper-adjoint-Galois-Connection y)
     adjoint-relation-Galois-Connection =
       pr2 is-upper-adjoint-upper-adjoint-Galois-Connection
 
     map-adjoint-relation-Galois-Connection :
-      (x : element-Poset P) (y : element-Poset Q) →
+      (x : type-Poset P) (y : type-Poset Q) →
       leq-Poset Q (map-lower-adjoint-Galois-Connection x) y →
       leq-Poset P x (map-upper-adjoint-Galois-Connection y)
     map-adjoint-relation-Galois-Connection x y =
       forward-implication (adjoint-relation-Galois-Connection x y)
 
     map-inv-adjoint-relation-Galois-Connection :
-      (x : element-Poset P) (y : element-Poset Q) →
+      (x : type-Poset P) (y : type-Poset Q) →
       leq-Poset P x (map-upper-adjoint-Galois-Connection y) →
       leq-Poset Q (map-lower-adjoint-Galois-Connection x) y
     map-inv-adjoint-relation-Galois-Connection x y =
@@ -426,7 +426,7 @@ module _
   where
 
   compute-upper-lower-upper-adjoint-Galois-Connection :
-    (y : element-Poset Q) →
+    (y : type-Poset Q) →
     map-upper-adjoint-Galois-Connection P Q G y ＝
     map-upper-adjoint-Galois-Connection P Q G
       ( map-lower-adjoint-Galois-Connection P Q G
@@ -461,7 +461,7 @@ module _
   where
 
   compute-lower-upper-lower-adjoint-Galois-Connection :
-    (x : element-Poset P) →
+    (x : type-Poset P) →
     map-lower-adjoint-Galois-Connection P Q G x ＝
     map-lower-adjoint-Galois-Connection P Q G
       ( map-upper-adjoint-Galois-Connection P Q G

@@ -45,36 +45,36 @@ module _
   poset-Frame : Poset l1 l2
   poset-Frame = poset-Meet-Suplattice (pr1 A)
 
-  element-Frame : UU l1
-  element-Frame = element-Poset poset-Frame
+  type-Frame : UU l1
+  type-Frame = type-Poset poset-Frame
 
-  leq-Frame-Prop : (x y : element-Frame) → Prop l2
+  leq-Frame-Prop : (x y : type-Frame) → Prop l2
   leq-Frame-Prop = leq-Poset-Prop poset-Frame
 
-  leq-Frame : (x y : element-Frame) → UU l2
+  leq-Frame : (x y : type-Frame) → UU l2
   leq-Frame = leq-Poset poset-Frame
 
   is-prop-leq-Frame :
-    (x y : element-Frame) → is-prop (leq-Frame x y)
+    (x y : type-Frame) → is-prop (leq-Frame x y)
   is-prop-leq-Frame = is-prop-leq-Poset poset-Frame
   refl-leq-Frame :
-    (x : element-Frame) → leq-Frame x x
+    (x : type-Frame) → leq-Frame x x
   refl-leq-Frame = refl-leq-Poset poset-Frame
 
   antisymmetric-leq-Frame :
-    (x y : element-Frame) →
+    (x y : type-Frame) →
     leq-Frame x y → leq-Frame y x → x ＝ y
   antisymmetric-leq-Frame =
     antisymmetric-leq-Poset poset-Frame
 
   transitive-leq-Frame :
-    (x y z : element-Frame) →
+    (x y z : type-Frame) →
     leq-Frame y z → leq-Frame x y →
     leq-Frame x z
   transitive-leq-Frame = transitive-leq-Poset poset-Frame
 
-  is-set-element-Frame : is-set element-Frame
-  is-set-element-Frame = is-set-element-Poset poset-Frame
+  is-set-type-Frame : is-set type-Frame
+  is-set-type-Frame = is-set-type-Poset poset-Frame
 
   set-Frame : Set l1
   set-Frame = set-Poset poset-Frame
@@ -103,13 +103,13 @@ module _
     is-suplattice-Frame
 
   meet-Frame :
-    (x y : element-Frame) →
-    element-Frame
+    (x y : type-Frame) →
+    type-Frame
   meet-Frame x y = pr1 (is-meet-semilattice-Frame x y)
 
   sup-Frame :
-    (I : UU l3) → (I → element-Frame) →
-    element-Frame
+    (I : UU l3) → (I → type-Frame) →
+    type-Frame
   sup-Frame I b = pr1 (is-suplattice-Frame I b)
 
   distributive-law-Frame :

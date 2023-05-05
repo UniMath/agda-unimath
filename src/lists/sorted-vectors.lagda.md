@@ -44,7 +44,7 @@ module _
   where
 
   is-sorted-vec-Prop :
-    {n : ℕ} → vec (element-Decidable-Total-Order X) n → Prop l2
+    {n : ℕ} → vec (type-Decidable-Total-Order X) n → Prop l2
   is-sorted-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
@@ -53,16 +53,16 @@ module _
       ( is-sorted-vec-Prop (y ∷ v))
 
   is-sorted-vec :
-    {n : ℕ} → vec (element-Decidable-Total-Order X) n → UU l2
+    {n : ℕ} → vec (type-Decidable-Total-Order X) n → UU l2
   is-sorted-vec l = type-Prop (is-sorted-vec-Prop l)
 ```
 
-### The proposition that a element is less or equal than every element in a vector
+### The proposition that a type is less or equal than every type in a vector
 
 ```agda
   is-least-element-vec-Prop :
-    {n : ℕ} → element-Decidable-Total-Order X →
-    vec (element-Decidable-Total-Order X) n → Prop l2
+    {n : ℕ} → type-Decidable-Total-Order X →
+    vec (type-Decidable-Total-Order X) n → Prop l2
   is-least-element-vec-Prop {0} x v = raise-unit-Prop l2
   is-least-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
     prod-Prop
@@ -70,8 +70,8 @@ module _
       ( is-least-element-vec-Prop x v)
 
   is-least-element-vec :
-    {n : ℕ} → element-Decidable-Total-Order X →
-    vec (element-Decidable-Total-Order X) n → UU l2
+    {n : ℕ} → type-Decidable-Total-Order X →
+    vec (type-Decidable-Total-Order X) n → UU l2
   is-least-element-vec x v = type-Prop (is-least-element-vec-Prop x v)
 ```
 
@@ -82,25 +82,25 @@ module _
 ```agda
   is-sorted-tail-is-sorted-vec :
     {n : ℕ} →
-    (v : vec (element-Decidable-Total-Order X) (succ-ℕ n)) →
+    (v : vec (type-Decidable-Total-Order X) (succ-ℕ n)) →
     is-sorted-vec v → is-sorted-vec (tail-vec v)
   is-sorted-tail-is-sorted-vec {zero-ℕ} (x ∷ empty-vec) s = raise-star
   is-sorted-tail-is-sorted-vec {succ-ℕ n} (x ∷ y ∷ v) s = pr2 s
 
   is-leq-head-head-tail-is-sorted-vec :
-    {n : ℕ} → (v : vec (element-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
+    {n : ℕ} → (v : vec (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
     is-sorted-vec v →
     leq-Decidable-Total-Order X (head-vec v) (head-vec (tail-vec v))
   is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
 ```
 
-### If a vector `v' ＝ y ∷ v` is sorted then for all element `x` less or equal than `y`, `x` is less or equal than every element in the vector.
+### If a vector `v' ＝ y ∷ v` is sorted then for all type `x` less or equal than `y`, `x` is less or equal than every type in the vector.
 
 ```agda
   is-least-element-vec-is-leq-head-sorted-vec :
     {n : ℕ}
-    (x : element-Decidable-Total-Order X)
-    (v : vec (element-Decidable-Total-Order X) (succ-ℕ n)) →
+    (x : type-Decidable-Total-Order X)
+    (v : vec (type-Decidable-Total-Order X) (succ-ℕ n)) →
     is-sorted-vec v → leq-Decidable-Total-Order X x (head-vec v) →
     is-least-element-vec x v
   is-least-element-vec-is-leq-head-sorted-vec {zero-ℕ} x (y ∷ v) s p =
@@ -124,7 +124,7 @@ module _
 
 ```agda
   is-sorted-least-element-vec-Prop :
-    {n : ℕ} → vec (element-Decidable-Total-Order X) n → Prop l2
+    {n : ℕ} → vec (type-Decidable-Total-Order X) n → Prop l2
   is-sorted-least-element-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
@@ -133,13 +133,13 @@ module _
       ( is-sorted-least-element-vec-Prop v)
 
   is-sorted-least-element-vec :
-    {n : ℕ} → vec (element-Decidable-Total-Order X) n → UU l2
+    {n : ℕ} → vec (type-Decidable-Total-Order X) n → UU l2
   is-sorted-least-element-vec v =
     type-Prop (is-sorted-least-element-vec-Prop v)
 
   is-sorted-least-element-vec-is-sorted-vec :
     {n : ℕ}
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (v : vec (type-Decidable-Total-Order X) n) →
     is-sorted-vec v → is-sorted-least-element-vec v
   is-sorted-least-element-vec-is-sorted-vec {0} v x = raise-star
   is-sorted-least-element-vec-is-sorted-vec {1} v x = raise-star
@@ -152,7 +152,7 @@ module _
 
   is-sorted-vec-is-sorted-least-element-vec :
     {n : ℕ}
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (v : vec (type-Decidable-Total-Order X) n) →
     is-sorted-least-element-vec v →
     is-sorted-vec v
   is-sorted-vec-is-sorted-least-element-vec {0} v x = raise-star
@@ -170,36 +170,36 @@ module _
 ```agda
   is-sorted-vec-is-sorted-tail-is-leq-head-vec :
     {n : ℕ}
-    (v : vec (element-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
+    (v : vec (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
     is-sorted-vec (tail-vec v) →
     (leq-Decidable-Total-Order X (head-vec v) (head-vec (tail-vec v))) →
     is-sorted-vec v
   is-sorted-vec-is-sorted-tail-is-leq-head-vec (x ∷ y ∷ v) s p = p , s
 ```
 
-### If an element `x` is less or equal than every element of a vector `v`, then it is less or equal than every element of every permutation of `v`
+### If an type `x` is less or equal than every type of a vector `v`, then it is less or equal than every type of every permutation of `v`
 
 ```agda
   is-least-element-functional-vec-Prop :
     (n : ℕ)
-    (x : element-Decidable-Total-Order X)
-    (fv : functional-vec (element-Decidable-Total-Order X) n) →
+    (x : type-Decidable-Total-Order X)
+    (fv : functional-vec (type-Decidable-Total-Order X) n) →
     Prop l2
   is-least-element-functional-vec-Prop n x fv =
     Π-Prop (Fin n) λ k → leq-Decidable-Total-Order-Prop X x (fv k)
 
   is-least-element-functional-vec :
     (n : ℕ)
-    (x : element-Decidable-Total-Order X)
-    (fv : functional-vec (element-Decidable-Total-Order X) n) →
+    (x : type-Decidable-Total-Order X)
+    (fv : functional-vec (type-Decidable-Total-Order X) n) →
     UU l2
   is-least-element-functional-vec n x fv =
     type-Prop (is-least-element-functional-vec-Prop n x fv)
 
   is-least-element-permute-functional-vec :
     (n : ℕ)
-    (x : element-Decidable-Total-Order X)
-    (fv : functional-vec (element-Decidable-Total-Order X) n)
+    (x : type-Decidable-Total-Order X)
+    (fv : functional-vec (type-Decidable-Total-Order X) n)
     (a : Permutation n) →
     is-least-element-functional-vec n x fv →
     is-least-element-functional-vec n x (fv ∘ map-equiv a)
@@ -208,8 +208,8 @@ module _
 
   is-least-element-vec-is-least-element-functional-vec :
     (n : ℕ)
-    (x : element-Decidable-Total-Order X)
-    (fv : functional-vec (element-Decidable-Total-Order X) n) →
+    (x : type-Decidable-Total-Order X)
+    (fv : functional-vec (type-Decidable-Total-Order X) n) →
     is-least-element-functional-vec n x fv →
     is-least-element-vec x (listed-vec-functional-vec n fv)
   is-least-element-vec-is-least-element-functional-vec 0 x fv p = raise-star
@@ -223,8 +223,8 @@ module _
 
   is-least-element-functional-vec-is-least-element-vec :
     (n : ℕ)
-    (x : element-Decidable-Total-Order X)
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (x : type-Decidable-Total-Order X)
+    (v : vec (type-Decidable-Total-Order X) n) →
     is-least-element-vec x v →
     is-least-element-functional-vec n x (functional-vec-vec n v)
   is-least-element-functional-vec-is-least-element-vec
@@ -244,8 +244,8 @@ module _
 
   is-least-element-permute-vec :
     {n : ℕ}
-    (x : element-Decidable-Total-Order X)
-    (v : vec (element-Decidable-Total-Order X) n)
+    (x : type-Decidable-Total-Order X)
+    (v : vec (type-Decidable-Total-Order X) n)
     (a : Permutation n) →
     is-least-element-vec x v →
     is-least-element-vec x (permute-vec n v a)

@@ -25,15 +25,15 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-least-element-Poset-Prop : element-Poset X → Prop (l1 ⊔ l2)
+  is-least-element-Poset-Prop : type-Poset X → Prop (l1 ⊔ l2)
   is-least-element-Poset-Prop =
     is-least-element-Preorder-Prop (preorder-Poset X)
 
-  is-least-element-Poset : element-Poset X → UU (l1 ⊔ l2)
+  is-least-element-Poset : type-Poset X → UU (l1 ⊔ l2)
   is-least-element-Poset = is-least-element-Preorder (preorder-Poset X)
 
   is-prop-is-least-element-Poset :
-    (x : element-Poset X) → is-prop (is-least-element-Poset x)
+    (x : type-Poset X) → is-prop (is-least-element-Poset x)
   is-prop-is-least-element-Poset =
     is-prop-is-least-element-Preorder (preorder-Poset X)
 
