@@ -165,10 +165,10 @@ module _
   inductive-step-quicksort-list :
     (k : ℕ) →
     □-≤-ℕ
-    ( λ n →
-         (l : list (element-Decidable-Total-Order X)) →
-         n ＝ length-list l → list (element-Decidable-Total-Order X))
-    k →
+      ( λ n →
+        (l : list (element-Decidable-Total-Order X)) →
+        n ＝ length-list l → list (element-Decidable-Total-Order X))
+      ( k) →
     (l : list (element-Decidable-Total-Order X)) →
     succ-ℕ k ＝ length-list l → list (element-Decidable-Total-Order X)
   inductive-step-quicksort-list k sort (cons x l) p =
