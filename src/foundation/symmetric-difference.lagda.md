@@ -90,10 +90,10 @@ module _
           ( type-decidable-subtype (intersection-decidable-subtype P Q)))))
   pr1 (equiv-symmetric-difference P Q) (inl (pair x p)) =
     left-cases-equiv-symmetric-difference P Q x p
-      ( is-decidable-type-Decidable-Prop (Q x))
+      ( is-decidable-Decidable-Prop (Q x))
   pr1 (equiv-symmetric-difference P Q) (inr (pair x q)) =
     right-cases-equiv-symmetric-difference P Q x q
-      ( is-decidable-type-Decidable-Prop (P x))
+      ( is-decidable-Decidable-Prop (P x))
   pr2 (equiv-symmetric-difference P Q) =
     is-equiv-has-inverse inv retr sec
     where
@@ -158,7 +158,7 @@ module _
       (C : type-decidable-subtype P + type-decidable-subtype Q) →
       (inv ∘ pr1 (equiv-symmetric-difference P Q)) C ＝ C
     sec (inl (pair x p)) =
-      left-cases-sec x p (is-decidable-type-Decidable-Prop (Q x))
+      left-cases-sec x p (is-decidable-Decidable-Prop (Q x))
     sec (inr (pair x q)) =
-      right-cases-sec x q (is-decidable-type-Decidable-Prop (P x))
+      right-cases-sec x q (is-decidable-Decidable-Prop (P x))
 ```

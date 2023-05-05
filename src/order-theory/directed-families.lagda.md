@@ -21,7 +21,7 @@ open import order-theory.posets
 
 ## Idea
 
-A **directed family** of elements in a poset `P` consists of an inhabited type
+A **directed family of elements** in a poset `P` consists of an inhabited type
 `I` and a map `x : I → P` such that for any two elements `i j : I` there exists
 an element `k : I` such that both `x i ≤ x k` and `x j ≤ x k` hold.
 
@@ -30,7 +30,7 @@ an element `k : I` such that both `x i ≤ x k` and `x j ≤ x k` hold.
 ```agda
 is-directed-family-Poset-Prop :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
-  (x : type-Inhabited-Type I → element-Poset P) → Prop (l2 ⊔ l3)
+  (x : type-Inhabited-Type I → type-Poset P) → Prop (l2 ⊔ l3)
 is-directed-family-Poset-Prop P I x =
   Π-Prop
     ( type-Inhabited-Type I)
@@ -44,7 +44,7 @@ is-directed-family-Poset-Prop P I x =
 
 is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
-  (α : type-Inhabited-Type I → element-Poset P) → UU (l2 ⊔ l3)
+  (α : type-Inhabited-Type I → type-Poset P) → UU (l2 ⊔ l3)
 is-directed-family-Poset P I x = type-Prop (is-directed-family-Poset-Prop P I x)
 
 directed-family-Poset :
@@ -52,7 +52,7 @@ directed-family-Poset :
 directed-family-Poset l3 P =
   Σ ( Inhabited-Type l3)
     ( λ I →
-      Σ ( type-Inhabited-Type I → element-Poset P)
+      Σ ( type-Inhabited-Type I → type-Poset P)
         ( is-directed-family-Poset P I))
 
 module _
@@ -71,7 +71,7 @@ module _
   is-inhabited-type-directed-family-Poset =
     is-inhabited-type-Inhabited-Type inhabited-type-directed-family-Poset
 
-  family-directed-family-Poset : type-directed-family-Poset → element-Poset P
+  family-directed-family-Poset : type-directed-family-Poset → type-Poset P
   family-directed-family-Poset = pr1 (pr2 x)
 
   is-directed-family-directed-family-Poset :

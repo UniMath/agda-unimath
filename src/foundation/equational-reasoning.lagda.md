@@ -170,13 +170,13 @@ infixl 0 step-preorder-reasoning
 
 preorder_reasoning_ :
   {l1 l2 : Level} (X : Preorder l1 l2)
-  (x : element-Preorder X) → leq-Preorder X x x
+  (x : type-Preorder X) → leq-Preorder X x x
 preorder_reasoning_ = refl-leq-Preorder
 
 step-preorder-reasoning :
   {l1 l2 : Level} (X : Preorder l1 l2)
-  {x y : element-Preorder X} → leq-Preorder X x y →
-  (z : element-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
+  {x y : type-Preorder X} → leq-Preorder X x y →
+  (z : type-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
 step-preorder-reasoning X {x} {y} u z v =
   transitive-leq-Preorder X x y z v u
 

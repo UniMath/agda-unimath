@@ -52,10 +52,10 @@ module _
 
   helper-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-Decidable-Total-Order X)
-    (l : vec (element-Decidable-Total-Order X) n) →
+    (x y : type-Decidable-Total-Order X)
+    (l : vec (type-Decidable-Total-Order X) n) →
     leq-or-strict-greater-Decidable-Poset X x y →
-    vec (element-Decidable-Total-Order X) (succ-ℕ (succ-ℕ (n)))
+    vec (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ (n)))
   helper-insertion-sort-vec x y l (inl p) = x ∷ y ∷ l
   helper-insertion-sort-vec {0} x y empty-vec (inr p) = y ∷ x ∷ empty-vec
   helper-insertion-sort-vec {succ-ℕ n} x y (z ∷ l) (inr p) =
@@ -68,8 +68,8 @@ module _
 
   insertion-sort-vec :
     {n : ℕ} →
-    vec (element-Decidable-Total-Order X) n →
-    vec (element-Decidable-Total-Order X) n
+    vec (type-Decidable-Total-Order X) n →
+    vec (type-Decidable-Total-Order X) n
   insertion-sort-vec {zero-ℕ} empty-vec = empty-vec
   insertion-sort-vec {1} l = l
   insertion-sort-vec {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ l) =
@@ -87,8 +87,8 @@ module _
 ```agda
   helper-permutation-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-Decidable-Total-Order X)
-    (l : vec (element-Decidable-Total-Order X) n) →
+    (x y : type-Decidable-Total-Order X)
+    (l : vec (type-Decidable-Total-Order X) n) →
     leq-or-strict-greater-Decidable-Poset X x y →
     Permutation (succ-ℕ (succ-ℕ (n)))
   helper-permutation-insertion-sort-vec x y l (inl _) = id-equiv
@@ -106,7 +106,7 @@ module _
 
   permutation-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (v : vec (type-Decidable-Total-Order X) n) →
     Permutation n
   permutation-insertion-sort-vec {zero-ℕ} empty-vec = id-equiv
   permutation-insertion-sort-vec {1} l = id-equiv
@@ -122,8 +122,8 @@ module _
 
   helper-is-permutation-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-Decidable-Total-Order X)
-    (v : vec (element-Decidable-Total-Order X) n)
+    (x y : type-Decidable-Total-Order X)
+    (v : vec (type-Decidable-Total-Order X) n)
     (p : leq-or-strict-greater-Decidable-Poset X x y) →
     helper-insertion-sort-vec x y v p ＝
     permute-vec
@@ -197,7 +197,7 @@ module _
 
   is-permutation-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (v : vec (type-Decidable-Total-Order X) n) →
     insertion-sort-vec v ＝ permute-vec n v (permutation-insertion-sort-vec v)
   is-permutation-insertion-sort-vec {0} empty-vec = refl
   is-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
@@ -236,8 +236,8 @@ module _
 ```agda
   helper-is-sorting-insertion-sort-vec :
     {n : ℕ}
-    (x y : element-Decidable-Total-Order X)
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (x y : type-Decidable-Total-Order X)
+    (v : vec (type-Decidable-Total-Order X) n) →
     (p : leq-or-strict-greater-Decidable-Poset X x y) →
     is-sorted-vec X (y ∷ v) →
     is-sorted-vec X (helper-insertion-sort-vec x y v p)
@@ -290,7 +290,7 @@ module _
 
   is-sorting-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (element-Decidable-Total-Order X) n) →
+    (v : vec (type-Decidable-Total-Order X) n) →
     is-sorted-vec X (insertion-sort-vec v)
   is-sorting-insertion-sort-vec {0} v = raise-star
   is-sorting-insertion-sort-vec {1} v = raise-star

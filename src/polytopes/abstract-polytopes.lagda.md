@@ -175,32 +175,32 @@ module _
         ( y)
         ( z)
 
-  element-prepolytope-Set : Set l1
-  element-prepolytope-Set =
-    element-Finitely-Graded-Poset-Set finitely-graded-poset-Prepolytope
+  set-Prepolytope : Set l1
+  set-Prepolytope =
+    set-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  element-Prepolytope : UU l1
-  element-Prepolytope =
-    element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  type-Prepolytope : UU l1
+  type-Prepolytope =
+    type-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  is-set-element-Prepolytope : is-set element-Prepolytope
-  is-set-element-Prepolytope =
-    is-set-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  is-set-type-Prepolytope : is-set type-Prepolytope
+  is-set-type-Prepolytope =
+    is-set-type-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   element-face-Prepolytope :
-    {i : Fin (succ-ℕ k)} → face-Prepolytope i → element-Prepolytope
+    {i : Fin (succ-ℕ k)} → face-Prepolytope i → type-Prepolytope
   element-face-Prepolytope =
     element-face-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  type-element-Prepolytope :
-    element-Prepolytope → Fin (succ-ℕ k)
-  type-element-Prepolytope =
-    type-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  shape-Prepolytope :
+    type-Prepolytope → Fin (succ-ℕ k)
+  shape-Prepolytope =
+    shape-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   face-element-Prepolytope :
-    (x : element-Prepolytope) → face-Prepolytope (type-element-Prepolytope x)
+    (x : type-Prepolytope) → face-Prepolytope (shape-Prepolytope x)
   face-element-Prepolytope =
-    face-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+    face-type-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   path-faces-Prepolytope :
     {i j : Fin (succ-ℕ k)} →
@@ -234,17 +234,17 @@ module _
   concat-path-faces-Prepolytope =
     concat-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  path-elements-Prepolytope : (x y : element-Prepolytope) → UU (l1 ⊔ l2)
+  path-elements-Prepolytope : (x y : type-Prepolytope) → UU (l1 ⊔ l2)
   path-elements-Prepolytope =
     path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   refl-path-elements-Prepolytope :
-    (x : element-Prepolytope) → path-elements-Prepolytope x x
+    (x : type-Prepolytope) → path-elements-Prepolytope x x
   refl-path-elements-Prepolytope =
     refl-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   concat-path-elements-Prepolytope :
-    (x y z : element-Prepolytope) →
+    (x y z : type-Prepolytope) →
     path-elements-Prepolytope y z → path-elements-Prepolytope x y →
     path-elements-Prepolytope x z
   concat-path-elements-Prepolytope =
@@ -258,8 +258,8 @@ module _
     leq-type-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   eq-path-elements-Prepolytope :
-    (x y : element-Prepolytope)
-    (p : Id (type-element-Prepolytope x) (type-element-Prepolytope y)) →
+    (x y : type-Prepolytope)
+    (p : Id (shape-Prepolytope x) (shape-Prepolytope y)) →
     path-elements-Prepolytope x y → Id x y
   eq-path-elements-Prepolytope =
     eq-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
@@ -271,14 +271,14 @@ module _
     eq-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   antisymmetric-path-elements-Prepolytope :
-    (x y : element-Prepolytope) → path-elements-Prepolytope x y →
+    (x y : type-Prepolytope) → path-elements-Prepolytope x y →
     path-elements-Prepolytope y x → Id x y
   antisymmetric-path-elements-Prepolytope =
     antisymmetric-path-elements-Finitely-Graded-Poset
       finitely-graded-poset-Prepolytope
 
   module _
-    (x y : element-Prepolytope)
+    (x y : type-Prepolytope)
     where
 
     leq-prepolytope-Prop : Prop (l1 ⊔ l2)
@@ -293,18 +293,18 @@ module _
     is-prop-leq-Prepolytope =
       is-prop-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope x y
 
-  refl-leq-Prepolytope : (x : element-Prepolytope) → leq-Prepolytope x x
+  refl-leq-Prepolytope : (x : type-Prepolytope) → leq-Prepolytope x x
   refl-leq-Prepolytope =
     refl-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   transitive-leq-Prepolytope :
-    (x y z : element-Prepolytope) →
+    (x y z : type-Prepolytope) →
     leq-Prepolytope y z → leq-Prepolytope x y → leq-Prepolytope x z
   transitive-leq-Prepolytope =
     transitive-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   antisymmetric-leq-Prepolytope :
-    (x y : element-Prepolytope) →
+    (x y : type-Prepolytope) →
     leq-Prepolytope x y → leq-Prepolytope y x → Id x y
   antisymmetric-leq-Prepolytope =
     antisymmetric-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
@@ -342,12 +342,12 @@ module _
   face-least-element-Prepolytope : face-Prepolytope (zero-Fin k)
   face-least-element-Prepolytope = pr1 least-element-Prepolytope
 
-  element-least-element-Prepolytope : element-Prepolytope
+  element-least-element-Prepolytope : type-Prepolytope
   element-least-element-Prepolytope =
     element-face-Prepolytope face-least-element-Prepolytope
 
   is-least-element-least-element-Prepolytope :
-    (x : element-Prepolytope) →
+    (x : type-Prepolytope) →
     leq-Prepolytope element-least-element-Prepolytope x
   is-least-element-least-element-Prepolytope =
     pr2 least-element-Prepolytope
@@ -355,12 +355,12 @@ module _
   face-largest-element-Prepolytope : face-Prepolytope (neg-one-Fin k)
   face-largest-element-Prepolytope = pr1 largest-element-Prepolytope
 
-  element-largest-element-Prepolytope : element-Prepolytope
+  element-largest-element-Prepolytope : type-Prepolytope
   element-largest-element-Prepolytope =
     element-face-Prepolytope face-largest-element-Prepolytope
 
   is-largest-element-largest-element-Prepolytope :
-    (x : element-Prepolytope) →
+    (x : type-Prepolytope) →
     leq-Prepolytope x element-largest-element-Prepolytope
   is-largest-element-largest-element-Prepolytope =
     pr2 largest-element-Prepolytope
@@ -404,7 +404,7 @@ module _
   is-on-path-face-prepolytope-Prop
     {x = x} refl-path-faces-Finitely-Graded-Poset z =
     Id-Prop
-      ( element-prepolytope-Set)
+      ( set-Prepolytope)
       ( element-face-Prepolytope x)
       ( element-face-Prepolytope z)
   is-on-path-face-prepolytope-Prop
@@ -412,7 +412,7 @@ module _
     disj-Prop
       ( is-on-path-face-prepolytope-Prop p z)
       ( Id-Prop
-        ( element-prepolytope-Set)
+        ( set-Prepolytope)
         ( element-face-Prepolytope w)
         ( element-face-Prepolytope z))
 

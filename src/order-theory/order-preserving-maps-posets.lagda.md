@@ -36,24 +36,24 @@ module _
   where
 
   preserves-order-Poset-Prop :
-    (element-Poset P → element-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
+    (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
   preserves-order-Poset-Prop =
     preserves-order-Preorder-Prop (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-Poset :
-    (element-Poset P → element-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)
+    (type-Poset P → type-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)
   preserves-order-Poset =
     preserves-order-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-prop-preserves-order-Poset :
-    (f : element-Poset P → element-Poset Q) → is-prop (preserves-order-Poset f)
+    (f : type-Poset P → type-Poset Q) → is-prop (preserves-order-Poset f)
   is-prop-preserves-order-Poset =
     is-prop-preserves-order-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Poset = hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  map-hom-Poset : hom-Poset → element-Poset P → element-Poset Q
+  map-hom-Poset : hom-Poset → type-Poset P → type-Poset Q
   map-hom-Poset = map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-map-hom-Poset :
@@ -105,7 +105,7 @@ module _
   is-prop-htpy-hom-Poset f g =
     is-prop-Π
       ( λ x →
-        is-set-element-Poset Q
+        is-set-type-Poset Q
           ( map-hom-Poset P Q f x)
           ( map-hom-Poset P Q g x))
 ```
@@ -118,7 +118,7 @@ module _
   where
 
   preserves-order-id-Poset :
-    preserves-order-Poset P P (id {A = element-Poset P})
+    preserves-order-Poset P P (id {A = type-Poset P})
   preserves-order-id-Poset = preserves-order-id-Preorder (preorder-Poset P)
 
   id-hom-Poset : hom-Poset P P

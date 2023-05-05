@@ -43,11 +43,11 @@ module _
   is-sort-vec :
     (f :
       {n : ℕ} →
-      vec (element-Decidable-Total-Order X) n →
-      vec (element-Decidable-Total-Order X) n) →
+      vec (type-Decidable-Total-Order X) n →
+      vec (type-Decidable-Total-Order X) n) →
     UU (l1 ⊔ l2)
   is-sort-vec f =
     (n : ℕ) →
     is-permutation-vec n f ×
-    ((v : vec (element-Decidable-Total-Order X) n) → is-sorted-vec X (f v))
+    ((v : vec (type-Decidable-Total-Order X) n) → is-sorted-vec X (f v))
 ```

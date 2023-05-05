@@ -77,7 +77,7 @@ module _
   is-decidable-subtype-subtype-2-Element-Decidable-Subtype :
     is-decidable-subtype subtype-2-Element-Decidable-Subtype
   is-decidable-subtype-subtype-2-Element-Decidable-Subtype =
-    is-decidable-subtype-decidable-subtype
+    is-decidable-decidable-subtype
       decidable-subtype-2-Element-Decidable-Subtype
 
   is-in-2-Element-Decidable-Subtype : X → UU l2

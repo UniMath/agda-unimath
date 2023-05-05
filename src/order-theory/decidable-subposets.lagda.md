@@ -20,50 +20,58 @@ open import order-theory.subposets
 
 </details>
 
+## Idea
+
+A **decidable subposet** of a poset `P` is a decidable subtype of `P`, equipped
+with the restricted ordering of `P`.
+
 ## Definition
 
 ```agda
+Decidable-Subposet :
+  {l1 l2 : Level} (l3 : Level) → Poset l1 l2 → UU (l1 ⊔ lsuc l3)
+Decidable-Subposet l3 P = decidable-subtype l3 (type-Poset P)
+
 module _
-  {l1 l2 l3 : Level} (X : Poset l1 l2)
-  (S : element-Poset X → Decidable-Prop l3)
+  {l1 l2 l3 : Level} (P : Poset l1 l2) (S : Decidable-Subposet l3 P)
   where
 
-  element-decidable-sub-Poset : UU (l1 ⊔ l3)
-  element-decidable-sub-Poset =
-    element-sub-Poset X (subtype-decidable-subtype S)
+  type-Decidable-Subposet : UU (l1 ⊔ l3)
+  type-Decidable-Subposet =
+    type-Subposet P (subtype-decidable-subtype S)
 
-  eq-element-decidable-sub-Poset :
-    (x y : element-decidable-sub-Poset) → Id (pr1 x) (pr1 y) → Id x y
-  eq-element-decidable-sub-Poset =
-    eq-element-sub-Poset X (subtype-decidable-subtype S)
+  eq-type-Decidable-Subposet :
+    (x y : type-Decidable-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+  eq-type-Decidable-Subposet =
+    eq-type-Subposet P (subtype-decidable-subtype S)
 
-  leq-decidable-sub-Poset-Prop :
-    (x y : element-decidable-sub-Poset) → Prop l2
-  leq-decidable-sub-Poset-Prop =
-    leq-sub-Poset-Prop X (subtype-decidable-subtype S)
+  leq-Decidable-Subposet-Prop :
+    (x y : type-Decidable-Subposet) → Prop l2
+  leq-Decidable-Subposet-Prop =
+    leq-Subposet-Prop P (subtype-decidable-subtype S)
 
-  leq-decidable-sub-Poset : (x y : element-decidable-sub-Poset) → UU l2
-  leq-decidable-sub-Poset =
-    leq-sub-Poset X (subtype-decidable-subtype S)
+  leq-Decidable-Subposet : (x y : type-Decidable-Subposet) → UU l2
+  leq-Decidable-Subposet =
+    leq-Subposet P (subtype-decidable-subtype S)
 
-  is-prop-leq-decidable-sub-Poset :
-    (x y : element-decidable-sub-Poset) →
-    is-prop (leq-decidable-sub-Poset x y)
-  is-prop-leq-decidable-sub-Poset =
-    is-prop-leq-sub-Poset X (subtype-decidable-subtype S)
+  is-prop-leq-Decidable-Subposet :
+    (x y : type-Decidable-Subposet) →
+    is-prop (leq-Decidable-Subposet x y)
+  is-prop-leq-Decidable-Subposet =
+    is-prop-leq-Subposet P (subtype-decidable-subtype S)
 
-  refl-leq-decidable-sub-Poset :
-    (x : element-decidable-sub-Poset) → leq-decidable-sub-Poset x x
-  refl-leq-decidable-sub-Poset =
-    refl-leq-sub-Poset X (subtype-decidable-subtype S)
+  refl-leq-Decidable-Subposet :
+    (x : type-Decidable-Subposet) → leq-Decidable-Subposet x x
+  refl-leq-Decidable-Subposet =
+    refl-leq-Subposet P (subtype-decidable-subtype S)
 
-  transitive-leq-decidable-sub-Poset :
-    (x y z : element-decidable-sub-Poset) →
-    leq-decidable-sub-Poset y z → leq-decidable-sub-Poset x y →
-    leq-decidable-sub-Poset x z
-  transitive-leq-decidable-sub-Poset =
-    transitive-leq-sub-Poset X (subtype-decidable-subtype S)
+  transitive-leq-Decidable-Subposet :
+    (x y z : type-Decidable-Subposet) →
+    leq-Decidable-Subposet y z → leq-Decidable-Subposet x y →
+    leq-Decidable-Subposet x z
+  transitive-leq-Decidable-Subposet =
+    transitive-leq-Subposet P (subtype-decidable-subtype S)
 
-  decidable-sub-Poset : Poset (l1 ⊔ l3) l2
-  decidable-sub-Poset = sub-Poset X (subtype-decidable-subtype S)
+  poset-Decidable-Subposet : Poset (l1 ⊔ l3) l2
+  poset-Decidable-Subposet = poset-Subposet P (subtype-decidable-subtype S)
 ```

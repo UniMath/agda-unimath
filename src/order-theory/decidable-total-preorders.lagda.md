@@ -28,6 +28,11 @@ open import order-theory.total-preorders
 
 </details>
 
+## Idea
+
+A **decidable total preorder** is a total preorder of which the inequality
+relation is decidable.
+
 ## Definitions
 
 ```agda
@@ -56,55 +61,55 @@ module _
   pr2 decidable-preorder-Decidable-Total-Preorder =
     is-decidable-leq-Decidable-Total-Preorder
 
-  element-Decidable-Total-Preorder : UU l1
-  element-Decidable-Total-Preorder =
-    element-Preorder preorder-Decidable-Total-Preorder
+  type-Decidable-Total-Preorder : UU l1
+  type-Decidable-Total-Preorder =
+    type-Preorder preorder-Decidable-Total-Preorder
 
   leq-Decidable-Total-Preorder-Prop :
-    (x y : element-Decidable-Total-Preorder) → Prop l2
+    (x y : type-Decidable-Total-Preorder) → Prop l2
   leq-Decidable-Total-Preorder-Prop =
     leq-Preorder-Prop preorder-Decidable-Total-Preorder
 
   leq-Decidable-Total-Preorder :
-    (x y : element-Decidable-Total-Preorder) → UU l2
+    (x y : type-Decidable-Total-Preorder) → UU l2
   leq-Decidable-Total-Preorder =
     leq-Preorder preorder-Decidable-Total-Preorder
 
   is-prop-leq-Decidable-Total-Preorder :
-    (x y : element-Decidable-Total-Preorder) →
+    (x y : type-Decidable-Total-Preorder) →
     is-prop (leq-Decidable-Total-Preorder x y)
   is-prop-leq-Decidable-Total-Preorder =
     is-prop-leq-Preorder preorder-Decidable-Total-Preorder
 
   le-Decidable-Total-Preorder-Prop :
-    (x y : element-Decidable-Total-Preorder) → Prop (l1 ⊔ l2)
+    (x y : type-Decidable-Total-Preorder) → Prop (l1 ⊔ l2)
   le-Decidable-Total-Preorder-Prop =
     le-Preorder-Prop preorder-Decidable-Total-Preorder
 
   le-Decidable-Total-Preorder :
-    (x y : element-Decidable-Total-Preorder) → UU (l1 ⊔ l2)
+    (x y : type-Decidable-Total-Preorder) → UU (l1 ⊔ l2)
   le-Decidable-Total-Preorder =
     le-Preorder preorder-Decidable-Total-Preorder
 
   is-prop-le-Decidable-Total-Preorder :
-    (x y : element-Decidable-Total-Preorder) →
+    (x y : type-Decidable-Total-Preorder) →
     is-prop (le-Decidable-Total-Preorder x y)
   is-prop-le-Decidable-Total-Preorder =
     is-prop-le-Preorder preorder-Decidable-Total-Preorder
 
   leq-Total-Decidable-Preorder-Decidable-Prop :
-    (x y : element-Decidable-Total-Preorder) → Decidable-Prop l2
+    (x y : type-Decidable-Total-Preorder) → Decidable-Prop l2
   leq-Total-Decidable-Preorder-Decidable-Prop =
     leq-Decidable-Preorder-Decidable-Prop
       decidable-preorder-Decidable-Total-Preorder
 
   refl-leq-Decidable-Total-Preorder :
-    (x : element-Decidable-Total-Preorder) → leq-Decidable-Total-Preorder x x
+    (x : type-Decidable-Total-Preorder) → leq-Decidable-Total-Preorder x x
   refl-leq-Decidable-Total-Preorder =
     refl-leq-Preorder preorder-Decidable-Total-Preorder
 
   transitive-leq-Decidable-Total-Preorder :
-    (x y z : element-Decidable-Total-Preorder) →
+    (x y z : type-Decidable-Total-Preorder) →
     leq-Decidable-Total-Preorder y z →
     leq-Decidable-Total-Preorder x y →
     leq-Decidable-Total-Preorder x z
@@ -112,13 +117,13 @@ module _
     transitive-leq-Preorder preorder-Decidable-Total-Preorder
 
   leq-or-strict-greater-Decidable-Preorder :
-    (x y : element-Decidable-Total-Preorder) →
+    (x y : type-Decidable-Total-Preorder) →
     UU (l1 ⊔ l2)
   leq-or-strict-greater-Decidable-Preorder x y =
     leq-Decidable-Total-Preorder x y + le-Decidable-Total-Preorder y x
 
   helper-is-leq-or-strict-greater-Decidable-Total-Preorder :
-    (x y : element-Decidable-Total-Preorder) →
+    (x y : type-Decidable-Total-Preorder) →
     is-decidable (leq-Decidable-Total-Preorder x y) →
     leq-or-strict-greater-Decidable-Preorder x y
   helper-is-leq-or-strict-greater-Decidable-Total-Preorder x y (inl p) =
@@ -135,7 +140,7 @@ module _
                ( λ q → ex-falso (p q))))
 
   is-leq-or-strict-greater-Decidable-Total-Preorder :
-    (x y : element-Decidable-Total-Preorder) →
+    (x y : type-Decidable-Total-Preorder) →
     leq-or-strict-greater-Decidable-Preorder x y
   is-leq-or-strict-greater-Decidable-Total-Preorder x y =
     helper-is-leq-or-strict-greater-Decidable-Total-Preorder

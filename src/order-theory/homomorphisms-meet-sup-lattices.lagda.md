@@ -38,7 +38,7 @@ module _
   where
 
   preserves-meets-sups :
-    (element-Meet-Suplattice A → element-Meet-Suplattice B) →
+    (type-Meet-Suplattice A → type-Meet-Suplattice B) →
     UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   preserves-meets-sups f =
     preserves-meets
@@ -52,7 +52,7 @@ module _
 
   hom-Meet-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   hom-Meet-Suplattice =
-    Σ ( element-Meet-Suplattice A → element-Meet-Suplattice B)
+    Σ ( type-Meet-Suplattice A → type-Meet-Suplattice B)
       ( λ f →
         preserves-order-Poset
           ( poset-Meet-Suplattice A)
@@ -62,7 +62,7 @@ module _
 
   map-hom-Meet-Suplattice :
     hom-Meet-Suplattice →
-    element-Meet-Suplattice A → element-Meet-Suplattice B
+    type-Meet-Suplattice A → type-Meet-Suplattice B
   map-hom-Meet-Suplattice = pr1
 
   preserves-order-Meet-Suplattice :

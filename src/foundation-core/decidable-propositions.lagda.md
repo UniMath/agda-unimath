@@ -84,8 +84,8 @@ module _
     is-prop-type-Decidable-Prop : is-prop type-Decidable-Prop
     is-prop-type-Decidable-Prop = is-prop-type-Prop prop-Decidable-Prop
 
-  is-decidable-type-Decidable-Prop : is-decidable type-Decidable-Prop
-  is-decidable-type-Decidable-Prop = pr2 (pr2 P)
+  is-decidable-Decidable-Prop : is-decidable type-Decidable-Prop
+  is-decidable-Decidable-Prop = pr2 (pr2 P)
 
   is-decidable-prop-type-Decidable-Prop : is-decidable-prop type-Decidable-Prop
   is-decidable-prop-type-Decidable-Prop = pr2 P

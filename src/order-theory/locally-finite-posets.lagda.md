@@ -32,12 +32,12 @@ module _
   is-locally-finite-Poset-Prop : Prop (l1 ⊔ l2)
   is-locally-finite-Poset-Prop =
     Π-Prop
-      ( element-Poset X)
+      ( type-Poset X)
       ( λ x →
         Π-Prop
-          ( element-Poset X)
+          ( type-Poset X)
           ( λ y →
-            is-finite-Poset-Prop (interval-sub-Poset X x y)))
+            is-finite-Poset-Prop (poset-interval-Subposet X x y)))
 
   is-locally-finite-Poset : UU (l1 ⊔ l2)
   is-locally-finite-Poset = type-Prop is-locally-finite-Poset-Prop

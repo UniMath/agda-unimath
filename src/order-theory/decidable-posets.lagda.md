@@ -61,17 +61,17 @@ module _
     is-decidable-leq-Poset (poset-Decidable-Poset)
   is-decidable-leq-Decidable-Poset = pr2 X
 
-  element-Decidable-Poset : UU l1
-  element-Decidable-Poset = element-Poset poset-Decidable-Poset
+  type-Decidable-Poset : UU l1
+  type-Decidable-Poset = type-Poset poset-Decidable-Poset
 
-  leq-Decidable-Poset-Prop : (x y : element-Decidable-Poset) → Prop l2
+  leq-Decidable-Poset-Prop : (x y : type-Decidable-Poset) → Prop l2
   leq-Decidable-Poset-Prop = leq-Poset-Prop poset-Decidable-Poset
 
-  leq-Decidable-Poset : (x y : element-Decidable-Poset) → UU l2
+  leq-Decidable-Poset : (x y : type-Decidable-Poset) → UU l2
   leq-Decidable-Poset = leq-Poset poset-Decidable-Poset
 
   is-prop-leq-Decidable-Poset :
-    (x y : element-Decidable-Poset) → is-prop (leq-Decidable-Poset x y)
+    (x y : type-Decidable-Poset) → is-prop (leq-Decidable-Poset x y)
   is-prop-leq-Decidable-Poset = is-prop-leq-Poset poset-Decidable-Poset
 
   decidable-preorder-Decidable-Poset : Decidable-Preorder l1 l2
@@ -79,39 +79,39 @@ module _
   pr2 decidable-preorder-Decidable-Poset = is-decidable-leq-Decidable-Poset
 
   leq-decidable-poset-decidable-Prop :
-    (x y : element-Decidable-Poset) → Decidable-Prop l2
+    (x y : type-Decidable-Poset) → Decidable-Prop l2
   leq-decidable-poset-decidable-Prop =
     leq-Decidable-Preorder-Decidable-Prop decidable-preorder-Decidable-Poset
 
   concatenate-eq-leq-Decidable-Poset :
-    {x y z : element-Decidable-Poset} → x ＝ y →
+    {x y z : type-Decidable-Poset} → x ＝ y →
     leq-Decidable-Poset y z → leq-Decidable-Poset x z
   concatenate-eq-leq-Decidable-Poset =
     concatenate-eq-leq-Poset poset-Decidable-Poset
 
   concatenate-leq-eq-Decidable-Poset :
-    {x y z : element-Decidable-Poset} →
+    {x y z : type-Decidable-Poset} →
     leq-Decidable-Poset x y → y ＝ z → leq-Decidable-Poset x z
   concatenate-leq-eq-Decidable-Poset =
     concatenate-leq-eq-Poset poset-Decidable-Poset
 
   refl-leq-Decidable-Poset :
-    (x : element-Decidable-Poset) → leq-Decidable-Poset x x
+    (x : type-Decidable-Poset) → leq-Decidable-Poset x x
   refl-leq-Decidable-Poset = refl-leq-Poset poset-Decidable-Poset
 
   transitive-leq-Decidable-Poset :
-    (x y z : element-Decidable-Poset) → leq-Decidable-Poset y z →
+    (x y z : type-Decidable-Poset) → leq-Decidable-Poset y z →
     leq-Decidable-Poset x y → leq-Decidable-Poset x z
   transitive-leq-Decidable-Poset = transitive-leq-Poset poset-Decidable-Poset
 
   antisymmetric-leq-Decidable-Poset :
-    (x y : element-Decidable-Poset) →
+    (x y : type-Decidable-Poset) →
     leq-Decidable-Poset x y → leq-Decidable-Poset y x → Id x y
   antisymmetric-leq-Decidable-Poset =
     antisymmetric-leq-Poset poset-Decidable-Poset
 
-  is-set-element-Decidable-Poset : is-set element-Decidable-Poset
-  is-set-element-Decidable-Poset = is-set-element-Poset poset-Decidable-Poset
+  is-set-type-Decidable-Poset : is-set type-Decidable-Poset
+  is-set-type-Decidable-Poset = is-set-type-Poset poset-Decidable-Poset
 
   set-Decidable-Poset : Set l1
   set-Decidable-Poset = set-Poset poset-Decidable-Poset

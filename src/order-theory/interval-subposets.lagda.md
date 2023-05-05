@@ -26,13 +26,13 @@ subposet of `X` consisting of all elements `z` in `X` such that `x ≤ z` and
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Poset l1 l2) (x y : element-Poset X)
+  {l1 l2 : Level} (X : Poset l1 l2) (x y : type-Poset X)
   where
 
-  is-in-interval-Poset : (z : element-Poset X) → Prop l2
+  is-in-interval-Poset : (z : type-Poset X) → Prop l2
   is-in-interval-Poset z =
     prod-Prop (leq-Poset-Prop X x z) (leq-Poset-Prop X z y)
 
-  interval-sub-Poset : Poset (l1 ⊔ l2) l2
-  interval-sub-Poset = sub-Poset X is-in-interval-Poset
+  poset-interval-Subposet : Poset (l1 ⊔ l2) l2
+  poset-interval-Subposet = poset-Subposet X is-in-interval-Poset
 ```

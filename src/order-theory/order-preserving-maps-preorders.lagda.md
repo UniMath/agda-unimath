@@ -38,34 +38,34 @@ module _
   where
 
   preserves-order-Preorder-Prop :
-    (element-Preorder P → element-Preorder Q) → Prop (l1 ⊔ l2 ⊔ l4)
+    (type-Preorder P → type-Preorder Q) → Prop (l1 ⊔ l2 ⊔ l4)
   preserves-order-Preorder-Prop f =
     Π-Prop
-      ( element-Preorder P)
+      ( type-Preorder P)
       ( λ x →
         Π-Prop
-          ( element-Preorder P)
+          ( type-Preorder P)
           ( λ y →
             hom-Prop
               ( leq-Preorder-Prop P x y)
               ( leq-Preorder-Prop Q (f x) (f y))))
 
   preserves-order-Preorder :
-    (element-Preorder P → element-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)
+    (type-Preorder P → type-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)
   preserves-order-Preorder f =
     type-Prop (preserves-order-Preorder-Prop f)
 
   is-prop-preserves-order-Preorder :
-    (f : element-Preorder P → element-Preorder Q) →
+    (f : type-Preorder P → type-Preorder Q) →
     is-prop (preserves-order-Preorder f)
   is-prop-preserves-order-Preorder f =
     is-prop-type-Prop (preserves-order-Preorder-Prop f)
 
   hom-Preorder : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Preorder =
-    Σ (element-Preorder P → element-Preorder Q) preserves-order-Preorder
+    Σ (type-Preorder P → type-Preorder Q) preserves-order-Preorder
 
-  map-hom-Preorder : hom-Preorder → element-Preorder P → element-Preorder Q
+  map-hom-Preorder : hom-Preorder → type-Preorder P → type-Preorder Q
   map-hom-Preorder = pr1
 
   preserves-order-map-hom-Preorder :
@@ -127,7 +127,7 @@ module _
   where
 
   preserves-order-id-Preorder :
-    preserves-order-Preorder P P (id {A = element-Preorder P})
+    preserves-order-Preorder P P (id {A = type-Preorder P})
   preserves-order-id-Preorder x y = id
 
   id-hom-Preorder : hom-Preorder P P
