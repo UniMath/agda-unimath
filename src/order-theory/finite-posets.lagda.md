@@ -8,6 +8,7 @@ module order-theory.finite-posets where
 
 ```agda
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -48,4 +49,9 @@ module _
     (x y : type-Poset P) → is-decidable (leq-Poset P x y)
   is-decidable-leq-is-finite-Poset =
     is-decidable-leq-is-finite-Preorder (preorder-Poset P)
+
+Poset-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Poset-𝔽 l1 l2 =
+  Σ ( Preorder-𝔽 l1 l2)
+    ( λ P → is-antisymmetric-leq-Preorder (preorder-Preorder-𝔽 P))
 ```

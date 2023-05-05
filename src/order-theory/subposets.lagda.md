@@ -58,12 +58,15 @@ module _
   antisymmetric-leq-Subposet x y H K =
     eq-type-Subposet x y (antisymmetric-leq-Poset X (pr1 x) (pr1 y) H K)
 
-  Subposet : Poset (l1 ⊔ l3) l2
-  pr1 Subposet = type-Subposet
-  pr1 (pr2 Subposet) = leq-Subposet-Prop
-  pr1 (pr1 (pr2 (pr2 Subposet))) = refl-leq-Subposet
-  pr2 (pr1 (pr2 (pr2 Subposet))) = transitive-leq-Subposet
-  pr2 (pr2 (pr2 Subposet)) = antisymmetric-leq-Subposet
+  preorder-Subposet : Preorder (l1 ⊔ l3) l2
+  pr1 preorder-Subposet = type-Subposet
+  pr1 (pr2 preorder-Subposet) = leq-Subposet-Prop
+  pr1 (pr2 (pr2 preorder-Subposet)) = refl-leq-Subposet
+  pr2 (pr2 (pr2 preorder-Subposet)) = transitive-leq-Subposet
+
+  poset-Subposet : Poset (l1 ⊔ l3) l2
+  pr1 poset-Subposet = preorder-Subposet
+  pr2 poset-Subposet = antisymmetric-leq-Subposet
 ```
 
 ### Inclusion of sub-posets

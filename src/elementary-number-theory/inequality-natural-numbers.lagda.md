@@ -25,6 +25,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -133,12 +134,15 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
 ### The poset of natural numbers
 
 ```agda
+ℕ-Preorder : Preorder lzero lzero
+pr1 ℕ-Preorder = ℕ
+pr1 (pr2 ℕ-Preorder) = leq-ℕ-Prop
+pr1 (pr2 (pr2 ℕ-Preorder)) = refl-leq-ℕ
+pr2 (pr2 (pr2 ℕ-Preorder)) = transitive-leq-ℕ
+
 ℕ-Poset : Poset lzero lzero
-pr1 ℕ-Poset = ℕ
-pr1 (pr2 ℕ-Poset) = leq-ℕ-Prop
-pr1 (pr1 (pr2 (pr2 ℕ-Poset))) = refl-leq-ℕ
-pr2 (pr1 (pr2 (pr2 ℕ-Poset))) = transitive-leq-ℕ
-pr2 (pr2 (pr2 ℕ-Poset)) = antisymmetric-leq-ℕ
+pr1 ℕ-Poset = ℕ-Preorder
+pr2 ℕ-Poset = antisymmetric-leq-ℕ
 ```
 
 ### For any two natural numbers we can decide which one is less than the other

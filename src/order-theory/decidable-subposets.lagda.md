@@ -73,5 +73,5 @@ module _
     transitive-leq-Subposet P (subtype-decidable-subtype S)
 
   poset-Decidable-Subposet : Poset (l1 ⊔ l3) l2
-  poset-Decidable-Subposet = Subposet P (subtype-decidable-subtype S)
+  poset-Decidable-Subposet = poset-Subposet P (subtype-decidable-subtype S)
 ```

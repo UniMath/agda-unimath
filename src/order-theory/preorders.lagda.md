@@ -9,6 +9,7 @@ module order-theory.preorders where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
@@ -50,6 +51,14 @@ module _
 
   is-prop-leq-Preorder : (x y : type-Preorder) → is-prop (leq-Preorder x y)
   is-prop-leq-Preorder x y = is-prop-type-Prop (leq-Preorder-Prop x y)
+
+  concatenate-eq-leq-Preorder :
+    {x y z : type-Preorder} → x ＝ y → leq-Preorder y z → leq-Preorder x z
+  concatenate-eq-leq-Preorder refl = id
+
+  concatenate-leq-eq-Preorder :
+    {x y z : type-Preorder} → leq-Preorder x y → y ＝ z → leq-Preorder x z
+  concatenate-leq-eq-Preorder H refl = H
 
   le-Preorder-Prop : (x y : type-Preorder) → Prop (l1 ⊔ l2)
   le-Preorder-Prop x y =
