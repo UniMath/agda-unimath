@@ -34,17 +34,18 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-decidable-Poset-Prop : Prop (l1 ⊔ l2)
-  is-decidable-Poset-Prop = is-decidable-Preorder-Prop (preorder-Poset X)
+  is-decidable-leq-Poset-Prop : Prop (l1 ⊔ l2)
+  is-decidable-leq-Poset-Prop =
+    is-decidable-leq-Preorder-Prop (preorder-Poset X)
 
-  is-decidable-Poset : UU (l1 ⊔ l2)
-  is-decidable-Poset = type-Prop is-decidable-Poset-Prop
+  is-decidable-leq-Poset : UU (l1 ⊔ l2)
+  is-decidable-leq-Poset = type-Prop is-decidable-leq-Poset-Prop
 
-  is-prop-is-decidable-Poset : is-prop is-decidable-Poset
-  is-prop-is-decidable-Poset = is-prop-type-Prop is-decidable-Poset-Prop
+  is-prop-is-decidable-leq-Poset : is-prop is-decidable-leq-Poset
+  is-prop-is-decidable-leq-Poset = is-prop-type-Prop is-decidable-leq-Poset-Prop
 
 Decidable-Poset : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Decidable-Poset l1 l2 = Σ (Poset l1 l2) is-decidable-Poset
+Decidable-Poset l1 l2 = Σ (Poset l1 l2) is-decidable-leq-Poset
 
 module _
   {l1 l2 : Level} (X : Decidable-Poset l1 l2)
@@ -53,9 +54,12 @@ module _
   poset-Decidable-Poset : Poset l1 l2
   poset-Decidable-Poset = pr1 X
 
-  is-decidable-poset-Decidable-Poset :
-    is-decidable-Poset (poset-Decidable-Poset)
-  is-decidable-poset-Decidable-Poset = pr2 X
+  preorder-Decidable-Poset : Preorder l1 l2
+  preorder-Decidable-Poset = preorder-Poset poset-Decidable-Poset
+
+  is-decidable-leq-Decidable-Poset :
+    is-decidable-leq-Poset (poset-Decidable-Poset)
+  is-decidable-leq-Decidable-Poset = pr2 X
 
   element-Decidable-Poset : UU l1
   element-Decidable-Poset = element-Poset poset-Decidable-Poset
@@ -70,17 +74,14 @@ module _
     (x y : element-Decidable-Poset) → is-prop (leq-Decidable-Poset x y)
   is-prop-leq-Decidable-Poset = is-prop-leq-Poset poset-Decidable-Poset
 
-  preorder-Decidable-Poset : Preorder l1 l2
-  preorder-Decidable-Poset = preorder-Poset poset-Decidable-Poset
-
-  decidable-preorder-Decidable-Poset : decidable-Preorder l1 l2
+  decidable-preorder-Decidable-Poset : Decidable-Preorder l1 l2
   pr1 decidable-preorder-Decidable-Poset = preorder-Decidable-Poset
-  pr2 decidable-preorder-Decidable-Poset = is-decidable-poset-Decidable-Poset
+  pr2 decidable-preorder-Decidable-Poset = is-decidable-leq-Decidable-Poset
 
   leq-decidable-poset-decidable-Prop :
     (x y : element-Decidable-Poset) → Decidable-Prop l2
   leq-decidable-poset-decidable-Prop =
-    leq-decidable-preorder-decidable-Prop decidable-preorder-Decidable-Poset
+    leq-Decidable-Preorder-Decidable-Prop decidable-preorder-Decidable-Poset
 
   concatenate-eq-leq-Decidable-Poset :
     {x y z : element-Decidable-Poset} → x ＝ y →
@@ -112,6 +113,6 @@ module _
   is-set-element-Decidable-Poset : is-set element-Decidable-Poset
   is-set-element-Decidable-Poset = is-set-element-Poset poset-Decidable-Poset
 
-  element-decidable-poset-Set : Set l1
-  element-decidable-poset-Set = element-poset-Set poset-Decidable-Poset
+  set-Decidable-Poset : Set l1
+  set-Decidable-Poset = set-Poset poset-Decidable-Poset
 ```

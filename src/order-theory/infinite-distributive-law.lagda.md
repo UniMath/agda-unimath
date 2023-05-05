@@ -98,8 +98,8 @@ module _
   is-set-element-Meet-Suplattice : is-set element-Meet-Suplattice
   is-set-element-Meet-Suplattice = is-set-element-Poset poset-Meet-Suplattice
 
-  element-meet-suplattice-Set : Set l1
-  element-meet-suplattice-Set = element-poset-Set poset-Meet-Suplattice
+  set-Meet-Suplattice : Set l1
+  set-Meet-Suplattice = set-Poset poset-Meet-Suplattice
 
   is-meet-semilattice-Meet-Suplattice :
     is-meet-semilattice-Poset poset-Meet-Suplattice

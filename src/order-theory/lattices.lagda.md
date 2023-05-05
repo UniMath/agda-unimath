@@ -81,8 +81,8 @@ module _
   is-set-element-Lattice : is-set element-Lattice
   is-set-element-Lattice = is-set-element-Poset poset-Lattice
 
-  element-lattice-Set : Set l1
-  element-lattice-Set = element-poset-Set poset-Lattice
+  set-Lattice : Set l1
+  set-Lattice = set-Poset poset-Lattice
 
   is-lattice-poset-Lattice : is-lattice-Poset poset-Lattice
   is-lattice-poset-Lattice = pr2 A

@@ -109,5 +109,5 @@ module _
   is-set-element-Total-Order = is-set-element-Poset poset-Total-Order
 
   set-Total-Order : Set l1
-  set-Total-Order = element-poset-Set poset-Total-Order
+  set-Total-Order = set-Poset poset-Total-Order
 ```

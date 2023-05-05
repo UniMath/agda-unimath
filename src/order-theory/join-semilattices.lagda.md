@@ -95,8 +95,8 @@ module _
   is-set-element-Join-Semilattice : is-set element-Join-Semilattice
   is-set-element-Join-Semilattice = is-set-element-Poset poset-Join-Semilattice
 
-  element-join-semilattice-Set : Set l1
-  element-join-semilattice-Set = element-poset-Set poset-Join-Semilattice
+  set-Join-Semilattice : Set l1
+  set-Join-Semilattice = set-Poset poset-Join-Semilattice
 
   is-join-semilattice-Join-Semilattice :
     is-join-semilattice-Poset poset-Join-Semilattice
