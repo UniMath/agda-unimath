@@ -129,9 +129,3 @@ module _
   pr2 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =
     right-unit-law-comp-hom-Large-Precategory C
 ```
-
-## See also
-
-- A list of examples of large precategories in the agda-unimath library can be
-  found in
-  [`category-theory.examples-of-categories`](category-theory.examples-of-categories.md)
