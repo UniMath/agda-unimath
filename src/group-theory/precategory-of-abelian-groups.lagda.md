@@ -19,7 +19,8 @@ open import group-theory.homomorphisms-abelian-groups
 
 ## Idea
 
-The **precategory of abelian groups** consists of abelian groups and group homomorphisms.
+The **precategory of abelian groups** consists of abelian groups and group
+homomorphisms.
 
 ## Definition
 
@@ -45,4 +46,3 @@ Large-Precategory.right-unit-law-comp-hom-Large-Precategory ab-Precategory
   {X = A} {B} =
   right-unit-law-comp-hom-Ab A B
 ```
-

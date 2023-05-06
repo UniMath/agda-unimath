@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **category of sets** consists of sets and functions. There is a category of sets for each universe level, and there is a large category of sets.
+The **category of sets** consists of sets and functions. There is a category of
+sets for each universe level, and there is a large category of sets.
 
 ## Definitions
 
