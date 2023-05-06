@@ -249,7 +249,7 @@ module _
   pr2 (pr2 comp-hom-Semiring) = preserves-unit-comp-hom-Semiring
 ```
 
-### Homotopies of homomorphisms of semiring
+### Homotopies of homomorphisms of semirings
 
 ```agda
 module _
