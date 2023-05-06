@@ -76,27 +76,34 @@ module _
 ### Anafunctors between categories
 
 ```agda
-anafunctor-Cat :
+anafunctor-Category :
   {l1 l2 l3 l4 : Level} (l : Level) →
-  Cat l1 l2 → Cat l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-anafunctor-Cat l C D =
-  anafunctor-Precategory l (precategory-Cat C) (precategory-Cat D)
+  Category l1 l2 → Category l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+anafunctor-Category l C D =
+  anafunctor-Precategory l (precategory-Category C) (precategory-Category D)
 
 module _
-  {l1 l2 l3 l4 l5 : Level} (C : Cat l1 l2) (D : Cat l3 l4)
-  (F : anafunctor-Cat l5 C D)
+  {l1 l2 l3 l4 l5 : Level} (C : Category l1 l2) (D : Category l3 l4)
+  (F : anafunctor-Category l5 C D)
   where
 
-  object-anafunctor-Cat : obj-Cat C → obj-Cat D → UU l5
-  object-anafunctor-Cat =
-    object-anafunctor-Precategory (precategory-Cat C) (precategory-Cat D) F
+  object-anafunctor-Category : obj-Category C → obj-Category D → UU l5
+  object-anafunctor-Category =
+    object-anafunctor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
 
-  hom-anafunctor-Cat :
-    (X Y : obj-Cat C) (U : obj-Cat D) (u : object-anafunctor-Cat X U)
-    (V : obj-Cat D) (v : object-anafunctor-Cat Y V) →
-    type-hom-Cat C X Y → type-hom-Cat D U V
-  hom-anafunctor-Cat =
-    hom-anafunctor-Precategory (precategory-Cat C) (precategory-Cat D) F
+  hom-anafunctor-Category :
+    (X Y : obj-Category C) (U : obj-Category D)
+    (u : object-anafunctor-Category X U)
+    (V : obj-Category D) (v : object-anafunctor-Category Y V) →
+    type-hom-Category C X Y → type-hom-Category D U V
+  hom-anafunctor-Category =
+    hom-anafunctor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
 ```
 
 ## Properties
@@ -184,9 +191,10 @@ module _
 ### The action on objects
 
 ```agda
-image-object-anafunctor-Cat :
-  {l1 l2 l3 l4 l5 : Level} (C : Cat l1 l2) (D : Cat l3 l4) →
-  anafunctor-Cat l5 C D → obj-Cat C → UU (l3 ⊔ l5)
-image-object-anafunctor-Cat C D F X =
-  Σ (obj-Cat D) (λ U → type-trunc-Prop (object-anafunctor-Cat C D F X U))
+image-object-anafunctor-Category :
+  {l1 l2 l3 l4 l5 : Level} (C : Category l1 l2) (D : Category l3 l4) →
+  anafunctor-Category l5 C D → obj-Category C → UU (l3 ⊔ l5)
+image-object-anafunctor-Category C D F X =
+  Σ ( obj-Category D)
+    ( λ U → type-trunc-Prop (object-anafunctor-Category C D F X U))
 ```

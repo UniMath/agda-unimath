@@ -27,36 +27,42 @@ precategories.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Cat l1 l2)
-  (D : Cat l3 l4)
+  (C : Category l1 l2)
+  (D : Category l3 l4)
   where
 
-  functor-Cat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  functor-Cat = functor-Precategory (precategory-Cat C) (precategory-Cat D)
+  functor-Category : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  functor-Category =
+    functor-Precategory (precategory-Category C) (precategory-Category D)
 
-  obj-functor-Cat : functor-Cat → obj-Cat C → obj-Cat D
-  obj-functor-Cat = pr1
+  obj-functor-Category : functor-Category → obj-Category C → obj-Category D
+  obj-functor-Category = pr1
 
-  hom-functor-Cat :
-    (F : functor-Cat) →
-    {x y : obj-Cat C} →
-    (f : type-hom-Cat C x y) →
-    type-hom-Cat D (obj-functor-Cat F x) (obj-functor-Cat F y)
-  hom-functor-Cat F = pr1 (pr2 F)
+  hom-functor-Category :
+    (F : functor-Category) →
+    {x y : obj-Category C} →
+    (f : type-hom-Category C x y) →
+    type-hom-Category D (obj-functor-Category F x) (obj-functor-Category F y)
+  hom-functor-Category F = pr1 (pr2 F)
 
-  preserves-comp-functor-Cat :
-    (F : functor-Cat) →
-    {x y z : obj-Cat C} (g : type-hom-Cat C y z) (f : type-hom-Cat C x y) →
-    ( hom-functor-Cat F (comp-hom-Cat C g f)) ＝
-    ( comp-hom-Cat D (hom-functor-Cat F g) (hom-functor-Cat F f))
-  preserves-comp-functor-Cat F =
-    preserves-comp-functor-Precategory (precategory-Cat C) (precategory-Cat D) F
+  preserves-comp-functor-Category :
+    ( F : functor-Category) {x y z : obj-Category C}
+    ( g : type-hom-Category C y z) (f : type-hom-Category C x y) →
+    ( hom-functor-Category F (comp-hom-Category C g f)) ＝
+    ( comp-hom-Category D (hom-functor-Category F g) (hom-functor-Category F f))
+  preserves-comp-functor-Category F =
+    preserves-comp-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D) F
 
-  preserves-id-functor-Cat :
-    (F : functor-Cat) (x : obj-Cat C) →
-    hom-functor-Cat F (id-hom-Cat C {x}) ＝ id-hom-Cat D {obj-functor-Cat F x}
-  preserves-id-functor-Cat F =
-    preserves-id-functor-Precategory (precategory-Cat C) (precategory-Cat D) F
+  preserves-id-functor-Category :
+    (F : functor-Category) (x : obj-Category C) →
+    hom-functor-Category F (id-hom-Category C {x}) ＝
+    id-hom-Category D {obj-functor-Category F x}
+  preserves-id-functor-Category F =
+    preserves-id-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D) F
 ```
 
 ## Examples
@@ -66,8 +72,9 @@ module _
 There is an identity functor on any category.
 
 ```agda
-id-functor-Cat : {l1 l2 : Level} (C : Cat l1 l2) → functor-Cat C C
-id-functor-Cat C = id-functor-Precategory (precategory-Cat C)
+id-functor-Category :
+  {l1 l2 : Level} (C : Category l1 l2) → functor-Category C C
+id-functor-Category C = id-functor-Precategory (precategory-Category C)
 ```
 
 ### Composition of functors
@@ -75,15 +82,15 @@ id-functor-Cat C = id-functor-Precategory (precategory-Cat C)
 Any two compatible functors can be composed to a new functor.
 
 ```agda
-comp-functor-Cat :
+comp-functor-Category :
   {l1 l2 l3 l4 l5 l6 : Level}
-  (C : Cat l1 l2) (D : Cat l3 l4) (E : Cat l5 l6) →
-  functor-Cat D E → functor-Cat C D → functor-Cat C E
-comp-functor-Cat C D E G F =
+  (C : Category l1 l2) (D : Category l3 l4) (E : Category l5 l6) →
+  functor-Category D E → functor-Category C D → functor-Category C E
+comp-functor-Category C D E G F =
   comp-functor-Precategory
-    ( precategory-Cat C)
-    ( precategory-Cat D)
-    ( precategory-Cat E)
+    ( precategory-Category C)
+    ( precategory-Category D)
+    ( precategory-Category E)
     ( G)
     ( F)
 ```

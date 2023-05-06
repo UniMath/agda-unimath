@@ -48,7 +48,7 @@ eq-iso-Semigroup :
   {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
 eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
-Semigroup-Large-Cat : Large-Cat lsuc (_⊔_)
-precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precategory
-is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
+Semigroup-Large-Category : Large-Category lsuc (_⊔_)
+precat-Large-Category Semigroup-Large-Category = Semigroup-Large-Precategory
+is-category-Large-Category Semigroup-Large-Category = is-category-Semigroup
 ```

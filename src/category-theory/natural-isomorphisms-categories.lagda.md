@@ -27,20 +27,25 @@ between the functors on the underlying precategories.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Cat l1 l2)
-  (D : Cat l3 l4)
-  (F G : functor-Cat C D)
+  (C : Category l1 l2)
+  (D : Category l3 l4)
+  (F G : functor-Category C D)
   where
 
-  is-natural-isomorphism-Cat : natural-transformation-Cat C D F G → UU (l1 ⊔ l4)
-  is-natural-isomorphism-Cat =
+  is-natural-isomorphism-Category :
+    natural-transformation-Category C D F G → UU (l1 ⊔ l4)
+  is-natural-isomorphism-Category =
     is-natural-isomorphism-Precategory
-      ( precategory-Cat C)
-      ( precategory-Cat D)
+      ( precategory-Category C)
+      ( precategory-Category D)
       ( F)
       ( G)
 
-  natural-isomorphism-Cat : UU (l1 ⊔ l2 ⊔ l4)
-  natural-isomorphism-Cat =
-    natural-isomorphism-Precategory (precategory-Cat C) (precategory-Cat D) F G
+  natural-isomorphism-Category : UU (l1 ⊔ l2 ⊔ l4)
+  natural-isomorphism-Category =
+    natural-isomorphism-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
 ```

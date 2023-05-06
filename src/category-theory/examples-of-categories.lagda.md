@@ -8,6 +8,11 @@ module category-theory.examples-of-categories where
 
 ## Examples of large categories
 
+| Large category | File                                                                            |
+| -------------- | ------------------------------------------------------------------------------- |
+| Groups         | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
+| Semigroups     | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
+
 ## Examples of large precategories
 
 | Large precategory | File                                                                                            |

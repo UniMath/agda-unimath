@@ -35,11 +35,16 @@ is-category-Large-Precategory C =
   {l : Level} (X Y : obj-Large-Precategory C l) →
   is-equiv (iso-eq-Large-Precategory C X Y)
 
-record Large-Cat (α : Level → Level) (β : Level → Level → Level) : UUω where
-  constructor make-Large-Cat
+record
+  Large-Category (α : Level → Level) (β : Level → Level → Level) : UUω
+  where
+  constructor
+    make-Large-Category
   field
-    precat-Large-Cat : Large-Precategory α β
-    is-category-Large-Cat : is-category-Large-Precategory precat-Large-Cat
+    precat-Large-Category :
+      Large-Precategory α β
+    is-category-Large-Category :
+      is-category-Large-Precategory precat-Large-Category
 
-open Large-Cat public
+open Large-Category public
 ```
