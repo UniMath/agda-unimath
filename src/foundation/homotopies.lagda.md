@@ -290,4 +290,6 @@ module _
 
 ## See also
 
-- We postulate that homotopies characterize identifications in (dependent) function types in the file [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+- We postulate that homotopies characterize identifications in (dependent)
+  function types in the file
+  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
