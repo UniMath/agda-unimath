@@ -1,5 +1,7 @@
 # Reflection
 
+## Files in the reflection folder
+
 ```agda
 module reflection where
 

@@ -1,5 +1,7 @@
 # Set theory
 
+## Files in the set theory folder
+
 ```agda
 module set-theory where
 

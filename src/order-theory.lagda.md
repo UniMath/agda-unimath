@@ -1,5 +1,7 @@
 # Order theory
 
+## Files in the order theory folder
+
 ```agda
 module order-theory where
 

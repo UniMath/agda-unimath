@@ -1,5 +1,7 @@
 # Group theory
 
+## Files in the group theory folder
+
 ```agda
 module group-theory where
 

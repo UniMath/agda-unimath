@@ -1,5 +1,7 @@
 # Ring theory
 
+## Files in the ring theory folder
+
 ```agda
 module ring-theory where
 

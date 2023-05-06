@@ -1,5 +1,7 @@
 # Commutative algebra
 
+## Files in the commutative algebra folder
+
 ```agda
 module commutative-algebra where
 
