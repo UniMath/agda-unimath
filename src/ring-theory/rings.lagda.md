@@ -74,6 +74,15 @@ module _
   group-Ring : Group l
   group-Ring = group-Ab ab-Ring
 
+  additive-commutative-monoid-Ring : Commutative-Monoid l
+  additive-commutative-monoid-Ring = commutative-monoid-Ab ab-Ring
+
+  additive-monoid-Ring : Monoid l
+  additive-monoid-Ring = monoid-Ab ab-Ring
+
+  additive-semigroup-Ring : Semigroup l
+  additive-semigroup-Ring = semigroup-Ab ab-Ring
+
   set-Ring : Set l
   set-Ring = set-Ab ab-Ring
 
@@ -110,10 +119,7 @@ module _
     Id (add-Ring (add-Ring x y) z) (add-Ring x (add-Ring y z))
   associative-add-Ring = associative-add-Ab (ab-Ring R)
 
-  additive-semigroup-Ring : Semigroup l
-  additive-semigroup-Ring = semigroup-Ab (ab-Ring R)
-
-  is-group-additive-semigroup-Ring : is-group additive-semigroup-Ring
+  is-group-additive-semigroup-Ring : is-group (additive-semigroup-Ring R)
   is-group-additive-semigroup-Ring = is-group-Ab (ab-Ring R)
 
   commutative-add-Ring : (x y : type-Ring R) → Id (add-Ring x y) (add-Ring y x)
@@ -324,22 +330,22 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  commutative-monoid-Ring : Commutative-Monoid l
-  commutative-monoid-Ring = commutative-monoid-Ab (ab-Ring R)
-
-  has-mul-Ring : has-mul-Commutative-Monoid commutative-monoid-Ring
+  has-mul-Ring :
+    has-mul-Commutative-Monoid (additive-commutative-monoid-Ring R)
   pr1 has-mul-Ring = has-associative-mul-Ring R
   pr1 (pr2 has-mul-Ring) = is-unital-Ring R
   pr1 (pr2 (pr2 has-mul-Ring)) = left-distributive-mul-add-Ring R
   pr2 (pr2 (pr2 has-mul-Ring)) = right-distributive-mul-add-Ring R
 
   zero-laws-mul-Ring :
-    zero-laws-Commutative-Monoid commutative-monoid-Ring has-mul-Ring
+    zero-laws-Commutative-Monoid
+      ( additive-commutative-monoid-Ring R)
+      ( has-mul-Ring)
   pr1 zero-laws-mul-Ring = left-zero-law-mul-Ring R
   pr2 zero-laws-mul-Ring = right-zero-law-mul-Ring R
 
   semiring-Ring : Semiring l
-  pr1 semiring-Ring = commutative-monoid-Ring
+  pr1 semiring-Ring = additive-commutative-monoid-Ring R
   pr1 (pr2 semiring-Ring) = has-mul-Ring
   pr2 (pr2 semiring-Ring) = zero-laws-mul-Ring
 ```

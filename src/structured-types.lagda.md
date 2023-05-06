@@ -1,5 +1,7 @@
 # Structured types
 
+## Files in the structured types folder
+
 ```agda
 module structured-types where
 

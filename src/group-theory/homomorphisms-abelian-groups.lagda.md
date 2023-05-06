@@ -18,6 +18,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 ```
@@ -65,6 +66,19 @@ module _
     (f : type-hom-Ab) → preserves-negatives-Ab (map-hom-Ab f)
   preserves-negatives-hom-Ab f =
     preserves-inv-hom-Group (group-Ab A) (group-Ab B) f
+
+  hom-semigroup-hom-Ab :
+    type-hom-Ab → type-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
+  pr1 (hom-semigroup-hom-Ab f) = map-hom-Ab f
+  pr2 (hom-semigroup-hom-Ab f) = preserves-add-hom-Ab f
+
+  hom-commutative-monoid-hom-Ab :
+    type-hom-Ab →
+    type-hom-Commutative-Monoid
+      ( commutative-monoid-Ab A)
+      ( commutative-monoid-Ab B)
+  pr1 (hom-commutative-monoid-hom-Ab f) = hom-semigroup-hom-Ab f
+  pr2 (hom-commutative-monoid-hom-Ab f) = preserves-zero-hom-Ab f
 ```
 
 ### Characterization of the identity type of the abelian group homomorphisms

@@ -7,6 +7,9 @@ module category-theory.large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.precategories
+
+open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
@@ -22,6 +25,8 @@ of objects or morphisms. (This cannot be done with Σ-types, we must use a recor
 type.)
 
 ## Definition
+
+### Large precategories
 
 ```agda
 record
@@ -99,8 +104,28 @@ module _
   comp-hom-Large-Precategory' f g = comp-hom-Large-Precategory C g f
 ```
 
-## See also
+### Precategories obtained from large precategories
 
-- A list of examples of large precategories in the agda-unimath library can be
-  found in
-  [`category-theory.examples-of-categories`](category-theory.examples-of-categories.md)
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  where
+
+  precategory-Large-Precategory :
+    (l : Level) → Precategory (α l) (β l l)
+  pr1 (precategory-Large-Precategory l) =
+    obj-Large-Precategory C l
+  pr1 (pr2 (precategory-Large-Precategory l)) =
+    hom-Large-Precategory C
+  pr1 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
+    comp-hom-Large-Precategory C
+  pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
+    associative-comp-hom-Large-Precategory C
+  pr1 (pr2 (pr2 (pr2 (precategory-Large-Precategory l)))) x =
+    id-hom-Large-Precategory C
+  pr1 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =
+    left-unit-law-comp-hom-Large-Precategory C
+  pr2 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =
+    right-unit-law-comp-hom-Large-Precategory C
+```

@@ -1,5 +1,7 @@
 # Synthetic homotopy theory
 
+## Files in the synthetic homotopy theory folder
+
 ```agda
 module synthetic-homotopy-theory where
 
