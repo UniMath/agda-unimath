@@ -30,10 +30,10 @@ additionally preserves binary meets and arbitrary joins.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6)
+  {l1 l2 l3 l4 : Level} (A : Frame l1 l2) (B : Frame l3 l4)
   where
 
-  hom-Frame : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+  hom-Frame : UU (l1 ⊔ lsuc l2 ⊔ l3)
   hom-Frame = Σ (type-Frame A → type-Frame B)
     (λ f → preserves-order-Poset (poset-Frame A) (poset-Frame B) f ×
       preserves-meets-sups

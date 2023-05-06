@@ -93,12 +93,8 @@ module _
   is-meet-semilattice-Lattice : is-meet-semilattice-Poset poset-Lattice
   is-meet-semilattice-Lattice = pr1 is-lattice-Lattice
 
-  meet-semilattice-Lattice : Meet-Semilattice l1 l2
-  pr1 meet-semilattice-Lattice = poset-Lattice
-  pr2 meet-semilattice-Lattice = is-meet-semilattice-Lattice
-
   meet-Lattice : (x y : type-Lattice) → type-Lattice
-  meet-Lattice = meet-Meet-Semilattice meet-semilattice-Lattice
+  meet-Lattice x y = pr1 (is-meet-semilattice-Lattice x y)
 
   is-join-semilattice-Lattice : is-join-semilattice-Poset poset-Lattice
   is-join-semilattice-Lattice = pr2 is-lattice-Lattice

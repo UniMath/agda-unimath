@@ -28,19 +28,19 @@ that homomorphisms of meet-semilattices are order preserving.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
+  {l1 l2 : Level}
+  (A : Meet-Semilattice l1) (B : Meet-Semilattice l2)
   where
 
   preserves-meets :
     (type-Meet-Semilattice A → type-Meet-Semilattice B) →
-    UU (l1 ⊔ l3 ⊔ l4)
+    UU (l1 ⊔ l2)
   preserves-meets f =
     (x y : type-Meet-Semilattice A) →
     is-greatest-binary-lower-bound-Poset
       (poset-Meet-Semilattice B) (f x) (f y) (f (meet-Meet-Semilattice A x y))
 
-  hom-Meet-Semilattice : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-Meet-Semilattice : UU (l1 ⊔ l2)
   hom-Meet-Semilattice =
     Σ ( type-Meet-Semilattice A → type-Meet-Semilattice B)
       ( λ f →

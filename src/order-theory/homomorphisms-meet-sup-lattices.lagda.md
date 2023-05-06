@@ -29,14 +29,14 @@ that in addition preserves least upper bounds.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  (A : Meet-Suplattice l1 l2 l3)
-  (B : Meet-Suplattice l4 l5 l6)
+  {l1 l2 l3 l4 : Level}
+  (A : Meet-Suplattice l1 l2)
+  (B : Meet-Suplattice l3 l4)
   where
 
   preserves-meets-sups :
     (type-Meet-Suplattice A → type-Meet-Suplattice B) →
-    UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+    UU (l1 ⊔ lsuc l2 ⊔ l3)
   preserves-meets-sups f =
     preserves-meets
       ( meet-semilattice-Meet-Suplattice A)
@@ -47,7 +47,7 @@ module _
       ( suplattice-Meet-Suplattice B)
       ( f)
 
-  hom-Meet-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+  hom-Meet-Suplattice : UU (l1 ⊔ lsuc l2 ⊔ l3)
   hom-Meet-Suplattice =
     Σ ( type-Meet-Suplattice A → type-Meet-Suplattice B)
       ( λ f →

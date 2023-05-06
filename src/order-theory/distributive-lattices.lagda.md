@@ -117,9 +117,11 @@ module _
   is-meet-semilattice-Distributive-Lattice =
     is-meet-semilattice-Lattice lattice-Distributive-Lattice
 
+{-
   meet-semilattice-Distributive-Lattice : Meet-Semilattice l1 l2
   meet-semilattice-Distributive-Lattice =
     meet-semilattice-Lattice lattice-Distributive-Lattice
+-}
 
   meet-Distributive-Lattice :
     (x y : type-Distributive-Lattice) → type-Distributive-Lattice
