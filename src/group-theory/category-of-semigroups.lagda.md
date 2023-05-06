@@ -29,7 +29,7 @@ category.
 
 ## Definition
 
-### The larege category of semigroups
+### The large category of semigroups
 
 ```agda
 is-category-Semigroup :

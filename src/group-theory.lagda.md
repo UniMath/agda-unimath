@@ -95,9 +95,11 @@ open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
 open import group-theory.precategory-of-abelian-groups public
+open import group-theory.precategory-of-commutative-monoids public
 open import group-theory.precategory-of-concrete-groups public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
+open import group-theory.precategory-of-monoids public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
