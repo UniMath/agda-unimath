@@ -16,6 +16,7 @@ open import ring-theory.division-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
 open import ring-theory.homomorphisms-rings public
+open import ring-theory.homomorphisms-semirings public
 open import ring-theory.ideals-generated-by-subsets-rings public
 open import ring-theory.ideals-rings public
 open import ring-theory.ideals-semirings public
@@ -33,6 +34,8 @@ open import ring-theory.nilpotent-elements-semirings public
 open import ring-theory.opposite-rings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
+open import ring-theory.precategory-of-rings public
+open import ring-theory.precategory-of-semirings public
 open import ring-theory.products-rings public
 open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public

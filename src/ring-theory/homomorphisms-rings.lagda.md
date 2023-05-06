@@ -302,7 +302,7 @@ comp-hom-Ring R1 R2 R3 g f =
 ```
 
 ```agda
-is-associative-comp-hom-Ring :
+associative-comp-hom-Ring :
   { l1 l2 l3 l4 : Level}
   ( R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) (R4 : Ring l4) →
   ( h : type-hom-Ring R3 R4)
@@ -310,7 +310,7 @@ is-associative-comp-hom-Ring :
   ( f : type-hom-Ring R1 R2) →
   Id (comp-hom-Ring R1 R2 R4 (comp-hom-Ring R2 R3 R4 h g) f)
      (comp-hom-Ring R1 R3 R4 h (comp-hom-Ring R1 R2 R3 g f))
-is-associative-comp-hom-Ring R1 R2 R3 R4 h g f =
+associative-comp-hom-Ring R1 R2 R3 R4 h g f =
   eq-htpy-hom-Ring R1 R4
     ( comp-hom-Ring R1 R2 R4 (comp-hom-Ring R2 R3 R4 h g) f)
     ( comp-hom-Ring R1 R3 R4 h (comp-hom-Ring R1 R2 R3 g f))
@@ -360,17 +360,4 @@ comp-law-ab-Ring R1 R2 R3 g f =
     ( ab-Ring R1)
     ( ab-Ring R3)
     ( refl-htpy)
-
-Ring-Precategory : (l : Level) → Precategory (lsuc l) l
-pr1 (Ring-Precategory l) = Ring l
-pr1 (pr2 (Ring-Precategory l)) = hom-Ring
-pr1 (pr1 (pr2 (pr2 (Ring-Precategory l)))) {R1} {R2} {R3} =
-  comp-hom-Ring R1 R2 R3
-pr2 (pr1 (pr2 (pr2 (Ring-Precategory l)))) {R1} {R2} {R3} {R4} =
-  is-associative-comp-hom-Ring R1 R2 R3 R4
-pr1 (pr2 (pr2 (pr2 (Ring-Precategory l)))) = id-hom-Ring
-pr1 (pr2 (pr2 (pr2 (pr2 (Ring-Precategory l))))) {R1} {R2} f =
-  eq-htpy-hom-Ring
-    R1 R2 (comp-hom-Ring R1 R2 R2 (id-hom-Ring R2) f) f refl-htpy
-pr2 (pr2 (pr2 (pr2 (pr2 (Ring-Precategory l))))) {R1} {R2} f = refl
 ```

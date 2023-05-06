@@ -4,18 +4,16 @@
 module category-theory.examples-of-categories where
 ```
 
-## Examples of categories
+## Examples of categories and large categories
 
-## Examples of large categories
+| (Large) category | File                                                                            |
+| ---------------- | ------------------------------------------------------------------------------- |
+| Groups           | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
+| Semigroups       | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
 
-| Large category | File                                                                            |
-| -------------- | ------------------------------------------------------------------------------- |
-| Groups         | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
-| Semigroups     | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
+## Examples of precategories and large precategories
 
-## Examples of large precategories
-
-| Large precategory   | File                                                                                                    |
+| (Large) precategory | File                                                                                                    |
 | ------------------- | ------------------------------------------------------------------------------------------------------- |
 | Abelian groups      | [`group-theory.precategory-of-abelian-groups`](group-theory.precategory-of-abelian-groups.md)           |
 | Commutative monoids | [`group-theory.precategory-of-commutative-monoids`](group-theory.precategory-of-commutative-monoids.md) |
@@ -24,7 +22,7 @@ module category-theory.examples-of-categories where
 | `G`-sets            | [`group-theory.precategory-of-group-actions`](group-theory.precategory-of-group-actions.md)             |
 | Groups              | [`group-theory.precategory-of-groups`](group-theory.precategory-of-groups.md)                           |
 | Monoids             | [`group-theory.precategory-of-monoids`](group-theory.precategory-of-monoids.md)                         |
-| Semigroups          | [`group-theory.pre-category-of-semigroups`](group-theory.precategory-of-semigroups.md)                  |
+| Rings               | [`ring-theory.precategory-of-rings`](ring-theory.precategory-of-rings.md)                               |
+| Semigroups          | [`group-theory.precategory-of-semigroups`](group-theory.precategory-of-semigroups.md)                   |
+| Semirings           | [`ring-theory.precategory-of-semirings`](ring-theory.precategory-of-semirings.md)                       |
 | Sets                | [`foundation.category-of-sets`](foundation.category-of-sets.md)                                         |
-
-## Examples of precategories
