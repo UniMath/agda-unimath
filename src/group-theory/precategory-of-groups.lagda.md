@@ -21,17 +21,20 @@ open import group-theory.homomorphisms-groups
 
 ```agda
 instance
-  Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
-  obj-Large-Precat Group-Large-Precat = Group
-  hom-Large-Precat Group-Large-Precat = hom-Group
-  comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
+  Group-Large-Precategory : Large-Precategory lsuc (λ l1 l2 → l1 ⊔ l2)
+  obj-Large-Precategory Group-Large-Precategory = Group
+  hom-Large-Precategory Group-Large-Precategory = hom-Group
+  comp-hom-Large-Precategory Group-Large-Precategory {X = G} {H} {K} =
     comp-hom-Group G H K
-  id-hom-Large-Precat Group-Large-Precat {X = G} =
+  id-hom-Large-Precategory Group-Large-Precategory {X = G} =
     id-hom-Group G
-  associative-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-hom-Large-Precategory
+    Group-Large-Precategory {X = G} {H} {K} {L} =
     associative-comp-hom-Group G H K L
-  left-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  left-unit-law-comp-hom-Large-Precategory
+    Group-Large-Precategory {X = G} {H} =
     left-unit-law-comp-hom-Group G H
-  right-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  right-unit-law-comp-hom-Large-Precategory
+    Group-Large-Precategory {X = G} {H} =
     right-unit-law-comp-hom-Group G H
 ```

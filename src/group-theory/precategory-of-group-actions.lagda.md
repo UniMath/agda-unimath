@@ -29,24 +29,28 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  Abstract-Group-Action-Large-Precat :
-    Large-Precat (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
-  obj-Large-Precat Abstract-Group-Action-Large-Precat =
+  Abstract-Group-Action-Large-Precategory :
+    Large-Precategory (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  obj-Large-Precategory
+    Abstract-Group-Action-Large-Precategory =
     Abstract-Group-Action G
-  hom-Large-Precat Abstract-Group-Action-Large-Precat =
+  hom-Large-Precategory
+    Abstract-Group-Action-Large-Precategory =
     hom-Abstract-Group-Action G
-  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
+  comp-hom-Large-Precategory
+    Abstract-Group-Action-Large-Precategory {X = X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
-  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
+  id-hom-Large-Precategory
+    Abstract-Group-Action-Large-Precategory {X = X} =
     id-hom-Abstract-Group-Action G X
-  associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {X = X} {Y} {Z} {W} =
+  associative-comp-hom-Large-Precategory
+    Abstract-Group-Action-Large-Precategory {X = X} {Y} {Z} {W} =
     associative-comp-hom-Abstract-Group-Action G X Y Z W
-  left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {X = X} {Y} =
+  left-unit-law-comp-hom-Large-Precategory
+    Abstract-Group-Action-Large-Precategory {X = X} {Y} =
     left-unit-law-comp-hom-Abstract-Group-Action G X Y
-  right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {X = X} {Y} =
+  right-unit-law-comp-hom-Large-Precategory
+    Abstract-Group-Action-Large-Precategory {X = X} {Y} =
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
 ```
 

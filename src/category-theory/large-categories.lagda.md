@@ -28,18 +28,18 @@ proposition.
 ## Definition
 
 ```agda
-is-category-Large-Precat :
+is-category-Large-Precategory :
   {α : Level → Level} {β : Level → Level → Level} →
-  (C : Large-Precat α β) → UUω
-is-category-Large-Precat C =
-  {l : Level} (X Y : obj-Large-Precat C l) →
-  is-equiv (iso-eq-Large-Precat C X Y)
+  (C : Large-Precategory α β) → UUω
+is-category-Large-Precategory C =
+  {l : Level} (X Y : obj-Large-Precategory C l) →
+  is-equiv (iso-eq-Large-Precategory C X Y)
 
 record Large-Cat (α : Level → Level) (β : Level → Level → Level) : UUω where
   constructor make-Large-Cat
   field
-    precat-Large-Cat : Large-Precat α β
-    is-category-Large-Cat : is-category-Large-Precat precat-Large-Cat
+    precat-Large-Cat : Large-Precategory α β
+    is-category-Large-Cat : is-category-Large-Precategory precat-Large-Cat
 
 open Large-Cat public
 ```

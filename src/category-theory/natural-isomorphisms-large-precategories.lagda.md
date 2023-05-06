@@ -28,45 +28,49 @@ an isomorphism, for every object `x` in `C`.
 ```agda
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
-  {C : Large-Precat αC βC} {D : Large-Precat αD βD}
-  (F : functor-Large-Precat C D γF) (G : functor-Large-Precat C D γG)
+  {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
+  (F : functor-Large-Precategory C D γF)
+  (G : functor-Large-Precategory C D γG)
   where
 
-  record natural-isomorphism-Large-Precat : UUω
+  record natural-isomorphism-Large-Precategory : UUω
     where
     constructor make-natural-isomorphism
     field
-      obj-natural-isomorphism-Large-Precat :
-        {l1 : Level} (X : obj-Large-Precat C l1) →
-        iso-Large-Precat D
-          ( obj-functor-Large-Precat F X)
-          ( obj-functor-Large-Precat G X)
-      coherence-square-natural-isomorphism-Large-Precat :
-        {l1 l2 : Level} {X : obj-Large-Precat C l1}
-        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
-        square-Large-Precat D
-          ( hom-iso-Large-Precat D
-            ( obj-functor-Large-Precat F X)
-            ( obj-functor-Large-Precat G X)
-            ( obj-natural-isomorphism-Large-Precat X))
-          ( hom-functor-Large-Precat F f)
-          ( hom-functor-Large-Precat G f)
-          ( hom-iso-Large-Precat D
-            ( obj-functor-Large-Precat F Y)
-            ( obj-functor-Large-Precat G Y)
-            ( obj-natural-isomorphism-Large-Precat Y))
+      obj-natural-isomorphism-Large-Precategory :
+        { l1 : Level} (X : obj-Large-Precategory C l1) →
+        iso-Large-Precategory D
+          ( obj-functor-Large-Precategory F X)
+          ( obj-functor-Large-Precategory G X)
+      coherence-square-natural-isomorphism-Large-Precategory :
+        { l1 l2 : Level}
+        { X : obj-Large-Precategory C l1}
+        { Y : obj-Large-Precategory C l2}
+        ( f : type-hom-Large-Precategory C X Y) →
+        square-Large-Precategory D
+          ( hom-iso-Large-Precategory D
+            ( obj-functor-Large-Precategory F X)
+            ( obj-functor-Large-Precategory G X)
+            ( obj-natural-isomorphism-Large-Precategory X))
+          ( hom-functor-Large-Precategory F f)
+          ( hom-functor-Large-Precategory G f)
+          ( hom-iso-Large-Precategory D
+            ( obj-functor-Large-Precategory F Y)
+            ( obj-functor-Large-Precategory G Y)
+            ( obj-natural-isomorphism-Large-Precategory Y))
 
-  open natural-isomorphism-Large-Precat public
+  open natural-isomorphism-Large-Precategory public
 
-  natural-transformation-natural-isomorphism-Large-Precat :
-    natural-isomorphism-Large-Precat → (natural-transformation-Large-Precat F G)
-  obj-natural-transformation-Large-Precat
-    (natural-transformation-natural-isomorphism-Large-Precat γ) X =
-      hom-iso-Large-Precat D
-        ( obj-functor-Large-Precat F X)
-        ( obj-functor-Large-Precat G X)
-        ( obj-natural-isomorphism-Large-Precat γ X)
-  coherence-square-natural-transformation-Large-Precat
-    (natural-transformation-natural-isomorphism-Large-Precat γ) =
-      coherence-square-natural-isomorphism-Large-Precat γ
+  natural-transformation-natural-isomorphism-Large-Precategory :
+    natural-isomorphism-Large-Precategory →
+    natural-transformation-Large-Precategory F G
+  obj-natural-transformation-Large-Precategory
+    ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
+    hom-iso-Large-Precategory D
+      ( obj-functor-Large-Precategory F X)
+      ( obj-functor-Large-Precategory G X)
+      ( obj-natural-isomorphism-Large-Precategory γ X)
+  coherence-square-natural-transformation-Large-Precategory
+    (natural-transformation-natural-isomorphism-Large-Precategory γ) =
+      coherence-square-natural-isomorphism-Large-Precategory γ
 ```
