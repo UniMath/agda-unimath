@@ -6,14 +6,14 @@ module category-theory.examples-of-categories where
 
 ## Examples of categories and large categories
 
-| Category | File                                                                            |
-| ---------------- | ------------------------------------------------------------------------------- |
-| Groups           | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
-| Semigroups       | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
+| Category   | File                                                                            |
+| ---------- | ------------------------------------------------------------------------------- |
+| Groups     | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
+| Semigroups | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
 
 ## Examples of precategories and large precategories
 
-| Precategory | File                                                                                                    |
+| Precategory         | File                                                                                                    |
 | ------------------- | ------------------------------------------------------------------------------------------------------- |
 | Abelian groups      | [`group-theory.precategory-of-abelian-groups`](group-theory.precategory-of-abelian-groups.md)           |
 | Commutative monoids | [`group-theory.precategory-of-commutative-monoids`](group-theory.precategory-of-commutative-monoids.md) |

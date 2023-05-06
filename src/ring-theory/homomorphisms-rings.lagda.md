@@ -27,8 +27,8 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-monoids
 
-open import ring-theory.rings
 open import ring-theory.homomorphisms-semirings
+open import ring-theory.rings
 ```
 
 </details>
@@ -93,7 +93,7 @@ is-prop-preserves-unit-hom-Ab R S f =
 module _
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
   where
-  
+
   is-ring-homomorphism-hom-Ab-Prop :
     type-hom-Ab (ab-Ring R) (ab-Ring S) → Prop (l1 ⊔ l2)
   is-ring-homomorphism-hom-Ab-Prop f =
@@ -126,7 +126,7 @@ module _
     set-subset
       ( hom-Ab (ab-Ring R) (ab-Ring S))
       ( is-ring-homomorphism-hom-Ab-Prop R S)
-  
+
   type-hom-Ring : UU (l1 ⊔ l2)
   type-hom-Ring = type-Set hom-Ring
 
@@ -196,7 +196,7 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   preserves-mul-id-hom-Ring : preserves-mul-hom-Ab R R (id-hom-Ab (ab-Ring R))
   preserves-mul-id-hom-Ring x y = refl
 
@@ -207,7 +207,7 @@ module _
     is-ring-homomorphism-hom-Ab R R (id-hom-Ab (ab-Ring R))
   pr1 is-ring-homomorphism-id-hom-Ring = preserves-mul-id-hom-Ring
   pr2 is-ring-homomorphism-id-hom-Ring = preserves-unit-id-hom-Ring
-  
+
   id-hom-Ring : type-hom-Ring R R
   pr1 id-hom-Ring = id-hom-Ab (ab-Ring R)
   pr2 id-hom-Ring = is-ring-homomorphism-id-hom-Ring
@@ -220,7 +220,7 @@ module _
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3)
   (g : type-hom-Ring S T) (f : type-hom-Ring R S)
   where
-  
+
   hom-ab-comp-hom-Ring : type-hom-Ab (ab-Ring R) (ab-Ring T)
   hom-ab-comp-hom-Ring =
     comp-hom-Ab
@@ -248,7 +248,7 @@ module _
       ( multiplicative-monoid-Ring R)
       ( multiplicative-monoid-Ring T)
       ( hom-multiplicative-monoid-comp-hom-Ring)
-  
+
   preserves-unit-comp-hom-Ring :
     preserves-unit-hom-Ab R T hom-ab-comp-hom-Ring
   preserves-unit-comp-hom-Ring =
@@ -256,7 +256,7 @@ module _
       ( multiplicative-monoid-Ring R)
       ( multiplicative-monoid-Ring T)
       ( hom-multiplicative-monoid-comp-hom-Ring)
-  
+
   is-ring-homomorphism-comp-hom-Ring :
     is-ring-homomorphism-hom-Ab R T hom-ab-comp-hom-Ring
   pr1 is-ring-homomorphism-comp-hom-Ring = preserves-mul-comp-hom-Ring
@@ -289,7 +289,7 @@ module _
 module _
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
   where
-  
+
   htpy-eq-hom-Ring :
     (g : type-hom-Ring R S) → (f ＝ g) → htpy-hom-Ring R S f g
   htpy-eq-hom-Ring .f refl = refl-htpy-hom-Ring R S f
