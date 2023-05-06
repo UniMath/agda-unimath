@@ -39,6 +39,7 @@ open import order-theory.least-elements-posets public
 open import order-theory.least-elements-preorders public
 open import order-theory.least-upper-bounds-posets public
 open import order-theory.locally-finite-posets public
+open import order-theory.lower-bounds-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
