@@ -21,6 +21,13 @@ open import order-theory.total-preorders
 
 </details>
 
+## Idea
+
+A **total order**, or a \*\*linear order, is a poset `P` such that for every two
+elements `x` and `y` in `P` the disjunction `(x ≤ y) ∨ (y ≤ x)` holds. In other
+words, total orders are totally ordered in the sense tat any two elements are
+comparable.
+
 ## Definitions
 
 ### Being a totally ordered poset

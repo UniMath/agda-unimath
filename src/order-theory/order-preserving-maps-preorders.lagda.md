@@ -25,8 +25,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two preorders is siad to be
-order preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two preorders is said to be
+**order preserving** if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 

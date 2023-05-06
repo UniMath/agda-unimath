@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A preorder is a type equipped with a reflexive, transitive relation that is
+A **preorder** is a type equipped with a reflexive, transitive relation that is
 valued in propositions.
 
 ## Definition

@@ -18,6 +18,11 @@ open import order-theory.posets
 
 </details>
 
+## Idea
+
+A **least element** in a poset `P` is an element `b` such that `b ≤ x` holds for
+every element `x : P`.
+
 ## Definition
 
 ```agda

@@ -23,8 +23,8 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two posets is siad to be order
-preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two posets is siad to be
+**order preserving** if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 

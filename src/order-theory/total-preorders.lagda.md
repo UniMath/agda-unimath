@@ -17,6 +17,13 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **total preorder** is a preorder `P` such that for every two elements
+`x y : P` the disjunction `(x ≤ y) ∨ (y ≤ x)` holds. In other words, total
+preorders are totally ordered in the sense that any two elements can be
+compared.
+
 ## Definition
 
 ### Being a total preorder

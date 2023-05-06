@@ -23,8 +23,8 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-A frame homomorphism is an order preserving map between posets that additionally
-preserves binary meets and arbitrary joins.
+A **frame homomorphism** is an order preserving map between posets that
+additionally preserves binary meets and arbitrary joins.
 
 ## Definitions
 

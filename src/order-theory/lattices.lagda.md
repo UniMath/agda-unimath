@@ -22,8 +22,11 @@ open import order-theory.posets
 
 ## Idea
 
-A lattice is a poset in which every pair of elements has a meet (a greatest
-lower bound) and a join (a least upper bound)
+A **lattice** is a poset in which every pair of elements has a meet (a greatest
+lower bound) and a join (a least upper bound).
+
+Note that we don't require that meets distribute over joins. Such lattices are
+called [distributive lattices](order-theory.distributive-lattices.md).
 
 ## Definitions
 

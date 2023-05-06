@@ -16,6 +16,11 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **largest element** in a preorder `P` is an element `t` such that `x ≤ t`
+holds for every `x : P`.
+
 ## Definition
 
 ```agda

@@ -22,11 +22,8 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-A meet sup lattice homomorphism is an order preserving map between the
-underlying posets that preserves meets and sup. In fact any sup lattice
-neccesarily has binary meets but we have yet to give a proof of this fact in the
-library. Thus, we opt (for now) to treat the two structures as existing
-independently.
+A \*\*homomorphism of meet-suplattices is a homomorphism of meet-semilattices
+that in addition preserves least upper bounds.
 
 ## Definitions
 
