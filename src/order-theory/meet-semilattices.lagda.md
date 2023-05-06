@@ -28,13 +28,18 @@ open import order-theory.preorders
 ## Idea
 
 A **meet-semilattice** is a poset in which every pair of elements has a greatest
-binary-lower bound. Alternatively, meet-semilattices can be defined algebraically as a set `X` equipped with a binary operation `∧ : X → X → X` satisfying
+binary-lower bound. Alternatively, meet-semilattices can be defined
+algebraically as a set `X` equipped with a binary operation `∧ : X → X → X`
+satisfying
 
 1. Asociativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
 2. Commutativity: `x ∧ y ＝ y ∧ x`,
 3. Idempotency: `x ∧ x ＝ x`.
 
-We will follow the algebraic approach for our principal definition of meet-semilattices, since it requires only one universe level. This is necessary in order to consider the [large category](category-theory.large-categories.md) of meet-semilattices.
+We will follow the algebraic approach for our principal definition of
+meet-semilattices, since it requires only one universe level. This is necessary
+in order to consider the [large category](category-theory.large-categories.md)
+of meet-semilattices.
 
 ## Definitions
 
