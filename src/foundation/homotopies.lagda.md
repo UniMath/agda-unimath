@@ -290,7 +290,6 @@ module _
 
 ## See also
 
-- We postulate that homotopy is equivalent to identity of functions in
+- We postulate that homotopies characterize identifications in (dependent)
+  function types in the file
   [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
-- We define an equational reasoning syntax for homotopies in
-  [`foundation.equational-reasoning`](foundation.equational-reasoning.md).
