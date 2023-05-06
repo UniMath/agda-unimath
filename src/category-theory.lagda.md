@@ -13,6 +13,7 @@
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Abelian groups        | [`group-theory.precategory-of-abelian-groups`](group-theory.precategory-of-abelian-groups.md)                             |
 | Commutative monoids   | [`group-theory.precategory-of-commutative-monoids`](group-theory.precategory-of-commutative-monoids.md)                   |
+| Commutative rings     | [`commutative-algebra.precategory-of-commutative-rings`](commutative-algebra.precategory-of-commutative-rings.md)         |
 | Commutative semirings | [`commutative-algebra.precategory-of-commutative-semirings`](commutative-algebra.precategory-of-commutative-semirings.md) |
 | Concrete groups       | [`group-theory.precategory-of-concrete-groups`](group-theory.precategory-of-concrete-groups.md)                           |
 | Finite species        | [`species.precategory-of-finite-species`](species.precategory-of-finite-species.md)                                       |

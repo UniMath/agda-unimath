@@ -314,10 +314,10 @@ module _
       is-contr-total-htpy-hom-Ring
       htpy-eq-hom-Ring
 
-  equiv-htpy-eq-hom-Ring :
+  extensionality-hom-Ring :
     (g : type-hom-Ring R S) → (f ＝ g) ≃ htpy-hom-Ring R S f g
-  pr1 (equiv-htpy-eq-hom-Ring g) = htpy-eq-hom-Ring g
-  pr2 (equiv-htpy-eq-hom-Ring g) = is-equiv-htpy-eq-hom-Ring g
+  pr1 (extensionality-hom-Ring g) = htpy-eq-hom-Ring g
+  pr2 (extensionality-hom-Ring g) = is-equiv-htpy-eq-hom-Ring g
 
   eq-htpy-hom-Ring :
     (g : type-hom-Ring R S) → htpy-hom-Ring R S f g → f ＝ g
@@ -327,41 +327,44 @@ module _
 ### Associativity of composition of ring homomorphisms
 
 ```agda
-associative-comp-hom-Ring :
+module _
   { l1 l2 l3 l4 : Level}
-  ( R : Ring l1) (S : Ring l2) (T : Ring l3) (U : Ring l4) →
+  ( R : Ring l1) (S : Ring l2) (T : Ring l3) (U : Ring l4)
   ( h : type-hom-Ring T U)
   ( g : type-hom-Ring S T)
-  ( f : type-hom-Ring R S) →
-  Id (comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
-     (comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
-associative-comp-hom-Ring R S T U h g f =
-  eq-htpy-hom-Ring R U
-    ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
+  ( f : type-hom-Ring R S)
+  where
+
+  associative-comp-hom-Ring :
+    ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f) ＝
     ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
-    ( refl-htpy)
+  associative-comp-hom-Ring =
+    eq-htpy-hom-Ring R U
+      ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
+      ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
+      ( refl-htpy)
 ```
 
 ### Unit laws for composition of ring homomorphisms
 
 ```agda
-left-unit-law-comp-hom-Ring :
-  { l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S) →
-  Id (comp-hom-Ring R S S (id-hom-Ring S) f) f
-left-unit-law-comp-hom-Ring R S f =
-  eq-htpy-hom-Ring R S
-    ( comp-hom-Ring R S S (id-hom-Ring S) f)
-    ( f)
-    ( refl-htpy)
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  where
 
-right-unit-law-comp-hom-Ring :
-  { l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S) →
-  Id (comp-hom-Ring R R S f (id-hom-Ring R)) f
-right-unit-law-comp-hom-Ring R S f =
-  eq-htpy-hom-Ring R S
-    ( comp-hom-Ring R R S f (id-hom-Ring R))
-    ( f)
-    ( refl-htpy)
+  left-unit-law-comp-hom-Ring : comp-hom-Ring R S S (id-hom-Ring S) f ＝ f
+  left-unit-law-comp-hom-Ring =
+    eq-htpy-hom-Ring R S
+      ( comp-hom-Ring R S S (id-hom-Ring S) f)
+      ( f)
+      ( refl-htpy)
+
+  right-unit-law-comp-hom-Ring : comp-hom-Ring R R S f (id-hom-Ring R) ＝ f
+  right-unit-law-comp-hom-Ring =
+    eq-htpy-hom-Ring R S
+      ( comp-hom-Ring R R S f (id-hom-Ring R))
+      ( f)
+      ( refl-htpy)
 ```
 
 ### The underlying morphism of abelian groups of the identity ring homomorphism is the identity homomorphism of abelian groups

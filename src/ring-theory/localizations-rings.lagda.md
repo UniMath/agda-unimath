@@ -132,7 +132,7 @@ unique-extension-universal-property-localization-Ring R S T x f H up-f h K =
   is-contr-equiv'
     ( fib (precomp-universal-property-localization-Ring R S T x f H) (pair h K))
     ( equiv-tot ( λ g →
-      ( equiv-htpy-eq-hom-Ring R T (comp-hom-Ring R S T g f) h) ∘e
+      ( extensionality-hom-Ring R T (comp-hom-Ring R S T g f) h) ∘e
       ( extensionality-type-subtype'
         ( inverts-element-hom-ring-Prop R T x)
         ( precomp-universal-property-localization-Ring R S T x f H g)
