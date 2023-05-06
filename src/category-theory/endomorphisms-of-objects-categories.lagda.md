@@ -26,43 +26,43 @@ open import group-theory.semigroups
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2) (X : obj-Cat C)
+  {l1 l2 : Level} (C : Category l1 l2) (X : obj-Category C)
   where
 
-  endo-Cat : UU l2
-  endo-Cat = type-hom-Cat C X X
+  endo-Category : UU l2
+  endo-Category = type-hom-Category C X X
 
-  comp-endo-Cat : endo-Cat → endo-Cat → endo-Cat
-  comp-endo-Cat g f = comp-hom-Cat C g f
+  comp-endo-Category : endo-Category → endo-Category → endo-Category
+  comp-endo-Category g f = comp-hom-Category C g f
 
-  id-endo-Cat : endo-Cat
-  id-endo-Cat = id-hom-Cat C
+  id-endo-Category : endo-Category
+  id-endo-Category = id-hom-Category C
 
-  associative-comp-endo-Cat :
-    (h g f : endo-Cat) →
-    ( comp-endo-Cat (comp-endo-Cat h g) f) ＝
-    ( comp-endo-Cat h (comp-endo-Cat g f))
-  associative-comp-endo-Cat = associative-comp-hom-Cat C
+  associative-comp-endo-Category :
+    (h g f : endo-Category) →
+    ( comp-endo-Category (comp-endo-Category h g) f) ＝
+    ( comp-endo-Category h (comp-endo-Category g f))
+  associative-comp-endo-Category = associative-comp-hom-Category C
 
-  left-unit-law-comp-endo-Cat :
-    (f : endo-Cat) → comp-endo-Cat id-endo-Cat f ＝ f
-  left-unit-law-comp-endo-Cat = left-unit-law-comp-hom-Cat C
+  left-unit-law-comp-endo-Category :
+    (f : endo-Category) → comp-endo-Category id-endo-Category f ＝ f
+  left-unit-law-comp-endo-Category = left-unit-law-comp-hom-Category C
 
-  right-unit-law-comp-endo-Cat :
-    (f : endo-Cat) → comp-endo-Cat f id-endo-Cat ＝ f
-  right-unit-law-comp-endo-Cat = right-unit-law-comp-hom-Cat C
+  right-unit-law-comp-endo-Category :
+    (f : endo-Category) → comp-endo-Category f id-endo-Category ＝ f
+  right-unit-law-comp-endo-Category = right-unit-law-comp-hom-Category C
 
-  set-endo-Cat : Set l2
-  set-endo-Cat = hom-Cat C X X
+  set-endo-Category : Set l2
+  set-endo-Category = hom-Category C X X
 
-  semigroup-endo-Cat : Semigroup l2
-  pr1 semigroup-endo-Cat = set-endo-Cat
-  pr1 (pr2 semigroup-endo-Cat) = comp-endo-Cat
-  pr2 (pr2 semigroup-endo-Cat) = associative-comp-endo-Cat
+  semigroup-endo-Category : Semigroup l2
+  pr1 semigroup-endo-Category = set-endo-Category
+  pr1 (pr2 semigroup-endo-Category) = comp-endo-Category
+  pr2 (pr2 semigroup-endo-Category) = associative-comp-endo-Category
 
-  monoid-endo-Cat : Monoid l2
-  pr1 monoid-endo-Cat = semigroup-endo-Cat
-  pr1 (pr2 monoid-endo-Cat) = id-endo-Cat
-  pr1 (pr2 (pr2 monoid-endo-Cat)) = left-unit-law-comp-endo-Cat
-  pr2 (pr2 (pr2 monoid-endo-Cat)) = right-unit-law-comp-endo-Cat
+  monoid-endo-Category : Monoid l2
+  pr1 monoid-endo-Category = semigroup-endo-Category
+  pr1 (pr2 monoid-endo-Category) = id-endo-Category
+  pr1 (pr2 (pr2 monoid-endo-Category)) = left-unit-law-comp-endo-Category
+  pr2 (pr2 (pr2 monoid-endo-Category)) = right-unit-law-comp-endo-Category
 ```

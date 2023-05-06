@@ -31,39 +31,42 @@ most one morphism between any two objects).
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2) (A : obj-Cat C)
+  {l1 l2 : Level} (C : Category l1 l2) (A : obj-Category C)
   where
 
-  is-sieve-Cat-Prop :
-    {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
-    Prop (l1 ⊔ l2 ⊔ l3)
-  is-sieve-Cat-Prop S =
+  is-sieve-Category-Prop :
+    { l3 : Level}
+    ( S : (X Y : obj-Category C) →
+    subtype l3 (type-hom-Category C X Y)) → Prop (l1 ⊔ l2 ⊔ l3)
+  is-sieve-Category-Prop S =
     Π-Prop
-      ( obj-Cat C)
+      ( obj-Category C)
       ( λ X →
         Π-Prop
-          ( obj-Cat C)
+          ( obj-Category C)
           ( λ Y →
             Π-Prop
-              ( obj-Cat C)
+              ( obj-Category C)
               ( λ Z →
                 Π-Prop
                   ( type-subtype (S Y X))
                   ( λ f →
                     Π-Prop
-                      ( type-hom-Cat C Z Y)
+                      ( type-hom-Category C Z Y)
                       ( λ g →
                         S Z X
-                          ( comp-hom-Cat
+                          ( comp-hom-Category
                               C (inclusion-subtype (S Y X) f) g))))))
 
-  is-sieve-Cat :
-    {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
-    UU (l1 ⊔ l2 ⊔ l3)
-  is-sieve-Cat S = type-Prop (is-sieve-Cat-Prop S)
+  is-sieve-Category :
+    { l3 : Level}
+    ( S : (X Y : obj-Category C) →
+    subtype l3 (type-hom-Category C X Y)) → UU (l1 ⊔ l2 ⊔ l3)
+  is-sieve-Category S = type-Prop (is-sieve-Category-Prop S)
 
-  is-prop-is-sieve-Cat :
-    {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
-    is-prop (is-sieve-Cat S)
-  is-prop-is-sieve-Cat S = is-prop-type-Prop (is-sieve-Cat-Prop S)
+  is-prop-is-sieve-Category :
+    { l3 : Level}
+    ( S : (X Y : obj-Category C) → subtype l3 (type-hom-Category C X Y)) →
+    is-prop (is-sieve-Category S)
+  is-prop-is-sieve-Category S = is-prop-type-Prop (is-sieve-Category-Prop S)
 ```

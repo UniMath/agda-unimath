@@ -52,54 +52,61 @@ module _
   is-category-Precategory : UU (l1 ⊔ l2)
   is-category-Precategory = type-Prop is-category-Precategory-Prop
 
-Cat : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Cat l1 l2 = Σ (Precategory l1 l2) is-category-Precategory
+Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Category l1 l2 = Σ (Precategory l1 l2) is-category-Precategory
 
 module _
-  {l1 l2 : Level} (C : Cat l1 l2)
+  {l1 l2 : Level} (C : Category l1 l2)
   where
 
-  precategory-Cat : Precategory l1 l2
-  precategory-Cat = pr1 C
+  precategory-Category : Precategory l1 l2
+  precategory-Category = pr1 C
 
-  obj-Cat : UU l1
-  obj-Cat = obj-Precategory precategory-Cat
+  obj-Category : UU l1
+  obj-Category = obj-Precategory precategory-Category
 
-  hom-Cat : obj-Cat → obj-Cat → Set l2
-  hom-Cat = hom-Precategory precategory-Cat
+  hom-Category : obj-Category → obj-Category → Set l2
+  hom-Category = hom-Precategory precategory-Category
 
-  type-hom-Cat : obj-Cat → obj-Cat → UU l2
-  type-hom-Cat = type-hom-Precategory precategory-Cat
+  type-hom-Category : obj-Category → obj-Category → UU l2
+  type-hom-Category = type-hom-Precategory precategory-Category
 
-  is-set-type-hom-Cat : (x y : obj-Cat) → is-set (type-hom-Cat x y)
-  is-set-type-hom-Cat = is-set-type-hom-Precategory precategory-Cat
+  is-set-type-hom-Category :
+    (x y : obj-Category) → is-set (type-hom-Category x y)
+  is-set-type-hom-Category = is-set-type-hom-Precategory precategory-Category
 
-  comp-hom-Cat :
-    {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
-  comp-hom-Cat = comp-hom-Precategory precategory-Cat
+  comp-hom-Category :
+    {x y z : obj-Category} →
+    type-hom-Category y z → type-hom-Category x y → type-hom-Category x z
+  comp-hom-Category = comp-hom-Precategory precategory-Category
 
-  associative-comp-hom-Cat :
-    {x y z w : obj-Cat}
-    (h : type-hom-Cat z w) (g : type-hom-Cat y z) (f : type-hom-Cat x y) →
-    comp-hom-Cat (comp-hom-Cat h g) f ＝
-    comp-hom-Cat h (comp-hom-Cat g f)
-  associative-comp-hom-Cat = associative-comp-hom-Precategory precategory-Cat
+  associative-comp-hom-Category :
+    {x y z w : obj-Category}
+    (h : type-hom-Category z w)
+    (g : type-hom-Category y z)
+    (f : type-hom-Category x y) →
+    comp-hom-Category (comp-hom-Category h g) f ＝
+    comp-hom-Category h (comp-hom-Category g f)
+  associative-comp-hom-Category =
+    associative-comp-hom-Precategory precategory-Category
 
-  id-hom-Cat : {x : obj-Cat} → type-hom-Cat x x
-  id-hom-Cat = id-hom-Precategory precategory-Cat
+  id-hom-Category : {x : obj-Category} → type-hom-Category x x
+  id-hom-Category = id-hom-Precategory precategory-Category
 
-  left-unit-law-comp-hom-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → comp-hom-Cat id-hom-Cat f ＝ f
-  left-unit-law-comp-hom-Cat =
-    left-unit-law-comp-hom-Precategory precategory-Cat
+  left-unit-law-comp-hom-Category :
+    {x y : obj-Category} (f : type-hom-Category x y) →
+    comp-hom-Category id-hom-Category f ＝ f
+  left-unit-law-comp-hom-Category =
+    left-unit-law-comp-hom-Precategory precategory-Category
 
-  right-unit-law-comp-hom-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → comp-hom-Cat f id-hom-Cat ＝ f
-  right-unit-law-comp-hom-Cat =
-    right-unit-law-comp-hom-Precategory precategory-Cat
+  right-unit-law-comp-hom-Category :
+    {x y : obj-Category} (f : type-hom-Category x y) →
+    comp-hom-Category f id-hom-Category ＝ f
+  right-unit-law-comp-hom-Category =
+    right-unit-law-comp-hom-Precategory precategory-Category
 
-  is-category-Cat : is-category-Precategory precategory-Cat
-  is-category-Cat = pr2 C
+  is-category-Category : is-category-Precategory precategory-Category
+  is-category-Category = pr2 C
 ```
 
 ## Examples
@@ -125,9 +132,9 @@ is-category-Set-Precategory l x =
       ( is-contr-total-equiv-Set x))
     ( iso-eq-Set x)
 
-Set-Cat : (l : Level) → Cat (lsuc l) l
-pr1 (Set-Cat l) = Set-Precategory l
-pr2 (Set-Cat l) = is-category-Set-Precategory l
+Set-Category : (l : Level) → Category (lsuc l) l
+pr1 (Set-Category l) = Set-Precategory l
+pr2 (Set-Category l) = is-category-Set-Precategory l
 ```
 
 ## Properties
@@ -140,18 +147,18 @@ type is a set.
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2)
+  {l1 l2 : Level} (C : Category l1 l2)
   where
 
-  is-1-type-obj-Cat : is-1-type (obj-Cat C)
-  is-1-type-obj-Cat x y =
+  is-1-type-obj-Category : is-1-type (obj-Category C)
+  is-1-type-obj-Category x y =
     is-set-is-equiv
-      ( iso-Precategory (precategory-Cat C) x y)
-      ( iso-eq-Precategory (precategory-Cat C) x y)
-      ( is-category-Cat C x y)
-      ( is-set-iso-Precategory (precategory-Cat C) x y)
+      ( iso-Precategory (precategory-Category C) x y)
+      ( iso-eq-Precategory (precategory-Category C) x y)
+      ( is-category-Category C x y)
+      ( is-set-iso-Precategory (precategory-Category C) x y)
 
-  obj-Cat-1-Type : 1-Type l1
-  pr1 obj-Cat-1-Type = obj-Cat C
-  pr2 obj-Cat-1-Type = is-1-type-obj-Cat
+  obj-Category-1-Type : 1-Type l1
+  pr1 obj-Category-1-Type = obj-Category C
+  pr2 obj-Category-1-Type = is-1-type-obj-Category
 ```

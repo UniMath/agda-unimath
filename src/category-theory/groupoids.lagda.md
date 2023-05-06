@@ -37,66 +37,70 @@ A groupoid is a category in which every morphism is an isomorphism.
 ## Definition
 
 ```agda
-is-groupoid-Cat-Prop : {l1 l2 : Level} (C : Cat l1 l2) → Prop (l1 ⊔ l2)
-is-groupoid-Cat-Prop C = is-groupoid-Precategory-Prop (precategory-Cat C)
+is-groupoid-Category-Prop :
+  {l1 l2 : Level} (C : Category l1 l2) → Prop (l1 ⊔ l2)
+is-groupoid-Category-Prop C =
+  is-groupoid-Precategory-Prop (precategory-Category C)
 
-is-groupoid-Cat : {l1 l2 : Level} (C : Cat l1 l2) → UU (l1 ⊔ l2)
-is-groupoid-Cat C = is-groupoid-Precategory (precategory-Cat C)
+is-groupoid-Category :
+  {l1 l2 : Level} (C : Category l1 l2) → UU (l1 ⊔ l2)
+is-groupoid-Category C =
+  is-groupoid-Precategory (precategory-Category C)
 
 Groupoid : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Groupoid l1 l2 = Σ (Cat l1 l2) is-groupoid-Cat
+Groupoid l1 l2 = Σ (Category l1 l2) is-groupoid-Category
 
 module _
   {l1 l2 : Level} (G : Groupoid l1 l2)
   where
 
-  cat-Groupoid : Cat l1 l2
+  cat-Groupoid : Category l1 l2
   cat-Groupoid = pr1 G
 
   precat-Groupoid : Precategory l1 l2
-  precat-Groupoid = precategory-Cat cat-Groupoid
+  precat-Groupoid = precategory-Category cat-Groupoid
 
   obj-Groupoid : UU l1
-  obj-Groupoid = obj-Cat cat-Groupoid
+  obj-Groupoid = obj-Category cat-Groupoid
 
   hom-Groupoid : obj-Groupoid → obj-Groupoid → Set l2
-  hom-Groupoid = hom-Cat cat-Groupoid
+  hom-Groupoid = hom-Category cat-Groupoid
 
   type-hom-Groupoid : obj-Groupoid → obj-Groupoid → UU l2
-  type-hom-Groupoid = type-hom-Cat cat-Groupoid
+  type-hom-Groupoid = type-hom-Category cat-Groupoid
 
   id-hom-Groupoid :
     {x : obj-Groupoid} → type-hom-Groupoid x x
-  id-hom-Groupoid = id-hom-Cat cat-Groupoid
+  id-hom-Groupoid = id-hom-Category cat-Groupoid
 
   comp-hom-Groupoid :
     {x y z : obj-Groupoid} → type-hom-Groupoid y z →
     type-hom-Groupoid x y → type-hom-Groupoid x z
-  comp-hom-Groupoid = comp-hom-Cat cat-Groupoid
+  comp-hom-Groupoid = comp-hom-Category cat-Groupoid
 
   associative-comp-hom-Groupoid :
     {x y z w : obj-Groupoid} (h : type-hom-Groupoid z w)
     (g : type-hom-Groupoid y z) (f : type-hom-Groupoid x y) →
     ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
     ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
-  associative-comp-hom-Groupoid = associative-comp-hom-Cat cat-Groupoid
+  associative-comp-hom-Groupoid = associative-comp-hom-Category cat-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
     ( comp-hom-Groupoid id-hom-Groupoid f) ＝ f
   left-unit-law-comp-hom-Groupoid =
-    left-unit-law-comp-hom-Cat cat-Groupoid
+    left-unit-law-comp-hom-Category cat-Groupoid
 
   right-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
     ( comp-hom-Groupoid f id-hom-Groupoid) ＝ f
   right-unit-law-comp-hom-Groupoid =
-    right-unit-law-comp-hom-Cat cat-Groupoid
+    right-unit-law-comp-hom-Category cat-Groupoid
 
   iso-Groupoid : (x y : obj-Groupoid) → UU l2
-  iso-Groupoid = iso-Cat cat-Groupoid
+  iso-Groupoid = iso-Category cat-Groupoid
 
-  is-groupoid-Groupoid : is-groupoid-Cat cat-Groupoid
+  is-groupoid-Groupoid : is-groupoid-Category cat-Groupoid
   is-groupoid-Groupoid = pr2 G
 ```
 
@@ -181,7 +185,7 @@ module _
   where
 
   1-type-Groupoid : 1-Type l1
-  1-type-Groupoid = obj-Cat-1-Type (cat-Groupoid G)
+  1-type-Groupoid = obj-Category-1-Type (cat-Groupoid G)
 ```
 
 #### The groupoid obtained from the 1-type induced by a groupoid `G` is `G` itself
@@ -192,7 +196,7 @@ module _
   where
 
   functor-equiv-groupoid-1-type-Groupoid :
-    functor-Cat
+    functor-Category
       ( cat-Groupoid (groupoid-1-Type (1-type-Groupoid G)))
       ( cat-Groupoid G)
   pr1 functor-equiv-groupoid-1-type-Groupoid = id
