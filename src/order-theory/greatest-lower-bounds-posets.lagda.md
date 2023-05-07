@@ -22,17 +22,19 @@ open import order-theory.posets
 
 ## Idea
 
-A **greatest lower bound** of `a` and `b` in a poset `P` is an element `x` such that the logical equivalence
+A **greatest lower bound** of `a` and `b` in a poset `P` is an element `x` such
+that the logical equivalence
 
 ```md
   ((y ≤ a) ∧ (y ≤ b)) ⇔ (y ≤ x)
 ```
 
-holds for every element `y` in `P`.
-Similarly, a **greatest lower bound** of a family `a : I → P` of elements of `P` is an element `x` of `P` such that the logical equivalence
+holds for every element `y` in `P`. Similarly, a **greatest lower bound** of a
+family `a : I → P` of elements of `P` is an element `x` of `P` such that the
+logical equivalence
 
 ```md
-  (∀ᵢ (y ≤ aᵢ)) ⇔ (y ≤ x) 
+  (∀ᵢ (y ≤ aᵢ)) ⇔ (y ≤ x)
 ```
 
 holds for every element `y` in `P`.
@@ -159,7 +161,7 @@ module _
 
   eq-is-greatest-binary-lower-bound-Poset :
     {x y : type-Poset P} →
-    is-greatest-binary-lower-bound-Poset P a b x  →
+    is-greatest-binary-lower-bound-Poset P a b x →
     is-greatest-binary-lower-bound-Poset P a b y →
     x ＝ y
   eq-is-greatest-binary-lower-bound-Poset {x} {y} H K =

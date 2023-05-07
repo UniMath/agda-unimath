@@ -147,5 +147,5 @@ module _
       ( hom-set-Poset
         ( poset-Order-Theoretic-Meet-Semilattice A)
         ( poset-Order-Theoretic-Meet-Semilattice B))
-      ( preserves-meet-hom-Poset-Prop) 
+      ( preserves-meet-hom-Poset-Prop)
 ```

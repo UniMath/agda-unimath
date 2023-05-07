@@ -468,7 +468,7 @@ module _
     (x ∧ (y ∧ z)) ≤ x
   leq-left-triple-meet-Order-Theoretic-Meet-Semilattice' =
     leq-left-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-    
+
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' :
     (x ∧ (y ∧ z)) ≤ y
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' =
