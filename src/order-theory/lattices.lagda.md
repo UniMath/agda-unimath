@@ -93,16 +93,24 @@ module _
   is-meet-semilattice-Lattice : is-meet-semilattice-Poset poset-Lattice
   is-meet-semilattice-Lattice = pr1 is-lattice-Lattice
 
+  meet-semilattice-Lattice : Meet-Semilattice l1
+  meet-semilattice-Lattice =
+    meet-semilattice-Order-Theoretic-Meet-Semilattice
+      ( poset-Lattice ,
+        is-meet-semilattice-Lattice)
+
   meet-Lattice : (x y : type-Lattice) → type-Lattice
   meet-Lattice x y = pr1 (is-meet-semilattice-Lattice x y)
 
   is-join-semilattice-Lattice : is-join-semilattice-Poset poset-Lattice
   is-join-semilattice-Lattice = pr2 is-lattice-Lattice
 
-  join-semilattice-Lattice : Join-Semilattice l1 l2
-  pr1 join-semilattice-Lattice = poset-Lattice
-  pr2 join-semilattice-Lattice = is-join-semilattice-Lattice
+  join-semilattice-Lattice : Join-Semilattice l1
+  join-semilattice-Lattice =
+    join-semilattice-Order-Theoretic-Join-Semilattice
+      ( poset-Lattice ,
+        is-join-semilattice-Lattice)
 
   join-Lattice : (x y : type-Lattice) → type-Lattice
-  join-Lattice = join-Join-Semilattice join-semilattice-Lattice
+  join-Lattice x y = pr1 (is-join-semilattice-Lattice x y)
 ```
