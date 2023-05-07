@@ -18,7 +18,7 @@ open import order-theory.preorders
 
 ## Idea
 
-A lower type in a preorder `P` is a downwards closed subtype of `P`.
+A **lower type** in a preorder `P` is a downwards closed subtype of `P`.
 
 ## Definition
 

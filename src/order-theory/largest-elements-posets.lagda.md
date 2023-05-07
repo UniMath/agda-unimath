@@ -18,6 +18,11 @@ open import order-theory.posets
 
 </details>
 
+## Idea
+
+A **largest element** in a poset is an element `t` such that `x ≤ t` holds for
+every `x : P`.
+
 ## Definition
 
 ```agda

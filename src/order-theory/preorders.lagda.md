@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A preorder is a type equipped with a reflexive, transitive relation that is
+A **preorder** is a type equipped with a reflexive, transitive relation that is
 valued in propositions.
 
 ## Definition
@@ -86,30 +86,37 @@ module _
 Inequalities in preorders can be constructed by equational reasoning as follows:
 
 ```md
-preorder X reasoning
-  x ≤ y by ineq-1 inside X
-    ≤ z by ineq-2 inside X
-    ≤ v by ineq-3 inside X
+calculate-in-Preorder X
+  chain-of-inequalities
+  x ≤ y
+      by ineq-1
+      in-Preorder X
+    ≤ z
+      by ineq-2
+      in-Preorder X
+    ≤ v
+      by ineq-3
+      in-Preorder X
 ```
 
 Note, however, that in our setup of equational reasoning with inequalities it is
 not possible to mix inequalities with equalities or strict inequalities.
 
 ```agda
-infixl 1 preorder_reasoning_
-infixl 0 step-preorder-reasoning
+infixl 1 calculate-in-Preorder_chain-of-inequalities_
+infixl 0 step-calculate-in-Preorder
 
-preorder_reasoning_ :
+calculate-in-Preorder_chain-of-inequalities_ :
   {l1 l2 : Level} (X : Preorder l1 l2)
   (x : type-Preorder X) → leq-Preorder X x x
-preorder_reasoning_ = refl-leq-Preorder
+calculate-in-Preorder_chain-of-inequalities_ = refl-leq-Preorder
 
-step-preorder-reasoning :
+step-calculate-in-Preorder :
   {l1 l2 : Level} (X : Preorder l1 l2)
   {x y : type-Preorder X} → leq-Preorder X x y →
   (z : type-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
-step-preorder-reasoning X {x} {y} u z v =
+step-calculate-in-Preorder X {x} {y} u z v =
   transitive-leq-Preorder X x y z v u
 
-syntax step-preorder-reasoning X u z v = u ≤ z by v inside X
+syntax step-calculate-in-Preorder X u z v = u ≤ z by v in-Preorder X
 ```

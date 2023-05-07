@@ -19,6 +19,11 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **subpreorder** of a preorder `P` is a subtype of `P`. By restriction of the
+ordering on `P`, the subpreorder inherits the structure of a preorder.
+
 ## Definition
 
 ### Subpreorders

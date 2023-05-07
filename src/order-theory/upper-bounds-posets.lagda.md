@@ -7,6 +7,7 @@ module order-theory.upper-bounds-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -45,6 +46,17 @@ module _
     (x y z : type-Poset P) → is-prop (is-binary-upper-bound-Poset x y z)
   is-prop-is-binary-upper-bound-Poset x y z =
     is-prop-type-Prop (is-binary-upper-bound-Poset-Prop x y z)
+
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {a b x : type-Poset P}
+  (H : is-binary-upper-bound-Poset P a b x)
+  where
+
+  leq-left-is-binary-upper-bound-Poset : leq-Poset P a x
+  leq-left-is-binary-upper-bound-Poset = pr1 H
+
+  leq-right-is-binary-upper-bound-Poset : leq-Poset P b x
+  leq-right-is-binary-upper-bound-Poset = pr2 H
 ```
 
 ### Upper bounds of families of elements
@@ -71,4 +83,42 @@ module _
     is-prop (is-upper-bound-family-of-elements-Poset f z)
   is-prop-is-upper-bound-family-of-elements-Poset f z =
     is-prop-type-Prop (is-upper-bound-family-of-elements-Poset-Prop f z)
+```
+
+## Properties
+
+### Any element greater than an upper bound of `a` and `b` is an upper bound of `a` and `b`
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {a b x : type-Poset P}
+  (H : is-binary-upper-bound-Poset P a b x)
+  where
+
+  is-binary-upper-bound-leq-Poset :
+    {y : type-Poset P} →
+    leq-Poset P x y → is-binary-upper-bound-Poset P a b y
+  pr1 (is-binary-upper-bound-leq-Poset K) =
+    transitive-leq-Poset P a x _
+      ( K)
+      ( leq-left-is-binary-upper-bound-Poset P H)
+  pr2 (is-binary-upper-bound-leq-Poset K) =
+    transitive-leq-Poset P b x _
+      ( K)
+      ( leq-right-is-binary-upper-bound-Poset P H)
+```
+
+### Any element greater than an upper bound of a family of elements `a` is an upper bound of `a`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} {a : I → type-Poset P}
+  {x : type-Poset P} (H : is-upper-bound-family-of-elements-Poset P a x)
+  where
+
+  is-upper-bound-family-of-elements-leq-Poset :
+    {y : type-Poset P} → leq-Poset P x y →
+    is-upper-bound-family-of-elements-Poset P a y
+  is-upper-bound-family-of-elements-leq-Poset K i =
+    transitive-leq-Poset P (a i) x _ K (H i)
 ```

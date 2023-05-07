@@ -33,25 +33,25 @@ needed at this time.
 
 ```agda
 module _
-  {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
+  {l1 : Level} (l2 : Level) (X : Meet-Semilattice l1)
   where
 
-  is-meet-suplattice-Poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-meet-suplattice-Poset-Prop =
-    prod-Prop
-      ( is-meet-semilattice-Poset-Prop P)
-      ( is-suplattice-Poset-Prop l3 P)
+  is-meet-suplattice-Meet-Semilattice-Prop : Prop (l1 ⊔ lsuc l2)
+  is-meet-suplattice-Meet-Semilattice-Prop =
+    is-suplattice-Poset-Prop l2 (poset-Meet-Semilattice X)
 
-  is-meet-suplattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-meet-suplattice-Poset = type-Prop is-meet-suplattice-Poset-Prop
+  is-meet-suplattice-Meet-Semilattice : UU (l1 ⊔ lsuc l2)
+  is-meet-suplattice-Meet-Semilattice =
+    type-Prop is-meet-suplattice-Meet-Semilattice-Prop
 
-  is-prop-is-meet-suplattice-Poset : is-prop is-meet-suplattice-Poset
-  is-prop-is-meet-suplattice-Poset =
-    is-prop-type-Prop is-meet-suplattice-Poset-Prop
+  is-prop-is-meet-suplattice-Meet-Semilattice :
+    is-prop is-meet-suplattice-Meet-Semilattice
+  is-prop-is-meet-suplattice-Meet-Semilattice =
+    is-prop-type-Prop is-meet-suplattice-Meet-Semilattice-Prop
 
-Meet-Suplattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Meet-Suplattice l1 l2 l3 =
-  Σ (Poset l1 l2) (is-meet-suplattice-Poset l3)
+Meet-Suplattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Meet-Suplattice l1 l2 =
+  Σ (Meet-Semilattice l1) (is-meet-suplattice-Meet-Semilattice l2)
 ```
 
 We need to provide the appropriate components to state the infinite distributive
@@ -59,20 +59,24 @@ law.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Meet-Suplattice l1 l2 l3)
+  {l1 l2 : Level} (A : Meet-Suplattice l1 l2)
   where
 
-  poset-Meet-Suplattice : Poset l1 l2
-  poset-Meet-Suplattice = pr1 A
+  meet-semilattice-Meet-Suplattice : Meet-Semilattice l1
+  meet-semilattice-Meet-Suplattice = pr1 A
+
+  poset-Meet-Suplattice : Poset l1 l1
+  poset-Meet-Suplattice =
+    poset-Meet-Semilattice meet-semilattice-Meet-Suplattice
 
   type-Meet-Suplattice : UU l1
   type-Meet-Suplattice =
     type-Poset poset-Meet-Suplattice
 
-  leq-meet-suplattice-Prop : (x y : type-Meet-Suplattice) → Prop l2
+  leq-meet-suplattice-Prop : (x y : type-Meet-Suplattice) → Prop l1
   leq-meet-suplattice-Prop = leq-Poset-Prop poset-Meet-Suplattice
 
-  leq-Meet-Suplattice : (x y : type-Meet-Suplattice) → UU l2
+  leq-Meet-Suplattice : (x y : type-Meet-Suplattice) → UU l1
   leq-Meet-Suplattice = leq-Poset poset-Meet-Suplattice
 
   is-prop-leq-Meet-Suplattice :
@@ -101,38 +105,22 @@ module _
   set-Meet-Suplattice : Set l1
   set-Meet-Suplattice = set-Poset poset-Meet-Suplattice
 
-  is-meet-semilattice-Meet-Suplattice :
-    is-meet-semilattice-Poset poset-Meet-Suplattice
-  is-meet-semilattice-Meet-Suplattice = pr1 (pr2 A)
-
-  meet-semilattice-Meet-Suplattice : Meet-Semilattice l1 l2
-  meet-semilattice-Meet-Suplattice =
-    ( poset-Meet-Suplattice , is-meet-semilattice-Meet-Suplattice)
-
   is-suplattice-Meet-Suplattice :
-    is-suplattice-Poset l3 poset-Meet-Suplattice
-  is-suplattice-Meet-Suplattice = pr2 (pr2 A)
+    is-suplattice-Poset l2 poset-Meet-Suplattice
+  is-suplattice-Meet-Suplattice = pr2 A
 
-  suplattice-Meet-Suplattice : Suplattice l1 l2 l3
+  suplattice-Meet-Suplattice : Suplattice l1 l1 l2
   suplattice-Meet-Suplattice =
     ( poset-Meet-Suplattice , is-suplattice-Meet-Suplattice)
-
-  meet-suplattice-Meet-Suplattice :
-    Meet-Suplattice l1 l2 l3
-  pr1 meet-suplattice-Meet-Suplattice =
-    poset-Meet-Suplattice
-  pr1 (pr2 meet-suplattice-Meet-Suplattice) =
-    is-meet-semilattice-Meet-Suplattice
-  pr2 (pr2 meet-suplattice-Meet-Suplattice) =
-    is-suplattice-Meet-Suplattice
 
   meet-Meet-Suplattice :
     (x y : type-Meet-Suplattice) →
     type-Meet-Suplattice
-  meet-Meet-Suplattice x y = pr1 (is-meet-semilattice-Meet-Suplattice x y)
+  meet-Meet-Suplattice =
+    meet-Meet-Semilattice meet-semilattice-Meet-Suplattice
 
   sup-Meet-Suplattice :
-    (I : UU l3) → (I → type-Meet-Suplattice) →
+    (I : UU l2) → (I → type-Meet-Suplattice) →
     type-Meet-Suplattice
   sup-Meet-Suplattice I f = pr1 (is-suplattice-Meet-Suplattice I f)
 ```
@@ -141,9 +129,9 @@ module _
 
 ```agda
 distributive-law-meet-suplattice :
-  (l1 l2 l3 : Level) → (Meet-Suplattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
-distributive-law-meet-suplattice l1 l2 l3 A =
-  (a : type-Meet-Suplattice A) → {I : UU l3} →
+  (l1 l2 : Level) → (Meet-Suplattice l1 l2) → UU (l1 ⊔ lsuc l2)
+distributive-law-meet-suplattice l1 l2 A =
+  (a : type-Meet-Suplattice A) → {I : UU l2} →
   (b : I → type-Meet-Suplattice A) →
   (meet-Meet-Suplattice A a (sup-Meet-Suplattice A I b) ＝
   sup-Meet-Suplattice A I (λ i → (meet-Meet-Suplattice A a (b i))))

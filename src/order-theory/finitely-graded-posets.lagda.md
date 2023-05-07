@@ -39,7 +39,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A finitely graded poset consists of a family of types indexed by
+A **finitely graded poset** consists of a family of types indexed by
 `Fin (succ-ℕ k)` equipped with an ordering relation from `Fin (inl i)` to
 `Fin (succ-Fin (inl i))` for each `i : Fin k`.
 

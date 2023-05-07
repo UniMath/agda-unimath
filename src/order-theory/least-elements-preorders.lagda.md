@@ -16,6 +16,11 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **least element** in a preorder `P` is an element `b` such that `b ≤ x` holds
+for every element `x : P`.
+
 ## Definition
 
 ```agda
