@@ -30,6 +30,7 @@ open import order-theory.ideals-preorders public
 open import order-theory.infinite-distributive-law public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public
+open import order-theory.large-meet-semilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
 open import order-theory.largest-elements-posets public

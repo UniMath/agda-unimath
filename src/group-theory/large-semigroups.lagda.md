@@ -16,10 +16,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **large semigroup** with universe indexing function `α : Level → Level` consists of:
+A **large semigroup** with universe indexing function `α : Level → Level`
+consists of:
 
 - For each universe level `l` a set `X l : UU (α l)`
-- For any two universe levels `l1` and `l2` a binary operation `μ l1 l2 : X l1 → X l2 → X (l1 ⊔ l2)` satisfying the following associativity law:
+- For any two universe levels `l1` and `l2` a binary operation
+  `μ l1 l2 : X l1 → X l2 → X (l1 ⊔ l2)` satisfying the following associativity
+  law:
 
 ```md
   μ (l1 ⊔ l2) l3 (μ l1 l2 x y) z ＝ μ l1 (l2 ⊔ l3) x (μ l2 l3 y z).

@@ -18,7 +18,9 @@ open import group-theory.large-semigroups
 
 ## Idea
 
-A **large meet-semilattice** is a [large semigroup](group-theory.large-semigroups.md) which is commutative and idempotent.
+A **large meet-semilattice** is a
+[large semigroup](group-theory.large-semigroups.md) which is commutative and
+idempotent.
 
 ## Definition
 

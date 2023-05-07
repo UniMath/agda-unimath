@@ -79,6 +79,7 @@ open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.kernels public
 open import group-theory.kernels-homomorphisms-concrete-groups public
+open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
