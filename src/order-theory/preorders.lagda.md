@@ -88,9 +88,15 @@ Inequalities in preorders can be constructed by equational reasoning as follows:
 ```md
 calculate-in-Preorder X
   chain-of-inequalities
-  x ≤ y by ineq-1 in-Preorder X
-    ≤ z by ineq-2 in-Preorder X
-    ≤ v by ineq-3 in-Preorder X
+  x ≤ y
+      by ineq-1
+      in-Preorder X
+    ≤ z
+      by ineq-2
+      in-Preorder X
+    ≤ v
+      by ineq-3
+      in-Preorder X
 ```
 
 Note, however, that in our setup of equational reasoning with inequalities it is

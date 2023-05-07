@@ -59,7 +59,7 @@ module _
 
   preserves-meets-hom-Frame :
     (H : hom-Frame) →
-    preserves-meets
+    preserves-meet
       ( meet-semilattice-Frame A)
       ( meet-semilattice-Frame B)
       ( map-hom-Frame H)

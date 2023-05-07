@@ -10,6 +10,7 @@ module order-theory.meet-semilattices where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -43,7 +44,7 @@ of meet-semilattices.
 
 ## Definitions
 
-### Algebraic definition of meet-semilattices
+### The predicate on semigroups of being a meet-semilattice
 
 ```agda
 module _
@@ -79,7 +80,11 @@ module _
     is-prop is-meet-semilattice-Semigroup
   is-prop-is-meet-semilattice-Semigroup =
     is-prop-type-Prop is-meet-semilattice-Semigroup-Prop
+```
 
+### The algebraic definition of meet-semilattices
+
+```agda
 Meet-Semilattice : (l : Level) → UU (lsuc l)
 Meet-Semilattice l = type-subtype is-meet-semilattice-Semigroup-Prop
 
@@ -236,7 +241,7 @@ module _
             by K)
 ```
 
-### Order theoretic meet-semilattices
+### The predicate on posets of being a meet-semilattice
 
 ```agda
 module _
@@ -274,7 +279,11 @@ module _
         ( meet-is-meet-semilattice-Poset x y)
     is-greatest-binary-lower-bound-meet-is-meet-semilattice-Poset x y =
       pr2 (H x y)
+```
 
+### The order-theoretic definition of meet semilattices
+
+```agda
 Order-Theoretic-Meet-Semilattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Order-Theoretic-Meet-Semilattice l1 l2 =
   Σ (Poset l1 l2) is-meet-semilattice-Poset
@@ -322,12 +331,12 @@ module _
     refl-leq-Poset poset-Order-Theoretic-Meet-Semilattice
 
   antisymmetric-leq-Order-Theoretic-Meet-Semilattice :
-    (x y : type-Order-Theoretic-Meet-Semilattice) →
+    {x y : type-Order-Theoretic-Meet-Semilattice} →
     leq-Order-Theoretic-Meet-Semilattice x y →
     leq-Order-Theoretic-Meet-Semilattice y x →
     x ＝ y
-  antisymmetric-leq-Order-Theoretic-Meet-Semilattice =
-    antisymmetric-leq-Poset poset-Order-Theoretic-Meet-Semilattice
+  antisymmetric-leq-Order-Theoretic-Meet-Semilattice {x} {y} =
+    antisymmetric-leq-Poset poset-Order-Theoretic-Meet-Semilattice x y
 
   transitive-leq-Order-Theoretic-Meet-Semilattice :
     (x y z : type-Order-Theoretic-Meet-Semilattice) →
@@ -364,44 +373,233 @@ module _
       poset-Order-Theoretic-Meet-Semilattice
       is-meet-semilattice-Order-Theoretic-Meet-Semilattice
 
-  is-binary-lower-bound-meet-Order-Theoretic-Semilattice :
+  is-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice :
     (x y : type-Order-Theoretic-Meet-Semilattice) →
     is-binary-lower-bound-Poset
       ( poset-Order-Theoretic-Meet-Semilattice)
       ( x)
       ( y)
       ( x ∧ y)
-  is-binary-lower-bound-meet-Order-Theoretic-Semilattice x y =
+  is-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice x y =
     is-binary-lower-bound-is-greatest-binary-lower-bound-Poset
       ( poset-Order-Theoretic-Meet-Semilattice)
       ( is-greatest-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice
         ( x)
         ( y))
-      
 
-  associative-meet-Order-Theoretic-Meet-Semilattice :
-    (x y z : type-Order-Theoretic-Meet-Semilattice) →
-    ((x ∧ y) ∧ z) ＝ (x ∧ (y ∧ z))
-  associative-meet-Order-Theoretic-Meet-Semilattice x y z =
-    eq-is-greatest-binary-lower-bound-Poset
+  leq-left-meet-Order-Theoretic-Meet-Semilattice :
+    (x y : type-Order-Theoretic-Meet-Semilattice) →
+    leq-Order-Theoretic-Meet-Semilattice (x ∧ y) x
+  leq-left-meet-Order-Theoretic-Meet-Semilattice x y =
+    leq-left-is-binary-lower-bound-Poset
       ( poset-Order-Theoretic-Meet-Semilattice)
+      ( is-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice x y)
+
+  leq-right-meet-Order-Theoretic-Meet-Semilattice :
+    (x y : type-Order-Theoretic-Meet-Semilattice) →
+    leq-Order-Theoretic-Meet-Semilattice (x ∧ y) y
+  leq-right-meet-Order-Theoretic-Meet-Semilattice x y =
+    leq-right-is-binary-lower-bound-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice)
+      ( is-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice x y)
+
+  leq-meet-Order-Theoretic-Meet-Semilattice :
+    {x y z : type-Order-Theoretic-Meet-Semilattice} →
+    leq-Order-Theoretic-Meet-Semilattice z x →
+    leq-Order-Theoretic-Meet-Semilattice z y →
+    leq-Order-Theoretic-Meet-Semilattice z (x ∧ y)
+  leq-meet-Order-Theoretic-Meet-Semilattice {x} {y} {z} H K =
+    forward-implication
       ( is-greatest-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice
-        ( x ∧ y)
+        ( x)
+        ( y)
         ( z))
-      ( λ y →
-        pair
-          ( λ H → {!!})
-          ( λ H → {!!}))
+      ( H , K)
 ```
 
-### Algebraic meet-semilattices
+## Properties
+
+### The meet operation of order theoretic meet-semilattices is associative
 
 ```agda
-Algebraic-Meet-Semilattice : (l : Level) → UU (lsuc l)
-Algebraic-Meet-Semilattice l =
-  Σ ( Semigroup l)
-    ( λ X →
-      ( (x y : type-Semigroup X) →
-        Id (mul-Semigroup X x y) (mul-Semigroup X y x)) ×
-      ( (x : type-Semigroup X) → Id (mul-Semigroup X x x) x))
+module _
+  {l1 l2 : Level} (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  (x y z : type-Order-Theoretic-Meet-Semilattice A)
+  where
+
+  private
+    _∧_ = meet-Order-Theoretic-Meet-Semilattice A
+    _≤_ = leq-Order-Theoretic-Meet-Semilattice A
+
+  leq-left-triple-meet-Order-Theoretic-Meet-Semilattice :
+    ((x ∧ y) ∧ z) ≤ x
+  leq-left-triple-meet-Order-Theoretic-Meet-Semilattice =
+    calculate-in-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice A)
+      chain-of-inequalities
+        (x ∧ y) ∧ z
+          ≤ x ∧ y
+            by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+          ≤ x
+            by leq-left-meet-Order-Theoretic-Meet-Semilattice A x y
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+
+  leq-center-triple-meet-Order-Theoretic-Meet-Semilattice :
+    ((x ∧ y) ∧ z) ≤ y
+  leq-center-triple-meet-Order-Theoretic-Meet-Semilattice =
+    calculate-in-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice A)
+      chain-of-inequalities
+        (x ∧ y) ∧ z
+          ≤ x ∧ y
+            by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+          ≤ y
+            by leq-right-meet-Order-Theoretic-Meet-Semilattice A x y
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+
+  leq-right-triple-meet-Order-Theoretic-Meet-Semilattice :
+    ((x ∧ y) ∧ z) ≤ z
+  leq-right-triple-meet-Order-Theoretic-Meet-Semilattice =
+    leq-right-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
+
+  leq-left-triple-meet-Order-Theoretic-Meet-Semilattice' :
+    (x ∧ (y ∧ z)) ≤ x
+  leq-left-triple-meet-Order-Theoretic-Meet-Semilattice' =
+    leq-left-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
+    
+  leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' :
+    (x ∧ (y ∧ z)) ≤ y
+  leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' =
+    calculate-in-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice A)
+      chain-of-inequalities
+        x ∧ (y ∧ z)
+          ≤ y ∧ z
+            by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+          ≤ y
+            by leq-left-meet-Order-Theoretic-Meet-Semilattice A y z
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+
+  leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' :
+    (x ∧ (y ∧ z)) ≤ z
+  leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' =
+    calculate-in-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice A)
+      chain-of-inequalities
+        x ∧ (y ∧ z)
+          ≤ y ∧ z
+            by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+          ≤ z
+            by leq-right-meet-Order-Theoretic-Meet-Semilattice A y z
+            in-Poset poset-Order-Theoretic-Meet-Semilattice A
+
+  leq-associative-meet-Order-Theoretic-Meet-Semilattice :
+    ((x ∧ y) ∧ z) ≤ (x ∧ (y ∧ z))
+  leq-associative-meet-Order-Theoretic-Meet-Semilattice =
+    leq-meet-Order-Theoretic-Meet-Semilattice A
+      ( leq-left-triple-meet-Order-Theoretic-Meet-Semilattice)
+      ( leq-meet-Order-Theoretic-Meet-Semilattice A
+        ( leq-center-triple-meet-Order-Theoretic-Meet-Semilattice)
+        ( leq-right-triple-meet-Order-Theoretic-Meet-Semilattice))
+
+  leq-associative-meet-Order-Theoretic-Meet-Semilattice' :
+    (x ∧ (y ∧ z)) ≤ ((x ∧ y) ∧ z)
+  leq-associative-meet-Order-Theoretic-Meet-Semilattice' =
+    leq-meet-Order-Theoretic-Meet-Semilattice A
+      ( leq-meet-Order-Theoretic-Meet-Semilattice A
+        ( leq-left-triple-meet-Order-Theoretic-Meet-Semilattice')
+        ( leq-center-triple-meet-Order-Theoretic-Meet-Semilattice'))
+      ( leq-right-triple-meet-Order-Theoretic-Meet-Semilattice')
+
+  associative-meet-Order-Theoretic-Meet-Semilattice :
+    ((x ∧ y) ∧ z) ＝ (x ∧ (y ∧ z))
+  associative-meet-Order-Theoretic-Meet-Semilattice =
+    antisymmetric-leq-Order-Theoretic-Meet-Semilattice A
+      leq-associative-meet-Order-Theoretic-Meet-Semilattice
+      leq-associative-meet-Order-Theoretic-Meet-Semilattice'
+```
+
+### The meet operation of order theoretic meet-semilattices is commutative
+
+```agda
+module _
+  {l1 l2 : Level} (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  (x y : type-Order-Theoretic-Meet-Semilattice A)
+  where
+
+  private
+    _∧_ = meet-Order-Theoretic-Meet-Semilattice A
+    _≤_ = leq-Order-Theoretic-Meet-Semilattice A
+
+  leq-commutative-meet-Order-Theoretic-Meet-Semilattice :
+    (x ∧ y) ≤ (y ∧ x)
+  leq-commutative-meet-Order-Theoretic-Meet-Semilattice =
+    leq-meet-Order-Theoretic-Meet-Semilattice A
+      ( leq-right-meet-Order-Theoretic-Meet-Semilattice A x y)
+      ( leq-left-meet-Order-Theoretic-Meet-Semilattice A x y)
+
+  leq-commutative-meet-Order-Theoretic-Meet-Semilattice' :
+    (y ∧ x) ≤ (x ∧ y)
+  leq-commutative-meet-Order-Theoretic-Meet-Semilattice' =
+    leq-meet-Order-Theoretic-Meet-Semilattice A
+      ( leq-right-meet-Order-Theoretic-Meet-Semilattice A y x)
+      ( leq-left-meet-Order-Theoretic-Meet-Semilattice A y x)
+
+  commutative-meet-Order-Theoretic-Meet-Semilattice :
+    (x ∧ y) ＝ (y ∧ x)
+  commutative-meet-Order-Theoretic-Meet-Semilattice =
+    antisymmetric-leq-Order-Theoretic-Meet-Semilattice A
+      leq-commutative-meet-Order-Theoretic-Meet-Semilattice
+      leq-commutative-meet-Order-Theoretic-Meet-Semilattice'
+```
+
+### The meet operation of order theoretic meet-semilattices is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  (x : type-Order-Theoretic-Meet-Semilattice A)
+  where
+
+  private
+    _∧_ = meet-Order-Theoretic-Meet-Semilattice A
+    _≤_ = leq-Order-Theoretic-Meet-Semilattice A
+
+  idempotent-meet-Order-Theoretic-Meet-Semilattice :
+    (x ∧ x) ＝ x
+  idempotent-meet-Order-Theoretic-Meet-Semilattice =
+    antisymmetric-leq-Order-Theoretic-Meet-Semilattice A
+      ( leq-left-meet-Order-Theoretic-Meet-Semilattice A x x)
+      ( leq-meet-Order-Theoretic-Meet-Semilattice A
+        ( refl-leq-Order-Theoretic-Meet-Semilattice A x)
+        ( refl-leq-Order-Theoretic-Meet-Semilattice A x))
+```
+
+### Any order theoretic meet-semilattice is an algebraic meet semilattice
+
+```agda
+module _
+  {l1 l2 : Level} (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  semigroup-Order-Theoretic-Meet-Semilattice : Semigroup l1
+  pr1 semigroup-Order-Theoretic-Meet-Semilattice =
+    set-Order-Theoretic-Meet-Semilattice A
+  pr1 (pr2 semigroup-Order-Theoretic-Meet-Semilattice) =
+    meet-Order-Theoretic-Meet-Semilattice A
+  pr2 (pr2 semigroup-Order-Theoretic-Meet-Semilattice) =
+    associative-meet-Order-Theoretic-Meet-Semilattice A
+
+  meet-semilattice-Order-Theoretic-Meet-Semilattice :
+    Meet-Semilattice l1
+  pr1 meet-semilattice-Order-Theoretic-Meet-Semilattice =
+    semigroup-Order-Theoretic-Meet-Semilattice
+  pr1 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
+    commutative-meet-Order-Theoretic-Meet-Semilattice A
+  pr2 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
+    idempotent-meet-Order-Theoretic-Meet-Semilattice A
 ```

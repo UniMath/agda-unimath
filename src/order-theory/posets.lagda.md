@@ -104,9 +104,15 @@ Inequalities in preorders can be constructed by equational reasoning as follows:
 ```md
 calculate-in-Poset X
   chain-of-inequalities
-  x ≤ y by ineq-1 in-Poset X
-    ≤ z by ineq-2 in-Poset X
-    ≤ v by ineq-3 in-Poset X
+  x ≤ y
+      by ineq-1
+      in-Poset X
+    ≤ z
+      by ineq-2
+      in-Poset X
+    ≤ v
+      by ineq-3
+      in-Poset X
 ```
 
 Note, however, that in our setup of equational reasoning with inequalities it is

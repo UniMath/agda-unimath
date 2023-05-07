@@ -100,6 +100,22 @@ module _
   is-binary-lower-bound-is-greatest-binary-lower-bound-Poset H =
     backward-implication-is-greatest-binary-lower-bound-Poset H
       ( refl-leq-Poset P _)
+
+  leq-left-is-greatest-binary-lower-bound-Poset :
+    {x : type-Poset P} →
+    is-greatest-binary-lower-bound-Poset P a b x →
+    leq-Poset P x a
+  leq-left-is-greatest-binary-lower-bound-Poset H =
+    leq-left-is-binary-lower-bound-Poset P
+      ( is-binary-lower-bound-is-greatest-binary-lower-bound-Poset H)
+
+  leq-right-is-greatest-binary-lower-bound-Poset :
+    {x : type-Poset P} →
+    is-greatest-binary-lower-bound-Poset P a b x →
+    leq-Poset P x b
+  leq-right-is-greatest-binary-lower-bound-Poset H =
+    leq-right-is-binary-lower-bound-Poset P
+      ( is-binary-lower-bound-is-greatest-binary-lower-bound-Poset H)
 ```
 
 ### The proposition that two elements have a greatest lower bound

@@ -22,7 +22,7 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-A \*\*homomorphism of meet-suplattices is a homomorphism of meet-semilattices
+A **homomorphism of meet-suplattices** is a homomorphism of meet-semilattices
 that in addition preserves least upper bounds.
 
 ## Definitions
@@ -38,7 +38,7 @@ module _
     (type-Meet-Suplattice A → type-Meet-Suplattice B) →
     UU (l1 ⊔ lsuc l2 ⊔ l3)
   preserves-meets-sups f =
-    preserves-meets
+    preserves-meet
       ( meet-semilattice-Meet-Suplattice A)
       ( meet-semilattice-Meet-Suplattice B)
       ( f) ×
@@ -77,7 +77,7 @@ module _
 
   preserves-meets-Meet-Suplattice :
     (H : hom-Meet-Suplattice) →
-    preserves-meets
+    preserves-meet
       ( meet-semilattice-Meet-Suplattice A)
       ( meet-semilattice-Meet-Suplattice B)
       ( map-hom-Meet-Suplattice H)
