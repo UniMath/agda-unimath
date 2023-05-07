@@ -20,7 +20,7 @@ main {
   /* height: calc(100vh - var(--menu-bar-height) - 0.67em * 4); */
   overflow: auto;
   border-left: 2px solid #dfdfdf;
-  /* margin-left: 2%; */
+  margin-left: 2%;
   /* margin-right: 15px; */
   font-size: var(--pagetoc-fontsize);
 }
@@ -29,7 +29,6 @@ main {
   border-left: 1px solid var(--sidebar-bg);
   color: var(--fg) !important;
   display: block;
-  padding-bottom: 5px;
   padding-top: 5px;
   padding-left: 10px;
   text-align: left;
