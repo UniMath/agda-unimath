@@ -71,6 +71,8 @@ website: agda-html \
 		SUMMARY.md
 	@cp $(METAFILES) docs/
 	@mdbook build
+	@mkdir -p book/html/theme/images/
+	@cp theme/images/agda-unimath-logo.svg  book/html/theme/images/
 
 .PHONY: serve-website
 serve-website:

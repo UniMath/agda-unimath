@@ -1,3 +1,4 @@
+<?xml-stylesheet type="text/css" href="css/agda-logo.css" ?>
 <svg width="5217" height="1707" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
 
@@ -7,20 +8,20 @@
   <title>Layer 1</title>
   <g id="Page-1" fill="none" fill-rule="evenodd">
    <g id="Group">
-    
+
     <g id="black-logotypes">
      <g id="logotype">
       <g id="logo">
-       <circle id="left-eye" fill="#000000" cx="459" cy="489" r="27"/>
-       <circle id="right-eye" fill="#000000" cx="559" cy="489" r="27"/>
-       <path d="m1219,219l-400,400" id="wing" stroke="#000000" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
-       <path d="m1419,319l-200,200" id="tail-middle" stroke="#000000" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
-       <path d="m1419,219l-200,200" id="tail-top" stroke="#000000" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
-       <path d="m719,219l-200,200" id="head-middle" stroke="#000000" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
-       <path d="m819,219l-200,200" id="head-right" stroke="#000000" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
-       <path d="m619,219l-400,400l200,0l0,200c0,220 180,400 400,400c220,0 400,-180 400,-400l0,-200l200,-200" id="body" stroke="#000000" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+       <circle id="left-eye" fill="#000000" class="fg" cx="459" cy="489" r="27"/>
+       <circle id="right-eye" fill="#000000" class="fg" cx="559" cy="489" r="27"/>
+       <path d="m1219,219l-400,400" id="wing" stroke="#000000" class="fg" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+       <path d="m1419,319l-200,200" id="tail-middle" stroke="#000000" class="fg" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+       <path d="m1419,219l-200,200" id="tail-top" stroke="#000000" class="fg" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+       <path d="m719,219l-200,200" id="head-middle" stroke="#000000" class="fg" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+       <path d="m819,219l-200,200" id="head-right" stroke="#000000" class="fg" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+       <path d="m619,219l-400,400l200,0l0,200c0,220 180,400 400,400c220,0 400,-180 400,-400l0,-200l200,-200" id="body" stroke="#000000" class="fg" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
       </g>
-      <g id="type" stroke="#000000" stroke-width="36">
+      <g id="type" stroke="#000000" class="fg" stroke-width="36">
        <g id="A">
         <polyline id="A-body" stroke-linecap="round" stroke-linejoin="round" points="1419,1219 2421,219 2421,1219 "/>
         <path d="m1779,859.5l640.5,0" id="A-stroke"/>
@@ -42,7 +43,7 @@
     </g>
    </g>
   </g>
-  <text transform="matrix(1.61974 0 0 1.61974 -3108.15 -984.759)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="'Noto Sans Mono'" font-size="260" id="svg_1" y="1611.86434" x="3980.84999" stroke-width="0" fill="#000000">UniMath</text>
-  <path id="svg_3" d="m686.27364,1384.6193l0.56913,0l0.17587,-0.54067l0.17587,0.54067l0.56913,0l-0.46044,0.33415l0.17588,0.54067l-0.46044,-0.33416l-0.46044,0.33416l0.17588,-0.54067l-0.46044,-0.33415z" stroke-width="0" stroke="#000" fill="#000000"/>
+  <text transform="matrix(1.61974 0 0 1.61974 -3108.15 -984.759)" xml:space="preserve" text-anchor="start" font-family="'Noto Sans Mono'" font-size="260" id="svg_1" y="1611.86434" x="3980.84999" stroke-width="0" class="fg">UniMath</text>
+  <path id="svg_3" d="m686.27364,1384.6193l0.56913,0l0.17587,-0.54067l0.17587,0.54067l0.56913,0l-0.46044,0.33415l0.17588,0.54067l-0.46044,-0.33416l-0.46044,0.33416l0.17588,-0.54067l-0.46044,-0.33415z" stroke-width="0" class="fg"/>
  </g>
 </svg>
