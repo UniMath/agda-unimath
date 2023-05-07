@@ -16,6 +16,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.isomorphisms-semigroups
 open import group-theory.semigroups
 
 open import order-theory.greatest-lower-bounds-posets
@@ -602,4 +603,39 @@ module _
     commutative-meet-Order-Theoretic-Meet-Semilattice A
   pr2 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
     idempotent-meet-Order-Theoretic-Meet-Semilattice A
+```
+
+### Any meet-semilattice `A` is isomorphic to the meet-semilattice obtained from the order theoretic meet-semilattice obtained from `A`
+
+```agda
+module _
+  {l1 : Level} (A : Meet-Semilattice l1)
+  where
+
+  order-theoretic-meet-semilattice-Meet-Semilattice :
+    Order-Theoretic-Meet-Semilattice l1 l1
+  pr1 order-theoretic-meet-semilattice-Meet-Semilattice =
+    poset-Meet-Semilattice A
+  pr1 (pr2 order-theoretic-meet-semilattice-Meet-Semilattice x y) =
+    meet-Meet-Semilattice A x y
+  pr2 (pr2 order-theoretic-meet-semilattice-Meet-Semilattice x y) =
+    is-greatest-binary-lower-bound-meet-Meet-Semilattice A x y
+
+  compute-meet-order-theoretic-meet-semilattice-Meet-Semilattice :
+    (x y : type-Meet-Semilattice A) →
+    meet-Meet-Semilattice A x y ＝
+    meet-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Meet-Semilattice)
+      ( x)
+      ( y)
+  compute-meet-order-theoretic-meet-semilattice-Meet-Semilattice x y = refl
+
+  compute-order-theoretic-meet-semilattice-Meet-Semilattice :
+    type-iso-Semigroup
+      ( semigroup-Meet-Semilattice A)
+      ( semigroup-Meet-Semilattice
+        ( meet-semilattice-Order-Theoretic-Meet-Semilattice
+          ( order-theoretic-meet-semilattice-Meet-Semilattice)))
+  compute-order-theoretic-meet-semilattice-Meet-Semilattice =
+    id-iso-Semigroup (semigroup-Meet-Semilattice A)
 ```
