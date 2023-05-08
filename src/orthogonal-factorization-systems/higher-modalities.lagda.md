@@ -225,18 +225,17 @@ module _
   (Id-○ : is-modal-identity-types (○ , is-locally-small-○) unit-○)
   where
 
-  id-elim-higher-modality :
+  elim-Id-higher-modality :
     {X : UU l1} {x' y' : ○ X} →
     ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
-  id-elim-higher-modality {X} {x'} {y'} =
+  elim-Id-higher-modality {X} {x'} {y'} =
     map-inv-unit-is-modal-is-small unit-○
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y')
 ```
 
-Homogenous higher modalities are closed under identity formation in the usual
-sense
+### For homogenous higher modalities, The identity types of modal types are modal in the usual sense
 
 ```agda
 module _
