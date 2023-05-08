@@ -12,6 +12,7 @@ open import foundation.decidable-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.universe-levels
@@ -73,11 +74,21 @@ pr2 (intro-conj-Prop P Q p q) = q
 ### The universal property of conjunction
 
 ```agda
-universal-property-conj-Prop :
+iff-universal-property-conj-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
   (type-hom-Prop R P × type-hom-Prop R Q) ↔ type-hom-Prop R (conj-Prop P Q)
-pr1 (universal-property-conj-Prop P Q R) (f , g) r = (f r , g r)
-pr1 (pr2 (universal-property-conj-Prop P Q R) h) r = pr1 (h r)
-pr2 (pr2 (universal-property-conj-Prop P Q R) h) r = pr2 (h r)
+pr1 (iff-universal-property-conj-Prop P Q R) (f , g) r = (f r , g r)
+pr1 (pr2 (iff-universal-property-conj-Prop P Q R) h) r = pr1 (h r)
+pr2 (pr2 (iff-universal-property-conj-Prop P Q R) h) r = pr2 (h r)
+
+equiv-universal-property-conj-Prop :
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  {l3 : Level} (R : Prop l3) →
+  (type-hom-Prop R P × type-hom-Prop R Q) ≃ type-hom-Prop R (conj-Prop P Q)
+equiv-universal-property-conj-Prop P Q R =
+  equiv-iff'
+    ( conj-Prop (hom-Prop R P) (hom-Prop R Q))
+    ( hom-Prop R (conj-Prop P Q))
+    ( iff-universal-property-conj-Prop P Q R)
 ```

@@ -136,7 +136,7 @@ module _
 
 ```agda
 record
-  Large-Suplattice (α : Level → Level) ( β : Level → Level → Level) : UUω
+  Large-Suplattice (α : Level → Level) (β : Level → Level → Level) : UUω
   where
   constructor
     make-Large-Suplattice

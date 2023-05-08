@@ -57,7 +57,7 @@ has-meets-Prop-Large-Locale :
 meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = conj-Prop
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
   has-meets-Prop-Large-Locale =
-  universal-property-conj-Prop
+  iff-universal-property-conj-Prop
 ```
 
 ### Suprema in the large poset of propositions
