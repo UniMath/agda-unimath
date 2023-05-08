@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Let `C` be a precategory, it's opposite precategory `Cᵒᵖ` is given by reversing
+Let `C` be a precategory, its opposite precategory `Cᵒᵖ` is given by reversing
 every morphism.
 
 ## Definition
