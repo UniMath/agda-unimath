@@ -31,7 +31,7 @@ for meets over suprema** states that in any
 [meet-suplattice](order-theory.meet-suplattices.md) `A`, we have
 
 ```md
-  x ∧ ⋁ᵢ yᵢ ＝ ⋁ᵢ (x ∧ yᵢ)
+  x ∧ (⋁ᵢ yᵢ) ＝ ⋁ᵢ (x ∧ yᵢ)
 ```
 
 for every element `x : A` and any family `y : I → A`.
