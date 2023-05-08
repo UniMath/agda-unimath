@@ -151,6 +151,7 @@ open import foundation.iterating-involutions public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
 open import foundation.large-identity-types public
+open import foundation.large-locale-of-propositions public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
