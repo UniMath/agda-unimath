@@ -1,7 +1,7 @@
 # Planar binary trees
 
 ```agda
-module order-theory.planar-binary-trees where
+module trees.planar-binary-trees where
 ```
 
 <details><summary>Imports</summary>

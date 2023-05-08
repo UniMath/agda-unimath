@@ -25,21 +25,23 @@ inherited pointwise from the codomain precategory.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
+  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
   where
 
-  functor-Precat-Precat : Precat (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
-  pr1 functor-Precat-Precat = functor-Precat C D
-  pr1 (pr2 functor-Precat-Precat) F G =
-    natural-transformation-Precat-Set C D F G
-  pr1 (pr2 (pr2 functor-Precat-Precat)) =
-    (λ {F} {G} {H} → comp-natural-transformation-Precat C D F G H) ,
-    λ {F} {G} {H} {I} h g f →
-    associative-comp-natural-transformation-Precat C D {F} {G} {H} {I} f g h
-  pr2 (pr2 (pr2 functor-Precat-Precat)) =
-    (id-natural-transformation-Precat C D) ,
+  functor-precategory-Precategory :
+    Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
+  pr1 functor-precategory-Precategory = functor-Precategory C D
+  pr1 (pr2 functor-precategory-Precategory) F G =
+    natural-transformation-Precategory-Set C D F G
+  pr1 (pr2 (pr2 functor-precategory-Precategory)) =
+    ( λ {F} {G} {H} → comp-natural-transformation-Precategory C D F G H) ,
+    ( λ {F} {G} {H} {I} h g f →
+      associative-comp-natural-transformation-Precategory
+        C D {F} {G} {H} {I} f g h)
+  pr2 (pr2 (pr2 functor-precategory-Precategory)) =
+    (id-natural-transformation-Precategory C D) ,
     ( λ {F} {G} →
-      left-unit-law-comp-natural-transformation-Precat C D {F} {G}) ,
+      left-unit-law-comp-natural-transformation-Precategory C D {F} {G}) ,
     ( λ {F} {G} →
-      right-unit-law-comp-natural-transformation-Precat C D {F} {G})
+      right-unit-law-comp-natural-transformation-Precategory C D {F} {G})
 ```

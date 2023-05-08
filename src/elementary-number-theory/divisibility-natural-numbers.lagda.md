@@ -16,7 +16,6 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation

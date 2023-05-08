@@ -84,9 +84,14 @@ leq-right-leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
 is-least-upper-bound-max-ℕ :
   (m n : ℕ) → is-least-binary-upper-bound-Poset ℕ-Poset m n (max-ℕ m n)
 is-least-upper-bound-max-ℕ m n =
-  ( leq-left-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)),
-    leq-right-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n))),
-  λ x (m≤x , n≤x) → leq-max-ℕ x m n m≤x n≤x
+  prove-is-least-binary-upper-bound-Poset
+    ( ℕ-Poset)
+    { m}
+    { n}
+    { max-ℕ m n}
+    ( leq-left-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)),
+      leq-right-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)))
+    ( λ x (H , K) → leq-max-ℕ x m n H K)
 ```
 
 ### Associativity of `max-ℕ`

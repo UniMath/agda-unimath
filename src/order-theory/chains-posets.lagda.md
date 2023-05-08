@@ -16,6 +16,11 @@ open import order-theory.posets
 
 </details>
 
+## Idea
+
+A **chain** in a poset `P` is a subtype `S` of `P` such that the ordering of `P`
+restricted to `S` is linear.
+
 ## Definition
 
 ```agda
@@ -23,18 +28,18 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-chain-sub-poset-Prop :
-    {l3 : Level} (S : element-Poset X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-poset-Prop = is-chain-sub-preorder-Prop (preorder-Poset X)
+  is-chain-Subposet-Prop :
+    {l3 : Level} (S : type-Poset X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
+  is-chain-Subposet-Prop = is-chain-Subpreorder-Prop (preorder-Poset X)
 
-  is-chain-sub-Poset :
-    {l3 : Level} (S : element-Poset X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-Poset = is-chain-sub-Preorder (preorder-Poset X)
+  is-chain-Subposet :
+    {l3 : Level} (S : type-Poset X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
+  is-chain-Subposet = is-chain-Subpreorder (preorder-Poset X)
 
-  is-prop-is-chain-sub-Poset :
-    {l3 : Level} (S : element-Poset X → Prop l3) →
-    is-prop (is-chain-sub-Poset S)
-  is-prop-is-chain-sub-Poset = is-prop-is-chain-sub-Preorder (preorder-Poset X)
+  is-prop-is-chain-Subposet :
+    {l3 : Level} (S : type-Poset X → Prop l3) →
+    is-prop (is-chain-Subposet S)
+  is-prop-is-chain-Subposet = is-prop-is-chain-Subpreorder (preorder-Poset X)
 
 chain-Poset :
   {l1 l2 : Level} (l : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
@@ -44,21 +49,21 @@ module _
   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
   where
 
-  sub-preorder-chain-Poset : element-Poset X → Prop l3
+  sub-preorder-chain-Poset : type-Poset X → Prop l3
   sub-preorder-chain-Poset =
     sub-preorder-chain-Preorder (preorder-Poset X) C
 
-  element-chain-Poset : UU (l1 ⊔ l3)
-  element-chain-Poset = element-chain-Preorder (preorder-Poset X) C
+  type-chain-Poset : UU (l1 ⊔ l3)
+  type-chain-Poset = type-chain-Preorder (preorder-Poset X) C
 
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  inclusion-chain-poset-Prop :
+  inclusion-chain-Poset-Prop :
     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
     Prop (l1 ⊔ l3 ⊔ l4)
-  inclusion-chain-poset-Prop = inclusion-chain-preorder-Prop (preorder-Poset X)
+  inclusion-chain-Poset-Prop = inclusion-chain-Preorder-Prop (preorder-Poset X)
 
   inclusion-chain-Poset :
     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X → UU (l1 ⊔ l3 ⊔ l4)

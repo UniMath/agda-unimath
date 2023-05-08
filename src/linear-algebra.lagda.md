@@ -1,5 +1,7 @@
 # Linear algebra
 
+## Files in the linear algebra folder
+
 ```agda
 module linear-algebra where
 

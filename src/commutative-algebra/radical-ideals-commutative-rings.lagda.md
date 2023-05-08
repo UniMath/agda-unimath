@@ -106,10 +106,10 @@ module _
   inclusion-radical-ideal-Commutative-Ring =
     inclusion-ideal-Commutative-Ring A ideal-radical-ideal-Commutative-Ring
 
-  is-ideal-subset-radical-ideal-Commutative-Ring :
+  is-ideal-radical-ideal-Commutative-Ring :
     is-ideal-subset-Commutative-Ring A subset-radical-ideal-Commutative-Ring
-  is-ideal-subset-radical-ideal-Commutative-Ring =
-    is-ideal-subset-ideal-Commutative-Ring A
+  is-ideal-radical-ideal-Commutative-Ring =
+    is-ideal-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring
 
   contains-zero-radical-ideal-Commutative-Ring :
@@ -118,10 +118,8 @@ module _
     contains-zero-ideal-Commutative-Ring A ideal-radical-ideal-Commutative-Ring
 
   is-closed-under-addition-radical-ideal-Commutative-Ring :
-    {x y : type-Commutative-Ring A} →
-    is-in-radical-ideal-Commutative-Ring x →
-    is-in-radical-ideal-Commutative-Ring y →
-    is-in-radical-ideal-Commutative-Ring (add-Commutative-Ring A x y)
+    is-closed-under-addition-subset-Commutative-Ring A
+      subset-radical-ideal-Commutative-Ring
   is-closed-under-addition-radical-ideal-Commutative-Ring =
     is-closed-under-addition-ideal-Commutative-Ring A
       ideal-radical-ideal-Commutative-Ring

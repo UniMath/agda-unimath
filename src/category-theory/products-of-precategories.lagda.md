@@ -30,33 +30,33 @@ Composition of morphisms is given by composing each entry.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precat l1 l2)
-  (D : Precat l3 l4)
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
   where
 
-  prod-Precat :
-    Precat (l1 ⊔ l3) (l2 ⊔ l4)
-  pr1 prod-Precat = obj-Precat C × obj-Precat D
-  pr1 (pr2 prod-Precat) (x , y) (x' , y') =
-    prod-Set (hom-Precat C x x') (hom-Precat D y y')
-  pr1 (pr1 (pr1 (pr2 (pr2 prod-Precat))) (f' , g') (f , g)) =
-    comp-hom-Precat C f' f
-  pr2 (pr1 (pr1 (pr2 (pr2 prod-Precat))) (f' , g') (f , g)) =
-    comp-hom-Precat D g' g
-  pr2 (pr1 (pr2 (pr2 prod-Precat))) (f'' , g'') (f' , g') (f , g) =
+  prod-Precategory :
+    Precategory (l1 ⊔ l3) (l2 ⊔ l4)
+  pr1 prod-Precategory = obj-Precategory C × obj-Precategory D
+  pr1 (pr2 prod-Precategory) (x , y) (x' , y') =
+    prod-Set (hom-Precategory C x x') (hom-Precategory D y y')
+  pr1 (pr1 (pr1 (pr2 (pr2 prod-Precategory))) (f' , g') (f , g)) =
+    comp-hom-Precategory C f' f
+  pr2 (pr1 (pr1 (pr2 (pr2 prod-Precategory))) (f' , g') (f , g)) =
+    comp-hom-Precategory D g' g
+  pr2 (pr1 (pr2 (pr2 prod-Precategory))) (f'' , g'') (f' , g') (f , g) =
     eq-pair
-      ( associative-comp-hom-Precat C f'' f' f)
-      ( associative-comp-hom-Precat D g'' g' g)
-  pr1 (pr1 (pr2 (pr2 (pr2 prod-Precat))) (x , y)) =
-    id-hom-Precat C {x}
-  pr2 (pr1 (pr2 (pr2 (pr2 prod-Precat))) (x , y)) =
-    id-hom-Precat D {y}
-  pr1 (pr2 (pr2 (pr2 (pr2 prod-Precat)))) (f , g) =
+      ( associative-comp-hom-Precategory C f'' f' f)
+      ( associative-comp-hom-Precategory D g'' g' g)
+  pr1 (pr1 (pr2 (pr2 (pr2 prod-Precategory))) (x , y)) =
+    id-hom-Precategory C {x}
+  pr2 (pr1 (pr2 (pr2 (pr2 prod-Precategory))) (x , y)) =
+    id-hom-Precategory D {y}
+  pr1 (pr2 (pr2 (pr2 (pr2 prod-Precategory)))) (f , g) =
     eq-pair
-      ( left-unit-law-comp-hom-Precat C f)
-      ( left-unit-law-comp-hom-Precat D g)
-  pr2 (pr2 (pr2 (pr2 (pr2 prod-Precat)))) (f , g) =
+      ( left-unit-law-comp-hom-Precategory C f)
+      ( left-unit-law-comp-hom-Precategory D g)
+  pr2 (pr2 (pr2 (pr2 (pr2 prod-Precategory)))) (f , g) =
     eq-pair
-      ( right-unit-law-comp-hom-Precat C f)
-      ( right-unit-law-comp-hom-Precat D g)
+      ( right-unit-law-comp-hom-Precategory C f)
+      ( right-unit-law-comp-hom-Precategory D g)
 ```

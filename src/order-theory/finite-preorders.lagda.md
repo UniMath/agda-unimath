@@ -20,6 +20,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.decidable-preorders
 open import order-theory.decidable-subpreorders
 open import order-theory.preorders
 
@@ -31,217 +32,212 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-## Finite preorders
+## Idea
 
-We say that a preorder X is finite if X has finitely many elements and the
-ordering relation on X is decidable.
+We say that a preorder `P` is **finite** if `P` has finitely many elements and
+the ordering relation on `P` is decidable.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Preorder l1 l2)
+  {l1 l2 : Level} (P : Preorder l1 l2)
   where
 
-  is-finite-preorder-Prop : Prop (l1 ⊔ l2)
-  is-finite-preorder-Prop =
+  is-finite-Preorder-Prop : Prop (l1 ⊔ l2)
+  is-finite-Preorder-Prop =
     prod-Prop
-      ( is-finite-Prop (element-Preorder X))
-      ( Π-Prop
-        ( element-Preorder X)
-        ( λ x →
-          Π-Prop
-            ( element-Preorder X)
-            ( λ y → is-decidable-Prop (leq-preorder-Prop X x y))))
+      ( is-finite-Prop (type-Preorder P))
+      ( is-decidable-leq-Preorder-Prop P)
 
   is-finite-Preorder : UU (l1 ⊔ l2)
-  is-finite-Preorder = type-Prop is-finite-preorder-Prop
+  is-finite-Preorder = type-Prop is-finite-Preorder-Prop
 
   is-prop-is-finite-Preorder : is-prop is-finite-Preorder
-  is-prop-is-finite-Preorder = is-prop-type-Prop is-finite-preorder-Prop
+  is-prop-is-finite-Preorder = is-prop-type-Prop is-finite-Preorder-Prop
 
-  is-finite-element-is-finite-Preorder :
-    is-finite-Preorder → is-finite (element-Preorder X)
-  is-finite-element-is-finite-Preorder = pr1
+  is-finite-type-is-finite-Preorder :
+    is-finite-Preorder → is-finite (type-Preorder P)
+  is-finite-type-is-finite-Preorder = pr1
 
   is-decidable-leq-is-finite-Preorder :
     is-finite-Preorder →
-    (x y : element-Preorder X) → is-decidable (leq-Preorder X x y)
+    (x y : type-Preorder P) → is-decidable (leq-Preorder P x y)
   is-decidable-leq-is-finite-Preorder H = pr2 H
 
-Finite-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Finite-Preorder l1 l2 =
+Preorder-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Preorder-𝔽 l1 l2 =
   Σ ( 𝔽 l1)
-    ( λ X →
-      Σ ( (x y : type-𝔽 X) → Decidable-Prop l2)
+    ( λ P →
+      Σ ( (x y : type-𝔽 P) → Decidable-Prop l2)
         ( λ R →
-          ( (x : type-𝔽 X) → type-Decidable-Prop (R x x)) ×
-          ( (x y z : type-𝔽 X) →
+          ( (x : type-𝔽 P) → type-Decidable-Prop (R x x)) ×
+          ( (x y z : type-𝔽 P) →
             type-Decidable-Prop (R y z) → type-Decidable-Prop (R x y) →
             type-Decidable-Prop (R x z))))
 
 finite-preorder-is-finite-Preorder :
-  {l1 l2 : Level} (X : Preorder l1 l2) → is-finite-Preorder X →
-  Finite-Preorder l1 l2
-pr1 (pr1 (finite-preorder-is-finite-Preorder X H)) = element-Preorder X
-pr2 (pr1 (finite-preorder-is-finite-Preorder X H)) = pr1 H
-pr1 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y) =
-  leq-Preorder X x y
-pr1 (pr2 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y)) =
-  is-prop-leq-Preorder X x y
-pr2 (pr2 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y)) =
+  {l1 l2 : Level} (P : Preorder l1 l2) → is-finite-Preorder P →
+  Preorder-𝔽 l1 l2
+pr1 (pr1 (finite-preorder-is-finite-Preorder P H)) = type-Preorder P
+pr2 (pr1 (finite-preorder-is-finite-Preorder P H)) = pr1 H
+pr1 (pr1 (pr2 (finite-preorder-is-finite-Preorder P H)) x y) =
+  leq-Preorder P x y
+pr1 (pr2 (pr1 (pr2 (finite-preorder-is-finite-Preorder P H)) x y)) =
+  is-prop-leq-Preorder P x y
+pr2 (pr2 (pr1 (pr2 (finite-preorder-is-finite-Preorder P H)) x y)) =
   pr2 H x y
-pr1 (pr2 (pr2 (finite-preorder-is-finite-Preorder X H))) =
-  refl-leq-Preorder X
-pr2 (pr2 (pr2 (finite-preorder-is-finite-Preorder X H))) =
-  transitive-leq-Preorder X
+pr1 (pr2 (pr2 (finite-preorder-is-finite-Preorder P H))) =
+  refl-leq-Preorder P
+pr2 (pr2 (pr2 (finite-preorder-is-finite-Preorder P H))) =
+  transitive-leq-Preorder P
 
 module _
-  {l1 l2 : Level} (X : Finite-Preorder l1 l2)
+  {l1 l2 : Level} (P : Preorder-𝔽 l1 l2)
   where
 
-  element-Finite-Preorder-𝔽 : 𝔽 l1
-  element-Finite-Preorder-𝔽 = pr1 X
+  finite-type-Preorder-𝔽 : 𝔽 l1
+  finite-type-Preorder-𝔽 = pr1 P
 
-  element-Finite-Preorder : UU l1
-  element-Finite-Preorder = type-𝔽 element-Finite-Preorder-𝔽
+  type-Preorder-𝔽 : UU l1
+  type-Preorder-𝔽 = type-𝔽 finite-type-Preorder-𝔽
 
-  is-finite-element-Finite-Preorder : is-finite element-Finite-Preorder
-  is-finite-element-Finite-Preorder =
-    is-finite-type-𝔽 element-Finite-Preorder-𝔽
+  is-finite-type-Preorder-𝔽 : is-finite type-Preorder-𝔽
+  is-finite-type-Preorder-𝔽 =
+    is-finite-type-𝔽 finite-type-Preorder-𝔽
 
-  number-of-elements-Finite-Preorder : ℕ
-  number-of-elements-Finite-Preorder =
-    number-of-elements-is-finite is-finite-element-Finite-Preorder
+  number-of-types-Preorder-𝔽 : ℕ
+  number-of-types-Preorder-𝔽 =
+    number-of-elements-is-finite is-finite-type-Preorder-𝔽
 
-  mere-equiv-element-Finite-Preorder :
-    mere-equiv (Fin number-of-elements-Finite-Preorder) element-Finite-Preorder
-  mere-equiv-element-Finite-Preorder =
-    mere-equiv-is-finite is-finite-element-Finite-Preorder
+  mere-equiv-type-Preorder-𝔽 :
+    mere-equiv (Fin number-of-types-Preorder-𝔽) type-Preorder-𝔽
+  mere-equiv-type-Preorder-𝔽 =
+    mere-equiv-is-finite is-finite-type-Preorder-𝔽
 
-  is-set-element-Finite-Preorder : is-set element-Finite-Preorder
-  is-set-element-Finite-Preorder =
-    is-set-is-finite is-finite-element-Finite-Preorder
+  is-set-type-Preorder-𝔽 : is-set type-Preorder-𝔽
+  is-set-type-Preorder-𝔽 =
+    is-set-is-finite is-finite-type-Preorder-𝔽
 
-  has-decidable-equality-element-Finite-Preorder :
-    has-decidable-equality element-Finite-Preorder
-  has-decidable-equality-element-Finite-Preorder =
-    has-decidable-equality-is-finite is-finite-element-Finite-Preorder
+  has-decidable-equality-type-Preorder-𝔽 :
+    has-decidable-equality type-Preorder-𝔽
+  has-decidable-equality-type-Preorder-𝔽 =
+    has-decidable-equality-is-finite is-finite-type-Preorder-𝔽
 
   leq-finite-preorder-Decidable-Prop :
-    (x y : element-Finite-Preorder) → Decidable-Prop l2
-  leq-finite-preorder-Decidable-Prop = pr1 (pr2 X)
+    (x y : type-Preorder-𝔽) → Decidable-Prop l2
+  leq-finite-preorder-Decidable-Prop = pr1 (pr2 P)
 
-  leq-Finite-Preorder : (x y : element-Finite-Preorder) → UU l2
-  leq-Finite-Preorder x y =
+  leq-Preorder-𝔽 : (x y : type-Preorder-𝔽) → UU l2
+  leq-Preorder-𝔽 x y =
     type-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
 
-  is-decidable-prop-leq-Finite-Preorder :
-    (x y : element-Finite-Preorder) →
-    is-decidable-prop (leq-Finite-Preorder x y)
-  is-decidable-prop-leq-Finite-Preorder x y =
+  is-decidable-prop-leq-Preorder-𝔽 :
+    (x y : type-Preorder-𝔽) →
+    is-decidable-prop (leq-Preorder-𝔽 x y)
+  is-decidable-prop-leq-Preorder-𝔽 x y =
     is-decidable-prop-type-Decidable-Prop
       ( leq-finite-preorder-Decidable-Prop x y)
 
-  is-decidable-leq-Finite-Preorder :
-    (x y : element-Finite-Preorder) → is-decidable (leq-Finite-Preorder x y)
-  is-decidable-leq-Finite-Preorder x y =
-    is-decidable-type-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
+  is-decidable-leq-Preorder-𝔽 :
+    (x y : type-Preorder-𝔽) → is-decidable (leq-Preorder-𝔽 x y)
+  is-decidable-leq-Preorder-𝔽 x y =
+    is-decidable-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
 
-  is-prop-leq-Finite-Preorder :
-    (x y : element-Finite-Preorder) → is-prop (leq-Finite-Preorder x y)
-  is-prop-leq-Finite-Preorder x y =
+  is-prop-leq-Preorder-𝔽 :
+    (x y : type-Preorder-𝔽) → is-prop (leq-Preorder-𝔽 x y)
+  is-prop-leq-Preorder-𝔽 x y =
     is-prop-type-Decidable-Prop (leq-finite-preorder-Decidable-Prop x y)
 
-  leq-Finite-preorder-Prop :
-    (x y : element-Finite-Preorder) → Prop l2
-  pr1 (leq-Finite-preorder-Prop x y) = leq-Finite-Preorder x y
-  pr2 (leq-Finite-preorder-Prop x y) = is-prop-leq-Finite-Preorder x y
+  leq-Preorder-𝔽-Prop :
+    (x y : type-Preorder-𝔽) → Prop l2
+  pr1 (leq-Preorder-𝔽-Prop x y) = leq-Preorder-𝔽 x y
+  pr2 (leq-Preorder-𝔽-Prop x y) = is-prop-leq-Preorder-𝔽 x y
 
-  refl-leq-Finite-Preorder :
-    (x : element-Finite-Preorder) → leq-Finite-Preorder x x
-  refl-leq-Finite-Preorder = pr1 (pr2 (pr2 X))
+  refl-leq-Preorder-𝔽 :
+    (x : type-Preorder-𝔽) → leq-Preorder-𝔽 x x
+  refl-leq-Preorder-𝔽 = pr1 (pr2 (pr2 P))
 
-  transitive-leq-Finite-Preorder :
-    (x y z : element-Finite-Preorder) →
-    leq-Finite-Preorder y z → leq-Finite-Preorder x y → leq-Finite-Preorder x z
-  transitive-leq-Finite-Preorder = pr2 (pr2 (pr2 X))
+  transitive-leq-Preorder-𝔽 :
+    (x y z : type-Preorder-𝔽) →
+    leq-Preorder-𝔽 y z → leq-Preorder-𝔽 x y → leq-Preorder-𝔽 x z
+  transitive-leq-Preorder-𝔽 = pr2 (pr2 (pr2 P))
 
-  preorder-Finite-Preorder : Preorder l1 l2
-  pr1 preorder-Finite-Preorder = element-Finite-Preorder
-  pr1 (pr2 preorder-Finite-Preorder) = leq-Finite-preorder-Prop
-  pr1 (pr2 (pr2 preorder-Finite-Preorder)) = refl-leq-Finite-Preorder
-  pr2 (pr2 (pr2 preorder-Finite-Preorder)) = transitive-leq-Finite-Preorder
+  preorder-Preorder-𝔽 : Preorder l1 l2
+  pr1 preorder-Preorder-𝔽 = type-Preorder-𝔽
+  pr1 (pr2 preorder-Preorder-𝔽) = leq-Preorder-𝔽-Prop
+  pr1 (pr2 (pr2 preorder-Preorder-𝔽)) = refl-leq-Preorder-𝔽
+  pr2 (pr2 (pr2 preorder-Preorder-𝔽)) = transitive-leq-Preorder-𝔽
 
-  is-finite-preorder-Finite-Preorder :
-    is-finite-Preorder preorder-Finite-Preorder
-  pr1 is-finite-preorder-Finite-Preorder = is-finite-element-Finite-Preorder
-  pr2 is-finite-preorder-Finite-Preorder = is-decidable-leq-Finite-Preorder
+  is-finite-preorder-Preorder-𝔽 :
+    is-finite-Preorder preorder-Preorder-𝔽
+  pr1 is-finite-preorder-Preorder-𝔽 = is-finite-type-Preorder-𝔽
+  pr2 is-finite-preorder-Preorder-𝔽 = is-decidable-leq-Preorder-𝔽
 ```
 
 ### Decidable sub-preorders of finite preorders
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
-  (S : element-Finite-Preorder X → Decidable-Prop l3)
+  {l1 l2 l3 : Level} (P : Preorder-𝔽 l1 l2)
+  (S : type-Preorder-𝔽 P → Decidable-Prop l3)
   where
 
-  element-finite-sub-Preorder : UU (l1 ⊔ l3)
-  element-finite-sub-Preorder =
-    element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+  type-finite-Subpreorder : UU (l1 ⊔ l3)
+  type-finite-Subpreorder =
+    type-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
-  is-finite-element-finite-sub-Preorder : is-finite element-finite-sub-Preorder
-  is-finite-element-finite-sub-Preorder =
-    is-finite-type-decidable-subtype S (is-finite-element-Finite-Preorder X)
+  is-finite-type-finite-Subpreorder : is-finite type-finite-Subpreorder
+  is-finite-type-finite-Subpreorder =
+    is-finite-type-decidable-subtype S (is-finite-type-Preorder-𝔽 P)
 
-  eq-element-finite-sub-Preorder :
-    (x y : element-finite-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
-  eq-element-finite-sub-Preorder =
-    eq-element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+  eq-type-finite-Subpreorder :
+    (x y : type-finite-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+  eq-type-finite-Subpreorder =
+    eq-type-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
-  leq-finite-sub-Preorder-Decidable-Prop :
-    (x y : element-finite-sub-Preorder) → Decidable-Prop l2
-  leq-finite-sub-Preorder-Decidable-Prop x y =
-    leq-finite-preorder-Decidable-Prop X (pr1 x) (pr1 y)
+  leq-finite-Subpreorder-Decidable-Prop :
+    (x y : type-finite-Subpreorder) → Decidable-Prop l2
+  leq-finite-Subpreorder-Decidable-Prop x y =
+    leq-finite-preorder-Decidable-Prop P (pr1 x) (pr1 y)
 
-  leq-finite-sub-preorder-Prop :
-    (x y : element-finite-sub-Preorder) → Prop l2
-  leq-finite-sub-preorder-Prop =
-    leq-decidable-sub-preorder-Prop (preorder-Finite-Preorder X) S
+  leq-finite-Subpreorder-Prop :
+    (x y : type-finite-Subpreorder) → Prop l2
+  leq-finite-Subpreorder-Prop =
+    leq-Decidable-Subpreorder-Prop (preorder-Preorder-𝔽 P) S
 
-  leq-finite-sub-Preorder : (x y : element-finite-sub-Preorder) → UU l2
-  leq-finite-sub-Preorder =
-    leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+  leq-finite-Subpreorder : (x y : type-finite-Subpreorder) → UU l2
+  leq-finite-Subpreorder =
+    leq-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
-  is-prop-leq-finite-sub-Preorder :
-    (x y : element-finite-sub-Preorder) →
-    is-prop (leq-finite-sub-Preorder x y)
-  is-prop-leq-finite-sub-Preorder =
-    is-prop-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+  is-prop-leq-finite-Subpreorder :
+    (x y : type-finite-Subpreorder) →
+    is-prop (leq-finite-Subpreorder x y)
+  is-prop-leq-finite-Subpreorder =
+    is-prop-leq-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
-  refl-leq-finite-sub-Preorder :
-    (x : element-finite-sub-Preorder) → leq-finite-sub-Preorder x x
-  refl-leq-finite-sub-Preorder =
-    refl-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+  refl-leq-finite-Subpreorder :
+    (x : type-finite-Subpreorder) → leq-finite-Subpreorder x x
+  refl-leq-finite-Subpreorder =
+    refl-leq-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
-  transitive-leq-finite-sub-Preorder :
-    (x y z : element-finite-sub-Preorder) →
-    leq-finite-sub-Preorder y z → leq-finite-sub-Preorder x y →
-    leq-finite-sub-Preorder x z
-  transitive-leq-finite-sub-Preorder =
-    transitive-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+  transitive-leq-finite-Subpreorder :
+    (x y z : type-finite-Subpreorder) →
+    leq-finite-Subpreorder y z → leq-finite-Subpreorder x y →
+    leq-finite-Subpreorder x z
+  transitive-leq-finite-Subpreorder =
+    transitive-leq-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
 module _
-  {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
-  (S : element-Finite-Preorder X → Decidable-Prop l3)
+  {l1 l2 l3 : Level} (P : Preorder-𝔽 l1 l2)
+  (S : type-Preorder-𝔽 P → Decidable-Prop l3)
   where
 
-  element-finite-sub-Preorder-𝔽 : 𝔽 (l1 ⊔ l3)
-  pr1 element-finite-sub-Preorder-𝔽 = element-finite-sub-Preorder X S
-  pr2 element-finite-sub-Preorder-𝔽 = is-finite-element-finite-sub-Preorder X S
+  type-finite-Subpreorder-𝔽 : 𝔽 (l1 ⊔ l3)
+  pr1 type-finite-Subpreorder-𝔽 = type-finite-Subpreorder P S
+  pr2 type-finite-Subpreorder-𝔽 = is-finite-type-finite-Subpreorder P S
 
-  finite-sub-Preorder : Finite-Preorder (l1 ⊔ l3) l2
-  pr1 finite-sub-Preorder = element-finite-sub-Preorder-𝔽
-  pr1 (pr2 finite-sub-Preorder) = leq-finite-sub-Preorder-Decidable-Prop X S
-  pr1 (pr2 (pr2 finite-sub-Preorder)) = refl-leq-finite-sub-Preorder X S
-  pr2 (pr2 (pr2 finite-sub-Preorder)) = transitive-leq-finite-sub-Preorder X S
+  finite-Subpreorder : Preorder-𝔽 (l1 ⊔ l3) l2
+  pr1 finite-Subpreorder = type-finite-Subpreorder-𝔽
+  pr1 (pr2 finite-Subpreorder) = leq-finite-Subpreorder-Decidable-Prop P S
+  pr1 (pr2 (pr2 finite-Subpreorder)) = refl-leq-finite-Subpreorder P S
+  pr2 (pr2 (pr2 finite-Subpreorder)) = transitive-leq-finite-Subpreorder P S
 ```

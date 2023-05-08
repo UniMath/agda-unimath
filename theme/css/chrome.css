@@ -154,7 +154,7 @@ a > .hljs {
   min-width: auto;
 
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-content: center;
   flex-direction: column;
 

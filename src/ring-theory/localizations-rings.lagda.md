@@ -89,7 +89,7 @@ inverts-element-comp-hom-Ring R S T x g f H =
         ( ( ap
             ( map-hom-Ring S T g)
             ( is-left-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙
-          ( preserves-one-hom-Ring S T g)))
+          ( preserves-unit-hom-Ring S T g)))
       ( ( inv
           ( preserves-mul-hom-Ring S T g
             ( map-hom-Ring R S f x)
@@ -97,7 +97,7 @@ inverts-element-comp-hom-Ring R S T x g f H =
         ( ( ap
             ( map-hom-Ring S T g)
             ( is-right-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙
-          ( preserves-one-hom-Ring S T g))))
+          ( preserves-unit-hom-Ring S T g))))
 ```
 
 ### The universal property of the localization of a ring at a single element
@@ -132,7 +132,7 @@ unique-extension-universal-property-localization-Ring R S T x f H up-f h K =
   is-contr-equiv'
     ( fib (precomp-universal-property-localization-Ring R S T x f H) (pair h K))
     ( equiv-tot ( λ g →
-      ( equiv-htpy-eq-hom-Ring R T (comp-hom-Ring R S T g f) h) ∘e
+      ( extensionality-hom-Ring R T (comp-hom-Ring R S T g f) h) ∘e
       ( extensionality-type-subtype'
         ( inverts-element-hom-ring-Prop R T x)
         ( precomp-universal-property-localization-Ring R S T x f H g)

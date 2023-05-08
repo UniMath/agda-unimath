@@ -76,5 +76,5 @@ module _
   is-full-union-subtype-complement-decidable-subtype P =
     is-full-union-subtype-complement-subtype
       ( subtype-decidable-subtype P)
-      ( is-decidable-subtype-decidable-subtype P)
+      ( is-decidable-decidable-subtype P)
 ```

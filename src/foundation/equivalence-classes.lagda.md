@@ -8,7 +8,6 @@ module foundation.equivalence-classes where
 
 ```agda
 open import foundation.effective-maps-equivalence-relations
-open import foundation.equational-reasoning
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes

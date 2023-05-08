@@ -1,5 +1,7 @@
 # Primitives
 
+## Files in the primitives folder
+
 ```agda
 module primitives where
 

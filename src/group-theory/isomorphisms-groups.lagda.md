@@ -37,20 +37,22 @@ module _
   where
 
   is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-Group = is-iso-Large-Precat Group-Large-Precat {X = G} {Y = H}
+  is-iso-hom-Group =
+    is-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H}
 
   type-iso-Group : UU (l1 ⊔ l2)
-  type-iso-Group = iso-Large-Precat Group-Large-Precat G H
+  type-iso-Group = iso-Large-Precategory Group-Large-Precategory G H
 
   hom-iso-Group : type-iso-Group → type-hom-Group G H
-  hom-iso-Group = hom-iso-Large-Precat Group-Large-Precat G H
+  hom-iso-Group = hom-iso-Large-Precategory Group-Large-Precategory G H
 
   is-iso-hom-iso-Group :
     (f : type-iso-Group) → is-iso-hom-Group (hom-iso-Group f)
-  is-iso-hom-iso-Group = is-iso-hom-iso-Large-Precat Group-Large-Precat G H
+  is-iso-hom-iso-Group =
+    is-iso-hom-iso-Large-Precategory Group-Large-Precategory G H
 
   hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
-  hom-inv-iso-Group = hom-inv-iso-Large-Precat Group-Large-Precat G H
+  hom-inv-iso-Group = hom-inv-iso-Large-Precategory Group-Large-Precategory G H
 
   is-equiv-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
   is-equiv-hom-Group =
@@ -85,7 +87,7 @@ module _
   where
 
   id-iso-Group : type-iso-Group G G
-  id-iso-Group = id-iso-Large-Precat Group-Large-Precat {X = G}
+  id-iso-Group = id-iso-Large-Precategory Group-Large-Precategory {X = G}
 ```
 
 ## Properties
@@ -98,7 +100,7 @@ module _
   where
 
   iso-eq-Group : (H : Group l) → Id G H → type-iso-Group G H
-  iso-eq-Group = iso-eq-Large-Precat Group-Large-Precat G
+  iso-eq-Group = iso-eq-Large-Precategory Group-Large-Precategory G
 
   abstract
     extensionality-Group' : (H : Group l) → Id G H ≃ type-iso-Group G H
@@ -126,7 +128,7 @@ module _
 
   comp-iso-Group :
     type-iso-Group H K → type-iso-Group G H → type-iso-Group G K
-  comp-iso-Group = comp-iso-Large-Precat Group-Large-Precat G H K
+  comp-iso-Group = comp-iso-Large-Precategory Group-Large-Precategory G H K
 ```
 
 ### Group isomorphisms are stable by inversion
@@ -137,5 +139,5 @@ module _
   where
 
   inv-iso-Group : type-iso-Group G H → type-iso-Group H G
-  inv-iso-Group = inv-iso-Large-Precat Group-Large-Precat G H
+  inv-iso-Group = inv-iso-Large-Precategory Group-Large-Precategory G H
 ```

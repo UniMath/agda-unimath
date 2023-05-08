@@ -45,8 +45,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-A ring `R` is said to be commutative if its multiplicative operation is
-commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
+A ring `A` is said to be **commutative** if its multiplicative operation is
+commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
 
 ## Definition
 
@@ -55,28 +55,28 @@ commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
 ```agda
 is-commutative-Ring :
   { l : Level} → Ring l → UU l
-is-commutative-Ring R =
-  (x y : type-Ring R) → mul-Ring R x y ＝ mul-Ring R y x
+is-commutative-Ring A =
+  (x y : type-Ring A) → mul-Ring A x y ＝ mul-Ring A y x
 
 is-prop-is-commutative-Ring :
-  { l : Level} (R : Ring l) → is-prop (is-commutative-Ring R)
-is-prop-is-commutative-Ring R =
+  { l : Level} (A : Ring l) → is-prop (is-commutative-Ring A)
+is-prop-is-commutative-Ring A =
   is-prop-Π
     ( λ x →
       is-prop-Π
       ( λ y →
-        is-set-type-Ring R (mul-Ring R x y) (mul-Ring R y x)))
+        is-set-type-Ring A (mul-Ring A x y) (mul-Ring A y x)))
 
 Commutative-Ring :
   ( l : Level) → UU (lsuc l)
 Commutative-Ring l = Σ (Ring l) is-commutative-Ring
 
 module _
-  {l : Level} (R : Commutative-Ring l)
+  {l : Level} (A : Commutative-Ring l)
   where
 
   ring-Commutative-Ring : Ring l
-  ring-Commutative-Ring = pr1 R
+  ring-Commutative-Ring = pr1 A
 
   ab-Commutative-Ring : Ab l
   ab-Commutative-Ring = ab-Ring ring-Commutative-Ring
@@ -313,7 +313,7 @@ module _
   commutative-mul-Commutative-Ring :
     (x y : type-Commutative-Ring) →
     mul-Commutative-Ring x y ＝ mul-Commutative-Ring y x
-  commutative-mul-Commutative-Ring = pr2 R
+  commutative-mul-Commutative-Ring = pr2 A
 ```
 
 ### Multiplicative units in a commutative ring

@@ -1,7 +1,7 @@
-# The discrete precategory introduced by any hSet
+# Discrete categories
 
 ```agda
-module category-theory.discrete-precategories where
+module category-theory.discrete-categories where
 ```
 
 <details><summary>Imports</summary>
@@ -27,8 +27,9 @@ module _
   {l : Level} (X : Set l)
   where
 
-  Discrete-Precat : Precat _ _
-  Discrete-Precat = type-Set X , disc-Hom , composition-structure , id-structure
+  discrete-precategory-Set : Precategory l l
+  discrete-precategory-Set =
+    type-Set X , disc-Hom , composition-structure , id-structure
     where
       disc-Hom : type-Set X → type-Set X → Set l
       disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y)

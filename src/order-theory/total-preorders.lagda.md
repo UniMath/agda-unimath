@@ -17,6 +17,13 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **total preorder** is a preorder `P` such that for every two elements
+`x y : P` the disjunction `(x ≤ y) ∨ (y ≤ x)` holds. In other words, total
+preorders are totally ordered in the sense that any two elements can be
+compared.
+
 ## Definition
 
 ### Being a total preorder
@@ -26,66 +33,66 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  incident-preorder-Prop : (x y : element-Preorder X) → Prop l2
-  incident-preorder-Prop x y =
-    disj-Prop (leq-preorder-Prop X x y) (leq-preorder-Prop X y x)
+  incident-Preorder-Prop : (x y : type-Preorder X) → Prop l2
+  incident-Preorder-Prop x y =
+    disj-Prop (leq-Preorder-Prop X x y) (leq-Preorder-Prop X y x)
 
-  incident-Preorder : (x y : element-Preorder X) → UU l2
-  incident-Preorder x y = type-Prop (incident-preorder-Prop x y)
+  incident-Preorder : (x y : type-Preorder X) → UU l2
+  incident-Preorder x y = type-Prop (incident-Preorder-Prop x y)
 
   is-prop-incident-Preorder :
-    (x y : element-Preorder X) → is-prop (incident-Preorder x y)
-  is-prop-incident-Preorder x y = is-prop-type-Prop (incident-preorder-Prop x y)
+    (x y : type-Preorder X) → is-prop (incident-Preorder x y)
+  is-prop-incident-Preorder x y = is-prop-type-Prop (incident-Preorder-Prop x y)
 
-  is-total-preorder-Prop : Prop (l1 ⊔ l2)
-  is-total-preorder-Prop =
+  is-total-Preorder-Prop : Prop (l1 ⊔ l2)
+  is-total-Preorder-Prop =
     Π-Prop
-      ( element-Preorder X)
-      ( λ x → Π-Prop ( element-Preorder X) (λ y → incident-preorder-Prop x y))
+      ( type-Preorder X)
+      ( λ x → Π-Prop ( type-Preorder X) (λ y → incident-Preorder-Prop x y))
 
   is-total-Preorder : UU (l1 ⊔ l2)
-  is-total-Preorder = type-Prop is-total-preorder-Prop
+  is-total-Preorder = type-Prop is-total-Preorder-Prop
 
   is-prop-is-total-Preorder : is-prop is-total-Preorder
-  is-prop-is-total-Preorder = is-prop-type-Prop is-total-preorder-Prop
+  is-prop-is-total-Preorder = is-prop-type-Prop is-total-Preorder-Prop
 ```
 
 ### The type of total preorder
 
 ```agda
-total-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-total-Preorder l1 l2 = Σ (Preorder l1 l2) is-total-Preorder
+Total-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Total-Preorder l1 l2 = Σ (Preorder l1 l2) is-total-Preorder
 
 module _
-  {l1 l2 : Level} (X : total-Preorder l1 l2)
+  {l1 l2 : Level} (X : Total-Preorder l1 l2)
   where
 
-  preorder-total-Preorder : Preorder l1 l2
-  preorder-total-Preorder = pr1 X
+  preorder-Total-Preorder : Preorder l1 l2
+  preorder-Total-Preorder = pr1 X
 
-  is-total-preorder-total-Preorder : is-total-Preorder preorder-total-Preorder
-  is-total-preorder-total-Preorder = pr2 X
+  is-total-preorder-Total-Preorder : is-total-Preorder preorder-Total-Preorder
+  is-total-preorder-Total-Preorder = pr2 X
 
-  element-total-Preorder : UU l1
-  element-total-Preorder = element-Preorder preorder-total-Preorder
+  type-Total-Preorder : UU l1
+  type-Total-Preorder = type-Preorder preorder-Total-Preorder
 
-  leq-total-preorder-Prop : (x y : element-total-Preorder) → Prop l2
-  leq-total-preorder-Prop = leq-preorder-Prop preorder-total-Preorder
+  leq-Total-Preorder-Prop : (x y : type-Total-Preorder) → Prop l2
+  leq-Total-Preorder-Prop = leq-Preorder-Prop preorder-Total-Preorder
 
-  leq-total-Preorder : (x y : element-total-Preorder) → UU l2
-  leq-total-Preorder = leq-Preorder preorder-total-Preorder
+  leq-Total-Preorder : (x y : type-Total-Preorder) → UU l2
+  leq-Total-Preorder = leq-Preorder preorder-Total-Preorder
 
-  is-prop-leq-total-Preorder :
-    (x y : element-total-Preorder) → is-prop (leq-total-Preorder x y)
-  is-prop-leq-total-Preorder = is-prop-leq-Preorder preorder-total-Preorder
+  is-prop-leq-Total-Preorder :
+    (x y : type-Total-Preorder) → is-prop (leq-Total-Preorder x y)
+  is-prop-leq-Total-Preorder = is-prop-leq-Preorder preorder-Total-Preorder
 
-  refl-leq-total-Preorder :
-    (x : element-total-Preorder) → leq-total-Preorder x x
-  refl-leq-total-Preorder = refl-leq-Preorder preorder-total-Preorder
+  refl-leq-Total-Preorder :
+    (x : type-Total-Preorder) → leq-Total-Preorder x x
+  refl-leq-Total-Preorder = refl-leq-Preorder preorder-Total-Preorder
 
-  transitive-leq-total-Preorder :
-    (x y z : element-total-Preorder) →
-    leq-total-Preorder y z → leq-total-Preorder x y → leq-total-Preorder x z
-  transitive-leq-total-Preorder =
-    transitive-leq-Preorder preorder-total-Preorder
+  transitive-leq-Total-Preorder :
+    (x y z : type-Total-Preorder) →
+    leq-Total-Preorder y z → leq-Total-Preorder x y → leq-Total-Preorder x z
+  transitive-leq-Total-Preorder =
+    transitive-leq-Preorder preorder-Total-Preorder
 ```

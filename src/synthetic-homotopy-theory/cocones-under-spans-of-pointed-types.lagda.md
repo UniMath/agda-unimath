@@ -9,7 +9,6 @@ module synthetic-homotopy-theory.cocones-under-spans-of-pointed-types where
 ```agda
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types

@@ -25,15 +25,12 @@
   "files.trimTrailingWhitespace": true,
   "files.associations": {
     "*.agda": "agda",
-    "*.lagda.md": "agda",
-    "*.md": "markdown"
+    "*.lagda.md": "literate agda markdown"
   },
 
   "[agda]": {
     "editor.tabSize": 2,
     "editor.rulers": [80],
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true,
     "editor.quickSuggestions": {
       "other": "inline"
     },
@@ -58,7 +55,7 @@
     "editor.suggest.insertMode": "replace",
     "gitlens.codeLens.scopes": ["document"]
   },
-  "[markdown]": {
+  "[markdown][literate agda markdown]": {
     "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {

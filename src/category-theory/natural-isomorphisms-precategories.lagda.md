@@ -31,20 +31,22 @@ an isomorphism, for every object `x` in `C`.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precat l1 l2)
-  (D : Precat l3 l4)
-  (F G : functor-Precat C D)
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F G : functor-Precategory C D)
   where
 
-  is-natural-isomorphism-Precat :
-    natural-transformation-Precat C D F G → UU (l1 ⊔ l4)
-  is-natural-isomorphism-Precat γ =
-    (x : obj-Precat C) →
-    is-iso-Precat D (components-natural-transformation-Precat C D F G γ x)
+  is-natural-isomorphism-Precategory :
+    natural-transformation-Precategory C D F G → UU (l1 ⊔ l4)
+  is-natural-isomorphism-Precategory γ =
+    (x : obj-Precategory C) →
+    is-iso-Precategory D
+      ( components-natural-transformation-Precategory C D F G γ x)
 
-  natural-isomorphism-Precat : UU (l1 ⊔ l2 ⊔ l4)
-  natural-isomorphism-Precat =
-    Σ (natural-transformation-Precat C D F G) is-natural-isomorphism-Precat
+  natural-isomorphism-Precategory : UU (l1 ⊔ l2 ⊔ l4)
+  natural-isomorphism-Precategory =
+    Σ ( natural-transformation-Precategory C D F G)
+      ( is-natural-isomorphism-Precategory)
 ```
 
 ## Propositions
@@ -55,14 +57,14 @@ That a natural transformation is a natural isomorphism is a proposition. This
 follows from the fact that being an isomorphism is a proposition.
 
 ```agda
-is-prop-is-natural-isomorphism-Precat :
+is-prop-is-natural-isomorphism-Precategory :
   {l1 l2 l3 l4 : Level}
-  (C : Precat l1 l2)
-  (D : Precat l3 l4)
-  (F G : functor-Precat C D)
-  (γ : natural-transformation-Precat C D F G) →
-  is-prop (is-natural-isomorphism-Precat C D F G γ)
-is-prop-is-natural-isomorphism-Precat C D F G γ =
-  is-prop-Π (is-prop-is-iso-Precat D ∘
-  components-natural-transformation-Precat C D F G γ)
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F G : functor-Precategory C D)
+  (γ : natural-transformation-Precategory C D F G) →
+  is-prop (is-natural-isomorphism-Precategory C D F G γ)
+is-prop-is-natural-isomorphism-Precategory C D F G γ =
+  is-prop-Π (is-prop-is-iso-Precategory D ∘
+  components-natural-transformation-Precategory C D F G γ)
 ```

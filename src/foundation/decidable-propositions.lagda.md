@@ -250,5 +250,5 @@ neg-Decidable-Prop :
 pr1 (neg-Decidable-Prop P) = ¬ (type-Decidable-Prop P)
 pr1 (pr2 (neg-Decidable-Prop P)) = is-prop-neg
 pr2 (pr2 (neg-Decidable-Prop P)) =
-  is-decidable-neg (is-decidable-type-Decidable-Prop P)
+  is-decidable-neg (is-decidable-Decidable-Prop P)
 ```

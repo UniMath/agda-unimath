@@ -26,13 +26,17 @@ the underlying precategories.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Cat l1 l2)
-  (D : Cat l3 l4)
+  (C : Category l1 l2)
+  (D : Category l3 l4)
   where
 
-  is-equiv-functor-Cat : functor-Cat C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-equiv-functor-Cat = is-equiv-functor-Precat (precat-Cat C) (precat-Cat D)
+  is-equiv-functor-Category : functor-Category C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-equiv-functor-Category =
+    is-equiv-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
 
-  equiv-Cat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-Cat = equiv-Precat (precat-Cat C) (precat-Cat D)
+  equiv-Category : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  equiv-Category =
+    equiv-Precategory (precategory-Category C) (precategory-Category D)
 ```

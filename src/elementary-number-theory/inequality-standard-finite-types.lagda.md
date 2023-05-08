@@ -45,9 +45,9 @@ abstract
   is-prop-leq-Fin (succ-ℕ k) (inr star) (inl y) = is-prop-empty
   is-prop-leq-Fin (succ-ℕ k) (inr star) (inr star) = is-prop-unit
 
-leq-fin-Prop : (k : ℕ) → Fin k → Fin k → Prop lzero
-pr1 (leq-fin-Prop k x y) = leq-Fin k x y
-pr2 (leq-fin-Prop k x y) = is-prop-leq-Fin k x y
+leq-Fin-Prop : (k : ℕ) → Fin k → Fin k → Prop lzero
+pr1 (leq-Fin-Prop k x y) = leq-Fin k x y
+pr2 (leq-Fin-Prop k x y) = is-prop-leq-Fin k x y
 
 leq-neg-one-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → leq-Fin (succ-ℕ k) x (neg-one-Fin k)
@@ -107,18 +107,15 @@ reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
 ### The preordering on the standard finite types
 
 ```agda
-fin-Preorder : ℕ → Preorder lzero lzero
-pr1 (fin-Preorder k) = Fin k
-pr1 (pr2 (fin-Preorder k)) = leq-fin-Prop k
-pr1 (pr2 (pr2 (fin-Preorder k))) = refl-leq-Fin k
-pr2 (pr2 (pr2 (fin-Preorder k))) = transitive-leq-Fin k
+Fin-Preorder : ℕ → Preorder lzero lzero
+pr1 (Fin-Preorder k) = Fin k
+pr1 (pr2 (Fin-Preorder k)) = leq-Fin-Prop k
+pr1 (pr2 (pr2 (Fin-Preorder k))) = refl-leq-Fin k
+pr2 (pr2 (pr2 (Fin-Preorder k))) = transitive-leq-Fin k
 
-fin-Poset : ℕ → Poset lzero lzero
-pr1 (fin-Poset k) = Fin k
-pr1 (pr2 (fin-Poset k)) = leq-fin-Prop k
-pr1 (pr1 (pr2 (pr2 (fin-Poset k)))) = refl-leq-Fin k
-pr2 (pr1 (pr2 (pr2 (fin-Poset k)))) = transitive-leq-Fin k
-pr2 (pr2 (pr2 (fin-Poset k))) = antisymmetric-leq-Fin k
+Fin-Poset : ℕ → Poset lzero lzero
+pr1 (Fin-Poset k) = Fin-Preorder k
+pr2 (Fin-Poset k) = antisymmetric-leq-Fin k
 ```
 
 ### Ordering on the standard finite types is decidable

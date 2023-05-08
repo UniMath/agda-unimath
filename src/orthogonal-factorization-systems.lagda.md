@@ -1,5 +1,7 @@
 # Orthogonal factorization systems
 
+## Files in the orthogonal factorization systems folder
+
 ```agda
 module orthogonal-factorization-systems where
 

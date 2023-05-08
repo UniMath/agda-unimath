@@ -174,17 +174,17 @@ module _
     eq-htpy-hom-orbit-Monoid-Action
       ( right-unit-law-mul-Monoid M (element-hom-orbit-Monoid-Action f))
 
-  orbit-monoid-action-Precategory : Precat l2 (l1 ⊔ l2)
-  pr1 orbit-monoid-action-Precategory = type-Monoid-Action M X
-  pr1 (pr2 orbit-monoid-action-Precategory) = hom-orbit-monoid-action-Set
-  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+  orbit-monoid-action-Precategoryegory : Precategory l2 (l1 ⊔ l2)
+  pr1 orbit-monoid-action-Precategoryegory = type-Monoid-Action M X
+  pr1 (pr2 orbit-monoid-action-Precategoryegory) = hom-orbit-monoid-action-Set
+  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
     comp-hom-orbit-Monoid-Action
-  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
     associative-comp-hom-orbit-Monoid-Action
-  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
     id-hom-orbit-Monoid-Action
-  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
+  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory)))) =
     left-unit-law-comp-hom-orbit-Monoid-Action
-  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
+  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory)))) =
     right-unit-law-comp-hom-orbit-Monoid-Action
 ```

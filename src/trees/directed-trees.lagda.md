@@ -18,7 +18,6 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types

@@ -74,17 +74,17 @@ module _
             intro-∃
               ( add-ℕ n m)
               ( is-closed-under-eq-ideal-Commutative-Ring' A I
-                ( is-closed-under-addition-ideal-Commutative-Ring A I
+                ( is-closed-under-addition-ideal-Commutative-Ring A I _ _
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring
                     ( A)
                     ( I)
-                    ( power-Commutative-Ring A m y)
+                    ( _)
                     ( _)
                     ( q))
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring
                     ( A)
                     ( I)
-                    ( power-Commutative-Ring A n x)
+                    ( _)
                     ( _)
                     ( p)))
                 ( is-linear-combination-power-add-Commutative-Ring A n m x y))))

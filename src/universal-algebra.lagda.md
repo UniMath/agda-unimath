@@ -1,5 +1,7 @@
 # Universal Algebra
 
+## Files in the universal algebra folder
+
 ```agda
 module universal-algebra where
 

@@ -17,6 +17,11 @@ open import order-theory.posets
 
 </details>
 
+## Idea
+
+A **maximal chain** in a poset `P` is a chain `C` in `P` such that for any chain
+`D` we have `C ⊆ D ⇒ C ＝ D`.
+
 ## Definition
 
 ```agda
@@ -24,10 +29,10 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-maximal-chain-poset-Prop :
+  is-maximal-chain-Poset-Prop :
     {l3 : Level} → chain-Poset l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-poset-Prop =
-    is-maximal-chain-preorder-Prop (preorder-Poset X)
+  is-maximal-chain-Poset-Prop =
+    is-maximal-chain-Preorder-Prop (preorder-Poset X)
 
   is-maximal-chain-Poset :
     {l3 : Level} → chain-Poset l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
@@ -54,7 +59,7 @@ module _
   is-maximal-chain-maximal-chain-Poset =
     is-maximal-chain-maximal-chain-Preorder (preorder-Poset X) C
 
-  element-maximal-chain-Poset : UU (l1 ⊔ l3)
-  element-maximal-chain-Poset =
-    element-maximal-chain-Preorder (preorder-Poset X) C
+  type-maximal-chain-Poset : UU (l1 ⊔ l3)
+  type-maximal-chain-Poset =
+    type-maximal-chain-Preorder (preorder-Poset X) C
 ```

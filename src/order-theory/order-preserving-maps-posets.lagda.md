@@ -13,6 +13,8 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-preorders
@@ -23,8 +25,8 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two posets is siad to be order
-preserving if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two posets is siad to be
+**order preserving** if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 
@@ -35,29 +37,35 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-order-poset-Prop :
-    (element-Poset P → element-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-poset-Prop =
-    preserves-order-preorder-Prop (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-Poset-Prop :
+    (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
+  preserves-order-Poset-Prop =
+    preserves-order-Preorder-Prop (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-Poset :
-    (element-Poset P → element-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)
+    (type-Poset P → type-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)
   preserves-order-Poset =
     preserves-order-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-prop-preserves-order-Poset :
-    (f : element-Poset P → element-Poset Q) → is-prop (preserves-order-Poset f)
+    (f : type-Poset P → type-Poset Q) → is-prop (preserves-order-Poset f)
   is-prop-preserves-order-Poset =
     is-prop-preserves-order-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-Poset = hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+  hom-set-Poset : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-set-Poset =
+    set-subset
+      ( function-Set (type-Poset P) (set-Poset Q))
+      ( preserves-order-Poset-Prop)
 
-  map-hom-Poset : hom-Poset → element-Poset P → element-Poset Q
+  type-hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  type-hom-Poset = type-Set hom-set-Poset
+
+  map-hom-Poset : type-hom-Poset → type-Poset P → type-Poset Q
   map-hom-Poset = map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-map-hom-Poset :
-    (f : hom-Poset) → preserves-order-Poset (map-hom-Poset f)
+    (f : type-hom-Poset) → preserves-order-Poset (map-hom-Poset f)
   preserves-order-map-hom-Poset =
     preserves-order-map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 ```
@@ -69,43 +77,43 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  htpy-hom-Poset : (f g : hom-Poset P Q) → UU (l1 ⊔ l3)
+  htpy-hom-Poset : (f g : type-hom-Poset P Q) → UU (l1 ⊔ l3)
   htpy-hom-Poset = htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  refl-htpy-hom-Poset : (f : hom-Poset P Q) → htpy-hom-Poset f f
+  refl-htpy-hom-Poset : (f : type-hom-Poset P Q) → htpy-hom-Poset f f
   refl-htpy-hom-Poset =
     refl-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   htpy-eq-hom-Poset :
-    (f g : hom-Poset P Q) → Id f g → htpy-hom-Poset f g
+    (f g : type-hom-Poset P Q) → Id f g → htpy-hom-Poset f g
   htpy-eq-hom-Poset = htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-contr-total-htpy-hom-Poset :
-    (f : hom-Poset P Q) →
-    is-contr (Σ (hom-Poset P Q) (htpy-hom-Poset f))
+    (f : type-hom-Poset P Q) →
+    is-contr (Σ (type-hom-Poset P Q) (htpy-hom-Poset f))
   is-contr-total-htpy-hom-Poset =
     is-contr-total-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-equiv-htpy-eq-hom-Poset :
-    (f g : hom-Poset P Q) → is-equiv (htpy-eq-hom-Poset f g)
+    (f g : type-hom-Poset P Q) → is-equiv (htpy-eq-hom-Poset f g)
   is-equiv-htpy-eq-hom-Poset =
     is-equiv-htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   extensionality-hom-Poset :
-    (f g : hom-Poset P Q) → Id f g ≃ htpy-hom-Poset f g
+    (f g : type-hom-Poset P Q) → Id f g ≃ htpy-hom-Poset f g
   extensionality-hom-Poset =
     extensionality-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   eq-htpy-hom-Poset :
-    (f g : hom-Poset P Q) → htpy-hom-Poset f g → Id f g
+    (f g : type-hom-Poset P Q) → htpy-hom-Poset f g → Id f g
   eq-htpy-hom-Poset = eq-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-prop-htpy-hom-Poset :
-    (f g : hom-Poset P Q) → is-prop (htpy-hom-Poset f g)
+    (f g : type-hom-Poset P Q) → is-prop (htpy-hom-Poset f g)
   is-prop-htpy-hom-Poset f g =
     is-prop-Π
       ( λ x →
-        is-set-element-Poset Q
+        is-set-type-Poset Q
           ( map-hom-Poset P Q f x)
           ( map-hom-Poset P Q g x))
 ```
@@ -118,10 +126,10 @@ module _
   where
 
   preserves-order-id-Poset :
-    preserves-order-Poset P P (id {A = element-Poset P})
+    preserves-order-Poset P P (id {A = type-Poset P})
   preserves-order-id-Poset = preserves-order-id-Preorder (preorder-Poset P)
 
-  id-hom-Poset : hom-Poset P P
+  id-hom-Poset : type-hom-Poset P P
   id-hom-Poset = id-hom-Preorder (preorder-Poset P)
 ```
 
@@ -134,7 +142,7 @@ module _
   where
 
   preserves-order-comp-Poset :
-    (g : hom-Poset Q R) (f : hom-Poset P Q) →
+    (g : type-hom-Poset Q R) (f : type-hom-Poset P Q) →
     preserves-order-Poset P R
       ( map-hom-Poset Q R g ∘ map-hom-Poset P Q f)
   preserves-order-comp-Poset =
@@ -144,7 +152,7 @@ module _
       ( preorder-Poset R)
 
   comp-hom-Poset :
-    (g : hom-Poset Q R) (f : hom-Poset P Q) → hom-Poset P R
+    (g : type-hom-Poset Q R) (f : type-hom-Poset P Q) → type-hom-Poset P R
   comp-hom-Poset =
     comp-hom-Preorder
       ( preorder-Poset P)
@@ -160,13 +168,13 @@ module _
   where
 
   left-unit-law-comp-hom-Poset :
-    (f : hom-Poset P Q) →
+    (f : type-hom-Poset P Q) →
     Id ( comp-hom-Poset P Q Q (id-hom-Poset Q) f) f
   left-unit-law-comp-hom-Poset =
     left-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   right-unit-law-comp-hom-Poset :
-    (f : hom-Poset P Q) →
+    (f : type-hom-Poset P Q) →
     Id (comp-hom-Poset P P Q f (id-hom-Poset P)) f
   right-unit-law-comp-hom-Poset =
     right-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
@@ -181,7 +189,7 @@ module _
   where
 
   associative-comp-hom-Poset :
-    (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
+    (h : type-hom-Poset R S) (g : type-hom-Poset Q R) (f : type-hom-Poset P Q) →
     Id ( comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f)
        ( comp-hom-Poset P R S h (comp-hom-Poset P Q R g f))
   associative-comp-hom-Poset =

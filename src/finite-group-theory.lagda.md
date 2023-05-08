@@ -1,5 +1,7 @@
 # Finite group theory
 
+## Files in the finite group theory folder
+
 ```agda
 module finite-group-theory where
 

@@ -18,10 +18,11 @@ open import order-theory.preorders
 
 ## Idea
 
-A large preorder consists of types indexed by a universe levels, and an ordering
-relation comparing objects of arbitrary universe levels. This level of
-generality accommodates the inclusion relation on subtypes of different universe
-levels.
+A **large preorder** consists of types indexed by a universe levels, and an
+ordering relation comparing objects of arbitrary universe levels. This level of
+generality therefore accommodates the inclusion relation on subtypes of
+different universe levels. Many preorders in agda-unimath naturally arise as
+large preorders.
 
 ## Definition
 

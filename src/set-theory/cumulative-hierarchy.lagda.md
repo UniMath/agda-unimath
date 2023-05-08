@@ -14,7 +14,6 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equational-reasoning
 open import foundation.existential-quantification
 open import foundation.functions
 open import foundation.functoriality-propositional-truncation
