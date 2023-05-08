@@ -30,8 +30,10 @@ pullbacks.
 is-stable-orthogonal-factorization-system :
   {l1 lL lR : Level} (l2 : Level) →
   orthogonal-factorization-system l1 lL lR → UU (lsuc l1 ⊔ lL ⊔ lsuc l2)
-is-stable-orthogonal-factorization-system l2 O =
-  is-pullback-stable-function-class l2 (pr1 O)
+is-stable-orthogonal-factorization-system l2 OFS =
+  is-pullback-stable-function-class
+    ( l2)
+    ( left-class-orthogonal-factorization-system OFS)
 ```
 
 ## See also
