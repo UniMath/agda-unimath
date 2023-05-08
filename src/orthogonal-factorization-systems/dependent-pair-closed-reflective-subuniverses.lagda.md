@@ -29,7 +29,7 @@ modal types are closed under the formation of dependent pair types.
 is-Σ-closed-reflective-subuniverse :
   {l lM : Level} (U : reflective-subuniverse l lM) → UU (lsuc l ⊔ lM)
 is-Σ-closed-reflective-subuniverse (○ , unit-○ , is-modal' , _) =
-  is-Σ-closed-modal-operator (type-Prop ∘ is-modal')
+  is-Σ-closed-operator-modality (type-Prop ∘ is-modal')
 
 Σ-closed-reflective-subuniverse :
   (l lM : Level) → UU (lsuc l ⊔ lsuc lM)

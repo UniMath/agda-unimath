@@ -30,7 +30,7 @@ reflective subuniverse.
 
 ```agda
 module _
-  {l lM : Level} {○ : modal-operator l l} (unit-○ : modal-unit ○)
+  {l lM : Level} {○ : operator-modality l l} (unit-○ : unit-modality ○)
   (is-modal' : UU l → Prop lM)
   where
 
@@ -42,9 +42,9 @@ module _
 
 reflective-subuniverse : (l lM : Level) → UU (lsuc l ⊔ lsuc lM)
 reflective-subuniverse l lM =
-  Σ ( modal-operator l l)
+  Σ ( operator-modality l l)
     ( λ ○ →
-      Σ ( modal-unit ○)
+      Σ ( unit-modality ○)
         ( λ unit-○ →
           Σ ( UU l → Prop lM)
             ( is-reflective-subuniverse unit-○)))

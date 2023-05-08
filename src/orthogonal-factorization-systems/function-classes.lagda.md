@@ -7,13 +7,11 @@ module orthogonal-factorization-systems.function-classes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.propositions
 open import foundation.pullback-squares
-open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
 

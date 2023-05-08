@@ -81,14 +81,6 @@ module _
     is-prop-is-orthogonal-factorization-system
 ```
 
-## See also
-
-The equivalent notions of
-
-- [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
-- [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses.md)
-
 ## References
 
 - Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
