@@ -1,0 +1,123 @@
+# Locales
+
+```agda
+module order-theory.locales where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
+
+open import order-theory.frames
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.meet-suplattices
+open import order-theory.posets
+open import order-theory.suplattices
+```
+
+</details>
+
+## Idea
+
+A **locale** is an object in the opposite of the category of [frames](order-theory.frames.md). In other words, a locale is just a frame.
+
+## Definition
+
+```agda
+Locale : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Locale l1 l2 = Frame l1 l2
+
+module _
+  {l1 l2 : Level} (L : Locale l1 l2)
+  where
+
+  meet-suplattice-Locale : Meet-Suplattice l1 l2
+  meet-suplattice-Locale = meet-suplattice-Frame L
+
+  meet-semilattice-Locale : Meet-Semilattice l1
+  meet-semilattice-Locale = meet-semilattice-Frame L
+
+  suplattice-Locale : Suplattice l1 l1 l2
+  suplattice-Locale = suplattice-Meet-Suplattice meet-suplattice-Locale
+
+  poset-Locale : Poset l1 l1
+  poset-Locale = poset-Meet-Suplattice meet-suplattice-Locale
+
+  set-Locale : Set l1
+  set-Locale = set-Poset poset-Locale
+
+  type-Locale : UU l1
+  type-Locale = type-Poset poset-Locale
+
+  is-set-type-Locale : is-set type-Locale
+  is-set-type-Locale = is-set-type-Poset poset-Locale
+
+  leq-Locale-Prop : (x y : type-Locale) → Prop l1
+  leq-Locale-Prop = leq-Poset-Prop poset-Locale
+
+  leq-Locale : (x y : type-Locale) → UU l1
+  leq-Locale = leq-Poset poset-Locale
+
+  is-prop-leq-Locale : (x y : type-Locale) → is-prop (leq-Locale x y)
+  is-prop-leq-Locale = is-prop-leq-Poset poset-Locale
+
+  refl-leq-Locale : (x : type-Locale) → leq-Locale x x
+  refl-leq-Locale = refl-leq-Poset poset-Locale
+
+  antisymmetric-leq-Locale :
+    (x y : type-Locale) → leq-Locale x y → leq-Locale y x → x ＝ y
+  antisymmetric-leq-Locale = antisymmetric-leq-Poset poset-Locale
+
+  transitive-leq-Locale :
+    (x y z : type-Locale) → leq-Locale y z → leq-Locale x y → leq-Locale x z
+  transitive-leq-Locale = transitive-leq-Poset poset-Locale
+
+  meet-Locale : type-Locale → type-Locale → type-Locale
+  meet-Locale = meet-Meet-Semilattice meet-semilattice-Locale
+
+  is-greatest-binary-lower-bound-meet-Locale :
+    (x y : type-Locale) →
+    is-greatest-binary-lower-bound-Poset poset-Locale x y (meet-Locale x y)
+  is-greatest-binary-lower-bound-meet-Locale =
+    is-greatest-binary-lower-bound-meet-Meet-Semilattice meet-semilattice-Locale
+
+  associative-meet-Locale :
+    (x y z : type-Locale) →
+    meet-Locale (meet-Locale x y) z ＝ meet-Locale x (meet-Locale y z)
+  associative-meet-Locale =
+    associative-meet-Meet-Semilattice meet-semilattice-Locale
+
+  commutative-meet-Locale :
+    (x y : type-Locale) → meet-Locale x y ＝ meet-Locale y x
+  commutative-meet-Locale =
+    commutative-meet-Meet-Semilattice meet-semilattice-Locale
+
+  idempotent-meet-Locale :
+    (x : type-Locale) → meet-Locale x x ＝ x
+  idempotent-meet-Locale =
+    idempotent-meet-Meet-Semilattice meet-semilattice-Locale
+
+  is-suplattice-Locale :
+    is-suplattice-Poset l2 poset-Locale
+  is-suplattice-Locale = is-suplattice-Suplattice suplattice-Locale
+
+  sup-Locale : {I : UU l2} → (I → type-Locale) → type-Locale
+  sup-Locale = sup-Suplattice suplattice-Locale
+
+  is-least-upper-bound-sup-Locale :
+    {I : UU l2} (x : I → type-Locale) →
+    is-least-upper-bound-family-of-elements-Poset poset-Locale x (sup-Locale x)
+  is-least-upper-bound-sup-Locale =
+    is-least-upper-bound-sup-Suplattice suplattice-Locale
+
+  distributive-meet-sup-Locale :
+    distributive-law-Meet-Suplattice meet-suplattice-Locale
+  distributive-meet-sup-Locale = pr2 L
+```
