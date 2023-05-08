@@ -45,22 +45,22 @@ module _
   meet-semilattice-Locale = meet-semilattice-Frame L
 
   suplattice-Locale : Suplattice l1 l1 l2
-  suplattice-Locale = suplattice-Meet-Suplattice meet-suplattice-Locale
+  suplattice-Locale = suplattice-Frame L
 
   poset-Locale : Poset l1 l1
-  poset-Locale = poset-Meet-Suplattice meet-suplattice-Locale
+  poset-Locale = poset-Frame L
 
   set-Locale : Set l1
-  set-Locale = set-Poset poset-Locale
+  set-Locale = set-Frame L
 
   type-Locale : UU l1
-  type-Locale = type-Poset poset-Locale
+  type-Locale = type-Frame L
 
   is-set-type-Locale : is-set type-Locale
-  is-set-type-Locale = is-set-type-Poset poset-Locale
+  is-set-type-Locale = is-set-type-Frame L
 
   leq-Locale-Prop : (x y : type-Locale) → Prop l1
-  leq-Locale-Prop = leq-Poset-Prop poset-Locale
+  leq-Locale-Prop = leq-Frame-Prop L
 
   leq-Locale : (x y : type-Locale) → UU l1
   leq-Locale = leq-Poset poset-Locale
