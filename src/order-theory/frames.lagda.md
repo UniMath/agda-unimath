@@ -92,7 +92,7 @@ module _
 
   is-prop-leq-Frame : (x y : type-Frame) → is-prop (leq-Frame x y)
   is-prop-leq-Frame = is-prop-leq-Poset poset-Frame
-  
+
   refl-leq-Frame : (x : type-Frame) → leq-Frame x x
   refl-leq-Frame = refl-leq-Poset poset-Frame
 

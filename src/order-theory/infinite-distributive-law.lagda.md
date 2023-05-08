@@ -25,7 +25,8 @@ open import order-theory.suplattices
 
 ## Idea
 
-The **distributive law for meets over suprema** states that in any [meet-suplattice](order-theory.meet-suplattices.md) `A`, we have
+The **distributive law for meets over suprema** states that in any
+[meet-suplattice](order-theory.meet-suplattices.md) `A`, we have
 
 ```md
   x ∧ ⋁ᵢ yᵢ ＝ ⋁ᵢ (x ∧ yᵢ)
@@ -55,7 +56,7 @@ module _
     instance-distributive-law-meet-sup-Poset-Prop : Prop l1
     instance-distributive-law-meet-sup-Poset-Prop =
       Id-Prop (set-Poset P) (pr1 K) (pr1 M)
-    
+
     instance-distributive-law-meet-sup-Poset : UU l1
     instance-distributive-law-meet-sup-Poset =
       type-Prop instance-distributive-law-meet-sup-Poset-Prop
@@ -86,7 +87,7 @@ module _
                     ( H x (pr1 (K I y)))
                     ( λ i → H x (y i))
                     ( K I (λ i → pr1 (H x (y i)))))))
-    
+
     distributive-law-meet-sup-Poset : UU (l1 ⊔ lsuc l3)
     distributive-law-meet-sup-Poset =
       type-Prop distributive-law-meet-sup-Poset-Prop
@@ -147,7 +148,7 @@ module _
                   ( set-Meet-Suplattice L)
                   ( x ∧ (⋁ y))
                   ( ⋁ (λ i → (x ∧ (y i)))))))
-  
+
   distributive-law-Meet-Suplattice : UU (l1 ⊔ lsuc l2)
   distributive-law-Meet-Suplattice =
     type-Prop distributive-law-Meet-Suplattice-Prop

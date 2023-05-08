@@ -21,7 +21,8 @@ open import order-theory.posets
 
 ## Idea
 
-An **`l`-suplattice** is a poset which has all least upper bounds of families of elements indexed by a type of universe level `l`.
+An **`l`-suplattice** is a poset which has all least upper bounds of families of
+elements indexed by a type of universe level `l`.
 
 ## Definitions
 

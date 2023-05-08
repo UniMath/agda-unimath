@@ -22,9 +22,11 @@ open import order-theory.suplattices
 
 ## Idea
 
-An **`l`-meet-suplattice** is a meet-semilattice `L` which has least upper bounds for all families of elements `x : I → L` indexed by a type `I : UU l`.
+An **`l`-meet-suplattice** is a meet-semilattice `L` which has least upper
+bounds for all families of elements `x : I → L` indexed by a type `I : UU l`.
 
-Note that meet-suplattices are not required to satisfy a distributive law. Such meet-suplattices are called [frames](order-theory.frames.md).
+Note that meet-suplattices are not required to satisfy a distributive law. Such
+meet-suplattices are called [frames](order-theory.frames.md).
 
 ## Definitions
 
