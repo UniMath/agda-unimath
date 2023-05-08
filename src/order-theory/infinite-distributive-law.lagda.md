@@ -13,7 +13,10 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
+open import order-theory.meet-suplattices
 open import order-theory.posets
 open import order-theory.suplattices
 ```
@@ -22,120 +25,136 @@ open import order-theory.suplattices
 
 ## Idea
 
-Let A be a poset that has all binary meets and arbitrary joins (which we call
-sups). We can show that all sup lattices have binary meets (and we plan to in
-another file), but this economy offers little benefit here. The infinite
-distributive law states: for all `a : A` and for all families `b : I → A` the
-following identity holds: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
+The **distributive law for meets over suprema** states that in any
+[meet-suplattice](order-theory.meet-suplattices.md) `A`, we have
 
-Note: One could inquire about the dual infinite distributive law but it is not
-needed at this time.
+```md
+  x ∧ ⋁ᵢ yᵢ ＝ ⋁ᵢ (x ∧ yᵢ)
+```
+
+for every element `x : A` and any family `y : I → A`.
+
+## Definition
+
+### Statement of (instances of) the infinite distributive law
+
+#### In posets
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (X : Meet-Semilattice l1)
+  {l1 l2 l3 : Level} (P : Poset l1 l2)
   where
 
-  is-meet-suplattice-Meet-Semilattice-Prop : Prop (l1 ⊔ lsuc l2)
-  is-meet-suplattice-Meet-Semilattice-Prop =
-    is-suplattice-Poset-Prop l2 (poset-Meet-Semilattice X)
+  module _
+    {I : UU l3} {x : type-Poset P} {y : I → type-Poset P}
+    (H : has-least-upper-bound-family-of-elements-Poset P y)
+    (K : has-greatest-binary-lower-bound-Poset P x (pr1 H))
+    (L : (i : I) → has-greatest-binary-lower-bound-Poset P x (y i))
+    (M : has-least-upper-bound-family-of-elements-Poset P (λ i → (pr1 (L i))))
+    where
 
-  is-meet-suplattice-Meet-Semilattice : UU (l1 ⊔ lsuc l2)
-  is-meet-suplattice-Meet-Semilattice =
-    type-Prop is-meet-suplattice-Meet-Semilattice-Prop
+    instance-distributive-law-meet-sup-Poset-Prop : Prop l1
+    instance-distributive-law-meet-sup-Poset-Prop =
+      Id-Prop (set-Poset P) (pr1 K) (pr1 M)
 
-  is-prop-is-meet-suplattice-Meet-Semilattice :
-    is-prop is-meet-suplattice-Meet-Semilattice
-  is-prop-is-meet-suplattice-Meet-Semilattice =
-    is-prop-type-Prop is-meet-suplattice-Meet-Semilattice-Prop
+    instance-distributive-law-meet-sup-Poset : UU l1
+    instance-distributive-law-meet-sup-Poset =
+      type-Prop instance-distributive-law-meet-sup-Poset-Prop
 
-Meet-Suplattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Meet-Suplattice l1 l2 =
-  Σ (Meet-Semilattice l1) (is-meet-suplattice-Meet-Semilattice l2)
+    is-prop-instance-distributive-law-meet-sup-Poset :
+      is-prop instance-distributive-law-meet-sup-Poset
+    is-prop-instance-distributive-law-meet-sup-Poset =
+      is-prop-type-Prop instance-distributive-law-meet-sup-Poset-Prop
+
+  module _
+    ( H : is-meet-semilattice-Poset P)
+    ( K : is-suplattice-Poset l3 P)
+    where
+
+    distributive-law-meet-sup-Poset-Prop : Prop (l1 ⊔ lsuc l3)
+    distributive-law-meet-sup-Poset-Prop =
+      Π-Prop
+        ( type-Poset P)
+        ( λ x →
+          Π-Prop'
+            ( UU l3)
+            ( λ I →
+              Π-Prop
+                ( I → type-Poset P)
+                ( λ y →
+                  instance-distributive-law-meet-sup-Poset-Prop {I} {x} {y}
+                    ( K I y)
+                    ( H x (pr1 (K I y)))
+                    ( λ i → H x (y i))
+                    ( K I (λ i → pr1 (H x (y i)))))))
+
+    distributive-law-meet-sup-Poset : UU (l1 ⊔ lsuc l3)
+    distributive-law-meet-sup-Poset =
+      type-Prop distributive-law-meet-sup-Poset-Prop
+
+    is-prop-distributive-law-meet-sup-Poset :
+      is-prop distributive-law-meet-sup-Poset
+    is-prop-distributive-law-meet-sup-Poset =
+      is-prop-type-Prop distributive-law-meet-sup-Poset-Prop
 ```
 
-We need to provide the appropriate components to state the infinite distributive
-law.
+#### In meet-semilattices
+
+```agda
+instance-distributive-law-meet-sup-Meet-Semilattice :
+  {l1 l2 : Level} (L : Meet-Semilattice l1) {I : UU l2}
+  ( x : type-Meet-Semilattice L)
+  { y : I → type-Meet-Semilattice L} →
+  ( H :
+    has-least-upper-bound-family-of-elements-Poset
+      ( poset-Meet-Semilattice L)
+      ( y))
+  ( K :
+    has-least-upper-bound-family-of-elements-Poset
+      ( poset-Meet-Semilattice L)
+      ( λ i → meet-Meet-Semilattice L x (y i))) →
+  UU l1
+instance-distributive-law-meet-sup-Meet-Semilattice L x {y} H =
+  instance-distributive-law-meet-sup-Poset
+    ( poset-Meet-Semilattice L)
+    ( H)
+    ( has-greatest-binary-lower-bound-Meet-Semilattice L x (pr1 H))
+    ( λ i → has-greatest-binary-lower-bound-Meet-Semilattice L x (y i))
+```
+
+#### Statement of the distributive law in meet-suplattices
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Meet-Suplattice l1 l2)
+  {l1 l2 : Level} (L : Meet-Suplattice l1 l2)
   where
 
-  meet-semilattice-Meet-Suplattice : Meet-Semilattice l1
-  meet-semilattice-Meet-Suplattice = pr1 A
+  private
+    _∧_ = meet-Meet-Suplattice L
+    ⋁_ = sup-Meet-Suplattice L
 
-  poset-Meet-Suplattice : Poset l1 l1
-  poset-Meet-Suplattice =
-    poset-Meet-Semilattice meet-semilattice-Meet-Suplattice
+  distributive-law-Meet-Suplattice-Prop : Prop (l1 ⊔ lsuc l2)
+  distributive-law-Meet-Suplattice-Prop =
+    Π-Prop
+      ( type-Meet-Suplattice L)
+      ( λ x →
+        Π-Prop'
+          ( UU l2)
+          ( λ I →
+            Π-Prop
+              ( I → type-Meet-Suplattice L)
+              ( λ y →
+                Id-Prop
+                  ( set-Meet-Suplattice L)
+                  ( x ∧ (⋁ y))
+                  ( ⋁ (λ i → (x ∧ (y i)))))))
 
-  type-Meet-Suplattice : UU l1
-  type-Meet-Suplattice =
-    type-Poset poset-Meet-Suplattice
+  distributive-law-Meet-Suplattice : UU (l1 ⊔ lsuc l2)
+  distributive-law-Meet-Suplattice =
+    type-Prop distributive-law-Meet-Suplattice-Prop
 
-  leq-meet-suplattice-Prop : (x y : type-Meet-Suplattice) → Prop l1
-  leq-meet-suplattice-Prop = leq-Poset-Prop poset-Meet-Suplattice
-
-  leq-Meet-Suplattice : (x y : type-Meet-Suplattice) → UU l1
-  leq-Meet-Suplattice = leq-Poset poset-Meet-Suplattice
-
-  is-prop-leq-Meet-Suplattice :
-    (x y : type-Meet-Suplattice) → is-prop (leq-Meet-Suplattice x y)
-  is-prop-leq-Meet-Suplattice = is-prop-leq-Poset poset-Meet-Suplattice
-
-  refl-leq-Meet-Suplattice :
-    (x : type-Meet-Suplattice) → leq-Meet-Suplattice x x
-  refl-leq-Meet-Suplattice = refl-leq-Poset poset-Meet-Suplattice
-
-  antisymmetric-leq-Meet-Suplattice :
-    (x y : type-Meet-Suplattice) →
-    leq-Meet-Suplattice x y → leq-Meet-Suplattice y x → x ＝ y
-  antisymmetric-leq-Meet-Suplattice =
-    antisymmetric-leq-Poset poset-Meet-Suplattice
-
-  transitive-leq-Meet-Suplattice :
-    (x y z : type-Meet-Suplattice) →
-    leq-Meet-Suplattice y z → leq-Meet-Suplattice x y →
-    leq-Meet-Suplattice x z
-  transitive-leq-Meet-Suplattice = transitive-leq-Poset poset-Meet-Suplattice
-
-  is-set-type-Meet-Suplattice : is-set type-Meet-Suplattice
-  is-set-type-Meet-Suplattice = is-set-type-Poset poset-Meet-Suplattice
-
-  set-Meet-Suplattice : Set l1
-  set-Meet-Suplattice = set-Poset poset-Meet-Suplattice
-
-  is-suplattice-Meet-Suplattice :
-    is-suplattice-Poset l2 poset-Meet-Suplattice
-  is-suplattice-Meet-Suplattice = pr2 A
-
-  suplattice-Meet-Suplattice : Suplattice l1 l1 l2
-  suplattice-Meet-Suplattice =
-    ( poset-Meet-Suplattice , is-suplattice-Meet-Suplattice)
-
-  meet-Meet-Suplattice :
-    (x y : type-Meet-Suplattice) →
-    type-Meet-Suplattice
-  meet-Meet-Suplattice =
-    meet-Meet-Semilattice meet-semilattice-Meet-Suplattice
-
-  sup-Meet-Suplattice :
-    (I : UU l2) → (I → type-Meet-Suplattice) →
-    type-Meet-Suplattice
-  sup-Meet-Suplattice I f = pr1 (is-suplattice-Meet-Suplattice I f)
+  is-prop-distributive-law-Meet-Suplattice :
+    is-prop distributive-law-Meet-Suplattice
+  is-prop-distributive-law-Meet-Suplattice =
+    is-prop-type-Prop distributive-law-Meet-Suplattice-Prop
 ```
-
-## Statement of the infinite distributive law
-
-```agda
-distributive-law-meet-suplattice :
-  (l1 l2 : Level) → (Meet-Suplattice l1 l2) → UU (l1 ⊔ lsuc l2)
-distributive-law-meet-suplattice l1 l2 A =
-  (a : type-Meet-Suplattice A) → {I : UU l2} →
-  (b : I → type-Meet-Suplattice A) →
-  (meet-Meet-Suplattice A a (sup-Meet-Suplattice A I b) ＝
-  sup-Meet-Suplattice A I (λ i → (meet-Meet-Suplattice A a (b i))))
-```
-
-This notation is not easy on the eye, but recall, in more familiar notation the
-identity expressed here is: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.

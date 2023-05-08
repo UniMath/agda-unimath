@@ -45,6 +45,7 @@ open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
+open import order-theory.meet-suplattices public
 open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
 open import order-theory.posets public
