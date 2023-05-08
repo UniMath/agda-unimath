@@ -186,7 +186,7 @@ equivalence.
 The equivalent notions of
 
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
-- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses.md)
+- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
 - [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
 
 ## References

@@ -1,7 +1,7 @@
 # Σ-closed reflective subuniverses
 
 ```agda
-module orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses where
+module orthogonal-factorization-systems.sigma-closed-reflective-subuniverses where
 ```
 
 <details><summary>Imports</summary>
