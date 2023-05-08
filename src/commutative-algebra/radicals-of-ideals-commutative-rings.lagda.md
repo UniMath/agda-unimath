@@ -142,3 +142,17 @@ module _
       is-closed-under-negatives-radical-of-ideal-Commutative-Ring
       is-closed-under-right-multiplication-radical-of-ideal-Commutative-Ring
 ```
+
+## Properties
+
+### The radical ideal of an intersection is the intersection of the radicals of the ideals
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Commutative-Ring l1)
+  (I : ideal-Commutative-Ring l2 A) (J : ideal-Commutative-Ring l3 A)
+  where
+
+  preserves-intersection-radical-of-ideal-commutative-ring :
+
+```
