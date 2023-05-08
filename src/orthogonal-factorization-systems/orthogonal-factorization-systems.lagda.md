@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.factorization-operations
+open import orthogonal-factorization-systems.function-class-factorization-operations
 open import orthogonal-factorization-systems.function-classes
 open import orthogonal-factorization-systems.wide-function-classes
 ```
@@ -36,8 +36,8 @@ left map (by diagrammatic ordering) `l` is in `L` and the right map `r` is in
 is-orthogonal-factorization-system :
   {l lL lR : Level}
   (L : function-class l l lL)
-  (R : function-class l l lR) →
-  UU (lsuc l ⊔ lL ⊔ lR)
+  (R : function-class l l lR)
+  → UU (lsuc l ⊔ lL ⊔ lR)
 is-orthogonal-factorization-system {l} L R =
   ( is-wide-function-class L) ×
   ( ( is-wide-function-class R) ×
@@ -87,7 +87,9 @@ The equivalent notions of
 
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
+- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses.md)
+
+## References
 
 - Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
   theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
