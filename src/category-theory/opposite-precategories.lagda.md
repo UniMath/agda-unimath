@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Let `C` be a precategory, it's opposite precategory `Cᵒᵖ` is given by reversing every morphism.
+Let `C` be a precategory, it's opposite precategory `Cᵒᵖ` is given by reversing
+every morphism.
 
 ## Definition
 
@@ -30,9 +31,12 @@ module _
   opposite-Precategory : Precategory l1 l2
   pr1 opposite-Precategory = obj-Precategory C
   pr1 (pr2 opposite-Precategory) x y = hom-Precategory C y x
-  pr1 (pr1 (pr2 (pr2 opposite-Precategory))) f g = comp-hom-Precategory C g f 
-  pr2 (pr1 (pr2 (pr2 opposite-Precategory))) f g h = inv (associative-comp-hom-Precategory C h g f )
-  pr1 (pr2 (pr2 (pr2 opposite-Precategory))) x = id-hom-Precategory C {x} 
-  pr1 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) f = right-unit-law-comp-hom-Precategory C f 
-  pr2 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) f = left-unit-law-comp-hom-Precategory C f
+  pr1 (pr1 (pr2 (pr2 opposite-Precategory))) f g = comp-hom-Precategory C g f
+  pr2 (pr1 (pr2 (pr2 opposite-Precategory))) f g h =
+    inv (associative-comp-hom-Precategory C h g f)
+  pr1 (pr2 (pr2 (pr2 opposite-Precategory))) x = id-hom-Precategory C {x}
+  pr1 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) f =
+    right-unit-law-comp-hom-Precategory C f
+  pr2 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) f =
+    left-unit-law-comp-hom-Precategory C f
 ```
