@@ -54,7 +54,7 @@ orthogonal-factorization-system l lL lR =
         ( is-orthogonal-factorization-system L))
 ```
 
-## Projections for orthogonal factorization systems
+### Components of a orthogonal factorization system
 
 ```agda
 module _
