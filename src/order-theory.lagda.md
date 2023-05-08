@@ -27,7 +27,6 @@ open import order-theory.homomorphisms-meet-semilattices public
 open import order-theory.homomorphisms-meet-sup-lattices public
 open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
-open import order-theory.infinite-distributive-law public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public
 open import order-theory.large-meet-semilattices public
@@ -39,6 +38,7 @@ open import order-theory.lattices public
 open import order-theory.least-elements-posets public
 open import order-theory.least-elements-preorders public
 open import order-theory.least-upper-bounds-posets public
+open import order-theory.locales public
 open import order-theory.locally-finite-posets public
 open import order-theory.lower-bounds-posets public
 open import order-theory.lower-types-preorders public

@@ -25,7 +25,9 @@ open import order-theory.suplattices
 
 ## Idea
 
-A **frame** is a [meet-suplattice](order-theory.meet-suplattices.md) with arbitrary joins in which meets distribute over suprema. The **distributive law for meets over suprema** states that in any
+A **frame** is a [meet-suplattice](order-theory.meet-suplattices.md) with
+arbitrary joins in which meets distribute over suprema. The **distributive law
+for meets over suprema** states that in any
 [meet-suplattice](order-theory.meet-suplattices.md) `A`, we have
 
 ```md

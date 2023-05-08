@@ -26,7 +26,8 @@ open import order-theory.suplattices
 
 ## Idea
 
-A **locale** is an object in the opposite of the category of [frames](order-theory.frames.md). In other words, a locale is just a frame.
+A **locale** is an object in the opposite of the category of
+[frames](order-theory.frames.md). In other words, a locale is just a frame.
 
 ## Definition
 
@@ -63,61 +64,57 @@ module _
   leq-Locale-Prop = leq-Frame-Prop L
 
   leq-Locale : (x y : type-Locale) → UU l1
-  leq-Locale = leq-Poset poset-Locale
+  leq-Locale = leq-Frame L
 
   is-prop-leq-Locale : (x y : type-Locale) → is-prop (leq-Locale x y)
-  is-prop-leq-Locale = is-prop-leq-Poset poset-Locale
+  is-prop-leq-Locale = is-prop-leq-Frame L
 
   refl-leq-Locale : (x : type-Locale) → leq-Locale x x
-  refl-leq-Locale = refl-leq-Poset poset-Locale
+  refl-leq-Locale = refl-leq-Frame L
 
   antisymmetric-leq-Locale :
     (x y : type-Locale) → leq-Locale x y → leq-Locale y x → x ＝ y
-  antisymmetric-leq-Locale = antisymmetric-leq-Poset poset-Locale
+  antisymmetric-leq-Locale = antisymmetric-leq-Frame L
 
   transitive-leq-Locale :
     (x y z : type-Locale) → leq-Locale y z → leq-Locale x y → leq-Locale x z
-  transitive-leq-Locale = transitive-leq-Poset poset-Locale
+  transitive-leq-Locale = transitive-leq-Frame L
 
   meet-Locale : type-Locale → type-Locale → type-Locale
-  meet-Locale = meet-Meet-Semilattice meet-semilattice-Locale
+  meet-Locale = meet-Frame L
 
   is-greatest-binary-lower-bound-meet-Locale :
     (x y : type-Locale) →
     is-greatest-binary-lower-bound-Poset poset-Locale x y (meet-Locale x y)
   is-greatest-binary-lower-bound-meet-Locale =
-    is-greatest-binary-lower-bound-meet-Meet-Semilattice meet-semilattice-Locale
+    is-greatest-binary-lower-bound-meet-Frame L
 
   associative-meet-Locale :
     (x y z : type-Locale) →
     meet-Locale (meet-Locale x y) z ＝ meet-Locale x (meet-Locale y z)
-  associative-meet-Locale =
-    associative-meet-Meet-Semilattice meet-semilattice-Locale
+  associative-meet-Locale = associative-meet-Frame L
 
   commutative-meet-Locale :
     (x y : type-Locale) → meet-Locale x y ＝ meet-Locale y x
-  commutative-meet-Locale =
-    commutative-meet-Meet-Semilattice meet-semilattice-Locale
+  commutative-meet-Locale = commutative-meet-Frame L
 
   idempotent-meet-Locale :
     (x : type-Locale) → meet-Locale x x ＝ x
-  idempotent-meet-Locale =
-    idempotent-meet-Meet-Semilattice meet-semilattice-Locale
+  idempotent-meet-Locale = idempotent-meet-Frame L
 
   is-suplattice-Locale :
     is-suplattice-Poset l2 poset-Locale
-  is-suplattice-Locale = is-suplattice-Suplattice suplattice-Locale
+  is-suplattice-Locale = is-suplattice-Frame L
 
   sup-Locale : {I : UU l2} → (I → type-Locale) → type-Locale
-  sup-Locale = sup-Suplattice suplattice-Locale
+  sup-Locale = sup-Frame L
 
   is-least-upper-bound-sup-Locale :
     {I : UU l2} (x : I → type-Locale) →
     is-least-upper-bound-family-of-elements-Poset poset-Locale x (sup-Locale x)
-  is-least-upper-bound-sup-Locale =
-    is-least-upper-bound-sup-Suplattice suplattice-Locale
+  is-least-upper-bound-sup-Locale = is-least-upper-bound-sup-Frame L
 
   distributive-meet-sup-Locale :
     distributive-law-Meet-Suplattice meet-suplattice-Locale
-  distributive-meet-sup-Locale = pr2 L
+  distributive-meet-sup-Locale = distributive-meet-sup-Frame L
 ```
