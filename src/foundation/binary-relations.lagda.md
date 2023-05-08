@@ -9,6 +9,7 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
+open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 open import foundation.equality-dependent-function-types
@@ -67,6 +68,17 @@ is-symmetric {A = A} R = (x y : A) → R x y → R y x
 
 is-transitive : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
 is-transitive {A = A} R = (x y z : A) → R x y → R y z → R x z
+
+is-irreflexive : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
+is-irreflexive {A = A} R = (x : A) → ¬ (R x x)
+
+is-asymmetric : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
+is-asymmetric {A = A} R = (x y : A) → R x y → ¬ (R y x)
+
+is-irreflexive-is-asymmetric :
+  {l1 l2 : Level} {A : UU l1} (R : Rel l2 A) →
+  is-asymmetric R → is-irreflexive R
+is-irreflexive-is-asymmetric R H x xRx = H x x xRx xRx
 
 is-reflexive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
