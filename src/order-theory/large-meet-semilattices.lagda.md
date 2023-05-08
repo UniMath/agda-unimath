@@ -27,6 +27,35 @@ idempotent.
 
 ## Definition
 
+### The predicate that an element of a large poset is a lower bound of two elements
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
+  {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  where
+
+  is-binary-lower-bound-Large-Poset :
+    {l3 : Level} → type-Large-Poset P l3 → UU (β l3 l1 ⊔ β l3 l2)
+  is-binary-lower-bound-Large-Poset x =
+    leq-Large-Poset P x a × leq-Large-Poset P x b
+```
+
+### The predicate that an element of a large poset is the greatest lower bound of two elements
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
+  {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  where
+  
+  is-greatest-binary-lower-bound-Large-Poset :
+    {l3 : Level} → type-Large-Poset P l3 → UUω
+  is-greatest-binary-lower-bound-Large-Poset x =
+    {l4 : Level} (y : type-Large-Poset P l4) →
+    is-binary-lower-bound-Large-Poset P a b y ↔ leq-Large-Poset P y x
+```
+
 ### The predicate that a large poset has meets
 
 ```agda
@@ -45,11 +74,10 @@ record
       (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
       type-Large-Poset P (l1 ⊔ l2)
     is-greatest-binary-lower-bound-meet-has-meets-Large-Poset :
-      {l1 l2 l3 : Level}
-      (x : type-Large-Poset P l1) (y : type-Large-Poset P l2)
-      (z : type-Large-Poset P l3) →
-      ( leq-Large-Poset P z x × leq-Large-Poset P z y) ↔
-      ( leq-Large-Poset P z (meet-has-meets-Large-Poset x y))
+      {l1 l2 : Level}
+      (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+      is-greatest-binary-lower-bound-Large-Poset P x y
+        ( meet-has-meets-Large-Poset x y)
 
 open has-meets-Large-Poset public
 ```
@@ -130,12 +158,14 @@ module _
     meet-has-meets-Large-Poset (has-meets-Large-Meet-Semilattice L)
 
   is-greatest-binary-lower-bound-meet-Large-Meet-Semilattice :
-    {l1 l2 l3 : Level}
+    {l1 l2 : Level}
     (x : type-Large-Meet-Semilattice l1)
-    (y : type-Large-Meet-Semilattice l2)
-    (z : type-Large-Meet-Semilattice l2) →
-    ( leq-Large-Meet-Semilattice z x × leq-Large-Meet-Semilattice z y) ↔
-    ( leq-Large-Meet-Semilattice z (meet-Large-Meet-Semilattice x y))
+    (y : type-Large-Meet-Semilattice l2) →
+    is-greatest-binary-lower-bound-Large-Poset
+      ( large-poset-Large-Meet-Semilattice L)
+      ( x)
+      ( y)
+      ( meet-Large-Meet-Semilattice x y)
   is-greatest-binary-lower-bound-meet-Large-Meet-Semilattice =
     is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
       ( has-meets-Large-Meet-Semilattice L)

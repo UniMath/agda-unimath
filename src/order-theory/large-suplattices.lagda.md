@@ -80,7 +80,7 @@ module _
     is-upper-bound-family-of-elements-Large-Poset P x y ↔ leq-Large-Poset P z y
 ```
 
-### The predicate on large posets of having least upper bounds of families of elements
+### The predicate on families of elements in large posets of having least upper bounds
 
 ```agda
 module _
@@ -102,6 +102,36 @@ module _
   open has-least-upper-bound-family-of-elements-Large-Poset public
 ```
 
+### The predicate on large posets of having least upper bounds of families of elements
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  where
+
+  is-large-suplattice-Large-Poset : UUω
+  is-large-suplattice-Large-Poset =
+    {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2) →
+    has-least-upper-bound-family-of-elements-Large-Poset P x
+
+  module _
+    (H : is-large-suplattice-Large-Poset)
+    {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
+    where
+
+    sup-is-large-suplattice-Large-Poset : type-Large-Poset P (l1 ⊔ l2)
+    sup-is-large-suplattice-Large-Poset =
+      sup-has-least-upper-bound-family-of-elements-Large-Poset (H x)
+
+    is-least-upper-bound-sup-is-large-suplattice-Large-Poset :
+      is-least-upper-bound-family-of-elements-Large-Poset P x
+        sup-is-large-suplattice-Large-Poset
+    is-least-upper-bound-sup-is-large-suplattice-Large-Poset =
+      is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
+        ( H x)
+```
+
 ### Large suplattices
 
 ```agda
@@ -112,12 +142,8 @@ record
     make-Large-Suplattice
   field
     large-poset-Large-Suplattice : Large-Poset α β
-    has-least-upper-bounds-Large-Suplattice :
-      {l1 l2 : Level} {I : UU l1}
-      (x : I → type-Large-Poset large-poset-Large-Suplattice l2) →
-      has-least-upper-bound-family-of-elements-Large-Poset
-        ( large-poset-Large-Suplattice)
-        ( x)
+    is-large-suplattice-Large-Suplattice :
+      is-large-suplattice-Large-Poset large-poset-Large-Suplattice
 
 open Large-Suplattice public
 
@@ -184,7 +210,7 @@ module _
     type-Large-Suplattice (l1 ⊔ l2)
   sup-Large-Suplattice x =
     sup-has-least-upper-bound-family-of-elements-Large-Poset
-      ( has-least-upper-bounds-Large-Suplattice L x)
+      ( is-large-suplattice-Large-Suplattice L x)
 
   is-upper-bound-family-of-elements-Large-Suplattice :
     {l1 l2 l3 : Level} {I : UU l1} (x : I → type-Large-Suplattice l2)
@@ -208,5 +234,5 @@ module _
       ( sup-Large-Suplattice x)
   is-least-upper-bound-sup-Large-Suplattice x =
      is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
-       ( has-least-upper-bounds-Large-Suplattice L x)
+       ( is-large-suplattice-Large-Suplattice L x)
 ```
