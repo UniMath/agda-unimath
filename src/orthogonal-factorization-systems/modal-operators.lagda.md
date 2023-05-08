@@ -153,20 +153,6 @@ is-locally-small-locally-small-operator-modality :
 is-locally-small-locally-small-operator-modality = pr2
 ```
 
-### Σ-closed modal operators
-
-We can say a modal operator `○` is Σ-closed if for every type `X` such that for
-every term of `○ X` and for every family `P` over `X` equipped with a section of
-`○ ∘ P`, there is also a term of `○ (Σ X P)`. Note that this is not completely
-conventional terminology.
-
-```agda
-is-Σ-closed-operator-modality :
-  {l1 l2 : Level} → operator-modality l1 l2 → UU (lsuc l1 ⊔ l2)
-is-Σ-closed-operator-modality {l1} ○ =
-  (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
-```
-
 ## References
 
 - Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type

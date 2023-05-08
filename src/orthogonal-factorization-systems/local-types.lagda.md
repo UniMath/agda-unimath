@@ -173,7 +173,10 @@ is-contr-is-local-type A is-local-type-A =
   is-contr-is-equiv
     ( empty → A)
     ( λ a _ → a)
-    ( is-equiv-comp _ _
+    ( is-equiv-comp
+      ( λ a' _ → a' star)
+      ( λ a _ →
+        map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)) a star)
       ( is-equiv-map-inv-is-equiv (is-equiv-map-left-unit-law-Π λ _ → A))
       ( is-local-type-A))
     ( universal-property-empty' A)

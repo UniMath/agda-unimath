@@ -25,6 +25,23 @@ modal types are closed under the formation of dependent pair types.
 
 ## Definition
 
+### Σ-closed modal operators
+
+We say a modal operator `○` is Σ-closed if for every type `X` such that for
+every term of `○ X` and for every type family `P` over `X` there is a section of
+`○ ∘ P`, then there is also a term of `○ (Σ X P)`.
+
+**Note**: this is not well-established terminology.
+
+```agda
+is-Σ-closed-operator-modality :
+  {l1 l2 : Level} → operator-modality l1 l2 → UU (lsuc l1 ⊔ l2)
+is-Σ-closed-operator-modality {l1} ○ =
+  (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
+```
+
+### Σ-closed reflective subuniverses
+
 ```agda
 is-Σ-closed-reflective-subuniverse :
   {l lM : Level} (U : reflective-subuniverse l lM) → UU (lsuc l ⊔ lM)
