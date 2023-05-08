@@ -102,7 +102,7 @@ module _
   is-equiv-is-local-type = is-equiv-is-equiv-precomp f
 ```
 
-### If the domain and codomain of ´f´ is ´f´-local then ´f´ is an equivalence
+### If the domain and codomain of `f` is `f`-local then `f` is an equivalence
 
 ```agda
   retraction-sec-precomp-domain : sec (precomp f Y) → retr f
