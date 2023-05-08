@@ -48,7 +48,7 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
   {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
   where
-  
+
   is-greatest-binary-lower-bound-Large-Poset :
     {l3 : Level} → type-Large-Poset P l3 → UUω
   is-greatest-binary-lower-bound-Large-Poset x =
