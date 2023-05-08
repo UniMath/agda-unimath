@@ -71,9 +71,9 @@ composition-closed-function-class l1 l2 =
   Σ (function-class l1 l1 l2) (is-composition-closed-function-class)
 ```
 
-## Pullback stable function classes
+## Pullback-stable function classes
 
-A function class is said to be **pullback stable** if given a function in it,
+A function class is said to be **pullback-stable** if given a function in it,
 then its pullback along any map is also in the function class.
 
 ```agda
@@ -144,7 +144,7 @@ pr2 (is-composition-closed-function-class-Prop c) =
   is-prop-is-composition-closed-function-class c
 ```
 
-### Being pullback stable is a property
+### Being pullback-stable is a property
 
 ```agda
 is-prop-is-pullback-stable-function-class :

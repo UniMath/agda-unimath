@@ -1,4 +1,4 @@
-# Dependent-pair-closed reflective subuniverses
+# Σ-closed reflective subuniverses
 
 ```agda
 module orthogonal-factorization-systems.dependent-pair-closed-reflective-subuniverses where
@@ -20,7 +20,7 @@ open import orthogonal-factorization-systems.reflective-subuniverses
 
 ## Idea
 
-A reflective subuniverse is **dependent-pair-closed** (or **Σ-closed**) if its
+A reflective subuniverse is **Σ-closed**, or **dependent-pair-closed**, if its
 modal types are closed under the formation of dependent pair types.
 
 ## Definition
