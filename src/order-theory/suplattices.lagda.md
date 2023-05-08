@@ -21,12 +21,11 @@ open import order-theory.posets
 
 ## Idea
 
-An **`l`-suplattice** is a poset which has all joins of families of elements
-indexed by a type of universe level `l`.
+An **`l`-suplattice** is a poset which has all least upper bounds of families of elements indexed by a type of universe level `l`.
 
 ## Definitions
 
-### Order theoretic sup lattices
+### The predicate on posets of being an `l`-suplattice
 
 ```agda
 module _
@@ -48,14 +47,27 @@ module _
   is-prop-suplattice-Poset : is-prop is-suplattice-Poset
   is-prop-suplattice-Poset = is-prop-type-Prop is-suplattice-Poset-Prop
 
-Suplattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Suplattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-suplattice-Poset l3 P)
+module _
+  {l1 l2 l3 : Level} (P : Poset l1 l2) (H : is-suplattice-Poset l3 P)
+  where
+
+  sup-is-suplattice-Poset :
+    {I : UU l3} → (I → type-Poset P) → type-Poset P
+  sup-is-suplattice-Poset {I} x = pr1 (H I x)
+
+  is-least-upper-bound-sup-is-suplattice-Poset :
+    {I : UU l3} (x : I → type-Poset P) →
+    is-least-upper-bound-family-of-elements-Poset P x
+      ( sup-is-suplattice-Poset x)
+  is-least-upper-bound-sup-is-suplattice-Poset {I} x = pr2 (H I x)
 ```
 
-We now develop the tools that allow us to work with the components of a sup
-lattice.
+### `l`-Suplattices
 
 ```agda
+Suplattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+Suplattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-suplattice-Poset l3 P)
+
 module _
   {l1 l2 l3 : Level} (A : Suplattice l1 l2 l3)
   where
@@ -103,13 +115,18 @@ module _
   is-suplattice-Suplattice = pr2 A
 
   sup-Suplattice :
-    (I : UU l3) → (I → type-Suplattice) → type-Suplattice
-  sup-Suplattice I f = pr1 (is-suplattice-Suplattice I f)
+    {I : UU l3} → (I → type-Suplattice) → type-Suplattice
+  sup-Suplattice =
+    sup-is-suplattice-Poset
+      ( poset-Suplattice)
+      ( is-suplattice-Suplattice)
 
-  is-least-upper-bound-family-of-elements-sup-Suplattice :
-    (I : UU l3) → (f : I → type-Suplattice) →
-    is-least-upper-bound-family-of-elements-Poset poset-Suplattice f
-      (sup-Suplattice I f)
-  is-least-upper-bound-family-of-elements-sup-Suplattice I f =
-    pr2 (is-suplattice-Suplattice I f)
+  is-least-upper-bound-sup-Suplattice :
+    {I : UU l3} (x : I → type-Suplattice) →
+    is-least-upper-bound-family-of-elements-Poset poset-Suplattice x
+      ( sup-Suplattice x)
+  is-least-upper-bound-sup-Suplattice =
+    is-least-upper-bound-sup-is-suplattice-Poset
+      ( poset-Suplattice)
+      ( is-suplattice-Suplattice)
 ```
