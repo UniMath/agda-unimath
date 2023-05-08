@@ -43,7 +43,8 @@ module _
   (A : UU l1) (B : UU l2)
   where
 
-  function-class-factorization-operation : UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
+  function-class-factorization-operation :
+    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   function-class-factorization-operation =
     (f : A → B) → function-class-factorization L R f
 
