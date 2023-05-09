@@ -157,4 +157,14 @@ module _
   distributive-meet-sup-Π-Large-Locale x y =
     eq-htpy
       ( λ i → distributive-meet-sup-Large-Locale (L i) (x i) (λ j → y j i))
+
+  Π-Large-Locale : Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  large-poset-Large-Locale Π-Large-Locale =
+    large-poset-Π-Large-Locale
+  has-meets-Large-Locale Π-Large-Locale =
+    has-meets-Π-Large-Locale
+  is-large-suplattice-Large-Locale Π-Large-Locale =
+    is-large-suplattice-Π-Large-Locale
+  distributive-meet-sup-Large-Locale Π-Large-Locale =
+    distributive-meet-sup-Π-Large-Locale
 ```

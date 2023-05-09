@@ -1,0 +1,163 @@
+# Powers of large locales
+
+```agda
+module order-theory.powers-of-large-locales where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
+
+open import order-theory.dependent-products-large-locales
+open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-locales
+open import order-theory.large-meet-semilattices
+open import order-theory.large-posets
+open import order-theory.large-suplattices
+open import order-theory.least-upper-bounds-large-posets
+```
+
+</details>
+
+## Idea
+
+Given a large locale `L` and a type `X : UU l`, the **large power locale** is
+the locale `X → L` of functions from `X` to `L`.
+
+## Definitions
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {l1 : Level}
+  (X : UU l1) (L : Large-Locale α β)
+  where
+
+  power-Large-Locale :
+    Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  power-Large-Locale = Π-Large-Locale (λ (x : X) → L)
+
+  large-poset-power-Large-Locale :
+    Large-Poset (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  large-poset-power-Large-Locale =
+    large-poset-Large-Locale power-Large-Locale
+
+  large-meet-semilattice-power-Large-Locale :
+    Large-Meet-Semilattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  large-meet-semilattice-power-Large-Locale =
+    large-meet-semilattice-Large-Locale power-Large-Locale
+
+  has-meets-power-Large-Locale :
+    has-meets-Large-Poset large-poset-power-Large-Locale
+  has-meets-power-Large-Locale =
+    has-meets-Large-Locale power-Large-Locale
+
+  large-suplattice-power-Large-Locale :
+    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  large-suplattice-power-Large-Locale =
+    large-suplattice-Large-Locale power-Large-Locale
+
+  is-large-suplattice-power-Large-Locale :
+    is-large-suplattice-Large-Poset large-poset-power-Large-Locale
+  is-large-suplattice-power-Large-Locale =
+    is-large-suplattice-Large-Locale power-Large-Locale
+
+  set-power-Large-Locale : (l : Level) → Set (α l ⊔ l1)
+  set-power-Large-Locale =
+    set-Large-Locale power-Large-Locale
+
+  type-power-Large-Locale : (l : Level) → UU (α l ⊔ l1)
+  type-power-Large-Locale =
+    type-Large-Locale power-Large-Locale
+
+  is-set-type-power-Large-Locale :
+    {l : Level} → is-set (type-power-Large-Locale l)
+  is-set-type-power-Large-Locale =
+    is-set-type-Large-Locale power-Large-Locale
+
+  leq-power-Large-Locale-Prop :
+    {l2 l3 : Level} → type-power-Large-Locale l2 → type-power-Large-Locale l3 →
+    Prop (β l2 l3 ⊔ l1)
+  leq-power-Large-Locale-Prop =
+    leq-Large-Locale-Prop power-Large-Locale
+
+  leq-power-Large-Locale :
+    {l2 l3 : Level} →
+    type-power-Large-Locale l2 → type-power-Large-Locale l3 → UU (β l2 l3 ⊔ l1)
+  leq-power-Large-Locale =
+    leq-Large-Locale power-Large-Locale
+
+  is-prop-leq-power-Large-Locale :
+    {l2 l3 : Level}
+    (x : type-power-Large-Locale l2) (y : type-power-Large-Locale l3) →
+    is-prop (leq-power-Large-Locale x y)
+  is-prop-leq-power-Large-Locale =
+    is-prop-leq-Large-Locale power-Large-Locale
+
+  refl-leq-power-Large-Locale :
+    {l2 : Level} (x : type-power-Large-Locale l2) → leq-power-Large-Locale x x
+  refl-leq-power-Large-Locale =
+    refl-leq-Large-Locale power-Large-Locale
+
+  antisymmetric-leq-power-Large-Locale :
+    {l2 : Level} (x y : type-power-Large-Locale l2) →
+    leq-power-Large-Locale x y → leq-power-Large-Locale y x → x ＝ y
+  antisymmetric-leq-power-Large-Locale =
+    antisymmetric-leq-Large-Locale power-Large-Locale
+
+  transitive-leq-power-Large-Locale :
+    {l2 l3 l4 : Level}
+    (x : type-power-Large-Locale l2)
+    (y : type-power-Large-Locale l3)
+    (z : type-power-Large-Locale l4) →
+    leq-power-Large-Locale y z → leq-power-Large-Locale x y →
+    leq-power-Large-Locale x z
+  transitive-leq-power-Large-Locale =
+    transitive-leq-Large-Locale power-Large-Locale
+
+  meet-power-Large-Locale :
+    {l2 l3 : Level} →
+    type-power-Large-Locale l2 → type-power-Large-Locale l3 →
+    type-power-Large-Locale (l2 ⊔ l3)
+  meet-power-Large-Locale =
+    meet-Large-Locale power-Large-Locale
+
+  is-greatest-binary-lower-bound-meet-power-Large-Locale :
+    {l2 l3 : Level}
+    (x : type-power-Large-Locale l2)
+    (y : type-power-Large-Locale l3) →
+    is-greatest-binary-lower-bound-Large-Poset
+      ( large-poset-power-Large-Locale)
+      ( x)
+      ( y)
+      ( meet-power-Large-Locale x y)
+  is-greatest-binary-lower-bound-meet-power-Large-Locale =
+    is-greatest-binary-lower-bound-meet-Large-Locale power-Large-Locale
+
+  sup-power-Large-Locale :
+    {l2 l3 : Level} {J : UU l2} (x : J → type-power-Large-Locale l3) →
+    type-power-Large-Locale (l2 ⊔ l3)
+  sup-power-Large-Locale =
+    sup-Large-Locale power-Large-Locale
+
+  is-least-upper-bound-sup-power-Large-Locale :
+    {l2 l3 : Level} {J : UU l2} (x : J → type-power-Large-Locale l3) →
+    is-least-upper-bound-family-of-elements-Large-Poset
+      ( large-poset-power-Large-Locale)
+      ( x)
+      ( sup-power-Large-Locale x)
+  is-least-upper-bound-sup-power-Large-Locale =
+    is-least-upper-bound-sup-Large-Locale power-Large-Locale
+
+  distributive-meet-sup-power-Large-Locale :
+    {l2 l3 l4 : Level}
+    (x : type-power-Large-Locale l2)
+    {J : UU l3} (y : J → type-power-Large-Locale l4) →
+    meet-power-Large-Locale x (sup-power-Large-Locale y) ＝
+    sup-power-Large-Locale (λ j → meet-power-Large-Locale x (y j))
+  distributive-meet-sup-power-Large-Locale =
+    distributive-meet-sup-Large-Locale power-Large-Locale
+```
