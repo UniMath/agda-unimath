@@ -22,7 +22,8 @@ open import order-theory.large-preorders
 
 ## Idea
 
-Given a family `P : I → Large-Poset α β` indexed by a type `I : UU l`, the dependent product of the large posets `P i` is again a large poset.
+Given a family `P : I → Large-Poset α β` indexed by a type `I : UU l`, the
+dependent product of the large posets `P i` is again a large poset.
 
 ## Definitions
 

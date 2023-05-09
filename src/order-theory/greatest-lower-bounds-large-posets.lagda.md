@@ -19,7 +19,9 @@ open import order-theory.lower-bounds-large-posets
 
 ## Idea
 
-A **greatest binary lower bound** of two elements `a` and `b` in a large poset `P` is an element `x` such that for every element `y` in `P` the logical equivalence
+A **greatest binary lower bound** of two elements `a` and `b` in a large poset
+`P` is an element `x` such that for every element `y` in `P` the logical
+equivalence
 
 ```md
   is-binary-lower-bound-Large-Poset P a b y ↔ y ≤ x

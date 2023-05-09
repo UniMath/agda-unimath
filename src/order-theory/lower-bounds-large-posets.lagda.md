@@ -20,7 +20,10 @@ open import order-theory.large-posets
 
 ## Idea
 
-A **binary lower bound** of two elements `a` and `b` in a large poset `P` is an element `x` such that both `x ≤ a` and `x ≤ b` hold. Similarly, a **lower bound** of a family of elements `a : I → P` in a large poset `P` is an element `x` such that `x ≤ a i` holds for every `i : I`.
+A **binary lower bound** of two elements `a` and `b` in a large poset `P` is an
+element `x` such that both `x ≤ a` and `x ≤ b` hold. Similarly, a **lower
+bound** of a family of elements `a : I → P` in a large poset `P` is an element
+`x` such that `x ≤ a i` holds for every `i : I`.
 
 ## Definitions
 
@@ -65,7 +68,7 @@ module _
   pr2 (is-binary-lower-bound-is-binary-lower-bound-Π-Large-Poset z H i) =
     pr2 H i
 
-  logical-equivalence-is-binary-lower-bound-Π-Large-Poset :  
+  logical-equivalence-is-binary-lower-bound-Π-Large-Poset :
     {l3 : Level} (z : type-Π-Large-Poset P l3) →
     ((i : I) → is-binary-lower-bound-Large-Poset (P i) (x i) (y i) (z i)) ↔
     is-binary-lower-bound-Large-Poset (Π-Large-Poset P) x y z

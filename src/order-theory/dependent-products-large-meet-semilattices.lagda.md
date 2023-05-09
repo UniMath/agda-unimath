@@ -23,7 +23,9 @@ open import order-theory.large-posets
 
 ## Idea
 
-Meets in dependent products of large posets are computed pointwise. This implies that the dependent product of a large meet-semilattice is again a large meet-semilattice.
+Meets in dependent products of large posets are computed pointwise. This implies
+that the dependent product of a large meet-semilattice is again a large
+meet-semilattice.
 
 ## Definitions
 
