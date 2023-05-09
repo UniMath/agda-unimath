@@ -8,7 +8,6 @@ module foundation.large-locale-of-propositions where
 
 ```agda
 open import foundation.conjunction
-open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.functions
 open import foundation.propositional-extensionality

@@ -16,6 +16,13 @@ open import foundation-core.universe-levels
 
 </details>
 
+## Idea
+
+A **pullback square**, or **cartesian square**, is a
+[commuting square of maps](foundation.commuting-squares-of-maps.md) that
+satisfies the
+[universal property of being a pullback](foundation.universal-property-pullback.md).
+
 ## Definitions
 
 ### Pullback cones
@@ -45,8 +52,12 @@ module _
         Σ ( B → C)
           ( λ g →
             Σ ( cone f g X)
-              (universal-property-pullback l f g)))
+              ( universal-property-pullback l f g)))
+```
 
+### Components of a pullback cone
+
+```agda
 module _
   {l1 l2 l3 l4 l : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
   (f : A → C) (g : B → C) (c : pullback-cone l f g X)
