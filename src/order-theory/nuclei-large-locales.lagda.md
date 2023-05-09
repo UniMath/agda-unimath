@@ -22,7 +22,7 @@ open import order-theory.large-locales
 A **nucleus** on a [large locale](order-theory.large-locales.md) `L` is an order
 preserving map `j : hom-Large-Poset id L L` such that
 
-- `j` preserves the top element
+- `j` preserves meets, and
 - `j(j(x)) ＝ j(x)`.
 
 ## Definition
