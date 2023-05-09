@@ -15,6 +15,7 @@ open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-posets
+open import order-theory.largest-elements-large-posets
 open import order-theory.lower-bounds-large-posets
 ```
 
@@ -54,6 +55,60 @@ record
 open has-meets-Large-Poset public
 ```
 
+### The predicate of being a large meet-semilattice
+
+```agda
+record
+  is-large-meet-semilattice-Large-Poset
+    { α : Level → Level}
+    { β : Level → Level → Level}
+    ( P : Large-Poset α β) :
+    UUω
+  where
+  field
+    has-meets-is-large-meet-semilattice-Large-Poset :
+      has-meets-Large-Poset P
+    has-largest-element-is-large-meet-semilattice-Large-Poset :
+      has-largest-element-Large-Poset P
+
+open is-large-meet-semilattice-Large-Poset public
+
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  (H : is-large-meet-semilattice-Large-Poset P)
+  where
+
+  meet-is-large-meet-semilattice-Large-Poset :
+    {l1 l2 : Level} (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+    type-Large-Poset P (l1 ⊔ l2)
+  meet-is-large-meet-semilattice-Large-Poset =
+    meet-has-meets-Large-Poset
+      ( has-meets-is-large-meet-semilattice-Large-Poset H)
+
+  is-greatest-binary-lower-bound-meet-is-large-meet-semilattice-Large-Poset :
+    {l1 l2 : Level} (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+    is-greatest-binary-lower-bound-Large-Poset P x y
+      ( meet-is-large-meet-semilattice-Large-Poset x y)
+  is-greatest-binary-lower-bound-meet-is-large-meet-semilattice-Large-Poset =
+    is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
+      ( has-meets-is-large-meet-semilattice-Large-Poset H)
+
+  top-is-large-meet-semilattice-Large-Poset :
+    type-Large-Poset P lzero
+  top-is-large-meet-semilattice-Large-Poset =
+    top-has-largest-element-Large-Poset
+      ( has-largest-element-is-large-meet-semilattice-Large-Poset H)
+
+  is-largest-element-top-is-large-meet-semilattice-Large-Poset :
+    {l1 : Level} (x : type-Large-Poset P l1) →
+    leq-Large-Poset P x top-is-large-meet-semilattice-Large-Poset
+  is-largest-element-top-is-large-meet-semilattice-Large-Poset =
+    is-largest-element-top-has-largest-element-Large-Poset
+      ( has-largest-element-is-large-meet-semilattice-Large-Poset H)
+```
+
 ### Large meet-semilattices
 
 ```agda
@@ -68,8 +123,9 @@ record
   field
     large-poset-Large-Meet-Semilattice :
       Large-Poset α β
-    has-meets-Large-Meet-Semilattice :
-      has-meets-Large-Poset large-poset-Large-Meet-Semilattice
+    is-large-meet-semilattice-Large-Meet-Semilattice :
+      is-large-meet-semilattice-Large-Poset
+        large-poset-Large-Meet-Semilattice
 
 open Large-Meet-Semilattice public
 
@@ -121,13 +177,21 @@ module _
   transitive-leq-Large-Meet-Semilattice =
     transitive-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
+  has-meets-Large-Meet-Semilattice :
+    has-meets-Large-Poset (large-poset-Large-Meet-Semilattice L)
+  has-meets-Large-Meet-Semilattice =
+    has-meets-is-large-meet-semilattice-Large-Poset
+      ( is-large-meet-semilattice-Large-Meet-Semilattice L)
+
   meet-Large-Meet-Semilattice :
     {l1 l2 : Level}
     (x : type-Large-Meet-Semilattice l1)
     (y : type-Large-Meet-Semilattice l2) →
     type-Large-Meet-Semilattice (l1 ⊔ l2)
   meet-Large-Meet-Semilattice =
-    meet-has-meets-Large-Poset (has-meets-Large-Meet-Semilattice L)
+    meet-is-large-meet-semilattice-Large-Poset
+      ( large-poset-Large-Meet-Semilattice L)
+      ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 
   is-greatest-binary-lower-bound-meet-Large-Meet-Semilattice :
     {l1 l2 : Level}
@@ -139,6 +203,28 @@ module _
       ( y)
       ( meet-Large-Meet-Semilattice x y)
   is-greatest-binary-lower-bound-meet-Large-Meet-Semilattice =
-    is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
-      ( has-meets-Large-Meet-Semilattice L)
+    is-greatest-binary-lower-bound-meet-is-large-meet-semilattice-Large-Poset
+      ( large-poset-Large-Meet-Semilattice L)
+      ( is-large-meet-semilattice-Large-Meet-Semilattice L)
+
+  has-largest-element-Large-Meet-Semilattice :
+    has-largest-element-Large-Poset (large-poset-Large-Meet-Semilattice L)
+  has-largest-element-Large-Meet-Semilattice =
+    has-largest-element-is-large-meet-semilattice-Large-Poset
+      ( is-large-meet-semilattice-Large-Meet-Semilattice L)
+
+  top-Large-Meet-Semilattice :
+    type-Large-Meet-Semilattice lzero
+  top-Large-Meet-Semilattice =
+    top-is-large-meet-semilattice-Large-Poset
+      ( large-poset-Large-Meet-Semilattice L)
+      ( is-large-meet-semilattice-Large-Meet-Semilattice L)
+
+  is-largest-element-top-Large-Meet-Semilattice :
+    {l1 : Level} (x : type-Large-Meet-Semilattice l1) →
+    leq-Large-Meet-Semilattice x top-Large-Meet-Semilattice
+  is-largest-element-top-Large-Meet-Semilattice =
+    is-largest-element-top-is-large-meet-semilattice-Large-Poset
+      ( large-poset-Large-Meet-Semilattice L)
+      ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 ```

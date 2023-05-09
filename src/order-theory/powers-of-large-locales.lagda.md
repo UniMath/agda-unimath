@@ -18,6 +18,7 @@ open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
+open import order-theory.largest-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
 ```
 
@@ -126,6 +127,20 @@ module _
       ( meet-power-Large-Locale x y)
   is-greatest-binary-lower-bound-meet-power-Large-Locale =
     is-greatest-binary-lower-bound-meet-Large-Locale power-Large-Locale
+
+  has-largest-element-power-Large-Locale :
+    has-largest-element-Large-Poset large-poset-power-Large-Locale
+  has-largest-element-power-Large-Locale =
+    has-largest-element-Large-Locale power-Large-Locale
+
+  top-power-Large-Locale : type-power-Large-Locale lzero
+  top-power-Large-Locale = top-Large-Locale power-Large-Locale
+
+  is-largest-element-top-power-Large-Locale :
+    {l1 : Level} (x : type-power-Large-Locale l1) →
+    leq-power-Large-Locale x top-power-Large-Locale
+  is-largest-element-top-power-Large-Locale =
+    is-largest-element-top-Large-Locale power-Large-Locale
 
   large-suplattice-power-Large-Locale :
     Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
