@@ -17,6 +17,7 @@ open import order-theory.dependent-products-large-locales public
 open import order-theory.dependent-products-large-meet-semilattices public
 open import order-theory.dependent-products-large-posets public
 open import order-theory.dependent-products-large-preorders public
+open import order-theory.dependent-products-large-suplattices public
 open import order-theory.directed-complete-posets public
 open import order-theory.directed-families public
 open import order-theory.distributive-lattices public
@@ -44,6 +45,7 @@ open import order-theory.largest-elements-preorders public
 open import order-theory.lattices public
 open import order-theory.least-elements-posets public
 open import order-theory.least-elements-preorders public
+open import order-theory.least-upper-bounds-large-posets public
 open import order-theory.least-upper-bounds-posets public
 open import order-theory.locales public
 open import order-theory.locally-finite-posets public
@@ -63,5 +65,6 @@ open import order-theory.subpreorders public
 open import order-theory.suplattices public
 open import order-theory.total-orders public
 open import order-theory.total-preorders public
+open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 ```
