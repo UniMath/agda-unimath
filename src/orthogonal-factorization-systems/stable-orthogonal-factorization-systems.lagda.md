@@ -7,7 +7,6 @@ module orthogonal-factorization-systems.stable-orthogonal-factorization-systems 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.function-classes
