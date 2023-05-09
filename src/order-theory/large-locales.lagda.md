@@ -12,9 +12,12 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
+open import order-theory.least-upper-bounds-large-posets
+open import order-theory.upper-bounds-large-posets
 ```
 
 </details>
@@ -120,6 +123,13 @@ module _
     is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
       ( has-meets-Large-Locale L)
 
+  large-meet-semilattice-Large-Locale :
+    Large-Meet-Semilattice α β
+  large-poset-Large-Meet-Semilattice large-meet-semilattice-Large-Locale =
+    large-poset-Large-Locale L
+  has-meets-Large-Meet-Semilattice large-meet-semilattice-Large-Locale =
+    has-meets-Large-Locale L
+
   sup-Large-Locale :
     {l1 l2 : Level} {I : UU l1} →
     (I → type-Large-Locale l2) → type-Large-Locale (l1 ⊔ l2)
@@ -138,4 +148,10 @@ module _
     is-least-upper-bound-sup-is-large-suplattice-Large-Poset
       ( large-poset-Large-Locale L)
       ( is-large-suplattice-Large-Locale L)
+
+  large-suplattice-Large-Locale : Large-Suplattice α β
+  large-poset-Large-Suplattice large-suplattice-Large-Locale =
+    large-poset-Large-Locale L
+  is-large-suplattice-Large-Suplattice large-suplattice-Large-Locale =
+    is-large-suplattice-Large-Locale L
 ```

@@ -14,11 +14,13 @@ open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
+open import order-theory.least-upper-bounds-large-posets
 ```
 
 </details>
@@ -35,9 +37,9 @@ The types of propositions `Prop l` combined form a
 ```agda
 Prop-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder Prop-Large-Preorder = Prop
-leq-large-preorder-Prop Prop-Large-Preorder = hom-Prop
+leq-Large-Preorder-Prop Prop-Large-Preorder = hom-Prop
 refl-leq-Large-Preorder Prop-Large-Preorder P = id
-trans-leq-Large-Preorder Prop-Large-Preorder P Q R g f = g ∘ f
+transitive-leq-Large-Preorder Prop-Large-Preorder P Q R g f = g ∘ f
 ```
 
 ### The large poset of propositions

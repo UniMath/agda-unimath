@@ -103,6 +103,18 @@ pr1 (iff-equiv e) = map-equiv e
 pr2 (iff-equiv e) = map-inv-equiv e
 ```
 
+## Logical equivalences between dependent function types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  iff-Π : ((i : I) → A i ↔ B i) → ((i : I) → A i) ↔ ((i : I) → B i)
+  pr1 (iff-Π e) a i = forward-implication (e i) (a i)
+  pr2 (iff-Π e) b i = backward-implication (e i) (b i)
+```
+
 ## Reasoning with logical equivalences
 
 Logical equivalences can be constructed by equational reasoning in the following

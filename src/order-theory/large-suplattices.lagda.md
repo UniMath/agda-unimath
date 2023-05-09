@@ -14,6 +14,8 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+open import order-theory.least-upper-bounds-large-posets
+open import order-theory.upper-bounds-large-posets
 ```
 
 </details>
@@ -37,70 +39,6 @@ such that the logical equivalence
 holds for every element `y : type-Large-Poset P l3`.
 
 ## Definitions
-
-### The predicate of being an upper bound of a family of elements
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (P : Large-Poset α β)
-  {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
-  where
-
-  is-upper-bound-family-of-elements-Large-Poset-Prop :
-    {l3 : Level} (y : type-Large-Poset P l3) → Prop (β l2 l3 ⊔ l1)
-  is-upper-bound-family-of-elements-Large-Poset-Prop y =
-    Π-Prop I (λ i → leq-Large-Poset-Prop P (x i) y)
-
-  is-upper-bound-family-of-elements-Large-Poset :
-    {l3 : Level} (y : type-Large-Poset P l3) → UU (β l2 l3 ⊔ l1)
-  is-upper-bound-family-of-elements-Large-Poset y =
-    type-Prop (is-upper-bound-family-of-elements-Large-Poset-Prop y)
-
-  is-prop-is-upper-bound-family-of-elements-Large-Poset :
-    {l3 : Level} (y : type-Large-Poset P l3) →
-    is-prop (is-upper-bound-family-of-elements-Large-Poset y)
-  is-prop-is-upper-bound-family-of-elements-Large-Poset y =
-    is-prop-type-Prop (is-upper-bound-family-of-elements-Large-Poset-Prop y)
-```
-
-### The predicate on large-posets of being a least upper bound of a family of elements
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (P : Large-Poset α β)
-  {l1 l2 l3 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
-  where
-
-  is-least-upper-bound-family-of-elements-Large-Poset :
-    type-Large-Poset P l3 → UUω
-  is-least-upper-bound-family-of-elements-Large-Poset y =
-    {l4 : Level} (z : type-Large-Poset P l4) →
-    is-upper-bound-family-of-elements-Large-Poset P x z ↔ leq-Large-Poset P y z
-```
-
-### The predicate on families of elements in large posets of having least upper bounds
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (P : Large-Poset α β)
-  {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
-  where
-
-  record
-    has-least-upper-bound-family-of-elements-Large-Poset : UUω
-    where
-    field
-      sup-has-least-upper-bound-family-of-elements-Large-Poset :
-        type-Large-Poset P (l1 ⊔ l2)
-      is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset :
-        is-least-upper-bound-family-of-elements-Large-Poset P x
-          sup-has-least-upper-bound-family-of-elements-Large-Poset
-
-  open has-least-upper-bound-family-of-elements-Large-Poset public
-```
 
 ### The predicate on large posets of having least upper bounds of families of elements
 
