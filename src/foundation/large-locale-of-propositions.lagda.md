@@ -35,9 +35,9 @@ The types of propositions `Prop l` combined form a
 ```agda
 Prop-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder Prop-Large-Preorder = Prop
-leq-large-preorder-Prop Prop-Large-Preorder = hom-Prop
+leq-Large-Preorder-Prop Prop-Large-Preorder = hom-Prop
 refl-leq-Large-Preorder Prop-Large-Preorder P = id
-trans-leq-Large-Preorder Prop-Large-Preorder P Q R g f = g ∘ f
+transitive-leq-Large-Preorder Prop-Large-Preorder P Q R g f = g ∘ f
 ```
 
 ### The large poset of propositions

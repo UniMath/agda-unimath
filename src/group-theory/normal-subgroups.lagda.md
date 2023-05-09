@@ -337,11 +337,11 @@ Normal-Subgroup-Large-Preorder :
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Normal-Subgroup-Large-Preorder G) l2 =
   Normal-Subgroup l2 G
-leq-large-preorder-Prop (Normal-Subgroup-Large-Preorder G) H K =
+leq-Large-Preorder-Prop (Normal-Subgroup-Large-Preorder G) H K =
   contains-Normal-Subgroup-Prop G H K
 refl-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
   refl-contains-Normal-Subgroup G
-trans-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
+transitive-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
   transitive-contains-Normal-Subgroup G
 
 Normal-Subgroup-Preorder :

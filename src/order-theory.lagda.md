@@ -13,6 +13,10 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.decidable-total-orders public
 open import order-theory.decidable-total-preorders public
+open import order-theory.dependent-products-large-locales public
+open import order-theory.dependent-products-large-meet-semilattices public
+open import order-theory.dependent-products-large-posets public
+open import order-theory.dependent-products-large-preorders public
 open import order-theory.directed-complete-posets public
 open import order-theory.directed-families public
 open import order-theory.distributive-lattices public
@@ -21,6 +25,7 @@ open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public
 open import order-theory.frames public
 open import order-theory.galois-connections public
+open import order-theory.greatest-lower-bounds-large-posets public
 open import order-theory.greatest-lower-bounds-posets public
 open import order-theory.homomorphisms-frames public
 open import order-theory.homomorphisms-meet-semilattices public
@@ -42,6 +47,7 @@ open import order-theory.least-elements-preorders public
 open import order-theory.least-upper-bounds-posets public
 open import order-theory.locales public
 open import order-theory.locally-finite-posets public
+open import order-theory.lower-bounds-large-posets public
 open import order-theory.lower-bounds-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public

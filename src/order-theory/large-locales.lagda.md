@@ -12,6 +12,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
