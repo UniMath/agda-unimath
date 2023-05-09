@@ -10,7 +10,6 @@ module orthogonal-factorization-systems.orthogonal-factorization-systems where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -43,7 +42,7 @@ is-orthogonal-factorization-system :
 is-orthogonal-factorization-system {l} L R =
   ( is-wide-function-class L) ×
   ( ( is-wide-function-class R) ×
-    ( (A B : UU l) → unique-function-class-factorization-operation L R A B))
+    ( (A B : UU l) → unique-factorization-operation-function-class L R A B))
 
 orthogonal-factorization-system :
   (l lL lR : Level) → UU (lsuc l ⊔ lsuc lL ⊔ lsuc lR)
@@ -73,12 +72,12 @@ module _
   is-wide-right-class-is-orthogonal-factorization-system = pr1 (pr2 is-OFS)
 
   unique-factorization-operation-is-orthogonal-factorization-system :
-    (A B : UU l) → unique-function-class-factorization-operation L R A B
+    (A B : UU l) → unique-factorization-operation-function-class L R A B
   unique-factorization-operation-is-orthogonal-factorization-system =
     pr2 (pr2 is-OFS)
 
   factorization-operation-is-orthogonal-factorization-system :
-    (A B : UU l) → function-class-factorization-operation L R A B
+    (A B : UU l) → factorization-operation-function-class L R A B
   factorization-operation-is-orthogonal-factorization-system A B f =
     center
       ( unique-factorization-operation-is-orthogonal-factorization-system A B f)
@@ -119,7 +118,7 @@ module _
 
   unique-factorization-operation-orthogonal-factorization-system :
     (A B : UU l) →
-    unique-function-class-factorization-operation
+    unique-factorization-operation-function-class
       ( left-class-orthogonal-factorization-system)
       ( right-class-orthogonal-factorization-system)
       ( A)
@@ -132,7 +131,7 @@ module _
 
   factorization-operation-orthogonal-factorization-system :
     (A B : UU l) →
-    function-class-factorization-operation
+    factorization-operation-function-class
       ( left-class-orthogonal-factorization-system)
       ( right-class-orthogonal-factorization-system)
       ( A)
@@ -164,7 +163,7 @@ module _
         ( is-prop-is-wide-function-class R)
         ( is-prop-Π
             λ A → is-prop-Π
-              λ B → is-prop-unique-function-class-factorization-operation L R))
+              λ B → is-prop-unique-factorization-operation-function-class L R))
 
   is-orthogonal-factorization-system-Prop : Prop (lsuc l ⊔ lL ⊔ lR)
   pr1 is-orthogonal-factorization-system-Prop =

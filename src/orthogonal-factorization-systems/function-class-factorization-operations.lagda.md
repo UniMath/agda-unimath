@@ -43,20 +43,20 @@ module _
   (A : UU l1) (B : UU l2)
   where
 
-  function-class-factorization-operation :
+  factorization-operation-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  function-class-factorization-operation =
-    (f : A → B) → function-class-factorization L R f
+  factorization-operation-function-class =
+    (f : A → B) → factorization-function-class L R f
 
-  mere-function-class-factorization-property :
+  mere-factorization-property-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  mere-function-class-factorization-property =
-    (f : A → B) → is-inhabited (function-class-factorization L R f)
+  mere-factorization-property-function-class =
+    (f : A → B) → is-inhabited (factorization-function-class L R f)
 
-  unique-function-class-factorization-operation :
+  unique-factorization-operation-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  unique-function-class-factorization-operation =
-    (f : A → B) → is-contr (function-class-factorization L R f)
+  unique-factorization-operation-function-class =
+    (f : A → B) → is-contr (factorization-function-class L R f)
 ```
 
 ## Properties
@@ -71,15 +71,15 @@ module _
   {A : UU l1} {B : UU l2}
   where
 
-  mere-function-class-factorization-property-Prop :
+  mere-factorization-property-function-class-Prop :
     Prop (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  mere-function-class-factorization-property-Prop =
-    Π-Prop (A → B) (is-inhabited-Prop ∘ function-class-factorization L R)
+  mere-factorization-property-function-class-Prop =
+    Π-Prop (A → B) (is-inhabited-Prop ∘ factorization-function-class L R)
 
-  is-prop-mere-function-class-factorization-property :
-    is-prop (mere-function-class-factorization-property L R A B)
-  is-prop-mere-function-class-factorization-property =
-    is-prop-type-Prop mere-function-class-factorization-property-Prop
+  is-prop-mere-factorization-property-function-class :
+    is-prop (mere-factorization-property-function-class L R A B)
+  is-prop-mere-factorization-property-function-class =
+    is-prop-type-Prop mere-factorization-property-function-class-Prop
 ```
 
 ### Having a unique function class factorization operation is a property
@@ -92,13 +92,13 @@ module _
   {A : UU l1} {B : UU l2}
   where
 
-  unique-function-class-factorization-operation-Prop :
+  unique-factorization-operation-function-class-Prop :
     Prop (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  unique-function-class-factorization-operation-Prop =
-    Π-Prop (A → B) (is-contr-Prop ∘ function-class-factorization L R)
+  unique-factorization-operation-function-class-Prop =
+    Π-Prop (A → B) (is-contr-Prop ∘ factorization-function-class L R)
 
-  is-prop-unique-function-class-factorization-operation :
-    is-prop (unique-function-class-factorization-operation L R A B)
-  is-prop-unique-function-class-factorization-operation =
-    is-prop-type-Prop unique-function-class-factorization-operation-Prop
+  is-prop-unique-factorization-operation-function-class :
+    is-prop (unique-factorization-operation-function-class L R A B)
+  is-prop-unique-factorization-operation-function-class =
+    is-prop-type-Prop unique-factorization-operation-function-class-Prop
 ```
