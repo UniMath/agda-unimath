@@ -1,7 +1,7 @@
-# Function class factorization operations
+# Factorization operations into function classes
 
 ```agda
-module orthogonal-factorization-systems.function-class-factorization-operations where
+module orthogonal-factorization-systems.factorization-operations-function-classes where
 ```
 
 <details><summary>Imports</summary>
@@ -21,8 +21,8 @@ open import orthogonal-factorization-systems.function-classes
 
 ## Idea
 
-Given two function classes `L` and `R`, a **function class factorization
-operation** is a factorization operation such that the left map of every
+A **factorization operation into function classes** is a factorization operation
+equipped with two function classes `L` and `R` such that the left map of every
 factorization is in `L`, and the right map is in `R`.
 
 ```md
