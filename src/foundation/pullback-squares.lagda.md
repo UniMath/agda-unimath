@@ -21,7 +21,7 @@ open import foundation-core.universe-levels
 A **pullback square**, or **cartesian square**, is a
 [commuting square of maps](foundation.commuting-squares-of-maps.md) that
 satisfies the
-[universal property of being a pullback](foundation.universal-property-pullback.md).
+[universal property of being a pullback](foundation.universal-property-pullbacks.md).
 
 ## Definitions
 
