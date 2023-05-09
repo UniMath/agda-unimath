@@ -17,6 +17,7 @@ open import order-theory.dependent-products-large-posets
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
+open import order-theory.largest-elements-large-posets
 ```
 
 </details>
@@ -73,12 +74,29 @@ module _
       ( λ i → large-poset-Large-Meet-Semilattice (L i))
       ( λ i → has-meets-Large-Meet-Semilattice (L i))
 
+  has-largest-element-Π-Large-Meet-Semilattice :
+    has-largest-element-Large-Poset large-poset-Π-Large-Meet-Semilattice
+  has-largest-element-Π-Large-Meet-Semilattice =
+    has-largest-element-Π-Large-Poset
+      ( λ i → large-poset-Large-Meet-Semilattice (L i))
+      ( λ i → has-largest-element-Large-Meet-Semilattice (L i))
+
+  is-large-meet-semilattice-Π-Large-Meet-Semilattice :
+    is-large-meet-semilattice-Large-Poset
+      large-poset-Π-Large-Meet-Semilattice
+  has-meets-is-large-meet-semilattice-Large-Poset
+    is-large-meet-semilattice-Π-Large-Meet-Semilattice =
+    has-meets-Π-Large-Meet-Semilattice
+  has-largest-element-is-large-meet-semilattice-Large-Poset
+    is-large-meet-semilattice-Π-Large-Meet-Semilattice =
+    has-largest-element-Π-Large-Meet-Semilattice
+
   Π-Large-Meet-Semilattice :
     Large-Meet-Semilattice (λ l1 → α l1 ⊔ l) (λ l1 l2 → β l1 l2 ⊔ l)
   large-poset-Large-Meet-Semilattice Π-Large-Meet-Semilattice =
     large-poset-Π-Large-Meet-Semilattice
-  has-meets-Large-Meet-Semilattice Π-Large-Meet-Semilattice =
-    has-meets-Π-Large-Meet-Semilattice
+  is-large-meet-semilattice-Large-Meet-Semilattice Π-Large-Meet-Semilattice =
+    is-large-meet-semilattice-Π-Large-Meet-Semilattice
 
   type-Π-Large-Meet-Semilattice : (l1 : Level) → UU (α l1 ⊔ l)
   type-Π-Large-Meet-Semilattice =
@@ -143,4 +161,17 @@ module _
   is-greatest-binary-lower-bound-meet-Π-Large-Meet-Semilattice =
     is-greatest-binary-lower-bound-meet-Large-Meet-Semilattice
       Π-Large-Meet-Semilattice
+
+  top-Π-Large-Meet-Semilattice :
+    type-Π-Large-Meet-Semilattice lzero
+  top-Π-Large-Meet-Semilattice =
+    top-has-largest-element-Large-Poset
+      has-largest-element-Π-Large-Meet-Semilattice
+
+  is-largest-element-top-Π-Large-Meet-Semilattice :
+    {l1 : Level} (x : type-Π-Large-Meet-Semilattice l1) →
+    leq-Π-Large-Meet-Semilattice x top-Π-Large-Meet-Semilattice
+  is-largest-element-top-Π-Large-Meet-Semilattice =
+    is-largest-element-top-has-largest-element-Large-Poset
+      has-largest-element-Π-Large-Meet-Semilattice
 ```

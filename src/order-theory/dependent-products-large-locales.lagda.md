@@ -21,6 +21,7 @@ open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
+open import order-theory.largest-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
 ```
 
@@ -129,6 +130,29 @@ module _
     is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
       has-meets-Π-Large-Locale
 
+  top-Π-Large-Locale : type-Π-Large-Locale lzero
+  top-Π-Large-Locale =
+    top-Large-Meet-Semilattice large-meet-semilattice-Π-Large-Locale
+
+  is-largest-element-top-Π-Large-Locale :
+    {l1 : Level} (x : type-Π-Large-Locale l1) →
+    leq-Π-Large-Locale x top-Π-Large-Locale
+  is-largest-element-top-Π-Large-Locale =
+    is-largest-element-top-Large-Meet-Semilattice
+      large-meet-semilattice-Π-Large-Locale
+
+  has-largest-element-Π-Large-Locale :
+    has-largest-element-Large-Poset large-poset-Π-Large-Locale
+  has-largest-element-Π-Large-Locale =
+    has-largest-element-Large-Meet-Semilattice
+      large-meet-semilattice-Π-Large-Locale
+
+  is-large-meet-semilattice-Π-Large-Locale :
+    is-large-meet-semilattice-Large-Poset large-poset-Π-Large-Locale
+  is-large-meet-semilattice-Π-Large-Locale =
+    is-large-meet-semilattice-Large-Meet-Semilattice
+      large-meet-semilattice-Π-Large-Locale
+
   sup-Π-Large-Locale :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Locale l3) →
     type-Π-Large-Locale (l2 ⊔ l3)
@@ -161,8 +185,8 @@ module _
   Π-Large-Locale : Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
   large-poset-Large-Locale Π-Large-Locale =
     large-poset-Π-Large-Locale
-  has-meets-Large-Locale Π-Large-Locale =
-    has-meets-Π-Large-Locale
+  is-large-meet-semilattice-Large-Locale Π-Large-Locale =
+    is-large-meet-semilattice-Π-Large-Locale
   is-large-suplattice-Large-Locale Π-Large-Locale =
     is-large-suplattice-Π-Large-Locale
   distributive-meet-sup-Large-Locale Π-Large-Locale =
