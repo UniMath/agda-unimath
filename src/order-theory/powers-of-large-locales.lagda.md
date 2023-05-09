@@ -45,26 +45,6 @@ module _
   large-poset-power-Large-Locale =
     large-poset-Large-Locale power-Large-Locale
 
-  large-meet-semilattice-power-Large-Locale :
-    Large-Meet-Semilattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
-  large-meet-semilattice-power-Large-Locale =
-    large-meet-semilattice-Large-Locale power-Large-Locale
-
-  has-meets-power-Large-Locale :
-    has-meets-Large-Poset large-poset-power-Large-Locale
-  has-meets-power-Large-Locale =
-    has-meets-Large-Locale power-Large-Locale
-
-  large-suplattice-power-Large-Locale :
-    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
-  large-suplattice-power-Large-Locale =
-    large-suplattice-Large-Locale power-Large-Locale
-
-  is-large-suplattice-power-Large-Locale :
-    is-large-suplattice-Large-Poset large-poset-power-Large-Locale
-  is-large-suplattice-power-Large-Locale =
-    is-large-suplattice-Large-Locale power-Large-Locale
-
   set-power-Large-Locale : (l : Level) → Set (α l ⊔ l1)
   set-power-Large-Locale =
     set-Large-Locale power-Large-Locale
@@ -118,6 +98,16 @@ module _
   transitive-leq-power-Large-Locale =
     transitive-leq-Large-Locale power-Large-Locale
 
+  large-meet-semilattice-power-Large-Locale :
+    Large-Meet-Semilattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  large-meet-semilattice-power-Large-Locale =
+    large-meet-semilattice-Large-Locale power-Large-Locale
+
+  has-meets-power-Large-Locale :
+    has-meets-Large-Poset large-poset-power-Large-Locale
+  has-meets-power-Large-Locale =
+    has-meets-Large-Locale power-Large-Locale
+
   meet-power-Large-Locale :
     {l2 l3 : Level} →
     type-power-Large-Locale l2 → type-power-Large-Locale l3 →
@@ -136,6 +126,16 @@ module _
       ( meet-power-Large-Locale x y)
   is-greatest-binary-lower-bound-meet-power-Large-Locale =
     is-greatest-binary-lower-bound-meet-Large-Locale power-Large-Locale
+
+  large-suplattice-power-Large-Locale :
+    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  large-suplattice-power-Large-Locale =
+    large-suplattice-Large-Locale power-Large-Locale
+
+  is-large-suplattice-power-Large-Locale :
+    is-large-suplattice-Large-Poset large-poset-power-Large-Locale
+  is-large-suplattice-power-Large-Locale =
+    is-large-suplattice-Large-Locale power-Large-Locale
 
   sup-power-Large-Locale :
     {l2 l3 : Level} {J : UU l2} (x : J → type-power-Large-Locale l3) →
