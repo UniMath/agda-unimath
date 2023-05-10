@@ -7,10 +7,10 @@ module structured-types.cartesian-products-types-equipped-with-endomorphisms whe
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms
 ```

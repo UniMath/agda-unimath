@@ -7,32 +7,30 @@ module univalent-combinatorics.cycle-decomposition-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.fundamental-theorem-of-arithmetic
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.universe-levels
 open import foundation.iterated-cartesian-product-types
+open import foundation.universe-levels
+
+open import lists.functoriality-lists
+open import lists.lists
+
+open import structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms
+open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms
 
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
-
-open import lists.lists
-open import lists.functoriality-lists
-
-open import structured-types.types-equipped-with-endomorphisms
-open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
-open import structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms
 ```
 
 </details>
 
 ## Idea
-
-
 
 ## Definition
 
@@ -53,4 +51,3 @@ is-cycle-decomposition-Endo n p X =
 Cycle-Decomposition : (l : Level) → (n : ℕ) → 1 ≤-ℕ n → UU (lsuc l)
 Cycle-Decomposition l n p = Σ (Endo l) (is-cycle-decomposition-Endo n p)
 ```
-

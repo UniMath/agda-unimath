@@ -268,7 +268,7 @@ equiv-type-Concrete-group-iterated-product-Concrete-Group :
 equiv-type-Concrete-group-iterated-product-Concrete-Group zero-ℕ G =
   equiv-is-contr
     ( is-proof-irrelevant-is-prop
-        ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl )
+        ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl)
     is-contr-raise-unit
 equiv-type-Concrete-group-iterated-product-Concrete-Group (succ-ℕ n) G =
   equiv-prod

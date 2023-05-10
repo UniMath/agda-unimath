@@ -5,7 +5,7 @@
 ```agda
 module structured-types where
 
-open import structured-types.cartesian-products-pointed-types public
+open import structured-types.cartesian-products-types-equipped-with-endomorphisms public
 open import structured-types.central-h-spaces public
 open import structured-types.coherent-h-spaces public
 open import structured-types.commuting-squares-of-pointed-maps public
@@ -20,7 +20,8 @@ open import structured-types.h-spaces public
 open import structured-types.initial-pointed-type-equipped-with-automorphism public
 open import structured-types.involutive-type-of-h-space-structures public
 open import structured-types.involutive-types public
-open import structured-types.iterated-cartesian-products-pointed-types public
+open import structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms public
+open import structured-types.iterated-pointed-cartesian-product-types public
 open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-coherent-h-spaces public

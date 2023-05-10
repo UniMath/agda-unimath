@@ -39,8 +39,8 @@ open import higher-group-theory.higher-groups
 
 ## Idea
 
-A torsor of `G` is a group action wich merely equivalent to the principal group action
-of `G`.
+A torsor of `G` is a group action wich merely equivalent to the principal group
+action of `G`.
 
 ## Definitions
 

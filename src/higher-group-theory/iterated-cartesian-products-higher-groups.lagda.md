@@ -184,13 +184,13 @@ module _
 
 ```agda
 equiv-type-∞-Group-iterated-product-∞-Group :
-  {l : Level} (n : ℕ) (G : Fin n → ∞-Group l)  →
+  {l : Level} (n : ℕ) (G : Fin n → ∞-Group l) →
   ( type-iterated-product-∞-Group n G) ≃
   ( iterated-product-Fin-recursive n (type-∞-Group ∘ G))
 equiv-type-∞-Group-iterated-product-∞-Group zero-ℕ G =
   equiv-is-contr
     ( is-proof-irrelevant-is-prop
-        ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl )
+        ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl)
     is-contr-raise-unit
 equiv-type-∞-Group-iterated-product-∞-Group (succ-ℕ n) G =
   ( ( equiv-prod

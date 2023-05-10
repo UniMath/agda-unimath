@@ -59,7 +59,7 @@ iterated-product-Fin-recursive (succ-ℕ n) A =
 iterated-product-Fin-Π :
   {l : Level} (n : ℕ) →
   ((Fin n) → UU l) → UU l
-iterated-product-Fin-Π n A = (i : Fin n) →  A i
+iterated-product-Fin-Π n A = (i : Fin n) → A i
 ```
 
 ### Via lists

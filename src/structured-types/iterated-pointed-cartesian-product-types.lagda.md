@@ -24,7 +24,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given a list of pointed types `l` we define recursively the iterated pointed cartesian product of `l`.
+Given a list of pointed types `l` we define recursively the iterated pointed
+cartesian product of `l`.
 
 ## Definition
 

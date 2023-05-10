@@ -7,21 +7,24 @@ module structured-types.iterated-cartesian-products-types-equipped-with-endomorp
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.universe-levels
+
+open import lists.lists
 
 open import structured-types.cartesian-products-types-equipped-with-endomorphisms
 open import structured-types.types-equipped-with-endomorphisms
-open import lists.lists
 ```
 
 </details>
 
 ## Idea
 
-From a list of a types equipped with endomorphisms, we define its iterated cartesian product recursively via the cartesian product of types equipped with endomorphism.
+From a list of a types equipped with endomorphisms, we define its iterated
+cartesian product recursively via the cartesian product of types equipped with
+endomorphism.
 
 ## Definitions
 
@@ -32,4 +35,3 @@ iterated-product-Endo-list nil = trivial-Endo
 iterated-product-Endo-list (cons A L) =
   product-Endo A (iterated-product-Endo-list L)
 ```
-

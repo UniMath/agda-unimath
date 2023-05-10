@@ -9,9 +9,9 @@ module structured-types.types-equipped-with-endomorphisms where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
-open import foundation.universe-levels
-open import foundation.unit-type
 open import foundation.functions
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 </details>
