@@ -216,6 +216,14 @@ abstract
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t)))
 
+comp-trunc-map :
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  {X : UU l3} (g : trunc-map k B X) (h : trunc-map k A B) →
+  trunc-map k A X
+pr1 (comp-trunc-map k g h) = pr1 g ∘ pr1 h
+pr2 (comp-trunc-map k g h) =
+  is-trunc-map-comp k (pr1 g) (pr1 h) (pr2 g) (pr2 h)
+
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (g : B → X) (h : A → B)

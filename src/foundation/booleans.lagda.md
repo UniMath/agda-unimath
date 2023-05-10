@@ -38,6 +38,17 @@ data bool : UU lzero where
 {-# BUILTIN BOOL bool #-}
 {-# BUILTIN TRUE  true  #-}
 {-# BUILTIN FALSE false #-}
+
+ind-bool :
+  {l : Level} (P : bool → UU l) →
+  P true → P false →
+  (b : bool) → P b
+ind-bool P pt pf true = pt
+ind-bool P pt pf false = pf
+
+if_then_else_ : {l : Level} {A : UU l} → bool → A → A → A
+if true then x else y = x
+if false then x else y = y
 ```
 
 ### Raising universe levels of the booleans
