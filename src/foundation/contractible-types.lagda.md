@@ -240,6 +240,11 @@ module _
   pr2 (equiv-dependent-universal-property-contr a H P) =
     dependent-universal-property-contr-is-contr a H P
 
+  apply-dependent-universal-property-contr :
+    (a : A) → is-contr A → {l : Level} (B : A → UU l) → (B a → ((x : A) → B x))
+  apply-dependent-universal-property-contr a H P =
+    map-inv-equiv (equiv-dependent-universal-property-contr a H P)
+
   abstract
     universal-property-contr-is-contr :
       (a : A) → is-contr A → {l : Level} → universal-property-contr l a
@@ -252,6 +257,11 @@ module _
   pr1 (equiv-universal-property-contr a H X) = ev-point' a
   pr2 (equiv-universal-property-contr a H X) =
     universal-property-contr-is-contr a H X
+
+  apply-universal-property-contr :
+    (a : A) → is-contr A → {l : Level} (X : UU l) → X → (A → X)
+  apply-universal-property-contr a H X =
+    map-inv-equiv (equiv-universal-property-contr a H X)
 
   abstract
     is-equiv-self-diagonal-is-equiv-diagonal :
