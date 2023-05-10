@@ -21,7 +21,7 @@ open import order-theory.large-frames
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
+open import order-theory.top-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
 ```
 
@@ -134,17 +134,17 @@ module _
   top-Π-Large-Frame =
     top-Large-Meet-Semilattice large-meet-semilattice-Π-Large-Frame
 
-  is-largest-element-top-Π-Large-Frame :
+  is-top-element-top-Π-Large-Frame :
     {l1 : Level} (x : type-Π-Large-Frame l1) →
     leq-Π-Large-Frame x top-Π-Large-Frame
-  is-largest-element-top-Π-Large-Frame =
-    is-largest-element-top-Large-Meet-Semilattice
+  is-top-element-top-Π-Large-Frame =
+    is-top-element-top-Large-Meet-Semilattice
       large-meet-semilattice-Π-Large-Frame
 
-  has-largest-element-Π-Large-Frame :
-    has-largest-element-Large-Poset large-poset-Π-Large-Frame
-  has-largest-element-Π-Large-Frame =
-    has-largest-element-Large-Meet-Semilattice
+  has-top-element-Π-Large-Frame :
+    has-top-element-Large-Poset large-poset-Π-Large-Frame
+  has-top-element-Π-Large-Frame =
+    has-top-element-Large-Meet-Semilattice
       large-meet-semilattice-Π-Large-Frame
 
   is-large-meet-semilattice-Π-Large-Frame :

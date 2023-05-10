@@ -17,7 +17,7 @@ open import order-theory.large-frames
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
+open import order-theory.top-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -116,19 +116,19 @@ module _
   is-greatest-binary-lower-bound-meet-Large-Locale =
     is-greatest-binary-lower-bound-meet-Large-Frame L
 
-  has-largest-element-Large-Locale :
-    has-largest-element-Large-Poset large-poset-Large-Locale
-  has-largest-element-Large-Locale =
-    has-largest-element-Large-Frame L
+  has-top-element-Large-Locale :
+    has-top-element-Large-Poset large-poset-Large-Locale
+  has-top-element-Large-Locale =
+    has-top-element-Large-Frame L
 
   top-Large-Locale : type-Large-Locale lzero
   top-Large-Locale = top-Large-Frame L
 
-  is-largest-element-top-Large-Locale :
+  is-top-element-top-Large-Locale :
     {l1 : Level} (x : type-Large-Locale l1) →
     leq-Large-Locale x top-Large-Locale
-  is-largest-element-top-Large-Locale =
-    is-largest-element-top-Large-Frame L
+  is-top-element-top-Large-Locale =
+    is-top-element-top-Large-Frame L
 
   large-suplattice-Large-Locale : Large-Suplattice α β
   large-suplattice-Large-Locale = large-suplattice-Large-Frame L

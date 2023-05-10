@@ -23,7 +23,7 @@ open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
+open import order-theory.top-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
 ```
 
@@ -125,16 +125,16 @@ module _
   top-Π-Large-Locale : type-Π-Large-Locale lzero
   top-Π-Large-Locale = top-Π-Large-Frame L
 
-  is-largest-element-top-Π-Large-Locale :
+  is-top-element-top-Π-Large-Locale :
     {l1 : Level} (x : type-Π-Large-Locale l1) →
     leq-Π-Large-Locale x top-Π-Large-Locale
-  is-largest-element-top-Π-Large-Locale =
-    is-largest-element-top-Π-Large-Frame L
+  is-top-element-top-Π-Large-Locale =
+    is-top-element-top-Π-Large-Frame L
 
-  has-largest-element-Π-Large-Locale :
-    has-largest-element-Large-Poset large-poset-Π-Large-Locale
-  has-largest-element-Π-Large-Locale =
-    has-largest-element-Π-Large-Frame L
+  has-top-element-Π-Large-Locale :
+    has-top-element-Large-Poset large-poset-Π-Large-Locale
+  has-top-element-Π-Large-Locale =
+    has-top-element-Π-Large-Frame L
 
   is-large-meet-semilattice-Π-Large-Locale :
     is-large-meet-semilattice-Large-Poset large-poset-Π-Large-Locale

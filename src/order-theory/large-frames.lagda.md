@@ -16,7 +16,7 @@ open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
+open import order-theory.top-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -147,21 +147,21 @@ module _
       ( large-poset-Large-Frame L)
       ( is-large-meet-semilattice-Large-Frame L)
 
-  has-largest-element-Large-Frame :
-    has-largest-element-Large-Poset (large-poset-Large-Frame L)
-  has-largest-element-Large-Frame =
-    has-largest-element-Large-Meet-Semilattice
+  has-top-element-Large-Frame :
+    has-top-element-Large-Poset (large-poset-Large-Frame L)
+  has-top-element-Large-Frame =
+    has-top-element-Large-Meet-Semilattice
       large-meet-semilattice-Large-Frame
 
   top-Large-Frame : type-Large-Frame lzero
   top-Large-Frame =
     top-Large-Meet-Semilattice large-meet-semilattice-Large-Frame
 
-  is-largest-element-top-Large-Frame :
+  is-top-element-top-Large-Frame :
     {l1 : Level} (x : type-Large-Frame l1) →
     leq-Large-Frame x top-Large-Frame
-  is-largest-element-top-Large-Frame =
-    is-largest-element-top-Large-Meet-Semilattice
+  is-top-element-top-Large-Frame =
+    is-top-element-top-Large-Meet-Semilattice
       large-meet-semilattice-Large-Frame
 
   sup-Large-Frame :

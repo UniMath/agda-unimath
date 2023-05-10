@@ -42,12 +42,12 @@ open import order-theory.large-meet-semilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
 open import order-theory.large-suplattices public
-open import order-theory.largest-elements-large-posets public
-open import order-theory.largest-elements-posets public
-open import order-theory.largest-elements-preorders public
+open import order-theory.top-elements-large-posets public
+open import order-theory.top-elements-posets public
+open import order-theory.top-elements-preorders public
 open import order-theory.lattices public
-open import order-theory.least-elements-posets public
-open import order-theory.least-elements-preorders public
+open import order-theory.bottom-elements-posets public
+open import order-theory.bottom-elements-preorders public
 open import order-theory.least-upper-bounds-large-posets public
 open import order-theory.least-upper-bounds-posets public
 open import order-theory.locales public
