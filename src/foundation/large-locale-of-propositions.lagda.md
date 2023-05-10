@@ -16,6 +16,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
@@ -101,16 +102,23 @@ is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
   is-least-upper-bound-exists-Prop P
 ```
 
+### The large frame of propositions
+
+```agda
+Prop-Large-Frame : Large-Frame lsuc _⊔_
+large-poset-Large-Frame Prop-Large-Frame =
+  Prop-Large-Poset
+is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
+  is-large-meet-semilattice-Prop-Large-Locale
+is-large-suplattice-Large-Frame Prop-Large-Frame =
+  is-large-suplattice-Prop-Large-Locale
+distributive-meet-sup-Large-Frame Prop-Large-Frame =
+  distributive-conj-exists-Prop
+```
+
 ### The large locale of propositions
 
 ```agda
 Prop-Large-Locale : Large-Locale lsuc _⊔_
-large-poset-Large-Locale Prop-Large-Locale =
-  Prop-Large-Poset
-is-large-meet-semilattice-Large-Locale Prop-Large-Locale =
-  is-large-meet-semilattice-Prop-Large-Locale
-is-large-suplattice-Large-Locale Prop-Large-Locale =
-  is-large-suplattice-Prop-Large-Locale
-distributive-meet-sup-Large-Locale Prop-Large-Locale =
-  distributive-conj-exists-Prop
+Prop-Large-Locale = Prop-Large-Frame
 ```
