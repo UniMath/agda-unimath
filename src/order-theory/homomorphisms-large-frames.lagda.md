@@ -21,7 +21,8 @@ open import order-theory.order-preserving-maps-large-posets
 
 ## Idea
 
-A **homomorphism of large frames** from `K` to `L` is an order preserving map from `K` to `L` which preserves meets, the top element, and suprema.
+A **homomorphism of large frames** from `K` to `L` is an order preserving map
+from `K` to `L` which preserves meets, the top element, and suprema.
 
 ## Definitions
 

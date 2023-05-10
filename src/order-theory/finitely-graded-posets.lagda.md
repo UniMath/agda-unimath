@@ -26,10 +26,10 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import order-theory.top-elements-posets
 open import order-theory.bottom-elements-posets
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.top-elements-posets
 open import order-theory.total-orders
 
 open import univalent-combinatorics.standard-finite-types

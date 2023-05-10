@@ -23,7 +23,9 @@ open import order-theory.large-subpreorders
 
 ## Idea
 
-A **large subposet** of a [large poset](order-theory.large-posets.md) `P` consists of a subtype `S : type-Large-Poset P l1 → Prop (γ l1)` for each universe level `l1`.
+A **large subposet** of a [large poset](order-theory.large-posets.md) `P`
+consists of a subtype `S : type-Large-Poset P l1 → Prop (γ l1)` for each
+universe level `l1`.
 
 ## Definition
 

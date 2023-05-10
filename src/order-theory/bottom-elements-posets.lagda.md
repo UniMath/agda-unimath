@@ -20,8 +20,8 @@ open import order-theory.posets
 
 ## Idea
 
-A **bottom element** in a poset `P` is an element `b` such that `b ≤ x` holds for
-every element `x : P`.
+A **bottom element** in a poset `P` is an element `b` such that `b ≤ x` holds
+for every element `x : P`.
 
 ## Definition
 

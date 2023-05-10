@@ -23,8 +23,8 @@ open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.top-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>

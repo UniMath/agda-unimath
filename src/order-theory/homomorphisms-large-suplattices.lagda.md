@@ -19,7 +19,9 @@ open import order-theory.order-preserving-maps-large-posets
 
 ## Idea
 
-A **homomorphism of large suplattices** is an [order preserving map](order-theory.order-preserving-maps-large-posets.md) that preserves least upper bounds.
+A **homomorphism of large suplattices** is an
+[order preserving map](order-theory.order-preserving-maps-large-posets.md) that
+preserves least upper bounds.
 
 ## Definitions
 

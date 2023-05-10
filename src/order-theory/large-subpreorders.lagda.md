@@ -19,13 +19,15 @@ open import order-theory.large-preorders
 
 ## Idea
 
-A **large subpreorder** of a [large preorder](order-theory.large-preorders.md) `P` consists of a subtype
+A **large subpreorder** of a [large preorder](order-theory.large-preorders.md)
+`P` consists of a subtype
 
 ```md
   S : type-Large-Preorder P l → Prop (γ l)
 ```
 
-for each universe level `l`, where `γ : Level → Level` is a universe level reindexing function.
+for each universe level `l`, where `γ : Level → Level` is a universe level
+reindexing function.
 
 ## Definition
 

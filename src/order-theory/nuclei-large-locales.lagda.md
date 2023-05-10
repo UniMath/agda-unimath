@@ -23,7 +23,8 @@ open import order-theory.large-locales
 ## Idea
 
 A **nucleus** on a [large locale](order-theory.large-locales.md) `L` is an order
-preserving map `j : hom-Large-Poset id L L` such that `j` preserves meets and is idempotent.
+preserving map `j : hom-Large-Poset id L L` such that `j` preserves meets and is
+idempotent.
 
 ## Definition
 

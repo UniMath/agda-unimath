@@ -22,8 +22,8 @@ open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>
@@ -67,12 +67,12 @@ is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
 ### The largest element in the large poset of propositions
 
 ```agda
-has-largest-element-Prop-Large-Locale :
-  has-largest-element-Large-Poset Prop-Large-Poset
-top-has-largest-element-Large-Poset
-  has-largest-element-Prop-Large-Locale = unit-Prop
-is-largest-element-top-has-largest-element-Large-Poset
-  has-largest-element-Prop-Large-Locale P p =
+has-top-element-Prop-Large-Locale :
+  has-top-element-Large-Poset Prop-Large-Poset
+top-has-top-element-Large-Poset
+  has-top-element-Prop-Large-Locale = unit-Prop
+is-top-element-top-has-top-element-Large-Poset
+  has-top-element-Prop-Large-Locale P p =
   star
 ```
 
@@ -84,9 +84,9 @@ is-large-meet-semilattice-Prop-Large-Locale :
 has-meets-is-large-meet-semilattice-Large-Poset
   is-large-meet-semilattice-Prop-Large-Locale =
   has-meets-Prop-Large-Locale
-has-largest-element-is-large-meet-semilattice-Large-Poset
+has-top-element-is-large-meet-semilattice-Large-Poset
   is-large-meet-semilattice-Prop-Large-Locale =
-  has-largest-element-Prop-Large-Locale
+  has-top-element-Prop-Large-Locale
 ```
 
 ### Suprema in the large poset of propositions

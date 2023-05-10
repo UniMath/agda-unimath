@@ -16,8 +16,8 @@ open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.top-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.top-elements-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
 
@@ -25,8 +25,8 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large frame** is a large meet-suplattice satisfying the distributive law
-for meets over suprema.
+A **large frame** is a large meet-suplattice satisfying the distributive law for
+meets over suprema.
 
 ## Definitions
 

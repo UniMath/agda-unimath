@@ -5,6 +5,8 @@
 ```agda
 module order-theory where
 
+open import order-theory.bottom-elements-posets public
+open import order-theory.bottom-elements-preorders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.decidable-posets public
@@ -13,6 +15,7 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.decidable-total-orders public
 open import order-theory.decidable-total-preorders public
+open import order-theory.dependent-products-large-frames public
 open import order-theory.dependent-products-large-locales public
 open import order-theory.dependent-products-large-meet-semilattices public
 open import order-theory.dependent-products-large-posets public
@@ -30,24 +33,25 @@ open import order-theory.galois-connections-large-posets public
 open import order-theory.greatest-lower-bounds-large-posets public
 open import order-theory.greatest-lower-bounds-posets public
 open import order-theory.homomorphisms-frames public
+open import order-theory.homomorphisms-large-frames public
+open import order-theory.homomorphisms-large-locales public
 open import order-theory.homomorphisms-large-meet-semilattices public
+open import order-theory.homomorphisms-large-suplattices public
 open import order-theory.homomorphisms-meet-semilattices public
 open import order-theory.homomorphisms-meet-sup-lattices public
 open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public
+open import order-theory.large-frames public
 open import order-theory.large-locales public
 open import order-theory.large-meet-semilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
+open import order-theory.large-subposets public
+open import order-theory.large-subpreorders public
 open import order-theory.large-suplattices public
-open import order-theory.top-elements-large-posets public
-open import order-theory.top-elements-posets public
-open import order-theory.top-elements-preorders public
 open import order-theory.lattices public
-open import order-theory.bottom-elements-posets public
-open import order-theory.bottom-elements-preorders public
 open import order-theory.least-upper-bounds-large-posets public
 open import order-theory.least-upper-bounds-posets public
 open import order-theory.locales public
@@ -70,6 +74,9 @@ open import order-theory.preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.suplattices public
+open import order-theory.top-elements-large-posets public
+open import order-theory.top-elements-posets public
+open import order-theory.top-elements-preorders public
 open import order-theory.total-orders public
 open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public

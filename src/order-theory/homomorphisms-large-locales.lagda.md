@@ -18,7 +18,8 @@ open import order-theory.large-locales
 
 ## Idea
 
-A **homomorphism of large locales** from `K` to `L` is a [frame homomorphism](order-theory.homomorphism-large-frames.md) from `L` to `K`.
+A **homomorphism of large locales** from `K` to `L` is a
+[frame homomorphism](order-theory.homomorphism-large-frames.md) from `L` to `K`.
 
 ## Definition
 
