@@ -32,10 +32,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In these file, we give three definitions of the iterated cartesian product
-`A₁ × ... × Aₙ` of `n` types `A₁ , ... , Aₙ`. Two uses a family of types over
-`Fin n`: the first use recursion over `Fin n` and the second is just
-`Π (Fin n) A`. The last one use lists. We also show that the first two
+In this file, we give three definitions of the iterated cartesian product
+`A₁ × ... × Aₙ` of `n` types `A₁ , ... , Aₙ`. Two use a family of types over
+`Fin n`: the first uses recursion over `Fin n` and the second is just
+`Π (Fin n) A`. The last one uses lists. We also show that the first two
 definitions are equivalent.
 
 ## Definitions

@@ -43,12 +43,12 @@ concrete-group-cycle-prime-decomposition-ℕ :
   (n : ℕ) → leq-ℕ 1 n → Concrete-Group (lsuc lzero)
 concrete-group-cycle-prime-decomposition-ℕ n H =
   iterated-product-Concrete-Group
-    ( pr1
+    ( length-array
       ( array-list
         ( map-list
           ( concrete-group-Cyclic-Type)
           ( list-fundamental-theorem-arithmetic-ℕ n H))))
-    ( pr2
+    ( functional-vec-array
       ( array-list
         ( map-list
           ( concrete-group-Cyclic-Type)
