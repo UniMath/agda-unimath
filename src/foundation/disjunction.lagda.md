@@ -62,8 +62,8 @@ pr2 (pr2 (disj-Decidable-Prop P Q)) =
     ( type-Decidable-Prop P + type-Decidable-Prop Q)
     ( unit-trunc-Prop
       ( is-decidable-coprod
-        ( is-decidable-type-Decidable-Prop P)
-        ( is-decidable-type-Decidable-Prop Q)))
+        ( is-decidable-Decidable-Prop P)
+        ( is-decidable-Decidable-Prop Q)))
 ```
 
 ## Properties

@@ -23,25 +23,25 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-A frame homomorphism is an order preserving map between posets that additionally
-preserves binary meets and arbitrary joins.
+A **frame homomorphism** is an order preserving map between posets that
+additionally preserves binary meets and arbitrary joins.
 
 ## Definitions
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (A : Frame l1 l2 l3) (B : Frame l4 l5 l6)
+  {l1 l2 l3 l4 : Level} (A : Frame l1 l2) (B : Frame l3 l4)
   where
 
-  hom-Frame : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
-  hom-Frame = Σ (element-Frame A → element-Frame B)
+  hom-Frame : UU (l1 ⊔ lsuc l2 ⊔ l3)
+  hom-Frame = Σ (type-Frame A → type-Frame B)
     (λ f → preserves-order-Poset (poset-Frame A) (poset-Frame B) f ×
       preserves-meets-sups
-        ( meet-sup-lattice-Frame A)
-        ( meet-sup-lattice-Frame B)
+        ( meet-suplattice-Frame A)
+        ( meet-suplattice-Frame B)
         ( f))
 
-  map-hom-Frame : hom-Frame → element-Frame A → element-Frame B
+  map-hom-Frame : hom-Frame → type-Frame A → type-Frame B
   map-hom-Frame = pr1
 
   preserves-order-hom-Frame :
@@ -52,14 +52,14 @@ module _
   preserves-meets-sups-hom-Frame :
     (H : hom-Frame) →
     preserves-meets-sups
-      ( meet-sup-lattice-Frame A)
-      ( meet-sup-lattice-Frame B)
+      ( meet-suplattice-Frame A)
+      ( meet-suplattice-Frame B)
       ( map-hom-Frame H)
   preserves-meets-sups-hom-Frame = pr2 ∘ pr2
 
   preserves-meets-hom-Frame :
     (H : hom-Frame) →
-    preserves-meets
+    preserves-meet
       ( meet-semilattice-Frame A)
       ( meet-semilattice-Frame B)
       ( map-hom-Frame H)
@@ -68,8 +68,8 @@ module _
   preserves-sups-hom-Frame :
     (H : hom-Frame) →
     preserves-sups
-      ( sup-lattice-Frame A)
-      ( sup-lattice-Frame B)
+      ( suplattice-Frame A)
+      ( suplattice-Frame B)
       ( map-hom-Frame H)
   preserves-sups-hom-Frame = pr2 ∘ preserves-meets-sups-hom-Frame
 ```

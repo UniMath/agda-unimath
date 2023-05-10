@@ -14,7 +14,7 @@ module commutative-algebra.maximal-ideals-commutative-rings where
 
 ## Idea
 
-Maximal ideals in a commutative ring `R` are proper ideals `I` such that any
-ideal `J` such that `I ⊆ J` is either `I` or `R`.
+**Maximal ideals** in a commutative ring `A` are proper ideals `I` such that any
+ideal `J` such that `I ⊆ J` satisfies `1 ∉ J ⇒ I ＝ J`.
 
 ## Definition

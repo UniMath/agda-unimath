@@ -1,4 +1,4 @@
-# endomorphisms
+# Endomorphisms
 
 ```agda
 module foundation.endomorphisms where

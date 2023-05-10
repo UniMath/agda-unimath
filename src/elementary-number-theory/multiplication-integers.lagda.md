@@ -19,7 +19,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps

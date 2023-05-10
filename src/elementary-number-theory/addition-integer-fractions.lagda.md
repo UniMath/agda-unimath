@@ -12,7 +12,6 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.multiplication-integers
 
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 ```
 

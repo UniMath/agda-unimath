@@ -16,7 +16,6 @@ open import foundation.binary-equivalences
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types

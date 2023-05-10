@@ -464,3 +464,48 @@ ap-binary-concat :
     ((ap-binary f p q) ∙ (ap-binary f p' q'))
 ap-binary-concat f refl refl refl refl = refl
 ```
+
+## Equational reasoning
+
+Identifications can be constructed by equational reasoning in the following way:
+
+```md
+equational-reasoning
+  x ＝ y by eq-1
+    ＝ z by eq-2
+    ＝ v by eq-3
+```
+
+The resulting identification of this computaion is `eq-1 ∙ (eq-2 ∙ eq-3)`, i.e.,
+the identification is associated fully to the right. For examples of the use of
+equational reasoning, see
+[addition-integers](elementary-number-theory.addition-integers.md).
+
+```agda
+infixl 1 equational-reasoning_
+infixl 0 step-equational-reasoning
+
+equational-reasoning_ :
+  {l : Level} {X : UU l} (x : X) → x ＝ x
+equational-reasoning x = refl
+
+step-equational-reasoning :
+  {l : Level} {X : UU l} {x y : X} →
+  (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
+step-equational-reasoning p z q = p ∙ q
+
+syntax step-equational-reasoning p z q = p ＝ z by q
+```
+
+## References
+
+Our setup of equational reasoning is derived from the following sources:
+
+1. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda>
+
+2. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda>
+
+3. The Agda standard library.
+   <https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda>

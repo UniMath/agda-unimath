@@ -78,11 +78,19 @@ leq-right-leq-max-Fin (succ-ℕ k) (inl x) (inl y) (inr z) p = p
 
 is-least-upper-bound-max-Fin :
   (k : ℕ) (m n : Fin k) →
-  is-least-binary-upper-bound-Poset (fin-Poset k) m n (max-Fin k m n)
-pr1 (pr1 (is-least-upper-bound-max-Fin k m n)) =
-  leq-left-leq-max-Fin k (max-Fin k m n) m n (refl-leq-Fin k (max-Fin k m n))
-pr2 (pr1 (is-least-upper-bound-max-Fin k m n)) =
-  leq-right-leq-max-Fin k (max-Fin k m n) m n (refl-leq-Fin k (max-Fin k m n))
-pr2 (is-least-upper-bound-max-Fin k m n) x (pair H K) =
-  leq-max-Fin k x m n H K
+  is-least-binary-upper-bound-Poset (Fin-Poset k) m n (max-Fin k m n)
+is-least-upper-bound-max-Fin k m n =
+  prove-is-least-binary-upper-bound-Poset
+    ( Fin-Poset k)
+    ( ( leq-left-leq-max-Fin k
+        ( max-Fin k m n)
+        ( m)
+        ( n)
+        ( refl-leq-Fin k (max-Fin k m n))) ,
+      ( leq-right-leq-max-Fin k
+        ( max-Fin k m n)
+        ( m)
+        ( n)
+        ( refl-leq-Fin k (max-Fin k m n))))
+    ( λ x (H , K) → leq-max-Fin k x m n H K)
 ```

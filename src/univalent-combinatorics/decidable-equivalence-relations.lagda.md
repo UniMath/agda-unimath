@@ -113,12 +113,12 @@ module _
   where
 
   is-finite-relation-Decidable-Relation-𝔽 :
-    (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (type-Decidable-Relation R x y)
+    (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (rel-Decidable-Relation R x y)
   is-finite-relation-Decidable-Relation-𝔽 x y =
      unit-trunc-Prop
        ( count-Decidable-Prop
          ( relation-Decidable-Relation R x y)
-         ( is-decidable-type-Decidable-Relation R x y))
+         ( is-decidable-Decidable-Relation R x y))
 
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 :
     is-finite (is-reflexive-Rel-Prop (relation-Decidable-Relation R))

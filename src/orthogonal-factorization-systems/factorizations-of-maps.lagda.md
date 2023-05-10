@@ -123,18 +123,18 @@ module _
   {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-function-class-factorization-Prop : factorization f lF → Prop (lL ⊔ lR)
-  is-function-class-factorization-Prop F =
+  is-factorization-function-class-Prop : factorization f lF → Prop (lL ⊔ lR)
+  is-factorization-function-class-Prop F =
     conj-Prop (L (left-map-factorization F)) (R (right-map-factorization F))
 
-  is-function-class-factorization : factorization f lF → UU (lL ⊔ lR)
-  is-function-class-factorization =
-    type-Prop ∘ is-function-class-factorization-Prop
+  is-factorization-function-class : factorization f lF → UU (lL ⊔ lR)
+  is-factorization-function-class =
+    type-Prop ∘ is-factorization-function-class-Prop
 
-  function-class-factorization :
+  factorization-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  function-class-factorization =
-    Σ (factorization f lF) (is-function-class-factorization)
+  factorization-function-class =
+    Σ (factorization f lF) (is-factorization-function-class)
 ```
 
 ## Properties
@@ -182,8 +182,8 @@ module _
   is-contr-total-htpy-factorization-through F =
     is-contr-total-Eq-structure
       ( λ g hH R →
-        Σ ( left-map-factorization-through F
-            ~ left-map-factorization-through (g , hH))
+        Σ ( left-map-factorization-through F ~
+            left-map-factorization-through (g , hH))
           ( coherence-htpy-factorization-through F (g , hH) R))
       ( is-contr-total-htpy (right-map-factorization-through F))
       ( right-map-factorization-through F , refl-htpy)
@@ -191,11 +191,11 @@ module _
         ( λ h H →
           coherence-htpy-factorization-through
             ( F)
-            ( (right-map-factorization-through F) , h , H)
+            ( right-map-factorization-through F , h , H)
             ( refl-htpy))
         ( is-contr-total-htpy (left-map-factorization-through F))
-        (left-map-factorization-through F , refl-htpy)
-        (is-contr-total-htpy
+        ( left-map-factorization-through F , refl-htpy)
+        ( is-contr-total-htpy
           ( is-factorization-factorization-through F ∙h refl-htpy)))
 
   is-equiv-htpy-eq-factorization-through :

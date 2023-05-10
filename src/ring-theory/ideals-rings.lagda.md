@@ -8,14 +8,17 @@ module ring-theory.ideals-rings where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.normal-subgroups
-open import group-theory.subgroups
+open import group-theory.subgroups-abelian-groups
 
 open import ring-theory.rings
 open import ring-theory.subsets-rings
@@ -105,6 +108,11 @@ module _
   is-closed-under-addition-left-ideal-Ring =
     pr1 (pr2 is-additive-subgroup-subset-left-ideal-Ring)
 
+  is-closed-under-negatives-left-ideal-Ring :
+    is-closed-under-negatives-subset-Ring R subset-left-ideal-Ring
+  is-closed-under-negatives-left-ideal-Ring =
+    pr2 (pr2 is-additive-subgroup-subset-left-ideal-Ring)
+
   is-closed-under-left-multiplication-left-ideal-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-left-ideal-Ring
   is-closed-under-left-multiplication-left-ideal-Ring =
@@ -186,6 +194,11 @@ module _
   is-closed-under-addition-right-ideal-Ring =
     pr1 (pr2 is-additive-subgroup-subset-right-ideal-Ring)
 
+  is-closed-under-negatives-right-ideal-Ring :
+    is-closed-under-negatives-subset-Ring R subset-right-ideal-Ring
+  is-closed-under-negatives-right-ideal-Ring =
+    pr2 (pr2 is-additive-subgroup-subset-right-ideal-Ring)
+
   is-closed-under-right-multiplication-right-ideal-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-right-ideal-Ring
   is-closed-under-right-multiplication-right-ideal-Ring =
@@ -201,6 +214,16 @@ is-ideal-subset-Ring R P =
   is-additive-subgroup-subset-Ring R P ×
   ( is-closed-under-left-multiplication-subset-Ring R P ×
     is-closed-under-right-multiplication-subset-Ring R P)
+
+is-prop-is-ideal-subset-Ring :
+  {l1 l2 : Level} (R : Ring l1) (P : subset-Ring l2 R) →
+  is-prop (is-ideal-subset-Ring R P)
+is-prop-is-ideal-subset-Ring R P =
+  is-prop-prod
+    ( is-prop-is-additive-subgroup-subset-Ring R P)
+    ( is-prop-prod
+      ( is-prop-is-closed-under-left-multiplication-subset-Ring R P)
+      ( is-prop-is-closed-under-right-multiplication-subset-Ring R P))
 
 ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
@@ -244,64 +267,111 @@ module _
   is-closed-under-eq-ideal-Ring' =
     is-closed-under-eq-subset-Ring' R subset-ideal-Ring
 
-  is-ideal-subset-ideal-Ring :
+  is-ideal-ideal-Ring :
     is-ideal-subset-Ring R subset-ideal-Ring
-  is-ideal-subset-ideal-Ring = pr2 I
+  is-ideal-ideal-Ring = pr2 I
 
-  is-additive-subgroup-subset-ideal-Ring :
+  is-additive-subgroup-ideal-Ring :
     is-additive-subgroup-subset-Ring R subset-ideal-Ring
-  is-additive-subgroup-subset-ideal-Ring =
-    pr1 is-ideal-subset-ideal-Ring
+  is-additive-subgroup-ideal-Ring =
+    pr1 is-ideal-ideal-Ring
 
-  contains-zero-ideal-Ring : is-in-ideal-Ring (zero-Ring R)
-  contains-zero-ideal-Ring =
-    pr1 is-additive-subgroup-subset-ideal-Ring
+  contains-zero-ideal-Ring : contains-zero-subset-Ring R subset-ideal-Ring
+  contains-zero-ideal-Ring = pr1 is-additive-subgroup-ideal-Ring
 
   is-closed-under-addition-ideal-Ring :
-    {x y : type-Ring R} → is-in-ideal-Ring x →
-    is-in-ideal-Ring y →
-    is-in-ideal-Ring (add-Ring R x y)
-  is-closed-under-addition-ideal-Ring H K =
-    pr1 (pr2 is-additive-subgroup-subset-ideal-Ring) _ _ H K
+    is-closed-under-addition-subset-Ring R subset-ideal-Ring
+  is-closed-under-addition-ideal-Ring =
+    pr1 (pr2 is-additive-subgroup-ideal-Ring)
+
+  is-closed-under-negatives-ideal-Ring :
+    is-closed-under-negatives-subset-Ring R subset-ideal-Ring
+  is-closed-under-negatives-ideal-Ring =
+    pr2 (pr2 is-additive-subgroup-ideal-Ring)
 
   is-closed-under-left-multiplication-ideal-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-ideal-Ring
   is-closed-under-left-multiplication-ideal-Ring =
-    pr1 (pr2 is-ideal-subset-ideal-Ring)
-
-  is-closed-under-neg-ideal-Ring :
-    {x : type-Ring R} → is-in-ideal-Ring x →
-    is-in-ideal-Ring (neg-Ring R x)
-  is-closed-under-neg-ideal-Ring H =
-    pr2 (pr2 is-additive-subgroup-subset-ideal-Ring) _ H
+    pr1 (pr2 is-ideal-ideal-Ring)
 
   is-closed-under-right-multiplication-ideal-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-ideal-Ring
   is-closed-under-right-multiplication-ideal-Ring =
-    pr2 (pr2 is-ideal-subset-ideal-Ring)
+    pr2 (pr2 is-ideal-ideal-Ring)
 
-  subgroup-ideal-Ring : Subgroup l2 (group-Ring R)
+  subgroup-ideal-Ring : Subgroup-Ab l2 (ab-Ring R)
   pr1 subgroup-ideal-Ring = subset-ideal-Ring
   pr1 (pr2 subgroup-ideal-Ring) = contains-zero-ideal-Ring
-  pr1 (pr2 (pr2 subgroup-ideal-Ring)) x y =
-    is-closed-under-addition-ideal-Ring
-  pr2 (pr2 (pr2 subgroup-ideal-Ring)) x =
-    is-closed-under-neg-ideal-Ring
+  pr1 (pr2 (pr2 subgroup-ideal-Ring)) = is-closed-under-addition-ideal-Ring
+  pr2 (pr2 (pr2 subgroup-ideal-Ring)) = is-closed-under-negatives-ideal-Ring
 
-  normal-subgroup-ideal-Ring : Normal-Subgroup l2 (group-Ring R)
-  pr1 normal-subgroup-ideal-Ring = subgroup-ideal-Ring
-  pr2 normal-subgroup-ideal-Ring x (y , H) =
-    tr
-      ( is-in-ideal-Ring)
-      ( equational-reasoning
-          y
-          ＝ add-Ring R y (zero-Ring R)
-            by inv (right-unit-law-add-Ring R y)
-          ＝ add-Ring R y (add-Ring R x (neg-Ring R x))
-            by inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))
-          ＝ add-Ring R (add-Ring R y x) (neg-Ring R x)
-            by inv (associative-add-Ring R y x (neg-Ring R x))
-          ＝ add-Ring R (add-Ring R x y) (neg-Ring R x)
-            by ap (add-Ring' R (neg-Ring R x)) (commutative-add-Ring R y x))
-      ( H)
+  normal-subgroup-ideal-Ring : Normal-Subgroup-Ab l2 (ab-Ring R)
+  normal-subgroup-ideal-Ring =
+    normal-subgroup-Subgroup-Ab (ab-Ring R) subgroup-ideal-Ring
+
+  left-ideal-ideal-Ring : left-ideal-Ring l2 R
+  pr1 left-ideal-ideal-Ring = subset-ideal-Ring
+  pr1 (pr2 left-ideal-ideal-Ring) = is-additive-subgroup-ideal-Ring
+  pr2 (pr2 left-ideal-ideal-Ring) =
+    is-closed-under-left-multiplication-ideal-Ring
+
+  right-ideal-ideal-Ring : right-ideal-Ring l2 R
+  pr1 right-ideal-ideal-Ring = subset-ideal-Ring
+  pr1 (pr2 right-ideal-ideal-Ring) = is-additive-subgroup-ideal-Ring
+  pr2 (pr2 right-ideal-ideal-Ring) =
+    is-closed-under-right-multiplication-ideal-Ring
+```
+
+## Properties
+
+### Characterizing equality of ideals in rings
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
+  where
+
+  has-same-elements-ideal-Ring : (J : ideal-Ring l3 R) → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-ideal-Ring J =
+    has-same-elements-subtype (subset-ideal-Ring R I) (subset-ideal-Ring R J)
+
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
+  where
+
+  refl-has-same-elements-ideal-Ring :
+    has-same-elements-ideal-Ring R I I
+  refl-has-same-elements-ideal-Ring =
+    refl-has-same-elements-subtype (subset-ideal-Ring R I)
+
+  is-contr-total-has-same-elements-ideal-Ring :
+    is-contr (Σ (ideal-Ring l2 R) (has-same-elements-ideal-Ring R I))
+  is-contr-total-has-same-elements-ideal-Ring =
+    is-contr-total-Eq-subtype
+      ( is-contr-total-has-same-elements-subtype (subset-ideal-Ring R I))
+      ( is-prop-is-ideal-subset-Ring R)
+      ( subset-ideal-Ring R I)
+      ( refl-has-same-elements-ideal-Ring)
+      ( is-ideal-ideal-Ring R I)
+
+  has-same-elements-eq-ideal-Ring :
+    (J : ideal-Ring l2 R) → (I ＝ J) → has-same-elements-ideal-Ring R I J
+  has-same-elements-eq-ideal-Ring .I refl = refl-has-same-elements-ideal-Ring
+
+  is-equiv-has-same-elements-eq-ideal-Ring :
+    (J : ideal-Ring l2 R) → is-equiv (has-same-elements-eq-ideal-Ring J)
+  is-equiv-has-same-elements-eq-ideal-Ring =
+    fundamental-theorem-id
+      is-contr-total-has-same-elements-ideal-Ring
+      has-same-elements-eq-ideal-Ring
+
+  extensionality-ideal-Ring :
+    (J : ideal-Ring l2 R) → (I ＝ J) ≃ has-same-elements-ideal-Ring R I J
+  pr1 (extensionality-ideal-Ring J) = has-same-elements-eq-ideal-Ring J
+  pr2 (extensionality-ideal-Ring J) = is-equiv-has-same-elements-eq-ideal-Ring J
+
+  eq-has-same-elements-ideal-Ring :
+    (J : ideal-Ring l2 R) → has-same-elements-ideal-Ring R I J → I ＝ J
+  eq-has-same-elements-ideal-Ring J =
+    map-inv-equiv (extensionality-ideal-Ring J)
 ```

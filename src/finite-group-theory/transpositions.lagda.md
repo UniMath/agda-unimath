@@ -584,7 +584,7 @@ module _
   pr2 (pr2 (pr1 (transposition-conjugation-equiv (pair P H)) x)) =
     is-decidable-raise l4
       ( type-Decidable-Prop (P (map-inv-equiv e x)))
-      ( is-decidable-type-Decidable-Prop (P (map-inv-equiv e x)))
+      ( is-decidable-Decidable-Prop (P (map-inv-equiv e x)))
   pr2 (transposition-conjugation-equiv (pair P H)) =
     apply-universal-property-trunc-Prop
       ( H)
@@ -649,7 +649,7 @@ module _
         ( (e ∘e (transposition t)) ∘e (inv-equiv e))
     correct-transposition-conjugation-equiv t x =
       cases-correct-transposition-conjugation-equiv
-        ( is-decidable-type-Decidable-Prop (pr1 t (map-inv-equiv e x)))
+        ( is-decidable-Decidable-Prop (pr1 t (map-inv-equiv e x)))
       where
       cases-correct-transposition-conjugation-equiv :
         (Q : is-decidable (type-Decidable-Prop (pr1 t (map-inv-equiv e x)))) →
@@ -800,7 +800,7 @@ correct-Fin-succ-Fin-transposition :
         ( extend-equiv-Maybe (Fin-Set n))
         ( transposition t)))
 correct-Fin-succ-Fin-transposition n t (inl x) with
-  is-decidable-type-Decidable-Prop (pr1 t x)
+  is-decidable-Decidable-Prop (pr1 t x)
 correct-Fin-succ-Fin-transposition n t (inl x) | inl p =
     ap
       ( pr1)
@@ -1076,7 +1076,7 @@ module _
           ( d'))
       { x = inl (pr1 (iff-universes-decidable-subtype X l l' (pr1 P) x) p)}
       { y =
-        is-decidable-type-Decidable-Prop
+        is-decidable-Decidable-Prop
           ( map-equiv (equiv-universes-decidable-subtype X l l') (pr1 P) x)}
       ( eq-is-prop
         ( is-prop-is-decidable
@@ -1093,7 +1093,7 @@ module _
           ( d'))
       { x = inr (np ∘ pr2 (iff-universes-decidable-subtype X l l' (pr1 P) x))}
       { y =
-        is-decidable-type-Decidable-Prop
+        is-decidable-Decidable-Prop
           ( map-equiv (equiv-universes-decidable-subtype X l l') (pr1 P) x)}
       ( eq-is-prop
         ( is-prop-is-decidable
@@ -1110,7 +1110,7 @@ module _
     eq-htpy-equiv
       ( λ x →
         cases-eq-equiv-universes-transposition P x
-          ( is-decidable-type-Decidable-Prop (pr1 P x)))
+          ( is-decidable-Decidable-Prop (pr1 P x)))
 
   eq-equiv-universes-transposition-list :
     ( li : list (2-Element-Decidable-Subtype l X)) →

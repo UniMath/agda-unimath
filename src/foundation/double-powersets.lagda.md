@@ -44,7 +44,7 @@ module _
     poset-Large-Poset (double-powerset-Large-Poset A) l
 
   double-powerset : (l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-  double-powerset l3 A = element-Poset (double-powerset-Poset l3 A)
+  double-powerset l3 A = type-Poset (double-powerset-Poset l3 A)
 ```
 
 ## Operations on the double powerset

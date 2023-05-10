@@ -50,7 +50,7 @@ module _
 
   is-decidable-subset-𝔽 : is-decidable-subtype subtype-subset-𝔽
   is-decidable-subset-𝔽 =
-    is-decidable-subtype-decidable-subtype P
+    is-decidable-decidable-subtype P
 
   is-in-subset-𝔽 : type-𝔽 X → UU l2
   is-in-subset-𝔽 = is-in-decidable-subtype P
@@ -123,7 +123,7 @@ is-finite-type-decidable-subtype P H =
     ( λ x →
       is-finite-is-decidable-Prop
         ( prop-Decidable-Prop (P x))
-        ( is-decidable-type-Decidable-Prop (P x)))
+        ( is-decidable-Decidable-Prop (P x)))
 
 is-finite-type-subset-𝔽 :
   {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) →

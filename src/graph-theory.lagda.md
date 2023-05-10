@@ -1,5 +1,7 @@
 # Graph theory
 
+## Files in the graph theory folder
+
 ```agda
 module graph-theory where
 

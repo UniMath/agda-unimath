@@ -120,7 +120,7 @@ module _
     trunc-Prop (subset-left-ideal-subset-Ring' x)
 
   contains-zero-left-ideal-subset-Ring :
-    type-Prop (subset-left-ideal-subset-Ring (zero-Ring R))
+    contains-zero-subset-Ring R subset-left-ideal-subset-Ring
   contains-zero-left-ideal-subset-Ring = unit-trunc-Prop (pair nil refl)
 
   is-closed-under-addition-left-ideal-subset-Ring' :
@@ -138,10 +138,7 @@ module _
     ( ap-add-Ring R p q)
 
   is-closed-under-addition-left-ideal-subset-Ring :
-    (x y : type-Ring R) →
-    type-Prop (subset-left-ideal-subset-Ring x) →
-    type-Prop (subset-left-ideal-subset-Ring y) →
-    type-Prop (subset-left-ideal-subset-Ring (add-Ring R x y))
+    is-closed-under-addition-subset-Ring R subset-left-ideal-subset-Ring
   is-closed-under-addition-left-ideal-subset-Ring x y H K =
     apply-universal-property-trunc-Prop H
       ( subset-left-ideal-subset-Ring (add-Ring R x y))
@@ -152,31 +149,34 @@ module _
             unit-trunc-Prop
               ( is-closed-under-addition-left-ideal-subset-Ring' x y H' K')))
 
-  is-closed-under-mul-left-ideal-subset-Ring' :
+  is-closed-under-left-multiplication-ideal-subset-Ring' :
     (r x : type-Ring R) → subset-left-ideal-subset-Ring' x →
     subset-left-ideal-subset-Ring' (mul-Ring R r x)
-  pr1 (is-closed-under-mul-left-ideal-subset-Ring' r x (pair l p)) =
+  pr1 (is-closed-under-left-multiplication-ideal-subset-Ring' r x (pair l p)) =
     mul-formal-combination-subset-Ring r l
-  pr2 (is-closed-under-mul-left-ideal-subset-Ring' r x (pair l p)) =
+  pr2 (is-closed-under-left-multiplication-ideal-subset-Ring' r x (pair l p)) =
     ( preserves-mul-ev-formal-combination-subset-Ring r l) ∙
     ( ap (mul-Ring R r) p)
 
-  is-closed-under-mul-left-ideal-subset-Ring :
-    (r x : type-Ring R) → type-Prop (subset-left-ideal-subset-Ring x) →
-    type-Prop (subset-left-ideal-subset-Ring (mul-Ring R r x))
-  is-closed-under-mul-left-ideal-subset-Ring r x H =
+  is-closed-under-left-multiplication-ideal-subset-Ring :
+    is-closed-under-left-multiplication-subset-Ring R
+      subset-left-ideal-subset-Ring
+  is-closed-under-left-multiplication-ideal-subset-Ring r x H =
     apply-universal-property-trunc-Prop H
       ( subset-left-ideal-subset-Ring (mul-Ring R r x))
       ( λ H' →
-        unit-trunc-Prop (is-closed-under-mul-left-ideal-subset-Ring' r x H'))
+        unit-trunc-Prop
+          ( is-closed-under-left-multiplication-ideal-subset-Ring' r x H'))
 
-  is-closed-under-additive-inverses-left-ideal-subset-Ring :
-    (x : type-Ring R) → type-Prop (subset-left-ideal-subset-Ring x) →
-    type-Prop (subset-left-ideal-subset-Ring (neg-Ring R x))
-  is-closed-under-additive-inverses-left-ideal-subset-Ring x H =
+  is-closed-under-negatives-left-ideal-subset-Ring :
+    is-closed-under-negatives-subset-Ring R subset-left-ideal-subset-Ring
+  is-closed-under-negatives-left-ideal-subset-Ring x H =
     tr ( type-Prop ∘ subset-left-ideal-subset-Ring)
        ( mul-neg-one-Ring R x)
-       ( is-closed-under-mul-left-ideal-subset-Ring (neg-one-Ring R) x H)
+       ( is-closed-under-left-multiplication-ideal-subset-Ring
+         ( neg-one-Ring R)
+         ( x)
+         ( H))
 
   left-ideal-subset-Ring : left-ideal-Ring (l1 ⊔ l2) R
   pr1 left-ideal-subset-Ring = subset-left-ideal-subset-Ring
@@ -184,9 +184,9 @@ module _
   pr1 (pr2 (pr1 (pr2 left-ideal-subset-Ring))) =
     is-closed-under-addition-left-ideal-subset-Ring
   pr2 (pr2 (pr1 (pr2 left-ideal-subset-Ring))) =
-    is-closed-under-additive-inverses-left-ideal-subset-Ring
+    is-closed-under-negatives-left-ideal-subset-Ring
   pr2 (pr2 left-ideal-subset-Ring) =
-    is-closed-under-mul-left-ideal-subset-Ring
+    is-closed-under-left-multiplication-ideal-subset-Ring
 
   contains-subset-left-ideal-subset-Ring :
     S ⊆ subset-left-ideal-subset-Ring
@@ -197,19 +197,19 @@ module _
         ( ( right-unit-law-add-Ring R (mul-Ring R (one-Ring R) s)) ∙
           ( left-unit-law-mul-Ring R s)))
 
-  contains-formal-combinations-left-ideal-Ring :
+  contains-formal-combinations-left-ideal-subset-Ring :
     {l3 : Level} (I : left-ideal-Ring l3 R) → S ⊆ subset-left-ideal-Ring R I →
     (x : formal-combination-subset-Ring) →
     is-in-left-ideal-Ring R I (ev-formal-combination-subset-Ring x)
-  contains-formal-combinations-left-ideal-Ring I H nil =
+  contains-formal-combinations-left-ideal-subset-Ring I H nil =
     contains-zero-left-ideal-Ring R I
-  contains-formal-combinations-left-ideal-Ring I H
+  contains-formal-combinations-left-ideal-subset-Ring I H
     ( cons (pair r (pair s K)) c) =
     is-closed-under-addition-left-ideal-Ring R I
       ( mul-Ring R r s)
       ( ev-formal-combination-subset-Ring c)
       ( is-closed-under-left-multiplication-left-ideal-Ring R I r s (H s K))
-      ( contains-formal-combinations-left-ideal-Ring I H c)
+      ( contains-formal-combinations-left-ideal-subset-Ring I H c)
 
   is-left-ideal-generated-by-subset-left-ideal-subset-Ring :
     (l : Level) →
@@ -221,5 +221,5 @@ module _
     apply-universal-property-trunc-Prop H (subset-left-ideal-Ring R J x) P
     where
     P : subset-left-ideal-subset-Ring' x → is-in-left-ideal-Ring R J x
-    P (pair c refl) = contains-formal-combinations-left-ideal-Ring J K c
+    P (pair c refl) = contains-formal-combinations-left-ideal-subset-Ring J K c
 ```

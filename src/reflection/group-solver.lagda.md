@@ -1,7 +1,7 @@
 # Group solver
 
 ```agda
-module group-theory.group-solver where
+module reflection.group-solver where
 ```
 
 <details><summary>Imports</summary>

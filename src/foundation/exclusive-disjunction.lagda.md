@@ -1,7 +1,7 @@
 # Exclusive disjunction of propositions
 
 ```agda
-module foundation.xor where
+module foundation.exclusive-disjunction where
 ```
 
 <details><summary>Imports</summary>
@@ -400,9 +400,9 @@ pr1 (pr2 (xor-Decidable-Prop P Q)) =
 pr2 (pr2 (xor-Decidable-Prop P Q)) =
   is-decidable-coprod
     ( is-decidable-prod
-      ( is-decidable-type-Decidable-Prop P)
-      ( is-decidable-neg (is-decidable-type-Decidable-Prop Q)))
+      ( is-decidable-Decidable-Prop P)
+      ( is-decidable-neg (is-decidable-Decidable-Prop Q)))
     ( is-decidable-prod
-      ( is-decidable-type-Decidable-Prop Q)
-      ( is-decidable-neg (is-decidable-type-Decidable-Prop P)))
+      ( is-decidable-Decidable-Prop Q)
+      ( is-decidable-neg (is-decidable-Decidable-Prop P)))
 ```

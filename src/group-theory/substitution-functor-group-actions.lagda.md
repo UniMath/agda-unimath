@@ -82,18 +82,18 @@ module _
   preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :
-    functor-Large-Precat
-      ( Abstract-Group-Action-Large-Precat H)
-      ( Abstract-Group-Action-Large-Precat G)
+    functor-Large-Precategory
+      ( Abstract-Group-Action-Large-Precategory H)
+      ( Abstract-Group-Action-Large-Precategory G)
       ( λ l → l)
-  obj-functor-Large-Precat subst-Abstract-Group-Action =
+  obj-functor-Large-Precategory subst-Abstract-Group-Action =
     obj-subst-Abstract-Group-Action
-  hom-functor-Large-Precat subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
+  hom-functor-Large-Precategory subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
     hom-subst-Abstract-Group-Action X Y
-  preserves-comp-functor-Large-Precat subst-Abstract-Group-Action
+  preserves-comp-functor-Large-Precategory subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =
     preserves-comp-subst-Abstract-Group-Action X Y Z
-  preserves-id-functor-Large-Precat subst-Abstract-Group-Action {l1} {X} =
+  preserves-id-functor-Large-Precategory subst-Abstract-Group-Action {l1} {X} =
     preserves-id-subst-Abstract-Group-Action X
 ```
 

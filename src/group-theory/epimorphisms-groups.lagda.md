@@ -37,7 +37,7 @@ module _
 
   is-epi-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-epi-Group-Prop =
-    is-epi-Large-Precat-Prop Group-Large-Precat l3 G H f
+    is-epi-Large-Precategory-Prop Group-Large-Precategory l3 G H f
 
   is-epi-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-epi-Group = type-Prop is-epi-Group-Prop
@@ -58,5 +58,6 @@ module _
 
   is-epi-iso-Group :
     is-epi-Group l3 G H (hom-iso-Group G H f)
-  is-epi-iso-Group = is-epi-iso-Large-Precat Group-Large-Precat l3 G H f
+  is-epi-iso-Group =
+    is-epi-iso-Large-Precategory Group-Large-Precategory l3 G H f
 ```

@@ -8,7 +8,6 @@ module foundation.sigma-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equational-reasoning
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.inhabited-types

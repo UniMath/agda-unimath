@@ -425,11 +425,11 @@ Subgroup-Large-Preorder :
   {l1 : Level} (G : Group l1) →
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G
-leq-large-preorder-Prop (Subgroup-Large-Preorder G) H K =
+leq-Large-Preorder-Prop (Subgroup-Large-Preorder G) H K =
   contains-Subgroup-Prop G H K
 refl-leq-Large-Preorder (Subgroup-Large-Preorder G) =
   refl-contains-Subgroup G
-trans-leq-Large-Preorder (Subgroup-Large-Preorder G) =
+transitive-leq-Large-Preorder (Subgroup-Large-Preorder G) =
   transitive-contains-Subgroup G
 
 Subgroup-Preorder :

@@ -22,7 +22,6 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions

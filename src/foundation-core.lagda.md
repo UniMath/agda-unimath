@@ -1,5 +1,7 @@
 # Foundation core
 
+## Files in the foundation-core folder
+
 ```agda
 module foundation-core where
 

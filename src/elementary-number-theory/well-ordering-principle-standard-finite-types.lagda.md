@@ -184,7 +184,7 @@ well-ordering-principle-∃-Fin k P H =
   apply-universal-property-trunc-Prop H
     ( minimal-element-Fin-Prop k (subtype-decidable-subtype P))
     ( well-ordering-principle-Σ-Fin k
-      ( is-decidable-subtype-decidable-subtype P))
+      ( is-decidable-decidable-subtype P))
 ```
 
 ### Hilbert's epsilon operator for decidable subtypes of standard finite types
@@ -212,7 +212,7 @@ well-ordering-principle-∃-Fin k P H =
   Q n = subtype-decidable-subtype P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
   is-decidable-Q n =
-    is-decidable-subtype-decidable-subtype P (mod-succ-ℕ k n)
+    is-decidable-decidable-subtype P (mod-succ-ℕ k n)
   ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
   ε-operator-total-Q =
     ε-operator-decidable-subtype-ℕ Q is-decidable-Q
