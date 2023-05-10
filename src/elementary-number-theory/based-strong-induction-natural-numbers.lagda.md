@@ -11,6 +11,7 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.function-extensionality
@@ -18,7 +19,6 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.contractible-types
 ```
 
 </details>
@@ -413,12 +413,12 @@ based-strong-ind-ℕ' :
 based-strong-ind-ℕ' {l} k P p0 pS n H =
   based-strong-ind-ℕ
     ( k)
-    ( λ n → (H : k ≤-ℕ n ) → P n H)
+    ( λ n → (H : k ≤-ℕ n) → P n H)
     ( apply-dependent-universal-property-contr
       ( refl-leq-ℕ k)
       ( is-proof-irrelevant-is-prop (is-prop-leq-ℕ k k) (refl-leq-ℕ k))
       ( P k)
-      ( p0) )
+      ( p0))
     ( λ x H p →
       apply-dependent-universal-property-contr
         ( preserves-leq-succ-ℕ k x H)
@@ -426,7 +426,7 @@ based-strong-ind-ℕ' {l} k P p0 pS n H =
           ( is-prop-leq-ℕ k (succ-ℕ x))
           ( preserves-leq-succ-ℕ k x H))
         ( P (succ-ℕ x))
-        ( pS x H ( compute-base-□-≤-ℕ' k P x p)) )
+        ( pS x H ( compute-base-□-≤-ℕ' k P x p)))
     ( n)
     ( H)
     ( H)

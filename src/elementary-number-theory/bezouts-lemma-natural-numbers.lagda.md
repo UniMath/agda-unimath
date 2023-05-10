@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
@@ -28,7 +29,6 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
-open import elementary-number-theory.divisibility-integers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types

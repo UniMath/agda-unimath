@@ -104,6 +104,7 @@ open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers p
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.telephone-numbers public
+open import elementary-number-theory.total-decidable-poset-natural-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public

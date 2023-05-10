@@ -14,14 +14,14 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.negation
-open import foundation.coproduct-types
 ```
 
 </details>

@@ -84,6 +84,28 @@ concatenate-eq-div-eq-ℕ refl p refl = p
 
 ## Properties
 
+### The quotients of a natural number `n` by two natural numbers `p` and `q` are equals if `p` and `q` are equals
+
+```agda
+eq-quotient-div-eq-div-ℕ :
+  (x y z : ℕ) → is-nonzero-ℕ x → x ＝ y →
+  (H : div-ℕ x z) → (I : div-ℕ y z) →
+  quotient-div-ℕ x z H ＝ quotient-div-ℕ y z I
+eq-quotient-div-eq-div-ℕ x y z n e H I =
+  is-injective-mul-ℕ
+    ( x)
+    ( n)
+  ( tr
+    ( λ p →
+      mul-ℕ x (quotient-div-ℕ x z H) ＝
+      mul-ℕ p (quotient-div-ℕ y z I))
+    ( inv e)
+    ( commutative-mul-ℕ x (quotient-div-ℕ x z H) ∙
+      ( eq-quotient-div-ℕ x z H ∙
+        ( inv (eq-quotient-div-ℕ y z I) ∙
+           commutative-mul-ℕ (quotient-div-ℕ y z I) y))))
+```
+
 ### Divisibility by a nonzero natural number is a property
 
 ```agda

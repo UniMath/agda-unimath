@@ -20,9 +20,9 @@ open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.propositions
 ```
 
 </details>
@@ -42,7 +42,6 @@ le-ℕ n m = type-Prop (le-ℕ-Prop n m)
 
 is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
 is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
-
 
 _<_ = le-ℕ
 ```

@@ -9,10 +9,10 @@ module lists.sorted-lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.dependent-pair-types
 
 open import lists.lists
 
@@ -46,7 +46,7 @@ module _
   is-sorted-list l = type-Prop (is-sorted-list-Prop l)
 
   is-prop-is-sorted-list :
-    (l : list (element-total-decidable-Poset X)) → is-prop (is-sorted-list l)
+    (l : list (type-Decidable-Total-Order X)) → is-prop (is-sorted-list l)
   is-prop-is-sorted-list l = is-prop-type-Prop (is-sorted-list-Prop l)
 ```
 
@@ -54,17 +54,17 @@ module _
 
 ```agda
   is-least-element-list-Prop :
-    element-total-decidable-Poset X →
-    list (element-total-decidable-Poset X) → Prop l2
+    type-Decidable-Total-Order X →
+    list (type-Decidable-Total-Order X) → Prop l2
   is-least-element-list-Prop x nil = raise-unit-Prop l2
   is-least-element-list-Prop x (cons y l) =
     prod-Prop
-      ( leq-total-decidable-poset-Prop X x y)
+      ( leq-Decidable-Total-Order-Prop X x y)
       ( is-least-element-list-Prop x l)
 
   is-least-element-list :
-    element-total-decidable-Poset X →
-    list (element-total-decidable-Poset X) → UU l2
+    type-Decidable-Total-Order X →
+    list (type-Decidable-Total-Order X) → UU l2
   is-least-element-list x l = type-Prop (is-least-element-list-Prop x l)
 ```
 
@@ -74,17 +74,17 @@ module _
 
 ```agda
   is-sorted-tail-is-sorted-list :
-    (l : list (element-total-decidable-Poset X)) →
+    (l : list (type-Decidable-Total-Order X)) →
     is-sorted-list l → is-sorted-list (tail-list l)
   is-sorted-tail-is-sorted-list nil _ = raise-star
   is-sorted-tail-is-sorted-list (cons x nil) s = raise-star
   is-sorted-tail-is-sorted-list (cons x (cons y l)) s = pr2 s
 
 --   is-leq-head-head-tail-is-sorted-list :
---     {n : ℕ} → (l : list (element-total-decidable-Poset X)) →
+--     {n : ℕ} → (l : list (type-Decidable-Total-Order X)) →
 --     leq-ℕ 2 length-list l →
 --     is-sorted-list l →
---     leq-total-decidable-Poset X (head-list v) (head-list (tail-list l))
+--     leq-Decidable-Total-Order X (head-list v) (head-list (tail-list l))
 --   is-leq-head-head-tail-is-sorted-list (cons x (cons y l)) s = pr1 s
 ```
 
@@ -92,16 +92,30 @@ module _
 
 ```agda
   leq-element-in-list-leq-head-is-sorted-list :
-    (x y z : element-total-decidable-Poset X)
-    (l : list (element-total-decidable-Poset X)) →
+    (x y z : type-Decidable-Total-Order X)
+    (l : list (type-Decidable-Total-Order X)) →
     is-sorted-list (cons y l) →
     z ∈-list (cons y l) →
-    leq-total-decidable-Poset X x y →
-    leq-total-decidable-Poset X x z
+    leq-Decidable-Total-Order X x y →
+    leq-Decidable-Total-Order X x z
   leq-element-in-list-leq-head-is-sorted-list x .z z l s (is-head .z l) q =
     q
-  leq-element-in-list-leq-head-is-sorted-list x y z (cons w l) s (is-in-tail .z .y .(cons w l) i) q =
-    leq-element-in-list-leq-head-is-sorted-list x w z l (pr2 s) i (transitive-leq-total-decidable-Poset X x y w (pr1 s) q)
+  leq-element-in-list-leq-head-is-sorted-list
+    ( x)
+    ( y)
+    ( z)
+    ( cons w l)
+    ( s)
+    ( is-in-tail .z .y .(cons w l) i)
+    ( q) =
+    leq-element-in-list-leq-head-is-sorted-list
+      ( x)
+      ( w)
+      ( z)
+      ( l)
+      ( pr2 s)
+      ( i)
+      ( transitive-leq-Decidable-Total-Order X x y w (pr1 s) q)
 ```
 
 ### If a list `l' ＝ cons y l` is sorted then for all element `x` less or equal than `y`, `x` is less or equal than every element in the list.
@@ -109,9 +123,9 @@ module _
 ```agda
 --   is-leq-all-element-list-is-leq-head-sorted-list :
 --     {n : ℕ}
---     (x : element-total-decidable-Poset X)
---     (l : list (element-total-decidable-Poset X) (succ-ℕ n)) →
---     is-sorted-list l → leq-total-decidable-Poset X x (head-list l) →
+--     (x : type-Decidable-Total-Order X)
+--     (l : list (type-Decidable-Total-Order X) (succ-ℕ n)) →
+--     is-sorted-list l → leq-Decidable-Total-Order X x (head-list l) →
 --     is-leq-all-element-list x l
 --   is-leq-all-element-list-is-leq-head-sorted-list {zero-ℕ} x (y ∷ l) s p =
 --     p , raise-star
@@ -121,7 +135,7 @@ module _
 --         ( x)
 --         ( l)
 --         ( is-sorted-tail-is-sorted-list (y ∷ l) s)
---         ( transitile-leq-total-decidable-Poset
+--         ( transitile-leq-Decidable-Total-Order
 --             ( X)
 --             ( x)
 --             ( y)
@@ -134,7 +148,7 @@ module _
 
 ```agda
   is-sorted-least-element-list-Prop :
-    list (element-total-decidable-Poset X) → Prop l2
+    list (type-Decidable-Total-Order X) → Prop l2
   is-sorted-least-element-list-Prop nil = raise-unit-Prop l2
   is-sorted-least-element-list-Prop (cons x l) =
     prod-Prop
@@ -142,13 +156,12 @@ module _
       ( is-sorted-least-element-list-Prop l)
 
   is-sorted-least-element-list :
-    list (element-total-decidable-Poset X) → UU l2
+    list (type-Decidable-Total-Order X) → UU l2
   is-sorted-least-element-list l =
     type-Prop (is-sorted-least-element-list-Prop l)
 
-
 --   is-sorted-least-element-list-is-sorted-list :
---     (l : list (element-total-decidable-Poset X)) →
+--     (l : list (type-Decidable-Total-Order X)) →
 --     is-sorted-list l → is-sorted-least-element-list l
 --   is-sorted-least-element-list-is-sorted-list nil x = raise-star
 --   is-sorted-least-element-list-is-sorted-list (cons _ nil) x = raise-star
@@ -159,7 +172,7 @@ module _
 --     is-sorted-least-element-list-is-sorted-list (cons y l) q
 
   is-sorted-list-is-sorted-least-element-list :
-    (l : list (element-total-decidable-Poset X)) →
+    (l : list (type-Decidable-Total-Order X)) →
     is-sorted-least-element-list l → is-sorted-list l
   is-sorted-list-is-sorted-least-element-list nil _ =
     raise-star
