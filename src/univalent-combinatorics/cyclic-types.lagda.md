@@ -33,7 +33,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.groups
+open import group-theory.concrete-groups
 open import group-theory.isomorphisms-groups
+
+open import higher-group-theory.higher-groups
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
@@ -353,6 +356,11 @@ is-0-connected-Cyclic-Type k =
     ( ℤ-Mod-Cyclic-Type k)
     ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
 
+∞-group-Cyclic-Type :
+  (k : ℕ) → ∞-Group (lsuc lzero)
+pr1 (∞-group-Cyclic-Type k) = Cyclic-Type-Pointed-Type k
+pr2 (∞-group-Cyclic-Type k) = is-0-connected-Cyclic-Type k
+
 Eq-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero k → UU lzero
 Eq-Cyclic-Type k X = type-Cyclic-Type k X
 
@@ -548,6 +556,11 @@ is-set-type-Ω-Cyclic-Type k =
     ( ℤ-Mod k)
     ( equiv-compute-Ω-Cyclic-Type k)
     ( is-set-ℤ-Mod k)
+
+concrete-group-Cyclic-Type :
+  (k : ℕ) → Concrete-Group (lsuc lzero)
+pr1 (concrete-group-Cyclic-Type k) = ∞-group-Cyclic-Type k
+pr2 (concrete-group-Cyclic-Type k) = is-set-type-Ω-Cyclic-Type k
 
 Ω-Cyclic-Type-Group : (k : ℕ) → Group (lsuc lzero)
 Ω-Cyclic-Type-Group k =
