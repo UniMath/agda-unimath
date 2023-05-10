@@ -46,6 +46,7 @@ open import order-theory.join-semilattices public
 open import order-theory.large-frames public
 open import order-theory.large-locales public
 open import order-theory.large-meet-semilattices public
+open import order-theory.large-meet-subsemilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
 open import order-theory.large-subposets public

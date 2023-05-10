@@ -48,6 +48,11 @@ module _
   large-preorder-Large-Subposet =
     large-preorder-Large-Subpreorder (large-preorder-Large-Poset P) S
 
+  is-in-Large-Subposet :
+    {l1 : Level} → type-Large-Poset P l1 → UU (γ l1)
+  is-in-Large-Subposet =
+    is-in-Large-Subpreorder (large-preorder-Large-Poset P) S
+
   type-Large-Subposet : (l1 : Level) → UU (α l1 ⊔ γ l1)
   type-Large-Subposet = type-Large-Subpreorder (large-preorder-Large-Poset P) S
 

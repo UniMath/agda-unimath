@@ -45,6 +45,10 @@ module _
   (P : Large-Preorder α β) (S : Large-Subpreorder γ P)
   where
 
+  is-in-Large-Subpreorder :
+    {l1 : Level} → type-Large-Preorder P l1 → UU (γ l1)
+  is-in-Large-Subpreorder {l1} = is-in-subtype (S {l1})
+
   type-Large-Subpreorder : (l1 : Level) → UU (α l1 ⊔ γ l1)
   type-Large-Subpreorder l1 = type-subtype (S {l1})
 
