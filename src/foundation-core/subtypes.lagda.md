@@ -18,6 +18,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtype-identity-principle
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.type-arithmetic-dependent-pair-types
@@ -128,23 +129,59 @@ module _
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
 ```
 
+### Restriction of a k-truncated map to a k-truncated map into a subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} (B : subtype l2 A) {X : UU l3}
+  where
+
+  is-trunc-map-into-subtype :
+    {f : X → A} → is-trunc-map k f →
+    (p : (x : X) → is-in-subtype B (f x)) →
+    is-trunc-map k {B = type-subtype B} (λ x → (f x , p x))
+  is-trunc-map-into-subtype H p (a , b) =
+    is-trunc-equiv k _
+      ( equiv-tot (λ x → extensionality-type-subtype' B _ _))
+      ( H a)
+
+  trunc-map-into-subtype :
+    (f : trunc-map k X A) → ((x : X) → is-in-subtype B (map-trunc-map f x)) →
+    trunc-map k X (type-subtype B)
+  pr1 (trunc-map-into-subtype f p) x = (map-trunc-map f x , p x)
+  pr2 (trunc-map-into-subtype f p) =
+    is-trunc-map-into-subtype
+      ( is-trunc-map-map-trunc-map f)
+      ( p)
+```
+
 ### Restriction of an embedding to an embedding into a subtype
 
 ```
 module _
-  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  {l1 l2 l3 : Level} {A : UU l1} (B : subtype l2 A) {X : UU l3}
   where
 
-  emb-into-subtype : {l3 : Level} {X : UU l3}
-                   → (f : X ↪ A)
-                   → ((x : X) → is-in-subtype B (map-emb f x))
-                   → X ↪ type-subtype B
+  is-emb-into-subtype :
+    {f : X → A} → is-emb f →
+    (p : (x : X) → is-in-subtype B (f x)) →
+    is-emb {B = type-subtype B} (λ x → (f x , p x))
+  is-emb-into-subtype H p =
+    is-emb-is-prop-map
+      ( is-trunc-map-into-subtype
+        ( neg-one-𝕋)
+        ( B)
+        ( is-prop-map-is-emb H)
+        ( p))
+
+  emb-into-subtype :
+    (f : X ↪ A) → ((x : X) → is-in-subtype B (map-emb f x)) →
+    X ↪ type-subtype B
   pr1 (emb-into-subtype f p) x = (map-emb f x , p x)
   pr2 (emb-into-subtype f p) =
-    is-emb-is-prop-map
-      ( λ (a , b) → is-prop-equiv
-        ( equiv-tot (λ x → extensionality-type-subtype' B (map-emb f x , p x) (a , b)))
-        ( is-prop-map-is-emb (is-emb-map-emb f) a))
+    is-emb-into-subtype
+      ( is-emb-map-emb f)
+      ( p)
 ```
 
 ### If the projection map of a type family is an embedding, then the type family is a subtype
