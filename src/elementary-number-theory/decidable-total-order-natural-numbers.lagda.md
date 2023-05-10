@@ -1,7 +1,7 @@
 # Natural numbers are a total decidable poset
 
 ```agda
-module elementary-number-theory.total-decidable-poset-natural-numbers where
+module elementary-number-theory.decidable-total-order-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -21,7 +21,7 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-In these file, we show defined the total decidable poset of natural numbers.
+The type of natural numbers equipped with its standard ordering relation forms a total order.
 
 ## Definition
 

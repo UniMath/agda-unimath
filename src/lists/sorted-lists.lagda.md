@@ -50,7 +50,7 @@ module _
   is-prop-is-sorted-list l = is-prop-type-Prop (is-sorted-list-Prop l)
 ```
 
-### The proposition that a element is less or equal than every element in a list
+### The proposition that an element is less or equal than every element in a list
 
 ```agda
   is-least-element-list-Prop :
@@ -79,13 +79,6 @@ module _
   is-sorted-tail-is-sorted-list nil _ = raise-star
   is-sorted-tail-is-sorted-list (cons x nil) s = raise-star
   is-sorted-tail-is-sorted-list (cons x (cons y l)) s = pr2 s
-
---   is-leq-head-head-tail-is-sorted-list :
---     {n : ℕ} → (l : list (type-Decidable-Total-Order X)) →
---     leq-ℕ 2 length-list l →
---     is-sorted-list l →
---     leq-Decidable-Total-Order X (head-list v) (head-list (tail-list l))
---   is-leq-head-head-tail-is-sorted-list (cons x (cons y l)) s = pr1 s
 ```
 
 ### If a list is sorted then its head is less or equal than every element in the list
@@ -118,32 +111,6 @@ module _
       ( transitive-leq-Decidable-Total-Order X x y w (pr1 s) q)
 ```
 
-### If a list `l' ＝ cons y l` is sorted then for all element `x` less or equal than `y`, `x` is less or equal than every element in the list.
-
-```agda
---   is-leq-all-element-list-is-leq-head-sorted-list :
---     {n : ℕ}
---     (x : type-Decidable-Total-Order X)
---     (l : list (type-Decidable-Total-Order X) (succ-ℕ n)) →
---     is-sorted-list l → leq-Decidable-Total-Order X x (head-list l) →
---     is-leq-all-element-list x l
---   is-leq-all-element-list-is-leq-head-sorted-list {zero-ℕ} x (y ∷ l) s p =
---     p , raise-star
---   is-leq-all-element-list-is-leq-head-sorted-list {succ-ℕ n} x (y ∷ l) s p =
---     p ,
---     ( is-leq-all-element-list-is-leq-head-sorted-list
---         ( x)
---         ( l)
---         ( is-sorted-tail-is-sorted-list (y ∷ l) s)
---         ( transitile-leq-Decidable-Total-Order
---             ( X)
---             ( x)
---             ( y)
---             ( head-list l)
---             ( is-leq-head-head-tail-is-sorted-list (y ∷ l) s)
---             ( p)))
-```
-
 ### An equivalent definition of being sorted
 
 ```agda
@@ -159,17 +126,6 @@ module _
     list (type-Decidable-Total-Order X) → UU l2
   is-sorted-least-element-list l =
     type-Prop (is-sorted-least-element-list-Prop l)
-
---   is-sorted-least-element-list-is-sorted-list :
---     (l : list (type-Decidable-Total-Order X)) →
---     is-sorted-list l → is-sorted-least-element-list l
---   is-sorted-least-element-list-is-sorted-list nil x = raise-star
---   is-sorted-least-element-list-is-sorted-list (cons _ nil) x = raise-star
---   is-sorted-least-element-list-is-sorted-list
---     ( cons x (cons y l))
---     ( p , q) =
---     is-least-element-list-is-leq-head-sorted-list x (cons y l) q p ,
---     is-sorted-least-element-list-is-sorted-list (cons y l) q
 
   is-sorted-list-is-sorted-least-element-list :
     (l : list (type-Decidable-Total-Order X)) →

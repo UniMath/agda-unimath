@@ -44,9 +44,3 @@ module _
     (l : list X) → is-prop (for-all-list l)
   is-prop-for-all-list l = is-prop-type-Prop (for-all-list-Prop l)
 ```
-
-### Exists
-
-```agda
-
-```

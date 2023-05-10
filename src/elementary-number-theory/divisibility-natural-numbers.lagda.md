@@ -84,7 +84,7 @@ concatenate-eq-div-eq-ℕ refl p refl = p
 
 ## Properties
 
-### The quotients of a natural number `n` by two natural numbers `p` and `q` are equals if `p` and `q` are equals
+### The quotients of a natural number `n` by two natural numbers `p` and `q` are equal if `p` and `q` are equal
 
 ```agda
 eq-quotient-div-eq-div-ℕ :

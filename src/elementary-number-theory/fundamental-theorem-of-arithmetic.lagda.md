@@ -19,8 +19,9 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.total-decidable-poset-natural-numbers
+open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.multiplication-lists-of-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -86,10 +87,6 @@ is-prime-list-primes-ℕ :
 is-prime-list-primes-ℕ nil = raise-star
 is-prime-list-primes-ℕ (cons x l) =
   (is-prime-Prime-ℕ x) , (is-prime-list-primes-ℕ l)
-
-mul-list-ℕ :
-  list ℕ → ℕ
-mul-list-ℕ = fold-list 1 mul-ℕ
 
 module _
   (x : ℕ)
@@ -178,19 +175,19 @@ If `l` is a prime decomposition of `n`, then `l` is a list of non-trivial
 divisors of `n`.
 
 ```agda
-is-nontrivial-divisors-list-ℕ :
+is-list-of-nontrivial-divisors-ℕ :
   ℕ → list ℕ → UU lzero
-is-nontrivial-divisors-list-ℕ x nil = unit
-is-nontrivial-divisors-list-ℕ x (cons y l) =
-  (is-nontrivial-divisor-ℕ x y) × (is-nontrivial-divisors-list-ℕ x l)
+is-list-of-nontrivial-divisors-ℕ x nil = unit
+is-list-of-nontrivial-divisors-ℕ x (cons y l) =
+  (is-nontrivial-divisor-ℕ x y) × (is-list-of-nontrivial-divisors-ℕ x l)
 
-transitive-is-nontrivial-divisors-list-ℕ :
+is-nontrivial-divisors-div-list-ℕ :
   (x y : ℕ) → div-ℕ x y → (l : list ℕ) →
-  is-nontrivial-divisors-list-ℕ x l → is-nontrivial-divisors-list-ℕ y l
-transitive-is-nontrivial-divisors-list-ℕ x y d nil H = star
-transitive-is-nontrivial-divisors-list-ℕ x y d (cons z l) H =
+  is-list-of-nontrivial-divisors-ℕ x l → is-list-of-nontrivial-divisors-ℕ y l
+is-nontrivial-divisors-div-list-ℕ x y d nil H = star
+is-nontrivial-divisors-div-list-ℕ x y d (cons z l) H =
   ( pr1 (pr1 H) , transitive-div-ℕ z x y (pr2 (pr1 H)) d) ,
-  transitive-is-nontrivial-divisors-list-ℕ x y d l (pr2 H)
+  is-nontrivial-divisors-div-list-ℕ x y d l (pr2 H)
 
 is-divisor-head-is-decomposition-list-ℕ :
   (x : ℕ) (y : ℕ) (l : list ℕ) →
@@ -211,20 +208,20 @@ pr1 (is-nontrivial-divisor-head-is-decomposition-is-prime-list-ℕ x y l D P) =
 pr2 (is-nontrivial-divisor-head-is-decomposition-is-prime-list-ℕ x y l D P) =
   is-divisor-head-is-decomposition-list-ℕ x y l D
 
-is-nontrivial-divisors-list-is-decomposition-is-prime-list-ℕ :
+is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ :
   (x : ℕ) → (l : list ℕ) →
   is-decomposition-list-ℕ x l →
   is-prime-list-ℕ l →
-  is-nontrivial-divisors-list-ℕ x l
-is-nontrivial-divisors-list-is-decomposition-is-prime-list-ℕ x nil _ _ = star
-is-nontrivial-divisors-list-is-decomposition-is-prime-list-ℕ x (cons y l) D P =
+  is-list-of-nontrivial-divisors-ℕ x l
+is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ x nil _ _ = star
+is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ x (cons y l) D P =
   ( is-nontrivial-divisor-head-is-decomposition-is-prime-list-ℕ x y l D P ,
-   transitive-is-nontrivial-divisors-list-ℕ
+   is-nontrivial-divisors-div-list-ℕ
     ( mul-list-ℕ l)
     ( x)
     ( y , D)
     ( l)
-    ( is-nontrivial-divisors-list-is-decomposition-is-prime-list-ℕ
+    ( is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
       ( mul-list-ℕ l)
       ( l)
       ( refl)
@@ -253,12 +250,12 @@ is-nontrivial-divisor-head-prime-decomposition-list-ℕ x y l D =
     ( is-decomposition-list-is-prime-decomposition-list-ℕ x (cons y l) D)
     ( is-prime-list-is-prime-decomposition-list-ℕ x (cons y l) D)
 
-is-nontrivial-divisors-list-is-prime-decomposition-list-ℕ :
+is-list-of-nontrivial-divisors-is-prime-decomposition-list-ℕ :
   (x : ℕ) → (l : list ℕ) →
   is-prime-decomposition-list-ℕ x l →
-  is-nontrivial-divisors-list-ℕ x l
-is-nontrivial-divisors-list-is-prime-decomposition-list-ℕ x l D =
-  is-nontrivial-divisors-list-is-decomposition-is-prime-list-ℕ
+  is-list-of-nontrivial-divisors-ℕ x l
+is-list-of-nontrivial-divisors-is-prime-decomposition-list-ℕ x l D =
+  is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
     ( x)
     ( l)
     ( is-decomposition-list-is-prime-decomposition-list-ℕ x l D)
@@ -382,7 +379,7 @@ leq-quotient-div-least-prime-divisor-ℕ x H =
 
 ### Existence
 
-The list given by the fundamental theorem of arithmetic
+#### The list given by the fundamental theorem of arithmetic
 
 ```agda
 list-primes-fundamental-theorem-arithmetic-ℕ :
@@ -412,7 +409,7 @@ list-fundamental-theorem-arithmetic-ℕ x H =
   map-list nat-Prime-ℕ (list-primes-fundamental-theorem-arithmetic-ℕ x H)
 ```
 
-Computational rules for the list given by the fundamental theorem of arithmetic
+#### Computational rules for the list given by the fundamental theorem of arithmetic
 
 ```agda
 helper-compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ :
@@ -502,8 +499,7 @@ compute-list-fundamental-theorem-arithmetic-succ-ℕ x H =
     ( compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ x H)
 ```
 
-Proof that the list given by the fundamental theorem of arithmetic is a prime
-decomposition
+#### Proof that the list given by the fundamental theorem of arithmetic is a prime decomposition
 
 ```agda
 is-prime-list-fundamental-theorem-arithmetic-ℕ :
@@ -554,11 +550,11 @@ is-decomposition-list-fundamental-theorem-arithmetic-ℕ x H =
     ( x)
     ( H)
 
-is-nontrivial-divisors-list-fundamental-theorem-arithmetic-ℕ :
+is-list-of-nontrivial-divisors-fundamental-theorem-arithmetic-ℕ :
   (x : ℕ) (H : leq-ℕ 1 x) →
-  is-nontrivial-divisors-list-ℕ x (list-fundamental-theorem-arithmetic-ℕ x H)
-is-nontrivial-divisors-list-fundamental-theorem-arithmetic-ℕ x H =
-  is-nontrivial-divisors-list-is-decomposition-is-prime-list-ℕ
+  is-list-of-nontrivial-divisors-ℕ x (list-fundamental-theorem-arithmetic-ℕ x H)
+is-list-of-nontrivial-divisors-fundamental-theorem-arithmetic-ℕ x H =
+  is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
     ( x)
     ( list-fundamental-theorem-arithmetic-ℕ x H)
     ( is-decomposition-list-fundamental-theorem-arithmetic-ℕ x H)
@@ -566,7 +562,7 @@ is-nontrivial-divisors-list-fundamental-theorem-arithmetic-ℕ x H =
 
 is-least-element-list-least-prime-divisor-ℕ :
   (x : ℕ) (H : leq-ℕ 1 x) (l : list ℕ) →
-  is-nontrivial-divisors-list-ℕ
+  is-list-of-nontrivial-divisors-ℕ
     ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
     ( l) →
   is-least-element-list
@@ -614,7 +610,7 @@ is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ x H =
         ( succ-ℕ x)
         ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
-    ( is-nontrivial-divisors-list-fundamental-theorem-arithmetic-ℕ
+    ( is-list-of-nontrivial-divisors-fundamental-theorem-arithmetic-ℕ
       ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
@@ -923,11 +919,11 @@ eq-prime-decomposition-list-ℕ x H (cons y l) (cons z p) I J =
                 ( is-divisor-head-prime-decomposition-list-ℕ x y l I))
               ( refl)))))
 
-is-contr-prime-decomposition-list-ℕ :
+fundamental-theorem-arithmetic-list-ℕ :
   (x : ℕ) → (H : leq-ℕ 1 x) → is-contr (prime-decomposition-list-ℕ x H)
-pr1 (is-contr-prime-decomposition-list-ℕ x H) =
+pr1 (fundamental-theorem-arithmetic-list-ℕ x H) =
   prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H
-pr2 (is-contr-prime-decomposition-list-ℕ x H) d =
+pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
    eq-type-subtype
      ( is-prime-decomposition-list-ℕ-Prop x)
      ( eq-prime-decomposition-list-ℕ
