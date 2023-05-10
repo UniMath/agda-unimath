@@ -32,8 +32,8 @@ open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.groups
 open import group-theory.concrete-groups
+open import group-theory.groups
 open import group-theory.isomorphisms-groups
 
 open import higher-group-theory.higher-groups
