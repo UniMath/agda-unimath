@@ -536,6 +536,6 @@ div-right-factor-coprime-ℕ x y z H K =
       ( int-ℕ x)
       ( int-ℕ y)
       ( int-ℕ z)
-      {!div!}
-      {!!})
+        ( tr (λ p → div-ℤ (int-ℕ x) p) (inv (mul-int-ℕ y z)) (div-int-div-ℕ H))
+      ( eq-gcd-gcd-int-ℕ x y ∙ ap int-ℕ K))
 ```

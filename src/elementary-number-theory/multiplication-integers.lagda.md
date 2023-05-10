@@ -530,3 +530,6 @@ preserves-leq-mul-ℤ' x y z H K =
     ( preserves-leq-mul-ℤ x y z H K)
     ( commutative-mul-ℤ z y)
 ```
+
+```agda
+```

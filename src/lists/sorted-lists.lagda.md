@@ -88,6 +88,22 @@ module _
 --   is-leq-head-head-tail-is-sorted-list (cons x (cons y l)) s = pr1 s
 ```
 
+### If a list is sorted then its head is less or equal than every element in the list
+
+```agda
+  leq-element-in-list-leq-head-is-sorted-list :
+    (x y z : element-total-decidable-Poset X)
+    (l : list (element-total-decidable-Poset X)) →
+    is-sorted-list (cons y l) →
+    z ∈-list (cons y l) →
+    leq-total-decidable-Poset X x y →
+    leq-total-decidable-Poset X x z
+  leq-element-in-list-leq-head-is-sorted-list x .z z l s (is-head .z l) q =
+    q
+  leq-element-in-list-leq-head-is-sorted-list x y z (cons w l) s (is-in-tail .z .y .(cons w l) i) q =
+    leq-element-in-list-leq-head-is-sorted-list x w z l (pr2 s) i (transitive-leq-total-decidable-Poset X x y w (pr1 s) q)
+```
+
 ### If a list `l' ＝ cons y l` is sorted then for all element `x` less or equal than `y`, `x` is less or equal than every element in the list.
 
 ```agda
