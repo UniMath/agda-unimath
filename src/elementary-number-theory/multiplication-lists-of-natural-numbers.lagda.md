@@ -1,4 +1,4 @@
-# Product of the element of a list of natural numbers
+# Multiplication of the elements of a list of natural numbers
 
 ```agda
 module elementary-number-theory.multiplication-lists-of-natural-numbers where
