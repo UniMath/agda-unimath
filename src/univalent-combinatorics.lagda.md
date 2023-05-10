@@ -35,8 +35,8 @@ open import univalent-combinatorics.counting-dependent-pair-types public
 open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.cubes public
-open import univalent-combinatorics.cycle-decomposition-natural-numbers public
 open import univalent-combinatorics.cycle-partitions public
+open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers public
 open import univalent-combinatorics.cyclic-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
