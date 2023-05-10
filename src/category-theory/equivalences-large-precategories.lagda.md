@@ -21,32 +21,36 @@ open import foundation.universe-levels
 The large precategories `C` and `D` are equivalent if there are functors
 `F : C → D` and `G : D → C` such that
 
-- `comp G F` is naturally isomorphic to the identity functor on `C`,
-- `comp F G` is naturally isomorphic to the identity functor on `D`.
+- `G ∘ F` is naturally isomorphic to the identity functor on `C`,
+- `F ∘ G` is naturally isomorphic to the identity functor on `D`.
 
 ## Definition
 
 ```agda
 module _
   {αC αD : Level → Level} {βC βD : Level → Level → Level}
-  (C : Large-Precat αC βC) (D : Large-Precat αD βD)
+  (C : Large-Precategory αC βC) (D : Large-Precategory αD βD)
   where
 
-  record equivalence-Large-Precat (γ-there γ-back : Level → Level) : UUω where
-    constructor make-equivalence-Large-Precat
+  record
+    equivalence-Large-Precategory (γ-there γ-back : Level → Level) : UUω where
+    constructor
+      make-equivalence-Large-Precategory
     field
-      functor-equivalence-Large-Precat : functor-Large-Precat C D γ-there
-      functor-inv-equivalence-Large-Precat : functor-Large-Precat D C γ-back
-      issec-functor-inv-equivalence-Large-Precat :
-        natural-isomorphism-Large-Precat
-          ( comp-functor-Large-Precat
-            functor-equivalence-Large-Precat
-            functor-inv-equivalence-Large-Precat)
-          (id-functor-Large-Precat)
-      isretr-functor-inv-equivalence-Large-Precat :
-        natural-isomorphism-Large-Precat
-          ( comp-functor-Large-Precat
-            functor-inv-equivalence-Large-Precat
-            functor-equivalence-Large-Precat)
-          (id-functor-Large-Precat)
+      functor-equivalence-Large-Precategory :
+        functor-Large-Precategory C D γ-there
+      functor-inv-equivalence-Large-Precategory :
+        functor-Large-Precategory D C γ-back
+      issec-functor-inv-equivalence-Large-Precategory :
+        natural-isomorphism-Large-Precategory
+          ( comp-functor-Large-Precategory
+            functor-equivalence-Large-Precategory
+            functor-inv-equivalence-Large-Precategory)
+          ( id-functor-Large-Precategory)
+      isretr-functor-inv-equivalence-Large-Precategory :
+        natural-isomorphism-Large-Precategory
+          ( comp-functor-Large-Precategory
+            functor-inv-equivalence-Large-Precategory
+            functor-equivalence-Large-Precategory)
+          ( id-functor-Large-Precategory)
 ```

@@ -38,7 +38,7 @@ module _
   dirichlet-convolution-arithmetic-functions-Ring f g (pair (succ-ℕ n) H) =
     bounded-sum-arithmetic-function-Ring R
       ( succ-ℕ n)
-      ( λ x → div-ℕ-decidable-Prop (pr1 x) (succ-ℕ n) (pr2 x))
+      ( λ x → div-ℕ-Decidable-Prop (pr1 x) (succ-ℕ n) (pr2 x))
       ( λ { (pair x K) H →
             mul-Ring R
               ( f ( pair x K))

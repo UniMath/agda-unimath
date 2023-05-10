@@ -48,7 +48,7 @@ is-iso-hom-Ring R1 R2 f =
       ( Id (comp-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
 ```
 
-### Projections
+### Components of a ring isomorphism
 
 ```agda
 inv-is-iso-hom-Ring :
@@ -233,14 +233,14 @@ abstract
         ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f x)
         ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f y)))
 
-preserves-one-inv-is-iso-hom-Ab :
+preserves-unit-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2)
   ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f)
-  ( pres-unit-f : preserves-one-hom-Ab R1 R2 f) →
-  preserves-one-hom-Ab R2 R1
+  ( pres-unit-f : preserves-unit-hom-Ab R1 R2 f) →
+  preserves-unit-hom-Ab R2 R1
     ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
-preserves-one-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
+preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
   ( inv
     ( ap
       ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
@@ -259,7 +259,7 @@ is-ring-homomorphism-inv-is-iso-hom-Ab
   R1 R2 f is-iso-f (pair pres-mul-f pres-unit-f) =
   pair
     ( preserves-mul-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-mul-f)
-    ( preserves-one-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f)
+    ( preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f)
 
 inv-hom-Ring-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
@@ -348,12 +348,12 @@ equiv-iso-Ab-iso-Ring :
   (iso-Ring R1 R2) ≃ (iso-Ab-Ring R1 R2)
 equiv-iso-Ab-iso-Ring R1 R2 =
   ( ( ( inv-equiv
-        ( assoc-Σ
+        ( associative-Σ
           ( type-hom-Ab (ab-Ring R1) (ab-Ring R2))
           ( is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2))
           ( λ f → is-ring-homomorphism-hom-Ab R1 R2 (pr1 f)))) ∘e
       ( equiv-tot (λ f → commutative-prod))) ∘e
-    ( assoc-Σ
+    ( associative-Σ
       ( type-hom-Ab (ab-Ring R1) (ab-Ring R2))
       ( is-ring-homomorphism-hom-Ab R1 R2)
       ( λ f → is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) (pr1 f)))) ∘e

@@ -11,6 +11,7 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.function-extensionality
@@ -154,27 +155,27 @@ module _
   inductive-step-based-strong-ind-ℕ =
     based-ind-ℕ k (based-□-≤-ℕ k P) z s
 
-  comp-base-inductive-step-based-strong-ind-ℕ :
+  compute-base-inductive-step-based-strong-ind-ℕ :
     (K : k ≤-ℕ k) (m : ℕ) (M : k ≤-ℕ m) (H : m ≤-ℕ k) →
     inductive-step-based-strong-ind-ℕ k K m M H ＝ z m M H
-  comp-base-inductive-step-based-strong-ind-ℕ K m M =
+  compute-base-inductive-step-based-strong-ind-ℕ K m M =
     htpy-eq
       ( htpy-eq
         ( htpy-eq
-          ( comp-base-based-ind-ℕ k (based-□-≤-ℕ k P) z s K)
+          ( compute-base-based-ind-ℕ k (based-□-≤-ℕ k P) z s K)
           ( m))
         ( M))
 
-  comp-succ-inductive-step-based-strong-ind-ℕ :
+  compute-succ-inductive-step-based-strong-ind-ℕ :
     (n : ℕ) (N : k ≤-ℕ n) (N' : k ≤-ℕ succ-ℕ n) →
     (m : ℕ) (M : k ≤-ℕ m) (H : m ≤-ℕ succ-ℕ n) →
     inductive-step-based-strong-ind-ℕ (succ-ℕ n) N' m M H ＝
     s n N (inductive-step-based-strong-ind-ℕ n N) m M H
-  comp-succ-inductive-step-based-strong-ind-ℕ n N N' m M =
+  compute-succ-inductive-step-based-strong-ind-ℕ n N N' m M =
     htpy-eq
       ( htpy-eq
         ( htpy-eq
-          ( comp-succ-based-ind-ℕ k (based-□-≤-ℕ k P) z s n N N')
+          ( compute-succ-based-ind-ℕ k (based-□-≤-ℕ k P) z s n N N')
           ( m))
         ( M))
 
@@ -203,12 +204,12 @@ based-strong-ind-ℕ k P p0 pS =
       ( base-based-strong-ind-ℕ k P p0)
       ( succ-based-strong-ind-ℕ k P pS))
 
-comp-base-based-strong-ind-ℕ :
+compute-base-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
   (pS : (x : ℕ) → k ≤-ℕ x → (based-□-≤-ℕ k P x) → P (succ-ℕ x)) →
   based-strong-ind-ℕ k P p0 pS k (refl-leq-ℕ k) ＝ p0
-comp-base-based-strong-ind-ℕ k P p0 pS =
-  ( comp-base-inductive-step-based-strong-ind-ℕ k P
+compute-base-based-strong-ind-ℕ k P p0 pS =
+  ( compute-base-inductive-step-based-strong-ind-ℕ k P
     ( base-based-strong-ind-ℕ k P p0)
     ( succ-based-strong-ind-ℕ k P pS)
     ( refl-leq-ℕ k)
@@ -217,7 +218,7 @@ comp-base-based-strong-ind-ℕ k P p0 pS =
     ( refl-leq-ℕ k)) ∙
   ( eq-base-based-strong-ind-ℕ k P p0 (refl-leq-ℕ k) (refl-leq-ℕ k))
 
-cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ :
+cases-eq-inductive-step-compute-succ-based-strong-ind-ℕ :
   { l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
   ( pS : (x : ℕ) → k ≤-ℕ x → based-□-≤-ℕ k P x → P (succ-ℕ x))
   ( n : ℕ) (N : k ≤-ℕ n) (N' : k ≤-ℕ succ-ℕ n)
@@ -257,9 +258,9 @@ cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ :
     ( m)
     ( M)
     ( refl-leq-ℕ m)
-cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
+cases-eq-inductive-step-compute-succ-based-strong-ind-ℕ
   k P p0 pS n N N' m M H (inl H') α =
-  ( comp-succ-inductive-step-based-strong-ind-ℕ k P
+  ( compute-succ-inductive-step-based-strong-ind-ℕ k P
     ( base-based-strong-ind-ℕ k P p0)
     ( succ-based-strong-ind-ℕ k P pS)
     ( n)
@@ -269,7 +270,7 @@ cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
     ( M)
     ( H)) ∙
   ( ( htpy-succ-based-strong-ind-ℕ k P pS n N
-      (  inductive-step-based-strong-ind-ℕ k P
+      ( inductive-step-based-strong-ind-ℕ k P
         ( base-based-strong-ind-ℕ k P p0)
         ( succ-based-strong-ind-ℕ k P pS)
         ( n)
@@ -279,7 +280,7 @@ cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
       ( H)
       ( H')) ∙
     ( α N H'))
-cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
+cases-eq-inductive-step-compute-succ-based-strong-ind-ℕ
   k P p0 pS n N N' m M H (inr p) α =
   ap-inductive-step-based-strong-ind-ℕ k P
     ( base-based-strong-ind-ℕ k P p0)
@@ -292,7 +293,7 @@ cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ
     ( H)
     ( refl-leq-ℕ m)
 
-eq-inductive-step-comp-succ-based-strong-ind-ℕ :
+eq-inductive-step-compute-succ-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
   (pS : (x : ℕ) → k ≤-ℕ x → based-□-≤-ℕ k P x → P (succ-ℕ x))
   (n : ℕ) (N : k ≤-ℕ n)
@@ -313,7 +314,7 @@ eq-inductive-step-comp-succ-based-strong-ind-ℕ :
     ( m)
     ( M)
     ( refl-leq-ℕ m)
-eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M =
+eq-inductive-step-compute-succ-based-strong-ind-ℕ k P p0 pS n N m M =
   based-ind-ℕ k
     ( λ i →
       (I : k ≤-ℕ i) (J : m ≤-ℕ i) →
@@ -345,7 +346,8 @@ eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M =
         ( J)
         ( refl-leq-ℕ m))
     ( λ i I' α I J →
-      cases-eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS i I' I m M
+      cases-eq-inductive-step-compute-succ-based-strong-ind-ℕ
+        k P p0 pS i I' I m M
         ( J)
         ( cases-leq-succ-ℕ J)
         ( α))
@@ -353,14 +355,14 @@ eq-inductive-step-comp-succ-based-strong-ind-ℕ k P p0 pS n N m M =
     ( N)
     ( N)
 
-comp-succ-based-strong-ind-ℕ :
+compute-succ-based-strong-ind-ℕ :
   { l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
   ( pS : (x : ℕ) → k ≤-ℕ x → (based-□-≤-ℕ k P x) → P (succ-ℕ x)) →
   ( n : ℕ) (N : k ≤-ℕ n) (N' : k ≤-ℕ succ-ℕ n) →
   based-strong-ind-ℕ k P p0 pS (succ-ℕ n) N' ＝
   pS n N (λ m M H → based-strong-ind-ℕ k P p0 pS m M)
-comp-succ-based-strong-ind-ℕ k P p0 pS n N N' =
-  ( comp-succ-inductive-step-based-strong-ind-ℕ k P
+compute-succ-based-strong-ind-ℕ k P p0 pS n N N' =
+  ( compute-succ-inductive-step-based-strong-ind-ℕ k P
     ( base-based-strong-ind-ℕ k P p0)
     ( succ-based-strong-ind-ℕ k P pS)
     ( n)
@@ -382,8 +384,50 @@ comp-succ-based-strong-ind-ℕ k P p0 pS n N N' =
       ( eq-htpy
         ( λ m →
           eq-htpy
-            ( λ M →
-              eq-htpy
-                ( eq-inductive-step-comp-succ-based-strong-ind-ℕ
-                  k P p0 pS n N m M))))))
+          ( eq-htpy ∘
+            eq-inductive-step-compute-succ-based-strong-ind-ℕ
+              k P p0 pS n N m)))))
+```
+
+## Corollaries
+
+### Based strong induction for a type family defined for `n ≥ k`
+
+```agda
+based-□-≤-ℕ' : {l : Level} (k : ℕ) → ((n : ℕ) → (k ≤-ℕ n) → UU l) → ℕ → UU l
+based-□-≤-ℕ' k P x = (m : ℕ) → (H : k ≤-ℕ m) → (m ≤-ℕ x) → P m H
+
+compute-base-□-≤-ℕ' :
+  {l : Level} (k : ℕ) (P : (n : ℕ) → (k ≤-ℕ n) → UU l) (x : ℕ) →
+  based-□-≤-ℕ k (λ n → (H : k ≤-ℕ n) → P n H) x →
+  based-□-≤-ℕ' k P x
+compute-base-□-≤-ℕ' k P x p m H I = p m H I H
+
+based-strong-ind-ℕ' :
+  {l : Level} (k : ℕ) (P : (n : ℕ) → (k ≤-ℕ n → UU l))
+  (p0 : P k (refl-leq-ℕ k)) →
+  (pS : (x : ℕ) → (H : k ≤-ℕ x) →
+    based-□-≤-ℕ' k P x →
+    P (succ-ℕ x) (preserves-leq-succ-ℕ k x H))
+  (n : ℕ) → (H : k ≤-ℕ n) → P n H
+based-strong-ind-ℕ' {l} k P p0 pS n H =
+  based-strong-ind-ℕ
+    ( k)
+    ( λ n → (H : k ≤-ℕ n) → P n H)
+    ( apply-dependent-universal-property-contr
+      ( refl-leq-ℕ k)
+      ( is-proof-irrelevant-is-prop (is-prop-leq-ℕ k k) (refl-leq-ℕ k))
+      ( P k)
+      ( p0))
+    ( λ x H p →
+      apply-dependent-universal-property-contr
+        ( preserves-leq-succ-ℕ k x H)
+        ( is-proof-irrelevant-is-prop
+          ( is-prop-leq-ℕ k (succ-ℕ x))
+          ( preserves-leq-succ-ℕ k x H))
+        ( P (succ-ℕ x))
+        ( pS x H ( compute-base-□-≤-ℕ' k P x p)))
+    ( n)
+    ( H)
+    ( H)
 ```

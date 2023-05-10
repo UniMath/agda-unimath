@@ -43,11 +43,11 @@ module _
       {l3 : Level} {P : A → UU l3} →
       is-contr (Σ A B) → ((x : A) → is-prop (P x)) →
       (a : A) (b : B a) (p : P a) →
-      is-contr (Σ (Σ A P) (λ t → B (pr1 t)))
+      is-contr (Σ (Σ A P) (B ∘ pr1))
     is-contr-total-Eq-subtype {l3} {P}
       is-contr-AB is-subtype-P a b p =
       is-contr-equiv
-        ( Σ (Σ A B) (λ t → P (pr1 t)))
+        ( Σ (Σ A B) (P ∘ pr1))
         ( equiv-right-swap-Σ)
         ( is-contr-equiv
           ( P a)
@@ -99,10 +99,10 @@ module _
   pr1 (extensionality-type-subtype f z) = map-extensionality-type-subtype f z
   pr2 (extensionality-type-subtype f z) =
     subtype-identity-principle
-      ( λ x → is-prop-type-Prop (P x))
+      ( is-prop-type-Prop ∘ P)
       ( p)
       ( refl-A)
       ( map-extensionality-type-subtype f)
-      ( λ x → is-equiv-map-equiv (f x))
+      ( is-equiv-map-equiv ∘ f)
       ( z)
 ```

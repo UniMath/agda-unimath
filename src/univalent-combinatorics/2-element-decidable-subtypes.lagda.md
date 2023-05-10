@@ -77,7 +77,7 @@ module _
   is-decidable-subtype-subtype-2-Element-Decidable-Subtype :
     is-decidable-subtype subtype-2-Element-Decidable-Subtype
   is-decidable-subtype-subtype-2-Element-Decidable-Subtype =
-    is-decidable-subtype-decidable-subtype
+    is-decidable-decidable-subtype
       decidable-subtype-2-Element-Decidable-Subtype
 
   is-in-2-Element-Decidable-Subtype : X → UU l2
@@ -163,7 +163,8 @@ module _
       ( pair X (is-set-has-decidable-equality d))
       ( np)
 
-  decidable-subtype-standard-2-Element-Decidable-Subtype : decidable-subtype l X
+  decidable-subtype-standard-2-Element-Decidable-Subtype :
+    decidable-subtype l X
   pr1 (decidable-subtype-standard-2-Element-Decidable-Subtype z) =
     type-prop-standard-2-Element-Decidable-Subtype z
   pr1 (pr2 (decidable-subtype-standard-2-Element-Decidable-Subtype z)) =
@@ -226,14 +227,14 @@ module _
             ( eq-pair-Σ
               ( eq-is-prop
                 ( is-prop-is-prop
-                  ( type-decidable-Prop
+                  ( type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d
                         ( λ p → np (inv p)))
                       ( z)))))
               ( eq-is-prop
                 ( is-prop-is-decidable
-                  ( is-prop-type-decidable-Prop
+                  ( is-prop-type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d
                         ( λ p → np (inv p)))
@@ -263,13 +264,13 @@ module _
             ( eq-pair-Σ
               ( eq-is-prop
                 ( is-prop-is-prop
-                  ( type-decidable-Prop
+                  ( type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d nq)
                       ( v)))))
               ( eq-is-prop
                 ( is-prop-is-decidable
-                  ( is-prop-type-decidable-Prop
+                  ( is-prop-type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d nq)
                       ( v))))))))
@@ -309,12 +310,12 @@ module _
       (λ P →
         pair
           ( has-cardinality 2
-            ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x))))
+            ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P)))
           ( pair
             ( is-prop-type-trunc-Prop)
             ( is-decidable-equiv
               ( equiv-has-cardinality-id-number-of-elements-is-finite
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))
+                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))
                 ( is-finite-type-decidable-subtype P
                   ( is-finite-type-UU-Fin n X))
                 ( 2))
@@ -327,7 +328,7 @@ module _
         ( is-finite-type-UU-Fin n X)
         ( λ x →
           is-finite-equiv
-            ( inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
+            ( inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
             ( is-finite-Fin 2)))
 ```
 
@@ -351,8 +352,8 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
           iff-equiv
             ( tr
               ( λ g →
-                ( type-decidable-Prop (P x)) ≃
-                ( type-decidable-Prop (P (map-equiv g x))))
+                ( type-Decidable-Prop (P x)) ≃
+                ( type-Decidable-Prop (P (map-equiv g x))))
               ( inv (right-inverse-law-equiv e))
               ( id-equiv))))
 
@@ -435,7 +436,8 @@ module _
   {l1 : Level} (X : UU l1)
   where
 
-  equiv-universes-2-Element-Decidable-Subtype : (l l' : Level) →
+  equiv-universes-2-Element-Decidable-Subtype :
+    (l l' : Level) →
     2-Element-Decidable-Subtype l X ≃ 2-Element-Decidable-Subtype l' X
   equiv-universes-2-Element-Decidable-Subtype l l' =
     equiv-subtype-equiv
@@ -455,14 +457,20 @@ module _
               ( λ h' →
                 equiv-Σ
                   ( λ x →
-                    type-decidable-Prop
-                      ( map-equiv (equiv-universes-decidable-subtype X l l') S x))
+                    type-Decidable-Prop
+                      ( map-equiv
+                        ( equiv-universes-decidable-subtype X l l')
+                        ( S)
+                        ( x)))
                   ( id-equiv)
                   ( λ x →
                     equiv-iff'
-                      ( prop-decidable-Prop (S x))
-                      ( prop-decidable-Prop
-                        ( map-equiv (equiv-universes-decidable-subtype X l l') S x))
+                      ( prop-Decidable-Prop (S x))
+                      ( prop-Decidable-Prop
+                        ( map-equiv
+                          ( equiv-universes-decidable-subtype X l l')
+                          ( S)
+                          ( x)))
                       ( iff-universes-decidable-subtype X l l' S x)) ∘e
                   ( h'))
               ( h))
@@ -470,14 +478,17 @@ module _
             map-trunc-Prop
               ( λ h' →
                 equiv-Σ
-                  ( λ x → type-decidable-Prop (S x))
+                  ( λ x → type-Decidable-Prop (S x))
                   ( id-equiv)
                   ( λ x →
                     inv-equiv
                       ( equiv-iff'
-                        ( prop-decidable-Prop (S x))
-                        ( prop-decidable-Prop
-                          ( map-equiv (equiv-universes-decidable-subtype X l l') S x))
+                        ( prop-Decidable-Prop (S x))
+                        ( prop-Decidable-Prop
+                          ( map-equiv
+                            ( equiv-universes-decidable-subtype X l l')
+                            ( S)
+                            ( x)))
                         ( iff-universes-decidable-subtype X l l' S x))) ∘e
                   ( h'))
               ( h)))

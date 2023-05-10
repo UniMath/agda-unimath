@@ -39,7 +39,9 @@ formalization, we are using de Bruijn variables.
 ### Terms
 
 ```agda
-module _ {l1 : Level} (Sg : signature l1) where
+module _
+  {l1 : Level} (Sg : signature l1)
+  where
 
   data Term : UU l1 where
     var-Term : ℕ → Term
@@ -112,7 +114,7 @@ element of `A`.
   eval-constant-term :
     { l2 : Level} {A : UU l2} →
     ( is-model Sg A) →
-    ( t : Term ) →
+    ( t : Term) →
     (de-bruijn-variables-term t ＝ nil) →
     A
 

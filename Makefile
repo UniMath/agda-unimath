@@ -1,16 +1,16 @@
 
-CHECKOPTS :=--without-K --exact-split --guardedness
-everythingOpts :=$(CHECKOPTS)
-AGDAVERBOSE?=-v1
+CHECKOPTS := --without-K --exact-split --guardedness
+everythingOpts := $(CHECKOPTS)
+AGDAVERBOSE ?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
-AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
+AGDAMDFILES := $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
-AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
-AGDA ?=agda $(AGDAVERBOSE)
-TIME ?=time
+AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
+AGDA ?= agda $(AGDAVERBOSE)
+TIME ?= time
 
-METAFILES:=CITATION.cff \
+METAFILES :=CITATION.cff \
 			CODINGSTYLE.md \
 			CONTRIBUTORS.md \
 			FILE-CONVENTIONS.md \
@@ -25,8 +25,8 @@ METAFILES:=CITATION.cff \
 			TEMPLATE.lagda.md \
 			USERS.md \
 
-.PHONY : agdaFiles
-agdaFiles :
+.PHONY: agdaFiles
+agdaFiles:
 	@rm -rf $@
 	@rm -rf src/everything.lagda.md
 	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda" -o -name "*.lagda.md" \) -print > $@
@@ -34,8 +34,8 @@ agdaFiles :
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
 
-.PHONY : src/everything.lagda.md
-src/everything.lagda.md : agdaFiles
+.PHONY: src/everything.lagda.md
+src/everything.lagda.md: agdaFiles
 	@echo "\`\`\`agda" > $@ ;\
 	echo "{-# OPTIONS $(everythingOpts) #-}" >> $@ ;\
 	echo "" >> $@ ;\
@@ -48,15 +48,15 @@ src/everything.lagda.md : agdaFiles
 		>> $@ ;\
 	echo "\`\`\`" >> $@ ;
 
-.PHONY : check
-check : src/everything.lagda.md
+.PHONY: check
+check: src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
 AGDAMDFILES: $(AGDAMDFILES)
 
 docs/%.md: src/%.lagda.md
 	@echo "... $@"
-	@${AGDA} ${AGDAHTMLFLAfoGS} $<
+	@${AGDA} ${AGDAHTMLFLAGS} $<
 
 agda-html: src/everything.lagda.md
 	@rm -rf docs/
@@ -72,22 +72,24 @@ website: agda-html \
 	@cp $(METAFILES) docs/
 	@mdbook build
 
-.phony: serve-website
+.PHONY: serve-website
 serve-website:
 	@mdbook serve -p 8080 --open -d ./book/html
 
-.PHONY : graph
+.PHONY: graph
 graph:
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=docs/dependency.dot src/README.lagda.md
 
-.PHONY : clean
+.PHONY: clean
 clean:
 	rm -Rf _build/
 	find docs -name '*.html' -and -name '*.md' -delete -print0
 
-.PHONY : pre-commit
+.PHONY: pre-commit
 pre-commit:
 	@pre-commit run --all-files
+	@echo
+	@echo Typechecking library
 	@make check
 
 install-website-dev:

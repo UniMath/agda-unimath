@@ -22,53 +22,57 @@ open import order-theory.subpreorders
 
 ## Idea
 
-A decidable subpreorder Q of P is a subpreorder Q of P such that for each
-element `x : P` it is decidable whether or not `x` is in `Q`.
+A **decidable subpreorder** of `P` is a decidable subtype of `P` equipped with
+the restricted ordering of `P`.
 
 ## Definition
 
 ```agda
+Decidable-Subpreorder :
+  {l1 l2 : Level} (l3 : Level) → Preorder l1 l2 → UU (l1 ⊔ lsuc l3)
+Decidable-Subpreorder l3 P = decidable-subtype l3 (type-Preorder P)
+
 module _
-  {l1 l2 l3 : Level} (X : Preorder l1 l2)
-  (S : element-Preorder X → decidable-Prop l3)
+  {l1 l2 l3 : Level} (P : Preorder l1 l2) (S : Decidable-Subpreorder l3 P)
   where
 
-  element-decidable-sub-Preorder : UU (l1 ⊔ l3)
-  element-decidable-sub-Preorder =
-    element-sub-Preorder X (subtype-decidable-subtype S)
+  type-Decidable-Subpreorder : UU (l1 ⊔ l3)
+  type-Decidable-Subpreorder =
+    type-Subpreorder P (subtype-decidable-subtype S)
 
-  eq-element-decidable-sub-Preorder :
-    (x y : element-decidable-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
-  eq-element-decidable-sub-Preorder =
-    eq-element-sub-Preorder X (subtype-decidable-subtype S)
+  eq-type-Decidable-Subpreorder :
+    (x y : type-Decidable-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+  eq-type-Decidable-Subpreorder =
+    eq-type-Subpreorder P (subtype-decidable-subtype S)
 
-  leq-decidable-sub-preorder-Prop :
-    (x y : element-decidable-sub-Preorder) → Prop l2
-  leq-decidable-sub-preorder-Prop =
-    leq-sub-preorder-Prop X (subtype-decidable-subtype S)
+  leq-Decidable-Subpreorder-Prop :
+    (x y : type-Decidable-Subpreorder) → Prop l2
+  leq-Decidable-Subpreorder-Prop =
+    leq-Subpreorder-Prop P (subtype-decidable-subtype S)
 
-  leq-decidable-sub-Preorder : (x y : element-decidable-sub-Preorder) → UU l2
-  leq-decidable-sub-Preorder =
-    leq-sub-Preorder X (subtype-decidable-subtype S)
+  leq-Decidable-Subpreorder : (x y : type-Decidable-Subpreorder) → UU l2
+  leq-Decidable-Subpreorder =
+    leq-Subpreorder P (subtype-decidable-subtype S)
 
-  is-prop-leq-decidable-sub-Preorder :
-    (x y : element-decidable-sub-Preorder) →
-    is-prop (leq-decidable-sub-Preorder x y)
-  is-prop-leq-decidable-sub-Preorder =
-    is-prop-leq-sub-Preorder X (subtype-decidable-subtype S)
+  is-prop-leq-Decidable-Subpreorder :
+    (x y : type-Decidable-Subpreorder) →
+    is-prop (leq-Decidable-Subpreorder x y)
+  is-prop-leq-Decidable-Subpreorder =
+    is-prop-leq-Subpreorder P (subtype-decidable-subtype S)
 
-  refl-leq-decidable-sub-Preorder :
-    (x : element-decidable-sub-Preorder) → leq-decidable-sub-Preorder x x
-  refl-leq-decidable-sub-Preorder =
-    refl-leq-sub-Preorder X (subtype-decidable-subtype S)
+  refl-leq-Decidable-Subpreorder :
+    (x : type-Decidable-Subpreorder) → leq-Decidable-Subpreorder x x
+  refl-leq-Decidable-Subpreorder =
+    refl-leq-Subpreorder P (subtype-decidable-subtype S)
 
-  transitive-leq-decidable-sub-Preorder :
-    (x y z : element-decidable-sub-Preorder) →
-    leq-decidable-sub-Preorder y z → leq-decidable-sub-Preorder x y →
-    leq-decidable-sub-Preorder x z
-  transitive-leq-decidable-sub-Preorder =
-    transitive-leq-sub-Preorder X (subtype-decidable-subtype S)
+  transitive-leq-Decidable-Subpreorder :
+    (x y z : type-Decidable-Subpreorder) →
+    leq-Decidable-Subpreorder y z → leq-Decidable-Subpreorder x y →
+    leq-Decidable-Subpreorder x z
+  transitive-leq-Decidable-Subpreorder =
+    transitive-leq-Subpreorder P (subtype-decidable-subtype S)
 
-  decidable-sub-Preorder : Preorder (l1 ⊔ l3) l2
-  decidable-sub-Preorder = sub-Preorder X (subtype-decidable-subtype S)
+  preorder-Decidable-Subpreorder : Preorder (l1 ⊔ l3) l2
+  preorder-Decidable-Subpreorder =
+    preorder-Subpreorder P (subtype-decidable-subtype S)
 ```

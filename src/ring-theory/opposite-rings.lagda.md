@@ -31,7 +31,7 @@ module _
   op-Ring : Ring l
   pr1 op-Ring = ab-Ring R
   pr1 (pr1 (pr2 op-Ring)) = mul-Ring' R
-  pr2 (pr1 (pr2 op-Ring)) x y z = inv (associative-mul-Ring R z y x )
+  pr2 (pr1 (pr2 op-Ring)) x y z = inv (associative-mul-Ring R z y x)
   pr1 (pr1 (pr2 (pr2 op-Ring))) = one-Ring R
   pr1 (pr2 (pr1 (pr2 (pr2 op-Ring)))) = right-unit-law-mul-Ring R
   pr2 (pr2 (pr1 (pr2 (pr2 op-Ring)))) = left-unit-law-mul-Ring R

@@ -7,19 +7,20 @@ module foundation.univalence-action-on-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.univalence
-open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.injective-maps
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.universe-levels
 ```
 
 </details>
@@ -37,15 +38,16 @@ module _
   ( P : subuniverse l1 l2) (B : type-subuniverse P → UU l3)
   where
 
-  univalent-action-equiv : (X Y : type-subuniverse P) →
-    pr1 X ≃ pr1 Y → B X ≃ B Y
+  univalent-action-equiv :
+    (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y
   univalent-action-equiv X Y e = equiv-tr B (eq-equiv-subuniverse P e)
 ```
 
 ## Properties
 
 ```agda
-  preserves-id-equiv-univalent-action-equiv : (X : type-subuniverse P) →
+  preserves-id-equiv-univalent-action-equiv :
+    (X : type-subuniverse P) →
     univalent-action-equiv X X id-equiv ＝ id-equiv
   preserves-id-equiv-univalent-action-equiv X =
     ( ap (equiv-tr B)
@@ -56,7 +58,8 @@ module _
           ( id-equiv)))) ∙
       ( equiv-tr-refl B)
 
-  Ind-univalent-action-path : {l4 : Level}
+  Ind-univalent-action-path :
+    { l4 : Level}
     ( X : type-subuniverse P)
     ( F : (Y : type-subuniverse P) → B X ≃ B Y → UU l4) →
     F X id-equiv → ( Y : type-subuniverse P) (p : X ＝ Y) →
@@ -64,7 +67,8 @@ module _
   Ind-univalent-action-path X F p .X refl =
     tr (F X) (inv (equiv-tr-refl B)) p
 
-  Ind-univalent-action-equiv : {l4 : Level}
+  Ind-univalent-action-equiv :
+    { l4 : Level}
     ( X : type-subuniverse P)
     ( F : (Y : type-subuniverse P) → B X ≃ B Y → UU l4) →
     F X id-equiv → (Y : type-subuniverse P) (e : pr1 X ≃ pr1 Y) →
@@ -108,7 +112,7 @@ module _
     lemma1 f g h X .X pX pX' refl = h X pX pX'
     lemma2 :
       ( f g : (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y) →
-      ( (X : type-subuniverse P) → f X X id-equiv ＝ g X X id-equiv ) →
+      ( (X : type-subuniverse P) → f X X id-equiv ＝ g X X id-equiv) →
       ( X Y : type-subuniverse P) (e : pr1 X ≃ pr1 Y) →
       f X Y e ＝ g X Y e
     lemma2 f g h X Y e =

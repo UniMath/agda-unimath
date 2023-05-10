@@ -41,12 +41,16 @@ _∘_ :
 (g ∘ f) a = g (f a)
 ```
 
-### Evaluating at a point
+### Evaluation at a point
 
 ```agda
-ev-pt :
-  {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
-ev-pt a B f = f a
+ev-point :
+  {l1 l2 : Level} {A : UU l1} (a : A) {P : A → UU l2} → ((x : A) → P x) → P a
+ev-point a f = f a
+
+ev-point' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {X : UU l2} → (A → X) → X
+ev-point' a f = f a
 ```
 
 ### Precomposition functions

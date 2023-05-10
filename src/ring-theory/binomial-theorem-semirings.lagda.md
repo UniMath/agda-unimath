@@ -153,7 +153,7 @@ module _
       ( λ i →
         left-nat-scalar-law-mul-Semiring R
           ( binomial-coefficient-Fin n i)
-          ( f i )
+          ( f i)
           ( x)))
 ```
 

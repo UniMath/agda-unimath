@@ -1,5 +1,7 @@
 # Elementary number theory
 
+## Files in the elementary number theory folder
+
 ```agda
 module elementary-number-theory where
 
@@ -27,6 +29,7 @@ open import elementary-number-theory.commutative-semiring-of-natural-numbers pub
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
+open import elementary-number-theory.decidable-total-order-natural-numbers public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
@@ -75,6 +78,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types pu
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
 open import elementary-number-theory.multiplication-integers public
+open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
@@ -83,6 +87,7 @@ open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.powers-integers public
+open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
@@ -103,6 +108,7 @@ open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
+open import elementary-number-theory.type-arithmetic-natural-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
 open import elementary-number-theory.universal-property-natural-numbers public

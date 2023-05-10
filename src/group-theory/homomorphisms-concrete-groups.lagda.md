@@ -34,7 +34,7 @@ module _
 
   is-set-hom-Concrete-Group : is-set hom-Concrete-Group
   is-set-hom-Concrete-Group =
-    is-trunc-map-ev-pt-is-connected
+    is-trunc-map-ev-point-is-connected
       ( zero-𝕋)
       ( shape-Concrete-Group G)
       ( is-0-connected-classifying-type-Concrete-Group G)
@@ -136,14 +136,17 @@ module _
 
   eq-htpy-hom-Concrete-Group :
     (g : hom-Concrete-Group G H) → (htpy-hom-Concrete-Group g) → Id f g
-  eq-htpy-hom-Concrete-Group g = map-inv-equiv (extensionality-hom-Concrete-Group g)
+  eq-htpy-hom-Concrete-Group g =
+    map-inv-equiv (extensionality-hom-Concrete-Group g)
 ```
 
 ```agda
-id-hom-Concrete-Group : {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
+id-hom-Concrete-Group :
+  {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
 id-hom-Concrete-Group G = id-hom-∞-Group ( ∞-group-Concrete-Group G)
 
-comp-hom-Concrete-Group : {l1 l2 l3 : Level}
+comp-hom-Concrete-Group :
+  {l1 l2 l3 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3) →
   hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
 comp-hom-Concrete-Group G H K =
@@ -152,7 +155,8 @@ comp-hom-Concrete-Group G H K =
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)
 
-assoc-comp-hom-Concrete-Group : {l1 l2 l3 l4 : Level}
+associative-comp-hom-Concrete-Group :
+  {l1 l2 l3 l4 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2)
   (K : Concrete-Group l3) (L : Concrete-Group l4)
   (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
@@ -160,8 +164,8 @@ assoc-comp-hom-Concrete-Group : {l1 l2 l3 l4 : Level}
   htpy-hom-Concrete-Group G L
     ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
     ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
-assoc-comp-hom-Concrete-Group G H K L =
-  assoc-comp-hom-∞-Group
+associative-comp-hom-Concrete-Group G H K L =
+  associative-comp-hom-∞-Group
     ( ∞-group-Concrete-Group G)
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)

@@ -46,14 +46,37 @@ module _
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = sec f × retr f
 
-_≃_ :
-  {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
+_≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = Σ (A → B) is-equiv
 ```
 
-### Immediate structure of equivalences
+### Components of an equivalence
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  sec-is-equiv : is-equiv f → sec f
+  sec-is-equiv = pr1
+
+  retr-is-equiv : is-equiv f → retr f
+  retr-is-equiv = pr2
+
+  map-sec-is-equiv : is-equiv f → B → A
+  map-sec-is-equiv = pr1 ∘ pr1
+
+  map-retr-is-equiv : is-equiv f → B → A
+  map-retr-is-equiv = pr1 ∘ pr2
+
+  isretr-is-equiv :
+    (is-equiv-f : is-equiv f) → (f ∘ map-sec-is-equiv is-equiv-f) ~ id
+  isretr-is-equiv is-equiv-f = pr2 (pr1 is-equiv-f)
+
+  issec-is-equiv :
+    (is-equiv-f : is-equiv f) → (map-retr-is-equiv is-equiv-f ∘ f) ~ id
+  issec-is-equiv is-equiv-f = pr2 (pr2 is-equiv-f)
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -63,6 +86,20 @@ module _
 
   is-equiv-map-equiv : (e : A ≃ B) → is-equiv (map-equiv e)
   is-equiv-map-equiv e = pr2 e
+
+  retr-map-equiv : (e : A ≃ B) → retr (map-equiv e)
+  retr-map-equiv = retr-is-equiv ∘ is-equiv-map-equiv
+
+  sec-map-equiv : (e : A ≃ B) → sec (map-equiv e)
+  sec-map-equiv = sec-is-equiv ∘ is-equiv-map-equiv
+
+  isretr-map-equiv :
+    (e : A ≃ B) → (map-equiv e ∘ map-sec-is-equiv (is-equiv-map-equiv e)) ~ id
+  isretr-map-equiv = isretr-is-equiv ∘ is-equiv-map-equiv
+
+  issec-map-equiv :
+    (e : A ≃ B) → (map-retr-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
+  issec-map-equiv = issec-is-equiv ∘ is-equiv-map-equiv
 ```
 
 ### Families of equivalences
@@ -84,8 +121,6 @@ module _
   fam-equiv B C = (x : A) → B x ≃ C x
 ```
 
-## Examples
-
 ### The identity map is an equivalence
 
 ```agda
@@ -103,6 +138,8 @@ module _
   pr1 id-equiv = id
   pr2 id-equiv = is-equiv-id
 ```
+
+## Properties
 
 ### A map has an two-sided inverse if and only if it is an equivalence
 
@@ -128,8 +165,6 @@ module _
   pr2 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) =
     (((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H
 ```
-
-## Properties
 
 ### Coherently invertible maps are equivalences
 
@@ -351,7 +386,7 @@ module _
 ```agda
 abstract
   is-equiv-is-retraction :
-    {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
     is-equiv f → (g ∘ f) ~ id → is-equiv g
   is-equiv-is-retraction {A = A} {f = f} {g = g} is-equiv-f H =
     is-equiv-left-factor-htpy id g f (inv-htpy H) is-equiv-id is-equiv-f
@@ -362,7 +397,7 @@ abstract
 ```agda
 abstract
   is-equiv-is-section :
-    {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
     is-equiv f → (f ∘ g) ~ id → is-equiv g
   is-equiv-is-section {B = B} {f = f} {g = g} is-equiv-f H =
     is-equiv-right-factor-htpy id f g (inv-htpy H) is-equiv-f is-equiv-id
@@ -426,23 +461,23 @@ is-equiv-equiv' {f = f} {g} i j H K =
     ( is-equiv-map-equiv i)
 ```
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
-  where
+We will assume a commuting square
 
-  {-
-
-  We assumed a commuting square
-
+```md
           h
     A --------> C
     |           |
    f|           |g
     V           V
     B --------> D
-          i                                                                   -}
+          i
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
+  where
 
   abstract
     is-equiv-top-is-equiv-left-square :
@@ -521,6 +556,36 @@ module _
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)
   pr1 (equiv-ap e x y) = ap (map-equiv e)
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
+```
+
+## Equivalence reasoning
+
+Equivalences can be constructed by equational reasoning in the following way:
+
+```md
+equivalence-reasoning
+  X ≃ Y by equiv-1
+    ≃ Z by equiv-2
+    ≃ V by equiv-3
+```
+
+The equivalence constructed in this way is `equiv-1 ∘e (equiv-2 ∘e equiv-3)`,
+i.e., the equivivalence is associated fully to the right.
+
+```agda
+infixl 1 equivalence-reasoning_
+infixl 0 step-equivalence-reasoning
+
+equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ≃ X
+equivalence-reasoning X = id-equiv
+
+step-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
+step-equivalence-reasoning e Z f = f ∘e e
+
+syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 ```
 
 ## See also

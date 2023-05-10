@@ -16,13 +16,13 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -84,6 +84,28 @@ concatenate-eq-div-eq-ℕ refl p refl = p
 
 ## Properties
 
+### The quotients of a natural number `n` by two natural numbers `p` and `q` are equal if `p` and `q` are equal
+
+```agda
+eq-quotient-div-eq-div-ℕ :
+  (x y z : ℕ) → is-nonzero-ℕ x → x ＝ y →
+  (H : div-ℕ x z) → (I : div-ℕ y z) →
+  quotient-div-ℕ x z H ＝ quotient-div-ℕ y z I
+eq-quotient-div-eq-div-ℕ x y z n e H I =
+  is-injective-mul-ℕ
+    ( x)
+    ( n)
+  ( tr
+    ( λ p →
+      mul-ℕ x (quotient-div-ℕ x z H) ＝
+      mul-ℕ p (quotient-div-ℕ y z I))
+    ( inv e)
+    ( commutative-mul-ℕ x (quotient-div-ℕ x z H) ∙
+      ( eq-quotient-div-ℕ x z H ∙
+        ( inv (eq-quotient-div-ℕ y z I) ∙
+           commutative-mul-ℕ (quotient-div-ℕ y z I) y))))
+```
+
 ### Divisibility by a nonzero natural number is a property
 
 ```agda
@@ -140,6 +162,14 @@ leq-quotient-div-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → leq-ℕ (quotient-div-ℕ d x H) x
 leq-quotient-div-ℕ d x f H =
   leq-div-ℕ (quotient-div-ℕ d x H) x f (div-quotient-div-ℕ d x H)
+
+leq-quotient-div-ℕ' :
+  (d x : ℕ) → is-nonzero-ℕ d → (H : div-ℕ d x) → leq-ℕ (quotient-div-ℕ d x H) x
+leq-quotient-div-ℕ' d zero-ℕ f (zero-ℕ , p) = star
+leq-quotient-div-ℕ' d zero-ℕ f (succ-ℕ n , p) =
+  f (is-zero-right-is-zero-add-ℕ _ d p)
+leq-quotient-div-ℕ' d (succ-ℕ x) f H =
+  leq-quotient-div-ℕ d (succ-ℕ x) (is-nonzero-succ-ℕ x) H
 ```
 
 ### If `x` is nonzero, if `d | x` and `d ≠ x`, then `d < x`
@@ -314,7 +344,7 @@ pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
           ( p))))
 ```
 
-### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`
 
 ```agda
 div-quotient-div-div-ℕ :
@@ -372,7 +402,7 @@ is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
 
 ```agda
 simplify-mul-quotient-div-ℕ :
-  {a b c : ℕ}  → is-nonzero-ℕ c →
+  {a b c : ℕ} → is-nonzero-ℕ c →
   (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
   ( mul-ℕ (quotient-div-ℕ b a H) (quotient-div-ℕ c b K)) ＝
   ( quotient-div-ℕ c a L)
@@ -380,10 +410,14 @@ simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
   is-injective-mul-ℕ' c nz
     ( equational-reasoning
       mul-ℕ (mul-ℕ a/b b/c) c
-      ＝ mul-ℕ a/b (mul-ℕ b/c c)   by associative-mul-ℕ a/b b/c c
-      ＝ mul-ℕ a/b b               by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
-      ＝ a                         by eq-quotient-div-ℕ b a H
-      ＝ mul-ℕ a/c c               by inv (eq-quotient-div-ℕ c a L))
+      ＝ mul-ℕ a/b (mul-ℕ b/c c)
+        by associative-mul-ℕ a/b b/c c
+      ＝ mul-ℕ a/b b
+        by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
+      ＝ a
+        by eq-quotient-div-ℕ b a H
+      ＝ mul-ℕ a/c c
+        by inv (eq-quotient-div-ℕ c a L))
   where
   a/b : ℕ
   a/b = quotient-div-ℕ b a H
@@ -403,20 +437,26 @@ pr1 (pr1 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
   equational-reasoning
     mul-ℕ u (mul-ℕ x d)
-    ＝ mul-ℕ (mul-ℕ u x) d                 by inv (associative-mul-ℕ u x d)
-    ＝ mul-ℕ (quotient-div-ℕ d a H) d      by ap (mul-ℕ' d) p
-    ＝ a                                   by eq-quotient-div-ℕ d a H
+    ＝ mul-ℕ (mul-ℕ u x) d
+      by inv (associative-mul-ℕ u x d)
+    ＝ mul-ℕ (quotient-div-ℕ d a H) d
+      by ap (mul-ℕ' d) p
+    ＝ a
+      by eq-quotient-div-ℕ d a H
 pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
   is-injective-mul-ℕ' d nz
     ( equational-reasoning
         mul-ℕ (mul-ℕ u x) d
-        ＝ mul-ℕ u (mul-ℕ x d)             by associative-mul-ℕ u x d
-        ＝ a                               by p
-        ＝ mul-ℕ (quotient-div-ℕ d a H) d  by inv (eq-quotient-div-ℕ d a H))
+        ＝ mul-ℕ u (mul-ℕ x d)
+          by associative-mul-ℕ u x d
+        ＝ a
+          by p
+        ＝ mul-ℕ (quotient-div-ℕ d a H) d
+          by inv (eq-quotient-div-ℕ d a H))
 ```
 
-### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero`. If `d`divides`b/c`then`d`divides`a/c`.
+### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero. If `d` divides `b/c` then `d` divides `a/c`.
 
 ```agda
 div-quotient-div-div-quotient-div-ℕ :

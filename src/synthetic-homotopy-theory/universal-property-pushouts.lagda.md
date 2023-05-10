@@ -7,7 +7,7 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-pullbacks
+open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,13 +17,14 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 ```
 
 </details>
@@ -36,7 +37,7 @@ open import synthetic-homotopy-theory.cocones-pushouts
 universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} →
-  cocone f g X → UU _
+  cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 universal-property-pushout l f g c =
   (Y : UU l) → is-equiv (cocone-map f g {Y = Y} c)
 
@@ -89,17 +90,6 @@ commuting square, and then we introduce the type pullback-property-pushout,
 which states that the above square is a pullback.
 
 ```agda
-htpy-precomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {f g : A → B} (H : f ~ g) (C : UU l3) →
-  (precomp f C) ~ (precomp g C)
-htpy-precomp H C h = eq-htpy (h ·l H)
-
-compute-htpy-precomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
-  (htpy-precomp (refl-htpy' f) C) ~ refl-htpy
-compute-htpy-precomp f C h = eq-htpy-refl-htpy (h ∘ f)
-
 cone-pullback-property-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (Y : UU l) →
@@ -116,7 +106,8 @@ pullback-property-pushout :
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 pullback-property-pushout l {S} {A} {B} f g {X} c =
-  (Y : UU l) → is-pullback
+  (Y : UU l) →
+  is-pullback
     ( precomp f Y)
     ( precomp g Y)
     ( cone-pullback-property-pushout f g c Y)
@@ -304,7 +295,8 @@ universal-property-pushout-is-equiv :
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv f → is-equiv (pr1 (pr2 c)) →
   ({l : Level} → universal-property-pushout l f g c)
-universal-property-pushout-is-equiv f g (pair i (pair j H)) is-equiv-f is-equiv-j {l} =
+universal-property-pushout-is-equiv
+  f g (pair i (pair j H)) is-equiv-f is-equiv-j {l} =
   let c = (pair i (pair j H)) in
   universal-property-pushout-pullback-property-pushout l f g c
     ( λ T → is-pullback-is-equiv'

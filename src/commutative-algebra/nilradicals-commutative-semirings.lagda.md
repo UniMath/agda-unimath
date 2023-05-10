@@ -21,16 +21,16 @@ open import ring-theory.nilpotent-elements-semirings
 
 ## Idea
 
-The nilradical of a commutative semiring is the ideal consisting of all
+The **nilradical** of a commutative semiring is the ideal consisting of all
 nilpotent elements.
 
 ## Definitions
 
 ```agda
 subset-nilradical-Commutative-Semiring :
-  {l : Level} (R : Commutative-Semiring l) → subset-Commutative-Semiring l R
-subset-nilradical-Commutative-Semiring R =
-  is-nilpotent-element-semiring-Prop (semiring-Commutative-Semiring R)
+  {l : Level} (A : Commutative-Semiring l) → subset-Commutative-Semiring l A
+subset-nilradical-Commutative-Semiring A =
+  is-nilpotent-element-semiring-Prop (semiring-Commutative-Semiring A)
 ```
 
 ## Properties
@@ -39,51 +39,51 @@ subset-nilradical-Commutative-Semiring R =
 
 ```agda
 contains-zero-nilradical-Commutative-Semiring :
-  {l : Level} (R : Commutative-Semiring l) →
-  contains-zero-subset-Commutative-Semiring R
-    ( subset-nilradical-Commutative-Semiring R)
-contains-zero-nilradical-Commutative-Semiring R = intro-∃ 1 refl
+  {l : Level} (A : Commutative-Semiring l) →
+  contains-zero-subset-Commutative-Semiring A
+    ( subset-nilradical-Commutative-Semiring A)
+contains-zero-nilradical-Commutative-Semiring A = intro-∃ 1 refl
 ```
 
 ### The nilradical is closed under addition
 
 ```agda
 is-closed-under-add-nilradical-Commutative-Semiring :
-  {l : Level} (R : Commutative-Semiring l) →
-  is-closed-under-addition-subset-Commutative-Semiring R
-    ( subset-nilradical-Commutative-Semiring R)
-is-closed-under-add-nilradical-Commutative-Semiring R x y =
+  {l : Level} (A : Commutative-Semiring l) →
+  is-closed-under-addition-subset-Commutative-Semiring A
+    ( subset-nilradical-Commutative-Semiring A)
+is-closed-under-add-nilradical-Commutative-Semiring A x y =
   is-nilpotent-add-Semiring
-    ( semiring-Commutative-Semiring R)
+    ( semiring-Commutative-Semiring A)
     ( x)
     ( y)
-    ( commutative-mul-Commutative-Semiring R x y)
+    ( commutative-mul-Commutative-Semiring A x y)
 ```
 
 ### The nilradical is closed under multiplication with ring elements
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} (A : Commutative-Semiring l)
   where
 
   is-closed-under-mul-right-nilradical-Commutative-Semiring :
-    is-closed-under-right-multiplication-subset-Commutative-Semiring R
-      ( subset-nilradical-Commutative-Semiring R)
+    is-closed-under-right-multiplication-subset-Commutative-Semiring A
+      ( subset-nilradical-Commutative-Semiring A)
   is-closed-under-mul-right-nilradical-Commutative-Semiring x y =
     is-nilpotent-element-mul-Semiring
-      ( semiring-Commutative-Semiring R)
+      ( semiring-Commutative-Semiring A)
       ( x)
       ( y)
-      ( commutative-mul-Commutative-Semiring R x y)
+      ( commutative-mul-Commutative-Semiring A x y)
 
   is-closed-under-mul-left-nilradical-Commutative-Semiring :
-    is-closed-under-left-multiplication-subset-Commutative-Semiring R
-      ( subset-nilradical-Commutative-Semiring R)
+    is-closed-under-left-multiplication-subset-Commutative-Semiring A
+      ( subset-nilradical-Commutative-Semiring A)
   is-closed-under-mul-left-nilradical-Commutative-Semiring x y =
     is-nilpotent-element-mul-Semiring'
-      ( semiring-Commutative-Semiring R)
+      ( semiring-Commutative-Semiring A)
       ( y)
       ( x)
-      ( commutative-mul-Commutative-Semiring R y x)
+      ( commutative-mul-Commutative-Semiring A y x)
 ```

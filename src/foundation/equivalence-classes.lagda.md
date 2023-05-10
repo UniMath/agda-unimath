@@ -8,7 +8,6 @@ module foundation.equivalence-classes where
 
 ```agda
 open import foundation.effective-maps-equivalence-relations
-open import foundation.equational-reasoning
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
@@ -409,7 +408,8 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  transitive-is-in-equivalence-class : (P : equivalence-class R) (a b : A) →
+  transitive-is-in-equivalence-class :
+    (P : equivalence-class R) (a b : A) →
     is-in-equivalence-class R P a → sim-Eq-Rel R a b →
     is-in-equivalence-class R P b
   transitive-is-in-equivalence-class P a b p r =

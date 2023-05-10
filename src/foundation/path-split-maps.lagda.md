@@ -38,10 +38,12 @@ module _
             ( is-contr-Π
               ( λ x → is-contr-Π
                 ( λ y → is-contr-sec-is-equiv
-                  ( is-emb-is-equiv (is-equiv-is-path-split f is-path-split-f) x y))))))
+                  ( is-emb-is-equiv
+                    ( is-equiv-is-path-split f is-path-split-f) x y))))))
 
   abstract
-    is-equiv-is-path-split-is-equiv : (f : A → B) → is-equiv (is-path-split-is-equiv f)
+    is-equiv-is-path-split-is-equiv :
+      (f : A → B) → is-equiv (is-path-split-is-equiv f)
     is-equiv-is-path-split-is-equiv f =
       is-equiv-is-prop
         ( is-property-is-equiv f)
@@ -53,7 +55,8 @@ module _
     pair (is-path-split-is-equiv f) (is-equiv-is-path-split-is-equiv f)
 
   abstract
-    is-equiv-is-equiv-is-path-split : (f : A → B) → is-equiv (is-equiv-is-path-split f)
+    is-equiv-is-equiv-is-path-split :
+      (f : A → B) → is-equiv (is-equiv-is-path-split f)
     is-equiv-is-equiv-is-path-split f =
       is-equiv-is-prop
         ( is-prop-is-path-split f)

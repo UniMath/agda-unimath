@@ -20,7 +20,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
@@ -188,7 +187,7 @@ eq-quotient-div-is-one-ℤ .one-ℤ x refl H =
         ( H)))
 ```
 
-### If `k` divides `x` and `k` is 0 then `x` is `0`
+### If `k` divides `x` and `k` is `0` then `x` is `0`
 
 ```agda
 is-zero-is-zero-div-ℤ : (x k : ℤ) → div-ℤ k x → is-zero-ℤ k → is-zero-ℤ x
@@ -230,10 +229,14 @@ pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (neg-div-ℤ x y (pair d p)) =
   equational-reasoning
     mul-ℤ (neg-ℤ d) (neg-ℤ x)
-    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))   by left-negative-law-mul-ℤ d (neg-ℤ x)
-    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
-    ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
-    ＝ y                           by p
+    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))
+      by left-negative-law-mul-ℤ d (neg-ℤ x)
+    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))
+      by ap neg-ℤ (right-negative-law-mul-ℤ d x)
+    ＝ (mul-ℤ d x)
+      by neg-neg-ℤ (mul-ℤ d x)
+    ＝ y
+      by p
 ```
 
 ### Multiplication preserves divisibility
@@ -471,7 +474,7 @@ is-nonzero-sim-unit-ℤ H f =
 is-zero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ x → is-zero-ℤ y
 is-zero-sim-unit-ℤ {x} {y} H p =
-  dn-elim-is-decidable
+  double-negation-elim-is-decidable
     ( has-decidable-equality-ℤ y zero-ℤ)
     ( λ g → g (inv (β g) ∙ (ap (mul-ℤ (u g)) p ∙ right-zero-law-mul-ℤ (u g))))
   where
@@ -657,9 +660,13 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg
   with is-decidable-is-zero-ℤ a
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
   equational-reasoning
-    a ＝ zero-ℤ   by z
-      ＝ neg-ℤ a  by inv (ap neg-ℤ z)
-      ＝ b        by neg
+    a
+    ＝ zero-ℤ
+      by z
+    ＝ neg-ℤ a
+      by inv (ap neg-ℤ z)
+    ＝ b
+      by neg
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
    a H (tr is-nonnegative-ℤ (inv neg) H')))

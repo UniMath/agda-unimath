@@ -88,11 +88,11 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  _∙h_ : {f g h : (x : A) → B x} →
-    f ~ g → g ~ h → f ~ h
+  _∙h_ : {f g h : (x : A) → B x} → f ~ g → g ~ h → f ~ h
   (H ∙h K) x = (H x) ∙ (K x)
 
-  concat-htpy : {f g : (x : A) → B x} →
+  concat-htpy :
+    {f g : (x : A) → B x} →
     f ~ g → (h : (x : A) → B x) → g ~ h → f ~ h
   concat-htpy H h K x = concat (H x) (h x) (K x)
 
@@ -130,12 +130,12 @@ htpy-right-whisk H f x = H (f x)
 _·r_ = htpy-right-whisk
 ```
 
-**Warning**: The infix whiskering operators `_·l_` and `_·r_` use the symbol `·`
-("MIDDLE DOT", codepoint #xb7) (agda-input: `\cdot` or `\centerdot`) as opposed
-to the infix homotopy concatenation operator `_∙h_` which uses the symbol `∙`
-("BULLET OPERATOR", codepoint #x2219) (agda-input: `\.`). If these look the same
-in your editor, we suggest that you change your font. For a reference, see
-[How to install](HOWTO-INSTALL.md).
+**Note**: The infix whiskering operators `_·l_` and `_·r_` use the
+[middle dot](https://codepoints.net/U+00B7) `·` (agda-input: `\cdot`
+`\centerdot`), as opposed to the infix homotopy concatenation operator `_∙h_`
+which uses the [bullet operator](https://codepoints.net/U+2219) `∙` (agda-input:
+`\.`). If these look the same in your editor, we suggest that you change your
+font. For a reference, see [How to install](HOWTO-INSTALL.md).
 
 ### Horizontal composition of homotopies
 
@@ -199,7 +199,7 @@ module _
   left-unit-htpy : (refl-htpy ∙h H) ~ H
   left-unit-htpy x = left-unit
 
-  inv-htpy-left-unit-htpy :  H ~ (refl-htpy ∙h H)
+  inv-htpy-left-unit-htpy : H ~ (refl-htpy ∙h H)
   inv-htpy-left-unit-htpy = inv-htpy left-unit-htpy
 
   right-unit-htpy : (H ∙h refl-htpy) ~ H
@@ -344,9 +344,40 @@ module _
     inv-htpy (right-whisk-inv-htpy H f)
 ```
 
+## Reasoning with homotopies
+
+Homotopies can be constructed by equational reasoning in the following way:
+
+```md
+homotopy-reasoning
+  f ~ g by htpy-1
+    ~ h by htpy-2
+    ~ i by htpy-3
+```
+
+The homotopy obtained in this way is `htpy-1 ∙h (htpy-2 ∙h htpy-3)`, i.e., it is
+associated fully to the right.
+
+```agda
+infixl 1 homotopy-reasoning_
+infixl 0 step-homotopy-reasoning
+
+homotopy-reasoning_ :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  (f : (x : X) → Y x) → f ~ f
+homotopy-reasoning f = refl-htpy
+
+step-homotopy-reasoning :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  {f g : (x : X) → Y x} → (f ~ g) →
+  (h : (x : X) → Y x) → (g ~ h) → (f ~ h)
+step-homotopy-reasoning p h q = p ∙h q
+
+syntax step-homotopy-reasoning p h q = p ~ h by q
+```
+
 ## See also
 
-- We postulate that homotopy is equivalent to identity of functions in
+- We postulate that homotopies characterize identifications in (dependent)
+  function types in the file
   [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
-- We define an equational reasoning syntax for homotopies in
-  [`foundation.equational-reasoning`](foundation.equational-reasoning.md).

@@ -93,7 +93,7 @@ module _
     type-hom-Abstract-Group-Action G X Z
   pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
   pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
-    coherence-square-maps-comp-horizontal
+    pasting-horizontal-coherence-square-maps
       ( f)
       ( g)
       ( mul-Abstract-Group-Action G X x)

@@ -50,7 +50,7 @@ module _
 
 ## Properties
 
-### The type `Eq-coprod x y` is equivalent to `Id x y`.
+### The type `Eq-coprod x y` is equivalent to `Id x y`
 
 We will use the fundamental theorem of identity types.
 
@@ -316,7 +316,8 @@ module _
 
 ```agda
 abstract
-  is-set-coprod : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-set-coprod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-set A → is-set B → is-set (A + B)
   is-set-coprod = is-trunc-coprod neg-two-𝕋
 

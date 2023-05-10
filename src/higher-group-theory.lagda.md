@@ -1,5 +1,7 @@
 # Higher group theory
 
+## Files in the higher group theory folder
+
 ```agda
 module higher-group-theory where
 

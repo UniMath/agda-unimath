@@ -33,8 +33,8 @@ open import trees.w-types
 
 ## Idea
 
-A W-type `𝕎 A B` is said to be extensional if for any two elements `S T : 𝕎 A B`
-the induced map
+A W-type `𝕎 A B` is said to be **extensional** if for any two elements
+`S T : 𝕎 A B` the induced map
 
 ```md
   Id S T → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
@@ -113,7 +113,7 @@ module _
     map-inv-is-equiv (is-equiv-Eq-Eq-ext-eq-𝕎 x y u v)
 
   equiv-total-Eq-ext-𝕎 :
-    (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (symbol-𝕎 x) ≃ B a)
+    (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (shape-𝕎 x) ≃ B a)
   equiv-total-Eq-ext-𝕎 (tree-𝕎 a f) =
     ( ( equiv-tot
             ( λ x →
@@ -134,7 +134,7 @@ module _
                 ( equiv-tot
                   ( λ g →
                     inv-equiv (equiv-fam-equiv-equiv-slice f g)))))) ∘e
-          ( assoc-Σ
+          ( associative-Σ
             ( A)
             ( λ x → B x → 𝕎 A B)
             ( λ t → Eq-ext-𝕎 (tree-𝕎 a f) (tree-𝕎 (pr1 t) (pr2 t))))) ∘e
@@ -144,13 +144,14 @@ module _
           ( inv-equiv-structure-𝕎-Alg)
           ( H))
     where
-    H : (z : 𝕎 A (λ x → B x)) →
-        Eq-ext-𝕎 ( tree-𝕎 a f) z ≃
-        Eq-ext-𝕎
-          ( tree-𝕎 a f)
-          ( tree-𝕎
-            ( pr1 (map-equiv inv-equiv-structure-𝕎-Alg z))
-            ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
+    H :
+      ( z : 𝕎 A (λ x → B x)) →
+      Eq-ext-𝕎 ( tree-𝕎 a f) z ≃
+      Eq-ext-𝕎
+        ( tree-𝕎 a f)
+        ( tree-𝕎
+          ( pr1 (map-equiv inv-equiv-structure-𝕎-Alg z))
+          ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
     H (tree-𝕎 b g) = id-equiv
 
   is-contr-total-Eq-ext-is-univalent-𝕎 :

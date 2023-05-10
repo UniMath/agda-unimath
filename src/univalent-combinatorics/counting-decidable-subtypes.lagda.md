@@ -52,7 +52,7 @@ count-decidable-subtype' P zero-ℕ e =
   count-is-empty
     ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl ∘ pr1)
 count-decidable-subtype' P (succ-ℕ k) e
-  with is-decidable-subtype-decidable-subtype P (map-equiv e (inr star))
+  with is-decidable-decidable-subtype P (map-equiv e (inr star))
 ... | inl p =
   count-equiv
     ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))

@@ -10,6 +10,7 @@ module foundation.unions-subtypes where
 open import foundation.decidable-subtypes
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.large-locale-of-subtypes
 
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
@@ -38,9 +39,10 @@ module _
 ### Unions of decidable subtypes
 
 ```agda
-  union-decidable-subtype : decidable-subtype l1 X → decidable-subtype l2 X →
+  union-decidable-subtype :
+    decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
-  union-decidable-subtype P Q x = disj-decidable-Prop (P x) (Q x)
+  union-decidable-subtype P Q x = disj-Decidable-Prop (P x) (Q x)
 ```
 
 ### Unions of families of subtypes
@@ -50,7 +52,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1}
   where
 
-  union-fam-subtype :
+  union-family-of-subtypes :
     {I : UU l2} (A : I → subtype l3 X) → subtype (l2 ⊔ l3) X
-  union-fam-subtype {I} A x = exists-Prop I (λ i → A i x)
+  union-family-of-subtypes = sup-power-set-Large-Locale
 ```

@@ -129,10 +129,12 @@ module _
   inv-triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
     (retr-g : retr g) → ((pr1 retr-g) ∘ f) ~ h
-  inv-triangle-retraction f g h H retr-g = (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
+  inv-triangle-retraction f g h H retr-g =
+    (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
 
   triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
     (retr-g : retr g) → h ~ ((pr1 retr-g) ∘ f)
-  triangle-retraction f g h H retr-g = inv-htpy (inv-triangle-retraction f g h H retr-g)
+  triangle-retraction f g h H retr-g =
+    inv-htpy (inv-triangle-retraction f g h H retr-g)
 ```

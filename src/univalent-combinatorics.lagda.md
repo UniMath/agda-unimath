@@ -1,4 +1,6 @@
-# Univalent Combinatorics
+# Univalent combinatorics
+
+## Idea
 
 Univalent combinatorics is the study of finite univalent mathematics. Finiteness
 in univalent mathematics is expressed by a mere equivalence to a standard finite
@@ -12,6 +14,8 @@ level `k` π-finite type is a type that has finitely many connected components,
 such that all its homotopy groups up to level `k` are finite. The π-finite types
 enjoy useful closure properties, such as closedness under Σ, cartesian products,
 coproducts, and closedness under Π under a mild condition.
+
+## Files in the univalent combinatorics folder
 
 ```agda
 module univalent-combinatorics where

@@ -30,66 +30,80 @@ An anafunctor is a functor that is only defined up to isomorphism.
 ### Anafunctors between precategories
 
 ```agda
-anafunctor-Precat :
+anafunctor-Precategory :
   {l1 l2 l3 l4 : Level} (l : Level) →
-  Precat l1 l2 → Precat l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-anafunctor-Precat l C D =
-  Σ ( obj-Precat C → obj-Precat D → UU l)
+  Precategory l1 l2 → Precategory l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+anafunctor-Precategory l C D =
+  Σ ( obj-Precategory C → obj-Precategory D → UU l)
     ( λ F₀ →
-      Σ ( (X Y : obj-Precat C) (U : obj-Precat D) (u : F₀ X U) →
-          (V : obj-Precat D) (v : F₀ Y V) →
-          (f : type-hom-Precat C X Y) → type-hom-Precat D U V)
+      Σ ( ( X Y : obj-Precategory C)
+          ( U : obj-Precategory D) (u : F₀ X U) →
+          ( V : obj-Precategory D) (v : F₀ Y V) →
+          ( f : type-hom-Precategory C X Y) → type-hom-Precategory D U V)
         ( λ F₁ →
-          ( ( X : obj-Precat C) → type-trunc-Prop (Σ (obj-Precat D) (F₀ X))) ×
-          ( ( ( X : obj-Precat C) (U : obj-Precat D) (u : F₀ X U) →
-              F₁ X X U u U u (id-hom-Precat C) ＝ id-hom-Precat D) ×
-            ( ( X Y Z : obj-Precat C)
-              ( U : obj-Precat D) (u : F₀ X U) (V : obj-Precat D) (v : F₀ Y V)
-              ( W : obj-Precat D) (w : F₀ Z W) →
-              ( g : type-hom-Precat C Y Z) (f : type-hom-Precat C X Y) →
-              ( F₁ X Z U u W w (comp-hom-Precat C g f)) ＝
-              ( comp-hom-Precat D
+          ( ( X : obj-Precategory C) →
+            type-trunc-Prop (Σ (obj-Precategory D) (F₀ X))) ×
+          ( ( ( X : obj-Precategory C)
+              ( U : obj-Precategory D) (u : F₀ X U) →
+              F₁ X X U u U u (id-hom-Precategory C) ＝ id-hom-Precategory D) ×
+            ( ( X Y Z : obj-Precategory C)
+              ( U : obj-Precategory D) (u : F₀ X U)
+              ( V : obj-Precategory D) (v : F₀ Y V)
+              ( W : obj-Precategory D) (w : F₀ Z W) →
+              ( g : type-hom-Precategory C Y Z)
+              ( f : type-hom-Precategory C X Y) →
+              ( F₁ X Z U u W w (comp-hom-Precategory C g f)) ＝
+              ( comp-hom-Precategory D
                 ( F₁ Y Z V v W w g)
                 ( F₁ X Y U u V v f))))))
 
 module _
-  {l1 l2 l3 l4 l5 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
-  (F : anafunctor-Precat l5 C D)
+  {l1 l2 l3 l4 l5 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : anafunctor-Precategory l5 C D)
   where
 
-  object-anafunctor-Precat : obj-Precat C → obj-Precat D → UU l5
-  object-anafunctor-Precat = pr1 F
+  object-anafunctor-Precategory : obj-Precategory C → obj-Precategory D → UU l5
+  object-anafunctor-Precategory = pr1 F
 
-  hom-anafunctor-Precat :
-    (X Y : obj-Precat C) (U : obj-Precat D) (u : object-anafunctor-Precat X U)
-    (V : obj-Precat D) (v : object-anafunctor-Precat Y V) →
-    type-hom-Precat C X Y → type-hom-Precat D U V
-  hom-anafunctor-Precat = pr1 (pr2 F)
+  hom-anafunctor-Precategory :
+    (X Y : obj-Precategory C)
+    (U : obj-Precategory D) (u : object-anafunctor-Precategory X U)
+    (V : obj-Precategory D) (v : object-anafunctor-Precategory Y V) →
+    type-hom-Precategory C X Y → type-hom-Precategory D U V
+  hom-anafunctor-Precategory = pr1 (pr2 F)
 ```
 
 ### Anafunctors between categories
 
 ```agda
-anafunctor-Cat :
+anafunctor-Category :
   {l1 l2 l3 l4 : Level} (l : Level) →
-  Cat l1 l2 → Cat l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-anafunctor-Cat l C D = anafunctor-Precat l (precat-Cat C) (precat-Cat D)
+  Category l1 l2 → Category l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+anafunctor-Category l C D =
+  anafunctor-Precategory l (precategory-Category C) (precategory-Category D)
 
 module _
-  {l1 l2 l3 l4 l5 : Level} (C : Cat l1 l2) (D : Cat l3 l4)
-  (F : anafunctor-Cat l5 C D)
+  {l1 l2 l3 l4 l5 : Level} (C : Category l1 l2) (D : Category l3 l4)
+  (F : anafunctor-Category l5 C D)
   where
 
-  object-anafunctor-Cat : obj-Cat C → obj-Cat D → UU l5
-  object-anafunctor-Cat =
-    object-anafunctor-Precat (precat-Cat C) (precat-Cat D) F
+  object-anafunctor-Category : obj-Category C → obj-Category D → UU l5
+  object-anafunctor-Category =
+    object-anafunctor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
 
-  hom-anafunctor-Cat :
-    (X Y : obj-Cat C) (U : obj-Cat D) (u : object-anafunctor-Cat X U)
-    (V : obj-Cat D) (v : object-anafunctor-Cat Y V) →
-    type-hom-Cat C X Y → type-hom-Cat D U V
-  hom-anafunctor-Cat =
-    hom-anafunctor-Precat (precat-Cat C) (precat-Cat D) F
+  hom-anafunctor-Category :
+    (X Y : obj-Category C) (U : obj-Category D)
+    (u : object-anafunctor-Category X U)
+    (V : obj-Category D) (v : object-anafunctor-Category Y V) →
+    type-hom-Category C X Y → type-hom-Category D U V
+  hom-anafunctor-Category =
+    hom-anafunctor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
 ```
 
 ## Properties
@@ -98,79 +112,89 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (C : Precat l1 l2) (D : Precat l3 l4)
+  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
   where
 
-  anafunctor-functor-Precat : functor-Precat C D → anafunctor-Precat l4 C D
-  pr1 (anafunctor-functor-Precat F) X Y =
-    iso-Precat D (obj-functor-Precat C D F X) Y
-  pr1 (pr2 (anafunctor-functor-Precat F)) X Y U u V v f =
-    comp-hom-Precat D
-      ( comp-hom-Precat D
-        ( hom-iso-Precat D v)
-        ( hom-functor-Precat C D F f))
-      ( hom-inv-iso-Precat D u)
-  pr1 (pr2 (pr2 (anafunctor-functor-Precat F))) X =
-    unit-trunc-Prop (pair (obj-functor-Precat C D F X) (id-iso-Precat D))
-  pr1 (pr2 (pr2 (pr2 (anafunctor-functor-Precat F)))) X U u =
+  anafunctor-functor-Precategory :
+    functor-Precategory C D → anafunctor-Precategory l4 C D
+  pr1 (anafunctor-functor-Precategory F) X Y =
+    iso-Precategory D (obj-functor-Precategory C D F X) Y
+  pr1 (pr2 (anafunctor-functor-Precategory F)) X Y U u V v f =
+    comp-hom-Precategory D
+      ( comp-hom-Precategory D
+        ( hom-iso-Precategory D v)
+        ( hom-functor-Precategory C D F f))
+      ( hom-inv-iso-Precategory D u)
+  pr1 (pr2 (pr2 (anafunctor-functor-Precategory F))) X =
+    unit-trunc-Prop
+      ( pair (obj-functor-Precategory C D F X) (id-iso-Precategory D))
+  pr1 (pr2 (pr2 (pr2 (anafunctor-functor-Precategory F)))) X U u =
     ( ap
-      ( comp-hom-Precat' D (hom-inv-iso-Precat D u))
+      ( comp-hom-Precategory' D (hom-inv-iso-Precategory D u))
       ( ( ap
-          ( comp-hom-Precat D (hom-iso-Precat D u))
-          ( respects-id-functor-Precat C D F X)) ∙
-        ( right-unit-law-comp-hom-Precat D (hom-iso-Precat D u)))) ∙
-    ( issec-hom-inv-iso-Precat D u)
-  pr2 (pr2 (pr2 (pr2 (anafunctor-functor-Precat F)))) X Y Z U u V v W w g f =
+          ( comp-hom-Precategory D (hom-iso-Precategory D u))
+          ( preserves-id-functor-Precategory C D F X)) ∙
+        ( right-unit-law-comp-hom-Precategory D (hom-iso-Precategory D u)))) ∙
+    ( issec-hom-inv-iso-Precategory D u)
+  pr2 (pr2 (pr2 (pr2 (anafunctor-functor-Precategory F))))
+    X Y Z U u V v W w g f =
     ( ap
-      ( comp-hom-Precat' D (hom-inv-iso-Precat D u))
+      ( comp-hom-Precategory' D (hom-inv-iso-Precategory D u))
       ( ( ( ap
-            ( comp-hom-Precat D (hom-iso-Precat D w))
-            ( respects-comp-functor-Precat C D F g f)) ∙
+            ( comp-hom-Precategory D (hom-iso-Precategory D w))
+            ( preserves-comp-functor-Precategory C D F g f)) ∙
           ( ( inv
-              ( assoc-comp-hom-Precat D
-                ( hom-iso-Precat D w)
-                ( hom-functor-Precat C D F g)
-                ( hom-functor-Precat C D F f))) ∙
+              ( associative-comp-hom-Precategory D
+                ( hom-iso-Precategory D w)
+                ( hom-functor-Precategory C D F g)
+                ( hom-functor-Precategory C D F f))) ∙
             ( ap
-              ( comp-hom-Precat' D (hom-functor-Precat C D F f))
+              ( comp-hom-Precategory' D (hom-functor-Precategory C D F f))
               ( ( inv
-                  ( right-unit-law-comp-hom-Precat D
-                    ( comp-hom-Precat D
-                      ( hom-iso-Precat D w)
-                      ( hom-functor-Precat C D F g)))) ∙
+                  ( right-unit-law-comp-hom-Precategory D
+                    ( comp-hom-Precategory D
+                      ( hom-iso-Precategory D w)
+                      ( hom-functor-Precategory C D F g)))) ∙
                 ( ( ap
-                    ( comp-hom-Precat D
-                      ( comp-hom-Precat D
-                        ( hom-iso-Precat D w)
-                        ( hom-functor-Precat C D F g)))
-                      ( inv (isretr-hom-inv-iso-Precat D v))) ∙
+                    ( comp-hom-Precategory D
+                      ( comp-hom-Precategory D
+                        ( hom-iso-Precategory D w)
+                        ( hom-functor-Precategory C D F g)))
+                      ( inv (isretr-hom-inv-iso-Precategory D v))) ∙
                   ( inv
-                    ( assoc-comp-hom-Precat D
-                      ( comp-hom-Precat D
-                        ( hom-iso-Precat D w)
-                        ( hom-functor-Precat C D F g))
-                      ( hom-inv-iso-Precat D v)
-                      ( hom-iso-Precat D v)))))))) ∙
-        ( assoc-comp-hom-Precat D
-          ( comp-hom-Precat D
-            ( comp-hom-Precat D (hom-iso-Precat D w) (hom-functor-Precat C D F g))
-            ( hom-inv-iso-Precat D v))
-          ( hom-iso-Precat D v)
-          ( hom-functor-Precat C D F f)))) ∙
-    ( assoc-comp-hom-Precat D
-      ( comp-hom-Precat D
-        ( comp-hom-Precat D (hom-iso-Precat D w) (hom-functor-Precat C D F g))
-        ( hom-inv-iso-Precat D v))
-      ( comp-hom-Precat D (hom-iso-Precat D v) (hom-functor-Precat C D F f))
-      ( hom-inv-iso-Precat D u))
+                    ( associative-comp-hom-Precategory D
+                      ( comp-hom-Precategory D
+                        ( hom-iso-Precategory D w)
+                        ( hom-functor-Precategory C D F g))
+                      ( hom-inv-iso-Precategory D v)
+                      ( hom-iso-Precategory D v)))))))) ∙
+        ( associative-comp-hom-Precategory D
+          ( comp-hom-Precategory D
+            ( comp-hom-Precategory D
+              ( hom-iso-Precategory D w)
+              ( hom-functor-Precategory C D F g))
+            ( hom-inv-iso-Precategory D v))
+          ( hom-iso-Precategory D v)
+          ( hom-functor-Precategory C D F f)))) ∙
+    ( associative-comp-hom-Precategory D
+      ( comp-hom-Precategory D
+        ( comp-hom-Precategory D
+          ( hom-iso-Precategory D w)
+          ( hom-functor-Precategory C D F g))
+        ( hom-inv-iso-Precategory D v))
+      ( comp-hom-Precategory D
+        ( hom-iso-Precategory D v)
+        ( hom-functor-Precategory C D F f))
+      ( hom-inv-iso-Precategory D u))
 ```
 
 ### The action on objects
 
 ```agda
-image-object-anafunctor-Cat :
-  {l1 l2 l3 l4 l5 : Level} (C : Cat l1 l2) (D : Cat l3 l4) →
-  anafunctor-Cat l5 C D → obj-Cat C → UU (l3 ⊔ l5)
-image-object-anafunctor-Cat C D F X =
-  Σ (obj-Cat D) (λ U → type-trunc-Prop (object-anafunctor-Cat C D F X U))
+image-object-anafunctor-Category :
+  {l1 l2 l3 l4 l5 : Level} (C : Category l1 l2) (D : Category l3 l4) →
+  anafunctor-Category l5 C D → obj-Category C → UU (l3 ⊔ l5)
+image-object-anafunctor-Category C D F X =
+  Σ ( obj-Category D)
+    ( λ U → type-trunc-Prop (object-anafunctor-Category C D F X U))
 ```

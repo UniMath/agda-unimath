@@ -14,9 +14,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.equational-reasoning
 open import foundation.identity-types
-open import foundation.unit-type
 ```
 
 </details>
@@ -52,17 +50,25 @@ dist-int-ℕ (succ-ℕ x) (succ-ℕ y) =
   ( dist-int-ℕ x y)
 
 dist-abs-ℤ :
-  (x y : ℤ) → (H : is-nonnegative-ℤ x) → (K : is-nonnegative-ℤ y)
-    → dist-ℕ (abs-ℤ x) (abs-ℤ y) ＝ dist-ℤ x y
-dist-abs-ℤ (inr (inl star)) y H K = equational-reasoning
-  dist-ℕ 0 (abs-ℤ y)
-  ＝ abs-ℤ y by left-unit-law-dist-ℕ (abs-ℤ y)
-  ＝ dist-ℤ (zero-ℤ) y by inv (left-zero-law-dist-ℤ y)
-dist-abs-ℤ (inr (inr x)) (inr (inl star)) H K = equational-reasoning
-  dist-ℕ (abs-ℤ (inr (inr x))) 0
-  ＝ succ-ℕ x by right-unit-law-dist-ℕ (abs-ℤ (inr (inr x)))
-  ＝ dist-ℤ (inr (inr x)) zero-ℤ by inv (right-zero-law-dist-ℤ (inr (inr x)))
-dist-abs-ℤ (inr (inr x)) (inr (inr y)) H K = equational-reasoning
-  dist-ℕ (succ-ℕ x) (succ-ℕ y)
-  ＝ dist-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ (succ-ℕ y)) by inv (dist-int-ℕ (succ-ℕ x) (succ-ℕ y))
+  (x y : ℤ) → (H : is-nonnegative-ℤ x) → (K : is-nonnegative-ℤ y) →
+  dist-ℕ (abs-ℤ x) (abs-ℤ y) ＝ dist-ℤ x y
+dist-abs-ℤ (inr (inl star)) y H K =
+  equational-reasoning
+    dist-ℕ 0 (abs-ℤ y)
+    ＝ abs-ℤ y
+      by left-unit-law-dist-ℕ (abs-ℤ y)
+    ＝ dist-ℤ (zero-ℤ) y
+      by inv (left-zero-law-dist-ℤ y)
+dist-abs-ℤ (inr (inr x)) (inr (inl star)) H K =
+  equational-reasoning
+    dist-ℕ (abs-ℤ (inr (inr x))) 0
+    ＝ succ-ℕ x
+      by right-unit-law-dist-ℕ (abs-ℤ (inr (inr x)))
+    ＝ dist-ℤ (inr (inr x)) zero-ℤ
+      by inv (right-zero-law-dist-ℤ (inr (inr x)))
+dist-abs-ℤ (inr (inr x)) (inr (inr y)) H K =
+  equational-reasoning
+    dist-ℕ (succ-ℕ x) (succ-ℕ y)
+    ＝ dist-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ (succ-ℕ y))
+      by inv (dist-int-ℕ (succ-ℕ x) (succ-ℕ y))
 ```

@@ -25,7 +25,9 @@ open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositions
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -82,11 +84,56 @@ has-unique-proper-divisor-ℕ n = is-contr (Σ ℕ (is-proper-divisor-ℕ n))
 
 ## Properties
 
+### The number `0` is not a prime
+
+```agda
+is-nonzero-is-prime-ℕ :
+  (n : ℕ) → is-prime-ℕ n → is-nonzero-ℕ n
+is-nonzero-is-prime-ℕ n H p =
+  is-not-one-two-ℕ
+    ( pr1
+      ( H 2)
+      ( tr (λ n → ¬ (2 ＝ n)) (inv (p)) ( is-nonzero-two-ℕ),
+        tr (λ n → div-ℕ 2 n) (inv p) (0 , refl)))
+```
+
 ### The number `1` is not a prime
 
 ```agda
 is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
 is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
+```
+
+### A prime is strictly greater than `1`
+
+```agda
+le-one-is-prime-ℕ :
+  (n : ℕ) → is-prime-ℕ n → le-ℕ 1 n
+le-one-is-prime-ℕ 0 x = ex-falso (is-nonzero-is-prime-ℕ 0 x refl)
+le-one-is-prime-ℕ 1 x = ex-falso (is-not-one-is-prime-ℕ 1 x refl)
+le-one-is-prime-ℕ (succ-ℕ (succ-ℕ n)) x = star
+```
+
+### Being a prime is a proposition
+
+```agda
+is-prop-is-prime-ℕ :
+  (n : ℕ) → is-prop (is-prime-ℕ n)
+is-prop-is-prime-ℕ n =
+  is-prop-Π
+    ( λ x →
+      is-prop-prod
+        ( is-prop-Π (λ p → is-set-ℕ x 1))
+        ( is-prop-Π (λ p → is-prop-is-proper-divisor-ℕ n x)))
+
+is-prime-ℕ-Prop :
+  (n : ℕ) → Prop lzero
+pr1 (is-prime-ℕ-Prop n) = is-prime-ℕ n
+pr2 (is-prime-ℕ-Prop n) = is-prop-is-prime-ℕ n
+
+is-prop-has-unique-proper-divisor-ℕ :
+  (n : ℕ) → is-prop (has-unique-proper-divisor-ℕ n)
+is-prop-has-unique-proper-divisor-ℕ n = is-property-is-contr
 ```
 
 ### The three definitions of primes are equivalent
@@ -150,7 +197,7 @@ is-decidable-is-prime-ℕ n =
     ( is-decidable-is-prime-easy-ℕ n)
 ```
 
-### The number `2` is a prime.
+### The number `2` is a prime
 
 ```agda
 is-one-is-proper-divisor-two-ℕ : is-one-is-proper-divisor-ℕ 2

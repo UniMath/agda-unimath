@@ -9,14 +9,14 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.functions
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
 open import foundation.set-quotients
-open import foundation.universe-levels
 open import foundation.vectors-set-quotients
 
 open import foundation-core.equivalence-relations
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
 
 open import linear-algebra.vectors
 
@@ -63,7 +63,7 @@ module _
   compute-multivariable-map-set-quotient :
     ( h : hom-Eq-Rel (all-sim-Eq-Rel n A R) S) →
     ( multivariable-map-set-quotient h ∘
-      quotient-vector-map n A R ) ~
+      quotient-vector-map n A R) ~
     ( quotient-map S ∘
       map-hom-Eq-Rel (all-sim-Eq-Rel n A R) S h)
   compute-multivariable-map-set-quotient =

@@ -1,4 +1,4 @@
-# Homomorphisms of meet semilattices
+# Homomorphisms of meet-semilattices
 
 ```agda
 module order-theory.homomorphisms-meet-semilattices where
@@ -10,7 +10,13 @@ module order-theory.homomorphisms-meet-semilattices where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
+
+open import group-theory.homomorphisms-semigroups
 
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.meet-semilattices
@@ -21,31 +27,125 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-A meet semi-lattice homomorphism is an order preserving map between the
-underlying posets that also preserves meets.
+A **homomorphism of meet-semilattice** is a map that preserves meets. It follows
+that homomorphisms of meet-semilattices are order preserving.
 
 ## Definitions
 
+### Homomorphisms of algebraic meet-semilattices
+
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (A : Meet-Semilattice l1 l2) (B : Meet-Semilattice l3 l4)
+  {l1 l2 : Level}
+  (A : Meet-Semilattice l1) (B : Meet-Semilattice l2)
   where
 
-  preserves-meets : (element-Meet-Semilattice A → element-Meet-Semilattice B) → UU (l1 ⊔ l3 ⊔ l4)
-  preserves-meets f = (x y : element-Meet-Semilattice A) →
-    is-greatest-binary-lower-bound-Poset (poset-Meet-Semilattice B) (f x) (f y) (f (meet-Meet-Semilattice A x y))
+  preserves-meet-Prop :
+    (type-Meet-Semilattice A → type-Meet-Semilattice B) → Prop (l1 ⊔ l2)
+  preserves-meet-Prop =
+    preserves-mul-semigroup-Prop
+      ( semigroup-Meet-Semilattice A)
+      ( semigroup-Meet-Semilattice B)
 
-  hom-Meet-Semilattice : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-Meet-Semilattice = Σ (element-Meet-Semilattice A → element-Meet-Semilattice B)
-    λ f → preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) f × preserves-meets f
+  preserves-meet :
+    (type-Meet-Semilattice A → type-Meet-Semilattice B) → UU (l1 ⊔ l2)
+  preserves-meet =
+    preserves-mul-Semigroup
+      ( semigroup-Meet-Semilattice A)
+      ( semigroup-Meet-Semilattice B)
 
-  map-hom-Meet-Semilattice : hom-Meet-Semilattice → element-Meet-Semilattice A → element-Meet-Semilattice B
-  map-hom-Meet-Semilattice = pr1
+  is-prop-preserves-meet :
+    (f : type-Meet-Semilattice A → type-Meet-Semilattice B) →
+    is-prop (preserves-meet f)
+  is-prop-preserves-meet =
+    is-prop-preserves-mul-Semigroup
+      ( semigroup-Meet-Semilattice A)
+      ( semigroup-Meet-Semilattice B)
 
-  preserves-order-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) →
-    preserves-order-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B) (map-hom-Meet-Semilattice H)
-  preserves-order-hom-Meet-Semilattice = pr1 ∘ pr2
+  hom-Meet-Semilattice : Set (l1 ⊔ l2)
+  hom-Meet-Semilattice =
+    hom-Semigroup (semigroup-Meet-Semilattice A) (semigroup-Meet-Semilattice B)
 
-  preserves-meet-hom-Meet-Semilattice : (H : hom-Meet-Semilattice) → preserves-meets (map-hom-Meet-Semilattice H)
-  preserves-meet-hom-Meet-Semilattice = pr2 ∘ pr2
+  type-hom-Meet-Semilattice : UU (l1 ⊔ l2)
+  type-hom-Meet-Semilattice = type-Set hom-Meet-Semilattice
+
+  is-set-type-hom-Meet-Semilattice : is-set type-hom-Meet-Semilattice
+  is-set-type-hom-Meet-Semilattice = is-set-type-Set hom-Meet-Semilattice
+
+  module _
+    (f : type-hom-Meet-Semilattice)
+    where
+
+    map-hom-Meet-Semilattice :
+      type-Meet-Semilattice A → type-Meet-Semilattice B
+    map-hom-Meet-Semilattice = pr1 f
+
+    preserves-meet-hom-Meet-Semilattice :
+      preserves-meet map-hom-Meet-Semilattice
+    preserves-meet-hom-Meet-Semilattice = pr2 f
+
+    preserves-order-hom-Meet-Semilattice :
+      preserves-order-Poset
+        ( poset-Meet-Semilattice A)
+        ( poset-Meet-Semilattice B)
+        ( map-hom-Meet-Semilattice)
+    preserves-order-hom-Meet-Semilattice x y H =
+      ( inv (preserves-meet-hom-Meet-Semilattice x y)) ∙
+      ( ap map-hom-Meet-Semilattice H)
+
+    hom-poset-hom-Meet-Semilattice :
+      type-hom-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B)
+    pr1 hom-poset-hom-Meet-Semilattice = map-hom-Meet-Semilattice
+    pr2 hom-poset-hom-Meet-Semilattice = preserves-order-hom-Meet-Semilattice
+```
+
+### Homomorphisms of order-theoretic meet-semilattices
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  (B : Order-Theoretic-Meet-Semilattice l3 l4)
+  where
+
+  preserves-meet-hom-Poset-Prop :
+    type-hom-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice A)
+      ( poset-Order-Theoretic-Meet-Semilattice B) → Prop (l1 ⊔ l3 ⊔ l4)
+  preserves-meet-hom-Poset-Prop (f , H) =
+    Π-Prop
+      ( type-Order-Theoretic-Meet-Semilattice A)
+      ( λ x →
+        Π-Prop
+          ( type-Order-Theoretic-Meet-Semilattice A)
+          ( λ y →
+            is-greatest-binary-lower-bound-Poset-Prop
+              ( poset-Order-Theoretic-Meet-Semilattice B)
+              ( f x)
+              ( f y)
+              ( f (meet-Order-Theoretic-Meet-Semilattice A x y))))
+
+  preserves-meet-hom-Poset :
+    type-hom-Poset
+      ( poset-Order-Theoretic-Meet-Semilattice A)
+      ( poset-Order-Theoretic-Meet-Semilattice B) → UU (l1 ⊔ l3 ⊔ l4)
+  preserves-meet-hom-Poset f =
+    type-Prop (preserves-meet-hom-Poset-Prop f)
+
+  is-prop-preserves-meet-hom-Prop :
+    ( f :
+      type-hom-Poset
+        ( poset-Order-Theoretic-Meet-Semilattice A)
+        ( poset-Order-Theoretic-Meet-Semilattice B)) →
+    is-prop (preserves-meet-hom-Poset f)
+  is-prop-preserves-meet-hom-Prop f =
+    is-prop-type-Prop (preserves-meet-hom-Poset-Prop f)
+
+  hom-Order-Theoretic-Meet-Semilattice : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-Order-Theoretic-Meet-Semilattice =
+    set-subset
+      ( hom-set-Poset
+        ( poset-Order-Theoretic-Meet-Semilattice A)
+        ( poset-Order-Theoretic-Meet-Semilattice B))
+      ( preserves-meet-hom-Poset-Prop)
 ```

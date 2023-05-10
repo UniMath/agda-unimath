@@ -27,12 +27,11 @@ consists of:
 
 - an object `w`
 - morphisms `p₁ : hom w y` and `p₂ : hom w z` such that
-- `comp f p₁ = comp g p₂` together with the universal property that for every
-  object `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such
-  that `comp f p₁' = comp g p₂'` there exists a unique morphism `h : hom w' w`
-  such that
-- `comp p₁ h = p₁'`
-- `comp p₂ h = p₂'`.
+- `f ∘ p₁ = g ∘ p₂` together with the universal property that for every object
+  `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such that
+  `f ∘ p₁' = g ∘ p₂'` there exists a unique morphism `h : hom w' w` such that
+- `p₁ ∘ h = p₁'`
+- `p₂ ∘ h = p₂'`.
 
 We say that `C` has all pullbacks if there is a choice of a pullback for each
 object `x` and pair of morphisms into `x` in `C`.
@@ -40,109 +39,132 @@ object `x` and pair of morphisms into `x` in `C`.
 ## Definition
 
 ```agda
-module _ {l1 l2 : Level} (C : Precat l1 l2) where
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
 
-  is-pullback :
-    (x y z : obj-Precat C) →
-    (f : type-hom-Precat C y x) →
-    (g : type-hom-Precat C z x) →
-    (w : obj-Precat C) →
-    (p₁ : type-hom-Precat C w y) →
-    (p₂ : type-hom-Precat C w z) →
-    comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂ →
+  is-pullback-Precategory :
+    (x y z : obj-Precategory C) →
+    (f : type-hom-Precategory C y x) →
+    (g : type-hom-Precategory C z x) →
+    (w : obj-Precategory C) →
+    (p₁ : type-hom-Precategory C w y) →
+    (p₂ : type-hom-Precategory C w z) →
+    comp-hom-Precategory C f p₁ ＝ comp-hom-Precategory C g p₂ →
     UU (l1 ⊔ l2)
-  is-pullback x y z f g w p₁ p₂ _ =
-    (w' : obj-Precat C) →
-    (p₁' : type-hom-Precat C w' y) →
-    (p₂' : type-hom-Precat C w' z) →
-    comp-hom-Precat C f p₁' ＝ comp-hom-Precat C g p₂' →
-    ∃! (type-hom-Precat C w' w) λ h →
-       (comp-hom-Precat C p₁ h ＝ p₁') ×
-       (comp-hom-Precat C p₂ h ＝ p₂')
+  is-pullback-Precategory x y z f g w p₁ p₂ _ =
+    (w' : obj-Precategory C) →
+    (p₁' : type-hom-Precategory C w' y) →
+    (p₂' : type-hom-Precategory C w' z) →
+    comp-hom-Precategory C f p₁' ＝ comp-hom-Precategory C g p₂' →
+    ∃! (type-hom-Precategory C w' w) λ h →
+       (comp-hom-Precategory C p₁ h ＝ p₁') ×
+       (comp-hom-Precategory C p₂ h ＝ p₂')
 
-  pullback :
-    (x y z : obj-Precat C) →
-    type-hom-Precat C y x →
-    type-hom-Precat C z x →
+  pullback-Precategory :
+    (x y z : obj-Precategory C) →
+    type-hom-Precategory C y x →
+    type-hom-Precategory C z x →
     UU (l1 ⊔ l2)
-  pullback x y z f g =
-    Σ (obj-Precat C) λ w →
-    Σ (type-hom-Precat C w y) λ p₁ →
-    Σ (type-hom-Precat C w z) λ p₂ →
-    Σ (comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂) λ α →
-      is-pullback x y z f g w p₁ p₂ α
+  pullback-Precategory x y z f g =
+    Σ (obj-Precategory C) λ w →
+    Σ (type-hom-Precategory C w y) λ p₁ →
+    Σ (type-hom-Precategory C w z) λ p₂ →
+    Σ (comp-hom-Precategory C f p₁ ＝ comp-hom-Precategory C g p₂) λ α →
+      is-pullback-Precategory x y z f g w p₁ p₂ α
 
-  has-all-pullbacks : UU (l1 ⊔ l2)
-  has-all-pullbacks =
-    (x y z : obj-Precat C) →
-    (f : type-hom-Precat C y x) →
-    (g : type-hom-Precat C z x) →
-    pullback x y z f g
+  has-all-pullback-Precategory : UU (l1 ⊔ l2)
+  has-all-pullback-Precategory =
+    (x y z : obj-Precategory C) →
+    (f : type-hom-Precategory C y x) →
+    (g : type-hom-Precategory C z x) →
+    pullback-Precategory x y z f g
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (t : has-all-pullbacks C)
-  (x y z : obj-Precat C)
-  (f : type-hom-Precat C y x)
-  (g : type-hom-Precat C z x) where
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (t : has-all-pullback-Precategory C)
+  (x y z : obj-Precategory C)
+  (f : type-hom-Precategory C y x)
+  (g : type-hom-Precategory C z x)
+  where
 
-  object-pullback : obj-Precat C
-  object-pullback = pr1 (t x y z f g)
+  object-pullback-Precategory : obj-Precategory C
+  object-pullback-Precategory = pr1 (t x y z f g)
 
-  proj₁-pullback : type-hom-Precat C object-pullback y
-  proj₁-pullback = pr1 (pr2 (t x y z f g))
+  pr1-pullback-Precategory :
+    type-hom-Precategory C object-pullback-Precategory y
+  pr1-pullback-Precategory = pr1 (pr2 (t x y z f g))
 
-  proj₂-pullback : type-hom-Precat C object-pullback z
-  proj₂-pullback = pr1 (pr2 (pr2 (t x y z f g)))
+  pr2-pullback-Precategory :
+    type-hom-Precategory C object-pullback-Precategory z
+  pr2-pullback-Precategory = pr1 (pr2 (pr2 (t x y z f g)))
 
-  pullback-square-comm :
-    comp-hom-Precat C f proj₁-pullback ＝ comp-hom-Precat C g proj₂-pullback
-  pullback-square-comm = pr1 (pr2 (pr2 (pr2 (t x y z f g))))
+  pullback-square-Precategory-comm :
+    comp-hom-Precategory C f pr1-pullback-Precategory ＝
+    comp-hom-Precategory C g pr2-pullback-Precategory
+  pullback-square-Precategory-comm = pr1 (pr2 (pr2 (pr2 (t x y z f g))))
 
-  module _ (w' : obj-Precat C)
-    (p₁' : type-hom-Precat C w' y)
-    (p₂' : type-hom-Precat C w' z)
-    (α : comp-hom-Precat C f p₁' ＝ comp-hom-Precat C g p₂') where
+  module _
+    (w' : obj-Precategory C)
+    (p₁' : type-hom-Precategory C w' y)
+    (p₂' : type-hom-Precategory C w' z)
+    (α : comp-hom-Precategory C f p₁' ＝ comp-hom-Precategory C g p₂')
+    where
 
-    morphism-into-pullback : type-hom-Precat C w' object-pullback
-    morphism-into-pullback =
+    morphism-into-pullback-Precategory :
+      type-hom-Precategory C w' object-pullback-Precategory
+    morphism-into-pullback-Precategory =
       pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
 
-    morphism-into-pullback-comm-proj₁ :
-      comp-hom-Precat C proj₁-pullback morphism-into-pullback ＝ p₁'
-    morphism-into-pullback-comm-proj₁ =
+    morphism-into-pullback-comm-pr1 :
+      comp-hom-Precategory C
+        pr1-pullback-Precategory
+        morphism-into-pullback-Precategory ＝
+      p₁'
+    morphism-into-pullback-comm-pr1 =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
-    morphism-into-pullback-comm-proj₂ :
-      comp-hom-Precat C proj₂-pullback morphism-into-pullback ＝ p₂'
-    morphism-into-pullback-comm-proj₂ =
+    morphism-into-pullback-comm-pr2 :
+      comp-hom-Precategory C
+        pr2-pullback-Precategory
+        morphism-into-pullback-Precategory ＝
+      p₂'
+    morphism-into-pullback-comm-pr2 =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
-    is-unique-morphism-into-pullback :
-      (h' : type-hom-Precat C w' object-pullback) →
-      comp-hom-Precat C proj₁-pullback h' ＝ p₁' →
-      comp-hom-Precat C proj₂-pullback h' ＝ p₂' →
-      morphism-into-pullback ＝ h'
-    is-unique-morphism-into-pullback h' α₁ α₂ =
-      ap pr1 (pr2 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α) (h' , α₁ , α₂))
+    is-unique-morphism-into-pullback-Precategory :
+      (h' : type-hom-Precategory C w' object-pullback-Precategory) →
+      comp-hom-Precategory C pr1-pullback-Precategory h' ＝ p₁' →
+      comp-hom-Precategory C pr2-pullback-Precategory h' ＝ p₂' →
+      morphism-into-pullback-Precategory ＝ h'
+    is-unique-morphism-into-pullback-Precategory h' α₁ α₂ =
+      ap
+        ( pr1)
+        ( pr2 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α) (h' , α₁ , α₂))
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (x y z : obj-Precat C)
-  (f : type-hom-Precat C y x)
-  (g : type-hom-Precat C z x)
-  (w : obj-Precat C)
-  (p₁ : type-hom-Precat C w y)
-  (p₂ : type-hom-Precat C w z)
-  (α : comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂) where
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (x y z : obj-Precategory C)
+  (f : type-hom-Precategory C y x)
+  (g : type-hom-Precategory C z x)
+  (w : obj-Precategory C)
+  (p₁ : type-hom-Precategory C w y)
+  (p₂ : type-hom-Precategory C w z)
+  (α : comp-hom-Precategory C f p₁ ＝ comp-hom-Precategory C g p₂)
+  where
 
-  is-prop-is-pullback : is-prop (is-pullback C x y z f g w p₁ p₂ α)
-  is-prop-is-pullback =
+  is-prop-is-pullback-Precategory :
+    is-prop (is-pullback-Precategory C x y z f g w p₁ p₂ α)
+  is-prop-is-pullback-Precategory =
     is-prop-Π (λ w' →
       is-prop-Π (λ p₁' →
         is-prop-Π (λ p₂' →
           is-prop-function-type
             is-property-is-contr)))
 
-  is-pullback-Prop : Prop (l1 ⊔ l2)
-  pr1 is-pullback-Prop = is-pullback C x y z f g w p₁ p₂ α
-  pr2 is-pullback-Prop = is-prop-is-pullback
+  is-pullback-Precategory-Prop : Prop (l1 ⊔ l2)
+  pr1 is-pullback-Precategory-Prop =
+    is-pullback-Precategory C x y z f g w p₁ p₂ α
+  pr2 is-pullback-Precategory-Prop =
+    is-prop-is-pullback-Precategory
 ```

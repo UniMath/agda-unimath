@@ -48,7 +48,7 @@ module _
 
 ## Properties
 
-### Projections of families of sets are 0-maps
+### Projections of families of sets are `0`-maps
 
 ```agda
 module _
@@ -67,7 +67,7 @@ module _
   pr2 (pr1-0-map B) = is-0-map-pr1 (λ x → is-set-type-Set (B x))
 ```
 
-### 0-maps are closed under homotopies
+### `0`-maps are closed under homotopies
 
 ```agda
 module _
@@ -78,7 +78,7 @@ module _
   is-0-map-htpy = is-trunc-map-htpy zero-𝕋 H
 ```
 
-### 0-maps are closed under composition
+### `0`-maps are closed under composition
 
 ```agda
 module _
@@ -114,7 +114,7 @@ module _
   is-0-map-right-factor-htpy = is-trunc-map-right-factor-htpy zero-𝕋
 ```
 
-### A family of 0-maps induces a 0-map on total spaces
+### A family of `0`-maps induces a `0`-map on total spaces
 
 ```agda
 module _
@@ -127,9 +127,9 @@ module _
     is-0-map-tot = is-trunc-map-tot zero-𝕋
 ```
 
-### For any type family over the codomain, a 0-map induces a 0-map on total spaces.
+### For any type family over the codomain, a `0`-map induces a `0`-map on total spaces
 
-In other words, 0-maps are stable under pullbacks. We will come to this point
+In other words, `0`-maps are stable under pullbacks. We will come to this point
 when we introduce homotopy pullbacks.
 
 ```agda
@@ -142,7 +142,7 @@ module _
     is-0-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base zero-𝕋 C
 ```
 
-### The functorial action of `Σ` preserves 0-maps.
+### The functorial action of `Σ` preserves `0`-maps
 
 ```agda
 module _

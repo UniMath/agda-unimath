@@ -130,7 +130,7 @@ module _
   preserves-shape-classifying-inclusion-subgroup-Concrete-Group = refl
 
   classifying-pointed-inclusion-subgroup-Concrete-Group :
-    classifying-pointed-type-subgroup-Concrete-Group →*
+    classifying-pointed-type-subgroup-Concrete-Group →∗
     classifying-pointed-type-Concrete-Group G
   pr1 classifying-pointed-inclusion-subgroup-Concrete-Group =
     classifying-inclusion-subgroup-Concrete-Group

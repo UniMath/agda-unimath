@@ -46,7 +46,7 @@ module _
 
   shape-∞-Group : classifying-type-∞-Group
   shape-∞-Group =
-    pt-Pointed-Type classifying-pointed-type-∞-Group
+    point-Pointed-Type classifying-pointed-type-∞-Group
 
   is-0-connected-classifying-type-∞-Group :
     is-0-connected classifying-type-∞-Group
@@ -76,11 +76,11 @@ module _
   mul-∞-Group : (x y : type-∞-Group) → type-∞-Group
   mul-∞-Group = mul-Ω classifying-pointed-type-∞-Group
 
-  assoc-mul-∞-Group :
+  associative-mul-∞-Group :
     (x y z : type-∞-Group) →
     Id (mul-∞-Group (mul-∞-Group x y) z)
        (mul-∞-Group x (mul-∞-Group y z))
-  assoc-mul-∞-Group = associative-mul-Ω classifying-pointed-type-∞-Group
+  associative-mul-∞-Group = associative-mul-Ω classifying-pointed-type-∞-Group
 
   left-unit-law-mul-∞-Group :
     (x : type-∞-Group) → Id (mul-∞-Group unit-∞-Group x) x

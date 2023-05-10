@@ -23,7 +23,7 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A prime ideal is an ideal `I` in a commutative ring `R` such that for every
+A **prime ideal** is an ideal `I` in a commutative ring `R` such that for every
 `a,b : R` whe have `ab ∈ I ⇒ (a ∈ I) ∨ (b ∈ I)`.
 
 ## Definition
@@ -90,17 +90,17 @@ module _
   inclusion-prime-ideal-Commutative-Ring =
     inclusion-subset-Commutative-Ring R subset-prime-ideal-Commutative-Ring
 
-  is-ideal-subset-prime-ideal-Commutative-Ring :
+  is-ideal-prime-ideal-Commutative-Ring :
     is-ideal-subset-Commutative-Ring R subset-prime-ideal-Commutative-Ring
-  is-ideal-subset-prime-ideal-Commutative-Ring =
-    is-ideal-subset-ideal-Commutative-Ring R ideal-prime-ideal-Commutative-Ring
+  is-ideal-prime-ideal-Commutative-Ring =
+    is-ideal-ideal-Commutative-Ring R ideal-prime-ideal-Commutative-Ring
 
-  is-additive-subgroup-subset-prime-ideal-Commutative-Ring :
+  is-additive-subgroup-prime-ideal-Commutative-Ring :
     is-additive-subgroup-subset-Ring
       ( ring-Commutative-Ring R)
       ( subset-prime-ideal-Commutative-Ring)
-  is-additive-subgroup-subset-prime-ideal-Commutative-Ring =
-    is-additive-subgroup-subset-ideal-Commutative-Ring R
+  is-additive-subgroup-prime-ideal-Commutative-Ring =
+    is-additive-subgroup-ideal-Commutative-Ring R
       ideal-prime-ideal-Commutative-Ring
 
   contains-zero-prime-ideal-Commutative-Ring :
@@ -109,10 +109,8 @@ module _
     contains-zero-ideal-Commutative-Ring R ideal-prime-ideal-Commutative-Ring
 
   is-closed-under-addition-prime-ideal-Commutative-Ring :
-    {x y : type-Commutative-Ring R} →
-    is-in-prime-ideal-Commutative-Ring x →
-    is-in-prime-ideal-Commutative-Ring y →
-    is-in-prime-ideal-Commutative-Ring (add-Commutative-Ring R x y)
+    is-closed-under-addition-subset-Commutative-Ring R
+      subset-prime-ideal-Commutative-Ring
   is-closed-under-addition-prime-ideal-Commutative-Ring =
     is-closed-under-addition-ideal-Commutative-Ring R
       ideal-prime-ideal-Commutative-Ring

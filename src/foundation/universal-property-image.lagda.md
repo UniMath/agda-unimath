@@ -244,9 +244,7 @@ abstract
       ( trunc-Prop (fib (map-hom-slice f (map-emb i) q) b))
       ( γ)
     where
-    g : type-subtype
-          ( λ b → trunc-Prop (fib (map-hom-slice f (map-emb i) q) b)) →
-        X
+    g : type-subtype (trunc-Prop ∘ fib (map-hom-slice f (map-emb i) q)) → X
     g = map-emb i ∘ pr1
     is-emb-g : is-emb g
     is-emb-g = is-emb-comp (map-emb i) pr1
@@ -261,8 +259,9 @@ abstract
           ( pair (map-unit-im (pr1 q)) (pr2 q))
     β : type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
     β = pr2 (pr1 α b)
-    γ : fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
-        type-Prop (trunc-Prop (fib (pr1 q) b))
+    γ :
+      fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
+      type-Prop (trunc-Prop (fib (pr1 q) b))
     γ (pair a p) =
       unit-trunc-Prop
         ( pair a (p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b))))

@@ -25,7 +25,8 @@ type `A` is the type `A → empty`.
 ¬ : {l : Level} → UU l → UU l
 ¬ A = A → empty
 
-map-neg : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
+map-neg :
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
 ```

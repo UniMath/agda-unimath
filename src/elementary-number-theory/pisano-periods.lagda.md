@@ -70,7 +70,7 @@ issec-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
           ( right-unit-law-add-Fin k y))))
 
 isretr-inv-generating-map-fibonacci-pair-Fin :
-  (k : ℕ ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
+  (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
   Id ( inv-generating-map-fibonacci-pair-Fin k
        ( generating-map-fibonacci-pair-Fin k p))
      ( p)

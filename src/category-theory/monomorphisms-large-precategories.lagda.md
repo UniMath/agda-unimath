@@ -29,22 +29,25 @@ embedding.
 ## Definition
 
 ```agda
-module _ {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
-  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  (f : type-hom-Large-Precat C X Y) where
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 : Level} (l3 : Level)
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
+  (f : type-hom-Large-Precategory C X Y)
+  where
 
-  is-mono-Large-Precat-Prop : Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
-  is-mono-Large-Precat-Prop =
+  is-mono-Large-Precategory-Prop : Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
+  is-mono-Large-Precategory-Prop =
     Π-Prop
-      ( obj-Large-Precat C l3)
-      ( λ Z → is-emb-Prop (comp-hom-Large-Precat C {X = Z} f))
+      ( obj-Large-Precategory C l3)
+      ( λ Z → is-emb-Prop (comp-hom-Large-Precategory C {X = Z} f))
 
-  is-mono-Large-Precat : UU (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
-  is-mono-Large-Precat = type-Prop is-mono-Large-Precat-Prop
+  is-mono-Large-Precategory : UU (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
+  is-mono-Large-Precategory = type-Prop is-mono-Large-Precategory-Prop
 
-  is-prop-is-mono-Large-Precat : is-prop is-mono-Large-Precat
-  is-prop-is-mono-Large-Precat = is-prop-type-Prop is-mono-Large-Precat-Prop
+  is-prop-is-mono-Large-Precategory : is-prop is-mono-Large-Precategory
+  is-prop-is-mono-Large-Precategory =
+    is-prop-type-Prop is-mono-Large-Precategory-Prop
 ```
 
 ## Properties
@@ -52,41 +55,48 @@ module _ {α : Level → Level} {β : Level → Level → Level}
 ### Isomorphisms are monomorphisms
 
 ```agda
-module _ {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
-  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  (f : iso-Large-Precat C X Y) where
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 : Level} (l3 : Level)
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
+  (f : iso-Large-Precategory C X Y)
+  where
 
-  is-mono-iso-Large-Precat :
-    is-mono-Large-Precat C l3 X Y (hom-iso-Large-Precat C X Y f)
-  is-mono-iso-Large-Precat Z g h =
+  is-mono-iso-Large-Precategory :
+    is-mono-Large-Precategory C l3 X Y (hom-iso-Large-Precategory C X Y f)
+  is-mono-iso-Large-Precategory Z g h =
     is-equiv-has-inverse
       ( λ P →
         ( inv
-          ( left-unit-law-comp-hom-Large-Precat C g)) ∙
+          ( left-unit-law-comp-hom-Large-Precategory C g)) ∙
           ( ( ap
-            ( λ h' → comp-hom-Large-Precat C h' g)
-            ( inv (is-retr-hom-inv-iso-Large-Precat C X Y f))) ∙
-            ( ( associative-comp-hom-Large-Precat C
-              ( hom-inv-iso-Large-Precat C X Y f)
-              ( hom-iso-Large-Precat C X Y f)
+            ( λ h' → comp-hom-Large-Precategory C h' g)
+            ( inv (is-retr-hom-inv-iso-Large-Precategory C X Y f))) ∙
+            ( ( associative-comp-hom-Large-Precategory C
+              ( hom-inv-iso-Large-Precategory C X Y f)
+              ( hom-iso-Large-Precategory C X Y f)
               ( g)) ∙
               ( ( ap
-                ( comp-hom-Large-Precat C (hom-inv-iso-Large-Precat C X Y f))
+                ( comp-hom-Large-Precategory C
+                  ( hom-inv-iso-Large-Precategory C X Y f))
                 ( P)) ∙
                 ( ( inv
-                  ( associative-comp-hom-Large-Precat C
-                    ( hom-inv-iso-Large-Precat C X Y f)
-                    ( hom-iso-Large-Precat C X Y f)
+                  ( associative-comp-hom-Large-Precategory C
+                    ( hom-inv-iso-Large-Precategory C X Y f)
+                    ( hom-iso-Large-Precategory C X Y f)
                     ( h))) ∙
                   ( ( ap
-                    ( λ h' → comp-hom-Large-Precat C h' h)
-                    ( is-retr-hom-inv-iso-Large-Precat C X Y f)) ∙
-                    ( left-unit-law-comp-hom-Large-Precat C h)))))))
+                    ( λ h' → comp-hom-Large-Precategory C h' h)
+                    ( is-retr-hom-inv-iso-Large-Precategory C X Y f)) ∙
+                    ( left-unit-law-comp-hom-Large-Precategory C h)))))))
       ( λ p →
         eq-is-prop
-          ( is-set-type-hom-Large-Precat C Z Y
-            ( comp-hom-Large-Precat C (hom-iso-Large-Precat C X Y f) g)
-            ( comp-hom-Large-Precat C (hom-iso-Large-Precat C X Y f) h)))
-      ( λ p → eq-is-prop (is-set-type-hom-Large-Precat C Z X g h))
+          ( is-set-type-hom-Large-Precategory C Z Y
+            ( comp-hom-Large-Precategory C
+              ( hom-iso-Large-Precategory C X Y f)
+              ( g))
+            ( comp-hom-Large-Precategory C
+              ( hom-iso-Large-Precategory C X Y f)
+              ( h))))
+      ( λ p → eq-is-prop (is-set-type-hom-Large-Precategory C Z X g h))
 ```

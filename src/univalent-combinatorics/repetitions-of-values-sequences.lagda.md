@@ -17,7 +17,8 @@ module univalent-combinatorics.repetitions-of-values-sequences where
 ```agda
 {-
 is-decidable-is-ordered-repetition-of-values-ℕ-Fin :
-  (k : ℕ) (f : ℕ → Fin k) (x : ℕ) → is-decidable (is-ordered-repetition-of-values-ℕ f x)
+  (k : ℕ) (f : ℕ → Fin k) (x : ℕ) →
+  is-decidable (is-ordered-repetition-of-values-ℕ f x)
 is-decidable-is-ordered-repetition-of-values-ℕ-Fin k f x = {!!}
 -}
 

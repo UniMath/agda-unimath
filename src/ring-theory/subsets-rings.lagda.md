@@ -125,19 +125,51 @@ module _
 ### The condition that a subset is closed under multiplication from the left by an arbitrary element
 
 ```agda
+  is-closed-under-left-multiplication-subset-Ring-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-left-multiplication-subset-Ring-Prop =
+    Π-Prop
+      ( type-Ring R)
+      ( λ x →
+        Π-Prop
+          ( type-Ring R)
+          ( λ y →
+            function-Prop
+              ( is-in-subset-Ring R S y)
+              ( S (mul-Ring R x y))))
+
   is-closed-under-left-multiplication-subset-Ring : UU (l1 ⊔ l2)
   is-closed-under-left-multiplication-subset-Ring =
-    (x y : type-Ring R) → is-in-subset-Ring R S y →
-    is-in-subset-Ring R S (mul-Ring R x y)
+    type-Prop is-closed-under-left-multiplication-subset-Ring-Prop
+
+  is-prop-is-closed-under-left-multiplication-subset-Ring :
+    is-prop is-closed-under-left-multiplication-subset-Ring
+  is-prop-is-closed-under-left-multiplication-subset-Ring =
+    is-prop-type-Prop is-closed-under-left-multiplication-subset-Ring-Prop
 ```
 
 ### The condition that a subset is closed-under-multiplication from the right by an arbitrary element
 
 ```agda
+  is-closed-under-right-multiplication-subset-Ring-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-right-multiplication-subset-Ring-Prop =
+    Π-Prop
+      ( type-Ring R)
+      ( λ x →
+        Π-Prop
+          ( type-Ring R)
+          ( λ y →
+            function-Prop
+              ( is-in-subset-Ring R S x)
+              ( S (mul-Ring R x y))))
+
   is-closed-under-right-multiplication-subset-Ring : UU (l1 ⊔ l2)
   is-closed-under-right-multiplication-subset-Ring =
-    (x y : type-Ring R) → is-in-subset-Ring R S x →
-    is-in-subset-Ring R S (mul-Ring R x y)
+    type-Prop is-closed-under-right-multiplication-subset-Ring-Prop
+
+  is-prop-is-closed-under-right-multiplication-subset-Ring :
+    is-prop is-closed-under-right-multiplication-subset-Ring
+  is-prop-is-closed-under-right-multiplication-subset-Ring =
+    is-prop-type-Prop is-closed-under-right-multiplication-subset-Ring-Prop
 ```
 
 ### The condition that a subset is an additive subgroup
@@ -150,4 +182,10 @@ module _
   is-additive-subgroup-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-additive-subgroup-subset-Ring = is-subgroup-Ab (ab-Ring R)
+
+  is-prop-is-additive-subgroup-subset-Ring :
+    {l2 : Level} (A : subset-Ring l2 R) →
+    is-prop (is-additive-subgroup-subset-Ring A)
+  is-prop-is-additive-subgroup-subset-Ring =
+    is-prop-is-subgroup-Ab (ab-Ring R)
 ```

@@ -113,7 +113,7 @@ abstract
   htpy-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     (H : is-weakly-constant-map f) →
-    ( map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop) ~ f
+    (map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop) ~ f
   htpy-universal-property-set-quotient-trunc-Prop B f H a =
     ap ( pr1)
       ( eq-is-prop'

@@ -41,7 +41,7 @@ is-decidable-prop A = is-prop A × is-decidable A
 is-prop-is-decidable :
   {l : Level} {A : UU l} → is-prop A → is-prop (is-decidable A)
 is-prop-is-decidable is-prop-A =
-  is-prop-coprod intro-dn is-prop-A is-prop-neg
+  is-prop-coprod intro-double-negation is-prop-A is-prop-neg
 
 is-decidable-Prop :
   {l : Level} → Prop l → Prop l
@@ -66,34 +66,34 @@ pr2 (is-decidable-prop-Prop A) = is-prop-is-decidable-prop A
 ### Decidable propositions
 
 ```agda
-decidable-Prop :
+Decidable-Prop :
   (l : Level) → UU (lsuc l)
-decidable-Prop l = type-subtype is-decidable-prop-Prop
+Decidable-Prop l = type-subtype is-decidable-prop-Prop
 
 module _
-  {l : Level} (P : decidable-Prop l)
+  {l : Level} (P : Decidable-Prop l)
   where
 
-  prop-decidable-Prop : Prop l
-  prop-decidable-Prop = tot (λ x → pr1) P
+  prop-Decidable-Prop : Prop l
+  prop-Decidable-Prop = tot (λ x → pr1) P
 
-  type-decidable-Prop : UU l
-  type-decidable-Prop = type-Prop prop-decidable-Prop
+  type-Decidable-Prop : UU l
+  type-Decidable-Prop = type-Prop prop-Decidable-Prop
 
   abstract
-    is-prop-type-decidable-Prop : is-prop type-decidable-Prop
-    is-prop-type-decidable-Prop = is-prop-type-Prop prop-decidable-Prop
+    is-prop-type-Decidable-Prop : is-prop type-Decidable-Prop
+    is-prop-type-Decidable-Prop = is-prop-type-Prop prop-Decidable-Prop
 
-  is-decidable-type-decidable-Prop : is-decidable type-decidable-Prop
-  is-decidable-type-decidable-Prop = pr2 (pr2 P)
+  is-decidable-Decidable-Prop : is-decidable type-Decidable-Prop
+  is-decidable-Decidable-Prop = pr2 (pr2 P)
 
-  is-decidable-prop-type-decidable-Prop : is-decidable-prop type-decidable-Prop
-  is-decidable-prop-type-decidable-Prop = pr2 P
+  is-decidable-prop-type-Decidable-Prop : is-decidable-prop type-Decidable-Prop
+  is-decidable-prop-type-Decidable-Prop = pr2 P
 
-  is-decidable-prop-decidable-Prop : Prop l
-  pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
-  pr2 is-decidable-prop-decidable-Prop =
-    is-prop-is-decidable is-prop-type-decidable-Prop
+  is-decidable-prop-Decidable-Prop : Prop l
+  pr1 is-decidable-prop-Decidable-Prop = is-decidable type-Decidable-Prop
+  pr2 is-decidable-prop-Decidable-Prop =
+    is-prop-is-decidable is-prop-type-Decidable-Prop
 ```
 
 ### The empty type is a decidable proposition
@@ -103,9 +103,9 @@ is-decidable-prop-empty : is-decidable-prop empty
 pr1 is-decidable-prop-empty = is-prop-empty
 pr2 is-decidable-prop-empty = inr id
 
-empty-decidable-Prop : decidable-Prop lzero
-pr1 empty-decidable-Prop = empty
-pr2 empty-decidable-Prop = is-decidable-prop-empty
+empty-Decidable-Prop : Decidable-Prop lzero
+pr1 empty-Decidable-Prop = empty
+pr2 empty-Decidable-Prop = is-decidable-prop-empty
 ```
 
 ### The unit type is a decidable proposition
@@ -115,9 +115,9 @@ is-decidable-prop-unit : is-decidable-prop unit
 pr1 is-decidable-prop-unit = is-prop-unit
 pr2 is-decidable-prop-unit = inl star
 
-unit-decidable-Prop : decidable-Prop lzero
-pr1 unit-decidable-Prop = unit
-pr2 unit-decidable-Prop = is-decidable-prop-unit
+unit-Decidable-Prop : Decidable-Prop lzero
+pr1 unit-Decidable-Prop = unit
+pr2 unit-Decidable-Prop = is-decidable-prop-unit
 ```
 
 ### Decidability of a propositional truncation
@@ -150,7 +150,7 @@ is-merely-decidable-is-decidable-trunc-Prop :
   is-decidable (type-trunc-Prop A) → is-merely-decidable A
 is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
    apply-universal-property-trunc-Prop x
-     ( is-merely-decidable-Prop A)
+     ( is-merely-Decidable-Prop A)
      ( unit-trunc-Prop ∘ inl)
 is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
   unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))

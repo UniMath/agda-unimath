@@ -58,7 +58,7 @@ module _
   interchange-law ν = (x y u v : X) → μ (ν x y) (ν u v) ＝ ν (μ x u) (μ y v)
 
   interchange-law-commutative-and-associative :
-    ((x y : X) → μ x y ＝ μ y x) → ((x y z : X ) → μ (μ x y) z ＝ μ x (μ y z)) →
+    ((x y : X) → μ x y ＝ μ y x) → ((x y z : X) → μ (μ x y) z ＝ μ x (μ y z)) →
     interchange-law μ
   interchange-law-commutative-and-associative C A x y u v =
     ( A x y (μ u v)) ∙

@@ -9,6 +9,7 @@ module elementary-number-theory.parity-natural-numbers where
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-types
@@ -111,4 +112,46 @@ is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
   is-odd-succ-succ-is-odd-ℕ
     ( succ-ℕ n)
     ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
+```
+
+### If a natural number `x + 1` is odd, then `x` is even
+
+```agda
+is-even-is-odd-succ-ℕ :
+  (n : ℕ) → is-odd-ℕ (succ-ℕ n) → is-even-ℕ n
+is-even-is-odd-succ-ℕ n p =
+  is-even-is-even-succ-succ-ℕ
+    ( n)
+    ( is-even-succ-is-odd-ℕ (succ-ℕ n) p)
+```
+
+### If a natural number `x + 1` is even, then `x` is odd
+
+```agda
+is-odd-is-even-succ-ℕ :
+  (n : ℕ) → is-even-ℕ (succ-ℕ n) → is-odd-ℕ n
+is-odd-is-even-succ-ℕ n p =
+  is-odd-is-odd-succ-succ-ℕ
+    ( n)
+    ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
+```
+
+### A natural number `x` is odd if and only if there is a natural number `y` such that `succ-ℕ (mul-ℕ y 2) ＝ x`
+
+```agda
+has-odd-expansion : ℕ → UU lzero
+has-odd-expansion x = Σ ℕ (λ y → (succ-ℕ (mul-ℕ y 2)) ＝ x)
+
+is-odd-has-odd-expansion : (n : ℕ) → has-odd-expansion n → is-odd-ℕ n
+is-odd-has-odd-expansion .(succ-ℕ (mul-ℕ m 2)) (m , refl) =
+  is-odd-succ-is-even-ℕ (mul-ℕ m 2) (m , refl)
+
+has-odd-expansion-is-odd : (n : ℕ) → is-odd-ℕ n → has-odd-expansion n
+has-odd-expansion-is-odd zero-ℕ p = ex-falso (p is-even-zero-ℕ)
+has-odd-expansion-is-odd (succ-ℕ zero-ℕ) p = 0 , refl
+has-odd-expansion-is-odd (succ-ℕ (succ-ℕ n)) p =
+  ( succ-ℕ (pr1 s)) , ap (succ-ℕ ∘ succ-ℕ) (pr2 s)
+  where
+    s : has-odd-expansion n
+    s = has-odd-expansion-is-odd n (is-odd-is-odd-succ-succ-ℕ n p)
 ```

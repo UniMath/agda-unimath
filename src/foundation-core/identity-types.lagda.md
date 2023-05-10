@@ -31,11 +31,10 @@ option the infix notation `_＝_`.
 
 **Note**: The equals sign in the infix notation is not the standard equals sign
 on your keyboard, but it is the
-[full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
-Note that the full width equals sign is slightly wider, and it is highlighted in
-blue just like all the other defined constructions in Agda. In order to type the
-full width equals sign in Agda's Emacs Mode, you need to add it to your agda
-input method as follows:
+[full width equals sign](https://codepoints.net/U+ff1d). Note that the full
+width equals sign is slightly wider, and it is highlighted like all the other
+defined constructions in Agda. In order to type the full width equals sign in
+Agda's Emacs Mode, you need to add it to your agda input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
@@ -165,22 +164,6 @@ con-inv :
 con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
 
-### Concatenation is injective
-
-```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  is-injective-concat :
-    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → (p ∙ q) ＝ (p ∙ r) → q ＝ r
-  is-injective-concat refl s = s
-
-  is-injective-concat' :
-    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → (p ∙ r) ＝ (q ∙ r) → p ＝ q
-  is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
-```
-
 ### The functorial action of functions on identity types
 
 ```agda
@@ -224,7 +207,8 @@ ap-concat f refl q = refl
 
 ap-concat-eq :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
+  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z)
+  (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
 ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
 
 ap-inv :
@@ -251,7 +235,7 @@ tr :
 tr B refl b = b
 
 path-over :
-  {l1 l2 : Level} {A :  UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
   B x → B x' → UU l2
 path-over B p y y' = (tr B p y) ＝ y'
 
@@ -296,18 +280,18 @@ preserves-tr :
 preserves-tr f refl x = refl
 
 tr-Id-left :
-  {l : Level} {A : UU l} {a b c : A} (q : Id b c) (p : Id b a) →
-  Id (tr (λ y → Id y a) q p) ((inv q) ∙ p)
-tr-Id-left refl p  = refl
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  (tr (_＝ a) q p) ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
 
 tr-Id-right :
-  {l : Level} {A : UU l} {a b c : A} (q : Id b c) (p : Id a b) →
-  Id (tr (λ y → Id a y) q p) (p ∙ q)
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
 tr-Id-right refl refl = refl
 
 tr-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : Id x y) (b : B) →
-  Id (tr (λ (a : A) → B) p b) b
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : x ＝ y) (b : B) →
+  tr (λ (a : A) → B) p b ＝ b
 tr-const refl b = refl
 ```
 
@@ -316,13 +300,67 @@ tr-const refl b = refl
 ```agda
 apd :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) {x y : A}
-  (p : x ＝ y) → (tr B p (f x)) ＝ (f y)
+  (p : x ＝ y) → tr B p (f x) ＝ f y
 apd f refl = refl
 
 apd-const :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : Id x y) → Id (apd f p) ((tr-const p (f x)) ∙ (ap f p))
+  (p : x ＝ y) → apd f p ＝ ((tr-const p (f x)) ∙ (ap f p))
 apd-const f refl = refl
+```
+
+### Concatenation is injective
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → (p ∙ q) ＝ (p ∙ r) → q ＝ r
+  is-injective-concat refl s = s
+
+  issec-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : (p ∙ q) ＝ (p ∙ r)) →
+    ap (concat p z) (is-injective-concat p s) ＝ s
+  issec-is-injective-concat refl refl = refl
+
+  is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → (p ∙ r) ＝ (q ∙ r) → p ＝ q
+  is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
+
+  cases-issec-is-injective-concat' :
+    {x y : A} {p q : x ＝ y} (s : p ＝ q) →
+    ( ap
+      ( concat' x refl)
+      ( is-injective-concat' refl (right-unit ∙ (s ∙ inv right-unit)))) ＝
+    ( right-unit ∙ (s ∙ inv right-unit))
+  cases-issec-is-injective-concat' {p = refl} refl = refl
+
+  issec-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} (s : (p ∙ r) ＝ (q ∙ r)) →
+    ap (concat' x r) (is-injective-concat' r s) ＝ s
+  issec-is-injective-concat' refl s =
+    ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α) ∙
+    ( ( cases-issec-is-injective-concat' (inv right-unit ∙ (s ∙ right-unit))) ∙
+      α)
+    where
+    α :
+      ( ( right-unit) ∙
+        ( ( inv right-unit ∙ (s ∙ right-unit)) ∙
+          ( inv right-unit))) ＝
+      ( s)
+    α =
+      ( ap
+        ( concat right-unit _)
+        ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
+          ( ( ap
+              ( concat (inv right-unit) _)
+              ( ( assoc s right-unit (inv right-unit)) ∙
+                ( ( ap (concat s _) (right-inv right-unit)) ∙
+                  ( right-unit))))))) ∙
+      ( ( inv (assoc right-unit (inv right-unit) s)) ∙
+        ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
 ### The Mac Lane pentagon for identity types
@@ -400,7 +438,8 @@ ap-binary-comp-diagonal :
   (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
   (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
 ap-binary-comp-diagonal H f g p =
-  inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
+  ( inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p)) ∙
+  ( ap-binary-comp H f g p p)
 
 ap-binary-comp' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
@@ -423,5 +462,50 @@ ap-binary-concat :
   (q : b0 ＝ b1) (q' : b1 ＝ b2) →
   (ap-binary f (p ∙ p') (q ∙ q')) ＝
     ((ap-binary f p q) ∙ (ap-binary f p' q'))
-ap-binary-concat f refl refl refl refl  = refl
+ap-binary-concat f refl refl refl refl = refl
 ```
+
+## Equational reasoning
+
+Identifications can be constructed by equational reasoning in the following way:
+
+```md
+equational-reasoning
+  x ＝ y by eq-1
+    ＝ z by eq-2
+    ＝ v by eq-3
+```
+
+The resulting identification of this computaion is `eq-1 ∙ (eq-2 ∙ eq-3)`, i.e.,
+the identification is associated fully to the right. For examples of the use of
+equational reasoning, see
+[addition-integers](elementary-number-theory.addition-integers.md).
+
+```agda
+infixl 1 equational-reasoning_
+infixl 0 step-equational-reasoning
+
+equational-reasoning_ :
+  {l : Level} {X : UU l} (x : X) → x ＝ x
+equational-reasoning x = refl
+
+step-equational-reasoning :
+  {l : Level} {X : UU l} {x y : X} →
+  (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
+step-equational-reasoning p z q = p ∙ q
+
+syntax step-equational-reasoning p z q = p ＝ z by q
+```
+
+## References
+
+Our setup of equational reasoning is derived from the following sources:
+
+1. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda>
+
+2. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda>
+
+3. The Agda standard library.
+   <https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda>

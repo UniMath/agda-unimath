@@ -26,6 +26,17 @@ open import trees.w-types
 
 </details>
 
+## Idea
+
+Since the type of natural numbers is an initial algebra for the polynomial
+endofunctor
+
+```md
+  X ↦ X + 𝟙,
+```
+
+there is an equivalent definition of the natural numbers as a W-type.
+
 ## Definition
 
 ### The type of natural numbers defined as a W-type

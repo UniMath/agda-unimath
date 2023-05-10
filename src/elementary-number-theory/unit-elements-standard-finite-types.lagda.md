@@ -82,7 +82,8 @@ pr2 (neg-one-unit-Fin k) = is-unit-neg-one-Fin
 is-unit-mul-Fin :
   {k : ℕ} {x y : Fin k} →
   is-unit-Fin k x → is-unit-Fin k y → is-unit-Fin k (mul-Fin k x y)
-pr1 (is-unit-mul-Fin {succ-ℕ k} {x} {y} (pair d p) (pair e q)) = mul-Fin (succ-ℕ k) e d
+pr1 (is-unit-mul-Fin {succ-ℕ k} {x} {y} (pair d p) (pair e q)) =
+  mul-Fin (succ-ℕ k) e d
 pr2 (is-unit-mul-Fin {succ-ℕ k} {x} {y} (pair d p) (pair e q)) =
   ( associative-mul-Fin (succ-ℕ k) e d (mul-Fin (succ-ℕ k) x y)) ∙
     ( ( ap

@@ -187,6 +187,20 @@ pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
     ( refl-sim-unit-ℤ (gcd-ℤ x y)))
 ```
 
+### The gcd in `ℕ` of `x` and `y` is equal to the gcd in `ℤ` of `int-ℕ x` and `int-ℕ y`
+
+```agda
+eq-gcd-gcd-int-ℕ :
+  (x y : ℕ) → gcd-ℤ (int-ℕ x) (int-ℕ y) ＝ int-ℕ (gcd-ℕ x y)
+eq-gcd-gcd-int-ℕ x y =
+  ( ( ap
+      ( λ x → int-ℕ (gcd-ℕ x (abs-ℤ (int-ℕ y))))
+      ( abs-int-ℕ x)) ∙
+    ( ap
+      ( λ y → int-ℕ (gcd-ℕ x y))
+      ( abs-int-ℕ y)))
+```
+
 ### The gcd of `x` and `y` divides both `x` and `y`
 
 ```agda
@@ -353,5 +367,6 @@ is-sim-id-is-gcd-zero-ℤ' {a} {x} H = is-sim-id-is-gcd-zero-ℤ {a} {x}
   ((is-commutative-gcd-ℤ zero-ℤ a) ∙ H)
 
 is-id-is-gcd-zero-ℤ' : {a x : ℤ} → gcd-ℤ a zero-ℤ ＝ x → x ＝ int-ℕ (abs-ℤ a)
-is-id-is-gcd-zero-ℤ' {a} {x} H = is-id-is-gcd-zero-ℤ {a} {x} (is-commutative-gcd-ℤ zero-ℤ a ∙ H)
+is-id-is-gcd-zero-ℤ' {a} {x} H =
+  is-id-is-gcd-zero-ℤ {a} {x} (is-commutative-gcd-ℤ zero-ℤ a ∙ H)
 ```

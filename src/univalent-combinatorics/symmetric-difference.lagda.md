@@ -103,8 +103,8 @@ module _
       is-finite (type-decidable-subtype (intersection-decidable-subtype P Q))
     is-finite-intersection =
       is-finite-type-decidable-subtype (intersection-decidable-subtype P Q) F
-    number-of-elements-decidable-subtype-X : {l' : Level} →
-      (decidable-subtype l' X) → ℕ
+    number-of-elements-decidable-subtype-X :
+      {l' : Level} → decidable-subtype l' X → ℕ
     number-of-elements-decidable-subtype-X R =
       number-of-elements-is-finite (is-finite-type-decidable-subtype R F)
     is-finite-coprod-symmetric-difference :

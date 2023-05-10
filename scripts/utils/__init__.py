@@ -1,3 +1,4 @@
+import re
 import pathlib
 import os
 import subprocess
@@ -37,16 +38,16 @@ def extract_agda_code(lagda_filepath):
     Extracts just the agda code from a literate agda markdown file.
     """
     contents = None
-    with open(lagda_filepath, "r") as lagda_file:
+    with open(lagda_filepath, 'r') as lagda_file:
         contents = lagda_file.read()
 
     def find_blocks(loc=0):
-        loc = contents.find("```agda\n", loc)
+        loc = contents.find('```agda\n', loc)
         if loc == -1:
             return
-        block_start = loc + len("```agda\n")
+        block_start = loc + len('```agda\n')
 
-        loc = contents.find("\n```", block_start)
+        loc = contents.find('\n```', block_start)
         if loc == -1:
             yield contents[block_start:]
             return
@@ -56,7 +57,7 @@ def extract_agda_code(lagda_filepath):
 
         yield from find_blocks(block_end + 1)
 
-    return "\n\n".join(find_blocks())
+    return '\n\n'.join(find_blocks())
 
 
 def has_no_definitions(lagda_filepath):
@@ -69,18 +70,18 @@ def has_no_definitions(lagda_filepath):
 
 
 def call_agda(options, filepath):
-    return subprocess.call(f"agda {options} {filepath}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.call(f'agda {options} {filepath}', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def get_lagda_file_title(lagda_filepath):
-    with open(lagda_filepath, "r") as file:
+def get_lagda_md_file_title(lagda_filepath):
+    with open(lagda_filepath, 'r') as file:
         contents = file.read()
-        title_index = contents.find("# ")
+        title_index = contents.find('# ')
         if title_index != 0:
             return None
 
-        title_start = title_index + len("# ")
-        title_end = contents.find("\n", len("# "))
+        title_start = title_index + len('# ')
+        title_end = contents.find('\n', len('# '))
         return contents[title_start:title_end]
 
 
@@ -89,10 +90,10 @@ def get_import_statement(namespace, module_file, public=False):
 
 
 def get_module_mdfile(namespace, module_file):
-    return namespace + "." + module_file.replace(".lagda.md", ".md")
+    return namespace + '.' + module_file.replace('.lagda.md', '.md')
 
 
-def get_agda_module_name(agda_file_path, root="src"):
+def get_agda_module_name(agda_file_path, root='src'):
     return agda_file_path[bool(root) * (len(root) + 1):agda_file_path.rfind('.lagda.md')].replace('/', '.').replace('\\', '.')
 
 
@@ -106,3 +107,53 @@ def get_equivalence_classes(equivalence_relation, iterable):
         else:  # Make a new partition for it.
             partitions.append([e])
     return partitions
+
+
+def recursive_sub(pattern, repl, string, flags=0):
+    while re.search(pattern, string, flags=flags):
+        string = re.sub(pattern, repl, string, flags=flags)
+    return string
+
+
+agda_comment_regex = re.compile(
+    r'(^--|(?<=[\s.;{}()@"])--)|(\{-#)|(#-\})|(\{-(?!#))|((?<!#)-\})')
+
+
+def split_agda_line_comment_and_get_block_comment_delta(line):
+    """
+    Splits a line of agda code at a line comment, and also returns deltas in block comment level
+    """
+    in_pragma = 0
+    block_comment_delta_pos = 0
+    block_comment_delta_neg = 0
+
+    for match in agda_comment_regex.finditer(line):
+        # Double dash
+        if not in_pragma and\
+            not block_comment_delta_pos - block_comment_delta_neg\
+                and match.group(1):
+            comment_start = match.start()
+            return line[:comment_start], line[comment_start:], block_comment_delta_pos, block_comment_delta_neg
+        elif match.group(2):  # Pragma start
+            in_pragma += 1
+        elif match.group(3):  # Pragma end
+            in_pragma -= 1
+        elif match.group(4):  # Block comment start
+            block_comment_delta_pos += 1
+        elif match.group(5):  # Block comment end
+            block_comment_delta_neg += 1
+
+    return line, '', block_comment_delta_pos, block_comment_delta_neg
+
+
+agda_block_tag_regex = re.compile(r'^```(agda)?((?=\s)|$)')
+
+
+def is_agda_opening_or_closing_tag(line):
+    """
+    Returns two booleans.
+    The first one signifies that the line is a opening or closing tag.
+    The second boolean signifies whether it is an opening tag.
+    """
+    tag_match = agda_block_tag_regex.match(line)
+    return bool(tag_match), tag_match and bool(tag_match.group(1))

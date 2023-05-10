@@ -12,7 +12,6 @@ open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
@@ -301,7 +300,9 @@ module _
 ```agda
   distributive-inv-mul-Group :
     (x y : type-Group G) →
-    Id (inv-Group G (mul-Group G x y)) (mul-Group G (inv-Group G y) (inv-Group G x))
+    Id
+      ( inv-Group G (mul-Group G x y))
+      ( mul-Group G (inv-Group G y) (inv-Group G x))
   distributive-inv-mul-Group x y =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
@@ -364,24 +365,30 @@ module _
 
 ```agda
   inv-left-div-Group :
-    (x y : type-Group G) → inv-Group G (left-div-Group x y) ＝ left-div-Group y x
+    (x y : type-Group G) →
+    inv-Group G (left-div-Group x y) ＝ left-div-Group y x
   inv-left-div-Group x y =
     equational-reasoning
       inv-Group G (left-div-Group x y)
-        ＝ left-div-Group y (inv-Group G (inv-Group G x))    by distributive-inv-mul-Group (inv-Group G x) y
-        ＝ left-div-Group y x                                by ap (left-div-Group y) (inv-inv-Group x)
+      ＝ left-div-Group y (inv-Group G (inv-Group G x))
+        by distributive-inv-mul-Group (inv-Group G x) y
+      ＝ left-div-Group y x
+        by ap (left-div-Group y) (inv-inv-Group x)
 ```
 
 ### The inverse of `xy⁻¹` is `yx⁻¹`
 
 ```agda
   inv-right-div-Group :
-    (x y : type-Group G) → inv-Group G (right-div-Group x y) ＝ right-div-Group y x
+    (x y : type-Group G) →
+    inv-Group G (right-div-Group x y) ＝ right-div-Group y x
   inv-right-div-Group x y =
     equational-reasoning
       inv-Group G (right-div-Group x y)
-        ＝ right-div-Group (inv-Group G (inv-Group G y)) x   by distributive-inv-mul-Group x (inv-Group G y)
-        ＝ right-div-Group y x                               by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
+      ＝ right-div-Group (inv-Group G (inv-Group G y)) x
+        by distributive-inv-mul-Group x (inv-Group G y)
+      ＝ right-div-Group y x
+        by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
 ```
 
 ### The multiple of `x⁻¹y` and `y⁻¹z` is `x⁻¹z`
@@ -404,7 +411,8 @@ module _
 ```agda
   mul-right-div-Group :
     (x y z : type-Group G) →
-    mul-Group G (right-div-Group x y) (right-div-Group y z) ＝ right-div-Group x z
+    mul-Group G (right-div-Group x y) (right-div-Group y z) ＝
+    right-div-Group x z
   mul-right-div-Group x y z =
     equational-reasoning
       mul-Group G (right-div-Group x y) (right-div-Group y z)
@@ -422,7 +430,7 @@ abstract
     {l : Level} (G : Semigroup l) (e : is-unital-Semigroup G) →
     all-elements-equal (is-group' G e)
   all-elements-equal-is-group
-    ( pair G (pair μ assoc-G))
+    ( pair G (pair μ associative-G))
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
@@ -432,13 +440,18 @@ abstract
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
-        ( λ x →
-          equational-reasoning
-          i x ＝ μ e (i x)            by inv (left-unit-G (i x))
-              ＝ μ (μ (i' x) x) (i x) by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
-              ＝ μ (i' x) (μ x (i x)) by assoc-G (i' x) x (i x)
-              ＝ μ (i' x) e           by ap (μ (i' x)) (right-inv-i x)
-              ＝ i' x                 by right-unit-G (i' x)))
+        ( λ x → equational-reasoning
+          i x
+          ＝ μ e (i x)
+            by inv (left-unit-G (i x))
+          ＝ μ (μ (i' x) x) (i x)
+            by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
+          ＝ μ (i' x) (μ x (i x))
+            by associative-G (i' x) x (i x)
+          ＝ μ (i' x) e
+            by ap (μ (i' x)) (right-inv-i x)
+          ＝ i' x
+            by right-unit-G (i' x)))
 
 abstract
   is-prop-is-group :

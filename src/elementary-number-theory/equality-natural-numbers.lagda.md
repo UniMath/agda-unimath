@@ -43,7 +43,7 @@ has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
 
-decidable-eq-ℕ : ℕ → ℕ → decidable-Prop lzero
+decidable-eq-ℕ : ℕ → ℕ → Decidable-Prop lzero
 pr1 (decidable-eq-ℕ m n) = (m ＝ n)
 pr1 (pr2 (decidable-eq-ℕ m n)) = is-set-ℕ m n
 pr2 (pr2 (decidable-eq-ℕ m n)) = has-decidable-equality-ℕ m n

@@ -16,9 +16,6 @@ open import foundation-core.identity-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-products-set-quotients
-open import foundation.coproduct-types
-open import foundation.equality-cartesian-product-types
-open import foundation.equational-reasoning
 open import foundation.function-extensionality
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
@@ -30,7 +27,9 @@ open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
@@ -411,8 +410,8 @@ pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
             ( prod-Eq-Rel
               ( R (inr star))
               ( all-sim-Eq-Rel n _ _))
-            ( X) _)))
-      ∙ isretr-inv-precomp-f
+            ( X) _))) ∙
+      isretr-inv-precomp-f
 
 is-set-quotient-vector-set-quotient :
   { l l1 l2 : Level}

@@ -26,5 +26,5 @@ the constant function.
 unpointed-map-Pointed-Type :
   {l1 l2 : Level} → Pointed-Type l1 → Pointed-Type l2 → Pointed-Type (l1 ⊔ l2)
 pr1 (unpointed-map-Pointed-Type A B) = type-Pointed-Type A → type-Pointed-Type B
-pr2 (unpointed-map-Pointed-Type A B) x = pt-Pointed-Type B
+pr2 (unpointed-map-Pointed-Type A B) x = point-Pointed-Type B
 ```

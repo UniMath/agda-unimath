@@ -201,7 +201,8 @@ associative-comp-hom-Semigroup :
        ( comp-hom-Semigroup H K L h g) f)
      ( comp-hom-Semigroup G K L h
        ( comp-hom-Semigroup G H K g f))
-associative-comp-hom-Semigroup G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
+associative-comp-hom-Semigroup
+  G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
   eq-htpy-hom-Semigroup G L refl-htpy
 ```
 
@@ -213,9 +214,9 @@ left-unit-law-comp-hom-Semigroup :
   ( f : type-hom-Semigroup G H) →
   Id ( comp-hom-Semigroup G H H (id-hom-Semigroup H) f) f
 left-unit-law-comp-hom-Semigroup G
-  (pair (pair H is-set-H) (pair μ-H assoc-H)) (pair f μ-f) =
+  (pair (pair H is-set-H) (pair μ-H associative-H)) (pair f μ-f) =
   eq-htpy-hom-Semigroup G
-    ( pair (pair H is-set-H) (pair μ-H assoc-H))
+    ( pair (pair H is-set-H) (pair μ-H associative-H))
     ( refl-htpy)
 
 right-unit-law-comp-hom-Semigroup :
@@ -223,7 +224,7 @@ right-unit-law-comp-hom-Semigroup :
   ( f : type-hom-Semigroup G H) →
   Id ( comp-hom-Semigroup G G H f (id-hom-Semigroup G)) f
 right-unit-law-comp-hom-Semigroup
-  (pair (pair G is-set-G) (pair μ-G assoc-G)) H (pair f μ-f) =
+  (pair (pair G is-set-G) (pair μ-G associative-G)) H (pair f μ-f) =
   eq-htpy-hom-Semigroup
-    ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy
+    ( pair (pair G is-set-G) (pair μ-G associative-G)) H refl-htpy
 ```

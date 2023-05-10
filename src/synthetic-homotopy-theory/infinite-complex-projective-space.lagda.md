@@ -25,9 +25,9 @@ open import synthetic-homotopy-theory.circle
 ℂP∞ : UU (lsuc lzero)
 ℂP∞ = Σ (UU lzero) (λ X → type-trunc-Set (𝕊¹ ≃ X))
 
-pt-ℂP∞ : ℂP∞
-pr1 pt-ℂP∞ = 𝕊¹
-pr2 pt-ℂP∞ = unit-trunc-Set id-equiv
+point-ℂP∞ : ℂP∞
+pr1 point-ℂP∞ = 𝕊¹
+pr2 point-ℂP∞ = unit-trunc-Set id-equiv
 ```
 
 ### ℂP∞ as the 2-truncation of the 2-sphere

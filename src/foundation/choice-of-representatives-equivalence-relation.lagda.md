@@ -81,7 +81,7 @@ module _
       fundamental-theorem-id
         ( is-contr-equiv
           ( Σ A (λ x → P x × sim-Eq-Rel R a x))
-          ( ( assoc-Σ A P (λ z → sim-Eq-Rel R a (pr1 z))) ∘e
+          ( ( associative-Σ A P (λ z → sim-Eq-Rel R a (pr1 z))) ∘e
             ( equiv-tot
               ( λ t →
                 is-effective-class R a (pr1 t))))

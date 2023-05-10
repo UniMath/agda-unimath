@@ -1,5 +1,7 @@
 # Foundation core
 
+## Files in the foundation-core folder
+
 ```agda
 module foundation-core where
 
@@ -14,7 +16,7 @@ open import foundation-core.commuting-cubes-of-maps public
 open import foundation-core.commuting-squares-of-maps public
 open import foundation-core.commuting-triangles-of-homotopies public
 open import foundation-core.commuting-triangles-of-maps public
-open import foundation-core.cones-pullbacks public
+open import foundation-core.cones-over-cospans public
 open import foundation-core.constant-maps public
 open import foundation-core.contractible-maps public
 open import foundation-core.contractible-types public

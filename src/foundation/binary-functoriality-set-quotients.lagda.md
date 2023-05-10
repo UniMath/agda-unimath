@@ -259,14 +259,15 @@ module _
   where
 
   private
-    p : (x : A) (y : B) →
-        map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
-        inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
-          ( quotient-hom-Eq-Rel-Set S T)
-          ( reflecting-map-quotient-map-hom-Eq-Rel S T)
-          ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
-          ( quotient-map-hom-Eq-Rel S T (map-hom-binary-hom-Eq-Rel R S T f x))
-          ( map-reflecting-map-Eq-Rel S qS y)
+    p :
+      (x : A) (y : B) →
+      map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
+      inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
+        ( quotient-hom-Eq-Rel-Set S T)
+        ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+        ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+        ( quotient-map-hom-Eq-Rel S T (map-hom-binary-hom-Eq-Rel R S T f x))
+        ( map-reflecting-map-Eq-Rel S qS y)
     p x y =
       ( inv
         ( coherence-square-map-is-set-quotient S QS qS T QT qT UqS UqT

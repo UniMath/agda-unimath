@@ -12,6 +12,7 @@ module elementary-number-theory.addition-rationals where
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -64,11 +65,36 @@ right-unit-law-add-ℚ (x , p) =
   in-fraction-fraction-ℚ (x , p)
 ```
 
+### Addition is associative
+
+```agda
+associative-add-ℚ :
+  (x y z : ℚ) →
+  (x +ℚ y) +ℚ z ＝ x +ℚ (y +ℚ z)
+associative-add-ℚ (x , px) (y , py) (z , pz) =
+  equational-reasoning
+    in-fraction-ℤ (add-fraction-ℤ (pr1 (in-fraction-ℤ (add-fraction-ℤ x y))) z)
+    ＝ in-fraction-ℤ (add-fraction-ℤ (add-fraction-ℤ x y) z)
+      by eq-ℚ-sim-fractions-ℤ _ _
+        ( sim-fraction-add-fraction-ℤ
+          ( symm-sim-fraction-ℤ _ _
+            ( sim-reduced-fraction-ℤ (add-fraction-ℤ x y)))
+          ( refl-sim-fraction-ℤ z))
+    ＝ in-fraction-ℤ (add-fraction-ℤ x (add-fraction-ℤ y z))
+      by eq-ℚ-sim-fractions-ℤ _ _ (associative-add-fraction-ℤ x y z)
+    ＝ in-fraction-ℤ
+        ( add-fraction-ℤ x (pr1 (in-fraction-ℤ (add-fraction-ℤ y z))))
+      by eq-ℚ-sim-fractions-ℤ _ _
+        ( sim-fraction-add-fraction-ℤ
+          ( refl-sim-fraction-ℤ x)
+          ( sim-reduced-fraction-ℤ (add-fraction-ℤ y z)))
+```
+
 ### Addition is commutative
 
 ```agda
 commutative-add-ℚ :
-  (x y  : ℚ) →
+  (x y : ℚ) →
   x +ℚ y ＝ y +ℚ x
 commutative-add-ℚ (x , px) (y , py) =
   eq-ℚ-sim-fractions-ℤ

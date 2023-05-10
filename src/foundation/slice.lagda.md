@@ -10,7 +10,6 @@ module foundation.slice where
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
-open import foundation.polynomial-endofunctors
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -29,6 +28,8 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
+
+open import trees.polynomial-endofunctors
 ```
 
 </details>
@@ -229,9 +230,10 @@ module _
     equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
     equiv-right-swap-Σ
     where
-      α : (h : hom-slice f g) →
-          is-equiv (pr1 h) ≃
-          is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+      α :
+        (h : hom-slice f g) →
+        is-equiv (pr1 h) ≃
+        is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
       α h = equiv-prop
         ( is-property-is-equiv _)
         ( is-prop-Π (λ _ → is-property-is-equiv _))

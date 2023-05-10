@@ -20,7 +20,10 @@ open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
+open import foundation-core.functions
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
@@ -34,7 +37,7 @@ open import foundation-core.universe-levels
 
 ## Properties
 
-### A type is (k+1)-truncated if and only if all constant maps into it are k-truncated
+### A type is `k+1`-truncated if and only if all constant maps into it are `k`-truncated
 
 ```agda
 module _
@@ -53,6 +56,16 @@ module _
         ( x ＝ y)
         ( fib-const x y)
         ( is-trunc-A x y)
+
+  abstract
+    is-trunc-is-trunc-map-const :
+      (k : 𝕋) → ((x : A) → is-trunc-map k (const unit A x)) →
+      is-trunc (succ-𝕋 k) A
+    is-trunc-is-trunc-map-const k is-trunc-const x y =
+      is-trunc-equiv' k
+        ( Σ unit (λ _ → x ＝ y))
+        ( left-unit-law-Σ (λ _ → x ＝ y))
+        ( is-trunc-const x y)
 
   abstract
     is-contr-map-const-is-prop :
@@ -85,16 +98,6 @@ module _
       is-faithful-is-0-map (is-0-map-const-is-1-type H x)
 
   abstract
-    is-trunc-is-trunc-map-const :
-      (k : 𝕋) → ((x : A) → is-trunc-map k (const unit A x)) →
-      is-trunc (succ-𝕋 k) A
-    is-trunc-is-trunc-map-const k is-trunc-const x y =
-      is-trunc-equiv' k
-        ( Σ unit (λ _ → x ＝ y))
-        ( left-unit-law-Σ (λ _ → x ＝ y))
-        ( is-trunc-const x y)
-
-  abstract
     is-prop-is-contr-map-const :
       ((x : A) → is-contr-map (const unit A x)) → is-prop A
     is-prop-is-contr-map-const = is-trunc-is-trunc-map-const neg-two-𝕋
@@ -103,7 +106,7 @@ module _
     is-prop-is-equiv-const :
       ((x : A) → is-equiv (const unit A x)) → is-prop A
     is-prop-is-equiv-const H =
-      is-prop-is-contr-map-const (λ x → is-contr-map-is-equiv (H x))
+      is-prop-is-contr-map-const (is-contr-map-is-equiv ∘ H)
 
   abstract
     is-set-is-prop-map-const :
@@ -114,7 +117,7 @@ module _
     is-set-is-emb-const :
       ((x : A) → is-emb (const unit A x)) → is-set A
     is-set-is-emb-const H =
-      is-set-is-prop-map-const (λ x → is-prop-map-is-emb (H x))
+      is-set-is-prop-map-const (is-prop-map-is-emb ∘ H)
 
   abstract
     is-1-type-is-0-map-const :
@@ -125,7 +128,7 @@ module _
     is-1-type-is-faithful-const :
       ((x : A) → is-faithful (const unit A x)) → is-1-type A
     is-1-type-is-faithful-const H =
-      is-1-type-is-0-map-const (λ x → is-0-map-is-faithful (H x))
+      is-1-type-is-0-map-const (is-0-map-is-faithful ∘ H)
 
 const-equiv :
   {l : Level} (A : Prop l) (x : type-Prop A) → unit ≃ type-Prop A
@@ -143,4 +146,17 @@ const-faithful-map :
 pr1 (const-faithful-map A x) = const unit (type-1-Type A) x
 pr2 (const-faithful-map A x) =
   is-faithful-const-is-1-type (is-1-type-type-1-Type A) x
+```
+
+### Given a term of `A`, the constant map is injective viewed as a function `B → (A → B)`
+
+```agda
+is-injective-const :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → is-injective (const A B)
+is-injective-const A B a p = htpy-eq p a
+
+const-injection :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → injection B (A → B)
+pr1 (const-injection A B a) = const A B
+pr2 (const-injection A B a) = is-injective-const A B a
 ```

@@ -1,5 +1,7 @@
 # Group theory
 
+## Files in the group theory folder
+
 ```agda
 module group-theory where
 
@@ -59,7 +61,6 @@ open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
 open import group-theory.group-actions public
-open import group-theory.group-solver public
 open import group-theory.groups public
 open import group-theory.homomorphisms-abelian-groups public
 open import group-theory.homomorphisms-commutative-monoids public
@@ -80,6 +81,7 @@ open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels public
 open import group-theory.kernels-homomorphisms-concrete-groups public
+open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
@@ -97,9 +99,12 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.precategory-of-abelian-groups public
+open import group-theory.precategory-of-commutative-monoids public
 open import group-theory.precategory-of-concrete-groups public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
+open import group-theory.precategory-of-monoids public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public

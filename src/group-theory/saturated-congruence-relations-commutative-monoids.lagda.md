@@ -223,7 +223,9 @@ is-equiv-relate-same-elements-eq-saturated-congruence-Commutative-Monoid :
     ( relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R S)
 is-equiv-relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R =
   fundamental-theorem-id
-    ( is-contr-total-relate-same-elements-saturated-congruence-Commutative-Monoid M R)
+    ( is-contr-total-relate-same-elements-saturated-congruence-Commutative-Monoid
+      ( M)
+      ( R))
     ( relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R)
 
 extensionality-saturated-congruence-Commutative-Monoid :

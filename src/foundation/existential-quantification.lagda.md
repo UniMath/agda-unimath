@@ -7,10 +7,14 @@ module foundation.existential-quantification where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
+open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
@@ -100,4 +104,39 @@ abstract
       ( is-prop-type-hom-Prop (exists-Prop A P) Q)
       ( is-prop-Π ((λ x → is-prop-type-hom-Prop (P x) Q)))
       ( elim-exists-Prop P Q)
+
+is-least-upper-bound-exists-Prop :
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) (Q : Prop l3) →
+  ((a : A) → type-hom-Prop (P a) Q) ↔ type-hom-Prop (exists-Prop A P) Q
+pr1 (is-least-upper-bound-exists-Prop P Q) = elim-exists-Prop P Q
+pr2 (is-least-upper-bound-exists-Prop P Q) h a p = h (intro-∃ a p)
+```
+
+### Conjunction distributes over existential quatification
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} (Q : A → Prop l3)
+  where
+
+  iff-distributive-conj-exists-Prop :
+    (conj-Prop P (exists-Prop A Q)) ⇔ (exists-Prop A (λ a → conj-Prop P (Q a)))
+  pr1 iff-distributive-conj-exists-Prop (p , e) =
+    elim-exists-Prop Q
+      ( exists-Prop A (λ a → conj-Prop P (Q a)))
+      ( λ x q → intro-∃ x (p , q))
+      ( e)
+  pr2 iff-distributive-conj-exists-Prop =
+    elim-exists-Prop
+      ( λ x → conj-Prop P (Q x))
+      ( conj-Prop P (exists-Prop A Q))
+      ( λ x (p , q) → (p , intro-∃ x q))
+
+  distributive-conj-exists-Prop :
+    conj-Prop P (exists-Prop A Q) ＝ exists-Prop A (λ a → conj-Prop P (Q a))
+  distributive-conj-exists-Prop =
+    eq-iff'
+      ( conj-Prop P (exists-Prop A Q))
+      ( exists-Prop A (λ a → conj-Prop P (Q a)))
+      ( iff-distributive-conj-exists-Prop)
 ```

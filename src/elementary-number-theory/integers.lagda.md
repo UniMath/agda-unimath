@@ -424,7 +424,8 @@ decide-is-nonnegative-ℤ {inr x} = inl star
 
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
   (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos = refl
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
+  refl
 ```
 
 ```agda

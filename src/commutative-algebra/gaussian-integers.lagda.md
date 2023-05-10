@@ -31,8 +31,8 @@ open import ring-theory.rings
 
 ## Idea
 
-The Gaussian integers are the complex numbers of the form `a + bi`, where `a`
-and `b` are integers.
+The **Gaussian integers** are the complex numbers of the form `a + bi`, where
+`a` and `b` are integers.
 
 ## Definition
 
@@ -95,7 +95,7 @@ pr1 i-ℤ[i] = zero-ℤ
 pr2 i-ℤ[i] = one-ℤ
 ```
 
-### The Gaussian integer `-i`.
+### The Gaussian integer `-i`
 
 ```agda
 neg-i-ℤ[i] : ℤ[i]

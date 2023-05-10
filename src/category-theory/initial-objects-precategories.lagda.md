@@ -26,24 +26,28 @@ universal property that there is a unique morphism from it to any object.
 ## Definition
 
 ```agda
-initial-object : {l1 l2 : Level} (C : Precat l1 l2) → UU (l1 ⊔ l2)
-initial-object C =
-  Σ (obj-Precat C) λ i →
-    (x : obj-Precat C) → is-contr (type-hom-Precat C i x)
+initial-object-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
+initial-object-Precategory C =
+  Σ (obj-Precategory C) λ i →
+    (x : obj-Precategory C) → is-contr (type-hom-Precategory C i x)
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (i : initial-object C) where
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (i : initial-object-Precategory C)
+  where
 
-  object-initial-object : obj-Precat C
-  object-initial-object = pr1 i
+  object-initial-object-Precategory : obj-Precategory C
+  object-initial-object-Precategory = pr1 i
 
-  morphism-initial-object :
-    (x : obj-Precat C) →
-    type-hom-Precat C object-initial-object x
-  morphism-initial-object x = pr1 (pr2 i x)
+  morphism-initial-object-Precategory :
+    (x : obj-Precategory C) →
+    type-hom-Precategory C object-initial-object-Precategory x
+  morphism-initial-object-Precategory x = pr1 (pr2 i x)
 
-  is-unique-morphism-initial-object :
-    (x : obj-Precat C) (f : type-hom-Precat C object-initial-object x) →
-    morphism-initial-object x ＝ f
-  is-unique-morphism-initial-object x = pr2 (pr2 i x)
+  is-unique-morphism-initial-object-Precategory :
+    (x : obj-Precategory C)
+    (f : type-hom-Precategory C object-initial-object-Precategory x) →
+    morphism-initial-object-Precategory x ＝ f
+  is-unique-morphism-initial-object-Precategory x = pr2 (pr2 i x)
 ```

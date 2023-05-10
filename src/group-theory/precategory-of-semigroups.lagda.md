@@ -27,17 +27,22 @@ Semigroups and semigroup homomorphisms form a precategory.
 
 ```agda
 instance
-  Semigroup-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
-  obj-Large-Precat Semigroup-Large-Precat = Semigroup
-  hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
-  comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} =
+  Semigroup-Large-Precategory : Large-Precategory lsuc (_⊔_)
+  obj-Large-Precategory Semigroup-Large-Precategory = Semigroup
+  hom-Large-Precategory Semigroup-Large-Precategory = hom-Semigroup
+  comp-hom-Large-Precategory Semigroup-Large-Precategory
+    {X = G} {H} {K} =
     comp-hom-Semigroup G H K
-  id-hom-Large-Precat Semigroup-Large-Precat {X = G} =
+  id-hom-Large-Precategory Semigroup-Large-Precategory
+    {X = G} =
     id-hom-Semigroup G
-  associative-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
+    {X = G} {H} {K} {L} =
     associative-comp-hom-Semigroup G H K L
-  left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
+  left-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory
+    {X = G} {H} =
     left-unit-law-comp-hom-Semigroup G H
-  right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
+  right-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory
+    {X = G} {H} =
     right-unit-law-comp-hom-Semigroup G H
 ```
