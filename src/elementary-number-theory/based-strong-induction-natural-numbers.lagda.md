@@ -11,6 +11,7 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.function-extensionality
@@ -386,4 +387,47 @@ compute-succ-based-strong-ind-ℕ k P p0 pS n N N' =
           ( eq-htpy ∘
             eq-inductive-step-compute-succ-based-strong-ind-ℕ
               k P p0 pS n N m)))))
+```
+
+## Corollaries
+
+### Based strong induction for a type family defined for `n ≥ k`
+
+```agda
+based-□-≤-ℕ' : {l : Level} (k : ℕ) → ((n : ℕ) → (k ≤-ℕ n) → UU l) → ℕ → UU l
+based-□-≤-ℕ' k P x = (m : ℕ) → (H : k ≤-ℕ m) → (m ≤-ℕ x) → P m H
+
+compute-base-□-≤-ℕ' :
+  {l : Level} (k : ℕ) (P : (n : ℕ) → (k ≤-ℕ n) → UU l) (x : ℕ) →
+  based-□-≤-ℕ k (λ n → (H : k ≤-ℕ n) → P n H) x →
+  based-□-≤-ℕ' k P x
+compute-base-□-≤-ℕ' k P x p m H I = p m H I H
+
+based-strong-ind-ℕ' :
+  {l : Level} (k : ℕ) (P : (n : ℕ) → (k ≤-ℕ n → UU l))
+  (p0 : P k (refl-leq-ℕ k)) →
+  (pS : (x : ℕ) → (H : k ≤-ℕ x) →
+    based-□-≤-ℕ' k P x →
+    P (succ-ℕ x) (preserves-leq-succ-ℕ k x H))
+  (n : ℕ) → (H : k ≤-ℕ n) → P n H
+based-strong-ind-ℕ' {l} k P p0 pS n H =
+  based-strong-ind-ℕ
+    ( k)
+    ( λ n → (H : k ≤-ℕ n) → P n H)
+    ( apply-dependent-universal-property-contr
+      ( refl-leq-ℕ k)
+      ( is-proof-irrelevant-is-prop (is-prop-leq-ℕ k k) (refl-leq-ℕ k))
+      ( P k)
+      ( p0))
+    ( λ x H p →
+      apply-dependent-universal-property-contr
+        ( preserves-leq-succ-ℕ k x H)
+        ( is-proof-irrelevant-is-prop
+          ( is-prop-leq-ℕ k (succ-ℕ x))
+          ( preserves-leq-succ-ℕ k x H))
+        ( P (succ-ℕ x))
+        ( pS x H ( compute-base-□-≤-ℕ' k P x p)))
+    ( n)
+    ( H)
+    ( H)
 ```

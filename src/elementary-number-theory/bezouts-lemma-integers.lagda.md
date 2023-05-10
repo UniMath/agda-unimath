@@ -15,6 +15,7 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
@@ -525,4 +526,15 @@ div-right-factor-coprime-ℤ x y z H K = pair (add-ℤ (mul-ℤ s z) (mul-ℤ t 
       by ap (λ M → mul-ℤ M z) (bezout-eqn ∙ K)
     ＝ z
       by left-unit-law-mul-ℤ z
+
+div-right-factor-coprime-ℕ :
+  (x y z : ℕ) → (div-ℕ x (mul-ℕ y z)) → (gcd-ℕ x y ＝ 1) → div-ℕ x z
+div-right-factor-coprime-ℕ x y z H K =
+  div-div-int-ℕ
+    ( div-right-factor-coprime-ℤ
+      ( int-ℕ x)
+      ( int-ℕ y)
+      ( int-ℕ z)
+        ( tr (λ p → div-ℤ (int-ℕ x) p) (inv (mul-int-ℕ y z)) (div-int-div-ℕ H))
+      ( eq-gcd-gcd-int-ℕ x y ∙ ap int-ℕ K))
 ```
