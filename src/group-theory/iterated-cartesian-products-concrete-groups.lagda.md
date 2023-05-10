@@ -157,7 +157,7 @@ module _
   mul-iterated-product-Concrete-Group' x y =
     mul-iterated-product-Concrete-Group y x
 
-  assoc-mul-iterated-product-Concrete-Group :
+  associative-mul-iterated-product-Concrete-Group :
     (x y z : type-iterated-product-Concrete-Group) →
     Id (mul-iterated-product-Concrete-Group
           ( mul-iterated-product-Concrete-Group x y)
@@ -165,8 +165,8 @@ module _
        (mul-iterated-product-Concrete-Group
           ( x)
           ( mul-iterated-product-Concrete-Group y z))
-  assoc-mul-iterated-product-Concrete-Group =
-    assoc-mul-∞-Group ∞-group-iterated-product-Concrete-Group
+  associative-mul-iterated-product-Concrete-Group =
+    associative-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   left-unit-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
@@ -223,7 +223,7 @@ module _
   pr1 (pr2 (pr1 abstract-group-iterated-product-Concrete-Group)) =
     mul-iterated-product-Concrete-Group
   pr2 (pr2 (pr1 abstract-group-iterated-product-Concrete-Group)) =
-    assoc-mul-iterated-product-Concrete-Group
+    associative-mul-iterated-product-Concrete-Group
   pr1 (pr1 (pr2 abstract-group-iterated-product-Concrete-Group)) =
     unit-iterated-product-Concrete-Group
   pr1 (pr2 (pr1 (pr2 abstract-group-iterated-product-Concrete-Group))) =
@@ -243,7 +243,7 @@ module _
   pr1 (pr2 (pr1 op-abstract-group-iterated-product-Concrete-Group)) =
     mul-iterated-product-Concrete-Group'
   pr2 (pr2 (pr1 op-abstract-group-iterated-product-Concrete-Group)) x y z =
-    inv (assoc-mul-iterated-product-Concrete-Group z y x)
+    inv (associative-mul-iterated-product-Concrete-Group z y x)
   pr1 (pr1 (pr2 op-abstract-group-iterated-product-Concrete-Group)) =
     unit-iterated-product-Concrete-Group
   pr1 (pr2 (pr1 (pr2 op-abstract-group-iterated-product-Concrete-Group))) =
