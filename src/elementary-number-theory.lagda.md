@@ -29,6 +29,7 @@ open import elementary-number-theory.commutative-semiring-of-natural-numbers pub
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
+open import elementary-number-theory.decidable-total-order-natural-numbers public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
@@ -77,6 +78,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types pu
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
 open import elementary-number-theory.multiplication-integers public
+open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
@@ -104,7 +106,6 @@ open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers p
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.telephone-numbers public
-open import elementary-number-theory.total-decidable-poset-natural-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public

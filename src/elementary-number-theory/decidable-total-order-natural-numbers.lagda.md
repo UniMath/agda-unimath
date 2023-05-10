@@ -21,7 +21,8 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-The type of natural numbers equipped with its standard ordering relation forms a total order.
+The type of natural numbers equipped with its standard ordering relation forms a
+total order.
 
 ## Definition
 

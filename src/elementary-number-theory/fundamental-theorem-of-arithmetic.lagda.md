@@ -9,19 +9,19 @@ module elementary-number-theory.fundamental-theorem-of-arithmetic where
 ```agda
 open import elementary-number-theory.based-strong-induction-natural-numbers
 open import elementary-number-theory.bezouts-lemma-integers
+open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-lists-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
-open import elementary-number-theory.multiplication-lists-of-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -214,7 +214,11 @@ is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ :
   is-prime-list-ℕ l →
   is-list-of-nontrivial-divisors-ℕ x l
 is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ x nil _ _ = star
-is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ x (cons y l) D P =
+is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
+  ( x)
+  ( cons y l)
+  ( D)
+  ( P) =
   ( is-nontrivial-divisor-head-is-decomposition-is-prime-list-ℕ x y l D P ,
    is-nontrivial-divisors-div-list-ℕ
     ( mul-list-ℕ l)
