@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
 
-open import structured-types.cartesian-products-pointed-types
+open import structured-types.pointed-cartesian-product-types
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-The Cartesian product of higher groups is also an higher group.
+The Cartesian product of higher groups is also a higher group.
 
 ## Definition
 
@@ -40,7 +40,7 @@ module _
 
   product-∞-Group : ∞-Group (l1 ⊔ l2)
   pr1 product-∞-Group =
-    product-Pointed-Type
+    prod-Pointed-Type
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
   pr2 product-∞-Group =
@@ -59,7 +59,7 @@ module _
 
   shape-product-∞-Group : classifying-type-product-∞-Group
   shape-product-∞-Group =
-    pt-Pointed-Type classifying-pointed-type-product-∞-Group
+    point-Pointed-Type classifying-pointed-type-product-∞-Group
 
   is-0-connected-classifying-type-product-∞-Group :
     is-0-connected classifying-type-product-∞-Group
@@ -129,9 +129,9 @@ module _
     right-inverse-law-mul-Ω classifying-pointed-type-product-∞-Group
 ```
 
-## Property
+## Properties
 
-### The `type-∞-Group` of a product of a `∞-Group` is the product of the `type-∞-Group`
+### The underlying type of a product of higher groups is the product of their underlying types
 
 ```agda
   equiv-type-∞-Group-product-∞-Group :

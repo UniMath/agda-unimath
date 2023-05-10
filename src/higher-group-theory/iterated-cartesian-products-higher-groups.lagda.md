@@ -29,7 +29,7 @@ open import foundation.universe-levels
 open import higher-group-theory.cartesian-products-higher-groups
 open import higher-group-theory.higher-groups
 
-open import structured-types.iterated-cartesian-products-pointed-types
+open import structured-types.iterated-pointed-cartesian-product-types
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
@@ -72,7 +72,7 @@ module _
   shape-iterated-product-∞-Group :
     classifying-type-iterated-product-∞-Group
   shape-iterated-product-∞-Group =
-    pt-Pointed-Type
+    point-Pointed-Type
       classifying-pointed-type-iterated-product-∞-Group
 
   is-0-connected-classifying-type-iterated-product-∞-Group :
@@ -178,7 +178,7 @@ module _
       classifying-pointed-type-iterated-product-∞-Group
 ```
 
-## Property
+## Properties
 
 ### The `type-∞-Group` of a iterated product of a `∞-Group` is the iterated product of the `type-∞-Group`
 
