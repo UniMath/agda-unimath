@@ -153,3 +153,21 @@ module _
       isretr-array-list
       issec-array-list
 ```
+
+### Computational rules of the equivalence between arrays and lists
+
+```agda
+  compute-length-list-list-vec :
+    (n : ℕ) (v : vec A n) →
+    length-list (list-vec n v) ＝ n
+  compute-length-list-list-vec zero-ℕ v = refl
+  compute-length-list-list-vec (succ-ℕ n) (x ∷ v) =
+    ap succ-ℕ (compute-length-list-list-vec n v)
+
+  compute-length-list-list-array :
+    (t : array A) → length-list (list-array t) ＝ length-array t
+  compute-length-list-list-array t =
+    compute-length-list-list-vec
+      ( length-array t)
+      ( listed-vec-functional-vec (length-array t) (functional-vec-array t))
+```
