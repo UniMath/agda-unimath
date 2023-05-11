@@ -1,7 +1,7 @@
-# Largest elements in large posets
+# Top elements in large posets
 
 ```agda
-module order-theory.largest-elements-large-posets where
+module order-theory.top-elements-large-posets where
 ```
 
 <details><summary>Imports</summary>
@@ -30,16 +30,16 @@ module _
   where
 
   record
-    has-largest-element-Large-Poset : UUω
+    has-top-element-Large-Poset : UUω
     where
     field
-      top-has-largest-element-Large-Poset :
+      top-has-top-element-Large-Poset :
         type-Large-Poset P lzero
-      is-largest-element-top-has-largest-element-Large-Poset :
+      is-top-element-top-has-top-element-Large-Poset :
         {l1 : Level} (x : type-Large-Poset P l1) →
-        leq-Large-Poset P x top-has-largest-element-Large-Poset
+        leq-Large-Poset P x top-has-top-element-Large-Poset
 
-  open has-largest-element-Large-Poset public
+  open has-top-element-Large-Poset public
 ```
 
 ## Properties
@@ -52,13 +52,13 @@ module _
   {l1 : Level} {I : UU l1} (P : I → Large-Poset α β)
   where
 
-  has-largest-element-Π-Large-Poset :
-    ((i : I) → has-largest-element-Large-Poset (P i)) →
-    has-largest-element-Large-Poset (Π-Large-Poset P)
-  top-has-largest-element-Large-Poset
-    ( has-largest-element-Π-Large-Poset H) i =
-    top-has-largest-element-Large-Poset (H i)
-  is-largest-element-top-has-largest-element-Large-Poset
-    ( has-largest-element-Π-Large-Poset H) x i =
-    is-largest-element-top-has-largest-element-Large-Poset (H i) (x i)
+  has-top-element-Π-Large-Poset :
+    ((i : I) → has-top-element-Large-Poset (P i)) →
+    has-top-element-Large-Poset (Π-Large-Poset P)
+  top-has-top-element-Large-Poset
+    ( has-top-element-Π-Large-Poset H) i =
+    top-has-top-element-Large-Poset (H i)
+  is-top-element-top-has-top-element-Large-Poset
+    ( has-top-element-Π-Large-Poset H) x i =
+    is-top-element-top-has-top-element-Large-Poset (H i) (x i)
 ```
