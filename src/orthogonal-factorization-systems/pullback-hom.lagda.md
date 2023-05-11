@@ -29,9 +29,9 @@ Given a pair of maps `f : A → X` and `g : B → Y`, there is a commuting squar
 ```md
           - ∘ f
     B → X ----> B → A
-      |            |
-g ∘ - |            | g ∘ -
-      V            V
+      |           |
+g ∘ - |           | g ∘ -
+      V           V
     Y → X ----> Y → A.
           - ∘ f
 ```
@@ -40,10 +40,10 @@ The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
 pullback of the cospan:
 
 ```md
-      ∙ -------> B → A
-      |  ⌟         |
-      |            | g ∘ -
-      V            V
+      ∙ ------> B → A
+      |  ⌟        |
+      |           | g ∘ -
+      V           V
     Y → X ----> Y → A.
           - ∘ f
 ```
