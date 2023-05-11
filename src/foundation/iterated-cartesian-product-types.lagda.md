@@ -66,7 +66,7 @@ iterated-product-Fin-recursive (succ-ℕ n) A =
   A (inr star) × iterated-product-Fin-recursive n (A ∘ inl)
 ```
 
-#### Using `Π` type
+#### Using `Π`-types
 
 ```agda
 iterated-product-Fin-Π :
@@ -86,7 +86,7 @@ iterated-product-lists (cons A p) = A × iterated-product-lists p
 
 ## Properties
 
-### The definitions using recursion and `Π-type` are equivalent
+### The definitions using recursion and `Π`-types are equivalent
 
 ```agda
 equiv-iterated-product-Fin-recursive-Π :
