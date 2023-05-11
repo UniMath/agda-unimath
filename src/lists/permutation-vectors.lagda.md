@@ -49,8 +49,9 @@ module _
 ```agda
   is-permutation-vec : (n : ℕ) → (vec A n → vec A n) → UU l
   is-permutation-vec n f =
-    Σ ( (v : vec A n) → Permutation n)
-      ( λ a → (v : vec A n) → f v ＝ permute-vec n v (a v))
+    (v : vec A n) →
+    Σ ( Permutation n)
+      ( λ t → f v ＝ permute-vec n v t)
 ```
 
 ## Properties

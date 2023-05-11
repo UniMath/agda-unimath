@@ -37,10 +37,15 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.predicates-on-lists
 open import lists.sorted-lists
+open import lists.sort-by-insertion-lists
+open import lists.concatenation-lists
+open import lists.permutation-lists
 ```
 
 </details>
@@ -937,4 +942,40 @@ pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
        ( pr1 d)
        ( is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H)
        ( pr2 d))
+```
+
+### The sorted list associated with the concatenation of the prime decomposition of `n` and the prime decomposition of `m` is the prime decomposition of `mul-ℕ n m`
+
+```agda
+is-prime-list-concat-list-ℕ :
+  (p q : list ℕ) → is-prime-list-ℕ p → is-prime-list-ℕ q →
+  is-prime-list-ℕ (concat-list p q)
+is-prime-list-concat-list-ℕ nil q Pp Pq = Pq
+is-prime-list-concat-list-ℕ (cons x p) q Pp Pq =
+  pr1 Pp , is-prime-list-concat-list-ℕ p q (pr2 Pp) Pq
+
+is-prime-list-permute-list-ℕ :
+  (p : list ℕ) (t : Permutation (length-list p)) → is-prime-list-ℕ p →
+  is-prime-list-ℕ (permute-list p t)
+is-prime-list-permute-list-ℕ p t P = {!!}
+
+is-prime-decomposition-list-sorted-concatenation-ℕ :
+  (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
+  is-prime-decomposition-list-ℕ x p →
+  is-prime-decomposition-list-ℕ y q →
+  is-prime-decomposition-list-ℕ
+    ( mul-ℕ x y)
+    ( insertion-sort-list
+      ( ℕ-Decidable-Total-Order)
+      ( concat-list p q))
+pr1 (is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq) =
+  is-sorting-insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
+pr1
+  ( pr2
+    ( is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq)) =
+  {!!}
+pr2
+  ( pr2
+    ( is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq)) =
+  {!!}
 ```

@@ -311,7 +311,7 @@ module _
 ```agda
   is-sort-insertion-sort-vec :
     is-sort-vec X (insertion-sort-vec)
-  pr1 (pr1 (is-sort-insertion-sort-vec n)) = permutation-insertion-sort-vec
-  pr2 (pr1 (is-sort-insertion-sort-vec n)) = is-permutation-insertion-sort-vec
+  pr1 (pr1 (is-sort-insertion-sort-vec n) v) = permutation-insertion-sort-vec v
+  pr2 (pr1 (is-sort-insertion-sort-vec n) v) = is-permutation-insertion-sort-vec v
   pr2 (is-sort-insertion-sort-vec n) = is-sorting-insertion-sort-vec
 ```

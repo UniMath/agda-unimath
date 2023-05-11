@@ -14,7 +14,11 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import linear-algebra.vectors
+
 open import lists.lists
+open import lists.sorted-vectors
+open import lists.arrays
 
 open import order-theory.decidable-total-orders
 ```
@@ -23,7 +27,7 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-In these file, we define sorted lists.
+In this file, we define sorted lists.
 
 ## Definitions
 
@@ -139,4 +143,17 @@ module _
     (p , q) =
     ( pr1 p ,
       is-sorted-list-is-sorted-least-element-list (cons y l) q)
+```
+
+### If a vector `v` of length `n` is sorted, then the list `list-vec n v` is also sorted
+
+```agda
+  is-sorted-list-is-sorted-vec :
+    (n : ℕ) (v : vec (type-Decidable-Total-Order X) n) →
+    is-sorted-vec X v →
+    is-sorted-list (list-vec n v)
+  is-sorted-list-is-sorted-vec 0 v S = raise-star
+  is-sorted-list-is-sorted-vec 1 (x ∷ v) S = raise-star
+  is-sorted-list-is-sorted-vec (succ-ℕ (succ-ℕ n)) (x ∷ y ∷ v) S =
+    pr1 S , is-sorted-list-is-sorted-vec (succ-ℕ n) (y ∷ v) (pr2 S)
 ```

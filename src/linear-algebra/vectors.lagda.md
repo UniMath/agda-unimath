@@ -112,6 +112,9 @@ module _
   revert-functional-vec :
     (n : ℕ) → functional-vec A n → functional-vec A n
   revert-functional-vec n v i = v (opposite-Fin n i)
+
+  in-functional-vec : (n : ℕ) → A → functional-vec A n → UU l
+  in-functional-vec n a v = Σ (Fin n) (λ k → a ＝ v k)
 ```
 
 ## Properties
@@ -217,6 +220,13 @@ module _
   compute-vec : (n : ℕ) → functional-vec A n ≃ vec A n
   pr1 (compute-vec n) = listed-vec-functional-vec n
   pr2 (compute-vec n) = is-equiv-listed-vec-functional-vec n
+```
+
+### Characterization of the elementhood predicate
+
+```agda
+  
+
 ```
 
 ### The type of vectors of elements in a truncated type is truncated
