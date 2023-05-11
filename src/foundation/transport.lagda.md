@@ -22,6 +22,10 @@ open import foundation-core.universe-levels
 
 </details>
 
+## Idea
+
+This file records interactions between transport (`tr`) and other constructions.
+
 ## Properties
 
 ### Transport
@@ -182,8 +186,8 @@ tr-loop refl l = inv right-unit
 ### Transport of identifications
 
 ```agda
-tr-identification :
+tr-Id :
   {l1 : Level} {A : UU l1} {a0 a1 a2 : A} (p : a1 ＝ a2) (l : a0 ＝ a1) →
-  (tr (λ y → a0 ＝ y) p l) ＝ (l ∙ p)
-tr-identification refl refl = refl
+  (tr (a0 ＝_) p l) ＝ (l ∙ p)
+tr-Id refl refl = refl
 ```
