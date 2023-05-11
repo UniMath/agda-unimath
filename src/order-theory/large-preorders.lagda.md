@@ -8,6 +8,7 @@ module order-theory.large-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -63,6 +64,12 @@ module _
     is-prop (leq-Large-Preorder x y)
   is-prop-leq-Large-Preorder x y =
     is-prop-type-Prop (leq-Large-Preorder-Prop X x y)
+
+  leq-eq-Large-Preorder :
+    {l1 : Level}
+    {x y : type-Large-Preorder X l1} →
+    (x ＝ y) → leq-Large-Preorder x y
+  leq-eq-Large-Preorder refl = refl-leq-Large-Preorder X _
 
   preorder-Large-Preorder : (l : Level) → Preorder (α l) (β l l)
   pr1 (preorder-Large-Preorder l) = type-Large-Preorder X l

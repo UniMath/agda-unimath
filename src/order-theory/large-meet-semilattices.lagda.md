@@ -15,8 +15,8 @@ open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-posets
-open import order-theory.largest-elements-large-posets
 open import order-theory.lower-bounds-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>
@@ -68,8 +68,8 @@ record
   field
     has-meets-is-large-meet-semilattice-Large-Poset :
       has-meets-Large-Poset P
-    has-largest-element-is-large-meet-semilattice-Large-Poset :
-      has-largest-element-Large-Poset P
+    has-top-element-is-large-meet-semilattice-Large-Poset :
+      has-top-element-Large-Poset P
 
 open is-large-meet-semilattice-Large-Poset public
 
@@ -98,15 +98,15 @@ module _
   top-is-large-meet-semilattice-Large-Poset :
     type-Large-Poset P lzero
   top-is-large-meet-semilattice-Large-Poset =
-    top-has-largest-element-Large-Poset
-      ( has-largest-element-is-large-meet-semilattice-Large-Poset H)
+    top-has-top-element-Large-Poset
+      ( has-top-element-is-large-meet-semilattice-Large-Poset H)
 
-  is-largest-element-top-is-large-meet-semilattice-Large-Poset :
+  is-top-element-top-is-large-meet-semilattice-Large-Poset :
     {l1 : Level} (x : type-Large-Poset P l1) →
     leq-Large-Poset P x top-is-large-meet-semilattice-Large-Poset
-  is-largest-element-top-is-large-meet-semilattice-Large-Poset =
-    is-largest-element-top-has-largest-element-Large-Poset
-      ( has-largest-element-is-large-meet-semilattice-Large-Poset H)
+  is-top-element-top-is-large-meet-semilattice-Large-Poset =
+    is-top-element-top-has-top-element-Large-Poset
+      ( has-top-element-is-large-meet-semilattice-Large-Poset H)
 ```
 
 ### Large meet-semilattices
@@ -207,10 +207,19 @@ module _
       ( large-poset-Large-Meet-Semilattice L)
       ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 
-  has-largest-element-Large-Meet-Semilattice :
-    has-largest-element-Large-Poset (large-poset-Large-Meet-Semilattice L)
-  has-largest-element-Large-Meet-Semilattice =
-    has-largest-element-is-large-meet-semilattice-Large-Poset
+  ap-meet-Large-Meet-Semilattice :
+    {l1 l2 : Level}
+    {x x' : type-Large-Meet-Semilattice l1}
+    {y y' : type-Large-Meet-Semilattice l2} →
+    (x ＝ x') → (y ＝ y') →
+    meet-Large-Meet-Semilattice x y ＝ meet-Large-Meet-Semilattice x' y'
+  ap-meet-Large-Meet-Semilattice p q =
+    ap-binary meet-Large-Meet-Semilattice p q
+
+  has-top-element-Large-Meet-Semilattice :
+    has-top-element-Large-Poset (large-poset-Large-Meet-Semilattice L)
+  has-top-element-Large-Meet-Semilattice =
+    has-top-element-is-large-meet-semilattice-Large-Poset
       ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 
   top-Large-Meet-Semilattice :
@@ -220,11 +229,11 @@ module _
       ( large-poset-Large-Meet-Semilattice L)
       ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 
-  is-largest-element-top-Large-Meet-Semilattice :
+  is-top-element-top-Large-Meet-Semilattice :
     {l1 : Level} (x : type-Large-Meet-Semilattice l1) →
     leq-Large-Meet-Semilattice x top-Large-Meet-Semilattice
-  is-largest-element-top-Large-Meet-Semilattice =
-    is-largest-element-top-is-large-meet-semilattice-Large-Poset
+  is-top-element-top-Large-Meet-Semilattice =
+    is-top-element-top-is-large-meet-semilattice-Large-Poset
       ( large-poset-Large-Meet-Semilattice L)
       ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 ```
