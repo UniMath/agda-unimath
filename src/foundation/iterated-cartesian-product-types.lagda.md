@@ -9,21 +9,30 @@ module foundation.iterated-cartesian-product-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 
+open import lists.arrays
 open import lists.lists
+open import lists.permutation-lists
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -91,4 +100,103 @@ equiv-iterated-product-Fin-recursive-Π (succ-ℕ n) A =
         ( ( equiv-prod
               ( id-equiv)
               ( equiv-iterated-product-Fin-recursive-Π n (A ∘ inl)))))))
+```
+
+### Equivalence between the first and the last definitions
+
+```agda
+equiv-iterated-product-Fin-recursive-lists :
+  {l : Level} (l : list (UU l)) →
+  iterated-product-Fin-recursive
+    ( length-array (array-list l))
+    ( functional-vec-array (array-list l)) ≃
+  iterated-product-lists l
+equiv-iterated-product-Fin-recursive-lists nil = id-equiv
+equiv-iterated-product-Fin-recursive-lists (cons x l) =
+  equiv-prod id-equiv (equiv-iterated-product-Fin-recursive-lists l)
+```
+
+### Iterated cartesian product is closed under permutations
+
+```agda
+permutation-iterated-product-Fin-Π :
+  {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) → UU l
+permutation-iterated-product-Fin-Π n A t =
+  iterated-product-Fin-Π n (A ∘ map-equiv t)
+
+equiv-permutation-iterated-product-Fin-Π :
+  {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) →
+  permutation-iterated-product-Fin-Π n A t ≃ iterated-product-Fin-Π n A
+equiv-permutation-iterated-product-Fin-Π n A t =
+  equiv-Π (λ z → A z) t (λ a → id-equiv)
+
+eq-permutation-iterated-product-Fin-Π :
+  {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) →
+  permutation-iterated-product-Fin-Π n A t ＝ iterated-product-Fin-Π n A
+eq-permutation-iterated-product-Fin-Π n A t =
+  eq-equiv
+    ( permutation-iterated-product-Fin-Π n A t)
+    ( iterated-product-Fin-Π n A)
+    ( equiv-permutation-iterated-product-Fin-Π n A t)
+
+permutation-iterated-product-Fin-recursive :
+  {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) → UU l
+permutation-iterated-product-Fin-recursive n A t =
+  iterated-product-Fin-recursive n (A ∘ map-equiv t)
+
+equiv-permutation-iterated-product-Fin-recursive :
+  {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) →
+  permutation-iterated-product-Fin-recursive n A t ≃
+  iterated-product-Fin-recursive n A
+equiv-permutation-iterated-product-Fin-recursive n A t =
+  ( inv-equiv (equiv-iterated-product-Fin-recursive-Π n A) ∘e
+    ( equiv-permutation-iterated-product-Fin-Π n A t ∘e
+      equiv-iterated-product-Fin-recursive-Π n (A ∘ map-equiv t)))
+
+eq-permutation-iterated-product-Fin-recursive :
+  {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) →
+  permutation-iterated-product-Fin-recursive n A t ＝
+  iterated-product-Fin-recursive n A
+eq-permutation-iterated-product-Fin-recursive n A t =
+  eq-equiv
+    ( permutation-iterated-product-Fin-recursive n A t)
+    ( iterated-product-Fin-recursive n A)
+    ( equiv-permutation-iterated-product-Fin-recursive n A t)
+
+permutation-iterated-product-lists :
+  {l : Level} (L : list (UU l)) (t : Permutation (length-list L)) → UU l
+permutation-iterated-product-lists L t =
+  iterated-product-lists (permute-list L t)
+
+equiv-permutation-iterated-product-lists :
+  {l : Level} (L : list (UU l)) (t : Permutation (length-list L)) →
+  permutation-iterated-product-lists L t ≃
+  iterated-product-lists L
+equiv-permutation-iterated-product-lists L t =
+  ( equiv-iterated-product-Fin-recursive-lists L ∘e
+    ( ( equiv-permutation-iterated-product-Fin-recursive
+        ( length-list L)
+        ( functional-vec-array (array-list L))
+        ( t)) ∘e
+      ( equiv-eq
+        ( ap
+          ( λ p →
+            iterated-product-Fin-recursive
+              ( length-array p)
+              ( functional-vec-array p))
+          ( isretr-array-list
+            ( length-list L ,
+              ( functional-vec-array (array-list L) ∘ map-equiv t)))) ∘e
+        ( inv-equiv
+          ( equiv-iterated-product-Fin-recursive-lists (permute-list L t))))))
+
+eq-permutation-iterated-product-lists :
+  {l : Level} (L : list (UU l)) (t : Permutation (length-list L)) →
+  permutation-iterated-product-lists L t ＝
+  iterated-product-lists L
+eq-permutation-iterated-product-lists L t =
+  eq-equiv
+    ( permutation-iterated-product-lists L t)
+    ( iterated-product-lists L)
+    ( equiv-permutation-iterated-product-lists L t)
 ```

@@ -41,6 +41,6 @@ module _
   permute-list : (l : list A) → Permutation (length-list l) → list A
   permute-list l s =
     list-array
-      ( pr1 (array-list l) ,
-        pr2 (array-list l) ∘ (map-equiv s))
+      ( length-array (array-list l) ,
+        functional-vec-array (array-list l) ∘ (map-equiv s))
 ```
