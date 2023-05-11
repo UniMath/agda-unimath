@@ -9,6 +9,7 @@ module group-theory.concrete-groups where
 ```agda
 open import foundation.0-connected-types
 open import foundation.1-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
@@ -17,6 +18,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -183,4 +185,19 @@ module _
     right-inverse-law-mul-Concrete-Group
   pr2 (pr2 (pr2 (pr2 op-abstract-group-Concrete-Group))) =
     left-inverse-law-mul-Concrete-Group
+```
+
+## Example
+
+### The trivial concrete group
+
+```agda
+trivial-Concrete-Group : {l : Level} → Concrete-Group l
+trivial-Concrete-Group =
+  trivial-∞-Group ,
+  is-trunc-is-contr
+     (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
+     is-contr-raise-unit
+     raise-star
+     raise-star
 ```

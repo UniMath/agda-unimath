@@ -12,11 +12,14 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.prime-numbers
 
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -130,4 +133,35 @@ is-relatively-prime-quotient-div-gcd-ℕ a b nz =
     ( div-gcd-is-common-divisor-ℕ a b
       ( gcd-ℕ a b)
       ( is-common-divisor-gcd-ℕ a b)))
+```
+
+### If `a` and `b` are prime and distinct, then they are relatively prime
+
+```agda
+module _
+  (a b : ℕ)
+  (pa : is-prime-ℕ a)
+  (pb : is-prime-ℕ b)
+  (n : ¬ (a ＝ b))
+  where
+
+  is-one-is-common-divisor-is-prime-ℕ :
+    (d : ℕ) → is-common-divisor-ℕ a b d → is-one-ℕ d
+  is-one-is-common-divisor-is-prime-ℕ d c =
+    pr1
+      ( pa d)
+      ( ( λ e →
+          is-not-one-is-prime-ℕ
+            ( a)
+            ( pa)
+            ( pr1 (pb a) (n , (tr (λ x → div-ℕ x b) e (pr2 c))))) ,
+        ( pr1 c))
+
+  is-relatively-prime-is-prime-ℕ :
+     is-relatively-prime-ℕ a b
+  is-relatively-prime-is-prime-ℕ =
+    is-relatively-prime-is-one-is-common-divisor-ℕ
+      ( a)
+      ( b)
+      ( is-one-is-common-divisor-is-prime-ℕ)
 ```

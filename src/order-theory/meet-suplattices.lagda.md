@@ -1,7 +1,7 @@
-# Infinite distributive law
+# Meet-suplattices
 
 ```agda
-module order-theory.infinite-distributive-law where
+module order-theory.meet-suplattices where
 ```
 
 <details><summary>Imports</summary>
@@ -22,14 +22,15 @@ open import order-theory.suplattices
 
 ## Idea
 
-Let A be a poset that has all binary meets and arbitrary joins (which we call
-sups). We can show that all sup lattices have binary meets (and we plan to in
-another file), but this economy offers little benefit here. The infinite
-distributive law states: for all `a : A` and for all families `b : I → A` the
-following identity holds: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.
+An **`l`-meet-suplattice** is a meet-semilattice `L` which has least upper
+bounds for all families of elements `x : I → L` indexed by a type `I : UU l`.
 
-Note: One could inquire about the dual infinite distributive law but it is not
-needed at this time.
+Note that meet-suplattices are not required to satisfy a distributive law. Such
+meet-suplattices are called [frames](order-theory.frames.md).
+
+## Definitions
+
+### The predicate on meet-semilattices of being a meet-suplattice
 
 ```agda
 module _
@@ -48,16 +49,15 @@ module _
     is-prop is-meet-suplattice-Meet-Semilattice
   is-prop-is-meet-suplattice-Meet-Semilattice =
     is-prop-type-Prop is-meet-suplattice-Meet-Semilattice-Prop
+```
 
+### Meet-suplattices
+
+```agda
 Meet-Suplattice : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Meet-Suplattice l1 l2 =
   Σ (Meet-Semilattice l1) (is-meet-suplattice-Meet-Semilattice l2)
-```
 
-We need to provide the appropriate components to state the infinite distributive
-law.
-
-```agda
 module _
   {l1 l2 : Level} (A : Meet-Suplattice l1 l2)
   where
@@ -120,22 +120,7 @@ module _
     meet-Meet-Semilattice meet-semilattice-Meet-Suplattice
 
   sup-Meet-Suplattice :
-    (I : UU l2) → (I → type-Meet-Suplattice) →
+    {I : UU l2} → (I → type-Meet-Suplattice) →
     type-Meet-Suplattice
-  sup-Meet-Suplattice I f = pr1 (is-suplattice-Meet-Suplattice I f)
+  sup-Meet-Suplattice {I} f = pr1 (is-suplattice-Meet-Suplattice I f)
 ```
-
-## Statement of the infinite distributive law
-
-```agda
-distributive-law-meet-suplattice :
-  (l1 l2 : Level) → (Meet-Suplattice l1 l2) → UU (l1 ⊔ lsuc l2)
-distributive-law-meet-suplattice l1 l2 A =
-  (a : type-Meet-Suplattice A) → {I : UU l2} →
-  (b : I → type-Meet-Suplattice A) →
-  (meet-Meet-Suplattice A a (sup-Meet-Suplattice A I b) ＝
-  sup-Meet-Suplattice A I (λ i → (meet-Meet-Suplattice A a (b i))))
-```
-
-This notation is not easy on the eye, but recall, in more familiar notation the
-identity expressed here is: `a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)`.

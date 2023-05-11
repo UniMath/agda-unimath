@@ -14,7 +14,7 @@ open import foundation.universe-levels
 
 open import order-theory.homomorphisms-meet-semilattices
 open import order-theory.homomorphisms-sup-lattices
-open import order-theory.infinite-distributive-law
+open import order-theory.meet-suplattices
 open import order-theory.order-preserving-maps-posets
 ```
 

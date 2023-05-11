@@ -40,7 +40,7 @@ module _
     is-least-upper-bound-family-of-elements-Poset
       ( poset-Suplattice B)
       ( f ∘ b)
-      ( f (sup-Suplattice A I b))
+      ( f (sup-Suplattice A b))
 
   hom-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   hom-Suplattice =

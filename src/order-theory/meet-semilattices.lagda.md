@@ -240,6 +240,14 @@ module _
             by ap (meet-Meet-Semilattice' y) H
           ＝ z
             by K)
+
+  has-greatest-binary-lower-bound-Meet-Semilattice :
+    (x y : type-Meet-Semilattice) →
+    has-greatest-binary-lower-bound-Poset (poset-Meet-Semilattice) x y
+  pr1 (has-greatest-binary-lower-bound-Meet-Semilattice x y) =
+    meet-Meet-Semilattice x y
+  pr2 (has-greatest-binary-lower-bound-Meet-Semilattice x y) =
+    is-greatest-binary-lower-bound-meet-Meet-Semilattice x y
 ```
 
 ### The predicate on posets of being a meet-semilattice

@@ -51,8 +51,8 @@ module _
   length-array : array A → ℕ
   length-array = pr1
 
-  map-array : (t : array A) → Fin (length-array t) → A
-  map-array = pr2
+  functional-vec-array : (t : array A) → Fin (length-array t) → A
+  functional-vec-array = pr2
 
   empty-array : array A
   pr1 (empty-array) = zero-ℕ
@@ -81,7 +81,7 @@ module _
   cons-array : A → array A → array A
   cons-array a t =
     ( succ-ℕ (length-array t) ,
-      ind-coprod (λ _ → A) (map-array t) λ _ → a)
+      ind-coprod (λ _ → A) (functional-vec-array t) λ _ → a)
 
   revert-array : array A → array A
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))

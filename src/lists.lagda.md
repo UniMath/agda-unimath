@@ -13,6 +13,7 @@ open import lists.lists public
 open import lists.lists-discrete-types public
 open import lists.permutation-lists public
 open import lists.permutation-vectors public
+open import lists.predicates-on-lists public
 open import lists.quicksort-lists public
 open import lists.reversing-lists public
 open import lists.sort-by-insertion-vectors public

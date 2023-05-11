@@ -7,6 +7,7 @@ module foundation.0-connected-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.fiber-inclusions
 open import foundation.functoriality-set-truncation
@@ -14,6 +15,7 @@ open import foundation.inhabited-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -24,7 +26,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -163,4 +164,30 @@ is-0-connected-equiv' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → is-0-connected A → is-0-connected B
 is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
+```
+
+### `0-connected` types are closed under cartesian products
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2)
+  (p1 : is-0-connected X) (p2 : is-0-connected Y)
+  where
+
+  is-0-connected-product : is-0-connected (X × Y)
+  is-0-connected-product =
+    is-contr-equiv
+      ( type-trunc-Set X × type-trunc-Set Y)
+      ( equiv-distributive-trunc-prod-Set X Y)
+      ( is-contr-prod p1 p2)
+```
+
+### A contractible type is `0`-connected
+
+```agda
+is-0-connected-is-contr :
+  {l : Level} (X : UU l) →
+  is-contr X → is-0-connected X
+is-0-connected-is-contr X p =
+  is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
 ```
