@@ -25,7 +25,13 @@ open import order-theory.large-subpreorders
 
 A **large subposet** of a [large poset](order-theory.large-posets.md) `P`
 consists of a subtype `S : type-Large-Poset P l1 → Prop (γ l1)` for each
-universe level `l1`.
+universe level `l1` such that the implication
+
+```md
+  ((x ≤ y) ∧ (y ≤ x)) → (x ∈ S → y ∈ S)
+```
+
+holds for every `x y : P`. Note that for elements of the same universe level, this is automatic by antisymmetry.
 
 ## Definition
 
@@ -35,8 +41,26 @@ module _
   (P : Large-Poset α β)
   where
 
-  Large-Subposet : UUω
-  Large-Subposet = Large-Subpreorder γ (large-preorder-Large-Poset P)
+  record
+    Large-Subposet : UUω
+    where
+    field
+      large-subpreorder-Large-Subposet :
+        Large-Subpreorder γ (large-preorder-Large-Poset P)
+      is-closed-under-sim-Large-Subposet :
+        {l1 l2 : Level}
+        (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+        leq-Large-Poset P x y → leq-Large-Poset P y x →
+        is-in-Large-Subpreorder
+          ( large-preorder-Large-Poset P)
+          ( large-subpreorder-Large-Subposet)
+          ( x) →
+        is-in-Large-Subpreorder
+          ( large-preorder-Large-Poset P)
+          ( large-subpreorder-Large-Subposet)
+          ( y)  
+
+  open Large-Subposet public
 
 module _
   {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
@@ -46,40 +70,55 @@ module _
   large-preorder-Large-Subposet :
     Large-Preorder (λ l → α l ⊔ γ l) (λ l1 l2 → β l1 l2)
   large-preorder-Large-Subposet =
-    large-preorder-Large-Subpreorder (large-preorder-Large-Poset P) S
+    large-preorder-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   is-in-Large-Subposet :
     {l1 : Level} → type-Large-Poset P l1 → UU (γ l1)
   is-in-Large-Subposet =
-    is-in-Large-Subpreorder (large-preorder-Large-Poset P) S
+    is-in-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   type-Large-Subposet : (l1 : Level) → UU (α l1 ⊔ γ l1)
-  type-Large-Subposet = type-Large-Subpreorder (large-preorder-Large-Poset P) S
+  type-Large-Subposet =
+    type-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet-Prop :
     {l1 l2 : Level} →
     type-Large-Subposet l1 → type-Large-Subposet l2 → Prop (β l1 l2)
   leq-Large-Subposet-Prop =
-    leq-Large-Subpreorder-Prop (large-preorder-Large-Poset P) S
+    leq-Large-Subpreorder-Prop
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet :
     {l1 l2 : Level} →
     type-Large-Subposet l1 → type-Large-Subposet l2 → UU (β l1 l2)
   leq-Large-Subposet =
-    leq-Large-Subpreorder (large-preorder-Large-Poset P) S
+    leq-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   is-prop-leq-Large-Subposet :
     {l1 l2 : Level} →
     (x : type-Large-Subposet l1) (y : type-Large-Subposet l2) →
     is-prop (leq-Large-Subposet x y)
   is-prop-leq-Large-Subposet =
-    is-prop-leq-Large-Subpreorder (large-preorder-Large-Poset P) S
+    is-prop-leq-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   refl-leq-Large-Subposet :
     {l1 : Level} (x : type-Large-Subposet l1) →
     leq-Large-Subposet x x
   refl-leq-Large-Subposet =
-    refl-leq-Large-Subpreorder (large-preorder-Large-Poset P) S
+    refl-leq-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   transitive-leq-Large-Subposet :
     {l1 l2 l3 : Level}
@@ -89,7 +128,9 @@ module _
     leq-Large-Subposet y z → leq-Large-Subposet x y →
     leq-Large-Subposet x z
   transitive-leq-Large-Subposet =
-    transitive-leq-Large-Subpreorder (large-preorder-Large-Poset P) S
+    transitive-leq-Large-Subpreorder
+      ( large-preorder-Large-Poset P)
+      ( large-subpreorder-Large-Subposet S)
 
   antisymmetric-leq-Large-Subposet :
     {l1 : Level}
@@ -98,7 +139,7 @@ module _
     leq-Large-Subposet x y → leq-Large-Subposet y x → x ＝ y
   antisymmetric-leq-Large-Subposet {l1} (x , p) (y , q) H K =
     eq-type-subtype
-      ( S {l1})
+      ( large-subpreorder-Large-Subposet S {l1})
       ( antisymmetric-leq-Large-Poset P x y H K)
 
   large-poset-Large-Subposet : Large-Poset (λ l → α l ⊔ γ l) β

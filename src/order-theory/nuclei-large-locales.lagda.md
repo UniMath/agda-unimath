@@ -114,7 +114,7 @@ module _
         ( hom-large-meet-semilattice-nucleus-Large-Locale j)
 ```
 
-### The `j`-closed elements of a nuceus
+### The `j`-closed elements of a nucleus
 
 ```agda
 module _

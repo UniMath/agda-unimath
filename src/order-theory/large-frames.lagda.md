@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
+open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.top-elements-large-posets
@@ -69,6 +70,10 @@ open Large-Frame public
 module _
   {α : Level → Level} {β : Level → Level → Level} (L : Large-Frame α β)
   where
+
+  large-preorder-Large-Frame : Large-Preorder α β
+  large-preorder-Large-Frame =
+    large-preorder-Large-Poset (large-poset-Large-Frame L)
 
   set-Large-Frame : (l : Level) → Set (α l)
   set-Large-Frame = set-Large-Poset (large-poset-Large-Frame L)

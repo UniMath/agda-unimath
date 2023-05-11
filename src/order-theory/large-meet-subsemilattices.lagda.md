@@ -210,6 +210,18 @@ module _
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
+  is-closed-under-sim-Large-Meet-Subsemilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Meet-Semilattice L l1)
+    (y : type-Large-Meet-Semilattice L l2) →
+    leq-Large-Meet-Semilattice L x y →
+    leq-Large-Meet-Semilattice L y x →
+    is-in-Large-Meet-Subsemilattice x →
+    is-in-Large-Meet-Subsemilattice y
+  is-closed-under-sim-Large-Meet-Subsemilattice =
+    is-closed-under-sim-Large-Subposet
+      ( large-subposet-Large-Meet-Subsemilattice S)
+
   meet-Large-Meet-Subsemilattice :
     {l1 l2 : Level}
     (x : type-Large-Meet-Subsemilattice l1)

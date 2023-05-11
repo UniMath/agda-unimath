@@ -55,7 +55,8 @@ module _
   leq-Large-Subpreorder-Prop :
     {l1 l2 : Level} →
     type-Large-Subpreorder l1 → type-Large-Subpreorder l2 → Prop (β l1 l2)
-  leq-Large-Subpreorder-Prop (x , p) (y , q) = leq-Large-Preorder-Prop P x y
+  leq-Large-Subpreorder-Prop x y =
+    leq-Large-Preorder-Prop P (pr1 x) (pr1 y)
 
   leq-Large-Subpreorder :
     {l1 l2 : Level} →

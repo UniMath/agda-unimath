@@ -16,6 +16,7 @@ open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-frames
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
+open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.top-elements-large-posets
@@ -45,6 +46,10 @@ module _
 
   large-poset-Large-Locale : Large-Poset α β
   large-poset-Large-Locale = large-poset-Large-Frame L
+
+  large-preorder-Large-Locale : Large-Preorder α β
+  large-preorder-Large-Locale =
+    large-preorder-Large-Poset large-poset-Large-Locale
 
   set-Large-Locale : (l : Level) → Set (α l)
   set-Large-Locale = set-Large-Frame L
