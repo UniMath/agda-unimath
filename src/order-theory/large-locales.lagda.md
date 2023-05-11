@@ -74,6 +74,11 @@ module _
     is-prop (leq-Large-Locale x y)
   is-prop-leq-Large-Locale = is-prop-leq-Large-Frame L
 
+  leq-eq-Large-Locale :
+    {l1 : Level} {x y : type-Large-Locale l1} →
+    (x ＝ y) → leq-Large-Locale x y
+  leq-eq-Large-Locale = leq-eq-Large-Frame L
+
   refl-leq-Large-Locale :
     {l1 : Level} (x : type-Large-Locale l1) → leq-Large-Locale x x
   refl-leq-Large-Locale = refl-leq-Large-Frame L
@@ -121,6 +126,12 @@ module _
   is-greatest-binary-lower-bound-meet-Large-Locale =
     is-greatest-binary-lower-bound-meet-Large-Frame L
 
+  ap-meet-Large-Locale :
+    {l1 l2 : Level} →
+    {x x' : type-Large-Locale l1} {y y' : type-Large-Locale l2} →
+    (x ＝ x') → (y ＝ y') → (meet-Large-Locale x y ＝ meet-Large-Locale x' y')
+  ap-meet-Large-Locale = ap-meet-Large-Frame L
+
   has-top-element-Large-Locale :
     has-top-element-Large-Poset large-poset-Large-Locale
   has-top-element-Large-Locale =
@@ -155,6 +166,15 @@ module _
       ( sup-Large-Locale x)
   is-least-upper-bound-sup-Large-Locale =
     is-least-upper-bound-sup-Large-Frame L
+
+  is-upper-bound-sup-Large-Locale :
+    {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Locale l2) →
+    is-upper-bound-family-of-elements-Large-Poset
+      ( large-poset-Large-Locale)
+      ( x)
+      ( sup-Large-Locale x)
+  is-upper-bound-sup-Large-Locale =
+    is-upper-bound-sup-Large-Frame L
 
   distributive-meet-sup-Large-Locale :
     {l1 l2 l3 : Level}

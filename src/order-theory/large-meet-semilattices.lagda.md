@@ -207,6 +207,15 @@ module _
       ( large-poset-Large-Meet-Semilattice L)
       ( is-large-meet-semilattice-Large-Meet-Semilattice L)
 
+  ap-meet-Large-Meet-Semilattice :
+    {l1 l2 : Level}
+    {x x' : type-Large-Meet-Semilattice l1}
+    {y y' : type-Large-Meet-Semilattice l2} →
+    (x ＝ x') → (y ＝ y') →
+    meet-Large-Meet-Semilattice x y ＝ meet-Large-Meet-Semilattice x' y'
+  ap-meet-Large-Meet-Semilattice p q =
+    ap-binary meet-Large-Meet-Semilattice p q
+
   has-top-element-Large-Meet-Semilattice :
     has-top-element-Large-Poset (large-poset-Large-Meet-Semilattice L)
   has-top-element-Large-Meet-Semilattice =

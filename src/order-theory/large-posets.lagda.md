@@ -63,6 +63,12 @@ module _
   is-prop-leq-Large-Poset =
     is-prop-leq-Large-Preorder (large-preorder-Large-Poset X)
 
+  leq-eq-Large-Poset :
+    {l1 : Level} {x y : type-Large-Poset l1} →
+    (x ＝ y) → leq-Large-Poset x y
+  leq-eq-Large-Poset =
+    leq-eq-Large-Preorder (large-preorder-Large-Poset X)
+
   refl-leq-Large-Poset :
     {l1 : Level} (x : type-Large-Poset l1) → leq-Large-Poset x x
   refl-leq-Large-Poset = refl-leq-Large-Preorder (large-preorder-Large-Poset X)

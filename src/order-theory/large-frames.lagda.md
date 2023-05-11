@@ -100,6 +100,12 @@ module _
   is-prop-leq-Large-Frame =
     is-prop-leq-Large-Poset (large-poset-Large-Frame L)
 
+  leq-eq-Large-Frame :
+    {l1 : Level} {x y : type-Large-Frame l1} →
+    (x ＝ y) → leq-Large-Frame x y
+  leq-eq-Large-Frame =
+    leq-eq-Large-Poset (large-poset-Large-Frame L)
+
   refl-leq-Large-Frame :
     {l1 : Level} (x : type-Large-Frame l1) → leq-Large-Frame x x
   refl-leq-Large-Frame = refl-leq-Large-Poset (large-poset-Large-Frame L)
@@ -152,6 +158,13 @@ module _
       ( large-poset-Large-Frame L)
       ( is-large-meet-semilattice-Large-Frame L)
 
+  ap-meet-Large-Frame :
+    {l1 l2 : Level}
+    {x x' : type-Large-Frame l1} {y y' : type-Large-Frame l2} →
+    (x ＝ x') → (y ＝ y') → (meet-Large-Frame x y ＝ meet-Large-Frame x' y')
+  ap-meet-Large-Frame =
+    ap-meet-Large-Meet-Semilattice large-meet-semilattice-Large-Frame
+
   has-top-element-Large-Frame :
     has-top-element-Large-Poset (large-poset-Large-Frame L)
   has-top-element-Large-Frame =
@@ -193,4 +206,13 @@ module _
     large-poset-Large-Frame L
   is-large-suplattice-Large-Suplattice large-suplattice-Large-Frame =
     is-large-suplattice-Large-Frame L
+
+  is-upper-bound-sup-Large-Frame :
+    {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Frame l2) →
+    is-upper-bound-family-of-elements-Large-Poset
+      ( large-poset-Large-Frame L)
+      ( x)
+      ( sup-Large-Frame x)
+  is-upper-bound-sup-Large-Frame =
+    is-upper-bound-sup-Large-Suplattice large-suplattice-Large-Frame
 ```
