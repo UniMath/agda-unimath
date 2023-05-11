@@ -204,5 +204,3 @@ eq-permutation-iterated-product-lists L t =
     ( iterated-product-lists L)
     ( equiv-permutation-iterated-product-lists L t)
 ```
-
-### The cartesian product of two iterated product of types is the it
