@@ -159,6 +159,10 @@ module _
     ( radical-of-ideal-Commutative-Ring A I)
     ( radical-of-ideal-Commutative-Ring A J) ＝
     radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J)
-  preserves-intersection-radical-of-ideal-commutative-ring = {!   !}
+  preserves-intersection-radical-of-ideal-commutative-ring =
+    eq-has-same-elements-ideal-Commutative-Ring A
+    (intersection-ideal-Commutative-Ring A (radical-of-ideal-Commutative-Ring A I) (radical-of-ideal-Commutative-Ring A J))
+    (radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J))
+    {!  !}
 
 ```
