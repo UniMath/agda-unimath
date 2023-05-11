@@ -22,8 +22,11 @@ open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-meet-subsemilattices
 open import order-theory.large-posets
+open import order-theory.large-quotient-locales
+open import order-theory.large-subframes
 open import order-theory.large-subposets
 open import order-theory.large-subpreorders
+open import order-theory.large-subsuplattices
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 ```

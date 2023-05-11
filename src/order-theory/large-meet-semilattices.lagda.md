@@ -13,6 +13,7 @@ open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-posets
+open import order-theory.lower-bounds-large-posets
 open import order-theory.top-elements-large-posets
 ```
 

@@ -7,12 +7,14 @@ module order-theory.homomorphisms-large-frames where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import order-theory.homomorphisms-large-meet-semilattices
 open import order-theory.homomorphisms-large-suplattices
 open import order-theory.large-frames
+open import order-theory.order-preserving-maps-large-posets
 ```
 
 </details>
