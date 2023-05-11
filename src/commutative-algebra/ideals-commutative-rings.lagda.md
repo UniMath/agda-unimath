@@ -136,7 +136,7 @@ module _
     is-in-ideal-Commutative-Ring x →
     is-in-ideal-Commutative-Ring (neg-Commutative-Ring R x)
   is-closed-under-negatives-ideal-Commutative-Ring =
-    pr2 (pr2 is-additive-subgroup-subset-ideal-Commutative-Ring) _
+    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring) _
 
   is-closed-under-left-multiplication-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring R
@@ -200,7 +200,7 @@ pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (R : Commutative-Ring l1)
+  {l1 l2 l3 : Level} (R : Commutative-Ring l1)
   (I : ideal-Commutative-Ring l2 R) (J : ideal-Commutative-Ring l3 R)
   where
 
@@ -223,9 +223,9 @@ module _
     is-closed-under-addition-subset-Commutative-Ring R
       ( subset-intersection-ideal-Commutative-Ring)
   pr1 (is-closed-under-addition-intersection-ideal-Commutative-Ring x y (H1 , H2) (K1 , K2)) =
-    is-closed-under-addition-ideal-Commutative-Ring R I H1 K1
+    is-closed-under-addition-ideal-Commutative-Ring R I x y H1 K1
   pr2 (is-closed-under-addition-intersection-ideal-Commutative-Ring x y (H1 , H2) (K1 , K2)) =
-    is-closed-under-addition-ideal-Commutative-Ring R J H2 K2
+    is-closed-under-addition-ideal-Commutative-Ring R J x y H2 K2
 
   is-closed-under-negatives-intersection-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring R

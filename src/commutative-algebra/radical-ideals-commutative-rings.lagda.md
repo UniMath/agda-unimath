@@ -142,5 +142,12 @@ module _
 ### Intersection of radical ideals is radical
 
 ```agda
+  is-radical-intersection-radical-ideal-Commutative-Ring :
+    {l1 l2 l3 : Level} ( R : Commutative-Ring l1)
+    ( I : radical-ideal-Commutative-Ring l2 R)
+    ( J : radical-ideal-Commutative-Ring l3 R)
+    → is-radical-ideal-Commutative-Ring R (intersection-ideal-Commutative-Ring R (pr1 I) (pr1 J))
+  pr1 (is-radical-intersection-radical-ideal-Commutative-Ring R (I , K) J x n H) = K x n (pr1 H)
+  pr2 (is-radical-intersection-radical-ideal-Commutative-Ring R I (J , K) x n H) = K x n (pr2 H)
 
 ```

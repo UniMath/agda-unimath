@@ -22,6 +22,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+open import foundation.identity-types
 ```
 
 </details>
@@ -154,5 +155,10 @@ module _
   where
 
   preserves-intersection-radical-of-ideal-commutative-ring :
+    intersection-ideal-Commutative-Ring A
+    ( radical-of-ideal-Commutative-Ring A I)
+    ( radical-of-ideal-Commutative-Ring A J) ＝
+    radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J)
+  preserves-intersection-radical-of-ideal-commutative-ring = {!   !}
 
 ```
