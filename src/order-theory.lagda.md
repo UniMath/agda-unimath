@@ -49,8 +49,11 @@ open import order-theory.large-meet-semilattices public
 open import order-theory.large-meet-subsemilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
+open import order-theory.large-quotient-locales public
+open import order-theory.large-subframes public
 open import order-theory.large-subposets public
 open import order-theory.large-subpreorders public
+open import order-theory.large-subsuplattices public
 open import order-theory.large-suplattices public
 open import order-theory.lattices public
 open import order-theory.least-upper-bounds-large-posets public

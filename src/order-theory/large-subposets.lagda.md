@@ -31,7 +31,8 @@ universe level `l1` such that the implication
   ((x ≤ y) ∧ (y ≤ x)) → (x ∈ S → y ∈ S)
 ```
 
-holds for every `x y : P`. Note that for elements of the same universe level, this is automatic by antisymmetry.
+holds for every `x y : P`. Note that for elements of the same universe level,
+this is automatic by antisymmetry.
 
 ## Definition
 
@@ -58,7 +59,7 @@ module _
         is-in-Large-Subpreorder
           ( large-preorder-Large-Poset P)
           ( large-subpreorder-Large-Subposet)
-          ( y)  
+          ( y)
 
   open Large-Subposet public
 

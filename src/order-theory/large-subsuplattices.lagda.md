@@ -23,7 +23,9 @@ open import order-theory.large-suplattices
 
 ## Idea
 
-A **large subsuplattice** of a [large suplattice](order-theory.large-suplattices.md) is a large subposet which is closed under suprema.
+A **large subsuplattice** of a
+[large suplattice](order-theory.large-suplattices.md) is a large subposet which
+is closed under suprema.
 
 ## Definition
 

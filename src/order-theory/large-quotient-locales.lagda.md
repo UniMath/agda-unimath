@@ -16,10 +16,10 @@ open import foundation.universe-levels
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
+open import order-theory.large-meet-subsemilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-subframes
-open import order-theory.large-meet-subsemilattices
 open import order-theory.large-subposets
 open import order-theory.large-subpreorders
 open import order-theory.large-subsuplattices
@@ -32,7 +32,9 @@ open import order-theory.top-elements-large-posets
 
 ## Idea
 
-A **large quotient locale** of a [large locale](order-theory.large-locales.md) `L` is by duality just a [large subframe](order-theory.large-subframes.md) of `L`.
+A **large quotient locale** of a [large locale](order-theory.large-locales.md)
+`L` is by duality just a [large subframe](order-theory.large-subframes.md) of
+`L`.
 
 ## Definition
 

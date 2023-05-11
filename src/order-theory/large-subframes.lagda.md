@@ -32,7 +32,9 @@ open import order-theory.top-elements-large-posets
 
 ## Idea
 
-A **large subframe** of a [large frame](order-theory.large-frames.md) is a [large subposet](order-theory.large-subposets.md) which is closed under meets, contains the top element, and is closed under suprema.
+A **large subframe** of a [large frame](order-theory.large-frames.md) is a
+[large subposet](order-theory.large-subposets.md) which is closed under meets,
+contains the top element, and is closed under suprema.
 
 ## Definition
 
