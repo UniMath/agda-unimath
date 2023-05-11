@@ -171,3 +171,15 @@ module _
       ( length-array t)
       ( listed-vec-functional-vec (length-array t) (functional-vec-array t))
 ```
+
+### If an element `x` is in a vector `v` then it is in `list-vec n v`
+
+```agda
+  is-in-list-is-in-vec-list :
+    (l : list A) (x : A) →
+    x ∈-vec (vec-list l) → x ∈-list l
+  is-in-list-is-in-vec-list (cons y l) .y (is-head .y .(vec-list l)) =
+    is-head y l
+  is-in-list-is-in-vec-list (cons y l) x (is-in-tail .x .y .(vec-list l) I) =
+    is-in-tail x y l (is-in-list-is-in-vec-list l x I)
+```

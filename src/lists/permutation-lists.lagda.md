@@ -75,11 +75,22 @@ module _
     ap (λ p → list-vec (length-list l) p) (pr2 (T (length-list l) (vec-list l)))
 ```
 
-### If `x` is in `permute-list l t` then `x` is in `l`
+-- ### If `x` is in `permute-list l t` then `x` is in `l`
 
-```agda
-  is-in-list-is-permute-list :
-    (l : list A) (t : Permutation (length-list l)) (x : A) →
-    x ∈-list (permute-list l t) → x ∈-list l
-  is-in-list-is-permute-list (cons x₁ l) t x I = {!!}
-```
+-- ```agda
+--   is-in-list-is-in-permute-list :
+--     (l : list A) (t : Permutation (length-list l)) (x : A) →
+--     x ∈-list (permute-list l t) → x ∈-list l
+--   is-in-list-is-in-permute-list (cons y l) t x I =
+--     is-in-list-is-in-vec-list
+--       ( cons y l)
+--       ( x)
+--       ( is-in-vec-is-in-functional-vec
+--         ( length-list (cons y l))
+--         ( vec-list (cons y l))
+--         ( x)
+--         ({!!} , {!!}))
+
+--   is-in-permute-list-is-in-list : {!!}
+--   is-in-permute-list-is-in-list = {!!}
+-- ```

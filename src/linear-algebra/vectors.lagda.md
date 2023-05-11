@@ -25,6 +25,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.logical-equivalences
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -72,9 +73,27 @@ module _
   all-vec P empty-vec = raise-unit _
   all-vec P (x ∷ v) = P x × all-vec P v
 
+  component-vec :
+    (n : ℕ) → vec A n → Fin n → A
+  component-vec (succ-ℕ n) (a ∷ v) (inl k) = component-vec n v k
+  component-vec (succ-ℕ n) (a ∷ v) (inr k) = a
+
   data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
     is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
     is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)
+
+  index-in-vec : (n : ℕ) → (a : A) → (v : vec A n) → a ∈-vec v → Fin n
+  index-in-vec (succ-ℕ n) a (.a ∷ v) (is-head .a .v) =
+    inr star
+  index-in-vec (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
+    inl (index-in-vec n a v I)
+
+  eq-component-vec-index-in-vec :
+    (n : ℕ) (a : A) (v : vec A n) (I : a ∈-vec v) →
+    a ＝ component-vec n v (index-in-vec n a v I)
+  eq-component-vec-index-in-vec (succ-ℕ n) a (.a ∷ v) (is-head .a .v) = refl
+  eq-component-vec-index-in-vec (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
+    eq-component-vec-index-in-vec n a v I
 ```
 
 ### The functional type of vectors
@@ -115,6 +134,16 @@ module _
 
   in-functional-vec : (n : ℕ) → A → functional-vec A n → UU l
   in-functional-vec n a v = Σ (Fin n) (λ k → a ＝ v k)
+
+  index-in-functional-vec :
+    (n : ℕ) → (x : A) → (v : functional-vec A n) → in-functional-vec n x v →
+    Fin n
+  index-in-functional-vec n x v I = pr1 I
+
+  eq-component-functional-vec-index-in-functional-vec :
+    (n : ℕ) → (x : A) → (v : functional-vec A n) → (I : in-functional-vec n x v) →
+    x ＝ v (index-in-functional-vec n x v I)
+  eq-component-functional-vec-index-in-functional-vec n x v I = pr2 I
 ```
 
 ## Properties
@@ -222,11 +251,25 @@ module _
   pr2 (compute-vec n) = is-equiv-listed-vec-functional-vec n
 ```
 
-### Characterization of the elementhood predicate
+### Characterizing the elementhood predicate
 
 ```agda
-  
+  is-in-functional-vec-is-in-vec :
+    (n : ℕ) (v : vec A n) (x : A) →
+    (x ∈-vec v) → (in-functional-vec n x (functional-vec-vec n v ))
+  is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-head .x l) =
+    (inr star) , refl
+  is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
+    inl (pr1 (is-in-functional-vec-is-in-vec n l x I)),
+    pr2 (is-in-functional-vec-is-in-vec n l x I)
 
+  is-in-vec-is-in-functional-vec :
+    (n : ℕ) (v : vec A n) (x : A) →
+    (in-functional-vec n x (functional-vec-vec n v)) → (x ∈-vec v)
+  is-in-vec-is-in-functional-vec (succ-ℕ n) (y ∷ v) x (inl k , p) =
+    is-in-tail x y v (is-in-vec-is-in-functional-vec n v x (k , p))
+  is-in-vec-is-in-functional-vec (succ-ℕ n) (y ∷ v) _ (inr k , refl) =
+    is-head (functional-vec-vec (succ-ℕ n) (y ∷ v) (inr k)) v
 ```
 
 ### The type of vectors of elements in a truncated type is truncated
