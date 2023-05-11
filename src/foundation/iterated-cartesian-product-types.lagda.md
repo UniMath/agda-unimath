@@ -44,8 +44,12 @@ open import univalent-combinatorics.standard-finite-types
 In this file, we give three definitions of the iterated cartesian product
 `A₁ × ... × Aₙ` of `n` types `A₁ , ... , Aₙ`. Two use a family of types over
 `Fin n`: the first uses recursion over `Fin n` and the second is just
-`Π (Fin n) A`. The last one uses lists. We also show that the first two
-definitions are equivalent.
+`Π (Fin n) A`. The last one uses lists.
+
+We show that :
+
+- all these definitions are equivalent
+- iterated cartesian product of types is closed under permutations
 
 ## Definitions
 
@@ -80,9 +84,9 @@ iterated-product-lists {l} nil = raise-unit l
 iterated-product-lists (cons A p) = A × iterated-product-lists p
 ```
 
-## Property
+## Properties
 
-### Equivalence between the first two definitions
+### The definitions using recursion and `Π-type` are equivalent
 
 ```agda
 equiv-iterated-product-Fin-recursive-Π :
@@ -102,7 +106,7 @@ equiv-iterated-product-Fin-recursive-Π (succ-ℕ n) A =
               ( equiv-iterated-product-Fin-recursive-Π n (A ∘ inl)))))))
 ```
 
-### Equivalence between the first and the last definitions
+### The definitions using recursion and lists are equivalent
 
 ```agda
 equiv-iterated-product-Fin-recursive-lists :
