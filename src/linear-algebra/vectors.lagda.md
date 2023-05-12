@@ -19,13 +19,13 @@ open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.logical-equivalences
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -136,12 +136,12 @@ module _
   in-functional-vec n a v = Σ (Fin n) (λ k → a ＝ v k)
 
   index-in-functional-vec :
-    (n : ℕ) → (x : A) → (v : functional-vec A n) → in-functional-vec n x v →
-    Fin n
+    (n : ℕ) (x : A) (v : functional-vec A n) →
+    in-functional-vec n x v → Fin n
   index-in-functional-vec n x v I = pr1 I
 
   eq-component-functional-vec-index-in-functional-vec :
-    (n : ℕ) → (x : A) → (v : functional-vec A n) → (I : in-functional-vec n x v) →
+    (n : ℕ) (x : A) (v : functional-vec A n) (I : in-functional-vec n x v) →
     x ＝ v (index-in-functional-vec n x v I)
   eq-component-functional-vec-index-in-functional-vec n x v I = pr2 I
 ```
@@ -256,7 +256,7 @@ module _
 ```agda
   is-in-functional-vec-is-in-vec :
     (n : ℕ) (v : vec A n) (x : A) →
-    (x ∈-vec v) → (in-functional-vec n x (functional-vec-vec n v ))
+    (x ∈-vec v) → (in-functional-vec n x (functional-vec-vec n v))
   is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-head .x l) =
     (inr star) , refl
   is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =

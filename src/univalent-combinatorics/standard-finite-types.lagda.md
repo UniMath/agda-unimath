@@ -292,6 +292,12 @@ is-injective-inl-Fin k refl = refl
 ### Exercise 7.5 (c)
 
 ```agda
+neq-zero-skip-zero-Fin :
+  {k : ℕ} {x : Fin k} →
+  is-nonzero-Fin (succ-ℕ k) (skip-zero-Fin k x)
+neq-zero-skip-zero-Fin {succ-ℕ k} {inl x} p =
+  neq-zero-skip-zero-Fin {k = k} {x = x} (is-injective-inl-Fin (succ-ℕ k) p)
+
 neq-zero-succ-Fin :
   {k : ℕ} {x : Fin k} →
   is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))

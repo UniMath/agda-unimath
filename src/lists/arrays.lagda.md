@@ -87,6 +87,14 @@ module _
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
 ```
 
+```agda
+fold-vec :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
+  {n : ℕ} → vec A n → B
+fold-vec b μ {0} _ = b
+fold-vec b μ (a ∷ l) = μ a (fold-vec b μ l)
+```
+
 ## Properties
 
 ### The types of lists and arrays are equivalent
@@ -189,6 +197,5 @@ module _
   is-in-vec-list-is-in-list (cons x l) x (is-head .x l) =
     is-head x (vec-list l)
   is-in-vec-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
-    is-in-tail x y (vec-list l) (is-in-vec-list-is-in-list l x I) 
+    is-in-tail x y (vec-list l) (is-in-vec-list-is-in-list l x I)
 ```
-

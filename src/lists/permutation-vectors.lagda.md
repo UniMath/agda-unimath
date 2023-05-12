@@ -17,8 +17,13 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.contractible-types
+open import foundation.unit-type
+open import foundation.coproduct-types
 
 open import linear-algebra.vectors
+
+open import lists.arrays
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -52,6 +57,17 @@ module _
     (v : vec A n) →
     Σ ( Permutation n)
       ( λ t → f v ＝ permute-vec n v t)
+
+  permutation-is-permutation-vec :
+    (n : ℕ )(f : vec A n → vec A n) → is-permutation-vec n f →
+    (v : vec A n) → Permutation n
+  permutation-is-permutation-vec n f P v = pr1 (P v)
+
+  eq-permute-vec-permutation-is-permutation-vec :
+    (n : ℕ) (f : vec A n → vec A n) → (P : is-permutation-vec n f) →
+    (v : vec A n) →
+    (f v ＝ permute-vec n v (permutation-is-permutation-vec n f P v))
+  eq-permute-vec-permutation-is-permutation-vec n f P v = pr2 (P v)
 ```
 
 ## Properties
@@ -162,4 +178,26 @@ module _
           ( t)
           ( x)
           ( is-in-functional-vec-is-in-vec n v x I)))
+```
+
+### If `(μ : A → (B → B))` satisfies a property of commutativity, then for `b : B` the function `fold-vec b μ` is invariant by permutation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B))
+  where
+
+  commutative-fold-vec : UU (l1 ⊔ l2)
+  commutative-fold-vec = (a1 a2 : A) (b : B) → μ a1 (μ a2 b) ＝ μ a2 (μ a1 b)
+
+  invariant-permutation-fold-vec :
+    {n : ℕ} → (v : vec A n) → (t : Permutation n) →
+    fold-vec b μ v ＝ fold-vec b μ (permute-vec n v t)
+  invariant-permutation-fold-vec {0} v t = refl
+  invariant-permutation-fold-vec {1} (x ∷ empty-vec) t =
+    ap
+      ( λ p → μ p b)
+      ( ap (λ k → (cons-functional-vec 0 x empty-functional-vec) k)
+      ( eq-is-contr' is-contr-Fin-one-ℕ (inr star) (pr1 t (inr star))))
+  invariant-permutation-fold-vec {succ-ℕ (succ-ℕ n)} v t = {!!}
 ```

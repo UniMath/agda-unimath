@@ -7,15 +7,15 @@ module lists.permutation-lists where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-group-theory.permutations-standard-finite-types
-
 open import elementary-number-theory.natural-numbers
+
+open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.universe-levels
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
@@ -57,6 +57,17 @@ module _
     (l : list A) →
     Σ ( Permutation (length-list l))
       ( λ t → f l ＝ permute-list l t)
+
+  permutation-is-permutation-list :
+    (f : list A → list A) → is-permutation-list f →
+    ((l : list A) → Permutation (length-list l))
+  permutation-is-permutation-list f P l = pr1 (P l)
+
+  eq-permute-list-permutation-is-permutation-list :
+    (f : list A → list A) → (P : is-permutation-list f) →
+    (l : list A) →
+    (f l ＝ permute-list l (permutation-is-permutation-list f P l))
+  eq-permute-list-permutation-is-permutation-list f P l = pr2 (P l)
 ```
 
 ## Properties
@@ -65,7 +76,7 @@ module _
 
 ```agda
   is-permutation-list-is-permutation-vec :
-    (f : (n : ℕ) → vec A n → vec A n ) →
+    (f : (n : ℕ) → vec A n → vec A n) →
     ((n : ℕ) → is-permutation-vec n (f n)) →
     is-permutation-list
       ( λ l → list-vec (length-list l) (f (length-list l) (vec-list l)))

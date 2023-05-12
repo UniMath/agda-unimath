@@ -391,7 +391,7 @@ preserves-leq-mul-ℕ m m' n n' H K =
     ( mul-ℕ m n)
     ( mul-ℕ m' n)
     ( mul-ℕ m' n')
-    ( preserves-order-mul-ℕ' m' n n' K )
+    ( preserves-order-mul-ℕ' m' n n' K)
     ( preserves-order-mul-ℕ n m m' H)
 ```
 

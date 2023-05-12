@@ -9,15 +9,15 @@ module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
 ```agda
 open import elementary-number-theory.fundamental-theorem-of-arithmetic
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.iterated-cartesian-product-types
 open import foundation.universe-levels
-open import foundation.cartesian-product-types
-open import foundation.identity-types
 
 open import group-theory.concrete-groups
 open import group-theory.iterated-cartesian-products-concrete-groups
@@ -67,12 +67,13 @@ cycle-prime-decomposition-ℕ n H =
 
 ### Cycle prime decomposition is closed by cartesian product
 
-The cartesian product of the cycle prime decomposition of `n` and `m` is equal to the cycle prime decomposition of `mul-ℕ n m`
+The cartesian product of the cycle prime decomposition of `n` and `m` is equal
+to the cycle prime decomposition of `mul-ℕ n m`
 
 ```agda
 eq-product-cycle-prime-decomposition-ℕ :
   (n m : ℕ) → (H : leq-ℕ 1 n) → (I : leq-ℕ 1 m) →
   ( cycle-prime-decomposition-ℕ n H × cycle-prime-decomposition-ℕ m I) ＝
-  cycle-prime-decomposition-ℕ (mul-ℕ n m) (preserves-leq-mul-ℕ 1 n 1 m H I )
+  cycle-prime-decomposition-ℕ (mul-ℕ n m) (preserves-leq-mul-ℕ 1 n 1 m H I)
 eq-product-cycle-prime-decomposition-ℕ = {!!}
 ```
