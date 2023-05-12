@@ -110,3 +110,56 @@ module _
     permute-vec n v a ＝ permute-vec n w a
   ap-permute-vec a refl = refl
 ```
+
+### `x` is in a vector `v` iff it is in `permute v t`
+
+```agda
+  is-in-functional-vec-is-in-permute-functional-vec :
+    (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
+    in-functional-vec n x (v ∘ map-equiv t) → in-functional-vec n x v
+  is-in-functional-vec-is-in-permute-functional-vec n v t x (k , refl) =
+    map-equiv t k , refl
+
+  is-in-vec-is-in-permute-vec :
+    (n : ℕ) (v : vec A n) (t : Permutation n) (x : A) →
+    x ∈-vec (permute-vec n v t) → x ∈-vec v
+  is-in-vec-is-in-permute-vec n v t x I =
+    is-in-vec-is-in-functional-vec
+      ( n)
+      ( v)
+      ( x)
+      ( is-in-functional-vec-is-in-permute-functional-vec
+        ( n)
+        ( functional-vec-vec n v)
+        ( t)
+        ( x)
+        ( tr
+          ( λ p → in-functional-vec n x p)
+          ( isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t))
+          ( is-in-functional-vec-is-in-vec n (permute-vec n v t) x I)))
+
+  is-in-permute-functional-vec-is-in-functional-vec :
+    (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
+    in-functional-vec n x v → in-functional-vec n x (v ∘ map-equiv t)
+  is-in-permute-functional-vec-is-in-functional-vec n v t x (k , refl) =
+    map-inv-equiv t k , ap v (inv (issec-map-inv-equiv t k))
+
+  is-in-permute-vec-is-in-vec :
+    (n : ℕ) (v : vec A n) (t : Permutation n) (x : A) →
+    x ∈-vec v → x ∈-vec (permute-vec n v t)
+  is-in-permute-vec-is-in-vec n v t x I =
+    is-in-vec-is-in-functional-vec
+      ( n)
+      ( permute-vec n v t)
+      ( x)
+      ( tr
+        ( λ p → in-functional-vec n x p)
+        ( inv
+          ( isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t)))
+        ( is-in-permute-functional-vec-is-in-functional-vec
+          ( n)
+          ( functional-vec-vec n v)
+          ( t)
+          ( x)
+          ( is-in-functional-vec-is-in-vec n v x I)))
+```

@@ -44,9 +44,9 @@ module _
 
   permute-list : (l : list A) → Permutation (length-list l) → list A
   permute-list l s =
-    list-array
-      ( length-array (array-list l) ,
-        functional-vec-array (array-list l) ∘ (map-equiv s))
+    list-vec
+      ( length-list l)
+      ( permute-vec (length-list l) (vec-list l) s)
 ```
 
 ### The predicate that a function from `list` to `list` is permuting lists
@@ -75,22 +75,49 @@ module _
     ap (λ p → list-vec (length-list l) p) (pr2 (T (length-list l) (vec-list l)))
 ```
 
--- ### If `x` is in `permute-list l t` then `x` is in `l`
+### If `x` is in `permute-list l t` then `x` is in `l`
 
--- ```agda
---   is-in-list-is-in-permute-list :
---     (l : list A) (t : Permutation (length-list l)) (x : A) →
---     x ∈-list (permute-list l t) → x ∈-list l
---   is-in-list-is-in-permute-list (cons y l) t x I =
---     is-in-list-is-in-vec-list
---       ( cons y l)
---       ( x)
---       ( is-in-vec-is-in-functional-vec
---         ( length-list (cons y l))
---         ( vec-list (cons y l))
---         ( x)
---         ({!!} , {!!}))
+```agda
+  is-in-list-is-in-permute-list :
+    (l : list A) (t : Permutation (length-list l)) (x : A) →
+    x ∈-list (permute-list l t) → x ∈-list l
+  is-in-list-is-in-permute-list l t x I =
+    is-in-list-is-in-vec-list
+      ( l)
+      ( x)
+      ( is-in-vec-is-in-permute-vec
+        ( length-list l)
+        ( vec-list l)
+        ( t)
+        ( x)
+        ( tr
+          ( λ p → x ∈-vec (pr2 p))
+          ( isretr-vec-list
+            ( length-list l ,
+              permute-vec (length-list l) (vec-list l) t))
+          ( is-in-vec-list-is-in-list
+            ( list-vec
+              ( length-list l)
+              ( permute-vec (length-list l) (vec-list l) t))
+            ( x)
+            ( I))))
 
---   is-in-permute-list-is-in-list : {!!}
---   is-in-permute-list-is-in-list = {!!}
--- ```
+  is-in-permute-list-is-in-list :
+    (l : list A) (t : Permutation (length-list l)) (x : A) →
+    x ∈-list l → x ∈-list (permute-list l t)
+  is-in-permute-list-is-in-list l t x I =
+    is-in-list-is-in-vec-list
+      ( permute-list l t)
+      ( x)
+      ( tr
+        ( λ p → x ∈-vec (pr2 p))
+        ( inv
+          ( isretr-vec-list
+            ( length-list l , permute-vec (length-list l) (vec-list l) t)))
+        ( is-in-permute-vec-is-in-vec
+          ( length-list l)
+          ( vec-list l)
+          ( t)
+          ( x)
+          ( is-in-vec-list-is-in-list l x I)))
+```

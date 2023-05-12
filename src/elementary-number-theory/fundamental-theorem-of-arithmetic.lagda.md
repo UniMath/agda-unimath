@@ -954,28 +954,68 @@ is-prime-list-concat-list-ℕ nil q Pp Pq = Pq
 is-prime-list-concat-list-ℕ (cons x p) q Pp Pq =
   pr1 Pp , is-prime-list-concat-list-ℕ p q (pr2 Pp) Pq
 
+all-elements-is-prime-list-ℕ :
+  (p : list ℕ) → UU lzero
+all-elements-is-prime-list-ℕ p = (x : ℕ) → x ∈-list p → is-prime-ℕ x
+
+all-elements-is-prime-list-tail-ℕ :
+  (p : list ℕ) (x : ℕ) (P : all-elements-is-prime-list-ℕ (cons x p)) →
+  all-elements-is-prime-list-ℕ p
+all-elements-is-prime-list-tail-ℕ p x P y I = P y (is-in-tail y x p I)
+
+all-elements-is-prime-list-is-prime-list-ℕ :
+  (p : list ℕ) → is-prime-list-ℕ p → all-elements-is-prime-list-ℕ p
+all-elements-is-prime-list-is-prime-list-ℕ (cons x p) P .x (is-head .x .p) =
+  pr1 P
+all-elements-is-prime-list-is-prime-list-ℕ
+  ( cons x p)
+  ( P)
+  ( y)
+  ( is-in-tail .y .x .p I) =
+  all-elements-is-prime-list-is-prime-list-ℕ p (pr2 P) y I
+
+is-prime-list-all-elements-is-prime-list-ℕ :
+  (p : list ℕ) → all-elements-is-prime-list-ℕ p → is-prime-list-ℕ p
+is-prime-list-all-elements-is-prime-list-ℕ nil P = raise-star
+is-prime-list-all-elements-is-prime-list-ℕ (cons x p) P =
+  P x (is-head x p) ,
+  is-prime-list-all-elements-is-prime-list-ℕ
+    ( p)
+    ( all-elements-is-prime-list-tail-ℕ p x P)
+
 is-prime-list-permute-list-ℕ :
   (p : list ℕ) (t : Permutation (length-list p)) → is-prime-list-ℕ p →
   is-prime-list-ℕ (permute-list p t)
-is-prime-list-permute-list-ℕ p t P = {!!}
+is-prime-list-permute-list-ℕ p t P =
+  is-prime-list-all-elements-is-prime-list-ℕ
+    ( permute-list p t)
+    ( λ x I → all-elements-is-prime-list-is-prime-list-ℕ
+      ( p)
+      ( P)
+      ( x)
+      ( is-in-list-is-in-permute-list
+        ( p)
+        ( t)
+        ( x)
+        ( I)))
 
-is-prime-decomposition-list-sorted-concatenation-ℕ :
-  (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
-  is-prime-decomposition-list-ℕ x p →
-  is-prime-decomposition-list-ℕ y q →
-  is-prime-decomposition-list-ℕ
-    ( mul-ℕ x y)
-    ( insertion-sort-list
-      ( ℕ-Decidable-Total-Order)
-      ( concat-list p q))
-pr1 (is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq) =
-  is-sorting-insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
-pr1
-  ( pr2
-    ( is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq)) =
-  {!!}
-pr2
-  ( pr2
-    ( is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq)) =
-  {!!}
-```
+-- is-prime-decomposition-list-sorted-concatenation-ℕ :
+--   (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
+--   is-prime-decomposition-list-ℕ x p →
+--   is-prime-decomposition-list-ℕ y q →
+--   is-prime-decomposition-list-ℕ
+--     ( mul-ℕ x y)
+--     ( insertion-sort-list
+--       ( ℕ-Decidable-Total-Order)
+--       ( concat-list p q))
+-- pr1 (is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq) =
+--   is-sorting-insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
+-- pr1
+--   ( pr2
+--     ( is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq)) =
+--   {!!}
+-- pr2
+--   ( pr2
+--     ( is-prime-decomposition-list-sorted-concatenation-ℕ x y H I p q Dp Dq)) =
+--   {!!}
+-- ```
