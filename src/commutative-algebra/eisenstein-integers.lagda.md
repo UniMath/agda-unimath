@@ -50,61 +50,71 @@ Eq-ℤ[ω] : ℤ[ω] → ℤ[ω] → UU lzero
 Eq-ℤ[ω] x y = (pr1 x ＝ pr1 y) × (pr2 x ＝ pr2 y)
 
 refl-Eq-ℤ[ω] : (x : ℤ[ω]) → Eq-ℤ[ω] x x
-refl-Eq-ℤ[ω] x = pair refl refl
+pr1 (refl-Eq-ℤ[ω] x) = refl
+pr2 (refl-Eq-ℤ[ω] x) = refl
 
 Eq-eq-ℤ[ω] : {x y : ℤ[ω]} → x ＝ y → Eq-ℤ[ω] x y
 Eq-eq-ℤ[ω] {x} refl = refl-Eq-ℤ[ω] x
 
 eq-Eq-ℤ[ω]' : {x y : ℤ[ω]} → Eq-ℤ[ω] x y → x ＝ y
-eq-Eq-ℤ[ω]' {pair a b} {pair .a .b} (pair refl refl) = refl
+eq-Eq-ℤ[ω]' {a , b} {.a , .b} (refl , refl) = refl
 
 eq-Eq-ℤ[ω] : {x y : ℤ[ω]} → (pr1 x ＝ pr1 y) → (pr2 x ＝ pr2 y) → x ＝ y
-eq-Eq-ℤ[ω] {pair a b} {pair .a .b} refl refl = refl
+eq-Eq-ℤ[ω] {a , b} {.a , .b} refl refl = refl
 ```
 
 ### The Eisenstein integer zero
 
 ```agda
 zero-ℤ[ω] : ℤ[ω]
-zero-ℤ[ω] = pair zero-ℤ zero-ℤ
+pr1 zero-ℤ[ω] = zero-ℤ
+pr2 zero-ℤ[ω] = zero-ℤ
 ```
 
 ### The Eisenstein integer one
 
 ```agda
 one-ℤ[ω] : ℤ[ω]
-one-ℤ[ω] = pair one-ℤ zero-ℤ
+pr1 one-ℤ[ω] = one-ℤ
+pr2 one-ℤ[ω] = zero-ℤ
 ```
 
 ### The inclusion of the integers into the Eisenstein integers
 
 ```agda
 eisenstein-int-ℤ : ℤ → ℤ[ω]
-eisenstein-int-ℤ x = pair x zero-ℤ
+pr1 (eisenstein-int-ℤ x) = x
+pr2 (eisenstein-int-ℤ x) = zero-ℤ
 ```
 
 ### The Eisenstein integer ω
 
 ```agda
 ω-ℤ[ω] : ℤ[ω]
-ω-ℤ[ω] = pair zero-ℤ one-ℤ
+pr1 ω-ℤ[ω] = zero-ℤ
+pr2 ω-ℤ[ω] = one-ℤ
 ```
 
 ### The Eisenstein integer -ω
 
 ```agda
 neg-ω-ℤ[ω] : ℤ[ω]
-neg-ω-ℤ[ω] = pair zero-ℤ neg-one-ℤ
+pr1 neg-ω-ℤ[ω] = zero-ℤ
+pr2 neg-ω-ℤ[ω] = neg-one-ℤ
 ```
 
 ### Addition of Eisenstein integers
 
 ```agda
 add-ℤ[ω] : ℤ[ω] → ℤ[ω] → ℤ[ω]
-add-ℤ[ω] (pair a b) (pair a' b') = pair (a +ℤ a') (b +ℤ b')
+pr1 (add-ℤ[ω] (a , b) (a' , b')) = a +ℤ a'
+pr2 (add-ℤ[ω] (a , b) (a' , b')) = b +ℤ b'
+
+infix 30 _+ℤ[ω]_
+_+ℤ[ω]_ = add-ℤ[ω]
 
 ap-add-ℤ[ω] :
-  {x x' y y' : ℤ[ω]} → x ＝ x' → y ＝ y' → add-ℤ[ω] x y ＝ add-ℤ[ω] x' y'
+  {x x' y y' : ℤ[ω]} → x ＝ x' → y ＝ y' → x +ℤ[ω] y ＝ x' +ℤ[ω] y'
 ap-add-ℤ[ω] p q = ap-binary add-ℤ[ω] p q
 ```
 
@@ -112,7 +122,8 @@ ap-add-ℤ[ω] p q = ap-binary add-ℤ[ω] p q
 
 ```agda
 neg-ℤ[ω] : ℤ[ω] → ℤ[ω]
-neg-ℤ[ω] (pair a b) = pair (neg-ℤ a) (neg-ℤ b)
+pr1 (neg-ℤ[ω] (a , b)) = neg-ℤ a
+pr2 (neg-ℤ[ω] (a , b)) = neg-ℤ b
 ```
 
 ### Multiplication of Eisenstein integers
@@ -121,13 +132,16 @@ Note that `(a + bω)(c + dω) = (ac - bd) + (ad + cb - bd)ω`
 
 ```agda
 mul-ℤ[ω] : ℤ[ω] → ℤ[ω] → ℤ[ω]
-mul-ℤ[ω] (pair a1 b1) (pair a2 b2) =
-  pair
-    ( (mul-ℤ a1 a2) +ℤ (neg-ℤ (mul-ℤ b1 b2)))
-    ( add-ℤ ((mul-ℤ a1 b2) +ℤ (mul-ℤ a2 b1)) (neg-ℤ (mul-ℤ b1 b2)))
+pr1 (mul-ℤ[ω] (a1 , b1) (a2 , b2)) =
+  (a1 *ℤ a2) +ℤ (neg-ℤ (b1 *ℤ b2))
+pr2 (mul-ℤ[ω] (a1 , b1) (a2 , b2)) =
+  ((a1 *ℤ b2) +ℤ (a2 *ℤ b1)) +ℤ (neg-ℤ (b1 *ℤ b2))
+
+infix 30 _*ℤ[ω]_
+_*ℤ[ω]_ = mul-ℤ[ω]
 
 ap-mul-ℤ[ω] :
-  {x x' y y' : ℤ[ω]} → x ＝ x' → y ＝ y' → mul-ℤ[ω] x y ＝ mul-ℤ[ω] x' y'
+  {x x' y y' : ℤ[ω]} → x ＝ x' → y ＝ y' → x *ℤ[ω] y ＝ x' *ℤ[ω] y'
 ap-mul-ℤ[ω] p q = ap-binary mul-ℤ[ω] p q
 ```
 
@@ -137,56 +151,57 @@ The conjugate of `a + bω` is `a + bω²`, which is `(a - b) - bω`.
 
 ```agda
 conjugate-ℤ[ω] : ℤ[ω] → ℤ[ω]
-conjugate-ℤ[ω] (pair a b) = pair (a +ℤ (neg-ℤ b)) (neg-ℤ b)
+pr1 (conjugate-ℤ[ω] (a , b)) = a +ℤ (neg-ℤ b)
+pr2 (conjugate-ℤ[ω] (a , b)) = neg-ℤ b
 
 conjugate-conjugate-ℤ[ω] :
   (x : ℤ[ω]) → conjugate-ℤ[ω] (conjugate-ℤ[ω] x) ＝ x
-conjugate-conjugate-ℤ[ω] (pair a b) =
+conjugate-conjugate-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω] (isretr-add-neg-ℤ' (neg-ℤ b) a) (neg-neg-ℤ b)
 ```
 
 ### The Eisenstein integers form a ring with conjugation
 
 ```agda
-left-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → add-ℤ[ω] zero-ℤ[ω] x ＝ x
-left-unit-law-add-ℤ[ω] (pair a b) = eq-Eq-ℤ[ω] refl refl
+left-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → zero-ℤ[ω] +ℤ[ω] x ＝ x
+left-unit-law-add-ℤ[ω] (a , b) = eq-Eq-ℤ[ω] refl refl
 
-right-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → add-ℤ[ω] x zero-ℤ[ω] ＝ x
-right-unit-law-add-ℤ[ω] (pair a b) =
+right-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → x +ℤ[ω] zero-ℤ[ω] ＝ x
+right-unit-law-add-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω] (right-unit-law-add-ℤ a) (right-unit-law-add-ℤ b)
 
 associative-add-ℤ[ω] :
-  (x y z : ℤ[ω]) → add-ℤ[ω] (add-ℤ[ω] x y) z ＝ add-ℤ[ω] x (add-ℤ[ω] y z)
-associative-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
+  (x y z : ℤ[ω]) → (x +ℤ[ω] y) +ℤ[ω] z ＝ x +ℤ[ω] (y +ℤ[ω] z)
+associative-add-ℤ[ω] (a , b) (c , d) (e , f) =
   eq-Eq-ℤ[ω] (associative-add-ℤ a c e) (associative-add-ℤ b d f)
 
 left-inverse-law-add-ℤ[ω] :
-  (x : ℤ[ω]) → add-ℤ[ω] (neg-ℤ[ω] x) x ＝ zero-ℤ[ω]
-left-inverse-law-add-ℤ[ω] (pair a b) =
+  (x : ℤ[ω]) → (neg-ℤ[ω] x) +ℤ[ω] x ＝ zero-ℤ[ω]
+left-inverse-law-add-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω] (left-inverse-law-add-ℤ a) (left-inverse-law-add-ℤ b)
 
 right-inverse-law-add-ℤ[ω] :
-  (x : ℤ[ω]) → add-ℤ[ω] x (neg-ℤ[ω] x) ＝ zero-ℤ[ω]
-right-inverse-law-add-ℤ[ω] (pair a b) =
+  (x : ℤ[ω]) → x +ℤ[ω] (neg-ℤ[ω] x) ＝ zero-ℤ[ω]
+right-inverse-law-add-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω] (right-inverse-law-add-ℤ a) (right-inverse-law-add-ℤ b)
 
 commutative-add-ℤ[ω] :
-  (x y : ℤ[ω]) → add-ℤ[ω] x y ＝ add-ℤ[ω] y x
-commutative-add-ℤ[ω] (pair a b) (pair a' b') =
+  (x y : ℤ[ω]) → x +ℤ[ω] y ＝ y +ℤ[ω] x
+commutative-add-ℤ[ω] (a , b) (a' , b') =
   eq-Eq-ℤ[ω] (commutative-add-ℤ a a') (commutative-add-ℤ b b')
 
 left-unit-law-mul-ℤ[ω] :
-  (x : ℤ[ω]) → mul-ℤ[ω] one-ℤ[ω] x ＝ x
-left-unit-law-mul-ℤ[ω] (pair a b) =
+  (x : ℤ[ω]) → one-ℤ[ω] *ℤ[ω] x ＝ x
+left-unit-law-mul-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω]
     ( right-unit-law-add-ℤ a)
-    ( ( right-unit-law-add-ℤ (b +ℤ (mul-ℤ a zero-ℤ))) ∙
+    ( ( right-unit-law-add-ℤ (b +ℤ (a *ℤ zero-ℤ))) ∙
       ( ( ap (add-ℤ b) (right-zero-law-mul-ℤ a)) ∙
         ( right-unit-law-add-ℤ b)))
 
 right-unit-law-mul-ℤ[ω] :
-  (x : ℤ[ω]) → mul-ℤ[ω] x one-ℤ[ω] ＝ x
-right-unit-law-mul-ℤ[ω] (pair a b) =
+  (x : ℤ[ω]) → x *ℤ[ω] one-ℤ[ω] ＝ x
+right-unit-law-mul-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω]
     ( ( ap-add-ℤ (right-unit-law-mul-ℤ a) (ap neg-ℤ (right-zero-law-mul-ℤ b))) ∙
       ( right-unit-law-add-ℤ a))
@@ -196,106 +211,106 @@ right-unit-law-mul-ℤ[ω] (pair a b) =
       ( right-unit-law-add-ℤ b))
 
 commutative-mul-ℤ[ω] :
-  (x y : ℤ[ω]) → mul-ℤ[ω] x y ＝ mul-ℤ[ω] y x
-commutative-mul-ℤ[ω] (pair a b) (pair c d) =
+  (x y : ℤ[ω]) → x *ℤ[ω] y ＝ y *ℤ[ω] x
+commutative-mul-ℤ[ω] (a , b) (c , d) =
   eq-Eq-ℤ[ω]
     ( ap-add-ℤ (commutative-mul-ℤ a c) (ap neg-ℤ (commutative-mul-ℤ b d)))
     ( ap-add-ℤ
-      ( commutative-add-ℤ (mul-ℤ a d) (mul-ℤ c b))
+      ( commutative-add-ℤ (a *ℤ d) (c *ℤ b))
       ( ap neg-ℤ (commutative-mul-ℤ b d)))
 
 associative-mul-ℤ[ω] :
-  (x y z : ℤ[ω]) → mul-ℤ[ω] (mul-ℤ[ω] x y) z ＝ mul-ℤ[ω] x (mul-ℤ[ω] y z)
-associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
+  (x y z : ℤ[ω]) → (x *ℤ[ω] y) *ℤ[ω] z ＝ x *ℤ[ω] (y *ℤ[ω] z)
+associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
   eq-Eq-ℤ[ω]
     ( ( ap-add-ℤ
         ( ( right-distributive-mul-add-ℤ
-            ( mul-ℤ a c)
-            ( neg-ℤ (mul-ℤ b d))
+            ( a *ℤ c)
+            ( neg-ℤ (b *ℤ d))
             ( e)) ∙
           ( ap-add-ℤ
             ( associative-mul-ℤ a c e)
-            ( ( left-negative-law-mul-ℤ (mul-ℤ b d) e) ∙
+            ( ( left-negative-law-mul-ℤ (b *ℤ d) e) ∙
               ( ap neg-ℤ (associative-mul-ℤ b d e)))))
         ( ( ap
             ( neg-ℤ)
             ( ( right-distributive-mul-add-ℤ
-                ( (mul-ℤ a d) +ℤ (mul-ℤ c b))
-                ( neg-ℤ (mul-ℤ b d))
+                ( (a *ℤ d) +ℤ (c *ℤ b))
+                ( neg-ℤ (b *ℤ d))
                 ( f)) ∙
               ( ap-add-ℤ
-                ( ( right-distributive-mul-add-ℤ (mul-ℤ a d) (mul-ℤ c b) f) ∙
+                ( ( right-distributive-mul-add-ℤ (a *ℤ d) (c *ℤ b) f) ∙
                   ( ap-add-ℤ
                     ( associative-mul-ℤ a d f)
                     ( ( ap (mul-ℤ' f) (commutative-mul-ℤ c b)) ∙
                       ( associative-mul-ℤ b c f))))
-                ( ( left-negative-law-mul-ℤ (mul-ℤ b d) f) ∙
+                ( ( left-negative-law-mul-ℤ (b *ℤ d) f) ∙
                   ( ap neg-ℤ (associative-mul-ℤ b d f)))))) ∙
           ( ( distributive-neg-add-ℤ
-              ( add-ℤ (mul-ℤ a (mul-ℤ d f)) (mul-ℤ b (mul-ℤ c f)))
-              ( neg-ℤ (mul-ℤ b (mul-ℤ d f)))) ∙
+              ( add-ℤ (a *ℤ (d *ℤ f)) (b *ℤ (c *ℤ f)))
+              ( neg-ℤ (b *ℤ (d *ℤ f)))) ∙
             ( ( ap-add-ℤ
                 ( distributive-neg-add-ℤ
-                  ( mul-ℤ a (mul-ℤ d f))
-                  ( mul-ℤ b (mul-ℤ c f)))
+                  ( a *ℤ (d *ℤ f))
+                  ( b *ℤ (c *ℤ f)))
                 ( refl
-                  { x = neg-ℤ (neg-ℤ (mul-ℤ b (mul-ℤ d f)))})) ∙
+                  { x = neg-ℤ (neg-ℤ (b *ℤ (d *ℤ f)))})) ∙
               ( associative-add-ℤ
-                ( neg-ℤ (mul-ℤ a (mul-ℤ d f)))
-                ( neg-ℤ (mul-ℤ b (mul-ℤ c f)))
-                ( neg-ℤ (neg-ℤ (mul-ℤ b (mul-ℤ d f))))))))) ∙
+                ( neg-ℤ (a *ℤ (d *ℤ f)))
+                ( neg-ℤ (b *ℤ (c *ℤ f)))
+                ( neg-ℤ (neg-ℤ (b *ℤ (d *ℤ f))))))))) ∙
       ( ( interchange-law-add-add-ℤ
-          ( mul-ℤ a (mul-ℤ c e))
-          ( neg-ℤ (mul-ℤ b (mul-ℤ d e)))
-          ( neg-ℤ (mul-ℤ a (mul-ℤ d f)))
+          ( a *ℤ (c *ℤ e))
+          ( neg-ℤ (b *ℤ (d *ℤ e)))
+          ( neg-ℤ (a *ℤ (d *ℤ f)))
           ( add-ℤ
-            ( neg-ℤ (mul-ℤ b (mul-ℤ c f)))
-            ( neg-ℤ (neg-ℤ (mul-ℤ b (mul-ℤ d f)))))) ∙
+            ( neg-ℤ (b *ℤ (c *ℤ f)))
+            ( neg-ℤ (neg-ℤ (b *ℤ (d *ℤ f)))))) ∙
         ( ap-add-ℤ
           ( ( ap
-              ( add-ℤ (mul-ℤ a (mul-ℤ c e)))
-              ( inv ( right-negative-law-mul-ℤ a (mul-ℤ d f)))) ∙
+              ( add-ℤ (a *ℤ (c *ℤ e)))
+              ( inv ( right-negative-law-mul-ℤ a (d *ℤ f)))) ∙
             ( inv
-              ( left-distributive-mul-add-ℤ a (mul-ℤ c e) (neg-ℤ (mul-ℤ d f)))))
+              ( left-distributive-mul-add-ℤ a (c *ℤ e) (neg-ℤ (d *ℤ f)))))
           ( ( ap
-              ( add-ℤ (neg-ℤ (mul-ℤ b (mul-ℤ d e))))
+              ( add-ℤ (neg-ℤ (b *ℤ (d *ℤ e))))
               ( inv
                 ( distributive-neg-add-ℤ
-                  ( mul-ℤ b (mul-ℤ c f))
-                  ( neg-ℤ (mul-ℤ b (mul-ℤ d f)))))) ∙
+                  ( b *ℤ (c *ℤ f))
+                  ( neg-ℤ (b *ℤ (d *ℤ f)))))) ∙
             ( ( inv
                 ( distributive-neg-add-ℤ
-                  ( mul-ℤ b (mul-ℤ d e))
+                  ( b *ℤ (d *ℤ e))
                   ( add-ℤ
-                    ( mul-ℤ b (mul-ℤ c f))
-                    ( neg-ℤ (mul-ℤ b (mul-ℤ d f)))))) ∙
+                    ( b *ℤ (c *ℤ f))
+                    ( neg-ℤ (b *ℤ (d *ℤ f)))))) ∙
               ( ap
                 ( neg-ℤ)
                 ( ( ap
-                    ( add-ℤ (mul-ℤ b (mul-ℤ d e)))
+                    ( add-ℤ (b *ℤ (d *ℤ e)))
                     ( ( ap
-                        ( add-ℤ (mul-ℤ b (mul-ℤ c f)))
-                        ( inv (right-negative-law-mul-ℤ b (mul-ℤ d f)))) ∙
+                        ( add-ℤ (b *ℤ (c *ℤ f)))
+                        ( inv (right-negative-law-mul-ℤ b (d *ℤ f)))) ∙
                       ( inv
                         ( left-distributive-mul-add-ℤ b
-                          ( mul-ℤ c f)
-                          ( neg-ℤ (mul-ℤ d f)))))) ∙
+                          ( c *ℤ f)
+                          ( neg-ℤ (d *ℤ f)))))) ∙
                   ( ( inv
                       ( left-distributive-mul-add-ℤ b
-                        ( mul-ℤ d e)
-                        ( (mul-ℤ c f) +ℤ (neg-ℤ (mul-ℤ d f))))) ∙
+                        ( d *ℤ e)
+                        ( (c *ℤ f) +ℤ (neg-ℤ (d *ℤ f))))) ∙
                     ( ap
                       ( mul-ℤ b)
                       ( ( inv
                           ( associative-add-ℤ
-                            ( mul-ℤ d e)
-                            ( mul-ℤ c f)
-                            ( neg-ℤ (mul-ℤ d f)))) ∙
+                            ( d *ℤ e)
+                            ( c *ℤ f)
+                            ( neg-ℤ (d *ℤ f)))) ∙
                         ( ap
-                          ( add-ℤ' (neg-ℤ (mul-ℤ d f)))
-                          ( ( commutative-add-ℤ (mul-ℤ d e) (mul-ℤ c f)) ∙
+                          ( add-ℤ' (neg-ℤ (d *ℤ f)))
+                          ( ( commutative-add-ℤ (d *ℤ e) (c *ℤ f)) ∙
                             ( ap
-                              ( add-ℤ (mul-ℤ c f))
+                              ( add-ℤ (c *ℤ f))
                               ( commutative-mul-ℤ d e))))))))))))))
     ( ( ap-add-ℤ
         ( ( ap-add-ℤ
@@ -314,7 +329,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                         ( ( associative-mul-ℤ a d e) ∙
                           ( ap (mul-ℤ a) (commutative-mul-ℤ d e))))
                       ( ( ap (mul-ℤ e) (commutative-mul-ℤ c b)) ∙
-                        ( ( commutative-mul-ℤ e (mul-ℤ b c)) ∙
+                        ( ( commutative-mul-ℤ e (b *ℤ c)) ∙
                           ( ( associative-mul-ℤ b c e) ∙
                             ( commutative-mul-ℤ b ce))))))
                   ( ( right-negative-law-mul-ℤ e bd) ∙
@@ -326,40 +341,40 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                         ( neg-ℤ)
                         ( ap (mul-ℤ b) (commutative-mul-ℤ d e)))))) ∙
                 ( associative-add-ℤ
-                  ( mul-ℤ a ed)
-                  ( mul-ℤ ce b)
-                  ( neg-ℤ (mul-ℤ b ed)))))) ∙
+                  ( a *ℤ ed)
+                  ( ce *ℤ b)
+                  ( neg-ℤ (b *ℤ ed)))))) ∙
           ( ( interchange-law-add-add-ℤ
-              ( mul-ℤ a cf)
-              ( mul-ℤ (neg-ℤ df) b)
-              ( mul-ℤ a ed)
-              ( (mul-ℤ ce b) +ℤ (neg-ℤ (mul-ℤ b ed)))) ∙
+              ( a *ℤ cf)
+              ( (neg-ℤ df) *ℤ b)
+              ( a *ℤ ed)
+              ( (ce *ℤ b) +ℤ (neg-ℤ (b *ℤ ed)))) ∙
             ( ( ap-add-ℤ
                 ( inv (left-distributive-mul-add-ℤ a cf ed))
                 ( ( inv
                     ( associative-add-ℤ
-                      ( mul-ℤ (neg-ℤ df) b)
-                      ( mul-ℤ ce b)
-                      ( neg-ℤ (mul-ℤ b ed)))) ∙
+                      ( (neg-ℤ df) *ℤ b)
+                      ( ce *ℤ b)
+                      ( neg-ℤ (b *ℤ ed)))) ∙
                   ( ap
-                    ( add-ℤ' (neg-ℤ (mul-ℤ b ed)))
-                    ( ( commutative-add-ℤ (mul-ℤ (neg-ℤ df) b) (mul-ℤ ce b)) ∙
+                    ( add-ℤ' (neg-ℤ (b *ℤ ed)))
+                    ( ( commutative-add-ℤ ((neg-ℤ df) *ℤ b) (ce *ℤ b)) ∙
                       ( inv
                         ( right-distributive-mul-add-ℤ ce (neg-ℤ df) b)))))) ∙
               ( ( inv
                   ( associative-add-ℤ
-                    ( mul-ℤ a (cf +ℤ ed))
+                    ( a *ℤ (cf +ℤ ed))
                     ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
-                    ( neg-ℤ (mul-ℤ b ed)))) ∙
+                    ( neg-ℤ (b *ℤ ed)))) ∙
                 ( ( ap
-                    ( add-ℤ' (neg-ℤ (mul-ℤ b ed)))
+                    ( add-ℤ' (neg-ℤ (b *ℤ ed)))
                     ( commutative-add-ℤ
-                      ( mul-ℤ a (cf +ℤ ed))
+                      ( a *ℤ (cf +ℤ ed))
                       ( mul-ℤ (ce +ℤ (neg-ℤ df)) b))) ∙
                   ( associative-add-ℤ
                     ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
-                    ( mul-ℤ a (cf +ℤ ed))
-                    ( neg-ℤ (mul-ℤ b ed))))))))
+                    ( a *ℤ (cf +ℤ ed))
+                    ( neg-ℤ (b *ℤ ed))))))))
         ( ( inv (left-negative-law-mul-ℤ ((ad +ℤ cb) +ℤ (neg-ℤ bd)) f)) ∙
           ( ( ap
               ( mul-ℤ' f)
@@ -385,18 +400,18 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                               ( commutative-mul-ℤ c b)) ∙
                             ( associative-mul-ℤ b c f))))))
                   ( ( associative-mul-ℤ b d f) ∙
-                    ( ( inv (neg-neg-ℤ (mul-ℤ b df))) ∙
+                    ( ( inv (neg-neg-ℤ (b *ℤ df))) ∙
                       ( ap neg-ℤ (inv (right-negative-law-mul-ℤ b df)))))) ∙
                 ( ( associative-add-ℤ
-                    ( mul-ℤ a ( neg-ℤ df))
-                    ( neg-ℤ (mul-ℤ b cf))
-                    ( neg-ℤ (mul-ℤ b (neg-ℤ df)))) ∙
+                    ( a *ℤ ( neg-ℤ df))
+                    ( neg-ℤ (b *ℤ cf))
+                    ( neg-ℤ (b *ℤ (neg-ℤ df)))) ∙
                   ( ap
-                    ( add-ℤ (mul-ℤ a (neg-ℤ df)))
+                    ( add-ℤ (a *ℤ (neg-ℤ df)))
                     ( ( inv
                         ( distributive-neg-add-ℤ
-                          ( mul-ℤ b cf)
-                          ( mul-ℤ b (neg-ℤ df)))) ∙
+                          ( b *ℤ cf)
+                          ( b *ℤ (neg-ℤ df)))) ∙
                       ( ap
                         ( neg-ℤ)
                         ( inv
@@ -406,24 +421,24 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                             ( neg-ℤ df)))))))))))) ∙
       ( ( associative-add-ℤ
           ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
-          ( add-ℤ (mul-ℤ a (cf +ℤ ed)) (neg-ℤ (mul-ℤ b ed)))
+          ( add-ℤ (a *ℤ (cf +ℤ ed)) (neg-ℤ (b *ℤ ed)))
           ( add-ℤ
-            ( mul-ℤ a (neg-ℤ df))
-            ( neg-ℤ (mul-ℤ b (cf +ℤ (neg-ℤ df)))))) ∙
+            ( a *ℤ (neg-ℤ df))
+            ( neg-ℤ (b *ℤ (cf +ℤ (neg-ℤ df)))))) ∙
         ( ( ( ap
               ( add-ℤ (mul-ℤ (ce +ℤ (neg-ℤ df)) b))
               ( ( interchange-law-add-add-ℤ
-                  ( mul-ℤ a (cf +ℤ ed))
-                  ( neg-ℤ (mul-ℤ b ed))
-                  ( mul-ℤ a (neg-ℤ df))
-                  ( neg-ℤ (mul-ℤ b (cf +ℤ (neg-ℤ df))))) ∙
+                  ( a *ℤ (cf +ℤ ed))
+                  ( neg-ℤ (b *ℤ ed))
+                  ( a *ℤ (neg-ℤ df))
+                  ( neg-ℤ (b *ℤ (cf +ℤ (neg-ℤ df))))) ∙
                 ( ap-add-ℤ
                   ( inv
                     ( left-distributive-mul-add-ℤ a (cf +ℤ ed) (neg-ℤ df)))
                   ( ( inv
                       ( distributive-neg-add-ℤ
-                        ( mul-ℤ b ed)
-                        ( mul-ℤ b (cf +ℤ (neg-ℤ df))))) ∙
+                        ( b *ℤ ed)
+                        ( b *ℤ (cf +ℤ (neg-ℤ df))))) ∙
                     ( ap
                       ( neg-ℤ)
                       ( ( inv
@@ -439,61 +454,61 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
             ( inv
               ( associative-add-ℤ
                 ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
-                ( mul-ℤ a ((cf +ℤ ed) +ℤ (neg-ℤ df)))
-                ( neg-ℤ (mul-ℤ b ((cf +ℤ ed) +ℤ (neg-ℤ df))))))) ∙
+                ( a *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df)))
+                ( neg-ℤ (b *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df))))))) ∙
           ( ap
-            ( add-ℤ' (neg-ℤ (mul-ℤ b ((cf +ℤ ed) +ℤ (neg-ℤ df)))))
+            ( add-ℤ' (neg-ℤ (b *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df)))))
             ( commutative-add-ℤ
               ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
-              ( mul-ℤ a ((cf +ℤ ed) +ℤ (neg-ℤ df))))))))
+              ( a *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df))))))))
     where
-    ac = mul-ℤ a c
-    bd = mul-ℤ b d
-    ad = mul-ℤ a d
-    cb = mul-ℤ c b
-    ce = mul-ℤ c e
-    cf = mul-ℤ c f
-    ed = mul-ℤ e d
-    df = mul-ℤ d f
+    ac = a *ℤ c
+    bd = b *ℤ d
+    ad = a *ℤ d
+    cb = c *ℤ b
+    ce = c *ℤ e
+    cf = c *ℤ f
+    ed = e *ℤ d
+    df = d *ℤ f
 
 left-distributive-mul-add-ℤ[ω] :
   (x y z : ℤ[ω]) →
-  mul-ℤ[ω] x (add-ℤ[ω] y z) ＝ add-ℤ[ω] (mul-ℤ[ω] x y) (mul-ℤ[ω] x z)
-left-distributive-mul-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
+  x *ℤ[ω] (y +ℤ[ω] z) ＝ (x *ℤ[ω] y) +ℤ[ω] (x *ℤ[ω] z)
+left-distributive-mul-add-ℤ[ω] (a , b) (c , d) (e , f) =
   eq-Eq-ℤ[ω]
     ( ( ap-add-ℤ
         ( left-distributive-mul-add-ℤ a c e)
         ( ( ap
             ( neg-ℤ)
             ( left-distributive-mul-add-ℤ b d f)) ∙
-          ( distributive-neg-add-ℤ (mul-ℤ b d) (mul-ℤ b f)))) ∙
+          ( distributive-neg-add-ℤ (b *ℤ d) (b *ℤ f)))) ∙
       ( interchange-law-add-add-ℤ
-        ( mul-ℤ a c)
-        ( mul-ℤ a e)
-        ( neg-ℤ (mul-ℤ b d))
-        ( neg-ℤ (mul-ℤ b f))))
+        ( a *ℤ c)
+        ( a *ℤ e)
+        ( neg-ℤ (b *ℤ d))
+        ( neg-ℤ (b *ℤ f))))
     ( ( ap-add-ℤ
         ( ( ap-add-ℤ
             ( left-distributive-mul-add-ℤ a d f)
             ( right-distributive-mul-add-ℤ c e b)) ∙
           ( interchange-law-add-add-ℤ
-            ( mul-ℤ a d)
-            ( mul-ℤ a f)
-            ( mul-ℤ c b)
-            ( mul-ℤ e b)))
+            ( a *ℤ d)
+            ( a *ℤ f)
+            ( c *ℤ b)
+            ( e *ℤ b)))
         ( ( ap neg-ℤ (left-distributive-mul-add-ℤ b d f)) ∙
-          ( distributive-neg-add-ℤ (mul-ℤ b d) (mul-ℤ b f)))) ∙
+          ( distributive-neg-add-ℤ (b *ℤ d) (b *ℤ f)))) ∙
       ( interchange-law-add-add-ℤ
-        ( (mul-ℤ a d) +ℤ (mul-ℤ c b))
-        ( (mul-ℤ a f) +ℤ (mul-ℤ e b))
-        ( neg-ℤ (mul-ℤ b d))
-        ( neg-ℤ (mul-ℤ b f))))
+        ( (a *ℤ d) +ℤ (c *ℤ b))
+        ( (a *ℤ f) +ℤ (e *ℤ b))
+        ( neg-ℤ (b *ℤ d))
+        ( neg-ℤ (b *ℤ f))))
 
 right-distributive-mul-add-ℤ[ω] :
   (x y z : ℤ[ω]) →
-  mul-ℤ[ω] (add-ℤ[ω] x y) z ＝ add-ℤ[ω] (mul-ℤ[ω] x z) (mul-ℤ[ω] y z)
+  (x +ℤ[ω] y) *ℤ[ω] z ＝ (x *ℤ[ω] z) +ℤ[ω] (y *ℤ[ω] z)
 right-distributive-mul-add-ℤ[ω] x y z =
-  ( commutative-mul-ℤ[ω] (add-ℤ[ω] x y) z) ∙
+  ( commutative-mul-ℤ[ω] (x +ℤ[ω] y) z) ∙
   ( ( left-distributive-mul-add-ℤ[ω] z x y) ∙
     ( ap-add-ℤ[ω] (commutative-mul-ℤ[ω] z x) (commutative-mul-ℤ[ω] z y)))
 
