@@ -7,7 +7,6 @@ module foundation.0-connected-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.fiber-inclusions
 open import foundation.functoriality-set-truncation
@@ -20,6 +19,7 @@ open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

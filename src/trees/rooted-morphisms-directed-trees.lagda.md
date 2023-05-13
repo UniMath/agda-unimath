@@ -19,8 +19,6 @@ open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps
-
 open import trees.bases-directed-trees
 open import trees.directed-trees
 open import trees.morphisms-directed-trees

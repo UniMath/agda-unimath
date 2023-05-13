@@ -7,7 +7,6 @@ module order-theory.decidable-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.identity-types

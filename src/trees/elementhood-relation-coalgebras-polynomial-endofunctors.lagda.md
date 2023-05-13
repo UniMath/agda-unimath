@@ -9,7 +9,6 @@ module trees.elementhood-relation-coalgebras-polynomial-endofunctors where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

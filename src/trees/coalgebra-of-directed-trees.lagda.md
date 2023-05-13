@@ -8,15 +8,12 @@ module trees.coalgebra-of-directed-trees where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
 open import trees.bases-directed-trees
 open import trees.coalgebras-polynomial-endofunctors
 open import trees.directed-trees
 open import trees.fibers-directed-trees
-open import trees.morphisms-coalgebras-polynomial-endofunctors
-open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors
 ```
 
 </details>

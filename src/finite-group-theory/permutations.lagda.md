@@ -27,10 +27,8 @@ open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.equivalences-maybe
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
 open import foundation.propositional-truncations
@@ -50,7 +48,6 @@ open import lists.lists
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

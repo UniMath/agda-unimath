@@ -13,14 +13,12 @@ open import commutative-algebra.homomorphisms-commutative-semirings
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
-open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-monoids
 
 open import ring-theory.homomorphisms-rings

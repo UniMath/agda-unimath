@@ -8,7 +8,6 @@ module trees.functoriality-fiber-directed-tree where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
