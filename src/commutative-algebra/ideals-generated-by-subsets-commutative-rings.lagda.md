@@ -12,8 +12,8 @@ open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.identity-types
-open import foundation.powersets
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import lists.concatenation-lists

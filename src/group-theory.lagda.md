@@ -60,6 +60,7 @@ open import group-theory.function-groups public
 open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
+open import group-theory.generating-sets-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public
 open import group-theory.homomorphisms-abelian-groups public
@@ -129,6 +130,7 @@ open import group-theory.submonoids public
 open import group-theory.submonoids-commutative-monoids public
 open import group-theory.subsemigroups public
 open import group-theory.subsets-commutative-monoids public
+open import group-theory.subsets-groups public
 open import group-theory.subsets-monoids public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public

@@ -57,6 +57,7 @@ open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
+open import group-theory.generating-sets-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-generated-subgroups
@@ -747,7 +748,7 @@ module _
           ( is-transposition-permutation-Prop {l2 = l1})
           ( tr
             ( λ s →
-              is-generating-subset-Group
+              is-generating-set-Group
                 ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s))
                 ( is-transposition-permutation-Prop))
             ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -766,7 +767,7 @@ module _
                   ( is-transposition-permutation-Prop)
                   ( tr
                     ( λ s₁ →
-                      is-generating-subset-Group
+                      is-generating-set-Group
                         ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                         ( is-transposition-permutation-Prop))
                     ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -789,7 +790,7 @@ module _
                   ( is-transposition-permutation-Prop)
                   ( tr
                     ( λ s₁ →
-                      is-generating-subset-Group
+                      is-generating-set-Group
                         ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                         ( is-transposition-permutation-Prop))
                     ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -829,7 +830,7 @@ module _
               ( is-transposition-permutation-Prop)
               ( tr
                 ( λ s₁ →
-                  is-generating-subset-Group
+                  is-generating-set-Group
                     ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                     ( is-transposition-permutation-Prop))
                 ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -1019,7 +1020,7 @@ module _
                         ( is-transposition-permutation-Prop)
                         ( tr
                           ( λ s →
-                            is-generating-subset-Group
+                            is-generating-set-Group
                               ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s))
                               ( is-transposition-permutation-Prop))
                           ( eq-is-prop

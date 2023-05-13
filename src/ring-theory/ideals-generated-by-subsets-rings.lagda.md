@@ -12,9 +12,9 @@ open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import lists.concatenation-lists

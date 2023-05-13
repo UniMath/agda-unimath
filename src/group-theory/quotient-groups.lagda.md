@@ -54,7 +54,7 @@ module _
   nullifies-normal-subgroup-hom-Group-Prop :
     type-hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Group-Prop f H =
-    contains-Normal-Subgroup-Prop G H (kernel-hom-Group G K f)
+    leq-Normal-Subgroup-Prop G H (kernel-hom-Group G K f)
 
   nullifies-normal-subgroup-hom-Group :
     type-hom-Group G K → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)

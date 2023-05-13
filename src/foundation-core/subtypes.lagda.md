@@ -33,6 +33,8 @@ type of a subtype `P` of `A` is the total space `Σ A B`.
 
 ## Definition
 
+### Subtypes
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
@@ -81,7 +83,46 @@ module _
   is-closed-under-eq-subtype' p refl = p
 ```
 
+### The containment relation on subtypes
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  leq-subtype-Prop :
+    {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+  leq-subtype-Prop P Q =
+    Π-Prop A (λ x → hom-Prop (P x) (Q x))
+
+  _⊆_ :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
+  P ⊆ Q = type-Prop (leq-subtype-Prop P Q)
+
+  is-prop-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
+  is-prop-leq-subtype P Q =
+    is-prop-type-Prop (leq-subtype-Prop P Q)
+```
+
 ## Properties
+
+### The containment relation on subtypes is a preordering
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  refl-leq-subtype : {l2 : Level} (P : subtype l2 A) → P ⊆ P
+  refl-leq-subtype P x = id
+
+  transitive-leq-subtype :
+    {l2 l3 l4 : Level}
+    (P : subtype l2 A) (Q : subtype l3 A) (R : subtype l4 A) →
+    Q ⊆ R → P ⊆ Q → P ⊆ R
+  transitive-leq-subtype P Q R H K x = H x ∘ K x
+```
 
 ### Equality in subtypes
 

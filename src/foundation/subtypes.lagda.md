@@ -11,12 +11,16 @@ open import foundation-core.subtypes public
 
 open import foundation.equality-dependent-function-types
 open import foundation.propositional-extensionality
+open import foundation.type-theoretic-principle-of-choice
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -72,6 +76,12 @@ module _
   has-same-elements-subtype : {l3 : Level} → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-subtype Q = type-Prop (has-same-elements-subtype-Prop Q)
 
+  is-prop-has-same-elements-subtype :
+    {l3 : Level} (Q : subtype l3 A) →
+    is-prop (has-same-elements-subtype Q)
+  is-prop-has-same-elements-subtype Q =
+    is-prop-type-Prop (has-same-elements-subtype-Prop Q)
+
   refl-has-same-elements-subtype : has-same-elements-subtype P
   pr1 (refl-has-same-elements-subtype x) = id
   pr2 (refl-has-same-elements-subtype x) = id
@@ -83,24 +93,50 @@ module _
       ( λ x Q → P x ⇔ Q)
       ( λ x → is-contr-total-iff (P x))
 
-  extensionality-subtype :
-    (Q : subtype l2 A) → (P ＝ Q) ≃ has-same-elements-subtype Q
-  extensionality-subtype =
-    extensionality-Π P
-      ( λ x Q → P x ⇔ Q)
-      ( λ x Q → propositional-extensionality (P x) Q)
-
   has-same-elements-eq-subtype :
     (Q : subtype l2 A) → (P ＝ Q) → has-same-elements-subtype Q
-  has-same-elements-eq-subtype Q = map-equiv (extensionality-subtype Q)
+  has-same-elements-eq-subtype .P refl =
+    refl-has-same-elements-subtype
+
+  is-equiv-has-same-elements-eq-subtype :
+    (Q : subtype l2 A) → is-equiv (has-same-elements-eq-subtype Q)
+  is-equiv-has-same-elements-eq-subtype =
+    fundamental-theorem-id
+      is-contr-total-has-same-elements-subtype
+      has-same-elements-eq-subtype
+
+  extensionality-subtype :
+    (Q : subtype l2 A) → (P ＝ Q) ≃ has-same-elements-subtype Q
+  pr1 (extensionality-subtype Q) = has-same-elements-eq-subtype Q
+  pr2 (extensionality-subtype Q) = is-equiv-has-same-elements-eq-subtype Q
 
   eq-has-same-elements-subtype :
     (Q : subtype l2 A) → has-same-elements-subtype Q → P ＝ Q
-  eq-has-same-elements-subtype Q = map-inv-equiv (extensionality-subtype Q)
+  eq-has-same-elements-subtype Q =
+    map-inv-equiv (extensionality-subtype Q)
+```
 
-  refl-extensionality-subtype :
-    map-equiv (extensionality-subtype P) refl ＝ (λ x → pair id id)
-  refl-extensionality-subtype = refl
+### The containment relation is antisymmetric
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  equiv-antisymmetric-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
+    (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
+  equiv-antisymmetric-leq-subtype P Q H K x =
+    equiv-prop
+      ( is-prop-is-in-subtype P x)
+      ( is-prop-is-in-subtype Q x)
+      ( H x)
+      ( K x)
+  
+  antisymmetric-leq-subtype :
+    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
+  antisymmetric-leq-subtype P Q H K =
+    eq-has-same-elements-subtype P Q (λ x → (H x , K x))
 ```
 
 ### The type of all subtypes of a type is a set
@@ -111,7 +147,7 @@ is-set-subtype :
 is-set-subtype {l1} {l2} {A} P Q =
   is-prop-equiv
     ( extensionality-subtype P Q)
-    ( is-prop-Π (λ x → is-prop-iff-Prop (P x) (Q x)))
+    ( is-prop-has-same-elements-subtype P Q)
 
 subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set {l1} l2 A) = subtype l2 A

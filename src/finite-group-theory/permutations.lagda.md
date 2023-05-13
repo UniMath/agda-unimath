@@ -41,6 +41,7 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.generating-sets-groups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 
@@ -120,7 +121,7 @@ module _
   where
 
   is-generated-transposition-symmetric-Fin-Level :
-    is-generating-subset-Group
+    is-generating-set-Group
       ( symmetric-Group (set-UU-Fin n X))
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f =

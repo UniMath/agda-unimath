@@ -36,7 +36,7 @@ standard-closed-subset-zariski-topology-Commutative-Ring :
   subtype l3 (type-Commutative-Ring A) →
   subtype (l1 ⊔ l2 ⊔ l3) (prime-ideal-Commutative-Ring l2 A)
 standard-closed-subset-zariski-topology-Commutative-Ring A U P =
-  inclusion-rel-subtype-Prop U (subset-prime-ideal-Commutative-Ring A P)
+  leq-subtype-Prop U (subset-prime-ideal-Commutative-Ring A P)
 
 is-closed-subset-zariski-topology-Commutative-Ring :
   {l1 l2 l3 : Level} (A : Commutative-Ring l1)

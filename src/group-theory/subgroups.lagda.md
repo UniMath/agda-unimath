@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
+open import group-theory.subsets-groups
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
@@ -35,19 +36,6 @@ open import order-theory.preorders
 </details>
 
 ## Definitions
-
-### Subsets of groups
-
-```agda
-subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-subset-Group l G = subtype l (type-Group G)
-
-is-set-subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
-is-set-subset-Group l G =
-  is-set-function-type is-set-type-Prop
-```
 
 ### Subgroups
 
@@ -386,39 +374,39 @@ module _
 ### The containment relation of subgroups
 
 ```agda
-contains-Subgroup-Prop :
+leq-Subgroup-Prop :
   {l1 l2 l3 : Level} (G : Group l1) →
   Subgroup l2 G → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-contains-Subgroup-Prop G H K =
-  inclusion-rel-subtype-Prop
+leq-Subgroup-Prop G H K =
+  leq-subtype-Prop
     ( subset-Subgroup G H)
     ( subset-Subgroup G K)
 
-contains-Subgroup :
+leq-Subgroup :
   {l1 l2 l3 : Level} (G : Group l1) →
   Subgroup l2 G → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
-contains-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
+leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
-refl-contains-Subgroup :
+refl-leq-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
-  contains-Subgroup G H H
-refl-contains-Subgroup G H = refl-⊆ (subset-Subgroup G H)
+  leq-Subgroup G H H
+refl-leq-Subgroup G H = refl-leq-subtype (subset-Subgroup G H)
 
-transitive-contains-Subgroup :
+transitive-leq-Subgroup :
   {l1 l2 l3 l4 : Level} (G : Group l1) (H : Subgroup l2 G)
   (K : Subgroup l3 G) (L : Subgroup l4 G) →
-  contains-Subgroup G K L → contains-Subgroup G H K →
-  contains-Subgroup G H L
-transitive-contains-Subgroup G H K L =
-  trans-⊆
+  leq-Subgroup G K L → leq-Subgroup G H K →
+  leq-Subgroup G H L
+transitive-leq-Subgroup G H K L =
+  transitive-leq-subtype
     ( subset-Subgroup G H)
     ( subset-Subgroup G K)
     ( subset-Subgroup G L)
 
-antisymmetric-contains-Subgroup :
+antisymmetric-leq-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H K : Subgroup l2 G) →
-  contains-Subgroup G H K → contains-Subgroup G K H → H ＝ K
-antisymmetric-contains-Subgroup G H K α β =
+  leq-Subgroup G H K → leq-Subgroup G K H → H ＝ K
+antisymmetric-leq-Subgroup G H K α β =
   eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
 
 Subgroup-Large-Preorder :
@@ -426,11 +414,11 @@ Subgroup-Large-Preorder :
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G
 leq-Large-Preorder-Prop (Subgroup-Large-Preorder G) H K =
-  contains-Subgroup-Prop G H K
+  leq-Subgroup-Prop G H K
 refl-leq-Large-Preorder (Subgroup-Large-Preorder G) =
-  refl-contains-Subgroup G
+  refl-leq-Subgroup G
 transitive-leq-Large-Preorder (Subgroup-Large-Preorder G) =
-  transitive-contains-Subgroup G
+  transitive-leq-Subgroup G
 
 Subgroup-Preorder :
   {l1 : Level} (l2 : Level) (G : Group l1) →
@@ -444,7 +432,7 @@ Subgroup-Large-Poset :
 large-preorder-Large-Poset (Subgroup-Large-Poset G) =
   Subgroup-Large-Preorder G
 antisymmetric-leq-Large-Poset (Subgroup-Large-Poset G) =
-  antisymmetric-contains-Subgroup G
+  antisymmetric-leq-Subgroup G
 
 Subgroup-Poset :
   {l1 : Level} (l2 : Level) (G : Group l1) →
