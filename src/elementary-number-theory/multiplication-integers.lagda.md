@@ -128,7 +128,7 @@ left-successor-law-mul-ℤ (inl zero-ℕ) l =
 left-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
   ( ( inv (left-unit-law-add-ℤ ((inl n) *ℤ l))) ∙
     ( ap
-      (  _+ℤ ((inl n) *ℤ l))
+      ( _+ℤ ((inl n) *ℤ l))
       ( inv (right-inverse-law-add-ℤ l)))) ∙
   ( associative-add-ℤ l (neg-ℤ l) ((inl n) *ℤ l))
 left-successor-law-mul-ℤ (inr (inl star)) l =
@@ -157,7 +157,7 @@ right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
   ( ( ap ((neg-ℤ (succ-ℤ l)) +ℤ_) (right-successor-law-mul-ℤ (inl n) l)) ∙
     ( ( inv (associative-add-ℤ (neg-ℤ (succ-ℤ l)) (inl n) ((inl n) *ℤ l))) ∙
       ( ( ap
-          (  _+ℤ ((inl n) *ℤ l))
+          ( _+ℤ ((inl n) *ℤ l))
           { x = (neg-ℤ (succ-ℤ l)) +ℤ (inl n)}
           { y = (inl (succ-ℕ n)) +ℤ (neg-ℤ l)}
           ( ( right-successor-law-add-ℤ (neg-ℤ (succ-ℤ l)) (inl (succ-ℕ n))) ∙
@@ -179,7 +179,7 @@ right-successor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( ( ap ((succ-ℤ l) +ℤ_) (right-successor-law-mul-ℤ (inr (inr n)) l)) ∙
     ( ( inv (associative-add-ℤ (succ-ℤ l) (in-pos n) ((in-pos n) *ℤ l))) ∙
       ( ( ap
-          (  _+ℤ ((in-pos n) *ℤ l))
+          ( _+ℤ ((in-pos n) *ℤ l))
           { x = (succ-ℤ l) +ℤ (in-pos n)}
           { y = (in-pos (succ-ℕ n)) +ℤ l}
           ( ( left-successor-law-add-ℤ l (in-pos n)) ∙
@@ -267,7 +267,7 @@ associative-mul-ℤ (inl (succ-ℕ n)) l m =
   ( right-distributive-mul-add-ℤ (neg-ℤ l) ((inl n) *ℤ l) m) ∙
   ( ( ap (((neg-ℤ l) *ℤ m) +ℤ_) (associative-mul-ℤ (inl n) l m)) ∙
     ( ap
-      (  _+ℤ ((inl n) *ℤ (l *ℤ m)))
+      ( _+ℤ ((inl n) *ℤ (l *ℤ m)))
       ( left-negative-law-mul-ℤ l m)))
 associative-mul-ℤ (inr (inl star)) l m = refl
 associative-mul-ℤ (inr (inr zero-ℕ)) l m = refl
