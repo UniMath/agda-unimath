@@ -132,7 +132,7 @@ module _
       ( is-prop-is-in-subtype Q x)
       ( H x)
       ( K x)
-  
+
   antisymmetric-leq-subtype :
     {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
   antisymmetric-leq-subtype P Q H K =
