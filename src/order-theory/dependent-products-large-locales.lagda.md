@@ -13,11 +13,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.dependent-products-large-frames
-open import order-theory.dependent-products-large-meet-semilattices
-open import order-theory.dependent-products-large-posets
-open import order-theory.dependent-products-large-suplattices
 open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
