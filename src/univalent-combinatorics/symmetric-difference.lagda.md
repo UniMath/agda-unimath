@@ -47,7 +47,7 @@ module _
         ( number-of-elements-is-finite
           ( is-finite-type-decidable-subtype
             ( symmetric-difference-decidable-subtype P Q) F))
-        ( ( 2) *ℕ
+        ( 2 *ℕ
           ( number-of-elements-is-finite
             ( is-finite-type-decidable-subtype
               ( intersection-decidable-subtype P Q)
@@ -78,21 +78,16 @@ module _
               ( symmetric-difference-decidable-subtype P Q) F)
             ( is-finite-coprod is-finite-intersection is-finite-intersection)) ∙
           ( ap
-            ( λ n →
-              add-ℕ
-                ( number-of-elements-decidable-subtype-X
-                  ( symmetric-difference-decidable-subtype P Q))
-                ( n))
+            ( ( number-of-elements-decidable-subtype-X
+                ( symmetric-difference-decidable-subtype P Q)) +ℕ_)
             ( ( inv
                 ( coprod-eq-is-finite
                   ( is-finite-intersection)
                   ( is-finite-intersection))) ∙
               ( ap
-                ( λ n →
-                  add-ℕ
-                    ( n)
-                    ( number-of-elements-decidable-subtype-X
-                      ( intersection-decidable-subtype P Q)))
+                ( _+ℕ
+                  ( number-of-elements-decidable-subtype-X
+                    ( intersection-decidable-subtype P Q)))
                 ( inv
                   ( left-unit-law-mul-ℕ
                     ( number-of-elements-decidable-subtype-X

@@ -151,9 +151,7 @@ abstract
     { l1 l2 : Level} {A : UU l1} {B : UU l2}
     ( count-A : count A) (count-B : count B) (count-C : count (A + B)) →
     Id ( number-of-elements-count count-C)
-       ( add-ℕ
-         ( number-of-elements-count count-A)
-         ( number-of-elements-count count-B))
+       ( number-of-elements-count count-A +ℕ number-of-elements-count count-B)
   double-counting-coprod count-A count-B count-C =
     ( double-counting count-C (count-coprod count-A count-B)) ∙
     ( number-of-elements-count-coprod count-A count-B)
@@ -232,13 +230,9 @@ coprod-eq-is-finite {X = X} {Y = Y} P Q =
     ( number-of-elements-has-finite-cardinality)
     ( all-elements-equal-has-finite-cardinality
       ( pair
-        ( add-ℕ
-          ( number-of-elements-is-finite P)
-          ( number-of-elements-is-finite Q))
+        ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
         ( has-cardinality-type-UU-Fin
-          ( add-ℕ
-            ( number-of-elements-is-finite P)
-            ( number-of-elements-is-finite Q))
+          ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
           ( coprod-UU-Fin
             ( number-of-elements-is-finite P)
             ( number-of-elements-is-finite Q)

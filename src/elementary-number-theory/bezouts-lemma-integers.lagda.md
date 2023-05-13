@@ -175,12 +175,8 @@ bezouts-lemma-refactor-hypotheses x y H K =
             ( y)))
       by bezouts-lemma-eqn-to-int x y P
     ＝ dist-ℤ
-        ( mul-ℤ
-          ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
-          ( x))
-        ( mul-ℤ
-          (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P))
-          ( y))
+        ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ x)
+        ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ y)
       by
         dist-abs-ℤ
           ( mul-ℤ
@@ -195,18 +191,14 @@ bezouts-lemma-refactor-hypotheses x y H K =
   P = (refactor-pos-cond x y H K)
   x-prod-nonneg :
     is-nonnegative-ℤ
-      ( mul-ℤ
-        ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
-        ( x))
+      ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ x)
   x-prod-nonneg = is-nonnegative-mul-ℤ
     (is-nonnegative-int-ℕ
       ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
     (is-nonnegative-is-positive-ℤ H)
   y-prod-nonneg :
     is-nonnegative-ℤ
-      ( mul-ℤ
-        ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P))
-        ( y))
+      ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ y)
   y-prod-nonneg =
     is-nonnegative-mul-ℤ
       ( is-nonnegative-int-ℕ
@@ -288,9 +280,8 @@ bezouts-lemma-ℤ (inl x) (inl y) = pair (neg-ℤ s) (pair (neg-ℤ t) eqn)
     gcd-ℤ (inl x) (inl y)
   eqn =
     equational-reasoning
-      add-ℤ
-        ( (neg-ℤ s) *ℤ (neg-ℤ (inr (inr x))))
-        ( (neg-ℤ t) *ℤ (neg-ℤ (inr (inr y))))
+      ( (neg-ℤ s) *ℤ (neg-ℤ (inr (inr x)))) +ℤ
+      ( (neg-ℤ t) *ℤ (neg-ℤ (inr (inr y))))
       ＝ (s *ℤ (inr (inr x))) +ℤ ((neg-ℤ t) *ℤ (neg-ℤ (inr (inr y))))
         by
           ( ap
@@ -299,7 +290,7 @@ bezouts-lemma-ℤ (inl x) (inl y) = pair (neg-ℤ s) (pair (neg-ℤ t) eqn)
       ＝ (s *ℤ (inr (inr x))) +ℤ (t *ℤ (inr (inr y)))
         by
           ( ap
-            ( add-ℤ (s *ℤ (inr (inr x))))
+            ( (s *ℤ (inr (inr x))) +ℤ_)
             ( double-negative-law-mul-ℤ t (inr (inr y))))
       ＝ gcd-ℤ (inr (inr x)) (inr (inr y))
         by pr2 (pr2 (pos-bezout))
@@ -321,7 +312,7 @@ bezouts-lemma-ℤ (inl x) (inr (inl star)) = pair neg-one-ℤ (pair one-ℤ eqn)
             ( _+ℤ (one-ℤ *ℤ (inr (inl star))))
             ( inv (is-mul-neg-one-neg-ℤ (inl x)))
       ＝ (inr (inr x)) +ℤ zero-ℤ
-        by ap (add-ℤ (inr (inr x))) (right-zero-law-mul-ℤ one-ℤ)
+        by ap ((inr (inr x)) +ℤ_) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inl x))
         by right-unit-law-add-ℤ (inr (inr x))
       ＝ gcd-ℤ (inl x) zero-ℤ
@@ -364,7 +355,7 @@ bezouts-lemma-ℤ (inr (inl star)) (inl y) = pair one-ℤ (pair neg-one-ℤ eqn)
       ＝ (one-ℤ *ℤ (inr (inl star))) +ℤ (inr (inr y))
         by
           ap
-            ( add-ℤ (one-ℤ *ℤ (inr (inl star))))
+            ( (one-ℤ *ℤ (inr (inl star))) +ℤ_)
             ( inv (is-mul-neg-one-neg-ℤ (inl y)))
       ＝ zero-ℤ +ℤ (inr (inr y))
         by ap (_+ℤ (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
@@ -399,7 +390,7 @@ bezouts-lemma-ℤ (inr (inl star)) (inr (inr y)) = pair one-ℤ (pair one-ℤ eq
       (one-ℤ *ℤ (inr (inl star))) +ℤ (one-ℤ *ℤ (inr (inr y)))
       ＝ (one-ℤ *ℤ (inr (inl star))) +ℤ (inr (inr y))
         by ap
-          ( add-ℤ (one-ℤ *ℤ (inr (inl star))))
+          ( (one-ℤ *ℤ (inr (inl star))) +ℤ_)
           ( inv (left-unit-law-mul-ℤ (inr (inr y))))
       ＝ zero-ℤ +ℤ (inr (inr y))
         by ap (_+ℤ (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)

@@ -265,7 +265,7 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
             ( neg-ℤ (b *ℤ d))
             ( f)) ∙
           ( ap
-            ( add-ℤ ((a *ℤ c) *ℤ f))
+            ( ((a *ℤ c) *ℤ f) +ℤ_)
             ( left-negative-law-mul-ℤ (b *ℤ d) f)))
         ( ( left-distributive-mul-add-ℤ e (a *ℤ d) (c *ℤ b)) ∙
           ( ap-add-ℤ

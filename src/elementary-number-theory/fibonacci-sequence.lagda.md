@@ -83,9 +83,8 @@ Fibo k = Fibo-function k 0
 Fibonacci-add-ℕ :
   (m n : ℕ) →
   Fibonacci-ℕ (m +ℕ (succ-ℕ n)) ＝
-  add-ℕ
-    ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
-    ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ n))
+  ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))) +ℕ
+  ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ n))
 Fibonacci-add-ℕ m zero-ℕ =
   ap-add-ℕ
     ( inv (right-unit-law-mul-ℕ (Fibonacci-ℕ (succ-ℕ m))))
@@ -104,8 +103,7 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
           ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
           ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))) ∙
         ( ( ap
-            ( add-ℕ
-              ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
+            ( ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))) +ℕ_)
             ( commutative-add-ℕ
               ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
               ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))) ∙

@@ -193,13 +193,13 @@ convert-based-succ-based-ℕ
     ( is-zero-nat-zero-Fin {k})) ∙
   ( right-unit-law-mul-ℕ (succ-ℕ k))
 convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
-  ap ( add-ℕ ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))
+  ap ( ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) +ℕ_)
      ( nat-succ-Fin k x)
 convert-based-succ-based-ℕ
   (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr star) n) =
-  ( ap ( add-ℕ
-         ( ( succ-ℕ k) *ℕ
-           ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n)))))
+  ( ap ( ( ( succ-ℕ k) *ℕ
+           ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
+          +ℕ_)
        ( is-zero-nat-zero-Fin {k})) ∙
   ( ( ap ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
          ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙

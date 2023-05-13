@@ -448,7 +448,7 @@ is-add-one-succ-Fin' (succ-ℕ k) x =
   ( ap (succ-Fin (succ-ℕ (succ-ℕ k))) (inv (issec-nat-Fin (succ-ℕ k) x))) ∙
   ( ap ( mod-succ-ℕ (succ-ℕ k))
        ( ap
-         ( add-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))
+         ( (nat-Fin (succ-ℕ (succ-ℕ k)) x) +ℕ_)
          ( inv (is-one-nat-one-Fin (succ-ℕ k)))))
 
 is-add-one-succ-Fin :

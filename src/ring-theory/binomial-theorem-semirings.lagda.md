@@ -683,7 +683,7 @@ is-linear-combination-power-add-Semiring R n m x y H =
                                   ( upper-bound-nat-Fin' n i)
                                   ( leq-add-ℕ n m)) ∙
                                 ( ap
-                                  ( add-ℕ (dist-ℕ (nat-Fin n i) n))
+                                  ( (dist-ℕ (nat-Fin n i) n) +ℕ_)
                                   ( dist-add-ℕ n m))) ∙
                               ( commutative-add-ℕ
                                 ( dist-ℕ (nat-Fin n i) n)
