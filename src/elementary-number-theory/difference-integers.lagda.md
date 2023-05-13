@@ -33,7 +33,7 @@ ap-diff-ℤ p q = ap-binary diff-ℤ p q
 eq-diff-ℤ : {x y : ℤ} → is-zero-ℤ (diff-ℤ x y) → x ＝ y
 eq-diff-ℤ {x} {y} H =
   ( inv (right-unit-law-add-ℤ x)) ∙
-  ( ( ap (add-ℤ x) (inv (left-inverse-law-add-ℤ y))) ∙
+  ( ( ap (x +ℤ_) (inv (left-inverse-law-add-ℤ y))) ∙
     ( ( inv (associative-add-ℤ x (neg-ℤ y) y)) ∙
       ( ( ap (_+ℤ y) H) ∙
         ( left-unit-law-add-ℤ y))))
@@ -58,7 +58,7 @@ left-successor-law-diff-ℤ x y = left-successor-law-add-ℤ x (neg-ℤ y)
 right-successor-law-diff-ℤ :
   (x y : ℤ) → diff-ℤ x (succ-ℤ y) ＝ pred-ℤ (diff-ℤ x y)
 right-successor-law-diff-ℤ x y =
-  ap (add-ℤ x) (neg-succ-ℤ y) ∙ right-predecessor-law-add-ℤ x (neg-ℤ y)
+  ap (x +ℤ_) (neg-succ-ℤ y) ∙ right-predecessor-law-add-ℤ x (neg-ℤ y)
 
 left-predecessor-law-diff-ℤ :
   (x y : ℤ) → diff-ℤ (pred-ℤ x) y ＝ pred-ℤ (diff-ℤ x y)
@@ -67,14 +67,14 @@ left-predecessor-law-diff-ℤ x y = left-predecessor-law-add-ℤ x (neg-ℤ y)
 right-predecessor-law-diff-ℤ :
   (x y : ℤ) → diff-ℤ x (pred-ℤ y) ＝ succ-ℤ (diff-ℤ x y)
 right-predecessor-law-diff-ℤ x y =
-  ap (add-ℤ x) (neg-pred-ℤ y) ∙ right-successor-law-add-ℤ x (neg-ℤ y)
+  ap (x +ℤ_) (neg-pred-ℤ y) ∙ right-successor-law-add-ℤ x (neg-ℤ y)
 
 triangle-diff-ℤ :
   (x y z : ℤ) → (diff-ℤ x y) +ℤ (diff-ℤ y z) ＝ diff-ℤ x z
 triangle-diff-ℤ x y z =
   ( associative-add-ℤ x (neg-ℤ y) (diff-ℤ y z)) ∙
   ( ap
-    ( add-ℤ x)
+    ( x +ℤ_)
     ( ( inv (associative-add-ℤ (neg-ℤ y) y (neg-ℤ z))) ∙
       ( ( ap (_+ℤ (neg-ℤ z)) (left-inverse-law-add-ℤ y)) ∙
         ( left-unit-law-add-ℤ (neg-ℤ z)))))
@@ -83,13 +83,13 @@ distributive-neg-diff-ℤ :
   (x y : ℤ) → neg-ℤ (diff-ℤ x y) ＝ diff-ℤ y x
 distributive-neg-diff-ℤ x y =
   ( distributive-neg-add-ℤ x (neg-ℤ y)) ∙
-  ( ( ap (add-ℤ (neg-ℤ x)) (neg-neg-ℤ y)) ∙
+  ( ( ap ((neg-ℤ x) +ℤ_) (neg-neg-ℤ y)) ∙
     ( commutative-add-ℤ (neg-ℤ x) y))
 
 interchange-law-add-diff-ℤ : interchange-law add-ℤ diff-ℤ
 interchange-law-add-diff-ℤ x y u v =
   ( interchange-law-add-add-ℤ x (neg-ℤ y) u (neg-ℤ v)) ∙
-  ( ap (add-ℤ (x +ℤ u)) (inv (distributive-neg-add-ℤ y v)))
+  ( ap ((x +ℤ u) +ℤ_) (inv (distributive-neg-add-ℤ y v)))
 
 interchange-law-diff-add-ℤ : interchange-law diff-ℤ add-ℤ
 interchange-law-diff-add-ℤ x y u v = inv (interchange-law-add-diff-ℤ x u y v)
@@ -111,7 +111,7 @@ right-translation-diff-ℤ x y z =
 ```agda
 diff-succ-ℤ : (x y : ℤ) → diff-ℤ (succ-ℤ x) (succ-ℤ y) ＝ diff-ℤ x y
 diff-succ-ℤ x y =
-  ( ap (add-ℤ (succ-ℤ x)) (neg-succ-ℤ y)) ∙
+  ( ap ((succ-ℤ x) +ℤ_) (neg-succ-ℤ y)) ∙
   ( ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
     ( ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
       ( issec-pred-ℤ (diff-ℤ x y))))

@@ -117,7 +117,7 @@ triangle-inequality-dist-ℕ (succ-ℕ m) zero-ℕ (succ-ℕ k) =
   concatenate-eq-leq-eq-ℕ
     ( inv (ap succ-ℕ (right-unit-law-dist-ℕ m)))
     ( triangle-inequality-dist-ℕ m zero-ℕ k)
-    ( ap (succ-ℕ ∘ (add-ℕ (dist-ℕ m k))) (right-unit-law-dist-ℕ k))
+    ( ap (succ-ℕ ∘ ((dist-ℕ m k) +ℕ_)) (right-unit-law-dist-ℕ k))
 triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ =
   concatenate-leq-eq-ℕ
     ( dist-ℕ m n)
@@ -233,18 +233,18 @@ is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
   inr
     ( inl
       ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
-        ( ( ap (add-ℕ (dist-ℕ x z)) (symmetric-dist-ℕ y z)) ∙
+        ( ( ap ((dist-ℕ x z) +ℕ_) (symmetric-dist-ℕ y z)) ∙
           ( triangle-equality-dist-ℕ x z y H1 H2))))
 is-total-dist-ℕ x y z | inr (inl (inl (pair H1 H2))) =
   inr
     ( inl
-      ( ( ap (add-ℕ (dist-ℕ y z)) (symmetric-dist-ℕ x z)) ∙
+      ( ( ap ((dist-ℕ y z) +ℕ_) (symmetric-dist-ℕ x z)) ∙
         ( ( triangle-equality-dist-ℕ y z x H1 H2) ∙
           ( symmetric-dist-ℕ y x))))
 is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
   inr
     ( inr
-      ( ( ap (add-ℕ (dist-ℕ x z)) (symmetric-dist-ℕ x y)) ∙
+      ( ( ap ((dist-ℕ x z) +ℕ_) (symmetric-dist-ℕ x y)) ∙
         ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
           ( triangle-equality-dist-ℕ y x z H1 H2))))
 is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =

@@ -133,7 +133,7 @@ is-injective-add-ℕ' : (k : ℕ) → is-injective (_+ℕ k)
 is-injective-add-ℕ' zero-ℕ = id
 is-injective-add-ℕ' (succ-ℕ k) p = is-injective-add-ℕ' k (is-injective-succ-ℕ p)
 
-is-injective-add-ℕ : (k : ℕ) → is-injective (add-ℕ k)
+is-injective-add-ℕ : (k : ℕ) → is-injective (k +ℕ_)
 is-injective-add-ℕ k {x} {y} p =
   is-injective-add-ℕ' k (commutative-add-ℕ x k ∙ (p ∙ commutative-add-ℕ k y))
 ```
@@ -141,7 +141,7 @@ is-injective-add-ℕ k {x} {y} p =
 ### Addition by a fixed element on either side is an embedding
 
 ```agda
-is-emb-add-ℕ : (x : ℕ) → is-emb (add-ℕ x)
+is-emb-add-ℕ : (x : ℕ) → is-emb (x +ℕ_)
 is-emb-add-ℕ x = is-emb-is-injective is-set-ℕ (is-injective-add-ℕ x)
 
 is-emb-add-ℕ' : (x : ℕ) → is-emb (_+ℕ x)

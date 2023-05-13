@@ -357,7 +357,7 @@ isretr-add-neg-ℤ x y =
       by ap (_+ℤ y) (left-inverse-law-add-ℤ x)
 
 abstract
-  is-equiv-add-ℤ : (x : ℤ) → is-equiv (add-ℤ x)
+  is-equiv-add-ℤ : (x : ℤ) → is-equiv (x +ℤ_)
   pr1 (pr1 (is-equiv-add-ℤ x)) = add-ℤ (neg-ℤ x)
   pr2 (pr1 (is-equiv-add-ℤ x)) = issec-add-neg-ℤ x
   pr1 (pr2 (is-equiv-add-ℤ x)) = add-ℤ (neg-ℤ x)
@@ -375,7 +375,7 @@ issec-add-neg-ℤ' x y =
     ＝ y +ℤ (neg-ℤ x +ℤ x)
       by associative-add-ℤ y (neg-ℤ x) x
     ＝ y +ℤ zero-ℤ
-      by ap (add-ℤ y) (left-inverse-law-add-ℤ x)
+      by ap (y +ℤ_) (left-inverse-law-add-ℤ x)
     ＝ y
       by right-unit-law-add-ℤ y
 
@@ -387,7 +387,7 @@ isretr-add-neg-ℤ' x y =
     ＝ y +ℤ (x +ℤ neg-ℤ x)
       by associative-add-ℤ y x (neg-ℤ x)
     ＝ y +ℤ zero-ℤ
-      by ap (add-ℤ y) (right-inverse-law-add-ℤ x)
+      by ap (y +ℤ_) (right-inverse-law-add-ℤ x)
     ＝ y
       by right-unit-law-add-ℤ y
 
@@ -411,7 +411,7 @@ pr2 is-binary-equiv-add-ℤ = is-equiv-add-ℤ
 
 ```agda
 is-emb-add-ℤ :
-  (x : ℤ) → is-emb (add-ℤ x)
+  (x : ℤ) → is-emb (x +ℤ_)
 is-emb-add-ℤ x =
   is-emb-is-equiv (is-equiv-add-ℤ x)
 
@@ -430,7 +430,7 @@ is-binary-emb-add-ℤ =
 is-injective-add-ℤ' : (x : ℤ) → is-injective (_+ℤ x)
 is-injective-add-ℤ' x = is-injective-is-emb (is-emb-add-ℤ' x)
 
-is-injective-add-ℤ : (x : ℤ) → is-injective (add-ℤ x)
+is-injective-add-ℤ : (x : ℤ) → is-injective (x +ℤ_)
 is-injective-add-ℤ x = is-injective-is-emb (is-emb-add-ℤ x)
 ```
 
@@ -545,7 +545,7 @@ add-int-ℕ x (succ-ℕ y) =
   equational-reasoning
     int-ℕ x +ℤ int-ℕ (succ-ℕ y)
     ＝ int-ℕ x +ℤ succ-ℤ (int-ℕ y)
-      by ap (add-ℤ (int-ℕ x)) (inv (succ-int-ℕ y))
+      by ap ((int-ℕ x) +ℤ_) (inv (succ-int-ℕ y))
     ＝ succ-ℤ (int-ℕ x +ℤ int-ℕ y)
       by right-successor-law-add-ℤ (int-ℕ x) (int-ℕ y)
     ＝ succ-ℤ (int-ℕ (x +ℕ y))
@@ -565,7 +565,7 @@ is-zero-add-ℤ x y H =
     ＝ x +ℤ zero-ℤ
       by inv (right-unit-law-add-ℤ x)
     ＝ x +ℤ (y +ℤ neg-ℤ y)
-      by inv (ap (add-ℤ x) (right-inverse-law-add-ℤ y))
+      by inv (ap (x +ℤ_) (right-inverse-law-add-ℤ y))
     ＝ (x +ℤ y) +ℤ neg-ℤ y
       by inv (associative-add-ℤ x y (neg-ℤ y))
     ＝ y +ℤ neg-ℤ y

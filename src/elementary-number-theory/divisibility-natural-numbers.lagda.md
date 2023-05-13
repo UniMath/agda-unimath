@@ -286,7 +286,7 @@ div-left-summand-ℕ :
 div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
   pair zero-ℕ
     ( ( inv (right-zero-law-mul-ℕ n)) ∙
-      ( p ∙ (ap (add-ℕ x) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
+      ( p ∙ (ap (x +ℕ_) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
 pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
 pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
   is-injective-add-ℕ' (m *ℕ (succ-ℕ d))
@@ -302,7 +302,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
               ( concatenate-eq-leq-eq-ℕ q
                 ( leq-add-ℕ' y x)
                 ( inv p))))) ∙
-        ( p ∙ (ap (add-ℕ x) (inv q)))))
+        ( p ∙ (ap (x +ℕ_) (inv q)))))
 
 div-right-summand-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d (x +ℕ y) → div-ℕ d y

@@ -49,7 +49,7 @@ length-flatten-list :
 length-flatten-list nil = refl
 length-flatten-list (cons a x) =
   ( length-concat-list a (flatten-list x)) ∙
-  ( ap (add-ℕ (length-list a)) (length-flatten-list x))
+  ( ap ((length-list a) +ℕ_) (length-flatten-list x))
 
 flatten-concat-list :
   {l1 : Level} {A : UU l1} (x y : list (list A)) →

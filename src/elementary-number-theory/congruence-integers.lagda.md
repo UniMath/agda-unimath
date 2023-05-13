@@ -55,7 +55,7 @@ pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
   ( is-injective-neg-ℤ
     ( ( neg-neg-ℤ (y *ℤ k)) ∙
       ( ( p) ∙
-        ( ( ap (add-ℤ x) (neg-succ-ℤ x)) ∙
+        ( ( ap (x +ℤ_) (neg-succ-ℤ x)) ∙
           ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙
             ( ap pred-ℤ (right-inverse-law-add-ℤ x)))))))
 
@@ -63,7 +63,7 @@ is-unit-cong-pred-ℤ : (k x : ℤ) → cong-ℤ k x (pred-ℤ x) → is-unit-�
 pr1 (is-unit-cong-pred-ℤ k x (pair y p)) = y
 pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
   ( p) ∙
-  ( ( ap (add-ℤ x) (neg-pred-ℤ x)) ∙
+  ( ( ap (x +ℤ_) (neg-pred-ℤ x)) ∙
     ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
       ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
 

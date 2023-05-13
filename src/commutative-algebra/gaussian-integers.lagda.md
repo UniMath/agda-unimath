@@ -183,7 +183,7 @@ left-unit-law-mul-ℤ[i] : (x : ℤ[i]) → one-ℤ[i] *ℤ[i] x ＝ x
 left-unit-law-mul-ℤ[i] (a , b) =
   eq-Eq-ℤ[i]
     ( right-unit-law-add-ℤ a)
-    ( ap (add-ℤ b) (right-zero-law-mul-ℤ a) ∙ right-unit-law-add-ℤ b)
+    ( ap (b +ℤ_) (right-zero-law-mul-ℤ a) ∙ right-unit-law-add-ℤ b)
 
 right-unit-law-mul-ℤ[i] : (x : ℤ[i]) → x *ℤ[i] one-ℤ[i] ＝ x
 right-unit-law-mul-ℤ[i] (a , b) =

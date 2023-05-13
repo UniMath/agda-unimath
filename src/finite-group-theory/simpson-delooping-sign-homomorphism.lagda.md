@@ -136,7 +136,7 @@ module _
   pr2 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} {h} P Q =
     ( ap mod-two-ℕ
       ( ap
-        ( add-ℕ zero-ℕ)
+        ( zero-ℕ +ℕ_)
         ( inv (is-zero-nat-zero-Fin {k = 1}) ∙ ap (nat-Fin 2) Q) ∙
         ( ap
           ( add-ℕ'

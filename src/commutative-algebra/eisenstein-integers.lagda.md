@@ -196,7 +196,7 @@ left-unit-law-mul-ℤ[ω] (a , b) =
   eq-Eq-ℤ[ω]
     ( right-unit-law-add-ℤ a)
     ( ( right-unit-law-add-ℤ (b +ℤ (a *ℤ zero-ℤ))) ∙
-      ( ( ap (add-ℤ b) (right-zero-law-mul-ℤ a)) ∙
+      ( ( ap (b +ℤ_) (right-zero-law-mul-ℤ a)) ∙
         ( right-unit-law-add-ℤ b)))
 
 right-unit-law-mul-ℤ[ω] :
@@ -310,7 +310,7 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                           ( add-ℤ' (neg-ℤ (d *ℤ f)))
                           ( ( commutative-add-ℤ (d *ℤ e) (c *ℤ f)) ∙
                             ( ap
-                              ( add-ℤ (c *ℤ f))
+                              ( (c *ℤ f) +ℤ_)
                               ( commutative-mul-ℤ d e))))))))))))))
     ( ( ap-add-ℤ
         ( ( ap-add-ℤ
