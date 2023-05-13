@@ -37,7 +37,7 @@ open import order-theory.least-upper-bounds-large-posets
 
 A **nucleus** on a [large locale](order-theory.large-locales.md) `L` is an order
 preserving map `j : hom-Large-Poset id L L` such that `j` preserves meets and is
-idempotent.
+inflationary and idempotent.
 
 ## Definitions
 
@@ -57,7 +57,7 @@ module _
         hom-Large-Meet-Semilattice
           ( large-meet-semilattice-Large-Locale L)
           ( large-meet-semilattice-Large-Locale L)
-      is-increasing-nucleus-Large-Locale :
+      is-inflationary-nucleus-Large-Locale :
         {l1 : Level} (x : type-Large-Locale L l1) →
         leq-Large-Locale L x
           ( map-hom-Large-Meet-Semilattice
@@ -166,7 +166,7 @@ module _
       ( map-nucleus-Large-Locale L j x)
       ( x)
       ( H)
-      (is-increasing-nucleus-Large-Locale j x)
+      (is-inflationary-nucleus-Large-Locale j x)
 
   closed-element-nucleus-Large-Locale :
     (l1 : Level) → UU (α l1)
@@ -356,7 +356,7 @@ module _
       ( map-nucleus-Large-Locale L j x)
       ( y)
       ( H)
-      ( is-increasing-nucleus-Large-Locale j x)
+      ( is-inflationary-nucleus-Large-Locale j x)
 
   adjoint-relation-nucleus-Large-Locale :
     {l1 l2 : Level}
