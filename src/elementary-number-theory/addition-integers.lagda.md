@@ -207,7 +207,7 @@ abstract
     equational-reasoning
       (neg-one-ℤ +ℤ y) +ℤ z
       ＝ (pred-ℤ (zero-ℤ +ℤ y)) +ℤ z
-        by ap (add-ℤ' z) (left-predecessor-law-add-ℤ zero-ℤ y)
+        by ap (_+ℤ z) (left-predecessor-law-add-ℤ zero-ℤ y)
       ＝ pred-ℤ (y +ℤ z)
         by left-predecessor-law-add-ℤ y z
       ＝ neg-one-ℤ +ℤ (y +ℤ z)
@@ -216,7 +216,7 @@ abstract
     equational-reasoning
       (pred-ℤ (inl x) +ℤ y) +ℤ z
       ＝ pred-ℤ (inl x +ℤ y) +ℤ z
-        by ap (add-ℤ' z) (left-predecessor-law-add-ℤ (inl x) y)
+        by ap (_+ℤ z) (left-predecessor-law-add-ℤ (inl x) y)
       ＝ pred-ℤ ((inl x +ℤ y) +ℤ z)
         by left-predecessor-law-add-ℤ ((inl x) +ℤ y) z
       ＝ pred-ℤ (inl x +ℤ (y +ℤ z))
@@ -229,7 +229,7 @@ abstract
     equational-reasoning
       (one-ℤ +ℤ y) +ℤ z
       ＝ succ-ℤ (zero-ℤ +ℤ y) +ℤ z
-        by ap (add-ℤ' z) (left-successor-law-add-ℤ zero-ℤ y)
+        by ap (_+ℤ z) (left-successor-law-add-ℤ zero-ℤ y)
       ＝ succ-ℤ (y +ℤ z)
         by left-successor-law-add-ℤ y z
       ＝ one-ℤ +ℤ (y +ℤ z)
@@ -238,7 +238,7 @@ abstract
     equational-reasoning
       (succ-ℤ (inr (inr x)) +ℤ y) +ℤ z
       ＝ succ-ℤ (inr (inr x) +ℤ y) +ℤ z
-        by ap (add-ℤ' z) (left-successor-law-add-ℤ (inr (inr x)) y)
+        by ap (_+ℤ z) (left-successor-law-add-ℤ (inr (inr x)) y)
       ＝ succ-ℤ ((inr (inr x) +ℤ y) +ℤ z)
         by left-successor-law-add-ℤ (add-ℤ (inr (inr x)) y) z
       ＝ succ-ℤ (inr (inr x) +ℤ (y +ℤ z))
@@ -344,7 +344,7 @@ issec-add-neg-ℤ x y =
     ＝ (x +ℤ neg-ℤ x) +ℤ y
       by inv (associative-add-ℤ x (neg-ℤ x) y)
     ＝ y
-      by ap (add-ℤ' y) (right-inverse-law-add-ℤ x)
+      by ap (_+ℤ y) (right-inverse-law-add-ℤ x)
 
 isretr-add-neg-ℤ :
   (x y : ℤ) → (neg-ℤ x) +ℤ (x +ℤ y) ＝ y
@@ -354,7 +354,7 @@ isretr-add-neg-ℤ x y =
     ＝ (neg-ℤ x +ℤ x) +ℤ y
       by inv (associative-add-ℤ (neg-ℤ x) x y)
     ＝ y
-      by ap (add-ℤ' y) (left-inverse-law-add-ℤ x)
+      by ap (_+ℤ y) (left-inverse-law-add-ℤ x)
 
 abstract
   is-equiv-add-ℤ : (x : ℤ) → is-equiv (add-ℤ x)
@@ -392,7 +392,7 @@ isretr-add-neg-ℤ' x y =
       by right-unit-law-add-ℤ y
 
 abstract
-  is-equiv-add-ℤ' : (y : ℤ) → is-equiv (add-ℤ' y)
+  is-equiv-add-ℤ' : (y : ℤ) → is-equiv (_+ℤ y)
   pr1 (pr1 (is-equiv-add-ℤ' y)) = add-ℤ' (neg-ℤ y)
   pr2 (pr1 (is-equiv-add-ℤ' y)) = issec-add-neg-ℤ' y
   pr1 (pr2 (is-equiv-add-ℤ' y)) = add-ℤ' (neg-ℤ y)
@@ -416,7 +416,7 @@ is-emb-add-ℤ x =
   is-emb-is-equiv (is-equiv-add-ℤ x)
 
 is-emb-add-ℤ' :
-  (y : ℤ) → is-emb (add-ℤ' y)
+  (y : ℤ) → is-emb (_+ℤ y)
 is-emb-add-ℤ' y = is-emb-is-equiv (is-equiv-add-ℤ' y)
 
 is-binary-emb-add-ℤ : is-binary-emb add-ℤ
@@ -427,7 +427,7 @@ is-binary-emb-add-ℤ =
 ### Addition by x is injective
 
 ```agda
-is-injective-add-ℤ' : (x : ℤ) → is-injective (add-ℤ' x)
+is-injective-add-ℤ' : (x : ℤ) → is-injective (_+ℤ x)
 is-injective-add-ℤ' x = is-injective-is-emb (is-emb-add-ℤ' x)
 
 is-injective-add-ℤ : (x : ℤ) → is-injective (add-ℤ x)
@@ -490,7 +490,7 @@ distributive-neg-add-ℤ (inl (succ-ℕ n)) l =
     ＝ succ-ℤ (neg-ℤ (inl n) +ℤ neg-ℤ l)
       by ap succ-ℤ (distributive-neg-add-ℤ (inl n) l)
     ＝ neg-ℤ (pred-ℤ (inl n)) +ℤ neg-ℤ l
-      by ap (add-ℤ' (neg-ℤ l)) (inv (neg-pred-ℤ (inl n)))
+      by ap (_+ℤ (neg-ℤ l)) (inv (neg-pred-ℤ (inl n)))
 distributive-neg-add-ℤ (inr (inl star)) l =
   refl
 distributive-neg-add-ℤ (inr (inr zero-ℕ)) l =
@@ -569,7 +569,7 @@ is-zero-add-ℤ x y H =
     ＝ (x +ℤ y) +ℤ neg-ℤ y
       by inv (associative-add-ℤ x y (neg-ℤ y))
     ＝ y +ℤ neg-ℤ y
-      by ap (add-ℤ' (neg-ℤ y)) H
+      by ap (_+ℤ (neg-ℤ y)) H
     ＝ zero-ℤ
       by right-inverse-law-add-ℤ y
 

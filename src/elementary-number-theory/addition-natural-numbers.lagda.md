@@ -129,7 +129,7 @@ interchange-law-add-add-ℕ =
 ### Addition by a fixed element on either side is injective
 
 ```agda
-is-injective-add-ℕ' : (k : ℕ) → is-injective (add-ℕ' k)
+is-injective-add-ℕ' : (k : ℕ) → is-injective (_+ℕ k)
 is-injective-add-ℕ' zero-ℕ = id
 is-injective-add-ℕ' (succ-ℕ k) p = is-injective-add-ℕ' k (is-injective-succ-ℕ p)
 
@@ -144,7 +144,7 @@ is-injective-add-ℕ k {x} {y} p =
 is-emb-add-ℕ : (x : ℕ) → is-emb (add-ℕ x)
 is-emb-add-ℕ x = is-emb-is-injective is-set-ℕ (is-injective-add-ℕ x)
 
-is-emb-add-ℕ' : (x : ℕ) → is-emb (add-ℕ' x)
+is-emb-add-ℕ' : (x : ℕ) → is-emb (_+ℕ x)
 is-emb-add-ℕ' x = is-emb-is-injective is-set-ℕ (is-injective-add-ℕ' x)
 ```
 

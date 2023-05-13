@@ -192,7 +192,7 @@ right-unit-law-mul-ℤ[i] (a , b) =
         ( right-unit-law-mul-ℤ a)
         ( ap neg-ℤ (right-zero-law-mul-ℤ b))) ∙
       ( right-unit-law-add-ℤ a))
-    ( ap (add-ℤ' b) (right-zero-law-mul-ℤ a))
+    ( ap (_+ℤ b) (right-zero-law-mul-ℤ a))
 
 commutative-mul-ℤ[i] :
   (x y : ℤ[i]) → x *ℤ[i] y ＝ y *ℤ[i] x

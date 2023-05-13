@@ -97,7 +97,7 @@ abstract
   constant-sum-Fin-ℕ :
     (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ m *ℕ n
   constant-sum-Fin-ℕ zero-ℕ n = refl
-  constant-sum-Fin-ℕ (succ-ℕ m) n = ap (add-ℕ' n) (constant-sum-Fin-ℕ m n)
+  constant-sum-Fin-ℕ (succ-ℕ m) n = ap (_+ℕ n) (constant-sum-Fin-ℕ m n)
 
 abstract
   constant-sum-count-ℕ :

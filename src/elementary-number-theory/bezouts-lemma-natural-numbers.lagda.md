@@ -423,7 +423,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
     ＝ zero-ℤ +ℤ (int-ℕ z)
       by
       ap
-        ( add-ℤ' (int-ℕ z))
+        ( _+ℤ (int-ℕ z))
         ( left-inverse-law-add-ℤ (a *ℤ (int-ℕ (succ-ℕ x))))
     ＝ int-ℕ z by left-unit-law-add-ℤ (int-ℕ z)
 

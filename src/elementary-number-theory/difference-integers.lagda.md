@@ -35,7 +35,7 @@ eq-diff-ℤ {x} {y} H =
   ( inv (right-unit-law-add-ℤ x)) ∙
   ( ( ap (add-ℤ x) (inv (left-inverse-law-add-ℤ y))) ∙
     ( ( inv (associative-add-ℤ x (neg-ℤ y) y)) ∙
-      ( ( ap (add-ℤ' y) H) ∙
+      ( ( ap (_+ℤ y) H) ∙
         ( left-unit-law-add-ℤ y))))
 
 is-zero-diff-ℤ' : (x : ℤ) → is-zero-ℤ (diff-ℤ x x)
@@ -76,7 +76,7 @@ triangle-diff-ℤ x y z =
   ( ap
     ( add-ℤ x)
     ( ( inv (associative-add-ℤ (neg-ℤ y) y (neg-ℤ z))) ∙
-      ( ( ap (add-ℤ' (neg-ℤ z)) (left-inverse-law-add-ℤ y)) ∙
+      ( ( ap (_+ℤ (neg-ℤ z)) (left-inverse-law-add-ℤ y)) ∙
         ( left-unit-law-add-ℤ (neg-ℤ z)))))
 
 distributive-neg-diff-ℤ :
@@ -98,7 +98,7 @@ left-translation-diff-ℤ :
   (x y z : ℤ) → diff-ℤ (z +ℤ x) (z +ℤ y) ＝ diff-ℤ x y
 left-translation-diff-ℤ x y z =
   ( interchange-law-diff-add-ℤ z x z y) ∙
-  ( ( ap (add-ℤ' (diff-ℤ x y)) (right-inverse-law-add-ℤ z)) ∙
+  ( ( ap (_+ℤ (diff-ℤ x y)) (right-inverse-law-add-ℤ z)) ∙
     ( left-unit-law-add-ℤ (diff-ℤ x y)))
 
 right-translation-diff-ℤ :

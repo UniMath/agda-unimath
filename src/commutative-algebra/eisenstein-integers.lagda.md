@@ -449,7 +449,7 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                           ( ( inv
                               ( associative-add-ℤ ed cf (neg-ℤ df))) ∙
                             ( ap
-                              ( add-ℤ' (neg-ℤ df))
+                              ( _+ℤ (neg-ℤ df))
                               ( commutative-add-ℤ ed cf)))))))))) ∙
             ( inv
               ( associative-add-ℤ

@@ -110,7 +110,7 @@ triangle-inequality-dist-ℕ zero-ℕ (succ-ℕ n) (succ-ℕ k) =
   concatenate-eq-leq-eq-ℕ
     ( inv (ap succ-ℕ (left-unit-law-dist-ℕ n)))
     ( triangle-inequality-dist-ℕ zero-ℕ n k)
-    ( ( ap (succ-ℕ ∘ (add-ℕ' (dist-ℕ k n))) (left-unit-law-dist-ℕ k)) ∙
+    ( ( ap (succ-ℕ ∘ (_+ℕ (dist-ℕ k n))) (left-unit-law-dist-ℕ k)) ∙
       ( inv (left-successor-law-add-ℕ k (dist-ℕ k n))))
 triangle-inequality-dist-ℕ (succ-ℕ m) zero-ℕ zero-ℕ = refl-leq-ℕ (succ-ℕ m)
 triangle-inequality-dist-ℕ (succ-ℕ m) zero-ℕ (succ-ℕ k) =
@@ -250,7 +250,7 @@ is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
 is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
   inr
     ( inr
-      ( ( ap (add-ℕ' (dist-ℕ x y)) (symmetric-dist-ℕ x z)) ∙
+      ( ( ap (_+ℕ (dist-ℕ x y)) (symmetric-dist-ℕ x z)) ∙
         ( ( triangle-equality-dist-ℕ z x y H1 H2) ∙
           ( symmetric-dist-ℕ z y))))
 is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =

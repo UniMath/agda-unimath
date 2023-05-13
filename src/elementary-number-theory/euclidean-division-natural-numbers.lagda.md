@@ -123,7 +123,7 @@ eq-euclidean-division-ℕ :
 eq-euclidean-division-ℕ zero-ℕ x =
   ( inv
     ( ap
-      ( add-ℕ' x)
+      ( _+ℕ x)
       ( right-zero-law-mul-ℕ (quotient-euclidean-division-ℕ zero-ℕ x)))) ∙
   ( left-unit-law-add-ℕ x)
 eq-euclidean-division-ℕ (succ-ℕ k) x =
