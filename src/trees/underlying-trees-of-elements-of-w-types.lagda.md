@@ -7,25 +7,18 @@ module trees.underlying-trees-of-elements-of-w-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
-open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -39,7 +32,6 @@ open import trees.elementhood-relation-w-types
 open import trees.enriched-directed-trees
 open import trees.equivalences-directed-trees
 open import trees.equivalences-enriched-directed-trees
-open import trees.inequality-w-types
 open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors
 open import trees.w-types
 ```

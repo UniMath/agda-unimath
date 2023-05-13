@@ -13,11 +13,9 @@ open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.identity-types
 open import foundation.powersets
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.concatenation-lists
-open import lists.lists
 
 open import ring-theory.ideals-generated-by-subsets-rings
 ```

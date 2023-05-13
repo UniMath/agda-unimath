@@ -8,7 +8,6 @@ module trees.equivalences-directed-trees where
 
 ```agda
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -18,12 +17,10 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import graph-theory.equivalences-directed-graphs
-open import graph-theory.morphisms-directed-graphs
 open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees

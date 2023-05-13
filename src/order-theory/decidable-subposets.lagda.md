@@ -7,7 +7,6 @@ module order-theory.decidable-subposets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.identity-types
