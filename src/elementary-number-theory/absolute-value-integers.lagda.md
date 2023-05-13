@@ -179,19 +179,19 @@ is-nonzero-abs-ℤ (inr (inr x)) H = is-nonzero-succ-ℕ x
 
 ```agda
 multiplicative-abs-ℤ' :
-  (x y : ℤ) → abs-ℤ (explicit-mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
+  (x y : ℤ) → abs-ℤ (explicit-mul-ℤ x y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
 multiplicative-abs-ℤ' (inl x) (inl y) =
   abs-int-ℕ _
 multiplicative-abs-ℤ' (inl x) (inr (inl star)) =
   inv (right-zero-law-mul-ℕ x)
 multiplicative-abs-ℤ' (inl x) (inr (inr y)) =
-  ( abs-neg-ℤ (inl (add-ℕ (mul-ℕ x (succ-ℕ y)) y))) ∙
-  ( abs-int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)))
+  ( abs-neg-ℤ (inl (add-ℕ (x *ℕ (succ-ℕ y)) y))) ∙
+  ( abs-int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))
 multiplicative-abs-ℤ' (inr (inl star)) (inl y) =
   refl
 multiplicative-abs-ℤ' (inr (inr x)) (inl y) =
-  ( abs-neg-ℤ (inl (add-ℕ (mul-ℕ x (succ-ℕ y)) y))) ∙
-  ( abs-int-ℕ (succ-ℕ (add-ℕ (mul-ℕ x (succ-ℕ y)) y)))
+  ( abs-neg-ℤ (inl (add-ℕ (x *ℕ (succ-ℕ y)) y))) ∙
+  ( abs-int-ℕ (succ-ℕ (add-ℕ (x *ℕ (succ-ℕ y)) y)))
 multiplicative-abs-ℤ' (inr (inl star)) (inr (inl star)) =
   refl
 multiplicative-abs-ℤ' (inr (inl star)) (inr (inr x)) =
@@ -202,7 +202,7 @@ multiplicative-abs-ℤ' (inr (inr x)) (inr (inr y)) =
   abs-int-ℕ _
 
 multiplicative-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
+  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
 multiplicative-abs-ℤ x y =
   ap abs-ℤ (compute-mul-ℤ x y) ∙ multiplicative-abs-ℤ' x y
 ```
