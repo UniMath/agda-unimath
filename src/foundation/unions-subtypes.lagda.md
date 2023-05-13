@@ -9,7 +9,6 @@ module foundation.unions-subtypes where
 ```agda
 open import foundation.decidable-subtypes
 open import foundation.disjunction
-open import foundation.existential-quantification
 open import foundation.large-locale-of-subtypes
 
 open import foundation-core.subtypes

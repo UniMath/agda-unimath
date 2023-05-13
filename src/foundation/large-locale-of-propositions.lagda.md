@@ -15,7 +15,6 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices

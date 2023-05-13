@@ -491,7 +491,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Ring :
     (m n : ℕ) (x : type-Ring R) →
-    mul-nat-scalar-Ring (add-ℕ m n) x ＝
+    mul-nat-scalar-Ring (m +ℕ n) x ＝
     add-Ring R (mul-nat-scalar-Ring m x) (mul-nat-scalar-Ring n x)
   right-distributive-mul-nat-scalar-add-Ring =
     right-distributive-mul-nat-scalar-add-Semiring (semiring-Ring R)

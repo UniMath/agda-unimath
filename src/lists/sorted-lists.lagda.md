@@ -7,8 +7,6 @@ module lists.sorted-lists where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.unit-type

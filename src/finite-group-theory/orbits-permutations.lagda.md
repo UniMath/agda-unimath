@@ -99,7 +99,7 @@ module _
     iso-iterative-groupoid-automorphism-𝔽 x y →
     iso-iterative-groupoid-automorphism-𝔽 x z
   pr1 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
-    add-ℕ n m
+    n +ℕ m
   pr2 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
@@ -387,16 +387,16 @@ module _
 
   mult-has-finite-orbits-permutation :
     (k : ℕ) →
-    Id (iterate (mul-ℕ k (pr1 has-finite-orbits-permutation)) (map-equiv f) a) a
+    Id (iterate (k *ℕ (pr1 has-finite-orbits-permutation)) (map-equiv f) a) a
   mult-has-finite-orbits-permutation zero-ℕ = refl
   mult-has-finite-orbits-permutation (succ-ℕ k) =
     ( iterate-add-ℕ
-      ( mul-ℕ k (pr1 has-finite-orbits-permutation))
+      ( k *ℕ (pr1 has-finite-orbits-permutation))
       ( pr1 has-finite-orbits-permutation)
       ( map-equiv f)
       ( a)) ∙
     ( ( ap
-        ( iterate (mul-ℕ k (pr1 has-finite-orbits-permutation)) (map-equiv f))
+        ( iterate (k *ℕ (pr1 has-finite-orbits-permutation)) (map-equiv f))
         ( pr2 (pr2 has-finite-orbits-permutation))) ∙
       ( mult-has-finite-orbits-permutation k))
 ```
@@ -445,11 +445,11 @@ module _
       (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
-          Id (add-ℕ j k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
+          Id (j +ℕ k) (k *ℕ (pr1 (has-finite-orbits-permutation-a h))))
     lemma h k =
       subtraction-leq-ℕ
         ( k)
-        ( mul-ℕ k (pr1 (has-finite-orbits-permutation-a h)))
+        ( k *ℕ (pr1 (has-finite-orbits-permutation-a h)))
         ( leq-mul-is-nonzero-ℕ
           ( pr1 (has-finite-orbits-permutation-a h))
           ( k)
@@ -465,7 +465,7 @@ module _
           ( λ { (pair k2 q) →
                 ( unit-trunc-Prop
                   ( pair
-                    ( add-ℕ k2 k1)
+                    ( k2 +ℕ k1)
                     ( (iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
                       ( ap (iterate k2 (map-equiv f)) p ∙ q))))}))
 
@@ -542,16 +542,14 @@ module _
                     ( ( inv
                         ( iterate-add-ℕ
                           ( remainder-euclidean-division-ℕ m (pr1 p))
-                          ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
+                          ( (quotient-euclidean-division-ℕ m (pr1 p)) *ℕ m)
                           ( map-equiv f)
                           ( a))) ∙
                       ( ( ap
                           ( λ x → iterate x (map-equiv f) a)
                           ( ( commutative-add-ℕ
                               ( remainder-euclidean-division-ℕ m (pr1 p))
-                              ( mul-ℕ
-                                ( quotient-euclidean-division-ℕ m (pr1 p))
-                                ( m))) ∙
+                              ( quotient-euclidean-division-ℕ m (pr1 p) *ℕ m)) ∙
                             ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
                         ( pr2 p)))))))
         where
@@ -633,7 +631,7 @@ module _
 
   sign-permutation-orbit : Fin 2
   sign-permutation-orbit =
-    iterate (add-ℕ n number-of-orbits-permutation) (succ-Fin 2) (zero-Fin 1)
+    iterate (n +ℕ number-of-orbits-permutation) (succ-Fin 2) (zero-Fin 1)
 ```
 
 ```agda
@@ -895,7 +893,7 @@ module _
           Σ ( ℕ)
             ( λ l →
               is-nonzero-ℕ l ×
-              Id (add-ℕ l k) (pr1 (minimal-element-iterate g a b pa)))
+              Id (l +ℕ k) (pr1 (minimal-element-iterate g a b pa)))
         pair-k2 =
           (subtraction-le-ℕ k (pr1 (minimal-element-iterate g a b pa)) ineq)
       pr2 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) r =
@@ -985,19 +983,19 @@ module _
         ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) (k : ℕ) →
         Id
           ( iterate
-            ( mul-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+            ( k *ℕ (pr1 (minimal-element-iterate g a b pa)))
             ( map-equiv (composition-transposition-a-b g))
             ( a))
           ( a)
       mult-lemma2 pa zero-ℕ = refl
       mult-lemma2 pa (succ-ℕ k) =
         ( iterate-add-ℕ
-          ( mul-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+          ( k *ℕ (pr1 (minimal-element-iterate g a b pa)))
           ( pr1 (minimal-element-iterate g a b pa))
           ( map-equiv (composition-transposition-a-b g)) a) ∙
         ( ap
           ( iterate
-            ( mul-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+            ( k *ℕ (pr1 (minimal-element-iterate g a b pa)))
             ( map-equiv (composition-transposition-a-b g)))
           ( lemma2
             ( pa)
@@ -1023,7 +1021,7 @@ module _
                 ( (inv
                     ( iterate-add-ℕ
                       ( r)
-                      ( mul-ℕ quo (pr1 (minimal-element-iterate g a b pa)))
+                      ( quo *ℕ (pr1 (minimal-element-iterate g a b pa)))
                       ( map-equiv (composition-transposition-a-b g)) a)) ∙
                   ( ( ap
                       ( λ n →
@@ -1033,7 +1031,7 @@ module _
                           ( a))
                       ( commutative-add-ℕ
                         ( r)
-                        ( mul-ℕ quo (pr1 (minimal-element-iterate g a b pa))) ∙
+                        ( quo *ℕ (pr1 (minimal-element-iterate g a b pa))) ∙
                         ( eq-euclidean-division-ℕ
                           ( pr1 (minimal-element-iterate g a b pa))
                           ( k)))) ∙
@@ -2327,7 +2325,7 @@ module _
             succ-Fin
               ( 2)
               ( iterate
-                ( add-ℕ (number-of-elements-count eX) k)
+                ( (number-of-elements-count eX) +ℕ k)
                 ( succ-Fin 2)
                 ( zero-Fin 1)))
           ( number-orbits-composition-transposition g P)
@@ -2335,7 +2333,7 @@ module _
         ap
           ( λ k →
             iterate
-              ( add-ℕ (number-of-elements-count eX) k)
+              ( (number-of-elements-count eX) +ℕ k)
               ( succ-Fin 2)
               ( zero-Fin 1))
           ( number-orbits-composition-transposition' g NP)

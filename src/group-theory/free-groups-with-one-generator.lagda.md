@@ -118,7 +118,7 @@ module _
 
   preserves-mul-map-hom-free-group-with-one-generator-ℤ :
     (x y : ℤ) →
-    ( map-hom-free-group-with-one-generator-ℤ (add-ℤ x y)) ＝
+    ( map-hom-free-group-with-one-generator-ℤ (x +ℤ y)) ＝
     ( mul-Group G
       ( map-hom-free-group-with-one-generator-ℤ x)
       ( map-hom-free-group-with-one-generator-ℤ y))
@@ -151,7 +151,7 @@ module _
           ( λ x →
             ( ap
               ( map-hom-Group ℤ-Group G h)
-              ( is-add-one-succ-ℤ x)) ∙
+              ( is-left-add-one-succ-ℤ x)) ∙
             ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 

@@ -29,7 +29,7 @@ times.
 ```agda
 exp-ℕ : ℕ → ℕ → ℕ
 exp-ℕ m 0 = 1
-exp-ℕ m (succ-ℕ n) = mul-ℕ (exp-ℕ m n) m
+exp-ℕ m (succ-ℕ n) = (exp-ℕ m n) *ℕ m
 
 infix 30 _^ℕ_
 _^ℕ_ = exp-ℕ

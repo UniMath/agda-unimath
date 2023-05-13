@@ -106,7 +106,7 @@ abstract
       ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star)))) ∙
     ( ap
-      ( add-ℕ' (number-of-elements-count (f (map-equiv e (inr star)))))
+      ( _+ℕ (number-of-elements-count (f (map-equiv e (inr star)))))
       ( number-of-elements-count-Σ' k id-equiv (λ x → f (map-equiv e (inl x)))))
 
 abstract

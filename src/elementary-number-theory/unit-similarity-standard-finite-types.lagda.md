@@ -44,14 +44,14 @@ sim-unit-Fin k x y = Σ (unit-Fin k) (λ u → mul-Fin k (pr1 u) x ＝ y)
 sim-unit-ℕ :
   (k : ℕ) → ℕ → ℕ → UU lzero
 sim-unit-ℕ k x y =
-  Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k (mul-ℕ (pr1 l) x) y)
+  Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k ((pr1 l) *ℕ x) y)
 ```
 
 ### Congruence to `1`
 
 ```agda
 sim-unit-one-ℕ : (k x : ℕ) → UU lzero
-sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (mul-ℕ l x) 1)
+sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (l *ℕ x) 1)
 ```
 
 ## Properties
@@ -94,13 +94,11 @@ pr1 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   nat-Fin (succ-ℕ k) (pr1 u)
 pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   cong-eq-mod-succ-ℕ k
-    ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
+    ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
     ( 1)
     ( ( eq-mod-succ-cong-ℕ k
-        ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
-        ( mul-ℕ
-          ( nat-Fin (succ-ℕ k) (pr1 u))
-          ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
+        ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
+        ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
         ( scalar-invariant-cong-ℕ
           ( succ-ℕ k)
           ( x)

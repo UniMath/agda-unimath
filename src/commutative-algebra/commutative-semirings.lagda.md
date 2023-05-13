@@ -309,7 +309,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Commutative-Semiring :
     (m n : ℕ) (x : type-Commutative-Semiring) →
-    mul-nat-scalar-Commutative-Semiring (add-ℕ m n) x ＝
+    mul-nat-scalar-Commutative-Semiring (m +ℕ n) x ＝
     add-Commutative-Semiring
       ( mul-nat-scalar-Commutative-Semiring m x)
       ( mul-nat-scalar-Commutative-Semiring n x)

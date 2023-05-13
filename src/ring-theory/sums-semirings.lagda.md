@@ -252,8 +252,8 @@ module _
 ```agda
 split-sum-Semiring :
   {l : Level} (R : Semiring l)
-  (n m : ℕ) (f : functional-vec-Semiring R (add-ℕ n m)) →
-  sum-Semiring R (add-ℕ n m) f ＝
+  (n m : ℕ) (f : functional-vec-Semiring R (n +ℕ m)) →
+  sum-Semiring R (n +ℕ m) f ＝
   add-Semiring R
     ( sum-Semiring R n (f ∘ inl-coprod-Fin n m))
     ( sum-Semiring R m (f ∘ inr-coprod-Fin n m))

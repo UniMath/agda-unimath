@@ -7,8 +7,6 @@ module lists.predicates-on-lists where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels

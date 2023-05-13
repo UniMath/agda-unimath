@@ -44,25 +44,25 @@ Coproducts of finite types are finite, giving a coproduct operation on the type
 
 ```agda
 coprod-Fin :
-  (k l : ℕ) → (Fin k + Fin l) ≃ Fin (add-ℕ k l)
+  (k l : ℕ) → (Fin k + Fin l) ≃ Fin (k +ℕ l)
 coprod-Fin k zero-ℕ = right-unit-law-coprod (Fin k)
 coprod-Fin k (succ-ℕ l) =
   (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-associative-coprod
 
 map-coprod-Fin :
-  (k l : ℕ) → (Fin k + Fin l) → Fin (add-ℕ k l)
+  (k l : ℕ) → (Fin k + Fin l) → Fin (k +ℕ l)
 map-coprod-Fin k l = map-equiv (coprod-Fin k l)
 
 Fin-add-ℕ :
-  (k l : ℕ) → Fin (add-ℕ k l) ≃ (Fin k + Fin l)
+  (k l : ℕ) → Fin (k +ℕ l) ≃ (Fin k + Fin l)
 Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
 
 inl-coprod-Fin :
-  (k l : ℕ) → Fin k → Fin (add-ℕ k l)
+  (k l : ℕ) → Fin k → Fin (k +ℕ l)
 inl-coprod-Fin k l = map-coprod-Fin k l ∘ inl
 
 inr-coprod-Fin :
-  (k l : ℕ) → Fin l → Fin (add-ℕ k l)
+  (k l : ℕ) → Fin l → Fin (k +ℕ l)
 inr-coprod-Fin k l = map-coprod-Fin k l ∘ inr
 
 compute-inl-coprod-Fin :
@@ -75,8 +75,8 @@ compute-inl-coprod-Fin k x = refl
 ```agda
 nat-coprod-Fin :
   (n m : ℕ) → (x : Fin n + Fin m) →
-  nat-Fin (add-ℕ n m) (map-coprod-Fin n m x) ＝
-  ind-coprod _ (nat-Fin n) (λ i → add-ℕ n (nat-Fin m i)) x
+  nat-Fin (n +ℕ m) (map-coprod-Fin n m x) ＝
+  ind-coprod _ (nat-Fin n) (λ i → n +ℕ (nat-Fin m i)) x
 nat-coprod-Fin n zero-ℕ (inl x) = refl
 nat-coprod-Fin n (succ-ℕ m) (inl x) = nat-coprod-Fin n m (inl x)
 nat-coprod-Fin n (succ-ℕ m) (inr (inl x)) = nat-coprod-Fin n m (inr x)
@@ -84,12 +84,12 @@ nat-coprod-Fin n (succ-ℕ m) (inr (inr star)) = refl
 
 nat-inl-coprod-Fin :
   (n m : ℕ) (i : Fin n) →
-  nat-Fin (add-ℕ n m) (inl-coprod-Fin n m i) ＝ nat-Fin n i
+  nat-Fin (n +ℕ m) (inl-coprod-Fin n m i) ＝ nat-Fin n i
 nat-inl-coprod-Fin n m i = nat-coprod-Fin n m (inl i)
 
 nat-inr-coprod-Fin :
   (n m : ℕ) (i : Fin m) →
-  nat-Fin (add-ℕ n m) (inr-coprod-Fin n m i) ＝ add-ℕ n (nat-Fin m i)
+  nat-Fin (n +ℕ m) (inr-coprod-Fin n m i) ＝ n +ℕ (nat-Fin m i)
 nat-inr-coprod-Fin n m i = nat-coprod-Fin n m (inr i)
 ```
 
@@ -99,7 +99,7 @@ nat-inr-coprod-Fin n m i = nat-coprod-Fin n m (inr i)
 count-coprod :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   count X → count Y → count (X + Y)
-pr1 (count-coprod (pair k e) (pair l f)) = add-ℕ k l
+pr1 (count-coprod (pair k e) (pair l f)) = k +ℕ l
 pr2 (count-coprod (pair k e) (pair l f)) =
   (equiv-coprod e f) ∘e (inv-equiv (coprod-Fin k l))
 
@@ -107,7 +107,7 @@ abstract
   number-of-elements-count-coprod :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : count X) (f : count Y) →
     Id ( number-of-elements-count (count-coprod e f))
-      ( add-ℕ (number-of-elements-count e) (number-of-elements-count f))
+      ( (number-of-elements-count e) +ℕ (number-of-elements-count f))
   number-of-elements-count-coprod (pair k e) (pair l f) = refl
 ```
 
@@ -151,9 +151,7 @@ abstract
     { l1 l2 : Level} {A : UU l1} {B : UU l2}
     ( count-A : count A) (count-B : count B) (count-C : count (A + B)) →
     Id ( number-of-elements-count count-C)
-       ( add-ℕ
-         ( number-of-elements-count count-A)
-         ( number-of-elements-count count-B))
+       ( number-of-elements-count count-A +ℕ number-of-elements-count count-B)
   double-counting-coprod count-A count-B count-C =
     ( double-counting count-C (count-coprod count-A count-B)) ∙
     ( number-of-elements-count-coprod count-A count-B)
@@ -161,7 +159,7 @@ abstract
 abstract
   sum-number-of-elements-coprod :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (A + B)) →
-    Id ( add-ℕ ( number-of-elements-count (count-left-summand e))
+    Id ( ( number-of-elements-count (count-left-summand e)) +ℕ
                ( number-of-elements-count (count-right-summand e)))
        ( number-of-elements-count e)
   sum-number-of-elements-coprod e =
@@ -210,14 +208,14 @@ abstract
 
 coprod-UU-Fin :
   {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
-  UU-Fin (l1 ⊔ l2) (add-ℕ k l)
+  UU-Fin (l1 ⊔ l2) (k +ℕ l)
 pr1 (coprod-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) = X + Y
 pr2 (coprod-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
-    ( mere-equiv-Prop (Fin (add-ℕ k l)) (X + Y))
+    ( mere-equiv-Prop (Fin (k +ℕ l)) (X + Y))
     ( λ e1 →
       apply-universal-property-trunc-Prop K
-        ( mere-equiv-Prop (Fin (add-ℕ k l)) (X + Y))
+        ( mere-equiv-Prop (Fin (k +ℕ l)) (X + Y))
         ( λ e2 →
           unit-trunc-Prop
             ( equiv-coprod e1 e2 ∘e inv-equiv (coprod-Fin k l))))
@@ -225,20 +223,16 @@ pr2 (coprod-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) =
 coprod-eq-is-finite :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
     Id
-      ( add-ℕ (number-of-elements-is-finite P) (number-of-elements-is-finite Q))
+      ( (number-of-elements-is-finite P) +ℕ (number-of-elements-is-finite Q))
       ( number-of-elements-is-finite (is-finite-coprod P Q))
 coprod-eq-is-finite {X = X} {Y = Y} P Q =
   ap
     ( number-of-elements-has-finite-cardinality)
     ( all-elements-equal-has-finite-cardinality
       ( pair
-        ( add-ℕ
-          ( number-of-elements-is-finite P)
-          ( number-of-elements-is-finite Q))
+        ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
         ( has-cardinality-type-UU-Fin
-          ( add-ℕ
-            ( number-of-elements-is-finite P)
-            ( number-of-elements-is-finite Q))
+          ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
           ( coprod-UU-Fin
             ( number-of-elements-is-finite P)
             ( number-of-elements-is-finite Q)

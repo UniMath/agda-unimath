@@ -53,9 +53,9 @@ pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
 pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
   ( left-negative-law-mul-ℤ y k) ∙
   ( is-injective-neg-ℤ
-    ( ( neg-neg-ℤ (mul-ℤ y k)) ∙
+    ( ( neg-neg-ℤ (y *ℤ k)) ∙
       ( ( p) ∙
-        ( ( ap (add-ℤ x) (neg-succ-ℤ x)) ∙
+        ( ( ap (x +ℤ_) (neg-succ-ℤ x)) ∙
           ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙
             ( ap pred-ℤ (right-inverse-law-add-ℤ x)))))))
 
@@ -63,7 +63,7 @@ is-unit-cong-pred-ℤ : (k x : ℤ) → cong-ℤ k x (pred-ℤ x) → is-unit-�
 pr1 (is-unit-cong-pred-ℤ k x (pair y p)) = y
 pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
   ( p) ∙
-  ( ( ap (add-ℤ x) (neg-pred-ℤ x)) ∙
+  ( ( ap (x +ℤ_) (neg-pred-ℤ x)) ∙
     ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
       ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
 
@@ -79,7 +79,7 @@ pr2 (symmetric-cong-ℤ k x y (pair d p)) =
     ( distributive-neg-diff-ℤ x y))
 
 transitive-cong-ℤ : (k x y z : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k x z
-pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = add-ℤ d e
+pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = d +ℤ e
 pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙

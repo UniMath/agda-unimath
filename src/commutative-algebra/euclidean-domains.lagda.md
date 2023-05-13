@@ -612,7 +612,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Euclidean-Domain :
     (m n : ℕ) (x : type-Euclidean-Domain) →
-    mul-nat-scalar-Euclidean-Domain (add-ℕ m n) x ＝
+    mul-nat-scalar-Euclidean-Domain (m +ℕ n) x ＝
     add-Euclidean-Domain
       ( mul-nat-scalar-Euclidean-Domain m x)
       ( mul-nat-scalar-Euclidean-Domain n x)

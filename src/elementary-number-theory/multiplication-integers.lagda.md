@@ -39,10 +39,10 @@ open import foundation.universe-levels
 ```agda
 mul-ℤ : ℤ → ℤ → ℤ
 mul-ℤ (inl zero-ℕ) l = neg-ℤ l
-mul-ℤ (inl (succ-ℕ x)) l = add-ℤ (neg-ℤ l) (mul-ℤ (inl x) l)
+mul-ℤ (inl (succ-ℕ x)) l = (neg-ℤ l) +ℤ (mul-ℤ (inl x) l)
 mul-ℤ (inr (inl star)) l = zero-ℤ
 mul-ℤ (inr (inr zero-ℕ)) l = l
-mul-ℤ (inr (inr (succ-ℕ x))) l = add-ℤ l (mul-ℤ (inr (inr x)) l)
+mul-ℤ (inr (inr (succ-ℕ x))) l = l +ℤ (mul-ℤ (inr (inr x)) l)
 
 infix 30 _*ℤ_
 _*ℤ_ = mul-ℤ
@@ -77,7 +77,7 @@ explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 
 ```agda
 is-plus-or-minus-ℤ : ℤ → ℤ → UU lzero
-is-plus-or-minus-ℤ x y = (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y)
+is-plus-or-minus-ℤ x y = (x ＝ y) + (neg-one-ℤ *ℤ x ＝ y)
 ```
 
 ## Properties
@@ -308,12 +308,12 @@ interchange-law-mul-mul-ℤ =
     commutative-mul-ℤ
     associative-mul-ℤ
 
-is-mul-neg-one-neg-ℤ : (x : ℤ) → neg-ℤ x ＝ neg-one-ℤ *ℤ x
-is-mul-neg-one-neg-ℤ x = refl
+is-left-mul-neg-one-neg-ℤ : (x : ℤ) → neg-ℤ x ＝ neg-one-ℤ *ℤ x
+is-left-mul-neg-one-neg-ℤ x = refl
 
-is-mul-neg-one-neg-ℤ' : (x : ℤ) → neg-ℤ x ＝ x *ℤ neg-one-ℤ
-is-mul-neg-one-neg-ℤ' x =
-  is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
+is-right-mul-neg-one-neg-ℤ : (x : ℤ) → neg-ℤ x ＝ x *ℤ neg-one-ℤ
+is-right-mul-neg-one-neg-ℤ x =
+  is-left-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
 
 double-negative-law-mul-ℤ : (k l : ℤ) → (neg-ℤ k) *ℤ (neg-ℤ l) ＝ k *ℤ l
 double-negative-law-mul-ℤ k l =
@@ -408,15 +408,15 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
 ### Linearity of the difference
 
 ```agda
-linear-diff-ℤ :
+linear-diff-left-mul-ℤ :
   (z x y : ℤ) → diff-ℤ (z *ℤ x) (z *ℤ y) ＝ z *ℤ (diff-ℤ x y)
-linear-diff-ℤ z x y =
+linear-diff-left-mul-ℤ z x y =
   ( ap ((z *ℤ x) +ℤ_) (inv (right-negative-law-mul-ℤ z y))) ∙
   ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
 
-linear-diff-ℤ' :
+linear-diff-right-mul-ℤ :
   (x y z : ℤ) → diff-ℤ (x *ℤ z) (y *ℤ z) ＝ (diff-ℤ x y) *ℤ z
-linear-diff-ℤ' x y z =
+linear-diff-right-mul-ℤ x y z =
   ( ap ((x *ℤ z) +ℤ_) (inv (left-negative-law-mul-ℤ y z))) ∙
   ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
 ```
@@ -440,9 +440,9 @@ is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inr y)) H =
 ### Injectivity of multiplication
 
 ```agda
-is-injective-mul-ℤ :
-  (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ x)
-is-injective-mul-ℤ x f {y} {z} p =
+is-injective-left-mul-ℤ :
+  (x : ℤ) → is-nonzero-ℤ x → is-injective (x *ℤ_)
+is-injective-left-mul-ℤ x f {y} {z} p =
   eq-diff-ℤ
     ( map-left-unit-law-coprod-is-empty
       ( is-zero-ℤ x)
@@ -450,22 +450,27 @@ is-injective-mul-ℤ x f {y} {z} p =
       ( f)
       ( is-zero-is-zero-mul-ℤ x
         ( diff-ℤ y z)
-        ( inv (linear-diff-ℤ x y z) ∙ is-zero-diff-ℤ p)))
+        ( inv (linear-diff-left-mul-ℤ x y z) ∙ is-zero-diff-ℤ p)))
 
-is-injective-mul-ℤ' :
-  (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ' x)
-is-injective-mul-ℤ' x f {y} {z} p =
-  is-injective-mul-ℤ x f (commutative-mul-ℤ x y ∙ (p ∙ commutative-mul-ℤ z x))
+is-injective-right-mul-ℤ :
+  (x : ℤ) → is-nonzero-ℤ x → is-injective (_*ℤ x)
+is-injective-right-mul-ℤ x f {y} {z} p =
+  is-injective-left-mul-ℤ
+    ( x)
+    ( f)
+    ( commutative-mul-ℤ x y ∙ (p ∙ commutative-mul-ℤ z x))
 ```
 
 ### Multiplication by a nonzero integer is an embedding
 
 ```agda
-is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ x)
-is-emb-mul-ℤ x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ x f)
+is-emb-left-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (x *ℤ_)
+is-emb-left-mul-ℤ x f =
+  is-emb-is-injective is-set-ℤ (is-injective-left-mul-ℤ x f)
 
-is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ' x)
-is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)
+is-emb-right-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (_*ℤ x)
+is-emb-right-mul-ℤ x f =
+  is-emb-is-injective is-set-ℤ (is-injective-right-mul-ℤ x f)
 ```
 
 ```agda
@@ -511,22 +516,22 @@ is-nonnegative-right-factor-mul-ℤ {x} {y} H =
 ```
 
 ```agda
-preserves-leq-mul-ℤ :
+preserves-leq-left-mul-ℤ :
   (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (z *ℤ x) (z *ℤ y)
-preserves-leq-mul-ℤ x y (inr (inl star)) star K = star
-preserves-leq-mul-ℤ x y (inr (inr zero-ℕ)) star K = K
-preserves-leq-mul-ℤ x y (inr (inr (succ-ℕ n))) star K =
+preserves-leq-left-mul-ℤ x y (inr (inl star)) star K = star
+preserves-leq-left-mul-ℤ x y (inr (inr zero-ℕ)) star K = K
+preserves-leq-left-mul-ℤ x y (inr (inr (succ-ℕ n))) star K =
   preserves-leq-add-ℤ {x} {y}
     { (inr (inr n)) *ℤ x}
     { (inr (inr n)) *ℤ y}
     ( K)
-    ( preserves-leq-mul-ℤ x y (inr (inr n)) star K)
+    ( preserves-leq-left-mul-ℤ x y (inr (inr n)) star K)
 
-preserves-leq-mul-ℤ' :
+preserves-leq-right-mul-ℤ :
   (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (x *ℤ z) (y *ℤ z)
-preserves-leq-mul-ℤ' x y z H K =
+preserves-leq-right-mul-ℤ x y z H K =
   concatenate-eq-leq-eq-ℤ
     ( commutative-mul-ℤ x z)
-    ( preserves-leq-mul-ℤ x y z H K)
+    ( preserves-leq-left-mul-ℤ x y z H K)
     ( commutative-mul-ℤ z y)
 ```
