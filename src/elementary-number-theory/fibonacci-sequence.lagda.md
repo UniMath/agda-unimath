@@ -94,7 +94,7 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
   ( ap Fibonacci-ℕ (inv (left-successor-law-add-ℕ m (succ-ℕ n)))) ∙
   ( ( Fibonacci-add-ℕ (succ-ℕ m) n) ∙
     ( ( ap
-        ( add-ℕ' ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))
+        ( _+ℕ ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))
         ( right-distributive-mul-add-ℕ
           ( Fibonacci-ℕ (succ-ℕ m))
           ( Fibonacci-ℕ m)
@@ -115,7 +115,7 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
                 ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))
                 ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))) ∙
             ( ap
-              ( add-ℕ' ((Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
+              ( _+ℕ ((Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
               ( inv
                 ( left-distributive-mul-add-ℕ
                   ( Fibonacci-ℕ (succ-ℕ m))

@@ -74,8 +74,7 @@ abstract
     (count-B : count B) →
     Id ( number-of-elements-count
          ( count-prod count-A count-B))
-       ( mul-ℕ
-         ( number-of-elements-count count-A)
+       ( ( number-of-elements-count count-A) *ℕ
          ( number-of-elements-count count-B))
   number-of-elements-count-prod (pair k e) (pair l f) = refl
 

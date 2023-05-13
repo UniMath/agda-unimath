@@ -98,9 +98,7 @@ pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
     ( 1)
     ( ( eq-mod-succ-cong-ℕ k
         ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
-        ( mul-ℕ
-          ( nat-Fin (succ-ℕ k) (pr1 u))
-          ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
+        ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
         ( scalar-invariant-cong-ℕ
           ( succ-ℕ k)
           ( x)

@@ -393,13 +393,13 @@ isretr-add-neg-ℤ' x y =
 
 abstract
   is-equiv-add-ℤ' : (y : ℤ) → is-equiv (_+ℤ y)
-  pr1 (pr1 (is-equiv-add-ℤ' y)) = add-ℤ' (neg-ℤ y)
+  pr1 (pr1 (is-equiv-add-ℤ' y)) = _+ℤ (neg-ℤ y)
   pr2 (pr1 (is-equiv-add-ℤ' y)) = issec-add-neg-ℤ' y
-  pr1 (pr2 (is-equiv-add-ℤ' y)) = add-ℤ' (neg-ℤ y)
+  pr1 (pr2 (is-equiv-add-ℤ' y)) = _+ℤ (neg-ℤ y)
   pr2 (pr2 (is-equiv-add-ℤ' y)) = isretr-add-neg-ℤ' y
 
 equiv-add-ℤ' : ℤ → (ℤ ≃ ℤ)
-pr1 (equiv-add-ℤ' y) = add-ℤ' y
+pr1 (equiv-add-ℤ' y) = _+ℤ y
 pr2 (equiv-add-ℤ' y) = is-equiv-add-ℤ' y
 
 is-binary-equiv-add-ℤ : is-binary-equiv add-ℤ

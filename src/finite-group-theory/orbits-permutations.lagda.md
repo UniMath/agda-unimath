@@ -549,9 +549,7 @@ module _
                           ( λ x → iterate x (map-equiv f) a)
                           ( ( commutative-add-ℕ
                               ( remainder-euclidean-division-ℕ m (pr1 p))
-                              ( mul-ℕ
-                                ( quotient-euclidean-division-ℕ m (pr1 p))
-                                ( m))) ∙
+                              ( quotient-euclidean-division-ℕ m (pr1 p) *ℕ m)) ∙
                             ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
                         ( pr2 p)))))))
         where

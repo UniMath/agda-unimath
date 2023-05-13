@@ -637,7 +637,7 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
           ( inr (inr x))
           ( ( commutative-mul-ℤ (inr (inr x)) (inr (inr k))) ∙
             ( ( ap
-                ( mul-ℤ' (inr (inr x)))
+                ( _*ℤ (inr (inr x)))
                 ( inv (succ-int-ℕ k) ∙ commutative-add-ℤ one-ℤ (int-ℕ k))) ∙
               ( ( right-distributive-mul-add-ℤ (int-ℕ k) one-ℤ (inr (inr x))) ∙
                 ( ap-add-ℤ

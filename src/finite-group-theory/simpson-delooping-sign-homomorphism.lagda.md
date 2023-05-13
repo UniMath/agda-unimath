@@ -139,7 +139,7 @@ module _
         ( zero-ℕ +ℕ_)
         ( inv (is-zero-nat-zero-Fin {k = 1}) ∙ ap (nat-Fin 2) Q) ∙
         ( ap
-          ( add-ℕ'
+          ( _+ℕ
             ( nat-Fin 2
               ( sign-homomorphism-Fin-two n
                 (Fin-UU-Fin' n) (inv-equiv g ∘e h))))

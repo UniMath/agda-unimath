@@ -98,8 +98,7 @@ binomial-theorem-ℕ :
   power-ℕ n (x +ℕ y) ＝
   binomial-sum-ℕ n
     ( λ i →
-      mul-ℕ
-      ( power-ℕ (nat-Fin (succ-ℕ n) i) x)
+      ( power-ℕ (nat-Fin (succ-ℕ n) i) x) *ℕ
       ( power-ℕ (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-ℕ =
   binomial-theorem-Commutative-Semiring ℕ-Commutative-Semiring

@@ -529,7 +529,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
           ( neg-ℤ ((int-ℕ (succ-ℕ x)) *ℤ (int-ℕ y))))
       by
       ap
-        ( add-ℤ'
+        ( _+ℤ
           ( add-ℤ
             ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
             ( neg-ℤ ((int-ℕ (succ-ℕ x)) *ℤ (int-ℕ y)))))
@@ -1826,16 +1826,14 @@ minimal-positive-distance-div-fst (succ-ℕ x) y =
         by
           ( inv
             ( right-unit-law-add-ℕ
-              ( mul-ℕ
-                ( quotient-euclidean-division-ℕ
+              ( ( quotient-euclidean-division-ℕ
                   ( minimal-positive-distance (succ-ℕ x) y)
-                  ( succ-ℕ x))
+                  ( succ-ℕ x)) *ℕ
                 ( minimal-positive-distance (succ-ℕ x) y))))
       ＝ add-ℕ
-        ( mul-ℕ
-          ( quotient-euclidean-division-ℕ
+        ( ( quotient-euclidean-division-ℕ
             ( minimal-positive-distance (succ-ℕ x) y)
-            ( succ-ℕ x))
+            ( succ-ℕ x)) *ℕ
           ( minimal-positive-distance (succ-ℕ x) y))
         ( remainder-euclidean-division-ℕ
           ( minimal-positive-distance (succ-ℕ x) y)

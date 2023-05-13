@@ -99,8 +99,7 @@ binomial-theorem-ℤ :
   power-ℤ n (x +ℤ y) ＝
   binomial-sum-ℤ n
     ( λ i →
-      mul-ℤ
-      ( power-ℤ (nat-Fin (succ-ℕ n) i) x)
-      ( power-ℤ (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
+        ( power-ℤ (nat-Fin (succ-ℕ n) i) x) *ℤ
+        ( power-ℤ (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-ℤ = binomial-theorem-Commutative-Ring ℤ-Commutative-Ring
 ```

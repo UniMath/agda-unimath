@@ -525,12 +525,9 @@ is-decomposition-list-fundamental-theorem-arithmetic-ℕ x H =
         ( λ p → is-decomposition-list-ℕ (succ-ℕ n) p)
         ( inv (compute-list-fundamental-theorem-arithmetic-succ-ℕ n N))
         ( ( ap
-            ( λ m →
-              mul-ℕ
-                ( nat-least-prime-divisor-ℕ
-                  ( succ-ℕ n)
-                  ( le-succ-leq-ℕ 1 n N))
-                ( m))
+            ( ( nat-least-prime-divisor-ℕ
+                ( succ-ℕ n)
+                ( le-succ-leq-ℕ 1 n N)) *ℕ_)
             ( f
               ( quotient-div-least-prime-divisor-ℕ
                 ( succ-ℕ n)

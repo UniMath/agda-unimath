@@ -198,8 +198,7 @@ convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl
 convert-based-succ-based-ℕ
   (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr star) n) =
   ( ap ( add-ℕ
-         ( mul-ℕ
-           ( succ-ℕ k)
+         ( ( succ-ℕ k) *ℕ
            ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n)))))
        ( is-zero-nat-zero-Fin {k})) ∙
   ( ( ap ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)

@@ -305,7 +305,7 @@ pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
   is-injective-int-ℕ
     ( ( inv (mul-int-ℕ (abs-ℤ d) (succ-ℕ x))) ∙
       ( ( ap
-          ( mul-ℤ' (inr (inr x)))
+          ( _*ℤ (inr (inr x)))
           { int-abs-ℤ d}
           { d}
           ( int-abs-is-nonnegative-ℤ d
@@ -585,13 +585,13 @@ div-presim-unit-ℤ :
 pr1 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
   ((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u)
 pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  ( ap (mul-ℤ (((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u))) (inv q)) ∙
+  ( ap ((((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u)) *ℤ_) (inv q)) ∙
   ( ( associative-mul-ℤ
       ( (int-unit-ℤ v) *ℤ d)
       ( int-unit-ℤ u)
       ( (int-unit-ℤ u) *ℤ x)) ∙
     ( ( ap
-        ( mul-ℤ ((int-unit-ℤ v) *ℤ d))
+        ( ((int-unit-ℤ v) *ℤ d) *ℤ_)
         ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
           ( ap (_*ℤ x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
       ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙

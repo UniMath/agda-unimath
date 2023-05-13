@@ -150,8 +150,9 @@ is-reduced-reduce-fraction-ℤ x =
       ( is-plus-or-minus-sim-unit-ℤ
       ( antisymmetric-div-ℤ (alpha *ℤ d) d
         ( div-gcd-is-common-divisor-ℤ
-          ( numerator-fraction-ℤ x) ( denominator-fraction-ℤ x)
-            (alpha *ℤ d)
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ x)
+          ( alpha *ℤ d)
           ( pair
             -- alpha * d divides the numerator of x
             ( tr
@@ -179,8 +180,10 @@ is-reduced-reduce-fraction-ℤ x =
           ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) refl)))
     where
     alpha : ℤ
-    alpha = gcd-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
-      (denominator-fraction-ℤ (reduce-fraction-ℤ x))
+    alpha =
+      gcd-ℤ
+        ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
     d : ℤ
     d = gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
     is-plus-or-minus-case-split :
@@ -219,13 +222,11 @@ sim-reduced-fraction-ℤ :
   (x : fraction-ℤ) → (sim-fraction-ℤ x (reduce-fraction-ℤ x))
 sim-reduced-fraction-ℤ x =
   equational-reasoning
-    mul-ℤ
-      ( numerator-fraction-ℤ x)
-      ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
-    ＝ mul-ℤ ((numerator-fraction-ℤ (reduce-fraction-ℤ x)) *ℤ
-        (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
+    (numerator-fraction-ℤ x) *ℤ (denominator-fraction-ℤ (reduce-fraction-ℤ x))
+    ＝ ((numerator-fraction-ℤ (reduce-fraction-ℤ x)) *ℤ
+        (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))) *ℤ
         (denominator-fraction-ℤ (reduce-fraction-ℤ x))
-      by ap (λ H → H *ℤ (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
+      by ap (_*ℤ (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
           (inv (eq-reduce-numerator-fraction-ℤ x))
     ＝ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) *ℤ
       ((gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) *ℤ
@@ -233,12 +234,10 @@ sim-reduced-fraction-ℤ x =
       by associative-mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
         (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
         (denominator-fraction-ℤ (reduce-fraction-ℤ x))
-    ＝ mul-ℤ
-      ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-      ( denominator-fraction-ℤ x)
+    ＝ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) *ℤ (denominator-fraction-ℤ x)
       by
         ap
-        ( mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x)))
+        ( (numerator-fraction-ℤ (reduce-fraction-ℤ x)) *ℤ_)
         ( ( commutative-mul-ℤ
             ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
             ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) ∙
@@ -402,7 +401,7 @@ unique-numerator-reduce-fraction-ℤ x y H =
               ( int-reduce-denominator-fraction-ℤ x)
             by
               ap
-                ( λ K → K *ℤ (int-reduce-denominator-fraction-ℤ x))
+                ( _*ℤ (int-reduce-denominator-fraction-ℤ x))
                 ( inv neg ∙
                   commutative-mul-ℤ
                     ( neg-one-ℤ)
@@ -470,10 +469,10 @@ sim-unique-denominator-reduce-fraction-ℤ x y H = antisymmetric-div-ℤ
   reduced-eqn :
     mul-ℤ
       ( int-reduce-numerator-fraction-ℤ x)
-      ( int-reduce-denominator-fraction-ℤ y)
-    ＝ mul-ℤ
-        ( int-reduce-numerator-fraction-ℤ y)
-        ( int-reduce-denominator-fraction-ℤ x)
+      ( int-reduce-denominator-fraction-ℤ y) ＝
+    mul-ℤ
+      ( int-reduce-numerator-fraction-ℤ y)
+      ( int-reduce-denominator-fraction-ℤ x)
   reduced-eqn = reduce-preserves-sim-ℤ x y H
   div-red-x-num :
     div-ℤ

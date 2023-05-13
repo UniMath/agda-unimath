@@ -47,8 +47,7 @@ module _
         ( number-of-elements-is-finite
           ( is-finite-type-decidable-subtype
             ( symmetric-difference-decidable-subtype P Q) F))
-        ( mul-ℕ
-          2
+        ( ( 2) *ℕ
           ( number-of-elements-is-finite
             ( is-finite-type-decidable-subtype
               ( intersection-decidable-subtype P Q)

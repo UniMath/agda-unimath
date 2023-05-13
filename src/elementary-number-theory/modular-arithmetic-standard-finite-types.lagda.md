@@ -487,28 +487,22 @@ associative-mul-Fin :
   mul-Fin k (mul-Fin k x y) z ＝ mul-Fin k x (mul-Fin k y z)
 associative-mul-Fin (succ-ℕ k) x y z =
   eq-mod-succ-cong-ℕ k
-    ( mul-ℕ
-      ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x y))
+    ( ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x y)) *ℕ
       ( nat-Fin (succ-ℕ k) z))
-    ( mul-ℕ
-      ( nat-Fin (succ-ℕ k) x)
+    ( ( nat-Fin (succ-ℕ k) x) *ℕ
       ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) y z)))
     ( concatenate-cong-eq-cong-ℕ
       { x1 =
-        mul-ℕ
-          ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x y))
+          ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x y)) *ℕ
           ( nat-Fin (succ-ℕ k) z)}
       { x2 =
-        mul-ℕ
-          ( (nat-Fin (succ-ℕ k) x) *ℕ (nat-Fin (succ-ℕ k) y))
+          ( (nat-Fin (succ-ℕ k) x) *ℕ (nat-Fin (succ-ℕ k) y)) *ℕ
           ( nat-Fin (succ-ℕ k) z)}
       { x3 =
-        mul-ℕ
-          ( nat-Fin (succ-ℕ k) x)
+          ( nat-Fin (succ-ℕ k) x) *ℕ
           ( (nat-Fin (succ-ℕ k) y) *ℕ (nat-Fin (succ-ℕ k) z))}
       { x4 =
-        mul-ℕ
-          ( nat-Fin (succ-ℕ k) x)
+          ( nat-Fin (succ-ℕ k) x) *ℕ
           ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) y z))}
       ( congruence-mul-ℕ
         ( succ-ℕ k)
@@ -522,11 +516,9 @@ associative-mul-Fin (succ-ℕ k) x y z =
         ( nat-Fin (succ-ℕ k) z))
       ( symm-cong-ℕ
         ( succ-ℕ k)
-        ( mul-ℕ
-          ( nat-Fin (succ-ℕ k) x)
+        ( ( nat-Fin (succ-ℕ k) x) *ℕ
           ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) y z)))
-        ( mul-ℕ
-          ( nat-Fin (succ-ℕ k) x)
+        ( ( nat-Fin (succ-ℕ k) x) *ℕ
           ( (nat-Fin (succ-ℕ k) y) *ℕ (nat-Fin (succ-ℕ k) z)))
         ( congruence-mul-ℕ
           ( succ-ℕ k)
@@ -550,13 +542,12 @@ left-unit-law-mul-Fin :
 left-unit-law-mul-Fin zero-ℕ (inr star) = refl
 left-unit-law-mul-Fin (succ-ℕ k) x =
   ( eq-mod-succ-cong-ℕ (succ-ℕ k)
-    ( mul-ℕ
-      ( nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k)))
+    ( ( nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k))) *ℕ
       ( nat-Fin (succ-ℕ (succ-ℕ k)) x))
     ( nat-Fin (succ-ℕ (succ-ℕ k)) x)
     ( cong-identification-ℕ
       ( succ-ℕ (succ-ℕ k))
-      ( ( ap ( mul-ℕ' (nat-Fin (succ-ℕ (succ-ℕ k)) x))
+      ( ( ap ( _*ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))
              ( is-one-nat-one-Fin k)) ∙
         ( left-unit-law-mul-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))))) ∙
   ( issec-nat-Fin (succ-ℕ k) x)
@@ -577,7 +568,7 @@ left-zero-law-mul-Fin k x =
       ( succ-ℕ k)
       { (nat-Fin (succ-ℕ k) (zero-Fin k)) *ℕ (nat-Fin (succ-ℕ k) x)}
       { nat-Fin (succ-ℕ k) (zero-Fin k)}
-      ( ( ap (mul-ℕ' (nat-Fin (succ-ℕ k) x)) (is-zero-nat-zero-Fin {k})) ∙
+      ( ( ap (_*ℕ (nat-Fin (succ-ℕ k) x)) (is-zero-nat-zero-Fin {k})) ∙
         ( inv (is-zero-nat-zero-Fin {k}))))) ∙
   ( issec-nat-Fin k (zero-Fin k))
 
@@ -592,8 +583,7 @@ left-distributive-mul-add-Fin :
   mul-Fin k x (add-Fin k y z) ＝ add-Fin k (mul-Fin k x y) (mul-Fin k x z)
 left-distributive-mul-add-Fin (succ-ℕ k) x y z =
   eq-mod-succ-cong-ℕ k
-    ( mul-ℕ
-      ( nat-Fin (succ-ℕ k) x)
+    ( ( nat-Fin (succ-ℕ k) x) *ℕ
       ( nat-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) y z)))
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x y))
@@ -601,12 +591,10 @@ left-distributive-mul-add-Fin (succ-ℕ k) x y z =
     ( concatenate-cong-eq-cong-ℕ
       { k = succ-ℕ k}
       { x1 =
-        mul-ℕ
-          ( nat-Fin (succ-ℕ k) x)
+          ( nat-Fin (succ-ℕ k) x) *ℕ
           ( nat-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) y z))}
       { x2 =
-        mul-ℕ
-          ( nat-Fin (succ-ℕ k) x)
+          ( nat-Fin (succ-ℕ k) x) *ℕ
           ( (nat-Fin (succ-ℕ k) y) +ℕ (nat-Fin (succ-ℕ k) z))}
       { x3 =
         add-ℕ

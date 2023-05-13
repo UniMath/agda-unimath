@@ -133,10 +133,10 @@ is-pair-expansion-unique (succ-ℕ u) (succ-ℕ u') v v' p = pu , pv
         ((exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2)))
     q = is-injective-mul-ℕ 2 is-nonzero-two-ℕ
       ( inv (associative-mul-ℕ 2 (exp-ℕ 2 u) (succ-ℕ (v *ℕ 2))) ∙
-      ( ( ap (mul-ℕ' (succ-ℕ (v *ℕ 2)))
+      ( ( ap (_*ℕ (succ-ℕ (v *ℕ 2)))
         ( commutative-mul-ℕ 2 (exp-ℕ 2 u))) ∙
       ( ( p) ∙
-      ( ( ap (mul-ℕ' (succ-ℕ (v' *ℕ 2)))
+      ( ( ap (_*ℕ (succ-ℕ (v' *ℕ 2)))
         ( commutative-mul-ℕ (exp-ℕ 2 u') 2)) ∙
       ( associative-mul-ℕ 2 (exp-ℕ 2 u') (succ-ℕ (v' *ℕ 2)))))))
 

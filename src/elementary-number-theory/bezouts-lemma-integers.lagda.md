@@ -40,19 +40,15 @@ bezouts-lemma-eqn-to-int :
   nat-gcd-ℤ x y ＝
   dist-ℕ
     ( abs-ℤ
-      ( mul-ℤ
-        ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H)) x))
+      ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H) *ℤ x))
     ( abs-ℤ
-      ( mul-ℤ
-        ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H)) y))
+      ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H) *ℤ y))
 bezouts-lemma-eqn-to-int x y H =
   equational-reasoning
     nat-gcd-ℤ x y
     ＝ dist-ℕ
-      ( mul-ℕ
-        ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H) (abs-ℤ x))
-      ( mul-ℕ
-        ( minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H) (abs-ℤ y))
+      ( (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) H) *ℕ (abs-ℤ x))
+      ( (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) H) *ℕ (abs-ℤ y))
       by (inv (bezouts-lemma-eqn-ℕ (abs-ℤ x) (abs-ℤ y) H))
     ＝ dist-ℕ
         ( mul-ℕ
