@@ -73,7 +73,7 @@ right-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 k)) =
 ```agda
 left-successor-law-add-𝕋 :
   (n k : 𝕋) →
-  add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 n))) k ＝
+  (succ-𝕋 (succ-𝕋 (succ-𝕋 n))) +𝕋 k ＝
   succ-𝕋 (add-𝕋 (succ-𝕋 (succ-𝕋 n)) k)
 left-successor-law-add-𝕋 n neg-two-𝕋 = refl
 left-successor-law-add-𝕋 n (succ-𝕋 k) = refl

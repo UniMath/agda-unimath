@@ -189,7 +189,7 @@ convert-based-succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl
 convert-based-succ-based-ℕ
   ( succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
   ( ap
-    ( λ t → add-ℕ ((succ-ℕ k) *ℕ (succ-ℕ t)) t)
+    ( λ t → ((succ-ℕ k) *ℕ (succ-ℕ t)) +ℕ t)
     ( is-zero-nat-zero-Fin {k})) ∙
   ( right-unit-law-mul-ℕ (succ-ℕ k))
 convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =

@@ -426,7 +426,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
 
   a-extra-eqn-neg :
     add-ℤ
-      ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+      ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
       ( neg-ℤ
         ( mul-ℤ
           ( add-ℤ
@@ -439,7 +439,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
   a-extra-eqn-neg =
     equational-reasoning
     add-ℤ
-      ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+      ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
       ( neg-ℤ
         ( mul-ℤ
           ( add-ℤ
@@ -447,7 +447,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
             ( neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
           ( int-ℕ y)))
     ＝ add-ℤ
-        ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+        ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
         ( mul-ℤ
           ( neg-ℤ
             ( add-ℤ
@@ -465,7 +465,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
             ( (int-ℕ (succ-ℕ x)) +ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
             ( int-ℕ y)))
     ＝ add-ℤ
-        ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+        ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
         ( mul-ℤ
           ( (int-ℤ-Mod (succ-ℕ x) u) +ℤ (neg-ℤ (int-ℕ (succ-ℕ x))))
           ( int-ℕ y))
@@ -473,11 +473,11 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
       ap
         ( λ p →
           add-ℤ
-            ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+            ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
             ( p *ℤ (int-ℕ y)))
         ( equational-reasoning
           neg-ℤ ((int-ℕ (succ-ℕ x)) +ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
-          ＝ neg-ℤ (add-ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)) (int-ℕ (succ-ℕ x)))
+          ＝ neg-ℤ ((neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)) +ℤ (int-ℕ (succ-ℕ x)))
             by
             ap
               ( neg-ℤ)
@@ -497,19 +497,19 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
               ( _+ℤ (neg-ℤ (int-ℕ (succ-ℕ x))))
               ( neg-neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
     ＝ add-ℤ
-        ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+        ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
         ( add-ℤ
           ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
-          ( mul-ℤ (neg-ℤ (int-ℕ (succ-ℕ x))) (int-ℕ y)))
+          ( (neg-ℤ (int-ℕ (succ-ℕ x))) *ℤ (int-ℕ y)))
       by
       ap
-        ( add-ℤ (mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x))))
+        ( add-ℤ (((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x))))
         ( right-distributive-mul-add-ℤ
           ( int-ℤ-Mod (succ-ℕ x) u)
           ( neg-ℤ (int-ℕ (succ-ℕ x)))
           ( int-ℕ y))
     ＝ add-ℤ
-        ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+        ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
         ( add-ℤ
           ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
           ( neg-ℤ ((int-ℕ (succ-ℕ x)) *ℤ (int-ℕ y))))
@@ -517,7 +517,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
       ap
         ( λ p →
           add-ℤ
-            ( mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+            ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
             ( add-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) p))
         ( left-negative-law-mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))
     ＝ add-ℤ
@@ -633,14 +633,14 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
             ( dist-ℤ (int-ℕ ((nat-Fin (succ-ℕ x) u) *ℕ y)))
             ( inv (mul-int-ℕ (abs-ℤ a) (succ-ℕ x)))
         ＝ dist-ℤ
-            ( mul-ℤ (int-ℕ (nat-Fin (succ-ℕ x) u)) (int-ℕ y))
+            ( (int-ℕ (nat-Fin (succ-ℕ x) u)) *ℤ (int-ℕ y))
             ( (int-ℕ (abs-ℤ a)) *ℤ (int-ℕ (succ-ℕ x)))
           by
           ap
             ( λ p → dist-ℤ p ((int-ℕ (abs-ℤ a)) *ℤ (int-ℕ (succ-ℕ x))))
             ( inv (mul-int-ℕ (nat-Fin (succ-ℕ x) u) y))
         ＝ dist-ℤ
-            ( mul-ℤ (int-ℕ (nat-Fin (succ-ℕ x) u)) (int-ℕ y))
+            ( (int-ℕ (nat-Fin (succ-ℕ x) u)) *ℤ (int-ℕ y))
             ( a *ℤ (int-ℕ (succ-ℕ x)))
           by
           ap
@@ -677,7 +677,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
         by inv (dist-int-ℕ (((abs-ℤ a) +ℕ y) *ℕ (succ-ℕ x))
           (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
           (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
-        ＝ dist-ℤ (mul-ℤ (int-ℕ ((abs-ℤ a) +ℕ y)) (int-ℕ (succ-ℕ x)))
+        ＝ dist-ℤ ((int-ℕ ((abs-ℤ a) +ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
           (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
         by ap (λ p → dist-ℤ p (int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
@@ -706,7 +706,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u))
         ＝ dist-ℤ
             ( mul-ℤ
-              ( add-ℤ (int-ℕ (abs-ℤ (neg-ℤ a))) (int-ℕ y))
+              ( (int-ℕ (abs-ℤ (neg-ℤ a))) +ℤ (int-ℕ y))
               ( int-ℕ (succ-ℕ x)))
             ( mul-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))
@@ -714,12 +714,12 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
           ap
             ( λ p →
               dist-ℤ
-                ( mul-ℤ ((int-ℕ p) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+                ( ((int-ℕ p) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
                 ( mul-ℤ
                   ( (int-ℕ (succ-ℕ x)) +ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
                   ( int-ℕ y)))
           (inv (abs-neg-ℤ a))
-        ＝ dist-ℤ (mul-ℤ ((neg-ℤ a) +ℤ (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+        ＝ dist-ℤ (((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (mul-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))
         by ap (λ p → dist-ℤ ((p +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
@@ -1074,15 +1074,15 @@ remainder-min-dist-succ-x-is-distance x y =
           by ap (λ H → (int-ℕ H) +ℤ (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x)))))
             (rewrite-left-dist-add-ℕ d (s *ℕ (succ-ℕ x))
               (t *ℕ y) sxty (inv (dist-sx-ty-eq-d)))
-        ＝ add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+        ＝ ((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
           (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
           by ap (_+ℤ (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x)))))
             (inv (mul-int-ℕ t y))
-        ＝ add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+        ＝ ((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
           (neg-ℤ ((int-ℕ s) *ℤ (int-ℕ (succ-ℕ x))))
           by ap (λ H → ((int-ℕ t) *ℤ (int-ℕ y)) +ℤ (neg-ℤ H))
             (inv (mul-int-ℕ s (succ-ℕ x)))
-        ＝ add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+        ＝ ((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
           ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))
           by ap (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ_)
             (inv (left-negative-law-mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))
@@ -1100,18 +1100,18 @@ remainder-min-dist-succ-x-is-distance x y =
     isolate-rem-eqn =
       equational-reasoning
         int-ℕ r
-        ＝ add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+        ＝ add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
              ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
-          (add-ℤ ((int-ℕ q) *ℤ (add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+          (add-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
               ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
           (int-ℕ r))
           by inv (isretr-add-neg-ℤ
-            ((int-ℕ q) *ℤ (add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+            ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
             ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             (int-ℕ r))
-        ＝ add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+        ＝ add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
              ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
-          (add-ℤ ((int-ℕ q) *ℤ (int-ℕ d)) (int-ℕ r))
+          (((int-ℕ q) *ℤ (int-ℕ d)) +ℤ (int-ℕ r))
           by
             ap
               ( λ H →
@@ -1144,14 +1144,14 @@ remainder-min-dist-succ-x-is-distance x y =
               ( minimal-positive-distance-div-succ-x-eqn x y)
 
     rearrange-arith-eqn :
-      add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+      add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
         ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
-      ＝ add-ℤ (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) one-ℤ)
+      ＝ add-ℤ ((((int-ℕ q) *ℤ (int-ℕ s)) +ℤ one-ℤ) *ℤ
           (int-ℕ (succ-ℕ x)))
-        (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+        (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
     rearrange-arith-eqn =
       equational-reasoning
-        add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (add-ℤ ((int-ℕ t) *ℤ (int-ℕ y))
+        add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
           ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
         ＝ add-ℤ (neg-ℤ (add-ℤ ((int-ℕ q) *ℤ ((int-ℕ t) *ℤ (int-ℕ y)))
           ((int-ℕ q) *ℤ ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
@@ -1159,21 +1159,21 @@ remainder-min-dist-succ-x-is-distance x y =
           by (ap (λ H → (neg-ℤ H) +ℤ (int-ℕ (succ-ℕ x)))
             (left-distributive-mul-add-ℤ (int-ℕ q) ((int-ℕ t) *ℤ (int-ℕ y))
               ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
-        ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
+        ＝ add-ℤ (neg-ℤ (add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
           ((int-ℕ q) *ℤ ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
             (int-ℕ (succ-ℕ x))
           by (ap (λ H → add-ℤ (neg-ℤ (H +ℤ (mul-ℤ (int-ℕ q)
             ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x)))
               (inv (associative-mul-ℤ (int-ℕ q) (int-ℕ t) (int-ℕ y))))
-        ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-          (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+        ＝ add-ℤ (neg-ℤ (add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+          (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
             (int-ℕ (succ-ℕ x))
           by
             ap
               ( λ H →
                 add-ℤ
                   ( neg-ℤ
-                    ( add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)) H))
+                    ( add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)) H))
                   ( int-ℕ (succ-ℕ x)))
             ( equational-reasoning
                 ((int-ℕ q) *ℤ ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))
@@ -1184,64 +1184,64 @@ remainder-min-dist-succ-x-is-distance x y =
                         ( int-ℕ q)
                         ( neg-ℤ (int-ℕ s))
                         ( int-ℕ (succ-ℕ x)))
-                ＝ mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) (int-ℕ (succ-ℕ x))
+                ＝ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x))
                   by ap (_*ℤ (int-ℕ (succ-ℕ x)))
                   (right-negative-law-mul-ℤ (int-ℕ q) (int-ℕ s))
-                ＝ neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+                ＝ neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))
                   by
                     left-negative-law-mul-ℤ
                       ( (int-ℕ q) *ℤ (int-ℕ s))
                       ( int-ℕ (succ-ℕ x)))
         ＝ add-ℤ
             ( add-ℤ
-              ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+              ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
               ( neg-ℤ
                 ( neg-ℤ
-                  ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+                  ( ((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
             (int-ℕ (succ-ℕ x))
           by
             ap
               ( _+ℤ (int-ℕ (succ-ℕ x)))
               ( distributive-neg-add-ℤ
-                ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-                ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+                ( ((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+                ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
         ＝ add-ℤ
             ( add-ℤ
-              ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
-              ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))
+              ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
+              ( ((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))
             ( int-ℕ (succ-ℕ x))
           by
             ap
               ( λ H →
               add-ℤ
                 ( add-ℤ
-                  ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+                  ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
                   ( H))
                 ( int-ℕ (succ-ℕ x)))
               ( neg-neg-ℤ
                 ( mul-ℤ ((int-ℕ q) *ℤ ((int-ℕ s))) (int-ℕ (succ-ℕ x))))
-        ＝ add-ℤ (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
-           (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+        ＝ add-ℤ (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
+           ((((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))) +ℤ
              (int-ℕ (succ-ℕ x)))
           by associative-add-ℤ
-            (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
-            (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+            (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
+            (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))
             (int-ℕ (succ-ℕ x))
-        ＝ add-ℤ (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+        ＝ add-ℤ ((((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))) +ℤ
           (int-ℕ (succ-ℕ x)))
-          (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+          (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
           by commutative-add-ℤ
-            (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
-            (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+            (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
+            ((((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))) +ℤ
             (int-ℕ (succ-ℕ x)))
         ＝ add-ℤ
             ( mul-ℤ
-              ( add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) one-ℤ)
+              ( ((int-ℕ q) *ℤ (int-ℕ s)) +ℤ one-ℤ)
               ( int-ℕ (succ-ℕ x)))
-            ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+            ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
           by
             ap
-              ( _+ℤ (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))))
+              ( _+ℤ (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))))
               ( ap
                 ( add-ℤ
                   ( mul-ℤ ((int-ℕ q) *ℤ ((int-ℕ s))) (int-ℕ (succ-ℕ x))))
@@ -1259,24 +1259,24 @@ remainder-min-dist-succ-x-is-distance x y =
         r
         ＝ abs-ℤ (int-ℕ r)
           by (inv (abs-int-ℕ r))
-        ＝ dist-ℤ (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) one-ℤ)
+        ＝ dist-ℤ ((((int-ℕ q) *ℤ (int-ℕ s)) +ℤ one-ℤ) *ℤ
             (int-ℕ (succ-ℕ x)))
-          (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
+          (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
           by (ap (abs-ℤ) (isolate-rem-eqn ∙ rearrange-arith-eqn))
         ＝ dist-ℤ
             ( mul-ℤ ((int-ℕ (q *ℕ s)) +ℤ (int-ℕ 1)) (int-ℕ (succ-ℕ x)))
-            ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
+            ( ((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
           by ap (λ H → dist-ℤ ((H +ℤ (int-ℕ 1)) *ℤ (int-ℕ (succ-ℕ x)))
-            (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+            (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
             (mul-int-ℕ q s)
-        ＝ dist-ℤ (mul-ℤ (int-ℕ ((q *ℕ s) +ℕ 1)) (int-ℕ (succ-ℕ x)))
-          (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
+        ＝ dist-ℤ ((int-ℕ ((q *ℕ s) +ℕ 1)) *ℤ (int-ℕ (succ-ℕ x)))
+          (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
           by ap (λ H → dist-ℤ (H *ℤ (int-ℕ (succ-ℕ x)))
-            (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+            (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
             (add-int-ℕ (q *ℕ s) 1)
         ＝ dist-ℤ (int-ℕ (((q *ℕ s) +ℕ 1) *ℕ (succ-ℕ x)))
-          (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-          by ap (λ H → dist-ℤ H (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+          (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+          by ap (λ H → dist-ℤ H (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
             (mul-int-ℕ ((q *ℕ s) +ℕ 1) (succ-ℕ x))
         ＝ dist-ℤ (int-ℕ (((q *ℕ s) +ℕ 1) *ℕ (succ-ℕ x)))
           ((int-ℕ (q *ℕ t)) *ℤ (int-ℕ y))
@@ -1293,7 +1293,7 @@ remainder-min-dist-succ-x-is-distance x y =
             ((q *ℕ t) *ℕ y)
 
   sx-ty-case-split (inr tysx) =
-    (abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)) ,
+    (abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)) ,
       (q *ℕ t) , inv (dist-eqn))
     where
     rewrite-dist : (t *ℕ y) +ℕ d ＝ (s *ℕ (succ-ℕ x))
@@ -1384,10 +1384,10 @@ remainder-min-dist-succ-x-is-distance x y =
             ( neg-ℤ (int-ℕ (t *ℕ y)))
             ( (int-ℕ (t *ℕ y)) +ℤ (int-ℕ d))
           by inv (isretr-add-neg-ℤ (int-ℕ (t *ℕ y)) (int-ℕ d))
-        ＝ add-ℤ (neg-ℤ (int-ℕ (t *ℕ y))) (int-ℕ ((t *ℕ y) +ℕ d))
+        ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ ((t *ℕ y) +ℕ d))
           by ap (add-ℤ (neg-ℤ (int-ℕ (t *ℕ y)))) (add-int-ℕ (t *ℕ y) d)
-        ＝ add-ℤ (neg-ℤ (int-ℕ (t *ℕ y))) (int-ℕ (s *ℕ (succ-ℕ x)))
-          by ap (λ H → add-ℤ (neg-ℤ (int-ℕ (t *ℕ y))) (int-ℕ H)) rewrite-dist
+        ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ (s *ℕ (succ-ℕ x)))
+          by ap (λ H → (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ H)) rewrite-dist
         ＝ add-ℤ
           ( neg-ℤ ((int-ℕ t) *ℤ (int-ℕ y)))
           ( int-ℕ (s *ℕ (succ-ℕ x)))
@@ -1447,7 +1447,7 @@ remainder-min-dist-succ-x-is-distance x y =
                 ( add-ℤ
                   ( (neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y))
                   ( (int-ℕ s) *ℤ (int-ℕ (succ-ℕ x))))))
-            ( add-ℤ ((int-ℕ q) *ℤ (int-ℕ d)) (int-ℕ r))
+            ( ((int-ℕ q) *ℤ (int-ℕ d)) +ℤ (int-ℕ r))
           by
             ap
               ( λ H →
@@ -1480,8 +1480,8 @@ remainder-min-dist-succ-x-is-distance x y =
     rearrange-arith :
       add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (add-ℤ ((neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y))
         ((int-ℕ s) *ℤ (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
-      ＝ add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-        (neg-ℤ (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+      ＝ add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+        (neg-ℤ (mul-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
           (int-ℕ (succ-ℕ x))))
     rearrange-arith =
       equational-reasoning
@@ -1520,7 +1520,7 @@ remainder-min-dist-succ-x-is-distance x y =
             ( neg-ℤ
               ( add-ℤ
                 ( mul-ℤ ((int-ℕ q) *ℤ (neg-ℤ (int-ℕ t))) (int-ℕ y))
-                ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+                ( ((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             ( int-ℕ (succ-ℕ x))
           by
             ap
@@ -1535,8 +1535,8 @@ remainder-min-dist-succ-x-is-distance x y =
         ＝ add-ℤ
             ( neg-ℤ
               ( add-ℤ
-                ( mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t))) (int-ℕ y))
-                ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+                ( (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t))) *ℤ (int-ℕ y))
+                ( ((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             ( int-ℕ (succ-ℕ x))
           by
             ap
@@ -1552,18 +1552,18 @@ remainder-min-dist-succ-x-is-distance x y =
               ( right-negative-law-mul-ℤ (int-ℕ q) (int-ℕ t))
         ＝ add-ℤ
             ( add-ℤ
-              ( neg-ℤ (mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t))) (int-ℕ y)))
-              ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+              ( neg-ℤ ((neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t))) *ℤ (int-ℕ y)))
+              ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             ( int-ℕ (succ-ℕ x))
           by ap (_+ℤ (int-ℕ (succ-ℕ x)))
             (distributive-neg-add-ℤ
-              (mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t))) (int-ℕ y))
-              (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s))
+              ((neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t))) *ℤ (int-ℕ y))
+              (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ
               (int-ℕ (succ-ℕ x))))
         ＝ add-ℤ
             ( add-ℤ
               ( mul-ℤ (neg-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t)))) (int-ℕ y))
-              ( neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+              ( neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             ( int-ℕ (succ-ℕ x))
           by
             ap
@@ -1572,21 +1572,21 @@ remainder-min-dist-succ-x-is-distance x y =
                 ( add-ℤ
                   ( H)
                   ( neg-ℤ
-                    ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+                    ( ((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
                 ( int-ℕ (succ-ℕ x)))
             ( inv
               ( left-negative-law-mul-ℤ
                 ( neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t)))
                 ( int-ℕ y)))
-        ＝ add-ℤ (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-            (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+        ＝ add-ℤ (add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+            (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             (int-ℕ (succ-ℕ x))
           by ap (λ H → (add-ℤ ((H *ℤ (int-ℕ y)) +ℤ
-            (neg-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+            (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
               (int-ℕ (succ-ℕ x))))
             (neg-neg-ℤ ((int-ℕ q) *ℤ (int-ℕ t)))
-        ＝ add-ℤ (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-            (mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) (int-ℕ (succ-ℕ x))))
+        ＝ add-ℤ (add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+            ((neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x))))
           (int-ℕ (succ-ℕ x))
           by
             ap
@@ -1598,14 +1598,14 @@ remainder-min-dist-succ-x-is-distance x y =
                 ( left-negative-law-mul-ℤ
                   ( (int-ℕ q) *ℤ (int-ℕ s))
                   ( int-ℕ (succ-ℕ x))))
-        ＝ add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-          (add-ℤ (mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) (int-ℕ (succ-ℕ x)))
+        ＝ add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+          (add-ℤ ((neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x)))
             (int-ℕ (succ-ℕ x)))
-          by associative-add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-            (mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) (int-ℕ (succ-ℕ x)))
+          by associative-add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+            ((neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x)))
             (int-ℕ (succ-ℕ x))
-        ＝ add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-          (add-ℤ (mul-ℤ (neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) (int-ℕ (succ-ℕ x)))
+        ＝ add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+          (add-ℤ ((neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x)))
             ((neg-ℤ (neg-ℤ one-ℤ)) *ℤ (int-ℕ (succ-ℕ x))))
           by
             ap
@@ -1619,7 +1619,7 @@ remainder-min-dist-succ-x-is-distance x y =
                     ( H *ℤ (int-ℕ (succ-ℕ x)))))
               ( inv (neg-neg-ℤ one-ℤ))
         ＝ add-ℤ
-            ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
+            ( ((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
             ( mul-ℤ
               ( add-ℤ
                 ( neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s)))
@@ -1627,65 +1627,65 @@ remainder-min-dist-succ-x-is-distance x y =
               ( int-ℕ (succ-ℕ x)))
           by
             ap
-              ( add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)))
+              ( add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
               ( inv
                 ( right-distributive-mul-add-ℤ
                   ( neg-ℤ ((int-ℕ q) *ℤ (int-ℕ s)))
                   ( neg-ℤ (neg-ℤ one-ℤ))
                   ( int-ℕ (succ-ℕ x))))
         ＝ add-ℤ
-            ( mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-            ( mul-ℤ (neg-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s))
+            ( ((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+            ( mul-ℤ (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ
             (neg-ℤ one-ℤ))) (int-ℕ (succ-ℕ x)))
-          by ap (λ H → (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
+          by ap (λ H → (add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
               (H *ℤ (int-ℕ (succ-ℕ x)))))
               (inv (distributive-neg-add-ℤ
                 ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
-        ＝ add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-          (neg-ℤ (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s))
+        ＝ add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+          (neg-ℤ (mul-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ
             (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x))))
-          by ap ((mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y)) +ℤ_)
+          by ap ((((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)) +ℤ_)
             (left-negative-law-mul-ℤ
-              (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+              (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
               (int-ℕ (succ-ℕ x)))
 
     dist-eqn :
       r ＝
       dist-ℕ
         ( mul-ℕ
-          ( abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
+          ( abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)))
           ( succ-ℕ x))
         ( (q *ℕ t) *ℕ y)
     dist-eqn =
       equational-reasoning
         r
         ＝ abs-ℤ (int-ℕ r) by (inv (abs-int-ℕ r))
-        ＝ abs-ℤ (add-ℤ (mul-ℤ ((int-ℕ q) *ℤ (int-ℕ t)) (int-ℕ y))
-            (neg-ℤ (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+        ＝ abs-ℤ (add-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))
+            (neg-ℤ (mul-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
             (int-ℕ (succ-ℕ x)))))
           by (ap abs-ℤ (isolate-rem-eqn ∙ rearrange-arith))
         ＝ dist-ℤ ((int-ℕ (q *ℕ t)) *ℤ (int-ℕ y))
-          (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+          (mul-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
             (int-ℕ (succ-ℕ x)))
           by ap (λ H → (dist-ℤ (H *ℤ (int-ℕ y))
-            (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+            (mul-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
               (int-ℕ (succ-ℕ x)))))
               (mul-int-ℕ q t)
         ＝ dist-ℤ (int-ℕ ((q *ℕ t) *ℕ y))
-          (mul-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+          (mul-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
           (int-ℕ (succ-ℕ x)))
           by
             ap
               ( λ H →
                 dist-ℤ H
                   ( mul-ℤ
-                    ( add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+                    ( ((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
                     ( int-ℕ (succ-ℕ x))))
               ( mul-int-ℕ (q *ℕ t) y)
         ＝ dist-ℤ
             ( int-ℕ ((q *ℕ t) *ℕ y))
             ( mul-ℤ
-              ( int-ℕ (abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))))
+              ( int-ℕ (abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))))
               ( int-ℕ (succ-ℕ x)))
           by
             ap
@@ -1695,29 +1695,29 @@ remainder-min-dist-succ-x-is-distance x y =
                   ( H *ℤ (int-ℕ (succ-ℕ x))))
               ( inv
                 ( int-abs-is-nonnegative-ℤ
-                  ( add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ))
+                  ( ((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))
                   ( coeff-nonnegative)))
         ＝ dist-ℤ
             ( int-ℕ ((q *ℕ t) *ℕ y))
             ( int-ℕ
               ( mul-ℕ
-                ( abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
+                ( abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)))
                 ( succ-ℕ x)))
           by
             ap
               ( dist-ℤ (int-ℕ ((q *ℕ t) *ℕ y)))
               ( mul-int-ℕ
-                ( abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
+                ( abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)))
                 ( succ-ℕ x))
         ＝ dist-ℕ ((q *ℕ t) *ℕ y)
-          (mul-ℕ (abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
+          (mul-ℕ (abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)))
             (succ-ℕ x))
           by dist-int-ℕ
             ((q *ℕ t) *ℕ y)
-            (mul-ℕ (abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
+            (mul-ℕ (abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)))
               (succ-ℕ x))
         ＝ dist-ℕ
-          (mul-ℕ (abs-ℤ (add-ℤ ((int-ℕ q) *ℤ (int-ℕ s)) (neg-ℤ one-ℤ)))
+          (mul-ℕ (abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ)))
             (succ-ℕ x))
             ((q *ℕ t) *ℕ y)
           by symmetric-dist-ℕ

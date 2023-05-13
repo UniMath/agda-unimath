@@ -571,11 +571,11 @@ left-zero-law-mul-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → mul-Fin (succ-ℕ k) (zero-Fin k) x ＝ zero-Fin k
 left-zero-law-mul-Fin k x =
   ( eq-mod-succ-cong-ℕ k
-    ( mul-ℕ (nat-Fin (succ-ℕ k) (zero-Fin k)) (nat-Fin (succ-ℕ k) x))
+    ( (nat-Fin (succ-ℕ k) (zero-Fin k)) *ℕ (nat-Fin (succ-ℕ k) x))
     ( nat-Fin (succ-ℕ k) (zero-Fin k))
     ( cong-identification-ℕ
       ( succ-ℕ k)
-      { mul-ℕ (nat-Fin (succ-ℕ k) (zero-Fin k)) (nat-Fin (succ-ℕ k) x)}
+      { (nat-Fin (succ-ℕ k) (zero-Fin k)) *ℕ (nat-Fin (succ-ℕ k) x)}
       { nat-Fin (succ-ℕ k) (zero-Fin k)}
       ( ( ap (mul-ℕ' (nat-Fin (succ-ℕ k) x)) (is-zero-nat-zero-Fin {k})) ∙
         ( inv (is-zero-nat-zero-Fin {k}))))) ∙

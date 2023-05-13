@@ -48,7 +48,7 @@ sum-list-ℕ = fold-list 0 add-ℕ
 ```agda
 sum-Fin-ℕ : (k : ℕ) → (Fin k → ℕ) → ℕ
 sum-Fin-ℕ zero-ℕ f = zero-ℕ
-sum-Fin-ℕ (succ-ℕ k) f = add-ℕ (sum-Fin-ℕ k (λ x → f (inl x))) (f (inr star))
+sum-Fin-ℕ (succ-ℕ k) f = (sum-Fin-ℕ k (λ x → f (inl x))) +ℕ (f (inr star))
 ```
 
 ### Sums of natural numbers indexed by a type equipped with a counting

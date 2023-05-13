@@ -228,7 +228,7 @@ sim-reduced-fraction-ℤ x =
       by ap (λ H → H *ℤ (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
           (inv (eq-reduce-numerator-fraction-ℤ x))
     ＝ (numerator-fraction-ℤ (reduce-fraction-ℤ x)) *ℤ
-      (mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+      ((gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) *ℤ
         (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
       by associative-mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
         (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))

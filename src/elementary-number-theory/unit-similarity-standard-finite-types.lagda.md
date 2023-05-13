@@ -94,10 +94,10 @@ pr1 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   nat-Fin (succ-ℕ k) (pr1 u)
 pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   cong-eq-mod-succ-ℕ k
-    ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
+    ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
     ( 1)
     ( ( eq-mod-succ-cong-ℕ k
-        ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
+        ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
         ( mul-ℕ
           ( nat-Fin (succ-ℕ k) (pr1 u))
           ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
