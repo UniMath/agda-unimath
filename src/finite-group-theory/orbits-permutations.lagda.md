@@ -542,7 +542,7 @@ module _
                     ( ( inv
                         ( iterate-add-ℕ
                           ( remainder-euclidean-division-ℕ m (pr1 p))
-                          ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
+                          ( (quotient-euclidean-division-ℕ m (pr1 p)) *ℕ m)
                           ( map-equiv f)
                           ( a))) ∙
                       ( ( ap

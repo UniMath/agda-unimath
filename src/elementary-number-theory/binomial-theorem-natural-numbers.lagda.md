@@ -56,7 +56,7 @@ binomial-sum-one-element-ℕ =
 
 binomial-sum-two-elements-ℕ :
   (f : functional-vec ℕ 2) →
-  binomial-sum-ℕ 1 f ＝ add-ℕ (f (zero-Fin 1)) (f (one-Fin 1))
+  binomial-sum-ℕ 1 f ＝ (f (zero-Fin 1)) +ℕ (f (one-Fin 1))
 binomial-sum-two-elements-ℕ =
   binomial-sum-two-elements-Commutative-Semiring ℕ-Commutative-Semiring
 ```

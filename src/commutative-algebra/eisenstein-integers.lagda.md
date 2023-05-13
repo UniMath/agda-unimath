@@ -247,7 +247,7 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                 ( ( left-negative-law-mul-ℤ (b *ℤ d) f) ∙
                   ( ap neg-ℤ (associative-mul-ℤ b d f)))))) ∙
           ( ( distributive-neg-add-ℤ
-              ( add-ℤ (a *ℤ (d *ℤ f)) (b *ℤ (c *ℤ f)))
+              ( (a *ℤ (d *ℤ f)) +ℤ (b *ℤ (c *ℤ f)))
               ( neg-ℤ (b *ℤ (d *ℤ f)))) ∙
             ( ( ap-add-ℤ
                 ( distributive-neg-add-ℤ
@@ -364,15 +364,15 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
               ( ( inv
                   ( associative-add-ℤ
                     ( a *ℤ (cf +ℤ ed))
-                    ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
+                    ( (ce +ℤ (neg-ℤ df)) *ℤ b)
                     ( neg-ℤ (b *ℤ ed)))) ∙
                 ( ( ap
                     ( add-ℤ' (neg-ℤ (b *ℤ ed)))
                     ( commutative-add-ℤ
                       ( a *ℤ (cf +ℤ ed))
-                      ( mul-ℤ (ce +ℤ (neg-ℤ df)) b))) ∙
+                      ( (ce +ℤ (neg-ℤ df)) *ℤ b))) ∙
                   ( associative-add-ℤ
-                    ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
+                    ( (ce +ℤ (neg-ℤ df)) *ℤ b)
                     ( a *ℤ (cf +ℤ ed))
                     ( neg-ℤ (b *ℤ ed))))))))
         ( ( inv (left-negative-law-mul-ℤ ((ad +ℤ cb) +ℤ (neg-ℤ bd)) f)) ∙
@@ -420,13 +420,13 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                             ( cf)
                             ( neg-ℤ df)))))))))))) ∙
       ( ( associative-add-ℤ
-          ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
-          ( add-ℤ (a *ℤ (cf +ℤ ed)) (neg-ℤ (b *ℤ ed)))
+          ( (ce +ℤ (neg-ℤ df)) *ℤ b)
+          ( (a *ℤ (cf +ℤ ed)) +ℤ (neg-ℤ (b *ℤ ed)))
           ( add-ℤ
             ( a *ℤ (neg-ℤ df))
             ( neg-ℤ (b *ℤ (cf +ℤ (neg-ℤ df)))))) ∙
         ( ( ( ap
-              ( add-ℤ (mul-ℤ (ce +ℤ (neg-ℤ df)) b))
+              ( add-ℤ ((ce +ℤ (neg-ℤ df)) *ℤ b))
               ( ( interchange-law-add-add-ℤ
                   ( a *ℤ (cf +ℤ ed))
                   ( neg-ℤ (b *ℤ ed))
@@ -453,13 +453,13 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                               ( commutative-add-ℤ ed cf)))))))))) ∙
             ( inv
               ( associative-add-ℤ
-                ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
+                ( (ce +ℤ (neg-ℤ df)) *ℤ b)
                 ( a *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df)))
                 ( neg-ℤ (b *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df))))))) ∙
           ( ap
             ( add-ℤ' (neg-ℤ (b *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df)))))
             ( commutative-add-ℤ
-              ( mul-ℤ (ce +ℤ (neg-ℤ df)) b)
+              ( (ce +ℤ (neg-ℤ df)) *ℤ b)
               ( a *ℤ ((cf +ℤ ed) +ℤ (neg-ℤ df))))))))
     where
     ac = a *ℤ c

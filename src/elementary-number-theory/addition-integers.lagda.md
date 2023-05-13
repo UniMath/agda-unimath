@@ -83,7 +83,7 @@ abstract
   left-predecessor-law-add-ℤ (inr (inr zero-ℕ)) y =
     inv (isretr-pred-ℤ y)
   left-predecessor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
-    inv (isretr-pred-ℤ (add-ℤ (inr (inr x)) y))
+    inv (isretr-pred-ℤ ((inr (inr x)) +ℤ y))
 
   right-predecessor-law-add-ℤ :
     (x y : ℤ) → x +ℤ pred-ℤ y ＝ pred-ℤ (x +ℤ y)
@@ -104,9 +104,9 @@ abstract
       ＝ succ-ℤ (pred-ℤ (inr (inr x) +ℤ n))
         by ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) n)
       ＝ inr (inr x) +ℤ n
-        by issec-pred-ℤ (add-ℤ (inr (inr x)) n)
+        by issec-pred-ℤ ((inr (inr x)) +ℤ n)
       ＝ pred-ℤ (succ-ℤ (inr (inr x) +ℤ n))
-        by inv (isretr-pred-ℤ (add-ℤ (inr (inr x)) n))
+        by inv (isretr-pred-ℤ ((inr (inr x)) +ℤ n))
 ```
 
 ### Left and right successor laws
@@ -240,7 +240,7 @@ abstract
       ＝ succ-ℤ (inr (inr x) +ℤ y) +ℤ z
         by ap (_+ℤ z) (left-successor-law-add-ℤ (inr (inr x)) y)
       ＝ succ-ℤ ((inr (inr x) +ℤ y) +ℤ z)
-        by left-successor-law-add-ℤ (add-ℤ (inr (inr x)) y) z
+        by left-successor-law-add-ℤ ((inr (inr x)) +ℤ y) z
       ＝ succ-ℤ (inr (inr x) +ℤ (y +ℤ z))
         by ap succ-ℤ (associative-add-ℤ (inr (inr x)) y z)
       ＝ succ-ℤ (inr (inr x)) +ℤ (y +ℤ z)
@@ -263,7 +263,7 @@ abstract
         by inv (right-predecessor-law-add-ℤ y zero-ℤ)
   commutative-add-ℤ (inl (succ-ℕ x)) y =
     equational-reasoning
-      add-ℤ (inl (succ-ℕ x)) y
+      (inl (succ-ℕ x)) +ℤ y
       ＝ pred-ℤ (y +ℤ (inl x))
         by ap pred-ℤ (commutative-add-ℤ (inl x) y)
       ＝ y +ℤ (inl (succ-ℕ x))
@@ -279,7 +279,7 @@ abstract
         by inv (right-successor-law-add-ℤ y zero-ℤ)
   commutative-add-ℤ (inr (inr (succ-ℕ x))) y =
     equational-reasoning
-      succ-ℤ (add-ℤ (inr (inr x)) y)
+      succ-ℤ ((inr (inr x)) +ℤ y)
       ＝ succ-ℤ (y +ℤ (inr (inr x)))
         by ap succ-ℤ (commutative-add-ℤ (inr (inr x)) y)
       ＝ y +ℤ (succ-ℤ (inr (inr x)))
@@ -299,7 +299,7 @@ abstract
       ＝ succ-ℤ (pred-ℤ (inr (inr x) +ℤ inl x))
         by ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) (inl x))
       ＝ inr (inr x) +ℤ inl x
-        by issec-pred-ℤ (add-ℤ (inr (inr x)) (inl x))
+        by issec-pred-ℤ ((inr (inr x)) +ℤ (inl x))
       ＝ zero-ℤ
         by left-inverse-law-add-ℤ (inl x)
   left-inverse-law-add-ℤ (inr (inl star)) = refl
@@ -515,12 +515,12 @@ is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
 is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
 is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inl star)) star star =
   is-nonnegative-succ-ℤ
-    ( add-ℤ (inr (inr n)) (inr (inl star)))
+    ( (inr (inr n)) +ℤ (inr (inl star)))
     ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inl star)) star star)
 is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inr m)) star star = star
 is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
   is-nonnegative-succ-ℤ
-    ( add-ℤ (inr (inr n)) (inr (inr m)))
+    ( (inr (inr n)) +ℤ (inr (inr m)))
     ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inr m)) star star)
 ```
 

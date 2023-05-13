@@ -282,6 +282,6 @@ module _
   iterate-automorphism-add-ℤ (inr (inr zero-ℕ)) l e =
     iterate-automorphism-succ-ℤ' l e
   iterate-automorphism-add-ℤ (inr (inr (succ-ℕ x))) l e =
-    ( iterate-automorphism-succ-ℤ' (add-ℤ (inr (inr x)) l) e) ∙h
+    ( iterate-automorphism-succ-ℤ' ((inr (inr x)) +ℤ l) e) ∙h
     ( map-equiv e ·l iterate-automorphism-add-ℤ (inr (inr x)) l e)
 ```

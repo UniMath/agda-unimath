@@ -42,7 +42,7 @@ pair-expansion : ℕ → UU lzero
 pair-expansion n =
   Σ (ℕ × ℕ)
     ( λ p →
-      ( mul-ℕ (exp-ℕ 2 (pr1 p)) (succ-ℕ ((pr2 p) *ℕ 2))) ＝
+      ( (exp-ℕ 2 (pr1 p)) *ℕ (succ-ℕ ((pr2 p) *ℕ 2))) ＝
         succ-ℕ n)
 
 is-nonzero-pair-expansion :
@@ -78,10 +78,10 @@ has-pair-expansion-is-even-or-odd n =
               s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
            in pair
              ( (succ-ℕ (pr1 (pr1 s))) , pr2 (pr1 s))
-             ( ( ap (λ a → a *ℕ (succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2)))
+             ( ( ap (λ a → a *ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
                ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
              ( ( associative-mul-ℕ 2 (exp-ℕ 2 (pr1 (pr1 s)))
-               ( succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2))) ∙
+               ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
              ( ( ap (λ a → 2 *ℕ a) (pr2 s)) ∙
              ( ( ap succ-ℕ
                ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙

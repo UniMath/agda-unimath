@@ -57,7 +57,7 @@ binomial-sum-one-element-ℤ =
 
 binomial-sum-two-elements-ℤ :
   (f : functional-vec ℤ 2) →
-  binomial-sum-ℤ 1 f ＝ add-ℤ (f (zero-Fin 1)) (f (one-Fin 1))
+  binomial-sum-ℤ 1 f ＝ (f (zero-Fin 1)) +ℤ (f (one-Fin 1))
 binomial-sum-two-elements-ℤ =
   binomial-sum-two-elements-Commutative-Ring ℤ-Commutative-Ring
 ```

@@ -44,7 +44,7 @@ constant-ℕ : (k : ℕ) → Fin k → ℕ
 constant-ℕ k x = nat-Fin k x
 
 unary-op-ℕ : (k : ℕ) → Fin k → ℕ → ℕ
-unary-op-ℕ k x n = add-ℕ (k *ℕ (succ-ℕ n)) (nat-Fin k x)
+unary-op-ℕ k x n = (k *ℕ (succ-ℕ n)) +ℕ (nat-Fin k x)
 
 convert-based-ℕ : (k : ℕ) → based-ℕ k → ℕ
 convert-based-ℕ k (constant-based-ℕ .k x) =

@@ -113,7 +113,7 @@ abstract
   product-number-of-elements-prod :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
     (a : A) (b : B) →
-    Id ( mul-ℕ ( number-of-elements-count (count-left-factor count-AB b))
+    Id ( ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
                ( number-of-elements-count (count-right-factor count-AB a)))
        ( number-of-elements-count count-AB)
   product-number-of-elements-prod count-AB a b =

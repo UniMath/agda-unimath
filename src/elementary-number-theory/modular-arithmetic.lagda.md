@@ -139,10 +139,10 @@ int-ℤ-Mod-bounded :
   leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
 int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ
-  (add-ℤ (inr (inr k))
+  ((inr (inr k)) +ℤ
   (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
 int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ
-  (add-ℤ (inr (inr k)) (inl k))
+  ((inr (inr k)) +ℤ (inl k))
   (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```
 
@@ -516,7 +516,7 @@ preserves-add-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) y =
         ( zero-Fin k)
         ( mod-ℤ (succ-ℕ k) y))))
 preserves-add-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) y =
-  ( preserves-successor-mod-ℤ (succ-ℕ k) (add-ℤ (inr (inr x)) y)) ∙
+  ( preserves-successor-mod-ℤ (succ-ℕ k) ((inr (inr x)) +ℤ y)) ∙
   ( ( ap
       ( succ-Fin (succ-ℕ k))
       ( preserves-add-mod-ℤ (succ-ℕ k) (inr (inr x)) y)) ∙
@@ -563,7 +563,7 @@ preserves-mul-mod-ℤ (succ-ℕ k) (inr (inl star)) y =
 preserves-mul-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) y =
   inv (left-unit-law-mul-Fin k (mod-ℤ (succ-ℕ k) y))
 preserves-mul-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) y =
-  ( preserves-add-mod-ℤ (succ-ℕ k) y (mul-ℤ (inr (inr x)) y)) ∙
+  ( preserves-add-mod-ℤ (succ-ℕ k) y ((inr (inr x)) *ℤ y)) ∙
   ( ( ap
       ( add-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) y))
       ( preserves-mul-mod-ℤ (succ-ℕ k) (inr (inr x)) y)) ∙

@@ -583,9 +583,9 @@ div-presim-unit-ℤ :
   {x y x' y' : ℤ} → presim-unit-ℤ x x' → presim-unit-ℤ y y' →
   div-ℤ x y → div-ℤ x' y'
 pr1 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  mul-ℤ ((int-unit-ℤ v) *ℤ d) (int-unit-ℤ u)
+  ((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u)
 pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  ( ap (mul-ℤ (mul-ℤ ((int-unit-ℤ v) *ℤ d) (int-unit-ℤ u))) (inv q)) ∙
+  ( ap (mul-ℤ (((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u))) (inv q)) ∙
   ( ( associative-mul-ℤ
       ( (int-unit-ℤ v) *ℤ d)
       ( int-unit-ℤ u)

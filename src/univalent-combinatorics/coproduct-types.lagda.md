@@ -161,7 +161,7 @@ abstract
 abstract
   sum-number-of-elements-coprod :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (A + B)) →
-    Id ( add-ℕ ( number-of-elements-count (count-left-summand e))
+    Id ( ( number-of-elements-count (count-left-summand e)) +ℕ
                ( number-of-elements-count (count-right-summand e)))
        ( number-of-elements-count e)
   sum-number-of-elements-coprod e =

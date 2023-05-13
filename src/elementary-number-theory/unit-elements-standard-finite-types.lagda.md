@@ -69,7 +69,7 @@ pr2 (is-unit-neg-one-Fin {succ-ℕ k}) =
       ( square-succ-ℕ k)
       ( pair k
         ( ( commutative-mul-ℕ k (succ-ℕ (succ-ℕ k))) ∙
-          ( inv (right-unit-law-dist-ℕ (mul-ℕ (succ-ℕ (succ-ℕ k)) k))))))
+          ( inv (right-unit-law-dist-ℕ ((succ-ℕ (succ-ℕ k)) *ℕ k))))))
 
 neg-one-unit-Fin : (k : ℕ) → unit-Fin (succ-ℕ k)
 pr1 (neg-one-unit-Fin k) = neg-one-Fin k
