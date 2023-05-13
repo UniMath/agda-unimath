@@ -47,7 +47,7 @@ In this file, we give three definitions of the iterated cartesian product
 
 We show that :
 
-- all these definitions are equivalent
+- all of these definitions are equivalent
 - iterated cartesian product of types is closed under permutations
 
 ## Definitions

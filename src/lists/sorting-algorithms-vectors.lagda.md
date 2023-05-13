@@ -24,12 +24,10 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-In these file we define the notion of sorting algorithms.
+A function `f` on vectors is a **sort** if `f` is a permutation and if for every
+vector `v`, `f v` is sorted.
 
 ## Definition
-
-A function `f` from `vec` to `vec` is a sort if `f` is a permutation and if for
-every vector `v`, `f v` is sorted
 
 ```agda
 module _

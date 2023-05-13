@@ -16,10 +16,6 @@ open import lists.lists
 
 </details>
 
-## Idea
-
-In these file we define predicates on lists.
-
 ## Definitions
 
 ### For all
