@@ -266,7 +266,7 @@ abstract
       add-ℤ (inl (succ-ℕ x)) y
       ＝ pred-ℤ (y +ℤ (inl x))
         by ap pred-ℤ (commutative-add-ℤ (inl x) y)
-      ＝ add-ℤ y (inl (succ-ℕ x))
+      ＝ y +ℤ (inl (succ-ℕ x))
         by inv (right-predecessor-law-add-ℤ y (inl x))
   commutative-add-ℤ (inr (inl star)) y =
     inv (right-unit-law-add-ℤ y)
@@ -280,9 +280,9 @@ abstract
   commutative-add-ℤ (inr (inr (succ-ℕ x))) y =
     equational-reasoning
       succ-ℤ (add-ℤ (inr (inr x)) y)
-      ＝ succ-ℤ (add-ℤ y (inr (inr x)))
+      ＝ succ-ℤ (y +ℤ (inr (inr x)))
         by ap succ-ℤ (commutative-add-ℤ (inr (inr x)) y)
-      ＝ add-ℤ y (succ-ℤ (inr (inr x)))
+      ＝ y +ℤ (succ-ℤ (inr (inr x)))
         by inv (right-successor-law-add-ℤ y (inr (inr x)))
 ```
 

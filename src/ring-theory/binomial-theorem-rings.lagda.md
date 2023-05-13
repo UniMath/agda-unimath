@@ -150,7 +150,7 @@ is-linear-combination-power-add-Ring :
           mul-nat-scalar-Ring R
             ( binomial-coefficient-ℕ
               ( n +ℕ m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Ring R
               ( power-Ring R (nat-Fin (succ-ℕ m) i) x)
               ( power-Ring R (dist-ℕ (nat-Fin (succ-ℕ m) i) m) y)))))

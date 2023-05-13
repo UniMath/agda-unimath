@@ -123,7 +123,7 @@ Note that `(a + bω)(c + dω) = (ac - bd) + (ad + cb - bd)ω`
 mul-ℤ[ω] : ℤ[ω] → ℤ[ω] → ℤ[ω]
 mul-ℤ[ω] (pair a1 b1) (pair a2 b2) =
   pair
-    ( add-ℤ (mul-ℤ a1 a2) (neg-ℤ (mul-ℤ b1 b2)))
+    ( (mul-ℤ a1 a2) +ℤ (neg-ℤ (mul-ℤ b1 b2)))
     ( add-ℤ ((mul-ℤ a1 b2) +ℤ (mul-ℤ a2 b1)) (neg-ℤ (mul-ℤ b1 b2)))
 
 ap-mul-ℤ[ω] :
@@ -283,7 +283,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                   ( ( inv
                       ( left-distributive-mul-add-ℤ b
                         ( mul-ℤ d e)
-                        ( add-ℤ (mul-ℤ c f) (neg-ℤ (mul-ℤ d f))))) ∙
+                        ( (mul-ℤ c f) +ℤ (neg-ℤ (mul-ℤ d f))))) ∙
                     ( ap
                       ( mul-ℤ b)
                       ( ( inv
@@ -333,7 +333,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
               ( mul-ℤ a cf)
               ( mul-ℤ (neg-ℤ df) b)
               ( mul-ℤ a ed)
-              ( add-ℤ (mul-ℤ ce b) (neg-ℤ (mul-ℤ b ed)))) ∙
+              ( (mul-ℤ ce b) +ℤ (neg-ℤ (mul-ℤ b ed)))) ∙
             ( ( ap-add-ℤ
                 ( inv (left-distributive-mul-add-ℤ a cf ed))
                 ( ( inv

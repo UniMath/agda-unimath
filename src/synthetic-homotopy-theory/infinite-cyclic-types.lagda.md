@@ -163,7 +163,7 @@ module _
                           equiv-map-Π
                             ( λ k →
                               ( equiv-concat'
-                                ( add-ℤ (neg-ℤ x) (map-equiv e (succ-ℤ k)))
+                                ( (neg-ℤ x) +ℤ (map-equiv e (succ-ℤ k)))
                                 ( right-successor-law-add-ℤ
                                   ( neg-ℤ x)
                                   ( map-equiv e k))) ∘e
@@ -173,7 +173,7 @@ module _
                                 ( succ-ℤ (map-equiv e k))))))
                       ( λ e →
                         ( equiv-concat'
-                          ( add-ℤ (neg-ℤ x) (map-equiv (pr1 e) zero-ℤ))
+                          ( (neg-ℤ x) +ℤ (map-equiv (pr1 e) zero-ℤ))
                           ( left-inverse-law-add-ℤ x)) ∘e
                         ( equiv-ap
                           ( equiv-add-ℤ (neg-ℤ x))

@@ -39,10 +39,10 @@ open import foundation.universe-levels
 ```agda
 mul-ℤ : ℤ → ℤ → ℤ
 mul-ℤ (inl zero-ℕ) l = neg-ℤ l
-mul-ℤ (inl (succ-ℕ x)) l = add-ℤ (neg-ℤ l) (mul-ℤ (inl x) l)
+mul-ℤ (inl (succ-ℕ x)) l = (neg-ℤ l) +ℤ (mul-ℤ (inl x) l)
 mul-ℤ (inr (inl star)) l = zero-ℤ
 mul-ℤ (inr (inr zero-ℕ)) l = l
-mul-ℤ (inr (inr (succ-ℕ x))) l = add-ℤ l (mul-ℤ (inr (inr x)) l)
+mul-ℤ (inr (inr (succ-ℕ x))) l = l +ℤ (mul-ℤ (inr (inr x)) l)
 
 infix 30 _*ℤ_
 _*ℤ_ = mul-ℤ

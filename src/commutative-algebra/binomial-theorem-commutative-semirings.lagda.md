@@ -170,7 +170,7 @@ is-linear-combination-power-add-Commutative-Semiring :
           mul-nat-scalar-Commutative-Semiring A
             ( binomial-coefficient-ℕ
               ( n +ℕ m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Commutative-Semiring A
               ( power-Commutative-Semiring A (nat-Fin (succ-ℕ m) i) x)
               ( power-Commutative-Semiring A

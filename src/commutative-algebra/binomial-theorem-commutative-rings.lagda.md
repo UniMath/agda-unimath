@@ -164,7 +164,7 @@ is-linear-combination-power-add-Commutative-Ring :
           mul-nat-scalar-Commutative-Ring A
             ( binomial-coefficient-ℕ
               ( n +ℕ m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Commutative-Ring A
               ( power-Commutative-Ring A (nat-Fin (succ-ℕ m) i) x)
               ( power-Commutative-Ring A

@@ -245,7 +245,7 @@ bezouts-lemma-pos-ints x y H K =
           by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
         ＝ diff-ℤ (mul-ℤ s x) (mul-ℤ t y)
           by int-abs-is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) pos
-        ＝ add-ℤ (mul-ℤ s x) (mul-ℤ (neg-ℤ t) y)
+        ＝ (mul-ℤ s x) +ℤ (mul-ℤ (neg-ℤ t) y)
           by ap (λ M → (mul-ℤ s x) +ℤ M) (inv (left-negative-law-mul-ℤ t y)))
 
   pr1 (sx-ty-nonneg-case-split (inr neg)) = neg-ℤ s
@@ -266,7 +266,7 @@ bezouts-lemma-pos-ints x y H K =
           ＝ add-ℤ (neg-ℤ (mul-ℤ s x)) (neg-ℤ (neg-ℤ (mul-ℤ t y)))
             by distributive-neg-add-ℤ (mul-ℤ s x) (neg-ℤ (mul-ℤ t y))
           ＝ add-ℤ (mul-ℤ (neg-ℤ s) x) (neg-ℤ (neg-ℤ (mul-ℤ t y)))
-            by ap (λ M → add-ℤ M (neg-ℤ (neg-ℤ (mul-ℤ t y))))
+            by ap (λ M → M +ℤ (neg-ℤ (neg-ℤ (mul-ℤ t y))))
               (inv (left-negative-law-mul-ℤ s x))
           ＝ add-ℤ (mul-ℤ (neg-ℤ s) x) (mul-ℤ t y)
             by ap (λ M → add-ℤ (mul-ℤ (neg-ℤ s) x) M) (neg-neg-ℤ (mul-ℤ t y)))
@@ -298,7 +298,7 @@ bezouts-lemma-ℤ (inl x) (inl y) = pair (neg-ℤ s) (pair (neg-ℤ t) eqn)
       ＝ add-ℤ (mul-ℤ s (inr (inr x))) (mul-ℤ (neg-ℤ t) (neg-ℤ (inr (inr y))))
         by
           ( ap
-            ( λ M → add-ℤ M (mul-ℤ (neg-ℤ t) (neg-ℤ (inr (inr y)))))
+            ( λ M → M +ℤ (mul-ℤ (neg-ℤ t) (neg-ℤ (inr (inr y)))))
             ( double-negative-law-mul-ℤ s (inr (inr x))))
       ＝ add-ℤ (mul-ℤ s (inr (inr x))) (mul-ℤ t (inr (inr y)))
         by
@@ -322,7 +322,7 @@ bezouts-lemma-ℤ (inl x) (inr (inl star)) = pair neg-one-ℤ (pair one-ℤ eqn)
       ＝ add-ℤ (inr (inr x)) (mul-ℤ one-ℤ (inr (inl star)))
         by
           ap
-            ( λ M → add-ℤ M (mul-ℤ one-ℤ (inr (inl star))))
+            ( λ M → M +ℤ (mul-ℤ one-ℤ (inr (inl star))))
             ( inv (is-mul-neg-one-neg-ℤ (inl x)))
       ＝ add-ℤ (inr (inr x)) zero-ℤ
         by ap (add-ℤ (inr (inr x))) (right-zero-law-mul-ℤ one-ℤ)
@@ -351,7 +351,7 @@ bezouts-lemma-ℤ (inl x) (inr (inr y)) = pair (neg-ℤ s) (pair t eqn)
     equational-reasoning
       add-ℤ (mul-ℤ (neg-ℤ s) (neg-ℤ (inr (inr x)))) (mul-ℤ t (inr (inr y)))
       ＝ add-ℤ (mul-ℤ s (inr (inr x))) (mul-ℤ t (inr (inr y)))
-        by ap (λ M → add-ℤ M (mul-ℤ t (inr (inr y))))
+        by ap (λ M → M +ℤ (mul-ℤ t (inr (inr y))))
           (double-negative-law-mul-ℤ s (inr (inr x)))
       ＝ gcd-ℤ (inr (inr x)) (inr (inr y))
         by pr2 (pr2 (pos-bezout))
@@ -370,8 +370,8 @@ bezouts-lemma-ℤ (inr (inl star)) (inl y) = pair one-ℤ (pair neg-one-ℤ eqn)
           ap
             ( add-ℤ (mul-ℤ one-ℤ (inr (inl star))))
             ( inv (is-mul-neg-one-neg-ℤ (inl y)))
-      ＝ add-ℤ zero-ℤ (inr (inr y))
-        by ap (λ M → add-ℤ M (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
+      ＝ zero-ℤ +ℤ (inr (inr y))
+        by ap (λ M → M +ℤ (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inl y))
         by left-unit-law-add-ℤ (inr (inr y))
       ＝ gcd-ℤ zero-ℤ (inl y)
@@ -384,10 +384,10 @@ bezouts-lemma-ℤ (inr (inl star)) (inr (inl star)) = pair one-ℤ (pair one-ℤ
   eqn =
     equational-reasoning
       add-ℤ (mul-ℤ one-ℤ (inr (inl star))) (mul-ℤ one-ℤ (inr (inl star)))
-      ＝ add-ℤ zero-ℤ (mul-ℤ one-ℤ (inr (inl star)))
+      ＝ zero-ℤ +ℤ (mul-ℤ one-ℤ (inr (inl star)))
         by
           ap
-            ( λ M → add-ℤ M (mul-ℤ one-ℤ (inr (inl star))))
+            ( λ M → M +ℤ (mul-ℤ one-ℤ (inr (inl star))))
             ( right-zero-law-mul-ℤ one-ℤ)
       ＝ zero-ℤ +ℤ zero-ℤ
         by ap (λ M → zero-ℤ +ℤ M) (right-zero-law-mul-ℤ one-ℤ)
@@ -405,8 +405,8 @@ bezouts-lemma-ℤ (inr (inl star)) (inr (inr y)) = pair one-ℤ (pair one-ℤ eq
         by ap
           ( add-ℤ (mul-ℤ one-ℤ (inr (inl star))))
           ( inv (left-unit-law-mul-ℤ (inr (inr y))))
-      ＝ add-ℤ zero-ℤ (inr (inr y))
-        by ap (λ M → add-ℤ M (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
+      ＝ zero-ℤ +ℤ (inr (inr y))
+        by ap (λ M → M +ℤ (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inr (inr y)))
         by left-unit-law-add-ℤ (inr (inr y))
       ＝ gcd-ℤ zero-ℤ (inr (inr y))
@@ -454,7 +454,7 @@ bezouts-lemma-ℤ (inr (inr x)) (inr (inl star)) = pair one-ℤ (pair one-ℤ eq
       ＝ add-ℤ (inr (inr x)) (mul-ℤ one-ℤ (inr (inl star)))
         by
           ap
-            ( λ M → add-ℤ M (mul-ℤ one-ℤ (inr (inl star))))
+            ( λ M → M +ℤ (mul-ℤ one-ℤ (inr (inl star))))
             ( left-unit-law-mul-ℤ (inr (inr x)))
       ＝ add-ℤ (inr (inr x)) zero-ℤ
         by ap (λ M → add-ℤ (inr (inr x)) M) (right-zero-law-mul-ℤ one-ℤ)
@@ -501,7 +501,7 @@ div-right-factor-coprime-ℤ x y z H K = pair ((mul-ℤ s z) +ℤ (mul-ℤ t k))
       ＝ add-ℤ (mul-ℤ (mul-ℤ s z) x) (mul-ℤ (mul-ℤ t k) x)
         by right-distributive-mul-add-ℤ (mul-ℤ s z) (mul-ℤ t k) x
       ＝ add-ℤ (mul-ℤ (mul-ℤ s x) z) (mul-ℤ (mul-ℤ t k) x)
-        by ap (λ M → add-ℤ M (mul-ℤ (mul-ℤ t k) x))
+        by ap (λ M → M +ℤ (mul-ℤ (mul-ℤ t k) x))
         ( equational-reasoning
             mul-ℤ (mul-ℤ s z) x
             ＝ mul-ℤ s (mul-ℤ z x)

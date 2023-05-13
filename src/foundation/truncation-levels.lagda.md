@@ -80,8 +80,8 @@ left-successor-law-add-𝕋 n (succ-𝕋 k) = refl
 
 right-successor-law-add-𝕋 :
   (k n : 𝕋) →
-  add-𝕋 k (succ-𝕋 (succ-𝕋 (succ-𝕋 n))) ＝
-  succ-𝕋 (add-𝕋 k (succ-𝕋 (succ-𝕋 n)))
+  k +𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 n))) ＝
+  succ-𝕋 (k +𝕋 (succ-𝕋 (succ-𝕋 n)))
 right-successor-law-add-𝕋 neg-two-𝕋 n = refl
 right-successor-law-add-𝕋 (succ-𝕋 neg-two-𝕋) n = refl
 right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 k)) n =

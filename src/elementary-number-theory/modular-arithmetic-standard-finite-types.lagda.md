@@ -211,7 +211,7 @@ cong-add-ℕ {k} x y =
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
-    ( add-ℕ x (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
+    ( x +ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ y)
     ( translation-invariant-cong-ℕ'
       ( succ-ℕ k)
