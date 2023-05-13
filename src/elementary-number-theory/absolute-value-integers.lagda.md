@@ -111,7 +111,7 @@ successor-law-abs-ℤ (inr (inr x)) =
 
 ```agda
 subadditive-abs-ℤ :
-  (x y : ℤ) → (abs-ℤ (add-ℤ x y)) ≤-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
+  (x y : ℤ) → (abs-ℤ (x +ℤ y)) ≤-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
 subadditive-abs-ℤ x (inl zero-ℕ) =
   concatenate-eq-leq-eq-ℕ
     ( ap abs-ℤ (add-neg-one-right-ℤ x))
@@ -121,11 +121,11 @@ subadditive-abs-ℤ x (inl (succ-ℕ y)) =
   concatenate-eq-leq-eq-ℕ
     ( ap abs-ℤ (right-predecessor-law-add-ℤ x (inl y)))
     ( transitive-leq-ℕ
-      ( abs-ℤ (pred-ℤ (add-ℤ x (inl y))))
-      ( succ-ℕ (abs-ℤ (add-ℤ x (inl y))))
-      ( add-ℕ (abs-ℤ x) (succ-ℕ (succ-ℕ y)))
+      ( abs-ℤ (pred-ℤ (x +ℤ (inl y))))
+      ( succ-ℕ (abs-ℤ (x +ℤ (inl y))))
+      ( (abs-ℤ x) +ℕ (succ-ℕ (succ-ℕ y)))
       ( subadditive-abs-ℤ x (inl y))
-      ( predecessor-law-abs-ℤ (add-ℤ x (inl y))))
+      ( predecessor-law-abs-ℤ (x +ℤ (inl y))))
     ( refl)
 subadditive-abs-ℤ x (inr (inl star)) =
   concatenate-eq-leq-eq-ℕ
@@ -141,11 +141,11 @@ subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =
   concatenate-eq-leq-eq-ℕ
     ( ap abs-ℤ (right-successor-law-add-ℤ x (inr (inr y))))
     ( transitive-leq-ℕ
-      ( abs-ℤ (succ-ℤ (add-ℤ x (inr (inr y)))))
-      ( succ-ℕ (abs-ℤ (add-ℤ x (inr (inr y)))))
-      ( succ-ℕ (add-ℕ (abs-ℤ x) (succ-ℕ y)))
+      ( abs-ℤ (succ-ℤ (x +ℤ (inr (inr y)))))
+      ( succ-ℕ (abs-ℤ (x +ℤ (inr (inr y)))))
+      ( succ-ℕ ((abs-ℤ x) +ℕ (succ-ℕ y)))
       ( subadditive-abs-ℤ x (inr (inr y)))
-      ( successor-law-abs-ℤ (add-ℤ x (inr (inr y)))))
+      ( successor-law-abs-ℤ (x +ℤ (inr (inr y)))))
     ( refl)
 ```
 
@@ -185,13 +185,13 @@ multiplicative-abs-ℤ' (inl x) (inl y) =
 multiplicative-abs-ℤ' (inl x) (inr (inl star)) =
   inv (right-zero-law-mul-ℕ x)
 multiplicative-abs-ℤ' (inl x) (inr (inr y)) =
-  ( abs-neg-ℤ (inl (add-ℕ (x *ℕ (succ-ℕ y)) y))) ∙
+  ( abs-neg-ℤ (inl ((x *ℕ (succ-ℕ y)) +ℕ y))) ∙
   ( abs-int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))
 multiplicative-abs-ℤ' (inr (inl star)) (inl y) =
   refl
 multiplicative-abs-ℤ' (inr (inr x)) (inl y) =
-  ( abs-neg-ℤ (inl (add-ℕ (x *ℕ (succ-ℕ y)) y))) ∙
-  ( abs-int-ℕ (succ-ℕ (add-ℕ (x *ℕ (succ-ℕ y)) y)))
+  ( abs-neg-ℤ (inl ((x *ℕ (succ-ℕ y)) +ℕ y))) ∙
+  ( abs-int-ℕ (succ-ℕ ((x *ℕ (succ-ℕ y)) +ℕ y)))
 multiplicative-abs-ℤ' (inr (inl star)) (inr (inl star)) =
   refl
 multiplicative-abs-ℤ' (inr (inl star)) (inr (inr x)) =
@@ -202,7 +202,7 @@ multiplicative-abs-ℤ' (inr (inr x)) (inr (inr y)) =
   abs-int-ℕ _
 
 multiplicative-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
+  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
 multiplicative-abs-ℤ x y =
   ap abs-ℤ (compute-mul-ℤ x y) ∙ multiplicative-abs-ℤ' x y
 ```
@@ -211,13 +211,13 @@ multiplicative-abs-ℤ x y =
 
 ```agda
 left-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
+  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
 left-negative-law-mul-abs-ℤ x y =
   equational-reasoning
-    abs-ℤ (mul-ℤ x y)
-    ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
-      by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
-    ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
+    abs-ℤ (x *ℤ y)
+    ＝ abs-ℤ (neg-ℤ (x *ℤ y))
+      by (inv (negative-law-abs-ℤ (x *ℤ y)))
+    ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
       by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
 ```
 
@@ -225,13 +225,13 @@ left-negative-law-mul-abs-ℤ x y =
 
 ```agda
 right-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
+  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ (x *ℤ (neg-ℤ y))
 right-negative-law-mul-abs-ℤ x y =
   equational-reasoning
-    abs-ℤ (mul-ℤ x y)
-    ＝ abs-ℤ (neg-ℤ (mul-ℤ x y))
-      by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
-    ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
+    abs-ℤ (x *ℤ y)
+    ＝ abs-ℤ (neg-ℤ (x *ℤ y))
+      by (inv (negative-law-abs-ℤ (x *ℤ y)))
+    ＝ abs-ℤ (x *ℤ (neg-ℤ y))
       by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
 ```
 
@@ -239,7 +239,7 @@ right-negative-law-mul-abs-ℤ x y =
 
 ```agda
 double-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) (neg-ℤ y))
+  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ (neg-ℤ y))
 double-negative-law-mul-abs-ℤ x y =
   (right-negative-law-mul-abs-ℤ x y) ∙ (left-negative-law-mul-abs-ℤ x (neg-ℤ y))
 ```
