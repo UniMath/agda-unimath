@@ -202,7 +202,7 @@ convert-based-succ-based-ℕ
            ( succ-ℕ k)
            ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n)))))
        ( is-zero-nat-zero-Fin {k})) ∙
-  ( ( ap ( (mul-ℕ (succ-ℕ k)) ∘ succ-ℕ)
+  ( ( ap ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
          ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
     ( ( right-successor-law-mul-ℕ
         ( succ-ℕ k)

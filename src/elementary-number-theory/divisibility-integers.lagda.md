@@ -105,7 +105,7 @@ div-is-unit-ℤ :
   (x y : ℤ) → is-unit-ℤ x → div-ℤ x y
 pr1 (div-is-unit-ℤ x y (pair d p)) = y *ℤ d
 pr2 (div-is-unit-ℤ x y (pair d p)) =
-  associative-mul-ℤ y d x ∙ (ap (mul-ℤ y) p ∙ right-unit-law-mul-ℤ y)
+  associative-mul-ℤ y d x ∙ (ap (y *ℤ_) p ∙ right-unit-law-mul-ℤ y)
 ```
 
 ### The equivalence relation `sim-unit-ℤ`
@@ -144,7 +144,7 @@ trans-div-ℤ :
 pr1 (trans-div-ℤ x y z (pair d p) (pair e q)) = e *ℤ d
 pr2 (trans-div-ℤ x y z (pair d p) (pair e q)) =
   ( associative-mul-ℤ e d x) ∙
-    ( ( ap (mul-ℤ e) p) ∙
+    ( ( ap (e *ℤ_) p) ∙
       ( q))
 ```
 
@@ -249,7 +249,7 @@ pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
   ( inv (associative-mul-ℤ q k x)) ∙
     ( ( ap (_*ℤ x) (commutative-mul-ℤ q k)) ∙
       ( ( associative-mul-ℤ k q x) ∙
-        ( ap (mul-ℤ k) p)))
+        ( ap (k *ℤ_) p)))
 ```
 
 ### Multiplication by a nonzero number reflects divisibility
@@ -411,7 +411,7 @@ pr1 (is-unit-mul-ℤ x y (pair d p) (pair e q)) = e *ℤ d
 pr2 (is-unit-mul-ℤ x y (pair d p) (pair e q)) =
   ( associative-mul-ℤ e d (x *ℤ y)) ∙
     ( ( ap
-        ( mul-ℤ e)
+        ( e *ℤ_)
         ( ( inv (associative-mul-ℤ d x y)) ∙
           ( ap (_*ℤ y) p))) ∙
       ( q))
@@ -424,13 +424,13 @@ is-unit-left-factor-mul-ℤ :
   (x y : ℤ) → is-unit-ℤ (x *ℤ y) → is-unit-ℤ x
 pr1 (is-unit-left-factor-mul-ℤ x y (pair d p)) = d *ℤ y
 pr2 (is-unit-left-factor-mul-ℤ x y (pair d p)) =
-  associative-mul-ℤ d y x ∙ (ap (mul-ℤ d) (commutative-mul-ℤ y x) ∙ p)
+  associative-mul-ℤ d y x ∙ (ap (d *ℤ_) (commutative-mul-ℤ y x) ∙ p)
 
 is-unit-right-factor-ℤ :
   (x y : ℤ) → is-unit-ℤ (x *ℤ y) → is-unit-ℤ y
 is-unit-right-factor-ℤ x y (pair d p) =
   is-unit-left-factor-mul-ℤ y x
-    ( pair d (ap (mul-ℤ d) (commutative-mul-ℤ y x) ∙ p))
+    ( pair d (ap (d *ℤ_) (commutative-mul-ℤ y x) ∙ p))
 ```
 
 ### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are logically equivalent
@@ -476,7 +476,7 @@ is-zero-sim-unit-ℤ :
 is-zero-sim-unit-ℤ {x} {y} H p =
   double-negation-elim-is-decidable
     ( has-decidable-equality-ℤ y zero-ℤ)
-    ( λ g → g (inv (β g) ∙ (ap (mul-ℤ (u g)) p ∙ right-zero-law-mul-ℤ (u g))))
+    ( λ g → g (inv (β g) ∙ (ap ((u g) *ℤ_) p ∙ right-zero-law-mul-ℤ (u g))))
   where
   K : is-nonzero-ℤ y → presim-unit-ℤ x y
   K g = H (λ {(pair u v) → g v})
@@ -512,7 +512,7 @@ symm-presim-unit-ℤ {x} {y} (pair (pair u H) p) =
   pr1 (f (inl refl)) = one-unit-ℤ
   pr2 (f (inl refl)) = inv p
   pr1 (f (inr refl)) = neg-one-unit-ℤ
-  pr2 (f (inr refl)) = inv (inv (neg-neg-ℤ x) ∙ ap (mul-ℤ neg-one-ℤ) p)
+  pr2 (f (inr refl)) = inv (inv (neg-neg-ℤ x) ∙ ap (neg-one-ℤ *ℤ_) p)
 
 symm-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → sim-unit-ℤ y x
 symm-sim-unit-ℤ {x} {y} H f =
@@ -565,7 +565,7 @@ antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
     is-injective-mul-ℤ x g
       ( ( commutative-mul-ℤ x (e *ℤ d)) ∙
         ( ( associative-mul-ℤ e d x) ∙
-          ( ( ap (mul-ℤ e) p) ∙
+          ( ( ap (e *ℤ_) p) ∙
             ( q ∙ inv (right-unit-law-mul-ℤ x)))))
   pr2 (f (inr g)) = p
 ```
@@ -595,7 +595,7 @@ pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
         ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
           ( ap (_*ℤ x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
       ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
-        ( ( ap (mul-ℤ (int-unit-ℤ v)) p) ∙
+        ( ( ap ((int-unit-ℤ v) *ℤ_) p) ∙
           ( r)))))
 
 div-sim-unit-ℤ :

@@ -137,14 +137,14 @@ antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
            ( is-one-right-is-one-mul-ℕ l k
              ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
                ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
-                 ( ap (mul-ℕ l) p ∙ q)))))) ∙
+                 ( ap (l *ℕ_) p ∙ q)))))) ∙
     ( p))
 
 transitive-div-ℕ :
   (x y z : ℕ) → div-ℕ x y → div-ℕ y z → div-ℕ x z
 pr1 (transitive-div-ℕ x y z (pair k p) (pair l q)) = l *ℕ k
 pr2 (transitive-div-ℕ x y z (pair k p) (pair l q)) =
-  associative-mul-ℕ l k x ∙ (ap (mul-ℕ l) p ∙ q)
+  associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
 ```
 
 ### If `x` is nonzero and `d | x`, then `d ≤ x`
@@ -327,7 +327,7 @@ pr2 (preserves-div-mul-ℕ k x y (pair q p)) =
   ( inv (associative-mul-ℕ q k x)) ∙
     ( ( ap (_*ℕ x) (commutative-mul-ℕ q k)) ∙
       ( ( associative-mul-ℕ k q x) ∙
-        ( ap (mul-ℕ k) p)))
+        ( ap (k *ℕ_) p)))
 ```
 
 ### Multiplication by a nonzero number reflects divisibility
@@ -413,7 +413,7 @@ simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
       ＝ a/b *ℕ (b/c *ℕ c)
         by associative-mul-ℕ a/b b/c c
       ＝ a/b *ℕ b
-        by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
+        by ap (a/b *ℕ_) (eq-quotient-div-ℕ c b K)
       ＝ a
         by eq-quotient-div-ℕ b a H
       ＝ a/c *ℕ c

@@ -441,7 +441,7 @@ is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inr y)) H =
 
 ```agda
 is-injective-mul-ℤ :
-  (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ x)
+  (x : ℤ) → is-nonzero-ℤ x → is-injective (x *ℤ_)
 is-injective-mul-ℤ x f {y} {z} p =
   eq-diff-ℤ
     ( map-left-unit-law-coprod-is-empty
@@ -461,7 +461,7 @@ is-injective-mul-ℤ' x f {y} {z} p =
 ### Multiplication by a nonzero integer is an embedding
 
 ```agda
-is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ x)
+is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (x *ℤ_)
 is-emb-mul-ℤ x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ x f)
 
 is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (_*ℤ x)

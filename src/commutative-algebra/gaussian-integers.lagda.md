@@ -214,9 +214,9 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
             ( associative-mul-ℤ a c e)
             ( ( associative-mul-ℤ neg-one-ℤ (b *ℤ d) e) ∙
               ( ap
-                ( mul-ℤ neg-one-ℤ)
+                ( neg-one-ℤ *ℤ_)
                 ( ( associative-mul-ℤ b d e) ∙
-                  ( ap (mul-ℤ b) (commutative-mul-ℤ d e)))))))
+                  ( ap (b *ℤ_) (commutative-mul-ℤ d e)))))))
         ( ( ap
             ( neg-ℤ)
             ( ( right-distributive-mul-add-ℤ (a *ℤ d) (c *ℤ b) f) ∙
@@ -249,7 +249,7 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
             ( ap neg-ℤ
               ( ( ap-add-ℤ
                   ( refl {x = b *ℤ (e *ℤ d)})
-                  ( ( ap (mul-ℤ c) (commutative-mul-ℤ b f)) ∙
+                  ( ( ap (c *ℤ_) (commutative-mul-ℤ b f)) ∙
                     ( ( inv (associative-mul-ℤ c f b)) ∙
                       ( commutative-mul-ℤ (c *ℤ f) b)))) ∙
                 ( ( inv
@@ -257,7 +257,7 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
                       ( e *ℤ d)
                       ( c *ℤ f))) ∙
                   ( ap
-                    ( mul-ℤ b)
+                    ( b *ℤ_)
                     ( commutative-add-ℤ (e *ℤ d) (c *ℤ f))))))))))
     ( ( ap-add-ℤ
         ( ( right-distributive-mul-add-ℤ
@@ -271,7 +271,7 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
           ( ap-add-ℤ
             ( ( commutative-mul-ℤ e (a *ℤ d)) ∙
               ( ( associative-mul-ℤ a d e) ∙
-                ( ap (mul-ℤ a) (commutative-mul-ℤ d e))))
+                ( ap (a *ℤ_) (commutative-mul-ℤ d e))))
             ( ( inv (associative-mul-ℤ e c b)) ∙
               ( ap (_*ℤ b) (commutative-mul-ℤ e c)))))) ∙
       ( ( interchange-law-add-add-ℤ

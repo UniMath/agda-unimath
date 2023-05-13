@@ -164,7 +164,7 @@ scalar-invariant-cong-ℕ :
 pr1 (scalar-invariant-cong-ℕ k x y z (pair d p)) = z *ℕ d
 pr2 (scalar-invariant-cong-ℕ k x y z (pair d p)) =
   ( associative-mul-ℕ z d k) ∙
-    ( ( ap (mul-ℕ z) p) ∙
+    ( ( ap (z *ℕ_) p) ∙
       ( left-distributive-mul-dist-ℕ x y z))
 
 scalar-invariant-cong-ℕ' :

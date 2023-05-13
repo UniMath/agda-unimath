@@ -179,19 +179,19 @@ is-injective-mul-ℕ' k H p with
 ... | pair l refl = is-injective-mul-succ-ℕ' l p
 
 is-injective-mul-succ-ℕ :
-  (k : ℕ) → is-injective (mul-ℕ (succ-ℕ k))
+  (k : ℕ) → is-injective ((succ-ℕ k) *ℕ_)
 is-injective-mul-succ-ℕ k {m} {n} p =
   is-injective-mul-succ-ℕ' k
     ( ( commutative-mul-ℕ m (succ-ℕ k)) ∙
       ( p ∙ commutative-mul-ℕ (succ-ℕ k) n))
 
 is-injective-mul-ℕ :
-  (k : ℕ) → is-nonzero-ℕ k → is-injective (mul-ℕ k)
+  (k : ℕ) → is-nonzero-ℕ k → is-injective (k *ℕ_)
 is-injective-mul-ℕ k H p with
   is-successor-is-nonzero-ℕ H
 ... | pair l refl = is-injective-mul-succ-ℕ l p
 
-is-emb-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (mul-ℕ x)
+is-emb-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (x *ℕ_)
 is-emb-mul-ℕ x H = is-emb-is-injective is-set-ℕ (is-injective-mul-ℕ x H)
 
 is-emb-mul-ℕ' : (x : ℕ) → is-nonzero-ℕ x → is-emb (_*ℕ x)
