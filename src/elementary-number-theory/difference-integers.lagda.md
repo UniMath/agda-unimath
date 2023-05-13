@@ -25,7 +25,7 @@ are derived there.
 
 ```agda
 diff-ℤ : ℤ → ℤ → ℤ
-diff-ℤ x y = add-ℤ x (neg-ℤ y)
+diff-ℤ x y = x +ℤ (neg-ℤ y)
 
 ap-diff-ℤ : {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → diff-ℤ x y ＝ diff-ℤ x' y'
 ap-diff-ℤ p q = ap-binary diff-ℤ p q
@@ -70,7 +70,7 @@ right-predecessor-law-diff-ℤ x y =
   ap (add-ℤ x) (neg-pred-ℤ y) ∙ right-successor-law-add-ℤ x (neg-ℤ y)
 
 triangle-diff-ℤ :
-  (x y z : ℤ) → add-ℤ (diff-ℤ x y) (diff-ℤ y z) ＝ diff-ℤ x z
+  (x y z : ℤ) → (diff-ℤ x y) +ℤ (diff-ℤ y z) ＝ diff-ℤ x z
 triangle-diff-ℤ x y z =
   ( associative-add-ℤ x (neg-ℤ y) (diff-ℤ y z)) ∙
   ( ap
@@ -89,20 +89,20 @@ distributive-neg-diff-ℤ x y =
 interchange-law-add-diff-ℤ : interchange-law add-ℤ diff-ℤ
 interchange-law-add-diff-ℤ x y u v =
   ( interchange-law-add-add-ℤ x (neg-ℤ y) u (neg-ℤ v)) ∙
-  ( ap (add-ℤ (add-ℤ x u)) (inv (distributive-neg-add-ℤ y v)))
+  ( ap (add-ℤ (x +ℤ u)) (inv (distributive-neg-add-ℤ y v)))
 
 interchange-law-diff-add-ℤ : interchange-law diff-ℤ add-ℤ
 interchange-law-diff-add-ℤ x y u v = inv (interchange-law-add-diff-ℤ x u y v)
 
 left-translation-diff-ℤ :
-  (x y z : ℤ) → diff-ℤ (add-ℤ z x) (add-ℤ z y) ＝ diff-ℤ x y
+  (x y z : ℤ) → diff-ℤ (z +ℤ x) (z +ℤ y) ＝ diff-ℤ x y
 left-translation-diff-ℤ x y z =
   ( interchange-law-diff-add-ℤ z x z y) ∙
   ( ( ap (add-ℤ' (diff-ℤ x y)) (right-inverse-law-add-ℤ z)) ∙
     ( left-unit-law-add-ℤ (diff-ℤ x y)))
 
 right-translation-diff-ℤ :
-  (x y z : ℤ) → diff-ℤ (add-ℤ x z) (add-ℤ y z) ＝ diff-ℤ x y
+  (x y z : ℤ) → diff-ℤ (x +ℤ z) (y +ℤ z) ＝ diff-ℤ x y
 right-translation-diff-ℤ x y z =
   ( ap-diff-ℤ (commutative-add-ℤ x z) (commutative-add-ℤ y z)) ∙
   ( left-translation-diff-ℤ x y z)

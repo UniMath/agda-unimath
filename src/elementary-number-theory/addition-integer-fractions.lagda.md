@@ -27,7 +27,7 @@ that the properties only hold up to fraction similarity.
 ```agda
 add-fraction-ℤ : fraction-ℤ → fraction-ℤ → fraction-ℤ
 pr1 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos)) =
-  add-ℤ (mul-ℤ m n') (mul-ℤ m' n)
+  (mul-ℤ m n') +ℤ (mul-ℤ m' n)
 pr1 (pr2 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos))) =
   mul-ℤ n n'
 pr2 (pr2 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos))) =

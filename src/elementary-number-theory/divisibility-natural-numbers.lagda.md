@@ -275,14 +275,14 @@ div-mul-ℕ' k x y H =
 
 ```agda
 div-add-ℕ :
-  (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (add-ℕ x y)
-pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = add-ℕ n m
+  (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (x +ℕ y)
+pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = n +ℕ m
 pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
   ( right-distributive-mul-add-ℕ n m d) ∙
   ( ap-add-ℕ p q)
 
 div-left-summand-ℕ :
-  (d x y : ℕ) → div-ℕ d y → div-ℕ d (add-ℕ x y) → div-ℕ d x
+  (d x y : ℕ) → div-ℕ d y → div-ℕ d (x +ℕ y) → div-ℕ d x
 div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
   pair zero-ℕ
     ( ( inv (right-zero-law-mul-ℕ n)) ∙
@@ -305,7 +305,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
         ( p ∙ (ap (add-ℕ x) (inv q)))))
 
 div-right-summand-ℕ :
-  (d x y : ℕ) → div-ℕ d x → div-ℕ d (add-ℕ x y) → div-ℕ d y
+  (d x y : ℕ) → div-ℕ d x → div-ℕ d (x +ℕ y) → div-ℕ d y
 div-right-summand-ℕ d x y H1 H2 =
   div-left-summand-ℕ d y x H1 (concatenate-div-eq-ℕ H2 (commutative-add-ℕ x y))
 ```

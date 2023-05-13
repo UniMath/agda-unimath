@@ -99,7 +99,7 @@ module _
     iso-iterative-groupoid-automorphism-𝔽 x y →
     iso-iterative-groupoid-automorphism-𝔽 x z
   pr1 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
-    add-ℕ n m
+    n +ℕ m
   pr2 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
@@ -445,7 +445,7 @@ module _
       (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
-          Id (add-ℕ j k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
+          Id (j +ℕ k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
     lemma h k =
       subtraction-leq-ℕ
         ( k)
@@ -465,7 +465,7 @@ module _
           ( λ { (pair k2 q) →
                 ( unit-trunc-Prop
                   ( pair
-                    ( add-ℕ k2 k1)
+                    ( k2 +ℕ k1)
                     ( (iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
                       ( ap (iterate k2 (map-equiv f)) p ∙ q))))}))
 
@@ -633,7 +633,7 @@ module _
 
   sign-permutation-orbit : Fin 2
   sign-permutation-orbit =
-    iterate (add-ℕ n number-of-orbits-permutation) (succ-Fin 2) (zero-Fin 1)
+    iterate (n +ℕ number-of-orbits-permutation) (succ-Fin 2) (zero-Fin 1)
 ```
 
 ```agda
@@ -895,7 +895,7 @@ module _
           Σ ( ℕ)
             ( λ l →
               is-nonzero-ℕ l ×
-              Id (add-ℕ l k) (pr1 (minimal-element-iterate g a b pa)))
+              Id (l +ℕ k) (pr1 (minimal-element-iterate g a b pa)))
         pair-k2 =
           (subtraction-le-ℕ k (pr1 (minimal-element-iterate g a b pa)) ineq)
       pr2 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) r =
@@ -2327,7 +2327,7 @@ module _
             succ-Fin
               ( 2)
               ( iterate
-                ( add-ℕ (number-of-elements-count eX) k)
+                ( (number-of-elements-count eX) +ℕ k)
                 ( succ-Fin 2)
                 ( zero-Fin 1)))
           ( number-orbits-composition-transposition g P)
@@ -2335,7 +2335,7 @@ module _
         ap
           ( λ k →
             iterate
-              ( add-ℕ (number-of-elements-count eX) k)
+              ( (number-of-elements-count eX) +ℕ k)
               ( succ-Fin 2)
               ( zero-Fin 1))
           ( number-orbits-composition-transposition' g NP)

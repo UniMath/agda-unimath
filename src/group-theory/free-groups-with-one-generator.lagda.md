@@ -118,7 +118,7 @@ module _
 
   preserves-mul-map-hom-free-group-with-one-generator-ℤ :
     (x y : ℤ) →
-    ( map-hom-free-group-with-one-generator-ℤ (add-ℤ x y)) ＝
+    ( map-hom-free-group-with-one-generator-ℤ (x +ℤ y)) ＝
     ( mul-Group G
       ( map-hom-free-group-with-one-generator-ℤ x)
       ( map-hom-free-group-with-one-generator-ℤ y))

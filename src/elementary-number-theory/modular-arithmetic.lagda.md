@@ -485,7 +485,7 @@ preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) =
 
 preserves-add-mod-ℤ :
   (k : ℕ) (x y : ℤ) →
-  mod-ℤ k (add-ℤ x y) ＝ add-ℤ-Mod k (mod-ℤ k x) (mod-ℤ k y)
+  mod-ℤ k (x +ℤ y) ＝ add-ℤ-Mod k (mod-ℤ k x) (mod-ℤ k y)
 preserves-add-mod-ℤ zero-ℕ x y = refl
 preserves-add-mod-ℤ (succ-ℕ k) (inl zero-ℕ) y =
   ( preserves-predecessor-mod-ℤ (succ-ℕ k) y) ∙
@@ -494,7 +494,7 @@ preserves-add-mod-ℤ (succ-ℕ k) (inl zero-ℕ) y =
       ( add-Fin' (succ-ℕ k) (mod-ℤ (succ-ℕ k) y))
       ( inv (mod-neg-one-ℤ (succ-ℕ k)))))
 preserves-add-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) y =
-  ( preserves-predecessor-mod-ℤ (succ-ℕ k) (add-ℤ (inl x) y)) ∙
+  ( preserves-predecessor-mod-ℤ (succ-ℕ k) ((inl x) +ℤ y)) ∙
   ( ( ap (pred-Fin (succ-ℕ k)) (preserves-add-mod-ℤ (succ-ℕ k) (inl x) y)) ∙
     ( ( inv
         ( left-predecessor-law-add-Fin (succ-ℕ k)

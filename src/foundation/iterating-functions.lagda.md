@@ -102,7 +102,7 @@ module _
 
   iterate-add-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    iterate (add-ℕ k l) f x ＝ iterate k f (iterate l f x)
+    iterate (k +ℕ l) f x ＝ iterate k f (iterate l f x)
   iterate-add-ℕ k zero-ℕ f x = refl
   iterate-add-ℕ k (succ-ℕ l) f x =
     ap f (iterate-add-ℕ k l f x) ∙ iterate-succ-ℕ k f (iterate l f x)

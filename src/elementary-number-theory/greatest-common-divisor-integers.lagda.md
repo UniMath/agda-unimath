@@ -238,7 +238,7 @@ is-positive-gcd-is-positive-left-ℤ x y H =
       ( abs-ℤ y)
       ( λ p → is-nonzero-abs-ℤ x H (f p)))
   where
-  f : is-zero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y)) → is-zero-ℕ (abs-ℤ x)
+  f : is-zero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y)) → is-zero-ℕ (abs-ℤ x)
   f = is-zero-left-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y)
 
 is-positive-gcd-is-positive-right-ℤ :
@@ -251,7 +251,7 @@ is-positive-gcd-is-positive-right-ℤ x y H =
       ( abs-ℤ y)
       ( λ p → is-nonzero-abs-ℤ y H (f p)))
   where
-  f : is-zero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y)) → is-zero-ℕ (abs-ℤ y)
+  f : is-zero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y)) → is-zero-ℕ (abs-ℤ y)
   f = is-zero-right-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y)
 
 is-positive-gcd-ℤ :

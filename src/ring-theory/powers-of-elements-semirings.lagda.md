@@ -59,14 +59,14 @@ module _
 
   power-add-Semiring :
     (m n : ℕ) {x : type-Semiring R} →
-    power-Semiring R (add-ℕ m n) x ＝
+    power-Semiring R (m +ℕ n) x ＝
     mul-Semiring R (power-Semiring R m x) (power-Semiring R n x)
   power-add-Semiring m zero-ℕ {x} =
     inv
       ( right-unit-law-mul-Semiring R
         ( power-Semiring R m x))
   power-add-Semiring m (succ-ℕ n) {x} =
-    ( power-succ-Semiring R (add-ℕ m n) x) ∙
+    ( power-succ-Semiring R (m +ℕ n) x) ∙
     ( ( ap (mul-Semiring' R x) (power-add-Semiring m n)) ∙
       ( ( associative-mul-Semiring R
           ( power-Semiring R m x)

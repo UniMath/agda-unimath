@@ -84,9 +84,9 @@ has-pair-expansion-is-even-or-odd n =
                ( succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2))) ∙
              ( ( ap (λ a → mul-ℕ 2 a) (pr2 s)) ∙
              ( ( ap succ-ℕ
-               ( left-successor-law-add-ℕ (add-ℕ 0 (pr1 e)) (pr1 e))) ∙
+               ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
              ( ( ap (succ-ℕ ∘ succ-ℕ)
-               ( ap (λ a → add-ℕ a (pr1 e))
+               ( ap (λ a → a +ℕ (pr1 e))
                  ( left-unit-law-add-ℕ (pr1 e)))) ∙
              ( ( ap (succ-ℕ ∘ succ-ℕ)
                ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
@@ -112,19 +112,19 @@ is-pair-expansion-unique zero-ℕ zero-ℕ v v' p =
       ( is-injective-add-ℕ 0 (is-injective-succ-ℕ p))))
 is-pair-expansion-unique zero-ℕ (succ-ℕ u') v v' p = ex-falso (s t)
   where
-    s : is-odd-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v 2)))
+    s : is-odd-ℕ (succ-ℕ (0 +ℕ (mul-ℕ v 2)))
     s = is-odd-has-odd-expansion _
       ( v , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
 
-    t : is-even-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v 2)))
+    t : is-even-ℕ (succ-ℕ (0 +ℕ (mul-ℕ v 2)))
     t = tr is-even-ℕ (inv p) (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u') , refl))
 is-pair-expansion-unique (succ-ℕ u) zero-ℕ v v' p = ex-falso (s t)
   where
-    s : is-odd-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v' 2)))
+    s : is-odd-ℕ (succ-ℕ (0 +ℕ (mul-ℕ v' 2)))
     s = is-odd-has-odd-expansion _
       ( v' , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
 
-    t : is-even-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v' 2)))
+    t : is-even-ℕ (succ-ℕ (0 +ℕ (mul-ℕ v' 2)))
     t = tr is-even-ℕ p (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u) , refl))
 is-pair-expansion-unique (succ-ℕ u) (succ-ℕ u') v v' p = pu , pv
   where

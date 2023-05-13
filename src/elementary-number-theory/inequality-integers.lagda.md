@@ -54,8 +54,8 @@ trans-leq-ℤ k l m p q =
   tr is-nonnegative-ℤ
     ( triangle-diff-ℤ m l k)
     ( is-nonnegative-add-ℤ
-      ( add-ℤ m (neg-ℤ l))
-      ( add-ℤ l (neg-ℤ k))
+      ( m +ℤ (neg-ℤ l))
+      ( l +ℤ (neg-ℤ k))
       ( q)
       ( p))
 
@@ -108,32 +108,32 @@ is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 
 ```agda
 preserves-order-add-ℤ' :
-  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ x z) (add-ℤ y z)
+  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
 preserves-order-add-ℤ' {x} {y} z =
   is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
 preserves-order-add-ℤ :
-  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ z x) (add-ℤ z y)
+  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
 preserves-order-add-ℤ {x} {y} z =
   is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
 preserves-leq-add-ℤ :
-  {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (add-ℤ a c) (add-ℤ b d)
+  {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
 preserves-leq-add-ℤ {a} {b} {c} {d} H K =
   trans-leq-ℤ
-    ( add-ℤ a c)
-    ( add-ℤ b c)
-    ( add-ℤ b d)
+    ( a +ℤ c)
+    ( b +ℤ c)
+    ( b +ℤ d)
     ( preserves-order-add-ℤ' {a} {b} c H)
     ( preserves-order-add-ℤ b K)
 
 reflects-order-add-ℤ' :
-  {x y z : ℤ} → leq-ℤ (add-ℤ x z) (add-ℤ y z) → leq-ℤ x y
+  {x y z : ℤ} → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
 reflects-order-add-ℤ' {x} {y} {z} =
   is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
 
 reflects-order-add-ℤ :
-  {x y z : ℤ} → leq-ℤ (add-ℤ z x) (add-ℤ z y) → leq-ℤ x y
+  {x y z : ℤ} → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
 reflects-order-add-ℤ {x} {y} {z} =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```

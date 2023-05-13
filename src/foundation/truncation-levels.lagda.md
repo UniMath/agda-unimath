@@ -45,6 +45,9 @@ add-𝕋 (succ-𝕋 neg-two-𝕋) neg-two-𝕋 = neg-two-𝕋
 add-𝕋 (succ-𝕋 neg-two-𝕋) (succ-𝕋 l) = l
 add-𝕋 (succ-𝕋 (succ-𝕋 k)) neg-two-𝕋 = k
 add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 l) = succ-𝕋 (add-𝕋 (succ-𝕋 k) (succ-𝕋 l))
+
+infix 30 _+𝕋_
+_+𝕋_ = add-𝕋
 ```
 
 ## Properties
@@ -52,13 +55,13 @@ add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 l) = succ-𝕋 (add-𝕋 (succ-�
 ### Unit laws for addition of truncation levels
 
 ```agda
-left-unit-law-add-𝕋 : (k : 𝕋) → add-𝕋 zero-𝕋 k ＝ k
+left-unit-law-add-𝕋 : (k : 𝕋) → zero-𝕋 +𝕋 k ＝ k
 left-unit-law-add-𝕋 neg-two-𝕋 = refl
 left-unit-law-add-𝕋 (succ-𝕋 neg-two-𝕋) = refl
 left-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)) = refl
 left-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) = refl
 
-right-unit-law-add-𝕋 : (k : 𝕋) → add-𝕋 k zero-𝕋 ＝ k
+right-unit-law-add-𝕋 : (k : 𝕋) → k +𝕋 zero-𝕋 ＝ k
 right-unit-law-add-𝕋 neg-two-𝕋 = refl
 right-unit-law-add-𝕋 (succ-𝕋 neg-two-𝕋) = refl
 right-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 k)) =

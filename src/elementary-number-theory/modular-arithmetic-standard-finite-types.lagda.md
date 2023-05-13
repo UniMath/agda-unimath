@@ -194,7 +194,7 @@ ap-add-Fin k p q = ap-binary (add-Fin k) p q
 
 cong-add-Fin :
   {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (add-Fin k x y)) (add-ℕ (nat-Fin k x) (nat-Fin k y))
+  cong-ℕ k (nat-Fin k (add-Fin k x y)) ((nat-Fin k x) +ℕ (nat-Fin k y))
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
 
@@ -205,14 +205,14 @@ cong-add-ℕ :
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
-    ( add-ℕ x y)
+    ( x +ℕ y)
 cong-add-ℕ {k} x y =
   trans-cong-ℕ (succ-ℕ k)
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( add-ℕ x (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
-    ( add-ℕ x y)
+    ( x +ℕ y)
     ( translation-invariant-cong-ℕ'
       ( succ-ℕ k)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
@@ -228,19 +228,19 @@ cong-add-ℕ {k} x y =
 
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
-  cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (add-ℕ x y) (add-ℕ x' y')
+  cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y')
 congruence-add-ℕ k {x} {y} {x'} {y'} H K =
-  trans-cong-ℕ k (add-ℕ x y) (add-ℕ x y') (add-ℕ x' y')
+  trans-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
     ( translation-invariant-cong-ℕ k y y' x K)
     ( translation-invariant-cong-ℕ' k x x' y' H)
 
 mod-succ-add-ℕ :
   (k x y : ℕ) →
-  mod-succ-ℕ k (add-ℕ x y) ＝
+  mod-succ-ℕ k (x +ℕ y) ＝
   add-Fin (succ-ℕ k) (mod-succ-ℕ k x) (mod-succ-ℕ k y)
 mod-succ-add-ℕ k x y =
   eq-mod-succ-cong-ℕ k
-    ( add-ℕ x y)
+    ( x +ℕ y)
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))

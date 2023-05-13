@@ -36,7 +36,7 @@ open import foundation.unit-type
 
 ```agda
 bezouts-lemma-eqn-to-int :
-  (x y : ℤ) → (H : is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))) →
+  (x y : ℤ) → (H : is-nonzero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))) →
   nat-gcd-ℤ x y ＝
   dist-ℕ
     ( abs-ℤ
@@ -142,7 +142,7 @@ bezouts-lemma-eqn-to-int x y H =
 
 refactor-pos-cond :
   (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) →
-  is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
+  is-nonzero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
 refactor-pos-cond x y H _ =
   is-nonzero-abs-ℤ x H ∘ is-zero-left-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y)
 
@@ -195,7 +195,7 @@ bezouts-lemma-refactor-hypotheses x y H K =
             ( y))
         x-prod-nonneg y-prod-nonneg
   where
-  P : is-nonzero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y))
+  P : is-nonzero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
   P = (refactor-pos-cond x y H K)
   x-prod-nonneg :
     is-nonnegative-ℤ
@@ -219,7 +219,7 @@ bezouts-lemma-refactor-hypotheses x y H K =
 
 bezouts-lemma-pos-ints :
   (x y : ℤ) (H : is-positive-ℤ x) (K : is-positive-ℤ y) →
-  Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+  Σ ℤ (λ s → Σ ℤ (λ t → (mul-ℤ s x) +ℤ (mul-ℤ t y) ＝ gcd-ℤ x y))
 bezouts-lemma-pos-ints x y H K =
   sx-ty-nonneg-case-split
     ( decide-is-nonnegative-ℤ {diff-ℤ (mul-ℤ s x) (mul-ℤ t y)})
@@ -234,7 +234,7 @@ bezouts-lemma-pos-ints x y H K =
   sx-ty-nonneg-case-split :
     ( is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) +
       is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)))) →
-    Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+    Σ ℤ (λ s → Σ ℤ (λ t → (mul-ℤ s x) +ℤ (mul-ℤ t y) ＝ gcd-ℤ x y))
   pr1 (sx-ty-nonneg-case-split (inl pos)) = s
   pr1 (pr2 (sx-ty-nonneg-case-split (inl pos))) = neg-ℤ t
   pr2 (pr2 (sx-ty-nonneg-case-split (inl pos))) =
@@ -246,7 +246,7 @@ bezouts-lemma-pos-ints x y H K =
         ＝ diff-ℤ (mul-ℤ s x) (mul-ℤ t y)
           by int-abs-is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) pos
         ＝ add-ℤ (mul-ℤ s x) (mul-ℤ (neg-ℤ t) y)
-          by ap (λ M → add-ℤ (mul-ℤ s x) M) (inv (left-negative-law-mul-ℤ t y)))
+          by ap (λ M → (mul-ℤ s x) +ℤ M) (inv (left-negative-law-mul-ℤ t y)))
 
   pr1 (sx-ty-nonneg-case-split (inr neg)) = neg-ℤ s
   pr1 (pr2 (sx-ty-nonneg-case-split (inr neg))) = t
@@ -272,7 +272,7 @@ bezouts-lemma-pos-ints x y H K =
             by ap (λ M → add-ℤ (mul-ℤ (neg-ℤ s) x) M) (neg-neg-ℤ (mul-ℤ t y)))
 
 bezouts-lemma-ℤ :
-  (x y : ℤ) → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+  (x y : ℤ) → Σ ℤ (λ s → Σ ℤ (λ t → (mul-ℤ s x) +ℤ (mul-ℤ t y) ＝ gcd-ℤ x y))
 bezouts-lemma-ℤ (inl x) (inl y) = pair (neg-ℤ s) (pair (neg-ℤ t) eqn)
   where
   pos-bezout :
@@ -389,8 +389,8 @@ bezouts-lemma-ℤ (inr (inl star)) (inr (inl star)) = pair one-ℤ (pair one-ℤ
           ap
             ( λ M → add-ℤ M (mul-ℤ one-ℤ (inr (inl star))))
             ( right-zero-law-mul-ℤ one-ℤ)
-      ＝ add-ℤ zero-ℤ zero-ℤ
-        by ap (λ M → add-ℤ zero-ℤ M) (right-zero-law-mul-ℤ one-ℤ)
+      ＝ zero-ℤ +ℤ zero-ℤ
+        by ap (λ M → zero-ℤ +ℤ M) (right-zero-law-mul-ℤ one-ℤ)
       ＝ gcd-ℤ zero-ℤ zero-ℤ
         by inv (is-zero-gcd-ℤ zero-ℤ zero-ℤ refl refl)
 bezouts-lemma-ℤ (inr (inl star)) (inr (inr y)) = pair one-ℤ (pair one-ℤ eqn)
@@ -479,25 +479,25 @@ Bezout.
 ```agda
 div-right-factor-coprime-ℤ :
   (x y z : ℤ) → (div-ℤ x (mul-ℤ y z)) → (gcd-ℤ x y ＝ one-ℤ) → div-ℤ x z
-div-right-factor-coprime-ℤ x y z H K = pair (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) eqn
+div-right-factor-coprime-ℤ x y z H K = pair ((mul-ℤ s z) +ℤ (mul-ℤ t k)) eqn
   where
   bezout-triple :
-    Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+    Σ ℤ (λ s → Σ ℤ (λ t → (mul-ℤ s x) +ℤ (mul-ℤ t y) ＝ gcd-ℤ x y))
   bezout-triple = bezouts-lemma-ℤ x y
   s : ℤ
   s = pr1 bezout-triple
   t : ℤ
   t = pr1 (pr2 bezout-triple)
-  bezout-eqn : add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y
+  bezout-eqn : (mul-ℤ s x) +ℤ (mul-ℤ t y) ＝ gcd-ℤ x y
   bezout-eqn = pr2 (pr2 bezout-triple)
   k : ℤ
   k = pr1 H
   div-yz : mul-ℤ k x ＝ mul-ℤ y z
   div-yz = pr2 H
-  eqn : mul-ℤ (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) x ＝ z
+  eqn : mul-ℤ ((mul-ℤ s z) +ℤ (mul-ℤ t k)) x ＝ z
   eqn =
     equational-reasoning
-      mul-ℤ (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) x
+      mul-ℤ ((mul-ℤ s z) +ℤ (mul-ℤ t k)) x
       ＝ add-ℤ (mul-ℤ (mul-ℤ s z) x) (mul-ℤ (mul-ℤ t k) x)
         by right-distributive-mul-add-ℤ (mul-ℤ s z) (mul-ℤ t k) x
       ＝ add-ℤ (mul-ℤ (mul-ℤ s x) z) (mul-ℤ (mul-ℤ t k) x)
@@ -520,7 +520,7 @@ div-right-factor-coprime-ℤ x y z H K = pair (add-ℤ (mul-ℤ s z) (mul-ℤ t 
           by ap (λ P → mul-ℤ t P) div-yz
         ＝ mul-ℤ (mul-ℤ t y) z
           by inv (associative-mul-ℤ t y z))
-    ＝ mul-ℤ (add-ℤ (mul-ℤ s x) (mul-ℤ t y)) z
+    ＝ mul-ℤ ((mul-ℤ s x) +ℤ (mul-ℤ t y)) z
       by inv (right-distributive-mul-add-ℤ (mul-ℤ s x) (mul-ℤ t y) z)
     ＝ mul-ℤ one-ℤ z
       by ap (λ M → mul-ℤ M z) (bezout-eqn ∙ K)

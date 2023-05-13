@@ -301,14 +301,14 @@ module _
     inv
       ( is-zero-mod-succ-ℕ
         ( 1)
-        ( dist-ℕ (add-ℕ k1 k2) (mul-ℕ 2 k'))
+        ( dist-ℕ (k1 +ℕ k2) (mul-ℕ 2 k'))
         ( trans-cong-ℕ
           ( 2)
-          ( add-ℕ k1 k2)
+          ( k1 +ℕ k2)
           ( zero-ℕ)
           ( mul-ℕ 2 k')
           ( trans-cong-ℕ 2
-            ( add-ℕ k1 k2)
+            ( k1 +ℕ k2)
             ( add-ℕ
               ( nat-Fin 2
                 ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
@@ -325,7 +325,7 @@ module _
                 ( nat-Fin 2
                   ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
                       d2 d3)))
-              ( add-ℕ k1 k2)
+              ( k1 +ℕ k2)
               ( cong-add-ℕ k1 k2))
             ( concatenate-eq-cong-ℕ 2
               ( ( ap-binary
@@ -333,18 +333,18 @@ module _
                 ( ap (nat-Fin 2) (inv p1))
                 ( ap (nat-Fin 2) (inv p2))) ∙
                 ( ap
-                  ( λ n → add-ℕ n (nat-Fin 2 m))
+                  ( λ n → n +ℕ (nat-Fin 2 m))
                   ( inv (left-unit-law-mul-ℕ (nat-Fin 2 m)))))
               ( scalar-invariant-cong-ℕ' 2 2 0 (nat-Fin 2 m) (cong-zero-ℕ' 2))))
           ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2)))) ∙
       ( ap
         ( mod-two-ℕ)
-        ( ( symmetric-dist-ℕ (add-ℕ k1 k2) (mul-ℕ 2 k')) ∙
+        ( ( symmetric-dist-ℕ (k1 +ℕ k2) (mul-ℕ 2 k')) ∙
           ( inv
             ( rewrite-left-add-dist-ℕ
               ( k)
               ( mul-ℕ 2 k')
-              ( add-ℕ k1 k2)
+              ( k1 +ℕ k2)
               ( inv
                 ( eq-symmetric-difference
                   ( 2-Element-Decidable-Subtype l (type-UU-Fin n X))

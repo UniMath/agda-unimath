@@ -49,7 +49,7 @@ infix 30 _+ℤ_
 _+ℤ_ = add-ℤ
 
 ap-add-ℤ :
-  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → add-ℤ x y ＝ add-ℤ x' y'
+  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → x +ℤ y ＝ x' +ℤ y'
 ap-add-ℤ p q = ap-binary add-ℤ p q
 ```
 
@@ -121,7 +121,7 @@ abstract
     equational-reasoning
       inl x +ℤ y
       ＝ succ-ℤ (pred-ℤ (inl x +ℤ y))
-        by inv (issec-pred-ℤ (add-ℤ (inl x) y))
+        by inv (issec-pred-ℤ ((inl x) +ℤ y))
       ＝ succ-ℤ (pred-ℤ (inl x) +ℤ y)
         by ap succ-ℤ (inv (left-predecessor-law-add-ℤ (inl x) y))
   left-successor-law-add-ℤ (inr (inl star)) y = refl
@@ -142,9 +142,9 @@ abstract
       ＝ pred-ℤ (succ-ℤ (inl x +ℤ y))
         by ap pred-ℤ (right-successor-law-add-ℤ (inl x) y)
       ＝ inl x +ℤ y
-        by isretr-pred-ℤ (add-ℤ (inl x) y)
+        by isretr-pred-ℤ ((inl x) +ℤ y)
       ＝ succ-ℤ (pred-ℤ (inl x +ℤ y))
-        by inv (issec-pred-ℤ (add-ℤ (inl x) y))
+        by inv (issec-pred-ℤ ((inl x) +ℤ y))
   right-successor-law-add-ℤ (inr (inl star)) y = refl
   right-successor-law-add-ℤ (inr (inr zero-ℕ)) y = refl
   right-successor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
@@ -211,18 +211,18 @@ abstract
       ＝ pred-ℤ (y +ℤ z)
         by left-predecessor-law-add-ℤ y z
       ＝ neg-one-ℤ +ℤ (y +ℤ z)
-        by inv (left-predecessor-law-add-ℤ zero-ℤ (add-ℤ y z))
+        by inv (left-predecessor-law-add-ℤ zero-ℤ (y +ℤ z))
   associative-add-ℤ (inl (succ-ℕ x)) y z =
     equational-reasoning
       (pred-ℤ (inl x) +ℤ y) +ℤ z
       ＝ pred-ℤ (inl x +ℤ y) +ℤ z
         by ap (add-ℤ' z) (left-predecessor-law-add-ℤ (inl x) y)
       ＝ pred-ℤ ((inl x +ℤ y) +ℤ z)
-        by left-predecessor-law-add-ℤ (add-ℤ (inl x) y) z
+        by left-predecessor-law-add-ℤ ((inl x) +ℤ y) z
       ＝ pred-ℤ (inl x +ℤ (y +ℤ z))
         by ap pred-ℤ (associative-add-ℤ (inl x) y z)
       ＝ pred-ℤ (inl x) +ℤ (y +ℤ z)
-        by inv (left-predecessor-law-add-ℤ (inl x) (add-ℤ y z))
+        by inv (left-predecessor-law-add-ℤ (inl x) (y +ℤ z))
   associative-add-ℤ (inr (inl star)) y z =
     refl
   associative-add-ℤ (inr (inr zero-ℕ)) y z =
@@ -233,7 +233,7 @@ abstract
       ＝ succ-ℤ (y +ℤ z)
         by left-successor-law-add-ℤ y z
       ＝ one-ℤ +ℤ (y +ℤ z)
-        by inv (left-successor-law-add-ℤ zero-ℤ (add-ℤ y z))
+        by inv (left-successor-law-add-ℤ zero-ℤ (y +ℤ z))
   associative-add-ℤ (inr (inr (succ-ℕ x))) y z =
     equational-reasoning
       (succ-ℤ (inr (inr x)) +ℤ y) +ℤ z
@@ -244,7 +244,7 @@ abstract
       ＝ succ-ℤ (inr (inr x) +ℤ (y +ℤ z))
         by ap succ-ℤ (associative-add-ℤ (inr (inr x)) y z)
       ＝ succ-ℤ (inr (inr x)) +ℤ (y +ℤ z)
-        by inv (left-successor-law-add-ℤ (inr (inr x)) (add-ℤ y z))
+        by inv (left-successor-law-add-ℤ (inr (inr x)) (y +ℤ z))
 ```
 
 ### Addition is commutative
@@ -254,17 +254,17 @@ abstract
   commutative-add-ℤ : (x y : ℤ) → x +ℤ y ＝ y +ℤ x
   commutative-add-ℤ (inl zero-ℕ) y =
     equational-reasoning
-      add-ℤ neg-one-ℤ y
-      ＝ pred-ℤ (add-ℤ zero-ℤ y)
+      neg-one-ℤ +ℤ y
+      ＝ pred-ℤ (zero-ℤ +ℤ y)
         by left-predecessor-law-add-ℤ zero-ℤ y
-      ＝ pred-ℤ (add-ℤ y zero-ℤ)
+      ＝ pred-ℤ (y +ℤ zero-ℤ)
         by inv (ap pred-ℤ (right-unit-law-add-ℤ y))
-      ＝ add-ℤ y neg-one-ℤ
+      ＝ y +ℤ neg-one-ℤ
         by inv (right-predecessor-law-add-ℤ y zero-ℤ)
   commutative-add-ℤ (inl (succ-ℕ x)) y =
     equational-reasoning
       add-ℤ (inl (succ-ℕ x)) y
-      ＝ pred-ℤ (add-ℤ y (inl x))
+      ＝ pred-ℤ (y +ℤ (inl x))
         by ap pred-ℤ (commutative-add-ℤ (inl x) y)
       ＝ add-ℤ y (inl (succ-ℕ x))
         by inv (right-predecessor-law-add-ℤ y (inl x))
@@ -273,9 +273,9 @@ abstract
   commutative-add-ℤ (inr (inr zero-ℕ)) y =
     equational-reasoning
       succ-ℤ y
-      ＝ succ-ℤ (add-ℤ y zero-ℤ)
+      ＝ succ-ℤ (y +ℤ zero-ℤ)
         by inv (ap succ-ℤ (right-unit-law-add-ℤ y))
-      ＝ add-ℤ y one-ℤ
+      ＝ y +ℤ one-ℤ
         by inv (right-successor-law-add-ℤ y zero-ℤ)
   commutative-add-ℤ (inr (inr (succ-ℕ x))) y =
     equational-reasoning
@@ -347,7 +347,7 @@ issec-add-neg-ℤ x y =
       by ap (add-ℤ' y) (right-inverse-law-add-ℤ x)
 
 isretr-add-neg-ℤ :
-  (x y : ℤ) → add-ℤ (neg-ℤ x) (add-ℤ x y) ＝ y
+  (x y : ℤ) → (neg-ℤ x) +ℤ (x +ℤ y) ＝ y
 isretr-add-neg-ℤ x y =
   equational-reasoning
     neg-ℤ x +ℤ (x +ℤ y)
@@ -466,8 +466,8 @@ right-negative-law-add-ℤ (inr (inr (succ-ℕ n))) l =
       by left-successor-law-add-ℤ (in-pos n) (neg-ℤ l)
     ＝ succ-ℤ (neg-ℤ (neg-ℤ (inr (inr n)) +ℤ l))
       by ap succ-ℤ (right-negative-law-add-ℤ (inr (inr n)) l)
-    ＝ neg-ℤ (pred-ℤ (add-ℤ (inl n) l))
-      by inv (neg-pred-ℤ (add-ℤ (inl n) l))
+    ＝ neg-ℤ (pred-ℤ ((inl n) +ℤ l))
+      by inv (neg-pred-ℤ ((inl n) +ℤ l))
 ```
 
 ### Distributivity of negatives over addition
@@ -509,7 +509,7 @@ distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
 ```agda
 is-nonnegative-add-ℤ :
   (k l : ℤ) →
-  is-nonnegative-ℤ k → is-nonnegative-ℤ l → is-nonnegative-ℤ (add-ℤ k l)
+  is-nonnegative-ℤ k → is-nonnegative-ℤ l → is-nonnegative-ℤ (k +ℤ l)
 is-nonnegative-add-ℤ (inr (inl star)) (inr (inl star)) p q = star
 is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
 is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
@@ -528,7 +528,7 @@ is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
 
 ```agda
 is-positive-add-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (add-ℤ x y)
+  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
 is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
   is-positive-succ-ℤ
@@ -539,7 +539,7 @@ is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
 ### The inclusion of ℕ into ℤ preserves addition
 
 ```agda
-add-int-ℕ : (x y : ℕ) → add-ℤ (int-ℕ x) (int-ℕ y) ＝ int-ℕ (add-ℕ x y)
+add-int-ℕ : (x y : ℕ) → (int-ℕ x) +ℤ (int-ℕ y) ＝ int-ℕ (x +ℕ y)
 add-int-ℕ x zero-ℕ = right-unit-law-add-ℤ (int-ℕ x)
 add-int-ℕ x (succ-ℕ y) =
   equational-reasoning
@@ -548,17 +548,17 @@ add-int-ℕ x (succ-ℕ y) =
       by ap (add-ℤ (int-ℕ x)) (inv (succ-int-ℕ y))
     ＝ succ-ℤ (int-ℕ x +ℤ int-ℕ y)
       by right-successor-law-add-ℤ (int-ℕ x) (int-ℕ y)
-    ＝ succ-ℤ (int-ℕ (add-ℕ x y))
+    ＝ succ-ℤ (int-ℕ (x +ℕ y))
       by ap succ-ℤ (add-int-ℕ x y)
-    ＝ int-ℕ (succ-ℕ (add-ℕ x y))
-      by succ-int-ℕ (add-ℕ x y)
+    ＝ int-ℕ (succ-ℕ (x +ℕ y))
+      by succ-int-ℕ (x +ℕ y)
 ```
 
 ### If `x + y = y` then `x = 0`
 
 ```agda
 is-zero-add-ℤ :
-  (x y : ℤ) → add-ℤ x y ＝ y → is-zero-ℤ x
+  (x y : ℤ) → x +ℤ y ＝ y → is-zero-ℤ x
 is-zero-add-ℤ x y H =
   equational-reasoning
     x
@@ -574,7 +574,7 @@ is-zero-add-ℤ x y H =
       by right-inverse-law-add-ℤ y
 
 is-zero-add-ℤ' :
-  (x y : ℤ) → add-ℤ x y ＝ x → is-zero-ℤ y
+  (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
 is-zero-add-ℤ' x y H =
   is-zero-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
@@ -583,13 +583,13 @@ is-zero-add-ℤ' x y H =
 
 ```agda
 negatives-add-ℤ :
-  (x y : ℕ) → in-neg x +ℤ in-neg y ＝ in-neg (succ-ℕ (add-ℕ x y))
+  (x y : ℕ) → in-neg x +ℤ in-neg y ＝ in-neg (succ-ℕ (x +ℕ y))
 negatives-add-ℤ zero-ℕ y = ap (inl ∘ succ-ℕ) (inv (left-unit-law-add-ℕ y))
 negatives-add-ℤ (succ-ℕ x) y =
   equational-reasoning
     pred-ℤ (in-neg x +ℤ in-neg y)
-    ＝ pred-ℤ (in-neg (succ-ℕ (add-ℕ x y)))
+    ＝ pred-ℤ (in-neg (succ-ℕ (x +ℕ y)))
       by ap pred-ℤ (negatives-add-ℤ x y)
-    ＝ (inl ∘ succ-ℕ) (add-ℕ (succ-ℕ x) y)
+    ＝ (inl ∘ succ-ℕ) ((succ-ℕ x) +ℕ y)
       by ap (inl ∘ succ-ℕ) (inv (left-successor-law-add-ℕ x y))
 ```

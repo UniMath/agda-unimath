@@ -63,7 +63,7 @@ Fibo-zero-ℕ : ℕ → ℕ
 Fibo-zero-ℕ = shift-two 0 1 (λ x → 0)
 
 Fibo-succ-ℕ : (ℕ → ℕ) → (ℕ → ℕ)
-Fibo-succ-ℕ f = shift-two (f 1) (add-ℕ (f 1) (f 0)) (λ x → 0)
+Fibo-succ-ℕ f = shift-two (f 1) ((f 1) +ℕ (f 0)) (λ x → 0)
 
 Fibo-function : ℕ → ℕ → ℕ
 Fibo-function =
@@ -82,7 +82,7 @@ Fibo k = Fibo-function k 0
 ```agda
 Fibonacci-add-ℕ :
   (m n : ℕ) →
-  Fibonacci-ℕ (add-ℕ m (succ-ℕ n)) ＝
+  Fibonacci-ℕ (m +ℕ (succ-ℕ n)) ＝
   add-ℕ
     ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
     ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ n))
@@ -152,12 +152,12 @@ third:
 
 1. `d | Fibonacci-ℕ m`
 2. `d | Fibonacci-ℕ n`
-3. `d | Fibonacci-ℕ (add-ℕ m n)`.
+3. `d | Fibonacci-ℕ (m +ℕ n)`.
 
 ```agda
 div-Fibonacci-add-ℕ :
   (d m n : ℕ) → div-ℕ d (Fibonacci-ℕ m) → div-ℕ d (Fibonacci-ℕ n) →
-  div-ℕ d (Fibonacci-ℕ (add-ℕ m n))
+  div-ℕ d (Fibonacci-ℕ (m +ℕ n))
 div-Fibonacci-add-ℕ d m zero-ℕ H1 H2 = H1
 div-Fibonacci-add-ℕ d m (succ-ℕ n) H1 H2 =
   tr

@@ -47,8 +47,8 @@ zero-½ℤ = inr zero-ℤ
 
 ```agda
 add-½ℤ : ½ℤ → ½ℤ → ½ℤ
-add-½ℤ (inl x) (inl y) = inr (succ-ℤ (add-ℤ x y))
-add-½ℤ (inl x) (inr y) = inl (add-ℤ x y)
-add-½ℤ (inr x) (inl y) = inl (add-ℤ x y)
-add-½ℤ (inr x) (inr y) = inr (add-ℤ x y)
+add-½ℤ (inl x) (inl y) = inr (succ-ℤ (x +ℤ y))
+add-½ℤ (inl x) (inr y) = inl (x +ℤ y)
+add-½ℤ (inr x) (inl y) = inl (x +ℤ y)
+add-½ℤ (inr x) (inr y) = inr (x +ℤ y)
 ```

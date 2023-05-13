@@ -289,11 +289,11 @@ contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
 
 ```agda
 left-law-leq-add-ℕ :
-  (k m n : ℕ) → m ≤-ℕ n → (add-ℕ m k) ≤-ℕ (add-ℕ n k)
+  (k m n : ℕ) → m ≤-ℕ n → (m +ℕ k) ≤-ℕ (n +ℕ k)
 left-law-leq-add-ℕ zero-ℕ m n = id
 left-law-leq-add-ℕ (succ-ℕ k) m n H = left-law-leq-add-ℕ k m n H
 
-right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ k m) ≤-ℕ (add-ℕ k n)
+right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (k +ℕ m) ≤-ℕ (k +ℕ n)
 right-law-leq-add-ℕ k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-add-ℕ k m)
@@ -301,12 +301,12 @@ right-law-leq-add-ℕ k m n H =
     ( commutative-add-ℕ n k)
 
 preserves-leq-add-ℕ :
-  {m m' n n' : ℕ} → m ≤-ℕ m' → n ≤-ℕ n' → (add-ℕ m n) ≤-ℕ (add-ℕ m' n')
+  {m m' n n' : ℕ} → m ≤-ℕ m' → n ≤-ℕ n' → (m +ℕ n) ≤-ℕ (m' +ℕ n')
 preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
   transitive-leq-ℕ
-    ( add-ℕ m n)
-    ( add-ℕ m' n)
-    ( add-ℕ m' n')
+    ( m +ℕ n)
+    ( m' +ℕ n)
+    ( m' +ℕ n')
     ( right-law-leq-add-ℕ m' n n' K)
     ( left-law-leq-add-ℕ n m m' H)
 ```
@@ -315,12 +315,12 @@ preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
 
 ```agda
 reflects-order-add-ℕ :
-  (k m n : ℕ) → (add-ℕ m k) ≤-ℕ (add-ℕ n k) → m ≤-ℕ n
+  (k m n : ℕ) → (m +ℕ k) ≤-ℕ (n +ℕ k) → m ≤-ℕ n
 reflects-order-add-ℕ zero-ℕ m n = id
 reflects-order-add-ℕ (succ-ℕ k) m n = reflects-order-add-ℕ k m n
 
 reflects-order-add-ℕ' :
-  (k m n : ℕ) → (add-ℕ k m) ≤-ℕ (add-ℕ k n) → m ≤-ℕ n
+  (k m n : ℕ) → (k +ℕ m) ≤-ℕ (k +ℕ n) → m ≤-ℕ n
 reflects-order-add-ℕ' k m n H =
   reflects-order-add-ℕ k m n
     ( concatenate-eq-leq-eq-ℕ
@@ -332,14 +332,14 @@ reflects-order-add-ℕ' k m n H =
 ### `m ≤ m + n` for any two natural numbers `m` and `n`
 
 ```agda
-leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (add-ℕ m n)
+leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (m +ℕ n)
 leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
 leq-add-ℕ m (succ-ℕ n) =
-  transitive-leq-ℕ m (add-ℕ m n) (succ-ℕ (add-ℕ m n))
-    ( succ-leq-ℕ (add-ℕ m n))
+  transitive-leq-ℕ m (m +ℕ n) (succ-ℕ (m +ℕ n))
+    ( succ-leq-ℕ (m +ℕ n))
     ( leq-add-ℕ m n)
 
-leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (add-ℕ n m)
+leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (n +ℕ m)
 leq-add-ℕ' m n =
   concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
 ```
@@ -347,14 +347,14 @@ leq-add-ℕ' m n =
 ### We have `n ≤ m` if and only if there is a number `l` such that `l+n=m`
 
 ```agda
-subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → add-ℕ l n ＝ m)
+subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → l +ℕ n ＝ m)
 subtraction-leq-ℕ zero-ℕ m p = pair m refl
 subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (ap succ-ℕ (pr2 P))
   where
-  P : Σ ℕ (λ l' → add-ℕ l' n ＝ m)
+  P : Σ ℕ (λ l' → l' +ℕ n ＝ m)
   P = subtraction-leq-ℕ n m p
 
-leq-subtraction-ℕ : (n m l : ℕ) → add-ℕ l n ＝ m → n ≤-ℕ m
+leq-subtraction-ℕ : (n m l : ℕ) → l +ℕ n ＝ m → n ≤-ℕ m
 leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
 leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
   leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)

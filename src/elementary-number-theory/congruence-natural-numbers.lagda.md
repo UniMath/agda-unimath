@@ -192,13 +192,13 @@ congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
 
 ```agda
 translation-invariant-cong-ℕ :
-  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ z x) (add-ℕ z y)
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (z +ℕ x) (z +ℕ y)
 pr1 (translation-invariant-cong-ℕ k x y z (pair d p)) = d
 pr2 (translation-invariant-cong-ℕ k x y z (pair d p)) =
   p ∙ inv (translation-invariant-dist-ℕ z x y)
 
 translation-invariant-cong-ℕ' :
-  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ x z) (add-ℕ y z)
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (x +ℕ z) (y +ℕ z)
 translation-invariant-cong-ℕ' k x y z H =
   concatenate-eq-cong-eq-ℕ k
     ( commutative-add-ℕ x z)
@@ -210,7 +210,7 @@ step-invariant-cong-ℕ :
 step-invariant-cong-ℕ k x y = translation-invariant-cong-ℕ' k x y 1
 
 reflects-cong-add-ℕ :
-  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (add-ℕ x y) (add-ℕ x z) → cong-ℕ k y z
+  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (x +ℕ y) (x +ℕ z) → cong-ℕ k y z
 pr1 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) = d
 pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
   p ∙ translation-invariant-dist-ℕ x y z

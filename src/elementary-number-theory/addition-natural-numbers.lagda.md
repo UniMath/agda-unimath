@@ -32,12 +32,11 @@ add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 add-ℕ' : ℕ → ℕ → ℕ
 add-ℕ' m n = add-ℕ n m
 
+infix 30 _+ℕ_
 _+ℕ_ = add-ℕ
 
-infix 30 _+ℕ_
-
 ap-add-ℕ :
-  {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → add-ℕ m n ＝ add-ℕ m' n'
+  {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → m +ℕ n ＝ m' +ℕ n'
 ap-add-ℕ p q = ap-binary add-ℕ p q
 ```
 
@@ -47,11 +46,11 @@ ap-add-ℕ p q = ap-binary add-ℕ p q
 
 ```agda
 right-unit-law-add-ℕ :
-  (x : ℕ) → add-ℕ x zero-ℕ ＝ x
+  (x : ℕ) → x +ℕ zero-ℕ ＝ x
 right-unit-law-add-ℕ x = refl
 
 left-unit-law-add-ℕ :
-  (x : ℕ) → add-ℕ zero-ℕ x ＝ x
+  (x : ℕ) → zero-ℕ +ℕ x ＝ x
 left-unit-law-add-ℕ zero-ℕ = refl
 left-unit-law-add-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-add-ℕ x)
 ```
@@ -60,13 +59,13 @@ left-unit-law-add-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-add-ℕ x)
 
 ```agda
 left-successor-law-add-ℕ :
-  (x y : ℕ) → add-ℕ (succ-ℕ x) y ＝ succ-ℕ (add-ℕ x y)
+  (x y : ℕ) → (succ-ℕ x) +ℕ y ＝ succ-ℕ (x +ℕ y)
 left-successor-law-add-ℕ x zero-ℕ = refl
 left-successor-law-add-ℕ x (succ-ℕ y) =
   ap succ-ℕ (left-successor-law-add-ℕ x y)
 
 right-successor-law-add-ℕ :
-  (x y : ℕ) → add-ℕ x (succ-ℕ y) ＝ succ-ℕ (add-ℕ x y)
+  (x y : ℕ) → x +ℕ (succ-ℕ y) ＝ succ-ℕ (x +ℕ y)
 right-successor-law-add-ℕ x y = refl
 ```
 
@@ -74,7 +73,7 @@ right-successor-law-add-ℕ x y = refl
 
 ```agda
 associative-add-ℕ :
-  (x y z : ℕ) → add-ℕ (add-ℕ x y) z ＝ add-ℕ x (add-ℕ y z)
+  (x y z : ℕ) → (x +ℕ y) +ℕ z ＝ x +ℕ (y +ℕ z)
 associative-add-ℕ x y zero-ℕ = refl
 associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
 ```
@@ -82,7 +81,7 @@ associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
 ### Addition is commutative
 
 ```agda
-commutative-add-ℕ : (x y : ℕ) → add-ℕ x y ＝ add-ℕ y x
+commutative-add-ℕ : (x y : ℕ) → x +ℕ y ＝ y +ℕ x
 commutative-add-ℕ zero-ℕ y = left-unit-law-add-ℕ y
 commutative-add-ℕ (succ-ℕ x) y =
   (left-successor-law-add-ℕ x y) ∙ (ap succ-ℕ (commutative-add-ℕ x y))
@@ -92,13 +91,13 @@ commutative-add-ℕ (succ-ℕ x) y =
 
 ```agda
 left-one-law-add-ℕ :
-  (x : ℕ) → add-ℕ 1 x ＝ succ-ℕ x
+  (x : ℕ) → 1 +ℕ x ＝ succ-ℕ x
 left-one-law-add-ℕ x =
   ( left-successor-law-add-ℕ zero-ℕ x) ∙
   ( ap succ-ℕ (left-unit-law-add-ℕ x))
 
 right-one-law-add-ℕ :
-  (x : ℕ) → add-ℕ x 1 ＝ succ-ℕ x
+  (x : ℕ) → x +ℕ 1 ＝ succ-ℕ x
 right-one-law-add-ℕ x = refl
 ```
 
@@ -106,13 +105,13 @@ right-one-law-add-ℕ x = refl
 
 ```agda
 left-two-law-add-ℕ :
-  (x : ℕ) → add-ℕ 2 x ＝ succ-ℕ (succ-ℕ x)
+  (x : ℕ) → 2 +ℕ x ＝ succ-ℕ (succ-ℕ x)
 left-two-law-add-ℕ x =
   ( left-successor-law-add-ℕ 1 x) ∙
   ( ap succ-ℕ (left-one-law-add-ℕ x))
 
 right-two-law-add-ℕ :
-  (x : ℕ) → add-ℕ x 2 ＝ succ-ℕ (succ-ℕ x)
+  (x : ℕ) → x +ℕ 2 ＝ succ-ℕ (succ-ℕ x)
 right-two-law-add-ℕ x = refl
 ```
 
@@ -153,23 +152,23 @@ is-emb-add-ℕ' x = is-emb-is-injective is-set-ℕ (is-injective-add-ℕ' x)
 
 ```agda
 is-zero-right-is-zero-add-ℕ :
-  (x y : ℕ) → is-zero-ℕ (add-ℕ x y) → is-zero-ℕ y
+  (x y : ℕ) → is-zero-ℕ (x +ℕ y) → is-zero-ℕ y
 is-zero-right-is-zero-add-ℕ x zero-ℕ p = refl
 is-zero-right-is-zero-add-ℕ x (succ-ℕ y) p =
-  ex-falso (is-nonzero-succ-ℕ (add-ℕ x y) p)
+  ex-falso (is-nonzero-succ-ℕ (x +ℕ y) p)
 
 is-zero-left-is-zero-add-ℕ :
-  (x y : ℕ) → is-zero-ℕ (add-ℕ x y) → is-zero-ℕ x
+  (x y : ℕ) → is-zero-ℕ (x +ℕ y) → is-zero-ℕ x
 is-zero-left-is-zero-add-ℕ x y p =
   is-zero-right-is-zero-add-ℕ y x ((commutative-add-ℕ y x) ∙ p)
 
 is-zero-summand-is-zero-sum-ℕ :
-  (x y : ℕ) → is-zero-ℕ (add-ℕ x y) → (is-zero-ℕ x) × (is-zero-ℕ y)
+  (x y : ℕ) → is-zero-ℕ (x +ℕ y) → (is-zero-ℕ x) × (is-zero-ℕ y)
 is-zero-summand-is-zero-sum-ℕ x y p =
   pair (is-zero-left-is-zero-add-ℕ x y p) (is-zero-right-is-zero-add-ℕ x y p)
 
 is-zero-sum-is-zero-summand-ℕ :
-  (x y : ℕ) → (is-zero-ℕ x) × (is-zero-ℕ y) → is-zero-ℕ (add-ℕ x y)
+  (x y : ℕ) → (is-zero-ℕ x) × (is-zero-ℕ y) → is-zero-ℕ (x +ℕ y)
 is-zero-sum-is-zero-summand-ℕ .zero-ℕ .zero-ℕ (pair refl refl) = refl
 ```
 
@@ -177,7 +176,7 @@ is-zero-sum-is-zero-summand-ℕ .zero-ℕ .zero-ℕ (pair refl refl) = refl
 
 ```agda
 neq-add-ℕ :
-  (m n : ℕ) → ¬ (m ＝ add-ℕ m (succ-ℕ n))
+  (m n : ℕ) → ¬ (m ＝ m +ℕ (succ-ℕ n))
 neq-add-ℕ (succ-ℕ m) n p =
   neq-add-ℕ m n
     ( ( is-injective-succ-ℕ p) ∙

@@ -77,7 +77,7 @@ is-nilpotent-add-Semiring R x y H f h =
         ( is-nilpotent-element-semiring-Prop R (add-Semiring R x y))
         ( λ (m , q) →
           intro-∃
-            ( add-ℕ n m)
+            ( n +ℕ m)
             ( ( is-linear-combination-power-add-Semiring R n m x y H) ∙
               ( ( ap-add-Semiring R
                   ( ( ap (mul-Semiring' R _) q) ∙

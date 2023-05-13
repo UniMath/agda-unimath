@@ -95,7 +95,7 @@ right-distributive-mul-binomial-sum-ℕ =
 ```agda
 binomial-theorem-ℕ :
   (n : ℕ) (x y : ℕ) →
-  power-ℕ n (add-ℕ x y) ＝
+  power-ℕ n (x +ℕ y) ＝
   binomial-sum-ℕ n
     ( λ i →
       mul-ℕ

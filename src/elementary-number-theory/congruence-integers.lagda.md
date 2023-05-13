@@ -79,7 +79,7 @@ pr2 (symmetric-cong-ℤ k x y (pair d p)) =
     ( distributive-neg-diff-ℤ x y))
 
 transitive-cong-ℤ : (k x y z : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k x z
-pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = add-ℤ d e
+pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = d +ℤ e
 pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙

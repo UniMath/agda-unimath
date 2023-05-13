@@ -39,7 +39,7 @@ infix 30 _+ℚ_
 _+ℚ_ = add-ℚ
 
 ap-add-ℚ :
-  {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → add-ℚ x y ＝ add-ℚ x' y'
+  {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → x +ℚ y ＝ x' +ℚ y'
 ap-add-ℚ p q = ap-binary add-ℚ p q
 ```
 

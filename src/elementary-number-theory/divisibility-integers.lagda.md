@@ -197,8 +197,8 @@ is-zero-is-zero-div-ℤ x .zero-ℤ k-div-x refl = is-zero-div-zero-ℤ x k-div-
 ### If `x` divides both `y` and `z`, then it divides `y + z`
 
 ```agda
-div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (add-ℤ y z)
-pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = add-ℤ d e
+div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (y +ℤ z)
+pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = d +ℤ e
 pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e x) ∙
   ( ap-add-ℤ p q)
