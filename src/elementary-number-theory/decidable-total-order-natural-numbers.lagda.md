@@ -8,7 +8,6 @@ module elementary-number-theory.decidable-total-order-natural-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations

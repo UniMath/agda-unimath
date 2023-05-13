@@ -14,12 +14,8 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-
 open import lists.arrays
 open import lists.lists
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
