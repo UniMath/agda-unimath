@@ -18,8 +18,8 @@
       "problemMatcher": []
     },
     {
-      "label": "imports",
-      "detail": "Search for and remove unused imports. Warning: very slow!",
+      "label": "unused-imports",
+      "detail": "Search for and remove unused imports. Very slow!",
       "type": "shell",
       "command": "python scripts/remove_unused_imports.py && python scripts/demote_foundation_imports.py",
       "problemMatcher": []
