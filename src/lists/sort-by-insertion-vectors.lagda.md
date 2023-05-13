@@ -15,7 +15,6 @@ open import finite-group-theory.transpositions-standard-finite-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.unit-type
@@ -28,8 +27,6 @@ open import lists.sorted-vectors
 open import lists.sorting-algorithms-vectors
 
 open import order-theory.decidable-total-orders
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

@@ -32,7 +32,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In these file, we define sorted vectors.
+We define a sorted vector to be a vector such that for every pair of consecutive
+elements `x` and `y`, the inequality `x ≤ y` holds.
 
 ## Definitions
 

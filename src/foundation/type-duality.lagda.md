@@ -10,7 +10,6 @@ module foundation.type-duality where
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.locally-small-types
-open import foundation.propositional-maps
 open import foundation.slice
 open import foundation.unit-type
 open import foundation.univalence
