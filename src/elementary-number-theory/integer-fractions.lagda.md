@@ -116,8 +116,8 @@ is-set-fraction-ℤ = is-set-Σ is-set-ℤ λ _ → is-set-positive-ℤ
 sim-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 sim-fraction-ℤ-Prop x y =
   Id-Prop ℤ-Set
-    (mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ y))
-    (mul-ℤ (numerator-fraction-ℤ y) (denominator-fraction-ℤ x))
+    ((numerator-fraction-ℤ x) *ℤ (denominator-fraction-ℤ y))
+    ((numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x))
 
 sim-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 sim-fraction-ℤ x y = type-Prop (sim-fraction-ℤ-Prop x y)

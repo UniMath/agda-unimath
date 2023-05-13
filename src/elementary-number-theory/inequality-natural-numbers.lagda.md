@@ -364,16 +364,16 @@ leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
 
 ```agda
 preserves-order-mul-ℕ :
-  (k m n : ℕ) → m ≤-ℕ n → (mul-ℕ m k) ≤-ℕ (mul-ℕ n k)
+  (k m n : ℕ) → m ≤-ℕ n → (m *ℕ k) ≤-ℕ (n *ℕ k)
 preserves-order-mul-ℕ k zero-ℕ n p = star
 preserves-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
   left-law-leq-add-ℕ k
-    ( mul-ℕ m k)
-    ( mul-ℕ n k)
+    ( m *ℕ k)
+    ( n *ℕ k)
     ( preserves-order-mul-ℕ k m n p)
 
 preserves-order-mul-ℕ' :
-  (k m n : ℕ) → m ≤-ℕ n → (mul-ℕ k m) ≤-ℕ (mul-ℕ k n)
+  (k m n : ℕ) → m ≤-ℕ n → (k *ℕ m) ≤-ℕ (k *ℕ n)
 preserves-order-mul-ℕ' k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-mul-ℕ k m)
@@ -385,18 +385,18 @@ preserves-order-mul-ℕ' k m n H =
 
 ```agda
 reflects-order-mul-ℕ :
-  (k m n : ℕ) → (mul-ℕ m (succ-ℕ k)) ≤-ℕ (mul-ℕ n (succ-ℕ k)) → m ≤-ℕ n
+  (k m n : ℕ) → (m *ℕ (succ-ℕ k)) ≤-ℕ (n *ℕ (succ-ℕ k)) → m ≤-ℕ n
 reflects-order-mul-ℕ k zero-ℕ n p = star
 reflects-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
   reflects-order-mul-ℕ k m n
     ( reflects-order-add-ℕ
       ( succ-ℕ k)
-      ( mul-ℕ m (succ-ℕ k))
-      ( mul-ℕ n (succ-ℕ k))
+      ( m *ℕ (succ-ℕ k))
+      ( n *ℕ (succ-ℕ k))
       ( p))
 
 reflects-order-mul-ℕ' :
-  (k m n : ℕ) → (mul-ℕ (succ-ℕ k) m) ≤-ℕ (mul-ℕ (succ-ℕ k) n) → m ≤-ℕ n
+  (k m n : ℕ) → ((succ-ℕ k) *ℕ m) ≤-ℕ ((succ-ℕ k) *ℕ n) → m ≤-ℕ n
 reflects-order-mul-ℕ' k m n H =
   reflects-order-mul-ℕ k m n
     ( concatenate-eq-leq-eq-ℕ
@@ -409,27 +409,27 @@ reflects-order-mul-ℕ' k m n H =
 
 ```agda
 leq-mul-ℕ :
-  (k x : ℕ) → x ≤-ℕ (mul-ℕ x (succ-ℕ k))
+  (k x : ℕ) → x ≤-ℕ (x *ℕ (succ-ℕ k))
 leq-mul-ℕ k x =
   concatenate-eq-leq-ℕ
-    ( mul-ℕ x (succ-ℕ k))
+    ( x *ℕ (succ-ℕ k))
     ( inv (right-unit-law-mul-ℕ x))
     ( preserves-order-mul-ℕ' x 1 (succ-ℕ k) (leq-zero-ℕ k))
 
 leq-mul-ℕ' :
-  (k x : ℕ) → x ≤-ℕ (mul-ℕ (succ-ℕ k) x)
+  (k x : ℕ) → x ≤-ℕ ((succ-ℕ k) *ℕ x)
 leq-mul-ℕ' k x =
   concatenate-leq-eq-ℕ x
     ( leq-mul-ℕ k x)
     ( commutative-mul-ℕ x (succ-ℕ k))
 
 leq-mul-is-nonzero-ℕ :
-  (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (mul-ℕ x k)
+  (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (x *ℕ k)
 leq-mul-is-nonzero-ℕ k x H with is-successor-is-nonzero-ℕ H
 ... | pair l refl = leq-mul-ℕ l x
 
 leq-mul-is-nonzero-ℕ' :
-  (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (mul-ℕ k x)
+  (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (k *ℕ x)
 leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 ... | pair l refl = leq-mul-ℕ' l x
 ```

@@ -301,12 +301,12 @@ module _
     inv
       ( is-zero-mod-succ-ℕ
         ( 1)
-        ( dist-ℕ (k1 +ℕ k2) (mul-ℕ 2 k'))
+        ( dist-ℕ (k1 +ℕ k2) (2 *ℕ k'))
         ( trans-cong-ℕ
           ( 2)
           ( k1 +ℕ k2)
           ( zero-ℕ)
-          ( mul-ℕ 2 k')
+          ( 2 *ℕ k')
           ( trans-cong-ℕ 2
             ( k1 +ℕ k2)
             ( add-ℕ
@@ -339,11 +339,11 @@ module _
           ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2)))) ∙
       ( ap
         ( mod-two-ℕ)
-        ( ( symmetric-dist-ℕ (k1 +ℕ k2) (mul-ℕ 2 k')) ∙
+        ( ( symmetric-dist-ℕ (k1 +ℕ k2) (2 *ℕ k')) ∙
           ( inv
             ( rewrite-left-add-dist-ℕ
               ( k)
-              ( mul-ℕ 2 k')
+              ( 2 *ℕ k')
               ( k1 +ℕ k2)
               ( inv
                 ( eq-symmetric-difference

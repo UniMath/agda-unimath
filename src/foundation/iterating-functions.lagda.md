@@ -132,10 +132,10 @@ module _
 
   iterate-mul-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    iterate (mul-ℕ k l) f x ＝ iterate k (iterate l f) x
+    iterate (k *ℕ l) f x ＝ iterate k (iterate l f) x
   iterate-mul-ℕ zero-ℕ l f x = refl
   iterate-mul-ℕ (succ-ℕ k) l f x =
-    ( iterate-add-ℕ (mul-ℕ k l) l f x) ∙
+    ( iterate-add-ℕ (k *ℕ l) l f x) ∙
     ( ( iterate-mul-ℕ k l f (iterate l f x)) ∙
       ( inv (iterate-succ-ℕ k (iterate l f) x)))
 

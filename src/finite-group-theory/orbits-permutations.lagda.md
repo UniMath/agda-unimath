@@ -387,16 +387,16 @@ module _
 
   mult-has-finite-orbits-permutation :
     (k : ℕ) →
-    Id (iterate (mul-ℕ k (pr1 has-finite-orbits-permutation)) (map-equiv f) a) a
+    Id (iterate (k *ℕ (pr1 has-finite-orbits-permutation)) (map-equiv f) a) a
   mult-has-finite-orbits-permutation zero-ℕ = refl
   mult-has-finite-orbits-permutation (succ-ℕ k) =
     ( iterate-add-ℕ
-      ( mul-ℕ k (pr1 has-finite-orbits-permutation))
+      ( k *ℕ (pr1 has-finite-orbits-permutation))
       ( pr1 has-finite-orbits-permutation)
       ( map-equiv f)
       ( a)) ∙
     ( ( ap
-        ( iterate (mul-ℕ k (pr1 has-finite-orbits-permutation)) (map-equiv f))
+        ( iterate (k *ℕ (pr1 has-finite-orbits-permutation)) (map-equiv f))
         ( pr2 (pr2 has-finite-orbits-permutation))) ∙
       ( mult-has-finite-orbits-permutation k))
 ```
@@ -445,11 +445,11 @@ module _
       (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
-          Id (j +ℕ k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
+          Id (j +ℕ k) (k *ℕ (pr1 (has-finite-orbits-permutation-a h))))
     lemma h k =
       subtraction-leq-ℕ
         ( k)
-        ( mul-ℕ k (pr1 (has-finite-orbits-permutation-a h)))
+        ( k *ℕ (pr1 (has-finite-orbits-permutation-a h)))
         ( leq-mul-is-nonzero-ℕ
           ( pr1 (has-finite-orbits-permutation-a h))
           ( k)
@@ -985,19 +985,19 @@ module _
         ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) (k : ℕ) →
         Id
           ( iterate
-            ( mul-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+            ( k *ℕ (pr1 (minimal-element-iterate g a b pa)))
             ( map-equiv (composition-transposition-a-b g))
             ( a))
           ( a)
       mult-lemma2 pa zero-ℕ = refl
       mult-lemma2 pa (succ-ℕ k) =
         ( iterate-add-ℕ
-          ( mul-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+          ( k *ℕ (pr1 (minimal-element-iterate g a b pa)))
           ( pr1 (minimal-element-iterate g a b pa))
           ( map-equiv (composition-transposition-a-b g)) a) ∙
         ( ap
           ( iterate
-            ( mul-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+            ( k *ℕ (pr1 (minimal-element-iterate g a b pa)))
             ( map-equiv (composition-transposition-a-b g)))
           ( lemma2
             ( pa)
@@ -1023,7 +1023,7 @@ module _
                 ( (inv
                     ( iterate-add-ℕ
                       ( r)
-                      ( mul-ℕ quo (pr1 (minimal-element-iterate g a b pa)))
+                      ( quo *ℕ (pr1 (minimal-element-iterate g a b pa)))
                       ( map-equiv (composition-transposition-a-b g)) a)) ∙
                   ( ( ap
                       ( λ n →
@@ -1033,7 +1033,7 @@ module _
                           ( a))
                       ( commutative-add-ℕ
                         ( r)
-                        ( mul-ℕ quo (pr1 (minimal-element-iterate g a b pa))) ∙
+                        ( quo *ℕ (pr1 (minimal-element-iterate g a b pa))) ∙
                         ( eq-euclidean-division-ℕ
                           ( pr1 (minimal-element-iterate g a b pa))
                           ( k)))) ∙

@@ -28,6 +28,6 @@ stirling-number-second-kind zero-ℕ (succ-ℕ n) = 0
 stirling-number-second-kind (succ-ℕ m) zero-ℕ = 0
 stirling-number-second-kind (succ-ℕ m) (succ-ℕ n) =
   add-ℕ
-    ( mul-ℕ (succ-ℕ n) (stirling-number-second-kind m (succ-ℕ n)))
+    ( (succ-ℕ n) *ℕ (stirling-number-second-kind m (succ-ℕ n)))
     ( stirling-number-second-kind m n)
 ```

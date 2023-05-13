@@ -537,7 +537,7 @@ preserves-neg-mod-ℤ (succ-ℕ k) x =
 
 preserves-mul-mod-ℤ :
   (k : ℕ) (x y : ℤ) →
-  mod-ℤ k (mul-ℤ x y) ＝ mul-ℤ-Mod k (mod-ℤ k x) (mod-ℤ k y)
+  mod-ℤ k (x *ℤ y) ＝ mul-ℤ-Mod k (mod-ℤ k x) (mod-ℤ k y)
 preserves-mul-mod-ℤ zero-ℕ x y = refl
 preserves-mul-mod-ℤ (succ-ℕ k) (inl zero-ℕ) y =
   ( preserves-neg-mod-ℤ (succ-ℕ k) y) ∙
@@ -546,7 +546,7 @@ preserves-mul-mod-ℤ (succ-ℕ k) (inl zero-ℕ) y =
       ( mul-ℤ-Mod' (succ-ℕ k) (mod-ℤ (succ-ℕ k) y))
       ( inv (mod-neg-one-ℤ (succ-ℕ k)))))
 preserves-mul-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) y =
-  ( preserves-add-mod-ℤ (succ-ℕ k) (neg-ℤ y) (mul-ℤ (inl x) y)) ∙
+  ( preserves-add-mod-ℤ (succ-ℕ k) (neg-ℤ y) ((inl x) *ℤ y)) ∙
   ( ( ap-add-ℤ-Mod
       ( succ-ℕ k)
       ( preserves-neg-mod-ℤ (succ-ℕ k) y)
@@ -610,24 +610,24 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
         ( nat-Fin
           ( succ-ℕ k)
           ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x)))))
-      ( int-ℕ (mul-ℕ k (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
+      ( int-ℕ (k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
       ( inl x)
       ( cong-int-cong-ℕ
         ( succ-ℕ k)
         ( nat-Fin
           ( succ-ℕ k)
           ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
-        ( mul-ℕ k (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
+        ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
         ( cong-mul-Fin (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
       ( transitive-cong-ℤ
         ( int-ℕ (succ-ℕ k))
-        ( int-ℕ (mul-ℕ k (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
-        ( int-ℕ (mul-ℕ k (succ-ℕ x)))
+        ( int-ℕ (k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
+        ( int-ℕ (k *ℕ (succ-ℕ x)))
         ( inl x)
         ( cong-int-cong-ℕ
           ( succ-ℕ k)
-          ( mul-ℕ k (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
-          ( mul-ℕ k (succ-ℕ x))
+          ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
+          ( k *ℕ (succ-ℕ x))
           ( congruence-mul-ℕ
             ( succ-ℕ k)
             {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}

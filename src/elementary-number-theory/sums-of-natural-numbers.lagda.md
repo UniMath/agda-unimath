@@ -95,14 +95,14 @@ abstract
 ```agda
 abstract
   constant-sum-Fin-ℕ :
-    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ mul-ℕ m n
+    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ m *ℕ n
   constant-sum-Fin-ℕ zero-ℕ n = refl
   constant-sum-Fin-ℕ (succ-ℕ m) n = ap (add-ℕ' n) (constant-sum-Fin-ℕ m n)
 
 abstract
   constant-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) (n : ℕ) →
-    sum-count-ℕ e (const A ℕ n) ＝ mul-ℕ (number-of-elements-count e) n
+    sum-count-ℕ e (const A ℕ n) ＝ (number-of-elements-count e) *ℕ n
   constant-sum-count-ℕ (pair m e) n = constant-sum-Fin-ℕ m n
 ```
 

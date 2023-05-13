@@ -61,7 +61,7 @@ pr1 (is-unit-neg-one-Fin {succ-ℕ k}) = neg-one-Fin (succ-ℕ k)
 pr2 (is-unit-neg-one-Fin {succ-ℕ k}) =
   eq-mod-succ-cong-ℕ
     ( succ-ℕ k)
-    ( mul-ℕ (succ-ℕ k) (succ-ℕ k))
+    ( (succ-ℕ k) *ℕ (succ-ℕ k))
     ( 1)
     ( concatenate-eq-cong-ℕ
       ( succ-ℕ (succ-ℕ k))

@@ -38,7 +38,7 @@ An integer `m` is said to **divide** an integer `n` if there exists an integer
 interpretation of logic into type theory, we express divisibility as follows:
 
 ```md
-  div-ℤ m n := Σ (k : ℤ), mul-ℤ k m ＝ n.
+  div-ℤ m n := Σ (k : ℤ), k *ℤ m ＝ n.
 ```
 
 If `n` is a nonzero integer, then `div-ℤ m n` is always a proposition in the
@@ -54,17 +54,17 @@ divisibility relation on the integers.
 
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
-div-ℤ d x = Σ ℤ (λ k → mul-ℤ k d ＝ x)
+div-ℤ d x = Σ ℤ (λ k → k *ℤ d ＝ x)
 
 quotient-div-ℤ : (x y : ℤ) → div-ℤ x y → ℤ
 quotient-div-ℤ x y H = pr1 H
 
 eq-quotient-div-ℤ :
-  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ (quotient-div-ℤ x y H) x ＝ y
+  (x y : ℤ) (H : div-ℤ x y) → (quotient-div-ℤ x y H) *ℤ x ＝ y
 eq-quotient-div-ℤ x y H = pr2 H
 
 eq-quotient-div-ℤ' :
-  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ x (quotient-div-ℤ x y H) ＝ y
+  (x y : ℤ) (H : div-ℤ x y) → x *ℤ (quotient-div-ℤ x y H) ＝ y
 eq-quotient-div-ℤ' x y H =
   commutative-mul-ℤ x (quotient-div-ℤ x y H) ∙ eq-quotient-div-ℤ x y H
 
@@ -103,7 +103,7 @@ is-unit-int-unit-ℤ = pr2
 
 div-is-unit-ℤ :
   (x y : ℤ) → is-unit-ℤ x → div-ℤ x y
-pr1 (div-is-unit-ℤ x y (pair d p)) = mul-ℤ y d
+pr1 (div-is-unit-ℤ x y (pair d p)) = y *ℤ d
 pr2 (div-is-unit-ℤ x y (pair d p)) =
   associative-mul-ℤ y d x ∙ (ap (mul-ℤ y) p ∙ right-unit-law-mul-ℤ y)
 ```
@@ -115,7 +115,7 @@ We define the equivalence relation `sim-unit-ℤ` in such a way that
 
 ```agda
 presim-unit-ℤ : ℤ → ℤ → UU lzero
-presim-unit-ℤ x y = Σ unit-ℤ (λ u → mul-ℤ (pr1 u) x ＝ y)
+presim-unit-ℤ x y = Σ unit-ℤ (λ u → (pr1 u) *ℤ x ＝ y)
 
 sim-unit-ℤ : ℤ → ℤ → UU lzero
 sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
@@ -141,7 +141,7 @@ pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
 
 trans-div-ℤ :
   (x y z : ℤ) → div-ℤ x y → div-ℤ y z → div-ℤ x z
-pr1 (trans-div-ℤ x y z (pair d p) (pair e q)) = mul-ℤ e d
+pr1 (trans-div-ℤ x y z (pair d p) (pair e q)) = e *ℤ d
 pr2 (trans-div-ℤ x y z (pair d p) (pair e q)) =
   ( associative-mul-ℤ e d x) ∙
     ( ( ap (mul-ℤ e) p) ∙
@@ -208,9 +208,9 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
 
 ```agda
 div-mul-ℤ :
-  (k x y : ℤ) → div-ℤ x y → div-ℤ x (mul-ℤ k y)
+  (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
 div-mul-ℤ k x y H =
-  trans-div-ℤ x y (mul-ℤ k y) H (pair k refl)
+  trans-div-ℤ x y (k *ℤ y) H (pair k refl)
 ```
 
 ### If `x` divides `y` then it divides `-y`
@@ -228,13 +228,13 @@ neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
 pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (neg-div-ℤ x y (pair d p)) =
   equational-reasoning
-    mul-ℤ (neg-ℤ d) (neg-ℤ x)
-    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))
+    (neg-ℤ d) *ℤ (neg-ℤ x)
+    ＝ neg-ℤ (d *ℤ (neg-ℤ x))
       by left-negative-law-mul-ℤ d (neg-ℤ x)
-    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))
+    ＝ neg-ℤ (neg-ℤ (d *ℤ x))
       by ap neg-ℤ (right-negative-law-mul-ℤ d x)
-    ＝ (mul-ℤ d x)
-      by neg-neg-ℤ (mul-ℤ d x)
+    ＝ (d *ℤ x)
+      by neg-neg-ℤ (d *ℤ x)
     ＝ y
       by p
 ```
@@ -243,7 +243,7 @@ pr2 (neg-div-ℤ x y (pair d p)) =
 
 ```agda
 preserves-div-mul-ℤ :
-  (k x y : ℤ) → div-ℤ x y → div-ℤ (mul-ℤ k x) (mul-ℤ k y)
+  (k x y : ℤ) → div-ℤ x y → div-ℤ (k *ℤ x) (k *ℤ y)
 pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
 pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
   ( inv (associative-mul-ℤ q k x)) ∙
@@ -256,7 +256,7 @@ pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
 
 ```agda
 reflects-div-mul-ℤ :
-  (k x y : ℤ) → is-nonzero-ℤ k → div-ℤ (mul-ℤ k x) (mul-ℤ k y) → div-ℤ x y
+  (k x y : ℤ) → is-nonzero-ℤ k → div-ℤ (k *ℤ x) (k *ℤ y) → div-ℤ x y
 pr1 (reflects-div-mul-ℤ k x y H (pair q p)) = q
 pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
   is-injective-mul-ℤ k H
@@ -271,18 +271,18 @@ pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
 ```agda
 div-quotient-div-div-ℤ :
   (x y d : ℤ) (H : div-ℤ d y) → is-nonzero-ℤ d →
-  div-ℤ (mul-ℤ d x) y → div-ℤ x (quotient-div-ℤ d y H)
+  div-ℤ (d *ℤ x) y → div-ℤ x (quotient-div-ℤ d y H)
 div-quotient-div-div-ℤ x y d H f K =
   reflects-div-mul-ℤ d x
     ( quotient-div-ℤ d y H)
     ( f)
-    ( tr (div-ℤ (mul-ℤ d x)) (inv (eq-quotient-div-ℤ' d y H)) K)
+    ( tr (div-ℤ (d *ℤ x)) (inv (eq-quotient-div-ℤ' d y H)) K)
 
 div-div-quotient-div-ℤ :
   (x y d : ℤ) (H : div-ℤ d y) →
-  div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (mul-ℤ d x) y
+  div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (d *ℤ x) y
 div-div-quotient-div-ℤ x y d H K =
-  tr ( div-ℤ (mul-ℤ d x))
+  tr ( div-ℤ (d *ℤ x))
      ( eq-quotient-div-ℤ' d y H)
      ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
@@ -387,11 +387,11 @@ is-one-or-neg-one-is-unit-ℤ
 ### Units are idempotent
 
 ```agda
-idempotent-is-unit-ℤ : {x : ℤ} → is-unit-ℤ x → mul-ℤ x x ＝ one-ℤ
+idempotent-is-unit-ℤ : {x : ℤ} → is-unit-ℤ x → x *ℤ x ＝ one-ℤ
 idempotent-is-unit-ℤ {x} H =
   f (is-one-or-neg-one-is-unit-ℤ x H)
   where
-  f : is-one-or-neg-one-ℤ x → mul-ℤ x x ＝ one-ℤ
+  f : is-one-or-neg-one-ℤ x → x *ℤ x ＝ one-ℤ
   f (inl refl) = refl
   f (inr refl) = refl
 
@@ -406,10 +406,10 @@ abstract
 
 ```agda
 is-unit-mul-ℤ :
-  (x y : ℤ) → is-unit-ℤ x → is-unit-ℤ y → is-unit-ℤ (mul-ℤ x y)
-pr1 (is-unit-mul-ℤ x y (pair d p) (pair e q)) = mul-ℤ e d
+  (x y : ℤ) → is-unit-ℤ x → is-unit-ℤ y → is-unit-ℤ (x *ℤ y)
+pr1 (is-unit-mul-ℤ x y (pair d p) (pair e q)) = e *ℤ d
 pr2 (is-unit-mul-ℤ x y (pair d p) (pair e q)) =
-  ( associative-mul-ℤ e d (mul-ℤ x y)) ∙
+  ( associative-mul-ℤ e d (x *ℤ y)) ∙
     ( ( ap
         ( mul-ℤ e)
         ( ( inv (associative-mul-ℤ d x y)) ∙
@@ -417,17 +417,17 @@ pr2 (is-unit-mul-ℤ x y (pair d p) (pair e q)) =
       ( q))
 
 mul-unit-ℤ : unit-ℤ → unit-ℤ → unit-ℤ
-pr1 (mul-unit-ℤ (pair x H) (pair y K)) = mul-ℤ x y
+pr1 (mul-unit-ℤ (pair x H) (pair y K)) = x *ℤ y
 pr2 (mul-unit-ℤ (pair x H) (pair y K)) = is-unit-mul-ℤ x y H K
 
 is-unit-left-factor-mul-ℤ :
-  (x y : ℤ) → is-unit-ℤ (mul-ℤ x y) → is-unit-ℤ x
-pr1 (is-unit-left-factor-mul-ℤ x y (pair d p)) = mul-ℤ d y
+  (x y : ℤ) → is-unit-ℤ (x *ℤ y) → is-unit-ℤ x
+pr1 (is-unit-left-factor-mul-ℤ x y (pair d p)) = d *ℤ y
 pr2 (is-unit-left-factor-mul-ℤ x y (pair d p)) =
   associative-mul-ℤ d y x ∙ (ap (mul-ℤ d) (commutative-mul-ℤ y x) ∙ p)
 
 is-unit-right-factor-ℤ :
-  (x y : ℤ) → is-unit-ℤ (mul-ℤ x y) → is-unit-ℤ y
+  (x y : ℤ) → is-unit-ℤ (x *ℤ y) → is-unit-ℤ y
 is-unit-right-factor-ℤ x y (pair d p) =
   is-unit-left-factor-mul-ℤ y x
     ( pair d (ap (mul-ℤ d) (commutative-mul-ℤ y x) ∙ p))
@@ -484,7 +484,7 @@ is-zero-sim-unit-ℤ {x} {y} H p =
   u g = pr1 (pr1 (K g))
   v : is-nonzero-ℤ y → ℤ
   v g = pr1 (pr2 (pr1 (K g)))
-  β : (g : is-nonzero-ℤ y) → mul-ℤ (u g) x ＝ y
+  β : (g : is-nonzero-ℤ y) → (u g) *ℤ x ＝ y
   β g = pr2 (K g)
 ```
 
@@ -563,7 +563,7 @@ antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
   pr1 (pr2 (pr1 (f (inr g)))) = e
   pr2 (pr2 (pr1 (f (inr g)))) =
     is-injective-mul-ℤ x g
-      ( ( commutative-mul-ℤ x (mul-ℤ e d)) ∙
+      ( ( commutative-mul-ℤ x (e *ℤ d)) ∙
         ( ( associative-mul-ℤ e d x) ∙
           ( ( ap (mul-ℤ e) p) ∙
             ( q ∙ inv (right-unit-law-mul-ℤ x)))))
@@ -583,15 +583,15 @@ div-presim-unit-ℤ :
   {x y x' y' : ℤ} → presim-unit-ℤ x x' → presim-unit-ℤ y y' →
   div-ℤ x y → div-ℤ x' y'
 pr1 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  mul-ℤ (mul-ℤ (int-unit-ℤ v) d) (int-unit-ℤ u)
+  mul-ℤ ((int-unit-ℤ v) *ℤ d) (int-unit-ℤ u)
 pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  ( ap (mul-ℤ (mul-ℤ (mul-ℤ (int-unit-ℤ v) d) (int-unit-ℤ u))) (inv q)) ∙
+  ( ap (mul-ℤ (mul-ℤ ((int-unit-ℤ v) *ℤ d) (int-unit-ℤ u))) (inv q)) ∙
   ( ( associative-mul-ℤ
-      ( mul-ℤ (int-unit-ℤ v) d)
+      ( (int-unit-ℤ v) *ℤ d)
       ( int-unit-ℤ u)
-      ( mul-ℤ (int-unit-ℤ u) x)) ∙
+      ( (int-unit-ℤ u) *ℤ x)) ∙
     ( ( ap
-        ( mul-ℤ (mul-ℤ (int-unit-ℤ v) d))
+        ( mul-ℤ ((int-unit-ℤ v) *ℤ d))
         ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
           ( ap (mul-ℤ' x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
       ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
@@ -632,7 +632,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos =
   inl
     ( equational-reasoning
       x
-      ＝ mul-ℤ one-ℤ x
+      ＝ one-ℤ *ℤ x
         by (inv (left-unit-law-mul-ℤ x))
       ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
         by inv (ap (mul-ℤ' x) pos)

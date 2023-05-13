@@ -323,17 +323,17 @@ translation-invariant-dist-ℕ' k m n =
 
 ```agda
 left-distributive-mul-dist-ℕ :
-  (m n k : ℕ) → mul-ℕ k (dist-ℕ m n) ＝ dist-ℕ (mul-ℕ k m) (mul-ℕ k n)
+  (m n k : ℕ) → k *ℕ (dist-ℕ m n) ＝ dist-ℕ (k *ℕ m) (k *ℕ n)
 left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ zero-ℕ = refl
 left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) =
   left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ k
 left-distributive-mul-dist-ℕ zero-ℕ (succ-ℕ n) zero-ℕ = refl
 left-distributive-mul-dist-ℕ zero-ℕ (succ-ℕ n) (succ-ℕ k) =
-  ap ( dist-ℕ' (mul-ℕ (succ-ℕ k) (succ-ℕ n)))
+  ap ( dist-ℕ' ((succ-ℕ k) *ℕ (succ-ℕ n)))
      ( inv (right-zero-law-mul-ℕ (succ-ℕ k)))
 left-distributive-mul-dist-ℕ (succ-ℕ m) zero-ℕ zero-ℕ = refl
 left-distributive-mul-dist-ℕ (succ-ℕ m) zero-ℕ (succ-ℕ k) =
-  ap ( dist-ℕ (mul-ℕ (succ-ℕ k) (succ-ℕ m)))
+  ap ( dist-ℕ ((succ-ℕ k) *ℕ (succ-ℕ m)))
      ( inv (right-zero-law-mul-ℕ (succ-ℕ k)))
 left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ = refl
 left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
@@ -343,12 +343,12 @@ left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
         ( right-successor-law-mul-ℕ (succ-ℕ k) n)) ∙
       ( ( translation-invariant-dist-ℕ
           ( succ-ℕ k)
-          ( mul-ℕ (succ-ℕ k) m)
-          ( mul-ℕ (succ-ℕ k) n)) ∙
+          ( (succ-ℕ k) *ℕ m)
+          ( (succ-ℕ k) *ℕ n)) ∙
         ( inv (left-distributive-mul-dist-ℕ m n (succ-ℕ k)))))
 
 right-distributive-mul-dist-ℕ :
-  (x y k : ℕ) → mul-ℕ (dist-ℕ x y) k ＝ dist-ℕ (mul-ℕ x k) (mul-ℕ y k)
+  (x y k : ℕ) → (dist-ℕ x y) *ℕ k ＝ dist-ℕ (x *ℕ k) (y *ℕ k)
 right-distributive-mul-dist-ℕ x y k =
   ( commutative-mul-ℕ (dist-ℕ x y) k) ∙
   ( ( left-distributive-mul-dist-ℕ x y k) ∙

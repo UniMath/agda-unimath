@@ -256,7 +256,7 @@ div-left-factor-div-gcd-ℕ a b x d with
           ( ap ( dist-ℕ a)
                ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
                  ( λ x H →
-                   div-right-summand-ℕ x (mul-ℕ q (gcd-ℕ a b)) r
+                   div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
                      ( div-mul-ℕ q x (gcd-ℕ a b)
                        ( div-gcd-is-common-divisor-ℕ a b x H))
                      ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
@@ -281,7 +281,7 @@ div-right-factor-div-gcd-ℕ a b x d with
       ( ( α ∙ ( ap ( dist-ℕ b)
                ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
                  ( λ x H →
-                   div-right-summand-ℕ x (mul-ℕ q (gcd-ℕ a b)) r
+                   div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
                      ( div-mul-ℕ q x (gcd-ℕ a b)
                        ( div-gcd-is-common-divisor-ℕ a b x H))
                      ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
@@ -347,7 +347,7 @@ is-commutative-gcd-ℕ a b =
 ```agda
 preserves-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-common-divisor-ℕ a b d →
-  is-common-divisor-ℕ (mul-ℕ k a) (mul-ℕ k b) (mul-ℕ k d)
+  is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d)
 preserves-is-common-divisor-mul-ℕ k a b d =
   map-prod
     ( preserves-div-mul-ℕ k d a)
@@ -355,7 +355,7 @@ preserves-is-common-divisor-mul-ℕ k a b d =
 
 reflects-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-nonzero-ℕ k →
-  is-common-divisor-ℕ (mul-ℕ k a) (mul-ℕ k b) (mul-ℕ k d) →
+  is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d) →
   is-common-divisor-ℕ a b d
 reflects-is-common-divisor-mul-ℕ k a b d H =
   map-prod
@@ -427,7 +427,7 @@ simplify-is-common-divisor-quotient-div-ℕ :
     ( quotient-div-ℕ d a (pr1 H))
     ( quotient-div-ℕ d b (pr2 H))
     ( x) ↔
-  is-common-divisor-ℕ a b (mul-ℕ x d)
+  is-common-divisor-ℕ a b (x *ℕ d)
 pr1 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
   forward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
 pr2 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
@@ -455,10 +455,10 @@ is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
       ( quotient-div-ℕ d a (pr1 H))
       ( quotient-div-ℕ d b (pr2 H))
       ( x)
-    ↔ is-common-divisor-ℕ a b (mul-ℕ x d)
+    ↔ is-common-divisor-ℕ a b (x *ℕ d)
       by simplify-is-common-divisor-quotient-div-ℕ nz H
-    ↔ div-ℕ (mul-ℕ x d) (gcd-ℕ a b)
-      by is-gcd-gcd-ℕ a b (mul-ℕ x d)
+    ↔ div-ℕ (x *ℕ d) (gcd-ℕ a b)
+      by is-gcd-gcd-ℕ a b (x *ℕ d)
     ↔ div-ℕ x
         ( quotient-div-ℕ d
           ( gcd-ℕ a b)

@@ -44,14 +44,14 @@ sim-unit-Fin k x y = Σ (unit-Fin k) (λ u → mul-Fin k (pr1 u) x ＝ y)
 sim-unit-ℕ :
   (k : ℕ) → ℕ → ℕ → UU lzero
 sim-unit-ℕ k x y =
-  Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k (mul-ℕ (pr1 l) x) y)
+  Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k ((pr1 l) *ℕ x) y)
 ```
 
 ### Congruence to `1`
 
 ```agda
 sim-unit-one-ℕ : (k x : ℕ) → UU lzero
-sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (mul-ℕ l x) 1)
+sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (l *ℕ x) 1)
 ```
 
 ## Properties

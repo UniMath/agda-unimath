@@ -53,7 +53,7 @@ pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
 pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
   ( left-negative-law-mul-ℤ y k) ∙
   ( is-injective-neg-ℤ
-    ( ( neg-neg-ℤ (mul-ℤ y k)) ∙
+    ( ( neg-neg-ℤ (y *ℤ k)) ∙
       ( ( p) ∙
         ( ( ap (add-ℤ x) (neg-succ-ℤ x)) ∙
           ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙

@@ -77,13 +77,13 @@ htpy-binomial-sum-ℤ =
 ```agda
 left-distributive-mul-binomial-sum-ℤ :
   (n : ℕ) (x : ℤ) (f : functional-vec ℤ (succ-ℕ n)) →
-  mul-ℤ x (binomial-sum-ℤ n f) ＝ binomial-sum-ℤ n (λ i → mul-ℤ x (f i))
+  x *ℤ (binomial-sum-ℤ n f) ＝ binomial-sum-ℤ n (λ i → x *ℤ (f i))
 left-distributive-mul-binomial-sum-ℤ =
   left-distributive-mul-binomial-sum-Commutative-Ring ℤ-Commutative-Ring
 
 right-distributive-mul-binomial-sum-ℤ :
   (n : ℕ) (f : functional-vec ℤ (succ-ℕ n)) (x : ℤ) →
-  mul-ℤ (binomial-sum-ℤ n f) x ＝ binomial-sum-ℤ n (λ i → mul-ℤ (f i) x)
+  (binomial-sum-ℤ n f) *ℤ x ＝ binomial-sum-ℤ n (λ i → (f i) *ℤ x)
 right-distributive-mul-binomial-sum-ℤ =
   right-distributive-mul-binomial-sum-Commutative-Ring
     ℤ-Commutative-Ring

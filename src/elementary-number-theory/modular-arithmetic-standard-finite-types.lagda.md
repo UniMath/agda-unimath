@@ -312,7 +312,7 @@ ap-mul-Fin k p q = ap-binary (mul-Fin k) p q
 
 cong-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (mul-Fin k x y)) (mul-ℕ (nat-Fin k x) (nat-Fin k y))
+  cong-ℕ k (nat-Fin k (mul-Fin k x y)) ((nat-Fin k x) *ℕ (nat-Fin k y))
 cong-mul-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (mul-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
 ```

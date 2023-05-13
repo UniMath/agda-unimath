@@ -28,5 +28,5 @@ telephone-number : ℕ → ℕ
 telephone-number zero-ℕ = succ-ℕ zero-ℕ
 telephone-number (succ-ℕ zero-ℕ) = succ-ℕ zero-ℕ
 telephone-number (succ-ℕ (succ-ℕ n)) =
-  add-ℕ (telephone-number (succ-ℕ n)) (mul-ℕ (succ-ℕ n) (telephone-number n))
+  add-ℕ (telephone-number (succ-ℕ n)) ((succ-ℕ n) *ℕ (telephone-number n))
 ```

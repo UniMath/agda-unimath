@@ -77,7 +77,7 @@ explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 
 ```agda
 is-plus-or-minus-ℤ : ℤ → ℤ → UU lzero
-is-plus-or-minus-ℤ x y = (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y)
+is-plus-or-minus-ℤ x y = (x ＝ y) + (neg-one-ℤ *ℤ x ＝ y)
 ```
 
 ## Properties

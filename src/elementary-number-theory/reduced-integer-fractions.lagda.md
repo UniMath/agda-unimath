@@ -148,10 +148,10 @@ is-reduced-reduce-fraction-ℤ x =
   is-zero-gcd-case-split (inr nz) =
     is-plus-or-minus-case-split
       ( is-plus-or-minus-sim-unit-ℤ
-      ( antisymmetric-div-ℤ (mul-ℤ alpha d) d
+      ( antisymmetric-div-ℤ (alpha *ℤ d) d
         ( div-gcd-is-common-divisor-ℤ
           ( numerator-fraction-ℤ x) ( denominator-fraction-ℤ x)
-            (mul-ℤ alpha d)
+            (alpha *ℤ d)
           ( pair
             -- alpha * d divides the numerator of x
             ( tr
@@ -184,7 +184,7 @@ is-reduced-reduce-fraction-ℤ x =
     d : ℤ
     d = gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
     is-plus-or-minus-case-split :
-      (is-plus-or-minus-ℤ (mul-ℤ alpha d) d) →
+      (is-plus-or-minus-ℤ (alpha *ℤ d) d) →
       is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
     is-plus-or-minus-case-split (inl pos) =
       ( is-injective-mul-ℤ' d
@@ -225,7 +225,7 @@ sim-reduced-fraction-ℤ x =
     ＝ mul-ℤ (mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
         (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
         (denominator-fraction-ℤ (reduce-fraction-ℤ x))
-      by ap (λ H → mul-ℤ H (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
+      by ap (λ H → H *ℤ (denominator-fraction-ℤ (reduce-fraction-ℤ x)))
           (inv (eq-reduce-numerator-fraction-ℤ x))
     ＝ mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
       (mul-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
@@ -387,7 +387,7 @@ unique-numerator-reduce-fraction-ℤ x y H =
           ( int-reduce-denominator-fraction-ℤ y) ＝
         mul-ℤ
           ( int-reduce-numerator-fraction-ℤ x)
-          ( mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))
+          ( neg-one-ℤ *ℤ (int-reduce-denominator-fraction-ℤ x))
       reduced-eqn =
         equational-reasoning
           mul-ℤ
@@ -398,18 +398,18 @@ unique-numerator-reduce-fraction-ℤ x y H =
               ( int-reduce-denominator-fraction-ℤ x)
             by reduce-preserves-sim-ℤ x y H
           ＝ mul-ℤ
-              ( mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ)
+              ( (int-reduce-numerator-fraction-ℤ x) *ℤ neg-one-ℤ)
               ( int-reduce-denominator-fraction-ℤ x)
             by
               ap
-                ( λ K → mul-ℤ K (int-reduce-denominator-fraction-ℤ x))
+                ( λ K → K *ℤ (int-reduce-denominator-fraction-ℤ x))
                 ( inv neg ∙
                   commutative-mul-ℤ
                     ( neg-one-ℤ)
                     ( int-reduce-numerator-fraction-ℤ x))
           ＝ mul-ℤ
               ( int-reduce-numerator-fraction-ℤ x)
-              ( mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))
+              ( neg-one-ℤ *ℤ (int-reduce-denominator-fraction-ℤ x))
             by
               associative-mul-ℤ
                 ( int-reduce-numerator-fraction-ℤ x)

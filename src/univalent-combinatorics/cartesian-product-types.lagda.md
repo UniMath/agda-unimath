@@ -50,21 +50,21 @@ operation on finite types.
 ### The standard finite types are closed under cartesian products
 
 ```agda
-prod-Fin : (k l : ℕ) → ((Fin k) × (Fin l)) ≃ Fin (mul-ℕ k l)
+prod-Fin : (k l : ℕ) → ((Fin k) × (Fin l)) ≃ Fin (k *ℕ l)
 prod-Fin zero-ℕ l = left-absorption-prod (Fin l)
 prod-Fin (succ-ℕ k) l =
-  ( ( coprod-Fin (mul-ℕ k l) l) ∘e
+  ( ( coprod-Fin (k *ℕ l) l) ∘e
     ( equiv-coprod (prod-Fin k l) left-unit-law-prod)) ∘e
   ( right-distributive-prod-coprod (Fin k) unit (Fin l))
 
-Fin-mul-ℕ : (k l : ℕ) → (Fin (mul-ℕ k l)) ≃ ((Fin k) × (Fin l))
+Fin-mul-ℕ : (k l : ℕ) → (Fin (k *ℕ l)) ≃ ((Fin k) × (Fin l))
 Fin-mul-ℕ k l = inv-equiv (prod-Fin k l)
 ```
 
 ```agda
 count-prod :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count X → count Y → count (X × Y)
-pr1 (count-prod (pair k e) (pair l f)) = mul-ℕ k l
+pr1 (count-prod (pair k e) (pair l f)) = k *ℕ l
 pr2 (count-prod (pair k e) (pair l f)) =
   (equiv-prod e f) ∘e (inv-equiv (prod-Fin k l))
 
@@ -161,14 +161,14 @@ abstract
 
 prod-UU-Fin :
   {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
-  UU-Fin (l1 ⊔ l2) (mul-ℕ k l)
+  UU-Fin (l1 ⊔ l2) (k *ℕ l)
 pr1 (prod-UU-Fin k l (pair X H) (pair Y K)) = X × Y
 pr2 (prod-UU-Fin k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
-    ( mere-equiv-Prop (Fin (mul-ℕ k l)) (X × Y))
+    ( mere-equiv-Prop (Fin (k *ℕ l)) (X × Y))
     ( λ e1 →
       apply-universal-property-trunc-Prop K
-        ( mere-equiv-Prop (Fin (mul-ℕ k l)) (X × Y))
+        ( mere-equiv-Prop (Fin (k *ℕ l)) (X × Y))
         ( λ e2 →
           unit-trunc-Prop (equiv-prod e1 e2 ∘e inv-equiv (prod-Fin k l))))
 ```

@@ -85,7 +85,7 @@ Fibonacci-add-ℕ :
   Fibonacci-ℕ (m +ℕ (succ-ℕ n)) ＝
   add-ℕ
     ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-    ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ n))
+    ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ n))
 Fibonacci-add-ℕ m zero-ℕ =
   ap-add-ℕ
     ( inv (right-unit-law-mul-ℕ (Fibonacci-ℕ (succ-ℕ m))))
@@ -101,21 +101,21 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
           ( Fibonacci-ℕ (succ-ℕ n)))) ∙
       ( ( associative-add-ℕ
           ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-          ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n)))
+          ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
           ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n))) ∙
         ( ( ap
             ( add-ℕ
               ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n))))
             ( commutative-add-ℕ
-              ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n)))
+              ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
               ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n)))) ∙
           ( ( inv
               ( associative-add-ℕ
                 ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
                 ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n))
-                ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n))))) ∙
+                ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))) ∙
             ( ap
-              ( add-ℕ' (mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n))))
+              ( add-ℕ' ((Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
               ( inv
                 ( left-distributive-mul-add-ℕ
                   ( Fibonacci-ℕ (succ-ℕ m))
@@ -165,7 +165,7 @@ div-Fibonacci-add-ℕ d m (succ-ℕ n) H1 H2 =
     ( inv (Fibonacci-add-ℕ m n))
     ( div-add-ℕ d
       ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-      ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ n))
+      ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ n))
       ( div-mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) d (Fibonacci-ℕ (succ-ℕ n)) H2)
       ( tr
         ( div-ℕ d)
@@ -179,18 +179,18 @@ div-Fibonacci-add-ℕ d m (succ-ℕ n) H1 H2 =
 div-Fibonacci-div-ℕ :
   (d m n : ℕ) → div-ℕ m n → div-ℕ d (Fibonacci-ℕ m) → div-ℕ d (Fibonacci-ℕ n)
 div-Fibonacci-div-ℕ d m .zero-ℕ (zero-ℕ , refl) H = div-zero-ℕ d
-div-Fibonacci-div-ℕ d zero-ℕ .(mul-ℕ k zero-ℕ) (succ-ℕ k , refl) H =
+div-Fibonacci-div-ℕ d zero-ℕ .(k *ℕ zero-ℕ) (succ-ℕ k , refl) H =
   tr
     ( div-ℕ d)
     ( ap Fibonacci-ℕ (inv (right-zero-law-mul-ℕ (succ-ℕ k))))
     ( div-zero-ℕ d)
 div-Fibonacci-div-ℕ d (succ-ℕ m) ._ (succ-ℕ k , refl) H =
    div-Fibonacci-add-ℕ d
-     ( mul-ℕ k (succ-ℕ m))
+     ( k *ℕ (succ-ℕ m))
      ( succ-ℕ m)
      ( div-Fibonacci-div-ℕ d
        ( succ-ℕ m)
-       ( mul-ℕ k (succ-ℕ m))
+       ( k *ℕ (succ-ℕ m))
        ( pair k refl)
        ( H))
      ( H)
