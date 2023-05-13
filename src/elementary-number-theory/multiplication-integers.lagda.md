@@ -47,6 +47,9 @@ mul-ℤ (inr (inr (succ-ℕ x))) l = l +ℤ (mul-ℤ (inr (inr x)) l)
 infix 30 _*ℤ_
 _*ℤ_ = mul-ℤ
 
+infix 30 _*ℤ_
+_*ℤ_ = mul-ℤ
+
 mul-ℤ' : ℤ → ℤ → ℤ
 mul-ℤ' x y = mul-ℤ y x
 
