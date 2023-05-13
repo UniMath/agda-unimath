@@ -60,7 +60,7 @@ module _
 
   power-add-Commutative-Semiring :
     (m n : ℕ) {x : type-Commutative-Semiring A} →
-    power-Commutative-Semiring A (add-ℕ m n) x ＝
+    power-Commutative-Semiring A (m +ℕ n) x ＝
     mul-Commutative-Semiring A
       ( power-Commutative-Semiring A m x)
       ( power-Commutative-Semiring A n x)

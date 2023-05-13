@@ -121,10 +121,9 @@ module _
           ( inv P) ∙
           ( ap
             ( mod-two-ℕ ∘
-              add-ℕ
-                ( nat-Fin 2
-                  ( sign-homomorphism-Fin-two n
-                    (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))))
+              ( nat-Fin 2
+                ( sign-homomorphism-Fin-two n
+                  (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
             ( is-zero-nat-zero-Fin {k = 1}) ∙
             ( issec-nat-Fin 1
               ( sign-homomorphism-Fin-two n
@@ -136,10 +135,10 @@ module _
   pr2 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} {h} P Q =
     ( ap mod-two-ℕ
       ( ap
-        ( add-ℕ zero-ℕ)
+        ( zero-ℕ +ℕ_)
         ( inv (is-zero-nat-zero-Fin {k = 1}) ∙ ap (nat-Fin 2) Q) ∙
         ( ap
-          ( add-ℕ'
+          ( _+ℕ
             ( nat-Fin 2
               ( sign-homomorphism-Fin-two n
                 (Fin-UU-Fin' n) (inv-equiv g ∘e h))))

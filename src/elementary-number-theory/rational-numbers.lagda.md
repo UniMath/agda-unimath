@@ -29,7 +29,7 @@ open import foundation.universe-levels
 ## Idea
 
 The type of rational numbers is the quotient of the type of fractions, by the
-equivalence relation given by `(n/m) ~ (n'/m') := Id (mul-ℤ n m') (mul-ℤ n' m)`.
+equivalence relation given by `(n/m) ~ (n'/m') := Id (n *ℤ m') (n' *ℤ m)`.
 
 ## Definitions
 

@@ -72,7 +72,7 @@ module _
             ( add-Commutative-Ring A x y))
           ( λ (m , q) →
             intro-∃
-              ( add-ℕ n m)
+              ( n +ℕ m)
               ( is-closed-under-eq-ideal-Commutative-Ring' A I
                 ( is-closed-under-addition-ideal-Commutative-Ring A I _ _
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring

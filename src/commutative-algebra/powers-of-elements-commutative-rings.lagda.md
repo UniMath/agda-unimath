@@ -61,7 +61,7 @@ module _
 
   power-add-Commutative-Ring :
     (m n : ℕ) {x : type-Commutative-Ring A} →
-    power-Commutative-Ring A (add-ℕ m n) x ＝
+    power-Commutative-Ring A (m +ℕ n) x ＝
     mul-Commutative-Ring A
       ( power-Commutative-Ring A m x)
       ( power-Commutative-Ring A n x)

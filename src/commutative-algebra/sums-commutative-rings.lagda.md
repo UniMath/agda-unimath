@@ -185,8 +185,8 @@ module _
 ```agda
 split-sum-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l)
-  (n m : ℕ) (f : functional-vec-Commutative-Ring A (add-ℕ n m)) →
-  sum-Commutative-Ring A (add-ℕ n m) f ＝
+  (n m : ℕ) (f : functional-vec-Commutative-Ring A (n +ℕ m)) →
+  sum-Commutative-Ring A (n +ℕ m) f ＝
   add-Commutative-Ring A
     ( sum-Commutative-Ring A n (f ∘ inl-coprod-Fin n m))
     ( sum-Commutative-Ring A m (f ∘ inr-coprod-Fin n m))

@@ -9,11 +9,8 @@ module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
 ```agda
 open import elementary-number-theory.fundamental-theorem-of-arithmetic
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.iterated-cartesian-product-types
 open import foundation.universe-levels
 
@@ -22,10 +19,8 @@ open import group-theory.iterated-cartesian-products-concrete-groups
 
 open import lists.arrays
 open import lists.functoriality-lists
-open import lists.lists
 
 open import univalent-combinatorics.cyclic-types
-open import univalent-combinatorics.finite-types
 ```
 
 </details>

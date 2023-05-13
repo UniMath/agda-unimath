@@ -90,7 +90,7 @@ power-nat-succ-Ω' (succ-ℕ n) A ω =
 ```agda
 power-nat-add-Ω :
   {l : Level} (m n : ℕ) (A : Pointed-Type l) (ω : type-Ω A) →
-  power-nat-Ω (add-ℕ m n) A ω ＝ (power-nat-Ω m A ω ∙ power-nat-Ω n A ω)
+  power-nat-Ω (m +ℕ n) A ω ＝ (power-nat-Ω m A ω ∙ power-nat-Ω n A ω)
 power-nat-add-Ω m zero-ℕ A ω = inv right-unit
 power-nat-add-Ω m (succ-ℕ n) A ω =
   ( ap (concat' (point-Pointed-Type A) ω) (power-nat-add-Ω m n A ω)) ∙
@@ -102,17 +102,17 @@ power-nat-add-Ω m (succ-ℕ n) A ω =
 ```agda
 power-nat-mul-Ω :
   {l : Level} (m n : ℕ) (A : Pointed-Type l) (ω : type-Ω A) →
-  power-nat-Ω (mul-ℕ m n) A ω ＝ power-nat-Ω m A (power-nat-Ω n A ω)
+  power-nat-Ω (m *ℕ n) A ω ＝ power-nat-Ω m A (power-nat-Ω n A ω)
 power-nat-mul-Ω zero-ℕ n A ω = refl
 power-nat-mul-Ω (succ-ℕ m) n A ω =
-  ( power-nat-add-Ω (mul-ℕ m n) n A ω) ∙
+  ( power-nat-add-Ω (m *ℕ n) n A ω) ∙
   ( ( ap
       ( concat' (point-Pointed-Type A) (power-nat-Ω n A ω))
       ( power-nat-mul-Ω m n A ω)))
 
 power-nat-mul-Ω' :
   {l : Level} (m n : ℕ) (A : Pointed-Type l) (ω : type-Ω A) →
-  power-nat-Ω (mul-ℕ m n) A ω ＝ power-nat-Ω n A (power-nat-Ω m A ω)
+  power-nat-Ω (m *ℕ n) A ω ＝ power-nat-Ω n A (power-nat-Ω m A ω)
 power-nat-mul-Ω' m n A ω =
   ( ap (λ u → power-nat-Ω u A ω) (commutative-mul-ℕ m n)) ∙
   ( power-nat-mul-Ω n m A ω)

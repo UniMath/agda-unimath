@@ -29,7 +29,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -525,12 +524,9 @@ is-decomposition-list-fundamental-theorem-arithmetic-ℕ x H =
         ( λ p → is-decomposition-list-ℕ (succ-ℕ n) p)
         ( inv (compute-list-fundamental-theorem-arithmetic-succ-ℕ n N))
         ( ( ap
-            ( λ m →
-              mul-ℕ
-                ( nat-least-prime-divisor-ℕ
-                  ( succ-ℕ n)
-                  ( le-succ-leq-ℕ 1 n N))
-                ( m))
+            ( ( nat-least-prime-divisor-ℕ
+                ( succ-ℕ n)
+                ( le-succ-leq-ℕ 1 n N)) *ℕ_)
             ( f
               ( quotient-div-least-prime-divisor-ℕ
                 ( succ-ℕ n)

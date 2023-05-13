@@ -205,7 +205,7 @@ module _
 
 ```agda
 is-trunc-map-precomp-Π-is-connected-map :
-  {l1 l2 l3 : Level} (k l n : 𝕋) → add-𝕋 k (succ-𝕋 (succ-𝕋 n)) ＝ l →
+  {l1 l2 l3 : Level} (k l n : 𝕋) → k +𝕋 (succ-𝕋 (succ-𝕋 n)) ＝ l →
   {A : UU l1} {B : UU l2} {f : A → B} → is-connected-map k f →
   (P : B → Truncated-Type l3 l) →
   is-trunc-map

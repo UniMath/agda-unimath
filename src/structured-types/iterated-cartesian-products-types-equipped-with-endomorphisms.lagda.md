@@ -7,9 +7,6 @@ module structured-types.iterated-cartesian-products-types-equipped-with-endomorp
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.universe-levels
 
 open import lists.lists

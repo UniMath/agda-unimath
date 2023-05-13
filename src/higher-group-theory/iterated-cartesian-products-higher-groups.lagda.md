@@ -10,11 +10,9 @@ module higher-group-theory.iterated-cartesian-products-higher-groups where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -29,7 +27,6 @@ open import foundation.universe-levels
 open import higher-group-theory.cartesian-products-higher-groups
 open import higher-group-theory.higher-groups
 
-open import structured-types.iterated-pointed-cartesian-product-types
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
