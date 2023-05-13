@@ -162,7 +162,7 @@ interchange-law-mul-mul-ℕ =
     associative-mul-ℕ
 
 is-injective-mul-succ-ℕ' :
-  (k : ℕ) → is-injective (mul-ℕ' (succ-ℕ k))
+  (k : ℕ) → is-injective (_*ℕ (succ-ℕ k))
 is-injective-mul-succ-ℕ' k {zero-ℕ} {zero-ℕ} p = refl
 is-injective-mul-succ-ℕ' k {succ-ℕ m} {succ-ℕ n} p =
   ap succ-ℕ
@@ -173,7 +173,7 @@ is-injective-mul-succ-ℕ' k {succ-ℕ m} {succ-ℕ n} p =
           ( ( p) ∙
             ( left-successor-law-mul-ℕ n (succ-ℕ k))))))
 
-is-injective-mul-ℕ' : (k : ℕ) → is-nonzero-ℕ k → is-injective (mul-ℕ' k)
+is-injective-mul-ℕ' : (k : ℕ) → is-nonzero-ℕ k → is-injective (_*ℕ k)
 is-injective-mul-ℕ' k H p with
   is-successor-is-nonzero-ℕ H
 ... | pair l refl = is-injective-mul-succ-ℕ' l p
@@ -194,7 +194,7 @@ is-injective-mul-ℕ k H p with
 is-emb-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (mul-ℕ x)
 is-emb-mul-ℕ x H = is-emb-is-injective is-set-ℕ (is-injective-mul-ℕ x H)
 
-is-emb-mul-ℕ' : (x : ℕ) → is-nonzero-ℕ x → is-emb (mul-ℕ' x)
+is-emb-mul-ℕ' : (x : ℕ) → is-nonzero-ℕ x → is-emb (_*ℕ x)
 is-emb-mul-ℕ' x H = is-emb-is-injective is-set-ℕ (is-injective-mul-ℕ' x H)
 
 is-nonzero-mul-ℕ :

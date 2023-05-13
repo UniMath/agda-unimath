@@ -453,7 +453,7 @@ is-injective-mul-ℤ x f {y} {z} p =
         ( inv (linear-diff-ℤ x y z) ∙ is-zero-diff-ℤ p)))
 
 is-injective-mul-ℤ' :
-  (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ' x)
+  (x : ℤ) → is-nonzero-ℤ x → is-injective (_*ℤ x)
 is-injective-mul-ℤ' x f {y} {z} p =
   is-injective-mul-ℤ x f (commutative-mul-ℤ x y ∙ (p ∙ commutative-mul-ℤ z x))
 ```
@@ -464,7 +464,7 @@ is-injective-mul-ℤ' x f {y} {z} p =
 is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ x)
 is-emb-mul-ℤ x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ x f)
 
-is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ' x)
+is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (_*ℤ x)
 is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)
 ```
 

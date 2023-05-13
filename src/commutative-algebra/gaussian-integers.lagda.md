@@ -273,7 +273,7 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
               ( ( associative-mul-ℤ a d e) ∙
                 ( ap (mul-ℤ a) (commutative-mul-ℤ d e))))
             ( ( inv (associative-mul-ℤ e c b)) ∙
-              ( ap (mul-ℤ' b) (commutative-mul-ℤ e c)))))) ∙
+              ( ap (_*ℤ b) (commutative-mul-ℤ e c)))))) ∙
       ( ( interchange-law-add-add-ℤ
           ( (a *ℤ c) *ℤ f)
           ( neg-ℤ ((b *ℤ d) *ℤ f))
@@ -296,7 +296,7 @@ associative-mul-ℤ[i] (a , b) (c , d) (e , f) =
                     ( neg-ℤ (d *ℤ f))
                     ( c *ℤ e) b))) ∙
               ( ap
-                ( mul-ℤ' b)
+                ( _*ℤ b)
                 ( commutative-add-ℤ (neg-ℤ (d *ℤ f)) (c *ℤ e))))))))
 
 left-distributive-mul-add-ℤ[i] :

@@ -247,7 +247,7 @@ preserves-div-mul-ℤ :
 pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
 pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
   ( inv (associative-mul-ℤ q k x)) ∙
-    ( ( ap (mul-ℤ' x) (commutative-mul-ℤ q k)) ∙
+    ( ( ap (_*ℤ x) (commutative-mul-ℤ q k)) ∙
       ( ( associative-mul-ℤ k q x) ∙
         ( ap (mul-ℤ k) p)))
 ```
@@ -261,7 +261,7 @@ pr1 (reflects-div-mul-ℤ k x y H (pair q p)) = q
 pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
   is-injective-mul-ℤ k H
     ( ( inv (associative-mul-ℤ k q x)) ∙
-      ( ( ap (mul-ℤ' x) (commutative-mul-ℤ k q)) ∙
+      ( ( ap (_*ℤ x) (commutative-mul-ℤ k q)) ∙
         ( ( associative-mul-ℤ q k x) ∙
           ( p))))
 ```
@@ -413,7 +413,7 @@ pr2 (is-unit-mul-ℤ x y (pair d p) (pair e q)) =
     ( ( ap
         ( mul-ℤ e)
         ( ( inv (associative-mul-ℤ d x y)) ∙
-          ( ap (mul-ℤ' y) p))) ∙
+          ( ap (_*ℤ y) p))) ∙
       ( q))
 
 mul-unit-ℤ : unit-ℤ → unit-ℤ → unit-ℤ
@@ -461,7 +461,7 @@ presim-unit-sim-unit-ℤ {inr (inr x)} {inr (inr y)} H =
 is-nonzero-presim-unit-ℤ :
   {x y : ℤ} → presim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
 is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
-  Eq-eq-ℤ (ap (mul-ℤ' u) (inv q) ∙ (commutative-mul-ℤ v u ∙ α))
+  Eq-eq-ℤ (ap (_*ℤ u) (inv q) ∙ (commutative-mul-ℤ v u ∙ α))
   where
   q : is-zero-ℤ v
   q = is-injective-mul-ℤ' x f {v} {zero-ℤ} (β ∙ p)
@@ -593,7 +593,7 @@ pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
     ( ( ap
         ( mul-ℤ ((int-unit-ℤ v) *ℤ d))
         ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
-          ( ap (mul-ℤ' x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
+          ( ap (_*ℤ x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
       ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
         ( ( ap (mul-ℤ (int-unit-ℤ v)) p) ∙
           ( r)))))
@@ -635,7 +635,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos =
       ＝ one-ℤ *ℤ x
         by (inv (left-unit-law-mul-ℤ x))
       ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
-        by inv (ap (mul-ℤ' x) pos)
+        by inv (ap (_*ℤ x) pos)
       ＝ y
         by pr2 (H (λ u → nz (pr1 u))))
 is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
@@ -643,7 +643,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
     ( equational-reasoning
       neg-ℤ x
       ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
-        by ap (mul-ℤ' x) (inv p)
+        by ap (_*ℤ x) (inv p)
       ＝ y
         by pr2 (H (λ u → nz (pr1 u))))
 ```

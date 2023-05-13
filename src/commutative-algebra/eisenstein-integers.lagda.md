@@ -206,7 +206,7 @@ right-unit-law-mul-ℤ[ω] (a , b) =
     ( ( ap-add-ℤ (right-unit-law-mul-ℤ a) (ap neg-ℤ (right-zero-law-mul-ℤ b))) ∙
       ( right-unit-law-add-ℤ a))
     ( ( ap-add-ℤ
-        ( ap (add-ℤ' b) (right-zero-law-mul-ℤ a))
+        ( ap (_+ℤ b) (right-zero-law-mul-ℤ a))
         ( ap neg-ℤ (right-zero-law-mul-ℤ b))) ∙
       ( right-unit-law-add-ℤ b))
 
@@ -242,7 +242,7 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                 ( ( right-distributive-mul-add-ℤ (a *ℤ d) (c *ℤ b) f) ∙
                   ( ap-add-ℤ
                     ( associative-mul-ℤ a d f)
-                    ( ( ap (mul-ℤ' f) (commutative-mul-ℤ c b)) ∙
+                    ( ( ap (_*ℤ f) (commutative-mul-ℤ c b)) ∙
                       ( associative-mul-ℤ b c f))))
                 ( ( left-negative-law-mul-ℤ (b *ℤ d) f) ∙
                   ( ap neg-ℤ (associative-mul-ℤ b d f)))))) ∙
@@ -377,7 +377,7 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                     ( neg-ℤ (b *ℤ ed))))))))
         ( ( inv (left-negative-law-mul-ℤ ((ad +ℤ cb) +ℤ (neg-ℤ bd)) f)) ∙
           ( ( ap
-              ( mul-ℤ' f)
+              ( _*ℤ f)
               ( ( distributive-neg-add-ℤ (ad +ℤ cb) (neg-ℤ bd)) ∙
                 ( ap-add-ℤ (distributive-neg-add-ℤ ad cb) (neg-neg-ℤ bd)))) ∙
             ( ( right-distributive-mul-add-ℤ
@@ -396,7 +396,7 @@ associative-mul-ℤ[ω] (a , b) (c , d) (e , f) =
                         ( ap
                           ( neg-ℤ)
                           ( ( ap
-                              ( mul-ℤ' f)
+                              ( _*ℤ f)
                               ( commutative-mul-ℤ c b)) ∙
                             ( associative-mul-ℤ b c f))))))
                   ( ( associative-mul-ℤ b d f) ∙

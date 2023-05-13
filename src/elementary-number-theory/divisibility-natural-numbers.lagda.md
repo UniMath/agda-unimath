@@ -132,7 +132,7 @@ antisymmetric-div-ℕ (succ-ℕ x) zero-ℕ H (pair l q) =
   inv q ∙ right-zero-law-mul-ℕ l
 antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
   ( inv (left-unit-law-mul-ℕ (succ-ℕ x))) ∙
-  ( ( ap ( mul-ℕ' (succ-ℕ x))
+  ( ( ap ( _*ℕ (succ-ℕ x))
          ( inv
            ( is-one-right-is-one-mul-ℕ l k
              ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
@@ -296,7 +296,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
             ( m *ℕ (succ-ℕ d))
             ( (dist-ℕ m n) *ℕ (succ-ℕ d))))) ∙
       ( ( ap
-          ( mul-ℕ' (succ-ℕ d))
+          ( _*ℕ (succ-ℕ d))
           ( is-additive-right-inverse-dist-ℕ m n
             ( reflects-order-mul-ℕ d m n
               ( concatenate-eq-leq-eq-ℕ q
@@ -325,7 +325,7 @@ preserves-div-mul-ℕ :
 pr1 (preserves-div-mul-ℕ k x y (pair q p)) = q
 pr2 (preserves-div-mul-ℕ k x y (pair q p)) =
   ( inv (associative-mul-ℕ q k x)) ∙
-    ( ( ap (mul-ℕ' x) (commutative-mul-ℕ q k)) ∙
+    ( ( ap (_*ℕ x) (commutative-mul-ℕ q k)) ∙
       ( ( associative-mul-ℕ k q x) ∙
         ( ap (mul-ℕ k) p)))
 ```
@@ -339,7 +339,7 @@ pr1 (reflects-div-mul-ℕ k x y H (pair q p)) = q
 pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
   is-injective-mul-ℕ k H
     ( ( inv (associative-mul-ℕ k q x)) ∙
-      ( ( ap (mul-ℕ' x) (commutative-mul-ℕ k q)) ∙
+      ( ( ap (_*ℕ x) (commutative-mul-ℕ k q)) ∙
         ( ( associative-mul-ℕ q k x) ∙
           ( p))))
 ```
@@ -440,7 +440,7 @@ pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
     ＝ (u *ℕ x) *ℕ d
       by inv (associative-mul-ℕ u x d)
     ＝ (quotient-div-ℕ d a H) *ℕ d
-      by ap (mul-ℕ' d) p
+      by ap (_*ℕ d) p
     ＝ a
       by eq-quotient-div-ℕ d a H
 pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u

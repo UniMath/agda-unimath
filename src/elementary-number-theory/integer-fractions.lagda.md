@@ -153,7 +153,7 @@ trans-sim-fraction-ℤ x y z r s =
               ( numerator-fraction-ℤ x)
               ( denominator-fraction-ℤ y)
               ( denominator-fraction-ℤ z))) ∙
-          ( ( ap ( mul-ℤ' (denominator-fraction-ℤ z)) r) ∙
+          ( ( ap ( _*ℤ (denominator-fraction-ℤ z)) r) ∙
             ( ( associative-mul-ℤ
                 ( numerator-fraction-ℤ y)
                 ( denominator-fraction-ℤ x)
@@ -168,7 +168,7 @@ trans-sim-fraction-ℤ x y z r s =
                       ( numerator-fraction-ℤ y)
                       ( denominator-fraction-ℤ z)
                       ( denominator-fraction-ℤ x))) ∙
-                  ( ( ap (mul-ℤ' (denominator-fraction-ℤ x)) s) ∙
+                  ( ( ap (_*ℤ (denominator-fraction-ℤ x)) s) ∙
                     ( ( associative-mul-ℤ
                         ( numerator-fraction-ℤ z)
                         ( denominator-fraction-ℤ y)
