@@ -158,7 +158,7 @@ module _
                       ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
                       ( equiv-Σ
                         ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
-                        ( equiv-postcomp-equiv (equiv-add-ℤ (neg-ℤ x)) ℤ)
+                        ( equiv-postcomp-equiv (equiv-left-add-ℤ (neg-ℤ x)) ℤ)
                         ( λ e →
                           equiv-map-Π
                             ( λ k →
@@ -168,7 +168,7 @@ module _
                                   ( neg-ℤ x)
                                   ( map-equiv e k))) ∘e
                               ( equiv-ap
-                                ( equiv-add-ℤ (neg-ℤ x))
+                                ( equiv-left-add-ℤ (neg-ℤ x))
                                 ( map-equiv e (succ-ℤ k))
                                 ( succ-ℤ (map-equiv e k))))))
                       ( λ e →
@@ -176,7 +176,7 @@ module _
                           ( (neg-ℤ x) +ℤ (map-equiv (pr1 e) zero-ℤ))
                           ( left-inverse-law-add-ℤ x)) ∘e
                         ( equiv-ap
-                          ( equiv-add-ℤ (neg-ℤ x))
+                          ( equiv-left-add-ℤ (neg-ℤ x))
                           ( map-equiv (pr1 e) zero-ℤ)
                           ( x))))))))
             ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))

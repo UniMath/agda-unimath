@@ -161,46 +161,48 @@ interchange-law-mul-mul-ℕ =
     commutative-mul-ℕ
     associative-mul-ℕ
 
-is-injective-mul-succ-ℕ' :
+is-injective-right-mul-succ-ℕ :
   (k : ℕ) → is-injective (_*ℕ (succ-ℕ k))
-is-injective-mul-succ-ℕ' k {zero-ℕ} {zero-ℕ} p = refl
-is-injective-mul-succ-ℕ' k {succ-ℕ m} {succ-ℕ n} p =
+is-injective-right-mul-succ-ℕ k {zero-ℕ} {zero-ℕ} p = refl
+is-injective-right-mul-succ-ℕ k {succ-ℕ m} {succ-ℕ n} p =
   ap succ-ℕ
-    ( is-injective-mul-succ-ℕ' k {m} {n}
-      ( is-injective-add-ℕ'
+    ( is-injective-right-mul-succ-ℕ k {m} {n}
+      ( is-injective-right-add-ℕ
         ( succ-ℕ k)
         ( ( inv (left-successor-law-mul-ℕ m (succ-ℕ k))) ∙
           ( ( p) ∙
             ( left-successor-law-mul-ℕ n (succ-ℕ k))))))
 
-is-injective-mul-ℕ' : (k : ℕ) → is-nonzero-ℕ k → is-injective (_*ℕ k)
-is-injective-mul-ℕ' k H p with
+is-injective-right-mul-ℕ : (k : ℕ) → is-nonzero-ℕ k → is-injective (_*ℕ k)
+is-injective-right-mul-ℕ k H p with
   is-successor-is-nonzero-ℕ H
-... | pair l refl = is-injective-mul-succ-ℕ' l p
+... | pair l refl = is-injective-right-mul-succ-ℕ l p
 
-is-injective-mul-succ-ℕ :
+is-injective-left-mul-succ-ℕ :
   (k : ℕ) → is-injective ((succ-ℕ k) *ℕ_)
-is-injective-mul-succ-ℕ k {m} {n} p =
-  is-injective-mul-succ-ℕ' k
+is-injective-left-mul-succ-ℕ k {m} {n} p =
+  is-injective-right-mul-succ-ℕ k
     ( ( commutative-mul-ℕ m (succ-ℕ k)) ∙
       ( p ∙ commutative-mul-ℕ (succ-ℕ k) n))
 
-is-injective-mul-ℕ :
+is-injective-left-mul-ℕ :
   (k : ℕ) → is-nonzero-ℕ k → is-injective (k *ℕ_)
-is-injective-mul-ℕ k H p with
+is-injective-left-mul-ℕ k H p with
   is-successor-is-nonzero-ℕ H
-... | pair l refl = is-injective-mul-succ-ℕ l p
+... | pair l refl = is-injective-left-mul-succ-ℕ l p
 
-is-emb-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (x *ℕ_)
-is-emb-mul-ℕ x H = is-emb-is-injective is-set-ℕ (is-injective-mul-ℕ x H)
+is-emb-left-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (x *ℕ_)
+is-emb-left-mul-ℕ x H =
+  is-emb-is-injective is-set-ℕ (is-injective-left-mul-ℕ x H)
 
-is-emb-mul-ℕ' : (x : ℕ) → is-nonzero-ℕ x → is-emb (_*ℕ x)
-is-emb-mul-ℕ' x H = is-emb-is-injective is-set-ℕ (is-injective-mul-ℕ' x H)
+is-emb-right-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (_*ℕ x)
+is-emb-right-mul-ℕ x H =
+  is-emb-is-injective is-set-ℕ (is-injective-right-mul-ℕ x H)
 
 is-nonzero-mul-ℕ :
   (x y : ℕ) → is-nonzero-ℕ x → is-nonzero-ℕ y → is-nonzero-ℕ (x *ℕ y)
 is-nonzero-mul-ℕ x y H K p =
-  K (is-injective-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
+  K (is-injective-left-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
 
 is-nonzero-left-factor-mul-ℕ :
   (x y : ℕ) → is-nonzero-ℕ (x *ℕ y) → is-nonzero-ℕ x
@@ -217,12 +219,12 @@ We conclude that $y = 1$ if $(x+1)y = x+1$.
 is-one-is-right-unit-mul-ℕ :
   (x y : ℕ) → (succ-ℕ x) *ℕ y ＝ succ-ℕ x → is-one-ℕ y
 is-one-is-right-unit-mul-ℕ x y p =
-  is-injective-mul-succ-ℕ x (p ∙ inv (right-unit-law-mul-ℕ (succ-ℕ x)))
+  is-injective-left-mul-succ-ℕ x (p ∙ inv (right-unit-law-mul-ℕ (succ-ℕ x)))
 
 is-one-is-left-unit-mul-ℕ :
   (x y : ℕ) → x *ℕ (succ-ℕ y) ＝ succ-ℕ y → is-one-ℕ x
 is-one-is-left-unit-mul-ℕ x y p =
-  is-injective-mul-succ-ℕ' y (p ∙ inv (left-unit-law-mul-ℕ (succ-ℕ y)))
+  is-injective-right-mul-succ-ℕ y (p ∙ inv (left-unit-law-mul-ℕ (succ-ℕ y)))
 
 is-one-right-is-one-mul-ℕ :
   (x y : ℕ) → is-one-ℕ (x *ℕ y) → is-one-ℕ y

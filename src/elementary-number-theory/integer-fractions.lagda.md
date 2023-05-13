@@ -136,7 +136,7 @@ trans-sim-fraction-ℤ :
   (x y z : fraction-ℤ) →
   sim-fraction-ℤ x y → sim-fraction-ℤ y z → sim-fraction-ℤ x z
 trans-sim-fraction-ℤ x y z r s =
-  is-injective-mul-ℤ'
+  is-injective-right-mul-ℤ
     ( denominator-fraction-ℤ y)
     ( is-nonzero-denominator-fraction-ℤ y)
     ( ( associative-mul-ℤ

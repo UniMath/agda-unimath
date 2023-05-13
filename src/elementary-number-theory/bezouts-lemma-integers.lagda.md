@@ -310,7 +310,7 @@ bezouts-lemma-ℤ (inl x) (inr (inl star)) = pair neg-one-ℤ (pair one-ℤ eqn)
         by
           ap
             ( _+ℤ (one-ℤ *ℤ (inr (inl star))))
-            ( inv (is-mul-neg-one-neg-ℤ (inl x)))
+            ( inv (is-left-mul-neg-one-neg-ℤ (inl x)))
       ＝ (inr (inr x)) +ℤ zero-ℤ
         by ap ((inr (inr x)) +ℤ_) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inl x))
@@ -356,7 +356,7 @@ bezouts-lemma-ℤ (inr (inl star)) (inl y) = pair one-ℤ (pair neg-one-ℤ eqn)
         by
           ap
             ( (one-ℤ *ℤ (inr (inl star))) +ℤ_)
-            ( inv (is-mul-neg-one-neg-ℤ (inl y)))
+            ( inv (is-left-mul-neg-one-neg-ℤ (inl y)))
       ＝ zero-ℤ +ℤ (inr (inr y))
         by ap (_+ℤ (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inl y))

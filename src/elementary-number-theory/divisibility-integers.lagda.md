@@ -127,7 +127,7 @@ sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
 
 ```agda
 is-prop-div-ℤ : (d x : ℤ) → is-nonzero-ℤ d → is-prop (div-ℤ d x)
-is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-mul-ℤ' d f) x
+is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-right-mul-ℤ d f) x
 ```
 
 ### The divisibility relation is a preorder
@@ -259,7 +259,7 @@ reflects-div-mul-ℤ :
   (k x y : ℤ) → is-nonzero-ℤ k → div-ℤ (k *ℤ x) (k *ℤ y) → div-ℤ x y
 pr1 (reflects-div-mul-ℤ k x y H (pair q p)) = q
 pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
-  is-injective-mul-ℤ k H
+  is-injective-left-mul-ℤ k H
     ( ( inv (associative-mul-ℤ k q x)) ∙
       ( ( ap (_*ℤ x) (commutative-mul-ℤ k q)) ∙
         ( ( associative-mul-ℤ q k x) ∙
@@ -464,7 +464,7 @@ is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
   Eq-eq-ℤ (ap (_*ℤ u) (inv q) ∙ (commutative-mul-ℤ v u ∙ α))
   where
   q : is-zero-ℤ v
-  q = is-injective-mul-ℤ' x f {v} {zero-ℤ} (β ∙ p)
+  q = is-injective-right-mul-ℤ x f {v} {zero-ℤ} (β ∙ p)
 
 is-nonzero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
@@ -562,7 +562,7 @@ antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
   pr1 (pr1 (f (inr g))) = d
   pr1 (pr2 (pr1 (f (inr g)))) = e
   pr2 (pr2 (pr1 (f (inr g)))) =
-    is-injective-mul-ℤ x g
+    is-injective-left-mul-ℤ x g
       ( ( commutative-mul-ℤ x (e *ℤ d)) ∙
         ( ( associative-mul-ℤ e d x) ∙
           ( ( ap (e *ℤ_) p) ∙

@@ -190,7 +190,7 @@ is-reduced-reduce-fraction-ℤ x =
       (is-plus-or-minus-ℤ (alpha *ℤ d) d) →
       is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
     is-plus-or-minus-case-split (inl pos) =
-      ( is-injective-mul-ℤ' d
+      ( is-injective-right-mul-ℤ d
         ( λ r → tr is-positive-ℤ r
           ( is-positive-gcd-is-positive-right-ℤ
             ( numerator-fraction-ℤ x) ( denominator-fraction-ℤ x)
@@ -201,7 +201,7 @@ is-reduced-reduce-fraction-ℤ x =
           (inv (neg-neg-ℤ ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
             ( denominator-fraction-ℤ (reduce-fraction-ℤ x)))) ∙
              ap neg-ℤ
-               ( is-injective-mul-ℤ' d
+               ( is-injective-right-mul-ℤ d
                  ( λ r →
                    tr is-positive-ℤ r
                      ( is-positive-gcd-is-positive-right-ℤ
@@ -442,7 +442,7 @@ unique-numerator-reduce-fraction-ℤ x y H =
                     ( is-positive-int-reduce-denominator-fraction-ℤ y)))
           ＝ neg-ℤ (int-reduce-denominator-fraction-ℤ x)
             by
-              is-injective-mul-ℤ
+              is-injective-left-mul-ℤ
                 ( int-reduce-numerator-fraction-ℤ x)
                 ( nz)
                 ( reduced-eqn)

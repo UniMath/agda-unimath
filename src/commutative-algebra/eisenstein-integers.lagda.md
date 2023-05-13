@@ -157,7 +157,7 @@ pr2 (conjugate-ℤ[ω] (a , b)) = neg-ℤ b
 conjugate-conjugate-ℤ[ω] :
   (x : ℤ[ω]) → conjugate-ℤ[ω] (conjugate-ℤ[ω] x) ＝ x
 conjugate-conjugate-ℤ[ω] (a , b) =
-  eq-Eq-ℤ[ω] (isretr-add-neg-ℤ' (neg-ℤ b) a) (neg-neg-ℤ b)
+  eq-Eq-ℤ[ω] (isretr-right-add-neg-ℤ (neg-ℤ b) a) (neg-neg-ℤ b)
 ```
 
 ### The Eisenstein integers form a ring with conjugation

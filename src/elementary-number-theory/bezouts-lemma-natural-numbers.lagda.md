@@ -266,7 +266,7 @@ div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) =
                       ( is-distance-between-multiples-sym-ℕ x y z (k , l , p))
                     ( lykx)))
               ＝ int-ℕ z
-                by isretr-add-neg-ℤ' ((int-ℕ l) *ℤ (int-ℕ y)) (int-ℕ z))
+                by isretr-right-add-neg-ℤ ((int-ℕ l) *ℤ (int-ℕ y)) (int-ℕ z))
               ＝ mod-ℕ x z by mod-int-ℕ x z))
 ```
 
@@ -371,7 +371,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
       ap
         ( ((neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))) +ℤ_)
         ( inv
-          ( issec-add-neg-ℤ'
+          ( issec-right-add-neg-ℤ
             ( int-ℕ z)
             ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))))
     ＝ add-ℤ
@@ -1032,7 +1032,7 @@ remainder-min-dist-succ-x-is-distance x y =
         int-ℕ d
         ＝ ((int-ℕ d) +ℤ (int-ℕ (s *ℕ (succ-ℕ x)))) +ℤ
           (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
-          by inv (isretr-add-neg-ℤ' (int-ℕ (s *ℕ (succ-ℕ x))) (int-ℕ d))
+          by inv (isretr-right-add-neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))) (int-ℕ d))
         ＝ (int-ℕ (d +ℕ (s *ℕ (succ-ℕ x)))) +ℤ
           (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
           by ap (_+ℤ (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x)))))
@@ -1072,7 +1072,7 @@ remainder-min-dist-succ-x-is-distance x y =
           (add-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
               ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
           (int-ℕ r))
-          by inv (isretr-add-neg-ℤ
+          by inv (isretr-left-add-neg-ℤ
             ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
             ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             (int-ℕ r))
@@ -1343,7 +1343,7 @@ remainder-min-dist-succ-x-is-distance x y =
       equational-reasoning
         int-ℕ d
         ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ ((int-ℕ (t *ℕ y)) +ℤ (int-ℕ d))
-          by inv (isretr-add-neg-ℤ (int-ℕ (t *ℕ y)) (int-ℕ d))
+          by inv (isretr-left-add-neg-ℤ (int-ℕ (t *ℕ y)) (int-ℕ d))
         ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ ((t *ℕ y) +ℕ d))
           by ap ((neg-ℤ (int-ℕ (t *ℕ y))) +ℤ_) (add-int-ℕ (t *ℕ y) d)
         ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ (s *ℕ (succ-ℕ x)))
@@ -1391,7 +1391,7 @@ remainder-min-dist-succ-x-is-distance x y =
                   ( (neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y))
                   ( (int-ℕ s) *ℤ (int-ℕ (succ-ℕ x)))))
               ( int-ℕ r))
-          by inv (isretr-add-neg-ℤ (mul-ℤ (int-ℕ q)
+          by inv (isretr-left-add-neg-ℤ (mul-ℤ (int-ℕ q)
             (((neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y)) +ℤ
             ((int-ℕ s) *ℤ (int-ℕ (succ-ℕ x))))) (int-ℕ r))
         ＝ add-ℤ

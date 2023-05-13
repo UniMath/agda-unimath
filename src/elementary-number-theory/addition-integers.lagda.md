@@ -155,8 +155,8 @@ abstract
 
 ```agda
 abstract
-  is-add-one-succ-ℤ' : (x : ℤ) → succ-ℤ x ＝ x +ℤ one-ℤ
-  is-add-one-succ-ℤ' x =
+  is-right-add-one-succ-ℤ : (x : ℤ) → succ-ℤ x ＝ x +ℤ one-ℤ
+  is-right-add-one-succ-ℤ x =
     equational-reasoning
       succ-ℤ x
       ＝ succ-ℤ (x +ℤ zero-ℤ)
@@ -164,25 +164,25 @@ abstract
       ＝ x +ℤ one-ℤ
         by inv (right-successor-law-add-ℤ x zero-ℤ)
 
-  is-add-one-succ-ℤ : (x : ℤ) → succ-ℤ x ＝ one-ℤ +ℤ x
-  is-add-one-succ-ℤ x = inv (left-successor-law-add-ℤ zero-ℤ x)
+  is-left-add-one-succ-ℤ : (x : ℤ) → succ-ℤ x ＝ one-ℤ +ℤ x
+  is-left-add-one-succ-ℤ x = inv (left-successor-law-add-ℤ zero-ℤ x)
 
-  add-one-left-ℤ : (x : ℤ) → one-ℤ +ℤ x ＝ succ-ℤ x
-  add-one-left-ℤ x = refl
+  left-add-one-ℤ : (x : ℤ) → one-ℤ +ℤ x ＝ succ-ℤ x
+  left-add-one-ℤ x = refl
 
-  add-one-right-ℤ : (x : ℤ) → x +ℤ one-ℤ ＝ succ-ℤ x
-  add-one-right-ℤ x = inv (is-add-one-succ-ℤ' x)
+  right-add-one-ℤ : (x : ℤ) → x +ℤ one-ℤ ＝ succ-ℤ x
+  right-add-one-ℤ x = inv (is-right-add-one-succ-ℤ x)
 ```
 
 ### The predecessor of an integer is that integer minus one
 
 ```agda
-  is-add-neg-one-pred-ℤ : (x : ℤ) → pred-ℤ x ＝ neg-one-ℤ +ℤ x
-  is-add-neg-one-pred-ℤ x =
+  is-left-add-neg-one-pred-ℤ : (x : ℤ) → pred-ℤ x ＝ neg-one-ℤ +ℤ x
+  is-left-add-neg-one-pred-ℤ x =
     inv (left-predecessor-law-add-ℤ zero-ℤ x)
 
-  is-add-neg-one-pred-ℤ' : (x : ℤ) → pred-ℤ x ＝ x +ℤ neg-one-ℤ
-  is-add-neg-one-pred-ℤ' x =
+  is-right-add-neg-one-pred-ℤ : (x : ℤ) → pred-ℤ x ＝ x +ℤ neg-one-ℤ
+  is-right-add-neg-one-pred-ℤ x =
     equational-reasoning
       pred-ℤ x
       ＝ pred-ℤ (x +ℤ zero-ℤ)
@@ -190,11 +190,11 @@ abstract
       ＝ x +ℤ neg-one-ℤ
         by inv (right-predecessor-law-add-ℤ x zero-ℤ)
 
-  add-neg-one-left-ℤ : (x : ℤ) → neg-one-ℤ +ℤ x ＝ pred-ℤ x
-  add-neg-one-left-ℤ x = refl
+  left-add-neg-one-ℤ : (x : ℤ) → neg-one-ℤ +ℤ x ＝ pred-ℤ x
+  left-add-neg-one-ℤ x = refl
 
-  add-neg-one-right-ℤ : (x : ℤ) → x +ℤ neg-one-ℤ ＝ pred-ℤ x
-  add-neg-one-right-ℤ x = inv (is-add-neg-one-pred-ℤ' x)
+  right-add-neg-one-ℤ : (x : ℤ) → x +ℤ neg-one-ℤ ＝ pred-ℤ x
+  right-add-neg-one-ℤ x = inv (is-right-add-neg-one-pred-ℤ x)
 ```
 
 ### Addition is associative
@@ -333,12 +333,12 @@ interchange-law-add-add-ℤ =
     associative-add-ℤ
 ```
 
-### Addition by x is a binary equivalence
+### Addition by `x` is a binary equivalence
 
 ```agda
-issec-add-neg-ℤ :
+issec-left-add-neg-ℤ :
   (x y : ℤ) → x +ℤ (neg-ℤ x +ℤ y) ＝ y
-issec-add-neg-ℤ x y =
+issec-left-add-neg-ℤ x y =
   equational-reasoning
     x +ℤ (neg-ℤ x +ℤ y)
     ＝ (x +ℤ neg-ℤ x) +ℤ y
@@ -346,9 +346,9 @@ issec-add-neg-ℤ x y =
     ＝ y
       by ap (_+ℤ y) (right-inverse-law-add-ℤ x)
 
-isretr-add-neg-ℤ :
+isretr-left-add-neg-ℤ :
   (x y : ℤ) → (neg-ℤ x) +ℤ (x +ℤ y) ＝ y
-isretr-add-neg-ℤ x y =
+isretr-left-add-neg-ℤ x y =
   equational-reasoning
     neg-ℤ x +ℤ (x +ℤ y)
     ＝ (neg-ℤ x +ℤ x) +ℤ y
@@ -357,19 +357,19 @@ isretr-add-neg-ℤ x y =
       by ap (_+ℤ y) (left-inverse-law-add-ℤ x)
 
 abstract
-  is-equiv-add-ℤ : (x : ℤ) → is-equiv (x +ℤ_)
-  pr1 (pr1 (is-equiv-add-ℤ x)) = add-ℤ (neg-ℤ x)
-  pr2 (pr1 (is-equiv-add-ℤ x)) = issec-add-neg-ℤ x
-  pr1 (pr2 (is-equiv-add-ℤ x)) = add-ℤ (neg-ℤ x)
-  pr2 (pr2 (is-equiv-add-ℤ x)) = isretr-add-neg-ℤ x
+  is-equiv-left-add-ℤ : (x : ℤ) → is-equiv (x +ℤ_)
+  pr1 (pr1 (is-equiv-left-add-ℤ x)) = add-ℤ (neg-ℤ x)
+  pr2 (pr1 (is-equiv-left-add-ℤ x)) = issec-left-add-neg-ℤ x
+  pr1 (pr2 (is-equiv-left-add-ℤ x)) = add-ℤ (neg-ℤ x)
+  pr2 (pr2 (is-equiv-left-add-ℤ x)) = isretr-left-add-neg-ℤ x
 
-equiv-add-ℤ : ℤ → (ℤ ≃ ℤ)
-pr1 (equiv-add-ℤ x) = add-ℤ x
-pr2 (equiv-add-ℤ x) = is-equiv-add-ℤ x
+equiv-left-add-ℤ : ℤ → (ℤ ≃ ℤ)
+pr1 (equiv-left-add-ℤ x) = add-ℤ x
+pr2 (equiv-left-add-ℤ x) = is-equiv-left-add-ℤ x
 
-issec-add-neg-ℤ' :
+issec-right-add-neg-ℤ :
   (x y : ℤ) → (y +ℤ neg-ℤ x) +ℤ x ＝ y
-issec-add-neg-ℤ' x y =
+issec-right-add-neg-ℤ x y =
   equational-reasoning
     (y +ℤ neg-ℤ x) +ℤ x
     ＝ y +ℤ (neg-ℤ x +ℤ x)
@@ -379,9 +379,9 @@ issec-add-neg-ℤ' x y =
     ＝ y
       by right-unit-law-add-ℤ y
 
-isretr-add-neg-ℤ' :
+isretr-right-add-neg-ℤ :
   (x y : ℤ) → (y +ℤ x) +ℤ neg-ℤ x ＝ y
-isretr-add-neg-ℤ' x y =
+isretr-right-add-neg-ℤ x y =
   equational-reasoning
     (y +ℤ x) +ℤ neg-ℤ x
     ＝ y +ℤ (x +ℤ neg-ℤ x)
@@ -392,46 +392,46 @@ isretr-add-neg-ℤ' x y =
       by right-unit-law-add-ℤ y
 
 abstract
-  is-equiv-add-ℤ' : (y : ℤ) → is-equiv (_+ℤ y)
-  pr1 (pr1 (is-equiv-add-ℤ' y)) = _+ℤ (neg-ℤ y)
-  pr2 (pr1 (is-equiv-add-ℤ' y)) = issec-add-neg-ℤ' y
-  pr1 (pr2 (is-equiv-add-ℤ' y)) = _+ℤ (neg-ℤ y)
-  pr2 (pr2 (is-equiv-add-ℤ' y)) = isretr-add-neg-ℤ' y
+  is-equiv-right-add-ℤ : (y : ℤ) → is-equiv (_+ℤ y)
+  pr1 (pr1 (is-equiv-right-add-ℤ y)) = _+ℤ (neg-ℤ y)
+  pr2 (pr1 (is-equiv-right-add-ℤ y)) = issec-right-add-neg-ℤ y
+  pr1 (pr2 (is-equiv-right-add-ℤ y)) = _+ℤ (neg-ℤ y)
+  pr2 (pr2 (is-equiv-right-add-ℤ y)) = isretr-right-add-neg-ℤ y
 
-equiv-add-ℤ' : ℤ → (ℤ ≃ ℤ)
-pr1 (equiv-add-ℤ' y) = _+ℤ y
-pr2 (equiv-add-ℤ' y) = is-equiv-add-ℤ' y
+equiv-right-add-ℤ : ℤ → (ℤ ≃ ℤ)
+pr1 (equiv-right-add-ℤ y) = _+ℤ y
+pr2 (equiv-right-add-ℤ y) = is-equiv-right-add-ℤ y
 
-is-binary-equiv-add-ℤ : is-binary-equiv add-ℤ
-pr1 is-binary-equiv-add-ℤ = is-equiv-add-ℤ'
-pr2 is-binary-equiv-add-ℤ = is-equiv-add-ℤ
+is-binary-equiv-left-add-ℤ : is-binary-equiv add-ℤ
+pr1 is-binary-equiv-left-add-ℤ = is-equiv-right-add-ℤ
+pr2 is-binary-equiv-left-add-ℤ = is-equiv-left-add-ℤ
 ```
 
 ### Addition by an integer is a binary embedding
 
 ```agda
-is-emb-add-ℤ :
+is-emb-left-add-ℤ :
   (x : ℤ) → is-emb (x +ℤ_)
-is-emb-add-ℤ x =
-  is-emb-is-equiv (is-equiv-add-ℤ x)
+is-emb-left-add-ℤ x =
+  is-emb-is-equiv (is-equiv-left-add-ℤ x)
 
-is-emb-add-ℤ' :
+is-emb-right-add-ℤ :
   (y : ℤ) → is-emb (_+ℤ y)
-is-emb-add-ℤ' y = is-emb-is-equiv (is-equiv-add-ℤ' y)
+is-emb-right-add-ℤ y = is-emb-is-equiv (is-equiv-right-add-ℤ y)
 
 is-binary-emb-add-ℤ : is-binary-emb add-ℤ
 is-binary-emb-add-ℤ =
-  is-binary-emb-is-binary-equiv is-binary-equiv-add-ℤ
+  is-binary-emb-is-binary-equiv is-binary-equiv-left-add-ℤ
 ```
 
 ### Addition by x is injective
 
 ```agda
-is-injective-add-ℤ' : (x : ℤ) → is-injective (_+ℤ x)
-is-injective-add-ℤ' x = is-injective-is-emb (is-emb-add-ℤ' x)
+is-injective-right-add-ℤ : (x : ℤ) → is-injective (_+ℤ x)
+is-injective-right-add-ℤ x = is-injective-is-emb (is-emb-right-add-ℤ x)
 
 is-injective-add-ℤ : (x : ℤ) → is-injective (x +ℤ_)
-is-injective-add-ℤ x = is-injective-is-emb (is-emb-add-ℤ x)
+is-injective-add-ℤ x = is-injective-is-emb (is-emb-left-add-ℤ x)
 ```
 
 ### Negative laws for addition
@@ -557,9 +557,9 @@ add-int-ℕ x (succ-ℕ y) =
 ### If `x + y = y` then `x = 0`
 
 ```agda
-is-zero-add-ℤ :
+is-zero-left-add-ℤ :
   (x y : ℤ) → x +ℤ y ＝ y → is-zero-ℤ x
-is-zero-add-ℤ x y H =
+is-zero-left-add-ℤ x y H =
   equational-reasoning
     x
     ＝ x +ℤ zero-ℤ
@@ -573,10 +573,10 @@ is-zero-add-ℤ x y H =
     ＝ zero-ℤ
       by right-inverse-law-add-ℤ y
 
-is-zero-add-ℤ' :
+is-zero-right-add-ℤ :
   (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
-is-zero-add-ℤ' x y H =
-  is-zero-add-ℤ y x (commutative-add-ℤ y x ∙ H)
+is-zero-right-add-ℤ x y H =
+  is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
 
 ### Adding negatives results in a negative

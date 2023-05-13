@@ -204,17 +204,17 @@ ap-add-ℤ-Mod :
 ap-add-ℤ-Mod k p q = ap-binary (add-ℤ-Mod k) p q
 
 abstract
-  is-equiv-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod k x)
-  is-equiv-add-ℤ-Mod zero-ℕ = is-equiv-add-ℤ
-  is-equiv-add-ℤ-Mod (succ-ℕ k) = is-equiv-add-Fin (succ-ℕ k)
+  is-equiv-left-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod k x)
+  is-equiv-left-add-ℤ-Mod zero-ℕ = is-equiv-left-add-ℤ
+  is-equiv-left-add-ℤ-Mod (succ-ℕ k) = is-equiv-add-Fin (succ-ℕ k)
 
-equiv-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
-pr1 (equiv-add-ℤ-Mod k x) = add-ℤ-Mod k x
-pr2 (equiv-add-ℤ-Mod k x) = is-equiv-add-ℤ-Mod k x
+equiv-left-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-left-add-ℤ-Mod k x) = add-ℤ-Mod k x
+pr2 (equiv-left-add-ℤ-Mod k x) = is-equiv-left-add-ℤ-Mod k x
 
 abstract
   is-equiv-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod' k x)
-  is-equiv-add-ℤ-Mod' zero-ℕ = is-equiv-add-ℤ'
+  is-equiv-add-ℤ-Mod' zero-ℕ = is-equiv-right-add-ℤ
   is-equiv-add-ℤ-Mod' (succ-ℕ k) = is-equiv-add-Fin' (succ-ℕ k)
 
 equiv-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
@@ -226,7 +226,7 @@ is-injective-add-ℤ-Mod zero-ℕ = is-injective-add-ℤ
 is-injective-add-ℤ-Mod (succ-ℕ k) = is-injective-add-Fin (succ-ℕ k)
 
 is-injective-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod' k x)
-is-injective-add-ℤ-Mod' zero-ℕ = is-injective-add-ℤ'
+is-injective-add-ℤ-Mod' zero-ℕ = is-injective-right-add-ℤ
 is-injective-add-ℤ-Mod' (succ-ℕ k) = is-injective-add-Fin' (succ-ℕ k)
 ```
 
@@ -308,25 +308,25 @@ right-predecessor-law-add-ℤ-Mod zero-ℕ = right-predecessor-law-add-ℤ
 right-predecessor-law-add-ℤ-Mod (succ-ℕ k) =
   right-predecessor-law-add-Fin (succ-ℕ k)
 
-is-add-one-succ-ℤ-Mod :
+is-left-add-one-succ-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → succ-ℤ-Mod k x ＝ add-ℤ-Mod k (one-ℤ-Mod k) x
-is-add-one-succ-ℤ-Mod zero-ℕ = is-add-one-succ-ℤ
-is-add-one-succ-ℤ-Mod (succ-ℕ k) = is-add-one-succ-Fin k
+is-left-add-one-succ-ℤ-Mod zero-ℕ = is-left-add-one-succ-ℤ
+is-left-add-one-succ-ℤ-Mod (succ-ℕ k) = is-add-one-succ-Fin k
 
-is-add-one-succ-ℤ-Mod' :
+is-left-add-one-succ-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → succ-ℤ-Mod k x ＝ add-ℤ-Mod k x (one-ℤ-Mod k)
-is-add-one-succ-ℤ-Mod' zero-ℕ = is-add-one-succ-ℤ'
-is-add-one-succ-ℤ-Mod' (succ-ℕ k) = is-add-one-succ-Fin' k
+is-left-add-one-succ-ℤ-Mod' zero-ℕ = is-right-add-one-succ-ℤ
+is-left-add-one-succ-ℤ-Mod' (succ-ℕ k) = is-add-one-succ-Fin' k
 
-is-add-neg-one-pred-ℤ-Mod :
+is-left-add-neg-one-pred-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → pred-ℤ-Mod k x ＝ add-ℤ-Mod k (neg-one-ℤ-Mod k) x
-is-add-neg-one-pred-ℤ-Mod zero-ℕ = is-add-neg-one-pred-ℤ
-is-add-neg-one-pred-ℤ-Mod (succ-ℕ k) = is-add-neg-one-pred-Fin k
+is-left-add-neg-one-pred-ℤ-Mod zero-ℕ = is-left-add-neg-one-pred-ℤ
+is-left-add-neg-one-pred-ℤ-Mod (succ-ℕ k) = is-add-neg-one-pred-Fin k
 
-is-add-neg-one-pred-ℤ-Mod' :
+is-left-add-neg-one-pred-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → pred-ℤ-Mod k x ＝ add-ℤ-Mod k x (neg-one-ℤ-Mod k)
-is-add-neg-one-pred-ℤ-Mod' zero-ℕ = is-add-neg-one-pred-ℤ'
-is-add-neg-one-pred-ℤ-Mod' (succ-ℕ k) = is-add-neg-one-pred-Fin' k
+is-left-add-neg-one-pred-ℤ-Mod' zero-ℕ = is-right-add-neg-one-pred-ℤ
+is-left-add-neg-one-pred-ℤ-Mod' (succ-ℕ k) = is-add-neg-one-pred-Fin' k
 ```
 
 ## Multiplication modulo k
@@ -385,15 +385,15 @@ right-distributive-mul-add-ℤ-Mod zero-ℕ = right-distributive-mul-add-ℤ
 right-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
   right-distributive-mul-add-Fin (succ-ℕ k)
 
-is-mul-neg-one-neg-ℤ-Mod :
+is-left-mul-neg-one-neg-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k (neg-one-ℤ-Mod k) x
-is-mul-neg-one-neg-ℤ-Mod zero-ℕ = is-mul-neg-one-neg-ℤ
-is-mul-neg-one-neg-ℤ-Mod (succ-ℕ k) = is-mul-neg-one-neg-Fin k
+is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = is-left-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod (succ-ℕ k) = is-mul-neg-one-neg-Fin k
 
-is-mul-neg-one-neg-ℤ-Mod' :
+is-left-mul-neg-one-neg-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k x (neg-one-ℤ-Mod k)
-is-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-mul-neg-one-neg-ℤ'
-is-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin' k
+is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-right-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin' k
 ```
 
 ## Congruence classes of integers modulo k

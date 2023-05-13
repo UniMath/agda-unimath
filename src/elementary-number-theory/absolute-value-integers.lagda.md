@@ -114,7 +114,7 @@ subadditive-abs-ℤ :
   (x y : ℤ) → (abs-ℤ (x +ℤ y)) ≤-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
 subadditive-abs-ℤ x (inl zero-ℕ) =
   concatenate-eq-leq-eq-ℕ
-    ( ap abs-ℤ (add-neg-one-right-ℤ x))
+    ( ap abs-ℤ (right-add-neg-one-ℤ x))
     ( predecessor-law-abs-ℤ x)
     ( refl)
 subadditive-abs-ℤ x (inl (succ-ℕ y)) =
@@ -134,7 +134,7 @@ subadditive-abs-ℤ x (inr (inl star)) =
     ( refl)
 subadditive-abs-ℤ x (inr (inr zero-ℕ)) =
   concatenate-eq-leq-eq-ℕ
-    ( ap abs-ℤ (add-one-right-ℤ x))
+    ( ap abs-ℤ (right-add-one-ℤ x))
     ( successor-law-abs-ℤ x)
     ( refl)
 subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =

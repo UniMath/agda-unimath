@@ -146,8 +146,8 @@ is-injective-convert-based-ℕ
   ap ( unary-op-based-ℕ (succ-ℕ k) x)
      ( is-injective-convert-based-ℕ (succ-ℕ k)
        ( is-injective-succ-ℕ
-         ( is-injective-mul-succ-ℕ k
-           ( is-injective-add-ℕ' (nat-Fin (succ-ℕ k) x) p))))
+         ( is-injective-left-mul-succ-ℕ k
+           ( is-injective-right-add-ℕ (nat-Fin (succ-ℕ k) x) p))))
 ```
 
 ### The zero-element of the `k+1`-ary natural numbers

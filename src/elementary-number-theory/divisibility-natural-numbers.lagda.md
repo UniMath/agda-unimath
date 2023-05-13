@@ -92,7 +92,7 @@ eq-quotient-div-eq-div-ℕ :
   (H : div-ℕ x z) → (I : div-ℕ y z) →
   quotient-div-ℕ x z H ＝ quotient-div-ℕ y z I
 eq-quotient-div-eq-div-ℕ x y z n e H I =
-  is-injective-mul-ℕ
+  is-injective-left-mul-ℕ
     ( x)
     ( n)
   ( tr
@@ -110,7 +110,7 @@ eq-quotient-div-eq-div-ℕ x y z n e H I =
 
 ```agda
 is-prop-div-ℕ : (k x : ℕ) → is-nonzero-ℕ k → is-prop (div-ℕ k x)
-is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-mul-ℕ' k f) x
+is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-right-mul-ℕ k f) x
 ```
 
 ### The divisibility relation is a partial order on the natural numbers
@@ -289,7 +289,7 @@ div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
       ( p ∙ (ap (x +ℕ_) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
 pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
 pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
-  is-injective-add-ℕ' (m *ℕ (succ-ℕ d))
+  is-injective-right-add-ℕ (m *ℕ (succ-ℕ d))
     ( ( inv
         ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
           ( commutative-add-ℕ
@@ -337,7 +337,7 @@ reflects-div-mul-ℕ :
   (k x y : ℕ) → is-nonzero-ℕ k → div-ℕ (k *ℕ x) (k *ℕ y) → div-ℕ x y
 pr1 (reflects-div-mul-ℕ k x y H (pair q p)) = q
 pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
-  is-injective-mul-ℕ k H
+  is-injective-left-mul-ℕ k H
     ( ( inv (associative-mul-ℕ k q x)) ∙
       ( ( ap (_*ℕ x) (commutative-mul-ℕ k q)) ∙
         ( ( associative-mul-ℕ q k x) ∙
@@ -407,7 +407,7 @@ simplify-mul-quotient-div-ℕ :
   ( (quotient-div-ℕ b a H) *ℕ (quotient-div-ℕ c b K)) ＝
   ( quotient-div-ℕ c a L)
 simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
-  is-injective-mul-ℕ' c nz
+  is-injective-right-mul-ℕ c nz
     ( equational-reasoning
       (a/b *ℕ b/c) *ℕ c
       ＝ a/b *ℕ (b/c *ℕ c)
@@ -445,7 +445,7 @@ pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
       by eq-quotient-div-ℕ d a H
 pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
-  is-injective-mul-ℕ' d nz
+  is-injective-right-mul-ℕ d nz
     ( equational-reasoning
         (u *ℕ x) *ℕ d
         ＝ u *ℕ (x *ℕ d)
@@ -500,7 +500,7 @@ is-one-divisor-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
   quotient-div-ℕ d x H ＝ x → is-one-ℕ d
 is-one-divisor-ℕ d x f (.x , q) refl =
-  is-injective-mul-ℕ x f (q ∙ inv (right-unit-law-mul-ℕ x))
+  is-injective-left-mul-ℕ x f (q ∙ inv (right-unit-law-mul-ℕ x))
 ```
 
 ### If `x` is nonzero and `d | x` is a nontrivial divisor, then `x/d < x`

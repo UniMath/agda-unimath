@@ -108,8 +108,8 @@ is-pair-expansion-unique :
   (u ＝ u') × (v ＝ v')
 is-pair-expansion-unique zero-ℕ zero-ℕ v v' p =
   ( pair refl
-    ( is-injective-mul-ℕ' 2 is-nonzero-two-ℕ
-      ( is-injective-add-ℕ 0 (is-injective-succ-ℕ p))))
+    ( is-injective-right-mul-ℕ 2 is-nonzero-two-ℕ
+      ( is-injective-left-add-ℕ 0 (is-injective-succ-ℕ p))))
 is-pair-expansion-unique zero-ℕ (succ-ℕ u') v v' p = ex-falso (s t)
   where
     s : is-odd-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
@@ -131,7 +131,7 @@ is-pair-expansion-unique (succ-ℕ u) (succ-ℕ u') v v' p = pu , pv
     q :
       ((exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2))) ＝
         ((exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2)))
-    q = is-injective-mul-ℕ 2 is-nonzero-two-ℕ
+    q = is-injective-left-mul-ℕ 2 is-nonzero-two-ℕ
       ( inv (associative-mul-ℕ 2 (exp-ℕ 2 u) (succ-ℕ (v *ℕ 2))) ∙
       ( ( ap (_*ℕ (succ-ℕ (v *ℕ 2)))
         ( commutative-mul-ℕ 2 (exp-ℕ 2 u))) ∙

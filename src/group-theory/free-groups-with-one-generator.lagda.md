@@ -151,7 +151,7 @@ module _
           ( λ x →
             ( ap
               ( map-hom-Group ℤ-Group G h)
-              ( is-add-one-succ-ℤ x)) ∙
+              ( is-left-add-one-succ-ℤ x)) ∙
             ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 
