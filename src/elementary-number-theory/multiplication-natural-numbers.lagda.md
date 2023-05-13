@@ -33,6 +33,8 @@ mul-ℕ : ℕ → ℕ → ℕ
 mul-ℕ 0 n = 0
 mul-ℕ (succ-ℕ m) n = add-ℕ (mul-ℕ m n) n
 
+_*ℕ_ = mul-ℕ
+
 mul-ℕ' : ℕ → ℕ → ℕ
 mul-ℕ' x y = mul-ℕ y x
 
