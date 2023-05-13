@@ -408,7 +408,7 @@ left-inverse-law-add-Fin :
   is-zero-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x) x)
 left-inverse-law-add-Fin k x =
   eq-mod-succ-cong-ℕ k
-    ( add-ℕ (nat-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x)) (nat-Fin (succ-ℕ k) x))
+    ( (nat-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x)) +ℕ (nat-Fin (succ-ℕ k) x))
     ( zero-ℕ)
     ( concatenate-cong-eq-cong-ℕ
       { succ-ℕ k}
@@ -417,7 +417,7 @@ left-inverse-law-add-Fin k x =
           ( nat-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x))
           ( nat-Fin (succ-ℕ k) x)}
       { x2 =
-        add-ℕ (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k)) (nat-Fin (succ-ℕ k) x)}
+        (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k)) +ℕ (nat-Fin (succ-ℕ k) x)}
       { x3 = succ-ℕ k}
       { x4 = zero-ℕ}
       ( translation-invariant-cong-ℕ' (succ-ℕ k)

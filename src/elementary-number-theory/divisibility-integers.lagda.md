@@ -634,7 +634,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos =
       x
       ＝ one-ℤ *ℤ x
         by (inv (left-unit-law-mul-ℤ x))
-      ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
+      ＝ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) *ℤ x
         by inv (ap (_*ℤ x) pos)
       ＝ y
         by pr2 (H (λ u → nz (pr1 u))))
@@ -642,7 +642,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
   inr
     ( equational-reasoning
       neg-ℤ x
-      ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) x
+      ＝ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) *ℤ x
         by ap (_*ℤ x) (inv p)
       ＝ y
         by pr2 (H (λ u → nz (pr1 u))))

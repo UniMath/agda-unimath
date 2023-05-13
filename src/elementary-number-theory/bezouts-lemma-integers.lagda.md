@@ -349,7 +349,7 @@ bezouts-lemma-ℤ (inl x) (inr (inr y)) = pair (neg-ℤ s) (pair t eqn)
     gcd-ℤ (inl x) (inr (inr y))
   eqn =
     equational-reasoning
-      add-ℤ ((neg-ℤ s) *ℤ (neg-ℤ (inr (inr x)))) (t *ℤ (inr (inr y)))
+      ((neg-ℤ s) *ℤ (neg-ℤ (inr (inr x)))) +ℤ (t *ℤ (inr (inr y)))
       ＝ (s *ℤ (inr (inr x))) +ℤ (t *ℤ (inr (inr y)))
         by ap (_+ℤ (t *ℤ (inr (inr y))))
           (double-negative-law-mul-ℤ s (inr (inr x)))
