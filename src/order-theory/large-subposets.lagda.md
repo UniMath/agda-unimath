@@ -26,7 +26,7 @@ A **large subposet** of a [large poset](order-theory.large-posets.md) `P`
 consists of a subtype `S : type-Large-Poset P l1 → Prop (γ l1)` for each
 universe level `l1` such that the implication
 
-```md
+```text
   ((x ≤ y) ∧ (y ≤ x)) → (x ∈ S → y ∈ S)
 ```
 

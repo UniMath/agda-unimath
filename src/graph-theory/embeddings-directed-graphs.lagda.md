@@ -24,7 +24,7 @@ An embedding of directed graphs is a morphism `f : G → H` of directed graphs
 which is an embedding on vertices such that for each pair `(x , y)` of vertices
 in `G` the map
 
-```md
+```text
   edge-hom-Graph G H : edge-Graph G p → edge-Graph H x y
 ```
 

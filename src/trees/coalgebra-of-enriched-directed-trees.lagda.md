@@ -25,7 +25,7 @@ open import trees.polynomial-endofunctors
 Using the fibers of base elements, the type of enriched directed trees has the
 structure of a coalgebra for the polynomial endofunctor
 
-```md
+```text
   X ↦ Σ (a : A), B a → X.
 ```
 

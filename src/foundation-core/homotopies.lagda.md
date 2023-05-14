@@ -348,7 +348,7 @@ module _
 
 Homotopies can be constructed by equational reasoning in the following way:
 
-```md
+```text
 homotopy-reasoning
   f ~ g by htpy-1
     ~ h by htpy-2

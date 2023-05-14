@@ -45,7 +45,7 @@ open import foundation-core.universe-levels
 A partition of a type `A` is a subset `P` of the type of inhabited subsets of
 `A` such that for each `a : A` the type
 
-```md
+```text
   Σ (Q : inhabited-subtype (A)), P(Q) × Q(a)
 ```
 

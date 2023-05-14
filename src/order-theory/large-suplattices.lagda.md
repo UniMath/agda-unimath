@@ -25,14 +25,14 @@ open import order-theory.upper-bounds-large-posets
 A **large suplattice** is a [large poset](order-theory.large-posets.md) `P` such
 that for every family
 
-```md
+```text
   x : I → type-Large-Poset P l1
 ```
 
 indexed by `I : UU l2` there is an element `⋁ x : type-Large-Poset P (l1 ⊔ l2)`
 such that the logical equivalence
 
-```md
+```text
   (∀ᵢ xᵢ ≤ y) ↔ ((⋁ x) ≤ y)
 ```
 

@@ -27,7 +27,7 @@ open import order-theory.posets
 A **Galois connection** between posets `P` and `Q` is a pair of order preserving
 maps `f : P → Q` and `g : Q → P` such that the logical equivalence
 
-```md
+```text
   (f x ≤ y) ↔ (x ≤ g y)
 ```
 

@@ -27,7 +27,7 @@ open import foundation-core.universe-levels
 The universal property of pullbacks describes the optimal way to complete a
 diagram of the form
 
-```md
+```text
          B
          |
          |
@@ -37,7 +37,7 @@ A -----> X
 
 to a square
 
-```md
+```text
 C -----> B
 |        |
 |        |
