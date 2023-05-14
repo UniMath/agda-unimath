@@ -42,12 +42,12 @@ pair-expansion : ℕ → UU lzero
 pair-expansion n =
   Σ (ℕ × ℕ)
     ( λ p →
-      ( mul-ℕ (exp-ℕ 2 (pr1 p)) (succ-ℕ (mul-ℕ (pr2 p) 2))) ＝
+      ( (exp-ℕ 2 (pr1 p)) *ℕ (succ-ℕ ((pr2 p) *ℕ 2))) ＝
         succ-ℕ n)
 
 is-nonzero-pair-expansion :
   (u v : ℕ) →
-  is-nonzero-ℕ (mul-ℕ (exp-ℕ 2 u) (succ-ℕ (mul-ℕ v 2)))
+  is-nonzero-ℕ ((exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
 is-nonzero-pair-expansion u v =
   is-nonzero-mul-ℕ _ _
     ( is-nonzero-exp-ℕ 2 u is-nonzero-two-ℕ)
@@ -78,15 +78,15 @@ has-pair-expansion-is-even-or-odd n =
               s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
            in pair
              ( (succ-ℕ (pr1 (pr1 s))) , pr2 (pr1 s))
-             ( ( ap (λ a → mul-ℕ a (succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2)))
+             ( ( ap (λ a → a *ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
                ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
              ( ( associative-mul-ℕ 2 (exp-ℕ 2 (pr1 (pr1 s)))
-               ( succ-ℕ (mul-ℕ (pr2 (pr1 s)) 2))) ∙
-             ( ( ap (λ a → mul-ℕ 2 a) (pr2 s)) ∙
+               ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
+             ( ( ap (λ a → 2 *ℕ a) (pr2 s)) ∙
              ( ( ap succ-ℕ
-               ( left-successor-law-add-ℕ (add-ℕ 0 (pr1 e)) (pr1 e))) ∙
+               ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
              ( ( ap (succ-ℕ ∘ succ-ℕ)
-               ( ap (λ a → add-ℕ a (pr1 e))
+               ( ap (λ a → a +ℕ (pr1 e))
                  ( left-unit-law-add-ℕ (pr1 e)))) ∙
              ( ( ap (succ-ℕ ∘ succ-ℕ)
                ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
@@ -103,42 +103,42 @@ has-pair-expansion n =
 ```agda
 is-pair-expansion-unique :
   (u u' v v' : ℕ) →
-  (mul-ℕ (exp-ℕ 2 u) (succ-ℕ (mul-ℕ v 2))) ＝
-    (mul-ℕ (exp-ℕ 2 u') (succ-ℕ (mul-ℕ v' 2))) →
+  ((exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2))) ＝
+    ((exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2))) →
   (u ＝ u') × (v ＝ v')
 is-pair-expansion-unique zero-ℕ zero-ℕ v v' p =
   ( pair refl
-    ( is-injective-mul-ℕ' 2 is-nonzero-two-ℕ
-      ( is-injective-add-ℕ 0 (is-injective-succ-ℕ p))))
+    ( is-injective-right-mul-ℕ 2 is-nonzero-two-ℕ
+      ( is-injective-left-add-ℕ 0 (is-injective-succ-ℕ p))))
 is-pair-expansion-unique zero-ℕ (succ-ℕ u') v v' p = ex-falso (s t)
   where
-    s : is-odd-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v 2)))
+    s : is-odd-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
     s = is-odd-has-odd-expansion _
       ( v , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
 
-    t : is-even-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v 2)))
+    t : is-even-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
     t = tr is-even-ℕ (inv p) (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u') , refl))
 is-pair-expansion-unique (succ-ℕ u) zero-ℕ v v' p = ex-falso (s t)
   where
-    s : is-odd-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v' 2)))
+    s : is-odd-ℕ (succ-ℕ (0 +ℕ (v' *ℕ 2)))
     s = is-odd-has-odd-expansion _
       ( v' , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
 
-    t : is-even-ℕ (succ-ℕ (add-ℕ 0 (mul-ℕ v' 2)))
+    t : is-even-ℕ (succ-ℕ (0 +ℕ (v' *ℕ 2)))
     t = tr is-even-ℕ p (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u) , refl))
 is-pair-expansion-unique (succ-ℕ u) (succ-ℕ u') v v' p = pu , pv
   where
     q :
-      (mul-ℕ (exp-ℕ 2 u) (succ-ℕ (mul-ℕ v 2))) ＝
-        (mul-ℕ (exp-ℕ 2 u') (succ-ℕ (mul-ℕ v' 2)))
-    q = is-injective-mul-ℕ 2 is-nonzero-two-ℕ
-      ( inv (associative-mul-ℕ 2 (exp-ℕ 2 u) (succ-ℕ (mul-ℕ v 2))) ∙
-      ( ( ap (mul-ℕ' (succ-ℕ (mul-ℕ v 2)))
+      ((exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2))) ＝
+        ((exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2)))
+    q = is-injective-left-mul-ℕ 2 is-nonzero-two-ℕ
+      ( inv (associative-mul-ℕ 2 (exp-ℕ 2 u) (succ-ℕ (v *ℕ 2))) ∙
+      ( ( ap (_*ℕ (succ-ℕ (v *ℕ 2)))
         ( commutative-mul-ℕ 2 (exp-ℕ 2 u))) ∙
       ( ( p) ∙
-      ( ( ap (mul-ℕ' (succ-ℕ (mul-ℕ v' 2)))
+      ( ( ap (_*ℕ (succ-ℕ (v' *ℕ 2)))
         ( commutative-mul-ℕ (exp-ℕ 2 u') 2)) ∙
-      ( associative-mul-ℕ 2 (exp-ℕ 2 u') (succ-ℕ (mul-ℕ v' 2)))))))
+      ( associative-mul-ℕ 2 (exp-ℕ 2 u') (succ-ℕ (v' *ℕ 2)))))))
 
     pu : (succ-ℕ u) ＝ (succ-ℕ u')
     pu = ap succ-ℕ (pr1 (is-pair-expansion-unique u u' v v' q))
@@ -173,7 +173,7 @@ is-split-surjective-pairing-map n = (u , v) , is-injective-succ-ℕ (q ∙ s)
 
    q :
      ( succ-ℕ (pairing-map (u , v))) ＝
-     ( mul-ℕ (exp-ℕ 2 u) (succ-ℕ (mul-ℕ v 2)))
+     ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
    q = inv (pr2 r)
 ```
 
@@ -188,8 +188,8 @@ is-injecitve-pairing-map {u , v} {u' , v'} p =
     s = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u' v')
 
     q :
-      ( mul-ℕ (exp-ℕ 2 u) (succ-ℕ (mul-ℕ v 2))) ＝
-        ( mul-ℕ (exp-ℕ 2 u') (succ-ℕ (mul-ℕ v' 2)))
+      ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2))) ＝
+        ( (exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2)))
     q = (pr2 r) ∙ (ap succ-ℕ p ∙ inv (pr2 s))
 ```
 

@@ -109,7 +109,7 @@ quotient-euclidean-division-ℕ k x =
 
 eq-quotient-euclidean-division-ℕ :
   (k x : ℕ) →
-  ( mul-ℕ (quotient-euclidean-division-ℕ k x) k) ＝
+  ( (quotient-euclidean-division-ℕ k x) *ℕ k) ＝
   ( dist-ℕ x (remainder-euclidean-division-ℕ k x))
 eq-quotient-euclidean-division-ℕ k x =
   pr2 (cong-euclidean-division-ℕ k x)
@@ -117,17 +117,17 @@ eq-quotient-euclidean-division-ℕ k x =
 eq-euclidean-division-ℕ :
   (k x : ℕ) →
   ( add-ℕ
-    ( mul-ℕ (quotient-euclidean-division-ℕ k x) k)
+    ( (quotient-euclidean-division-ℕ k x) *ℕ k)
     ( remainder-euclidean-division-ℕ k x)) ＝
   ( x)
 eq-euclidean-division-ℕ zero-ℕ x =
   ( inv
     ( ap
-      ( add-ℕ' x)
+      ( _+ℕ x)
       ( right-zero-law-mul-ℕ (quotient-euclidean-division-ℕ zero-ℕ x)))) ∙
   ( left-unit-law-add-ℕ x)
 eq-euclidean-division-ℕ (succ-ℕ k) x =
-  ( ap ( add-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x))
+  ( ap ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
        ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
          ( symmetric-dist-ℕ x
            ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙

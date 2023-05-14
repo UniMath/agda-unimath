@@ -11,15 +11,11 @@ module finite-group-theory.permutations-standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.orbits-permutations
 open import finite-group-theory.transpositions
 
 open import foundation.automorphisms
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -31,25 +27,15 @@ open import foundation.equivalences-maybe
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.iterating-functions
-open import foundation.iterating-involutions
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import group-theory.subgroups-generated-by-subsets-groups
-open import group-theory.symmetric-groups
 
 open import lists.functoriality-lists
 open import lists.lists
 
 open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types

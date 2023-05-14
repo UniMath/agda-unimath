@@ -28,7 +28,7 @@ open import foundation.identity-types
 Fibonacci-ℕ : ℕ → ℕ
 Fibonacci-ℕ 0 = 0
 Fibonacci-ℕ (succ-ℕ 0) = 1
-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) = add-ℕ (Fibonacci-ℕ (succ-ℕ n)) (Fibonacci-ℕ n)
+Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) = (Fibonacci-ℕ (succ-ℕ n)) +ℕ (Fibonacci-ℕ n)
 ```
 
 ### A definition using the induction principle of `ℕ`
@@ -63,7 +63,7 @@ Fibo-zero-ℕ : ℕ → ℕ
 Fibo-zero-ℕ = shift-two 0 1 (λ x → 0)
 
 Fibo-succ-ℕ : (ℕ → ℕ) → (ℕ → ℕ)
-Fibo-succ-ℕ f = shift-two (f 1) (add-ℕ (f 1) (f 0)) (λ x → 0)
+Fibo-succ-ℕ f = shift-two (f 1) ((f 1) +ℕ (f 0)) (λ x → 0)
 
 Fibo-function : ℕ → ℕ → ℕ
 Fibo-function =
@@ -82,10 +82,9 @@ Fibo k = Fibo-function k 0
 ```agda
 Fibonacci-add-ℕ :
   (m n : ℕ) →
-  Fibonacci-ℕ (add-ℕ m (succ-ℕ n)) ＝
-  add-ℕ
-    ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-    ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ n))
+  Fibonacci-ℕ (m +ℕ (succ-ℕ n)) ＝
+  ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))) +ℕ
+  ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ n))
 Fibonacci-add-ℕ m zero-ℕ =
   ap-add-ℕ
     ( inv (right-unit-law-mul-ℕ (Fibonacci-ℕ (succ-ℕ m))))
@@ -94,28 +93,27 @@ Fibonacci-add-ℕ m (succ-ℕ n) =
   ( ap Fibonacci-ℕ (inv (left-successor-law-add-ℕ m (succ-ℕ n)))) ∙
   ( ( Fibonacci-add-ℕ (succ-ℕ m) n) ∙
     ( ( ap
-        ( add-ℕ' (mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n)))
+        ( _+ℕ ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))
         ( right-distributive-mul-add-ℕ
           ( Fibonacci-ℕ (succ-ℕ m))
           ( Fibonacci-ℕ m)
           ( Fibonacci-ℕ (succ-ℕ n)))) ∙
       ( ( associative-add-ℕ
-          ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-          ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n)))
-          ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n))) ∙
+          ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+          ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+          ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))) ∙
         ( ( ap
-            ( add-ℕ
-              ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n))))
+            ( ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))) +ℕ_)
             ( commutative-add-ℕ
-              ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n)))
-              ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n)))) ∙
+              ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+              ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))) ∙
           ( ( inv
               ( associative-add-ℕ
-                ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-                ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ n))
-                ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n))))) ∙
+                ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+                ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))
+                ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))) ∙
             ( ap
-              ( add-ℕ' (mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ (succ-ℕ n))))
+              ( _+ℕ ((Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
               ( inv
                 ( left-distributive-mul-add-ℕ
                   ( Fibonacci-ℕ (succ-ℕ m))
@@ -152,20 +150,20 @@ third:
 
 1. `d | Fibonacci-ℕ m`
 2. `d | Fibonacci-ℕ n`
-3. `d | Fibonacci-ℕ (add-ℕ m n)`.
+3. `d | Fibonacci-ℕ (m +ℕ n)`.
 
 ```agda
 div-Fibonacci-add-ℕ :
   (d m n : ℕ) → div-ℕ d (Fibonacci-ℕ m) → div-ℕ d (Fibonacci-ℕ n) →
-  div-ℕ d (Fibonacci-ℕ (add-ℕ m n))
+  div-ℕ d (Fibonacci-ℕ (m +ℕ n))
 div-Fibonacci-add-ℕ d m zero-ℕ H1 H2 = H1
 div-Fibonacci-add-ℕ d m (succ-ℕ n) H1 H2 =
   tr
     ( div-ℕ d)
     ( inv (Fibonacci-add-ℕ m n))
     ( div-add-ℕ d
-      ( mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) (Fibonacci-ℕ (succ-ℕ n)))
-      ( mul-ℕ (Fibonacci-ℕ m) (Fibonacci-ℕ n))
+      ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+      ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ n))
       ( div-mul-ℕ (Fibonacci-ℕ (succ-ℕ m)) d (Fibonacci-ℕ (succ-ℕ n)) H2)
       ( tr
         ( div-ℕ d)
@@ -179,18 +177,18 @@ div-Fibonacci-add-ℕ d m (succ-ℕ n) H1 H2 =
 div-Fibonacci-div-ℕ :
   (d m n : ℕ) → div-ℕ m n → div-ℕ d (Fibonacci-ℕ m) → div-ℕ d (Fibonacci-ℕ n)
 div-Fibonacci-div-ℕ d m .zero-ℕ (zero-ℕ , refl) H = div-zero-ℕ d
-div-Fibonacci-div-ℕ d zero-ℕ .(mul-ℕ k zero-ℕ) (succ-ℕ k , refl) H =
+div-Fibonacci-div-ℕ d zero-ℕ .(k *ℕ zero-ℕ) (succ-ℕ k , refl) H =
   tr
     ( div-ℕ d)
     ( ap Fibonacci-ℕ (inv (right-zero-law-mul-ℕ (succ-ℕ k))))
     ( div-zero-ℕ d)
 div-Fibonacci-div-ℕ d (succ-ℕ m) ._ (succ-ℕ k , refl) H =
    div-Fibonacci-add-ℕ d
-     ( mul-ℕ k (succ-ℕ m))
+     ( k *ℕ (succ-ℕ m))
      ( succ-ℕ m)
      ( div-Fibonacci-div-ℕ d
        ( succ-ℕ m)
-       ( mul-ℕ k (succ-ℕ m))
+       ( k *ℕ (succ-ℕ m))
        ( pair k refl)
        ( H))
      ( H)

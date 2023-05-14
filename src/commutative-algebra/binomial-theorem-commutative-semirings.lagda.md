@@ -151,14 +151,14 @@ binomial-theorem-Commutative-Semiring A n x y =
 is-linear-combination-power-add-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l) (n m : ℕ)
   (x y : type-Commutative-Semiring A) →
-  power-Commutative-Semiring A (add-ℕ n m) (add-Commutative-Semiring A x y) ＝
+  power-Commutative-Semiring A (n +ℕ m) (add-Commutative-Semiring A x y) ＝
   add-Commutative-Semiring A
     ( mul-Commutative-Semiring A
       ( power-Commutative-Semiring A m y)
       ( sum-Commutative-Semiring A n
         ( λ i →
           mul-nat-scalar-Commutative-Semiring A
-            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+            ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Commutative-Semiring A
               ( power-Commutative-Semiring A (nat-Fin n i) x)
               ( power-Commutative-Semiring A (dist-ℕ (nat-Fin n i) n) y)))))
@@ -169,8 +169,8 @@ is-linear-combination-power-add-Commutative-Semiring :
         ( λ i →
           mul-nat-scalar-Commutative-Semiring A
             ( binomial-coefficient-ℕ
-              ( add-ℕ n m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ m)
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Commutative-Semiring A
               ( power-Commutative-Semiring A (nat-Fin (succ-ℕ m) i) x)
               ( power-Commutative-Semiring A

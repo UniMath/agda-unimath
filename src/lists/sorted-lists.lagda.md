@@ -7,8 +7,6 @@ module lists.sorted-lists where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.unit-type
@@ -23,7 +21,8 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-In these file, we define sorted lists.
+We define a sorted list to be a list such that for every pair of consecutive
+entries `x` and `y`, the inequality `x ≤ y` holds.
 
 ## Definitions
 

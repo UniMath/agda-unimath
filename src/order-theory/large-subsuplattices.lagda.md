@@ -7,14 +7,11 @@ module order-theory.large-subsuplattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.large-posets
-open import order-theory.large-preorders
 open import order-theory.large-subposets
 open import order-theory.large-suplattices
 ```

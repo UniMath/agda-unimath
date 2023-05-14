@@ -131,14 +131,14 @@ binomial-theorem-Ring R = binomial-theorem-Semiring (semiring-Ring R)
 is-linear-combination-power-add-Ring :
   {l : Level} (R : Ring l) (n m : ℕ) (x y : type-Ring R) →
   mul-Ring R x y ＝ mul-Ring R y x →
-  power-Ring R (add-ℕ n m) (add-Ring R x y) ＝
+  power-Ring R (n +ℕ m) (add-Ring R x y) ＝
   add-Ring R
     ( mul-Ring R
       ( power-Ring R m y)
       ( sum-Ring R n
         ( λ i →
           mul-nat-scalar-Ring R
-            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+            ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Ring R
               ( power-Ring R (nat-Fin n i) x)
               ( power-Ring R (dist-ℕ (nat-Fin n i) n) y)))))
@@ -149,8 +149,8 @@ is-linear-combination-power-add-Ring :
         ( λ i →
           mul-nat-scalar-Ring R
             ( binomial-coefficient-ℕ
-              ( add-ℕ n m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ m)
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Ring R
               ( power-Ring R (nat-Fin (succ-ℕ m) i) x)
               ( power-Ring R (dist-ℕ (nat-Fin (succ-ℕ m) i) m) y)))))

@@ -370,7 +370,7 @@ module unityped where
 
     iterated-weakening :
       {l : Level} {A : type-theory l} {m n : ℕ} →
-      El A n → El A (succ-ℕ (add-ℕ m n))
+      El A n → El A (succ-ℕ (m +ℕ n))
     iterated-weakening {l} {A} {zero-ℕ} {n} x =
       {!hom-system.element (weakening.element (type-theory.W A))!}
     iterated-weakening {l} {A} {succ-ℕ m} {n} x = {!!}
@@ -380,7 +380,7 @@ module unityped where
 
 ```agda
     hom : {l : Level} (A : type-theory l) → ℕ → ℕ → UU l
-    hom A m n = El A (succ-ℕ (add-ℕ m n))
+    hom A m n = El A (succ-ℕ (m +ℕ n))
 
     id-hom : {l : Level} (A : type-theory l) (n : ℕ) → hom A n n
     id-hom A zero-ℕ = generic-element.element (type-theory.δ A)

@@ -61,7 +61,7 @@ is-gcd-ℕ a b d = (x : ℕ) → (is-common-divisor-ℕ a b x) ↔ (div-ℕ x d)
 ```agda
 is-multiple-of-gcd-ℕ : (a b n : ℕ) → UU lzero
 is-multiple-of-gcd-ℕ a b n =
-  is-nonzero-ℕ (add-ℕ a b) →
+  is-nonzero-ℕ (a +ℕ b) →
   (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)
 ```
 
@@ -111,17 +111,17 @@ uniqueness-is-gcd-ℕ a b d d' H H' =
 ```agda
 leq-sum-is-common-divisor-ℕ' :
   (a b d : ℕ) →
-  is-successor-ℕ (add-ℕ a b) → is-common-divisor-ℕ a b d → leq-ℕ d (add-ℕ a b)
+  is-successor-ℕ (a +ℕ b) → is-common-divisor-ℕ a b d → leq-ℕ d (a +ℕ b)
 leq-sum-is-common-divisor-ℕ' a zero-ℕ d (pair k p) H =
   concatenate-leq-eq-ℕ d
     ( leq-div-succ-ℕ d k (concatenate-div-eq-ℕ (pr1 H) p))
     ( inv p)
 leq-sum-is-common-divisor-ℕ' a (succ-ℕ b) d (pair k p) H =
-  leq-div-succ-ℕ d (add-ℕ a b) (div-add-ℕ d a (succ-ℕ b) (pr1 H) (pr2 H))
+  leq-div-succ-ℕ d (a +ℕ b) (div-add-ℕ d a (succ-ℕ b) (pr1 H) (pr2 H))
 
 leq-sum-is-common-divisor-ℕ :
   (a b d : ℕ) →
-  is-nonzero-ℕ (add-ℕ a b) → is-common-divisor-ℕ a b d → leq-ℕ d (add-ℕ a b)
+  is-nonzero-ℕ (a +ℕ b) → is-common-divisor-ℕ a b d → leq-ℕ d (a +ℕ b)
 leq-sum-is-common-divisor-ℕ a b d H =
   leq-sum-is-common-divisor-ℕ' a b d (is-successor-is-nonzero-ℕ H)
 ```
@@ -133,7 +133,7 @@ is-decidable-is-multiple-of-gcd-ℕ :
   (a b : ℕ) → is-decidable-fam (is-multiple-of-gcd-ℕ a b)
 is-decidable-is-multiple-of-gcd-ℕ a b n =
   is-decidable-function-type'
-    ( is-decidable-neg (is-decidable-is-zero-ℕ (add-ℕ a b)))
+    ( is-decidable-neg (is-decidable-is-zero-ℕ (a +ℕ b)))
     ( λ np →
       is-decidable-prod
         ( is-decidable-neg (is-decidable-is-zero-ℕ n))
@@ -142,14 +142,14 @@ is-decidable-is-multiple-of-gcd-ℕ a b n =
           ( λ x → div-ℕ x n)
           ( is-decidable-is-common-divisor-ℕ a b)
           ( λ x → is-decidable-div-ℕ x n)
-          ( add-ℕ a b)
+          ( a +ℕ b)
           ( λ x → leq-sum-is-common-divisor-ℕ a b x np)))
 ```
 
 ### The sum of `a` and `b` is a multiple of the greatest common divisor of `a` and `b`
 
 ```agda
-sum-is-multiple-of-gcd-ℕ : (a b : ℕ) → is-multiple-of-gcd-ℕ a b (add-ℕ a b)
+sum-is-multiple-of-gcd-ℕ : (a b : ℕ) → is-multiple-of-gcd-ℕ a b (a +ℕ b)
 pr1 (sum-is-multiple-of-gcd-ℕ a b np) = np
 pr2 (sum-is-multiple-of-gcd-ℕ a b np) x H = div-add-ℕ x a b (pr1 H) (pr2 H)
 ```
@@ -163,7 +163,7 @@ abstract
     well-ordering-principle-ℕ
       ( is-multiple-of-gcd-ℕ a b)
       ( is-decidable-is-multiple-of-gcd-ℕ a b)
-      ( pair (add-ℕ a b) (sum-is-multiple-of-gcd-ℕ a b))
+      ( pair (a +ℕ b) (sum-is-multiple-of-gcd-ℕ a b))
 
 gcd-ℕ : ℕ → ℕ → ℕ
 gcd-ℕ a b = pr1 (GCD-ℕ a b)
@@ -180,14 +180,14 @@ is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
 
 ```agda
 is-zero-gcd-ℕ :
-  (a b : ℕ) → is-zero-ℕ (add-ℕ a b) → is-zero-ℕ (gcd-ℕ a b)
+  (a b : ℕ) → is-zero-ℕ (a +ℕ b) → is-zero-ℕ (gcd-ℕ a b)
 is-zero-gcd-ℕ a b p =
   is-zero-leq-zero-ℕ
     ( gcd-ℕ a b)
     ( concatenate-leq-eq-ℕ
       ( gcd-ℕ a b)
       ( is-lower-bound-gcd-ℕ a b
-        ( add-ℕ a b)
+        ( a +ℕ b)
         ( sum-is-multiple-of-gcd-ℕ a b))
       ( p))
 
@@ -195,10 +195,10 @@ is-zero-gcd-zero-zero-ℕ : is-zero-ℕ (gcd-ℕ zero-ℕ zero-ℕ)
 is-zero-gcd-zero-zero-ℕ = is-zero-gcd-ℕ zero-ℕ zero-ℕ refl
 
 is-zero-add-is-zero-gcd-ℕ :
-  (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (add-ℕ a b)
+  (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (a +ℕ b)
 is-zero-add-is-zero-gcd-ℕ a b H =
   double-negation-elim-is-decidable
-    ( is-decidable-is-zero-ℕ (add-ℕ a b))
+    ( is-decidable-is-zero-ℕ (a +ℕ b))
     ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
 
@@ -206,11 +206,11 @@ is-zero-add-is-zero-gcd-ℕ a b H =
 
 ```agda
 is-nonzero-gcd-ℕ :
-  (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) → is-nonzero-ℕ (gcd-ℕ a b)
+  (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) → is-nonzero-ℕ (gcd-ℕ a b)
 is-nonzero-gcd-ℕ a b ne = pr1 (is-multiple-of-gcd-gcd-ℕ a b ne)
 
 is-successor-gcd-ℕ :
-  (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) → is-successor-ℕ (gcd-ℕ a b)
+  (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) → is-successor-ℕ (gcd-ℕ a b)
 is-successor-gcd-ℕ a b ne =
   is-successor-is-nonzero-ℕ (is-nonzero-gcd-ℕ a b ne)
 ```
@@ -221,7 +221,7 @@ is-successor-gcd-ℕ a b ne =
 div-gcd-is-common-divisor-ℕ :
   (a b x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x (gcd-ℕ a b)
 div-gcd-is-common-divisor-ℕ a b x H with
-  is-decidable-is-zero-ℕ (add-ℕ a b)
+  is-decidable-is-zero-ℕ (a +ℕ b)
 ... | inl p = concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-gcd-ℕ a b p))
 ... | inr np = pr2 (is-multiple-of-gcd-gcd-ℕ a b np) x H
 ```
@@ -246,7 +246,7 @@ is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
 div-left-factor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x a
 div-left-factor-div-gcd-ℕ a b x d with
-  is-decidable-is-zero-ℕ (add-ℕ a b)
+  is-decidable-is-zero-ℕ (a +ℕ b)
 ... | inl p =
   concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-left-is-zero-add-ℕ a b p))
 ... | inr np =
@@ -256,7 +256,7 @@ div-left-factor-div-gcd-ℕ a b x d with
           ( ap ( dist-ℕ a)
                ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
                  ( λ x H →
-                   div-right-summand-ℕ x (mul-ℕ q (gcd-ℕ a b)) r
+                   div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
                      ( div-mul-ℕ q x (gcd-ℕ a b)
                        ( div-gcd-is-common-divisor-ℕ a b x H))
                      ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
@@ -272,7 +272,7 @@ div-left-factor-div-gcd-ℕ a b x d with
 div-right-factor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x b
 div-right-factor-div-gcd-ℕ a b x d with
-  is-decidable-is-zero-ℕ (add-ℕ a b)
+  is-decidable-is-zero-ℕ (a +ℕ b)
 ... | inl p =
   concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-right-is-zero-add-ℕ a b p))
 ... | inr np =
@@ -281,7 +281,7 @@ div-right-factor-div-gcd-ℕ a b x d with
       ( ( α ∙ ( ap ( dist-ℕ b)
                ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
                  ( λ x H →
-                   div-right-summand-ℕ x (mul-ℕ q (gcd-ℕ a b)) r
+                   div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
                      ( div-mul-ℕ q x (gcd-ℕ a b)
                        ( div-gcd-is-common-divisor-ℕ a b x H))
                      ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
@@ -347,7 +347,7 @@ is-commutative-gcd-ℕ a b =
 ```agda
 preserves-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-common-divisor-ℕ a b d →
-  is-common-divisor-ℕ (mul-ℕ k a) (mul-ℕ k b) (mul-ℕ k d)
+  is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d)
 preserves-is-common-divisor-mul-ℕ k a b d =
   map-prod
     ( preserves-div-mul-ℕ k d a)
@@ -355,7 +355,7 @@ preserves-is-common-divisor-mul-ℕ k a b d =
 
 reflects-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-nonzero-ℕ k →
-  is-common-divisor-ℕ (mul-ℕ k a) (mul-ℕ k b) (mul-ℕ k d) →
+  is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d) →
   is-common-divisor-ℕ a b d
 reflects-is-common-divisor-mul-ℕ k a b d H =
   map-prod
@@ -427,7 +427,7 @@ simplify-is-common-divisor-quotient-div-ℕ :
     ( quotient-div-ℕ d a (pr1 H))
     ( quotient-div-ℕ d b (pr2 H))
     ( x) ↔
-  is-common-divisor-ℕ a b (mul-ℕ x d)
+  is-common-divisor-ℕ a b (x *ℕ d)
 pr1 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
   forward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
 pr2 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
@@ -455,10 +455,10 @@ is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
       ( quotient-div-ℕ d a (pr1 H))
       ( quotient-div-ℕ d b (pr2 H))
       ( x)
-    ↔ is-common-divisor-ℕ a b (mul-ℕ x d)
+    ↔ is-common-divisor-ℕ a b (x *ℕ d)
       by simplify-is-common-divisor-quotient-div-ℕ nz H
-    ↔ div-ℕ (mul-ℕ x d) (gcd-ℕ a b)
-      by is-gcd-gcd-ℕ a b (mul-ℕ x d)
+    ↔ div-ℕ (x *ℕ d) (gcd-ℕ a b)
+      by is-gcd-gcd-ℕ a b (x *ℕ d)
     ↔ div-ℕ x
         ( quotient-div-ℕ d
           ( gcd-ℕ a b)

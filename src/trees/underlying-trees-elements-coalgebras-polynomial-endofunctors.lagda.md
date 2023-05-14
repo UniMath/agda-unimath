@@ -20,7 +20,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-points
-open import foundation.maybe
 open import foundation.negation
 open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
@@ -30,7 +29,6 @@ open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.walks-directed-graphs
 
-open import trees.bases-enriched-directed-trees
 open import trees.coalgebras-polynomial-endofunctors
 open import trees.combinator-directed-trees
 open import trees.combinator-enriched-directed-trees
@@ -39,9 +37,6 @@ open import trees.elementhood-relation-coalgebras-polynomial-endofunctors
 open import trees.enriched-directed-trees
 open import trees.equivalences-directed-trees
 open import trees.equivalences-enriched-directed-trees
-open import trees.fibers-directed-trees
-open import trees.fibers-enriched-directed-trees
-open import trees.morphisms-directed-trees
 ```
 
 </details>

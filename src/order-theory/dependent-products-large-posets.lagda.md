@@ -8,7 +8,6 @@ module order-theory.dependent-products-large-posets where
 
 ```agda
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels

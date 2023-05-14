@@ -9,19 +9,13 @@ module trees.coalgebra-of-enriched-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import trees.coalgebras-polynomial-endofunctors
-open import trees.combinator-enriched-directed-trees
 open import trees.enriched-directed-trees
-open import trees.equivalences-enriched-directed-trees
 open import trees.fibers-enriched-directed-trees
-open import trees.morphisms-coalgebras-polynomial-endofunctors
 open import trees.polynomial-endofunctors
-open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors
 ```
 
 </details>

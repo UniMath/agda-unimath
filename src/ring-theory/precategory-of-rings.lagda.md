@@ -10,9 +10,6 @@ module ring-theory.precategory-of-rings where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import ring-theory.homomorphisms-rings

@@ -11,24 +11,23 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
-open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.type-arithmetic-cartesian-product-types
+open import foundation-core.universe-levels
 
 open import lists.arrays
 open import lists.lists
@@ -48,7 +47,7 @@ In this file, we give three definitions of the iterated cartesian product
 
 We show that :
 
-- all these definitions are equivalent
+- all of these definitions are equivalent
 - iterated cartesian product of types is closed under permutations
 
 ## Definitions

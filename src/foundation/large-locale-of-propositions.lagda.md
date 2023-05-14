@@ -9,13 +9,13 @@ module foundation.large-locale-of-propositions where
 ```agda
 open import foundation.conjunction
 open import foundation.existential-quantification
-open import foundation.functions
 open import foundation.propositional-extensionality
-open import foundation.propositions
 open import foundation.unit-type
-open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.universe-levels
+
 open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices

@@ -14,7 +14,6 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -104,7 +103,7 @@ is-relatively-prime-div-ℕ a b c d H K L =
 
 ```agda
 is-relatively-prime-quotient-div-gcd-ℕ :
-  (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) →
+  (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) →
   is-relatively-prime-ℕ
     ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-factor-gcd-ℕ a b))
     ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-factor-gcd-ℕ a b))

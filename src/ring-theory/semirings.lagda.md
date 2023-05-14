@@ -356,7 +356,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Semiring :
     (m n : ℕ) (x : type-Semiring R) →
-    mul-nat-scalar-Semiring (add-ℕ m n) x ＝
+    mul-nat-scalar-Semiring (m +ℕ n) x ＝
     add-Semiring R (mul-nat-scalar-Semiring m x) (mul-nat-scalar-Semiring n x)
   right-distributive-mul-nat-scalar-add-Semiring m zero-ℕ x =
     inv (right-unit-law-add-Semiring R (mul-nat-scalar-Semiring m x))

@@ -33,7 +33,7 @@ binomial-coefficient-ℕ zero-ℕ zero-ℕ = 1
 binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) = 0
 binomial-coefficient-ℕ (succ-ℕ n) zero-ℕ = 1
 binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) =
-  add-ℕ (binomial-coefficient-ℕ n k) (binomial-coefficient-ℕ n (succ-ℕ k))
+  (binomial-coefficient-ℕ n k) +ℕ (binomial-coefficient-ℕ n (succ-ℕ k))
 ```
 
 ### Binomial coefficients indexed by elements of standard finite types
