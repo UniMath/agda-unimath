@@ -26,25 +26,25 @@ open import foundation.universe-levels
 
 Given a pair of maps `f : A → X` and `g : B → Y`, there is a commuting square
 
-```md
+```text
           - ∘ f
-    B → X ----> B → A
-      |            |
-g ∘ - |            | g ∘ -
-      V            V
-    Y → X ----> Y → A.
+    X → B ----> A → B
+      |           |
+g ∘ - |           | g ∘ -
+      V           V
+    X → Y ----> A → Y.
           - ∘ f
 ```
 
 The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
 pullback of the cospan:
 
-```md
-      ∙ -------> B → A
-      |  ⌟         |
-      |            | g ∘ -
-      V            V
-    Y → X ----> Y → A.
+```text
+      ∙ ------> A → B
+      |  ⌟        |
+      |           | g ∘ -
+      V           V
+    X → Y ----> A → Y.
           - ∘ f
 ```
 
