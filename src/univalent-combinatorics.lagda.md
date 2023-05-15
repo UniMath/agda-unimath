@@ -76,6 +76,7 @@ open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public
 open import univalent-combinatorics.necklaces public
+open import univalent-combinatorics.omega-finite-types public
 open import univalent-combinatorics.orientations-complete-undirected-graph public
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.partitions public
