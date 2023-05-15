@@ -10,10 +10,14 @@ module foundation.intersections-subtypes where
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.large-locale-of-subtypes
+open import foundation.powersets
 
+open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
+
+open import order-theory.greatest-lower-bounds-large-posets
 ```
 
 </details>
@@ -29,11 +33,24 @@ elements that are in `A` and in `B`.
 
 ```agda
 module _
-  {l l1 l2 : Level} {X : UU l}
+  {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
   where
 
-  intersection-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
-  intersection-subtype = meet-power-set-Large-Locale
+  intersection-subtype : subtype (l2 ⊔ l3) X
+  intersection-subtype = meet-power-set-Large-Locale P Q
+
+  is-greatest-binary-lower-bound-intersection-subtype :
+    is-greatest-binary-lower-bound-Large-Poset
+      ( powerset-Large-Poset X)
+      ( P)
+      ( Q)
+      ( intersection-subtype)
+  pr1 (is-greatest-binary-lower-bound-intersection-subtype R) (p , q) x r =
+    ( p x r , q x r)
+  pr1 (pr2 (is-greatest-binary-lower-bound-intersection-subtype R) p) x r =
+    pr1 (p x r)
+  pr2 (pr2 (is-greatest-binary-lower-bound-intersection-subtype R) p) x r =
+    pr2 (p x r)
 ```
 
 ### The intersection of two decidable subtypes
