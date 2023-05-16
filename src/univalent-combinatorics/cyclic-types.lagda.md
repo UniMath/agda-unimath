@@ -582,3 +582,12 @@ iso-Ω-Cyclic-Type-Group k =
     ( ℤ-Mod-Group k)
     ( equiv-Ω-Cyclic-Type-Group k)
 ```
+
+### The category of cyclic types
+
+```agda
+hom-Cyclic-Type :
+  {l1 l2 : Level} (m n : ℕ) (X : Cyclic-Type l1 m) (Y : Cyclic-Type l2 n) →
+  UU {!!}
+hom-Cyclic-Type m n X Y = {!!}
+```
