@@ -34,7 +34,7 @@ numbers equipped with
    `pS : (x : ℕ) → k ≤-ℕ x → ((y : ℕ) → k ≤-ℕ y ≤-ℕ x → P y) → P (x + 1)` there
    is a function
 
-```md
+```text
   f := based-strong-ind-ℕ k P p0 pS : (x : ℕ) → k ≤-ℕ x → P k
 ```
 

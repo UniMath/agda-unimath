@@ -25,20 +25,20 @@ open import species.species-of-types
 In classical mathematics, the Cauchy series of a species (of finite types) `S`
 is the formal series in `x` :
 
-```md
+```text
 Σ (n : ℕ) (|S({1,...,n}| x^n / n!))
 ```
 
 The categorified version of this series is :
 
-```md
+```text
   Σ (F : 𝔽), S(F) × (F → X)
 ```
 
 Remarks that we can generalized this to species of types with the following
 definition :
 
-```md
+```text
   Σ (U : UU), S(U) × (U → X)
 ```
 

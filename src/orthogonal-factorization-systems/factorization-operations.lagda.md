@@ -19,7 +19,7 @@ open import orthogonal-factorization-systems.factorizations-of-maps
 A **factorization operation** on a function type `A → B` is a choice of
 factorization for every map `f` in `A → B`.
 
-```md
+```text
        ∙
       ^ \
      /   \

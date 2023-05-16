@@ -24,7 +24,7 @@ open import foundation-core.universe-levels
 
 A morphism of cospans is a commuting diagram of the form
 
-```md
+```text
   A -----> X <----- B
   |        |        |
   |        |        |

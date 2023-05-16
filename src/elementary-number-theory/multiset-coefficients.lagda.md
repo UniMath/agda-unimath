@@ -19,7 +19,7 @@ The multiset coefficients count the number of multisets of size `k` of elements
 of a set of size `n`. In oter words, it counts the number of connected componets
 of the type
 
-```md
+```text
   Σ (A : Fin n → 𝔽), ∥ Fin k ≃ Σ (i : Fin n), A i ∥.
 ```
 

@@ -20,7 +20,7 @@ open import trees.polynomial-endofunctors
 **Coalgebras** for polynomial endofunctors are types `X` equipped with a
 function
 
-```md
+```text
   X → Σ (a : A), B a → X
 ```
 

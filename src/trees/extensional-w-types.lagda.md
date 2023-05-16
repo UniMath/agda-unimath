@@ -36,7 +36,7 @@ open import trees.w-types
 A W-type `𝕎 A B` is said to be **extensional** if for any two elements
 `S T : 𝕎 A B` the induced map
 
-```md
+```text
   Id S T → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
 ```
 

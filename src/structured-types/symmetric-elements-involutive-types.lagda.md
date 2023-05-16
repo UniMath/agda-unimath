@@ -22,7 +22,7 @@ Symmetric elements of involutive types are fixed points of the involution. In
 other words, the type of symmetric elements of an involutive type `A` is defined
 to be
 
-```md
+```text
   (X : 2-Element-Type lzero) → A X
 ```
 

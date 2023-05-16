@@ -30,7 +30,7 @@ open import foundation-core.universe-levels
 
 A fibered equivalence is a fibered map
 
-```md
+```text
        h
   A -------> B
   |          |

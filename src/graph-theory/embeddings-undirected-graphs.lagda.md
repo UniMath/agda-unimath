@@ -24,7 +24,7 @@ An embedding of undirected graphs is a morphism `f : G → H` of undirected grap
 which is an embedding on vertices such that for each unordered pair `p` of
 vertices in `G` the map
 
-```md
+```text
   edge-hom-Undirected-Graph G H :
     edge-Undirected-Graph G p →
     edge-Undirected-Graph H (unordered-pair-vertices-hom-Undirected-Graph G H f)

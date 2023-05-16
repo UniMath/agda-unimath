@@ -32,7 +32,7 @@ open import univalent-combinatorics.standard-finite-types
 The binomial theorem for the integers asserts that for any two integers `x` and
 `y` and any natural number `n`, we have
 
-```md
+```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 

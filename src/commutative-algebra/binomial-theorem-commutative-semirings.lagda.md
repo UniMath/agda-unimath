@@ -35,8 +35,8 @@ The **binomial theorem** in commutative semirings asserts that for any two
 elements `x` and `y` of a commutative semiring `A` and any natural number `n`,
 we have
 
-```md
-  (x + y)ⁿ = ∑\_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
+```text
+  (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
 ## Definitions

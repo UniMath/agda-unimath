@@ -35,7 +35,7 @@ a natural number `k` equipped with an identification `km ＝ n`. Using the
 Curry-Howard interpretation of logic into type theory, we express divisibility
 as follows:
 
-```md
+```text
   div-ℕ m n := Σ (k : ℕ), k *ℕ m ＝ n.
 ```
 

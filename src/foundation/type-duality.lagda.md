@@ -40,14 +40,14 @@ open import trees.polynomial-endofunctors
 Given a univalent universe `𝒰`, we can define two closely related functors
 acting on all types. First there is the covariant functor given by
 
-```md
+```text
   P_𝒰(A) := Σ (X : 𝒰), X → A.
 ```
 
 This is a polynomial endofunctor. Second, there is the contravariant functor
 given by
 
-```md
+```text
   P^𝒰(A) := A → 𝒰.
 ```
 

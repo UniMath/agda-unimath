@@ -24,7 +24,7 @@ open import orthogonal-factorization-systems.local-types
 
 A type `A` is said to be **null at** `Y`, or **`Y`-null**, if the constant map
 
-```md
+```text
   const : A → (Y → A)
 ```
 

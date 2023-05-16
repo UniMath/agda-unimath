@@ -37,7 +37,7 @@ open import foundation-core.universe-levels
 Given a type `A` equipped with an equivalence relation `R` and a type `X`, the
 set quotient
 
-```md
+```text
   (X → A) / ~
 ```
 
@@ -46,7 +46,7 @@ embedding for every `X`, `A`, and `R` if and only if the axiom of choice holds.
 
 Consequently, we get embeddings
 
-```md
+```text
   ((hom-Eq-Rel R S) / ~) ↪ ((A/R) → (B/S))
 ```
 

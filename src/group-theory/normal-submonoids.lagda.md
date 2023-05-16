@@ -43,7 +43,7 @@ relations.
 A submonoid `N` of `M` is normal if and only if for all `x y : M` and `u : N` we
 have
 
-```md
+```text
   xuy ∈ N ⇔ xy ∈ N.
 ```
 

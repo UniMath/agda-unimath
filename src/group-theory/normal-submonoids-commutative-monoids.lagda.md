@@ -39,7 +39,7 @@ corresponds uniquely to a saturated congruence relation `~` on `M` consisting of
 the elements congruent to `1`. This is the case if and only if for all `x : M`
 and `u : N` we have
 
-```md
+```text
   xu ∈ N → x ∈ N
 ```
 

@@ -28,7 +28,7 @@ A cone on a cospan `A --f--> X <--g-- B` with vertex `C` is a triple `(p,q,H)`
 consisting of a map `p : C → A`, a map `q : C → B`, and a homotopy `H`
 witnessing that the square
 
-```md
+```text
       q
   C -----> B
   |        |
