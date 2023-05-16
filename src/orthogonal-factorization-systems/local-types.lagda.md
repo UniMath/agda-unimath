@@ -34,7 +34,7 @@ open import foundation-core.universe-levels
 A type family `A` over `X` is said to be **local at** `f : Y → X`, or
 **`f`-local**, if the precomposition map
 
-```md
+```text
   _∘ f : ((x : X) → A x) → ((y : Y) → A (f y))
 ```
 

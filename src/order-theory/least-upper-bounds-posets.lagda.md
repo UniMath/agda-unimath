@@ -25,7 +25,7 @@ open import order-theory.upper-bounds-posets
 A **least upper bound** of `a` and `b` in a poset `P` is an element `x` such
 that the logical equivalence
 
-```md
+```text
   ((a ≤ y) ∧ (b ≤ y)) ⇔ (x ≤ y)
 ```
 
@@ -33,7 +33,7 @@ holds for every element `y` in `P`. Similarly, a **least upper bound** of a
 family `a : I → P` of elements of `P` is an element `x` of `P` such that the
 logical equivalence
 
-```md
+```text
   (∀ᵢ (aᵢ ≤ y)) ⇔ (x ≤ y)
 ```
 

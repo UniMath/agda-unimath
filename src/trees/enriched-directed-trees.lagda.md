@@ -33,13 +33,13 @@ open import trees.directed-trees
 Consider a type `A` and a type family `B` over `A`. An **`(A,B)`-enriched
 directed tree** is a directed tree `T` equipped with a map
 
-```md
+```text
   shape : node-Directed-Tree T → A
 ```
 
 and for each node `x` an equivalence
 
-```md
+```text
   e : B (shape x) ≃ Σ (node-Directed-Tree T) (λ y → edge-Directed-Tree T y x)
 ```
 

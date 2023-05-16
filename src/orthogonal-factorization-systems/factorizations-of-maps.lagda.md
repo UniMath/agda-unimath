@@ -29,7 +29,7 @@ open import orthogonal-factorization-systems.function-classes
 A **factorization** of a map `f : A → B` is a pair of maps `g : X → B` and
 `h : A → X` such that their composite `g ∘ h` is `f`.
 
-```md
+```text
        X
       ^ \
    h /   \ g

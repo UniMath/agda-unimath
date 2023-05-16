@@ -20,7 +20,7 @@ open import foundation-core.universe-levels
 
 A triangle of homotopies of maps
 
-```md
+```text
  f ----> g
   \     /
    \   /

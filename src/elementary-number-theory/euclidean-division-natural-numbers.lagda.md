@@ -38,7 +38,7 @@ unique natural number `r < d` such that `kd + r = n`.
 The following definition produces for each `k : ℕ` a sequence of sequences as
 follows:
 
-```md
+```text
     This is column k
       ↓
   0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence

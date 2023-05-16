@@ -26,7 +26,7 @@ open import foundation.universe-levels
 Given a type `A` equipped with a type family `B` over `A`, the **polynomial
 endofunctor** `P A B` is defined by
 
-```md
+```text
   X ↦ Σ (x : A), (B x → X)
 ```
 

@@ -29,7 +29,7 @@ open import ring-theory.rings
 A (left) module `M` over a ring `R` consists of an abelian group `M` equipped
 with an action `R → M → M` such
 
-```md
+```text
   r(x+y) = rx + ry
       r0 = 0
    r(-x) = -(rx)

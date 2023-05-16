@@ -27,7 +27,7 @@ open import synthetic-homotopy-theory.wedges-of-pointed-types
 Given two pointed types `a : A` and `b : B` we may form their **smash product**
 as the following pushout
 
-```md
+```text
  A ∨∗ B ----> A ×∗ B
     |           |
     |           |

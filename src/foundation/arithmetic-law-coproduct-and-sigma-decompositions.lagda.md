@@ -33,7 +33,7 @@ open import foundation-core.universe-levels
 
 Let `X` be a type, we have the following equivalence :
 
-```md
+```text
  Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
    ( binary-coproduct-Decomposition U) ≃
  Σ ( (A , B , e) : binary-coproduct-Decomposition X)

@@ -24,7 +24,7 @@ open import foundation-core.universe-levels
 
 A fibered involution is a fibered map
 
-```md
+```text
        h
   A -------> A
   |          |

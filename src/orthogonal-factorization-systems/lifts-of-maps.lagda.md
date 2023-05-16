@@ -31,7 +31,7 @@ open import foundation.universe-levels
 A _lift_ of a map `f : X → B` along a map `i : A → B` is a map `g : X → A` such
 that the composition `i ∘ g` is `f`.
 
-```md
+```text
            A
           ^|
         /  i
@@ -72,7 +72,7 @@ module _
 
 ### Vertical composition of lifts of maps
 
-```md
+```text
            A
           ^|
         /  i
@@ -98,7 +98,7 @@ module _
 
 ### Horizontal composition of lifts of maps
 
-```md
+```text
   A - f -> B - g -> C
     \      |      /
       h    i    j
@@ -120,7 +120,7 @@ module _
 
 ## Left whiskering of lifts of maps
 
-```md
+```text
            A
           ^|
         /  i
@@ -141,7 +141,7 @@ module _
 
 ## Right whiskering of lifts of maps
 
-```md
+```text
                     A
                    ^|
                  /  i

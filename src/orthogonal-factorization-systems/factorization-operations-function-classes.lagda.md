@@ -25,7 +25,7 @@ A **factorization operation into function classes** is a factorization operation
 equipped with two function classes `L` and `R` such that the left map of every
 factorization is in `L`, and the right map is in `R`.
 
-```md
+```text
        ∙
       ^ \
  L ∋ /   \ ∈ R

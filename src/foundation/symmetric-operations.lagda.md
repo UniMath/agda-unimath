@@ -31,7 +31,7 @@ open import univalent-combinatorics.standard-finite-types
 Recall that there is a standard unordered pairing operation
 `{-,-} : A → (A → unordered-pair A)`. This induces for any type `B` a map
 
-```md
+```text
   λ f x y → f {x,y} : (unordered-pair A → B) → (A → A → B)
 ```
 

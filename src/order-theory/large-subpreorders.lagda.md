@@ -22,7 +22,7 @@ open import order-theory.large-preorders
 A **large subpreorder** of a [large preorder](order-theory.large-preorders.md)
 `P` consists of a subtype
 
-```md
+```text
   S : type-Large-Preorder P l → Prop (γ l)
 ```
 

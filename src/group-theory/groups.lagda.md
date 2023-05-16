@@ -43,7 +43,7 @@ An **abstract group** is a group in the usual algebraic sense, i.e., it consists
 of a set equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and
 an inverse operation `x ↦ x⁻¹` satisfying the group laws
 
-```md
+```text
   (xy)z = x(yz)      (associativity)
      ex = x          (left unit law)
      xe = x          (right unit law)

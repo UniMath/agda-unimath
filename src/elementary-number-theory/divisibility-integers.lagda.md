@@ -37,7 +37,7 @@ An integer `m` is said to **divide** an integer `n` if there exists an integer
 `k` equipped with an identification `km ＝ n`. Using the Curry-Howard
 interpretation of logic into type theory, we express divisibility as follows:
 
-```md
+```text
   div-ℤ m n := Σ (k : ℤ), k *ℤ m ＝ n.
 ```
 

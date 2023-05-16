@@ -84,7 +84,7 @@ The delooping of a group homomorphism `f : G → H` is a pointed map
 `Bf : BG → BH` equiped with an homotopy witnessing that the following square
 commutes :
 
-```md
+```text
         f
   G --------> H
   |           |

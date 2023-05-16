@@ -24,27 +24,27 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a pair of maps `f : A → X` and `g : B → Y`, there is a commuting square
+Given a pair of maps `f : A → B` and `g : X → Y`, there is a commuting square
 
-```md
+```text
           - ∘ f
-    B → X ----> B → A
-      |            |
-g ∘ - |            | g ∘ -
-      V            V
-    Y → X ----> Y → A.
+    B → X ----> A → X
+      |           |
+g ∘ - |           | g ∘ -
+      V           V
+    B → Y ----> A → Y.
           - ∘ f
 ```
 
 The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
 pullback of the cospan:
 
-```md
-      ∙ -------> B → A
-      |  ⌟         |
-      |            | g ∘ -
-      V            V
-    Y → X ----> Y → A.
+```text
+      ∙ ------> A → X
+      |  ⌟        |
+      |           | g ∘ -
+      V           V
+    B → Y ----> A → Y.
           - ∘ f
 ```
 
@@ -56,7 +56,7 @@ from `f` to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → X) (g : B → Y)
+  (f : A → B) (g : X → Y)
   where
 
   type-pullback-hom : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -73,14 +73,14 @@ module _
 
 ### The pullback-hom map
 
-The pullback-hom is the canonical gap map `(X → B) → type-pullback-hom` and can
+The pullback-hom is the canonical gap map `(B → X) → type-pullback-hom` and can
 be interpreted as the map that takes a diagonal map `j` from the codomain of `f`
 to the domain of `g` to the fibered map `((g ∘ j) , (j ∘ f) , refl-htpy)`.
 
 ```agda
-  pullback-hom : (X → B) → type-pullback-hom
+  pullback-hom : (B → X) → type-pullback-hom
   pullback-hom =
-    gap-pullback-hom (postcomp X g , precomp f B , refl-htpy)
+    gap-pullback-hom (postcomp B g , precomp f X , refl-htpy)
 ```
 
 ## Properties
@@ -91,10 +91,10 @@ to the domain of `g` to the fibered map `((g ∘ j) , (j ∘ f) , refl-htpy)`.
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → X) (g : B → Y)
+  (f : A → B) (g : X → Y)
   {l1' l2' l3' l4' : Level}
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → X') (g' : B' → Y')
+  (f' : A' → B') (g' : X' → Y')
   where
 
   map-pullback-hom :
@@ -113,7 +113,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → X) (g : B → Y)
+  (f : A → B) (g : X → Y)
   where
 
   equiv-fibered-map-type-pullback-hom :

@@ -25,7 +25,7 @@ family `P` of types over `ℕ` and any natural number `k : ℕ`, equipped with
 1. An element `p0 : P k`
 2. A function `pS : (x : ℕ) → k ≤-ℕ x → P x → P (x + 1)` there is a function
 
-```md
+```text
   based-ind-ℕ k P p0 pS : (x : ℕ) → k ≤-ℕ x → P x
 ```
 

@@ -9,6 +9,7 @@ module online-encyclopedia-of-integer-sequences.oeis where
 ```agda
 open import elementary-number-theory.ackermann-function
 open import elementary-number-theory.cofibonacci
+open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
@@ -62,7 +63,7 @@ A000045 : ℕ → ℕ
 A000045 = Fibonacci-ℕ
 ```
 
-### [A000079](https://oeis.org/A000079) Powers of `2
+### [A000079](https://oeis.org/A000079) Powers of `2`
 
 ```agda
 A000079 : ℕ → ℕ
@@ -111,7 +112,14 @@ A001477 : ℕ → ℕ
 A001477 = id
 ```
 
-### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann-Péter function
+### [A006369](https://oeis.org/A006369) Collatz' bijection
+
+```agda
+A006369 : ℕ → ℕ
+A006369 = map-collatz-bijection
+```
+
+### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann–Péter function
 
 ```agda
 A046859 : ℕ → ℕ

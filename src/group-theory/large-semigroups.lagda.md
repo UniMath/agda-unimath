@@ -24,7 +24,7 @@ consists of:
   `μ l1 l2 : X l1 → X l2 → X (l1 ⊔ l2)` satisfying the following associativity
   law:
 
-```md
+```text
   μ (l1 ⊔ l2) l3 (μ l1 l2 x y) z ＝ μ l1 (l2 ⊔ l3) x (μ l2 l3 y z).
 ```
 

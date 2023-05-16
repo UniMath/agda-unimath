@@ -77,7 +77,7 @@ The universal property of the pushout of a span `S` can also be stated as a
 pullback-property: a cocone `c ≐ pair i (pair j H)` with vertex `X` satisfies
 the universal property of the pushout of `S` if and only if the square
 
-```md
+```text
   Y^X -----> Y^B
    |          |
    |          |
