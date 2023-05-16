@@ -40,7 +40,7 @@ An _extension_ of a map `f : (x : A) → P x` along a map `i : A → B` is a map
 `g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g` restricts
 along `i` to `f`.
 
-```md
+```text
   A
   |  \
   i    f
@@ -92,7 +92,7 @@ module _
 
 ### Vertical composition of extensions of maps
 
-```md
+```text
   A
   |  \
   i    f
@@ -120,7 +120,7 @@ module _
 
 ### Horizontal composition of extensions of maps
 
-```md
+```text
            A
         /  |  \
       f    g    h
@@ -160,7 +160,7 @@ module _
 
 ### Left whiskering of extensions of maps
 
-```md
+```text
   A
   |  \
   i    f
@@ -183,7 +183,7 @@ module _
 
 ### Right whiskering of extensions of maps
 
-```md
+```text
   X - h -> A
            |  \
            i    f

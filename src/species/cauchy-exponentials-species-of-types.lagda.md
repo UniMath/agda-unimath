@@ -41,7 +41,7 @@ Cauchy composite `exp ∘ S`. Since the exponent species is defined as `X ↦ �
 the coefficients of the Cauchy exponential of `S` are defined as follows:
 species of types :
 
-```md
+```text
   X ↦ Σ ((U , V , e) : Relaxed-Σ-Decomposition X),  Π (u : U) → S (V u).
 ```
 

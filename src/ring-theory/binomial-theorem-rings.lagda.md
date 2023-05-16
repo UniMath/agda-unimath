@@ -34,7 +34,7 @@ The binomial theorem for rings asserts that for any two elements `x` and `y` of
 a commutative ring `R` and any natural number `n`, if `xy ＝ yx` holds then we
 have
 
-```md
+```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 

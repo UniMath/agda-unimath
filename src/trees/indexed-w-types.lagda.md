@@ -18,7 +18,7 @@ open import foundation.universe-levels
 containers. The main idea is that indexed W-types are initial algebras for the
 polynomial endofunctor
 
-```md
+```text
   (X : I → UU) ↦ Σ (a : A i), Π (b : B i a), X (f i a b),
 ```
 

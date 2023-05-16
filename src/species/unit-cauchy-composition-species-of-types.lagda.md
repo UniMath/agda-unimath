@@ -19,7 +19,7 @@ open import species.species-of-types
 
 The **unit** of Cauchy composition of species of types is the species
 
-```md
+```text
   X ↦ is-contr X.
 ```
 

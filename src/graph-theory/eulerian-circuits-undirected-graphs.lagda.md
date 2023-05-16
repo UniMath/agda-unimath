@@ -28,7 +28,7 @@ such that every edge in `G` is in the image of `T`. In other words, an Eulerian
 circuit `T` consists of `k`-gon `H` equipped with a graph homomorphism
 `f : H → G` that induces an equivalence
 
-```md
+```text
   Σ (unordered-pair-vertices-Polygon k H) (edge-Polygon k H) ≃
   Σ (unordered-pair-vertices-Undirected-Graph G) (edge-Undirected-Graph G)
 ```

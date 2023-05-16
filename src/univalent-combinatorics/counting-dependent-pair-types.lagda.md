@@ -169,7 +169,7 @@ counted if and only if the type `Σ A (¬ ∘ B)` can be counted. However, to av
 having to invoke function extensionality, we show that if `Σ A B` and each `B x`
 can be counted, then `A` can be counted if and only if
 
-```md
+```text
    count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))),
 ```
 

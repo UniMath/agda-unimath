@@ -85,7 +85,7 @@ module _
 
 Inequalities in preorders can be constructed by equational reasoning as follows:
 
-```md
+```text
 calculate-in-Preorder X
   chain-of-inequalities
   x ≤ y

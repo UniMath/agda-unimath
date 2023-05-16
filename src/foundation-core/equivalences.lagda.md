@@ -463,7 +463,7 @@ is-equiv-equiv' {f = f} {g} i j H K =
 
 We will assume a commuting square
 
-```md
+```text
           h
     A --------> C
     |           |
@@ -562,7 +562,7 @@ module _
 
 Equivalences can be constructed by equational reasoning in the following way:
 
-```md
+```text
 equivalence-reasoning
   X ≃ Y by equiv-1
     ≃ Z by equiv-2

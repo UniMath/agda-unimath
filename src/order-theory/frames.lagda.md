@@ -30,7 +30,7 @@ arbitrary joins in which meets distribute over suprema. The **distributive law
 for meets over suprema** states that in any
 [meet-suplattice](order-theory.meet-suplattices.md) `A`, we have
 
-```md
+```text
   x ∧ (⋁ᵢ yᵢ) ＝ ⋁ᵢ (x ∧ yᵢ)
 ```
 

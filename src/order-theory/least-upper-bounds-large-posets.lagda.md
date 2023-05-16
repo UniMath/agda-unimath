@@ -22,7 +22,7 @@ open import order-theory.upper-bounds-large-posets
 A **least upper bound** of a family of elements `a : I → P` in a large poset `P`
 is an element `x` in `P` such that the logial equivalence
 
-```md
+```text
   is-upper-bound-family-of-elements-Large-Poset P a y ↔ (x ≤ y)
 ```
 

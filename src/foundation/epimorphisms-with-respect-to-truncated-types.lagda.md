@@ -29,7 +29,7 @@ open import foundation-core.universe-levels
 A map `f : A → B` is said to be a **`k`-epimorphism** if the precomposition
 function
 
-```md
+```text
   - ∘ f : (B → X) → (A → X)
 ```
 

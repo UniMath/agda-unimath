@@ -31,7 +31,7 @@ open import species.species-of-types-in-subuniverses
 The Dirichlet product of two species of subuniverse `S` and `T` from `P` to `Q`
 on `X` is defined as
 
-```md
+```text
   Σ (k : P) (Σ (k' : P) (Σ (e : k × k' ≃ X) S(k) × T(k')))
 ```
 

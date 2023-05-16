@@ -49,7 +49,7 @@ Bezout's lemma shows that for any two natural numbers `x` and `y` there exist
 `k` and `l` such that `dist-ℕ (kx,ly) = gcd(x,y)`. To prove this, note that the
 predicate `P : ℕ → UU lzero` given by
 
-```md
+```text
   P z := Σ (k : ℕ), Σ (l : ℕ), dist-ℕ (kx, ly) = z
 ```
 

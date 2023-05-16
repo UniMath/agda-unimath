@@ -25,7 +25,7 @@ open import order-theory.posets
 A **greatest lower bound** of `a` and `b` in a poset `P` is an element `x` such
 that the logical equivalence
 
-```md
+```text
   ((y ≤ a) ∧ (y ≤ b)) ⇔ (y ≤ x)
 ```
 
@@ -33,7 +33,7 @@ holds for every element `y` in `P`. Similarly, a **greatest lower bound** of a
 family `a : I → P` of elements of `P` is an element `x` of `P` such that the
 logical equivalence
 
-```md
+```text
   (∀ᵢ (y ≤ aᵢ)) ⇔ (y ≤ x)
 ```
 

@@ -40,7 +40,7 @@ open import species.unit-cauchy-composition-species-of-types
 A species `S : Inhabited-Type → UU l` can be thought of as the analytic
 endofunctor
 
-```md
+```text
   X ↦ Σ (A : Inhabited-Type) (S A) × (A → X)
 ```
 
