@@ -11,6 +11,7 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.decidable-total-order-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -25,6 +26,8 @@ open import group-theory.iterated-cartesian-products-concrete-groups
 open import lists.arrays
 open import lists.functoriality-lists
 open import lists.lists
+open import lists.concatenation-lists
+open import lists.sort-by-insertion-lists
 
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
@@ -71,9 +74,9 @@ The cartesian product of the cycle prime decomposition of `n` and `m` is equal
 to the cycle prime decomposition of `mul-ℕ n m`
 
 ```agda
-eq-product-cycle-prime-decomposition-ℕ :
+equiv-product-cycle-prime-decomposition-ℕ :
   (n m : ℕ) → (H : leq-ℕ 1 n) → (I : leq-ℕ 1 m) →
-  ( cycle-prime-decomposition-ℕ n H × cycle-prime-decomposition-ℕ m I) ＝
+  ( cycle-prime-decomposition-ℕ n H × cycle-prime-decomposition-ℕ m I) ≃
   cycle-prime-decomposition-ℕ (mul-ℕ n m) (preserves-leq-mul-ℕ 1 n 1 m H I)
-eq-product-cycle-prime-decomposition-ℕ = {!!}
+equiv-product-cycle-prime-decomposition-ℕ n m H I = {!!}
 ```

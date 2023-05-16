@@ -37,6 +37,7 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.homotopies
 
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types

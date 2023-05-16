@@ -40,6 +40,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.negation
+open import foundation.homotopies
 
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
@@ -451,4 +453,69 @@ abstract
   retr-permutation-list-transpositions-Fin (succ-ℕ n) f y =
     retr-permutation-list-transpositions-Fin'
       n f (map-equiv f (inr star)) refl y (map-equiv f y) refl
+```
+
+```agda
+permutation-list-standard-transpositions-Fin :
+  (n : ℕ) →
+  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j))) →
+  Permutation n
+permutation-list-standard-transpositions-Fin n =
+  fold-list
+    ( id-equiv)
+    ( λ (_ , neq) p →
+      standard-transposition (has-decidable-equality-Fin n) neq ∘e p)
+
+list-standard-transpositions-permutation-Fin :
+  (n : ℕ) (f : Permutation n) →
+  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j) ))
+list-standard-transpositions-permutation-Fin n f =
+  map-list
+    ( λ P →
+      ( element-two-elements-transposition-Fin P ,
+        other-element-two-elements-transposition-Fin P) ,
+      unequal-elements-two-elements-transposition-Fin P)
+    ( list-transpositions-permutation-Fin n f)
+
+private
+  htpy-permutation-list :
+    (n : ℕ)
+    (l : list
+      (2-Element-Decidable-Subtype lzero (Fin (succ-ℕ n)))) →
+    htpy-equiv
+      ( permutation-list-standard-transpositions-Fin
+        ( succ-ℕ n)
+        ( map-list
+          ( λ P →
+            ( element-two-elements-transposition-Fin P ,
+              other-element-two-elements-transposition-Fin P) ,
+            unequal-elements-two-elements-transposition-Fin P)
+          ( l)))
+      ( permutation-list-transpositions l)
+  htpy-permutation-list n nil = refl-htpy
+  htpy-permutation-list n (cons P l) =
+    ( htpy-two-elements-transpositon-Fin P ·r
+      map-equiv
+        ( permutation-list-standard-transpositions-Fin
+          ( succ-ℕ n)
+          ( map-list
+            ( λ P →
+              ( element-two-elements-transposition-Fin P ,
+                other-element-two-elements-transposition-Fin P) ,
+              unequal-elements-two-elements-transposition-Fin P)
+           ( l)))) ∙h
+    ( map-transposition P ·l
+      htpy-permutation-list n l)
+
+retr-permutation-list-standard-transpositions-Fin :
+  (n : ℕ) (f : Permutation n) →
+  htpy-equiv
+    ( permutation-list-standard-transpositions-Fin
+      ( n)
+      ( list-standard-transpositions-permutation-Fin n f))
+    ( f)
+retr-permutation-list-standard-transpositions-Fin 0 f ()
+retr-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
+  htpy-permutation-list n (list-transpositions-permutation-Fin (succ-ℕ n) f) ∙h
+  retr-permutation-list-transpositions-Fin (succ-ℕ n) f
 ```

@@ -22,6 +22,7 @@ open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.addition-natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
@@ -999,6 +1000,22 @@ is-prime-list-permute-list-ℕ p t P =
         ( x)
         ( I)))
 
+is-decomposition-list-concat-list-ℕ :
+  (n m : ℕ) (p q : list ℕ) →
+  is-decomposition-list-ℕ n p → is-decomposition-list-ℕ m q →
+  is-decomposition-list-ℕ (mul-ℕ n m) (concat-list p q)
+is-decomposition-list-concat-list-ℕ n m p q Dp Dq =
+  ( eq-mul-list-concat-list-ℕ p q ∙
+    ( ap (mul-ℕ (mul-list-ℕ p)) Dq ∙
+      ap (λ n → mul-ℕ n m) Dp))
+
+is-decomposition-list-permute-list-ℕ :
+  (n : ℕ) (p : list ℕ) (t : Permutation (length-list p)) →
+  is-decomposition-list-ℕ n p →
+  is-decomposition-list-ℕ n (permute-list p t)
+is-decomposition-list-permute-list-ℕ n p t D =
+  inv (invariant-permutation-mul-list-ℕ p t) ∙ D
+
 is-prime-decomposition-list-sort-concatenation-ℕ :
   (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
   is-prime-decomposition-list-ℕ x p →
@@ -1032,6 +1049,24 @@ pr1
 pr2
   ( pr2
     ( is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq)) =
-  {!!}
+  tr
+    ( λ p → is-decomposition-list-ℕ (mul-ℕ x y) p)
+    ( inv
+      ( eq-permute-list-permutation-insertion-sort-list
+        ( ℕ-Decidable-Total-Order)
+        ( concat-list p q)))
+    ( is-decomposition-list-permute-list-ℕ
+      ( mul-ℕ x y)
+      ( concat-list p q)
+      ( permutation-insertion-sort-list
+        ( ℕ-Decidable-Total-Order)
+        ( concat-list p q))
+      ( is-decomposition-list-concat-list-ℕ
+        ( x)
+        ( y)
+        ( p)
+        ( q)
+        ( is-decomposition-list-is-prime-decomposition-list-ℕ x p Dp)
+        ( is-decomposition-list-is-prime-decomposition-list-ℕ y q Dq)))
 
 ```

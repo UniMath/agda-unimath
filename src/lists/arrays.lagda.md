@@ -87,6 +87,8 @@ module _
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
 ```
 
+### The definition of `fold-vec`
+
 ```agda
 fold-vec :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
@@ -198,4 +200,20 @@ module _
     is-head x (vec-list l)
   is-in-vec-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
     is-in-tail x y (vec-list l) (is-in-vec-list-is-in-list l x I)
+```
+
+### Link between `fold-list` and `fold-vec`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (b : B)
+  (μ : A → (B → B))
+  where
+  htpy-fold-list-fold-vec :
+    (l : list A) →
+    fold-vec b μ (vec-list l) ＝ fold-list b μ l
+  htpy-fold-list-fold-vec nil = refl
+  htpy-fold-list-fold-vec (cons x l) =
+    ap (μ x) (htpy-fold-list-fold-vec l)
 ```

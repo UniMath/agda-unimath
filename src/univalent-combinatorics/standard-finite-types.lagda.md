@@ -88,6 +88,18 @@ is-neg-one-is-not-inl-Fin k (inr star) H = refl
 inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inr-Fin (succ-ℕ k) (inl x) = inl (inr-Fin k x)
 inr-Fin (succ-ℕ k) (inr star) = inr star
+
+neq-inl-Fin-inr-Fin :
+  (n : ℕ) → (k : Fin n) → ¬ (inl-Fin n k ＝ inr-Fin n k)
+neq-inl-Fin-inr-Fin (succ-ℕ n) (inl k) =
+  neq-inl-Fin-inr-Fin n k ∘ is-injective-inl
+neq-inl-Fin-inr-Fin (succ-ℕ n) (inr star) = neq-inl-inr
+
+neq-inr-Fin-inl-Fin :
+  (n : ℕ) → (k : Fin n) → ¬ (inr-Fin n k ＝ inl-Fin n k)
+neq-inr-Fin-inl-Fin (succ-ℕ n) (inl k) =
+  neq-inr-Fin-inl-Fin n k ∘ is-injective-inl
+neq-inr-Fin-inl-Fin (succ-ℕ n) (inr k) = neq-inr-inl
 ```
 
 ### The standard finite types in an arbitrary universe

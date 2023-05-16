@@ -52,6 +52,7 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
 ```
 
 </details>
@@ -448,6 +449,20 @@ module _
             ( refl)
             ( refl))
 
+  element-two-elements-transposition : X
+  element-two-elements-transposition =
+    pr1 (two-elements-transposition)
+
+  other-element-two-elements-transposition : X
+  other-element-two-elements-transposition =
+    pr1 (pr2 two-elements-transposition)
+
+  unequal-elements-two-elements-transposition :
+    ¬ ( element-two-elements-transposition ＝
+        other-element-two-elements-transposition)
+  unequal-elements-two-elements-transposition =
+    pr1 (pr2 (pr2 two-elements-transposition))
+
   abstract
     cases-eq-two-elements-transposition :
       (x y : X) (np : ¬ (Id x y)) →
@@ -551,6 +566,77 @@ module _
           ( eX)
           ( pr1 (pr2 two-elements-transposition))
           ( y))
+```
+
+#### The case of `Fin n`
+
+```agda
+module _
+  {n : ℕ}
+  (Y : 2-Element-Decidable-Subtype (lzero) (Fin n))
+  where
+
+  two-elements-transposition-Fin :
+    Σ ( Fin n)
+      ( λ x →
+        Σ ( Fin n)
+          ( λ y →
+            Σ ( ¬ (Id x y))
+              ( λ np →
+                Id ( standard-2-Element-Decidable-Subtype
+                     ( has-decidable-equality-Fin n)
+                     ( np))
+                   ( Y))))
+  two-elements-transposition-Fin =
+    tr
+      ( λ p →
+        Σ ( Fin n)
+          ( λ x →
+            Σ ( Fin n)
+              ( λ y →
+                Σ ( ¬ (Id x y))
+                  ( λ np →
+                    Id
+                      ( standard-2-Element-Decidable-Subtype
+                        ( p)
+                        ( np))
+                     ( Y)))))
+      ( eq-is-prop (is-prop-has-decidable-equality))
+      ( two-elements-transposition (count-Fin n) Y)
+
+  element-two-elements-transposition-Fin : Fin n
+  element-two-elements-transposition-Fin =
+    pr1 (two-elements-transposition-Fin)
+
+  other-element-two-elements-transposition-Fin : Fin n
+  other-element-two-elements-transposition-Fin =
+    pr1 (pr2 two-elements-transposition-Fin)
+
+  unequal-elements-two-elements-transposition-Fin :
+    ¬ ( element-two-elements-transposition-Fin ＝
+        other-element-two-elements-transposition-Fin)
+  unequal-elements-two-elements-transposition-Fin =
+    pr1 (pr2 (pr2 two-elements-transposition-Fin))
+
+  eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin :
+    standard-2-Element-Decidable-Subtype
+      ( has-decidable-equality-Fin n)
+      ( unequal-elements-two-elements-transposition-Fin) ＝
+    Y
+  eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin =
+    pr2 (pr2 (pr2 two-elements-transposition-Fin))
+
+  htpy-two-elements-transpositon-Fin :
+    htpy-equiv
+      ( standard-transposition
+        ( has-decidable-equality-Fin n)
+        ( unequal-elements-two-elements-transposition-Fin))
+      ( transposition Y)
+  htpy-two-elements-transpositon-Fin =
+    htpy-eq
+      ( ap
+        map-transposition
+        eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin)
 ```
 
 ### Transpositions can be transported along equivalences
@@ -1132,7 +1218,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
+  {l1 : Level}
   {X : UU l1}
   (H : has-decidable-equality X)
   {x y z : X}

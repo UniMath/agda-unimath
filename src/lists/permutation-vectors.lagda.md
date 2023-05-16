@@ -9,6 +9,7 @@ module lists.permutation-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.transpositions
 open import finite-group-theory.permutations-standard-finite-types
 open import finite-group-theory.transpositions-standard-finite-types
 
@@ -20,12 +21,18 @@ open import foundation.universe-levels
 open import foundation.contractible-types
 open import foundation.unit-type
 open import foundation.coproduct-types
+open import foundation.functoriality-coproduct-types
+open import foundation.negation
+open import foundation.equivalence-extensionality
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 
 open import linear-algebra.vectors
 
 open import lists.arrays
-
+open import lists.lists
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-decidable-subtypes
 ```
 
 </details>
@@ -118,6 +125,25 @@ module _
           ( v)
           ( compute-permute-vec-id-equiv n v))
 
+  compute-equiv-coprod-permutation-id-equiv-permute-vec :
+    (n : ℕ)
+    (v : vec A n)
+    (x : A)
+    (t : Permutation n) →
+    permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv) ＝
+    (x ∷ permute-vec n v t)
+  compute-equiv-coprod-permutation-id-equiv-permute-vec n v x t = 
+    eq-Eq-vec
+      ( succ-ℕ n)
+      ( permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv))
+      ( x ∷ permute-vec n v t)
+      ( refl ,
+        ( Eq-eq-vec
+          ( n)
+          ( _)
+          ( permute-vec n v t)
+          ( refl)))
+
   ap-permute-vec :
     {n : ℕ}
     (a : Permutation n)
@@ -184,20 +210,151 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B))
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (μ : A → (B → B))
   where
 
   commutative-fold-vec : UU (l1 ⊔ l2)
   commutative-fold-vec = (a1 a2 : A) (b : B) → μ a1 (μ a2 b) ＝ μ a2 (μ a1 b)
 
-  invariant-permutation-fold-vec :
-    {n : ℕ} → (v : vec A n) → (t : Permutation n) →
-    fold-vec b μ v ＝ fold-vec b μ (permute-vec n v t)
-  invariant-permutation-fold-vec {0} v t = refl
-  invariant-permutation-fold-vec {1} (x ∷ empty-vec) t =
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (b : B)
+  (μ : A → (B → B))
+  (C : commutative-fold-vec μ)
+  where
+
+  invariant-swap-two-last-elements-transposition-fold-vec :
+    {n : ℕ} → (v : vec A (succ-ℕ (succ-ℕ n))) →
+    fold-vec b μ v ＝
+    fold-vec
+      ( b)
+      ( μ)
+      ( permute-vec (succ-ℕ (succ-ℕ n))
+      ( v)
+      ( swap-two-last-elements-transposition-Fin n))
+  invariant-swap-two-last-elements-transposition-fold-vec {n} (y ∷ z ∷ v) =
+    C y z (fold-vec b μ v) ∙
+    inv
+      ( ap
+        ( fold-vec b μ)
+        ( compute-swap-two-last-elements-transposition-Fin-permute-vec
+          ( n)
+          ( v)
+          ( y)
+          ( z) ))
+
+  invariant-adjacent-transposition-fold-vec :
+    {n : ℕ} → (v : vec A (succ-ℕ n)) → (k : Fin n) →
+    fold-vec b μ v ＝
+    fold-vec b μ (permute-vec (succ-ℕ n) v (adjacent-transposition-Fin n k))
+  invariant-adjacent-transposition-fold-vec {succ-ℕ n} (x ∷ v) (inl k) =
+     ap
+       ( μ x)
+       ( invariant-adjacent-transposition-fold-vec v k ) ∙
+     inv
+       ( ap
+         ( fold-vec b μ)
+         ( compute-equiv-coprod-permutation-id-equiv-permute-vec
+           ( succ-ℕ n)
+           ( v)
+           ( x)
+           ( adjacent-transposition-Fin n k)))
+  invariant-adjacent-transposition-fold-vec {succ-ℕ n} (x ∷ v) (inr _) =
+    invariant-swap-two-last-elements-transposition-fold-vec (x ∷ v)
+
+  invariant-list-adjacent-transpositions-fold-vec :
+    {n : ℕ} (v : vec A (succ-ℕ n)) (l : list (Fin n)) →
+    fold-vec b μ v ＝
+    fold-vec
+      ( b)
+      ( μ)
+      ( permute-vec
+        ( succ-ℕ n)
+        ( v)
+        ( permutation-list-adjacent-transpositions n l))
+  invariant-list-adjacent-transpositions-fold-vec {n} v nil =
+    ap (fold-vec b μ) (inv (compute-permute-vec-id-equiv (succ-ℕ n) v))
+  invariant-list-adjacent-transpositions-fold-vec {n} v (cons x l) =
+    ( invariant-adjacent-transposition-fold-vec v x ∙
+      ( ( invariant-list-adjacent-transpositions-fold-vec
+          ( permute-vec (succ-ℕ n) v (adjacent-transposition-Fin n x))
+          ( l)) ∙
+        ( ap
+          ( fold-vec b μ)
+          ( inv
+            ( compute-composition-permute-vec
+              ( succ-ℕ n)
+              ( v)
+              ( adjacent-transposition-Fin n x)
+              ( permutation-list-adjacent-transpositions n l))))))
+
+  invariant-transposition-fold-vec :
+    {n : ℕ} (v : vec A (succ-ℕ n)) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j)) →
+    fold-vec b μ v ＝
+    fold-vec b μ (permute-vec (succ-ℕ n) v (transposition-Fin (succ-ℕ n) i j neq))
+  invariant-transposition-fold-vec {n} v i j neq =
+    ( ( invariant-list-adjacent-transpositions-fold-vec
+        ( v)
+        ( list-adjacent-transpositions-transposition-Fin n i j))∙
+      ( ap
+        ( λ t → fold-vec b μ (permute-vec (succ-ℕ n) v t))
+        ( eq-htpy-equiv
+          {e = permutation-list-adjacent-transpositions
+                 ( n)
+                 ( list-adjacent-transpositions-transposition-Fin n i j)}
+          {e' = transposition-Fin (succ-ℕ n) i j neq}
+          ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
+            ( n)
+            ( i)
+            ( j)
+            ( neq)))))
+
+  invariant-list-transpositions-fold-vec :
+    {n : ℕ}
+    (v : vec A n)
+    (l : list (Σ (Fin n × Fin n)
+                 ( λ (i , j) → ¬ (i ＝ j)))) →
+    fold-vec b μ v ＝
+    fold-vec
+      ( b)
+      ( μ)
+      ( permute-vec
+        ( n)
+        ( v)
+        ( permutation-list-standard-transpositions-Fin n l ))
+  invariant-list-transpositions-fold-vec {n} v nil =
     ap
-      ( λ p → μ p b)
-      ( ap (λ k → (cons-functional-vec 0 x empty-functional-vec) k)
-      ( eq-is-contr' is-contr-Fin-one-ℕ (inr star) (pr1 t (inr star))))
-  invariant-permutation-fold-vec {succ-ℕ (succ-ℕ n)} v t = {!!}
+      ( fold-vec b μ)
+      ( inv ( compute-permute-vec-id-equiv n v))
+  invariant-list-transpositions-fold-vec {0} v (cons _ _) = refl
+  invariant-list-transpositions-fold-vec {succ-ℕ n} v (cons ((i , j) , neq) l) =
+    ( invariant-transposition-fold-vec v i j neq ∙
+      ( ( invariant-list-transpositions-fold-vec
+          ( permute-vec (succ-ℕ n) v (transposition-Fin (succ-ℕ n) i j neq))
+          ( l)) ∙
+        ( ap
+          ( fold-vec b μ)
+          ( inv
+            ( compute-composition-permute-vec
+              ( succ-ℕ n)
+              ( v)
+              ( transposition-Fin (succ-ℕ n) i j neq)
+              ( permutation-list-standard-transpositions-Fin (succ-ℕ n) l))))))
+
+  invariant-permutation-fold-vec :
+    {n : ℕ} → (v : vec A n) → (f : Permutation n) →
+    fold-vec b μ v ＝ fold-vec b μ (permute-vec n v f)
+  invariant-permutation-fold-vec {n} v f =
+    ( ( invariant-list-transpositions-fold-vec
+        ( v)
+        ( list-standard-transpositions-permutation-Fin n f)) ∙
+      ( ap
+        ( λ f → fold-vec b μ (permute-vec n v f))
+        ( eq-htpy-equiv
+          {e =
+            permutation-list-standard-transpositions-Fin
+              ( n)
+              ( list-standard-transpositions-permutation-Fin n f)}
+          {e' = f}
+          ( retr-permutation-list-standard-transpositions-Fin n f))))
 ```

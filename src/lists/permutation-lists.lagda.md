@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.equality-dependent-pair-types
 
 open import linear-algebra.vectors
 
@@ -71,6 +72,24 @@ module _
 ```
 
 ## Properties
+
+### Link between `permute-list` and `permute-vec`
+
+```agda
+  eq-vec-list-permute-list :
+    (l : list A) (f : Permutation (length-list l)) →
+    permute-vec (length-list l) (vec-list l) f  ＝
+    tr
+      ( vec A)
+      (  _)
+      ( vec-list ( permute-list l f))
+  eq-vec-list-permute-list l f  =
+    inv
+      ( pr2
+        ( pair-eq-Σ
+          ( isretr-vec-list
+            ( (length-list l , permute-vec (length-list l) (vec-list l) f)))))
+```
 
 ### If a function `f` from `vec` to `vec` is a permutation of vectors then `list-vec ∘ f ∘ vec-list` is a permutation of lists
 
@@ -131,4 +150,33 @@ module _
           ( t)
           ( x)
           ( is-in-vec-list-is-in-list l x I)))
+```
+
+### If `(μ : A → (B → B))` satisfies a property of commutativity, then for `b : B` the function `fold-list b μ` is invariant by permutation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (b : B)
+  (μ : A → (B → B))
+  (C : commutative-fold-vec μ)
+  where
+
+  invariant-fold-vec-tr :
+    {n m : ℕ} (v : vec A n) (eq : n ＝ m) →
+    fold-vec b μ (tr (vec A) eq v) ＝ fold-vec b μ v
+  invariant-fold-vec-tr v refl = refl
+
+  invariant-permutation-fold-list :
+    (l : list A) → (f : Permutation (length-list l)) →
+    fold-list b μ l ＝ fold-list b μ (permute-list l f)
+  invariant-permutation-fold-list l f =
+    ( inv (htpy-fold-list-fold-vec b μ l) ∙
+      ( invariant-permutation-fold-vec b μ C (vec-list l) f ∙
+        ( ap (fold-vec b μ) (eq-vec-list-permute-list l f) ∙
+          ( ( invariant-fold-vec-tr
+              { m = length-list l}
+              ( vec-list (permute-list l f))
+              ( _)) ∙
+            ( htpy-fold-list-fold-vec b μ (permute-list l f))))))
 ```
