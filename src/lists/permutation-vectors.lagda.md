@@ -28,6 +28,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 
 open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors
 
 open import lists.arrays
 open import lists.lists
@@ -357,4 +358,36 @@ module _
               ( list-standard-transpositions-permutation-Fin n f)}
           {e' = f}
           ( retr-permutation-list-standard-transpositions-Fin n f))))
+```
+
+### `map-vec` of the permutation of a vector
+
+```agda
+eq-map-vec-permute-vec :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) {n : ℕ} (v : vec A n) (t : Permutation n) →
+  permute-vec n (map-vec f v) t ＝
+  map-vec f (permute-vec n v t)
+eq-map-vec-permute-vec f {n} v t =
+  ( ( ap
+      ( λ w →
+        ( listed-vec-functional-vec
+          ( n)
+          ( functional-vec-vec n w ∘ (map-equiv t)))))
+      ( inv (map-vec-map-functional-vec f n v) ) ∙
+    ( ( ap
+        ( λ p →
+          listed-vec-functional-vec
+            ( n)
+            ( p ∘ map-equiv t))
+        ( isretr-functional-vec-vec
+          ( n)
+          ( map-functional-vec n f (functional-vec-vec n v)))) ∙
+      ( ( ap
+          ( listed-vec-functional-vec n ∘ map-functional-vec n f)
+          ( inv
+            ( isretr-functional-vec-vec
+              ( n)
+              ( λ z → functional-vec-vec n v (map-equiv t z))))) ∙
+        ( map-vec-map-functional-vec f n (permute-vec n v t)))))
 ```

@@ -1069,4 +1069,13 @@ pr2
         ( is-decomposition-list-is-prime-decomposition-list-ℕ x p Dp)
         ( is-decomposition-list-is-prime-decomposition-list-ℕ y q Dq)))
 
+prime-decomposition-list-sort-concatenation-ℕ :
+  (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
+  is-prime-decomposition-list-ℕ x p →
+  is-prime-decomposition-list-ℕ y q →
+  prime-decomposition-list-ℕ (mul-ℕ x y) (preserves-leq-mul-ℕ 1 x 1 y H I)
+pr1 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
+  insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
+pr2 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
+  is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq
 ```

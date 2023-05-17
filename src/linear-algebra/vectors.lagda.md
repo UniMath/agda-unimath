@@ -246,6 +246,14 @@ module _
       ( issec-functional-vec-vec n)
       ( isretr-functional-vec-vec n)
 
+  is-equiv-functional-vec-vec :
+    (n : ℕ) → is-equiv (functional-vec-vec n)
+  is-equiv-functional-vec-vec n =
+    is-equiv-has-inverse
+      ( listed-vec-functional-vec n)
+      ( isretr-functional-vec-vec n)
+      ( issec-functional-vec-vec n)
+
   compute-vec : (n : ℕ) → functional-vec A n ≃ vec A n
   pr1 (compute-vec n) = listed-vec-functional-vec n
   pr2 (compute-vec n) = is-equiv-listed-vec-functional-vec n
@@ -409,4 +417,15 @@ module _
       ( v)
   cons-head-tail-functional-vec n v =
     eq-htpy (htpy-cons-head-tail-functional-vec n v)
+```
+
+### Computing the transport of a vector over its size
+
+```agda
+compute-tr-vec :
+  {l : Level} {A : UU l}
+  {n m : ℕ} (p : succ-ℕ n ＝ succ-ℕ m) (v : vec A n) (x : A) →
+  tr (vec A) p (x ∷ v) ＝
+  (x ∷ tr (vec A) (is-injective-succ-ℕ p) v)
+compute-tr-vec refl v x = refl
 ```

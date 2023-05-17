@@ -29,10 +29,12 @@ open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
+open import foundation.type-arithmetic-cartesian-product-types
 
 open import lists.arrays
 open import lists.lists
 open import lists.permutation-lists
+open import lists.concatenation-lists
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -118,6 +120,22 @@ equiv-iterated-product-Fin-recursive-lists :
 equiv-iterated-product-Fin-recursive-lists nil = id-equiv
 equiv-iterated-product-Fin-recursive-lists (cons x l) =
   equiv-prod id-equiv (equiv-iterated-product-Fin-recursive-lists l)
+```
+
+### The cartesian product of two iterated cartesian product (via list) is the iterated cartesian product of the concatenation of the corresponding lists
+
+```agda
+equiv-product-iterated-product-lists :
+  {l : Level} (p q : list (UU l)) →
+  (iterated-product-lists p × iterated-product-lists q ) ≃
+  iterated-product-lists (concat-list p q)
+equiv-product-iterated-product-lists nil q =
+  left-unit-law-prod-is-contr (is-contr-raise-unit)
+equiv-product-iterated-product-lists (cons x p) q =
+  ( ( equiv-prod
+      ( id-equiv)
+      ( equiv-product-iterated-product-lists p q)) ∘e
+    ( associative-prod x (iterated-product-lists p) (iterated-product-lists q)))
 ```
 
 ### Iterated cartesian product is closed under permutations

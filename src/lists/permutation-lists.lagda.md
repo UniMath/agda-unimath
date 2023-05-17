@@ -17,12 +17,18 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.equality-dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.coproduct-types
+open import foundation.propositions
 
 open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors
 
 open import lists.arrays
 open import lists.lists
 open import lists.permutation-vectors
+open import lists.functoriality-lists
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -72,6 +78,18 @@ module _
 ```
 
 ## Properties
+
+### The length of a permuted list
+
+```agda
+  length-permute-list :
+    (l : list A) (t : Permutation (length-list l)) →
+    length-list (permute-list l t) ＝ (length-list l)
+  length-permute-list l t =
+    compute-length-list-list-vec
+      ( length-list l)
+      ( permute-vec (length-list l) (vec-list l) t)
+```
 
 ### Link between `permute-list` and `permute-vec`
 
@@ -179,4 +197,119 @@ module _
               ( vec-list (permute-list l f))
               ( _)) ∙
             ( htpy-fold-list-fold-vec b μ (permute-list l f))))))
+```
+
+### `map-list` of the permutation of a list
+
+```agda
+compute-tr-permute-vec :
+  {l : Level} {A : UU l} {n m : ℕ}
+  (e : n ＝ m) (v : vec A n) (t : Permutation m) →
+  tr
+    ( vec A)
+    ( e)
+    ( permute-vec
+      ( n)
+      ( v)
+      ( tr Permutation (inv e) t)) ＝
+  permute-vec
+    ( m)
+    ( tr (vec A) e v)
+    ( t)
+compute-tr-permute-vec refl v t = refl
+
+compute-tr-map-vec :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) {n m : ℕ} (p : n ＝ m) (v : vec A n ) →
+  tr (vec B) p (map-vec f v) ＝ map-vec f (tr (vec A) p v)
+compute-tr-map-vec f refl v = refl
+
+helper-compute-list-vec-map-vec-permute-vec-vec-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) (p : list A) (t : Permutation (length-list p)) →
+  tr
+    ( vec B)
+    ( inv (length-permute-list p t))
+    ( map-vec f (permute-vec (length-list p) (vec-list p) t)) ＝
+   map-vec f (vec-list (permute-list p t))
+helper-compute-list-vec-map-vec-permute-vec-vec-list f p t =
+   ( ( compute-tr-map-vec
+       ( f)
+       ( inv (length-permute-list p t))
+       ( permute-vec (length-list p) (vec-list p) t)) ∙
+     ( ( ap
+         ( λ P →
+           map-vec
+             ( f)
+             ( tr (vec _) P (permute-vec (length-list p) (vec-list p) t)))
+         ( eq-is-prop (is-set-ℕ _ _))) ∙
+       ( ap
+         ( map-vec f)
+         ( pr2
+           ( pair-eq-Σ
+             ( inv
+               ( isretr-vec-list
+                 ( length-list p ,
+                   permute-vec (length-list p) (vec-list p) t))))))))
+
+compute-list-vec-map-vec-permute-vec-vec-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) (p : list A) (t : Permutation (length-list p)) →
+  list-vec
+    ( length-list p)
+    ( map-vec f (permute-vec (length-list p) (vec-list p) t)) ＝
+  list-vec
+    ( length-list (permute-list p t))
+    ( map-vec f (vec-list (permute-list p t)))
+compute-list-vec-map-vec-permute-vec-vec-list f p t =
+  ap
+    ( λ p → list-vec (pr1 p) (pr2 p))
+    ( eq-pair-Σ
+      ( inv (length-permute-list p t))
+      ( ( helper-compute-list-vec-map-vec-permute-vec-vec-list f p t)))
+
+private
+  -- I think that this lemma is already in the library, but I didn't find it
+  lemma-tr :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+    (x y : A) (p : x ＝ y) (b : B y) →
+    tr B p (tr B (inv p) b) ＝ b
+  lemma-tr x y refl b = refl
+
+eq-map-list-permute-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) (p : list A) (t : Permutation (length-list p)) →
+  permute-list (map-list f p) (tr Permutation (inv (length-map-list f p)) t) ＝
+  map-list f (permute-list p t)
+eq-map-list-permute-list {B = B} f p t =
+  ( ( ap
+      ( λ (n , p) → list-vec n p)
+      ( eq-pair-Σ
+        ( length-map-list f p)
+        ( ( ap
+            ( λ x →
+              tr
+                ( vec B)
+                ( length-map-list f p)
+                ( permute-vec
+                  ( length-list (map-list f p))
+                  ( x)
+                  ( tr Permutation (inv (length-map-list f p)) t)))
+            ( vec-list-map-list-map-vec-list' f p)) ∙
+          ( ( compute-tr-permute-vec
+              ( length-map-list f p)
+              ( tr (vec B) (inv (length-map-list f p)) (map-vec f (vec-list p)))
+              ( t)) ∙
+            ( ap
+              ( λ v → permute-vec (length-list p) v t)
+              ( lemma-tr
+                ( length-list (map-list f p))
+                ( length-list p)
+                ( length-map-list f p)
+                ( map-vec f (vec-list p)) )))))) ∙
+    ( ( ap
+        ( list-vec (length-list p))
+        ( eq-map-vec-permute-vec f (vec-list p) t)) ∙
+      ( compute-list-vec-map-vec-permute-vec-vec-list f p t ∙
+        ( map-list-map-vec-list f (permute-list p t)))))
 ```
