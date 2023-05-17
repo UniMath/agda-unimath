@@ -13,8 +13,8 @@ open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
@@ -55,11 +55,12 @@ module _
     ((l : list (type-Decidable-Total-Order X)) → is-sorted-list X (f l))
 
   is-permutation-list-is-sort-list :
-    is-sort-list  → is-permutation-list f
+    is-sort-list → is-permutation-list f
   is-permutation-list-is-sort-list S = pr1 (S)
 
   permutation-list-is-sort-list :
-    is-sort-list  → (l : list (type-Decidable-Total-Order X)) → Permutation (length-list l)
+    is-sort-list → (l : list (type-Decidable-Total-Order X)) →
+    Permutation (length-list l)
   permutation-list-is-sort-list S l =
     permutation-is-permutation-list f (is-permutation-list-is-sort-list S) l
 
@@ -72,10 +73,9 @@ module _
       ( is-permutation-list-is-sort-list S) l
 
   is-sorting-list-is-sort-list :
-    is-sort-list  →
+    is-sort-list →
     (l : list (type-Decidable-Total-Order X)) → is-sorted-list X (f l)
   is-sorting-list-is-sort-list S = pr2 (S)
-
 ```
 
 ## Properties

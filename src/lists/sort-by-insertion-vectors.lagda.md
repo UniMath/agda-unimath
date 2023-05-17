@@ -132,9 +132,19 @@ module _
       ( helper-permutation-insertion-sort-vec x y v p)
   helper-eq-permute-vec-permutation-insertion-sort-vec x y v (inl _) =
     inv (compute-permute-vec-id-equiv (succ-ℕ (succ-ℕ _)) (x ∷ y ∷ v))
-  helper-eq-permute-vec-permutation-insertion-sort-vec {zero-ℕ} x y empty-vec (inr _) =
+  helper-eq-permute-vec-permutation-insertion-sort-vec
+    {0}
+    ( x)
+    ( y)
+    ( empty-vec)
+    ( inr _) =
     refl
-  helper-eq-permute-vec-permutation-insertion-sort-vec {succ-ℕ n} x y (z ∷ v) (inr p) =
+  helper-eq-permute-vec-permutation-insertion-sort-vec
+    {succ-ℕ n}
+    ( x)
+    ( y)
+    ( z ∷ v)
+    ( inr p) =
     eq-Eq-vec
       ( succ-ℕ (succ-ℕ (succ-ℕ n)))
       ( helper-insertion-sort-vec x y (z ∷ v) (inr p))
@@ -201,7 +211,9 @@ module _
     insertion-sort-vec v ＝ permute-vec n v (permutation-insertion-sort-vec v)
   eq-permute-vec-permutation-insertion-sort-vec {0} empty-vec = refl
   eq-permute-vec-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
-  eq-permute-vec-permutation-insertion-sort-vec {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
+  eq-permute-vec-permutation-insertion-sort-vec
+    {succ-ℕ (succ-ℕ n)}
+    ( x ∷ y ∷ v) =
     ( ( helper-eq-permute-vec-permutation-insertion-sort-vec
         ( x)
         ( head-vec (insertion-sort-vec (y ∷ v)))

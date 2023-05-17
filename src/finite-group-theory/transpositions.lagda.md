@@ -50,9 +50,9 @@ open import lists.lists
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
 ```
 
 </details>
@@ -1261,7 +1261,7 @@ module _
           map-equiv
             ( standard-transposition H npyz ∘e standard-transposition H npxy)
             ( w))
-        ( left-computation-standard-transposition H npyz) ) ∙
+        ( left-computation-standard-transposition H npyz)) ∙
       ( ( ap
           ( λ w → map-equiv (standard-transposition H npyz) w)
           ( is-fixed-point-standard-transposition H npxy z npxz npyz)) ∙

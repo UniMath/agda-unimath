@@ -7,17 +7,17 @@ module elementary-number-theory.multiplication-lists-of-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.addition-natural-numbers
-
-open import lists.lists
-open import lists.permutation-lists
-open import lists.concatenation-lists
 
 open import finite-group-theory.permutations-standard-finite-types
+
+open import foundation.identity-types
+
+open import lists.concatenation-lists
+open import lists.lists
+open import lists.permutation-lists
 ```
 
 </details>

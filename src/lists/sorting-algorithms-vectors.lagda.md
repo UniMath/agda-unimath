@@ -12,9 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.cartesian-product-types
-open import foundation.universe-levels
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
 

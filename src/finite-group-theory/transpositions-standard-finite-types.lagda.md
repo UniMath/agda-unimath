@@ -49,7 +49,8 @@ these two elements.
 
 ### Transpositions on `Fin n`
 
-This definition uses the `standard-transposition` in [`finite-group-theory.transposition`](finite-group-theory.transposition.lagda.md)
+This definition uses the `standard-transposition` in
+[`finite-group-theory.transposition`](finite-group-theory.transposition.lagda.md)
 
 ```agda
 module _
@@ -84,7 +85,8 @@ module _
 
 ### The transposition which swap the two last element of `Fin (succ-ℕ (succ-ℕ n))`
 
-We define directly the transposition of `Fin (succ-ℕ (succ-ℕ n))` which exchange the two elements associated to `n` and `succ-ℕ n`.
+We define directly the transposition of `Fin (succ-ℕ (succ-ℕ n))` which exchange
+the two elements associated to `n` and `succ-ℕ n`.
 
 ```agda
 module _
@@ -302,7 +304,7 @@ htpy-map-coprod-map-transposition-id-Fin :
       ( succ-ℕ n)
       ( inl-Fin n k)
       ( inl-Fin n l)
-      ( neq ∘ is-injective-inl-Fin n) )
+      ( neq ∘ is-injective-inl-Fin n))
 htpy-map-coprod-map-transposition-id-Fin n k l neq x =
   cases-htpy-map-coprod-map-transposition-id-Fin
     ( n)
@@ -339,7 +341,7 @@ htpy-adjacent-transposition-Fin :
       ( inr-Fin n k)
       ( neq-inl-Fin-inr-Fin n k))
 htpy-adjacent-transposition-Fin (succ-ℕ n) (inl x) =
-  ( ( htpy-map-coprod (htpy-adjacent-transposition-Fin n x) refl-htpy ) ∙h
+  ( ( htpy-map-coprod (htpy-adjacent-transposition-Fin n x) refl-htpy) ∙h
     ( ( htpy-map-coprod-map-transposition-id-Fin
         ( succ-ℕ n)
         ( inl-Fin n x)
@@ -438,15 +440,16 @@ htpy-conjugate-transposition-Fin :
 htpy-conjugate-transposition-Fin n x y z neqxy neqyz neqxz =
   htpy-conjugate-transposition
    ( has-decidable-equality-Fin n)
-   (  neqxy)
-   (  neqyz)
-   (  neqxz)
+   ( neqxy)
+   ( neqyz)
+   ( neqxz)
 
 private
   htpy-whisk-conjugate :
-    {l1  : Level} {A : UU l1} {f f' : A → A} (g : A → A) →
+    {l1 : Level} {A : UU l1} {f f' : A → A} (g : A → A) →
     (f ~ f') → (f ∘ (g ∘ f)) ~ (f' ∘ (g ∘ f'))
-  htpy-whisk-conjugate {f = f} {f' = f'} g H x = H (g ( f x)) ∙ ap (f' ∘ g) (H x)
+  htpy-whisk-conjugate {f = f} {f' = f'} g H x =
+    H (g ( f x)) ∙ ap (f' ∘ g) (H x)
 
   htpy-whisk :
     {l : Level} {A : UU l} (f : A → A) {g g' : A → A} →
@@ -481,7 +484,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin n x neq =
         ( inl-Fin (succ-ℕ n) x)
         ( neg-two-Fin (succ-ℕ n))
         ( neg-one-Fin (succ-ℕ n))
-        ( neq ∘ is-injective-inl-Fin (succ-ℕ n) )
+        ( neq ∘ is-injective-inl-Fin (succ-ℕ n))
         ( neq-inl-inr)
         ( neq-inl-inr))))
 
@@ -512,7 +515,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' n x neq =
       ( ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin
           ( n)
           ( x)
-          ( neq)  ∙h
+          ( neq) ∙h
         ( ( htpy-transposition-Fin-transposition-swap-Fin
             ( succ-ℕ (succ-ℕ n))
             ( inl-Fin (succ-ℕ n) x)
@@ -577,7 +580,7 @@ permutation-list-adjacent-transpositions n (cons x l) =
 map-permutation-list-adjacent-transpositions :
   (n : ℕ) → list (Fin n) → Fin (succ-ℕ n) → Fin (succ-ℕ n)
 map-permutation-list-adjacent-transpositions n l =
-  map-equiv (permutation-list-adjacent-transpositions n l )
+  map-equiv (permutation-list-adjacent-transpositions n l)
 
 htpy-permutation-inl-list-adjacent-transpositions :
   (n : ℕ) → (l : list (Fin n)) →
@@ -683,7 +686,7 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
           ( n)
           ( inl i)
           ( neq-inl-inr) ∙h
-          htpy-same-transposition-Fin )))
+          htpy-same-transposition-Fin)))
 htpy-permutation-list-adjacent-transpositions-transposition-Fin
   ( succ-ℕ n)
   ( inl (inr star))
@@ -743,7 +746,7 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
       ( neg-two-Fin (succ-ℕ n))
       ( neg-one-Fin (succ-ℕ n))
       ( neq-inl-inr)) ∙h
-    htpy-same-transposition-Fin )
+    htpy-same-transposition-Fin)
 htpy-permutation-list-adjacent-transpositions-transposition-Fin
   ( succ-ℕ n)
   ( inr star)

@@ -7,35 +7,35 @@ module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.fundamental-theorem-of-arithmetic
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.decidable-total-order-natural-numbers
+
+open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.iterated-cartesian-product-types
-open import foundation.universe-levels
 open import foundation.univalence
-open import foundation.contractible-types
+open import foundation.universe-levels
 
 open import group-theory.concrete-groups
 open import group-theory.iterated-cartesian-products-concrete-groups
 
 open import lists.arrays
+open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
-open import lists.concatenation-lists
-open import lists.sort-by-insertion-lists
 open import lists.permutation-lists
+open import lists.sort-by-insertion-lists
 
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
-
-open import finite-group-theory.permutations-standard-finite-types
 ```
 
 </details>
@@ -127,7 +127,7 @@ equiv-product-cycle-prime-decomposition-ℕ n m H I =
             ( ℕ-Decidable-Total-Order)
             ( concat-list
               ( list-fundamental-theorem-arithmetic-ℕ n H)
-              ( list-fundamental-theorem-arithmetic-ℕ m I)))))  ∘e
+              ( list-fundamental-theorem-arithmetic-ℕ m I))))) ∘e
       ( ( inv-equiv
            ( equiv-permutation-iterated-product-lists
              ( map-list

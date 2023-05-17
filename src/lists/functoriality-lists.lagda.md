@@ -9,20 +9,20 @@ module lists.functoriality-lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
 open import foundation.propositions
-open import foundation.equality-dependent-pair-types
+open import foundation.universe-levels
 
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
+
+open import lists.arrays
 open import lists.concatenation-lists
 open import lists.lists
-open import lists.arrays
-
-open import linear-algebra.vectors
-open import linear-algebra.functoriality-vectors
 ```
 
 </details>
@@ -53,7 +53,6 @@ length-map-list f nil = refl
 length-map-list f (cons x l) =
   ap succ-ℕ (length-map-list f l)
 ```
-
 
 ## Link between `map-list` and `map-vec`
 
@@ -140,7 +139,6 @@ module _
       ( length-map-list f (list-vec n v) ∙ compute-length-list-list-vec n v)
       ( map-vec-map-list-vec n v)
 
-
   vec-list-map-list-map-vec-list :
     (l : list A) →
     tr
@@ -177,7 +175,8 @@ module _
                 ( p)
                 ( vec-list (map-list f l))) ＝
               ( map-vec f (vec-list l)))
-            ( eq-is-prop (is-set-ℕ (length-list (map-list f l)) (length-list l)))
+            ( eq-is-prop
+              ( is-set-ℕ (length-list (map-list f l)) (length-list l)))
             ( vec-list-map-list-map-vec-list l)))
 
   vec-list-map-list-map-vec-list' :

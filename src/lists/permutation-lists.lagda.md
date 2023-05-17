@@ -11,24 +11,24 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.universe-levels
-open import foundation.equality-dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.universe-levels
 
-open import linear-algebra.vectors
 open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
 open import lists.arrays
+open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-vectors
-open import lists.functoriality-lists
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -96,12 +96,12 @@ module _
 ```agda
   eq-vec-list-permute-list :
     (l : list A) (f : Permutation (length-list l)) →
-    permute-vec (length-list l) (vec-list l) f  ＝
+    permute-vec (length-list l) (vec-list l) f ＝
     tr
       ( vec A)
-      (  _)
+      ( _)
       ( vec-list ( permute-list l f))
-  eq-vec-list-permute-list l f  =
+  eq-vec-list-permute-list l f =
     inv
       ( pr2
         ( pair-eq-Σ
@@ -220,7 +220,7 @@ compute-tr-permute-vec refl v t = refl
 
 compute-tr-map-vec :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B) {n m : ℕ} (p : n ＝ m) (v : vec A n ) →
+  (f : A → B) {n m : ℕ} (p : n ＝ m) (v : vec A n) →
   tr (vec B) p (map-vec f v) ＝ map-vec f (tr (vec A) p v)
 compute-tr-map-vec f refl v = refl
 
@@ -306,7 +306,7 @@ eq-map-list-permute-list {B = B} f p t =
                 ( length-list (map-list f p))
                 ( length-list p)
                 ( length-map-list f p)
-                ( map-vec f (vec-list p)) )))))) ∙
+                ( map-vec f (vec-list p)))))))) ∙
     ( ( ap
         ( list-vec (length-list p))
         ( eq-map-vec-permute-vec f (vec-list p) t)) ∙

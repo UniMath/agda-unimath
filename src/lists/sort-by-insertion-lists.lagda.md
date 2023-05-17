@@ -7,12 +7,12 @@ module lists.sort-by-insertion-lists where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.dependent-pair-types
 open import foundation.functions
-open import foundation.universe-levels
 open import foundation.identity-types
-
-open import finite-group-theory.permutations-standard-finite-types
+open import foundation.universe-levels
 
 open import lists.arrays
 open import lists.lists

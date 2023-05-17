@@ -29,10 +29,12 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -40,8 +42,6 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.negation
-open import foundation.homotopies
 
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
@@ -468,7 +468,7 @@ permutation-list-standard-transpositions-Fin n =
 
 list-standard-transpositions-permutation-Fin :
   (n : ℕ) (f : Permutation n) →
-  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j) ))
+  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j)))
 list-standard-transpositions-permutation-Fin n f =
   map-list
     ( λ P →

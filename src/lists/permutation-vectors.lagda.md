@@ -9,31 +9,31 @@ module lists.permutation-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.transpositions
 open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.transpositions
 open import finite-group-theory.transpositions-standard-finite-types
 
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.identity-types
-open import foundation.universe-levels
-open import foundation.contractible-types
-open import foundation.unit-type
-open import foundation.coproduct-types
 open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
 open import foundation.negation
-open import foundation.equivalence-extensionality
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import linear-algebra.vectors
 open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
 open import lists.arrays
 open import lists.lists
-open import univalent-combinatorics.standard-finite-types
+
 open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -67,7 +67,7 @@ module _
       ( λ t → f v ＝ permute-vec n v t)
 
   permutation-is-permutation-vec :
-    (n : ℕ )(f : vec A n → vec A n) → is-permutation-vec n f →
+    (n : ℕ)(f : vec A n → vec A n) → is-permutation-vec n f →
     (v : vec A n) → Permutation n
   permutation-is-permutation-vec n f P v = pr1 (P v)
 
@@ -133,7 +133,7 @@ module _
     (t : Permutation n) →
     permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv) ＝
     (x ∷ permute-vec n v t)
-  compute-equiv-coprod-permutation-id-equiv-permute-vec n v x t = 
+  compute-equiv-coprod-permutation-id-equiv-permute-vec n v x t =
     eq-Eq-vec
       ( succ-ℕ n)
       ( permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv))
@@ -242,7 +242,7 @@ module _
           ( n)
           ( v)
           ( y)
-          ( z) ))
+          ( z)))
 
   invariant-adjacent-transposition-fold-vec :
     {n : ℕ} → (v : vec A (succ-ℕ n)) → (k : Fin n) →
@@ -251,7 +251,7 @@ module _
   invariant-adjacent-transposition-fold-vec {succ-ℕ n} (x ∷ v) (inl k) =
      ap
        ( μ x)
-       ( invariant-adjacent-transposition-fold-vec v k ) ∙
+       ( invariant-adjacent-transposition-fold-vec v k) ∙
      inv
        ( ap
          ( fold-vec b μ)
@@ -292,7 +292,10 @@ module _
   invariant-transposition-fold-vec :
     {n : ℕ} (v : vec A (succ-ℕ n)) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j)) →
     fold-vec b μ v ＝
-    fold-vec b μ (permute-vec (succ-ℕ n) v (transposition-Fin (succ-ℕ n) i j neq))
+    fold-vec
+      ( b)
+      ( μ)
+      ( permute-vec (succ-ℕ n) v (transposition-Fin (succ-ℕ n) i j neq))
   invariant-transposition-fold-vec {n} v i j neq =
     ( ( invariant-list-adjacent-transpositions-fold-vec
         ( v)
@@ -322,7 +325,7 @@ module _
       ( permute-vec
         ( n)
         ( v)
-        ( permutation-list-standard-transpositions-Fin n l ))
+        ( permutation-list-standard-transpositions-Fin n l))
   invariant-list-transpositions-fold-vec {n} v nil =
     ap
       ( fold-vec b μ)
@@ -374,7 +377,7 @@ eq-map-vec-permute-vec f {n} v t =
         ( listed-vec-functional-vec
           ( n)
           ( functional-vec-vec n w ∘ (map-equiv t)))))
-      ( inv (map-vec-map-functional-vec f n v) ) ∙
+      ( inv (map-vec-map-functional-vec f n v)) ∙
     ( ( ap
         ( λ p →
           listed-vec-functional-vec
