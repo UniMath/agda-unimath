@@ -7,7 +7,6 @@ module trees.combinator-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -23,8 +22,6 @@ open import foundation.isolated-points
 open import foundation.maybe
 open import foundation.negation
 open import foundation.propositions
-open import foundation.singleton-induction
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

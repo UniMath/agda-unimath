@@ -20,7 +20,7 @@ open import structured-types.pointed-types
 
 A coherence square of pointed maps
 
-```md
+```text
   A ------> X
   |         |
   |         |

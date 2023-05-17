@@ -21,7 +21,6 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation

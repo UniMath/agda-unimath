@@ -24,7 +24,7 @@ open import foundation.universe-levels
 collatz : ℕ → ℕ
 collatz n with is-decidable-div-ℕ 2 n
 ... | inl (pair y p) = y
-... | inr f = succ-ℕ (mul-ℕ 3 n)
+... | inr f = succ-ℕ (3 *ℕ n)
 
 iterate-collatz : ℕ → ℕ → ℕ
 iterate-collatz zero-ℕ n = n

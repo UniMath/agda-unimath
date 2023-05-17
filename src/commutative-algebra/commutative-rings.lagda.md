@@ -525,7 +525,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Commutative-Ring :
     (m n : ℕ) (x : type-Commutative-Ring) →
-    mul-nat-scalar-Commutative-Ring (add-ℕ m n) x ＝
+    mul-nat-scalar-Commutative-Ring (m +ℕ n) x ＝
     add-Commutative-Ring
       ( mul-nat-scalar-Commutative-Ring m x)
       ( mul-nat-scalar-Commutative-Ring n x)

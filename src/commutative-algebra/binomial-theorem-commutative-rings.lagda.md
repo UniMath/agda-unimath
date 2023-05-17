@@ -35,8 +35,8 @@ open import univalent-combinatorics.standard-finite-types
 The **binomial theorem** in commutative rings asserts that for any two elements
 `x` and `y` of a commutative ring `A` and any natural number `n`, we have
 
-```md
-  (x + y)ⁿ = ∑\_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
+```text
+  (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
 ## Definitions
@@ -145,14 +145,14 @@ binomial-theorem-Commutative-Ring A n x y =
 is-linear-combination-power-add-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) (n m : ℕ)
   (x y : type-Commutative-Ring A) →
-  power-Commutative-Ring A (add-ℕ n m) (add-Commutative-Ring A x y) ＝
+  power-Commutative-Ring A (n +ℕ m) (add-Commutative-Ring A x y) ＝
   add-Commutative-Ring A
     ( mul-Commutative-Ring A
       ( power-Commutative-Ring A m y)
       ( sum-Commutative-Ring A n
         ( λ i →
           mul-nat-scalar-Commutative-Ring A
-            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+            ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Commutative-Ring A
               ( power-Commutative-Ring A (nat-Fin n i) x)
               ( power-Commutative-Ring A (dist-ℕ (nat-Fin n i) n) y)))))
@@ -163,8 +163,8 @@ is-linear-combination-power-add-Commutative-Ring :
         ( λ i →
           mul-nat-scalar-Commutative-Ring A
             ( binomial-coefficient-ℕ
-              ( add-ℕ n m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ m)
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Commutative-Ring A
               ( power-Commutative-Ring A (nat-Fin (succ-ℕ m) i) x)
               ( power-Commutative-Ring A

@@ -42,7 +42,7 @@ open import species.species-of-types-in-subuniverses
 The **Cauchy exponential** of a species `S : P → Q` of types in subuniverse is
 defined by
 
-```md
+```text
   X ↦ Σ ((U , V , e) : Σ-Decomposition-subuniverse P X),  Π (u : U) → S (V u).
 ```
 

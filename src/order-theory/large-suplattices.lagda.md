@@ -25,14 +25,14 @@ open import order-theory.upper-bounds-large-posets
 A **large suplattice** is a [large poset](order-theory.large-posets.md) `P` such
 that for every family
 
-```md
+```text
   x : I → type-Large-Poset P l1
 ```
 
 indexed by `I : UU l2` there is an element `⋁ x : type-Large-Poset P (l1 ⊔ l2)`
 such that the logical equivalence
 
-```md
+```text
   (∀ᵢ xᵢ ≤ y) ↔ ((⋁ x) ≤ y)
 ```
 
@@ -173,4 +173,44 @@ module _
   is-least-upper-bound-sup-Large-Suplattice x =
      is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
        ( is-large-suplattice-Large-Suplattice L x)
+
+  is-upper-bound-sup-Large-Suplattice :
+    {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Suplattice l2) →
+    is-upper-bound-family-of-elements-Large-Suplattice x
+      ( sup-Large-Suplattice x)
+  is-upper-bound-sup-Large-Suplattice x =
+    backward-implication
+      ( is-least-upper-bound-sup-Large-Suplattice x (sup-Large-Suplattice x))
+      ( refl-leq-Large-Suplattice (sup-Large-Suplattice x))
+```
+
+## Properties
+
+### The operation `sup` is order preserving
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Suplattice α β)
+  where
+
+  preserves-order-sup-Large-Suplatice :
+    {l1 l2 l3 : Level} {I : UU l1}
+    {x : I → type-Large-Suplattice L l1}
+    {y : I → type-Large-Suplattice L l3} →
+    ((i : I) → leq-Large-Suplattice L (x i) (y i)) →
+    leq-Large-Suplattice L
+      ( sup-Large-Suplattice L x)
+      ( sup-Large-Suplattice L y)
+  preserves-order-sup-Large-Suplatice {x = x} {y} H =
+    forward-implication
+      ( is-least-upper-bound-sup-Large-Suplattice L x
+        ( sup-Large-Suplattice L y))
+      ( λ i →
+        transitive-leq-Large-Suplattice L
+          ( x i)
+          ( y i)
+          ( sup-Large-Suplattice L y)
+          ( is-upper-bound-sup-Large-Suplattice L y i)
+          ( H i))
 ```

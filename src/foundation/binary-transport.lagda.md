@@ -21,7 +21,7 @@ open import foundation-core.universe-levels
 Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` and
 `q : y ＝ y'` in `A`, the binary transport of `B` is an operation
 
-```md
+```text
   binary-tr B p q : B x y → B x' y'
 ```
 

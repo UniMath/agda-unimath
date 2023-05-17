@@ -26,7 +26,7 @@ Consider a subuniverse `P` and a type `A` in `P`. A **Σ-decomposition** of `A`
 into types in `P` consists of a type `X` in `P` and a family `Y` of types in `P`
 indexed over `X`, equipped with an equivalence
 
-```md
+```text
   A ≃ Σ X Y.
 ```
 

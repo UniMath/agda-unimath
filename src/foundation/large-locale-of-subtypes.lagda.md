@@ -7,11 +7,12 @@ module foundation.large-locale-of-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
 open import foundation.large-locale-of-propositions
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
+
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-locales

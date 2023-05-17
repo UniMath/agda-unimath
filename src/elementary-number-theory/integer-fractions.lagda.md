@@ -116,8 +116,8 @@ is-set-fraction-ℤ = is-set-Σ is-set-ℤ λ _ → is-set-positive-ℤ
 sim-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 sim-fraction-ℤ-Prop x y =
   Id-Prop ℤ-Set
-    (mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ y))
-    (mul-ℤ (numerator-fraction-ℤ y) (denominator-fraction-ℤ x))
+    ((numerator-fraction-ℤ x) *ℤ (denominator-fraction-ℤ y))
+    ((numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x))
 
 sim-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 sim-fraction-ℤ x y = type-Prop (sim-fraction-ℤ-Prop x y)
@@ -136,7 +136,7 @@ trans-sim-fraction-ℤ :
   (x y z : fraction-ℤ) →
   sim-fraction-ℤ x y → sim-fraction-ℤ y z → sim-fraction-ℤ x z
 trans-sim-fraction-ℤ x y z r s =
-  is-injective-mul-ℤ'
+  is-injective-right-mul-ℤ
     ( denominator-fraction-ℤ y)
     ( is-nonzero-denominator-fraction-ℤ y)
     ( ( associative-mul-ℤ
@@ -144,7 +144,7 @@ trans-sim-fraction-ℤ x y z r s =
         ( denominator-fraction-ℤ z)
         ( denominator-fraction-ℤ y)) ∙
       ( ( ap
-          ( mul-ℤ (numerator-fraction-ℤ x))
+          ( (numerator-fraction-ℤ x) *ℤ_)
           ( commutative-mul-ℤ
             ( denominator-fraction-ℤ z)
             ( denominator-fraction-ℤ y))) ∙
@@ -153,13 +153,13 @@ trans-sim-fraction-ℤ x y z r s =
               ( numerator-fraction-ℤ x)
               ( denominator-fraction-ℤ y)
               ( denominator-fraction-ℤ z))) ∙
-          ( ( ap ( mul-ℤ' (denominator-fraction-ℤ z)) r) ∙
+          ( ( ap ( _*ℤ (denominator-fraction-ℤ z)) r) ∙
             ( ( associative-mul-ℤ
                 ( numerator-fraction-ℤ y)
                 ( denominator-fraction-ℤ x)
                 ( denominator-fraction-ℤ z)) ∙
               ( ( ap
-                  ( mul-ℤ (numerator-fraction-ℤ y))
+                  ( (numerator-fraction-ℤ y) *ℤ_)
                   ( commutative-mul-ℤ
                     ( denominator-fraction-ℤ x)
                     ( denominator-fraction-ℤ z))) ∙
@@ -168,13 +168,13 @@ trans-sim-fraction-ℤ x y z r s =
                       ( numerator-fraction-ℤ y)
                       ( denominator-fraction-ℤ z)
                       ( denominator-fraction-ℤ x))) ∙
-                  ( ( ap (mul-ℤ' (denominator-fraction-ℤ x)) s) ∙
+                  ( ( ap (_*ℤ (denominator-fraction-ℤ x)) s) ∙
                     ( ( associative-mul-ℤ
                         ( numerator-fraction-ℤ z)
                         ( denominator-fraction-ℤ y)
                         ( denominator-fraction-ℤ x)) ∙
                       ( ( ap
-                          ( mul-ℤ (numerator-fraction-ℤ z))
+                          ( (numerator-fraction-ℤ z) *ℤ_)
                           ( commutative-mul-ℤ
                             ( denominator-fraction-ℤ y)
                             ( denominator-fraction-ℤ x))) ∙

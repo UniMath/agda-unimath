@@ -172,15 +172,15 @@ linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
 
 ```agda
 subtraction-le-ℕ :
-  (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (add-ℕ l n ＝ m))
+  (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (l +ℕ n ＝ m))
 subtraction-le-ℕ zero-ℕ m p = pair m (pair (is-nonzero-le-ℕ zero-ℕ m p) refl)
 subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p =
   pair (pr1 P) (pair (pr1 (pr2 P)) (ap succ-ℕ (pr2 (pr2 P))))
   where
-  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (add-ℕ l' n ＝ m))
+  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (l' +ℕ n ＝ m))
   P = subtraction-le-ℕ n m p
 
-le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → add-ℕ l n ＝ m → le-ℕ n m
+le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → l +ℕ n ＝ m → le-ℕ n m
 le-subtraction-ℕ zero-ℕ m l q p =
   tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
 le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p =

@@ -401,7 +401,7 @@ compute-map-preserves-succ-map-ℤ-Mod' :
   (x : ℤ) → Id (add-ℤ-Mod k (mod-ℤ k x) (f (zero-ℤ-Mod k))) (f (mod-ℤ k x))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inl zero-ℕ) =
   ( ap (add-ℤ-Mod' k (f (zero-ℤ-Mod k))) (mod-neg-one-ℤ k)) ∙
-  ( ( inv (is-add-neg-one-pred-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
+  ( ( inv (is-left-add-neg-one-pred-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
     ( ( ap (pred-ℤ-Mod k) (ap f (inv (mod-zero-ℤ k)))) ∙
       ( ( inv
           ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k zero-ℤ))) ∙
@@ -423,7 +423,7 @@ compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl star)) =
     ( ap f (inv (mod-zero-ℤ k))))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr zero-ℕ)) =
   ( ap-add-ℤ-Mod k (mod-one-ℤ k) (ap f (inv (mod-zero-ℤ k)))) ∙
-  ( ( inv (is-add-one-succ-ℤ-Mod k (f (mod-ℤ k zero-ℤ)))) ∙
+  ( ( inv (is-left-add-one-succ-ℤ-Mod k (f (mod-ℤ k zero-ℤ)))) ∙
     ( ( inv (H (mod-ℤ k zero-ℤ))) ∙
       ( ap f (inv (preserves-successor-mod-ℤ k zero-ℤ)))))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr (succ-ℕ x))) =

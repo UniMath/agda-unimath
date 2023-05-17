@@ -11,7 +11,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
 open import foundation.1-types
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -34,7 +33,6 @@ open import group-theory.concrete-groups
 open import group-theory.groups
 
 open import higher-group-theory.higher-groups
-open import higher-group-theory.iterated-cartesian-products-higher-groups
 
 open import structured-types.pointed-types
 

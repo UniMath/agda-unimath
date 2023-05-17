@@ -29,8 +29,6 @@ open import lists.arrays
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-vectors
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

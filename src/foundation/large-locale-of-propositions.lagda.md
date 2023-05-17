@@ -9,20 +9,21 @@ module foundation.large-locale-of-propositions where
 ```agda
 open import foundation.conjunction
 open import foundation.existential-quantification
-open import foundation.functions
 open import foundation.propositional-extensionality
-open import foundation.propositions
 open import foundation.unit-type
-open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.universe-levels
+
+open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>
@@ -66,12 +67,12 @@ is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
 ### The largest element in the large poset of propositions
 
 ```agda
-has-largest-element-Prop-Large-Locale :
-  has-largest-element-Large-Poset Prop-Large-Poset
-top-has-largest-element-Large-Poset
-  has-largest-element-Prop-Large-Locale = unit-Prop
-is-largest-element-top-has-largest-element-Large-Poset
-  has-largest-element-Prop-Large-Locale P p =
+has-top-element-Prop-Large-Locale :
+  has-top-element-Large-Poset Prop-Large-Poset
+top-has-top-element-Large-Poset
+  has-top-element-Prop-Large-Locale = unit-Prop
+is-top-element-top-has-top-element-Large-Poset
+  has-top-element-Prop-Large-Locale P p =
   star
 ```
 
@@ -83,9 +84,9 @@ is-large-meet-semilattice-Prop-Large-Locale :
 has-meets-is-large-meet-semilattice-Large-Poset
   is-large-meet-semilattice-Prop-Large-Locale =
   has-meets-Prop-Large-Locale
-has-largest-element-is-large-meet-semilattice-Large-Poset
+has-top-element-is-large-meet-semilattice-Large-Poset
   is-large-meet-semilattice-Prop-Large-Locale =
-  has-largest-element-Prop-Large-Locale
+  has-top-element-Prop-Large-Locale
 ```
 
 ### Suprema in the large poset of propositions
@@ -101,16 +102,23 @@ is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
   is-least-upper-bound-exists-Prop P
 ```
 
+### The large frame of propositions
+
+```agda
+Prop-Large-Frame : Large-Frame lsuc _⊔_
+large-poset-Large-Frame Prop-Large-Frame =
+  Prop-Large-Poset
+is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
+  is-large-meet-semilattice-Prop-Large-Locale
+is-large-suplattice-Large-Frame Prop-Large-Frame =
+  is-large-suplattice-Prop-Large-Locale
+distributive-meet-sup-Large-Frame Prop-Large-Frame =
+  distributive-conj-exists-Prop
+```
+
 ### The large locale of propositions
 
 ```agda
 Prop-Large-Locale : Large-Locale lsuc _⊔_
-large-poset-Large-Locale Prop-Large-Locale =
-  Prop-Large-Poset
-is-large-meet-semilattice-Large-Locale Prop-Large-Locale =
-  is-large-meet-semilattice-Prop-Large-Locale
-is-large-suplattice-Large-Locale Prop-Large-Locale =
-  is-large-suplattice-Prop-Large-Locale
-distributive-meet-sup-Large-Locale Prop-Large-Locale =
-  distributive-conj-exists-Prop
+Prop-Large-Locale = Prop-Large-Frame
 ```

@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types
 The **wedge** or **wedge sum** of two pointed types `a : A` and `b : B` is
 defined by the following pushout.
 
-```md
+```text
   unit ------> A
     |          |
     |          |

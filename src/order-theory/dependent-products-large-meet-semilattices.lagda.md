@@ -7,9 +7,7 @@ module order-theory.dependent-products-large-meet-semilattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -17,7 +15,7 @@ open import order-theory.dependent-products-large-posets
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
-open import order-theory.largest-elements-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>
@@ -74,12 +72,12 @@ module _
       ( λ i → large-poset-Large-Meet-Semilattice (L i))
       ( λ i → has-meets-Large-Meet-Semilattice (L i))
 
-  has-largest-element-Π-Large-Meet-Semilattice :
-    has-largest-element-Large-Poset large-poset-Π-Large-Meet-Semilattice
-  has-largest-element-Π-Large-Meet-Semilattice =
-    has-largest-element-Π-Large-Poset
+  has-top-element-Π-Large-Meet-Semilattice :
+    has-top-element-Large-Poset large-poset-Π-Large-Meet-Semilattice
+  has-top-element-Π-Large-Meet-Semilattice =
+    has-top-element-Π-Large-Poset
       ( λ i → large-poset-Large-Meet-Semilattice (L i))
-      ( λ i → has-largest-element-Large-Meet-Semilattice (L i))
+      ( λ i → has-top-element-Large-Meet-Semilattice (L i))
 
   is-large-meet-semilattice-Π-Large-Meet-Semilattice :
     is-large-meet-semilattice-Large-Poset
@@ -87,9 +85,9 @@ module _
   has-meets-is-large-meet-semilattice-Large-Poset
     is-large-meet-semilattice-Π-Large-Meet-Semilattice =
     has-meets-Π-Large-Meet-Semilattice
-  has-largest-element-is-large-meet-semilattice-Large-Poset
+  has-top-element-is-large-meet-semilattice-Large-Poset
     is-large-meet-semilattice-Π-Large-Meet-Semilattice =
-    has-largest-element-Π-Large-Meet-Semilattice
+    has-top-element-Π-Large-Meet-Semilattice
 
   Π-Large-Meet-Semilattice :
     Large-Meet-Semilattice (λ l1 → α l1 ⊔ l) (λ l1 l2 → β l1 l2 ⊔ l)
@@ -165,13 +163,13 @@ module _
   top-Π-Large-Meet-Semilattice :
     type-Π-Large-Meet-Semilattice lzero
   top-Π-Large-Meet-Semilattice =
-    top-has-largest-element-Large-Poset
-      has-largest-element-Π-Large-Meet-Semilattice
+    top-has-top-element-Large-Poset
+      has-top-element-Π-Large-Meet-Semilattice
 
-  is-largest-element-top-Π-Large-Meet-Semilattice :
+  is-top-element-top-Π-Large-Meet-Semilattice :
     {l1 : Level} (x : type-Π-Large-Meet-Semilattice l1) →
     leq-Π-Large-Meet-Semilattice x top-Π-Large-Meet-Semilattice
-  is-largest-element-top-Π-Large-Meet-Semilattice =
-    is-largest-element-top-has-largest-element-Large-Poset
-      has-largest-element-Π-Large-Meet-Semilattice
+  is-top-element-top-Π-Large-Meet-Semilattice =
+    is-top-element-top-has-top-element-Large-Poset
+      has-top-element-Π-Large-Meet-Semilattice
 ```

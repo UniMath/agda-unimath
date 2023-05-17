@@ -187,8 +187,8 @@ module _
 ```agda
 split-sum-Ring :
   {l : Level} (R : Ring l)
-  (n m : ℕ) (f : functional-vec-Ring R (add-ℕ n m)) →
-  sum-Ring R (add-ℕ n m) f ＝
+  (n m : ℕ) (f : functional-vec-Ring R (n +ℕ m)) →
+  sum-Ring R (n +ℕ m) f ＝
   add-Ring R
     ( sum-Ring R n (f ∘ inl-coprod-Fin n m))
     ( sum-Ring R m (f ∘ inr-coprod-Fin n m))

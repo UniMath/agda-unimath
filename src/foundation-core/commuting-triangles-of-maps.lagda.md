@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 
 A triangle of maps
 
-```md
+```text
  A ----> B
   \     /
    \   /

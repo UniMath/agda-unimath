@@ -31,7 +31,7 @@ open import univalent-combinatorics.standard-finite-types
 The binomial theorem for natural numbers asserts that for any two natural
 numbers `x` and `y` and any natural number `n`, we have
 
-```md
+```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
@@ -56,7 +56,7 @@ binomial-sum-one-element-ℕ =
 
 binomial-sum-two-elements-ℕ :
   (f : functional-vec ℕ 2) →
-  binomial-sum-ℕ 1 f ＝ add-ℕ (f (zero-Fin 1)) (f (one-Fin 1))
+  binomial-sum-ℕ 1 f ＝ (f (zero-Fin 1)) +ℕ (f (one-Fin 1))
 binomial-sum-two-elements-ℕ =
   binomial-sum-two-elements-Commutative-Semiring ℕ-Commutative-Semiring
 ```
@@ -76,13 +76,13 @@ htpy-binomial-sum-ℕ =
 ```agda
 left-distributive-mul-binomial-sum-ℕ :
   (n : ℕ) (x : ℕ) (f : functional-vec ℕ (succ-ℕ n)) →
-  mul-ℕ x (binomial-sum-ℕ n f) ＝ binomial-sum-ℕ n (λ i → mul-ℕ x (f i))
+  x *ℕ (binomial-sum-ℕ n f) ＝ binomial-sum-ℕ n (λ i → x *ℕ (f i))
 left-distributive-mul-binomial-sum-ℕ =
   left-distributive-mul-binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
 
 right-distributive-mul-binomial-sum-ℕ :
   (n : ℕ) (f : functional-vec ℕ (succ-ℕ n)) (x : ℕ) →
-  mul-ℕ (binomial-sum-ℕ n f) x ＝ binomial-sum-ℕ n (λ i → mul-ℕ (f i) x)
+  (binomial-sum-ℕ n f) *ℕ x ＝ binomial-sum-ℕ n (λ i → (f i) *ℕ x)
 right-distributive-mul-binomial-sum-ℕ =
   right-distributive-mul-binomial-sum-Commutative-Semiring
     ℕ-Commutative-Semiring
@@ -95,11 +95,10 @@ right-distributive-mul-binomial-sum-ℕ =
 ```agda
 binomial-theorem-ℕ :
   (n : ℕ) (x y : ℕ) →
-  power-ℕ n (add-ℕ x y) ＝
+  power-ℕ n (x +ℕ y) ＝
   binomial-sum-ℕ n
     ( λ i →
-      mul-ℕ
-      ( power-ℕ (nat-Fin (succ-ℕ n) i) x)
+      ( power-ℕ (nat-Fin (succ-ℕ n) i) x) *ℕ
       ( power-ℕ (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-ℕ =
   binomial-theorem-Commutative-Semiring ℕ-Commutative-Semiring

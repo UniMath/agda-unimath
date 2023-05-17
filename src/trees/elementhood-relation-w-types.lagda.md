@@ -9,7 +9,6 @@ module trees.elementhood-relation-w-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 

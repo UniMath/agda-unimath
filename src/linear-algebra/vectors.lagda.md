@@ -13,7 +13,6 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions

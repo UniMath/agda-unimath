@@ -23,7 +23,7 @@ open import ring-theory.rings
 An algebra over a ring `R` consists of an `R`-module `M` equipped with a binary
 operation `x y ↦ xy : M → M → M` such that
 
-```md
+```text
   (xy)z  = x(yz)
   r(xy)  = (rx)y
   r(xy)  = x(ry)

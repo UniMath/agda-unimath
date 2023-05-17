@@ -19,7 +19,7 @@ open import order-theory.order-preserving-maps-large-preorders
 
 An order preserving map between large posets from `P` to `Q` consists of a map
 
-```md
+```text
   f : type-Large-Poset P l1 → type-Large-Poset Q (γ l1)
 ```
 

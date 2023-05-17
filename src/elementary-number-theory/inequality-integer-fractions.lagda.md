@@ -30,7 +30,7 @@ A fraction `m/n` is less (or equal) to a fraction `m'/n'` iff `m * n'` is less
 ```agda
 leq-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 leq-fraction-ℤ-Prop (m , n , p) (m' , n' , p') =
-  leq-ℤ-Prop (mul-ℤ m n') (mul-ℤ m' n)
+  leq-ℤ-Prop (m *ℤ n') (m' *ℤ n)
 
 leq-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 leq-fraction-ℤ x y = type-Prop (leq-fraction-ℤ-Prop x y)
@@ -44,7 +44,7 @@ is-prop-leq-fraction-ℤ x y = is-prop-type-Prop (leq-fraction-ℤ-Prop x y)
 ```agda
 le-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 le-fraction-ℤ-Prop (m , n , p) (m' , n' , p') =
-  le-ℤ-Prop (mul-ℤ m n') (mul-ℤ m' n)
+  le-ℤ-Prop (m *ℤ n') (m' *ℤ n)
 
 le-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 le-fraction-ℤ x y = type-Prop (le-fraction-ℤ-Prop x y)

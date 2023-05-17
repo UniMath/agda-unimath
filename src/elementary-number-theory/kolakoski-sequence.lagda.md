@@ -22,14 +22,14 @@ open import foundation.dependent-pair-types
 
 The Kolakoski sequence
 
-```md
+```text
 1,2,2,1,1,2,1,2,2,1,2,2,1,1,...
 ```
 
 is a self-referential sequence of `1`s and `2`s which is the flattening of a
 sequence
 
-```md
+```text
 (1),(2,2),(1,1),(2),(1),(2,2),(1,1)
 ```
 

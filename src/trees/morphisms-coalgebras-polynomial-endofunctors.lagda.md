@@ -11,7 +11,6 @@ open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -31,7 +30,7 @@ A **morphism** of coalgebras of a polynomial endofunctor `P A B` consists of a
 function `f : X → Y` between their underlying types, equipped with a homotopy
 witnessing that the square
 
-```md
+```text
               f
       X -------------> Y
       |                |

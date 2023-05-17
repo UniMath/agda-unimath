@@ -25,7 +25,7 @@ and `Q` consists of
 `f : hom-Large-Poset id P Q` and `hom-Large-Poset id Q P` such that the adjoint
 relation
 
-```md
+```text
   (f x ≤ y) ↔ (x ≤ g y)
 ```
 

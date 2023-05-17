@@ -23,7 +23,7 @@ open import graph-theory.undirected-graphs
 A faithful morphism of undirected graphs is a morphism `f : G → H` of undirected
 graphs such that for each unordered pair `p` of vertices in `G` the map
 
-```md
+```text
   edge-hom-Undirected-Graph G H f p :
     edge-Undirected-Graph G p →
     edge-Undirected-Graph H

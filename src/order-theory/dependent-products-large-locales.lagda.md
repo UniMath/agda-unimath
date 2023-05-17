@@ -7,22 +7,19 @@ module order-theory.dependent-products-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-meet-semilattices
-open import order-theory.dependent-products-large-posets
-open import order-theory.dependent-products-large-suplattices
+open import order-theory.dependent-products-large-frames
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
-open import order-theory.largest-elements-large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>
@@ -36,70 +33,63 @@ module _
   {l1 : Level} {I : UU l1} (L : I → Large-Locale α β)
   where
 
+  Π-Large-Locale : Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  Π-Large-Locale = Π-Large-Frame L
+
   large-poset-Π-Large-Locale :
     Large-Poset (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
-  large-poset-Π-Large-Locale =
-    Π-Large-Poset (λ i → large-poset-Large-Locale (L i))
+  large-poset-Π-Large-Locale = large-poset-Π-Large-Frame L
 
   large-meet-semilattice-Π-Large-Locale :
     Large-Meet-Semilattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
   large-meet-semilattice-Π-Large-Locale =
-    Π-Large-Meet-Semilattice (λ i → large-meet-semilattice-Large-Locale (L i))
+    large-meet-semilattice-Π-Large-Frame L
 
   has-meets-Π-Large-Locale :
     has-meets-Large-Poset large-poset-Π-Large-Locale
-  has-meets-Π-Large-Locale =
-    has-meets-Π-Large-Poset
-      ( λ i → large-poset-Large-Locale (L i))
-      ( λ i → has-meets-Large-Locale (L i))
+  has-meets-Π-Large-Locale = has-meets-Π-Large-Frame L
 
   large-suplattice-Π-Large-Locale :
     Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
-  large-suplattice-Π-Large-Locale =
-    Π-Large-Suplattice (λ i → large-suplattice-Large-Locale (L i))
+  large-suplattice-Π-Large-Locale = large-suplattice-Π-Large-Frame L
 
   is-large-suplattice-Π-Large-Locale :
     is-large-suplattice-Large-Poset large-poset-Π-Large-Locale
   is-large-suplattice-Π-Large-Locale =
-    is-large-suplattice-Π-Large-Suplattice
-      ( λ i → large-suplattice-Large-Locale (L i))
+    is-large-suplattice-Π-Large-Frame L
 
   set-Π-Large-Locale : (l : Level) → Set (α l ⊔ l1)
-  set-Π-Large-Locale = set-Large-Poset large-poset-Π-Large-Locale
+  set-Π-Large-Locale = set-Π-Large-Frame L
 
   type-Π-Large-Locale : (l : Level) → UU (α l ⊔ l1)
-  type-Π-Large-Locale = type-Large-Poset large-poset-Π-Large-Locale
+  type-Π-Large-Locale = type-Π-Large-Frame L
 
   is-set-type-Π-Large-Locale : {l : Level} → is-set (type-Π-Large-Locale l)
-  is-set-type-Π-Large-Locale =
-    is-set-type-Large-Poset large-poset-Π-Large-Locale
+  is-set-type-Π-Large-Locale = is-set-type-Π-Large-Frame L
 
   leq-Π-Large-Locale-Prop :
     {l2 l3 : Level} → type-Π-Large-Locale l2 → type-Π-Large-Locale l3 →
     Prop (β l2 l3 ⊔ l1)
-  leq-Π-Large-Locale-Prop =
-    leq-Large-Poset-Prop large-poset-Π-Large-Locale
+  leq-Π-Large-Locale-Prop = leq-Π-Large-Frame-Prop L
 
   leq-Π-Large-Locale :
     {l2 l3 : Level} →
     type-Π-Large-Locale l2 → type-Π-Large-Locale l3 → UU (β l2 l3 ⊔ l1)
-  leq-Π-Large-Locale = leq-Large-Poset large-poset-Π-Large-Locale
+  leq-Π-Large-Locale = leq-Π-Large-Frame L
 
   is-prop-leq-Π-Large-Locale :
     {l2 l3 : Level} (x : type-Π-Large-Locale l2) (y : type-Π-Large-Locale l3) →
     is-prop (leq-Π-Large-Locale x y)
-  is-prop-leq-Π-Large-Locale =
-    is-prop-leq-Large-Poset large-poset-Π-Large-Locale
+  is-prop-leq-Π-Large-Locale = is-prop-leq-Π-Large-Frame L
 
   refl-leq-Π-Large-Locale :
     {l2 : Level} (x : type-Π-Large-Locale l2) → leq-Π-Large-Locale x x
-  refl-leq-Π-Large-Locale = refl-leq-Large-Poset large-poset-Π-Large-Locale
+  refl-leq-Π-Large-Locale = refl-leq-Π-Large-Frame L
 
   antisymmetric-leq-Π-Large-Locale :
     {l2 : Level} (x y : type-Π-Large-Locale l2) →
     leq-Π-Large-Locale x y → leq-Π-Large-Locale y x → x ＝ y
-  antisymmetric-leq-Π-Large-Locale =
-    antisymmetric-leq-Large-Poset large-poset-Π-Large-Locale
+  antisymmetric-leq-Π-Large-Locale = antisymmetric-leq-Π-Large-Frame L
 
   transitive-leq-Π-Large-Locale :
     {l2 l3 l4 : Level}
@@ -107,15 +97,13 @@ module _
     (y : type-Π-Large-Locale l3)
     (z : type-Π-Large-Locale l4) →
     leq-Π-Large-Locale y z → leq-Π-Large-Locale x y → leq-Π-Large-Locale x z
-  transitive-leq-Π-Large-Locale =
-    transitive-leq-Large-Poset large-poset-Π-Large-Locale
+  transitive-leq-Π-Large-Locale = transitive-leq-Π-Large-Frame L
 
   meet-Π-Large-Locale :
     {l2 l3 : Level} →
     type-Π-Large-Locale l2 → type-Π-Large-Locale l3 →
     type-Π-Large-Locale (l2 ⊔ l3)
-  meet-Π-Large-Locale =
-    meet-has-meets-Large-Poset has-meets-Π-Large-Locale
+  meet-Π-Large-Locale = meet-Π-Large-Frame L
 
   is-greatest-binary-lower-bound-meet-Π-Large-Locale :
     {l2 l3 : Level}
@@ -127,39 +115,31 @@ module _
       ( y)
       ( meet-Π-Large-Locale x y)
   is-greatest-binary-lower-bound-meet-Π-Large-Locale =
-    is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
-      has-meets-Π-Large-Locale
+    is-greatest-binary-lower-bound-meet-Π-Large-Frame L
 
   top-Π-Large-Locale : type-Π-Large-Locale lzero
-  top-Π-Large-Locale =
-    top-Large-Meet-Semilattice large-meet-semilattice-Π-Large-Locale
+  top-Π-Large-Locale = top-Π-Large-Frame L
 
-  is-largest-element-top-Π-Large-Locale :
+  is-top-element-top-Π-Large-Locale :
     {l1 : Level} (x : type-Π-Large-Locale l1) →
     leq-Π-Large-Locale x top-Π-Large-Locale
-  is-largest-element-top-Π-Large-Locale =
-    is-largest-element-top-Large-Meet-Semilattice
-      large-meet-semilattice-Π-Large-Locale
+  is-top-element-top-Π-Large-Locale =
+    is-top-element-top-Π-Large-Frame L
 
-  has-largest-element-Π-Large-Locale :
-    has-largest-element-Large-Poset large-poset-Π-Large-Locale
-  has-largest-element-Π-Large-Locale =
-    has-largest-element-Large-Meet-Semilattice
-      large-meet-semilattice-Π-Large-Locale
+  has-top-element-Π-Large-Locale :
+    has-top-element-Large-Poset large-poset-Π-Large-Locale
+  has-top-element-Π-Large-Locale =
+    has-top-element-Π-Large-Frame L
 
   is-large-meet-semilattice-Π-Large-Locale :
     is-large-meet-semilattice-Large-Poset large-poset-Π-Large-Locale
   is-large-meet-semilattice-Π-Large-Locale =
-    is-large-meet-semilattice-Large-Meet-Semilattice
-      large-meet-semilattice-Π-Large-Locale
+    is-large-meet-semilattice-Π-Large-Frame L
 
   sup-Π-Large-Locale :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Locale l3) →
     type-Π-Large-Locale (l2 ⊔ l3)
-  sup-Π-Large-Locale =
-    sup-is-large-suplattice-Large-Poset
-      ( large-poset-Π-Large-Locale)
-      ( is-large-suplattice-Π-Large-Locale)
+  sup-Π-Large-Locale = sup-Π-Large-Frame L
 
   is-least-upper-bound-sup-Π-Large-Locale :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Locale l3) →
@@ -168,9 +148,7 @@ module _
       ( x)
       ( sup-Π-Large-Locale x)
   is-least-upper-bound-sup-Π-Large-Locale =
-    is-least-upper-bound-sup-is-large-suplattice-Large-Poset
-      ( large-poset-Π-Large-Locale)
-      ( is-large-suplattice-Π-Large-Locale)
+    is-least-upper-bound-sup-Π-Large-Frame L
 
   distributive-meet-sup-Π-Large-Locale :
     {l2 l3 l4 : Level}
@@ -178,17 +156,6 @@ module _
     {J : UU l3} (y : J → type-Π-Large-Locale l4) →
     meet-Π-Large-Locale x (sup-Π-Large-Locale y) ＝
     sup-Π-Large-Locale (λ j → meet-Π-Large-Locale x (y j))
-  distributive-meet-sup-Π-Large-Locale x y =
-    eq-htpy
-      ( λ i → distributive-meet-sup-Large-Locale (L i) (x i) (λ j → y j i))
-
-  Π-Large-Locale : Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
-  large-poset-Large-Locale Π-Large-Locale =
-    large-poset-Π-Large-Locale
-  is-large-meet-semilattice-Large-Locale Π-Large-Locale =
-    is-large-meet-semilattice-Π-Large-Locale
-  is-large-suplattice-Large-Locale Π-Large-Locale =
-    is-large-suplattice-Π-Large-Locale
-  distributive-meet-sup-Large-Locale Π-Large-Locale =
-    distributive-meet-sup-Π-Large-Locale
+  distributive-meet-sup-Π-Large-Locale =
+    distributive-meet-sup-Π-Large-Frame L
 ```

@@ -136,15 +136,15 @@ is-odd-is-even-succ-ℕ n p =
     ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
 ```
 
-### A natural number `x` is odd if and only if there is a natural number `y` such that `succ-ℕ (mul-ℕ y 2) ＝ x`
+### A natural number `x` is odd if and only if there is a natural number `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
 
 ```agda
 has-odd-expansion : ℕ → UU lzero
-has-odd-expansion x = Σ ℕ (λ y → (succ-ℕ (mul-ℕ y 2)) ＝ x)
+has-odd-expansion x = Σ ℕ (λ y → (succ-ℕ (y *ℕ 2)) ＝ x)
 
 is-odd-has-odd-expansion : (n : ℕ) → has-odd-expansion n → is-odd-ℕ n
-is-odd-has-odd-expansion .(succ-ℕ (mul-ℕ m 2)) (m , refl) =
-  is-odd-succ-is-even-ℕ (mul-ℕ m 2) (m , refl)
+is-odd-has-odd-expansion .(succ-ℕ (m *ℕ 2)) (m , refl) =
+  is-odd-succ-is-even-ℕ (m *ℕ 2) (m , refl)
 
 has-odd-expansion-is-odd : (n : ℕ) → is-odd-ℕ n → has-odd-expansion n
 has-odd-expansion-is-odd zero-ℕ p = ex-falso (p is-even-zero-ℕ)

@@ -1,4 +1,4 @@
-# Cycle decompositions of a natural numbers
+# Cycle prime decompositions of natural numbers
 
 ```agda
 module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
@@ -35,14 +35,13 @@ open import lists.permutation-lists
 open import lists.sort-by-insertion-lists
 
 open import univalent-combinatorics.cyclic-types
-open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-Let `n` be a natural numbers. The `cycle-prime-decomposition-ℕ` of `n` is the
+Let `n` be a natural number. The `cycle-prime-decomposition-ℕ` of `n` is the
 iterated cartesian product of the cyclic types assocated to the prime
 decomposition of `n`.
 

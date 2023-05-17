@@ -23,7 +23,7 @@ A **greatest binary lower bound** of two elements `a` and `b` in a large poset
 `P` is an element `x` such that for every element `y` in `P` the logical
 equivalence
 
-```md
+```text
   is-binary-lower-bound-Large-Poset P a b y ↔ y ≤ x
 ```
 

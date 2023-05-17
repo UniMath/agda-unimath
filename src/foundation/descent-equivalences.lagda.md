@@ -24,7 +24,7 @@ open import foundation-core.universe-levels
 The descent property of equivalences is a somewhat degenerate form of a descent
 property. It asserts that in a commuting diagram of the form
 
-```md
+```text
      p        q
  A -----> B -----> C
  |        |        |

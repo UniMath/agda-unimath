@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 Consider a function `f : A → B` between types equipped with apartness relations.
 Then we say that `f` is **strongly extensional** if
 
-```md
+```text
   f x # f y → x # y
 ```
 
