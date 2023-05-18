@@ -8,11 +8,16 @@ module univalent-combinatorics.reduced-1-bordism-category where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -119,6 +124,92 @@ module _
   pr2 directed-graph-equiv-left-equiv-coprod =
     edge-equiv-left-equiv-coprod
 
+  direct-successor-equiv-left-equiv-coprod :
+    (x : X) →
+    direct-successor-Directed-Graph
+      ( directed-graph-equiv-left-equiv-coprod)
+      ( inl x)
+  pr1 (direct-successor-equiv-left-equiv-coprod x) = inr (map-equiv φ (inl x))
+  pr2 (direct-successor-equiv-left-equiv-coprod x) =
+    edge-to-value-equiv-left-equiv-coprod x
+
+  contraction-direct-successor-equiv-left-equiv-coprod :
+    (x : X)
+    ( s :
+      direct-successor-Directed-Graph
+        ( directed-graph-equiv-left-equiv-coprod)
+        ( inl x)) →
+    direct-successor-equiv-left-equiv-coprod x ＝ s
+  contraction-direct-successor-equiv-left-equiv-coprod x
+    ( ._ , edge-to-value-equiv-left-equiv-coprod .x) =
+    refl
+
+  unique-direct-successor-equiv-left-equiv-coprod :
+    (x : X) →
+    is-contr
+      ( direct-successor-Directed-Graph
+        ( directed-graph-equiv-left-equiv-coprod)
+        ( inl x))
+  pr1 (unique-direct-successor-equiv-left-equiv-coprod x) =
+    direct-successor-equiv-left-equiv-coprod x
+  pr2 (unique-direct-successor-equiv-left-equiv-coprod x) =
+    contraction-direct-successor-equiv-left-equiv-coprod x
+
+  cases-direct-predecessor-equiv-left-equiv-coprod :
+    (y : Y) →
+    ( Σ X (λ x → map-equiv φ (inl x) ＝ inl y) +
+      Σ (type-𝔽 Z) (λ z → map-equiv φ (inr z) ＝ inl y)) →
+    direct-predecessor-Directed-Graph
+      ( directed-graph-equiv-left-equiv-coprod)
+      ( inr (inl y))
+  pr1 (cases-direct-predecessor-equiv-left-equiv-coprod y (inl (x , p))) = inl x
+  pr2 (cases-direct-predecessor-equiv-left-equiv-coprod y (inl (x , p))) =
+    tr
+      ( edge-equiv-left-equiv-coprod (inl x))
+      ( ap inr p)
+      ( edge-to-value-equiv-left-equiv-coprod x)
+  pr1 (cases-direct-predecessor-equiv-left-equiv-coprod y (inr (z , p))) =
+    inr (inr z)
+  pr2 (cases-direct-predecessor-equiv-left-equiv-coprod y (inr (z , p))) =
+    tr
+      ( edge-equiv-left-equiv-coprod (inr (inr z)))
+      ( ap inr p)
+      ( edge-right-summand-equiv-left-equiv-coprod z)
+
+  direct-predecessor-equiv-left-equiv-coprod :
+    (y : Y) →
+    direct-predecessor-Directed-Graph
+      ( directed-graph-equiv-left-equiv-coprod)
+      ( inr (inl y))
+  direct-predecessor-equiv-left-equiv-coprod y =
+    cases-direct-predecessor-equiv-left-equiv-coprod y
+      ( map-right-distributive-Σ-coprod X
+        ( type-𝔽 Z)
+        ( λ u → map-equiv φ u ＝ inl y)
+        ( center (is-contr-map-is-equiv (is-equiv-map-equiv φ) (inl y))))
+
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod :
+    ( y : Y) →
+    ( d :
+      Σ X (λ x → map-equiv φ (inl x) ＝ inl y) +
+      Σ (type-𝔽 Z) (λ z → map-equiv φ (inr z) ＝ inl y))
+    ( p :
+      direct-predecessor-Directed-Graph
+        ( directed-graph-equiv-left-equiv-coprod)
+        ( inr (inl y))) →
+    cases-direct-predecessor-equiv-left-equiv-coprod y d ＝ p
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y (inl (x , q)) (inl x' , e) = {!ap pr1 ((eq-is-contr (is-contr-map-is-equiv (is-equiv-map-equiv φ) (inl y))) {inl x , q} {inl x' , ?})!}
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y (inl (x , q)) (inr n , e) = {!!}
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y (inr (z , q)) p = {!!}
+
+  unique-direct-predecessor-equiv-left-equiv-coprod :
+    (y : Y) →
+    is-contr
+      ( direct-predecessor-Directed-Graph
+        ( directed-graph-equiv-left-equiv-coprod)
+        ( inr (inl y)))
+  unique-direct-predecessor-equiv-left-equiv-coprod y = {!!}
+
   walk-equiv-left-equiv-coprod :
     (x y : node-equiv-left-equiv-coprod) → UU (l1 ⊔ l2 ⊔ l3)
   walk-equiv-left-equiv-coprod =
@@ -127,7 +218,7 @@ module _
   walk-across-equiv-left-equiv-coprod :
     (x : X) →
     Σ Y (λ y → edge-equiv-left-equiv-coprod (inl x) (inr (inl y)))
-  walk-across-equiv-left-equiv-coprod x = ?
+  walk-across-equiv-left-equiv-coprod x = {!!}
 ```
 
 In this graph, there is for each `x : A⁺ ⊔ C⁻` a unique element `y : C⁺ ⊔ A⁻` equipped with a walk from `inl x` to `inl (inr y)`. This determines an equivalence `A⁺ ⊔ C⁻ ≃ C⁺ ⊔ A⁻` which we use to define the composite `g ∘ f`.
